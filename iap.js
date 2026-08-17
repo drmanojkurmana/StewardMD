@@ -36,7 +36,25 @@
     getProducts: getProducts,
     purchase: purchase,
     restore: restore,
-    // Auto-renewable subscription product IDs (must match App Store Connect exactly).
+    // Product IDs per the signed-off pricing plan (docs/PRICING_PACKAGING.md v7); the full ASC catalog
+    // + prices is in docs/IOS-IAP-PRODUCTS.md. Must match App Store Connect exactly.
+    // Auto-renewable subscription tiers (monthly / annual):
+    TIERS: {
+      trainee:      { monthly: "in.stewardmd.trainee.monthly",      annual: "in.stewardmd.trainee.annual" },
+      coresident:   { monthly: "in.stewardmd.coresident.monthly",   annual: "in.stewardmd.coresident.annual" },
+      pro:          { monthly: "in.stewardmd.pro.monthly",          annual: "in.stewardmd.pro.annual" },
+      physician:    { monthly: "in.stewardmd.physician.monthly",    annual: "in.stewardmd.physician.annual" },
+      physicianpro: { monthly: "in.stewardmd.physicianpro.monthly", annual: "in.stewardmd.physicianpro.annual" },
+      onco:         { monthly: "in.stewardmd.onco.monthly",         annual: "in.stewardmd.onco.annual" }
+    },
+    // Consumable MaiK Token top-up packs:
+    TOKENS: {
+      boost: "in.stewardmd.tokens.boost",   // 50,000 MT · ₹49
+      plus:  "in.stewardmd.tokens.plus",    // 250,000 MT · ₹199
+      power: "in.stewardmd.tokens.power"    // 750,000 MT · ₹499
+    },
+    // Back-compat alias for the current single-tier paywall (Pro monthly/annual). The multi-tier
+    // paywall UI is owned by the pricing session; this stays until it lands.
     PRODUCTS: { monthly: "in.stewardmd.pro.monthly", annual: "in.stewardmd.pro.annual" }
   };
 })();
