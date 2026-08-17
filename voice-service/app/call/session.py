@@ -70,6 +70,10 @@ class CallSession:
             transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, conv.lang)
             cur_q = conv.questions[conv.q_index] if (conv.phase == ASK and conv.q_index < len(conv.questions)) else None
             nlu = await loop.run_in_executor(None, self.nlu.interpret, cur_q, transcript, conv.lang)
+            # Instrumentation: what did we actually capture + hear + extract this turn? (read via GET /lastcall)
+            self.call.setdefault("_turns", []).append({
+                "q": (cur_q or {}).get("id", conv.phase), "sec": round(len(pcm) / 2 / 8000, 1),
+                "heard": transcript, "intent": nlu.get("intent"), "value": nlu.get("value")})
             engine = None
             if conv.phase == ASK and cur_q is not None and nlu.get("intent") != "unclear":
                 merged = dict(conv.answers)

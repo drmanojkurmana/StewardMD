@@ -60,14 +60,15 @@ class PlivoController:
 
 
 class PlivoStreamTelephony(TelephonyProvider):
-    def __init__(self, ws, config, silence_ms=800, energy_threshold=500, max_utterance_ms=15000):
+    def __init__(self, ws, config, silence_ms=None, energy_threshold=None, max_utterance_ms=None):
         self.ws = ws                       # a starlette/FastAPI WebSocket
         self.cfg = config
         self.stream_id = None
         self._answered = True              # the WS only opens once the call is answered
-        self._silence_ms = silence_ms
-        self._energy = energy_threshold
-        self._max_ms = max_utterance_ms
+        # Endpointing thresholds come from config (tunable per deployment) unless explicitly overridden.
+        self._silence_ms = silence_ms if silence_ms is not None else config.silence_ms
+        self._energy = energy_threshold if energy_threshold is not None else config.energy_threshold
+        self._max_ms = max_utterance_ms if max_utterance_ms is not None else config.max_utterance_ms
         self._playing = False
         self._barge = False
 

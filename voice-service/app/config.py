@@ -42,7 +42,12 @@ class Config:
         self.sarvam_api_key = e.get("SARVAM_API_KEY", "")
         self.sarvam_speaker = e.get("SARVAM_SPEAKER", "")
         self.sarvam_tts_model = e.get("SARVAM_TTS_MODEL", "bulbul:v2")
-        self.sarvam_stt_model = e.get("SARVAM_STT_MODEL", "")
+        self.sarvam_stt_model = e.get("SARVAM_STT_MODEL", "saarika:v2.5")   # v2 is deprecated
+        # Endpointing (how we capture a patient turn) — tunable from real calls. Lower energy = catch quieter
+        # speech; longer silence = don't cut off someone who pauses. These are the "can't understand me" knobs.
+        self.energy_threshold = _int("VOICE_ENERGY_THRESHOLD", 350)
+        self.silence_ms = _int("VOICE_SILENCE_MS", 1000)
+        self.max_utterance_ms = _int("VOICE_MAX_UTTERANCE_MS", 15000)
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")

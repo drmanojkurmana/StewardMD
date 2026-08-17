@@ -111,6 +111,18 @@ async def selftest():
             "tts_en_bytes": len(en), "tts_te_bytes": len(te)}
 
 
+@app.get("/lastcall")
+async def lastcall():
+    """What the most recent call actually captured + heard + extracted, per turn — for tuning 'can't understand me'."""
+    if not STATE["calls"]:
+        return {"calls": 0}
+    cid = max(STATE["calls"], key=lambda c: STATE["calls"][c]["ts"])
+    rec = STATE["calls"][cid]
+    call = rec["call"]
+    return {"callId": cid, "phone": call.get("phone"), "state": rec["state"],
+            "lang": call.get("lang"), "turns": call.get("_turns", [])}
+
+
 @app.post("/ingest")
 async def ingest(request: Request):
     """Dial a call payload PUSHED from outside. Cloudflare bot-protection 403s this pod's datacenter IP on
