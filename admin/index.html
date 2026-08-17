@@ -99,7 +99,7 @@
         <a data-p="logs">🛰️ Crawl logs</a>
         <div class="grp">Users</div>
         <a data-p="verif">🩺 Verifications <span class="b" id="navVerif">0</span></a>
-        <a data-p="pro">💳 Pro subscriptions</a>
+        <a data-p="pro">💳 Payments &amp; Billing</a>
         <div class="grp">System</div>
         <a data-p="push">📣 Push blast</a>
         <a data-p="watch">🧪 Lab-watch</a>
@@ -222,6 +222,11 @@
       <!-- PRO SUBSCRIPTIONS -->
       <div class="pane" id="pane-pro" data-need-auth>
         <div class="card">
+          <div style="display:flex;align-items:center;gap:10px"><b style="flex:1">Billing control center</b><button class="ghost" id="pbReload" style="padding:7px 11px">Reload</button></div>
+          <div class="hint" style="margin:2px 0 10px">Live status of payment providers, enforcement flags, plan prices, coupons and the Founding offer. Prices/flags are set via <code>wrangler.toml</code> env; this reflects what is live now.</div>
+          <div id="pbOverview" class="hint">Loading…</div>
+        </div>
+        <div class="card">
           <b>Grant / manage Pro</b>
           <div class="hint" style="margin:2px 0 8px">Enter the doctor's <b>email</b> (or their uid). Granting persists as a Firebase claim and sends them a confirmation email. During the launch promo everyone already has Pro free — these grants take over when the promo ends.</div>
           <label for="proEmail">User email or uid</label>
@@ -260,7 +265,7 @@
           <b>Institution coupons</b>
           <div class="hint" style="margin:2px 0 8px">Issue a code to an institution that pays for its doctors. Each doctor redeems it in-app to unlock Pro. Revoke anytime (pulls Pro from redeemers who haven't since paid).</div>
           <div class="row">
-            <div><label for="cpnDur">Grant</label><select id="cpnDur"><option value="months:12">1 year</option><option value="months:6">6 months</option><option value="months:3">3 months</option><option value="months:1">1 month</option><option value="forever">Forever</option></select></div>
+            <div><label for="cpnDur">Grant</label><select id="cpnDur"><option value="months:12">1 year</option><option value="months:6">6 months</option><option value="months:3">3 months</option><option value="months:1">1 month</option><option value="forever">Forever</option><option value="founding">Founding Doctor (1 yr + capped AI pool)</option></select></div>
             <div><label for="cpnMax">Max redemptions</label><input id="cpnMax" type="number" min="0" placeholder="0 = unlimited"></div>
           </div>
           <label for="cpnNote">Note (institution name)</label>
@@ -503,7 +508,7 @@
   var auth=null; try{ firebase.initializeApp(FB); auth=firebase.auth(); }catch(e){}
   var vFilter="pending", activePane="overview", _aiStructured=null;
   var PANES=["overview","support","userctl","aictl","config","crashes","analytics","notif","sources","logs","verif","pro","push","watch","ai","kardiox","xa"];
-  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Pro subscriptions",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
+  var TITLES={overview:"Overview",support:"Support tickets",userctl:"User control",aictl:"AI control",config:"Remote config",crashes:"Crashes",analytics:"Usage analytics",notif:"Publish & notify",sources:"Medical sources",logs:"Crawl logs",verif:"Doctor verifications",pro:"Payments & Billing",push:"Push blast",watch:"Lab-watch",ai:"AI usage",kardiox:"KardiQ X training",xa:"Experimental Features"};
   var TYPE2CAT={guideline:"guideline",drug_approval:"approval",safety_alert:"safety",trial:"study",general:"general"};
   function esc(s){return String(s==null?"":s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
   function when(ts){ if(!ts)return""; if(typeof ts==="number"){var s=Math.floor((Date.now()-ts)/1000); if(s<3600)return Math.floor(s/60)+"m ago"; if(s<86400)return Math.floor(s/3600)+"h ago"; return new Date(ts).toLocaleDateString();} return String(ts).slice(0,16).replace("T"," "); }
@@ -630,6 +635,34 @@
   }
   $("vReload").onclick=vLoad;
 
+  // ---- Payments & Billing overview ----
+  function pbInr(paise){ return "₹"+Math.round((+paise||0)/100).toLocaleString("en-IN"); }
+  function pbLoad(){
+    api("/api/billing/admin/overview").then(function(x){
+      if(x.s!==200){ $("pbOverview").innerHTML='<div class="hint">'+(x.s===401?"Not an owner.":"Could not load.")+'</div>'; return; }
+      var d=x.d||{}, pv=d.providers||{}, fl=d.flags||{}, fo=d.founding||{}, cp=d.coupons||{}, pl=d.plans||{};
+      function dot(ok){ return '<b style="color:'+(ok?"#1c7a4a":"#b3261e")+'">'+(ok?"● live":"○ not set")+'</b>'; }
+      var prov='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin:6px 0 12px">'+
+        '<div>PhonePe (web) '+dot(pv.phonepe)+'</div><div>Razorpay (web) '+dot(pv.razorpay)+'</div>'+
+        '<div>Apple IAP '+dot(pv.apple)+'</div><div>Google Play '+dot(pv.google)+'</div></div>';
+      function flag(on,label,onTxt,offTxt){ return '<div>'+label+': <b style="color:'+(on?"#1c7a4a":"#b9852a")+'">'+(on?onTxt:offTxt)+'</b></div>'; }
+      var flags='<div style="display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;margin:6px 0 12px">'+
+        flag(fl.promoActive,"Launch promo (all free)","ACTIVE till "+(fl.promoUntil?new Date(fl.promoUntil).toLocaleDateString():"?"),"ended (enforcing)")+
+        flag(fl.enforceCaps,"AI per-module caps","enforced","off")+
+        flag(fl.costCapOn,"AI rupee cost cap","enforced","off (inert)")+
+        flag(fl.deviceLockOn,"Device-share lock","enforced","off (record-only)")+
+        flag(fl.featuresOn,"Feature gating","on","off")+'</div>';
+      var found='<div style="margin:6px 0 12px">Founding Doctor: <b>'+(fo.used||0)+' / '+(fo.seats||0)+'</b> seats used · '+(fo.left||0)+' left · '+(fo.codes||0)+' code(s) &nbsp;|&nbsp; Coupons: <b>'+(cp.active||0)+'</b> active / '+(cp.total||0)+' total</div>';
+      var tiers=pl.tiers||{}, addons=pl.addons||{}, tk=pl.tokens||{};
+      var rows=["student","coresident","pro","physician","physicianpro"].filter(function(k){return tiers[k];}).map(function(k){var t=tiers[k];return '<tr><td style="padding:3px 8px 3px 0">'+esc(t.label)+'</td><td style="padding:3px 8px 3px 0">'+pbInr(t.amount)+'/mo</td><td style="padding:3px 0">'+(t.annual?pbInr(t.annual)+'/yr':'—')+'</td></tr>';}).join("");
+      var priceTbl='<table style="border-collapse:collapse;font-size:12.5px;margin:4px 0 6px"><tr style="text-align:left;color:var(--slate-soft,#5a7184)"><th style="padding-right:8px">Tier</th><th style="padding-right:8px">Monthly</th><th>Annual</th></tr>'+rows+'</table>'+
+        '<div style="font-size:12.5px">Add-ons: Onco '+pbInr(addons.onco&&addons.onco.amount)+'/mo · Extra clinic '+pbInr(addons.clinic&&addons.clinic.amount)+'/mo · Founding '+pbInr(pl.founding&&pl.founding.amount)+'/yr</div>'+
+        '<div style="font-size:12.5px">MaiK Tokens: '+["boost","plus","power"].filter(function(k){return tk[k];}).map(function(k){return (tk[k].mt>=1e6?tk[k].mt/1e6+"M":Math.round(tk[k].mt/1e3)+"k")+" "+pbInr(tk[k].amount);}).join(" · ")+'</div>';
+      $("pbOverview").innerHTML='<b>Payment providers</b>'+prov+'<b>Enforcement flags</b>'+flags+'<b>Founding &amp; coupons</b>'+found+'<b>Live plan prices</b>'+priceTbl;
+    }).catch(function(){ $("pbOverview").innerHTML='<div class="hint">Sign in first.</div>'; });
+  }
+  $("pbReload").onclick=pbLoad;
+
   // ---- Pro subscriptions ----
   function proAct(spec){
     var v=$("proEmail").value.trim(); if(!v){say("proMsg","err","Enter an email or uid.");return;}
@@ -670,7 +703,7 @@
   function cpnCreate(){
     var body={ note:$("cpnNote").value.trim(), maxRedemptions:parseInt($("cpnMax").value,10)||0 };
     var code=$("cpnCode").value.trim(); if(code) body.code=code;
-    var dur=$("cpnDur").value; if(dur==="forever") body.forever=true; else if(dur.indexOf("months:")===0) body.months=parseInt(dur.split(":")[1],10)||12;
+    var dur=$("cpnDur").value; if(dur==="founding"){ body.type="founding"; if(!body.maxRedemptions) body.maxRedemptions=500; } else if(dur==="forever") body.forever=true; else if(dur.indexOf("months:")===0) body.months=parseInt(dur.split(":")[1],10)||12;
     say("cpnMsg","","Creating…");
     api("/api/billing/coupon/create",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(body)}).then(function(x){
       if(x.s!==200||!x.d.ok){ say("cpnMsg","err",x.s===401?"Not an owner.":("Failed: "+(x.d.error||x.s))); return; }
@@ -927,7 +960,7 @@
   }).catch(function(){ say("anMsg","err","Failed."); }); }
   $("anReload").onclick=anLoad;
 
-  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ cpnLoad(); }catch(e){} } }
+  function refresh(pane){ if(!(auth&&auth.currentUser))return; if(pane==="overview")ovLoad(); else if(pane==="support")supLoad(); else if(pane==="userctl"){ try{ if(!$("ucEmail").value) $("ucEmail").focus(); }catch(e){} } else if(pane==="aictl")aicLoad(); else if(pane==="config")cfgLoad(); else if(pane==="crashes")crLoad(); else if(pane==="analytics")anLoad(); else if(pane==="notif")nLoad(); else if(pane==="sources")sLoad(); else if(pane==="logs")lLoad(); else if(pane==="verif")vLoad(); else if(pane==="watch"){} else if(pane==="push")pStatus(); else if(pane==="ai")aiLoad(); else if(pane==="kardiox")kxLoad(); else if(pane==="xa")xaLoad(); else if(pane==="pro"){ try{ if(!$("etEmail").value) $("etEmail").value=(auth.currentUser.email||""); }catch(e){} try{ pbLoad(); }catch(e){} try{ cpnLoad(); }catch(e){} } }
 
   // ---- AI usage ----
   function aiRow(k,v){ return '<div style="display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span style="color:var(--mut)">'+esc(k)+'</span><b>'+esc(String(v))+'</b></div>'; }

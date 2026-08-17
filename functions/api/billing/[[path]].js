@@ -16,8 +16,8 @@
  */
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
-import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlement.js";
-import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
+import { entitlementFor, grantPro, revokePro, promoUntil, promoActive } from "../../_entitlement.js";
+import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
@@ -134,6 +134,30 @@ export async function onRequest(context) {
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
         role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
       }, state));
+    }
+    // ---- owner billing overview: provider config (booleans, never secrets) + flags + founding + plans ----
+    if (method === "GET" && seg === "admin" && sub === "overview") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      const cps = await listCoupons(env);
+      const founding = cps.filter((c) => c.type === "founding");
+      const foundingUsed = founding.reduce((n, c) => n + ((c.redeemedBy || []).length), 0);
+      const seats = +(env.FOUNDING_SEATS || 500);
+      return json({
+        providers: {
+          phonepe: !!(env.PHONEPE_CLIENT_ID && env.PHONEPE_CLIENT_SECRET),
+          razorpay: !!(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET),
+          apple: iapConfigured(env, "apple"),
+          google: iapConfigured(env, "google"),
+        },
+        flags: {
+          promoActive: promoActive(env), promoUntil: promoUntil(env),
+          costCapOn: costCapOn(env), deviceLockOn: deviceLockOn(env),
+          enforceCaps: String(env.MAIK_ENFORCE_CAPS) === "1", featuresOn: String(env.FEATURES_ON) === "1",
+        },
+        founding: { seats, used: foundingUsed, left: Math.max(0, seats - foundingUsed), codes: founding.length },
+        coupons: { total: cps.length, active: cps.filter((c) => !c.revoked).length },
+        plans: plans(env),
+      });
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
