@@ -97,3 +97,14 @@ export async function getInvoice(env, orgId, invoiceId) {
   if (!d || !d.fields || d.fields.orgId !== orgId) return null;
   return Object.assign({ id: invoiceId }, d.fields, { lines: JSON.parse(d.fields.lines || "[]") });
 }
+// Paid revenue for TODAY (IST) across the org, in rupees + the count of invoices paid today. Returns null
+// when billing is off, so the analytics dashboard simply hides the tile. fsQuery is single-field (orgId),
+// so status/date are filtered in JS. IST day boundary (UTC+5:30) matches the clinic's calendar day.
+export async function revenueToday(env, orgId) {
+  if (!billingEnabled(env) || !orgId) return null;
+  const rows = await fsQuery(env, "q_invoices", { where: { field: "orgId", value: orgId }, limit: 1000 }).catch(() => []);
+  const now = Date.now(), dayStart = now - ((now + 19800000) % 86400000);
+  let paise = 0, count = 0;
+  (rows || []).forEach((r) => { const f = r.fields || {}; if (f.status === "paid" && (f.paidAt || 0) >= dayStart) { paise += (f.total || 0); count++; } });
+  return { revenueToday: Math.round(paise / 100), invoicesPaidToday: count };
+}
