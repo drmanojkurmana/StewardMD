@@ -48,6 +48,11 @@ function firewallBlock(q) {
 // (anonymous non-app clients rejected; native X-SMD-App + owner/Cf-Access + named Origins still pass).
 function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+  // A signed-in caller (Firebase Bearer token) is never the anonymous-abuse case the Origin gate guards
+  // against — and browsers omit the Origin header on SAME-ORIGIN GETs, which was silently 403-ing the
+  // admin console + web app once APP_GATE_KEY was set. Let authenticated requests through; per-user
+  // quota + the owner check (aiAdminAuthed) downstream are the real controls.
+  if (request.headers.get("Authorization")) return true;
   if (env.GHIS_APP_TOKEN && request.headers.get("X-App-Token") === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && request.headers.get("X-App-Token") === env.AI_APP_TOKEN) return true;
   // Exact host allowlist (NOT endsWith — that matched attacker domains like
