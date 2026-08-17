@@ -1,6 +1,6 @@
-# StewardMD — Pricing & Packaging (v4)
+# StewardMD — Pricing & Packaging (v5)
 
-*v4 changes: FollowCare call is ₹4/min × 3–5 min ≈ ₹20/patient episode (quotas trimmed to match); AI top-ups are now **tokens**, not rupee-credits (§8a — big-number packs, honest strike-through anchor, better psychology than "₹50 → ₹25"); **Device Voice "Ultra"** on-device model is a Pro-and-above perk; **strike-through/anchor pricing** everywhere (genuine anchors only); **coupons on Android/Web only** (Apple forbids IAP codes → iOS uses Apple Offer Codes or redeem-on-web).*
+*v5 changes: AI usage is shown to users only in **MaiK Tokens**, never rupees (§8a — peg 2,000 MT = ₹1, ₹10 usage = 20,000 MT; packs 50k/250k/750k MT); GST guidance corrected (no startup waiver, but ₹20L threshold + 6% composition, §12). v4 set: FollowCare ₹4/min × 3–5 min ≈ ₹20/patient (quotas trimmed); **Device Voice "Ultra"** Pro-and-above perk; strike-through/anchor pricing (genuine only); coupons Android/Web only (Apple forbids IAP codes).*
 
 *Signed-off commercial model. v3 splits the top of the ladder into **three attending tiers** — Pro ₹599 (clinical AI), **Physician ₹1,499** (run your clinic: Google-Drive Personal Clinic + capped FollowCare/Scribe/MaiK-Ask + unlimited Billing + optional Onco), and **Physician Pro ₹2,499** (we host PHI + higher AI/credits + OncoTree/ONCQIS included). Trainee tiers (Student/Intern/Resident ₹199, Co-Resident ₹299) and Pro are kept as-is. Per-patient AI (voice consult ₹3–5, FollowCare ~₹11) is metered by monthly quota + credits, separate from the daily text cap. Ladder: Free → ₹199 → ₹299 → ₹599 → ₹1,499 → ₹2,499.*
 
@@ -237,16 +237,22 @@ Legend: **F**=Free · **S**=Trainee (Student/Intern/Resident) · **P**=Pro · **
 - **On-device voice DICTATION = ₹0 to serve** → plain dictation unlimited from Trainee up; the **Ultra** on-device model is a Pro-and-above perk (also ₹0 to run). The AI OPD **voice consult / Scribe** (ambient + structuring) costs ₹3–5/pt and is quota-metered.
 - **Answer cache** already drops repeat generic questions to ₹0.
 
-### 8a. AI Tokens (top-ups) — sell abundance, not a discount
-We DON'T sell "₹25 of AI for ₹50" (reads as *losing half*). We sell **StewardMD Tokens** — one wallet, big numbers, a genuine bulk discount as the anchor. Every AI action spends tokens (text = actual tokens; an imaging read, voice consult or FollowCare patient spends a fixed token amount shown in-app). Our blended cost is ≈ **₹12 per million tokens**, so every pack profits.
+### 8a. MaiK Tokens — the in-app AI currency (never show rupees)
+**The user never sees AI usage in rupees.** All usage, the daily allowance, the balance, and top-ups are shown in **MaiK Tokens (MT)**. Rupees appear ONLY on the price of a token pack. Internally the engine still tracks the real ₹ cost (unchanged); the app just displays it as MT. Peg (🔧 tunable): **2,000 MaiK Tokens = ₹1 of AI**, so ₹10 of usage reads as **20,000 MaiK Tokens** (a big, "spendable" number).
 
-| Pack | Tokens | Price 🔧 | Struck (entry rate ₹29/M) | Per-M | Our cost | Margin |
+**Daily allowance shown per tier** (= the ₹ cap × 2,000): Free **1,000 MT** · Trainee **10,000 MT** · Co-Resident **12,000 MT pooled** · Pro **20,000 MT** · Physician **30,000 MT** · Physician Pro **50,000 MT**.
+
+**What actions spend** (illustrative, shown in-app): MaiK answer ~60 MT · Deep review ~160 · Research ~250 · Patient summary ~190 · Imaging read ~800 · Voice consult/Scribe ~8,000 · FollowCare episode ~40,000.
+
+**Top-up packs** (₹ shown only here; our cost basis 2,000 MT = ₹1):
+
+| Pack | MaiK Tokens | Price 🔧 | Struck | Save | Our cost | Margin |
 |---|---|---|---|---|---|---|
-| **Boost** | **1,000,000** | **₹29** | — | ₹29 | ₹12 | ₹17 |
-| **Plus** ⭐ | **5,000,000** | **₹119** | ~~₹145~~ save 18% | ₹23.8 | ₹60 | ₹59 |
-| **Power** | **15,000,000** | **₹299** | ~~₹435~~ save 31% | ₹19.9 | ₹180 | ₹119 |
+| **Boost** | **50,000 MT** | **₹49** | — | — | ₹25 | ₹24 |
+| **Plus** ⭐ | **250,000 MT** | **₹199** | ~~₹245~~ | 19% | ₹125 | ₹74 |
+| **Power** | **750,000 MT** | **₹499** | ~~₹735~~ | 32% | ₹375 | ₹124 |
 
-Psychology: a **million-scale number feels abundant**; charm prices (₹29/₹119/₹299); the **strike-through is honest** (it's the real entry per-token rate, so bigger packs genuinely save — no fake MRP, which India's ASCI/CCPA penalise); "best value" badge on Power. Same wallet powers overage for imaging/voice/FollowCare, so the doctor tops up once and everything just works. Hospital Credits-base = the same, one shared org wallet.
+Psychology: a five/six-figure token balance feels abundant and spendable (unlike "₹25 of AI", which reads as *losing half*); charm prices; the **strike-through is honest** (entry rate ₹0.00098/MT, so bigger packs genuinely save, no fake MRP which India's ASCI/CCPA penalise). One wallet powers all overage (text, imaging, voice, FollowCare); hospital Credits-base = one shared org MT wallet. The "AI limit hit" sheet reads "You've used today's MaiK Tokens" with a Top-up button.
 
 ---
 
@@ -290,6 +296,6 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 - **Referral:** refer a doctor → **both get bonus tokens** (e.g. 5,000,000 tokens) or 1 free Pro month on the referee's activation.
 - **Strike-through / anchor pricing everywhere:** show the higher **regular** price struck next to the launch/plan price so every screen reads as a saving, e.g. **~~₹1,000~~ ₹299**, "**₹4,999/yr ~~₹7,188~~, 2 months free**", token packs "~~₹435~~ ₹299". *Anchors must be genuine* (the real regular price or the entry per-token rate), never a fabricated MRP — India's ASCI/CCPA penalise fake strike-throughs.
 - **Annual framing:** monthly-equivalent + "2 months free" (Pro ₹4,999/yr = ₹416/mo).
-- **GST:** B2C prices shown **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at hospital checkout). Register for GST before the first paid rupee (SaaS = 18%).
+- **GST (no startup waiver exists):** DPIIT-recognised startups get income-tax relief (80-IAC holiday) and angel-tax exemption, but **there is no GST exemption for startups**. What actually helps early on: (a) **no GST registration or charge required below ₹20 lakh** annual turnover (₹10L in special-category states), so early revenue is GST-free and margins are higher; (b) the **composition scheme for services (6%)** is available up to ₹50L turnover instead of the full 18%; (c) once regular-registered, SaaS is **18%**. Plan pricing so it works at 18%, enjoy the sub-threshold headroom while it lasts, and register the moment you approach ₹20L. Caveat: selling through an e-commerce operator / marketplace or making inter-state B2B supply can force registration earlier. *Confirm the exact position with a CA — this is guidance, not tax advice.* Display: B2C prices **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at checkout) once registered.
 - **Coupons = Android + Web only.** Apple forbids external discount codes inside IAP, so the coupon-redeem field is **shown on Android/Web (Razorpay/PhonePe/Play) and hidden on iOS**; iOS discounts use **Apple Offer Codes** or a "redeem on stewardmd.in" link (purchase on web, entitlement syncs to the account). The built coupon engine already grants server-side, so a web redeem unlocks the iOS app automatically.
 - **In-app cap nudge** is the primary upsell surface (the built `429 ai-cost-cap` sheet).
