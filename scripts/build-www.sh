@@ -14,7 +14,7 @@ rm -rf "$WWW"
 mkdir -p "$WWW" "$WWW/kb/dist" "$WWW/kb/ai" "$WWW/kb/treatments" "$WWW/kb/protocols"
 
 # ── 1. Shipping HTML (exclude demos + site-verification pages) ────────────────
-for f in index.html privacy.html terms.html disclaimer.html support.html; do
+for f in index.html privacy.html terms.html disclaimer.html support.html copyright.html; do
   [ -f "$f" ] && cp "$f" "$WWW/"
 done
 

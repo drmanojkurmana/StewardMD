@@ -3,15 +3,17 @@
  * lab-watch, push). Accepts EITHER:
  *   • Authorization: Bearer <Firebase ID token> whose email ∈ OWNER_EMAILS, OR
  *   • X-Admin-Token matching UPDATES_ADMIN_TOKEN or VERIFY_ADMIN_TOKEN (legacy fallback).
- * OWNER_EMAILS (comma-separated) overrides the default owner list.
+ * OWNER_EMAILS (comma-separated) ADDS to the built-in owner list — the two are UNIONED, so the built-in
+ * owners always work even if a stale/partial OWNER_EMAILS env is set in the Cloudflare dashboard.
  */
 import { verifyFirebaseToken } from "./_fbauth.js";
 
-const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+const OWNER_EMAILS_DEFAULT = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"];
 
 export function ownerEmails(env) {
-  return (env.OWNER_EMAILS ? String(env.OWNER_EMAILS).split(",") : OWNER_EMAILS_DEFAULT)
-    .map((s) => s.trim().toLowerCase()).filter(Boolean);
+  const fromEnv = (env && env.OWNER_EMAILS) ? String(env.OWNER_EMAILS).split(",") : [];
+  const all = OWNER_EMAILS_DEFAULT.concat(fromEnv).map((s) => s.trim().toLowerCase()).filter(Boolean);
+  return Array.from(new Set(all));   // union of built-in defaults + env; env can add owners, never remove
 }
 export function emailFromToken(idToken) {
   try {

@@ -16,25 +16,62 @@
  */
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
-import { entitlementFor, grantPro, revokePro, promoUntil } from "../../_entitlement.js";
-import { verifyPurchase, daysFromExpiry } from "../../_iap.js";
+import { entitlementFor, grantPro, revokePro, promoUntil, promoActive } from "../../_entitlement.js";
+import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
-import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn } from "../../_credits.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool } from "../../_credits.js";
+import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
+import { deviceLockOn } from "../../_devices.js";
+import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
 
 const json = (obj, status = 200, cache = "no-store") => new Response(JSON.stringify(obj), {
   status, headers: { "Content-Type": "application/json", "Cache-Control": cache },
 });
 const rawUid = (id) => (typeof id === "string" && id.indexOf("fb:") === 0 ? id.slice(3) : id);
 
-// Plans — amounts in PAISE (₹1 = 100). Placeholders; override via env before launch.
+// Plans — amounts in PAISE (₹1 = 100), env-overridable. See docs/PRICING_PACKAGING.md. `monthly`/`annual`
+// stay as the Pro back-compat keys the current paywall renders; `tiers`/`addons`/`founding` carry the full set.
 function plans(env) {
+  const P = (k, d) => cfgPrice(env, k, d);   // live KV price override > env > default
   return {
-    monthly: { months: 1, amount: +(env.PRO_PRICE_MONTHLY || 49900), label: "Monthly" },
-    annual: { months: 12, amount: +(env.PRO_PRICE_ANNUAL || 399900), label: "Annual" },
+    monthly: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), label: "Pro Monthly" },
+    annual: { months: 12, amount: P("PRO_PRICE_ANNUAL", 499900), label: "Pro Annual" },
+    tiers: {
+      student: { months: 1, amount: P("STUDENT_PRICE_MONTHLY", 19900), annual: P("STUDENT_PRICE_ANNUAL", 199900), regular: P("STUDENT_REGULAR", 39900), label: "Trainee", requiresVerify: true },
+      coresident: { months: 1, amount: P("CORESIDENT_PRICE_MONTHLY", 29900), annual: P("CORESIDENT_PRICE_ANNUAL", 299900), regular: P("CORESIDENT_REGULAR", 99900), seats: 2, label: "Co-Resident" },
+      pro: { months: 1, amount: P("PRO_PRICE_MONTHLY", 59900), annual: P("PRO_PRICE_ANNUAL", 499900), regular: P("PRO_REGULAR", 99900), label: "Pro", popular: true },
+      physician: { months: 1, amount: P("PHYSICIAN_PRICE_MONTHLY", 149900), annual: P("PHYSICIAN_PRICE_ANNUAL", 1499900), regular: P("PHYSICIAN_REGULAR", 249900), label: "Physician" },
+      physicianpro: { months: 1, amount: P("PHYSICIANPRO_PRICE_MONTHLY", 249900), annual: P("PHYSICIANPRO_PRICE_ANNUAL", 2499900), regular: P("PHYSICIANPRO_REGULAR", 399900), label: "Physician Pro", premium: true },
+    },
+    addons: {
+      onco: { amount: P("ONCO_ADDON_MONTHLY", 8900), label: "Physician Onco" },
+      clinic: { amount: P("CLINIC_ADDON_MONTHLY", 13900), label: "Extra clinic" },
+    },
+    tokens: {
+      boost: { mt: 50000, amount: P("TOKENS_BOOST", 4900), label: "Boost" },
+      plus: { mt: 250000, amount: P("TOKENS_PLUS", 19900), regular: P("TOKENS_PLUS_REGULAR", 24500), label: "Plus", popular: true },
+      power: { mt: 750000, amount: P("TOKENS_POWER", 49900), regular: P("TOKENS_POWER_REGULAR", 73500), label: "Power" },
+    },
+    founding: { amount: P("FOUNDING_PRICE_YEAR", 39900), months: 12, seats: P("FOUNDING_SEATS", 500), label: "Founding Doctor (year)" },
   };
+}
+
+// Resolve what the client is buying -> { amount(paise), months, key, label, mt? }. Accepts the new
+// { tier, cycle } and { pack } / { addon }, and the legacy { plan:"monthly|annual" } (Pro). The `key`
+// rides in the payment metaInfo/notes so the webhook grants the right thing.
+function selectAmount(env, body) {
+  const P = plans(env); const b = body || {};
+  if (b.tier && P.tiers[b.tier]) {
+    const t = P.tiers[b.tier], annual = b.cycle === "annual" && t.annual;
+    return { amount: annual ? t.annual : t.amount, months: annual ? 12 : 1, key: b.tier + ":" + (annual ? "annual" : "monthly"), label: t.label };
+  }
+  if (b.pack && P.tokens[b.pack]) { const k = P.tokens[b.pack]; return { amount: k.amount, months: 0, mt: k.mt, key: "tokens:" + b.pack, label: k.label + " tokens" }; }
+  if (b.addon && P.addons[b.addon]) { const a = P.addons[b.addon]; return { amount: a.amount, months: 1, key: "addon:" + b.addon, label: a.label }; }
+  const plan = P[b.plan] ? b.plan : "monthly";
+  return { amount: P[plan].amount, months: P[plan].months, key: "pro:" + plan, label: P[plan].label };
 }
 
 async function hmacSha256Hex(secret, message) {
@@ -83,16 +120,58 @@ export async function onRequest(context) {
   const method = request.method;
 
   try {
+    try { await warmBillingCfg(usageKv(env)); } catch (e) {}   // load live price/flag overrides (cached 30s)
+
+    // ---- owner: read / write the live price + flag overrides (KV; no redeploy) ----
+    if (seg === "admin" && sub === "config") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      if (method === "GET") return json({ cfg: await getBillingCfg(usageKv(env)), effective: plans(env), promoUntil: promoUntil(env) });
+      if (method === "POST") {
+        let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
+        const next = await setBillingCfg(usageKv(env), { prices: body.prices || {}, flags: body.flags || {} });
+        return json({ ok: true, cfg: next, effective: plans(env), promoUntil: promoUntil(env) });
+      }
+    }
+
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);
       // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
-      let credits = 0, costCap = 0;
+      let credits = 0, costCap = 0, role = null;
       try {
         const who = await usageIdentify(request, env);
-        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); costCap = await dailyCostCap(env, kv, who.email, state && state.role); }
+        if (who && who.email) { const kv = usageKv(env); credits = await getCredits(kv, usageKeyFor(who)); }
       } catch (e) {}
-      return json(Object.assign({ signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env) }, state));
+      try { const ent = uid ? await getEntitlement(env, uid) : null; role = ent && ent.role; } catch (e) {}
+      try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
+      return json(Object.assign({
+        signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
+        role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
+      }, state));
+    }
+    // ---- owner billing overview: provider config (booleans, never secrets) + flags + founding + plans ----
+    if (method === "GET" && seg === "admin" && sub === "overview") {
+      if (!(await ownerOK(request, env))) return json({ error: "unauthorised" }, 401);
+      const cps = await listCoupons(env);
+      const founding = cps.filter((c) => c.type === "founding");
+      const foundingUsed = founding.reduce((n, c) => n + ((c.redeemedBy || []).length), 0);
+      const seats = +(env.FOUNDING_SEATS || 500);
+      return json({
+        providers: {
+          phonepe: !!(env.PHONEPE_CLIENT_ID && env.PHONEPE_CLIENT_SECRET),
+          razorpay: !!(env.RAZORPAY_KEY_ID && env.RAZORPAY_KEY_SECRET),
+          apple: iapConfigured(env, "apple"),
+          google: iapConfigured(env, "google"),
+        },
+        flags: {
+          promoActive: promoActive(env), promoUntil: promoUntil(env),
+          costCapOn: costCapOn(env), deviceLockOn: deviceLockOn(env),
+          enforceCaps: String(env.MAIK_ENFORCE_CAPS) === "1", featuresOn: String(env.FEATURES_ON) === "1",
+        },
+        founding: { seats, used: foundingUsed, left: Math.max(0, seats - foundingUsed), codes: founding.length },
+        coupons: { total: cps.length, active: cps.filter((c) => !c.revoked).length },
+        plans: plans(env),
+      });
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
@@ -153,15 +232,15 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
-      const P = plans(env); const plan = P[body.plan] ? body.plan : "monthly";
+      const sel = selectAmount(env, body);
       const r = await fetch("https://api.razorpay.com/v1/orders", {
         method: "POST",
         headers: { "Authorization": "Basic " + btoa(env.RAZORPAY_KEY_ID + ":" + env.RAZORPAY_KEY_SECRET), "Content-Type": "application/json" },
-        body: JSON.stringify({ amount: P[plan].amount, currency: "INR", notes: { uid, plan, months: P[plan].months }, receipt: "pro-" + uid.slice(0, 20) + "-" + plan }),
+        body: JSON.stringify({ amount: sel.amount, currency: "INR", notes: { uid, plan: sel.key, months: sel.months }, receipt: "smd-" + uid.slice(0, 18) + "-" + Date.now().toString(36) }),
       });
       const o = await r.json();
       if (!r.ok || !o.id) return json({ error: "order-failed", detail: (o && o.error) || null }, 502);
-      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: env.RAZORPAY_KEY_ID, plan });
+      return json({ orderId: o.id, amount: o.amount, currency: o.currency, keyId: env.RAZORPAY_KEY_ID, plan: sel.key, label: sel.label });
     }
     if (method === "POST" && seg === "razorpay" && sub === "webhook") {
       const raw = await request.text();
@@ -189,25 +268,25 @@ export async function onRequest(context) {
       const uid = rawUid(await identify(request, env));
       if (!uid) return json({ error: "signin-required" }, 401);
       let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
-      const P = plans(env); const plan = P[body.plan] ? body.plan : "monthly";
+      const sel = selectAmount(env, body);
       const token = await phonepeToken(env);
       const cfg = phonepeCfg(env);
       const merchantOrderId = "SMDPRO" + crypto.randomUUID().replace(/-/g, "").slice(0, 24);
       const redirectUrl = env.PRO_REDIRECT_URL || "https://stewardmd.in/?pro=return";
-      // uid + months ride in metaInfo (echoed back by the status API) so the webhook grants the
-      // right account for the right duration — no client-supplied entitlement is trusted.
+      // uid + months + selection key ride in metaInfo (echoed back by the status API) so the webhook
+      // grants the right thing for the right duration — no client-supplied entitlement is trusted.
       const r = await fetch(cfg.pg + "/checkout/v2/pay", {
         method: "POST",
         headers: { "Authorization": "O-Bearer " + token, "Content-Type": "application/json" },
         body: JSON.stringify({
-          merchantOrderId, amount: P[plan].amount,
-          metaInfo: { udf1: uid, udf2: String(P[plan].months), udf3: plan },
+          merchantOrderId, amount: sel.amount,
+          metaInfo: { udf1: uid, udf2: String(sel.months), udf3: sel.key },
           paymentFlow: { type: "PG_CHECKOUT", merchantUrls: { redirectUrl } },
         }),
       });
       const o = await r.json();
       if (!r.ok || !o.redirectUrl) return json({ error: "pay-failed", detail: o || null }, 502);
-      return json({ redirectUrl: o.redirectUrl, merchantOrderId, orderId: o.orderId, plan });
+      return json({ redirectUrl: o.redirectUrl, merchantOrderId, orderId: o.orderId, plan: sel.key, label: sel.label });
     }
     if (method === "POST" && seg === "phonepe" && sub === "webhook") {
       const user = env.PHONEPE_WEBHOOK_USERNAME, pass = env.PHONEPE_WEBHOOK_PASSWORD;
@@ -259,6 +338,13 @@ export async function onRequest(context) {
         if (!uid) return json({ error: "signin-required" }, 401);
         let body = {}; try { body = (await request.json()) || {}; } catch (e) {}
         const r = await redeemCoupon(env, body.code, uid);
+        // Founding-Doctor SKU: apply the fixed annual AI pool + ~0 daily cap (keyed by email, like the meter).
+        if (r.ok && r.founding && !r.already) {
+          try {
+            const who = await usageIdentify(request, env);
+            if (who && who.email) { const kv = usageKv(env); await setUserCostCap(kv, who.email, foundingDailyCap(env)); await grantFoundingPool(env, kv, usageKeyFor(who)); }
+          } catch (e) {}
+        }
         return json(r, r.ok ? 200 : (r.reason === "signin-required" ? 401 : 404));
       }
       // owner-only management

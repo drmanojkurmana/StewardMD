@@ -32,6 +32,7 @@ export const AI_MODULES = {
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
 };
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
+import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
@@ -203,7 +204,7 @@ export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
   // maik:50 / research:2 while guests/natives (ip-keyed) don't. Usage is still RECORDED for dashboards
   // (recordAiUsage runs regardless). Flip env MAIK_ENFORCE_CAPS="1" to re-enable the caps.
-  if (String(env && env.MAIK_ENFORCE_CAPS) !== "1") return { ok: true, unlimited: true, limit: 0 };
+  if (String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) !== "1") return { ok: true, unlimited: true, limit: 0 };
   const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
   if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
@@ -348,6 +349,7 @@ export async function poolKeyFor(store, doctorId) {
 // (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
 export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
+  try { await warmBillingCfg(store); } catch (e) {}        // live enforce/cost-cap flags (cached 30s)
   doctorId = await poolKeyFor(store, doctorId);            // co-resident pair shares ONE AI bucket
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
   if (!q.ok) return q;                                     // at the per-module daily cap → block
