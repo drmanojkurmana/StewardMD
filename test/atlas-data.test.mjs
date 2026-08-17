@@ -321,5 +321,41 @@ A._state.atlas.structures.fornix.name = "Fornix";
 delete A._state.atlas.structures.fornix.parent;
 delete A._state.atlas.structures.wmroot;
 
+// --- accessibility contract ---
+// open() nulls st.atlas and there is no fetch in this stub, so re-seed the fixture:
+// without it the scrub bar is (correctly) not rendered and every bar assertion fails.
+const FIX = {
+  categories: { wm: { label: "White matter", color: "#ffffff" }, csf: { label: "CSF", color: "#7fd9e8" } },
+  structures: { fornix: { name: "Fornix", category: "wm", definition: "A tract." }, sas: { name: "Subarachnoid space", category: "csf" } },
+  slices: [
+    { i: 1, img: "/a/001.webp", aspect: 0.9, pins: [{ s: "fornix", x: 48, y: 55 }, { s: "fornix", x: 52, y: 55 }, { s: "sas", x: 80, y: 40 }] },
+    { i: 2, img: "/a/002.webp", aspect: 0.9, pins: [{ s: "fornix", x: 49, y: 57 }] }
+  ]
+};
+A.open("brain-mri-axial-t1");
+A._state.atlas = FIX;
+A._state.slice = 1;
+A._state.hidden = {}; A._state.sel = null; A._state.locked = null;
+const vh = A._viewerHtml();
+ok("slice counter is a live region", vh.includes('aria-live="polite"'));
+ok("the range has an accessible name", vh.includes('aria-label="Slice"'));
+ok("back control matches swipe-back BACK_SEL",
+   vh.includes('class="atlas-back"') && /aria-label="(Back|Close)"/.test(vh));
+ok("step buttons are labelled", vh.includes('aria-label="Previous slice"') && vh.includes('aria-label="Next slice"'));
+ok("the grid button is labelled", vh.includes('aria-label="All slices"'));
+ok("footer disclaimer is present verbatim", vh.includes("Educational reference only — not for diagnosis."));
+ok("viewer renders no attribution", !/licen[cs]e|public domain|courtesy|Visible Human|Gray/i.test(vh));
+ok("viewer uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(vh));
+ok("catalog uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(A._catalogHtml()));
+ok("info screen uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{2300}-\u{23FF}\u{2B00}-\u{2BFF}\u{FE0F}]/u.test(A._infoHtml()));
+// Every pin is reachable and named — colour alone must never carry the meaning.
+const ovs = A._pure.overlaySvg(A._state.atlas.slices[0], A._state.atlas,
+  A._pure.imageBox(400, 800, 0.9, 90), 400, 800, { sel: null, hidden: {} });
+ok("every dot is focusable", (ovs.match(/class="atlas-dot[^"]*"[^>]*tabindex="0"/g) || []).length === 3);
+ok("every dot carries its name", (ovs.match(/class="atlas-dot[^"]*"[^>]*aria-label="/g) || []).length === 3);
+ok("names are present as text, not colour alone", ovs.includes("Fornix") && ovs.includes("Subarachnoid"));
+A.close();
+ok("close() restores focus tracking", A._state._prevFocus === null);
+
 console.log(fail === 0 ? "ALL " + pass + " PASS" : pass + " pass / " + fail + " FAIL");
 process.exit(fail ? 1 : 0);

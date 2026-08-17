@@ -34,3 +34,21 @@ See [[MaiK Intent Firewall]]. Require a positive medical signal; reject the rest
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.
 - **No em-dash** in app-facing text (MaiK AI *output* exempt).
 - **Mobile-only**: the web code IS the app (Capacitor renders local `www/`).
+
+## 2026-08-17 — RadioAnatome: pre-rendered webp, not in-app DICOM
+
+Built the cross-sectional atlas on pre-converted `.webp` stacks with JSON pin
+coordinates rather than in-app DICOM rendering (Cornerstone.js / Niivue). The
+reference app ships flat images too; a slice atlas needs no windowing, measurement
+or MPR. Consequences: zero new dependencies, `<input type="range">` gives drag +
+keyboard + VoiceOver for free, and all DICOM handling stays in the offline pipeline.
+
+Content is restricted to licence-cleared sources under a product decision of
+"attribution tier B+": nothing names a source in the viewer or catalog, one credit
+line is permitted on the info screen, and third-party notices live in Settings →
+Legal. Verified against primary licence text — FSL is non-commercial *and its terms
+reach the development process*, so JHU ICBM-DTI-81 and every FSL-bundled
+white-matter atlas are unusable; FreeSurfer forces its licence into user
+documentation, so FastSurfer `--seg_only` (Apache-2.0) is used instead. There is no
+attribution-free named white-matter atlas in existence, so that layer is
+hand-authored. TCIA, FMA, UBERON, Wikipedia prose and Mindboggle-101 are all barred.

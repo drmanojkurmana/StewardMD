@@ -774,6 +774,7 @@
     var el = rootEl();
     if (!el) return;
     st.sel = null; st.locked = null; st.hidden = {};
+    try { st._prevFocus = G.document.activeElement; } catch (e) { st._prevFocus = null; }
     try { if (G.SMD_hideHome) G.SMD_hideHome(); } catch (e) {}
     el.removeEventListener("click", onClick);
     el.addEventListener("click", onClick);
@@ -801,6 +802,10 @@
     // button — see the SMD_showHome comment in home.js). showV2 only re-adds the
     // home layer underneath, so anything legitimately on top is unaffected.
     try { if (G.SMD_showHome) G.SMD_showHome(); } catch (e) {}
+    // Return focus where the user left it, or a keyboard user is dumped at the
+    // top of the document with no idea where they are.
+    try { if (st._prevFocus && st._prevFocus.focus) st._prevFocus.focus(); } catch (e) {}
+    st._prevFocus = null;
     st.view = "catalog"; st.sel = null;
   }
 
@@ -821,6 +826,15 @@
     close();
     return true;
   }
+
+  // Escape unwinds one layer at a time, matching back() exactly so keyboard and
+  // gesture users get identical behaviour.
+  if (G.document && G.document.addEventListener)
+    G.document.addEventListener("keydown", function (e) {
+      if (e.key !== "Escape" || !isOpen()) return;
+      e.preventDefault();
+      back();
+    });
 
   // Two repaint triggers, deliberately. ResizeObserver catches element-level changes
   // (iPad split view, desktop window drag) but does not fire at all in headless/CDP
