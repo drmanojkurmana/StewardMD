@@ -549,8 +549,11 @@ export async function onRequest(context) {
         const room = await ORG.getRoom(env, body.roomId);
         if (!room || String(room.orgId) !== String(body.orgId)) return json({ ok: false, error: "room_not_found" }, 404, request);
         const az = await azOrg(CAPS.QUEUE_ASSIGN, { roomId: room.id, departmentId: room.departmentId }); if (!az.ok) return deny(az);
+        // Setting urgent priority needs QUEUE_PRIORITY separately - reception may route but not mark urgent. Drop the
+        // priority (never deny the whole routing) unless the actor also holds it, so a crafted request can't bypass the role.
+        const azP = body.priority ? await azOrg(CAPS.QUEUE_PRIORITY, { roomId: room.id, departmentId: room.departmentId }) : { ok: false };
         const org = await ORG.getOrg(env, body.orgId);
-        try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: body.priority, reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
+        try { await Q.assignToRoom(env, org, body.ticketId, room, { priority: (azP.ok ? body.priority : 0), reason: body.reason, date: body.date, doctorName: body.doctorName }, actor.id); }
         catch (e) { return json({ ok: false, error: (e && e.message) || "assign_failed" }, (e && e.status) || 500, request); }
         return json({ ok: true, board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
