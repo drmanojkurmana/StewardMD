@@ -82,12 +82,17 @@ def greeting_text(lang):
 
 
 def warm(tts, cfg, lang="te"):
-    """Pre-synthesize the greeting + filler for a language so the first call has zero warm-up delay."""
-    if lang not in _greeting_cache:
-        _greeting_cache[lang] = tts.synth(greeting_text(lang), lang)
-    if lang not in _filler_cache:
-        _filler_cache[lang] = tts.synth(_FILLER.get(lang, _FILLER["en"]), lang)
-    return _greeting_cache[lang]
+    """Pre-synthesize the greeting + filler for a language so the first call has zero warm-up delay.
+    Only cache NON-EMPTY audio - caching an empty clip (a transient TTS failure) would mute the greeting forever."""
+    if not _greeting_cache.get(lang):
+        pcm = tts.synth(greeting_text(lang), lang)
+        if pcm:
+            _greeting_cache[lang] = pcm
+    if not _filler_cache.get(lang):
+        pcm = tts.synth(_FILLER.get(lang, _FILLER["en"]), lang)
+        if pcm:
+            _filler_cache[lang] = pcm
+    return _greeting_cache.get(lang)
 
 
 def _json(text):
@@ -171,17 +176,23 @@ class ConversationalSession:
         self.client.post_status(call_id, {"status": "in_progress"})
 
         lang = self.call.get("lang", "te")
-        # INSTANT greeting: play the pre-synthesized opening immediately (no LLM/TTS wait = no dead air on
-        # answer, so patients don't hang up). Seed it into history so the LLM continues instead of greeting
-        # again, and compute the first question WHILE the greeting audio plays (pipelined - hides LLM latency).
-        greet_pcm = _greeting_cache.get(lang) or await loop.run_in_executor(None, warm, self.tts, self.cfg, lang)
-        self.brain.turns.append(("YOU", greeting_text(lang)))
         self.call["_convo"] = self.brain.turns   # live refs -> /lastcall always shows the current dialogue+facts
         self.call["_facts"] = self.brain.facts
-        think = asyncio.create_task(loop.run_in_executor(None, self.brain.step, None))
-        await self.telephony.play(greet_pcm)
-        turn = await think
-        await self._say(turn["reply"])
+        # Greeting. If we have a pre-synthesized clip, play it INSTANTLY (no dead air) and compute the first
+        # question WHILE it plays (pipelined). Otherwise fall back to a normal LLM greeting (still works).
+        turn = {"reply": "", "complete": False, "emergency": False}
+        try:
+            greet_pcm = _greeting_cache.get(lang) or await loop.run_in_executor(None, warm, self.tts, self.cfg, lang)
+            if greet_pcm:
+                self.brain.turns.append(("YOU", greeting_text(lang)))
+                think = asyncio.create_task(loop.run_in_executor(None, self.brain.step, None))
+                await self.telephony.play(greet_pcm)
+                turn = await think
+            else:
+                turn = await loop.run_in_executor(None, self.brain.step, None)
+            await self._say(turn["reply"])
+        except Exception as e:           # a greeting failure must NOT drop the call - fall into the loop anyway
+            self.call.setdefault("_error", []).append("greeting: " + str(e)[:200])
 
         emergency = False
         silence = 0
@@ -193,7 +204,10 @@ class ConversationalSession:
                     None, self.brain.step, "(the call has gone on a while - warmly say a short goodbye now and end)")
                 await self._say(turn["reply"])
                 break
-            pcm = await self.telephony.listen(self.cfg.convo_turn_timeout)
+            try:
+                pcm = await self.telephony.listen(self.cfg.convo_turn_timeout)
+            except Exception:            # patient hung up / websocket closed - end cleanly
+                break
             if pcm is None:                              # elderly patients pause a lot - be VERY patient, don't cut off
                 silence += 1
                 if silence <= self.cfg.max_silence_nudges:
@@ -206,17 +220,21 @@ class ConversationalSession:
                     continue
                 break
             silence = 0
-            # Respond INSTANTLY with a short "listening" filler while STT runs, so there's no dead gap.
-            filler = _filler_cache.get(lang)
-            transcribe = loop.run_in_executor(None, self.stt.transcribe, pcm, lang)
-            if filler:
-                await self.telephony.play(filler)
-            transcript = await transcribe
-            self.call.setdefault("_turns", []).append(
-                {"sec": round(len(pcm) / 2 / 8000, 1), "heard": transcript})
-            turn = await loop.run_in_executor(None, self.brain.step, transcript or "(unclear)")
-            emergency = emergency or turn.get("emergency")
-            await self._say(turn["reply"])
+            try:
+                # Respond INSTANTLY with a short "listening" filler while STT runs, so there's no dead gap.
+                filler = _filler_cache.get(lang)
+                transcribe = loop.run_in_executor(None, self.stt.transcribe, pcm, lang)
+                if filler:
+                    await self.telephony.play(filler)
+                transcript = await transcribe
+                self.call.setdefault("_turns", []).append(
+                    {"sec": round(len(pcm) / 2 / 8000, 1), "heard": transcript})
+                turn = await loop.run_in_executor(None, self.brain.step, transcript or "(unclear)")
+                emergency = emergency or turn.get("emergency")
+                await self._say(turn["reply"])
+            except Exception as e:       # a transient STT/LLM/TTS hiccup must NOT drop the call
+                self.call.setdefault("_error", []).append(str(e)[:200])
+                await self._say(self.cfg.convo_fallback)
 
         duration_ms = int((self.clock() - started) * 1000)
         # Hand the gathered facts + transcript to the engine/record (server scores + escalates; safety net).

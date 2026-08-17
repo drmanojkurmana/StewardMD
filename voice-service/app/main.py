@@ -128,7 +128,8 @@ async def lastcall():
     rec = STATE["calls"][cid]
     call = rec["call"]
     return {"callId": cid, "phone": call.get("phone"), "state": rec["state"], "lang": call.get("lang"),
-            "turns": call.get("_turns", []), "convo": call.get("_convo", []), "facts": call.get("_facts", {})}
+            "turns": call.get("_turns", []), "convo": call.get("_convo", []), "facts": call.get("_facts", {}),
+            "errors": call.get("_error", [])}
 
 
 @app.post("/ingest")
