@@ -1,0 +1,307 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>StewardMD - Pricing & Go-To-Market</title>
+<style>
+  :root{
+    --teal:#0e6e63; --teal-soft:#e3f1ee; --teal-line:#bfe0d8;
+    --ink:#14202b; --slate:#2d4356; --slate-soft:#5a7184;
+    --paper:#ffffff; --panel:#f6f8f7; --line:#dde5e2;
+    --gold:#b9852a; --gold-soft:#fbf1dd; --green:#1c7a4a; --red:#b3261e;
+    --sans:"Helvetica Neue",Arial,sans-serif; --serif:Georgia,"Times New Roman",serif;
+  }
+  *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact;}
+  html,body{margin:0;padding:0;color:var(--ink);font-family:var(--sans);font-size:12px;line-height:1.5;}
+  @page{size:A4;margin:14mm 13mm;}
+  h1,h2,h3{font-family:var(--serif);color:var(--ink);margin:0 0 6px;}
+  .section{page-break-inside:avoid;margin:0 0 18px;}
+  .page-break{page-break-before:always;}
+  .muted{color:var(--slate-soft);}
+  .accent{color:var(--teal);}
+  .kicker{font:700 10px var(--sans);letter-spacing:.14em;text-transform:uppercase;color:var(--teal);margin-bottom:4px;}
+  h2.sec{font-size:19px;border-bottom:2px solid var(--teal);padding-bottom:6px;margin-bottom:12px;}
+  table{width:100%;border-collapse:collapse;margin:6px 0;font-size:10.5px;}
+  th,td{text-align:left;padding:6px 8px;border-bottom:1px solid var(--line);vertical-align:top;}
+  th{background:var(--teal);color:#fff;font:700 10px var(--sans);letter-spacing:.02em;}
+  tr:nth-child(even) td{background:var(--panel);}
+  .tag{display:inline-block;font:700 9px var(--sans);padding:2px 7px;border-radius:999px;background:var(--teal-soft);color:var(--teal);border:1px solid var(--teal-line);}
+  .tag.gold{background:var(--gold-soft);color:var(--gold);border-color:#efd9a8;}
+  .callout{background:var(--panel);border:1px solid var(--line);border-left:4px solid var(--teal);border-radius:6px;padding:10px 12px;margin:8px 0;}
+  .callout.gold{border-left-color:var(--gold);background:var(--gold-soft);}
+  .grid{display:flex;gap:8px;flex-wrap:wrap;}
+  .card{flex:1;min-width:150px;border:1px solid var(--line);border-radius:10px;padding:11px 12px;background:var(--paper);}
+  .card.hi{border:2px solid var(--teal);background:var(--teal-soft);}
+  .card .name{font:800 13px var(--sans);color:var(--slate);}
+  .card .price{font:800 21px var(--serif);color:var(--ink);margin:3px 0;}
+  .card .price small{font:600 11px var(--sans);color:var(--slate-soft);}
+  .card ul{margin:6px 0 0;padding-left:15px;}
+  .card li{margin:2px 0;font-size:10px;}
+  ul.tight{margin:4px 0;padding-left:16px;} ul.tight li{margin:3px 0;}
+  .two{display:flex;gap:14px;} .two>div{flex:1;}
+  .cover{height:255mm;display:flex;flex-direction:column;justify-content:center;}
+  .cover .logo{font:800 46px var(--serif);color:var(--ink);letter-spacing:-1px;}
+  .cover .logo .x{color:var(--teal);}
+  .cover .title{font:800 30px var(--serif);margin-top:18px;line-height:1.15;}
+  .cover .sub{font-size:14px;color:var(--slate);margin-top:10px;max-width:135mm;}
+  .cover .meta{margin-top:34px;font-size:11px;color:var(--slate-soft);}
+  .rule{height:5px;width:70px;background:var(--teal);border-radius:3px;margin:16px 0;}
+  .foot{font-size:9px;color:var(--slate-soft);border-top:1px solid var(--line);padding-top:6px;margin-top:8px;}
+  .yes{color:var(--green);font-weight:700;} .no{color:#b9c2c0;}
+  .big{font:800 15px var(--serif);}
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="logo">Steward<span class="x">MD</span></div>
+  <div class="rule"></div>
+  <div class="title">Pricing &amp; Go-To-Market Plan</div>
+  <div class="sub">The complete commercial pack: subscription tiers, hospital licensing, AI cost economics, the Founding-Doctor launch offer, and the growth strategy, for the Sales &amp; Marketing team.</div>
+  <div class="meta">
+    Version 3 &middot; 17 August 2026 &middot; India (INR)<br>
+    <b>Confidential</b> - internal Sales &amp; Marketing use. Prices marked 🔧 are tunable before launch.
+  </div>
+</div>
+
+<!-- 1. STRATEGY -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="kicker">The one idea</div>
+  <h2 class="sec">How StewardMD is priced</h2>
+  <div class="callout"><span class="big">Free where it is cheap and habit-forming. Paid where it costs us money or scales to a team.</span><br>
+  Deterministic tools (reasoning engine, drug safety, calculators, knowledge base) cost us almost nothing and build the daily habit, so they stay free forever, that is our acquisition engine. We charge for AI compute, imaging, per-patient services, and multi-user hospital workflow.</div>
+  <div class="grid">
+    <div class="card"><div class="name accent">1 &middot; Meter by rupee, not by count</div><ul class="tight"><li>A text answer costs ₹0.03; an imaging read ₹0.40; a voice consult ₹3-5.</li><li>Caps are worst-case ceilings, typical use is ~15% of the cap.</li></ul></div>
+    <div class="card"><div class="name accent">2 &middot; Every tier profits after 18% GST</div><ul class="tight"><li>Price always exceeds maximum AI exposure.</li><li>Heavy per-patient use is quota + credit metered, never flat-unlimited.</li></ul></div>
+    <div class="card"><div class="name accent">3 &middot; B2C is the funnel, hospitals are the revenue</div><ul class="tight"><li>Cheap individual tiers capture doctors.</li><li>Doctors carry us into their hospital (land and expand).</li></ul></div>
+  </div>
+  <div class="callout gold"><b>Never hard-block a safety warning</b> (drug interaction, renal/QT, critical value). It is ethically required and it builds the trust that sells the paid tiers.</div>
+</div>
+
+<!-- 2. INDIVIDUAL -->
+<div class="section">
+  <div class="kicker">B2C &middot; web + app</div>
+  <h2 class="sec">Individual plans</h2>
+  <div class="grid">
+    <div class="card"><div class="name">Free</div><div class="price">₹0</div>
+      <ul><li>Reasoning engine, antibiotics, drug DB + safety</li><li>All calculators, KB, guidelines</li><li>Onco reference + CTCAE/RECIST/interactions</li><li>On-device My Clinic (1 device)</li><li>Daily taste of MaiK AI</li></ul></div>
+    <div class="card"><div class="name">Trainee</div><div class="price">₹199<small>/mo</small></div>
+      <div class="muted" style="font-size:9px">Student / Intern / Resident (verified)</div>
+      <ul><li>Full MaiK text AI</li><li>Voice dictation</li><li>Educational content + Learn atlases</li></ul></div>
+    <div class="card"><div class="name">Co-Resident</div><div class="price">₹299<small>/mo</small></div>
+      <div class="muted" style="font-size:9px">2 accounts, shared AI pool</div>
+      <ul><li>Everything in Trainee, x2 logins</li><li>4 imaging reads/day each</li><li>"Split it with your co-resident"</li></ul></div>
+    <div class="card hi"><div class="name">Pro <span class="tag">Most popular</span></div><div class="price">₹599<small>/mo</small></div>
+      <div class="muted" style="font-size:9px">₹4,999/yr &middot; practising doctor</div>
+      <ul><li>MaiK + imaging AI 5/day</li><li>Patient Summary, Research</li><li>Lab Watch + wearable</li></ul></div>
+  </div>
+  <div class="grid" style="margin-top:8px">
+    <div class="card" style="max-width:none"><div class="name">Physician <small class="muted">(was "Ultimate")</small></div><div class="price">₹1,499<small>/mo &middot; ₹14,999/yr</small></div>
+      <div class="muted" style="font-size:10px">Run your own clinic. Everything in Pro, plus:</div>
+      <ul><li>My Clinic backup to <b>your own Google Drive</b> (we store no PHI)</li><li><b>Unlimited</b> Clinic Billing &middot; imaging 15/day &middot; text AI ₹15/day</li><li>FollowCare 15 pts/mo &middot; MaiK Scribe/voice consult 40/mo &middot; MaiK Ask 40/mo (credits beyond)</li><li>Oncology (OncoTree + ONCQIS) optional add-on <b>+₹89/mo</b></li></ul></div>
+    <div class="card hi" style="max-width:none"><div class="name">Physician Pro <span class="tag gold">Premium</span></div><div class="price">₹2,499<small>/mo &middot; ₹24,999/yr</small></div>
+      <div class="muted" style="font-size:10px">We host your clinic, no limits. Everything in Physician, plus:</div>
+      <ul><li><b>Cloud Sync, we host your records (PHI)</b>, realtime multi-device</li><li>More AI: text ₹25/day &middot; imaging 30/day &middot; priority reasoning model</li><li>FollowCare 40 pts/mo &middot; Scribe 120/mo &middot; MaiK Ask 150/mo (credits beyond)</li><li><b>OncoTree + ONCQIS included</b> &middot; dedicated support</li></ul></div>
+  </div>
+  <div class="callout"><b>Trial:</b> 14 days (7 after the cutover), no card required, auto-drops to Free. <b>Over any cap or quota:</b> buy credits (₹50 → ₹25 of AI), upgrade, or wait for the daily reset. No hard lockout, ever.</div>
+</div>
+
+<!-- 3. PER-PATIENT AI + MARGIN -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="kicker">Why the two clinic tiers are safe</div>
+  <h2 class="sec">Per-patient AI is metered separately</h2>
+  <p class="muted">Text AI runs off the daily rupee cap. The expensive per-patient services get their own monthly quota because they cost real money each time, so a high-volume clinic can never invert the tier.</p>
+  <div class="two">
+    <div>
+      <table>
+        <tr><th>Service</th><th>Cost to us</th></tr>
+        <tr><td>MaiK text answer</td><td>₹0.03</td></tr>
+        <tr><td>Imaging read (FundX/KardioX/ThoreX/SknX)</td><td>₹0.35-0.50</td></tr>
+        <tr><td>Voice dictation (on-device Whisper)</td><td>₹0.00</td></tr>
+        <tr><td><b>AI voice consult / MaiK Scribe</b></td><td><b>₹3-5 / patient</b></td></tr>
+        <tr><td><b>FollowCare</b> (1 call + 7-day SMS)</td><td><b>≈ ₹11 / patient</b></td></tr>
+        <tr><td class="muted">- call ₹4 &middot; SMS ₹1 x7 = ₹7</td><td class="muted"></td></tr>
+      </table>
+    </div>
+    <div>
+      <table>
+        <tr><th>Margin check (net of GST)</th><th>Physician</th><th>Physn Pro</th></tr>
+        <tr><td>Price / mo</td><td>₹1,499</td><td>₹2,499</td></tr>
+        <tr><td>Net after 18% GST</td><td>₹1,270</td><td>₹2,118</td></tr>
+        <tr><td>Worst-case included AI cost</td><td>₹425</td><td>₹1,070</td></tr>
+        <tr><td><b>Contribution</b></td><td class="yes">₹845 (67%)</td><td class="yes">₹1,048 (49%)</td></tr>
+      </table>
+      <div class="callout" style="margin-top:6px">Quotas cap our exposure; anything beyond is paid by the doctor via credits, so margin only improves with heavy use.</div>
+    </div>
+  </div>
+</div>
+
+<!-- 4. HOSPITAL -->
+<div class="section">
+  <div class="kicker">B2B &middot; sales-led</div>
+  <h2 class="sec">Hospital licensing, two simple steps</h2>
+  <div class="two">
+    <div>
+      <div class="tag">Step 1</div> <b>Pick size (beds set the seats)</b>
+      <table>
+        <tr><th>Tier</th><th>Beds</th><th>Min seats</th><th>Vol. disc.</th></tr>
+        <tr><td>Clinic</td><td>1-25</td><td>3</td><td>-</td></tr>
+        <tr><td>Community</td><td>26-100</td><td>15</td><td>10%</td></tr>
+        <tr><td>Secondary</td><td>101-300</td><td>40</td><td>20%</td></tr>
+        <tr><td>Tertiary</td><td>301-750</td><td>100</td><td>30%</td></tr>
+        <tr><td>Enterprise</td><td>750+</td><td>custom</td><td>35%+</td></tr>
+      </table>
+    </div>
+    <div>
+      <div class="tag">Step 2</div> <b>Pick the AI plan (per seat / month)</b>
+      <table>
+        <tr><th>Plan</th><th>/seat</th><th>Includes</th></tr>
+        <tr><td>Credits-base</td><td>₹399</td><td>Platform + shared AI wallet (pay-as-you-go)</td></tr>
+        <tr><td>Pro</td><td>₹799</td><td>+ ₹15/seat/day pooled AI, imaging fair-use</td></tr>
+        <tr><td>Ultimate</td><td>₹1,499</td><td>+ all imaging, Connect, FollowCare, white-label, support</td></tr>
+      </table>
+    </div>
+  </div>
+  <p style="font-size:10.5px"><b>Every seat</b> includes the team platform: ICU workstation, OPD Queue + EMR, Ward Sync, antimicrobial policy overlay, oncology treatment-plan execution, admin console. <b>Institution coupons</b> let a hospital pay for its doctors (each redeems a code; revocable anytime).</p>
+  <div class="callout">Public site shows only <b>"Hospitals &amp; Institutions - Talk to us"</b>. Sales prices from beds, seats, modules, integrations and SLA. Example: Community, 15 seats, Pro = 15 x ₹799 x 0.90 ≈ <b>₹10,786/mo</b>.</div>
+</div>
+
+<!-- 5. FEATURE MATRIX -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="kicker">Reference</div>
+  <h2 class="sec">Feature to tier map</h2>
+  <p class="muted" style="font-size:10px">F Free &middot; T Trainee &middot; P Pro &middot; Ph Physician &middot; PP Physician Pro &middot; H Hospital &middot; 💰 AI-metered</p>
+  <table>
+    <tr><th>Feature</th><th>Tier</th></tr>
+    <tr><td>Clinical reasoning engine, workspace</td><td>F</td></tr>
+    <tr><td>Antibiotic engine, AWaRe, antibiogram</td><td>F</td></tr>
+    <tr><td>Drug DB + interaction / QT / renal safety</td><td>F (never blocked)</td></tr>
+    <tr><td>All calculators, electrolytes, insulin, renal dosing</td><td>F</td></tr>
+    <tr><td>Knowledge base, guidelines, offline, updates</td><td>F</td></tr>
+    <tr><td>Oncology reference + CTCAE + RECIST + IO-tox + interactions</td><td>F</td></tr>
+    <tr><td>MaiK text (Ask, Deep Review, Summary, Research)</td><td>P / Ph / PP 💰</td></tr>
+    <tr><td>Imaging AI (FundX / ThoreX / SknX / KardioX)</td><td>Co-Res 4 &middot; P 5 &middot; Ph 15 &middot; PP 30 /day 💰</td></tr>
+    <tr><td>Voice dictation (on-device)</td><td>T / P / Ph / PP</td></tr>
+    <tr><td>My Clinic (on-device)</td><td>F to P</td></tr>
+    <tr><td>My Clinic backup - own Google Drive</td><td>Ph</td></tr>
+    <tr><td>My Clinic - Cloud Sync (we host PHI)</td><td>PP</td></tr>
+    <tr><td>Clinic Billing (invoices)</td><td>Ph / PP unlimited</td></tr>
+    <tr><td>MaiK Scribe / AI voice consult (₹3-5/pt)</td><td>Ph 40/mo &middot; PP 120/mo 💰</td></tr>
+    <tr><td>MaiK Ask (AI-guided history)</td><td>Ph 40/mo &middot; PP 150/mo 💰</td></tr>
+    <tr><td>FollowCare (post-discharge, ₹11/pt)</td><td>Ph 15/mo &middot; PP 40/mo &middot; H 💰</td></tr>
+    <tr><td>Oncology treatment planning (OncoTree + ONCQIS)</td><td>+₹89 on Ph &middot; incl. in PP</td></tr>
+    <tr><td>ICU workstation + collaboration</td><td>H</td></tr>
+    <tr><td>Hospital OPD Queue (multi-staff, display, billing)</td><td>H</td></tr>
+    <tr><td>Connect interoperability (FHIR/HL7/DICOM/ABDM)</td><td>H</td></tr>
+  </table>
+</div>
+
+<!-- 6. AI ECONOMICS -->
+<div class="section">
+  <div class="kicker">Finance guardrails</div>
+  <h2 class="sec">AI cost discipline (why we cannot go bankrupt)</h2>
+  <ul class="tight" style="font-size:11px">
+    <li><b>Daily text-AI caps (₹/day):</b> Free 0.5 &middot; Trainee 5 &middot; Co-Res 6 pooled &middot; Pro 10 &middot; Physician 15 &middot; Physician Pro 25. Set so under 5% of paying users ever hit them.</li>
+    <li><b>Credits:</b> buy ₹50 get ₹25 of AI, spent only above the cap. Overflow valve and power-user revenue.</li>
+    <li><b>Per-patient AI</b> (voice consult, FollowCare) is quota + credit metered, never flat-unlimited.</li>
+    <li><b>On-device voice dictation</b> costs us ₹0, a real edge versus per-minute scribe competitors.</li>
+    <li><b>Live tuning:</b> the AI Control Center shows per-user daily cost, so caps are tuned from real hit-rates with no redeploy.</li>
+    <li><b>Target:</b> AI cost of goods stays under 25% of revenue on every tier.</li>
+  </ul>
+</div>
+
+<!-- 7. FOUNDING -->
+<div class="section">
+  <div class="callout gold">
+    <div class="kicker" style="color:var(--gold)">Launch offer</div>
+    <span class="big">Founding Doctor: first 500 doctors, ₹399 for the whole year.</span><br>
+    A fixed annual AI budget (₹120 + one ₹120 refill = ₹240/yr ceiling), then pay-as-you-go credits. Profitable even at full use (~₹150/yr, 38% margin). A controlled land-grab that seeds 500 loyal advocates; they roll to Pro ₹599/mo at renewal. Public countdown drives urgency.
+  </div>
+</div>
+
+<!-- 8. MARKETING -->
+<div class="page-break"></div>
+<div class="section">
+  <div class="kicker">Go-to-market</div>
+  <h2 class="sec">How we grow</h2>
+  <div class="two">
+    <div>
+      <h3 style="font-size:13px">Positioning</h3>
+      <p><b>The clinical operating layer for doctors and hospitals</b>, not "an AI scribe". From thinking through a case, to deciding, documenting, the patient record, follow-up and hospital workflow.</p>
+      <div class="callout" style="font-size:10px">Think (Free) &rarr; Learn (Trainee) &rarr; Practice (Pro) &rarr; Run your clinic (Physician) &rarr; Without limits (Physician Pro) &rarr; Run care (Hospital)</div>
+      <h3 style="font-size:13px;margin-top:8px">Who we target</h3>
+      <ul class="tight">
+        <li><b>Residents / trainees</b> - volume + virality, carry us into hospitals</li>
+        <li><b>Practising physicians</b> - core B2C revenue (Pro, Physician)</li>
+        <li><b>Hospitals 50-500 beds</b> - the revenue tier, landed via doctors already inside</li>
+      </ul>
+    </div>
+    <div>
+      <h3 style="font-size:13px">Channels, cheapest first</h3>
+      <ol class="tight">
+        <li><b>Community / word of mouth</b> - resident groups, colleges (₹0-50 CAC)</li>
+        <li><b>App-store optimisation</b> - "MELD calculator", "antibiotic dose", high intent</li>
+        <li><b>Programmatic SEO</b> - thousands of drug / calculator / guideline pages that capture Google searches (the compounding moat)</li>
+        <li><b>KOLs, colleges, CME, conferences</b></li>
+        <li><b>Referral loop</b> - refer a doctor, both get ₹150 credits</li>
+        <li><b>Paid ads</b> - last, and small, only after LTV:CAC is proven</li>
+      </ol>
+    </div>
+  </div>
+  <div class="callout"><b>SEO prerequisite:</b> the app is behind a private gate today, so search engines cannot index it. Ship a public, crawlable content site (/learn, /drugs, /calculators) with an "Open in app" call to action, that is step one of growth.</div>
+</div>
+
+<!-- 9. UNIT ECON + FUNNEL -->
+<div class="section">
+  <div class="two">
+    <div>
+      <h3 style="font-size:13px">Unit economics (Pro)</h3>
+      <table>
+        <tr><th>Metric</th><th>Value</th></tr>
+        <tr><td>Gross margin (typical)</td><td class="yes">~80%</td></tr>
+        <tr><td>Lifetime value (18 mo)</td><td>~₹8,600</td></tr>
+        <tr><td>Target blended CAC</td><td>&lt; ₹2,000</td></tr>
+        <tr><td>LTV : CAC</td><td class="yes">&gt; 4</td></tr>
+        <tr><td>Mid-hospital ACV</td><td>₹1.3L - 5.8L / yr</td></tr>
+      </table>
+    </div>
+    <div>
+      <h3 style="font-size:13px">Funnel targets</h3>
+      <table>
+        <tr><th>Stage</th><th>Target</th></tr>
+        <tr><td>Activation (clinical action in 24h)</td><td>&gt; 40%</td></tr>
+        <tr><td>D7 / D30 retention</td><td>35% / 20%</td></tr>
+        <tr><td>Free to paid</td><td>4-6%</td></tr>
+        <tr><td>Trial to paid</td><td>&gt; 25%</td></tr>
+        <tr><td>Referral coefficient (k)</td><td>&gt; 0.3</td></tr>
+      </table>
+      <p class="muted" style="font-size:9px">North-star: Weekly Active Clinicians completing a clinical action.</p>
+    </div>
+  </div>
+</div>
+
+<!-- 10. 90 DAY -->
+<div class="section">
+  <h3 style="font-size:13px">The first 90 days</h3>
+  <div class="grid">
+    <div class="card"><div class="name accent">Weeks 0-2 &middot; Prepare</div><ul class="tight"><li>Wire prices + payment; do a real test purchase</li><li>Stand up the public SEO content site + 50 seed pages</li><li>App-store optimisation, analytics, referral, Founding offer</li></ul></div>
+    <div class="card"><div class="name accent">Weeks 2-6 &middot; Soft launch</div><ul class="tight"><li>3-5 resident communities + 1 college department (free)</li><li>Turn on referral + Founding offer</li><li>Fix the biggest activation drop-off; collect testimonials</li></ul></div>
+    <div class="card"><div class="name accent">Weeks 6-12 &middot; Scale</div><ul class="tight"><li>SEO to 500 pages; weekly content</li><li>First hospital pilots via institution coupons</li><li>Launch annual plans + win-back</li></ul></div>
+  </div>
+</div>
+
+<!-- 11. NEXT STEPS -->
+<div class="section">
+  <div class="callout gold">
+    <div class="kicker" style="color:var(--gold)">Action</div>
+    <b>Owner decisions to confirm:</b> Physician Pro at ₹2,499 &middot; trial cutover date &middot; free-vs-paid feature list (built, list pending) &middot; payment credentials. Then: payment test-purchase &rarr; flip enforcement. Everything else (roles, caps, credits, coupons, admin, IAP) is already built and inert behind the launch promo.
+  </div>
+  <div class="foot">StewardMD &middot; Pricing &amp; Go-To-Market v3 &middot; 17 Aug 2026 &middot; Confidential, internal Sales &amp; Marketing. Full detail: docs/PRICING_PACKAGING.md and docs/GROWTH_STRATEGY.md.</div>
+</div>
+
+</body>
+</html>
