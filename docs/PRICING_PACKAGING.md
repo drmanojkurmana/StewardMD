@@ -1,4 +1,6 @@
-# StewardMD — Pricing & Packaging (v3)
+# StewardMD — Pricing & Packaging (v4)
+
+*v4 changes: FollowCare call is ₹4/min × 3–5 min ≈ ₹20/patient episode (quotas trimmed to match); AI top-ups are now **tokens**, not rupee-credits (§8a — big-number packs, honest strike-through anchor, better psychology than "₹50 → ₹25"); **Device Voice "Ultra"** on-device model is a Pro-and-above perk; **strike-through/anchor pricing** everywhere (genuine anchors only); **coupons on Android/Web only** (Apple forbids IAP codes → iOS uses Apple Offer Codes or redeem-on-web).*
 
 *Signed-off commercial model. v3 splits the top of the ladder into **three attending tiers** — Pro ₹599 (clinical AI), **Physician ₹1,499** (run your clinic: Google-Drive Personal Clinic + capped FollowCare/Scribe/MaiK-Ask + unlimited Billing + optional Onco), and **Physician Pro ₹2,499** (we host PHI + higher AI/credits + OncoTree/ONCQIS included). Trainee tiers (Student/Intern/Resident ₹199, Co-Resident ₹299) and Pro are kept as-is. Per-patient AI (voice consult ₹3–5, FollowCare ~₹11) is metered by monthly quota + credits, separate from the daily text cap. Ladder: Free → ₹199 → ₹299 → ₹599 → ₹1,499 → ₹2,499.*
 
@@ -37,11 +39,11 @@ Date: 2026-08-17 · Applies to: mobile app (iOS/Android) + web · 🔧 = still t
 | Action | Approx cost to us |
 |---|---|
 | **AI OPD voice consult / MaiK Scribe** (ambient + diarization + LLM structuring) | **₹3–5 per patient** |
-| **FollowCare** — one voice call | **₹4 per patient / call** |
-| **FollowCare** — SMS | **₹1 per SMS** (7-day follow-up ≈ 7 SMS ≈ ₹7/patient) |
-| → FollowCare episode (1 call + 7-day SMS) | **≈ ₹11 per patient** |
+| **FollowCare** — voice call | **₹4 per minute × 3–5 min ≈ ₹12–20 per call** |
+| **FollowCare** — SMS | **₹1 per SMS** (7-day follow-up ≈ 7 SMS ≈ ₹7) |
+| → **FollowCare episode** (1 call + 7-day SMS) | **≈ ₹20–27 per patient** |
 
-Why the split matters: a busy OPD doctor scribing 30 patients/day at ₹4 each = ₹120/day = ₹3,600/mo — that can never sit under a flat cap. So voice consult and FollowCare each get their own **monthly included quota + credit overage**; only text AI runs off the daily rupee cap.
+Why the split matters: a busy OPD doctor scribing 30 patients/day at ₹4 each = ₹120/day = ₹3,600/mo, and a FollowCare episode is ~₹20 — that can never sit under a flat cap. So voice consult and FollowCare each get their own **monthly included quota + token overage**; only text AI runs off the daily rupee cap.
 
 ---
 
@@ -78,6 +80,7 @@ Trainee = Student / Intern / Resident (all one price band, kept as-is). "Physici
 | Patient Summary · Research | ❌ · taste | ❌ · educational | ❌ · 10/day | ✅ · 10/day |
 | Imaging AI reads/day | ❌ | ❌ (Learn atlas) | 4/day each | 5/day |
 | Personal Clinic (My Clinic) | on-device (1 device) | on-device | on-device | on-device + case sync |
+| **Device Voice "Ultra"** (premium on-device model) | ❌ | ❌ | ❌ | ✅ |
 | Lab Watch + wearable | ❌ | ❌ | ❌ | ✅ |
 
 ### 4b. The two clinic-owner tiers (NEW split)
@@ -91,19 +94,21 @@ Both are for a doctor running their own practice. **Physician** = solo clinic on
 | **Text AI cap/day** | ₹15 | ₹25 |
 | Imaging AI reads/day | 15 | 30 |
 | Priority reasoning model | ✅ | ✅ |
+| **Device Voice "Ultra"** (premium on-device dictation model) | ✅ | ✅ |
 | **Personal Clinic storage** | **own Google Drive** (we store no PHI) | **Cloud Sync — we host PHI**, multi-device realtime |
 | **Clinic Billing** (invoices) | **unlimited** | **unlimited** |
-| **FollowCare** (₹≈11/patient to us) | **15 patients/mo** incl → credits | **40 patients/mo** incl → credits |
-| **MaiK Scribe / AI voice consult** (₹3–5/pt) | **40/mo** incl → credits | **120/mo** incl → credits |
-| **MaiK Ask** (AI-guided history) | **40/mo** incl → credits | **150/mo** incl → credits |
+| **FollowCare** (₹≈20/patient to us) | **10 patients/mo** incl → tokens | **25 patients/mo** incl → tokens |
+| **MaiK Scribe / AI voice consult** (₹3–5/pt) | **40/mo** incl → tokens | **120/mo** incl → tokens |
+| **MaiK Ask** (AI-guided history) | **40/mo** incl → tokens | **150/mo** incl → tokens |
 | **OncoTree + ONCQIS** | **+₹89/mo add-on** (optional) | **✅ included** |
 | Support | priority email | dedicated |
 
-Over any daily cap or monthly quota → **buy credits** (₹50→₹25) or upgrade; never a hard lockout. Text AI runs off the daily rupee cap; the three per-patient items (FollowCare, voice consult, MaiK Ask) are **metered separately by monthly quota** because they cost real money per use — that's what keeps a high-volume OPD from inverting the tier.
+Over any daily cap or monthly quota → **top up tokens** (§7) or upgrade; never a hard lockout. Text AI runs off the daily rupee cap; the three per-patient items (FollowCare, voice consult, MaiK Ask) are **metered separately by monthly quota** because they cost real money per use — that's what keeps a high-volume OPD from inverting the tier.
+**Device Voice "Ultra"** (a larger, higher-accuracy on-device speech model) is a **Pro-and-above** perk — it costs us ₹0 to run (on-device) so it's a pure differentiator that makes Pro worth buying.
 
 **Margins (net of 18% GST):**
-- **Physician ₹1,499** → net ~₹1,270; worst-case included cost ≈ FollowCare 15×₹11 (₹165) + Scribe 40×₹4 (₹160) + text (~₹100) ≈ ₹425 → **~₹845 contribution (67%)**; +₹89 Onco is near-pure margin.
-- **Physician Pro ₹2,499** → net ~₹2,118; included cost ≈ FollowCare 40×₹11 (₹440) + Scribe 120×₹4 (₹480) + text (~₹150) ≈ ₹1,070 → **~₹1,048 contribution (49%)**; overage billed via credits, so it only improves.
+- **Physician ₹1,499** → net ~₹1,270; worst-case included cost ≈ FollowCare 10×₹20 (₹200) + Scribe 40×₹4 (₹160) + text (~₹100) ≈ ₹460 → **~₹810 contribution (64%)**; +₹89 Onco is near-pure margin.
+- **Physician Pro ₹2,499** → net ~₹2,118; included cost ≈ FollowCare 25×₹20 (₹500) + Scribe 120×₹4 (₹480) + text (~₹150) ≈ ₹1,130 → **~₹988 contribution (47%)**; overage billed via tokens, so it only improves.
 
 *Build note: the text cost-cap + credits are shipped; the three **monthly per-patient quota meters** (FollowCare, voice consult, MaiK Ask) + credit-overage still need wiring before go-live — same pattern as the built daily meter, keyed `<feature>:<uid>:<month>`.*
 
@@ -193,6 +198,7 @@ Legend: **F**=Free · **S**=Trainee (Student/Intern/Resident) · **P**=Pro · **
 | MaiK Patient Summary | **P/Ph/U** 💰 | |
 | MaiK Research | **P/Ph** 10/day · **U** ∞ 💰 | |
 | Voice dictation (on-device Whisper) | **S/P/Ph/U** | ₹0 to serve |
+| **Device Voice "Ultra"** (premium on-device model) | **P/Ph/U** | ₹0, Pro-and-above perk |
 | **MaiK Scribe / AI voice consult** (ambient→EMR) | **Ph** 40/mo · **U** 120/mo → credits 💰 | ₹3–5/pt |
 | **MaiK Ask** (AI-guided patient history) | **Ph** 40/mo · **U** 150/mo → credits 💰 | |
 | Imaging AI — FundX / ThoreX / SknX | **Co-Res** 4/day · **P** 5 · **Ph** 15 · **U** 30 · **H** 💰 | Free ❌ |
@@ -209,7 +215,7 @@ Legend: **F**=Free · **S**=Trainee (Student/Intern/Resident) · **P**=Pro · **
 | **Onco: treatment-plan execution (role-split)** | **H** | team |
 | Connect — Ward Sync (basic) | **H** | |
 | Connect — full interop + AI mapping | **H**-Ultimate / **+** 💰 | |
-| FollowCare (post-discharge) | **Ph** 15 pts/mo · **U** 40 pts/mo → credits · **H** | ₹11/patient episode |
+| FollowCare (post-discharge) | **Ph** 10 pts/mo · **U** 25 pts/mo → tokens · **H** | ₹20/patient episode |
 | MaiK Scribe in OPD / AI voice consult | **U** 60/mo incl → credits · **H** 💰 | ₹3–5/patient |
 | MaiK Ask (AI-guided history) · Clinic Billing | **U** · **H** | |
 | KB + guidelines + offline + updates | **F** | |
@@ -227,10 +233,20 @@ Legend: **F**=Free · **S**=Trainee (Student/Intern/Resident) · **P**=Pro · **
 ## 8. AI economics (anti-bankruptcy)
 
 - **Daily TEXT-AI rupee caps** (`AI_DAILY_COST_CAP_<ROLE>`): Free ₹0.5 · Student/Intern/Resident ₹5 · Co-Resident ₹6 pooled · Pro ₹10 · Physician ₹15 · Physician Pro ₹25 · Hospital-Pro ₹15/seat pooled · Hospital-Ultimate ₹25/seat or fair-use. Set so <5% of paying users ever hit them and worst-case margin stays ≥ ~25% after GST; tune live from the AI Control Center hit-rate.
-- **Per-patient AI (voice consult ₹3–5, FollowCare ~₹11) is metered SEPARATELY** — monthly included quota per tier + credits overage — so a high-volume OPD can never invert the tier. Never counted in the daily text cap.
-- **Credits** (`CREDIT_CONVERSION=0.5`): ₹50 → ₹25 of AI, spent only above the cap. Overflow valve + power-user revenue; hospital Credits-base runs the whole org off one wallet.
-- **On-device voice DICTATION = ₹0 to serve** → plain dictation is unlimited from Trainee up. (The AI OPD **voice consult / Scribe** — ambient + structuring — costs ₹3–5/pt and is quota-metered on Physician/Physician Pro, per §2.)
+- **Per-patient AI (voice consult ₹3–5, FollowCare ~₹20) is metered SEPARATELY** — monthly included quota per tier + token overage — so a high-volume OPD can never invert the tier. Never counted in the daily text cap.
+- **On-device voice DICTATION = ₹0 to serve** → plain dictation unlimited from Trainee up; the **Ultra** on-device model is a Pro-and-above perk (also ₹0 to run). The AI OPD **voice consult / Scribe** (ambient + structuring) costs ₹3–5/pt and is quota-metered.
 - **Answer cache** already drops repeat generic questions to ₹0.
+
+### 8a. AI Tokens (top-ups) — sell abundance, not a discount
+We DON'T sell "₹25 of AI for ₹50" (reads as *losing half*). We sell **StewardMD Tokens** — one wallet, big numbers, a genuine bulk discount as the anchor. Every AI action spends tokens (text = actual tokens; an imaging read, voice consult or FollowCare patient spends a fixed token amount shown in-app). Our blended cost is ≈ **₹12 per million tokens**, so every pack profits.
+
+| Pack | Tokens | Price 🔧 | Struck (entry rate ₹29/M) | Per-M | Our cost | Margin |
+|---|---|---|---|---|---|---|
+| **Boost** | **1,000,000** | **₹29** | — | ₹29 | ₹12 | ₹17 |
+| **Plus** ⭐ | **5,000,000** | **₹119** | ~~₹145~~ save 18% | ₹23.8 | ₹60 | ₹59 |
+| **Power** | **15,000,000** | **₹299** | ~~₹435~~ save 31% | ₹19.9 | ₹180 | ₹119 |
+
+Psychology: a **million-scale number feels abundant**; charm prices (₹29/₹119/₹299); the **strike-through is honest** (it's the real entry per-token rate, so bigger packs genuinely save — no fake MRP, which India's ASCI/CCPA penalise); "best value" badge on Power. Same wallet powers overage for imaging/voice/FollowCare, so the doctor tops up once and everything just works. Hospital Credits-base = the same, one shared org wallet.
 
 ---
 
@@ -259,9 +275,10 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 ## 11. Final numbers at a glance
 
 **Individual:** Free ₹0 · Trainee (Student/Intern/Resident) ₹199 · Co-Resident ₹299 · Pro ₹599 · **Physician ₹1,499** · **Physician Pro ₹2,499.**
-**Physician ₹1,499** (was Ultimate): everything in Pro + own-Google-Drive Personal Clinic + unlimited Clinic Billing + FollowCare 15 pts/mo + MaiK Scribe/voice consult 40/mo + MaiK Ask 40/mo (all → credits over quota) + **Onco optional +₹89**.
-**Physician Pro ₹2,499:** everything in Physician + **Cloud Sync (we host PHI)** + higher AI (₹25/day text) + FollowCare 40/mo + Scribe 120/mo + MaiK Ask 150/mo + **OncoTree + ONCQIS included** + dedicated support.
-**Text AI caps/day:** Free ₹0.5 · Trainee ₹5 · Co-Res ₹6 · Pro ₹10 · Physician ₹15 · Physician Pro ₹25. **Imaging/day:** 0 / 0 / 4 / 5 / 15 / 30. Per-patient AI (voice ₹3–5, FollowCare ~₹11) metered by monthly quota + credits.
+**Physician ₹1,499** (was Ultimate): everything in Pro + own-Google-Drive Personal Clinic + unlimited Clinic Billing + FollowCare 10 pts/mo + MaiK Scribe/voice consult 40/mo + MaiK Ask 40/mo (all → tokens over quota) + Device Voice Ultra + **Onco optional +₹89**.
+**Physician Pro ₹2,499:** everything in Physician + **Cloud Sync (we host PHI)** + higher AI (₹25/day text) + FollowCare 25/mo + Scribe 120/mo + MaiK Ask 150/mo + **OncoTree + ONCQIS included** + dedicated support.
+**Text AI caps/day:** Free ₹0.5 · Trainee ₹5 · Co-Res ₹6 · Pro ₹10 · Physician ₹15 · Physician Pro ₹25. **Imaging/day:** 0 / 0 / 4 / 5 / 15 / 30. Per-patient AI (voice ₹3–5, FollowCare ~₹20) metered by monthly quota + **tokens** (§8a).
+**AI Tokens:** 1M ₹29 · 5M ₹119 · 15M ₹299 (one wallet, big-number packs, honest strike-through). **Founding:** 500 doctors, ₹399/yr.
 **Hospital (per-seat/mo, min seats by beds, volume-discounted, sales-led):** Credits ₹399 · Pro ₹799 · Ultimate ₹1,499.
 
 ---
@@ -269,8 +286,10 @@ Built and ready to carry all of this: roles, per-user/role rupee caps, credits, 
 ## 12. CRO add-ons (launch, referral, tax) — see `GROWTH_STRATEGY.md` §1
 
 - **Free trial takes no card**; auto-drops to Free at end (never locks out).
-- **Founding-Doctor offer:** first **500** verified doctors get **Pro for ₹399 for the whole year** (~₹33/mo; not per month). AI is a **fixed annual budget — ₹120 at signup + ONE ₹120 refill when spent = ₹240/yr hard ceiling, no daily reset**; beyond that, standard credits (₹50→₹25). Imaging 5/day draws from the same budget (imaging is what depletes it → renewal nudge). **Profit even at full AI burn: ₹399 − ~₹8 fees − ₹240 AI = ₹151/yr (~38% margin);** light users net more. Runs on the coupon + credits engine (set the founding role's daily free cap to ~₹0 so all AI draws from the granted annual pool; grant ₹120, auto-refill ₹120 once). Public countdown for urgency (land-grab for the first 500).
-- **Referral:** refer a doctor → **both get ₹150 credits** (or 1 free Pro month) on the referee's activation. Runs on the credits engine.
-- **Annual framing:** show monthly-equivalent + "2 months free" (e.g. Pro ₹4,999/yr = ₹416/mo).
+- **Founding-Doctor offer:** first **500** verified doctors get **Pro for ₹399 for the whole year** (~₹33/mo; not per month). AI is a **fixed annual token pool** (≈ the ₹240/yr cost ceiling, no daily reset); beyond that, buy token packs (§8a). **Profit even at full burn ≈ ₹150/yr (~38% margin);** light users net more. Runs on the coupon + token engine. Public countdown for urgency.
+- **Referral:** refer a doctor → **both get bonus tokens** (e.g. 5,000,000 tokens) or 1 free Pro month on the referee's activation.
+- **Strike-through / anchor pricing everywhere:** show the higher **regular** price struck next to the launch/plan price so every screen reads as a saving, e.g. **~~₹1,000~~ ₹299**, "**₹4,999/yr ~~₹7,188~~, 2 months free**", token packs "~~₹435~~ ₹299". *Anchors must be genuine* (the real regular price or the entry per-token rate), never a fabricated MRP — India's ASCI/CCPA penalise fake strike-throughs.
+- **Annual framing:** monthly-equivalent + "2 months free" (Pro ₹4,999/yr = ₹416/mo).
 - **GST:** B2C prices shown **inclusive**; B2B **ex-GST + GST invoice** (capture GSTIN at hospital checkout). Register for GST before the first paid rupee (SaaS = 18%).
+- **Coupons = Android + Web only.** Apple forbids external discount codes inside IAP, so the coupon-redeem field is **shown on Android/Web (Razorpay/PhonePe/Play) and hidden on iOS**; iOS discounts use **Apple Offer Codes** or a "redeem on stewardmd.in" link (purchase on web, entitlement syncs to the account). The built coupon engine already grants server-side, so a web redeem unlocks the iOS app automatically.
 - **In-app cap nudge** is the primary upsell surface (the built `429 ai-cost-cap` sheet).
