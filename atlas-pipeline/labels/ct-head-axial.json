@@ -1,0 +1,24 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918 (PD-US)",
+  "_geometry": "Classical thresholding on public-domain CT; air-bone contrast only, no neural segmenter",
+  "_why_no_brain": "TRIED AND REMOVED. Vault detection flickered between adjacent slices because the temporal squama in this frozen cadaver falls below the bone threshold, leaving the skull ring open in 2D so fill_holes leaked to the scalp (slice 1080 cavity measured mean -66 HU; slice 1100 enclosed nothing). CT also cannot show internal brain anatomy - grey and white matter differ by only ~10 HU even in life - which is why the reference app uses MRI for brain.",
+  "_why_skull_is_all_bone": "Per Terminologia Anatomica the skull comprises the neurocranium AND the viscerocranium (facial bones, mandible), so labelling all head bone 'Skull' is anatomically correct, not a shortcut.",
+  "_why_sinus_is_generic": "WHICH sinus (frontal, maxillary, sphenoid, ethmoid) would be a position guess. The air cells are labelled generically instead.",
+  "_why_no_sides": "Same as the thorax module: no reliable left/right indicator on this cadaver, so no side is asserted.",
+  "_clinical_note": "Sinus and mastoid air-cell anatomy is the tie-in to the sinusitis / otitis antibiotic pathways.",
+
+  "categories": {
+    "bone": { "label": "Bone", "color": "#ffffff" },
+    "airway": { "label": "Air space", "color": "#7fd9e8" }
+  },
+
+  "structures": {
+    "head": { "name": "Head", "category": "bone" },
+    "skull": { "name": "Skull", "category": "bone", "parent": "head", "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint." },
+    "paranasal-sinus": { "name": "Paranasal sinus", "category": "airway", "parent": "head", "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised." }
+  },
+
+  "model_labels": { "skull": "skull", "air_cell": "paranasal-sinus" },
+  "model_values": { "1": "skull", "2": "air_cell" }
+}
