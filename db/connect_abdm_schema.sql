@@ -49,3 +49,20 @@ CREATE UNIQUE INDEX IF NOT EXISTS idx_abdm_txn_txid ON connect_abdm_txn(transact
 CREATE TABLE IF NOT EXISTS connect_abdm_carecontext (
   id TEXT PRIMARY KEY, tenant_id TEXT, patient_abha_hash TEXT, source TEXT,           -- followcare|icu|case (HIP)
   ref TEXT, hi_type TEXT, display TEXT, linked_at TEXT );
+
+-- M1 (2026-08-18): the ABHA <-> local patient binding. Enforces the mandatory certification rule
+-- TAGGING_UNIQUEPATIENTID_UNIQUEABHANUMBER - one ABHA number maps to exactly one local patient id
+-- within a tenant. The ABHA number itself is NEVER stored: only its tenant-scoped HMAC pseudonym
+-- (patient_abha_hash, the same derivation the rest of ABDM uses) and the last 4 digits for display.
+CREATE TABLE IF NOT EXISTS connect_abha_link (
+  tenant_id         TEXT NOT NULL,
+  patient_abha_hash TEXT NOT NULL,
+  abha_last4        TEXT,
+  abha_address      TEXT,
+  patient_ref       TEXT NOT NULL,
+  created_at        TEXT NOT NULL,
+  updated_at        TEXT NOT NULL,
+  PRIMARY KEY (tenant_id, patient_abha_hash)
+);
+-- Reverse lookup: "which ABHA is this patient linked to?" for the registration screen.
+CREATE INDEX IF NOT EXISTS idx_abha_link_patient ON connect_abha_link (tenant_id, patient_ref);
