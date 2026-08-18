@@ -168,6 +168,9 @@ function scaffoldSource(id, hiTypes) {
 export const icuSource = scaffoldSource("icu", ["OPConsultation", "DiagnosticReport"]);
 export const casesSource = scaffoldSource("cases", ["OPConsultation", "DiagnosticReport"]);
 
+// native-opd is the "StewardMD EMR" source (clinics with no EMR of their own). It lives in its own file
+// because it reads a different store with a different retention profile - see native-opd.js.
+export { nativeOpdSource } from "./native-opd.js";
 export const hipSources = { followcare: followcareSource, icu: icuSource, cases: casesSource };
 
 // Registry lookup — an unknown source id is NotImplemented, not a null-deref.
