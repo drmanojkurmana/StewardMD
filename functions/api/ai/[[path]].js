@@ -210,9 +210,14 @@ function streamTextAsSSE(text) {
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
 // so disabling also cuts latency + cost.
 function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.tools) b.tools = opts.tools; return b; }
+// Latency/token instrumentation: last Gemini call's usageMetadata (promptTokenCount / thoughtsTokenCount
+// / candidatesTokenCount) + finishReason, surfaced via ?diag=1. thoughtsTokenCount reveals how much time
+// is spent on invisible "thinking" (the suspected latency sink) vs visible output. No content, no PHI.
+let _lastGenMeta = null;
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
+  _lastGenMeta = { finishReason: (cand && cand.finishReason) || "", usage: (data && data.usageMetadata) || null };
   return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
 }
 
@@ -225,7 +230,7 @@ const developerProvider = {
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
     const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
@@ -295,7 +300,7 @@ const vertexProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
     const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
@@ -1248,6 +1253,7 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
+        const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
         try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
@@ -1257,6 +1263,12 @@ export async function onRequest(context) {
         if (wantStream) return withCors(request, streamTextAsSSE(text));
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
+        if (new URL(request.url).searchParams.get("diag") === "1") {
+          const u = (_lastGenMeta && _lastGenMeta.usage) || {};
+          const _diag = { ms: Date.now() - _t0, cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+            promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
+          return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
+        }
         return json({ text: text, mode: "grounded", citations: cites });
       }
       // Legacy fallback: plain engine summary string (backward compatible).
