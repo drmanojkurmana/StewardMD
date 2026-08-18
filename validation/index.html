@@ -14,7 +14,7 @@
   --line:#2b3238;--accent:#3b9dff;--ok:#57d07f;--warn:#ffb45e;--bad:#ff7a7a;
 }
 *{box-sizing:border-box}
-body{margin:0;background:var(--stage);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased}
+body{margin:0;background:var(--stage);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
 .wrap{max-width:1180px;margin:0 auto;padding:26px 20px 72px;display:flex;flex-direction:column;gap:24px}
 .eyebrow{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
 h1{margin:0;font-size:clamp(25px,4vw,35px);font-weight:700;letter-spacing:-.02em}
@@ -25,6 +25,14 @@ h2{margin:0;font-size:18px;font-weight:650}
 .split{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
 .frame{position:relative;flex:0 0 auto;width:375px;height:740px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--stage);box-shadow:0 16px 50px rgba(0,0,0,.6)}
 .frame .atlas-overlay{position:absolute}
+/* atlas.js holds `.atlas-lock` (overflow:hidden) on <body> for as long as the viewer is open,
+   which is right in the app where the viewer IS the screen. On desktop this page opens it once
+   at load and re-parents it into the phone frame, so that lock would sit on <body> for the whole
+   session — measured on the live page: body.overflow was already "hidden" before any module was
+   opened. Desktop Chrome ignores it (only the ROOT element's overflow reaches the viewport) but a
+   browser that honours it cannot scroll the sheet at all. Neutralise it ONLY while the viewer is
+   embedded; on mobile it opens fullscreen for real, where the lock is correct and wanted. */
+body.atlas-embedded.atlas-lock{overflow:visible}
 .col{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .viewcol{position:sticky;top:18px;align-self:flex-start;flex:0 0 375px;width:375px;max-width:375px;display:flex;flex-direction:column;gap:11px}
 .viewcol .hint{max-width:375px}
@@ -37,6 +45,8 @@ table.signoff td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-a
 .structs{color:var(--ink-dim);font-size:12px;line-height:1.5;margin-top:3px}
 .btns{display:flex;gap:6px;flex-wrap:wrap}
 button.vote{border:1px solid var(--line);background:var(--surface2);color:var(--ink-dim);border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.open{margin-top:9px;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;padding:7px 13px;font-size:13px;cursor:pointer;font-weight:600}
+.open:active{background:var(--accent);color:#04121f}
 button.vote:hover{border-color:var(--ink-dim);color:var(--ink)}
 tr[data-status=ok] button.vote[data-v=ok]{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:650}
 tr[data-status=fix] button.vote[data-v=fix]{background:var(--warn);border-color:var(--warn);color:#2a1600;font-weight:650}
@@ -69,6 +79,27 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media (max-width:980px){.viewcol{position:static}}
 @media (max-width:860px){.viewcol{flex:1 1 auto;width:100%;max-width:100%}.viewcol .hint{max-width:100%}.frame{width:100%;max-width:375px;height:660px}}
+
+/* PHONE. The desktop conceit — a 375px phone mock-up beside the checklist — does not survive a
+   real phone: it became a 350x660 box inside a 390x844 screen, too small to judge anatomy in,
+   and it wedged a permanent scroll lock onto <body>. On a phone the frame is dropped entirely
+   and each row gets its own "View" button that opens the viewer FULLSCREEN on that module —
+   the same presentation the app gives, and the only one with enough pixels to actually read.
+   The two-column table also stops being a table and becomes one card per module, so the three
+   verdict buttons and the notes box get full width instead of half. */
+@media (max-width:720px){
+  .frame{display:none}
+  table.signoff thead{display:none}
+  table.signoff,table.signoff tbody,table.signoff tr,table.signoff td{display:block;width:auto}
+  table.signoff tr{border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:12px}
+  table.signoff td{border-bottom:0;padding:0}
+  table.signoff td+td{margin-top:12px}
+  /* `button.vote`, not `.vote` — the base rule is element+class (0,1,1) and outranks a bare
+     class no matter what media query it sits in. Measured 27px tall before this. */
+  button.vote{padding:10px 16px;font-size:14px}   /* ~40px tall — a thumb, not a mouse */
+  textarea.note{width:100%;box-sizing:border-box}
+  .card{padding:15px}
+}
 </style>
 </head>
 <body>
@@ -100,8 +131,9 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
   <div class="split">
     <div class="viewcol">
       <div class="frame" id="frame"></div>
-      <p class="hint"><b>Tap a row</b> to open a module &middot; <b>drag</b> the thumbnail strip to
-        scrub &middot; <b>tap a label</b> for its definition &middot; <b>&lsaquo;</b> goes back</p>
+      <p class="hint"><b>View this module</b> on any row below opens it &middot; <b>drag</b> the
+        thumbnail strip to scrub &middot; <b>tap a label</b> for its definition &middot;
+        <b>&lsaquo;</b> goes back</p>
     </div>
 
     <div class="col">
@@ -219,6 +251,20 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
       .catch(function () { flash("offline — could not save", true); });
   }
 
+  // "View this module" — jumps the viewer straight to that module. On desktop it swaps the module
+  // shown in the embedded frame; on a phone, where nothing is embedded, atlas.js's own
+  // position:fixed overlay takes the full screen, which is the point.
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest && e.target.closest("button.open");
+    if (!o || !window.ATLAS || !ATLAS.open) return;
+    ATLAS.open(o.getAttribute("data-open"));
+    if (!isPhone()) {
+      var root = document.getElementById("smdAtlas"), frame = document.getElementById("frame");
+      if (root && frame && root.parentNode !== frame) frame.appendChild(root);
+      frame && frame.scrollIntoView({ block: "center" });
+    }
+  });
+
   document.addEventListener("click", function (e) {
     var b = e.target.closest && e.target.closest("button.vote");
     if (!b) return;
@@ -240,7 +286,8 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
       '<td><div class="mod">' + esc(m.title) + '</div>' +
       '<div class="plane">' + esc(m.subtitle) + ' &middot; ' + m.pins + ' pins &middot; ' +
         m.slices + ' slices</div>' +
-      '<div class="structs">' + esc(structs) + '</div></td>' +
+      '<div class="structs">' + esc(structs) + '</div>' +
+      '<button class="open" data-open="' + esc(m.id) + '">View this module</button></td>' +
       '<td><div class="btns">' +
         '<button class="vote" data-v="ok">Verified</button>' +
         '<button class="vote" data-v="fix">Needs fix</button>' +
@@ -255,9 +302,19 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
                "ct-abdomen-axial","ct-abdomen-coronal","ct-abdomen-sagittal",
                "brain-mri-axial-t1"];
 
+  function isPhone() {
+    try { return window.matchMedia("(max-width:720px)").matches; } catch (e) { return false; }
+  }
+
   function boot() {
-    if (window.ATLAS && ATLAS.open) {
+    // Desktop only: open the viewer once and keep re-parenting it into the phone frame so it sits
+    // beside the checklist. `atlas-embedded` tells the CSS above to cancel atlas.js's <body> scroll
+    // lock, which would otherwise be stuck on for the whole session. On a phone we deliberately do
+    // NOT do this — the frame is hidden and each row's "View this module" opens the viewer
+    // fullscreen, so the lock stays meaningful and the reviewer gets the whole screen.
+    if (window.ATLAS && ATLAS.open && !isPhone()) {
       ATLAS.open();
+      document.body.classList.add("atlas-embedded");
       var n = 0;
       (function settle() {
         var root = document.getElementById("smdAtlas"), frame = document.getElementById("frame");
