@@ -68,6 +68,12 @@ def assemble(module_meta, slice_stubs, pins_by_slice, mapping):
         for p in pins:
             used.add(p["s"])
 
+    # No pins at all means this module ships images for hand-authoring. Keep the WHOLE
+    # structure block in that case: atlas-author.html builds its "add pin as" palette
+    # from atlas.structures, so pruning it would leave the author with nothing to pick.
+    if not used:
+        used = set(strs_all)
+
     frontier = list(used)
     while frontier:
         sid = frontier.pop()
