@@ -1144,11 +1144,15 @@ export async function onRequest(context) {
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
   const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
-  // Native (capacitor://) CANNOT stream — CapacitorHttp buffers SSE — so it waits for the ENTIRE
-  // answer before anything renders; a long answer there = a long blank wait. The non-stream concise
-  // answer therefore uses a TIGHTER cap so generation finishes fast. Streaming web keeps OUT_BASE (it
-  // flows, so length is ~free), and "detailed" honours the explicit depth request on either path.
-  const NONSTREAM_BASE = Math.max(256, Math.min(1100, Number(env.MAIK_NONSTREAM_OUTPUT_TOKENS) || 600));
+  // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
+  // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
+  // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
+  // "thinking" even with thinkingConfig.thinkingBudget:0, so the old 600 was consumed ENTIRELY by
+  // thinking and long/structured answers (management, compare, differential) came back EMPTY (verified
+  // live: 600 -> "", 2048 -> full). The budget must leave headroom for thinking PLUS the full visible
+  // answer. Short/factual answers still self-adapt and stop early, so they are unaffected. Tune with
+  // MAIK_NONSTREAM_OUTPUT_TOKENS; "detailed" still honours the explicit depth request. Was 600 (empty).
+  const NONSTREAM_BASE = Math.max(256, Math.min(4096, Number(env.MAIK_NONSTREAM_OUTPUT_TOKENS) || 2560));
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
