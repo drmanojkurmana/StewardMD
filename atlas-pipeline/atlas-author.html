@@ -1,0 +1,166 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>RadioAnatome author / QA</title>
+<!-- Dev tooling. Exempt from the app's ES5 and no-emoji rules; never shipped.
+     Serve it from the dev server so the /atlas/... image paths resolve:
+       node test/serve.mjs . 8903
+       open http://localhost:8903/atlas-pipeline/atlas-author.html -->
+<style>
+  body { margin: 0; font: 14px system-ui, sans-serif; background: #111; color: #eee; display: flex; height: 100vh; }
+  #side { width: 320px; flex: 0 0 320px; overflow-y: auto; padding: 12px; background: #191919; box-sizing: border-box; }
+  #main { flex: 1; position: relative; overflow: hidden; }
+  #wrap { position: absolute; inset: 0 0 56px; display: grid; place-items: center; }
+  #box { position: relative; }
+  img { display: block; max-width: 100%; max-height: 86vh; }
+  svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+  circle { cursor: grab; }
+  h1 { font-size: 15px; margin: 0 0 10px; }
+  button { background: #2b2b2b; color: #eee; border: 0; padding: 6px 10px; border-radius: 6px; cursor: pointer; }
+  button:hover { background: #3a3a3a; }
+  select, input[type=text] { background: #222; color: #eee; border: 1px solid #444; border-radius: 4px; padding: 5px; width: 100%; box-sizing: border-box; }
+  #bar { position: absolute; left: 0; right: 0; bottom: 0; height: 56px; padding: 0 10px; background: #000c; display: flex; gap: 10px; align-items: center; box-sizing: border-box; }
+  #rng { flex: 1; }
+  .row { display: flex; gap: 6px; align-items: center; padding: 3px 0; border-bottom: 1px solid #222; font-size: 12px; }
+  .row code { color: #9ad; }
+  .row .del { margin-left: auto; padding: 2px 6px; font-size: 11px; }
+  .warn { color: #ffb4b4; font-size: 12px; }
+  .hint { opacity: .6; font-size: 12px; line-height: 1.5; }
+  .ok { color: #8fe08f; }
+  fieldset { border: 1px solid #333; border-radius: 6px; margin: 10px 0; }
+  legend { font-size: 11px; opacity: .7; }
+</style>
+
+<div id="side">
+  <h1>RadioAnatome QA</h1>
+  <fieldset><legend>module</legend>
+    <input id="mid" type="text" value="brain-mri-axial-t1">
+    <p><button id="load">Load</button> <button id="save">Download atlas.json</button></p>
+    <p id="status" class="hint"></p>
+  </fieldset>
+
+  <fieldset><legend>add pin as</legend>
+    <select id="pick"></select>
+    <p class="hint">Click the image to add a pin of the selected structure.
+      Drag a pin to move it. Shift-click a pin to delete it.
+      Arrow keys change slice.</p>
+  </fieldset>
+
+  <fieldset><legend>pins on this slice</legend>
+    <div id="list"></div>
+  </fieldset>
+
+  <p id="todo" class="warn"></p>
+</div>
+
+<div id="main">
+  <div id="wrap"><div id="box"><img id="img" alt=""><svg id="ov" viewBox="0 0 100 100" preserveAspectRatio="none"></svg></div></div>
+  <div id="bar">
+    <button id="prev">&larr;</button><span id="cnt">-</span><button id="next">&rarr;</button>
+    <input id="rng" type="range" min="1" max="1" value="1">
+  </div>
+</div>
+
+<script>
+let A = null, i = 1, drag = null;
+const $ = (id) => document.getElementById(id);
+const cur = () => A.slices[i - 1];
+
+async function load() {
+  const id = $("mid").value.trim();
+  try {
+    A = await (await fetch("/atlas/" + id + "/atlas.json")).json();
+  } catch (e) {
+    $("status").textContent = "could not load /atlas/" + id + "/atlas.json";
+    return;
+  }
+  i = 1;
+  $("rng").max = A.slices.length;
+  $("pick").innerHTML = Object.keys(A.structures).sort()
+    .map((k) => `<option value="${k}">${A.structures[k].name}</option>`).join("");
+  const hand = Object.keys(A.structures).filter((k) => A.structures[k].hand_authored);
+  $("todo").textContent = hand.length
+    ? "Hand-author still pending: " + hand.map((k) => A.structures[k].name).join(", ")
+    : "";
+  $("status").innerHTML = `<span class="ok">loaded</span> ${A.slices.length} slices, ` +
+    `${Object.keys(A.structures).length} structures, ` +
+    `${A.slices.reduce((n, s) => n + (s.pins || []).length, 0)} pins`;
+  draw();
+}
+
+function draw() {
+  const s = cur();
+  $("img").src = s.img;
+  $("cnt").textContent = i + "/" + A.slices.length;
+  $("rng").value = i;
+  $("ov").innerHTML = (s.pins || []).map((p, n) => {
+    const st = A.structures[p.s] || { name: "?" };
+    const col = ((A.categories || {})[st.category] || {}).color || "#fff";
+    return `<circle data-n="${n}" cx="${p.x}" cy="${p.y}" r="1.1" fill="${col}" stroke="#000" stroke-width=".3"/>`
+         + `<text x="${p.x + 1.8}" y="${p.y}" fill="${col}" font-size="2.4">${st.name}</text>`;
+  }).join("");
+  $("list").innerHTML = (s.pins || []).map((p, n) => {
+    const st = A.structures[p.s] || { name: "?" };
+    return `<div class="row"><code>${st.name}</code> <span style="opacity:.5">${p.x},${p.y}</span>` +
+           `<button class="del" data-del="${n}">delete</button></div>`;
+  }).join("") || '<p class="hint">no pins on this slice</p>';
+}
+
+function xy(e) {
+  const r = $("img").getBoundingClientRect();
+  return [+(((e.clientX - r.left) / r.width) * 100).toFixed(1),
+          +(((e.clientY - r.top) / r.height) * 100).toFixed(1)];
+}
+
+$("ov").addEventListener("pointerdown", (e) => {
+  const c = e.target.closest("circle");
+  if (!c) return;
+  const n = +c.dataset.n;
+  if (e.shiftKey) { cur().pins.splice(n, 1); draw(); return; }
+  drag = n;
+  e.preventDefault();
+});
+window.addEventListener("pointermove", (e) => {
+  if (drag === null) return;
+  const [x, y] = xy(e);
+  Object.assign(cur().pins[drag], { x, y });
+  draw();
+});
+window.addEventListener("pointerup", () => { drag = null; });
+
+$("img").addEventListener("click", (e) => {
+  const s = cur();
+  (s.pins = s.pins || []).push({ s: $("pick").value, ...(() => { const [x, y] = xy(e); return { x, y }; })() });
+  draw();
+});
+$("list").addEventListener("click", (e) => {
+  const b = e.target.closest("[data-del]");
+  if (!b) return;
+  cur().pins.splice(+b.dataset.del, 1);
+  draw();
+});
+
+const go = (n) => { if (n >= 1 && n <= A.slices.length) { i = n; draw(); } };
+$("prev").onclick = () => go(i - 1);
+$("next").onclick = () => go(i + 1);
+$("rng").oninput = () => go(+$("rng").value);
+$("load").onclick = load;
+window.addEventListener("keydown", (e) => {
+  if (!A) return;
+  if (e.key === "ArrowLeft") go(i - 1);
+  if (e.key === "ArrowRight") go(i + 1);
+});
+
+$("save").onclick = () => {
+  // hand_authored is pipeline bookkeeping; strip it so the shipped file stays
+  // schema-clean and the viewer never sees a key it does not know.
+  const out = JSON.parse(JSON.stringify(A));
+  Object.values(out.structures).forEach((s) => delete s.hand_authored);
+  const b = new Blob([JSON.stringify(out, null, 1)], { type: "application/json" });
+  const a = document.createElement("a");
+  a.href = URL.createObjectURL(b);
+  a.download = "atlas.json";
+  a.click();
+};
+
+load();
+</script>

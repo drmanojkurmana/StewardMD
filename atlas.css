@@ -1,0 +1,198 @@
+/* Anatomy Atlas — educational cross-sectional viewer.
+   Mirrors the .oh-overlay contract from onco-home.css. `display:none` when closed is
+   load-bearing: swipe-back.js walks ancestors and correctly skips back controls
+   inside a hidden overlay, so a visibility-only hide would steal the gesture. */
+.atlas-overlay {
+  position: fixed; inset: 0; z-index: 880;
+  background: #000; color: #f2f2f2;
+  display: none; flex-direction: column; overflow: hidden;
+}
+.atlas-overlay.on { display: flex; animation: atlasIn .25s ease; }
+@keyframes atlasIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+body.atlas-lock { overflow: hidden; }
+
+.atlas-top { display: flex; align-items: center; gap: 10px; padding: 10px 12px; flex: 0 0 auto; }
+.atlas-back {
+  width: 40px; height: 40px; flex: 0 0 auto;
+  border-radius: 50%; border: 0;
+  background: #1e1e1e; color: #f2f2f2;
+  font-size: 20px; line-height: 1; cursor: pointer;
+}
+.atlas-hd { display: flex; flex-direction: column; min-width: 0; }
+.atlas-ttl { font-weight: 700; font-size: 17px; }
+.atlas-sub { font-size: 12px; opacity: .65; }
+
+.atlas-info {
+  width: 34px; height: 34px; flex: 0 0 auto; margin-left: auto;
+  border-radius: 50%; border: 1px solid #333;
+  background: #141414; color: #ccc;
+  font-size: 14px; line-height: 1; cursor: pointer;
+}
+.atlas-info svg { width: 18px; height: 18px; vertical-align: middle; }
+
+.atlas-foot {
+  flex: 0 0 auto; padding: 6px 12px 10px; text-align: center;
+  font-size: 11px; opacity: .5;
+}
+
+/* ---------- catalog ---------- */
+
+.atlas-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 0 12px 16px; }
+.atlas-chips { display: flex; gap: 8px; overflow-x: auto; padding: 6px 0; scrollbar-width: none; }
+.atlas-chips::-webkit-scrollbar { display: none; }
+.atlas-chip {
+  flex: 0 0 auto; padding: 6px 12px; border-radius: 999px;
+  border: 1px solid #333; background: #141414; color: #ddd;
+  font-size: 13px; cursor: pointer; white-space: nowrap;
+}
+.atlas-chip.on { background: #f2f2f2; color: #111; border-color: #f2f2f2; }
+
+.atlas-grp-h { font-size: 20px; font-weight: 700; margin: 16px 0 8px; }
+.atlas-row {
+  display: flex; align-items: center; gap: 12px;
+  width: 100%; margin-bottom: 8px; padding: 0;
+  border: 0; border-radius: 12px; background: #161616; color: inherit;
+  text-align: left; cursor: pointer; overflow: hidden;
+}
+.atlas-row-th { flex: 0 0 76px; width: 76px; height: 76px; background: #0b0b0b center/cover no-repeat; }
+.atlas-row-txt { flex: 1 1 auto; display: flex; flex-direction: column; gap: 2px; padding: 8px 0; min-width: 0; }
+.atlas-row-ttl { font-size: 16px; font-weight: 600; }
+.atlas-row-sub { font-size: 12px; opacity: .6; }
+.atlas-row-n { flex: 0 0 auto; padding-right: 14px; font-size: 12px; opacity: .45; }
+.atlas-empty { padding: 32px 4px; opacity: .6; font-size: 14px; }
+
+/* ---------- slice stage ---------- */
+
+.atlas-stage { position: relative; flex: 1 1 auto; overflow: hidden; }
+/* Explicit width/height come from imageBox(), so fill is correct here — the box
+   already has the file's aspect ratio and will not distort. */
+.atlas-img { position: absolute; object-fit: fill; }
+.atlas-ov { position: absolute; inset: 0; pointer-events: none; }
+.atlas-ov svg { position: absolute; inset: 0; overflow: visible; }
+
+.atlas-lead { stroke-width: 1; opacity: .85; }
+.atlas-tick { stroke-width: 1.5; opacity: .85; }
+.atlas-dot { stroke: #000; stroke-width: .5; pointer-events: auto; cursor: pointer; }
+.atlas-lab {
+  font: 500 11px/1.15 system-ui, -apple-system, "Segoe UI", sans-serif;
+  pointer-events: auto; cursor: pointer;
+}
+.atlas-lab:focus-visible, .atlas-dot:focus-visible { outline: 2px solid #3b9dff; outline-offset: 2px; }
+
+.atlas-lead.dim, .atlas-tick.dim, .atlas-lab.dim, .atlas-dot.dim { opacity: .38; }
+.atlas-lead.on, .atlas-tick.on { stroke: #fff; stroke-width: 2; opacity: 1; }
+.atlas-dot.on { opacity: 1; }
+/* The white "pill" on a selected label is a thick white stroke painted UNDER the
+   glyphs (paint-order), not a separate rect — one property instead of a second
+   element per label, and it hugs the text at any length. */
+.atlas-lab.on {
+  fill: #111 !important;
+  paint-order: stroke;
+  stroke: #fff; stroke-width: 9px; stroke-linejoin: round;
+  font-weight: 700;
+}
+
+/* ---------- scrub bar ---------- */
+/* The track is a SLIDER whose background happens to be 5 thumbnails, with a moving
+   playhead — not a scrolling filmstrip. A real <input type=range> sits transparent on
+   top so drag, keyboard arrows and VoiceOver all work with no code. */
+
+.atlas-bar { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 8px 12px; }
+.atlas-gridbtn, .atlas-step {
+  width: 38px; height: 38px; flex: 0 0 auto;
+  border: 0; border-radius: 10px; background: transparent; color: #eee;
+  font-size: 18px; cursor: pointer;
+}
+.atlas-gridbtn svg, .atlas-step svg { width: 20px; height: 20px; vertical-align: middle; }
+.atlas-track { position: relative; flex: 1 1 auto; height: 46px; display: flex; gap: 2px; border-radius: 6px; overflow: hidden; }
+.atlas-tth { flex: 1 1 0; min-width: 0; background: #0b0b0b center/cover no-repeat; }
+.atlas-play {
+  position: absolute; top: 0; bottom: 0; width: 3px;
+  background: #3b9dff; pointer-events: none; transform: translateX(-1.5px);
+}
+.atlas-range {
+  position: absolute; inset: 0; width: 100%; height: 100%; margin: 0;
+  opacity: 0; cursor: pointer; -webkit-appearance: none; appearance: none; background: transparent;
+}
+.atlas-range:focus-visible { opacity: 1; outline: 2px solid #3b9dff; }
+.atlas-count { flex: 0 0 auto; font-size: 13px; opacity: .8; min-width: 48px; text-align: center; }
+
+/* ---------- all-slices grid ---------- */
+
+.atlas-grid { position: absolute; inset: 0; z-index: 5; background: #000; display: flex; flex-direction: column; }
+.atlas-grid-in { display: grid; grid-template-columns: repeat(auto-fill, minmax(84px, 1fr)); gap: 8px; }
+.atlas-gth {
+  position: relative; aspect-ratio: 1; padding: 0;
+  border: 2px solid transparent; border-radius: 8px;
+  background: #0b0b0b center/cover no-repeat; cursor: pointer;
+}
+.atlas-gth.on { border-color: #3b9dff; }
+.atlas-gth span { position: absolute; bottom: 2px; right: 4px; font-size: 10px; color: #ddd; }
+
+/* ---------- info screen ---------- */
+
+.atlas-info-screen {
+  position: absolute; inset: 0; z-index: 5;
+  display: flex; flex-direction: column;
+  background: #000;
+}
+.atlas-prose { margin: 12px 0; font-size: 15px; line-height: 1.55; opacity: .85; }
+.atlas-credit { font-size: 13px; opacity: .6; }
+
+/* ---------- detail sheet (peek <-> full) ---------- */
+/* Two snap heights. Nothing in the repo has this — home.js's openSheet() is
+   single-height and private — so it is built here. The literal class "sheet" opts it
+   into dialog-motion.js's spring for free. */
+
+.atlas-sheet {
+  position: absolute; left: 0; right: 0; bottom: 0; z-index: 6;
+  display: flex; flex-direction: column; overflow: hidden;
+  height: 170px; max-height: 92%;
+  background: #2b2b2b; color: #f2f2f2;
+  border-radius: 16px 16px 0 0;
+  box-shadow: 0 -8px 32px rgba(0, 0, 0, .5);
+  transform: translateY(100%);
+  transition: transform .28s cubic-bezier(.2, .8, .2, 1), height .28s cubic-bezier(.2, .8, .2, 1);
+}
+.atlas-sheet.on { transform: none; }
+.atlas-sheet.full { height: 92%; }
+
+.atlas-grab { width: 38px; height: 4px; flex: 0 0 auto; margin: 8px auto 4px; border-radius: 2px; background: #666; }
+.atlas-sheet-hd { display: flex; justify-content: flex-end; padding: 0 12px; flex: 0 0 auto; }
+.atlas-sheet-x {
+  width: 34px; height: 34px; border: 0; border-radius: 50%;
+  background: #3a3a3a; color: #eee; font-size: 18px; cursor: pointer;
+}
+.atlas-sheet-x svg { width: 18px; height: 18px; vertical-align: middle; }
+.atlas-sheet-ttl { margin: 0 16px 8px; font-size: 22px; font-weight: 700; flex: 0 0 auto; }
+
+.atlas-pills { display: flex; gap: 8px; padding: 0 16px 10px; overflow-x: auto; flex: 0 0 auto; scrollbar-width: none; }
+.atlas-pills::-webkit-scrollbar { display: none; }
+.atlas-pill {
+  display: inline-flex; align-items: center; gap: 6px; flex: 0 0 auto;
+  padding: 8px 14px; border: 0; border-radius: 999px;
+  background: #3a3a3a; color: #eee; font-size: 14px; cursor: pointer; white-space: nowrap;
+}
+.atlas-pill.on { background: #f2f2f2; color: #111; }
+.atlas-pill svg { width: 16px; height: 16px; }
+.atlas-pill.cat { cursor: default; }
+.atlas-pill.cat i { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+
+.atlas-tabs { display: flex; gap: 18px; padding: 4px 16px 0; border-bottom: 1px solid #3d3d3d; flex: 0 0 auto; overflow-x: auto; scrollbar-width: none; }
+.atlas-tabs::-webkit-scrollbar { display: none; }
+.atlas-tab {
+  padding: 10px 0; flex: 0 0 auto;
+  border: 0; border-bottom: 2px solid transparent; background: none;
+  color: #999; font-size: 14px; cursor: pointer; white-space: nowrap;
+}
+.atlas-tab.on { color: #f2f2f2; border-bottom-color: #3b9dff; }
+
+.atlas-sheet-body { flex: 1 1 auto; overflow-y: auto; padding: 14px 16px 24px; }
+.atlas-def { margin: 0; font-size: 15px; line-height: 1.55; }
+.atlas-tree { list-style: none; margin: 0; padding: 0; font-size: 15px; line-height: 1.9; }
+.atlas-tree li.on { font-weight: 700; }
+
+@media (prefers-reduced-motion: reduce) {
+  .atlas-overlay.on { animation: none; }
+  .atlas-sheet { transition: none; }
+}

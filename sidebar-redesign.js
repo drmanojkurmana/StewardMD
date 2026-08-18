@@ -25,6 +25,7 @@
   try { window.SMD_SBR = true; } catch (e) {}
 
   var ICON = {
+    atlas: '<circle cx="12" cy="4.6" r="2.4"/><path d="M12 7v9M8.2 10h7.6M9.6 16 8 21M14.4 16 16 21"/>',
     pills: '<path d="M10.5 13.5 3 21M2 18a4 4 0 0 0 6 3l9-9a4 4 0 0 0-6-6L2 14a4 4 0 0 0 0 4Z"/>',
     interact: '<circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/>',
     calc: '<rect x="4" y="2" width="16" height="20" rx="2"/><line x1="8" y1="6" x2="16" y2="6"/><line x1="8" y1="11" x2="8.01" y2="11"/><line x1="12" y1="11" x2="12.01" y2="11"/><line x1="16" y1="11" x2="16.01" y2="11"/><line x1="8" y1="16" x2="8.01" y2="16"/>',
@@ -52,6 +53,7 @@
     drugs: function () { if (window.MEDDB && MEDDB.openList) MEDDB.openList(); else toast("Drugs database loading…"); },
     interactions: function () { if (window.MEDDRUGS && MEDDRUGS.openInteractions) MEDDRUGS.openInteractions(); else toast("Drug interactions loading…"); },
     calculators: function () { if (window.MEDCALC && MEDCALC.openList) MEDCALC.openList(); else toast("Calculators loading…"); },
+    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     guidelines: function () { if (window.SB && SB.openRef) SB.openRef("guidelines"); else toast("Guidelines loading…"); },
     tour: function () { if (window.SMD_TOUR && SMD_TOUR.start) SMD_TOUR.start({ replay: true }); else toast("Tour loading…"); },
     feedback: function () {
@@ -277,6 +279,7 @@
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
+        row("atlas", "atlas", "RadioAnatome") +
       row("tour", "info", "How it works · App tour") +
       row("feedback", "edit", "Send Feedback") +
       row("ack", "award", "About &amp; Acknowledgements") +

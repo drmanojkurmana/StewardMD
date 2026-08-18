@@ -1,0 +1,938 @@
+{
+ "id": "ct-abdomen-coronal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "TotalSegmentator `total` (Apache-2.0 code and weights), run on our own public-domain CT",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "gi-tract": {
+   "label": "GI tract",
+   "color": "#c9a06a"
+  },
+  "vessel-artery": {
+   "label": "Artery",
+   "color": "#ff8080"
+  },
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  },
+  "muscle": {
+   "label": "Muscle",
+   "color": "#e0a0c0"
+  }
+ },
+ "structures": {
+  "abdomen": {
+   "name": "Abdomen",
+   "category": "viscus"
+  },
+  "aorta": {
+   "name": "Abdominal aorta",
+   "category": "vessel-artery",
+   "parent": "abdomen",
+   "definition": "The abdominal aorta begins at the aortic hiatus of the diaphragm and divides into the common iliac arteries."
+  },
+  "autochthonous-back-muscle": {
+   "name": "Deep back muscles",
+   "category": "muscle",
+   "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+  },
+  "colon": {
+   "name": "Colon",
+   "category": "gi-tract",
+   "parent": "abdomen",
+   "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+  },
+  "duodenum": {
+   "name": "Duodenum",
+   "category": "gi-tract",
+   "parent": "abdomen",
+   "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas."
+  },
+  "iliopsoas": {
+   "name": "Iliopsoas",
+   "category": "muscle",
+   "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+  },
+  "lumbar-vertebra": {
+   "name": "Lumbar vertebra",
+   "category": "bone",
+   "parent": "vertebral-column",
+   "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column."
+  },
+  "small-bowel": {
+   "name": "Small intestine",
+   "category": "gi-tract",
+   "parent": "abdomen",
+   "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+  },
+  "vertebral-column": {
+   "name": "Vertebral column",
+   "category": "bone"
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-abdomen-coronal/001.webp",
+   "aspect": 1.0444,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-abdomen-coronal/002.webp",
+   "aspect": 1.0444,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-abdomen-coronal/003.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 56.5,
+     "y": 37.0
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-abdomen-coronal/004.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 51.9,
+     "y": 60.5
+    },
+    {
+     "s": "colon",
+     "x": 52.2,
+     "y": 38.8
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-abdomen-coronal/005.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 44.1,
+     "y": 80.6
+    },
+    {
+     "s": "colon",
+     "x": 26.8,
+     "y": 25.7
+    },
+    {
+     "s": "colon",
+     "x": 62.7,
+     "y": 27.4
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-abdomen-coronal/006.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 41.7,
+     "y": 77.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 45.2,
+     "y": 7.9
+    },
+    {
+     "s": "small-bowel",
+     "x": 57.0,
+     "y": 69.0
+    },
+    {
+     "s": "colon",
+     "x": 56.8,
+     "y": 46.4
+    },
+    {
+     "s": "colon",
+     "x": 63.4,
+     "y": 24.8
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-abdomen-coronal/007.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 40.8,
+     "y": 94.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 47.2,
+     "y": 5.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 57.4,
+     "y": 78.5
+    },
+    {
+     "s": "colon",
+     "x": 25.6,
+     "y": 65.2
+    },
+    {
+     "s": "colon",
+     "x": 62.7,
+     "y": 8.0
+    },
+    {
+     "s": "colon",
+     "x": 76.6,
+     "y": 17.2
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-abdomen-coronal/008.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 43.9,
+     "y": 88.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 47.2,
+     "y": 6.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 58.9,
+     "y": 77.6
+    },
+    {
+     "s": "colon",
+     "x": 25.2,
+     "y": 84.2
+    },
+    {
+     "s": "colon",
+     "x": 69.1,
+     "y": 99.8
+    },
+    {
+     "s": "colon",
+     "x": 78.2,
+     "y": 7.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-abdomen-coronal/009.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 45.9,
+     "y": 6.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 49.1,
+     "y": 72.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 63.2,
+     "y": 88.1
+    },
+    {
+     "s": "colon",
+     "x": 24.8,
+     "y": 80.6
+    },
+    {
+     "s": "colon",
+     "x": 72.0,
+     "y": 96.2
+    },
+    {
+     "s": "colon",
+     "x": 79.1,
+     "y": 26.1
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-abdomen-coronal/010.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 37.6,
+     "y": 68.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 69.4,
+     "y": 65.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 72.2,
+     "y": 57.1
+    },
+    {
+     "s": "colon",
+     "x": 21.6,
+     "y": 32.7
+    },
+    {
+     "s": "colon",
+     "x": 79.8,
+     "y": 64.6
+    },
+    {
+     "s": "colon",
+     "x": 81.3,
+     "y": 31.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 8.1,
+     "y": 87.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 64.9,
+     "y": 92.3
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-abdomen-coronal/011.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 54.6,
+     "y": 17.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 70.9,
+     "y": 64.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 74.0,
+     "y": 40.6
+    },
+    {
+     "s": "duodenum",
+     "x": 42.3,
+     "y": 41.0
+    },
+    {
+     "s": "colon",
+     "x": 19.9,
+     "y": 37.8
+    },
+    {
+     "s": "colon",
+     "x": 64.4,
+     "y": 3.7
+    },
+    {
+     "s": "colon",
+     "x": 83.8,
+     "y": 28.7
+    },
+    {
+     "s": "aorta",
+     "x": 42.9,
+     "y": 50.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 8.5,
+     "y": 84.9
+    },
+    {
+     "s": "iliopsoas",
+     "x": 31.6,
+     "y": 78.3
+    },
+    {
+     "s": "iliopsoas",
+     "x": 64.5,
+     "y": 86.2
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-abdomen-coronal/012.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 51.1,
+     "y": 15.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 59.7,
+     "y": 13.2
+    },
+    {
+     "s": "small-bowel",
+     "x": 74.7,
+     "y": 63.1
+    },
+    {
+     "s": "colon",
+     "x": 19.4,
+     "y": 38.2
+    },
+    {
+     "s": "colon",
+     "x": 84.2,
+     "y": 26.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.3,
+     "y": 56.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.9,
+     "y": 64.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.4,
+     "y": 57.5
+    },
+    {
+     "s": "aorta",
+     "x": 41.7,
+     "y": 44.3
+    },
+    {
+     "s": "iliopsoas",
+     "x": 9.8,
+     "y": 85.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 30.0,
+     "y": 83.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 65.0,
+     "y": 83.8
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-abdomen-coronal/013.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 15.9,
+     "y": 25.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 59.6,
+     "y": 13.8
+    },
+    {
+     "s": "colon",
+     "x": 16.9,
+     "y": 39.3
+    },
+    {
+     "s": "colon",
+     "x": 26.0,
+     "y": 27.1
+    },
+    {
+     "s": "colon",
+     "x": 78.6,
+     "y": 20.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.9,
+     "y": 42.6
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 49.0,
+     "y": 54.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 41.7,
+     "y": 57.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 44.9,
+     "y": 66.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.9,
+     "y": 49.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 12.5,
+     "y": 86.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 30.2,
+     "y": 82.6
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.8,
+     "y": 69.4
+    },
+    {
+     "s": "iliopsoas",
+     "x": 65.4,
+     "y": 73.4
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-abdomen-coronal/014.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 11.7,
+     "y": 29.3
+    },
+    {
+     "s": "colon",
+     "x": 77.1,
+     "y": 20.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 45.4,
+     "y": 53.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.1,
+     "y": 40.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.2,
+     "y": 66.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 55.1,
+     "y": 49.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 22.9,
+     "y": 88.9
+    },
+    {
+     "s": "iliopsoas",
+     "x": 33.0,
+     "y": 69.4
+    },
+    {
+     "s": "iliopsoas",
+     "x": 59.7,
+     "y": 43.3
+    },
+    {
+     "s": "iliopsoas",
+     "x": 63.2,
+     "y": 69.6
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-abdomen-coronal/015.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 77.2,
+     "y": 20.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 36.7,
+     "y": 67.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 45.4,
+     "y": 41.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.8,
+     "y": 54.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 42.6,
+     "y": 66.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 52.6,
+     "y": 49.6
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 54.2,
+     "y": 66.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 36.6,
+     "y": 43.4
+    },
+    {
+     "s": "iliopsoas",
+     "x": 59.6,
+     "y": 56.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 60.1,
+     "y": 43.6
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-abdomen-coronal/016.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 42.0,
+     "y": 53.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 43.1,
+     "y": 39.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 53.7,
+     "y": 53.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 40.4,
+     "y": 75.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 44.3,
+     "y": 62.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 53.1,
+     "y": 64.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 44.3,
+     "y": 66.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.5,
+     "y": 72.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 52.5,
+     "y": 66.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 32.2,
+     "y": 64.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 60.7,
+     "y": 64.6
+    },
+    {
+     "s": "iliopsoas",
+     "x": 58.9,
+     "y": 28.3
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-abdomen-coronal/017.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.8,
+     "y": 45.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 56.8,
+     "y": 41.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 44.8,
+     "y": 48.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.8,
+     "y": 61.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 51.7,
+     "y": 50.6
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.4,
+     "y": 72.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.8,
+     "y": 74.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 34.1,
+     "y": 63.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 61.6,
+     "y": 61.2
+    },
+    {
+     "s": "iliopsoas",
+     "x": 59.6,
+     "y": 21.8
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-abdomen-coronal/018.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 44.8,
+     "y": 36.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.4,
+     "y": 30.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.8,
+     "y": 47.9
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.4,
+     "y": 76.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.5,
+     "y": 71.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.9,
+     "y": 66.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 34.0,
+     "y": 62.4
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 60.8,
+     "y": 57.6
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-abdomen-coronal/019.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 46.9,
+     "y": 35.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.4,
+     "y": 51.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.5,
+     "y": 63.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 33.2,
+     "y": 47.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 60.3,
+     "y": 47.5
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-abdomen-coronal/020.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 47.4,
+     "y": 36.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 34.6,
+     "y": 36.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 61.3,
+     "y": 32.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 86.0,
+     "y": 11.3
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-abdomen-coronal/021.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 34.2,
+     "y": 23.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 59.7,
+     "y": 20.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 84.7,
+     "y": 7.9
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-abdomen-coronal/022.webp",
+   "aspect": 1.0444,
+   "pins": [
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 34.4,
+     "y": 6.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 59.5,
+     "y": 11.9
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-abdomen-coronal/023.webp",
+   "aspect": 1.0444,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-abdomen-coronal/024.webp",
+   "aspect": 1.0444,
+   "pins": []
+  }
+ ]
+}
