@@ -1384,7 +1384,8 @@
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
-    { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy" },
+    { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy",
+      eligible: function () { try { var q = (location.search.match(/[?&]atlas=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_atlas") === "1"); } catch (e) { return false; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },

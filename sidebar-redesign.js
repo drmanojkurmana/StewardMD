@@ -279,7 +279,7 @@
       (flag("smd_personal_clinic", false) ? row("clinic", "steth", "My Clinic") : "") +
       '<div class="sbr-sec">Reference &amp; Help</div>' +
       row("guidelines", "book", "Guidelines &amp; Protocols") +
-        row("atlas", "atlas", "RadioAnatome") +
+        (flag("smd_atlas", false) ? row("atlas", "atlas", "RadioAnatome") : "") +
       row("tour", "info", "How it works · App tour") +
       row("feedback", "edit", "Send Feedback") +
       row("ack", "award", "About &amp; Acknowledgements") +
