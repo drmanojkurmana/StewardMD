@@ -25,14 +25,21 @@ h2{margin:0;font-size:18px;font-weight:650}
 .split{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
 .frame{position:relative;flex:0 0 auto;width:375px;height:740px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--stage);box-shadow:0 16px 50px rgba(0,0,0,.6)}
 .frame .atlas-overlay{position:absolute}
-/* atlas.js holds `.atlas-lock` (overflow:hidden) on <body> for as long as the viewer is open,
-   which is right in the app where the viewer IS the screen. On desktop this page opens it once
-   at load and re-parents it into the phone frame, so that lock would sit on <body> for the whole
-   session — measured on the live page: body.overflow was already "hidden" before any module was
-   opened. Desktop Chrome ignores it (only the ROOT element's overflow reaches the viewport) but a
-   browser that honours it cannot scroll the sheet at all. Neutralise it ONLY while the viewer is
-   embedded; on mobile it opens fullscreen for real, where the lock is correct and wanted. */
-body.atlas-embedded.atlas-lock{overflow:visible}
+/* SCROLL MUST ALWAYS WORK ON THIS PAGE — no exceptions, no conditions.
+   atlas.js holds `.atlas-lock` (overflow:hidden) on <body> for as long as the viewer is open.
+   That is right in the app, where the viewer IS the screen. It is never right here: this page
+   opens the viewer at load and keeps it open for the whole session to embed it, so the lock never
+   lifts — the viewer's own inner regions scroll while the page underneath is frozen, which is
+   exactly the reported symptom. Measured on the live page: body.overflow was already "hidden"
+   before any module had been opened.
+   Unconditional on purpose. An earlier version scoped this to an `atlas-embedded` class and the
+   page still froze wherever that class did not apply; there is no state of this page in which
+   locking the document is wanted — either the viewer is a box inside a scrolling document, or it
+   is a fullscreen overlay already covering whatever is behind it.
+   !important because atlas.css is a shared app file whose rules may be reordered or re-specified
+   later; this page must not silently regress to a frozen document again. */
+html{overflow-y:auto!important}
+body,body.atlas-lock{overflow:visible!important}
 .col{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px}
 .viewcol{position:sticky;top:18px;align-self:flex-start;flex:0 0 375px;width:375px;max-width:375px;display:flex;flex-direction:column;gap:11px}
 .viewcol .hint{max-width:375px}
@@ -308,13 +315,12 @@ code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
 
   function boot() {
     // Desktop only: open the viewer once and keep re-parenting it into the phone frame so it sits
-    // beside the checklist. `atlas-embedded` tells the CSS above to cancel atlas.js's <body> scroll
-    // lock, which would otherwise be stuck on for the whole session. On a phone we deliberately do
-    // NOT do this — the frame is hidden and each row's "View this module" opens the viewer
-    // fullscreen, so the lock stays meaningful and the reviewer gets the whole screen.
+    // beside the checklist. The CSS above cancels atlas.js's <body> scroll lock unconditionally, so
+    // this page can never end up with a frozen document. On a phone we deliberately do NOT embed —
+    // the frame is hidden and each row's "View this module" opens the viewer fullscreen, giving the
+    // reviewer the whole screen instead of a 350x660 box inside it.
     if (window.ATLAS && ATLAS.open && !isPhone()) {
       ATLAS.open();
-      document.body.classList.add("atlas-embedded");
       var n = 0;
       (function settle() {
         var root = document.getElementById("smdAtlas"), frame = document.getElementById("frame");
