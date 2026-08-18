@@ -1,7 +1,9 @@
 {
  "version": 1,
  "_credits": "Curated, render-safe lines shown ONLY on the atlas info screen. Empty while slices are locally generated placeholders needing no credit. The pipeline writes the required line here when real imagery lands (e.g. Visible Human).",
- "credits": [],
+ "credits": [
+  "Courtesy of the U.S. National Library of Medicine"
+ ],
  "modules": [
   {
    "id": "brain-mri-axial-t1",
@@ -11,6 +13,15 @@
    "modality": "MRI",
    "slices": 3,
    "thumb": "/atlas/brain-mri-axial-t1/t/002.webp"
+  },
+  {
+   "id": "ct-thorax-axial",
+   "title": "Thorax - CT",
+   "subtitle": "Axial",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-thorax-axial/t/013.webp"
   }
  ]
 }

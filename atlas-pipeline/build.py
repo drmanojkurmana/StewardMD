@@ -13,6 +13,7 @@ import sys
 import tempfile
 
 import numpy as np
+from scipy import ndimage
 
 from check_sources import require_clear, load_sources
 from labels import load_mapping, structure_for_label, structures_block, categories_block
@@ -143,7 +144,19 @@ def pins_from_segmentation(seg_path, slice_stubs, mapping, spacing_disp):
             if not sid:
                 continue
             m = resize_to_square_pixels(to_display(plane == val), spacing_disp, DISPLAY_H)
-            for (r, c) in pins_for_mask(m, MIN_AREA_PX):
+            found = pins_for_mask(m, MIN_AREA_PX)
+            # A generically-named structure that recurs many times per slice (ribs) would
+            # saturate both gutters with identical labels. Keep the largest few, which are
+            # the clearest cross-sections; the cap is per-mapping, not hard-coded.
+            cap = (mapping.get("max_pins_per_slice") or {}).get(sid)
+            if cap and len(found) > cap:
+                area = {}
+                lab2, k2 = ndimage.label(m, structure=np.ones((3, 3), dtype=bool))
+                for (r, c) in found:
+                    area[(r, c)] = int((lab2 == lab2[r, c]).sum())
+                found = sorted(found, key=lambda rc: -area[rc])[:cap]
+                found.sort(key=lambda rc: (rc[1], rc[0]))
+            for (r, c) in found:
                 x, y = to_percent(r, c, m.shape)
                 pins.append({"s": sid, "x": x, "y": y})
         out[stub["i"]] = pins
