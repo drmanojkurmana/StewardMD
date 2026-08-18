@@ -10,7 +10,7 @@ HPR is not** (teleconsultation apps only). Lives inside [[Connect]] as one conne
 
 **Before writing any ABDM code read `docs/connect/abdm/V3-SPEC-RECONCILIATION.md`.** The Stage-1..6
 code was written in July 2026 *without* live spec access (research was WAF-blocked); a full pass over
-the official docs on 2026-08-18 found five defects in it, listed there with evidence.
+the official docs on 2026-08-18 found five defects in it, listed there with evidence and current status.
 
 ## Key files
 - `functions/_connect/abdm/` — `gateway.js` (the ONE config seam for paths/fields, ADR-2H), `hip.js`,
@@ -21,8 +21,14 @@ the official docs on 2026-08-18 found five defects in it, listed there with evid
 - `docs/connect/abdm/owner-onboarding.md` — provisioning + go-live gates (64 `// VERIFY` pins)
 
 ## Status
-Merged, **inert**, mock-only. No D1/R2 binding, no secrets, no ABDM credential. Both flags OFF ⇒ every
-`/api/connect/*` route 404/400s, so a partial provision cannot leak.
+Merged, **inert**, mock-only. Both flags OFF ⇒ every `/api/connect/*` route 404/400s, so a partial
+provision cannot leak. No D1/R2 binding and no Pages secrets yet.
+**Sandbox bridge credentials DO exist** (client id `SBXID_062379`, MAIKNOWLEDGE LLP, approved
+2026-08-18) - kept outside the repo at `~/.stewardmd-secrets/abdm-sandbox.env`, never committed.
+ABDM currently has our bridge URL as a webhook.site placeholder and **no registered service**, so
+there is no HIP ID yet.
+Of the five recorded defects, **D1 (session headers) and D2 (V3 paths) are fixed and test-pinned**, and
+D4's encoding half is fixed; D3 (ingress shape) and D5 (care-context sources) remain.
 
 ## Hard rules
 - **M1 must use V3 APIs.** A V1/V2 M1 implementation is *rejected* at Sandbox Exit.
