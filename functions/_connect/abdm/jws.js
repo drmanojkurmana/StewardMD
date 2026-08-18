@@ -104,10 +104,14 @@ function fail(reason) { return { ok: false, payload: null, reason }; }
 // proceed until the owner sets env.ABDM_JWKS_URL (or pins this constant) to an allow-listed https URL.
 export const ABDM_JWKS_URL = "";
 // The ONLY hosts a JWKS may EVER be fetched from. A configured URL whose host is not here is refused
-// (defence-in-depth over env config). // VERIFY: confirm the live ABDM sandbox/prod JWKS host(s).
+// (defence-in-depth over env config).
+// CONFIRMED live 2026-08-18: the V3 JWKS is GET /api/hiecm/gateway/v3/certs on the gateway host -
+// dev.abdm.gov.in in sandbox, apis.abdm.gov.in in production. It returns a standard JWKS (RS256 +
+// RS512 RSA keys, use:sig, with kids that match the token headers).
 export const ABDM_JWKS_HOSTS = Object.freeze([
   "healthidsbx.abdm.gov.in",
-  "dev.abdm.gov.in",
+  "dev.abdm.gov.in",        // sandbox gateway
+  "apis.abdm.gov.in",       // production gateway
   "sbx.abdm.gov.in",
   "abdm.gov.in",
 ]);
@@ -137,7 +141,15 @@ export async function getPinnedJwks(env, deps = {}) {
 
   if (typeof fetchImpl !== "function") throw new JwsError("no fetch available for JWKS (fail-closed)");
   let res;
-  try { res = await fetchImpl(u.toString(), { method: "GET", headers: { accept: "application/json" } }); }
+  // The V3 /certs endpoint needs no bearer, but REQUEST-ID / TIMESTAMP / X-CM-ID are MANDATORY:
+  // verified live 2026-08-18 - omitting them returns 401, sending them returns 200.
+  const headers = {
+    accept: "application/json",
+    "REQUEST-ID": crypto.randomUUID(),
+    TIMESTAMP: new Date().toISOString(),
+    "X-CM-ID": (env && (env.ABDM_CM_ID || (String(env.ABDM_ENV || "sandbox").toLowerCase() === "production" ? "abdm" : "sbx"))) || "sbx",
+  };
+  try { res = await fetchImpl(u.toString(), { method: "GET", headers }); }
   catch (e) { throw new JwsError("JWKS fetch failed: " + (e && e.message)); }
   if (!res || !res.ok) throw new JwsError("JWKS HTTP " + (res ? res.status : "no-response"));
   let jwks;

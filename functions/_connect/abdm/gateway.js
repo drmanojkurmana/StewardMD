@@ -15,7 +15,25 @@ export const ENDPOINTS = {
   hiNotify:     "/api/hiecm/data-flow/v3/health-information/notify",       // pinned (was /health-information/notify)
   bridgeUrl:      "/api/hiecm/gateway/v3/bridge/url",                      // PATCH {url} - register callback BASE url only
   bridgeServices: "/api/hiecm/gateway/v3/bridge-services",                 // GET - live-verified 200
-  certs:          "/api/hiecm/gateway/v3/certs",
+  certs:          "/api/hiecm/gateway/v3/certs",                           // JWKS; needs the 3 headers, no bearer
+
+  // M2 - HIP. All pinned from the Milestone-2 Postman collection (16-02-2026).
+  tokenGenerate:      "/api/hiecm/v3/token/generate-token",                // X-HIP-ID + X-CM-ID
+  linkCareContext:    "/api/hiecm/hip/v3/link/carecontext",                // + X-LINK-TOKEN
+  linkContextNotify:  "/api/hiecm/hip/v3/link/context/notify",             // + X-LINK-TOKEN
+  smsNotify:          "/api/hiecm/hip/v3/link/patient/links/sms/notify2",  // deep-link SMS when no ABHA was shared
+  patientLinks:       "/api/hiecm/hip/v3/link/patient/links",              // GET, X-AUTH-TOKEN (PHR-side)
+  onDiscover:         "/api/hiecm/user-initiated-linking/v3/patient/care-context/on-discover",
+  onLinkInit:         "/api/hiecm/user-initiated-linking/v3/link/care-context/on-init",
+  onLinkConfirm:      "/api/hiecm/user-initiated-linking/v3/link/care-context/on-confirm",
+  consentHipOnNotify: "/api/hiecm/consent/v3/request/hip/on-notify",
+  hiHipOnRequest:     "/api/hiecm/data-flow/v3/health-information/hip/on-request",
+  patientShareOnShare: "/api/hiecm/patient-share/v3/on-share",             // scan-and-share: we return the token number
+
+  // M3 - HIU.
+  consentStatus:      "/api/hiecm/consent/v3/request/status",              // + X-HIU-ID
+  consentHiuOnNotify: "/api/hiecm/consent/v3/request/hiu/on-notify",
+  hiRequestStatus:    "/api/hiecm/data-flow/v3/health-information/request/status",  // GET /{transaction-id}
 };
 
 // Session request/response field names - CONFIRMED against the live sandbox response.
