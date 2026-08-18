@@ -21,6 +21,9 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
 
+### Interop & compliance
+- [[ABDM]] — national health-data exchange (ABHA, HIP/HIU, consent); read the V3 reconciliation first
+
 ## Cross-cutting
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
