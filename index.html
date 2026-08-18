@@ -1527,6 +1527,11 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978" defer></script>
 <script src="/interaction-rules.js?v=gold363" defer></script>
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
+<!-- ONE image/PDF compressor for every vision path (Scan-Meds, ICU snapshot, ABG, SknX, PDF reports).
+     Vision tokens scale with pixel DIMENSIONS, not file bytes, so the long-edge cap is the token lever and
+     JPEG quality is only a bytes lever. pdfParts() reads a PDF's text layer instead of OCR-ing a rasterised
+     page, which is both far cheaper and more accurate on numbers. Loads BEFORE the modules that use it. -->
+<script defer src="/img-compress.js?v=imgc1"></script>
 <script defer src="/medlist.js?v=gold1048-scan"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
