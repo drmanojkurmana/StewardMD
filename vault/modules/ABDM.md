@@ -1,6 +1,6 @@
 ---
 tags: [module, interop, compliance]
-status: built-but-wrong-generation (inert, flag OFF)
+status: gateway pinned to V3 + key codec landed; ingress still legacy-shaped. Inert, flag OFF
 flag: smd_connect / CONNECT_FLAG + smd_connect_hip / CONNECT_HIP_FLAG, both default OFF
 ---
 # ABDM (Ayushman Bharat Digital Mission)
@@ -36,9 +36,13 @@ Merged, **inert**, mock-only. No D1/R2 binding, no secrets, no ABDM credential. 
 
 ## Gotchas
 - **Fidelius public keys are 65-byte uncompressed EC points (`0x04‖X32‖Y32`, base64), not 32-byte
-  X25519.** `fidelius.js` currently rejects real ABDM keys. Worse, `04‖X‖Y` implies Weierstrass
-  Curve25519, whose ECDH output differs from X25519's Montgomery u by A/3 — the shared secret may
-  silently differ. Highest technical risk in the module.
+  X25519.** FIXED: `abdmKeyToX25519` / `x25519KeyToAbdm` in `fidelius.js` convert both ways (proven -
+  the official swagger key satisfies the BouncyCastle Weierstrass equation and maps to Montgomery u
+  via `u = x - A/3`), covered by `test/connect/abdm/fidelius-wire-keyformat.test.mjs`. **Still open:**
+  BouncyCastle ECDH returns the Weierstrass x while X25519 returns Montgomery u, so the shared secret
+  may need the same A/3 offset before HKDF. `montgomeryUToWeierstrassX` implements it but is
+  deliberately NOT wired in until proven against `mgrmtech/fidelius-cli` vectors. Highest remaining
+  technical risk in the module.
 - `ingress.js` is one JWS endpoint dispatching on `ev.type`; ABDM V3 posts **plain JSON to ~10 distinct
   callback paths** with bearer auth. Transport layer needs a rebuild.
 - Register the callback **base URL only** — a path makes the gateway append it twice.
@@ -49,10 +53,14 @@ Merged, **inert**, mock-only. No D1/R2 binding, no secrets, no ABDM credential. 
 - Sandbox allows only **100 ABHA creations per client id** (`ABDM-1227`).
 
 ## Open questions for the owner
-- **India hosting.** ABDM requires the callback server to be India-based, addressed by domain (not
-  IP/port), whitelisting NAT IPs `13.203.243.253` `13.203.245.166` `65.0.113.207` `14.143.232.140`.
-  Cloudflare Pages answers from the nearest global edge. Needs an India origin/proxy, CF
-  data-localization, or written NHA confirmation. Settle before booking functional testing.
+- **India hosting** (researched 2026-08-18, see V3-SPEC-RECONCILIATION.md §7b). ABDM requires the
+  callback server to be India-based, addressed by domain, whitelisting NAT IPs `13.203.243.253`
+  `13.203.245.166` `65.0.113.207` `14.143.232.140`. Cloudflare **Regional Services** does support an
+  India managed region and Workers run in-region, but it is an **Enterprise add-on**, Pages needs a
+  **custom domain set to a region**, and it gives processing residency only - **KV is incompatible, D1
+  has no jurisdictional restriction, and R2 jurisdictions are eu/fedramp only**, so consent artefacts
+  would not be guaranteed India-resident. Ask NHA first; fallback is Enterprise Regional Services or a
+  small India-hosted forwarder (Mumbai) with the ABDM state store there too.
 - Sandbox client id + secret (register at `sandbox.abdm.gov.in`), and an HFR facility id per hospital
   (`hspsbx.abdm.gov.in` sandbox, `nhpr.abdm.gov.in` prod), linked to our client id via **Software
   Linkage** on the facility portal.

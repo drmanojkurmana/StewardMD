@@ -335,13 +335,69 @@ Two owner actions follow from that:
 Note the NHA approval email's own instructions are **stale** - it quotes the retired
 `/gateway/v1/bridges` and `addUpdateServices` endpoints. Use the V3 paths above.
 
+## 7b. The India-hosting question, and what Cloudflare can actually do
+
+ABDM FAQ Q29 lists, as a requirement for receiving callbacks: the callback URL must be a **domain**
+(not an IP or port), the **server must be India-based**, and the ABDM NAT IPs
+`13.203.243.253` / `13.203.245.166` / `65.0.113.207` / `14.143.232.140` must be allowed through the
+firewall. Our data plane is Cloudflare Pages Functions, which answer from the nearest global edge.
+
+Researched against current Cloudflare docs (2026-08-18):
+
+**Regional Services can put request *processing* in India.** India is a generally-available managed
+region: "Cloudflare will only use data centers that are physically located within India to decrypt and
+service HTTPS traffic." Workers are explicitly in scope - "Products that require decryption, such as
+WAF, Bot Management and Workers will only be applied within those data centers." A region is assigned
+per proxied hostname via the `region_key` field, so we could region-lock only the ABDM callback
+hostname rather than the whole app.
+
+Two important constraints:
+
+- It is an **Enterprise add-on** (account-team enablement), not a self-serve toggle.
+- For Pages specifically the compatibility matrix says supported **"only when using Custom Domain set
+  to a region"** - so the callback must be a custom domain, not a `*.pages.dev` URL.
+
+**But Regional Services does not give us data-at-rest residency, and that is the real gap.** From the
+Data Localization compatibility matrix:
+
+| Store | ABDM use | India residency today |
+|---|---|---|
+| Workers KV | gateway token cache, JWKS, replay nonces | **Not compatible** with Regional Services; no jurisdictional restriction for KV |
+| D1 | `connect_abdm_consent_req` / `_txn` / `_carecontext` | Jurisdictional restrictions **not supported today** |
+| R2 | transient encrypted push buffer | Jurisdictions are **`eu` and `fedramp` only**; location hints have no India (`apac` is best-effort, explicitly "not a guarantee") |
+| Durable Objects | not used by ABDM yet | Jurisdiction restrictions exist |
+
+So even on Enterprise, consent artefacts and the encrypted buffer would not be *guaranteed* to sit in
+India. Customer Metadata Boundary is also marked unsupported for India, so logs and analytics metadata
+would still leave the country.
+
+### The three real options
+
+1. **Ask NHA first** (cheapest, do it regardless). Get a written answer on whether an India-region
+   Cloudflare hostname satisfies "server is India-based". If yes, option 2 becomes an Enterprise
+   purchase and nothing more. Route: `integration.support@nha.gov.in`.
+2. **Cloudflare Enterprise + Regional Services on the callback hostname.** Solves in-country
+   processing and keeps the whole stack as it is. Does **not** solve at-rest residency for
+   D1 / KV / R2 - which we would have to disclose in the DPIA rather than claim.
+3. **A small India-hosted callback receiver** (for example Mumbai `ap-south-1`) on a fixed domain,
+   terminating ABDM callbacks and forwarding to Pages Functions, with the ABDM state store also in
+   India. More infrastructure to run, but it is unambiguously compliant, gives us a stable IP to
+   declare, and is the only option that also fixes data-at-rest residency.
+
+The NAT-IP whitelisting itself is not a blocker on Cloudflare - we simply must not block those four
+addresses, and can add an explicit WAF allow rule for the callback path.
+
+**Recommendation:** send the question to NHA now, and design the transport layer (D3) behind a small
+seam so the callback receiver can be either a Pages route or an India-hosted forwarder without
+rewriting the handlers.
+
 ## 8. Recommended order
 
 1. ~~Pin D1 + D2 (constants and headers)~~ - **done**, live-verified, test-pinned.
 2. ~~Settle the D4 curve identity and encoding~~ - **done**; the remaining shared-secret offset
    hypothesis still needs fidelius-cli vectors before the HIP encrypt path is enabled.
-3. Settle the **India-hosting question** - blocks registering the real bridge URL, and can invalidate
-   the transport design. No code needed.
+3. Settle the **India-hosting question** (see 7b) - blocks registering the real bridge URL. Ask NHA
+   first; the fallback is Enterprise Regional Services or an India-hosted forwarder.
 4. Build M1 (ABHA capture + verification) - nothing else in ABDM can key on a patient without it.
 5. HFR identity on the tenant, and scan-and-share wired into the OPD Queue token.
 6. Rebuild the ingress transport per D3; wire the FollowCare reader; add care-context sources per HI type.
