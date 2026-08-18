@@ -187,8 +187,15 @@ export async function onRequest(context) {
   //   • /api/* — in-app AI, Resend-triggering endpoints, the emailed approve/reject links
   //     (/api/verifications/action), the native app, and cron. Each endpoint self-authorises.
   //   • /admin/* — the admin console gates itself with Google owner login (_adminauth.js).
+  //   • /atlas.js, /atlas.css, /atlas/* — the RadioAnatome viewer and its slice data, needed by the
+  //     login-free /validation clinical sign-off sheet below. DELIBERATELY NARROW: this is the atlas
+  //     module and its public-domain NLM imagery only — the clinical app bundle (app.js, engine, kb/,
+  //     MaiK) stays 404'd. Considered trade-off: without it there is no reachable sign-off sheet, which
+  //     means shipping unverified anatomy labels to students. Delete these two lines to close it again.
   if (url.pathname.startsWith("/api/") || url.pathname.startsWith("/admin") ||
-      url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare")) {
+      url.pathname.startsWith("/vendor/") || url.pathname.startsWith("/followcare") ||
+      url.pathname === "/atlas.js" || url.pathname === "/atlas.css" ||
+      url.pathname.startsWith("/atlas/")) {
     return next();
   }
 
@@ -211,7 +218,12 @@ export async function onRequest(context) {
   // "opd-display" is the login-free OPD waiting-room WALL screen: opened on a TV/monitor from a signed
   // …/opd-display?t=<org token> link, no app/account/cookie. Safe to expose — /api/queue/display self-
   // authorises via the signed token and returns a PHI-minimal board (first name + last initial, no MRN).
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display"];
+  // "validation" is the login-free RadioAnatome clinical sign-off sheet: an external radiologist opens
+  // stewardmd.in/validation from a private link — no StewardMD account, no app, no /realapp cookie — and
+  // marks each atlas module verified / needs-fix / rejected before the atlas is exposed to students, so it
+  // must resolve for that anonymous reviewer. Its own passphrase plus the APPEND-ONLY /api/validation
+  // record are what protect the sign-off; no PHI is involved at any point.
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }
