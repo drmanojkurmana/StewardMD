@@ -134,9 +134,18 @@ function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL 
 // sets env.STRONG_MODEL (a valid model, e.g. gemini-2.5-pro), a genuinely COMPLEX/reasoning query escalates
 // to it for better answers; everything else stays on flash. Unset STRONG_MODEL = current behaviour (no-op).
 function strongModel(env) { const m = env && env.STRONG_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+// FAST path (latency + cost): a SIMPLE (non-complex) query can run on a cheaper, non-"thinking" model.
+// gemini-2.5-flash keeps thinking even with thinkingBudget:0 (a known Google issue — thinking tokens
+// eat the output budget + wall-clock); gemini-2.5-flash-lite honours budget:0, so it is faster AND
+// ~2.4x cheaper. Set env.MAIK_FAST_MODEL=gemini-2.5-flash-lite to route simple queries there; complex
+// reasoning still uses the default (full flash). Unset = current behaviour (no-op). Validate quality first.
+function fastModel(env) { const m = env && env.MAIK_FAST_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
 function looksComplex(q) {
-  q = String(q || ""); if (q.length > 200) return true;
-  return /\b(why|compare|comparison|versus|\bvs\b|differentiate|difference between|mechanism|reconcile|trade[- ]?off|weigh|approach to|work ?up of|interpret|rationale|pros and cons|when to (choose|prefer)|first line vs)\b/i.test(q) || (q.match(/\?/g) || []).length > 1;
+  q = String(q || ""); if (q.length > 160) return true;
+  // Depth/reasoning cues -> keep on the full model. Anything NOT matching (a bare factual/dose/definition
+  // lookup) is eligible for the cheaper, faster fast-path model. Bias toward "complex" so quality is the
+  // default and only genuinely trivial questions are sped up.
+  return /\b(why|compare|comparison|versus|\bvs\b|differentiate|difference between|mechanism|reconcile|trade[- ]?off|weigh|approach|work ?up|workup|interpret|rationale|pros and cons|when to (choose|prefer)|first[- ]?line|manage|management|treat|treatment|regimen|protocol|differential|causes? of|etiolog|aetiolog|prophylaxis|evaluate|investigate|guideline|which (drug|antibiotic|agent|regimen)|how (to|do|should))\b/i.test(q) || (q.match(/\?/g) || []).length > 1;
 }
 
 // Vision/OCR uses a strong, FIXED multimodal model — deliberately NOT the admin text-model override
@@ -447,7 +456,10 @@ function failReason(e) {
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
 export async function callGemini(env, parts, maxTokens, opts) {
   // Tiered routing: a complex clinical query escalates to the stronger model, if the owner enabled one.
-  if (opts && opts.complex && !opts.model) { const sm = strongModel(env); if (sm) opts = Object.assign({}, opts, { model: sm }); }
+  if (opts && !opts.model) {
+    if (opts.complex) { const sm = strongModel(env); if (sm) opts = Object.assign({}, opts, { model: sm }); }        // hard query -> stronger model (opt-in)
+    else { const fm = fastModel(env); if (fm) opts = Object.assign({}, opts, { model: fm }); }                        // simple query -> cheaper/faster non-thinking model (opt-in)
+  }
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
