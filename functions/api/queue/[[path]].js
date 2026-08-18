@@ -425,7 +425,9 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "analytics") {
       const { s, err } = await loadSessionFor(env, url.searchParams.get("sessionId"), actor); if (err) return err;
       await requireSessionCap(env, actor, s, CAPS.ANALYTICS_VIEW);
-      return json({ ok: true, analytics: await Q.analytics(env, s) }, 200, request);
+      const analytics = await Q.analytics(env, s);
+      try { const rev = await BILL.revenueToday(env, s.orgId || s.hospitalId); if (rev) Object.assign(analytics, rev); } catch (e) {}   // clinic revenue dashboard: today's paid total (null when billing off)
+      return json({ ok: true, analytics: analytics }, 200, request);
     }
 
     // ---- Oncology treatment plans (Phase 2, data layer; no UI wiring yet - flag smd_onco_protocols
