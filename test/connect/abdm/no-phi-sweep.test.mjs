@@ -203,8 +203,14 @@ function scan(src, file) {
   const hits = [];
   for (let i = 0; i < lines.length; i++) {
     const line = lines[i];
+    // ABDM's own endpoints contain the token "abha" as a bounded word, in the host
+    // (https://abha.abdm.gov.in) and in the path (/abha/api/v3/...). Those are endpoints, not patient
+    // identifiers, so blank the ABDM URL literal out before matching identifiers. Narrow on purpose:
+    // only the literal is neutralised, so anything CONCATENATED onto it - a real abhaNumber or
+    // abhaAddress variable - is still caught. The planted-violation test pins both directions.
+    const probe = line.replace(/https?:\/\/[A-Za-z0-9.-]*abdm\.gov\.in[^"'`\s)]*/g, "ABDM_URL");
     for (const s of SINKS) {
-      if (s.re.test(line) && s.tiers.some((t) => t.test(line))) { hits.push({ file, line: i + 1, sink: s.name, text: line.trim().slice(0, 120) }); break; }
+      if (s.re.test(line) && s.tiers.some((t) => t.test(probe))) { hits.push({ file, line: i + 1, sink: s.name, text: line.trim().slice(0, 120) }); break; }
     }
   }
   return hits;
@@ -240,8 +246,19 @@ test("codebase-audit: the sweep WOULD flag every planted violation shape", () =>
     'await r2.put(`abdm/buffer/${txn}/${careContextReference}`, body);', // careContextReference in an R2 key
     'await db.prepare("INSERT ...").bind(id, abhaAddress).run();',       // raw ABHA into a D1 column (STRICT)
     'await r2.put("k", decryptedContent);',                              // decrypted plaintext persisted
+    'await fetch("https://abha.abdm.gov.in/x?id=" + abhaNumber);',       // ABDM host allowance must NOT hide a real leak
+    'const u = new URL("https://abhasbx.abdm.gov.in/" + abhaAddress);',  // ditto, sandbox host
   ];
   planted.forEach((code, idx) => assert.equal(scan(code, "planted-" + idx + ".js").length, 1, "planted violation NOT caught: " + code));
+});
+
+test("codebase-audit: an ABDM API hostname alone is not a PHI violation", () => {
+  const benign = [
+    'abhaApiHost: "https://abha.abdm.gov.in",',
+    'gateway: "https://dev.abdm.gov.in",',
+    'const cert = await fetch("https://abhasbx.abdm.gov.in/abha/api/v3/profile/public/certificate");',
+  ];
+  benign.forEach((code) => assert.deepEqual(scan(code, "benign.js"), [], "false positive on: " + code));
 });
 
 test("codebase-audit: careContextReference in a D1 column is the ACCEPTED protocol-visible exception (not flagged)", () => {

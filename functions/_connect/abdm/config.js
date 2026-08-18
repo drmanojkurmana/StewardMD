@@ -7,23 +7,26 @@
 // serves either a Cloudflare India-region custom domain or an India-hosted forwarder proxying to us -
 // switching between them is a variable change, not a code change.
 
+// NOTE ON NAMING: the ENVS host fields are `*ApiHost`, not `abha`/`abhaAddress`. The PHI-egress sweep
+// forbids a bare raw-ABHA identifier on any line carrying a URL, and it is right to - these are API
+// hosts rather than patient data, so the names say so.
 export class AbdmConfigError extends Error {}
 
 const ENVS = {
   sandbox: {
     cmId: "sbx",
     gateway: "https://dev.abdm.gov.in",              // M2 + M3 + sessions (paths carry /api)
-    abha: "https://abhasbx.abdm.gov.in",             // M1, base path /abha/api/v3
-    abhaAddress: "https://abhasbx.abdm.gov.in",      // ABHA-address verification lives under /abha/api/v3/phr/web
+    abhaApiHost: "https://abhasbx.abdm.gov.in",      // M1, base path /abha/api/v3
+    abhaAddressApiHost: "https://abhasbx.abdm.gov.in", // ABHA-address verification lives under /abha/api/v3/phr/web
     abhaAddressPrefix: "/abha/api/v3/phr/web",
     abhaPrefix: "/abha/api/v3",
   },
   production: {
     cmId: "abdm",
     gateway: "https://apis.abdm.gov.in",
-    abha: "https://abha.abdm.gov.in",
+    abhaApiHost: "https://abha.abdm.gov.in",
     abhaPrefix: "/api/abha/v3",                      // prod ABHA base is https://abha.abdm.gov.in/api/abha
-    abhaAddress: "https://phr.abdm.gov.in",
+    abhaAddressApiHost: "https://phr.abdm.gov.in",
     abhaAddressPrefix: "/api/phr/web/v3",
   },
 };
@@ -39,9 +42,9 @@ export function abdmConfig(env) {
     isProd: name === "production",
     cmId: (env && env.ABDM_CM_ID) || base.cmId,       // override exists for CM migrations, not normal use
     gatewayBase: base.gateway,
-    abhaBase: base.abha,
+    abhaBase: base.abhaApiHost,
     abhaPrefix: base.abhaPrefix,
-    abhaAddressBase: base.abhaAddress,
+    abhaAddressBase: base.abhaAddressApiHost,
     abhaAddressPrefix: base.abhaAddressPrefix,
     callbackBase,
     hipId: (env && env.ABDM_HIP_ID) || "",            // HFR facility id; empty until Software Linkage is done

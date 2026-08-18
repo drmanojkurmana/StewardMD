@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS connect_abha_link (
   tenant_id         TEXT NOT NULL,
   patient_abha_hash TEXT NOT NULL,
   abha_last4        TEXT,
-  abha_address      TEXT,
+  abha_address_sealed TEXT,   -- AES-256-GCM ciphertext (CONNECT_MASTER_KEY), never plaintext
   patient_ref       TEXT NOT NULL,
   created_at        TEXT NOT NULL,
   updated_at        TEXT NOT NULL,
