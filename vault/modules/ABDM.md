@@ -25,8 +25,11 @@ Merged, **inert**, mock-only. Both flags OFF ⇒ every `/api/connect/*` route 40
 provision cannot leak. No D1/R2 binding and no Pages secrets yet.
 **Sandbox bridge credentials DO exist** (client id `SBXID_062379`, MAIKNOWLEDGE LLP, approved
 2026-08-18) - kept outside the repo at `~/.stewardmd-secrets/abdm-sandbox.env`, never committed.
-ABDM currently has our bridge URL as a webhook.site placeholder and **no registered service**, so
-there is no HIP ID yet.
+**HIP/HIU ID = `IN2810006668`** ("StewardMD", sandbox HFR facility, submitted 2026-08-18), linked to
+bridge `SBXID_062379` as both HIP and HIU via
+`POST apihspsbx.../v4/int/v1/bridges/MutipleHRPAddUpdateServices` - the legacy
+`/gateway/v1/bridges/addUpdateServices` is retired (403). The bridge URL is still a webhook.site
+placeholder, which is deliberately useful: it captures ABDM's real callback payloads.
 Of the five recorded defects, **D1 (session headers) and D2 (V3 paths) are fixed and test-pinned**, and
 D4's encoding half is fixed; D3 (ingress shape) and D5 (care-context sources) remain.
 
@@ -67,9 +70,10 @@ D4's encoding half is fixed; D3 (ingress shape) and D5 (care-context sources) re
   has no jurisdictional restriction, and R2 jurisdictions are eu/fedramp only**, so consent artefacts
   would not be guaranteed India-resident. Ask NHA first; fallback is Enterprise Regional Services or a
   small India-hosted forwarder (Mumbai) with the ABDM state store there too.
-- Sandbox client id + secret (register at `sandbox.abdm.gov.in`), and an HFR facility id per hospital
-  (`hspsbx.abdm.gov.in` sandbox, `nhpr.abdm.gov.in` prod), linked to our client id via **Software
-  Linkage** on the facility portal.
+- ~~Sandbox client id + HFR facility id~~ **DONE**: client `SBXID_062379`, facility `IN2810006668`.
+- Production facilities are **not ours to register**: each hospital registers itself in HFR with its own
+  photographs and licences, then links our bridge id with the portal's **Software Linkage** button. We
+  are a Digital Solution Company and own no clinical establishment.
 
 ## Where it touches the rest of the app
 - **Scan-and-share is the [[OPD Queue]]**: the facility QR carries `hipid` + `counterid`; the patient's

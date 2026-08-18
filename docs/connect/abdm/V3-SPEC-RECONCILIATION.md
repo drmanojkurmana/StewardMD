@@ -391,6 +391,87 @@ addresses, and can add an explicit WAF allow rule for the callback path.
 seam so the callback receiver can be either a Pages route or an India-hosted forwarder without
 rewriting the handlers.
 
+## 7c. We are a DSC, not a health facility - what that changes (2026-08-18)
+
+An earlier draft of this note told the owner to "register a facility at hspsbx.abdm.gov.in". **That was
+wrong**, and it matters, because it sends a software company into a registry of physical clinics.
+
+StewardMD / MAIKNOWLEDGE LLP is a **Digital Solution Company**. We own no building, no signboard and no
+clinical establishment licence. The owner practises from home and holds no facility address proof. HFR
+registrations are checked by a human verifier against documents, so such a submission would likely be
+refused - and inventing a facility, a board photograph or an address proof is not an option.
+
+### The documented shortcut is dead
+
+"Working with ABDM APIs" (page last updated 29/07/2023) says a sandbox integrator may "simply declare a
+HIP/HIU ID without it being part of the health facility registry ... with no validations". **Verified
+2026-08-18: that path now fails.**
+
+| Attempt | Result |
+|---|---|
+| `POST /gateway/v1/bridges/addUpdateServices` (the endpoint NHA's own approval email quotes) | **403** `900908 "User is NOT authorized to access the Resource. API Subscription validation failed."` |
+| `POST apihspsbx.../v4/int/v1/bridges/MutipleHRPAddUpdateServices` with a made-up id | **400** `HIS-1070 "Facility ID must start with 'IN' followed by numeric characters"` |
+
+The NHPR endpoint authenticates our bridge token fine, so the blocker is purely the facility id: it must
+be HFR-shaped. Whether a well-formed-but-unregistered id is accepted is still unprobed.
+
+### RESOLVED 2026-08-18 - we have a HIP ID
+
+The owner registered a sandbox HFR facility through the portal and it linked cleanly:
+
+```
+facility   IN2810006668  "StewardMD"  (Visakhapatnam, Private, Clinic/Dispensary)
+bridge     SBXID_062379  "MAIKNOWLEDGE LLP"
+services   [{ id: IN2810006668, types: ["HIP","HIU"], active: true }]
+provider   {"identifier":{"name":"StewardMD","id":"IN2810006668"},"facilityType":["HIP","HIU"],"isHIP":true}
+```
+
+**The working link call** (the legacy `/gateway/v1/bridges/addUpdateServices` is retired - 403):
+
+```
+POST https://apihspsbx.abdm.gov.in/v4/int/v1/bridges/MutipleHRPAddUpdateServices
+Authorization: Bearer <gateway session token>
+{ "facilityId": "IN2810006668", "facilityName": "StewardMD",
+  "HRP": [ {"bridgeId":"SBXID_062379","hipName":"StewardMD","type":"HIP","active":true},
+           {"bridgeId":"SBXID_062379","hipName":"StewardMD","type":"HIU","active":true} ] }
+```
+
+Notes for whoever repeats this:
+- **One facility id serves both HIP and HIU** (FAQ Q22). Send both HRP entries; a `code 2500
+  "already associated"` on the second is benign idempotency noise, and the final `types` array is what
+  to check.
+- A facility is invisible to the gateway until it is linked to a bridge. Before linking,
+  `GET /providers/<id>` returns `400 "Invalid provider ID"` and the name search returns `[]`. That is
+  not a verification problem, it is just how provider discovery is populated.
+- The facility is "submitted", **not yet validated for existence**. Linking did not require validation.
+- Retire a link by re-sending with `"active": false`.
+- Script: `link-bridge.sh` (kept out of the repo, next to the sandbox credentials).
+
+### Consequences
+
+- **M1 needs no facility at all.** ABHA creation and verification run against `abhasbx.abdm.gov.in` with
+  only the client id + secret - no `X-HIP-ID`, no HFR record. Confirmed live. Every M1 certification case
+  (`CRT_ABHA_*`, `VRFY_ABHA_*`, `TAGGING_*`) is facility-free. So M1 is buildable and testable today.
+- **Only scan-and-share needs a HIP ID within M1** (`SHARE_PATIENT_PROFILE_701`), because the facility QR
+  carries `hipid`. It waits for a real facility.
+- **M2 and M3 need a HIP/HIU ID** - now satisfied by `IN2810006668`. What still gates a real callback is
+  the bridge URL (below) and mounted routes, not the facility.
+
+### How to get a HIP ID honestly
+
+1. **A partner hospital that is already HFR-registered links our bridge.** This is the production model:
+   the hospital registers itself, we remain the bridge, and each (facility, bridge) pair yields its own
+   HIP ID (FAQ Q24). Their facility manager uses **Software Linkage** and enters our client id. We never
+   register a facility. StewardMD already has the GIMSR relationship via Ward Sync.
+2. **Ask NHA for a sandbox integrator facility.** Production has `IN0110005723` "Integrator Testing Lab"
+   for exactly this purpose; ask `integration.support@nha.gov.in` for the sandbox equivalent, and report
+   the dead `addUpdateServices` endpoint while doing so.
+
+**Production is still not ours to register.** There, the hospital registers its own facility in HFR with
+its own photographs and licences, then links our bridge id via the portal's **Software Linkage** button
+(FAQ Q23 - the API is unnecessary for a UI-registered facility). One facility can link many bridge ids,
+each pair yielding its own HIP ID (FAQ Q24), so a hospital keeps whatever HMIS it already runs.
+
 ## 8. Recommended order
 
 1. ~~Pin D1 + D2 (constants and headers)~~ - **done**, live-verified, test-pinned.
