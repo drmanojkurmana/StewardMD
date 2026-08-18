@@ -70,6 +70,22 @@ export async function findLink(deps, { tenantId, abhaNumber }) {
 }
 
 /**
+ * Look up the binding directly by pseudonym. The HIP serve path only ever has the hash - ABDM sends a
+ * consent/discovery for a patient we know solely as `patient_abha_hash` - so it cannot use findLink(),
+ * which hashes a raw number it does not have.
+ */
+export async function findLinkByHash(deps, { tenantId, abhaHash }) {
+  const { db } = deps;
+  if (!db) throw new AbhaLinkError("no database binding", "no_db");
+  if (!tenantId || !abhaHash) throw new AbhaLinkError("tenant and pseudonym are required", "bad_lookup");
+  const row = await db.prepare(
+    `SELECT tenant_id, patient_abha_hash, abha_last4, abha_address_sealed, patient_ref, created_at, updated_at
+       FROM ${ABHA_LINK_TABLE} WHERE tenant_id = ? AND patient_abha_hash = ? LIMIT 1`)
+    .bind(tenantId, abhaHash).first();
+  return row || null;
+}
+
+/**
  * Bind an ABHA to a local patient, enforcing the one-to-one rule. Idempotent for the same pair;
  * throws `abha_already_linked` when the same ABHA is presented for a different patient id.
  */

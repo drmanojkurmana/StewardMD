@@ -29,6 +29,12 @@ function finalizeBundle(bundle, scope) {
 }
 
 // Build the injected connector ctx (no global state; PHI stays here). Shared by loadPatientContext + searchPatients.
+// EXPORTED for the ABDM HIP serve path. That path has NO StewardMD actor - ABDM is the caller and the
+// tenant comes from the correlation row - so it cannot use loadPatientContext(), which resolves an actor
+// first. It still needs an identical connector ctx, and duplicating one would fork the scope/secret/budget
+// rules that make it safe. Callers outside the request path must pass an already-authorised tenant.
+export function buildConnectorCtx(env, tenant, config, scope, t0, io) { return buildCtx(env, tenant, config, scope, t0, io); }
+
 function buildCtx(env, tenant, config, scope, t0, io) {
   const secrets = makeSecrets(env);
   return {
