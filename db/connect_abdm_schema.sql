@@ -66,3 +66,26 @@ CREATE TABLE IF NOT EXISTS connect_abha_link (
 );
 -- Reverse lookup: "which ABHA is this patient linked to?" for the registration screen.
 CREATE INDEX IF NOT EXISTS idx_abha_link_patient ON connect_abha_link (tenant_id, patient_ref);
+
+-- ABDM consented-records store (2026-08-19). Holds ONLY the records of patients who consented to share
+-- through ABDM - never the clinic database. Exists because linking a care context is a promise to serve
+-- it on demand with no human in the loop, which a local-first clinic cannot honour from the doctor's
+-- device (phone off, doctor moved on, twenty patients waiting).
+-- The blob lives in R2, sealed with the Connect master key; this table is the index. care_context_ref is
+-- stored here because it is protocol-visible by design and the erasure sweep needs it - it must never
+-- reach KV, a log line, a URL or an object key.
+CREATE TABLE IF NOT EXISTS connect_abdm_consented_record (
+  tenant_id         TEXT NOT NULL,
+  patient_abha_hash TEXT NOT NULL,      -- HMAC pseudonym, never a raw ABHA
+  ref_hash          TEXT NOT NULL,      -- sha256(care_context_ref); the object key uses this, not the ref
+  care_context_ref  TEXT NOT NULL,
+  hi_type           TEXT,
+  r2_key            TEXT NOT NULL,
+  bytes             INTEGER,
+  source            TEXT,               -- native-opd | connected-emr | local-clinic
+  created_at        TEXT NOT NULL,
+  updated_at        TEXT NOT NULL,
+  PRIMARY KEY (tenant_id, ref_hash)
+);
+-- Erasure on consent revoke / expiry / ABHA opt-out is by (tenant, patient).
+CREATE INDEX IF NOT EXISTS idx_consented_patient ON connect_abdm_consented_record (tenant_id, patient_abha_hash);
