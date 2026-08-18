@@ -199,16 +199,22 @@ ok("every category has a colour", all(str(c.get("color", "")).startswith("#") fo
 ok("every category has a label", all(c.get("label") for c in cats.values()))
 ok("structure ids are kebab-case", all(re.match(r"^[a-z0-9-]+$", k) for k in strs))
 
-ok("a known model label maps", structure_for_label(M, "Left-Thalamus") is not None)
-ok("mapped targets exist as structures", structure_for_label(M, "Left-Thalamus") in strs)
+# The BRAIN mapping is intentionally images-only (no model_labels): classical tissue
+# segmentation failed on 4 mm T1 because skull-stripping keeps the scalp attached. So the
+# label-resolution assertions target a mapping that actually HAS a model, and an empty
+# model_labels must come with a written reason rather than being silently empty.
+ok("brain mapping is images-only", not M.get("model_labels"))
+ok("an images-only mapping explains itself", bool(M.get("_why_no_auto_pins")))
+ok("an images-only mapping still ships a structure palette for the author tool", len(strs) >= 5)
+
+AB = load_mapping("ct-abdomen-axial")
+ab_strs = structures_block(AB)
+ok("a known model label maps", structure_for_label(AB, "liver") is not None)
+ok("mapped targets exist as structures", structure_for_label(AB, "liver") in ab_strs)
 ok("left and right collapse to ONE structure (bilateral pins, one entry)",
-   structure_for_label(M, "Left-Thalamus") == structure_for_label(M, "Right-Thalamus"))
-ok("an unmapped label is skipped", structure_for_label(M, "Some-Label-We-Do-Not-Show") is None)
-ok("an explicitly nulled label is skipped", structure_for_label(M, "Unknown") is None)
-ok("white matter structures are marked hand-authored",
-   any(s.get("hand_authored") for s in strs.values()))
-ok("every hand-authored structure is white matter",
-   all(s.get("category") == "white-matter" for s in strs.values() if s.get("hand_authored")))
+   structure_for_label(AB, "kidney_left") == structure_for_label(AB, "kidney_right"))
+ok("an unmapped label is skipped", structure_for_label(AB, "Some-Label-We-Do-Not-Show") is None)
+ok("an explicitly nulled label is skipped", structure_for_label(AB, "kidney_cyst_left") is None)
 ok("mapping cites no blocked source",
    not re.search(r"(?i)freesurfer licen|fsl licen|jhu|mindboggle", json.dumps(M)))
 
