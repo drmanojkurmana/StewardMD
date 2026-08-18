@@ -58,12 +58,17 @@ Ordered by severity. Each is evidence-backed; the evidence is cited so it can be
 `REQUEST-ID`, `TIMESTAMP`, `X-CM-ID` on `POST /api/hiecm/gateway/v3/sessions`, and the
 Swagger marks all three `required: true`. Missing them yields "Access Denied".
 
-Also: success is **202**, not 200 (`res.ok` already covers it), and the 202 body in the Swagger
-carries **only `accessToken`** - no `expiresIn`. `FIELDS.resExpiresIn` is therefore probably wrong;
-derive expiry from the JWT `exp` claim instead.
+**Live-verified 2026-08-18** with our own bridge credentials: with the three headers the sandbox
+returns **200**; without them it returns **401**. So this defect is confirmed, not inferred.
 
-The rest of `FIELDS` is **confirmed correct**: request `clientId` / `clientSecret` /
-`grantType: "client_credentials"`, response `accessToken`.
+Two corrections to what the Swagger implies. Real success is **200**, not the documented 202
+(`res.ok` covers both). And the real body **does** carry `expiresIn` (1200 seconds), plus
+`refreshToken`, `refreshExpiresIn` (1800) and `tokenType: "bearer"` - the Swagger's 202 example shows
+only `accessToken`, which misled an earlier draft of this note into calling `FIELDS.resExpiresIn`
+wrong. It is correct. **All six `FIELDS` values are confirmed against the live response.**
+
+Status: **FIXED** - `session()` now sends `REQUEST-ID` / `TIMESTAMP` / `X-CM-ID`, covered by
+`test/connect/abdm/gateway.test.mjs`.
 
 ### D2 - four of five `ENDPOINTS` are wrong (legacy v0.5 shapes)
 
@@ -75,7 +80,9 @@ The rest of `FIELDS` is **confirmed correct**: request `clientId` / `clientSecre
 | `hiRequest` | `/health-information/cm/request` | `/api/hiecm/data-flow/v3/health-information/request` |
 | `hiNotify` | `/health-information/notify` | `/api/hiecm/data-flow/v3/health-information/notify` |
 
-The one-file config seam (ADR-2H) did its job: this is a constants edit.
+The one-file config seam (ADR-2H) did its job: this was a constants edit.
+Status: **FIXED and pinned by test**. `GET /api/hiecm/gateway/v3/bridge-services` was live-verified 200
+with a real session token, which confirms the `/api/hiecm/` base and the bearer/header contract.
 
 ### D3 - the ingress contract is structurally wrong (real rework)
 
@@ -138,13 +145,30 @@ X25519 (RFC 7748) outputs the *Montgomery* u. The two differ by the constant `A/
 naive X25519 implementation can produce a **different shared secret** and every decryption will fail
 with no useful error.
 
-**Do not guess this.** Resolve it before writing any HIP encrypt path:
-1. Clone `https://github.com/mgrmtech/fidelius-cli` (Java, the reference implementation).
-2. Generate a key material pair with it, and encrypt a known plaintext.
-3. Feed the same inputs to our `fidelius.js` and compare byte-for-byte.
-4. If they disagree, implement the Weierstrass path (or the Montgomery↔Weierstrass conversion) - use
-   a vetted library (`@noble/curves` runs in Workers) rather than hand-rolled field arithmetic.
-5. Keep the known-answer vectors as a permanent test.
+**The curve identity is now settled by arithmetic** (2026-08-18). The official example point
+satisfies the short-Weierstrass equation `y² = x³ + ax + b (mod 2²⁵⁵-19)` with BouncyCastle's
+`curve25519` parameters, **and** maps onto the Montgomery curve exactly via `u = x - A/3 (mod p)`,
+`A = 486662`, with the same `Y`. Both checks pass. So it is definitively the Weierstrass named curve,
+and WebCrypto X25519 *can* interoperate through an exact conversion.
+
+Status: **encoding FIXED.** `fidelius.js` gained `abdmKeyToX25519()` / `x25519KeyToAbdm()`, which
+convert the 65-byte wire form to and from X25519 raw (including the big-endian ↔ little-endian flip),
+validate that an inbound point is actually on the curve, and pass a 32-byte key through untouched.
+Nine known-answer and round-trip tests in `test/connect/abdm/fidelius-wire-keyformat.test.mjs`, one of
+them anchored on the official Swagger key. Publishing either square root of `Y` is safe: `(x,-y)` is
+`-(x,y)` and `k·(-P) = -(k·P)`, so the peer derives the same shared `x` either way.
+
+**One hypothesis remains open, and it is the blocker for the HIP encrypt path.** BouncyCastle's
+`ECDHBasicAgreement` returns the x-coordinate on the curve it operates on - the *Weierstrass* x -
+whereas X25519 `deriveBits` returns the *Montgomery* u. Those differ by the same `A/3`. If Fidelius
+feeds the Weierstrass x into HKDF, we must apply the offset before deriving, or every decryption fails
+with no useful error. `montgomeryUToWeierstrassX()` implements the shim, is unit-tested, and is
+deliberately **not wired into `sealBundle` / `openEntry`** until it is proven.
+
+To settle it: clone `https://github.com/mgrmtech/fidelius-cli`, generate key material and encrypt a
+known plaintext with it, feed the identical inputs to our `fidelius.js`, and compare byte-for-byte.
+Keep the resulting vectors as a permanent test. A live sandbox data-push round-trip against the ABHA
+PHR app is the other acceptable proof.
 
 ### D5 - Only one care-context source, and its reader is not wired
 
@@ -275,13 +299,51 @@ admission**, which maps onto our existing units:
 Bundles may be **unstructured** (PDF/image attachment) to begin with; structured coded FHIR is expected
 "within a couple of years" of compliance. Start unstructured, keep the builder pluggable.
 
+## 7a. Live sandbox state (verified 2026-08-18)
+
+Bridge credentials arrived by email the same day (approved 14:44). Verified directly against the
+sandbox; credentials live outside the repo at `~/.stewardmd-secrets/abdm-sandbox.env` (mode 600) and
+are **not** committed.
+
+| Check | Result |
+|---|---|
+| `POST /api/hiecm/gateway/v3/sessions` with the 3 headers | **200** + `accessToken`, `expiresIn` 1200, `refreshToken`, `refreshExpiresIn` 1800, `tokenType` bearer |
+| Same call **without** the 3 headers | **401** (proves D1) |
+| `GET /api/hiecm/gateway/v3/bridge-services` | **200** |
+| `GET /abha/api/v3/profile/public/certificate` | **200**, RSA public key returned |
+
+Our bridge as ABDM currently sees it:
+
+```
+id        SBXID_062379
+name      MAIKNOWLEDGE LLP
+entity    Private
+url       https://webhook.site/… (placeholder from registration)
+active    true
+services  []            <-- no HIP/HIU service registered yet
+```
+
+Two owner actions follow from that:
+
+1. **Register a facility** at `https://hspsbx.abdm.gov.in/home` to get an HFR id, then use the portal's
+   **Software Linkage** button to bind it to client id `SBXID_062379`. That is what populates
+   `services` and yields the HIP ID. The same facility id serves both the HIP (M2) and HIU (M3) roles.
+2. **Replace the bridge URL** with our real callback base URL via
+   `PATCH /api/hiecm/gateway/v3/bridge/url` - base URL only, no endpoint path (FAQ Q30). This depends
+   on the India-hosting decision below, so leave the placeholder until that is settled.
+
+Note the NHA approval email's own instructions are **stale** - it quotes the retired
+`/gateway/v1/bridges` and `addUpdateServices` endpoints. Use the V3 paths above.
+
 ## 8. Recommended order
 
-1. **Resolve D4** (Fidelius known-answer test) and the **India-hosting question** - both can invalidate
-   design work, and neither needs code.
-2. Pin D1 + D2 (constants and headers) - small, mechanical.
-3. Build M1 (ABHA capture + verification) - nothing else in ABDM can key on a patient without it.
-4. HFR identity on the tenant, and scan-and-share wired into the OPD Queue token.
-5. Rebuild the ingress transport per D3; wire the FollowCare reader; add care-context sources per HI type.
-6. M3 consent + HIU rendering.
-7. Sandbox exit: FT agency, WASA, HTC.
+1. ~~Pin D1 + D2 (constants and headers)~~ - **done**, live-verified, test-pinned.
+2. ~~Settle the D4 curve identity and encoding~~ - **done**; the remaining shared-secret offset
+   hypothesis still needs fidelius-cli vectors before the HIP encrypt path is enabled.
+3. Settle the **India-hosting question** - blocks registering the real bridge URL, and can invalidate
+   the transport design. No code needed.
+4. Build M1 (ABHA capture + verification) - nothing else in ABDM can key on a patient without it.
+5. HFR identity on the tenant, and scan-and-share wired into the OPD Queue token.
+6. Rebuild the ingress transport per D3; wire the FollowCare reader; add care-context sources per HI type.
+7. M3 consent + HIU rendering.
+8. Sandbox exit: FT agency, WASA, HTC.
