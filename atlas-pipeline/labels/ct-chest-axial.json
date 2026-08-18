@@ -1,0 +1,293 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US)",
+  "_geometry": "TotalSegmentator `total` (Apache-2.0 code and weights), run on our own public-domain CT",
+  "_model_values_note": "REQUIRED before building. Integer -> label LUT for the segmentation you actually run; values differ between TotalSegmentator versions. Populate with: build.py --print-seg-values <seg.nii.gz>, then map each integer to the label name used in model_labels below. An unmapped integer is skipped, so a partial LUT is safe — the structure simply does not appear.",
+  "_clinical_note": "Lobar anatomy is the tie-in to the pneumonia / antibiotic pathway: a lobe named here is the same lobe named in a CAP or HAP recommendation.",
+  "categories": {
+    "airway": {
+      "label": "Airway",
+      "color": "#7ee081"
+    },
+    "vessel-artery": {
+      "label": "Artery",
+      "color": "#ff8080"
+    },
+    "vessel-vein": {
+      "label": "Vein",
+      "color": "#8fb8ff"
+    },
+    "viscus": {
+      "label": "Viscus",
+      "color": "#ffd479"
+    },
+    "bone": {
+      "label": "Bone",
+      "color": "#ffffff"
+    },
+    "muscle": {
+      "label": "Muscle",
+      "color": "#e0a0c0"
+    }
+  },
+  "structures": {
+    "thorax": {
+      "name": "Thorax",
+      "category": "viscus"
+    },
+    "lung": {
+      "name": "Lung",
+      "category": "airway",
+      "parent": "thorax",
+      "definition": "The lungs are the essential organs of respiration, occupying the pleural cavities on either side of the mediastinum."
+    },
+    "upper-lobe-left": {
+      "name": "Left upper lobe",
+      "category": "airway",
+      "parent": "lung",
+      "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+    },
+    "lower-lobe-left": {
+      "name": "Left lower lobe",
+      "category": "airway",
+      "parent": "lung",
+      "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+    },
+    "upper-lobe-right": {
+      "name": "Right upper lobe",
+      "category": "airway",
+      "parent": "lung",
+      "definition": "The right lung is divided by oblique and horizontal fissures into upper, middle and lower lobes."
+    },
+    "middle-lobe-right": {
+      "name": "Right middle lobe",
+      "category": "airway",
+      "parent": "lung",
+      "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+    },
+    "lower-lobe-right": {
+      "name": "Right lower lobe",
+      "category": "airway",
+      "parent": "lung",
+      "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+    },
+    "trachea": {
+      "name": "Trachea",
+      "category": "airway",
+      "parent": "thorax",
+      "definition": "The trachea is a cartilaginous and membranous tube extending from the larynx to its bifurcation at the carina."
+    },
+    "esophagus": {
+      "name": "Oesophagus",
+      "category": "viscus",
+      "parent": "thorax",
+      "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+    },
+    "thyroid-gland": {
+      "name": "Thyroid gland",
+      "category": "viscus",
+      "definition": "The thyroid gland is a highly vascular organ situated in front of the neck, consisting of two lobes joined by an isthmus."
+    },
+    "heart": {
+      "name": "Heart",
+      "category": "viscus",
+      "parent": "thorax",
+      "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+    },
+    "left-atrial-appendage": {
+      "name": "Left atrial appendage",
+      "category": "viscus",
+      "parent": "heart",
+      "definition": "The left auricle is a small conical pouch projecting from the upper anterior part of the left atrium."
+    },
+    "aorta": {
+      "name": "Aorta",
+      "category": "vessel-artery",
+      "parent": "thorax",
+      "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+    },
+    "pulmonary-artery": {
+      "name": "Pulmonary artery",
+      "category": "vessel-artery",
+      "parent": "thorax",
+      "definition": "The pulmonary artery conveys venous blood from the right ventricle to the lungs."
+    },
+    "pulmonary-vein": {
+      "name": "Pulmonary vein",
+      "category": "vessel-vein",
+      "parent": "thorax",
+      "definition": "The pulmonary veins return oxygenated blood from the lungs to the left atrium."
+    },
+    "superior-vena-cava": {
+      "name": "Superior vena cava",
+      "category": "vessel-vein",
+      "parent": "thorax",
+      "definition": "The superior vena cava returns blood from the upper half of the body to the right atrium."
+    },
+    "inferior-vena-cava": {
+      "name": "Inferior vena cava",
+      "category": "vessel-vein",
+      "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+    },
+    "brachiocephalic-trunk": {
+      "name": "Brachiocephalic trunk",
+      "category": "vessel-artery",
+      "definition": "The brachiocephalic trunk is the largest branch of the arch of the aorta, dividing into the right subclavian and right common carotid arteries."
+    },
+    "brachiocephalic-vein": {
+      "name": "Brachiocephalic vein",
+      "category": "vessel-vein",
+      "definition": "The brachiocephalic veins are formed by the union of the internal jugular and subclavian veins on each side."
+    },
+    "subclavian-artery": {
+      "name": "Subclavian artery",
+      "category": "vessel-artery",
+      "definition": "The subclavian artery supplies the upper limb, passing between the scalene muscles."
+    },
+    "common-carotid-artery": {
+      "name": "Common carotid artery",
+      "category": "vessel-artery",
+      "definition": "The common carotid artery ascends the neck and divides into external and internal carotid arteries."
+    },
+    "vertebral-column": {
+      "name": "Vertebral column",
+      "category": "bone"
+    },
+    "thoracic-vertebra": {
+      "name": "Thoracic vertebra",
+      "category": "bone",
+      "parent": "vertebral-column",
+      "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies."
+    },
+    "cervical-vertebra": {
+      "name": "Cervical vertebra",
+      "category": "bone",
+      "parent": "vertebral-column",
+      "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+    },
+    "rib": {
+      "name": "Rib",
+      "category": "bone",
+      "parent": "thorax",
+      "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton."
+    },
+    "sternum": {
+      "name": "Sternum",
+      "category": "bone",
+      "parent": "thorax",
+      "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall."
+    },
+    "costal-cartilage": {
+      "name": "Costal cartilage",
+      "category": "bone",
+      "parent": "thorax",
+      "definition": "The costal cartilages are bars of hyaline cartilage prolonging the ribs forward to the sternum."
+    },
+    "clavicle": {
+      "name": "Clavicle",
+      "category": "bone",
+      "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+    },
+    "scapula": {
+      "name": "Scapula",
+      "category": "bone",
+      "definition": "The scapula is a large flat triangular bone on the posterolateral thoracic wall."
+    },
+    "humerus": {
+      "name": "Humerus",
+      "category": "bone",
+      "definition": "The humerus is the longest and largest bone of the upper limb."
+    },
+    "spinal-cord": {
+      "name": "Spinal cord",
+      "category": "viscus",
+      "parent": "vertebral-column",
+      "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+    },
+    "autochthonous-back-muscle": {
+      "name": "Deep back muscles",
+      "category": "muscle",
+      "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+    }
+  },
+  "model_labels": {
+    "lung_upper_lobe_left": "upper-lobe-left",
+    "lung_lower_lobe_left": "lower-lobe-left",
+    "lung_upper_lobe_right": "upper-lobe-right",
+    "lung_middle_lobe_right": "middle-lobe-right",
+    "lung_lower_lobe_right": "lower-lobe-right",
+    "trachea": "trachea",
+    "esophagus": "esophagus",
+    "thyroid_gland": "thyroid-gland",
+    "heart": "heart",
+    "atrial_appendage_left": "left-atrial-appendage",
+    "aorta": "aorta",
+    "pulmonary_artery": "pulmonary-artery",
+    "pulmonary_vein": "pulmonary-vein",
+    "superior_vena_cava": "superior-vena-cava",
+    "inferior_vena_cava": "inferior-vena-cava",
+    "brachiocephalic_trunk": "brachiocephalic-trunk",
+    "brachiocephalic_vein_left": "brachiocephalic-vein",
+    "brachiocephalic_vein_right": "brachiocephalic-vein",
+    "subclavian_artery_left": "subclavian-artery",
+    "subclavian_artery_right": "subclavian-artery",
+    "common_carotid_artery_left": "common-carotid-artery",
+    "common_carotid_artery_right": "common-carotid-artery",
+    "sternum": "sternum",
+    "costal_cartilages": "costal-cartilage",
+    "spinal_cord": "spinal-cord",
+    "clavicula_left": "clavicle",
+    "clavicula_right": "clavicle",
+    "scapula_left": "scapula",
+    "scapula_right": "scapula",
+    "humerus_left": "humerus",
+    "humerus_right": "humerus",
+    "autochthon_left": "autochthonous-back-muscle",
+    "autochthon_right": "autochthonous-back-muscle",
+    "vertebrae_T1": "thoracic-vertebra",
+    "vertebrae_T2": "thoracic-vertebra",
+    "vertebrae_T3": "thoracic-vertebra",
+    "vertebrae_T4": "thoracic-vertebra",
+    "vertebrae_T5": "thoracic-vertebra",
+    "vertebrae_T6": "thoracic-vertebra",
+    "vertebrae_T7": "thoracic-vertebra",
+    "vertebrae_T8": "thoracic-vertebra",
+    "vertebrae_T9": "thoracic-vertebra",
+    "vertebrae_T10": "thoracic-vertebra",
+    "vertebrae_T11": "thoracic-vertebra",
+    "vertebrae_T12": "thoracic-vertebra",
+    "vertebrae_C1": "cervical-vertebra",
+    "vertebrae_C2": "cervical-vertebra",
+    "vertebrae_C3": "cervical-vertebra",
+    "vertebrae_C4": "cervical-vertebra",
+    "vertebrae_C5": "cervical-vertebra",
+    "vertebrae_C6": "cervical-vertebra",
+    "vertebrae_C7": "cervical-vertebra",
+    "rib_left_1": "rib",
+    "rib_left_2": "rib",
+    "rib_left_3": "rib",
+    "rib_left_4": "rib",
+    "rib_left_5": "rib",
+    "rib_left_6": "rib",
+    "rib_left_7": "rib",
+    "rib_left_8": "rib",
+    "rib_left_9": "rib",
+    "rib_left_10": "rib",
+    "rib_left_11": "rib",
+    "rib_left_12": "rib",
+    "rib_right_1": "rib",
+    "rib_right_2": "rib",
+    "rib_right_3": "rib",
+    "rib_right_4": "rib",
+    "rib_right_5": "rib",
+    "rib_right_6": "rib",
+    "rib_right_7": "rib",
+    "rib_right_8": "rib",
+    "rib_right_9": "rib",
+    "rib_right_10": "rib",
+    "rib_right_11": "rib",
+    "rib_right_12": "rib"
+  },
+  "model_values": {},
+  "_status": "RESERVED, NOT BUILT. This mapping targets TotalSegmentator on LIVE clinical CT. Visible Human cannot feed it: measured lung parenchyma is -540 to -570 HU vs -700 to -850 in live lung (cadaver lungs were never inflated; the fresh pre-freezing series measures the same), so lobar fissures are not resolvable and lobe labels would be guesses. Built instead: ct-thorax-axial, which claims only what this data supports."
+}

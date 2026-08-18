@@ -1,0 +1,89 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918 (PD-US)",
+  "_geometry": "Classical thresholding + position on public-domain CT; no neural segmenter",
+  "_why_no_lobes": "Measured on this volume: lung parenchyma is -540 to -570 HU where live clinical lung is -700 to -850, because a cadaver's lungs were never inflated (the fresh pre-freezing series measures the same). Lobar fissures are not resolvable, so LOBES ARE DELIBERATELY NOT CLAIMED.",
+  "_why_no_sides": "Two independent landmarks disagree on this cadaver about which image side is the patient's left (lung asymmetry says one thing, heart position the other, on an 8% margin that flips sign). NO SIDE IS ASSERTED ANYWHERE. A missing distinction is a gap; a wrong side teaches wrong anatomy.",
+  "_why_no_levels": "Position alone cannot number an individual rib or vertebral level, so structures are named generically.",
+  "categories": {
+    "airway": {
+      "label": "Airway",
+      "color": "#7ee081"
+    },
+    "bone": {
+      "label": "Bone",
+      "color": "#ffffff"
+    },
+    "viscus": {
+      "label": "Viscus",
+      "color": "#ffd479"
+    },
+    "csf": {
+      "label": "Canal",
+      "color": "#7fd9e8"
+    }
+  },
+  "structures": {
+    "thorax": {
+      "name": "Thorax",
+      "category": "viscus"
+    },
+    "lung": {
+      "name": "Lung",
+      "category": "airway",
+      "parent": "thorax",
+      "definition": "The lungs are the essential organs of respiration, occupying the pleural cavities on either side of the mediastinum. Each is conical, with an apex reaching above the first rib and a concave base resting on the diaphragm."
+    },
+    "thoracic-cage": {
+      "name": "Thoracic cage",
+      "category": "bone",
+      "parent": "thorax"
+    },
+    "rib": {
+      "name": "Rib",
+      "category": "bone",
+      "parent": "thoracic-cage",
+      "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton. They are twelve in number on either side, articulating behind with the vertebral column."
+    },
+    "sternum": {
+      "name": "Sternum",
+      "category": "bone",
+      "parent": "thoracic-cage",
+      "definition": "The sternum is a flat narrow bone forming the middle of the anterior wall of the thorax, consisting of the manubrium, the body and the xiphoid process."
+    },
+    "thoracic-vertebra": {
+      "name": "Thoracic vertebra",
+      "category": "bone",
+      "parent": "thoracic-cage",
+      "definition": "The thoracic vertebrae are twelve in number and are distinguished by the costal facets on the sides of their bodies for articulation with the heads of the ribs."
+    },
+    "vertebral-canal": {
+      "name": "Vertebral canal",
+      "category": "csf",
+      "parent": "thoracic-vertebra",
+      "definition": "The vertebral canal is formed by the vertebral foramina in series and contains the spinal cord with its meninges and vessels."
+    }
+  },
+  "model_labels": {
+    "lung_region": "lung",
+    "sternum": "sternum",
+    "vertebra_thoracic": "thoracic-vertebra",
+    "rib": "rib",
+    "spinal_canal": "vertebral-canal"
+  },
+  "model_values": {
+    "1": "lung_region",
+    "2": "sternum",
+    "3": "vertebra_thoracic",
+    "4": "rib",
+    "5": "spinal_canal"
+  },
+  "max_pins_per_slice": {
+    "rib": 4,
+    "thoracic-vertebra": 3,
+    "lung": 2,
+    "vertebral-canal": 2
+  },
+  "_why_rib_cap": "Ten identical 'Rib' labels per slice saturate both gutters and add no information beyond the first few. The four largest cross-sections are kept.",
+  "_why_caps": "One structure can appear many times in one slice (a sagittal cut shows ~12 vertebral bodies; an axial chest shows ~10 ribs). Identical repeated labels saturate both gutters and add nothing after the first few, so the largest cross-sections are kept."
+}
