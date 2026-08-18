@@ -79,7 +79,11 @@
     "5": "spinal_canal"
   },
   "max_pins_per_slice": {
-    "rib": 4
+    "rib": 4,
+    "thoracic-vertebra": 3,
+    "lung": 2,
+    "vertebral-canal": 2
   },
-  "_why_rib_cap": "Ten identical 'Rib' labels per slice saturate both gutters and add no information beyond the first few. The four largest cross-sections are kept."
+  "_why_rib_cap": "Ten identical 'Rib' labels per slice saturate both gutters and add no information beyond the first few. The four largest cross-sections are kept.",
+  "_why_caps": "One structure can appear many times in one slice (a sagittal cut shows ~12 vertebral bodies; an axial chest shows ~10 ribs). Identical repeated labels saturate both gutters and add nothing after the first few, so the largest cross-sections are kept."
 }

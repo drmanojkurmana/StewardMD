@@ -238,5 +238,14 @@
     "88": "iliopsoas_left",
     "89": "iliopsoas_right"
   },
-  "_actually_found": "Run 2026-08-18 on Visible Human frozenCT found ONLY: small_bowel, colon, vertebrae_L1-L3, aorta, autochthon (deep back muscles), iliopsoas. NO liver, spleen, kidney, pancreas or gallbladder — exactly as the HU measurement predicted: in this cadaver those organs all sit in one undifferentiated 25-90 HU band, so a model trained on live CT cannot separate them. Those structures stay in this mapping but receive no pins and are pruned from the built module. They need contrast-enhanced live CT, or hand-authoring."
+  "_actually_found": "Run 2026-08-18 on Visible Human frozenCT found ONLY: small_bowel, colon, vertebrae_L1-L3, aorta, autochthon (deep back muscles), iliopsoas. NO liver, spleen, kidney, pancreas or gallbladder — exactly as the HU measurement predicted: in this cadaver those organs all sit in one undifferentiated 25-90 HU band, so a model trained on live CT cannot separate them. Those structures stay in this mapping but receive no pins and are pruned from the built module. They need contrast-enhanced live CT, or hand-authoring.",
+  "max_pins_per_slice": {
+    "colon": 3,
+    "small-bowel": 3,
+    "lumbar-vertebra": 3,
+    "iliopsoas": 2,
+    "autochthonous-back-muscle": 2,
+    "aorta": 2
+  },
+  "_why_caps": "One structure can appear many times in one slice (a sagittal cut shows ~12 vertebral bodies; an axial chest shows ~10 ribs). Identical repeated labels saturate both gutters and add nothing after the first few, so the largest cross-sections are kept."
 }

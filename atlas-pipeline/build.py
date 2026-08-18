@@ -182,6 +182,9 @@ def main(argv=None):
     ap.add_argument("--subtitle", default="")
     ap.add_argument("--region", default="Brain")
     ap.add_argument("--modality", default="MRI")
+    ap.add_argument("--labels", default=None,
+                    help="reuse another module's label mapping (reformats of the same "
+                         "volume share one mapping instead of duplicating it)")
     ap.add_argument("--print-seg-values", metavar="NIFTI",
                     help="print the integer label values in a segmentation and exit")
     ap.add_argument("--dry-run", action="store_true")
@@ -195,7 +198,7 @@ def main(argv=None):
 
     require_clear(a.source)                    # gate BEFORE any data is touched
     repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-    mapping = load_mapping(a.module)
+    mapping = load_mapping(a.labels or a.module)
     out_dir = os.path.join(repo, "atlas", a.module)
 
     if a.dry_run:

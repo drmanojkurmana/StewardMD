@@ -1,0 +1,814 @@
+{
+ "id": "ct-head-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical thresholding on public-domain CT; air-bone contrast only, no neural segmenter",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  },
+  "airway": {
+   "label": "Air space",
+   "color": "#7fd9e8"
+  }
+ },
+ "structures": {
+  "head": {
+   "name": "Head",
+   "category": "bone"
+  },
+  "paranasal-sinus": {
+   "name": "Paranasal sinus",
+   "category": "airway",
+   "parent": "head",
+   "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised."
+  },
+  "skull": {
+   "name": "Skull",
+   "category": "bone",
+   "parent": "head",
+   "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-head-sagittal/001.webp",
+   "aspect": 2.1133,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-head-sagittal/002.webp",
+   "aspect": 2.1133,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-head-sagittal/003.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "paranasal-sinus",
+     "x": 55.0,
+     "y": 59.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 57.7,
+     "y": 55.7
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-head-sagittal/004.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 33.7,
+     "y": 81.9
+    },
+    {
+     "s": "skull",
+     "x": 63.7,
+     "y": 51.5
+    },
+    {
+     "s": "skull",
+     "x": 64.0,
+     "y": 39.8
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 54.9,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-head-sagittal/005.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 33.7,
+     "y": 57.2
+    },
+    {
+     "s": "skull",
+     "x": 50.1,
+     "y": 31.1
+    },
+    {
+     "s": "skull",
+     "x": 67.1,
+     "y": 31.8
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 54.9,
+     "y": 62.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.1,
+     "y": 59.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 65.2,
+     "y": 57.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 65.6,
+     "y": 60.4
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-head-sagittal/006.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 28.0,
+     "y": 55.6
+    },
+    {
+     "s": "skull",
+     "x": 33.5,
+     "y": 81.9
+    },
+    {
+     "s": "skull",
+     "x": 38.1,
+     "y": 27.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.1,
+     "y": 59.1
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 60.3,
+     "y": 64.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 60.7,
+     "y": 56.1
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 61.9,
+     "y": 63.6
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-head-sagittal/007.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 25.2,
+     "y": 58.2
+    },
+    {
+     "s": "skull",
+     "x": 39.8,
+     "y": 75.0
+    },
+    {
+     "s": "skull",
+     "x": 82.4,
+     "y": 53.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 31.1,
+     "y": 82.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.2,
+     "y": 59.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.9,
+     "y": 54.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 59.2,
+     "y": 63.4
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-head-sagittal/008.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 22.9,
+     "y": 57.1
+    },
+    {
+     "s": "skull",
+     "x": 32.1,
+     "y": 92.1
+    },
+    {
+     "s": "skull",
+     "x": 57.6,
+     "y": 56.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 23.5,
+     "y": 31.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 27.8,
+     "y": 61.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 35.2,
+     "y": 80.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 52.5,
+     "y": 57.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-head-sagittal/009.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 33.3,
+     "y": 85.4
+    },
+    {
+     "s": "skull",
+     "x": 54.2,
+     "y": 56.5
+    },
+    {
+     "s": "skull",
+     "x": 87.5,
+     "y": 31.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 21.8,
+     "y": 31.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 31.3,
+     "y": 61.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 44.5,
+     "y": 0.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 54.1,
+     "y": 60.7
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-head-sagittal/010.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 24.8,
+     "y": 95.4
+    },
+    {
+     "s": "skull",
+     "x": 57.7,
+     "y": 72.5
+    },
+    {
+     "s": "skull",
+     "x": 62.0,
+     "y": 99.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 20.3,
+     "y": 31.9
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 24.9,
+     "y": 18.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 29.0,
+     "y": 62.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 31.7,
+     "y": 82.3
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-head-sagittal/011.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 21.2,
+     "y": 76.5
+    },
+    {
+     "s": "skull",
+     "x": 56.5,
+     "y": 83.1
+    },
+    {
+     "s": "skull",
+     "x": 91.2,
+     "y": 53.8
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 19.4,
+     "y": 32.9
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 21.1,
+     "y": 58.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 29.6,
+     "y": 46.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 40.5,
+     "y": 51.7
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-head-sagittal/012.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 20.3,
+     "y": 75.5
+    },
+    {
+     "s": "skull",
+     "x": 55.5,
+     "y": 76.1
+    },
+    {
+     "s": "skull",
+     "x": 91.4,
+     "y": 54.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 8.8,
+     "y": 64.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 19.0,
+     "y": 33.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 33.2,
+     "y": 47.1
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 43.9,
+     "y": 54.7
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-head-sagittal/013.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 20.3,
+     "y": 74.3
+    },
+    {
+     "s": "skull",
+     "x": 58.5,
+     "y": 93.2
+    },
+    {
+     "s": "skull",
+     "x": 91.8,
+     "y": 36.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 19.2,
+     "y": 33.1
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 21.1,
+     "y": 41.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 22.5,
+     "y": 20.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 40.9,
+     "y": 51.7
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-head-sagittal/014.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 49.8,
+     "y": 0.0
+    },
+    {
+     "s": "skull",
+     "x": 56.0,
+     "y": 76.0
+    },
+    {
+     "s": "skull",
+     "x": 63.5,
+     "y": 86.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 19.5,
+     "y": 34.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 21.9,
+     "y": 22.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 33.5,
+     "y": 47.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 41.1,
+     "y": 51.8
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-head-sagittal/015.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 26.4,
+     "y": 94.4
+    },
+    {
+     "s": "skull",
+     "x": 58.0,
+     "y": 71.4
+    },
+    {
+     "s": "skull",
+     "x": 92.1,
+     "y": 38.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 20.2,
+     "y": 33.1
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 26.4,
+     "y": 39.5
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 32.5,
+     "y": 63.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 36.5,
+     "y": 52.5
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-head-sagittal/016.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 34.5,
+     "y": 86.2
+    },
+    {
+     "s": "skull",
+     "x": 43.1,
+     "y": 56.8
+    },
+    {
+     "s": "skull",
+     "x": 91.5,
+     "y": 43.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 21.2,
+     "y": 32.4
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 28.0,
+     "y": 38.8
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 32.0,
+     "y": 63.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 32.0,
+     "y": 83.6
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-head-sagittal/017.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 22.4,
+     "y": 58.0
+    },
+    {
+     "s": "skull",
+     "x": 35.8,
+     "y": 92.5
+    },
+    {
+     "s": "skull",
+     "x": 89.1,
+     "y": 50.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 22.4,
+     "y": 32.5
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 26.2,
+     "y": 22.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 28.9,
+     "y": 63.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.0,
+     "y": 61.2
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-head-sagittal/018.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 24.5,
+     "y": 59.5
+    },
+    {
+     "s": "skull",
+     "x": 45.7,
+     "y": 90.5
+    },
+    {
+     "s": "skull",
+     "x": 85.1,
+     "y": 51.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 24.4,
+     "y": 35.5
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 27.1,
+     "y": 27.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 27.7,
+     "y": 62.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 56.2,
+     "y": 62.8
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-head-sagittal/019.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 27.7,
+     "y": 35.3
+    },
+    {
+     "s": "skull",
+     "x": 34.9,
+     "y": 81.6
+    },
+    {
+     "s": "skull",
+     "x": 62.2,
+     "y": 61.0
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.7,
+     "y": 62.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 61.3,
+     "y": 69.7
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 62.0,
+     "y": 64.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 65.0,
+     "y": 65.2
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-head-sagittal/020.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 31.6,
+     "y": 59.4
+    },
+    {
+     "s": "skull",
+     "x": 44.4,
+     "y": 38.9
+    },
+    {
+     "s": "skull",
+     "x": 63.6,
+     "y": 63.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 65.3,
+     "y": 66.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 65.4,
+     "y": 62.2
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 66.5,
+     "y": 58.3
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 68.2,
+     "y": 64.1
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-head-sagittal/021.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 35.5,
+     "y": 81.9
+    },
+    {
+     "s": "skull",
+     "x": 55.8,
+     "y": 33.6
+    },
+    {
+     "s": "paranasal-sinus",
+     "x": 55.9,
+     "y": 63.7
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-head-sagittal/022.webp",
+   "aspect": 2.1133,
+   "pins": [
+    {
+     "s": "paranasal-sinus",
+     "x": 58.6,
+     "y": 60.0
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-head-sagittal/023.webp",
+   "aspect": 2.1133,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-head-sagittal/024.webp",
+   "aspect": 2.1133,
+   "pins": []
+  }
+ ]
+}

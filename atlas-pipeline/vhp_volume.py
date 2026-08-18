@@ -46,16 +46,67 @@ def crop_pair(vol, seg, margin=22, target_aspect=1.15):
     return vol[x0:x1, y0:y1, :], seg[x0:x1, y0:y1, :], (x0, x1, y0, y1)
 
 
+def reformat(vol, seg, plane, spacing=SPACING):
+    """Re-slice an axial [X, Y, Z] pair into another plane, transposing BOTH identically.
+
+    Array convention in / out is [display-col axis, display-row axis (increasing UPWARD),
+    slice axis], because orient.to_display() does flipud(a.T) — so keeping that convention
+    means the whole downstream pipeline works on a reformatted volume unchanged, pins and
+    all. Input axes: X = patient left->right, Y = posterior->anterior, Z = slice index
+    with 0 most SUPERIOR (VHP numbering increases inferiorly).
+
+    Returns (vol, seg, (col_spacing, row_spacing, slice_spacing)).
+    """
+    sx, sy, sz = spacing
+    if plane == "axial":
+        return vol, seg, (sx, sy, sz)
+
+    if plane == "coronal":
+        # cols = X (left-right), rows = superior-up (so flip Z), slices = Y anterior->posterior
+        v = np.flip(np.transpose(vol, (0, 2, 1)), axis=1)
+        g = np.flip(np.transpose(seg, (0, 2, 1)), axis=1)
+        v, g = np.flip(v, axis=2), np.flip(g, axis=2)      # slice order A -> P
+        return v, g, (sx, sz, sy)
+
+    if plane == "sagittal":
+        # cols = anterior on the LEFT (so flip Y), rows = superior-up (flip Z), slices = X
+        v = np.flip(np.flip(np.transpose(vol, (1, 2, 0)), axis=0), axis=1)
+        g = np.flip(np.flip(np.transpose(seg, (1, 2, 0)), axis=0), axis=1)
+        return v, g, (sy, sz, sx)
+
+    raise SystemExit("plane must be axial, coronal or sagittal")
+
+
 def main():
     ap = argparse.ArgumentParser()
     sub = ap.add_subparsers(dest="cmd", required=True)
     b = sub.add_parser("stack"); b.add_argument("--raw-dir", required=True); b.add_argument("--out", required=True)
+    r = sub.add_parser("reformat")
+    r.add_argument("--vol", required=True); r.add_argument("--seg", required=True)
+    r.add_argument("--plane", required=True, choices=["axial", "coronal", "sagittal"])
+    r.add_argument("--out-vol", required=True); r.add_argument("--out-seg", required=True)
+    r.add_argument("--spacing", default=None, help="cx,cy,cz of the INPUT axial volume")
+
     c = sub.add_parser("crop")
     c.add_argument("--vol", required=True); c.add_argument("--seg", required=True)
     c.add_argument("--out-vol", required=True); c.add_argument("--out-seg", required=True)
     a = ap.parse_args()
     import nibabel as nib
     aff = np.diag(list(SPACING) + [1.0])
+
+    if a.cmd == "reformat":
+        vol = np.asanyarray(nib.load(a.vol).dataobj)
+        seg = np.asanyarray(nib.load(a.seg).dataobj)
+        sp = tuple(float(x) for x in a.spacing.split(",")) if a.spacing else SPACING
+        v, g, out_sp = reformat(vol, seg, a.plane, sp)
+        v, g, box = crop_pair(v, g)
+        aff2 = np.diag(list(out_sp) + [1.0])
+        nib.save(nib.Nifti1Image(v.astype(np.int16), aff2), a.out_vol)
+        nib.save(nib.Nifti1Image(g.astype(np.uint16), aff2), a.out_seg)
+        print("%s: %s spacing %s aspect %.2f labels %d"
+              % (a.plane, v.shape, tuple(round(x, 4) for x in out_sp),
+                 v.shape[0] / v.shape[1], len(np.unique(g)) - 1))
+        return
 
     if a.cmd == "stack":
         vol, files = stack(a.raw_dir)

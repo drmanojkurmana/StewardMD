@@ -1,0 +1,860 @@
+{
+ "id": "ct-thorax-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical thresholding + position on public-domain CT; no neural segmenter",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "airway": {
+   "label": "Airway",
+   "color": "#7ee081"
+  },
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  },
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "csf": {
+   "label": "Canal",
+   "color": "#7fd9e8"
+  }
+ },
+ "structures": {
+  "lung": {
+   "name": "Lung",
+   "category": "airway",
+   "parent": "thorax",
+   "definition": "The lungs are the essential organs of respiration, occupying the pleural cavities on either side of the mediastinum. Each is conical, with an apex reaching above the first rib and a concave base resting on the diaphragm."
+  },
+  "rib": {
+   "name": "Rib",
+   "category": "bone",
+   "parent": "thoracic-cage",
+   "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton. They are twelve in number on either side, articulating behind with the vertebral column."
+  },
+  "sternum": {
+   "name": "Sternum",
+   "category": "bone",
+   "parent": "thoracic-cage",
+   "definition": "The sternum is a flat narrow bone forming the middle of the anterior wall of the thorax, consisting of the manubrium, the body and the xiphoid process."
+  },
+  "thoracic-cage": {
+   "name": "Thoracic cage",
+   "category": "bone",
+   "parent": "thorax"
+  },
+  "thoracic-vertebra": {
+   "name": "Thoracic vertebra",
+   "category": "bone",
+   "parent": "thoracic-cage",
+   "definition": "The thoracic vertebrae are twelve in number and are distinguished by the costal facets on the sides of their bodies for articulation with the heads of the ribs."
+  },
+  "thorax": {
+   "name": "Thorax",
+   "category": "viscus"
+  },
+  "vertebral-canal": {
+   "name": "Vertebral canal",
+   "category": "csf",
+   "parent": "thoracic-vertebra",
+   "definition": "The vertebral canal is formed by the vertebral foramina in series and contains the spinal cord with its meninges and vessels."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-thorax-sagittal/001.webp",
+   "aspect": 1.0167,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-thorax-sagittal/002.webp",
+   "aspect": 1.0167,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-thorax-sagittal/003.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 67.3,
+     "y": 83.8
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-thorax-sagittal/004.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 56.6,
+     "y": 1.9
+    },
+    {
+     "s": "rib",
+     "x": 65.0,
+     "y": 0.0
+    },
+    {
+     "s": "rib",
+     "x": 68.4,
+     "y": 83.9
+    },
+    {
+     "s": "rib",
+     "x": 68.7,
+     "y": 86.0
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-thorax-sagittal/005.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 51.0,
+     "y": 0.0
+    },
+    {
+     "s": "rib",
+     "x": 69.1,
+     "y": 1.4
+    },
+    {
+     "s": "rib",
+     "x": 74.5,
+     "y": 27.0
+    },
+    {
+     "s": "rib",
+     "x": 80.3,
+     "y": 35.8
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-thorax-sagittal/006.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 32.3,
+     "y": 84.0
+    },
+    {
+     "s": "rib",
+     "x": 43.7,
+     "y": 63.8
+    },
+    {
+     "s": "rib",
+     "x": 57.8,
+     "y": 45.9
+    },
+    {
+     "s": "rib",
+     "x": 61.1,
+     "y": 63.1
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-thorax-sagittal/007.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 44.2,
+     "y": 52.5
+    },
+    {
+     "s": "lung",
+     "x": 61.4,
+     "y": 55.5
+    },
+    {
+     "s": "rib",
+     "x": 73.4,
+     "y": 34.7
+    },
+    {
+     "s": "rib",
+     "x": 76.7,
+     "y": 41.7
+    },
+    {
+     "s": "rib",
+     "x": 76.7,
+     "y": 53.3
+    },
+    {
+     "s": "rib",
+     "x": 77.9,
+     "y": 65.5
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-thorax-sagittal/008.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 35.9,
+     "y": 49.6
+    },
+    {
+     "s": "lung",
+     "x": 60.6,
+     "y": 61.1
+    },
+    {
+     "s": "rib",
+     "x": 82.2,
+     "y": 38.7
+    },
+    {
+     "s": "rib",
+     "x": 84.5,
+     "y": 50.4
+    },
+    {
+     "s": "rib",
+     "x": 84.7,
+     "y": 61.2
+    },
+    {
+     "s": "rib",
+     "x": 84.8,
+     "y": 74.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-thorax-sagittal/009.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 33.4,
+     "y": 49.5
+    },
+    {
+     "s": "rib",
+     "x": 36.8,
+     "y": 5.2
+    },
+    {
+     "s": "rib",
+     "x": 52.2,
+     "y": 4.1
+    },
+    {
+     "s": "rib",
+     "x": 84.1,
+     "y": 36.0
+    },
+    {
+     "s": "rib",
+     "x": 86.8,
+     "y": 84.2
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-thorax-sagittal/010.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 21.6,
+     "y": 100.0
+    },
+    {
+     "s": "lung",
+     "x": 29.5,
+     "y": 54.3
+    },
+    {
+     "s": "rib",
+     "x": 37.3,
+     "y": 9.3
+    },
+    {
+     "s": "rib",
+     "x": 83.4,
+     "y": 34.3
+    },
+    {
+     "s": "rib",
+     "x": 84.2,
+     "y": 43.7
+    },
+    {
+     "s": "rib",
+     "x": 86.3,
+     "y": 56.1
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-thorax-sagittal/011.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 32.2,
+     "y": 36.4
+    },
+    {
+     "s": "lung",
+     "x": 53.1,
+     "y": 16.4
+    },
+    {
+     "s": "sternum",
+     "x": 30.2,
+     "y": 23.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 66.6,
+     "y": 7.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 72.2,
+     "y": 16.0
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 78.4,
+     "y": 35.5
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 69.0,
+     "y": 6.2
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 81.1,
+     "y": 36.6
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-thorax-sagittal/012.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 26.3,
+     "y": 39.4
+    },
+    {
+     "s": "lung",
+     "x": 54.6,
+     "y": 15.0
+    },
+    {
+     "s": "sternum",
+     "x": 21.6,
+     "y": 36.7
+    },
+    {
+     "s": "sternum",
+     "x": 50.8,
+     "y": 0.0
+    },
+    {
+     "s": "sternum",
+     "x": 52.0,
+     "y": 1.4
+    },
+    {
+     "s": "sternum",
+     "x": 53.3,
+     "y": 0.0
+    },
+    {
+     "s": "sternum",
+     "x": 59.2,
+     "y": 4.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 80.4,
+     "y": 73.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 81.8,
+     "y": 63.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 83.0,
+     "y": 50.9
+    },
+    {
+     "s": "rib",
+     "x": 60.8,
+     "y": 100.0
+    },
+    {
+     "s": "rib",
+     "x": 66.4,
+     "y": 100.0
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 67.2,
+     "y": 9.0
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 70.7,
+     "y": 17.8
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-thorax-sagittal/013.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 16.6,
+     "y": 100.0
+    },
+    {
+     "s": "lung",
+     "x": 57.9,
+     "y": 12.3
+    },
+    {
+     "s": "sternum",
+     "x": 10.4,
+     "y": 80.8
+    },
+    {
+     "s": "sternum",
+     "x": 11.4,
+     "y": 76.1
+    },
+    {
+     "s": "sternum",
+     "x": 54.2,
+     "y": 1.2
+    },
+    {
+     "s": "sternum",
+     "x": 55.0,
+     "y": 0.0
+    },
+    {
+     "s": "sternum",
+     "x": 58.4,
+     "y": 4.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 73.0,
+     "y": 16.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 74.4,
+     "y": 36.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 82.9,
+     "y": 50.7
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 74.6,
+     "y": 97.7
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 76.3,
+     "y": 74.3
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-thorax-sagittal/014.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 32.6,
+     "y": 30.1
+    },
+    {
+     "s": "lung",
+     "x": 51.9,
+     "y": 10.5
+    },
+    {
+     "s": "sternum",
+     "x": 9.5,
+     "y": 67.1
+    },
+    {
+     "s": "sternum",
+     "x": 10.9,
+     "y": 64.4
+    },
+    {
+     "s": "sternum",
+     "x": 11.5,
+     "y": 57.1
+    },
+    {
+     "s": "sternum",
+     "x": 15.0,
+     "y": 46.2
+    },
+    {
+     "s": "sternum",
+     "x": 30.7,
+     "y": 16.2
+    },
+    {
+     "s": "sternum",
+     "x": 31.5,
+     "y": 11.8
+    },
+    {
+     "s": "sternum",
+     "x": 32.9,
+     "y": 7.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 81.3,
+     "y": 32.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 81.7,
+     "y": 52.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 84.2,
+     "y": 66.5
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 79.6,
+     "y": 63.7
+    },
+    {
+     "s": "vertebral-canal",
+     "x": 81.1,
+     "y": 67.2
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-thorax-sagittal/015.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 15.5,
+     "y": 98.2
+    },
+    {
+     "s": "lung",
+     "x": 31.4,
+     "y": 35.3
+    },
+    {
+     "s": "rib",
+     "x": 35.2,
+     "y": 8.5
+    },
+    {
+     "s": "rib",
+     "x": 83.4,
+     "y": 76.0
+    },
+    {
+     "s": "rib",
+     "x": 83.9,
+     "y": 63.7
+    },
+    {
+     "s": "rib",
+     "x": 84.9,
+     "y": 54.1
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-thorax-sagittal/016.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 18.1,
+     "y": 97.8
+    },
+    {
+     "s": "lung",
+     "x": 34.1,
+     "y": 36.9
+    },
+    {
+     "s": "rib",
+     "x": 35.9,
+     "y": 4.0
+    },
+    {
+     "s": "rib",
+     "x": 51.8,
+     "y": 2.3
+    },
+    {
+     "s": "rib",
+     "x": 85.9,
+     "y": 79.9
+    },
+    {
+     "s": "rib",
+     "x": 86.1,
+     "y": 67.3
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-thorax-sagittal/017.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 30.1,
+     "y": 48.5
+    },
+    {
+     "s": "lung",
+     "x": 64.3,
+     "y": 67.1
+    },
+    {
+     "s": "rib",
+     "x": 81.7,
+     "y": 45.7
+    },
+    {
+     "s": "rib",
+     "x": 83.6,
+     "y": 58.4
+    },
+    {
+     "s": "rib",
+     "x": 84.9,
+     "y": 71.4
+    },
+    {
+     "s": "rib",
+     "x": 85.3,
+     "y": 84.3
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-thorax-sagittal/018.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 43.9,
+     "y": 46.9
+    },
+    {
+     "s": "lung",
+     "x": 64.3,
+     "y": 44.8
+    },
+    {
+     "s": "rib",
+     "x": 74.4,
+     "y": 38.4
+    },
+    {
+     "s": "rib",
+     "x": 75.6,
+     "y": 49.4
+    },
+    {
+     "s": "rib",
+     "x": 77.4,
+     "y": 60.4
+    },
+    {
+     "s": "rib",
+     "x": 88.4,
+     "y": 39.9
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-thorax-sagittal/019.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "lung",
+     "x": 43.3,
+     "y": 61.2
+    },
+    {
+     "s": "rib",
+     "x": 28.3,
+     "y": 60.2
+    },
+    {
+     "s": "rib",
+     "x": 51.0,
+     "y": 43.8
+    },
+    {
+     "s": "rib",
+     "x": 51.2,
+     "y": 33.7
+    },
+    {
+     "s": "rib",
+     "x": 81.4,
+     "y": 32.7
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-thorax-sagittal/020.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 38.0,
+     "y": 79.0
+    },
+    {
+     "s": "rib",
+     "x": 47.2,
+     "y": 84.6
+    },
+    {
+     "s": "rib",
+     "x": 60.5,
+     "y": 90.2
+    },
+    {
+     "s": "rib",
+     "x": 74.4,
+     "y": 21.9
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-thorax-sagittal/021.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 43.4,
+     "y": 2.2
+    },
+    {
+     "s": "rib",
+     "x": 51.6,
+     "y": 2.2
+    },
+    {
+     "s": "rib",
+     "x": 64.4,
+     "y": 78.0
+    },
+    {
+     "s": "rib",
+     "x": 68.7,
+     "y": 88.8
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-thorax-sagittal/022.webp",
+   "aspect": 1.0167,
+   "pins": [
+    {
+     "s": "rib",
+     "x": 40.5,
+     "y": 2.0
+    },
+    {
+     "s": "rib",
+     "x": 51.1,
+     "y": 2.4
+    },
+    {
+     "s": "rib",
+     "x": 54.5,
+     "y": 2.2
+    },
+    {
+     "s": "rib",
+     "x": 58.6,
+     "y": 2.2
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-thorax-sagittal/023.webp",
+   "aspect": 1.0167,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-thorax-sagittal/024.webp",
+   "aspect": 1.0167,
+   "pins": []
+  }
+ ]
+}

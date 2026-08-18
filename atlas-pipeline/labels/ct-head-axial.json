@@ -7,18 +7,45 @@
   "_why_sinus_is_generic": "WHICH sinus (frontal, maxillary, sphenoid, ethmoid) would be a position guess. The air cells are labelled generically instead.",
   "_why_no_sides": "Same as the thorax module: no reliable left/right indicator on this cadaver, so no side is asserted.",
   "_clinical_note": "Sinus and mastoid air-cell anatomy is the tie-in to the sinusitis / otitis antibiotic pathways.",
-
   "categories": {
-    "bone": { "label": "Bone", "color": "#ffffff" },
-    "airway": { "label": "Air space", "color": "#7fd9e8" }
+    "bone": {
+      "label": "Bone",
+      "color": "#ffffff"
+    },
+    "airway": {
+      "label": "Air space",
+      "color": "#7fd9e8"
+    }
   },
-
   "structures": {
-    "head": { "name": "Head", "category": "bone" },
-    "skull": { "name": "Skull", "category": "bone", "parent": "head", "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint." },
-    "paranasal-sinus": { "name": "Paranasal sinus", "category": "airway", "parent": "head", "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised." }
+    "head": {
+      "name": "Head",
+      "category": "bone"
+    },
+    "skull": {
+      "name": "Skull",
+      "category": "bone",
+      "parent": "head",
+      "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint."
+    },
+    "paranasal-sinus": {
+      "name": "Paranasal sinus",
+      "category": "airway",
+      "parent": "head",
+      "definition": "The paranasal sinuses are air-filled cavities within the frontal, maxillary, ethmoid and sphenoid bones, communicating with the nasal cavity and lined by mucous membrane. The mastoid air cells of the temporal bone are similarly pneumatised."
+    }
   },
-
-  "model_labels": { "skull": "skull", "air_cell": "paranasal-sinus" },
-  "model_values": { "1": "skull", "2": "air_cell" }
+  "model_labels": {
+    "skull": "skull",
+    "air_cell": "paranasal-sinus"
+  },
+  "model_values": {
+    "1": "skull",
+    "2": "air_cell"
+  },
+  "max_pins_per_slice": {
+    "skull": 3,
+    "paranasal-sinus": 4
+  },
+  "_why_caps": "One structure can appear many times in one slice (a sagittal cut shows ~12 vertebral bodies; an axial chest shows ~10 ribs). Identical repeated labels saturate both gutters and add nothing after the first few, so the largest cross-sections are kept."
 }
