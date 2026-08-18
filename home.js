@@ -3458,7 +3458,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // keyword-matched a random disease (a real case: "Ok First Line Treatment?" after
       // an ascites answer retrieved FIRST Bite Syndrome). Any non-generic token means
       // the clinician may be naming a NEW topic → fall through to normal routing.
-      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
+      var GENERIC_FU = /^(ok(ay)?|yes|yeah|yep|sure|please|pls|go|ahead|and|so|also|what|whats|about|the|of|for|in|a|an|is|are|its|tell|me|give|now|then|this|that|first|second|third|line|initial|choice|best|treatment|treat|therapy|therapies|management|manage|mx|rx|drug|drugs|medication|medications|medicine|medicines|med|meds|recommend|recommended|suggest|suggested|suggestion|suggestions|prescribe|prescribed|prescription|write|writing|should|shall|can|could|would|will|you|we|i|need|use|used|using|which|when|why|how|better|safe|safer|safety|alternative|alternatives|avoid|contraindication|contraindications|interaction|interactions|side|effect|effects|adverse|acute|chronic|severe|mild|moderate|start|starting|begin|prefer|preferred|do|does|to|with|on|or|as|at|than|vs|any|renal|hepatic|kidney|liver|pregnancy|pregnant|elderly|adult|child|children|paediatric|pediatric|neonatal|neonate|geriatric|dose|doses|dosing|option|options|step|steps|investigation|investigations|workup|work-up|test|tests|lab|labs|complication|complications|cause|causes|sign|signs|symptom|symptoms|prognosis|criteria|classification|type|types|feature|features|diagnosis|differential|differentials|monitoring|follow|followup|up|red|flag|flags)$/;
       if (wc <= 7) {
         var toksF = n.replace(/\?/g, "").split(" ").filter(Boolean);   // maikNorm keeps '?' — drop it for token matching
         if (toksF.length && toksF.every(function (w) { return GENERIC_FU.test(w); })) {
@@ -3528,6 +3528,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             srcHTML = '<details class="maik-src" style="margin-top:6px"><summary>' + MK.book + r.sources.length + ' web source' + (r.sources.length > 1 ? 's' : '') + '</summary><ol>' + items + '</ol></details>';
           }
           container.insertAdjacentHTML("beforeend", '<div class="maik-b ai" style="margin-top:8px"><div class="maik-attr" style="display:flex;align-items:center;gap:6px;font:600 11px var(--sans,system-ui);color:var(--slate-soft,#94a3b8);margin-bottom:6px">' + svg("spark", "smd-ico") + '<span>MaiK</span><span style="opacity:.7">· web-sourced, verify independently</span></div>' + bd + srcHTML + '</div>');
+          // Remember the topic after a web answer too, so a follow-up ("what medicines?", "dose?") stays in
+          // context instead of being resolved cold. (KB answers already set _maikTopic via maikRenderAnswer.)
+          try { if (maikV2()) { _maikTopic = { topic: maikCanonTopic(q), question: q, depth: "concise", lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; _maikTurns.push({ q: q, a: String(r.text).replace(/\s+/g, " ").slice(0, 320) }); if (_maikTurns.length > 8) _maikTurns.shift(); } } catch (e) {}
           try { scroll(); } catch (e) {} _persistWeb();
         } else if (r && r.reason === "quota") {
           container.insertAdjacentHTML("beforeend", '<div class="maik-welcome" style="margin-top:8px">Web research is unavailable right now (usage limit reached). Please verify against a reference source.</div>');
@@ -4269,10 +4272,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try { var blob = new Blob([tr.text], { type: "text/plain" }); var url = URL.createObjectURL(blob); var a = document.createElement("a"); a.href = url; a.download = "maik-conversation.txt"; document.body.appendChild(a); a.click(); setTimeout(function () { try { URL.revokeObjectURL(url); a.remove(); } catch (e) {} }, 800); toast("Saved conversation."); } catch (e) { maikCopyText(tr.text); }
     }
     function maikExportPDF(tr) {
+      var full = '<!doctype html><html><head><meta charset="utf-8"><title>MaiK conversation</title><style>body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;color:#0b1220;padding:32px;max-width:720px;margin:0 auto}h1{font-size:18px;margin:0 0 2px}.dt{color:#64748b;font-size:12px;margin-bottom:18px}.q{font-weight:700;margin:16px 0 2px;color:#0e6e63}.a{white-space:pre-wrap;margin:0}.ft{margin-top:26px;border-top:1px solid #e6ebf0;padding-top:8px;color:#64748b;font-size:11px}</style></head><body>' + tr.html + '</body></html>';
+      // Native (Android/iOS): real PDF via the shared renderer (window.open/print is dead in the WebView, which
+      // is why "Save as PDF" was silently giving text). Web: keep print-to-PDF.
+      if (window.SMD_IS_NATIVE && window.SMD_NATIVE && SMD_NATIVE.sharePdfFromHtml) {
+        toast("Building PDF…");
+        SMD_NATIVE.sharePdfFromHtml(full, "maik-conversation", "MaiK conversation").catch(function () { toast("Couldn’t make a PDF — sharing as text."); maikExportText(tr); });
+        return;
+      }
       try {
         var w = window.open("", "_blank");
         if (!w) { toast("Allow pop-ups to save PDF, or use Share."); maikExportText(tr); return; }
-        w.document.write('<!doctype html><html><head><meta charset="utf-8"><title>MaiK conversation</title><style>body{font:14px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif;color:#0b1220;padding:32px;max-width:720px;margin:0 auto}h1{font-size:18px;margin:0 0 2px}.dt{color:#64748b;font-size:12px;margin-bottom:18px}.q{font-weight:700;margin:16px 0 2px;color:#0e6e63}.a{white-space:pre-wrap;margin:0}.ft{margin-top:26px;border-top:1px solid #e6ebf0;padding-top:8px;color:#64748b;font-size:11px}</style></head><body>' + tr.html + '</body></html>');
+        w.document.write(full);
         w.document.close();
         setTimeout(function () { try { w.focus(); w.print(); } catch (e) {} }, 350);
       } catch (e) { maikExportText(tr); }

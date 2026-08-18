@@ -70,6 +70,12 @@
     catch (e) { return ""; }
   }
   function coreSource(p) { try { var c = (p && p.evidence && p.evidence.core || [])[0]; return c && c.source; } catch (e) { return null; } }
+  // Lifecycle/evidence badge on the shared severity ramp: current->stable, superseded->warning, draft->info.
+  function evBadge(status) {
+    status = status || "unknown";
+    var cls = status === "current" ? "rds-badge--stable" : status === "superseded" ? "rds-badge--warning" : status === "draft" ? "rds-badge--info" : "";
+    return '<span class="rds-badge ' + cls + '">' + esc(status) + "</span>";
+  }
 
   function findEntryHtml(entry, protocol, compareOn) {
     entry = entry || {};
@@ -77,16 +83,15 @@
     var matchTxt = conf.length ? conf.join(", ") : "none fully confirmed";
     var needTxt = (entry.unconfirmed && entry.unconfirmed.length) ? entry.unconfirmed.join(", ") : "";
     return '<div class="of-entry" data-of-id="' + esc(entry.id) + '">' +
-      '<div class="of-entry-h">' + esc(entry.name || entry.id) + (entry.protocolVersion ? ' <span class="of-ver">v' + esc(entry.protocolVersion) + "</span>" : "") + "</div>" +
+      '<div class="of-entry-h">' + esc(entry.name || entry.id) + (entry.protocolVersion ? ' <span class="of-ver">v' + esc(entry.protocolVersion) + "</span>" : "") + " " + evBadge(entry.evidenceStatus) + "</div>" +
       '<div class="of-entry-crit"><b>Matched criteria:</b> ' + esc(matchTxt) + "</div>" +
       (needTxt ? '<div class="of-entry-crit of-need"><b>Needs verification:</b> ' + esc(needTxt) + "</div>" : "") +
       '<div class="of-entry-why"><b>Why suggested:</b> ' + esc(entry.rationale || "") + "</div>" +
-      '<div class="of-entry-ev">Evidence status: ' + esc(entry.evidenceStatus || "unknown") + "</div>" +
       evPanel(entry.evidenceStatus, coreSource(protocol)) +
       '<div class="of-entry-actions">' +
-        '<button class="oe-btn ghost" data-of-act="details:' + esc(entry.id) + '">VIEW DETAILS</button>' +
-        '<button class="oe-btn ghost' + (compareOn ? " on" : "") + '" data-of-act="cmp:' + esc(entry.id) + '">COMPARE' + (compareOn ? " (selected)" : "") + "</button>" +
-        '<button class="oe-btn primary" data-of-act="select:' + esc(entry.id) + '">SELECT</button>' +
+        '<button class="oe-btn" data-of-act="details:' + esc(entry.id) + '">View details</button>' +
+        '<button class="oe-btn' + (compareOn ? " on" : "") + '" data-of-act="cmp:' + esc(entry.id) + '">Compare' + (compareOn ? " (selected)" : "") + "</button>" +
+        '<button class="oe-btn primary" data-of-act="select:' + esc(entry.id) + '">Select</button>' +
       "</div></div>";
   }
 
@@ -100,7 +105,7 @@
   function renderFind(pheno, protocols, compareIds) {
     compareIds = compareIds || [];
     var applicable = recommend(pheno, protocols).applicable || [];
-    var head = '<div class="of-sec-h">APPLICABLE STANDARD PROTOCOLS</div>';
+    var head = '<div class="of-sec-h">Applicable standard protocols</div>';
     if (applicable.length === 1) head += '<div class="of-note of-review">1 applicable protocol identified - review required</div>';
     var listHtml;
     if (!applicable.length) {
@@ -110,7 +115,7 @@
         return findEntryHtml(e, protoById(protocols, e.id), compareIds.indexOf(e.id) >= 0);
       }).join("");
     }
-    var cmpBar = compareIds.length >= 2 ? '<button class="oe-btn primary of-cmpbar" data-of-act="cmp-go">COMPARE ' + compareIds.length + " SELECTED</button>" : "";
+    var cmpBar = compareIds.length >= 2 ? '<button class="oe-btn primary of-cmpbar" data-of-act="cmp-go">Compare ' + compareIds.length + " selected</button>" : "";
     return phenotypeStrip(pheno) + head + cmpBar + listHtml;
   }
 
@@ -124,13 +129,13 @@
       cmpRow("Cycle length", reg.cycleLengthDays != null ? reg.cycleLengthDays + " days" : "") +
       cmpRow("Cycles", reg.cycles != null ? String(reg.cycles) : "") +
       cmpRow("Evidence status", evStatusOf(p)) +
-      '<button class="oe-btn primary" data-of-act="select:' + esc(p.id) + '">SELECT</button></div>';
+      '<button class="oe-btn primary" data-of-act="select:' + esc(p.id) + '">Select</button></div>';
   }
   // compare(protocols): side-by-side of the passed protocols (regimen / cycle / evidence status).
   function renderCompare(protocols) {
     protocols = (protocols || []).filter(Boolean);
     if (!protocols.length) return '<div class="of-empty">Select two or more protocols to compare.</div>';
-    return '<div class="of-sec-h">COMPARE PROTOCOLS</div><div class="of-cmp">' + protocols.map(cmpCol).join("") + "</div>";
+    return '<div class="of-sec-h">Compare protocols</div><div class="of-cmp">' + protocols.map(cmpCol).join("") + "</div>";
   }
 
   /* ---- SELECT: build the patient-specific digital protocol (Tata matrix) -------------------- */
@@ -170,27 +175,32 @@
   }
 
   function hrow(k, v) { return '<div class="of-hrow"><span class="of-hk">' + esc(k) + '</span><span class="of-hv">' + esc(v == null || v === "" ? "verify" : v) + "</span></div>"; }
-  // One always-visible lineage line per drug: protocol dose -> input(s) -> calculated -> rounding/cap
+  // One stepped lineage row: step label + value. verify=true tints the row amber (of-lin-verify).
+  function linRow(step, value, verify) {
+    return '<div class="of-lin' + (verify ? " of-lin-verify" : "") + '"><span class="of-lin-d">' + esc(step) + '</span><span class="of-lin-c">' + esc(value) + "</span></div>";
+  }
+  // Always-visible stepped lineage per drug: protocol dose -> patient input -> calculated -> rounding/cap
   // -> proposed. "verify" (never a guessed number) whenever a step is not computable.
-  function lineageRow(drug, lin) {
+  function lineageRows(drug, lin) {
     drug = drug || {}; lin = lin || {};
     var unit = drug.unit ? " " + drug.unit : "";
-    var chain = [];
-    chain.push("protocol " + (lin.protocolDose != null ? lin.protocolDose + unit : "verify"));
-    var inp = lin.inputs || {};
-    if (inp.bsa != null) chain.push("BSA " + inp.bsa + " m2");
-    if (inp.gfr != null) chain.push("GFR " + inp.gfr + " mL/min");
-    if (inp.weight != null) chain.push("weight " + inp.weight + " kg");
-    chain.push("calculated " + (lin.calculated != null ? lin.calculated + " mg" : "verify"));
-    if (lin.rounded != null) chain.push("rounded " + lin.rounded + " mg");
-    if (lin.capApplied) chain.push("cap applied");
-    chain.push("proposed " + (lin.final != null ? lin.final + " mg" : "verify"));
-    return '<div class="of-lin"><span class="of-lin-d">' + esc(drug.name || drug.id || "") + '</span><span class="of-lin-c">' + esc(chain.join(" -> ")) + "</span></div>";
+    var out = '<div class="of-sec-h">' + esc(drug.name || drug.id || "") + "</div>";
+    out += linRow("Protocol dose", lin.protocolDose != null ? lin.protocolDose + unit : "verify", lin.protocolDose == null);
+    var inp = lin.inputs || {}, patient = [];
+    if (inp.bsa != null) patient.push("BSA " + inp.bsa + " m2");
+    if (inp.gfr != null) patient.push("GFR " + inp.gfr + " mL/min");
+    if (inp.weight != null) patient.push("weight " + inp.weight + " kg");
+    if (patient.length) out += linRow("Patient input", patient.join(", "), false);
+    out += linRow("Calculated", lin.calculated != null ? lin.calculated + " mg" : "verify", lin.calculated == null);
+    if (lin.rounded != null) out += linRow("Rounding/cap", lin.rounded + " mg" + (lin.capApplied ? " (cap applied)" : ""), false);
+    else if (lin.capApplied) out += linRow("Rounding/cap", "cap applied", false);
+    out += linRow("Proposed", lin.final != null ? lin.final + " mg" : "verify", lin.final == null);
+    return out;
   }
   function lineageBlock(d) {
     var drugs = (d.plan && d.plan.lockedTemplate && d.plan.lockedTemplate.drugs) || [];
     var byId = {}; (d.lineages || []).forEach(function (l) { if (l && l.drugId) byId[l.drugId] = l; });
-    var rows = drugs.map(function (drug) { return lineageRow(drug, byId[drug.id]); }).join("");
+    var rows = drugs.map(function (drug) { return lineageRows(drug, byId[drug.id]); }).join("");
     return '<section class="of-lineage"><div class="of-sec-h">Dose lineage (patient-specific)</div>' +
       '<div class="of-note">protocol dose -> patient input -> calculated -> rounding/cap -> proposed. Tap a matrix cell for the full calculation.</div>' +
       rows + "</section>";
@@ -205,9 +215,9 @@
   // never auto-shown before an explicit CREATE click).
   function actionsRow(created) {
     return '<div class="of-actions">' +
-      actionBtn("edit", "EDIT") + actionBtn("viewcalc", "VIEW CALCULATION") + actionBtn("viewev", "VIEW EVIDENCE") +
-      actionBtn("compareguide", "COMPARE GUIDELINE") + actionBtn("print", "PRINT/PDF") +
-      (created ? actionBtn("activate", "CONFIRM & ACTIVATE TREATMENT PLAN", true) : actionBtn("create", "CREATE TREATMENT PLAN", true)) +
+      actionBtn("edit", "Edit") + actionBtn("viewcalc", "View calculation") + actionBtn("viewev", "View evidence") +
+      actionBtn("compareguide", "Compare guideline") + actionBtn("print", "Print/PDF") +
+      (created ? actionBtn("activate", "Confirm & activate", true) : actionBtn("create", "Create treatment plan", true)) +
       "</div>";
   }
 
@@ -228,7 +238,7 @@
         '<input class="oe-inp" type="number" step="any" data-of-inp="edit-dose:' + esc(drug.id) + '" placeholder="' + (orig != null ? esc(orig) : "mg") + '" value="' + (ov ? esc(ov.modifiedDose) : "") + '">' +
         '<select class="oe-inp" data-of-inp="edit-reason:' + esc(drug.id) + '">' + reasonOptions(ov && ov.reason) + "</select>" +
         '<input class="oe-inp" type="text" data-of-inp="edit-detail:' + esc(drug.id) + '" placeholder="Detail (optional)" value="' + (ov && ov.reasonDetail ? esc(ov.reasonDetail) : "") + '">' +
-        '<button class="oe-btn ghost" data-of-act="ov-save:' + esc(drug.id) + '">Save edit</button>' +
+        '<button class="oe-btn" data-of-act="ov-save:' + esc(drug.id) + '">Save edit</button>' +
       "</div></div>";
   }
   function editPanel(d) {
@@ -236,7 +246,7 @@
     var linById = {}; (d.lineages || []).forEach(function (l) { if (l && l.drugId) linById[l.drugId] = l; });
     var ovById = {}; (st.overrides || []).forEach(function (o) { if (o && o.drugId) ovById[o.drugId] = o; });
     var rows = drugs.map(function (drug) { return editRow(drug, linById[drug.id], ovById[drug.id]); }).join("");
-    return '<section class="of-edit"><div class="of-sec-h">STRUCTURED DOSE EDIT</div>' +
+    return '<section class="of-edit"><div class="of-sec-h">Structured dose edit</div>' +
       '<div class="of-note">The original calculated dose is preserved. Every change records the modified dose, a reason, the physician and a timestamp.</div>' +
       rows + "</section>";
   }
@@ -307,7 +317,7 @@
   function renderDigitalProtocol(d, sub) {
     d = d || {};
     applyOverrides(d);
-    var header = '<section class="of-dp-head"><div class="of-sec-h">PATIENT-SPECIFIC DIGITAL PROTOCOL</div>' +
+    var header = '<section class="of-dp-head"><div class="of-sec-h">Patient-specific digital protocol</div>' +
       hrow("Patient", d.patientName) + hrow("MRN", d.mrn) + hrow("Diagnosis", d.diagnosis) +
       hrow("Stage", d.stage) + hrow("Biomarkers", biomarkerText(d.biomarkers)) +
       hrow("BSA", d.bsa != null ? d.bsa + " m2 (computed)" : "") + hrow("Treatment intent", d.intent) +
@@ -341,13 +351,13 @@
       '<div class="of-entry-crit"><b>Regimen:</b> ' + esc(drugs) + "</div>" +
       '<div class="of-entry-crit"><b>Cycle:</b> ' + esc(reg.cycleLengthDays != null ? reg.cycleLengthDays + " days" : "verify") + ", " + esc(reg.cycles != null ? reg.cycles : "verify") + " cycles</div>" +
       layers +
-      '<div class="of-entry-actions"><button class="oe-btn primary" data-of-act="select:' + esc(p.id) + '">SELECT</button></div>';
+      '<div class="of-entry-actions"><button class="oe-btn primary" data-of-act="select:' + esc(p.id) + '">Select</button></div>';
   }
   function cmpProtocols() { return st.compareIds.map(function (id) { return protoById(st.protocols, id); }).filter(Boolean); }
 
   function render() { var el = rootEl(); el.innerHTML =
     '<div class="oh-top"><button class="oh-back" data-of-act="close" aria-label="Close">&lsaquo; Close</button>' +
-    '<div class="oh-title">ONCO PROTOCOL</div><span style="width:64px"></span></div>' +
+    '<div class="oh-title">Onco protocol</div><span style="width:64px"></span></div>' +
     '<div class="oh-body">' + body() + "</div>"; }
 
   function findActive(id) { var p = protoById(st.protocols, id); return (p && p.status === "ACTIVE") ? p : null; }

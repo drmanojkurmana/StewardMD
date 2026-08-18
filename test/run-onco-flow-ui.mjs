@@ -52,7 +52,7 @@ try {
   await sleep(250);
   ok(await ev(`return !!(document.getElementById("smdOncoFlow") && document.getElementById("smdOncoFlow").classList.contains("on"));`) === true, "openFind opens the flow overlay (#smdOncoFlow)");
   const find = (await ev(`return document.getElementById("smdOncoFlow").textContent || "";`)) || "";
-  ok(/APPLICABLE STANDARD PROTOCOLS/.test(find), "the APPLICABLE STANDARD PROTOCOLS list renders");
+  ok(/Applicable standard protocols/.test(find), "the applicable standard protocols list renders");
   ok(/FX R-CHOP-D/.test(find) && /FX DLBCL Alt/.test(find), "both matching DLBCL protocols are listed");
   ok(!/FX NSCLC regimen/.test(find), "the contradicted (wrong-disease) NSCLC protocol is excluded");
   ok(/Why suggested:/.test(find) && /Confirmed matches/.test(find), "each entry shows the 'why suggested' rationale");
@@ -71,7 +71,7 @@ try {
   ok(await ev(`return !!document.querySelector('#smdOncoFlow [data-of-act="cmp-go"]');`) === true, "the COMPARE bar appears once two protocols are selected");
   await ev(`document.querySelector('#smdOncoFlow [data-of-act="cmp-go"]').click(); return 1;`); await sleep(150);
   const cmp = (await ev(`return document.getElementById("smdOncoFlow").textContent || "";`)) || "";
-  ok(/COMPARE PROTOCOLS/.test(cmp), "the side-by-side COMPARE view renders");
+  ok(/Compare protocols/.test(cmp), "the side-by-side compare view renders");
   ok(/FX R-CHOP-D/.test(cmp) && /FX DLBCL Alt/.test(cmp), "both protocols appear side by side");
   ok(/Rituximab/.test(cmp) && /Cyclophosphamide/.test(cmp), "the compare shows each regimen");
   ok(/Cycle length/.test(cmp) && /Evidence status/.test(cmp), "the compare shows cycle + evidence status");
@@ -82,7 +82,7 @@ try {
   await ev(`document.querySelector('#smdOncoFlow [data-of-act="select:fx-dlbcl-rchopd"]').click(); return 1;`); await sleep(200);
   ok(await ev(`return window.SMD_ONCOFLOW._st.digital !== null;`) === true, "an explicit SELECT click builds the in-memory digital protocol");
   const dp = (await ev(`return document.getElementById("smdOncoFlow").textContent || "";`)) || "";
-  ok(/PATIENT-SPECIFIC DIGITAL PROTOCOL/.test(dp), "the patient-specific digital protocol renders");
+  ok(/Patient-specific digital protocol/.test(dp), "the patient-specific digital protocol renders");
   ok(/Test Patient/.test(dp) && /MR-1001/.test(dp), "header shows patient + MRN");
   ok(/BSA/.test(dp) && /m2 \(computed\)/.test(dp), "header shows the computed BSA");
   ok(/Diffuse large B-cell lymphoma/.test(dp) && /Standard Protocol/.test(dp) && /Protocol version/.test(dp) && /Number of cycles/.test(dp), "header shows diagnosis / selected protocol / version / cycles");
@@ -96,7 +96,7 @@ try {
 
   // ---- full lineage visible (HARD RULE) ----
   ok(/Dose lineage \(patient-specific\)/.test(dp), "the dose lineage section is visible on the SELECT screen");
-  ok(/protocol 375 mg\/m2/.test(dp) && /calculated/.test(dp) && /proposed 600 mg/.test(dp), "the lineage shows protocol dose -> calculated -> proposed");
+  ok(/Protocol dose\s*375 mg\/m2/.test(dp) && /Calculated/.test(dp) && /Proposed\s*600 mg/.test(dp), "the stepped lineage shows protocol dose / calculated / proposed");
 
   // ---- all 6 action buttons ----
   for (const a of ["edit", "viewcalc", "viewev", "compareguide", "print", "create"]) {
@@ -126,7 +126,7 @@ try {
   // HARD RULE: matrix reflects the edit (500 mg) but the ORIGINAL calculated dose is never destroyed
   const edited = (await ev(`return document.getElementById("smdOncoFlow").textContent||"";`)) || "";
   ok(/500 mg/.test(edited), "the matrix reflects the edited dose (rituximab 500 mg)");
-  ok(/proposed 600 mg/.test(edited), "the always-visible lineage STILL shows the original calculated dose (600 mg) - original never destroyed");
+  ok(/Proposed\s*600 mg/.test(edited), "the always-visible lineage STILL shows the original calculated dose (600 mg) - original never destroyed");
   ok(await ev(`return (window.SMD_ONCOFLOW._st.digital.lineages||[]).filter(function(l){return l.drugId==="rituximab"})[0].final === 600;`) === true, "the underlying calculated lineage is untouched (final still 600)");
 
   // ============ PHASE F: CREATE -> CONFIRM & ACTIVATE (explicit clicks only; never automatic) ============

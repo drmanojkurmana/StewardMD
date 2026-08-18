@@ -106,6 +106,28 @@ service cloud.firestore {
       allow delete: if false;
     }
 
+    // ── Doctor-to-doctor referrals (smd_referrals) ────────────────────────────
+    // A referral carries a patient record (PHI), addressed FROM one doctor TO another (by uid, resolved
+    // from doctorDirectory). Only the two parties may read it; the sender creates it addressed from
+    // themselves with a bounded expiry; the recipient may update status (accept/decline/seen) without
+    // changing the parties; the sender may revoke. NEVER listable in bulk — the inbox is a
+    // where('toUid','==',me) query, satisfied by the read predicate below. DENY BY DEFAULT.
+    match /referrals/{id} {
+      allow read: if request.auth != null
+                  && (resource.data.toUid == request.auth.uid || resource.data.fromUid == request.auth.uid);
+      allow create: if request.auth != null
+                    && request.resource.data.fromUid == request.auth.uid
+                    && request.resource.data.toUid is string
+                    && request.resource.data.expiresAt is number
+                    && request.resource.data.expiresAt <= request.time.toMillis() + 32 * 24 * 60 * 60 * 1000;
+      allow update: if request.auth != null
+                    && resource.data.toUid == request.auth.uid
+                    && request.resource.data.toUid == resource.data.toUid
+                    && request.resource.data.fromUid == resource.data.fromUid;
+      allow delete: if request.auth != null && resource.data.fromUid == request.auth.uid;
+      allow list: if false;
+    }
+
     // ── ICU collaboration groups (smd_icu_groups) ─────────────────────────────
     // A shared, permissioned ICU unit. The access boundary is GROUP MEMBERSHIP, now held in a
     // per-unit SUBCOLLECTION (icuGroups/{gid}/members/{uid}) so a colleague can SELF-JOIN by a

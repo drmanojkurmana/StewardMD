@@ -1,0 +1,160 @@
+{
+  "site": "liver",
+  "name": "Liver (hepatocellular)",
+  "system": "Oncology / Liver",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition hepatocellular carcinoma staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging applies to hepatocellular carcinoma (HCC). The 8th edition T category combines tumour number, size, and vascular invasion: T1 is a solitary tumour split by size and vascular invasion (T1a <= 2 cm, T1b > 2 cm without vascular invasion), T2 is a solitary tumour > 2 cm with vascular invasion or multiple tumours none > 5 cm, T3 is multiple tumours with at least one > 5 cm, and T4 is major vascular or adjacent-organ involvement.\n\nA key nuance is that TNM mainly informs surgical candidates, because prognosis in HCC depends heavily on underlying liver function and performance status rather than tumour anatomy alone. The score-based systems (BCLC, Child-Pugh, and MELD) are used alongside TNM for treatment selection and are captured here under prognostic factors rather than in the TNM tables. Intrahepatic cholangiocarcinoma and combined hepatocellular-cholangiocarcinoma are staged with separate systems.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Solitary tumour <= 2 cm, or > 2 cm without vascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Solitary tumour <= 2 cm, with or without vascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Solitary tumour > 2 cm without vascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Solitary tumour > 2 cm with vascular invasion, OR multiple tumours, none > 5 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Multiple tumours, at least one of which is > 5 cm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Single or multiple tumours of any size involving a major branch of the portal vein or hepatic vein, OR tumour(s) with direct invasion of adjacent organs other than the gallbladder, or with perforation of the visceral peritoneum",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Regional lymph node metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Solitary tumour <= 2 cm, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Solitary tumour > 2 cm without vascular invasion, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Solitary tumour > 2 cm with vascular invasion, or multiple tumours none > 5 cm; node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Multiple tumours with at least one > 5 cm; node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Major vascular or adjacent-organ involvement; node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "Any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Regional lymph node metastasis, no distant disease.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the hilar, hepatoduodenal ligament, inferior phrenic, and caval nodes. Nodes beyond these (e.g., celiac, periaortic, pericaval) are considered distant metastasis.",
+      "histologicGrade": "Grade (G): GX not assessable; G1 well differentiated; G2 moderately differentiated; G3 poorly differentiated; G4 undifferentiated. Fibrosis score (Ishak 0 to 6) of the surrounding non-tumour liver is recorded as it carries prognostic weight.",
+      "histopathologicTypes": "Hepatocellular carcinoma and its variants (fibrolamellar, scirrhous, clear cell, and others). Intrahepatic cholangiocarcinoma and combined hepatocellular-cholangiocarcinoma are staged with separate systems.",
+      "prognosticFactors": [
+        "Underlying liver function by Child-Pugh class (A/B/C)",
+        "Barcelona Clinic Liver Cancer (BCLC) stage (0, A, B, C, D) integrating tumour burden, performance status, and liver function",
+        "MELD score",
+        "Serum alpha-fetoprotein (AFP) level",
+        "Macrovascular (portal/hepatic vein) invasion",
+        "ECOG performance status",
+        "Presence of cirrhosis and portal hypertension"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

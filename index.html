@@ -59,10 +59,10 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
 <link rel="stylesheet" href="/abx-wizard.css?v=bug809-build7">
-<link rel="stylesheet" href="/queue.css?v=q9-rm">
+<link rel="stylesheet" href="/queue.css?v=q10-staffadmin">
 <link rel="stylesheet" href="/opd-emr.css?v=voicenote1">
-<link rel="stylesheet" href="/onco-home.css?v=oh5">
-<link rel="stylesheet" href="/oncotree.css?v=ot10-map">
+<link rel="stylesheet" href="/onco-home.css?v=op4">
+<link rel="stylesheet" href="/oncotree.css?v=op1-map">
 <link rel="stylesheet" href="/fundx.css?v=sar1">
 <link rel="stylesheet" href="/kardiox.css?v=kx7-dark">
 <link rel="stylesheet" href="/kardiox-screens.css?v=kx7">
@@ -1479,7 +1479,7 @@ window.openExternal = function (u) {
   </div>
 </div>
 
-<script src="/native-bridge.js?v=whisperfb1" defer></script>
+<script src="/native-bridge.js?v=pdffallback1" defer></script>
 <!-- Server-driven fleet controls: force-upgrade floor, maintenance mode, remote banners, feature flags.
      Loads after native-bridge so /api/config routes correctly on native. Fail-open. -->
 <script src="/remote-config.js?v=rc1" defer></script>
@@ -1504,7 +1504,7 @@ window.openExternal = function (u) {
      prescription.js; export is user-triggered so defer order is safe. -->
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
-<script src="/prescription.js?v=gold981-rx3" defer></script>
+<script src="/prescription.js?v=gold981-rx5night" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -1521,7 +1521,7 @@ window.openExternal = function (u) {
 <script src="/email-auth.js?v=gold473" defer></script>
 <script src="/policy.js?v=gold363" defer></script>
 <script src="/features.js?v=gold997" defer></script>
-<script src="/calculators.js?v=gold1050-attrib" defer></script>
+<script src="/calculators.js?v=gold1051-attrib" defer></script>
 <script src="/calc-links.js?v=gold400" defer></script>
 <script src="/icu-autoscores.js?v=gold403" defer></script>
 <script src="/drugs.js?v=gold978" defer></script>
@@ -1557,7 +1557,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
-<script src="/kb/ai/maik-kb.js?v=gold1057-lang" defer></script>
+<script src="/kb/ai/maik-symptoms.js?v=sx2" defer></script><script src="/kb/ai/maik-kb.js?v=gold1060-neg" defer></script>
 <!-- MaiK clinician-only scope gate (window.MaiKScope): refuses non-clinical asks instantly, before KB/router/Vertex. -->
 <script src="/kb/ai/maik-scope.js?v=scope-widen1" defer></script>
 <!-- MaiK Clinical Decision Engine (brain) + Evidence Engine. Deterministic, KB-first.
@@ -1567,7 +1567,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs2" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/home.js?v=protocol1-sknx" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/home.js?v=maikmempdf2" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1598,12 +1598,12 @@ window.openExternal = function (u) {
 <!-- Clinical vocabulary registry (SMD_VOCAB) - deterministic offline finding autocomplete for the
      ICU complaint/finding picker. Separate from disease scoring; maps to existing canonical finding IDs. -->
 <script src="/clinical-vocab.js?v=gold363" defer></script>
-<script src="/icu.js?v=gold998-tl" defer></script>
+<script src="/icu.js?v=gold998-referral" defer></script>
 <script src="/discharge-ghis.js?v=dg1" defer></script>
 <!-- ICU v2 Phase 2: real-time collaboration backend (window.SMD_ICU_GROUPS). Pure data +
      Firestore subscription layer; NO DOM. Flag smd_icu_groups (default OFF). Loads AFTER icu.js
      (icu.js reads window.SMD_ICU_GROUPS lazily at runtime, so this order is safe). -->
-<script src="/icu-collab.js?v=gold454" defer></script>
+<script src="/icu-collab.js?v=gold454" defer></script><script src="/referrals.js?v=ref1" defer></script>
 <!-- Native push (APNs iOS + FCM Android) + closed-app watch-lab (SMD_WATCH). native-push.js
      exposes SMD_localNotify/SMD_enableNativePush; watch-lab.js exposes window.SMD_WATCH. -->
 <script src="/native-push.js?v=gold364-thread" defer></script>
@@ -1743,15 +1743,15 @@ window.openExternal = function (u) {
 <script src="/followcare.js?v=fc13" defer></script>
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
-<script src="/queue-flags.js?v=q3-alllive" defer></script>
-<script src="/queue.js?v=q16-reroute" defer></script>
+<script src="/queue-flags.js?v=q5-alllive" defer></script>
+<script src="/queue.js?v=q21-nightbuild" defer></script>
 <!-- Oncology dose engine (pure, no DOM/fetch). Phase 4 needs it client-side: applying a protocol
      computes calculatedDoses via window.SMD_ONCODOSE.planDoses() before anything is staged/posted. -->
-<script src="/onco-dose.js?v=onco1" defer></script>
+<script src="/onco-dose.js?v=op1" defer></script>
 <!-- Oncology treatment-plan matrix + read-only dose drawer + Phase 4 apply/review/override panels
      (flag smd_onco_protocols, default OFF), rendered inside the opd-emr.js Oncology/Assess tabs.
      Loaded before opd-emr.js so window.SMD_ONCOUI is present when it renders. -->
-<script src="/onco-protocols.js?v=onco6-draftwarn" defer></script>
+<script src="/onco-protocols.js?v=op1-draftwarn" defer></script>
 <!-- Oncology Phase 5: nurse execution view ("Today's Chemotherapy" - clearance banner, give-list,
      administration record). Reads confirmed doses off the plan/cycle only - never calculates.
      Loaded before opd-emr.js so window.SMD_ONCONURSE is present when it renders. -->
@@ -1762,7 +1762,7 @@ window.openExternal = function (u) {
 <script src="/onco-protocol-report.js?v=onco1" defer></script>
 <!-- OPD patient profile + reports (flag smd_opd_emr, default OFF). Read-only view over the existing GHIS
      read proxy; inert unless the flag is on + OPDEMR.openProfile() is called from a queue ticket. -->
-<script src="/opd-emr.js?v=voicenote1" defer></script>
+<script src="/opd-emr.js?v=nightbuild1" defer></script>
 <!-- My Clinic — on-device EMR for personal clinics (reuses opd-emr's form; flag smd_personal_clinic). -->
 <script src="/personal-clinic.js?v=gold6" defer></script>
 <!-- Shared Clinic — multi-device encrypted EMR for clinics/small hospitals with no EMR (flag
@@ -1783,19 +1783,19 @@ window.openExternal = function (u) {
      flag is on + SMD_ONCOHOME.open() is called (a home tile, or ?oncohome=1 for testing). -->
 <script src="/onco-evidence.js?v=oh2" defer></script>
 <!-- Onco Home Phase 8 P1 (flags smd_onco_staging / smd_onco_tallman / smd_onco_drugview /
-     smd_onco_protoref, all DEFAULT OFF): AJCC/TNM staging engine (versioned scaffold + honest gaps,
-     no proprietary tables), ISMP tall-man drug names, onco drug+interaction view, and a read-only
-     protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
+     smd_onco_protoref): International TNM-based cancer staging engine (versioned, licensed content +
+     honest gaps for sites not yet added), ISMP tall-man drug names, onco drug+interaction view, and a
+     read-only protocol reference library. onco-tallman.js + onco-staging.js load before onco-home.js. -->
 <script src="/onco-tallman.js?v=oh2" defer></script>
-<script src="/onco-staging.js?v=oh2" defer></script>
+<script src="/onco-staging.js?v=op6" defer></script>
 <!-- Onco Home Phase 8 P2 (flags smd_onco_ctcae / smd_onco_iotox / smd_onco_recist / smd_onco_favorites,
      all DEFAULT OFF): CTCAE v5.0 grading engine (curated public-domain grades, R1-flagged, honest gaps +
      fail-closed fabrication auditor), irAE management-principles reference (ASCO/NCCN/SITC by name, no
      doses), RECIST 1.1 target-lesion response calculator, and localStorage Favorites/Recent. These load
      before onco-home.js so their globals + SMD_ONCOFAV exist when the grid renders. -->
-<script src="/onco-ctcae.js?v=oh3" defer></script>
-<script src="/onco-iotox.js?v=oh3" defer></script>
-<script src="/onco-recist.js?v=oh3" defer></script>
+<script src="/onco-ctcae.js?v=op2" defer></script>
+<script src="/onco-iotox.js?v=op3" defer></script>
+<script src="/onco-recist.js?v=op1" defer></script>
 <script src="/onco-favorites.js?v=oh3" defer></script>
 <!-- ONCQIS Phase B (flag smd_onco_recommend, DEFAULT OFF): pure protocol RECOMMENDATION engine
      (window.SMD_ONCORECOMMEND). Decision-support only - suggests APPLICABLE ACTIVE Standard Protocols
@@ -1806,8 +1806,8 @@ window.openExternal = function (u) {
      Decision-support only; SELECT is always an explicit physician click (never auto-selected) and
      every proposed dose comes from SMD_ONCODOSE with the full lineage visible. Reuses SMD_ONCORECOMMEND
      (Phase B), SMD_ONCOEV (Phase C), SMD_ONCOUI matrix/drawer + SMD_ONCODOSE. Loaded before onco-home.js. -->
-<script src="/onco-plan-flow.js?v=oh1" defer></script>
-<script src="/onco-home.js?v=analytics1" defer></script>
+<script src="/onco-plan-flow.js?v=op1" defer></script>
+<script src="/onco-home.js?v=op6" defer></script>
 <!-- ONCOTREE navigator (flag smd_onco_navigator, DEFAULT OFF): deterministic disease pathway
      (phenotype -> APPLICABLE EXISTING Standard Protocols by reference). Decision-support only; never a
      second protocol DB, never auto-selects/doses. engine + recommend loaded before the UI. -->

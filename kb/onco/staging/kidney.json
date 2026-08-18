@@ -1,0 +1,178 @@
+{
+  "site": "kidney",
+  "name": "Kidney (renal cell)",
+  "system": "Oncology / Kidney (renal cell)",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Public 8th edition references (American Cancer Society staging summary and standard 8th edition renal cell TNM); Medscape staging article was paywalled",
+      "provenance": "8th edition renal cell carcinoma TNM, rewritten in original wording from criteria published on public references (cancer.org and standard 8th edition RCC staging) after the Medscape article returned a paywall; size cut-offs, local extension criteria, and stage mappings preserved exactly. Interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to renal cell carcinoma. The T category is driven by tumor size (with 7 cm and 10 cm cut-offs for organ-confined disease) and by local extension into the renal vein, perinephric or renal sinus fat, the pelvicalyceal system, the vena cava, the ipsilateral adrenal gland, and Gerota fascia. Nodal disease is binary (N0 versus N1).\n\n8th edition made only limited changes for kidney relative to the 7th Edition, the most notable being adoption of the WHO/ISUP nucleolar grade in place of the older Fuhrman system. A key nuance is that direct (contiguous) extension into the ipsilateral adrenal gland is classified as T4, whereas non-contiguous adrenal involvement is treated as distant metastasis (M1).",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumor <= 7 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumor <= 4 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumor > 4 cm but <= 7 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumor > 7 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Tumor > 7 cm but <= 10 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Tumor > 10 cm in greatest dimension, limited to the kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumor extends into major veins or perinephric tissues but not into the ipsilateral adrenal gland and not beyond Gerota fascia",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a",
+          "label": "Tumor extends into the renal vein or its segmental branches, or invades the pelvicalyceal system, or invades perirenal and/or renal sinus fat, but not beyond Gerota fascia",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b",
+          "label": "Tumor extends into the vena cava below the diaphragm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3c",
+          "label": "Tumor extends into the vena cava above the diaphragm or invades the wall of the vena cava",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumor invades beyond Gerota fascia, including contiguous extension into the ipsilateral adrenal gland",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in regional lymph node(s)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis (including non-contiguous ipsilateral adrenal involvement)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Organ-confined tumor <= 7 cm.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Organ-confined tumor > 7 cm.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Local extension into major veins or perinephric tissue, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1/T2/T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Regional node metastasis with T1 to T3 primary.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "T4",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Tumor beyond Gerota fascia or into ipsilateral adrenal gland.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the renal hilar, paracaval, precaval, retrocaval, interaortocaval, para-aortic, preaortic, and retroaortic nodes. Laterality does not affect the N classification; any regional node metastasis is N1.",
+      "histologicGrade": "8th edition uses the WHO/ISUP nucleolar grade (grade 1 to 4), which has replaced the older Fuhrman system for clear cell and papillary renal cell carcinoma. Grade 4 also captures tumors with marked nuclear pleomorphism, sarcomatoid, or rhabdoid features.",
+      "histopathologicTypes": "Clear cell renal cell carcinoma is the most common type, followed by papillary (types 1 and 2) and chromophobe carcinoma. Less common types include collecting duct (Bellini) carcinoma, renal medullary carcinoma, MiT family translocation carcinoma, and unclassified renal cell carcinoma.",
+      "prognosticFactors": [
+        "Tumor size and T category",
+        "WHO/ISUP nucleolar grade",
+        "Presence of sarcomatoid or rhabdoid differentiation",
+        "Tumor (coagulative) necrosis",
+        "Renal vein or vena cava (venous) invasion",
+        "Regional node and distant metastasis status",
+        "Histologic subtype",
+        "Patient performance status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

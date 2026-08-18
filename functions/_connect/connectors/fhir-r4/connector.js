@@ -141,5 +141,38 @@ export const fhirR4Connector = {
       .map((p) => ({ id: p.id, name: fhirName(p), gender: p.gender || "", birthDate: p.birthDate || "" }));
   },
 
+  // Practitioner (doctor) SEARCH by name (GET {base}/Practitioner?name=<q>). Returns [{id,name}] for a
+  // "pick treating doctor from the hospital EMR" picker. Empty query -> whole active list (bounded by _count).
+  // Same hardening as searchPatients (redirect:manual, one re-auth on 401, typed UpstreamError).
+  searchPractitioners: async (ctx, query) => {
+    const base = (ctx.config.base_url || "").replace(/\/$/, "");
+    const smart = smartOn(ctx);
+    const q = String(query == null ? "" : query).trim().slice(0, 100);
+    const n = Math.min((ctx.budget && ctx.budget.maxSubrequests) || 20, 50);
+    let authHeader = await initialAuthHeader(ctx);
+    const url = base + "/Practitioner?" + (q ? "name=" + encodeURIComponent(q) + "&" : "") + "_count=" + n;
+    const doSearch = async () => {
+      let res;
+      try { res = await ctx.fetch(url, { headers: authHeader, redirect: "manual" }); }
+      catch (e) {
+        if (e && e.name && !["Error", "TypeError", "RangeError", "ReferenceError", "SyntaxError"].includes(e.name)) throw e;
+        throw new UpstreamError("Practitioner search failed");
+      }
+      if (res.status === 401) return 401;
+      if (!res.ok) throw new UpstreamError("Practitioner search HTTP " + res.status);
+      return res.json();
+    };
+    let bundle = await doSearch();
+    if (bundle === 401) {
+      if (!smart) throw new UpstreamError("unauthorized");
+      authHeader = { authorization: "Bearer " + (await doAuth(ctx, true)).accessToken };
+      bundle = await doSearch();
+      if (bundle === 401) throw new UpstreamError("unauthorized after re-auth");
+    }
+    const entries = (bundle && bundle.entry) || [];
+    return entries.map((e) => e && e.resource).filter((r) => r && r.resourceType === "Practitioner")
+      .map((p) => ({ id: p.id, name: fhirName(p) })).filter((d) => d.name);
+  },
+
   normalize: async (ctx, raw) => normalizeFhir(ctx, raw),
 };

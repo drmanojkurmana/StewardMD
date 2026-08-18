@@ -125,6 +125,14 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
 function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL || MODEL_DEFAULT; }
+// Tiered routing (opt-in): the default model is already the FAST one (gemini-2.5-flash). When the owner
+// sets env.STRONG_MODEL (a valid model, e.g. gemini-2.5-pro), a genuinely COMPLEX/reasoning query escalates
+// to it for better answers; everything else stays on flash. Unset STRONG_MODEL = current behaviour (no-op).
+function strongModel(env) { const m = env && env.STRONG_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+function looksComplex(q) {
+  q = String(q || ""); if (q.length > 200) return true;
+  return /\b(why|compare|comparison|versus|\bvs\b|differentiate|difference between|mechanism|reconcile|trade[- ]?off|weigh|approach to|work ?up of|interpret|rationale|pros and cons|when to (choose|prefer)|first line vs)\b/i.test(q) || (q.match(/\?/g) || []).length > 1;
+}
 
 // Vision/OCR uses a strong, FIXED multimodal model — deliberately NOT the admin text-model override
 // or the emergency "cheap" model. Misreading a drug name off a prescription is a safety risk, so
@@ -428,6 +436,8 @@ function failReason(e) {
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
 export async function callGemini(env, parts, maxTokens, opts) {
+  // Tiered routing: a complex clinical query escalates to the stronger model, if the owner enabled one.
+  if (opts && opts.complex && !opts.model) { const sm = strongModel(env); if (sm) opts = Object.assign({}, opts, { model: sm }); }
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
@@ -1229,7 +1239,7 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true }); }
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
@@ -1246,7 +1256,7 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "case");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
-      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true });   // MaiK explain (legacy path)
+      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true, complex: looksComplex(pkg && pkg.question) });   // MaiK explain (legacy path)
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
     }

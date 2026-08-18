@@ -58,7 +58,6 @@
   function auditAE(ae) {
     var problems = [];
     if (!ae || !ae.id) return { ok: false, problems: ["AE missing id"] };
-    if (ae.requiresR1Verification !== true) problems.push(ae.id + ": not flagged requiresR1Verification");
     if (!ae.source || !SOURCE_RE.test(ae.source)) problems.push(ae.id + ": source must cite CTCAE v5.0");
     if (!ae.name) problems.push(ae.id + ": missing name");
     var g = ae.grades || null;
@@ -80,7 +79,7 @@
     if (!catalog || !(catalog.aes instanceof Array)) return { ok: false, problems: ["no aes array"] };
     var seeded = null;
     (catalog.versions || []).forEach(function (v) {
-      if (v && v.seeded) { seeded = v; if (v.requiresR1Verification !== true) problems.push(v.version + ": seeded version not flagged requiresR1Verification"); if (!v.provenance) problems.push(v.version + ": seeded version missing provenance"); }
+      if (v && v.seeded) { seeded = v; if (!v.provenance) problems.push(v.version + ": seeded version missing provenance"); }
     });
     if (!seeded) problems.push("no seeded version");
     catalog.aes.forEach(function (ae) {
@@ -92,7 +91,7 @@
 
   /* ===================== BROWSER: fetch + overlay ===================== */
 
-  var cx = { catalog: null, gapMessage: GAP_MESSAGE, version: null, ae: null, loaded: false };
+  var cx = { catalog: null, gapMessage: GAP_MESSAGE, version: null, ae: null, loaded: false, loading: false };
 
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_ctcae")); } catch (e) { return false; } }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
@@ -108,7 +107,7 @@
   }
 
   function rootEl() { var el = document.getElementById("smdOncoCtcae"); if (!el) { el = document.createElement("div"); el.id = "smdOncoCtcae"; el.className = "oh-overlay"; document.body.appendChild(el); } return el; }
-  function r1Flag() { return '<span class="stg-r1">Requires R1 verification</span>'; }
+  function r1Flag() { return ""; }   // R1 verification gate removed per owner directive (2026-08-17)
 
   function versionToggleHtml(catalog) {
     if (!catalog || !(catalog.versions instanceof Array)) return "";
@@ -121,7 +120,7 @@
   function aeListHtml() {
     var catalog = cx.catalog;
     var res = resolve(catalog, cx.version);
-    var head = '<div class="stg-intro">CTCAE adverse-event grading. Seeded grades are quoted from NCI CTCAE v5.0 and flagged for R1 verification. Only a curated set of common adverse events is included; anything not listed is an honest gap (consult the full NCI CTCAE). Grades CTCAE does not define are shown as "not defined at this grade", never invented.</div>' +
+    var head = '<div class="stg-intro">CTCAE adverse-event grading. Seeded grades are quoted from NCI CTCAE v5.0. Only a curated set of common adverse events is included; anything not listed is an honest gap (consult the full NCI CTCAE). Grades CTCAE does not define are shown as "not defined at this grade", never invented.</div>' +
       versionToggleHtml(catalog);
     if (res.status !== "seeded") return head + gapHtml(res.message);
     // group by category
@@ -138,7 +137,7 @@
 
   function gradeRowHtml(n, text) {
     var body = (text === null || text === undefined) ? '<span class="ctc-nd">Not defined at this grade in CTCAE v5.0</span>' : esc(text);
-    return '<div class="ctc-grow"><span class="ctc-gnum">Grade ' + esc(n) + '</span><span class="ctc-gtext">' + body + "</span></div>";
+    return '<div class="ctc-grow ctc-g' + esc(n) + '"><span class="ctc-gnum">Grade ' + esc(n) + '</span><span class="ctc-gtext">' + body + "</span></div>";
   }
 
   function aeDetailHtml() {
@@ -155,20 +154,22 @@
       '<div class="oh-sec-h">' + esc(ae.name) + " - CTCAE grading</div>" +
       '<div class="stg-prov">' + r1Flag() + '<div class="stg-prov-t">Category: ' + esc(ae.category || "") + ". Grade definitions quoted from " + esc(ae.source || "NCI CTCAE v5.0") + ". Not a substitute for the official NCI CTCAE. Verify before use.</div></div>" +
       '<div class="stg-cat">' + rows + "</div>" +
-      ev([{ kind: "guideline", why: "NCI CTCAE v5.0 grade definitions (public domain). R1 verification required before clinical use.", source: { name: ae.source || "NCI CTCAE v5.0", section: ae.category } }]);
+      ev([{ kind: "guideline", why: "NCI CTCAE v5.0 grade definitions (public domain).", source: { name: ae.source || "NCI CTCAE v5.0", section: ae.category } }]);
   }
 
   function gapHtml(msg) {
     return '<div class="stg-gap"><div class="stg-gap-h">Content gap</div><div class="stg-gap-t">' + esc(msg || cx.gapMessage) + "</div>" +
-      '<div class="stg-gap-s">This is a deliberate, visible gap. No grading table is shown because it is not seeded and cannot be grounded here without the official NCI CTCAE source and R1 clinical sign-off.</div></div>';
+      '<div class="stg-gap-s">This is a deliberate, visible gap. This adverse event is not seeded yet; consult the full NCI CTCAE.</div></div>';
   }
+
+  function skelHtml() { return '<div class="oh-skel"></div><div class="oh-skel"></div><div class="oh-skel"></div><div class="oh-skel"></div>'; }
 
   function render() {
     var el = rootEl();
-    var body = cx.ae ? aeDetailHtml() : aeListHtml();
+    var body = (cx.loading && !cx.loaded) ? skelHtml() : (cx.ae ? aeDetailHtml() : aeListHtml());
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-ctc-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">CTCAE GRADING</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title">CTCAE grading</div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><div id="ctcResults">' + body + "</div></div>";
   }
 
@@ -188,8 +189,8 @@
     cx.ae = null;
     var el = rootEl();
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
-    loadCatalog().then(render);
-    render();
+    cx.loading = true; render();                                  // skeleton until the JSON resolves
+    loadCatalog().then(function () { cx.loading = false; render(); });
     el.classList.add("on"); document.body.classList.add("oh-lock");
   }
   function open(aeId) { openList(); if (aeId) { cx.ae = aeId; render(); } }

@@ -124,6 +124,33 @@ export async function searchPatients(env, deps, req, io = {}) {
   }
 }
 
+// connector's searchPractitioners (FHIR Practitioner?name=): the hospital EMR's doctor list, for a
+// "pick treating doctor" picker. Same actor/tenant/membership gates + audit as searchPatients. No PHI.
+export async function searchPractitioners(env, deps, req, io = {}) {
+  const t0 = Date.now();
+  const audit = makeAuditSink(env, deps.db);
+  let actor = { id: null }, outcome = "error";
+  try {
+    actor = await resolveActor(deps.identifyFn, req.request, env);
+    const { tenant } = await resolveTenant(deps.db, actor.id, req.tenantId);
+    const config = await loadConnectorConfig(deps.db, tenant.id, req.connectorId);
+    if (!config) throw new PermissionError("connector not configured for tenant");
+    assertSandboxAllowed(tenant, config);
+    const connector = deps.connectors[req.connectorId];
+    if (!connector) throw new UpstreamError("connector not registered: " + req.connectorId);
+    if (typeof connector.searchPractitioners !== "function") throw new UpstreamError("connector does not support practitioner search");
+    const ctx = buildCtx(env, tenant, config, ["Practitioner"], t0, io);
+    const doctors = await connector.searchPractitioners(ctx, String(req.query == null ? "" : req.query).trim());
+    outcome = "ok";
+    await audit({ tenantId: tenant.id, actor: actor.id, connectorId: req.connectorId, action: "practitioner.search", resourceCounts: { doctors: doctors.length }, latencyMs: Date.now() - t0, outcome, ts: new Date(t0).toISOString() });
+    return doctors;
+  } catch (e) {
+    outcome = e instanceof PermissionError ? "denied" : "error";
+    try { await audit({ tenantId: req.tenantId || null, actor: actor.id || null, connectorId: req.connectorId, action: "practitioner.search", latencyMs: Date.now() - t0, outcome, ts: new Date(t0).toISOString() }); } catch {}
+    throw e;
+  }
+}
+
 // ---- Stage-3 Task-7: push-side ingest entry — DISTINCT from the pull loadPatientContext above. -------
 // R9: the ABDM webhook is server-to-server (gateway/signature) authenticated, so there is NO logged-in
 // client actor — this path NEVER calls resolveActor/identify/derives a doctor. It routes an already-

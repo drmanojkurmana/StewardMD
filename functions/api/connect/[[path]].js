@@ -1,6 +1,6 @@
 // functions/api/connect/[[path]].js — StewardMD Connect HTTP surface (spec §8). Flag-gated; server-derived identity; no-store.
 import { flagOn, jsonResponse } from "../../_connect/testkit.js";
-import { loadPatientContext, searchPatients, ingestEvent } from "../../_connect/engine.js";
+import { loadPatientContext, searchPatients, searchPractitioners, ingestEvent } from "../../_connect/engine.js";
 import { fhirR4Connector } from "../../_connect/connectors/fhir-r4/connector.js";
 import { AuthError, PermissionError, SandboxViolation } from "../../_connect/permission.js";
 import { makeSecrets } from "../../_connect/secrets.js";
@@ -145,6 +145,28 @@ export async function onRequest(context) {
     try {
       const patients = await searchPatients(env, deps, req);   // engine derives actor + verifies membership
       return jsonResponse({ ok: true, patients });             // lightweight [{id,name,gender,birthDate}]
+    } catch (e) {
+      return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });   // sanitized
+    }
+  }
+  if (path === "/practitioners/search" && request.method === "POST") {
+    let body = {}; try { body = await request.json(); } catch {}
+    let connectors = { "fhir-r4": fhirR4Connector };
+    if (sdkFlagOn(env)) {
+      connectors = {};
+      for (const [id, c] of Object.entries(defaultRegistry().asConnectorMap()))
+        if (c.meta && c.meta.profile === "pull") connectors[id] = c;
+    }
+    const deps = { db: env.CONNECT_DB, kv: env.MAIK_KV, identifyFn: identify, connectors };
+    const req = { request, tenantId: body.tenantId, connectorId: body.connectorId || "fhir-r4", query: body.query };
+    if (req.connectorId === "fhir-r4" && !fhirFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (req.connectorId === "rest-json" && !restFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (req.connectorId === "dicomweb" && !dicomFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (req.connectorId === "graphql" && !graphqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    if (req.connectorId === "sql" && !sqlFlagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
+    try {
+      const doctors = await searchPractitioners(env, deps, req);   // engine derives actor + verifies membership
+      return jsonResponse({ ok: true, doctors });                  // lightweight [{id,name}]
     } catch (e) {
       return jsonResponse({ error: CODE(e) }, { status: STATUS(e) });   // sanitized
     }

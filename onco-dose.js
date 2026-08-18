@@ -146,10 +146,32 @@
       lin.capApplied = true;
       lin.warnings.push("carboplatin final dose capped at absolute " + params.carboplatinMaxDoseMg + " mg (caller-supplied pharmacy AUC-dosing safety cap; NCCN Chemotherapy Order Templates Appendix A/B). Calvert GFR is separately capped at 125 mL/min.");
     }
-    // A cumulative lifetime cap (e.g. anthracyclines) is NOT auto-enforced in v1 (needs cross-encounter
-    // history, Phase 5). Surface it so the absence of enforcement is never silent (R1 requirement).
+    // Cumulative lifetime cap (anthracyclines mg/m2, bleomycin units). ENFORCED only when the caller
+    // supplies prior exposure via params.priorCumulativeByDrug[drugId] (in the cap's unit) - the engine
+    // has no cross-encounter history of its own and must never invent one. Default OFF => the legacy
+    // manual-verify warning, byte-identical. Mirrors the opt-in carboplatinMaxDoseMg pattern above.
     var cl = drug.caps && drug.caps.cumulativeLifetime;
-    if (cl) lin.warnings.push("Cumulative lifetime dose (warn " + cl.warn + " / hard " + cl.hard + " " + (cl.unit || "mg/m2") + ") is NOT auto-enforced in v1 - verify prior exposure manually.");
+    if (cl) {
+      var pcMap = params.priorCumulativeByDrug || null;
+      var prior = (pcMap && drug.id != null && pcMap[drug.id] > 0) ? Number(pcMap[drug.id]) : null;
+      if (prior != null) {
+        // contribution in the cap's unit: mg/m2 caps sum the per-m2 protocol dose; unit-caps sum the final dose
+        var mgm2Cap = String(cl.unit || "mg/m2").indexOf("mg/m2") === 0;
+        var contrib = mgm2Cap ? Number(drug.dosePerUnit) : lin.final;
+        contrib = (contrib > 0) ? contrib : 0;
+        var projected = round2(prior + contrib);
+        lin.cumulative = { prior: round2(prior), contribution: round2(contrib), projected: projected, warn: cl.warn, hard: (cl.hard != null ? cl.hard : null), unit: cl.unit || "mg/m2" };
+        if (cl.hard != null && projected > cl.hard) {
+          lin.cumulativeHardExceeded = true;
+          lin.warnings.push("Cumulative HARD cap exceeded: projected lifetime " + projected + " " + lin.cumulative.unit + " over hard limit " + cl.hard + " (prior " + lin.cumulative.prior + " + this " + lin.cumulative.contribution + "). Do not administer without specialist review - cardiotoxicity/pulmonary risk.");
+        } else if (projected > cl.warn) {
+          lin.cumulativeWarn = true;
+          lin.warnings.push("Cumulative lifetime warning: projected " + projected + " " + lin.cumulative.unit + " over warn threshold " + cl.warn + " (prior " + lin.cumulative.prior + " + this " + lin.cumulative.contribution + "). Verify cardiac/pulmonary status before proceeding.");
+        }
+      } else {
+        lin.warnings.push("Cumulative lifetime dose (warn " + cl.warn + (cl.hard != null ? " / hard " + cl.hard : "") + " " + (cl.unit || "mg/m2") + ") is NOT auto-enforced without prior-exposure input - verify prior cumulative dose manually.");
+      }
+    }
     // Intra-day frequency: `final` stays a per-ADMINISTRATION dose. dosesPerDay (or a frequency token)
     // yields the DAILY dose the workbench surfaces, so a BID/TID oral drug is not shown at a single
     // administration's mg as if it were the whole day. Default 1 => dailyDose === final, so every

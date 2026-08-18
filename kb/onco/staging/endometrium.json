@@ -1,0 +1,215 @@
+{
+  "site": "endometrium",
+  "name": "Uterus (endometrium)",
+  "system": "Oncology / Gynecologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition (and FIGO where applicable) endometrial carcinoma staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging of endometrial carcinoma covers carcinomas of the uterine corpus (and carcinosarcoma, staged as carcinoma) and corresponds to the FIGO 2009 surgical staging system, so each T category maps to a FIGO stage (shown in the labels). Uterine sarcomas such as leiomyosarcoma and endometrial stromal sarcoma are staged with separate systems.\n\nStage grouping is anatomic and rests on surgical-pathologic assessment of myometrial invasion, cervical stromal involvement, and extrauterine and nodal spread, with nodal disease subdivided into pelvic (IIIC1) and para-aortic (IIIC2). The key nuance is that, although stage is anatomic, FIGO histologic grade (1 to 3) and histologic type strongly influence prognosis and management: serous, clear cell, and undifferentiated carcinomas and carcinosarcoma are treated as high risk, and molecular classification (POLE-mutated, MMR-deficient, p53-abnormal, no specific molecular profile) increasingly guides care.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1 (FIGO I)",
+          "label": "T1 (FIGO I): Tumor confined to the corpus uteri, including endocervical glandular involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a (FIGO IA)",
+          "label": "T1a (FIGO IA): Tumor limited to the endometrium or invading less than one half of the myometrium",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b (FIGO IB)",
+          "label": "T1b (FIGO IB): Tumor invades one half or more of the myometrium",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2 (FIGO II)",
+          "label": "T2 (FIGO II): Tumor invades the stromal connective tissue of the cervix but does not extend beyond the uterus (endocervical glandular involvement alone is T1, not T2)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3 (FIGO III)",
+          "label": "T3 (FIGO III): Tumor involves the serosa, adnexa, vagina, or parametrium (local and/or regional spread)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a (FIGO IIIA)",
+          "label": "T3a (FIGO IIIA): Tumor involves the serosa of the corpus uteri and/or the adnexa (by direct extension or metastasis)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b (FIGO IIIB)",
+          "label": "T3b (FIGO IIIB): Vaginal involvement (by direct extension or metastasis) or parametrial involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4 (FIGO IVA)",
+          "label": "T4 (FIGO IVA): Tumor invades the bladder mucosa and/or the bowel mucosa (bullous edema alone does not qualify as T4)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0(i+)",
+          "label": "Isolated tumor cells in regional lymph node(s) no larger than 0.2 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1 (FIGO IIIC1)",
+          "label": "N1 (FIGO IIIC1): Regional lymph node metastasis to pelvic lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1mi",
+          "label": "N1mi: Pelvic lymph node metastasis measuring > 0.2 mm and <= 2.0 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1a",
+          "label": "N1a: Pelvic lymph node metastasis measuring > 2.0 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2 (FIGO IIIC2)",
+          "label": "N2 (FIGO IIIC2): Regional lymph node metastasis to para-aortic lymph nodes, with or without positive pelvic lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2mi",
+          "label": "N2mi: Para-aortic lymph node metastasis measuring > 0.2 mm and <= 2.0 mm in greatest dimension, with or without positive pelvic nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "N2a: Para-aortic lymph node metastasis measuring > 2.0 mm in greatest dimension, with or without positive pelvic nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1 (FIGO IVB)",
+          "label": "M1 (FIGO IVB): Distant metastasis, including metastasis to inguinal lymph nodes, intraperitoneal disease, or spread to lung, liver, or bone. It excludes metastasis to para-aortic or pelvic nodes, the vagina, the pelvic serosa, or the adnexa.",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumor limited to endometrium or < half myometrial invasion, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Invasion of half or more of the myometrium, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Cervical stromal invasion without extrauterine spread, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Serosal and/or adnexal involvement, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Vaginal and/or parametrial involvement, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC1",
+          "t": "T1 to T3",
+          "n": "N1, N1mi, or N1a",
+          "m": "M0",
+          "basis": "Metastasis to pelvic lymph nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC2",
+          "t": "T1 to T3",
+          "n": "N2, N2mi, or N2a",
+          "m": "M0",
+          "basis": "Metastasis to para-aortic lymph nodes, with or without positive pelvic nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Invasion of bladder and/or bowel mucosa.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis, including intra-abdominal spread and/or inguinal node involvement.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional lymph nodes are the pelvic nodes (paracervical, parametrial, hypogastric [obturator, internal iliac], external iliac, common iliac, presacral) and the para-aortic nodes. Para-aortic involvement is regional (FIGO IIIC2).",
+      "histologicGrade": "FIGO grade for endometrioid carcinoma is based on the proportion of solid, nonsquamous/nonmorular growth: G1 <= 5%, G2 6% to 50%, G3 > 50%. Marked nuclear atypia inappropriate for the architectural grade raises the grade by one. Serous, clear cell, and undifferentiated carcinomas are regarded as high grade by definition.",
+      "histopathologicTypes": "Endometrioid adenocarcinoma (and its variants) is the most common. Higher-risk types include serous carcinoma, clear cell carcinoma, mixed carcinoma, undifferentiated/dedifferentiated carcinoma, mucinous carcinoma, and carcinosarcoma (staged as carcinoma).",
+      "prognosticFactors": [
+        "FIGO stage (depth of myometrial invasion, cervical, adnexal, and nodal spread)",
+        "Histologic type (serous, clear cell, undifferentiated, and carcinosarcoma are high risk)",
+        "FIGO histologic grade (1 to 3)",
+        "Lymphovascular space invasion (LVSI)",
+        "Regional lymph node status (pelvic vs para-aortic)",
+        "Peritoneal cytology and molecular subtype (POLE-mutated, MMR-deficient, p53-abnormal, no specific molecular profile)"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

@@ -88,6 +88,42 @@
       '</style></head><body>' + String(fragment == null ? "" : fragment) + '</body></html>';
   }
 
+  // Client-side HTML->PDF (jsPDF + html2canvas) — the reliable path when the native VisionOcr plugin is
+  // absent (Android has no VisionOcr; it is iOS-only). Mirrors the proven prescription.js exportRx pipeline:
+  // render the doc offscreen at A4 width, rasterize, paginate into a PDF, then share (native) or download (web).
+  // Rejects if the vendored engines aren't loaded, so callers keep their existing HTML/text fallback = no regression.
+  function pdfFromHtmlJs(html, name, title) {
+    return new Promise(function (resolve, reject) {
+      var H = window.html2canvas, JS = (window.jspdf && window.jspdf.jsPDF) || window.jsPDF;
+      if (!H || !JS) { reject(new Error("pdf-engine-unavailable")); return; }
+      var s = String(html == null ? "" : html);
+      var style = (s.match(/<style[\s\S]*?<\/style>/i) || [""])[0];
+      var bodyInner = (s.match(/<body[^>]*>([\s\S]*?)<\/body>/i) || [null, s])[1];
+      var host = document.createElement("div");
+      host.style.cssText = "position:fixed;left:-9999px;top:0;width:794px;background:#fff;z-index:-1;color:#14202b";
+      host.innerHTML = style + '<div style="padding:24px;box-sizing:border-box;width:794px">' + bodyInner + "</div>";
+      document.body.appendChild(host);
+      H(host, { scale: 2, backgroundColor: "#ffffff", useCORS: true }).then(function (canvas) {
+        try { host.remove(); } catch (e) {}
+        var pdf = new JS({ unit: "pt", format: "a4" }), pw = pdf.internal.pageSize.getWidth(), ph = pdf.internal.pageSize.getHeight();
+        var imgW = pw, imgH = canvas.height * (pw / canvas.width), img = canvas.toDataURL("image/jpeg", 0.95);
+        if (imgH <= ph) pdf.addImage(img, "JPEG", 0, 0, imgW, imgH);
+        else { var y = 0; while (y < imgH - 1) { pdf.addImage(img, "JPEG", 0, -y, imgW, imgH); y += ph; if (y < imgH - 1) pdf.addPage(); } }
+        var uri = pdf.output("datauristring");
+        var P = plugins();
+        if (window.SMD_IS_NATIVE && P && P.Filesystem && P.Filesystem.writeFile && P.Share && P.Share.share) {
+          var b64 = (uri.split(",")[1] || "");
+          P.Filesystem.writeFile({ path: name + ".pdf", data: b64, directory: "CACHE" }).then(function (res) {
+            return P.Share.share({ title: title || "StewardMD", url: res.uri, files: [res.uri], dialogTitle: "Save PDF / Print / Share" });
+          }).then(resolve, reject);
+        } else {
+          try { var a = document.createElement("a"); a.href = uri; a.download = name + ".pdf"; document.body.appendChild(a); a.click(); a.remove(); resolve(); } catch (e) { reject(e); }
+        }
+      }).catch(function (e) { try { host.remove(); } catch (x) {} reject(e); });
+    });
+  }
+  window.SMD_PDF = { fromHtml: pdfFromHtmlJs };   // reusable everywhere (MaiK, onco, reports)
+
   window.SMD_NATIVE = {
     // Route to the iOS share sheet (offers Save to Files / Print / Markup / Mail).
     share: function (opts) {
@@ -124,13 +160,17 @@
     sharePdfFromHtml: function (html, filename, title) {
       var P = plugins();
       var V = P && P.VisionOcr;
-      if (!(V && V.htmlToPdf && P.Share && P.Share.share)) return Promise.reject(new Error("pdf-unavailable"));
       var name = (filename || "StewardMD-report").replace(/[^\w.-]+/g, "-");
-      return V.htmlToPdf({ html: String(html == null ? "" : html), filename: name }).then(function (res) {
-        var uri = res && (res.uri || res.path);
-        if (!uri) throw new Error("no-pdf");
-        return P.Share.share({ title: title || "StewardMD report", files: [uri], dialogTitle: "Save PDF / Print / Share" });
-      });
+      // iOS: native VisionOcr -> WKWebView PDF. If the plugin is absent (Android) or fails, fall back to the
+      // client-side jsPDF renderer so a real PDF is produced everywhere (was rejecting -> callers shared HTML).
+      if (V && V.htmlToPdf && P.Share && P.Share.share) {
+        return V.htmlToPdf({ html: String(html == null ? "" : html), filename: name }).then(function (res) {
+          var uri = res && (res.uri || res.path);
+          if (!uri) throw new Error("no-pdf");
+          return P.Share.share({ title: title || "StewardMD report", files: [uri], dialogTitle: "Save PDF / Print / Share" });
+        }).catch(function () { return pdfFromHtmlJs(html, name, title); });
+      }
+      return pdfFromHtmlJs(html, name, title);
     },
     // OS accessibility text scale — iOS Dynamic Type / Android configuration.fontScale — as a multiplier
     // (1 = system default, ~1.35 at the largest standard size, up to ~3.1 at the Larger-Accessibility-Sizes

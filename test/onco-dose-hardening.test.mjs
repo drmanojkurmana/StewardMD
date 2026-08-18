@@ -130,6 +130,50 @@ test("carboplatin absolute cap: not applied to non-AUC drugs", () => {
   assert.equal(lin.capApplied, false);
 });
 
+/* ---- Feature 4: cumulative lifetime cap ENFORCEMENT (opt-in params.priorCumulativeByDrug) ---- */
+
+test("cumulative cap: default OFF (no prior supplied) -> legacy manual-verify warning, no cumulative object", () => {
+  const drug = { id: "doxorubicin", basis: "bsa", dosePerUnit: 50, caps: { cumulativeLifetime: { warn: 450, hard: 550, unit: "mg/m2" } }, roundingRule: { increment: 5 } };
+  const lin = D.doseForDrug(drug, { bsa: 1.8 });
+  assert.equal(lin.cumulative, undefined);
+  assert.ok(!lin.cumulativeHardExceeded && !lin.cumulativeWarn);
+  assert.ok(lin.warnings.some((w) => /not auto-enforced without prior-exposure/i.test(w)));
+});
+
+test("cumulative cap: mg/m2 prior over HARD limit -> hardExceeded flag + do-not-administer warning", () => {
+  const drug = { id: "doxorubicin", basis: "bsa", dosePerUnit: 50, caps: { cumulativeLifetime: { warn: 450, hard: 550, unit: "mg/m2" } }, roundingRule: { increment: 5 } };
+  const lin = D.doseForDrug(drug, { bsa: 1.8, priorCumulativeByDrug: { doxorubicin: 520 } });
+  assert.equal(lin.cumulative.projected, 570); // 520 prior + 50 mg/m2 this dose
+  assert.equal(lin.cumulativeHardExceeded, true);
+  assert.ok(lin.warnings.some((w) => /HARD cap exceeded/i.test(w) && /do not administer/i.test(w)));
+});
+
+test("cumulative cap: mg/m2 prior over WARN but under hard -> warn flag only", () => {
+  const drug = { id: "doxorubicin", basis: "bsa", dosePerUnit: 50, caps: { cumulativeLifetime: { warn: 450, hard: 550, unit: "mg/m2" } }, roundingRule: { increment: 5 } };
+  const lin = D.doseForDrug(drug, { bsa: 1.8, priorCumulativeByDrug: { doxorubicin: 420 } });
+  assert.equal(lin.cumulative.projected, 470);
+  assert.equal(lin.cumulativeWarn, true);
+  assert.ok(!lin.cumulativeHardExceeded);
+  assert.ok(lin.warnings.some((w) => /warn threshold 450/i.test(w)));
+});
+
+test("cumulative cap: mg/m2 prior under warn -> cumulative recorded, no flags", () => {
+  const drug = { id: "doxorubicin", basis: "bsa", dosePerUnit: 50, caps: { cumulativeLifetime: { warn: 450, hard: 550, unit: "mg/m2" } }, roundingRule: { increment: 5 } };
+  const lin = D.doseForDrug(drug, { bsa: 1.8, priorCumulativeByDrug: { doxorubicin: 100 } });
+  assert.equal(lin.cumulative.projected, 150);
+  assert.ok(!lin.cumulativeWarn && !lin.cumulativeHardExceeded);
+});
+
+test("cumulative cap: bleomycin units cap (no hard) sums the FINAL dose, warns over the units threshold", () => {
+  const drug = { id: "bleomycin", basis: "flat", dosePerUnit: 30, unit: "units", caps: { cumulativeLifetime: { warn: 400, unit: "units" } } };
+  const lin = D.doseForDrug(drug, { priorCumulativeByDrug: { bleomycin: 390 } });
+  assert.equal(lin.cumulative.contribution, 30); // unit-cap uses final dose, not per-m2
+  assert.equal(lin.cumulative.projected, 420);
+  assert.equal(lin.cumulative.hard, null);
+  assert.equal(lin.cumulativeWarn, true);
+  assert.ok(!lin.cumulativeHardExceeded);
+});
+
 /* ---- All options OFF == pre-existing behavior (byte-for-byte) ---- */
 
 test("all hardening options OFF -> output identical to legacy lineage", () => {
