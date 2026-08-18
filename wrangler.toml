@@ -124,6 +124,20 @@ FOUNDING_SEATS = "500"
 DEVICE_LOCK_ON = "0"
 # AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
+# ── ABDM (Ayushman Bharat Digital Mission) ────────────────────────────────────────────────────────
+# Bridge SBXID_062379 (MAIKNOWLEDGE LLP); HFR facility IN2810006668 "StewardMD" linked as HIP + HIU.
+# ABDM_CLIENT_SECRET / CONNECT_MASTER_KEY / CONNECT_HMAC_SALT are Pages SECRETS, never vars - a name
+# defined as BOTH a var and a secret makes the deployment fail with a duplicate binding.
+# Everything stays inert: CONNECT_FLAG and ABDM_M1_FLAG are deliberately NOT set here.
+ABDM_ENV = "sandbox"
+ABDM_CLIENT_ID = "SBXID_062379"
+ABDM_HIP_ID = "IN2810006668"
+ABDM_HIU_ID = "IN2810006668"
+ABDM_JWKS_URL = "https://dev.abdm.gov.in/api/hiecm/gateway/v3/certs"
+# The India-hosted callback base ABDM posts to. Leave UNSET until the host exists and the receiver is
+# deployed - registering a URL that 404s is worse than leaving the placeholder ABDM already holds.
+# ABDM_CALLBACK_BASE = "https://abdm.stewardmd.in"
+
 [env.production]
 compatibility_date = "2026-06-28"
 
