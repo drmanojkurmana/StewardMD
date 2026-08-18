@@ -41,6 +41,44 @@
       '<span class="oe-row-b"><span class="oe-row-t">' + esc(o.serviceName || "Lab test") + "</span>" +
       (meta ? '<span class="oe-row-m">' + meta + "</span>" : "") + "</span>" + status + ms("chevron_right") + "</button>";
   }
+  // #156 — Lab-trend sparklines (flag smd_lab_sparklines, default OFF; ?labspark=1). PURE helpers below are
+  // unit-tested; the multi-report fetch that feeds them (openLabTrend) needs on-device GHIS validation, so
+  // the whole affordance stays OFF until the owner confirms the live parse. Neutral accent only (a rising
+  // value is not inherently good or bad), so the sparkline never implies a clinical judgement.
+  function labSparkOn() {
+    try { if (G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_lab_sparklines")) return true; } catch (e) {}
+    try { return /[?&]labspark=1/.test((G.location && G.location.search) || ""); } catch (e) { return false; }
+  }
+  // Numeric series for one analyte across fetched reports [{reported|orderDate, tests:[{test,result}]}].
+  // -> [{t,v}] oldest-first; ignores narrative/non-numeric results. Pure.
+  function labSeries(reports, testName) {
+    var key = String(testName || "").trim().toLowerCase(), out = [];
+    (reports || []).forEach(function (rp) {
+      if (!rp) return;
+      var t = Date.parse(rp.reported || rp.orderDate || "") || 0;
+      (rp.tests || []).forEach(function (x) {
+        if (!x || String(x.test || "").trim().toLowerCase() !== key) return;
+        var v = parseFloat(x.result); if (!isNaN(v)) out.push({ t: t, v: v });
+      });
+    });
+    return out.sort(function (a, b) { return a.t - b.t; });
+  }
+  // Tiny inline trend SVG from a numeric array. <2 finite points -> "" (nothing to trend). Pure.
+  function sparkline(nums, opts) {
+    opts = opts || {}; var w = opts.w || 92, hgt = opts.h || 22, pad = 3;
+    var xs = (nums || []).filter(function (n) { return typeof n === "number" && isFinite(n); });
+    if (xs.length < 2) return "";
+    var min = Math.min.apply(null, xs), max = Math.max.apply(null, xs), span = (max - min) || 1;
+    var stepX = (w - 2 * pad) / (xs.length - 1);
+    var pts = xs.map(function (v, i) {
+      var x = pad + i * stepX, y = pad + (hgt - 2 * pad) * (1 - (v - min) / span);
+      return (Math.round(x * 10) / 10) + "," + (Math.round(y * 10) / 10);
+    });
+    var lastXY = pts[pts.length - 1].split(",");
+    return '<svg class="oe-spark" width="' + w + '" height="' + hgt + '" viewBox="0 0 ' + w + " " + hgt + '" preserveAspectRatio="none" aria-hidden="true" style="vertical-align:middle">' +
+      '<polyline points="' + pts.join(" ") + '" fill="none" stroke="var(--primary,#0e6e63)" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/>' +
+      '<circle cx="' + lastXY[0] + '" cy="' + lastXY[1] + '" r="2" fill="var(--primary,#0e6e63)"/></svg>';
+  }
   function radRow(o) {
     var meta = [o.date].filter(Boolean).map(esc).join(" · ");
     return '<button class="oe-row" data-oe-act="rad:' + esc(o.resultid || "") + ":" + esc(o.printType || "manual") + '">' +
@@ -120,19 +158,47 @@
     if (st.source === "ghis") { loadGhisHistory(); return; }      // hospital: crawl the GHIS Opcard history footprint
     if (!st.ticketId || !st.sessionId) return;
     st.timelineLoading = true;
+    var forPatient = st;   // guard: a patient switch mid-fetch must not paint this timeline onto the new patient
     fbTok().then(function (t) {
+      if (st !== forPatient) return;
       if (!t) { st.timelineLoading = false; return; }
       fetch(qBase() + "/api/queue/timeline?sessionId=" + encodeURIComponent(st.sessionId) + "&ticketId=" + encodeURIComponent(st.ticketId), { headers: { Authorization: "Bearer " + t } })
         .then(function (r) { return r.ok ? r.json() : { timeline: [] }; })
-        .then(function (d) { st.timeline = (d && d.timeline) || []; st.timelineLoading = false; if (st.tab === "profile") paint(); })
-        .catch(function () { st.timelineLoading = false; });
-    }).catch(function () { st.timelineLoading = false; });
+        .then(function (d) { if (st !== forPatient) return; st.timeline = (d && d.timeline) || []; st.timelineLoading = false; if (st.tab === "profile") paint(); })
+        .catch(function () { if (st !== forPatient) return; st.timelineLoading = false; });
+    }).catch(function () { if (st !== forPatient) return; st.timelineLoading = false; });
+  }
+  // #156 — one "<test> trend" chip per lab test the patient has ordered 2+ times (flag-gated OFF).
+  function labTrendButtons(st) {
+    if (!labSparkOn()) return "";
+    var counts = {}; (st.labs || []).forEach(function (l) { var n = l.serviceName || l.testName; if (n) counts[n] = (counts[n] || 0) + 1; });
+    var repeated = Object.keys(counts).filter(function (n) { return counts[n] >= 2; });
+    if (!repeated.length) return "";
+    return '<div class="oe-trend-chips" style="display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px">' +
+      repeated.map(function (n) { return '<button class="oe-chip" data-oe-act="labtrend:' + esc(n) + '" style="border:1px solid var(--border);background:var(--card);border-radius:999px;padding:5px 10px;font:600 12px var(--font,inherit);color:var(--ink);cursor:pointer">' + ms("timeline") + esc(n) + " trend</button>"; }).join("") + "</div>";
+  }
+  // Trend panel: for each numeric analyte present in 2+ of the fetched reports, a row of name + sparkline +
+  // first -> latest. Reuses the tested labSeries/sparkline. Live data via openLabTrend (on-device validated).
+  function labTrendPanel(trend) {
+    if (!trend) return "";
+    var head = '<section class="oe-sec"><h3 class="oe-h3">' + ms("timeline") + esc(trend.name) + " trend" +
+      '<button class="oe-linkbtn" data-oe-act="trend-close" style="margin-left:auto">Close</button></h3>';
+    if (trend.loading) return head + loadingBox("Loading trend…") + "</section>";
+    if (trend.err) return head + errorBox(trend.err) + "</section>";
+    var names = {}; (trend.reports || []).forEach(function (rp) { (rp.tests || []).forEach(function (x) { if (x && x.test && !isNaN(parseFloat(x.result))) names[x.test] = true; }); });
+    var rows = Object.keys(names).map(function (nm) {
+      var series = labSeries(trend.reports, nm); if (series.length < 2) return "";
+      return '<div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid var(--border)">' +
+        '<span style="flex:1;font:600 13px var(--font,inherit)">' + esc(nm) + "</span>" + sparkline(series.map(function (p) { return p.v; })) +
+        '<span style="font:600 12px var(--font,inherit);color:var(--muted)">' + esc(String(series[0].v)) + " → " + esc(String(series[series.length - 1].v)) + "</span></div>";
+    }).filter(Boolean).join("");
+    return head + (rows || '<div class="oe-empty sm">Not enough repeat numeric results to trend yet.</div>') + "</section>";
   }
   function profileTab(st) {
     var labs = (st.labs || []).map(labRow).join(""), rad = (st.radiology || []).map(radRow).join("");
-    var reports = section("history", "Reports", "Investigations we ordered", (labs + rad) || "", "No labs or imaging on record.");
+    var reports = section("history", "Reports", "Investigations we ordered", (labTrendButtons(st) + labs + rad) || "", "No labs or imaging on record.");
     var meds = section("pill", "Current medications", "", (st.medications || []).map(medRow).join(""), "No current medications on record.");
-    return timelineSection(st) + reports + meds;
+    return (st.trend && st.trend.open ? labTrendPanel(st.trend) : "") + timelineSection(st) + reports + meds;
   }
   // Standalone Investigations for a clinic patient (local/shared) — record onto the clinic store, no GHIS.
   function clinicInvTab(st) {
@@ -556,7 +622,8 @@
     return '<div class="oe-ai-row">' +
       '<div class="oe-ai-main"><div class="oe-ai-label">' + esc(opts.label) +
         (opts.score != null ? '<span class="oe-ai-score">' + Math.round(opts.score) + "</span>" : "") + "</div>" +
-        (opts.why ? '<div class="oe-ai-why">' + esc(opts.why) + "</div>" : "") + "</div>" +
+        (opts.why ? '<div class="oe-ai-why">' + esc(opts.why) + "</div>" : "") +
+        (opts.cite ? '<div class="oe-ai-cite" style="font-size:11px;color:#5a7184;margin-top:2px;display:flex;align-items:center;gap:4px">' + ms("menu_book") + esc(opts.cite) + "</div>" : "") + "</div>" +   // Explainable MaiK: guideline/source
       (opts.accepted ? '<span class="oe-ai-added">' + ms("check") + "Added</span>"
         : '<button class="oe-ai-accept" data-oe-act="scribe-accept:' + kind + ":" + idx + '">' + ms("add") + "Accept</button>") +
       "</div>";
@@ -581,10 +648,12 @@
       body += '<div class="oe-ai-redflags">' + ms("warning") + "<div><b>Must-not-miss red flags</b><ul>" +
         s.redFlags.map(function (r) { return "<li>" + esc(r) + "</li>"; }).join("") + "</ul></div></div>";
     }
+    // Never-guess: when the top possibilities are genuinely close, say so instead of presenting a confident dx.
+    if (s.lowConfidence) body += '<div class="oe-ai-lowconf" style="font:500 12.5px/1.45 system-ui;padding:9px 11px;border-radius:8px;margin:2px 0 8px;background:#fff8e1;color:#7a5b00;border-left:3px solid #eab308;display:flex;gap:6px;align-items:flex-start">' + ms("help") + "<span>MaiK is not confident here — the leading possibilities are close. Treat this as a checklist, not an answer; add discriminating findings (exam, labs) to narrow it.</span></div>";
     if (s.provisionalDx) body += aiGroup("Provisional diagnosis", scribeRow("dx", 0, { label: s.provisionalDx, why: s.provisionalWhy, accepted: !!s.acceptedDx }), null, 1);
     if (s.ddx && s.ddx.length) body += aiGroup("Differential", s.ddx.map(function (d, i) { return scribeRow("ddx", i, { label: d.label, score: d.score, why: d.why, accepted: !!(s.acceptedDdx && s.acceptedDdx[i]) }); }).join(""), null, s.ddx.length);
     if (s.investigations && s.investigations.length) body += aiGroup("Investigations to consider", s.investigations.map(function (d, i) { return scribeRow("inv", i, { label: d.label, accepted: !!(s.acceptedInv && s.acceptedInv[i]) }); }).join(""), "inv", s.investigations.length);
-    if (s.treatment && s.treatment.length) body += aiGroup("Management / Treatment", s.treatment.map(function (d, i) { return scribeRow("rx", i, { label: d.label, accepted: !!(s.acceptedRx && s.acceptedRx[i]) }); }).join(""), "rx", s.treatment.length);
+    if (s.treatment && s.treatment.length) body += aiGroup("Management / Treatment", s.treatment.map(function (d, i) { return scribeRow("rx", i, { label: d.label, cite: d.cite, accepted: !!(s.acceptedRx && s.acceptedRx[i]) }); }).join(""), "rx", s.treatment.length);
     if (s.corrections && s.corrections.length) body += aiGroup("EMR corrections", s.corrections.map(function (c, i) { return scribeRow("fix", i, { label: correctionLabel(c), why: correctionSub(c), accepted: !!(s.acceptedFix && s.acceptedFix[i]) }); }).join(""), null, s.corrections.length);
     if (!body) return "";
     // Pro (Vertex) upgrade: offer a deeper LLM differential (explicit tap = consent to send the note).
@@ -656,6 +725,10 @@
   function postConsultPanel() {
     return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Close the consult, or send to Emergency.</div>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
+      '<button class="oe-btn" data-oe-act="rx-share">' + ms("share") + "Share prescription (WhatsApp / print)</button>" +
+      '<button class="oe-btn" data-oe-act="rx-refer">' + ms("forward") + "Refer patient</button>" +
+      '<button class="oe-btn" data-oe-act="rx-summary">' + ms("description") + "Visit summary</button>" +
+      ((G.SMD_FOLLOWCARE && G.SMD_FOLLOWCARE.enabled && G.SMD_FOLLOWCARE.enabled()) ? '<button class="oe-btn" data-oe-act="rx-followup">' + ms("event_repeat") + "Set follow-up</button>" : "") +   // enrol this patient into FollowCare -> pulls them back for a check-in
       '<button class="oe-btn er" data-oe-act="consult-er">' + ms("emergency") + "Send to Emergency (ER)</button></div>";
   }
   // Oncology tab (flag smd_onco_protocols, default OFF): the Tata-style drug x cycle dose matrix
@@ -861,15 +934,17 @@
     st.timeline = []; st.timelineLoading = true; if (st.tab === "profile") paint();
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent((st.patient && st.patient.mrn) || "") + "&visitId=" + encodeURIComponent(st.visitId || "") + "&episodeId=" + encodeURIComponent(st.episodeId || "");
+    var forPatient = st;   // guard: don't paint patient A's history timeline onto patient B if the doctor switched mid-fetch
     fetch(a.base + "/history" + q, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }, function () { return { ok: false, d: {} }; }); })
       .then(function (res) {
+        if (st !== forPatient) return;
         st.timelineLoading = false;
         var ents = (res.d && res.d.entries) || [], nowTs = now();
         st.timeline = ents.map(function (e, i) { return { ts: e.ts || (nowTs - i * 60000), by: e.by || "", kind: "note", text: e.text || "" }; });
         if (st.tab === "profile") paint();
       })
-      .catch(function () { st.timelineLoading = false; if (st.tab === "profile") paint(); });
+      .catch(function () { if (st !== forPatient) return; st.timelineLoading = false; if (st.tab === "profile") paint(); });
   }
   function clinicTimelineSection(s) {
     var tl = s.timeline || [];
@@ -1027,6 +1102,8 @@
     if (cmd === "tab") return switchTab(arg);
     if (cmd === "lab" || cmd === "rad") return openReport(cmd, arg);
     if (cmd === "report-close") { st.report = null; paint(); return; }
+    if (cmd === "labtrend") return openLabTrend(arg);
+    if (cmd === "trend-close") { st.trend = null; paint(); return; }
     if (cmd === "inv-pick") { var s = st.invResults[+arg]; if (s) { st.invDraft = { service: s, diagnosis: (st.invDraft && st.invDraft.diagnosis) || "", emergency: false }; st.invResults = []; st.invQuery = ""; paint(); } return; }
     if (cmd === "inv-clear") { st.invDraft = {}; paint(); return; }
     if (cmd === "inv-emg") { st.invDraft = st.invDraft || {}; st.invDraft.emergency = !st.invDraft.emergency; paint(); return; }
@@ -1066,6 +1143,10 @@
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
     if (cmd === "consult-er") return consultToER();
+    if (cmd === "rx-share") return shareRx();
+    if (cmd === "rx-refer") return shareReferral();
+    if (cmd === "rx-summary") return shareSummary();
+    if (cmd === "rx-followup") { if (G.SMD_FOLLOWCARE && G.SMD_FOLLOWCARE.openEnroll) G.SMD_FOLLOWCARE.openEnroll({ name: (st.patient && st.patient.name) || "", phone: st.phone || "", diagnosisText: (st.assessVals && st.assessVals.provisional_diagnosis) || "" }); return; }
     if (cmd === "onco-cell") return oncoCellClick(arg);
     if (cmd === "onco-drawer-close") { st.doseDrawer = null; paint(); return; }
     if (cmd === "proto-assign") return assignProtocol(arg);
@@ -1466,13 +1547,125 @@
   // print (the browser print dialog offers "Save as PDF"). Copied verbatim (~15 lines) from
   // thorex-screens.js's exportHtmlDoc - the ~15-line dual-path pipeline the plan called for reusing.
   // The native path is device-only (per the iOS build gotcha); this file only wires it, never tests it.
-  function oncoExportHtmlDoc(html, filename) {
+  // ---- One-tap prescription sheet: build a branded Rx from the consult, share to WhatsApp / print / PDF.
+  // Reuses oncoExportHtmlDoc (native real-PDF share sheet -> WhatsApp, else share-HTML, else web print). No
+  // server, no PHI in logs: the doctor picks WhatsApp in the OS share sheet. ----
+  function rxLinesFromPlan(v) {
+    var plan = String((v && v.management_plan) || ""), rx = [], ix = [], adv = [];
+    plan.split(/\n+/).forEach(function (l) {
+      l = l.trim(); if (!l) return;
+      if (/^Rx:\s*/i.test(l)) rx.push(l.replace(/^Rx:\s*/i, ""));
+      else if (/^Ix:\s*/i.test(l)) ix.push(l.replace(/^Ix:\s*/i, ""));
+      else adv.push(l);
+    });
+    return { rx: rx, ix: ix, adv: adv };
+  }
+  function rxSheetHtml(st) {
+    var v = st.assessVals || {}, p = st.patient || {};
+    var e2 = function (s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]; }); };
+    var parts = rxLinesFromPlan(v);
+    var meds = parts.rx.length ? parts.rx : (st.medications || []).map(function (m) { return (m.drugText || m.drug || "") + [m.dosage, m.frequency, m.duration].filter(Boolean).map(function (x) { return " " + x; }).join(""); }).filter(Boolean);
+    var doctor = st.author || st.ghisDoctorName || "";
+    var today = ""; try { today = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }); } catch (e) {}
+    var li = function (a) { return a.map(function (x) { return "<li>" + e2(x) + "</li>"; }).join(""); };
+    var sec = function (t, arr) { return arr.length ? '<div class="rx-sec"><h3>' + t + "</h3><ul>" + li(arr) + "</ul></div>" : ""; };
+    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Prescription</title><style>' +
+      'body{font:14px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#14202b;margin:0;padding:24px;max-width:720px}' +
+      '.rx-hd{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:3px solid #0e6e63;padding-bottom:12px;margin-bottom:14px}' +
+      '.rx-hd h1{font-size:20px;margin:0;color:#0e6e63}.rx-hd .rx-sym{font-size:34px;color:#0e6e63;font-weight:700;line-height:1}' +
+      '.rx-pt{display:flex;flex-wrap:wrap;gap:6px 22px;font-size:13px;color:#333;margin-bottom:14px}.rx-pt b{color:#14202b}' +
+      '.rx-sec{margin:12px 0}.rx-sec h3{font-size:12px;text-transform:uppercase;letter-spacing:.05em;color:#5a7184;margin:0 0 6px;border-bottom:1px solid #e2e8ec;padding-bottom:3px}' +
+      '.rx-sec ul{margin:0;padding-left:20px}.rx-sec li{margin:3px 0}.rx-dx{font-size:15px;font-weight:600;margin:8px 0 4px}' +
+      '.rx-sign{margin-top:40px;text-align:right;font-size:13px;color:#333}.rx-sign .ln{border-top:1px solid #999;width:200px;margin-left:auto;padding-top:4px}' +
+      '.rx-foot{margin-top:22px;font-size:11px;color:#94a3b8;text-align:center;border-top:1px solid #e2e8ec;padding-top:8px}' +
+      '</style></head><body>' +
+      '<div class="rx-hd"><div><h1>Prescription</h1>' + (doctor ? '<div style="font-size:13px;color:#5a7184">' + e2(doctor) + "</div>" : "") + '</div><div class="rx-sym">&#8478;</div></div>' +
+      '<div class="rx-pt"><span><b>' + e2(p.name || "Patient") + "</b></span>" + (p.displayId || p.mrn ? "<span>ID: " + e2(p.displayId || p.mrn) + "</span>" : "") + (today ? "<span>Date: " + e2(today) + "</span>" : "") + "</div>" +
+      (v.provisional_diagnosis ? '<div class="rx-dx">Dx: ' + e2(v.provisional_diagnosis) + "</div>" : "") +
+      sec("Medications", meds) + sec("Investigations advised", parts.ix) + sec("Advice", parts.adv) +
+      (v.refered_management_plan ? sec("Referral", [v.refered_management_plan]) : "") +
+      '<div class="rx-sign"><div class="ln">Signature</div></div>' +
+      '<div class="rx-foot">Generated with StewardMD &middot; Not valid without the prescriber\'s signature</div></body></html>';
+  }
+  function shareRx() {
+    if (!st.assessVals) { toast("Open the assessment first."); return; }
+    oncoExportHtmlDoc(rxSheetHtml(st), "Prescription-" + ((st.patient && st.patient.name) || "patient"), "Prescription");
+  }
+  // ---- Referral letter: refer this patient to another doctor / department / hospital, with the clinical
+  // record attached, shared over WhatsApp / print. Reuses the same export pipeline as the Rx sheet. ----
+  function referralSheetHtml(st, toWhom, reason) {
+    var v = st.assessVals || {}, p = st.patient || {};
+    var e2 = function (s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]; }); };
+    var doctor = st.author || st.ghisDoctorName || "";
+    var today = ""; try { today = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" }); } catch (e) {}
+    var summary = "";
+    try { summary = (typeof assessFindingsText === "function" ? assessFindingsText(v) : "") || ""; } catch (e) {}
+    var row = function (t, val) { return val ? '<div class="rl-row"><span class="rl-k">' + t + "</span><div>" + e2(val).replace(/\n/g, "<br>") + "</div></div>" : ""; };
+    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Referral</title><style>' +
+      'body{font:14px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#14202b;margin:0;padding:24px;max-width:720px}' +
+      '.rl-hd{border-bottom:3px solid #0e6e63;padding-bottom:12px;margin-bottom:14px}.rl-hd h1{font-size:20px;margin:0;color:#0e6e63}' +
+      '.rl-row{display:flex;gap:12px;margin:8px 0}.rl-k{flex:0 0 130px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#5a7184;padding-top:2px}' +
+      '.rl-sign{margin-top:40px;text-align:right;font-size:13px}.rl-sign .ln{border-top:1px solid #999;width:220px;margin-left:auto;padding-top:4px}' +
+      '.rl-foot{margin-top:22px;font-size:11px;color:#94a3b8;text-align:center;border-top:1px solid #e2e8ec;padding-top:8px}</style></head><body>' +
+      '<div class="rl-hd"><h1>Referral letter</h1>' + (doctor ? '<div style="font-size:13px;color:#5a7184">From: ' + e2(doctor) + "</div>" : "") + (today ? '<div style="font-size:12px;color:#94a3b8">' + e2(today) + "</div>" : "") + "</div>" +
+      row("Refer to", toWhom) +
+      row("Patient", (p.name || "Patient") + (p.displayId || p.mrn ? "  (ID: " + (p.displayId || p.mrn) + ")" : "")) +
+      row("Diagnosis", v.provisional_diagnosis) +
+      row("Reason", reason) +
+      row("Clinical summary", summary) +
+      row("Management so far", v.management_plan) +
+      '<div class="rl-sign"><div class="ln">Referring doctor</div></div>' +
+      '<div class="rl-foot">Shared securely from StewardMD</div></body></html>';
+  }
+  function shareReferral() {
+    if (!st.assessVals) { toast("Open the assessment first."); return; }
+    var toWhom = "", reason = "";
+    try { toWhom = window.prompt("Refer to (doctor / department / hospital):", (st.assessVals.refered_management_plan || "")) || ""; } catch (e) {}
+    try { reason = window.prompt("Reason for referral (optional):") || ""; } catch (e) {}
+    oncoExportHtmlDoc(referralSheetHtml(st, toWhom, reason), "Referral-" + ((st.patient && st.patient.name) || "patient"), "Referral letter");
+  }
+  // ---- Medico-legal visit / discharge summary: the full consult record as a signed, timestamped document
+  // (electronically-generated attribution line = the medico-legal attestation). Shareable / printable. ----
+  function visitSummaryHtml(st) {
+    var v = st.assessVals || {}, p = st.patient || {};
+    var e2 = function (s) { return String(s == null ? "" : s).replace(/[&<>]/g, function (c) { return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" })[c]; }); };
+    var doctor = st.author || st.ghisDoctorName || "";
+    var when = ""; try { when = new Date().toLocaleString("en-IN", { day: "2-digit", month: "short", year: "numeric", hour: "2-digit", minute: "2-digit" }); } catch (e) {}
+    var parts = rxLinesFromPlan(v);
+    var meds = parts.rx.length ? parts.rx : (st.medications || []).map(function (m) { return (m.drugText || m.drug || "") + [m.dosage, m.frequency, m.duration].filter(Boolean).map(function (x) { return " " + x; }).join(""); }).filter(Boolean);
+    var row = function (t, val) { return val ? '<div class="vs-row"><span class="vs-k">' + t + "</span><div>" + e2(val).replace(/\n/g, "<br>") + "</div></div>" : ""; };
+    var list = function (t, arr) { return arr && arr.length ? '<div class="vs-row"><span class="vs-k">' + t + '</span><ul style="margin:0;padding-left:18px">' + arr.map(function (x) { return "<li>" + e2(x) + "</li>"; }).join("") + "</ul></div>" : ""; };
+    return '<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Visit summary</title><style>' +
+      'body{font:14px/1.55 -apple-system,system-ui,Segoe UI,Roboto,sans-serif;color:#14202b;margin:0;padding:24px;max-width:760px}' +
+      '.vs-hd{border-bottom:3px solid #0e6e63;padding-bottom:12px;margin-bottom:14px}.vs-hd h1{font-size:20px;margin:0;color:#0e6e63}' +
+      '.vs-row{display:flex;gap:12px;margin:9px 0;border-bottom:1px solid #eef2f4;padding-bottom:9px}.vs-row:last-of-type{border-bottom:none}' +
+      '.vs-k{flex:0 0 140px;font-size:12px;text-transform:uppercase;letter-spacing:.04em;color:#5a7184;padding-top:2px}' +
+      '.vs-sign{margin-top:34px;text-align:right;font-size:13px}.vs-sign .ln{border-top:1px solid #999;width:220px;margin-left:auto;padding-top:4px}' +
+      '.vs-foot{margin-top:20px;font-size:11px;color:#94a3b8;text-align:center;border-top:1px solid #e2e8ec;padding-top:8px}</style></head><body>' +
+      '<div class="vs-hd"><h1>Visit summary</h1>' + (when ? '<div style="font-size:12px;color:#94a3b8">' + e2(when) + "</div>" : "") + "</div>" +
+      row("Patient", (p.name || "Patient") + (p.displayId || p.mrn ? "  (ID: " + (p.displayId || p.mrn) + ")" : "")) +
+      row("Chief complaints", v.Chief_complaints_duration) +
+      row("History", v.History_present_illness) +
+      row("Diagnosis", v.provisional_diagnosis) +
+      list("Investigations", parts.ix) +
+      list("Medications", meds) +
+      list("Advice", parts.adv) +
+      row("Referral", v.refered_management_plan) +
+      '<div class="vs-sign"><div class="ln">' + (doctor ? e2(doctor) : "Treating doctor") + "</div></div>" +
+      '<div class="vs-foot">Electronically generated' + (doctor ? " by " + e2(doctor) : "") + (when ? " on " + e2(when) : "") + " via StewardMD &middot; a record of this consultation</div></body></html>";
+  }
+  function shareSummary() {
+    if (!st.assessVals) { toast("Open the assessment first."); return; }
+    oncoExportHtmlDoc(visitSummaryHtml(st), "VisitSummary-" + ((st.patient && st.patient.name) || "patient"), "Visit summary");
+  }
+
+  function oncoExportHtmlDoc(html, filename, title) {
     var name = (filename || "StewardMD-Protocol-sheet").replace(/[^\w.-]+/g, "-");
     if (G.SMD_IS_NATIVE) {
       var N = G.SMD_NATIVE;
       if (N && N.sharePdfFromHtml) {
         toast("Building PDF...");
-        N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
+        N.sharePdfFromHtml(html, name, title || "StewardMD - Protocol sheet").catch(function () { oncoShareHtml(html, name); });
         return;
       }
       oncoShareHtml(html, name);
@@ -1509,6 +1702,22 @@
         st.report.loading = false; st.report.data = res.d; paint();
       })
       .catch(function () { if (st.report) { st.report.loading = false; st.report.err = "Could not load this report."; paint(); } });
+  }
+  // #156 — fetch every lab report for a repeated test name so labTrendPanel can trend its numeric analytes.
+  // Reuses the /lab-detail endpoint per order. Patient-switch guarded. Flag-gated OFF (validate on device).
+  function openLabTrend(name) {
+    var group = (st.labs || []).filter(function (l) { return (l.serviceName || l.testName) === name; });
+    st.report = null; st.trend = { open: true, name: name, loading: true, reports: [], err: "" }; paint();
+    var a = ghisAuth(), forPatient = st;
+    Promise.all(group.map(function (l) {
+      return fetch(a.base + "/lab-detail?renderId=" + encodeURIComponent(l.renderId || "") + "&episodeId=" + encodeURIComponent(l.episodeId || ""), { headers: authHeaders(), credentials: "include" })
+        .then(function (r) { return r.ok ? r.json() : null; }, function () { return null; }).catch(function () { return null; });
+    })).then(function (reps) {
+      if (st !== forPatient || !st.trend) return;
+      st.trend.loading = false; st.trend.reports = (reps || []).filter(Boolean);
+      if (!st.trend.reports.length) st.trend.err = "Could not load the trend reports.";
+      paint();
+    }, function () { if (st === forPatient && st.trend) { st.trend.loading = false; st.trend.err = "Could not load the trend."; paint(); } });
   }
   // GHIS lab results can be HTML (histopath/culture narratives). Turn block tags into line breaks, drop the
   // rest, decode entities -> readable plain text (mirrors the server's htmlToText for radiology).
@@ -1569,15 +1778,17 @@
     if (usesLocal(st.source)) { st.loading = false; paint(); return; }   // personal/shared clinic: no hospital profile/labs to fetch
     var a = ghisAuth();
     var q = "?patientId=" + encodeURIComponent(opts.patientId || "") + "&recordNo=" + encodeURIComponent(opts.recordNo || "");
+    var forPatient = st;   // guard: if the doctor opens another patient before this resolves, don't write A's labs onto B's chart
     fetch(a.base + "/profile" + q, { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }); })
       .then(function (res) {
+        if (st !== forPatient) return;
         var d = res.d;
         if (!res.ok || d.error === "login_required") { st.loading = false; st.error = "Connect Ward Sync (GHIS) first, then reopen the profile."; paint(); return; }
         st.loading = false; st.labs = d.labs || []; st.radiology = d.radiology || []; st.medications = d.medications || []; st.phone = d.phone || "";
         paint();
       })
-      .catch(function () { st.loading = false; st.error = "Could not load the patient profile."; paint(); });
+      .catch(function () { if (st !== forPatient) return; st.loading = false; st.error = "Could not load the patient profile."; paint(); });
   }
   function loadAssessment() {
     if (usesLocal(st.source)) {   // personal/shared clinic: prefill from the on-device store (no GHIS fetch)
@@ -1587,15 +1798,17 @@
     }
     st.assessLoading = true; st.assessErr = ""; paint();
     var a = ghisAuth();
+    var forPatient = st;   // guard: another patient opened mid-flight must not receive this patient's assessment values
     fetch(a.base + "/assessment?patientId=" + encodeURIComponent(st.patient.mrn || "") + "&episodeId=" + encodeURIComponent(st.episodeId || ""), { headers: authHeaders(), credentials: "include" })
       .then(function (r) { return r.json().then(function (d) { return { ok: r.ok, d: d || {} }; }); })
       .then(function (res) {
+        if (st !== forPatient) return;
         st.assessLoading = false; st.assessLoaded = true;
         if (!res.ok || res.d.error === "login_required") st.assessErr = "Connect Ward Sync (GHIS) first, then reopen this tab.";
         else st.assessVals = buildAssessVals(res.d.fields || []);
         paint();
       })
-      .catch(function () { st.assessLoading = false; st.assessLoaded = true; st.assessErr = "Could not load the assessment form."; paint(); });
+      .catch(function () { if (st !== forPatient) return; st.assessLoading = false; st.assessLoaded = true; st.assessErr = "Could not load the assessment form."; paint(); });
   }
 
   // Every write: explicit confirm() -> POST. 501 / disabled -> clean "being set up" toast (never a raw error).
@@ -1835,7 +2048,13 @@
       var dosing = [d.dose, d.route, d.freq].filter(Boolean).join(" ");
       return [d.composition, dosing].filter(Boolean).join(" · ");
     }).filter(Boolean);
-    return { rx: rx, steps: (rec.steps || []).slice(0, 4), regimen: rec.regimenLabel || "" };
+    return { rx: rx, steps: (rec.steps || []).slice(0, 4), regimen: rec.regimenLabel || "", source: tj.source || "", tier: rec.tier || "" };
+  }
+  // Explainable MaiK: a short, copyright-safe citation label for an OPD suggestion (Harrison genericized
+  // per the app-wide policy; named guidelines/societies kept verbatim).
+  function citeShort(src) {
+    src = String(src || "").trim(); if (!src) return "";
+    return src.replace(/Harrison[^·|,;]*/i, "Standard medicine reference").trim();
   }
 
   // PURE: differentialFor returns infective THEN non-infective (the antibiotic gate's order); rank the
@@ -1887,6 +2106,9 @@
   function buildMaikSuggestions(diff, treatMap) {
     diff = diff || []; treatMap = treatMap || {};
     var top = diff.slice(0, 6);
+    // Never-guess signal (scale-independent): no score, or the top two are nearly tied => genuinely uncertain.
+    var t0 = top[0] || {}, t1 = top[1] || {};
+    var lowConfidence = !(t0.score > 0) || (t1.score != null && t0.score > 0 && (t1.score / t0.score) > 0.85);
     var provisionalDx = top.length ? cleanClinical(top[0].dx) : "";
     var provisionalWhy = top.length ? cleanClinical(top[0].reason || "") : "";
     var ddx = top.slice(1).map(function (r) { var nm = cleanClinical(r.dx); return { label: nm, dx: nm, score: r.score, source: "engine", why: cleanClinical(r.reason || "") }; });
@@ -1900,9 +2122,10 @@
     var rxSeen = {}, treatment = [];
     top.slice(0, 2).forEach(function (r) {
       var t = treatMap[r.id]; if (!t) return;
+      var cite = citeShort(t.source);   // Explainable MaiK: the guideline/textbook this regimen came from
       (t.rx || []).concat(t.steps || []).forEach(function (line) {
         var k = String(line).toLowerCase();
-        if (line && !rxSeen[k]) { rxSeen[k] = 1; treatment.push({ label: cleanClinical(line), source: "engine", dx: r.dx }); }
+        if (line && !rxSeen[k]) { rxSeen[k] = 1; treatment.push({ label: cleanClinical(line), source: "engine", cite: cite, dx: r.dx }); }
       });
     });
     // Must-not-miss red flags across the leading differentials (deduped) — surfaced, never accepted/written.
@@ -1913,7 +2136,7 @@
         if (rf && !redSeen[k]) { redSeen[k] = 1; redFlags.push(cleanClinical(rf)); }
       });
     });
-    return { provisionalDx: provisionalDx, provisionalWhy: provisionalWhy, ddx: ddx, investigations: investigations, treatment: treatment, redFlags: redFlags };
+    return { provisionalDx: provisionalDx, provisionalWhy: provisionalWhy, ddx: ddx, investigations: investigations, treatment: treatment, redFlags: redFlags, lowConfidence: lowConfidence };
   }
 
   // Fetch a STATIC disease-treatment file (no PHI). Tries the id verbatim then upper/lower-case
@@ -1999,7 +2222,7 @@
       var sg = buildMaikSuggestions(diff, treatMap);
       st.maikBusy = false;
       st.scribeSuggestions = { provisionalDx: sg.provisionalDx, provisionalWhy: sg.provisionalWhy, ddx: sg.ddx,
-        investigations: sg.investigations, treatment: sg.treatment, redFlags: sg.redFlags, corrections: emrCorrections(v),
+        investigations: sg.investigations, treatment: sg.treatment, redFlags: sg.redFlags, corrections: emrCorrections(v), lowConfidence: sg.lowConfidence,
         acceptedDx: false, acceptedDdx: {}, acceptedInv: {}, acceptedRx: {}, acceptedFix: {}, source: "maik" };
       st.scribeStats = { filled: 0, suggestions: (sg.provisionalDx ? 1 : 0) + sg.ddx.length + sg.investigations.length + sg.treatment.length };
       st.scribeAnim = true; paint();
@@ -2186,9 +2409,10 @@
       if (kind === "dx") s.acceptedDx = true; else { s.acceptedDdx = s.acceptedDdx || {}; s.acceptedDdx[idx] = true; }
     } else if (kind === "inv") {
       var inv = s.investigations[idx]; if (!inv) return false;
-      // Ask MaiK folds the workup into the Management plan; the voice-scribe path keeps its order draft.
-      if (s.source === "maik") appendPlan("management_plan", "Ix: " + inv.label);
-      else st.invDraft = { service: { id: null, name: inv.label }, diagnosis: (st.assessVals && st.assessVals.provisional_diagnosis) || "", emergency: false, fromSuggestion: true };
+      // Fold every accepted investigation into the Management plan (accumulates across taps + "Accept all",
+      // persists on Save). Scribe/Pro labels are free-text with no GHIS service id, so we must NOT stage them
+      // as a single-slot invDraft order (that overwrote earlier accepts + posted serviceId:null -> order failed).
+      appendPlan("management_plan", "Ix: " + inv.label);
       s.acceptedInv = s.acceptedInv || {}; s.acceptedInv[idx] = true;
     } else if (kind === "rx") {
       var rx = s.treatment && s.treatment[idx]; if (!rx) return false;
@@ -2334,7 +2558,7 @@
       onError: function () { setVoiceStatus("On-device voice unavailable"); stopFieldMic(); },
       onState: function () {}
     });
-    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); }   // listen returned null (no engine)
+    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); toast("On-device voice could not start. Type the value instead."); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
   }
 
   // ---- finish the consult (shown after a GHIS save) --------------------------------------------

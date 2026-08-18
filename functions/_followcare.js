@@ -218,7 +218,10 @@ export async function enrollEpisode(env, p) {
   if (isMinor && guardianDigits.length < 8) return { ok: false, error: "guardian_required" };
   const dischargeMs = Number(p.dischargeMs) || nowMs;
   const sendHour = (typeof p.sendHour === "number") ? p.sendHour : 9;
-  const schedule = Schedule.scheduleFor(p.pathwayId, dischargeMs, { pathways: Pathways, sendHour });
+  // Optional doctor-set "first follow-up" time: shifts the whole pathway schedule to start then, keeping
+  // its spacing. Clamped to [now - 1h, now + 180d] so a bad value can never schedule in the past/far future.
+  let firstDueMs; { const f = Number(p.firstFollowupMs); if (isFinite(f) && f >= nowMs - 3600000 && f <= nowMs + 180 * 86400000) firstDueMs = f; }
+  const schedule = Schedule.scheduleFor(p.pathwayId, dischargeMs, { pathways: Pathways, sendHour, firstDueMs });
   const firstDue = schedule.find(function (s) { return s.dueAtMs >= nowMs; }) || schedule[0] || null;
 
   const episodeId = uuid();

@@ -7151,21 +7151,66 @@
     var r = list.slice().sort(function (a, b) { return (b.savedAt || 0) - (a.savedAt || 0); });
     var items = r.length ? r.map(function (e) {
       var cur = (e.id === _raw.patient._id);
-      return '<div class="icu-row" style="align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">' +
+      var mrn = (e.state && e.state.patient && e.state.patient.mrn) || e.mrn || "";   // StewardMD/clinic patient ID
+      var skey = ((e.name || "") + " " + (e.dx || "") + " " + (e.bed || "") + " " + mrn + " " + (e.id || "")).toLowerCase();
+      return '<div class="icu-row" data-s="' + esc(skey) + '" style="align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--border)">' +
         '<button data-icu-act="loadpt:' + esc(e.id) + '" style="flex:1;text-align:left;border:none;background:none;cursor:pointer;color:var(--ink)">' +
           '<div style="font:800 14px var(--font)">' + esc(e.name || "Unnamed") + (cur ? ' <span style="color:var(--primary);font-size:11px">• current</span>' : "") + '</div>' +
           '<div style="font:600 12px var(--font);color:var(--muted)">' + (e.dx ? esc(e.dx) : "No diagnosis") + (e.bed ? " · Bed " + esc(e.bed) : "") + " · " + esc(fmtWhen(e.savedAt)) + '</div>' +
         '</button>' +
         '<button data-icu-act="sharept:' + esc(e.id) + '" aria-label="Share case" title="Share" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:15px;padding:6px">📤</button>' +
+        ((window.SMD_REFERRALS && SMD_REFERRALS.flagOn && SMD_REFERRALS.flagOn()) ? '<button data-icu-act="referpt:' + esc(e.id) + '" aria-label="Refer to a doctor" title="Refer to a doctor" style="border:none;background:none;color:var(--primary);cursor:pointer;font-size:15px;padding:6px">↪</button>' : "") +
         '<button data-icu-act="delpt:' + esc(e.id) + '" aria-label="Delete patient" title="Delete" style="border:none;background:none;color:var(--danger);cursor:pointer;font-size:16px;padding:6px">🗑</button></div>';
     }).join("") : '<div class="icu-empty">No saved patients yet. Enter patient details, then tap 💾 Save.</div>';
     var status = cloudOn === true ? "☁︎ Synced to your cloud" : cloudOn === false ? "📱 Saved on this device (cloud unavailable)" : "…checking cloud";
     modalEl.innerHTML = '<div class="icu-sheet"><h3>📋 Saved patients <span class="icu-phase">' + r.length + "/" + MAX_CASES + "</span></h3>" +
       '<div style="font:600 11px var(--font);color:var(--muted);margin:-6px 0 8px">' + status + " · max " + MAX_CASES + " cases (oldest is replaced)</div>" +
+      (r.length > 4 ? '<input id="icuRosterSearch" placeholder="Search name, diagnosis, bed or ID…" autocomplete="off" oninput="try{window.ICU&&ICU._rosterSearch&&ICU._rosterSearch(this.value)}catch(e){}" style="width:100%;box-sizing:border-box;margin-bottom:8px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;font:500 14px var(--font);background:var(--card);color:var(--ink)">' : "") +
       '<div style="max-height:50vh;overflow:auto;margin-bottom:10px">' + items + "</div>" +
+      ((window.SMD_REFERRALS && SMD_REFERRALS.flagOn && SMD_REFERRALS.flagOn()) ? '<button class="icu-btn ghost" id="refInboxBtn" data-icu-act="refinbox">↪ Referrals' + (window.SMD_REFERRALS.unreadCount && SMD_REFERRALS.unreadCount() ? " (" + SMD_REFERRALS.unreadCount() + ")" : "") + "</button>" : "") +
+      ((window.SMD_CONNECT && SMD_CONNECT.listDoctors) ? '<button class="icu-btn ghost" data-icu-act="emrdocs">🩺 EMR Doctors</button>' : "") +
       '<button class="icu-btn" data-icu-act="newpt">＋ New patient</button>' +
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
+  }
+  // #151 — EMR Doctors: display the connected hospital EMR's practitioner directory (FHIR Practitioner
+  // search via SMD_CONNECT.listDoctors). Display-only; reuses the roster sheet's .icu-row + data-s so the
+  // shared _rosterSearch filter works here too. Rows carry no PHI (name + EMR id only).
+  function emrDocRows(doctors) {
+    if (!doctors || !doctors.length) return '<div class="icu-empty">No doctors found in the connected EMR.</div>';
+    return doctors.map(function (d) {
+      var nm = (d && (d.name || d.id)) || "Doctor";
+      var skey = (nm + " " + ((d && d.id) || "")).toLowerCase();
+      return '<div class="icu-row" data-s="' + esc(skey) + '" style="align-items:center;gap:10px;padding:9px 0;border-bottom:1px solid var(--border)">' +
+        '<span style="flex:1;font:600 14px var(--font);color:var(--ink)">' + esc(nm) +
+        ((d && d.id) ? ' <span style="color:var(--muted);font-weight:500;font-size:12px">· ' + esc(d.id) + "</span>" : "") + "</span></div>";
+    }).join("");
+  }
+  function emrDoctorsSheetHTML(s) {
+    s = s || {};
+    var head = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="EMR doctors"><h3>🩺 EMR Doctors' +
+      (s.tenantName ? ' <span class="icu-phase" style="font-weight:500">' + esc(s.tenantName) + "</span>" : "") + "</h3>";
+    var body;
+    if (s.loading) body = '<div class="icu-empty">Loading the hospital EMR doctor list…</div>';
+    else if (s.err) body = '<div class="icu-empty">' + esc(s.err) + "</div>";
+    else body = ((s.doctors && s.doctors.length > 6) ? '<input id="icuEmrDocq" placeholder="Search doctor name or ID…" autocomplete="off" oninput="try{window.ICU&&ICU._rosterSearch&&ICU._rosterSearch(this.value)}catch(e){}" style="width:100%;box-sizing:border-box;margin-bottom:8px;padding:9px 11px;border:1px solid var(--border);border-radius:9px;font:500 14px var(--font);background:var(--card);color:var(--ink)">' : "") +
+      '<div style="max-height:52vh;overflow:auto;margin-bottom:10px">' + emrDocRows(s.doctors) + "</div>";
+    return head + body + '<button class="icu-btn ghost" data-icu-act="patients">‹ Back</button>' +
+      '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
+  }
+  function renderEmrDoctors(s) { if (!modalEl) ensureModal(); if (!modalEl) return; modalEl.innerHTML = emrDoctorsSheetHTML(s); modalEl.classList.add("on"); }
+  function openEmrDoctors() {
+    if (!(window.SMD_CONNECT && SMD_CONNECT.listDoctors && SMD_CONNECT.tenants)) { renderEmrDoctors({ err: "Connect a hospital EMR first (Ward Sync / Connect)." }); return; }
+    renderEmrDoctors({ loading: true });
+    SMD_CONNECT.tenants().then(function (tl) {
+      var tn = (tl && tl[0]) || null;
+      if (!tn) { renderEmrDoctors({ err: "No connected hospital EMR found for your account." }); return; }
+      var tid = tn.id || tn.tenantId, tnm = tn.name || tn.hospitalName || tid;
+      SMD_CONNECT.listDoctors({ tenantId: tid }).then(function (r) {
+        if (r && r.ok) renderEmrDoctors({ tenantName: tnm, doctors: r.doctors || [] });
+        else renderEmrDoctors({ tenantName: tnm, err: "Could not load the doctor list (" + ((r && r.error) || "error") + ")." });
+      }, function () { renderEmrDoctors({ tenantName: tnm, err: "Could not reach the EMR. Check your connection." }); });
+    }, function () { renderEmrDoctors({ err: "Could not reach the EMR. Check your connection." }); });
   }
   function openRoster() {
     ensureModal();
@@ -7391,6 +7436,9 @@
       case "dischargeptgo": dischargePatientGo(); break;
       case "grprmpt": grpRemovePatient(); break;             // group: remove the shared patient doc (canInstruct)
       case "sharept": sharePatient(arg); break;
+      case "referpt": { var _rr = loadRoster().filter(function (x) { return x.id === arg; })[0]; if (_rr && window.SMD_REFERRALS) SMD_REFERRALS.referPrompt(_rr); break; }
+      case "refinbox": if (window.SMD_REFERRALS) SMD_REFERRALS.openInbox(); break;
+      case "emrdocs": openEmrDoctors(); break;
       case "sharecase": shareCase(); break;
       case "phiexportgo": { var _pe = _phiPending; _phiPending = null; closeForm(); if (_pe) _pe(); break; }   // KI-H6: confirmed PHI export
       case "clearfindings": openClearConfirm(); break;
@@ -7642,6 +7690,13 @@
 
   /* ------------------------------------------------------------- controller */
   var ICU = {
+    // Roster search: filter the saved-patients sheet in place (by name / diagnosis / bed / StewardMD ID)
+    // without a re-render, so the input keeps focus while typing.
+    _rosterSearch: function (v) {
+      if (!modalEl) return; v = String(v || "").toLowerCase().trim();
+      var rows = modalEl.querySelectorAll(".icu-row");
+      for (var i = 0; i < rows.length; i++) { var s = rows[i].getAttribute("data-s") || ""; rows[i].style.display = (!v || s.indexOf(v) > -1) ? "" : "none"; }
+    },
     open: function (target, ward) {
       injectCSS();
       // Context switch (ICU ↔ Ward): each category has a SEPARATE patient namespace, so swap the live
@@ -7748,6 +7803,8 @@
     recompute: function () { onChange(); },
     reset: function () { resetState(); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
+    // Load a referral received from another doctor (referrals.js): add it to this device's roster, then open it.
+    ingestReferral: function (entry) { if (!entry || !entry.state) return; var r = loadRoster(); r.push(entry); saveRoster(capTen(r)); try { ICU.open(); } catch (e) {} applyState(entry.state, entry.id); },
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
     ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
