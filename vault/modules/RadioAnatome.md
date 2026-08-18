@@ -9,7 +9,8 @@ built only from licence-cleared sources.
 - **Pipeline:** `atlas-pipeline/` (dev-only, never shipped)
 - **Spec:** `docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md`
 - **Plans:** `docs/superpowers/plans/2026-08-17-anatomy-atlas-viewer.md` · `…-pipeline.md`
-- **Tests:** `test/atlas-layout.test.mjs` · `test/atlas-data.test.mjs`
+- **Tests:** `test/atlas-layout.test.mjs` (74) · `test/atlas-data.test.mjs` (143) · `atlas-pipeline/test_pipeline.py` (203)
+- **Modules:** 10 — head/thorax/abdomen CT in axial + coronal + sagittal (1249 verified pins), plus brain T1 MRI images awaiting authoring
 
 ## Gotchas
 
@@ -40,3 +41,39 @@ built only from licence-cleared sources.
   `modules.json.credits` lines on the info screen. `provenance` in each `atlas.json` is an
   audit trail only — it contains internal tooling paths.
 - **The selected label's white pill is `paint-order: stroke`**, not a second element.
+
+
+## Content status (2026-08-18)
+
+Nine CT modules across three planes, all real Visible Human data, **1249/1249 pins
+verified inside their own structure**. The brain module ships real T1 images with the
+full 23-structure palette and **zero pins** — see below.
+
+**Reformats are free.** `vhp_volume.py reformat` transposes image and label mask
+identically and keeps the `[display-col, display-row-increasing-UP, slice]` convention
+that `orient.to_display()` consumes, so the whole pipeline runs on a reformatted volume
+unchanged. One region → three modules. Superior is up in both new planes; sagittal puts
+anterior left. `build.py --labels` lets the three planes share one mapping file.
+
+**What the data refuses to give, all measured not guessed:**
+- lung lobes — lung is −540 to −570 HU here vs −700 to −850 live (never-inflated cadaver
+  lungs); soft tissue reads +49 HU so calibration is fine
+- liver/spleen/kidney — one undifferentiated 25–90 HU band, so TotalSegmentator found
+  bowel, muscle, vertebrae, aorta and no solid organs
+- left vs right — two landmarks disagree on this cadaver (8% margin, flips sign)
+- brain labels — **SynthSeg was run** and produced only cortex+WM, ~2× asymmetric, most
+  of the brain unlabelled: a 33-slice 4 mm stack is not the 3D T1 it needs. Evidence:
+  `docs/superpowers/specs/2026-08-17-synthseg-brain-failure.png`
+- rib/vertebral levels — position cannot number them
+
+**Running TotalSegmentator on 8 GB:** it OOMs in its final resample step, not inference
+(20 s). Pre-resample to 3 mm yourself, segment there, nearest-neighbour the MASK back to
+full resolution. `--roi_subset` cuts inference from ~8 min/pass to 20 s.
+
+**Running SynthSeg at all:** needs Python 3.11 + TF 2.15 + Keras 2.15 (bare
+`import keras` in 30 places, so TF_USE_LEGACY_KERAS is not enough), plus patches for
+`np.int` (removed in numpy 1.24) and Keras returning a list from `Model.output`.
+`--crop 176 --threads 2` to fit 8 GB.
+
+**Process:** never run the self-checks as `... | tail -1` — the pipe returns tail's exit
+code and a failing test looks green.
