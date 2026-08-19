@@ -9,14 +9,24 @@
 // resolves to a Cloudflare India-region custom domain or an India-hosted forwarder proxying to us, this
 // file is unchanged. Set ABDM_CALLBACK_PATH_PREFIX if the forwarder mounts us under a path.
 //
-// Handlers are wired in deliberately, one at a time, as each downstream path is proven. An unwired kind
-// still returns 202 - the gateway treats non-2xx as a delivery failure and retries, so acknowledging an
-// unimplemented callback is strictly better than 5xx-ing at it. The gap shows up in the audit trail.
+// This is the composition root: it binds storage, the gateway, the HIP read-source and the two outbound
+// seams (OTP delivery, OPD token issue) to the handlers in hip-handlers.js. Everything stays inert behind
+// CONNECT_FLAG, and the M2 handlers behind CONNECT_HIP_FLAG on top of it.
+//
+// An unhandled kind still returns 202 - the gateway treats non-2xx as a delivery failure and retries, so
+// acknowledging an unimplemented callback is strictly better than 5xx-ing at it. The gap shows up in the
+// audit trail as abdm.callback.unhandled.
 
 import { flagOn, jsonResponse } from "../../_connect/testkit.js";
 import { handleCallback } from "../../_connect/abdm/callbacks.js";
 import { putToken } from "../../_connect/abdm/linktoken.js";
 import { makeAuditSink } from "../../_connect/audit.js";
+import { makeSecrets } from "../../_connect/secrets.js";
+import { makeGateway } from "../../_connect/abdm/gateway.js";
+import { abdmConfig } from "../../_connect/abdm/config.js";
+import { HIP_HANDLERS } from "../../_connect/abdm/hip-handlers.js";
+import { consentedStoreSource } from "../../_connect/abdm/consented-store.js";
+import { issueQueueToken } from "../../_connect/abdm/opd-bridge.js";
 
 /**
  * The link token arrives asynchronously here after ensureLinkToken() fires generate-token.
@@ -37,11 +47,8 @@ async function onGenerateToken({ env, deps, body }) {
 
 const HANDLERS = {
   "link-token-result": onGenerateToken,
-  // Not yet wired, and acknowledged rather than failed:
-  //   discover / link-init / link-confirm      need the care-context model (D5)
-  //   consent-notify                           needs the HIP consent store wired to real tenants
-  //   hi-request                               needs the Fidelius shared-secret question settled (D4)
-  //   patient-share                            needs the OPD queue token bridge
+  ...HIP_HANDLERS,
+  // Still unwired, and acknowledged rather than failed: the six M3 (HIU) callback kinds.
 };
 
 export async function onRequest(context) {
@@ -49,14 +56,33 @@ export async function onRequest(context) {
   if (!flagOn(env)) return jsonResponse({ error: "not_found" }, { status: 404 });
 
   const audit = makeAuditSink(env, env.CONNECT_DB);
+  const cfg = abdmConfig(env);
+  const now = () => new Date().toISOString();
   const deps = {
     fetch,
     kv: env.MAIK_KV,
     db: env.CONNECT_DB,
-    now: () => new Date().toISOString(),
+    r2: env.CONNECT_R2,
+    secrets: makeSecrets(env),
+    now,
     waitUntil: (p) => context.waitUntil(p),
     handlers: HANDLERS,
     audit,
+    // Answering an ABDM callback means calling BACK into the gateway (on-discover, on-init, on-confirm,
+    // hip/on-notify, hip/on-request, hiNotify, on-share). Same session-token seam as the outbound side.
+    gateway: makeGateway({
+      baseUrl: cfg.gatewayBase, cmId: cfg.cmId, hipId: cfg.hipId, hiuId: cfg.hiuId,
+      fetch, kv: env.MAIK_KV, now: () => new Date(), secrets: makeSecrets(env),
+    }),
+    // The only HIP source that can answer without the doctor's device being awake, which is the whole
+    // point of the 20-minute data-push budget. See consented-store.js.
+    source: consentedStoreSource,
+    // Scan-and-share issues an OPD queue token. Bound here so hip-handlers stays free of Firestore.
+    issueQueueToken,
+    // OTP delivery for user-initiated linking. Left unbound until the owner picks the channel: an
+    // unbound sender makes onLinkInit report delivered:false rather than silently claim it sent one.
+    // // VERIFY (owner): wire to the FollowCare SMS/WhatsApp sender before USER_INIT_LINK certification.
+    sendOtp: null,
     // Correlating a callback back to a patient is per-flow and none of it is proven yet, so it stays
     // null: onGenerateToken records and skips rather than caching against a guessed subject.
     correlate: null,
