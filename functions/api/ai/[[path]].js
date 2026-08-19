@@ -434,9 +434,9 @@ function providerOrder(env, opts) {
   // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
   // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
-  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
+  const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
   const forMaik = !!(opts && opts.maik);
-  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "developer" ? ["developer"] : ["vertex", "developer"];
+  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
   if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
   return order.length ? order : ["vertex", "developer"];
@@ -1228,7 +1228,7 @@ export async function onRequest(context) {
         // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
         // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
         // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
