@@ -1,6 +1,6 @@
 ---
 tags: [module, interop, compliance]
-status: M1+M2+M3 built and wired; Fidelius resolved; 603 tests green. Inert, flags OFF
+status: M1+M2+M3 wired; FHIR conforms to NRCES (6/8 producible); 738 tests. Inert, flags OFF
 flag: smd_connect / CONNECT_FLAG + smd_connect_hip / CONNECT_HIP_FLAG, both default OFF
 ---
 # ABDM (Ayushman Bharat Digital Mission)
@@ -24,6 +24,9 @@ the official docs on 2026-08-18 found five defects in it, listed there with evid
 - `hip-sources/` — `native-opd.js`, `connected-emr.js`, `followcare.js`
 - `db/connect_abdm_schema.sql` — `connect_abdm_consent_req` / `_txn` / `_carecontext`
 - `docs/connect/abdm/owner-onboarding.md` — provisioning + go-live gates (64 `// VERIFY` pins)
+- `docs/connect/abdm/CERTIFICATION-READINESS.md` — **read this before booking functional testing**
+- `docs/connect/abdm/CAPTURE-RUNBOOK.md` — how to capture real callbacks (needs the ABHA app)
+- `scripts/abdm-sandbox-probe.sh` / `abdm-capture.py` / `abdm-validate-fhir.sh` / `abdm-migrate.mjs`
 
 ## Status
 Merged, **inert**, mock-only. Both flags OFF ⇒ every `/api/connect/*` route 404/400s, so a partial
@@ -51,6 +54,15 @@ placeholder, which is deliberately useful: it captures ABDM's real callback payl
   `hiu-handlers.js` (6 HIU kinds), all mounted at `functions/api/v3/[[path]].js`.
 - **D5 care-context sources** - three sources exist (native OPD, connected EMR, consented store) and the
   consented store is bound in the receiver.
+- **D9 composite KV keys** - `guardedKvPut` checked the JOINED key, and a hex digest next to other text
+  manufactures digit runs that look like a mobile: 7% of `prefix:hipId:<sha256>` keys tripped the no-PHI
+  guard and FAILED CLOSED, so ~1 patient in 14 could never be cleared for a link OTP. Keys are now checked
+  segment-wise.
+- **FHIR conformance** - HAPI 6.2.1 vs the real NRCES IG rejected **8 of 8** HI types while our own gate
+  passed all 8. Root cause: five profiles allow `Composition.section` max 1 with entry slicing CLOSED.
+  Now **6 of 6 producible types pass with 0 errors**; ImmunizationRecord and InvoiceRecord are
+  structurally unproducible (section + section.entry both min=1, SCCM has no immunisations or billing) and
+  are REFUSED rather than emitted invalid. That is a certification gap needing SCCM fields.
 
 ## Hard rules
 - **M1 must use V3 APIs.** A V1/V2 M1 implementation is *rejected* at Sandbox Exit.

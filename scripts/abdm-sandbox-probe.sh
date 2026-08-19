@@ -73,7 +73,13 @@ case "$cmd" in
     ;;
   set-url)
     [ -n "${2:-}" ] || { echo "usage: set-url <https://host>   (BASE ONLY - a path makes the gateway append it twice, FAQ Q30)" >&2; exit 2; }
-    case "$2" in */*/*) echo "refusing: that looks like it has a path. Register the BASE only (FAQ Q30)." >&2; exit 2;; esac
+    # FAQ Q30: register the BASE only - a path makes the gateway append the endpoint twice. Count path
+    # segments AFTER the scheme; the earlier check counted the "https://" slashes and so rejected every
+    # legitimate https://host/segment base, including a webhook.site URL.
+    nopath="${2#*://}"
+    case "$nopath" in
+      */*/*) echo "refusing: '$2' has more than one path segment. Register the BASE only (FAQ Q30)." >&2; exit 2;;
+    esac
     TOKEN=$(tok)
     printf '{"url":"%s"}' "$2" > /tmp/abdm-url.json
     call PATCH /api/hiecm/gateway/v3/bridge/url /tmp/abdm-url.json -w "\nHTTP:%{http_code}\n"

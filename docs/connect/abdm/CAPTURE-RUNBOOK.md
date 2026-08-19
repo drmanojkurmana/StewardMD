@@ -23,7 +23,7 @@ Which is why step 1 below is yours, and most of the rest is scripted.
 |---|---|
 | Bridge | `SBXID_062379` (MAIKNOWLEDGE LLP), active |
 | Facility / HIP / HIU id | `IN2810006668` "StewardMD", HIP+HIU, active |
-| Callback base registered | `https://webhook.site/05b1b1c7-9bff-4c50-83dc-0a73682eec13` |
+| Callback base registered | a webhook.site capture URL - read it with `./scripts/abdm-sandbox-probe.sh bridge` |
 
 The previous callback URL had expired, so ABDM's callbacks were going nowhere and nothing was retained.
 It was re-registered on 2026-08-19. Confirm at any time with:
@@ -52,7 +52,7 @@ Then tell me the address, or run step 2 yourself.
 
 ```bash
 # Start the capture watcher in one terminal
-./scripts/abdm-capture.py 05b1b1c7-9bff-4c50-83dc-0a73682eec13 --watch
+./scripts/abdm-capture.py "$(./scripts/abdm-sandbox-probe.sh bridge | sed -n 's#.*webhook.site/##p')" --watch
 
 # Fire the flows in another
 ./scripts/abdm-sandbox-probe.sh flow <your-address>@sbx
@@ -87,7 +87,7 @@ evidence we want.
 ## Step 4 — turn captures into fixtures
 
 ```bash
-./scripts/abdm-capture.py 05b1b1c7-9bff-4c50-83dc-0a73682eec13 \
+./scripts/abdm-capture.py "$(./scripts/abdm-sandbox-probe.sh bridge | sed -n 's#.*webhook.site/##p')" \
   --out test/connect/abdm/fixtures/real-callbacks.mjs
 ```
 
@@ -119,6 +119,20 @@ which consent-init fields are mandatory. Reproduce with:
 | `purpose` | "Consent purpose cannot be null" |
 | `requester` | *accepted without it* — we require it anyway (certification pins it, and the patient's consent screen must name the doctor) |
 | `hip` / `careContexts` | *accepted without them* — we send explicit nulls, as ABDM's own collection does |
+
+## Why the capture URL is not written down here
+
+A webhook.site URL is an unauthenticated inbox, and the callbacks ABDM posts to it carry a real ABHA
+address and real patient demographics. Committing the token would put "anyone who can read this repo can
+read captured PHI" into git history, where it cannot be taken back. So the token lives only in the ABDM
+registration, and every command above reads it from there:
+
+```bash
+./scripts/abdm-sandbox-probe.sh bridge     # prints the registered URL
+```
+
+Rotate it (mint a new token and `set-url`) once the capture exercise is finished, so the inbox stops
+being live.
 
 ## Safety
 
