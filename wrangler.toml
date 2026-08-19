@@ -130,6 +130,7 @@ DEVICE_LOCK_ON = "0"
 compatibility_date = "2026-06-28"
 
 [env.production.vars]
+AI_PROVIDER = "developer"   # MaiK on Developer API (fast). NOT "azure" (slow, MaiK-only). Named envs don't inherit top-level [vars], so it must be set here too.
 FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
 OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com,stewardmd.in@gmail.com"
