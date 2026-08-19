@@ -47,8 +47,12 @@ call() {
 PROBE_ADDR="${PROBE_ADDR:-stewardmd-probe-does-not-exist@sbx}"
 
 consent_body() {  # consent_body <abhaAddress> > file
+  # The permission window ENDS NOW, deliberately. A hardcoded `to` made every run byte-identical, so the
+  # second one came back ABDM-1070 "Duplicate consent request" and no callback ever fired again - a probe
+  # you can only run once is not a probe. Found 2026-08-20 re-triggering after the D14 fix.
   python3 - "$1" <<'PY'
-import json,sys
+import json,sys,datetime as d
+now=d.datetime.now(d.UTC).strftime('%Y-%m-%dT%H:%M:%S.')+'%03dZ'%(d.datetime.now(d.UTC).microsecond//1000)
 print(json.dumps({"consent":{
  "purpose":{"text":"Care Management","code":"CAREMGT","refUri":"https://www.nhs.uk/"},
  "patient":{"id":sys.argv[1]},
@@ -57,7 +61,7 @@ print(json.dumps({"consent":{
  "requester":{"name":"Dr Probe","identifier":{"type":"REGNO","value":"AP12345","system":"https://www.mciindia.org"}},
  "hiTypes":["OPConsultation"],
  "permission":{"accessMode":"VIEW",
-   "dateRange":{"from":"2026-01-01T00:00:00.000Z","to":"2026-08-19T00:00:00.000Z"},
+   "dateRange":{"from":"2026-01-01T00:00:00.000Z","to":now},
    "dataEraseAt":"2026-12-31T00:00:00.000Z",
    "frequency":{"unit":"HOUR","value":0,"repeats":0}}}}))
 PY

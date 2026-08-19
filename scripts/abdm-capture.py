@@ -21,9 +21,12 @@ The token is the last path segment of the registered URL:
 NO PHI IS WRITTEN BY DEFAULT. A real callback carries a live ABHA address and patient demographics, so
 `--out` redacts them unless you pass --raw, which you should only do into a gitignored path.
 """
-import argparse, json, re, sys, time, urllib.request
+import argparse, json, os, re, sys, time, urllib.request
 
-API = "https://webhook.site/token/%s/requests?sorting=oldest&per_page=100"
+# Any endpoint that returns webhook.site's shape will do. scripts/abdm-bridge.py serves exactly that
+# while ALSO forwarding to the real receiver, which is the only way the callbacks that follow our reply
+# (link init/confirm) can ever be observed - webhook.site never replies, so they never fire.
+API = os.environ.get("ABDM_CAPTURE_API") or "https://webhook.site/token/%s/requests?sorting=oldest&per_page=100"
 
 # ---- the M2 / M3 end-to-end expectation sets ------------------------------------------------------
 # Each entry is (certification-ish label, path substring). A milestone is COMPLETE only when every
