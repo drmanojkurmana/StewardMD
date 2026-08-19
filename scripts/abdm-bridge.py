@@ -19,8 +19,10 @@ import argparse, http.server, json, os, socketserver, threading, urllib.error, u
 from datetime import datetime, timezone
 
 # Hop-by-hop headers must not be forwarded (RFC 7230 6.1). Host is dropped so the upstream sees its own.
+# accept-encoding goes too: passing ABDM's through made wrangler gzip the reply, so every answer we
+# recorded read as "<31 non-utf8 bytes>" instead of the body that is the actual M2 evidence.
 HOP = {"connection", "keep-alive", "proxy-authenticate", "proxy-authorization", "te", "trailers",
-       "transfer-encoding", "upgrade", "host", "content-length"}
+       "transfer-encoding", "upgrade", "host", "content-length", "accept-encoding"}
 
 RECORDS = []
 LOCK = threading.Lock()
@@ -95,7 +97,13 @@ class Handler(http.server.BaseHTTPRequestHandler):
             status, rbody, rhdrs = 502, json.dumps({"error": "bridge_upstream", "detail": str(e)}).encode(), {}
             rec["bridgeError"] = str(e)
 
+        # What we ANSWERED is evidence too: for the HIP flows the reply IS the milestone (an on-discover
+        # that 202s but carries the wrong body still fails certification, and the status alone hides that).
         rec["upstreamStatus"] = status
+        try:
+            rec["upstreamBody"] = rbody.decode("utf-8")[:4000]
+        except UnicodeDecodeError:
+            rec["upstreamBody"] = "<%d non-utf8 bytes>" % len(rbody)
         remember(rec, ARGS.log)
         print("%s  %-4s %-52s -> %s" % (rec["created_at"], method, path[:52], status), flush=True)
 
