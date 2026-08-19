@@ -27,7 +27,7 @@ import { abdmConfig } from "../../_connect/abdm/config.js";
 import { HIP_HANDLERS } from "../../_connect/abdm/hip-handlers.js";
 import { HIU_HANDLERS } from "../../_connect/abdm/hiu-handlers.js";
 import { consentedStoreSource } from "../../_connect/abdm/consented-store.js";
-import { issueQueueToken, resolvePatientMobile } from "../../_connect/abdm/opd-bridge.js";
+import { issueQueueToken, resolvePatientMobile, findTicketMobile } from "../../_connect/abdm/opd-bridge.js";
 
 /**
  * The link token arrives asynchronously here after ensureLinkToken() fires generate-token.
@@ -86,9 +86,10 @@ export async function onRequest(context) {
     // an approved template is dropped by the provider, which would otherwise look to us like success.
     // // VERIFY (owner): register the OTP template with the SMS provider and set ABDM_OTP_TEMPLATE.
     resolvePatientMobile,
-    // The OPD store is Firestore, which _connect must not import; the lookup is injected here.
-    // // VERIFY (owner): wire findTicketMobile to the queue's decPHI lookup once the OPD binding is live.
-    findTicketMobile: null,
+    // The mobile for a link OTP: this patient's most recent OPD ticket, decrypted for one send. Bound
+    // rather than null, so resolvePatientMobile can actually find a number - it was the reason
+    // link/init always reported delivered:false even where a number was on file.
+    findTicketMobile,
     // Correlating a callback back to a patient is per-flow and none of it is proven yet, so it stays
     // null: onGenerateToken records and skips rather than caching against a guessed subject.
     correlate: null,

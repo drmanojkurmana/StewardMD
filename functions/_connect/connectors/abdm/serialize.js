@@ -149,7 +149,25 @@ const urnFor = (res) => {
 // ('MedicationRequest' in type) and slicing CLOSED. A reference without it matches NO slice, so a
 // correctly-shaped section was still rejected outright.
 const refOf = (res) => ({ reference: urnFor(res), type: res.resourceType });
-const entryOf = (res) => ({ fullUrl: urnFor(res), resource: res });
+// FHIR Resource.id is [A-Za-z0-9-.]{1,64} — an UNDERSCORE is ILLEGAL. Our own ids happen to be safe, but
+// app ids are not: the clinic billing store mints `inv_<hex>`, and HAPI rejected the resource outright and
+// then failed every section entry that referenced it ("unable to find a match for profile"). One projection
+// producing an invalid id is a projection bug; EVERY id crossing this boundary is the serializer's problem,
+// so it is normalised at the single funnel every resource passes through on its way into the bundle.
+//
+// Safe to rewrite because nothing resolves BY id: fullUrl and every internal reference are urn:uuid (see
+// urnFor). The business id survives verbatim wherever the resource carries an `identifier`, which has no
+// charset restriction — an Invoice keeps `inv_abc123` as its identifier.value.
+const fhirId = (v) => {
+  const clean = String(v == null ? "" : v).replace(/[^A-Za-z0-9.\-]/g, "-").slice(0, 64);
+  // A 64-char cap can only collide for ids that already agreed on their first 64 characters, which no
+  // generator here produces; an all-illegal id would collapse to dashes rather than to nothing.
+  return clean || "unknown";
+};
+const entryOf = (res) => {
+  if (res && res.id != null) res.id = fhirId(res.id);
+  return { fullUrl: urnFor(res), resource: res };
+};
 
 // INVERSE of normalize.js cc(): SCCM codeable {coding:[{system,code,display,kind}],text} -> FHIR CodeableConcept
 // {coding:[{system,code,display}],text}. The `kind` is dropped (FHIR has none); normalizeNdhm re-derives it from
@@ -592,6 +610,16 @@ export function validateNdhmDoc(docBundle) {
     if (!first.author || (Array.isArray(first.author) ? first.author.length === 0 : !first.author)) errors.push("Composition.author (StewardMD device/organization) missing");
     if (!first.custodian) errors.push("Composition.custodian (StewardMD tenant organization) missing");
   }
+  // Resource.id charset. This was HAPI-only discoverable until now: an `inv_<hex>` id from the billing
+  // store passed our gate and was rejected on the wire, which is exactly the failure mode this whole file
+  // was rewritten to stop.
+  const ID_OK = /^[A-Za-z0-9.\-]{1,64}$/;
+  entries.forEach((e, i) => {
+    const r = e && e.resource;
+    if (r && r.id != null && !ID_OK.test(String(r.id))) {
+      errors.push("entry[" + i + "] " + r.resourceType + ".id is not a valid FHIR id (got " + JSON.stringify(String(r.id)) + ")");
+    }
+  });
   walkDoc(b, errors, "Bundle"); // every CodeableConcept carries a non-empty text; and NO binary/attachment bytes.
   return { ok: errors.length === 0, errors };
 }

@@ -20,6 +20,7 @@ import {
   normalizeProfile, ENROL_CONSENT, SCOPES,
 } from "../../_connect/abdm/abha.js";
 import { linkAbhaToPatient, findLink, openLinkAddress, AbhaLinkError } from "../../_connect/abdm/abha-link.js";
+import { indexPatient } from "../../_connect/abdm/demographic-index.js";
 import { resolveTenant } from "../../_connect/identity.js";
 import { PermissionError } from "../../_connect/permission.js";
 import {
@@ -122,7 +123,32 @@ export async function onRequest(context) {
           tenantId, abhaNumber: body.abhaNumber,
           abhaAddress: body.abhaAddress, patientRef: body.patientRef,
         });
-        return ok(res);
+        // Index the patient for discovery. This is the ONLY place it happens: linking is the moment we
+        // hold ABHA-VERIFIED demographics (the client has just read them from /profile, where ABDM marks
+        // name/gender/dob non-editable), and it is already the authenticated, tenant-resolved write that
+        // binds this ABHA to this patient - so indexing grants no authority the route did not have.
+        //
+        // Discovery's mobile and MRN arms BOTH require gender and year of birth to corroborate, so a row
+        // without them can never match anything: it would be noise in the index, not a partial win.
+        // Skipped rather than written, and reported honestly as discoverable:false.
+        let discoverable = false, indexError = null;
+        if (body.gender && body.yearOfBirth) {
+          try {
+            await indexPatient(env, { db: env.CONNECT_DB, now: iso }, {
+              tenantId, patientRef: body.patientRef,
+              name: body.name, mobile: body.mobile, gender: body.gender, yearOfBirth: body.yearOfBirth,
+              // patient_ref IS the tenant's MR# (it is what the OPD ticket stores as ghisPatientId), so it
+              // doubles as the MRN arm's key unless the caller sends a different one.
+              mrn: body.mrn || body.patientRef,
+            });
+            discoverable = true;
+          } catch (e) {
+            // The ABHA binding is the durable artefact and it succeeded; discovery is an optimisation on
+            // top. Report the failure instead of throwing, so the desk does not re-link a linked patient.
+            indexError = (e && e.message) || "index failed";
+          }
+        }
+        return ok(Object.assign({}, res, { discoverable }, indexError ? { indexError } : {}));
       }
       case "/link/lookup": {
         const tenantId = await forTenant(q.get("tenantId"));

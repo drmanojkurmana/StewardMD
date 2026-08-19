@@ -93,9 +93,22 @@ export async function resolvePatientMobile(env, deps, { tenantId, patientRef } =
   const localRef = link && link.patient_ref;
   if (!localRef) return null;
 
-  // deps.findTicketMobile is the seam onto the OPD store (Firestore), injected by the composition root so
-  // this module stays testable without it.
+  // deps.findTicketMobile is the seam onto the OPD store, injected by the composition root so this module
+  // stays testable without Firestore. findTicketMobile() below is the real implementation bound there.
   if (typeof deps.findTicketMobile !== "function") return null;
   try { return (await deps.findTicketMobile(env, { tenantId, patientRef: localRef })) || null; }
   catch { return null; }
+}
+
+/**
+ * The real `deps.findTicketMobile`, bound in the /api/v3 composition root.
+ *
+ * Lives here rather than in the composition root because this file already owns the ABDM<->queue mapping
+ * (opdOrgFor) and already imports the queue engine, so nothing new crosses the boundary. Kept as an
+ * injected seam anyway: resolvePatientMobile stays unit-testable with a fake.
+ */
+export async function findTicketMobile(env, { tenantId, patientRef } = {}) {
+  const org = opdOrgFor(env, tenantId);
+  if (!org.id || !patientRef) return null;
+  return Q.findMobileByPatientId(env, org.id, patientRef);
 }

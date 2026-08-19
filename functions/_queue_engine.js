@@ -372,3 +372,22 @@ export async function qAudit(env, ev) {
   const f = { ts: now(), hospitalId: ev.hospitalId || "", ticketId: ev.ticketId || "", actor: ev.actor || "", action: ev.action || "", meta: String(ev.meta == null ? "" : ev.meta).slice(0, 200) };
   try { await fsCommit(env, [wCreate(env, "q_events/" + id, f)]); } catch (e) {}   // best-effort; never blocks the action
 }
+
+// ---- ABDM: the mobile to send a link OTP to ------------------------------------------------------
+// ABDM sends a pseudonymous patient reference, never a phone number, so the number is ours to find. The
+// most recent ticket for this MR# carries it under encPHI, which is the same number the queue already
+// texts. Returned for ONE send; never stored, never logged, never audited.
+//
+// fsQuery takes a single field filter, so the org is filtered in JS - and it MUST be filtered: another
+// hospital's ticket for a colliding MR# would be somebody else's phone number.
+export async function findMobileByPatientId(env, hospitalId, patientId) {
+  if (!hospitalId || !patientId) return null;
+  const rows = await fsQuery(env, "q_tickets", { where: { field: "ghisPatientId", value: String(patientId) }, limit: 50 });
+  const mine = (rows || []).filter((r) => r.fields && r.fields.hospitalId === hospitalId)
+    .sort((a, b) => (b.fields.registeredAt || 0) - (a.fields.registeredAt || 0));
+  for (const r of mine) {
+    const mobile = await decPHI(env, r.fields.encMobile);
+    if (mobile) return mobile;     // the newest ticket that actually has a number on it
+  }
+  return null;
+}

@@ -6,6 +6,8 @@
 import { writeFileSync, mkdirSync } from "node:fs";
 import { serializeNdhm, validateNdhmDoc } from "../functions/_connect/connectors/abdm/serialize.js";
 import { dischargeRecord, immunizationRecord, invoiceRecord } from "../test/connect/abdm/fixtures/sccm-records.mjs";
+import { projectInvoiceRecord } from "../functions/_connect/abdm/hip-sources/clinic-billing.js";
+import { buildInvoice } from "../functions/_clinic_billing.js";
 
 const out = process.argv[2];
 if (!out) { console.error("usage: abdm-emit-bundles.mjs <outdir>"); process.exit(2); }
@@ -41,5 +43,19 @@ for (const profile of PRODUCIBLE) {
   if (!v.ok) { console.error("our own gate rejects " + profile + ": " + JSON.stringify(v.errors)); bad++; }
   writeFileSync(out + "/" + profile + ".json", JSON.stringify(doc, null, 1));
 }
-console.log("emitted " + PRODUCIBLE.length + " bundles to " + out);
+// A NINTH bundle: an InvoiceRecord projected from a REAL clinic bill rather than the hand-written
+// fixture. The header's whole point is that a serializer test asking our own serializer whether it is
+// happy proves nothing - and the fixture is coded by hand, while a projection has to derive its codes and
+// convert paise to rupees. If those two disagree with the IG, this is the file that says so.
+const billed = Object.assign({
+  id: "inv_projected01", patientId: "SMD-GIMSR-0042", encounterId: "",
+  status: "paid", createdAt: Date.parse("2026-08-18T09:30:00Z"),
+}, buildInvoice([{ id: "o1", name: "Specialist consultation", qty: 1, unitPrice: 50000 },
+                 { id: "o2", name: "CBC", qty: 2, unitPrice: 12345 }]));
+const projected = serializeNdhm(ctx, { ...projectInvoiceRecord(billed, { tenantId: "t1", now: () => "2026-08-19T00:00:00.000Z" }), profile: "InvoiceRecord" });
+const pv = validateNdhmDoc(projected);
+if (!pv.ok) { console.error("our own gate rejects the PROJECTED invoice: " + JSON.stringify(pv.errors)); bad++; }
+writeFileSync(out + "/InvoiceRecord-projected.json", JSON.stringify(projected, null, 1));
+
+console.log("emitted " + (PRODUCIBLE.length + 1) + " bundles to " + out);
 process.exit(bad ? 1 : 0);

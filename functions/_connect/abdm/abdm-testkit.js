@@ -8,7 +8,12 @@ export function makeAbdmDb(seed = {}) {
     // single-use claim. IS NULL consumes NO bind, so predicates are walked in order and only the
     // ?-bearing ones advance the bind cursor.
     // Scan only the WHERE clause so an UPDATE's `SET col=?` isn't parsed as a guard condition.
-    const clause = (sql.match(/\bWHERE\b([\s\S]*)$/i) || [, ""])[1];
+    // A trailing LIMIT is part of the statement, NOT a predicate: leaving it in made the last condition
+    // read as `col = ? LIMIT 1` and threw "unsupported WHERE" on an ordinary lookup. It is stripped here
+    // and APPLIED by the caller, because dropping it silently would change how many rows .all() returns.
+    // ORDER BY is deliberately still unsupported: honouring it would mean implementing SQL collation, and
+    // ignoring it would silently change WHICH row .first() hands back.
+    const clause = (sql.match(/\bWHERE\b([\s\S]*)$/i) || [, ""])[1].replace(/\bLIMIT\s+\d+\s*;?\s*$/i, "");
     // Fail LOUD on any predicate we don't implement. Silently dropping one (e.g. `expires_at < ?`)
     // would collapse the WHERE to a no-op and match the whole table — a DELETE-everything landmine.
     // Validate per-predicate shape (so the supported `<>` isn't false-flagged by a bare `<` scan).
@@ -34,8 +39,9 @@ export function makeAbdmDb(seed = {}) {
     prepare(sql) {
       let binds = [];
       const stmt = { bind: (...a) => { binds = a; return stmt; } };
+      const limit = () => { const m = /\bLIMIT\s+(\d+)/i.exec(sql); return m ? Number(m[1]) : Infinity; };
       stmt.first = async () => { const t = table(sql); return where(sql, binds, tables[t] || [], 0)[0] || null; };
-      stmt.all = async () => { const t = table(sql); return { results: where(sql, binds, tables[t] || [], 0) }; };
+      stmt.all = async () => { const t = table(sql); return { results: where(sql, binds, tables[t] || [], 0).slice(0, limit()) }; };
       stmt.run = async () => {
         const t = table(sql); tables[t] = tables[t] || [];
         if (/^\s*INSERT/i.test(sql)) { const c = cols(sql); const row = {}; c.forEach((k, i) => (row[k] = binds[i])); tables[t].push(row); return { success: true, meta: { changes: 1 } }; }

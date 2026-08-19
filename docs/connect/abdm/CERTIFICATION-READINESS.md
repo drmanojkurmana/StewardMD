@@ -27,9 +27,12 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | Erasure completeness | done | R2 blobs + discovery index, verified to fail without the fix |
 | D1 migration | done | real SQLite, clean/old/current/half-migrated |
 | SCCM v1.1 immunisations + billing | done | 17 tests, round-trip proven |
+| Link-OTP number lookup | done | 6 tests incl. the cross-tenant guard |
+| Discovery index populated at link | done | 5 tests through the real route |
+| A real bill -> InvoiceRecord | done | 9 tests + HAPI on the emitted bundle |
 | M1 client UI | done | 22 tests |
 
-**Test counts:** ABDM + connect suites **1052/1052**. Client **22/22**. Full-repo sweep unchanged apart from four
+**Test counts:** ABDM + connect suites **1072/1072**. Client **22/22**. Full-repo sweep unchanged apart from four
 pre-existing failures (`followcare-voice-server` 1, `onco-emr` 3, `site-gate` 2, `sknx-flags` 3) — none
 imports anything changed here.
 
@@ -78,8 +81,18 @@ OPConsultRecord           PASS        DischargeSummaryRecord   PASS
 PrescriptionRecord        PASS        HealthDocumentRecord     PASS
 DiagnosticReportRecord    PASS        WellnessRecord           PASS
 ImmunizationRecord        PASS        InvoiceRecord            PASS
-total errors: 0   (all 8 of 8)
+InvoiceRecord-projected   PASS        <- from a REAL clinic bill, not the fixture
+total errors: 0   (all 8 of 8, plus the projection)
 ```
+
+**A ninth bundle earns its place.** The eight above are serialised from hand-written fixtures, whose ids
+happen to be FHIR-legal. `InvoiceRecord-projected` is built from a real `q_invoices` row instead, and it
+**failed with 3 errors** on its first run: FHIR `Resource.id` is `[A-Za-z0-9-.]{1,64}` and the billing store
+mints `inv_<hex>` — an underscore. HAPI rejected the Invoice outright and then failed the section entry
+referencing it. Our own gate passed it, which is the same failure mode this file documents at §3: asking our
+serializer whether it is happy proves nothing. Fixed at `entryOf`, the single funnel every resource passes
+through on its way into a bundle, and `validateNdhmDoc` now refuses the charset too, so the next one is
+caught without a JDK.
 
 Evidence: `docs/connect/abdm/fhir-validation-evidence.log`.
 Reproduce: `./scripts/abdm-validate-fhir.sh` (needs a JDK; downloads a 220MB jar once).
@@ -114,12 +127,16 @@ IG package itself.
 
 ### Needs a decision from you
 
-6. **OTP delivery.** An Indian transactional SMS needs a DLT-approved template. `deliverOtp` returns
-   `not_configured` and `on-init` reports `delivered:false` until you register an OTP template and set
-   `ABDM_OTP_TEMPLATE`. Nothing fakes a send.
+6. **OTP delivery — the only thing still missing is the template.** An Indian transactional SMS needs a
+   DLT-approved template. `deliverOtp` returns `not_configured` and `on-init` reports `delivered:false`
+   until you register an OTP template and set `ABDM_OTP_TEMPLATE`. Nothing fakes a send. The *number* is
+   now found (see 7), so once the template exists this path is complete.
 
-7. **`findTicketMobile` is unbound**, so the OTP has no number to go to. It needs the OPD store's `decPHI`
-   lookup wired in the composition root.
+7. ~~`findTicketMobile` is unbound, so the OTP has no number to go to.~~ **RESOLVED.** Bound to the
+   queue's real lookup: `_queue_engine.findMobileByPatientId` reads this patient's most recent OPD ticket
+   and decrypts `encMobile` for one send. `fsQuery` takes a single field filter, so the org is filtered in
+   JS — and that filter is a cross-tenant guard with its own test, because a colliding MR# at another
+   hospital would otherwise hand back a stranger's phone number.
 
 8. **A stated invariant was narrowed — please confirm.** The serializer said "ZERO binary: attachment
    bytes are never emitted". NRCES makes `DocumentReference.content.attachment.data` min=1, so a
@@ -135,10 +152,20 @@ IG package itself.
 
 ### Lower priority
 
-10. Demographic discovery needs `indexPatient` called from registration; the index is otherwise empty and
-    discovery falls back to the ABHA-address arm only.
-10b. Nothing yet WRITES SCCM immunisations or invoices — the resources exist and round-trip, but the OPD /
-    billing surfaces have to populate them before a real ImmunizationRecord or InvoiceRecord can be served.
+10. ~~Demographic discovery needs `indexPatient` called from registration.~~ **RESOLVED.** It is called
+    from `POST /api/abdm/link` — the moment we hold ABHA-*verified* demographics, and already an
+    authenticated, tenant-resolved write. A link with no gender or year of birth writes **nothing** and
+    reports `discoverable:false`: both discovery arms require those two to corroborate, so such a row could
+    never match anything. An index failure does not lose the ABHA binding.
+10b. **Invoices RESOLVED; immunisations have no source.** A real clinic bill now projects to a conformant
+    InvoiceRecord (`hip-sources/clinic-billing.js`, from `q_invoices`), validated by HAPI as an emitted
+    bundle rather than only by our own gate. **Immunisations are a different kind of gap: nothing anywhere
+    in the product records a vaccination**, so there is no data to project. Serving ImmunizationRecord for
+    real needs a vaccination-capture feature first — a product decision, not plumbing. The SCCM resource,
+    serializer, normaliser and validator are all in place for when it exists.
+10c. `clinic-billing.js` is a projection, not yet a wired HIP source. Advertising a bill as a care context
+    needs two decisions it cannot make: whether a bill should be linkable at all (a linked context can
+    never be withdrawn), and how it survives the same `q_*` retention conflict `native-opd.js` documents.
 11. `ABDM_CLIENT_ID` is a committed wrangler var (the secret is a Pages secret). Deliberate and documented;
     override if you disagree.
 
@@ -147,7 +174,7 @@ IG package itself.
 ```bash
 cd <repo>
 
-# ABDM + connect suites (1052 tests) - no external dependencies
+# ABDM + connect suites (1072 tests) - no external dependencies
 node --test "test/connect/abdm/"*.test.mjs test/connect/*.test.mjs
 
 # the M1 client
