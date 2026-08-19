@@ -1,0 +1,1323 @@
+{
+ "id": "mri-brain-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "SynthSeg v1.0 (Apache-2.0, weights shipped IN the SynthSeg repository - the 2.0/robust/parc weights come from a separate link with no licence statement and are NOT used) run on OpenNeuro ds003563, a LIVING subject's 0.6 mm isotropic 7T MPRAGE T1. That dataset declares \"License\": \"CC0\" in its own dataset_description.json - verified there, not assumed from OpenNeuro's default. CC0 places no restriction on use, commercial included, and requires no attribution. Run on a 31 GB VM; it OOMs on an 8 GB laptop.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "grey": {
+   "label": "Grey matter",
+   "color": "#c8a2c8"
+  },
+  "white": {
+   "label": "White matter",
+   "color": "#f0ead6"
+  },
+  "deep-grey": {
+   "label": "Deep grey",
+   "color": "#9370db"
+  },
+  "csf": {
+   "label": "CSF",
+   "color": "#7fd9e8"
+  }
+ },
+ "structures": {
+  "amygdala": {
+   "name": "Amygdala",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The amygdala is an almond-shaped grey mass in the roof of the inferior horn of the lateral ventricle, at the temporal pole."
+  },
+  "brain": {
+   "name": "Brain",
+   "category": "grey"
+  },
+  "brainstem": {
+   "name": "Brainstem",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
+  },
+  "caudate-nucleus": {
+   "name": "Caudate nucleus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
+  },
+  "cerebellum": {
+   "name": "Cerebellum",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
+  },
+  "cerebral-cortex": {
+   "name": "Cerebral cortex",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci."
+  },
+  "cerebral-white-matter": {
+   "name": "Cerebral white matter",
+   "category": "white",
+   "parent": "brain",
+   "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association."
+  },
+  "fourth-ventricle": {
+   "name": "Fourth ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind."
+  },
+  "globus-pallidus": {
+   "name": "Globus pallidus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus."
+  },
+  "hippocampus": {
+   "name": "Hippocampus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
+  },
+  "lateral-ventricle": {
+   "name": "Lateral ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
+  },
+  "putamen": {
+   "name": "Putamen",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
+  },
+  "thalamus": {
+   "name": "Thalamus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle."
+  },
+  "third-ventricle": {
+   "name": "Third ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The third ventricle is a narrow median cleft between the two thalami."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/mri-brain-sagittal/001.webp",
+   "aspect": 1.1511,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/mri-brain-sagittal/002.webp",
+   "aspect": 1.1511,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/mri-brain-sagittal/003.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-cortex",
+     "x": 50.3,
+     "y": 55.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 50.8,
+     "y": 40.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 61.1,
+     "y": 52.9
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/mri-brain-sagittal/004.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 50.0,
+     "y": 34.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 51.1,
+     "y": 48.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 68.2,
+     "y": 34.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 68.4,
+     "y": 68.7
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/mri-brain-sagittal/005.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 45.6,
+     "y": 27.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 56.6,
+     "y": 58.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 38.3,
+     "y": 72.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 71.1,
+     "y": 55.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 72.5,
+     "y": 37.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 71.0,
+     "y": 68.3
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/mri-brain-sagittal/006.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 35.4,
+     "y": 31.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 45.7,
+     "y": 61.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 25.3,
+     "y": 53.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 46.5,
+     "y": 48.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 56.7,
+     "y": 31.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 71.0,
+     "y": 69.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 68.3,
+     "y": 76.4
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/mri-brain-sagittal/007.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 41.4,
+     "y": 48.3
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 64.1,
+     "y": 52.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 41.2,
+     "y": 31.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 48.0,
+     "y": 51.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 76.5,
+     "y": 52.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.9,
+     "y": 72.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 69.2,
+     "y": 75.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 74.8,
+     "y": 75.9
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/mri-brain-sagittal/008.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 33.0,
+     "y": 24.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 43.4,
+     "y": 35.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 41.1,
+     "y": 17.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 59.2,
+     "y": 41.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 75.1,
+     "y": 59.1
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 66.9,
+     "y": 50.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.1,
+     "y": 65.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 68.1,
+     "y": 73.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 78.1,
+     "y": 75.1
+    },
+    {
+     "s": "putamen",
+     "x": 47.2,
+     "y": 49.8
+    },
+    {
+     "s": "hippocampus",
+     "x": 51.8,
+     "y": 57.7
+    },
+    {
+     "s": "amygdala",
+     "x": 43.3,
+     "y": 60.6
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/mri-brain-sagittal/009.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 50.9,
+     "y": 15.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 54.5,
+     "y": 35.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 73.4,
+     "y": 50.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 74.8,
+     "y": 44.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 83.6,
+     "y": 36.4
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 64.2,
+     "y": 46.6
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 77.2,
+     "y": 50.6
+    },
+    {
+     "s": "cerebellum",
+     "x": 65.3,
+     "y": 71.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 80.3,
+     "y": 68.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 73.8,
+     "y": 79.3
+    },
+    {
+     "s": "thalamus",
+     "x": 57.7,
+     "y": 50.9
+    },
+    {
+     "s": "putamen",
+     "x": 38.6,
+     "y": 49.7
+    },
+    {
+     "s": "putamen",
+     "x": 46.9,
+     "y": 53.9
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 47.1,
+     "y": 50.5
+    },
+    {
+     "s": "hippocampus",
+     "x": 43.2,
+     "y": 66.0
+    },
+    {
+     "s": "hippocampus",
+     "x": 50.0,
+     "y": 59.6
+    },
+    {
+     "s": "amygdala",
+     "x": 43.3,
+     "y": 59.6
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/mri-brain-sagittal/010.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 68.6,
+     "y": 33.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 85.5,
+     "y": 50.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 19.8,
+     "y": 43.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 61.4,
+     "y": 28.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 71.4,
+     "y": 47.9
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 60.3,
+     "y": 41.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 65.5,
+     "y": 70.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.2,
+     "y": 80.1
+    },
+    {
+     "s": "thalamus",
+     "x": 53.1,
+     "y": 46.5
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 36.5,
+     "y": 44.2
+    },
+    {
+     "s": "putamen",
+     "x": 38.1,
+     "y": 53.2
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 43.1,
+     "y": 50.4
+    },
+    {
+     "s": "brainstem",
+     "x": 52.9,
+     "y": 67.5
+    },
+    {
+     "s": "brainstem",
+     "x": 54.0,
+     "y": 55.6
+    },
+    {
+     "s": "hippocampus",
+     "x": 47.6,
+     "y": 60.0
+    },
+    {
+     "s": "hippocampus",
+     "x": 61.1,
+     "y": 50.7
+    },
+    {
+     "s": "amygdala",
+     "x": 42.9,
+     "y": 59.4
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/mri-brain-sagittal/011.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 59.9,
+     "y": 36.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 88.5,
+     "y": 51.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 26.9,
+     "y": 21.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 64.3,
+     "y": 32.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 73.6,
+     "y": 37.4
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 42.3,
+     "y": 40.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 65.5,
+     "y": 66.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 69.0,
+     "y": 75.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.1,
+     "y": 62.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 69.8,
+     "y": 81.5
+    },
+    {
+     "s": "thalamus",
+     "x": 50.0,
+     "y": 45.9
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 37.7,
+     "y": 47.5
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 64.6,
+     "y": 72.6
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 66.2,
+     "y": 70.1
+    },
+    {
+     "s": "brainstem",
+     "x": 54.2,
+     "y": 66.0
+    },
+    {
+     "s": "brainstem",
+     "x": 59.2,
+     "y": 76.5
+    },
+    {
+     "s": "hippocampus",
+     "x": 44.1,
+     "y": 60.6
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/mri-brain-sagittal/012.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 58.4,
+     "y": 42.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 80.1,
+     "y": 45.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 13.8,
+     "y": 44.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 48.6,
+     "y": 22.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 60.0,
+     "y": 33.0
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 39.6,
+     "y": 44.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.9,
+     "y": 56.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.8,
+     "y": 65.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 69.4,
+     "y": 75.1
+    },
+    {
+     "s": "thalamus",
+     "x": 48.8,
+     "y": 47.6
+    },
+    {
+     "s": "third-ventricle",
+     "x": 44.4,
+     "y": 51.5
+    },
+    {
+     "s": "third-ventricle",
+     "x": 53.5,
+     "y": 50.7
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 63.9,
+     "y": 68.7
+    },
+    {
+     "s": "brainstem",
+     "x": 53.8,
+     "y": 66.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 26.6,
+     "y": 21.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 28.2,
+     "y": 30.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 30.7,
+     "y": 18.9
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/mri-brain-sagittal/013.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "fourth-ventricle",
+     "x": 62.8,
+     "y": 67.9
+    },
+    {
+     "s": "brainstem",
+     "x": 53.8,
+     "y": 66.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 29.1,
+     "y": 46.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 79.4,
+     "y": 55.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 24.3,
+     "y": 26.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 26.9,
+     "y": 54.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 27.1,
+     "y": 42.2
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 38.6,
+     "y": 44.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.4,
+     "y": 66.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 66.3,
+     "y": 63.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 68.5,
+     "y": 75.0
+    },
+    {
+     "s": "thalamus",
+     "x": 48.5,
+     "y": 47.4
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/mri-brain-sagittal/014.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "fourth-ventricle",
+     "x": 63.6,
+     "y": 72.7
+    },
+    {
+     "s": "brainstem",
+     "x": 54.6,
+     "y": 64.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 46.3,
+     "y": 30.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 85.1,
+     "y": 51.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 24.2,
+     "y": 38.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 57.0,
+     "y": 30.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 74.7,
+     "y": 37.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 46.6,
+     "y": 38.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 56.8,
+     "y": 73.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 65.6,
+     "y": 66.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 62.8,
+     "y": 73.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 69.9,
+     "y": 81.1
+    },
+    {
+     "s": "thalamus",
+     "x": 50.3,
+     "y": 45.9
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 36.1,
+     "y": 47.4
+    },
+    {
+     "s": "hippocampus",
+     "x": 45.0,
+     "y": 59.7
+    },
+    {
+     "s": "amygdala",
+     "x": 43.9,
+     "y": 59.1
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/mri-brain-sagittal/015.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "brainstem",
+     "x": 52.6,
+     "y": 68.1
+    },
+    {
+     "s": "brainstem",
+     "x": 52.9,
+     "y": 57.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 54.4,
+     "y": 29.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 82.6,
+     "y": 56.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 37.0,
+     "y": 71.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 65.2,
+     "y": 28.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 74.6,
+     "y": 41.3
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 30.0,
+     "y": 44.8
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 60.0,
+     "y": 41.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.6,
+     "y": 71.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 66.9,
+     "y": 64.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 66.9,
+     "y": 81.4
+    },
+    {
+     "s": "thalamus",
+     "x": 53.5,
+     "y": 46.9
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 37.0,
+     "y": 41.0
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 52.9,
+     "y": 38.5
+    },
+    {
+     "s": "putamen",
+     "x": 37.4,
+     "y": 51.8
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 42.8,
+     "y": 49.9
+    },
+    {
+     "s": "hippocampus",
+     "x": 46.9,
+     "y": 60.6
+    },
+    {
+     "s": "hippocampus",
+     "x": 60.5,
+     "y": 49.6
+    },
+    {
+     "s": "amygdala",
+     "x": 43.1,
+     "y": 58.7
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/mri-brain-sagittal/016.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 25.8,
+     "y": 54.1
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 54.7,
+     "y": 36.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 67.9,
+     "y": 52.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 72.6,
+     "y": 45.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 84.7,
+     "y": 47.1
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 62.6,
+     "y": 45.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.4,
+     "y": 72.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 73.5,
+     "y": 80.5
+    },
+    {
+     "s": "thalamus",
+     "x": 56.8,
+     "y": 51.4
+    },
+    {
+     "s": "putamen",
+     "x": 39.9,
+     "y": 48.7
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 46.9,
+     "y": 51.1
+    },
+    {
+     "s": "hippocampus",
+     "x": 50.5,
+     "y": 59.0
+    },
+    {
+     "s": "amygdala",
+     "x": 43.3,
+     "y": 59.0
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/mri-brain-sagittal/017.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 56.9,
+     "y": 62.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 71.8,
+     "y": 45.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 42.7,
+     "y": 32.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 47.0,
+     "y": 67.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 53.7,
+     "y": 44.8
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 63.0,
+     "y": 51.6
+    },
+    {
+     "s": "cerebellum",
+     "x": 65.5,
+     "y": 73.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.7,
+     "y": 66.6
+    },
+    {
+     "s": "cerebellum",
+     "x": 72.9,
+     "y": 80.6
+    },
+    {
+     "s": "putamen",
+     "x": 46.6,
+     "y": 50.8
+    },
+    {
+     "s": "hippocampus",
+     "x": 48.5,
+     "y": 59.7
+    },
+    {
+     "s": "amygdala",
+     "x": 42.2,
+     "y": 61.2
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/mri-brain-sagittal/018.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 38.9,
+     "y": 22.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 61.4,
+     "y": 53.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 43.8,
+     "y": 52.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.0,
+     "y": 72.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 64.0,
+     "y": 75.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 75.8,
+     "y": 75.4
+    },
+    {
+     "s": "hippocampus",
+     "x": 51.2,
+     "y": 58.7
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/mri-brain-sagittal/019.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 33.4,
+     "y": 30.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 63.8,
+     "y": 53.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 57.9,
+     "y": 51.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 60.4,
+     "y": 62.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 68.5,
+     "y": 71.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.2,
+     "y": 77.8
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/mri-brain-sagittal/020.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 46.2,
+     "y": 49.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 60.0,
+     "y": 57.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 31.6,
+     "y": 31.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 35.7,
+     "y": 26.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 38.6,
+     "y": 33.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 67.7,
+     "y": 72.1
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/mri-brain-sagittal/021.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 41.3,
+     "y": 41.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 52.0,
+     "y": 59.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 30.1,
+     "y": 39.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 37.2,
+     "y": 60.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 67.6,
+     "y": 45.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 66.7,
+     "y": 68.9
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/mri-brain-sagittal/022.webp",
+   "aspect": 1.1511,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 50.0,
+     "y": 48.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 55.1,
+     "y": 49.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 51.2,
+     "y": 56.5
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/mri-brain-sagittal/023.webp",
+   "aspect": 1.1511,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/mri-brain-sagittal/024.webp",
+   "aspect": 1.1511,
+   "pins": []
+  }
+ ]
+}

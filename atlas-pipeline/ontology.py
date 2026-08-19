@@ -72,7 +72,7 @@ REGION = {
     "autochthonous-back-muscle": "SPINE", "iliopsoas": "ABDOMEN",
     "pelvis": "PELVIS", "hip-bone": "PELVIS", "sacrum": "PELVIS",
     "urinary-bladder": "PELVIS", "prostate": "PELVIS", "iliac-artery": "PELVIS",
-    "iliac-vein": "PELVIS", "gluteal-muscle": "PELVIS", "femur": "LOWER_LIMB",
+    "iliac-vein": "PELVIS", "gluteal-muscle": "PELVIS", "femur": "LOWER_LIMB", "lower-limb": "LOWER_LIMB",
     "patella": "LOWER_LIMB", "tibia": "LOWER_LIMB", "fibula": "LOWER_LIMB",
     "tarsal": "LOWER_LIMB", "metatarsal": "LOWER_LIMB",
     "clavicle": "UPPER_LIMB", "scapula": "UPPER_LIMB", "humerus": "UPPER_LIMB",

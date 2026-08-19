@@ -1,0 +1,1543 @@
+{
+ "id": "mri-brain-coronal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "SynthSeg v1.0 (Apache-2.0, weights shipped IN the SynthSeg repository - the 2.0/robust/parc weights come from a separate link with no licence statement and are NOT used) run on OpenNeuro ds003563, a LIVING subject's 0.6 mm isotropic 7T MPRAGE T1. That dataset declares \"License\": \"CC0\" in its own dataset_description.json - verified there, not assumed from OpenNeuro's default. CC0 places no restriction on use, commercial included, and requires no attribution. Run on a 31 GB VM; it OOMs on an 8 GB laptop.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "grey": {
+   "label": "Grey matter",
+   "color": "#c8a2c8"
+  },
+  "white": {
+   "label": "White matter",
+   "color": "#f0ead6"
+  },
+  "deep-grey": {
+   "label": "Deep grey",
+   "color": "#9370db"
+  },
+  "csf": {
+   "label": "CSF",
+   "color": "#7fd9e8"
+  }
+ },
+ "structures": {
+  "amygdala": {
+   "name": "Amygdala",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The amygdala is an almond-shaped grey mass in the roof of the inferior horn of the lateral ventricle, at the temporal pole."
+  },
+  "brain": {
+   "name": "Brain",
+   "category": "grey"
+  },
+  "brainstem": {
+   "name": "Brainstem",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
+  },
+  "caudate-nucleus": {
+   "name": "Caudate nucleus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
+  },
+  "cerebellum": {
+   "name": "Cerebellum",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
+  },
+  "cerebral-cortex": {
+   "name": "Cerebral cortex",
+   "category": "grey",
+   "parent": "brain",
+   "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci."
+  },
+  "cerebral-white-matter": {
+   "name": "Cerebral white matter",
+   "category": "white",
+   "parent": "brain",
+   "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association."
+  },
+  "fourth-ventricle": {
+   "name": "Fourth ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind."
+  },
+  "globus-pallidus": {
+   "name": "Globus pallidus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus."
+  },
+  "hippocampus": {
+   "name": "Hippocampus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
+  },
+  "lateral-ventricle": {
+   "name": "Lateral ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
+  },
+  "putamen": {
+   "name": "Putamen",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
+  },
+  "thalamus": {
+   "name": "Thalamus",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle."
+  },
+  "third-ventricle": {
+   "name": "Third ventricle",
+   "category": "csf",
+   "parent": "brain",
+   "definition": "The third ventricle is a narrow median cleft between the two thalami."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/mri-brain-coronal/001.webp",
+   "aspect": 0.9044,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/mri-brain-coronal/002.webp",
+   "aspect": 0.9044,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/mri-brain-coronal/003.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-cortex",
+     "x": 41.2,
+     "y": 39.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 44.2,
+     "y": 47.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 56.2,
+     "y": 40.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 58.2,
+     "y": 38.6
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/mri-brain-coronal/004.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 41.5,
+     "y": 47.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 43.2,
+     "y": 32.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 26.4,
+     "y": 41.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 42.4,
+     "y": 50.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 57.1,
+     "y": 44.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 68.3,
+     "y": 46.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 60.1,
+     "y": 37.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 72.8,
+     "y": 42.3
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/mri-brain-coronal/005.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 37.0,
+     "y": 47.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 23.9,
+     "y": 46.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 27.6,
+     "y": 30.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 31.6,
+     "y": 46.1
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 60.1,
+     "y": 46.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 70.5,
+     "y": 33.7
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/mri-brain-coronal/006.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 20.5,
+     "y": 44.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 33.9,
+     "y": 45.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 30.0,
+     "y": 54.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 40.6,
+     "y": 40.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 64.0,
+     "y": 45.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 51.3,
+     "y": 31.3
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/mri-brain-coronal/007.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 34.9,
+     "y": 44.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 31.1,
+     "y": 54.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 63.2,
+     "y": 43.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 50.6,
+     "y": 28.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 79.8,
+     "y": 59.2
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/mri-brain-coronal/008.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 34.4,
+     "y": 36.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 24.1,
+     "y": 67.2
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 29.0,
+     "y": 50.8
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 40.0,
+     "y": 45.3
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 65.7,
+     "y": 36.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 74.3,
+     "y": 65.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 76.1,
+     "y": 48.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 58.3,
+     "y": 45.1
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/mri-brain-coronal/009.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 24.0,
+     "y": 69.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 31.2,
+     "y": 36.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 16.4,
+     "y": 61.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 28.0,
+     "y": 60.3
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 46.1,
+     "y": 43.8
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 40.6,
+     "y": 46.6
+    },
+    {
+     "s": "putamen",
+     "x": 35.3,
+     "y": 50.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.1,
+     "y": 31.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 74.7,
+     "y": 66.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 72.3,
+     "y": 44.6
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 52.3,
+     "y": 43.7
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 58.8,
+     "y": 44.8
+    },
+    {
+     "s": "putamen",
+     "x": 63.5,
+     "y": 50.2
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/mri-brain-coronal/010.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 25.8,
+     "y": 66.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 34.3,
+     "y": 31.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 22.0,
+     "y": 33.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 24.0,
+     "y": 24.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 49.6,
+     "y": 57.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 46.4,
+     "y": 41.5
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 41.1,
+     "y": 42.8
+    },
+    {
+     "s": "putamen",
+     "x": 34.2,
+     "y": 50.1
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 40.6,
+     "y": 50.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.6,
+     "y": 32.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 71.5,
+     "y": 65.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 66.3,
+     "y": 60.8
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 52.0,
+     "y": 41.3
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 58.8,
+     "y": 40.8
+    },
+    {
+     "s": "putamen",
+     "x": 64.6,
+     "y": 49.4
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 58.7,
+     "y": 50.7
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/mri-brain-coronal/011.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 31.7,
+     "y": 35.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 48.6,
+     "y": 44.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 14.8,
+     "y": 59.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 19.6,
+     "y": 35.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 38.6,
+     "y": 56.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 46.1,
+     "y": 40.6
+    },
+    {
+     "s": "thalamus",
+     "x": 45.5,
+     "y": 48.9
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 40.1,
+     "y": 40.0
+    },
+    {
+     "s": "putamen",
+     "x": 31.1,
+     "y": 49.8
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 37.9,
+     "y": 50.6
+    },
+    {
+     "s": "third-ventricle",
+     "x": 49.2,
+     "y": 49.8
+    },
+    {
+     "s": "hippocampus",
+     "x": 34.7,
+     "y": 66.4
+    },
+    {
+     "s": "hippocampus",
+     "x": 41.8,
+     "y": 61.8
+    },
+    {
+     "s": "amygdala",
+     "x": 34.8,
+     "y": 61.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 50.2,
+     "y": 44.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.4,
+     "y": 30.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 59.3,
+     "y": 55.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 86.0,
+     "y": 60.4
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 52.6,
+     "y": 40.8
+    },
+    {
+     "s": "thalamus",
+     "x": 53.1,
+     "y": 48.7
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 58.8,
+     "y": 39.0
+    },
+    {
+     "s": "putamen",
+     "x": 67.7,
+     "y": 50.4
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 61.4,
+     "y": 50.8
+    },
+    {
+     "s": "hippocampus",
+     "x": 57.4,
+     "y": 61.5
+    },
+    {
+     "s": "hippocampus",
+     "x": 63.5,
+     "y": 65.5
+    },
+    {
+     "s": "amygdala",
+     "x": 64.5,
+     "y": 60.6
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/mri-brain-coronal/012.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 23.0,
+     "y": 59.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 30.9,
+     "y": 33.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 27.1,
+     "y": 25.0
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 45.8,
+     "y": 39.0
+    },
+    {
+     "s": "thalamus",
+     "x": 44.0,
+     "y": 46.1
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 38.5,
+     "y": 37.6
+    },
+    {
+     "s": "putamen",
+     "x": 33.0,
+     "y": 45.9
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 35.2,
+     "y": 51.1
+    },
+    {
+     "s": "third-ventricle",
+     "x": 49.6,
+     "y": 52.5
+    },
+    {
+     "s": "brainstem",
+     "x": 46.5,
+     "y": 65.7
+    },
+    {
+     "s": "hippocampus",
+     "x": 33.9,
+     "y": 61.5
+    },
+    {
+     "s": "amygdala",
+     "x": 34.9,
+     "y": 56.1
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 50.9,
+     "y": 41.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 67.2,
+     "y": 33.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 85.1,
+     "y": 63.1
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 52.9,
+     "y": 39.2
+    },
+    {
+     "s": "thalamus",
+     "x": 55.5,
+     "y": 45.9
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 59.5,
+     "y": 37.5
+    },
+    {
+     "s": "putamen",
+     "x": 67.5,
+     "y": 48.1
+    },
+    {
+     "s": "globus-pallidus",
+     "x": 64.5,
+     "y": 51.3
+    },
+    {
+     "s": "hippocampus",
+     "x": 65.7,
+     "y": 61.6
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/mri-brain-coronal/013.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 20.7,
+     "y": 20.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 32.2,
+     "y": 34.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 19.2,
+     "y": 41.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 45.8,
+     "y": 39.5
+    },
+    {
+     "s": "thalamus",
+     "x": 42.7,
+     "y": 46.7
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 38.4,
+     "y": 37.6
+    },
+    {
+     "s": "putamen",
+     "x": 32.6,
+     "y": 47.1
+    },
+    {
+     "s": "third-ventricle",
+     "x": 49.6,
+     "y": 50.7
+    },
+    {
+     "s": "brainstem",
+     "x": 50.3,
+     "y": 68.0
+    },
+    {
+     "s": "hippocampus",
+     "x": 31.2,
+     "y": 57.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 54.7,
+     "y": 24.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.9,
+     "y": 30.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 77.9,
+     "y": 39.8
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 56.6,
+     "y": 38.5
+    },
+    {
+     "s": "thalamus",
+     "x": 56.2,
+     "y": 47.3
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 59.9,
+     "y": 38.6
+    },
+    {
+     "s": "putamen",
+     "x": 67.5,
+     "y": 49.6
+    },
+    {
+     "s": "hippocampus",
+     "x": 68.9,
+     "y": 57.7
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/mri-brain-coronal/014.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 32.6,
+     "y": 32.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 11.6,
+     "y": 58.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 40.8,
+     "y": 39.6
+    },
+    {
+     "s": "cerebellum",
+     "x": 40.0,
+     "y": 69.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 31.1,
+     "y": 68.5
+    },
+    {
+     "s": "thalamus",
+     "x": 40.3,
+     "y": 47.6
+    },
+    {
+     "s": "caudate-nucleus",
+     "x": 37.9,
+     "y": 39.3
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 49.9,
+     "y": 54.3
+    },
+    {
+     "s": "brainstem",
+     "x": 50.1,
+     "y": 64.8
+    },
+    {
+     "s": "hippocampus",
+     "x": 32.8,
+     "y": 56.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 65.9,
+     "y": 32.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 87.3,
+     "y": 36.0
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 58.5,
+     "y": 40.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 60.1,
+     "y": 71.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 70.6,
+     "y": 70.0
+    },
+    {
+     "s": "thalamus",
+     "x": 59.3,
+     "y": 47.9
+    },
+    {
+     "s": "hippocampus",
+     "x": 69.9,
+     "y": 56.0
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/mri-brain-coronal/015.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 31.2,
+     "y": 30.9
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 18.3,
+     "y": 50.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 32.3,
+     "y": 18.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 38.5,
+     "y": 42.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 38.7,
+     "y": 69.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 33.3,
+     "y": 77.2
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 50.1,
+     "y": 66.0
+    },
+    {
+     "s": "brainstem",
+     "x": 50.2,
+     "y": 75.9
+    },
+    {
+     "s": "hippocampus",
+     "x": 38.5,
+     "y": 50.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 72.7,
+     "y": 40.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 64.6,
+     "y": 17.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 69.6,
+     "y": 18.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 88.9,
+     "y": 54.3
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 62.1,
+     "y": 42.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 61.1,
+     "y": 70.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 62.0,
+     "y": 79.6
+    },
+    {
+     "s": "hippocampus",
+     "x": 66.8,
+     "y": 53.1
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/mri-brain-coronal/016.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 20.8,
+     "y": 21.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 28.2,
+     "y": 39.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 19.7,
+     "y": 60.6
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 34.2,
+     "y": 48.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 37.8,
+     "y": 71.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 41.3,
+     "y": 81.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 46.2,
+     "y": 63.1
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 49.7,
+     "y": 68.2
+    },
+    {
+     "s": "fourth-ventricle",
+     "x": 50.9,
+     "y": 79.3
+    },
+    {
+     "s": "brainstem",
+     "x": 49.9,
+     "y": 85.3
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.9,
+     "y": 39.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 77.5,
+     "y": 43.5
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 67.5,
+     "y": 50.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 59.3,
+     "y": 61.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 62.1,
+     "y": 72.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 53.6,
+     "y": 63.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 78.5,
+     "y": 78.1
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/mri-brain-coronal/017.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 15.7,
+     "y": 32.3
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 32.3,
+     "y": 38.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 42.8,
+     "y": 49.3
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 32.1,
+     "y": 48.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 38.3,
+     "y": 71.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 42.6,
+     "y": 60.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 39.6,
+     "y": 80.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 49.3,
+     "y": 65.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 65.1,
+     "y": 36.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 80.3,
+     "y": 51.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 78.8,
+     "y": 45.6
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 67.9,
+     "y": 51.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 56.2,
+     "y": 61.7
+    },
+    {
+     "s": "cerebellum",
+     "x": 62.5,
+     "y": 72.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 51.3,
+     "y": 65.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 59.9,
+     "y": 81.9
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/mri-brain-coronal/018.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 19.3,
+     "y": 30.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 35.9,
+     "y": 35.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 23.0,
+     "y": 50.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 46.1,
+     "y": 50.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 41.7,
+     "y": 72.4
+    },
+    {
+     "s": "cerebellum",
+     "x": 25.6,
+     "y": 77.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 53.9,
+     "y": 47.6
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 69.1,
+     "y": 50.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 59.2,
+     "y": 46.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 60.6,
+     "y": 74.2
+    },
+    {
+     "s": "cerebellum",
+     "x": 50.9,
+     "y": 59.8
+    },
+    {
+     "s": "cerebellum",
+     "x": 75.6,
+     "y": 75.9
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/mri-brain-coronal/019.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 32.1,
+     "y": 46.2
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 46.0,
+     "y": 57.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 46.7,
+     "y": 53.2
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 36.0,
+     "y": 50.6
+    },
+    {
+     "s": "cerebellum",
+     "x": 35.7,
+     "y": 69.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 35.8,
+     "y": 74.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 27.9,
+     "y": 75.0
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 53.9,
+     "y": 28.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 67.8,
+     "y": 44.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 52.8,
+     "y": 53.5
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 53.0,
+     "y": 59.6
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 72.4,
+     "y": 42.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 59.3,
+     "y": 70.0
+    },
+    {
+     "s": "cerebellum",
+     "x": 60.3,
+     "y": 75.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 71.7,
+     "y": 75.4
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/mri-brain-coronal/020.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 26.6,
+     "y": 63.0
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 35.2,
+     "y": 54.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 38.6,
+     "y": 63.3
+    },
+    {
+     "s": "cerebellum",
+     "x": 39.4,
+     "y": 73.1
+    },
+    {
+     "s": "cerebellum",
+     "x": 34.1,
+     "y": 72.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 52.3,
+     "y": 39.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 62.9,
+     "y": 56.4
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 69.0,
+     "y": 38.5
+    },
+    {
+     "s": "cerebellum",
+     "x": 61.6,
+     "y": 74.2
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/mri-brain-coronal/021.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 37.4,
+     "y": 52.8
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 42.2,
+     "y": 63.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 30.5,
+     "y": 45.1
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 30.8,
+     "y": 61.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 41.0,
+     "y": 53.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 38.0,
+     "y": 69.9
+    },
+    {
+     "s": "cerebellum",
+     "x": 41.3,
+     "y": 70.4
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 53.8,
+     "y": 64.7
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 56.2,
+     "y": 39.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 54.5,
+     "y": 41.8
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 59.9,
+     "y": 43.7
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 67.5,
+     "y": 47.2
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/mri-brain-coronal/022.webp",
+   "aspect": 0.9044,
+   "pins": [
+    {
+     "s": "cerebral-white-matter",
+     "x": 34.2,
+     "y": 52.5
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 38.1,
+     "y": 58.3
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 36.3,
+     "y": 42.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 44.4,
+     "y": 50.1
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 55.4,
+     "y": 46.9
+    },
+    {
+     "s": "cerebral-white-matter",
+     "x": 59.5,
+     "y": 56.0
+    },
+    {
+     "s": "cerebral-cortex",
+     "x": 54.1,
+     "y": 56.7
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/mri-brain-coronal/023.webp",
+   "aspect": 0.9044,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/mri-brain-coronal/024.webp",
+   "aspect": 0.9044,
+   "pins": []
+  }
+ ]
+}
