@@ -12,6 +12,16 @@ USER_NAME="$(id -un)"
 
 echo "==> voice-service dir: $VS"
 
+# On a tiny box (E2.1.Micro = 1 GB) add swap so the pip install + runtime never OOM. Skip if RAM >= 2 GB.
+MEM_MB="$(free -m | awk '/^Mem:/{print $2}')"
+if [ "${MEM_MB:-9999}" -lt 2000 ] && ! sudo swapon --show | grep -q .; then
+  echo "==> Low RAM (${MEM_MB} MB): creating a 3 GB swap file…"
+  sudo fallocate -l 3G /swapfile 2>/dev/null || sudo dd if=/dev/zero of=/swapfile bs=1M count=3072
+  sudo chmod 600 /swapfile && sudo mkswap /swapfile && sudo swapon /swapfile
+  grep -q '/swapfile' /etc/fstab || echo '/swapfile none swap sw 0 0' | sudo tee -a /etc/fstab >/dev/null
+  echo "    swap: $(free -m | awk '/^Swap:/{print $2" MB"}')"
+fi
+
 echo "==> Installing system packages (python3.12, venv, build tools, curl)…"
 sudo apt-get update -y
 sudo apt-get install -y software-properties-common curl ca-certificates >/dev/null
