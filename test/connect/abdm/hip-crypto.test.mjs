@@ -74,13 +74,16 @@ test("MULTI-ENTRY KAT (R1 HARD GATE): N=3 distinct plaintexts ⇒ pairwise-disti
   }
 });
 
-test("sealForHiu: a single seal round-trips + emits well-formed keyMaterial (ECDH/Curve25519, 32-byte pub+nonce)", async () => {
+test("sealForHiu: a single seal round-trips + emits well-formed keyMaterial (ECDH/Curve25519, 65-byte pub, 32-byte nonce)", async () => {
   const hiu = await makeHiu();
   const pt = JSON.stringify({ resourceType: "Bundle", id: "solo" });
   const page = await sealForHiu(hiu.keyMaterial, pt);
   assert.equal(page.keyMaterial.cryptoAlg, "ECDH");
   assert.equal(page.keyMaterial.curve, "Curve25519");
-  assert.equal(unb64(page.keyMaterial.dhPublicKey).length, 32);
+  // 65-byte uncompressed point (88 base64 chars) - the only form Fidelius routes to decodePoint().
+  assert.equal(unb64(page.keyMaterial.dhPublicKey).length, 65);
+  assert.equal(unb64(page.keyMaterial.dhPublicKey)[0], 0x04);
+  assert.equal(page.keyMaterial.dhPublicKey.length, 88);
   assert.equal(unb64(page.keyMaterial.nonce).length, 32);
   const { secret } = await rederive(hiu, page);
   assert.equal(await openEntry(secret, hiu.nonce, unb64(page.keyMaterial.nonce), page.content, page.checksum), pt);
@@ -110,13 +113,23 @@ test("deterministic KAT is cross-anchored to fidelius-kat (same content/checksum
   assert.equal(KAT.checksum, FID.checksum, "hip-seal-kat.checksum must equal the independent fidelius-kat.checksum");
 });
 
-test("EXTERNAL ANCHOR: the KAT's derived ECDH shared secret equals the published RFC 7748 §6.1 value K", async () => {
-  const { importRawPrivate } = await import("../../../functions/_connect/abdm/fidelius.js");
+test("EXTERNAL ANCHOR: the KAT's raw X25519 output equals the published RFC 7748 §6.1 value K", async () => {
+  const { importRawPrivate, sharedSecretMontgomeryU, montgomeryUToWeierstrassX } =
+    await import("../../../functions/_connect/abdm/fidelius.js");
   const eph = await importRawPrivate(hexToBytes(KAT.ephScalarHex));           // RFC 7748 "Alice"
-  const secret = await sharedSecret(eph.privateKey, unb64(KAT.hiuKeyMaterial.dhPublicKey)); // X25519(Alice, Bob_pub)
-  assert.equal(bytesToHex(secret), KAT.sharedSecretHex, "KAT secret must match the pinned RFC value");
+  // The standards-body anchor is on the MONTGOMERY u, which is what RFC 7748 publishes. sharedSecret()
+  // deliberately returns the Weierstrass x instead (that is what Fidelius feeds HKDF), so the anchor is
+  // taken on the pre-conversion value and the conversion is then asserted on top of it.
+  const u = await sharedSecretMontgomeryU(eph.privateKey, unb64(KAT.hiuKeyMaterial.dhPublicKey));
+  assert.equal(bytesToHex(u), KAT.sharedSecretHex, "raw X25519 output must match the pinned RFC value");
   assert.equal(KAT.sharedSecretHex, "4a5d9d5ba4ce2de1728e3bf480350f25e07e21c947d19e3376f09b3c1e161742",
     "the pinned value must be RFC 7748 §6.1 K (external, standards-body anchor — not fidelius-derived)");
+
+  // …and what we actually hand to HKDF is that value mapped up by A/3 (docs/connect/abdm/FIDELIUS-RESOLVED.md).
+  const secret = await sharedSecret(eph.privateKey, unb64(KAT.hiuKeyMaterial.dhPublicKey));
+  assert.equal(bytesToHex(secret), bytesToHex(montgomeryUToWeierstrassX(Uint8Array.from(u).reverse())),
+    "sharedSecret() must be the Weierstrass x of the RFC anchor, not the anchor itself");
+  assert.notEqual(bytesToHex(secret), KAT.sharedSecretHex, "the two must differ - else the shim is a no-op");
 });
 
 // ─────────────────────────────────────────────────────────────────────────────

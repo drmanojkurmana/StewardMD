@@ -7,6 +7,12 @@
 //
 // Roles here: the HIP mints the EPHEMERAL half per entry (io injects it deterministically for this vector);
 // the HIU supplies its public { dhPublicKey, nonce } (base64). Expected outputs are the sealed page.
+//
+// RE-RECORDED 2026-08-19 after the Fidelius IKM correction (docs/connect/abdm/FIDELIUS-RESOLVED.md):
+// HKDF is fed the WEIERSTRASS x, not the Montgomery u, so the AES key - and therefore `content` -
+// changed. `checksum` did NOT change: it is sha256(plaintext), independent of the key. These bytes are
+// self-recorded; the external proof that they are right is test/connect/abdm/fidelius-abdm-kat.test.mjs,
+// which reproduces BouncyCastle's ECDH from an independent BigInt oracle.
 export const KAT = {
   // Injected HIP ephemeral (io.scalar / io.nonce) — DETERMINISTIC KAT ONLY (production uses the CSPRNG path).
   ephScalarHex: "77076d0a7318a57d3c16c17251b26645df4c2f87ebc0992ab177fba51db92c2a", // RFC 7748 scalar (Alice)
@@ -28,14 +34,14 @@ export const KAT = {
   plaintext: "{\"resourceType\":\"Bundle\",\"type\":\"document\",\"id\":\"kat-1\"}",
 
   // Expected sealed page (identical to fidelius-kat's content/checksum — the cross-anchor).
-  content:  "OwkS1mBGpRIWmVpt+gOhMFReaXpEwSMYMXUadFW22DtD6A+zUB0wb/gev39+5MqIiQbXymeGGOhG2ydHbuuIJZrxJyKbYaC2",
+  content:  "6xdNsr+2dvqDn/h9UUZ7fHLK7UHGxK5EOer2yVqQAe5e3DeePip5lv8tA51MH94SRLz224SSenbSB/+ljPi9ubUDG4HayXWc",
   checksum: "8b266a05493166ee42812a1d620c32a51592766fb293e3118167db027abaab22",
 
   // Expected returned public keyMaterial for the injected ephemeral.
   keyMaterial: {
     cryptoAlg:   "ECDH",
     curve:       "Curve25519",
-    dhPublicKey: "hSDwCYkwp1R0i33ctD73Wg2/Og0mOBr066SpjqqbTmo=",
+    dhPublicKey: "BBT5RlU5VE+WnsTi0LflabgFoelfhyg2Hv9R2zO0nUTpKMkk101f7zPFtiT0Hypa2bIgFGXW/ja0xfd0088AC1s=",
     nonce:       "ABEiM0RVZneImaq7zN3u/wARIjNEVWZ3iJmqu8zd7v8=",
   },
 };

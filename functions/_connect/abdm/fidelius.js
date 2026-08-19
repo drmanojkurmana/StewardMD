@@ -14,17 +14,45 @@ export async function generateKeyPair() {
   return { privateKey: kp.privateKey, publicKeyRaw: raw };
 }
 
+/**
+ * The ECDH shared secret in the form Fidelius feeds to HKDF.
+ *
+ * RESOLVED 2026-08-19 from the reference implementation (see docs/connect/abdm/FIDELIUS-RESOLVED.md):
+ * Fidelius does `KeyAgreement.getInstance("ECDH","BC")` over BouncyCastle's SHORT-WEIERSTRASS
+ * `curve25519`, so `generateSecret()` returns the shared point's **Weierstrass x-coordinate**. WebCrypto
+ * X25519 returns the **Montgomery u**. The two differ by exactly A/3, so handing the raw X25519 output to
+ * HKDF produces a valid-looking AES key that never decrypts anything - and fails silently, at the far end,
+ * as "the other hospital cannot read our records".
+ *
+ * The scalar multiplication deliberately stays in WebCrypto X25519 (constant-time and audited); only the
+ * public field addition is ours. RFC 7748 clamping is not a problem: it applies consistently to both our
+ * published public key and our ECDH, so agreement with an unclamped BouncyCastle peer still holds.
+ *
+ * Accepts either a bare 32-byte X25519 key or ABDM's 65-byte uncompressed point.
+ * Returns 32 bytes, BIG-endian - the exact bytes Fidelius base64-decodes into HKDF's IKM.
+ */
 export async function sharedSecret(privateKey, peerPublicRaw) {
-  if (!(peerPublicRaw instanceof Uint8Array) || peerPublicRaw.length !== 32) throw new FideliusError("peer public key must be 32 bytes");
+  const peer = (peerPublicRaw instanceof Uint8Array && peerPublicRaw.length === 32)
+    ? peerPublicRaw
+    : abdmKeyToX25519(peerPublicRaw);      // throws on anything that is not a valid ABDM/X25519 key
   let pub;
-  try { pub = await subtle.importKey("raw", peerPublicRaw, { name: "X25519" }, false, []); }
+  try { pub = await subtle.importKey("raw", peer, { name: "X25519" }, false, []); }
   catch (e) { throw new FideliusError("invalid peer public key: " + e.message); }
-  let bits;
-  try { bits = new Uint8Array(await subtle.deriveBits({ name: "X25519", public: pub }, privateKey, 256)); }
+  let uLe;
+  try { uLe = new Uint8Array(await subtle.deriveBits({ name: "X25519", public: pub }, privateKey, 256)); }
   catch (e) { throw new FideliusError("ECDH failed: " + e.message); }
   // RFC 7748 contributory behaviour: a low-order peer point yields an all-zero secret — reject it.
-  if (bits.every((b) => b === 0)) throw new FideliusError("low-order/all-zero shared secret rejected");
-  return bits;
+  if (uLe.every((b) => b === 0)) throw new FideliusError("low-order/all-zero shared secret rejected");
+  // X25519 emits u LITTLE-endian; the Weierstrass conversion works big-endian.
+  return montgomeryUToWeierstrassX(Uint8Array.from(uLe).reverse());
+}
+
+/** The raw X25519 output, without the ABDM conversion. Exposed only so tests can prove the difference. */
+export async function sharedSecretMontgomeryU(privateKey, peerPublicRaw) {
+  const peer = (peerPublicRaw instanceof Uint8Array && peerPublicRaw.length === 32)
+    ? peerPublicRaw : abdmKeyToX25519(peerPublicRaw);
+  const pub = await subtle.importKey("raw", peer, { name: "X25519" }, false, []);
+  return new Uint8Array(await subtle.deriveBits({ name: "X25519", public: pub }, privateKey, 256));
 }
 
 export function nonce() { return randomBytes(32); }
@@ -80,11 +108,13 @@ export function x25519KeyToAbdm(raw32) {
 
 /**
  * Weierstrass x of the shared point, given the Montgomery u that X25519 returns.
- * NOT WIRED IN YET - see D4. BouncyCastle's ECDHBasicAgreement returns the x-coordinate on the curve
- * it operates on (Weierstrass x), whereas X25519 deriveBits returns the Montgomery u; they differ by
- * exactly A/3. If that is what Fidelius feeds to HKDF, sealBundle/openEntry must apply this first or
- * every decryption fails with no useful error. MUST be settled with known-answer vectors from
- * github.com/mgrmtech/fidelius-cli (or a live sandbox round-trip) before enabling the HIP serve path.
+ *
+ * WIRED IN as of 2026-08-19: `sharedSecret()` applies this, because the reference implementation feeds
+ * HKDF the Weierstrass x (BouncyCastle ECDH over the short-Weierstrass `curve25519`), not the Montgomery
+ * u. Evidence file-by-file in docs/connect/abdm/FIDELIUS-RESOLVED.md.
+ *
+ * INPUT IS BIG-ENDIAN. X25519 `deriveBits` emits u little-endian, so callers must reverse first -
+ * `sharedSecret()` does. Feeding little-endian bytes here silently yields the wrong key.
  */
 export function montgomeryUToWeierstrassX(secret32) {
   if (!(secret32 instanceof Uint8Array) || secret32.length !== 32) throw new FideliusError("shared secret must be 32 bytes");

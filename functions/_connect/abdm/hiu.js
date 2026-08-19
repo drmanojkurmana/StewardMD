@@ -10,7 +10,7 @@
 import { resolveActor, resolveTenant } from "../identity.js";
 import { hmacPseudonym } from "../audit.js";
 import { putConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered, advanceStatus } from "./state.js";
-import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, FideliusError } from "./fidelius.js";
+import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, x25519KeyToAbdm, FideliusError } from "./fidelius.js";
 import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";
 import { AbdmError } from "./gateway.js";
 import { PermissionError } from "../permission.js";
@@ -204,7 +204,10 @@ export async function requestHealthInformation(env, deps, req) {
   const body = buildHiRequestBody(HIREQUEST_FIELDS, {
     requestId, now, consentId: consent.id, dateRange: req.dateRange,
     dataPushUrl: env && env.CONNECT_ABDM_DATA_PUSH_URL,   // VERIFY: our on-push callback URL
-    dhPublicKey: b64(publicKeyRaw), nonce: b64(ourNonce),
+    // 65-byte uncompressed point, NOT the bare 32-byte X25519 key: the HIP runs Fidelius, which selects
+    // its decoder by base64 length (88 chars -> decodePoint, otherwise X509/SPKI). A 44-char key is
+    // unparseable at the far end, so the HIP could never encrypt for us.
+    dhPublicKey: x25519KeyToAbdm(publicKeyRaw), nonce: b64(ourNonce),
   });
   const { status } = await gateway.post("hiRequest", body);
   if (status !== 202) throw new AbdmError("hiRequest not accepted: HTTP " + status);   // no txn row; minted key discarded

@@ -10,7 +10,7 @@
 // seals EXACTLY ONE plaintext per call, and sealEntries calls sealForHiu once per plaintext (one fresh
 // keyMaterial per page). There is no batch/shared-key form — mirroring fidelius's intentional no-batch API.
 // Fresh material comes ONLY from crypto.getRandomValues (via generateKeyPair/nonce), NEVER Math.random (R13).
-import { generateKeyPair, importRawPrivate, sharedSecret, nonce, sealBundle, FideliusError } from "./fidelius.js";
+import { generateKeyPair, importRawPrivate, sharedSecret, nonce, sealBundle, x25519KeyToAbdm, FideliusError } from "./fidelius.js";
 
 // Local base64 helpers (no new deps). Only ever applied to 32-byte pubkeys/nonces — spread is safe here.
 const b64 = (u8) => btoa(String.fromCharCode(...u8));
@@ -70,7 +70,10 @@ export async function sealForHiu(hiuKeyMaterial, plaintextStr, io = {}) {
   return {
     content,
     checksum,
-    keyMaterial: { cryptoAlg: "ECDH", curve: "Curve25519", dhPublicKey: b64(publicKeyRaw), nonce: b64(ourNonce) },
+    // dhPublicKey MUST be the 65-byte uncompressed point (base64, 88 chars). Fidelius picks its decoder
+    // by string length - 88 chars goes to decodePoint(), anything else is treated as X509/SPKI - so
+    // publishing the bare 32-byte X25519 key made the peer fail to parse us entirely.
+    keyMaterial: { cryptoAlg: "ECDH", curve: "Curve25519", dhPublicKey: x25519KeyToAbdm(publicKeyRaw), nonce: b64(ourNonce) },
   };
 }
 

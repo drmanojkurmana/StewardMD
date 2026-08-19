@@ -66,7 +66,7 @@ const makeDeps = (db, over = {}) => ({
 });
 const km = (body) => body[HIREQUEST_FIELDS.hiRequest][HIREQUEST_FIELDS.keyMaterial];
 
-test("1. happy path → hiRequest carries a 32-byte b64 dhPublicKey+nonce, a sealed txn row, status REQUESTED", async () => {
+test("1. happy path → hiRequest carries a 65-byte b64 dhPublicKey + 32-byte nonce, a sealed txn row, status REQUESTED", async () => {
   const db = seedDb();
   const deps = makeDeps(db);
   const out = await requestHealthInformation(ENV, deps, makeReq());
@@ -79,7 +79,12 @@ test("1. happy path → hiRequest carries a 32-byte b64 dhPublicKey+nonce, a sea
   // Read the body THROUGH the seam (not hardcoded names) so the test tracks the ADR-2H field seam.
   assert.equal(km(body)[HIREQUEST_FIELDS.cryptoAlg], "ECDH");
   assert.equal(km(body)[HIREQUEST_FIELDS.curve], "Curve25519");
-  assert.equal(unb64(km(body)[HIREQUEST_FIELDS.dhPublicKey]).length, 32, "dhPublicKey is a 32-byte X25519 public key");
+  // 65-byte uncompressed EC point (0x04||X||Y), NOT the bare 32-byte X25519 key: Fidelius picks its
+  // decoder by base64 length, so a 44-char key is unparseable at the HIP and it can never encrypt for us.
+  const dhPub = unb64(km(body)[HIREQUEST_FIELDS.dhPublicKey]);
+  assert.equal(dhPub.length, 65, "dhPublicKey is a 65-byte uncompressed EC point");
+  assert.equal(dhPub[0], 0x04, "uncompressed points start with 0x04");
+  assert.equal(km(body)[HIREQUEST_FIELDS.dhPublicKey].length, 88, "…which is 88 base64 chars - what Fidelius routes to decodePoint()");
   assert.equal(unb64(km(body)[HIREQUEST_FIELDS.nonce]).length, 32, "nonce is 32 bytes");
   const hi = body[HIREQUEST_FIELDS.hiRequest];
   assert.equal(hi[HIREQUEST_FIELDS.consent][HIREQUEST_FIELDS.consentId], CONSENT_ID);
