@@ -6,6 +6,7 @@
 // (status, hiTypes, expiry) are authoritative — so a since-REVOKED or a narrowed grant is refused HERE, never
 // trusted from a cached fetch-time status. Gateway 202 => sealed txn row + status REQUESTED; non-202 =>
 // fail-closed throw with NO txn row (the minted key is discarded, never sealed).
+import { readDhPublicKey } from "../../../functions/_connect/abdm/fidelius.js";
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { requestHealthInformation, HIREQUEST_FIELDS } from "../../../functions/_connect/abdm/hiu.js";
@@ -81,10 +82,16 @@ test("1. happy path → hiRequest carries a 65-byte b64 dhPublicKey + 32-byte no
   assert.equal(km(body)[HIREQUEST_FIELDS.curve], "Curve25519");
   // 65-byte uncompressed EC point (0x04||X||Y), NOT the bare 32-byte X25519 key: Fidelius picks its
   // decoder by base64 length, so a 44-char key is unparseable at the HIP and it can never encrypt for us.
-  const dhPub = unb64(km(body)[HIREQUEST_FIELDS.dhPublicKey]);
-  assert.equal(dhPub.length, 65, "dhPublicKey is a 65-byte uncompressed EC point");
+  // dhPublicKey is the { expiry, parameters, keyValue } OBJECT ABDM's M3 collection specifies, and
+  // keyValue is the 65-byte uncompressed point (88 base64 chars) Fidelius routes to decodePoint().
+  const dhObj = km(body)[HIREQUEST_FIELDS.dhPublicKey];
+  assert.equal(typeof dhObj, "object", "dhPublicKey must be the wire OBJECT, not a bare base64 string");
+  assert.equal(dhObj.parameters, "Curve25519/32byte random key");
+  assert.ok(Date.parse(dhObj.expiry) > 0, "dhPublicKey.expiry must be an ISO instant");
+  const dhPub = unb64(readDhPublicKey(dhObj));
+  assert.equal(dhPub.length, 65, "keyValue is a 65-byte uncompressed EC point");
   assert.equal(dhPub[0], 0x04, "uncompressed points start with 0x04");
-  assert.equal(km(body)[HIREQUEST_FIELDS.dhPublicKey].length, 88, "…which is 88 base64 chars - what Fidelius routes to decodePoint()");
+  assert.equal(dhObj.keyValue.length, 88, "…which is 88 base64 chars");
   assert.equal(unb64(km(body)[HIREQUEST_FIELDS.nonce]).length, 32, "nonce is 32 bytes");
   const hi = body[HIREQUEST_FIELDS.hiRequest];
   assert.equal(hi[HIREQUEST_FIELDS.consent][HIREQUEST_FIELDS.consentId], CONSENT_ID);
@@ -118,8 +125,8 @@ test("3. two data requests mint TWO DISTINCT ephemeral keypairs — no key reuse
   const d1 = makeDeps(db1), d2 = makeDeps(db2);
   const r1 = await requestHealthInformation(ENV, d1, makeReq());
   const r2 = await requestHealthInformation(ENV, d2, makeReq());
-  const pub1 = km(d1.gateway.calls[0].body)[HIREQUEST_FIELDS.dhPublicKey];
-  const pub2 = km(d2.gateway.calls[0].body)[HIREQUEST_FIELDS.dhPublicKey];
+  const pub1 = readDhPublicKey(km(d1.gateway.calls[0].body)[HIREQUEST_FIELDS.dhPublicKey]);
+  const pub2 = readDhPublicKey(km(d2.gateway.calls[0].body)[HIREQUEST_FIELDS.dhPublicKey]);
   assert.notEqual(pub1, pub2, "a fresh dhPublicKey per request (no reuse)");
   const s1 = (await getTxnByRequestId(db1, r1.requestId)).eph_privkey_sealed;
   const s2 = (await getTxnByRequestId(db2, r2.requestId)).eph_privkey_sealed;

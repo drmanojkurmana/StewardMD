@@ -57,6 +57,50 @@ export async function sharedSecretMontgomeryU(privateKey, peerPublicRaw) {
 
 export function nonce() { return randomBytes(32); }
 
+// ── ABDM keyMaterial wire object ──────────────────────────────────────────────────────────────────
+// `dhPublicKey` is NOT a bare base64 string on the wire - it is a NESTED OBJECT. Confirmed against the
+// official Milestone-2 and Milestone-3 Postman collections (16-02-2026), in BOTH directions:
+//   HIU -> gateway  /data-flow/v3/health-information/request  hiRequest.keyMaterial.dhPublicKey
+//   HIP -> HIU      the dataPushUrl body                      keyMaterial.dhPublicKey
+// both being { expiry, parameters, keyValue }. Sending the bare string means the peer reads
+// `dhPublicKey.keyValue` as undefined and can neither encrypt for us nor decrypt from us.
+export const ABDM_KEY_PARAMETERS = "Curve25519/32byte random key";   // the literal string ABDM's own samples carry
+const KEY_TTL_MS = 24 * 3600 * 1000;                                  // ephemeral half is single-transfer; a day is generous
+
+/**
+ * Build ABDM's keyMaterial. `publicKeyRaw` is our 32-byte X25519 key (converted to the 65-byte
+ * uncompressed point on the way out); `nonce32` our 32-byte nonce. `now` is an injected clock.
+ */
+export function abdmKeyMaterial(publicKeyRaw, nonce32, { now } = {}) {
+  if (!(nonce32 instanceof Uint8Array) || nonce32.length !== 32) throw new FideliusError("keyMaterial nonce must be 32 bytes");
+  const t = typeof now === "function" ? now() : now;
+  const base = t instanceof Date ? t.getTime() : (typeof t === "string" ? Date.parse(t) : (typeof t === "number" ? t : Date.now()));
+  return {
+    cryptoAlg: "ECDH",
+    curve: "Curve25519",
+    dhPublicKey: {
+      expiry: new Date((Number.isFinite(base) ? base : Date.now()) + KEY_TTL_MS).toISOString(),
+      parameters: ABDM_KEY_PARAMETERS,
+      keyValue: x25519KeyToAbdm(publicKeyRaw),
+    },
+    nonce: b64(nonce32),
+  };
+}
+
+/**
+ * Read a peer's dhPublicKey. Accepts the object form ABDM specifies AND a bare base64 string, because a
+ * peer that got this wrong the way we did should still interoperate - we are the ones who must be strict
+ * about what we SEND, and liberal about what we accept.
+ */
+export function readDhPublicKey(dhPublicKey) {
+  if (typeof dhPublicKey === "string") return dhPublicKey;
+  if (dhPublicKey && typeof dhPublicKey === "object") {
+    const v = dhPublicKey.keyValue ?? dhPublicKey.value ?? dhPublicKey.key;
+    if (typeof v === "string" && v) return v;
+  }
+  throw new FideliusError("keyMaterial.dhPublicKey must be a base64 string or { keyValue }");
+}
+
 // ── ABDM wire codec for public keys ───────────────────────────────────────────────────────────────
 // ABDM's "Curve25519" is the SHORT-WEIERSTRASS named curve (BouncyCastle's `curve25519`), so a wire
 // public key is base64(0x04 || X(32) || Y(32)) BIG-endian - 65 bytes - not the bare 32-byte

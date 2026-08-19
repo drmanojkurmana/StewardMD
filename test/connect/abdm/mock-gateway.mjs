@@ -2,7 +2,7 @@
 import { ENDPOINTS, FIELDS } from "../../../functions/_connect/abdm/gateway.js";
 import { CONSENT_FIELDS, HIREQUEST_FIELDS } from "../../../functions/_connect/abdm/hiu.js";
 import { attachTransactionId, advanceStatus } from "../../../functions/_connect/abdm/state.js";
-import { sealBundle, sharedSecret, generateKeyPair, nonce, openEntry, deriveKeyIv } from "../../../functions/_connect/abdm/fidelius.js";
+import { sealBundle, sharedSecret, generateKeyPair, nonce, openEntry, deriveKeyIv, abdmKeyMaterial, readDhPublicKey } from "../../../functions/_connect/abdm/fidelius.js";
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { "content-type": "application/json" } });
 const pathOf = (url) => new URL(url).pathname;
 
@@ -113,10 +113,10 @@ export async function makeHiuMockGateway({ env, deps, handleIngress, tenantId = 
   // proves is per-entry ISOLATION + checksum, not per-entry keys (Stage-5 HIP-encrypt owns per-entry material).
   async function hipSession() {
     if (state.hip) return state.hip;
-    const hiuPub = unb64(state.hiuKeyMaterial.dhPublicKey), hiuNonce = unb64(state.hiuKeyMaterial.nonce);
+    const hiuPub = unb64(readDhPublicKey(state.hiuKeyMaterial.dhPublicKey)), hiuNonce = unb64(state.hiuKeyMaterial.nonce);
     const kp = await generateKeyPair(), hn = nonce();
     const secret = await sharedSecret(kp.privateKey, hiuPub);
-    state.hip = { keyMaterial: { dhPublicKey: b64(kp.publicKeyRaw), nonce: b64(hn) }, seal: (pt) => sealBundle(secret, hn, hiuNonce, pt) };
+    state.hip = { keyMaterial: abdmKeyMaterial(kp.publicKeyRaw, hn, { now: () => new Date(0) }), seal: (pt) => sealBundle(secret, hn, hiuNonce, pt) };
     return state.hip;
   }
 
@@ -192,7 +192,7 @@ export async function makeHipMockHiu({ env, deps, handleIngress, tenantId = "t-h
   // against; we keep the PRIVATE key so we can later decrypt every page (the round-trip proof).
   const kp = await generateKeyPair();
   const hiuNonce = nonce();
-  const hiuKeyMaterial = { cryptoAlg: "ECDH", curve: "Curve25519", dhPublicKey: b64(kp.publicKeyRaw), nonce: b64(hiuNonce) };
+  const hiuKeyMaterial = abdmKeyMaterial(kp.publicKeyRaw, hiuNonce, { now: () => new Date(0) });
 
   const pushedPages = [];   // every page the HIP POSTs to OUR dataPushUrl, in wire order: { url, body }
   const calls = [];
@@ -228,7 +228,7 @@ export async function makeHipMockHiu({ env, deps, handleIngress, tenantId = "t-h
   // composed no-(key,iv)-reuse proof. secret is per-page (a fresh HIP ephemeral pub -> a fresh ECDH secret).
   async function ivHexFor(body) {
     const km = body.keyMaterial;
-    const secret = await sharedSecret(kp.privateKey, unb64(km.dhPublicKey));
+    const secret = await sharedSecret(kp.privateKey, unb64(readDhPublicKey(km.dhPublicKey)));
     const { iv } = await deriveKeyIv(secret, hiuNonce, unb64(km.nonce));
     return [...iv].map((x) => x.toString(16).padStart(2, "0")).join("");
   }
@@ -271,7 +271,7 @@ export async function makeHipMockHiu({ env, deps, handleIngress, tenantId = "t-h
       const out = [];
       for (const { body } of pushedPages) {
         const km = body.keyMaterial;
-        const secret = await sharedSecret(kp.privateKey, unb64(km.dhPublicKey));
+        const secret = await sharedSecret(kp.privateKey, unb64(readDhPublicKey(km.dhPublicKey)));
         const e = body.entries[0];
         let content = e.content;
         if (tamper) { const raw = [...atob(content)]; raw[raw.length - 1] = String.fromCharCode(raw[raw.length - 1].charCodeAt(0) ^ 1); content = btoa(raw.join("")); }

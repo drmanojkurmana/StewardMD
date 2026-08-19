@@ -5,7 +5,8 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   generateKeyPair, sharedSecret, abdmKeyToX25519, x25519KeyToAbdm,
-  montgomeryUToWeierstrassX, FideliusError,
+  montgomeryUToWeierstrassX, abdmKeyMaterial, readDhPublicKey, nonce,
+  ABDM_KEY_PARAMETERS, FideliusError,
 } from "../../../functions/_connect/abdm/fidelius.js";
 
 // Verbatim from the official ABDM swagger (consent_management_data_flow / hiu_request keyMaterial example).
@@ -77,4 +78,57 @@ test("the Montgomery->Weierstrass shared-secret shim is exact (A/3 offset)", () 
   // Guards the constant. Feeding u = 0 must return exactly A/3 mod P, big-endian.
   const A_OVER_3_BE_HEX = "2aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaad2451";
   assert.equal(hex(montgomeryUToWeierstrassX(new Uint8Array(32))), A_OVER_3_BE_HEX);
+});
+
+
+// ── keyMaterial container shape (defect D6) ─────────────────────────────────────────────────────────
+// `dhPublicKey` is a NESTED OBJECT on the wire, not a bare base64 string. Pinned from ABDM's OWN
+// Milestone-2 and Milestone-3 Postman collections (16-02-2026), which agree in both directions:
+//   M3  hiRequest.keyMaterial.dhPublicKey = { expiry, parameters, keyValue }   (HIU -> gateway)
+//   M2  dataPushUrl body keyMaterial.dhPublicKey = { expiry, parameters, keyValue }  (HIP -> HIU)
+// Sending the bare string means the peer reads dhPublicKey.keyValue as undefined, so it can neither
+// encrypt for us nor decrypt from us - fatal in both directions, and silent.
+test("abdmKeyMaterial emits ABDM's nested dhPublicKey object, not a bare string", async () => {
+  const kp = await generateKeyPair();
+  const n = nonce();
+  const km = abdmKeyMaterial(kp.publicKeyRaw, n, { now: () => new Date("2026-08-19T00:00:00.000Z") });
+  assert.equal(km.cryptoAlg, "ECDH");
+  assert.equal(km.curve, "Curve25519");
+  assert.equal(typeof km.dhPublicKey, "object", "dhPublicKey must be the wire object");
+  assert.equal(km.dhPublicKey.parameters, ABDM_KEY_PARAMETERS);
+  assert.equal(km.dhPublicKey.expiry, "2026-08-20T00:00:00.000Z", "expiry is clock-derived, not wall-clock");
+  assert.deepEqual(Object.keys(km.dhPublicKey).sort(), ["expiry", "keyValue", "parameters"]);
+  // keyValue is the 65-byte uncompressed point (88 base64 chars) - the only form Fidelius decodePoint()s.
+  const raw = unb64(km.dhPublicKey.keyValue);
+  assert.equal(raw.length, 65);
+  assert.equal(raw[0], 0x04);
+  assert.equal(km.dhPublicKey.keyValue.length, 88);
+  assert.equal(unb64(km.nonce).length, 32);
+});
+
+test("readDhPublicKey unwraps the object and still accepts a bare string peer", async () => {
+  const kp = await generateKeyPair();
+  const km = abdmKeyMaterial(kp.publicKeyRaw, nonce(), {});
+  assert.equal(readDhPublicKey(km.dhPublicKey), km.dhPublicKey.keyValue);
+  // Liberal in what we accept: a peer that made our old mistake still interoperates.
+  assert.equal(readDhPublicKey(km.dhPublicKey.keyValue), km.dhPublicKey.keyValue);
+  assert.equal(readDhPublicKey({ keyValue: "AAAA" }), "AAAA");
+});
+
+test("readDhPublicKey refuses anything it cannot resolve to a key, rather than coercing", () => {
+  for (const bad of [null, undefined, {}, { expiry: "x" }, 42, [], { keyValue: 7 }]) {
+    assert.throws(() => readDhPublicKey(bad), FideliusError, "must refuse: " + JSON.stringify(bad));
+  }
+});
+
+test("a keyMaterial round-trips: what we publish is what a peer resolves back to our key", async () => {
+  const kp = await generateKeyPair();
+  const km = abdmKeyMaterial(kp.publicKeyRaw, nonce(), {});
+  assert.equal(hex(abdmKeyToX25519(readDhPublicKey(km.dhPublicKey))), hex(kp.publicKeyRaw));
+});
+
+test("abdmKeyMaterial refuses a wrong-length nonce rather than emitting an unusable keyMaterial", async () => {
+  const kp = await generateKeyPair();
+  assert.throws(() => abdmKeyMaterial(kp.publicKeyRaw, new Uint8Array(31), {}), FideliusError);
+  assert.throws(() => abdmKeyMaterial(kp.publicKeyRaw, "not-bytes", {}), FideliusError);
 });

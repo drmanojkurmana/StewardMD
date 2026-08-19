@@ -9,7 +9,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
-  generateKeyPair, sharedSecret, nonce, deriveKeyIv, openEntry, FideliusError,
+  generateKeyPair, sharedSecret, nonce, deriveKeyIv, openEntry, readDhPublicKey, FideliusError,
 } from "../../../functions/_connect/abdm/fidelius.js";
 import { sealForHiu, sealEntries } from "../../../functions/_connect/abdm/hip-crypto.js";
 import { KAT } from "./vectors/hip-seal-kat.mjs";
@@ -31,10 +31,13 @@ async function makeHiu() {
 }
 // Re-derive the (key,iv) + secret a sealed page uses, from the HIU's side (proves what the HIP produced).
 async function rederive(hiu, page) {
-  const secret = await sharedSecret(hiu.privateKey, unb64(page.keyMaterial.dhPublicKey));
+  const secret = await sharedSecret(hiu.privateKey, unb64(dhk(page.keyMaterial)));
   const { iv } = await deriveKeyIv(secret, hiu.nonce, unb64(page.keyMaterial.nonce));
   return { secret, iv };
 }
+// ABDM sends dhPublicKey as { expiry, parameters, keyValue }; this is the production reader, so the
+// tests compare exactly what a real peer would read off the wire (never the object identity).
+const dhk = (km) => readDhPublicKey(km.dhPublicKey);
 const allPairwiseDistinct = (arr) => new Set(arr).size === arr.length;
 
 // ─────────────────────────────────────────────────────────────────────────────
@@ -51,7 +54,7 @@ test("MULTI-ENTRY KAT (R1 HARD GATE): N=3 distinct plaintexts ⇒ pairwise-disti
   assert.equal(pages.length, 3, "one transfer page per plaintext");
 
   // Pairwise-distinct PUBLIC keyMaterial (fresh ephemeral keypair + fresh nonce per entry).
-  assert.ok(allPairwiseDistinct(pages.map((p) => p.keyMaterial.dhPublicKey)), "dhPublicKey must be pairwise-distinct");
+  assert.ok(allPairwiseDistinct(pages.map((p) => dhk(p.keyMaterial))), "dhPublicKey must be pairwise-distinct");
   assert.ok(allPairwiseDistinct(pages.map((p) => p.keyMaterial.nonce)), "nonce must be pairwise-distinct");
 
   // Pairwise-distinct DERIVED iv AND secret (re-derived from the HIU side) ⇒ no two pages share (key,iv).
@@ -81,9 +84,12 @@ test("sealForHiu: a single seal round-trips + emits well-formed keyMaterial (ECD
   assert.equal(page.keyMaterial.cryptoAlg, "ECDH");
   assert.equal(page.keyMaterial.curve, "Curve25519");
   // 65-byte uncompressed point (88 base64 chars) - the only form Fidelius routes to decodePoint().
-  assert.equal(unb64(page.keyMaterial.dhPublicKey).length, 65);
-  assert.equal(unb64(page.keyMaterial.dhPublicKey)[0], 0x04);
-  assert.equal(page.keyMaterial.dhPublicKey.length, 88);
+  assert.equal(unb64(dhk(page.keyMaterial)).length, 65);
+  assert.equal(unb64(dhk(page.keyMaterial))[0], 0x04);
+  assert.equal(dhk(page.keyMaterial).length, 88);
+  // …and the container is the object ABDM's own data-push sample carries, not a bare string.
+  assert.equal(page.keyMaterial.dhPublicKey.parameters, "Curve25519/32byte random key");
+  assert.ok(Date.parse(page.keyMaterial.dhPublicKey.expiry) > 0, "dhPublicKey.expiry must be an ISO instant");
   assert.equal(unb64(page.keyMaterial.nonce).length, 32);
   const { secret } = await rederive(hiu, page);
   assert.equal(await openEntry(secret, hiu.nonce, unb64(page.keyMaterial.nonce), page.content, page.checksum), pt);
@@ -93,7 +99,8 @@ test("sealForHiu: a single seal round-trips + emits well-formed keyMaterial (ECD
 // DETERMINISTIC KAT: fixed HIU keyMaterial + injected ephemeral ⇒ exact known ciphertext + checksum bytes.
 // ─────────────────────────────────────────────────────────────────────────────
 test("deterministic KAT: fixed HIU keyMaterial + io-injected ephemeral reproduce exact content/checksum/keyMaterial", async () => {
-  const io = { testOnly: true, scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex) };
+  const io = { testOnly: true, scalar: hexToBytes(KAT.ephScalarHex), nonce: hexToBytes(KAT.ephNonceHex),
+               now: () => new Date(KAT.katNow) };   // dhPublicKey.expiry is clock-derived - pin it
   const page = await sealForHiu(KAT.hiuKeyMaterial, KAT.plaintext, io);
   assert.equal(page.content, KAT.content, "content must match the recorded KAT bytes");
   assert.equal(page.checksum, KAT.checksum, "checksum must match the recorded KAT bytes");
@@ -101,7 +108,7 @@ test("deterministic KAT: fixed HIU keyMaterial + io-injected ephemeral reproduce
   // And it decrypts back with the HIU's private scalar (self-consistency of the KAT).
   const hiuPriv = (await import("../../../functions/_connect/abdm/fidelius.js")).importRawPrivate;
   const hiu = await hiuPriv(hexToBytes(KAT.hiuScalarHex));
-  const secret = await sharedSecret(hiu.privateKey, unb64(page.keyMaterial.dhPublicKey));
+  const secret = await sharedSecret(hiu.privateKey, unb64(dhk(page.keyMaterial)));
   const out = await openEntry(secret, unb64(KAT.hiuKeyMaterial.nonce), unb64(page.keyMaterial.nonce), page.content, page.checksum);
   assert.equal(out, KAT.plaintext);
   assert.equal(page.checksum, await sha256hex(out));
@@ -160,7 +167,7 @@ test("sealEntries: N plaintexts ⇒ N pages, EACH its own keyMaterial (no shared
   const pts = ["a", "b", "c", "d", "e"];
   const pages = await sealEntries(hiu.keyMaterial, pts);
   assert.equal(pages.length, pts.length);
-  assert.ok(allPairwiseDistinct(pages.map((p) => p.keyMaterial.dhPublicKey)));
+  assert.ok(allPairwiseDistinct(pages.map((p) => dhk(p.keyMaterial))));
   assert.ok(allPairwiseDistinct(pages.map((p) => p.keyMaterial.nonce)));
   for (let i = 0; i < pages.length; i++) {
     const { secret } = await rederive(hiu, pages[i]);
@@ -180,7 +187,7 @@ test("the module exposes NO batch/multi-plaintext-per-key form (surface audit)",
   const one = await sealForHiu(hiu.keyMaterial, "solo");
   assert.equal(Array.isArray(one), false);
   assert.equal(typeof one.content, "string");
-  assert.ok(one.keyMaterial && typeof one.keyMaterial.dhPublicKey === "string");
+  assert.ok(one.keyMaterial && typeof dhk(one.keyMaterial) === "string");
 });
 
 test("sealEntries REJECTS a broadcast io.scalar/io.nonce (would reuse one (key,iv) across entries)", async () => {
@@ -218,20 +225,20 @@ test("HARDENING #1: a PROD call passing scalar/nonce WITHOUT testOnly IGNORES th
   const p1 = await sealForHiu(hiu.keyMaterial, "phi", attacker);
   const p2 = await sealForHiu(hiu.keyMaterial, "phi", attacker);
   // If injection were honored both would equal the KAT ephemeral; instead each is a fresh CSPRNG keypair.
-  assert.notEqual(p1.keyMaterial.dhPublicKey, p2.keyMaterial.dhPublicKey, "two prod calls must yield DISTINCT dhPublicKey");
-  assert.notEqual(p1.keyMaterial.dhPublicKey, KAT.keyMaterial.dhPublicKey, "the injected scalar must have been ignored");
+  assert.notEqual(dhk(p1.keyMaterial), dhk(p2.keyMaterial), "two prod calls must yield DISTINCT dhPublicKey");
+  assert.notEqual(dhk(p1.keyMaterial), dhk(KAT.keyMaterial), "the injected scalar must have been ignored");
   assert.notEqual(p1.keyMaterial.nonce, KAT.keyMaterial.nonce, "the injected nonce must have been ignored");
   // sealEntries: same guarantee — an attacker object without testOnly cannot pin any entry's material.
   const pages = await sealEntries(hiu.keyMaterial, ["x", "y"], attacker);
-  assert.notEqual(pages[0].keyMaterial.dhPublicKey, pages[1].keyMaterial.dhPublicKey);
-  assert.notEqual(pages[0].keyMaterial.dhPublicKey, KAT.keyMaterial.dhPublicKey);
+  assert.notEqual(dhk(pages[0].keyMaterial), dhk(pages[1].keyMaterial));
+  assert.notEqual(dhk(pages[0].keyMaterial), dhk(KAT.keyMaterial));
 });
 
 test("R1 negation proof: two DIFFERENT plaintexts sealed independently never collide on (key,iv)", async () => {
   const hiu = await makeHiu();
   const p1 = await sealForHiu(hiu.keyMaterial, "plaintext-ONE");
   const p2 = await sealForHiu(hiu.keyMaterial, "plaintext-TWO");
-  assert.notEqual(p1.keyMaterial.dhPublicKey, p2.keyMaterial.dhPublicKey);
+  assert.notEqual(dhk(p1.keyMaterial), dhk(p2.keyMaterial));
   assert.notEqual(p1.keyMaterial.nonce, p2.keyMaterial.nonce);
   const { iv: iv1, secret: s1 } = await rederive(hiu, p1);
   const { iv: iv2, secret: s2 } = await rederive(hiu, p2);

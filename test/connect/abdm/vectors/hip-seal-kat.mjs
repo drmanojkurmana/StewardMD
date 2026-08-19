@@ -38,10 +38,18 @@ export const KAT = {
   checksum: "8b266a05493166ee42812a1d620c32a51592766fb293e3118167db027abaab22",
 
   // Expected returned public keyMaterial for the injected ephemeral.
+  // dhPublicKey is the { expiry, parameters, keyValue } OBJECT ABDM specifies (Milestone-2/-3 Postman
+  // collections, 16-02-2026), NOT a bare base64 string. `expiry` is clock-derived, so the deterministic
+  // KAT injects a fixed clock (io.now) to keep it reproducible.
+  katNow: "2026-08-19T00:00:00.000Z",
   keyMaterial: {
     cryptoAlg:   "ECDH",
     curve:       "Curve25519",
-    dhPublicKey: "BBT5RlU5VE+WnsTi0LflabgFoelfhyg2Hv9R2zO0nUTpKMkk101f7zPFtiT0Hypa2bIgFGXW/ja0xfd0088AC1s=",
+    dhPublicKey: {
+      expiry:     "2026-08-20T00:00:00.000Z",
+      parameters: "Curve25519/32byte random key",
+      keyValue:   "BBT5RlU5VE+WnsTi0LflabgFoelfhyg2Hv9R2zO0nUTpKMkk101f7zPFtiT0Hypa2bIgFGXW/ja0xfd0088AC1s=",
+    },
     nonce:       "ABEiM0RVZneImaq7zN3u/wARIjNEVWZ3iJmqu8zd7v8=",
   },
 };

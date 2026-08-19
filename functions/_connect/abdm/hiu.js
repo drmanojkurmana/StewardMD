@@ -10,7 +10,7 @@
 import { resolveActor, resolveTenant } from "../identity.js";
 import { hmacPseudonym } from "../audit.js";
 import { putConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered, advanceStatus } from "./state.js";
-import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, x25519KeyToAbdm, FideliusError } from "./fidelius.js";
+import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, abdmKeyMaterial, readDhPublicKey, FideliusError } from "./fidelius.js";
 import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";
 import { AbdmError } from "./gateway.js";
 import { PermissionError } from "../permission.js";
@@ -133,7 +133,7 @@ export const HIREQUEST_FIELDS = {
 
 // Build the hiRequest POST body through the field seam. keyMaterial carries ONLY our PUBLIC half (public key +
 // nonce); the private scalar never leaves this process except SEALED into D1.
-export function buildHiRequestBody(F, { requestId, now, consentId, dateRange, dataPushUrl, dhPublicKey, nonce }) {
+export function buildHiRequestBody(F, { requestId, now, consentId, dateRange, dataPushUrl, keyMaterial }) {
   return {
     [F.requestId]: requestId,
     [F.timestamp]: now,
@@ -141,12 +141,9 @@ export function buildHiRequestBody(F, { requestId, now, consentId, dateRange, da
       [F.consent]: { [F.consentId]: consentId },
       [F.dateRange]: dateRange ?? null,
       [F.dataPushUrl]: dataPushUrl ?? null,
-      [F.keyMaterial]: {
-        [F.cryptoAlg]: "ECDH",
-        [F.curve]: "Curve25519",
-        [F.dhPublicKey]: dhPublicKey,
-        [F.nonce]: nonce,
-      },
+      // keyMaterial comes from fidelius.abdmKeyMaterial(): dhPublicKey is the { expiry, parameters,
+      // keyValue } object the M3 collection specifies, not a bare base64 string.
+      [F.keyMaterial]: keyMaterial,
     },
   };
 }
@@ -204,10 +201,10 @@ export async function requestHealthInformation(env, deps, req) {
   const body = buildHiRequestBody(HIREQUEST_FIELDS, {
     requestId, now, consentId: consent.id, dateRange: req.dateRange,
     dataPushUrl: env && env.CONNECT_ABDM_DATA_PUSH_URL,   // VERIFY: our on-push callback URL
-    // 65-byte uncompressed point, NOT the bare 32-byte X25519 key: the HIP runs Fidelius, which selects
-    // its decoder by base64 length (88 chars -> decodePoint, otherwise X509/SPKI). A 44-char key is
-    // unparseable at the far end, so the HIP could never encrypt for us.
-    dhPublicKey: x25519KeyToAbdm(publicKeyRaw), nonce: b64(ourNonce),
+    // keyValue is the 65-byte uncompressed point, NOT the bare 32-byte X25519 key: the HIP runs Fidelius,
+    // which selects its decoder by base64 length (88 chars -> decodePoint, otherwise X509/SPKI). A 44-char
+    // key is unparseable at the far end, so the HIP could never encrypt for us.
+    keyMaterial: abdmKeyMaterial(publicKeyRaw, ourNonce, { now }),
   });
   const { status } = await gateway.post("hiRequest", body);
   if (status !== 202) throw new AbdmError("hiRequest not accepted: HTTP " + status);   // no txn row; minted key discarded
@@ -272,7 +269,9 @@ export async function consumeTransfer(env, deps, { transactionId, hipKeyMaterial
   // VERIFY: confirm against the ABDM /health-information/transfer wire-shape (one keyMaterial per page, one entry per page)
   const scalarB64 = await unsealTxnKey(deps.secrets, txn);
   const { privateKey } = await importRawPrivate(unb64(scalarB64));
-  const secret = await sharedSecret(privateKey, unb64(hipKeyMaterial.dhPublicKey));
+  // The HIP sends dhPublicKey as { expiry, parameters, keyValue }; readDhPublicKey unwraps it and still
+  // accepts a bare base64 string from a peer that got the shape wrong.
+  const secret = await sharedSecret(privateKey, unb64(readDhPublicKey(hipKeyMaterial.dhPublicKey)));
   const ourNonce = unb64(txn.our_nonce);
   const hipNonce = unb64(hipKeyMaterial.nonce);
 
