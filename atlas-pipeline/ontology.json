@@ -461,6 +461,7 @@
       "laterality": "NONE_ASSERTED",
       "region": "LOWER_LIMB",
       "source_model": [
+        "classical",
         "totalsegmentator-total"
       ],
       "source_dataset": [
@@ -472,11 +473,43 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-knee-axial",
+        "ct-knee-coronal",
+        "ct-knee-sagittal",
         "ct-pelvis-axial",
         "ct-pelvis-coronal",
         "ct-pelvis-sagittal"
       ],
       "definition": "The femur is the longest and strongest bone in the skeleton."
+    },
+    "FIBULA": {
+      "canonical_id": "FIBULA",
+      "display_name": "Fibula",
+      "aliases": [
+        "fibula"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-knee-axial",
+        "ct-knee-coronal",
+        "ct-knee-sagittal"
+      ],
+      "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
     },
     "FORNIX": {
       "canonical_id": "FORNIX",
@@ -1007,6 +1040,31 @@
         "ct-live-torso-sagittal"
       ],
       "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+    },
+    "LOWER_LIMB": {
+      "canonical_id": "LOWER_LIMB",
+      "display_name": "Lower limb",
+      "aliases": [
+        "lower-limb"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "UNMAPPED",
+      "source_model": [],
+      "source_dataset": [],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "NOT_AVAILABLE",
+      "validation": "NO_GEOMETRY",
+      "modules": [
+        "ct-knee-axial",
+        "ct-knee-coronal",
+        "ct-knee-sagittal"
+      ],
+      "definition": null
     },
     "LOWER_LOBE_LEFT": {
       "canonical_id": "LOWER_LOBE_LEFT",
@@ -1892,6 +1950,35 @@
         "ct-thorax-sagittal"
       ],
       "definition": null
+    },
+    "TIBIA": {
+      "canonical_id": "TIBIA",
+      "display_name": "Tibia",
+      "aliases": [
+        "tibia"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-knee-axial",
+        "ct-knee-coronal",
+        "ct-knee-sagittal"
+      ],
+      "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
     },
     "TORSO": {
       "canonical_id": "TORSO",

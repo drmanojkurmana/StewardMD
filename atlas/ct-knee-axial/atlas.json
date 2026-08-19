@@ -1,0 +1,630 @@
+{
+ "id": "ct-knee-axial",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_knee_ct.py on Visible Human frozenCT slices 2300-2470. Bone contrast is the one thing this frozen cadaver reproduces faithfully, so HU thresholding at 300 plus 3D connected components plus position is sufficient, and it is free.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "femur": {
+   "name": "Femur",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The femur is the longest and strongest bone in the skeleton."
+  },
+  "fibula": {
+   "name": "Fibula",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+  },
+  "lower-limb": {
+   "name": "Lower limb",
+   "category": "bone"
+  },
+  "tibia": {
+   "name": "Tibia",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-knee-axial/001.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 17.9,
+     "y": 43.6
+    },
+    {
+     "s": "femur",
+     "x": 27.2,
+     "y": 46.9
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-knee-axial/002.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 17.7,
+     "y": 43.0
+    },
+    {
+     "s": "femur",
+     "x": 81.1,
+     "y": 51.1
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-knee-axial/003.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 14.9,
+     "y": 57.8
+    },
+    {
+     "s": "femur",
+     "x": 84.4,
+     "y": 48.4
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-knee-axial/004.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 14.2,
+     "y": 44.8
+    },
+    {
+     "s": "femur",
+     "x": 82.2,
+     "y": 56.4
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-knee-axial/005.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 26.5,
+     "y": 47.5
+    },
+    {
+     "s": "femur",
+     "x": 74.2,
+     "y": 47.4
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-knee-axial/006.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 25.1,
+     "y": 50.3
+    },
+    {
+     "s": "femur",
+     "x": 75.0,
+     "y": 51.7
+    },
+    {
+     "s": "tibia",
+     "x": 13.6,
+     "y": 46.7
+    },
+    {
+     "s": "tibia",
+     "x": 86.3,
+     "y": 48.6
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-knee-axial/007.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 22.6,
+     "y": 54.9
+    },
+    {
+     "s": "tibia",
+     "x": 76.4,
+     "y": 55.6
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-knee-axial/008.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 24.5,
+     "y": 54.1
+    },
+    {
+     "s": "tibia",
+     "x": 74.7,
+     "y": 52.1
+    },
+    {
+     "s": "fibula",
+     "x": 9.7,
+     "y": 41.2
+    },
+    {
+     "s": "fibula",
+     "x": 90.4,
+     "y": 43.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-knee-axial/009.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 14.9,
+     "y": 45.9
+    },
+    {
+     "s": "tibia",
+     "x": 86.3,
+     "y": 47.5
+    },
+    {
+     "s": "fibula",
+     "x": 9.5,
+     "y": 43.5
+    },
+    {
+     "s": "fibula",
+     "x": 89.8,
+     "y": 45.4
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-knee-axial/010.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.9,
+     "y": 58.3
+    },
+    {
+     "s": "tibia",
+     "x": 84.7,
+     "y": 60.0
+    },
+    {
+     "s": "fibula",
+     "x": 11.7,
+     "y": 40.8
+    },
+    {
+     "s": "fibula",
+     "x": 89.9,
+     "y": 42.5
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-knee-axial/011.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.5,
+     "y": 58.0
+    },
+    {
+     "s": "tibia",
+     "x": 84.9,
+     "y": 59.8
+    },
+    {
+     "s": "fibula",
+     "x": 11.6,
+     "y": 41.0
+    },
+    {
+     "s": "fibula",
+     "x": 90.4,
+     "y": 42.6
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-knee-axial/012.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.3,
+     "y": 57.6
+    },
+    {
+     "s": "tibia",
+     "x": 86.8,
+     "y": 59.4
+    },
+    {
+     "s": "fibula",
+     "x": 8.6,
+     "y": 39.9
+    },
+    {
+     "s": "fibula",
+     "x": 90.1,
+     "y": 42.7
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-knee-axial/013.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.9,
+     "y": 57.7
+    },
+    {
+     "s": "tibia",
+     "x": 86.4,
+     "y": 59.2
+    },
+    {
+     "s": "fibula",
+     "x": 10.6,
+     "y": 40.6
+    },
+    {
+     "s": "fibula",
+     "x": 91.2,
+     "y": 42.0
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-knee-axial/014.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 10.9,
+     "y": 56.5
+    },
+    {
+     "s": "tibia",
+     "x": 85.3,
+     "y": 58.6
+    },
+    {
+     "s": "fibula",
+     "x": 10.4,
+     "y": 40.3
+    },
+    {
+     "s": "fibula",
+     "x": 90.6,
+     "y": 42.2
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-knee-axial/015.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.1,
+     "y": 56.4
+    },
+    {
+     "s": "tibia",
+     "x": 87.3,
+     "y": 57.5
+    },
+    {
+     "s": "fibula",
+     "x": 9.9,
+     "y": 39.3
+    },
+    {
+     "s": "fibula",
+     "x": 91.0,
+     "y": 41.6
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-knee-axial/016.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 56.2
+    },
+    {
+     "s": "tibia",
+     "x": 87.3,
+     "y": 57.4
+    },
+    {
+     "s": "fibula",
+     "x": 9.7,
+     "y": 38.9
+    },
+    {
+     "s": "fibula",
+     "x": 90.7,
+     "y": 41.7
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-knee-axial/017.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 56.0
+    },
+    {
+     "s": "tibia",
+     "x": 87.2,
+     "y": 57.3
+    },
+    {
+     "s": "fibula",
+     "x": 10.3,
+     "y": 39.2
+    },
+    {
+     "s": "fibula",
+     "x": 91.2,
+     "y": 41.2
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-knee-axial/018.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 55.6
+    },
+    {
+     "s": "tibia",
+     "x": 87.2,
+     "y": 56.8
+    },
+    {
+     "s": "fibula",
+     "x": 10.2,
+     "y": 39.2
+    },
+    {
+     "s": "fibula",
+     "x": 92.0,
+     "y": 43.2
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-knee-axial/019.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.3,
+     "y": 55.4
+    },
+    {
+     "s": "tibia",
+     "x": 87.3,
+     "y": 56.5
+    },
+    {
+     "s": "fibula",
+     "x": 8.5,
+     "y": 40.6
+    },
+    {
+     "s": "fibula",
+     "x": 92.5,
+     "y": 42.8
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-knee-axial/020.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.1,
+     "y": 55.1
+    },
+    {
+     "s": "tibia",
+     "x": 86.9,
+     "y": 56.4
+    },
+    {
+     "s": "fibula",
+     "x": 9.9,
+     "y": 38.2
+    },
+    {
+     "s": "fibula",
+     "x": 92.5,
+     "y": 42.6
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-knee-axial/021.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.4,
+     "y": 54.8
+    },
+    {
+     "s": "tibia",
+     "x": 87.3,
+     "y": 55.8
+    },
+    {
+     "s": "fibula",
+     "x": 10.2,
+     "y": 38.6
+    },
+    {
+     "s": "fibula",
+     "x": 92.6,
+     "y": 42.6
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-knee-axial/022.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.3,
+     "y": 54.5
+    },
+    {
+     "s": "tibia",
+     "x": 87.2,
+     "y": 55.7
+    },
+    {
+     "s": "fibula",
+     "x": 10.1,
+     "y": 38.0
+    },
+    {
+     "s": "fibula",
+     "x": 92.7,
+     "y": 42.3
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-knee-axial/023.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 54.3
+    },
+    {
+     "s": "tibia",
+     "x": 87.4,
+     "y": 55.4
+    },
+    {
+     "s": "fibula",
+     "x": 10.1,
+     "y": 38.0
+    },
+    {
+     "s": "fibula",
+     "x": 92.9,
+     "y": 42.3
+    }
+   ]
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-knee-axial/024.webp",
+   "aspect": 1.15,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 54.1
+    },
+    {
+     "s": "tibia",
+     "x": 87.6,
+     "y": 55.3
+    },
+    {
+     "s": "fibula",
+     "x": 10.0,
+     "y": 37.9
+    },
+    {
+     "s": "fibula",
+     "x": 93.2,
+     "y": 42.3
+    }
+   ]
+  }
+ ]
+}
