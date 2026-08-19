@@ -449,3 +449,58 @@ test("round-3 FIX-C: an unparseable LIVE consent scope protects the patient's ca
   assert.equal(counts.careContextsErased, 0, "an unparseable live scope is treated as protecting → nothing erased");
   assert.equal((db._tables.connect_abdm_carecontext || []).length, 1, "the care-context is RETAINED (fail-safe, no data-loss)");
 });
+
+// ───────────── consented-store purge: the record goes with the registration it backs ─────────────
+// deleteForPatient/deleteCareContext existed but NOTHING in production called them, so a care context
+// could be erased while its sealed consented-store blob survived - orphaned PHI under a reference
+// nothing can reach, and a DPDP erasure-completeness violation. The sweep now erases the store record
+// for exactly the refs it drops, and only those.
+const sha256hex = async (s) => {
+  const h = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(s)));
+  return [...h].map((b) => b.toString(16).padStart(2, "0")).join("");
+};
+const consentedRow = async (ref, o = {}) => ({
+  tenant_id: o.tenant_id ?? "t1", patient_abha_hash: o.patient_abha_hash ?? "HMAC-P",
+  care_context_ref: ref, ref_hash: await sha256hex(ref), hi_type: "OPConsultation",
+  r2_key: "abdm/consented/t1/HMAC-P/" + (await sha256hex(ref)), created_at: NOW,
+});
+
+test("consented-store: erasing a care-context also erases its sealed record, and ONLY that one", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [
+      scopedConsentRow({ request_id: "rqA", consent_id: "cidA", status: "GRANTED", data_erase_at: "2026-07-31T11:00:00Z",
+        care_contexts: JSON.stringify(["ref-1", "ref-2"]) }),
+      scopedConsentRow({ request_id: "rqB", consent_id: "cidB", status: "GRANTED", data_erase_at: S6_FUT,
+        care_contexts: JSON.stringify(["ref-2"]) }),
+    ],
+    connect_abdm_carecontext: [ccReg({ id: "cc-1", ref: "ref-1" }), ccReg({ id: "cc-2", ref: "ref-2" })],
+    connect_abdm_consented_record: [await consentedRow("ref-1"), await consentedRow("ref-2")],
+  });
+  const r2 = makeR2();
+  for (const ref of ["ref-1", "ref-2"]) await r2.put("abdm/consented/t1/HMAC-P/" + (await sha256hex(ref)), "sealed-bytes");
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);   // past cidA's dataEraseAt, before cidB's
+
+  assert.equal(counts.careContextsErased, 1, "only ref-1 is uniquely backed by the erased consent");
+  const refsLeft = (db._tables.connect_abdm_consented_record || []).map((r) => r.care_context_ref);
+  assert.deepEqual(refsLeft, ["ref-2"], "ref-1's consented record is erased with its registration");
+  // The crown assertion: no sealed blob survives for an erased care context.
+  const blobs = await listAll(r2, "abdm/consented/");
+  assert.deepEqual(blobs, ["abdm/consented/t1/HMAC-P/" + (await sha256hex("ref-2"))],
+    "ref-1's sealed blob is gone; ref-2's (still backed by LIVE cidB) survives");
+});
+
+test("consented-store: a sweep that erases nothing leaves every record and blob intact", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "rqB", consent_id: "cidB", status: "GRANTED",
+      data_erase_at: S6_FUT, care_contexts: JSON.stringify(["ref-2"]) })],
+    connect_abdm_carecontext: [ccReg({ id: "cc-2", ref: "ref-2" })],
+    connect_abdm_consented_record: [await consentedRow("ref-2")],
+  });
+  const r2 = makeR2();
+  const key = "abdm/consented/t1/HMAC-P/" + (await sha256hex("ref-2"));
+  await r2.put(key, "sealed-bytes");
+  await sweep(db, r2, HMAC_ENV, ISO_NOW);
+  assert.equal((db._tables.connect_abdm_consented_record || []).length, 1, "a live consent's record is never touched");
+  assert.deepEqual(await listAll(r2, "abdm/consented/"), [key]);
+});

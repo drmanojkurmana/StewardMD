@@ -5,6 +5,7 @@
 // TIME CONTRACT (pinned): every timestamp column here (`created_at`/`updated_at`/`expires_at`) and every
 // injected `now` is an ISO-8601 string — NEVER epoch-ms. `sweep` compares them ISO-aware (Date.parse),
 // never `Number()` (which turns an ISO string into NaN and silently no-ops the expiry branch).
+import { deleteCareContext } from "./consented-store.js";
 import { hmacPseudonym, makeAuditSink } from "../audit.js"; // reuse the CONNECT_HMAC_SALT keyed-HMAC + PHI-free audit sink
 export class ConnectStateError extends Error {}
 
@@ -324,7 +325,7 @@ function parseCareContextRefs(careContextsJson) {
 // OWN `data_erase_at` has NOT passed is KEPT; only refs with no remaining live consent are deleted. The consent
 // being erased is past its own dataEraseAt (or terminal), so it is correctly excluded from "live" and its
 // uniquely-backed refs ARE removed. Mock-safe (two-predicate SELECTs + single-id DELETEs). Returns rows removed.
-async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
+async function eraseCareContexts(db, r2, env, tenantId, patientAbhaHash, now) {
   const { results: ccs = [] } = await db.prepare(
     "SELECT * FROM connect_abdm_carecontext WHERE tenant_id=? AND patient_abha_hash=?").bind(tenantId, patientAbhaHash).all();
   if (ccs.length === 0) return 0;
@@ -351,6 +352,12 @@ async function eraseCareContexts(db, tenantId, patientAbhaHash, now) {
   let n = 0;
   for (const cc of ccs) {
     if (liveRefs.has(cc.ref)) continue;   // still referenced by another live consent → never collateral-erase it
+    // The consented-store copy goes with the registration it backs. Erasing the registration alone would
+    // leave a sealed blob for a care context nothing can reach any more - orphaned PHI, and a DPDP
+    // erasure-completeness violation. Scoped to THIS ref, so a record still referenced by another live
+    // consent (skipped above) is never collateral-erased. Best-effort: an unbound store must not abort a
+    // sweep that is otherwise erasing correctly, and the D1 delete below is what makes the row unreachable.
+    if (r2) { try { await deleteCareContext(env, { r2, db }, { tenantId, careContextRef: cc.ref }); } catch { /* index delete below still lands */ } }
     const del = await db.prepare("DELETE FROM connect_abdm_carecontext WHERE id=?").bind(cc.id).run();
     if (!del || del.success === false) throw new ConnectStateError("sweep care-context erase failed");
     n += (del.meta && del.meta.changes) || 0;
@@ -480,7 +487,7 @@ export async function sweep(db, r2, env, now) {
       //     erased ONLY on a patient-level `data_erase_at`/full-erase — NEVER on a single-consent REVOKE/EXPIRE.
       //     // VERIFY (owner): confirm the association (per-consent derived state vs per-patient registration).
       if (eraseDeadlinePassed && c.tenant_id != null && c.patient_abha_hash) {
-        cCare += await eraseCareContexts(db, c.tenant_id, c.patient_abha_hash, now);
+        cCare += await eraseCareContexts(db, r2, env, c.tenant_id, c.patient_abha_hash, now);
       }
       // (3) FIX-3: scrub the raw SIGNED scope from the RETAINED consent row. The row is kept (marked terminal) for
       //     R6 anti-replay, but anti-replay needs ONLY {request_id, status, consent_id} + timestamps — it never
