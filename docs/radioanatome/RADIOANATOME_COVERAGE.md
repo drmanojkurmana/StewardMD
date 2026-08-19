@@ -6,15 +6,15 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 
 ## Headline
 
-- **Modules shipped:** 24
-- **Total pins:** 3430
-- **Canonical structures in the ontology:** 76
-- **Structures WITH geometry (covered):** 55
-- **Structures declared but empty (honest gaps):** 21
-- **CT structures covered:** 42
+- **Modules shipped:** 30
+- **Total pins:** 3994
+- **Canonical structures in the ontology:** 82
+- **Structures WITH geometry (covered):** 59
+- **Structures declared but empty (honest gaps):** 23
+- **CT structures covered:** 46
 - **MRI structures covered:** 13
 - **3D structures:** 0 — every module is a 2D slice stack with per-slice pins. No volume rendering exists yet; claiming 3D would be false.
-- **2D structures:** 55 (all of them)
+- **2D structures:** 59 (all of them)
 
 ## Coverage by body region
 
@@ -25,11 +25,11 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | BRAIN | 24 | 13 | PARTIAL |
 | CHEST | 12 | 10 | PARTIAL |
 | HEAD | 4 | 2 | PARTIAL |
-| LOWER_LIMB | 4 | 3 | PARTIAL |
+| LOWER_LIMB | 8 | 6 | PARTIAL |
 | NECK | 1 | 1 | PARTIAL |
 | PELVIS | 8 | 7 | PARTIAL |
 | SPINE | 6 | 5 | PARTIAL |
-| UPPER_LIMB | 1 | 1 | PARTIAL |
+| UPPER_LIMB | 3 | 2 | PARTIAL |
 
 ## Modules
 
@@ -45,9 +45,12 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-head-coronal` | Head and neck | CT | Coronal | 99 | 2 of 3 declared |
 | `ct-head-sagittal` | Head and neck | CT | Sagittal | 122 | 2 of 3 declared |
 | `ct-head-axial` | Head and neck | CT | Axial | 105 | 2 of 3 declared |
+| `ct-foot-axial` | Lower limb | CT | Axial | 113 | 5 of 6 declared |
+| `ct-foot-coronal` | Lower limb | CT | Coronal | 78 | 5 of 6 declared |
+| `ct-foot-sagittal` | Lower limb | CT | Sagittal - single foot | 188 | 5 of 6 declared |
 | `ct-knee-axial` | Lower limb | CT | Axial | 84 | 3 of 4 declared |
 | `ct-knee-coronal` | Lower limb | CT | Coronal | 23 | 3 of 4 declared |
-| `ct-knee-sagittal` | Lower limb | CT | Sagittal | 41 | 3 of 4 declared |
+| `ct-knee-sagittal` | Lower limb | CT | Sagittal - single leg | 72 | 3 of 4 declared |
 | `ct-pelvis-axial` | Pelvis | CT | Axial | 132 | 3 of 4 declared |
 | `ct-pelvis-coronal` | Pelvis | CT | Coronal | 62 | 3 of 4 declared |
 | `ct-pelvis-sagittal` | Pelvis | CT | Sagittal | 53 | 3 of 4 declared |
@@ -57,6 +60,9 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-live-torso-axial` | Torso | CT | Axial - living patient | 346 | 27 of 28 declared |
 | `ct-live-torso-coronal` | Torso | CT | Coronal - living patient | 294 | 27 of 28 declared |
 | `ct-live-torso-sagittal` | Torso | CT | Sagittal - living patient | 261 | 27 of 28 declared |
+| `ct-hand-axial` | Upper limb | CT | Axial | 81 | 1 of 2 declared |
+| `ct-hand-coronal` | Upper limb | CT | Coronal | 24 | 1 of 2 declared |
+| `ct-hand-sagittal` | Upper limb | CT | Sagittal | 49 | 1 of 2 declared |
 | `ct-wholebody-axial` | Whole body | CT | Axial - vertex to feet | 66 | 8 of 9 declared |
 | `ct-wholebody-coronal` | Whole body | CT | Coronal - vertex to feet | 173 | 8 of 9 declared |
 
@@ -64,9 +70,9 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 
 Denominator is covered structures plus the gap families listed below, so this is a measure of ANATOMICAL AMBITION met, not of one dataset's class list.
 
-- **FREE coverage: 81%** (55 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
+- **FREE coverage: 82%** (59 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
 - **Licence-gated: 6%** (4 families that a purchase would unlock)
-- **Not yet available: 13%** (9 families, most blocked by SOURCE DATA rather than licensing — those cannot be bought)
+- **Not yet available: 12%** (9 families, most blocked by SOURCE DATA rather than licensing — those cannot be bought)
 
 ## Known gaps, with the honest reason
 

@@ -1,0 +1,600 @@
+{
+ "id": "ct-foot-coronal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_foot_ct.py on Visible Human frozenCT slices 2690-2882.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "fibula": {
+   "name": "Fibula",
+   "category": "bone",
+   "parent": "foot",
+   "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+  },
+  "foot": {
+   "name": "Foot",
+   "category": "bone"
+  },
+  "metatarsal": {
+   "name": "Metatarsal bone",
+   "category": "bone",
+   "parent": "foot",
+   "definition": "The five metatarsal bones are long bones lying between the tarsus and the phalanges, forming the skeleton of the forefoot."
+  },
+  "phalanx-foot": {
+   "name": "Phalanx of foot",
+   "category": "bone",
+   "parent": "foot",
+   "definition": "The phalanges of the foot are fourteen in number, three for each of the lesser toes and two for the great toe."
+  },
+  "tarsal": {
+   "name": "Tarsal bone",
+   "category": "bone",
+   "parent": "foot",
+   "definition": "The tarsus consists of seven bones - the calcaneus, talus, navicular, cuboid and three cuneiforms - forming the posterior half of the foot and the ankle."
+  },
+  "tibia": {
+   "name": "Tibia",
+   "category": "bone",
+   "parent": "foot",
+   "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-foot-coronal/001.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-foot-coronal/002.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-foot-coronal/003.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-foot-coronal/004.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-foot-coronal/005.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-foot-coronal/006.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-foot-coronal/007.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tarsal",
+     "x": 17.6,
+     "y": 40.8
+    },
+    {
+     "s": "tarsal",
+     "x": 82.9,
+     "y": 44.7
+    },
+    {
+     "s": "tarsal",
+     "x": 83.7,
+     "y": 47.5
+    },
+    {
+     "s": "tarsal",
+     "x": 84.4,
+     "y": 32.5
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-foot-coronal/008.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tarsal",
+     "x": 13.5,
+     "y": 30.8
+    },
+    {
+     "s": "tarsal",
+     "x": 19.2,
+     "y": 47.6
+    },
+    {
+     "s": "tarsal",
+     "x": 83.2,
+     "y": 46.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-foot-coronal/009.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 13.0,
+     "y": 18.1
+    },
+    {
+     "s": "tibia",
+     "x": 87.9,
+     "y": 18.7
+    },
+    {
+     "s": "fibula",
+     "x": 8.9,
+     "y": 2.2
+    },
+    {
+     "s": "fibula",
+     "x": 91.9,
+     "y": 21.9
+    },
+    {
+     "s": "tarsal",
+     "x": 11.8,
+     "y": 30.4
+    },
+    {
+     "s": "tarsal",
+     "x": 12.3,
+     "y": 24.8
+    },
+    {
+     "s": "tarsal",
+     "x": 88.1,
+     "y": 24.2
+    },
+    {
+     "s": "tarsal",
+     "x": 89.4,
+     "y": 29.9
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-foot-coronal/010.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 9.8,
+     "y": 15.0
+    },
+    {
+     "s": "tibia",
+     "x": 87.2,
+     "y": 16.0
+    },
+    {
+     "s": "tarsal",
+     "x": 8.1,
+     "y": 19.4
+    },
+    {
+     "s": "tarsal",
+     "x": 14.8,
+     "y": 32.6
+    },
+    {
+     "s": "tarsal",
+     "x": 85.6,
+     "y": 33.4
+    },
+    {
+     "s": "tarsal",
+     "x": 93.1,
+     "y": 25.7
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-foot-coronal/011.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 11.2,
+     "y": 15.7
+    },
+    {
+     "s": "tibia",
+     "x": 88.8,
+     "y": 15.2
+    },
+    {
+     "s": "tarsal",
+     "x": 8.4,
+     "y": 46.4
+    },
+    {
+     "s": "tarsal",
+     "x": 12.1,
+     "y": 20.8
+    },
+    {
+     "s": "tarsal",
+     "x": 89.3,
+     "y": 22.7
+    },
+    {
+     "s": "tarsal",
+     "x": 90.4,
+     "y": 45.6
+    },
+    {
+     "s": "metatarsal",
+     "x": 6.2,
+     "y": 68.3
+    },
+    {
+     "s": "metatarsal",
+     "x": 93.3,
+     "y": 70.1
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 10.0,
+     "y": 59.6
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 10.6,
+     "y": 58.8
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 10.9,
+     "y": 52.2
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 11.0,
+     "y": 55.1
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-foot-coronal/012.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tarsal",
+     "x": 7.3,
+     "y": 39.3
+    },
+    {
+     "s": "tarsal",
+     "x": 8.6,
+     "y": 35.4
+    },
+    {
+     "s": "tarsal",
+     "x": 91.4,
+     "y": 35.9
+    },
+    {
+     "s": "tarsal",
+     "x": 92.1,
+     "y": 40.2
+    },
+    {
+     "s": "metatarsal",
+     "x": 7.8,
+     "y": 65.9
+    },
+    {
+     "s": "metatarsal",
+     "x": 93.0,
+     "y": 60.6
+    },
+    {
+     "s": "metatarsal",
+     "x": 93.7,
+     "y": 64.0
+    },
+    {
+     "s": "metatarsal",
+     "x": 93.8,
+     "y": 74.6
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 9.5,
+     "y": 56.8
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-foot-coronal/013.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tarsal",
+     "x": 8.1,
+     "y": 45.7
+    },
+    {
+     "s": "tarsal",
+     "x": 8.6,
+     "y": 54.2
+    },
+    {
+     "s": "tarsal",
+     "x": 10.6,
+     "y": 38.8
+    },
+    {
+     "s": "tarsal",
+     "x": 87.8,
+     "y": 45.1
+    },
+    {
+     "s": "metatarsal",
+     "x": 5.6,
+     "y": 71.2
+    },
+    {
+     "s": "metatarsal",
+     "x": 6.8,
+     "y": 62.3
+    },
+    {
+     "s": "metatarsal",
+     "x": 93.1,
+     "y": 66.3
+    },
+    {
+     "s": "metatarsal",
+     "x": 94.0,
+     "y": 75.6
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-foot-coronal/014.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "tarsal",
+     "x": 11.5,
+     "y": 50.1
+    },
+    {
+     "s": "tarsal",
+     "x": 88.3,
+     "y": 51.6
+    },
+    {
+     "s": "metatarsal",
+     "x": 8.0,
+     "y": 61.7
+    },
+    {
+     "s": "metatarsal",
+     "x": 9.5,
+     "y": 51.8
+    },
+    {
+     "s": "metatarsal",
+     "x": 87.4,
+     "y": 55.8
+    },
+    {
+     "s": "metatarsal",
+     "x": 89.6,
+     "y": 57.3
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-foot-coronal/015.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "metatarsal",
+     "x": 10.3,
+     "y": 63.0
+    },
+    {
+     "s": "metatarsal",
+     "x": 13.5,
+     "y": 56.5
+    },
+    {
+     "s": "metatarsal",
+     "x": 83.5,
+     "y": 66.0
+    },
+    {
+     "s": "metatarsal",
+     "x": 87.5,
+     "y": 72.6
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 79.0,
+     "y": 79.5
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 81.5,
+     "y": 81.9
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-foot-coronal/016.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "metatarsal",
+     "x": 12.1,
+     "y": 72.9
+    },
+    {
+     "s": "metatarsal",
+     "x": 16.5,
+     "y": 65.0
+    },
+    {
+     "s": "metatarsal",
+     "x": 16.6,
+     "y": 69.2
+    },
+    {
+     "s": "metatarsal",
+     "x": 18.6,
+     "y": 74.2
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 17.3,
+     "y": 77.8
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 20.0,
+     "y": 74.9
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 78.6,
+     "y": 79.9
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 80.7,
+     "y": 78.1
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-foot-coronal/017.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "phalanx-foot",
+     "x": 11.7,
+     "y": 77.2
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 19.1,
+     "y": 75.4
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 82.1,
+     "y": 81.3
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 86.8,
+     "y": 86.3
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-foot-coronal/018.webp",
+   "aspect": 2.2733,
+   "pins": [
+    {
+     "s": "phalanx-foot",
+     "x": 15.7,
+     "y": 76.4
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 15.8,
+     "y": 74.2
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 18.1,
+     "y": 75.2
+    },
+    {
+     "s": "phalanx-foot",
+     "x": 80.8,
+     "y": 87.5
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-foot-coronal/019.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-foot-coronal/020.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-foot-coronal/021.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-foot-coronal/022.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-foot-coronal/023.webp",
+   "aspect": 2.2733,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-foot-coronal/024.webp",
+   "aspect": 2.2733,
+   "pins": []
+  }
+ ]
+}
