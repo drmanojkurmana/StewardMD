@@ -383,4 +383,22 @@ with tempfile.TemporaryDirectory() as tmp:
     ok("e2e: provenance carries the credit line, not internal notes",
        atlas["provenance"]["images"] == "Courtesy of the U.S. National Library of Medicine")
 
+# ---------- no shipped slice may render as an empty frame ----------
+# ct-hand-coronal shipped SIX consecutive pure-black frames and every test passed, because
+# nothing here ever opened a shipped image. Blankness depends on the WINDOW, not the voxels:
+# a coronal plane full of soft tissue renders solid black under a bone window.
+try:
+    from PIL import Image as _Im
+    import numpy as _np
+    _repo = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+    _shipped = sorted(glob.glob(os.path.join(_repo, "atlas", "*", "[0-9][0-9][0-9].webp")))
+    ok("shipped slice images exist to check", len(_shipped) > 0)
+    _blank = [os.path.relpath(q, _repo) for q in _shipped
+              if int(_np.asarray(_Im.open(q)).max()) <= 8]
+    if _blank:
+        print("   blank frames:", ", ".join(_blank[:8]), "...", len(_blank), "total")
+    ok("no shipped slice renders as an empty frame", not _blank)
+except ImportError:
+    pass
+
 print("ALL %d PASS" % PASS[0])

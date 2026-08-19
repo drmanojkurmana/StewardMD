@@ -77,6 +77,7 @@ ok("group holds its modules", grouped[0].modules.length === 2);
 
 // --- the real shipped data must be valid ---
 const cat = JSON.parse(readFileSync(join(ROOT, "atlas/modules.json"), "utf8"));
+const GEOM = JSON.parse(readFileSync(join(ROOT, "test/atlas-geometry.json"), "utf8"));
 ok("modules.json has modules", Array.isArray(cat.modules) && cat.modules.length > 0);
 for (const m of cat.modules) {
   ok("module " + m.id + " id is kebab-case", /^[a-z0-9-]+$/.test(m.id));
@@ -88,7 +89,19 @@ for (const m of cat.modules) {
   ok("shipped atlas " + m.id + " is valid", errs.length === 0);
   ok("shipped atlas " + m.id + " slice count matches catalog", a.slices.length === m.slices);
   ok("shipped atlas " + m.id + " renders no attribution", !a.provenance || typeof a.provenance === "object");
+  // GOLDEN GEOMETRY. Rebuilding a module from the wrong volume changes its aspect and
+  // silently re-encodes every slice at a different width, and NOTHING else here notices:
+  // `aspect` is derived from the image it describes, so checking one against the other is
+  // a tautology that passes either way. A frozen number is the only thing that catches it.
+  // If a change to the crop is intended, update test/atlas-geometry.json deliberately.
+  ok("shipped atlas " + m.id + " geometry matches the golden table",
+    GEOM[m.id] !== undefined && a.slices.every((s) => s.aspect === GEOM[m.id]));
+  // Every module must carry its OWN credit string, so the info screen never falls back to
+  // the union of all sources and credit the wrong institution.
+  ok("module " + m.id + " declares its own credit", typeof m.credit === "string");
 }
+ok("golden geometry table covers exactly the shipped modules",
+  Object.keys(GEOM).length === cat.modules.length);
 
 // --- overlay lifecycle (DOM-stubbed, mirroring test/dialog-motion.test.mjs) ---
 function fakeDom() {

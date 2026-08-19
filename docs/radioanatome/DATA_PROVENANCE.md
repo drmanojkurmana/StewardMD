@@ -7,7 +7,7 @@ GENERATED on 2026-08-19.
 | `autopet-fdg-petct` | CC BY-NC 4.0 (NIfTI via FDAT) or TCIA Restricted (DICOM via TCIA) | https://autopet.grand-challenge.org/Dataset/ ; https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/ | NO | NO | NOT USED - deferred |
 | `jhu-icbm-dti-81` | FSL (as distributed) | http://neuro.debian.net/debian/extracts/fsldata/copyright | NO | NO | - |
 | `mindboggle-101` | CC BY-NC-SA 3.0 (paper) vs CC BY 4.0 (site) - conflicting | https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2012.00171/full | NO | NO | - |
-| `openneuro-cc0` | CC0 1.0 Public Domain Dedication (OpenNeuro default for uploaded datasets) | https://openneuro.org/datasets/ds003563/versions/1.1.0 ; https://openneuro.org/faq | yes | yes | living brain MRI (planned) |
+| `openneuro-cc0` | CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json) | https://openneuro.org/datasets/ds003563/versions/1.1.0 ; https://openneuro.org/faq | yes | yes | living brain MRI (planned) |
 | `spl-nac-brain-atlas` | 3D Slicer License Part B | https://github.com/Slicer/Slicer/blob/main/License.txt | yes | yes | not currently used |
 | `tcia` | Per-collection CC BY 3.0/4.0, some NC | https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/ | NO | NO | not used |
 | `totalsegmentator-dataset` | CC BY 4.0 | https://zenodo.org/records/10047292 | yes | yes | living-patient CT soft tissue, organs, vessels |
@@ -35,10 +35,10 @@ GENERATED on 2026-08-19.
 - Unresolved conflicting licence claims; under the paper's version it is non-commercial AND share-alike. Encumbers the DKT40 classifier.
 
 ### `openneuro-cc0`
-- licence: CC0 1.0 Public Domain Dedication (OpenNeuro default for uploaded datasets)
+- licence: CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json)
 - verdict: **CLEAR**
 - attribution: none required
-- THE BRAIN ANSWER, and it costs nothing. OpenNeuro releases data under CC0 by default, which places no restrictions on who may use it or for what, commercial included. ds003563 is a whole-brain in-vivo T1 at 250 um isotropic from a LIVING subject - far better than the 1 mm the brain pipeline needs, and the exact opposite of the 33-slice 4 mm cadaver T1 that defeated SynthSeg. Paired with fastsurfer-segonly (already CLEAR) this is expected to yield real brain labels with NO purchase. Verify the specific dataset's own licence field before ingesting: CC0 is the default, not a guarantee, and a few datasets opt out.
+- THE BRAIN ANSWER, and it costs nothing. OpenNeuro releases data under CC0 by default, which places no restrictions on who may use it or for what, commercial included. ds003563 publishes several resolutions; the volume ACTUALLY ingested is the 0.6 mm isotropic 7T MPRAGE (sub-yv98 ses-0481), confirmed from its own NIfTI header, and it was segmented with SynthSeg v1.0, not FastSurfer from a LIVING subject - far better than the 1 mm the brain pipeline needs, and the exact opposite of the 33-slice 4 mm cadaver T1 that defeated SynthSeg. Paired with fastsurfer-segonly (already CLEAR) this is expected to yield real brain labels with NO purchase. Verify the specific dataset's own licence field before ingesting: CC0 is the default, not a guarantee, and a few datasets opt out.
 
 ### `spl-nac-brain-atlas`
 - licence: 3D Slicer License Part B

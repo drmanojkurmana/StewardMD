@@ -49,6 +49,32 @@ def pick_slice_indices(n_available, n_wanted):
     return [int(round(i * (n_available - 1) / (n_wanted - 1))) for i in range(n_wanted)]
 
 
+def visible_slices(vol, window, frac=0.0005):
+    """First and last z index that renders as something, so the 24-slice stack is not
+    spent on frames the viewer shows as pure black.
+
+    Blankness is a property of the WINDOW, not of the voxels. A coronal plane through the
+    hand can be full of soft tissue and still render solid black under a bone window, so
+    thresholding the raw volume misses it - that is why the first version of this trim left
+    ct-hand-coronal with blank frames, merely different ones. Measure what will actually be
+    displayed: apply the same window, then keep the z-range that has visible pixels.
+    """
+    v = np.asanyarray(vol)
+    if v.shape[2] == 0:
+        return np.arange(0)
+    if window is None:
+        lo, hi = np.percentile(v, [1.0, 99.5])
+        g = np.clip((v - lo) / max(hi - lo, 1e-6), 0.0, 1.0)
+    else:
+        c, wd = WINDOWS[window] if isinstance(window, str) else window
+        g = apply_window(v, c, wd)
+    frac_visible = (g > 0.06).mean(axis=(0, 1))
+    nz = np.flatnonzero(frac_visible > frac)
+    if nz.size == 0:                      # nothing visible anywhere: fall back to the lot
+        return np.arange(v.shape[2])
+    return nz
+
+
 def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id):
     """Write NNN.webp and t/NNN.webp; return slice stubs for build.py.
 
@@ -62,7 +88,10 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id):
     zooms = img.header.get_zooms()[:3]
 
     os.makedirs(os.path.join(out_dir, "t"), exist_ok=True)
-    picks = pick_slice_indices(vol.shape[2], n_wanted)
+    # Sample only where there is anatomy. Without this the stack spends slices on empty
+    # margins and ships pure-black frames (ct-hand-coronal shipped six in a row).
+    vis = visible_slices(vol, window)
+    picks = [int(vis[i]) for i in pick_slice_indices(len(vis), n_wanted)]
     # Display spacing after to_display (which transposes): rows = Y, cols = X.
     spacing_disp = (zooms[1], zooms[0])
 

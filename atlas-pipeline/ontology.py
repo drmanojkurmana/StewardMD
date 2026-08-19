@@ -112,8 +112,25 @@ def _modules():
 
 
 def _label_files():
-    return {os.path.basename(p)[:-5]: json.load(open(p))
-            for p in glob.glob(os.path.join(_HERE, "labels", "*.json"))}
+    """Label files that a SHIPPED module actually uses.
+
+    Globbing labels/ unconditionally let a DEAD file rewrite live provenance: an orphan
+    labels/ct-chest-axial.json (no such module exists) declared the thoracic and abdominal
+    organ ids as Visible Human, and so stamped `visible-human` onto 18 structures that in
+    fact ship from the living-patient CT. A mapping file with no module cannot describe
+    what shipped.
+    """
+    cat_path = os.path.join(_HERE, "..", "atlas", "modules.json")
+    live = set()
+    if os.path.exists(cat_path):
+        live = {m["id"] for m in json.load(open(cat_path, encoding="utf-8"))["modules"]}
+    out = {}
+    for p in glob.glob(os.path.join(_HERE, "labels", "*.json")):
+        lab_id = os.path.basename(p)[:-5]
+        if live and lab_id not in live:
+            continue
+        out[lab_id] = json.load(open(p))
+    return out
 
 
 def build():
@@ -163,12 +180,21 @@ def build():
     # aliases + provenance from the mapping files that produced the pins
     for lab_id, lab in labels.items():
         prov = lab.get("_geometry", "")
-        model = ("totalsegmentator-total" if "TotalSegmentator" in prov
+        model = ("expert-masks-supplied" if "EXPERT MASKS SUPPLIED" in prov.upper()
+                 else "synthseg-v1" if "SynthSeg" in prov
+                 else "totalsegmentator-total" if "TotalSegmentator" in prov
                  else "fastsurfer" if "FastSurfer" in prov
                  else "classical" if "hresholding" in prov or "classical" in prov.lower()
                  else "unknown")
-        dataset = ("totalsegmentator-dataset" if "Totalsegmentator_dataset" in prov
-                   or "living" in prov.lower() else "visible-human")
+        # Name the dataset explicitly. The previous test was `"living" in prov`, which the
+        # brain's own phrase "a LIVING subject's 0.6 mm isotropic 7T MPRAGE" satisfied - so
+        # the CC0 OpenNeuro brain was attributed to the CC BY 4.0 TotalSegmentator CT set.
+        low = prov.lower()
+        dataset = ("openneuro-cc0" if "ds003563" in low or "openneuro" in low
+                   else "totalsegmentator-dataset" if "totalsegmentator_dataset" in low
+                   or "totalsegmentator dataset" in low
+                   else "visible-human")
+        fam = "-".join(lab_id.split("-")[:2])
         for src, tgt in (lab.get("model_labels") or {}).items():
             if not tgt:
                 continue
@@ -176,6 +202,11 @@ def build():
             if cid not in reg:
                 continue
             reg[cid]["aliases"].add(src)
+            # A mapping only describes what SHIPPED if one of this label file's own modules
+            # actually pins the structure. Without this gate a label file that merely lists
+            # an id contributes a source it never produced.
+            if not any(str(m).startswith(fam) for m in reg[cid]["modules"]):
+                continue
             reg[cid]["source_model"].add(model)
             reg[cid]["source_dataset"].add(dataset)
 

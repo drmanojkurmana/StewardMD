@@ -143,7 +143,7 @@
     "licence": "Proprietary; free for non-commercial, paid commercial licence required",
     "commercial": false,
     "attribution": "n/a",
-    "blocking_clause": "Paid commercial licence required (free academic key is not usable under the commercial goal set 2026-08-19). 16 brain substructures. BUT buying it probably does NOT solve the brain: the blocker measured on our data is the SOURCE, not the model — a 33-slice 4 mm cadaver T1 defeated SynthSeg, which ran clean and still returned ~2x L/R asymmetry with most of the brain unlabelled. Fix the data first (see openneuro-cc0), then FastSurfer --seg_only, already CLEAR, is expected to suffice without any purchase.",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Paid commercial licence required (free academic key is not usable under the commercial goal set 2026-08-19). 16 brain substructures. BUT buying it probably does NOT solve the brain: the blocker measured on our data is the SOURCE, not the model — a 33-slice 4 mm cadaver T1 defeated SynthSeg, which ran clean and still returned ~2x L/R asymmetry with most of the brain unlabelled. Fix the data first (see openneuro-cc0), then FastSurfer --seg_only, already CLEAR, is expected to suffice without any purchase.",
     "verified_from": "https://github.com/wasserth/TotalSegmentator",
     "verdict": "BLOCKED"
   },
@@ -160,7 +160,7 @@
     "licence": "CC BY-NC 4.0 (NIfTI via FDAT) or TCIA Restricted (DICOM via TCIA)",
     "commercial": false,
     "attribution": "required: Gatidis S, Kuestner T, University Hospital Tuebingen, plus DOI citation",
-    "blocking_clause": "BANNED BY OWNER 2026-08-19: RadioAnatome is to be COMMERCIALLY deployable, and CC BY-NC 4.0 forbids that for as long as the data ships. Owner instruction: no CC BY-NC, research-only or restricted datasets, and PET/CT is to be kept architecturally separate for a later, separately licensed phase. Supersedes the earlier non-commercial position recorded on the same day.",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: BANNED BY OWNER 2026-08-19: RadioAnatome is to be COMMERCIALLY deployable, and CC BY-NC 4.0 forbids that for as long as the data ships. Owner instruction: no CC BY-NC, research-only or restricted datasets, and PET/CT is to be kept architecturally separate for a later, separately licensed phase. Supersedes the earlier non-commercial position recorded on the same day.",
     "note": "Only whole-body PET/CT found that is redistributable at all. HEALTHY-TOTAL-BODY-CTS was checked and rejected: its segmentations are CC BY 4.0 but the CT IMAGES sit under the NIH Controlled Data Access Policy (facial-reconstruction risk), so they cannot ship. No PD or CC0 whole-body PET/CT exists as of 2026-08-19.",
     "verified_from": "https://autopet.grand-challenge.org/Dataset/ ; https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/",
     "verdict": "BLOCKED"
@@ -177,15 +177,16 @@
     "licence": "CC BY 4.0",
     "commercial": true,
     "attribution": "required: one credit line plus the Zenodo DOI",
+    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
     "note": "THE SINGLE BIGGEST UNLOCK FOUND. 1228 CT volumes of real LIVING clinical patients across many scanners, institutions and pathologies, WITH 117 anatomical structures already expertly labelled. CC BY 4.0 permits commercial use AND redistribution of the images and of derivatives, with attribution. This needs NO segmentation model and NO model licence: the masks are supplied, so liver, spleen, kidney, lung, muscle, vessels and cardiac structures become available WITHOUT buying anything. It also fixes the real problem, which is that Visible Human is a frozen cadaver: living tissue has normal HU, so lung reads -700 to -850 instead of -540, organs separate on contrast, and muscle reads +20 to +70 instead of the -13 to -21 measured in our pelvis. CAVEAT: these are clinical studies chosen for pathological variety, so near-normal volumes must be CURATED by a clinician before use as an anatomy reference. Distinct from the existing rule against RUNNING the model on this dataset: shipping the CC BY 4.0 images and labels directly is a different and legitimate route that costs only an attribution line.",
     "verified_from": "https://zenodo.org/records/10047292",
     "verdict": "CLEAR"
   },
   "openneuro-cc0": {
-    "licence": "CC0 1.0 Public Domain Dedication (OpenNeuro default for uploaded datasets)",
+    "licence": "CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json)",
     "commercial": true,
     "attribution": "none required",
-    "note": "THE BRAIN ANSWER, and it costs nothing. OpenNeuro releases data under CC0 by default, which places no restrictions on who may use it or for what, commercial included. ds003563 is a whole-brain in-vivo T1 at 250 um isotropic from a LIVING subject - far better than the 1 mm the brain pipeline needs, and the exact opposite of the 33-slice 4 mm cadaver T1 that defeated SynthSeg. Paired with fastsurfer-segonly (already CLEAR) this is expected to yield real brain labels with NO purchase. Verify the specific dataset's own licence field before ingesting: CC0 is the default, not a guarantee, and a few datasets opt out.",
+    "note": "THE BRAIN ANSWER, and it costs nothing. OpenNeuro releases data under CC0 by default, which places no restrictions on who may use it or for what, commercial included. ds003563 publishes several resolutions; the volume ACTUALLY ingested is the 0.6 mm isotropic 7T MPRAGE (sub-yv98 ses-0481), confirmed from its own NIfTI header, and it was segmented with SynthSeg v1.0, not FastSurfer from a LIVING subject - far better than the 1 mm the brain pipeline needs, and the exact opposite of the 33-slice 4 mm cadaver T1 that defeated SynthSeg. Paired with fastsurfer-segonly (already CLEAR) this is expected to yield real brain labels with NO purchase. Verify the specific dataset's own licence field before ingesting: CC0 is the default, not a guarantee, and a few datasets opt out.",
     "verified_from": "https://openneuro.org/datasets/ds003563/versions/1.1.0 ; https://openneuro.org/faq",
     "verdict": "CLEAR"
   },
@@ -201,7 +202,7 @@
     "licence": "Non-commercial",
     "commercial": false,
     "attribution": "n/a",
-    "blocking_clause": "Non-commercial weights, so barred by the commercial goal set 2026-08-19. Would otherwise have been the most tempting option on the table: 345+ classes including 50 MRI body classes and 133 brain substructures. Not usable.",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Non-commercial weights, so barred by the commercial goal set 2026-08-19. Would otherwise have been the most tempting option on the table: 345+ classes including 50 MRI body classes and 133 brain substructures. Not usable.",
     "verified_from": "https://github.com/Project-MONAI/VISTA",
     "verdict": "BLOCKED"
   }

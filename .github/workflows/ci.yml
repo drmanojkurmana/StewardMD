@@ -21,6 +21,33 @@ jobs:
       - name: Run unit tests
         run: node --test test/*.test.mjs
 
+  atlas-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install atlas pipeline deps
+        run: pip install -r atlas-pipeline/requirements.txt
+      # These gates already existed and NOTHING invoked them, so the clearance register,
+      # the ontology region map and the pipeline invariants could all drift without
+      # failing a merge. An unreachable gate is not a gate. Kept in its OWN job so an
+      # unrelated failure in unit-tests cannot silence them again.
+      - name: Atlas source clearance, ontology and pipeline self-checks
+        run: |
+          python atlas-pipeline/check_sources.py
+          python atlas-pipeline/ontology.py --check
+          python atlas-pipeline/test_pipeline.py
+      - name: Atlas data and layout suites
+        run: |
+          node test/atlas-data.test.mjs
+          node test/atlas-layout.test.mjs
+
   maik-eval:
     runs-on: ubuntu-latest
     timeout-minutes: 10

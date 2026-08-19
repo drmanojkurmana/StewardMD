@@ -26,16 +26,31 @@ DOCS = os.path.join(_REPO, "docs", "radioanatome")
 # Structures we know are missing, with the honest reason and route. Kept explicit so the
 # report never implies the atlas is finished.
 GAPS = [
-    ("Brain: cerebrum, hemispheres, cerebellum, brainstem, ventricles, thalamus, basal "
-     "ganglia, hippocampus, amygdala", "SOURCE DATA (cadaver T1 is 33 slices at 4 mm)",
-     "FREE — OpenNeuro CC0 living T1 + SynthSeg v1.0 (both already CLEAR)"),
-    ("Patella", "SEGMENTATION (trabecular bone fragments at a 300 HU threshold; the "
-     "femoral component breaks into 20-22 in-plane parts)",
-     "licensed appendicular_bones, or a dedicated low-threshold anterior routine"),
-    ("Tarsals, metatarsals, phalanges of the foot", "NOT ATTEMPTED YET (slices exist, "
-     "VHP 2700-2882)", "FREE — same classical approach as the knee"),
-    ("Carpals, metacarpals, phalanges of the hand", "NOT ATTEMPTED YET",
-     "FREE — classical, or licensed appendicular_bones"),
+    # The whole-brain row was RESOLVED (45d7b32d, d3966b62): 16 brain structures ship from
+    # the CC0 living T1. What is genuinely still missing is the finer anatomy below - do
+    # not restate the solved part as a gap.
+    ("Brain: named gyri, sulci and lobes, and the named white-matter tracts "
+     "(corpus callosum, internal capsule, fornix, corona radiata) and insula",
+     "MODEL WEIGHTS — SynthSeg v1.0 segments whole structures only; it folds the corpus "
+     "callosum into cerebral white matter. Its parcellation weights ship from a separate "
+     "link with NO licence statement and are therefore not used",
+     "no free route found; hand-authoring on the CC0 living T1 is the only clean option"),
+    ("Patella", "SEGMENTATION — retested at 600 HU (the threshold that separates the foot): "
+     "a candidate matched on pair symmetry, volume and z-span, then FAILED the decisive "
+     "test, sitting posterior to the femoral condyles in every shared slice. Not claimed",
+     "appendicular_bones (free academic key under the non-commercial determination), or a "
+     "dedicated low-threshold anterior routine"),
+    # SHIPPED at 600 HU: tarsal 14, metatarsal 10, tibia 2, fibula 2. Only the smallest
+    # phalanges are missing, and the limit is resolution rather than method.
+    ("Middle and distal phalanges of toes 2-5", "RESOLUTION — below the 300-voxel "
+     "component floor at 0.9 mm; 10 of 28 phalanges recovered",
+     "no route on this subject; needs a higher-resolution foot series"),
+    ("Individually-named carpals, metacarpals and phalanges of the hand",
+     "ATTEMPTED AND FAILED, twice — the hands lie flat against the thighs across only "
+     "~8 cm of axial slices (a hand's width, not its length), so no z-banding exists; "
+     "component size is near-uniform (1180-2681 voxels) and PCA found no three-band "
+     "structure. Ships as the aggregate `bone of the hand`",
+     "appendicular_bones (free academic key), or a dedicated coronal hand series"),
     ("Cardiac chambers and myocardium", "SOURCE DATA on the cadaver; available on living "
      "CT but not yet built", "FREE — the CC BY 4.0 dataset has heart; chambers need the "
      "licensed heartchambers_highres"),
@@ -83,8 +98,11 @@ def main():
             r["cov"] += 1
 
     n_free = len(covered)                 # everything shipped came from CLEAR sources
-    n_gated = 4                           # patella, hand+foot bones, cardiac chambers, coronaries via licence
-    n_unavail = len(GAPS) - 1             # the rest; -1 because lung lobes are already solved
+    # Derive both from the rows themselves. These were hand-set integers keyed to the prose
+    # list, so every shipped family left the published percentage silently wrong.
+    n_gated = len([g for g in GAPS if "appendicular_bones" in g[2] or "licensed" in g[2]])
+    n_unavail = len([g for g in GAPS if not ("appendicular_bones" in g[2] or "licensed" in g[2])
+                     and "already solved" not in g[2]])
     denom = n_free + n_gated + n_unavail
 
     cleared = [k for k, v in reg.items()
@@ -166,15 +184,12 @@ def main():
           "process, so even computing coordinates with it would taint output. autoPET — "
           "CC BY-NC.", "",
           "## What would move these numbers most", "",
-          "1. **Brain, free.** OpenNeuro CC0 living T1 (verified `\"License\": \"CC0\"` in "
-          "the dataset's own dataset_description.json) plus SynthSeg v1.0, whose in-repo "
-          "weights are already CLEAR. Would fill the largest empty region in the table "
-          "above at no licence cost.",
-          "2. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies "
+          "1. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies "
           "with a `no_pathology` metadata flag, of which one is currently used. Thorax-"
           "only and neck studies would add the trachea and neck vessels that fall outside "
           "the present subject's field of view.",
-          "3. **Feet and hands, free.** Classical, exactly as the knee was done.", ""]
+          "2. **MRI body, free.** TotalSegmentator `total_mr` is Apache-2.0 and already "
+          "CLEAR; the whole MRI musculoskeletal region is unattempted.", ""]
 
     os.makedirs(DOCS, exist_ok=True)
     p = os.path.join(DOCS, "RADIOANATOME_COVERAGE.md")

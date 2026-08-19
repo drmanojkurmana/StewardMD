@@ -7,7 +7,7 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 ## Headline
 
 - **Modules shipped:** 30
-- **Total pins:** 4084
+- **Total pins:** 3881
 - **Canonical structures in the ontology:** 86
 - **Structures WITH geometry (covered):** 62
 - **Structures declared but empty (honest gaps):** 24
@@ -38,16 +38,16 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-abdomen-coronal` | Abdomen | CT | Coronal | 138 | 7 of 9 declared |
 | `ct-abdomen-sagittal` | Abdomen | CT | Sagittal | 140 | 6 of 8 declared |
 | `ct-abdomen-axial` | Abdomen | CT | Axial | 238 | 6 of 8 declared |
-| `brain-mri-axial-t1` | Brain | MRI | Axial - T1 | 0 | 0 of 23 declared |
-| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 282 | 16 of 18 declared |
-| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 244 | 16 of 18 declared |
-| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 210 | 16 of 18 declared |
+| `brain-mri-axial-t1` | Brain | MRI | Axial - T1 (cadaver, unlabelled) | 0 | 0 of 23 declared |
+| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 217 | 16 of 18 declared |
+| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 225 | 16 of 18 declared |
+| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 155 | 16 of 18 declared |
 | `ct-head-coronal` | Head and neck | CT | Coronal | 99 | 2 of 3 declared |
 | `ct-head-sagittal` | Head and neck | CT | Sagittal | 122 | 2 of 3 declared |
 | `ct-head-axial` | Head and neck | CT | Axial | 105 | 2 of 3 declared |
 | `ct-foot-axial` | Lower limb | CT | Axial | 113 | 5 of 6 declared |
-| `ct-foot-coronal` | Lower limb | CT | Coronal | 78 | 5 of 6 declared |
 | `ct-foot-sagittal` | Lower limb | CT | Sagittal - single foot | 188 | 5 of 6 declared |
+| `ct-foot-coronal` | Lower limb | CT | Coronal | 74 | 5 of 6 declared |
 | `ct-knee-axial` | Lower limb | CT | Axial | 84 | 3 of 4 declared |
 | `ct-knee-coronal` | Lower limb | CT | Coronal | 23 | 3 of 4 declared |
 | `ct-knee-sagittal` | Lower limb | CT | Sagittal - single leg | 72 | 3 of 4 declared |
@@ -57,11 +57,11 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-thorax-coronal` | Thorax | CT | Coronal | 109 | 5 of 7 declared |
 | `ct-thorax-sagittal` | Thorax | CT | Sagittal | 125 | 5 of 7 declared |
 | `ct-thorax-axial` | Thorax | CT | Axial | 173 | 5 of 7 declared |
-| `ct-live-torso-axial` | Torso | CT | Axial - living patient | 346 | 27 of 28 declared |
-| `ct-live-torso-coronal` | Torso | CT | Coronal - living patient | 294 | 27 of 28 declared |
-| `ct-live-torso-sagittal` | Torso | CT | Sagittal - living patient | 261 | 27 of 28 declared |
+| `ct-live-torso-axial` | Torso | CT | Axial - living patient | 321 | 27 of 28 declared |
+| `ct-live-torso-coronal` | Torso | CT | Coronal - living patient | 275 | 27 of 28 declared |
+| `ct-live-torso-sagittal` | Torso | CT | Sagittal - living patient | 253 | 27 of 28 declared |
+| `ct-hand-coronal` | Upper limb | CT | Coronal | 16 | 1 of 2 declared |
 | `ct-hand-axial` | Upper limb | CT | Axial | 81 | 1 of 2 declared |
-| `ct-hand-coronal` | Upper limb | CT | Coronal | 24 | 1 of 2 declared |
 | `ct-hand-sagittal` | Upper limb | CT | Sagittal | 49 | 1 of 2 declared |
 | `ct-wholebody-axial` | Whole body | CT | Axial - vertex to feet | 66 | 8 of 9 declared |
 | `ct-wholebody-coronal` | Whole body | CT | Coronal - vertex to feet | 173 | 8 of 9 declared |
@@ -70,18 +70,18 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 
 Denominator is covered structures plus the gap families listed below, so this is a measure of ANATOMICAL AMBITION met, not of one dataset's class list.
 
-- **FREE coverage: 83%** (62 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
-- **Licence-gated: 5%** (4 families that a purchase would unlock)
-- **Not yet available: 12%** (9 families, most blocked by SOURCE DATA rather than licensing — those cannot be bought)
+- **FREE coverage: 87%** (62 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
+- **Licence-gated: 4%** (3 families that a purchase would unlock)
+- **Not yet available: 8%** (6 families, most blocked by SOURCE DATA rather than licensing — those cannot be bought)
 
 ## Known gaps, with the honest reason
 
 | missing anatomy | why | route |
 |---|---|---|
-| Brain: cerebrum, hemispheres, cerebellum, brainstem, ventricles, thalamus, basal ganglia, hippocampus, amygdala | SOURCE DATA (cadaver T1 is 33 slices at 4 mm) | FREE — OpenNeuro CC0 living T1 + SynthSeg v1.0 (both already CLEAR) |
-| Patella | SEGMENTATION (trabecular bone fragments at a 300 HU threshold; the femoral component breaks into 20-22 in-plane parts) | licensed appendicular_bones, or a dedicated low-threshold anterior routine |
-| Tarsals, metatarsals, phalanges of the foot | NOT ATTEMPTED YET (slices exist, VHP 2700-2882) | FREE — same classical approach as the knee |
-| Carpals, metacarpals, phalanges of the hand | NOT ATTEMPTED YET | FREE — classical, or licensed appendicular_bones |
+| Brain: named gyri, sulci and lobes, and the named white-matter tracts (corpus callosum, internal capsule, fornix, corona radiata) and insula | MODEL WEIGHTS — SynthSeg v1.0 segments whole structures only; it folds the corpus callosum into cerebral white matter. Its parcellation weights ship from a separate link with NO licence statement and are therefore not used | no free route found; hand-authoring on the CC0 living T1 is the only clean option |
+| Patella | SEGMENTATION — retested at 600 HU (the threshold that separates the foot): a candidate matched on pair symmetry, volume and z-span, then FAILED the decisive test, sitting posterior to the femoral condyles in every shared slice. Not claimed | appendicular_bones (free academic key under the non-commercial determination), or a dedicated low-threshold anterior routine |
+| Middle and distal phalanges of toes 2-5 | RESOLUTION — below the 300-voxel component floor at 0.9 mm; 10 of 28 phalanges recovered | no route on this subject; needs a higher-resolution foot series |
+| Individually-named carpals, metacarpals and phalanges of the hand | ATTEMPTED AND FAILED, twice — the hands lie flat against the thighs across only ~8 cm of axial slices (a hand's width, not its length), so no z-banding exists; component size is near-uniform (1180-2681 voxels) and PCA found no three-band structure. Ships as the aggregate `bone of the hand` | appendicular_bones (free academic key), or a dedicated coronal hand series |
 | Cardiac chambers and myocardium | SOURCE DATA on the cadaver; available on living CT but not yet built | FREE — the CC BY 4.0 dataset has heart; chambers need the licensed heartchambers_highres |
 | Coronary arteries | needs cardiac CTA plus a dedicated model | none free and verified — NOT AVAILABLE |
 | Lung lobes on the CADAVER | SOURCE DATA (-540 HU, no resolvable fissures) | already solved on living CT: 4 of 5 lobes shipped |
@@ -107,7 +107,6 @@ Full detail in LICENSE_MANIFEST.md, LICENSE_REQUIRED.md, DATA_PROVENANCE.md and 
 
 ## What would move these numbers most
 
-1. **Brain, free.** OpenNeuro CC0 living T1 (verified `"License": "CC0"` in the dataset's own dataset_description.json) plus SynthSeg v1.0, whose in-repo weights are already CLEAR. Would fill the largest empty region in the table above at no licence cost.
-2. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies with a `no_pathology` metadata flag, of which one is currently used. Thorax-only and neck studies would add the trachea and neck vessels that fall outside the present subject's field of view.
-3. **Feet and hands, free.** Classical, exactly as the knee was done.
+1. **More living-CT subjects, free.** The CC BY 4.0 dataset has 404 studies with a `no_pathology` metadata flag, of which one is currently used. Thorax-only and neck studies would add the trachea and neck vessels that fall outside the present subject's field of view.
+2. **MRI body, free.** TotalSegmentator `total_mr` is Apache-2.0 and already CLEAR; the whole MRI musculoskeletal region is unattempted.
 

@@ -22,9 +22,15 @@ def inside_point(mask2d):
     m = np.asarray(mask2d, dtype=bool)
     if not m.any():
         return None
-    dist = ndimage.distance_transform_edt(m)
-    r, c = np.unravel_index(int(np.argmax(dist)), m.shape)
-    return int(r), int(c)
+    # Pad by one before the EDT. SciPy treats everything outside the array as FOREGROUND,
+    # so a structure cut off by the crop gets its "deepest interior point" on the very
+    # first or last row/column - the pin then renders half off the edge of the image and
+    # its leader line points at the cut margin instead of into the structure. Padding
+    # makes the border a real boundary; the offset is undone before returning.
+    padded = np.pad(m, 1, constant_values=False)
+    dist = ndimage.distance_transform_edt(padded)
+    r, c = np.unravel_index(int(np.argmax(dist)), padded.shape)
+    return int(r) - 1, int(c) - 1
 
 
 def pins_for_mask(mask2d, min_area_px):

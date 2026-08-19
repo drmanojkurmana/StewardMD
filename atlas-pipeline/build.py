@@ -113,7 +113,8 @@ def assemble(module_meta, slice_stubs, pins_by_slice, mapping):
 
 def upsert_module(catalog, module_meta):
     """Add or replace a module row, keeping the catalog sorted and credits intact."""
-    row = {k: module_meta[k] for k in ("id", "title", "subtitle", "region", "modality", "slices", "thumb")
+    row = {k: module_meta[k] for k in ("id", "title", "subtitle", "region", "modality", "slices",
+                                      "thumb", "credit", "notice")
            if k in module_meta}
     mods = [m for m in catalog.get("modules", []) if m["id"] != row["id"]]
     mods.append(row)
@@ -141,7 +142,14 @@ def pins_from_segmentation(seg_path, slice_stubs, mapping, spacing_disp):
     out = {}
     for stub in slice_stubs:
         plane = seg[:, :, stub["_z"]]
-        pins = []
+        # Collect candidates per STRUCTURE before capping. Several model labels can feed one
+        # structure - every bilateral structure does (left and right are separate labels), and
+        # so do the cerebellar cortex/white-matter split and the merged temporal horn. Capping
+        # inside the label loop therefore multiplied every cap by the number of contributing
+        # labels: a cap of 2 on a paired structure really allowed 4, and splitting a structure
+        # silently dropped its cap entirely. The cap must bound what the student sees.
+        cand = {}
+        shape = None
         for val in np.unique(plane):
             if val == 0:
                 continue
@@ -150,20 +158,24 @@ def pins_from_segmentation(seg_path, slice_stubs, mapping, spacing_disp):
             if not sid:
                 continue
             m = resize_to_square_pixels(to_display(plane == val), spacing_disp, DISPLAY_H)
+            shape = m.shape
             found = pins_for_mask(m, MIN_AREA_PX)
+            if not found:
+                continue
+            lab2, _k2 = ndimage.label(m, structure=np.ones((3, 3), dtype=bool))
+            for (r, c) in found:
+                cand.setdefault(sid, []).append((r, c, int((lab2 == lab2[r, c]).sum())))
+        pins = []
+        for sid, items in cand.items():
             # A generically-named structure that recurs many times per slice (ribs) would
             # saturate both gutters with identical labels. Keep the largest few, which are
             # the clearest cross-sections; the cap is per-mapping, not hard-coded.
             cap = (mapping.get("max_pins_per_slice") or {}).get(sid)
-            if cap and len(found) > cap:
-                area = {}
-                lab2, k2 = ndimage.label(m, structure=np.ones((3, 3), dtype=bool))
-                for (r, c) in found:
-                    area[(r, c)] = int((lab2 == lab2[r, c]).sum())
-                found = sorted(found, key=lambda rc: -area[rc])[:cap]
-                found.sort(key=lambda rc: (rc[1], rc[0]))
-            for (r, c) in found:
-                x, y = to_percent(r, c, m.shape)
+            if cap and len(items) > cap:
+                items = sorted(items, key=lambda t: -t[2])[:cap]
+            items.sort(key=lambda t: (t[1], t[0]))
+            for (r, c, _area) in items:
+                x, y = to_percent(r, c, shape)
                 pins.append({"s": sid, "x": x, "y": y})
         out[stub["i"]] = pins
     return out
@@ -177,7 +189,10 @@ def main(argv=None):
     ap.add_argument("--slices", type=int, default=24)
     ap.add_argument("--window", default=None,
                     help="brain|soft-tissue|lung|bone|mediastinum (CT only; omit for MR)")
-    ap.add_argument("--source", default="visible-human")
+    # No default. This argument decides the licence and credit written into the module,
+    # and defaulting it to visible-human silently stamped "US Government work, no
+    # copyright" onto third-party CC BY 4.0 images. Make the caller say it.
+    ap.add_argument("--source", required=True)
     ap.add_argument("--title", default=None)
     ap.add_argument("--subtitle", default="")
     ap.add_argument("--region", default="Brain")
@@ -254,10 +269,21 @@ def main(argv=None):
     mid = len(stubs) // 2 + 1
     meta["slices"] = len(stubs)
     meta["thumb"] = "/atlas/%s/t/%03d.webp" % (a.module, mid)
+    # The credit line the info screen renders. Only added when the source needs one.
+    # Recorded PER MODULE as well as in the global list: the global list is the union of
+    # every source in the catalog, so rendering it wholesale credited NLM on CC0 brain
+    # images. An empty string means "this module needs no credit" and is meaningful.
+    credit = reg.get(a.source, {}).get("credit")
+    meta["credit"] = credit or ""
+    notice = (mapping or {}).get("_student_notice")
+    if notice:
+        meta["notice"] = notice
     catalog = upsert_module(catalog, meta)
 
-    # The credit line the info screen renders. Only added when the source needs one.
-    credit = reg.get(a.source, {}).get("credit")
+    if str(reg.get(a.source, {}).get("attribution", "")).lower().startswith("required") and not credit:
+        print("REFUSING: source %r requires attribution but sources.json gives it no `credit` "
+              "line, so nothing would reach the info screen." % a.source, file=sys.stderr)
+        return 1
     if credit and credit not in catalog["credits"]:
         catalog["credits"].append(credit)
 

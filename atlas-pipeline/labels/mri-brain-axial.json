@@ -22,22 +22,26 @@
     "csf": {
       "label": "CSF",
       "color": "#7fd9e8"
+    },
+    "mixed": {
+      "label": "Mixed grey and white",
+      "color": "#b9a8c9"
     }
   },
   "structures": {
     "brain": {
       "name": "Brain",
-      "category": "grey"
+      "category": "mixed"
     },
     "amygdala": {
       "name": "Amygdala",
       "category": "deep-grey",
       "parent": "brain",
-      "definition": "The amygdala is an almond-shaped grey mass in the roof of the inferior horn of the lateral ventricle, at the temporal pole."
+      "definition": "The amygdala is an almond-shaped grey mass forming the roof and anterior wall of the tip of the inferior (temporal) horn of the lateral ventricle, deep to the uncus in the anteromedial temporal lobe, immediately anterosuperior to the head of the hippocampus."
     },
     "brainstem": {
       "name": "Brainstem",
-      "category": "grey",
+      "category": "mixed",
       "parent": "brain",
       "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
     },
@@ -49,7 +53,7 @@
     },
     "cerebellum": {
       "name": "Cerebellum",
-      "category": "grey",
+      "category": "mixed",
       "parent": "brain",
       "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
     },
@@ -79,21 +83,21 @@
     },
     "hippocampus": {
       "name": "Hippocampus",
-      "category": "deep-grey",
+      "category": "grey",
       "parent": "brain",
-      "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
+      "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle. It is archicortex - a three-layered allocortex rolled into the medial temporal lobe - not a subcortical nucleus."
     },
     "lateral-ventricle": {
       "name": "Lateral ventricle",
       "category": "csf",
       "parent": "brain",
-      "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
+      "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina. Each has a frontal (anterior) horn, a body, an atrium (trigone), and occipital (posterior) and inferior (temporal) horns; the pins in this atlas do not distinguish them."
     },
     "putamen": {
       "name": "Putamen",
       "category": "deep-grey",
       "parent": "brain",
-      "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
+      "definition": "The putamen is the outer and larger part of the lentiform nucleus, separated from the globus pallidus by the lateral medullary lamina; together with the caudate nucleus it forms the striatum."
     },
     "subarachnoid-space": {
       "name": "Subarachnoid space",
@@ -111,19 +115,19 @@
       "name": "Third ventricle",
       "category": "csf",
       "parent": "brain",
-      "definition": "The third ventricle is a narrow median cleft between the two thalami."
+      "definition": "The third ventricle is a narrow median cleft between the two thalami. Its floor and lower lateral walls are formed by the hypothalamus."
     },
     "cerebellar-cortex": {
       "name": "Cerebellar cortex",
       "category": "grey",
       "parent": "cerebellum",
-      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia so that its surface area greatly exceeds that of the cerebral cortex relative to its volume."
+      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia, which pack a surface area of roughly half that of the cerebral cortex into about a tenth of the volume."
     },
     "cerebellar-white-matter": {
       "name": "Cerebellar white matter",
       "category": "white",
       "parent": "cerebellum",
-      "definition": "The central white core of the cerebellum, which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
+      "definition": "The central white core of the cerebellum (corpus medullare), which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
     },
     "nucleus-accumbens": {
       "name": "Nucleus accumbens",
@@ -132,10 +136,10 @@
       "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum."
     },
     "ventral-diencephalon": {
-      "name": "Ventral diencephalon",
-      "category": "deep-grey",
+      "name": "Ventral diencephalic / subthalamic region (composite)",
+      "category": "mixed",
       "parent": "brain",
-      "definition": "A COMPOSITE region, not a single named organ: the ventral diencephalic grey lying below the thalamus, which at this resolution includes the hypothalamus together with the subthalamic nucleus, substantia nigra, red nucleus and mammillary bodies. It is labelled as an aggregate BECAUSE the segmentation cannot separate those parts; naming any one of them here would be wrong."
+      "definition": "NOT a single named structure and NOT a Terminologia Anatomica term: this is the FreeSurfer \"ventral diencephalon\" segmentation label, a composite of the grey and white matter packed between the thalamus above, the internal capsule laterally and the midbrain below. It contains the hypothalamus, mammillary body and subthalamic nucleus (diencephalic), the geniculate bodies (metathalamic), the substantia nigra and red nucleus (which are MIDBRAIN, not diencephalon), the zona incerta, and fibre bundles including the medial lemniscus and lenticular fasciculus. It is shown as an aggregate because this segmentation cannot separate them: do not learn any one of these structures from this pin."
     }
   },
   "model_values": {
@@ -164,7 +168,6 @@
     "53": "fs_53",
     "18": "fs_18",
     "54": "fs_54",
-    "24": "fs_24",
     "5": "fs_5",
     "26": "fs_26",
     "28": "fs_28",
@@ -198,7 +201,6 @@
     "fs_53": "hippocampus",
     "fs_18": "amygdala",
     "fs_54": "amygdala",
-    "fs_24": "subarachnoid-space",
     "fs_26": "nucleus-accumbens",
     "fs_58": "nucleus-accumbens",
     "fs_28": "ventral-diencephalon",
@@ -211,14 +213,16 @@
     "cerebral-cortex": 3,
     "cerebral-white-matter": 2,
     "lateral-ventricle": 2,
-    "cerebellum": 2,
     "thalamus": 2,
     "caudate-nucleus": 2,
     "putamen": 2,
     "globus-pallidus": 2,
     "hippocampus": 2,
     "amygdala": 2,
-    "subarachnoid-space": 2
+    "cerebellar-cortex": 2,
+    "cerebellar-white-matter": 2
   },
-  "_geometry_extended_2026_08_19": "Four structures added and one extended from labels ALREADY PRESENT in the same SynthSeg v1.0 output - no new model, no new data, no licence. fs_7/46 and fs_8/47 were both collapsed onto `cerebellum`, discarding the cortex-versus-white-core distinction; they are now split. fs_26/58 (accumbens) and fs_28/60 (ventral diencephalon) were segmented but never mapped. fs_5/44, the inferior (temporal) horn, is merged INTO `lateral-ventricle` rather than declared separately, because the inferior horn is part of that ventricle. `cerebellum` is retained as the parent container and no longer carries pins of its own, exactly as `brain` does."
+  "_geometry_extended_2026_08_19": "Four structures added and one extended from labels ALREADY PRESENT in the same SynthSeg v1.0 output - no new model, no new data, no licence. fs_7/46 and fs_8/47 were both collapsed onto `cerebellum`, discarding the cortex-versus-white-core distinction; they are now split. fs_26/58 (accumbens) and fs_28/60 (ventral diencephalon) were segmented but never mapped. fs_5/44, the inferior (temporal) horn, is merged INTO `lateral-ventricle` rather than declared separately, because the inferior horn is part of that ventricle. `cerebellum` is retained as the parent container and no longer carries pins of its own, exactly as `brain` does.",
+  "_why_fs24_removed": "FreeSurfer label 24 is a generic residual CSF class, not the subarachnoid space the `subarachnoid-space` definition describes. It produced zero pins, so no student saw it, but the mapping was wrong and would have fired on the next rebuild or a different subject. Removed rather than renamed.",
+  "_student_notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
 }

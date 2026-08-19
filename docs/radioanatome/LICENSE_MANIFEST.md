@@ -19,7 +19,7 @@ refuse to run, so a licence mistake fails loudly instead of shipping.
 | `mindboggle-101` | CC BY-NC-SA 3.0 (paper) vs CC BY 4.0 (site) - conflicting | NO | required | **BLOCKED** |
 | `nv-segment-ct` | Code Apache-2.0; weights under the NVIDIA Open Model License (commercial-friendly) | yes | notice retention | **CLEAR** |
 | `nv-segment-ctmr` | Non-commercial | NO | n/a | **BLOCKED** |
-| `openneuro-cc0` | CC0 1.0 Public Domain Dedication (OpenNeuro default for uploaded datasets) | yes | none required | **CLEAR** |
+| `openneuro-cc0` | CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json) | yes | none required | **CLEAR** |
 | `radiopaedia` | Non-commercial educational use | NO | required | **BLOCKED** |
 | `spl-nac-brain-atlas` | 3D Slicer License Part B | yes | notice retention only | **CLEAR** |
 | `synthseg-v1` | Apache-2.0 (v1.0 weights are in-repo) | yes | notice retention only | **CLEAR** |
@@ -44,7 +44,7 @@ refuse to run, so a licence mistake fails loudly instead of shipping.
 - **openneuro-cc0** — none required
 - **spl-nac-brain-atlas** — notice retention only
 - **synthseg-v1** — notice retention only
-- **totalsegmentator-dataset** — required: one credit line plus the Zenodo DOI
+- **totalsegmentator-dataset** — required: one credit line plus the Zenodo DOI — credit line: *CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292*
 - **totalsegmentator-open-subtasks** — notice retention only
 - **totalsegmentator-total** — notice retention only
 - **visible-human** — one credit line required — credit line: *Courtesy of the U.S. National Library of Medicine*

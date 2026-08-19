@@ -12,7 +12,7 @@ because the limitation is our source data, not the model.
 - **licence** — CC BY-NC 4.0 (NIfTI via FDAT) or TCIA Restricted (DICOM via TCIA)
 - **commercial use** — NOT permitted
 - **status** — BLOCKED
-- **why blocked** — BANNED BY OWNER 2026-08-19: RadioAnatome is to be COMMERCIALLY deployable, and CC BY-NC 4.0 forbids that for as long as the data ships. Owner instruction: no CC BY-NC, research-only or restricted datasets, and PET/CT is to be kept architecturally separate for a later, separately licensed phase. Supersedes the earlier non-commercial position recorded on the same day.
+- **why blocked** — SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: BANNED BY OWNER 2026-08-19: RadioAnatome is to be COMMERCIALLY deployable, and CC BY-NC 4.0 forbids that for as long as the data ships. Owner instruction: no CC BY-NC, research-only or restricted datasets, and PET/CT is to be kept architecturally separate for a later, separately licensed phase. Supersedes the earlier non-commercial position recorded on the same day.
 - **verified from** — https://autopet.grand-challenge.org/Dataset/ ; https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/
 - **note** — Only whole-body PET/CT found that is redistributable at all. HEALTHY-TOTAL-BODY-CTS was checked and rejected: its segmentations are CC BY 4.0 but the CT IMAGES sit under the NIH Controlled Data Access Policy (facial-reconstruction risk), so they cannot ship. No PD or CC0 whole-body PET/CT exists as of 2026-08-19.
 
@@ -61,7 +61,7 @@ because the limitation is our source data, not the model.
 - **licence** — Non-commercial
 - **commercial use** — NOT permitted
 - **status** — BLOCKED
-- **why blocked** — Non-commercial weights, so barred by the commercial goal set 2026-08-19. Would otherwise have been the most tempting option on the table: 345+ classes including 50 MRI body classes and 133 brain substructures. Not usable.
+- **why blocked** — SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Non-commercial weights, so barred by the commercial goal set 2026-08-19. Would otherwise have been the most tempting option on the table: 345+ classes including 50 MRI body classes and 133 brain substructures. Not usable.
 - **verified from** — https://github.com/Project-MONAI/VISTA
 
 ## `radiopaedia`
@@ -94,7 +94,7 @@ because the limitation is our source data, not the model.
 - **licence** — Proprietary; free for non-commercial, paid commercial licence required
 - **commercial use** — NOT permitted
 - **status** — BLOCKED
-- **why blocked** — Paid commercial licence required (free academic key is not usable under the commercial goal set 2026-08-19). 16 brain substructures. BUT buying it probably does NOT solve the brain: the blocker measured on our data is the SOURCE, not the model — a 33-slice 4 mm cadaver T1 defeated SynthSeg, which ran clean and still returned ~2x L/R asymmetry with most of the brain unlabelled. Fix the data first (see openneuro-cc0), then FastSurfer --seg_only, already CLEAR, is expected to suffice without any purchase.
+- **why blocked** — SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Paid commercial licence required (free academic key is not usable under the commercial goal set 2026-08-19). 16 brain substructures. BUT buying it probably does NOT solve the brain: the blocker measured on our data is the SOURCE, not the model — a 33-slice 4 mm cadaver T1 defeated SynthSeg, which ran clean and still returned ~2x L/R asymmetry with most of the brain unlabelled. Fix the data first (see openneuro-cc0), then FastSurfer --seg_only, already CLEAR, is expected to suffice without any purchase.
 - **verified from** — https://github.com/wasserth/TotalSegmentator
 
 ## `uberon`

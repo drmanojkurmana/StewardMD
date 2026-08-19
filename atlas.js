@@ -393,7 +393,16 @@
   // It renders catalog.credits — a curated, render-safe list — and deliberately NOT
   // atlas.provenance, which holds licence notes and internal tooling paths.
   function infoHtml() {
+    // Prefer the CREDIT OF THE MODULE BEING VIEWED. The global list is the union of every
+    // source in the catalog, so showing it wholesale credited the U.S. National Library of
+    // Medicine on the brain modules, whose images are CC0 OpenNeuro data and are not NLM's
+    // at all. A module that needs no credit (CC0) must show none.
+    var mod = moduleMeta();
     var credits = (st.catalog && st.catalog.credits) || [];
+    if (mod && Object.prototype.hasOwnProperty.call(mod, "credit")) {
+      credits = mod.credit ? [mod.credit] : [];
+    }
+    var notice = (mod && mod.notice) || "";
     return '<div class="atlas-info-screen" id="atlasInfo">' +
       '<div class="atlas-top">' +
         '<button class="atlas-back" data-atlas-act="infoclose" aria-label="Close">‹</button>' +
@@ -402,6 +411,9 @@
         "RadioAnatome is an educational cross-sectional anatomy reference. It is not a " +
         "diagnostic tool and must not be used to interpret a patient's imaging." +
       "</p>" +
+      (notice
+        ? '<p class="atlas-prose atlas-notice">' + esc(notice) + "</p>"
+        : "") +
       (credits.length
         ? '<p class="atlas-prose atlas-credit">' + credits.map(esc).join("<br>") + "</p>"
         : "") +
