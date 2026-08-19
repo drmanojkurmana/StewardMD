@@ -101,3 +101,21 @@ CREATE TABLE IF NOT EXISTS connect_abdm_consented_record (
 );
 -- Erasure on consent revoke / expiry / ABHA opt-out is by (tenant, patient).
 CREATE INDEX IF NOT EXISTS idx_consented_patient ON connect_abdm_consented_record (tenant_id, patient_abha_hash);
+
+-- ABHA enrolment consent (2026-08-19). Certification CRT_ABHA_102 requires the ABDM-published consent
+-- language to be DISPLAYED and the beneficiary's agreement RECORDED, and the "Registration via Aadhaar
+-- OTP" page requires it to be collected BEFORE the Aadhaar OTP is requested. So this row is written
+-- first and its id is required by /enrol/otp - consent that cannot be evidenced is not consent.
+-- NO PHI: the patient is a local reference the tenant already holds, the worker is our own actor id,
+-- and the agreed clause ids are ABDM's own constants. The Aadhaar number is never involved.
+CREATE TABLE IF NOT EXISTS connect_abdm_enrol_consent (
+  id            TEXT PRIMARY KEY,
+  tenant_id     TEXT NOT NULL,
+  actor         TEXT NOT NULL,        -- the clinician who explained it (the worker attestation)
+  patient_ref   TEXT,                 -- the tenant's own patient id, if the patient is already registered
+  version       TEXT NOT NULL,        -- the consent-language version shown
+  agreed        TEXT NOT NULL,        -- JSON array of the clause/attestation ids agreed to
+  flow          TEXT,                 -- aadhaar | other
+  created_at    TEXT NOT NULL,
+  used_at       TEXT );               -- stamped when an enrolment actually consumed it (single-use)
+CREATE INDEX IF NOT EXISTS idx_enrol_consent_tenant ON connect_abdm_enrol_consent (tenant_id, created_at);

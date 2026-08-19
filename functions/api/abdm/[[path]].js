@@ -20,6 +20,11 @@ import {
   normalizeProfile, ENROL_CONSENT, SCOPES,
 } from "../../_connect/abdm/abha.js";
 import { linkAbhaToPatient, findLink, openLinkAddress, AbhaLinkError } from "../../_connect/abdm/abha-link.js";
+import { resolveTenant } from "../../_connect/identity.js";
+import { PermissionError } from "../../_connect/permission.js";
+import {
+  enrolmentConsent, recordEnrolConsent, claimEnrolConsent, ConsentRecordError,
+} from "../../_connect/abdm/consent-text.js";
 
 // M1 has its own flag: the ABHA surface is useful long before HIP/HIU serving is ready.
 const m1On = (env) => String(env && env.ABDM_M1_FLAG) === "1";
@@ -45,6 +50,16 @@ export async function onRequest(context) {
   catch (e) { return jsonResponse({ error: "abdm_unavailable", detail: e.message }, { status: 503 }); }
 
   const deps = { fetch, token, kv: env.MAIK_KV, now: () => Date.now() };
+  const iso = () => new Date().toISOString();
+  const cdeps = { db: env.CONNECT_DB, now: iso };
+  // A tenant id on the request body is a CLAIM, never an authority. Every route that reads or writes
+  // tenant-scoped data resolves membership first, or one signed-in user could bind an ABHA into another
+  // hospital's patient index - or probe whether a given ABHA is registered there.
+  const forTenant = async (tenantId) => {
+    if (!tenantId) throw new PermissionError("tenant is required");
+    const { tenant } = await resolveTenant(env.CONNECT_DB, who.id, tenantId, env);
+    return tenant.id;
+  };
   const body = request.method === "POST" ? await request.json().catch(() => ({})) : {};
   const q = new URL(request.url).searchParams;
 
@@ -52,6 +67,10 @@ export async function onRequest(context) {
     switch (path) {
       // ── creation (cert CRT_ABHA_101..115) ───────────────────────────────────────────────────────
       case "/enrol/otp":
+        // "Consent must be explained & collected from the user prior to performing Aadhaar OTP
+        // authentication" (Registration via Aadhaar OTP). claimEnrolConsent is single-use, so one
+        // patient's agreement can never be spent on another patient's ABHA.
+        await claimEnrolConsent(cdeps, { tenantId: await forTenant(body.tenantId), consentId: body.consentId });
         return ok(await enrolSendAadhaarOtp(cfg, deps, { aadhaar: body.aadhaar }));
       case "/enrol/verify":
         return ok(await enrolVerifyAadhaarOtp(cfg, deps, { txnId: body.txnId, otp: body.otp, mobile: body.mobile }));
@@ -97,23 +116,44 @@ export async function onRequest(context) {
 
       // ── the mandatory one-ABHA-per-patient binding (cert TAGGING_*) ─────────────────────────────
       case "/link": {
-        const linkDeps = { db: env.CONNECT_DB, env, secrets: makeSecrets(env), now: () => new Date().toISOString() };
+        const tenantId = await forTenant(body.tenantId);
+        const linkDeps = { db: env.CONNECT_DB, env, secrets: makeSecrets(env), now: iso };
         const res = await linkAbhaToPatient(linkDeps, {
-          tenantId: body.tenantId, abhaNumber: body.abhaNumber,
+          tenantId, abhaNumber: body.abhaNumber,
           abhaAddress: body.abhaAddress, patientRef: body.patientRef,
         });
         return ok(res);
       }
       case "/link/lookup": {
+        const tenantId = await forTenant(q.get("tenantId"));
         const linkDeps = { db: env.CONNECT_DB, env, secrets: makeSecrets(env) };
-        const row = await findLink(linkDeps, { tenantId: q.get("tenantId"), abhaNumber: q.get("abhaNumber") });
+        const row = await findLink(linkDeps, { tenantId, abhaNumber: q.get("abhaNumber") });
         if (!row) return ok({ linked: false });
         return ok({ linked: true, patientRef: row.patient_ref, abhaLast4: row.abha_last4, abhaAddress: await openLinkAddress(linkDeps, row) });
       }
 
       // ── what the UI needs to render the consent screen (cert CRT_ABHA_102) ──────────────────────
+      // The PUBLISHED consent language itself, with the patient's and clinician's names filled in and
+      // the private-integrator wording applied. The client renders exactly what this returns.
       case "/meta":
-        return ok({ consent: ENROL_CONSENT, scopes: SCOPES, env: cfg.envName, hipId: cfg.hipId });
+        return ok({
+          consent: ENROL_CONSENT, scopes: SCOPES, env: cfg.envName, hipId: cfg.hipId,
+          consentLanguage: enrolmentConsent({
+            flow: q.get("flow") || "aadhaar",
+            workerName: q.get("workerName") || who.name || "",
+            patientName: q.get("patientName") || "",
+          }),
+        });
+
+      // Record the beneficiary's agreement BEFORE any Aadhaar OTP is requested, and hand back the id
+      // that /enrol/otp requires. An incomplete agreement is refused rather than stored.
+      case "/consent": {
+        const tenantId = await forTenant(body.tenantId);
+        return ok(await recordEnrolConsent(cdeps, {
+          tenantId, actor: who.id, patientRef: body.patientRef,
+          agreed: body.agreed, flow: body.flow, government: false,
+        }));
+      }
 
       default:
         return jsonResponse({ error: "not_found" }, { status: 404 });
@@ -125,6 +165,8 @@ export async function onRequest(context) {
         { status: e.status && e.status >= 400 && e.status < 600 ? e.status : 400 });
     }
     if (e instanceof AbhaLinkError) return jsonResponse({ error: e.code, message: e.message }, { status: 409 });
+    if (e instanceof PermissionError) return jsonResponse({ error: "forbidden", message: e.message }, { status: 403 });
+    if (e instanceof ConsentRecordError) return jsonResponse({ error: "consent_required", message: e.message }, { status: 400 });
     if (e instanceof AbdmConfigError) return jsonResponse({ error: "misconfigured", message: e.message }, { status: 500 });
     return jsonResponse({ error: "failed" }, { status: 500 });
   }
