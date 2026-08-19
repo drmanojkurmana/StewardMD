@@ -7,6 +7,8 @@
 // a token-embedded key locator (`jku`/`x5u`, or a `kid` that looks like a URL) is NEVER dereferenced
 // (verifyJws performs zero network I/O — it takes no fetch dep); an unavailable JWKS is a HARD fail-closed
 // (getPinnedJwks throws — there is no "skip verification" path).
+import { abdmConfig } from "./config.js";   // gateway host per environment; config.js imports nothing back
+
 export class JwsError extends Error {}
 const subtle = globalThis.crypto.subtle;
 
@@ -100,9 +102,16 @@ export async function verifyJws(token, { jwks, allowedAlgs } = {}) {
 function fail(reason) { return { ok: false, payload: null, reason }; }
 
 // ── getPinnedJwks: fetch (+cache) the JWKS from the CONFIGURED, allow-listed ABDM host over TLS only ─────
-// VERIFY: ABDM JWKS URL (owner must confirm; research WAF-blocked). Empty by default → verification cannot
-// proceed until the owner sets env.ABDM_JWKS_URL (or pins this constant) to an allow-listed https URL.
+// Override only. Left empty on purpose: the URL is DERIVED from the resolved gateway host below, so a
+// deployment cannot forget to set it. Pin this (or env.ABDM_JWKS_URL) only to point somewhere else.
 export const ABDM_JWKS_URL = "";
+// D14 (found 2026-08-20, on the wire): this was empty with nothing deriving it, so getPinnedJwks threw
+// "not configured" and EVERY callback was answered 503. The gateway treats non-2xx as a delivery failure
+// and retries, so the first real callbacks arrived four times each and nothing could ever be served.
+// It survived 1109 tests because every test supplies its own JWKS - the gap was in the composition, not
+// the crypto. The host is per-environment and already resolved by abdmConfig; the path is fixed and was
+// confirmed live on 2026-08-18. Deriving it removes the only way to get this wrong.
+export const ABDM_JWKS_PATH = "/api/hiecm/gateway/v3/certs";
 // The ONLY hosts a JWKS may EVER be fetched from. A configured URL whose host is not here is refused
 // (defence-in-depth over env config).
 // CONFIRMED live 2026-08-18: the V3 JWKS is GET /api/hiecm/gateway/v3/certs on the gateway host -
@@ -125,7 +134,12 @@ const JWKS_TTL_SEC = 3600;                 // cache public keys 1h; KV TTL gover
  */
 export async function getPinnedJwks(env, deps = {}) {
   const { fetch: fetchImpl, kv } = deps;
-  const raw = (env && env.ABDM_JWKS_URL) || ABDM_JWKS_URL;
+  let raw = (env && env.ABDM_JWKS_URL) || ABDM_JWKS_URL;
+  if (!raw) {
+    // Derived, not defaulted-away: an unknown ABDM_ENV still fails closed rather than guessing a host.
+    try { raw = abdmConfig(env).gatewayBase + ABDM_JWKS_PATH; }
+    catch (e) { throw new JwsError("ABDM JWKS URL not configured: " + (e && e.message)); }
+  }
   if (!raw) throw new JwsError("ABDM JWKS URL not configured (fail-closed)");
   let u;
   try { u = new URL(raw); } catch { throw new JwsError("ABDM JWKS URL invalid"); }

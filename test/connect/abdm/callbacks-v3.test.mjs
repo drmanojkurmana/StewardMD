@@ -28,8 +28,11 @@ async function signer() {
   return { jwks, mint, kid };
 }
 
+// D15: this said `/auth/realms/cent` here AND in the source, so these tests agreed with a truncated
+// string and every real bearer was rejected 401. The realm is read off a live token; do not shorten it.
+// See wire-config.test.mjs, which asserts the truncation cannot come back.
 const goodClaims = (over = {}) => ({
-  iss: "https://dev.abdm.gov.in/auth/realms/cent",
+  iss: "https://dev.abdm.gov.in/auth/realms/central-registry",
   exp: Math.floor(Date.parse(NOW) / 1000) + 600,
   iat: Math.floor(Date.parse(NOW) / 1000) - 10,
   ...over,
@@ -112,15 +115,15 @@ test("the HIU role reads X-HIU-ID instead of X-HIP-ID", () => {
 
 // ── bearer ──────────────────────────────────────────────────────────────────────────────────────────
 test("the expected issuer follows the environment and is overridable", () => {
-  assert.equal(expectedIssuer(ENV), "https://dev.abdm.gov.in/auth/realms/cent");
-  assert.equal(expectedIssuer({ ABDM_ENV: "production" }), "https://apis.abdm.gov.in/auth/realms/cent");
+  assert.equal(expectedIssuer(ENV), "https://dev.abdm.gov.in/auth/realms/central-registry");
+  assert.equal(expectedIssuer({ ABDM_ENV: "production" }), "https://apis.abdm.gov.in/auth/realms/central-registry");
   assert.equal(expectedIssuer({ ...ENV, ABDM_TOKEN_ISSUER: "https://x/realm" }), "https://x/realm");
 });
 
 test("a correctly signed, unexpired, right-issuer bearer verifies", async () => {
   const { jwks, mint } = await signer();
   const claims = await verifyBearer(ENV, depsFor(jwks), req({ token: await mint(goodClaims()) }));
-  assert.equal(claims.iss, "https://dev.abdm.gov.in/auth/realms/cent");
+  assert.equal(claims.iss, "https://dev.abdm.gov.in/auth/realms/central-registry");
 });
 
 test("no bearer, an expired one, or a foreign issuer are all refused 401", async () => {

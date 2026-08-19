@@ -112,13 +112,18 @@ export async function verifyBearer(env, deps, request) {
 }
 
 /**
- * The gateway realm that mints callback bearers. Confirmed live 2026-08-18 for sandbox:
- * https://dev.abdm.gov.in/auth/realms/cent. Overridable because the realm path is ABDM's to change.
+ * The gateway realm that mints callback bearers. Overridable because the realm path is ABDM's to change.
+ *
+ * D15 (found 2026-08-20, on the wire): this read `/auth/realms/cent` - the real realm is
+ * `central-registry`, TRUNCATED at some point between capture and code. Every real callback bearer
+ * therefore failed the issuer check with 401, and the gateway retries non-2xx forever. Read off a live
+ * token: iss=https://dev.abdm.gov.in/auth/realms/central-registry, azp=gateway, aud=account.
+ * No test caught it because every test signs its own token with whatever issuer it expects.
  */
 export function expectedIssuer(env) {
   if (env && env.ABDM_TOKEN_ISSUER) return String(env.ABDM_TOKEN_ISSUER);
   const cfg = abdmConfig(env);
-  return cfg.gatewayBase + "/auth/realms/cent";
+  return cfg.gatewayBase + "/auth/realms/central-registry";
 }
 
 // ── The receiver ────────────────────────────────────────────────────────────────────────────────────
