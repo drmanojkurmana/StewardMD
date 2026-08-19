@@ -193,6 +193,9 @@
           '<div class="smd-nav-note">' + svg("flask", "smd-ico") + ' Experimental — for clinician review.</div>';
         var aiBody = swRow("ai", "MaiK — Medical AI Knowledge", "Grounded clinical knowledge assistant", flag("smd_ai", true)) +
           swRow("maikperf", "Show AI response time", "Prints MaiK first-token + full-answer time under each answer (diagnostics)", flag("smd_maik_perf", false)) +
+          ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.settingsHTML)
+            ? '<div class="smd-nav-row" style="display:block">' + SMD_MAIK_ENGINE.settingsHTML() + '</div>'
+            : "") +
           '<div class="smd-nav-note">AI advisory — clinician confirmation required.</div>';
         var wardBody = swRow("ghis", "GHIS Ward Sync", "Live inpatient labs & radiology", flag("smd_ghis_ward", true)) +
           (window.SMD_IS_NATIVE ? swRow("autofetch", "Auto-fetch reports", "Keep a linked patient's labs/imaging fresh on launch & resume · GHIS login stored on THIS device only (Keychain/Keystore), per-patient consent · turn on/off per patient from the Ward Sync bar", flag("smd_autofetch", true)) : "") +
@@ -208,6 +211,7 @@
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
         var txActive = false; try { txActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("thorex")); } catch (e) {}
         var sxActive = false; try { sxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) {}
+        var mlActive = false; try { mlActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("maik_local")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
         var otaBlk = "";
         try {
@@ -223,7 +227,8 @@
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' + otaBlk;
+          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' +
+          '<button class="smd-nav-btn' + (mlActive ? ' on' : '') + '" data-xa-open="maik_local">' + (mlActive ? 'MaiK on-device model: enabled' : 'MaiK on-device model: enter access code') + '</button>' + otaBlk;
         setBody.insertAdjacentHTML("beforeend",
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
@@ -231,6 +236,7 @@
           group("beta", "Experimental Features", xaBody, false) +
           group("ward", "Ward Integration", wardBody, false));
         try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(setBody); } catch (e) {}
+        try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireSettings) SMD_MAIK_ENGINE.wireSettings(setBody); } catch (e) {}
         // wire subgroup collapse
         setBody.querySelectorAll("[data-grp]").forEach(function (h) {
           h.addEventListener("click", function () {
@@ -290,6 +296,9 @@
                   if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
                   return;
                 }
+                // MaiK on-device model: no module to open — the engine picker + model download live
+                // in Settings › AI Assistant, so just confirm the unlock and point there.
+                if (feat === "maik_local") { toast("On-device model unlocked. Open Settings › AI Assistant to download it."); return; }
                 try { localStorage.setItem("smd_fundx", "1"); } catch (e) {}
                 if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…");
               }
