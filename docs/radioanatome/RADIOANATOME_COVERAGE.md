@@ -7,14 +7,14 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 ## Headline
 
 - **Modules shipped:** 30
-- **Total pins:** 3994
-- **Canonical structures in the ontology:** 82
-- **Structures WITH geometry (covered):** 59
-- **Structures declared but empty (honest gaps):** 23
+- **Total pins:** 4084
+- **Canonical structures in the ontology:** 86
+- **Structures WITH geometry (covered):** 62
+- **Structures declared but empty (honest gaps):** 24
 - **CT structures covered:** 46
-- **MRI structures covered:** 13
+- **MRI structures covered:** 16
 - **3D structures:** 0 — every module is a 2D slice stack with per-slice pins. No volume rendering exists yet; claiming 3D would be false.
-- **2D structures:** 59 (all of them)
+- **2D structures:** 62 (all of them)
 
 ## Coverage by body region
 
@@ -22,7 +22,7 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 |---|---|---|---|
 | ABDOMEN | 14 | 13 | PARTIAL |
 | BODY | 2 | 0 | **EMPTY** |
-| BRAIN | 24 | 13 | PARTIAL |
+| BRAIN | 28 | 16 | PARTIAL |
 | CHEST | 12 | 10 | PARTIAL |
 | HEAD | 4 | 2 | PARTIAL |
 | LOWER_LIMB | 8 | 6 | PARTIAL |
@@ -39,9 +39,9 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-abdomen-sagittal` | Abdomen | CT | Sagittal | 140 | 6 of 8 declared |
 | `ct-abdomen-axial` | Abdomen | CT | Axial | 238 | 6 of 8 declared |
 | `brain-mri-axial-t1` | Brain | MRI | Axial - T1 | 0 | 0 of 23 declared |
-| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 184 | 13 of 14 declared |
-| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 253 | 13 of 14 declared |
-| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 209 | 13 of 14 declared |
+| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 282 | 16 of 18 declared |
+| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 244 | 16 of 18 declared |
+| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 210 | 16 of 18 declared |
 | `ct-head-coronal` | Head and neck | CT | Coronal | 99 | 2 of 3 declared |
 | `ct-head-sagittal` | Head and neck | CT | Sagittal | 122 | 2 of 3 declared |
 | `ct-head-axial` | Head and neck | CT | Axial | 105 | 2 of 3 declared |
@@ -70,8 +70,8 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 
 Denominator is covered structures plus the gap families listed below, so this is a measure of ANATOMICAL AMBITION met, not of one dataset's class list.
 
-- **FREE coverage: 82%** (59 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
-- **Licence-gated: 6%** (4 families that a purchase would unlock)
+- **FREE coverage: 83%** (62 structures, all from sources marked CLEAR — no licence was bought for anything shipped)
+- **Licence-gated: 5%** (4 families that a purchase would unlock)
 - **Not yet available: 12%** (9 families, most blocked by SOURCE DATA rather than licensing — those cannot be bought)
 
 ## Known gaps, with the honest reason

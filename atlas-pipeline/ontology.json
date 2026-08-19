@@ -247,14 +247,12 @@
       ],
       "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
     },
-    "CEREBELLUM": {
-      "canonical_id": "CEREBELLUM",
-      "display_name": "Cerebellum",
+    "CEREBELLAR_CORTEX": {
+      "canonical_id": "CEREBELLAR_CORTEX",
+      "display_name": "Cerebellar cortex",
       "aliases": [
-        "cerebellum",
-        "fs_46",
+        "cerebellar-cortex",
         "fs_47",
-        "fs_7",
         "fs_8"
       ],
       "modality": [
@@ -273,6 +271,62 @@
       ],
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia so that its surface area greatly exceeds that of the cerebral cortex relative to its volume."
+    },
+    "CEREBELLAR_WHITE_MATTER": {
+      "canonical_id": "CEREBELLAR_WHITE_MATTER",
+      "display_name": "Cerebellar white matter",
+      "aliases": [
+        "cerebellar-white-matter",
+        "fs_46",
+        "fs_7"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": "The central white core of the cerebellum, which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
+    },
+    "CEREBELLUM": {
+      "canonical_id": "CEREBELLUM",
+      "display_name": "Cerebellum",
+      "aliases": [
+        "cerebellum"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [],
+      "source_dataset": [],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "NOT_AVAILABLE",
+      "validation": "NO_GEOMETRY",
       "modules": [
         "brain-mri-axial-t1",
         "mri-brain-axial",
@@ -1204,6 +1258,8 @@
       "aliases": [
         "fs_4",
         "fs_43",
+        "fs_44",
+        "fs_5",
         "lateral-ventricle"
       ],
       "modality": [
@@ -1473,6 +1529,37 @@
         "ct-live-torso-sagittal"
       ],
       "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+    },
+    "NUCLEUS_ACCUMBENS": {
+      "canonical_id": "NUCLEUS_ACCUMBENS",
+      "display_name": "Nucleus accumbens",
+      "aliases": [
+        "fs_26",
+        "fs_58",
+        "nucleus-accumbens"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum."
     },
     "OCCIPITAL_LOBE": {
       "canonical_id": "OCCIPITAL_LOBE",
@@ -2406,6 +2493,37 @@
         "ct-live-torso-sagittal"
       ],
       "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis."
+    },
+    "VENTRAL_DIENCEPHALON": {
+      "canonical_id": "VENTRAL_DIENCEPHALON",
+      "display_name": "Ventral diencephalon",
+      "aliases": [
+        "fs_28",
+        "fs_60",
+        "ventral-diencephalon"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": "A COMPOSITE region, not a single named organ: the ventral diencephalic grey lying below the thalamus, which at this resolution includes the hypothalamus together with the subthalamic nucleus, substantia nigra, red nucleus and mammillary bodies. It is labelled as an aggregate BECAUSE the segmentation cannot separate those parts; naming any one of them here would be wrong."
     },
     "VERTEBRAL_CANAL": {
       "canonical_id": "VERTEBRAL_CANAL",

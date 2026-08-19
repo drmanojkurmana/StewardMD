@@ -1,8 +1,8 @@
 {
  "id": "mri-brain-axial",
  "provenance": {
-  "images": "Courtesy of the U.S. National Library of Medicine",
-  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "images": "",
+  "licence": "CC0 1.0 Public Domain Dedication (OpenNeuro default for uploaded datasets)",
   "definitions": "Gray's Anatomy (1918)",
   "geometry": "SynthSeg v1.0 (Apache-2.0, weights shipped IN the SynthSeg repository - the 2.0/robust/parc weights come from a separate link with no licence statement and are NOT used) run on OpenNeuro ds003563, a LIVING subject's 0.6 mm isotropic 7T MPRAGE T1. That dataset declares \"License\": \"CC0\" in its own dataset_description.json - verified there, not assumed from OpenNeuro's default. CC0 places no restriction on use, commercial included, and requires no attribution. Run on a 31 GB VM; it OOMs on an 8 GB laptop.",
   "clearedOn": "2026-08-17"
@@ -48,6 +48,18 @@
    "parent": "brain",
    "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
   },
+  "cerebellar-cortex": {
+   "name": "Cerebellar cortex",
+   "category": "grey",
+   "parent": "cerebellum",
+   "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia so that its surface area greatly exceeds that of the cerebral cortex relative to its volume."
+  },
+  "cerebellar-white-matter": {
+   "name": "Cerebellar white matter",
+   "category": "white",
+   "parent": "cerebellum",
+   "definition": "The central white core of the cerebellum, which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
+  },
   "cerebellum": {
    "name": "Cerebellum",
    "category": "grey",
@@ -90,6 +102,12 @@
    "parent": "brain",
    "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
   },
+  "nucleus-accumbens": {
+   "name": "Nucleus accumbens",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum."
+  },
   "putamen": {
    "name": "Putamen",
    "category": "deep-grey",
@@ -107,6 +125,12 @@
    "category": "csf",
    "parent": "brain",
    "definition": "The third ventricle is a narrow median cleft between the two thalami."
+  },
+  "ventral-diencephalon": {
+   "name": "Ventral diencephalon",
+   "category": "deep-grey",
+   "parent": "brain",
+   "definition": "A COMPOSITE region, not a single named organ: the ventral diencephalic grey lying below the thalamus, which at this resolution includes the hypothalamus together with the subthalamic nucleus, substantia nigra, red nucleus and mammillary bodies. It is labelled as an aggregate BECAUSE the segmentation cannot separate those parts; naming any one of them here would be wrong."
   }
  },
  "slices": [
@@ -639,12 +663,17 @@
      "y": 80.0
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 30.4,
+     "y": 58.5
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 48.2,
      "y": 65.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 48.2,
      "y": 69.4
     },
@@ -684,6 +713,16 @@
      "y": 60.7
     },
     {
+     "s": "nucleus-accumbens",
+     "x": 44.5,
+     "y": 38.3
+    },
+    {
+     "s": "ventral-diencephalon",
+     "x": 45.9,
+     "y": 51.5
+    },
+    {
      "s": "cerebral-white-matter",
      "x": 60.0,
      "y": 30.0
@@ -704,12 +743,17 @@
      "y": 64.1
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 69.3,
+     "y": 57.2
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 49.9,
      "y": 65.0
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 50.2,
      "y": 69.4
     },
@@ -732,6 +776,16 @@
      "s": "hippocampus",
      "x": 66.4,
      "y": 60.4
+    },
+    {
+     "s": "nucleus-accumbens",
+     "x": 54.9,
+     "y": 38.3
+    },
+    {
+     "s": "ventral-diencephalon",
+     "x": 53.7,
+     "y": 51.7
     }
    ]
   },
@@ -766,17 +820,32 @@
      "y": 85.3
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 26.6,
+     "y": 49.7
+    },
+    {
+     "s": "lateral-ventricle",
+     "x": 31.4,
+     "y": 46.4
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 42.9,
      "y": 62.1
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 46.1,
      "y": 69.4
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 49.1,
+     "y": 65.1
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 39.4,
      "y": 66.2
     },
@@ -799,6 +868,11 @@
      "s": "amygdala",
      "x": 35.7,
      "y": 43.7
+    },
+    {
+     "s": "ventral-diencephalon",
+     "x": 44.0,
+     "y": 49.9
     },
     {
      "s": "cerebral-white-matter",
@@ -826,17 +900,22 @@
      "y": 38.6
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 65.6,
+     "y": 46.5
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 54.7,
      "y": 65.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 50.9,
      "y": 67.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 59.4,
      "y": 66.1
     },
@@ -849,6 +928,11 @@
      "s": "amygdala",
      "x": 62.3,
      "y": 43.4
+    },
+    {
+     "s": "ventral-diencephalon",
+     "x": 55.6,
+     "y": 49.9
     }
    ]
   },
@@ -883,24 +967,59 @@
      "y": 83.5
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 32.2,
+     "y": 44.6
+    },
+    {
+     "s": "cerebellar-white-matter",
+     "x": 31.6,
+     "y": 71.3
+    },
+    {
+     "s": "cerebellar-white-matter",
+     "x": 33.9,
+     "y": 72.2
+    },
+    {
+     "s": "cerebellar-white-matter",
+     "x": 36.8,
+     "y": 74.3
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 40.5,
      "y": 55.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 40.8,
+     "y": 75.4
+    },
+    {
+     "s": "cerebellar-white-matter",
+     "x": 42.6,
+     "y": 71.3
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 44.8,
      "y": 65.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 23.7,
      "y": 70.9
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 49.1,
      "y": 63.6
+    },
+    {
+     "s": "cerebellar-cortex",
+     "x": 49.1,
+     "y": 66.5
     },
     {
      "s": "fourth-ventricle",
@@ -948,22 +1067,42 @@
      "y": 39.3
     },
     {
-     "s": "cerebellum",
+     "s": "lateral-ventricle",
+     "x": 67.4,
+     "y": 43.7
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 54.9,
      "y": 66.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 59.2,
      "y": 54.5
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 59.4,
+     "y": 64.7
+    },
+    {
+     "s": "cerebellar-white-matter",
+     "x": 62.2,
+     "y": 61.2
+    },
+    {
+     "s": "cerebellar-cortex",
+     "x": 50.9,
+     "y": 63.4
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 50.9,
      "y": 66.4
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 68.9,
      "y": 69.6
     },
@@ -995,17 +1134,17 @@
      "y": 42.9
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 25.0,
      "y": 77.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 37.1,
      "y": 64.5
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 41.5,
      "y": 81.6
     },
@@ -1030,17 +1169,22 @@
      "y": 34.3
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 62.9,
      "y": 62.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 69.4,
      "y": 76.5
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 72.2,
+     "y": 72.4
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 76.1,
      "y": 65.0
     }
@@ -1057,17 +1201,27 @@
      "y": 39.5
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 27.1,
+     "y": 70.5
+    },
+    {
+     "s": "cerebellar-white-matter",
      "x": 30.1,
      "y": 67.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 36.4,
      "y": 65.2
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
+     "x": 42.6,
+     "y": 66.3
+    },
+    {
+     "s": "cerebellar-cortex",
      "x": 38.1,
      "y": 77.6
     },
@@ -1092,17 +1246,17 @@
      "y": 40.2
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 60.1,
      "y": 73.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-white-matter",
      "x": 67.7,
      "y": 66.7
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 61.6,
      "y": 80.1
     }
@@ -1114,7 +1268,7 @@
    "aspect": 0.7644,
    "pins": [
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 32.5,
      "y": 70.5
     },
@@ -1129,7 +1283,7 @@
      "y": 60.8
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 67.2,
      "y": 69.1
     }
@@ -1146,7 +1300,7 @@
      "y": 62.8
     },
     {
-     "s": "cerebellum",
+     "s": "cerebellar-cortex",
      "x": 59.5,
      "y": 65.9
     }

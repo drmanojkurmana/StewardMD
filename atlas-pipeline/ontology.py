@@ -43,6 +43,9 @@ REGION = {
     "cerebral-white-matter": "BRAIN", "corpus-callosum": "BRAIN",
     "corona-radiata": "BRAIN", "internal-capsule": "BRAIN", "fornix": "BRAIN",
     "cerebellum": "BRAIN", "brainstem": "BRAIN", "thalamus": "BRAIN",
+    # added 2026-08-19: SynthSeg already separated these; they were being discarded.
+    "cerebellar-cortex": "BRAIN", "cerebellar-white-matter": "BRAIN",
+    "nucleus-accumbens": "BRAIN", "ventral-diencephalon": "BRAIN",
     "caudate-nucleus": "BRAIN", "putamen": "BRAIN", "globus-pallidus": "BRAIN",
     "hippocampus": "BRAIN", "amygdala": "BRAIN", "insula": "BRAIN",
     "frontal-lobe": "BRAIN", "parietal-lobe": "BRAIN", "temporal-lobe": "BRAIN",

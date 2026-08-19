@@ -112,6 +112,30 @@
       "category": "csf",
       "parent": "brain",
       "definition": "The third ventricle is a narrow median cleft between the two thalami."
+    },
+    "cerebellar-cortex": {
+      "name": "Cerebellar cortex",
+      "category": "grey",
+      "parent": "cerebellum",
+      "definition": "The cerebellar cortex is the thin grey mantle covering the cerebellum, thrown into closely set transverse folia so that its surface area greatly exceeds that of the cerebral cortex relative to its volume."
+    },
+    "cerebellar-white-matter": {
+      "name": "Cerebellar white matter",
+      "category": "white",
+      "parent": "cerebellum",
+      "definition": "The central white core of the cerebellum, which sends a branching sheet into each folium; the branching pattern seen on a median section is termed the arbor vitae."
+    },
+    "nucleus-accumbens": {
+      "name": "Nucleus accumbens",
+      "category": "deep-grey",
+      "parent": "brain",
+      "definition": "A grey mass lying where the head of the caudate nucleus and the putamen become continuous beneath the anterior limb of the internal capsule, forming the ventral part of the striatum."
+    },
+    "ventral-diencephalon": {
+      "name": "Ventral diencephalon",
+      "category": "deep-grey",
+      "parent": "brain",
+      "definition": "A COMPOSITE region, not a single named organ: the ventral diencephalic grey lying below the thalamus, which at this resolution includes the hypothalamus together with the subthalamic nucleus, substantia nigra, red nucleus and mammillary bodies. It is labelled as an aggregate BECAUSE the segmentation cannot separate those parts; naming any one of them here would be wrong."
     }
   },
   "model_values": {
@@ -140,7 +164,13 @@
     "53": "fs_53",
     "18": "fs_18",
     "54": "fs_54",
-    "24": "fs_24"
+    "24": "fs_24",
+    "5": "fs_5",
+    "26": "fs_26",
+    "28": "fs_28",
+    "44": "fs_44",
+    "58": "fs_58",
+    "60": "fs_60"
   },
   "model_labels": {
     "fs_2": "cerebral-white-matter",
@@ -151,10 +181,10 @@
     "fs_43": "lateral-ventricle",
     "fs_14": "third-ventricle",
     "fs_15": "fourth-ventricle",
-    "fs_7": "cerebellum",
-    "fs_8": "cerebellum",
-    "fs_46": "cerebellum",
-    "fs_47": "cerebellum",
+    "fs_7": "cerebellar-white-matter",
+    "fs_8": "cerebellar-cortex",
+    "fs_46": "cerebellar-white-matter",
+    "fs_47": "cerebellar-cortex",
     "fs_16": "brainstem",
     "fs_10": "thalamus",
     "fs_49": "thalamus",
@@ -168,7 +198,13 @@
     "fs_53": "hippocampus",
     "fs_18": "amygdala",
     "fs_54": "amygdala",
-    "fs_24": "subarachnoid-space"
+    "fs_24": "subarachnoid-space",
+    "fs_26": "nucleus-accumbens",
+    "fs_58": "nucleus-accumbens",
+    "fs_28": "ventral-diencephalon",
+    "fs_60": "ventral-diencephalon",
+    "fs_5": "lateral-ventricle",
+    "fs_44": "lateral-ventricle"
   },
   "_why_caps": "A single axial cut crosses both lateral ventricles and both basal ganglia; identical repeated labels saturate the gutters.",
   "max_pins_per_slice": {
@@ -183,5 +219,6 @@
     "hippocampus": 2,
     "amygdala": 2,
     "subarachnoid-space": 2
-  }
+  },
+  "_geometry_extended_2026_08_19": "Four structures added and one extended from labels ALREADY PRESENT in the same SynthSeg v1.0 output - no new model, no new data, no licence. fs_7/46 and fs_8/47 were both collapsed onto `cerebellum`, discarding the cortex-versus-white-core distinction; they are now split. fs_26/58 (accumbens) and fs_28/60 (ventral diencephalon) were segmented but never mapped. fs_5/44, the inferior (temporal) horn, is merged INTO `lateral-ventricle` rather than declared separately, because the inferior horn is part of that ventricle. `cerebellum` is retained as the parent container and no longer carries pins of its own, exactly as `brain` does."
 }
