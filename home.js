@@ -3487,6 +3487,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // MaiK V2 — retrieval-first KB brain. Default ON; ?kb=0 (or smd_maik_kb=0) forces the legacy
     // Gemini-first path. Independent of account/sign-in — the KB answer is composed locally.
     function maikKB() { try { var q = new URLSearchParams(location.search || "").get("kb"); if (q === "1") return true; if (q === "0") return false; return localStorage.getItem("smd_maik_kb") !== "0"; } catch (e) { return true; } }
+    // LLM-FIRST (default ON): answer every standalone clinical question with Gemini/Vertex, using the KB
+    // as GROUNDING (not as a templated reply), so MaiK reads like a real LLM. Also skips the ~3s semantic
+    // router call, so it is cheaper + faster, not just more fluent. KB stays as the offline fallback.
+    // Revert instantly with ?llm=0 or localStorage smd_maik_llm_first=0 (no redeploy).
+    function maikLLMFirst() { try { var q = new URLSearchParams(location.search || "").get("llm"); if (q === "1") return true; if (q === "0") return false; return localStorage.getItem("smd_maik_llm_first") !== "0"; } catch (e) { return true; } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
@@ -3956,7 +3961,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
           // "not StewardMD-verified") — no tap required. We still don't let the KB model describe
           // a lexically-near but different condition; the web tier researches the ACTUAL topic.
-          if (tm && tm.matched === false && tm.mode !== "assume") {
+          if (!(maikLLMFirst() && !active) && tm && tm.matched === false && tm.mode !== "assume") {   // LLM-first standalone: let Gemini answer off-KB topics directly (skip the slower web-research tier)
             var tp = maikEscH(tm.topic || question);
             think.innerHTML = '<div class="maik-welcome"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
@@ -4111,6 +4116,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
               } catch (e) {}
+            }).catch(function (eGen) {
+              // LLM path failed (offline / provider error). Fall back to the on-device KB so the clinician
+              // still gets an answer instead of a bare "unavailable". Rethrow if the KB has nothing, so the
+              // outer catch shows the graceful message.
+              try { if (window.MaiKKB && !active) { var _kbF = window.MaiKKB.compose(question, pkg, {}); if (_kbF && _kbF.text) { finishKB(_kbF, pkg, "offline"); return; } } } catch (e) {}
+              throw eGen;
             });
           }
           function _askAmbiguous(options, header) {   // genuine ambiguity / underspecified concept → ask, never guess
@@ -4142,7 +4153,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             } catch (e) {}
             return null;
           }
-          var _kbOn = window.MaiKKB && maikKB() && !active;
+          var _kbOn = window.MaiKKB && maikKB() && !active && !maikLLMFirst();   // LLM-first: skip templated-KB short-circuits, answer via Gemini with the KB as grounding
           // ── CLINICAL DIALOGUE MANAGER (above the router): an underspecified BROAD concept (meningitis,
           // diabetes, shock…) must NOT silently answer an arbitrary subtype. Prefer a general overview +
           // subtype drill-down chips; ask ONE clarification only when the KB has no safe general answer.
