@@ -75,6 +75,8 @@ REGION = {
     "iliac-vein": "PELVIS", "gluteal-muscle": "PELVIS", "femur": "LOWER_LIMB", "lower-limb": "LOWER_LIMB",
     "patella": "LOWER_LIMB", "tibia": "LOWER_LIMB", "fibula": "LOWER_LIMB",
     "tarsal": "LOWER_LIMB", "metatarsal": "LOWER_LIMB",
+    "phalanx-foot": "LOWER_LIMB", "foot": "LOWER_LIMB",
+    "hand": "UPPER_LIMB", "hand-bone": "UPPER_LIMB",
     "clavicle": "UPPER_LIMB", "scapula": "UPPER_LIMB", "humerus": "UPPER_LIMB",
     "radius": "UPPER_LIMB", "ulna": "UPPER_LIMB", "carpal": "UPPER_LIMB",
     "metacarpal": "UPPER_LIMB",

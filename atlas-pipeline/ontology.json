@@ -607,11 +607,39 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal",
         "ct-knee-axial",
         "ct-knee-coronal",
         "ct-knee-sagittal"
       ],
       "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+    },
+    "FOOT": {
+      "canonical_id": "FOOT",
+      "display_name": "Foot",
+      "aliases": [
+        "foot"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [],
+      "source_dataset": [],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "NOT_AVAILABLE",
+      "validation": "NO_GEOMETRY",
+      "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal"
+      ],
+      "definition": null
     },
     "FORNIX": {
       "canonical_id": "FORNIX",
@@ -787,6 +815,60 @@
         "ct-live-torso-sagittal"
       ],
       "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint."
+    },
+    "HAND": {
+      "canonical_id": "HAND",
+      "display_name": "Hand",
+      "aliases": [
+        "hand"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "UPPER_LIMB",
+      "source_model": [],
+      "source_dataset": [],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "NOT_AVAILABLE",
+      "validation": "NO_GEOMETRY",
+      "modules": [
+        "ct-hand-axial",
+        "ct-hand-coronal",
+        "ct-hand-sagittal"
+      ],
+      "definition": null
+    },
+    "HAND_BONE": {
+      "canonical_id": "HAND_BONE",
+      "display_name": "Bone of the hand",
+      "aliases": [
+        "hand-bone"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "UPPER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-hand-axial",
+        "ct-hand-coronal",
+        "ct-hand-sagittal"
+      ],
+      "definition": "The skeleton of the hand comprises the eight carpal bones of the wrist, five metacarpals, and fourteen phalanges - two in the thumb and three in each of the other digits."
     },
     "HEAD": {
       "canonical_id": "HEAD",
@@ -1332,6 +1414,35 @@
       "definition": "The lungs are the essential organs of respiration, occupying the pleural cavities on either side of the mediastinum. Each is conical, with an apex reaching above the first rib and a concave base resting on the diaphragm.",
       "caveat": "whole organ only on cadaver CT; lobes need living aerated lung"
     },
+    "METATARSAL": {
+      "canonical_id": "METATARSAL",
+      "display_name": "Metatarsal bone",
+      "aliases": [
+        "metatarsal"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal"
+      ],
+      "definition": "The five metatarsal bones are long bones lying between the tarsus and the phalanges, forming the skeleton of the forefoot."
+    },
     "MIDDLE_LOBE_RIGHT": {
       "canonical_id": "MIDDLE_LOBE_RIGHT",
       "display_name": "Middle lobe of right lung",
@@ -1493,6 +1604,35 @@
         "ct-pelvis-sagittal"
       ],
       "definition": null
+    },
+    "PHALANX_FOOT": {
+      "canonical_id": "PHALANX_FOOT",
+      "display_name": "Phalanx of foot",
+      "aliases": [
+        "phalanx-foot"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal"
+      ],
+      "definition": "The phalanges of the foot are fourteen in number, three for each of the lesser toes and two for the great toe."
     },
     "PORTAL_VEIN": {
       "canonical_id": "PORTAL_VEIN",
@@ -1915,6 +2055,35 @@
       ],
       "definition": "The subarachnoid space lies between the arachnoid mater and the pia mater and contains cerebrospinal fluid."
     },
+    "TARSAL": {
+      "canonical_id": "TARSAL",
+      "display_name": "Tarsal bone",
+      "aliases": [
+        "tarsal"
+      ],
+      "modality": [
+        "CT"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "LOWER_LIMB",
+      "source_model": [
+        "classical"
+      ],
+      "source_dataset": [
+        "visible-human"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal"
+      ],
+      "definition": "The tarsus consists of seven bones - the calcaneus, talus, navicular, cuboid and three cuneiforms - forming the posterior half of the foot and the ankle."
+    },
     "TELENCEPHALON": {
       "canonical_id": "TELENCEPHALON",
       "display_name": "Telencephalon",
@@ -2142,6 +2311,9 @@
       "confidence": "GOOD",
       "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
+        "ct-foot-axial",
+        "ct-foot-coronal",
+        "ct-foot-sagittal",
         "ct-knee-axial",
         "ct-knee-coronal",
         "ct-knee-sagittal"
