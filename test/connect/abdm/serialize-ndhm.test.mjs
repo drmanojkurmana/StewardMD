@@ -56,7 +56,12 @@ test("Composition.attester.party is the HFR facility Organization carrying our H
   const party = byUrn.get(comp.attester[0].party.reference);
   assert.ok(party, "attester.party must resolve inside the document");
   assert.equal(party.resourceType, "Organization");
-  assert.deepEqual(party.identifier, [{ system: "https://facilitysbx.ndhm.gov.in", value: "IN2810006668" }]);
+  // NRCES makes Organization.identifier.type min=1, so the facility identifier carries a type as well as
+  // the registry system - without it the Organization does not conform and every reference to it fails.
+  assert.equal(party.identifier.length, 1);
+  assert.equal(party.identifier[0].system, "https://facilitysbx.ndhm.gov.in");
+  assert.equal(party.identifier[0].value, "IN2810006668");
+  assert.equal(party.identifier[0].type.coding[0].code, "PRN");
   assert.equal(facilitySystemFor("production"), "https://facility.ndhm.gov.in");
 });
 

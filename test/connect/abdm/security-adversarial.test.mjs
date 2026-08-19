@@ -291,18 +291,52 @@ test("MALFORMED FHIR: the serializer never throws, so one bad record cannot kill
   }
 });
 
-test("MALFORMED FHIR: no raw attachment bytes can ever leave in a bundle", () => {
+test("ATTACHMENT BYTES: every profile EXCEPT HealthDocumentRecord refuses to carry them", () => {
+  // The old assertion was a blanket "no bytes, ever". That is no longer true, and pretending otherwise
+  // would hide a real widening: NRCES makes DocumentReference.content.attachment.data min=1, so a
+  // HealthDocumentRecord without the scanned bytes is structurally INVALID. The rule is now narrower and
+  // more precise - bytes for that one profile, nothing anywhere else - and this test pins exactly that.
+  const ctx = { now: () => new Date(NOW), tenant: { id: "hospital-a" } };
+  const withScan = (profile) => ({
+    profile, patient: { id: "p1", name: { text: "A" } },
+    documents: [{ id: "d0", text: "summary" },
+                { id: "scan", status: "current", contentType: "application/pdf",
+                  data: "JVBERi0xLjQgc3ludGhldGlj", text: "scanned report" }],
+  });
+
+  for (const profile of ["OPConsultRecord", "PrescriptionRecord", "DiagnosticReportRecord",
+                         "DischargeSummaryRecord", "WellnessRecord"]) {
+    const json = JSON.stringify(serializeNdhm(ctx, withScan(profile)));
+    assert.ok(!json.includes("JVBERi0xLjQgc3ludGhldGlj"), profile + " must NOT carry attachment bytes");
+    assert.ok(!/"data":/.test(json), profile + " must have no data element at all");
+  }
+
+  // …and HealthDocumentRecord, where the document IS the payload, does - and is valid because of it.
+  const hdr = serializeNdhm(ctx, withScan("HealthDocumentRecord"));
+  const json = JSON.stringify(hdr);
+  assert.ok(json.includes("JVBERi0xLjQgc3ludGhldGlj"), "a health-document record carries its document");
+  assert.equal(validateNdhmDoc(hdr).ok, true, JSON.stringify(validateNdhmDoc(hdr).errors));
+});
+
+test("ATTACHMENT BYTES: a HealthDocumentRecord with NO scanned bytes is REFUSED, not emitted hollow", () => {
   const ctx = { now: () => new Date(NOW), tenant: { id: "hospital-a" } };
   const doc = serializeNdhm(ctx, {
     profile: "HealthDocumentRecord", patient: { id: "p1", name: { text: "A" } },
-    documents: [{ id: "d0", text: "summary" },
-                { id: "d1", text: "scan", data: "QUJDRA==", url: "data:image/png;base64,QUJDRA==" }],
+    documents: [{ id: "d0", text: "summary" }],                 // narrative only, no bytes
   });
-  const v = validateNdhmDoc(doc);
-  const json = JSON.stringify(doc);
-  assert.ok(!json.includes("QUJDRA=="), "inline bytes must never be serialised");
-  assert.ok(!/"data":/.test(json));
-  assert.equal(v.ok, true, "…and the by-reference document is still valid: " + JSON.stringify(v.errors));
+  assert.equal(validateNdhmDoc(doc).ok, false,
+    "the HIU would otherwise see a care context that resolves to an empty document");
+});
+
+test("ATTACHMENT BYTES: a data: URI is refused everywhere, including HealthDocumentRecord", () => {
+  const ctx = { now: () => new Date(NOW), tenant: { id: "hospital-a" } };
+  const doc = serializeNdhm(ctx, {
+    profile: "HealthDocumentRecord", patient: { id: "p1", name: { text: "A" } },
+    documents: [{ id: "d0", text: "s" },
+                { id: "scan", status: "current", contentType: "application/pdf",
+                  data: "JVBER", url: "data:application/pdf;base64,JVBER", text: "x" }],
+  });
+  assert.ok(!JSON.stringify(doc).includes("data:application/pdf"), "a data: URI is never serialised");
 });
 
 // ── PHI / secret leakage ────────────────────────────────────────────────────────────────────────────

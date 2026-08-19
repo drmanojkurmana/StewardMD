@@ -1,0 +1,339 @@
+===== fhir/DiagnosticReportRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/DiagnosticReportRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.344)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.913)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.602)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:02.043)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.298)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.148)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.418)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:08.127)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.207)
+Validating
+  Validate fhir/DiagnosticReportRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:01.900
+Done. Times: Loading: 00:21.248, validation: 00:01.900. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/DiagnosticReportRecord.json 02:34:21
+[-1, -1] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.result[0]: Warning - URN reference is not locally contained within the bundle urn:uuid:421d0bce-39f0-4943-b32b-c32fadf53382
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#721981007)
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Warning - Unable to check whether the code is in the value set https://nrces.in/ndhm/fhir/r4/ValueSet/ndhm-diagnostic-report-type|6.5.0
+[94, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[126, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[141, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[154, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[166, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[188, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[203, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[225, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[240, 5] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[244, 6] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
+[273, 8] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:21.248, validation: 00:01.900. Max Memory = 4Gb
+exit=0
+===== fhir/DischargeSummaryRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/DischargeSummaryRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.270)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.826)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.723)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.971)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.294)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.410)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:02.527)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:08.527)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.170)
+Validating
+  Validate fhir/DischargeSummaryRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:01.947
+Done. Times: Loading: 00:22.867, validation: 00:01.947. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/DischargeSummaryRecord.json 02:34:44
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#373942005)
+[56, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[0]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord|6.5.0
+[65, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[1]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord|6.5.0
+[74, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[2]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord|6.5.0
+[87, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[3]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/DischargeSummaryRecord|6.5.0
+[137, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[169, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[184, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[197, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[209, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[231, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[246, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[268, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[283, 5] Bundle.entry[5].resource/*Encounter/enc-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[298, 8] Bundle.entry[5].resource/*Encounter/enc-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[313, 5] Bundle.entry[6].resource/*Condition/cond-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[341, 8] Bundle.entry[6].resource/*Condition/cond-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[356, 5] Bundle.entry[7].resource/*AllergyIntolerance/alg-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[385, 8] Bundle.entry[7].resource/*AllergyIntolerance/alg-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[400, 5] Bundle.entry[8].resource/*MedicationRequest/med-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[424, 8] Bundle.entry[8].resource/*MedicationRequest/med-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[439, 5] Bundle.entry[9].resource/*MedicationStatement/med-2*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[457, 8] Bundle.entry[9].resource/*MedicationStatement/med-2*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[469, 5] Bundle.entry[10].resource/*Observation/obs-hb*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[469, 5] Bundle.entry[10].resource/*Observation/obs-hb*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[469, 5] Bundle.entry[10].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[507, 8] Bundle.entry[10].resource/*Observation/obs-hb*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[522, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[522, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[522, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[522, 5] Bundle.entry[11].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[522, 5] Bundle.entry[11].resource: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[547, 8] Bundle.entry[11].resource/*Observation/obs-note*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[562, 5] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[566, 6] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
+[595, 8] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:22.867, validation: 00:01.947. Max Memory = 4Gb
+exit=0
+===== fhir/HealthDocumentRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/HealthDocumentRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.321)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:03.465)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.790)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.961)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.284)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.123)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.448)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:08.410)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.168)
+Validating
+  Validate fhir/HealthDocumentRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:02.679
+Done. Times: Loading: 00:22.117, validation: 00:02.679. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/HealthDocumentRecord.json 02:35:09
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#419891008)
+[94, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[126, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[141, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[154, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[166, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[188, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[203, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[225, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[240, 5] Bundle.entry[5].resource/*DocumentReference/scan-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[251, 40] Bundle.entry[5].resource/*DocumentReference/scan-1*/.content[0].attachment.contentType: Warning - The value provided ('application/pdf') could not be validated because the code system urn:ietf:bcp:13 is not known
+[258, 8] Bundle.entry[5].resource/*DocumentReference/scan-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:22.117, validation: 00:02.679. Max Memory = 4Gb
+exit=0
+===== fhir/OPConsultRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/OPConsultRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.358)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.784)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.746)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.965)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.300)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.026)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.449)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:08.526)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.197)
+Validating
+  Validate fhir/OPConsultRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:02.012
+Done. Times: Loading: 00:21.505, validation: 00:02.013. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/OPConsultRecord.json 02:35:34
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#371530004)
+[56, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[0]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord|6.5.0
+[65, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[1]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord|6.5.0
+[74, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[2]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord|6.5.0
+[87, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[3]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord|6.5.0
+[100, 7] Bundle.entry[0].resource/*Composition/comp-ds*/.section[4]: Information - This element does not match any known slice defined in the profile https://nrces.in/ndhm/fhir/r4/StructureDefinition/OPConsultRecord|6.5.0
+[142, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[174, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[189, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[202, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[214, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[236, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[251, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[273, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[288, 5] Bundle.entry[5].resource/*Encounter/enc-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[303, 8] Bundle.entry[5].resource/*Encounter/enc-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[318, 5] Bundle.entry[6].resource/*Condition/cond-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[346, 8] Bundle.entry[6].resource/*Condition/cond-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[361, 5] Bundle.entry[7].resource/*AllergyIntolerance/alg-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[390, 8] Bundle.entry[7].resource/*AllergyIntolerance/alg-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[405, 5] Bundle.entry[8].resource/*MedicationRequest/med-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[429, 8] Bundle.entry[8].resource/*MedicationRequest/med-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[444, 5] Bundle.entry[9].resource/*MedicationStatement/med-2*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[462, 8] Bundle.entry[9].resource/*MedicationStatement/med-2*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[474, 5] Bundle.entry[10].resource/*Observation/obs-hb*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[474, 5] Bundle.entry[10].resource/*Observation/obs-hb*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[474, 5] Bundle.entry[10].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[512, 8] Bundle.entry[10].resource/*Observation/obs-hb*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[527, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[527, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[527, 5] Bundle.entry[11].resource/*Observation/obs-note*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[527, 5] Bundle.entry[11].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[527, 5] Bundle.entry[11].resource: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[552, 8] Bundle.entry[11].resource/*Observation/obs-note*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[567, 5] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[571, 6] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
+[600, 8] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:21.505, validation: 00:02.013. Max Memory = 4Gb
+exit=0
+===== fhir/PrescriptionRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/PrescriptionRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.261)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.871)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.841)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.977)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.304)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.052)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.474)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:09.075)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.224)
+Validating
+  Validate fhir/PrescriptionRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:02.246
+Done. Times: Loading: 00:22.232, validation: 00:02.246. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/PrescriptionRecord.json 02:35:58
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#440545006)
+[94, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[126, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[141, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[154, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[166, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[188, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[203, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[225, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[240, 5] Bundle.entry[5].resource/*MedicationRequest/med-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[264, 8] Bundle.entry[5].resource/*MedicationRequest/med-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:22.232, validation: 00:02.246. Max Memory = 4Gb
+exit=0
+===== fhir/WellnessRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/WellnessRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.536)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.628)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.612)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.973)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.299)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:00.975)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.460)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:08.310)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.186)
+Validating
+  Validate fhir/WellnessRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:01.897
+Done. Times: Loading: 00:21.193, validation: 00:01.897. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/WellnessRecord.json 02:36:23
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[91, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[123, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[138, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[151, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[163, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[185, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[200, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[222, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[237, 5] Bundle.entry[5].resource/*Observation/obs-hb*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[237, 5] Bundle.entry[5].resource/*Observation/obs-hb*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[237, 5] Bundle.entry[5].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[275, 8] Bundle.entry[5].resource/*Observation/obs-hb*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[290, 5] Bundle.entry[6].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[290, 5] Bundle.entry[6].resource/*Observation/obs-note*/: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[290, 5] Bundle.entry[6].resource/*Observation/obs-note*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[290, 5] Bundle.entry[6].resource: Warning - Best Practice Recommendation: In general, all observations should have a performer
+[290, 5] Bundle.entry[6].resource: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
+[315, 8] Bundle.entry[6].resource/*Observation/obs-note*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:21.193, validation: 00:01.897. Max Memory = 4Gb
+exit=0
+ALL DONE
