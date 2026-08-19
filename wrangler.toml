@@ -131,6 +131,7 @@ compatibility_date = "2026-06-28"
 
 [env.production.vars]
 AI_PROVIDER = "developer"   # MaiK on Developer API (fast). NOT "azure" (slow, MaiK-only). Named envs don't inherit top-level [vars], so it must be set here too.
+MAIK_AI_TIMEOUT_MS = "22000"   # hard per-request ceiling so MaiK fails fast instead of buffering ~100s through a provider chain
 FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
 OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com,stewardmd.in@gmail.com"
