@@ -1,0 +1,1683 @@
+{
+ "id": "ct-live-torso-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "EXPERT MASKS SUPPLIED WITH THE DATASET - no segmentation model was run. Subject s0108 of the TotalSegmentator dataset v2.0.1 (Zenodo 10047292), CC BY 4.0: a LIVING patient, study type 'ct neck-thorax-abdomen-pelvis', pathology field 'no_pathology', Siemens 100 kVp, resampled to 1.5 mm isotropic by the dataset authors. Masks were drawn and reviewed by the dataset's authors, not by us.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "gi-tract": {
+   "label": "GI tract",
+   "color": "#c9a06a"
+  },
+  "vessel-artery": {
+   "label": "Artery",
+   "color": "#ff8080"
+  },
+  "vessel-vein": {
+   "label": "Vein",
+   "color": "#8fb8ff"
+  },
+  "urinary": {
+   "label": "Urinary",
+   "color": "#7fd9e8"
+  },
+  "airway": {
+   "label": "Airway",
+   "color": "#7ee081"
+  },
+  "muscle": {
+   "label": "Muscle",
+   "color": "#e0a0c0"
+  },
+  "csf": {
+   "label": "Cord",
+   "color": "#b0c4de"
+  }
+ },
+ "structures": {
+  "adrenal-gland": {
+   "name": "Adrenal gland",
+   "category": "viscus",
+   "parent": "torso",
+   "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys."
+  },
+  "aorta": {
+   "name": "Aorta",
+   "category": "vessel-artery",
+   "parent": "torso",
+   "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+  },
+  "autochthonous-back-muscle": {
+   "name": "Deep back muscles",
+   "category": "muscle",
+   "parent": "torso",
+   "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+  },
+  "colon": {
+   "name": "Colon",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+  },
+  "duodenum": {
+   "name": "Duodenum",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas."
+  },
+  "esophagus": {
+   "name": "Oesophagus",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+  },
+  "gallbladder": {
+   "name": "Gallbladder",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver."
+  },
+  "gluteal-muscle": {
+   "name": "Gluteal muscles",
+   "category": "muscle",
+   "parent": "torso",
+   "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint."
+  },
+  "heart": {
+   "name": "Heart",
+   "category": "viscus",
+   "parent": "torso",
+   "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+  },
+  "iliac-artery": {
+   "name": "Iliac artery",
+   "category": "vessel-artery",
+   "parent": "torso",
+   "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries."
+  },
+  "iliac-vein": {
+   "name": "Iliac vein",
+   "category": "vessel-vein",
+   "parent": "torso",
+   "definition": "The common iliac veins unite to form the inferior vena cava."
+  },
+  "iliopsoas": {
+   "name": "Iliopsoas",
+   "category": "muscle",
+   "parent": "torso",
+   "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+  },
+  "inferior-vena-cava": {
+   "name": "Inferior vena cava",
+   "category": "vessel-vein",
+   "parent": "torso",
+   "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+  },
+  "kidney": {
+   "name": "Kidney",
+   "category": "urinary",
+   "parent": "torso",
+   "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum."
+  },
+  "liver": {
+   "name": "Liver",
+   "category": "viscus",
+   "parent": "torso",
+   "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+  },
+  "lower-lobe-left": {
+   "name": "Lower lobe of left lung",
+   "category": "airway",
+   "parent": "torso",
+   "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+  },
+  "lower-lobe-right": {
+   "name": "Lower lobe of right lung",
+   "category": "airway",
+   "parent": "torso",
+   "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+  },
+  "middle-lobe-right": {
+   "name": "Middle lobe of right lung",
+   "category": "airway",
+   "parent": "torso",
+   "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+  },
+  "pancreas": {
+   "name": "Pancreas",
+   "category": "viscus",
+   "parent": "torso",
+   "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach."
+  },
+  "portal-vein": {
+   "name": "Portal vein",
+   "category": "vessel-vein",
+   "parent": "torso",
+   "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver."
+  },
+  "prostate": {
+   "name": "Prostate",
+   "category": "urinary",
+   "parent": "torso",
+   "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra."
+  },
+  "small-bowel": {
+   "name": "Small bowel",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+  },
+  "spinal-cord": {
+   "name": "Spinal cord",
+   "category": "csf",
+   "parent": "torso",
+   "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+  },
+  "spleen": {
+   "name": "Spleen",
+   "category": "viscus",
+   "parent": "torso",
+   "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm."
+  },
+  "stomach": {
+   "name": "Stomach",
+   "category": "gi-tract",
+   "parent": "torso",
+   "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum."
+  },
+  "torso": {
+   "name": "Torso",
+   "category": "viscus"
+  },
+  "upper-lobe-left": {
+   "name": "Upper lobe of left lung",
+   "category": "airway",
+   "parent": "torso",
+   "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+  },
+  "urinary-bladder": {
+   "name": "Urinary bladder",
+   "category": "urinary",
+   "parent": "torso",
+   "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-live-torso-sagittal/001.webp",
+   "aspect": 0.7233,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-live-torso-sagittal/002.webp",
+   "aspect": 0.7233,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-live-torso-sagittal/003.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "gluteal-muscle",
+     "x": 67.2,
+     "y": 80.3
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-live-torso-sagittal/004.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "lower-lobe-left",
+     "x": 50.3,
+     "y": 10.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 68.5,
+     "y": 78.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 60.9,
+     "y": 70.3
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-live-torso-sagittal/005.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "spleen",
+     "x": 46.5,
+     "y": 26.5
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 35.4,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 54.2,
+     "y": 0.0
+    },
+    {
+     "s": "colon",
+     "x": 46.8,
+     "y": 40.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 72.2,
+     "y": 96.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 55.5,
+     "y": 69.4
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-live-torso-sagittal/006.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "spleen",
+     "x": 52.2,
+     "y": 24.1
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 28.2,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 61.1,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 40.9,
+     "y": 44.8
+    },
+    {
+     "s": "colon",
+     "x": 32.2,
+     "y": 34.7
+    },
+    {
+     "s": "colon",
+     "x": 54.9,
+     "y": 41.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 73.1,
+     "y": 100.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 45.2,
+     "y": 71.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 62.5,
+     "y": 59.7
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 48.3,
+     "y": 65.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 47.8,
+     "y": 87.0
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-live-torso-sagittal/007.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "spleen",
+     "x": 58.2,
+     "y": 17.7
+    },
+    {
+     "s": "kidney",
+     "x": 62.0,
+     "y": 31.8
+    },
+    {
+     "s": "stomach",
+     "x": 39.4,
+     "y": 12.1
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 23.2,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 65.1,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 42.2,
+     "y": 35.6
+    },
+    {
+     "s": "colon",
+     "x": 24.0,
+     "y": 18.8
+    },
+    {
+     "s": "colon",
+     "x": 30.2,
+     "y": 30.4
+    },
+    {
+     "s": "colon",
+     "x": 58.0,
+     "y": 44.8
+    },
+    {
+     "s": "portal-vein",
+     "x": 46.3,
+     "y": 23.7
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 74.8,
+     "y": 97.9
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 68.2,
+     "y": 59.8
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 58.8,
+     "y": 67.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 38.8,
+     "y": 75.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 51.2,
+     "y": 56.7
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-live-torso-sagittal/008.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "spleen",
+     "x": 60.8,
+     "y": 16.4
+    },
+    {
+     "s": "kidney",
+     "x": 65.1,
+     "y": 27.7
+    },
+    {
+     "s": "stomach",
+     "x": 40.6,
+     "y": 12.0
+    },
+    {
+     "s": "pancreas",
+     "x": 44.6,
+     "y": 21.2
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 23.7,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 66.2,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 32.3,
+     "y": 24.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 35.2,
+     "y": 56.1
+    },
+    {
+     "s": "colon",
+     "x": 20.6,
+     "y": 16.7
+    },
+    {
+     "s": "colon",
+     "x": 50.6,
+     "y": 56.0
+    },
+    {
+     "s": "portal-vein",
+     "x": 45.2,
+     "y": 22.7
+    },
+    {
+     "s": "portal-vein",
+     "x": 51.8,
+     "y": 19.7
+    },
+    {
+     "s": "iliac-artery",
+     "x": 38.0,
+     "y": 88.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 77.2,
+     "y": 98.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 74.2,
+     "y": 57.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 82.3,
+     "y": 19.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 40.8,
+     "y": 75.8
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-live-torso-sagittal/009.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "spleen",
+     "x": 60.2,
+     "y": 13.9
+    },
+    {
+     "s": "kidney",
+     "x": 55.4,
+     "y": 39.6
+    },
+    {
+     "s": "stomach",
+     "x": 39.4,
+     "y": 11.7
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 13.4,
+     "y": 0.0
+    },
+    {
+     "s": "upper-lobe-left",
+     "x": 32.6,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 66.8,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 26.9,
+     "y": 45.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 28.2,
+     "y": 24.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 44.2,
+     "y": 40.9
+    },
+    {
+     "s": "colon",
+     "x": 21.4,
+     "y": 18.4
+    },
+    {
+     "s": "colon",
+     "x": 35.8,
+     "y": 68.4
+    },
+    {
+     "s": "heart",
+     "x": 20.2,
+     "y": 0.0
+    },
+    {
+     "s": "portal-vein",
+     "x": 48.9,
+     "y": 22.7
+    },
+    {
+     "s": "iliac-artery",
+     "x": 38.6,
+     "y": 75.6
+    },
+    {
+     "s": "iliac-vein",
+     "x": 38.0,
+     "y": 83.8
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 77.8,
+     "y": 96.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 83.1,
+     "y": 20.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 54.0,
+     "y": 63.5
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-live-torso-sagittal/010.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "kidney",
+     "x": 62.6,
+     "y": 25.3
+    },
+    {
+     "s": "stomach",
+     "x": 35.8,
+     "y": 10.9
+    },
+    {
+     "s": "pancreas",
+     "x": 42.5,
+     "y": 20.6
+    },
+    {
+     "s": "adrenal-gland",
+     "x": 54.5,
+     "y": 17.2
+    },
+    {
+     "s": "adrenal-gland",
+     "x": 57.1,
+     "y": 15.7
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 64.6,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 25.1,
+     "y": 38.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 36.5,
+     "y": 59.2
+    },
+    {
+     "s": "colon",
+     "x": 23.1,
+     "y": 19.8
+    },
+    {
+     "s": "colon",
+     "x": 37.5,
+     "y": 72.1
+    },
+    {
+     "s": "heart",
+     "x": 20.3,
+     "y": 0.0
+    },
+    {
+     "s": "portal-vein",
+     "x": 49.2,
+     "y": 20.6
+    },
+    {
+     "s": "iliac-artery",
+     "x": 46.3,
+     "y": 67.6
+    },
+    {
+     "s": "iliac-vein",
+     "x": 47.4,
+     "y": 70.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 78.5,
+     "y": 92.4
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 80.5,
+     "y": 31.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 57.4,
+     "y": 48.4
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-live-torso-sagittal/011.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 36.3,
+     "y": 6.8
+    },
+    {
+     "s": "stomach",
+     "x": 18.0,
+     "y": 12.1
+    },
+    {
+     "s": "stomach",
+     "x": 27.7,
+     "y": 7.9
+    },
+    {
+     "s": "stomach",
+     "x": 34.2,
+     "y": 10.0
+    },
+    {
+     "s": "stomach",
+     "x": 44.3,
+     "y": 10.3
+    },
+    {
+     "s": "pancreas",
+     "x": 39.2,
+     "y": 17.9
+    },
+    {
+     "s": "adrenal-gland",
+     "x": 52.0,
+     "y": 17.1
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 59.2,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 25.1,
+     "y": 31.4
+    },
+    {
+     "s": "small-bowel",
+     "x": 34.3,
+     "y": 66.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 41.8,
+     "y": 25.5
+    },
+    {
+     "s": "duodenum",
+     "x": 44.9,
+     "y": 27.8
+    },
+    {
+     "s": "colon",
+     "x": 23.8,
+     "y": 22.1
+    },
+    {
+     "s": "colon",
+     "x": 57.5,
+     "y": 75.2
+    },
+    {
+     "s": "urinary-bladder",
+     "x": 46.3,
+     "y": 80.9
+    },
+    {
+     "s": "heart",
+     "x": 19.4,
+     "y": 0.0
+    },
+    {
+     "s": "portal-vein",
+     "x": 45.5,
+     "y": 19.9
+    },
+    {
+     "s": "iliac-artery",
+     "x": 54.6,
+     "y": 54.6
+    },
+    {
+     "s": "iliac-vein",
+     "x": 58.9,
+     "y": 59.8
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 78.9,
+     "y": 88.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 78.6,
+     "y": 35.3
+    },
+    {
+     "s": "iliopsoas",
+     "x": 62.6,
+     "y": 30.9
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-live-torso-sagittal/012.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 30.3,
+     "y": 7.2
+    },
+    {
+     "s": "stomach",
+     "x": 19.2,
+     "y": 14.6
+    },
+    {
+     "s": "stomach",
+     "x": 43.2,
+     "y": 9.1
+    },
+    {
+     "s": "pancreas",
+     "x": 35.8,
+     "y": 16.7
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 40.8,
+     "y": 3.6
+    },
+    {
+     "s": "lower-lobe-left",
+     "x": 51.4,
+     "y": 6.0
+    },
+    {
+     "s": "esophagus",
+     "x": 44.5,
+     "y": 6.2
+    },
+    {
+     "s": "small-bowel",
+     "x": 26.6,
+     "y": 50.8
+    },
+    {
+     "s": "small-bowel",
+     "x": 29.4,
+     "y": 31.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 44.3,
+     "y": 57.2
+    },
+    {
+     "s": "duodenum",
+     "x": 44.6,
+     "y": 33.7
+    },
+    {
+     "s": "colon",
+     "x": 24.3,
+     "y": 25.3
+    },
+    {
+     "s": "colon",
+     "x": 60.3,
+     "y": 83.8
+    },
+    {
+     "s": "colon",
+     "x": 62.8,
+     "y": 75.2
+    },
+    {
+     "s": "urinary-bladder",
+     "x": 44.3,
+     "y": 80.4
+    },
+    {
+     "s": "prostate",
+     "x": 52.0,
+     "y": 87.2
+    },
+    {
+     "s": "heart",
+     "x": 19.4,
+     "y": 0.0
+    },
+    {
+     "s": "aorta",
+     "x": 49.8,
+     "y": 30.0
+    },
+    {
+     "s": "aorta",
+     "x": 54.5,
+     "y": 19.4
+    },
+    {
+     "s": "aorta",
+     "x": 59.4,
+     "y": 1.4
+    },
+    {
+     "s": "portal-vein",
+     "x": 36.6,
+     "y": 22.1
+    },
+    {
+     "s": "iliac-artery",
+     "x": 51.2,
+     "y": 50.8
+    },
+    {
+     "s": "iliac-vein",
+     "x": 54.2,
+     "y": 55.2
+    },
+    {
+     "s": "spinal-cord",
+     "x": 68.8,
+     "y": 52.8
+    },
+    {
+     "s": "spinal-cord",
+     "x": 72.9,
+     "y": 17.9
+    },
+    {
+     "s": "spinal-cord",
+     "x": 74.0,
+     "y": 11.5
+    },
+    {
+     "s": "spinal-cord",
+     "x": 75.8,
+     "y": 3.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 78.0,
+     "y": 39.6
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-live-torso-sagittal/013.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 31.5,
+     "y": 8.5
+    },
+    {
+     "s": "stomach",
+     "x": 20.0,
+     "y": 16.1
+    },
+    {
+     "s": "pancreas",
+     "x": 34.2,
+     "y": 18.1
+    },
+    {
+     "s": "pancreas",
+     "x": 41.5,
+     "y": 25.3
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 49.2,
+     "y": 4.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 27.7,
+     "y": 52.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 30.9,
+     "y": 35.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 35.4,
+     "y": 71.7
+    },
+    {
+     "s": "duodenum",
+     "x": 43.8,
+     "y": 35.5
+    },
+    {
+     "s": "colon",
+     "x": 26.2,
+     "y": 28.7
+    },
+    {
+     "s": "colon",
+     "x": 60.6,
+     "y": 83.9
+    },
+    {
+     "s": "urinary-bladder",
+     "x": 44.9,
+     "y": 80.5
+    },
+    {
+     "s": "prostate",
+     "x": 51.7,
+     "y": 87.0
+    },
+    {
+     "s": "heart",
+     "x": 22.0,
+     "y": 0.0
+    },
+    {
+     "s": "aorta",
+     "x": 55.5,
+     "y": 14.1
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 41.7,
+     "y": 0.0
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 48.3,
+     "y": 38.9
+    },
+    {
+     "s": "portal-vein",
+     "x": 39.4,
+     "y": 20.5
+    },
+    {
+     "s": "iliac-artery",
+     "x": 45.1,
+     "y": 48.6
+    },
+    {
+     "s": "iliac-artery",
+     "x": 43.7,
+     "y": 44.5
+    },
+    {
+     "s": "iliac-vein",
+     "x": 51.1,
+     "y": 52.3
+    },
+    {
+     "s": "spinal-cord",
+     "x": 69.8,
+     "y": 50.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 80.9,
+     "y": 23.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 85.2,
+     "y": 2.2
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-live-torso-sagittal/014.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 28.9,
+     "y": 10.8
+    },
+    {
+     "s": "stomach",
+     "x": 29.5,
+     "y": 20.8
+    },
+    {
+     "s": "pancreas",
+     "x": 40.3,
+     "y": 24.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 15.1,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 58.3,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 34.5,
+     "y": 35.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 37.5,
+     "y": 61.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 39.7,
+     "y": 75.9
+    },
+    {
+     "s": "duodenum",
+     "x": 44.6,
+     "y": 36.0
+    },
+    {
+     "s": "colon",
+     "x": 26.0,
+     "y": 30.8
+    },
+    {
+     "s": "colon",
+     "x": 60.5,
+     "y": 73.9
+    },
+    {
+     "s": "urinary-bladder",
+     "x": 46.8,
+     "y": 79.9
+    },
+    {
+     "s": "heart",
+     "x": 27.8,
+     "y": 0.0
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 40.6,
+     "y": 0.0
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 44.6,
+     "y": 9.0
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 48.3,
+     "y": 44.6
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 48.5,
+     "y": 26.7
+    },
+    {
+     "s": "portal-vein",
+     "x": 40.9,
+     "y": 19.6
+    },
+    {
+     "s": "iliac-artery",
+     "x": 54.2,
+     "y": 55.1
+    },
+    {
+     "s": "iliac-vein",
+     "x": 51.7,
+     "y": 49.6
+    },
+    {
+     "s": "iliac-vein",
+     "x": 56.8,
+     "y": 59.7
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 76.0,
+     "y": 91.3
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 79.2,
+     "y": 34.0
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-live-torso-sagittal/015.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "kidney",
+     "x": 62.0,
+     "y": 20.8
+    },
+    {
+     "s": "liver",
+     "x": 20.2,
+     "y": 12.5
+    },
+    {
+     "s": "adrenal-gland",
+     "x": 51.5,
+     "y": 19.7
+    },
+    {
+     "s": "adrenal-gland",
+     "x": 58.0,
+     "y": 15.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 24.9,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 62.3,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 36.9,
+     "y": 63.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 45.2,
+     "y": 41.8
+    },
+    {
+     "s": "duodenum",
+     "x": 45.8,
+     "y": 29.3
+    },
+    {
+     "s": "colon",
+     "x": 22.0,
+     "y": 29.8
+    },
+    {
+     "s": "inferior-vena-cava",
+     "x": 47.7,
+     "y": 22.1
+    },
+    {
+     "s": "portal-vein",
+     "x": 30.9,
+     "y": 13.5
+    },
+    {
+     "s": "portal-vein",
+     "x": 38.9,
+     "y": 19.6
+    },
+    {
+     "s": "iliac-artery",
+     "x": 47.7,
+     "y": 65.5
+    },
+    {
+     "s": "iliac-vein",
+     "x": 51.1,
+     "y": 68.5
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 76.5,
+     "y": 95.2
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 77.2,
+     "y": 38.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 56.0,
+     "y": 49.7
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-live-torso-sagittal/016.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "kidney",
+     "x": 54.6,
+     "y": 37.4
+    },
+    {
+     "s": "gallbladder",
+     "x": 37.5,
+     "y": 23.8
+    },
+    {
+     "s": "liver",
+     "x": 49.8,
+     "y": 15.4
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 19.1,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 65.4,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 38.2,
+     "y": 43.9
+    },
+    {
+     "s": "colon",
+     "x": 25.7,
+     "y": 30.6
+    },
+    {
+     "s": "portal-vein",
+     "x": 26.6,
+     "y": 14.7
+    },
+    {
+     "s": "portal-vein",
+     "x": 38.6,
+     "y": 18.6
+    },
+    {
+     "s": "iliac-artery",
+     "x": 35.7,
+     "y": 79.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 76.3,
+     "y": 82.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 80.9,
+     "y": 29.6
+    },
+    {
+     "s": "iliopsoas",
+     "x": 53.8,
+     "y": 61.1
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-live-torso-sagittal/017.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "kidney",
+     "x": 66.3,
+     "y": 24.2
+    },
+    {
+     "s": "gallbladder",
+     "x": 33.2,
+     "y": 28.3
+    },
+    {
+     "s": "liver",
+     "x": 26.3,
+     "y": 14.7
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 21.2,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 66.5,
+     "y": 0.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 36.3,
+     "y": 39.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 42.6,
+     "y": 44.2
+    },
+    {
+     "s": "colon",
+     "x": 41.8,
+     "y": 55.2
+    },
+    {
+     "s": "colon",
+     "x": 43.4,
+     "y": 34.5
+    },
+    {
+     "s": "portal-vein",
+     "x": 41.5,
+     "y": 19.4
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 73.4,
+     "y": 83.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 77.5,
+     "y": 58.1
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 73.5,
+     "y": 61.3
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 64.2,
+     "y": 71.0
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 82.2,
+     "y": 19.1
+    },
+    {
+     "s": "iliopsoas",
+     "x": 45.1,
+     "y": 66.0
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-live-torso-sagittal/018.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "kidney",
+     "x": 61.5,
+     "y": 31.7
+    },
+    {
+     "s": "gallbladder",
+     "x": 29.2,
+     "y": 34.0
+    },
+    {
+     "s": "liver",
+     "x": 39.4,
+     "y": 17.9
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 25.1,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 65.4,
+     "y": 0.0
+    },
+    {
+     "s": "colon",
+     "x": 46.9,
+     "y": 47.7
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 74.6,
+     "y": 99.8
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 68.8,
+     "y": 60.8
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 58.6,
+     "y": 67.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 45.5,
+     "y": 92.2
+    },
+    {
+     "s": "iliopsoas",
+     "x": 52.2,
+     "y": 58.0
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-live-torso-sagittal/019.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 41.7,
+     "y": 20.8
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 29.1,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 60.9,
+     "y": 0.0
+    },
+    {
+     "s": "colon",
+     "x": 51.2,
+     "y": 42.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 72.8,
+     "y": 100.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 64.2,
+     "y": 61.0
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 50.5,
+     "y": 72.2
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-live-torso-sagittal/020.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "liver",
+     "x": 46.5,
+     "y": 21.8
+    },
+    {
+     "s": "middle-lobe-right",
+     "x": 35.4,
+     "y": 0.0
+    },
+    {
+     "s": "lower-lobe-right",
+     "x": 54.2,
+     "y": 1.0
+    },
+    {
+     "s": "colon",
+     "x": 50.5,
+     "y": 42.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 70.8,
+     "y": 99.9
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 55.5,
+     "y": 66.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 55.1,
+     "y": 80.2
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-live-torso-sagittal/021.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "lower-lobe-right",
+     "x": 48.8,
+     "y": 11.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 67.5,
+     "y": 81.2
+    },
+    {
+     "s": "gluteal-muscle",
+     "x": 53.1,
+     "y": 75.6
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-live-torso-sagittal/022.webp",
+   "aspect": 0.7233,
+   "pins": [
+    {
+     "s": "gluteal-muscle",
+     "x": 68.0,
+     "y": 82.4
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-live-torso-sagittal/023.webp",
+   "aspect": 0.7233,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-live-torso-sagittal/024.webp",
+   "aspect": 0.7233,
+   "pins": []
+  }
+ ]
+}
