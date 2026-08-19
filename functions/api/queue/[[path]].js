@@ -21,6 +21,7 @@ import { ownerEmails } from "../../_adminauth.js";
 import { CAPS, can, requireCap, roleForActor, capsFor } from "../../_queue_roles.js";
 import * as Q from "../../_queue_engine.js";
 import * as QT from "../../_queue_timeline.js";
+import { vaccineCatalogue, buildImmunisation } from "../../_vaccines.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
@@ -65,7 +66,7 @@ function corsHeaders(request) {
   if (CORS_ORIGINS.indexOf(o) >= 0) { h["Access-Control-Allow-Origin"] = o; h["Access-Control-Allow-Methods"] = "POST, GET, OPTIONS"; h["Access-Control-Allow-Headers"] = "Content-Type, Authorization, X-App-Token, X-Admin-Token, X-Staff-Token"; h["Access-Control-Max-Age"] = "86400"; }
   return h;
 }
-function json(obj, status, request) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request)) }); }
+function json(obj, status, request, extra) { return new Response(JSON.stringify(obj), { status: status || 200, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, corsHeaders(request), extra || {}) }); }
 async function readBody(request) { try { return await request.json(); } catch (e) { return {}; } }
 function today() { try { return new Date().toISOString().slice(0, 10); } catch (e) { return ""; } }
 
@@ -687,11 +688,26 @@ export async function onRequest(context) {
         return json(Object.assign({ ok: true }, await QT.extendTimeline(env, t.id, body.days)), 200, request);
       }
       if (seg === "timeline") {
-        await requireSessionCap(env, actor, s, QT.tlKind(body.kind) === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        const kind = QT.tlKind(body.kind);
+        // An immunisation is gated like PRESCRIBING, not like vitals: once a care context is linked to an
+        // ABHA it can never be withdrawn, so this entry can end up permanently in a national health record.
+        // Widen to EMR_VITALS if nurses should be able to record the doses they administer.
+        await requireSessionCap(env, actor, s, kind === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
-        return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, body.kind, body.text, actor.id)), 200, request);
+        let data = null;
+        if (kind === "immunization") {
+          // The CODE is validated against the IG's value set server-side. A client-supplied code is a
+          // claim, and an unrecognised one would put an invented SNOMED concept into a patient's PHR - so
+          // it is refused rather than stored as free text. The display is taken from the IG, never the body.
+          const built = buildImmunisation(body);
+          if (built.error) return json({ ok: false, error: built.error }, 400, request);
+          data = built.data;
+        }
+        return json(Object.assign({ ok: true }, await QT.appendTimeline(env, s, t, kind, data ? data.text : body.text, actor.id, data)), 200, request);
       }
+      // The picker's options. Static, so it is cacheable; no PHI, and it needs no session.
+      if (seg === "vaccines") return json({ ok: true, catalogue: vaccineCatalogue() }, 200, request, { "Cache-Control": "public, max-age=86400" });
       // Slide-to-checkout: seal + share the timeline, close the patient, call the next.
       if (seg === "checkout") {
         await requireSessionCap(env, actor, s, CAPS.QUEUE_STATUS);

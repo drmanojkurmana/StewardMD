@@ -29,7 +29,7 @@
 //   (c) do not link native OPD visits at all, and offer ABDM only to connected-EMR tenants.
 
 import { coding, codeable, provenance } from "../../canonical/coding.js";
-import { bundle, patient, medicationStatement, observation, documentReference } from "../../canonical/model.js";
+import { bundle, patient, medicationStatement, observation, documentReference, immunization } from "../../canonical/model.js";
 import { careContextRef, parseCareContextRef, careContextDisplay, hiTypesForVisit } from "../carecontext.js";
 
 /** Thrown when the care context is still linked at ABDM but the underlying record has aged out. */
@@ -41,11 +41,13 @@ export class RecordExpired extends Error {
 const KIND_TO_HITYPE = {
   note: "OPConsultation", assessment: "OPConsultation", status: "OPConsultation", move: "OPConsultation",
   medication: "Prescription", vitals: "WellnessRecord", checkout: "OPConsultation",
+  immunization: "ImmunizationRecord",
 };
 
 const HITYPE_TO_RECORD = {
   OPConsultation: "OPConsultRecord", Prescription: "PrescriptionRecord",
   WellnessRecord: "WellnessRecord", DiagnosticReport: "DiagnosticReportRecord",
+  ImmunizationRecord: "ImmunizationRecord",
 };
 
 /** Which HI types a decrypted timeline actually supports. Only what is present. */
@@ -55,7 +57,17 @@ export function hiTypesForTimeline(tl) {
     notes: entries.some((e) => KIND_TO_HITYPE[e.kind] === "OPConsultation") || undefined,
     medications: entries.filter((e) => e.kind === "medication"),
     vitals: entries.some((e) => e.kind === "vitals") || undefined,
+    // Only entries that actually carry a coded vaccine count. An immunisation entry whose structured
+    // payload is missing cannot produce a valid Immunization (vaccineCode and occurrence are both min=1),
+    // so advertising the HI type would promise a care context that fails to load.
+    immunisations: entries.filter(isImmunisation),
   });
+}
+
+/** A timeline entry that can actually become a FHIR Immunization: coded vaccine + a date. */
+function isImmunisation(e) {
+  const d = e && e.kind === "immunization" ? e.data : null;
+  return !!(d && d.vaccineCode && d.vaccineCode.code && (d.occurrenceDateTime || e.ts));
 }
 
 /**
@@ -99,6 +111,21 @@ export function projectTimeline(tl, { tenantId, now } = {}) {
     status: "final",
   }));
 
+  // Immunisations: captured in OPD with a code from the IG's own value set, so the coding is passed through
+  // rather than re-derived. `site`/`route` are absent by design (see the capture path) - NRCES makes their
+  // codings complete-or-absent, and a half-known site is worse than none.
+  const immunisations = entries.filter(isImmunisation).map((e, i) => immunization({
+    id: ref + "-imm-" + i,
+    vaccineCode: codeable({
+      coding: [coding({ system: e.data.vaccineCode.system, code: e.data.vaccineCode.code, display: e.data.vaccineCode.display, kind: "standard" })],
+      text: e.data.vaccineCode.display,
+    }),
+    status: e.data.status || "completed",
+    occurrenceDateTime: e.data.occurrenceDateTime || iso(e.ts),
+    doseNumber: e.data.doseNumber,
+    lotNumber: e.data.lotNumber,
+  }));
+
   // Consultation narrative: notes + assessments, in order, as an unstructured document. ABDM explicitly
   // permits starting with attachment-style bundles before structured coded data.
   const narrative = entries
@@ -114,12 +141,16 @@ export function projectTimeline(tl, { tenantId, now } = {}) {
 
   const record = bundle({
     tenantId, sourceConnector: "native-opd", generatedAt,
-    patient: patientRes, conditions: [], medications, observations, documents,
-    scope: ["Patient", "MedicationRequest", "Observation", "DocumentReference"],
+    patient: patientRes, conditions: [], medications, observations, documents, immunizations: immunisations,
+    scope: ["Patient", "MedicationRequest", "Observation", "DocumentReference"].concat(immunisations.length ? ["Immunization"] : []),
     provenance: [provenance({ resource: "Composition", sourceConnector: "native-opd", sourceId: ref })],
     warnings: [],
   });
-  record.recordType = "OPConsultRecord";
+  // The record type follows what the visit actually holds. A visit with only a vaccination is an
+  // ImmunizationRecord; anything with a consultation stays an OPConsultRecord, which is what the
+  // narrative is.
+  const types = hiTypesForTimeline(tl);
+  record.recordType = HITYPE_TO_RECORD[types[0]] || "OPConsultRecord";
   return record;
 }
 
@@ -127,7 +158,7 @@ const iso = (ms) => new Date(Number(ms) || 0).toISOString();
 
 export const nativeOpdSource = {
   id: "native-opd",
-  hiTypes: ["OPConsultation", "Prescription", "WellnessRecord"],
+  hiTypes: ["OPConsultation", "Prescription", "WellnessRecord", "ImmunizationRecord"],
 
   /**
    * deps.opd.listVisits(env, { tenantId, patientAbhaHash }) -> [{ ticketId, patientAbhaHash, entries,

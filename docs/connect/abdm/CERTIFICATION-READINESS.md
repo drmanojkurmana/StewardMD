@@ -29,7 +29,8 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | SCCM v1.1 immunisations + billing | done | 17 tests, round-trip proven |
 | Link-OTP number lookup | done | 6 tests incl. the cross-tenant guard |
 | Discovery index populated at link | done | 5 tests through the real route |
-| A real bill -> InvoiceRecord | done | 9 tests + HAPI on the emitted bundle |
+| A real bill -> InvoiceRecord | done | 11 tests + HAPI on the emitted bundle |
+| OPD immunisation capture -> ImmunizationRecord | done | 12 tests + HAPI on the emitted bundle |
 | M1 client UI | done | 22 tests |
 
 **Test counts:** ABDM + connect suites **1072/1072**. Client **22/22**. Full-repo sweep unchanged apart from four
@@ -82,10 +83,11 @@ PrescriptionRecord        PASS        HealthDocumentRecord     PASS
 DiagnosticReportRecord    PASS        WellnessRecord           PASS
 ImmunizationRecord        PASS        InvoiceRecord            PASS
 InvoiceRecord-projected   PASS        <- from a REAL clinic bill, not the fixture
-total errors: 0   (all 8 of 8, plus the projection)
+ImmunizationRecord-projected PASS     <- from a REAL OPD vaccination capture
+total errors: 0   (all 8 of 8, plus both projections)
 ```
 
-**A ninth bundle earns its place.** The eight above are serialised from hand-written fixtures, whose ids
+**The two projected bundles earn their place.** The eight above are serialised from hand-written fixtures, whose ids
 happen to be FHIR-legal. `InvoiceRecord-projected` is built from a real `q_invoices` row instead, and it
 **failed with 3 errors** on its first run: FHIR `Resource.id` is `[A-Za-z0-9-.]{1,64}` and the billing store
 mints `inv_<hex>` — an underscore. HAPI rejected the Invoice outright and then failed the section entry
@@ -157,12 +159,12 @@ IG package itself.
     authenticated, tenant-resolved write. A link with no gender or year of birth writes **nothing** and
     reports `discoverable:false`: both discovery arms require those two to corroborate, so such a row could
     never match anything. An index failure does not lose the ABHA binding.
-10b. **Invoices RESOLVED; immunisations have no source.** A real clinic bill now projects to a conformant
-    InvoiceRecord (`hip-sources/clinic-billing.js`, from `q_invoices`), validated by HAPI as an emitted
-    bundle rather than only by our own gate. **Immunisations are a different kind of gap: nothing anywhere
-    in the product records a vaccination**, so there is no data to project. Serving ImmunizationRecord for
-    real needs a vaccination-capture feature first — a product decision, not plumbing. The SCCM resource,
-    serializer, normaliser and validator are all in place for when it exists.
+10b. ~~Nothing populates the new SCCM collections.~~ **BOTH RESOLVED.** A real clinic bill projects to a
+    conformant InvoiceRecord (`hip-sources/clinic-billing.js`, from `q_invoices`), and **OPD immunisation
+    capture now exists** (owner-approved 2026-08-19): a vaccination recorded in the OPD EMR projects through
+    `native-opd.js` to a conformant ImmunizationRecord. Both are validated by HAPI as emitted bundles, not
+    just by our own gate. Vaccine codes are generated from the IG's own `ndhm-vaccine-codes` value set
+    (179 SNOMED concepts, `scripts/gen-vaccines.mjs`) and the server refuses any code outside it.
 10c. `clinic-billing.js` is a projection, not yet a wired HIP source. Advertising a bill as a care context
     needs two decisions it cannot make: whether a bill should be linkable at all (a linked context can
     never be withdrawn), and how it survives the same `q_*` retention conflict `native-opd.js` documents.

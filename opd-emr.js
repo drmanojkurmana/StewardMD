@@ -23,6 +23,7 @@
   }
   function tabsNav(active) {
     var defs = [["profile", "Profile", "person"], ["inv", "Investigations", "science"], ["meds", "Medications", "pill"], ["assess", "Assessment", "clinical_notes"], ["protocol", "Protocol", "account_tree"], ["onco", "ONCqis", "vaccines"]];
+    if (immunFlagOn()) defs.splice(3, 0, ["immun", "Immunisation", "vaccines"]);
     return '<nav class="oe-tabs">' + defs.map(function (t) {
       return '<button class="oe-tab' + (t[0] === active ? " on" : "") + '" data-oe-act="tab:' + t[0] + '">' + ms(t[2]) + "<span>" + t[1] + "</span></button>";
     }).join("") + "</nav>";
@@ -79,7 +80,7 @@
   // ordered, meds prescribed, notes, ER referral) — shown in the patient Profile, newest first. --------
   var TL_ICON = { note: "clinical_notes", medication: "medication", med: "medication", assessment: "assignment",
     investigation: "science", inv: "science", order: "science", vitals: "monitor_heart", checkout: "check_circle",
-    referral: "emergency", er: "emergency" };
+    referral: "emergency", er: "emergency", immunization: "vaccines" };
   function relTime(ts) {
     var d = now() - ts; if (!(d >= 0)) return "";
     var m = Math.floor(d / 60000); if (m < 1) return "just now"; if (m < 60) return m + "m ago";
@@ -159,6 +160,41 @@
     var rows = list.map(function (x) { return '<div class="oe-row"><span class="oe-row-ic">' + ms("medication") + '</span><span class="oe-row-b"><span class="oe-row-t">' + esc([x.drug, x.dose].filter(Boolean).join(" ")) + '</span><span class="oe-row-s">' + esc([x.freq, x.duration, fmtClinicDate(x.ts), x.author].filter(Boolean).join(" · ")) + "</span></span></div>"; }).join("");
     return form + section("pill", "Medications prescribed", list.length + " on record", rows, "No medications recorded yet.");
   }
+  // ---- Immunisation capture -------------------------------------------------------------------------
+  // A vaccination is its own ABDM HI type (ImmunizationRecord), not a prescription, so it gets its own tab
+  // rather than being smuggled into Medications.
+  //
+  // The vaccine list is a plain <select> with two optgroups: browsers already give type-ahead inside a
+  // select, so there is no picker to build. Options come from the SERVER catalogue, which is generated from
+  // the NDHM IG's value set - the client never holds its own copy of a clinical code list.
+  function immunTab(st) {
+    var d = st.immunDraft || {}, cat = st.vaccineCatalogue;
+    if (!cat) return '<div class="oe-draft"><div class="oe-draft-h">' + ms("vaccines") + "<b>Record a vaccination</b></div>" +
+      '<p class="oe-note">Loading the vaccine list…</p></div>';
+    function opt(o, label) { return '<option value="' + esc(o.code) + '"' + (d.vaccineCode === o.code ? " selected" : "") + ">" + esc(label || o.display) + "</option>"; }
+    var sel = '<select class="oe-inp" data-oe-inp="imm-vac"><option value="">Select a vaccine…</option>' +
+      '<optgroup label="India immunisation schedule">' + cat.schedule.map(function (o) { return opt(o, o.label + " — " + o.display); }).join("") + "</optgroup>" +
+      '<optgroup label="All vaccines (' + cat.others.length + ')">' + cat.others.map(function (o) { return opt(o); }).join("") + "</optgroup></select>";
+    var form = '<div class="oe-draft"><div class="oe-draft-h">' + ms("vaccines") + "<b>Record a vaccination</b></div>" +
+      fieldRow("Vaccine", sel, true, !d.vaccineCode) +
+      fieldRow("Dose number", textInp("imm-dose", d.doseNumber, "e.g. 1")) +
+      fieldRow("Batch / lot no.", textInp("imm-lot", d.lotNumber, "Optional, from the vial")) +
+      fieldRow("Given on", textInp("imm-when", d.occurrenceDateTime, "Blank = now (YYYY-MM-DD)")) +
+      fieldRow("Note", textInp("imm-note", d.note, "Optional — site, reaction, who administered")) +
+      '<button class="oe-btn primary" data-oe-act="immun-add">' + ms("add") + "Record vaccination</button>" +
+      '<p class="oe-note">Site and route are recorded in the note for now: the NDHM guide fixes no code list for them, and a half-coded site is rejected by the national validator.</p></div>';
+    var given = (st.timeline || []).filter(function (e) { return e.kind === "immunization"; })
+      .sort(function (a, b) { return (b.ts || 0) - (a.ts || 0); });
+    var rows = given.map(function (e) {
+      var v = (e.data && e.data.vaccineCode) || {};
+      var meta = [e.data && e.data.doseNumber ? "dose " + e.data.doseNumber : "", e.data && e.data.lotNumber ? "lot " + e.data.lotNumber : "", relTime(e.ts), e.by].filter(Boolean).join(" · ");
+      return '<div class="oe-row"><span class="oe-row-ic">' + ms("vaccines") + '</span><span class="oe-row-b">' +
+        '<span class="oe-row-t">' + esc(v.display || e.text || "Vaccination") + '</span>' +
+        '<span class="oe-row-s">' + esc(meta) + "</span></span></div>";
+    }).join("");
+    return form + section("vaccines", "Vaccinations this visit", given.length + " recorded", rows, "No vaccination recorded in this visit yet.");
+  }
+
   function invTab(st) {
     if (usesLocal(st.source)) return clinicInvTab(st);
     var d = st.invDraft || {}, draft = "";
@@ -769,6 +805,7 @@
       else if (active === "assess") body = head + assessTab(st);
       else if (active === "protocol") body = head + protocolTab(st);
       else if (active === "onco") body = head + oncoTab(st);
+      else if (active === "immun") body = head + immunTab(st);
       else body = head + profileTab(st);
     }
     var app = '<div class="oe-app">' + header() + tabsNav(active) + '<div class="oe-canvas">' + body + "</div></div>";
@@ -780,6 +817,9 @@
   // ---- overlay + controller ----------------------------------------------------------------
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr")); } catch (e) { return false; } }
   function writeFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_emr_write")); } catch (e) { return false; } }
+  // Kill switch for immunisation capture. def:true, because this tab only exists inside the OPD EMR
+  // surface, which is itself gated. Turn it off with localStorage smd_opd_immunization=0.
+  function immunFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_opd_immunization")); } catch (e) { return true; } }
   function oncoFlagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_protocols")); } catch (e) { return false; } }
   // EXPERIMENTAL test flag (default OFF): when ON, the workbench ALSO accepts experimental grounded
   // protocols (lifecycleState:draft + experimental:true). "active" is never set by promotion, so real
@@ -825,6 +865,48 @@
         body: JSON.stringify({ sessionId: st.sessionId, ticketId: st.ticketId, kind: kind, text: String(text).slice(0, 1000) }) }).catch(function () {});
     }).catch(function () {});
   }
+  // The catalogue is static and public (no PHI, no session) - fetched once per app load and cached on st.
+  function loadVaccineCatalogue() {
+    if (st.vaccineCatalogue || st._vacLoading) return;
+    st._vacLoading = true;
+    fetch(qBase() + "/api/queue/vaccines")
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { st._vacLoading = false; if (d && d.ok && d.catalogue) { st.vaccineCatalogue = d.catalogue; if (st.tab === "immun") paint(); } })
+      .catch(function () { st._vacLoading = false; });
+  }
+
+  // Record a vaccination. The server re-validates the code against the IG's value set and builds the
+  // stored payload, so this only has to send what the clinician chose - it never composes the coding
+  // itself. A rejected code surfaces as a message rather than a silent no-op.
+  function recordImmunisation() {
+    var d = st.immunDraft || {};
+    if (!d.vaccineCode) { toast("Choose a vaccine first."); return; }
+    if (!st.ticketId || !st.sessionId) { toast("Open the patient from the queue to record a vaccination."); return; }
+    if (!confirm("Record this vaccination in the patient's visit record?")) return;
+    fbTok().then(function (t) {
+      if (!t) { toast("Please sign in again."); return; }
+      return fetch(qBase() + "/api/queue/timeline", {
+        method: "POST", headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({
+          sessionId: st.sessionId, ticketId: st.ticketId, kind: "immunization",
+          vaccineCode: d.vaccineCode, doseNumber: d.doseNumber, lotNumber: d.lotNumber,
+          occurrenceDateTime: d.occurrenceDateTime, note: d.note,
+        }),
+      }).then(function (r) { return r.json().then(function (j) { return { ok: r.ok, j: j }; }); }).then(function (res) {
+        if (!res.ok || !res.j || !res.j.ok) {
+          var e = (res.j && res.j.error) || "failed";
+          toast(e === "unknown_vaccine_code" ? "That vaccine is not in the national code list."
+            : e === "future_date" ? "A vaccination cannot be dated in the future."
+            : e === "bad_dose" ? "Check the dose number."
+            : e === "bad_date" ? "Check the date."
+            : "Could not record the vaccination.");
+          return;
+        }
+        st.immunDraft = {}; loadTimeline(); toast("Vaccination recorded."); paint();
+      });
+    }).catch(function () { toast("Could not record the vaccination."); });
+  }
+
   function assessSummary(v) {
     v = v || {}; var p = [];
     if (v.Chief_complaints_duration) p.push("Complaints: " + v.Chief_complaints_duration);
@@ -956,7 +1038,9 @@
   // free-text field edits update state silently (no repaint) so focus/caret are never lost mid-typing.
   function setField(inp, val) {
     var map = { "inv-dx": ["invDraft", "diagnosis"], "med-route": ["medDraft", "route"], "med-form": ["medDraft", "form"], "med-qty": ["medDraft", "qty"], "med-freq": ["medDraft", "frequency"], "med-dur": ["medDraft", "duration"], "med-remarks": ["medDraft", "remarks"],
-      "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"] };
+      "cinv-name": ["invDraft", "name"], "cinv-note": ["invDraft", "note"], "crx-drug": ["medDraft", "drug"], "crx-dose": ["medDraft", "dose"], "crx-freq": ["medDraft", "frequency"], "crx-dur": ["medDraft", "duration"], "crx-rem": ["medDraft", "remarks"],
+      "imm-vac": ["immunDraft", "vaccineCode"], "imm-dose": ["immunDraft", "doseNumber"], "imm-lot": ["immunDraft", "lotNumber"],
+      "imm-when": ["immunDraft", "occurrenceDateTime"], "imm-note": ["immunDraft", "note"] };
     if (map[inp]) { st[map[inp][0]] = st[map[inp][0]] || {}; st[map[inp][0]][map[inp][1]] = val; return; }
     if (inp.indexOf("assess:") === 0) { var an = inp.slice(7); st.assessVals = st.assessVals || {}; st.assessVals[an] = val; st.assessTouched = st.assessTouched || {}; st.assessTouched[an] = true; return; }
     // Oncology override staging (Phase 4): silent, no repaint (mirrors the assess: fields above) so
@@ -1053,6 +1137,7 @@
       try { if (_localStore && _localStore.addPrescription) _localStore.addPrescription(st.patient.mrn, { drug: rx.drug, dose: rx.dose, freq: rx.frequency, duration: rx.duration, remarks: rx.remarks }, { author: st.author || "" }); } catch (e) {}
       st.medDraft = {}; loadTimeline(); toast("Medication added to the record."); paint(); return;
     }
+    if (cmd === "immun-add") return recordImmunisation();
     if (cmd === "assess-maik") return askMaik();
     if (cmd === "maik-ask") return maikAsk();
     if (cmd === "assess-maik-pro") return askMaikPro();
@@ -1152,7 +1237,7 @@
     switchTab("assess");
   }
 
-  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } }
+  function switchTab(t) { st.tab = t; paint(); if (t === "assess") { if (!st.assessLoaded) loadAssessment(); maybeLoadOncoProtocols(); } if (t === "immun") loadVaccineCatalogue(); }
 
   // Tap a dose-matrix cell: build the drawer PURELY from the plan already in state - no fetch, no
   // write. drugId may itself contain ":" so re-join everything after the cycle number.

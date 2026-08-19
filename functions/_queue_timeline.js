@@ -23,7 +23,7 @@ const LINK_DAYS_DEFAULT = 7;
 const LINK_DAYS_MAX = 30;
 
 // ---- pure helpers -------------------------------------------------------------------------------
-export const TL_KINDS = ["note", "assessment", "medication", "vitals", "status", "move", "checkout"];
+export const TL_KINDS = ["note", "assessment", "medication", "vitals", "status", "move", "checkout", "immunization"];
 export function tlKind(k) { k = String(k || "").toLowerCase(); return TL_KINDS.indexOf(k) > -1 ? k : "note"; }
 // A doctor may extend the link, clamped to [1, 30] days from now.
 export function clampExtendMs(nowMs, days) { const n = (days == null || isNaN(Number(days))) ? LINK_DAYS_DEFAULT : Number(days); const d = Math.max(1, Math.min(LINK_DAYS_MAX, Math.round(n))); return nowMs + d * DAY; }
@@ -31,10 +31,14 @@ export function clampExtendMs(nowMs, days) { const n = (days == null || isNaN(Nu
 export function timelineLive(doc, nowMs) { return !!(doc && doc.linkExpiresAt && nowMs <= doc.linkExpiresAt); }
 
 // ---- append a clinical entry (creates the timeline doc on first write) --------------------------
-export async function appendTimeline(env, session, ticket, kind, text, by) {
+// `data` is an optional STRUCTURED payload (immunisation: the coded vaccine, dose, site, route, lot). It is
+// encrypted like the text, because "this patient received this vaccine" is clinical PHI - the same reason
+// the note text is sealed. Only kinds that need structure carry it; every other kind is unchanged.
+export async function appendTimeline(env, session, ticket, kind, text, by, data) {
   const id = ticket.id;
   const enc = await encPHI(env, String(text || "").slice(0, 4000));
   const entry = { ts: now(), kind: tlKind(kind), by: String(by || "").slice(0, 60), enc: enc };
+  if (data && typeof data === "object") entry.encData = await encPHI(env, JSON.stringify(data).slice(0, 4000));
   const existing = await fsGet(env, "q_timeline/" + id);
   if (!existing) {
     const f = {
@@ -51,11 +55,18 @@ export async function appendTimeline(env, session, ticket, kind, text, by) {
   return { ok: true, count: entries.length };
 }
 
+/** Decrypt an entry's structured payload. A corrupt or absent blob yields null, never a throw - one bad
+ *  entry must not make the whole timeline unreadable. */
+async function tlData(env, e) {
+  if (!e || !e.encData) return null;
+  try { return JSON.parse(await decPHI(env, e.encData)); } catch { return null; }
+}
+
 // ---- staff/doctor view (decrypted) --------------------------------------------------------------
 export async function getTimeline(env, ticketId) {
   const d = await fsGet(env, "q_timeline/" + ticketId); if (!d) return null;
   const doc = d.fields;
-  const entries = await Promise.all((doc.entries || []).map(async (e) => ({ ts: e.ts, kind: e.kind, by: e.by, text: await decPHI(env, e.enc) })));
+  const entries = await Promise.all((doc.entries || []).map(async (e) => ({ ts: e.ts, kind: e.kind, by: e.by, text: await decPHI(env, e.enc), data: await tlData(env, e) })));
   return { ticketId: ticketId, mrnLast4: doc.mrnLast4 || "", closed: !!doc.closed, closedAt: doc.closedAt || 0, linkExpiresAt: doc.linkExpiresAt || 0, entries: entries };
 }
 
@@ -67,7 +78,7 @@ export async function getTimelineByToken(env, token) {
   const v = await verifyTicketToken(env, token, doc.tokenVer || 1); if (!v || !v.ok) return { error: "invalid" };
   if (!doc.closed) return { error: "not_ready" };
   if (!timelineLive(doc, now())) return { error: "expired" };
-  const entries = await Promise.all((doc.entries || []).map(async (e) => ({ ts: e.ts, kind: e.kind, text: await decPHI(env, e.enc) })));  // 'by' omitted for the patient
+  const entries = await Promise.all((doc.entries || []).map(async (e) => ({ ts: e.ts, kind: e.kind, text: await decPHI(env, e.enc), data: await tlData(env, e) })));  // 'by' omitted for the patient
   return { ok: true, mrnLast4: doc.mrnLast4 || "", closedAt: doc.closedAt || 0, linkExpiresAt: doc.linkExpiresAt || 0, entries: entries };
 }
 

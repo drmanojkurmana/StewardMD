@@ -8,6 +8,8 @@ import { serializeNdhm, validateNdhmDoc } from "../functions/_connect/connectors
 import { dischargeRecord, immunizationRecord, invoiceRecord } from "../test/connect/abdm/fixtures/sccm-records.mjs";
 import { projectInvoiceRecord } from "../functions/_connect/abdm/hip-sources/clinic-billing.js";
 import { buildInvoice } from "../functions/_clinic_billing.js";
+import { projectTimeline } from "../functions/_connect/abdm/hip-sources/native-opd.js";
+import { buildImmunisation } from "../functions/_vaccines.js";
 
 const out = process.argv[2];
 if (!out) { console.error("usage: abdm-emit-bundles.mjs <outdir>"); process.exit(2); }
@@ -57,5 +59,17 @@ const pv = validateNdhmDoc(projected);
 if (!pv.ok) { console.error("our own gate rejects the PROJECTED invoice: " + JSON.stringify(pv.errors)); bad++; }
 writeFileSync(out + "/InvoiceRecord-projected.json", JSON.stringify(projected, null, 1));
 
-console.log("emitted " + (PRODUCIBLE.length + 1) + " bundles to " + out);
+// A TENTH: an ImmunizationRecord projected from an OPD capture, through the real validator that the API
+// uses. Same reason as the invoice - the fixture's codes are hand-picked, while a projection has to carry
+// what the picker actually produced.
+const shot = buildImmunisation({ vaccineCode: "1861000221106", doseNumber: 1, lotNumber: "L-77", occurrenceDateTime: "2026-08-18T09:00:00Z" });
+if (shot.error) { console.error("the immunisation capture path refuses its own input: " + shot.error); bad++; }
+const visit = { ticketId: "tkt-emit-1", patientAbhaHash: "h", expiresAt: 0,
+                entries: [{ ts: Date.parse("2026-08-18T09:00:00Z"), kind: "immunization", by: "dr-1", text: shot.data.text, data: shot.data }] };
+const immDoc = serializeNdhm(ctx, { ...projectTimeline(visit, { tenantId: "t1", now: () => "2026-08-19T00:00:00.000Z" }), profile: "ImmunizationRecord" });
+const iv = validateNdhmDoc(immDoc);
+if (!iv.ok) { console.error("our own gate rejects the PROJECTED immunisation: " + JSON.stringify(iv.errors)); bad++; }
+writeFileSync(out + "/ImmunizationRecord-projected.json", JSON.stringify(immDoc, null, 1));
+
+console.log("emitted " + (PRODUCIBLE.length + 2) + " bundles to " + out);
 process.exit(bad ? 1 : 0);
