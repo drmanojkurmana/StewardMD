@@ -69,6 +69,42 @@ export const REAL_CALLBACKS = Object.freeze([
     "requestId": "11af9733-5cb0-4d81-8105-cb9d19f62bf0"
    }
   }
+ },
+ {
+  "at": "2026-08-19 20:07:16",
+  "method": "POST",
+  "path": "/api/v3/hip/patient/care-context/discover",
+  "headers": {
+   "REQUEST-ID": "dcfbaf6d-de3c-42a0-9604-ca3944bd11d2",
+   "TIMESTAMP": "2026-08-19T20:07:16.387Z",
+   "X-HIP-ID": "IN2810006668",
+   "CONTENT-TYPE": "application/json"
+  },
+  "hasBearer": true,
+  "body": {
+   "transactionId": "a607c82c-f1a6-4712-9a23-b151b26c353f",
+   "patient": {
+    "id": "<abha-address>",
+    "verifiedIdentifiers": [
+     {
+      "type": "MOBILE",
+      "value": "<mobile>"
+     },
+     {
+      "type": "ABHA_NUMBER",
+      "value": ""
+     },
+     {
+      "type": "abhaAddress",
+      "value": "<abha-address>"
+     }
+    ],
+    "unverifiedIdentifiers": null,
+    "name": "<name>",
+    "gender": "M",
+    "yearOfBirth": 1997
+   }
+  }
  }
 ]);
 
@@ -76,5 +112,6 @@ export const REAL_CALLBACKS = Object.freeze([
 export const OBSERVED_PATHS = Object.freeze([
  "/api/v3/hiu/consent/request/on-init",
  "/api/v3/hiu/consent/request/notify",
- "/api/v3/hip/token/on-generate-token"
+ "/api/v3/hip/token/on-generate-token",
+ "/api/v3/hip/patient/care-context/discover"
 ]);

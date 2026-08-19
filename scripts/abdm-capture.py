@@ -83,12 +83,20 @@ MOBILE = re.compile(r"\b[6-9]\d{9}\b")
 AADHAAR = re.compile(r"\b\d{12}\b")
 
 
-def redact(node):
+# A NAME is PHI and no regex can spot one - "Manoj Kumar Kurmana" is just a string. So names are masked by
+# KEY instead. This was a real leak: the discovery callback carries patient.name, the value-regexes below
+# passed it straight through, and it would have been committed to a tracked fixture.
+NAME_KEYS = {"name", "fullname", "firstname", "middlename", "lastname", "patientname", "healthid", "abhaaddress"}
+
+
+def redact(node, key=None):
     """Structure is the evidence; the identifiers are not. Keep every key and type, mask the values."""
+    if key is not None and str(key).lower() in NAME_KEYS and isinstance(node, str) and node.strip():
+        return "<" + str(key).lower() + ">"
     if isinstance(node, dict):
-        return {k: redact(v) for k, v in node.items()}
+        return {k: redact(v, k) for k, v in node.items()}
     if isinstance(node, list):
-        return [redact(v) for v in node]
+        return [redact(v, key) for v in node]
     if isinstance(node, str):
         s = ABHA_ADDR.sub("<abha-address>", node)
         s = ABHA_NUM.sub("<abha-number>", s)

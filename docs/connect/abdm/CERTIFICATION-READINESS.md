@@ -38,7 +38,7 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | M2/M3 E2E verdict tooling | done | `--expect`, verified offline |
 | M1 client UI | done | 22 tests |
 
-**Test counts:** ABDM + connect suites **1101/1101**. Client **22/22**. Full-repo sweep unchanged apart from four
+**Test counts:** ABDM + connect suites **1106/1106**. Client **22/22**. Full-repo sweep unchanged apart from four
 pre-existing failures (`followcare-voice-server` 1, `onco-emr` 3, `site-gate` 2, `sknx-flags` 3) — none
 imports anything changed here.
 
@@ -114,7 +114,7 @@ Six areas, in the order the owner set them. Two are blocked on a sandbox ABHA ad
 
 | Area | State | Evidence |
 |---|---|---|
-| Real callbacks | **3 CAPTURED** (2026-08-19) | first ever; 2 defects found, both fixed |
+| Real callbacks | **4 CAPTURED** (2026-08-19) | first ever; **3 defects** found, all fixed |
 | Demographic discovery | done | 32 unit + 5 route tests; index now populated at `/link` |
 | OTP | done bar the DLT template | 30 tests; bounded attempts (3), resend cap (2), 3/hour budget, Q31 3/day |
 | HAPI / NRCES validation | done | 10 bundles, 0 errors, committed evidence log |
@@ -158,6 +158,7 @@ no `400 "User not found"` - the dead end every previous attempt hit - and three 
 | `/api/v3/hiu/consent/request/on-init` | `{ consentRequest:{id}, error:null, response:{requestId} }` |
 | `/api/v3/hiu/consent/request/notify` | `{ notification:{consentRequestId}, error:{code,message} }` |
 | `/api/v3/hip/token/on-generate-token` | `{ error:{code,message}, response:{requestId} }` |
+| `/api/v3/hip/patient/care-context/discover` | `{ transactionId, patient:{ id, name, gender, yearOfBirth, verifiedIdentifiers[], unverifiedIdentifiers } }` |
 
 Fixtures (identifier-masked) in `test/connect/abdm/fixtures/real-callbacks.mjs`; pinned by
 `test/connect/abdm/real-callbacks.test.mjs`.
@@ -179,8 +180,27 @@ correctly - one inferred shape verified rather than broken.
   which reads as "we could not identify the patient" when the truth was "ABDM rejected our input". Those
   need different fixes, so they no longer share an audit line.
 
-Neither would have been caught by any amount of reasoning about the spec, which is the entire argument for
-this exercise. 12 of 15 shapes remain `// INFERRED`.
+- **D12 - the discovery probe carries identifier ARRAYS, not flat fields.** This is the worst of the three.
+  `matchDemographics` reads `probe.mobile` and `probe.mrn`; ABDM sends
+  `verifiedIdentifiers: [{type:"MOBILE",value}, ...]` and `unverifiedIdentifiers: null`. Against a real
+  probe `probe.mobile` was always `undefined`, so **the mobile arm - ABDM's PRIMARY discovery arm - could
+  never have matched anyone.** The whole deterministic matcher, 32 tests and all, would have sat there
+  looking correct and never fired once in production. Fixed with `probeFromDiscovery()` at the wire
+  boundary, keeping `demographic-index.js` wire-agnostic.
+
+  Three further traps in that one body, every one silent: `ABHA_NUMBER` arrives as an EMPTY STRING rather
+  than an absent key; the type casing is inconsistent (`MOBILE`, `ABHA_NUMBER`, but `abhaAddress`);
+  and `unverifiedIdentifiers` is `null`, not `[]`.
+
+  Also note what the first three bodies would have taught us WRONGLY: "every callback carries an `error`
+  envelope" is false. Discovery is a REQUEST to us and correlates by `transactionId`.
+
+None of the three would have been caught by any amount of reasoning about the spec, which is the entire
+argument for this exercise. 11 of 15 shapes remain `// INFERRED`.
+
+**A PHI leak in the capture tooling, found the same way.** The redactor masked ABHA addresses, numbers,
+mobiles and Aadhaar by VALUE regex - but a name is just a string, and `patient.name` sailed through into a
+tracked fixture. Names are now masked by KEY, and a test asserts it rather than trusting the regex.
 
 ## 4. Remaining blockers
 
@@ -191,7 +211,7 @@ this exercise. 12 of 15 shapes remain `// INFERRED`.
    the IG's own code systems. All 8 HI types now conform. A record that happens to carry neither still
    cannot produce those HI types, which is correct — refusing beats pushing a document the far end rejects.
 
-2. **Only 3 of 15 callback bodies have been observed.** The patient-initiated ones (discovery, consent
+2. **Only 4 of 15 callback bodies have been observed.** The patient-initiated ones (discovery, consent
    GRANT, link init/confirm, scan-and-share) need taps in the Sandbox ABHA app, and demographic auth needs
    the sandbox ABHA to complete Aadhaar KYC (it is currently self-declared, which is what ABDM-1207 was
    telling us). Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
@@ -258,7 +278,7 @@ this exercise. 12 of 15 shapes remain `// INFERRED`.
 ```bash
 cd <repo>
 
-# ABDM + connect suites (1101 tests) - no external dependencies.
+# ABDM + connect suites (1106 tests) - no external dependencies.
 # The flag matters: 11 tests use module mocks (the /link route, the OPD ticket lookup) and SKIP without it,
 # so the suite still reads green while testing less.
 node --test --experimental-test-module-mocks "test/connect/abdm/"*.test.mjs test/connect/*.test.mjs

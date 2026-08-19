@@ -41,6 +41,53 @@ const isoOf = (now) => {
 };
 
 /** The raw ABHA identifier on any V3 payload. ABDM is inconsistent about which field carries it. */
+/**
+ * PINNED (captured 2026-08-19). ABDM's discovery probe does NOT carry flat `mobile` / `mrn` fields. The
+ * real body is:
+ *   patient: { id, name, gender, yearOfBirth,
+ *              verifiedIdentifiers:   [ {type:"MOBILE",value}, {type:"ABHA_NUMBER",value:""},
+ *                                       {type:"abhaAddress",value} ],
+ *              unverifiedIdentifiers: null }
+ *
+ * D12: matchDemographics reads `probe.mobile` and `probe.mrn`, so against a REAL probe the mobile arm -
+ * ABDM's PRIMARY discovery arm - could never match. The whole deterministic matcher would have sat there
+ * looking correct and never firing once. Nothing in the spec text says these are arrays; only the wire did.
+ *
+ * Three traps in that one body, all of them silent:
+ *   - `ABHA_NUMBER` arrives as an EMPTY STRING, not as an absent key. "" must not count as an identifier.
+ *   - the type casing is INCONSISTENT: MOBILE and ABHA_NUMBER are upper-snake, `abhaAddress` is camelCase.
+ *     Matching must be case-insensitive or the address arm silently drops.
+ *   - `unverifiedIdentifiers` is NULL, not []. Iterating it directly throws.
+ *
+ * Verified vs unverified matters clinically: ABDM's flowchart trusts a VERIFIED mobile as a match arm, and
+ * treats an MR number as patient-declared. So they are kept apart rather than merged into one bag.
+ */
+export function probeFromDiscovery(patient) {
+  const p = (patient && typeof patient === "object") ? patient : {};
+  const pick = (list, ...types) => {
+    const want = types.map((t) => t.toLowerCase());
+    for (const it of Array.isArray(list) ? list : []) {
+      const t = String((it && it.type) || "").toLowerCase();
+      const v = it && typeof it.value === "string" ? it.value.trim() : "";
+      if (v && want.indexOf(t) > -1) return v;
+    }
+    return null;
+  };
+  const verified = p.verifiedIdentifiers, unverified = p.unverifiedIdentifiers;
+  return {
+    // The address may appear as patient.id, as an `abhaAddress` identifier, or both.
+    abhaAddress: abhaOf(p) || pick(verified, "abhaaddress", "abha_address") || null,
+    abhaNumber: pick(verified, "abha_number", "abhanumber"),
+    // A mobile is only a discovery arm when ABDM says it is VERIFIED.
+    mobile: pick(verified, "mobile", "mobile_number"),
+    // An MR number is patient-declared, so it arrives unverified - and never counts on its own.
+    mrn: pick(unverified, "mr", "mrn", "medical_record_number") || pick(verified, "mr", "mrn"),
+    name: typeof p.name === "string" ? p.name : null,
+    gender: p.gender ?? null,
+    yearOfBirth: p.yearOfBirth ?? null,
+  };
+}
+
 export function abhaOf(o) {
   if (!o || typeof o !== "object") return null;
   const v = o.abhaAddress ?? o.healthId ?? o.id ?? o.abha;
@@ -108,8 +155,10 @@ export async function onDiscover({ env, deps, body, headers }) {
   if (!hipFlagOn(env)) return;                                  // second flag OFF: answer nothing, leak nothing
   const now = deps.now;
   const tenantId = await resolveHipTenant(env, deps, headers.entityId);
-  const probe = (body && body.patient) || {};
-  const abha = abhaOf(probe);
+  // D12: flatten ABDM's identifier ARRAYS into the flat probe the matcher expects. Passing body.patient
+  // straight through meant `probe.mobile` was always undefined and the mobile arm never fired.
+  const probe = probeFromDiscovery(body && body.patient);
+  const abha = probe.abhaAddress;
 
   // The exact-identifier arm reuses hip.js#handleDiscovery unchanged: per-source rate limit, EXACT ABHA
   // only, constant-shape miss, every probe audited.
