@@ -21,13 +21,14 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | M3 HIU callbacks (6 kinds) | wired | unit tests |
 | Demographic discovery | done | 32 tests incl. ambiguity + cross-tenant |
 | Link OTP | done | 30 tests; delivery honest-false until provisioned |
-| FHIR conformance (6 of 8) | **done** | **HAPI 6.2.1 vs the real NRCES IG, 0 errors** |
+| FHIR conformance (**8 of 8**) | **done** | **HAPI 6.2.1 vs the real NRCES IG, 0 errors** |
 | Published ABHA consent language | done | transcribed from ABDM's own image, recorded single-use |
 | Erasure completeness | done | R2 blobs + discovery index, verified to fail without the fix |
 | D1 migration | done | real SQLite, clean/old/current/half-migrated |
+| SCCM v1.1 immunisations + billing | done | 17 tests, round-trip proven |
 | M1 client UI | done | 22 tests |
 
-**Test counts:** ABDM suite **738/738**. Client **22/22**. Full-repo sweep unchanged apart from four
+**Test counts:** ABDM + connect suites **1052/1052**. Client **22/22**. Full-repo sweep unchanged apart from four
 pre-existing failures (`followcare-voice-server` 1, `onco-emr` 3, `site-gate` 2, `sknx-flags` 3) — none
 imports anything changed here.
 
@@ -66,7 +67,8 @@ Only these. Everything else is internal.
 `HAPI validator_cli 6.2.1` (the version ABDM's FAQ Q37/Q46 names) against
 `https://nrces.in/ndhm/fhir/r4`, terminology off, single clean run.
 
-**Before:** 8 of 8 HI types rejected, ~60 errors — while our own `validateNdhmDoc` passed all eight.
+**Before:** 8 of 8 HI types rejected, ~60 errors — while our own `validateNdhmDoc` passed all eight. Two
+of the eight were additionally *unproducible*, because SCCM had nowhere to put a vaccination or a bill.
 
 **After:**
 
@@ -74,7 +76,8 @@ Only these. Everything else is internal.
 OPConsultRecord           PASS        DischargeSummaryRecord   PASS
 PrescriptionRecord        PASS        HealthDocumentRecord     PASS
 DiagnosticReportRecord    PASS        WellnessRecord           PASS
-total errors: 0
+ImmunizationRecord        PASS        InvoiceRecord            PASS
+total errors: 0   (all 8 of 8)
 ```
 
 Evidence: `docs/connect/abdm/fhir-validation-evidence.log`.
@@ -88,11 +91,10 @@ IG package itself.
 
 ### Blocking certification
 
-1. **ImmunizationRecord and InvoiceRecord cannot be produced.** NRCES makes both `section` and
-   `section.entry` min=1, so a document from an SCCM record carrying no immunisations and no billing is
-   structurally *invalid*, not thin. SCCM has neither collection. The serializer refuses rather than
-   emitting something the far end rejects. **ABDM requires all 8 HI types for an HMIS.** This needs SCCM
-   fields — a data-model change, not a serializer one.
+1. ~~ImmunizationRecord and InvoiceRecord cannot be produced.~~ **RESOLVED.** SCCM v1.1 added
+   `immunizations` and `invoices` across all four layers (model, validator, serializer, normalizer), with
+   the IG's own code systems. All 8 HI types now conform. A record that happens to carry neither still
+   cannot produce those HI types, which is correct — refusing beats pushing a document the far end rejects.
 
 2. **No callback body has been observed.** Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
    Android, ~10 min) and, for roughly half the callbacks, you tapping in the app. Runbook:
@@ -134,6 +136,8 @@ IG package itself.
 
 10. Demographic discovery needs `indexPatient` called from registration; the index is otherwise empty and
     discovery falls back to the ABHA-address arm only.
+10b. Nothing yet WRITES SCCM immunisations or invoices — the resources exist and round-trip, but the OPD /
+    billing surfaces have to populate them before a real ImmunizationRecord or InvoiceRecord can be served.
 11. `ABDM_CLIENT_ID` is a committed wrangler var (the secret is a Pages secret). Deliberate and documented;
     override if you disagree.
 
@@ -195,13 +199,14 @@ name defined as both fails the deployment on a duplicate binding.
 4. **Confirm `ABDM_CLIENT_ID` as a committed var** (§4.11).
 5. **Capture at least one real callback per handler** and replace the `// INFERRED` comments. Until then
    `CONNECT_HIP_FLAG` must stay unset even after merge.
-6. **Decide on ImmunizationRecord / InvoiceRecord** (§4.1). Merging without them means the HMIS cannot
-   claim all 8 HI types.
+6. ~~Decide on ImmunizationRecord / InvoiceRecord.~~ Done — all 8 conform. But confirm §4.10b: nothing
+   populates the new SCCM collections yet, so the HI types are *servable* rather than *served*.
 7. Confirm nothing enables a flag: `git diff main..HEAD -- wrangler.toml` should show no flag being set.
 
 ## 8. What I will not claim
 
-- That this is certification-ready. Two mandatory HI types are unproducible and no callback has been seen.
+- That this is certification-ready. No ABDM callback has been seen, and nothing yet populates the two
+  newest SCCM collections.
 - That the inbound callback handlers are correct. They are *reasoned*, and marked as such.
 - That FHIR conformance means ABDM will accept the bundles. It means they conform to the NRCES profiles
   under HAPI 6.2.1 with terminology checks off. A functional-testing agency may still object to content.

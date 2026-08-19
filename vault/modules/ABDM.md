@@ -1,6 +1,6 @@
 ---
 tags: [module, interop, compliance]
-status: M1+M2+M3 wired; FHIR conforms to NRCES (6/8 producible); 738 tests. Inert, flags OFF
+status: M1+M2+M3 wired; FHIR conforms to NRCES 8/8; SCCM v1.1; 1052 tests. Inert, flags OFF
 flag: smd_connect / CONNECT_FLAG + smd_connect_hip / CONNECT_HIP_FLAG, both default OFF
 ---
 # ABDM (Ayushman Bharat Digital Mission)
@@ -60,9 +60,10 @@ placeholder, which is deliberately useful: it captures ABDM's real callback payl
   segment-wise.
 - **FHIR conformance** - HAPI 6.2.1 vs the real NRCES IG rejected **8 of 8** HI types while our own gate
   passed all 8. Root cause: five profiles allow `Composition.section` max 1 with entry slicing CLOSED.
-  Now **6 of 6 producible types pass with 0 errors**; ImmunizationRecord and InvoiceRecord are
-  structurally unproducible (section + section.entry both min=1, SCCM has no immunisations or billing) and
-  are REFUSED rather than emitted invalid. That is a certification gap needing SCCM fields.
+  Now **8 of 8 pass with 0 errors**. ImmunizationRecord and InvoiceRecord were structurally unproducible
+  (section + section.entry both min=1) until **SCCM v1.1** added `immunizations` and `invoices` across
+  model/validator/serializer/normalizer, using the IG's own code systems (ndhm-vaccine-codes,
+  ndhm-billing-codes, ndhm-price-components). Nothing POPULATES them yet - that is the remaining gap.
 
 ## Hard rules
 - **M1 must use V3 APIs.** A V1/V2 M1 implementation is *rejected* at Sandbox Exit.
