@@ -1094,6 +1094,8 @@ export async function onRequest(context) {
     return json({
       enabled: enabled,
       provider: order[0],
+      ai_provider_env: (env.AI_PROVIDER || null),
+      live_stream_env: (env.MAIK_LIVE_STREAM || null),
       fallback_available: !!(fb && PROVIDERS[fb] && PROVIDERS[fb].available(env)),
       fallback_provider: fb,
       model: modelId(env),
@@ -1160,7 +1162,7 @@ export async function onRequest(context) {
   // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000)) : OUT_BASE;
   // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
   // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
   // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
