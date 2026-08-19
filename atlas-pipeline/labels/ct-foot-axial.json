@@ -1,0 +1,83 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US) for `tibia` and `fibula`, which already existed in this repo. The tarsal, metatarsal and phalanx entries were written for this module in the same register and are NOT presented as verbatim quotations.",
+  "_geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_foot_ct.py on Visible Human frozenCT slices 2690-2882.",
+
+  "_why_not_a_model": "`appendicular_bones` is the only model with tarsals, metatarsals and phalanges, and it is licence-gated (in TotalSegmentator's own `commercial_models` register, exits without a key). VISTA3D has none of them. So the free path was built.",
+
+  "_the_600_hu_finding": "A 300 HU threshold FUSES the entire foot skeleton into ONE component per foot - measured at 223735 and 217858 voxels each, spanning nearly the whole crop, because the tarsal joints are too tight at 0.9 mm for the joint space to break the connection. Raising the threshold to 600 HU, i.e. cortical bone only, separates it into 29 components. That single change is what makes the foot tractable at all.",
+
+  "_how_the_groups_are_told_apart": "The cadaver's feet are plantarflexed, so their long axis runs along the body axis and body-axial slices cut the foot proximal to distal. Sorting components by z-centroid produced two CLEAN gaps that the code finds itself rather than having hard-coded: the ankle (z 27 -> 51) and the tarsometatarsal joints (z 97 -> 111). The metatarsophalangeal boundary is NOT a clean gap because the toes curl and overlap in z, so shape decides it instead: metatarsal shafts measured dz 40-55 slices against 13-26 for phalanges. An earlier version asked for three gaps and a spurious 13-unit gap inside the tarsus tied with the real metatarsophalangeal one and won, pushing the navicular, cuboid and cuneiforms into the metatarsal band - which is why z decides only the first two boundaries.",
+
+  "_validation": "The component COUNTS match human anatomy exactly, which is the strongest check available here and was not tuned for: tarsal 14 (7 per foot x 2), metatarsal 10 (5 per foot x 2), tibia 2, fibula 2. Tibia and fibula are separated by SIZE, the same rule that worked at the knee: 12987 and 11701 voxels against 4412 and 4764. Phalanges recovered 10 of the 28 a foot pair has - the small middle and distal phalanges of toes 2 to 5 fall under the 300-voxel floor, so this is an acknowledged SUBSET, not a mislabelling.",
+
+  "_why_no_individual_bone_names": "There is deliberately no `calcaneus`, `talus`, `navicular`, `cuboid`, `cuneiform`, `first metatarsal` or `proximal phalanx`. Naming an individual bone requires matching it to its neighbours by articulation, and a z-centroid cannot do that - it can say a component IS a tarsal, not WHICH tarsal. The calcaneus (31181 voxels) and talus (17142) are individually obvious to a human eye in these images, but 'obvious to me' is not a segmentation rule, and a mislabelled cuneiform teaches wrong anatomy. Group labels are what the geometry supports, so group labels are what ship. Individual naming needs either the licensed model or hand-authoring in atlas-author.html.",
+
+  "_why_no_sides": "No side is asserted, consistent with every other module. One pin per connected component still shows both feet.",
+
+  "categories": {
+    "bone": { "label": "Bone", "color": "#ffffff" }
+  },
+
+  "structures": {
+    "foot": {
+      "name": "Foot",
+      "category": "bone"
+    },
+    "tibia": {
+      "name": "Tibia",
+      "category": "bone",
+      "parent": "foot",
+      "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+    },
+    "fibula": {
+      "name": "Fibula",
+      "category": "bone",
+      "parent": "foot",
+      "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+    },
+    "tarsal": {
+      "name": "Tarsal bone",
+      "category": "bone",
+      "parent": "foot",
+      "definition": "The tarsus consists of seven bones - the calcaneus, talus, navicular, cuboid and three cuneiforms - forming the posterior half of the foot and the ankle."
+    },
+    "metatarsal": {
+      "name": "Metatarsal bone",
+      "category": "bone",
+      "parent": "foot",
+      "definition": "The five metatarsal bones are long bones lying between the tarsus and the phalanges, forming the skeleton of the forefoot."
+    },
+    "phalanx-foot": {
+      "name": "Phalanx of foot",
+      "category": "bone",
+      "parent": "foot",
+      "definition": "The phalanges of the foot are fourteen in number, three for each of the lesser toes and two for the great toe."
+    }
+  },
+
+  "model_values": {
+    "1": "tibia",
+    "2": "fibula",
+    "3": "tarsal",
+    "4": "metatarsal",
+    "5": "phalanx-foot"
+  },
+
+  "model_labels": {
+    "tibia": "tibia",
+    "fibula": "fibula",
+    "tarsal": "tarsal",
+    "metatarsal": "metatarsal",
+    "phalanx-foot": "phalanx-foot"
+  },
+
+  "_why_caps": "A single axial cut through the forefoot crosses ten metatarsals at once, and a cut through the tarsus crosses several tarsal bones per foot. Identical repeated labels saturate both gutters and teach nothing after the first few.",
+  "max_pins_per_slice": {
+    "tarsal": 4,
+    "metatarsal": 4,
+    "phalanx-foot": 4,
+    "tibia": 2,
+    "fibula": 2
+  }
+}

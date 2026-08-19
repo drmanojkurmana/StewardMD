@@ -1,0 +1,31 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Written for this module in the register of Gray's Anatomy 1918 (PD-US); NOT a verbatim quotation.",
+  "_geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_hand_ct.py on Visible Human frozenCT slices 1800-1890, at a 600 HU cortical threshold.",
+
+  "_only_one_structure_and_why": "This module labels ONE group, `hand-bone`, and that is a deliberate limit rather than laziness. The FOOT could be split into tarsal, metatarsal and phalanx because the cadaver's feet are plantarflexed: their long axis runs along the body axis, so body-axial slices cut them proximal to distal and the three groups fall into z-bands separated by clean gaps. The hands do not lie that way - they rest flat against the thighs and the whole hand occupies only VHP 1805-1885, about 8 cm, which is a hand's WIDTH not its 19 cm length. Axial slices therefore cut ACROSS the hand and no z-banding exists.",
+
+  "_two_failed_attempts": "Both recorded because both failed. SIZE: at 600 HU the 21 components span 1180-2681 voxels, near-uniform - a carpal, a metacarpal and a phalanx are not separable by volume here. PCA along each hand's own long axis: projected centroids gave scattered gaps (23.0, 7.3, 7.5, 15.9, 26.3, 18.5, 6.1, 23.3, 0.7) with no three-band structure, and the dominant axis returned was contaminated by the left/right split used to separate the two hands in the first place. Naming individual carpals needs articulation-based matching, which needs the licensed `appendicular_bones` model or hand-authoring.",
+
+  "_the_600_hu_finding": "Same as the foot. At 250 HU the hand skeleton fuses into 8 blobs (28323 and 25661 voxels among them). At 600 HU - cortical bone only - it separates into 21 individually sensible bones. A hand pair has 54 bones, so this is an acknowledged SUBSET limited by the 8 cm crop and the 200-voxel floor, not a mislabelling.",
+
+  "_why_no_sides": "No side is asserted, consistent with every other module.",
+
+  "categories": { "bone": { "label": "Bone", "color": "#ffffff" } },
+
+  "structures": {
+    "hand": { "name": "Hand", "category": "bone" },
+    "hand-bone": {
+      "name": "Bone of the hand",
+      "category": "bone",
+      "parent": "hand",
+      "definition": "The skeleton of the hand comprises the eight carpal bones of the wrist, five metacarpals, and fourteen phalanges - two in the thumb and three in each of the other digits."
+    }
+  },
+
+  "model_values": { "1": "hand-bone" },
+  "model_labels": { "hand-bone": "hand-bone" },
+
+  "_why_caps": "A single cut crosses many small hand bones at once; identical repeated labels saturate both gutters.",
+  "max_pins_per_slice": { "hand-bone": 4 }
+}

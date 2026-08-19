@@ -53,6 +53,12 @@ BONE_HU = 300
 MIN_COMPONENT = 3000       # below this a component is trabecular debris, not a bone
 LEG_MIN_PX = 3000          # a leg cross-section; a forearm is smaller at this level
 
+# PATELLA: attempted at cortical density (600 HU) and REJECTED. See the note in
+# labels/ct-knee-axial.json — a paired 4.9 cm3 candidate at the joint looked right on
+# volume and position, but tested against the femoral condyles slice by slice it is
+# POSTERIOR to them in every shared slice, so it is not the patella. Not implemented
+# rather than implemented-and-wrong.
+
 
 def leg_mask(vol):
     """The two largest body components per slice. Excludes forearms, hands, container."""
@@ -131,6 +137,7 @@ def classify(vol, legs):
     for r in rows:
         if r["bone"] in LBL:
             seg[lab == r["idx"]] = LBL[r["bone"]]
+
     return seg, rows
 
 
