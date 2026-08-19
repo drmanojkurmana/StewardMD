@@ -303,7 +303,7 @@ const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
@@ -313,7 +313,7 @@ const vertexProvider = {
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
@@ -436,7 +436,7 @@ function providerOrder(env, opts) {
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
   const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
   const forMaik = !!(opts && opts.maik);
-  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];
+  let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
   if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
   return order.length ? order : ["vertex", "developer"];
