@@ -56,7 +56,13 @@
     try { return !!(window.SMD_XACCESS && window.SMD_XACCESS.isActiveCached && window.SMD_XACCESS.isActiveCached(XA_FEATURE)); } catch (e) { return false; }
   }
   function runtimeAvailable() {
-    try { return !!(window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.answer); } catch (e) { return false; }
+    try {
+      var L = window.SMD_MAIK_LOCAL;
+      if (!L || !L.answer) return false;
+      // The module ships in the web bundle too, so its presence proves nothing. Ask it whether the
+      // native capacitor-llama plugin is actually there.
+      return (typeof L.available === "function") ? !!L.available() : true;
+    } catch (e) { return false; }
   }
   function packInstalled() {
     try { return !!(window.SMD_MAIK_MODELS && window.SMD_MAIK_MODELS.installedCached && window.SMD_MAIK_MODELS.installedCached(PACK_ID)); } catch (e) { return false; }

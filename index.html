@@ -1559,6 +1559,11 @@ window.openExternal = function (u) {
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
 <script src="/maik-engine.js?v=mkeng1" defer></script>
+<!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
+     (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
+     capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
+<script src="/maik-models.js?v=mkeng1" defer></script>
+<script src="/maik-local.js?v=mkeng1" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
