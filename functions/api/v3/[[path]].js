@@ -34,7 +34,21 @@ import { issueQueueToken, resolvePatientMobile, findTicketMobile } from "../../_
  * Caching it is the whole point: the token lasts six months and only three requests per patient per
  * facility per day are permitted before ABDM blocks the patient for 24 hours (FAQ Q31).
  */
-async function onGenerateToken({ env, deps, body }) {
+export async function onGenerateToken({ env, deps, body }) {
+  // PINNED (captured 2026-08-19): this callback commonly arrives as a pure FAILURE, carrying only
+  //   { error: { code: "ABDM-1207: ", message: "...does not match the details on record with Aadhaar" },
+  //     response: { requestId } }
+  // and no token at all. The old code fell into the `!token` branch and filed it as "uncorrelated", which
+  // reads as "we could not match this to a patient" when the truth is "ABDM refused the demographics".
+  // Those need different fixes, so they cannot share an audit line.
+  if (body && body.error) {
+    await deps.audit({
+      action: "abdm.linktoken.failed", outcome: "error", ts: deps.now(),
+      detail: String(body.error.code ?? "").trim() + " " + String(body.error.message ?? "").slice(0, 200),
+      transactionId: (body.response && body.response.requestId) || null,
+    }).catch(() => {});
+    return;
+  }
   const token = body && (body.linkToken || body.accessToken || (body.link && body.link.accessToken));
   const abhaHash = deps.correlate ? await deps.correlate(body) : null;
   if (!token || !abhaHash) {

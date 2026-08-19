@@ -41,6 +41,10 @@ const ourRequestId = (body) => (body && (body.resp || body.response) || {}).requ
 // Inbound // INFERRED: { consentRequest: { id }, response: { requestId }, error? }
 // Nothing is owed back. Record the CM's consent-REQUEST id so the later grant can be matched to the
 // request that asked for it.
+// PINNED (captured 2026-08-19). The real body:
+//   { consentRequest: { id }, error: null, response: { requestId } }
+// Both readers below were already correct. The ABDM envelope is `error` (null on success) + `response`,
+// and `error` is ALWAYS present as a key - nothing may treat it as optional.
 export async function onConsentInit({ env, deps, body, headers }) {
   if (!flagOn(env)) return;
   const now = isoOf(deps.now);
@@ -80,6 +84,25 @@ export async function onConsentNotify({ env, deps, body, headers }) {
 
   const row = await getConsentReqByConsentRequestId(deps.db, n.consentRequestId);
   if (!row) throw new HiuHandlerError("consent notify for a request we never made");
+
+  // PINNED (captured 2026-08-19): a notify can carry a top-level `error` and NO status at all -
+  //   { notification: { consentRequestId }, error: { code: "ABDM-1120: ", message: "No care context available" } }
+  // The old code read `status` as "", fell through to `status || "DENIED"` and wrote DENIED with no
+  // diagnostic anywhere. The row ends in the same place, but the REASON is what the doctor needs: "the
+  // patient refused" and "the CM had nothing to share" look identical on screen otherwise. on-init already
+  // handled its error branch; this one did not.
+  if (body && body.error) {
+    await updateConsentStatus(deps.db, row.request_id, status || "DENIED", now);
+    if (deps.audit) await deps.audit({
+      action: "abdm.hiu.consent.notify", outcome: "error", ts: now, tenantId: row.tenant_id,
+      scope: { code: String(body.error.code ?? "").trim(), status: status || "DENIED" },
+    }).catch(() => {});
+    // Still ACKNOWLEDGE it. The notification was delivered and understood; only the consent failed. An
+    // unacknowledged notify is a DELIVERY failure to the gateway, which retries - and the retry would
+    // carry the same error and be dropped the same way, forever.
+    await reply(deps, "consentHiuOnNotify", { acknowledgement: [{ status: "OK", consentId: null }], ...respondTo(headers) });
+    return;
+  }
 
   // GRANTED: link each artefact to our row, then FETCH it. Nothing is persisted as granted here - the
   // signed artefact arrives on on-fetch and only a verified signature may write scope (R3).

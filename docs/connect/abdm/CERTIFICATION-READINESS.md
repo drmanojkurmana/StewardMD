@@ -38,7 +38,7 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | M2/M3 E2E verdict tooling | done | `--expect`, verified offline |
 | M1 client UI | done | 22 tests |
 
-**Test counts:** ABDM + connect suites **1092/1092**. Client **22/22**. Full-repo sweep unchanged apart from four
+**Test counts:** ABDM + connect suites **1101/1101**. Client **22/22**. Full-repo sweep unchanged apart from four
 pre-existing failures (`followcare-voice-server` 1, `onco-emr` 3, `site-gate` 2, `sknx-flags` 3) — none
 imports anything changed here.
 
@@ -114,11 +114,11 @@ Six areas, in the order the owner set them. Two are blocked on a sandbox ABHA ad
 
 | Area | State | Evidence |
 |---|---|---|
-| Real callbacks | **BLOCKED** on a `@sbx` address | tooling ready; fail-safety proven instead (below) |
+| Real callbacks | **3 CAPTURED** (2026-08-19) | first ever; 2 defects found, both fixed |
 | Demographic discovery | done | 32 unit + 5 route tests; index now populated at `/link` |
 | OTP | done bar the DLT template | 30 tests; bounded attempts (3), resend cap (2), 3/hour budget, Q31 3/day |
 | HAPI / NRCES validation | done | 10 bundles, 0 errors, committed evidence log |
-| M2 / M3 sandbox E2E | **BLOCKED** on a `@sbx` address | one-command verdict built and verified offline |
+| M2 / M3 sandbox E2E | server-driven half **COMPLETE** | `--expect server-driven` PASS; patient-initiated half pending |
 | This report | done | you are reading it |
 
 **The 15 inferred shapes: being wrong is now survivable.** ABDM has never published the V3 request YAML, so
@@ -148,6 +148,40 @@ records (partial set reads INCOMPLETE and names what is missing; full set reads 
 Start with `--expect server-driven`: if the two callbacks that need no human tapping are MISSING, the
 registered URL is wrong or expired, and nothing else is worth debugging.
 
+### First real callbacks (2026-08-19)
+
+A sandbox ABHA address finally existed, so `flow` was fired against it. Both requests returned **202** with
+no `400 "User not found"` - the dead end every previous attempt hit - and three callbacks arrived:
+
+| Path | Body |
+|---|---|
+| `/api/v3/hiu/consent/request/on-init` | `{ consentRequest:{id}, error:null, response:{requestId} }` |
+| `/api/v3/hiu/consent/request/notify` | `{ notification:{consentRequestId}, error:{code,message} }` |
+| `/api/v3/hip/token/on-generate-token` | `{ error:{code,message}, response:{requestId} }` |
+
+Fixtures (identifier-masked) in `test/connect/abdm/fixtures/real-callbacks.mjs`; pinned by
+`test/connect/abdm/real-callbacks.test.mjs`.
+
+**The envelope is confirmed:** every callback carries `error` (null on success) plus `response.requestId`,
+and `error` is always PRESENT as a key. `ourRequestId` and `consentRequest.id` were already reading it
+correctly - one inferred shape verified rather than broken.
+
+**Two defects, found by three bodies:**
+
+- **D10 - `consent/request/notify` can carry an error and NO status.** The handler read `status` as `""`,
+  fell through to `status || "DENIED"` and wrote a bare DENIED. The row landed in the right state with the
+  REASON discarded, so "the patient refused" and "the CM had nothing to share" (ABDM-1120, what actually
+  happened) were indistinguishable afterwards. `on-init` already had an error branch; this one did not.
+  Fixed, and it now still ACKNOWLEDGES the notify - an unacknowledged one is a delivery failure the
+  gateway retries forever with the same body.
+- **D11 - `token/on-generate-token` commonly arrives as a pure FAILURE** with no token at all
+  (ABDM-1207: the demographics we sent do not match Aadhaar). The receiver filed it as `uncorrelated`,
+  which reads as "we could not identify the patient" when the truth was "ABDM rejected our input". Those
+  need different fixes, so they no longer share an audit line.
+
+Neither would have been caught by any amount of reasoning about the spec, which is the entire argument for
+this exercise. 12 of 15 shapes remain `// INFERRED`.
+
 ## 4. Remaining blockers
 
 ### Blocking certification
@@ -157,7 +191,10 @@ registered URL is wrong or expired, and nothing else is worth debugging.
    the IG's own code systems. All 8 HI types now conform. A record that happens to carry neither still
    cannot produce those HI types, which is correct — refusing beats pushing a document the far end rejects.
 
-2. **No callback body has been observed.** Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
+2. **Only 3 of 15 callback bodies have been observed.** The patient-initiated ones (discovery, consent
+   GRANT, link init/confirm, scan-and-share) need taps in the Sandbox ABHA app, and demographic auth needs
+   the sandbox ABHA to complete Aadhaar KYC (it is currently self-declared, which is what ABDM-1207 was
+   telling us). Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
    Android, ~10 min) and, for roughly half the callbacks, you tapping in the app. Runbook:
    `docs/connect/abdm/CAPTURE-RUNBOOK.md`. **Do not set `CONNECT_HIP_FLAG=1` before this** — an unverified
    parser against a real peer fails silently, which is how D4, D6, D4b and D4c all happened.
@@ -221,7 +258,7 @@ registered URL is wrong or expired, and nothing else is worth debugging.
 ```bash
 cd <repo>
 
-# ABDM + connect suites (1092 tests) - no external dependencies.
+# ABDM + connect suites (1101 tests) - no external dependencies.
 # The flag matters: 11 tests use module mocks (the /link route, the OPD ticket lookup) and SKIP without it,
 # so the suite still reads green while testing less.
 node --test --experimental-test-module-mocks "test/connect/abdm/"*.test.mjs test/connect/*.test.mjs
