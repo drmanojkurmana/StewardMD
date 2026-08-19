@@ -22,8 +22,21 @@ const uuid = () => (typeof crypto !== "undefined" && crypto.randomUUID) ? crypto
 const safeIso = (d) => (d && typeof d.toISOString === "function") ? d.toISOString() : new Date().toISOString();
 const humanize = (p) => String(p).replace(/Record$/, "").replace(/([a-z])([A-Z])/g, "$1 $2").trim() || "Health Document";
 const escapeHtml = (s) => String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
-const refOf = (res) => ({ reference: res.resourceType + "/" + res.id });
-const entryOf = (res) => ({ fullUrl: "urn:uuid:" + res.resourceType.toLowerCase() + "-" + res.id, resource: res });
+// FHIR document-bundle references must RESOLVE inside the bundle, so `fullUrl` and every `reference` to
+// that resource have to be the SAME string. They were not: fullUrl was "urn:uuid:composition-<id>" while
+// the reference was "Composition/<id>", so a validator resolving the document found nothing - and
+// "urn:uuid:composition-<id>" is not a well-formed urn:uuid either (it must be an actual UUID).
+// ABDM FAQ Q37/Q46 settles the style: use urn:uuid. One UUID is minted per resource on first mention and
+// reused for both sides. The WeakMap is keyed by the resource OBJECT and every serializeNdhm call builds
+// fresh objects, so ids never collide across calls and entries are collected when the bundle is.
+const URNS = new WeakMap();
+const urnFor = (res) => {
+  let u = URNS.get(res);
+  if (!u) { u = "urn:uuid:" + uuid(); URNS.set(res, u); }
+  return u;
+};
+const refOf = (res) => ({ reference: urnFor(res) });
+const entryOf = (res) => ({ fullUrl: urnFor(res), resource: res });
 
 // INVERSE of normalize.js cc(): SCCM codeable {coding:[{system,code,display,kind}],text} -> FHIR CodeableConcept
 // {coding:[{system,code,display}],text}. The `kind` is dropped (FHIR has none); normalizeNdhm re-derives it from
@@ -58,6 +71,20 @@ function buildAuthorDevice() {
 function buildCustodianOrg(tenantId) {
   const t = String(tenantId || "stewardmd").replace(/[^A-Za-z0-9_-]/g, "-");
   return stampMeta({ resourceType: "Organization", id: "stewardmd-org-" + t, name: "StewardMD (tenant " + (tenantId || "stewardmd") + ")" });
+}
+// The HFR facility this document was produced at. ABDM's Main Envelope requires
+// Composition.attester.party to be an Organization whose identifier.value is the HIP id, with the facility
+// registry as the system - that is how the HIE-CM attributes a record to a real facility.
+const FACILITY_SYSTEM = { sandbox: "https://facilitysbx.ndhm.gov.in", production: "https://facility.ndhm.gov.in" };
+export function facilitySystemFor(envName) {
+  return FACILITY_SYSTEM[String(envName || "sandbox").toLowerCase()] || FACILITY_SYSTEM.sandbox;
+}
+function buildHipOrg(hipId, system) {
+  const safe = String(hipId).replace(/[^A-Za-z0-9_-]/g, "-");
+  return stampMeta({
+    resourceType: "Organization", id: "hip-" + safe, name: "StewardMD HIP " + hipId,
+    identifier: [{ system, value: String(hipId) }],
+  });
 }
 function buildCondition(c) {
   return stampMeta({ resourceType: "Condition", id: c.id, code: ccInv(c.code, "condition"), clinicalStatus: codedText(c.clinicalStatus || "unknown") });
@@ -131,11 +158,16 @@ export function serializeNdhm(ctx, record) {
     const primaryDoc = docs[0] || null;
     for (let i = 1; i < docs.length; i++) if (docs[i] && docs[i].id) add(buildDocumentReference(docs[i]), "Documents");
 
-    const comp = buildComposition({ profile, primaryDoc, patientRes, author, custodian, generatedAt, sections: sec.list });
+    // The attesting facility. Present only when a HIP id is configured - an unattested bundle is still a
+    // valid document, but an attester pointing at a blank facility id would be worse than none.
+    const hipId = (ctx && ctx.hipId) || null;
+    const hipOrg = hipId ? buildHipOrg(hipId, (ctx && ctx.facilitySystem) || facilitySystemFor(ctx && ctx.envName)) : null;
+    const comp = buildComposition({ profile, primaryDoc, patientRes, author, custodian, hipOrg, generatedAt, sections: sec.list });
 
     const entry = [entryOf(comp)]; // Composition FIRST
     if (patientRes) entry.push(entryOf(patientRes));
     entry.push(entryOf(author), entryOf(custodian));
+    if (hipOrg) entry.push(entryOf(hipOrg));
     for (const e of clinical) entry.push(e);
 
     return { resourceType: "Bundle", type: "document", identifier, timestamp: generatedAt, meta, entry };
@@ -145,7 +177,7 @@ export function serializeNdhm(ctx, record) {
   }
 }
 
-function buildComposition({ profile, primaryDoc, patientRes, author, custodian, generatedAt, sections }) {
+function buildComposition({ profile, primaryDoc, patientRes, author, custodian, hipOrg, generatedAt, sections }) {
   const id = (primaryDoc && primaryDoc.id) || ("comp-" + uuid());
   const typeCc = (primaryDoc && primaryDoc.type) ? ccInv(primaryDoc.type, humanize(profile)) : ccInv(null, humanize(profile));
   const narrative = (primaryDoc && primaryDoc.text) ? primaryDoc.text : (humanize(profile) + " generated by StewardMD clinical decision support");
@@ -159,6 +191,8 @@ function buildComposition({ profile, primaryDoc, patientRes, author, custodian, 
   if (patientRes) comp.subject = refOf(patientRes);
   comp.author = [refOf(author)];       // StewardMD Device
   comp.custodian = refOf(custodian);   // StewardMD tenant Organization
+  // Main Envelope: attester.party = the HFR facility Organization carrying our HIP id.
+  if (hipOrg) comp.attester = [{ mode: "official", time: generatedAt, party: refOf(hipOrg) }];
   return comp;
 }
 

@@ -4,7 +4,7 @@
 // normalizeNdhm to the SAME SCCM resource counts (the inverse-correctness proof). Never throws on a partial record.
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { serializeNdhm, validateNdhmDoc } from "../../../functions/_connect/connectors/abdm/serialize.js";
+import { serializeNdhm, validateNdhmDoc, facilitySystemFor } from "../../../functions/_connect/connectors/abdm/serialize.js";
 import { normalizeNdhm } from "../../../functions/_connect/connectors/abdm/normalize.js";
 import { makeCtx } from "../../../functions/_connect/interfaces.js";
 import { dischargeRecord, localOnlyRecord } from "./fixtures/sccm-records.mjs";
@@ -26,15 +26,43 @@ test("discharge record -> Bundle.type=document, Composition FIRST with author+cu
   assert.match(doc.identifier.value, /^urn:uuid:[0-9a-f-]{36}$/);
   const first = doc.entry[0].resource;
   assert.equal(first.resourceType, "Composition");
-  assert.ok(first.subject && first.subject.reference === "Patient/pat-1");
   assert.ok(Array.isArray(first.author) && first.author.length >= 1);
   assert.ok(first.custodian && first.custodian.reference);
   // Composition.type is the record profile; author Device + custodian Organization are StewardMD-tagged.
   assert.match(first.meta.profile[0], /DischargeSummaryRecord$/);
-  const author = doc.entry.map((e) => e.resource).find((r) => r.resourceType === "Device");
-  const custodian = doc.entry.map((e) => e.resource).find((r) => r.resourceType === "Organization");
-  assert.equal(author.id, first.author[0].reference.split("/")[1]);
-  assert.equal(custodian.id, first.custodian.reference.split("/")[1]);
+
+  // References are urn:uuid (ABDM FAQ Q37/Q46) and RESOLVE inside the document - the invariant that
+  // matters, and the one the old "Patient/pat-1" assertion could not see: fullUrl and reference used to
+  // be different strings, so nothing in the bundle resolved at all.
+  const byUrn = new Map(doc.entry.map((e) => [e.fullUrl, e.resource]));
+  for (const e of doc.entry) assert.match(e.fullUrl, /^urn:uuid:[0-9a-f-]{36}$/, "fullUrl must be a real urn:uuid");
+  assert.equal(byUrn.size, doc.entry.length, "each entry gets its OWN urn");
+  const resolve = (ref) => byUrn.get(ref && ref.reference);
+  assert.equal(resolve(first.subject) && resolve(first.subject).id, "pat-1", "subject resolves to the Patient");
+  assert.equal(resolve(first.author[0]).resourceType, "Device");
+  assert.equal(resolve(first.custodian).resourceType, "Organization");
+  for (const sec of first.section || []) for (const ref of sec.entry || []) {
+    assert.ok(resolve(ref), "every section reference must resolve inside the document: " + JSON.stringify(ref));
+  }
+});
+
+test("Composition.attester.party is the HFR facility Organization carrying our HIP id (Main Envelope)", () => {
+  const doc = serializeNdhm({ now: () => new Date("2026-08-19T00:00:00Z"), tenant: { id: "t1" },
+                              hipId: "IN2810006668", envName: "sandbox" }, dischargeRecord);
+  const comp = doc.entry[0].resource;
+  const byUrn = new Map(doc.entry.map((e) => [e.fullUrl, e.resource]));
+  assert.ok(Array.isArray(comp.attester) && comp.attester.length === 1, "one official attester");
+  assert.equal(comp.attester[0].mode, "official");
+  const party = byUrn.get(comp.attester[0].party.reference);
+  assert.ok(party, "attester.party must resolve inside the document");
+  assert.equal(party.resourceType, "Organization");
+  assert.deepEqual(party.identifier, [{ system: "https://facilitysbx.ndhm.gov.in", value: "IN2810006668" }]);
+  assert.equal(facilitySystemFor("production"), "https://facility.ndhm.gov.in");
+});
+
+test("with no HIP id configured the document is unattested rather than attested to a blank facility", () => {
+  const comp = ser(dischargeRecord).entry[0].resource;
+  assert.equal(comp.attester, undefined);
 });
 
 test("every CodeableConcept carries a non-empty text fallback (inverse of cc(), R12)", () => {
