@@ -12,6 +12,8 @@ Usage:
   ./scripts/abdm-capture.py <webhook-token>            # dump everything captured so far
   ./scripts/abdm-capture.py <webhook-token> --watch    # poll until interrupted, printing new arrivals
   ./scripts/abdm-capture.py <webhook-token> --out test/connect/abdm/fixtures/real-callbacks.mjs
+  ./scripts/abdm-capture.py <webhook-token> --expect m2 --timeout 600   # E2E VERDICT: did M2 complete?
+  ./scripts/abdm-capture.py <webhook-token> --expect m3 --timeout 600   # ...and M3
 
 The token is the last path segment of the registered URL:
   ./scripts/abdm-sandbox-probe.sh bridge   # shows the URL
@@ -22,6 +24,57 @@ NO PHI IS WRITTEN BY DEFAULT. A real callback carries a live ABHA address and pa
 import argparse, json, re, sys, time, urllib.request
 
 API = "https://webhook.site/token/%s/requests?sorting=oldest&per_page=100"
+
+# ---- the M2 / M3 end-to-end expectation sets ------------------------------------------------------
+# Each entry is (certification-ish label, path substring). A milestone is COMPLETE only when every
+# callback in its set has actually arrived - which is the difference between "we sent the request and got a
+# 202" and "the flow worked". `--expect` is the verdict; `flow` is only the trigger.
+#
+# Paths are matched as substrings of the callback path ABDM appended to our registered base, because that
+# path IS the callback's identity (see normalise()).
+EXPECT = {
+    "m2": [
+        ("link token issued (demographic auth)", "/token/on-generate-token"),
+        ("care-context discovery", "/patient/care-context/discover"),
+        ("link init (OTP issued)", "/link/care-context/init"),
+        ("link confirm (OTP verified)", "/link/care-context/confirm"),
+        ("scan-and-share", "/patient/share"),
+    ],
+    "m3": [
+        ("consent request accepted", "/consent/request/on-init"),
+        ("consent GRANTED notification", "/consent/request/notify"),
+        ("consent artefact fetched", "/consent/on-fetch"),
+        ("health-information request accepted", "/health-information/hiu/on-request"),
+    ],
+    # The two the gateway emits without any human tapping in the ABHA app. If even these are missing, the
+    # registered callback URL is wrong or expired - check `abdm-sandbox-probe.sh bridge` before anything else.
+    "server-driven": [
+        ("consent request accepted", "/consent/request/on-init"),
+        ("link token issued", "/token/on-generate-token"),
+    ],
+}
+
+
+def verdict(records, which):
+    """Per-callback PASS/MISSING table for one milestone. Returns True when the milestone is complete."""
+    want = EXPECT[which]
+    paths = [r["path"] for r in records]
+    print("\n" + "=" * 88)
+    print("%s END-TO-END - %d callback(s) required" % (which.upper(), len(want)))
+    print("=" * 88)
+    ok = True
+    for label, frag in want:
+        hit = next((p for p in paths if frag in p), None)
+        print("  %-8s %-42s %s" % ("PASS" if hit else "MISSING", label, hit or frag))
+        ok = ok and bool(hit)
+    extra = [p for p in paths if not any(f in p for _, f in want)]
+    if extra:
+        print("\n  also observed (not required for %s): %s" % (which, ", ".join(sorted(set(extra)))))
+    print("\n  %s: %s" % (which.upper(), "COMPLETE" if ok else "INCOMPLETE - the MISSING rows above have not arrived"))
+    if not ok:
+        print("  Patient-initiated steps only fire when someone taps in the Sandbox ABHA app;")
+        print("  see docs/connect/abdm/CAPTURE-RUNBOOK.md step 3.")
+    return ok
 
 # What a captured body must never carry into a committed fixture.
 ABHA_ADDR = re.compile(r"\b[A-Za-z0-9._-]+@(?:sbx|abdm)\b")
@@ -90,9 +143,15 @@ def main():
     ap.add_argument("--watch", action="store_true")
     ap.add_argument("--out")
     ap.add_argument("--raw", action="store_true", help="do NOT mask identifiers (gitignored paths only)")
+    ap.add_argument("--expect", choices=sorted(EXPECT), help="poll until this milestone's callbacks all arrive, then print a verdict")
+    ap.add_argument("--timeout", type=int, default=900, help="seconds to wait for --expect (default 900)")
     a = ap.parse_args()
+    # --expect implies watching: the patient-initiated callbacks arrive minutes after the trigger.
+    if a.expect:
+        a.watch = True
 
     seen, records = set(), []
+    started = time.time()
     while True:
         try:
             data = fetch(a.token)
@@ -112,6 +171,20 @@ def main():
             print(rec["at"], rec["method"], rec["path"], "| bearer:", rec["hasBearer"])
             print("headers:", json.dumps(rec["headers"]))
             print(json.dumps(redact(rec["body"]), indent=1)[:3000])
+        if a.expect:
+            want = EXPECT[a.expect]
+            paths = [r["path"] for r in records]
+            if all(any(f in p for p in paths) for _, f in want):
+                verdict(records, a.expect)
+                if a.out:
+                    emit(records, a.out, a.raw)
+                return 0
+            if time.time() - started > a.timeout:
+                print("\ntimed out after %ds waiting for %s" % (a.timeout, a.expect), file=sys.stderr)
+                verdict(records, a.expect)
+                if a.out:
+                    emit(records, a.out, a.raw)
+                return 2
         if not a.watch:
             break
         time.sleep(4)

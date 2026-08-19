@@ -689,10 +689,12 @@ export async function onRequest(context) {
       }
       if (seg === "timeline") {
         const kind = QT.tlKind(body.kind);
-        // An immunisation is gated like PRESCRIBING, not like vitals: once a care context is linked to an
-        // ABHA it can never be withdrawn, so this entry can end up permanently in a national health record.
-        // Widen to EMR_VITALS if nurses should be able to record the doses they administer.
-        await requireSessionCap(env, actor, s, kind === "vitals" ? CAPS.EMR_VITALS : CAPS.EMR_TREAT);
+        // Immunisation has its OWN cap (owner-decided: doctor + authorised staff). Not emr.treat, because
+        // the nurse who administers the dose must be able to record it; not emr.vitals, because this can
+        // end up permanently in a national health record once the care context is linked. Reception,
+        // supervisor and cashier hold neither and are refused.
+        await requireSessionCap(env, actor, s,
+          kind === "vitals" ? CAPS.EMR_VITALS : kind === "immunization" ? CAPS.EMR_IMMUNISE : CAPS.EMR_TREAT);
         const t = await Q.getTicket(env, body.ticketId);
         if (!t || t.sessionId !== s.id) return json({ ok: false, error: "not_found" }, 404, request);
         let data = null;

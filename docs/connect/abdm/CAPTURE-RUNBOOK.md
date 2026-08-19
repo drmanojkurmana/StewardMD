@@ -48,6 +48,18 @@ Sandbox allows **100 ABHA creations per client id** (`ABDM-1227`), so there is r
 
 Then tell me the address, or run step 2 yourself.
 
+## Step 1b — the address must be a SANDBOX one
+
+`something@sbx`, from the Sandbox ABHA app. A **production** ABHA (`...@abdm`, from the normal ABHA app or
+an ABHA card) cannot be used, and this is not a technicality:
+
+- We are registered in the sandbox (`ABDM_ENV=sandbox`, gateway `dev.abdm.gov.in`, ABHA host
+  `abhasbx.abdm.gov.in`). Production identities do not exist in the sandbox registry, so the gateway
+  answers `400 "User not found"` and emits no callback - the dead end described above.
+- The capture endpoint is an UNAUTHENTICATED inbox. A production callback would put a real person's ABHA
+  address and verified demographics somewhere anyone with the URL can read.
+- `flow` sends a real consent request. Against a production address that reaches a real person's phone.
+
 ## Step 2 — trigger the server-driven flows (scripted)
 
 ```bash
@@ -57,6 +69,23 @@ Then tell me the address, or run step 2 yourself.
 # Fire the flows in another
 ./scripts/abdm-sandbox-probe.sh flow <your-address>@sbx
 ```
+
+Then get a VERDICT rather than reading the stream by eye. `--expect` polls until every callback a
+milestone needs has actually arrived, prints a PASS/MISSING line per step, and exits non-zero if any is
+still absent:
+
+```bash
+# Did the two callbacks that need no human tapping arrive? If these are MISSING, the registered URL is
+# wrong or expired - check `abdm-sandbox-probe.sh bridge` before touching anything else.
+./scripts/abdm-capture.py "$TOKEN" --expect server-driven --timeout 300
+
+# The full milestones, once you have done step 3 in the app:
+./scripts/abdm-capture.py "$TOKEN" --expect m2 --timeout 900 --out test/connect/abdm/fixtures/real-callbacks.mjs
+./scripts/abdm-capture.py "$TOKEN" --expect m3 --timeout 900
+```
+
+`flow` is only the trigger; `--expect` is the evidence that the flow WORKED. A 202 on the request says
+ABDM accepted it, not that the callback ever came back.
 
 That posts a consent request and a demographic-auth link-token request. Expect:
 

@@ -29,6 +29,15 @@ Heavy, flag-gated module assets are stripped from the native bundle and fetched 
 ## 2026-07-29 · Intent Firewall = allow-list, not block-list
 See [[MaiK Intent Firewall]]. Require a positive medical signal; reject the rest. **Why**: a block-list can't enumerate all non-medical topics. **Invariant**: zero false-refusals. **Status**: live (gold1041).
 
+## 2026-08-19 · Recording a vaccination is its own capability
+`CAPS.EMR_IMMUNISE`, held by doctor + nurse + intern/resident (owner: "doctor + auth staff"). NOT `emr.treat` (the nurse usually gives the dose, so doctor-only would mean the doctor typing in someone else's act) and NOT `emr.vitals` (once a care context is linked to an ABHA it can never be withdrawn, so this can land permanently in a national health record). Reception/supervisor/cashier hold neither. **Status**: live behind `smd_opd_immunization` (def true, inside the already-gated OPD EMR surface).
+
+## 2026-08-19 · Clinical code lists are GENERATED from the IG, never hand-written
+`functions/_vaccines.js` is emitted by `scripts/gen-vaccines.mjs` from the NDHM IG's own `ndhm-vaccine-codes` value set; the server refuses any code outside it and always takes the display from the IG, never the request body. **Why**: a vaccine code in a patient's national health record is a clinical claim ABDM can never retract, and typing SNOMED from memory is how a wrong one ships - the generator's assertion caught HPV as `...109` vs the IG's `...103` on the first run. **Applies to**: any future coded clinical list (route, body site, billing codes). **Status**: live.
+
+## 2026-08-19 · Validate PROJECTIONS against the real validator, not just fixtures
+The HAPI/NRCES gate emits two extra bundles built from real product data (a `q_invoices` bill, an OPD vaccination) alongside the eight fixtures. **Why**: fixture ids are hand-written and happen to be legal - the first projected bundle failed with 3 errors because FHIR `Resource.id` forbids underscores and the billing store mints `inv_<hex>`. Fixed at `entryOf()` (the one funnel every resource passes through) and `validateNdhmDoc` now checks the charset, so the class is caught without a JDK. **Status**: live.
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.

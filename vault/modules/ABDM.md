@@ -1,6 +1,6 @@
 ---
 tags: [module, interop, compliance]
-status: M1+M2+M3 wired; FHIR conforms to NRCES 8/8; SCCM v1.1; 1052 tests. Inert, flags OFF
+status: M1+M2+M3 wired; FHIR conforms to NRCES 8/8 (+2 projections); SCCM v1.1; 1092 tests. Inert, flags OFF
 flag: smd_connect / CONNECT_FLAG + smd_connect_hip / CONNECT_HIP_FLAG, both default OFF
 ---
 # ABDM (Ayushman Bharat Digital Mission)
@@ -120,3 +120,31 @@ placeholder, which is deliberately useful: it captures ABDM's real callback payl
   and each hospital gets a HIP ID under it, matching `connect_tenant` multi-tenancy.
 
 Deps: [[Connect]] · [[Infra]] (D1, R2, India-hosting question) · [[FollowCare]] · [[OPD Queue]] · [[Decisions]].
+
+## Certification state (2026-08-19, hardening pass closed)
+
+Feature development STOPPED on owner instruction; the deliverable is
+`docs/connect/abdm/CERTIFICATION-READINESS.md` (the final report).
+
+**One gap blocks certification: no ABDM callback body has ever been observed.** It needs a **sandbox**
+ABHA address (`something@sbx`, Sandbox ABHA app, Android). A production ABHA (`...@abdm`) CANNOT be used -
+we are registered in the sandbox, so production identities do not resolve (`400 "User not found"`, no
+callback), and the capture inbox is unauthenticated.
+
+Everything else that did not need that address is done:
+
+- **All 15 inferred callback shapes fail SAFE** (`test/connect/abdm/inferred-shapes-failsafe.test.mjs`):
+  15 kinds x 11 hostile bodies, proving no crash / no mis-attribution / no silent success. Survivable is
+  NOT correct - only a capture closes it. A count assertion (9 HIP + 6 HIU) stops the sweep shrinking.
+- **M2/M3 E2E is one command**: `abdm-capture.py --expect m2|m3|server-driven` gives a PASS/MISSING verdict.
+  `flow` only triggers; a 202 is not evidence the callback came back. Start with `server-driven` - if those
+  two are MISSING the registered URL is wrong/expired.
+- Demographic index has a writer (`/api/abdm/link`); OTP has a number (`findMobileByPatientId`).
+- 10 bundles pass HAPI 6.2.1 vs the real NRCES IG, including two built from REAL product data
+  (a `q_invoices` bill, an OPD vaccination) rather than fixtures.
+
+### Immunisation capture (built here, then feature work stopped)
+`functions/_vaccines.js` **IS GENERATED** - `node scripts/gen-vaccines.mjs` rebuilds it from the IG's own
+`ndhm-vaccine-codes` value set (179 SNOMED concepts). Never hand-edit it. The generator asserts every
+India-schedule code exists and already caught HPV typed as `...109` when the IG says `...103`.
+Capture gate: `CAPS.EMR_IMMUNISE` (doctor + nurse + intern/resident), NOT `emr.treat`.

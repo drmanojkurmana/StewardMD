@@ -173,14 +173,14 @@
       '<p class="oe-note">Loading the vaccine list…</p></div>';
     function opt(o, label) { return '<option value="' + esc(o.code) + '"' + (d.vaccineCode === o.code ? " selected" : "") + ">" + esc(label || o.display) + "</option>"; }
     var sel = '<select class="oe-inp" data-oe-inp="imm-vac"><option value="">Select a vaccine…</option>' +
-      '<optgroup label="India immunisation schedule">' + cat.schedule.map(function (o) { return opt(o, o.label + " — " + o.display); }).join("") + "</optgroup>" +
+      '<optgroup label="India immunisation schedule">' + cat.schedule.map(function (o) { return opt(o, o.label + " (" + o.display + ")"); }).join("") + "</optgroup>" +
       '<optgroup label="All vaccines (' + cat.others.length + ')">' + cat.others.map(function (o) { return opt(o); }).join("") + "</optgroup></select>";
     var form = '<div class="oe-draft"><div class="oe-draft-h">' + ms("vaccines") + "<b>Record a vaccination</b></div>" +
       fieldRow("Vaccine", sel, true, !d.vaccineCode) +
       fieldRow("Dose number", textInp("imm-dose", d.doseNumber, "e.g. 1")) +
       fieldRow("Batch / lot no.", textInp("imm-lot", d.lotNumber, "Optional, from the vial")) +
       fieldRow("Given on", textInp("imm-when", d.occurrenceDateTime, "Blank = now (YYYY-MM-DD)")) +
-      fieldRow("Note", textInp("imm-note", d.note, "Optional — site, reaction, who administered")) +
+      fieldRow("Note", textInp("imm-note", d.note, "Optional: site, reaction, who administered")) +
       '<button class="oe-btn primary" data-oe-act="immun-add">' + ms("add") + "Record vaccination</button>" +
       '<p class="oe-note">Site and route are recorded in the note for now: the NDHM guide fixes no code list for them, and a half-coded site is rejected by the national validator.</p></div>';
     var given = (st.timeline || []).filter(function (e) { return e.kind === "immunization"; })

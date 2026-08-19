@@ -149,3 +149,25 @@ test("a not-done vaccination is still a legal record, and a bogus status is refu
   const bad = projectTimeline(visit([immEntry({ status: "sort-of" })]), ctx);
   assert.equal(validateBundle(bad).ok, false);
 });
+
+// ── who may record one ──────────────────────────────────────────────────────────────────────────────
+test("doctor and authorised clinical staff may record a vaccination; nobody else may", async () => {
+  const { CAPS, ROLE_CAPS, capsFor } = await import("../../../functions/_queue_roles.js");
+  // Owner-decided 2026-08-19: doctor + authorised staff. The nurse usually gives the dose, so recording
+  // it cannot be doctor-only - otherwise the doctor types in someone else's act.
+  for (const role of ["doctor", "nurse", "intern", "resident", "admin"]) {
+    assert.ok(capsFor(role).includes(CAPS.EMR_IMMUNISE), role + " must be able to record a vaccination");
+  }
+  // Non-clinical and read-only roles must not be able to write into a national health record.
+  for (const role of ["reception", "supervisor", "cashier", "viewer"]) {
+    assert.ok(!capsFor(role).includes(CAPS.EMR_IMMUNISE), role + " must NOT be able to record a vaccination");
+  }
+  // It is a SEPARATE authority from prescribing: a nurse gains recording without gaining emr.treat.
+  assert.ok(!capsFor("nurse").includes(CAPS.EMR_TREAT), "the nurse still may not prescribe or order");
+  assert.notEqual(CAPS.EMR_IMMUNISE, CAPS.EMR_TREAT);
+  assert.notEqual(CAPS.EMR_IMMUNISE, CAPS.EMR_VITALS);
+  // ONCQIS governance roles are clinical-governance only and hold no queue/EMR write.
+  for (const role of Object.keys(ROLE_CAPS).filter((r) => r.startsWith("oncqis_"))) {
+    assert.ok(!capsFor(role).includes(CAPS.EMR_IMMUNISE), role);
+  }
+});
