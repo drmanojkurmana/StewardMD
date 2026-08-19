@@ -14,7 +14,19 @@ CREATE TABLE IF NOT EXISTS connect_abdm_consent_req (
   -- dataEraseAt equals the artifact expiry or is a separate (usually later) bound. NOTE: CREATE-IF-NOT-EXISTS
   -- adds this only on a FRESH D1; a provisioned D1 needs `ALTER TABLE connect_abdm_consent_req ADD COLUMN
   -- data_erase_at TEXT;` (SQLite has no ADD-COLUMN-IF-NOT-EXISTS) — see the T9 go-live checklist.
-  data_erase_at TEXT );
+  data_erase_at TEXT,
+  -- M3 (additive): the CM's OWN consent-REQUEST id, returned on /consent/request/on-init. DISTINCT from
+  -- `consent_id`, which is the ARTEFACT id and only exists once the patient grants. The later hiu notify
+  -- carries the consentRequestId, so without this column a grant cannot be matched back to the request that
+  -- asked for it. NOTE: CREATE-IF-NOT-EXISTS adds this only on a FRESH D1; a provisioned D1 needs
+  -- `ALTER TABLE connect_abdm_consent_req ADD COLUMN consent_request_id TEXT;`.
+  consent_request_id TEXT,
+  -- M3 (additive): when we last successfully fetched data under this consent. The HIU may repeat a fetch
+  -- under an existing artefact only within 14 days; past that the patient must be asked again. Enforced at
+  -- the REQUEST (hiu.js#requestHealthInformation), because a request we should not have made is not fixed
+  -- by discarding the answer. Provisioned D1 needs
+  -- `ALTER TABLE connect_abdm_consent_req ADD COLUMN last_fetched_at TEXT;`.
+  last_fetched_at TEXT );
 -- `consent_id` is the durable join (linked by the GRANT notify); index it for the by-consent reload path.
 -- UNIQUE (partial, NULLs excluded): a consentId maps to AT MOST ONE lifecycle row — the DB-layer backstop
 -- that makes the two-row split structurally impossible (persistGranted also fails closed on no-linked-row).

@@ -38,6 +38,7 @@ const ENV = {
   CONNECT_HMAC_SALT: Buffer.from("connect-test-hmac-salt-key-1234").toString("base64"),
   CONNECT_ABDM_DATA_PUSH_URL: "https://stewardmd.in/api/connect/abdm/hiu/data",
   ABDM_JWKS_URL: "https://healthidsbx.abdm.gov.in/certs",   // allow-listed host → getPinnedJwks resolves the mock JWKS
+  ABDM_HIU_ID: "IN2810006668",                             // consent.hiu.id - how the gateway routes the grant back
 };
 
 // The consent scope the CM SIGNS into the artifact (→ persisted onto the reconciled row by verifyConsentArtifact).
@@ -107,7 +108,8 @@ async function setup({ env = ENV, knobs = {} } = {}) {
   return { env, db, r2, kv, audit, ingressDeps, outDeps, consumeDeps, mock };
 }
 
-const consentReq = () => ({ request: {}, tenantId: "t1", abhaAddress: ABHA, purpose: SCOPE.purpose, hiTypes: SCOPE.hiTypes, dateRange: SCOPE.dateRange, dataEraseAt: SCOPE.dataEraseAt });
+const REQUESTER = { name: "Dr A Rao", identifier: { type: "REGNO", value: "AP12345", system: "https://www.mciindia.org" } };
+const consentReq = () => ({ request: {}, tenantId: "t1", abhaAddress: ABHA, purpose: SCOPE.purpose, hiTypes: SCOPE.hiTypes, dateRange: SCOPE.dateRange, dataEraseAt: SCOPE.dataEraseAt, requester: REQUESTER });
 // NOTE: no `consent` field — the data request MUST revalidate off the DB row the on-fetch route persisted.
 const dataReq = (consentId) => ({ request: {}, tenantId: "t1", consentId, careContexts: ["cc-A"], hiTypes: ["OPConsultation"], purpose: { code: "CAREMGT" }, dateRange: { from: "2026-06-01T00:00:00.000Z", to: "2026-07-15T00:00:00.000Z" } });
 

@@ -11,7 +11,7 @@ import { resolveActor, resolveTenant } from "../identity.js";
 import { hmacPseudonym } from "../audit.js";
 import { putConsentReq, putTxn, tryJoin, unsealTxnKey, claimAck, deleteBuffered, advanceStatus } from "./state.js";
 import { randomBytes, importRawPrivate, nonce, sharedSecret, openEntry, abdmKeyMaterial, readDhPublicKey, FideliusError } from "./fidelius.js";
-import { revalidateForRequest, getConsentReqByConsentId } from "./consent.js";
+import { revalidateForRequest, getConsentReqByConsentId, withinRefetchWindow } from "./consent.js";
 import { AbdmError } from "./gateway.js";
 import { PermissionError } from "../permission.js";
 
@@ -19,32 +19,55 @@ import { PermissionError } from "../permission.js";
 //    key casing differs) — pin every name to the live Postman/Swagger before real calls. Kept LOCAL to the
 //    consent code (the sole place these names are used) so the real names change in exactly one spot, mirroring
 //    gateway.js's FIELDS/ENDPOINTS seam.
+// PINNED against the Milestone-3 Postman collection (16-02-2026), "HIU APIs / Consent init Request".
 export const CONSENT_FIELDS = {
-  requestId:   "requestId",     // VERIFY
-  timestamp:   "timestamp",     // VERIFY
-  consent:     "consent",       // VERIFY
-  purpose:     "purpose",       // VERIFY
-  patient:     "patient",       // VERIFY
-  patientId:   "id",            // VERIFY — the RAW ABHA address lands here (POST body ONLY, never persisted)
-  hiTypes:     "hiTypes",       // VERIFY
-  permission:  "permission",    // VERIFY
-  dateRange:   "dateRange",     // VERIFY
-  dataEraseAt: "dataEraseAt",   // VERIFY
+  requestId:   "requestId",
+  timestamp:   "timestamp",
+  consent:     "consent",
+  purpose:     "purpose",
+  patient:     "patient",
+  patientId:   "id",            // the RAW ABHA address lands here (POST body ONLY, never persisted)
+  hiu:         "hiu",
+  hip:         "hip",
+  careContexts: "careContexts",
+  requester:   "requester",
+  hiTypes:     "hiTypes",
+  permission:  "permission",
+  accessMode:  "accessMode",
+  dateRange:   "dateRange",
+  dataEraseAt: "dataEraseAt",
+  frequency:   "frequency",
 };
+
+// The consent the patient is asked to approve is shown to THEM in the ABHA app, so an incomplete request is
+// not a protocol nicety - it is a consent screen that cannot say who is asking. Certification pins
+// requester.identifier to the doctor's medical registration number
+// ({type:"REGNO", value:"MH1001", system:"https://www.mciindia.org"}), which the NMC verification gate
+// already collects. hiu.id is how the gateway routes the grant back to us.
+const DEFAULT_FREQUENCY = { unit: "HOUR", value: 0, repeats: 0 };   // one-shot pull, per the collection sample
 
 // Build the consentInit POST body through the field seam. The RAW ABHA is placed ONLY here (patient.id) —
 // it is HMAC'd before it touches D1/KV/audit and must never appear in a URL/log.
-export function buildConsentInitBody(F, { requestId, now, abhaAddress, purpose, hiTypes, dateRange, dataEraseAt }) {
+export function buildConsentInitBody(F, { requestId, now, abhaAddress, purpose, hiTypes, dateRange, dataEraseAt,
+                                          hiuId, requester, hipId, careContexts, frequency }) {
   return {
     [F.requestId]: requestId,
     [F.timestamp]: now,
     [F.consent]: {
       [F.purpose]: purpose ?? null,
       [F.patient]: { [F.patientId]: abhaAddress },   // RAW ABHA — POST body ONLY
+      [F.hiu]: { id: hiuId ?? null },
+      // Explicit nulls, as the collection sends: "any HIP" / "any care context". Omitting them is not the
+      // same statement as sending null, and the CM reads the absence differently.
+      [F.hip]: hipId ? { id: hipId } : null,
+      [F.careContexts]: careContexts ?? null,
+      [F.requester]: requester ?? null,
       [F.hiTypes]: hiTypes ?? [],
       [F.permission]: {
+        [F.accessMode]: "VIEW",
         [F.dateRange]: dateRange ?? null,
         [F.dataEraseAt]: dataEraseAt ?? null,
+        [F.frequency]: frequency ?? DEFAULT_FREQUENCY,
       },
     },
   };
@@ -65,6 +88,16 @@ export async function requestConsent(env, deps, req) {
   // Our own correlation id — distinct from the gateway's per-HTTP REQUEST-ID header, which the gateway mints.
   const requestId = globalThis.crypto.randomUUID();
 
+  // The requester is the DOCTOR asking, identified by their medical registration number - the patient's
+  // consent screen shows it, and certification checks it. Refuse rather than send an anonymous request:
+  // a consent the patient cannot attribute is not informed consent.
+  const requester = req.requester || null;
+  if (!requester || !requester.identifier || !requester.identifier.value) {
+    throw new PermissionError("consent request needs a requester with a medical registration number");
+  }
+  const hiuId = (env && env.ABDM_HIU_ID) || null;
+  if (!hiuId) throw new AbdmError("ABDM_HIU_ID is not configured");
+
   const body = buildConsentInitBody(CONSENT_FIELDS, {
     requestId, now,
     abhaAddress: req.abhaAddress,
@@ -72,6 +105,9 @@ export async function requestConsent(env, deps, req) {
     hiTypes: req.hiTypes,
     dateRange: req.dateRange,
     dataEraseAt: req.dataEraseAt,
+    hiuId, requester,
+    hipId: req.hipId ?? null,
+    careContexts: req.careContexts ?? null,
   });
 
   // Submit. Fresh REQUEST-ID header is minted inside the gateway. Fail-closed: only a 202-accept persists.
@@ -187,6 +223,12 @@ export async function requestHealthInformation(env, deps, req) {
   const gate = revalidateForRequest(consent, req, now);
   if (!gate.ok) throw new PermissionError("consent revalidation failed: " + gate.reason);   // fail-closed: no gateway, no txn
 
+  // (1c) The 14-day re-consent window (M3). A repeat fetch under an EXISTING artefact is allowed only
+  //      within 14 days of the last one; past that the patient must be asked again. Checked HERE, before
+  //      the gateway call, because a request we should not have made is not fixed by discarding the answer.
+  const window = withinRefetchWindow(fresh, now);
+  if (!window.ok) throw new PermissionError("re-consent required: " + window.reason);
+
   // Our own correlation id for THIS data request; the txn row is keyed by it (R17).
   const requestId = globalThis.crypto.randomUUID();
 
@@ -218,6 +260,9 @@ export async function requestHealthInformation(env, deps, req) {
     status: "CONSENT_GRANTED", expiresAt: consent.expiry ?? null, now,
   });
   await advanceStatus(db, requestId, "CONSENT_GRANTED", "REQUESTED", now);
+  // Stamp the fetch so the 14-day window is measured from a real request, not from the grant.
+  await db.prepare("UPDATE connect_abdm_consent_req SET last_fetched_at=?,updated_at=? WHERE consent_id=?")
+    .bind(now, now, req.consentId).run();
 
   // PHI-free audit (metadata only): consentId is a non-PHI artifact id (R16); COUNTS, not lists; no ABHA/careContextRef.
   if (audit) await audit({

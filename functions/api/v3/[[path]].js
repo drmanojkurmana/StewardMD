@@ -25,6 +25,7 @@ import { makeSecrets } from "../../_connect/secrets.js";
 import { makeGateway } from "../../_connect/abdm/gateway.js";
 import { abdmConfig } from "../../_connect/abdm/config.js";
 import { HIP_HANDLERS } from "../../_connect/abdm/hip-handlers.js";
+import { HIU_HANDLERS } from "../../_connect/abdm/hiu-handlers.js";
 import { consentedStoreSource } from "../../_connect/abdm/consented-store.js";
 import { issueQueueToken } from "../../_connect/abdm/opd-bridge.js";
 
@@ -48,7 +49,7 @@ async function onGenerateToken({ env, deps, body }) {
 const HANDLERS = {
   "link-token-result": onGenerateToken,
   ...HIP_HANDLERS,
-  // Still unwired, and acknowledged rather than failed: the six M3 (HIU) callback kinds.
+  ...HIU_HANDLERS,
 };
 
 export async function onRequest(context) {
