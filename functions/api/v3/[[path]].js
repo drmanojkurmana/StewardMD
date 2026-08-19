@@ -27,7 +27,7 @@ import { abdmConfig } from "../../_connect/abdm/config.js";
 import { HIP_HANDLERS } from "../../_connect/abdm/hip-handlers.js";
 import { HIU_HANDLERS } from "../../_connect/abdm/hiu-handlers.js";
 import { consentedStoreSource } from "../../_connect/abdm/consented-store.js";
-import { issueQueueToken } from "../../_connect/abdm/opd-bridge.js";
+import { issueQueueToken, resolvePatientMobile } from "../../_connect/abdm/opd-bridge.js";
 
 /**
  * The link token arrives asynchronously here after ensureLinkToken() fires generate-token.
@@ -80,10 +80,15 @@ export async function onRequest(context) {
     source: consentedStoreSource,
     // Scan-and-share issues an OPD queue token. Bound here so hip-handlers stays free of Firestore.
     issueQueueToken,
-    // OTP delivery for user-initiated linking. Left unbound until the owner picks the channel: an
-    // unbound sender makes onLinkInit report delivered:false rather than silently claim it sent one.
-    // // VERIFY (owner): wire to the FollowCare SMS/WhatsApp sender before USER_INIT_LINK certification.
-    sendOtp: null,
+    // OTP delivery for user-initiated linking goes through the app's existing SMS/WhatsApp senders
+    // (functions/_connect/abdm/otp.js). It reports delivered:false, honestly, until BOTH a provider and a
+    // DLT-approved OTP template (ABDM_OTP_TEMPLATE) are configured - an Indian transactional SMS without
+    // an approved template is dropped by the provider, which would otherwise look to us like success.
+    // // VERIFY (owner): register the OTP template with the SMS provider and set ABDM_OTP_TEMPLATE.
+    resolvePatientMobile,
+    // The OPD store is Firestore, which _connect must not import; the lookup is injected here.
+    // // VERIFY (owner): wire findTicketMobile to the queue's decPHI lookup once the OPD binding is live.
+    findTicketMobile: null,
     // Correlating a callback back to a patient is per-flow and none of it is proven yet, so it stays
     // null: onGenerateToken records and skips rather than caching against a guessed subject.
     correlate: null,

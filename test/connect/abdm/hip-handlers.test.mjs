@@ -10,8 +10,9 @@ import { makeAbdmDb, makeR2 } from "../../../functions/_connect/abdm/abdm-testki
 import { makeMockKv } from "../../../functions/_connect/testkit.js";
 import { hmacPseudonym } from "../../../functions/_connect/audit.js";
 import {
-  HIP_HANDLERS, resolveHipTenant, abhaOf, HipHandlerError, OTP_TTL_SEC,
+  HIP_HANDLERS, resolveHipTenant, abhaOf, HipHandlerError,
 } from "../../../functions/_connect/abdm/hip-handlers.js";
+import { OTP_TTL_SEC } from "../../../functions/_connect/abdm/otp.js";
 
 const NOW = "2026-08-19T00:00:00.000Z";
 const HIP_ID = "IN2810006668";
@@ -185,10 +186,19 @@ test("discover: the HIP flag OFF answers nothing at all", async () => {
 });
 
 // ── link init / confirm ─────────────────────────────────────────────────────────────────────────────
+// A tenant with a real OTP channel configured. Without ABDM_OTP_TEMPLATE and a provider, delivery
+// correctly reports not_configured - see otp.test.mjs for that path in full.
+const ENV_OTP = { ...ENV, ABDM_OTP_TEMPLATE: "SMD_ABDM_OTP", FOLLOWCARE_SMS_PROVIDER: "twofactor",
+  TWOFACTOR_API_KEY: "k", TWOFACTOR_SENDER: "STWRDM", TWOFACTOR_TEMPLATE_CHECKIN: "t" };
+
 test("link-init: mints an OTP, holds the offered scope, and answers on-init in the pinned shape", async () => {
   const sent = [];
-  const deps = await baseDeps({ sendOtp: async (e, d, a) => { sent.push(a); return true; }, mintOtp: () => "123456" });
-  await HIP_HANDLERS["link-init"]({ env: ENV, deps, headers: headers(),
+  const deps = await baseDeps({
+    send: async (channel, payload) => { sent.push({ channel, payload }); return { ok: true }; },
+    mintOtp: () => "123456",
+    resolvePatientMobile: async () => "9876543210",
+  });
+  await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers(),
     body: { transactionId: "tx-l1", patient: { referenceNumber: "PSEUDO-1", careContexts: [{ referenceNumber: "OPD:1" }] } } });
 
   const { key, body } = deps.gateway.calls[0];
@@ -200,8 +210,11 @@ test("link-init: mints an OTP, holds the offered scope, and answers on-init in t
   assert.ok(body.link.referenceNumber, "a link reference is required to correlate the confirm");
   assert.deepEqual(body.response, { requestId: "req-1" });
 
-  assert.equal(sent.length, 1, "the OTP is delivered out of band by the HIP, not by the gateway");
-  assert.equal(sent[0].otp, "123456");
+  // Delivered for real, through the app's existing sender.
+  assert.equal(sent.length, 1);
+  assert.equal(sent[0].channel, "sms");
+  assert.ok(sent[0].payload.body.includes("123456"), "the OTP is in the message");
+  assert.ok(!/PSEUDO-1|OPD:1/.test(sent[0].payload.body), "an SMS is not a private channel: no refs in it");
 
   // The held state is NON-PHI: an OTP hash, a pseudonym and opaque references. No OTP in the clear.
   const held = JSON.parse(await deps.kv.get("connect:abdm:linkotp:" + body.link.referenceNumber));
@@ -209,23 +222,49 @@ test("link-init: mints an OTP, holds the offered scope, and answers on-init in t
   assert.equal(held.patientRef, "PSEUDO-1");
   assert.equal(held.attempts, 0);
   assert.ok(!JSON.stringify(held).includes("123456"), "the OTP itself must never be stored");
+  assert.ok(!JSON.stringify(held).includes("9876543210"), "nor the mobile");
 });
 
-test("link-init: with no OTP sender bound we do not claim to have sent one", async () => {
-  const deps = await baseDeps({ mintOtp: () => "123456" });
+test("link-init: with nothing able to deliver, we do NOT claim to have sent one", async () => {
   const seen = [];
+  const deps = await baseDeps({ mintOtp: () => "123456", resolvePatientMobile: async () => "9876543210" });
   deps.audit = async (e) => { seen.push(e); };
+  // ENV (not ENV_OTP): no ABDM_OTP_TEMPLATE, so no channel is usable.
   await HIP_HANDLERS["link-init"]({ env: ENV, deps, headers: headers(), body: { transactionId: "tx", patient: {} } });
   const rec = seen.find((e) => e.action === "abdm.link.init");
   assert.equal(rec.outcome, "failed");
   assert.equal(rec.scope.delivered, false);
+  assert.equal(rec.scope.reason, "not_configured");
+});
+
+test("link-init: no mobile on file means no delivery, and it says so", async () => {
+  const seen = [];
+  const deps = await baseDeps({ send: async () => ({ ok: true }), mintOtp: () => "123456",
+                                resolvePatientMobile: async () => null });
+  deps.audit = async (e) => { seen.push(e); };
+  await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers(), body: { transactionId: "tx", patient: {} } });
+  const rec = seen.find((e) => e.action === "abdm.link.init");
+  assert.equal(rec.scope.delivered, false);
+  assert.equal(rec.scope.reason, "bad_number");
+});
+
+test("link-init: past the send budget we answer an ERROR, not a link nobody can satisfy", async () => {
+  const deps = await baseDeps({ send: async () => ({ ok: true }), mintOtp: () => "123456",
+                                resolvePatientMobile: async () => "9876543210" });
+  const body = { transactionId: "tx", patient: { referenceNumber: "PSEUDO-1" } };
+  for (let i = 0; i < 3; i++) await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers(), body });
+  await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers(), body });
+  const last = deps.gateway.calls[deps.gateway.calls.length - 1].body;
+  assert.ok(last.error, "a refused mint has no reference to offer");
+  assert.equal(last.link, undefined);
+  assert.deepEqual(last.response, { requestId: "req-1" });
 });
 
 async function initThenConfirm(deps, { otp = "123456", token = "123456", refs = ["OPD:1"], patientRef } = {}) {
-  await HIP_HANDLERS["link-init"]({ env: ENV, deps, headers: headers({ requestId: "req-init" }),
+  await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers({ requestId: "req-init" }),
     body: { transactionId: "tx-l1", patient: { referenceNumber: patientRef, careContexts: refs.map((r) => ({ referenceNumber: r })) } } });
   const linkRef = deps.gateway.calls[0].body.link.referenceNumber;
-  await HIP_HANDLERS["link-confirm"]({ env: ENV, deps, headers: headers({ requestId: "req-conf" }),
+  await HIP_HANDLERS["link-confirm"]({ env: ENV_OTP, deps, headers: headers({ requestId: "req-conf" }),
     body: { confirmation: { linkRefNumber: linkRef, token } } });
   return { linkRef, confirm: deps.gateway.calls[deps.gateway.calls.length - 1] };
 }
@@ -237,7 +276,7 @@ test("link-confirm: the right OTP links exactly what link-init offered", async (
       ccRow({ id: "c1", hash, ref: "OPD:1" }),
       ccRow({ id: "c2", hash, ref: "OPD:2" }),          // NOT offered at init
     ] },
-    sendOtp: async () => true, mintOtp: () => "123456",
+    send: async () => ({ ok: true }), mintOtp: () => "123456", resolvePatientMobile: async () => "9876543210",
   });
   const { confirm, linkRef } = await initThenConfirm(deps, { patientRef: hash, refs: ["OPD:1"] });
   assert.equal(confirm.key, "onLinkConfirm");
@@ -251,27 +290,27 @@ test("link-confirm: a wrong OTP links nothing, and three wrong tries destroy the
   const hash = await hashFor();
   const deps = await baseDeps({
     tables: { connect_abdm_carecontext: [ccRow({ id: "c1", hash, ref: "OPD:1" })] },
-    sendOtp: async () => true, mintOtp: () => "123456",
+    send: async () => ({ ok: true }), mintOtp: () => "123456", resolvePatientMobile: async () => "9876543210",
   });
-  await HIP_HANDLERS["link-init"]({ env: ENV, deps, headers: headers(),
+  await HIP_HANDLERS["link-init"]({ env: ENV_OTP, deps, headers: headers(),
     body: { transactionId: "tx", patient: { referenceNumber: hash, careContexts: [{ referenceNumber: "OPD:1" }] } } });
   const linkRef = deps.gateway.calls[0].body.link.referenceNumber;
   const key = "connect:abdm:linkotp:" + linkRef;
 
   for (let i = 0; i < 3; i++) {
-    await HIP_HANDLERS["link-confirm"]({ env: ENV, deps, headers: headers(), body: { confirmation: { linkRefNumber: linkRef, token: "000000" } } });
+    await HIP_HANDLERS["link-confirm"]({ env: ENV_OTP, deps, headers: headers(), body: { confirmation: { linkRefNumber: linkRef, token: "000000" } } });
     assert.deepEqual(deps.gateway.calls[deps.gateway.calls.length - 1].body.patient, []);
   }
   assert.equal(await deps.kv.get(key), null, "past the attempt cap the reference is destroyed, not ground down");
 
   // …and the now-dead reference still answers identically, so it is no oracle.
-  await HIP_HANDLERS["link-confirm"]({ env: ENV, deps, headers: headers(), body: { confirmation: { linkRefNumber: linkRef, token: "123456" } } });
+  await HIP_HANDLERS["link-confirm"]({ env: ENV_OTP, deps, headers: headers(), body: { confirmation: { linkRefNumber: linkRef, token: "123456" } } });
   assert.deepEqual(deps.gateway.calls[deps.gateway.calls.length - 1].body.patient, []);
 });
 
 test("link-confirm: an unknown link reference is indistinguishable from a wrong OTP", async () => {
   const deps = await baseDeps();
-  await HIP_HANDLERS["link-confirm"]({ env: ENV, deps, headers: headers(), body: { confirmation: { linkRefNumber: "never-issued", token: "123456" } } });
+  await HIP_HANDLERS["link-confirm"]({ env: ENV_OTP, deps, headers: headers(), body: { confirmation: { linkRefNumber: "never-issued", token: "123456" } } });
   const { key, body } = deps.gateway.calls[0];
   assert.equal(key, "onLinkConfirm");
   assert.deepEqual(body.patient, []);

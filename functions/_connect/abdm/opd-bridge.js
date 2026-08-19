@@ -69,3 +69,33 @@ export function tokenNumberFor(tickets, ticketId) {
   const idx = queue.findIndex((t) => t.id === ticketId);
   return idx < 0 ? queue.length || 1 : idx + 1;
 }
+
+/**
+ * Resolve the mobile number to send an ABDM link OTP to.
+ *
+ * ABDM sends a pseudonymous patient reference, never a phone number, so the number is ours to find. The
+ * chain is: the reference we published (hmacPseudonym of the ABHA) -> connect_abha_link -> the tenant's
+ * own patient id -> that patient's most recent OPD ticket -> its encPHI mobile.
+ *
+ * Returns null rather than throwing when there is no number on file. A null makes link/init report
+ * delivered:false, which is the truth; a throw would lose the callback.
+ *
+ * PHI: the decrypted number is returned to the caller for one send and is never stored or logged.
+ */
+export async function resolvePatientMobile(env, deps, { tenantId, patientRef } = {}) {
+  const db = deps && deps.db;
+  if (!db || !tenantId || !patientRef) return null;
+
+  // The reference ABDM echoes back is our published pseudonym, which IS the patient_abha_hash column.
+  const link = await db.prepare(
+    "SELECT patient_ref FROM connect_abha_link WHERE tenant_id=? AND patient_abha_hash=?")
+    .bind(tenantId, patientRef).first();
+  const localRef = link && link.patient_ref;
+  if (!localRef) return null;
+
+  // deps.findTicketMobile is the seam onto the OPD store (Firestore), injected by the composition root so
+  // this module stays testable without it.
+  if (typeof deps.findTicketMobile !== "function") return null;
+  try { return (await deps.findTicketMobile(env, { tenantId, patientRef: localRef })) || null; }
+  catch { return null; }
+}

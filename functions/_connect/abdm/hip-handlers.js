@@ -24,6 +24,7 @@ import { hipFlagOn } from "./hip-flags.js";
 import { assertDataBlind } from "./carecontext.js";
 import { deleteForPatient } from "./consented-store.js";
 import { matchDemographics } from "./demographic-index.js";
+import { issueLinkOtp, verifyLinkOtp, OTP_TTL_SEC, MAX_VERIFY_ATTEMPTS } from "./otp.js";
 
 export class HipHandlerError extends Error {}
 
@@ -208,55 +209,56 @@ async function groupForWire(env, deps, { tenantId, patientHash, careContexts }) 
 // "On getting the link/init request, the HRP/HIP must send an OTP to the patient's phone number"
 // (Discovery & Link). So the OTP is OURS to generate, deliver and verify - the gateway only carries the
 // patient's answer back to us on link/confirm.
-export const OTP_TTL_SEC = 10 * 60;
-const OTP_PREFIX = "connect:abdm:linkotp:";
-
 export async function onLinkInit({ env, deps, body, headers }) {
   if (!hipFlagOn(env)) return;
   const now = deps.now;
   const tenantId = await resolveHipTenant(env, deps, headers.entityId);
   const transactionId = body && body.transactionId;
-  const linkRef = (deps.newId || (() => crypto.randomUUID()))();
-
-  const otp = mintOtp(deps);
   const patient = (body && body.patient) || {};
+  const patientRef = String(patient.referenceNumber || "");
   const refs = ((patient.careContexts || []).map((c) => c.referenceNumber ?? c.ref)).filter(Boolean);
 
-  // The OTP and the care-context scope it authorises are held together under the link reference, so
-  // link/confirm can only ever link what link/init offered. KV value is NON-PHI: an OTP hash, a
-  // pseudonymous patient reference and opaque care-context references - never a name, mobile or ABHA.
-  const patientRef = String(patient.referenceNumber || "");
-  await deps.kv.put(OTP_PREFIX + linkRef, JSON.stringify({
-    otpHash: await sha256hex(String(otp) + ":" + linkRef), tenantId, transactionId, patientRef, refs, attempts: 0,
-  }), { expirationTtl: OTP_TTL_SEC });
+  // The mobile is OURS to find - ABDM sends a pseudonymous patient reference, not a phone number. The
+  // resolver is injected at the composition root because it reaches the OPD store, which this file must
+  // not import. No resolver, or no number on file, means we cannot deliver, and we say so.
+  const mobile = typeof deps.resolvePatientMobile === "function"
+    ? await deps.resolvePatientMobile(env, deps, { tenantId, patientRef }).catch(() => null)
+    : null;
 
-  // Deliver out-of-band. deps.sendOtp is the seam: the SMS/WhatsApp sender the rest of the app already has.
-  // Absent sender => we must NOT claim to have sent one, so the reply says so and the flow fails visibly
-  // rather than leaving the patient waiting for an OTP that never comes.
-  const delivered = typeof deps.sendOtp === "function"
-    ? await deps.sendOtp(env, deps, { tenantId, patientRef, otp })
-    : false;
+  const issued = await issueLinkOtp(env, deps, { tenantId, patientRef, refs, transactionId, mobile, now, io: deps });
+
   if (deps.audit) await deps.audit({
-    action: "abdm.link.init", outcome: delivered ? "ok" : "failed", ts: isoOf(now), tenantId,
-    transactionId, scope: { delivered, careContexts: refs.length },
+    action: "abdm.link.init", outcome: issued.delivered ? "ok" : "failed", ts: isoOf(now), tenantId,
+    transactionId,
+    scope: { delivered: issued.delivered, channel: issued.channel, reason: issued.reason,
+             careContexts: refs.length },
   }).catch(() => {});
+
+  // A refused mint (rate limit, no store) has no reference to offer, so there is nothing the patient
+  // could confirm. Answer with an explicit failure rather than a link the gateway will wait on.
+  if (!issued.linkRef) {
+    await reply(deps, "onLinkInit", {
+      transactionId,
+      error: { code: 1000, message: "cannot send an OTP right now" },
+      ...respondTo(headers),
+    });
+    return;
+  }
 
   await reply(deps, "onLinkInit", {
     transactionId,
     link: {
-      referenceNumber: linkRef,
+      referenceNumber: issued.linkRef,
       authenticationType: "DIRECT",
       meta: {
         communicationMedium: "MOBILE",
         communicationHint: "OTP",
-        communicationExpiry: new Date(Date.parse(isoOf(now)) + OTP_TTL_SEC * 1000).toISOString(),
+        communicationExpiry: issued.expiresAt,
       },
     },
     ...respondTo(headers),
   });
 }
-
-const MAX_OTP_ATTEMPTS = 3;
 
 // ── 4. link-confirm — verify the OTP, then link ─────────────────────────────────────────────────────
 // Inbound (INFERRED): { confirmation: { linkRefNumber, token } }  (token = the OTP the patient typed)
@@ -267,33 +269,21 @@ export async function onLinkConfirm({ env, deps, body, headers }) {
   const now = deps.now;
   const conf = (body && (body.confirmation || body.link)) || {};
   const linkRef = conf.linkRefNumber ?? conf.referenceNumber ?? conf.linkReference;
-  const token = String(conf.token ?? conf.otp ?? "");
-  const key = OTP_PREFIX + linkRef;
+  const token = conf.token ?? conf.otp;
 
-  const raw = linkRef ? await deps.kv.get(key) : null;
-  let state = null;
-  try { state = raw ? JSON.parse(raw) : null; } catch { state = null; }
-  // Fail closed and identically on every failure mode - an unknown reference, an expired one and a wrong
-  // OTP must be indistinguishable, or the reply becomes an oracle for guessing link references.
-  const ok = Boolean(state) && state.attempts < MAX_OTP_ATTEMPTS
-    && (await sha256hex(token + ":" + linkRef)) === state.otpHash;
-
-  if (!ok) {
-    if (state) {
-      // Burn the attempt. Past the cap the reference is destroyed rather than left to be ground down.
-      const attempts = state.attempts + 1;
-      if (attempts >= MAX_OTP_ATTEMPTS) await deps.kv.delete(key);
-      else await deps.kv.put(key, JSON.stringify({ ...state, attempts }), { expirationTtl: OTP_TTL_SEC });
-    }
+  const v = await verifyLinkOtp(deps, { linkRef, token, now });
+  if (!v.ok) {
+    // One answer for every failure: unknown reference, expired reference, wrong OTP, attempts exhausted.
+    // The distinction is in the audit trail, never on the wire, or the reply becomes an oracle.
     if (deps.audit) await deps.audit({
       action: "abdm.link.confirm", outcome: "denied", ts: isoOf(now),
-      tenantId: state ? state.tenantId : null, scope: { reason: "otp-rejected" },
+      scope: { reason: v.reason },
     }).catch(() => {});
     await reply(deps, "onLinkConfirm", { patient: [], ...respondTo(headers) });
     return;
   }
 
-  await deps.kv.delete(key);                                     // single-use: a replayed OTP links nothing
+  const state = v.state;
   // state.patientRef is what WE put on the wire in on-discover: hmacPseudonym(tenant, abha), which is
   // exactly the patient_abha_hash column. So the lookup is already tenant- and patient-scoped, and a
   // referenceNumber we never issued simply finds nothing.
@@ -549,12 +539,4 @@ export const HIP_HANDLERS = Object.freeze({
 async function sha256hex(s) {
   const h = new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(String(s))));
   return [...h].map((b) => b.toString(16).padStart(2, "0")).join("");
-}
-/** A 6-digit OTP from the CSPRNG. Rejection-sampled so the range is uniform, never Math.random (R13). */
-function mintOtp(deps) {
-  if (deps && typeof deps.mintOtp === "function") return deps.mintOtp();   // test seam only
-  const buf = new Uint32Array(1);
-  let v;
-  do { crypto.getRandomValues(buf); v = buf[0]; } while (v >= 4294000000);  // 4294000000 = 900000 * 4771
-  return String(100000 + (v % 900000));
 }

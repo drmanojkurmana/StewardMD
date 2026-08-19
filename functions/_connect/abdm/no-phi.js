@@ -143,10 +143,35 @@ export function scrubPhi(value, depth = 0) {
   return value;
 }
 
+// A KV key is a COMPOSITE: a literal namespace plus one or more values, joined by ":". Checking the joined
+// string is wrong, and measurably so - a 64-char hex digest sitting next to other text manufactures digit
+// runs that look like an Indian mobile, and 7% of `prefix:hipId:<sha256>` keys tripped the guard. The
+// consequence was not a leak but a DENIAL: guardedKvPut throws, the caller fails closed, and roughly one
+// patient in fourteen could never be rate-limit-cleared to receive a link OTP.
+//
+// So a key is checked SEGMENT-WISE, and then once more with the individually-safe segments (hex digests,
+// UUIDs, ISO timestamps, small counts) removed. A raw ABHA, mobile or Aadhaar in ANY segment still trips
+// on that segment; an identifier split across segments still trips on the elided remainder. What no longer
+// trips is an artefact of concatenation.
+export function assertNoPhiKey(key, where) {
+  const s = String(key == null ? "" : key);
+  const segments = s.split(":");
+  for (const seg of segments) assertNoPhi(seg, where || "kv.key");
+  // Elide ONLY the segment shapes that manufacture false digit runs - a hex digest, a UUID, an ISO
+  // timestamp. A short numeric segment is NOT elided: eliding those is exactly what would let an
+  // identifier split across two segments slip through.
+  const kept = segments.filter((seg) => !(HEX.test(seg) || UUID.test(seg) || ISO.test(seg)));
+  // Always re-check the remainder, joined two ways: with separators (catches a name or ABHA form that
+  // spans a segment boundary) and without (catches an identifier split across segments, which per-segment
+  // checking alone would wave through as two harmless short numbers).
+  assertNoPhi(kept.join(":"), where || "kv.key");
+  assertNoPhi(kept.join(""), where || "kv.key");
+}
+
 // guardedKvPut(kv, key, value, opts) -> Promise. The KV write guard: refuse a PHI-shaped KEY or VALUE before
 // any kv.put. Fail-closed — on a PHI hit it throws and NOTHING is written; otherwise it delegates to kv.put.
 export async function guardedKvPut(kv, key, value, opts) {
-  assertNoPhi(key, "kv.key");
+  assertNoPhiKey(key, "kv.key");
   assertNoPhi(value, "kv.value");
   return kv.put(key, value, opts);
 }
