@@ -1,6 +1,6 @@
 ---
 tags: [module, interop, compliance]
-status: gateway pinned to V3 + key codec landed; ingress still legacy-shaped. Inert, flag OFF
+status: M1+M2+M3 built and wired; Fidelius resolved; 603 tests green. Inert, flags OFF
 flag: smd_connect / CONNECT_FLAG + smd_connect_hip / CONNECT_HIP_FLAG, both default OFF
 ---
 # ABDM (Ayushman Bharat Digital Mission)
@@ -14,9 +14,14 @@ the official docs on 2026-08-18 found five defects in it, listed there with evid
 
 ## Key files
 - `functions/_connect/abdm/` — `gateway.js` (the ONE config seam for paths/fields, ADR-2H), `hip.js`,
-  `hiu.js`, `consent.js`, `state.js`, `fidelius.js` (E2E crypto), `jws.js`, `ingress.js`, `no-phi.js`
+  `hiu.js`, `consent.js`, `state.js`, `fidelius.js` (E2E crypto), `jws.js`, `ingress.js`, `no-phi.js`,
+  `callbacks.js` (V3 transport), `hip-handlers.js` (M2), `hiu-handlers.js` (M3),
+  `consent-text.js` (the published ABHA consent language + its recording), `opd-bridge.js`
+  (scan-and-share -> OPD token), `consented-store.js`
+- `functions/api/v3/[[path]].js` — the V3 callback receiver + composition root
+- `functions/api/abdm/[[path]].js` — M1 (ABHA) routes; `abdm.js` — the registration-desk client
 - `functions/_connect/connectors/abdm/` — `normalize.js` / `serialize.js`
-- `hip-sources/followcare.js` — the ONLY care-context source, and its reader is **not injected**
+- `hip-sources/` — `native-opd.js`, `connected-emr.js`, `followcare.js`
 - `db/connect_abdm_schema.sql` — `connect_abdm_consent_req` / `_txn` / `_carecontext`
 - `docs/connect/abdm/owner-onboarding.md` — provisioning + go-live gates (64 `// VERIFY` pins)
 
@@ -30,8 +35,22 @@ bridge `SBXID_062379` as both HIP and HIU via
 `POST apihspsbx.../v4/int/v1/bridges/MutipleHRPAddUpdateServices` - the legacy
 `/gateway/v1/bridges/addUpdateServices` is retired (403). The bridge URL is still a webhook.site
 placeholder, which is deliberately useful: it captures ABDM's real callback payloads.
-Of the five recorded defects, **D1 (session headers) and D2 (V3 paths) are fixed and test-pinned**, and
-D4's encoding half is fixed; D3 (ingress shape) and D5 (care-context sources) remain.
+
+**2026-08-19 (this session).** D4 is RESOLVED and three further wire defects were found and fixed:
+- **D4 Fidelius shared secret** - HKDF takes the **Weierstrass x**, not the Montgomery u (they differ by
+  A/3). Resolved from the `mgrmtech/fidelius-cli` Java reference, proven by an independent BigInt
+  Weierstrass oracle in `test/connect/abdm/fidelius-abdm-kat.test.mjs`. Wired in.
+- **D6 keyMaterial.dhPublicKey is an OBJECT** `{expiry, parameters, keyValue}`, not a bare base64
+  string - in BOTH directions, pinned from ABDM's own M2 + M3 Postman collections (16-02-2026).
+- **D7 consent-init body was incomplete** - missing `consent.hiu.id`, `consent.requester` (the doctor's
+  medical registration number, which certification checks), `permission.accessMode`,
+  `permission.frequency` and the explicit `hip`/`careContexts` nulls.
+- **D8 cross-tenant write** - `/api/abdm/link` and `/link/lookup` took `tenantId` off the request with no
+  membership check. Both now resolve membership first.
+- **D3 ingress rebuild** is DONE: `callbacks.js` (transport) + `hip-handlers.js` (9 HIP kinds) +
+  `hiu-handlers.js` (6 HIU kinds), all mounted at `functions/api/v3/[[path]].js`.
+- **D5 care-context sources** - three sources exist (native OPD, connected EMR, consented store) and the
+  consented store is bound in the receiver.
 
 ## Hard rules
 - **M1 must use V3 APIs.** A V1/V2 M1 implementation is *rejected* at Sandbox Exit.
@@ -44,16 +63,15 @@ D4's encoding half is fixed; D3 (ingress shape) and D5 (care-context sources) re
 - Never hand-roll the Fidelius crypto - prove it against `mgrmtech/fidelius-cli` known-answer vectors.
 
 ## Gotchas
-- **Fidelius public keys are 65-byte uncompressed EC points (`0x04‖X32‖Y32`, base64), not 32-byte
-  X25519.** FIXED: `abdmKeyToX25519` / `x25519KeyToAbdm` in `fidelius.js` convert both ways (proven -
-  the official swagger key satisfies the BouncyCastle Weierstrass equation and maps to Montgomery u
-  via `u = x - A/3`), covered by `test/connect/abdm/fidelius-wire-keyformat.test.mjs`. **Still open:**
-  BouncyCastle ECDH returns the Weierstrass x while X25519 returns Montgomery u, so the shared secret
-  may need the same A/3 offset before HKDF. `montgomeryUToWeierstrassX` implements it but is
-  deliberately NOT wired in until proven against `mgrmtech/fidelius-cli` vectors. Highest remaining
-  technical risk in the module.
-- `ingress.js` is one JWS endpoint dispatching on `ev.type`; ABDM V3 posts **plain JSON to ~10 distinct
-  callback paths** with bearer auth. Transport layer needs a rebuild.
+- **Fidelius has THREE wire traps, all now fixed.** (1) Public keys are 65-byte uncompressed EC points
+  (`0x04‖X32‖Y32`, base64), not 32-byte X25519 - `abdmKeyToX25519` / `x25519KeyToAbdm` convert.
+  (2) HKDF's IKM is the **Weierstrass x**, not the Montgomery u X25519 returns; `sharedSecret()` applies
+  the A/3 offset. (3) `keyMaterial.dhPublicKey` is an **object** `{expiry, parameters, keyValue}` -
+  `abdmKeyMaterial()` builds it, `readDhPublicKey()` reads it (and still accepts a bare string from a
+  peer that got it wrong). All three fail SILENTLY against a real peer, which is why they need
+  known-answer tests rather than a round trip against ourselves.
+- `ingress.js` (the legacy one-JWS-endpoint shape) is superseded by `callbacks.js` + the two handler
+  files. It is still mounted at `/api/connect/ingress/abdm` for the older HIU path.
 - Register the callback **base URL only** — a path makes the gateway append it twice.
 - `generate-token` more than 3×/day per (ABHA address, facility) ⇒ **blocked 24 h**. The link token is
   valid 6 months: cache it.

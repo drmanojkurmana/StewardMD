@@ -119,6 +119,12 @@ later changes need ABDM Integration Support.
 The downstream state machine, consent store, no-PHI guard and audit layers stay useful; the
 transport/dispatch layer is what must be rebuilt.
 
+Status: **DONE (2026-08-19).** `callbacks.js` is the transport (route table, mandatory headers,
+JWKS-verified bearer, REQUEST-ID replay nonce, immediate ack); `hip-handlers.js` implements the nine HIP
+kinds and `hiu-handlers.js` the six HIU kinds; `functions/api/v3/[[path]].js` is the composition root.
+An unimplemented kind still 202s and lands in the audit trail as `abdm.callback.unhandled`, because the
+gateway treats a non-2xx as a delivery failure and retries.
+
 ### D4 - Fidelius public-key wire format mismatch (highest technical risk)
 
 Spec: public keys are "**base64 encoded, uncompressed public key format**" (recommended) or
@@ -165,10 +171,57 @@ feeds the Weierstrass x into HKDF, we must apply the offset before deriving, or 
 with no useful error. `montgomeryUToWeierstrassX()` implements the shim, is unit-tested, and is
 deliberately **not wired into `sealBundle` / `openEntry`** until it is proven.
 
-To settle it: clone `https://github.com/mgrmtech/fidelius-cli`, generate key material and encrypt a
-known plaintext with it, feed the identical inputs to our `fidelius.js`, and compare byte-for-byte.
-Keep the resulting vectors as a permanent test. A live sandbox data-push round-trip against the ABHA
-PHR app is the other acceptable proof.
+**RESOLVED 2026-08-19.** Answered by reading the authoritative Java reference (`mgrmtech/fidelius-cli`)
+rather than by inference: `KeyAgreement("ECDH","BC")` over BouncyCastle's SHORT-WEIERSTRASS `curve25519`
+returns the shared point's **Weierstrass x**, so HKDF's IKM is that, not the Montgomery u. The shim is
+wired into `sharedSecret()`. Proven without a JDK by `test/connect/abdm/fidelius-abdm-kat.test.mjs`,
+which re-implements BouncyCastle's algorithm independently in BigInt and asserts our path reproduces it,
+plus a negative assertion that the raw X25519 output would have been wrong by exactly A/3 (so the fix
+cannot silently decay into a no-op). Full evidence in `FIDELIUS-RESOLVED.md`.
+
+### D6 - `keyMaterial.dhPublicKey` is an OBJECT, not a base64 string (found 2026-08-19)
+
+Pinned from ABDM's OWN Milestone-2 and Milestone-3 Postman collections (16-02-2026), downloaded from
+`sandboxcms.abdm.gov.in/uploads/`. Both agree, in both directions:
+
+```json
+"keyMaterial": {
+  "cryptoAlg": "ECDH", "curve": "Curve25519",
+  "dhPublicKey": { "expiry": "...", "parameters": "Curve25519/32byte random key", "keyValue": "<base64>" },
+  "nonce": "<base64>" }
+```
+
+  * M3 `hiRequest.keyMaterial.dhPublicKey`        HIU -> gateway
+  * M2 the dataPushUrl body's `keyMaterial.dhPublicKey`  HIP -> HIU
+
+We sent a bare base64 string on both paths, so a peer reads `dhPublicKey.keyValue` as `undefined` and can
+neither encrypt for us nor decrypt from us. Same failure class as D4: silent, and invisible without a
+real peer.
+
+Status: **FIXED.** One codec in `fidelius.js` - `abdmKeyMaterial()` builds it, `readDhPublicKey()` reads
+it. Strict in what we send, liberal in what we accept, so a peer that made our old mistake still
+interoperates. `expiry` is derived from the injected clock, never the wall clock.
+
+### D7 - the consent-init body was missing mandatory fields (found 2026-08-19)
+
+Against the M3 collection, `buildConsentInitBody` omitted `consent.hiu.id` (how the gateway routes the
+grant back to us), `consent.requester` (the doctor's medical registration number - certification pins it
+to `{type:"REGNO", value:"MH1001", system:"https://www.mciindia.org"}`, and the patient's consent screen
+displays it), `permission.accessMode`, `permission.frequency`, and the explicit `hip` / `careContexts`
+nulls the collection sends.
+
+Status: **FIXED.** A request with no requester is now REFUSED - a consent the patient cannot attribute to
+a named doctor is not informed consent. Explicit nulls are sent where the collection sends them, because
+omitting a field is not the same statement as sending null.
+
+### D8 - `/api/abdm/link` was a cross-tenant write (found 2026-08-19)
+
+`/link` and `/link/lookup` took `tenantId` straight off the request with **no membership check**, while
+`linkAbhaToPatient` trusts whatever it is given. Any signed-in user could bind an ABHA into another
+hospital's patient index, or probe whether a given ABHA was registered there.
+
+Status: **FIXED.** Both resolve membership through `resolveTenant` first, the way `linkCareContext`
+already did. A tenant id on a request is a claim, not an authority.
 
 ### D5 - Only one care-context source, and its reader is not wired
 
@@ -179,6 +232,11 @@ PHR app is the other acceptable proof.
 
 Prescription, DiagnosticReport, OPConsultation, DischargeSummary, ImmunizationRecord,
 HealthDocumentRecord, WellnessRecord, **Invoice** - plus any HI type ABDM adds later.
+
+Status: **largely done.** `hip-sources/` now holds `native-opd.js`, `connected-emr.js` and
+`followcare.js`, plus `consented-store.js` (the only source that can answer without the doctor's device
+being awake, which is what the 20-minute push budget actually requires). The V3 receiver injects the
+consented store. `serialize.js` emits all eight record profiles.
 
 ## 3. What ABDM requires of us that does not exist at all
 
