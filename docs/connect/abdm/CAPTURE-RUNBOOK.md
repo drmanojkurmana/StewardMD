@@ -62,9 +62,24 @@ an ABHA card) cannot be used, and this is not a technicality:
 
 ## Step 2 — trigger the server-driven flows (scripted)
 
+> **Use the answering receiver, not webhook.site.** webhook.site records and never replies, so the
+> gateway times out and the ten callbacks that only fire *after* our reply never arrive at all. Since
+> 2026-08-20 the real receiver runs locally behind a tunnel and answers them, which is the only way the
+> patient-initiated half of M2 can ever be captured:
+>
+> ```bash
+> ./scripts/abdm-local-receiver.sh --register     # tunnel + receiver + recorder, re-points the bridge
+> export ABDM_CAPTURE_API='http://127.0.0.1:8787/token/%s/requests'
+> ```
+>
+> Then use `local` wherever `$TOKEN` appears below. Everything else in this runbook is unchanged.
+> **Put the registration back when you finish** (`set-url https://webhook.site/<token>`): a quick-tunnel
+> hostname dies with the process, and a bridge pointing at a dead host loses every callback silently.
+> Doing this for the first time found D14 and D15 within minutes — see the readiness report §4a.
+
 ```bash
 # Start the capture watcher in one terminal
-./scripts/abdm-capture.py "$(./scripts/abdm-sandbox-probe.sh bridge | sed -n 's#.*webhook.site/##p')" --watch
+./scripts/abdm-capture.py local --watch
 
 # Fire the flows in another
 ./scripts/abdm-sandbox-probe.sh flow <your-address>@sbx
@@ -169,5 +184,7 @@ being live.
   consent request unless you pass one to `flow`.
 - Credentials are sourced from `~/.stewardmd-secrets/abdm-sandbox.env` and never printed.
 - `set-url` refuses a URL with a path, because that silently doubles the endpoint (FAQ Q30).
-- **Do not set `CONNECT_HIP_FLAG=1`** until the inferred shapes have been replaced. An unverified parser
+- **Do not set `CONNECT_HIP_FLAG=1` on a DEPLOYED environment** until the inferred shapes have been
+  replaced. (`abdm-local-receiver.sh` sets it in one local process, which is the point: the parser gets
+  verified against the real peer before anything is deployed.) An unverified parser
   against a real peer fails silently, which is exactly how D4, D6 and the two key-format defects happened.

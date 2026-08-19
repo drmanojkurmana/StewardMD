@@ -114,7 +114,8 @@ Six areas, in the order the owner set them. Two are blocked on a sandbox ABHA ad
 
 | Area | State | Evidence |
 |---|---|---|
-| Real callbacks | **6 CAPTURED**, 5 kinds (2026-08-19) | first ever; **4 defects** found, all fixed |
+| Real callbacks | **CAPTURED AND ANSWERED** (2026-08-20) | 5 kinds; **6 defects** found on the wire, all fixed |
+| Receiver answers a live callback | **YES, 202** (2026-08-20) | D14+D15; `scripts/abdm-local-receiver.sh`, no deploy |
 | Demographic discovery | done | 32 unit + 5 route tests; index now populated at `/link` |
 | OTP | done bar the DLT template | 30 tests; bounded attempts (3), resend cap (2), 3/hour budget, Q31 3/day |
 | HAPI / NRCES validation | done | 10 bundles, 0 errors, committed evidence log |
@@ -234,13 +235,23 @@ All are now masked by KEY, structure preserved, and tests assert each rather tha
    the IG's own code systems. All 8 HI types now conform. A record that happens to carry neither still
    cannot produce those HI types, which is correct — refusing beats pushing a document the far end rejects.
 
-2. **Only 5 of 15 callback KINDS have been observed.** The patient-initiated ones (discovery, consent
-   GRANT, link init/confirm, scan-and-share) need taps in the Sandbox ABHA app, and demographic auth needs
-   the sandbox ABHA to complete Aadhaar KYC (it is currently self-declared, which is what ABDM-1207 was
-   telling us). Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
-   Android, ~10 min) and, for roughly half the callbacks, you tapping in the app. Runbook:
-   `docs/connect/abdm/CAPTURE-RUNBOOK.md`. **Do not set `CONNECT_HIP_FLAG=1` before this** — an unverified
-   parser against a real peer fails silently, which is how D4, D6, D4b and D4c all happened.
+2. **Only 5 of 15 callback KINDS have been observed.** ~~The other ten need a receiver that answers, which
+   needs a production deploy.~~ **That half of the blocker is GONE (2026-08-20).** The real receiver now
+   runs on localhost behind a cloudflared quick tunnel (`scripts/abdm-local-receiver.sh`), the gateway is
+   registered against it, and it **answers a genuine callback 202** — so the callbacks that only fire after
+   our reply are reachable without deploying anything and without setting `CONNECT_HIP_FLAG=1` anywhere but
+   one local process. Doing that immediately found **D14 and D15**, which between them meant every callback
+   in production would have been refused (503, then 401). See §4a.
+
+   What is still missing is the **human half**: discovery, consent GRANT, link init/confirm and
+   scan-and-share only fire when someone taps in the Sandbox ABHA app, and demographic auth additionally
+   needs that ABHA to have completed Aadhaar KYC (it is self-declared, which is what ABDM-1207 was telling
+   us — question 3 of the NHA email asks about exactly this). Runbook:
+   `docs/connect/abdm/CAPTURE-RUNBOOK.md`.
+
+   The old warning still stands **for production**: do not set `CONNECT_HIP_FLAG=1` on a deployed
+   environment until the shapes are captured. An unverified parser against a real peer fails silently,
+   which is how D4, D6, D4b and D4c all happened — and D14/D15 are the proof that it was still true.
 
 3. **M2 / M3 end-to-end not executed.** Same dependency as (2).
 
@@ -248,9 +259,34 @@ All are now masked by KEY, structure preserved, and tests assert each rather tha
    Services has an India region but is Enterprise-only and gives processing residency only — KV
    incompatible, D1 has no jurisdictional restriction, R2 jurisdictions are eu/fedramp. Ask NHA first
    (`integration.support@nha.gov.in`); fallback is a Mumbai forwarder. Only item with a recurring cost.
+   **Email drafted and ready to send: `outreach/01-nha-integration-support.md`.** It also asks for the V3
+   *request* schemas, which is the root cause of all fifteen inferred shapes.
 
 5. **Functional testing + CERT-In/STQC.** NHA-empanelled agency, chargeable, 7-working-day window once
-   started. Worth quoting now.
+   started. Worth quoting now. **RFQ drafted: `outreach/02-certin-functional-testing-rfq.md`** — send it
+   to three or four empanelled agencies separately (list at cert-in.org.in).
+
+### 4a. D14 and D15 — what answering a real callback found immediately
+
+Both were live within minutes of the receiver being reachable, and **either one alone would have meant
+nothing worked in production**. Both had been green across 1109 tests.
+
+| | Defect | Effect on the wire |
+|---|---|---|
+| **D14** | `ABDM_JWKS_URL` was `""` and nothing derived it | `getPinnedJwks` threw "not configured" → every callback answered **503**. ABDM retries non-2xx, so the first real callbacks arrived **four times each** |
+| **D15** | `expectedIssuer` built `/auth/realms/cent` | the real realm is `central-registry` — the string was **truncated**, in the source *and* in the test that pinned it → every bearer rejected **401** |
+
+The pattern is the one this module keeps relearning: **a test that supplies its own JWKS and signs its
+own bearer cannot discover that a configured value is simply wrong.** D15 is the sharper example — the
+test asserted the same truncated string the code produced, so the suite agreed with itself all the way
+to a 401 from the real gateway.
+
+Fixed by deriving the JWKS URL from the already-per-environment gateway host (an unknown `ABDM_ENV`
+still fails closed rather than guessing) and by pinning the realm read off a live token. Both are now
+asserted against the literal observed strings in `test/connect/abdm/wire-config.test.mjs`, including an
+explicit assertion that the truncation cannot come back. **Evidence: a genuine
+`consent/request/on-init` with a genuine bearer is answered `202 {"ok":true}`** — the first ABDM
+callback this system has ever accepted. 1489 connect+abdm tests pass.
 
 ### Needs a decision from you
 
