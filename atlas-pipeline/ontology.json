@@ -60,6 +60,37 @@
       ],
       "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys."
     },
+    "AMYGDALA": {
+      "canonical_id": "AMYGDALA",
+      "display_name": "Amygdala",
+      "aliases": [
+        "amygdala",
+        "fs_18",
+        "fs_54"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": "The amygdala is an almond-shaped grey mass in the roof of the inferior horn of the lateral ventricle, at the temporal pole."
+    },
     "AORTA": {
       "canonical_id": "AORTA",
       "display_name": "Abdominal aorta",
@@ -128,17 +159,17 @@
       ],
       "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
     },
-    "BRAINSTEM": {
-      "canonical_id": "BRAINSTEM",
-      "display_name": "Brainstem",
+    "BRAIN": {
+      "canonical_id": "BRAIN",
+      "display_name": "Brain",
       "aliases": [
-        "brainstem"
+        "brain"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
-      "region": "BRAIN",
+      "region": "HEAD",
       "source_model": [],
       "source_dataset": [],
       "licence": [
@@ -147,7 +178,40 @@
       "confidence": "NOT_AVAILABLE",
       "validation": "NO_GEOMETRY",
       "modules": [
-        "brain-mri-axial-t1"
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
+      ],
+      "definition": null
+    },
+    "BRAINSTEM": {
+      "canonical_id": "BRAINSTEM",
+      "display_name": "Brainstem",
+      "aliases": [
+        "brainstem",
+        "fs_16"
+      ],
+      "modality": [
+        "MRI"
+      ],
+      "laterality": "NONE_ASSERTED",
+      "region": "BRAIN",
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
+      "licence": [
+        "see sources.json for the dataset that produced each module"
+      ],
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
+      "modules": [
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
     },
@@ -155,22 +219,31 @@
       "canonical_id": "CAUDATE_NUCLEUS",
       "display_name": "Caudate nucleus",
       "aliases": [
-        "caudate-nucleus"
+        "caudate-nucleus",
+        "fs_11",
+        "fs_50"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
     },
@@ -178,22 +251,33 @@
       "canonical_id": "CEREBELLUM",
       "display_name": "Cerebellum",
       "aliases": [
-        "cerebellum"
+        "cerebellum",
+        "fs_46",
+        "fs_47",
+        "fs_7",
+        "fs_8"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
     },
@@ -201,22 +285,31 @@
       "canonical_id": "CEREBRAL_CORTEX",
       "display_name": "Cerebral cortex",
       "aliases": [
-        "cerebral-cortex"
+        "cerebral-cortex",
+        "fs_3",
+        "fs_42"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci."
     },
@@ -224,22 +317,31 @@
       "canonical_id": "CEREBRAL_WHITE_MATTER",
       "display_name": "Cerebral white matter",
       "aliases": [
-        "cerebral-white-matter"
+        "cerebral-white-matter",
+        "fs_2",
+        "fs_41"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association."
     },
@@ -538,22 +640,30 @@
       "canonical_id": "FOURTH_VENTRICLE",
       "display_name": "Fourth ventricle",
       "aliases": [
-        "fourth-ventricle"
+        "fourth-ventricle",
+        "fs_15"
       ],
       "modality": [
         "MRI"
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind."
     },
@@ -614,6 +724,8 @@
       "canonical_id": "GLOBUS_PALLIDUS",
       "display_name": "Globus pallidus",
       "aliases": [
+        "fs_13",
+        "fs_52",
         "globus-pallidus"
       ],
       "modality": [
@@ -621,15 +733,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus."
     },
@@ -728,6 +847,8 @@
       "canonical_id": "HIPPOCAMPUS",
       "display_name": "Hippocampus",
       "aliases": [
+        "fs_17",
+        "fs_53",
         "hippocampus"
       ],
       "modality": [
@@ -735,15 +856,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
     },
@@ -992,6 +1120,8 @@
       "canonical_id": "LATERAL_VENTRICLE",
       "display_name": "Lateral ventricle",
       "aliases": [
+        "fs_4",
+        "fs_43",
         "lateral-ventricle"
       ],
       "modality": [
@@ -999,15 +1129,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
     },
@@ -1051,7 +1188,7 @@
         "CT"
       ],
       "laterality": "NONE_ASSERTED",
-      "region": "UNMAPPED",
+      "region": "LOWER_LIMB",
       "source_model": [],
       "source_dataset": [],
       "licence": [
@@ -1422,6 +1559,8 @@
       "canonical_id": "PUTAMEN",
       "display_name": "Putamen",
       "aliases": [
+        "fs_12",
+        "fs_51",
         "putamen"
       ],
       "modality": [
@@ -1429,15 +1568,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
     },
@@ -1745,6 +1891,7 @@
       "canonical_id": "SUBARACHNOID_SPACE",
       "display_name": "Subarachnoid space",
       "aliases": [
+        "fs_24",
         "subarachnoid-space"
       ],
       "modality": [
@@ -1752,8 +1899,12 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
@@ -1814,6 +1965,8 @@
       "canonical_id": "THALAMUS",
       "display_name": "Thalamus",
       "aliases": [
+        "fs_10",
+        "fs_49",
         "thalamus"
       ],
       "modality": [
@@ -1821,15 +1974,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle."
     },
@@ -1837,6 +1997,7 @@
       "canonical_id": "THIRD_VENTRICLE",
       "display_name": "Third ventricle",
       "aliases": [
+        "fs_14",
         "third-ventricle"
       ],
       "modality": [
@@ -1844,15 +2005,22 @@
       ],
       "laterality": "NONE_ASSERTED",
       "region": "BRAIN",
-      "source_model": [],
-      "source_dataset": [],
+      "source_model": [
+        "unknown"
+      ],
+      "source_dataset": [
+        "totalsegmentator-dataset"
+      ],
       "licence": [
         "see sources.json for the dataset that produced each module"
       ],
-      "confidence": "NOT_AVAILABLE",
-      "validation": "NO_GEOMETRY",
+      "confidence": "GOOD",
+      "validation": "HU_AND_POSITION_CHECKED",
       "modules": [
-        "brain-mri-axial-t1"
+        "brain-mri-axial-t1",
+        "mri-brain-axial",
+        "mri-brain-coronal",
+        "mri-brain-sagittal"
       ],
       "definition": "The third ventricle is a narrow median cleft between the two thalami."
     },
