@@ -287,7 +287,14 @@ bridge - without disturbing whatever HMIS they already run. This is exactly the 
 
 The facility-QR flow is a near-exact match for the existing Smart OPD Queue.
 
-QR content is a URL: `https://phrsbx.abdm.gov.in/share-profile?hipid=<HIP ID>&counterid=<our counter code>`.
+QR content is a URL: `https://phrsbx.abdm.gov.in/share-profile?hip-id=<HIP ID>&counter-id=<our counter code>`.
+
+> **D13 (corrected 2026-08-20, on device).** This line previously read `hipid` / `counterid`, unhyphenated.
+> The Sandbox ABHA app rejects that outright with "Invalid QR code" - it never reaches the gateway, so
+> there is no callback and nothing to debug from our side. The parameter names are HYPHENATED, per ABDM's
+> own Scan-and-Share document v1.0 (22 Aug 2024) §4.1:
+> `https://phrsbx.abdm.gov.in/share-profile?hip-id=IN3410000260&counter-id=12345`
+> Generate ours with `scripts/abdm-facility-qr.sh`, which is built from this line rather than from memory.
 Patient scans it in the ABHA app → gateway calls `<cb>/api/v3/hip/patient/share` with
 
 - `intent`: `PROFILE_SHARE` | `Payment` | `Health_record_sharing`

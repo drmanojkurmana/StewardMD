@@ -38,7 +38,7 @@ Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 | M2/M3 E2E verdict tooling | done | `--expect`, verified offline |
 | M1 client UI | done | 22 tests |
 
-**Test counts:** ABDM + connect suites **1106/1106**. Client **22/22**. Full-repo sweep unchanged apart from four
+**Test counts:** ABDM + connect suites **1109/1109**. Client **22/22**. Full-repo sweep unchanged apart from four
 pre-existing failures (`followcare-voice-server` 1, `onco-emr` 3, `site-gate` 2, `sknx-flags` 3) — none
 imports anything changed here.
 
@@ -114,7 +114,7 @@ Six areas, in the order the owner set them. Two are blocked on a sandbox ABHA ad
 
 | Area | State | Evidence |
 |---|---|---|
-| Real callbacks | **4 CAPTURED** (2026-08-19) | first ever; **3 defects** found, all fixed |
+| Real callbacks | **6 CAPTURED**, 5 kinds (2026-08-19) | first ever; **4 defects** found, all fixed |
 | Demographic discovery | done | 32 unit + 5 route tests; index now populated at `/link` |
 | OTP | done bar the DLT template | 30 tests; bounded attempts (3), resend cap (2), 3/hour budget, Q31 3/day |
 | HAPI / NRCES validation | done | 10 bundles, 0 errors, committed evidence log |
@@ -159,6 +159,7 @@ no `400 "User not found"` - the dead end every previous attempt hit - and three 
 | `/api/v3/hiu/consent/request/notify` | `{ notification:{consentRequestId}, error:{code,message} }` |
 | `/api/v3/hip/token/on-generate-token` | `{ error:{code,message}, response:{requestId} }` |
 | `/api/v3/hip/patient/care-context/discover` | `{ transactionId, patient:{ id, name, gender, yearOfBirth, verifiedIdentifiers[], unverifiedIdentifiers } }` |
+| `/api/v3/hip/patient/share` | `{ intent, metaData:{hipId,context,hprId,lat,long}, profile:{patient:{...,address{},phoneNumber}} }` |
 
 Fixtures (identifier-masked) in `test/connect/abdm/fixtures/real-callbacks.mjs`; pinned by
 `test/connect/abdm/real-callbacks.test.mjs`.
@@ -195,12 +196,34 @@ correctly - one inferred shape verified rather than broken.
   Also note what the first three bodies would have taught us WRONGLY: "every callback carries an `error`
   envelope" is false. Discovery is a REQUEST to us and correlates by `transactionId`.
 
-None of the three would have been caught by any amount of reasoning about the spec, which is the entire
-argument for this exercise. 11 of 15 shapes remain `// INFERRED`.
+- **D13 - the facility QR parameter names are HYPHENATED** (`hip-id`, `counter-id`), and our
+  V3-SPEC-RECONCILIATION.md said `hipid` / `counterid`. This one is nastier than it looks: the ABHA app
+  rejects a malformed QR with "Invalid QR code" BEFORE anything reaches the gateway, so there is no
+  callback, no audit line, and no server-side signal at all. A clinic printing that QR would watch every
+  patient fail at the desk and have nothing to debug. Only a scan on a real device could find it.
+  Corrected against ABDM's own Scan-and-Share document v1.0 (22 Aug 2024) §4.1, and
+  `scripts/abdm-facility-qr.sh` now generates the QR from the documented format rather than from memory.
+  The captured `patient/share` body proves the round trip: our `counter-id=OPD1` came back as
+  `metaData.context`.
 
-**A PHI leak in the capture tooling, found the same way.** The redactor masked ABHA addresses, numbers,
-mobiles and Aadhaar by VALUE regex - but a name is just a string, and `patient.name` sailed through into a
-tracked fixture. Names are now masked by KEY, and a test asserts it rather than trusting the regex.
+None of the four would have been caught by any amount of reasoning about the spec, which is the entire
+argument for this exercise. Two shapes were also CONFIRMED CORRECT - `consent on-init` and the whole of
+`patient/share` (our parser already read `phoneNumber`, which is the trap there) - and confirmation is
+worth as much as a defect.
+
+**The envelope rule, learned properly.** The first three bodies suggested "every callback carries `error` +
+`response.requestId`". False. DIRECTION decides it: a callback ANSWERING something we sent carries the
+error envelope; a callback where ABDM is ASKING US (discover, share) carries neither and correlates by its
+own `transactionId` / `metaData`. The suite asserts the split rather than the first-three generalisation.
+
+10 of 15 shapes remain `// INFERRED`.
+
+**TWO PHI leaks in the capture tooling, both found on real captures rather than hypothesised.** The
+redactor masked ABHA addresses, numbers, mobiles and Aadhaar by VALUE regex - but prose is just prose:
+- `patient.name` (discovery) sailed straight through;
+- `profile.patient.address` (scan-and-share) carried a full postal address, line + district + pincode, and
+  `metaData` carried house-accurate GPS.
+All are now masked by KEY, structure preserved, and tests assert each rather than trusting the regexes.
 
 ## 4. Remaining blockers
 
@@ -211,7 +234,7 @@ tracked fixture. Names are now masked by KEY, and a test asserts it rather than 
    the IG's own code systems. All 8 HI types now conform. A record that happens to carry neither still
    cannot produce those HI types, which is correct — refusing beats pushing a document the far end rejects.
 
-2. **Only 4 of 15 callback bodies have been observed.** The patient-initiated ones (discovery, consent
+2. **Only 5 of 15 callback KINDS have been observed.** The patient-initiated ones (discovery, consent
    GRANT, link init/confirm, scan-and-share) need taps in the Sandbox ABHA app, and demographic auth needs
    the sandbox ABHA to complete Aadhaar KYC (it is currently self-declared, which is what ABDM-1207 was
    telling us). Needs a sandbox ABHA address (yours: Sandbox ABHA apk,
@@ -261,6 +284,10 @@ tracked fixture. Names are now masked by KEY, and a test asserts it rather than 
     authenticated, tenant-resolved write. A link with no gender or year of birth writes **nothing** and
     reports `discoverable:false`: both discovery arms require those two to corroborate, so such a row could
     never match anything. An index failure does not lose the ABHA binding.
+10a. **Scan-and-share delivers ABDM-VERIFIED demographics that nothing indexes.** The `patient/share`
+    body carries name, gender, yearOfBirth, phoneNumber and an ABHA address, already verified by the CM -
+    exactly what `indexPatient` needs. Indexing at scan time would make that patient discoverable later
+    with nobody typing anything. Deferred: feature work is stopped.
 10b. ~~Nothing populates the new SCCM collections.~~ **BOTH RESOLVED.** A real clinic bill projects to a
     conformant InvoiceRecord (`hip-sources/clinic-billing.js`, from `q_invoices`), and **OPD immunisation
     capture now exists** (owner-approved 2026-08-19): a vaccination recorded in the OPD EMR projects through
@@ -278,7 +305,7 @@ tracked fixture. Names are now masked by KEY, and a test asserts it rather than 
 ```bash
 cd <repo>
 
-# ABDM + connect suites (1106 tests) - no external dependencies.
+# ABDM + connect suites (1109 tests) - no external dependencies.
 # The flag matters: 11 tests use module mocks (the /link route, the OPD ticket lookup) and SKIP without it,
 # so the suite still reads green while testing less.
 node --test --experimental-test-module-mocks "test/connect/abdm/"*.test.mjs test/connect/*.test.mjs

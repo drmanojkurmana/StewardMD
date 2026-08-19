@@ -43,13 +43,14 @@ const consentRow = (o = {}) => ({
 });
 
 // ── what actually arrived ───────────────────────────────────────────────────────────────────────────
-test("four callbacks were captured, and every one carries ABDM's envelope", () => {
-  assert.equal(REAL_CALLBACKS.length, 4);
-  assert.deepEqual(OBSERVED_PATHS, [
+test("six callbacks were captured, across five distinct kinds", () => {
+  assert.equal(REAL_CALLBACKS.length, 6);
+  assert.deepEqual([...new Set(OBSERVED_PATHS)], [
     "/api/v3/hiu/consent/request/on-init",
     "/api/v3/hiu/consent/request/notify",
     "/api/v3/hip/token/on-generate-token",
     "/api/v3/hip/patient/care-context/discover",
+    "/api/v3/hip/patient/share",
   ]);
   for (const c of REAL_CALLBACKS) {
     assert.equal(c.method, "POST");
@@ -57,13 +58,16 @@ test("four callbacks were captured, and every one carries ABDM's envelope", () =
     assert.ok(c.headers["REQUEST-ID"], c.path + " has no REQUEST-ID");
     assert.ok(c.headers["TIMESTAMP"], c.path + " has no TIMESTAMP");
   }
-  // The `error` envelope is on the RESPONSE-style callbacks. Discovery is a REQUEST to us and carries a
-  // transactionId instead - so "every callback has an error key" would have been the wrong lesson to draw
-  // from the first three bodies.
-  for (const c of REAL_CALLBACKS.filter((x) => !x.path.includes("discover"))) {
-    assert.ok("error" in c.body, c.path + " has no error key");
+  // DIRECTION decides the envelope, and the first three bodies would have taught us the wrong rule.
+  // A callback that ANSWERS something we sent carries `error` (null on success) + `response.requestId`.
+  // A callback that is ABDM ASKING US for something carries neither - it correlates by its own id.
+  const ANSWERS_US = ["on-init", "notify", "on-generate-token"];
+  for (const c of REAL_CALLBACKS) {
+    const answering = ANSWERS_US.some((k) => c.path.includes(k));
+    assert.equal("error" in c.body, answering, c.path + " envelope does not match its direction");
   }
-  assert.ok(byPath("discover").body.transactionId, "discovery correlates by transactionId, not response.requestId");
+  assert.ok(byPath("discover").body.transactionId, "discovery correlates by transactionId");
+  assert.ok(byPath("patient/share").body.metaData, "share correlates by metaData + REQUEST-ID header");
   // The HIU callbacks carry X-HIU-ID; the HIP one carries X-HIP-ID. That is how the receiver picks a tenant.
   assert.equal(byPath("/hiu/").headers["X-HIU-ID"], "IN2810006668");
   assert.equal(byPath("/hip/token").headers["X-HIP-ID"], "IN2810006668");
@@ -77,6 +81,10 @@ test("the identifier masking actually held - no ABHA address reached the committ
   // A NAME is PHI that no value-regex can spot - it is masked by KEY. This was a real leak: the discovery
   // body carries patient.name and the first version of the redactor passed it straight through.
   assert.ok(!/Kurmana|Manoj/i.test(s), "a patient NAME leaked into a tracked file");
+  // The scan-and-share body carries a full POSTAL ADDRESS and GPS. Also caught on a real capture, not
+  // hypothetically: line + pincode alone identifies a household, and the coordinates were house-accurate.
+  assert.ok(!/Eden Gardens|Visakhapatnam|ANDHRA|530017/i.test(s), "a postal ADDRESS leaked into a tracked file");
+  assert.ok(!/1[0-9]\.[0-9]{4}|8[0-9]\.[0-9]{4}/.test(s), "GPS coordinates leaked into a tracked file");
   assert.equal(byPath("discover").body.patient.name, "<name>", "the name key must be masked, not dropped");
 });
 
@@ -250,4 +258,41 @@ test("D12 END TO END: the real probe now MATCHES an indexed patient - before the
   // ...and the un-flattened body, which is exactly what the old code passed, still cannot match.
   const missed = await matchDemographics(ENVX, d, { tenantId: "t1", probe: probeRaw });
   assert.equal(missed.matched, false, "the raw ABDM body has no probe.mobile, so the mobile arm is dead");
+});
+
+// ── scan-and-share: the QR round trip, and a shape we got RIGHT ─────────────────────────────────────
+test("scan-and-share proves the facility QR end to end", () => {
+  const c = byPath("patient/share");
+  assert.equal(c.body.intent, "PROFILE_SHARE");
+  // D13: the QR encodes `hip-id` and `counter-id` (HYPHENATED). Wrong names are rejected inside the ABHA
+  // app with "Invalid QR code" - it never reaches the gateway, so there is NO callback and nothing to
+  // debug server-side. This body is the proof the corrected QR works: our counter-id came back as context.
+  assert.equal(c.body.metaData.hipId, "IN2810006668");
+  assert.equal(c.body.metaData.context, "OPD1", "our counter-id survives the round trip as metaData.context");
+  assert.ok(c.body.metaData.hprId, "the scanning practitioner's HPR id arrives free");
+});
+
+test("our scan-and-share parser was already correct - phoneNumber, not mobile", () => {
+  const p = byPath("patient/share").body.profile.patient;
+  // The trap we happened to avoid: the field is `phoneNumber`. `patient.mobile` does not exist.
+  assert.equal(p.mobile, undefined);
+  assert.ok("phoneNumber" in p);
+  assert.equal(p.abhaNumber, null, "an unlinked ABHA number arrives as null, not as an empty string");
+  // Dates of birth arrive as STRINGS, and the month is NOT zero-padded ("6", not "06").
+  assert.equal(typeof p.yearOfBirth, "string");
+  assert.equal(p.monthOfBirth, "6");
+  assert.equal(p.dayOfBirth, "11");
+  // Structure survives masking, which is the whole point of masking by key rather than dropping.
+  assert.deepEqual(Object.keys(p.address), ["line", "district", "state", "pincode"]);
+});
+
+test("scan-and-share carries ABDM-VERIFIED demographics that nothing indexes yet", () => {
+  // Worth stating rather than fixing here (feature work is stopped): this callback delivers exactly the
+  // five fields the demographic index needs - name, gender, yearOfBirth, phoneNumber, and an ABHA address
+  // to key by - already verified by the CM. Indexing at scan time would make a scan-and-share patient
+  // discoverable later without anyone typing anything. Recorded in the report as a follow-up.
+  const p = byPath("patient/share").body.profile.patient;
+  for (const k of ["name", "gender", "yearOfBirth", "phoneNumber", "abhaAddress"]) {
+    assert.ok(k in p, "scan-and-share should carry " + k);
+  }
 });

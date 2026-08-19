@@ -105,6 +105,82 @@ export const REAL_CALLBACKS = Object.freeze([
     "yearOfBirth": 1997
    }
   }
+ },
+ {
+  "at": "2026-08-19 20:37:17",
+  "method": "POST",
+  "path": "/api/v3/hip/patient/care-context/discover",
+  "headers": {
+   "REQUEST-ID": "66e39c3a-5edd-42c6-93de-ea64ab75d0c5",
+   "TIMESTAMP": "2026-08-19T20:37:17.377Z",
+   "X-HIP-ID": "IN2810006668",
+   "CONTENT-TYPE": "application/json"
+  },
+  "hasBearer": true,
+  "body": {
+   "transactionId": "0a6605b4-0e12-4885-a3fa-2b341f36b228",
+   "patient": {
+    "id": "<abha-address>",
+    "verifiedIdentifiers": [
+     {
+      "type": "MOBILE",
+      "value": "<mobile>"
+     },
+     {
+      "type": "ABHA_NUMBER",
+      "value": ""
+     },
+     {
+      "type": "abhaAddress",
+      "value": "<abha-address>"
+     }
+    ],
+    "unverifiedIdentifiers": null,
+    "name": "<name>",
+    "gender": "M",
+    "yearOfBirth": 1997
+   }
+  }
+ },
+ {
+  "at": "2026-08-19 20:52:08",
+  "method": "POST",
+  "path": "/api/v3/hip/patient/share",
+  "headers": {
+   "REQUEST-ID": "a8bcb6cc-27a9-4bda-9aa9-1c821f0f2799",
+   "TIMESTAMP": "2026-08-19T20:52:08.631Z",
+   "X-HIP-ID": "IN2810006668",
+   "CONTENT-TYPE": "application/json"
+  },
+  "hasBearer": true,
+  "body": {
+   "intent": "PROFILE_SHARE",
+   "metaData": {
+    "hipId": "IN2810006668",
+    "context": "OPD1",
+    "hprId": "abdulkalam@hpr.abdm",
+    "latitude": "<latitude>",
+    "longitude": "<longitude>"
+   },
+   "profile": {
+    "patient": {
+     "abhaNumber": null,
+     "abhaAddress": "<abhaaddress>",
+     "name": "<name>",
+     "gender": "M",
+     "dayOfBirth": "11",
+     "monthOfBirth": "6",
+     "yearOfBirth": "1997",
+     "address": {
+      "line": "<line>",
+      "district": "<district>",
+      "state": "<state>",
+      "pincode": "<pincode>"
+     },
+     "phoneNumber": "<mobile>"
+    }
+   }
+  }
  }
 ]);
 
@@ -113,5 +189,7 @@ export const OBSERVED_PATHS = Object.freeze([
  "/api/v3/hiu/consent/request/on-init",
  "/api/v3/hiu/consent/request/notify",
  "/api/v3/hip/token/on-generate-token",
- "/api/v3/hip/patient/care-context/discover"
+ "/api/v3/hip/patient/care-context/discover",
+ "/api/v3/hip/patient/care-context/discover",
+ "/api/v3/hip/patient/share"
 ]);

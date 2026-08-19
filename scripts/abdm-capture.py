@@ -83,10 +83,19 @@ MOBILE = re.compile(r"\b[6-9]\d{9}\b")
 AADHAAR = re.compile(r"\b\d{12}\b")
 
 
-# A NAME is PHI and no regex can spot one - "Manoj Kumar Kurmana" is just a string. So names are masked by
-# KEY instead. This was a real leak: the discovery callback carries patient.name, the value-regexes below
-# passed it straight through, and it would have been committed to a tracked fixture.
-NAME_KEYS = {"name", "fullname", "firstname", "middlename", "lastname", "patientname", "healthid", "abhaaddress"}
+# PHI that no VALUE regex can recognise, because it is just prose: a name, a street, a village. These are
+# masked by KEY instead. Both entries here were REAL leaks caught on real captures, not hypotheticals:
+#   - patient.name           (discovery callback)      - "Manoj Kumar Kurmana" is only a string
+#   - profile.patient.address (scan-and-share callback) - a full postal address, line + district + pincode
+#   - metaData.latitude/longitude - GPS fine enough to locate a house
+# The STRUCTURE is the evidence and is untouched; every key and type survives, only the value is replaced.
+NAME_KEYS = {
+    "name", "fullname", "firstname", "middlename", "lastname", "patientname", "healthid", "abhaaddress",
+    # postal address, every component: line+pincode alone identifies a household
+    "address", "line", "district", "state", "pincode", "town", "village", "city", "subdistrict", "locality",
+    # location
+    "latitude", "longitude",
+}
 
 
 def redact(node, key=None):
