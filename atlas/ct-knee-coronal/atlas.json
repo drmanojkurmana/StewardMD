@@ -1,0 +1,307 @@
+{
+ "id": "ct-knee-coronal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_knee_ct.py on Visible Human frozenCT slices 2300-2470. Bone contrast is the one thing this frozen cadaver reproduces faithfully, so HU thresholding at 300 plus 3D connected components plus position is sufficient, and it is free.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "femur": {
+   "name": "Femur",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The femur is the longest and strongest bone in the skeleton."
+  },
+  "fibula": {
+   "name": "Fibula",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+  },
+  "lower-limb": {
+   "name": "Lower limb",
+   "category": "bone"
+  },
+  "tibia": {
+   "name": "Tibia",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-knee-coronal/001.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-knee-coronal/002.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-knee-coronal/003.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-knee-coronal/004.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-knee-coronal/005.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-knee-coronal/006.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-knee-coronal/007.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-knee-coronal/008.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-knee-coronal/009.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-knee-coronal/010.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "fibula",
+     "x": 9.4,
+     "y": 66.6
+    },
+    {
+     "s": "fibula",
+     "x": 92.5,
+     "y": 99.9
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-knee-coronal/011.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 15.7,
+     "y": 12.2
+    },
+    {
+     "s": "femur",
+     "x": 85.3,
+     "y": 7.7
+    },
+    {
+     "s": "tibia",
+     "x": 19.8,
+     "y": 30.5
+    },
+    {
+     "s": "tibia",
+     "x": 78.5,
+     "y": 32.3
+    },
+    {
+     "s": "fibula",
+     "x": 7.5,
+     "y": 32.5
+    },
+    {
+     "s": "fibula",
+     "x": 91.6,
+     "y": 60.7
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-knee-coronal/012.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 14.9,
+     "y": 14.9
+    },
+    {
+     "s": "femur",
+     "x": 85.1,
+     "y": 12.5
+    },
+    {
+     "s": "tibia",
+     "x": 15.6,
+     "y": 55.3
+    },
+    {
+     "s": "tibia",
+     "x": 84.9,
+     "y": 38.5
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-knee-coronal/013.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 24.0,
+     "y": 21.0
+    },
+    {
+     "s": "femur",
+     "x": 75.5,
+     "y": 19.1
+    },
+    {
+     "s": "tibia",
+     "x": 24.3,
+     "y": 28.9
+    },
+    {
+     "s": "tibia",
+     "x": 76.4,
+     "y": 45.1
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-knee-coronal/014.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 14.9,
+     "y": 11.6
+    },
+    {
+     "s": "femur",
+     "x": 83.1,
+     "y": 13.1
+    },
+    {
+     "s": "tibia",
+     "x": 12.5,
+     "y": 65.6
+    },
+    {
+     "s": "tibia",
+     "x": 86.1,
+     "y": 76.5
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-knee-coronal/015.webp",
+   "aspect": 2.3078,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 15.1,
+     "y": 3.0
+    },
+    {
+     "s": "femur",
+     "x": 83.0,
+     "y": 8.6
+    },
+    {
+     "s": "tibia",
+     "x": 85.6,
+     "y": 48.3
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-knee-coronal/016.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-knee-coronal/017.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-knee-coronal/018.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-knee-coronal/019.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-knee-coronal/020.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-knee-coronal/021.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-knee-coronal/022.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-knee-coronal/023.webp",
+   "aspect": 2.3078,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-knee-coronal/024.webp",
+   "aspect": 2.3078,
+   "pins": []
+  }
+ ]
+}
