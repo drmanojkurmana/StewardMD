@@ -75,7 +75,7 @@ def visible_slices(vol, window, frac=0.0005):
     return nz
 
 
-def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id):
+def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id, seg_path=None):
     """Write NNN.webp and t/NNN.webp; return slice stubs for build.py.
 
     The returned _z and _shape let the mask path reproduce this geometry exactly.
@@ -91,6 +91,23 @@ def extract_slices(nifti_path, out_dir, module_id, n_wanted, window, source_id):
     # Sample only where there is anatomy. Without this the stack spends slices on empty
     # margins and ships pure-black frames (ct-hand-coronal shipped six in a row).
     vis = visible_slices(vol, window)
+    # Prefer slices that carry a LABEL. "Visible" is not enough on MR: the percentile
+    # stretch amplifies pure noise outside the head to full range, so the first frame of
+    # the brain opened on a noise field - visible, and teaching nothing. In a labelled
+    # atlas a slice with no structure on it is a wasted frame, so when a segmentation is
+    # available, keep the picks inside the z-range where labels exist.
+    if seg_path:
+        try:
+            import nibabel as _nib
+            seg = np.asanyarray(_nib.load(seg_path).dataobj)
+            nz = np.flatnonzero((seg > 0).any(axis=(0, 1)))
+            if nz.size:
+                lo, hi = int(nz[0]), int(nz[-1])
+                inside = [z for z in vis if lo <= z <= hi]
+                if len(inside) >= min(n_wanted, 4):
+                    vis = np.asarray(inside)
+        except Exception:
+            pass
     picks = [int(vis[i]) for i in pick_slice_indices(len(vis), n_wanted)]
     # Display spacing after to_display (which transposes): rows = Y, cols = X.
     spacing_disp = (zooms[1], zooms[0])

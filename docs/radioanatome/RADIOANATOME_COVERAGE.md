@@ -7,7 +7,7 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 ## Headline
 
 - **Modules shipped:** 30
-- **Total pins:** 3881
+- **Total pins:** 4284
 - **Canonical structures in the ontology:** 86
 - **Structures WITH geometry (covered):** 62
 - **Structures declared but empty (honest gaps):** 24
@@ -39,15 +39,15 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-abdomen-sagittal` | Abdomen | CT | Sagittal | 140 | 6 of 8 declared |
 | `ct-abdomen-axial` | Abdomen | CT | Axial | 238 | 6 of 8 declared |
 | `brain-mri-axial-t1` | Brain | MRI | Axial - T1 (cadaver, unlabelled) | 0 | 0 of 23 declared |
-| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 217 | 16 of 18 declared |
-| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 225 | 16 of 18 declared |
-| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 155 | 16 of 18 declared |
+| `mri-brain-axial` | Brain | MRI | Axial - living 7T T1 | 228 | 16 of 18 declared |
+| `mri-brain-coronal` | Brain | MRI | Coronal - living 7T T1 | 242 | 16 of 18 declared |
+| `mri-brain-sagittal` | Brain | MRI | Sagittal - living 7T T1 | 259 | 16 of 18 declared |
 | `ct-head-coronal` | Head and neck | CT | Coronal | 99 | 2 of 3 declared |
 | `ct-head-sagittal` | Head and neck | CT | Sagittal | 122 | 2 of 3 declared |
 | `ct-head-axial` | Head and neck | CT | Axial | 105 | 2 of 3 declared |
 | `ct-foot-axial` | Lower limb | CT | Axial | 113 | 5 of 6 declared |
 | `ct-foot-sagittal` | Lower limb | CT | Sagittal - single foot | 188 | 5 of 6 declared |
-| `ct-foot-coronal` | Lower limb | CT | Coronal | 74 | 5 of 6 declared |
+| `ct-foot-coronal` | Lower limb | CT | Coronal | 137 | 5 of 6 declared |
 | `ct-knee-axial` | Lower limb | CT | Axial | 84 | 3 of 4 declared |
 | `ct-knee-coronal` | Lower limb | CT | Coronal | 23 | 3 of 4 declared |
 | `ct-knee-sagittal` | Lower limb | CT | Sagittal - single leg | 72 | 3 of 4 declared |
@@ -58,9 +58,9 @@ A structure counts as COVERED only if it has at least one pin in a shipped modul
 | `ct-thorax-sagittal` | Thorax | CT | Sagittal | 125 | 5 of 7 declared |
 | `ct-thorax-axial` | Thorax | CT | Axial | 173 | 5 of 7 declared |
 | `ct-live-torso-axial` | Torso | CT | Axial - living patient | 321 | 27 of 28 declared |
-| `ct-live-torso-coronal` | Torso | CT | Coronal - living patient | 275 | 27 of 28 declared |
-| `ct-live-torso-sagittal` | Torso | CT | Sagittal - living patient | 253 | 27 of 28 declared |
-| `ct-hand-coronal` | Upper limb | CT | Coronal | 16 | 1 of 2 declared |
+| `ct-live-torso-coronal` | Torso | CT | Coronal - living patient | 365 | 27 of 28 declared |
+| `ct-live-torso-sagittal` | Torso | CT | Sagittal - living patient | 303 | 27 of 28 declared |
+| `ct-hand-coronal` | Upper limb | CT | Coronal | 84 | 1 of 2 declared |
 | `ct-hand-axial` | Upper limb | CT | Axial | 81 | 1 of 2 declared |
 | `ct-hand-sagittal` | Upper limb | CT | Sagittal | 49 | 1 of 2 declared |
 | `ct-wholebody-axial` | Whole body | CT | Axial - vertex to feet | 66 | 8 of 9 declared |

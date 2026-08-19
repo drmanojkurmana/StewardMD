@@ -238,7 +238,7 @@ def main(argv=None):
     zooms = nib.load(a.volume).header.get_zooms()[:3]
     spacing_disp = (zooms[1], zooms[0])
 
-    stubs = extract_slices(a.volume, out_dir, a.module, a.slices, a.window, a.source)
+    stubs = extract_slices(a.volume, out_dir, a.module, a.slices, a.window, a.source, a.seg)
     pins = pins_from_segmentation(a.seg, stubs, mapping, spacing_disp) if a.seg else {}
 
     reg = load_sources()
