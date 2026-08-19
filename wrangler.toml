@@ -46,6 +46,8 @@ bucket_name = "stewardmd-followcare-media"
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
+MAIK_LIVE_STREAM = "1"
+AI_PROVIDER = "developer"
 FOLLOWCARE_RETENTION_DAYS = "7"
 # Admin/owner allowlist (comma-separated Google account emails). The authoritative server gate
 # (functions/_adminauth.js ownerOK) uses this; the in-code defaults are kept in sync as a fallback.
