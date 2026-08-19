@@ -6,29 +6,29 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.344)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.913)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.602)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:02.043)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.298)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.148)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.418)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.979)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:03.152)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.739)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.976)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.308)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.091)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.493)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:08.127)
+ - 5115 resources (00:10.083)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.207)
+  Get set...  go (00:00.205)
 Validating
   Validate fhir/DiagnosticReportRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:01.900
-Done. Times: Loading: 00:21.248, validation: 00:01.900. Memory = 1Gb
+ 00:02.170
+Done. Times: Loading: 00:24.209, validation: 00:02.170. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/DiagnosticReportRecord.json 02:34:21
-[-1, -1] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.result[0]: Warning - URN reference is not locally contained within the bundle urn:uuid:421d0bce-39f0-4943-b32b-c32fadf53382
+fhir/DiagnosticReportRecord.json 03:03:44
+[-1, -1] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.result[0]: Warning - URN reference is not locally contained within the bundle urn:uuid:309e7910-7399-43f5-931c-38490697c69d
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#721981007)
@@ -45,7 +45,7 @@ fhir/DiagnosticReportRecord.json 02:34:21
 [244, 6] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
 [273, 8] Bundle.entry[5].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:21.248, validation: 00:01.900. Max Memory = 4Gb
+Done. Times: Loading: 00:24.209, validation: 00:02.170. Max Memory = 4Gb
 exit=0
 ===== fhir/DischargeSummaryRecord.json
 FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
@@ -55,28 +55,28 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.270)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.826)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.723)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.971)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.294)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.410)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:02.527)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.175)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.661)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.710)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.973)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.314)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.051)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.491)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:08.527)
+ - 5115 resources (00:08.671)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.170)
+  Get set...  go (00:00.194)
 Validating
   Validate fhir/DischargeSummaryRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:01.947
-Done. Times: Loading: 00:22.867, validation: 00:01.947. Memory = 1Gb
+ 00:01.969
+Done. Times: Loading: 00:21.391, validation: 00:01.970. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/DischargeSummaryRecord.json 02:34:44
+fhir/DischargeSummaryRecord.json 03:04:10
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#373942005)
@@ -116,7 +116,7 @@ fhir/DischargeSummaryRecord.json 02:34:44
 [566, 6] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
 [595, 8] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:22.867, validation: 00:01.947. Max Memory = 4Gb
+Done. Times: Loading: 00:21.391, validation: 00:01.970. Max Memory = 4Gb
 exit=0
 ===== fhir/HealthDocumentRecord.json
 FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
@@ -126,28 +126,28 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.321)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:03.465)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.790)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.961)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.284)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.123)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.448)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.499)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.685)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.789)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.942)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.298)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.009)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.441)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:08.410)
+ - 5115 resources (00:09.961)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.168)
+  Get set...  go (00:00.240)
 Validating
   Validate fhir/HealthDocumentRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:02.679
-Done. Times: Loading: 00:22.117, validation: 00:02.679. Memory = 1Gb
+ 00:02.446
+Done. Times: Loading: 00:23.013, validation: 00:02.446. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/HealthDocumentRecord.json 02:35:09
+fhir/HealthDocumentRecord.json 03:04:34
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#419891008)
@@ -163,7 +163,104 @@ fhir/HealthDocumentRecord.json 02:35:09
 [251, 40] Bundle.entry[5].resource/*DocumentReference/scan-1*/.content[0].attachment.contentType: Warning - The value provided ('application/pdf') could not be validated because the code system urn:ietf:bcp:13 is not known
 [258, 8] Bundle.entry[5].resource/*DocumentReference/scan-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:22.117, validation: 00:02.679. Max Memory = 4Gb
+Done. Times: Loading: 00:23.013, validation: 00:02.446. Max Memory = 4Gb
+exit=0
+===== fhir/ImmunizationRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/ImmunizationRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.951)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.905)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.617)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:02.065)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.300)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.036)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.587)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:10.382)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.237)
+Validating
+  Validate fhir/ImmunizationRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:02.196
+Done. Times: Loading: 00:24.267, validation: 00:02.196. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/ImmunizationRecord.json 03:05:00
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-imm*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[39, 6] Bundle.entry[0].resource/*Composition/comp-imm*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#41000179103)
+[94, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[126, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[141, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[154, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[166, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[188, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[203, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[225, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[240, 5] Bundle.entry[5].resource/*Immunization/imm-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[244, 6] Bundle.entry[5].resource/*Immunization/imm-1*/.vaccineCode: Warning - Unable to check whether the code is in the value set https://nrces.in/ndhm/fhir/r4/ValueSet/ndhm-vaccine-codes|6.5.0
+[290, 8] Bundle.entry[5].resource/*Immunization/imm-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:24.267, validation: 00:02.196. Max Memory = 4Gb
+exit=0
+===== fhir/InvoiceRecord.json
+FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
+  Java:   21.0.10 from /Applications/Android Studio.app/Contents/jbr/Contents/Home on aarch64 (64bit). 4096MB available
+  Paths:  Current = /Users/diwakarkumar/.claude/jobs/13eb7b6b/tmp, Package Cache = /Users/diwakarkumar/.fhir/packages
+  Params: fhir/InvoiceRecord.json -version 4.0.1 -ig https://nrces.in/ndhm/fhir/r4 -tx n/a -output-style compact
+  Locale: India/IN
+  Jurisdiction: India
+Loading
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.575)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.837)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.621)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.966)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.287)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:00.984)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.466)
+  Terminology server null - Version n/a: No Terminology Server (00:00.000)
+  Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
++  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
+ - 5115 resources (00:09.370)
+  Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
+  Get set...  go (00:00.278)
+Validating
+  Validate fhir/InvoiceRecord.json
+Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
+ 00:02.473
+Done. Times: Loading: 00:22.568, validation: 00:02.473. Memory = 1Gb
+
+
+----------------------------------------------------------------------------------
+fhir/InvoiceRecord.json 03:05:27
+[11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[31, 8] Bundle.entry[0].resource/*Composition/comp-inv*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[87, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[119, 8] Bundle.entry[1].resource/*Patient/pat-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[134, 5] Bundle.entry[2].resource/*Device/stewardmd-cds*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[147, 8] Bundle.entry[2].resource/*Device/stewardmd-cds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[159, 5] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[181, 8] Bundle.entry[3].resource/*Organization/stewardmd-org-gimsr*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[196, 5] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[218, 8] Bundle.entry[4].resource/*Organization/hip-IN2810006668*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+[233, 5] Bundle.entry[5].resource/*Invoice/inv-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
+[282, 27] Bundle.entry[5].resource/*Invoice/inv-1*/.lineItem[0].priceComponent[0].amount.currency: Warning - The value provided ('INR') could not be validated because the code system urn:iso:std:iso:4217 is not known
+[299, 27] Bundle.entry[5].resource/*Invoice/inv-1*/.lineItem[0].priceComponent[1].amount.currency: Warning - The value provided ('INR') could not be validated because the code system urn:iso:std:iso:4217 is not known
+[316, 27] Bundle.entry[5].resource/*Invoice/inv-1*/.lineItem[0].priceComponent[2].amount.currency: Warning - The value provided ('INR') could not be validated because the code system urn:iso:std:iso:4217 is not known
+[324, 23] Bundle.entry[5].resource/*Invoice/inv-1*/.totalNet.currency: Warning - The value provided ('INR') could not be validated because the code system urn:iso:std:iso:4217 is not known
+[328, 23] Bundle.entry[5].resource/*Invoice/inv-1*/.totalGross.currency: Warning - The value provided ('INR') could not be validated because the code system urn:iso:std:iso:4217 is not known
+[344, 8] Bundle.entry[5].resource/*Invoice/inv-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
+
+Done. Times: Loading: 00:22.568, validation: 00:02.473. Max Memory = 4Gb
 exit=0
 ===== fhir/OPConsultRecord.json
 FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
@@ -173,28 +270,28 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.358)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.784)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.746)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.965)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.300)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.026)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.449)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.297)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.730)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.768)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.984)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.296)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.043)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.478)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:08.526)
+ - 5115 resources (00:09.792)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.197)
+  Get set...  go (00:00.294)
 Validating
   Validate fhir/OPConsultRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:02.012
-Done. Times: Loading: 00:21.505, validation: 00:02.013. Memory = 1Gb
+ 00:02.183
+Done. Times: Loading: 00:22.831, validation: 00:02.183. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/OPConsultRecord.json 02:35:34
+fhir/OPConsultRecord.json 03:05:52
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#371530004)
@@ -235,7 +332,7 @@ fhir/OPConsultRecord.json 02:35:34
 [571, 6] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.code: Warning - Unable to check whether the code is in the value set http://hl7.org/fhir/ValueSet/report-codes|4.0.1
 [600, 8] Bundle.entry[12].resource/*DiagnosticReport/dr-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:21.505, validation: 00:02.013. Max Memory = 4Gb
+Done. Times: Loading: 00:22.831, validation: 00:02.183. Max Memory = 4Gb
 exit=0
 ===== fhir/PrescriptionRecord.json
 FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
@@ -245,28 +342,28 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.261)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.871)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.841)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.977)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.304)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.052)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.474)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.485)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.834)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.749)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:02.229)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.312)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:01.270)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.495)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:09.075)
+ - 5115 resources (00:09.559)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.224)
+  Get set...  go (00:00.270)
 Validating
   Validate fhir/PrescriptionRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:02.246
-Done. Times: Loading: 00:22.232, validation: 00:02.246. Memory = 1Gb
+ 00:02.120
+Done. Times: Loading: 00:23.359, validation: 00:02.120. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/PrescriptionRecord.json 02:35:58
+fhir/PrescriptionRecord.json 03:06:18
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [39, 6] Bundle.entry[0].resource/*Composition/comp-ds*/.type: Information - None of the codings provided are in the value set 'FHIR Document Type Codes' (http://hl7.org/fhir/ValueSet/doc-typecodes|4.0.1), and a coding is recommended to come from this value set) (codes = http://snomed.info/sct#440545006)
@@ -281,7 +378,7 @@ fhir/PrescriptionRecord.json 02:35:58
 [240, 5] Bundle.entry[5].resource/*MedicationRequest/med-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
 [264, 8] Bundle.entry[5].resource/*MedicationRequest/med-1*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:22.232, validation: 00:02.246. Max Memory = 4Gb
+Done. Times: Loading: 00:23.359, validation: 00:02.120. Max Memory = 4Gb
 exit=0
 ===== fhir/WellnessRecord.json
 FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:38.531Z (1022 days old)
@@ -291,28 +388,28 @@ FHIR Validation tool Version 6.2.1 (Git# 3c198658e133). Built 2023-10-31T16:24:3
   Locale: India/IN
   Jurisdiction: India
 Loading
-  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.536)
-  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.628)
-  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.612)
-  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:01.973)
-  Load hl7.terminology#7.3.0 - 4145 resources (00:00.299)
-  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:00.975)
-  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.460)
+  Load FHIR v4.0 from hl7.fhir.r4.core#4.0.1 - 4576 resources (00:04.640)
+  Load hl7.fhir.uv.extensions.r5#5.2.0 - 758 resources (00:02.886)
+  Load hl7.terminology.r5#7.1.0 - 4071 resources (00:00.585)
+  Load hl7.fhir.uv.extensions.r5#5.3.0 - 855 resources (00:02.038)
+  Load hl7.terminology#7.3.0 - 4145 resources (00:00.300)
+  Load hl7.terminology.r5#6.5.0 - 4356 resources (00:00.996)
+  Load hl7.fhir.uv.extensions#5.3.0-ballot-tc1 - 822 resources (00:01.581)
   Terminology server null - Version n/a: No Terminology Server (00:00.000)
   Load https://nrces.in/ndhm/fhir/r4+  .. load IG from hl7.terminology.r4#6.0.2
 +  .. load IG from hl7.fhir.uv.extensions.r4#5.1.0
- - 5115 resources (00:08.310)
+ - 5115 resources (00:09.794)
   Package Summary: [hl7.fhir.r4.core#4.0.1, hl7.fhir.xver-extensions#0.0.12, hl7.fhir.uv.extensions.r5#5.2.0, hl7.terminology.r5#7.1.0, hl7.fhir.uv.extensions.r5#5.3.0, hl7.terminology#7.3.0, hl7.terminology.r5#6.5.0, hl7.fhir.uv.extensions#5.3.0-ballot-tc1]
-  Get set...  go (00:00.186)
+  Get set...  go (00:00.224)
 Validating
   Validate fhir/WellnessRecord.json
 Validate Bundle against http://hl7.org/fhir/StructureDefinition/Bundle|4.0.1..........20..........40..........60..........80.........|
- 00:01.897
-Done. Times: Loading: 00:21.193, validation: 00:01.897. Memory = 1Gb
+ 00:02.170
+Done. Times: Loading: 00:23.226, validation: 00:02.170. Memory = 1Gb
 
 
 ----------------------------------------------------------------------------------
-fhir/WellnessRecord.json 02:36:23
+fhir/WellnessRecord.json 03:06:43
 [11, 5] Bundle.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [31, 8] Bundle.entry[0].resource/*Composition/comp-ds*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 [91, 5] Bundle.entry[1].resource/*Patient/pat-1*/: Warning - Constraint failed: dom-6: 'A resource should have narrative for robust management' (defined in http://hl7.org/fhir/StructureDefinition/DomainResource) (Best Practice Recommendation)
@@ -334,6 +431,6 @@ fhir/WellnessRecord.json 02:36:23
 [290, 5] Bundle.entry[6].resource: Warning - Best Practice Recommendation: In general, all observations should have an effective[x] ()
 [315, 8] Bundle.entry[6].resource/*Observation/obs-note*/.meta.tag[0]: Information - Code System URI 'https://stewardmd.in/CodeSystem/provenance-source' is unknown so the code cannot be validated
 
-Done. Times: Loading: 00:21.193, validation: 00:01.897. Max Memory = 4Gb
+Done. Times: Loading: 00:23.226, validation: 00:02.170. Max Memory = 4Gb
 exit=0
 ALL DONE

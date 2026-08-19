@@ -1,7 +1,7 @@
 // functions/_connect/canonical/model.js — SCCM v1 resources + bundle (spec §4.2/§4.3)
 export const SCCM_VERSION = "1.0";
 export const SCCM_MAJOR = 1;
-export const RESOURCE_KEYS = ["encounters", "conditions", "medications", "allergies", "observations", "diagnosticReports", "documents", "imagingStudies"];
+export const RESOURCE_KEYS = ["encounters", "conditions", "medications", "allergies", "observations", "diagnosticReports", "documents", "imagingStudies", "immunizations", "invoices"];
 
 function requireId(o) { if (!o || !o.id || typeof o.id !== "string") throw new Error("resource requires a stable string id"); return o.id; }
 // Attach an optional field only when the source actually carries a value (never invent/default a placeholder).
@@ -35,12 +35,84 @@ export function imagingStudy(o = {}) {
   return out;
 }
 
+// ── Immunization (SCCM v1.1) ────────────────────────────────────────────────────────────────────────
+// Added because ABDM makes all EIGHT HI types mandatory for an HMIS, and ImmunizationRecord is one of
+// them. NRCES marks Composition.section AND section.entry min=1 on that profile, so a record with no
+// immunisations is structurally INVALID rather than merely thin - which meant the HI type could not be
+// served at all while SCCM had nowhere to put a vaccination.
+//
+// The FHIR minima this has to be able to satisfy: status, vaccineCode (with system+code+display),
+// patient (supplied by the bundle) and occurrence[x]. Everything else is optional and OMITTED when the
+// source does not carry it - and NRCES is strict about that: `site`, `route`, `performer.function` and
+// `reasonCode` are each optional, but IF present their coding needs system+code+display. So a half-known
+// site is worse than no site, and putIf is doing real work here.
+export function immunization(o = {}) {
+  requireId(o);
+  const out = { id: o.id, vaccineCode: o.vaccineCode || null, status: o.status || "completed" };
+  putIf(out, "occurrenceDateTime", o.occurrenceDateTime);
+  putIf(out, "lotNumber", o.lotNumber);
+  putIf(out, "expirationDate", o.expirationDate);
+  putIf(out, "doseNumber", o.doseNumber);
+  putIf(out, "site", o.site);                 // codeable; needs system+code+display if present at all
+  putIf(out, "route", o.route);               // codeable; same
+  putIf(out, "manufacturer", o.manufacturer); // free text (an Organization reference is not modelled)
+  putIf(out, "encounter", o.encounter);
+  return out;
+}
+
+// ── Invoice (SCCM v1.1) ─────────────────────────────────────────────────────────────────────────────
+// The other mandatory-but-unmodelled HI type. The normalizer used to skip Invoice as "billing artifact,
+// not clinical data", which is true and beside the point: ABDM requires it of an HMIS, and a patient
+// asking for their records is entitled to what they were charged.
+//
+// NRCES minima: identifier.value, status, type (system+code+display), subject (from the bundle), date,
+// lineItem[].chargeItem[x], lineItem[].priceComponent[].{type, code(system+code+display), amount},
+// totalNet and totalGross. `type` codes come from ndhm-billing-codes (00 Consultation, 01 Pharmacy,
+// 02 IPD, 03 OPD, 99 Others); priceComponent.code from ndhm-price-components (00 MRP, 01 Rate,
+// 02 Discount, 03 CGST, 04 SGST); priceComponent.type from the R4 required set
+// (base|surcharge|deduction|discount|tax|informational).
+//
+// Money is { value, currency } and currency is NOT defaulted: an amount without a currency is a number,
+// not a price, and guessing INR for a bill we did not issue would be inventing data.
+export function money(o = {}) {
+  const out = {};
+  putIf(out, "value", o.value);
+  putIf(out, "currency", o.currency);
+  return out;
+}
+export function invoicePriceComponent(o = {}) {
+  const out = { type: o.type || "base" };
+  putIf(out, "code", o.code);                 // codeable
+  putIf(out, "amount", o.amount ? money(o.amount) : null);
+  putIf(out, "factor", o.factor);
+  return out;
+}
+export function invoiceLineItem(o = {}) {
+  const out = {};
+  putIf(out, "sequence", o.sequence);
+  putIf(out, "chargeItem", o.chargeItem);     // codeable: what was charged for
+  out.priceComponents = (o.priceComponents || []).map(invoicePriceComponent);
+  return out;
+}
+export function invoice(o = {}) {
+  requireId(o);
+  const out = { id: o.id, status: o.status || "issued", type: o.type || null };
+  putIf(out, "identifierValue", o.identifierValue);
+  putIf(out, "date", o.date);
+  out.lineItems = (o.lineItems || []).map(invoiceLineItem);
+  putIf(out, "totalNet", o.totalNet ? money(o.totalNet) : null);
+  putIf(out, "totalGross", o.totalGross ? money(o.totalGross) : null);
+  putIf(out, "encounter", o.encounter);
+  return out;
+}
+
 export function bundle(o = {}) {
   return {
     sccmVersion: SCCM_VERSION, tenantId: o.tenantId || null, patient: o.patient || null,
     encounters: o.encounters || [], conditions: o.conditions || [], medications: o.medications || [],
     allergies: o.allergies || [], observations: o.observations || [], diagnosticReports: o.diagnosticReports || [],
     documents: o.documents || [], imagingStudies: o.imagingStudies || [],
+    immunizations: o.immunizations || [], invoices: o.invoices || [],
     meta: { generatedAt: o.generatedAt || null, sourceConnector: o.sourceConnector || null, scope: o.scope || [], provenance: o.provenance || [], warnings: o.warnings || [] },
   };
 }

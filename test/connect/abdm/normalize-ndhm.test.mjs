@@ -85,14 +85,31 @@ test("binary HealthDocumentRecord -> metadata-only documentReference + warning, 
   assertTextFallbacks(b);
 });
 
-test("InvoiceRecord -> skipped + warning (no clinical resources emitted)", () => {
+test("InvoiceRecord -> MAPPED into SCCM invoices (was: skipped as 'not clinical data')", () => {
+  // This test used to assert the deferral. SCCM v1.1 carries invoices, because ABDM makes all eight HI
+  // types mandatory for an HMIS and a patient asking for their records is entitled to what they were
+  // charged. The old behaviour returned before the sections were ever walked.
   const b = norm(F.invoiceRecord);
-  assert.equal(validateBundle(b).ok, true);           // still valid: patient present, no coded fields
-  assert.match(b.meta.warnings.join(" | "), /invoice/i);
+  assert.equal(b.invoices.length, 1, "the invoice must land somewhere now");
+  const inv = b.invoices[0];
+  assert.equal(inv.id, "inv-1");
+  assert.equal(inv.status, "issued");
+  assert.deepEqual(inv.totalGross, { value: 500, currency: "INR" });
+  assert.ok(!b.meta.warnings.some((w) => /billing artifact/i.test(w)), "the dismissal warning is retired");
+  // The Composition itself is still captured as documentReference metadata, as every record type is.
+  assert.ok(b.documents.some((d) => d.id === "comp-inv"));
   assert.equal(b.conditions.length, 0);
-  assert.equal(b.medications.length, 0);
   assert.equal(b.observations.length, 0);
-  assert.equal(b.documents.length, 0);                // fully skipped, not turned into a documentReference
+});
+
+test("a partial inbound Invoice normalises without throwing, and SCCM validation catches it", () => {
+  // This fixture's Invoice has no identifier, date, type or lineItem - a real peer can send that, and
+  // WARN-don't-DROP means we map what is there rather than refuse the whole document. The SCCM validator
+  // is what reports the gaps, so a bundle we could not re-serialise never masquerades as complete.
+  const b = norm(F.invoiceRecord);
+  const v = validateBundle(b);
+  assert.equal(v.ok, false, "an invoice missing its FHIR minima must not read as valid SCCM");
+  assert.ok(v.errors.some((e) => /Invoice inv-1/.test(e)), JSON.stringify(v.errors));
 });
 
 test("WellnessRecord -> Observations mapped to wellness / social-history categories", () => {
@@ -105,13 +122,22 @@ test("WellnessRecord -> Observations mapped to wellness / social-history categor
   assertTextFallbacks(b);
 });
 
-test("ImmunizationRecord -> metadata-only + warning, not dropped, no crash", () => {
+test("ImmunizationRecord -> MAPPED into SCCM immunizations (was: metadata-only + DEFER warning)", () => {
+  // Also used to assert the deferral. A vaccination arriving from another facility now lands as a first
+  // class resource instead of surviving only as narrative text nobody can query.
   const b = norm(F.immunizationRecord);
-  assert.equal(validateBundle(b).ok, true);
-  assert.match(b.meta.warnings.join(" | "), /immuniz/i);
+  assert.equal(validateBundle(b).ok, true, JSON.stringify(validateBundle(b).errors));
+  assert.equal(b.immunizations.length, 1);
+  const im = b.immunizations[0];
+  assert.equal(im.id, "imm-1");
+  assert.equal(im.status, "completed");
+  assert.equal(im.occurrenceDateTime, "2026-01-15");
+  assert.equal(im.vaccineCode.text, "COVID-19 vaccine");
+  assert.ok(!b.meta.warnings.some((w) => /DEFER/i.test(w)), "the DEFER warning is retired");
+  // …and the narrative is still preserved as documentReference metadata alongside it.
   const compDoc = b.documents.find((d) => d.id === "comp-imm");
-  assert.ok(compDoc, "immunization should survive as documentReference metadata (not silently dropped)");
-  assert.match(compDoc.text, /vaccine/i);             // clinical info preserved in narrative
+  assert.ok(compDoc);
+  assert.match(compDoc.text, /vaccine/i);
 });
 
 test("Bundle missing a referenced resource -> warning, no throw, partial bundle valid", () => {

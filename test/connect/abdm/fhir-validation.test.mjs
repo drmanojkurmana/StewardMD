@@ -14,7 +14,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { serializeNdhm, validateNdhmDoc } from "../../../functions/_connect/connectors/abdm/serialize.js";
-import { dischargeRecord } from "./fixtures/sccm-records.mjs";
+import { dischargeRecord, immunizationRecord, invoiceRecord } from "./fixtures/sccm-records.mjs";
 
 const NOW = "2026-08-19T00:00:00.000Z";
 const ctx = { now: () => new Date(NOW), tenant: { id: "t1" }, hipId: "IN2810006668", envName: "sandbox" };
@@ -26,13 +26,19 @@ const resources = (doc, type) => doc.entry.map((e) => e.resource).filter((r) => 
 const SCAN = { id: "scan-1", status: "current", contentType: "application/pdf",
                data: "JVBERi0xLjQgc3ludGhldGlj", text: "Scanned report" };
 
-// The six HI types producible from an SCCM record. Immunization and Invoice are absent DELIBERATELY - see
-// the test at the bottom.
+// ALL EIGHT, as ABDM requires of an HMIS. ImmunizationRecord and InvoiceRecord became producible when
+// SCCM v1.1 gained `immunizations` and `invoices` - before that they were structurally impossible.
 const PRODUCIBLE = ["OPConsultRecord", "PrescriptionRecord", "DiagnosticReportRecord",
-                    "DischargeSummaryRecord", "HealthDocumentRecord", "WellnessRecord"];
-const withData = (p) => (p === "HealthDocumentRecord"
-  ? build(p, { documents: [...(dischargeRecord.documents || []), SCAN] })
-  : build(p));
+                    "DischargeSummaryRecord", "HealthDocumentRecord", "WellnessRecord",
+                    "ImmunizationRecord", "InvoiceRecord"];
+// Each HI type is built from the SCCM record that actually carries its data: a discharge summary does not
+// contain a bill, and pretending otherwise is how the generic-bundle bug happened.
+const SOURCE = { ImmunizationRecord: immunizationRecord, InvoiceRecord: invoiceRecord };
+const withData = (p) => {
+  if (p === "HealthDocumentRecord") return build(p, { documents: [...(dischargeRecord.documents || []), SCAN] });
+  const src = SOURCE[p];
+  return src ? serializeNdhm(ctx, { ...src, profile: p }) : build(p);
+};
 
 // ── the shape the profiles demand ───────────────────────────────────────────────────────────────────
 test("every producible HI type still passes our own structural gate", () => {
@@ -226,16 +232,21 @@ test("DiagnosticReport carries a resultsInterpreter and resolvable results", () 
 });
 
 // ── what cannot be produced, and why ────────────────────────────────────────────────────────────────
-test("ImmunizationRecord and InvoiceRecord are REFUSED, not emitted hollow", () => {
-  // NRCES makes BOTH section and section.entry min=1 on these, so a document built from an SCCM record
-  // that carries no immunisations and no billing is structurally INVALID - not thin, invalid. SCCM has
-  // neither collection, so these two of the eight mandatory HI types cannot be served at all until the
-  // data model carries them. That is a certification gap, and it is a data-model change, not a
-  // serializer one.
+test("ImmunizationRecord and InvoiceRecord are refused when the record has no such DATA", () => {
+  // NRCES makes BOTH section and section.entry min=1, so an empty one is structurally INVALID rather than
+  // thin. SCCM v1.1 carries both collections now, but a record that happens to hold neither still cannot
+  // produce these HI types - and refusing beats pushing a document the far end rejects.
   for (const p of ["ImmunizationRecord", "InvoiceRecord"]) {
-    const v = validateNdhmDoc(build(p));
-    assert.equal(v.ok, false, p + " must be refused rather than emitted");
+    assert.equal(validateNdhmDoc(build(p)).ok, false, p + " from a discharge record must be refused");
+    assert.equal(validateNdhmDoc(withData(p)).ok, true, p + " from its OWN record must build");
   }
+});
+
+test("Composition.type for the two newest HI types", () => {
+  assert.equal(first(withData("ImmunizationRecord")).type.coding[0].code, "41000179103");
+  const inv = first(withData("InvoiceRecord")).type;
+  assert.equal(inv.text, "Invoice Record");
+  assert.equal(inv.coding, undefined, "this profile fixes only text");
 });
 
 test("a HealthDocumentRecord without the scanned bytes is refused too", () => {

@@ -16,6 +16,57 @@ function validateImagingStudy(img, errors) {
   for (const f of IMAGING_FORBIDDEN_FIELDS) { if (Object.prototype.hasOwnProperty.call(img, f)) errors.push("ImagingStudy " + img.id + " carries forbidden field '" + f + "' (metadata-only: no binary/url)"); }
 }
 
+// Immunization + Invoice (SCCM v1.1). The FHIR minima are enforced HERE rather than left to the
+// serializer, because a bundle that cannot produce a valid ImmunizationRecord should be rejected at
+// ingest, not discovered at push time when a patient is waiting.
+const IMMUNIZATION_STATUS = new Set(["completed", "entered-in-error", "not-done"]);
+const INVOICE_STATUS = new Set(["draft", "issued", "balanced", "cancelled", "entered-in-error"]);
+const PRICE_COMPONENT_TYPE = new Set(["base", "surcharge", "deduction", "discount", "tax", "informational"]);
+
+function validateImmunization(im, errors, checkCoded) {
+  if (!im || typeof im !== "object" || typeof im.id !== "string" || !im.id) { errors.push("Immunization missing/invalid id"); return; }
+  const w = "Immunization " + im.id;
+  if (!IMMUNIZATION_STATUS.has(im.status)) errors.push(w + ".status must be completed|entered-in-error|not-done");
+  if (!im.vaccineCode) errors.push(w + ".vaccineCode is required");
+  else checkCoded(im.vaccineCode, w + ".vaccineCode");
+  // occurrence[x] is min=1 in FHIR, so a vaccination with no date cannot be serialised.
+  if (!im.occurrenceDateTime) errors.push(w + ".occurrenceDateTime is required");
+  // site/route are optional, but a coding that is present must be complete - a half-known site is worse
+  // than none, because NRCES makes system+code+display all min=1 once the element exists.
+  for (const f of ["site", "route"]) if (im[f]) checkCoded(im[f], w + "." + f);
+}
+
+function validateInvoice(inv, errors, checkCoded) {
+  if (!inv || typeof inv !== "object" || typeof inv.id !== "string" || !inv.id) { errors.push("Invoice missing/invalid id"); return; }
+  const w = "Invoice " + inv.id;
+  if (!INVOICE_STATUS.has(inv.status)) errors.push(w + ".status must be draft|issued|balanced|cancelled|entered-in-error");
+  if (!inv.identifierValue) errors.push(w + ".identifierValue is required");
+  if (!inv.date) errors.push(w + ".date is required");
+  if (!inv.type) errors.push(w + ".type is required"); else checkCoded(inv.type, w + ".type");
+  const money = (m, where) => {
+    if (!m || m.value == null) { errors.push(where + " requires a value"); return; }
+    if (typeof m.value !== "number" || !Number.isFinite(m.value)) errors.push(where + ".value must be a finite number");
+    // An amount without a currency is a number, not a price. Never defaulted.
+    if (!m.currency) errors.push(where + " requires a currency");
+  };
+  money(inv.totalNet, w + ".totalNet");
+  money(inv.totalGross, w + ".totalGross");
+  const items = inv.lineItems || [];
+  if (!items.length) errors.push(w + ".lineItems must have at least one entry");
+  items.forEach((li, i) => {
+    const lw = w + ".lineItems[" + i + "]";
+    if (!li.chargeItem) errors.push(lw + ".chargeItem is required"); else checkCoded(li.chargeItem, lw + ".chargeItem");
+    const pcs = li.priceComponents || [];
+    if (!pcs.length) errors.push(lw + ".priceComponents must have at least one entry");
+    pcs.forEach((pc, j) => {
+      const pw = lw + ".priceComponents[" + j + "]";
+      if (!PRICE_COMPONENT_TYPE.has(pc.type)) errors.push(pw + ".type must be one of " + [...PRICE_COMPONENT_TYPE].join("|"));
+      if (!pc.code) errors.push(pw + ".code is required"); else checkCoded(pc.code, pw + ".code");
+      money(pc.amount, pw + ".amount");
+    });
+  });
+}
+
 export function validateBundle(b) {
   const errors = [], warnings = [];
   if (!b || typeof b !== "object") return { ok: false, errors: ["bundle missing"], warnings };
@@ -41,6 +92,8 @@ export function validateBundle(b) {
   (b.diagnosticReports || []).forEach((d) => { checkCoded(d.code, "DiagnosticReport"); (d.results || []).forEach((_, i) => resolveRef(d.results, i, "DiagnosticReport.results")); });
   (b.documents || []).forEach((d) => { checkCoded(d.type, "DocumentReference"); resolveRef(d, "encounter", "DocumentReference"); });
   (b.imagingStudies || []).forEach((im) => validateImagingStudy(im, errors));
+  (b.immunizations || []).forEach((im) => validateImmunization(im, errors, checkCoded));
+  (b.invoices || []).forEach((inv) => validateInvoice(inv, errors, checkCoded));
 
   return { ok: errors.length === 0, errors, warnings };
 }

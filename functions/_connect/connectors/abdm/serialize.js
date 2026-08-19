@@ -102,17 +102,17 @@ const RECORD_SHAPE = {
     sections: [{ title: "Health Document", accepts: ["documents"] }],
   },
   ImmunizationRecord: {
-    // NRCES: section min=1 AND section.entry min=1. An immunisation record with nothing in it is
-    // STRUCTURALLY INVALID, not merely thin - so this profile can only be produced from real
-    // immunisation data. SCCM has no `immunizations` collection, so serializeNdhm REFUSES rather than
-    // emit a document that would be rejected at the far end. Populating it is a data-model change.
+    // NRCES: section min=1 AND section.entry min=1, so an immunisation record with nothing in it is
+    // STRUCTURALLY INVALID rather than merely thin. SCCM v1.1 added `immunizations` precisely so this HI
+    // type could be served; `needs` still refuses a record that carries none, because refusing beats
+    // pushing a document the far end rejects.
     type: { code: "41000179103", display: "Immunization record" }, encounter: false,
     needs: ["immunizations"],
     sections: [{ title: "Immunization", accepts: ["immunizations", "documents"] }],
   },
   InvoiceRecord: {
-    // Likewise, and worse: an NRCES Invoice needs date, identifier, lineItem, totalGross, totalNet and
-    // type. SCCM holds no billing at all, so this profile is unproducible today and says so.
+    // Same story: SCCM v1.1 added `invoices`. ABDM requires this HI type of an HMIS, and a patient asking
+    // for their records is entitled to what they were charged.
     type: { text: "Invoice Record" }, encounter: false,
     needs: ["invoices"],
     sections: [{ title: "Invoice", accepts: ["invoices"] }],
@@ -338,6 +338,75 @@ function buildAttachment(d, inlineBytes) {
   if (inlineBytes && d.data && d.contentType) { att.contentType = d.contentType; att.data = d.data; }
   return att;
 }
+/**
+ * Immunization. NRCES minima: status, vaccineCode (system+code+display), patient, occurrence[x].
+ *
+ * site / route / performer / reasonCode / protocolApplied are all OPTIONAL parents whose codings are
+ * min=1 once the parent exists - so a half-known site is emitted as nothing rather than as a coding the
+ * validator will reject. The SCCM validator already refuses an incomplete one upstream.
+ */
+function buildImmunization(im, subject) {
+  const res = {
+    resourceType: "Immunization", id: im.id,
+    status: im.status || "completed",
+    vaccineCode: ccInv(im.vaccineCode, "vaccine"),
+    occurrenceDateTime: im.occurrenceDateTime,
+  };
+  if (subject) res.patient = subject;
+  if (im.lotNumber) res.lotNumber = im.lotNumber;
+  if (im.expirationDate) res.expirationDate = im.expirationDate;
+  // A site/route coding must be complete or absent. `hasFullCoding` is what makes that a rule rather than
+  // a hope: text-only is fine for a CodeableConcept in general, but NOT for these two elements.
+  if (hasFullCoding(im.site)) res.site = ccInv(im.site, "site");
+  if (hasFullCoding(im.route)) res.route = ccInv(im.route, "route");
+  if (im.doseNumber != null) {
+    res.protocolApplied = [{ doseNumberPositiveInt: Number(im.doseNumber) }];
+  }
+  if (im.manufacturer) res.manufacturer = { display: String(im.manufacturer) };
+  return stampMeta(res, { profile: [PROFILE("Immunization")] });
+}
+/** True when every coding carries system, code AND display - what NRCES demands once the element exists. */
+function hasFullCoding(cc) {
+  const codings = (cc && cc.coding) || [];
+  return codings.length > 0 && codings.every((c) => c.system && c.code && c.display);
+}
+
+/**
+ * Invoice. NRCES minima: identifier.value, status, type (system+code+display), subject, date,
+ * lineItem[].chargeItem[x], lineItem[].priceComponent[].{type, code(system+code+display), amount},
+ * totalNet, totalGross.
+ *
+ * Money currency is passed through, never defaulted: guessing INR on a bill we did not issue would be
+ * inventing a fact about someone's money. The SCCM validator refuses an amount with no currency, so by
+ * the time we are here there is one.
+ */
+function buildInvoice(inv, subject, participant) {
+  const money = (m) => ({ value: m.value, currency: m.currency });
+  const res = {
+    resourceType: "Invoice", id: inv.id,
+    identifier: [{ system: "https://stewardmd.in/invoice", value: String(inv.identifierValue) }],
+    status: inv.status || "issued",
+    type: ccInv(inv.type, "invoice"),
+    date: inv.date,
+    lineItem: (inv.lineItems || []).map((li, i) => {
+      const out = { sequence: li.sequence != null ? Number(li.sequence) : i + 1 };
+      out.chargeItemCodeableConcept = ccInv(li.chargeItem, "charge");
+      out.priceComponent = (li.priceComponents || []).map((pc) => {
+        const p = { type: pc.type || "base", code: ccInv(pc.code, "price component"), amount: money(pc.amount || {}) };
+        if (pc.factor != null) p.factor = Number(pc.factor);
+        return p;
+      });
+      return out;
+    }),
+    totalNet: money(inv.totalNet || {}),
+    totalGross: money(inv.totalGross || {}),
+  };
+  if (subject) res.subject = subject;
+  // participant.actor is min=1 once participant exists, so the issuing organisation is named explicitly.
+  if (participant) res.participant = [{ actor: participant }];
+  return stampMeta(res, { profile: [PROFILE("Invoice")] });
+}
+
 function buildDocumentReference(d, inlineBytes) {
   // By-reference metadata only — NO attachment.data / Binary bytes are ever emitted.
   // DocumentReference.status is a REQUIRED binding to current|superseded|entered-in-error. An SCCM
@@ -398,7 +467,8 @@ export function serializeNdhm(ctx, record) {
     // DiagnosticReport.result must reference the urn of an Observation that is actually in this bundle.
     const obsRefs = new Map();
     const built = { conditions: [], medications: [], medicationRequests: [], allergies: [],
-                    observations: [], diagnosticReports: [], documents: [] };
+                    observations: [], diagnosticReports: [], documents: [],
+                    immunizations: [], invoices: [] };
     for (const c of (r.conditions || [])) if (c && c.id) built.conditions.push(buildCondition(c, subject));
     for (const m of (r.medications || [])) if (m && m.id) {
       const res = buildMedication(m, subject, requester, generatedAt);
@@ -413,6 +483,8 @@ export function serializeNdhm(ctx, record) {
       obsRefs.set(o.id, refOf(res));
     }
     for (const d of (r.diagnosticReports || [])) if (d && d.id) built.diagnosticReports.push(buildDiagnosticReport(d, subject, obsRefs, requester));
+    for (const im of (r.immunizations || [])) if (im && im.id) built.immunizations.push(buildImmunization(im, subject));
+    for (const inv of (r.invoices || [])) if (inv && inv.id) built.invoices.push(buildInvoice(inv, subject, requester));
 
     // documents[0] IS the summary itself -> it becomes the Composition narrative (normalizeNdhm always
     // re-captures the Composition as one documentReference). documents[1..] become by-reference
