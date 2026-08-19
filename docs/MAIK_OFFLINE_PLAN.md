@@ -12,6 +12,19 @@ didn't ask for and the people who want to test a local medical model can opt in.
 Test devices: **iPhone 15 Pro** (8 GB, A17 Pro, Metal) and **Pixel 9** (12 GB, Tensor G4, CPU).
 The iPhone is the MEMORY floor; the Pixel is the SPEED floor. Both must pass §3 gates.
 
+> **STATUS 2026-08-20 — BUILT on `feat/maik-offline-engine`.** See `MAIK_OFFLINE_RUNBOOK.md` for what
+> is verified vs unverified and the steps to test on device. Resolutions since this plan was written:
+> **B1** entitlements added + mmap set explicitly + n_ctx 4096 (peak memory still UNMEASURED).
+> **B2** Android build verified with the proven flags (tok/s UNMEASURED).
+> **B3** RESOLVED at zero cost — the XCFramework is `minos 16.4`, matching the app; no target bump.
+> New constraint found: that XCFramework has **no iOS simulator slice**.
+> **B4** solved with chunked HTTP Range + appendFile (resumable), not `downloadFile` (which cannot resume).
+> **B6** DROPPED by owner decision.
+> **B9** decided by measurement, not benchmarks: Gemma 4 E4B Q4_K_M is **4.98 GB**, not the ~2.5 GB
+> quoted in secondary sources ("E" = effective params, GGUF sized by raw params), so it does NOT fit
+> the 8 GB floor device. Shipping **MedGemma 1.5 4B Q4_K_M (2.49 GB)** as primary, Gemma 4 E2B
+> (3.11 GB) as the A/B pack.
+
 ---
 
 ## 1. What I verified in the repo (integration points)

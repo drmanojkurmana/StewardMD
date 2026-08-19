@@ -141,6 +141,16 @@ function load(env = {}) {
   ok("local: rejection becomes {error}", r.error === "oom");
 }
 
+// ── owner/QA bypass unlocks the gate without a server deploy ──
+{
+  const { E, ls } = load({ runtime: true, pack: true });
+  ok("gate closed without a code", E.localReady() === false);
+  ls.setItem("smd_maik_local_bypass", "1");
+  ok("bypass opens the gate", E.localReady() === true);
+  E.setPref("local");
+  ok("bypass makes local the effective engine", E.effective() === "local");
+}
+
 // ── settings markup ──
 {
   const { E } = load();

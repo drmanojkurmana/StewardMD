@@ -53,6 +53,11 @@
   // Gate (access code) and pack (downloaded) are separate: gated-but-not-downloaded must show a
   // download row, not disappear.
   function gateActive() {
+    // Owner/QA escape hatch, same convention as the NMC verify bypass: lets the on-device engine be
+    // tested on a real device BEFORE the server-side FEATURES entry for maik_local is deployed
+    // (SMD_XACCESS.devBypass only covers non-native, non-prod). Set it in the WebView console:
+    //   localStorage.setItem("smd_maik_local_bypass","1")
+    try { if (lget("smd_maik_local_bypass") === "1") return true; } catch (e) {}
     try { return !!(window.SMD_XACCESS && window.SMD_XACCESS.isActiveCached && window.SMD_XACCESS.isActiveCached(XA_FEATURE)); } catch (e) { return false; }
   }
   function runtimeAvailable() {
