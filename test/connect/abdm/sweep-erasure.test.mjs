@@ -504,3 +504,49 @@ test("consented-store: a sweep that erases nothing leaves every record and blob 
   assert.equal((db._tables.connect_abdm_consented_record || []).length, 1, "a live consent's record is never touched");
   assert.deepEqual(await listAll(r2, "abdm/consented/"), [key]);
 });
+
+// ───────────── erasure must reach the DISCOVERY index, not just the records ─────────────
+// Erasing a patient's records while leaving them in the demographic index would keep answering
+// "yes, we have this patient" to a discovery probe about someone whose data we just destroyed.
+// That is both a leak and a lie, so the sweep unindexes them too.
+test("consented-store + discovery index: a patient-level erase leaves NOTHING findable", async () => {
+  const hash = await sha256hex("HMAC-P-DEMO");   // stand-in for the patient's ABHA pseudonym
+  const refHash = await sha256hex("OPD:9");
+  const r2key = "abdm/consented/t1/" + hash + "/" + refHash;
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "rqD", consent_id: "cidD", status: "GRANTED",
+      patient_abha_hash: hash, data_erase_at: "2026-07-31T11:00:00Z", care_contexts: JSON.stringify(["OPD:9"]) })],
+    connect_abdm_carecontext: [ccReg({ id: "cc-9", ref: "OPD:9", patient_abha_hash: hash })],
+    connect_abdm_consented_record: [{ tenant_id: "t1", patient_abha_hash: hash, care_context_ref: "OPD:9",
+      ref_hash: refHash, hi_type: "OPConsultation", r2_key: r2key, created_at: NOW, updated_at: NOW }],
+    // The ABHA link is what ties the pseudonym to the tenant's own patient ref.
+    connect_abha_link: [{ tenant_id: "t1", patient_abha_hash: hash, abha_last4: "0123",
+      patient_ref: "P-DEMO", created_at: NOW, updated_at: NOW }],
+    connect_abdm_demographic: [{ tenant_id: "t1", patient_ref: "P-DEMO", mobile_hash: "MH", mrn_hash: "RH",
+      name_hash: "NH", gender: "M", year_of_birth: 1985, created_at: NOW, updated_at: NOW }],
+  });
+  const r2 = makeR2();
+  await r2.put(r2key, "sealed-bytes");
+
+  const counts = await sweep(db, r2, HMAC_ENV, ISO_NOW);
+
+  assert.equal(counts.careContextsErased, 1);
+  assert.equal(counts.demographicsErased, 1, "the patient is unindexed as well as un-served");
+  assert.equal((db._tables.connect_abdm_demographic || []).length, 0, "no discovery index row survives");
+  assert.equal((db._tables.connect_abdm_consented_record || []).length, 0, "no record index row survives");
+  await assertR2Empty(r2);                       // and NO sealed blob anywhere in the store
+});
+
+test("a sweep that erases nothing leaves the discovery index intact", async () => {
+  const db = makeAbdmDb({
+    connect_abdm_consent_req: [scopedConsentRow({ request_id: "rqL", consent_id: "cidL", status: "GRANTED",
+      patient_abha_hash: "HMAC-LIVE", data_erase_at: S6_FUT, care_contexts: JSON.stringify(["OPD:1"]) })],
+    connect_abha_link: [{ tenant_id: "t1", patient_abha_hash: "HMAC-LIVE", patient_ref: "P-LIVE",
+      created_at: NOW, updated_at: NOW }],
+    connect_abdm_demographic: [{ tenant_id: "t1", patient_ref: "P-LIVE", mobile_hash: "MH", mrn_hash: null,
+      name_hash: "NH", gender: "M", year_of_birth: 1985, created_at: NOW, updated_at: NOW }],
+  });
+  const counts = await sweep(db, makeR2(), HMAC_ENV, ISO_NOW);
+  assert.equal(counts.demographicsErased, 0);
+  assert.equal((db._tables.connect_abdm_demographic || []).length, 1, "a live patient stays discoverable");
+});

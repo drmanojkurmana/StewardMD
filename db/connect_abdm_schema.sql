@@ -119,3 +119,27 @@ CREATE TABLE IF NOT EXISTS connect_abdm_enrol_consent (
   created_at    TEXT NOT NULL,
   used_at       TEXT );               -- stamped when an enrolment actually consumed it (single-use)
 CREATE INDEX IF NOT EXISTS idx_enrol_consent_tenant ON connect_abdm_enrol_consent (tenant_id, created_at);
+
+-- ABDM demographic discovery index (2026-08-19). ABDM's discovery flowchart requires matching a patient
+-- on mobile (or medical record number) CORROBORATED by gender + age within +/-5 years + a phonetically
+-- similar name. connect_abdm_carecontext holds only patient_abha_hash and the OPD queue holds name and
+-- mobile under encPHI, so neither can answer that; this table can.
+-- NO RAW DEMOGRAPHIC IS STORED. mobile/MRN/name are per-tenant HMAC pseudonyms (the same derivation used
+-- for the ABHA), so the table cannot be reversed into a patient list and the same mobile at two tenants
+-- yields two unrelated hashes. gender and year_of_birth are stored plainly because both must be COMPARED
+-- (exact, and a +/-5 window) which a hash cannot do, and neither identifies anyone on its own.
+-- Populated at registration; removed by unindexPatient on erasure.
+CREATE TABLE IF NOT EXISTS connect_abdm_demographic (
+  tenant_id     TEXT NOT NULL,
+  patient_ref   TEXT NOT NULL,        -- the tenant's own patient id
+  mobile_hash   TEXT,                 -- HMAC(tenant, "mobile:" || last 10 digits)
+  mrn_hash      TEXT,                 -- HMAC(tenant, "mrn:" || folded record number)
+  name_hash     TEXT,                 -- HMAC(tenant, "name:" || phonetic code)
+  gender        TEXT,                 -- M | F | O
+  year_of_birth INTEGER,
+  created_at    TEXT NOT NULL,
+  updated_at    TEXT NOT NULL,
+  PRIMARY KEY (tenant_id, patient_ref) );
+-- Discovery looks up by one identifier at a time, always tenant-scoped.
+CREATE INDEX IF NOT EXISTS idx_demographic_mobile ON connect_abdm_demographic (tenant_id, mobile_hash);
+CREATE INDEX IF NOT EXISTS idx_demographic_mrn    ON connect_abdm_demographic (tenant_id, mrn_hash);

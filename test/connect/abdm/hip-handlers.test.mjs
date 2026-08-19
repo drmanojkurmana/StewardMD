@@ -111,30 +111,60 @@ test("discover: a demographic-only probe matches NOTHING while no demographic in
     "without an exact identifier we must answer no-match, never guess a patient");
 });
 
-test("discover: an injected demographic matcher is honoured and reported in matchedBy", async () => {
+test("discover: a demographic match publishes that patient's care contexts and reports matchedBy", async () => {
   const hash = await hashFor();
   const deps = await baseDeps({
     tables: { connect_abdm_carecontext: [ccRow({ id: "c1", hash, ref: "OPD:1" })] },
-    // The matcher must name the patient it matched: the probe carried no ABHA to derive a pseudonym from.
-    demographicMatch: async () => ({ matched: true, matchedBy: ["MOBILE"], patientHash: hash,
-                                     careContexts: [{ referenceNumber: "OPD:1" }] }),
+    // The matcher answers in matchDemographics' real shape: a LOCAL patient ref plus how it matched.
+    demographicMatch: async () => ({ matched: true, patientRef: "P-1", matchedBy: ["MOBILE"], reason: "unique" }),
   });
   await HIP_HANDLERS.discover({ env: ENV, deps, headers: headers(),
-    body: { transactionId: "tx-4", patient: { name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+    body: { transactionId: "tx-4", patient: { id: ABHA, name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
   const { body } = deps.gateway.calls[0];
-  assert.deepEqual(body.matchedBy, ["MOBILE"]);
+  assert.deepEqual(body.matchedBy, ["ABHA_ADDRESS"], "the ABHA arm wins when it hits - the flowchart is ordered");
   assert.equal(body.patient[0].referenceNumber, hash);
-  assert.equal(body.patient[0].careContexts[0].referenceNumber, "OPD:1");
 });
 
-test("discover: a demographic matcher that names no patient is IGNORED, not guessed at", async () => {
-  const hash = await hashFor();
+test("discover: the demographic arm runs ONLY when the ABHA arm missed", async () => {
+  const hash = await hashFor("someone-else@sbx");
+  let ran = 0;
   const deps = await baseDeps({
     tables: { connect_abdm_carecontext: [ccRow({ id: "c1", hash, ref: "OPD:1" })] },
-    demographicMatch: async () => ({ matched: true, careContexts: [{ referenceNumber: "OPD:1" }] }),  // no patientHash
+    demographicMatch: async () => { ran++; return { matched: true, patientRef: "P-1", matchedBy: ["MOBILE"], reason: "unique" }; },
   });
-  await HIP_HANDLERS.discover({ env: ENV, deps, headers: headers(), body: { transactionId: "tx", patient: { name: "Ramesh" } } });
-  assert.deepEqual(deps.gateway.calls[0].body.patient, []);
+  await HIP_HANDLERS.discover({ env: ENV, deps, headers: headers(),
+    body: { transactionId: "tx", patient: { id: "someone-else@sbx", name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+  assert.equal(ran, 0, "an ABHA hit must not also run the demographic arm");
+
+  const deps2 = await baseDeps({ demographicMatch: async () => { ran++; return { matched: false, reason: "no-match" }; } });
+  await HIP_HANDLERS.discover({ env: ENV, deps: deps2, headers: headers(),
+    body: { transactionId: "tx", patient: { id: "nobody@sbx", name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+  assert.equal(ran, 1, "an ABHA miss must fall through to the demographic arm");
+  assert.deepEqual(deps2.gateway.calls[0].body.patient, []);
+});
+
+test("discover: an AMBIGUOUS demographic result is published exactly like a plain miss", async () => {
+  // Two patients both fit. The reply must be byte-identical to "nobody fits", or it becomes an oracle
+  // for probing who is registered here.
+  const deps = await baseDeps({ demographicMatch: async () => ({ matched: false, patientRef: null, matchedBy: [], reason: "ambiguous" }) });
+  await HIP_HANDLERS.discover({ env: ENV, deps, headers: headers(),
+    body: { transactionId: "tx", patient: { id: "nobody@sbx", name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+  const ambiguous = deps.gateway.calls[0].body;
+
+  const deps2 = await baseDeps({ demographicMatch: async () => ({ matched: false, patientRef: null, matchedBy: [], reason: "no-match" }) });
+  await HIP_HANDLERS.discover({ env: ENV, deps: deps2, headers: headers(),
+    body: { transactionId: "tx", patient: { id: "nobody@sbx", name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+  assert.deepEqual(ambiguous, deps2.gateway.calls[0].body, "ambiguous and no-match must be indistinguishable");
+});
+
+test("discover: a demographic match with no care contexts publishes NOTHING", async () => {
+  const deps = await baseDeps({
+    demographicMatch: async () => ({ matched: true, patientRef: "P-1", matchedBy: ["MR"], reason: "unique" }),
+  });
+  await HIP_HANDLERS.discover({ env: ENV, deps, headers: headers(),
+    body: { transactionId: "tx", patient: { id: "nobody@sbx", name: "Ramesh", gender: "M", yearOfBirth: 1980 } } });
+  assert.deepEqual(deps.gateway.calls[0].body.patient, [],
+    "matching a patient we hold no records for must not fabricate an entry");
 });
 
 test("discover: a care-context display carrying a clinical result is REFUSED, not sent to the CM", async () => {

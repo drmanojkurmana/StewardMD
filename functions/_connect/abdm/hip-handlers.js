@@ -23,6 +23,7 @@ import { handleDiscovery, serveTransfer, putHipConsent, getServableCareContexts 
 import { hipFlagOn } from "./hip-flags.js";
 import { assertDataBlind } from "./carecontext.js";
 import { deleteForPatient } from "./consented-store.js";
+import { matchDemographics } from "./demographic-index.js";
 
 export class HipHandlerError extends Error {}
 
@@ -95,13 +96,13 @@ async function reply(deps, endpointKey, body) {
 //
 // THE MATCHING ALGORITHM (Discovery & Link, certification USER_INIT_LINK_602-607) is a flowchart:
 //   ABHA address match -> return; else mobile match AND gender match AND age within +/-5 AND name
-//   phonetically similar -> return; else medical-record-number match -> return; else no match.
-// We implement the ABHA-address arm exactly. The demographic and MRN arms need a demographic index that
-// does not exist yet: connect_abdm_carecontext stores only patient_abha_hash, and the OPD queue stores
-// name/mobile under encPHI with no deterministic hash to match on. Rather than fake it, the fallback is an
-// injected seam (deps.demographicMatch) that is absent by default, so discovery answers "no match" instead
-// of a wrong patient's records. Wiring it is a certification prerequisite, not an optimisation.
-// // VERIFY (owner): before FT, build the demographic index and inject demographicMatch.
+//   phonetically similar -> return; else medical-record-number match (under the SAME three conditions)
+//   -> return; else no match.
+// The ABHA-address arm is handled by hip.js#handleDiscovery (exact identifier only, rate-limited). The
+// demographic and MRN arms are demographic-index.js, which is deterministic throughout - exact equality
+// on hashed, normalised values, no distance metric anywhere - and returns NO MATCH when two patients
+// both fit, because picking one would be a coin toss with somebody's medical history.
+// deps.demographicMatch remains injectable for tests; production binds the real matcher.
 export async function onDiscover({ env, deps, body, headers }) {
   if (!hipFlagOn(env)) return;                                  // second flag OFF: answer nothing, leak nothing
   const now = deps.now;
@@ -120,9 +121,9 @@ export async function onDiscover({ env, deps, body, headers }) {
   // derive it from - deriving one from an unlinked address would key the reply to nobody.
   let patientHash = out.matched && abha ? await hmacPseudonym(env, tenantId, abha) : null;
 
-  if (!out.matched && typeof deps.demographicMatch === "function") {
-    const dm = await deps.demographicMatch(env, deps, { tenantId, probe, now });
-    if (dm && dm.matched && dm.patientHash) {
+  if (!out.matched) {
+    const dm = await runDemographicMatch(env, deps, { tenantId, probe, now });
+    if (dm && dm.patientHash) {
       out = { matched: true, careContexts: dm.careContexts || [] };
       matchedBy = dm.matchedBy || ["MOBILE"];
       patientHash = dm.patientHash;
@@ -139,6 +140,39 @@ export async function onDiscover({ env, deps, body, headers }) {
     matchedBy,
     ...respondTo(headers),
   });
+}
+
+/**
+ * Run the demographic/MRN arms of the discovery flowchart and translate the result into the shape
+ * onDiscover expects. A patient found this way is keyed by the tenant's own patient reference, so it is
+ * turned into the same pseudonym the ABHA arm publishes.
+ *
+ * `deps.demographicMatch` overrides the matcher (tests only). An "ambiguous" result is reported to the
+ * audit trail but returned to ABDM as a plain miss - a caller must not be able to tell "two people fit"
+ * from "nobody fits", or the response becomes an oracle for probing who is registered here.
+ */
+async function runDemographicMatch(env, deps, { tenantId, probe, now }) {
+  const match = deps.demographicMatch || matchDemographics;
+  const dm = await match(env, deps, { tenantId, probe, now });
+  if (deps.audit) await deps.audit({
+    action: "hip.discovery.demographic", outcome: dm && dm.matched ? "ok" : "denied", ts: isoOf(now),
+    tenantId, scope: { reason: (dm && dm.reason) || "no-match", matchedBy: (dm && dm.matchedBy) || [] },
+  }).catch(() => {});
+  if (!dm || !dm.matched) return null;
+
+  // The matcher names a LOCAL patient ref. Its care contexts are registered under the patient's ABHA
+  // pseudonym, so resolve through the ABHA the probe carried; a demographic match with no ABHA on the
+  // probe cannot be published (there is nothing to key the care contexts by).
+  const abha = abhaOf(probe);
+  if (!abha) return null;
+  const patientHash = await hmacPseudonym(env, tenantId, abha);
+  const rows = await getServableCareContexts(deps.db, tenantId, patientHash);
+  if (!rows.length) return null;
+  return {
+    matchedBy: dm.matchedBy,
+    patientHash,
+    careContexts: rows.map((r) => ({ referenceNumber: r.ref, display: r.display })),
+  };
 }
 
 /**
