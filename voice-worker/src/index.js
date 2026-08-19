@@ -42,12 +42,24 @@ export default {
     // Plivo hits this when the call is answered -> return the audio-stream XML pointing at the per-call DO.
     if (path === "/plivo/answer") {
       const callId = url.searchParams.get("callId") || "";
+      await env.VOICE_KV.put("trace:answer:" + callId, new Date().toISOString(), { expirationTtl: 1800 });
+      // Answering-machine detection (opt-in via VOICE_AMD): if Plivo flags the answer as a machine/voicemail,
+      // hang up instead of speaking to an answering machine. Checks the common Plivo AMD param names.
+      if (env.VOICE_AMD) {
+        let amd = url.searchParams.get("Machine") || url.searchParams.get("AnsweredBy") || "";
+        if (!amd && request.method === "POST") { try { const f = await request.formData(); amd = (f.get("Machine") || f.get("AnsweredBy") || ""); } catch (e) {} }
+        if (/machine|voicemail|amd_machine|^true$/i.test(String(amd))) {
+          await env.VOICE_KV.put("trace:amd:" + callId, "machine", { expirationTtl: 1800 });
+          return new Response('<?xml version="1.0" encoding="UTF-8"?><Response><Hangup/></Response>', { headers: { "Content-Type": "application/xml" } });
+        }
+      }
       return new Response(answerXml(`wss://${host}/plivo/stream/${callId}`, fmt, rate),
         { headers: { "Content-Type": "application/xml" } });
     }
     // The bidirectional audio WebSocket -> route to the DO instance for this call.
     if (path.startsWith("/plivo/stream/")) {
       const callId = decodeURIComponent(path.split("/").pop() || "");
+      await env.VOICE_KV.put("trace:ws:" + callId, new Date().toISOString(), { expirationTtl: 1800 });
       return doStub(env, callId).fetch(request);
     }
     if (path === "/plivo/hangup") return json({ ok: true });
@@ -91,7 +103,7 @@ export default {
       const which = url.searchParams.get("u");
       const u = which === "echo" ? "https://ws.postman-echo.com/raw"
         : "https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw"
-        + "&sample_rate=8000&endpointing=vad&language_code=te-IN";
+        + "&sample_rate=8000&endpointing=vad&language_code=" + (url.searchParams.get("lang") || "te-IN");
       try {
         const resp = await fetch(u, { headers: { Upgrade: "websocket", "API-SUBSCRIPTION-KEY": env.SARVAM_API_KEY } });
         const w = resp.webSocket;
@@ -132,6 +144,16 @@ export default {
     if (path.startsWith("/voice/kvlog/")) {
       if ((request.headers.get("X-Voice-Token") || "") !== (env.FOLLOWCARE_VOICE_SERVICE_TOKEN || "")) return json({ error: "unauthorized" }, 401);
       return json(JSON.parse(await env.VOICE_KV.get("log:" + decodeURIComponent(path.split("/").pop())) || "null"));
+    }
+
+    if (path.startsWith("/voice/trace/")) {
+      if ((request.headers.get("X-Voice-Token") || "") !== (env.FOLLOWCARE_VOICE_SERVICE_TOKEN || "")) return json({ error: "unauthorized" }, 401);
+      const id = decodeURIComponent(path.split("/").pop());
+      return json({
+        answer_hit: await env.VOICE_KV.get("trace:answer:" + id),
+        ws_hit: await env.VOICE_KV.get("trace:ws:" + id),
+        do: JSON.parse((await env.VOICE_KV.get("trace:" + id)) || "null"),
+      });
     }
 
     if (path === "/health") return json({ ok: true });

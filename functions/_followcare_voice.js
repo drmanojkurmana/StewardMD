@@ -43,9 +43,10 @@ export async function setHospitalSettings(env, hospitalId, patch, actor) {
     name: (patch && patch.name != null) ? patch.name : cur.name,
     voice: Object.assign({}, cur.voice, (patch && patch.voice) || {}),
     ambulance: Object.assign({}, cur.ambulance, (patch && patch.ambulance) || {}),
+    escalation: Object.assign({}, cur.escalation, (patch && patch.escalation) || {}),
   });
   await fsCommit(env, [wUpdate(env, "fc_hospitals/" + String(hospitalId), {
-    name: merged.name, voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), updatedMs: Date.now(),
+    name: merged.name, voiceJson: JSON.stringify(merged.voice), ambulanceJson: JSON.stringify(merged.ambulance), escalationJson: JSON.stringify(merged.escalation), updatedMs: Date.now(),
   })]);
   await audit(env, { hospitalId, actor: actor || "system", action: "voice_settings" });
   return { ok: true, settings: merged };
@@ -55,10 +56,11 @@ export async function setHospitalSettings(env, hospitalId, patch, actor) {
 // either shape (raw fields OR {voiceJson,ambulanceJson}).
 function parseSettingsFields(f) {
   if (!f) return {};
-  let voice = f.voice, ambulance = f.ambulance;
+  let voice = f.voice, ambulance = f.ambulance, escalation = f.escalation;
   try { if (f.voiceJson) voice = JSON.parse(f.voiceJson); } catch (e) {}
   try { if (f.ambulanceJson) ambulance = JSON.parse(f.ambulanceJson); } catch (e) {}
-  return { name: f.name, voice, ambulance };
+  try { if (f.escalationJson) escalation = JSON.parse(f.escalationJson); } catch (e) {}
+  return { name: f.name, voice, ambulance, escalation };
 }
 
 // ---- voice status for one episode (UI + /episode) ----------------------------------------
@@ -98,6 +100,13 @@ export async function queueVoiceCall(env, ep, settings, nowMs, opts) {
   if (!guard.ok) return { ok: false, error: "already_called_today" };
   const elig = Voice.voiceEligible(ep, now, settings, { manual: !!opts.manual });
   if (!elig.eligible) return { ok: false, error: elig.reason };
+  // Total-attempts cap (additive safety, never loosens): the 1-call/day guard already blocks same-day retries;
+  // this stops us re-calling a non-responder forever. If maxAttempts unanswered attempts already exist and none
+  // was ever answered, stop. A completed/answered call clears the cap.
+  const prior = (await fsQuery(env, "fc_voice_calls", { where: { field: "episodeId", value: ep.episodeId }, limit: 25 })).map(function (d) { return d.fields || {}; });
+  const answered = prior.some(function (c) { return c.status === "completed" && c.outcome && c.outcome !== "unknown"; });
+  const unanswered = prior.filter(function (c) { return c.status === "scheduled" || c.status === "no_answer" || c.status === "technical_failure" || (c.status !== "completed" && c.outcome === "unknown"); }).length;
+  if (!answered && unanswered >= (settings.voice.maxAttempts || 2)) return { ok: false, error: "attempts_exhausted" };
   const recipientEnc = ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc;
   if (!recipientEnc) return { ok: false, error: "no_phone" };
   const win = Voice.nextCallWindow(now, settings);
@@ -239,7 +248,11 @@ export async function submitVoiceResult(env, episodeId, payload, meta) {
   // questionnaire score alone would not have escalated (previously payload.emergency was ignored entirely).
   if ((emergency || ambulance) && !notified && typeof meta.notify === "function") { try { await meta.notify(ep, "red"); notified = true; } catch (e) {} }
 
-  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify || emergency || ambulance, notifyPlan: route, ambulance: ambulanceSent, emergency };
+  // Post-call recap to the patient (de-identified, generic reassurance + record). Best-effort, opt-out aware.
+  let recapSent = false;
+  try { if (!ep.voiceOptOut) recapSent = (await sendPatientRecap(env, ep, r)).ok; } catch (e) {}
+
+  return { ok: true, status: "completed", scored: true, escalation: r.escalation, outcome, notify: route.notify || emergency || ambulance, notifyPlan: route, ambulance: ambulanceSent, emergency, recap: recapSent };
 }
 
 // ---- ambulance notification (spec §21) — NOTIFY only, NEVER dispatch -----------------------
@@ -262,6 +275,42 @@ export async function notifyAmbulance(env, ep, settings, info) {
   const res = await sendToNumber(env, amb.phone, body, amb.method);
   await audit(env, { hospitalId: ep.hospitalId, episodeId: ep.episodeId, actor: "voice", action: "ambulance_requested", meta: { delivered: res.ok ? "sent" : (res.skipped ? "skipped" : "failed"), method: amb.method } });
   return { ok: !!res.ok, delivered: res.ok ? "sent" : (res.skipped ? "skipped" : "failed") };
+}
+
+// ---- real-time red-flag escalation — page the on-call doctor DURING the call ---------------
+// The voice worker POSTs /voice/alert the instant it confirms a danger sign. We message the hospital's
+// escalation contact over SMS/WhatsApp - DE-IDENTIFIED (no PHI, just "review this case in FollowCare") - and
+// fire the in-app clinician push. Notify-only; never diagnoses or dispatches.
+export async function voiceAlert(env, body, meta) {
+  if (!isConfigured(env)) return { ok: false, error: "not_configured" };
+  meta = meta || {}; body = body || {};
+  const ep = await getEpisode(env, body.episodeId);
+  if (!ep) return { ok: false, error: "not_found" };
+  const settings = await getHospitalSettings(env, ep.hospitalId);
+  const esc = settings.escalation || {};
+  const msg = "URGENT - StewardMD FollowCare\n"
+    + "A patient reported a possible danger sign on their AI recovery call. Please review now in FollowCare.\n"
+    + "Case: " + ep.episodeId + "\nTime: " + new Date().toISOString();
+  let sent = null;
+  if (esc.enabled && esc.phone) { try { sent = await sendToNumber(env, esc.phone, msg, esc.method); } catch (e) {} }
+  if (typeof meta.notify === "function") { try { await meta.notify(ep, "red"); } catch (e) {} }
+  await audit(env, { hospitalId: ep.hospitalId, episodeId: ep.episodeId, actor: "voice", action: "voice_alert", meta: { delivered: sent ? (sent.ok ? "sent" : "failed") : "no_contact", method: esc.method } });
+  return { ok: true, paged: !!(sent && sent.ok) };
+}
+
+// ---- post-call patient recap — de-identified, generic reassurance (opt-out aware) ---------
+async function sendPatientRecap(env, ep, r) {
+  let phone = "";
+  try { phone = await decPHI(env, ep.isMinor ? ep._phi.guardianEnc : ep._phi.phoneEnc); } catch (e) {}
+  if (!phone) return { ok: false, reason: "no_phone" };
+  const worrying = r && (r.escalation === "red" || r.escalation === "orange");
+  const msg = worrying
+    ? "Namaste. Thank you for your recovery check-in. Your care team has your update and will follow up. If you feel worse, please contact your doctor or hospital."
+    : "Namaste. Thank you for your recovery check-in today. Your care team has your update. Please take your medicines and rest well. Get well soon.";
+  const method = (env.FOLLOWCARE_MSG_CHANNEL === "whatsapp") ? "whatsapp" : "sms";
+  const res = await sendToNumber(env, phone, msg, method);
+  try { await audit(env, { hospitalId: ep.hospitalId, episodeId: ep.episodeId, actor: "voice", action: "voice_recap", meta: { delivered: res && res.ok ? "sent" : "failed", method } }); } catch (e) {}
+  return res || { ok: false };
 }
 
 // ---- Phase 3: dial queue + live in-call classify + status (consumed by the RunPod voice service) ----

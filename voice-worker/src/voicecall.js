@@ -5,6 +5,7 @@ import { sarvamSTT, sarvamTTS } from "./sarvam.js";
 import { Brain, greetingText } from "./brain.js";
 
 const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const shash = (s) => { let h = 5381; for (let i = 0; i < s.length; i++) h = ((h << 5) + h + s.charCodeAt(i)) | 0; return (h >>> 0).toString(36); };
 const PAGES_BASE = "https://stewardmd.pages.dev/api/followcare";
 const LC = { te: "te-IN", en: "en-IN", hi: "hi-IN", ta: "ta-IN", kn: "kn-IN", ml: "ml-IN",
   mr: "mr-IN", gu: "gu-IN", bn: "bn-IN", pa: "pa-IN", od: "od-IN" };
@@ -32,6 +33,8 @@ function cfgFrom(env) {
     geminiModel: env.VOICE_GEMINI_MODEL || "gemini-flash-latest",
     sarvamLlm: env.SARVAM_LLM || "sarvam-105b",          // India-hosted LLM (fast, consistent) for the brain
     vadSilenceMs: +(env.VOICE_VAD_SILENCE_MS || 300),   // Sarvam realtime end-of-turn silence (lower = snappier)
+    bargeIn: env.VOICE_BARGE_IN === "1",                 // opt-in: let the patient interrupt the bot mid-sentence
+    langAuto: env.VOICE_LANG_AUTO === "1",               // opt-in: detect the caller's language instead of call.lang
   };
 }
 
@@ -61,7 +64,7 @@ export class VoiceCall {
     try {
       const r = await fetch("https://api.sarvam.ai/v1/chat/completions", {
         method: "POST", headers: { "Content-Type": "application/json", "api-subscription-key": this.cfg.sarvamKey },
-        body: JSON.stringify({ model: this.cfg.sarvamLlm, temperature: 0.3, max_tokens: 400,
+        body: JSON.stringify({ model: this.cfg.sarvamLlm, temperature: 0.3, max_tokens: 400, reasoning_effort: null,
           messages: [{ role: "user", content: prompt }] }) });
       const j = await r.json();
       const t = j?.choices?.[0]?.message?.content;
@@ -93,7 +96,7 @@ export class VoiceCall {
       const body = await request.json();
       this.call = body.call || {};
       const lang = this.call.lang || "te";
-      this.greetPcm = await sarvamTTS(this.cfg, greetingText(lang), lang); // pre-synth for instant greeting
+      this.greetPcm = await this.ttsCached(greetingText(lang), lang); // pre-synth (KV-cached) for instant greeting
       return new Response(JSON.stringify({ ok: true, greetBytes: this.greetPcm.length }),
         { headers: { "Content-Type": "application/json" } });
     }
@@ -168,12 +171,28 @@ export class VoiceCall {
     return new Response("voicecall", { status: 200 });
   }
 
-  _send(obj) { try { this.ws.send(JSON.stringify(obj)); } catch { /* closed */ } }
+  _send(obj) {
+    try { this.ws.send(JSON.stringify(obj)); if (this._trace) this._trace.sent = (this._trace.sent || 0) + 1; }
+    catch (e) { if (this._trace) { this._trace.sendErr = (this._trace.sendErr || 0) + 1; if (this._trace.errors.length < 3) this._trace.errors.push("send:" + String(e).slice(0, 100)); } }
+  }
+
+  // TTS with a cross-call KV cache keyed by lang+text. The greeting (same every call) and any repeated fixed
+  // phrase become a KV read instead of a Sarvam TTS call - cheaper and instant. Unique LLM replies bypass it.
+  async ttsCached(text, lang) {
+    if (!text) return new Int16Array(0);
+    const key = "tts:" + lang + ":" + shash(text);
+    try { const b = await this.env.VOICE_KV.get(key, "arrayBuffer"); if (b && b.byteLength) return new Int16Array(b); } catch {}
+    const pcm = await sarvamTTS(this.cfg, text, lang);
+    try { if (pcm && pcm.length) await this.env.VOICE_KV.put(key, pcm.buffer.slice(pcm.byteOffset, pcm.byteOffset + pcm.byteLength), { expirationTtl: 2592000 }); } catch {}
+    return pcm;
+  }
 
   async _play(pcm) {
     if (!pcm || !pcm.length) return;
+    if (this._trace) this._trace.playFrames += Math.ceil(pcm.length / 160);
     const ct = this.cfg.fmt === "mulaw" ? "audio/x-mulaw" : "audio/x-l16";
     for (let i = 0; i < pcm.length; i += 160) {          // 160 samples = 20ms @ 8k
+      if (this._abort) break;                            // barge-in: patient started speaking, stop playback
       this._send({ event: "playAudio", media: { contentType: ct, sampleRate: "8000",
         payload: encodeFrame(pcm.subarray(i, i + 160), this.cfg.fmt) } });
       await sleep(20);                                    // pace ~ real time so we know when playback ends
@@ -224,18 +243,34 @@ export class VoiceCall {
   _run(ws) {
     this.ws = ws;
     const cfg = this.cfg, lang = (this.call && this.call.lang) || "te";
+    const autoLang = cfg.langAuto || lang === "auto";   // per-call: language "auto" -> auto STT + LLM switch (Option B); a specific language -> clean fixed STT (Option A)
     const brain = new Brain(this.call || { lang }, cfg);
     this._facts = brain.facts;
     const started = Date.now();
+    const trace = { wsOpen: new Date().toISOString(), events: {}, greetBytes: 0, playFrames: 0, errors: [] };
+    this._trace = trace;
+    const saveTrace = () => { try { return this.env.VOICE_KV.put("trace:" + (this.call?.callId || "x"), JSON.stringify(trace), { expirationTtl: 1800 }); } catch {} };
     let mode = "await_start";   // await_start | speaking | listening | processing | done
-    let turns = 0, nudges = 0, emergency = false, sttWs = null, idleTimer = null;
+    let turns = 0, nudges = 0, emergency = false, alerted = false, sttWs = null, idleTimer = null, bargeText = null, greeted = false, sttLang = null;
+    this._abort = false;
 
     const clearIdle = () => { if (idleTimer) { clearTimeout(idleTimer); idleTimer = null; } };
     const armIdle = () => { clearIdle(); idleTimer = setTimeout(() => { if (mode === "listening") noSpeech(); }, cfg.turnTimeoutMs); };
 
+    // Real-time red-flag escalation: the instant an emergency is confirmed, page the on-call doctor (server sends
+    // WhatsApp/SMS) - do NOT wait for the call to end. Fire-and-forget, once per call.
+    const escalate = () => {
+      if (!emergency || alerted) return;
+      alerted = true;
+      this.pages("/voice/alert", { episodeId: this.call?.episodeId, callId: this.call?.callId,
+        phone: this.call?.phone, firstName: this.call?.firstName, disease: this.call?.disease,
+        reason: "red flag confirmed during FollowCare voice call", transcript: this.log.slice(-8) });
+    };
+
     const finalize = async (status) => {
       if (mode === "done") return;
       mode = "done"; clearIdle();
+      trace.status = status; try { await saveTrace(); } catch {}
       try { sttWs && sttWs.close(); } catch {}
       try { await this.env.VOICE_KV.put("log:" + (this.call?.callId || "x"), JSON.stringify(this.log), { expirationTtl: 1800 }); } catch {}
       await this.pages("/voice/result", { episodeId: this.call?.episodeId, callId: this.call?.callId,
@@ -247,8 +282,8 @@ export class VoiceCall {
 
     const say = async (turn) => {
       this.log.push(["YOU", turn.reply]);
-      emergency = emergency || turn.emergency;
-      await this._play(await sarvamTTS(cfg, turn.reply, lang));   // batch TTS is faster to first sound than the ws stream
+      emergency = emergency || turn.emergency; escalate();
+      await this._play(await sarvamTTS(cfg, turn.reply, brain.lang));   // TTS in the CURRENT language (may switch to match the patient)
     };
 
     // A finished patient utterance (from Sarvam VAD) -> brain -> speak.
@@ -259,13 +294,15 @@ export class VoiceCall {
       this.log.push(["PATIENT", text]);
       const turn = await brain.step(text || "(unclear)", (p) => this.modelCall(p));
       const tLlm = Date.now() - t0;
+      if (!autoLang && brain.lang !== sttLang) { try { sttWs && sttWs.close(); } catch {} sttWs = null; await openStt(); }   // fixed-lang mode only; with auto STT there is no reopen (it already hears every language)
       mode = "speaking";
       const t1 = Date.now();
-      const pcm = await sarvamTTS(cfg, turn.reply, lang);
+      const pcm = await sarvamTTS(cfg, turn.reply, brain.lang);
       this.log.push(["TIMING", `llm=${tLlm}ms tts=${Date.now() - t1}ms`]);
       this.log.push(["YOU", turn.reply]);
-      emergency = emergency || turn.emergency;
+      emergency = emergency || turn.emergency; escalate();
       await this._play(pcm);
+      if (this._abort) { this._abort = false; mode = "listening"; if (bargeText) { const t = bargeText; bargeText = null; return handleTurn(t); } }   // barge-in: act on what they interrupted with
       turns++;
       if (turn.complete || turns >= cfg.maxConvoTurns || Date.now() - started > cfg.convoMaxMs)
         return finalize("completed");
@@ -277,8 +314,7 @@ export class VoiceCall {
       nudges++;
       if (nudges > cfg.maxSilenceNudges) return finalize(Object.keys(brain.facts).length ? "completed" : "no_answer");
       mode = "speaking"; clearIdle();
-      const turn = await brain.step("(the patient has been silent - gently, warmly encourage them and kindly "
-        + "re-ask the same thing in simpler words. Do NOT re-introduce yourself, do NOT hang up.)", (p) => this.modelCall(p));
+      const turn = await brain.step(null, (p) => this.modelCall(p), true);   // nudge: re-ask same topic, do not advance
       await say(turn);
       mode = "listening"; armIdle();
     };
@@ -288,14 +324,19 @@ export class VoiceCall {
       try {
         const u = "https://api.sarvam.ai/speech-to-text-realtime/ws?model=saaras:v3-realtime&encoding=mulaw"
           + "&sample_rate=8000&endpointing=vad&stream_type=fast&silence_duration_ms=" + (this.cfg.vadSilenceMs || 300)
-          + "&language_code=" + (LC[lang] || "te-IN");
+          + "&language_code=" + (autoLang ? "auto" : (LC[brain.lang] || "te-IN"));
+        sttLang = brain.lang;
         const resp = await fetch(u, { headers: { Upgrade: "websocket", "API-SUBSCRIPTION-KEY": cfg.sarvamKey } });
         sttWs = resp.webSocket;
         if (!sttWs) return;
         sttWs.accept();
         sttWs.addEventListener("message", (e) => {
           let m; try { m = JSON.parse(e.data); } catch { return; }
-          if (m.event === "transcript.final" && (m.text || "").trim()) handleTurn(m.text.trim());
+          if (m.event === "transcript.final" && (m.text || "").trim()) {
+            const txt = m.text.trim();
+            if (cfg.bargeIn && greeted && mode === "speaking") { bargeText = txt; this._abort = true; }   // barge-in: interrupt the bot
+            else handleTurn(txt);
+          }
         });
         sttWs.addEventListener("close", () => { sttWs = null; });
         sttWs.addEventListener("error", () => { sttWs = null; });
@@ -308,23 +349,28 @@ export class VoiceCall {
       this.log.push(["YOU", greetingText(lang)]);
       const firstP = brain.step(null, (p) => this.modelCall(p));   // compute first question...
       const greetP = (this.greetPcm && this.greetPcm.length)       // ...while synthesizing the greeting (in India, fast)
-        ? Promise.resolve(this.greetPcm) : sarvamTTS(cfg, greetingText(lang), lang).catch(() => null);
+        ? Promise.resolve(this.greetPcm) : this.ttsCached(greetingText(lang), lang).catch(() => null);
       const gp = await greetP;
+      trace.greetBytes = (gp && gp.length) || 0; saveTrace();
       if (gp && gp.length) await this._play(gp);
+      saveTrace();   // persist playFrames + send counts AFTER the greeting actually played
       const turn = await firstP;
       await say(turn);
       if (turn.complete) return finalize("completed");
-      mode = "listening"; armIdle();
+      greeted = true; mode = "listening"; armIdle();   // barge-in becomes allowed only after the greeting + first question
     };
 
     ws.addEventListener("message", async (e) => {
-      let m; try { m = JSON.parse(e.data); } catch { return; }
+      let m; try { m = JSON.parse(e.data); } catch { trace.events["_nonjson"] = (trace.events["_nonjson"] || 0) + 1; return; }
       const ev = m.event;
+      trace.events[ev] = (trace.events[ev] || 0) + 1;
+      if (ev !== "media") saveTrace();   // persist on every non-media event so a stuck call still leaves a trail
       if (ev === "start") { if (mode === "await_start") { await openStt(); await speakFirst(); } return; }
       if (ev === "stop" || ev === "closed") return void finalize("completed");
       if (ev !== "media") return;
-      // Forward the caller's mu-law audio to Sarvam realtime STT (no transcode) while we're listening.
-      if (mode === "listening" && sttWs) { try { sttWs.send(JSON.stringify({ event: "audio_input", audio: m.media?.payload || "" })); } catch {} }
+      // Forward the caller's mu-law audio to Sarvam realtime STT. Normally only while listening; with barge-in on
+      // (after the greeting) also while the bot speaks, so an interruption is detected.
+      if (sttWs && (mode === "listening" || (cfg.bargeIn && greeted && mode === "speaking"))) { try { sttWs.send(JSON.stringify({ event: "audio_input", audio: m.media?.payload || "" })); } catch {} }
     });
 
     ws.addEventListener("close", () => finalize("completed"));

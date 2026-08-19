@@ -248,6 +248,14 @@ export async function onRequest(context) {
       const res = await FCV.submitVoiceResult(env, b.episodeId || "", b, { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
       return json(res, res.ok ? 200 : (res.error === "not_found" ? 404 : 400), request);
     }
+    // Real-time red-flag escalation: the voice worker posts here the instant it confirms a danger sign mid-call,
+    // so the on-call doctor is paged (SMS/WhatsApp + in-app push) without waiting for the call to end.
+    if (isVoice && seg === "alert" && request.method === "POST") {
+      if (!(await voiceServiceOK(request, env))) return json({ error: "forbidden" }, 403, request);
+      const b = await readBody(request);
+      const res = await FCV.voiceAlert(env, b, { notify: function (ep, level) { return notifyClinician(env, ep, level); } });
+      return json(res, res.ok ? 200 : (res.error === "not_found" ? 404 : 400), request);
+    }
     // The RunPod voice service pulls the calls to dial NOW (each with the ordered question script + decrypted
     // phone). Already-responded/opted-out scheduled calls are cancelled here (spec §4).
     if (isVoice && seg === "queue" && request.method === "GET") {
