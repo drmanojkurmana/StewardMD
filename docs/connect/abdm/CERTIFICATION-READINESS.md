@@ -1,8 +1,9 @@
 # ABDM certification readiness — 2026-08-19
 
-**Not certification-ready.** Two of the eight mandatory HI types cannot be produced at all, and no ABDM
-callback body has yet been observed. Everything below distinguishes what was proven against real ABDM
-behaviour from what is only proven against our own tests, because those are not the same claim.
+**Not certification-ready** — but the FHIR gap is closed: all eight mandatory HI types now conform to the
+real NRCES profiles. What remains is that **no ABDM callback body has yet been observed**, and nothing yet
+populates the two newest SCCM collections. Everything below distinguishes what was proven against real
+ABDM behaviour from what is only proven against our own tests, because those are not the same claim.
 
 Branch `feat/abdm-v3-reconcile`. All flags OFF. Nothing merged.
 
@@ -146,8 +147,8 @@ IG package itself.
 ```bash
 cd <repo>
 
-# ABDM suite (738 tests) - no external dependencies
-node --test "test/connect/abdm/"*.test.mjs
+# ABDM + connect suites (1052 tests) - no external dependencies
+node --test "test/connect/abdm/"*.test.mjs test/connect/*.test.mjs
 
 # the M1 client
 node test/abdm-client.test.mjs
