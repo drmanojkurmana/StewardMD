@@ -19,8 +19,10 @@
 
   function defaultSettings() {
     return {
-      voice: { enabled: false, morningStart: 9, morningEnd: 10, eveningStart: 17, eveningEnd: 18, tz: "Asia/Kolkata", maxConcurrent: 5, fallbackHours: 24, maxCallsPerDay: 1 },
-      ambulance: { enabled: false, contactName: "", phone: "", method: "sms" }
+      name: "",
+      voice: { enabled: false, morningStart: 9, morningEnd: 10, eveningStart: 17, eveningEnd: 18, tz: "Asia/Kolkata", maxConcurrent: 5, fallbackHours: 24, maxCallsPerDay: 1, maxAttempts: 2 },
+      ambulance: { enabled: false, contactName: "", phone: "", method: "sms" },
+      escalation: { enabled: false, contactName: "", phone: "", method: "sms" }
     };
   }
   // Merge a raw (possibly partial / hostile) settings object with defaults. The 1-call/day cap is a hard
@@ -36,17 +38,16 @@
       tz: safeTz(rv.tz || "Asia/Kolkata"),
       maxConcurrent: clampInt(rv.maxConcurrent, 1, 50, 5),
       fallbackHours: clampInt(rv.fallbackHours, 0, 240, 24),
-      maxCallsPerDay: 1
+      maxCallsPerDay: 1,
+      maxAttempts: clampInt(rv.maxAttempts, 1, 5, 2)
     };
     if (v.morningEnd <= v.morningStart) { v.morningStart = 9; v.morningEnd = 10; }
     if (v.eveningEnd <= v.eveningStart) { v.eveningStart = 17; v.eveningEnd = 18; }
-    var a = {
-      enabled: !!ra.enabled,
-      contactName: String(ra.contactName || "").slice(0, 120),
-      phone: String(ra.phone || "").slice(0, 24),
-      method: (ra.method === "whatsapp") ? "whatsapp" : "sms"
-    };
-    return { voice: v, ambulance: a };
+    function contact(rc) {
+      rc = rc || {};
+      return { enabled: !!rc.enabled, contactName: String(rc.contactName || "").slice(0, 120), phone: String(rc.phone || "").slice(0, 24), method: (rc.method === "whatsapp") ? "whatsapp" : "sms" };
+    }
+    return { name: String(raw.name || "").slice(0, 160), voice: v, ambulance: contact(ra), escalation: contact(raw.escalation) };
   }
 
   // ---- timezone helpers (Intl-only; no dependency) -----------------------------------------

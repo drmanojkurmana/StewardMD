@@ -13,7 +13,9 @@ ENV_FILE="${ENV_FILE:-$HERE/.env}"
 BRANCH="${VOICE_BRANCH:-feat/followcare-voice}"
 REPO="${VOICE_REPO:-github.com/drmanojkurmana/StewardMD.git}"
 GPU_TYPE="${RUNPOD_GPU_TYPE:-NVIDIA GeForce RTX 3090}"
+CLOUD_TYPE="${RUNPOD_CLOUD_TYPE:-COMMUNITY}"   # COMMUNITY = more availability + cheaper; SECURE for stricter isolation
 IMAGE="${RUNPOD_IMAGE:-runpod/pytorch:2.4.0-py3.11-cuda12.4.1-devel-ubuntu22.04}"
+REQ_FILE="${VOICE_REQUIREMENTS:-requirements-sarvam.txt}"   # Sarvam API mode (no GPU models); requirements.txt = self-hosted Indic
 
 # Keys may come from the shell OR from ENV_FILE (so `bash runpod.sh up` works after the wizard, no exports).
 _envfile_get() { [ -f "$ENV_FILE" ] && sed -n "s/^$1=//p" "$ENV_FILE" | head -1 || true; }
@@ -39,10 +41,14 @@ case "$cmd" in
       | grep -vE '^(RUNPOD_POD_ID|VOICE_PUBLIC_BASE|GITHUB_TOKEN|GEMINI_API_KEY)=' \
       | jq -R 'capture("^(?<k>[^=]+)=(?<v>.*)$")' \
       | jq -sr --arg t "$GITHUB_TOKEN" '(. + [{k:"GITHUB_TOKEN", v:$t}]) | map("{key:\"\(.k)\",value:\(.v|tojson)}") | join(",")')
-    # Pod start command: clone + install + run. $GITHUB_TOKEN is kept literal here and expands in the pod.
-    START="bash -lc 'cd /workspace && (test -d StewardMD || git clone -b ${BRANCH} https://\$GITHUB_TOKEN@${REPO} StewardMD) && cd StewardMD/voice-service && pip install -r requirements.txt && uvicorn app.main:app --host 0.0.0.0 --port 8080'"
+    # Pod start command: clone + install + run. Notes: x-access-token: form works for fine-grained PATs;
+    # `set -x` traces each step into the container log; a trailing `sleep infinity` keeps the container ALIVE on
+    # any failure (no crash loop) so the error is inspectable instead of vanishing. $GITHUB_TOKEN expands in-pod.
+    # Sparse/shallow/blobless clone of ONLY voice-service/ — the full repo is 472MB and GitHub throttles it;
+    # the pod needs ~1MB. This turns a multi-minute (throttled) clone into a few seconds.
+    START="bash -c 'set -x; cd /workspace; rm -rf StewardMD; set +x; git clone --depth 1 --filter=blob:none --sparse -b ${BRANCH} https://x-access-token:\$GITHUB_TOKEN@${REPO} StewardMD && (cd StewardMD && git sparse-checkout set voice-service) || { echo CLONE_FAILED__token_or_sparse; sleep infinity; }; set -x; cd StewardMD/voice-service && pip install -r ${REQ_FILE} && exec uvicorn app.main:app --host 0.0.0.0 --port 8080; echo BOOT_FAILED_EXIT_\$?; sleep infinity'"
     # gpuTypeId/image/dockerArgs as GraphQL String variables; env inlined above.
-    Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: SECURE, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
+    Q="mutation(\$args:String, \$g:String!, \$img:String!){ podFindAndDeployOnDemand(input:{ cloudType: ${CLOUD_TYPE}, gpuCount: 1, gpuTypeId: \$g, name: \"stewardmd-followcare-voice\", imageName: \$img, containerDiskInGb: 30, volumeInGb: 40, volumeMountPath: \"/models\", ports: \"8080/http\", minMemoryInGb: 24, minVcpuCount: 4, dockerArgs: \$args, env: [${ENVGQL}] }){ id machineId } }"
     BODY=$(jq -n --arg args "$START" --arg g "$GPU_TYPE" --arg img "$IMAGE" --arg q "$Q" \
       '{query:$q, variables:{args:$args, g:$g, img:$img}}')
     RESP=$(gql "$BODY"); echo "$RESP" | jq .
@@ -65,5 +71,92 @@ case "$cmd" in
     : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
     gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"mutation($id:String!){ podStop(input:{podId:$id}){ id desiredStatus } }", variables:{id:$id}}')" | jq .
     ;;
-  *) echo "usage: runpod.sh {up|status|down}"; exit 1;;
+  restart)
+    # Stop + resume the SAME pod: re-runs the boot (re-clone latest + pip install) but KEEPS the persistent
+    # /models volume, so downloaded models are reused (no 10-min re-download). Use to iterate quickly.
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    gql "$(jq -n --arg q "mutation { podStop(input:{podId:\"$RUNPOD_POD_ID\"}){ id desiredStatus } }" '{query:$q}')" >/dev/null
+    sleep 8
+    gql "$(jq -n --arg q "mutation { podResume(input:{podId:\"$RUNPOD_POD_ID\"}){ id desiredStatus } }" '{query:$q}')" | jq .
+    echo "restarted $RUNPOD_POD_ID → https://${RUNPOD_POD_ID}-8080.proxy.runpod.net"
+    ;;
+  testcall)
+    # Fire the owner test call via Cloudflare /voice/test (service-token gated). Args: [phone] [pathwayId].
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    PHONE="${2:-8897298117}"; PW="${3:-heart_failure}"
+    curl -sS -X POST "$BASE/voice/test" -H "X-Voice-Token: $TOK" -H "Content-Type: application/json" \
+      -d "{\"phone\":\"$PHONE\",\"pathwayId\":\"$PW\",\"name\":\"Test\"}"; echo
+    ;;
+  queue)
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK"; echo
+    ;;
+  plivocall)
+    # Fast telephony smoke test: dial [phone] directly via Plivo, speaking a test line (no GPU). Args: [phone-E164].
+    AID="$(_envfile_get PLIVO_AUTH_ID)"; ATOK="$(_envfile_get PLIVO_AUTH_TOKEN)"; FROM="$(_envfile_get PLIVO_FROM)"
+    TO="${2:-918897298117}"
+    ANS="https://followcare-voice-proxy.drmanojkurmana.workers.dev/plivo-test-answer"
+    curl -sS -X POST "https://api.plivo.com/v1/Account/$AID/Call/" -u "$AID:$ATOK" -H "Content-Type: application/json" \
+      -d "{\"from\":\"$FROM\",\"to\":\"$TO\",\"answer_url\":\"$ANS\",\"answer_method\":\"GET\"}"; echo
+    ;;
+  call)
+    # ONE command for a live test: resume the pod if it self-stopped, wait until models are ready, then dial.
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    ST=$(gql "$(jq -n --arg id "$RUNPOD_POD_ID" '{query:"query($id:String!){pod(input:{podId:$id}){desiredStatus}}",variables:{id:$id}}')" | jq -r '.data.pod.desiredStatus // empty')
+    if [ "$ST" != "RUNNING" ]; then
+      echo "resuming pod $RUNPOD_POD_ID ..."
+      gql "$(jq -n --arg q "mutation{podResume(input:{podId:\"$RUNPOD_POD_ID\"}){id}}" '{query:$q}')" >/dev/null
+    fi
+    echo "waiting for models to load (~2-3 min) ..."
+    for i in $(seq 1 90); do
+      curl -sS -m 8 "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/healthz" 2>/dev/null | grep -q '"ready":true' && { echo "ready"; break; }
+      sleep 10
+    done
+    exec bash "$0" ingest "${2:-}"
+    ;;
+  ingest)
+    # Relay the queued call to the pod's /ingest. The pod's datacenter IP is 403'd pulling the queue itself,
+    # so THIS host (allowed IP) pulls it, attaches the Gemini key for direct slot-extraction, and pushes it.
+    BASE="$(_envfile_get FOLLOWCARE_BASE)"; TOK="$(_envfile_get FOLLOWCARE_VOICE_SERVICE_TOKEN)"
+    GK="$(_envfile_get GEMINI_API_KEY)"
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    Q=$(curl -sS "$BASE/voice/queue" -H "X-Voice-Token: $TOK")
+    [ "$(printf '%s' "$Q" | jq -r '.count // 0')" = "0" ] && { echo "queue empty — run: runpod.sh testcall"; exit 1; }
+    # Fresh callId each run (so a re-dial isn't dropped as a duplicate); amd:"" disables machine-detection.
+    # Optional $2 = phone override (E.164 no +, e.g. 919392376206) to dial a number other than the queued one.
+    CID="retry-$(date +%s)"; PHONE="${2:-}"
+    BODY=$(printf '%s' "$Q" | jq -c --arg k "$GK" --arg cid "$CID" --arg ph "$PHONE" \
+      '{call:(.calls[0] + {callId:$cid, lang:"te"} + (if $ph=="" then {} else {phone:$ph} end)), geminiKey:$k, amd:""}')
+    curl -sS -m 45 -X POST "https://${RUNPOD_POD_ID}-8080.proxy.runpod.net/ingest" \
+      -H "Content-Type: application/json" -d "$BODY"; echo
+    ;;
+  plivostatus)
+    # What happened to the recent call(s): ring/answer/hangup cause. Shows why a placed call didn't connect.
+    AID="$(_envfile_get PLIVO_AUTH_ID)"; ATOK="$(_envfile_get PLIVO_AUTH_TOKEN)"
+    curl -sS -u "$AID:$ATOK" "https://api.plivo.com/v1/Account/$AID/Call/?limit=5" \
+      | jq '.objects[] | {to:.to_number, status:.call_state, hangup:.hangup_cause_name, dur:.bill_duration, end:.end_time}'
+    ;;
+  list)
+    gql '{"query":"query{myself{pods{id name desiredStatus costPerHr}}}"}' \
+      | jq -r '.data.myself.pods[] | .id + "  " + .desiredStatus + "  $" + (.costPerHr|tostring) + "/hr  " + .name'
+    ;;
+  terminate)
+    # terminate ONE pod by id: runpod.sh terminate <podId>
+    : "${2:?usage: runpod.sh terminate <podId>}"
+    gql "$(jq -n --arg q "mutation{podTerminate(input:{podId:\"$2\"})}" '{query:$q}')"; echo " -> terminated $2"
+    ;;
+  terminate-others)
+    # terminate every pod EXCEPT the working one (RUNPOD_POD_ID from .env).
+    KEEP="${RUNPOD_POD_ID}"
+    : "${KEEP:?set RUNPOD_POD_ID = the pod to KEEP}"
+    for id in $(gql '{"query":"query{myself{pods{id}}}"}' | jq -r '.data.myself.pods[].id'); do
+      if [ "$id" = "$KEEP" ]; then echo "KEEP  $id"; continue; fi
+      gql "$(jq -n --arg q "mutation{podTerminate(input:{podId:\"$id\"})}" '{query:$q}')" >/dev/null && echo "TERM  $id"
+    done
+    ;;
+  podinfo)
+    : "${RUNPOD_POD_ID:?set RUNPOD_POD_ID}"
+    curl -sS -H "Authorization: Bearer $RUNPOD_API_KEY" "https://rest.runpod.io/v1/pods/$RUNPOD_POD_ID"; echo
+    ;;
+  *) echo "usage: runpod.sh {up|status|down|restart|call|ingest|queue|testcall|plivocall|plivostatus|podinfo}"; exit 1;;
 esac

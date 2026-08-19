@@ -60,19 +60,34 @@ class PlivoController:
 
 
 class PlivoStreamTelephony(TelephonyProvider):
-    def __init__(self, ws, config, silence_ms=800, energy_threshold=500, max_utterance_ms=15000):
+    def __init__(self, ws, config, silence_ms=None, energy_threshold=None, max_utterance_ms=None):
         self.ws = ws                       # a starlette/FastAPI WebSocket
         self.cfg = config
         self.stream_id = None
         self._answered = True              # the WS only opens once the call is answered
-        self._silence_ms = silence_ms
-        self._energy = energy_threshold
-        self._max_ms = max_utterance_ms
+        # Endpointing thresholds come from config (tunable per deployment) unless explicitly overridden.
+        self._silence_ms = silence_ms if silence_ms is not None else config.silence_ms
+        self._energy = energy_threshold if energy_threshold is not None else config.energy_threshold
+        self._max_ms = max_utterance_ms if max_utterance_ms is not None else config.max_utterance_ms
         self._playing = False
         self._barge = False
 
     async def dial(self, call):
-        return self._answered              # origination happened before the WS; connection == answered
+        # Plivo DROPS any audio sent before it emits the "start" event. Wait for it (bounded) so the greeting
+        # isn't lost into a not-yet-ready stream — the classic "call connects but caller hears dead air".
+        try:
+            while True:
+                raw = await asyncio.wait_for(self.ws.receive_text(), timeout=self._max_ms / 1000.0)
+                m = json.loads(raw)
+                ev = m.get("event")
+                if ev == "start":
+                    self.stream_id = (m.get("start") or {}).get("streamId") or m.get("streamId")
+                    return True
+                if ev in ("stop", "closed"):
+                    return False
+                # ignore early media/other events until "start"
+        except asyncio.TimeoutError:
+            return self._answered           # no explicit start seen — proceed rather than hang
 
     async def _recv_media(self):
         """Yield inbound PCM16 chunks from Plivo media frames; track the stream id."""
@@ -136,7 +151,9 @@ class PlivoStreamTelephony(TelephonyProvider):
             await self.ws.send_text(json.dumps({
                 "event": "playAudio",
                 "media": {"contentType": "audio/x-mulaw" if self.cfg.audio_format == "mulaw" else "audio/x-l16",
-                          "sampleRate": self.cfg.sample_rate, "payload": codec.encode_frame(frame, self.cfg.audio_format)},
+                          # Plivo REQUIRES sampleRate as a STRING here; a numeric value makes Plivo drop the frame
+                          # silently (agent audio never reaches the caller = dead air).
+                          "sampleRate": str(self.cfg.sample_rate), "payload": codec.encode_frame(frame, self.cfg.audio_format)},
             }))
             await asyncio.sleep(0.02)
         self._playing = False

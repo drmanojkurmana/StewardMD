@@ -14,6 +14,10 @@ class Config:
         e = env if env is not None else os.environ
         # FollowCare (Cloudflare) — the source of truth for eligibility, script, classify, results.
         self.followcare_base = e.get("FOLLOWCARE_BASE", "https://stewardmd.in/api/followcare")
+        # stewardmd.in blocks hosting/datacenter IPs (bot/scraping protection) with a 403 before the token
+        # check — so from the RunPod GPU, use the pages.dev production hostname (same code + secrets, no such
+        # block). Both point at the same Cloudflare Pages production deployment.
+        self.followcare_base = self.followcare_base.replace("//stewardmd.in/", "//stewardmd.pages.dev/")
         self.voice_service_token = e.get("FOLLOWCARE_VOICE_SERVICE_TOKEN", "")
         self.app_token = e.get("FOLLOWCARE_APP_TOKEN", "")  # X-App-Token for the app gate, if required
         # Telephony (Plivo) — India account with the required KYC/DID.
@@ -28,14 +32,41 @@ class Config:
         self.amd = e.get("VOICE_AMD", "hangup")
         # NLU (Gemini 2.5 Flash) — slot extraction ONLY, never a clinical decision.
         self.gemini_api_key = e.get("GEMINI_API_KEY", "")
-        self.gemini_model = e.get("SCRIBE_MODEL", "") or "gemini-2.5-flash"
-        # Models on this GPU.
+        self.gemini_model = e.get("VOICE_GEMINI_MODEL", "") or "gemini-flash-latest"  # 2.5-flash is 404 for new keys
+        # Models on this GPU. Provider "whisper"/"gtts" = fast, small, ungated (fast testing); "indicconformer"/
+        # "parler" = best Indic quality (slower, gated). Select with STT_PROVIDER / TTS_PROVIDER.
+        self.stt_provider = e.get("STT_PROVIDER", "indicconformer")
+        self.tts_provider = e.get("TTS_PROVIDER", "parler")
+        self.whisper_size = e.get("WHISPER_SIZE", "base")
+        # Sarvam API (no GPU): STT_PROVIDER=sarvam / TTS_PROVIDER=sarvam. Empty model/speaker => Sarvam defaults.
+        self.sarvam_api_key = e.get("SARVAM_API_KEY", "")
+        self.sarvam_speaker = e.get("SARVAM_SPEAKER", "")
+        self.sarvam_tts_model = e.get("SARVAM_TTS_MODEL", "bulbul:v2")
+        self.sarvam_stt_model = e.get("SARVAM_STT_MODEL", "saarika:v2.5")   # v2 is deprecated
+        # Endpointing (how we capture a patient turn) — tunable from real calls. Lower energy = catch quieter
+        # speech; longer silence = don't cut off someone who pauses. These are the "can't understand me" knobs.
+        self.energy_threshold = _int("VOICE_ENERGY_THRESHOLD", 350)
+        self.silence_ms = _int("VOICE_SILENCE_MS", 500)
+        self.max_utterance_ms = _int("VOICE_MAX_UTTERANCE_MS", 15000)
+        # Conversational mode: an LLM drives a natural chat (default ON) vs. the deterministic form-reader.
+        self.conversational = e.get("VOICE_CONVERSATIONAL", "1") == "1"
+        self.agent_name = e.get("VOICE_AGENT_NAME", "Maithri")
+        self.convo_fallback = e.get("VOICE_CONVO_FALLBACK", "క్షమించండి, దయచేసి మళ్ళీ చెప్పగలరా?")
+        # Patient enough for elderly, but BOUNDED for cost: wait longer per turn, allow a couple of gentle
+        # silence nudges, cap turns + a hard wall-clock ceiling so a call can never run for many minutes.
+        self.convo_turn_timeout = _int("VOICE_CONVO_TURN_TIMEOUT", 12)
+        self.max_silence_nudges = _int("VOICE_MAX_SILENCE_NUDGES", 2)
+        self.max_convo_turns = _int("VOICE_MAX_CONVO_TURNS", 18)
+        self.convo_max_seconds = _int("VOICE_CONVO_MAX_SECONDS", 300)
+        # Sarvam voice tuning for elderly ears: slower + a bit louder.
+        self.sarvam_pace = e.get("SARVAM_PACE", "0.9")
+        self.sarvam_loudness = e.get("SARVAM_LOUDNESS", "1.3")
         self.stt_model = e.get("STT_MODEL", "ai4bharat/indic-conformer-600m-multilingual")
         self.tts_model = e.get("TTS_MODEL", "ai4bharat/indic-parler-tts")
         self.device = e.get("VOICE_DEVICE", "cuda")
         # Call behaviour.
         self.max_concurrent = _int("VOICE_MAX_CONCURRENT", 5)
-        self.turn_timeout_s = _int("VOICE_TURN_TIMEOUT_S", 8)     # silence window before we treat a turn as done
+        self.turn_timeout_s = _int("VOICE_TURN_TIMEOUT_S", 10)    # silence window before we treat a turn as done
         self.no_answer_timeout_s = _int("VOICE_NO_ANSWER_TIMEOUT_S", 30)
         self.max_reasks = _int("VOICE_MAX_REASKS", 1)
         self.idle_shutdown_s = _int("VOICE_IDLE_SHUTDOWN_S", 180)  # self-stop the GPU after this idle gap

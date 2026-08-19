@@ -216,7 +216,33 @@
       ".fc-ring .fc-ring-t{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}",
       ".fc-ring .fc-ring-n{font-size:25px;font-weight:800;line-height:1}",
       ".fc-ring .fc-ring-l{font-size:9.5px;color:var(--slate,#5a7184);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}",
-      ".fc-ring .fc-ring-track{stroke:color-mix(in srgb,var(--line,#dbe4e2) 85%,transparent)}"
+      ".fc-ring .fc-ring-track{stroke:color-mix(in srgb,var(--line,#dbe4e2) 85%,transparent)}",
+      // ═══════════ Futuristic AI console skin (.fcai — default look for the whole module) ═══════════
+      "@keyframes maiAura{0%,100%{transform:translate(0,0) scale(1);opacity:.72}50%{transform:translate(5%,4%) scale(1.12);opacity:1}}",
+      "@keyframes maiPulse{0%,100%{box-shadow:0 0 0 0 rgba(124,245,198,.55)}70%{box-shadow:0 0 0 6px rgba(124,245,198,0)}}",
+      ".fc-ov.fcai{background:radial-gradient(1100px 640px at 50% -8%,rgba(20,184,166,.28),transparent 58%),radial-gradient(760px 460px at 86% 6%,rgba(56,189,248,.16),transparent 55%),rgba(3,10,12,.74);backdrop-filter:blur(11px) saturate(1.2)}",
+      ".fc-sheet.fcai{position:relative;--panel:#102a2f;--ink:#e9f6f3;--slate:#8fb0ab;--line:rgba(94,234,212,.16);--fc-accent:#5eead4;max-width:660px;color:#e9f6f3;background:linear-gradient(180deg,#0a191d,#081419 55%,#060f14);box-shadow:0 40px 120px -30px rgba(0,0,0,.85),0 0 0 1px rgba(94,234,212,.09)}",
+      ".fc-sheet.fcai::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.75),rgba(56,189,248,.6),transparent);z-index:3}",
+      ".fc-sheet.fcai .fc-hd{background:linear-gradient(135deg,rgba(11,38,38,.94),rgba(7,22,27,.94));backdrop-filter:blur(14px);border-bottom:1px solid rgba(94,234,212,.16);box-shadow:0 10px 34px -20px rgba(0,0,0,.9)}",
+      ".fc-sheet.fcai .fc-hd b{background:linear-gradient(90deg,#5eead4,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.3px}",
+      ".fc-sheet.fcai .fc-hd .fc-x{background:rgba(94,234,212,.14);color:#bff3ea}.fc-sheet.fcai .fc-hd .fc-x:hover{background:rgba(94,234,212,.26)}",
+      ".fc-sheet.fcai .fc-hd-logo{filter:drop-shadow(0 0 6px rgba(94,234,212,.6))}",
+      ".fc-sheet.fcai .fc-row,.fc-sheet.fcai .fc-act,.fc-sheet.fcai .fc-cm,.fc-sheet.fcai .fc-cc{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));backdrop-filter:blur(10px);border:1px solid rgba(94,234,212,.14);box-shadow:0 18px 46px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.05);border-radius:16px}",
+      ".fc-sheet.fcai .fc-row:hover,.fc-sheet.fcai .fc-act:hover{border-color:rgba(94,234,212,.36);box-shadow:0 24px 54px -26px rgba(20,184,166,.45),inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(-2px)}",
+      ".fc-sheet.fcai .fc-cc>div:first-child{text-shadow:0 0 18px rgba(94,234,212,.5)}",
+      ".fc-sheet.fcai .fc-hero2{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));border-color:rgba(94,234,212,.16);box-shadow:0 18px 46px -30px rgba(0,0,0,.8)}",
+      ".fc-sheet.fcai .fc-btn{background:linear-gradient(135deg,#22d3bf,#0891b2);border:1px solid rgba(94,234,212,.45);box-shadow:0 16px 36px -14px rgba(20,184,166,.85),inset 0 1px 0 rgba(255,255,255,.22);color:#04181a;font-weight:850;letter-spacing:.2px;border-radius:14px;transition:transform .12s,box-shadow .25s,filter .2s}",
+      ".fc-sheet.fcai .fc-btn:hover{filter:brightness(1.08);box-shadow:0 20px 44px -12px rgba(34,211,191,.95)}.fc-sheet.fcai .fc-btn:active{transform:translateY(1px) scale(.99)}",
+      ".fc-sheet.fcai .fc-btn.sec{background:rgba(94,234,212,.07);color:#8ef0df;border:1px solid rgba(94,234,212,.38);box-shadow:none}",
+      ".fc-sheet.fcai .fc-field input,.fc-sheet.fcai .fc-field select,.fc-sheet.fcai .fc-ta,.fc-sheet.fcai input,.fc-sheet.fcai select,.fc-sheet.fcai textarea{background:rgba(6,20,24,.72);border:1px solid rgba(94,234,212,.22);color:#e9f6f3;border-radius:12px}",
+      ".fc-sheet.fcai .fc-field input:focus,.fc-sheet.fcai select:focus,.fc-sheet.fcai textarea:focus{outline:none;border-color:rgba(94,234,212,.6);box-shadow:0 0 0 3px rgba(94,234,212,.16)}",
+      ".fc-sheet.fcai .fc-field label{color:#bcd6d1}.fc-sheet.fcai .fc-empty{color:#82a09b}",
+      ".fc-sheet.fcai .fc-tmpl{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.22);color:#bff3ea}",
+      ".fc-sheet.fcai .fc-ai-draft{border-color:rgba(94,234,212,.5);color:#8ef0df;background:rgba(94,234,212,.06)}",
+      ".mai-hero{background:linear-gradient(135deg,#0e7d70,#0b544c);box-shadow:0 14px 34px -14px rgba(14,110,99,.7)}",
+      ".fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
+      ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
+      ".mai-dot{animation:maiPulse 2.4s ease-out infinite}"
     ].join("");
   }
   function ensureStyle() { if (mounted) return; var s = document.createElement("style"); s.id = "fc-style"; s.textContent = css(); document.head.appendChild(s); mounted = true; }
@@ -236,7 +262,7 @@
     ensureStyle();
     close();
     var body = h("div", { "class": "fc-bd" }, [bodyEl]);
-    var sheet = h("div", { "class": "fc-sheet" + (ui2() ? " fcui2" : "") }, [
+    var sheet = h("div", { "class": "fc-sheet fcai" + (ui2() ? " fcui2" : "") }, [
       h("div", { "class": "fc-hd" }, [
         h("span", { "class": "fc-hd-logo", "aria-hidden": "true", text: "🩺" }),
         h("b", { text: "FollowCare" }),
@@ -244,9 +270,9 @@
       ]),
       body
     ]);
-    root = h("div", { "class": "fc-ov" + (ui2() ? " fcui2" : ""), onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
+    root = h("div", { "class": "fc-ov fcai" + (ui2() ? " fcui2" : ""), onclick: function (e) { if (e.target === root) close(); } }, [sheet]);
     document.body.appendChild(root);
-    if (ui2()) mSheetIn(sheet);
+    mSheetIn(sheet);
     return body;
   }
 
@@ -290,6 +316,7 @@
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
+      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: HEART_SVG + '<span style="font-weight:800">MAITRI dashboard</span>' }));
       body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
       if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
@@ -298,7 +325,7 @@
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
   }
   function pill(text, meta) { return h("span", { "class": "fc-pill", style: "background:" + meta.bg + ";color:" + meta.color, text: text }); }
-  function ccBox(n, label) { return h("div", { style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:20px;font-weight:800;color:#0e6e63", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
+  function ccBox(n, label) { return h("div", { "class": "fc-cc", style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:21px;font-weight:850;color:var(--fc-accent,#0e6e63)", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
   function episodeRow(ep) {
     var m = escalationMeta(ep.escalation);
     return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
@@ -403,8 +430,9 @@
       var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
       var langOpts = null; try { langOpts = (G.FollowCareI18n && FollowCareI18n.languages()) || null; } catch (e) {}
       var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } },
-        (langOpts ? langOpts.map(function (l) { return h("option", { value: l.code, text: l.code === "en" ? "English" : (l.native + " (" + l.name + ")") + (l.reviewed ? "" : " · in review") }); })
-                  : [h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })]));
+        [h("option", { value: "auto", text: "Auto-detect (adapts to the language the patient speaks)" })].concat(
+          langOpts ? langOpts.map(function (l) { return h("option", { value: l.code, text: l.code === "en" ? "English" : (l.native + " (" + l.name + ")") + (l.reviewed ? "" : " · in review") }); })
+                   : [h("option", { value: "en", text: "English" }), h("option", { value: "hi", text: "हिन्दी (Hindi)" })]));
       lang.value = form.lang;
       // DPDP §9: enrolling a minor routes ALL messaging to a guardian's phone.
       var guardianField = h("div", { "class": "fc-field", style: "display:none" }, [h("label", { text: "Guardian's mobile number" }), h("input", { type: "tel", inputmode: "numeric", placeholder: "Guardian mobile (required for a minor)", oninput: function (e) { form.guardianPhone = e.target.value; } })]);
@@ -475,6 +503,8 @@
       var s = res.body.settings, v = s.voice, a = s.ambulance;
       body.appendChild(h("div", { style: "margin:10px 0;font-weight:800;font-size:15px;color:#0e6e63", text: "AI Voice Follow-up" }));
       body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If a discharged patient ignores the check-in link, place at most one short AI wellbeing call per day, only inside the windows below." }));
+      var hName = h("input", { type: "text", value: s.name || "", placeholder: "e.g. City General Hospital", maxlength: "160" });
+      body.appendChild(field("Hospital / clinic name (the AI says this to the patient on the call)", hName));
       var vEnable = h("input", { type: "checkbox" }); vEnable.checked = !!v.enabled;
       body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [vEnable, document.createTextNode("Enable AI voice follow-up calls")]));
       function numIn(val, min, max) { return h("input", { type: "number", min: String(min), max: String(max), value: String(val), inputmode: "numeric", style: "width:80px" }); }
@@ -485,6 +515,8 @@
       body.appendChild(field("Timezone (IANA, e.g. Asia/Kolkata)", tz));
       var conc = numIn(v.maxConcurrent, 1, 50);
       body.appendChild(field("Max simultaneous calls", conc));
+      var attempts = numIn(v.maxAttempts == null ? 2 : v.maxAttempts, 1, 5);
+      body.appendChild(field("Retry attempts if unanswered (within the call windows)", attempts));
       body.appendChild(h("div", { style: "margin:2px 0 14px;color:var(--slate,#5a7184);font-size:12px", text: "Maximum 1 call per patient per day (fixed for safety)." }));
 
       body.appendChild(h("div", { style: "margin:12px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "Emergency / Ambulance" }));
@@ -498,13 +530,27 @@
       body.appendChild(field("Ambulance contact number", aPhone));
       body.appendChild(field("Notification method", aMethod));
 
+      body.appendChild(h("div", { style: "margin:12px 0 6px;font-weight:800;font-size:15px;color:#0e6e63", text: "On-call doctor escalation" }));
+      body.appendChild(h("div", { style: "margin:0 0 10px;color:var(--slate,#5a7184);font-size:12.5px", text: "If the AI confirms a danger sign on a call, page this contact at once (plus the in-app alert). Notify only." }));
+      var e = s.escalation || { enabled: false, contactName: "", phone: "", method: "sms" };
+      var eEnable = h("input", { type: "checkbox" }); eEnable.checked = !!e.enabled;
+      body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [eEnable, document.createTextNode("Enable red-flag escalation pages")]));
+      var eName = h("input", { type: "text", value: e.contactName || "", placeholder: "Contact name (e.g. On-call doctor)" });
+      var ePhone = h("input", { type: "tel", inputmode: "numeric", value: e.phone || "", placeholder: "Escalation contact number" });
+      var eMethod = h("select", {}, [h("option", { value: "sms", text: "SMS" }), h("option", { value: "whatsapp", text: "WhatsApp" })]); eMethod.value = e.method || "sms";
+      body.appendChild(field("Escalation contact name", eName));
+      body.appendChild(field("Escalation contact number", ePhone));
+      body.appendChild(field("Escalation method", eMethod));
+
       var err = h("div", { role: "alert", tabindex: "-1" });
       var save = h("button", { "class": "fc-btn", style: "margin-top:6px", text: "Save settings" });
       save.addEventListener("click", function () {
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
-          voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value },
-          ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value }
+          name: hName.value,
+          voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value },
+          ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value },
+          escalation: { enabled: eEnable.checked, contactName: eName.value, phone: ePhone.value, method: eMethod.value }
         };
         API.voiceSettingsSet(payload).then(function (r) {
           save.disabled = false; save.textContent = "Save settings";
@@ -525,7 +571,15 @@
     lines.push(h("div", { style: "font-size:13px;margin-bottom:3px", text: voiceReasonText(voice.reason) }));
     if (voice.lastCallMs) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "Last call " + fmtWhen(voice.lastCallMs) + (voice.lastOutcome ? "  ·  " + voice.lastOutcome : "") + (voice.lastStatus ? "  ·  " + voice.lastStatus : "") }));
     else lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184)", text: "No calls placed yet." }));
-    if (voice.ambulanceRequested) lines.push(h("div", { style: "font-size:12.5px;font-weight:700;color:#b3261e;margin-top:3px", text: "⚠ Ambulance was requested" }));
+    if (voice.emergency || voice.ambulanceRequested) {
+      var alHead = voice.ambulanceRequested ? "AMBULANCE REQUESTED" : "URGENT: DANGER SIGN REPORTED";
+      var alSub = voice.ambulanceRequested ? "The patient asked for an ambulance on the call." : "The patient reported a danger sign on the call.";
+      lines.push(h("div", { style: "margin-top:8px;padding:10px 12px;border-radius:10px;background:#fdecea;border:1px solid #f3b4ad;color:#8f1d14" }, [
+        h("div", { style: "font-weight:800;font-size:12.5px;display:flex;align-items:center;gap:6px", html: '<span class="fc-bi" style="color:#b3261e;display:inline-flex;width:16px;height:16px">' + actIcon("emergency") + '</span>' + alHead }),
+        h("div", { style: "font-size:12.5px;margin-top:3px", text: alSub }),
+        voice.lastStatement ? h("div", { style: "font-size:12.5px;margin-top:3px;font-style:italic", text: "“" + voice.lastStatement + "”" }) : null
+      ]));
+    }
     if (voice.optedOut) lines.push(h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);margin-top:3px", text: "Patient opted out of calls." }));
     var blocked = voice.calledToday || voice.optedOut;
     var btn = h("button", { "class": "fc-btn" + (blocked ? " sec" : ""), style: "margin-top:10px;width:100%", text: voice.calledToday ? "Already called today" : "AI Call Patient" });
@@ -598,6 +652,9 @@
         var hist = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", html: '<span class="fc-bi">' + actIcon("history") + '</span>Communication history' });
         hist.addEventListener("click", function () { renderCommHistory(episodeId, ep); });
         body.appendChild(hist);
+        var chatBtn = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", html: '<span class="fc-bi">' + actIcon("question") + '</span>Chat with patient' });
+        chatBtn.addEventListener("click", function () { renderChat(episodeId, ep); });
+        body.appendChild(chatBtn);
       }
       // AI voice fallback card (flag smd_followcare_voice): status + manual "AI Call Patient" (1-call/day enforced).
       if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
@@ -802,6 +859,45 @@
       });
     }).catch(function () { list.innerHTML = ""; list.appendChild(h("div", { "class": "fc-empty", text: "Could not load history." })); });
   }
+  // Free-form doctor to patient chat. Reuses the existing thread (GET /comms) + the "question" action
+  // (POST /action), so the patient can reply from their secure portal link. Bodies stay encrypted server-side.
+  function renderChat(episodeId, ep) {
+    var body = actionSheet(episodeId, ep, function () { renderDetail(episodeId); });
+    body.appendChild(h("div", { style: "font-size:17px;font-weight:800;margin:12px 0 10px", text: "Chat with patient" }));
+    var thread = h("div", { style: "display:flex;flex-direction:column;gap:8px;margin-bottom:12px;max-height:52vh;overflow:auto" });
+    body.appendChild(thread);
+    function load() {
+      thread.innerHTML = ""; thread.appendChild(h("div", { "class": "fc-empty", text: "Loading…" }));
+      API.comms(episodeId).then(function (res) {
+        thread.innerHTML = "";
+        var items = ((res.body && res.body.items) || []).filter(function (c) { return (c.body && String(c.body).trim()) || c.dir === "in"; });
+        if (!items.length) { thread.appendChild(h("div", { "class": "fc-empty", text: "No messages yet. Send the first one below." })); return; }
+        items.forEach(function (c) {
+          var inbound = c.dir === "in";
+          thread.appendChild(h("div", { style: "max-width:82%;padding:8px 11px;border-radius:12px;font-size:13.5px;line-height:1.35;" + (inbound ? "align-self:flex-start;background:var(--panel,#f1f5f4);color:var(--ink,#14202b);border:1px solid var(--line,#dbe4e2)" : "align-self:flex-end;background:#0e6e63;color:#fff") }, [
+            h("div", { text: c.body || "(message)" }),
+            h("div", { style: "font-size:10.5px;opacity:.75;margin-top:3px", text: fmtCommTime(c.createdMs) })
+          ]));
+        });
+        try { thread.scrollTop = thread.scrollHeight; } catch (e) {}
+      }).catch(function () { thread.innerHTML = ""; thread.appendChild(h("div", { "class": "fc-empty", text: "Could not load the chat." })); });
+    }
+    load();
+    var input = h("textarea", { rows: "2", placeholder: "Type a message to your patient…", style: "width:100%;box-sizing:border-box;padding:10px 12px;border:1px solid var(--line,#dbe4e2);border-radius:10px;font-size:14px;resize:vertical;font-family:inherit" });
+    var send = h("button", { "class": "fc-btn", style: "margin-top:8px;width:100%", text: "Send message" });
+    send.addEventListener("click", function () {
+      var text = String(input.value || "").trim();
+      if (!text) { toast("Type a message first"); return; }
+      send.disabled = true; send.textContent = "Sending…";
+      API.action({ episodeId: episodeId, type: "question", body: text, doctorName: (G.SMD_DOCTOR_NAME || "") }).then(function (r) {
+        if (r.body && r.body.ok) { input.value = ""; toast("Message sent to patient"); load(); }
+        else { toast((r.body && r.body.error) === "not_configured" ? "FollowCare not configured" : "Could not send"); }
+        send.disabled = false; send.textContent = "Send message";
+      }).catch(function () { toast("Connection problem"); send.disabled = false; send.textContent = "Send message"; });
+    });
+    body.appendChild(input); body.appendChild(send);
+    body.appendChild(h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184);margin-top:8px", text: "Your patient gets a secure link by message and can reply from it. Message text stays private in FollowCare." }));
+  }
   // Render the structured payload of a comm entry (vitals values, requested fields, photos, review date, etc.).
   function commPayloadEl(c) {
     var p = c.payload || {};
@@ -819,9 +915,85 @@
     return null;
   }
 
+  // ---- MAITRI (Multimodal Autonomous Intelligence for Treatment & Recovery Integration) -------------
+  // Branded AI-recovery-companion dashboard inside FollowCare: at-a-glance recovery metrics, the red-flag
+  // triage list, voice-calling status, and a jump to voice/escalation settings. Reuses the FollowCare API,
+  // stat components and escalation palette so it stays one design language. No new endpoint, no new script.
+  var HEART_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.6-9.2-9C1.3 8 3 4.7 6.2 4.7c2 0 3.2 1.2 3.8 2.2C10.6 5.9 11.8 4.7 13.8 4.7 17 4.7 18.7 8 21.2 11 19 15.4 12 20 12 20z"/></svg>';
+  function maitriWindows(v) {
+    if (!v) return "";
+    function hh(n) { n = +n || 0; return (n < 10 ? "0" + n : n) + ":00"; }
+    return hh(v.morningStart) + "-" + hh(v.morningEnd) + "  &  " + hh(v.eveningStart) + "-" + hh(v.eveningEnd);
+  }
+  function maitriHero(sv) {
+    var on = !!(sv && sv.voice && sv.voice.enabled);
+    var win = sv ? maitriWindows(sv.voice) : "";
+    var wrap = h("div", { "class": "mai-hero", style: "border-radius:18px;padding:18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden" });
+    wrap.innerHTML =
+      '<div class="mai-aura"></div>' +
+      '<div style="position:relative;z-index:1">' +
+        '<div style="display:flex;align-items:center;gap:11px">' +
+          '<div style="width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)">' + HEART_SVG + '</div>' +
+          '<div style="min-width:0"><div style="font-size:26px;font-weight:900;letter-spacing:1.5px;line-height:1;text-shadow:0 0 22px rgba(94,234,212,.55)">MAITRI</div>' +
+            '<div style="font-size:11px;opacity:.9;margin-top:3px;font-weight:600;letter-spacing:.3px">AI Recovery Companion</div></div>' +
+          '<div style="margin-left:auto;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:6px 11px;border-radius:999px;font-size:11.5px;font-weight:800;white-space:nowrap;border:1px solid rgba(255,255,255,.2)">' +
+            '<span class="mai-dot" style="width:8px;height:8px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
+        '</div>' +
+        '<div style="font-size:12px;opacity:.94;margin-top:13px;line-height:1.5;letter-spacing:.2px">Multimodal Autonomous Intelligence for Treatment &amp; Recovery Integration</div>' +
+        (win ? '<div style="font-size:11.5px;opacity:.82;margin-top:9px">Call windows ' + win + '</div>' : '') +
+      '</div>';
+    return wrap;
+  }
+  function maitriStatus(sv) {
+    var on = !!(sv && sv.voice && sv.voice.enabled), col = on ? ESC.green : ESC[""];
+    return h("div", { style: "border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:12px 14px;margin-bottom:12px;background:var(--panel,#fff);display:flex;align-items:center;gap:11px" }, [
+      pill(on ? "Voice calling ON" : "Voice calling OFF", col),
+      h("div", { style: "font-size:12.5px;color:var(--slate,#5a7184);flex:1", text: on ? "Maitri calls patients who miss their check-in, in their language." : "Turn on in settings to enable AI wellbeing calls." })
+    ]);
+  }
+  function maitriSection(t, n) {
+    return h("div", { style: "display:flex;align-items:center;gap:8px;margin:8px 0 10px;font-weight:800;font-size:14px;color:var(--ink,#14202b)" }, [
+      document.createTextNode(t),
+      n != null ? h("span", { style: "font-size:11.5px;font-weight:800;color:#0e6e63;background:#e7f6ee;border-radius:999px;padding:2px 9px", text: String(n) }) : null
+    ]);
+  }
+  function renderMaitri(body) {
+    body.innerHTML = "";
+    body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
+    var host = h("div"); body.appendChild(host);
+    host.appendChild(maitriHero(null));
+    host.appendChild(h("div", { "class": "fc-empty", text: "Loading MAITRI…" }));
+    Promise.all([
+      API.episodes().catch(function () { return { body: {} }; }),
+      API.voiceSettingsGet().catch(function () { return { body: {} }; })
+    ]).then(function (r) {
+      var eps = (r[0].body && r[0].body.episodes) || [];
+      var sv = (r[1].body && r[1].body.settings) || null;
+      host.innerHTML = "";
+      host.appendChild(maitriHero(sv));
+      var list = sortEpisodes(eps), c = counts(list);
+      host.appendChild(h("div", { style: "display:flex;gap:8px;flex-wrap:wrap;margin-bottom:12px" }, [
+        ccBox(c.total, "Recovering"), ccBox(c.red, "Urgent"), ccBox(c.orange + c.yellow, "Watch"), ccBox(c.green, "On track")
+      ]));
+      host.appendChild(maitriStatus(sv));
+      var urgent = list.filter(function (e) { return e.escalation === "red" || e.escalation === "orange"; });
+      host.appendChild(maitriSection("Needs attention", urgent.length));
+      if (!urgent.length) host.appendChild(h("div", { "class": "fc-empty", text: "No red flags right now. Everyone is on track." }));
+      else urgent.slice(0, 8).forEach(function (ep) { host.appendChild(episodeRow(ep)); });
+      host.appendChild(h("button", { "class": "fc-btn", style: "margin-top:10px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation settings" }));
+      host.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+    }).catch(function () {
+      host.innerHTML = ""; host.appendChild(maitriHero(null));
+      host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAITRI. Check your connection." }));
+    });
+  }
+  function maitri() { if (!enabled()) { toast("FollowCare is not enabled."); return; } withReady(shell(), renderMaitri); }
+
   var PUB = {
-    open: open, openEnroll: openEnroll, close: close, enabled: enabled,
+    open: open, openEnroll: openEnroll, close: close, enabled: enabled, maitri: maitri,
     openActions: openActions, actionsEnabled: actionsEnabled,
+    // Deep link (from a FollowCare push tap) straight to one patient's recovery detail.
+    openDetail: function (id) { try { open(); } catch (e) {} try { renderDetail(id); } catch (e) {} },
     // pure, testable:
     validateEnroll: validateEnroll, escalationMeta: escalationMeta, statusMeta: statusMeta,
     sortEpisodes: sortEpisodes, fmtWhen: fmtWhen, counts: counts, enrollError: enrollError,

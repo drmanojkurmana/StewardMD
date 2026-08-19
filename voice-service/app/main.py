@@ -19,9 +19,14 @@ from .config import Config
 from .followcare.client import FollowCareClient
 from .nlu.gemini import SlotExtractor
 from .stt.indicconformer import IndicConformerSTT
+from .stt.whisper import WhisperSTT
+from .stt.sarvam import SarvamSTT
 from .tts.parler import ParlerTTS
+from .tts.gtts_provider import GttsTTS
+from .tts.sarvam import SarvamTTS
 from .telephony.plivo_provider import PlivoController, PlivoStreamTelephony
 from .call.session import CallSession
+from .call.conversational import ConversationalBrain, ConversationalSession
 from .gpu import RunPodController
 
 cfg = Config()
@@ -31,8 +36,8 @@ client = FollowCareClient(cfg)
 # Slot extraction runs on the SHARED Cloudflare Gemini transport (Vertex AI primary, AI Studio GEMINI_API_KEY
 # fallback) — one integration, no Google creds on this box. Set VOICE_NLU_DIRECT=1 to use a local Gemini key.
 nlu = SlotExtractor(cfg) if os.environ.get("VOICE_NLU_DIRECT") == "1" else SlotExtractor(cfg, model_call=client.nlu)
-stt = IndicConformerSTT(cfg)
-tts = ParlerTTS(cfg)
+stt = ({"sarvam": SarvamSTT, "whisper": WhisperSTT}.get(cfg.stt_provider, IndicConformerSTT))(cfg)
+tts = ({"sarvam": SarvamTTS, "gtts": GttsTTS}.get(cfg.tts_provider, ParlerTTS))(cfg)
 plivo = PlivoController(cfg)
 runpod = RunPodController(cfg)
 
@@ -41,20 +46,119 @@ STATE = {"ready": False, "calls": {}, "last_activity": time.time()}
 
 @app.on_event("startup")
 async def _startup():
-    def _load():
-        try:
-            stt.load(); tts.load(); STATE["ready"] = True
-        except Exception as e:  # a model failing to load must not wedge the box; health reports not-ready
-            STATE["ready"] = False
-            STATE["load_error"] = str(e)
-    await asyncio.get_event_loop().run_in_executor(None, _load)
-    asyncio.create_task(_campaign())
+    # Load models as a BACKGROUND task so uvicorn serves /healthz immediately (ready:false while loading),
+    # instead of blocking startup for the multi-GB model download — otherwise the box looks dead while it's fine.
+    async def _boot():
+        def _load():
+            try:
+                stt.load(); tts.load()
+                if cfg.conversational:      # pre-synthesize the greeting/filler so the FIRST call has no warm-up
+                    try:
+                        from .call.conversational import warm
+                        warm(tts, cfg, "te")
+                    except Exception:
+                        pass
+                STATE["ready"] = True
+            except Exception as e:  # a model failing to load must not wedge the box; health surfaces the error
+                STATE["ready"] = False
+                STATE["load_error"] = str(e)
+        await asyncio.get_event_loop().run_in_executor(None, _load)
+        asyncio.create_task(_campaign())
+    asyncio.create_task(_boot())
 
 
 @app.get("/healthz")
 async def healthz():
-    return {"ok": True, "ready": STATE["ready"], "active": sum(1 for c in STATE["calls"].values() if c["state"] == "active"),
+    return {"ok": True, "ready": STATE["ready"], "loading": (not STATE["ready"] and "load_error" not in STATE),
+            "load_error": STATE.get("load_error"),
+            "active": sum(1 for c in STATE["calls"].values() if c["state"] == "active"),
             "followcare": cfg.followcare_configured(), "telephony": cfg.telephony_configured()}
+
+
+# Debug/force: show what THIS pod sees from the queue, and manually originate any fresh calls (bypasses the
+# auto-poll loop). Lets us confirm the pod can reach + auth Cloudflare, and force a dial on demand.
+@app.post("/drain")
+async def drain():
+    # Raw fetch so we can see the exact HTTP status the POD gets from Cloudflare (vs. my working curl).
+    status, obj = client.transport("GET", client._url("/voice/queue"), client._headers(), None)
+    q = obj.get("calls", []) if status == 200 else []
+    tok = cfg.voice_service_token or ""
+    out = {"ready": STATE["ready"], "queue_http_status": status, "queue_count": len(q),
+           "base": cfg.followcare_base, "token_len": len(tok), "token_tail": tok[-4:], "originated": []}
+    for c in q:
+        cid = c.get("callId")
+        if cid in STATE["calls"]:
+            continue
+        STATE["calls"][cid] = {"call": c, "state": "originated", "ts": time.time()}
+        client.post_status(cid, {"status": "ringing"})
+        ok = await asyncio.get_event_loop().run_in_executor(None, plivo.originate, c.get("phone"), cid)
+        out["originated"].append({"callId": cid, "phone": c.get("phone"), "plivo_ok": ok})
+        if not ok:
+            STATE["calls"][cid]["state"] = "done"
+    return out
+
+
+@app.get("/selftest")
+async def selftest():
+    """Diagnose the silent-agent bug: does TTS actually emit audio bytes, in both languages? Returns the byte
+    counts + a sample of the first outbound frame so we can tell TTS-broken from Plivo-send-broken."""
+    def _run():
+        try:
+            en = tts.synth("Hello, this is a test call.", "en")
+        except Exception as e:
+            en = ("ERR:" + str(e)).encode()
+        try:
+            te = tts.synth("నమస్తే, ఇది ఒక పరీక్ష కాల్.", "te")
+        except Exception as e:
+            te = ("ERR:" + str(e)).encode()
+        return en, te
+    en, te = await asyncio.get_event_loop().run_in_executor(None, _run)
+    return {"ready": STATE["ready"], "load_error": STATE.get("load_error"),
+            "audio_format": cfg.audio_format, "sample_rate": cfg.sample_rate,
+            "tts_provider": cfg.tts_provider, "stt_provider": cfg.stt_provider,
+            "tts_en_bytes": len(en), "tts_te_bytes": len(te)}
+
+
+@app.get("/lastcall")
+async def lastcall():
+    """What the most recent call actually captured + heard + extracted, per turn — for tuning 'can't understand me'."""
+    if not STATE["calls"]:
+        return {"calls": 0}
+    cid = max(STATE["calls"], key=lambda c: STATE["calls"][c]["ts"])
+    rec = STATE["calls"][cid]
+    call = rec["call"]
+    return {"callId": cid, "phone": call.get("phone"), "state": rec["state"], "lang": call.get("lang"),
+            "turns": call.get("_turns", []), "convo": call.get("_convo", []), "facts": call.get("_facts", {}),
+            "errors": call.get("_error", [])}
+
+
+@app.post("/ingest")
+async def ingest(request: Request):
+    """Dial a call payload PUSHED from outside. Cloudflare bot-protection 403s this pod's datacenter IP on
+    every path (direct, pages.dev, and through a Worker — the IP is preserved), so the pod cannot pull its own
+    queue. Instead a caller on an allowed IP pulls the queue from Cloudflare and relays the payload here.
+    An optional geminiKey flips slot-extraction to talk DIRECTLY to Google (also unreachable via Cloudflare),
+    so the whole call runs with zero pod->Cloudflare hops (STT/TTS/Parler are already local)."""
+    global nlu
+    body = await request.json()
+    call = body.get("call") or body
+    gkey = body.get("geminiKey")
+    if gkey:
+        cfg.gemini_api_key = gkey
+        nlu = SlotExtractor(cfg)  # direct-to-Google slot extraction, no Cloudflare hop
+    if "amd" in body:
+        cfg.amd = body["amd"]     # ""/none disables machine-detection (avoids AMD false-positive hangups on live answers)
+    cid = call.get("callId") or ("ingest-" + str(int(time.time())))
+    call["callId"] = cid
+    if cid in STATE["calls"]:
+        return {"callId": cid, "duplicate": True}
+    STATE["calls"][cid] = {"call": call, "state": "originated", "ts": time.time()}
+    if body.get("dryDial"):   # register only — a local harness opens the WS itself (offline audio-loop test, no phone)
+        return {"callId": cid, "dryDial": True, "wsPath": "/plivo/stream/" + cid, "ready": STATE["ready"]}
+    ok = await asyncio.get_event_loop().run_in_executor(None, plivo.originate, call.get("phone"), cid)
+    if not ok:
+        STATE["calls"][cid]["state"] = "done"
+    return {"callId": cid, "phone": call.get("phone"), "plivo_ok": ok, "nlu_direct": bool(gkey), "ready": STATE["ready"]}
 
 
 @app.post("/plivo/answer")
@@ -83,7 +187,11 @@ async def plivo_stream(ws: WebSocket, call_id: str):
     rec["state"] = "active"
     STATE["last_activity"] = time.time()
     telephony = PlivoStreamTelephony(ws, cfg)
-    session = CallSession(rec["call"], stt, tts, telephony, nlu, client, cfg)
+    if cfg.conversational:      # LLM-driven natural conversation (reacts to the patient, not a form)
+        brain = ConversationalBrain(rec["call"], cfg, nlu.model_call)
+        session = ConversationalSession(rec["call"], stt, tts, telephony, brain, client, cfg)
+    else:                       # deterministic form-reader (fallback)
+        session = CallSession(rec["call"], stt, tts, telephony, nlu, client, cfg)
     try:
         await session.run()
     except Exception:

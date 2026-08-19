@@ -1,0 +1,10 @@
+# Fast-test deps: small, quick to install + load (faster-whisper STT + gTTS TTS). No parler-tts git build,
+# no onnxruntime/IndicConformer. Boots in ~2-3 min. Use requirements.txt for the full Indic-quality stack.
+fastapi>=0.111
+uvicorn[standard]>=0.30
+plivo>=4.47
+google-generativeai>=0.8
+faster-whisper>=1.0
+gTTS>=2.5
+av>=12
+numpy>=1.24

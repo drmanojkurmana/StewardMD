@@ -20,8 +20,26 @@ def float_to_pcm16(samples):
 def resample_linear(samples, src_hz, dst_hz):
     if src_hz == dst_hz or not samples:
         return list(samples)
+    samples = list(samples)
     ratio = dst_hz / float(src_hz)
     n_out = int(len(samples) * ratio)
+    # DOWNSAMPLING: average each output sample over its full input window. This is a cheap low-pass
+    # (anti-alias) filter — plain linear interpolation only reads 2 of the ~src/dst input samples and
+    # aliases everything above the new Nyquist into "underwater/robotic" garble.
+    if dst_hz < src_hz:
+        win = src_hz / float(dst_hz)
+        out = [0.0] * n_out
+        for i in range(n_out):
+            a = int(i * win)
+            b = int((i + 1) * win)
+            if b <= a:
+                b = a + 1
+            if b > len(samples):
+                b = len(samples)
+            seg = samples[a:b]
+            out[i] = sum(seg) / len(seg) if seg else 0.0
+        return out
+    # UPSAMPLING (no aliasing): linear interpolation.
     out = [0.0] * n_out
     for i in range(n_out):
         pos = i / ratio

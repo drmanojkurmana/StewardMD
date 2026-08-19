@@ -7,9 +7,11 @@ Wires the pieces of the agreed loop:
 Everything clinical is delegated (classify + result = the Cloudflare engine). Providers are injected so the
 whole loop runs offline in tests with fakes (no GPU, no Plivo, no network).
 """
+import asyncio
 import time
 
-from .state_machine import Conversation, ASK
+from . import responder
+from .state_machine import Conversation, ASK, Turn
 
 
 class CallSession:
@@ -25,7 +27,10 @@ class CallSession:
 
     async def _say(self, turn):
         if turn and turn.say:
-            pcm = self.tts.synth(turn.say, self.call.get("lang", "en"))
+            # TTS is a heavy blocking call (GPU generate); run OFF the event loop so it doesn't freeze the
+            # WebSocket (missed keepalives / audio stalls). Same for STT/NLU below.
+            pcm = await asyncio.get_event_loop().run_in_executor(
+                None, self.tts.synth, turn.say, self.call.get("lang", "en"))
             await self.telephony.play(pcm)
 
     async def run(self):
@@ -46,20 +51,34 @@ class CallSession:
 
         turn = conv.start()
         await self._say(turn)
+        silence_reasks = 0
         while turn.expect_reply and not turn.done:
             pcm = await self.telephony.listen(self.cfg.turn_timeout_s)
             if pcm is None:                       # silence / hangup
+                # A pause isn't a hangup — re-prompt once and repeat the question before giving up, so a
+                # patient who's just thinking (or a slightly-slow line) doesn't get cut off.
+                if silence_reasks < 1:
+                    silence_reasks += 1
+                    await self._say(Turn(responder.say("still_there", conv.lang), expect_reply=True))
+                    await self._say(turn)         # repeat the same question
+                    continue
                 if not conv.answers:
                     conv.status = "no_answer"
                 break
-            transcript = self.stt.transcribe(pcm, conv.lang)
+            silence_reasks = 0
+            loop = asyncio.get_event_loop()
+            transcript = await loop.run_in_executor(None, self.stt.transcribe, pcm, conv.lang)
             cur_q = conv.questions[conv.q_index] if (conv.phase == ASK and conv.q_index < len(conv.questions)) else None
-            nlu = self.nlu.interpret(cur_q, transcript, conv.lang)
+            nlu = await loop.run_in_executor(None, self.nlu.interpret, cur_q, transcript, conv.lang)
+            # Instrumentation: what did we actually capture + hear + extract this turn? (read via GET /lastcall)
+            self.call.setdefault("_turns", []).append({
+                "q": (cur_q or {}).get("id", conv.phase), "sec": round(len(pcm) / 2 / 8000, 1),
+                "heard": transcript, "intent": nlu.get("intent"), "value": nlu.get("value")})
             engine = None
             if conv.phase == ASK and cur_q is not None and nlu.get("intent") != "unclear":
                 merged = dict(conv.answers)
                 merged[cur_q.get("id")] = nlu.get("value", "")
-                engine = self.client.classify(episode_id, merged)
+                engine = await loop.run_in_executor(None, self.client.classify, episode_id, merged)
             turn = conv.on_reply(nlu, engine)
             await self._say(turn)
 
