@@ -217,30 +217,32 @@
       ".fc-ring .fc-ring-n{font-size:25px;font-weight:800;line-height:1}",
       ".fc-ring .fc-ring-l{font-size:9.5px;color:var(--slate,#5a7184);text-transform:uppercase;letter-spacing:.06em;margin-top:3px}",
       ".fc-ring .fc-ring-track{stroke:color-mix(in srgb,var(--line,#dbe4e2) 85%,transparent)}",
-      // ═══════════ Futuristic AI console skin (.fcai — default look for the whole module) ═══════════
+      // ═══════════ Futuristic AI console skin (.fcai) — DARK MODE ONLY (body.dark / body.v3-dark).
+      // In light mode the .fcai class is inert, so the module falls back to the light base .fc-sheet
+      // and follows the app's global light/dark switch like every other module. ═══════════
       "@keyframes maiAura{0%,100%{transform:translate(0,0) scale(1);opacity:.72}50%{transform:translate(5%,4%) scale(1.12);opacity:1}}",
       "@keyframes maiPulse{0%,100%{box-shadow:0 0 0 0 rgba(124,245,198,.55)}70%{box-shadow:0 0 0 6px rgba(124,245,198,0)}}",
-      ".fc-ov.fcai{background:radial-gradient(1100px 640px at 50% -8%,rgba(20,184,166,.28),transparent 58%),radial-gradient(760px 460px at 86% 6%,rgba(56,189,248,.16),transparent 55%),rgba(3,10,12,.74);backdrop-filter:blur(11px) saturate(1.2)}",
-      ".fc-sheet.fcai{position:relative;--panel:#102a2f;--ink:#e9f6f3;--slate:#8fb0ab;--line:rgba(94,234,212,.16);--fc-accent:#5eead4;max-width:660px;color:#e9f6f3;background:linear-gradient(180deg,#0a191d,#081419 55%,#060f14);box-shadow:0 40px 120px -30px rgba(0,0,0,.85),0 0 0 1px rgba(94,234,212,.09)}",
-      ".fc-sheet.fcai::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.75),rgba(56,189,248,.6),transparent);z-index:3}",
-      ".fc-sheet.fcai .fc-hd{background:linear-gradient(135deg,rgba(11,38,38,.94),rgba(7,22,27,.94));backdrop-filter:blur(14px);border-bottom:1px solid rgba(94,234,212,.16);box-shadow:0 10px 34px -20px rgba(0,0,0,.9)}",
-      ".fc-sheet.fcai .fc-hd b{background:linear-gradient(90deg,#5eead4,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.3px}",
-      ".fc-sheet.fcai .fc-hd .fc-x{background:rgba(94,234,212,.14);color:#bff3ea}.fc-sheet.fcai .fc-hd .fc-x:hover{background:rgba(94,234,212,.26)}",
-      ".fc-sheet.fcai .fc-hd-logo{filter:drop-shadow(0 0 6px rgba(94,234,212,.6))}",
-      ".fc-sheet.fcai .fc-row,.fc-sheet.fcai .fc-act,.fc-sheet.fcai .fc-cm,.fc-sheet.fcai .fc-cc{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));backdrop-filter:blur(10px);border:1px solid rgba(94,234,212,.14);box-shadow:0 18px 46px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.05);border-radius:16px}",
-      ".fc-sheet.fcai .fc-row:hover,.fc-sheet.fcai .fc-act:hover{border-color:rgba(94,234,212,.36);box-shadow:0 24px 54px -26px rgba(20,184,166,.45),inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(-2px)}",
-      ".fc-sheet.fcai .fc-cc>div:first-child{text-shadow:0 0 18px rgba(94,234,212,.5)}",
-      ".fc-sheet.fcai .fc-hero2{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));border-color:rgba(94,234,212,.16);box-shadow:0 18px 46px -30px rgba(0,0,0,.8)}",
-      ".fc-sheet.fcai .fc-btn{background:linear-gradient(135deg,#22d3bf,#0891b2);border:1px solid rgba(94,234,212,.45);box-shadow:0 16px 36px -14px rgba(20,184,166,.85),inset 0 1px 0 rgba(255,255,255,.22);color:#04181a;font-weight:850;letter-spacing:.2px;border-radius:14px;transition:transform .12s,box-shadow .25s,filter .2s}",
-      ".fc-sheet.fcai .fc-btn:hover{filter:brightness(1.08);box-shadow:0 20px 44px -12px rgba(34,211,191,.95)}.fc-sheet.fcai .fc-btn:active{transform:translateY(1px) scale(.99)}",
-      ".fc-sheet.fcai .fc-btn.sec{background:rgba(94,234,212,.07);color:#8ef0df;border:1px solid rgba(94,234,212,.38);box-shadow:none}",
-      ".fc-sheet.fcai .fc-field input,.fc-sheet.fcai .fc-field select,.fc-sheet.fcai .fc-ta,.fc-sheet.fcai input,.fc-sheet.fcai select,.fc-sheet.fcai textarea{background:rgba(6,20,24,.72);border:1px solid rgba(94,234,212,.22);color:#e9f6f3;border-radius:12px}",
-      ".fc-sheet.fcai .fc-field input:focus,.fc-sheet.fcai select:focus,.fc-sheet.fcai textarea:focus{outline:none;border-color:rgba(94,234,212,.6);box-shadow:0 0 0 3px rgba(94,234,212,.16)}",
-      ".fc-sheet.fcai .fc-field label{color:#bcd6d1}.fc-sheet.fcai .fc-empty{color:#82a09b}",
-      ".fc-sheet.fcai .fc-tmpl{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.22);color:#bff3ea}",
-      ".fc-sheet.fcai .fc-ai-draft{border-color:rgba(94,234,212,.5);color:#8ef0df;background:rgba(94,234,212,.06)}",
+      "body.dark .fc-ov.fcai,body.v3-dark .fc-ov.fcai{background:radial-gradient(1100px 640px at 50% -8%,rgba(20,184,166,.28),transparent 58%),radial-gradient(760px 460px at 86% 6%,rgba(56,189,248,.16),transparent 55%),rgba(3,10,12,.74);backdrop-filter:blur(11px) saturate(1.2)}",
+      "body.dark .fc-sheet.fcai,body.v3-dark .fc-sheet.fcai{position:relative;--panel:#102a2f;--ink:#e9f6f3;--slate:#8fb0ab;--line:rgba(94,234,212,.16);--fc-accent:#5eead4;max-width:660px;color:#e9f6f3;background:linear-gradient(180deg,#0a191d,#081419 55%,#060f14);box-shadow:0 40px 120px -30px rgba(0,0,0,.85),0 0 0 1px rgba(94,234,212,.09)}",
+      "body.dark .fc-sheet.fcai::before,body.v3-dark .fc-sheet.fcai::before{content:'';position:absolute;left:0;right:0;top:0;height:1px;background:linear-gradient(90deg,transparent,rgba(94,234,212,.75),rgba(56,189,248,.6),transparent);z-index:3}",
+      "body.dark .fc-sheet.fcai .fc-hd,body.v3-dark .fc-sheet.fcai .fc-hd{background:linear-gradient(135deg,rgba(11,38,38,.94),rgba(7,22,27,.94));backdrop-filter:blur(14px);border-bottom:1px solid rgba(94,234,212,.16);box-shadow:0 10px 34px -20px rgba(0,0,0,.9)}",
+      "body.dark .fc-sheet.fcai .fc-hd b,body.v3-dark .fc-sheet.fcai .fc-hd b{background:linear-gradient(90deg,#5eead4,#38bdf8);-webkit-background-clip:text;background-clip:text;color:transparent;letter-spacing:.3px}",
+      "body.dark .fc-sheet.fcai .fc-hd .fc-x,body.v3-dark .fc-sheet.fcai .fc-hd .fc-x{background:rgba(94,234,212,.14);color:#bff3ea}body.dark .fc-sheet.fcai .fc-hd .fc-x:hover,body.v3-dark .fc-sheet.fcai .fc-hd .fc-x:hover{background:rgba(94,234,212,.26)}",
+      "body.dark .fc-sheet.fcai .fc-hd-logo,body.v3-dark .fc-sheet.fcai .fc-hd-logo{filter:drop-shadow(0 0 6px rgba(94,234,212,.6))}",
+      "body.dark .fc-sheet.fcai .fc-row,body.dark .fc-sheet.fcai .fc-act,body.dark .fc-sheet.fcai .fc-cm,body.dark .fc-sheet.fcai .fc-cc,body.v3-dark .fc-sheet.fcai .fc-row,body.v3-dark .fc-sheet.fcai .fc-act,body.v3-dark .fc-sheet.fcai .fc-cm,body.v3-dark .fc-sheet.fcai .fc-cc{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));backdrop-filter:blur(10px);border:1px solid rgba(94,234,212,.14);box-shadow:0 18px 46px -30px rgba(0,0,0,.85),inset 0 1px 0 rgba(255,255,255,.05);border-radius:16px}",
+      "body.dark .fc-sheet.fcai .fc-row:hover,body.dark .fc-sheet.fcai .fc-act:hover,body.v3-dark .fc-sheet.fcai .fc-row:hover,body.v3-dark .fc-sheet.fcai .fc-act:hover{border-color:rgba(94,234,212,.36);box-shadow:0 24px 54px -26px rgba(20,184,166,.45),inset 0 1px 0 rgba(255,255,255,.07);transform:translateY(-2px)}",
+      "body.dark .fc-sheet.fcai .fc-cc>div:first-child,body.v3-dark .fc-sheet.fcai .fc-cc>div:first-child{text-shadow:0 0 18px rgba(94,234,212,.5)}",
+      "body.dark .fc-sheet.fcai .fc-hero2,body.v3-dark .fc-sheet.fcai .fc-hero2{background:linear-gradient(180deg,rgba(20,46,50,.72),rgba(12,31,35,.72));border-color:rgba(94,234,212,.16);box-shadow:0 18px 46px -30px rgba(0,0,0,.8)}",
+      "body.dark .fc-sheet.fcai .fc-btn,body.v3-dark .fc-sheet.fcai .fc-btn{background:linear-gradient(135deg,#22d3bf,#0891b2);border:1px solid rgba(94,234,212,.45);box-shadow:0 16px 36px -14px rgba(20,184,166,.85),inset 0 1px 0 rgba(255,255,255,.22);color:#04181a;font-weight:850;letter-spacing:.2px;border-radius:14px;transition:transform .12s,box-shadow .25s,filter .2s}",
+      "body.dark .fc-sheet.fcai .fc-btn:hover,body.v3-dark .fc-sheet.fcai .fc-btn:hover{filter:brightness(1.08);box-shadow:0 20px 44px -12px rgba(34,211,191,.95)}body.dark .fc-sheet.fcai .fc-btn:active,body.v3-dark .fc-sheet.fcai .fc-btn:active{transform:translateY(1px) scale(.99)}",
+      "body.dark .fc-sheet.fcai .fc-btn.sec,body.v3-dark .fc-sheet.fcai .fc-btn.sec{background:rgba(94,234,212,.07);color:#8ef0df;border:1px solid rgba(94,234,212,.38);box-shadow:none}",
+      "body.dark .fc-sheet.fcai .fc-field input,body.dark .fc-sheet.fcai .fc-field select,body.dark .fc-sheet.fcai .fc-ta,body.dark .fc-sheet.fcai input,body.dark .fc-sheet.fcai select,body.dark .fc-sheet.fcai textarea,body.v3-dark .fc-sheet.fcai .fc-field input,body.v3-dark .fc-sheet.fcai .fc-field select,body.v3-dark .fc-sheet.fcai .fc-ta,body.v3-dark .fc-sheet.fcai input,body.v3-dark .fc-sheet.fcai select,body.v3-dark .fc-sheet.fcai textarea{background:rgba(6,20,24,.72);border:1px solid rgba(94,234,212,.22);color:#e9f6f3;border-radius:12px}",
+      "body.dark .fc-sheet.fcai .fc-field input:focus,body.dark .fc-sheet.fcai select:focus,body.dark .fc-sheet.fcai textarea:focus,body.v3-dark .fc-sheet.fcai .fc-field input:focus,body.v3-dark .fc-sheet.fcai select:focus,body.v3-dark .fc-sheet.fcai textarea:focus{outline:none;border-color:rgba(94,234,212,.6);box-shadow:0 0 0 3px rgba(94,234,212,.16)}",
+      "body.dark .fc-sheet.fcai .fc-field label,body.v3-dark .fc-sheet.fcai .fc-field label{color:#bcd6d1}body.dark .fc-sheet.fcai .fc-empty,body.v3-dark .fc-sheet.fcai .fc-empty{color:#82a09b}",
+      "body.dark .fc-sheet.fcai .fc-tmpl,body.v3-dark .fc-sheet.fcai .fc-tmpl{background:rgba(94,234,212,.06);border:1px solid rgba(94,234,212,.22);color:#bff3ea}",
+      "body.dark .fc-sheet.fcai .fc-ai-draft,body.v3-dark .fc-sheet.fcai .fc-ai-draft{border-color:rgba(94,234,212,.5);color:#8ef0df;background:rgba(94,234,212,.06)}",
       ".mai-hero{background:linear-gradient(135deg,#0e7d70,#0b544c);box-shadow:0 14px 34px -14px rgba(14,110,99,.7)}",
-      ".fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
+      "body.dark .fc-sheet.fcai .mai-hero,body.v3-dark .fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
       ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
       ".mai-dot{animation:maiPulse 2.4s ease-out infinite}"
     ].join("");
@@ -316,7 +318,7 @@
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
-      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: HEART_SVG + '<span style="font-weight:800">MAITRI dashboard</span>' }));
+      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: HEART_SVG + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
       body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
       if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
@@ -915,7 +917,7 @@
     return null;
   }
 
-  // ---- MAITRI (Multimodal Autonomous Intelligence for Treatment & Recovery Integration) -------------
+  // ---- MAiTRI (Medical Adaptive Intelligence for Treatment & Recovery Integration) -------------
   // Branded AI-recovery-companion dashboard inside FollowCare: at-a-glance recovery metrics, the red-flag
   // triage list, voice-calling status, and a jump to voice/escalation settings. Reuses the FollowCare API,
   // stat components and escalation palette so it stays one design language. No new endpoint, no new script.
@@ -927,21 +929,19 @@
   }
   function maitriHero(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled);
-    var win = sv ? maitriWindows(sv.voice) : "";
-    var wrap = h("div", { "class": "mai-hero", style: "border-radius:18px;padding:18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden" });
+    var wrap = h("div", { "class": "mai-hero", style: "border-radius:20px;padding:22px 18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
     wrap.innerHTML =
       '<div class="mai-aura"></div>' +
+      '<div style="position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
+        '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
       '<div style="position:relative;z-index:1">' +
-        '<div style="display:flex;align-items:center;gap:11px">' +
-          '<div style="width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.2)">' + HEART_SVG + '</div>' +
-          '<div style="min-width:0"><div style="font-size:26px;font-weight:900;letter-spacing:1.5px;line-height:1;text-shadow:0 0 22px rgba(94,234,212,.55)">MAITRI</div>' +
-            '<div style="font-size:11px;opacity:.9;margin-top:3px;font-weight:600;letter-spacing:.3px">AI Recovery Companion</div></div>' +
-          '<div style="margin-left:auto;display:flex;align-items:center;gap:7px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:6px 11px;border-radius:999px;font-size:11.5px;font-weight:800;white-space:nowrap;border:1px solid rgba(255,255,255,.2)">' +
-            '<span class="mai-dot" style="width:8px;height:8px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
-        '</div>' +
-        '<div style="font-size:12px;opacity:.94;margin-top:13px;line-height:1.5;letter-spacing:.2px">Multimodal Autonomous Intelligence for Treatment &amp; Recovery Integration</div>' +
-        (win ? '<div style="font-size:11.5px;opacity:.82;margin-top:9px">Call windows ' + win + '</div>' : '') +
-      '</div>';
+        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:88px;height:88px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
+        '<div style="font-family:\'Space Grotesk\',Inter,system-ui,sans-serif;font-weight:700;font-size:33px;letter-spacing:2px;line-height:1;text-shadow:0 2px 20px rgba(94,234,212,.5)">MA<span style="color:#5eead4;text-transform:lowercase">i</span>TRI</div>' +
+        '<div style="font-size:11px;opacity:.92;margin-top:9px;line-height:1.5;letter-spacing:.2px">Medical Adaptive Intelligence for Treatment &amp; Recovery Integration</div>' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
+          '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
+      '</div>' +
+      '<div style="position:absolute;right:12px;bottom:8px;z-index:1;font-size:9px;font-weight:800;letter-spacing:.6px;color:rgba(233,246,243,.34);text-transform:uppercase">◈ StewardMD</div>';
     return wrap;
   }
   function maitriStatus(sv) {
@@ -962,7 +962,7 @@
     body.appendChild(h("button", { "class": "fc-btn sec", onclick: function () { renderDashboard(body); }, text: "‹ Back" }));
     var host = h("div"); body.appendChild(host);
     host.appendChild(maitriHero(null));
-    host.appendChild(h("div", { "class": "fc-empty", text: "Loading MAITRI…" }));
+    host.appendChild(h("div", { "class": "fc-empty", text: "Loading MAiTRI…" }));
     Promise.all([
       API.episodes().catch(function () { return { body: {} }; }),
       API.voiceSettingsGet().catch(function () { return { body: {} }; })
@@ -984,7 +984,7 @@
       host.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
     }).catch(function () {
       host.innerHTML = ""; host.appendChild(maitriHero(null));
-      host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAITRI. Check your connection." }));
+      host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAiTRI. Check your connection." }));
     });
   }
   function maitri() { if (!enabled()) { toast("FollowCare is not enabled."); return; } withReady(shell(), renderMaitri); }
