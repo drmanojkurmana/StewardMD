@@ -64,87 +64,68 @@ const { L } = load();
   ok("available() false on the web PWA", web.L.available() === false);
 }
 
-// ── prompt builder ──
+// ── prompt builder: UNGROUNDED BY DESIGN ──
+// The on-device engine answers from the model's own weights and must not touch StewardMD data.
+// Grounding was 94% of time-to-first-word (1799 tok -> 130 s prefill on a Pixel 9) AND it caused a
+// wrong answer when retrieval missed (amoebic chunks for a pyogenic question). KB only / MaiK Cloud
+// remain the grounded engines.
 {
-  ok("no package → empty prompt", L.buildPrompt(null) === "");
+  ok("no package -> empty prompt", L.buildPrompt(null) === "");
 
   const pkg = {
-    question: "First-line treatment for febrile neutropenia?",
-    grounding: [{
-      name: "Febrile neutropenia", diseaseId: "fn",
-      knowledge: [
-        { section: "management", text: "Start piperacillin-tazobactam 4.5 g IV q6h within one hour.", source: { ref: "IDSA 2018", page: "e56" } },
-        { section: "workup", text: "Blood cultures from two sites before antibiotics." }
-      ]
-    }],
-    retrieved: [{ section: "escalation", diseaseId: "fn", text: "Add vancomycin for suspected line infection." }],
-    treatment: { default: { tier: "empiric", line: "Pip-tazo monotherapy", source: "GIMSR HIC-3e", steps: ["Review at 48h", "De-escalate on cultures"] } },
-    sources: [{ n: 1, title: "IDSA 2018" }]
+    question: "Empiric antibiotic for pyogenic liver abscess in an adult?",
+    grounding: [{ name: "Amoebic Liver Abscess", diseaseId: "AMOEBIC_LIVER_ABSCESS",
+                  knowledge: [{ section: "management", text: "Metronidazole 750 mg TDS for 7-10 days.", source: { ref: "Harrison 22e" } }] }],
+    retrieved: [{ section: "escalation", diseaseId: "OTHER", text: "Add vancomycin for line infection." }],
+    treatment: { default: { tier: "empiric", line: "Metronidazole then paromomycin", source: "Harrison", steps: ["step one"] } },
+    sources: [{ n: 1, title: "Harrison 22e" }],
+    topicMatch: { confident: false, match: "fallback" }
   };
   const p = L.buildPrompt(pkg);
-  ok("prompt includes the knowledge header", /RETRIEVED STEWARDMD KNOWLEDGE/.test(p));
-  ok("prompt includes grounding text", /piperacillin-tazobactam 4\.5 g/.test(p));
-  ok("prompt cites the grounding source", /IDSA 2018/.test(p));
-  ok("prompt includes retrieved chunks", /Add vancomycin/.test(p));
-  ok("prompt includes treatment resolution", /TREATMENT RESOLUTION/.test(p) && /Pip-tazo monotherapy/.test(p));
-  ok("prompt includes treatment steps", /De-escalate on cultures/.test(p));
-  ok("question is present", /First-line treatment for febrile neutropenia/.test(p));
-  ok("question comes LAST (models attend to the end)", p.lastIndexOf("=== QUESTION ===") > p.lastIndexOf("TREATMENT RESOLUTION"));
 
-  // de-duplication across grounding and retrieved
-  const dup = {
-    question: "q",
-    grounding: [{ name: "x", knowledge: [{ section: "a", text: "Exactly the same sentence appears twice here." }] }],
-    retrieved: [{ section: "b", text: "Exactly the same sentence appears twice here." }]
-  };
-  const dp = L.buildPrompt(dup);
-  ok("duplicate chunk text emitted once", (dp.match(/Exactly the same sentence/g) || []).length === 1);
+  ok("prompt is ONLY the question", p === pkg.question);
+  ok("no KB grounding text leaks in", !/Metronidazole 750 mg/.test(p));
+  ok("no retrieved chunks leak in", !/vancomycin for line infection/.test(p));
+  ok("no treatment resolution leaks in", !/paromomycin/.test(p));
+  ok("no StewardMD headers at all", !/RETRIEVED|STEWARDMD|TREATMENT RESOLUTION|primary source/i.test(p));
+  ok("no source refs leak in", !/Harrison/.test(p));
+  ok("prompt stays tiny (this IS the latency)", p.length < 250);
 
-  // conversation history for bare follow-ups
+  // conversation history IS kept - it is the clinician's own turns, not a StewardMD resource
   const hist = L.buildPrompt({ question: "and the dose?", history: [
     { role: "user", text: "meropenem in meningitis" }, { role: "assistant", text: "Meropenem is used for..." }] });
-  ok("history included", /RECENT CONVERSATION/.test(hist) && /meropenem in meningitis/.test(hist));
+  ok("history kept so bare follow-ups work", /meropenem in meningitis/.test(hist) && /and the dose\?/.test(hist));
   ok("history labels the speakers", /Doctor: /.test(hist) && /MaiK: /.test(hist));
+  ok("history is capped", L.HISTORY_TURNS <= 3);
+  const longHist = L.buildPrompt({ question: "q", history: Array.from({ length: 20 }, (_, i) => ({ role: "user", text: "turn " + i })) });
+  ok("long history is truncated, not sent whole", !/turn 0\b/.test(longHist) && /turn 19/.test(longHist));
 
-  // empty package still yields a usable instruction rather than a bare prompt
-  const bare = L.buildPrompt({});
-  ok("packageless prompt still asks for something", /QUESTION/.test(bare) && bare.length > 20);
+  // no question at all still yields something usable
+  ok("packageless prompt still asks for something", L.buildPrompt({}).length > 10);
+
+  ok("system prompt makes no promise about retrieved knowledge",
+     !/RETRIEVED|knowledge base|grounding/i.test(L.SYSTEM));
+  ok("system prompt stays terse", L.SYSTEM.length < 500);
 }
 
-// ── low-confidence retrieval must NOT be labelled "primary source" ──
-// Real failure this prevents: "pyogenic liver abscess" resolves to LIVER_ABSCESS by FALLBACK while
-// AMOEBIC_LIVER_ABSCESS is an exact match, so the model was fed amoebic chunks under a header
-// telling it they were authoritative - and answered metronidazole for a pyogenic abscess.
+// ── an ungrounded answer must NOT claim StewardMD citations ──
 {
-  const g = { question: "pyogenic liver abscess?", grounding: [{ name: "Liver Abscess", knowledge: [{ section: "management", text: "Metronidazole 750 mg TDS for amoebic liver abscess." }] }] };
+  const { L: L2 } = load();
+  const r = await L2.answer({ question: "x", sources: [{ n: 1, title: "Harrison 22e" }] }, null, null);
+  ok("sources are empty - nothing was cited because nothing was read", Array.isArray(r.sources) && r.sources.length === 0);
+  ok("result flags itself ungrounded", r.grounded === false);
 
-  const confident = L.buildPrompt({ ...g, topicMatch: { confident: true, match: "exact" } });
-  ok("confident match keeps the primary-source header", /RETRIEVED STEWARDMD KNOWLEDGE \(primary source\)/.test(confident));
-
-  for (const weak of [{ confident: false }, { match: "fallback" }, { matched: false }]) {
-    const p2 = L.buildPrompt({ ...g, topicMatch: weak });
-    ok("weak match (" + JSON.stringify(weak) + ") is NOT called primary source", !/primary source/.test(p2));
-    ok("weak match (" + JSON.stringify(weak) + ") warns it may be a different condition", /DIFFERENT condition/.test(p2));
-    ok("weak match (" + JSON.stringify(weak) + ") tells the model to prefer established medicine", /established medicine/.test(p2));
-  }
-
-  // no topicMatch at all -> treat as confident (the old behaviour), so nothing regresses
-  ok("absent topicMatch keeps the primary-source header", /primary source/.test(L.buildPrompt(g)));
-}
-
-// ── the budget must hold, or llama.cpp refuses the answer ──
-{
-  const huge = {
-    question: "what now?",
-    grounding: [{ name: "big", knowledge: Array.from({ length: 400 }, (_, i) => ({ section: "s" + i, text: "x".repeat(3000) + i })) }],
-    retrieved: Array.from({ length: 400 }, (_, i) => ({ section: "r", text: "y".repeat(3000) + i }))
-  };
-  const p = L.buildPrompt(huge);
-  ok("oversized package is clipped to the budget", p.length <= L.PROMPT_CHAR_BUDGET + 200);
-  // Prefill is ~94% of time-to-first-word and linear in prompt tokens, so this budget IS the latency.
-  ok("budget kept small enough to keep first-token latency sane", L.PROMPT_CHAR_BUDGET <= 3500);
-  ok("no single chunk exceeds the per-chunk clip",
-     !p.split("\n").some((line) => line.trim().startsWith("[") && line.length > 400));
+  // home.js renders citations from the PACKAGE (SMD_MaiK.sourceList(pkg)), not from the result, so
+  // the package's citation-bearing fields must be cleared or the UI shows borrowed sources.
+  const pkg2 = { question: "x", grounding: [{ name: "A", knowledge: [{ text: "t" }] }],
+                 retrieved: [{ text: "u" }], treatment: { default: { line: "l" } },
+                 sources: [{ n: 1, title: "Harrison 22e" }] };
+  await L2.answer(pkg2, null, null);
+  ok("package grounding cleared so the UI cannot cite it", pkg2.grounding.length === 0);
+  ok("package retrieved cleared", pkg2.retrieved.length === 0);
+  ok("package sources cleared", pkg2.sources.length === 0);
+  ok("package treatment removed", pkg2.treatment === undefined);
+  ok("result still names the model", /MedGemma/.test(r.model));
 }
 
 // ── streaming contract: onDelta gets ACCUMULATED text ──

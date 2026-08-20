@@ -251,7 +251,10 @@ function load(env = {}) {
   ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-local-v1" && opts[3].id === "local:maik-local-e2b");
   ok("picker: on-device rows badged OFFLINE", opts[2].badge === "OFFLINE");
   ok("picker: quant suffix stripped from the label", opts[2].label === "MedGemma 1.5 4B");
-  ok("picker: installed pack says it works offline", /works offline/.test(opts[2].sub));
+  ok("picker: installed pack promises speed and its own knowledge", /own knowledge/.test(opts[2].sub));
+  ok("picker: installed pack admits it can be wrong", /Can be wrong/i.test(opts[2].sub));
+  ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
+  ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
   ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[3].sub));
   ok("picker: uninstalled pack flagged needsDownload", opts[3].needsDownload === true && !opts[2].needsDownload);
 

@@ -214,15 +214,15 @@
     if (!gated) { localDesc = "Private beta. Unlock with an access code below, then download the model."; localDisabled = true; }
     else if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
     else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
-    else { localDesc = "Answers on this device with no network and no AI tokens. Beta quality."; }
+    else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
 
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Answer engine</div>' +
       '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
       opt("rag", "KB only", pill("Free", "#dcfce7", "#166534"),
-          "StewardMD knowledge base only. No AI tokens are ever used, and it works offline.", true, false) +
+          "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
-          "Full grounded clinical answers from StewardMD's secure AI. Uses AI tokens.", false, false) +
+          "Gemini, grounded in the StewardMD knowledge base. Uses AI tokens.", false, false) +
       opt("local", "On-device model", pill("Beta", "#e0e7ff", "#3730a3"),
           localDesc, false, localDisabled) +
       '</div>' +
@@ -409,8 +409,8 @@
    */
   function options() {
     var out = [
-      { id: "cloud", label: "MaiK Cloud", sub: "Best answers, uses AI tokens", badge: "PRO" },
-      { id: "rag", label: "KB only", sub: "StewardMD knowledge base, no tokens", badge: "FREE" }
+      { id: "cloud", label: "MaiK Cloud", sub: "Gemini, grounded in the StewardMD KB. Uses AI tokens.", badge: "PRO" },
+      { id: "rag", label: "KB only", sub: "StewardMD knowledge base, cited. No tokens, works offline.", badge: "FREE" }
     ];
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
@@ -419,7 +419,7 @@
         out.push({
           id: "local:" + pid, label: M.PACKS[pid].label.replace(/\s*\(Q4_K_M\)$/, ""),
           sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "% - will answer when ready"
-             : have ? "On this device, works offline"
+             : have ? "Fast, offline, from the model's own knowledge. Can be wrong."
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
           badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading,

@@ -19,30 +19,38 @@
 (function () {
   "use strict";
 
-  /* PROMPT SIZE IS THE LATENCY. Measured on a Pixel 9: an 8000-char package tokenised to 1799
-   * tokens and prefill alone took 130.5 s of a 138.5 s answer - 94% of the wait, before a single
-   * word appears. Prefill is linear in prompt tokens, so this budget IS the first-token latency.
+  /* UNGROUNDED BY DESIGN.
    *
-   * 3000 chars keeps the top-ranked grounding (which is what stops the model inventing regimens)
-   * while cutting prefill roughly 2.7x. CHUNK_CLIP drops too, so the budget buys more DISTINCT
-   * sources rather than more words from the same one - breadth matters more than verbosity for
-   * grounding, and it is cheaper per token.
+   * The on-device engine answers from MedGemma's OWN weights and touches no StewardMD data. That is
+   * the product decision, and it is what makes it fast: grounding was 94% of time-to-first-word on a
+   * Pixel 9 (1799 prompt tokens -> 130 s of prefill at a flat ~14 tok/s). A question-only prompt is
+   * ~100 tokens, so first token lands in seconds rather than a minute.
+   *
+   * It also removes a failure mode rather than adding one. When retrieval missed - "pyogenic liver
+   * abscess" resolves to LIVER_ABSCESS by FALLBACK while AMOEBIC_LIVER_ABSCESS is an exact match -
+   * the model was handed amoebic chunks labelled "primary source" and dutifully answered
+   * metronidazole for a pyogenic abscess. Grounding is only a safety net when retrieval is right;
+   * when it is wrong it is an amplifier pointed the wrong way.
+   *
+   * The division of labour is now explicit:
+   *   KB only    - StewardMD knowledge base, grounded, cited
+   *   MaiK Cloud - Gemini, grounded with the same KB package
+   *   On-device  - the model's own knowledge, fast, offline, CAN BE WRONG (accepted tradeoff)
+   *
+   * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
+   * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
    */
-  var PROMPT_CHAR_BUDGET = 3000;
-  var CHUNK_CLIP = 150;          // per-chunk characters
   var DEFAULT_PACK = "maik-local-v1";
+  var HISTORY_TURNS = 2;
+  var HISTORY_CLIP = 180;
 
-  // Short cousin of the server's SYSTEM prompt (functions/api/ai/[[path]].js). Deliberately terse:
-  // every token here is a token not available for evidence or answer at n_ctx 4096.
-  // Every token here is prefill on the critical path, so this is deliberately terse. Trimmed from
-  // ~175 tokens after measuring that prefill is 94% of time-to-first-word on a Pixel 9.
+  // Every token here is prefill on the critical path, so this is deliberately terse. No mention of
+  // retrieved knowledge - there is none.
   var SYSTEM =
     "You are MaiK, clinical decision support for doctors. Answer the question directly in markdown: " +
     "one-line bottom line, then short bullets. No preamble.\n" +
-    "Ground specifics in the RETRIEVED KNOWLEDGE where it applies; otherwise use established medicine.\n" +
-    "Ignore retrieved text about a different condition. Never invent a guideline number or citation.\n" +
     "Give standard adult doses; for weight-based, paediatric or high-alert drugs give the principle " +
-    "and range, not a made-up figure.";
+    "and range, not a made-up figure. Never invent a guideline number or a citation.";
 
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
@@ -50,86 +58,26 @@
 
   function clip(s, n) {
     s = String(s == null ? "" : s).replace(/\s+/g, " ").trim();
-    return s.length > n ? s.slice(0, n - 1) + "…" : s;
+    return s.length > n ? s.slice(0, n - 1) + "\u2026" : s;
   }
 
   /**
-   * Serialise the grounded package into a compact prompt. Mirrors the server's ordering (grounding
-   * first, then re-ranked retrieved, then treatment) with the same de-duplication, but on a budget.
+   * Question (plus a little conversation) only. The grounded package is deliberately IGNORED apart
+   * from its question and history - see the note above.
    */
   function buildPrompt(pkg) {
     if (!pkg) return "";
-    var L = [], used = 0, seen = {};
-    function push(line) {
-      if (used + line.length > PROMPT_CHAR_BUDGET) return false;
-      L.push(line); used += line.length + 1; return true;
-    }
-    // De-dup the same chunk appearing in both grounding and retrieved (pure budget savings).
-    function fresh(t) {
-      var k = String(t == null ? "" : t).slice(0, 90).toLowerCase().replace(/\s+/g, " ").trim();
-      if (!k || seen[k]) return false;
-      seen[k] = 1; return true;
-    }
-
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
-
-    // Recent conversation, if the caller supplied it — a bare follow-up ("and the dose?") is
-    // meaningless without it, and MaiK's follow-up continuity depends on this.
-    if (pkg.history && pkg.history.length) {
-      push("=== RECENT CONVERSATION ===");
-      pkg.history.slice(-4).forEach(function (h) {
-        push((h.role === "assistant" ? "MaiK: " : "Doctor: ") + clip(h.text || h.content, 260));
+    var L = [];
+    var hist = pkg.history || [];
+    if (hist.length) {
+      L.push("Recent conversation:");
+      hist.slice(-HISTORY_TURNS * 2).forEach(function (h) {
+        L.push((h.role === "assistant" ? "MaiK: " : "Doctor: ") + clip(h.text || h.content, HISTORY_CLIP));
       });
-      push("");
+      L.push("");
     }
-
-    /* Grounding header depends on how CONFIDENT the KB match was.
-     *
-     * Measured on a Pixel 9: asking for "pyogenic liver abscess" resolves to LIVER_ABSCESS with
-     * match:"fallback", confident:false, while "amoebic liver abscess" is an exact match. So the
-     * retrieved chunks were about the WRONG disease, and this header called them "primary source".
-     * A 4B model obeys that label - it answered "metronidazole ... for amoebic liver abscess" to a
-     * pyogenic question. Labelling low-confidence retrieval honestly is the difference between
-     * grounding and misleading.
-     */
-    var tm = pkg.topicMatch || {};
-    var weak = tm.confident === false || tm.match === "fallback" || tm.matched === false;
-    if (weak) {
-      push("=== POSSIBLY RELATED REFERENCE (the knowledge base had no confident match for this " +
-           "question - it may describe a DIFFERENT condition; ignore it unless it clearly applies, " +
-           "and answer from established medicine instead) ===");
-    } else {
-      push("=== RETRIEVED STEWARDMD KNOWLEDGE (primary source) ===");
-    }
-    (pkg.grounding || []).forEach(function (g) {
-      var lines = [];
-      (g.knowledge || []).forEach(function (c) {
-        if (!c || !c.text || !fresh(c.text)) return;
-        lines.push("  [" + (c.section || "kb") + "] " + clip(c.text, CHUNK_CLIP) +
-          (c.source && c.source.ref ? " (" + clip(c.source.ref, 60) + ")" : ""));
-      });
-      if (lines.length) {
-        push("* " + (g.name || g.diseaseId || "topic") + ":");
-        lines.forEach(push);
-      }
-    });
-    (pkg.retrieved || []).forEach(function (c) {
-      if (!c || !c.text || !fresh(c.text)) return;
-      push("  [" + (c.section || "kb") + "] " + (c.diseaseId ? c.diseaseId + ": " : "") + clip(c.text, CHUNK_CLIP));
-    });
-
-    var t = pkg.treatment;
-    if (t && t.default) {
-      push("");
-      push("=== TREATMENT RESOLUTION ===");
-      push("Default [" + (t.default.tier || "?") + "]: " + clip(t.default.line, 220) +
-        (t.default.source ? " (" + clip(t.default.source, 60) + ")" : ""));
-      (t.default.steps || []).slice(0, 5).forEach(function (s) { push("  - " + clip(s, 160)); });
-    }
-
-    push("");
-    push("=== QUESTION ===");
-    push(question || "Summarise the retrieved knowledge above for a clinician.");
+    L.push(question || "Give a brief clinical overview.");
     return L.join("\n");
   }
 
@@ -185,6 +133,19 @@
           }))
         : Promise.resolve(null);
 
+      /* STRIP the citation-bearing fields off the package before the answer renders.
+       *
+       * Returning sources:[] is not enough: home.js renders citations with
+       * SMD_MaiK.sourceList(pkg), which recomputes them from pkg.grounding / pkg.retrieved /
+       * pkg.treatment and ignores the result. So an ungrounded answer displayed "3 sources" from a
+       * KB it never read. In a clinical UI that is worse than a weak drug choice - it lends
+       * borrowed authority to the model's own guess. This engine read none of it, so none of it may
+       * be shown.
+       */
+      try {
+        if (pkg) { pkg.grounding = []; pkg.retrieved = []; pkg.sources = []; delete pkg.treatment; }
+      } catch (e) {}
+
       return attach.then(function (handle) {
         sub = handle;
         var pk = (models() && models().PACKS[packId]) || {};
@@ -199,7 +160,10 @@
         var text = (r && r.text) || acc || "";
         return {
           text: text,
-          sources: (pkg && pkg.sources) || [],
+          // ALWAYS empty: this answer used no StewardMD material, so attaching the package's
+          // citations would credit sources the model never saw. That is a lie in a clinical UI.
+          sources: [],
+          grounded: false,
           engine: "local",
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
           ms: (r && r.ms) || (Date.now() - t0)
@@ -258,8 +222,8 @@
   }
 
   var API = {
-    SYSTEM: SYSTEM, PROMPT_CHAR_BUDGET: PROMPT_CHAR_BUDGET, DEFAULT_PACK: DEFAULT_PACK,
-    buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
+    SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
+    HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
     warm: warm, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
