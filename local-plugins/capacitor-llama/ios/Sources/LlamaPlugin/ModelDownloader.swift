@@ -40,6 +40,31 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
 
     /// One background session for the app. The identifier must be stable so iOS can hand completed
     /// transfers back after a relaunch.
+    /// Reconnect to transfers that outlived the app.
+    ///
+    /// A background URLSession KEEPS RUNNING across app relaunches, but this object's `progress` and
+    /// `tasks` maps do not. Without adopting the live tasks, status() reports "none" after a
+    /// relaunch, the JS layer concludes nothing is in flight, and start() launches a SECOND download
+    /// of the same file - two concurrent transfers fighting over one destination, with the progress
+    /// jumping between them. Observed on device.
+    func adoptExistingTasks(_ done: (() -> Void)? = nil) {
+        session.getAllTasks { [weak self] tasks in
+            guard let self else { done?(); return }
+            self.lock.lock()
+            for t in tasks {
+                guard let name = t.taskDescription, let dt = t as? URLSessionDownloadTask else { continue }
+                self.tasks[name] = dt
+                let total = dt.countOfBytesExpectedToReceive
+                self.progress[name] = Progress(bytes: dt.countOfBytesReceived,
+                                               total: total > 0 ? total : -1,
+                                               state: dt.state == .running ? "running" : "pending",
+                                               error: nil)
+            }
+            self.lock.unlock()
+            done?()
+        }
+    }
+
     private lazy var session: URLSession = {
         let cfg = URLSessionConfiguration.background(withIdentifier: "in.stewardmd.llama.modeldownload")
         cfg.allowsExpensiveNetworkAccess = true        // no Wi-Fi-only gate
@@ -85,13 +110,19 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
     /// Start (or restart) a download. Returns the task identifier as a string, mirroring Android.
     func start(url: String, name: String) throws -> String {
         guard let u = URL(string: url) else { throw LlamaError(.badArguments, "bad url") }
-        // A partial file from a previous attempt must go: URLSession writes to its own temp file and
-        // moves on completion, so a stale destination would just be overwritten - but clearing it
-        // keeps sizeOf() honest while the download runs.
-        let dest = Self.pathFor(name)
-        if FileManager.default.fileExists(atPath: dest.path) {
-            try? FileManager.default.removeItem(at: dest)
+        // Never start a second transfer for a file that is already downloading. This is the guard
+        // that stops the double-download: the JS side can legitimately ask again after a relaunch,
+        // and the honest answer is "already running", not "here is another one".
+        lock.lock()
+        if let existing = tasks[name], existing.state == .running || existing.state == .suspended {
+            lock.unlock()
+            return String(existing.taskIdentifier)
         }
+        lock.unlock()
+        // Deliberately NOT deleting the destination here. URLSession writes to its own temp file and
+        // moves it into place on completion, so a stale destination is overwritten anyway - and
+        // deleting it meant a partially-verified file could vanish under a caller that was about to
+        // read its size.
         let task = session.downloadTask(with: u)
         task.taskDescription = name
         lock.lock()

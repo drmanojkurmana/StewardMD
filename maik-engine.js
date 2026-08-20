@@ -247,6 +247,17 @@
     return m < 60 ? m + " min left" : (m / 60).toFixed(1) + " h left";
   }
 
+  /* The primary action button. Extracted so live progress can re-render JUST this button.
+   * It has to: on device a row showed "0.3% of 2.83 GB ... 0.4 MB/s" while its button still read
+   * "Download", because live updates patched only the status text. Tapping that stale button is how
+   * a second download gets started. */
+  function actionBtnHTML(id, st, have) {
+    var label = st.downloading ? "Pause" : (have ? "Verify" : (st.frac > 0 ? "Resume" : "Download"));
+    var act = st.downloading ? "pause" : "download";
+    return '<button class="smd-nav-btn" data-me-model="' + act + '" data-me-id="' + id +
+      '" style="margin:0;flex:1">' + label + '</button>';
+  }
+
   function modelRowHTML() {
     var M = window.SMD_MAIK_MODELS;
     // Defensive: this renders inside the Settings panel, so a missing/older model module must
@@ -287,11 +298,12 @@
           '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span>' +
         '</button>' +
         '<div data-me-bar="' + id + '">' + bar + '</div>' +
-        '<div style="display:flex;gap:8px;margin-top:9px">' +
-          (st.downloading
-            ? '<button class="smd-nav-btn" data-me-model="pause" data-me-id="' + id + '" style="margin:0;flex:1">Pause</button>'
-            : '<button class="smd-nav-btn" data-me-model="download" data-me-id="' + id + '" style="margin:0;flex:1">' + (have ? "Verify" : (st.frac > 0 ? "Resume" : "Download")) + '</button>') +
-          (have || st.frac > 0 ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
+        '<div style="display:flex;gap:8px;margin-top:9px" data-me-actions="' + id + '">' +
+          actionBtnHTML(id, st, have) +
+          // No Delete while a transfer is running: a mis-tap there throws away a partial download
+          // AND cancels it. Pause first, then Delete appears.
+          (!st.downloading && (have || st.frac > 0)
+            ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
         '</div>' +
       '</div>';
     }).join("");
@@ -327,6 +339,20 @@
           ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
               '<div style="height:100%;width:' + (st.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63);transition:width .3s"></div></div>'
           : "";
+      }
+      // Keep the BUTTON honest too. A "Download" button on a downloading row is what produced a
+      // second, concurrent transfer when it was tapped.
+      var actEl = host.querySelector('[data-me-actions="' + id + '"]');
+      if (actEl) {
+        var have = M.installedCached(id);
+        var cur = actEl.querySelector("[data-me-model]");
+        var wantAct = st.downloading ? "pause" : "download";
+        if (!cur || cur.getAttribute("data-me-model") !== wantAct) {
+          var del = st.downloading ? "" :
+            ((have || st.frac > 0) ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "");
+          actEl.innerHTML = actionBtnHTML(id, st, have) + del;
+          wireSettings(actEl.parentNode || host);
+        }
       }
       // A finished or failed download changes which buttons belong here.
       if (!st.downloading) { var seg = (root && root.querySelector) ? root.querySelector(".me-seg") : null; if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, root); }

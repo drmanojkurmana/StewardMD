@@ -243,6 +243,8 @@ function load(env = {}) {
   ok("downloading: shows an ETA", /11 min left/.test(h));
   ok("downloading: renders a progress bar at the right width", /width:42\.1%/.test(h));
   ok("downloading: offers Pause, not Download", /data-me-model="pause"/.test(h) && !/data-me-model="download" data-me-id="maik-local-v1"/.test(h));
+  ok("downloading: no Delete next to Pause (avoids a mis-tap mid-transfer)", !/data-me-model="delete" data-me-id="maik-local-v1"/.test(h));
+  ok("action buttons have a live-update hook", /data-me-actions="maik-local-v1"/.test(h));
 }
 
 // a stopped download must invite resume, not restart

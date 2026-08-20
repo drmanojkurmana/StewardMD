@@ -41,6 +41,10 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
     private let engine = LlamaEngine()
 
     public override func load() {
+        // Re-attach to any model download that outlived the previous app launch, BEFORE the JS layer
+        // can ask about it. Otherwise status() says "none", JS starts a second transfer, and two
+        // downloads race for the same file.
+        ModelDownloader.shared.adoptExistingTasks()
         // Drop the model when we go to the background. iOS kills the largest-footprint suspended app
         // first, and a 2.5 GB mapping makes us that app. mmap keeps the reload cheap.
         NotificationCenter.default.addObserver(

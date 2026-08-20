@@ -31,9 +31,32 @@ final class ModelDownloader {
 
     static final String SUBDIR = "maik-models";
 
+    /**
+     * File name -> DownloadManager id for transfers we believe are in flight.
+     *
+     * WHY THIS EXISTS: without it, a second tap starts a SECOND download of the same file. Two
+     * transfers then race for one destination and the progress readout jumps between them - which is
+     * exactly what was observed on device. Hiding the button in the UI is not enough: the guard has
+     * to live here, where it cannot be bypassed by any UI mistake, a re-render, a stacked click
+     * listener, or an app relaunch.
+     *
+     * static so it survives the plugin object being recreated within a process.
+     */
+    private static final java.util.Map<String, Long> inFlight = new java.util.HashMap<>();
+
     private final Context ctx;
 
     ModelDownloader(Context ctx) { this.ctx = ctx; }
+
+    /** The live DownloadManager id for this file, or null if nothing is running. */
+    private synchronized Long liveId(String name) {
+        Long id = inFlight.get(name);
+        if (id == null) return null;
+        Status s = status(id);
+        if ("pending".equals(s.state) || "running".equals(s.state) || "paused".equals(s.state)) return id;
+        inFlight.remove(name);
+        return null;
+    }
 
     private DownloadManager dm() {
         return (DownloadManager) ctx.getSystemService(Context.DOWNLOAD_SERVICE);
@@ -50,9 +73,12 @@ final class ModelDownloader {
      * Enqueue a background download. Returns the DownloadManager id, which the JS side persists so
      * it can re-attach to a transfer that outlived the app.
      */
-    long start(String url, String name, String title) throws LlamaException {
+    synchronized long start(String url, String name, String title) throws LlamaException {
         DownloadManager m = dm();
         if (m == null) throw new LlamaException(LlamaErr.BAD_ARGUMENTS, "no download service");
+        // Already downloading? Hand back the SAME transfer instead of starting a rival one.
+        Long live = liveId(name);
+        if (live != null) return live;
         File dest = pathFor(name);
         // A partial file from a previous attempt must go: DownloadManager will not append to it, and
         // leaving it would make a fresh download fail or silently produce a short file.
@@ -66,7 +92,9 @@ final class ModelDownloader {
         req.setNotificationVisibility(DownloadManager.Request.VISIBILITY_VISIBLE_NOTIFY_COMPLETED);
         req.setDestinationInExternalFilesDir(ctx, null, SUBDIR + "/" + name);
         try {
-            return m.enqueue(req);
+            long id = m.enqueue(req);
+            inFlight.put(name, id);
+            return id;
         } catch (Throwable t) {
             throw new LlamaException(LlamaErr.MODEL_DOWNLOAD_FAILED, String.valueOf(t.getMessage()));
         }
@@ -113,9 +141,16 @@ final class ModelDownloader {
         return s;
     }
 
-    void cancel(long id) {
+    synchronized void cancel(long id) {
         DownloadManager m = dm();
         if (m != null) try { m.remove(id); } catch (Throwable ignore) {}
+        inFlight.values().remove(id);
+    }
+
+    /** Re-attach after an app relaunch: the id the OS is still carrying for this file, or -1. */
+    synchronized long liveIdFor(String name) {
+        Long id = liveId(name);
+        return id == null ? -1L : id;
     }
 
     boolean delete(String name) {

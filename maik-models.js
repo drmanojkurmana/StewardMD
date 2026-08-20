@@ -148,6 +148,42 @@
     for (var i = 0; i < _subs.length; i++) { try { _subs[i](id, st); } catch (e) {} }
   }
 
+  /**
+   * Re-attach the UI to any download the OS is still carrying.
+   *
+   * The native downloader survives app relaunch; this module's _state does not. Without this a
+   * transfer that is genuinely running reads as "Not downloaded" until the row is touched, which is
+   * both wrong and an invitation to start a second one. Called once at startup.
+   */
+  function resumeUiForBackgroundDownloads() {
+    var L = llama();
+    if (!isNative() || !L || !L.downloadStatus) return Promise.resolve(false);
+    var ids = Object.keys(PACKS);
+    return ids.reduce(function (chain, id) {
+      return chain.then(function (found) {
+        if (_state[id] && _state[id].downloading) return found;
+        var f = PACKS[id].files[0];
+        return L.downloadStatus({ id: lget(KEY_DLID + id) || "", name: f.name }).then(function (st) {
+          st = st || {};
+          var live = st.state === "running" || st.state === "pending" || st.state === "paused";
+          if (!live) return found;
+          // Adopt it: show real progress, and let ensure() re-attach rather than start a duplicate.
+          var total = f.bytes || st.total || 0;
+          _state[id] = {
+            downloading: st.state !== "paused", frac: total ? Math.min(1, (st.bytes || 0) / total) : 0,
+            bytes: st.bytes || 0, total: total, mbps: 0, etaS: null,
+            note: st.state === "paused" ? "Waiting for a connection" : "Downloading in the background",
+            err: null, done: false, background: true
+          };
+          emit(id);
+          // Keep polling so the UI keeps moving, and settle the marker when it finishes.
+          ensure(id, null).catch(function () {});
+          return true;
+        }).catch(function () { return found; });
+      });
+    }, Promise.resolve(false));
+  }
+
   /** Which pack the on-device engine should run. Defaults to the primary (MedGemma). */
   function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-local-v1"; }
   function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
@@ -483,8 +519,13 @@
     ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
     state: state, subscribe: subscribe,
     activePack: activePack, setActivePack: setActivePack,
+    resumeUiForBackgroundDownloads: resumeUiForBackgroundDownloads,
     _abToB64: abToB64
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
-  if (typeof window !== "undefined") window.SMD_MAIK_MODELS = API;
+  if (typeof window !== "undefined") {
+    window.SMD_MAIK_MODELS = API;
+    // Deferred so it never competes with first paint.
+    try { if (typeof setTimeout === "function") setTimeout(function () { resumeUiForBackgroundDownloads(); }, 3000); } catch (e) {}
+  }
 })();

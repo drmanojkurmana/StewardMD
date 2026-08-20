@@ -343,5 +343,44 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("pathFor asks the plugin on native", (await M.pathFor("maik-local-v1")) === "/ext/maik-models/m.gguf");
 }
 
+// ── the UI must re-attach to a transfer the OS is still carrying ──
+// The native downloader survives app relaunch; _state does not. Without this a running transfer
+// reads as "Not downloaded" until the row is touched - wrong, and an invitation to start a second.
+{
+  const SIZE = 2489894976;
+  const { M } = loadNative({ script: [
+    { state: "running", bytes: 6e8, total: SIZE, onDisk: 0 },
+    { state: "running", bytes: 12e8, total: SIZE, onDisk: 0 },
+    { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
+  ] });
+  const found = await M.resumeUiForBackgroundDownloads();
+  ok("finds the in-flight transfer", found === true);
+  const st = M.state("maik-local-v1");
+  ok("adopts it as downloading", st.downloading === true && st.background === true);
+  ok("shows real progress, not zero", st.bytes === 6e8 && st.frac > 0.2 && st.frac < 0.3);
+  ok("says it is a background transfer", /background/i.test(st.note));
+}
+
+// a paused transfer is adopted as waiting, not as running
+{
+  const SIZE = 2489894976;
+  const { M } = loadNative({ script: [{ state: "paused", bytes: 3e8, total: SIZE, onDisk: 0 }] });
+  await M.resumeUiForBackgroundDownloads();
+  const st = M.state("maik-local-v1");
+  // A paused transfer is still IN FLIGHT (the OS will resume it), so downloading stays true and the
+  // NOTE is what tells the clinician it is waiting. Keeping downloading=true also means the row
+  // shows Pause rather than Download, so it cannot be tapped into a duplicate.
+  ok("paused transfer is still tracked as in flight", st.downloading === true);
+  ok("paused transfer says it is waiting", /Waiting for a connection|Downloading in the background/i.test(st.note));
+}
+
+// nothing in flight -> no state invented
+{
+  const { M, calls } = loadNative({ script: [{ state: "none", onDisk: 0 }] });
+  const found = await M.resumeUiForBackgroundDownloads();
+  ok("no phantom state when nothing is running", found === false && M.state("maik-local-v1").downloading === false);
+  ok("did not start anything", calls.start === 0);
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

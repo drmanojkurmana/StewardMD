@@ -67,6 +67,10 @@ public class LlamaPlugin extends Plugin {
         if (name != null) {
             out.put("onDisk", downloader.sizeOf(name));
             out.put("path", downloader.pathFor(name).getAbsolutePath());
+            // Report the id the OS is still carrying, so a caller that lost its own copy (app
+            // relaunch, cleared JS state) adopts THIS transfer instead of starting a second.
+            long live = downloader.liveIdFor(name);
+            if (live >= 0) out.put("liveId", String.valueOf(live));
         }
         out.put("freeBytes", downloader.freeBytes());
         if (idStr == null) { call.resolve(out.put("state", "none")); return; }
