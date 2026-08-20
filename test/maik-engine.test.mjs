@@ -238,5 +238,19 @@ function load(env = {}) {
   ok("degrades safely when the model module is incomplete", (h.match(/data-me-opt="/g) || []).length === 3 && !/data-me-pack/.test(h));
 }
 
+// ── the section must be wired into the LIVE settings surface ──
+// sidebar-redesign.js sets window.SMD_SBR, which makes home.js's old Settings group stand down.
+// Wiring only home.js renders nothing on a real device (that is exactly what happened once).
+{
+  const sbr = src("sidebar-redesign.js");
+  ok("wired into sidebar-redesign advBody()", /SMD_MAIK_ENGINE\s*&&\s*SMD_MAIK_ENGINE\.settingsHTML/.test(sbr));
+  ok("wired into sidebar-redesign openSettingsPage()", /SMD_MAIK_ENGINE\.wireSettings\(ov\.querySelector/.test(sbr));
+  ok("sidebar-redesign is the superseding surface (sets SMD_SBR)", /window\.SMD_SBR\s*=\s*true/.test(sbr));
+  const home = src("home.js");
+  ok("legacy home.js seam kept as a fallback", /SMD_MAIK_ENGINE\.wireSettings\(setBody\)/.test(home));
+  const idx = src("index.html");
+  ok("all three modules ship in index.html", /maik-engine\.js/.test(idx) && /maik-models\.js/.test(idx) && /maik-local\.js/.test(idx));
+}
+
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

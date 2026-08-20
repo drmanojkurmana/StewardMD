@@ -233,6 +233,14 @@
         html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">MaiK Scribe · Voice models</div>' + SMD_VOICE.modelSettingsHTML() + "</div>";
       }
     } catch (e) {}
+    // MaiK answer engine (KB only / Cloud / On-device) + the on-device model pack manager.
+    // This is the ONLY live settings surface: home.js's old Settings group stands down when
+    // SMD_SBR is set, so wiring it there alone would render nothing.
+    try {
+      if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.settingsHTML) {
+        html += '<div class="smd-nav-row" style="display:block"><div class="sbr-tg-t" style="margin-bottom:6px">MaiK · Answers</div>' + SMD_MAIK_ENGINE.settingsHTML() + "</div>";
+      }
+    } catch (e) {}
     // Offline drug database (NATIVE + PRO only) — restored under Advanced. Hidden on web where the
     // plugin is a no-op stub (SMD_OFFLINEDB.open absent).
     try {
@@ -350,6 +358,7 @@
     // let the Image Engine + Voice wire their controls inside the page (same seams as the old block)
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
+    try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireSettings) SMD_MAIK_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     ov.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest("[data-sset=close]")) { closeSettingsPage(); return; }
