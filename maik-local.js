@@ -145,7 +145,7 @@
     return true;
   }
 
-  function buildPrompt(pkg) {
+  function buildPrompt(pkg, packId) {
     if (!pkg) return "";
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
@@ -158,7 +158,20 @@
       L.push("");
     }
     L.push(question || "Give a brief clinical overview.");
+    /* Suppress the base model's thinking mode when the pack asks for it.
+     *
+     * A Qwen3-family pack emits <think> blocks by default. At nPredict 768 a long reasoning trace can
+     * consume the entire budget, so the doctor gets a truncated thought and NO answer - and
+     * stripReasoning() then correctly returns "", which reads as the app failing. "/no_think" is the
+     * family's own switch and costs three tokens, which is far cheaper than the reasoning it prevents.
+     */
+    if (packId && noThinkPack(packId)) L.push("/no_think");
     return L.join("\n");
+  }
+
+  /** Does this pack's base model need its thinking mode switched off? Registry-driven, not hardcoded. */
+  function noThinkPack(id) {
+    try { var m = models(); return !!(m && m.PACKS[id] && m.PACKS[id].noThink); } catch (e) { return false; }
   }
 
   // ── model lifecycle ─────────────────────────────────────────────────────
@@ -202,7 +215,7 @@
     var sub = null;
 
     return ensureLoaded(packId).then(function () {
-      var prompt = buildPrompt(pkg);
+      var prompt = buildPrompt(pkg, packId);
       if (!prompt) return { error: "no-package" };
 
       // Stream tokens into the caller's typewriter. Accumulate: onDelta wants the full text so far.

@@ -46,7 +46,10 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
   const win = {
     Capacitor: { isNativePlatform: () => true, Plugins: noPlugin ? {} : { Llama } },
     SMD_MAIK_MODELS: {
-      PACKS: { "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 } },
+      PACKS: {
+        "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 },
+        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true }
+      },
       pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf"
     }
   };
@@ -205,6 +208,36 @@ const { L } = load();
   const { L: L2 } = load();
   const r = await L2.answer({ question: "x" }, null, () => { throw new Error("render blew up"); });
   ok("answer survives a throwing onDelta", r.text === "Hello world");
+}
+
+
+/* ── Thinking-mode suppression (MAiK Apex / Qwen3 base) ─────────────────────────────────────────
+ * A reasoning-capable base emits <think> blocks by default. At nPredict 768 a long trace can consume
+ * the whole budget, leaving a truncated thought and NO answer - and stripReasoning() then correctly
+ * returns "", which on screen reads as the app being broken. "/no_think" is the family's own switch.
+ * Driven off the pack registry, never hardcoded to a model name.
+ */
+{
+  const { L } = load();
+  const q = { question: "empiric antibiotic for pyogenic liver abscess" };
+
+  ok("a pack with noThink gets the switch appended", /\/no_think\s*$/.test(L.buildPrompt(q, "maik-apex")));
+  ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
+  ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
+  ok("an unknown pack id does not crash or inject", !/no_think/.test(L.buildPrompt(q, "nope")));
+  ok("the question still leads the prompt", /pyogenic liver abscess/.test(L.buildPrompt(q, "maik-apex")));
+
+  // The switch must not defeat the topic-bleed fix that came before it.
+  const hist = [{ role: "user", text: "Treatment of Fever" },
+                { role: "assistant", text: "Acetaminophen 650 mg to 1 g orally." }];
+  const p = L.buildPrompt({ question: "Polycystic Kidney Disease", history: hist }, "maik-apex");
+  ok("noThink does not reintroduce history on a new topic", !/fever|Acetaminophen/i.test(p));
+  const fu = L.buildPrompt({ question: "Side effects?", history: hist }, "maik-apex");
+  ok("noThink still allows history on a real follow-up", /Acetaminophen/.test(fu) && /no_think/.test(fu));
+
+  // stripReasoning is the backstop if the switch is ignored.
+  ok("a leaked qwen-style think block is still stripped",
+     L.stripReasoning("<think>weighing options</think>Pip-tazo 3.375 g IV q8h") === "Pip-tazo 3.375 g IV q8h");
 }
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

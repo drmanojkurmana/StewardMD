@@ -101,6 +101,19 @@
     "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
   ];
 
+  /* HARDWARE WARNING, shown before download AND at selection.
+   *
+   * These are 2.5 to 3.2 GB models held in memory while they answer. On a phone without the RAM and
+   * the AI accelerator for it, the app does not degrade gracefully - it stalls or the OS kills it. A
+   * clinician is entitled to know that BEFORE spending 3 GB of data, and again before switching the
+   * engine over to it, which is why the same text appears in both places.
+   *
+   * The device list is the owner's, kept verbatim rather than turned into a vague "recent flagship".
+   */
+  var DEVICE_SUPPORTED = "iPhone 18 Pro, 17 Pro, 16 Pro. Samsung Galaxy Fold 7, 6, 5 or S24, S25, S26 Ultra.";
+  var DEVICE_WARNING = "Built for flagship, AI-enabled phones: " + DEVICE_SUPPORTED +
+    " On any other phone this is at your own risk. It may hang or crash the phone.";
+
   var PACKS = {
     "maik-mxcore": {
       label: "MAiK MxCore",
@@ -160,6 +173,42 @@
         url: HF + "/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf?download=true",
         bytes: 3106738272,   // exact, HuggingFace API
         sha256: null         // UNVERIFIED
+      }]
+    },
+    /* FLAGSHIP tier. A medical fine-tune of Qwen3 4B - a newer, stronger base than the other three,
+     * which is the whole reason to carry a fourth option.
+     *
+     * WHY Q5_K_M AND NOT Q8_0: q8_0 exists at 4.69 GB and would score better, but a 4.69 GB mapping on
+     * an 8 GB iPhone is the wrong side of the memory limit (2.5 GB already needs the
+     * increased-memory-limit entitlement) and its decode is slower - which loses the "speed" half of
+     * the brief. Q5_K_M lands at 3.16 GB, the same footprint class as Horizon, which is already proven
+     * to load and run on both test phones. The -imat suffix is importance-matrix calibration: better
+     * quality per byte than a plain quant at the same size.
+     *
+     * THINKING MODE: Qwen3 emits <think> blocks by default. Left unchecked they eat the whole nPredict
+     * budget and the doctor gets reasoning with no answer, so `noThink` suppresses them at the prompt
+     * (see maik-local.js) and stripReasoning() is the backstop.
+     */
+    "maik-apex": {
+      label: "MAiK Apex",
+      actual: "MedPsy 4B (Q5_K_M, imatrix)",
+      tier: 4,
+      flagship: true,
+      noThink: true,
+      note: "Strongest reasoning. Flagship phones only, and the largest download.",
+      guide: {
+        speed: 1, medical: 3, general: 3,
+        bestFor: "Flagship phones, when you want the best on-device answer and can wait a little longer.",
+        why: "A medical fine-tune on a newer, stronger base than the other tiers, so it reasons better across both clinical and general questions.",
+        pick: "Best quality here, slowest of the four. On an older phone prefer MxCore."
+      },
+      nCtx: 4096,
+      nPredict: 768,          // more headroom: a reasoning-capable base spends tokens before answering
+      files: [{
+        name: "medpsy-4b-q5_k_m-imat.gguf",
+        url: HF + "/qvac/MedPsy-4B-GGUF/resolve/main/medpsy-4b-q5_k_m-imat.gguf?download=true",
+        bytes: 3156921120,   // exact: HuggingFace paths-info AND a live content-length check agree
+        sha256: "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868"   // lfs.oid from the HF API
       }]
     }
   };
@@ -673,7 +722,8 @@
   }
 
   var API = {
-    PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
+    PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
+    activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
     packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,

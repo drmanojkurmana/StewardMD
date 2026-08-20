@@ -55,17 +55,24 @@ function load(env = {}) {
           guide: { speed: 1, medical: 1, general: 3,
                    bestFor: "Broader reasoning and topics at the edges of clinical work.",
                    why: "A newer general-purpose base with wider world knowledge.",
-                   pick: "Not medically tuned. Prefer MxCore or Neural for clinical answers." } }
+                   pick: "Not medically tuned. Prefer MxCore or Neural for clinical answers." } },
+        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", tier: 4, nCtx: 4096,
+          flagship: true, noThink: true,
+          guide: { speed: 1, medical: 3, general: 3,
+                   bestFor: "Flagship phones, when you want the best on-device answer.",
+                   why: "A medical fine-tune on a newer, stronger base.",
+                   pick: "Best quality here, slowest of the four. On an older phone prefer MxCore." } }
       },
+      DEVICE_WARNING: "Built for flagship, AI-enabled phones: iPhone 18 Pro, 17 Pro, 16 Pro. Samsung Galaxy Fold 7, 6, 5 or S24, S25, S26 Ultra. On any other phone this is at your own risk. It may hang or crash the phone.",
       GUIDE_INTRO: [
         "Answers come from a model stored on your phone. No internet, no AI tokens.",
         "It answers from its own training, not from StewardMD's knowledge base, so there are no sources or citations and it can be wrong. Verify against local protocol.",
         "You can keep more than one downloaded and switch between them. Only the selected one runs.",
         "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
       ],
-      packIds: () => ["maik-mxcore", "maik-neural", "maik-horizon"],
+      packIds: () => ["maik-mxcore", "maik-neural", "maik-horizon", "maik-apex"],
       installedCached: (id) => installed && id === "maik-mxcore",
-      sizeLabel: (id) => (id === "maik-mxcore" ? "2.49 GB" : id === "maik-neural" ? "2.83 GB" : "3.11 GB"),
+      sizeLabel: (id) => (id === "maik-mxcore" ? "2.49 GB" : id === "maik-neural" ? "2.83 GB" : id === "maik-apex" ? "3.16 GB" : "3.11 GB"),
       totalBytes: () => 2489894976,
       state: (id) => env.state || { downloading: false, frac: installed && id === "maik-mxcore" ? 1 : 0, done: installed && id === "maik-mxcore", err: null },
       subscribe: () => () => {},
@@ -243,14 +250,14 @@ function load(env = {}) {
 {
   const { E } = load({ gate: true, runtime: true, models: true, pack: false });
   const h = E.settingsHTML();
-  ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 3);
+  ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 4);
   ok("model section: names the MAiK tiers, not the upstream models",
      /MAiK MxCore/.test(h) && /MAiK Horizon/.test(h) && !/MedGemma|Gemma 4/i.test(h));
   ok("model section: shows each size", /2\.49 GB/.test(h) && /3\.11 GB/.test(h));
   ok("model section: active pack is ticked", /data-me-pack="maik-mxcore" role="radio" aria-checked="true"/.test(h));
   ok("model section: inactive pack not ticked", /data-me-pack="maik-horizon" role="radio" aria-checked="false"/.test(h));
   ok("model section: per-pack download buttons carry the id", /data-me-model="download" data-me-id="maik-horizon"/.test(h));
-  ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 3);
+  ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 4);
   ok("model section: not-downloaded state is stated", /Not downloaded/.test(h));
 }
 
@@ -316,7 +323,7 @@ function load(env = {}) {
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
   const opts = E.options();
-  ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 5);
+  ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 6);
   ok("picker: cloud first (it is the default)", opts[0].id === "cloud" && /PRO/.test(opts[0].badge));
   ok("picker: KB-only row is free", opts[1].id === "rag" && /FREE/.test(opts[1].badge));
   ok("picker: on-device rows are namespaced per pack",
@@ -488,14 +495,48 @@ function load(env = {}) {
   ok("guide explains you can keep several and switch", /switch between them/i.test(h));
 
   // Ratings are comparative, not absolute - claiming otherwise would overstate a 4B.
-  ok("guide scopes its ratings to these three", /compare these three with each other, nothing else/i.test(h));
+  ok("guide scopes its ratings comparatively, not absolutely", /compare these options with each other, nothing else/i.test(h));
   ok("guide rates all three axes", /Speed/.test(h) && /Medical depth/.test(h) && /General knowledge/.test(h));
-  ok("guide gives the recommended order", /MAiK MxCore, then Neural, then Horizon/.test(h));
+  ok("guide tells a first-timer where to start and why", /Start with MAiK MxCore/.test(h) && /Apex on a flagship phone/.test(h));
   ok("guide tells a first-timer where to start", /install only one/i.test(h));
   ok("guide warns Horizon is not medically tuned", /Not medically tuned/i.test(h));
   ok("pips are labelled for assistive tech", /role="img" aria-label="Speed: \d of 3"/.test(h));
 }
 
+
+
+// ── Hardware warning, in every surface a clinician can commit from ─────────────────────────────
+// These are 2.5-3.2 GB models held in memory while answering. On a phone without the RAM and the AI
+// accelerator the app does not degrade gracefully, it stalls or gets killed. The owner asked for the
+// warning at BOTH download and selection, so it is asserted in both plus the guide.
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  const h = E.settingsHTML();
+
+  ok("warning shows in the download section", /Built for flagship, AI-enabled phones/.test(h));
+  ok("warning appears BEFORE the on-device model list, not after",
+     h.indexOf("Built for flagship") < h.indexOf('aria-label="On-device model"'));
+  ok("warning names the supported iPhones", /iPhone 18 Pro, 17 Pro, 16 Pro/.test(h));
+  ok("warning names the supported Samsungs", /Fold 7, 6, 5 or S24, S25, S26 Ultra/.test(h));
+  ok("warning states the risk plainly", /at your own risk/.test(h) && /hang or crash the phone/.test(h));
+  ok("warning is styled as a caution, not a footnote", /role="note"/.test(h));
+  ok("guide sheet repeats it under a plain question", /Will it run on my phone\?/.test(h));
+  ok("warning appears in both the section and the guide",
+     (h.match(/Built for flagship, AI-enabled phones/g) || []).length >= 2);
+  ok("no em-dash in the warning (app-facing text)", !/Built for flagship[^<]*\u2014/.test(h));
+
+  // Selection surface: the picker row itself must carry the hardware flag.
+  const opts = E.options();
+  const apex = opts.filter((o) => o.pack === "maik-apex")[0];
+  ok("picker exposes the flagship tier", !!apex);
+  ok("flagship tier is badged FLAGSHIP, not OFFLINE", apex.badge === "FLAGSHIP");
+  ok("flagship tier carries the warning text for the confirm step", /hang or crash/.test(apex.warn || ""));
+  ok("flagship flag is exposed to the picker", apex.flagship === true);
+  const mx = opts.filter((o) => o.pack === "maik-mxcore")[0];
+  ok("non-flagship tiers keep the OFFLINE badge", mx.badge === "OFFLINE" && mx.flagship === false);
+  ok("picker still never prints the upstream model name",
+     !/MedPsy|MedGemma|Gemma|Qwen/i.test(apex.label + " " + apex.sub));
+}
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

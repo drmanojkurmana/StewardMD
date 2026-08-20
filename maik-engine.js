@@ -318,10 +318,25 @@
     }).join("");
 
     return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-device model</div>' +
+      // ABOVE the list, not below it: the hardware warning has to be read before a 3 GB tap, not
+      // discovered afterwards. Same text is repeated at the moment of selection.
+      deviceWarnHTML() +
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
+  }
+
+  /** The hardware warning, styled as a caution rather than a note so it is not skimmed past. */
+  function deviceWarnHTML() {
+    var M = window.SMD_MAIK_MODELS;
+    var t = (M && M.DEVICE_WARNING) || "";
+    if (!t) return "";
+    return '<div role="note" style="display:flex;gap:8px;align-items:flex-start;border:1px solid var(--yellow-line,#f0d49b);' +
+      'background:var(--yellow-bg,#fdf2de);color:var(--yellow,#92620a);border-radius:12px;padding:10px 12px;margin:0 0 8px">' +
+      '<span aria-hidden="true" style="flex:0 0 auto;font:800 13px/1.4 var(--sans,system-ui)">!</span>' +
+      '<span style="font:600 12.5px/1.5 var(--sans,system-ui)">' + esc(t) + '</span>' +
+    '</div>';
   }
 
 
@@ -372,13 +387,17 @@
     }).join("");
 
     return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--card,#fff);padding:14px;margin-top:8px">' +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">Will it run on my phone?</div>' +
+      deviceWarnHTML() +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +
       '<ul style="margin:0 0 4px;padding-left:18px;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356)">' + intro + "</ul>" +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin:14px 0 0">Choosing a model</div>' +
-      '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these three with each other, nothing else.</div>' +
+      '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these options with each other, nothing else.</div>' +
       rows +
       '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
-        "Recommended order: MAiK MxCore, then Neural, then Horizon. Fastest, then strongest medical, then broadest general knowledge." +
+        "Start with MAiK MxCore: fastest, lightest, and enough for most questions. Neural for stronger " +
+        "medical detail, Horizon for broader general knowledge, Apex on a flagship phone when you want " +
+        "the best answer and can wait a little longer." +
       "</div>" +
     "</div>";
   }
@@ -538,7 +557,12 @@
              : have ? "On this device, works offline"
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
-          badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading,
+          // FLAGSHIP badge instead of OFFLINE for the heaviest tier, so the hardware requirement is
+          // visible in the picker row itself and not only in the guide.
+          badge: M.PACKS[pid].flagship ? "FLAGSHIP" : "OFFLINE",
+          flagship: !!M.PACKS[pid].flagship,
+          warn: M.DEVICE_WARNING || "",
+          pack: pid, needsDownload: !have && !st.downloading,
           requested: pendingPack() === pid
         });
       });

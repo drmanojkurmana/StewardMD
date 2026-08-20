@@ -88,7 +88,7 @@ function fakeModel(n) {
   ok("primary pack exact byte count", M.totalBytes("maik-mxcore") === 2489894976);
   ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
   ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
-  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon");
+  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon,maik-apex");
   ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);
   ok("Neural still fits the 8 GB iPhone budget", M.totalBytes("maik-neural") < 3.0e9);
   ok("Neural sha256 is explicitly null (unverified), not a guess", M.PACKS["maik-neural"].files[0].sha256 === null);
@@ -453,6 +453,46 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("a stalled transfer is named in the status note", /Stalled on a slow connection/.test(SRC));
   // The destructive option was deliberately NOT taken.
   ok("a stall never auto-restarts the transfer", !/restart/i.test(SRC.match(/stalledFor[\s\S]{0,600}/)[0]));
+}
+
+
+/* ── MAiK Apex, the flagship tier ───────────────────────────────────────────────────────────────
+ * Every figure here was verified against the live host before being written down, because a wrong
+ * size or hash silently breaks a 3 GB download - and this project has already shipped a wrong hash
+ * twice. bytes came from the HF paths-info API AND a live content-length HEAD (they agree); the
+ * sha256 is the API's lfs.oid; the URL was confirmed to answer 200, advertise accept-ranges, and
+ * start with the GGUF magic.
+ */
+{
+  const { M } = loadNative();
+  const p = M.PACKS["maik-apex"];
+  ok("Apex exists as a fourth tier", !!p && p.tier === 4);
+  ok("Apex is last in the recommended order",
+     M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon,maik-apex");
+  ok("Apex byte count is the exact verified value", M.totalBytes("maik-apex") === 3156921120);
+  ok("Apex carries a real sha256, not null",
+     /^[0-9a-f]{64}$/.test(p.files[0].sha256 || "") &&
+     p.files[0].sha256 === "68bd5e14cd87ff40bba5d08fbef2da9a6088b11aacab8466ef3f13a602e2d868");
+  ok("Apex is flagged flagship", p.flagship === true);
+  ok("Apex suppresses thinking mode", p.noThink === true);
+  ok("Apex gets extra output headroom for a reasoning base", p.nPredict > 512);
+  ok("Apex size label is honest", M.sizeLabel("maik-apex") === "3.16 GB");
+
+  // The q8_0 build exists at 4.69 GB and was deliberately NOT chosen: a mapping that large on an
+  // 8 GB iPhone is past the memory limit and decodes slower, which loses the speed half of the brief.
+  ok("Apex stays inside the footprint class already proven on device", M.totalBytes("maik-apex") < 3.3e9);
+  ok("Apex is the largest of the four",
+     M.packIds().every((id) => M.totalBytes(id) <= M.totalBytes("maik-apex")));
+
+  // No upstream model name may reach the UI - `actual` is for logs only.
+  ok("Apex label is a MAiK tier name", p.label === "MAiK Apex");
+  ok("Apex records its upstream model for logs", /MedPsy 4B/.test(p.actual));
+
+  // The guide must describe it, or a clinician has no basis to pick a 3.16 GB download.
+  ok("Apex has guide copy", !!(p.guide && p.guide.bestFor && p.guide.why && p.guide.pick));
+  ok("Apex guide names the flagship requirement", /[Ff]lagship/.test(p.guide.bestFor));
+  ok("Apex guide admits it is the slowest", /slowest/i.test(p.guide.pick));
+  ok("Apex guide points older phones elsewhere", /MxCore/.test(p.guide.pick));
 }
 
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
