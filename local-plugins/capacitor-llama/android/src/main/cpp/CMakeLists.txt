@@ -22,6 +22,19 @@ set(GGML_NATIVE          OFF CACHE BOOL "" FORCE)   # cross-compile: do not use 
 set(GGML_BUILD_TESTS     OFF CACHE BOOL "" FORCE)
 set(GGML_BUILD_EXAMPLES  OFF CACHE BOOL "" FORCE)
 
+# STATIC LINK — NOT optional, and not a size optimisation.
+#
+# capacitor-whisper builds whisper.cpp v1.9.1 and ships libggml.so, libggml-base.so and
+# libggml-cpu.so. A SHARED llama build emits .so files with the IDENTICAL names from a DIFFERENT
+# ggml version (llama.cpp b10502). Both plugins package into the same jniLibs directory in one APK,
+# so one silently overwrites the other and whichever consumer loses gets an ABI-mismatched ggml —
+# a runtime crash, not a build error.
+#
+# BUILD_SHARED_LIBS=OFF folds llama + ggml into libllama_jni.so, so this plugin ships exactly ONE
+# .so and cannot collide with whisper's. Do not flip this back without renaming every ggml target.
+set(BUILD_SHARED_LIBS    OFF CACHE BOOL "" FORCE)
+set(GGML_STATIC          ON  CACHE BOOL "" FORCE)
+
 add_subdirectory(llama-cpp)
 
 add_library(llama_jni SHARED llama_jni.cpp)

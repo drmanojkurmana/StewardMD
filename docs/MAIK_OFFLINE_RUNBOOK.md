@@ -45,6 +45,7 @@ Tap the download row again if it stops — it resumes from where it got to.
 | Prompt builder + streaming contract (`maik-local.js`) | **VERIFIED** — 38 unit tests |
 | HuggingFace serves Range + exact byte count | **VERIFIED** against the live URL (`206`, `content-range: .../2489894976`) |
 | Android native llama.cpp build | **VERIFIED** — compiles clean, NDK 27.2, arm64-v8a, 16 KB-aligned `.so` |
+| No ggml `.so` collision with capacitor-whisper | **VERIFIED** — clean static build emits ONE `.so`; filename overlap with whisper is empty |
 | iOS XCFramework min-OS matches the app | **VERIFIED** — `vtool` says `minos 16.4`, app is already 16.4 |
 | `www/` bundle assembles with the new files | **VERIFIED** |
 | **Swift code compiles** | **NOT VERIFIED** — no Xcode on this machine. Expect to fix small Swift errors. |
@@ -107,9 +108,14 @@ npx cap run android          # or ./gradlew assembleDebug
 Use `adb install -r` for reinstalls so the 2.49 GB model is not wiped (your documented gotcha).
 
 Two Android notes:
-- The native payload is **~49 MB** added to the arm64 APK (`libllama.so` alone is 38 MB, because
-  llama.cpp compiles every model architecture). Whisper only added ~6 MB. Trimming architectures is
+- The native payload is **~48 MB** added to the arm64 APK — one statically-linked `libllama_jni.so`
+  (llama.cpp compiles every model architecture). Whisper only added ~6 MB. Trimming architectures is
   a later optimisation, not a blocker.
+- **ggml is linked STATICALLY, deliberately.** capacitor-whisper ships `libggml.so`,
+  `libggml-base.so` and `libggml-cpu.so` from whisper.cpp v1.9.1. A shared llama build emits the
+  SAME THREE FILENAMES from llama.cpp b10502's different ggml. Both land in one APK's jniLibs, so one
+  silently overwrites the other and the loser gets an ABI-mismatched ggml — a runtime crash, not a
+  build error. `BUILD_SHARED_LIBS=OFF` folds everything into one `.so`. Do not flip it back.
 - Threads default to `min(4, cores/2)` — big cores only. Tensor G4 is 1×X4 + 3×A720 + 4×A520, and
   scheduling matmul onto the A520s makes generation slower, not faster.
 
@@ -135,6 +141,7 @@ Two Android notes:
 | Symptom | Likely cause |
 |---|---|
 | Simulator build fails to link | The b10502 XCFramework has **no simulator slice**. Build for the device. |
+| Whisper dictation crashes after adding this | ggml collision — check `BUILD_SHARED_LIBS=OFF` is still set in the plugin's CMakeLists. |
 | Swift compile errors | Expected — unverifiable here. The llama.cpp C API is imported directly; `LlamaEngine.swift` is where to look. |
 | Third option missing in Settings | Bypass not set, or the app is the web build (the plugin is native-only by design). |
 | `low-memory` on load | Reduce `nGpuLayers`, then `n_ctx`. |
