@@ -238,6 +238,51 @@ function load(env = {}) {
   ok("degrades safely when the model module is incomplete", (h.match(/data-me-opt="/g) || []).length === 3 && !/data-me-pack/.test(h));
 }
 
+// ── ChatGPT-style inline picker ──
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  const opts = E.options();
+  ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 4);
+  ok("picker: cloud first (it is the default)", opts[0].id === "cloud" && /PRO/.test(opts[0].badge));
+  ok("picker: KB-only row is free", opts[1].id === "rag" && /FREE/.test(opts[1].badge));
+  ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-local-v1" && opts[3].id === "local:maik-local-e2b");
+  ok("picker: on-device rows badged OFFLINE", opts[2].badge === "OFFLINE");
+  ok("picker: quant suffix stripped from the label", opts[2].label === "MedGemma 1.5 4B");
+  ok("picker: installed pack says it works offline", /works offline/.test(opts[2].sub));
+  ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[3].sub));
+  ok("picker: uninstalled pack flagged needsDownload", opts[3].needsDownload === true && !opts[2].needsDownload);
+
+  ok("picker: chip reflects cloud by default", E.chipLabel() === "MaiK Cloud");
+  ok("picker: currentOptionId is cloud by default", E.currentOptionId() === "cloud");
+  E.selectOption("local:maik-local-e2b");
+  ok("picker: selecting an on-device row sets engine AND pack", E.getPref() === "local");
+  ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-local-v1" || E.currentOptionId() === "local:maik-local-e2b");
+  E.selectOption("rag");
+  ok("picker: selecting KB only switches engine", E.getPref() === "rag" && E.chipLabel() === "KB only");
+  E.selectOption("cloud");
+  ok("picker: back to cloud", E.getPref() === "cloud");
+
+  const h = E.chipHTML();
+  ok("picker: chip markup has the id home.js wires", /id="maikModelChip"/.test(h));
+  ok("picker: chip has an accessible popup role", /aria-haspopup="listbox"/.test(h));
+  ok("picker: chip label is escaped into its own span", /id="maikModelChipLbl"/.test(h));
+}
+
+// on-device rows must NOT appear without the gate or the native runtime
+{
+  const nogate = load({ runtime: true, pack: true });
+  ok("picker: no on-device rows without the access gate", nogate.E.options().length === 2);
+  const nort = load({ gate: true, pack: true });
+  ok("picker: no on-device rows without the native plugin", nort.E.options().length === 2);
+}
+
+// the chip is mounted in the MaiK sheet header, not just defined
+{
+  const home = src("home.js");
+  ok("chip rendered in the MaiK header", /SMD_MAIK_ENGINE\.chipHTML\(\)/.test(home));
+  ok("chip wired when the sheet is built", /SMD_MAIK_ENGINE\.wireChip\(sheet\)/.test(home));
+}
+
 // ── the section must be wired into the LIVE settings surface ──
 // sidebar-redesign.js sets window.SMD_SBR, which makes home.js's old Settings group stand down.
 // Wiring only home.js renders nothing on a real device (that is exactly what happened once).

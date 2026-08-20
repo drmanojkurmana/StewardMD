@@ -355,12 +355,181 @@
     });
   }
 
+
+  /* ── ChatGPT-style inline model picker (MaiK sheet header) ──────────────────
+   * A chip next to the MaiK logo showing what will answer, tapping it opens a bottom sheet to
+   * switch. Same state as the Settings section (getPref/setPref + SMD_MAIK_MODELS.activePack), so
+   * the two surfaces can never disagree - this is a second VIEW, not a second source of truth.
+   *
+   * Options are flattened the way ChatGPT flattens them: the clinician picks a NAMED thing that
+   * answers, not an abstract "engine" and then a "model". Cloud and KB-only are one row each; every
+   * on-device pack is its own row.
+   */
+  function options() {
+    var out = [
+      { id: "cloud", label: "MaiK Cloud", sub: "Best answers, uses AI tokens", badge: "PRO" },
+      { id: "rag", label: "KB only", sub: "StewardMD knowledge base, no tokens", badge: "FREE" }
+    ];
+    var M = window.SMD_MAIK_MODELS;
+    if (M && M.PACKS && gateActive() && runtimeAvailable()) {
+      Object.keys(M.PACKS).forEach(function (pid) {
+        var st = M.state(pid), have = M.installedCached(pid);
+        out.push({
+          id: "local:" + pid, label: M.PACKS[pid].label.replace(/\s*\(Q4_K_M\)$/, ""),
+          sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "%"
+             : have ? "On this device, works offline"
+             : st.frac > 0 ? "Paused - tap to resume" : "Tap to download " + M.sizeLabel(pid),
+          badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading
+        });
+      });
+    }
+    return out;
+  }
+
+  /** Which option row is currently active. */
+  function currentOptionId() {
+    var p = getPref();
+    return p === "local" ? "local:" + activePack() : p;
+  }
+
+  /** Short label for the header chip. */
+  function chipLabel() {
+    var cur = currentOptionId();
+    var o = options().filter(function (x) { return x.id === cur; })[0];
+    if (o) return o.label;
+    return getPref() === "rag" ? "KB only" : "MaiK Cloud";
+  }
+
+  function chipHTML() {
+    return '<button type="button" id="maikModelChip" aria-haspopup="listbox" ' +
+      'style="display:flex;align-items:center;gap:5px;max-width:44%;padding:5px 9px;border-radius:999px;' +
+      'border:1px solid var(--mk-bd,#dbe3ee);background:var(--mk-soft,#f1f5f9);color:var(--mk-ink,#14202b);' +
+      'font:600 12px/1.1 var(--sans,system-ui);cursor:pointer;flex:0 0 auto;-webkit-tap-highlight-color:transparent">' +
+      '<span id="maikModelChipLbl" style="overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + esc(chipLabel()) + '</span>' +
+      '<span aria-hidden="true" style="opacity:.6;font-size:9px">\u25be</span></button>';
+  }
+
+  function esc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+    });
+  }
+
+  function syncChip() {
+    try {
+      var el = document.getElementById("maikModelChipLbl");
+      if (el) el.textContent = chipLabel();
+    } catch (e) {}
+  }
+
+  /** Apply an option row id ("cloud" | "rag" | "local:<packId>"). */
+  function selectOption(optId) {
+    if (optId.indexOf("local:") === 0) {
+      var pid = optId.slice(6);
+      var M = window.SMD_MAIK_MODELS;
+      if (M && M.setActivePack) M.setActivePack(pid);
+      setPref("local");
+    } else {
+      setPref(optId);
+    }
+    syncChip();
+    return currentOptionId();
+  }
+
+  var _pickerUnsub = null;
+  function closePicker() {
+    if (_pickerUnsub) { try { _pickerUnsub(); } catch (e) {} _pickerUnsub = null; }
+    var ov = document.getElementById("maikModelPicker");
+    if (ov && ov.parentNode) ov.parentNode.removeChild(ov);
+  }
+
+  function openPicker() {
+    closePicker();
+    var cur = currentOptionId();
+    var ov = document.createElement("div");
+    ov.id = "maikModelPicker";
+    ov.style.cssText = "position:fixed;inset:0;z-index:100000;display:flex;align-items:flex-end;background:rgba(11,17,22,.45)";
+
+    function rowsHTML() {
+      return options().map(function (o) {
+        var on = o.id === cur;
+        return '<button type="button" data-mk-pick="' + o.id + '" role="option" aria-selected="' + on + '" ' +
+          'style="display:flex;align-items:center;gap:12px;width:100%;text-align:left;cursor:pointer;border:0;' +
+          'background:' + (on ? "var(--mk-tsoft,#e6f4f1)" : "transparent") + ';padding:14px 16px;' +
+          'color:var(--mk-ink,#14202b);-webkit-tap-highlight-color:transparent">' +
+          '<span style="flex:1;min-width:0">' +
+            '<span style="display:flex;align-items:center;gap:7px;font:600 15px/1.25 var(--sans,system-ui)">' + esc(o.label) +
+              '<span style="font:700 9px/1 var(--sans,system-ui);background:var(--mk-bd,#e2e8f0);color:var(--mk-mut,#5a7184);border-radius:5px;padding:2px 5px">' + o.badge + '</span>' +
+            '</span>' +
+            '<span data-mk-sub="' + o.id + '" style="display:block;font:500 12px/1.4 var(--sans,system-ui);color:var(--mk-mut,#5a7184);margin-top:3px">' + esc(o.sub) + '</span>' +
+          '</span>' +
+          '<span aria-hidden="true" style="flex:0 0 auto;width:18px;text-align:center;color:var(--mk-teal,#0e6e63);font-size:15px;font-weight:800;opacity:' + (on ? "1" : "0") + '">\u2713</span>' +
+          '</button>';
+      }).join('<div style="height:1px;background:var(--mk-bd,#e2e8f0);margin-left:16px"></div>');
+    }
+
+    ov.innerHTML = '<div id="maikModelSheetInner" style="width:100%;background:var(--mk-bg,#fff);border-radius:18px 18px 0 0;padding:8px 0 max(14px,env(safe-area-inset-bottom));box-shadow:0 -10px 40px rgba(0,0,0,.28)">' +
+      '<div style="width:38px;height:4px;border-radius:2px;background:var(--mk-bd,#dbe3ee);margin:6px auto 10px"></div>' +
+      '<div style="font:700 13px/1.2 var(--sans,system-ui);color:var(--mk-mut,#5a7184);padding:0 16px 8px">Answer with</div>' +
+      '<div id="maikModelRows" role="listbox">' + rowsHTML() + '</div>' +
+      '</div>';
+    document.body.appendChild(ov);
+
+    // Live progress inside the picker, so a download started here shows movement without reopening.
+    try {
+      var M = window.SMD_MAIK_MODELS;
+      if (M && M.subscribe) {
+        _pickerUnsub = M.subscribe(function (pid) {
+          var opts = options();
+          for (var i = 0; i < opts.length; i++) {
+            var el = ov.querySelector('[data-mk-sub="' + opts[i].id + '"]');
+            if (el) el.textContent = opts[i].sub;
+          }
+          syncChip();
+        });
+      }
+    } catch (e) {}
+
+    ov.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest("[data-mk-pick]") : null;
+      if (!btn) { if (e.target === ov) closePicker(); return; }
+      var optId = btn.getAttribute("data-mk-pick");
+      var chosen = options().filter(function (x) { return x.id === optId; })[0];
+      selectOption(optId);
+      // Picking an on-device model that is not downloaded starts the download right here.
+      if (chosen && chosen.needsDownload && chosen.pack) {
+        var M2 = window.SMD_MAIK_MODELS;
+        if (M2 && M2.ensure) {
+          M2.ensure(chosen.pack, null).then(function () { toast("On-device model ready."); syncChip(); })
+            .catch(function (err) { if (String((err && err.message) || err) !== "cancelled") toast("Download stopped. Tap the model again to resume."); });
+        }
+        cur = currentOptionId();
+        var rows = ov.querySelector("#maikModelRows");
+        if (rows) rows.innerHTML = rowsHTML();
+        return;   // keep the sheet open so the clinician sees the download start
+      }
+      closePicker();
+    });
+  }
+
+  /** Mount the header chip. Called by home.js after the MaiK sheet is built. */
+  function wireChip(root) {
+    var host = (root || document).querySelector ? (root || document) : document;
+    var chip = host.querySelector("#maikModelChip");
+    if (!chip || chip.getAttribute("data-mk-wired")) return;
+    chip.setAttribute("data-mk-wired", "1");
+    chip.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openPicker(); });
+    syncChip();
+  }
+
   var API = {
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, XA_FEATURE: XA_FEATURE, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
     kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,
-    settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML
+    settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
+    options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
+    selectOption: selectOption, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") { window.SMD_MAIK_ENGINE = API; installWhenReady(); }
