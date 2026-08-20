@@ -54,6 +54,9 @@
    *
    *   MedGemma 1.5 4B Q4_K_M  2.49 GB  PRIMARY. Medical-tuned and the only candidate that fits
    *                                    the 8 GB device with comfortable headroom.
+   *   MedGemma 1.5 4B Q5_K_M  2.83 GB  Same weights at higher precision. The cheapest real quality
+   *                                    upgrade (+340 MB); decode is bandwidth-bound so expect ~12%
+   *                                    slower. Still fits the 8 GB iPhone.
    *   Gemma 4 E2B Q4_K_M      3.11 GB  Comparison pack. Newer general base, official QAT lineage.
    *                                    Feasible only with the increased-memory-limit entitlement.
    *
@@ -77,6 +80,18 @@
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q4_K_M.gguf?download=true",
         bytes: 2489894976,   // exact, from the HuggingFace API 2026-08-20
         sha256: "49bfba86b0f3607d250fba3489299a46d4f83e657da5ad87bca08b2948abda1a"   // VERIFIED off-device
+      }]
+    },
+    "maik-local-v1-q5": {
+      label: "MedGemma 1.5 4B (Q5_K_M)",
+      note: "Same model, higher precision. Better answers, +340 MB, slightly slower.",
+      nCtx: 4096,
+      nPredict: 512,
+      files: [{
+        name: "medgemma-1.5-4b-it-Q5_K_M.gguf",
+        url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q5_K_M.gguf?download=true",
+        bytes: 2829699136,   // exact, HuggingFace API 2026-08-20
+        sha256: null         // UNVERIFIED: HF lfs.oid is a Xet hash, not a file digest. See header.
       }]
     },
     "maik-local-e2b": {

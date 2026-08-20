@@ -105,7 +105,14 @@ const { L } = load();
 
   ok("system prompt makes no promise about retrieved knowledge",
      !/RETRIEVED|knowledge base|grounding/i.test(L.SYSTEM));
-  ok("system prompt stays terse", L.SYSTEM.length < 500);
+  ok("system prompt stays terse", L.SYSTEM.length < 700);
+  // Phrased positively: a 4B follows instructions far better than prohibitions. The old negative
+  // wording ("not a made-up figure") produced "20 mg/kg" for adult IV magnesium.
+  ok("dose rule tells it what TO do", /give the standard flat adult dose/i.test(L.SYSTEM));
+  ok("dose rule shows a worked example", /2 g IV over 20 min/.test(L.SYSTEM));
+  ok("mg/kg is scoped, not forbidden", /Use mg\/kg only when/.test(L.SYSTEM));
+  ok("no bare prohibitions left", !/\bnot a made-up\b|\bNever invent\b/.test(L.SYSTEM));
+  ok("asks for a verify line", /Verify against local protocol/.test(L.SYSTEM));
 }
 
 // ── an ungrounded answer must NOT claim StewardMD citations ──

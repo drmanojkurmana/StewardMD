@@ -87,6 +87,9 @@ function fakeModel(n) {
   ok("primary pack exact byte count", M.totalBytes("maik-local-v1") === 2489894976);
   ok("primary pack sizeLabel", M.sizeLabel("maik-local-v1") === "2.49 GB");
   ok("comparison pack is Gemma 4 E2B", /Gemma 4 E2B/.test(M.PACKS["maik-local-e2b"].label));
+  ok("Q5 quality pack present with the exact size", M.totalBytes("maik-local-v1-q5") === 2829699136);
+  ok("Q5 pack still fits the 8 GB iPhone budget", M.totalBytes("maik-local-v1-q5") < 3.0e9);
+  ok("Q5 pack sha256 is explicitly null, not a fake Xet oid", M.PACKS["maik-local-v1-q5"].files[0].sha256 === null);
   ok("E2B exact byte count", M.totalBytes("maik-local-e2b") === 3106738272);
   ok("E4B is NOT offered (4.98 GB will not fit the 8 GB floor device)",
      !Object.values(M.PACKS).some((p) => /E4B/.test(p.label)));

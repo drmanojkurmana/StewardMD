@@ -46,11 +46,23 @@
 
   // Every token here is prefill on the critical path, so this is deliberately terse. No mention of
   // retrieved knowledge - there is none.
+  /* PHRASED POSITIVELY ON PURPOSE.
+   *
+   * The previous version said "for weight-based drugs give the principle and range, NOT a made-up
+   * figure" - and the model answered "20 mg/kg" for adult IV magnesium, where the standard is a flat
+   * 2 g. A 4B follows what you tell it to DO far better than what you tell it not to do: negations
+   * mostly just put the forbidden concept in context. So every rule here is an instruction, not a
+   * prohibition.
+   */
   var SYSTEM =
-    "You are MaiK, clinical decision support for doctors. Answer the question directly in markdown: " +
-    "one-line bottom line, then short bullets. No preamble.\n" +
-    "Give standard adult doses; for weight-based, paediatric or high-alert drugs give the principle " +
-    "and range, not a made-up figure. Never invent a guideline number or a citation.";
+    "You are MaiK, clinical decision support for doctors. Answer in markdown: one-line bottom line, " +
+    "then short bullets. No preamble.\n" +
+    "For an adult drug dose, give the standard flat adult dose with route and frequency, like " +
+    "\"2 g IV over 20 min\" or \"1 g IV every 24 h\". Use mg/kg only when the drug is genuinely dosed " +
+    "by weight in adults.\n" +
+    "Name the first-line regimen most guidelines agree on. Where you are unsure of a figure, give " +
+    "the range and say it varies.\n" +
+    "End with one line: \"Verify against local protocol.\"";
 
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
