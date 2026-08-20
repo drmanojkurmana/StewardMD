@@ -26,12 +26,80 @@ import java.util.concurrent.Executors;
 public class LlamaPlugin extends Plugin {
 
     private LlamaEngine engine;
+    private ModelDownloader downloader;
     /** Single thread: llama.cpp contexts are not thread-safe and the engine serialises anyway. */
     private final ExecutorService worker = Executors.newSingleThreadExecutor();
 
     @Override
     public void load() {
         engine = new LlamaEngine();
+        downloader = new ModelDownloader(getContext());
+    }
+
+    // MARK: - Background model download (system DownloadManager)
+
+    /**
+     * Start a background download. Survives the app being backgrounded or killed, resumes across
+     * network changes, shows a system notification. The JS side persists the returned id so it can
+     * re-attach to a transfer that outlived the app.
+     */
+    @PluginMethod
+    public void downloadStart(PluginCall call) {
+        String url = call.getString("url");
+        String name = call.getString("name");
+        if (url == null || url.isEmpty() || name == null || name.isEmpty()) {
+            call.reject("Missing url or name", LlamaErr.BAD_ARGUMENTS.code); return;
+        }
+        try {
+            long id = downloader.start(url, name, call.getString("title"));
+            call.resolve(new JSObject().put("id", String.valueOf(id))
+                .put("path", downloader.pathFor(name).getAbsolutePath()));
+        } catch (LlamaException e) {
+            call.reject(e.detail, e.err.code);
+        }
+    }
+
+    @PluginMethod
+    public void downloadStatus(PluginCall call) {
+        String idStr = call.getString("id");
+        String name = call.getString("name");
+        JSObject out = new JSObject();
+        if (name != null) {
+            out.put("onDisk", downloader.sizeOf(name));
+            out.put("path", downloader.pathFor(name).getAbsolutePath());
+        }
+        out.put("freeBytes", downloader.freeBytes());
+        if (idStr == null) { call.resolve(out.put("state", "none")); return; }
+        long id;
+        try { id = Long.parseLong(idStr); } catch (Throwable t) { call.resolve(out.put("state", "none")); return; }
+        ModelDownloader.Status s = downloader.status(id);
+        call.resolve(out.put("state", s.state).put("bytes", s.bytes).put("total", s.total)
+            .put("reason", s.reason).put("localPath", s.path));
+    }
+
+    @PluginMethod
+    public void downloadCancel(PluginCall call) {
+        String idStr = call.getString("id");
+        if (idStr != null) {
+            try { downloader.cancel(Long.parseLong(idStr)); } catch (Throwable ignore) {}
+        }
+        call.resolve();
+    }
+
+    /** Absolute path (and current size) of a model file, whether or not it exists yet. */
+    @PluginMethod
+    public void modelPath(PluginCall call) {
+        String name = call.getString("name");
+        if (name == null || name.isEmpty()) { call.reject("Missing name", LlamaErr.BAD_ARGUMENTS.code); return; }
+        call.resolve(new JSObject().put("path", downloader.pathFor(name).getAbsolutePath())
+            .put("bytes", downloader.sizeOf(name)).put("freeBytes", downloader.freeBytes()));
+    }
+
+    @PluginMethod
+    public void modelDelete(PluginCall call) {
+        String name = call.getString("name");
+        if (name == null || name.isEmpty()) { call.reject("Missing name", LlamaErr.BAD_ARGUMENTS.code); return; }
+        call.resolve(new JSObject().put("ok", downloader.delete(name)));
     }
 
     /** Is on-device inference possible on this build/ABI at all? Cheap, synchronous. */

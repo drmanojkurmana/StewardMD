@@ -225,5 +225,123 @@ function fakeModel(n) {
   ok("non-native installed() is false", (await M.installed("maik-local-v1")) === false);
 }
 
+// ── NATIVE background download (OS DownloadManager) ──
+// The JS chunk loop dies when the app backgrounds, which is exactly when someone starts a 2.5 GB
+// download and switches apps. On native the transfer belongs to the OS.
+function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = null } = {}) {
+  const calls = { start: 0, status: 0, cancel: 0, del: 0, chunkRanges: 0 };
+  let step = 0;
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "77", path: "/ext/maik-models/m.gguf" }; },
+    downloadStatus: async () => { calls.status++; return script[Math.min(step++, script.length - 1)]; },
+    downloadCancel: async () => { calls.cancel++; },
+    modelPath: async () => ({ path: "/ext/maik-models/m.gguf", bytes: onDisk, freeBytes }),
+    modelDelete: async () => { calls.del++; return { ok: true }; }
+  };
+  const win = {
+    Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {
+      stat: async () => { throw new Error("nope"); }, mkdir: async () => ({}),
+      appendFile: async () => ({}), deleteFile: async () => ({}), getUri: async () => ({ uri: "file:///x" }) } } },
+    CapacitorWebFetch: async () => { calls.chunkRanges++; throw new Error("chunk loop must NOT run on native"); }
+  };
+  const ls = fakeLS();
+  if (existingId) ls.setItem("smd_maik_dlid_maik-local-v1", existingId);
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  return { M: win.SMD_MAIK_MODELS, ls, calls };
+}
+
+{
+  const SIZE = 2489894976;
+  const { M, ls, calls } = loadNative({ script: [
+    { state: "running", bytes: 5e8, total: SIZE, onDisk: 5e8 },
+    { state: "running", bytes: 15e8, total: SIZE, onDisk: 15e8 },
+    { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
+  ] });
+  const seen = [];
+  const r = await M.ensure("maik-local-v1", (f, n) => seen.push(n || f));
+  ok("native: resolves installed", r && r.installed === true);
+  ok("native: handed to the OS downloader", calls.start === 1);
+  ok("native: NEVER runs the JS chunk loop", calls.chunkRanges === 0);
+  ok("native: polled to completion", calls.status >= 3);
+  ok("native: marker written", ls._s["smd_maik_pack_maik-local-v1"] === "1");
+  ok("native: download id cleared when done", !("smd_maik_dlid_maik-local-v1" in ls._s));
+  ok("native: state says it ran in the background", M.state("maik-local-v1").background === true);
+  ok("native: tells the user it is a background transfer", seen.some((n) => /background/i.test(String(n))));
+}
+
+// re-attach to a transfer that outlived the app
+{
+  const SIZE = 2489894976;
+  const { M, calls } = loadNative({ existingId: "42", script: [
+    { state: "running", bytes: 9e8, total: SIZE, onDisk: 9e8 },
+    { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
+  ] });
+  const notes = [];
+  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  ok("re-attach: did NOT start a second download", calls.start === 0);
+  ok("re-attach: surfaced that it resumed", notes.some((n) => /Resuming in the background/i.test(n)));
+}
+
+// a paused transfer (no connection) is reported, not treated as failure
+{
+  const SIZE = 2489894976;
+  const { M } = loadNative({ script: [
+    { state: "paused", bytes: 3e8, total: SIZE, onDisk: 3e8, reason: 2 },
+    { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
+  ] });
+  const notes = [];
+  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  ok("paused is surfaced as waiting, not failed", notes.some((n) => /Waiting for a connection/i.test(n)));
+}
+
+// OS reports done but the file is short -> reject, do not mark installed
+{
+  const SIZE = 2489894976;
+  const { M, ls } = loadNative({ script: [{ state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE - 4096 }] });
+  let err = null;
+  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  ok("short file rejected even when the OS says done", !!err && /size mismatch/.test(err.message));
+  ok("no install marker on a short file", !("smd_maik_pack_maik-local-v1" in ls._s));
+}
+
+// pre-flight: refuse politely instead of filling the device
+{
+  const { M, calls } = loadNative({ freeBytes: 1e9, script: [{ state: "done", onDisk: 0 }] });
+  let err = null;
+  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  ok("refuses when free space is short", !!err && /not enough free space/.test(err.message));
+  ok("did not start a doomed download", calls.start === 0);
+}
+
+// already on disk -> no download at all
+{
+  const { M, calls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
+  const r = await M.ensure("maik-local-v1", () => {});
+  ok("already-complete file skips the OS download", r.installed === true && calls.start === 0);
+}
+
+// failure reason surfaced
+{
+  const { M } = loadNative({ script: [{ state: "failed", bytes: 1e8, total: 2489894976, reason: 1004 }] });
+  let err = null;
+  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  ok("OS failure reason surfaced", !!err && /reason 1004/.test(err.message));
+}
+
+// delete goes through the plugin on native
+{
+  const { M, calls, ls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
+  ls.setItem("smd_maik_pack_maik-local-v1", "1");
+  await M.remove("maik-local-v1");
+  ok("native delete uses the plugin", calls.del === 1);
+  ok("native delete clears the marker", !("smd_maik_pack_maik-local-v1" in ls._s));
+}
+
+// path comes from the plugin on native (DownloadManager cannot write the internal files dir)
+{
+  const { M } = loadNative({ script: [{ state: "none" }] });
+  ok("pathFor asks the plugin on native", (await M.pathFor("maik-local-v1")) === "/ext/maik-models/m.gguf");
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

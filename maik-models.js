@@ -129,6 +129,7 @@
   }
 
   var KEY_ACTIVE = "stewardmd.maikPack";
+  var KEY_DLID = "smd_maik_dlid_";     // DownloadManager id per pack, so a transfer survives the app
 
   // In-flight download state lives on the MODULE, not in the settings view, so closing Settings
   // does not stop or lose a download and reopening re-attaches to the live numbers.
@@ -163,6 +164,10 @@
 
   // ── on-disk size of one file (0 when absent) ──
   function sizeOf(name) {
+    var L = llama();
+    if (isNative() && L && L.modelPath) {
+      return L.modelPath({ name: name }).then(function (r) { return (r && r.bytes) || 0; }).catch(function () { return 0; });
+    }
     var F = fs(); if (!F) return Promise.resolve(0);
     return F.stat({ path: relPath(name), directory: DIR })
       .then(function (s) { return (s && s.size) || 0; })
@@ -190,9 +195,114 @@
 
   // ── absolute on-device path for the native plugin's load() ──
   function pathFor(id) {
+    var name = pack(id).files[0].name;
+    var L = llama();
+    // The native downloader owns model storage (DownloadManager cannot write the internal files
+    // dir), so it is the only authority on where a model actually is.
+    if (isNative() && L && L.modelPath) {
+      return L.modelPath({ name: name }).then(function (r) { return (r && r.path) || ""; });
+    }
     var F = fs(); if (!F) return Promise.reject(new Error("no filesystem"));
-    return F.getUri({ path: relPath(pack(id).files[0].name), directory: DIR })
+    return F.getUri({ path: relPath(name), directory: DIR })
       .then(function (r) { return String((r && r.uri) || "").replace(/^file:\/\//, ""); });
+  }
+
+  /* ── BACKGROUND download (native) ───────────────────────────────────────────
+   * On native the transfer is handed to the OS (Android DownloadManager / iOS background
+   * URLSession) via the capacitor-llama plugin, so it keeps going when the app is backgrounded or
+   * killed - which is exactly what someone does after starting a 2.5 GB download. The JS chunk loop
+   * below is kept only for the web PWA, where there is no plugin.
+   *
+   * This also removes the bug the chunk loop needed workarounds for: no 2 MiB Range slicing, no
+   * base64 across the bridge, no per-chunk retry. The OS owns resume and network changes.
+   */
+  function nativeDownload(id, onProgress) {
+    var L = llama(), pk = pack(id), f = pk.files[0];
+    var total = f.bytes || 0;
+    var t0 = Date.now(), startBytes = 0, stopped = false;
+
+    _state[id] = { downloading: true, frac: 0, bytes: 0, total: total, mbps: 0, etaS: null,
+                   note: "Starting", err: null, done: false, background: true };
+    _state[id].cancel = function () {
+      stopped = true;
+      var did = lget(KEY_DLID + id);
+      if (did && L.downloadCancel) L.downloadCancel({ id: did });
+    };
+    emit(id);
+
+    function report(bytes, note) {
+      var st = _state[id]; if (!st) return;
+      var secs = (Date.now() - t0) / 1000, moved = bytes - startBytes;
+      st.bytes = bytes;
+      st.frac = total ? Math.min(1, bytes / total) : 0;
+      st.mbps = secs > 1 ? (moved / secs / 1e6) : 0;
+      st.etaS = (st.mbps > 0.01 && total) ? Math.round((total - bytes) / (st.mbps * 1e6)) : null;
+      if (note) st.note = note;
+      emit(id);
+      if (onProgress) onProgress(st.frac, note);
+    }
+
+    function fresh() {
+      return L.downloadStart({ url: f.url, name: f.name, title: pk.label }).then(function (r) {
+        lset(KEY_DLID + id, String(r.id));
+        report(0, "Downloading in the background");
+        return String(r.id);
+      });
+    }
+
+    // Re-attach to an existing transfer if one is already in flight for this pack.
+    function begin() {
+      var existing = lget(KEY_DLID + id);
+      if (!existing) return fresh();
+      return L.downloadStatus({ id: existing, name: f.name }).then(function (s) {
+        if (s && (s.state === "running" || s.state === "pending" || s.state === "paused")) {
+          startBytes = s.bytes || 0;
+          report(s.bytes || 0, "Resuming in the background");
+          return existing;
+        }
+        return fresh();
+      }).catch(fresh);
+    }
+
+    function poll(did) {
+      if (stopped) throw new Error("cancelled");
+      return L.downloadStatus({ id: did, name: f.name }).then(function (s) {
+        s = s || {};
+        if (s.total > 0 && !total) { total = s.total; _state[id].total = total; }
+        report(s.bytes || s.onDisk || 0, s.state === "paused" ? "Waiting for a connection" : "Downloading in the background");
+        if (s.state === "done") {
+          var onDisk = s.onDisk || 0;
+          if (f.bytes && onDisk !== f.bytes) throw new Error("size mismatch: got " + onDisk + " want " + f.bytes);
+          return true;
+        }
+        if (s.state === "failed") throw new Error("download failed (reason " + s.reason + ")");
+        if (s.state === "cancelled" || s.state === "none") throw new Error("cancelled");
+        return new Promise(function (r) { setTimeout(r, 1500); }).then(function () { return poll(did); });
+      });
+    }
+
+    return L.modelPath({ name: f.name }).then(function (mp) {
+      if (mp && mp.bytes && f.bytes && mp.bytes === f.bytes) return "already";
+      if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05) {
+        throw new Error("not enough free space (" + (mp.freeBytes / 1e9).toFixed(1) + " GB left, needs " + (f.bytes / 1e9).toFixed(1) + " GB)");
+      }
+      return begin().then(poll);
+    }).then(function () {
+      lset(MARK_PREFIX + id, "1");
+      lrem(KEY_DLID + id);
+      _state[id] = { downloading: false, frac: 1, bytes: total, total: total, mbps: 0, etaS: 0,
+                     note: "Ready", err: null, done: true, background: true };
+      emit(id);
+      if (onProgress) onProgress(1, "Ready");
+      return { installed: true };
+    }).catch(function (e) {
+      var msg = String((e && e.message) || e);
+      _state[id] = { downloading: false, frac: (_state[id] && _state[id].frac) || 0,
+                     bytes: (_state[id] && _state[id].bytes) || 0, total: total, mbps: 0, etaS: null,
+                     note: msg === "cancelled" ? "Paused" : msg, err: msg, done: false, background: true };
+      emit(id);
+      throw e;
+    });
   }
 
   /**
@@ -200,6 +310,15 @@
    * onProgress(fraction, note) is called as bytes land.
    */
   function ensure(id, onProgress) {
+    var L = llama();
+    if (isNative() && L && L.downloadStart) {
+      if (_state[id] && _state[id].downloading) return Promise.reject(new Error("already downloading"));
+      return nativeDownload(id, onProgress);
+    }
+    return ensureChunked(id, onProgress);
+  }
+
+  function ensureChunked(id, onProgress) {
     var F = fs(), fx = fetchImpl();
     if (!isNative() || !F) return Promise.reject(new Error("on-device models need the native app"));
     if (!fx) return Promise.reject(new Error("no fetch available"));
@@ -340,10 +459,16 @@
 
   // ── delete the cached pack (frees storage) ──
   function remove(id) {
-    var F = fs();
+    var F = fs(), L = llama();
     cancel(id);
     lrem(MARK_PREFIX + id);
+    lrem(KEY_DLID + id);
     delete _state[id];
+    if (isNative() && L && L.modelDelete) {
+      return pack(id).files.reduce(function (chain, f) {
+        return chain.then(function () { return L.modelDelete({ name: f.name }).catch(function () {}); });
+      }, Promise.resolve());
+    }
     if (!isNative() || !F) return Promise.resolve();
     return pack(id).files.reduce(function (chain, f) {
       return chain.then(function () { return F.deleteFile({ path: relPath(f.name), directory: DIR }).catch(function () {}); });
@@ -354,7 +479,7 @@
     PACKS: PACKS, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
-    ensure: ensure, remove: remove, cancel: cancel, pathFor: pathFor,
+    ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
     state: state, subscribe: subscribe,
     activePack: activePack, setActivePack: setActivePack,
     _abToB64: abToB64

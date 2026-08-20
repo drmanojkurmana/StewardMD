@@ -12,7 +12,9 @@ public enum LlamaErr {
     GENERATION_FAILURE("generation-failure"),
     BUSY("busy"),
     USER_CANCELLED("user-cancelled"),
-    BAD_ARGUMENTS("bad-arguments");
+    BAD_ARGUMENTS("bad-arguments"),
+    MODEL_DOWNLOAD_FAILED("model-download-failed"),
+    INSUFFICIENT_STORAGE("insufficient-storage");
 
     public final String code;
 

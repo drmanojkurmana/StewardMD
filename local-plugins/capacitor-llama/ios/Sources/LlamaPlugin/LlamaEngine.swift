@@ -167,6 +167,12 @@ final class LlamaEngine {
         // want when a clinician may read the same question twice.
         let smpl = llama_sampler_chain_init(llama_sampler_chain_default_params())
         defer { llama_sampler_free(smpl) }
+        // REPETITION PENALTY IS NOT OPTIONAL, even for greedy. Verified on Android: a bare greedy
+        // chain answered "insulin insulin insulin ..." to a DKA question. Greedy takes the argmax
+        // every step, so a locally-likely token can lock in forever. Deterministic, so greedy stays
+        // reproducible.
+        llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
+            llama_vocab_n_tokens(vocab), 128, 1.15, 0.0, 0.0))
         if temperature > 0 {
             llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40))
             llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95, 1))

@@ -191,7 +191,17 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     llama_memory_clear(llama_get_memory(ctx), true);
 
     // Sampler chain.
+    //
+    // REPETITION PENALTY IS NOT OPTIONAL, even for greedy. A bare greedy chain degenerated on a real
+    // Pixel 9: asked for first-line treatment of DKA it emitted "insulin insulin insulin ..." for
+    // the whole budget. Greedy always takes the argmax, so once a token becomes locally most-likely
+    // it can lock in forever; llama.cpp's own examples always include penalties. These are
+    // deterministic transforms, so greedy stays reproducible.
     llama_sampler* smpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
+    const int32_t n_vocab = llama_vocab_n_tokens(vocab);
+    llama_sampler_chain_add(smpl, llama_sampler_init_penalties(
+        n_vocab, /*penalty_last_n=*/128, /*penalty_repeat=*/1.15f,
+        /*penalty_freq=*/0.0f, /*penalty_present=*/0.0f));
     if (temp > 0.0f) {
         llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
         llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95f, 1));
