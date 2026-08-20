@@ -51,6 +51,8 @@
   var CHUNK_BYTES = 2 * 1024 * 1024;
   var CHUNK_TRIES = 5;                  // per-chunk retries; a 2.5 GB pull WILL see transient failures
   var MARK_PREFIX = "smd_maik_pack_";   // localStorage install marker (sync check for settingsHTML)
+  // Set when the CLINICIAN taps Pause, so startup auto-resume does not override a deliberate stop.
+  var KEY_USERPAUSE = "smd_maik_userpause_";
 
   /* Pack registry.
    *
@@ -329,7 +331,31 @@
         return L.downloadStatus({ id: lget(KEY_DLID + id) || "", name: f.name }).then(function (st) {
           st = st || {};
           var live = st.state === "running" || st.state === "pending" || st.state === "paused";
-          if (!live) return found;
+          /* AUTO-RESUME AN INTERRUPTED DOWNLOAD.
+           *
+           * A transfer can be left half-done with no live task behind it: the app was updated, the
+           * process was killed, or the OS dropped the session. The native side reports "paused" with
+           * committed parts on disk, and until now nothing restarted it - the row simply sat at 63%
+           * until somebody noticed and tapped Download. That is a poor outcome for a 2.5 GB file that
+           * has already been paid for, and worse when the model is the thing the app is waiting on.
+           *
+           * NOT resumed when the clinician paused it themselves. Overriding a deliberate pause on a
+           * metered connection would be its own bug, so an explicit Pause records a marker here and
+           * this skips those.
+           */
+          if (!live) {
+            var partial = (st.bytes || 0) > 0 && !installedCached(id);
+            var userPaused = lget(KEY_USERPAUSE + id) === "1";
+            if (partial && !userPaused) {
+              _state[id] = { downloading: true, frac: (f.bytes ? Math.min(1, st.bytes / f.bytes) : 0),
+                             bytes: st.bytes || 0, total: f.bytes || st.total || 0, mbps: 0, etaS: null,
+                             note: "Resuming where it stopped", err: null, done: false, background: true };
+              emit(id);
+              ensure(id, null).catch(function () {});
+              return true;
+            }
+            return found;
+          }
           // Adopt it: show real progress, and let ensure() re-attach rather than start a duplicate.
           var total = f.bytes || st.total || 0;
           _state[id] = {
@@ -597,6 +623,7 @@
   }
 
   function ensure(id, onProgress) {
+    lrem(KEY_USERPAUSE + id);          // asking for it again clears any earlier deliberate pause
     if (_active === id) return Promise.reject(new Error("already downloading"));
     if (queuedIds().indexOf(id) >= 0) return Promise.reject(new Error("already queued"));
     return new Promise(function (res, rej) {
@@ -752,6 +779,9 @@
       try { job.reject(new Error("cancelled")); } catch (e) {}
       return;
     }
+    // An explicit Pause is a decision, not a failure: remember it so the next launch does not
+    // helpfully restart a download the clinician stopped on purpose.
+    lset(KEY_USERPAUSE + id, "1");
     var st = _state[id];
     if (st && st.cancel) st.cancel();
   }
