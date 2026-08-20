@@ -46,7 +46,7 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
   const win = {
     Capacitor: { isNativePlatform: () => true, Plugins: noPlugin ? {} : { Llama } },
     SMD_MAIK_MODELS: {
-      PACKS: { "maik-local-v1": { label: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 } },
+      PACKS: { "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 } },
       pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf"
     }
   };
@@ -97,15 +97,18 @@ const { L } = load();
   ok("history kept so bare follow-ups work", /meropenem in meningitis/.test(hist) && /and the dose\?/.test(hist));
   ok("history labels the speakers", /Doctor: /.test(hist) && /MaiK: /.test(hist));
   ok("history is capped", L.HISTORY_TURNS <= 3);
-  const longHist = L.buildPrompt({ question: "q", history: Array.from({ length: 20 }, (_, i) => ({ role: "user", text: "turn " + i })) });
+  // "dose?" (an aspect-only follow-up) so history is included at all - the point here is the CAP.
+  const longHist = L.buildPrompt({ question: "dose?", history: Array.from({ length: 20 }, (_, i) => ({ role: "user", text: "turn " + i })) });
   ok("long history is truncated, not sent whole", !/turn 0\b/.test(longHist) && /turn 19/.test(longHist));
 
   // no question at all still yields something usable
   ok("packageless prompt still asks for something", L.buildPrompt({}).length > 10);
 
+  ok("system prompt bans printed section labels (it was emitting a literal \"Bottom Line:\")",
+     /no section labels/.test(L.SYSTEM) && /ONE plain sentence/.test(L.SYSTEM));
   ok("system prompt makes no promise about retrieved knowledge",
      !/RETRIEVED|knowledge base|grounding/i.test(L.SYSTEM));
-  ok("system prompt stays terse", L.SYSTEM.length < 700);
+  ok("system prompt stays terse", L.SYSTEM.length < 900);
   // Phrased positively: a 4B follows instructions far better than prohibitions. The old negative
   // wording ("not a made-up figure") produced "20 mg/kg" for adult IV magnesium.
   ok("dose rule tells it what TO do", /give the standard flat adult dose/i.test(L.SYSTEM));
@@ -132,7 +135,7 @@ const { L } = load();
   ok("package retrieved cleared", pkg2.retrieved.length === 0);
   ok("package sources cleared", pkg2.sources.length === 0);
   ok("package treatment removed", pkg2.treatment === undefined);
-  ok("result still names the model", /MedGemma/.test(r.model));
+  ok("result names the MAiK tier, not the upstream model", r.model === "MAiK MxCore");
 }
 
 // ── streaming contract: onDelta gets ACCUMULATED text ──
@@ -142,17 +145,26 @@ const { L } = load();
   const r = await L2.answer({ question: "hi" }, null, (t) => seen.push(t));
   ok("answer resolves with the full text", r.text === "Hello world");
   ok("answer is tagged engine=local", r.engine === "local");
-  ok("answer reports the model label", /MedGemma/.test(r.model));
+  ok("answer reports the MAiK tier label", r.model === "MAiK MxCore");
   ok("answer reports timing", r.ms === 1234);
   ok("onDelta called once per token", seen.length === 3);
+  // Right-trimmed, because every delta goes through stripReasoning() on the way to the typewriter -
+  // the trade for never rendering a leaked reasoning preamble on screen. The trailing space arrives
+  // with the next word, so the render is unaffected.
   ok("onDelta receives ACCUMULATED text, not deltas",
-     seen[0] === "Hel" && seen[1] === "Hello " && seen[2] === "Hello world");
+     seen[0] === "Hel" && seen[1] === "Hello" && seen[2] === "Hello world");
   ok("each onDelta value extends the previous", seen.every((v, i) => i === 0 || v.startsWith(seen[i - 1])));
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);
   ok("nPredict capped from the pack", calls.generate[0].nPredict === 512);
   ok("system prompt sent", /clinical decision support/i.test(calls.generate[0].system));
-  ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 600);
+  // Prefill is ~14 tok/s on-device and linear in prompt tokens, so every character here is latency:
+  // roughly 1s per 14 tokens (~56 chars). The budget grew 600 -> 750 -> 900: the last step bought the
+  // medical-only rule, the no-reasoning rule and the conditional dose rule for about 2s of prefill,
+  // after the first draft of those three came in at 1055 chars and was rewritten tighter. The
+  // no-section-labels rule, which cost ~17 tokens (~1.2s) and removed the literal "Bottom Line:"
+  // the model was printing. Do not let it creep further without measuring.
+  ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 900);
   ok("model loaded with the clamped context", calls.load[0].nCtx === 4096);
 }
 
@@ -197,3 +209,57 @@ const { L } = load();
 
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
+
+/* ── Regressions from a real device transcript (20 Aug 2026) ────────────────────────────────────
+ * A doctor ran a normal clinical conversation on the phone and it produced three distinct failures.
+ * Each one gets a test here, because each was invisible to every test that existed at the time.
+ */
+{
+  const { L } = load();
+
+  // 1. TOPIC BLEED. History was prepended to every prompt, so after "Treatment of Fever" the next
+  //    question "Polycystic Kidney Disease" was answered as fever-with-renal-impairment. A doctor
+  //    asked about one disease and got the treatment for another.
+  ok("aspect-only question IS a follow-up (needs the previous turn)",
+     L.isFollowUp("Side effects?") && L.isFollowUp("dose?") && L.isFollowUp("what about in children"));
+  ok("a question naming its own subject is NOT a follow-up",
+     !L.isFollowUp("Polycystic Kidney Disease") && !L.isFollowUp("Side effects of Linagliptin") &&
+     !L.isFollowUp("Treatment of Fever") && !L.isFollowUp("empiric antibiotic for meningitis"));
+  ok("a long question is never treated as a follow-up",
+     !L.isFollowUp("what is the dose of magnesium in severe asthma in an adult patient"));
+
+  const hist = [{ role: "user", text: "Treatment of Fever" },
+                { role: "assistant", text: "Acetaminophen 650 mg to 1 g orally every 4 to 6 hours." }];
+  const bled = L.buildPrompt({ question: "Polycystic Kidney Disease", history: hist });
+  ok("new-topic question carries NO history (this is the fever/PKD bug)",
+     !/fever/i.test(bled) && !/Acetaminophen/i.test(bled) && /Polycystic Kidney Disease/.test(bled));
+  const cont = L.buildPrompt({ question: "Side effects?", history: hist });
+  ok("aspect-only follow-up DOES carry history (else it is unanswerable)",
+     /Recent conversation/.test(cont) && /Acetaminophen/.test(cont) && /Side effects\?/.test(cont));
+
+  // 2. REASONING LEAK. An answer shipped starting "thought The user wants me to act as MaiK, a
+  //    clinical decision support system. I need to provide..." - reciting the system prompt.
+  ok("tagged reasoning is stripped",
+     L.stripReasoning("<think>plan the answer</think>5 mg PO once daily") === "5 mg PO once daily");
+  ok("unterminated reasoning keeps only what came before it",
+     L.stripReasoning("5 mg PO once daily\n<thinking>ran out of budget") === "5 mg PO once daily");
+  const leak = "thought The user wants me to act as MaiK. I need the standard dose.\n\n5 mg PO once daily";
+  ok("bare 'thought' preamble is stripped", L.stripReasoning(leak) === "5 mg PO once daily");
+  ok("gemma control tokens are stripped",
+     L.stripReasoning("<start_of_turn>5 mg PO<end_of_turn>") === "5 mg PO");
+  ok("an answer that merely begins with a normal word is untouched",
+     L.stripReasoning("Thoughtful monitoring is required.") === "Thoughtful monitoring is required.");
+  ok("plain text passes through unchanged",
+     L.stripReasoning("  Ceftriaxone 2 g IV daily.  ") === "Ceftriaxone 2 g IV daily.");
+
+  // 3. FORCED DOSE. The dose rule was unconditional, so a SIDE EFFECTS question opened with
+  //    "Linagliptin 100 mg orally once daily is the standard first-line treatment" - wrong by 20x
+  //    (it is 5 mg) and not what was asked.
+  ok("dose rule is conditional on the question asking for a dose", /When asked for a dose/.test(L.SYSTEM));
+  ok("prompt tells the model to answer only what was asked", /Answer exactly what was asked/.test(L.SYSTEM));
+  ok("side effects / mechanism questions are named explicitly", /side effects, mechanism/.test(L.SYSTEM));
+  ok("prompt asks for the final answer only", /never your reasoning/.test(L.SYSTEM));
+  ok("prompt enforces medical-only scope", /Answer medical questions only/.test(L.SYSTEM));
+  ok("no section labels are requested", /Bottom Line/.test(L.SYSTEM) && /no section labels/.test(L.SYSTEM));
+  ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-mxcore");
+}

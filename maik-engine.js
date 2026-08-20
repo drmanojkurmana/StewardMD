@@ -292,8 +292,7 @@
         '<button type="button" data-me-pack="' + id + '" role="radio" aria-checked="' + on + '"' +
         ' style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:transparent;border:0;padding:0;color:var(--ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
-            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label +
-              (p.actual ? '<span style="font:500 11px/1.2 var(--sans,system-ui);color:var(--slate-soft,#5a7184)"> &middot; ' + p.actual + '</span>' : "") + '</span>' +
+            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label + '</span>' +
             '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + status + '</span>' +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span>' +
@@ -452,7 +451,9 @@
         out.push({
           id: "local:" + pid, label: M.PACKS[pid].label,
           sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "% - will answer when ready"
-             : have ? (M.PACKS[pid].actual + " · on this device, works offline")
+             // Never surface the upstream model name (MedGemma / Gemma) in the UI - owner decision.
+             // `actual` stays in the registry for logs and code, not for the clinician.
+             : have ? "On this device, works offline"
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
           badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading,
@@ -499,7 +500,23 @@
     });
   }
 
+  /** Header disclaimer text for the engine that will actually answer. */
+  function discLabel() {
+    var e = effective();
+    if (e === "local") return "On-device \u00b7 AI-generated, no sources, verify independently";
+    if (e === "rag") return "StewardMD knowledge base \u00b7 verify independently";
+    return "Grounded \u00b7 AI-generated, verify independently";
+  }
+
+  function syncDisc() {
+    try {
+      var el = document.querySelector("#maikSheet .maik-disc span");
+      if (el) el.textContent = discLabel();
+    } catch (e) {}
+  }
+
   function syncChip() {
+    syncDisc();
     try {
       var el = document.getElementById("maikModelChipLbl");
       if (el) el.textContent = chipLabel();
@@ -648,6 +665,7 @@
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
+    discLabel: discLabel, syncDisc: syncDisc,
     warmIfLocal: warmIfLocal,
     KEY_PENDING: KEY_PENDING, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
   };

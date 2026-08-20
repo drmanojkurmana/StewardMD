@@ -2873,7 +2873,12 @@
         '<button class="maik-hd-btn" id="maikNew" type="button" title="New conversation" aria-label="New conversation">' + MK.new + '</button>' +
         '<button class="maik-hd-btn" id="maikClose" type="button" title="Close" aria-label="Close assistant">' + MK.close + '</button>' +
       '</div></div>' +
-      '<div class="maik-disc">' + MK.shield + '<span>Grounded &middot; AI-generated, verify independently</span></div>' +
+      // Disclaimer follows the ENGINE. Saying "Grounded" while the on-device model answers from its
+      // own weights, with no StewardMD sources, is simply untrue.
+      '<div class="maik-disc">' + MK.shield + '<span>' +
+        ((window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.discLabel) ? SMD_MAIK_ENGINE.discLabel()
+                                                               : "Grounded &middot; AI-generated, verify independently") +
+      '</span></div>' +
       '<div class="maik-body" id="maikBody"></div>' +
       // ── Conversation sidebar (slide-in). History is stored ON-DEVICE only (privacy). ──
       '<div class="maik-side-wrap" id="maikSideWrap" hidden>' +
@@ -3391,17 +3396,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return String(s || "").replace(/\b(iz|da|doze|pls|plz|ur|wat|abt|nd|hw)\b/gi, function (w) { return _MAIK_DESLANG[w.toLowerCase()] || w; });
     }
     var MAIK_CASUAL = ["hi", "hii", "hey", "helo", "hello", "yo", "hiya", "sup", "namaste", "hai"];
-    var MAIK_ACK = ["thanks", "thank", "thankyou", "thx", "ty", "ok", "okay", "k", "kk", "cool", "great", "nice", "got", "gotit", "fine", "alright", "sure", "yep", "yes", "no"];
     function maikRoute(q, active) {
       var n = maikNorm(q), toks = n.split(" ").filter(Boolean), first = toks[0] || "";
       var isShort = toks.length <= 4;
       if (!n || /^[?.\s]+$/.test(n)) return { kind: "clarify" };                       // empty / punctuation-only
       if (/^(dose|doses|dosage|what dose|which dose|drug|drugs|which drug|what drug)\??$/.test(n)) return { kind: "clarify" };  // bare dose/drug with no drug named
-      if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK \u2014 I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
+      if (/\b(weather|joke|jokes|funny|movie|movies|song|songs|music|sport|sports|cricket|football|news|poem|story|stories|recipe|cook|game|games|stock|horoscope|who won|what time|time is it|date today|your name)\b/.test(n) && !/(treat|manage|dose|drug|patient|symptom|sign|diagnos|infection|fever|pain|therapy|antibiotic|disease|syndrome|management|shock|sepsis|poison)/.test(n)) return { kind: "casual", reply: "I\u2019m MaiK. I focus on clinical knowledge, drug information, calculators, and patient assessment. Ask me a medical question and I\u2019ll help." };
       // A/B casual conversation — fuzzy (typo-tolerant) match on the FIRST token / short phrase
       var casualHit = MAIK_CASUAL.some(function (w) { return first === w || maikLev(first, w) <= 1; })
         || /^(hello|hey|hi)\b/.test(n) || /^good (morning|afternoon|evening|night)\b/.test(n) || /^how (are|r) (you|u)\b/.test(n) || /^how'?s it going\b/.test(n) || /^whats up\b|^what'?s up\b/.test(n);
-      var ackHit = isShort && MAIK_ACK.some(function (w) { return toks.indexOf(w) >= 0 || maikLev(first, w) <= 1; });
       var byeHit = isShort && /^(bye|goodbye|see ya|cya|good night)\b/.test(n);
       // A greeting is only "casual" when the message is essentially JUST the greeting. If a real
       // question follows it ("hi rx of uti", "hey dose of atropine"), answer that instead of the
@@ -3412,11 +3415,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam)\b/i, "")
         .replace(/[\s,!.?]+/g, " ").trim();
       var greetOnly = afterGreet.split(" ").filter(function (w) { return w.length >= 2 && MAIK_CASUAL.indexOf(w) < 0; }).length === 0;
-      if (isShort && /how (are|r) (you|u)/.test(n)) return { kind: "casual", reply: "I’m well, thank you. I’m here to support clinical questions, drug information, calculations, or patient assessment. What would you like to discuss?" };
-      if (byeHit) return { kind: "casual", reply: "Goodbye — StewardMD is here whenever you need clinical support." };
-      if (isShort && /(thanks|thank you|thankyou|thx|^ty\b)/.test(n)) return { kind: "casual", reply: "You’re welcome. Let me know if you want to review a clinical topic or assess a patient." };
-      if (casualHit && isShort && greetOnly) return { kind: "casual", reply: "Hello. I can help with clinical knowledge, drug information, calculators, or a patient assessment. What would you like to discuss?" };
-      if (ackHit && !/(treat|manage|dose|sign|approach|explain|patient|what|how|why|which)/.test(n)) return { kind: "casual", reply: "Sure — let me know if you’d like to review a clinical topic, look up a drug, or assess a patient." };
+      // Greetings, thanks, acknowledgements and sign-offs are answered BY THE MODEL, in MaiK's own
+      // voice. They used to return fixed strings from here; a doctor typing "Hi" got a scripted
+      // paragraph that never varied and never reached the engine they had selected.
+      // COST: a greeting now costs one model turn (cheap on cloud, a few seconds on-device). That is
+      // the price of not sounding like a scripted bot, and it was the owner's explicit call.
+      if (byeHit || (casualHit && isShort && greetOnly)) return { kind: "clinical" };
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
       // E patient-specific (existing detector) with no active case → guided assessment
@@ -3429,7 +3433,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // define-it request, not something to clarify. If the V2 KB engine resolves it confidently,
       // route it as a clinical question so it gets an instant KB definition.
       try { if (isShort && toks.length <= 4 && window.MaiKKB && MaiKKB.resolveTarget) { var _kbt = MaiKKB.resolveTarget(n, { question: n, grounding: [], topicMatch: { matched: false } }); if (_kbt && _kbt.confident) return { kind: "clinical" }; } } catch (e) {}
-      if (isShort && toks.length <= 2 && !/(dka|op|tb|uti|copd|ards|hiv|mi|pe|sepsis|shock|fever|pain|dose|drug|poison|toxic|overdose|antidote|envenom|snakebite|syndrome|disease|disorder|infection|itis|osis|aemia|emia|pathy|opathy|crisis|failure|bleed|haemorrhage|hemorrhage|stroke|embolism|infarct|arrest|malaria|meningitis|pneumonia|tetanus|rabies|dengue|typhoid|cholera)/.test(n)) return { kind: "clarify" };
+      // A short query is clarified ONLY when the Intent Firewall also finds no clinical signal in it.
+      // This used to be a second, much smaller keyword list maintained here by hand, and it dead-ended
+      // real questions the firewall had already accepted: "PCOD?" and "Side effects?" both got
+      // "Could you tell me the condition…" instead of an answer. MaiKScope is the single source of
+      // truth for "is this clinical", so ask it rather than keeping a rival list in sync.
+      if (isShort && toks.length <= 2) {
+        var _clinSignal = false;
+        try { _clinSignal = !!(window.MaiKScope && MaiKScope.classify(n).medical); } catch (e) { _clinSignal = false; }
+        if (!_clinSignal) return { kind: "clarify" };
+      }
       return { kind: "clinical" };
     }
     // ---- Conversation-aware clinical helpers (smd_maik_v2) ----
@@ -3742,7 +3755,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // MaiK attribution row (sparkle + MAIK) atop every answer bubble.
       var attrHTML = '<div class="maik-attr">' + MK.spark + '<span>MaiK</span>' + ((r && r.kb) ? '<span class="maik-kbbadge" title="Answered instantly from the StewardMD Knowledge Base — no external AI call">&#9889; Instant &middot; StewardMD KB</span>' : '') + '</div>';
       var assumeHTML = assume ? ('<div class="maik-assume">Assuming you mean <b>' + maikEscH(assume.name) + '</b> · not quite? Tap a topic below or search the web.</div>') : "";
-      var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference — verify with local protocol.</div>');
+      var eduHTML = assumeHTML + (active ? "" : '<div class="maik-edu">Educational clinical reference. Verify with local protocol.</div>');
       var full = attrHTML + eduHTML + rendered + srcHTML;
       if (maikLazyOn()) {
         // Lazy: only the bottom line was fetched (tier 1). The tier-2 detail is fetched on demand when
@@ -3872,7 +3885,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // (test/maik-scope.test.mjs). Fails OPEN — a genuine clinical question is never blocked. Skipped
       // in case mode (active), which is inherently clinical. Nothing armed/disabled yet, so we just return.
       var _scope = (!active && window.MaiKScope) ? MaiKScope.classify(question) : null;
-      if (_scope && _scope.medical === false) {
+      // Refuse ONLY what the firewall can positively identify as non-clinical. An unrecognised query
+      // is NOT a non-medical one: "PCOD?" and "SGLT2 mechanism of action" were refused here purely
+      // for being absent from a finite allow-list, which no list can fix. Those now go to the model,
+      // which knows the difference and refuses non-medical itself. (The server has always used this
+      // narrower predicate - the client was the stricter of the two, and the one doctors saw.)
+      if (_scope && _scope.medical === false && _scope.certain === true) {
         try { console.debug("[MaiK firewall] blocked non-clinical query (" + _scope.category + ") before AI pipeline; ~1 LLM/RAG call saved"); } catch (e) {}
         _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
         _maikRefuse(think);
@@ -4064,6 +4082,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // chips — surfaced below the answer so MaiK guides the next decision, no extra prompt.
           function _brainAugment(host, p) {
             if (!(brainOn() && window.MaiKCopilot && window.MaiKBrain)) return;
+            // NOT on an on-device answer. This appends StewardMD KB material (red flags from
+            // KB_ENRICHMENT, workflow steps) beneath the answer, and the on-device engine read none
+            // of it. A doctor testing it saw "⚠ Red flags: Clinical deterioration without new PDCs…
+            // (pp.152-153)" - Harrison's fever-of-unknown-origin chapter - hanging under an answer
+            // about treating simple fever, on an engine whose own disclaimer says "no sources".
+            // Same borrowed-authority problem the citation-stripping in maik-local.js exists to stop.
+            try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.effective() === "local") return; } catch (e) {}
             try {
               var res = MaiKBrain.resolve(question, { disease: (_maikTopic && _maikTopic.topic) || null, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null });
               // proactive safety

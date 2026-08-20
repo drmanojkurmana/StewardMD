@@ -38,10 +38,12 @@ const MODEL_DEFAULT = "gemini-2.5-flash";
 // Server-side Intent Firewall (defense-in-depth): reject CONFIDENTLY non-clinical requests BEFORE any
 // LLM/web call, regardless of what the client did — "system prompts are not a security boundary".
 // CONSERVATIVE on purpose: only the unambiguous categories (code/creative/general/lay), never the
-// "no medical signal" case — so an obscure real clinical term the client already allowed can never be
-// false-refused on the server. The client allow-list is the primary firewall; this backs it up.
+// "no medical signal" case — so an obscure real clinical term can never be false-refused on the
+// server. MaiKScope.isRefusable() IS that predicate, shared with the client so the two cannot drift
+// (they had: the client refused the uncertain bucket too, and told doctors asking "PCOD?" that MaiK
+// only answers medical questions). The uncertain tail is handled by MEDICAL_ONLY in the model prompt.
 function firewallBlock(q) {
-  try { const c = MaiKScope && MaiKScope.classify && MaiKScope.classify(String(q || "")); return !!(c && c.medical === false && c.category !== "non_medical"); } catch (e) { return false; }
+  try { return !!(MaiKScope && MaiKScope.isRefusable && MaiKScope.isRefusable(String(q || ""))); } catch (e) { return false; }
 }
 
 // APP_GATE_KEY secret provisioned in prod 2026-08-16 -> the empty-Origin block below is now ACTIVE
@@ -505,6 +507,29 @@ const RAG_SYS =
 // topic question, not seeking individualized management. Educational reference,
 // grounded in the retrieved KB, with a clean clinical structure. No provider/model
 // names; no long trailing disclaimer (the UI shows a persistent advisory badge).
+/* SCOPE (medical-only) — the MODEL half of the boundary.
+ *
+ * The deterministic Intent Firewall refuses only what it can POSITIVELY identify as non-clinical; an
+ * unrecognised query is deliberately let through rather than false-refused, because no finite
+ * allow-list holds all of medicine (a doctor typing "PCOD?" was being told MaiK answers only medical
+ * questions). That makes the model responsible for the uncertain tail: it has the world knowledge to
+ * tell "PCOD" from a state capital, so it refuses the non-medical remainder itself.
+ *
+ * The closing sentence matters as much as the rule: without it the model over-refuses, which is the
+ * exact failure this whole change exists to remove.
+ */
+const MEDICAL_ONLY =
+  "\nSCOPE — NON-NEGOTIABLE: answer MEDICAL and CLINICAL questions only. That includes everything a " +
+  "doctor legitimately asks: diseases, drugs and drug classes, doses, mechanisms of action, " +
+  "investigations, procedures, guidelines, physiology, pathology, public health and medical education. " +
+  "If the question is NOT medical — general knowledge, geography, history, sport, entertainment, " +
+  "programming, maths, finance, travel, shopping, personal life advice, or a request to write " +
+  "non-medical content — do not answer it. Reply with exactly this line and nothing else: " +
+  "\"I can only help with medical and clinical questions.\" " +
+  "Judge the QUESTION, not the retrieved knowledge. When a question IS medical but unfamiliar, or uses " +
+  "an abbreviation or drug class you are unsure of, ANSWER IT as a clinical question: a doctor asking " +
+  "about an obscure condition must never be told their question is not medical.";
+
 const KNOWLEDGE_SYS =
   "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors, built into StewardMD. Talk like a sharp, warm senior colleague — natural, direct, and genuinely useful, the way a modern medical AI would. Answer the clinician's question (shown under 'CLINICIAN QUESTION'), and use the RECENT CONVERSATION for continuity. " +
   "Draw on solid, widely-accepted medical knowledge and use the RETRIEVED STEWARDMD KNOWLEDGE below to ground specifics (regimens, protocols, doses), preferring it where it applies. You MAY answer confidently from mainstream clinical knowledge — do NOT refuse or hedge just because the retrieved text looks thin. " +
@@ -529,7 +554,7 @@ const KNOWLEDGE_SYS =
   "6. STAY ON TOPIC: the retrieved knowledge is keyword-matched and can be OFF-TOPIC, especially for short follow-ups. Judge every retrieved chunk against the RECENT CONVERSATION; if it is about a different condition than the one under discussion, IGNORE it completely and continue the conversation's topic from mainstream knowledge. Never switch to an unrelated disease because a chunk shares a word with the question (e.g. a follow-up about 'first-line treatment' of the current topic must never become an answer about 'First Bite Syndrome').\n" +
   "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "8. GROUND-CHECK before finalizing: for every specific claim — a dose, threshold, cut-off, criterion, or guideline statement — silently confirm it rests EITHER on the retrieved knowledge OR on solidly-established mainstream medicine. If it rests on neither, omit it or explicitly flag the uncertainty ('exact figure varies — verify locally') rather than asserting it. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.\n" +
-  "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content.";
+  "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". Gemini does the Google search +
@@ -540,7 +565,7 @@ const KNOWLEDGE_SYS =
 const RESEARCH_SYS =
   "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. The clinician has asked a question StewardMD's own knowledge base does not cover — answer it directly, thoroughly and naturally, the way a sharp senior colleague would and the way a modern medical AI does, using web search to ground current, authoritative specifics. " +
   "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
-  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
+  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one." + MEDICAL_ONLY;
 // FAST PATH prompt: the search is done externally (TinyFish); the model writes the ANSWER from its
 // own medical knowledge and uses the provided results to ground specifics + cite [n] — it must NOT
 // merely summarise the snippets or limit itself to what they happen to mention.
@@ -548,7 +573,7 @@ const RESEARCH_SYS_SNIPPETS =
   "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors. Answer the clinician's question directly, thoroughly and naturally — the way a sharp, warm senior colleague would explain it, and the way a modern medical AI answers. " +
   "Draw on solid, widely-accepted medical knowledge for the substance of the answer; the numbered WEB RESULTS below are recent supporting sources — use them to ground specifics (agents, doses, current guidance) and cite the relevant ones inline as [n] matching the list, but do NOT merely summarise the snippets or limit yourself to what they happen to mention. " +
   "Lead with the direct answer, then give enough well-organised detail to be genuinely useful at the bedside: flowing prose, with short bullets only for real lists (drugs, doses, steps, differentials) and a brief markdown heading only when it truly helps. Bold key terms sparingly. Give standard adult doses/routes/durations where relevant. " +
-  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one.";
+  "Be honest in one line if evidence is weak or sources disagree. Never fabricate a specific figure or a citation. Do not describe your sources or process, and do NOT append any disclaimer — the interface already shows one." + MEDICAL_ONLY;
 
 // Research Mode (Evidence Review) — a clinician EVIDENCE REVIEW over trusted medical literature
 // (PubMed/PMC, WHO, CDC, NICE, ICMR, Cochrane and major specialty-society guidelines), NOT a general
@@ -566,7 +591,7 @@ const EVIDENCE_REVIEW_SYS =
   "5. CRITICAL — NEVER refuse or dead-end. If the SOURCES are empty, sparse, or clearly about a DIFFERENT topic than the question, IGNORE the off-topic ones and STILL answer the question fully from well-established medical knowledge and major guidelines; add ONE short line that this rests on established guidance rather than the retrieved sources. NEVER reply that 'the provided sources do not contain information' (or any equivalent) — the clinician always receives a real, direct answer.\n" +
   "6. Never let an unrelated source pull your answer toward a different condition than the one the clinician asked about.\n" +
   "7. END with exactly this one line and nothing after it: 'This is an evidence summary, not a substitute for clinical judgment.'\n" +
-  "Do not describe your retrieval process or mention PubMed. Do not add any other disclaimer (the interface already shows one).";
+  "Do not describe your retrieval process or mention PubMed. Do not add any other disclaimer (the interface already shows one)." + MEDICAL_ONLY;
 
 function clip(s, n) { return String(s == null ? "" : s).slice(0, n || 240); }
 

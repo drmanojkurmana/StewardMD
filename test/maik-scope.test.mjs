@@ -75,7 +75,9 @@ test("Intent Firewall: trivial input never blocks (normal flow handles it)", () 
 });
 
 test("Intent Firewall: classify() labels the category", () => {
-  assert.equal(MaiKScope.classify("how to eat apple").category, "non_medical");
+  // Positively identified as general knowledge now, not left to the default-deny fall-through -
+  // which matters because the fall-through no longer refuses.
+  assert.equal(MaiKScope.classify("how to eat apple").category, "general");
   assert.equal(MaiKScope.classify("write a code for website").category, "code");
   assert.equal(MaiKScope.classify("write a poem").category, "creative");
   assert.equal(MaiKScope.classify("what's the weather today").category, "general");
@@ -88,4 +90,47 @@ test("Intent Firewall: configurable allow / block without code change", () => {
   assert.equal(isNonMedical("my horoscope for today"), true);      // custom block wins
   MaiKScope.configure({ allow: ["\\bteleconsult\\b"] });
   assert.equal(isNonMedical("teleconsult"), false);                // custom allow (would otherwise be non-medical)
+});
+
+// ── certain vs uncertain ────────────────────────────────────────────────────────────────────────
+// A doctor typing "PCOD?" was told "MaiK is for healthcare professionals. It answers only medical
+// and clinical questions." No finite allow-list holds all of medicine, so "no medical signal" must
+// mean "ask the model", not "refuse the doctor". isRefusable() is the gate; classify().medical is not.
+test("Intent Firewall: real clinical vocabulary is never refused", () => {
+  for (const q of [
+    "PCOD?", "What is PCOD?", "what is PCOS", "PCOS management",
+    "What is SGLT2 drugs mechanism of action?", "SGLT2 mechanism of action",
+    "DPP-4 inhibitor mechanism", "GLP-1 agonist side effects", "Linagliptin mechanism of action",
+    "Side effects?", "Side effects of Linagliptin", "Polycystic Kidney Disease",
+    "half life of amiodarone", "bioavailability of oral iron", "drug of choice for MRSA",
+    "BPH treatment", "GDM screening", "T2DM first line", "HFpEF management", "ITP treatment",
+    "loading dose of phenytoin", "ACE inhibitor vs ARB", "PPI in GI bleed", "statin intolerance"
+  ]) {
+    assert.equal(MaiKScope.isRefusable(q), false, "wrongly refusable: " + q);
+  }
+});
+
+test("Intent Firewall: an unrecognised query goes to the model, it is not refused", () => {
+  const c = MaiKScope.classify("zzzqq unknown token here");
+  assert.equal(c.medical, false);              // no positive signal, as before
+  assert.equal(c.certain, false);              // but we do NOT claim it is non-medical
+  assert.equal(MaiKScope.isRefusable("zzzqq unknown token here"), false);
+});
+
+test("Intent Firewall: positively non-clinical is still refused without a model call", () => {
+  for (const q of ["what is ap capital", "how to code", "write me a python script",
+                   "who won the world cup", "plan my trip to goa", "how to eat apple",
+                   "what is the capital of andhra pradesh", "tell me a joke"]) {
+    assert.equal(MaiKScope.isRefusable(q), true, "should be refused: " + q);
+    assert.equal(MaiKScope.classify(q).certain, true, "should be certain: " + q);
+  }
+});
+
+test("Intent Firewall: question wrappers do not defeat the runtime lexicon", () => {
+  // lexiconMedical() is an EXACT lookup, so it only ever fired on a bare term before: "PCOD"
+  // resolved, "What is PCOD?" did not. core() strips the wrapper so both reach the same lookup.
+  assert.equal(MaiKScope.core("What is PCOD?"), "pcod");
+  assert.equal(MaiKScope.core("what is the treatment of dengue"), "dengue");
+  assert.equal(MaiKScope.core("side effects of linagliptin"), "linagliptin");
+  assert.equal(MaiKScope.core("dengue"), "dengue");
 });

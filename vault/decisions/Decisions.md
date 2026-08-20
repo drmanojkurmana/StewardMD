@@ -29,6 +29,29 @@ Heavy, flag-gated module assets are stripped from the native bundle and fetched 
 ## 2026-07-29 · Intent Firewall = allow-list, not block-list
 See [[MaiK Intent Firewall]]. Require a positive medical signal; reject the rest. **Why**: a block-list can't enumerate all non-medical topics. **Invariant**: zero false-refusals. **Status**: live (gold1041).
 
+## 2026-08-20 · Intent Firewall: refuse only what we can NAME; the model handles the rest
+Amends the 2026-07-29 allow-list decision, which stood on one wrong assumption: that "no positive
+medical signal" means "not medical". It means "not in our vocabulary". A doctor's own device transcript
+had MaiK answering "What is PCOD?" and "What is SGLT2 drugs mechanism of action?" with "MaiK is for
+healthcare professionals. It answers only medical and clinical questions." The **invariant of zero
+false-refusals was being violated by the firewall's own default branch**, and no amount of vocabulary
+can close it - medicine is open-ended.
+
+**Now:** `classify()` returns `certain:true|false`. Gate on `MaiKScope.isRefusable(q)`, which is true
+only for a POSITIVELY identified non-clinical category (code / creative / general / lay). An
+unrecognised query goes to the model, and the model refuses non-medical itself (`MEDICAL_ONLY` in the
+Vertex prompts, and a medical-only line in the on-device SYSTEM prompt). The model has the world
+knowledge to tell PCOD from a state capital; a regex does not.
+
+**Cost accepted:** a genuinely non-medical query that we cannot name deterministically now costs one
+model call to refuse. The named shapes (code, creative, general knowledge, travel, sport) are still
+refused for free. That trade is the right way round: a wasted call is cheap, telling a doctor their
+clinical question is not medical is not.
+
+**Corollary:** the client gate and the server `firewallBlock()` must share ONE predicate. They had
+drifted - the server already excluded the uncertain bucket, the client did not, and the client is what
+doctors saw. **Status**: live. See [[MaiK Intent Firewall]].
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.

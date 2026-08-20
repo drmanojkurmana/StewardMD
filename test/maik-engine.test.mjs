@@ -38,17 +38,17 @@ function load(env = {}) {
   // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
   if (env.pack !== undefined || env.models) {
     const installed = env.pack !== false;
-    let _active = env.active || "maik-local-v1";
+    let _active = env.active || "maik-mxcore";
     win.SMD_MAIK_MODELS = {
       PACKS: {
-        "maik-local-v1": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", tier: 1, nCtx: 4096 },
-        "maik-local-e2b": { label: "MAiK Horizon", actual: "Gemma 4 E2B (Q4_K_M)", tier: 3, nCtx: 4096 }
+        "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", tier: 1, nCtx: 4096 },
+        "maik-horizon": { label: "MAiK Horizon", actual: "Gemma 4 E2B (Q4_K_M)", tier: 3, nCtx: 4096 }
       },
-      packIds: () => ["maik-local-v1", "maik-local-e2b"],
-      installedCached: (id) => installed && id === "maik-local-v1",
-      sizeLabel: (id) => (id === "maik-local-v1" ? "2.49 GB" : "3.11 GB"),
+      packIds: () => ["maik-mxcore", "maik-horizon"],
+      installedCached: (id) => installed && id === "maik-mxcore",
+      sizeLabel: (id) => (id === "maik-mxcore" ? "2.49 GB" : "3.11 GB"),
       totalBytes: () => 2489894976,
-      state: (id) => env.state || { downloading: false, frac: installed && id === "maik-local-v1" ? 1 : 0, done: installed && id === "maik-local-v1", err: null },
+      state: (id) => env.state || { downloading: false, frac: installed && id === "maik-mxcore" ? 1 : 0, done: installed && id === "maik-mxcore", err: null },
       subscribe: () => () => {},
       // stateful, like the real module: setActivePack must actually change activePack
       activePack: () => _active,
@@ -225,11 +225,12 @@ function load(env = {}) {
   const { E } = load({ gate: true, runtime: true, models: true, pack: false });
   const h = E.settingsHTML();
   ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 2);
-  ok("model section: names both models", /MedGemma 1\.5 4B/.test(h) && /Gemma 4 E2B/.test(h));
+  ok("model section: names the MAiK tiers, not the upstream models",
+     /MAiK MxCore/.test(h) && /MAiK Horizon/.test(h) && !/MedGemma|Gemma 4/i.test(h));
   ok("model section: shows each size", /2\.49 GB/.test(h) && /3\.11 GB/.test(h));
-  ok("model section: active pack is ticked", /data-me-pack="maik-local-v1" role="radio" aria-checked="true"/.test(h));
-  ok("model section: inactive pack not ticked", /data-me-pack="maik-local-e2b" role="radio" aria-checked="false"/.test(h));
-  ok("model section: per-pack download buttons carry the id", /data-me-model="download" data-me-id="maik-local-e2b"/.test(h));
+  ok("model section: active pack is ticked", /data-me-pack="maik-mxcore" role="radio" aria-checked="true"/.test(h));
+  ok("model section: inactive pack not ticked", /data-me-pack="maik-horizon" role="radio" aria-checked="false"/.test(h));
+  ok("model section: per-pack download buttons carry the id", /data-me-model="download" data-me-id="maik-horizon"/.test(h));
   ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 2);
   ok("model section: not-downloaded state is stated", /Not downloaded/.test(h));
 }
@@ -243,9 +244,9 @@ function load(env = {}) {
   ok("downloading: shows throughput", /2\.4 MB\/s/.test(h));
   ok("downloading: shows an ETA", /11 min left/.test(h));
   ok("downloading: renders a progress bar at the right width", /width:42\.1%/.test(h));
-  ok("downloading: offers Pause, not Download", /data-me-model="pause"/.test(h) && !/data-me-model="download" data-me-id="maik-local-v1"/.test(h));
-  ok("downloading: no Delete next to Pause (avoids a mis-tap mid-transfer)", !/data-me-model="delete" data-me-id="maik-local-v1"/.test(h));
-  ok("action buttons have a live-update hook", /data-me-actions="maik-local-v1"/.test(h));
+  ok("downloading: offers Pause, not Download", /data-me-model="pause"/.test(h) && !/data-me-model="download" data-me-id="maik-mxcore"/.test(h));
+  ok("downloading: no Delete next to Pause (avoids a mis-tap mid-transfer)", !/data-me-model="delete" data-me-id="maik-mxcore"/.test(h));
+  ok("action buttons have a live-update hook", /data-me-actions="maik-mxcore"/.test(h));
 }
 
 // a stopped download must invite resume, not restart
@@ -266,6 +267,32 @@ function load(env = {}) {
   ok("degrades safely when the model module is incomplete", (h.match(/data-me-opt="/g) || []).length === 3 && !/data-me-pack/.test(h));
 }
 
+// ── the header disclaimer must match the engine that will answer ──
+// Saying "Grounded" while the on-device model answers from its own weights, with no StewardMD
+// sources, is untrue - and it appeared on screen exactly that way.
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  E.setPref("cloud");
+  ok("cloud says grounded", /Grounded/.test(E.discLabel()));
+  E.setPref("rag");
+  ok("KB-only names the knowledge base", /knowledge base/i.test(E.discLabel()) && !/^Grounded/.test(E.discLabel()));
+  E.selectOption("local:maik-mxcore");
+  const d = E.discLabel();
+  ok("on-device does NOT claim grounded", !/Grounded/i.test(d));
+  ok("on-device says it is on-device with no sources", /On-device/i.test(d) && /no sources/i.test(d));
+  ok("every variant still tells the clinician to verify", /verify independently/i.test(d));
+}
+
+// ── no upstream model name anywhere the clinician can see ──
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  const settings = E.settingsHTML();
+  ok("settings never prints MedGemma/Gemma", !/MedGemma|Gemma/i.test(settings));
+  ok("settings shows the MAiK brand instead", /MAiK MxCore/.test(settings));
+  const chipH = E.chipHTML();
+  ok("chip never prints MedGemma/Gemma", !/MedGemma|Gemma/i.test(chipH));
+}
+
 // ── ChatGPT-style inline picker ──
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
@@ -273,13 +300,13 @@ function load(env = {}) {
   ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 4);
   ok("picker: cloud first (it is the default)", opts[0].id === "cloud" && /PRO/.test(opts[0].badge));
   ok("picker: KB-only row is free", opts[1].id === "rag" && /FREE/.test(opts[1].badge));
-  ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-local-v1" && opts[3].id === "local:maik-local-e2b");
+  ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-mxcore" && opts[3].id === "local:maik-horizon");
   ok("picker: on-device rows badged OFFLINE", opts[2].badge === "OFFLINE");
   ok("picker: shows the MAiK brand name", opts[2].label === "MAiK MxCore");
   ok("picker: third tier is Horizon", opts[3].label === "MAiK Horizon");
-  // The MAiK name is the brand; the REAL model must stay visible, because a clinician deciding
-  // whether to trust an answer is entitled to know it came from MedGemma 4B.
-  ok("picker: installed pack names the real model", /MedGemma 1\.5 4B/.test(opts[2].sub));
+  // Owner decision: the upstream model name must NOT appear in the UI - clinicians see the MAiK
+  // tier only. `actual` stays in the registry for logs and bug reports.
+  ok("picker: no upstream model name leaks into the row", !/MedGemma|Gemma/i.test(opts[2].sub) && !/MedGemma|Gemma/i.test(opts[2].label));
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
   ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
@@ -289,9 +316,9 @@ function load(env = {}) {
   ok("picker: chip reflects cloud by default", E.chipLabel() === "MaiK Cloud");
   ok("picker: currentOptionId is cloud by default", E.currentOptionId() === "cloud");
   // Selecting an INSTALLED pack switches the answering engine.
-  E.selectOption("local:maik-local-v1");
+  E.selectOption("local:maik-mxcore");
   ok("picker: selecting an installed pack sets engine local", E.getPref() === "local");
-  ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-local-v1");
+  ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-mxcore");
   E.selectOption("rag");
   ok("picker: selecting KB only switches engine", E.getPref() === "rag" && E.chipLabel() === "KB only");
   E.selectOption("cloud");
@@ -309,15 +336,15 @@ function load(env = {}) {
 // model name. Nothing told the clinician why.
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
-  E.selectOption("local:maik-local-v1");
+  E.selectOption("local:maik-mxcore");
   ok("baseline: installed pack answers locally", E.effective() === "local");
 
-  E.selectOption("local:maik-local-e2b");          // NOT installed in the stub
-  ok("uninstalled pick keeps the WORKING model answering", E.activePack() === "maik-local-v1");
+  E.selectOption("local:maik-horizon");          // NOT installed in the stub
+  ok("uninstalled pick keeps the WORKING model answering", E.activePack() === "maik-mxcore");
   ok("uninstalled pick does not break the engine", E.effective() === "local");
-  ok("uninstalled pick is remembered as the request", E.pendingPack() === "maik-local-e2b");
+  ok("uninstalled pick is remembered as the request", E.pendingPack() === "maik-horizon");
   ok("chip still names what actually answers", E.chipLabel() === "MAiK MxCore");
-  ok("picker marks the requested pack", E.options().filter((o) => o.requested).map((o) => o.pack)[0] === "maik-local-e2b");
+  ok("picker marks the requested pack", E.options().filter((o) => o.requested).map((o) => o.pack)[0] === "maik-horizon");
   // switching away clears the pending request
   E.selectOption("cloud");
   ok("choosing cloud clears the pending request", E.pendingPack() === null);
@@ -326,12 +353,12 @@ function load(env = {}) {
 // the chip must never imply a model is answering when it cannot
 {
   const { E } = load({ gate: true, runtime: true, pack: false,
-                       active: "maik-local-e2b",
+                       active: "maik-horizon",
                        state: { downloading: false, frac: 0, done: false, err: null } });
   E.setPref("local");
   ok("chip flags a not-ready model", /\(not ready\)/.test(E.chipLabel()));
 
-  const dl = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+  const dl = load({ gate: true, runtime: true, pack: false, active: "maik-horizon",
                     state: { downloading: true, frac: 0.37, done: false, err: null } });
   dl.E.setPref("local");
   ok("chip shows download progress instead of pretending", /\(37%\)/.test(dl.E.chipLabel()));
@@ -339,7 +366,7 @@ function load(env = {}) {
 
 // the "no answer" message must name the real reason, not claim KB-only mode
 {
-  const notDl = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+  const notDl = load({ gate: true, runtime: true, pack: false, active: "maik-horizon",
                        state: { downloading: false, frac: 0, done: false, err: null } });
   notDl.E.setPref("local");
   const n1 = notDl.E.kbOnlyNotice();
@@ -348,12 +375,12 @@ function load(env = {}) {
   ok("notice: tells them how to fix it", /select it to start the download/.test(n1.text));
   ok("notice: tagged local-unavailable", n1.engine === "local-unavailable");
 
-  const mid = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+  const mid = load({ gate: true, runtime: true, pack: false, active: "maik-horizon",
                      state: { downloading: true, frac: 0.42, done: false, err: null } });
   mid.E.setPref("local");
   ok("notice: mid-download says so with a percentage", /still downloading \(42%\)/.test(mid.E.kbOnlyNotice().text));
 
-  const part = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+  const part = load({ gate: true, runtime: true, pack: false, active: "maik-horizon",
                       state: { downloading: false, frac: 0.19, done: false, err: "Failed to fetch" } });
   part.E.setPref("local");
   ok("notice: partial download offers resume", /partly downloaded \(19%\)/.test(part.E.kbOnlyNotice().text) && /resume/.test(part.E.kbOnlyNotice().text));
@@ -367,16 +394,16 @@ function load(env = {}) {
 // adopt the pack once it finishes downloading
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
-  E.selectOption("local:maik-local-v1");
+  E.selectOption("local:maik-mxcore");
   E.setPref("cloud");
-  ok("adopt: switches to local once the selected pack is installed", E.adoptPackWhenReady("maik-local-v1") === true && E.getPref() === "local");
-  ok("adopt: refuses for a pack that is not installed", E.adoptPackWhenReady("maik-local-e2b") === false);
+  ok("adopt: switches to local once the selected pack is installed", E.adoptPackWhenReady("maik-mxcore") === true && E.getPref() === "local");
+  ok("adopt: refuses for a pack that is not installed", E.adoptPackWhenReady("maik-horizon") === false);
   ok("adopt: promotes the PENDING pack once it lands", (function () {
     const f = load({ gate: true, runtime: true, pack: true });
-    f.E.selectOption("local:maik-local-e2b");                  // not installed -> pending
+    f.E.selectOption("local:maik-horizon");                  // not installed -> pending
     f.win.SMD_MAIK_MODELS.installedCached = () => true;        // download finishes
-    const okAdopt = f.E.adoptPackWhenReady("maik-local-e2b");
-    return okAdopt === true && f.E.activePack() === "maik-local-e2b" && f.E.pendingPack() === null;
+    const okAdopt = f.E.adoptPackWhenReady("maik-horizon");
+    return okAdopt === true && f.E.activePack() === "maik-horizon" && f.E.pendingPack() === null;
   })());
 }
 

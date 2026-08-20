@@ -40,7 +40,7 @@
    * Conversation history IS kept: it is the clinician's own turns, not a StewardMD resource, and
    * without it a bare follow-up ("and the dose?") is meaningless. Two turns, tightly clipped.
    */
-  var DEFAULT_PACK = "maik-local-v1";
+  var DEFAULT_PACK = "maik-mxcore";
   var HISTORY_TURNS = 2;
   var HISTORY_CLIP = 180;
 
@@ -54,15 +54,56 @@
    * mostly just put the forbidden concept in context. So every rule here is an instruction, not a
    * prohibition.
    */
+  /* THE DOSE RULE IS CONDITIONAL ON PURPOSE.
+   *
+   * It used to read "For an adult drug dose, give the standard flat adult dose..." unconditionally,
+   * and the model applied it to EVERY question. Asked for the SIDE EFFECTS of linagliptin it opened
+   * "Linagliptin 100 mg orally once daily is the standard first-line treatment" - a dose nobody
+   * asked for, wrong by 20x (5 mg), from a model that had itself said 5 mg two turns earlier. An
+   * instruction a 4B applies out of context is worse than no instruction: it manufactures a
+   * confident number to satisfy the format. So the rule now names the condition first.
+   */
   var SYSTEM =
-    "You are MaiK, clinical decision support for doctors. Answer in markdown: one-line bottom line, " +
-    "then short bullets. No preamble.\n" +
-    "For an adult drug dose, give the standard flat adult dose with route and frequency, like " +
-    "\"2 g IV over 20 min\" or \"1 g IV every 24 h\". Use mg/kg only when the drug is genuinely dosed " +
-    "by weight in adults.\n" +
-    "Name the first-line regimen most guidelines agree on. Where you are unsure of a figure, give " +
-    "the range and say it varies.\n" +
+    "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
+    "Answer medical questions only. For anything else reply: \"I can only help with medical and " +
+    "clinical questions.\"\n" +
+    "Give the final answer only, never your reasoning.\n" +
+    "Open with ONE plain sentence answering the question, then short bullets. Use no section labels " +
+    "such as \"Bottom Line\", \"Answer\" or \"Summary\".\n" +
+    "Answer exactly what was asked: for side effects, mechanism, monitoring or contraindications, " +
+    "write about that alone.\n" +
+    "When asked for a dose, give the standard flat adult dose with route and frequency, like " +
+    "\"2 g IV over 20 min\". Use mg/kg only when adults are genuinely dosed by weight.\n" +
+    "Name the first-line regimen most guidelines agree on. Where unsure of a figure, give the range " +
+    "and say it varies.\n" +
     "End with one line: \"Verify against local protocol.\"";
+
+  /* Reasoning leak guard.
+   *
+   * Observed on device: an answer that began "thought The user wants me to act as MaiK, a clinical
+   * decision support system..." and then recited this very system prompt back at the doctor before
+   * answering. The SYSTEM line above asks for the final answer only; this is the backstop for when a
+   * 4B ignores it, because the leak exposes the prompt and reads as a malfunction.
+   */
+  var THINK_TAG = /<\s*(think|thinking|thought|reason|reasoning|scratchpad)\s*>[\s\S]*?<\s*\/\s*\1\s*>/gi;
+  var THINK_OPEN = /<\s*(think|thinking|thought|reason|reasoning|scratchpad)\s*>[\s\S]*$/i;   // unterminated
+  var GEMMA_CTRL = /<\s*(start_of_turn|end_of_turn|unused\d+|eos|bos|pad)\s*>/gi;
+  var LEAD_THOUGHT = /^\s*(thought|thinking|reasoning|analysis|plan)\b\s*[:\-]?\s*/i;
+
+  function stripReasoning(t) {
+    var out = String(t == null ? "" : t);
+    out = out.replace(THINK_TAG, "").replace(GEMMA_CTRL, "");
+    // An unterminated <think> means the budget ran out mid-reasoning: there is no answer after it,
+    // so keep whatever came BEFORE rather than shipping raw reasoning.
+    out = out.replace(THINK_OPEN, "");
+    // Bare "thought ..." preamble with no tags (what actually shipped on device). Drop only up to the
+    // first paragraph break, so a genuine answer that merely starts with the word is not eaten.
+    if (LEAD_THOUGHT.test(out)) {
+      var brk = out.search(/\n\s*\n/);
+      out = brk > -1 ? out.slice(brk) : out.replace(LEAD_THOUGHT, "");
+    }
+    return out.replace(/^\s+/, "").replace(/\s+$/, "");
+  }
 
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
@@ -77,12 +118,39 @@
    * Question (plus a little conversation) only. The grounded package is deliberately IGNORED apart
    * from its question and history - see the note above.
    */
+  /* HISTORY IS OPT-IN, NOT ALWAYS-ON.
+   *
+   * It used to be prepended to every prompt. Observed on device: after "Treatment of Fever" was
+   * answered, the next question "Polycystic Kidney Disease" came back as "the standard first-line
+   * regimen for fever in adults with renal impairment... acetaminophen 650 mg". The 4B read the fever
+   * answer sitting above the new question and fused the two topics. A doctor asked about one disease
+   * and was given the treatment for another - the worst failure this engine can produce.
+   *
+   * A follow-up needs history ("Side effects?" is meaningless alone). A question that carries its own
+   * subject does not. So history goes in ONLY for an aspect-only question, and the default is none:
+   * losing continuity yields a generic answer, while bleeding topics yields a confidently wrong one.
+   */
+  var FILLER = /^(what|whats|what's|how|why|and|but|so|about|of|for|the|a|an|in|on|to|is|are|it|its|it's|this|that|them|those|these|same|any|other|more|also|then|ok|okay|please|tell|me|us|give|show)$/;
+  var ASPECT = /^(dose|doses|dosage|dosing|side|effect|effects|adverse|reaction|reactions|contraindication|contraindications|interaction|interactions|mechanism|action|moa|duration|monitoring|monitor|complication|complications|prognosis|alternative|alternatives|children|child|paediatric|pediatric|kids|pregnancy|pregnant|lactation|breastfeeding|renal|hepatic|liver|kidney|elderly|adult|adults|neonate|neonates|safety|cost|route|frequency|dilution|infusion|oral|iv|im|maximum|max|minimum|min|onset|half|life|failure|impairment|insufficiency|disease)$/;
+
+  /** An aspect-only question: every token is filler or an aspect word, so it has no subject of its
+   *  own and is only answerable against the previous turn. "Side effects?" yes; "Polycystic Kidney
+   *  Disease" no; "Side effects of Linagliptin" no (it names its own subject). */
+  function isFollowUp(q) {
+    var toks = String(q == null ? "" : q).toLowerCase().replace(/[^a-z0-9'\s-]/g, " ").split(/\s+/).filter(Boolean);
+    if (!toks.length || toks.length > 6) return false;
+    for (var i = 0; i < toks.length; i++) {
+      if (!FILLER.test(toks[i]) && !ASPECT.test(toks[i])) return false;
+    }
+    return true;
+  }
+
   function buildPrompt(pkg) {
     if (!pkg) return "";
     var question = pkg.question || (pkg.topicMatch && pkg.topicMatch.topic) || "";
     var L = [];
     var hist = pkg.history || [];
-    if (hist.length) {
+    if (hist.length && isFollowUp(question)) {
       L.push("Recent conversation:");
       hist.slice(-HISTORY_TURNS * 2).forEach(function (h) {
         L.push((h.role === "assistant" ? "MaiK: " : "Doctor: ") + clip(h.text || h.content, HISTORY_CLIP));
@@ -141,7 +209,11 @@
       var attach = (typeof onDelta === "function" && L.addListener)
         ? Promise.resolve(L.addListener("llamaToken", function (ev) {
             acc += (ev && ev.text) || "";
-            try { onDelta(acc); } catch (e) {}
+            // Strip on the way out too, not just at the end: onDelta feeds the live typewriter, so a
+            // leaked reasoning preamble would be read on screen even though the final text is clean.
+            // While the model is inside an unterminated reasoning block this yields "", which is the
+            // honest thing to show - nothing has been answered yet.
+            try { onDelta(stripReasoning(acc)); } catch (e) {}
           }))
         : Promise.resolve(null);
 
@@ -169,7 +241,7 @@
           stream: typeof onDelta === "function"
         });
       }).then(function (r) {
-        var text = (r && r.text) || acc || "";
+        var text = stripReasoning((r && r.text) || acc || "");
         return {
           text: text,
           // ALWAYS empty: this answer used no StewardMD material, so attaching the package's
@@ -249,6 +321,7 @@
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
+    isFollowUp: isFollowUp, stripReasoning: stripReasoning,
     warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

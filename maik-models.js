@@ -79,8 +79,9 @@
    *
    * Fastest -> strongest medical -> broadest general.
    *
-   * `actual` is the real upstream model, kept visible in the UI: a clinician deciding whether to
-   * trust an answer is entitled to know it came from MedGemma 4B and not something larger.
+   * `actual` is the real upstream model. It is deliberately NOT rendered anywhere in the UI - the
+   * product decision is that clinicians see the MAiK tier name only. It stays in the registry
+   * because logs, bug reports and the eval harness need to say which weights actually answered.
    *
    * Sizes and hashes are REAL values, not estimates. Only MxCore's sha256 has been verified by
    * hashing a complete download; the others are the HuggingFace API digest and are marked as such.

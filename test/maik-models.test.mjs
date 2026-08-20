@@ -83,16 +83,18 @@ function fakeModel(n) {
 {
   const { M } = load();
   ok("exposes API", !!M && typeof M.ensure === "function" && typeof M.pathFor === "function");
-  ok("primary pack is MedGemma 1.5 4B", /MedGemma 1\.5 4B/.test(M.PACKS["maik-local-v1"].label));
-  ok("primary pack exact byte count", M.totalBytes("maik-local-v1") === 2489894976);
-  ok("primary pack sizeLabel", M.sizeLabel("maik-local-v1") === "2.49 GB");
-  ok("comparison pack is Gemma 4 E2B", /Gemma 4 E2B/.test(M.PACKS["maik-local-e2b"].label));
-  ok("Q5 quality pack present with the exact size", M.totalBytes("maik-local-v1-q5") === 2829699136);
-  ok("Q5 pack still fits the 8 GB iPhone budget", M.totalBytes("maik-local-v1-q5") < 3.0e9);
-  ok("Q5 pack sha256 is explicitly null, not a fake Xet oid", M.PACKS["maik-local-v1-q5"].files[0].sha256 === null);
-  ok("E2B exact byte count", M.totalBytes("maik-local-e2b") === 3106738272);
+  ok("primary tier is MAiK MxCore", M.PACKS["maik-mxcore"].label === "MAiK MxCore");
+  ok("its upstream model is recorded for code/logs but not the UI", /MedGemma 1\.5 4B/.test(M.PACKS["maik-mxcore"].actual));
+  ok("primary pack exact byte count", M.totalBytes("maik-mxcore") === 2489894976);
+  ok("primary pack sizeLabel", M.sizeLabel("maik-mxcore") === "2.49 GB");
+  ok("third tier is MAiK Horizon", M.PACKS["maik-horizon"].label === "MAiK Horizon");
+  ok("tiers come back in recommended order", M.packIds().join(",") === "maik-mxcore,maik-neural,maik-horizon");
+  ok("MAiK Neural (Q5) present with the exact size", M.totalBytes("maik-neural") === 2829699136);
+  ok("Neural still fits the 8 GB iPhone budget", M.totalBytes("maik-neural") < 3.0e9);
+  ok("Neural sha256 is explicitly null (unverified), not a guess", M.PACKS["maik-neural"].files[0].sha256 === null);
+  ok("Horizon exact byte count", M.totalBytes("maik-horizon") === 3106738272);
   ok("E4B is NOT offered (4.98 GB will not fit the 8 GB floor device)",
-     !Object.values(M.PACKS).some((p) => /E4B/.test(p.label)));
+     !Object.values(M.PACKS).some((p) => /E4B/.test(p.actual || "")));
   ok("every pack clamps n_ctx to 4096", Object.values(M.PACKS).every((p) => p.nCtx === 4096));
   ok("chunked, not whole-file", M.CHUNK_BYTES > 0 && M.CHUNK_BYTES <= 64 * 1024 * 1024);
   let threw = false; try { M.totalBytes("nope"); } catch (e) { threw = true; }
@@ -102,9 +104,9 @@ function fakeModel(n) {
 // ── install marker ──
 {
   const { M, ls } = load();
-  ok("installedCached false before download", M.installedCached("maik-local-v1") === false);
-  ls.setItem("smd_maik_pack_maik-local-v1", "1");
-  ok("installedCached true once marked", M.installedCached("maik-local-v1") === true);
+  ok("installedCached false before download", M.installedCached("maik-mxcore") === false);
+  ls.setItem("smd_maik_pack_maik-mxcore", "1");
+  ok("installedCached true once marked", M.installedCached("maik-mxcore") === true);
 }
 
 // ── cold download of a small fake model ──
@@ -112,15 +114,15 @@ function fakeModel(n) {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
   const { M, ls, files, calls } = load({ serverBytes: server });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;         // shrink the pack for the test
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;         // shrink the pack for the test
   const seen = [];
-  const r = await M.ensure("maik-local-v1", (f) => seen.push(f));
+  const r = await M.ensure("maik-mxcore", (f) => seen.push(f));
   ok("cold download resolves installed", r && r.installed === true);
   ok("file fully written", files.get("maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf").length === SIZE);
   ok("started at byte 0", calls.ranges[0][0] === 0);
   ok("directory created", calls.mkdir === 1);
   ok("excluded from iCloud backup", calls.exclude === 1);
-  ok("marker written", ls._s["smd_maik_pack_maik-local-v1"] === "1");
+  ok("marker written", ls._s["smd_maik_pack_maik-mxcore"] === "1");
   ok("progress reported and reaches 1", seen.length > 0 && seen[seen.length - 1] === 1);
   ok("progress is monotonic", seen.every((v, i) => i === 0 || v >= seen[i - 1]));
   ok("no single append larger than the chunk size", Math.max(...calls.appends) <= M.CHUNK_BYTES);
@@ -131,9 +133,9 @@ function fakeModel(n) {
   const SIZE = 5_000_000, HAVE = 2_000_000;
   const server = fakeModel(SIZE);
   const { M, files, calls } = load({ serverBytes: server, onDisk: server.subarray(0, HAVE) });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
   const notes = [];
-  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
   ok("resume starts at the existing byte offset", calls.ranges[0][0] === HAVE);
   ok("resume did NOT refetch from 0", !calls.ranges.some((r) => r[0] === 0));
   ok("resumed file is complete and correct", Buffer.compare(files.get("maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf"), server) === 0);
@@ -145,9 +147,9 @@ function fakeModel(n) {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
   const { M, calls } = load({ serverBytes: server, onDisk: server });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
   const notes = [];
-  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
   ok("complete file triggers zero range requests", calls.ranges.length === 0);
   ok("complete file says so", notes.some((n) => /Already downloaded/i.test(n)));
 }
@@ -157,8 +159,8 @@ function fakeModel(n) {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
   const { M, files, calls } = load({ serverBytes: server, onDisk: Buffer.concat([server, Buffer.alloc(999)]) });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
-  await M.ensure("maik-local-v1", () => {});
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
+  await M.ensure("maik-mxcore", () => {});
   ok("oversize file deleted", calls.deleted.length === 1);
   ok("oversize file re-downloaded from 0", calls.ranges[0][0] === 0);
   ok("restarted file ends at the right size", files.get("maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf").length === SIZE);
@@ -168,11 +170,11 @@ function fakeModel(n) {
 {
   const SIZE = 5_000_000;
   const { M, ls } = load({ serverBytes: fakeModel(SIZE), badMagic: true });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("non-GGUF body rejected", !!err && /GGUF/.test(err.message));
-  ok("marker NOT written on a failed download", !("smd_maik_pack_maik-local-v1" in ls._s));
+  ok("marker NOT written on a failed download", !("smd_maik_pack_maik-mxcore" in ls._s));
 }
 
 // ── a server that ignores Range cannot be used to resume ──
@@ -180,9 +182,9 @@ function fakeModel(n) {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
   const { M } = load({ serverBytes: server, onDisk: server.subarray(0, 2_000_000), ignoreRange: true });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("range-ignoring server surfaces a clear error", !!err && /resume/i.test(err.message));
 }
 
@@ -190,11 +192,11 @@ function fakeModel(n) {
 {
   const SIZE = 5_000_000;
   const { M, ls } = load({ serverBytes: fakeModel(SIZE - 1000) });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;          // claim more than the server has
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;          // claim more than the server has
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("short file rejected on verify", !!err && /size mismatch/.test(err.message));
-  ok("marker NOT written on size mismatch", !("smd_maik_pack_maik-local-v1" in ls._s));
+  ok("marker NOT written on size mismatch", !("smd_maik_pack_maik-mxcore" in ls._s));
 }
 
 // ── delete ──
@@ -202,17 +204,17 @@ function fakeModel(n) {
   const SIZE = 5_000_000;
   const server = fakeModel(SIZE);
   const { M, ls, files } = load({ serverBytes: server, onDisk: server });
-  M.PACKS["maik-local-v1"].files[0].bytes = SIZE;
-  ls.setItem("smd_maik_pack_maik-local-v1", "1");
-  await M.remove("maik-local-v1");
+  M.PACKS["maik-mxcore"].files[0].bytes = SIZE;
+  ls.setItem("smd_maik_pack_maik-mxcore", "1");
+  await M.remove("maik-mxcore");
   ok("delete removes the file", !files.has("maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf"));
-  ok("delete clears the marker", !("smd_maik_pack_maik-local-v1" in ls._s));
+  ok("delete clears the marker", !("smd_maik_pack_maik-mxcore" in ls._s));
 }
 
 // ── path handed to the native plugin ──
 {
   const { M } = load();
-  const p = await M.pathFor("maik-local-v1");
+  const p = await M.pathFor("maik-mxcore");
   ok("pathFor strips the file:// scheme for the plugin", p === "/var/mobile/Data/maik-models/medgemma-1.5-4b-it-Q4_K_M.gguf");
 }
 
@@ -220,9 +222,9 @@ function fakeModel(n) {
 {
   const { M } = load({ native: false });
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("non-native ensure() rejects with a clear reason", !!err && /native app/i.test(err.message));
-  ok("non-native installed() is false", (await M.installed("maik-local-v1")) === false);
+  ok("non-native installed() is false", (await M.installed("maik-mxcore")) === false);
 }
 
 // ── NATIVE background download (OS DownloadManager) ──
@@ -245,7 +247,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
     CapacitorWebFetch: async () => { calls.chunkRanges++; throw new Error("chunk loop must NOT run on native"); }
   };
   const ls = fakeLS();
-  if (existingId) ls.setItem("smd_maik_dlid_maik-local-v1", existingId);
+  if (existingId) ls.setItem("smd_maik_dlid_maik-mxcore", existingId);
   new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
   return { M: win.SMD_MAIK_MODELS, ls, calls };
 }
@@ -258,14 +260,14 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
     { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
   ] });
   const seen = [];
-  const r = await M.ensure("maik-local-v1", (f, n) => seen.push(n || f));
+  const r = await M.ensure("maik-mxcore", (f, n) => seen.push(n || f));
   ok("native: resolves installed", r && r.installed === true);
   ok("native: handed to the OS downloader", calls.start === 1);
   ok("native: NEVER runs the JS chunk loop", calls.chunkRanges === 0);
   ok("native: polled to completion", calls.status >= 3);
-  ok("native: marker written", ls._s["smd_maik_pack_maik-local-v1"] === "1");
-  ok("native: download id cleared when done", !("smd_maik_dlid_maik-local-v1" in ls._s));
-  ok("native: state says it ran in the background", M.state("maik-local-v1").background === true);
+  ok("native: marker written", ls._s["smd_maik_pack_maik-mxcore"] === "1");
+  ok("native: download id cleared when done", !("smd_maik_dlid_maik-mxcore" in ls._s));
+  ok("native: state says it ran in the background", M.state("maik-mxcore").background === true);
   ok("native: tells the user it is a background transfer", seen.some((n) => /background/i.test(String(n))));
 }
 
@@ -277,7 +279,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
     { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
   ] });
   const notes = [];
-  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
   ok("re-attach: did NOT start a second download", calls.start === 0);
   ok("re-attach: surfaced that it resumed", notes.some((n) => /Resuming in the background/i.test(n)));
 }
@@ -290,7 +292,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
     { state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE }
   ] });
   const notes = [];
-  await M.ensure("maik-local-v1", (f, n) => { if (n) notes.push(n); });
+  await M.ensure("maik-mxcore", (f, n) => { if (n) notes.push(n); });
   ok("paused is surfaced as waiting, not failed", notes.some((n) => /Waiting for a connection/i.test(n)));
 }
 
@@ -299,16 +301,16 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const SIZE = 2489894976;
   const { M, ls } = loadNative({ script: [{ state: "done", bytes: SIZE, total: SIZE, onDisk: SIZE - 4096 }] });
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("short file rejected even when the OS says done", !!err && /size mismatch/.test(err.message));
-  ok("no install marker on a short file", !("smd_maik_pack_maik-local-v1" in ls._s));
+  ok("no install marker on a short file", !("smd_maik_pack_maik-mxcore" in ls._s));
 }
 
 // pre-flight: refuse politely instead of filling the device
 {
   const { M, calls } = loadNative({ freeBytes: 1e9, script: [{ state: "done", onDisk: 0 }] });
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("refuses when free space is short", !!err && /not enough free space/.test(err.message));
   ok("did not start a doomed download", calls.start === 0);
 }
@@ -316,7 +318,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
 // already on disk -> no download at all
 {
   const { M, calls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
-  const r = await M.ensure("maik-local-v1", () => {});
+  const r = await M.ensure("maik-mxcore", () => {});
   ok("already-complete file skips the OS download", r.installed === true && calls.start === 0);
 }
 
@@ -324,23 +326,23 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
 {
   const { M } = loadNative({ script: [{ state: "failed", bytes: 1e8, total: 2489894976, reason: 1004 }] });
   let err = null;
-  await M.ensure("maik-local-v1", () => {}).catch((e) => { err = e; });
+  await M.ensure("maik-mxcore", () => {}).catch((e) => { err = e; });
   ok("OS failure reason surfaced", !!err && /reason 1004/.test(err.message));
 }
 
 // delete goes through the plugin on native
 {
   const { M, calls, ls } = loadNative({ onDisk: 2489894976, script: [{ state: "none" }] });
-  ls.setItem("smd_maik_pack_maik-local-v1", "1");
-  await M.remove("maik-local-v1");
+  ls.setItem("smd_maik_pack_maik-mxcore", "1");
+  await M.remove("maik-mxcore");
   ok("native delete uses the plugin", calls.del === 1);
-  ok("native delete clears the marker", !("smd_maik_pack_maik-local-v1" in ls._s));
+  ok("native delete clears the marker", !("smd_maik_pack_maik-mxcore" in ls._s));
 }
 
 // path comes from the plugin on native (DownloadManager cannot write the internal files dir)
 {
   const { M } = loadNative({ script: [{ state: "none" }] });
-  ok("pathFor asks the plugin on native", (await M.pathFor("maik-local-v1")) === "/ext/maik-models/m.gguf");
+  ok("pathFor asks the plugin on native", (await M.pathFor("maik-mxcore")) === "/ext/maik-models/m.gguf");
 }
 
 // ── the UI must re-attach to a transfer the OS is still carrying ──
@@ -355,7 +357,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ] });
   const found = await M.resumeUiForBackgroundDownloads();
   ok("finds the in-flight transfer", found === true);
-  const st = M.state("maik-local-v1");
+  const st = M.state("maik-mxcore");
   ok("adopts it as downloading", st.downloading === true && st.background === true);
   ok("shows real progress, not zero", st.bytes === 6e8 && st.frac > 0.2 && st.frac < 0.3);
   ok("says it is a background transfer", /background/i.test(st.note));
@@ -366,7 +368,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   const SIZE = 2489894976;
   const { M } = loadNative({ script: [{ state: "paused", bytes: 3e8, total: SIZE, onDisk: 0 }] });
   await M.resumeUiForBackgroundDownloads();
-  const st = M.state("maik-local-v1");
+  const st = M.state("maik-mxcore");
   // A paused transfer is still IN FLIGHT (the OS will resume it), so downloading stays true and the
   // NOTE is what tells the clinician it is waiting. Keeping downloading=true also means the row
   // shows Pause rather than Download, so it cannot be tapped into a duplicate.
@@ -378,7 +380,7 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
 {
   const { M, calls } = loadNative({ script: [{ state: "none", onDisk: 0 }] });
   const found = await M.resumeUiForBackgroundDownloads();
-  ok("no phantom state when nothing is running", found === false && M.state("maik-local-v1").downloading === false);
+  ok("no phantom state when nothing is running", found === false && M.state("maik-mxcore").downloading === false);
   ok("did not start anything", calls.start === 0);
 }
 
