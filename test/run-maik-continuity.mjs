@@ -39,6 +39,7 @@ try {
     window.SMD_AI = window.SMD_AI || {};
     SMD_AI.setFlag = function(){};
     SMD_AI.explainGrounded = function(pkg, opts){ window.__mk.prov++; window.__mk.q = (pkg&&pkg.question)||""; window.__mk.depth = (opts&&opts.depth)||""; return Promise.resolve({ text: "## Clinical take\\nManagement guidance for the requested topic, complete to the last sentence." }); };
+    SMD_AI.explainGroundedStream = function(pkg, opts, onDelta){ window.__mk.prov++; window.__mk.q = (pkg&&pkg.question)||""; window.__mk.depth = (opts&&opts.depth)||""; try{onDelta&&onDelta("stub");}catch(e){} return Promise.resolve({ text: "## Clinical take\\nManagement guidance for the requested topic, complete to the last sentence." }); };
     window.StewardRAG = { ready:function(){return Promise.resolve();}, buildPackage:function(assess, opts){ window.__mk.retr++; window.__mk.retrieval = (opts&&opts.question)||""; return Promise.resolve({ retrieved:[], grounding:[], reasoning:{differential:[]}, question:(opts&&opts.question)||"" }); } };
     try { localStorage.setItem("smd_maik_v2","1"); } catch(e){}
     return 1;`);
