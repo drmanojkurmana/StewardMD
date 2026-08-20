@@ -152,6 +152,16 @@
     if (kind === "refine") return Promise.resolve(null);          // no local router; KB terms are enough
     var pkg = args[0], opts = args[1], onDelta = args[2];
     if (kind === "explain") { pkg = { summary: args[0], question: args[1] || "" }; opts = null; onDelta = null; }
+    // Attach any image the composer staged, and CONSUME it, so the next question is not silently
+    // answered about the previous photo. Taken here rather than in home.js so every caller of the
+    // decorated SMD_AI gets the same behaviour.
+    try {
+      var stagedTake = window.__MAIK_IMAGES && window.__MAIK_IMAGES.take;
+      if (stagedTake) {
+        var imgs = stagedTake();
+        if (imgs && imgs.length) opts = Object.assign({}, opts || {}, { images: imgs });
+      }
+    } catch (e) {}
     return Promise.resolve(window.SMD_MAIK_LOCAL.answer(pkg, opts, onDelta))
       .catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
   }
@@ -314,6 +324,9 @@
           (!st.downloading && !st.queued && (have || st.frac > 0)
             ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
         '</div>' +
+        // Image reading is a SEPARATE add-on, offered only once the model itself is on the device:
+        // spending 851 MB on a projector for a model you do not have is not a choice worth offering.
+        visionRowHTML(id, have) +
       '</div>';
     }).join("");
 
@@ -325,6 +338,40 @@
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
+  }
+
+  /**
+   * The optional image-reading add-on for one pack.
+   *
+   * Shown only when (a) the model can see at all - Apex is text-only and never gets this row - and
+   * (b) the model itself is already downloaded. It reuses the ordinary pack row machinery through the
+   * "<id>#vision" sub-pack, so its progress, pause, resume and delete all behave identically without
+   * a second code path.
+   */
+  function visionRowHTML(id, haveModel) {
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.hasVision || !M.hasVision(id) || !haveModel) return "";
+    var vid = M.visionIdOf(id);
+    var vst = M.state(vid), vhave = M.installedCached(vid);
+    var size = M.sizeLabel(vid);
+    var status = vst.queued ? (vst.note || "Waiting") + " · " + size
+      : vst.downloading ? (vst.frac * 100).toFixed(1) + "% of " + size + " · " + (vst.mbps || 0).toFixed(1) + " MB/s"
+      : vhave ? "Ready · reads photos, labels and reports offline"
+      : vst.frac > 0 ? "Paused at " + (vst.frac * 100).toFixed(1) + "% · " + size
+      : "Add image reading · " + size;
+    return '<div data-me-pack-row="' + vid + '" style="border-top:1px dashed var(--line,#e2e8f0);padding:10px 14px 12px;margin-top:2px">' +
+      '<div style="font:600 12.5px/1.3 var(--sans,system-ui);color:var(--ink,#14202b)">Image reading</div>' +
+      '<div data-me-status="' + vid + '" style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + esc(status) + '</div>' +
+      '<div data-me-bar="' + vid + '">' + (vst.downloading || (vst.frac > 0 && !vhave)
+        ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:6px">' +
+            '<div style="height:100%;width:' + (vst.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63)"></div></div>'
+        : "") + '</div>' +
+      '<div style="display:flex;gap:8px;margin-top:8px" data-me-actions="' + vid + '">' +
+        actionBtnHTML(vid, vst, vhave) +
+        (!vst.downloading && !vst.queued && (vhave || vst.frac > 0)
+          ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + vid + '" style="margin:0;flex:1">Remove</button>' : "") +
+      '</div>' +
+    '</div>';
   }
 
   /** The hardware warning, styled as a caution rather than a note so it is not skimmed past. */

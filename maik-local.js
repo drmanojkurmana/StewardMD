@@ -105,6 +105,49 @@
     return out.replace(/^\s+/, "").replace(/\s+$/, "");
   }
 
+  /* IMAGE ANSWERS.
+   *
+   * MedGemma 1.5 and Gemma 4 can see, but only with their projector (mmproj) downloaded alongside the
+   * weights. Apex is Qwen3-based and text-only, so it has no projector and must never be offered an
+   * image button.
+   *
+   * MAX_IMAGES is 2, not unbounded: each image costs hundreds of prompt tokens through the vision
+   * encoder, and prefill is the whole latency story on-device (measured flat ~14 tok/s). Three photos
+   * would push a 4096 context to the edge and leave no room for an answer.
+   */
+  var MAX_IMAGES = 2;
+
+  /* A SEPARATE system prompt for image questions.
+   *
+   * The text prompt tells the model to answer from its own knowledge; here it must describe what is
+   * ACTUALLY VISIBLE and say so when the picture is unreadable. Without that a 4B narrates a
+   * plausible label it cannot see, which on a drug box or a lab report is the most dangerous thing
+   * this feature could do.
+   */
+  var SYSTEM_IMAGE =
+    "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
+    "Describe only what is actually visible in the image. When text is blurred, cut off or you " +
+    "cannot read it, say which part you cannot read rather than guessing.\n" +
+    "Give the final answer only, never your reasoning. Use no section labels.\n" +
+    "For a medicine package or label, read back the drug name, strength and form exactly as printed.\n" +
+    "For a report or investigation, read the values as printed and flag the abnormal ones.\n" +
+    "This is an offline reading with no StewardMD sources. End with one line: " +
+    "\"Verify against the original document.\"";
+
+  /** Can this pack see at all, and is its projector on disk? */
+  function visionReady(packId) {
+    var M = models();
+    if (!M || !M.hasVision || !M.hasVision(packId)) return false;
+    try { return !!M.installedCached(M.visionIdOf(packId)); } catch (e) { return false; }
+  }
+
+  /** Absolute path of the projector for this pack, or "" when it is not downloaded. */
+  function visionPathFor(packId) {
+    var M = models();
+    if (!M || !visionReady(packId)) return Promise.resolve("");
+    return M.pathFor(M.visionIdOf(packId)).then(function (p) { return p || ""; }, function () { return ""; });
+  }
+
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
   function models() { try { return window.SMD_MAIK_MODELS || null; } catch (e) { return null; } }
@@ -210,6 +253,11 @@
     var L = llama();
     if (!L) return Promise.resolve({ error: "on-device inference needs the native app" });
     var packId = (opts && opts.pack) || currentPack();
+    // opts.images = local file paths. Empty for the ordinary text path.
+    var images = (opts && opts.images && opts.images.length) ? opts.images.slice(0, MAX_IMAGES) : [];
+    if (images.length && !visionReady(packId)) {
+      return Promise.resolve({ error: "vision-not-downloaded" });
+    }
     var t0 = Date.now();
     var acc = "";
     var sub = null;
@@ -246,14 +294,26 @@
       return attach.then(function (handle) {
         sub = handle;
         var pk = (models() && models().PACKS[packId]) || {};
-        return L.generate({
+        var common = {
           prompt: prompt,
-          system: SYSTEM,
+          system: images.length ? SYSTEM_IMAGE : SYSTEM,
           nPredict: pk.nPredict || 512,
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
           stream: typeof onDelta === "function"
+        };
+        if (!images.length) return L.generate(common);
+        // IMAGE PATH. mtmd reads the file itself, so paths cross the bridge, never base64 - a phone
+        // photo is several MB and marshalling that as a string is what made the old downloader
+        // unusable. mmproj must come from the SAME pack as the loaded model; nothing native can
+        // detect a mismatched pair, it just answers confident nonsense.
+        return visionPathFor(packId).then(function (mm) {
+          if (!mm) return { error: "vision-not-downloaded" };
+          common.images = images;
+          common.mmproj = mm;
+          return L.generateWithImage(common);
         });
       }).then(function (r) {
+        if (r && r.error) return r;
         var text = stripReasoning((r && r.text) || acc || "");
         return {
           text: text,
@@ -262,6 +322,7 @@
           sources: [],
           grounded: false,
           engine: "local",
+          images: images.length,
           model: (models() && models().PACKS[packId] && models().PACKS[packId].label) || packId,
           ms: (r && r.ms) || (Date.now() - t0)
         };
@@ -335,6 +396,7 @@
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, stripReasoning: stripReasoning,
+    visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

@@ -113,14 +113,30 @@
     return function () { try { ov.remove(); } catch (e) {} };
   }
 
+  /* Is the OFFLINE model able to read images right now?
+   *
+   * Three things must hold: the on-device engine exists, the selected pack can see (Apex is Qwen3
+   * text-only), and its projector is downloaded. Offered as a third engine only then, because an
+   * option that can only fail is worse than no option.
+   */
+  function localVisionReady() {
+    try {
+      var L = window.SMD_MAIK_LOCAL;
+      return !!(L && L.visionReady && L.visionReady(L.currentPack()));
+    } catch (e) { return false; }
+  }
+
   function engineCard(engine, selected, kind) {
     var isAi = engine === "ai";
+    var isLocal = engine === "local";
     var rec = recommendFor(kind) === engine;
-    var title = isAi ? "AI Vision" : "Private Device OCR";
+    var title = isAi ? "AI Vision" : isLocal ? "On-device AI" : "Private Device OCR";
     var pill = isAi ? '<span class="ie-pill pro">Pro</span>' : '<span class="ie-pill free">Free</span>';
     var recPill = rec ? '<span class="ie-pill rec">Recommended</span>' : "";
     var desc = isAi
       ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
+      : isLocal
+      ? "The downloaded model reads the image on this phone. Nothing is sent anywhere and no AI tokens are used. It understands what it is looking at rather than only extracting text, but it is a small model and can be wrong, so check it against the original."
       : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
     return '<button type="button" class="ie-lrow' + (selected ? " sel" : "") + '" data-engine="' + engine + '" role="radio" aria-checked="' + selected + '">' +
       '<span class="ie-lmain"><span class="ie-lt">' + esc(title) + " " + pill + recPill + "</span>" +
@@ -146,6 +162,7 @@
           '<div class="ie-list" role="radiogroup" aria-label="Image engine">' +
           engineCard("device", sel === "device", kind) +
           engineCard("ai", sel === "ai", kind) +
+          (localVisionReady() ? engineCard("local", sel === "local", kind) : "") +
           '</div>' +
           warn +
           '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice</span></label>' +
@@ -206,7 +223,37 @@
       return route(choice.engine, image, kind);
     });
   }
-  function route(engine, image, kind) { return engine === "ai" ? routeAI(image, kind) : routeDevice(image, kind); }
+  function route(engine, image, kind) {
+    if (engine === "local") return routeLocal(image, kind);
+    return engine === "ai" ? routeAI(image, kind) : routeDevice(image, kind);
+  }
+
+  /* THIRD ENGINE: the downloaded on-device model reads the image itself.
+   *
+   * Different in kind from the other two, not just in accuracy: OCR extracts text and cloud AI reads
+   * a clinical image, while this one is a multimodal model UNDERSTANDING the picture offline. It
+   * returns prose, so it is surfaced as { mode:"lines" } - the shape the callers already handle for a
+   * reading with no structured fields.
+   */
+  function routeLocal(image, kind) {
+    var L = window.SMD_MAIK_LOCAL;
+    if (!L || !L.answer || !localVisionReady()) {
+      return Promise.reject(new Error("the on-device model cannot read images yet"));
+    }
+    log("kind:", kind, "engine: local", "shape: none (on-device model, no upload)");
+    var ask = kind === "meds"
+      ? "Read this medicine package. Give the drug name, strength and form exactly as printed."
+      : "Read this clinical image. List the values or findings exactly as printed.";
+    return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(image)] }, null))
+      .then(function (r) {
+        if (!r || r.error) throw new Error((r && r.error) || "on-device reading failed");
+        var lines = String(r.text || "").split(/\n+/).map(function (t) { return t.trim(); }).filter(Boolean);
+        return { mode: "lines", lines: lines, engine: "local" };
+      });
+  }
+
+  /** mtmd wants a filesystem path; a file:// URI would be read as a literal filename. */
+  function stripFileScheme(p) { return String(p || "").replace(/^file:\/\//, ""); }
 
   function routeDevice(image, kind) {
     log("kind:", kind, "engine: device", "shape: none (on-device, no upload)");

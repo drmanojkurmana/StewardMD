@@ -147,9 +147,37 @@ final class LlamaEngine {
         }
     }
 
+    /**
+     * Same as generate(), but the answer is grounded in one or more IMAGES.
+     *
+     * The only difference is the prefill: LlamaVision runs the projector's vision encoder and feeds
+     * embeddings plus text into this same context, then decoding proceeds identically. Everything
+     * after the prefill is shared, so image answers cannot drift from text answers in sampling,
+     * repetition handling or cancellation.
+     */
+    func generateWithImages(system: String,
+                            user: String,
+                            imagePaths: [String],
+                            mmprojPath: String,
+                            nPredict: Int32,
+                            temperature: Float,
+                            seed: UInt32,
+                            onToken: ((String) -> Void)?,
+                            completion: @escaping (Result<String, Error>) -> Void) {
+        work.async { [weak self] in
+            guard let self else { return }
+            do { completion(.success(try self.generateSync(system: system, user: user, nPredict: nPredict,
+                                                           temperature: temperature, seed: seed,
+                                                           onToken: onToken,
+                                                           imagePaths: imagePaths, mmprojPath: mmprojPath))) }
+            catch { completion(.failure(error)) }
+        }
+    }
+
     private func generateSync(system: String, user: String, nPredict: Int32,
                               temperature: Float, seed: UInt32,
-                              onToken: ((String) -> Void)?) throws -> String {
+                              onToken: ((String) -> Void)?,
+                              imagePaths: [String] = [], mmprojPath: String = "") throws -> String {
         lock.lock()
         guard let m = model, let c = ctx else { lock.unlock(); throw LlamaError(.modelMissing, "model not loaded") }
         if isGenerating { lock.unlock(); throw LlamaError(.busy, "a generation is already running") }
@@ -159,19 +187,43 @@ final class LlamaEngine {
 
         cancelFlag.value = false
         let vocab = llama_model_get_vocab(m)
-        let prompt = Self.applyTemplate(model: m, system: system, user: user)
-            ?? ((system.isEmpty ? "" : system + "\n\n") + user)
+        let wantsImages = !imagePaths.isEmpty && !mmprojPath.isEmpty
 
-        // Tokenise (negative return = required capacity).
+        // IMAGE PATH: load the projector first, because its marker has to be inside the user turn
+        // BEFORE the chat template is applied - injecting it afterwards would land it outside the
+        // turn markers and the model would treat it as literal text.
+        var vision: LlamaVision? = nil
+        var userText = user
+        if wantsImages {
+            let v = LlamaVision()
+            try v.load(mmprojPath: mmprojPath, model: m,
+                       nThreads: Int32(max(1, ProcessInfo.processInfo.activeProcessorCount - 2)),
+                       useGpu: true)
+            // One marker per image, ahead of the question, matching how these models were trained.
+            userText = Array(repeating: v.marker, count: imagePaths.count).joined(separator: "\n")
+                + "\n" + user
+            vision = v
+        }
+        // Freed as soon as the answer is done: a 2.5 GB model plus a 851 MB projector held for the
+        // life of the app is what gets an 8 GB phone killed, and image questions are occasional.
+        defer { vision?.free() }
+
+        let prompt = Self.applyTemplate(model: m, system: system, user: userText)
+            ?? ((system.isEmpty ? "" : system + "\n\n") + userText)
+
+        // Tokenise (negative return = required capacity). Skipped entirely on the image path, where
+        // mtmd owns tokenisation because it has to interleave text tokens with image embeddings.
         var toks = [llama_token]()
-        try prompt.withCString { cstr in
-            let len = Int32(strlen(cstr))
-            let need = -llama_tokenize(vocab, cstr, len, nil, 0, true, true)
-            guard need > 0 else { throw LlamaError(.generationFailure, "tokenize sizing failed") }
-            toks = [llama_token](repeating: 0, count: Int(need))
-            let n = llama_tokenize(vocab, cstr, len, &toks, need, true, true)
-            guard n > 0 else { throw LlamaError(.generationFailure, "tokenize failed") }
-            toks = Array(toks.prefix(Int(n)))
+        if !wantsImages {
+            try prompt.withCString { cstr in
+                let len = Int32(strlen(cstr))
+                let need = -llama_tokenize(vocab, cstr, len, nil, 0, true, true)
+                guard need > 0 else { throw LlamaError(.generationFailure, "tokenize sizing failed") }
+                toks = [llama_token](repeating: 0, count: Int(need))
+                let n = llama_tokenize(vocab, cstr, len, &toks, need, true, true)
+                guard n > 0 else { throw LlamaError(.generationFailure, "tokenize failed") }
+                toks = Array(toks.prefix(Int(n)))
+            }
         }
 
         let nCtx = Int32(llama_n_ctx(c))
@@ -206,25 +258,37 @@ final class LlamaEngine {
         // when the batch exceeds n_batch. Verified on Android: short prompts passed, the real ~2000
         // token grounded package killed the process inside llama_context::decode. Slice it.
         let nBatch = Int(llama_n_batch(c))
-        var i = 0
-        while i < toks.count {
-            let n = min(nBatch, toks.count - i)
-            var slice = Array(toks[i..<(i + n)])
-            let batch = llama_batch_get_one(&slice, Int32(n))
-            guard llama_decode(c, batch) == 0 else { throw LlamaError(.generationFailure, "prefill failed at token \(i)") }
+        // How far the position counter has advanced. On the text path that is simply the prompt
+        // length; on the image path mtmd reports it, because image embeddings occupy positions that
+        // never existed as tokens.
+        var consumed = toks.count
+
+        if let v = vision {
+            // mtmd owns the whole prefill here: it runs the vision encoder, then interleaves the
+            // resulting embeddings with the text tokens into this same context.
+            consumed = Int(try v.prefill(prompt: prompt, imagePaths: imagePaths, ctx: c, nBatch: Int32(nBatch)))
             if cancelFlag.value { return "" }
-            i += n
+        } else {
+            var i = 0
+            while i < toks.count {
+                let n = min(nBatch, toks.count - i)
+                var slice = Array(toks[i..<(i + n)])
+                let batch = llama_batch_get_one(&slice, Int32(n))
+                guard llama_decode(c, batch) == 0 else { throw LlamaError(.generationFailure, "prefill failed at token \(i)") }
+                if cancelFlag.value { return "" }
+                i += n
+            }
         }
 
         let prefillMs = Int(Date().timeIntervalSince(tPrefill) * 1000)
-        llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(toks.count) n_gpu_layers=\(loadedGpuLayers)")
+        llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(consumed) images=\(imagePaths.count) n_gpu_layers=\(loadedGpuLayers)")
 
         var full = ""
         var produced: Int32 = 0
         let tDecode = Date()
         let budget = nPredict > 0 ? nPredict : Self.defaultNPredict
 
-        while produced < budget && Int32(toks.count) + produced < nCtx {
+        while produced < budget && Int32(consumed) + produced < nCtx {
             if cancelFlag.value { break }
             var id = llama_sampler_sample(smpl, c, -1)
             if llama_vocab_is_eog(vocab, id) { break }
@@ -240,7 +304,7 @@ final class LlamaEngine {
         let decodeMs = Int(Date().timeIntervalSince(tDecode) * 1000)
         let tps = decodeMs > 0 ? Double(produced) / (Double(decodeMs) / 1000.0) : 0
         llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=%", decodeMs, Int(produced), tps,
-               prefillMs > 0 ? Double(toks.count) / (Double(prefillMs) / 1000.0) : 0)
+               prefillMs > 0 ? Double(consumed) / (Double(prefillMs) / 1000.0) : 0)
         return full
     }
 

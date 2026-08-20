@@ -2899,6 +2899,11 @@
         '<div class="maik-cmp-in">' +
           '<button class="maik-mic" id="maikMic" type="button" title="Dictate" aria-label="Dictate to MaiK">' + MK.mic + '</button>' +
           (researchModeAvail() ? '<button class="maik-research" id="maikResearch" type="button" title="Research mode: review journals" aria-label="Research mode: review journals" aria-pressed="false">' + MK.research + '</button>' : '') +
+          // IMAGE, on-device engines only. Rendered hidden and revealed by maikSyncImageBtn() once
+          // the selected engine is on-device AND that pack can see AND its projector is downloaded.
+          // Cloud/KB answers have no image path, so showing it there would be a dead button.
+          '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
+          '<input type="file" id="maikImgFile" accept="image/*" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
@@ -3087,6 +3092,9 @@ body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color
 body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0,0,.3)}
 .maik-cmp-in:focus-within{border-color:var(--mk-teal)}
 .maik-mic{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-img{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-img.has{background:var(--teal,#0e6e63);color:#fff}
+.maik-img[hidden]{display:none}
 .maik-mic:hover{color:var(--mk-teal);background:var(--mk-tsoft)}
 .maik-mic.live{background:#fee2e2;color:#dc2626;animation:maikPulse 1.2s ease-in-out infinite}
 .maik-mic.prep{background:var(--mk-tsoft);color:var(--mk-teal);animation:maikPulse 1.2s ease-in-out infinite}
@@ -4544,6 +4552,71 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       setResearchMode(!_researchMode);
       if (_researchMode) { try { toast("Research mode on. MaiK will review trusted medical literature (2 per day)."); } catch (e) {} }
     });
+    /* ---- Offline image reading (on-device engines only) ----------------------------------------
+     *
+     * The button exists in the markup but stays hidden unless ALL of these hold:
+     *   the selected engine is on-device, that pack can see (Apex is text-only), and its projector
+     *   is downloaded. Cloud and KB answers have no image path at all, so showing it there would be
+     *   a button that can only fail.
+     *
+     * Re-checked on every open and after each engine change, because the projector can finish
+     * downloading while the sheet is sitting open.
+     */
+    var imgBtn = sheet.querySelector("#maikImg"), imgFile = sheet.querySelector("#maikImgFile");
+    var _pendingImages = [];
+    function maikVisionAvailable() {
+      try {
+        var E = window.SMD_MAIK_ENGINE, L = window.SMD_MAIK_LOCAL;
+        if (!E || !L || !L.visionReady) return false;
+        if (E.effective() !== "local") return false;
+        return !!L.visionReady(L.currentPack());
+      } catch (e) { return false; }
+    }
+    function maikSyncImageBtn() {
+      if (!imgBtn) return;
+      var on = maikVisionAvailable();
+      if (on) imgBtn.removeAttribute("hidden"); else imgBtn.setAttribute("hidden", "");
+      imgBtn.classList.toggle("has", _pendingImages.length > 0);
+    }
+    if (imgBtn && imgFile) {
+      imgBtn.addEventListener("click", function () { try { imgFile.value = ""; imgFile.click(); } catch (e) {} });
+      imgFile.addEventListener("change", function () {
+        var f = imgFile.files && imgFile.files[0];
+        if (!f) return;
+        // Written to a real file and passed by PATH, never base64: mtmd reads the file itself, and a
+        // multi-MB photo through the Capacitor bridge as a string is what made the old model
+        // downloader unusable.
+        maikStageImage(f);
+      });
+    }
+    function maikStageImage(file) {
+      var FS = (window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Filesystem) || null;
+      if (!FS) { toast("Image reading needs the app."); return; }
+      var rd = new FileReader();
+      rd.onload = function () {
+        var b64 = String(rd.result || "").split(",")[1] || "";
+        var name = "maik-img-" + Date.now() + ".jpg";
+        FS.writeFile({ path: "maik-images/" + name, data: b64, directory: "DATA", recursive: true })
+          .then(function () { return FS.getUri({ path: "maik-images/" + name, directory: "DATA" }); })
+          .then(function (u) {
+            var p = String((u && u.uri) || "").replace(/^file:\/\//, "");
+            if (!p) throw new Error("no path");
+            _pendingImages = [p];            // one at a time keeps the 4096 context usable
+            maikSyncImageBtn();
+            if (!(qEl.value || "").trim()) qEl.value = "What does this show?";
+            try { qEl.focus(); } catch (e) {}
+            toast("Image attached. Ask your question, then send.");
+          })
+          .catch(function () { toast("Could not attach that image."); });
+      };
+      rd.onerror = function () { toast("Could not read that image."); };
+      rd.readAsDataURL(file);
+    }
+    // Consumed by the send path, then cleared so the next question is not silently about the old photo.
+    function maikTakePendingImages() { var a = _pendingImages; _pendingImages = []; maikSyncImageBtn(); return a; }
+    try { window.__MAIK_IMAGES = { pending: function () { return _pendingImages.slice(); }, take: maikTakePendingImages, sync: maikSyncImageBtn }; } catch (e) {}
+    maikSyncImageBtn();
+
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----
     var micBtn = sheet.querySelector("#maikMic"), extractBtn = sheet.querySelector("#maikExtract");
     function reasoningReady() { return !!(window.SMD_AI && SMD_AI.extract && window.DX && DX.addFindings && DX.findingCatalog); }

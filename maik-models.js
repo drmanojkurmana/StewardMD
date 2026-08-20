@@ -133,7 +133,15 @@
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q4_K_M.gguf?download=true",
         bytes: 2489894976,   // exact
         sha256: "b31becdf4f39561800505514cce67681604fe449d04dd35c8c92fd7848c6d7bd"   // VERIFIED against a complete download
-      }]
+      }],
+      // Vision is a SEPARATE, optional download. The base pack stays 2.49 GB so a clinician who only
+      // wants text answers never pays for the projector.
+      vision: {
+        name: "mmproj-medgemma-1.5-4b-F16.gguf",
+        url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/mmproj-F16.gguf?download=true",
+        bytes: 851252224,    // exact, HuggingFace paths-info
+        sha256: "f45f0f750587494e8f976d952cb396dfaa3158662120e2f9c224fc11f3882c83"
+      }
     },
     "maik-neural": {
       label: "MAiK Neural",
@@ -153,7 +161,16 @@
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q5_K_M.gguf?download=true",
         bytes: 2829699136,   // exact, HuggingFace API
         sha256: null         // UNVERIFIED - nobody has hashed a complete copy of this file yet
-      }]
+      }],
+      // Same weights as MxCore at higher precision, so the SAME projector from the same repo applies.
+      // Deliberately not shared by reference: each pack states its own file so a future divergence
+      // cannot silently point one tier at the wrong projector.
+      vision: {
+        name: "mmproj-medgemma-1.5-4b-F16.gguf",
+        url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/mmproj-F16.gguf?download=true",
+        bytes: 851252224,
+        sha256: "f45f0f750587494e8f976d952cb396dfaa3158662120e2f9c224fc11f3882c83"
+      }
     },
     "maik-horizon": {
       label: "MAiK Horizon",
@@ -173,7 +190,13 @@
         url: HF + "/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf?download=true",
         bytes: 3106738272,   // exact, HuggingFace API
         sha256: null         // UNVERIFIED
-      }]
+      }],
+      vision: {
+        name: "mmproj-gemma-4-E2B-F16.gguf",
+        url: HF + "/unsloth/gemma-4-E2B-it-GGUF/resolve/main/mmproj-F16.gguf?download=true",
+        bytes: 985654080,    // exact, HuggingFace paths-info
+        sha256: "140be8d7849741f88c50757d529b84373ee8e27052cc2236855b537f4a8215fa"
+      }
     },
     /* FLAGSHIP tier. A medical fine-tune of Qwen3 4B - a newer, stronger base than the other three,
      * which is the whole reason to carry a fourth option.
@@ -218,7 +241,34 @@
     return Object.keys(PACKS).sort(function (a, b) { return (PACKS[a].tier || 99) - (PACKS[b].tier || 99); });
   }
 
-  function pack(id) { var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p; }
+  /* VISION AS A SUB-PACK, "<packId>#vision".
+   *
+   * The projector (mmproj) is a second, optional file: 851 MB for MxCore/Neural, 986 MB for Horizon,
+   * on top of a 2.5-3.1 GB model. The native downloader reads files[0], so a multi-file pack would
+   * have meant reworking the download loop, the queue, the sidecar and the progress UI.
+   *
+   * Instead a synthetic pack id resolves to the vision file alone. Everything downstream - the
+   * one-at-a-time queue, chunked ranged parts, the .parts sidecar, resume, the progress rows - works
+   * on it unchanged, because as far as those are concerned it is just another pack with one file.
+   */
+  var VISION_SUFFIX = "#vision";
+  function isVisionId(id) { return String(id || "").slice(-VISION_SUFFIX.length) === VISION_SUFFIX; }
+  function baseIdOf(id) { return isVisionId(id) ? String(id).slice(0, -VISION_SUFFIX.length) : String(id); }
+  function visionIdOf(id) { return baseIdOf(id) + VISION_SUFFIX; }
+  /** The vision file for a pack, or null when that model cannot see (Apex is text-only). */
+  function visionFile(id) { var p = PACKS[baseIdOf(id)]; return (p && p.vision) || null; }
+  function hasVision(id) { return !!visionFile(id); }
+
+  function pack(id) {
+    if (isVisionId(id)) {
+      var base = PACKS[baseIdOf(id)], vf = base && base.vision;
+      if (!vf) throw new Error("no vision pack for: " + id);
+      // A one-file synthetic pack. nPredict/nCtx are irrelevant here (nothing generates from it).
+      return { label: base.label + " vision", actual: base.actual + " projector", tier: base.tier,
+               files: [vf], visionOf: baseIdOf(id) };
+    }
+    var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p;
+  }
   function relPath(f) { return SUBDIR + "/" + f; }
   function totalBytes(id) { return pack(id).files.reduce(function (s, f) { return s + (f.bytes || 0); }, 0); }
   function sizeLabel(id) {
@@ -268,11 +318,14 @@
   function resumeUiForBackgroundDownloads() {
     var L = llama();
     if (!isNative() || !L || !L.downloadStatus) return Promise.resolve(false);
+    // Vision sub-packs are included: a projector download can outlive the app exactly like a model
+    // one, and if it is not adopted here the UI reports it as absent and offers to start a second.
     var ids = Object.keys(PACKS);
+    Object.keys(PACKS).forEach(function (b) { if (PACKS[b].vision) ids.push(b + VISION_SUFFIX); });
     return ids.reduce(function (chain, id) {
       return chain.then(function (found) {
         if (_state[id] && _state[id].downloading) return found;
-        var f = PACKS[id].files[0];
+        var f = pack(id).files[0];   // pack(), not PACKS[], so "<id>#vision" resolves too
         return L.downloadStatus({ id: lget(KEY_DLID + id) || "", name: f.name }).then(function (st) {
           st = st || {};
           var live = st.state === "running" || st.state === "pending" || st.state === "paused";
@@ -723,6 +776,7 @@
 
   var API = {
     PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, DEVICE_WARNING: DEVICE_WARNING, DEVICE_SUPPORTED: DEVICE_SUPPORTED,
+    hasVision: hasVision, visionFile: visionFile, visionIdOf: visionIdOf, isVisionId: isVisionId, baseIdOf: baseIdOf,
     activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,

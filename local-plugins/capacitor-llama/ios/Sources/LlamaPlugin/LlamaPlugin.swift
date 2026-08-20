@@ -29,6 +29,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "available", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "load", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "generate", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "generateWithImage", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "release", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "excludeFromBackup", returnType: CAPPluginReturnPromise),
@@ -181,6 +182,60 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                 call.reject(e.detail, e.code.rawValue)
             } catch {
                 call.reject(error.localizedDescription, LlamaErr.generationFailure.rawValue)
+            }
+        }
+    }
+
+    /**
+     * Answer a question about one or more IMAGES, entirely on device.
+     *
+     * `mmproj` is the projector path for the SAME pack as the loaded model. Nothing here can detect a
+     * mismatched pair - a MedGemma projector on a Gemma model yields confident nonsense rather than an
+     * error - so the JS registry owns the pairing and passes both from one pack.
+     *
+     * Images are passed as FILE PATHS, never base64. A phone photo is several MB and routing it
+     * through the Capacitor bridge as a string is what made the old model downloader unusable; mtmd
+     * reads the file directly.
+     */
+    @objc func generateWithImage(_ call: CAPPluginCall) {
+        guard let prompt = call.getString("prompt"), !prompt.isEmpty else {
+            call.reject("Missing prompt", LlamaErr.badArguments.rawValue); return
+        }
+        guard let mmproj = call.getString("mmproj"), !mmproj.isEmpty else {
+            call.reject("Missing mmproj (the vision add-on is not downloaded)", LlamaErr.badArguments.rawValue); return
+        }
+        // Accept one path or several; normalise to an array so the plugin has a single code path.
+        var paths: [String] = call.getArray("images", String.self) ?? []
+        if let one = call.getString("image"), !one.isEmpty { paths.append(one) }
+        paths = paths.map { $0.hasPrefix("file://") ? String($0.dropFirst(7)) : $0 }
+        guard !paths.isEmpty else {
+            call.reject("Missing image", LlamaErr.badArguments.rawValue); return
+        }
+        for p in paths where !FileManager.default.fileExists(atPath: p) {
+            call.reject("Image not found: \(p)", LlamaErr.badArguments.rawValue); return
+        }
+
+        let system = call.getString("system") ?? ""
+        let nPredict = Int32(call.getInt("nPredict") ?? Int(LlamaEngine.defaultNPredict))
+        let temperature = Float(call.getDouble("temperature") ?? 0.0)
+        let seed = UInt32(truncatingIfNeeded: call.getInt("seed") ?? 0)
+        let stream = call.getBool("stream") ?? true
+
+        let t0 = Date()
+        let onToken: ((String) -> Void)? = stream
+            ? { [weak self] piece in self?.notifyListeners("llamaToken", data: ["text": piece]) }
+            : nil
+
+        engine.generateWithImages(system: system, user: prompt, imagePaths: paths, mmprojPath: mmproj,
+                                  nPredict: nPredict, temperature: temperature, seed: seed,
+                                  onToken: onToken) { [weak self] result in
+            switch result {
+            case .success(let text):
+                call.resolve(["text": text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "images": paths.count])
+            case .failure(let err):
+                let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
+                self?.notifyListeners("llamaError", data: ["code": e.code.rawValue, "message": e.detail])
+                call.reject(e.detail, e.code.rawValue)
             }
         }
     }

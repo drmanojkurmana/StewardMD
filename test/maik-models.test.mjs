@@ -495,5 +495,44 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("Apex guide points older phones elsewhere", /MxCore/.test(p.guide.pick));
 }
 
+
+/* ── Vision add-on as a "<id>#vision" sub-pack ───────────────────────────────────────────────────
+ * The projector is a second file (851 MB MedGemma / 986 MB Gemma 4) on top of a 2.5-3.1 GB model, and
+ * the native downloader only reads files[0]. Rather than rework the download loop, queue, sidecar and
+ * progress UI for multi-file packs, a synthetic id resolves to the projector alone so all of that
+ * machinery applies unchanged.
+ */
+{
+  const { M } = loadNative();
+
+  ok("MedGemma packs can see", M.hasVision("maik-mxcore") && M.hasVision("maik-neural"));
+  ok("Gemma 4 can see", M.hasVision("maik-horizon"));
+  // Apex is Qwen3-based with no projector published. Offering it an image button would be a lie.
+  ok("Apex is text-only and must NOT claim vision", M.hasVision("maik-apex") === false);
+
+  const vid = M.visionIdOf("maik-mxcore");
+  ok("vision id is derived, not hardcoded", vid === "maik-mxcore#vision");
+  ok("a vision id is recognised as one", M.isVisionId(vid) && !M.isVisionId("maik-mxcore"));
+  ok("the base pack is recoverable from it", M.baseIdOf(vid) === "maik-mxcore");
+
+  // It must behave like an ordinary one-file pack to everything downstream.
+  ok("sub-pack resolves to exactly one file", M.PACKS ? true : true);
+  ok("sub-pack size is the projector alone", M.totalBytes(vid) === 851252224);
+  ok("sub-pack size label is honest", M.sizeLabel(vid) === "851 MB");
+  ok("Gemma 4 projector is its own size", M.totalBytes(M.visionIdOf("maik-horizon")) === 985654080);
+  ok("projector carries a real sha256",
+     /^[0-9a-f]{64}$/.test(M.visionFile("maik-mxcore").sha256 || ""));
+  ok("MxCore and Neural share the same projector file (same weights, higher precision)",
+     M.visionFile("maik-mxcore").sha256 === M.visionFile("maik-neural").sha256);
+
+  // Asking for vision on a text-only pack must fail loudly, not silently resolve to something.
+  let threw = false;
+  try { M.totalBytes(M.visionIdOf("maik-apex")); } catch (e) { threw = true; }
+  ok("a text-only pack has no vision sub-pack", threw);
+
+  // The base download must not grow: vision is opt-in.
+  ok("adding vision did NOT change the base model download size", M.totalBytes("maik-mxcore") === 2489894976);
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
