@@ -41,9 +41,10 @@ function load(env = {}) {
     let _active = env.active || "maik-local-v1";
     win.SMD_MAIK_MODELS = {
       PACKS: {
-        "maik-local-v1": { label: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096 },
-        "maik-local-e2b": { label: "Gemma 4 E2B (Q4_K_M)", nCtx: 4096 }
+        "maik-local-v1": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", tier: 1, nCtx: 4096 },
+        "maik-local-e2b": { label: "MAiK Horizon", actual: "Gemma 4 E2B (Q4_K_M)", tier: 3, nCtx: 4096 }
       },
+      packIds: () => ["maik-local-v1", "maik-local-e2b"],
       installedCached: (id) => installed && id === "maik-local-v1",
       sizeLabel: (id) => (id === "maik-local-v1" ? "2.49 GB" : "3.11 GB"),
       totalBytes: () => 2489894976,
@@ -274,9 +275,12 @@ function load(env = {}) {
   ok("picker: KB-only row is free", opts[1].id === "rag" && /FREE/.test(opts[1].badge));
   ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-local-v1" && opts[3].id === "local:maik-local-e2b");
   ok("picker: on-device rows badged OFFLINE", opts[2].badge === "OFFLINE");
-  ok("picker: quant suffix stripped from the label", opts[2].label === "MedGemma 1.5 4B");
-  ok("picker: installed pack promises speed and its own knowledge", /own knowledge/.test(opts[2].sub));
-  ok("picker: installed pack admits it can be wrong", /Can be wrong/i.test(opts[2].sub));
+  ok("picker: shows the MAiK brand name", opts[2].label === "MAiK MxCore");
+  ok("picker: third tier is Horizon", opts[3].label === "MAiK Horizon");
+  // The MAiK name is the brand; the REAL model must stay visible, because a clinician deciding
+  // whether to trust an answer is entitled to know it came from MedGemma 4B.
+  ok("picker: installed pack names the real model", /MedGemma 1\.5 4B/.test(opts[2].sub));
+  ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
   ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
   ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[3].sub));
@@ -312,7 +316,7 @@ function load(env = {}) {
   ok("uninstalled pick keeps the WORKING model answering", E.activePack() === "maik-local-v1");
   ok("uninstalled pick does not break the engine", E.effective() === "local");
   ok("uninstalled pick is remembered as the request", E.pendingPack() === "maik-local-e2b");
-  ok("chip still names what actually answers", E.chipLabel() === "MedGemma 1.5 4B");
+  ok("chip still names what actually answers", E.chipLabel() === "MAiK MxCore");
   ok("picker marks the requested pack", E.options().filter((o) => o.requested).map((o) => o.pack)[0] === "maik-local-e2b");
   // switching away clears the pending request
   E.selectOption("cloud");

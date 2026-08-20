@@ -33,7 +33,7 @@
   var KEY_LLM_FIRST = "smd_maik_llm_first";      // home.js maikLLMFirst() reads this
   var ENGINES = { rag: 1, cloud: 1, local: 1 };
   var XA_FEATURE = "maik_local";                 // experimental.js gate, same as fundx/kardiox
-  var PACK_ID = "maik-local-v1";
+  var PACK_ID = "maik-mxcore";
   // The pack the clinician ASKED for that is not installed yet. Kept separate from the ANSWERING
   // pack (SMD_MAIK_MODELS.activePack) on purpose: picking a model to download must never pull the
   // rug from under the model currently answering. That exact confusion presented as "no answer".
@@ -264,7 +264,7 @@
     // degrade to "no section" rather than throw and blank every setting below it.
     if (!M || !M.PACKS || !M.state || !M.sizeLabel) return "";
     var active = M.activePack ? M.activePack() : PACK_ID;
-    var ids = Object.keys(M.PACKS);
+    var ids = (M.packIds ? M.packIds() : Object.keys(M.PACKS));
     if (!ids.length) return "";
 
     var rows = ids.map(function (id, i) {
@@ -292,7 +292,8 @@
         '<button type="button" data-me-pack="' + id + '" role="radio" aria-checked="' + on + '"' +
         ' style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:transparent;border:0;padding:0;color:var(--ink,#14202b);-webkit-tap-highlight-color:transparent">' +
           '<span style="flex:1;min-width:0">' +
-            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label + '</span>' +
+            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label +
+              (p.actual ? '<span style="font:500 11px/1.2 var(--sans,system-ui);color:var(--slate-soft,#5a7184)"> &middot; ' + p.actual + '</span>' : "") + '</span>' +
             '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + status + '</span>' +
           '</span>' +
           '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span>' +
@@ -446,12 +447,12 @@
     ];
     var M = window.SMD_MAIK_MODELS;
     if (M && M.PACKS && gateActive() && runtimeAvailable()) {
-      Object.keys(M.PACKS).forEach(function (pid) {
+      (M.packIds ? M.packIds() : Object.keys(M.PACKS)).forEach(function (pid) {
         var st = M.state(pid), have = M.installedCached(pid);
         out.push({
-          id: "local:" + pid, label: M.PACKS[pid].label.replace(/\s*\(Q4_K_M\)$/, ""),
+          id: "local:" + pid, label: M.PACKS[pid].label,
           sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "% - will answer when ready"
-             : have ? "Fast, offline, from the model's own knowledge. Can be wrong."
+             : have ? (M.PACKS[pid].actual + " · on this device, works offline")
              : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
              : "Tap to download " + M.sizeLabel(pid),
           badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading,

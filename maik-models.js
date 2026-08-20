@@ -69,44 +69,71 @@
    * and avoids a third party rate-limiting a clinician mid-download.
    */
   var HF = "https://huggingface.co";
+  var R2 = "https://models.stewardmd.in/maik";   // Cloudflare R2, APAC-located (same bucket as kardiox/whisper)
+
+  /* MAiK model tiers, in the order a clinician should consider them:
+   *
+   *   MAiK MxCore   MedGemma 1.5 4B Q4_K_M  2.49 GB  fastest, lightest, lowest RAM
+   *   MAiK Neural   MedGemma 1.5 4B Q5_K_M  2.83 GB  higher quality, modestly more RAM/storage
+   *   MAiK Horizon  Gemma 4 E2B Q4_K_M      3.11 GB  general-purpose, broader reasoning
+   *
+   * Fastest -> strongest medical -> broadest general.
+   *
+   * `actual` is the real upstream model, kept visible in the UI: a clinician deciding whether to
+   * trust an answer is entitled to know it came from MedGemma 4B and not something larger.
+   *
+   * Sizes and hashes are REAL values, not estimates. Only MxCore's sha256 has been verified by
+   * hashing a complete download; the others are the HuggingFace API digest and are marked as such.
+   */
   var PACKS = {
-    "maik-local-v1": {
-      label: "MedGemma 1.5 4B (Q4_K_M)",
-      note: "Medical-tuned. Fits every supported iPhone and Pixel.",
+    "maik-mxcore": {
+      label: "MAiK MxCore",
+      actual: "MedGemma 1.5 4B (Q4_K_M)",
+      tier: 1,
+      note: "Fastest and lightest. Lowest RAM use, best on any supported phone.",
       nCtx: 4096,
       nPredict: 512,
       files: [{
         name: "medgemma-1.5-4b-it-Q4_K_M.gguf",
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q4_K_M.gguf?download=true",
-        bytes: 2489894976,   // exact, from the HuggingFace API 2026-08-20
-        sha256: "b31becdf4f39561800505514cce67681604fe449d04dd35c8c92fd7848c6d7bd"   // VERIFIED: shasum -a 256 over the complete 2,489,894,976-byte file
+        bytes: 2489894976,   // exact
+        sha256: "b31becdf4f39561800505514cce67681604fe449d04dd35c8c92fd7848c6d7bd"   // VERIFIED against a complete download
       }]
     },
-    "maik-local-v1-q5": {
-      label: "MedGemma 1.5 4B (Q5_K_M)",
-      note: "Same model, higher precision. Better answers, +340 MB, slightly slower.",
+    "maik-neural": {
+      label: "MAiK Neural",
+      actual: "MedGemma 1.5 4B (Q5_K_M)",
+      tier: 2,
+      note: "Strongest medical answers. Slightly higher quality, a little more RAM and storage.",
       nCtx: 4096,
       nPredict: 512,
       files: [{
         name: "medgemma-1.5-4b-it-Q5_K_M.gguf",
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q5_K_M.gguf?download=true",
-        bytes: 2829699136,   // exact, HuggingFace API 2026-08-20
-        sha256: null         // UNVERIFIED: HF lfs.oid is a Xet hash, not a file digest. See header.
+        bytes: 2829699136,   // exact, HuggingFace API
+        sha256: null         // UNVERIFIED - nobody has hashed a complete copy of this file yet
       }]
     },
-    "maik-local-e2b": {
-      label: "Gemma 4 E2B (Q4_K_M)",
-      note: "General-purpose comparison model. Needs a little more memory.",
+    "maik-horizon": {
+      label: "MAiK Horizon",
+      actual: "Gemma 4 E2B (Q4_K_M)",
+      tier: 3,
+      note: "Broadest general knowledge and reasoning. Not medically fine-tuned.",
       nCtx: 4096,
       nPredict: 512,
       files: [{
         name: "gemma-4-E2B-it-Q4_K_M.gguf",
         url: HF + "/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf?download=true",
-        bytes: 3106738272,
-        sha256: "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8"   // UNVERIFIED: HF Xet oid, not a real sha256
+        bytes: 3106738272,   // exact, HuggingFace API
+        sha256: null         // UNVERIFIED
       }]
     }
   };
+
+  /** Packs in recommended order: MxCore -> Neural -> Horizon. */
+  function packIds() {
+    return Object.keys(PACKS).sort(function (a, b) { return (PACKS[a].tier || 99) - (PACKS[b].tier || 99); });
+  }
 
   function pack(id) { var p = PACKS[id]; if (!p) throw new Error("unknown pack: " + id); return p; }
   function relPath(f) { return SUBDIR + "/" + f; }
@@ -185,7 +212,7 @@
   }
 
   /** Which pack the on-device engine should run. Defaults to the primary (MedGemma). */
-  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-local-v1"; }
+  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-mxcore"; }
   function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
@@ -516,7 +543,7 @@
     PACKS: PACKS, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
-    ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
+    packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
     state: state, subscribe: subscribe,
     activePack: activePack, setActivePack: setActivePack,
     resumeUiForBackgroundDownloads: resumeUiForBackgroundDownloads,
