@@ -52,6 +52,29 @@ clinical question is not medical is not.
 drifted - the server already excluded the uncertain bucket, the client did not, and the client is what
 doctors saw. **Status**: live. See [[MaiK Intent Firewall]].
 
+## 2026-08-21 · On-device model download stays on ONE background URLSession
+**Rejected:** a foreground/background hybrid (default session for speed while on screen, handed to the
+background session on `didEnterBackgroundNotification`). It was built, shipped to a device, and
+**reverted the same night** because background downloads stopped working: `cancel(byProducingResumeData:)`
+is ASYNCHRONOUS, so it tears the running transfer down immediately and iOS suspends the app before the
+completion block can restart it on the background session. The download died the moment the app left
+the screen.
+
+**The mistake worth remembering** is not the API detail, it is the trade: a VERIFIED capability (a
+2.49 GB model completing with the app force-stopped) was risked for an UNMEASURED speed hypothesis.
+The 0.5 MB/s figure came off the UI and was never confirmed natively, and the diagnosis ("iOS
+background sessions are throttled") was inferred from a Mac-vs-phone comparison, not measured on the
+phone. Correctness that is proven outranks speed that is assumed.
+
+**What was kept:** native throughput printing (`[llama-dl] … MB/s`, readable via
+`devicectl --console`), so the speed question can finally be measured rather than argued.
+
+**If throughput does need work,** prefer options that keep a single background session: several
+concurrent background tasks over byte ranges (a background session may throttle per-task, and a Mac
+test showed only a 23% gain from parallelism on an UNTHROTTLED session, so the per-task theory is
+untested and worth measuring), or host the files closer to the user (R2, APAC). Do NOT reintroduce a
+foreground/background handoff. **Status**: reverted, background-only shipped.
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.
