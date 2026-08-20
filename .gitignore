@@ -107,3 +107,7 @@ atlas-pipeline/synthseg-repo/
 # SwiftPM build output for the local Capacitor plugins (429MB, contains dSYMs >100MB).
 # Never commit: GitHub hard-rejects files over 100MB and this is pure build artifact.
 local-plugins/*/.build/
+# Android CMake/NDK build output for the local plugins (230MB; libllama.a alone is 93MB).
+# capacitor-whisper already avoids committing this - match it.
+local-plugins/*/android/.cxx/
+local-plugins/*/android/build/
