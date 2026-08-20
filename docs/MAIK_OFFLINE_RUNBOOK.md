@@ -1,6 +1,6 @@
 # MaiK Offline — wake-up runbook
 
-Branch: **`feat/maik-offline-engine`** (3 commits, NOT pushed, NOT merged).
+Branch: **`feat/maik-offline-engine`** (5 commits, NOT pushed, NOT merged).
 Plan: `docs/MAIK_OFFLINE_PLAN.md`. Built overnight 2026-08-20.
 
 ---
