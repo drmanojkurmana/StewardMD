@@ -24,11 +24,11 @@
  * ponytail: size + magic + loader validation, not a full SHA-256 (which would mean reading 2.5 GB
  * back through the bridge). The sha256 below is for OFF-device verification only.
  *
- * CAUTION on those hashes: HuggingFace's API `lfs.oid` is NOT the file's SHA-256 for Xet-backed
- * repos (these are - the responses carry an X-Xet-Hash header), it is a Xet content hash. The
- * MedGemma value below was recomputed with `shasum -a 256` over the fully downloaded 2,489,894,976
- * bytes and IS the real digest. The E2B one is still the API's oid and is NOT verified - do not
- * trust it until someone downloads that file and re-hashes it.
+ * HASHES: HuggingFace's API `lfs.oid` IS the file's SHA-256 here - confirmed by hashing a
+ * verified-complete 2,489,894,976-byte download of the MedGemma pack, which matched the oid exactly.
+ * An earlier note in this file claimed otherwise and replaced the value; that was wrong. The digest
+ * had been computed over a file that was resumed after a timeout and was not intact. Corrected.
+ * The E2B hash is the API oid and has NOT been verified by downloading that file.
  * ======================================================================== */
 (function () {
   "use strict";
@@ -79,7 +79,7 @@
         name: "medgemma-1.5-4b-it-Q4_K_M.gguf",
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q4_K_M.gguf?download=true",
         bytes: 2489894976,   // exact, from the HuggingFace API 2026-08-20
-        sha256: "49bfba86b0f3607d250fba3489299a46d4f83e657da5ad87bca08b2948abda1a"   // VERIFIED off-device
+        sha256: "b31becdf4f39561800505514cce67681604fe449d04dd35c8c92fd7848c6d7bd"   // VERIFIED: shasum -a 256 over the complete 2,489,894,976-byte file
       }]
     },
     "maik-local-v1-q5": {

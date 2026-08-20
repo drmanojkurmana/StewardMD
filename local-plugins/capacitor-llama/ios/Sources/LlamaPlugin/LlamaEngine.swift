@@ -1,5 +1,16 @@
 import Foundation
-import llama   // llama.cpp b10502 prebuilt XCFramework (module `llama`)
+import os.log
+import llama
+
+/// Timing goes to the device log so it can be read with `idevicesyslog` / Console. iOS has no JS
+/// console reachable from a Mac CLI, so this is the only way to get prefill/decode numbers off the
+/// phone without a human reading them off the screen. No prompt or answer text is ever logged.
+/// stdout, so `xcrun devicectl device process launch --console` streams it to the Mac. os_log would
+/// need Console.app or a working idevicesyslog, and libimobiledevice cannot pair this device.
+func llamaPerf(_ parts: Any...) {
+    print("[LLAMA-PERF] " + parts.map { String(describing: $0) }.joined(separator: " "))
+    fflush(stdout)
+}   // llama.cpp b10502 prebuilt XCFramework (module `llama`)
 
 /// Stable, user-facing error codes — mirror the Android `LlamaErr` 1:1.
 enum LlamaErr: String {
@@ -44,6 +55,8 @@ final class LlamaEngine {
     private var ctx: OpaquePointer?
     private var loadedPath: String?
     private var backendReady = false
+    /// Recorded so the perf log says whether Metal was actually used.
+    private var loadedGpuLayers: Int32 = 0
 
     /// llama.cpp contexts are NOT thread-safe: inference runs on `work`, but load/release can be
     /// called from another thread. Same hazard capacitor-whisper hit (BUG-13, use-after-free).
@@ -97,6 +110,8 @@ final class LlamaEngine {
         model = m
         ctx = c
         loadedPath = path
+        loadedGpuLayers = nGpuLayers
+        llamaPerf("PERF loaded n_ctx=\(Int(nCtx)) n_threads=\(Int(nThreads)) n_gpu_layers=\(Int(nGpuLayers))")
     }
 
     /// Drop the context and model. Called on app pause: iOS kills large-footprint backgrounded apps
@@ -184,6 +199,7 @@ final class LlamaEngine {
             llama_sampler_chain_add(smpl, llama_sampler_init_greedy())
         }
 
+        let tPrefill = Date()
         // Prefill, CHUNKED to n_batch.
         //
         // Submitting the whole prompt in one llama_batch_get_one() GGML_ABORTs (uncatchable SIGABRT)
@@ -200,8 +216,12 @@ final class LlamaEngine {
             i += n
         }
 
+        let prefillMs = Int(Date().timeIntervalSince(tPrefill) * 1000)
+        llamaPerf("PERF prefill_ms=\(prefillMs) prompt_tokens=\(toks.count) n_gpu_layers=\(loadedGpuLayers)")
+
         var full = ""
         var produced: Int32 = 0
+        let tDecode = Date()
         let budget = nPredict > 0 ? nPredict : Self.defaultNPredict
 
         while produced < budget && Int32(toks.count) + produced < nCtx {
@@ -217,6 +237,10 @@ final class LlamaEngine {
             guard llama_decode(c, nb) == 0 else { break }
             _ = nb
         }
+        let decodeMs = Int(Date().timeIntervalSince(tDecode) * 1000)
+        let tps = decodeMs > 0 ? Double(produced) / (Double(decodeMs) / 1000.0) : 0
+        llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=%", decodeMs, Int(produced), tps,
+               prefillMs > 0 ? Double(toks.count) / (Double(prefillMs) / 1000.0) : 0)
         return full
     }
 

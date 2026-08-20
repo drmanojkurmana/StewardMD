@@ -1,5 +1,6 @@
 import Foundation
 import UIKit
+import os.log
 import Capacitor
 
 /**
@@ -45,11 +46,67 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         // can ask about it. Otherwise status() says "none", JS starts a second transfer, and two
         // downloads race for the same file.
         ModelDownloader.shared.adoptExistingTasks()
+        runSelfTestIfRequested()
         // Drop the model when we go to the background. iOS kills the largest-footprint suspended app
         // first, and a 2.5 GB mapping makes us that app. mmap keeps the reload cheap.
         NotificationCenter.default.addObserver(
             self, selector: #selector(appDidEnterBackground),
             name: UIApplication.didEnterBackgroundNotification, object: nil)
+    }
+
+    /**
+     * DEBUG-ONLY self-benchmark, triggered by dropping a marker file into the app container:
+     *   Documents/maik-selftest
+     *
+     * iOS has no JS console reachable from a Mac CLI, so without this the only way to measure
+     * on-device speed is a human reading numbers off the screen. The marker is deleted after the run
+     * so it never repeats, and the whole thing is compiled out of release builds.
+     */
+    private func runSelfTestIfRequested() {
+        #if DEBUG
+        guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let marker = docs.appendingPathComponent("maik-selftest")
+        guard FileManager.default.fileExists(atPath: marker.path) else { return }
+        try? FileManager.default.removeItem(at: marker)
+
+        let modelName = "medgemma-1.5-4b-it-Q4_K_M.gguf"
+        let path = ModelDownloader.pathFor(modelName).path
+        guard FileManager.default.fileExists(atPath: path) else {
+            llamaPerf("SELFTEST model missing at \(path)")
+            return
+        }
+        DispatchQueue.global(qos: .userInitiated).async { [weak self] in
+            guard let self else { return }
+            let tLoad = Date()
+            do {
+                // -1 = every layer on Metal, which is the whole point of measuring on iOS.
+                try self.engine.load(path: path, nCtx: 4096, nThreads: 4, nGpuLayers: -1)
+            } catch {
+                llamaPerf("SELFTEST load FAILED \(error)")
+                return
+            }
+            llamaPerf("SELFTEST load_ms=\(Int(Date().timeIntervalSince(tLoad) * 1000))")
+
+            let qs = ["first-line treatment of diabetic ketoacidosis in an adult",
+                      "dose of IV magnesium sulphate in severe asthma in an adult"]
+            for (i, q) in qs.enumerated() {
+                let sem = DispatchSemaphore(value: 0)
+                let t0 = Date()
+                self.engine.generate(system: "You are MaiK, clinical decision support for doctors. Answer in markdown: one-line bottom line, then short bullets.",
+                                     user: q, nPredict: 120, temperature: 0, seed: 0, onToken: nil) { r in
+                    switch r {
+                    case .success(let text):
+                        llamaPerf("SELFTEST q\(i + 1) total_ms=\(Int(Date().timeIntervalSince(t0) * 1000)) chars=\(text.count)")
+                    case .failure(let e):
+                        llamaPerf("SELFTEST q\(i + 1) FAILED \(e)")
+                    }
+                    sem.signal()
+                }
+                sem.wait()
+            }
+            llamaPerf("SELFTEST done")
+        }
+        #endif
     }
 
     @objc private func appDidEnterBackground() {
