@@ -69,7 +69,7 @@
   // The element goBack() activates at step 1: the top-most overlay's control, preferring a Back control
   // (step one screen back) over a Close control (dismiss to home). null when no overlay control is on screen.
   function topBackControl() {
-    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdBackHandle" && onScreen(el) && interactive(el); });
+    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
     if (!els.length) return null;
     els.sort(function (a, b) {
       var za = zOf(a), zb = zOf(b);
@@ -136,22 +136,32 @@
     return false;
   }
 
-  // ── Universal left-edge back-handle: a small chevron shown on EVERY screen that can go back, so no module
-  //    is a dead-end even without its own button. Tap = goBack; it also hints the swipe. Hidden at home. ──
-  var _handle = null;
-  function ensureHandle() {
-    if (_handle) return _handle;
+  // ── Universal top-left back button (WhatsApp-style): shown on any screen that CAN go back but does NOT
+  //    already have its own top-left back/close control — so every module gets a visible back button without
+  //    per-module edits and without duplicating existing ones. Tap = goBack. Hidden at home/root. ──
+  var _btn = null;
+  function ensureBackBtn() {
+    if (_btn) return _btn;
     var b = document.createElement("button");
-    b.id = "smdBackHandle"; b.type = "button"; b.setAttribute("aria-label", "Back");
-    b.innerHTML = '<svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
-    b.style.cssText = "position:fixed;left:0;top:56%;transform:translateY(-50%);z-index:99000;width:26px;height:52px;"
-      + "display:none;align-items:center;justify-content:center;border:none;border-radius:0 14px 14px 0;cursor:pointer;"
-      + "background:rgba(15,118,110,.82);color:#fff;box-shadow:2px 0 12px -3px rgba(0,0,0,.4);padding:0 2px 0 0;-webkit-tap-highlight-color:transparent";
+    b.id = "smdTopBack"; b.type = "button"; b.setAttribute("aria-label", "Back");
+    b.innerHTML = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M15 5l-7 7 7 7"/></svg>';
+    b.style.cssText = "position:fixed;left:9px;top:calc(env(safe-area-inset-top,0px) + 9px);z-index:99000;width:38px;height:38px;"
+      + "display:none;align-items:center;justify-content:center;border:none;border-radius:50%;cursor:pointer;"
+      + "background:rgba(15,118,110,.92);color:#fff;box-shadow:0 2px 10px -2px rgba(0,0,0,.45);-webkit-tap-highlight-color:transparent";
     b.addEventListener("click", function (ev) { ev.stopPropagation(); goBack(); setTimeout(syncHandle, 80); });
     (document.body || document.documentElement).appendChild(b);
-    _handle = b; return b;
+    _btn = b; return b;
   }
-  function syncHandle() { try { ensureHandle().style.display = canGoBack() ? "flex" : "none"; } catch (e) {} }
+  // Does the top-most screen already show a back/close control in the top-left corner? (Then no need for ours.)
+  function hasTopLeftControl() {
+    var els = [].slice.call(document.querySelectorAll(BACK_SEL)).filter(function (el) { return el.id !== "smdTopBack" && onScreen(el) && interactive(el); });
+    for (var i = 0; i < els.length; i++) {
+      var r = els[i].getBoundingClientRect();
+      if (r.width > 4 && r.height > 4 && r.top < 150 && r.left < 150) return true;
+    }
+    return false;
+  }
+  function syncHandle() { try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl()) ? "flex" : "none"; } catch (e) {} }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
