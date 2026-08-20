@@ -35,7 +35,26 @@ function load(env = {}) {
   if (env.runtime) {
     win.SMD_MAIK_LOCAL = { answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); } };
   }
-  if (env.pack) win.SMD_MAIK_MODELS = { installedCached: () => true };
+  // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
+  if (env.pack !== undefined || env.models) {
+    const installed = env.pack !== false;
+    win.SMD_MAIK_MODELS = {
+      PACKS: {
+        "maik-local-v1": { label: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096 },
+        "maik-local-e2b": { label: "Gemma 4 E2B (Q4_K_M)", nCtx: 4096 }
+      },
+      installedCached: (id) => installed && id === "maik-local-v1",
+      sizeLabel: (id) => (id === "maik-local-v1" ? "2.49 GB" : "3.11 GB"),
+      totalBytes: () => 2489894976,
+      state: (id) => env.state || { downloading: false, frac: installed && id === "maik-local-v1" ? 1 : 0, done: installed && id === "maik-local-v1", err: null },
+      subscribe: () => () => {},
+      activePack: () => env.active || "maik-local-v1",
+      setActivePack: (id) => id,
+      cancel: () => {},
+      ensure: () => Promise.resolve({ installed: true }),
+      remove: () => Promise.resolve()
+    };
+  }
   const ls = fakeLS();
   new Function("window", "localStorage", SRC)(win, ls);
   return { win, ls, calls, E: win.SMD_MAIK_ENGINE };
@@ -162,16 +181,61 @@ function load(env = {}) {
   ok("settings: local disabled without a gate", /data-me-opt="local"[^>]*aria-disabled="true"/.test(h));
   ok("settings: no model row without gate+runtime", !/data-me-model/.test(h));
 
-  const ready = load({ gate: true, runtime: true });
+  const ready = load({ gate: true, runtime: true, models: true, pack: false });
   const h2 = ready.E.settingsHTML();
   ok("settings: gated+runtime shows a download row", /data-me-model="download"/.test(h2));
   ok("settings: download copy promises resume", /resumes if interrupted/i.test(h2));
   ok("settings: no Wi-Fi-only restriction in the copy", /Wi-Fi or mobile data/.test(h2));
+  ok("settings: download keeps going off-screen is stated", /keeps going/i.test(h2));
 
   const installed = load({ gate: true, runtime: true, pack: true });
   const h3 = installed.E.settingsHTML();
   ok("settings: installed shows a delete row", /data-me-model="delete"/.test(h3));
   ok("settings: local option enabled once ready", !/data-me-opt="local"[^>]*aria-disabled="true"/.test(h3));
+}
+
+// ── on-device model section: pack picker + live progress ──
+{
+  const { E } = load({ gate: true, runtime: true, models: true, pack: false });
+  const h = E.settingsHTML();
+  ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 2);
+  ok("model section: names both models", /MedGemma 1\.5 4B/.test(h) && /Gemma 4 E2B/.test(h));
+  ok("model section: shows each size", /2\.49 GB/.test(h) && /3\.11 GB/.test(h));
+  ok("model section: active pack is ticked", /data-me-pack="maik-local-v1" role="radio" aria-checked="true"/.test(h));
+  ok("model section: inactive pack not ticked", /data-me-pack="maik-local-e2b" role="radio" aria-checked="false"/.test(h));
+  ok("model section: per-pack download buttons carry the id", /data-me-model="download" data-me-id="maik-local-e2b"/.test(h));
+  ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 2);
+  ok("model section: not-downloaded state is stated", /Not downloaded/.test(h));
+}
+
+// mid-download rendering: progress bar, MB/s, ETA and a Pause button
+{
+  const { E } = load({ gate: true, runtime: true, models: true, pack: false,
+                       state: { downloading: true, frac: 0.4213, bytes: 1e9, total: 2489894976, mbps: 2.35, etaS: 640, note: "Downloading", err: null, done: false } });
+  const h = E.settingsHTML();
+  ok("downloading: shows a percentage", /42\.1% of/.test(h));
+  ok("downloading: shows throughput", /2\.4 MB\/s/.test(h));
+  ok("downloading: shows an ETA", /11 min left/.test(h));
+  ok("downloading: renders a progress bar at the right width", /width:42\.1%/.test(h));
+  ok("downloading: offers Pause, not Download", /data-me-model="pause"/.test(h) && !/data-me-model="download" data-me-id="maik-local-v1"/.test(h));
+}
+
+// a stopped download must invite resume, not restart
+{
+  const { E } = load({ gate: true, runtime: true, models: true, pack: false,
+                       state: { downloading: false, frac: 0.07, bytes: 1.7e8, total: 2489894976, mbps: 0, etaS: null, note: "Stopped", err: "Failed to fetch", done: false } });
+  const h = E.settingsHTML();
+  ok("stopped: tells the user to resume", /tap Download to resume/.test(h));
+  ok("stopped: button says Resume", />Resume</.test(h));
+  ok("stopped: keeps a Delete option for the partial file", /data-me-model="delete"/.test(h));
+}
+
+// a broken/older model module must not blank the settings panel
+{
+  const { win, E } = load({ gate: true, runtime: true });
+  win.SMD_MAIK_MODELS = { installedCached: () => false };      // no PACKS/state/sizeLabel
+  const h = E.settingsHTML();
+  ok("degrades safely when the model module is incomplete", (h.match(/data-me-opt="/g) || []).length === 3 && !/data-me-pack/.test(h));
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

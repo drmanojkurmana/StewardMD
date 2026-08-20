@@ -35,7 +35,16 @@
 
   var DIR = "DATA";                 // @capacitor/filesystem Directory (persistent)
   var SUBDIR = "maik-models";
-  var CHUNK_BYTES = 24 * 1024 * 1024;   // 24 MiB per Range request (~32 MiB base64 peak)
+  // 2 MiB per Range request. Measured, not guessed: on a real Pixel 9 (Android 17 WebView) a 24 MiB
+  // ranged fetch threw "Failed to fetch" every time. Isolating the steps at the same offset showed
+  // the fetch, the base64 and the appendFile all SUCCEED - but one 8 MiB chunk took 33.5 s on a
+  // degraded 2.4 GHz link (0.25 MB/s), so the failure is the WebView TIMING OUT a long request, not
+  // a range or size limit. Chunk size therefore has to be small enough that a single request stays
+  // short on a bad connection: 2 MiB is ~8 s even at 0.25 MB/s. Smaller chunks also cut peak memory
+  // (~2.7 MiB of base64), which matters on the 8 GB iPhone. Cost is more round trips, which is the
+  // right trade when the alternative is a download that can never finish.
+  var CHUNK_BYTES = 2 * 1024 * 1024;
+  var CHUNK_TRIES = 5;                  // per-chunk retries; a 2.5 GB pull WILL see transient failures
   var MARK_PREFIX = "smd_maik_pack_";   // localStorage install marker (sync check for settingsHTML)
 
   /* Pack registry.
@@ -104,6 +113,29 @@
     return (typeof fetch !== "undefined") ? fetch : null;
   }
 
+  var KEY_ACTIVE = "stewardmd.maikPack";
+
+  // In-flight download state lives on the MODULE, not in the settings view, so closing Settings
+  // does not stop or lose a download and reopening re-attaches to the live numbers.
+  var _state = {};
+  var _subs = [];
+  function state(id) {
+    return _state[id] || { downloading: false, frac: installedCached(id) ? 1 : 0, done: installedCached(id), err: null };
+  }
+  function subscribe(cb) {
+    if (typeof cb !== "function") return function () {};
+    _subs.push(cb);
+    return function () { var i = _subs.indexOf(cb); if (i > -1) _subs.splice(i, 1); };
+  }
+  function emit(id) {
+    var st = state(id);
+    for (var i = 0; i < _subs.length; i++) { try { _subs[i](id, st); } catch (e) {} }
+  }
+
+  /** Which pack the on-device engine should run. Defaults to the primary (MedGemma). */
+  function activePack() { var v = lget(KEY_ACTIVE); return PACKS[v] ? v : "maik-local-v1"; }
+  function setActivePack(id) { if (PACKS[id]) lset(KEY_ACTIVE, id); return activePack(); }
+
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
   function lrem(k) { try { localStorage.removeItem(k); } catch (e) {} }
@@ -157,14 +189,30 @@
     if (!isNative() || !F) return Promise.reject(new Error("on-device models need the native app"));
     if (!fx) return Promise.reject(new Error("no fetch available"));
 
+    if (_state[id] && _state[id].downloading) return Promise.reject(new Error("already downloading"));
+
     var files = pack(id).files;
     var grandTotal = totalBytes(id) || 1;
     var doneBefore = 0;
+    var t0 = Date.now(), startBytes = 0, cancelled = false;
+
+    _state[id] = { downloading: true, frac: 0, bytes: 0, total: grandTotal, mbps: 0, etaS: null, note: "Starting", err: null, done: false };
+    _state[id].cancel = function () { cancelled = true; };
 
     function report(currentFileBytes, note) {
-      if (!onProgress) return;
-      var frac = Math.min(1, (doneBefore + currentFileBytes) / grandTotal);
-      onProgress(frac, note);
+      var got = doneBefore + currentFileBytes;
+      var st = _state[id];
+      if (st) {
+        var secs = (Date.now() - t0) / 1000;
+        var moved = got - startBytes;
+        st.frac = Math.min(1, got / grandTotal);
+        st.bytes = got;
+        st.mbps = secs > 1 ? (moved / secs / 1e6) : 0;
+        st.etaS = st.mbps > 0.01 ? Math.round((grandTotal - got) / (st.mbps * 1e6)) : null;
+        if (note) st.note = note;
+        emit(id);
+      }
+      if (onProgress) onProgress(Math.min(1, got / grandTotal), note);
     }
 
     // Ensure the directory exists, and keep a 2.5 GB re-downloadable model out of iCloud backup.
@@ -185,7 +233,7 @@
           return F.deleteFile({ path: relPath(f.name), directory: DIR }).catch(function () {})
             .then(function () { return pull(f, 0); });
         }
-        if (have > 0) report(have, "Resuming at " + (have / 1e9).toFixed(2) + " GB");
+        if (have > 0) { startBytes = have; report(have, "Resuming at " + (have / 1e9).toFixed(2) + " GB"); }
         return pull(f, have);
       });
     }
@@ -193,10 +241,23 @@
     function pull(f, from) {
       var total = f.bytes || 0;
 
+      // One chunk, with backoff. A dropped connection mid-download must not force the clinician to
+      // tap Download again; that is the difference between "resumable" and "resumable by hand".
+      function chunk(offset, end, attempt) {
+        return fx(f.url, { headers: { Range: "bytes=" + offset + "-" + end } }).catch(function (e) {
+          if (attempt >= CHUNK_TRIES || cancelled) throw e;
+          var wait = 800 * Math.pow(2, attempt - 1);
+          _state[id].note = "Connection dropped, retrying…";
+          emit(id);
+          return new Promise(function (res) { setTimeout(res, wait); }).then(function () { return chunk(offset, end, attempt + 1); });
+        });
+      }
+
       function step(offset) {
+        if (cancelled) throw new Error("cancelled");
         if (total && offset >= total) return verify(f, offset);
         var end = total ? Math.min(offset + CHUNK_BYTES, total) - 1 : offset + CHUNK_BYTES - 1;
-        return fx(f.url, { headers: { Range: "bytes=" + offset + "-" + end } }).then(function (r) {
+        return chunk(offset, end, 1).then(function (r) {
           // 206 = ranged (expected). 200 = server ignored Range; only usable from a cold start.
           if (!r || (r.status !== 206 && r.status !== 200)) throw new Error("download failed (" + (r && r.status) + ")");
           if (r.status === 200 && offset > 0) throw new Error("server ignored resume; delete the model and retry");
@@ -215,7 +276,7 @@
           return F.appendFile({ path: relPath(f.name), data: abToB64(ab), directory: DIR })
             .then(function () {
               var next = offset + ab.byteLength;
-              report(next, null);
+              report(next, "Downloading");
               return step(next);
             });
         });
@@ -243,15 +304,31 @@
       return files.reduce(function (chain, f) { return chain.then(function () { return oneFile(f); }); }, Promise.resolve());
     }).then(function () {
       lset(MARK_PREFIX + id, "1");
+      _state[id] = { downloading: false, frac: 1, bytes: grandTotal, total: grandTotal, mbps: 0, etaS: 0, note: "Ready", err: null, done: true };
+      emit(id);
       if (onProgress) onProgress(1, "Ready");
       return { installed: true };
+    }).catch(function (e) {
+      var msg = String((e && e.message) || e);
+      _state[id] = { downloading: false, frac: (_state[id] && _state[id].frac) || 0, bytes: (_state[id] && _state[id].bytes) || 0,
+                     total: grandTotal, mbps: 0, etaS: null, note: msg === "cancelled" ? "Paused" : "Stopped", err: msg, done: false };
+      emit(id);
+      throw e;
     });
+  }
+
+  /** Stop an in-flight download. The bytes already on disk stay, so Download resumes from there. */
+  function cancel(id) {
+    var st = _state[id];
+    if (st && st.cancel) st.cancel();
   }
 
   // ── delete the cached pack (frees storage) ──
   function remove(id) {
     var F = fs();
+    cancel(id);
     lrem(MARK_PREFIX + id);
+    delete _state[id];
     if (!isNative() || !F) return Promise.resolve();
     return pack(id).files.reduce(function (chain, f) {
       return chain.then(function () { return F.deleteFile({ path: relPath(f.name), directory: DIR }).catch(function () {}); });
@@ -259,10 +336,12 @@
   }
 
   var API = {
-    PACKS: PACKS, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES,
+    PACKS: PACKS, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
-    ensure: ensure, remove: remove, pathFor: pathFor,
+    ensure: ensure, remove: remove, cancel: cancel, pathFor: pathFor,
+    state: state, subscribe: subscribe,
+    activePack: activePack, setActivePack: setActivePack,
     _abToB64: abToB64
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

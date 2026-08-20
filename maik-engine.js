@@ -69,8 +69,11 @@
       return (typeof L.available === "function") ? !!L.available() : true;
     } catch (e) { return false; }
   }
+  function activePack() {
+    try { var M = window.SMD_MAIK_MODELS; return (M && M.activePack) ? M.activePack() : PACK_ID; } catch (e) { return PACK_ID; }
+  }
   function packInstalled() {
-    try { return !!(window.SMD_MAIK_MODELS && window.SMD_MAIK_MODELS.installedCached && window.SMD_MAIK_MODELS.installedCached(PACK_ID)); } catch (e) { return false; }
+    try { return !!(window.SMD_MAIK_MODELS && window.SMD_MAIK_MODELS.installedCached && window.SMD_MAIK_MODELS.installedCached(activePack())); } catch (e) { return false; }
   }
   function localReady() { return gateActive() && runtimeAvailable() && packInstalled(); }
 
@@ -186,19 +189,101 @@
       '</div>';
   }
 
-  // Download / delete row for the model pack. Progress is driven by SMD_MAIK_MODELS.
+  /* ── On-device model section ────────────────────────────────────────────────
+   * Pack chooser + live progress. The download state lives in SMD_MAIK_MODELS, not here, so
+   * closing Settings never stops a download and reopening re-attaches to the live numbers.
+   */
+  function fmtETA(s) {
+    if (s == null) return "";
+    if (s < 90) return Math.max(1, Math.round(s)) + "s left";
+    var m = Math.round(s / 60);
+    return m < 60 ? m + " min left" : (m / 60).toFixed(1) + " h left";
+  }
+
   function modelRowHTML() {
-    var have = packInstalled();
-    var size = "";
-    try { if (window.SMD_MAIK_MODELS && window.SMD_MAIK_MODELS.sizeLabel) size = window.SMD_MAIK_MODELS.sizeLabel(PACK_ID); } catch (e) {}
-    if (have) {
-      return '<div id="meModelRow" style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:0 2px 6px">' +
-        'Model installed' + (size ? " (" + size + ")" : "") + '.</div>' +
-        '<button class="smd-nav-btn" data-me-model="delete" style="text-align:left">Delete model' + (size ? " (frees " + size + ")" : "") + '</button>';
-    }
-    return '<div id="meModelRow" style="font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);padding:0 2px 6px">' +
-      'Not downloaded' + (size ? " · " + size : "") + '. Downloads over Wi-Fi or mobile data, and resumes if interrupted.</div>' +
-      '<button class="smd-nav-btn" data-me-model="download" style="text-align:left">Download model' + (size ? " (" + size + ")" : "") + '</button>';
+    var M = window.SMD_MAIK_MODELS;
+    // Defensive: this renders inside the Settings panel, so a missing/older model module must
+    // degrade to "no section" rather than throw and blank every setting below it.
+    if (!M || !M.PACKS || !M.state || !M.sizeLabel) return "";
+    var active = M.activePack ? M.activePack() : PACK_ID;
+    var ids = Object.keys(M.PACKS);
+    if (!ids.length) return "";
+
+    var rows = ids.map(function (id, i) {
+      var p = M.PACKS[id];
+      var on = id === active;
+      var have = M.installedCached(id);
+      var st = M.state(id);
+      var size = M.sizeLabel(id);
+
+      var status;
+      if (st.downloading) status = (st.frac * 100).toFixed(1) + "% of " + size +
+        (st.mbps ? " · " + st.mbps.toFixed(1) + " MB/s" : "") + (st.etaS != null ? " · " + fmtETA(st.etaS) : "");
+      else if (have) status = "Downloaded · " + size;
+      else if (st.err) status = st.note + " · tap Download to resume";
+      else if (st.frac > 0) status = "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume";
+      else status = "Not downloaded · " + size;
+
+      var bar = (st.downloading || (st.frac > 0 && !have))
+        ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
+            '<div style="height:100%;width:' + (st.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63);transition:width .3s"></div>' +
+          '</div>'
+        : "";
+
+      return '<div data-me-pack-row="' + id + '" style="' + (i ? "border-top:1px solid var(--line,#e2e8f0);" : "") + 'padding:12px 14px">' +
+        '<button type="button" data-me-pack="' + id + '" role="radio" aria-checked="' + on + '"' +
+        ' style="display:flex;align-items:center;gap:10px;width:100%;text-align:left;cursor:pointer;background:transparent;border:0;padding:0;color:var(--ink,#14202b);-webkit-tap-highlight-color:transparent">' +
+          '<span style="flex:1;min-width:0">' +
+            '<span style="display:block;font:600 14px/1.3 var(--sans,system-ui)">' + p.label + '</span>' +
+            '<span data-me-status="' + id + '" style="display:block;font:500 12px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:2px">' + status + '</span>' +
+          '</span>' +
+          '<span aria-hidden="true" style="flex:0 0 auto;width:20px;text-align:center;color:var(--teal,#0e6e63);font-size:16px;font-weight:800;opacity:' + (on ? "1" : "0") + '">✓</span>' +
+        '</button>' +
+        '<div data-me-bar="' + id + '">' + bar + '</div>' +
+        '<div style="display:flex;gap:8px;margin-top:9px">' +
+          (st.downloading
+            ? '<button class="smd-nav-btn" data-me-model="pause" data-me-id="' + id + '" style="margin:0;flex:1">Pause</button>'
+            : '<button class="smd-nav-btn" data-me-model="download" data-me-id="' + id + '" style="margin:0;flex:1">' + (have ? "Verify" : (st.frac > 0 ? "Resume" : "Download")) + '</button>') +
+          (have || st.frac > 0 ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
+        '</div>' +
+      '</div>';
+    }).join("");
+
+    return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-device model</div>' +
+      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
+      '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>';
+  }
+
+  // Live updates without re-rendering the whole section (which would kill the tap targets
+  // mid-download). Patches only the status line and the bar for the pack that changed.
+  var _unsub = null;
+  function attachLive(root) {
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.subscribe) return;
+    if (_unsub) { try { _unsub(); } catch (e) {} _unsub = null; }
+    _unsub = M.subscribe(function (id, st) {
+      var host = (root && root.querySelector) ? root : document;
+      var stEl = host.querySelector('[data-me-status="' + id + '"]');
+      var barEl = host.querySelector('[data-me-bar="' + id + '"]');
+      if (!stEl && !barEl) { if (_unsub) { try { _unsub(); } catch (e) {} _unsub = null; } return; }   // section gone
+      var size = M.sizeLabel(id);
+      if (stEl) {
+        stEl.textContent = st.downloading
+          ? (st.frac * 100).toFixed(1) + "% of " + size + (st.mbps ? " · " + st.mbps.toFixed(1) + " MB/s" : "") + (st.etaS != null ? " · " + fmtETA(st.etaS) : "")
+          : st.done ? "Downloaded · " + size
+          : st.err ? st.note + " · tap Download to resume"
+          : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume"
+          : "Not downloaded · " + size;
+      }
+      if (barEl) {
+        barEl.innerHTML = (st.downloading || (st.frac > 0 && !st.done))
+          ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
+              '<div style="height:100%;width:' + (st.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63);transition:width .3s"></div></div>'
+          : "";
+      }
+      // A finished or failed download changes which buttons belong here.
+      if (!st.downloading) { var seg = (root && root.querySelector) ? root.querySelector(".me-seg") : null; if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, root); }
+    });
   }
 
   function rerender(anchor, root) {
@@ -221,35 +306,50 @@
         rerender(b, root);
       });
     });
-    root.querySelectorAll("[data-me-model]").forEach(function (b) {
+    root.querySelectorAll("[data-me-pack]").forEach(function (b) {
       b.addEventListener("click", function () {
-        if (b.getAttribute("data-me-model") === "delete") return removeModel(b, root);
-        return startDownload(b, root);
+        var M = window.SMD_MAIK_MODELS;
+        if (M && M.setActivePack) M.setActivePack(b.getAttribute("data-me-pack"));
+        rerender(b, root);
       });
     });
+    root.querySelectorAll("[data-me-model]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var act = b.getAttribute("data-me-model");
+        var id = b.getAttribute("data-me-id") || PACK_ID;
+        if (act === "delete") return removeModel(b, root, id);
+        if (act === "pause") {
+          var M = window.SMD_MAIK_MODELS;
+          if (M && M.cancel) M.cancel(id);
+          return;
+        }
+        return startDownload(b, root, id);
+      });
+    });
+    attachLive(root);
   }
 
   function toast(m) { try { (window.toast || function () {})(m); } catch (e) {} }
 
-  function startDownload(anchor, root) {
-    if (!window.SMD_MAIK_MODELS || !window.SMD_MAIK_MODELS.ensure) return toast("Model download is unavailable in this build.");
-    var row = document.getElementById("meModelRow");
-    function show(msg) { if (row) row.textContent = msg; }
-    show("Starting download…");
-    return window.SMD_MAIK_MODELS.ensure(PACK_ID, function (frac, note) {
-      show(note || ("Downloading … " + Math.round((frac || 0) * 100) + "%"));
-    }).then(function () {
+  function startDownload(anchor, root, id) {
+    id = id || PACK_ID;
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.ensure) return toast("Model download is unavailable in this build.");
+    rerender(anchor, root);            // flip the button to Pause immediately
+    return M.ensure(id, null).then(function () {
       toast("On-device model ready.");
-      rerender(anchor, root);
     }).catch(function (e) {
-      show("Download stopped: " + ((e && e.message) || e) + ". Tap to resume.");
+      var msg = String((e && e.message) || e);
+      if (msg !== "cancelled") toast("Download stopped. Tap Download to resume.");
     });
   }
 
-  function removeModel(anchor, root) {
-    if (!window.SMD_MAIK_MODELS || !window.SMD_MAIK_MODELS.remove) return;
-    return window.SMD_MAIK_MODELS.remove(PACK_ID).then(function () {
-      if (getPref() === "local") setPref("rag");
+  function removeModel(anchor, root, id) {
+    id = id || PACK_ID;
+    var M = window.SMD_MAIK_MODELS;
+    if (!M || !M.remove) return;
+    return M.remove(id).then(function () {
+      if (getPref() === "local" && !localReady()) setPref("rag");
       toast("Model deleted.");
       rerender(anchor, root);
     });
@@ -259,8 +359,8 @@
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, XA_FEATURE: XA_FEATURE, PACK_ID: PACK_ID,
     getPref: getPref, setPref: setPref, effective: effective,
     gateActive: gateActive, runtimeAvailable: runtimeAvailable, packInstalled: packInstalled, localReady: localReady,
-    kbOnlyNotice: kbOnlyNotice, route: route, install: install,
-    settingsHTML: settingsHTML, wireSettings: wireSettings
+    kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,
+    settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") { window.SMD_MAIK_ENGINE = API; installWhenReady(); }

@@ -134,10 +134,17 @@
    * Generate an answer for a grounded package.
    * opts.pack selects a pack (defaults to the primary); opts.temperature defaults to greedy.
    */
+  /** The pack the clinician picked in Settings, falling back to the primary. */
+  function currentPack() {
+    var M = models();
+    try { if (M && M.activePack) return M.activePack(); } catch (e) {}
+    return DEFAULT_PACK;
+  }
+
   function answer(pkg, opts, onDelta) {
     var L = llama();
     if (!L) return Promise.resolve({ error: "on-device inference needs the native app" });
-    var packId = (opts && opts.pack) || DEFAULT_PACK;
+    var packId = (opts && opts.pack) || currentPack();
     var t0 = Date.now();
     var acc = "";
     var sub = null;
@@ -200,7 +207,8 @@
 
   var API = {
     SYSTEM: SYSTEM, PROMPT_CHAR_BUDGET: PROMPT_CHAR_BUDGET, DEFAULT_PACK: DEFAULT_PACK,
-    buildPrompt: buildPrompt, answer: answer, available: available, cancel: cancel, release: release
+    buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
+    cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;
