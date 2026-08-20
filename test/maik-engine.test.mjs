@@ -163,6 +163,28 @@ function load(env = {}) {
   ok("local: rejection becomes {error}", r.error === "oom");
 }
 
+// ── a DEV build opens the experimental gate; a release build does not ──
+// Without this the feature is unreachable on a device: SMD_XACCESS needs a server-issued code and
+// iOS has no JS console to set a bypass by hand.
+{
+  const dev = load({ runtime: true, pack: true });
+  dev.win.SMD_MAIK_LOCAL.isDebugBuild = () => true;
+  ok("debug build opens the gate", dev.E.gateActive() === true && dev.E.localReady() === true);
+
+  const rel = load({ runtime: true, pack: true });
+  rel.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
+  ok("release build still requires a code", rel.E.gateActive() === false && rel.E.localReady() === false);
+
+  const relWithCode = load({ gate: true, runtime: true, pack: true });
+  relWithCode.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
+  ok("release build WITH a valid code is allowed", relWithCode.E.gateActive() === true);
+
+  const devBypass = load({ runtime: true, pack: true });
+  devBypass.win.SMD_MAIK_LOCAL.isDebugBuild = () => false;
+  devBypass.win.SMD_XACCESS = { isActiveCached: () => false, devBypass: () => true };
+  ok("SMD_XACCESS.devBypass is also honoured", devBypass.E.gateActive() === true);
+}
+
 // ── owner/QA bypass unlocks the gate without a server deploy ──
 {
   const { E, ls } = load({ runtime: true, pack: true });

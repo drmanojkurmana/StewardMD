@@ -103,3 +103,7 @@ atlas-pipeline/.venv-ss/
 atlas-pipeline/synthseg-repo/
 *.nii
 *.nii.gz
+
+# SwiftPM build output for the local Capacitor plugins (429MB, contains dSYMs >100MB).
+# Never commit: GitHub hard-rejects files over 100MB and this is pure build artifact.
+local-plugins/*/.build/

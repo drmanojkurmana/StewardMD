@@ -226,7 +226,8 @@
     _state[id].cancel = function () {
       stopped = true;
       var did = lget(KEY_DLID + id);
-      if (did && L.downloadCancel) L.downloadCancel({ id: did });
+      // Android cancels by DownloadManager id, iOS by destination file name. Send both.
+      if (L.downloadCancel) L.downloadCancel({ id: did || "", name: f.name });
     };
     emit(id);
 

@@ -11,6 +11,8 @@ enum LlamaErr: String {
     case busy                    = "busy"
     case userCancelled           = "user-cancelled"
     case badArguments            = "bad-arguments"
+    case modelDownloadFailed     = "model-download-failed"
+    case insufficientStorage     = "insufficient-storage"
 }
 
 struct LlamaError: Error {

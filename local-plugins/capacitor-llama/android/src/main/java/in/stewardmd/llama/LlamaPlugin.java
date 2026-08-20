@@ -105,8 +105,13 @@ public class LlamaPlugin extends Plugin {
     /** Is on-device inference possible on this build/ABI at all? Cheap, synchronous. */
     @PluginMethod
     public void available(PluginCall call) {
+        boolean isDebug = false;
+        try {
+            isDebug = (getContext().getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+        } catch (Throwable ignore) {}
         call.resolve(new JSObject()
             .put("available", engine.isAvailable())
+            .put("debugBuild", isDebug)
             .put("loaded", engine.isLoaded())
             .put("defaultNCtx", LlamaEngine.DEFAULT_N_CTX)
             .put("defaultNPredict", LlamaEngine.DEFAULT_N_PREDICT));

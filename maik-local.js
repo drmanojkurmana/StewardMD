@@ -197,6 +197,19 @@
    */
   function available() { return !!llama(); }
 
+  /* Is this a DEVELOPMENT build? Asked once at load and cached, because the engine picker needs the
+   * answer synchronously. Used only to open the experimental gate on a dev build - a release build
+   * reports false and still requires an access code. */
+  var _debugBuild = false;
+  function isDebugBuild() { return _debugBuild; }
+  (function probeDebug() {
+    try {
+      var L = llama();
+      if (!L || !L.available) return;
+      L.available().then(function (a) { _debugBuild = !!(a && a.debugBuild); }).catch(function () {});
+    } catch (e) {}
+  })();
+
   /**
    * Load the model AND fault its pages in, ahead of any question.
    *
@@ -236,7 +249,7 @@
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
-    warm: warm, cancel: cancel, release: release
+    warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

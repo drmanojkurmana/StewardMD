@@ -30,7 +30,12 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         CAPPluginMethod(name: "generate", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "cancel", returnType: CAPPluginReturnPromise),
         CAPPluginMethod(name: "release", returnType: CAPPluginReturnPromise),
-        CAPPluginMethod(name: "excludeFromBackup", returnType: CAPPluginReturnPromise)
+        CAPPluginMethod(name: "excludeFromBackup", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "downloadStart", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "downloadStatus", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "downloadCancel", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "modelPath", returnType: CAPPluginReturnPromise),
+        CAPPluginMethod(name: "modelDelete", returnType: CAPPluginReturnPromise)
     ]
 
     private let engine = LlamaEngine()
@@ -51,8 +56,17 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
     // MARK: - Capability
 
     @objc func available(_ call: CAPPluginCall) {
+        // debugBuild lets the experimental gate open itself on a development build only. Without it
+        // there is no way to reach this feature on a device: SMD_XACCESS needs a server-issued code,
+        // and iOS has no JS console to set a bypass by hand. Release builds report false, so the
+        // access code is still required in production.
+        var isDebug = false
+        #if DEBUG
+        isDebug = true
+        #endif
         call.resolve([
             "available": true,                     // the XCFramework is linked at build time
+            "debugBuild": isDebug,
             "loaded": engine.isLoaded,
             "defaultNCtx": Int(LlamaEngine.defaultNCtx),
             "defaultNPredict": Int(LlamaEngine.defaultNPredict)
@@ -122,6 +136,55 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         engine.cancel()
         engine.release()
         call.resolve(["released": true])
+    }
+
+    // MARK: - Background model download (background URLSession)
+    //
+    // These five mirror the Android plugin exactly, so maik-models.js takes the same native path on
+    // both platforms. Without them iOS silently fell back to the JS chunk loop, which is why the
+    // iPhone download was crawling while Android finished in under a minute.
+
+    @objc func downloadStart(_ call: CAPPluginCall) {
+        guard let url = call.getString("url"), let name = call.getString("name"),
+              !url.isEmpty, !name.isEmpty else {
+            call.reject("Missing url or name", LlamaErr.badArguments.rawValue); return
+        }
+        do {
+            let id = try ModelDownloader.shared.start(url: url, name: name)
+            call.resolve(["id": id, "path": ModelDownloader.pathFor(name).path])
+        } catch let e as LlamaError {
+            call.reject(e.detail, e.code.rawValue)
+        } catch {
+            call.reject(error.localizedDescription, LlamaErr.modelDownloadFailed.rawValue)
+        }
+    }
+
+    @objc func downloadStatus(_ call: CAPPluginCall) {
+        guard let name = call.getString("name"), !name.isEmpty else {
+            call.resolve(["state": "none", "freeBytes": ModelDownloader.freeBytes()]); return
+        }
+        call.resolve(ModelDownloader.shared.status(name: name))
+    }
+
+    @objc func downloadCancel(_ call: CAPPluginCall) {
+        if let name = call.getString("name") { ModelDownloader.shared.cancel(name: name) }
+        call.resolve()
+    }
+
+    @objc func modelPath(_ call: CAPPluginCall) {
+        guard let name = call.getString("name"), !name.isEmpty else {
+            call.reject("Missing name", LlamaErr.badArguments.rawValue); return
+        }
+        call.resolve(["path": ModelDownloader.pathFor(name).path,
+                      "bytes": ModelDownloader.sizeOf(name),
+                      "freeBytes": ModelDownloader.freeBytes()])
+    }
+
+    @objc func modelDelete(_ call: CAPPluginCall) {
+        guard let name = call.getString("name"), !name.isEmpty else {
+            call.reject("Missing name", LlamaErr.badArguments.rawValue); return
+        }
+        call.resolve(["ok": ModelDownloader.shared.delete(name: name)])
     }
 
     // MARK: - Storage

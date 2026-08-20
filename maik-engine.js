@@ -72,6 +72,12 @@
     // (SMD_XACCESS.devBypass only covers non-native, non-prod). Set it in the WebView console:
     //   localStorage.setItem("smd_maik_local_bypass","1")
     try { if (lget("smd_maik_local_bypass") === "1") return true; } catch (e) {}
+    // A DEVELOPMENT build opens the gate. Without this the feature is unreachable on a device:
+    // SMD_XACCESS needs a server-issued code (the maik_local FEATURES entry is not deployed yet) and
+    // iOS has no JS console to set the bypass by hand. Release builds report debugBuild:false from
+    // the native plugin, so production still requires a code.
+    try { if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.isDebugBuild && window.SMD_MAIK_LOCAL.isDebugBuild()) return true; } catch (e) {}
+    try { if (window.SMD_XACCESS && window.SMD_XACCESS.devBypass && window.SMD_XACCESS.devBypass()) return true; } catch (e) {}
     try { return !!(window.SMD_XACCESS && window.SMD_XACCESS.isActiveCached && window.SMD_XACCESS.isActiveCached(XA_FEATURE)); } catch (e) { return false; }
   }
   function runtimeAvailable() {

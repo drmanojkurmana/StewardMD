@@ -1111,7 +1111,15 @@
          == clientHeight → guard treats it as "short" and preventDefault()s every drag → nothing scrolls
          and the footer/last items are clipped. Flex-column the drawer so head/account/foot keep their
          height and #sbMenu (flex:1;min-height:0) clamps to the leftover space and scrolls natively. */
-      "#sbDrawer{overscroll-behavior:contain;display:flex;flex-direction:column}#sbMenu{flex:1 1 auto;min-height:0;overflow-y:auto;-webkit-overflow-scrolling:touch;overscroll-behavior:contain}",
+      "#sbDrawer{overscroll-behavior:contain;display:flex;flex-direction:column;overflow-x:hidden}#sbMenu{flex:1 1 auto;min-height:0;overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;overscroll-behavior:contain-y;touch-action:pan-y}",
+      // The drawer is meant to scroll VERTICALLY only. #sbMenu had overflow-y:auto but no
+      // overflow-x, which defaults to visible, so any child wider than the drawer made the
+      // whole panel draggable side to side. The rows ARE wider: .sbr-row is width:100% with
+      // 14-15px horizontal padding and there was no box-sizing rule, so each overflowed by
+      // ~28px. overflow-x:hidden + touch-action:pan-y pins it; border-box below removes the
+      // overflow at source rather than just clipping it.
+      "#sbMenu,#sbMenu *,#sbDrawer,#sbDrawer *{box-sizing:border-box}",
+      "#sbMenu img,#sbMenu svg{max-width:100%}",
       /* Remove the stray right-chevron "back" affordance from the Start-a-Case chooser header
          (it points the wrong way and reads as a random glyph); the title then sits flush-left. */
       "#v3case .v3-header [data-cx=\"back\"]{display:none}#v3case .v3-header{padding-left:4px}",

@@ -166,7 +166,13 @@
       "#sbMenu[data-sbr] .sbr-status{margin:16px 4px 6px;padding:12px 14px;border-radius:14px;background:rgba(255,255,255,.5);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);border:1px solid rgba(255,255,255,.6);display:flex;align-items:center;gap:9px;color:#0b5a50;font:600 12.5px/1 var(--sans,system-ui)}",
       "#sbMenu[data-sbr] .sbr-status b{width:9px;height:9px;border-radius:50%;background:#12b886;display:inline-block;box-shadow:0 0 0 3px rgba(18,184,134,.2)}",
       /* ── Settings page (dedicated full-screen module) ── */
-      ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
+      ".sbr-set-ov{position:fixed;inset:0;z-index:100200;background:var(--paper,#f6f7f5);color:var(--ink,#14202b);overflow-y:auto;overflow-x:hidden;-webkit-overflow-scrolling:touch;font-family:var(--sans,system-ui,-apple-system,sans-serif);animation:sbrSetIn .18s ease}",
+      // The settings page had NO box-sizing rule, so every `width:100%` row with padding
+      // (.sbr-row is width:100% + 12px padding) overflowed its container by ~24px and the
+      // whole page scrolled SIDEWAYS. border-box fixes the existing rows as well as the
+      // answer-engine block; overflow-x:hidden above is the belt-and-braces guard.
+      ".sbr-set-ov,.sbr-set-ov *{box-sizing:border-box}",
+      ".sbr-set-ov img,.sbr-set-ov svg{max-width:100%}",
       "@keyframes sbrSetIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}",
       "body.dark .sbr-set-ov,body.v3-dark .sbr-set-ov{background:#0d1b26;color:#e8edf2}",
       ".sbr-set-head{position:sticky;top:0;z-index:2;display:flex;align-items:center;gap:8px;padding:calc(12px + env(safe-area-inset-top)) 14px 12px;background:inherit;border-bottom:1px solid var(--line,#d7dee3)}",
