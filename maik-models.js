@@ -22,8 +22,13 @@
  * INTEGRITY: we check the exact byte length, then the GGUF magic, then let llama.cpp's own loader
  * reject anything structurally wrong. We deliberately do NOT hash the whole file on device.
  * ponytail: size + magic + loader validation, not a full SHA-256 (which would mean reading 2.5 GB
- * back through the bridge). The published sha256 is recorded below so a desktop or the server can
- * verify the SAME bytes if a corruption bug ever shows up.
+ * back through the bridge). The sha256 below is for OFF-device verification only.
+ *
+ * CAUTION on those hashes: HuggingFace's API `lfs.oid` is NOT the file's SHA-256 for Xet-backed
+ * repos (these are - the responses carry an X-Xet-Hash header), it is a Xet content hash. The
+ * MedGemma value below was recomputed with `shasum -a 256` over the fully downloaded 2,489,894,976
+ * bytes and IS the real digest. The E2B one is still the API's oid and is NOT verified - do not
+ * trust it until someone downloads that file and re-hashes it.
  * ======================================================================== */
 (function () {
   "use strict";
@@ -62,7 +67,7 @@
         name: "medgemma-1.5-4b-it-Q4_K_M.gguf",
         url: HF + "/unsloth/medgemma-1.5-4b-it-GGUF/resolve/main/medgemma-1.5-4b-it-Q4_K_M.gguf?download=true",
         bytes: 2489894976,   // exact, from the HuggingFace API 2026-08-20
-        sha256: "b31becdf4f39561800505514cce67681604fe449d04dd35c8c92fd7848c6d7bd"
+        sha256: "49bfba86b0f3607d250fba3489299a46d4f83e657da5ad87bca08b2948abda1a"   // VERIFIED off-device
       }]
     },
     "maik-local-e2b": {
@@ -74,7 +79,7 @@
         name: "gemma-4-E2B-it-Q4_K_M.gguf",
         url: HF + "/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf?download=true",
         bytes: 3106738272,
-        sha256: "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8"
+        sha256: "740185b21d22ceb83a11c3aa62ad5842ef32c70f6096d756bbee85a1e4ec34b8"   // UNVERIFIED: HF Xet oid, not a real sha256
       }]
     }
   };
