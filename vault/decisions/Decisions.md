@@ -52,6 +52,30 @@ clinical question is not medical is not.
 drifted - the server already excluded the uncertain bucket, the client did not, and the client is what
 doctors saw. **Status**: live. See [[MaiK Intent Firewall]].
 
+## 2026-08-21 · iOS background download is capped ~1 MB/s; chunking buys resilience, NOT speed
+**Measured, after two wrong turns.** The controlled comparison that settled the diagnosis was the
+owner's own: same Wi-Fi, same room, same hour, same 3.11 GB file on HuggingFace - **Android
+DownloadManager 10.5 MB/s vs iOS background URLSession 1.3 MB/s**. So the origin is not the cap and
+**R2 would not fix iOS**; the ceiling is client-side.
+
+**The burst-vs-sustained trap.** A DownloadProbe measured 20 MB bursts: default session 6.55 MB/s,
+background 1 stream 1.08 MB/s, background 4 range tasks 4.77 MB/s. The 4.4x looked like a per-task
+throttle, so a chunked downloader was built on it. The real sustained number, read off the `.parts`
+sidecar after a 2.49 GB attempt, was **1.04 MB/s across 8 parallel parts** - identical to one stream.
+**A 20 MB burst does not predict a 2.5 GB transfer**; iOS gives an initial allowance and then caps the
+session. Measure sustained throughput for a sustained feature.
+
+**Chunking was kept anyway, on different grounds:** 64 MB ranged parts written straight into the final
+file at their offset, with a `<name>.parts` sidecar. It buys resilience, not speed - a part is the most
+that can be lost, progress survives crashes AND app reinstalls (verified: 1.38 GB preserved across a
+reinstall), and a failure at 89% no longer costs 2.5 GB. The sidecar is also the best measurement tool
+available: pull it with `devicectl device copy from` and count '1's, no console needed.
+
+**Still untested:** whether a DEFAULT session sustains ~6 MB/s. Only the burst figure exists, and
+extrapolating it is exactly the mistake above. If it does, a foreground-first chunked download is worth
+building - and chunking is what makes it safe, because backgrounding would cost only the in-flight
+parts. **Status**: chunked background download shipped; speed unresolved and honestly so.
+
 ## 2026-08-21 · On-device model download stays on ONE background URLSession
 **Rejected:** a foreground/background hybrid (default session for speed while on screen, handed to the
 background session on `didEnterBackgroundNotification`). It was built, shipped to a device, and
