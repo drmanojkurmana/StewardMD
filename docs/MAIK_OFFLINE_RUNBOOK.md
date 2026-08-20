@@ -48,10 +48,44 @@ Tap the download row again if it stops — it resumes from where it got to.
 | No ggml `.so` collision with capacitor-whisper | **VERIFIED** — clean static build emits ONE `.so`; filename overlap with whisper is empty |
 | iOS XCFramework min-OS matches the app | **VERIFIED** — `vtool` says `minos 16.4`, app is already 16.4 |
 | `www/` bundle assembles with the new files | **VERIFIED** |
+| **Offline inference on a real Pixel 9** | **VERIFIED 2026-08-20** — see the measured numbers below |
+| **Streaming onDelta accumulation contract** | **VERIFIED on-device** — 54 deltas for 54 tokens, `accumulated === final` |
 | **Swift code compiles** | **NOT VERIFIED** — no Xcode on this machine. Expect to fix small Swift errors. |
-| **Model actually loads and generates on device** | **NOT VERIFIED** — needs your phone |
-| **Peak memory on the 8 GB iPhone** | **NOT MEASURED** — this is the real open question (see below) |
-| **tok/s on either device** | **NOT MEASURED** |
+| **Peak memory on the 8 GB iPhone** | **NOT MEASURED** — still the open question for iOS |
+| **tok/s on iPhone (Metal)** | **NOT MEASURED** |
+
+---
+
+## MEASURED on a real Pixel 9 (Android 17, Tensor G4, WiFi OFF)
+
+Proven offline from inside the app: `navigator.onLine === false` and a fetch to
+`stewardmd.in/api/ai/health` threw "Failed to fetch". Engine `local`, MedGemma 1.5 4B Q4_K_M.
+
+| | cold | warm 1 | warm 2 |
+|---|---|---|---|
+| total | 27.1 s | 19.9 s | 24.5 s |
+| first token | - | 9.3 s | 11.8 s |
+| generation | - | 10.6 s | 12.7 s |
+| tokens | ~20 | 54 | 50 |
+| **tok/s** | - | **5.11** | **3.94** |
+
+**This MISSES the >= 6 tok/s gate** this plan set for Android. Usable but slow. The bigger UX
+problem is the 9-12 s of silence before the first token: the answer bubble needs an explicit
+"thinking on device" state, not a spinner that looks hung.
+
+### Answer quality: one good, one clinically WRONG
+
+Both asked with EMPTY grounding on purpose (the worst case; in the app Tier 0 supplies KB chunks).
+
+- "Severe CAP needing ICU, empiric regimen?" -> *"Vancomycin plus a beta-lactam"*.
+  **WRONG.** Severe CAP needs a beta-lactam PLUS a macrolide (or a fluoroquinolone) for atypical
+  cover. Vancomycin is for suspected MRSA, not routine empiric therapy. It both adds an
+  inappropriate drug and omits atypical cover, stated confidently with no hedge.
+- "IV magnesium dose in severe asthma?" -> *"2 g over 20 min, repeat after 20 min, max 4 g"*. Correct.
+
+That is what a 4B model does. B6 (safety gating on dose/antibiotic answers) was dropped by owner
+decision, so nothing currently stops an ungrounded wrong regimen reaching a clinician. Recorded
+here as evidence, not as an argument to re-litigate it.
 
 341 test files in the repo pass. Three fail — `onco-emr`, `sknx-flags`, `followcare-voice-server` —
 and all three fail **identically on the branch base**, so they are not from this work.
