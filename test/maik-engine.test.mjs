@@ -5,7 +5,7 @@
  *   • rag  → no paid call ever leaves; a real {text} notice is returned so home.js renders it
  *   • local→ SMD_MAIK_LOCAL.answer, with pkg/opts/onDelta passed through for replay()
  *   • a stale "local" pref (no gate / no runtime / no pack) degrades to KB-only, never dead-ends
- *   • rag/local force KB-first ON (smd_maik_llm_first=0) so Tier 0 still produces an answer
+ *   • ONLY rag forces KB-first (smd_maik_llm_first=0); local must reach the model, not the template
  */
 import { readFileSync } from "node:fs";
 
@@ -38,6 +38,7 @@ function load(env = {}) {
   // Model module stub shaped like the real SMD_MAIK_MODELS so the settings section renders.
   if (env.pack !== undefined || env.models) {
     const installed = env.pack !== false;
+    let _active = env.active || "maik-local-v1";
     win.SMD_MAIK_MODELS = {
       PACKS: {
         "maik-local-v1": { label: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096 },
@@ -48,8 +49,9 @@ function load(env = {}) {
       totalBytes: () => 2489894976,
       state: (id) => env.state || { downloading: false, frac: installed && id === "maik-local-v1" ? 1 : 0, done: installed && id === "maik-local-v1", err: null },
       subscribe: () => () => {},
-      activePack: () => env.active || "maik-local-v1",
-      setActivePack: (id) => id,
+      // stateful, like the real module: setActivePack must actually change activePack
+      activePack: () => _active,
+      setActivePack: (id) => { if (id in win.SMD_MAIK_MODELS.PACKS) _active = id; return _active; },
       cancel: () => {},
       ensure: () => Promise.resolve({ installed: true }),
       remove: () => Promise.resolve()
@@ -70,7 +72,8 @@ function load(env = {}) {
   E.setPref("rag"); ok("setPref rag persists", E.getPref() === "rag");
   ok("rag forces KB-first ON (llm_first=0)", ls._s.smd_maik_llm_first === "0");
   E.setPref("cloud"); ok("cloud restores llm_first default (key removed)", !("smd_maik_llm_first" in ls._s));
-  E.setPref("local"); ok("local forces KB-first ON", ls._s.smd_maik_llm_first === "0");
+  E.setPref("local");
+  ok("local does NOT force KB-first (the model must answer, not the KB template)", !("smd_maik_llm_first" in ls._s));
   E.setPref("nonsense"); ok("setPref sanitises unknown → cloud", E.getPref() === "cloud");
 }
 
@@ -254,9 +257,10 @@ function load(env = {}) {
 
   ok("picker: chip reflects cloud by default", E.chipLabel() === "MaiK Cloud");
   ok("picker: currentOptionId is cloud by default", E.currentOptionId() === "cloud");
-  E.selectOption("local:maik-local-e2b");
-  ok("picker: selecting an on-device row sets engine AND pack", E.getPref() === "local");
-  ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-local-v1" || E.currentOptionId() === "local:maik-local-e2b");
+  // Selecting an INSTALLED pack switches the answering engine.
+  E.selectOption("local:maik-local-v1");
+  ok("picker: selecting an installed pack sets engine local", E.getPref() === "local");
+  ok("picker: currentOptionId follows the pack", E.currentOptionId() === "local:maik-local-v1");
   E.selectOption("rag");
   ok("picker: selecting KB only switches engine", E.getPref() === "rag" && E.chipLabel() === "KB only");
   E.selectOption("cloud");
@@ -266,6 +270,83 @@ function load(env = {}) {
   ok("picker: chip markup has the id home.js wires", /id="maikModelChip"/.test(h));
   ok("picker: chip has an accessible popup role", /aria-haspopup="listbox"/.test(h));
   ok("picker: chip label is escaped into its own span", /id="maikModelChipLbl"/.test(h));
+}
+
+// ── selecting a model that is NOT downloaded must not silently break answering ──
+// This is the bug that presented as "I get no answer": tapping an undownloaded pack set the engine
+// to local, localReady() went false, effective() fell back to rag, and the chip still showed the
+// model name. Nothing told the clinician why.
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  E.selectOption("local:maik-local-v1");
+  ok("baseline: installed pack answers locally", E.effective() === "local");
+
+  E.selectOption("local:maik-local-e2b");          // NOT installed in the stub
+  ok("uninstalled pick keeps the WORKING model answering", E.activePack() === "maik-local-v1");
+  ok("uninstalled pick does not break the engine", E.effective() === "local");
+  ok("uninstalled pick is remembered as the request", E.pendingPack() === "maik-local-e2b");
+  ok("chip still names what actually answers", E.chipLabel() === "MedGemma 1.5 4B");
+  ok("picker marks the requested pack", E.options().filter((o) => o.requested).map((o) => o.pack)[0] === "maik-local-e2b");
+  // switching away clears the pending request
+  E.selectOption("cloud");
+  ok("choosing cloud clears the pending request", E.pendingPack() === null);
+}
+
+// the chip must never imply a model is answering when it cannot
+{
+  const { E } = load({ gate: true, runtime: true, pack: false,
+                       active: "maik-local-e2b",
+                       state: { downloading: false, frac: 0, done: false, err: null } });
+  E.setPref("local");
+  ok("chip flags a not-ready model", /\(not ready\)/.test(E.chipLabel()));
+
+  const dl = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+                    state: { downloading: true, frac: 0.37, done: false, err: null } });
+  dl.E.setPref("local");
+  ok("chip shows download progress instead of pretending", /\(37%\)/.test(dl.E.chipLabel()));
+}
+
+// the "no answer" message must name the real reason, not claim KB-only mode
+{
+  const notDl = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+                       state: { downloading: false, frac: 0, done: false, err: null } });
+  notDl.E.setPref("local");
+  const n1 = notDl.E.kbOnlyNotice();
+  ok("notice: does NOT claim KB-only mode", !/KB-only mode is on/.test(n1.text));
+  ok("notice: says the model is not downloaded", /not downloaded/.test(n1.text));
+  ok("notice: tells them how to fix it", /select it to start the download/.test(n1.text));
+  ok("notice: tagged local-unavailable", n1.engine === "local-unavailable");
+
+  const mid = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+                     state: { downloading: true, frac: 0.42, done: false, err: null } });
+  mid.E.setPref("local");
+  ok("notice: mid-download says so with a percentage", /still downloading \(42%\)/.test(mid.E.kbOnlyNotice().text));
+
+  const part = load({ gate: true, runtime: true, pack: false, active: "maik-local-e2b",
+                      state: { downloading: false, frac: 0.19, done: false, err: "Failed to fetch" } });
+  part.E.setPref("local");
+  ok("notice: partial download offers resume", /partly downloaded \(19%\)/.test(part.E.kbOnlyNotice().text) && /resume/.test(part.E.kbOnlyNotice().text));
+
+  // a genuine KB-only choice still gets the KB-only copy
+  const kb = load({ gate: true, runtime: true, pack: true });
+  kb.E.setPref("rag");
+  ok("notice: real KB-only choice keeps its own copy", /KB-only mode is on/.test(kb.E.kbOnlyNotice().text));
+}
+
+// adopt the pack once it finishes downloading
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  E.selectOption("local:maik-local-v1");
+  E.setPref("cloud");
+  ok("adopt: switches to local once the selected pack is installed", E.adoptPackWhenReady("maik-local-v1") === true && E.getPref() === "local");
+  ok("adopt: refuses for a pack that is not installed", E.adoptPackWhenReady("maik-local-e2b") === false);
+  ok("adopt: promotes the PENDING pack once it lands", (function () {
+    const f = load({ gate: true, runtime: true, pack: true });
+    f.E.selectOption("local:maik-local-e2b");                  // not installed -> pending
+    f.win.SMD_MAIK_MODELS.installedCached = () => true;        // download finishes
+    const okAdopt = f.E.adoptPackWhenReady("maik-local-e2b");
+    return okAdopt === true && f.E.activePack() === "maik-local-e2b" && f.E.pendingPack() === null;
+  })());
 }
 
 // on-device rows must NOT appear without the gate or the native runtime

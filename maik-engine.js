@@ -34,6 +34,10 @@
   var ENGINES = { rag: 1, cloud: 1, local: 1 };
   var XA_FEATURE = "maik_local";                 // experimental.js gate, same as fundx/kardiox
   var PACK_ID = "maik-local-v1";
+  // The pack the clinician ASKED for that is not installed yet. Kept separate from the ANSWERING
+  // pack (SMD_MAIK_MODELS.activePack) on purpose: picking a model to download must never pull the
+  // rug from under the model currently answering. That exact confusion presented as "no answer".
+  var KEY_PENDING = "stewardmd.maikPackPending";
 
   function lget(k) { try { return localStorage.getItem(k); } catch (e) { return null; } }
   function lset(k, v) { try { localStorage.setItem(k, v); } catch (e) {} }
@@ -44,8 +48,18 @@
   function setPref(v) {
     v = ENGINES[v] ? v : "cloud";
     lset(KEY_ENGINE, v);
-    // Keep Tier 0 reachable for the two engines that depend on it (see header).
-    if (v === "cloud") lrem(KEY_LLM_FIRST); else lset(KEY_LLM_FIRST, "0");
+    // KB-first is forced ON for "rag" ONLY. That engine has no model to write an answer, so it needs
+    // the templated Tier 0 reply.
+    //
+    // For "local" it must stay OFF (the default), for two reasons found on a real device:
+    //   1. The picker promises "Answer with -> MedGemma". With KB-first on, Tier 0 answered in 20 ms
+    //      and the model was never called at all - and it answered the WRONG topic (amoebic liver
+    //      abscess for a pyogenic question). Picking a model has to mean that model answers, with
+    //      the KB as grounding rather than as a template.
+    //   2. home.js only auto-runs the WEB-research tier on a KB miss when maikLLMFirst() is false.
+    //      Web research needs the network, so forcing KB-first offline sent a KB miss to a tier that
+    //      cannot possibly work and dead-ended there instead of reaching the on-device model.
+    if (v === "rag") lset(KEY_LLM_FIRST, "0"); else lrem(KEY_LLM_FIRST);
     return v;
   }
 
@@ -89,6 +103,23 @@
   // ── the KB-only notice (rendered as a normal answer, so no home.js error branch needed) ──
   // Deliberately avoids the phrases maikRenderAnswer's "limited material" regex looks for.
   function kbOnlyNotice() {
+    // If the clinician PICKED an on-device model that cannot answer yet, saying "KB-only mode is on"
+    // is a lie - they never chose KB only. Name the real reason and how to fix it, because the
+    // silent-degrade version of this looked exactly like "the app gives me no answer".
+    if (getPref() === "local" && !localReady()) {
+      var M = window.SMD_MAIK_MODELS, pid = activePack();
+      var label = (M && M.PACKS && M.PACKS[pid]) ? M.PACKS[pid].label : "the on-device model";
+      var st = (M && M.state) ? M.state(pid) : { frac: 0, downloading: false };
+      var why, how;
+      if (!runtimeAvailable()) { why = "this build cannot run on-device models"; how = "Update the app, or switch to **MaiK Cloud**."; }
+      else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
+      else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
+      else { why = "**" + label + "** is not downloaded to this device yet"; how = "Tap the model name at the top of this screen and select it to start the download."; }
+      return {
+        text: "I could not answer on this device: " + why + ".\n\n" + how,
+        sources: [], engine: "local-unavailable", pack: pid
+      };
+    }
     return {
       text: "**KB-only mode is on.** The StewardMD knowledge base has no entry that answers this, " +
             "and KB-only mode never makes a paid AI call.\n\n" +
@@ -337,6 +368,7 @@
     if (!M || !M.ensure) return toast("Model download is unavailable in this build.");
     rerender(anchor, root);            // flip the button to Pause immediately
     return M.ensure(id, null).then(function () {
+      adoptPackWhenReady(id);
       toast("On-device model ready.");
     }).catch(function (e) {
       var msg = String((e && e.message) || e);
@@ -376,10 +408,12 @@
         var st = M.state(pid), have = M.installedCached(pid);
         out.push({
           id: "local:" + pid, label: M.PACKS[pid].label.replace(/\s*\(Q4_K_M\)$/, ""),
-          sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "%"
+          sub: st.downloading ? "Downloading " + (st.frac * 100).toFixed(0) + "% - will answer when ready"
              : have ? "On this device, works offline"
-             : st.frac > 0 ? "Paused - tap to resume" : "Tap to download " + M.sizeLabel(pid),
-          badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading
+             : st.frac > 0 ? "Paused at " + (st.frac * 100).toFixed(0) + "% - tap to resume"
+             : "Tap to download " + M.sizeLabel(pid),
+          badge: "OFFLINE", pack: pid, needsDownload: !have && !st.downloading,
+          requested: pendingPack() === pid
         });
       });
     }
@@ -396,8 +430,15 @@
   function chipLabel() {
     var cur = currentOptionId();
     var o = options().filter(function (x) { return x.id === cur; })[0];
-    if (o) return o.label;
-    return getPref() === "rag" ? "KB only" : "MaiK Cloud";
+    var base = o ? o.label : (getPref() === "rag" ? "KB only" : "MaiK Cloud");
+    // Never let the chip imply an on-device model is answering when it is not ready. Silent
+    // degrade-to-KB with a model name still showing is how "I get no answer" happens.
+    if (getPref() === "local" && !localReady()) {
+      var M = window.SMD_MAIK_MODELS, st = (M && M.state) ? M.state(activePack()) : null;
+      if (st && st.downloading) return base + " (" + (st.frac * 100).toFixed(0) + "%)";
+      return base + " (not ready)";
+    }
+    return base;
   }
 
   function chipHTML() {
@@ -423,17 +464,47 @@
   }
 
   /** Apply an option row id ("cloud" | "rag" | "local:<packId>"). */
+  function pendingPack() { var v = lget(KEY_PENDING); var M = window.SMD_MAIK_MODELS; return (v && M && M.PACKS && M.PACKS[v]) ? v : null; }
+
   function selectOption(optId) {
     if (optId.indexOf("local:") === 0) {
       var pid = optId.slice(6);
       var M = window.SMD_MAIK_MODELS;
-      if (M && M.setActivePack) M.setActivePack(pid);
-      setPref("local");
+      var ready = !!(M && M.installedCached && M.installedCached(pid));
+      if (ready) {
+        // It can answer: promote it and answer with it.
+        if (M && M.setActivePack) M.setActivePack(pid);
+        lrem(KEY_PENDING);
+        setPref("local");
+      } else {
+        // It cannot answer yet: remember the request and download it, but leave whatever is
+        // currently answering alone. Moving activePack here is what broke answering before.
+        lset(KEY_PENDING, pid);
+      }
     } else {
+      lrem(KEY_PENDING);
       setPref(optId);
     }
     syncChip();
     return currentOptionId();
+  }
+
+  /**
+   * Called when a pack finishes downloading: if the clinician had selected that pack, switch to it
+   * now that it can answer.
+   */
+  function adoptPackWhenReady(pid) {
+    try {
+      var M = window.SMD_MAIK_MODELS;
+      if (!M || !M.installedCached || !M.installedCached(pid)) return false;
+      // Promote when it is either the pack already answering, or the one the clinician asked for.
+      if (activePack() !== pid && pendingPack() !== pid) return false;
+      if (M.setActivePack) M.setActivePack(pid);
+      lrem(KEY_PENDING);
+      if (getPref() !== "local") setPref("local");
+      syncChip();
+      return true;
+    } catch (e) { return false; }
   }
 
   var _pickerUnsub = null;
@@ -500,7 +571,7 @@
       if (chosen && chosen.needsDownload && chosen.pack) {
         var M2 = window.SMD_MAIK_MODELS;
         if (M2 && M2.ensure) {
-          M2.ensure(chosen.pack, null).then(function () { toast("On-device model ready."); syncChip(); })
+          M2.ensure(chosen.pack, null).then(function () { adoptPackWhenReady(chosen.pack); toast("On-device model ready."); syncChip(); })
             .catch(function (err) { if (String((err && err.message) || err) !== "cancelled") toast("Download stopped. Tap the model again to resume."); });
         }
         cur = currentOptionId();
@@ -529,7 +600,8 @@
     kbOnlyNotice: kbOnlyNotice, route: route, install: install, activePack: activePack,
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
-    selectOption: selectOption, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
+    selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
+    KEY_PENDING: KEY_PENDING, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") { window.SMD_MAIK_ENGINE = API; installWhenReady(); }

@@ -12,6 +12,7 @@
 //   • n_gpu_layers = 0 on Android. There is no usable GPU offload path here; the CPU kernels with
 //     dotprod/fp16 (see build.gradle GGML_CPU_ARM_ARCH) are the fast path.
 #include <jni.h>
+#include <algorithm>
 #include <atomic>
 #include <string>
 #include <vector>
@@ -189,9 +190,25 @@ Java_in_stewardmd_llama_LlamaNative_generate(
         if (env->ExceptionCheck()) env->ExceptionClear();
     }
 
-    // Prefill.
-    llama_batch batch = llama_batch_get_one(toks.data(), (int32_t) toks.size());
-    if (llama_decode(ctx, batch) != 0) { LOGE("prefill decode failed"); llama_sampler_free(smpl); return nullptr; }
+    // Prefill, CHUNKED to n_batch.
+    //
+    // llama_batch_get_one() over the whole prompt looks fine and crashes hard: llama_decode()
+    // GGML_ABORTs (SIGABRT, uncatchable) when a batch exceeds n_batch. Short prompts hid it; the real
+    // grounded package is ~2000 tokens against n_batch 512, which killed the app inside
+    // llama_context::decode. Feed the prompt in n_batch-sized slices instead, which is also how
+    // llama.cpp's own examples do it, and keep the compute buffer bounded rather than raising
+    // n_batch to n_ctx.
+    const int n_batch = (int) llama_n_batch(ctx);
+    for (int i = 0; i < (int) toks.size(); i += n_batch) {
+        int n = std::min(n_batch, (int) toks.size() - i);
+        llama_batch batch = llama_batch_get_one(toks.data() + i, (int32_t) n);
+        if (llama_decode(ctx, batch) != 0) {
+            LOGE("prefill decode failed at token %d/%d (n_batch=%d)", i, (int) toks.size(), n_batch);
+            llama_sampler_free(smpl);
+            return nullptr;
+        }
+        if (g_cancel.load(std::memory_order_relaxed)) { llama_sampler_free(smpl); return env->NewStringUTF(""); }
+    }
 
     std::string full;
     int produced = 0;

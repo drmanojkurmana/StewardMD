@@ -176,10 +176,21 @@ final class LlamaEngine {
             llama_sampler_chain_add(smpl, llama_sampler_init_greedy())
         }
 
-        // Prefill.
-        var prefill = llama_batch_get_one(&toks, Int32(toks.count))
-        guard llama_decode(c, prefill) == 0 else { throw LlamaError(.generationFailure, "prefill failed") }
-        _ = prefill   // silence unused-mutation warning; llama_batch_get_one borrows the buffer
+        // Prefill, CHUNKED to n_batch.
+        //
+        // Submitting the whole prompt in one llama_batch_get_one() GGML_ABORTs (uncatchable SIGABRT)
+        // when the batch exceeds n_batch. Verified on Android: short prompts passed, the real ~2000
+        // token grounded package killed the process inside llama_context::decode. Slice it.
+        let nBatch = Int(llama_n_batch(c))
+        var i = 0
+        while i < toks.count {
+            let n = min(nBatch, toks.count - i)
+            var slice = Array(toks[i..<(i + n)])
+            let batch = llama_batch_get_one(&slice, Int32(n))
+            guard llama_decode(c, batch) == 0 else { throw LlamaError(.generationFailure, "prefill failed at token \(i)") }
+            if cancelFlag.value { return "" }
+            i += n
+        }
 
         var full = ""
         var produced: Int32 = 0

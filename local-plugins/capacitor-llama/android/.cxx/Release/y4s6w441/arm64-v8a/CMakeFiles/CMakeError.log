@@ -1,0 +1,115 @@
+Checking whether the ASM compiler is GNU using "--version" did not match "(GNU assembler)|(GCC)|(Free Software Foundation)":
+Android (12470979, +pgo, -bolt, +lto, -mlgo, based on r522817c) clang version 18.0.3 (https://android.googlesource.com/toolchain/llvm-project d8003a456d14a3deb8054cdaa529ffbf02d9b262)
+Target: x86_64-apple-darwin27.0.0
+Thread model: posix
+InstalledDir: /Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/diwakarkumar/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_35869 && [1/2] Building C object CMakeFiles/cmTC_35869.dir/src.c.o
+FAILED: CMakeFiles/cmTC_35869.dir/src.c.o 
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang --target=aarch64-none-linux-android24 --sysroot=/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DCMAKE_HAVE_LIBC_PTHREAD  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security   -fPIE -std=gnu11 -MD -MT CMakeFiles/cmTC_35869.dir/src.c.o -MF CMakeFiles/cmTC_35869.dir/src.c.o.d -o CMakeFiles/cmTC_35869.dir/src.c.o -c /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.c
+/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.c:13:3: error: call to undeclared function 'pthread_cancel'; ISO C99 and later do not support implicit function declarations [-Wimplicit-function-declaration]
+   13 |   pthread_cancel(thread);
+      |   ^
+/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.c:13:3: note: did you mean 'pthread_once'?
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot/usr/include/pthread.h:264:5: note: 'pthread_once' declared here
+  264 | int pthread_once(pthread_once_t* _Nonnull __once, void (* _Nonnull __init_routine)(void));
+      |     ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+#include <pthread.h>
+
+static void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_cancel(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Performing C++ SOURCE FILE Test GGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E failed with the following output:
+Change Dir: /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/diwakarkumar/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_1c759 && [1/2] Building CXX object CMakeFiles/cmTC_1c759.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_1c759.dir/src.cxx.o 
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DGGML_COMPILER_SUPPORTS_FP16_FORMAT_I3E  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -std=c++17 -fexceptions -frtti  -fPIE   -mfp16-format=ieee -std=c++17 -MD -MT CMakeFiles/cmTC_1c759.dir/src.cxx.o -MF CMakeFiles/cmTC_1c759.dir/src.cxx.o.d -o CMakeFiles/cmTC_1c759.dir/src.cxx.o -c /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx
+clang++: error: unknown argument: '-mfp16-format=ieee'
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+int main() { return 0; }
+Performing C++ SOURCE FILE Test HAVE_SVE failed with the following output:
+Change Dir: /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/diwakarkumar/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_2dd55 && [1/2] Building CXX object CMakeFiles/cmTC_2dd55.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_2dd55.dir/src.cxx.o 
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DHAVE_SVE  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -std=c++17 -fexceptions -frtti -march=armv8.2-a+dotprod+fp16 -fPIE -std=c++17 -MD -MT CMakeFiles/cmTC_2dd55.dir/src.cxx.o -MF CMakeFiles/cmTC_2dd55.dir/src.cxx.o.d -o CMakeFiles/cmTC_2dd55.dir/src.cxx.o -c /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx
+/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx:3:24: error: "Feature SVE is not defined"
+    3 |                     #  error "Feature SVE is not defined"
+      |                        ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+
+                    #if !defined(__ARM_FEATURE_SVE)
+                    #  error "Feature SVE is not defined"
+                    #endif
+                    int main() { return 0; }
+                    
+Performing C++ SOURCE FILE Test HAVE_MATMUL_INT8 failed with the following output:
+Change Dir: /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/diwakarkumar/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_85a09 && [1/2] Building CXX object CMakeFiles/cmTC_85a09.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_85a09.dir/src.cxx.o 
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DHAVE_MATMUL_INT8  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -std=c++17 -fexceptions -frtti -march=armv8.2-a+dotprod+fp16 -fPIE -std=c++17 -MD -MT CMakeFiles/cmTC_85a09.dir/src.cxx.o -MF CMakeFiles/cmTC_85a09.dir/src.cxx.o.d -o CMakeFiles/cmTC_85a09.dir/src.cxx.o -c /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx
+/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx:3:24: error: "Feature MATMUL_INT8 is not defined"
+    3 |                     #  error "Feature MATMUL_INT8 is not defined"
+      |                        ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+
+                    #if !defined(__ARM_FEATURE_MATMUL_INT8)
+                    #  error "Feature MATMUL_INT8 is not defined"
+                    #endif
+                    int main() { return 0; }
+                    
+Performing C++ SOURCE FILE Test HAVE_SME failed with the following output:
+Change Dir: /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/Users/diwakarkumar/Library/Android/sdk/cmake/3.22.1/bin/ninja cmTC_17c82 && [1/2] Building CXX object CMakeFiles/cmTC_17c82.dir/src.cxx.o
+FAILED: CMakeFiles/cmTC_17c82.dir/src.cxx.o 
+/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/bin/clang++ --target=aarch64-none-linux-android24 --sysroot=/Users/diwakarkumar/Library/Android/sdk/ndk/27.2.12479018/toolchains/llvm/prebuilt/darwin-x86_64/sysroot -DHAVE_SME  -g -DANDROID -fdata-sections -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -D__BIONIC_NO_PAGE_SIZE_MACRO -D_FORTIFY_SOURCE=2 -Wformat -Werror=format-security  -O3 -std=c++17 -fexceptions -frtti -march=armv8.2-a+dotprod+fp16 -fPIE -std=c++17 -MD -MT CMakeFiles/cmTC_17c82.dir/src.cxx.o -MF CMakeFiles/cmTC_17c82.dir/src.cxx.o.d -o CMakeFiles/cmTC_17c82.dir/src.cxx.o -c /Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx
+/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/CMakeFiles/CMakeTmp/src.cxx:3:24: error: "Feature SME is not defined"
+    3 |                     #  error "Feature SME is not defined"
+      |                        ^
+1 error generated.
+ninja: build stopped: subcommand failed.
+
+
+Source file was:
+
+                    #if !defined(__ARM_FEATURE_SME)
+                    #  error "Feature SME is not defined"
+                    #endif
+                    int main() { return 0; }
+                    

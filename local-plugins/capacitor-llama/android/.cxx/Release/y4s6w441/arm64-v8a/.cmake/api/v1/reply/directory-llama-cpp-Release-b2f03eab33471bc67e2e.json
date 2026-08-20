@@ -1,0 +1,89 @@
+{
+	"backtraceGraph" : 
+	{
+		"commands" : 
+		[
+			"install"
+		],
+		"files" : 
+		[
+			"llama-cpp/CMakeLists.txt"
+		],
+		"nodes" : 
+		[
+			{
+				"file" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 280,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 299,
+				"parent" : 0
+			},
+			{
+				"command" : 0,
+				"file" : 0,
+				"line" : 307,
+				"parent" : 0
+			}
+		]
+	},
+	"installers" : 
+	[
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "lib",
+			"paths" : 
+			[
+				"llama-cpp/src/libllama.a"
+			],
+			"targetId" : "llama::@bdc6b751588462a1e2f9",
+			"targetIndex" : 3,
+			"type" : "target"
+		},
+		{
+			"backtrace" : 1,
+			"component" : "Unspecified",
+			"destination" : "include",
+			"paths" : 
+			[
+				"llama-cpp/include/llama.h",
+				"llama-cpp/include/llama-cpp.h"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 2,
+			"component" : "Unspecified",
+			"destination" : "lib/cmake/llama",
+			"paths" : 
+			[
+				"/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/llama-cpp/llama-config.cmake",
+				"/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/llama-cpp/llama-config-version.cmake"
+			],
+			"type" : "file"
+		},
+		{
+			"backtrace" : 3,
+			"component" : "Unspecified",
+			"destination" : "lib/pkgconfig",
+			"paths" : 
+			[
+				"/Users/diwakarkumar/Developer/StewardMD/local-plugins/capacitor-llama/android/.cxx/Release/y4s6w441/arm64-v8a/llama-cpp/llama.pc"
+			],
+			"type" : "file"
+		}
+	],
+	"paths" : 
+	{
+		"build" : "llama-cpp",
+		"source" : "llama-cpp"
+	}
+}
