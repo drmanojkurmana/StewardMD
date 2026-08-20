@@ -310,7 +310,68 @@
 
     return '<div class="smd-nav-lbl" style="margin:14px 0 6px">On-device model</div>' +
       '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
-      '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>';
+      '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
+      '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
+      guideHTML();
+  }
+
+
+  /* ── "Which one should I download?" ────────────────────────────────────────────────────────────
+   * A clinician is being asked to spend 2.5-3.1 GB and pick between three names that mean nothing
+   * to them. The picker rows only have room for a size and a one-liner, so the reasoning lives here.
+   *
+   * NO upstream model names, by owner decision - the UI shows MAiK tiers only. The pip scale is
+   * RELATIVE to the other two tiers and says so, because "medical depth: 3" is meaningless as an
+   * absolute claim and would be a quiet overstatement of what a 4B can do.
+   * NO emoji, per the house icon rule - the pips are CSS blocks.
+   */
+  function pips(n, label) {
+    var out = '<span style="display:inline-flex;gap:3px;vertical-align:middle" role="img" aria-label="' + label + ': ' + n + ' of 3">';
+    for (var i = 1; i <= 3; i++) {
+      out += '<span style="width:14px;height:5px;border-radius:3px;background:' +
+             (i <= n ? "var(--teal,#0e6e63)" : "var(--line,#e2e8f0)") + '"></span>';
+    }
+    return out + "</span>";
+  }
+
+  function guideHTML() {
+    var M = window.SMD_MAIK_MODELS;
+    if (!M) return "";
+    var intro = (M.GUIDE_INTRO || []).map(function (t) {
+      return '<li style="margin:0 0 6px">' + esc(t) + "</li>";
+    }).join("");
+
+    var rows = M.packIds().map(function (id) {
+      var p = M.PACKS[id] || {}, g = p.guide || {};
+      var line = function (lbl, n) {
+        return '<div style="display:flex;align-items:center;gap:8px;margin-top:5px">' +
+                 '<span style="flex:0 0 96px;font:500 12px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + lbl + "</span>" +
+                 pips(n || 1, lbl) +
+               "</div>";
+      };
+      return '<div style="padding:12px 0;border-top:1px solid var(--line,#e2e8f0)">' +
+        '<div style="display:flex;align-items:baseline;gap:8px">' +
+          '<span style="font:700 14px/1.3 var(--sans,system-ui)">' + esc(p.label || id) + "</span>" +
+          '<span style="font:500 12px/1.3 var(--sans,system-ui);color:var(--slate-soft,#5a7184)">' + esc(M.sizeLabel(id)) + "</span>" +
+        "</div>" +
+        line("Speed", g.speed) + line("Medical depth", g.medical) + line("General knowledge", g.general) +
+        '<div style="font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356);margin-top:8px">' +
+          "<b>Best for</b> " + esc(g.bestFor || "") + "<br>" + esc(g.why || "") +
+        "</div>" +
+        (g.pick ? '<div style="font:600 12.5px/1.5 var(--sans,system-ui);color:var(--teal,#0e6e63);margin-top:5px">' + esc(g.pick) + "</div>" : "") +
+      "</div>";
+    }).join("");
+
+    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--card,#fff);padding:14px;margin-top:8px">' +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +
+      '<ul style="margin:0 0 4px;padding-left:18px;font:500 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#2d4356)">' + intro + "</ul>" +
+      '<div style="font:700 13px/1.3 var(--sans,system-ui);margin:14px 0 0">Choosing a model</div>' +
+      '<div style="font:500 11.5px/1.45 var(--sans,system-ui);color:var(--slate-soft,#5a7184);margin-top:3px">Ratings compare these three with each other, nothing else.</div>' +
+      rows +
+      '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate-soft,#5a7184);border-top:1px solid var(--line,#e2e8f0);padding-top:10px;margin-top:2px">' +
+        "Recommended order: MAiK MxCore, then Neural, then Horizon. Fastest, then strongest medical, then broadest general knowledge." +
+      "</div>" +
+    "</div>";
   }
 
   // Live updates without re-rendering the whole section (which would kill the tap targets
@@ -384,6 +445,18 @@
         var M = window.SMD_MAIK_MODELS;
         if (M && M.setActivePack) M.setActivePack(b.getAttribute("data-me-pack"));
         rerender(b, root);
+      });
+    });
+    // The guide is a plain expander rather than a modal: rerender() replaces this whole section on
+    // every pack change, and a modal would have to be torn down and re-opened around that.
+    root.querySelectorAll("[data-me-guide]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var panel = root.querySelector("[data-me-guide-panel]");
+        if (!panel) return;
+        var open = !panel.hasAttribute("hidden");
+        if (open) panel.setAttribute("hidden", ""); else panel.removeAttribute("hidden");
+        b.setAttribute("aria-expanded", open ? "false" : "true");
+        b.textContent = open ? "Which one should I download?" : "Hide the guide";
       });
     });
     root.querySelectorAll("[data-me-model]").forEach(function (b) {

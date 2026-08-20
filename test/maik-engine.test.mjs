@@ -41,12 +41,31 @@ function load(env = {}) {
     let _active = env.active || "maik-mxcore";
     win.SMD_MAIK_MODELS = {
       PACKS: {
-        "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", tier: 1, nCtx: 4096 },
-        "maik-horizon": { label: "MAiK Horizon", actual: "Gemma 4 E2B (Q4_K_M)", tier: 3, nCtx: 4096 }
+        "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", tier: 1, nCtx: 4096,
+          guide: { speed: 3, medical: 2, general: 1,
+                   bestFor: "Everyday clinical questions on any supported phone.",
+                   why: "Medically tuned, and the lightest of the three on memory.",
+                   pick: "Start here. If you install only one, install this one." } },
+        "maik-neural": { label: "MAiK Neural", actual: "MedGemma 1.5 4B (Q5_K_M)", tier: 2, nCtx: 4096,
+          guide: { speed: 2, medical: 3, general: 1,
+                   bestFor: "When you want the most dependable medical detail.",
+                   why: "Same medical tuning held at higher precision.",
+                   pick: "Choose this if you have the storage to spare." } },
+        "maik-horizon": { label: "MAiK Horizon", actual: "Gemma 4 E2B (Q4_K_M)", tier: 3, nCtx: 4096,
+          guide: { speed: 1, medical: 1, general: 3,
+                   bestFor: "Broader reasoning and topics at the edges of clinical work.",
+                   why: "A newer general-purpose base with wider world knowledge.",
+                   pick: "Not medically tuned. Prefer MxCore or Neural for clinical answers." } }
       },
-      packIds: () => ["maik-mxcore", "maik-horizon"],
+      GUIDE_INTRO: [
+        "Answers come from a model stored on your phone. No internet, no AI tokens.",
+        "It answers from its own training, not from StewardMD's knowledge base, so there are no sources or citations and it can be wrong. Verify against local protocol.",
+        "You can keep more than one downloaded and switch between them. Only the selected one runs.",
+        "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
+      ],
+      packIds: () => ["maik-mxcore", "maik-neural", "maik-horizon"],
       installedCached: (id) => installed && id === "maik-mxcore",
-      sizeLabel: (id) => (id === "maik-mxcore" ? "2.49 GB" : "3.11 GB"),
+      sizeLabel: (id) => (id === "maik-mxcore" ? "2.49 GB" : id === "maik-neural" ? "2.83 GB" : "3.11 GB"),
       totalBytes: () => 2489894976,
       state: (id) => env.state || { downloading: false, frac: installed && id === "maik-mxcore" ? 1 : 0, done: installed && id === "maik-mxcore", err: null },
       subscribe: () => () => {},
@@ -224,14 +243,14 @@ function load(env = {}) {
 {
   const { E } = load({ gate: true, runtime: true, models: true, pack: false });
   const h = E.settingsHTML();
-  ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 2);
+  ok("model section: renders one row per pack", (h.match(/data-me-pack="/g) || []).length === 3);
   ok("model section: names the MAiK tiers, not the upstream models",
      /MAiK MxCore/.test(h) && /MAiK Horizon/.test(h) && !/MedGemma|Gemma 4/i.test(h));
   ok("model section: shows each size", /2\.49 GB/.test(h) && /3\.11 GB/.test(h));
   ok("model section: active pack is ticked", /data-me-pack="maik-mxcore" role="radio" aria-checked="true"/.test(h));
   ok("model section: inactive pack not ticked", /data-me-pack="maik-horizon" role="radio" aria-checked="false"/.test(h));
   ok("model section: per-pack download buttons carry the id", /data-me-model="download" data-me-id="maik-horizon"/.test(h));
-  ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 2);
+  ok("model section: has a status line per pack", (h.match(/data-me-status="/g) || []).length === 3);
   ok("model section: not-downloaded state is stated", /Not downloaded/.test(h));
 }
 
@@ -297,20 +316,22 @@ function load(env = {}) {
 {
   const { E } = load({ gate: true, runtime: true, pack: true });
   const opts = E.options();
-  ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 4);
+  ok("picker: cloud + KB + every on-device pack as flat rows", opts.length === 5);
   ok("picker: cloud first (it is the default)", opts[0].id === "cloud" && /PRO/.test(opts[0].badge));
   ok("picker: KB-only row is free", opts[1].id === "rag" && /FREE/.test(opts[1].badge));
-  ok("picker: on-device rows are namespaced per pack", opts[2].id === "local:maik-mxcore" && opts[3].id === "local:maik-horizon");
+  ok("picker: on-device rows are namespaced per pack",
+     opts[2].id === "local:maik-mxcore" && opts[3].id === "local:maik-neural" && opts[4].id === "local:maik-horizon");
   ok("picker: on-device rows badged OFFLINE", opts[2].badge === "OFFLINE");
   ok("picker: shows the MAiK brand name", opts[2].label === "MAiK MxCore");
-  ok("picker: third tier is Horizon", opts[3].label === "MAiK Horizon");
+  ok("picker: tiers appear in recommended order",
+     opts[2].label === "MAiK MxCore" && opts[3].label === "MAiK Neural" && opts[4].label === "MAiK Horizon");
   // Owner decision: the upstream model name must NOT appear in the UI - clinicians see the MAiK
   // tier only. `actual` stays in the registry for logs and bug reports.
   ok("picker: no upstream model name leaks into the row", !/MedGemma|Gemma/i.test(opts[2].sub) && !/MedGemma|Gemma/i.test(opts[2].label));
   ok("picker: installed pack says it works offline", /works offline/i.test(opts[2].sub));
   ok("picker: KB-only row claims citations", /cited/i.test(opts[1].sub));
   ok("picker: cloud row names Gemini + grounding", /Gemini/.test(opts[0].sub) && /grounded/i.test(opts[0].sub));
-  ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[3].sub));
+  ok("picker: uninstalled pack invites a download with its size", /Tap to download 3\.11 GB/.test(opts[4].sub));
   ok("picker: uninstalled pack flagged needsDownload", opts[3].needsDownload === true && !opts[2].needsDownload);
 
   ok("picker: chip reflects cloud by default", E.chipLabel() === "MaiK Cloud");
@@ -435,6 +456,46 @@ function load(env = {}) {
   const idx = src("index.html");
   ok("all three modules ship in index.html", /maik-engine\.js/.test(idx) && /maik-models\.js/.test(idx) && /maik-local\.js/.test(idx));
 }
+
+
+// ── "Which one should I download?" guide ────────────────────────────────────────────────────────
+// A clinician is asked to spend 2.5-3.1 GB and choose between three invented names. The picker rows
+// only fit a size and a one-liner, so the reasoning lives in an expandable guide.
+{
+  const { E } = load({ gate: true, runtime: true, pack: true });
+  const h = E.settingsHTML();
+
+  ok("settings offers the guide", /data-me-guide\b/.test(h) && /Which one should I download\?/.test(h));
+  ok("the guide panel ships collapsed", /data-me-guide-panel hidden/.test(h));
+  ok("the toggle reports its state to a screen reader", /data-me-guide aria-expanded="false"/.test(h));
+
+  // The whole point of the owner's instruction: tier names only.
+  ok("guide never prints an upstream model name", !/MedGemma|Gemma|Q4_K_M|Q5_K_M|quant/i.test(h));
+  ok("guide names all three tiers", /MAiK MxCore/.test(h) && /MAiK Neural/.test(h) && /MAiK Horizon/.test(h));
+
+  // No emoji anywhere: the house rule is a custom icon set, and the ratings are CSS pips.
+  const panel = (h.match(/<div data-me-guide-panel[\s\S]*$/) || [""])[0];
+  ok("guide panel was rendered", panel.length > 400);
+  ok("guide uses no emoji", !/[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}]/u.test(panel));
+
+  // It must say what on-device mode CANNOT do. Easy to omit, and it is the part that matters.
+  ok("guide states there are no sources or citations", /no sources or citations/i.test(h));
+  ok("guide states it can be wrong", /can be wrong/i.test(h));
+  // esc() renders the apostrophe as &#39;, so match around it rather than through it.
+  ok("guide says answers do not come from the knowledge base", /not from StewardMD.{0,6}s knowledge base/i.test(h));
+  ok("guide states no tokens are used", /No internet, no AI tokens/i.test(h));
+  ok("guide explains resumable download", /resumes if it is interrupted/i.test(h));
+  ok("guide explains you can keep several and switch", /switch between them/i.test(h));
+
+  // Ratings are comparative, not absolute - claiming otherwise would overstate a 4B.
+  ok("guide scopes its ratings to these three", /compare these three with each other, nothing else/i.test(h));
+  ok("guide rates all three axes", /Speed/.test(h) && /Medical depth/.test(h) && /General knowledge/.test(h));
+  ok("guide gives the recommended order", /MAiK MxCore, then Neural, then Horizon/.test(h));
+  ok("guide tells a first-timer where to start", /install only one/i.test(h));
+  ok("guide warns Horizon is not medically tuned", /Not medically tuned/i.test(h));
+  ok("pips are labelled for assistive tech", /role="img" aria-label="Speed: \d of 3"/.test(h));
+}
+
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

@@ -86,12 +86,28 @@
    * Sizes and hashes are REAL values, not estimates. Only MxCore's sha256 has been verified by
    * hashing a complete download; the others are the HuggingFace API digest and are marked as such.
    */
+  /* Plain-language guide shown in Settings so a clinician can choose without knowing anything about
+   * quantisation. Deliberately says what on-device mode CANNOT do - no sources, no citations, can be
+   * wrong - because that is the part that matters at the bedside and it is easy to leave out. */
+  var GUIDE_INTRO = [
+    "Answers come from a model stored on your phone. No internet, no AI tokens.",
+    "It answers from its own training, not from StewardMD's knowledge base, so there are no sources or citations and it can be wrong. Verify against local protocol.",
+    "You can keep more than one downloaded and switch between them. Only the selected one runs.",
+    "Downloading needs the space shown plus room to run it. Wi-Fi is easier, mobile data works, and a download resumes if it is interrupted."
+  ];
+
   var PACKS = {
     "maik-mxcore": {
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
       tier: 1,
       note: "Fastest and lightest. Lowest RAM use, best on any supported phone.",
+      guide: {
+        speed: 3, medical: 2, general: 1,
+        bestFor: "Everyday clinical questions on any supported phone.",
+        why: "Medically tuned, and the lightest of the three on memory.",
+        pick: "Start here. If you install only one, install this one."
+      },
       nCtx: 4096,
       nPredict: 512,
       files: [{
@@ -106,6 +122,12 @@
       actual: "MedGemma 1.5 4B (Q5_K_M)",
       tier: 2,
       note: "Strongest medical answers. Slightly higher quality, a little more RAM and storage.",
+      guide: {
+        speed: 2, medical: 3, general: 1,
+        bestFor: "When you want the most dependable medical detail.",
+        why: "Same medical tuning held at higher precision, so figures and regimens drift less.",
+        pick: "Choose this if you have the storage to spare and answer quality matters more than speed."
+      },
       nCtx: 4096,
       nPredict: 512,
       files: [{
@@ -120,6 +142,12 @@
       actual: "Gemma 4 E2B (Q4_K_M)",
       tier: 3,
       note: "Broadest general knowledge and reasoning. Not medically fine-tuned.",
+      guide: {
+        speed: 1, medical: 1, general: 3,
+        bestFor: "Broader reasoning and topics at the edges of clinical work.",
+        why: "A newer general-purpose base with wider world knowledge.",
+        pick: "Not medically tuned. Prefer MxCore or Neural for clinical answers."
+      },
       nCtx: 4096,
       nPredict: 512,
       files: [{
@@ -541,7 +569,7 @@
   }
 
   var API = {
-    PACKS: PACKS, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
+    PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
     packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,
