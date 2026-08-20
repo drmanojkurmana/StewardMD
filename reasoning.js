@@ -3835,12 +3835,17 @@
         var full = res && res.text;
         if (!full || typeof onDelta !== "function") return res;
         return new Promise(function (resolve) {
-          var i = 0, step = Math.max(4, Math.round(full.length / 90));   // ~90 frames
+          // Word-paced reveal (ChatGPT feel): advance whole words at a steady rate, so a short
+          // answer really types word-by-word and a long one reveals a few words per frame instead
+          // of one big burst. Capped at ~MAX_FRAMES so a very long answer still can't drag on.
+          var words = full.match(/\S+\s*/g) || [full];   // each token keeps its trailing space → join === full
+          var per = Math.max(1, Math.ceil(words.length / 260));   // words/frame; ~260 frames (~4.3s @60fps) ceiling
           var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
+          var n = 0, acc = "";
           (function tick() {
-            i = Math.min(full.length, i + step);
-            try { onDelta(full.slice(0, i)); } catch (e) {}
-            if (i >= full.length) return resolve(res);
+            for (var end = Math.min(words.length, n + per); n < end; n++) acc += words[n];
+            try { onDelta(acc); } catch (e) {}
+            if (n >= words.length) return resolve(res);
             raf(tick);
           })();
         });
