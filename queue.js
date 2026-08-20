@@ -6,6 +6,9 @@
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
+  // Open an external URL. Raw window.open(...,"_blank") is a silent no-op inside the native
+  // Capacitor webview, so route through the app's Capacitor-aware helper when present.
+  function openExt(u) { try { if (G.openExternal) return G.openExternal(u); } catch (e) {} try { window.open(u, "_blank"); } catch (x) {} }
   var API = "/api/queue";
   var POLL_MS = 8000;
   var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
@@ -13,6 +16,15 @@
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "DR"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
+  // The signed-in user's Google account photo (via SMD_ACCOUNT, loaded before queue.js). "" if none.
+  function _photo() { try { return (G.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile().picture) || ""; } catch (e) { return ""; } }
+  // Avatar contents: the real Google photo when available, else initials. onerror (blocked/expired photo)
+  // falls back to initials. Used for the header, sidebar and profile-sheet avatars.
+  function avatarInner(name) {
+    var ini = String(initials(name)).replace(/[^A-Za-z0-9]/g, "") || "DR", pic = _photo();
+    if (!pic) return esc(ini);
+    return '<img class="q-avatar-img" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" src="' + esc(pic) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'' + ini + '\'">';
+  }
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }
   function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
   function now() { return Date.now(); }
@@ -109,7 +121,7 @@
 
   function sidebar(view, doctorName, dept) {
     return '<aside class="q-side">' +
-      '<div class="q-side-hd"><div class="q-avatar">' + esc(initials(doctorName)) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
+      '<div class="q-side-hd"><div class="q-avatar">' + avatarInner(doctorName) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       navItem("dashboard", "Dashboard", view === "dashboard") +
       '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved)">' + ms("recent_actors") + "<span>Patients</span></button>" +
       navItem("analytics", "Analytics", view === "analytics") +
@@ -138,13 +150,13 @@
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
     var doctorName = state.ghisDoctorName || (state.ghisToken && state.ghisUser ? ("Dr " + state.ghisUser) : "") || s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
-    var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
+    var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" aria-label="Back" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
       (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
       // Avatar is the doctor-profile entry (sign-out lives inside it now, so the top bar stays uncluttered).
       (state.ghisToken
-        ? '<button class="q-avatar q-avatar-btn" data-q-act="profile" title="Doctor profile" aria-label="Doctor profile">' + esc(initials(doctorName)) + "</button>"
-        : '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div>") +
+        ? '<button class="q-avatar q-avatar-btn" data-q-act="profile" title="Doctor profile" aria-label="Doctor profile">' + avatarInner(doctorName) + "</button>"
+        : '<div class="q-avatar" title="' + esc(doctorName) + '">' + avatarInner(doctorName) + "</div>") +
       "</div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     // "Patients" opens the saved-patients list of the active clinic store (My Clinic device / Shared Clinic
@@ -160,7 +172,7 @@
     var s = state.session || {};
     var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
     return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop">' +
-      '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + esc(initials(doctorName)) + "</div>" +
+      '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + avatarInner(doctorName) + "</div>" +
       '<div class="q-profile-id"><b>' + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       (state.ghisUser ? '<div class="q-profile-row">' + ms("badge") + "<span>GHIS ID</span><b>" + esc(state.ghisUser) + "</b></div>" : "") +
       '<div class="q-profile-row">' + ms("stethoscope") + "<span>Status</span><b>" + esc(status) + "</b></div>" +
@@ -292,7 +304,51 @@
           tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
         "</div>"
       : '<div class="q-card"><div class="q-skel" style="height:16px;width:50%;margin-bottom:16px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px"></div></div>';
-    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>";
+    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>" + consoleCard(state);
+  }
+  function _ensureConsoleCss() {
+    if (document.getElementById("qConsoleCss")) return;
+    var s = document.createElement("style"); s.id = "qConsoleCss";
+    s.textContent = ".q-mini{border:1px solid var(--rds-line,#cbd5e1);background:var(--rds-surface,#fff);color:var(--rds-ink,#0f172a);border-radius:8px;padding:7px 11px;font-size:12.5px;font-weight:700;cursor:pointer}"
+      + ".q-mini.danger{color:#dc2626;border-color:#f0b4b4}.q-mini:active{transform:scale(.97)}"
+      + ".q-staff{border:1px solid var(--rds-line,#e2e8f0);border-radius:12px;padding:10px 12px;margin-bottom:8px}"
+      + ".q-staff input,.q-staff-add input,.q-staff-add select{padding:7px 9px;border:1px solid var(--rds-line,#e2e8f0);border-radius:8px;font-size:13px;background:var(--rds-surface,#fff);color:var(--rds-ink,#0f172a)}"
+      + ".q-staff-badge{font-size:11px;font-weight:700;color:var(--rds-primary,#0e6e63);background:rgba(14,110,99,.1);border-radius:999px;padding:2px 8px}";
+    document.head.appendChild(s);
+  }
+  // OPD Console management — only the clinic OWNER sees it (st.console is set only when st.orgId is one of
+  // the orgs /orgs returns, i.e. an org this Firebase user owns). Reads/writes the already-live q_members
+  // endpoints (server re-checks STAFF_ADMIN on every mutation, so the client gate is cosmetic).
+  function consoleCard(state) {
+    var cc = state.console; if (!cc || !cc.org) return "";
+    _ensureConsoleCss();
+    var org = cc.org, members = cc.members || [], ROLES = ["reception", "nurse", "cashier", "supervisor"];
+    var rows = members.length ? members.map(function (m) {
+      var id = esc(m.identity || ""), off = (m.active === false);
+      return '<div class="q-staff"' + (off ? ' style="opacity:.6"' : '') + '>' +
+        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:14px">' + id + '</b>' +
+          '<span class="q-staff-badge">' + esc(m.role || "staff") + '</span>' +
+          (m.hasPin ? '<span style="font-size:11px;color:#16a34a">PIN set</span>' : '<span style="font-size:11px;color:#b45309">No PIN</span>') +
+          (off ? '<span style="font-size:11px;color:#dc2626">Disabled</span>' : '') + '</div>' +
+        '<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center">' +
+          '<input type="text" inputmode="numeric" maxlength="6" data-pin="' + id + '" placeholder="New PIN (4-6)" style="width:118px">' +
+          '<button class="q-mini" data-q-act="setpin:' + id + '">Set PIN</button>' +
+          '<button class="q-mini" data-q-act="' + (off ? "enablestaff" : "disablestaff") + ":" + id + '">' + (off ? "Enable" : "Disable") + '</button>' +
+          '<button class="q-mini danger" data-q-act="rmstaff:' + id + '">Remove</button>' +
+        '</div></div>';
+    }).join("") : '<div style="font-size:13px;color:var(--rds-muted,#64748b);padding:6px 0">No front-desk staff yet. Add one below so they can sign in to the OPD console.</div>';
+    return '<section style="margin-top:14px"><div class="q-card">' +
+      '<div class="q-card-h">' + ms("badge") + "OPD Console access</div>" +
+      '<div class="q-out"><span>Clinic code</span><b style="display:flex;align-items:center;gap:8px">' + esc(org.code || "-") + '<button class="q-mini" data-q-act="copycode">Copy</button></b></div>' +
+      '<div class="q-out"><span>Clinic</span><b>' + esc(org.name || "") + "</b></div>" +
+      '<div style="font-size:12px;color:var(--rds-muted,#64748b);margin:2px 0 12px">Front-desk staff sign in to the OPD console with this clinic code, their staff ID and PIN.</div>' +
+      '<button class="q-finish" style="font-size:13px;padding:9px 14px;margin-bottom:14px" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
+      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Front-desk staff</div>' + rows +
+      '<div class="q-staff-add" style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center">' +
+        '<input id="qNewStaffId" type="text" placeholder="Staff ID / name" style="flex:1;min-width:130px">' +
+        '<select id="qNewStaffRole">' + ROLES.map(function (r) { return '<option value="' + r + '">' + r + "</option>"; }).join("") + "</select>" +
+        '<button class="q-mini" data-q-act="addstaff">Add staff</button>' +
+      "</div></div></section>";
   }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
@@ -391,12 +447,45 @@
     st.view = view; paint();
     if (st.demo) return;   // demo has no server session to fetch analytics/config from
     if (view === "analytics" && st.session) apiGet("/analytics?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok && st.view === "analytics") { st.analytics = r.analytics; paint(); } }).catch(function () {});
-    if (view === "settings") apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {});
+    if (view === "settings") { apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {}); loadConsole(); }
   }
   function saveCfg() {
     var cfg = {};
     root().querySelectorAll("[data-cfg]").forEach(function (inp) { cfg[inp.getAttribute("data-cfg")] = inp.type === "checkbox" ? inp.checked : Number(inp.value); });
     apiPost("/config", { config: cfg }).then(function (r) { if (r && r.ok) { st.config = r.config; paint(); try { G.toast && G.toast("Settings saved"); } catch (e) {} } }).catch(function () {});
+  }
+  // ---- OPD Console management (clinic owner only) -----------------------------------------
+  function _orgId() { return st.orgId || (st.console && st.console.org && st.console.org.id) || ""; }
+  function loadConsole() {
+    var oid = st.orgId; if (!oid) { st.console = null; return; }
+    apiGet("/orgs").then(function (r) {
+      var org = ((r && r.orgs) || []).filter(function (o) { return String(o.id) === String(oid); })[0];   // /orgs = only orgs THIS user owns
+      if (!org) { st.console = null; if (st.view === "settings") paint(); return; }
+      return apiGet("/members?orgId=" + encodeURIComponent(oid)).then(function (mr) {
+        st.console = { org: org, members: (mr && mr.members) || [] };
+        if (st.view === "settings") paint();
+      });
+    }).catch(function () {});
+  }
+  function _staffMember(body) { body.orgId = _orgId(); return apiPost("/member", body).then(function (r) { loadConsole(); return r; }); }
+  function _staffAction(path, identity) { return apiPost(path, { orgId: _orgId(), identity: identity }).then(function (r) { loadConsole(); return r; }); }
+  function _setStaffPin(identity) {
+    var inp = null; root().querySelectorAll("[data-pin]").forEach(function (x) { if (x.getAttribute("data-pin") === identity) inp = x; });
+    var pin = inp ? String(inp.value || "").trim() : "";
+    if (!/^\d{4,6}$/.test(pin)) { try { G.toast && G.toast("Enter a 4-6 digit PIN"); } catch (e) {} return; }
+    apiPost("/member/pin", { orgId: _orgId(), identity: identity, pin: pin }).then(function (r) {
+      if (r && r.ok) { try { G.toast && G.toast("PIN set for " + identity); } catch (e) {} loadConsole(); }
+      else { try { G.toast && G.toast("Could not set PIN"); } catch (e) {} }
+    }).catch(function () {});
+  }
+  function _addStaff() {
+    var idEl = document.getElementById("qNewStaffId"), roleEl = document.getElementById("qNewStaffRole");
+    var identity = idEl ? String(idEl.value || "").trim() : "", role = roleEl ? roleEl.value : "reception";
+    if (!identity) { try { G.toast && G.toast("Enter a staff ID or name"); } catch (e) {} return; }
+    _staffMember({ identity: identity, role: role, active: true }).then(function (r) {
+      if (r && r.ok) { try { G.toast && G.toast("Staff added. Set a PIN for them."); } catch (e) {} }
+      else { try { G.toast && G.toast((r && r.error) || "Could not add staff"); } catch (e) {} }
+    });
   }
 
   function onClick(e) {
@@ -416,9 +505,15 @@
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
-    if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
-    if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
-    if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "newclinic") { openExt("https://stewardmd.in/opd"); return; }
+    if (cmd === "addhosp") { openExt("https://stewardmd.in/admin/connect-emr"); return; }  // reuse the Connect EMR onboarding wizard
+    if (cmd === "openconsole") { openExt("https://stewardmd.in/opd"); return; }
+    if (cmd === "copycode") { var code = (st.console && st.console.org && st.console.org.code) || ""; try { if (navigator.clipboard) navigator.clipboard.writeText(code); } catch (e) {} try { G.toast && G.toast("Clinic code copied"); } catch (e) {} return; }
+    if (cmd === "setpin") { _setStaffPin(arg); return; }
+    if (cmd === "disablestaff") { _staffAction("/member/disable", arg); return; }
+    if (cmd === "enablestaff") { _staffAction("/member/restore", arg); return; }
+    if (cmd === "rmstaff") { if (G.confirm && !G.confirm("Remove " + arg + " from the OPD console?")) return; _staffMember({ identity: arg, remove: true }); return; }
+    if (cmd === "addstaff") { _addStaff(); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }

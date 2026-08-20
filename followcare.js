@@ -510,6 +510,8 @@
       var vEnable = h("input", { type: "checkbox" }); vEnable.checked = !!v.enabled;
       body.appendChild(h("label", { style: "display:flex;align-items:center;gap:8px;font-size:13.5px;margin-bottom:10px" }, [vEnable, document.createTextNode("Enable AI voice follow-up calls")]));
       function numIn(val, min, max) { return h("input", { type: "number", min: String(min), max: String(max), value: String(val), inputmode: "numeric", style: "width:80px" }); }
+      var ndays = numIn(v.noResponseDays == null ? 3 : v.noResponseDays, 2, 30);
+      body.appendChild(field("Call the patient if they have not checked in for this many days (2 to 30)", ndays));
       var mS = numIn(v.morningStart, 0, 23), mE = numIn(v.morningEnd, 1, 24), eS = numIn(v.eveningStart, 0, 23), eE = numIn(v.eveningEnd, 1, 24);
       body.appendChild(field("Morning window (start / end hour, 24h)", h("div", { style: "display:flex;gap:8px;align-items:center" }, [mS, document.createTextNode("to"), mE])));
       body.appendChild(field("Evening window (start / end hour, 24h)", h("div", { style: "display:flex;gap:8px;align-items:center" }, [eS, document.createTextNode("to"), eE])));
@@ -550,7 +552,7 @@
         err.innerHTML = ""; save.disabled = true; save.textContent = "Saving…";
         var payload = {
           name: hName.value,
-          voice: { enabled: vEnable.checked, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value },
+          voice: { enabled: vEnable.checked, noResponseDays: +ndays.value, morningStart: +mS.value, morningEnd: +mE.value, eveningStart: +eS.value, eveningEnd: +eE.value, tz: String(tz.value || "Asia/Kolkata"), maxConcurrent: +conc.value, maxAttempts: +attempts.value },
           ambulance: { enabled: aEnable.checked, contactName: aName.value, phone: aPhone.value, method: aMethod.value },
           escalation: { enabled: eEnable.checked, contactName: eName.value, phone: ePhone.value, method: eMethod.value }
         };

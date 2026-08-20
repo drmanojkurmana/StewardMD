@@ -144,7 +144,7 @@
     ov.innerHTML =
       '<div style="display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;border-bottom:1px solid var(--line,#22303c)">' +
         '<b style="flex:1;font-size:15px">Connect patient</b>' +
-        '<button id="cptClose" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:8px;padding:7px 12px;font-weight:700">Close</button></div>' +
+        '<button id="cptClose" aria-label="Close" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:8px;padding:7px 12px;font-weight:700">Close</button></div>' +
       '<div style="padding:14px;overflow:auto;flex:1">' +
         '<div style="font-size:12.5px;color:var(--slate,#9bb0c2);margin-bottom:12px">Pull a patient from a hospital you connected, straight into the ICU dashboard.</div>' +
         '<label style="font-size:12px;font-weight:700">Hospital</label>' +
@@ -261,7 +261,7 @@
     ov.style.cssText = "position:fixed;inset:0;z-index:100001;background:var(--paper,#0b1016);color:var(--ink,#e8eef4);display:flex;flex-direction:column;font-family:var(--hfont,-apple-system,sans-serif)";
     ov.innerHTML =
       '<div style="display:flex;align-items:center;gap:10px;padding:calc(env(safe-area-inset-top,0px) + 10px) 14px 10px;border-bottom:1px solid var(--line,#22303c)">' +
-        '<button id="cptrBack" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:8px;padding:7px 12px;font-weight:700">Back</button>' +
+        '<button id="cptrBack" aria-label="Back" style="background:transparent;color:var(--ink,#e8eef4);border:1px solid var(--line,#3a4a5a);border-radius:8px;padding:7px 12px;font-weight:700">Back</button>' +
         '<b style="flex:1;font-size:15px">Admit from a connected hospital</b></div>' +
       '<div style="padding:14px 14px 6px">' +
         '<label style="font-size:12px;font-weight:700">Hospital</label>' +

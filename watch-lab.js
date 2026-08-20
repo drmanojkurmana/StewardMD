@@ -72,7 +72,7 @@
         + '<input id="smdWatchConsent" type="checkbox" style="width:17px;height:17px;margin-top:1px;flex:0 0 auto">'
         + '<span>I consent to StewardMD securely storing my GHIS login to check for new labs in the background (encrypted, auto-deleted in 30 days).</span></label>'
         + '<div style="display:flex;gap:10px">'
-        + '<button id="smdWatchCancel" style="flex:1;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Cancel</button>'
+        + '<button id="smdWatchCancel" aria-label="Close" style="flex:1;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Cancel</button>'
         + '<button id="smdWatchGo" style="flex:1;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Enable alerts</button>'
         + '</div></div>';
       document.body.appendChild(wrap);
@@ -129,7 +129,7 @@
       + (hasG ? '<button id="smdSiGoogle" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--panel,#fff);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Google</button>' : '')
       + (hasA ? '<button id="smdSiApple" style="width:100%;box-sizing:border-box;margin-bottom:9px;padding:12px;border:none;border-radius:11px;background:#000;color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Sign in with Apple</button>' : '')
       + (!hasG && !hasA ? '<div style="font:600 12.5px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:9px">Open <b>More → Account &amp; sign-in</b> to sign in with Google or Apple, then tap Lab Watch 24/7 again.</div>' : '')
-      + '<button id="smdSiClose" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--paper,#f6f8f6);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Close</button>'
+      + '<button id="smdSiClose" aria-label="Close" style="width:100%;box-sizing:border-box;padding:12px;border:1px solid var(--line,#e4eae8);border-radius:11px;background:var(--paper,#f6f8f6);color:var(--ink,#16232e);font:700 14px var(--sans,system-ui);cursor:pointer">Close</button>'
       + '</div>';
     document.body.appendChild(wrap);
     var close = function () { try { wrap.remove(); } catch (e) {} };
@@ -150,7 +150,7 @@
         + '<div style="font:800 17px/1.2 var(--serif,Georgia,serif);margin-bottom:4px">🔔 Lab Watch 24/7</div>'
         + '<div style="font:500 12px/1.5 var(--sans,system-ui);color:var(--slate,#5a7184);margin-bottom:12px">You’ll be notified when a new lab is reported — <b>even when StewardMD is closed</b>. Add a patient from <b>Ward Sync</b> → open the patient → <b>Lab Watch 24/7</b>.</div>'
         + '<div id="smdWatchMgrBody" style="overflow-y:auto;flex:1;min-height:44px;font:500 13px var(--sans,system-ui);color:var(--slate,#5a7184);text-align:center;padding:22px 4px">Loading…</div>'
-        + '<button id="smdWatchMgrDone" style="margin-top:14px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>'
+        + '<button id="smdWatchMgrDone" aria-label="Close" style="margin-top:14px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 14px var(--sans,system-ui);cursor:pointer">Done</button>'
         + '</div>';
       document.body.appendChild(wrap);
       var close = function () { try { wrap.remove(); } catch (e) {} resolve({ ok: true }); };

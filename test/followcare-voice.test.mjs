@@ -88,16 +88,28 @@ function ep(overdueH, extra) {
   return Object.assign({ schedule: [{ dayOffset: 1, dueAtMs: T_0930 - overdueH * H }, { dayOffset: 3, dueAtMs: T_0930 + 48 * H }], lastDayDone: -1, status: "active", voiceOptOut: false }, extra || {});
 }
 
-test("voiceEligible: enabled + due + overdue past fallbackHours → eligible (auto)", () => {
-  const r = Voice.voiceEligible(ep(30), T_0930, enabled());
+test("voiceEligible: enabled + due + overdue past the no-response threshold (default 3 days) → eligible (auto)", () => {
+  const r = Voice.voiceEligible(ep(80), T_0930, enabled());   // 80h overdue > 72h (3-day default)
   assert.deepEqual(r, { eligible: true, reason: "auto" });
 });
 
-test("voiceEligible: still inside the digital fallback window → not eligible (auto), but manual overrides", () => {
+test("voiceEligible: still inside the no-response window → not eligible (auto), but manual overrides", () => {
   assert.equal(Voice.voiceEligible(ep(2), T_0930, enabled()).eligible, false);
   assert.equal(Voice.voiceEligible(ep(2), T_0930, enabled()).reason, "within_fallback");
   const m = Voice.voiceEligible(ep(2), T_0930, enabled(), { manual: true });
   assert.deepEqual(m, { eligible: true, reason: "manual" });
+});
+
+test("voiceEligible: noResponseDays is the doctor-set wait (clamped 2-30, default 3)", () => {
+  assert.equal(Voice.normalizeSettings({}).voice.noResponseDays, 3);
+  assert.equal(Voice.normalizeSettings({ voice: { noResponseDays: 1 } }).voice.noResponseDays, 2);    // min 2
+  assert.equal(Voice.normalizeSettings({ voice: { noResponseDays: 99 } }).voice.noResponseDays, 30);  // max 30
+  // threshold = noResponseDays * 24h. With 2 days (48h): 30h overdue waits, 60h overdue → call.
+  assert.equal(Voice.voiceEligible(ep(30), T_0930, enabled({ noResponseDays: 2 })).reason, "within_fallback");
+  assert.equal(Voice.voiceEligible(ep(60), T_0930, enabled({ noResponseDays: 2 })).eligible, true);
+  // With 5 days (120h): 100h overdue waits, 130h overdue → call.
+  assert.equal(Voice.voiceEligible(ep(100), T_0930, enabled({ noResponseDays: 5 })).reason, "within_fallback");
+  assert.equal(Voice.voiceEligible(ep(130), T_0930, enabled({ noResponseDays: 5 })).eligible, true);
 });
 
 test("voiceEligible: hard blocks — disabled, opted out, recovered, nothing due", () => {

@@ -255,7 +255,7 @@
   function showResult(code){
     // On native the origin is https://localhost (no backend) → build a real web link.
     var link = (window.SMD_IS_NATIVE ? "https://stewardmd.in" : location.origin) + "/?case=" + code;
-    show('<div class="cs-head"><h3>📤 Case shared</h3><button class="cs-x" data-cs-x>×</button></div>'
+    show('<div class="cs-head"><h3>📤 Case shared</h3><button class="cs-x" data-cs-x aria-label="Close">×</button></div>'
        + '<div class="cs-body"><div class="cs-code">'+esc(code)+'</div>'
        + '<div class="cs-sub">Anyone with this code (or link) can open this case for 30 days. <b>Do not include patient identifiers (name, MRN, contact).</b></div>'
        + '<div class="cs-row"><button class="cs-btn" id="csCopyCode">Copy code</button><button class="cs-btn sec" id="csCopyLink">Copy link</button><button class="cs-btn sec" id="csShareLink">Share…</button></div>'
@@ -268,7 +268,7 @@
   function copy(t,msg){ try { if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t); toast(msg); return; } } catch(e){} toast(t); }
 
   function openPrompt(){
-    show('<div class="cs-head"><h3>🔎 Open shared case</h3><button class="cs-x" data-cs-x>×</button></div>'
+    show('<div class="cs-head"><h3>🔎 Open shared case</h3><button class="cs-x" data-cs-x aria-label="Close">×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">Enter a case code to retrieve it.</div>'
        + '<div class="cs-row"><input id="csCodeIn" placeholder="SMD-7K2Q9" autocapitalize="characters" autocomplete="off"><button class="cs-btn" id="csGo">Open</button></div>'
        + '<div class="cs-note">Codes expire 30 days after sharing.</div></div>');
@@ -286,7 +286,7 @@
     // display name only. (Enforces the "no email in public shares" invariant here too.)
     var by = "";
     if (rec.ownerName) by = "Shared by " + esc(rec.ownerName);
-    show('<div class="cs-head"><h3>'+esc(rec.title||"Shared case")+'</h3><button class="cs-x" data-cs-x>×</button></div>'
+    show('<div class="cs-head"><h3>'+esc(rec.title||"Shared case")+'</h3><button class="cs-x" data-cs-x aria-label="Close">×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">'+esc(code)+(when?" · shared "+esc(when):"")+'</div>'
        + (by?'<div class="cs-by" style="text-align:center;font:600 12.5px var(--f);color:var(--ink);margin:-8px 0 14px">'+by+'</div>':'')
        + '<div class="cs-viewer">'+((rec.html && sanitizeHTML(rec.html)) || ("<pre style=\"white-space:pre-wrap\">"+esc(rec.text||"")+"</pre>"))+'</div>'

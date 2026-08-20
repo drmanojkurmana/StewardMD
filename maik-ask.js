@@ -231,7 +231,7 @@
       '<div class="mka-confirm-t">Let MaiK ask a few history questions?</div>' +
       '<div class="mka-confirm-s">MaiK will ask the patient a few relevant questions about the ' + esc(pathway.label || "complaint") +
       " and add the answers to the clinical record for you to review. You can stop anytime." + (langLabel ? " Language: " + esc(langLabel) + "." : "") + "</div>" +
-      '<div class="mka-row"><button class="mka-btn ghost" data-mka="cancel">Cancel</button><button class="mka-btn primary" data-mka="start">Start</button></div>' +
+      '<div class="mka-row"><button class="mka-btn ghost" data-mka="cancel" aria-label="Close">Cancel</button><button class="mka-btn primary" data-mka="start">Start</button></div>' +
       '<div class="mka-priv">' + lock() + "<span>On-device speech - only the answer text (no audio) is used. History aid only; MaiK does not diagnose or advise.</span></div>" +
       "</div></div>";
   }
@@ -246,7 +246,7 @@
       (s.redFlag ? '<div class="mka-alert">' + warn() + "<b>Possible important finding</b><span>" + esc(s.redFlag) + "</span></div>" : "") +
       '<div class="mka-row"><button class="mka-btn ghost" data-mka="pause">' + (s.paused ? "Resume" : "Pause") + '</button>' +
       '<button class="mka-btn ghost" data-mka="skip">Skip</button>' +
-      '<button class="mka-btn stop" data-mka="stop">Stop interview</button></div>' +
+      '<button class="mka-btn stop" data-mka="stop" aria-label="Close">Stop interview</button></div>' +
       "</div></div>";
   }
   function renderReview(summary, pathway) {

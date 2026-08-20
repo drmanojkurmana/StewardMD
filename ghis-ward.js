@@ -612,10 +612,23 @@
             }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });
           });
         },
-        // Checkbox handler (list). Add-only: unticking reverts (re-tick to re-add) — removal is a
-        // dashboard action. `el` is the checkbox, or null when called from a header button.
+        // Checkbox handler (list). Tick = add to the dashboard, untick = remove it (a real toggle).
+        // `el` is the checkbox, or null when called from a header button.
         toggleAdd: function(episodeId, patientId, name, el) {
-          if (el && el.type === 'checkbox' && !el.checked) { el.checked = true; return; }
+          if (el && el.type === 'checkbox' && !el.checked) {
+            // Untick -> remove from the dashboard/unit. Optimistic; re-tick + revert label on failure.
+            delete _addedPids[patientId];
+            var sp0 = (el.parentNode) ? el.parentNode.querySelector('span') : null; if (sp0) sp0.textContent = 'Add';
+            if (window.ICU && ICU.removeWardPatientFromRoster) {
+              Promise.resolve(ICU.removeWardPatientFromRoster(patientId)).then(function () {
+                try { if (window.toast) toast('Removed from dashboard'); } catch (e) {}
+              }, function () {
+                _addedPids[patientId] = true; el.checked = true; if (sp0) sp0.textContent = 'Added';
+                try { if (window.toast) toast('Could not remove. Open the dashboard to manage it.'); } catch (e) {}
+              });
+            }
+            return;
+          }
           _addedPids[patientId] = true;
           if (el && el.parentNode) { var sp = el.parentNode.querySelector('span'); if (sp) sp.textContent = 'Added'; }
           GHIS.addToDashboard(episodeId, patientId, name);
@@ -1042,6 +1055,7 @@
                 : sort === 'doctor' ? 'employeeFirstName' : sort === 'bed' ? 'bedName' : null;
         if (key) list = list.slice().sort(function(a, b) { return _cmp(a[key], b[key]); });
         renderPatients(list);
+        try { renderFavs(); } catch (e) {}
         var cnt = document.getElementById('ghisCount');
         if (cnt) cnt.textContent = _patients.length
           ? (list.length + (list.length === 1 ? ' patient' : ' patients') + (list.length !== _patients.length ? ' · of ' + _patients.length : ''))
@@ -1049,6 +1063,77 @@
       };
       // legacy alias — older inline handlers / callers still reference this name
       window.ghisFilterLocal = window.ghisApplyFilters;
+
+      // ── Favourites: star a doctor or ward/branch to pin it as a one-tap quick-filter chip at the top.
+      // Personal + device-local (localStorage). Self-contained: injects its own host div + CSS so it does
+      // not touch the static panel markup. (Requested by Sri Harsha, 18/8.)
+      var FAV_STAR = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.6l2.85 5.78 6.38.93-4.62 4.5 1.09 6.35L12 17.6l-5.7 3.0 1.09-6.35-4.62-4.5 6.38-.93z"/></svg>';
+      function _favKey() { return 'smd_ward_favs'; }
+      function favLoad() { try { return JSON.parse(localStorage.getItem(_favKey()) || '{}') || {}; } catch (e) { return {}; } }
+      function favSave(o) { try { localStorage.setItem(_favKey(), JSON.stringify(o)); } catch (e) {} }
+      function _favList(o, type) { return (o && o[type]) || []; }
+      function _attr(v) { return esc(String(v == null ? '' : v)).replace(/"/g, '&quot;'); }
+      function _ensureFavCss() {
+        if (document.getElementById('ghisFavsCss')) return;
+        var s = document.createElement('style'); s.id = 'ghisFavsCss';
+        s.textContent = '.ghis-favs{display:flex;gap:6px;flex-wrap:wrap;align-items:center;margin:0 0 8px}'
+          + '.ghis-fav-chip{display:inline-flex;align-items:center;gap:5px;background:var(--panel,#f8fafc);border:1px solid var(--line,#e2e8f0);border-radius:999px;padding:5px 6px 5px 11px;font-size:12.5px;font-weight:600;color:var(--ink,#0f172a);cursor:pointer}'
+          + '.ghis-fav-chip svg{width:12px;height:12px;color:var(--teal,#14b8a6);fill:currentColor;flex:0 0 auto}'
+          + '.ghis-fav-chip.active{border-color:var(--teal,#14b8a6);background:rgba(20,184,166,.12);color:var(--teal,#14b8a6)}'
+          + '.ghis-fav-chip .x{border:none;background:none;color:var(--slate,#94a3b8);font-size:16px;line-height:1;cursor:pointer;padding:0 2px}'
+          + '.ghis-fav-add{display:inline-flex;align-items:center;gap:5px;background:none;border:1px dashed var(--teal,#14b8a6);color:var(--teal,#14b8a6);border-radius:999px;padding:5px 12px;font-size:12.5px;font-weight:700;cursor:pointer}'
+          + '.ghis-fav-add svg{width:12px;height:12px;fill:currentColor}'
+          + '.ghis-fav-hint{font-size:12px;color:var(--slate,#94a3b8)}';
+        document.head.appendChild(s);
+      }
+      function _ensureFavHost() {
+        var h = document.getElementById('ghisFavs'); if (h) return h;
+        var row2 = document.querySelector('#ghisWard .ghis-filter-row2'); if (!row2 || !row2.parentNode) return null;
+        h = document.createElement('div'); h.id = 'ghisFavs'; h.className = 'ghis-favs';
+        row2.parentNode.insertBefore(h, row2);
+        h.addEventListener('click', function (e) {
+          var rm = e.target.closest && e.target.closest('[data-fav-remove]');
+          if (rm) { e.stopPropagation(); window.ghisFavRemove(rm.getAttribute('data-fav-remove'), rm.getAttribute('data-fav-val')); return; }
+          var ap = e.target.closest && e.target.closest('[data-fav-apply]');
+          if (ap) { window.ghisFavApply(ap.getAttribute('data-fav-apply'), ap.getAttribute('data-fav-val')); return; }
+          if (e.target.closest && e.target.closest('[data-fav-star]')) window.ghisFavStar();
+        });
+        return h;
+      }
+      function _favChip(type, val, active, label) {
+        var a = _attr(val);
+        return '<span class="ghis-fav-chip' + (active ? ' active' : '') + '" data-fav-apply="' + type + '" data-fav-val="' + a + '">'
+          + FAV_STAR + '<span>' + esc(label) + '</span>'
+          + '<button class="x" data-fav-remove="' + type + '" data-fav-val="' + a + '" aria-label="Remove favourite">×</button></span>';
+      }
+      function renderFavs() {
+        _ensureFavCss();
+        var host = _ensureFavHost(); if (!host) return;
+        var favs = favLoad(), dr = _val('ghisFDoctor'), br = _val('ghisFBranch'), out = [];
+        _favList(favs, 'branch').forEach(function (v) { out.push(_favChip('branch', v, br === v, v)); });
+        _favList(favs, 'doctor').forEach(function (v) { out.push(_favChip('doctor', v, dr === v, 'Dr ' + v)); });
+        var canStar = (dr && _favList(favs, 'doctor').indexOf(dr) === -1) || (br && _favList(favs, 'branch').indexOf(br) === -1);
+        if (canStar) out.push('<button class="ghis-fav-add" data-fav-star="1">' + FAV_STAR + 'Star current</button>');
+        else if (!out.length) out.push('<span class="ghis-fav-hint">Pick a doctor or ward, then tap Star to pin it here.</span>');
+        host.innerHTML = out.join('');
+      }
+      window.ghisFavApply = function (type, val) {
+        var sel = document.getElementById(type === 'doctor' ? 'ghisFDoctor' : 'ghisFBranch'); if (!sel) return;
+        sel.value = val;
+        if (sel.value !== val) { var o = document.createElement('option'); o.value = val; o.textContent = val; sel.appendChild(o); sel.value = val; }
+        if (window.ghisApplyFilters) window.ghisApplyFilters();
+      };
+      window.ghisFavRemove = function (type, val) {
+        var o = favLoad(); o[type] = _favList(o, type).filter(function (x) { return x !== val; }); favSave(o); renderFavs();
+      };
+      window.ghisFavStar = function () {
+        var dr = _val('ghisFDoctor'), br = _val('ghisFBranch'), o = favLoad(), n = 0;
+        if (dr) { o.doctor = _favList(o, 'doctor'); if (o.doctor.indexOf(dr) === -1) { o.doctor.push(dr); n++; } }
+        if (br) { o.branch = _favList(o, 'branch'); if (o.branch.indexOf(br) === -1) { o.branch.push(br); n++; } }
+        if (!n) { try { if (window.toast) toast('Pick a doctor or ward first, then tap Star.'); } catch (e) {} return; }
+        favSave(o); renderFavs();
+        try { if (window.toast) toast('Pinned to favourites'); } catch (e) {}
+      };
 
       // ── react to Google account switch / sign-out ────────────────────────────
       // The GHIS token is scoped per Firebase uid; when the signed-in account

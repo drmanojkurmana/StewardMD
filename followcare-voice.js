@@ -20,7 +20,7 @@
   function defaultSettings() {
     return {
       name: "",
-      voice: { enabled: false, morningStart: 9, morningEnd: 10, eveningStart: 17, eveningEnd: 18, tz: "Asia/Kolkata", maxConcurrent: 5, fallbackHours: 24, maxCallsPerDay: 1, maxAttempts: 2 },
+      voice: { enabled: false, morningStart: 9, morningEnd: 10, eveningStart: 17, eveningEnd: 18, tz: "Asia/Kolkata", maxConcurrent: 5, noResponseDays: 3, fallbackHours: 24, maxCallsPerDay: 1, maxAttempts: 2 },
       ambulance: { enabled: false, contactName: "", phone: "", method: "sms" },
       escalation: { enabled: false, contactName: "", phone: "", method: "sms" }
     };
@@ -37,6 +37,8 @@
       eveningEnd: clampInt(rv.eveningEnd, 1, 24, 18),
       tz: safeTz(rv.tz || "Asia/Kolkata"),
       maxConcurrent: clampInt(rv.maxConcurrent, 1, 50, 5),
+      // "Call the patient if they have not checked in for this many days" (doctor-set, 2-30, default 3).
+      noResponseDays: clampInt(rv.noResponseDays, 2, 30, 3),
       fallbackHours: clampInt(rv.fallbackHours, 0, 240, 24),
       maxCallsPerDay: 1,
       maxAttempts: clampInt(rv.maxAttempts, 1, 5, 2)
@@ -115,8 +117,10 @@
     var due = dueUnanswered(ep, ms);
     if (!due.length) return { eligible: false, reason: "nothing_due" };
     if (!opts.manual) {
-      var fallbackMs = (v.fallbackHours == null ? 24 : v.fallbackHours) * HOUR;
-      if ((ms - due[0].dueAtMs) < fallbackMs) return { eligible: false, reason: "within_fallback" };
+      // Wait until the patient has been non-responsive for the doctor-set number of days (noResponseDays);
+      // legacy settings without it fall back to fallbackHours (default 24h).
+      var waitMs = (v.noResponseDays != null) ? (v.noResponseDays * DAY) : ((v.fallbackHours == null ? 24 : v.fallbackHours) * HOUR);
+      if ((ms - due[0].dueAtMs) < waitMs) return { eligible: false, reason: "within_fallback" };
     }
     return { eligible: true, reason: opts.manual ? "manual" : "auto" };
   }

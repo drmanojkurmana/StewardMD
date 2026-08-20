@@ -82,9 +82,9 @@
       body: "Calculators, a Drugs & interactions checker, Electrolyte correction and protocol Guides — the everyday tools, always to hand." },
     { sel: ".rnav-tabbar,.v3-tabbar", title: "Always know where you are",
       body: "Home, Cases, Drugs and More stay pinned to the bottom, with MaiK — your AI assistant — front and centre. One tap always brings you back here." },
-    { sel: '.rnav-qc[data-act="icu"],.v4-qc[data-act="icu"],[data-act="icu"]', kind: "tap",
-      title: "Let’s open the ICU dashboard", tapHint: "Tap the ICU tile",
-      body: "This is the busiest part of StewardMD, so it has its own guided tour. Go ahead — tap ICU to open it.", then: "icu" }
+    { sel: '.rnav-qc[data-act="hospital"],[data-act="hospital"]', kind: "tap", optional: true,
+      title: "Open your patient hub", tapHint: "Tap Hospital+",
+      body: "ICU, OPD, Ward Sync and FollowCare all live inside Hospital+, your admitted-patient hub. Tap it to take a look." }
   ];
 
   // ICU tour — spotlights the REAL ICU dashboard end to end: board → group/shared unit →
@@ -279,6 +279,10 @@
   }
   function rectOf(el) {
     var r = el.getBoundingClientRect();
+    // Highlight the control's OWN box. Only fall back to the union of visible children when the element's
+    // own box is degenerate (a zero-size wrapper whose real content lives in children) - otherwise an
+    // overflowing child icon/label floats the spotlight ring off the actual button (e.g. bottom-nav tabs).
+    if (r.width > 4 && r.height > 4) return { top: r.top, left: r.left, bottom: r.bottom, right: r.right, width: r.width, height: r.height };
     var kids = el.children, any = false;
     var top = r.top, left = r.left, bottom = r.bottom, right = r.right;
     for (var i = 0; kids && i < kids.length; i++) {
@@ -487,12 +491,11 @@
       scope: function () { return document.getElementById("homeV2") || document; },
       resolve: function (s) { return firstPresent(s.sel, this.scope()); },
       enter: function (s, cb) { cb(); },
-      // The user taps the real ICU tile → hand off to the ICU tour immediately (matched by element
-      // identity so it survives the app opening/hiding things on the same click). startIcuTour opens
-      // the real ICU and waits for the board before spotlighting.
+      // The user taps the Hospital+ tile (the ICU / OPD / Ward / FollowCare hub) → finish the app tour
+      // and let them explore. ICU moved inside Hospital+, so there is no top-level ICU tile to hand off from.
       onDomTap: function (target, s) {
-        if (closestAny(target, '[data-act="icu"]')) {
-          setTimeout(function () { if (s.then === "icu") startIcuTour(); else next(); }, 80);
+        if (closestAny(target, '[data-act="hospital"]')) {
+          setTimeout(function () { next(); }, 80);
           return true;
         }
         return false;
