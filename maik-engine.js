@@ -150,6 +150,14 @@
       .catch(function (err) { return { error: String((err && err.message) || err || "local-failed") }; });
   }
 
+  // If on-device is already the chosen engine at startup, warm it before the first question.
+  function warmIfLocal() {
+    try {
+      if (getPref() !== "local" || !localReady()) return;
+      if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.warm) window.SMD_MAIK_LOCAL.warm(activePack());
+    } catch (e) {}
+  }
+
   var _installed = false;
   function install() {
     if (_installed) return false;
@@ -163,6 +171,8 @@
     // route() is an alias for refine() in reasoning.js; re-point it at the wrapped refine.
     if (typeof A.route === "function") A.route = function (q) { return A.refine(q); };
     _installed = true;
+    // Deferred so it never competes with first paint.
+    try { if (typeof setTimeout === "function") setTimeout(warmIfLocal, 2500); } catch (e) {}
     return true;
   }
 
@@ -476,6 +486,10 @@
         if (M && M.setActivePack) M.setActivePack(pid);
         lrem(KEY_PENDING);
         setPref("local");
+        // Start loading + faulting the weights in NOW, while they are still typing. Prefill after a
+        // cold load is page-fault bound (measured 130 s on a Pixel 9); this moves that off the
+        // critical path instead of making the first question pay for it.
+        try { if (window.SMD_MAIK_LOCAL && window.SMD_MAIK_LOCAL.warm) window.SMD_MAIK_LOCAL.warm(pid); } catch (e) {}
       } else {
         // It cannot answer yet: remember the request and download it, but leave whatever is
         // currently answering alone. Moving activePack here is what broke answering before.
@@ -601,6 +615,7 @@
     settingsHTML: settingsHTML, wireSettings: wireSettings, modelRowHTML: modelRowHTML,
     options: options, currentOptionId: currentOptionId, chipLabel: chipLabel, chipHTML: chipHTML,
     selectOption: selectOption, adoptPackWhenReady: adoptPackWhenReady, pendingPack: pendingPack,
+    warmIfLocal: warmIfLocal,
     KEY_PENDING: KEY_PENDING, openPicker: openPicker, closePicker: closePicker, wireChip: wireChip, syncChip: syncChip
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

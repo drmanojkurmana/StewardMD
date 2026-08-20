@@ -45,6 +45,11 @@ public final class LlamaEngine {
      * @param nThreads big cores only. Using every core is slower on a big.LITTLE phone, not faster.
      */
     public void load(String path, int nCtx, int nThreads) throws LlamaException {
+        load(path, nCtx, nThreads, 0, 0, 0);
+    }
+
+    /** Full form: nBatch/nUbatch/nThreadsBatch drive PREFILL cost (0 = library default). */
+    public void load(String path, int nCtx, int nThreads, int nBatch, int nUbatch, int nThreadsBatch) throws LlamaException {
         if (!LlamaNative.isAvailable()) throw new LlamaException(LlamaErr.UNSUPPORTED_ARCHITECTURE, "libllama_jni.so missing for this ABI");
         File f = new File(path);
         if (!f.exists() || f.length() == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "no model at the given path");
@@ -58,7 +63,8 @@ public final class LlamaEngine {
             model = LlamaNative.loadModel(path, 0);
             if (model == 0) throw new LlamaException(LlamaErr.MODEL_CORRUPTED, "model failed to load");
 
-            ctx = LlamaNative.newContext(model, nCtx > 0 ? nCtx : DEFAULT_N_CTX, Math.max(1, nThreads));
+            ctx = LlamaNative.newContext(model, nCtx > 0 ? nCtx : DEFAULT_N_CTX, Math.max(1, nThreads),
+                                         nBatch, nUbatch, nThreadsBatch);
             if (ctx == 0) {
                 LlamaNative.freeModel(model); model = 0;
                 throw new LlamaException(LlamaErr.LOW_MEMORY, "context allocation failed (n_ctx too large for this device?)");
@@ -97,6 +103,9 @@ public final class LlamaEngine {
     }
 
     /** Ask the running generation to stop; generate() returns the partial text. */
+    public long lastPrefillMs() { return LlamaNative.isAvailable() ? LlamaNative.lastPrefillMs() : -1; }
+    public int lastPromptTokens() { return LlamaNative.isAvailable() ? LlamaNative.lastPromptTokens() : -1; }
+
     public void cancel() {
         if (LlamaNative.isAvailable()) LlamaNative.cancelGenerate();
     }

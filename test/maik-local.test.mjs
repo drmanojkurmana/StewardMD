@@ -111,6 +111,27 @@ const { L } = load();
   ok("packageless prompt still asks for something", /QUESTION/.test(bare) && bare.length > 20);
 }
 
+// ── low-confidence retrieval must NOT be labelled "primary source" ──
+// Real failure this prevents: "pyogenic liver abscess" resolves to LIVER_ABSCESS by FALLBACK while
+// AMOEBIC_LIVER_ABSCESS is an exact match, so the model was fed amoebic chunks under a header
+// telling it they were authoritative - and answered metronidazole for a pyogenic abscess.
+{
+  const g = { question: "pyogenic liver abscess?", grounding: [{ name: "Liver Abscess", knowledge: [{ section: "management", text: "Metronidazole 750 mg TDS for amoebic liver abscess." }] }] };
+
+  const confident = L.buildPrompt({ ...g, topicMatch: { confident: true, match: "exact" } });
+  ok("confident match keeps the primary-source header", /RETRIEVED STEWARDMD KNOWLEDGE \(primary source\)/.test(confident));
+
+  for (const weak of [{ confident: false }, { match: "fallback" }, { matched: false }]) {
+    const p2 = L.buildPrompt({ ...g, topicMatch: weak });
+    ok("weak match (" + JSON.stringify(weak) + ") is NOT called primary source", !/primary source/.test(p2));
+    ok("weak match (" + JSON.stringify(weak) + ") warns it may be a different condition", /DIFFERENT condition/.test(p2));
+    ok("weak match (" + JSON.stringify(weak) + ") tells the model to prefer established medicine", /established medicine/.test(p2));
+  }
+
+  // no topicMatch at all -> treat as confident (the old behaviour), so nothing regresses
+  ok("absent topicMatch keeps the primary-source header", /primary source/.test(L.buildPrompt(g)));
+}
+
 // ── the budget must hold, or llama.cpp refuses the answer ──
 {
   const huge = {
@@ -120,7 +141,8 @@ const { L } = load();
   };
   const p = L.buildPrompt(huge);
   ok("oversized package is clipped to the budget", p.length <= L.PROMPT_CHAR_BUDGET + 200);
-  ok("budget leaves room for the answer at n_ctx 4096", L.PROMPT_CHAR_BUDGET <= 14000);
+  // Prefill is ~94% of time-to-first-word and linear in prompt tokens, so this budget IS the latency.
+  ok("budget kept small enough to keep first-token latency sane", L.PROMPT_CHAR_BUDGET <= 3500);
   ok("no single chunk exceeds the per-chunk clip",
      !p.split("\n").some((line) => line.trim().startsWith("[") && line.length > 400));
 }
@@ -141,7 +163,8 @@ const { L } = load();
   ok("listener removed after the answer (no leak across questions)", calls.removed === 1);
   ok("greedy by default (reproducible answers)", calls.generate[0].temperature === 0);
   ok("nPredict capped from the pack", calls.generate[0].nPredict === 512);
-  ok("system prompt sent", /clinical decision-support/.test(calls.generate[0].system));
+  ok("system prompt sent", /clinical decision support/i.test(calls.generate[0].system));
+  ok("system prompt kept terse (it is prefill on the critical path)", calls.generate[0].system.length < 600);
   ok("model loaded with the clamped context", calls.load[0].nCtx === 4096);
 }
 

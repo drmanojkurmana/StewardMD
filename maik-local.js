@@ -19,23 +19,30 @@
 (function () {
   "use strict";
 
-  // ~4 chars/token, n_ctx 4096, 512 reserved for the answer plus slack for the chat template.
-  var PROMPT_CHAR_BUDGET = 8000;
-  var CHUNK_CLIP = 220;          // per-chunk characters
+  /* PROMPT SIZE IS THE LATENCY. Measured on a Pixel 9: an 8000-char package tokenised to 1799
+   * tokens and prefill alone took 130.5 s of a 138.5 s answer - 94% of the wait, before a single
+   * word appears. Prefill is linear in prompt tokens, so this budget IS the first-token latency.
+   *
+   * 3000 chars keeps the top-ranked grounding (which is what stops the model inventing regimens)
+   * while cutting prefill roughly 2.7x. CHUNK_CLIP drops too, so the budget buys more DISTINCT
+   * sources rather than more words from the same one - breadth matters more than verbosity for
+   * grounding, and it is cheaper per token.
+   */
+  var PROMPT_CHAR_BUDGET = 3000;
+  var CHUNK_CLIP = 150;          // per-chunk characters
   var DEFAULT_PACK = "maik-local-v1";
 
   // Short cousin of the server's SYSTEM prompt (functions/api/ai/[[path]].js). Deliberately terse:
   // every token here is a token not available for evidence or answer at n_ctx 4096.
+  // Every token here is prefill on the critical path, so this is deliberately terse. Trimmed from
+  // ~175 tokens after measuring that prefill is 94% of time-to-first-word on a Pixel 9.
   var SYSTEM =
-    "You are MaiK, a clinical decision-support assistant for doctors. Answer the clinical question " +
-    "directly and concisely in markdown, using the RETRIEVED STEWARDMD KNOWLEDGE below to ground " +
-    "specifics where it applies, and well-established medical knowledge otherwise.\n" +
-    "- Answer only what was asked. Never describe your knowledge base or say what it does or does not contain.\n" +
-    "- Structure: a one-line bottom line, then short bullets. No preamble.\n" +
-    "- Give standard adult doses when asked. For weight-based, paediatric, or high-alert drugs give " +
-    "the principle and range rather than inventing a precise figure.\n" +
-    "- Never fabricate a guideline number or a citation.\n" +
-    "- If a retrieved chunk is about a different condition than the question, ignore it.";
+    "You are MaiK, clinical decision support for doctors. Answer the question directly in markdown: " +
+    "one-line bottom line, then short bullets. No preamble.\n" +
+    "Ground specifics in the RETRIEVED KNOWLEDGE where it applies; otherwise use established medicine.\n" +
+    "Ignore retrieved text about a different condition. Never invent a guideline number or citation.\n" +
+    "Give standard adult doses; for weight-based, paediatric or high-alert drugs give the principle " +
+    "and range, not a made-up figure.";
 
   function cap() { try { return (typeof window !== "undefined" && window.Capacitor) || null; } catch (e) { return null; } }
   function llama() { var c = cap(); return (c && c.Plugins && c.Plugins.Llama) || null; }
@@ -76,7 +83,24 @@
       push("");
     }
 
-    push("=== RETRIEVED STEWARDMD KNOWLEDGE (primary source) ===");
+    /* Grounding header depends on how CONFIDENT the KB match was.
+     *
+     * Measured on a Pixel 9: asking for "pyogenic liver abscess" resolves to LIVER_ABSCESS with
+     * match:"fallback", confident:false, while "amoebic liver abscess" is an exact match. So the
+     * retrieved chunks were about the WRONG disease, and this header called them "primary source".
+     * A 4B model obeys that label - it answered "metronidazole ... for amoebic liver abscess" to a
+     * pyogenic question. Labelling low-confidence retrieval honestly is the difference between
+     * grounding and misleading.
+     */
+    var tm = pkg.topicMatch || {};
+    var weak = tm.confident === false || tm.match === "fallback" || tm.matched === false;
+    if (weak) {
+      push("=== POSSIBLY RELATED REFERENCE (the knowledge base had no confident match for this " +
+           "question - it may describe a DIFFERENT condition; ignore it unless it clearly applies, " +
+           "and answer from established medicine instead) ===");
+    } else {
+      push("=== RETRIEVED STEWARDMD KNOWLEDGE (primary source) ===");
+    }
     (pkg.grounding || []).forEach(function (g) {
       var lines = [];
       (g.knowledge || []).forEach(function (c) {
@@ -197,18 +221,46 @@
    */
   function available() { return !!llama(); }
 
+  /**
+   * Load the model AND fault its pages in, ahead of any question.
+   *
+   * The weights are mmap'd from flash, so the first prefill after a load has to fault ~2.5 GB in:
+   * measured 130 s of page-fault-bound prefill on a Pixel 9 (94% of a 138 s answer). That cost is
+   * unavoidable, but it does NOT have to sit between pressing send and the first word. Called when
+   * the on-device model is SELECTED, and at startup if it is already the choice, so the expensive
+   * part happens while the clinician is still typing.
+   *
+   * Fire-and-forget: never rejects, and never blocks a real answer.
+   */
+  var _warmed = null;
+  function warm(packId) {
+    var L = llama();
+    if (!L) return Promise.resolve(false);
+    packId = packId || currentPack();
+    if (_warmed === packId) return Promise.resolve(true);
+    return ensureLoaded(packId)
+      .then(function () {
+        // One token is enough to walk the whole graph and fault the weights in.
+        return L.generate({ prompt: "ok", system: "", nPredict: 1, temperature: 0, stream: false });
+      })
+      .then(function () { _warmed = packId; return true; })
+      .catch(function () { return false; });
+  }
+
   function cancel() { var L = llama(); if (L && L.cancel) { try { return L.cancel(); } catch (e) {} } }
 
   function release() {
     var L = llama();
     _loadedPack = null;
+    _warmed = null;
+    _warmed = null;
     if (L && L.release) { try { return L.release(); } catch (e) {} }
   }
 
   var API = {
     SYSTEM: SYSTEM, PROMPT_CHAR_BUDGET: PROMPT_CHAR_BUDGET, DEFAULT_PACK: DEFAULT_PACK,
     buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
-    cancel: cancel, release: release
+    warm: warm, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

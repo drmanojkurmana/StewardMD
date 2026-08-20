@@ -54,10 +54,15 @@ public class LlamaPlugin extends Plugin {
         if (path == null || path.isEmpty()) { call.reject("Missing path", LlamaErr.BAD_ARGUMENTS.code); return; }
         final int nCtx = call.getInt("nCtx", LlamaEngine.DEFAULT_N_CTX);
         final int nThreads = call.getInt("nThreads", defaultThreads());
+        // Prefill knobs. Defaults chosen by measurement on a Pixel 9 (see docs/MAIK_OFFLINE_RUNBOOK).
+        final int nBatch = call.getInt("nBatch", 512);
+        final int nUbatch = call.getInt("nUbatch", 512);
+        final int nThreadsBatch = call.getInt("nThreadsBatch", Runtime.getRuntime().availableProcessors());
         worker.execute(() -> {
             try {
-                engine.load(path, nCtx, nThreads);
-                call.resolve(new JSObject().put("loaded", true).put("nCtx", nCtx).put("nThreads", nThreads));
+                engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch);
+                call.resolve(new JSObject().put("loaded", true).put("nCtx", nCtx).put("nThreads", nThreads)
+                    .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch));
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);
@@ -89,7 +94,8 @@ public class LlamaPlugin extends Plugin {
                     : null;
                 String text = engine.generate(system, user, nPredict, temp, seed, sink);
                 long ms = System.currentTimeMillis() - t0;
-                call.resolve(new JSObject().put("text", text).put("ms", ms));
+                call.resolve(new JSObject().put("text", text).put("ms", ms)
+                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens()));
             } catch (LlamaException e) {
                 emitError(e);
                 call.reject(e.detail, e.err.code);

@@ -53,7 +53,14 @@ public final class LlamaNative {
      * Create an inference context. {@code nCtx} is deliberately small (4096): the KV cache is the
      * dirty allocation that triggers jetsam on an 8 GB phone, and it scales with context.
      */
-    public static native long newContext(long model, int nCtx, int nThreads);
+    public static native long newContext(long model, int nCtx, int nThreads,
+                                        int nBatch, int nUbatch, int nThreadsBatch);
+
+    /** Milliseconds the last generate() spent in prefill (-1 if none yet). For tuning sweeps. */
+    public static native long lastPrefillMs();
+
+    /** Prompt token count of the last generate() (-1 if none yet). */
+    public static native int lastPromptTokens();
 
     /** Free a context handle from {@link #newContext}. Safe with 0. */
     public static native void freeContext(long ctx);

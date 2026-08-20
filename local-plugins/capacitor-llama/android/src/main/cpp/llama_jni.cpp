@@ -13,6 +13,7 @@
 //     dotprod/fp16 (see build.gradle GGML_CPU_ARM_ARCH) are the fast path.
 #include <jni.h>
 #include <algorithm>
+#include <chrono>
 #include <atomic>
 #include <string>
 #include <vector>
@@ -79,19 +80,27 @@ Java_in_stewardmd_llama_LlamaNative_freeModel(JNIEnv*, jobject, jlong h) {
 
 JNIEXPORT jlong JNICALL
 Java_in_stewardmd_llama_LlamaNative_newContext(
-        JNIEnv*, jobject, jlong modelHandle, jint nCtx, jint nThreads) {
+        JNIEnv*, jobject, jlong modelHandle, jint nCtx, jint nThreads,
+        jint nBatch, jint nUbatch, jint nThreadsBatch) {
     auto* m = reinterpret_cast<llama_model*>(modelHandle);
     if (m == nullptr) return 0;
     llama_context_params cp = llama_context_default_params();
     cp.n_ctx               = (uint32_t) nCtx;
-    cp.n_batch             = 512;
+    // PREFILL COST lives here. Prefill is a batched matmul over the whole prompt, so it scales with
+    // how many tokens ggml can work on per pass (n_ubatch) and how many threads it can use for a
+    // BATCH (n_threads_batch), which is a different tradeoff from single-token decode: decode is
+    // latency-bound and hates slow little cores, prefill is throughput-bound and can use them.
+    // Both are parameters rather than constants so they can be swept on a real device.
+    cp.n_batch             = (uint32_t) (nBatch  > 0 ? nBatch  : 512);
+    cp.n_ubatch            = (uint32_t) (nUbatch > 0 ? nUbatch : 512);
     cp.n_threads           = (int32_t) nThreads;
-    cp.n_threads_batch     = (int32_t) nThreads;
+    cp.n_threads_batch     = (int32_t) (nThreadsBatch > 0 ? nThreadsBatch : nThreads);
     cp.abort_callback      = abort_cb;
     cp.abort_callback_data = nullptr;
     llama_context* c = llama_init_from_model(m, cp);
     if (c == nullptr) LOGE("llama_init_from_model returned null (n_ctx=%d)", (int) nCtx);
-    else LOGI("newContext: n_ctx=%d threads=%d", (int) nCtx, (int) nThreads);
+    else LOGI("newContext: n_ctx=%d threads=%d n_batch=%d n_ubatch=%d threads_batch=%d",
+              (int) nCtx, (int) nThreads, (int) cp.n_batch, (int) cp.n_ubatch, (int) cp.n_threads_batch);
     return reinterpret_cast<jlong>(c);
 }
 
@@ -104,6 +113,16 @@ JNIEXPORT void JNICALL
 Java_in_stewardmd_llama_LlamaNative_cancelGenerate(JNIEnv*, jobject) {
     g_cancel.store(true, std::memory_order_relaxed);
 }
+
+// Last generate()'s split of prefill vs decode, so a tuning sweep can attribute the cost.
+static std::atomic<long long> g_last_prefill_ms{-1};
+static std::atomic<int> g_last_prompt_tokens{-1};
+
+JNIEXPORT jlong JNICALL
+Java_in_stewardmd_llama_LlamaNative_lastPrefillMs(JNIEnv*, jobject) { return (jlong) g_last_prefill_ms.load(); }
+
+JNIEXPORT jint JNICALL
+Java_in_stewardmd_llama_LlamaNative_lastPromptTokens(JNIEnv*, jobject) { return (jint) g_last_prompt_tokens.load(); }
 
 /**
  * Apply the model's own chat template to a single user turn. Returns the templated prompt, or the
@@ -199,6 +218,7 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     // llama.cpp's own examples do it, and keep the compute buffer bounded rather than raising
     // n_batch to n_ctx.
     const int n_batch = (int) llama_n_batch(ctx);
+    const auto _pf0 = std::chrono::steady_clock::now();
     for (int i = 0; i < (int) toks.size(); i += n_batch) {
         int n = std::min(n_batch, (int) toks.size() - i);
         llama_batch batch = llama_batch_get_one(toks.data() + i, (int32_t) n);
@@ -209,6 +229,12 @@ Java_in_stewardmd_llama_LlamaNative_generate(
         }
         if (g_cancel.load(std::memory_order_relaxed)) { llama_sampler_free(smpl); return env->NewStringUTF(""); }
     }
+
+    const long long prefill_ms = std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now() - _pf0).count();
+
+    g_last_prefill_ms.store(prefill_ms);
+    g_last_prompt_tokens.store(ntok);
 
     std::string full;
     int produced = 0;
@@ -237,7 +263,8 @@ Java_in_stewardmd_llama_LlamaNative_generate(
         if (llama_decode(ctx, nb) != 0) { LOGE("decode failed at %d", produced); break; }
     }
 
-    LOGI("generate: %d prompt tokens, %d produced%s", ntok, produced, g_cancel.load() ? " (cancelled)" : "");
+    LOGI("generate: %d prompt tokens, prefill %lld ms, %d produced%s", ntok, (long long) prefill_ms,
+         produced, g_cancel.load() ? " (cancelled)" : "");
     llama_sampler_free(smpl);
     return env->NewStringUTF(full.c_str());
 }
