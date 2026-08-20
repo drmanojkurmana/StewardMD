@@ -1,6 +1,6 @@
 /* StewardMD — Universal swipe-to-go-back (iOS + Android).
  * ===========================================================================
- * A horizontal swipe — LEFT or RIGHT, anywhere on the screen — goes back, on every
+ * A rightward swipe from the LEFT EDGE (iOS-style) goes back one step, on every
  * page and window. Android's system/hardware back does the same. One action, goBack():
  *   1. If a menu/overlay is open  → activate its top-most Back/Close control.
  *   2. Else if the clinical engine is showing (5-step form OR the Clinical Decision
@@ -34,6 +34,11 @@
     if (el.onclick) return true;
     try { return window.getComputedStyle(el).cursor === "pointer"; } catch (e) { return false; }
   }
+  // A "back" control (step one screen back) vs a "close" control (dismiss the whole overlay). When an
+  // overlay header has BOTH (e.g. insulin: aria-label="Back" then aria-label="Close"), swipe-back must
+  // click Back — clicking Close dumped the user to home instead of the previous screen.
+  var BACK_ONLY = '[data-act="back"],[aria-label^="Back"],[aria-label^="back"],.step-nav-back,[class*="-back"],[class*="-sback"]';
+  function isBack(el) { try { return !!(el.matches && el.matches(BACK_ONLY)); } catch (e) { return false; } }
 
   function onScreen(el) {
     if (!el) return false;
@@ -75,8 +80,14 @@
         if (za !== zb) return za - zb;
         return (a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING) ? -1 : 1;
       });
+      // Within the top-most overlay (highest z-index), prefer its Back control over its Close control,
+      // so a swipe steps ONE screen back like the visible back arrow instead of dismissing to home.
+      var topZ = zOf(els[els.length - 1]);
+      var top = els.filter(function (el) { return zOf(el) === topZ; });
+      var backs = top.filter(isBack);
+      var pick = backs.length ? backs[backs.length - 1] : top[top.length - 1];
       _last = now;
-      try { els[els.length - 1].click(); } catch (e) {}
+      try { pick.click(); } catch (e) {}
       return true;
     }
     // 2) clinical engine (incl. the Clinical Decision output, which has no visible Back button)
@@ -107,7 +118,7 @@
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
     var sx = 0, sy = 0, t0 = 0, tracking = false;
-    var DIST = 72, MAXOFF = 0.6, MAXTIME = 700;               // ≥72px horizontal, dominantly horizontal, brisk
+    var DIST = 72, MAXOFF = 0.6, MAXTIME = 700, EDGE = 28;    // ≥72px, dominantly horizontal, brisk, from the left edge
     document.addEventListener("touchstart", function (e) {
       if (e.touches.length !== 1) { tracking = false; return; }
       var t = e.touches[0];
@@ -118,8 +129,9 @@
       if (!tracking) return; tracking = false;
       var t = e.changedTouches && e.changedTouches[0]; if (!t) return;
       var dx = t.clientX - sx, dy = t.clientY - sy, dt = Date.now() - t0;
-      // LEFT or RIGHT swipe: enough horizontal distance, mostly horizontal, quick
-      if (Math.abs(dx) >= DIST && Math.abs(dy) <= Math.abs(dx) * MAXOFF && dt <= MAXTIME) goBack();
+      // iOS-style edge-back: a RIGHTWARD swipe that STARTS near the left edge, mostly horizontal, quick.
+      // (Was any horizontal flick anywhere on screen, which fired accidentally and jumped to home.)
+      if (sx <= EDGE && dx >= DIST && Math.abs(dy) <= dx * MAXOFF && dt <= MAXTIME) goBack();
     }, { passive: true });
   }
 

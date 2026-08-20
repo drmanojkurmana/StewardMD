@@ -6,6 +6,9 @@
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
+  // Open an external URL. Raw window.open(...,"_blank") is a silent no-op inside the native
+  // Capacitor webview, so route through the app's Capacitor-aware helper when present.
+  function openExt(u) { try { if (G.openExternal) return G.openExternal(u); } catch (e) {} try { window.open(u, "_blank"); } catch (x) {} }
   var API = "/api/queue";
   var POLL_MS = 8000;
   var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
@@ -416,9 +419,9 @@
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
-    if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
-    if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
-    if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "newclinic") { openExt("https://stewardmd.in/opd"); return; }
+    if (cmd === "addhosp") { openExt("https://stewardmd.in/admin/connect-emr"); return; }  // reuse the Connect EMR onboarding wizard
+    if (cmd === "openconsole") { openExt("https://stewardmd.in/opd"); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }

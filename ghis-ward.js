@@ -612,10 +612,23 @@
             }, function () { delete _addedPids[patientId]; try { if (window.toast) toast('Couldn’t add — open the dashboard and choose a unit first.'); } catch (e) {} if (typeof ghisApplyFilters === 'function') ghisApplyFilters(); });
           });
         },
-        // Checkbox handler (list). Add-only: unticking reverts (re-tick to re-add) — removal is a
-        // dashboard action. `el` is the checkbox, or null when called from a header button.
+        // Checkbox handler (list). Tick = add to the dashboard, untick = remove it (a real toggle).
+        // `el` is the checkbox, or null when called from a header button.
         toggleAdd: function(episodeId, patientId, name, el) {
-          if (el && el.type === 'checkbox' && !el.checked) { el.checked = true; return; }
+          if (el && el.type === 'checkbox' && !el.checked) {
+            // Untick -> remove from the dashboard/unit. Optimistic; re-tick + revert label on failure.
+            delete _addedPids[patientId];
+            var sp0 = (el.parentNode) ? el.parentNode.querySelector('span') : null; if (sp0) sp0.textContent = 'Add';
+            if (window.ICU && ICU.removeWardPatientFromRoster) {
+              Promise.resolve(ICU.removeWardPatientFromRoster(patientId)).then(function () {
+                try { if (window.toast) toast('Removed from dashboard'); } catch (e) {}
+              }, function () {
+                _addedPids[patientId] = true; el.checked = true; if (sp0) sp0.textContent = 'Added';
+                try { if (window.toast) toast('Could not remove. Open the dashboard to manage it.'); } catch (e) {}
+              });
+            }
+            return;
+          }
           _addedPids[patientId] = true;
           if (el && el.parentNode) { var sp = el.parentNode.querySelector('span'); if (sp) sp.textContent = 'Added'; }
           GHIS.addToDashboard(episodeId, patientId, name);

@@ -814,6 +814,20 @@
     try { if (ICU.isOpen()) paint(); } catch (e) {}
     return Promise.resolve(entry);
   }
+  // Inverse of addWardPatientToRoster: un-add a Ward-Sync patient from the CURRENT unit's board, using
+  // the same deterministic id derived from the ward patientId. Group unit -> Firestore removePatient;
+  // solo unit -> local rosterRemove (pure, no navigation). Returns a Promise.
+  function removeWardPatientFromRoster(patientId) {
+    if (!patientId) return Promise.reject(new Error("no-patientId"));
+    if (grpActive() && _grp && _grp.id) {
+      var api = groupsApi();
+      if (api && api.removePatient) return Promise.resolve(api.removePatient(_grp.id, "w_" + patientId));
+      return Promise.reject(new Error("group-api-unavailable"));
+    }
+    var p = rosterRemove("pw_" + patientId);
+    try { if (ICU.isOpen()) paint(); } catch (e) {}
+    return Promise.resolve(p);
+  }
 
   /* ---------------------------------------------------------------- styles */
   function injectCSS() {
@@ -7749,7 +7763,7 @@
     reset: function () { resetState(); },
     ingestMonitor: ingestMonitor, ingestLabs: ingestLabs, ingestVentilator: ingestVentilator, ingestFlowsheet: ingestFlowsheet, ingestPatient: ingestPatient,
     ingestInfusion: ingestInfusion, _bridgeInfusion: bridgeInfusion, _bridgeInfusionFromCalc: bridgeInfusionFromCalc, _installInfBridge: installInfBridge, _infWeightBridge: infWeightBridge,
-    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
+    ingestFromWard: ingestFromWard, ingestWardHistory: ingestWardHistory, addWardPatientToRoster: addWardPatientToRoster, removeWardPatientFromRoster: removeWardPatientFromRoster, _buildWardState: buildWardState, parseWardDate: parseWardDate, mapWardLab: mapWardLab, _compressImage: compressImage, startImport: startImport, _review: openImportReview, reviewVoice: reviewVoice,
     ingestImaging: ingestImaging, ingestWardImaging: ingestWardImaging, imagingOn: icuImagingOn, _imgModality: imgModality, _imgCritical: imgCritical, _parseImaging: parseImagingSections,
     _buildImagingAiPacket: buildImagingAiPacket, _imagingDeterministic: imagingDeterministic,
     openFindingPicker: openFindingPicker, _addFindingChip: addFindingChip, _applyFindState: applyFindState, _findStateOf: findStateOf, _vocabNlpCtx: vocabNlpCtx,
