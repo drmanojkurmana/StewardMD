@@ -55,7 +55,7 @@ try {
   ok(await ev(`return !!(document.getElementById("smdOncoCtcae") && document.getElementById("smdOncoCtcae").classList.contains("on"));`) === true, "clicking CTCAE opens the #smdOncoCtcae overlay");
   const ctcList = (await ev(`return document.getElementById("ctcResults").textContent || "";`)) || "";
   ok(/Neutrophil count decreased/.test(ctcList), "the CTCAE AE list renders a seeded adverse event (Neutrophil count decreased)");
-  ok(/Requires R1 verification|R1 verification/i.test(ctcList) || /curated CTCAE v5\.0 subset/i.test(ctcList), "the CTCAE list states its curated CTCAE v5.0 provenance");
+  ok(/CTCAE v5\.0/i.test(ctcList), "the CTCAE list states its curated CTCAE v5.0 provenance");
   const ctcVbtns = await ev(`return document.querySelectorAll('#smdOncoCtcae .stg-vbtn').length;`);
   ok(Number(ctcVbtns) >= 2, `a CTCAE version toggle renders v5.0 + v4.03 (${ctcVbtns})`);
 

@@ -93,10 +93,7 @@ test("auditAE FAILS CLOSED if a grade is present-but-empty (missing value, not a
   assert.equal(ENG.auditAE(bad).ok, false);
 });
 
-test("auditAE FAILS CLOSED if requiresR1Verification is off or the source is not CTCAE v5.0", () => {
-  const a = JSON.parse(JSON.stringify(ENG.findAE(catalog, "anemia")));
-  a.requiresR1Verification = false;
-  assert.equal(ENG.auditAE(a).ok, false);
+test("auditAE FAILS CLOSED if the source is not CTCAE v5.0 (R1 gate removed per owner directive)", () => {
   const b = JSON.parse(JSON.stringify(ENG.findAE(catalog, "anemia")));
   b.source = "made up";
   assert.equal(ENG.auditAE(b).ok, false);

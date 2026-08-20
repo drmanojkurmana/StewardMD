@@ -243,7 +243,7 @@
       return { v:s, u:"points", i:risk+"." };
     } },
 
-  { id:"qtc", cat:"Cardiovascular", icon:"", title:"Corrected QT (QTc)",
+  { id:"qtc", cat:"Cardiovascular", onc:1, icon:"", title:"Corrected QT (QTc)",
     desc:"Rate-correct the QT interval (Bazett & Fridericia).",
     inputs:[
       { id:"qt", label:"QT interval", type:"number", unit:"ms", step:"1" },
@@ -288,7 +288,7 @@
       return { v:s, u:"/7", i:"14-day risk of death / MI / urgent revascularisation ≈ <b>"+rate+"%</b>. Score ≥3 favours early invasive strategy." };
     } },
 
-  { id:"wells_pe", cat:"Cardiovascular", icon:"", title:"Wells score — PE",
+  { id:"wells_pe", cat:"Cardiovascular", onc:1, icon:"", title:"Wells score — PE",
     desc:"Pre-test probability of pulmonary embolism.",
     inputs:[
       { id:"dvt", label:"Clinical signs of DVT", type:"check" },
@@ -306,7 +306,7 @@
       return { v:s, u:"points", i:"3-tier: <b>"+tier+"</b> probability. 2-tier: <b>"+two+"</b>." };
     } },
 
-  { id:"wells_dvt", cat:"Cardiovascular", icon:"", title:"Wells score — DVT",
+  { id:"wells_dvt", cat:"Cardiovascular", onc:1, icon:"", title:"Wells score — DVT",
     desc:"Pre-test probability of deep vein thrombosis.",
     inputs:[
       { id:"cancer", label:"Active cancer", type:"check" },
@@ -536,7 +536,7 @@
     } },
 
   /* ----------------------------- RENAL / ELECTROLYTES ----------------------------- */
-  { id:"crcl", cat:"Renal", icon:"", title:"CrCl (Cockcroft-Gault)",
+  { id:"crcl", cat:"Renal", onc:1, icon:"", title:"CrCl (Cockcroft-Gault)",
     desc:"Creatinine clearance for drug dosing.",
     inputs:[
       { id:"age", label:"Age", type:"number", unit:"yrs", demo:"age" },
@@ -649,7 +649,7 @@
       return { v:r0(def), u:"mEq Na", i:"Correct ≤8 mEq/L per 24 h (osmotic demyelination risk). Use Adrogué-Madias to predict the rise per litre of infusate." };
     } },
 
-  { id:"corr_ca", cat:"Renal", icon:"", title:"Corrected calcium",
+  { id:"corr_ca", cat:"Renal", onc:1, icon:"", title:"Corrected calcium",
     desc:"Calcium corrected for albumin.",
     inputs:[
       { id:"ca", label:"Measured calcium", type:"number", unit:"mg/dL", step:"0.1", lab:"ca" },
@@ -672,7 +672,7 @@
     } },
 
   /* ----------------------------- HEPATOLOGY ----------------------------- */
-  { id:"meld", cat:"Hepatology", icon:"", title:"MELD & MELD-Na",
+  { id:"meld", cat:"Hepatology", onc:1, icon:"", title:"MELD & MELD-Na",
     desc:"End-stage liver disease 90-day mortality.",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"number", unit:"mg/dL", step:"0.1", lab:"bili" },
@@ -699,7 +699,7 @@
       return { v:head, u:hu, i:out+" 3-month mortality ≈ "+mort+"." };
     } },
 
-  { id:"childpugh", cat:"Hepatology", icon:"", title:"Child-Pugh",
+  { id:"childpugh", cat:"Hepatology", onc:1, icon:"", title:"Child-Pugh",
     desc:"Cirrhosis severity classification.",
     inputs:[
       { id:"bili", label:"Bilirubin", type:"select", opts:[{v:"1",t:"<2 mg/dL (1)"},{v:"2",t:"2–3 mg/dL (2)"},{v:"3",t:">3 mg/dL (3)"}] },
@@ -755,7 +755,7 @@
     } },
 
   /* ----------------------------- NEUROLOGY ----------------------------- */
-  { id:"gcs", cat:"Neurology", icon:"", title:"Glasgow Coma Scale",
+  { id:"gcs", cat:"Neurology", onc:1, icon:"", title:"Glasgow Coma Scale",
     desc:"Level of consciousness (E+V+M).",
     inputs:[
       { id:"e", label:"Eye opening", type:"select", opts:[{v:"4",t:"Spontaneous (4)"},{v:"3",t:"To speech (3)"},{v:"2",t:"To pain (2)"},{v:"1",t:"None (1)"}] },
@@ -854,7 +854,7 @@
     } },
 
   /* ----------------------------- GENERAL / METABOLIC ----------------------------- */
-  { id:"bmi", cat:"General", icon:"", title:"BMI · IBW · AdjBW",
+  { id:"bmi", cat:"General", onc:1, icon:"", title:"BMI · IBW · AdjBW",
     desc:"Body mass index and dosing body weights.",
     inputs:[
       { id:"ht", label:"Height", type:"number", unit:"cm" },
@@ -875,7 +875,7 @@
       return { v:r1(bmi), u:"kg/m²", i:"<b>"+cat+"</b>. IBW (Devine) = "+r1(ibw)+" kg; adjusted BW = "+r1(adj)+" kg (use AdjBW for hydrophilic drug dosing when obese)." };
     } },
 
-  { id:"bsa", cat:"General", icon:"", title:"Body Surface Area",
+  { id:"bsa", cat:"General", onc:1, icon:"", title:"Body Surface Area",
     desc:"Mosteller & DuBois BSA.",
     inputs:[
       { id:"ht", label:"Height", type:"number", unit:"cm" },
@@ -981,7 +981,7 @@
       return { v:s, u:"/4", i:(s>=2?"<b>SIRS positive</b> (≥2 criteria). ":"<b>SIRS not met.</b> ")+"Sensitive but non-specific — for sepsis use organ-dysfunction scores (qSOFA / SOFA). Ref: ACCP/SCCM 1992; Sepsis-3, JAMA 2016." };
     } },
 
-  { id:"mascc", cat:"Infectious disease", icon:"", title:"MASCC febrile neutropenia",
+  { id:"mascc", cat:"Infectious disease", onc:1, icon:"", title:"MASCC febrile neutropenia",
     desc:"Identifies low-risk febrile neutropenia (candidate for oral/outpatient therapy).",
     kw:["febrile","neutropenia","cancer","chemo","risk"],
     inputs:[
@@ -1669,7 +1669,7 @@
       return { v:g, u:"(1–4)", i:"Grade "+g+"; symptomatic vasospasm risk is "+vs+" (classically greatest with grade 3 thick clot). Ref: Fisher, Neurosurgery 1980." };
     } },
 
-  { id:"steroid_conv", cat:"Endocrine", icon:"", title:"Corticosteroid Conversion",
+  { id:"steroid_conv", cat:"Endocrine", onc:1, icon:"", title:"Corticosteroid Conversion",
     desc:"Glucocorticoid dose equivalence (anti-inflammatory potency).",
     inputs:[
       { id:"drug", label:"Current glucocorticoid", type:"select", opts:[
@@ -1684,7 +1684,7 @@
       return { v:pred, u:"mg prednisolone-equiv", i:"≈ "+hc+" mg hydrocortisone or "+dex+" mg dexamethasone (anti-inflammatory equivalence). Does not account for mineralocorticoid effect or duration of action; taper and stress-dosing per clinical context." };
     } },
 
-  { id:"mme", cat:"General", icon:"", title:"Morphine Milligram Equivalents (MME/day)",
+  { id:"mme", cat:"General", onc:1, icon:"", title:"Morphine Milligram Equivalents (MME/day)",
     desc:"Converts an oral opioid to daily oral morphine equivalents.",
     inputs:[
       { id:"drug", label:"Opioid (oral)", type:"select", opts:[
@@ -2091,7 +2091,7 @@
       return { v:g, u:"(1–5)", i:txt+". Higher is better; often dichotomised as favourable (4–5) vs unfavourable (1–3). Ref: Jennett & Bond, Lancet 1975." };
     } },
 
-  { id:"anc", cat:"Haematology", icon:"", title:"Absolute Neutrophil Count (ANC)",
+  { id:"anc", cat:"Haematology", onc:1, icon:"", title:"Absolute Neutrophil Count (ANC)",
     desc:"Neutrophil count and neutropenia grading.",
     inputs:[
       { id:"wbc", label:"White cell count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -2392,6 +2392,234 @@
       var s=Number(v.site)+Number(v.pain)+Number(v.lesion)+Number(v.size);
       var b=s>=9?"Impending fracture — prophylactic fixation generally recommended":s===8?"Borderline — consider fixation":"Lower risk — radiotherapy/observation may be appropriate";
       return { v:s, u:"points", i:b+". Ref: Mirels, Clin Orthop Relat Res 1989." };
+    } },
+
+  { id:"nccn_ipi", cat:"Oncology", icon:"", title:"NCCN-IPI (DLBCL, rituximab era)",
+    desc:"Enhanced International Prognostic Index for diffuse large B-cell lymphoma.",
+    inputs:[
+      { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"≤ 40 years"},{v:"1",t:"> 40 to 60"},{v:"2",t:"> 60 to 75"},{v:"3",t:"> 75 years"}] },
+      { id:"ldh", label:"LDH ratio (measured ÷ upper limit normal)", type:"select", opts:[{v:"0",t:"≤ 1"},{v:"1",t:"> 1 to 3"},{v:"2",t:"> 3"}] },
+      { id:"stage", label:"Ann Arbor stage III-IV", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"extra", label:"Extranodal disease in marrow, CNS, liver/GI tract or lung", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ecog", label:"ECOG performance status ≥ 2", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.age)+Number(v.ldh)+Number(v.stage)+Number(v.extra)+Number(v.ecog);
+      var b=s<=1?"Low":s<=3?"Low-intermediate":s<=5?"High-intermediate":"High";
+      return { v:s, u:"/8", i:b+" risk. Groups: 0-1 low, 2-3 low-intermediate, 4-5 high-intermediate, 6-8 high. Ref: Zhou et al (NCCN-IPI), Blood 2014." };
+    } },
+
+  { id:"r_ipi", cat:"Oncology", icon:"", title:"R-IPI (Revised IPI, DLBCL)",
+    desc:"Revised IPI in rituximab-treated diffuse large B-cell lymphoma.",
+    inputs:[
+      { id:"age", label:"Age > 60 years", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ldh", label:"LDH > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ecog", label:"ECOG performance status ≥ 2", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"stage", label:"Ann Arbor stage III-IV", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"extra", label:"Extranodal sites > 1", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.age)+Number(v.ldh)+Number(v.ecog)+Number(v.stage)+Number(v.extra);
+      var b=s===0?"Very good (0 factors)":s<=2?"Good (1-2 factors)":"Poor (3-5 factors)";
+      return { v:s, u:"/5", i:b+". Ref: Sehn et al, Blood 2007." };
+    } },
+
+  { id:"npi_breast", cat:"Oncology", icon:"", title:"Nottingham Prognostic Index (Breast)",
+    desc:"Prognosis after primary operable breast cancer.",
+    inputs:[
+      { id:"size", label:"Invasive tumour size", type:"number", unit:"cm", step:"0.1" },
+      { id:"grade", label:"Histological grade", type:"select", opts:[{v:"1",t:"Grade 1"},{v:"2",t:"Grade 2"},{v:"3",t:"Grade 3"}] },
+      { id:"nodes", label:"Lymph node stage", type:"select", opts:[{v:"1",t:"No nodes involved"},{v:"2",t:"1-3 nodes"},{v:"3",t:"≥ 4 nodes"}] }
+    ],
+    compute:function(v){
+      if(!ok(v.size)||v.size<=0) return ERR;
+      var npi=0.2*v.size+Number(v.grade)+Number(v.nodes);
+      var b=npi<=3.4?"Good prognostic group":npi<=5.4?"Moderate prognostic group":"Poor prognostic group";
+      return { v:Math.round(npi*100)/100, u:"", i:b+". NPI = 0.2 × size(cm) + grade + nodal stage. Ref: Galea et al, Breast Cancer Res Treat 1992." };
+    } },
+
+  { id:"mgps", cat:"Oncology", icon:"", title:"Modified Glasgow Prognostic Score (mGPS)",
+    desc:"Inflammation-based prognostic score across solid tumours.",
+    inputs:[
+      { id:"crp", label:"C-reactive protein", type:"number", unit:"mg/L", step:"0.1" },
+      { id:"alb", label:"Serum albumin", type:"number", unit:"g/L", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.crp)||!ok(v.alb)||v.crp<0||v.alb<=0) return ERR;
+      var s=(v.crp<=10)?0:(v.alb>=35?1:2);
+      var b=s===0?"Good prognostic group":s===1?"Intermediate prognostic group":"Poor prognostic group";
+      return { v:s, u:"/2", i:b+". CRP ≤10 = 0; CRP >10 with albumin ≥35 g/L = 1; CRP >10 with albumin <35 g/L = 2. Ref: McMillan, Cancer Treat Rev 2013." };
+    } },
+
+  { id:"psadt", cat:"Oncology", icon:"", title:"PSA Doubling Time",
+    desc:"Rate of PSA rise from two measurements (prostate cancer).",
+    inputs:[
+      { id:"psa1", label:"First PSA", type:"number", unit:"ng/mL", step:"0.01" },
+      { id:"psa2", label:"Second PSA (later)", type:"number", unit:"ng/mL", step:"0.01" },
+      { id:"months", label:"Months between measurements", type:"number", unit:"months", step:"0.1" }
+    ],
+    compute:function(v){
+      if(!ok(v.psa1)||!ok(v.psa2)||!ok(v.months)||v.psa1<=0||v.psa2<=0||v.months<=0) return ERR;
+      if(v.psa2<=v.psa1) return { v:"—", u:"", i:"PSA is not rising between these two values, so a doubling time cannot be computed. Use serial values with PSA2 > PSA1." };
+      var dt=Math.log(2)*v.months/Math.log(v.psa2/v.psa1);
+      var b=dt<3?"Rapid rise (< 3 months) — associated with higher risk":dt<12?"Intermediate":"Slower rise";
+      return { v:Math.round(dt*10)/10, u:"months", i:b+". PSADT = ln(2) × interval ÷ ln(PSA2/PSA1). Two points only; more measurements improve accuracy. Ref: standard PSA kinetics (Pound, JAMA 1999)." };
+    } },
+
+  { id:"bed_eqd2", cat:"Oncology", icon:"", title:"BED and EQD2 (Radiotherapy)",
+    desc:"Biological Effective Dose and Equivalent Dose in 2-Gy fractions.",
+    inputs:[
+      { id:"n", label:"Number of fractions", type:"number", unit:"", step:"1" },
+      { id:"d", label:"Dose per fraction", type:"number", unit:"Gy", step:"0.1" },
+      { id:"ab", label:"α/β ratio", type:"number", unit:"Gy", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.n)||!ok(v.d)||!ok(v.ab)||v.n<=0||v.d<=0||v.ab<=0) return ERR;
+      var D=v.n*v.d;
+      var bed=D*(1+v.d/v.ab);
+      var eqd2=bed/(1+2/v.ab);
+      return { v:Math.round(eqd2*100)/100, u:"Gy EQD2", i:"BED = "+(Math.round(bed*100)/100)+" Gy; EQD2 = "+(Math.round(eqd2*100)/100)+" Gy (α/β "+v.ab+"). Typical α/β ~10 (early/tumour), ~3 (late). Ref: Fowler, Br J Radiol 1989." };
+    } },
+
+  { id:"cll_ipi", cat:"Oncology", icon:"", title:"CLL-IPI (Chronic Lymphocytic Leukaemia)",
+    desc:"Prognostic index for chronic lymphocytic leukaemia.",
+    inputs:[
+      { id:"tp53", label:"TP53 disrupted (del17p or TP53 mutation)", type:"select", opts:[{v:"0",t:"No"},{v:"4",t:"Yes"}] },
+      { id:"ighv", label:"IGHV unmutated", type:"select", opts:[{v:"0",t:"No (mutated)"},{v:"2",t:"Yes (unmutated)"}] },
+      { id:"b2m", label:"Serum beta-2 microglobulin > 3.5 mg/L", type:"select", opts:[{v:"0",t:"No"},{v:"2",t:"Yes"}] },
+      { id:"stage", label:"Clinical stage Rai I-IV or Binet B-C", type:"select", opts:[{v:"0",t:"No (Rai 0 / Binet A)"},{v:"1",t:"Yes"}] },
+      { id:"age", label:"Age > 65 years", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.tp53)+Number(v.ighv)+Number(v.b2m)+Number(v.stage)+Number(v.age);
+      var b=s<=1?"Low risk":s<=3?"Intermediate risk":s<=6?"High risk":"Very high risk";
+      return { v:s, u:"/10", i:b+". Groups: 0-1 low, 2-3 intermediate, 4-6 high, 7-10 very high. Ref: International CLL-IPI working group, Lancet Oncol 2016." };
+    } },
+  { id:"cns_ipi", cat:"Oncology", icon:"", title:"CNS-IPI (CNS Relapse Risk, DLBCL)",
+    desc:"Risk of central nervous system relapse in diffuse large B-cell lymphoma.",
+    inputs:[
+      { id:"age", label:"Age > 60 years", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ldh", label:"LDH > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ecog", label:"ECOG performance status ≥ 2", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"stage", label:"Ann Arbor stage III-IV", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"extra", label:"Extranodal sites > 1", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"kidney", label:"Kidney or adrenal gland involvement", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.age)+Number(v.ldh)+Number(v.ecog)+Number(v.stage)+Number(v.extra)+Number(v.kidney);
+      var b=s<=1?"Low risk":s<=3?"Intermediate risk":"High risk";
+      return { v:s, u:"/6", i:b+". Approx 2-year CNS relapse: low 0.6%, intermediate 3.4%, high 10.2%. Groups: 0-1 low, 2-3 intermediate, 4-6 high. Ref: Schmitz et al, J Clin Oncol 2016." };
+    } },
+  { id:"imdc_rcc", cat:"Oncology", icon:"", title:"IMDC (Heng) Risk, Metastatic RCC",
+    desc:"Prognostic risk in metastatic renal cell carcinoma on systemic therapy.",
+    inputs:[
+      { id:"kps", label:"Karnofsky performance status < 80%", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"time", label:"Time from diagnosis to systemic therapy < 1 year", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"hb", label:"Haemoglobin < lower limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ca", label:"Corrected calcium > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"neut", label:"Neutrophils > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"plt", label:"Platelets > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.kps)+Number(v.time)+Number(v.hb)+Number(v.ca)+Number(v.neut)+Number(v.plt);
+      var b=s===0?"Favourable risk":s<=2?"Intermediate risk":"Poor risk";
+      return { v:s, u:"/6", i:b+". Groups: 0 favourable, 1-2 intermediate, 3-6 poor. Ref: Heng et al, J Clin Oncol 2009." };
+    } },
+  { id:"mskcc_rcc", cat:"Oncology", icon:"", title:"MSKCC (Motzer) Risk, Metastatic RCC",
+    desc:"Memorial Sloan Kettering prognostic risk in metastatic renal cell carcinoma.",
+    inputs:[
+      { id:"kps", label:"Karnofsky performance status < 80%", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ldh", label:"LDH > 1.5 × upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"hb", label:"Haemoglobin < lower limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"ca", label:"Corrected calcium > 10 mg/dL", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"time", label:"Time from diagnosis to treatment < 1 year", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.kps)+Number(v.ldh)+Number(v.hb)+Number(v.ca)+Number(v.time);
+      var b=s===0?"Favourable risk":s<=2?"Intermediate risk":"Poor risk";
+      return { v:s, u:"/5", i:b+". Groups: 0 favourable, 1-2 intermediate, 3 or more poor. Ref: Motzer et al, J Clin Oncol 1999 and 2002." };
+    } },
+  { id:"fong_crc", cat:"Oncology", icon:"", title:"Fong Clinical Risk Score (Colorectal Liver Mets)",
+    desc:"Recurrence risk after resection of colorectal liver metastases.",
+    inputs:[
+      { id:"node", label:"Node-positive primary tumour", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"dfi", label:"Disease-free interval < 12 months", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"num", label:"More than 1 hepatic tumour", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"size", label:"Largest tumour > 5 cm", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"cea", label:"CEA > 200 ng/mL", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.node)+Number(v.dfi)+Number(v.num)+Number(v.size)+Number(v.cea);
+      var b=s<=2?"Lower-risk group (0-2)":"Higher-risk group (3-5)";
+      return { v:s, u:"/5", i:b+". Higher score predicts worse recurrence-free and overall survival; 0 best, 5 worst. Ref: Fong et al, Ann Surg 1999." };
+    } },
+  { id:"igcccg", cat:"Oncology", icon:"", title:"IGCCCG Risk (Metastatic Germ Cell Tumour)",
+    desc:"Good, intermediate or poor risk classification for metastatic germ cell tumour.",
+    inputs:[
+      { id:"hist", label:"Histology", type:"select", opts:[{v:"0",t:"Non-seminoma"},{v:"1",t:"Seminoma"}] },
+      { id:"primary", label:"Primary site", type:"select", opts:[{v:"0",t:"Gonadal or retroperitoneal"},{v:"1",t:"Mediastinal"}] },
+      { id:"npvm", label:"Non-pulmonary visceral metastases (liver, bone, brain)", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"afp", label:"AFP", type:"number", unit:"ng/mL", step:"1" },
+      { id:"hcg", label:"beta-hCG", type:"number", unit:"IU/L", step:"1" },
+      { id:"ldh", label:"LDH (multiple of upper limit normal)", type:"number", unit:"× ULN", step:"0.1" }
+    ],
+    compute:function(v){
+      var sem=Number(v.hist)===1, med=Number(v.primary)===1, npvm=Number(v.npvm)===1;
+      var grp;
+      if(sem){
+        grp=npvm?"Intermediate":"Good";
+        return { v:grp+" risk", u:"", i:grp+" risk (seminoma). Good = any primary site with no non-pulmonary visceral metastases; intermediate = non-pulmonary visceral metastases present. Seminoma has no poor-risk category and markers do not change the group. Ref: IGCCCG, J Clin Oncol 1997." };
+      }
+      if(!ok(v.afp)||!ok(v.hcg)||!ok(v.ldh)) return ERR;
+      var mk=(v.afp<1000&&v.hcg<5000&&v.ldh<1.5)?"good":(v.afp>10000||v.hcg>50000||v.ldh>10)?"poor":"intermediate";
+      if(med||npvm||mk==="poor") grp="Poor";
+      else if(mk==="intermediate") grp="Intermediate";
+      else grp="Good";
+      return { v:grp+" risk", u:"", i:grp+" risk (non-seminoma). Markers: good = AFP <1000 and hCG <5000 and LDH <1.5×; poor = AFP >10000 or hCG >50000 or LDH >10×; else intermediate. Poor also if mediastinal primary or non-pulmonary visceral metastases. Ref: IGCCCG, J Clin Oncol 1997." };
+    } },
+  { id:"mgus_mayo", cat:"Oncology", icon:"", title:"MGUS Risk (Mayo)",
+    desc:"Risk of progression of MGUS to myeloma or a related malignancy.",
+    inputs:[
+      { id:"mprot", label:"Serum M-protein", type:"number", unit:"g/dL", step:"0.1" },
+      { id:"iso", label:"Immunoglobulin isotype", type:"select", opts:[{v:"0",t:"IgG"},{v:"1",t:"Non-IgG (IgA or IgM)"}] },
+      { id:"flc", label:"Serum free light-chain ratio (kappa/lambda)", type:"number", unit:"", step:"0.01" }
+    ],
+    compute:function(v){
+      if(!ok(v.mprot)||!ok(v.flc)||v.mprot<0||v.flc<=0) return ERR;
+      var s=(v.mprot>=1.5?1:0)+Number(v.iso)+((v.flc<0.26||v.flc>1.65)?1:0);
+      var lbl=["Low risk (0 factors)","Low-intermediate risk (1 factor)","Intermediate risk (2 factors)","High risk (3 factors)"][s];
+      var risk20=["about 5%","about 21%","about 37%","about 58%"][s];
+      return { v:s, u:"/3", i:lbl+". Factors: M-protein ≥ 1.5 g/dL, non-IgG isotype, abnormal FLC ratio (<0.26 or >1.65). Approx 20-year progression risk "+risk20+". Ref: Rajkumar et al, Blood 2005." };
+    } },
+  { id:"manchester_sclc", cat:"Oncology", icon:"", title:"Manchester Score (Small-Cell Lung Cancer)",
+    desc:"Prognostic groups for 2-year survival in small-cell lung cancer.",
+    inputs:[
+      { id:"ldh", label:"LDH > upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"na", label:"Serum sodium < lower limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"alp", label:"Alkaline phosphatase > 1.5 × upper limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"hco3", label:"Serum bicarbonate < lower limit normal", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] },
+      { id:"stage", label:"Extensive-stage disease", type:"select", opts:[{v:"0",t:"No (limited)"},{v:"1",t:"Yes (extensive)"}] },
+      { id:"kps", label:"Karnofsky performance status ≤ 50", type:"select", opts:[{v:"0",t:"No"},{v:"1",t:"Yes"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.ldh)+Number(v.na)+Number(v.alp)+Number(v.hco3)+Number(v.stage)+Number(v.kps);
+      var b=s<=1?"Good prognostic group":s<=3?"Intermediate prognostic group":"Poor prognostic group";
+      return { v:s, u:"/6", i:b+". Groups: 0-1 good, 2-3 intermediate, 4-6 poor (declining 2-year survival). Ref: Cerny et al, Br J Cancer 1987." };
+    } },
+  { id:"sins", cat:"Oncology", icon:"", title:"SINS (Spinal Instability Neoplastic Score)",
+    desc:"Assessment of spinal instability from neoplastic disease.",
+    inputs:[
+      { id:"loc", label:"Location", type:"select", opts:[{v:"3",t:"Junctional (occiput-C2, C7-T2, T11-L1, L5-S1)"},{v:"2",t:"Mobile spine (C3-C6, L2-L4)"},{v:"1",t:"Semirigid (T3-T10)"},{v:"0",t:"Rigid (S2-S5)"}] },
+      { id:"pain", label:"Pain", type:"select", opts:[{v:"3",t:"Mechanical or positional"},{v:"1",t:"Occasional pain, not mechanical"},{v:"0",t:"Pain-free lesion"}] },
+      { id:"bone", label:"Bone lesion quality", type:"select", opts:[{v:"2",t:"Lytic"},{v:"1",t:"Mixed lytic and blastic"},{v:"0",t:"Blastic"}] },
+      { id:"align", label:"Radiographic spinal alignment", type:"select", opts:[{v:"4",t:"Subluxation or translation"},{v:"2",t:"De novo deformity (kyphosis or scoliosis)"},{v:"0",t:"Normal alignment"}] },
+      { id:"collapse", label:"Vertebral body collapse", type:"select", opts:[{v:"3",t:"More than 50% collapse"},{v:"2",t:"Less than 50% collapse"},{v:"1",t:"No collapse but more than 50% body involved"},{v:"0",t:"None of the above"}] },
+      { id:"postlat", label:"Posterolateral involvement of spinal elements", type:"select", opts:[{v:"3",t:"Bilateral"},{v:"1",t:"Unilateral"},{v:"0",t:"None"}] }
+    ],
+    compute:function(v){
+      var s=Number(v.loc)+Number(v.pain)+Number(v.bone)+Number(v.align)+Number(v.collapse)+Number(v.postlat);
+      var b=s<=6?"Stable":s<=12?"Indeterminate (potentially unstable)":"Unstable";
+      return { v:s, u:"/18", i:b+". Groups: 0-6 stable, 7-12 indeterminate, 13-18 unstable; scores 7-18 warrant surgical consultation. Ref: Fisher et al (SOSG), Spine 2010." };
     } },
 
   { id:"epds", cat:"Psychiatry", icon:"", title:"Edinburgh Postnatal Depression Scale (EPDS)",
@@ -2838,7 +3066,7 @@
       return { v:s, u:"/7", i:b+". Ref: Bendapudi, Lancet Haematol 2017 (PLASMIC)." };
     } },
 
-  { id:"cfs", cat:"General", icon:"", title:"Clinical Frailty Scale — Level Interpreter",
+  { id:"cfs", cat:"General", onc:1, icon:"", title:"Clinical Frailty Scale — Level Interpreter",
     desc:"Assign the CFS level (1–9) using the official Rockwood scale (© Dalhousie University; free for non-commercial clinical use), then enter it here for outcome context.",
     inputs:[
       { id:"level", label:"CFS level (1–9)", type:"number", step:"1" }
@@ -2916,7 +3144,7 @@
       return { v:s, u:"/40", i:b+" of COPD on health status. Ref: Jones, Eur Respir J 2009 (CAT)." };
     } },
 
-  { id:"ibw", cat:"General", icon:"", title:"Ideal Body Weight (Devine)",
+  { id:"ibw", cat:"General", onc:1, icon:"", title:"Ideal Body Weight (Devine)",
     desc:"Ideal body weight for drug dosing and ventilation.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -2930,7 +3158,7 @@
       return { v:r1(ibw), u:"kg", i:"Devine ideal body weight. Adjusted body weight (obesity) = IBW + 0.4×(actual − IBW). Ref: Devine 1974." };
     } },
 
-  { id:"adjbw", cat:"General", icon:"", title:"Adjusted Body Weight",
+  { id:"adjbw", cat:"General", onc:1, icon:"", title:"Adjusted Body Weight",
     desc:"Adjusted body weight in obesity (from ideal and actual weight).",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -3103,7 +3331,7 @@
       return { v: pos?"Positive screen ("+n+"/13)":"Negative screen ("+n+"/13)", u:"", i:(pos?"Suggestive of a bipolar spectrum disorder — warrants clinical evaluation":"Below the MDQ threshold (needs ≥7 symptoms, same time period, and at least moderate problems)")+". A screen, not a diagnosis. Ref: Hirschfeld, Am J Psychiatry 2000 (MDQ)." };
     } },
 
-  { id:"eutos", cat:"Haematology", icon:"", title:"EUTOS Score (Chronic Myeloid Leukaemia)",
+  { id:"eutos", cat:"Haematology", onc:1, icon:"", title:"EUTOS Score (Chronic Myeloid Leukaemia)",
     desc:"Predicts response and progression-free survival in CML at diagnosis.",
     inputs:[
       { id:"baso", label:"Peripheral blood basophils", type:"number", unit:"%", step:"0.1" },
@@ -3372,7 +3600,7 @@
       return { v:r1(abi*100)/100, u:"", i:b+". Ref: standard vascular assessment." };
     } },
 
-  { id:"pack_years", cat:"General", icon:"", title:"Smoking Pack-Years",
+  { id:"pack_years", cat:"General", onc:1, icon:"", title:"Smoking Pack-Years",
     desc:"Cumulative cigarette exposure.",
     inputs:[
       { id:"cpd", label:"Cigarettes per day", type:"number", step:"1" },
@@ -3452,7 +3680,7 @@
       return { v:s, u:"points", i:"Approximate non-operative hospital mortality "+mort+" (also depends on diagnosis). Ref: Knaus, Crit Care Med 1985 (APACHE II)." };
     } },
 
-  { id:"ipss_r", cat:"Haematology", icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
+  { id:"ipss_r", cat:"Haematology", onc:1, icon:"", title:"IPSS-R (Myelodysplastic Syndrome)",
     desc:"Revised International Prognostic Scoring System for MDS.",
     inputs:[
       { id:"cyto", label:"Cytogenetic risk group", type:"select", opts:[{v:"0",t:"Very good"},{v:"1",t:"Good"},{v:"2",t:"Intermediate"},{v:"3",t:"Poor"},{v:"4",t:"Very poor"}] },
@@ -3648,7 +3876,7 @@
       return { v:r1(s*100)/100, u:"", i:band+". Ref: Sokal, Blood 1984." };
     } },
 
-  { id:"nlr", cat:"Haematology", icon:"", title:"Neutrophil-Lymphocyte Ratio (NLR)",
+  { id:"nlr", cat:"Haematology", onc:1, icon:"", title:"Neutrophil-Lymphocyte Ratio (NLR)",
     desc:"Marker of systemic inflammation and physiological stress.",
     inputs:[
       { id:"neut", label:"Neutrophil count", type:"number", unit:"×10⁹/L", step:"0.1" },
@@ -4156,7 +4384,7 @@
       return { v:"Grade "+v.grade, u:"", i:m[v.grade]+". Ref: House & Brackmann 1985." };
     } },
 
-  { id:"rai", cat:"Haematology", icon:"", title:"Rai Staging (Chronic Lymphocytic Leukaemia)",
+  { id:"rai", cat:"Haematology", onc:1, icon:"", title:"Rai Staging (Chronic Lymphocytic Leukaemia)",
     desc:"Prognostic staging of CLL (lymphocytosis assumed present).",
     inputs:[
       { id:"nodes", label:"Lymphadenopathy", type:"check" },
@@ -4170,7 +4398,7 @@
       return { v:"Stage "+stage, u:"", i:risk+" (lymphocytosis assumed; stage set by the highest feature present). Ref: Rai, Blood 1975." };
     } },
 
-  { id:"binet", cat:"Haematology", icon:"", title:"Binet Staging (Chronic Lymphocytic Leukaemia)",
+  { id:"binet", cat:"Haematology", onc:1, icon:"", title:"Binet Staging (Chronic Lymphocytic Leukaemia)",
     desc:"European prognostic staging of CLL.",
     inputs:[
       { id:"areas", label:"Involved lymphoid areas (of 5: cervical, axillary, inguinal nodes, spleen, liver)", type:"number", step:"1" },
@@ -4800,7 +5028,7 @@
       return { v:s, u:"/9", i:b+". Modified NUTRIC. Ref: Heyland, Crit Care 2011; Rahman, Clin Nutr 2016." };
     } },
 
-  { id:"lbm", cat:"General", icon:"", title:"Lean Body Mass (Boer)",
+  { id:"lbm", cat:"General", onc:1, icon:"", title:"Lean Body Mass (Boer)",
     desc:"Estimated lean body mass from weight, height and sex.",
     inputs:[
       { id:"sex", label:"Sex", type:"select", opts:[{v:"m",t:"Male"},{v:"f",t:"Female"}] },
@@ -5036,7 +5264,7 @@
       return { v:r1(c), u:"g/L", i:"≈ "+pct+" g/100 mL (%). Forensic approximation only; individual clearance varies widely. One UK unit ≈ 8 g ethanol. Ref: Widmark 1932." };
     } },
 
-  { id:"dipss", cat:"Haematology", icon:"", title:"DIPSS (Myelofibrosis Prognosis)",
+  { id:"dipss", cat:"Haematology", onc:1, icon:"", title:"DIPSS (Myelofibrosis Prognosis)",
     desc:"Dynamic International Prognostic Scoring System for primary myelofibrosis.",
     inputs:[
       { id:"age", label:"Age >65 (+1)", type:"check" },
@@ -5051,7 +5279,7 @@
       return { v:s, u:"/6", i:b+" (anaemia is weighted 2 points in DIPSS). Ref: Passamonti, Blood 2010 (DIPSS)." };
     } },
 
-  { id:"r_iss", cat:"Haematology", icon:"", title:"R-ISS (Revised ISS, Myeloma)",
+  { id:"r_iss", cat:"Haematology", onc:1, icon:"", title:"R-ISS (Revised ISS, Myeloma)",
     desc:"Revised International Staging System for multiple myeloma.",
     inputs:[
       { id:"iss", label:"ISS stage", type:"select", opts:[{v:"1",t:"Stage I (β2M <3.5 mg/L & albumin ≥35 g/L)"},{v:"2",t:"Stage II"},{v:"3",t:"Stage III (β2M >5.5 mg/L)"}] },
@@ -5169,7 +5397,7 @@
       return { v:Math.round(change*100)/100, u:"mmol/L per L", i:"Estimated "+dir+" in serum sodium per litre infused (TBW ≈ "+r1(tbw)+" L). Correct hyponatraemia slowly — generally no more than ~8–10 mmol/L in 24 h. Ref: Adrogué & Madias, N Engl J Med 2000." };
     } },
 
-  { id:"measured_crcl", cat:"Renal", icon:"", title:"Measured Creatinine Clearance",
+  { id:"measured_crcl", cat:"Renal", onc:1, icon:"", title:"Measured Creatinine Clearance",
     desc:"Creatinine clearance from a timed urine collection.",
     inputs:[
       { id:"ucr", label:"Urine creatinine", type:"number", unit:"µmol/L", step:"1" },
@@ -5338,7 +5566,7 @@
       return { v:r0(fli), u:"/100", i:b+" (triglycerides in mg/dL). Ref: Bedogni, BMC Gastroenterol 2006 (FLI)." };
     } },
 
-  { id:"ipi", cat:"Haematology", icon:"", title:"IPI (Lymphoma Prognostic Index)",
+  { id:"ipi", cat:"Haematology", onc:1, icon:"", title:"IPI (Lymphoma Prognostic Index)",
     desc:"International Prognostic Index for aggressive non-Hodgkin lymphoma.",
     inputs:[
       { id:"age", label:"Age >60 years", type:"check" },
@@ -5353,7 +5581,7 @@
       return { v:s, u:"/5", i:b+". Ref: International NHL Prognostic Factors Project, N Engl J Med 1993." };
     } },
 
-  { id:"flipi", cat:"Haematology", icon:"", title:"FLIPI (Follicular Lymphoma IPI)",
+  { id:"flipi", cat:"Haematology", onc:1, icon:"", title:"FLIPI (Follicular Lymphoma IPI)",
     desc:"Prognostic index for follicular lymphoma.",
     inputs:[
       { id:"age", label:"Age ≥60 years", type:"check" },
@@ -5368,7 +5596,7 @@
       return { v:s, u:"/5", i:b+". Ref: Solal-Céligny, Blood 2004 (FLIPI)." };
     } },
 
-  { id:"mipi", cat:"Haematology", icon:"", title:"Simplified MIPI (Mantle Cell Lymphoma)",
+  { id:"mipi", cat:"Haematology", onc:1, icon:"", title:"Simplified MIPI (Mantle Cell Lymphoma)",
     desc:"Simplified Mantle Cell Lymphoma International Prognostic Index.",
     inputs:[
       { id:"age", label:"Age", type:"select", opts:[{v:"0",t:"<50"},{v:"1",t:"50–59"},{v:"2",t:"60–69"},{v:"3",t:"≥70"}] },
@@ -6335,7 +6563,7 @@
       return { v:Math.round(epvs*100)/100, u:"mL/g", i:b+" (Duarte ratio; higher values track congestion in heart failure). Ref: Duarte K, et al. JACC Heart Fail 2015 (ePVS)." };
     } },
 
-  { id:"frail_scale", cat:"General", icon:"", title:"FRAIL Scale",
+  { id:"frail_scale", cat:"General", onc:1, icon:"", title:"FRAIL Scale",
     desc:"Rapid frailty screen (Fatigue, Resistance, Ambulation, Illnesses, Loss of weight).",
     inputs:[
       { id:"fatigue", label:"Fatigue (tired most of the time)", type:"check" },
@@ -6361,7 +6589,7 @@
       return { v:r1(v.secs), u:"s", i:b+" (a common fall-risk cut-off is ≥12–13.5 s). Ref: Podsiadlo D, Richardson S. J Am Geriatr Soc 1991 (TUG)." };
     } },
 
-  { id:"prisma7", cat:"General", icon:"", title:"PRISMA-7 (Frailty Screen)",
+  { id:"prisma7", cat:"General", onc:1, icon:"", title:"PRISMA-7 (Frailty Screen)",
     desc:"Seven-item screen for frailty/disability in older adults.",
     inputs:[
       { id:"age85", label:"Age >85 years", type:"check" },
@@ -7186,7 +7414,7 @@
 
   function matches(c){
     if(favOnly && !isWatchFav(c.id)) return false;      // Starred chip → favourites-only (spans all categories)
-    if(!favOnly && activeCat && c.cat!==activeCat) return false;
+    if(!favOnly && activeCat && c.cat!==activeCat && !(activeCat==="Oncology" && c.onc)) return false;   // onc:1 calcs are surfaced under Oncology too (they keep their home category)
     if(!q) return true;
     return (c.title+" "+c.desc+" "+c.cat+" "+c.id+" "+(c.kw||[]).join(" ")).toLowerCase().indexOf(q)>=0;
   }
@@ -7209,7 +7437,12 @@
     // group by category preserving order
     var html="";
     CAT_ORDER.forEach(function(cat){
-      var inCat=list.filter(function(c){return c.cat===cat;});
+      // When browsing Oncology, group the onc:1 cross-tagged calcs under the Oncology header (and keep
+      // them out of their home-category header for that view). Every other view is unchanged.
+      var inCat=list.filter(function(c){
+        if(activeCat==="Oncology") return (cat==="Oncology") ? (c.cat==="Oncology"||c.onc) : (c.cat===cat && !c.onc);
+        return c.cat===cat;
+      });
       if(!inCat.length) return;
       html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
       inCat.forEach(function(c){

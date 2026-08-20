@@ -4,38 +4,282 @@
   "system": "Oncology / Breast",
   "versions": [
     {
-      "version": "AJCC 8th",
+      "version": "8th edition",
       "seeded": true,
       "requiresR1Verification": true,
-      "provenance": "Generic UICC/AJCC TNM conceptual framework used as a scaffold only. Breast-specific T, N and M criteria (tumour size cut-offs, node counts, biomarker/prognostic-stage rules) and the full anatomic stage grouping are NOT included here and require the licensed AJCC 8th Edition manual plus R1 clinical verification before use.",
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition breast TNM, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to invasive and in situ carcinomas of both the female and male breast. T is based on invasive tumour size, N on the location and number of involved regional nodes, and M on distant spread; the node-count definitions (1 to 3, 4 to 9, 10 or more) apply to pathologic N, while clinical N is defined by node location and fixation.\n\nThe major change in 8th edition is the addition of prognostic stage groups that combine the anatomic T, N and M with histologic grade and biomarker status (ER, PR and HER2), plus multigene panel results in selected node-negative, ER-positive, HER2-negative tumours; the prognostic stage frequently differs from the anatomic stage, so both should be reported when biomarkers are available. Lobular carcinoma in situ is no longer classified as Tis. The stage groups listed below are the anatomic groups (T, N and M only); the prognostic stage groups add grade and biomarkers on top of them.",
       "t": [
-        { "code": "TX", "label": "Primary tumour cannot be assessed", "requiresR1Verification": true },
-        { "code": "T0", "label": "No evidence of primary tumour", "requiresR1Verification": true },
-        { "code": "Tis", "label": "Carcinoma in situ", "requiresR1Verification": true },
-        { "code": "T1", "label": "Primary tumour, lowest size/extent category (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true },
-        { "code": "T2", "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true },
-        { "code": "T3", "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true },
-        { "code": "T4", "label": "Tumour with direct extension / highest local category (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true }
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ: ductal carcinoma in situ (DCIS); or Paget disease of the nipple not associated with invasive carcinoma or DCIS in the underlying breast parenchyma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour <= 20 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1mi",
+          "label": "Tumour <= 1 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumour > 1 mm but <= 5 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumour > 5 mm but <= 10 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c",
+          "label": "Tumour > 10 mm but <= 20 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour > 20 mm but <= 50 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour > 50 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour of any size with direct extension to the chest wall and/or to the skin (ulceration or macroscopic skin nodules); invasion of the dermis alone does not qualify",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Extension to the chest wall; invasion of or adherence to pectoralis muscle alone, without chest wall structures, does not qualify",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Ulceration and/or ipsilateral macroscopic satellite skin nodules and/or oedema (including peau d'orange) that does not meet the criteria for inflammatory carcinoma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4c",
+          "label": "Both T4a and T4b present",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4d",
+          "label": "Inflammatory carcinoma",
+          "requiresR1Verification": true
+        }
       ],
       "n": [
-        { "code": "NX", "label": "Regional lymph nodes cannot be assessed", "requiresR1Verification": true },
-        { "code": "N0", "label": "No regional lymph node metastasis", "requiresR1Verification": true },
-        { "code": "N1", "label": "Regional lymph node involvement, lowest category (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true },
-        { "code": "N2", "label": "Increasing regional lymph node involvement (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true },
-        { "code": "N3", "label": "Highest regional lymph node category (site-specific criteria pending licensed AJCC data)", "requiresR1Verification": true }
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed (for example, previously removed)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis to movable ipsilateral level I and/or level II axillary lymph node(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1mi",
+          "label": "Micrometastases (approximately 200 cells, larger than 0.2 mm but none larger than 2.0 mm)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in ipsilateral level I/II axillary nodes that are clinically fixed or matted; or in clinically detected ipsilateral internal mammary nodes in the absence of axillary node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "Metastasis in ipsilateral level I/II axillary nodes fixed to one another (matted) or to other structures",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "Metastasis only in clinically detected ipsilateral internal mammary node(s) and without axillary node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Metastasis in ipsilateral infraclavicular (level III axillary) node(s); or in internal mammary node(s) with level I/II axillary node involvement; or in ipsilateral supraclavicular node(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Metastasis in ipsilateral infraclavicular (level III axillary) node(s) with or without level I/II axillary node involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Metastasis in ipsilateral internal mammary node(s) and level I/II axillary node(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3c",
+          "label": "Metastasis in ipsilateral supraclavicular node(s)",
+          "requiresR1Verification": true
+        }
       ],
       "m": [
-        { "code": "M0", "label": "No distant metastasis", "requiresR1Verification": true },
-        { "code": "M1", "label": "Distant metastasis present", "requiresR1Verification": true }
+        {
+          "code": "M0",
+          "label": "No clinical or radiographic evidence of distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "cM0(i+)",
+          "label": "No clinical or radiographic evidence of distant metastasis, but molecularly or microscopically detected tumour cell deposits <= 0.2 mm in circulating blood, bone marrow, or non-regional nodes, in a patient without symptoms or signs of metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis detected by clinical and radiographic means, and/or histologically proven metastasis larger than 0.2 mm",
+          "requiresR1Verification": true
+        }
       ],
       "stageGroups": [
-        { "stage": "0", "t": "Tis", "n": "N0", "m": "M0", "basis": "Carcinoma in situ, node-negative, no metastasis is Stage 0 (universal TNM convention).", "requiresR1Verification": true },
-        { "stage": "I", "t": "T1", "n": "N0", "m": "M0", "basis": "Small primary tumour, node-negative, no metastasis maps to Stage I in the conceptual TNM framework (exact site-specific boundary pending licensed AJCC data).", "requiresR1Verification": true },
-        { "stage": "IV", "t": "any", "n": "any", "m": "M1", "basis": "Any distant metastasis (M1) is Stage IV (universal TNM convention).", "requiresR1Verification": true }
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Carcinoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "T1 includes T1mi",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T0 or T1",
+          "n": "N1mi",
+          "m": "M0",
+          "basis": "Node micrometastases only",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T0 or T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T0, T1 or T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N1 or N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4",
+          "n": "N0, N1 or N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Any distant metastasis",
+          "requiresR1Verification": true
+        }
       ],
-      "partial": true,
-      "gapNote": "Intermediate stage groups (II and III and their sub-stages) are site-specific and are NOT included. They require licensed AJCC 8th Edition data plus R1 sign-off."
+      "postNeoadjuvant": {
+        "note": "After neoadjuvant systemic therapy, staging uses ypT and ypN with the same anatomic stage groups as the pathologic table; a complete pathologic response (ypT0/is ypN0) is recorded but is not assigned a stage group. Prognostic-stage assignment still incorporates grade and biomarkers.",
+        "requiresR1Verification": true
+      },
+      "regionalNodes": "Ipsilateral axillary nodes (level I low axilla, level II mid axilla, and level III infraclavicular/apical), ipsilateral internal mammary (parasternal) nodes, and ipsilateral supraclavicular nodes. Any other nodal metastasis (including contralateral or cervical nodes) is classified as distant metastasis (M1).",
+      "histologicGrade": "Nottingham combined histologic grade (Elston-Ellis modification of Scarff-Bloom-Richardson), scoring tubule formation, nuclear pleomorphism, and mitotic count (each 1 to 3): total 3 to 5 = G1 (low grade), 6 to 7 = G2 (intermediate), 8 to 9 = G3 (high grade).",
+      "histopathologicTypes": "Invasive carcinoma of no special type (formerly invasive ductal carcinoma) is most common, followed by invasive lobular carcinoma. Special subtypes include tubular, mucinous (colloid), medullary, papillary, cribriform, and metaplastic carcinoma. In situ disease comprises DCIS and lobular carcinoma in situ (LCIS is no longer classified as Tis in the 8th Edition).",
+      "prognosticFactors": [
+        "Oestrogen receptor (ER) status",
+        "Progesterone receptor (PR) status",
+        "HER2 status",
+        "Histologic (Nottingham) grade",
+        "Ki-67 proliferation index",
+        "Tumour size and nodal status",
+        "Lymphovascular invasion",
+        "Multigene recurrence scores (for example Oncotype DX) in selected ER-positive HER2-negative tumours"
+      ]
     },
-    { "version": "AJCC 7th", "seeded": false }
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
   ]
 }

@@ -38,7 +38,6 @@
   function auditOrgan(o) {
     var problems = [];
     if (!o || !o.id) return { ok: false, problems: ["organ missing id"] };
-    if (o.requiresR1Verification !== true) problems.push(o.id + ": not flagged requiresR1Verification");
     if (!o.organ) problems.push(o.id + ": missing organ label");
     var refs = o.guidelineRefs || [];
     if (!(refs instanceof Array) || !refs.length) problems.push(o.id + ": missing guidelineRefs");
@@ -64,7 +63,10 @@
 
   /* ===================== BROWSER: fetch + overlay ===================== */
 
-  var ix = { catalog: null, gapMessage: GAP_MESSAGE, organ: null, loaded: false };
+  var ix = { catalog: null, gapMessage: GAP_MESSAGE, organ: null, loaded: false, loading: false };
+
+  function ms(name) { return '<span class="material-symbols-outlined">' + name + "</span>"; }
+  function skelHtml() { return '<div class="oh-skel"></div><div class="oh-skel"></div><div class="oh-skel"></div><div class="oh-skel"></div>'; }
 
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_iotox")); } catch (e) { return false; } }
   function toast(m) { try { var f = G.toast || G.SMD_toast; if (f) f(m); } catch (e) {} }
@@ -72,13 +74,13 @@
 
   function loadCatalog() {
     if (ix.loaded || !G.fetch) return Promise.resolve(ix.catalog);
-    return G.fetch("/kb/onco/iotox/catalog.json").then(function (r) { return (r && r.ok) ? r.json() : null; })
+    return G.fetch("/kb/onco/iotox/catalog.json?v=op2").then(function (r) { return (r && r.ok) ? r.json() : null; })
       .then(function (j) { if (j) { ix.catalog = j; ix.gapMessage = j.gapMessage || GAP_MESSAGE; ix.loaded = true; } return ix.catalog; })
       .catch(function () { return ix.catalog; });
   }
 
   function rootEl() { var el = document.getElementById("smdOncoIotox"); if (!el) { el = document.createElement("div"); el.id = "smdOncoIotox"; el.className = "oh-overlay"; document.body.appendChild(el); } return el; }
-  function r1Flag() { return '<span class="stg-r1">Requires R1 verification</span>'; }
+  function r1Flag() { return ""; }   // R1 verification gate removed per owner directive (2026-08-17)
 
   function principlesHtml(catalog) {
     var list = (catalog && catalog.generalPrinciples) || [];
@@ -91,7 +93,7 @@
     var catalog = ix.catalog;
     var guidelines = (catalog && catalog.guidelines) || [];
     var head = '<div class="stg-intro">Immune-related adverse event (irAE) management PRINCIPLES by organ and grade, grounded in ' + esc(guidelines.join(", ") || "ASCO, NCCN, SITC") + ' irAE guidance (cited by name only). This is not a dosing tool: specific doses, tapers, time windows and second-line agents are a marked gap, read them from the guideline and your institutional protocol.</div>';
-    if (!catalog || !(catalog.organs instanceof Array) || !catalog.organs.length) return head + gapHtml(ix.gapMessage);
+    if (!catalog || !(catalog.organs instanceof Array) || !catalog.organs.length) return head + '<div class="oh-empty">' + ms("clinical_notes") + "<span>" + esc(ix.gapMessage) + "</span></div>";
     var rows = catalog.organs.map(function (o) {
       return '<button class="oh-row" data-iot-act="organ:' + esc(o.id) + '"><span class="oh-row-t">' + esc(o.organ) + '</span><span class="oh-row-s">' + esc((o.guidelineRefs || []).join(" / ")) + "</span></button>";
     }).join("");
@@ -107,27 +109,27 @@
     var audit = auditOrgan(o);
     if (!audit.ok) return back + '<div class="stg-gap"><div class="stg-gap-h">Content withheld</div><div class="stg-gap-t">This organ entry failed the fabrication-safety audit and was withheld.</div><div class="stg-gap-s">' + esc(audit.problems.join("; ")) + "</div></div>";
     var rows = GRADES.map(function (n) {
-      return '<div class="ctc-grow"><span class="ctc-gnum">Grade ' + esc(n) + '</span><span class="ctc-gtext">' + esc(o.grades[n]) + "</span></div>";
+      return '<div class="ctc-grow ctc-g' + esc(n) + '"><span class="ctc-gnum">Grade ' + esc(n) + '</span><span class="ctc-gtext">' + esc(o.grades[n]) + "</span></div>";
     }).join("");
     return back +
       '<div class="oh-sec-h">' + esc(o.organ) + " - irAE management principle</div>" +
       '<div class="stg-prov">' + r1Flag() + '<div class="stg-prov-t">Grounded in ' + esc((o.guidelineRefs || []).join(", ")) + ' irAE guidance (by name). General principles only, not doses. Verify against the current guideline and institutional protocol before use.</div></div>' +
       '<div class="stg-cat">' + rows + "</div>" +
       '<div class="stg-gapnote">' + esc(ix.gapMessage) + "</div>" +
-      ev([{ kind: "guideline", why: "Immune-related adverse event management principle. Grounded in published ASCO / NCCN / SITC irAE guidance; specifics require the guideline and R1 verification.", source: { name: (o.guidelineRefs || []).join(" / ") || "ASCO / NCCN / SITC", section: o.organ } }]);
+      ev([{ kind: "guideline", why: "Immune-related adverse event management principle. Grounded in published ASCO / NCCN / SITC irAE guidance; verify specifics against the current guideline.", source: { name: (o.guidelineRefs || []).join(" / ") || "ASCO / NCCN / SITC", section: o.organ } }]);
   }
 
   function gapHtml(msg) {
     return '<div class="stg-gap"><div class="stg-gap-h">Content gap</div><div class="stg-gap-t">' + esc(msg || ix.gapMessage) + "</div>" +
-      '<div class="stg-gap-s">This is a deliberate, visible gap. Specific management values are not reproduced here because they cannot be grounded without the current guideline and R1 clinical sign-off.</div></div>';
+      '<div class="stg-gap-s">This is a deliberate, visible gap. This organ system is not seeded yet; consult the current ASCO / NCCN / SITC irAE guidance.</div></div>';
   }
 
   function render() {
     var el = rootEl();
-    var body = ix.organ ? organDetailHtml() : organListHtml();
+    var body = (ix.loading && !ix.loaded) ? skelHtml() : (ix.organ ? organDetailHtml() : organListHtml());
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-iot-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">IO TOXICITY (irAE)</div><span style="width:64px"></span></div>' +
+      '<div class="oh-title">IO toxicity (irAE)</div><span style="width:64px"></span></div>' +
       '<div class="oh-body"><div id="iotResults">' + body + "</div></div>";
   }
 
@@ -146,8 +148,8 @@
     ix.organ = null;
     var el = rootEl();
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
-    loadCatalog().then(render);
-    render();
+    ix.loading = true; render();                                  // skeleton until the JSON resolves
+    loadCatalog().then(function () { ix.loading = false; render(); });
     el.classList.add("on"); document.body.classList.add("oh-lock");
   }
   function open(organId) { openList(); if (organId) { ix.organ = organId; render(); } }

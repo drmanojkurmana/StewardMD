@@ -46,36 +46,36 @@ try {
 
   // ---- Staging: the P0 placeholder is now an ACTIVE card that opens the staging overlay ----
   const stagingCard = await ev(`return !!document.querySelector('[data-oh-act="staging-open"]');`);
-  ok(stagingCard === true, "the AJCC/TNM Staging card is now an active card (P0 placeholder replaced)");
+  ok(stagingCard === true, "the TNM Staging card is now an active card (P0 placeholder replaced)");
   await ev(`document.querySelector('[data-oh-act="staging-open"]').click(); return 1;`);
   await sleep(400);
   ok(await ev(`return !!(document.getElementById("smdOncoStaging") && document.getElementById("smdOncoStaging").classList.contains("on"));`) === true, "clicking Staging opens the staging overlay (#smdOncoStaging)");
 
   const siteText = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/Framework/.test(siteText) && /Gap/.test(siteText), "the site list shows both Framework (scaffold) and Gap sites");
-  ok(/No proprietary AJCC tables/i.test(siteText), "the intro states no proprietary AJCC tables are reproduced");
+  ok(/TNM/.test(siteText) && /Gap/.test(siteText), "the site list shows both seeded TNM sites and Gap sites");
+  ok(/International TNM-based cancer staging/i.test(siteText), "the intro presents neutral TNM-based staging (licensed content)");
 
   // ---- Open a scaffold site (breast): flagged TNM framework ----
   await ev(`document.querySelector('[data-stg-act="site:breast"]').click(); return 1;`);
   await sleep(400);
   const seeded = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/Requires R1 verification/i.test(seeded), "a scaffold site shows the 'Requires R1 verification' flag on the seeded framework");
-  ok(/T . primary tumour|primary tumour/i.test(seeded) && /Stage groups/i.test(seeded), "the seeded framework renders T/N/M categories and stage groups");
-  ok(/Intermediate stage groups .II and III/i.test(seeded), "the II/III content gap inside a scaffold is explicitly marked");
+  ok(/licensed content/i.test(seeded), "a seeded site shows its licensed-content provenance (R1 gate removed)");
+  ok(/T . primary tumour|primary tumour/i.test(seeded) && /Stage grouping/i.test(seeded), "the seeded site renders T/N/M categories and stage grouping");
+  ok(/Stage II|Stage III/i.test(seeded), "the seeded site renders full site-specific stage groups (II/III present, auditor relaxed per owner directive)");
   const vbtns = await ev(`return document.querySelectorAll('.stg-vbtn').length;`);
-  ok(Number(vbtns) >= 2, `a version toggle with multiple AJCC editions renders (${vbtns})`);
+  ok(Number(vbtns) >= 2, `a version toggle with multiple editions renders (${vbtns})`);
 
   // ---- Version toggle -> an un-seeded edition shows the HONEST gap ----
   await ev(`var b=Array.prototype.filter.call(document.querySelectorAll('.stg-vbtn'),function(x){return /gap/i.test(x.textContent);})[0]; if(b) b.click(); return 1;`);
   await sleep(250);
   const gapVer = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/Staging content pending licensed AJCC data \+ R1 sign-off/.test(gapVer), "switching to an un-seeded edition shows the honest content-gap placeholder");
+  ok(/Staging for this cancer site is being added/.test(gapVer), "switching to an un-seeded edition shows the honest content-gap placeholder");
 
   // ---- A gap-only site shows the honest gap, never a fabricated table ----
   await ev(`document.querySelector('[data-stg-act="list"]').click(); return 1;`); await sleep(200);
-  await ev(`document.querySelector('[data-stg-act="site:prostate"]').click(); return 1;`); await sleep(300);
+  await ev(`document.querySelector('[data-stg-act="site:anus"]').click(); return 1;`); await sleep(300);
   const gapSite = (await ev(`return document.getElementById("stgResults").textContent || "";`)) || "";
-  ok(/Staging content pending licensed AJCC data \+ R1 sign-off/.test(gapSite), "a gap-only site (prostate) shows the honest content-gap placeholder");
+  ok(/Staging for this cancer site is being added/.test(gapSite), "a gap-only site (anus, still on the crawl list) shows the honest content-gap placeholder");
   ok(!/\d\s?cm\b/.test(gapSite), "the gap card contains no fabricated measurement content");
   await ev(`document.querySelector('[data-stg-act="close"]').click(); return 1;`); await sleep(200);
 

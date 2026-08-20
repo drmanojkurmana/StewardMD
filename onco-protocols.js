@@ -44,7 +44,7 @@
     plan = plan || {};
     var tmpl = plan.lockedTemplate || {};
     var drugs = tmpl.drugs || [];
-    var cycles = Number(plan.plannedCycles) || 0;
+    var cycles = Math.min(60, Number(plan.plannedCycles) || 0);  // ceiling guards a bad plannedCycles
     var doses = (plan.confirmedDoses && plan.confirmedDoses.length) ? plan.confirmedDoses : (plan.calculatedDoses || []);
     var doseByDrug = {};
     doses.forEach(function (d) { if (d && d.drugId) doseByDrug[d.drugId] = d; });

@@ -43,6 +43,7 @@
     if (input.name != null && String(input.name).length > 120) errors.name = "Name is too long.";
     var dischargeMs = input.dischargeMs != null ? Number(input.dischargeMs) : NaN;
     if (input.dischargeMs != null && !isFinite(dischargeMs)) errors.dischargeMs = "Invalid discharge date.";
+    var firstFollowupMs = input.firstFollowupMs != null ? Number(input.firstFollowupMs) : NaN;   // optional doctor-set first check-in
     var ok = Object.keys(errors).length === 0;
     return {
       ok: ok, errors: errors,
@@ -50,6 +51,7 @@
         pathwayId: input.pathwayId, phone: digits, name: (input.name || "").trim() || undefined,
         mrn: (input.mrn || "").trim() || undefined,
         dischargeMs: isFinite(dischargeMs) ? dischargeMs : undefined,
+        firstFollowupMs: isFinite(firstFollowupMs) ? firstFollowupMs : undefined,
         lang: input.lang || "en", tz: input.tz || undefined
       } : null
     };
@@ -428,6 +430,15 @@
       var phone = h("input", { type: "tel", inputmode: "numeric", placeholder: "Patient mobile number", value: form.phone, oninput: function (e) { form.phone = e.target.value; } });
       var name = h("input", { type: "text", placeholder: "Patient name (optional)", value: form.name, oninput: function (e) { form.name = e.target.value; } });
       var disc = h("input", { type: "date", value: (form.dischargeMs ? isoDate(form.dischargeMs) : ""), oninput: function (e) { form.dischargeMs = e.target.value ? new Date(e.target.value).getTime() : ""; } });
+      // "When to follow up" — the doctor sets when the FIRST check-in fires; the rest of the pathway follows
+      // at its normal spacing. Empty = the pathway's own timing (unchanged default).
+      var fuOpts = [{ v: "", t: "Pathway default" }, { v: "3", t: "In 3 days" }, { v: "7", t: "In 1 week" }, { v: "14", t: "In 2 weeks" }, { v: "30", t: "In 1 month" }];
+      var fu = h("select", { onchange: function (e) {
+        var n = parseInt(e.target.value, 10);
+        if (!n) { form.firstFollowupMs = ""; return; }
+        var base = (G.Date && Date.now) ? Date.now() : 0;
+        form.firstFollowupMs = (base - (base % 86400000)) + n * 86400000 + 9 * 3600000;   // ~09:00, N days out
+      } }, fuOpts.map(function (o) { return h("option", { value: o.v, text: o.t }); }));
       var langOpts = null; try { langOpts = (G.FollowCareI18n && FollowCareI18n.languages()) || null; } catch (e) {}
       var lang = h("select", { onchange: function (e) { form.lang = e.target.value; } },
         [h("option", { value: "auto", text: "Auto-detect (adapts to the language the patient speaks)" })].concat(
@@ -475,7 +486,7 @@
       });
       var langLabel = "Patient's language";
       try { if (detectedLang && detectedLang !== "en" && G.FollowCareI18n) langLabel += " (auto-detected: " + FollowCareI18n.langNative(detectedLang) + ")"; } catch (e) {}
-      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field(langLabel, lang)].forEach(function (f) { body.appendChild(f); });
+      [field("Recovery pathway", sel), field("Mobile number", phone), field("Patient name", name), field("Discharge date", disc), field("First follow-up", fu), field(langLabel, lang)].forEach(function (f) { body.appendChild(f); });
       body.appendChild(minor); body.appendChild(guardianField); body.appendChild(consent);
       body.appendChild(errBox); body.appendChild(submit); body.appendChild(out);
     });
