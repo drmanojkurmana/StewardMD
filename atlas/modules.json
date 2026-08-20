@@ -1,0 +1,317 @@
+{
+ "version": 1,
+ "_credits": "Curated, render-safe lines shown ONLY on the atlas info screen. Empty while slices are locally generated placeholders needing no credit. The pipeline writes the required line here when real imagery lands (e.g. Visible Human).",
+ "credits": [
+  "Courtesy of the U.S. National Library of Medicine",
+  "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292"
+ ],
+ "modules": [
+  {
+   "id": "ct-abdomen-coronal",
+   "title": "Abdomen - CT",
+   "subtitle": "Coronal",
+   "region": "Abdomen",
+   "modality": "CT",
+   "slices": 23,
+   "thumb": "/atlas/ct-abdomen-coronal/t/012.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-abdomen-sagittal",
+   "title": "Abdomen - CT",
+   "subtitle": "Sagittal",
+   "region": "Abdomen",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-abdomen-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-abdomen-axial",
+   "title": "Abdomen - CT",
+   "subtitle": "Axial",
+   "region": "Abdomen",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-abdomen-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "brain-mri-axial-t1",
+   "title": "Brain - MRI",
+   "subtitle": "Axial - T1 (cadaver, unlabelled)",
+   "region": "Brain",
+   "modality": "MRI",
+   "slices": 24,
+   "thumb": "/atlas/brain-mri-axial-t1/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine",
+   "notice": "Images only - this cadaver series carries NO labels. It is kept as the source for hand-authored labelling; for a labelled brain use the living 7 T modules."
+  },
+  {
+   "id": "mri-brain-axial",
+   "title": "Brain - MRI",
+   "subtitle": "Axial - living 7T T1",
+   "region": "Brain",
+   "modality": "MRI",
+   "slices": 24,
+   "thumb": "/atlas/mri-brain-axial/t/013.webp",
+   "credit": "",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+  },
+  {
+   "id": "mri-brain-coronal",
+   "title": "Brain - MRI",
+   "subtitle": "Coronal - living 7T T1",
+   "region": "Brain",
+   "modality": "MRI",
+   "slices": 24,
+   "thumb": "/atlas/mri-brain-coronal/t/013.webp",
+   "credit": "",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+  },
+  {
+   "id": "mri-brain-sagittal",
+   "title": "Brain - MRI",
+   "subtitle": "Sagittal - living 7T T1",
+   "region": "Brain",
+   "modality": "MRI",
+   "slices": 24,
+   "thumb": "/atlas/mri-brain-sagittal/t/013.webp",
+   "credit": "",
+   "notice": "One healthy volunteer, scanned at 7 tesla for research - not a clinical scan. Brightness varies strongly across these images: that is a 7 T coil artefact, so the temporal lobes and cerebellum look darker here than they would at 1.5 T or 3 T. Compare shapes and positions, not brightness. Labels were placed by automated segmentation (SynthSeg) with no human correction, cover whole structures only - there are no named gyri, sulci, lobes or white-matter tracts, so the corpus callosum and internal capsule are unlabelled - and left and right are deliberately not asserted."
+  },
+  {
+   "id": "ct-head-coronal",
+   "title": "Skull and sinuses - CT",
+   "subtitle": "Coronal",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-head-coronal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-head-sagittal",
+   "title": "Skull and sinuses - CT",
+   "subtitle": "Sagittal",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-head-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-head-axial",
+   "title": "Skull and sinuses - CT",
+   "subtitle": "Axial",
+   "region": "Head and neck",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-head-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-foot-axial",
+   "title": "Ankle and foot - CT",
+   "subtitle": "Axial",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-foot-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-foot-sagittal",
+   "title": "Ankle and foot - CT",
+   "subtitle": "Sagittal - single foot",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-foot-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-foot-coronal",
+   "title": "Foot - CT",
+   "subtitle": "Coronal",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-foot-coronal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-knee-axial",
+   "title": "Knee and leg - CT",
+   "subtitle": "Axial",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-knee-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-knee-coronal",
+   "title": "Knee and leg - CT",
+   "subtitle": "Coronal",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 22,
+   "thumb": "/atlas/ct-knee-coronal/t/012.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-knee-sagittal",
+   "title": "Knee and leg - CT",
+   "subtitle": "Sagittal - single leg",
+   "region": "Lower limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-knee-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-pelvis-axial",
+   "title": "Pelvis - CT",
+   "subtitle": "Axial",
+   "region": "Pelvis",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-pelvis-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-pelvis-coronal",
+   "title": "Pelvis - CT",
+   "subtitle": "Coronal",
+   "region": "Pelvis",
+   "modality": "CT",
+   "slices": 21,
+   "thumb": "/atlas/ct-pelvis-coronal/t/011.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-pelvis-sagittal",
+   "title": "Pelvis - CT",
+   "subtitle": "Sagittal",
+   "region": "Pelvis",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-pelvis-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-thorax-coronal",
+   "title": "Thorax - CT",
+   "subtitle": "Coronal",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 20,
+   "thumb": "/atlas/ct-thorax-coronal/t/011.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-thorax-sagittal",
+   "title": "Thorax - CT",
+   "subtitle": "Sagittal",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-thorax-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-thorax-axial",
+   "title": "Thorax - CT",
+   "subtitle": "Axial",
+   "region": "Thorax",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-thorax-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-live-torso-axial",
+   "title": "Torso soft tissue - CT",
+   "subtitle": "Axial - living patient",
+   "region": "Torso",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-live-torso-axial/t/013.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+  },
+  {
+   "id": "ct-live-torso-coronal",
+   "title": "Torso soft tissue - CT",
+   "subtitle": "Coronal - living patient",
+   "region": "Torso",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-live-torso-coronal/t/013.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+  },
+  {
+   "id": "ct-live-torso-sagittal",
+   "title": "Torso soft tissue - CT",
+   "subtitle": "Sagittal - living patient",
+   "region": "Torso",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-live-torso-sagittal/t/013.webp",
+   "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+   "notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+  },
+  {
+   "id": "ct-hand-coronal",
+   "title": "Hand - CT",
+   "subtitle": "Coronal",
+   "region": "Upper limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-hand-coronal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-hand-axial",
+   "title": "Hand and wrist - CT",
+   "subtitle": "Axial",
+   "region": "Upper limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-hand-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-hand-sagittal",
+   "title": "Hand and wrist - CT",
+   "subtitle": "Sagittal",
+   "region": "Upper limb",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-hand-sagittal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-wholebody-axial",
+   "title": "Whole body - CT",
+   "subtitle": "Axial - vertex to feet",
+   "region": "Whole body",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-wholebody-axial/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  },
+  {
+   "id": "ct-wholebody-coronal",
+   "title": "Whole body - CT",
+   "subtitle": "Coronal - vertex to feet",
+   "region": "Whole body",
+   "modality": "CT",
+   "slices": 24,
+   "thumb": "/atlas/ct-wholebody-coronal/t/013.webp",
+   "credit": "Courtesy of the U.S. National Library of Medicine"
+  }
+ ]
+}

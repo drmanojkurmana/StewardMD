@@ -1,0 +1,85 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US)",
+  "_geometry": "Auto pins from TotalSegmentator `total` (Apache-2.0 code and weights) run on Visible Human frozenCT slices 1801-1960, at NATIVE 0.9375 mm on a 62 GB VM rather than the 3 mm downsample the 8 GB laptop forced on the abdomen. Every pin still needs clinician sign-off.",
+
+  "_why_bones_only": "MEASURED, not assumed. Inside each mask: sacrum median 270 HU with 64.6% of voxels >200 HU, femur 278-315 HU / 64-71%, hip 300-314 HU / 68-71% — these masks sit on real cortical bone. Every MUSCLE mask failed the same test: gluteus maximus/medius/minimus and iliopsoas all read median -13 to -21 HU with 32-40% of their voxels below -30 HU, i.e. substantially fat, not the +20 to +70 HU a muscle must read. So no muscle is claimed here and all six gluteal classes plus both iliopsoas are mapped to null below. A missing label is a gap; a wrong label teaches wrong anatomy.",
+
+  "_why_no_sides": "TotalSegmentator's left/right assignment is demonstrably unreliable on this volume: gluteus minimus came back 848 voxels on one side against 36293 on the other (43x), gluteus medius 6439 against 49070 (7.6x), hip 386189 against 246374 (1.57x). The same asymmetry signature sank the SynthSeg brain attempt. Since this atlas asserts NO side anywhere, left and right are COLLAPSED into one structure, which removes the error rather than shipping it. One pin per connected component still gives the reviewer both femurs and both hip bones.",
+
+  "_why_sacrum_is_sparse": "The sacrum mask covers only slices 1801-1821 (21 of 160) — TotalSegmentator did not follow it inferiorly. What it did find is genuine bone (64.6% >200 HU), so those pins are kept; the rest is simply absent. Under-segmentation, not mislabelling. vertebrae_L5 and vertebrae_S1 came back empty and are mapped anyway so a future run picks them up.",
+
+  "_why_no_levels": "No sacral segment (S1..S5) is numbered. Position alone cannot number them and this crop has no reliable superior landmark.",
+
+  "categories": {
+    "bone": { "label": "Bone", "color": "#ffffff" }
+  },
+
+  "structures": {
+    "pelvis": {
+      "name": "Pelvis",
+      "category": "bone"
+    },
+    "hip-bone": {
+      "name": "Hip bone",
+      "category": "bone",
+      "parent": "pelvis",
+      "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis."
+    },
+    "sacrum": {
+      "name": "Sacrum",
+      "category": "bone",
+      "parent": "pelvis",
+      "definition": "The sacrum is a large triangular bone formed by the union of five vertebrae, wedged between the two hip bones."
+    },
+    "femur": {
+      "name": "Femur",
+      "category": "bone",
+      "parent": "pelvis",
+      "definition": "The femur is the longest and strongest bone in the skeleton."
+    }
+  },
+
+  "model_values": {
+    "25": "sacrum",
+    "26": "vertebrae_S1",
+    "27": "vertebrae_L5",
+    "75": "femur_left",
+    "76": "femur_right",
+    "77": "hip_left",
+    "78": "hip_right",
+    "80": "gluteus_maximus_left",
+    "81": "gluteus_maximus_right",
+    "82": "gluteus_medius_left",
+    "83": "gluteus_medius_right",
+    "84": "gluteus_minimus_left",
+    "85": "gluteus_minimus_right",
+    "88": "iliopsoas_left",
+    "89": "iliopsoas_right"
+  },
+
+  "model_labels": {
+    "sacrum": "sacrum",
+    "vertebrae_S1": "sacrum",
+    "vertebrae_L5": null,
+    "femur_left": "femur",
+    "femur_right": "femur",
+    "hip_left": "hip-bone",
+    "hip_right": "hip-bone",
+    "gluteus_maximus_left": null,
+    "gluteus_maximus_right": null,
+    "gluteus_medius_left": null,
+    "gluteus_medius_right": null,
+    "gluteus_minimus_left": null,
+    "gluteus_minimus_right": null,
+    "iliopsoas_left": null,
+    "iliopsoas_right": null
+  },
+
+  "_why_caps": "One structure appears many times in one cut: an axial pelvis shows both hip bones and both femoral heads, a coronal cut shows the whole iliac wing broken into several components. Identical repeated labels saturate both gutters and teach nothing after the first two, so each is capped.",
+  "max_pins_per_slice": {
+    "hip-bone": 3,
+    "femur": 2,
+    "sacrum": 2
+  }
+}

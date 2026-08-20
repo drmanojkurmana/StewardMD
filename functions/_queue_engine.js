@@ -128,6 +128,9 @@ export async function setStatus(env, session, ticketId, to, actor) {
   const sessPatch = {};
   if (to === "called" && !t.calledAt) patch.calledAt = now();
   if (to === "in_consultation") { patch.consultStartAt = now(); if (!t.calledAt) patch.calledAt = now(); sessPatch.currentTicketId = ticketId; }
+  // Send back to the waiting hall (doctor/nurse reroute from the consulting room): free the room, drop the
+  // partial-consult timer so it is not counted, and re-queue the patient (recompute reassigns position/ETA).
+  if (from === "in_consultation" && to === "waiting") { patch.consultStartAt = 0; patch.calledAt = 0; if (session.currentTicketId === ticketId) sessPatch.currentTicketId = ""; }
   let learn = null;
   if (from === "in_consultation" && (to === "completed" || to === "investigation" || to === "followup" || to === "cancelled")) {
     patch.consultEndAt = now();

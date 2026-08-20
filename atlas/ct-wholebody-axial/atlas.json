@@ -1,0 +1,557 @@
+{
+ "id": "ct-wholebody-axial",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Auto pins from TotalSegmentator `total` (Apache-2.0 code and weights) on the FULL Visible Human frozenCT stack: slices 1006-2882, 1877 contiguous 1 mm slices, vertex to feet, verified gap-free. Run on a 62 GB VM; this volume is ~984 MB and cannot be segmented on the 8 GB laptop at all.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "cervical-vertebra": {
+   "name": "Cervical vertebra",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The cervical vertebrae are the smallest of the movable vertebrae and bear foramina in their transverse processes."
+  },
+  "clavicle": {
+   "name": "Clavicle",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The clavicle forms the anterior portion of the shoulder girdle."
+  },
+  "hip-bone": {
+   "name": "Hip bone",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The hip bone is a large flattened irregular bone formed by the ilium, ischium and pubis."
+  },
+  "lumbar-vertebra": {
+   "name": "Lumbar vertebra",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column."
+  },
+  "rib": {
+   "name": "Rib",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The ribs are elastic arches of bone forming the greater part of the thoracic skeleton."
+  },
+  "skeleton": {
+   "name": "Skeleton",
+   "category": "bone"
+  },
+  "skull": {
+   "name": "Skull",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The skull is the skeleton of the head, comprising the cranium, which encloses the brain, and the mandible. Its bones are united by sutures except at the temporomandibular joint."
+  },
+  "sternum": {
+   "name": "Sternum",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The sternum is a flat narrow bone forming the middle of the anterior thoracic wall."
+  },
+  "thoracic-vertebra": {
+   "name": "Thoracic vertebra",
+   "category": "bone",
+   "parent": "skeleton",
+   "definition": "The thoracic vertebrae are distinguished by costal facets on the sides of their bodies."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-wholebody-axial/001.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-wholebody-axial/002.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "skull",
+     "x": 51.0,
+     "y": 17.8
+    },
+    {
+     "s": "skull",
+     "x": 51.3,
+     "y": 87.8
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-wholebody-axial/003.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 36.7,
+     "y": 51.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 61.7,
+     "y": 50.9
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 48.3,
+     "y": 63.4
+    },
+    {
+     "s": "skull",
+     "x": 49.9,
+     "y": 13.9
+    },
+    {
+     "s": "skull",
+     "x": 58.8,
+     "y": 29.0
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-wholebody-axial/004.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "cervical-vertebra",
+     "x": 44.6,
+     "y": 48.2
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 48.1,
+     "y": 45.5
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 55.6,
+     "y": 47.9
+    },
+    {
+     "s": "cervical-vertebra",
+     "x": 50.0,
+     "y": 52.9
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-wholebody-axial/005.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 43.8,
+     "y": 64.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 49.6,
+     "y": 54.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 49.6,
+     "y": 63.1
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 49.7,
+     "y": 65.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.9,
+     "y": 63.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 49.7,
+     "y": 67.4
+    },
+    {
+     "s": "clavicle",
+     "x": 38.7,
+     "y": 41.3
+    },
+    {
+     "s": "rib",
+     "x": 59.7,
+     "y": 63.2
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-wholebody-axial/006.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "thoracic-vertebra",
+     "x": 44.6,
+     "y": 69.9
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 47.9,
+     "y": 65.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 48.2,
+     "y": 58.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 48.0,
+     "y": 67.2
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 50.2,
+     "y": 70.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 52.4,
+     "y": 67.2
+    },
+    {
+     "s": "rib",
+     "x": 36.9,
+     "y": 29.1
+    },
+    {
+     "s": "rib",
+     "x": 41.0,
+     "y": 70.0
+    },
+    {
+     "s": "rib",
+     "x": 38.9,
+     "y": 70.3
+    },
+    {
+     "s": "rib",
+     "x": 65.1,
+     "y": 69.2
+    },
+    {
+     "s": "sternum",
+     "x": 51.6,
+     "y": 28.0
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-wholebody-axial/007.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 50.0,
+     "y": 59.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.3,
+     "y": 58.4
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 53.2,
+     "y": 59.8
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 54.4,
+     "y": 62.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 48.8,
+     "y": 66.6
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 51.8,
+     "y": 69.3
+    },
+    {
+     "s": "thoracic-vertebra",
+     "x": 53.6,
+     "y": 66.5
+    },
+    {
+     "s": "rib",
+     "x": 33.3,
+     "y": 25.9
+    },
+    {
+     "s": "rib",
+     "x": 70.6,
+     "y": 24.6
+    },
+    {
+     "s": "sternum",
+     "x": 50.0,
+     "y": 22.6
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-wholebody-axial/008.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.9,
+     "y": 59.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 49.7,
+     "y": 64.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 53.6,
+     "y": 64.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 51.7,
+     "y": 65.6
+    },
+    {
+     "s": "rib",
+     "x": 70.2,
+     "y": 68.2
+    },
+    {
+     "s": "rib",
+     "x": 79.0,
+     "y": 59.3
+    },
+    {
+     "s": "rib",
+     "x": 33.1,
+     "y": 68.9
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-wholebody-axial/009.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 53.8,
+     "y": 51.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 54.6,
+     "y": 61.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 51.4,
+     "y": 62.6
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-wholebody-axial/010.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "lumbar-vertebra",
+     "x": 54.2,
+     "y": 49.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 43.6,
+     "y": 54.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 48.3,
+     "y": 54.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 51.9,
+     "y": 63.2
+    },
+    {
+     "s": "hip-bone",
+     "x": 35.9,
+     "y": 57.2
+    },
+    {
+     "s": "hip-bone",
+     "x": 67.6,
+     "y": 59.1
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-wholebody-axial/011.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "hip-bone",
+     "x": 37.3,
+     "y": 55.5
+    },
+    {
+     "s": "hip-bone",
+     "x": 73.9,
+     "y": 43.6
+    },
+    {
+     "s": "hip-bone",
+     "x": 33.1,
+     "y": 50.5
+    },
+    {
+     "s": "hip-bone",
+     "x": 67.2,
+     "y": 54.1
+    },
+    {
+     "s": "skull",
+     "x": 29.9,
+     "y": 46.6
+    },
+    {
+     "s": "skull",
+     "x": 32.1,
+     "y": 48.2
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-wholebody-axial/012.webp",
+   "aspect": 1.1533,
+   "pins": [
+    {
+     "s": "hip-bone",
+     "x": 37.8,
+     "y": 58.3
+    },
+    {
+     "s": "hip-bone",
+     "x": 48.8,
+     "y": 40.2
+    },
+    {
+     "s": "hip-bone",
+     "x": 53.6,
+     "y": 39.8
+    },
+    {
+     "s": "hip-bone",
+     "x": 65.9,
+     "y": 56.0
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-wholebody-axial/013.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-wholebody-axial/014.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-wholebody-axial/015.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-wholebody-axial/016.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-wholebody-axial/017.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-wholebody-axial/018.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-wholebody-axial/019.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-wholebody-axial/020.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-wholebody-axial/021.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-wholebody-axial/022.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-wholebody-axial/023.webp",
+   "aspect": 1.1533,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-wholebody-axial/024.webp",
+   "aspect": 1.1533,
+   "pins": []
+  }
+ ]
+}

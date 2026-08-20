@@ -41,6 +41,7 @@ try {
     window.SMD_AI = window.SMD_AI || {};
     SMD_AI.setFlag = function(){};
     SMD_AI.explainGrounded = function(){ window.__mk.prov++; return Promise.resolve({ text: "## Overview\\nDKA is treated with fluids, insulin, and potassium repletion." }); };
+    SMD_AI.explainGroundedStream = function(p,o,onDelta){ window.__mk.prov++; try{onDelta&&onDelta("stub");}catch(e){} return Promise.resolve({ text: "## Overview\\nDKA is treated with fluids, insulin, and potassium repletion." }); };
     window.StewardRAG = { ready:function(){return Promise.resolve();}, buildPackage:function(){ window.__mk.retr++; return Promise.resolve({ retrieved:[], grounding:[], reasoning:{differential:[]} }); } };
     return 1;`);
   // open Ask AI

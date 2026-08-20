@@ -1,0 +1,67 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US) for `femur`, which already existed in this repo. The `tibia` and `fibula` entries were written for this module in the same register and are NOT presented as verbatim quotations from Gray's.",
+  "_geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_knee_ct.py on Visible Human frozenCT slices 2300-2470. Bone contrast is the one thing this frozen cadaver reproduces faithfully, so HU thresholding at 300 plus 3D connected components plus position is sufficient, and it is free.",
+
+  "_why_not_a_model": "The only model offering tibia, fibula and patella is TotalSegmentator's `appendicular_bones`, which sits in the package's own `commercial_models` register and calls sys.exit(1) without a licence key. VISTA3D / NV-Segment-CT was checked against its own vista3d/data/jsons/label_dict.json and has NO tibia, fibula or patella either — its skeleton stops at femur, hip, humerus, scapula, clavicula, skull, sternum, sacrum and vertebrae. So a classical pipeline was built rather than blocking the product or buying a licence.",
+
+  "_how_the_bones_are_told_apart": "Measured, not assumed. 3D connected components inside a leg mask over VHP 2300-2470 gave exactly six bones with no ambiguity: tibia 102074 and 99664 voxels spanning z 31-170 at |relx| 0.65, median 643-650 HU; distal femur 64958 and 61384 voxels spanning z 0-42 at |relx| 0.58, median 427-434 HU; fibula 14427 and 13708 voxels spanning z 49-170 at |relx| 0.80, median 791-834 HU. Z-EXTENT separates femur (superior, stops at the joint) from the leg bones (start at the joint, run to the bottom of the crop). SIZE separates tibia from fibula, a 7x ratio in both legs. LATERALITY is used only as a CHECK - the fibula must be the more lateral of the pair, and it passed on both sides - never to assert a side.",
+
+  "_the_arm_trap": "The cadaver's forearms and hands lie beside the thighs at this level. A naive 'body component over 4000 px' rule admits them, which is exactly how the whole-body run came to label an arm bone `femur` (its voxels sat at relx +0.82 to +0.97, hard against the body edge). Here the legs are taken as the TWO LARGEST components on every slice, which excludes forearms, hands and the freezing container.",
+
+  "_why_no_patella": "NOT RELIABLY AVAILABLE, and deliberately absent rather than approximated. At the knee the epiphyseal bone is trabecular under a thin cortex, so a 300 HU threshold fragments it: the femoral component breaks into 20-22 separate in-plane parts at its mid-slice, against 1 for the solid tibial shaft, and no patella survives as a component of its own above the 3000-voxel floor. Pointing a pin at a trabecular fragment and calling it a patella would be a fabricated label.",
+
+  "_the_patella_attempt_that_failed": "Worth recording because it nearly shipped. The 600 HU cortical threshold that made the FOOT tractable was tried here too, and it produced a candidate that looked convincing on three counts: a matched PAIR (5555 and 5523 voxels, within 1 percent of each other), 4.9 cm3 each against a textbook patella of 3-5 cm3, and a z-span (31-53) sitting exactly in the gap between where the femur ends (41) and the tibia begins (49). An intermediate check appeared to confirm it was anterior to the femur in 11 of 11 shared slices. That check was WRONG: it compared against component sets selected by approximate voxel count, and the helper silently returned extra components, so it measured the wrong masks. Re-tested properly against the femoral condyles at the same cortical density, slice by slice, the candidate is POSTERIOR to them in EVERY shared slice (candidate y 274-282 against condyle y 266-274). It is therefore not the patella - most likely the posterior condylar cortex or proximal tibial epiphysis. Three plausible agreements did not survive the one test that mattered. The patella stays unclaimed; it needs `appendicular_bones` under licence or hand-authoring.",
+
+  "_why_no_tarsals_metatarsals_phalanges": "Not attempted in this module. The foot needs its own crop and the same measurement-first treatment; the slices exist (VHP 2700-2882) and this is tracked as future work rather than silently omitted.",
+
+  "_why_no_sides": "No side is asserted, consistent with every other module. One pin per connected component still gives the reviewer both legs.",
+
+  "categories": {
+    "bone": { "label": "Bone", "color": "#ffffff" }
+  },
+
+  "structures": {
+    "lower-limb": {
+      "name": "Lower limb",
+      "category": "bone"
+    },
+    "femur": {
+      "name": "Femur",
+      "category": "bone",
+      "parent": "lower-limb",
+      "definition": "The femur is the longest and strongest bone in the skeleton."
+    },
+    "tibia": {
+      "name": "Tibia",
+      "category": "bone",
+      "parent": "lower-limb",
+      "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+    },
+    "fibula": {
+      "name": "Fibula",
+      "category": "bone",
+      "parent": "lower-limb",
+      "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+    }
+  },
+
+  "model_values": {
+    "1": "femur",
+    "2": "tibia",
+    "3": "fibula"
+  },
+
+  "model_labels": {
+    "femur": "femur",
+    "tibia": "tibia",
+    "fibula": "fibula"
+  },
+
+  "_why_caps": "Both legs are in every axial cut, so each bone appears twice. Two pins is the whole story; more only saturates the gutters.",
+  "max_pins_per_slice": {
+    "femur": 2,
+    "tibia": 2,
+    "fibula": 2
+  }
+}

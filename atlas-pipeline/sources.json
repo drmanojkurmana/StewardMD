@@ -1,0 +1,209 @@
+{
+  "_note": "Clearance register. verdict must be CLEAR before any pipeline stage may use a source. Verified 2026-08-17 against primary licence text. See docs/superpowers/specs/2026-08-17-anatomy-atlas-spec.md section 9.",
+  "_tier": "B+ : nothing named in the slice viewer or catalog; one credit line on the RadioAnatome info screen; third-party notices in Settings > Legal.",
+  "_commercial_status": "OWNER DETERMINATION 2026-08-19: StewardMD is NON-COMMERCIAL. This resolves the contradiction recorded earlier the same day and SUPERSEDES the commercial-deployability instruction that banned CC BY-NC sources (see autopet-fdg-petct). Consequence, stated so no one has to rediscover it: free-for-non-commercial weights and data become usable, but anything DERIVED from them taints the shipped atlas for as long as it ships, and re-enabling billing (see pro-monetization / PhonePe, currently dormant) would require REBUILDING every module that consumed them. Everything shipped as of this date is commercially clean (Apache-2.0 total weights, CC BY 4.0 masks, or the classical no-model pipeline), so this determination costs nothing retroactively - it only constrains what is consumed from here on. Prefer the classical pipeline where it works: it keeps the atlas dual-track.",
+  "visible-human": {
+    "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+    "commercial": true,
+    "attribution": "one credit line required",
+    "credit": "Courtesy of the U.S. National Library of Medicine",
+    "note": "Licence agreement requirement was dropped in 2019. The credit obligation is contractual (from the download T&C), not copyright.",
+    "verified_from": "https://www.nlm.nih.gov/databases/download/terms_and_conditions.html",
+    "verdict": "CLEAR"
+  },
+  "wikimedia-cc0": {
+    "licence": "CC0 / Public Domain (hard-filtered)",
+    "commercial": true,
+    "attribution": "none",
+    "note": "Only files whose extmetadata License is pd or cc0. Keep the extmetadata blob per file as an audit record; Commons tags are user-asserted and sometimes wrong.",
+    "verified_from": "https://commons.wikimedia.org/wiki/Commons:Licensing",
+    "verdict": "CLEAR"
+  },
+  "totalsegmentator-total": {
+    "licence": "Apache-2.0 (code and the total / total_mr weights)",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "Run on our own PD images ONLY. Never run on the CC BY 4.0 training dataset, so nothing shipped is an adaptation of it.",
+    "verified_from": "https://github.com/wasserth/TotalSegmentator",
+    "verdict": "CLEAR"
+  },
+  "totalsegmentator-open-subtasks": {
+    "licence": "Apache-2.0 (the subtask weights NOT marked with an asterisk in the upstream subtask list)",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "Only the 18 tasks in the package's own `commercial_models` register need a licence; everything else carries the same Apache-2.0 grant as `total`. Verified in code, not inferred: totalsegmentator.registry.requires_license(task) is literally `task in commercial_models`, and it returns False for headneck_bones_vessels / head_muscles / teeth / abdominal_muscles / craniofacial_structures / vertebrae_body / trunk_cavities, True for appendicular_bones / brain_structures / tissue_types / thigh_shoulder_muscles. An earlier note in this project wrongly treated ALL subtasks as gated. Upstream also warns these are trained on smaller datasets than `total`, so expect them to be less robust — which is what the HU verification step is for. Run on our own PD images ONLY.",
+    "verified_from": "https://github.com/wasserth/TotalSegmentator ; totalsegmentator/registry.py requires_license()",
+    "verdict": "CLEAR"
+  },
+  "fastsurfer-segonly": {
+    "licence": "Apache-2.0",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "--seg_only (asegdkt, cereb) needs NO FreeSurfer licence. The SURFACE pipeline does; never invoke it. Weights licence as distinct from code is UNVERIFIED, and its training labels are FreeSurfer-derived.",
+    "verified_from": "https://github.com/Deep-MI/FastSurfer",
+    "verdict": "CLEAR"
+  },
+  "synthseg-v1": {
+    "licence": "Apache-2.0 (v1.0 weights are in-repo)",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "v1.0 ONLY. The 2.0 / robust / parc weights come from a separate link with no licence statement: UNVERIFIED, do not use. Take from GitHub, never from a FreeSurfer bundle.",
+    "verified_from": "https://github.com/BBillot/SynthSeg",
+    "verdict": "CLEAR"
+  },
+  "grays-1918": {
+    "licence": "Public domain in the US (published before 1931)",
+    "commercial": true,
+    "attribution": "none",
+    "note": "Source from an ORIGINAL 1918 scan. NOT Project Gutenberg (trademark notice + 20% commercial royalty clause). NOT Wikisource wikitext (editor annotations are BY-SA). EU/UK status unclear until 2035 if W. H. Lewis is editor of record.",
+    "verified_from": "https://en.wikisource.org/wiki/Anatomy_of_the_Human_Body",
+    "verdict": "CLEAR"
+  },
+  "terminologia-anatomica-terms": {
+    "licence": "Individual terms are explicitly public domain",
+    "commercial": true,
+    "attribution": "none",
+    "note": "TERMS ONLY. The TA2 document is CC BY-ND: never redistribute the PDF or a wholesale copy of its hierarchy.",
+    "verified_from": "https://libraries.dal.ca/Fipat/ta2.html",
+    "verdict": "CLEAR"
+  },
+  "spl-nac-brain-atlas": {
+    "licence": "3D Slicer License Part B",
+    "commercial": true,
+    "attribution": "notice retention only",
+    "note": "300+ hand-labelled structures; highest-quality single source. Part B 1(b) notice goes in Settings > Legal.",
+    "verified_from": "https://github.com/Slicer/Slicer/blob/main/License.txt",
+    "verdict": "CLEAR"
+  },
+  "fsl": {
+    "licence": "FSL Licence",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "Non-commercial. Clauses (2)/(3) reach the DEVELOPMENT PROCESS: using FSL to generate coordinates for a commercial product is caught even if no FSL code ships.",
+    "verified_from": "https://fsl.fmrib.ox.ac.uk/fsl/docs/license.html",
+    "verdict": "BLOCKED"
+  },
+  "jhu-icbm-dti-81": {
+    "licence": "FSL (as distributed)",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "Distributed under the FSL licence; independent non-FSL terms UNVERIFIED. This is why named white matter is hand-authored.",
+    "verified_from": "http://neuro.debian.net/debian/extracts/fsldata/copyright",
+    "verdict": "BLOCKED"
+  },
+  "freesurfer": {
+    "licence": "FreeSurfer Software License v1.0",
+    "commercial": true,
+    "attribution": "required in user documentation",
+    "blocking_clause": "Part B 1(b) forces MGH-prefaced licence text into user documentation. Also states clinical applications are neither recommended nor advised. Use fastsurfer-segonly instead.",
+    "verified_from": "https://surfer.nmr.mgh.harvard.edu/fswiki/FreeSurferSoftwareLicense",
+    "verdict": "BLOCKED"
+  },
+  "tcia": {
+    "licence": "Per-collection CC BY 3.0/4.0, some NC",
+    "commercial": true,
+    "attribution": "required plus DOI citation",
+    "blocking_clause": "No CC0 collection found. CC BY 4.0 s3(a) attribution plus a mandatory DOI citation.",
+    "verified_from": "https://www.cancerimagingarchive.net/data-usage-policies-and-restrictions/",
+    "verdict": "BLOCKED"
+  },
+  "fma": {
+    "licence": "CC BY 3.0 Unported",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "CC BY attribution. Licensor's own page is offline; version taken from OBO Foundry, so PARTIALLY UNVERIFIED.",
+    "verified_from": "https://obofoundry.org/ontology/fma.html",
+    "verdict": "BLOCKED"
+  },
+  "uberon": {
+    "licence": "CC BY 3.0 Unported",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "CC BY attribution. The LICENSE file is unambiguous even though GitHub's detector reports NOASSERTION.",
+    "verified_from": "https://github.com/obophenotype/uberon/blob/master/LICENSE",
+    "verdict": "BLOCKED"
+  },
+  "wikipedia": {
+    "licence": "CC BY-SA 4.0",
+    "commercial": true,
+    "attribution": "required",
+    "blocking_clause": "Attribution plus share-alike, which would force our derived text under BY-SA.",
+    "verified_from": "https://foundation.wikimedia.org/wiki/Policy:Terms_of_Use",
+    "verdict": "BLOCKED"
+  },
+  "mindboggle-101": {
+    "licence": "CC BY-NC-SA 3.0 (paper) vs CC BY 4.0 (site) - conflicting",
+    "commercial": false,
+    "attribution": "required",
+    "blocking_clause": "Unresolved conflicting licence claims; under the paper's version it is non-commercial AND share-alike. Encumbers the DKT40 classifier.",
+    "verified_from": "https://www.frontiersin.org/journals/neuroscience/articles/10.3389/fnins.2012.00171/full",
+    "verdict": "BLOCKED"
+  },
+  "totalsegmentator-brain-structures": {
+    "licence": "Proprietary; free for non-commercial, paid commercial licence required",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Paid commercial licence required (free academic key is not usable under the commercial goal set 2026-08-19). 16 brain substructures. BUT buying it probably does NOT solve the brain: the blocker measured on our data is the SOURCE, not the model — a 33-slice 4 mm cadaver T1 defeated SynthSeg, which ran clean and still returned ~2x L/R asymmetry with most of the brain unlabelled. Fix the data first (see openneuro-cc0), then FastSurfer --seg_only, already CLEAR, is expected to suffice without any purchase.",
+    "verified_from": "https://github.com/wasserth/TotalSegmentator",
+    "verdict": "BLOCKED"
+  },
+  "totalsegmentator-appendicular-bones": {
+    "licence": "Proprietary subtask weights; free licence for non-commercial use, commercial requires contacting the author",
+    "commercial": false,
+    "attribution": "notice retention plus citation",
+    "blocking_clause": "ROUTE RESOLVED 2026-08-19 by the owner's NON-COMMERCIAL determination (see _commercial_status): the FREE self-serve academic key at https://backend.totalsegmentator.com/license-academic/ is sufficient. No purchase, no email to the author. Still PENDING_LICENCE because the key has NOT been requested or installed - a resolved route is not an obtained licence, and require_clear() must keep refusing until the key exists. SCOPE (corrected, was overstated): this is NO LONGER the only route to tibia and fibula - PR #712 got both free via a classical cortical-bone segmenter at 600 HU (300 HU fuses the foot skeleton into one component per foot; 600 HU separates it into 29). What remains gated is only the PATELLA and individually-named carpals/metacarpals/phalanges. The free `total` task has femur only; VISTA3D / NV-Segment-CT was checked against its own label_dict.json and has no patella either. COST OF USING IT: pins derived from these weights make the affected modules non-commercial permanently. For two bones' worth of naming that is a poor trade against keeping the atlas commercially clean - the free alternative is a dedicated low-threshold anterior routine for the patella.",
+    "note": "Commercial status is now SETTLED as non-commercial, so this entry is no longer blocked on a decision, only on someone filling in the academic-key form. The eight NC-blocked entries in this register are REOPENED FOR PER-SOURCE REVIEW by the same determination, but their verdicts are deliberately left unchanged: each has its own distinct blocker beyond commercial use (mindboggle-101 is also share-alike, radiopaedia is copyright not NC, autopet was additionally to be kept architecturally separate), so they need individual re-verification against primary text rather than a blanket flip. Recorded because the register is the audit trail, not the conversation.",
+    "verified_from": "https://backend.totalsegmentator.com/license-academic/ ; totalsegmentator/map_to_binary.py commercial_models",
+    "verdict": "PENDING_LICENCE"
+  },
+  "autopet-fdg-petct": {
+    "licence": "CC BY-NC 4.0 (NIfTI via FDAT) or TCIA Restricted (DICOM via TCIA)",
+    "commercial": false,
+    "attribution": "required: Gatidis S, Kuestner T, University Hospital Tuebingen, plus DOI citation",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: BANNED BY OWNER 2026-08-19: RadioAnatome is to be COMMERCIALLY deployable, and CC BY-NC 4.0 forbids that for as long as the data ships. Owner instruction: no CC BY-NC, research-only or restricted datasets, and PET/CT is to be kept architecturally separate for a later, separately licensed phase. Supersedes the earlier non-commercial position recorded on the same day.",
+    "note": "Only whole-body PET/CT found that is redistributable at all. HEALTHY-TOTAL-BODY-CTS was checked and rejected: its segmentations are CC BY 4.0 but the CT IMAGES sit under the NIH Controlled Data Access Policy (facial-reconstruction risk), so they cannot ship. No PD or CC0 whole-body PET/CT exists as of 2026-08-19.",
+    "verified_from": "https://autopet.grand-challenge.org/Dataset/ ; https://www.cancerimagingarchive.net/collection/healthy-total-body-cts/",
+    "verdict": "BLOCKED"
+  },
+  "radiopaedia": {
+    "licence": "Non-commercial educational use",
+    "commercial": false,
+    "attribution": "required",
+    "blocking_clause": "Non-commercial only. Free-to-students distribution inside a commercial app does not qualify.",
+    "verified_from": "https://radiopaedia.org/licence",
+    "verdict": "BLOCKED"
+  },
+  "totalsegmentator-dataset": {
+    "licence": "CC BY 4.0",
+    "commercial": true,
+    "attribution": "required: one credit line plus the Zenodo DOI",
+    "credit": "CT images and expert segmentations from the TotalSegmentator dataset (Wasserthal et al.), CC BY 4.0 - doi:10.5281/zenodo.10047292",
+    "note": "THE SINGLE BIGGEST UNLOCK FOUND. 1228 CT volumes of real LIVING clinical patients across many scanners, institutions and pathologies, WITH 117 anatomical structures already expertly labelled. CC BY 4.0 permits commercial use AND redistribution of the images and of derivatives, with attribution. This needs NO segmentation model and NO model licence: the masks are supplied, so liver, spleen, kidney, lung, muscle, vessels and cardiac structures become available WITHOUT buying anything. It also fixes the real problem, which is that Visible Human is a frozen cadaver: living tissue has normal HU, so lung reads -700 to -850 instead of -540, organs separate on contrast, and muscle reads +20 to +70 instead of the -13 to -21 measured in our pelvis. CAVEAT: these are clinical studies chosen for pathological variety, so near-normal volumes must be CURATED by a clinician before use as an anatomy reference. Distinct from the existing rule against RUNNING the model on this dataset: shipping the CC BY 4.0 images and labels directly is a different and legitimate route that costs only an attribution line.",
+    "verified_from": "https://zenodo.org/records/10047292",
+    "verdict": "CLEAR"
+  },
+  "openneuro-cc0": {
+    "licence": "CC0 1.0 Public Domain Dedication (verified in the dataset's own dataset_description.json)",
+    "commercial": true,
+    "attribution": "none required",
+    "note": "THE BRAIN ANSWER, and it costs nothing. OpenNeuro releases data under CC0 by default, which places no restrictions on who may use it or for what, commercial included. ds003563 publishes several resolutions; the volume ACTUALLY ingested is the 0.6 mm isotropic 7T MPRAGE (sub-yv98 ses-0481), confirmed from its own NIfTI header, and it was segmented with SynthSeg v1.0, not FastSurfer from a LIVING subject - far better than the 1 mm the brain pipeline needs, and the exact opposite of the 33-slice 4 mm cadaver T1 that defeated SynthSeg. Paired with fastsurfer-segonly (already CLEAR) this is expected to yield real brain labels with NO purchase. Verify the specific dataset's own licence field before ingesting: CC0 is the default, not a guarantee, and a few datasets opt out.",
+    "verified_from": "https://openneuro.org/datasets/ds003563/versions/1.1.0 ; https://openneuro.org/faq",
+    "verdict": "CLEAR"
+  },
+  "nv-segment-ct": {
+    "licence": "Code Apache-2.0; weights under the NVIDIA Open Model License (commercial-friendly)",
+    "commercial": true,
+    "attribution": "notice retention",
+    "note": "VISTA3D. Investigated on request. Licence is fine and it is commercially usable, but it adds NOTHING we lack: checked against its own vista3d/data/jsons/label_dict.json, its skeleton is humerus 87/88, scapula 89/90, clavicula 91/92, femur 93/94, hip 95/96, sacrum 97, skull 120, sternum 122, vertebrae 33-56 - i.e. the same set as the free `total` task - with NO tibia, fibula or patella, and 'brain' as a single undifferentiated class (22). Its weights are also trained on 11454 living, often contrast-enhanced volumes, so on a frozen cadaver its priors are WRONG in the same way TotalSegmentator's were when it put muscle labels on fat. No reason to switch. Marked CLEAR so it may be used, not because it should be.",
+    "verified_from": "https://huggingface.co/nvidia/NV-Segment-CT/blob/main/README.md ; https://github.com/Project-MONAI/VISTA",
+    "verdict": "CLEAR"
+  },
+  "nv-segment-ctmr": {
+    "licence": "Non-commercial",
+    "commercial": false,
+    "attribution": "n/a",
+    "blocking_clause": "SUPERSEDED 2026-08-19 by _commercial_status (StewardMD is non-commercial); the commercial-goal reasoning below no longer applies. This entry remains BLOCKED for its second, independent reason: Non-commercial weights, so barred by the commercial goal set 2026-08-19. Would otherwise have been the most tempting option on the table: 345+ classes including 50 MRI body classes and 133 brain substructures. Not usable.",
+    "verified_from": "https://github.com/Project-MONAI/VISTA",
+    "verdict": "BLOCKED"
+  }
+}

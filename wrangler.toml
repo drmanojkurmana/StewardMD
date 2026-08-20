@@ -46,10 +46,12 @@ bucket_name = "stewardmd-followcare-media"
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
 [vars]
+MAIK_LIVE_STREAM = "1"
+AI_PROVIDER = "developer"
 FOLLOWCARE_RETENTION_DAYS = "7"
 # Admin/owner allowlist (comma-separated Google account emails). The authoritative server gate
 # (functions/_adminauth.js ownerOK) uses this; the in-code defaults are kept in sync as a fallback.
-OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com"
+OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com,stewardmd.in@gmail.com"
 # AI Control Center abuse watchlist FALLBACK: flag a doctor once their AI requests today reach this
 # count. The per-module daily caps (MaiK 50 + cases 25 + Vision 50 + STT 50 + ECG 10) already
 # hard-block runaway use at ~185/day, so 150 (~80% of the max) surfaces only the heaviest users.
@@ -84,14 +86,55 @@ QUEUE_ONCO_WRITE = "1"
 # Set "0" to revert instantly. (Caps today: MaiK 50, cases 25, Vision 50, STT 50, ECG 10, research 2,
 # + 60 req/day, 200k tok/day, 3M/month, 3s min-interval — tune in _ai_usage.js/_usage.js if too tight.)
 MAIK_ENFORCE_CAPS = "1"
+# Experimental Access code-gate ENFORCEMENT for the imaging AI cloud-compute endpoints. "1" = the
+# server requires an owner OR a valid access code (X-XA-Token) to hit /api/{sknx,thorex,kardiox}
+# compute. On-device imaging is unaffected; owner accounts always pass (ownerOK). Set "0" to revert.
+EXPERIMENTAL_ENFORCE_SKNX = "1"
+EXPERIMENTAL_ENFORCE_THOREX = "1"
+EXPERIMENTAL_ENFORCE_KARDIOX = "1"
+# ── Pro pricing (paise; ₹1 = 100). Read by functions/api/billing/[[path]].js plans(). INERT while the
+# launch promo (PRO_FREE_UNTIL, default 15 Sep 2026) is active. See docs/PRICING_PACKAGING.md.
+PRO_PRICE_MONTHLY = "59900"          # Pro ₹599/mo
+PRO_PRICE_ANNUAL = "499900"          # Pro ₹4,999/yr (~2 months free)
+STUDENT_PRICE_MONTHLY = "19900"      # Student ₹199/mo (verified trainee)
+STUDENT_PRICE_ANNUAL = "199900"      # Student ₹1,999/yr
+CORESIDENT_PRICE_MONTHLY = "29900"   # Co-Resident ₹299/mo (2 accounts, shared AI pool)
+PHYSICIAN_PRICE_MONTHLY = "149900"   # Physician ₹1,499/mo
+PHYSICIAN_PRICE_ANNUAL = "1499900"   # Physician ₹14,999/yr
+PHYSICIANPRO_PRICE_MONTHLY = "249900"  # Physician Pro ₹2,499/mo
+PHYSICIANPRO_PRICE_ANNUAL = "2499900"  # Physician Pro ₹24,999/yr
+ONCO_ADDON_MONTHLY = "8900"          # Physician Onco add-on +₹89/mo
+CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each (beyond tier limit)
+FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399 for the whole year (first 500)
+# ── Per-user daily AI COST cap (₹/day) by role. Read by functions/_credits.js. INERT unless AI_COST_CAP_ON="1".
+AI_DAILY_COST_CAP_INR = "0.5"        # Free default
+AI_COST_CAP_STUDENT = "5"            # trainee: GST-net ₹169 rev → ₹5/day keeps worst-case margin non-negative
+AI_COST_CAP_RESIDENT = "5"
+AI_COST_CAP_CO_RESIDENT = "6"        # POOLED across the 2 accounts
+AI_COST_CAP_INTERN = "5"
+AI_COST_CAP_PHYSICIAN = "10"         # Pro (worst-case ~41% margin after GST)
+AI_COST_CAP_PHYSICIAN_PRO = "25"     # Physician Pro (worst-case ~41%)
+CREDIT_CONVERSION = "0.5"            # buy ₹50 credits → ₹25 of AI allowance
+# ── Founding-Doctor fixed annual AI pool (₹): ₹120 grant + one ₹120 auto-refill = ₹240/yr ceiling.
+FOUNDING_AI_GRANT_INR = "120"
+FOUNDING_AI_REFILL_INR = "120"
+FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily allowance → founding AI draws the annual pool
+FOUNDING_SEATS = "500"
+# Anti-sharing device lock: "1" enforces the signed-in-device limit (1/tier, Co-Resident + Physician Pro 2;
+# override per role via DEVICE_LIMIT_<ROLE>). "0"/unset = record-only, no eviction. Clinic limits per role
+# are code defaults (Pro 2, Physician 4, Physician Pro 6; override via CLINIC_LIMIT_<ROLE>).
+DEVICE_LOCK_ON = "0"
+# AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
 [env.production]
 compatibility_date = "2026-06-28"
 
 [env.production.vars]
+AI_PROVIDER = "developer"   # MaiK on Developer API (fast). NOT "azure" (slow, MaiK-only). Named envs don't inherit top-level [vars], so it must be set here too.
+MAIK_AI_TIMEOUT_MS = "22000"   # hard per-request ceiling so MaiK fails fast instead of buffering ~100s through a provider chain
 FOLLOWCARE_RETENTION_DAYS = "7"
 AI_ABUSE_REQ_THRESHOLD = "150"
-OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com"
+OWNER_EMAILS = "drmanojkurmana@gmail.com,mkkmanojkumar0@gmail.com,kdiwakar45@gmail.com,stewardmd.in@gmail.com"
 QUEUE_ENABLED = "1"   # PUBLIC-RELEASE-GATE: OPD queue backend on for dev/testing; set "0" before release
 QUEUE_EMR_WRITE = "1"   # LIVE GHIS write-back for assessment + investigation orders (prescribe stays blocked). PUBLIC-RELEASE-GATE
 QUEUE_STAFF_ENABLED = "1"   # OPD staff platform on for dev/testing. PUBLIC-RELEASE-GATE: set "0" before release
@@ -100,6 +143,37 @@ MAIK_ANSWER_CACHE = "1"   # semantic answer cache ON (generic Qs only, never cas
 MAIK_CACHE_VERSION = "1"
 MAIK_ABSTAIN = "1"   # cite-or-abstain prompt directive ON (ground+cite, say 'verify' vs guess)
 QUEUE_ONCO_WRITE = "1"   # onco treatment-plan writes on (cap-gated EMR_TREAT/EMR_VITALS + confirm). PUBLIC-RELEASE-GATE
+MAIK_ENFORCE_CAPS = "1"   # enforce per-user/per-module AI daily+rate caps (owner exempt); set "0" to revert
+EXPERIMENTAL_ENFORCE_SKNX = "1"   # imaging code-gate enforced server-side (owner + code-holders only); "0" reverts
+EXPERIMENTAL_ENFORCE_THOREX = "1"
+EXPERIMENTAL_ENFORCE_KARDIOX = "1"
+# ── Pro pricing (paise) + AI cost caps + Founding-Doctor pool. INERT while the launch promo is active
+# (and the cost cap needs AI_COST_CAP_ON="1"). See docs/PRICING_PACKAGING.md.
+PRO_PRICE_MONTHLY = "59900"          # Pro ₹599/mo
+PRO_PRICE_ANNUAL = "499900"          # Pro ₹4,999/yr
+STUDENT_PRICE_MONTHLY = "19900"      # Student ₹199/mo
+STUDENT_PRICE_ANNUAL = "199900"      # Student ₹1,999/yr
+CORESIDENT_PRICE_MONTHLY = "29900"   # Co-Resident ₹299/mo (2 accounts, shared pool)
+PHYSICIAN_PRICE_MONTHLY = "149900"   # Physician ₹1,499/mo
+PHYSICIAN_PRICE_ANNUAL = "1499900"   # Physician ₹14,999/yr
+PHYSICIANPRO_PRICE_MONTHLY = "249900"  # Physician Pro ₹2,499/mo
+PHYSICIANPRO_PRICE_ANNUAL = "2499900"  # Physician Pro ₹24,999/yr
+ONCO_ADDON_MONTHLY = "8900"          # Physician Onco +₹89/mo
+CLINIC_ADDON_MONTHLY = "13900"       # extra personal clinic ₹139/mo each
+FOUNDING_PRICE_YEAR = "39900"        # Founding-Doctor ₹399/year (first 500)
+AI_DAILY_COST_CAP_INR = "0.5"        # Free default (₹/day)
+AI_COST_CAP_STUDENT = "5"
+AI_COST_CAP_RESIDENT = "5"
+AI_COST_CAP_CO_RESIDENT = "6"        # POOLED across the 2 accounts
+AI_COST_CAP_INTERN = "5"
+AI_COST_CAP_PHYSICIAN = "10"         # Pro
+AI_COST_CAP_PHYSICIAN_PRO = "25"     # Physician Pro
+CREDIT_CONVERSION = "0.5"            # ₹50 → ₹25 of AI
+FOUNDING_AI_GRANT_INR = "120"        # founding annual pool: ₹120 + one ₹120 refill = ₹240/yr ceiling
+FOUNDING_AI_REFILL_INR = "120"
+FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
+FOUNDING_SEATS = "500"
+DEVICE_LOCK_ON = "0"                  # "1" enforces the anti-sharing device limit (1/tier; Co-Res + Physician Pro 2)
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"

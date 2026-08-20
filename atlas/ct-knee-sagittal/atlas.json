@@ -1,0 +1,568 @@
+{
+ "id": "ct-knee-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "Classical segmentation, NO machine learning and NO licensed model: atlas-pipeline/segment_knee_ct.py on Visible Human frozenCT slices 2300-2470. Bone contrast is the one thing this frozen cadaver reproduces faithfully, so HU thresholding at 300 plus 3D connected components plus position is sufficient, and it is free.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  }
+ },
+ "structures": {
+  "femur": {
+   "name": "Femur",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The femur is the longest and strongest bone in the skeleton."
+  },
+  "fibula": {
+   "name": "Fibula",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The fibula is the slender lateral bone of the leg, bearing little weight but giving attachment to muscles and forming the lateral malleolus at the ankle."
+  },
+  "lower-limb": {
+   "name": "Lower limb",
+   "category": "bone"
+  },
+  "tibia": {
+   "name": "Tibia",
+   "category": "bone",
+   "parent": "lower-limb",
+   "definition": "The tibia is the medial and larger of the two bones of the leg, transmitting the weight of the body from the femur to the foot."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-knee-sagittal/001.webp",
+   "aspect": 0.74,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-knee-sagittal/002.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 53.7,
+     "y": 4.6
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-knee-sagittal/003.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 51.6,
+     "y": 11.6
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-knee-sagittal/004.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 36.4,
+     "y": 2.9
+    },
+    {
+     "s": "femur",
+     "x": 66.6,
+     "y": 1.7
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-knee-sagittal/005.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 33.5,
+     "y": 15.5
+    },
+    {
+     "s": "femur",
+     "x": 48.9,
+     "y": 2.4
+    },
+    {
+     "s": "tibia",
+     "x": 45.3,
+     "y": 32.5
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-knee-sagittal/006.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 38.3,
+     "y": 16.6
+    },
+    {
+     "s": "femur",
+     "x": 59.1,
+     "y": 12.1
+    },
+    {
+     "s": "tibia",
+     "x": 41.1,
+     "y": 35.5
+    },
+    {
+     "s": "tibia",
+     "x": 41.7,
+     "y": 30.0
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-knee-sagittal/007.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 44.5,
+     "y": 18.2
+    },
+    {
+     "s": "femur",
+     "x": 64.5,
+     "y": 15.1
+    },
+    {
+     "s": "tibia",
+     "x": 45.7,
+     "y": 41.6
+    },
+    {
+     "s": "tibia",
+     "x": 51.6,
+     "y": 29.4
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-knee-sagittal/008.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 54.3,
+     "y": 20.0
+    },
+    {
+     "s": "femur",
+     "x": 73.8,
+     "y": 13.1
+    },
+    {
+     "s": "tibia",
+     "x": 51.9,
+     "y": 42.3
+    },
+    {
+     "s": "tibia",
+     "x": 55.0,
+     "y": 29.3
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-knee-sagittal/009.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 52.2,
+     "y": 5.5
+    },
+    {
+     "s": "femur",
+     "x": 55.3,
+     "y": 19.7
+    },
+    {
+     "s": "tibia",
+     "x": 50.4,
+     "y": 46.5
+    },
+    {
+     "s": "tibia",
+     "x": 70.4,
+     "y": 32.0
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-knee-sagittal/010.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 72.3,
+     "y": 14.6
+    },
+    {
+     "s": "femur",
+     "x": 73.2,
+     "y": 8.7
+    },
+    {
+     "s": "tibia",
+     "x": 66.6,
+     "y": 26.6
+    },
+    {
+     "s": "tibia",
+     "x": 72.9,
+     "y": 28.9
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-knee-sagittal/011.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 73.1,
+     "y": 11.6
+    },
+    {
+     "s": "tibia",
+     "x": 45.4,
+     "y": 24.0
+    },
+    {
+     "s": "tibia",
+     "x": 51.9,
+     "y": 60.8
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-knee-sagittal/012.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 68.1,
+     "y": 12.6
+    },
+    {
+     "s": "tibia",
+     "x": 51.1,
+     "y": 73.4
+    },
+    {
+     "s": "tibia",
+     "x": 69.3,
+     "y": 23.7
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-knee-sagittal/013.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 35.2,
+     "y": 2.6
+    },
+    {
+     "s": "femur",
+     "x": 69.0,
+     "y": 11.8
+    },
+    {
+     "s": "tibia",
+     "x": 36.7,
+     "y": 25.4
+    },
+    {
+     "s": "tibia",
+     "x": 50.1,
+     "y": 88.3
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-knee-sagittal/014.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 64.4,
+     "y": 2.9
+    },
+    {
+     "s": "femur",
+     "x": 73.7,
+     "y": 9.3
+    },
+    {
+     "s": "tibia",
+     "x": 44.5,
+     "y": 100.0
+    },
+    {
+     "s": "tibia",
+     "x": 54.9,
+     "y": 99.4
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-knee-sagittal/015.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 43.8,
+     "y": 12.0
+    },
+    {
+     "s": "tibia",
+     "x": 42.1,
+     "y": 89.7
+    },
+    {
+     "s": "tibia",
+     "x": 71.6,
+     "y": 49.3
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-knee-sagittal/016.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 38.8,
+     "y": 11.6
+    },
+    {
+     "s": "femur",
+     "x": 62.4,
+     "y": 3.1
+    },
+    {
+     "s": "tibia",
+     "x": 37.4,
+     "y": 23.8
+    },
+    {
+     "s": "tibia",
+     "x": 72.3,
+     "y": 50.8
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-knee-sagittal/017.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 42.7,
+     "y": 14.5
+    },
+    {
+     "s": "femur",
+     "x": 66.9,
+     "y": 16.2
+    },
+    {
+     "s": "tibia",
+     "x": 38.6,
+     "y": 23.9
+    },
+    {
+     "s": "tibia",
+     "x": 69.6,
+     "y": 52.5
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-knee-sagittal/018.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 40.0,
+     "y": 12.5
+    },
+    {
+     "s": "femur",
+     "x": 62.3,
+     "y": 7.6
+    },
+    {
+     "s": "tibia",
+     "x": 53.2,
+     "y": 30.9
+    },
+    {
+     "s": "tibia",
+     "x": 57.0,
+     "y": 91.2
+    },
+    {
+     "s": "fibula",
+     "x": 28.6,
+     "y": 41.7
+    },
+    {
+     "s": "fibula",
+     "x": 31.6,
+     "y": 34.1
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-knee-sagittal/019.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "femur",
+     "x": 50.1,
+     "y": 6.2
+    },
+    {
+     "s": "tibia",
+     "x": 41.8,
+     "y": 22.8
+    },
+    {
+     "s": "tibia",
+     "x": 64.8,
+     "y": 37.9
+    },
+    {
+     "s": "fibula",
+     "x": 29.6,
+     "y": 47.2
+    },
+    {
+     "s": "fibula",
+     "x": 30.7,
+     "y": 33.0
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-knee-sagittal/020.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "tibia",
+     "x": 36.2,
+     "y": 29.4
+    },
+    {
+     "s": "tibia",
+     "x": 55.2,
+     "y": 28.9
+    },
+    {
+     "s": "fibula",
+     "x": 26.3,
+     "y": 61.4
+    },
+    {
+     "s": "fibula",
+     "x": 33.4,
+     "y": 33.9
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-knee-sagittal/021.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "fibula",
+     "x": 26.6,
+     "y": 62.6
+    },
+    {
+     "s": "fibula",
+     "x": 35.8,
+     "y": 33.1
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-knee-sagittal/022.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "fibula",
+     "x": 23.0,
+     "y": 99.9
+    },
+    {
+     "s": "fibula",
+     "x": 33.7,
+     "y": 32.9
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-knee-sagittal/023.webp",
+   "aspect": 0.74,
+   "pins": [
+    {
+     "s": "fibula",
+     "x": 32.0,
+     "y": 37.6
+    }
+   ]
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-knee-sagittal/024.webp",
+   "aspect": 0.74,
+   "pins": []
+  }
+ ]
+}

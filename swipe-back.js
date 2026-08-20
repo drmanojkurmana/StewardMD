@@ -83,6 +83,7 @@
   }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
   function canGoBack() {
+    try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
     return !!(engineActive() && typeof window._SMD_goBack === "function");
@@ -92,8 +93,9 @@
   function goBack() {
     var now = Date.now();
     if (now - _last < 400) return true;                        // debounce: one back per gesture
-    // 0) FundX AI full-screen overlay owns back while open.
-    try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
+    // 0) FundX / Atlas AI full-screen overlay owns back while open.
+    try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
+    if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
     var ctrl = topBackControl();
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }

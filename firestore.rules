@@ -21,16 +21,17 @@ service cloud.firestore {
 
     // DPDP retention cap. `expiresAt` is the field the ICU 7-day Firestore TTL policy acts on, and it
     // is set client-side. Without a cap an authorised unit member (or a future client bug) could write
-    // a far-future value and silently defeat the "cleared automatically after 7 days" promise. Cap it
-    // at ~8 days out (7d window + ~1d slack for latency/clock skew) so a legitimate now+7d write never
-    // false-rejects. Cap-WHEN-PRESENT: writes that omit the field (setReviewed's merge, task
-    // status/explain updates, legacy docs predating the field) still pass and carry the prior, already
-    // valid expiresAt forward. Mirrors the sharedCases expiry cap; ICU expiresAt is a Timestamp (not
-    // millis), so the bound uses request.time + duration, not toMillis().
+    // a far-future value and silently defeat the "cleared automatically" promise. The retention window
+    // is user-configurable (icu-collab.js retentionDays: default 7, HARD-CAPPED at 90 days), so bound
+    // expiresAt at ~91 days out (90d max window + ~1d slack for latency/clock skew) - a legitimate
+    // now+90d write never false-rejects, but a far-future value is rejected. Cap-WHEN-PRESENT: writes
+    // that omit the field (setReviewed's merge, task status/explain updates, legacy docs predating the
+    // field) still pass and carry the prior, already valid expiresAt forward. Mirrors the sharedCases
+    // expiry cap; ICU expiresAt is a Timestamp (not millis), so the bound uses request.time + duration.
     function retentionCapped() {
       return !('expiresAt' in request.resource.data)
              || (request.resource.data.expiresAt is timestamp
-                 && request.resource.data.expiresAt <= request.time + duration.value(8, 'd'));
+                 && request.resource.data.expiresAt <= request.time + duration.value(91, 'd'));
     }
 
     // A user's saved cases are PRIVATE to that user. (Previously this allowed any
@@ -104,6 +105,28 @@ service cloud.firestore {
                     && resource.data.uid == request.auth.uid
                     && request.resource.data.uid == resource.data.uid;
       allow delete: if false;
+    }
+
+    // ── Doctor-to-doctor referrals (smd_referrals) ────────────────────────────
+    // A referral carries a patient record (PHI), addressed FROM one doctor TO another (by uid, resolved
+    // from doctorDirectory). Only the two parties may read it; the sender creates it addressed from
+    // themselves with a bounded expiry; the recipient may update status (accept/decline/seen) without
+    // changing the parties; the sender may revoke. NEVER listable in bulk — the inbox is a
+    // where('toUid','==',me) query, satisfied by the read predicate below. DENY BY DEFAULT.
+    match /referrals/{id} {
+      allow read: if request.auth != null
+                  && (resource.data.toUid == request.auth.uid || resource.data.fromUid == request.auth.uid);
+      allow create: if request.auth != null
+                    && request.resource.data.fromUid == request.auth.uid
+                    && request.resource.data.toUid is string
+                    && request.resource.data.expiresAt is number
+                    && request.resource.data.expiresAt <= request.time.toMillis() + 32 * 24 * 60 * 60 * 1000;
+      allow update: if request.auth != null
+                    && resource.data.toUid == request.auth.uid
+                    && request.resource.data.toUid == resource.data.toUid
+                    && request.resource.data.fromUid == resource.data.fromUid;
+      allow delete: if request.auth != null && resource.data.fromUid == request.auth.uid;
+      allow list: if false;
     }
 
     // ── ICU collaboration groups (smd_icu_groups) ─────────────────────────────

@@ -1,0 +1,301 @@
+{
+ "id": "brain-mri-axial-t1",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "NONE YET - images only. Pins are to be hand-authored in atlas-pipeline/atlas-author.html.",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "grey-matter": {
+   "label": "Grey matter",
+   "color": "#7ee081"
+  },
+  "white-matter": {
+   "label": "White matter",
+   "color": "#ffffff"
+  },
+  "csf": {
+   "label": "CSF space",
+   "color": "#7fd9e8"
+  }
+ },
+ "structures": {
+  "brainstem": {
+   "name": "Brainstem",
+   "category": "grey-matter",
+   "definition": "The brainstem comprises the midbrain, pons and medulla oblongata."
+  },
+  "caudate-nucleus": {
+   "name": "Caudate nucleus",
+   "category": "grey-matter",
+   "parent": "telencephalon",
+   "definition": "The caudate nucleus is an elongated arched mass of grey matter closely related to the lateral ventricle throughout its length."
+  },
+  "cerebellum": {
+   "name": "Cerebellum",
+   "category": "grey-matter",
+   "definition": "The cerebellum occupies the posterior cranial fossa below the tentorium cerebelli."
+  },
+  "cerebral-cortex": {
+   "name": "Cerebral cortex",
+   "category": "grey-matter",
+   "parent": "telencephalon",
+   "definition": "The cerebral cortex is the layer of grey matter covering the surface of the cerebral hemispheres, thrown into folds forming the gyri, separated by sulci."
+  },
+  "cerebral-white-matter": {
+   "name": "Cerebral white matter",
+   "category": "white-matter",
+   "definition": "The white matter of the cerebrum consists of myelinated fibres: projection, commissural and association."
+  },
+  "corona-radiata": {
+   "name": "Corona radiata",
+   "category": "white-matter",
+   "parent": "cerebral-white-matter",
+   "definition": "The corona radiata is the fan-shaped mass of projection fibres passing between the internal capsule and the cerebral cortex."
+  },
+  "corpus-callosum": {
+   "name": "Corpus callosum",
+   "category": "white-matter",
+   "parent": "cerebral-white-matter",
+   "definition": "The corpus callosum is the great transverse commissure uniting the cerebral hemispheres."
+  },
+  "fornix": {
+   "name": "Fornix",
+   "category": "white-matter",
+   "parent": "cerebral-white-matter",
+   "definition": "The fornix is a longitudinal, arch-shaped lamella of white substance situated below the corpus callosum, consisting of two symmetrical bands, one for either hemisphere."
+  },
+  "fourth-ventricle": {
+   "name": "Fourth ventricle",
+   "category": "csf",
+   "definition": "The fourth ventricle lies between the pons and medulla in front and the cerebellum behind."
+  },
+  "frontal-lobe": {
+   "name": "Frontal lobe",
+   "category": "grey-matter",
+   "parent": "cerebral-cortex",
+   "definition": "The frontal lobe lies in front of the central sulcus and above the lateral fissure."
+  },
+  "globus-pallidus": {
+   "name": "Globus pallidus",
+   "category": "grey-matter",
+   "parent": "telencephalon",
+   "definition": "The globus pallidus is the medial, paler part of the lentiform nucleus."
+  },
+  "hippocampus": {
+   "name": "Hippocampus",
+   "category": "grey-matter",
+   "parent": "temporal-lobe",
+   "definition": "The hippocampus is a curved elevation of grey matter in the floor of the temporal horn of the lateral ventricle."
+  },
+  "insula": {
+   "name": "Insula",
+   "category": "grey-matter",
+   "parent": "cerebral-cortex",
+   "definition": "The insula is the cortex buried in the depth of the lateral fissure, covered by the opercula."
+  },
+  "internal-capsule": {
+   "name": "Internal capsule",
+   "category": "white-matter",
+   "parent": "cerebral-white-matter",
+   "definition": "The internal capsule is a broad band of white matter between the caudate nucleus and thalamus medially and the lentiform nucleus laterally."
+  },
+  "lateral-ventricle": {
+   "name": "Lateral ventricle",
+   "category": "csf",
+   "definition": "The lateral ventricles are two irregular cavities within the cerebral hemispheres, communicating with the third ventricle through the interventricular foramina."
+  },
+  "occipital-lobe": {
+   "name": "Occipital lobe",
+   "category": "grey-matter",
+   "parent": "cerebral-cortex",
+   "definition": "The occipital lobe forms the posterior extremity of the cerebral hemisphere, behind the parieto-occipital sulcus."
+  },
+  "parietal-lobe": {
+   "name": "Parietal lobe",
+   "category": "grey-matter",
+   "parent": "cerebral-cortex",
+   "definition": "The parietal lobe lies behind the central sulcus and in front of the parieto-occipital sulcus."
+  },
+  "putamen": {
+   "name": "Putamen",
+   "category": "grey-matter",
+   "parent": "telencephalon",
+   "definition": "The putamen is the outer and larger part of the striatum, separated from the globus pallidus by a lamina of white matter."
+  },
+  "subarachnoid-space": {
+   "name": "Subarachnoid space",
+   "category": "csf",
+   "definition": "The subarachnoid space lies between the arachnoid mater and the pia mater and contains cerebrospinal fluid."
+  },
+  "telencephalon": {
+   "name": "Telencephalon",
+   "category": "grey-matter"
+  },
+  "temporal-lobe": {
+   "name": "Temporal lobe",
+   "category": "grey-matter",
+   "parent": "cerebral-cortex",
+   "definition": "The temporal lobe lies below the lateral fissure and extends back to the occipital lobe."
+  },
+  "thalamus": {
+   "name": "Thalamus",
+   "category": "grey-matter",
+   "parent": "telencephalon",
+   "definition": "The thalamus is a large ovoid mass of grey matter forming much of the lateral wall of the third ventricle."
+  },
+  "third-ventricle": {
+   "name": "Third ventricle",
+   "category": "csf",
+   "definition": "The third ventricle is a narrow median cleft between the two thalami."
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/brain-mri-axial-t1/001.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/brain-mri-axial-t1/002.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/brain-mri-axial-t1/003.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 4,
+   "img": "/atlas/brain-mri-axial-t1/004.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 5,
+   "img": "/atlas/brain-mri-axial-t1/005.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 6,
+   "img": "/atlas/brain-mri-axial-t1/006.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 7,
+   "img": "/atlas/brain-mri-axial-t1/007.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 8,
+   "img": "/atlas/brain-mri-axial-t1/008.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 9,
+   "img": "/atlas/brain-mri-axial-t1/009.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 10,
+   "img": "/atlas/brain-mri-axial-t1/010.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 11,
+   "img": "/atlas/brain-mri-axial-t1/011.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 12,
+   "img": "/atlas/brain-mri-axial-t1/012.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 13,
+   "img": "/atlas/brain-mri-axial-t1/013.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 14,
+   "img": "/atlas/brain-mri-axial-t1/014.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 15,
+   "img": "/atlas/brain-mri-axial-t1/015.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 16,
+   "img": "/atlas/brain-mri-axial-t1/016.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 17,
+   "img": "/atlas/brain-mri-axial-t1/017.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 18,
+   "img": "/atlas/brain-mri-axial-t1/018.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 19,
+   "img": "/atlas/brain-mri-axial-t1/019.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 20,
+   "img": "/atlas/brain-mri-axial-t1/020.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 21,
+   "img": "/atlas/brain-mri-axial-t1/021.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 22,
+   "img": "/atlas/brain-mri-axial-t1/022.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 23,
+   "img": "/atlas/brain-mri-axial-t1/023.webp",
+   "aspect": 0.7811,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/brain-mri-axial-t1/024.webp",
+   "aspect": 0.7811,
+   "pins": []
+  }
+ ]
+}

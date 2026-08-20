@@ -120,6 +120,24 @@ export function estCostInr(cfg, inTok, outTok) { return (inTok / 1000) * cfg.pri
 async function readJson(store, key) { try { return (await store.get(key, "json")) || null; } catch (e) { return null; } }
 async function writeJson(store, key, obj, ttl) { try { await store.put(key, JSON.stringify(obj), ttl ? { expirationTtl: ttl } : undefined); } catch (e) {} }
 
+// ---- Atomic daily-cost counter (D1) for the global circuit breaker -----------------------------
+// The KV global counter (maik:global:<day>) is a non-atomic read-modify-write: a concurrent burst can
+// lose updates and UNDERCOUNT, so the breaker trips late/never. D1's per-row UPSERT is atomic, so the
+// daily cost total is exact regardless of concurrency. FAIL-SAFE: if UPDATES_DB is unbound or the
+// ai_cost_daily table is missing, both helpers return null / no-op and the caller falls back to the KV
+// counter exactly as before (zero regression). Cost stored as integer paise (no float drift).
+function costDb(env) { try { return (env && env.UPDATES_DB) || null; } catch (e) { return null; } }
+async function readDailyCostInr(env, day) {
+  const db = costDb(env); if (!db) return null;
+  try { const r = await db.prepare("SELECT cost_paise FROM ai_cost_daily WHERE day = ?").bind(day).first(); return r && r.cost_paise != null ? Number(r.cost_paise) / 100 : 0; }
+  catch (e) { return null; }   // table missing / D1 error -> caller falls back to the KV counter
+}
+async function addDailyCostInr(env, day, inr) {
+  const db = costDb(env); if (!db) return; const paise = Math.max(0, Math.round((inr || 0) * 100)); if (!paise) return;
+  try { await db.prepare("INSERT INTO ai_cost_daily (day, cost_paise) VALUES (?, ?) ON CONFLICT(day) DO UPDATE SET cost_paise = cost_paise + excluded.cost_paise").bind(day, paise).run(); }
+  catch (e) { /* fail-safe: the KV counter is still recorded by the caller */ }
+}
+
 // LAUNCH DECISION (2026-07-31, owner): AI has NO per-user restrictions — every account (signed-in OR
 // guest) behaves like the owner. Removes the rate limit + daily/monthly token caps + per-category daily
 // request caps that were blocking normal accounts (owners were admin-exempt, so "only my account works").
@@ -154,7 +172,11 @@ export async function checkQuota(env, request, type, opts) {
   const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
   let hardStop = cfg.costHardStopInr;
   try { const bo = Number(await store.get("ai:budget:daily")); if (Number.isFinite(bo) && bo > 0) hardStop = bo; } catch (e) {}
-  if (g.cost >= hardStop && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
+  // Prefer the ATOMIC D1 daily-cost total (exact under concurrency) over the racy KV counter, so the
+  // breaker trips reliably instead of undercounting; fall back to KV when D1 is unavailable.
+  let breakerCost = g.cost;
+  { const d1c = await readDailyCostInr(env, day); if (d1c != null && d1c > breakerCost) breakerCost = d1c; }
+  if (breakerCost >= hardStop && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
     return { ok: false, reason: "circuit-breaker", message: QUOTA_MSG, id };
   }
   // per-user rate limit. The "router" type (the always-on semantic parser) is EXEMPT: it is a tiny
@@ -196,7 +218,7 @@ export async function checkQuota(env, request, type, opts) {
   }
   // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router + admin are exempt.
   if (type !== "router" && !exempt) await writeJson(store, rlKey, { t: Date.now() }, 60);
-  return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type };
+  return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type, env };
 }
 
 // Best-effort per-DEVICE daily abuse cap (anti account-farming). Device id = X-SMD-Device header
@@ -243,6 +265,7 @@ export async function recordUsage(gate, info) {
   await writeJson(store, "maik:u:" + gate.id + ":" + gate._day, u, dayTtl);
   await writeJson(store, "maik:m:" + gate.id + ":" + gate._month, m, monTtl);
   await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
+  try { await addDailyCostInr(gate.env, gate._day, cost); } catch (e) {}   // atomic mirror (exact under concurrency)
   return { cost, alert: g.cost >= cfg.costAlertInr && g.cost < cfg.costHardStopInr };
 }
 
@@ -261,6 +284,7 @@ export async function meterTokens(env, id, inTok, outTok) {
   u.tokens += tot; m.tokens += tot; g.cost += cost; g.req += 1;
   const dayTtl = 60 * 60 * 26, monTtl = 60 * 60 * 24 * 32;
   await writeJson(store, uKey, u, dayTtl); await writeJson(store, mKey, m, monTtl); await writeJson(store, "maik:global:" + day, g, dayTtl);
+  try { await addDailyCostInr(env, day, cost); } catch (e) {}   // atomic mirror for the global breaker
 }
 
 /* Admin aggregate (token-gated by the caller). Anonymised — account ids are already

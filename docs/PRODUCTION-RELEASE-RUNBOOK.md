@@ -88,10 +88,13 @@ to **Enforce** in the console.
 
 ## PART B2 — Firestore TTL policies (DPDP 7-day auto-clear) — REQUIRED for the privacy notice
 
-**Why not repo-only:** the client now stamps `expiresAt` (= now + 7 days, refreshed on every write) on
-the shared ICU docs (`icu-collab.js retentionExpiry()`), but the actual deletion is done by a **Firestore
-TTL policy**, which is configured in the **Firebase/GCP console**, not in the repo. Without the policy the
-"kept for 7 days, then cleared automatically" promise in the ICU notice + privacy policy (§14) is NOT met.
+**Why not repo-only:** the client now stamps `expiresAt` on the shared ICU docs
+(`icu-collab.js retentionExpiry()`, refreshed on every write). The window is **user-configurable**
+(`smd_icu_retention_days`: 7 / 30 / 60 / 90 in the Rounds tab) with a **hard cap of 90 days**; the
+`firestore.rules` `retentionCapped()` bound (91d) enforces that ceiling server-side. The actual deletion
+is done by a **Firestore TTL policy**, configured in the **Firebase/GCP console**, not in the repo.
+Without the policy the "kept for N days, then cleared automatically" promise in the ICU notice + privacy
+policy (§14) is NOT met. (TTL only checks `expiresAt`, so a variable per-doc window works unchanged.)
 
 Configure a TTL policy on the **`expiresAt`** field for each of these **collection groups** (Firestore →
 project `stewardmd-*` (asia-south1) → *Time-to-live (TTL)* → Create policy; or

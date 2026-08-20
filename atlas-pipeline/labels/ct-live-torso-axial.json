@@ -1,0 +1,358 @@
+{
+  "_names": "Terminologia Anatomica individual terms (explicitly public domain)",
+  "_definitions": "Gray's Anatomy 1918, original scan (PD-US). Reused verbatim from the region label files already in this repo.",
+  "_geometry": "EXPERT MASKS SUPPLIED WITH THE DATASET - no segmentation model was run. Subject s0108 of the TotalSegmentator dataset v2.0.1 (Zenodo 10047292), CC BY 4.0: a LIVING patient, study type 'ct neck-thorax-abdomen-pelvis', pathology field 'no_pathology', Siemens 100 kVp, resampled to 1.5 mm isotropic by the dataset authors. Masks were drawn and reviewed by the dataset's authors, not by us.",
+  "_why_living_patient": "This layer exists because Visible Human CANNOT support soft tissue and the numbers say so. Measured on this living scan against the cadaver: lung -895 to -922 HU here versus -540 to -570 in the cadaver, so the lobar fissures are resolvable and FOUR of the five lobes are labelled; muscle +41 to +56 HU here (gluteus 41-51, iliopsoas 55-56, deep back 53-54) versus -13 to -21 in the cadaver pelvis where the masks sat on fat; liver 74, spleen 103, kidney 108-111 HU, separable here, against one indistinguishable 25-90 HU band without contrast in the cadaver. Visible Human remains the skeletal reference and is not replaced.",
+  "_validation": "Every structure was re-checked against the image even though the masks are expert-drawn: median HU inside each mask had to fall in the band expected for its tissue family, clear a 150-voxel floor, and map to a TotalSegmentator class id. 38 soft-tissue structures passed, 52 were rejected - 50 of them empty because they lie outside this scan's field of view (clavicle, humerus, brain, neck vessels), and 2 ribs whose median 112 and 117 HU fell under the 120 HU bone floor. Full numbers in atlas-pipeline/work/tsd/s0108_report.json.",
+  "_why_bone_dropped": "Bone IS present and validated in this scan (27 classes) but is mapped to null here. The Visible Human skeletal modules already cover the skeleton at 1 mm native resolution and passed their own HU check; duplicating it at 1.5 mm would add pin clutter and two sources of truth for the same structure.",
+  "_why_no_sides": "Sides are COLLAPSED (kidney_left + kidney_right -> `kidney`) to match the rest of the atlas, which asserts no laterality anywhere. Unlike the cadaver, this living scan HAS a trustworthy DICOM orientation, so laterality is genuinely available here and is recorded as a field in ontology.json - but introducing sided structures is a product-wide change (search, browser, filters) and is deliberately NOT half-done in this module. Named lung LOBES are not laterality and keep their own identity.",
+  "categories": {
+    "viscus": {
+      "label": "Viscus",
+      "color": "#ffd479"
+    },
+    "gi-tract": {
+      "label": "GI tract",
+      "color": "#c9a06a"
+    },
+    "vessel-artery": {
+      "label": "Artery",
+      "color": "#ff8080"
+    },
+    "vessel-vein": {
+      "label": "Vein",
+      "color": "#8fb8ff"
+    },
+    "urinary": {
+      "label": "Urinary",
+      "color": "#7fd9e8"
+    },
+    "airway": {
+      "label": "Airway",
+      "color": "#7ee081"
+    },
+    "muscle": {
+      "label": "Muscle",
+      "color": "#e0a0c0"
+    },
+    "csf": {
+      "label": "Cord",
+      "color": "#b0c4de"
+    }
+  },
+  "structures": {
+    "torso": {
+      "name": "Torso",
+      "category": "viscus"
+    },
+    "adrenal-gland": {
+      "name": "Adrenal gland",
+      "category": "viscus",
+      "parent": "torso",
+      "definition": "The suprarenal glands are flattened bodies capping the upper poles of the kidneys."
+    },
+    "aorta": {
+      "name": "Aorta",
+      "category": "vessel-artery",
+      "parent": "torso",
+      "definition": "The aorta is the main arterial trunk, conveying blood from the left ventricle to the body."
+    },
+    "autochthonous-back-muscle": {
+      "name": "Deep back muscles",
+      "category": "muscle",
+      "parent": "torso",
+      "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+    },
+    "colon": {
+      "name": "Colon",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+    },
+    "duodenum": {
+      "name": "Duodenum",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The duodenum is the shortest, widest and most fixed part of the small intestine, curved around the head of the pancreas."
+    },
+    "esophagus": {
+      "name": "Oesophagus",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The oesophagus is a muscular canal passing from the pharynx through the posterior mediastinum to the stomach."
+    },
+    "gallbladder": {
+      "name": "Gallbladder",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The gallbladder is a pear-shaped reservoir for bile lodged in a fossa on the under surface of the liver."
+    },
+    "gluteal-muscle": {
+      "name": "Gluteal muscles",
+      "category": "muscle",
+      "parent": "torso",
+      "definition": "The gluteal muscles extend, abduct and rotate the thigh at the hip joint."
+    },
+    "heart": {
+      "name": "Heart",
+      "category": "viscus",
+      "parent": "torso",
+      "definition": "The heart is a hollow muscular organ enclosed in the pericardium, occupying the middle mediastinum."
+    },
+    "iliac-artery": {
+      "name": "Iliac artery",
+      "category": "vessel-artery",
+      "parent": "torso",
+      "definition": "The common iliac arteries arise from the aortic bifurcation and divide into external and internal iliac arteries."
+    },
+    "iliac-vein": {
+      "name": "Iliac vein",
+      "category": "vessel-vein",
+      "parent": "torso",
+      "definition": "The common iliac veins unite to form the inferior vena cava."
+    },
+    "iliopsoas": {
+      "name": "Iliopsoas",
+      "category": "muscle",
+      "parent": "torso",
+      "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+    },
+    "inferior-vena-cava": {
+      "name": "Inferior vena cava",
+      "category": "vessel-vein",
+      "parent": "torso",
+      "definition": "The inferior vena cava returns blood from the lower half of the body to the right atrium."
+    },
+    "kidney": {
+      "name": "Kidney",
+      "category": "urinary",
+      "parent": "torso",
+      "definition": "The kidneys are situated in the posterior part of the abdomen, one on either side of the vertebral column, behind the peritoneum."
+    },
+    "liver": {
+      "name": "Liver",
+      "category": "viscus",
+      "parent": "torso",
+      "definition": "The liver is the largest gland in the body, occupying the right hypochondrium and extending into the epigastrium."
+    },
+    "lower-lobe-left": {
+      "name": "Lower lobe of left lung",
+      "category": "airway",
+      "parent": "torso",
+      "definition": "The lower lobe of the left lung lies posteroinferior to the oblique fissure."
+    },
+    "lower-lobe-right": {
+      "name": "Lower lobe of right lung",
+      "category": "airway",
+      "parent": "torso",
+      "definition": "The lower lobe of the right lung lies below and behind the oblique fissure."
+    },
+    "middle-lobe-right": {
+      "name": "Middle lobe of right lung",
+      "category": "airway",
+      "parent": "torso",
+      "definition": "The middle lobe of the right lung is a wedge lying between the horizontal and oblique fissures."
+    },
+    "pancreas": {
+      "name": "Pancreas",
+      "category": "viscus",
+      "parent": "torso",
+      "definition": "The pancreas is a compound racemose gland lying transversely across the posterior abdominal wall behind the stomach."
+    },
+    "portal-vein": {
+      "name": "Portal vein",
+      "category": "vessel-vein",
+      "parent": "torso",
+      "definition": "The portal vein conveys blood from the abdominal digestive tract and spleen to the liver."
+    },
+    "prostate": {
+      "name": "Prostate",
+      "category": "urinary",
+      "parent": "torso",
+      "definition": "The prostate is a firm glandular body surrounding the commencement of the male urethra."
+    },
+    "small-bowel": {
+      "name": "Small bowel",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+    },
+    "spinal-cord": {
+      "name": "Spinal cord",
+      "category": "csf",
+      "parent": "torso",
+      "definition": "The spinal cord is the elongated part of the central nervous system occupying the upper two-thirds of the vertebral canal."
+    },
+    "spleen": {
+      "name": "Spleen",
+      "category": "viscus",
+      "parent": "torso",
+      "definition": "The spleen is a highly vascular organ situated in the left hypochondrium between the fundus of the stomach and the diaphragm."
+    },
+    "stomach": {
+      "name": "Stomach",
+      "category": "gi-tract",
+      "parent": "torso",
+      "definition": "The stomach is the most dilated part of the digestive tube, lying between the oesophagus and the duodenum."
+    },
+    "upper-lobe-left": {
+      "name": "Upper lobe of left lung",
+      "category": "airway",
+      "parent": "torso",
+      "definition": "The left lung is divided by the oblique fissure into an upper and a lower lobe; the upper lobe includes the lingula."
+    },
+    "urinary-bladder": {
+      "name": "Urinary bladder",
+      "category": "urinary",
+      "parent": "torso",
+      "definition": "The urinary bladder is a musculomembranous reservoir for urine situated in the pelvis behind the pubic symphysis."
+    }
+  },
+  "model_values": {
+    "10": "lung_upper_lobe_left",
+    "11": "lung_lower_lobe_left",
+    "13": "lung_middle_lobe_right",
+    "14": "lung_lower_lobe_right",
+    "51": "heart",
+    "52": "aorta",
+    "63": "inferior_vena_cava",
+    "64": "portal_vein_and_splenic_vein",
+    "65": "iliac_artery_left",
+    "66": "iliac_artery_right",
+    "67": "iliac_vena_left",
+    "68": "iliac_vena_right",
+    "15": "esophagus",
+    "79": "spinal_cord",
+    "5": "liver",
+    "1": "spleen",
+    "7": "pancreas",
+    "4": "gallbladder",
+    "3": "kidney_left",
+    "2": "kidney_right",
+    "9": "adrenal_gland_left",
+    "8": "adrenal_gland_right",
+    "6": "stomach",
+    "19": "duodenum",
+    "18": "small_bowel",
+    "20": "colon",
+    "21": "urinary_bladder",
+    "22": "prostate",
+    "86": "autochthon_left",
+    "87": "autochthon_right",
+    "88": "iliopsoas_left",
+    "89": "iliopsoas_right",
+    "80": "gluteus_maximus_left",
+    "81": "gluteus_maximus_right",
+    "82": "gluteus_medius_left",
+    "83": "gluteus_medius_right",
+    "84": "gluteus_minimus_left",
+    "85": "gluteus_minimus_right",
+    "75": "femur_left",
+    "76": "femur_right",
+    "77": "hip_left",
+    "78": "hip_right",
+    "101": "rib_left_10",
+    "102": "rib_left_11",
+    "103": "rib_left_12",
+    "98": "rib_left_7",
+    "99": "rib_left_8",
+    "100": "rib_left_9",
+    "113": "rib_right_10",
+    "114": "rib_right_11",
+    "115": "rib_right_12",
+    "109": "rib_right_6",
+    "110": "rib_right_7",
+    "111": "rib_right_8",
+    "112": "rib_right_9",
+    "31": "vertebrae_L1",
+    "30": "vertebrae_L2",
+    "29": "vertebrae_L3",
+    "28": "vertebrae_L4",
+    "27": "vertebrae_L5",
+    "26": "vertebrae_S1",
+    "34": "vertebrae_T10",
+    "33": "vertebrae_T11",
+    "32": "vertebrae_T12",
+    "35": "vertebrae_T9"
+  },
+  "model_labels": {
+    "lung_upper_lobe_left": "upper-lobe-left",
+    "lung_lower_lobe_left": "lower-lobe-left",
+    "lung_middle_lobe_right": "middle-lobe-right",
+    "lung_lower_lobe_right": "lower-lobe-right",
+    "heart": "heart",
+    "aorta": "aorta",
+    "inferior_vena_cava": "inferior-vena-cava",
+    "portal_vein_and_splenic_vein": "portal-vein",
+    "iliac_artery_left": "iliac-artery",
+    "iliac_artery_right": "iliac-artery",
+    "iliac_vena_left": "iliac-vein",
+    "iliac_vena_right": "iliac-vein",
+    "esophagus": "esophagus",
+    "spinal_cord": "spinal-cord",
+    "liver": "liver",
+    "spleen": "spleen",
+    "pancreas": "pancreas",
+    "gallbladder": "gallbladder",
+    "kidney_left": "kidney",
+    "kidney_right": "kidney",
+    "adrenal_gland_left": "adrenal-gland",
+    "adrenal_gland_right": "adrenal-gland",
+    "stomach": "stomach",
+    "duodenum": "duodenum",
+    "small_bowel": "small-bowel",
+    "colon": "colon",
+    "urinary_bladder": "urinary-bladder",
+    "prostate": "prostate",
+    "autochthon_left": "autochthonous-back-muscle",
+    "autochthon_right": "autochthonous-back-muscle",
+    "iliopsoas_left": "iliopsoas",
+    "iliopsoas_right": "iliopsoas",
+    "gluteus_maximus_left": "gluteal-muscle",
+    "gluteus_maximus_right": "gluteal-muscle",
+    "gluteus_medius_left": "gluteal-muscle",
+    "gluteus_medius_right": "gluteal-muscle",
+    "gluteus_minimus_left": "gluteal-muscle",
+    "gluteus_minimus_right": "gluteal-muscle",
+    "femur_left": null,
+    "femur_right": null,
+    "hip_left": null,
+    "hip_right": null,
+    "rib_left_10": null,
+    "rib_left_11": null,
+    "rib_left_12": null,
+    "rib_left_7": null,
+    "rib_left_8": null,
+    "rib_left_9": null,
+    "rib_right_10": null,
+    "rib_right_11": null,
+    "rib_right_12": null,
+    "rib_right_6": null,
+    "rib_right_7": null,
+    "rib_right_8": null,
+    "rib_right_9": null,
+    "vertebrae_L1": null,
+    "vertebrae_L2": null,
+    "vertebrae_L3": null,
+    "vertebrae_L4": null,
+    "vertebrae_L5": null,
+    "vertebrae_S1": null,
+    "vertebrae_T10": null,
+    "vertebrae_T11": null,
+    "vertebrae_T12": null,
+    "vertebrae_T9": null
+  },
+  "_why_caps": "An axial cut through the abdomen shows bowel in many places at once; repeated identical labels saturate the gutters.",
+  "max_pins_per_slice": {
+    "colon": 3,
+    "small-bowel": 3,
+    "iliac-artery": 2,
+    "iliac-vein": 2,
+    "kidney": 2,
+    "adrenal-gland": 2,
+    "gluteal-muscle": 2,
+    "iliopsoas": 2,
+    "autochthonous-back-muscle": 2
+  },
+  "_student_notice": "One living patient from a public research dataset, chosen because its record carries a \"no pathology\" flag - but it is a clinical study, not a certified normal. Labels are the dataset's own expert segmentations; no model was run. Left and right are not asserted."
+}

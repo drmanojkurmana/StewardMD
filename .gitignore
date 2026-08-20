@@ -89,3 +89,17 @@ play-api-*.json
 # Play Developer API service-account keys — NEVER commit (keep outside the repo)
 backend/kardiox-image/image_model_mireal.pt
 backend/kardiox-image/image_model_v2.pt
+
+# RadioAnatome pipeline: volumes, masks, venvs and the vendored SynthSeg clone are
+# regenerated locally, never committed
+atlas-pipeline/work/
+# No trailing slash as well: the slash form matches a DIRECTORY only, so a symlink
+# named work/ slipped past it and got committed (mode 120000, absolute path). Pages
+# then failed the build with "contains links to files that can't be accessed" and a
+# whole commit never reached production.
+atlas-pipeline/work
+atlas-pipeline/.venv/
+atlas-pipeline/.venv-ss/
+atlas-pipeline/synthseg-repo/
+*.nii
+*.nii.gz

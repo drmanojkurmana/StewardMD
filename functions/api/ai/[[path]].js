@@ -48,6 +48,11 @@ function firewallBlock(q) {
 // (anonymous non-app clients rejected; native X-SMD-App + owner/Cf-Access + named Origins still pass).
 function authorise(request, env) {
   if (request.headers.get("Cf-Access-Authenticated-User-Email")) return true;
+  // A signed-in caller (Firebase Bearer token) is never the anonymous-abuse case the Origin gate guards
+  // against — and browsers omit the Origin header on SAME-ORIGIN GETs, which was silently 403-ing the
+  // admin console + web app once APP_GATE_KEY was set. Let authenticated requests through; per-user
+  // quota + the owner check (aiAdminAuthed) downstream are the real controls.
+  if (request.headers.get("Authorization")) return true;
   if (env.GHIS_APP_TOKEN && request.headers.get("X-App-Token") === env.GHIS_APP_TOKEN) return true;
   if (env.GHIS_APP_TOKEN === undefined && env.AI_APP_TOKEN && request.headers.get("X-App-Token") === env.AI_APP_TOKEN) return true;
   // Exact host allowlist (NOT endsWith — that matched attacker domains like
@@ -125,6 +130,23 @@ import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
 function modelId(env) { return (env && env.__modelOverride) || env.GEMINI_MODEL || MODEL_DEFAULT; }
+// Tiered routing (opt-in): the default model is already the FAST one (gemini-2.5-flash). When the owner
+// sets env.STRONG_MODEL (a valid model, e.g. gemini-2.5-pro), a genuinely COMPLEX/reasoning query escalates
+// to it for better answers; everything else stays on flash. Unset STRONG_MODEL = current behaviour (no-op).
+function strongModel(env) { const m = env && env.STRONG_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+// FAST path (latency + cost): a SIMPLE (non-complex) query can run on a cheaper, non-"thinking" model.
+// gemini-2.5-flash keeps thinking even with thinkingBudget:0 (a known Google issue — thinking tokens
+// eat the output budget + wall-clock); gemini-2.5-flash-lite honours budget:0, so it is faster AND
+// ~2.4x cheaper. Set env.MAIK_FAST_MODEL=gemini-2.5-flash-lite to route simple queries there; complex
+// reasoning still uses the default (full flash). Unset = current behaviour (no-op). Validate quality first.
+function fastModel(env) { const m = env && env.MAIK_FAST_MODEL; return (typeof m === "string" && ALLOWED_MODELS.indexOf(m) > -1) ? m : null; }
+function looksComplex(q) {
+  q = String(q || ""); if (q.length > 160) return true;
+  // Depth/reasoning cues -> keep on the full model. Anything NOT matching (a bare factual/dose/definition
+  // lookup) is eligible for the cheaper, faster fast-path model. Bias toward "complex" so quality is the
+  // default and only genuinely trivial questions are sped up.
+  return /\b(why|compare|comparison|versus|\bvs\b|differentiate|difference between|mechanism|reconcile|trade[- ]?off|weigh|approach|work ?up|workup|interpret|rationale|pros and cons|when to (choose|prefer)|first[- ]?line|manage|management|treat|treatment|regimen|protocol|differential|causes? of|etiolog|aetiolog|prophylaxis|evaluate|investigate|guideline|which (drug|antibiotic|agent|regimen)|how (to|do|should))\b/i.test(q) || (q.match(/\?/g) || []).length > 1;
+}
 
 // Vision/OCR uses a strong, FIXED multimodal model — deliberately NOT the admin text-model override
 // or the emergency "cheap" model. Misreading a drug name off a prescription is a safety risk, so
@@ -197,9 +219,14 @@ function streamTextAsSSE(text) {
 // These are synthesis/extraction tasks (grounded in retrieved evidence) that do not need it,
 // so disabling also cuts latency + cost.
 function genBody(parts, maxTokens, opts) { var t = (opts && typeof opts.temperature === "number") ? opts.temperature : 0.2; var b = { contents: [{ role: "user", parts: parts }], generationConfig: { temperature: t, maxOutputTokens: maxTokens || 1024, thinkingConfig: { thinkingBudget: 0 } } }; if (opts && opts.tools) b.tools = opts.tools; return b; }
+// Latency/token instrumentation: last Gemini call's usageMetadata (promptTokenCount / thoughtsTokenCount
+// / candidatesTokenCount) + finishReason, surfaced via ?diag=1. thoughtsTokenCount reveals how much time
+// is spent on invisible "thinking" (the suspected latency sink) vs visible output. No content, no PHI.
+let _lastGenMeta = null;
 function parseCandidates(data, status) {
   if (status >= 400 || !data || data.error) throw new Error("AI HTTP " + status + ((data && data.error && data.error.message) ? ": " + data.error.message : ""));
   const cand = data.candidates && data.candidates[0];
+  _lastGenMeta = { finishReason: (cand && cand.finishReason) || "", usage: (data && data.usageMetadata) || null };
   return (cand && cand.content && cand.content.parts) ? cand.content.parts.map(function (p) { return p.text || ""; }).join("") : "";
 }
 
@@ -212,7 +239,7 @@ const developerProvider = {
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });   // Developer API tool name
     const jr = await fetchJsonWithTimeout(`${DEV_HOST}/${modelFor(env, o)}:generateContent?key=${env.GEMINI_API_KEY}`,
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: function (env, parts, maxTokens, opts) {
@@ -276,17 +303,17 @@ const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });   // Vertex tool name
     const jr = await fetchJsonWithTimeout(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) }, aiTimeoutMs(env));
-    return parseCandidates(jr.data, jr.status);
+    { const _t = parseCandidates(jr.data, jr.status); if (_lastGenMeta) _lastGenMeta.model = modelFor(env, o); return _t; }
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
@@ -407,9 +434,9 @@ function providerOrder(env, opts) {
   // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
   // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
-  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
+  const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
   const forMaik = !!(opts && opts.maik);
-  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "developer" ? ["developer"] : ["vertex", "developer"];
+  let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
   if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
   return order.length ? order : ["vertex", "developer"];
@@ -428,6 +455,11 @@ function failReason(e) {
 // Vertex (retry once) → Developer hot standby. Fails over on any Vertex auth/OAuth/STS/
 // permission/quota/429/5xx/network/unavailable error so the clinician workflow never breaks.
 export async function callGemini(env, parts, maxTokens, opts) {
+  // Tiered routing: a complex clinical query escalates to the stronger model, if the owner enabled one.
+  if (opts && !opts.model) {
+    if (opts.complex) { const sm = strongModel(env); if (sm) opts = Object.assign({}, opts, { model: sm }); }        // hard query -> stronger model (opt-in)
+    else { const fm = fastModel(env); if (fm) opts = Object.assign({}, opts, { model: fm }); }                        // simple query -> cheaper/faster non-thinking model (opt-in)
+  }
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (let i = 0; i < order.length; i++) {
@@ -1062,6 +1094,8 @@ export async function onRequest(context) {
     return json({
       enabled: enabled,
       provider: order[0],
+      ai_provider_env: (env.AI_PROVIDER || null),
+      live_stream_env: (env.MAIK_LIVE_STREAM || null),
       fallback_available: !!(fb && PROVIDERS[fb] && PROVIDERS[fb].available(env)),
       fallback_provider: fb,
       model: modelId(env),
@@ -1128,12 +1162,16 @@ export async function onRequest(context) {
   // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
-  // Native (capacitor://) CANNOT stream — CapacitorHttp buffers SSE — so it waits for the ENTIRE
-  // answer before anything renders; a long answer there = a long blank wait. The non-stream concise
-  // answer therefore uses a TIGHTER cap so generation finishes fast. Streaming web keeps OUT_BASE (it
-  // flows, so length is ~free), and "detailed" honours the explicit depth request on either path.
-  const NONSTREAM_BASE = Math.max(256, Math.min(1100, Number(env.MAIK_NONSTREAM_OUTPUT_TOKENS) || 600));
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000)) : OUT_BASE;
+  // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
+  // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
+  // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
+  // "thinking" even with thinkingConfig.thinkingBudget:0, so the old 600 was consumed ENTIRELY by
+  // thinking and long/structured answers (management, compare, differential) came back EMPTY (verified
+  // live: 600 -> "", 2048 -> full). The budget must leave headroom for thinking PLUS the full visible
+  // answer. Short/factual answers still self-adapt and stop early, so they are unaffected. Tune with
+  // MAIK_NONSTREAM_OUTPUT_TOKENS; "detailed" still honours the explicit depth request. Was 600 (empty).
+  const NONSTREAM_BASE = Math.max(256, Math.min(4096, Number(env.MAIK_NONSTREAM_OUTPUT_TOKENS) || 2560));
   const MAX_IN_CHARS = Math.max(2000, (Number(env.MAIK_MAX_INPUT_TOKENS) || 4000) * 4);
 
   try {
@@ -1192,7 +1230,7 @@ export async function onRequest(context) {
         // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
         // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
         // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
@@ -1229,7 +1267,8 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true }); }
+        const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
@@ -1238,6 +1277,12 @@ export async function onRequest(context) {
         if (wantStream) return withCors(request, streamTextAsSSE(text));
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
+        if (new URL(request.url).searchParams.get("diag") === "1") {
+          const u = (_lastGenMeta && _lastGenMeta.usage) || {};
+          const _diag = { ms: Date.now() - _t0, cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+            promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
+          return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
+        }
         return json({ text: text, mode: "grounded", citations: cites });
       }
       // Legacy fallback: plain engine summary string (backward compatible).
@@ -1246,7 +1291,7 @@ export async function onRequest(context) {
       const gate = await checkQuota(env, request, "case");
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const prompt = EXPLAIN_SYS + "\n\n--- ENGINE OUTPUT ---\n" + summary + (body.question ? "\n\nClinician question: " + String(body.question).slice(0, 500) : "");
-      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true });   // MaiK explain (legacy path)
+      const text = await callGemini(env, [{ text: prompt }], MAX_OUT, { maik: true, complex: looksComplex(pkg && pkg.question) });   // MaiK explain (legacy path)
       await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
       return json({ text: text, mode: "summary" });
     }

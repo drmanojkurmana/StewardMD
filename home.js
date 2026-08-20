@@ -351,6 +351,7 @@
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", function () { setupSidebarToggle(IS_V2); }); else setupSidebarToggle(IS_V2);
 
   var ICON = {
+    grid: '<rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>',
     menu: '<line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/>',
     help: '<circle cx="12" cy="12" r="10"/><path d="M9.5 9.2a2.5 2.5 0 0 1 4.5 1.4c0 1.6-2 2-2 3.4"/><line x1="12" y1="17" x2="12.01" y2="17"/>',
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
@@ -480,7 +481,8 @@
   function goHome() {
     // 1) Close every module via its own API (resets internal state + restores body scroll).
     var apis = [
-      window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
+      window.ATLAS && window.ATLAS.close,
+    window.DX && window.DX.close, window.ELYTE && window.ELYTE.close,
       window.MEDCALC && window.MEDCALC.close, window.INF && window.INF.close,
       window.MEDDB && window.MEDDB.close, window.SB && window.SB.closeRef,
       window.SB && window.SB.close, window.ABG && window.ABG.close,
@@ -730,6 +732,7 @@
     queue: function () { if (window.QUEUE && QUEUE.open) QUEUE.open(); else toast("OPD Queue loading…"); },
     // Onco Home: clinician-facing oncology reference workbench (search + tool grid over the
     // existing MEDCALC/KB/drugs — not the patient treatment-plan engine). Flag-gated inside SMD_ONCOHOME.open().
+    atlas: function () { if (window.ATLAS && ATLAS.open) ATLAS.open(); else toast("RadioAnatome loading…"); },
     oncohome: function () { if (window.SMD_ONCOHOME && SMD_ONCOHOME.open) SMD_ONCOHOME.open(); else toast("ONCqis loading…"); },
     oncotree: function () { if (window.SMD_ONCOTREE && SMD_ONCOTREE.open) SMD_ONCOTREE.open(); else toast("OncoTree loading…"); },
     // "Hospital" hub — one roof over the patient-facing tools. Opens a sheet of tiles that each
@@ -1384,6 +1387,8 @@
     { act: "dictate", ic: "mic", tt: "Dictate", sub: "Voice notes" },
     { act: "interactions", ic: "photo_camera", tt: "Scan Meds", sub: "Interactions" },
     { act: "guidelines", ic: "book_2", tt: "Guides", sub: "Protocols" },
+    { act: "atlas", ic: "body_system", tt: "RadioAnatome", sub: "Anatomy",
+      eligible: function () { try { var q = (location.search.match(/[?&]atlas=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on" || q === "true"; return localStorage.getItem("smd_atlas") !== "0"; } catch (e) { return true; } } },
     { act: "electrolytes", ic: "science", tt: "Electrolytes", sub: "ICU correction", defOn: false },
     // Everything else the app can open — available in "Add Tool" (off by default; the doctor pins what they want).
     { act: "hospital", ic: "local_hospital", tt: "Hospital", sub: "OPD · ICU · Ward", defOn: false },
@@ -3483,6 +3488,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // MaiK V2 — retrieval-first KB brain. Default ON; ?kb=0 (or smd_maik_kb=0) forces the legacy
     // Gemini-first path. Independent of account/sign-in — the KB answer is composed locally.
     function maikKB() { try { var q = new URLSearchParams(location.search || "").get("kb"); if (q === "1") return true; if (q === "0") return false; return localStorage.getItem("smd_maik_kb") !== "0"; } catch (e) { return true; } }
+    // LLM-FIRST (default ON): answer every standalone clinical question with Gemini/Vertex, using the KB
+    // as GROUNDING (not as a templated reply), so MaiK reads like a real LLM. Also skips the ~3s semantic
+    // router call, so it is cheaper + faster, not just more fluent. KB stays as the offline fallback.
+    // Revert instantly with ?llm=0 or localStorage smd_maik_llm_first=0 (no redeploy).
+    function maikLLMFirst() { try { var q = new URLSearchParams(location.search || "").get("llm"); if (q === "1") return true; if (q === "0") return false; return localStorage.getItem("smd_maik_llm_first") !== "0"; } catch (e) { return true; } }
     // ── Web-research helper (extracted so the KB-miss branch AND the assume-tier refine chip
     //    share one implementation). Opt-in, one call, clearly labelled non-StewardMD.
     function maikRunWeb(container, q, srcEl) {
@@ -3952,7 +3962,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           // instead of dead-ending we AUTO-RUN web research (Google-grounded, clearly labelled
           // "not StewardMD-verified") — no tap required. We still don't let the KB model describe
           // a lexically-near but different condition; the web tier researches the ACTUAL topic.
-          if (tm && tm.matched === false && tm.mode !== "assume") {
+          if (!(maikLLMFirst() && !active) && tm && tm.matched === false && tm.mode !== "assume") {   // LLM-first standalone: let Gemini answer off-KB topics directly (skip the slower web-research tier)
             var tp = maikEscH(tm.topic || question);
             think.innerHTML = '<div class="maik-welcome"><span class="maik-live-dot"></span>' + svg("spark", "smd-ico") + ' Researching <b>' + tp + '</b>…</div>';
             try { maikRunWeb(think, question); } catch (e) { think.appendChild(maikWebChipEl(question)); }
@@ -4107,6 +4117,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
               } catch (e) {}
+            }).catch(function (eGen) {
+              // LLM path failed (offline / provider error). Fall back to the on-device KB so the clinician
+              // still gets an answer instead of a bare "unavailable". Rethrow if the KB has nothing, so the
+              // outer catch shows the graceful message.
+              try { if (window.MaiKKB && !active) { var _kbF = window.MaiKKB.compose(question, pkg, {}); if (_kbF && _kbF.text) { finishKB(_kbF, pkg, "offline"); return; } } } catch (e) {}
+              throw eGen;
             });
           }
           function _askAmbiguous(options, header) {   // genuine ambiguity / underspecified concept → ask, never guess
@@ -4138,7 +4154,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             } catch (e) {}
             return null;
           }
-          var _kbOn = window.MaiKKB && maikKB() && !active;
+          var _kbOn = window.MaiKKB && maikKB() && !active && !maikLLMFirst();   // LLM-first: skip templated-KB short-circuits, answer via Gemini with the KB as grounding
           // ── CLINICAL DIALOGUE MANAGER (above the router): an underspecified BROAD concept (meningitis,
           // diabetes, shock…) must NOT silently answer an arbitrary subtype. Prefer a general overview +
           // subtype drill-down chips; ask ONE clarification only when the KB has no safe general answer.
@@ -4749,7 +4765,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   var NOTIF_API = "/api/updates", NOTIF_SEEN = "smd_updates_seen_ts", NOTIF_BM = "smd_updates_bm";
   // Owner allowlist — mirrors functions/_adminauth.js OWNER_EMAILS. Client gate only shows the
   // in-app Delete affordance; the server (ownerOK on DELETE /api/updates/:id) is the real enforcement.
-  var NOTIF_OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com"];
+  var NOTIF_OWNERS = ["drmanojkurmana@gmail.com", "mkkmanojkumar0@gmail.com", "kdiwakar45@gmail.com", "stewardmd.in@gmail.com"];
   function nIsOwner() { try { var u = window.SMD_AUTH && SMD_AUTH.currentUser; return !!(u && u.email && NOTIF_OWNERS.indexOf(String(u.email).toLowerCase()) >= 0); } catch (e) { return false; } }
   var _notifItems = null;                 // Tab 1: manual app notices (auto=0)
   var _feedItems = [], _feedCursor = null, _feedEnd = false, _feedLoading = false;

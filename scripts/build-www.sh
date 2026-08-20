@@ -14,7 +14,7 @@ rm -rf "$WWW"
 mkdir -p "$WWW" "$WWW/kb/dist" "$WWW/kb/ai" "$WWW/kb/treatments" "$WWW/kb/protocols"
 
 # ── 1. Shipping HTML (exclude demos + site-verification pages) ────────────────
-for f in index.html privacy.html terms.html disclaimer.html support.html; do
+for f in index.html privacy.html terms.html disclaimer.html support.html copyright.html; do
   [ -f "$f" ] && cp "$f" "$WWW/"
 done
 
@@ -83,6 +83,13 @@ done
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
 # MaiK Ask clinical pathways (fetched at runtime by pathways.js SMD_PATHWAYS.loadAll)
+# RadioAnatome: ship the JSON but NOT the .webp slices -- those stay on Pages and
+# atlas.js rewrites their URLs natively, mirroring kardiox-screens.js kxImg().
+if [ -d atlas ]; then
+  mkdir -p "$WWW/atlas"
+  cp atlas/modules.json "$WWW/atlas/" 2>/dev/null || true
+  for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
+fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,

@@ -37,12 +37,13 @@ test("isSuperAdmin: false for a non-owner email, null email, or absent actor (fa
   assert.equal(isSuperAdmin(undefined, {}), false);
 });
 
-test("isSuperAdmin: OWNER_EMAILS env override changes the set (restricts AND grows)", () => {
-  const restricted = { OWNER_EMAILS: OTHER_OWNER_EMAIL };
-  assert.equal(isSuperAdmin({ id: "fb:x", email: OWNER_EMAIL }, restricted), false);       // narrowed out
-  assert.equal(isSuperAdmin({ id: "fb:y", email: OTHER_OWNER_EMAIL }, restricted), true);  // still in
-  const grown = { OWNER_EMAILS: OWNER_EMAIL + "," + NON_OWNER_EMAIL };
-  assert.equal(isSuperAdmin({ id: "fb:z", email: NON_OWNER_EMAIL }, grown), true);         // newly added
+test("isSuperAdmin: OWNER_EMAILS env ADDS owners (union with built-ins; never removes them)", () => {
+  const withEnv = { OWNER_EMAILS: OTHER_OWNER_EMAIL };
+  assert.equal(isSuperAdmin({ id: "fb:x", email: OWNER_EMAIL }, withEnv), true);        // built-in stays an owner
+  assert.equal(isSuperAdmin({ id: "fb:y", email: OTHER_OWNER_EMAIL }, withEnv), true);  // present in env too
+  const grown = { OWNER_EMAILS: NON_OWNER_EMAIL };
+  assert.equal(isSuperAdmin({ id: "fb:z", email: NON_OWNER_EMAIL }, grown), true);      // env-added owner
+  assert.equal(isSuperAdmin({ id: "fb:q", email: "random@x.com" }, grown), false);      // not built-in, not in env → denied
 });
 
 // ---- resolveTenant: the super-admin branch ----

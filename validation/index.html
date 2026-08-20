@@ -1,0 +1,371 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>RadioAnatome — clinical sign-off</title>
+<link rel="icon" href="/logo.png"><!-- /logo.png, not icon-only.png: only the brand images in _middleware.js's allowlist resolve for an anonymous visitor -->
+
+<link rel="stylesheet" href="/atlas.css?v=atlas1">
+<style>
+:root{
+  --stage:#000;--ink:#f2f2f2;--ink-dim:#98a0a8;--surface:#14171a;--surface2:#1c2126;
+  --line:#2b3238;--accent:#3b9dff;--ok:#57d07f;--warn:#ffb45e;--bad:#ff7a7a;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--stage);color:var(--ink);font:15px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;-webkit-font-smoothing:antialiased;-webkit-text-size-adjust:100%}
+.wrap{max-width:1180px;margin:0 auto;padding:26px 20px 72px;display:flex;flex-direction:column;gap:24px}
+.eyebrow{font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.15em;text-transform:uppercase;color:var(--accent)}
+h1{margin:0;font-size:clamp(25px,4vw,35px);font-weight:700;letter-spacing:-.02em}
+h2{margin:0;font-size:18px;font-weight:650}
+.sub{margin:0;color:var(--ink-dim);max-width:70ch}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:18px 20px}
+.card h3{margin:0 0 12px;font:650 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-dim)}
+.split{display:flex;flex-wrap:wrap;gap:26px;align-items:flex-start}
+.frame{position:relative;flex:0 0 auto;width:375px;height:740px;border:1px solid var(--line);border-radius:20px;overflow:hidden;background:var(--stage);box-shadow:0 16px 50px rgba(0,0,0,.6)}
+.frame .atlas-overlay{position:absolute}
+/* SCROLL MUST ALWAYS WORK ON THIS PAGE — no exceptions, no conditions.
+   atlas.js holds `.atlas-lock` (overflow:hidden) on <body> for as long as the viewer is open.
+   That is right in the app, where the viewer IS the screen. It is never right here: this page
+   opens the viewer at load and keeps it open for the whole session to embed it, so the lock never
+   lifts — the viewer's own inner regions scroll while the page underneath is frozen, which is
+   exactly the reported symptom. Measured on the live page: body.overflow was already "hidden"
+   before any module had been opened.
+   Unconditional on purpose. An earlier version scoped this to an `atlas-embedded` class and the
+   page still froze wherever that class did not apply; there is no state of this page in which
+   locking the document is wanted — either the viewer is a box inside a scrolling document, or it
+   is a fullscreen overlay already covering whatever is behind it.
+   !important because atlas.css is a shared app file whose rules may be reordered or re-specified
+   later; this page must not silently regress to a frozen document again. */
+html{overflow-y:auto!important}
+body,body.atlas-lock{overflow:visible!important}
+.col{flex:1 1 420px;min-width:0;display:flex;flex-direction:column;gap:18px}
+.viewcol{position:sticky;top:18px;align-self:flex-start;flex:0 0 375px;width:375px;max-width:375px;display:flex;flex-direction:column;gap:11px}
+.viewcol .hint{max-width:375px}
+.hint{color:var(--ink-dim);font:12px/1.5 ui-monospace,SFMono-Regular,Menlo,monospace}
+.hint b{color:var(--ink)}
+table.signoff{width:100%;border-collapse:collapse;font-size:14px}
+table.signoff th{text-align:left;padding:8px;border-bottom:1px solid var(--line);font:600 10px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-dim)}
+table.signoff td{padding:11px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+.mod{font-weight:600}.plane{color:var(--ink-dim);font-size:12px}
+.structs{color:var(--ink-dim);font-size:12px;line-height:1.5;margin-top:3px}
+.btns{display:flex;gap:6px;flex-wrap:wrap}
+button.vote{border:1px solid var(--line);background:var(--surface2);color:var(--ink-dim);border-radius:999px;padding:5px 11px;font-size:12.5px;cursor:pointer;white-space:nowrap}
+.open{margin-top:9px;border:1px solid var(--accent);background:transparent;color:var(--accent);border-radius:8px;padding:7px 13px;font-size:13px;cursor:pointer;font-weight:600}
+.open:active{background:var(--accent);color:#04121f}
+button.vote:hover{border-color:var(--ink-dim);color:var(--ink)}
+tr[data-status=ok] button.vote[data-v=ok]{background:var(--ok);border-color:var(--ok);color:#06210f;font-weight:650}
+tr[data-status=fix] button.vote[data-v=fix]{background:var(--warn);border-color:var(--warn);color:#2a1600;font-weight:650}
+tr[data-status=no] button.vote[data-v=no]{background:var(--bad);border-color:var(--bad);color:#2a0808;font-weight:650}
+.status{display:block;margin-top:6px;font:600 11px/1 ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-dim)}
+tr[data-status=ok] .status{color:var(--ok)}
+tr[data-status=fix] .status{color:var(--warn)}
+tr[data-status=no] .status{color:var(--bad)}
+textarea.note{display:block;width:100%;min-height:2.4em;margin-top:7px;padding:6px 9px;border:1px dashed var(--line);border-radius:7px;background:var(--surface2);color:var(--ink);font:13px system-ui,sans-serif;resize:vertical}
+textarea.note:focus{outline:none;border-style:solid;border-color:var(--accent)}
+input.who{width:100%;padding:9px 11px;border:1px solid var(--line);border-radius:8px;background:var(--surface2);color:var(--ink);font-size:14px}
+.flag{border-left:3px solid var(--warn);background:rgba(255,180,94,.07);padding:13px 15px;border-radius:0 8px 8px 0}
+.flag strong{color:var(--warn)}
+.flag.crit{border-left-color:var(--bad);background:rgba(255,122,122,.07)}
+.flag.crit strong{color:var(--bad)}
+ul{margin:0;padding-left:20px}li{margin:0 0 7px}
+.measure{font-variant-numeric:tabular-nums;color:#7fd9e8}
+footer{color:var(--ink-dim);font-size:12px;border-top:1px solid var(--line);padding-top:16px}
+code{font:12.5px ui-monospace,SFMono-Regular,Menlo,monospace}
+:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+/* overflow:auto + margin:auto on the box, NOT place-items:center — a centred grid/flex item
+   whose content is taller than the viewport gets clipped at the top with no way to scroll to
+   it (short laptop, or a phone with the keyboard up). margin:auto centres AND stays scrollable. */
+#gate{position:fixed;inset:0;background:var(--stage);display:flex;overflow:auto;padding:24px;z-index:99}
+#gate .box{margin:auto;width:min(360px,92vw);display:flex;flex-direction:column;gap:12px;padding:26px;border:1px solid var(--line);border-radius:14px;background:var(--surface)}
+#gate input{padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--surface2);color:var(--ink);font-size:15px}
+#gate button{padding:10px 12px;border:0;border-radius:8px;background:var(--accent);color:#04121f;font-weight:650;font-size:15px;cursor:pointer}
+#gerr{color:var(--bad);font-size:13px;min-height:1.2em}
+#saved{color:var(--ok);font:12px ui-monospace,Menlo,monospace;min-height:1.2em}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:980px){.viewcol{position:static}}
+@media (max-width:860px){.viewcol{flex:1 1 auto;width:100%;max-width:100%}.viewcol .hint{max-width:100%}.frame{width:100%;max-width:375px;height:660px}}
+
+/* PHONE. The desktop conceit — a 375px phone mock-up beside the checklist — does not survive a
+   real phone: it became a 350x660 box inside a 390x844 screen, too small to judge anatomy in,
+   and it wedged a permanent scroll lock onto <body>. On a phone the frame is dropped entirely
+   and each row gets its own "View" button that opens the viewer FULLSCREEN on that module —
+   the same presentation the app gives, and the only one with enough pixels to actually read.
+   The two-column table also stops being a table and becomes one card per module, so the three
+   verdict buttons and the notes box get full width instead of half. */
+@media (max-width:720px){
+  .frame{display:none}
+  table.signoff thead{display:none}
+  table.signoff,table.signoff tbody,table.signoff tr,table.signoff td{display:block;width:auto}
+  table.signoff tr{border:1px solid var(--line);border-radius:12px;padding:13px;margin-bottom:12px}
+  table.signoff td{border-bottom:0;padding:0}
+  table.signoff td+td{margin-top:12px}
+  /* `button.vote`, not `.vote` — the base rule is element+class (0,1,1) and outranks a bare
+     class no matter what media query it sits in. Measured 27px tall before this. */
+  button.vote{padding:10px 16px;font-size:14px}   /* ~40px tall — a thumb, not a mouse */
+  textarea.note{width:100%;box-sizing:border-box}
+  .card{padding:15px}
+}
+</style>
+</head>
+<body>
+
+<div id="gate"><div class="box">
+  <div class="eyebrow">RadioAnatome</div>
+  <h2>Clinical sign-off</h2>
+  <input id="gu" placeholder="ID" value="admin" autocomplete="username">
+  <input id="gp" type="password" placeholder="Password" autocomplete="current-password">
+  <button id="gb">Open</button>
+  <div id="gerr"></div>
+</div></div>
+
+<div class="wrap" id="app" hidden>
+  <header style="display:flex;flex-direction:column;gap:6px">
+    <span class="eyebrow">RadioAnatome &middot; clinical sign-off</span>
+    <h1>Please check the labels, module by module</h1>
+    <p class="sub">Ten modules of NLM Visible Human imagery in the StewardMD viewer. Every pin has been
+      checked by machine to sit <em>inside</em> the region it points at. What nobody has checked is
+      whether that region is the structure it is <em>named</em> &mdash; that is the judgement being asked
+      for here. Verdicts and notes save to the server as you go.</p>
+  </header>
+
+  <div class="flag crit">
+    <strong>Not live to students.</strong> The atlas is merged but switched off in the app
+    (<code>smd_atlas</code>) until this sheet is signed. Nothing here has reached a user.
+  </div>
+
+  <div class="split">
+    <div class="viewcol">
+      <div class="frame" id="frame"></div>
+      <p class="hint"><b>View this module</b> on any row below opens it &middot; <b>drag</b> the
+        thumbnail strip to scrub &middot; <b>tap a label</b> for its definition &middot;
+        <b>&lsaquo;</b> goes back</p>
+    </div>
+
+    <div class="col">
+      <div class="card">
+        <h3>Sign-off</h3>
+        <input class="who" id="who" placeholder="Reviewer name" autocomplete="name">
+        <p class="hint" id="tally" style="margin:10px 0 0"></p>
+        <p class="hint" id="store" style="margin:2px 0 0"></p>
+        <p id="saved"></p>
+        <div style="overflow-x:auto;margin-top:8px">
+          <table class="signoff">
+            <thead><tr><th>Module &amp; what it claims</th><th>Verdict</th></tr></thead>
+            <tbody id="rows"><tr><td colspan="2" class="hint">Loading modules&hellip;</td></tr></tbody>
+          </table>
+        </div>
+      </div>
+
+      <div class="card">
+        <h3>What to look for</h3>
+        <ul>
+          <li><b>Is each label on the right structure?</b> That is the whole question. The machine check
+            only proves a pin is inside <em>some</em> region.</li>
+          <li><b>Sides are never claimed.</b> Nothing says left or right anywhere &mdash; two anatomical
+            landmarks disagreed on this cadaver, so no side is asserted. If you see a side named
+            anywhere, that is a bug.</li>
+          <li><b>Levels are never claimed.</b> Ribs and vertebrae are generic, not numbered.</li>
+          <li><b>Lungs are not lobed.</b> This cadaver&rsquo;s lungs measure
+            <span class="measure">&minus;540 to &minus;570 HU</span> against
+            <span class="measure">&minus;700 to &minus;850</span> in a living aerated lung, so the
+            fissures are not resolvable. &ldquo;Lung&rdquo; is deliberately whole-organ.</li>
+          <li><b>No liver, spleen or kidney</b> in the abdomen &mdash; without contrast they share one
+            <span class="measure">25&ndash;90 HU</span> band and cannot be separated. Their absence is
+            intentional.</li>
+          <li><b>The brain has images and no labels.</b> Automatic segmentation was tried and failed;
+            it is listed so you can say whether the images are worth keeping.</li>
+        </ul>
+      </div>
+
+      <div class="flag">
+        <strong>Reject anything you cannot personally vouch for.</strong> A missing label is a gap we can
+        fill. A wrong label teaches wrong anatomy, which is the one failure this must not have.
+      </div>
+    </div>
+  </div>
+
+  <footer>Educational reference only &mdash; not for diagnosis.
+    Courtesy of the U.S. National Library of Medicine.</footer>
+</div>
+
+<script src="/atlas.js?v=atlas1"></script>
+<script>
+(function () {
+  var LABEL = { ok: "verified", fix: "needs fix", no: "rejected", pending: "not reviewed" };
+  var PW = "";
+
+  /* The passphrase gate is a courtesy: /validation is a public URL and this page must
+     send the passphrase to write, so anyone reading the source can find it. The server
+     stores every submission as an immutable append-only entry, which is what actually
+     protects the record. */
+  var gate = document.getElementById("gate"), app = document.getElementById("app");
+  function unlock(pw) {
+    PW = pw; gate.remove(); app.hidden = false;
+    try { sessionStorage.setItem("ra_pw", pw); } catch (e) {}
+    boot();
+  }
+  function tryUnlock() {
+    var u = (document.getElementById("gu").value || "").trim().toLowerCase();
+    var p = (document.getElementById("gp").value || "").trim();
+    if (u === "admin" && p === "5959") unlock(p);
+    else document.getElementById("gerr").textContent = "Not recognised. Check the ID and password you were given.";
+  }
+  document.getElementById("gb").addEventListener("click", tryUnlock);
+  gate.addEventListener("keydown", function (e) { if (e.key === "Enter") tryUnlock(); });
+  try { var s = sessionStorage.getItem("ra_pw"); if (s) unlock(s); } catch (e) {}
+
+  function esc(s) {
+    return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  }
+
+  function tally() {
+    var n = { ok: 0, fix: 0, no: 0, pending: 0 };
+    document.querySelectorAll("#rows tr[data-id]").forEach(function (r) {
+      n[r.getAttribute("data-status") || "pending"]++;
+    });
+    document.getElementById("tally").textContent =
+      n.ok + " verified · " + n.fix + " needs fix · " + n.no + " rejected · " +
+      n.pending + " not reviewed";
+  }
+
+  function flash(msg, bad) {
+    var el = document.getElementById("saved");
+    el.style.color = bad ? "var(--bad)" : "var(--ok)";
+    el.textContent = msg;
+    setTimeout(function () { if (el.textContent === msg) el.textContent = ""; }, 3500);
+  }
+
+  function send(tr) {
+    var body = {
+      pw: PW,
+      module: tr.getAttribute("data-id"),
+      verdict: tr.getAttribute("data-status") || "pending",
+      note: (tr.querySelector("textarea.note") || {}).value || "",
+      who: (document.getElementById("who") || {}).value || ""
+    };
+    return fetch("/api/validation", {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body)
+    }).then(function (r) { return r.json().catch(function () { return { ok: false }; }); })
+      .then(function (j) {
+        if (j && j.ok) flash(j.enabled === false ? "saved locally only (no server store bound)" : "saved");
+        else if (j && j.error === "unauthorized") flash("password rejected by the server", true);
+        else if (j && j.error === "rate_limited") flash("too many saves, slow down", true);
+        else flash("could not save — your verdict is still on screen", true);
+      })
+      .catch(function () { flash("offline — could not save", true); });
+  }
+
+  // "View this module" — jumps the viewer straight to that module. On desktop it swaps the module
+  // shown in the embedded frame; on a phone, where nothing is embedded, atlas.js's own
+  // position:fixed overlay takes the full screen, which is the point.
+  document.addEventListener("click", function (e) {
+    var o = e.target.closest && e.target.closest("button.open");
+    if (!o || !window.ATLAS || !ATLAS.open) return;
+    ATLAS.open(o.getAttribute("data-open"));
+    if (!isPhone()) {
+      var root = document.getElementById("smdAtlas"), frame = document.getElementById("frame");
+      if (root && frame && root.parentNode !== frame) frame.appendChild(root);
+      frame && frame.scrollIntoView({ block: "center" });
+    }
+  });
+
+  document.addEventListener("click", function (e) {
+    var b = e.target.closest && e.target.closest("button.vote");
+    if (!b) return;
+    var tr = b.closest("tr"), v = b.getAttribute("data-v");
+    if (!tr) return;
+    if (tr.getAttribute("data-status") === v) v = "pending";
+    tr.setAttribute("data-status", v);
+    tr.querySelector(".status").textContent = LABEL[v] || v;
+    tally(); send(tr);
+  });
+  document.addEventListener("change", function (e) {
+    var t = e.target;
+    if (t && t.matches && t.matches("textarea.note")) send(t.closest("tr"));
+  });
+
+  function rowHtml(m, structs, cur) {
+    var st = (cur && cur.verdict) || "pending";
+    return '<tr data-id="' + esc(m.id) + '" data-status="' + esc(st) + '">' +
+      '<td><div class="mod">' + esc(m.title) + '</div>' +
+      '<div class="plane">' + esc(m.subtitle) + ' &middot; ' + m.pins + ' pins &middot; ' +
+        m.slices + ' slices</div>' +
+      '<div class="structs">' + esc(structs) + '</div>' +
+      '<button class="open" data-open="' + esc(m.id) + '">View this module</button></td>' +
+      '<td><div class="btns">' +
+        '<button class="vote" data-v="ok">Verified</button>' +
+        '<button class="vote" data-v="fix">Needs fix</button>' +
+        '<button class="vote" data-v="no">Reject</button></div>' +
+      '<span class="status">' + esc(LABEL[st] || st) + '</span>' +
+      '<textarea class="note" placeholder="Notes — what is wrong, or which slice">' +
+        esc((cur && cur.note) || "") + '</textarea></td></tr>';
+  }
+
+  var ORDER = ["ct-head-axial","ct-head-coronal","ct-head-sagittal",
+               "ct-thorax-axial","ct-thorax-coronal","ct-thorax-sagittal",
+               "ct-abdomen-axial","ct-abdomen-coronal","ct-abdomen-sagittal",
+               "brain-mri-axial-t1"];
+
+  function isPhone() {
+    try { return window.matchMedia("(max-width:720px)").matches; } catch (e) { return false; }
+  }
+
+  function boot() {
+    // Desktop only: open the viewer once and keep re-parenting it into the phone frame so it sits
+    // beside the checklist. The CSS above cancels atlas.js's <body> scroll lock unconditionally, so
+    // this page can never end up with a frozen document. On a phone we deliberately do NOT embed —
+    // the frame is hidden and each row's "View this module" opens the viewer fullscreen, giving the
+    // reviewer the whole screen instead of a 350x660 box inside it.
+    if (window.ATLAS && ATLAS.open && !isPhone()) {
+      ATLAS.open();
+      var n = 0;
+      (function settle() {
+        var root = document.getElementById("smdAtlas"), frame = document.getElementById("frame");
+        if (root && frame && root.parentNode !== frame) frame.appendChild(root);
+        if (++n < 600) setTimeout(settle, 300);
+      })();
+    }
+    Promise.all([
+      fetch("/atlas/modules.json").then(function (r) { return r.json(); }),
+      fetch("/api/validation").then(function (r) { return r.json(); })
+        .catch(function () { return { current: {}, enabled: false }; })
+    ]).then(function (res) {
+      var cat = res[0], rec = res[1] || {};
+      document.getElementById("store").textContent = rec.enabled === false
+        ? "server store not bound — verdicts will not persist" : "";
+      var mods = (cat.modules || []).slice().sort(function (a, b) {
+        var i = ORDER.indexOf(a.id), j = ORDER.indexOf(b.id);
+        return (i < 0 ? 99 : i) - (j < 0 ? 99 : j);
+      });
+      return Promise.all(mods.map(function (m) {
+        return fetch("/atlas/" + m.id + "/atlas.json").then(function (r) { return r.json(); })
+          .then(function (A) {
+            var count = {}, names = {};
+            (A.slices || []).forEach(function (s) {
+              (s.pins || []).forEach(function (p) {
+                count[p.s] = (count[p.s] || 0) + 1;
+                names[p.s] = (A.structures[p.s] || {}).name || p.s;
+              });
+            });
+            var keys = Object.keys(count).sort(function (a, b) { return count[b] - count[a]; });
+            m.pins = keys.reduce(function (t, k) { return t + count[k]; }, 0);
+            var structs = keys.map(function (k) { return names[k] + " (" + count[k] + ")"; }).join(", ")
+              || "images only — no labels to check";
+            return rowHtml(m, structs, (rec.current || {})[m.id]);
+          }).catch(function () { return ""; });
+      })).then(function (html) {
+        document.getElementById("rows").innerHTML = html.join("");
+        tally();
+      });
+    }).catch(function () {
+      document.getElementById("rows").innerHTML =
+        '<tr><td colspan="2" class="hint">Could not load the atlas. Reload, or tell Dr Kurmana.</td></tr>';
+    });
+  }
+})();
+</script>
+</body>
+</html>

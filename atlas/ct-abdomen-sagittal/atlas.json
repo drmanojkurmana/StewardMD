@@ -1,0 +1,942 @@
+{
+ "id": "ct-abdomen-sagittal",
+ "provenance": {
+  "images": "Courtesy of the U.S. National Library of Medicine",
+  "licence": "US Government work, no copyright; NLM download Terms and Conditions apply",
+  "definitions": "Gray's Anatomy (1918)",
+  "geometry": "TotalSegmentator `total` (Apache-2.0 code and weights), run on our own public-domain CT",
+  "clearedOn": "2026-08-17"
+ },
+ "categories": {
+  "viscus": {
+   "label": "Viscus",
+   "color": "#ffd479"
+  },
+  "gi-tract": {
+   "label": "GI tract",
+   "color": "#c9a06a"
+  },
+  "vessel-artery": {
+   "label": "Artery",
+   "color": "#ff8080"
+  },
+  "bone": {
+   "label": "Bone",
+   "color": "#ffffff"
+  },
+  "muscle": {
+   "label": "Muscle",
+   "color": "#e0a0c0"
+  }
+ },
+ "structures": {
+  "abdomen": {
+   "name": "Abdomen",
+   "category": "viscus"
+  },
+  "aorta": {
+   "name": "Abdominal aorta",
+   "category": "vessel-artery",
+   "parent": "abdomen",
+   "definition": "The abdominal aorta begins at the aortic hiatus of the diaphragm and divides into the common iliac arteries."
+  },
+  "autochthonous-back-muscle": {
+   "name": "Deep back muscles",
+   "category": "muscle",
+   "definition": "The deep or intrinsic muscles of the back extend and rotate the vertebral column."
+  },
+  "colon": {
+   "name": "Colon",
+   "category": "gi-tract",
+   "parent": "abdomen",
+   "definition": "The colon extends from the caecum to the rectum and is distinguished by its haustra and taeniae coli."
+  },
+  "iliopsoas": {
+   "name": "Iliopsoas",
+   "category": "muscle",
+   "definition": "The iliacus and psoas major act together as the chief flexor of the thigh at the hip."
+  },
+  "lumbar-vertebra": {
+   "name": "Lumbar vertebra",
+   "category": "bone",
+   "parent": "vertebral-column",
+   "definition": "The lumbar vertebrae are the largest segments of the movable part of the vertebral column."
+  },
+  "small-bowel": {
+   "name": "Small intestine",
+   "category": "gi-tract",
+   "parent": "abdomen",
+   "definition": "The jejunum and ileum form the mesenteric portion of the small intestine, suspended by the mesentery."
+  },
+  "vertebral-column": {
+   "name": "Vertebral column",
+   "category": "bone"
+  }
+ },
+ "slices": [
+  {
+   "i": 1,
+   "img": "/atlas/ct-abdomen-sagittal/001.webp",
+   "aspect": 1.0311,
+   "pins": []
+  },
+  {
+   "i": 2,
+   "img": "/atlas/ct-abdomen-sagittal/002.webp",
+   "aspect": 1.0311,
+   "pins": []
+  },
+  {
+   "i": 3,
+   "img": "/atlas/ct-abdomen-sagittal/003.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 42.2,
+     "y": 49.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 44.7,
+     "y": 87.0
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "img": "/atlas/ct-abdomen-sagittal/004.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 24.8,
+     "y": 28.7
+    },
+    {
+     "s": "colon",
+     "x": 32.0,
+     "y": 76.1
+    },
+    {
+     "s": "colon",
+     "x": 42.2,
+     "y": 40.6
+    },
+    {
+     "s": "iliopsoas",
+     "x": 53.1,
+     "y": 86.0
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "img": "/atlas/ct-abdomen-sagittal/005.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 36.4,
+     "y": 39.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 56.2,
+     "y": 85.9
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "img": "/atlas/ct-abdomen-sagittal/006.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 36.0,
+     "y": 29.7
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 76.9,
+     "y": 54.7
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.5,
+     "y": 82.8
+    }
+   ]
+  },
+  {
+   "i": 7,
+   "img": "/atlas/ct-abdomen-sagittal/007.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 28.8,
+     "y": 68.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 76.3,
+     "y": 57.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 50.1,
+     "y": 88.9
+    }
+   ]
+  },
+  {
+   "i": 8,
+   "img": "/atlas/ct-abdomen-sagittal/008.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 16.7,
+     "y": 70.1
+    },
+    {
+     "s": "small-bowel",
+     "x": 35.4,
+     "y": 64.6
+    },
+    {
+     "s": "colon",
+     "x": 27.0,
+     "y": 72.0
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 76.7,
+     "y": 56.4
+    },
+    {
+     "s": "iliopsoas",
+     "x": 48.9,
+     "y": 77.0
+    }
+   ]
+  },
+  {
+   "i": 9,
+   "img": "/atlas/ct-abdomen-sagittal/009.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 21.0,
+     "y": 78.8
+    },
+    {
+     "s": "small-bowel",
+     "x": 34.6,
+     "y": 72.4
+    },
+    {
+     "s": "small-bowel",
+     "x": 36.4,
+     "y": 62.4
+    },
+    {
+     "s": "colon",
+     "x": 19.4,
+     "y": 44.7
+    },
+    {
+     "s": "colon",
+     "x": 27.7,
+     "y": 83.8
+    },
+    {
+     "s": "colon",
+     "x": 30.2,
+     "y": 79.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 60.4,
+     "y": 66.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 65.0,
+     "y": 54.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 70.2,
+     "y": 42.6
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 76.9,
+     "y": 54.4
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.7,
+     "y": 76.3
+    },
+    {
+     "s": "iliopsoas",
+     "x": 61.4,
+     "y": 43.2
+    }
+   ]
+  },
+  {
+   "i": 10,
+   "img": "/atlas/ct-abdomen-sagittal/010.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 21.5,
+     "y": 91.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 36.7,
+     "y": 72.1
+    },
+    {
+     "s": "colon",
+     "x": 18.9,
+     "y": 42.8
+    },
+    {
+     "s": "colon",
+     "x": 27.5,
+     "y": 32.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 60.9,
+     "y": 67.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 64.9,
+     "y": 55.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 69.4,
+     "y": 42.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 62.4,
+     "y": 66.7
+    },
+    {
+     "s": "aorta",
+     "x": 48.5,
+     "y": 39.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 74.5,
+     "y": 72.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 47.9,
+     "y": 69.9
+    },
+    {
+     "s": "iliopsoas",
+     "x": 54.4,
+     "y": 56.0
+    }
+   ]
+  },
+  {
+   "i": 11,
+   "img": "/atlas/ct-abdomen-sagittal/011.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 12.6,
+     "y": 55.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 18.6,
+     "y": 77.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 28.2,
+     "y": 7.8
+    },
+    {
+     "s": "colon",
+     "x": 17.8,
+     "y": 41.3
+    },
+    {
+     "s": "colon",
+     "x": 28.8,
+     "y": 96.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 57.7,
+     "y": 53.9
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 75.9,
+     "y": 23.9
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 50.3,
+     "y": 57.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 54.6,
+     "y": 66.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 64.0,
+     "y": 69.5
+    },
+    {
+     "s": "aorta",
+     "x": 45.8,
+     "y": 49.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 73.7,
+     "y": 79.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.9,
+     "y": 68.9
+    }
+   ]
+  },
+  {
+   "i": 12,
+   "img": "/atlas/ct-abdomen-sagittal/012.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 16.0,
+     "y": 76.2
+    },
+    {
+     "s": "small-bowel",
+     "x": 30.2,
+     "y": 6.2
+    },
+    {
+     "s": "small-bowel",
+     "x": 33.2,
+     "y": 73.5
+    },
+    {
+     "s": "colon",
+     "x": 17.0,
+     "y": 39.9
+    },
+    {
+     "s": "colon",
+     "x": 20.1,
+     "y": 13.8
+    },
+    {
+     "s": "colon",
+     "x": 28.2,
+     "y": 95.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 55.4,
+     "y": 53.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 58.4,
+     "y": 41.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 75.8,
+     "y": 48.6
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 55.0,
+     "y": 66.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 72.8,
+     "y": 72.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 74.8,
+     "y": 62.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 66.6,
+     "y": 72.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 71.7,
+     "y": 70.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 51.0,
+     "y": 70.0
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.9,
+     "y": 68.9
+    },
+    {
+     "s": "iliopsoas",
+     "x": 53.0,
+     "y": 70.0
+    }
+   ]
+  },
+  {
+   "i": 13,
+   "img": "/atlas/ct-abdomen-sagittal/013.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 13.2,
+     "y": 65.0
+    },
+    {
+     "s": "small-bowel",
+     "x": 24.5,
+     "y": 69.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 46.8,
+     "y": 15.5
+    },
+    {
+     "s": "colon",
+     "x": 16.3,
+     "y": 38.9
+    },
+    {
+     "s": "colon",
+     "x": 30.9,
+     "y": 88.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 57.2,
+     "y": 54.4
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 61.8,
+     "y": 40.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 51.6,
+     "y": 49.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 56.0,
+     "y": 66.2
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 70.2,
+     "y": 50.1
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 64.4,
+     "y": 74.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 79.6,
+     "y": 46.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.9,
+     "y": 68.9
+    },
+    {
+     "s": "iliopsoas",
+     "x": 49.1,
+     "y": 67.7
+    }
+   ]
+  },
+  {
+   "i": 14,
+   "img": "/atlas/ct-abdomen-sagittal/014.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 19.3,
+     "y": 70.7
+    },
+    {
+     "s": "small-bowel",
+     "x": 35.8,
+     "y": 64.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 45.8,
+     "y": 14.3
+    },
+    {
+     "s": "colon",
+     "x": 16.3,
+     "y": 36.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 54.8,
+     "y": 57.6
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 65.6,
+     "y": 53.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 69.8,
+     "y": 41.5
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 62.5,
+     "y": 67.9
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 80.0,
+     "y": 47.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 46.7,
+     "y": 87.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 64.7,
+     "y": 26.9
+    }
+   ]
+  },
+  {
+   "i": 15,
+   "img": "/atlas/ct-abdomen-sagittal/015.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 13.7,
+     "y": 55.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 25.0,
+     "y": 76.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 49.5,
+     "y": 13.1
+    },
+    {
+     "s": "colon",
+     "x": 23.3,
+     "y": 9.0
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 62.4,
+     "y": 66.7
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 66.0,
+     "y": 53.3
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 71.2,
+     "y": 40.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 79.0,
+     "y": 53.5
+    },
+    {
+     "s": "iliopsoas",
+     "x": 48.3,
+     "y": 86.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 65.6,
+     "y": 28.1
+    }
+   ]
+  },
+  {
+   "i": 16,
+   "img": "/atlas/ct-abdomen-sagittal/016.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 26.0,
+     "y": 70.3
+    },
+    {
+     "s": "small-bowel",
+     "x": 35.0,
+     "y": 87.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 40.3,
+     "y": 62.1
+    },
+    {
+     "s": "colon",
+     "x": 24.8,
+     "y": 6.6
+    },
+    {
+     "s": "colon",
+     "x": 28.7,
+     "y": 97.8
+    },
+    {
+     "s": "lumbar-vertebra",
+     "x": 67.5,
+     "y": 52.8
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 76.5,
+     "y": 62.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 48.4,
+     "y": 89.5
+    }
+   ]
+  },
+  {
+   "i": 17,
+   "img": "/atlas/ct-abdomen-sagittal/017.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 24.1,
+     "y": 81.6
+    },
+    {
+     "s": "small-bowel",
+     "x": 40.7,
+     "y": 65.6
+    },
+    {
+     "s": "colon",
+     "x": 18.7,
+     "y": 27.7
+    },
+    {
+     "s": "colon",
+     "x": 30.4,
+     "y": 96.1
+    },
+    {
+     "s": "colon",
+     "x": 49.9,
+     "y": 11.5
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 77.9,
+     "y": 58.8
+    },
+    {
+     "s": "iliopsoas",
+     "x": 48.4,
+     "y": 83.5
+    }
+   ]
+  },
+  {
+   "i": 18,
+   "img": "/atlas/ct-abdomen-sagittal/018.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 29.0,
+     "y": 61.5
+    },
+    {
+     "s": "small-bowel",
+     "x": 43.1,
+     "y": 38.2
+    },
+    {
+     "s": "small-bowel",
+     "x": 47.9,
+     "y": 63.4
+    },
+    {
+     "s": "colon",
+     "x": 19.4,
+     "y": 24.2
+    },
+    {
+     "s": "colon",
+     "x": 32.9,
+     "y": 93.4
+    },
+    {
+     "s": "colon",
+     "x": 47.8,
+     "y": 7.7
+    }
+   ]
+  },
+  {
+   "i": 19,
+   "img": "/atlas/ct-abdomen-sagittal/019.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "small-bowel",
+     "x": 34.8,
+     "y": 55.4
+    },
+    {
+     "s": "small-bowel",
+     "x": 44.8,
+     "y": 43.2
+    },
+    {
+     "s": "colon",
+     "x": 33.3,
+     "y": 76.5
+    },
+    {
+     "s": "colon",
+     "x": 41.9,
+     "y": 0.0
+    }
+   ]
+  },
+  {
+   "i": 20,
+   "img": "/atlas/ct-abdomen-sagittal/020.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 43.7,
+     "y": 24.1
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 84.6,
+     "y": 12.7
+    }
+   ]
+  },
+  {
+   "i": 21,
+   "img": "/atlas/ct-abdomen-sagittal/021.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 30.4,
+     "y": 19.4
+    },
+    {
+     "s": "colon",
+     "x": 38.5,
+     "y": 3.2
+    },
+    {
+     "s": "colon",
+     "x": 44.3,
+     "y": 24.4
+    },
+    {
+     "s": "autochthonous-back-muscle",
+     "x": 84.1,
+     "y": 9.2
+    }
+   ]
+  },
+  {
+   "i": 22,
+   "img": "/atlas/ct-abdomen-sagittal/022.webp",
+   "aspect": 1.0311,
+   "pins": [
+    {
+     "s": "colon",
+     "x": 44.8,
+     "y": 26.3
+    }
+   ]
+  },
+  {
+   "i": 23,
+   "img": "/atlas/ct-abdomen-sagittal/023.webp",
+   "aspect": 1.0311,
+   "pins": []
+  },
+  {
+   "i": 24,
+   "img": "/atlas/ct-abdomen-sagittal/024.webp",
+   "aspect": 1.0311,
+   "pins": []
+  }
+ ]
+}
