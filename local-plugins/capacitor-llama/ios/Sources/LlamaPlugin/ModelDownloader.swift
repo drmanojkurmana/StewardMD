@@ -1,38 +1,47 @@
 import Foundation
 
 /**
- * Background model download via a BACKGROUND `URLSession`.
+ * Background model download: CHUNKED, PARALLEL, and entirely inside one background URLSession.
  *
- * Mirrors the Android `ModelDownloader` (DownloadManager) so both platforms behave the same. The JS
- * chunk loop it replaces ran inside the WebView, so it stopped the moment the app was backgrounded -
- * exactly what someone does after starting a 2.5 GB download. A background URLSession keeps
- * transferring while the app is suspended and relaunches the app to finish up.
+ * ── Why chunked (measured, not assumed) ──────────────────────────────────────────────────────────
+ * On identical Wi-Fi, same room, same 3.11 GB file, Android's DownloadManager reached 10.5 MB/s while
+ * a single background URLSession task managed 1.3 MB/s. A DownloadProbe run on the device then
+ * measured three shapes back to back:
  *
- * It is also much faster. The chunk loop had to slice the file into 2 MiB HTTP Range requests
- * (because a 24 MiB ranged fetch times out in the WebView) and base64 every slice across the
- * Capacitor bridge; measured ~1.5 MB/s on Android where DownloadManager did the same file in under a
- * minute. None of that marshalling exists here.
+ *     A  default session, 1 stream           6.55 MB/s
+ *     B  background session, 1 stream        1.08 MB/s
+ *     C  background session, 4 range tasks   4.77 MB/s
  *
- * STORAGE: files land in Documents/maik-models, which is what @capacitor/filesystem `Directory.Data`
- * maps to on iOS, so the JS side's paths keep working. The directory is excluded from iCloud backup
- * (a 2.5 GB re-downloadable model must never enter someone's backup).
+ * C is 4.4x B, so iOS throttles background transfers PER TASK. Splitting the file into ranged parts
+ * therefore recovers the bandwidth WITHOUT leaving the background session - no foreground/background
+ * handoff, no dependency on app-lifecycle timing.
  *
- * NO metered gate, by product decision: `allowsExpensiveNetworkAccess` and
- * `allowsConstrainedNetworkAccess` are both on. If a clinician taps download, they get the download.
+ * That distinction matters: an earlier attempt did use a handoff (default session in the foreground,
+ * moved to the background session on didEnterBackgroundNotification) and it broke background
+ * downloads outright, because cancel(byProducingResumeData:) is asynchronous and iOS suspends the app
+ * before the completion block can restart the transfer. Nothing here depends on when the app is
+ * suspended: every task is a background task from the moment it is created.
  *
- * WHY THIS IS A BACKGROUND SESSION AND STAYS ONE.
+ * ── How a transfer is laid out ───────────────────────────────────────────────────────────────────
+ * The file is split into CHUNK_BYTES ranges. Each part is its own background download task with a
+ * `Range:` header. As a part lands it is written straight into the final file at its own offset and
+ * the temp copy is dropped, so peak extra disk is (in-flight parts x chunk), not a second copy of the
+ * model. Committed parts are recorded in a `<name>.parts` sidecar of '0'/'1' flags, so a relaunch
+ * re-queues only what is missing and nothing already paid for is downloaded twice.
  *
- * A default (foreground) URLSession is faster - iOS schedules background transfers for battery life,
- * not throughput. That was tried here and REVERTED, because handing a transfer from the foreground
- * session to the background session on `didEnterBackgroundNotification` cannot be done reliably:
- * `cancel(byProducingResumeData:)` is ASYNCHRONOUS, so it tears down the running transfer at once and
- * iOS suspends the app before the completion block can restart it on the background session. The
- * observed result was the download stopping the moment the app left the screen - trading a verified
- * capability (a 2.49 GB model completing with the app force-stopped) for an unmeasured speed gain.
+ * Losing an in-flight part costs at most one chunk, which is the other reason for chunking: the old
+ * single-task design lost everything when a transfer failed at 89%.
  *
- * If throughput needs work, measure it with the instrumentation below FIRST, and prefer options that
- * keep a single background session: several concurrent background tasks over byte ranges, or hosting
- * the file somewhere closer to the user. Do not reintroduce a foreground/background handoff.
+ * ── If the server ignores Range ──────────────────────────────────────────────────────────────────
+ * A part that comes back 200 instead of 206 IS the whole file. That is detected, the body is used as
+ * the complete download, and the sibling tasks are cancelled. So an origin without Range support
+ * still works, just single-streamed.
+ *
+ * STORAGE: models live in Documents/maik-models (Directory.Data on iOS, so the JS paths keep
+ * working), excluded from iCloud backup - a re-downloadable multi-GB model must never enter a backup.
+ *
+ * NO metered gate, by product decision: expensive and constrained network access are both allowed.
+ * If a clinician taps download, they get the download.
  */
 final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
 
@@ -40,55 +49,37 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
 
     static let subdir = "maik-models"
 
-    /// Progress for the in-flight task, read by `status(name:)`.
-    private struct Progress {
-        var bytes: Int64 = 0
-        var total: Int64 = -1
-        var state: String = "pending"   // pending | running | done | failed | cancelled
+    /// 64 MB. Big enough that per-request overhead is noise, small enough that losing one in-flight
+    /// part is cheap and the sidecar stays small (a 3.11 GB model is 49 parts).
+    static let chunkBytes: Int64 = 64 * 1024 * 1024
+
+    /// Concurrent parts. The probe showed 4 tasks recovering 4.4x; 8 aims at the ~6.5 MB/s a single
+    /// unthrottled stream managed, without opening so many sockets that the host starts throttling.
+    static let maxParts = 8
+
+    private struct Job {
+        var url: URL
+        var total: Int64
+        var chunks: Int
+        var committed: [Bool]          // parts already written into the final file
+        var inflight: [Int: Int64]     // part index -> bytes received so far
+        var state: String              // pending | running | done | failed | cancelled | paused
         var error: String?
+        var whole: Bool = false        // server ignored Range; one task carries everything
     }
 
     private let lock = NSLock()
+    private var jobs: [String: Job] = [:]
 
-    /// Throughput samples, printed to stdout for `devicectl --console`. Read-only instrumentation:
-    /// it changes no transfer behaviour, which is the point after the hybrid-session revert above.
-    private var mark: [String: (t: Date, bytes: Int64)] = [:]
-    private var progress: [String: Progress] = [:]      // keyed by destination file name
-    private var tasks: [String: URLSessionDownloadTask] = [:]
-
-    /// One background session for the app. The identifier must be stable so iOS can hand completed
+    /// One background session for the app. The identifier is stable so iOS can hand completed
     /// transfers back after a relaunch.
-    /// Reconnect to transfers that outlived the app.
-    ///
-    /// A background URLSession KEEPS RUNNING across app relaunches, but this object's `progress` and
-    /// `tasks` maps do not. Without adopting the live tasks, status() reports "none" after a
-    /// relaunch, the JS layer concludes nothing is in flight, and start() launches a SECOND download
-    /// of the same file - two concurrent transfers fighting over one destination, with the progress
-    /// jumping between them. Observed on device.
-    func adoptExistingTasks(_ done: (() -> Void)? = nil) {
-        session.getAllTasks { [weak self] tasks in
-            guard let self else { done?(); return }
-            self.lock.lock()
-            for t in tasks {
-                guard let name = t.taskDescription, let dt = t as? URLSessionDownloadTask else { continue }
-                self.tasks[name] = dt
-                let total = dt.countOfBytesExpectedToReceive
-                self.progress[name] = Progress(bytes: dt.countOfBytesReceived,
-                                               total: total > 0 ? total : -1,
-                                               state: dt.state == .running ? "running" : "pending",
-                                               error: nil)
-            }
-            self.lock.unlock()
-            done?()
-        }
-    }
-
     private lazy var session: URLSession = {
         let cfg = URLSessionConfiguration.background(withIdentifier: "in.stewardmd.llama.modeldownload")
-        cfg.allowsExpensiveNetworkAccess = true        // no Wi-Fi-only gate
-        cfg.allowsConstrainedNetworkAccess = true      // works in Low Data Mode too
+        cfg.allowsExpensiveNetworkAccess = true         // no Wi-Fi-only gate
+        cfg.allowsConstrainedNetworkAccess = true       // works in Low Data Mode too
         cfg.sessionSendsLaunchEvents = true
-        cfg.isDiscretionary = false                    // the clinician asked for it NOW
+        cfg.isDiscretionary = false                     // the clinician asked for it NOW
+        cfg.httpMaximumConnectionsPerHost = Self.maxParts   // pointless to fan out past this
         return URLSession(configuration: cfg, delegate: self, delegateQueue: nil)
     }()
 
@@ -100,7 +91,6 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         if !FileManager.default.fileExists(atPath: d.path) {
             try FileManager.default.createDirectory(at: d, withIntermediateDirectories: true)
         }
-        // A 2.5 GB re-downloadable model must never enter an iCloud backup.
         var rv = URLResourceValues(); rv.isExcludedFromBackup = true
         try? d.setResourceValues(rv)
         return d
@@ -110,9 +100,10 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         (try? dir())?.appendingPathComponent(name) ?? URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
     }
 
+    private static func sidecarFor(_ name: String) -> URL { pathFor(name + ".parts") }
+
     static func sizeOf(_ name: String) -> Int64 {
-        let p = pathFor(name).path
-        guard let a = try? FileManager.default.attributesOfItem(atPath: p) else { return 0 }
+        guard let a = try? FileManager.default.attributesOfItem(atPath: pathFor(name).path) else { return 0 }
         return (a[.size] as? Int64) ?? 0
     }
 
@@ -123,68 +114,195 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         return Int64(free)
     }
 
+    // MARK: - Sidecar (which parts are already committed)
+
+    private func readSidecar(_ name: String, chunks: Int) -> [Bool] {
+        guard let s = try? String(contentsOf: Self.sidecarFor(name), encoding: .utf8), s.count == chunks else {
+            return Array(repeating: false, count: chunks)
+        }
+        return s.map { $0 == "1" }
+    }
+
+    private func writeSidecar(_ name: String, _ committed: [Bool]) {
+        let s = committed.map { $0 ? "1" : "0" }.joined()
+        try? s.write(to: Self.sidecarFor(name), atomically: true, encoding: .utf8)
+    }
+
     // MARK: - Control
 
-    /// Start (or restart) a download. Returns the task identifier as a string, mirroring Android.
-    func start(url: String, name: String) throws -> String {
+    /**
+     * Start (or resume) a chunked download. `total` is the expected size from the model registry -
+     * without it the file cannot be split, so a missing/zero total falls back to one whole-file task.
+     */
+    func start(url: String, name: String, total: Int64) throws -> String {
         guard let u = URL(string: url) else { throw LlamaError(.badArguments, "bad url") }
-        // Never start a second transfer for a file that is already downloading. This is the guard
-        // that stops the double-download: the JS side can legitimately ask again after a relaunch,
-        // and the honest answer is "already running", not "here is another one".
+
         lock.lock()
-        if let existing = tasks[name], existing.state == .running || existing.state == .suspended {
-            lock.unlock()
-            return String(existing.taskIdentifier)
+        // Already running? Hand back the same transfer rather than starting a rival one.
+        if let j = jobs[name], j.state == "running" || j.state == "pending" {
+            lock.unlock(); return name
         }
         lock.unlock()
-        // Deliberately NOT deleting the destination here. URLSession writes to its own temp file and
-        // moves it into place on completion, so a stale destination is overwritten anyway - and
-        // deleting it meant a partially-verified file could vanish under a caller that was about to
-        // read its size.
-        let task = session.downloadTask(with: u)
-        task.taskDescription = name
+
+        // Nothing to do if the finished file is already the right size.
+        if total > 0 && Self.sizeOf(name) == total {
+            lock.lock(); jobs[name] = Job(url: u, total: total, chunks: 1, committed: [true], inflight: [:], state: "done", error: nil); lock.unlock()
+            return name
+        }
+
+        let chunks = total > 0 ? max(1, Int((total + Self.chunkBytes - 1) / Self.chunkBytes)) : 1
+        var committed = total > 0 ? readSidecar(name, chunks: chunks) : Array(repeating: false, count: 1)
+
+        // The final file must exist at full length before parts can be written at their offsets.
+        let dest = Self.pathFor(name)
+        if total > 0 {
+            if !FileManager.default.fileExists(atPath: dest.path) {
+                FileManager.default.createFile(atPath: dest.path, contents: nil)
+                committed = Array(repeating: false, count: chunks)   // fresh file, ignore a stale sidecar
+            }
+            if let h = try? FileHandle(forWritingTo: dest) {
+                // Extend (never shrink): truncating a file we may be resuming would discard parts.
+                if (try? h.seekToEnd()) ?? 0 < UInt64(total) { try? h.truncate(atOffset: UInt64(total)) }
+                try? h.close()
+            }
+            writeSidecar(name, committed)
+        }
+
         lock.lock()
-        progress[name] = Progress(bytes: 0, total: -1, state: "pending", error: nil)
-        tasks[name] = task
+        jobs[name] = Job(url: u, total: total, chunks: chunks, committed: committed, inflight: [:],
+                         state: "pending", error: nil, whole: total <= 0)
         lock.unlock()
-        lock.lock(); mark[name] = (Date(), 0); lock.unlock()
-        task.resume()
-        print("[llama-dl] \(name): started (background session)")
-        return String(task.taskIdentifier)
+
+        if total <= 0 {
+            // No known size: one plain task, same as before chunking existed.
+            let t = session.downloadTask(with: u)
+            t.taskDescription = name + "#w"
+            t.resume()
+            print("[llama-dl] \(name): started, size unknown, single stream")
+            return name
+        }
+
+        var queued = 0
+        for i in 0..<chunks where !committed[i] {
+            let from = Int64(i) * Self.chunkBytes
+            let to = min(from + Self.chunkBytes, total) - 1
+            var r = URLRequest(url: u)
+            r.setValue("bytes=\(from)-\(to)", forHTTPHeaderField: "Range")
+            let t = session.downloadTask(with: r)
+            t.taskDescription = "\(name)#\(i)"
+            t.resume()
+            queued += 1
+        }
+        let have = committed.filter { $0 }.count
+        print("[llama-dl] \(name): started \(queued) parts (\(have)/\(chunks) already on disk, \(Self.maxParts) at a time)")
+        if queued == 0 { finish(name) }
+        return name
     }
 
     func cancel(name: String) {
-        lock.lock(); let t = tasks[name]; progress[name]?.state = "cancelled"; lock.unlock()
-        t?.cancel()
+        lock.lock(); jobs[name]?.state = "cancelled"; lock.unlock()
+        // Parts already committed stay on disk, so a later Download resumes instead of restarting.
+        session.getAllTasks { tasks in
+            for t in tasks where (t.taskDescription ?? "").hasPrefix(name + "#") { t.cancel() }
+        }
     }
 
     func status(name: String) -> [String: Any] {
-        lock.lock(); let p = progress[name]; lock.unlock()
+        lock.lock()
+        let j = jobs[name]
+        let bytes: Int64 = {
+            guard let j else { return 0 }
+            if j.whole { return j.inflight.values.reduce(0, +) }
+            let done = Int64(j.committed.filter { $0 }.count) * Self.chunkBytes
+            return min(j.total > 0 ? j.total : done, done + j.inflight.values.reduce(0, +))
+        }()
+        lock.unlock()
+
         let onDisk = Self.sizeOf(name)
-        var out: [String: Any] = [
-            "onDisk": onDisk,
-            "path": Self.pathFor(name).path,
-            "freeBytes": Self.freeBytes()
-        ]
-        if let p {
-            out["state"] = p.state
-            out["bytes"] = p.bytes
-            out["total"] = p.total
-            if let e = p.error { out["reason"] = e }
+        var out: [String: Any] = ["onDisk": onDisk, "path": Self.pathFor(name).path, "freeBytes": Self.freeBytes()]
+        if let j {
+            out["state"] = j.state
+            out["bytes"] = bytes
+            out["total"] = j.total
+            if let e = j.error { out["reason"] = e }
         } else {
-            // No live task: either never started, or finished in a previous app launch.
-            out["state"] = onDisk > 0 ? "done" : "none"
-            out["bytes"] = onDisk
+            // No job in memory. A COMPLETE file means done; a part-written file means resumable, and
+            // it must NOT read as done just because bytes exist on disk - the final file is created at
+            // full length up front, so its size says nothing about how much has actually arrived.
+            let chunks = FileManager.default.fileExists(atPath: Self.sidecarFor(name).path)
+            out["state"] = chunks ? "paused" : (onDisk > 0 ? "done" : "none")
+            out["bytes"] = chunks ? committedBytesOnDisk(name) : onDisk
             out["total"] = onDisk
         }
         return out
     }
 
+    /// Bytes recorded as committed by the sidecar, for a transfer with no in-memory job (post-relaunch).
+    private func committedBytesOnDisk(_ name: String) -> Int64 {
+        guard let s = try? String(contentsOf: Self.sidecarFor(name), encoding: .utf8) else { return 0 }
+        return Int64(s.filter { $0 == "1" }.count) * Self.chunkBytes
+    }
+
     func delete(name: String) -> Bool {
         cancel(name: name)
+        lock.lock(); jobs[name] = nil; lock.unlock()
+        try? FileManager.default.removeItem(at: Self.sidecarFor(name))
         let p = Self.pathFor(name)
         if !FileManager.default.fileExists(atPath: p.path) { return true }
         return (try? FileManager.default.removeItem(at: p)) != nil
+    }
+
+    /**
+     * Reconnect to transfers that outlived the app.
+     *
+     * A background URLSession keeps running across relaunches, but `jobs` does not. Without adopting
+     * the live tasks, status() reports "none", the JS layer concludes nothing is in flight, and it
+     * starts a SECOND download of the same file - two sets of parts racing for one destination.
+     */
+    func adoptExistingTasks(_ done: (() -> Void)? = nil) {
+        session.getAllTasks { [weak self] tasks in
+            guard let self else { done?(); return }
+            self.lock.lock()
+            for t in tasks {
+                guard let desc = t.taskDescription, let hash = desc.lastIndex(of: "#") else { continue }
+                let name = String(desc[desc.startIndex..<hash])
+                let part = String(desc[desc.index(after: hash)...])
+                if self.jobs[name] == nil, let u = t.originalRequest?.url {
+                    let chunks = self.sidecarChunks(name)
+                    self.jobs[name] = Job(url: u, total: 0, chunks: max(1, chunks),
+                                          committed: self.readSidecar(name, chunks: max(1, chunks)),
+                                          inflight: [:], state: "running", error: nil, whole: part == "w")
+                }
+                self.jobs[name]?.state = "running"
+                if let i = Int(part) { self.jobs[name]?.inflight[i] = t.countOfBytesReceived }
+            }
+            self.lock.unlock()
+            done?()
+        }
+    }
+
+    private func sidecarChunks(_ name: String) -> Int {
+        guard let s = try? String(contentsOf: Self.sidecarFor(name), encoding: .utf8) else { return 0 }
+        return s.count
+    }
+
+    // MARK: - Completion
+
+    /// All parts committed: trim to the exact size, drop the sidecar, mark done.
+    private func finish(_ name: String) {
+        lock.lock()
+        guard var j = jobs[name] else { lock.unlock(); return }
+        let total = j.total
+        j.state = "done"; j.inflight = [:]
+        jobs[name] = j
+        lock.unlock()
+
+        if total > 0, let h = try? FileHandle(forWritingTo: Self.pathFor(name)) {
+            try? h.truncate(atOffset: UInt64(total))
+            try? h.close()
+        }
+        try? FileManager.default.removeItem(at: Self.sidecarFor(name))
+        print("[llama-dl] \(name): complete, \(Self.sizeOf(name)) bytes on disk")
     }
 
     // MARK: - URLSessionDownloadDelegate
@@ -192,54 +310,99 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask,
                     didWriteData bytesWritten: Int64, totalBytesWritten: Int64,
                     totalBytesExpectedToWrite: Int64) {
-        guard let name = downloadTask.taskDescription else { return }
+        guard let desc = downloadTask.taskDescription, let hash = desc.lastIndex(of: "#") else { return }
+        let name = String(desc[desc.startIndex..<hash])
+        let part = Int(String(desc[desc.index(after: hash)...])) ?? 0
         lock.lock()
-        progress[name] = Progress(bytes: totalBytesWritten, total: totalBytesExpectedToWrite,
-                                  state: "running", error: nil)
-        var line: String? = nil
-        if let m = mark[name] {
-            let dt = Date().timeIntervalSince(m.t)
-            if dt >= 5 {
-                line = String(format: "[llama-dl] %@: %.2f MB/s (%.1f%% of %.2f GB)", name,
-                              Double(totalBytesWritten - m.bytes) / 1_048_576.0 / dt,
-                              totalBytesExpectedToWrite > 0 ? Double(totalBytesWritten) / Double(totalBytesExpectedToWrite) * 100 : 0,
-                              Double(totalBytesExpectedToWrite) / 1_073_741_824.0)
-                mark[name] = (Date(), totalBytesWritten)
-            }
-        } else { mark[name] = (Date(), totalBytesWritten) }
+        jobs[name]?.state = "running"
+        jobs[name]?.inflight[part] = totalBytesWritten
         lock.unlock()
-        if let line { print(line) }
     }
 
     func urlSession(_ session: URLSession, downloadTask: URLSessionDownloadTask,
                     didFinishDownloadingTo location: URL) {
-        guard let name = downloadTask.taskDescription else { return }
-        // MUST move it synchronously here: `location` is deleted as soon as this returns.
-        do {
+        guard let desc = downloadTask.taskDescription, let hash = desc.lastIndex(of: "#") else { return }
+        let name = String(desc[desc.startIndex..<hash])
+        let partStr = String(desc[desc.index(after: hash)...])
+        let code = (downloadTask.response as? HTTPURLResponse)?.statusCode ?? 0
+
+        // MUST act synchronously: `location` is deleted as soon as this returns.
+
+        // The origin ignored Range, so this body is the ENTIRE file. Use it and stop the siblings.
+        if code == 200, partStr != "w" {
+            print("[llama-dl] \(name): origin ignored Range (http 200), falling back to a single stream")
             let dest = Self.pathFor(name)
-            if FileManager.default.fileExists(atPath: dest.path) { try? FileManager.default.removeItem(at: dest) }
-            try FileManager.default.moveItem(at: location, to: dest)
+            try? FileManager.default.removeItem(at: dest)
+            try? FileManager.default.moveItem(at: location, to: dest)
+            try? FileManager.default.removeItem(at: Self.sidecarFor(name))
             lock.lock()
-            progress[name] = Progress(bytes: Self.sizeOf(name), total: Self.sizeOf(name), state: "done", error: nil)
+            jobs[name]?.whole = true
+            jobs[name]?.committed = [true]
+            jobs[name]?.chunks = 1
+            jobs[name]?.state = "done"
             lock.unlock()
-        } catch {
-            lock.lock()
-            progress[name] = Progress(bytes: 0, total: -1, state: "failed", error: error.localizedDescription)
-            lock.unlock()
+            session.getAllTasks { tasks in
+                for t in tasks where (t.taskDescription ?? "").hasPrefix(name + "#") { t.cancel() }
+            }
+            return
         }
+
+        if partStr == "w" {                      // unknown-size single stream
+            let dest = Self.pathFor(name)
+            try? FileManager.default.removeItem(at: dest)
+            try? FileManager.default.moveItem(at: location, to: dest)
+            lock.lock(); jobs[name]?.state = "done"; lock.unlock()
+            print("[llama-dl] \(name): complete (single stream)")
+            return
+        }
+
+        guard let part = Int(partStr) else { return }
+        let offset = Int64(part) * Self.chunkBytes
+
+        // Write the part straight into the final file at its own offset, then let the temp go. This is
+        // why peak disk is (in-flight parts x chunk) and not a second copy of the whole model.
+        do {
+            let data = try Data(contentsOf: location, options: .mappedIfSafe)
+            let h = try FileHandle(forWritingTo: Self.pathFor(name))
+            try h.seek(toOffset: UInt64(offset))
+            try h.write(contentsOf: data)
+            try h.close()
+        } catch {
+            lock.lock(); jobs[name]?.state = "failed"; jobs[name]?.error = error.localizedDescription; lock.unlock()
+            print("[llama-dl] \(name) part \(part): write failed - \(error.localizedDescription)")
+            return
+        }
+
+        var allDone = false
+        lock.lock()
+        if var j = jobs[name] {
+            if part < j.committed.count { j.committed[part] = true }
+            j.inflight[part] = nil
+            jobs[name] = j
+            writeSidecar(name, j.committed)
+            allDone = !j.committed.contains(false)
+        }
+        lock.unlock()
+        if allDone { finish(name) }
     }
 
     func urlSession(_ session: URLSession, task: URLSessionTask, didCompleteWithError error: Error?) {
-        guard let name = task.taskDescription else { return }
+        guard let desc = task.taskDescription, let hash = desc.lastIndex(of: "#") else { return }
+        let name = String(desc[desc.startIndex..<hash])
+        let part = Int(String(desc[desc.index(after: hash)...]))
+        guard let error else { return }
+        let cancelled = (error as NSError).code == NSURLErrorCancelled
         lock.lock()
-        if let error {
-            let cancelled = (error as NSError).code == NSURLErrorCancelled
-            progress[name] = Progress(bytes: progress[name]?.bytes ?? 0, total: progress[name]?.total ?? -1,
-                                      state: cancelled ? "cancelled" : "failed",
-                                      error: cancelled ? nil : error.localizedDescription)
+        if let p = part { jobs[name]?.inflight[p] = nil }
+        if !cancelled {
+            // One part failing does not condemn the transfer: the committed parts are on disk and the
+            // next Download re-queues only what is missing.
+            jobs[name]?.state = "paused"
+            jobs[name]?.error = error.localizedDescription
+        } else if jobs[name]?.state != "done" {
+            jobs[name]?.state = "cancelled"
         }
-        tasks[name] = nil
-        mark[name] = nil
         lock.unlock()
+        if !cancelled { print("[llama-dl] \(name) part \(part.map(String.init) ?? "?"): \(error.localizedDescription)") }
     }
 }

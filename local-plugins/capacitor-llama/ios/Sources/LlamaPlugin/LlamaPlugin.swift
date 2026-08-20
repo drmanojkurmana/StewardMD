@@ -47,6 +47,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         // downloads race for the same file.
         ModelDownloader.shared.adoptExistingTasks()
         runSelfTestIfRequested()
+        runDownloadProbeIfRequested()
         // Drop the model when we go to the background. iOS kills the largest-footprint suspended app
         // first, and a 2.5 GB mapping makes us that app. mmap keeps the reload cheap.
         NotificationCenter.default.addObserver(
@@ -62,6 +63,30 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
      * on-device speed is a human reading numbers off the screen. The marker is deleted after the run
      * so it never repeats, and the whole thing is compiled out of release builds.
      */
+    /// Retained for the life of the probe; a local would be released mid-transfer.
+    private var dlProbe: DownloadProbe?
+
+    /**
+     * DEBUG-ONLY download diagnostic, same marker-file trick as the self-test:
+     *   Documents/maik-dlprobe
+     *
+     * Answers the one question that decides the downloader design - is the iOS background transfer
+     * throttle PER TASK (chunked ranges recover the speed) or PER SESSION (they cannot)? See
+     * DownloadProbe for the reasoning and how to read the output.
+     */
+    private func runDownloadProbeIfRequested() {
+        #if DEBUG
+        guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
+        let marker = docs.appendingPathComponent("maik-dlprobe")
+        guard FileManager.default.fileExists(atPath: marker.path) else { return }
+        try? FileManager.default.removeItem(at: marker)
+        guard let u = URL(string: "https://huggingface.co/unsloth/gemma-4-E2B-it-GGUF/resolve/main/gemma-4-E2B-it-Q4_K_M.gguf?download=true") else { return }
+        let p = DownloadProbe(url: u)
+        dlProbe = p
+        DispatchQueue.global(qos: .userInitiated).asyncAfter(deadline: .now() + 2) { p.run() }
+        #endif
+    }
+
     private func runSelfTestIfRequested() {
         #if DEBUG
         guard let docs = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask).first else { return }
@@ -211,7 +236,10 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
             call.reject("Missing url or name", LlamaErr.badArguments.rawValue); return
         }
         do {
-            let id = try ModelDownloader.shared.start(url: url, name: name)
+            // `total` comes from the model registry. Without it the file cannot be split into ranged
+            // parts, and a chunked transfer is the whole reason iOS reaches Android's speed here.
+            let total = Int64(call.getDouble("total") ?? 0)
+            let id = try ModelDownloader.shared.start(url: url, name: name, total: total)
             call.resolve(["id": id, "path": ModelDownloader.pathFor(name).path])
         } catch let e as LlamaError {
             call.reject(e.detail, e.code.rawValue)

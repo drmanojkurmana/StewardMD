@@ -43,6 +43,11 @@
   // short on a bad connection: 2 MiB is ~8 s even at 0.25 MB/s. Smaller chunks also cut peak memory
   // (~2.7 MiB of base64), which matters on the 8 GB iPhone. Cost is more round trips, which is the
   // right trade when the alternative is a download that can never finish.
+  // Rate is averaged over this window so the number tracks the CURRENT connection, not the whole run.
+  var RATE_WINDOW_MS = 20000;
+  // Bytes unchanged for this long means the connection is throttled to nothing. Reported, never
+  // auto-restarted: a restart at high progress would discard gigabytes.
+  var STALL_MS = 45000;
   var CHUNK_BYTES = 2 * 1024 * 1024;
   var CHUNK_TRIES = 5;                  // per-chunk retries; a 2.5 GB pull WILL see transient failures
   var MARK_PREFIX = "smd_maik_pack_";   // localStorage install marker (sync check for settingsHTML)
@@ -311,10 +316,21 @@
   function nativeDownload(id, onProgress) {
     var L = llama(), pk = pack(id), f = pk.files[0];
     var total = f.bytes || 0;
-    var t0 = Date.now(), startBytes = 0, stopped = false;
+    var t0 = Date.now(), startBytes = 0, stopped = false;   // startBytes re-seeded just below
 
-    _state[id] = { downloading: true, frac: 0, bytes: 0, total: total, mbps: 0, etaS: null,
-                   note: "Starting", err: null, done: false, background: true };
+    /* SEED FROM WHAT IS ALREADY KNOWN, do not zero it.
+     *
+     * resumeUiForBackgroundDownloads() adopts a transfer that outlived the app and fills in its real
+     * byte count, then calls ensure() to keep polling. Zeroing here threw that away, so the bar
+     * dropped to 0% and climbed back on the next poll - and a transfer resumed at 89% looked like it
+     * had restarted from nothing. startBytes also has to begin from those bytes, or the first rate
+     * sample counts already-downloaded data as though it arrived just now.
+     */
+    var prev = _state[id] || {};
+    startBytes = prev.bytes || 0;
+    _state[id] = { downloading: true, frac: prev.frac || 0, bytes: prev.bytes || 0, total: total,
+                   mbps: 0, etaS: null, note: prev.note || "Starting", err: null, done: false,
+                   background: true };
     _state[id].cancel = function () {
       stopped = true;
       var did = lget(KEY_DLID + id);
@@ -323,12 +339,23 @@
     };
     emit(id);
 
+    /* RATE OVER A ROLLING WINDOW, not an average since the start.
+     *
+     * The average-since-start is the reason a stalled transfer showed "89.7% of 2.83 GB" with no rate
+     * and no ETA at all: once a stream is throttled, dividing all bytes by all elapsed time decays
+     * towards zero, the rate rounds to 0.0 and the UI drops both fields. A rolling window reports
+     * what the connection is doing NOW, which is the number a clinician can actually act on.
+     */
+    var samples = [];
     function report(bytes, note) {
       var st = _state[id]; if (!st) return;
-      var secs = (Date.now() - t0) / 1000, moved = bytes - startBytes;
+      var now = Date.now();
+      samples.push({ t: now, b: bytes });
+      while (samples.length > 2 && now - samples[0].t > RATE_WINDOW_MS) samples.shift();
+      var head = samples[0], dt = (now - head.t) / 1000, moved = bytes - head.b;
       st.bytes = bytes;
       st.frac = total ? Math.min(1, bytes / total) : 0;
-      st.mbps = secs > 1 ? (moved / secs / 1e6) : 0;
+      st.mbps = dt >= 2 ? Math.max(0, moved / dt / 1e6) : 0;
       st.etaS = (st.mbps > 0.01 && total) ? Math.round((total - bytes) / (st.mbps * 1e6)) : null;
       if (note) st.note = note;
       emit(id);
@@ -336,7 +363,10 @@
     }
 
     function fresh() {
-      return L.downloadStart({ url: f.url, name: f.name, title: pk.label }).then(function (r) {
+      // `total` lets the native side split the file into ranged parts. iOS throttles background
+      // transfers PER TASK (measured: 1.08 MB/s on one stream, 4.77 MB/s on four), so the expected
+      // size is what turns a slow download into a fast one.
+      return L.downloadStart({ url: f.url, name: f.name, title: pk.label, total: f.bytes || 0 }).then(function (r) {
         lset(KEY_DLID + id, String(r.id));
         report(0, "Downloading in the background");
         return String(r.id);
@@ -357,12 +387,28 @@
       }).catch(fresh);
     }
 
+    var lastBytes = -1, lastMoved = Date.now();
     function poll(did) {
       if (stopped) throw new Error("cancelled");
       return L.downloadStatus({ id: did, name: f.name }).then(function (s) {
         s = s || {};
         if (s.total > 0 && !total) { total = s.total; _state[id].total = total; }
-        report(s.bytes || s.onDisk || 0, s.state === "paused" ? "Waiting for a connection" : "Downloading in the background");
+        var seen = s.bytes || s.onDisk || 0;
+        /* SAY SO WHEN NOTHING IS MOVING.
+         *
+         * The host throttles individual connections hard and unpredictably - the same file measured
+         * 0.5 MB/s on one stream and 21 MB/s on another minutes apart. A transfer can therefore sit
+         * at the same byte count for minutes while the UI still shows a progress bar and a Pause
+         * button, which reads as the app being broken. It is NOT restarted automatically: at 89.7% of
+         * 2.83 GB a restart would throw away 2.5 GB to chase a faster connection. Report it and let
+         * the clinician choose.
+         */
+        if (seen > lastBytes) { lastBytes = seen; lastMoved = Date.now(); }
+        var stalledFor = Date.now() - lastMoved;
+        var note = s.state === "paused" ? "Waiting for a connection"
+                 : stalledFor > STALL_MS ? "Stalled on a slow connection, still trying. Pause and start again to get a new one."
+                 : "Downloading in the background";
+        report(seen, note);
         if (s.state === "done") {
           var onDisk = s.onDisk || 0;
           if (f.bytes && onDisk !== f.bytes) throw new Error("size mismatch: got " + onDisk + " want " + f.bytes);
@@ -376,7 +422,9 @@
 
     return L.modelPath({ name: f.name }).then(function (mp) {
       if (mp && mp.bytes && f.bytes && mp.bytes === f.bytes) return "already";
-      if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05) {
+      // The final file is created at full length up front and parts are written into it in place, so
+      // the overhead is only the parts in flight (8 x 64 MB), not a second copy of the model.
+      if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05 + 600e6) {
         throw new Error("not enough free space (" + (mp.freeBytes / 1e9).toFixed(1) + " GB left, needs " + (f.bytes / 1e9).toFixed(1) + " GB)");
       }
       return begin().then(poll);
@@ -402,13 +450,58 @@
    * Download every file in the pack, resuming whatever is already on disk.
    * onProgress(fraction, note) is called as bytes land.
    */
-  function ensure(id, onProgress) {
+  /* ONE TRANSFER AT A TIME, and this is not a style preference.
+   *
+   * The old guard only stopped downloading the SAME pack twice, so tapping Download on all three
+   * tiers started three multi-GB transfers at once. Measured against the real host: three concurrent
+   * streams came back at 12.2, 0.5 and 8.6 MB/s - one of the three throttled to a fortieth of the
+   * others. On device that showed up as every row frozen (0.0%, 89.7%, 0.0%) with no rate and no ETA,
+   * because the average-since-start rate of a stalled transfer rounds to zero.
+   *
+   * Three at a third of the speed is also the wrong thing to want: a clinician needs ONE working
+   * model as soon as possible, not three that are each 30% done.
+   */
+  var _active = null;                    // pack id currently transferring
+  var _queue = [];                       // [{ id, onProgress, resolve, reject }]
+
+  function queuedIds() { return _queue.map(function (q) { return q.id; }); }
+  function activeId() { return _active; }
+
+  function _exec(id, onProgress) {
     var L = llama();
-    if (isNative() && L && L.downloadStart) {
-      if (_state[id] && _state[id].downloading) return Promise.reject(new Error("already downloading"));
-      return nativeDownload(id, onProgress);
-    }
+    if (isNative() && L && L.downloadStart) return nativeDownload(id, onProgress);
     return ensureChunked(id, onProgress);
+  }
+
+  function _drain() {
+    if (_active || !_queue.length) return;
+    var job = _queue.shift();
+    _active = job.id;
+    var settle = function (fn, v) {
+      _active = null;
+      // Re-label whatever is still waiting, then start the next one.
+      _queue.forEach(function (q) { _markQueued(q.id); });
+      try { fn(v); } finally { _drain(); }
+    };
+    _exec(job.id, job.onProgress).then(function (r) { settle(job.resolve, r); },
+                                      function (e) { settle(job.reject, e); });
+  }
+
+  function _markQueued(id) {
+    var head = _active && pack(_active) ? pack(_active).label : "another model";
+    _state[id] = { downloading: false, queued: true, frac: 0, bytes: 0, total: totalBytes(id),
+                   mbps: 0, etaS: null, note: "Waiting for " + head, err: null, done: false };
+    emit(id);
+  }
+
+  function ensure(id, onProgress) {
+    if (_active === id) return Promise.reject(new Error("already downloading"));
+    if (queuedIds().indexOf(id) >= 0) return Promise.reject(new Error("already queued"));
+    return new Promise(function (res, rej) {
+      _queue.push({ id: id, onProgress: onProgress, resolve: res, reject: rej });
+      if (_active) _markQueued(id);
+      _drain();
+    });
   }
 
   function ensureChunked(id, onProgress) {
@@ -546,6 +639,17 @@
 
   /** Stop an in-flight download. The bytes already on disk stay, so Download resumes from there. */
   function cancel(id) {
+    // A QUEUED pack has no transfer to stop, only a place in line. Without this branch its Pause
+    // button did nothing and the pack stayed queued for a download the clinician had given up on.
+    var qi = queuedIds().indexOf(id);
+    if (qi >= 0 && _active !== id) {
+      var job = _queue.splice(qi, 1)[0];
+      _state[id] = { downloading: false, frac: 0, bytes: 0, total: totalBytes(id), mbps: 0, etaS: null,
+                     note: "Not downloaded", err: null, done: false };
+      emit(id);
+      try { job.reject(new Error("cancelled")); } catch (e) {}
+      return;
+    }
     var st = _state[id];
     if (st && st.cancel) st.cancel();
   }
@@ -569,7 +673,7 @@
   }
 
   var API = {
-    PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
+    PACKS: PACKS, GUIDE_INTRO: GUIDE_INTRO, activeId: activeId, queuedIds: queuedIds, SUBDIR: SUBDIR, CHUNK_BYTES: CHUNK_BYTES, CHUNK_TRIES: CHUNK_TRIES, KEY_ACTIVE: KEY_ACTIVE,
     totalBytes: totalBytes, sizeLabel: sizeLabel,
     installed: installed, installedCached: installedCached,
     packIds: packIds, ensure: ensure, ensureChunked: ensureChunked, remove: remove, cancel: cancel, pathFor: pathFor,

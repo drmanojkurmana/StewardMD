@@ -252,6 +252,12 @@
    * "Download", because live updates patched only the status text. Tapping that stale button is how
    * a second download gets started. */
   function actionBtnHTML(id, st, have) {
+    // A QUEUED pack is not downloading and not idle. It used to render "Download", which invited a
+    // second tap that did nothing, and its Pause did nothing either because there was no transfer.
+    if (st.queued) {
+      return '<button class="smd-nav-btn" data-me-model="pause" data-me-id="' + id +
+        '" style="margin:0;flex:1">Cancel</button>';
+    }
     var label = st.downloading ? "Pause" : (have ? "Verify" : (st.frac > 0 ? "Resume" : "Download"));
     var act = st.downloading ? "pause" : "download";
     return '<button class="smd-nav-btn" data-me-model="' + act + '" data-me-id="' + id +
@@ -275,14 +281,17 @@
       var size = M.sizeLabel(id);
 
       var status;
-      if (st.downloading) status = (st.frac * 100).toFixed(1) + "% of " + size +
-        (st.mbps ? " · " + st.mbps.toFixed(1) + " MB/s" : "") + (st.etaS != null ? " · " + fmtETA(st.etaS) : "");
+      if (st.queued) status = (st.note || "Waiting") + " · " + size;
+      else if (st.downloading) status = (st.frac * 100).toFixed(1) + "% of " + size +
+        // A stalled transfer reports 0.0 MB/s honestly rather than dropping the field, because a
+        // percentage with no rate beside it is what made a frozen download look like a working one.
+        " · " + (st.mbps || 0).toFixed(1) + " MB/s" + (st.etaS != null ? " · " + fmtETA(st.etaS) : "");
       else if (have) status = "Downloaded · " + size;
       else if (st.err) status = st.note + " · tap Download to resume";
       else if (st.frac > 0) status = "Paused at " + (st.frac * 100).toFixed(1) + "% · tap Download to resume";
       else status = "Not downloaded · " + size;
 
-      var bar = (st.downloading || (st.frac > 0 && !have))
+      var bar = (!st.queued && (st.downloading || (st.frac > 0 && !have)))
         ? '<div style="height:4px;border-radius:2px;background:var(--line,#e2e8f0);overflow:hidden;margin-top:7px">' +
             '<div style="height:100%;width:' + (st.frac * 100).toFixed(1) + '%;background:var(--teal,#0e6e63);transition:width .3s"></div>' +
           '</div>'
@@ -302,7 +311,7 @@
           actionBtnHTML(id, st, have) +
           // No Delete while a transfer is running: a mis-tap there throws away a partial download
           // AND cancels it. Pause first, then Delete appears.
-          (!st.downloading && (have || st.frac > 0)
+          (!st.downloading && !st.queued && (have || st.frac > 0)
             ? '<button class="smd-nav-btn" data-me-model="delete" data-me-id="' + id + '" style="margin:0;flex:1">Delete</button>' : "") +
         '</div>' +
       '</div>';
