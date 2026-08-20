@@ -53,6 +53,6 @@ Our target is to begin within [two weeks / your window]. Please send the quote t
 Hello@maiknowledge.in.
 
 Kind regards,
-[Name]
-StewardMD / MaiKnowledge
+[Your name]
+MaiKnowledge LLP
 Hello@maiknowledge.in
