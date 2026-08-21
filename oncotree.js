@@ -43,7 +43,8 @@
   var st = {
     guideline: null, graph: null, protocols: {}, answers: {}, rebaseId: null,
     view: "pathway", openedProtocol: null, selection: null, whyOpen: {}, showExcluded: false,
-    loaded: false, loading: false, error: null, ctx: null
+    loaded: false, loading: false, error: null, ctx: null,
+    trail: [], tocQuery: "", summaryOpen: false, _pendingRebase: null
   };
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -114,7 +115,7 @@
       '<div class="ot-step-head">' + catChip(node.nodeCategory) + (node.section ? '<span class="ot-step-sec">' + esc(node.section) + "</span>" : "") + "</div>" +
       '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
       (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") +
-      bulletsHtml(node.bullets) +
+      bulletsHtml(node.bullets) + tablesHtml(node) +
       '<div class="ot-opts">' + opts + "</div></div>";
   }
 
@@ -154,6 +155,30 @@
       return "<li>" + esc(b) + "</li>";
     }).join("") + "</ul>";
   }
+  // Staging / dosing / biomarker tables on a node. node.tables = [{ title, headers:[], rows:[[...]] }],
+  // or a single node.table with the same shape. Pure render; horizontally scrollable on mobile.
+  function tablesHtml(node) {
+    var tbls = node && node.tables ? asArr(node.tables) : (node && node.table ? [node.table] : []);
+    if (!tbls.length) return "";
+    return tbls.map(function (tb) {
+      if (!tb) return "";
+      var hdr = asArr(tb.headers), rows = asArr(tb.rows);
+      var head = hdr.length ? "<thead><tr>" + hdr.map(function (h) { return "<th>" + esc(h) + "</th>"; }).join("") + "</tr></thead>" : "";
+      var body = "<tbody>" + rows.map(function (r) { return "<tr>" + asArr(r).map(function (c) { return "<td>" + esc(c) + "</td>"; }).join("") + "</tr>"; }).join("") + "</tbody>";
+      return '<div class="ot-tablewrap">' + (tb.title ? '<div class="ot-table-cap">' + esc(tb.title) + "</div>" : "") +
+        '<table class="ot-table">' + head + body + "</table></div>";
+    }).join("");
+  }
+  // Cross-page "see X" link node. node.linkGuideline jumps to another disease graph; node.linkTo re-roots
+  // (rebases) the current graph at that node. Pushes a breadcrumb so the physician can navigate back.
+  function linkCardHtml(node) {
+    var g = node.linkGuideline, n = node.linkTo;
+    if (!g && !n) return "";
+    var label = node.linkLabel || (g ? ("Go to " + g) : "Continue this pathway");
+    return '<button class="ot-linkcard" data-ot-act="link-follow"' +
+      (g ? ' data-ot-guideline="' + esc(g) + '"' : "") + (n ? ' data-ot-node="' + esc(n) + '"' : "") + '>' +
+      ms("linked_services") + '<span class="ot-linkcard-t">' + esc(label) + "</span>" + ms("arrow_forward") + "</button>";
+  }
   // ---- Standard-Guidelines schema support: evidence categories + lettered footnotes ----
   // Evidence-category badge(s) on a node (e.g. "1", "2A", "2B", "3").
   function evBadge(node) {
@@ -181,6 +206,14 @@
   }
 
   function outcomeHtml(node, state) {
+    var link = linkCardHtml(node);
+    if (link) {
+      var lcat = CAT[node.nodeCategory] || CAT.other;
+      return '<div class="ot-outcome"><div class="ot-outcome-head" style="--ot-c:' + lcat.color + '">' + catChip(node.nodeCategory || "other") +
+        '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
+        (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") +
+        bulletsHtml(node.bullets) + tablesHtml(node) + "</div>" + link + "</div>";
+    }
     var refs = asArr(node.protocolRefs);
     var rec = REC();
     // Deterministic curated refs are the primary list; recommend supplies the per-protocol match rationale
@@ -196,7 +229,7 @@
     var ocat = CAT[node.nodeCategory] || CAT.treatment;
     var head = '<div class="ot-outcome-head" style="--ot-c:' + ocat.color + '">' + catChip(node.nodeCategory || "treatment") +
       '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
-      (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + bulletsHtml(node.bullets) + "</div>";
+      (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + bulletsHtml(node.bullets) + tablesHtml(node) + "</div>";
     var count = '<div class="ot-outcome-count">' + applicable.length + " applicable protocol" + (applicable.length === 1 ? "" : "s") +
       ' <span class="ot-outcome-note">Decision support only. Physician selects; the existing dose engine computes doses.</span></div>';
     var exHtml = excludedByPheno.length
@@ -298,26 +331,45 @@
       "</div>";
   }
   // Table-of-Contents / outline panel: nodes grouped by section, each a jump-to-node link. Collapsible.
-  function tocHtml(state) {
-    if (st.tocOpen === false) return '<button class="ot-toc-fab" data-ot-act="toc-toggle" aria-label="Contents">' + ms("list") + "</button>";
-    var order = asArr(state.order), secs = [], bySec = {};
+  // Full-text over a node's visible text - powers the Contents search box.
+  function nodeSearchText(raw) {
+    return [raw.name || raw.title || "", raw.description || "",
+      asArr(raw.bullets).map(function (b) { return (b && typeof b === "object") ? ((b.label || "") + " " + (b.sub || "")) : b; }).join(" ")
+    ].join(" ").toLowerCase();
+  }
+  function tocItemHtml(raw, active) {
+    var cat = CAT[raw.nodeCategory] || CAT.other;
+    return '<button class="ot-toc-item' + (active ? " on" : "") + (st.mapSel === raw.id ? " sel" : "") +
+      '" data-ot-act="toc-goto" data-ot-node="' + esc(raw.id) + '" style="--ot-c:' + cat.color + '">' + esc(raw.name || raw.title || raw.id) + "</button>";
+  }
+  // The list under the Contents header - a flat filtered list while searching, grouped by section otherwise.
+  function tocListHtml(state) {
+    var order = asArr(state.order), q = (st.tocQuery || "").trim().toLowerCase();
+    if (q) {
+      var hits = order.filter(function (id) { var raw = st.byId[id]; return raw && nodeSearchText(raw).indexOf(q) >= 0; });
+      if (!hits.length) return '<div class="ot-toc-empty">No matches for "' + esc(q) + '"</div>';
+      return hits.map(function (id) { return tocItemHtml(st.byId[id], state.nodes[id] && state.nodes[id].status === "active"); }).join("");
+    }
+    var secs = [], bySec = {};
     order.forEach(function (id) {
       var raw = st.byId[id]; if (!raw) return;
       var sec = raw.section || "Other";
       if (!bySec[sec]) { bySec[sec] = []; secs.push(sec); }
       bySec[sec].push(raw);
     });
-    var body = secs.map(function (sec) {
-      var items = bySec[sec].map(function (raw) {
-        var cat = CAT[raw.nodeCategory] || CAT.other, sn = state.nodes[raw.id];
-        var on = sn && sn.status === "active";
-        return '<button class="ot-toc-item' + (on ? " on" : "") + (st.mapSel === raw.id ? " sel" : "") + '" data-ot-act="toc-goto" data-ot-node="' + esc(raw.id) + '" style="--ot-c:' + cat.color + '">' + esc(raw.name || raw.title || raw.id) + "</button>";
-      }).join("");
+    return secs.map(function (sec) {
+      var items = bySec[sec].map(function (raw) { return tocItemHtml(raw, state.nodes[raw.id] && state.nodes[raw.id].status === "active"); }).join("");
       return '<div class="ot-toc-sec"><div class="ot-toc-sec-h">' + esc(sec) + "</div>" + items + "</div>";
     }).join("");
+  }
+  function tocHtml(state) {
+    if (st.tocOpen === false) return '<button class="ot-toc-fab" data-ot-act="toc-toggle" aria-label="Contents">' + ms("list") + "</button>";
     return '<div class="ot-toc"><div class="ot-toc-hd">' + ms("list") + "<span>Contents</span>" +
       '<button class="ot-toc-x" data-ot-act="toc-toggle" aria-label="Collapse contents">' + ms("close") + "</button></div>" +
-      '<div class="ot-toc-body">' + body + "</div></div>";
+      '<div class="ot-toc-search-wrap">' + ms("search") +
+        '<input class="ot-toc-search" type="text" placeholder="Search this navigator" data-ot-input="toc-search" value="' + esc(st.tocQuery || "") + '">' +
+        '<button class="ot-toc-clear" data-ot-act="toc-clear" aria-label="Clear">' + ms("close") + "</button></div>" +
+      '<div class="ot-toc-body" id="otTocList">' + tocListHtml(state) + "</div></div>";
   }
 
   // Bottom-sheet detail for a tapped map node - keeps the physician IN the map (interactive), shows the
@@ -333,7 +385,7 @@
       '<div class="ot-mappop-cat">' + ms(cat.icon) + esc(cat.name) + " &middot; " + esc(statusTxt) + "</div>" +
       '<div class="ot-mappop-name">' + esc(raw.name || raw.title || id) + evBadge(raw) + fnMarkers(raw) + "</div>" +
       (raw.description ? '<div class="ot-mappop-desc">' + esc(raw.description) + "</div>" : "") +
-      bulletsHtml(raw.bullets) +
+      bulletsHtml(raw.bullets) + tablesHtml(raw) +
       (asArr(raw.protocolRefs).length ? '<div class="ot-mappop-rx">' + ms("medication") + "Regimens: " + asArr(raw.protocolRefs).map(function (r) { var p = st.protocols[r]; return esc((p && p.name) || r); }).join("; ") + "</div>" : "") +
       (sel.length ? '<div class="ot-mappop-sel">' + ms("check_circle") + esc(sel[0].label) + "</div>" : "") +
       (why.length ? '<div class="ot-mappop-why">' + ms("block") + "Excluded because " + why.join("; ") + "</div>" : "") +
@@ -408,6 +460,54 @@
       cards + "</div>";
   }
 
+  // Breadcrumb trail across cross-page link jumps (guideline switches + in-graph rebases).
+  function crumbsHtml() {
+    if (!st.trail || !st.trail.length) return "";
+    var items = st.trail.map(function (c, i) {
+      return '<button class="ot-crumb" data-ot-act="crumb" data-ot-idx="' + i + '">' + esc(c.label || "Start") + "</button>" + ms("chevron_right");
+    }).join("");
+    var curNode = st.rebaseId && st.byId[st.rebaseId];
+    var cur = curNode ? (curNode.name || curNode.title || "") : (st.graph ? (st.graph.title || st.guideline || "") : "");
+    return '<div class="ot-crumbs">' + ms("account_tree") + items + '<span class="ot-crumb cur">' + esc(cur) + "</span></div>";
+  }
+  // Plain-text summary of the walked pathway - copyable / shareable (no PHI; decision logic only).
+  function summaryText(state) {
+    var lines = [];
+    lines.push((st.graph && (st.graph.title || st.guideline)) || "Oncology navigator");
+    if (st.graph && st.graph.navigatorVersion) lines.push("Navigator " + st.graph.navigatorVersion);
+    lines.push("");
+    var steps = answeredSteps(state);
+    if (steps.length) {
+      lines.push("PATHWAY");
+      steps.forEach(function (n) {
+        var ns = state.nodes[n.id], sel = ns.options.filter(function (o) { return o.isSelected; }).map(function (o) { return o.label; });
+        lines.push("- " + (n.name || n.title || n.id) + ": " + (sel.join(", ") || "-"));
+      });
+      lines.push("");
+    }
+    var outs = reachedOutcomes(state);
+    if (outs.length) {
+      lines.push("OUTCOME");
+      outs.forEach(function (n) {
+        lines.push("- " + (n.title || n.name || n.id));
+        asArr(n.protocolRefs).forEach(function (r) { var p = st.protocols[r]; lines.push("    regimen: " + ((p && p.name) || r)); });
+      });
+      lines.push("");
+    }
+    lines.push("Decision support only - DRAFT. The physician decides; the dose engine computes doses.");
+    return lines.join("\n");
+  }
+  function summarySheetHtml() {
+    if (!st.summaryOpen) return "";
+    var state = evalState(); if (!state) return "";
+    var txt = summaryText(state);
+    return '<div class="ot-fn-ov" data-ot-act="summary-close"><div class="ot-fn-sheet ot-sum-sheet" data-ot-act="footnote-stop">' +
+      '<div class="ot-fn-hd"><b>Pathway summary</b>' +
+      '<button class="ot-fn-x" data-ot-act="summary-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<pre class="ot-sum-pre">' + esc(txt) + "</pre>" +
+      '<div class="ot-detail-actions"><button class="ot-btn primary" data-ot-act="summary-copy">' + ms("content_copy") + "Copy</button></div></div></div>";
+  }
+
   function bodyHtml() {
     if (st.loading) return '<div class="ot-loading">' + ms("progress_activity") + "Loading navigator...</div>";
     if (st.error) return '<div class="ot-error">' + ms("error") + esc(st.error) + '<button class="ot-btn ghost" data-ot-act="retry">Retry</button></div>';
@@ -416,7 +516,7 @@
     if (!state) return '<div class="ot-loading">Preparing...</div>';
     if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol);
     if (st.selection) return selectionHtml();
-    if (st.view === "map") return mapHtml(state) + footnoteSheetHtml();
+    if (st.view === "map") return mapHtml(state) + footnoteSheetHtml() + summarySheetHtml();
 
     var cur = currentQuestion(state);
     var mid = "";
@@ -426,7 +526,7 @@
       mid = outs.length ? outs.map(function (n) { return outcomeHtml(n, state); }).join("")
         : '<div class="ot-empty">Answer the questions above to see applicable protocols.</div>';
     }
-    return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state) + footnoteSheetHtml();
+    return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state) + footnoteSheetHtml() + summarySheetHtml();
   }
 
   // ---- shell + paint -----------------------------------------------------------------------------
@@ -435,7 +535,8 @@
     var title = hasGraph ? (st.graph.title || "ONCOTREE") : "Oncology navigator";
     var viewToggle = hasGraph ? ('<div class="ot-viewtoggle">' +
       '<button class="ot-vt' + (st.view === "pathway" ? " on" : "") + '" data-ot-act="view-pathway">' + ms("account_tree") + "Pathway</button>" +
-      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Map</button></div>") : "";
+      '<button class="ot-vt' + (st.view === "map" ? " on" : "") + '" data-ot-act="view-map">' + ms("map") + "Map</button>" +
+      '<button class="ot-vt ot-vt-act" data-ot-act="summary">' + ms("summarize") + "Summary</button></div>") : "";
     var kicker = hasGraph
       ? '<button class="ot-hkicker ot-hkicker-btn" data-ot-act="change-disease">' + ms("swap_horiz") + "Change cancer</button>"
       : '<span class="ot-hkicker">ONCOTREE navigator</span>';
@@ -449,6 +550,7 @@
         rightBtn +
       "</header>" +
       viewToggle +
+      crumbsHtml() +
       '<div class="ot-scroll" id="otBody">' + bodyHtml() + "</div>" +
       '<div class="ot-disclaimer">Decision support. DRAFT navigator + protocols. Not an approved clinical order; the physician decides and the existing dose engine computes doses.</div>' +
       "</div>";
@@ -555,6 +657,14 @@
   }
 
   // ---- events ------------------------------------------------------------------------------------
+  // Search input: update only the results list so the field keeps focus (no full repaint per keystroke).
+  function onInput(e) {
+    var t = e.target;
+    if (!t || t.getAttribute("data-ot-input") !== "toc-search") return;
+    st.tocQuery = t.value || "";
+    var list = D && D.getElementById("otTocList"), state = evalState();
+    if (list && state) list.innerHTML = tocListHtml(state);
+  }
   function onClick(e) {
     var t = e.target && e.target.closest ? e.target.closest("[data-ot-act]") : null;
     if (!t) return;
@@ -576,6 +686,12 @@
     if (act === "footnote") { st.footnoteOpen = t.getAttribute("data-ot-fn"); repaintBody(); return; }
     if (act === "footnote-close") { st.footnoteOpen = null; repaintBody(); return; }
     if (act === "footnote-stop") { return; }
+    if (act === "toc-clear") { st.tocQuery = ""; repaintBody(); return; }
+    if (act === "summary") { st.summaryOpen = true; repaintBody(); return; }
+    if (act === "summary-close") { st.summaryOpen = false; repaintBody(); return; }
+    if (act === "summary-copy") { copySummary(); return; }
+    if (act === "link-follow") { followLink(t.getAttribute("data-ot-guideline"), node); return; }
+    if (act === "crumb") { gotoCrumb(parseInt(t.getAttribute("data-ot-idx"), 10)); return; }
     if (act === "map-goto") { st.mapSel = null; st.view = "pathway"; editStep(node); return; }
     if (act === "answer") { answer(node, opt); return; }
     if (act === "edit") { editStep(node); return; }
@@ -613,6 +729,30 @@
       });
       if (!changed) break;
     }
+  }
+
+  // Cross-page navigation. g = jump to another disease graph; n = re-root the current graph at that node.
+  function followLink(g, n) {
+    var label = (st.graph && (st.graph.title || st.guideline)) || "Start";
+    st.trail = (st.trail || []).concat([{ label: label, guideline: st.guideline, rebaseId: st.rebaseId }]);
+    if (g && g !== st.guideline) { var keep = st.trail; st._pendingRebase = n || null; loadGuideline(g); st.trail = keep; }
+    else { st.rebaseId = n || null; st.mapSel = null; st.view = "pathway"; paint(); }
+  }
+  function gotoCrumb(idx) {
+    if (!st.trail || idx < 0 || idx >= st.trail.length) return;
+    var c = st.trail[idx];
+    st.trail = st.trail.slice(0, idx);
+    if (c.guideline && c.guideline !== st.guideline) { var keep = st.trail; st._pendingRebase = c.rebaseId || null; loadGuideline(c.guideline); st.trail = keep; }
+    else { st.rebaseId = c.rebaseId || null; st.mapSel = null; st.view = "pathway"; paint(); }
+  }
+  function copySummary() {
+    var state = evalState(); if (!state) return;
+    var txt = summaryText(state);
+    try {
+      if (G.navigator && G.navigator.clipboard && G.navigator.clipboard.writeText) {
+        G.navigator.clipboard.writeText(txt).then(function () { if (G.toast) G.toast("Pathway summary copied"); }, function () { if (G.toast) G.toast("Copy failed"); });
+      } else if (G.toast) { G.toast("Clipboard unavailable"); }
+    } catch (e) { if (G.toast) G.toast("Copy failed"); }
   }
 
   function selectProtocol(ref) {
@@ -691,7 +831,9 @@
           return G.fetch("/kb/protocols/" + encodeURIComponent(id) + ".json").then(function (r) { return r.ok ? r.json() : null; }).catch(function () { return null; });
         })).then(function (protos) {
           protos.forEach(function (p, i) { if (p) st.protocols[ids[i]] = p; });
-          st.loaded = true; st.loading = false; prepopulate(); paint();
+          st.loaded = true; st.loading = false; prepopulate();
+          if (st._pendingRebase) { if (st.byId[st._pendingRebase]) st.rebaseId = st._pendingRebase; st._pendingRebase = null; }
+          paint();
         });
       })
       .catch(function (err) { st.loading = false; st.error = "Could not load the navigator. " + (err && err.message ? err.message : ""); paint(); });
@@ -716,6 +858,7 @@
       el = D.createElement("div"); el.id = "smdOncoTree"; el.className = "ot-overlay";
       D.body.appendChild(el);
       el.addEventListener("click", onClick);
+      el.addEventListener("input", onInput);
     }
     el.style.display = "block";
     if (D.body) D.body.classList.add("ot-open");

@@ -260,6 +260,14 @@ body.ot-open { overflow: hidden; }
 .ot-toc-item.on::before { opacity: 1; }
 .ot-toc-item.sel { background: color-mix(in srgb, var(--ot-c) 12%, transparent); }
 .ot-toc-item:active { background: color-mix(in srgb, var(--ot-c) 18%, transparent); }
+.ot-toc-search-wrap { display: flex; align-items: center; gap: 6px; padding: 8px 9px; border-bottom: 1px solid var(--ot-line); }
+.ot-toc-search-wrap .material-symbols-outlined { font-size: 17px; color: var(--ot-sub); }
+.ot-toc-search { flex: 1; min-width: 0; border: none; background: transparent; color: var(--ot-ink); font: 500 13px system-ui; outline: none; }
+.ot-toc-search::placeholder { color: var(--ot-sub); }
+.ot-toc-clear { border: none; background: none; color: var(--ot-sub); cursor: pointer; padding: 2px; display: inline-flex; }
+.ot-toc-clear .material-symbols-outlined { font-size: 16px; }
+.ot-toc-search:placeholder-shown ~ .ot-toc-clear { display: none; }
+.ot-toc-empty { padding: 14px 12px; font: 500 12.5px system-ui; color: var(--ot-sub); }
 
 .ot-mappop { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; padding: 13px 15px 15px;
   border: 1px solid var(--ot-line); border-left: 4px solid var(--ot-c, var(--ot-accent)); border-radius: 16px;
@@ -315,6 +323,34 @@ body.ot-open { overflow: hidden; }
 
 /* disclaimer */
 .ot-disclaimer { flex: 0 0 auto; padding: 8px 14px calc(env(safe-area-inset-bottom, 0px) + 8px); font-size: 10.5px; color: var(--ot-sub); text-align: center; border-top: 1px solid var(--ot-line); background: var(--ot-card); }
+
+/* staging / dosing / biomarker tables (node.tables) */
+.ot-tablewrap { margin: 4px 0 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--ot-line); border-radius: 12px; background: var(--ot-card); }
+.ot-table-cap { font: 800 10.5px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); padding: 9px 11px 5px; }
+.ot-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ot-table th { text-align: left; font: 700 10.5px system-ui; text-transform: uppercase; letter-spacing: .04em; color: var(--ot-sub); padding: 8px 11px; border-bottom: 1px solid var(--ot-line); white-space: nowrap; }
+.ot-table td { padding: 8px 11px; border-bottom: 1px solid var(--ot-line); color: var(--ot-ink); vertical-align: top; }
+.ot-table tr:last-child td { border-bottom: none; }
+
+/* cross-page "see X" link node */
+.ot-linkcard { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; margin-top: 10px; padding: 13px 14px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--ot-c, var(--ot-accent)) 45%, var(--ot-line)); border-radius: 14px;
+  background: color-mix(in srgb, var(--ot-c, var(--ot-accent)) 8%, var(--ot-card)); color: var(--ot-ink); font: 700 14px system-ui; }
+.ot-linkcard .ot-linkcard-t { flex: 1; }
+.ot-linkcard .material-symbols-outlined { font-size: 20px; color: var(--ot-c, var(--ot-accent)); }
+.ot-linkcard:active { transform: scale(.995); }
+
+/* breadcrumb trail across link jumps */
+.ot-crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 2px; padding: 7px 12px; background: var(--ot-card); border-bottom: 1px solid var(--ot-line); }
+.ot-crumbs > .material-symbols-outlined { font-size: 16px; color: var(--ot-sub); margin-right: 4px; }
+.ot-crumbs .material-symbols-outlined { font-size: 15px; color: var(--ot-sub); }
+.ot-crumb { border: none; background: none; padding: 2px 3px; font: 700 12px system-ui; color: var(--ot-accent); cursor: pointer; max-width: 44%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ot-crumb.cur { color: var(--ot-sub); cursor: default; }
+
+/* Summary segment button + sheet */
+.ot-vt-act { margin-left: auto; }
+.ot-sum-sheet { max-width: 620px; }
+.ot-sum-pre { white-space: pre-wrap; word-break: break-word; font: 500 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ot-ink); background: var(--ot-bg); border: 1px solid var(--ot-line); border-radius: 12px; padding: 12px 13px; margin: 10px 0 4px; max-height: 46vh; overflow-y: auto; }
 
 /* prevent horizontal overflow anywhere */
 .ot-overlay * { max-width: 100%; box-sizing: border-box; }
