@@ -11,6 +11,11 @@
 # records as the ticket's department so the display board can group by counter.
 #
 # Usage: ./scripts/abdm-facility-qr.sh [counter-id] [out.png]
+#
+# GOTCHA (macOS/homebrew): `pip install segno` is refused - the interpreter is externally managed
+# (PEP 668) - and the script just says "need a QR encoder" again. Use a venv once, then prefix PATH:
+#   python3 -m venv ~/.cache/stewardmd-abdm-local/venv && ~/.cache/stewardmd-abdm-local/venv/bin/pip install segno
+#   PATH="$HOME/.cache/stewardmd-abdm-local/venv/bin:$PATH" ./scripts/abdm-facility-qr.sh OPD1 out.png
 set -euo pipefail
 COUNTER="${1:-OPD1}"
 OUT="${2:-$HOME/Downloads/stewardmd-facility-qr-$COUNTER.png}"
