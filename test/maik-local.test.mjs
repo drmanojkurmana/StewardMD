@@ -16,12 +16,16 @@ const SRC = src("maik-local.js");
  * @param tokens pieces the fake plugin will stream
  * @param opts.noPlugin simulate the web PWA (no capacitor-llama)
  */
-function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = null, loaded = false } = {}) {
+function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = null, loaded = false,
+               mem = null, availableThrows = false } = {}) {
   const calls = { load: [], generate: [], listeners: [], removed: 0 };
   let listener = null;
 
   const Llama = {
-    available: async () => ({ available: true, loaded }),
+    available: async () => {
+      if (availableThrows) throw new Error("plugin says no");
+      return Object.assign({ available: true, loaded }, mem || {});
+    },
     load: async (o) => {
       calls.load.push(o);
       if (loadFails) { const e = new Error(loadFails); e.code = loadFails; throw e; }
@@ -50,7 +54,8 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
         "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 },
         "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true }
       },
-      pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf"
+      pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf",
+      totalBytes: () => 2.5e9
     }
   };
   new Function("window", SRC)(win);
@@ -310,7 +315,6 @@ const { L } = load();
   ok("the two image prompts are different", L.SYSTEM_IMAGE !== L.SYSTEM_IMAGE_FOLLOWUP);
 }
 
-console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
 
 /* ── Regressions from a real device transcript (20 Aug 2026) ────────────────────────────────────
@@ -365,4 +369,48 @@ if (fail) process.exit(1);
   ok("prompt enforces medical-only scope", /Answer medical questions only/.test(L.SYSTEM));
   ok("no section labels are requested", /Bottom Line/.test(L.SYSTEM) && /no section labels/.test(L.SYSTEM));
   ok("default pack matches the real registry after the MAiK rebrand", L.DEFAULT_PACK === "maik-mxcore");
+
+  /* 4. MEMORY PRE-FLIGHT. A 2.5 GB model on a phone with nothing free does not fail cleanly: it
+   *    load/evict cycles (Android) or gets jetsam-killed (iOS), both of which present to the
+   *    clinician as the app hanging. The refusal must fire in the fatal region, must NOT fire where
+   *    mmap copes, and must never itself become the reason an answer fails.
+   */
+  const askOne = (o) => {
+    const { L: E } = load(o);
+    return E.answer({ question: "Ceftriaxone dose?" }, {}).then(r => r, e => ({ error: String(e) }));
+  };
+  const NEED = 2.5e9;
+
+  // iOS: os_proc_available_memory() is a hard ceiling, so 1.15x the weights is required.
+  await askOne({ mem: { availableMemory: NEED * 1.0, memoryIsHardLimit: true } })
+    .then(r => ok("iOS refuses when the jetsam headroom is under 1.15x the weights",
+                  /Not enough free memory/.test(r.error || "")));
+  await askOne({ mem: { availableMemory: NEED * 1.3, memoryIsHardLimit: true } })
+    .then(r => ok("iOS answers with headroom to spare", !r.error && /Hello world/.test(r.text)));
+
+  // Android: availMem is free + reclaimable and llama.cpp mmaps, so the SAME ratio that blocks on
+  // iOS must not block here - this is the measured Pixel case (2.1 GB free, 2.49 GB model, runs).
+  await askOne({ mem: { availableMemory: NEED * 0.85, memoryIsHardLimit: false } })
+    .then(r => ok("Android answers below the weight size (mmap pages in and out)",
+                  !r.error && /Hello world/.test(r.text)));
+  await askOne({ mem: { availableMemory: NEED * 0.06, memoryIsHardLimit: false } })
+    .then(r => ok("Android still refuses in the measured thrash region (176 MB / 2.83 GB)",
+                  /Not enough free memory/.test(r.error || "")));
+
+  // The clinician gets a SENTENCE with both numbers and a next step, never the code.
+  await askOne({ mem: { availableMemory: 1e6, memoryIsHardLimit: true } })
+    .then(r => ok("refusal is actionable: numbers plus what to do, and never the raw code",
+                  /1 MB free, 2\.5 GB needed/.test(r.error) && /Close some apps/.test(r.error) &&
+                  !/low-memory/.test(r.error)));
+
+  // Fail-open: an unmeasurable platform has NO opinion.
+  await askOne({ mem: null })
+    .then(r => ok("a platform that reports no memory figure does not block the answer",
+                  !r.error && /Hello world/.test(r.text)));
+  await askOne({ availableThrows: true })
+    .then(r => ok("available() throwing does not block the answer",
+                  !r.error && /Hello world/.test(r.text)));
 }
+
+
+console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);

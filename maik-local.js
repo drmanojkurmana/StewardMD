@@ -303,7 +303,50 @@
     }
     var pk = M.PACKS[packId];
     if (!pk) return Promise.reject(new Error("unknown model pack"));
-    return M.pathFor(packId).then(function (path) {
+    /* PRE-FLIGHT: is there room to map this model at all?
+     *
+     * Measured on a Pixel 9 (12 GB total) with a 2.83 GB model selected: MemAvailable had fallen to
+     * 176 MB. The model loaded to 3.4 GB resident, the kernel evicted it, it reloaded, and the answer
+     * never arrived - a load/evict cycle that presents to the clinician as the app hanging forever.
+     * On iOS the same situation ends in a jetsam kill, which looks like a crash.
+     *
+     * So ask first and refuse with a reason. A refusal a doctor can act on ("close some apps") beats
+     * a spinner that never resolves. 0 means the platform could not tell us, and that carries NO
+     * opinion - never block on it.
+     *
+     * BUT THE NUMBER MEANS DIFFERENT THINGS ON THE TWO PLATFORMS, and treating them alike would
+     * refuse loads that work. iOS reports os_proc_available_memory(): bytes left before jetsam kills
+     * us, a HARD ceiling, so needing 1.15x the weights (KV cache + runtime on top) is right. Android
+     * reports availMem, which is free + reclaimable, and llama.cpp mmaps the GGUF - clean pages get
+     * evicted and re-faulted, so a 2.5 GB model genuinely runs with well under 2.5 GB "available",
+     * just slower. Blocking there at 1.15x would have refused the Pixel in front of me at 2.1 GB
+     * free. So the plugin declares which kind of number it is and the soft case only refuses the
+     * region where thrashing is certain rather than possible.
+     */
+    return Promise.resolve()
+      .then(function () { return L.available(); })
+      // A plugin that cannot answer the question has no opinion on memory. Failing to MEASURE must
+      // never become a reason not to ANSWER.
+      .then(function (a) { return a; }, function () { return null; })
+      .then(function (a) {
+        var avail = 0, need = 0;
+        try {
+          avail = (a && Number(a.availableMemory)) || 0;
+          need = M.totalBytes(packId) || 0;
+        } catch (e) { return null; }
+        // ponytail: 0.35 is calibrated against two real measurements, not theory - 176 MB free
+        // against a 2.83 GB model (0.06) hung forever, 2.1 GB against 2.49 GB (0.85) runs. Retune
+        // with device data, do not compute it.
+        var ratio = (a && a.memoryIsHardLimit) ? 1.15 : 0.35;
+        if (avail > 0 && need > 0 && avail < need * ratio) {
+          var err = new Error("not-enough-memory:" + Math.round(avail / 1e6) + "MB free, " +
+                              (need / 1e9).toFixed(1) + "GB needed");
+          err.code = "low-memory";
+          throw err;
+        }
+        return null;
+      })
+      .then(function () { return M.pathFor(packId); }).then(function (path) {
       return L.load({ path: path, nCtx: pk.nCtx || 4096 });
     }).then(function () { _loadedPack = packId; return null; });
   }
@@ -410,7 +453,15 @@
         };
       });
     }).catch(function (e) {
-      // Surface the plugin's stable error code when we have one; the UI maps it to copy.
+      var msg = String((e && e.message) || "");
+      /* The memory case gets a SENTENCE, not a code. "low-memory" on screen tells a clinician
+       * nothing they can act on; "close some apps" does, and the numbers make it checkable. */
+      var mm = /^not-enough-memory:(\d+)MB free, ([\d.]+)GB needed$/.exec(msg);
+      if (mm) {
+        return { error: "Not enough free memory to load the on-device model right now (" + mm[1] +
+                        " MB free, " + mm[2] + " GB needed). Close some apps and try again, or use MaiK Cloud." };
+      }
+      // Otherwise surface the plugin's stable error code; the UI maps it to copy.
       return { error: String((e && (e.code || e.message)) || e || "local-failed") };
     }).then(function (out) {
       if (sub && sub.remove) { try { sub.remove(); } catch (e) {} }

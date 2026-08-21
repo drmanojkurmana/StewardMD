@@ -128,10 +128,35 @@ public class LlamaPlugin extends Plugin {
         try {
             isDebug = (getContext().getApplicationInfo().flags & android.content.pm.ApplicationInfo.FLAG_DEBUGGABLE) != 0;
         } catch (Throwable ignore) {}
+        /* availableMemory is the whole reason on-device answers sometimes never arrive.
+         *
+         * Measured on a Pixel 9 (12 GB total): MemAvailable dropped to 176 MB while a 2.83 GB model
+         * was selected. The model loaded to 3.4 GB resident, the kernel evicted it, it reloaded, and
+         * the answer never came - a load/evict cycle that presents to the clinician as a hang.
+         *
+         * ActivityManager.MemoryInfo.availMem is the closest thing to /proc/meminfo MemAvailable that
+         * an app can read. Reported so the JS layer can refuse the load with an honest message
+         * instead of hanging. 0 means "could not tell", and the caller must treat that as no opinion
+         * rather than as no memory.
+         */
+        long availMem = 0;
+        try {
+            android.app.ActivityManager am = (android.app.ActivityManager)
+                getContext().getSystemService(android.content.Context.ACTIVITY_SERVICE);
+            if (am != null) {
+                android.app.ActivityManager.MemoryInfo mi = new android.app.ActivityManager.MemoryInfo();
+                am.getMemoryInfo(mi);
+                availMem = mi.availMem;
+            }
+        } catch (Throwable ignore) {}
         call.resolve(new JSObject()
             .put("available", engine.isAvailable())
             .put("debugBuild", isDebug)
             .put("loaded", engine.isLoaded())
+            .put("availableMemory", availMem)
+            // SOFT: availMem is free + reclaimable, and llama.cpp mmaps the weights, so a model
+            // larger than this still runs (page faults, not an OOM kill). JS must not hard-block.
+            .put("memoryIsHardLimit", false)
             .put("defaultNCtx", LlamaEngine.DEFAULT_N_CTX)
             .put("defaultNPredict", LlamaEngine.DEFAULT_N_PREDICT));
     }
@@ -150,9 +175,11 @@ public class LlamaPlugin extends Plugin {
         final int nBatch = call.getInt("nBatch", 512);
         final int nUbatch = call.getInt("nUbatch", 512);
         final int nThreadsBatch = call.getInt("nThreadsBatch", Runtime.getRuntime().availableProcessors());
+        android.util.Log.i("LlamaPlugin", "load: queued " + path);
         worker.execute(() -> {
             try {
                 engine.load(path, nCtx, nThreads, nBatch, nUbatch, nThreadsBatch);
+                android.util.Log.i("LlamaPlugin", "load: resolving");
                 call.resolve(new JSObject().put("loaded", true).put("nCtx", nCtx).put("nThreads", nThreads)
                     .put("nBatch", nBatch).put("nUbatch", nUbatch).put("nThreadsBatch", nThreadsBatch));
             } catch (LlamaException e) {
@@ -168,7 +195,6 @@ public class LlamaPlugin extends Plugin {
      * Generate an answer, streaming each token as a {@code llamaToken} event and resolving with the
      * full text. The JS side feeds those events into MaiK's existing typewriter render.
      */
-    @PluginMethod
     /* THERMAL WATCH.
      *
      * Measured on a Pixel 9 mid-answer: 542% CPU, 3.4 GB resident, 69 C on the little cores, and the
@@ -202,6 +228,62 @@ public class LlamaPlugin extends Plugin {
         try { LlamaNative.setThermalStatus(0); } catch (Throwable ignore) {}
     }
 
+    @PluginMethod
+    public void generateWithImage(PluginCall call) {
+        final String system = call.getString("system", "");
+        final String user = call.getString("prompt", "");
+        final String mmproj = call.getString("mmproj", "");
+        if (user == null || user.isEmpty()) { call.reject("Missing prompt", LlamaErr.BAD_ARGUMENTS.code); return; }
+        if (mmproj == null || mmproj.isEmpty()) {
+            call.reject("Missing mmproj (the vision add-on is not downloaded)", LlamaErr.BAD_ARGUMENTS.code); return;
+        }
+        // Accept one path or several, and strip file:// - mtmd wants a filesystem path, and a URI
+        // would be read as a literal filename.
+        final java.util.List<String> paths = new java.util.ArrayList<>();
+        try {
+            com.getcapacitor.JSArray arr = call.getArray("images");
+            if (arr != null) for (Object o : arr.toList()) if (o != null) paths.add(String.valueOf(o));
+        } catch (Throwable ignore) {}
+        String one = call.getString("image");
+        if (one != null && !one.isEmpty()) paths.add(one);
+        for (int i = 0; i < paths.size(); i++) {
+            String p = paths.get(i);
+            if (p.startsWith("file://")) paths.set(i, p.substring(7));
+        }
+        if (paths.isEmpty()) { call.reject("Missing image", LlamaErr.BAD_ARGUMENTS.code); return; }
+        for (String p : paths) {
+            if (!new java.io.File(p).exists()) { call.reject("Image not found: " + p, LlamaErr.BAD_ARGUMENTS.code); return; }
+        }
+        final int nPredict = call.getInt("nPredict", LlamaEngine.DEFAULT_N_PREDICT);
+        final float temp = call.getFloat("temperature", 0.0f);
+        final int seed = call.getInt("seed", 0);
+        final boolean stream = call.getBoolean("stream", true);
+        final String[] arrPaths = paths.toArray(new String[0]);
+
+        worker.execute(() -> {
+            long t0 = System.currentTimeMillis();
+            startThermalWatch();
+            try {
+                LlamaNative.TokenSink sink = stream
+                    ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
+                    : null;
+                String text = engine.generateWithImage(system, user, mmproj, arrPaths, nPredict, temp, seed, sink);
+                call.resolve(new JSObject().put("text", text)
+                    .put("ms", System.currentTimeMillis() - t0)
+                    .put("images", arrPaths.length)
+                    .put("prefillMs", engine.lastPrefillMs()).put("promptTokens", engine.lastPromptTokens()));
+            } catch (LlamaException e) {
+                emitError(e);
+                call.reject(e.detail, e.err.code);
+            } catch (Throwable t) {
+                call.reject(String.valueOf(t.getMessage()), LlamaErr.GENERATION_FAILURE.code);
+            } finally {
+                stopThermalWatch();
+            }
+        });
+    }
+
+    @PluginMethod
     public void generate(PluginCall call) {
         final String system = call.getString("system", "");
         final String user = call.getString("prompt", "");

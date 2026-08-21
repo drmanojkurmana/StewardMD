@@ -102,6 +102,43 @@ public final class LlamaEngine {
         }
     }
 
+    /**
+     * Answer a question about IMAGES. Same contract as generate(), plus the projector and the images.
+     *
+     * The media marker has to go inside the USER TURN before the chat template is applied - injecting
+     * it afterwards would land it outside the turn markers and the model would read it as literal
+     * text. That is why the marker is fetched here rather than in native code.
+     */
+    public String generateWithImage(String system, String user, String mmprojPath, String[] imagePaths,
+                                    int nPredict, float temp, int seed, LlamaNative.TokenSink sink)
+            throws LlamaException {
+        if (mmprojPath == null || mmprojPath.isEmpty()) throw new LlamaException(LlamaErr.BAD_ARGUMENTS, "no projector");
+        if (imagePaths == null || imagePaths.length == 0) throw new LlamaException(LlamaErr.BAD_ARGUMENTS, "no image");
+        long m, c;
+        synchronized (lock) {
+            if (model == 0 || ctx == 0) throw new LlamaException(LlamaErr.MODEL_MISSING, "model not loaded");
+            if (generating) throw new LlamaException(LlamaErr.BUSY, "a generation is already running");
+            generating = true;
+            m = model; c = ctx;
+        }
+        try {
+            String marker = LlamaNative.mediaMarker();
+            StringBuilder u = new StringBuilder();
+            for (int i = 0; i < imagePaths.length; i++) u.append(marker).append("\n");
+            u.append(user == null ? "" : user);
+            String prompt = LlamaNative.applyChatTemplate(m, system == null ? "" : system, u.toString());
+            if (prompt == null || prompt.isEmpty()) {
+                prompt = ((system == null || system.isEmpty()) ? "" : system + "\n\n") + u;
+            }
+            String out = LlamaNative.generateWithImage(c, m, prompt, mmprojPath, imagePaths,
+                    nPredict > 0 ? nPredict : DEFAULT_N_PREDICT, temp, seed, sink);
+            if (out == null) throw new LlamaException(LlamaErr.GENERATION_FAILURE, "image generation returned null");
+            return out;
+        } finally {
+            generating = false;
+        }
+    }
+
     /** Ask the running generation to stop; generate() returns the partial text. */
     public long lastPrefillMs() { return LlamaNative.isAvailable() ? LlamaNative.lastPrefillMs() : -1; }
     public int lastPromptTokens() { return LlamaNative.isAvailable() ? LlamaNative.lastPromptTokens() : -1; }

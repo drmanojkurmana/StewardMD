@@ -47,6 +47,22 @@ public final class LlamaNative {
      */
     public static native void setThermalStatus(int level);
 
+    /** The token the model expects where an image belongs, e.g. "<__media__>". Comes from mtmd so it
+     *  cannot drift from what the projector actually parses. */
+    public static native String mediaMarker();
+
+    /**
+     * Answer a question about one or more IMAGES, entirely on device.
+     *
+     * `mmprojPath` is the projector for the SAME pack as the loaded model - nothing native can detect
+     * a mismatched pair, it simply answers confident nonsense, so the JS pack registry owns the
+     * pairing. `imagePaths` are filesystem paths, never base64: mtmd reads the files itself.
+     */
+    public static native String generateWithImage(long ctx, long model, String prompt,
+                                                 String mmprojPath, String[] imagePaths,
+                                                 int nPredict, float temperature, int seed,
+                                                 TokenSink callback);
+
     /**
      * mmap a GGUF from disk into a model handle (0 on failure). Split models named
      * {@code <name>-00001-of-0000N.gguf} are loaded whole from the FIRST shard's path.

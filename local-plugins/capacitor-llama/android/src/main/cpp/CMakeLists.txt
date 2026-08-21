@@ -37,8 +37,19 @@ set(GGML_STATIC          ON  CACHE BOOL "" FORCE)
 
 add_subdirectory(llama-cpp)
 
+# MULTIMODAL (mtmd) — the vision tower that lets MedGemma/Gemma read an image.
+#
+# LLAMA_BUILD_TOOLS is OFF above (it drags in CURL and host-only code), and mtmd lives under
+# tools/mtmd, so it is NOT built by that add_subdirectory. Adding just this one directory gets the
+# library without the rest of tools/. It links ggml + llama, which already exist as targets, plus the
+# vendor:: helpers that llama.cpp's own vendor/ defines.
+#
+# MTMD_VIDEO auto-disables itself when LLAMA_SUBPROCESS is off (it needs an ffmpeg binary in PATH),
+# which is exactly what we want on a phone: images and nothing else.
+add_subdirectory(llama-cpp/tools/mtmd)
+
 add_library(llama_jni SHARED llama_jni.cpp)
 
 find_library(log-lib log)
-# The `llama` target propagates its public include dir (include/llama.h).
-target_link_libraries(llama_jni llama ${log-lib})
+# `llama` propagates include/llama.h; `mtmd` propagates mtmd.h + mtmd-helper.h.
+target_link_libraries(llama_jni llama mtmd ${log-lib})

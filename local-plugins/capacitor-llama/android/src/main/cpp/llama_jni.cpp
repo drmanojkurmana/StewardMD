@@ -15,11 +15,14 @@
 #include <algorithm>
 #include <chrono>
 #include <atomic>
+#include <thread>
 #include <string>
 #include <vector>
 #include <unistd.h>
 #include <android/log.h>
 #include "llama.h"
+#include "mtmd.h"
+#include "mtmd-helper.h"
 
 #define LOG_TAG "llama_jni"
 #define LOGE(...) __android_log_print(ANDROID_LOG_ERROR, LOG_TAG, __VA_ARGS__)
@@ -261,6 +264,7 @@ Java_in_stewardmd_llama_LlamaNative_generate(
     // llama.cpp's own examples do it, and keep the compute buffer bounded rather than raising
     // n_batch to n_ctx.
     const int n_batch = (int) llama_n_batch(ctx);
+    LOGI("generate: prefill start, %d tokens, n_batch=%d", (int) toks.size(), n_batch);
     const auto _pf0 = std::chrono::steady_clock::now();
     for (int i = 0; i < (int) toks.size(); i += n_batch) {
         int n = std::min(n_batch, (int) toks.size() - i);
@@ -278,6 +282,7 @@ Java_in_stewardmd_llama_LlamaNative_generate(
 
     g_last_prefill_ms.store(prefill_ms);
     g_last_prompt_tokens.store(ntok);
+    LOGI("generate: prefill done in %lld ms, decoding", (long long) prefill_ms);
 
     std::string full;
     int produced = 0;
@@ -325,3 +330,164 @@ Java_in_stewardmd_llama_LlamaNative_generate(
 }
 
 } // extern "C"
+
+/* ────────────────────────────────────────────────────────────────────────────────────────────────
+ * IMAGE ANSWERS (mtmd). Mirrors ios/Sources/LlamaPlugin/LlamaVision.swift so the two platforms
+ * cannot drift.
+ *
+ * A GGUF language model cannot see on its own: the vision tower is a separate mmproj projector file.
+ * mtmd loads it against the ALREADY-LOADED text model, turns the picture into a bitmap, splits a
+ * prompt containing the media marker into interleaved text/image chunks, and evaluates those into
+ * the SAME llama_context. From there decoding is ordinary token generation, which is why this
+ * function owns only the prefill and then runs the same sampler and loop as generate().
+ *
+ * The projector is freed as soon as the answer is done. Holding 2.8 GB of weights plus ~850 MB of
+ * projector for the life of the app is what gets a phone killed, and image questions are occasional.
+ *
+ * THE MODEL AND PROJECTOR MUST MATCH. A MedGemma projector on a Gemma model produces confident
+ * nonsense rather than an error, so the JS pack registry owns the pairing; nothing here can detect a
+ * mismatch.
+ */
+extern "C" JNIEXPORT jstring JNICALL
+Java_in_stewardmd_llama_LlamaNative_mediaMarker(JNIEnv* env, jobject) {
+    const char* m = mtmd_default_marker();
+    return env->NewStringUTF(m != nullptr ? m : "<__media__>");
+}
+
+extern "C" JNIEXPORT jstring JNICALL
+Java_in_stewardmd_llama_LlamaNative_generateWithImage(
+        JNIEnv* env, jobject, jlong ctxHandle, jlong modelHandle, jstring promptStr,
+        jstring mmprojStr, jobjectArray imagePaths,
+        jint nPredict, jfloat temp, jint seed, jobject callback) {
+    auto* ctx = reinterpret_cast<llama_context*>(ctxHandle);
+    auto* mdl = reinterpret_cast<llama_model*>(modelHandle);
+    if (ctx == nullptr || mdl == nullptr) return nullptr;
+
+    g_cancel.store(false, std::memory_order_relaxed);
+    const llama_vocab* vocab = llama_model_get_vocab(mdl);
+    const int n_ctx  = (int) llama_n_ctx(ctx);
+    const int n_batch = (int) llama_n_batch(ctx);
+
+    const char* mmproj = env->GetStringUTFChars(mmprojStr, nullptr);
+    if (mmproj == nullptr) return nullptr;
+
+    mtmd_context_params mp = mtmd_context_params_default();
+    mp.use_gpu = false;                 // Android build is CPU-only here; ggml picks its own backend
+    mp.print_timings = false;
+    mp.n_threads = (int) std::max(1u, std::thread::hardware_concurrency() / 2);
+    LOGI("mtmd: loading projector %s", mmproj);
+    mtmd_context* mctx = mtmd_init_from_file(mmproj, mdl, mp);
+    env->ReleaseStringUTFChars(mmprojStr, mmproj);
+    if (mctx == nullptr) { LOGE("mtmd: projector failed to load"); return nullptr; }
+    if (!mtmd_support_vision(mctx)) { LOGE("mtmd: projector has no vision support"); mtmd_free(mctx); return nullptr; }
+
+    // Decode each image file into a bitmap.
+    std::vector<mtmd_bitmap*> bitmaps;
+    const jsize nImg = imagePaths != nullptr ? env->GetArrayLength(imagePaths) : 0;
+    for (jsize i = 0; i < nImg; i++) {
+        auto js = (jstring) env->GetObjectArrayElement(imagePaths, i);
+        if (js == nullptr) continue;
+        const char* path = env->GetStringUTFChars(js, nullptr);
+        if (path != nullptr) {
+            mtmd_helper_bitmap_wrapper w = mtmd_helper_bitmap_init_from_file(mctx, path, false);
+            if (w.bitmap != nullptr) bitmaps.push_back(w.bitmap);
+            else LOGE("mtmd: could not read image %s", path);
+            env->ReleaseStringUTFChars(js, path);
+        }
+        env->DeleteLocalRef(js);
+    }
+    if (bitmaps.empty()) { LOGE("mtmd: no readable images"); mtmd_free(mctx); return nullptr; }
+    LOGI("mtmd: projector loaded, %d bitmap(s) decoded", (int) bitmaps.size());
+
+    // Tokenise text + images into interleaved chunks.
+    mtmd_input_chunks* chunks = mtmd_input_chunks_init();
+    const char* prompt = env->GetStringUTFChars(promptStr, nullptr);
+    int rc = -1;
+    if (prompt != nullptr) {
+        mtmd_input_text txt;
+        txt.text = prompt;
+        txt.text_len = strlen(prompt);
+        txt.add_special = true;
+        txt.parse_special = true;
+        rc = mtmd_tokenize(mctx, chunks, &txt, (const mtmd_bitmap**) bitmaps.data(), bitmaps.size());
+        env->ReleaseStringUTFChars(promptStr, prompt);
+    }
+    if (rc != 0) {
+        // 1 = marker count did not match the image count, which is our prompt-building bug, not a
+        // bad photo. Logged distinctly so the two are never confused.
+        LOGE("mtmd: tokenize rc=%d (%s)", rc, rc == 1 ? "marker/image count mismatch" : "image preprocessing");
+        for (auto* b : bitmaps) mtmd_bitmap_free(b);
+        mtmd_input_chunks_free(chunks); mtmd_free(mctx);
+        return nullptr;
+    }
+
+    llama_memory_clear(llama_get_memory(ctx), true);   // fresh KV per answer
+
+    LOGI("mtmd: tokenized, evaluating chunks");
+    const auto tPrefill = std::chrono::steady_clock::now();
+    llama_pos n_past = 0;
+    // logits_last so the very next sample continues the answer instead of re-reading input.
+    const int32_t ev = mtmd_helper_eval_chunks(mctx, ctx, chunks, /*n_past=*/0, /*seq_id=*/0,
+                                               n_batch, /*logits_last=*/true, &n_past);
+    for (auto* b : bitmaps) mtmd_bitmap_free(b);
+    mtmd_input_chunks_free(chunks);
+    if (ev != 0) { LOGE("mtmd: eval_chunks failed %d", ev); mtmd_free(mctx); return nullptr; }
+    const long prefillMs = (long) std::chrono::duration_cast<std::chrono::milliseconds>(
+        std::chrono::steady_clock::now() - tPrefill).count();
+    g_last_prefill_ms.store(prefillMs, std::memory_order_relaxed);
+    g_last_prompt_tokens.store((int) n_past, std::memory_order_relaxed);
+    LOGI("mtmd prefill %ld ms, %d positions, %d image(s)", prefillMs, (int) n_past, (int) nImg);
+
+    // Same sampler as the text path, so image answers cannot drift in sampling or repetition.
+    llama_sampler* smpl = llama_sampler_chain_init(llama_sampler_chain_default_params());
+    const int32_t n_vocab = llama_vocab_n_tokens(vocab);
+    llama_sampler_chain_add(smpl, llama_sampler_init_penalties(n_vocab, 128, 1.15f, 0.0f, 0.0f));
+    if (temp > 0.0f) {
+        llama_sampler_chain_add(smpl, llama_sampler_init_top_k(40));
+        llama_sampler_chain_add(smpl, llama_sampler_init_top_p(0.95f, 1));
+        llama_sampler_chain_add(smpl, llama_sampler_init_temp(temp));
+        llama_sampler_chain_add(smpl, llama_sampler_init_dist((uint32_t) seed));
+    } else {
+        llama_sampler_chain_add(smpl, llama_sampler_init_greedy());
+    }
+
+    jmethodID onToken = nullptr;
+    if (callback != nullptr) {
+        jclass cbc = env->GetObjectClass(callback);
+        if (cbc != nullptr) onToken = env->GetMethodID(cbc, "onToken", "(Ljava/lang/String;)V");
+        if (env->ExceptionCheck()) env->ExceptionClear();
+    }
+
+    std::string full;
+    int produced = 0;
+    const int budget = nPredict > 0 ? nPredict : 512;
+    while (produced < budget && ((int) n_past + produced) < n_ctx) {
+        if (g_cancel.load(std::memory_order_relaxed)) break;
+        llama_token id = llama_sampler_sample(smpl, ctx, -1);
+        if (llama_vocab_is_eog(vocab, id)) break;
+        std::string piece = piece_of(vocab, id);
+        full += piece;
+        produced++;
+        if (onToken != nullptr && !piece.empty()) {
+            jstring js = env->NewStringUTF(piece.c_str());
+            if (js != nullptr) {
+                env->CallVoidMethod(callback, onToken, js);
+                if (env->ExceptionCheck()) { env->ExceptionClear(); onToken = nullptr; }
+                env->DeleteLocalRef(js);
+            }
+        }
+        llama_batch nb = llama_batch_get_one(&id, 1);
+        if (llama_decode(ctx, nb) != 0) { LOGE("mtmd decode failed at %d", produced); break; }
+        if ((produced & 7) == 0 && thermal_should_stop()) {
+            LOGI("mtmd stopping at %d tokens: thermal critical", produced);
+            full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
+            break;
+        }
+        const int nap = thermal_yield_us();
+        if (nap > 0) usleep(nap);
+    }
+
+    llama_sampler_free(smpl);
+    mtmd_free(mctx);        // projector freed immediately; see the note above
+    return env->NewStringUTF(full.c_str());
+}

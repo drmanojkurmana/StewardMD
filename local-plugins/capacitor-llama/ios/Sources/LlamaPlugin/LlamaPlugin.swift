@@ -177,10 +177,23 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         #if DEBUG
         isDebug = true
         #endif
+        /* availableMemory: how much this PROCESS may still allocate before jetsam kills it.
+         *
+         * os_proc_available_memory() is the iOS equivalent of the question "will a 2.5 GB model fit",
+         * and it already accounts for the increased-memory-limit entitlement. On Android the same
+         * field comes from ActivityManager.MemoryInfo.availMem. Reported so the JS layer can refuse
+         * the load with an honest message rather than letting the OS kill the app mid-load, which
+         * looks like a crash to the clinician. 0 means "could not tell" and carries no opinion.
+         */
+        let avail = Int(os_proc_available_memory())
         call.resolve([
             "available": true,                     // the XCFramework is linked at build time
             "debugBuild": isDebug,
             "loaded": engine.isLoaded,
+            "availableMemory": avail,
+            // HARD: os_proc_available_memory() is what jetsam enforces. Exceed it and the app is
+            // killed, so JS may refuse the load outright.
+            "memoryIsHardLimit": true,
             "defaultNCtx": Int(LlamaEngine.defaultNCtx),
             "defaultNPredict": Int(LlamaEngine.defaultNPredict)
         ])
