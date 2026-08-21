@@ -109,6 +109,23 @@ body.ot-open { overflow: hidden; }
 .ot-bullets li { position: relative; padding-left: 20px; font-size: 13px; line-height: 1.4; color: var(--ot-ink, #14202b); }
 .ot-bullets li::before { content: ""; position: absolute; left: 3px; top: 6px; width: 8px; height: 8px; border-radius: 3px; border: 1.5px solid var(--ot-c, var(--ot-line)); }
 .ot-bl-sub { display: block; font-size: 11.5px; color: var(--ot-sub); margin-top: 1px; }
+/* Standard-Guidelines schema: evidence-category badges + lettered footnote markers/sheet */
+.ot-ev { display: inline-flex; align-items: center; font: 800 10px system-ui; letter-spacing: .02em; border-radius: 5px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; border: 1px solid; }
+.ot-ev-1 { color: #15803d; background: #dcfce7; border-color: #86efac; }
+.ot-ev-2a { color: #b45309; background: #fef3c7; border-color: #fcd34d; }
+.ot-ev-2b { color: #9a3412; background: #ffedd5; border-color: #fdba74; }
+.ot-ev-3 { color: #b91c1c; background: #fee2e2; border-color: #fca5a5; }
+.ot-fnrow { display: inline; }
+.ot-fn { display: inline-flex; align-items: center; justify-content: center; min-width: 15px; height: 15px; margin-left: 3px; padding: 0 3px; font: 800 9px system-ui; color: var(--ot-primary, #0e6e63); background: color-mix(in srgb, var(--ot-primary, #0e6e63) 12%, transparent); border-radius: 4px; cursor: pointer; vertical-align: super; }
+.ot-fn:active { background: color-mix(in srgb, var(--ot-primary, #0e6e63) 24%, transparent); }
+.ot-gn-ev { position: absolute; right: 6px; top: 6px; }
+.ot-gn-ev .ot-ev { margin-left: 0; font-size: 8.5px; padding: 0 4px; }
+.ot-fn-ov { position: fixed; inset: 0; z-index: 40; background: rgba(12,22,38,.5); display: flex; align-items: flex-end; justify-content: center; }
+.ot-fn-sheet { width: 100%; max-width: 560px; max-height: 70%; overflow-y: auto; background: var(--ot-card, #fff); border-radius: 18px 18px 0 0; padding: 6px 16px 22px; box-shadow: 0 -14px 40px -12px rgba(0,0,0,.4); }
+.ot-fn-hd { display: flex; align-items: center; gap: 8px; padding: 12px 0 10px; position: sticky; top: 0; background: var(--ot-card, #fff); border-bottom: 1px solid var(--ot-line); }
+.ot-fn-hd b { font: 800 14px system-ui; color: var(--ot-ink, #14202b); }
+.ot-fn-x { margin-left: auto; border: none; background: none; color: var(--ot-sub); cursor: pointer; display: inline-flex; }
+.ot-fn-body { font: 500 13.5px/1.55 system-ui; color: var(--ot-ink, #14202b); padding-top: 12px; white-space: pre-wrap; }
 .ot-mappop-desc + .ot-bullets { margin-top: 8px; }
 .ot-mappop-desc + .ot-bullets li { font-size: 12px; }
 

@@ -112,7 +112,7 @@
     }).join("");
     return '<div class="ot-step" style="--ot-c:' + (CAT[node.nodeCategory] || CAT.other).color + '">' +
       '<div class="ot-step-head">' + catChip(node.nodeCategory) + (node.section ? '<span class="ot-step-sec">' + esc(node.section) + "</span>" : "") + "</div>" +
-      '<h2 class="ot-step-title">' + esc(node.title || node.name) + "</h2>" +
+      '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
       (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") +
       bulletsHtml(node.bullets) +
       '<div class="ot-opts">' + opts + "</div></div>";
@@ -154,6 +154,31 @@
       return "<li>" + esc(b) + "</li>";
     }).join("") + "</ul>";
   }
+  // ---- Standard-Guidelines schema support: evidence categories + lettered footnotes ----
+  // Evidence-category badge(s) on a node (e.g. "1", "2A", "2B", "3").
+  function evBadge(node) {
+    var ev = asArr(node && node.evidenceCategory); if (!ev.length) return "";
+    return ev.map(function (c) { var s = String(c); return '<span class="ot-ev ot-ev-' + esc(s.toLowerCase().replace(/[^a-z0-9]/g, "")) + '" title="Evidence category ' + esc(s) + '">' + esc(s) + "</span>"; }).join("");
+  }
+  // Superscript footnote markers on a node; resolved against the graph footnote registry on tap.
+  function fnMarkers(node) {
+    var fns = asArr(node && node.footnotes); if (!fns.length) return "";
+    return '<span class="ot-fnrow">' + fns.map(function (f) { var id = (f && typeof f === "object") ? f.id : f; return '<sup class="ot-fn" data-ot-act="footnote" data-ot-fn="' + esc(id) + '" role="button" tabindex="0">' + esc(id) + "</sup>"; }).join("") + "</span>";
+  }
+  function fnResolve(id) {
+    var reg = (st.graph && st.graph.footnotes) || {}, f = reg[id];
+    if (f == null) return null;
+    return (typeof f === "object") ? f : { text: String(f) };
+  }
+  function footnoteSheetHtml() {
+    if (!st.footnoteOpen) return "";
+    var f = fnResolve(st.footnoteOpen);
+    return '<div class="ot-fn-ov" data-ot-act="footnote-close"><div class="ot-fn-sheet" data-ot-act="footnote-stop">' +
+      '<div class="ot-fn-hd"><b>Footnote ' + esc(st.footnoteOpen) + "</b>" +
+      (f && f.evidence ? evBadge({ evidenceCategory: f.evidence }) : "") +
+      '<button class="ot-fn-x" data-ot-act="footnote-close" aria-label="Close">' + ms("close") + "</button></div>" +
+      '<div class="ot-fn-body">' + (f ? esc(f.text || "") : "This footnote is not defined in the current guideline.") + "</div></div></div>";
+  }
 
   function outcomeHtml(node, state) {
     var refs = asArr(node.protocolRefs);
@@ -170,7 +195,7 @@
     var cards = applicable.map(function (r) { return protocolCardHtml(r, matchById[r]); }).join("");
     var ocat = CAT[node.nodeCategory] || CAT.treatment;
     var head = '<div class="ot-outcome-head" style="--ot-c:' + ocat.color + '">' + catChip(node.nodeCategory || "treatment") +
-      '<h2 class="ot-step-title">' + esc(node.title || node.name) + "</h2>" +
+      '<h2 class="ot-step-title">' + esc(node.title || node.name) + evBadge(node) + fnMarkers(node) + "</h2>" +
       (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + bulletsHtml(node.bullets) + "</div>";
     var count = '<div class="ot-outcome-count">' + applicable.length + " applicable protocol" + (applicable.length === 1 ? "" : "s") +
       ' <span class="ot-outcome-note">Decision support only. Physician selects; the existing dose engine computes doses.</span></div>';
@@ -257,6 +282,7 @@
       return '<button class="' + cls + '" data-ot-act="mapnode" data-ot-node="' + esc(id) + '" style="left:' + p.x + "px;top:" + p.y + "px;width:" + NW + "px;height:" + NH + "px;--ot-c:" + cat.color + '">' +
         '<span class="ot-gn-top">' + ms(cat.icon) + '<span class="ot-gn-cat">' + esc(cat.name) + "</span>" + '<span class="ot-gn-mark">' + ms(mark) + "</span></span>" +
         '<span class="ot-gn-name">' + esc(raw.name || raw.title || id) + "</span>" +
+        (asArr(raw.evidenceCategory).length ? '<span class="ot-gn-ev">' + evBadge(raw) + "</span>" : "") +
         (sel.length ? '<span class="ot-gn-sel">' + esc(shortLabel(sel[0].label)) + "</span>" : "") +
         "</button>";
     }).join("");
@@ -305,7 +331,7 @@
     return '<div class="ot-mappop" id="otMapPop" style="--ot-c:' + cat.color + '">' +
       '<button class="ot-mappop-x" data-ot-act="mappop-close" aria-label="Close">' + ms("close") + "</button>" +
       '<div class="ot-mappop-cat">' + ms(cat.icon) + esc(cat.name) + " &middot; " + esc(statusTxt) + "</div>" +
-      '<div class="ot-mappop-name">' + esc(raw.name || raw.title || id) + "</div>" +
+      '<div class="ot-mappop-name">' + esc(raw.name || raw.title || id) + evBadge(raw) + fnMarkers(raw) + "</div>" +
       (raw.description ? '<div class="ot-mappop-desc">' + esc(raw.description) + "</div>" : "") +
       bulletsHtml(raw.bullets) +
       (asArr(raw.protocolRefs).length ? '<div class="ot-mappop-rx">' + ms("medication") + "Regimens: " + asArr(raw.protocolRefs).map(function (r) { var p = st.protocols[r]; return esc((p && p.name) || r); }).join("; ") + "</div>" : "") +
@@ -390,7 +416,7 @@
     if (!state) return '<div class="ot-loading">Preparing...</div>';
     if (st.openedProtocol) return protocolDetailHtml(st.openedProtocol);
     if (st.selection) return selectionHtml();
-    if (st.view === "map") return mapHtml(state);
+    if (st.view === "map") return mapHtml(state) + footnoteSheetHtml();
 
     var cur = currentQuestion(state);
     var mid = "";
@@ -400,7 +426,7 @@
       mid = outs.length ? outs.map(function (n) { return outcomeHtml(n, state); }).join("")
         : '<div class="ot-empty">Answer the questions above to see applicable protocols.</div>';
     }
-    return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state);
+    return railHtml(state) + missingHtml(state) + '<div class="ot-body-main">' + mid + "</div>" + disabledPanelHtml(state) + footnoteSheetHtml();
   }
 
   // ---- shell + paint -----------------------------------------------------------------------------
@@ -547,6 +573,9 @@
     if (act === "toc-goto") { st.mapSel = node; repaintBody(); centerOnNode(node); return; }
     if (act === "mapnode") { if (graphMoved) { graphMoved = false; return; } st.mapSel = (st.mapSel === node ? null : node); repaintBody(); return; }
     if (act === "mappop-close") { st.mapSel = null; repaintBody(); return; }
+    if (act === "footnote") { st.footnoteOpen = t.getAttribute("data-ot-fn"); repaintBody(); return; }
+    if (act === "footnote-close") { st.footnoteOpen = null; repaintBody(); return; }
+    if (act === "footnote-stop") { return; }
     if (act === "map-goto") { st.mapSel = null; st.view = "pathway"; editStep(node); return; }
     if (act === "answer") { answer(node, opt); return; }
     if (act === "edit") { editStep(node); return; }

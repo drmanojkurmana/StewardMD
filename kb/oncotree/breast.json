@@ -9,6 +9,9 @@
   "provenanceNote": "ONCOTREE navigator DRAFT for breast cancer. Full pathway by histology (DCIS, invasive, inflammatory, phyllodes, Paget, pregnancy, recurrent/Stage IV), then workup -> local-regional vs preoperative-systemic -> subtype-directed adjuvant (HR/HER2) -> adjuvant endocrine (pre/post-menopausal) -> surveillance, plus recurrent / metastatic treatment by subtype and local/regional recurrence. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; surgery / radiation and agents without a dose protocol are shown as checklist guidance with NO dose. Workup / staging / subtype-stratification content is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN) Breast Cancer, no proprietary content reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Breast Cancer. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
   "startNodeIds": ["n_histology"],
+  "footnotes": {
+    "a": { "text": "Bone-density (DEXA) monitoring is recommended during aromatase-inhibitor therapy; add calcium/vitamin D and a bone-modifying agent for osteopenia or osteoporosis.", "evidence": "2A" }
+  },
   "nodes": [
     {
       "id": "n_histology", "linkId": "breast_histology", "nodeCategory": "criteria", "nodeType": "question", "template": "main",
@@ -312,6 +315,7 @@
     },
     {
       "id": "n_endo_post", "linkId": "tx_endo_post", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "evidenceCategory": ["1"], "footnotes": ["a"],
       "name": "Endocrine postmenopausal", "title": "Adjuvant endocrine (postmenopausal) +/- CDK4/6", "section": "Treatment",
       "description": "Aromatase-inhibitor-based endocrine therapy.", "path": "Breast / Endocrine / Post",
       "pills": ["postmenopausal", "treatment"], "showsRecommendation": true,
