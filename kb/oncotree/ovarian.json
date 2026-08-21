@@ -2,180 +2,731 @@
   "guideline": "ovarian",
   "title": "Ovarian Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
+  "navigatorVersion": "2.0.0",
   "diseaseId": "ovarian_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "matchDisease": false,
-  "provenanceNote": "ONCOTREE navigator DRAFT for ovarian cancer. Captures treatment phase (primary chemotherapy vs maintenance after response to platinum) and, for maintenance, BRCA/HRD status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Ovarian Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Ovarian Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": [
-    "n_ov_phase"
-  ],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full epithelial ovarian pathway: workup -> histology -> molecular testing -> FIGO staging / risk -> primary debulking vs neoadjuvant -> platinum-taxane +/- bevacizumab -> PARP maintenance by BRCA/HRD -> surveillance -> recurrence split by platinum-free interval. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; modalities without a dose protocol (surgery, single-agent platinum-resistant options, mirvetuximab, hormonal therapy) are shown as checklist guidance with NO dose. Workup / staging / risk / surveillance content is standard oncology, authored in StewardMD's words, not proprietary guideline text. Invents no dose/regimen/criterion. DRAFT - not clinically activated.",
+  "sourceNote": "Structural pathway consistent with standard guidelines (NCCN Ovarian Cancer; DeVita; Harrison). Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "Carboplatin (AUC 5-6) + paclitaxel every 3 weeks x 6 cycles is the standard first-line backbone for epithelial ovarian cancer; dose-dense weekly paclitaxel and intraperitoneal schedules are accepted alternatives in selected patients.", "evidence": "1" },
+    "b": { "text": "Bevacizumab added to chemotherapy and continued as maintenance improves progression-free survival in advanced disease (GOG-0218 / ICON7-type data); reserve for higher-risk / stage IV / suboptimally debulked patients and screen for perforation, bleeding, and hypertension risk.", "evidence": "1" },
+    "c": { "text": "PARP-inhibitor maintenance after response to first-line platinum gives the largest benefit in BRCA-mutant (olaparib) and HRD-positive (niraparib, or olaparib + bevacizumab) tumors; niraparib is also active regardless of biomarker with smaller benefit.", "evidence": "1" },
+    "d": { "text": "Platinum-free interval (time from last platinum to relapse) approximates platinum sensitivity: >= 6 months = platinum-sensitive, < 6 months = platinum-resistant, progression on platinum = platinum-refractory. It is a continuum and a clinical guide, not a hard rule.", "evidence": "2A" }
+  },
   "nodes": [
     {
-      "id": "n_ov_phase",
-      "linkId": "ov_phase",
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup and diagnosis",
+      "description": "Baseline evaluation of a suspected ovarian / fallopian-tube / primary-peritoneal cancer before treatment planning.",
+      "path": "Ovarian / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History, physical and pelvic exam; performance status; family cancer history" },
+        { "label": "Pelvic / transvaginal ultrasound and CT chest-abdomen-pelvis", "sub": "characterize adnexal mass, ascites, omental / peritoneal disease" },
+        { "label": "CA-125 (and CEA / CA19-9 if a GI or mucinous primary is possible)", "sub": "baseline for later response and surveillance" },
+        { "label": "Tissue diagnosis: histology and grade from surgery, or image-guided biopsy / paracentesis if neoadjuvant chemo is planned" },
+        { "label": "CBC, renal and hepatic function, assess for venous thromboembolism" },
+        { "label": "Refer for gynecologic-oncology surgical assessment before any intervention" },
+        { "label": "Germline and tumor BRCA1/2 + HRD testing (genetic counseling); complete during / soon after primary therapy to guide maintenance" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_setting",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Treatment phase",
-      "title": "Treatment phase",
-      "description": "Newly diagnosed disease is treated with primary platinum-based chemotherapy; patients who respond to platinum-based chemotherapy are then evaluated for maintenance therapy selected by BRCA/HRD status.",
-      "path": "Ovarian / Treatment phase",
+      "name": "Clinical setting",
+      "title": "Clinical setting",
+      "description": "Choose the current clinical state; management diverges sharply between newly diagnosed, recurrent, and surveillance settings.",
+      "path": "Ovarian / Setting",
       "section": "Staging",
-      "pills": [
-        "setting"
-      ],
+      "pills": ["setting"],
       "required": true,
       "options": [
-        {
-          "id": "primary",
-          "label": "Newly diagnosed - primary chemotherapy",
-          "sets": {
-            "scenario": "primary"
-          }
-        },
-        {
-          "id": "maintenance",
-          "label": "Maintenance (after response to platinum)",
-          "sets": {
-            "scenario": "maintenance"
-          }
-        }
+        { "id": "newdx", "label": "Newly diagnosed (treatment-naive)", "sets": { "setting": "newdx" }, "pills": ["newly diagnosed"] },
+        { "id": "recur", "label": "Recurrent / progressive after prior therapy", "sets": { "setting": "recurrent" }, "pills": ["recurrent"] },
+        { "id": "fu", "label": "Post-treatment surveillance", "sets": { "setting": "surveillance" }, "pills": ["surveillance"] }
       ]
     },
     {
-      "id": "n_ov_hrd",
-      "linkId": "ov_hrd",
+      "id": "n_histology",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "BRCA / HRD status",
-      "title": "BRCA / HRD status (maintenance)",
-      "description": "BRCA-mutant or homologous recombination deficient (HRD)-positive tumors have the greatest benefit from PARP inhibitor maintenance; HR-proficient/BRCA wild-type tumors are directed to alternative maintenance options.",
-      "path": "Ovarian / Biomarkers / BRCA-HRD",
-      "section": "Biomarkers",
-      "pills": [
-        "biomarker",
-        "HRD"
-      ],
+      "name": "Histology",
+      "title": "Histologic subtype",
+      "description": "Epithelial subtype drives systemic therapy. High-grade serous is the dominant type and follows the main platinum-taxane pathway; low-grade serous, mucinous, and non-epithelial tumors follow distinct routes.",
+      "path": "Ovarian / Histology",
+      "section": "Staging",
+      "pills": ["histology"],
       "required": true,
+      "bullets": [
+        { "label": "High-grade epithelial", "sub": "high-grade serous, high-grade endometrioid, clear cell, carcinosarcoma - most chemo-responsive, main pathway" },
+        { "label": "Low-grade serous", "sub": "indolent, relatively chemo-resistant, hormone-receptor driven" },
+        { "label": "Mucinous", "sub": "rule out a GI primary; distinct chemosensitivity" }
+      ],
       "options": [
+        { "id": "epithelial_hg", "label": "High-grade epithelial (serous / endometrioid / clear cell / carcinosarcoma)", "sets": { "histology": "hg_epithelial" }, "pills": ["high-grade"] },
+        { "id": "lgsc", "label": "Low-grade serous", "sets": { "histology": "lgsc" }, "pills": ["low-grade serous"] },
+        { "id": "mucinous", "label": "Mucinous", "sets": { "histology": "mucinous" }, "pills": ["mucinous"] },
+        { "id": "nonepi", "label": "Non-epithelial (germ-cell / sex-cord stromal)", "sets": { "histology": "nonepithelial" }, "pills": ["non-epithelial"] }
+      ]
+    },
+    {
+      "id": "n_molecular",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Molecular testing",
+      "title": "Molecular / biomarker testing",
+      "description": "For high-grade epithelial disease, complete biomarker testing early - the results select maintenance and later-line therapy. Testing does not change the primary chemotherapy backbone.",
+      "path": "Ovarian / Biomarkers",
+      "section": "Biomarkers",
+      "pills": ["biomarker"],
+      "required": true,
+      "bullets": [
+        { "label": "BRCA1/2: germline AND tumor (somatic)", "sub": "strongest predictor of PARP-inhibitor benefit" },
+        { "label": "Homologous-recombination deficiency (HRD) assay", "sub": "genomic-instability / scar score in BRCA wild-type tumors" },
+        { "label": "Folate-receptor-alpha (FRalpha) expression", "sub": "predicts mirvetuximab benefit in platinum-resistant relapse" },
+        { "label": "Mismatch-repair / MSI and HER2 where relevant (endometrioid, clear cell)" }
+      ],
+      "tables": [
         {
-          "id": "hrd",
-          "label": "BRCA-mutant or HRD-positive",
-          "sets": {
-            "biomarkers.HRD": "positive"
-          }
-        },
-        {
-          "id": "hrp",
-          "label": "HR-proficient / BRCA wild-type",
-          "sets": {
-            "biomarkers.HRD": "negative"
-          }
+          "title": "Biomarker to therapy map",
+          "headers": ["Biomarker", "Status", "Implication"],
+          "rows": [
+            ["BRCA1/2", "Mutant (germline or somatic)", "PARP maintenance (olaparib) - largest benefit"],
+            ["HRD", "Positive, BRCA wild-type", "PARP maintenance (niraparib, or olaparib + bevacizumab)"],
+            ["HRD", "Negative / HR-proficient", "Bevacizumab or niraparib or observation"],
+            ["FRalpha", "High expression", "Mirvetuximab option at platinum-resistant relapse"]
+          ]
         }
+      ],
+      "options": [
+        { "id": "continue", "label": "Biomarkers sent - continue", "setsValue": null }
       ]
     },
     {
-      "id": "n_tx_ov_primary",
-      "linkId": "tx_ov_primary",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "Primary treatment",
-      "title": "Primary: carboplatin-paclitaxel (+/- bevacizumab)",
-      "description": "Newly diagnosed ovarian cancer - platinum-taxane chemotherapy, with or without bevacizumab, is the primary systemic backbone. Physician selects.",
-      "path": "Ovarian / Treatment / Primary",
-      "section": "Treatment",
-      "pills": [
-        "treatment"
+      "id": "n_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "FIGO stage",
+      "title": "FIGO stage",
+      "description": "Surgical-pathologic FIGO stage separates disease confined to the ovaries (early) from disease spread within or beyond the pelvis (advanced), which drives surgery and systemic therapy.",
+      "path": "Ovarian / Staging",
+      "section": "Staging",
+      "pills": ["FIGO"],
+      "required": true,
+      "tables": [
+        {
+          "title": "FIGO stage (simplified)",
+          "headers": ["Stage", "Extent"],
+          "rows": [
+            ["I", "Confined to one or both ovaries / tubes"],
+            ["II", "Pelvic extension or primary peritoneal disease within pelvis"],
+            ["III", "Peritoneal spread beyond pelvis and/or retroperitoneal nodes"],
+            ["IV", "Distant metastasis (pleural effusion cytology-positive, parenchymal / extra-abdominal)"]
+          ]
+        }
       ],
-      "showsRecommendation": true,
-      "protocolRefs": [
-        "gyn-carbo-paclitaxel",
-        "gyn-carbo-paclitaxel-bev"
+      "options": [
+        { "id": "early", "label": "Stage I (confined to ovaries / tubes)", "sets": { "stage": "early" }, "pills": ["stage I"] },
+        { "id": "advanced", "label": "Stage II-IV (advanced)", "sets": { "stage": "advanced" }, "pills": ["stage II-IV"] }
       ]
     },
     {
-      "id": "n_tx_ov_hrd",
-      "linkId": "tx_ov_hrd",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "BRCA/HRD-positive maintenance treatment",
-      "title": "Maintenance, BRCA/HRD-positive: PARP inhibitor",
-      "description": "Maintenance in BRCA-mutant or HRD-positive ovarian cancer after response to platinum-based chemotherapy - PARP inhibitor-based maintenance regimens are systemic options. Physician selects.",
-      "path": "Ovarian / Treatment / Maintenance / HRD positive",
-      "section": "Treatment",
-      "pills": [
-        "HRD+",
-        "treatment"
+      "id": "n_early_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Early-stage risk",
+      "title": "Stage I: risk stratification",
+      "description": "In stage I disease, grade, substage, rupture/surface involvement, and histology determine whether adjuvant chemotherapy is added after complete surgical staging.",
+      "path": "Ovarian / Staging / Early risk",
+      "section": "Staging",
+      "pills": ["risk group"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Stage I adjuvant-risk features",
+          "headers": ["Risk", "Features"],
+          "rows": [
+            ["Low", "Stage IA or IB, grade 1, non-clear-cell, capsule intact"],
+            ["High", "Stage IC, grade 2-3, clear-cell histology, surface involvement or rupture"]
+          ]
+        }
       ],
-      "showsRecommendation": true,
-      "protocolRefs": [
-        "gyn-olaparib-maint",
-        "gyn-niraparib-maint",
-        "gyn-carbo-paclitaxel-bev"
+      "options": [
+        { "id": "low", "label": "Low risk (IA/IB, grade 1)", "sets": { "earlyRisk": "low" }, "pills": ["low risk"] },
+        { "id": "high", "label": "High risk (IC, grade 2-3, or clear cell)", "sets": { "earlyRisk": "high" }, "pills": ["high risk"] }
       ]
     },
     {
-      "id": "n_tx_ov_hrp",
-      "linkId": "tx_ov_hrp",
+      "id": "n_advanced_surgery",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Surgical approach",
+      "title": "Advanced disease: surgical approach",
+      "description": "For stage II-IV disease, decide between upfront primary debulking and neoadjuvant chemotherapy with interval debulking, based on resectability and fitness. The goal either way is no residual macroscopic disease (R0).",
+      "path": "Ovarian / Advanced / Surgery",
+      "section": "Treatment",
+      "pills": ["surgery"],
+      "required": true,
+      "bullets": [
+        { "label": "Primary debulking", "sub": "preferred when complete cytoreduction to R0 looks achievable and the patient is fit" },
+        { "label": "Neoadjuvant chemotherapy", "sub": "bulky unresectable disease, poor performance status, or high surgical risk; requires a tissue diagnosis first" },
+        { "label": "Not a surgical / chemo candidate", "sub": "very poor performance status - palliative approach" }
+      ],
+      "options": [
+        { "id": "pds", "label": "Primary debulking surgery candidate", "sets": { "surgery": "pds" }, "pills": ["primary debulking"] },
+        { "id": "nact", "label": "Neoadjuvant chemotherapy (interval debulking)", "sets": { "surgery": "nact" }, "pills": ["neoadjuvant"] },
+        { "id": "unresectable", "label": "Not a candidate for surgery or intensive chemo", "sets": { "surgery": "palliative" }, "pills": ["palliative"] }
+      ]
+    },
+    {
+      "id": "n_tx_pds",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Primary debulking + chemo",
+      "title": "Primary debulking then adjuvant platinum-taxane",
+      "description": "Complete cytoreduction followed by adjuvant carboplatin-paclitaxel, with bevacizumab added for higher-risk disease. Proceed to maintenance selection at chemotherapy completion.",
+      "path": "Ovarian / Advanced / PDS",
+      "section": "Treatment",
+      "pills": ["primary debulking", "treatment"],
+      "evidenceCategory": ["1"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Maximal-effort cytoreduction to no visible residual disease (R0) by gynecologic oncology",
+        "Adjuvant carboplatin + paclitaxel every 3 weeks x 6 cycles",
+        "Add and continue bevacizumab for stage IV / suboptimal debulking / high-risk disease",
+        "Assess response by exam, CA-125, and imaging before maintenance"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev"],
+      "options": [
+        { "id": "continue", "label": "Chemo completed - assess maintenance", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_tx_nact",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Neoadjuvant + interval debulking",
+      "title": "Neoadjuvant chemo then interval debulking",
+      "description": "Neoadjuvant carboplatin-paclitaxel (typically 3 cycles), interval debulking surgery in responders, then completion of chemotherapy. Proceed to maintenance selection at chemotherapy completion.",
+      "path": "Ovarian / Advanced / NACT",
+      "section": "Treatment",
+      "pills": ["neoadjuvant", "treatment"],
+      "evidenceCategory": ["1"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Neoadjuvant carboplatin + paclitaxel, usually 3 cycles, then reassess resectability",
+        "Interval debulking surgery in responders, then complete chemotherapy (about 6 total cycles)",
+        "Bevacizumab is generally NOT given in the cycles immediately around surgery (wound healing); may start / continue afterward",
+        "Assess response by CA-125 and imaging before maintenance"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev"],
+      "options": [
+        { "id": "continue", "label": "Chemo completed - assess maintenance", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_maint_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Maintenance biomarker",
+      "title": "First-line maintenance: BRCA / HRD status",
+      "description": "After response to first-line platinum, maintenance is selected by BRCA and HRD status and by whether bevacizumab was already part of chemotherapy.",
+      "path": "Ovarian / Maintenance / Biomarker",
+      "section": "Treatment",
+      "pills": ["maintenance", "biomarker"],
+      "required": true,
+      "footnotes": ["c"],
+      "tables": [
+        {
+          "title": "First-line maintenance by biomarker",
+          "headers": ["Status", "Preferred maintenance"],
+          "rows": [
+            ["BRCA-mutant", "PARP inhibitor (olaparib); add bevacizumab if already started"],
+            ["HRD-positive, BRCA wild-type", "Niraparib, or olaparib + bevacizumab"],
+            ["HR-proficient / HRD-negative", "Bevacizumab, or niraparib, or observation"],
+            ["Complete response, low risk, no bevacizumab", "Observation acceptable"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "brca", "label": "BRCA1/2-mutant", "sets": { "biomarkers.BRCA": "mutant" }, "pills": ["BRCA+"] },
+        { "id": "hrd", "label": "HRD-positive, BRCA wild-type", "sets": { "biomarkers.HRD": "positive" }, "pills": ["HRD+"] },
+        { "id": "hrp", "label": "HR-proficient / HRD-negative", "sets": { "biomarkers.HRD": "negative" }, "pills": ["HRD-"] },
+        { "id": "obs", "label": "Complete response, low risk - consider observation", "sets": { "biomarkers.HRD": "unknown" }, "pills": ["observe"] }
+      ]
+    },
+    {
+      "id": "n_tx_early_obs",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Early low-risk observation",
+      "title": "Stage IA/IB grade 1: surgery alone",
+      "description": "Comprehensive surgical staging is definitive for low-risk stage I disease; adjuvant chemotherapy is not required.",
+      "path": "Ovarian / Early / Observation",
+      "section": "Treatment",
+      "pills": ["low risk", "surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Complete surgical staging (hysterectomy, bilateral salpingo-oophorectomy, omentectomy, peritoneal / nodal sampling)",
+        "No adjuvant chemotherapy for stage IA/IB grade 1",
+        "Fertility-sparing unilateral salpingo-oophorectomy is an option for stage IA in a young patient wanting fertility",
+        "Enter routine surveillance"
+      ],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_early_chemo",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "HR-proficient maintenance treatment",
-      "title": "Maintenance, HR-proficient: bevacizumab or observation",
-      "description": "Maintenance in HR-proficient / BRCA wild-type ovarian cancer after response to platinum-based chemotherapy - bevacizumab maintenance or observation. A PARP inhibitor is NOT indicated for BRCA-wild-type / HR-proficient disease in this guideline version; it is reserved for BRCA/HRD-positive disease. Physician selects.",
-      "path": "Ovarian / Treatment / Maintenance / HR proficient",
+      "title": "Stage I high-risk: adjuvant platinum-taxane",
+      "name": "Early high-risk chemo",
+      "description": "High-risk stage I disease benefits from adjuvant carboplatin-paclitaxel after complete surgical staging.",
+      "path": "Ovarian / Early / Adjuvant chemo",
       "section": "Treatment",
-      "pills": [
-        "HRD-",
-        "treatment"
-      ],
+      "pills": ["high risk", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": [
-        "gyn-carbo-paclitaxel-bev"
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "bullets": [
+        "Complete surgical staging first",
+        "Adjuvant carboplatin + paclitaxel; 3-6 cycles (often 6 for clear-cell / grade 3 / stage IC)",
+        "Bevacizumab and PARP maintenance are generally not used for fully resected stage I disease",
+        "Enter surveillance after treatment"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel"]
+    },
+    {
+      "id": "n_tx_lgsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Low-grade serous",
+      "title": "Low-grade serous: surgery + hormonal / targeted",
+      "description": "Low-grade serous carcinoma is indolent and relatively platinum-resistant; maximal surgery with endocrine or MEK-directed therapy is favored over intensive chemotherapy.",
+      "path": "Ovarian / Low-grade serous",
+      "section": "Treatment",
+      "pills": ["low-grade serous", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Maximal cytoreductive surgery is the mainstay",
+        "Endocrine therapy (aromatase inhibitor) as maintenance or in recurrence, given frequent hormone-receptor positivity",
+        "MEK inhibitor is an option in recurrent disease",
+        "Platinum-taxane chemotherapy has lower response rates than in high-grade disease; individualize",
+        "No StewardMD dose protocol for these agents here - physician arranges the regimen"
+      ]
+    },
+    {
+      "id": "n_tx_mucinous",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mucinous",
+      "title": "Mucinous: exclude GI primary, then chemo",
+      "description": "Primary mucinous ovarian carcinoma is uncommon; first exclude a metastatic GI primary. Chemotherapy choice may follow either a gynecologic or a colorectal-type backbone.",
+      "path": "Ovarian / Mucinous",
+      "section": "Treatment",
+      "pills": ["mucinous", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Rule out a GI (appendiceal / colorectal / pancreaticobiliary) primary: endoscopy, CEA / CA19-9, imaging",
+        "Complete surgical staging including appendectomy",
+        "Adjuvant chemotherapy for high-risk / advanced disease: carboplatin-paclitaxel, or a fluoropyrimidine-oxaliplatin (colorectal-type) regimen",
+        "Individualize by confirmed primary site"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel"]
+    },
+    {
+      "id": "n_tx_nonepi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-epithelial",
+      "title": "Non-epithelial: distinct pathway (out of scope)",
+      "description": "Germ-cell and sex-cord stromal tumors follow entirely different management and are outside this epithelial navigator; refer to the appropriate pathway.",
+      "path": "Ovarian / Non-epithelial",
+      "section": "Treatment",
+      "pills": ["non-epithelial", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Malignant germ-cell tumors: fertility-sparing surgery; BEP (bleomycin-etoposide-cisplatin) chemotherapy for most beyond stage IA",
+        "Sex-cord stromal (granulosa-cell) tumors: surgery; inhibin as a marker; chemo for advanced / recurrent disease",
+        "This epithelial navigator does not carry doses for these entities - use the dedicated pathway"
+      ]
+    },
+    {
+      "id": "n_tx_unresectable_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Palliative",
+      "title": "Not a surgical / intensive-chemo candidate: palliative care",
+      "description": "For patients too frail for cytoreduction or full-dose platinum-taxane, prioritize symptom control with gentle, individualized systemic options.",
+      "path": "Ovarian / Palliative",
+      "section": "Treatment",
+      "pills": ["palliative", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Early palliative-care involvement; manage ascites, bowel obstruction, and pain",
+        "Consider single-agent carboplatin or attenuated dosing if any systemic therapy is pursued",
+        "Reassess fitness - a good response may make interval surgery or fuller chemotherapy possible",
+        "Goals-of-care discussion"
+      ]
+    },
+    {
+      "id": "n_tx_maint_brca",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BRCA maintenance",
+      "title": "Maintenance, BRCA-mutant: PARP inhibitor",
+      "description": "BRCA-mutant tumors derive the greatest benefit from first-line PARP-inhibitor maintenance after response to platinum.",
+      "path": "Ovarian / Maintenance / BRCA",
+      "section": "Treatment",
+      "pills": ["BRCA+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Olaparib maintenance (or niraparib) after response to first-line platinum",
+        "If bevacizumab was part of chemotherapy, olaparib + bevacizumab is an option",
+        "Monitor CBC for myelosuppression; counsel on secondary-malignancy risk",
+        "Enter surveillance in parallel"
+      ],
+      "protocolRefs": ["gyn-olaparib-maint", "gyn-niraparib-maint", "gyn-carbo-paclitaxel-bev"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_maint_hrd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HRD maintenance",
+      "title": "Maintenance, HRD-positive (BRCA wild-type): PARP inhibitor",
+      "description": "HRD-positive, BRCA wild-type tumors still benefit substantially from PARP-inhibitor maintenance, with or without bevacizumab.",
+      "path": "Ovarian / Maintenance / HRD",
+      "section": "Treatment",
+      "pills": ["HRD+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Niraparib maintenance, or olaparib + bevacizumab if bevacizumab was used with chemotherapy",
+        "Benefit is intermediate between BRCA-mutant and HR-proficient disease",
+        "Monitor CBC and blood pressure (if on bevacizumab)",
+        "Enter surveillance in parallel"
+      ],
+      "protocolRefs": ["gyn-niraparib-maint", "gyn-olaparib-maint", "gyn-carbo-paclitaxel-bev"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_maint_hrp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HR-proficient maintenance",
+      "title": "Maintenance, HR-proficient: bevacizumab or niraparib",
+      "description": "In HR-proficient / HRD-negative disease PARP benefit is small; bevacizumab maintenance (if started with chemo) or observation are the usual choices.",
+      "path": "Ovarian / Maintenance / HR-proficient",
+      "section": "Treatment",
+      "pills": ["HRD-", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b", "c"],
+      "bullets": [
+        "Bevacizumab maintenance if it was part of chemotherapy",
+        "Niraparib maintenance is an option regardless of biomarker but with smaller benefit here",
+        "Observation is reasonable for a complete responder who did not receive bevacizumab",
+        "Enter surveillance in parallel"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel-bev", "gyn-niraparib-maint"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_maint_obs",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Maintenance observation",
+      "title": "Observation after first-line therapy",
+      "description": "For a complete responder at low risk who did not receive bevacizumab and has no PARP indication, active surveillance is acceptable.",
+      "path": "Ovarian / Maintenance / Observation",
+      "section": "Surveillance",
+      "pills": ["observe", "surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "No maintenance drug; monitor closely",
+        "Reconfirm BRCA / HRD results are complete before defaulting to observation",
+        "Enter routine surveillance"
+      ],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_recur_ppi",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Platinum-free interval",
+      "title": "Recurrence: platinum-free interval",
+      "description": "At relapse, the interval from the last platinum dose to progression approximates platinum sensitivity and directs the whole recurrence strategy.",
+      "path": "Ovarian / Recurrence / PFI",
+      "section": "Recurrence",
+      "pills": ["recurrent", "PFI"],
+      "required": true,
+      "footnotes": ["d"],
+      "tables": [
+        {
+          "title": "Platinum-free interval categories",
+          "headers": ["Category", "Interval from last platinum", "Implication"],
+          "rows": [
+            ["Platinum-sensitive", ">= 6 months", "Re-treat with a platinum doublet; consider secondary surgery"],
+            ["Platinum-resistant", "< 6 months", "Non-platinum single agent +/- bevacizumab; biomarker options"],
+            ["Platinum-refractory", "Progression during platinum", "Poor prognosis; trial / single agent / supportive care"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "plat_sens", "label": "Platinum-sensitive (>= 6 months)", "sets": { "platinum": "sensitive" }, "pills": ["platinum-sensitive"] },
+        { "id": "plat_res", "label": "Platinum-resistant (< 6 months)", "sets": { "platinum": "resistant" }, "pills": ["platinum-resistant"] },
+        { "id": "plat_refractory", "label": "Platinum-refractory (progressed on platinum)", "sets": { "platinum": "refractory" }, "pills": ["platinum-refractory"] }
+      ]
+    },
+    {
+      "id": "n_recur_sens",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Platinum-sensitive path",
+      "title": "Platinum-sensitive relapse: strategy",
+      "description": "For platinum-sensitive relapse, decide on secondary cytoreduction and account for any prior PARP exposure before choosing the platinum doublet and maintenance.",
+      "path": "Ovarian / Recurrence / Sensitive",
+      "section": "Recurrence",
+      "pills": ["platinum-sensitive"],
+      "required": true,
+      "bullets": [
+        { "label": "Secondary cytoreduction", "sub": "consider for isolated / oligometastatic relapse, good PS, long platinum-free interval, and likely complete resection" },
+        { "label": "Prior PARP exposure", "sub": "limits repeat PARP maintenance benefit; bevacizumab maintenance is the usual alternative" }
+      ],
+      "options": [
+        { "id": "surg", "label": "Secondary cytoreduction candidate", "sets": { "recurStrategy": "surgery" }, "pills": ["secondary surgery"] },
+        { "id": "chemo_noprior", "label": "Chemo, no prior PARP maintenance", "sets": { "recurStrategy": "chemo" }, "pills": ["platinum doublet"] },
+        { "id": "prior_parp", "label": "Chemo, prior PARP maintenance", "sets": { "recurStrategy": "postparp" }, "pills": ["post-PARP"] }
+      ]
+    },
+    {
+      "id": "n_tx_recur_sens_surg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Secondary cytoreduction",
+      "title": "Platinum-sensitive: secondary surgery + platinum doublet",
+      "description": "Selected platinum-sensitive relapses benefit from secondary cytoreduction to R0 followed by a platinum-based doublet and maintenance.",
+      "path": "Ovarian / Recurrence / Sensitive / Surgery",
+      "section": "Recurrence",
+      "pills": ["secondary surgery", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "bullets": [
+        "Secondary cytoreduction when complete resection is likely (favorable selection)",
+        "Platinum-based doublet after surgery: carboplatin + paclitaxel, or carboplatin + liposomal doxorubicin, or carboplatin + gemcitabine",
+        "PARP or bevacizumab maintenance after response, guided by biomarker and prior maintenance",
+        "Enter surveillance after treatment"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_recur_sens_chemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Platinum doublet + maintenance",
+      "title": "Platinum-sensitive: platinum doublet + PARP / bevacizumab maintenance",
+      "description": "Platinum-sensitive relapse without prior PARP maintenance is re-treated with a platinum doublet, then PARP or bevacizumab maintenance on response.",
+      "path": "Ovarian / Recurrence / Sensitive / Chemo",
+      "section": "Recurrence",
+      "pills": ["platinum doublet", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["a", "c"],
+      "bullets": [
+        "Platinum doublet: carboplatin + paclitaxel, carboplatin + liposomal doxorubicin, or carboplatin + gemcitabine (+/- bevacizumab)",
+        "Add bevacizumab and continue as maintenance if not contraindicated",
+        "PARP maintenance (olaparib / niraparib) after response if not previously given",
+        "Enter surveillance after treatment"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev", "gyn-olaparib-maint", "gyn-niraparib-maint"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_recur_sens_postparp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Post-PARP platinum doublet",
+      "title": "Platinum-sensitive after prior PARP: platinum doublet + bevacizumab",
+      "description": "When PARP maintenance was already used, re-treat with a platinum doublet and favor bevacizumab maintenance; repeat PARP has limited added benefit.",
+      "path": "Ovarian / Recurrence / Sensitive / Post-PARP",
+      "section": "Recurrence",
+      "pills": ["post-PARP", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Platinum doublet as above, ideally with bevacizumab maintenance",
+        "Repeat PARP maintenance gives limited benefit after prior PARP - individualize",
+        "Re-biopsy / re-test at relapse if it will change therapy",
+        "Enter surveillance after treatment"
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "gyn-carbo-paclitaxel-bev"],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_recur_res_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Platinum-resistant biomarker",
+      "title": "Platinum-resistant relapse: FRalpha status",
+      "description": "In platinum-resistant disease, folate-receptor-alpha expression selects patients for mirvetuximab; others receive sequential single-agent non-platinum chemotherapy.",
+      "path": "Ovarian / Recurrence / Resistant / Biomarker",
+      "section": "Recurrence",
+      "pills": ["platinum-resistant", "biomarker"],
+      "required": true,
+      "bullets": [
+        { "label": "FRalpha-high", "sub": "mirvetuximab soravtansine (antibody-drug conjugate) option" },
+        { "label": "FRalpha-low / unknown", "sub": "sequential single-agent chemotherapy +/- bevacizumab" }
+      ],
+      "options": [
+        { "id": "fra_high", "label": "FRalpha-high", "sets": { "biomarkers.FRalpha": "high" }, "pills": ["FRalpha+"] },
+        { "id": "fra_low", "label": "FRalpha-low / unknown", "sets": { "biomarkers.FRalpha": "low" }, "pills": ["FRalpha-"] }
+      ]
+    },
+    {
+      "id": "n_tx_mirvetuximab",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mirvetuximab",
+      "title": "Platinum-resistant, FRalpha-high: mirvetuximab",
+      "description": "Folate-receptor-alpha-high platinum-resistant disease can be treated with mirvetuximab soravtansine.",
+      "path": "Ovarian / Recurrence / Resistant / Mirvetuximab",
+      "section": "Recurrence",
+      "pills": ["FRalpha+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Mirvetuximab soravtansine for FRalpha-high, platinum-resistant relapse (typically 1-3 prior regimens)",
+        "Baseline and periodic ophthalmologic exam; use prophylactic eye care for keratopathy",
+        "No StewardMD dose protocol here - physician arranges the regimen",
+        "Enter surveillance / reassessment after treatment"
+      ],
+      "linkTo": "n_surv"
+    },
+    {
+      "id": "n_tx_plat_resistant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Platinum-resistant chemo",
+      "title": "Platinum-resistant: sequential single-agent chemo",
+      "description": "Platinum-resistant disease is treated with sequential non-platinum single agents, with bevacizumab added where appropriate; goals are palliative.",
+      "path": "Ovarian / Recurrence / Resistant / Chemo",
+      "section": "Recurrence",
+      "pills": ["platinum-resistant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Single-agent non-platinum: pegylated liposomal doxorubicin, weekly paclitaxel, topotecan, or gemcitabine",
+        "Add bevacizumab to single-agent chemo where not contraindicated (improves PFS)",
+        "Rotate agents sequentially on progression; avoid re-challenging with platinum",
+        "No StewardMD dose protocol for these single agents here - physician arranges the regimen",
+        "Prioritize quality of life and consider clinical trials"
+      ]
+    },
+    {
+      "id": "n_tx_plat_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Platinum-refractory",
+      "title": "Platinum-refractory: trial / single agent / supportive care",
+      "description": "Progression during platinum carries a poor prognosis; prioritize clinical trials, gentle single-agent therapy, and supportive care.",
+      "path": "Ovarian / Recurrence / Refractory",
+      "section": "Recurrence",
+      "pills": ["platinum-refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Strongly favor clinical-trial enrollment",
+        "Single-agent non-platinum chemotherapy +/- bevacizumab if performance status permits",
+        "Early palliative care; goals-of-care discussion",
+        "No StewardMD dose protocol for these agents here - physician arranges the regimen"
+      ]
+    },
+    {
+      "id": "n_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance",
+      "description": "Monitoring after completion of therapy; a rising CA-125 or symptoms prompt imaging and entry into the recurrence pathway.",
+      "path": "Ovarian / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "History, exam and pelvic exam every 2-4 months for 2 years, then less frequently to 5 years, then annually",
+        "CA-125 at each visit if initially elevated; imaging (CT) for a rising CA-125 or symptoms",
+        "Counsel that treating an asymptomatic CA-125-only rise earlier has not improved survival - individualize",
+        "Address survivorship: menopausal symptoms, bone health, sexual health, and cascade genetic testing of relatives if BRCA-positive",
+        "A confirmed relapse enters the recurrence pathway (platinum-free interval decides strategy)"
       ]
     }
   ],
   "links": [
-    {
-      "id": "l_ov_phase_primary",
-      "from": "n_ov_phase",
-      "to": "n_tx_ov_primary",
-      "fromOptions": [
-        "primary"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_ov_phase_maintenance",
-      "from": "n_ov_phase",
-      "to": "n_ov_hrd",
-      "fromOptions": [
-        "maintenance"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_ov_hrd_pos",
-      "from": "n_ov_hrd",
-      "to": "n_tx_ov_hrd",
-      "fromOptions": [
-        "hrd"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_ov_hrd_hrp",
-      "from": "n_ov_hrd",
-      "to": "n_tx_ov_hrp",
-      "fromOptions": [
-        "hrp"
-      ],
-      "linkCategory": "conditional"
-    }
+    { "id": "l_wk", "from": "n_workup", "to": "n_setting", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_set_new", "from": "n_setting", "to": "n_histology", "fromOptions": ["newdx"], "linkCategory": "conditional" },
+    { "id": "l_set_recur", "from": "n_setting", "to": "n_recur_ppi", "fromOptions": ["recur"], "linkCategory": "conditional" },
+    { "id": "l_set_fu", "from": "n_setting", "to": "n_surv", "fromOptions": ["fu"], "linkCategory": "conditional" },
+
+    { "id": "l_hist_hg", "from": "n_histology", "to": "n_molecular", "fromOptions": ["epithelial_hg"], "linkCategory": "conditional" },
+    { "id": "l_hist_lgsc", "from": "n_histology", "to": "n_tx_lgsc", "fromOptions": ["lgsc"], "linkCategory": "conditional" },
+    { "id": "l_hist_muc", "from": "n_histology", "to": "n_tx_mucinous", "fromOptions": ["mucinous"], "linkCategory": "conditional" },
+    { "id": "l_hist_nonepi", "from": "n_histology", "to": "n_tx_nonepi", "fromOptions": ["nonepi"], "linkCategory": "conditional" },
+
+    { "id": "l_mol_stage", "from": "n_molecular", "to": "n_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_stage_early", "from": "n_stage", "to": "n_early_risk", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_stage_adv", "from": "n_stage", "to": "n_advanced_surgery", "fromOptions": ["advanced"], "linkCategory": "conditional" },
+
+    { "id": "l_early_low", "from": "n_early_risk", "to": "n_tx_early_obs", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_early_high", "from": "n_early_risk", "to": "n_tx_early_chemo", "fromOptions": ["high"], "linkCategory": "conditional" },
+
+    { "id": "l_adv_pds", "from": "n_advanced_surgery", "to": "n_tx_pds", "fromOptions": ["pds"], "linkCategory": "conditional" },
+    { "id": "l_adv_nact", "from": "n_advanced_surgery", "to": "n_tx_nact", "fromOptions": ["nact"], "linkCategory": "conditional" },
+    { "id": "l_adv_pall", "from": "n_advanced_surgery", "to": "n_tx_unresectable_bsc", "fromOptions": ["unresectable"], "linkCategory": "conditional" },
+
+    { "id": "l_pds_maint", "from": "n_tx_pds", "to": "n_maint_biomarker", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_nact_maint", "from": "n_tx_nact", "to": "n_maint_biomarker", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_maint_brca", "from": "n_maint_biomarker", "to": "n_tx_maint_brca", "fromOptions": ["brca"], "linkCategory": "conditional" },
+    { "id": "l_maint_hrd", "from": "n_maint_biomarker", "to": "n_tx_maint_hrd", "fromOptions": ["hrd"], "linkCategory": "conditional" },
+    { "id": "l_maint_hrp", "from": "n_maint_biomarker", "to": "n_tx_maint_hrp", "fromOptions": ["hrp"], "linkCategory": "conditional" },
+    { "id": "l_maint_obs", "from": "n_maint_biomarker", "to": "n_tx_maint_obs", "fromOptions": ["obs"], "linkCategory": "conditional" },
+
+    { "id": "l_ppi_sens", "from": "n_recur_ppi", "to": "n_recur_sens", "fromOptions": ["plat_sens"], "linkCategory": "conditional" },
+    { "id": "l_ppi_res", "from": "n_recur_ppi", "to": "n_recur_res_biomarker", "fromOptions": ["plat_res"], "linkCategory": "conditional" },
+    { "id": "l_ppi_refr", "from": "n_recur_ppi", "to": "n_tx_plat_refractory", "fromOptions": ["plat_refractory"], "linkCategory": "conditional" },
+
+    { "id": "l_sens_surg", "from": "n_recur_sens", "to": "n_tx_recur_sens_surg", "fromOptions": ["surg"], "linkCategory": "conditional" },
+    { "id": "l_sens_chemo", "from": "n_recur_sens", "to": "n_tx_recur_sens_chemo", "fromOptions": ["chemo_noprior"], "linkCategory": "conditional" },
+    { "id": "l_sens_postparp", "from": "n_recur_sens", "to": "n_tx_recur_sens_postparp", "fromOptions": ["prior_parp"], "linkCategory": "conditional" },
+
+    { "id": "l_res_fra_hi", "from": "n_recur_res_biomarker", "to": "n_tx_mirvetuximab", "fromOptions": ["fra_high"], "linkCategory": "conditional" },
+    { "id": "l_res_fra_lo", "from": "n_recur_res_biomarker", "to": "n_tx_plat_resistant", "fromOptions": ["fra_low"], "linkCategory": "conditional" }
   ]
 }

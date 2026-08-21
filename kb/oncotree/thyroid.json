@@ -2,205 +2,733 @@
   "guideline": "thyroid",
   "title": "Thyroid Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "anaplastic_thyroid_carcinoma",
+  "navigatorVersion": "2.0.0",
+  "diseaseId": "thyroid_cancer",
   "matchDisease": false,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT spanning anaplastic and medullary thyroid carcinoma (which carry different protocol diseaseId tags, hence matchDisease:false and per-node reference scoping). Captures subtype and, for anaplastic disease, BRAF V600E status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Differentiated (papillary/follicular) thyroid cancer is managed distinctly and is not covered here. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Thyroid Carcinoma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Thyroid Carcinoma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": [
-    "n_thy_type"
-  ],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full pathway: workup -> histology/subtype -> subtype-specific staging and risk stratification (tables) -> stage / biomarker / line-of-therapy-directed treatment arms with per-node checklists -> surveillance and recurrence/metastatic pathways. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; agents without a dose protocol here (radioiodine, TSH-suppressive levothyroxine, lenvatinib/sorafenib, larotrectinib/entrectinib, cabozantinib/vandetanib) are shown as checklist guidance with NO dose. matchDisease:false because the subtypes carry different protocol diseaseId tags. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Thyroid Carcinoma; no proprietary content reproduced. DRAFT - not clinically activated.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN/DeVita/Harrison), Thyroid Carcinoma. Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "Post-operative recurrence-risk category (low / intermediate / high) is estimated from tumor size, extrathyroidal extension, resection completeness, vascular invasion, aggressive histology, nodal burden and post-op thyroglobulin. It drives extent of surgery, whether radioiodine is given, and the initial TSH target. Reassess dynamically at each follow-up (excellent / indeterminate / biochemically-incomplete / structurally-incomplete response).", "evidence": "2A" },
+    "b": { "text": "Radioiodine (I-131) is used for remnant ablation, adjuvant treatment of residual microscopic disease, or therapy of iodine-avid metastases. Requires TSH stimulation (thyroid-hormone withdrawal or recombinant human TSH) and a low-iodine diet. Confirm iodine avidity on a diagnostic or post-therapy scan before relying on it in metastatic disease.", "evidence": "2A" },
+    "c": { "text": "Selective RET inhibitors (selpercatinib, pralsetinib) are preferred for RET-mutant medullary and RET-fusion-positive differentiated thyroid cancer, with high response rates and better tolerability than multikinase inhibitors. Confirm the RET alteration on validated tissue or plasma NGS.", "evidence": "1" },
+    "d": { "text": "Anaplastic thyroid carcinoma is an oncologic emergency: secure the airway, obtain rapid BRAF V600E testing, and start systemic therapy without delay. BRAF V600E-mutant disease responds to dabrafenib plus trametinib (with consideration of subsequent surgery / an immune-checkpoint inhibitor); BRAF wild-type disease is managed on trial or with cytotoxic chemoradiation.", "evidence": "2A" }
+  },
   "nodes": [
     {
-      "id": "n_thy_type",
-      "linkId": "thy_type",
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup and diagnosis",
+      "description": "Baseline evaluation of a thyroid nodule or biopsy-proven thyroid cancer before subtype-directed management.",
+      "path": "Thyroid / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History and neck exam", "sub": "compressive / voice symptoms, prior neck irradiation, family history of thyroid cancer or MEN2" },
+        { "label": "Serum TSH; neck ultrasound of thyroid and central + lateral compartments" },
+        { "label": "FNA of the nodule with Bethesda cytology category", "sub": "molecular testing (e.g. Afirma / ThyroSeq) for indeterminate Bethesda III-IV" },
+        { "label": "Serum calcitonin and CEA if medullary carcinoma is suspected or before thyroid surgery per local practice" },
+        { "label": "Laryngoscopy to document vocal-cord function if voice change or before reoperation" },
+        { "label": "Cross-sectional imaging (contrast CT neck/chest) for bulky, fixed, substernal, or clinically aggressive disease" },
+        { "label": "Confirm histologic subtype - it determines the entire pathway" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_histology",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Subtype",
-      "title": "Thyroid cancer subtype",
-      "description": "Anaplastic and medullary thyroid carcinoma follow distinct, biomarker-directed systemic pathways.",
+      "name": "Histology / subtype",
+      "title": "Histologic subtype",
+      "description": "Thyroid cancer subtype defines a distinct pathway. Choose the confirmed histology, or enter surveillance for a previously treated patient.",
       "path": "Thyroid / Subtype",
-      "section": "Diagnosis",
-      "pills": [
-        "subtype"
-      ],
+      "section": "Staging",
+      "pills": ["subtype"],
       "required": true,
       "options": [
-        {
-          "id": "anaplastic",
-          "label": "Anaplastic thyroid carcinoma",
-          "sets": {
-            "scenario": "anaplastic"
-          },
-          "pills": [
-            "anaplastic"
-          ]
-        },
-        {
-          "id": "medullary",
-          "label": "Medullary thyroid carcinoma",
-          "sets": {
-            "scenario": "medullary"
-          },
-          "pills": [
-            "medullary"
-          ]
-        }
+        { "id": "dtc", "label": "Differentiated (papillary / follicular / oncocytic)", "sets": { "subtype": "differentiated" }, "pills": ["DTC"] },
+        { "id": "medullary", "label": "Medullary (MTC)", "sets": { "subtype": "medullary" }, "pills": ["MTC"] },
+        { "id": "anaplastic", "label": "Anaplastic (ATC)", "sets": { "subtype": "anaplastic" }, "pills": ["ATC"] },
+        { "id": "surveillance", "label": "Previously treated - surveillance / follow-up", "sets": { "subtype": "followup" }, "pills": ["surveillance"] }
+      ]
+    },
+
+    {
+      "id": "n_dtc_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "DTC staging workup",
+      "title": "Differentiated: staging and molecular workup",
+      "description": "Complete subtype-specific staging before assigning a recurrence-risk category.",
+      "path": "Thyroid / DTC / Workup",
+      "section": "Workup",
+      "pills": ["DTC", "workup"],
+      "required": true,
+      "bullets": [
+        { "label": "Document AJCC TNM stage using patient age at diagnosis (age < 55 vs >= 55 markedly changes stage)" },
+        { "label": "Neck ultrasound mapping of nodal compartments before surgery" },
+        { "label": "Aggressive histology on path?", "sub": "tall-cell, hobnail, columnar, diffuse-sclerosing papillary, or widely-invasive / poorly-differentiated follicular raises risk" },
+        { "label": "Molecular profiling of advanced or radioiodine-refractory disease", "sub": "BRAF, RAS, NTRK and RET fusions, TERT promoter - identifies targeted-therapy candidates" },
+        { "label": "Baseline post-op thyroglobulin and anti-thyroglobulin antibody once healed" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Staging reviewed - continue", "setsValue": null }
       ]
     },
     {
-      "id": "n_thy_anaplastic_braf",
-      "linkId": "thy_anaplastic_braf",
+      "id": "n_dtc_risk",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Anaplastic - BRAF status",
-      "title": "Anaplastic: BRAF V600E status",
-      "description": "A BRAF V600E mutation enables BRAF/MEK-targeted therapy in anaplastic thyroid carcinoma. BRAF wild-type anaplastic disease is managed with clinical-trial / multidisciplinary options not modeled here.",
-      "path": "Thyroid / Anaplastic / BRAF",
-      "section": "Biomarkers",
-      "pills": [
-        "biomarker",
-        "BRAF"
-      ],
+      "name": "DTC risk / stage",
+      "title": "Differentiated: recurrence-risk category",
+      "description": "Assign a post-operative recurrence-risk category (or select advanced / metastatic disease). Risk drives extent of surgery, radioiodine use, and TSH target.",
+      "path": "Thyroid / DTC / Risk",
+      "section": "Staging",
+      "pills": ["DTC", "risk"],
       "required": true,
-      "options": [
+      "footnotes": ["a"],
+      "tables": [
         {
-          "id": "brafmut",
-          "label": "BRAF V600E mutation positive",
-          "sets": {
-            "biomarkers.BRAF": "positive"
-          },
-          "pills": [
-            "BRAF+"
-          ]
-        },
-        {
-          "id": "brafwt",
-          "label": "BRAF wild-type",
-          "setsValue": null,
-          "pills": [
-            "BRAF WT"
+          "title": "Differentiated thyroid cancer - recurrence-risk category (illustrative)",
+          "headers": ["Category", "Representative features", "Typical initial approach"],
+          "rows": [
+            ["Low", "Intrathyroidal papillary <= 4 cm, N0/Nx or <= 5 micro-nodes, no aggressive histology or vascular invasion", "Lobectomy or total thyroidectomy; radioiodine usually not needed; TSH low-normal"],
+            ["Intermediate", "Microscopic extrathyroidal extension, aggressive histology, vascular invasion, or clinical N1", "Total thyroidectomy; consider adjuvant radioiodine; mild TSH suppression"],
+            ["High", "Gross extrathyroidal extension, incomplete resection, distant metastases, or high post-op thyroglobulin", "Total thyroidectomy + therapeutic neck dissection; radioiodine; TSH suppression < 0.1"]
           ]
         }
+      ],
+      "options": [
+        { "id": "micro", "label": "Papillary microcarcinoma (<= 1 cm, no adverse features)", "sets": { "dtcRisk": "micro" }, "pills": ["micropapillary"] },
+        { "id": "low", "label": "Low risk", "sets": { "dtcRisk": "low" }, "pills": ["low risk"] },
+        { "id": "intermediate", "label": "Intermediate risk", "sets": { "dtcRisk": "intermediate" }, "pills": ["intermediate risk"] },
+        { "id": "high", "label": "High risk (M0)", "sets": { "dtcRisk": "high" }, "pills": ["high risk"] },
+        { "id": "advanced", "label": "Advanced / distant metastatic", "sets": { "dtcRisk": "advanced" }, "pills": ["metastatic"] },
+        { "id": "locoregional", "label": "Locoregional recurrence (resectable, no distant disease)", "sets": { "dtcRisk": "locoregional" }, "pills": ["recurrence"] }
       ]
     },
     {
-      "id": "n_tx_thy_anaplastic",
-      "linkId": "tx_thy_anaplastic",
+      "id": "n_tx_dtc_micro",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Micropapillary",
+      "title": "Papillary microcarcinoma: active surveillance or lobectomy",
+      "description": "Very-low-risk papillary microcarcinoma; observation is a validated alternative to immediate surgery.",
+      "path": "Thyroid / DTC / Micropapillary",
+      "section": "Treatment",
+      "pills": ["DTC", "micropapillary", "surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a"],
+      "bullets": [
+        "Active surveillance with serial ultrasound is appropriate for selected patients without nodal disease, extrathyroidal extension, or high-risk cytology",
+        "Lobectomy if the tumor grows, develops adverse features, or the patient prefers surgery",
+        "No radioiodine; TSH kept low-normal",
+        "Not suitable when adjacent to the trachea / recurrent laryngeal nerve or with aggressive histology",
+        "Enter differentiated-cancer surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_dtc_locoreg",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Anaplastic BRAF-mutant",
-      "title": "Anaplastic, BRAF V600E: BRAF/MEK-targeted therapy",
-      "description": "BRAF V600E-mutant anaplastic thyroid carcinoma - dabrafenib plus trametinib. Physician selects; the existing dose engine computes doses.",
-      "path": "Thyroid / Anaplastic / BRAF-mutant",
-      "section": "Treatment",
-      "pills": [
-        "BRAF+",
-        "treatment"
-      ],
+      "name": "DTC locoregional recurrence",
+      "title": "Locoregional recurrence: compartmental reoperation",
+      "description": "Resectable locoregional recurrence without distant metastases.",
+      "path": "Thyroid / DTC / Locoregional recurrence",
+      "section": "Recurrence",
+      "pills": ["DTC", "recurrence", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": [
-        "thyroid-anaplastic-dab-tram"
+      "evidenceCategory": ["2A"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Compartment-oriented therapeutic neck dissection of biopsy-proven recurrence (avoid repeated berry-picking)",
+        "Radioiodine if the recurrence is iodine-avid and not fully resected",
+        "External-beam radiation for unresectable or repeatedly recurrent disease",
+        "Consider active surveillance for small-volume, stable, non-threatening nodal disease",
+        "Re-enter surveillance; move to the advanced pathway if distant metastases appear"
       ]
     },
     {
-      "id": "n_thy_medullary_ret",
-      "linkId": "thy_medullary_ret",
+      "id": "n_tx_dtc_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DTC low risk",
+      "title": "Low-risk DTC: surgery, selective radioiodine",
+      "description": "Surgery is definitive for most low-risk disease; radioiodine is generally not required.",
+      "path": "Thyroid / DTC / Low",
+      "section": "Treatment",
+      "pills": ["DTC", "low risk", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Lobectomy for a unifocal intrathyroidal tumor <= 4 cm; total thyroidectomy if bilateral disease, patient preference, or to enable radioiodine / thyroglobulin monitoring",
+        "Active surveillance is reasonable for selected papillary microcarcinomas (<= 1 cm, no adverse features)",
+        "Radioiodine usually omitted",
+        "Levothyroxine to keep TSH low-normal (about 0.5 to 2.0 mIU/L) after lobectomy, or mild suppression after total thyroidectomy",
+        "Enter differentiated-cancer surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_dtc_int",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DTC intermediate risk",
+      "title": "Intermediate-risk DTC: total thyroidectomy, adjuvant radioiodine, TSH suppression",
+      "description": "Total thyroidectomy with risk-adapted radioiodine and modest TSH suppression.",
+      "path": "Thyroid / DTC / Intermediate",
+      "section": "Treatment",
+      "pills": ["DTC", "intermediate risk", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Total thyroidectomy; therapeutic central / lateral neck dissection for proven nodal disease",
+        "Consider adjuvant radioiodine after TSH stimulation and a low-iodine diet (activity individualized to risk)",
+        "TSH suppression to about 0.1 to 0.5 mIU/L, relaxed over time with an excellent response",
+        "Radioiodine has no dose protocol here - shown as guidance; nuclear-medicine arranges activity",
+        "Enter differentiated-cancer surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_dtc_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DTC high risk",
+      "title": "High-risk (M0) DTC: total thyroidectomy, radioiodine, deep TSH suppression",
+      "description": "Aggressive locoregional disease without distant metastases.",
+      "path": "Thyroid / DTC / High",
+      "section": "Treatment",
+      "pills": ["DTC", "high risk", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a", "b"],
+      "bullets": [
+        "Total thyroidectomy with therapeutic compartmental neck dissection; resect gross extrathyroidal disease where feasible",
+        "Adjuvant radioiodine after stimulation and a low-iodine diet",
+        "External-beam radiation for unresectable or recurrent locoregional disease not controlled by surgery / radioiodine",
+        "TSH suppression < 0.1 mIU/L while disease persists, balanced against cardiac / skeletal risk",
+        "Enter differentiated-cancer surveillance; escalate to the advanced pathway if radioiodine-refractory disease emerges"
+      ]
+    },
+    {
+      "id": "n_dtc_rai",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Medullary - RET status",
-      "title": "Medullary: RET alteration status",
-      "description": "Selpercatinib is a selective RET inhibitor indicated for RET-altered medullary thyroid carcinoma. RET wild-type medullary disease is managed with multikinase inhibitors / clinical-trial options not modeled here.",
-      "path": "Thyroid / Medullary / RET",
-      "section": "Biomarkers",
-      "pills": [
-        "biomarker",
-        "RET"
-      ],
+      "name": "RAI status",
+      "title": "Advanced DTC: radioiodine avidity",
+      "description": "Distant metastatic differentiated disease is managed first by whether it concentrates radioiodine. Confirm avidity on a scan before relying on it.",
+      "path": "Thyroid / DTC / Advanced / RAI",
+      "section": "Treatment",
+      "pills": ["DTC", "metastatic", "RAI"],
       "required": true,
+      "footnotes": ["b"],
+      "bullets": [
+        "Iodine-avid metastases can respond durably to repeated radioiodine",
+        "Radioiodine-refractory = no iodine uptake, progression despite uptake, or progression within ~12 months of a therapeutic dose"
+      ],
       "options": [
-        {
-          "id": "retpos",
-          "label": "RET pathogenic variant / fusion positive",
-          "sets": {
-            "biomarkers.RET": "positive"
-          },
-          "pills": [
-            "RET+"
-          ]
-        },
-        {
-          "id": "retwt",
-          "label": "RET wild-type / not identified",
-          "setsValue": null,
-          "pills": [
-            "RET WT"
-          ]
-        }
+        { "id": "rai_avid", "label": "Radioiodine-avid metastases", "sets": { "raiStatus": "avid" }, "pills": ["RAI-avid"] },
+        { "id": "rai_refractory", "label": "Radioiodine-refractory", "sets": { "raiStatus": "refractory" }, "pills": ["RAI-refractory"] }
       ]
     },
     {
-      "id": "n_tx_thy_medullary",
-      "linkId": "tx_thy_medullary",
+      "id": "n_tx_dtc_rai",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Medullary",
-      "title": "Medullary: RET-directed therapy",
-      "description": "Advanced medullary thyroid carcinoma - a selective RET inhibitor (selpercatinib) for RET-altered disease. Physician selects.",
-      "path": "Thyroid / Medullary",
+      "name": "RAI-avid metastatic",
+      "title": "RAI-avid metastatic DTC: radioiodine therapy",
+      "description": "Iodine-avid distant metastases treated with therapeutic radioiodine and TSH suppression.",
+      "path": "Thyroid / DTC / Advanced / RAI-avid",
       "section": "Treatment",
-      "pills": [
-        "medullary",
-        "treatment"
-      ],
+      "pills": ["DTC", "RAI-avid", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": [
-        "thyroid-medullary-selpercatinib"
+      "evidenceCategory": ["2A"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Therapeutic radioiodine after TSH stimulation and a low-iodine diet; repeat while disease remains avid and responding",
+        "TSH suppression < 0.1 mIU/L between treatments",
+        "Directed local therapy (surgery, external-beam radiation, or ablation) for symptomatic, dominant, or CNS / weight-bearing bone lesions",
+        "Bone-modifying agent for skeletal metastases",
+        "Re-evaluate avidity at progression; move to the refractory pathway if radioiodine stops working"
+      ]
+    },
+    {
+      "id": "n_dtc_refr_bio",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Refractory biomarker",
+      "title": "RAI-refractory DTC: actionable biomarker",
+      "description": "In radioiodine-refractory progressive disease, a driver fusion changes first-line therapy from a multikinase inhibitor to a selective targeted agent.",
+      "path": "Thyroid / DTC / Refractory / Biomarker",
+      "section": "Treatment",
+      "pills": ["DTC", "RAI-refractory", "biomarker"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Actionable drivers in radioiodine-refractory DTC",
+          "headers": ["Alteration", "Preferred targeted agent"],
+          "rows": [
+            ["NTRK1/2/3 fusion", "Larotrectinib or entrectinib (TRK inhibitor)"],
+            ["RET fusion", "Selpercatinib or pralsetinib (selective RET inhibitor)"],
+            ["No actionable fusion", "Lenvatinib (or sorafenib) multikinase inhibitor"]
+          ]
+        }
+      ],
+      "footnotes": ["c"],
+      "options": [
+        { "id": "ntrk", "label": "NTRK fusion positive", "sets": { "biomarkers.NTRK": "positive" }, "pills": ["NTRK+"] },
+        { "id": "ret_fusion", "label": "RET fusion positive", "sets": { "biomarkers.RET": "positive" }, "pills": ["RET fusion+"] },
+        { "id": "no_target", "label": "No actionable fusion", "sets": { "biomarkers.driver": "none" }, "pills": ["no target"] }
+      ]
+    },
+    {
+      "id": "n_tx_ntrk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "NTRK fusion DTC",
+      "title": "RAI-refractory, NTRK fusion: TRK inhibitor",
+      "description": "NTRK-fusion-positive radioiodine-refractory differentiated thyroid cancer.",
+      "path": "Thyroid / DTC / Refractory / NTRK",
+      "section": "Treatment",
+      "pills": ["NTRK+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Larotrectinib or entrectinib (tissue-agnostic TRK inhibitor indication) - high, durable response rates",
+        "Confirm the NTRK fusion on validated NGS",
+        "No dedicated dose protocol here - shown as guidance; physician arranges the regimen",
+        "Continue TSH suppression; monitor for acquired resistance mutations"
+      ]
+    },
+    {
+      "id": "n_tx_ret_fusion",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RET fusion DTC",
+      "title": "RAI-refractory, RET fusion: selective RET inhibitor",
+      "description": "RET-fusion-positive radioiodine-refractory differentiated thyroid cancer.",
+      "path": "Thyroid / DTC / Refractory / RET",
+      "section": "Treatment",
+      "pills": ["RET fusion+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Selpercatinib (or pralsetinib) - selective RET inhibitor, preferred over multikinase inhibitors",
+        "Confirm the RET fusion on validated tissue or plasma NGS",
+        "Referenced dose protocol is the medullary-scoped selpercatinib protocol (same drug); physician confirms fit",
+        "Continue TSH suppression; monitor LFTs, blood pressure, QT, and hypersensitivity"
+      ],
+      "protocolRefs": ["thyroid-medullary-selpercatinib"]
+    },
+    {
+      "id": "n_tx_dtc_mki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RAI-refractory MKI",
+      "title": "RAI-refractory, no target: lenvatinib / sorafenib",
+      "description": "Progressive radioiodine-refractory disease without an actionable fusion.",
+      "path": "Thyroid / DTC / Refractory / MKI",
+      "section": "Treatment",
+      "pills": ["RAI-refractory", "MKI", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Lenvatinib is the preferred multikinase inhibitor (higher response rate); sorafenib is an alternative",
+        "Reserve systemic therapy for progressive or symptomatic disease - indolent metastases can be observed",
+        "No dedicated dose protocol here - shown as guidance; manage hypertension, proteinuria, diarrhea, hand-foot skin reaction, and thromboembolic / bleeding risk",
+        "Cabozantinib is an option after progression on prior multikinase therapy",
+        "Continue TSH suppression; use directed local therapy for dominant lesions"
+      ]
+    },
+
+    {
+      "id": "n_dtc_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "DTC surveillance",
+      "title": "Differentiated: surveillance and recurrence check",
+      "description": "Longitudinal monitoring after definitive therapy; a rising thyroglobulin or new structural disease reopens the advanced pathway.",
+      "path": "Thyroid / DTC / Surveillance",
+      "section": "Surveillance",
+      "pills": ["DTC", "surveillance"],
+      "showsRecommendation": true,
+      "footnotes": ["a"],
+      "bullets": [
+        "Serum thyroglobulin + anti-thyroglobulin antibody and neck ultrasound at intervals; assign a dynamic response category",
+        "Adjust the TSH target upward as the response becomes excellent; deepen suppression if disease persists",
+        "Rising thyroglobulin with negative imaging: consider a diagnostic radioiodine scan or FDG-PET (dedifferentiation)",
+        "Structural recurrence: surgery or directed local therapy for resectable disease; enter the advanced / radioiodine pathway for distant metastases",
+        "Monitor for over-suppression effects (atrial fibrillation, bone loss)"
+      ]
+    },
+
+    {
+      "id": "n_mtc_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "MTC workup",
+      "title": "Medullary: workup and RET testing",
+      "description": "Medullary carcinoma arises from calcitonin-producing C-cells and is RET-driven. Complete germline and biochemical workup before surgery.",
+      "path": "Thyroid / MTC / Workup",
+      "section": "Workup",
+      "pills": ["MTC", "workup"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Medullary carcinoma - RET germline context (MEN2)",
+          "headers": ["Setting", "Implication"],
+          "rows": [
+            ["Germline RET mutation (MEN2A / MEN2B / FMTC)", "Screen for pheochromocytoma and hyperparathyroidism; offer family cascade testing"],
+            ["MEN2B (e.g. RET M918T)", "Most aggressive; earliest prophylactic thyroidectomy"],
+            ["Somatic RET (sporadic, no germline)", "No inherited syndrome; RET still drives targeted therapy in advanced disease"]
+          ]
+        }
+      ],
+      "bullets": [
+        { "label": "Serum calcitonin and CEA (baseline and for doubling-time later)" },
+        { "label": "Germline RET testing in all; if positive, screen for pheochromocytoma (plasma/urine metanephrines) and hyperparathyroidism (calcium/PTH) BEFORE thyroid surgery" },
+        { "label": "Neck ultrasound; cross-sectional imaging for high calcitonin (e.g. > 500 pg/mL) to detect distant metastases" },
+        { "label": "Note: medullary carcinoma does not concentrate radioiodine and is not TSH-driven" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_mtc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "MTC stage",
+      "title": "Medullary: extent of disease",
+      "description": "Choose localized resectable disease versus advanced / distant metastatic medullary carcinoma.",
+      "path": "Thyroid / MTC / Stage",
+      "section": "Staging",
+      "pills": ["MTC", "stage"],
+      "required": true,
+      "options": [
+        { "id": "mtc_prophylactic", "label": "Germline RET carrier, no cancer yet (prophylactic)", "sets": { "mtcStage": "prophylactic" }, "pills": ["MEN2 carrier"] },
+        { "id": "mtc_local", "label": "Localized / regional (resectable)", "sets": { "mtcStage": "local" }, "pills": ["localized"] },
+        { "id": "mtc_advanced", "label": "Advanced / distant metastatic", "sets": { "mtcStage": "advanced" }, "pills": ["metastatic"] }
+      ]
+    },
+    {
+      "id": "n_tx_mtc_prophylactic",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MEN2 prophylactic",
+      "title": "Germline RET carrier: prophylactic thyroidectomy",
+      "description": "Risk-reducing surgery in an unaffected MEN2 carrier, timed by the specific RET mutation's aggressiveness.",
+      "path": "Thyroid / MTC / Prophylactic",
+      "section": "Treatment",
+      "pills": ["MEN2 carrier", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Timing is mutation-driven: earliest infancy for the highest-risk MEN2B (RET M918T), early childhood for high-risk, later and calcitonin-guided for moderate-risk mutations",
+        "Screen for and treat pheochromocytoma before any surgery",
+        "Total thyroidectomy; add central neck dissection if calcitonin is elevated or nodes look abnormal",
+        "Levothyroxine replacement afterward; begin lifelong calcitonin surveillance",
+        "Offer cascade genetic testing to at-risk relatives"
+      ]
+    },
+    {
+      "id": "n_tx_mtc_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MTC localized",
+      "title": "Localized MTC: total thyroidectomy + central neck dissection",
+      "description": "Surgery is the only curative modality for medullary carcinoma.",
+      "path": "Thyroid / MTC / Localized",
+      "section": "Treatment",
+      "pills": ["MTC", "localized", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Total thyroidectomy with prophylactic central (level VI) neck dissection; add lateral dissection for imaging or biochemical evidence of nodal disease",
+        "Treat any pheochromocytoma FIRST if present (avoid intra-operative crisis)",
+        "Levothyroxine for replacement only - no TSH suppression, no radioiodine (C-cells are not iodine-avid or TSH-driven)",
+        "External-beam radiation for high-risk unresectable neck disease",
+        "Enter medullary surveillance (calcitonin / CEA doubling-time)"
+      ]
+    },
+    {
+      "id": "n_mtc_ret",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "MTC RET status",
+      "title": "Advanced MTC: RET status",
+      "description": "In progressive advanced medullary carcinoma, a RET alteration selects a selective RET inhibitor over a multikinase inhibitor.",
+      "path": "Thyroid / MTC / Advanced / RET",
+      "section": "Treatment",
+      "pills": ["MTC", "metastatic", "RET"],
+      "required": true,
+      "footnotes": ["c"],
+      "options": [
+        { "id": "mtc_ret_pos", "label": "RET mutation positive (germline or somatic)", "sets": { "biomarkers.RET": "positive" }, "pills": ["RET+"] },
+        { "id": "mtc_ret_neg", "label": "RET wild-type / not identified", "sets": { "biomarkers.RET": "negative" }, "pills": ["RET WT"] }
+      ]
+    },
+    {
+      "id": "n_tx_mtc_ret",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MTC RET+",
+      "title": "Advanced MTC, RET-mutant: selpercatinib",
+      "description": "RET-mutant advanced / progressive medullary carcinoma.",
+      "path": "Thyroid / MTC / Advanced / RET+",
+      "section": "Treatment",
+      "pills": ["RET+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Selpercatinib (or pralsetinib) - selective RET inhibitor, preferred first line for RET-mutant disease",
+        "Confirm the RET alteration on validated testing",
+        "Reserve for progressive or symptomatic disease; monitor LFTs, blood pressure, QT, hypersensitivity",
+        "Referenced dose protocol below"
+      ],
+      "protocolRefs": ["thyroid-medullary-selpercatinib"]
+    },
+    {
+      "id": "n_tx_mtc_mki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MTC RET WT",
+      "title": "Advanced MTC, RET wild-type: multikinase inhibitor",
+      "description": "Progressive advanced medullary carcinoma without a targetable RET alteration.",
+      "path": "Thyroid / MTC / Advanced / MKI",
+      "section": "Treatment",
+      "pills": ["RET WT", "MKI", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Cabozantinib or vandetanib (multikinase inhibitors) for progressive / symptomatic disease",
+        "No dedicated dose protocol here - shown as guidance; vandetanib requires QT / ECG monitoring, cabozantinib requires wound / GI-perforation and hemorrhage vigilance",
+        "Observe indolent, asymptomatic metastatic disease with calcitonin / CEA doubling-time",
+        "Directed local therapy and a bone-modifying agent for symptomatic or skeletal lesions",
+        "Enter medullary surveillance"
+      ]
+    },
+    {
+      "id": "n_mtc_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "MTC surveillance",
+      "title": "Medullary: surveillance",
+      "description": "Biochemical follow-up after medullary carcinoma therapy.",
+      "path": "Thyroid / MTC / Surveillance",
+      "section": "Surveillance",
+      "pills": ["MTC", "surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Serial calcitonin and CEA; a short doubling-time (< 6-12 months) predicts progression and worse survival",
+        "Neck ultrasound and cross-sectional imaging guided by calcitonin level and trend",
+        "Continue germline / familial screening and MEN2 comorbidity surveillance where relevant",
+        "Rising markers or new lesions: restage and enter the advanced medullary pathway"
+      ]
+    },
+
+    {
+      "id": "n_atc_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "ATC workup",
+      "title": "Anaplastic: emergent workup",
+      "description": "Anaplastic carcinoma is rapidly lethal and an oncologic emergency. Move fast: airway, staging, and rapid mutation testing in parallel.",
+      "path": "Thyroid / ATC / Workup",
+      "section": "Workup",
+      "pills": ["ATC", "workup"],
+      "required": true,
+      "footnotes": ["d"],
+      "bullets": [
+        { "label": "Airway assessment first", "sub": "laryngoscopy; involve airway surgery early; tracheostomy only if truly needed" },
+        { "label": "Rapid BRAF V600E testing (IHC and/or molecular) - expedite, it changes first-line therapy" },
+        { "label": "Broader NGS (NTRK, RET, MMR/MSI, PD-L1) alongside BRAF" },
+        { "label": "Whole-body staging (CT neck/chest/abdomen + brain imaging); essentially all are AJCC stage IV" },
+        { "label": "Establish goals of care early given prognosis; multidisciplinary tumor board" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_atc_resect",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "ATC resectability",
+      "title": "Anaplastic: resectability / extent (AJCC stage IV)",
+      "description": "Anaplastic disease is stratified by resectability and distant spread, which sets the local-therapy plan.",
+      "path": "Thyroid / ATC / Resectability",
+      "section": "Staging",
+      "pills": ["ATC", "stage"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Anaplastic thyroid carcinoma - AJCC stage IV substages",
+          "headers": ["Substage", "Extent"],
+          "rows": [
+            ["IVA", "Intrathyroidal, potentially resectable"],
+            ["IVB", "Gross extrathyroidal extension or nodal disease, often unresectable"],
+            ["IVC", "Distant metastases"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "atc_resectable", "label": "Resectable (IVA / selected IVB)", "sets": { "atcStage": "resectable" }, "pills": ["resectable"] },
+        { "id": "atc_unresectable", "label": "Unresectable / metastatic (IVB / IVC)", "sets": { "atcStage": "unresectable" }, "pills": ["unresectable"] }
+      ]
+    },
+    {
+      "id": "n_tx_atc_surgery",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "ATC resectable",
+      "title": "Resectable ATC: surgery + adjuvant chemoradiation",
+      "description": "Complete resection followed by adjuvant therapy in the minority with resectable disease.",
+      "path": "Thyroid / ATC / Resectable",
+      "section": "Treatment",
+      "pills": ["ATC", "resectable", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Total thyroidectomy with therapeutic neck dissection when a complete (R0/R1) resection is achievable without unacceptable morbidity",
+        "Adjuvant external-beam radiation, often concurrent with radiosensitizing chemotherapy (e.g. taxane +/- platinum)",
+        "If BRAF V600E positive, neoadjuvant dabrafenib + trametinib may convert borderline disease to resectable - see the BRAF arm",
+        "No dedicated cytotoxic protocol here for this indication - shown as guidance",
+        "Continue multidisciplinary care and goals-of-care discussion"
+      ]
+    },
+    {
+      "id": "n_atc_braf",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "ATC BRAF status",
+      "title": "Unresectable ATC: BRAF V600E status",
+      "description": "In unresectable / metastatic anaplastic disease, BRAF V600E status decides first-line systemic therapy.",
+      "path": "Thyroid / ATC / BRAF",
+      "section": "Treatment",
+      "pills": ["ATC", "biomarker", "BRAF"],
+      "required": true,
+      "footnotes": ["d"],
+      "options": [
+        { "id": "braf_mut", "label": "BRAF V600E mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
+        { "id": "braf_wt", "label": "BRAF wild-type", "sets": { "biomarkers.BRAF": "negative" }, "pills": ["BRAF WT"] }
+      ]
+    },
+    {
+      "id": "n_tx_atc_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "ATC BRAF+",
+      "title": "Unresectable ATC, BRAF V600E: dabrafenib + trametinib",
+      "description": "BRAF V600E-mutant unresectable / metastatic anaplastic thyroid carcinoma.",
+      "path": "Thyroid / ATC / BRAF+",
+      "section": "Treatment",
+      "pills": ["BRAF+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Dabrafenib + trametinib (BRAF + MEK inhibition) - rapid responses; start without delay",
+        "Consider adding an immune-checkpoint inhibitor, and reassess for surgery / radiation if a good response converts the tumor to resectable",
+        "Monitor fever (dabrafenib), skin, cardiac (LVEF), and ocular toxicity",
+        "Referenced dose protocol below"
+      ],
+      "protocolRefs": ["thyroid-anaplastic-dab-tram"]
+    },
+    {
+      "id": "n_tx_atc_wt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "ATC BRAF WT",
+      "title": "Unresectable ATC, BRAF wild-type: chemoradiation / trial / immunotherapy",
+      "description": "BRAF wild-type unresectable / metastatic anaplastic disease.",
+      "path": "Thyroid / ATC / BRAF WT",
+      "section": "Treatment",
+      "pills": ["BRAF WT", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Clinical trial is strongly preferred where available",
+        "Chase other actionable drivers on NGS: NTRK fusion (TRK inhibitor), RET fusion (selective RET inhibitor), high TMB / MSI-H (checkpoint inhibitor)",
+        "Otherwise cytotoxic chemoradiation (taxane +/- platinum) for local control, or best supportive care per goals",
+        "No dedicated cytotoxic protocol here for this indication - shown as guidance",
+        "Early palliative care and airway / symptom management"
+      ]
+    },
+
+    {
+      "id": "n_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance",
+      "description": "General follow-up entry for a previously treated patient; the cadence and markers depend on the original subtype.",
+      "path": "Thyroid / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Differentiated: thyroglobulin + antibody, neck ultrasound, dynamic response category; adjust TSH target",
+        "Medullary: calcitonin and CEA with doubling-time; imaging by level and trend",
+        "Anaplastic: short-interval clinical and cross-sectional imaging; symptom and airway monitoring",
+        "Any new biochemical or structural recurrence re-enters the matching subtype pathway"
       ]
     }
   ],
   "links": [
-    {
-      "id": "l_thy_anaplastic",
-      "from": "n_thy_type",
-      "to": "n_thy_anaplastic_braf",
-      "fromOptions": [
-        "anaplastic"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_thy_medullary",
-      "from": "n_thy_type",
-      "to": "n_thy_medullary_ret",
-      "fromOptions": [
-        "medullary"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_thy_braf_mut",
-      "from": "n_thy_anaplastic_braf",
-      "to": "n_tx_thy_anaplastic",
-      "fromOptions": [
-        "brafmut"
-      ],
-      "linkCategory": "conditional"
-    },
-    {
-      "id": "l_thy_ret_pos",
-      "from": "n_thy_medullary_ret",
-      "to": "n_tx_thy_medullary",
-      "fromOptions": [
-        "retpos"
-      ],
-      "linkCategory": "conditional"
-    }
+    { "id": "l_wk", "from": "n_workup", "to": "n_histology", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_h_dtc", "from": "n_histology", "to": "n_dtc_workup", "fromOptions": ["dtc"], "linkCategory": "conditional" },
+    { "id": "l_h_mtc", "from": "n_histology", "to": "n_mtc_workup", "fromOptions": ["medullary"], "linkCategory": "conditional" },
+    { "id": "l_h_atc", "from": "n_histology", "to": "n_atc_workup", "fromOptions": ["anaplastic"], "linkCategory": "conditional" },
+    { "id": "l_h_surv", "from": "n_histology", "to": "n_surv", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
+
+    { "id": "l_dtc_wk", "from": "n_dtc_workup", "to": "n_dtc_risk", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_dtc_micro", "from": "n_dtc_risk", "to": "n_tx_dtc_micro", "fromOptions": ["micro"], "linkCategory": "conditional" },
+    { "id": "l_dtc_locoreg", "from": "n_dtc_risk", "to": "n_tx_dtc_locoreg", "fromOptions": ["locoregional"], "linkCategory": "conditional" },
+    { "id": "l_dtc_micro_surv", "from": "n_tx_dtc_micro", "to": "n_dtc_surv", "linkCategory": "sequential" },
+    { "id": "l_dtc_locoreg_surv", "from": "n_tx_dtc_locoreg", "to": "n_dtc_surv", "linkCategory": "sequential" },
+    { "id": "l_dtc_low", "from": "n_dtc_risk", "to": "n_tx_dtc_low", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_dtc_int", "from": "n_dtc_risk", "to": "n_tx_dtc_int", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
+    { "id": "l_dtc_high", "from": "n_dtc_risk", "to": "n_tx_dtc_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_dtc_adv", "from": "n_dtc_risk", "to": "n_dtc_rai", "fromOptions": ["advanced"], "linkCategory": "conditional" },
+
+    { "id": "l_rai_avid", "from": "n_dtc_rai", "to": "n_tx_dtc_rai", "fromOptions": ["rai_avid"], "linkCategory": "conditional" },
+    { "id": "l_rai_refr", "from": "n_dtc_rai", "to": "n_dtc_refr_bio", "fromOptions": ["rai_refractory"], "linkCategory": "conditional" },
+
+    { "id": "l_refr_ntrk", "from": "n_dtc_refr_bio", "to": "n_tx_ntrk", "fromOptions": ["ntrk"], "linkCategory": "conditional" },
+    { "id": "l_refr_ret", "from": "n_dtc_refr_bio", "to": "n_tx_ret_fusion", "fromOptions": ["ret_fusion"], "linkCategory": "conditional" },
+    { "id": "l_refr_none", "from": "n_dtc_refr_bio", "to": "n_tx_dtc_mki", "fromOptions": ["no_target"], "linkCategory": "conditional" },
+
+    { "id": "l_dtc_low_surv", "from": "n_tx_dtc_low", "to": "n_dtc_surv", "linkCategory": "sequential" },
+    { "id": "l_dtc_int_surv", "from": "n_tx_dtc_int", "to": "n_dtc_surv", "linkCategory": "sequential" },
+    { "id": "l_dtc_high_surv", "from": "n_tx_dtc_high", "to": "n_dtc_surv", "linkCategory": "sequential" },
+
+    { "id": "l_mtc_wk", "from": "n_mtc_workup", "to": "n_mtc_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_mtc_proph", "from": "n_mtc_stage", "to": "n_tx_mtc_prophylactic", "fromOptions": ["mtc_prophylactic"], "linkCategory": "conditional" },
+    { "id": "l_mtc_proph_surv", "from": "n_tx_mtc_prophylactic", "to": "n_mtc_surv", "linkCategory": "sequential" },
+    { "id": "l_mtc_local", "from": "n_mtc_stage", "to": "n_tx_mtc_local", "fromOptions": ["mtc_local"], "linkCategory": "conditional" },
+    { "id": "l_mtc_adv", "from": "n_mtc_stage", "to": "n_mtc_ret", "fromOptions": ["mtc_advanced"], "linkCategory": "conditional" },
+    { "id": "l_mtc_ret_pos", "from": "n_mtc_ret", "to": "n_tx_mtc_ret", "fromOptions": ["mtc_ret_pos"], "linkCategory": "conditional" },
+    { "id": "l_mtc_ret_neg", "from": "n_mtc_ret", "to": "n_tx_mtc_mki", "fromOptions": ["mtc_ret_neg"], "linkCategory": "conditional" },
+    { "id": "l_mtc_local_surv", "from": "n_tx_mtc_local", "to": "n_mtc_surv", "linkCategory": "sequential" },
+
+    { "id": "l_atc_wk", "from": "n_atc_workup", "to": "n_atc_resect", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_atc_resect", "from": "n_atc_resect", "to": "n_tx_atc_surgery", "fromOptions": ["atc_resectable"], "linkCategory": "conditional" },
+    { "id": "l_atc_unresect", "from": "n_atc_resect", "to": "n_atc_braf", "fromOptions": ["atc_unresectable"], "linkCategory": "conditional" },
+    { "id": "l_atc_braf_mut", "from": "n_atc_braf", "to": "n_tx_atc_braf", "fromOptions": ["braf_mut"], "linkCategory": "conditional" },
+    { "id": "l_atc_braf_wt", "from": "n_atc_braf", "to": "n_tx_atc_wt", "fromOptions": ["braf_wt"], "linkCategory": "conditional" }
   ]
 }

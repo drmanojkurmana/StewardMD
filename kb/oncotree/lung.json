@@ -2,278 +2,737 @@
   "guideline": "lung",
   "title": "Lung Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "neoplasms_of_the_lung",
+  "navigatorVersion": "2.0.0",
+  "diseaseId": "lung_cancer",
   "matchDisease": false,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for lung cancer (NSCLC, SCLC, malignant pleural mesothelioma). Nodes capture the physician-entered phenotype (histology, clinical scenario/stage, and for metastatic NSCLC the actionable driver then PD-L1) and route to APPLICABLE existing StewardMD Standard Protocols by reference. Histology (squamous vs non-squamous) is matched so pemetrexed-based regimens are not surfaced for squamous disease. Driver hierarchy (EGFR/ALK before PD-L1/chemo-immunotherapy) is encoded structurally. matchDisease is false because the existing lung protocols carry drifted diseaseId tags (nsclc vs neoplasms_of_the_lung); the per-node protocolRefs are the authoritative scope. The navigator invents no dose, no regimen, and no eligibility criterion. Structural pathway consistent with Standard Guidelines (NCCN) NSCLC/SCLC/Mesothelioma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), NSCLC / SCLC / Mesothelioma. Treatment options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_lh"],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full lung pathway by histology: NSCLC (workup -> clinical stage -> stage/driver/PD-L1/line-directed treatment -> surveillance -> recurrent/metastatic), small cell lung cancer (limited vs extensive vs relapsed), and malignant pleural mesothelioma (resectable vs advanced by histology). Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; targeted agents and surgery/radiation without a dose protocol are shown as checklist guidance with NO dose. Workup/staging/biomarker content is original wording, not proprietary guideline text. Invents no dose/regimen/eligibility criterion. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with standard guidelines (NCCN/DeVita/Harrison), NSCLC / SCLC / Mesothelioma. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "startNodeIds": ["n_histology"],
+  "footnotes": {
+    "a": {
+      "text": "Test EGFR, ALK, ROS1, BRAF V600E, KRAS G12C, MET exon-14, RET, NTRK and PD-L1 on every advanced non-squamous NSCLC (and never-smoker / young squamous). An actionable driver takes priority over first-line immunotherapy; do not start a checkpoint inhibitor while molecular results are pending if a targetable driver is plausible.",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "After definitive concurrent chemoradiation for unresectable stage III without progression, durvalumab consolidation improves progression-free and overall survival; PD-L1 >= 1% derives the greatest benefit in most regulatory labels.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "For resected EGFR-mutant stage IB-IIIA NSCLC, adjuvant osimertinib prolongs disease-free survival; give after any indicated adjuvant chemotherapy.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "In SCLC consider prophylactic cranial irradiation or MRI surveillance after response; add consolidative thoracic radiation in selected extensive-stage responders. Brain imaging is part of staging for all SCLC.",
+      "evidence": "2A"
+    }
+  },
   "nodes": [
     {
-      "id": "n_lh",
-      "linkId": "lung_histology",
+      "id": "n_histology",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
       "name": "Histology",
       "title": "Confirmed histology",
-      "description": "Histology drives the entire lung pathway: NSCLC subtype (squamous vs non-squamous) changes the chemotherapy backbone; small-cell and mesothelioma follow distinct pathways.",
-      "path": "Lung / Diagnosis / Histology",
-      "section": "Diagnosis",
-      "pills": ["diagnosis", "pathology"],
+      "section": "Contents",
+      "description": "Lung cancer branches first by histology. Small cell and mesothelioma follow distinct pathways; within NSCLC, squamous vs non-squamous changes the chemotherapy backbone (pemetrexed is non-squamous only).",
+      "path": "Lung / Type",
+      "pills": ["type", "pathology"],
       "required": true,
-      "phenotypeKey": "histology",
+      "bullets": [
+        "NSCLC - non-squamous (adenocarcinoma / large cell): full molecular panel",
+        "NSCLC - squamous cell carcinoma",
+        "Small cell lung cancer (SCLC)",
+        "Malignant pleural mesothelioma"
+      ],
       "options": [
-        { "id": "nsq", "label": "NSCLC - non-squamous (adenocarcinoma / large cell)", "setsValue": "non-squamous", "pills": ["NSCLC", "non-sq"] },
-        { "id": "sq", "label": "NSCLC - squamous cell carcinoma", "setsValue": "squamous", "pills": ["NSCLC", "squamous"] },
-        { "id": "sclc", "label": "Small cell lung cancer (SCLC)", "setsValue": "small cell", "pills": ["SCLC"] },
-        { "id": "meso", "label": "Malignant pleural mesothelioma", "setsValue": "mesothelioma", "pills": ["mesothelioma"] },
-        { "id": "other", "label": "Other / not yet confirmed", "setsValue": null }
+        { "id": "nonsq", "label": "NSCLC - non-squamous (adenocarcinoma / large cell)", "sets": { "histology": "non-squamous" }, "pills": ["NSCLC", "non-sq"] },
+        { "id": "sq", "label": "NSCLC - squamous cell carcinoma", "sets": { "histology": "squamous" }, "pills": ["NSCLC", "squamous"] },
+        { "id": "sclc", "label": "Small cell lung cancer (SCLC)", "sets": { "histology": "small-cell" }, "pills": ["SCLC"] },
+        { "id": "meso", "label": "Malignant pleural mesothelioma", "sets": { "histology": "mesothelioma" }, "pills": ["mesothelioma"] }
       ]
     },
     {
-      "id": "n_lnsclc_scenario",
-      "linkId": "nsclc_scenario",
-      "nodeCategory": "treatment",
+      "id": "n_nsclc_workup",
+      "nodeCategory": "workup",
       "nodeType": "question",
-      "template": "main",
-      "name": "Clinical scenario",
-      "title": "NSCLC clinical scenario",
-      "description": "Select the clinical scenario. Resectable early-stage and unresectable stage III are curative-intent; metastatic disease is palliative and driven by molecular testing.",
-      "path": "Lung / NSCLC / Scenario",
+      "name": "NSCLC workup",
+      "title": "NSCLC: workup and staging studies",
+      "section": "Workup",
+      "description": "Establish tissue diagnosis, molecular profile and accurate stage before committing to a curative or palliative track.",
+      "path": "Lung / NSCLC / Workup",
+      "pills": ["NSCLC", "workup"],
+      "required": true,
+      "footnotes": ["a"],
+      "bullets": [
+        "History, physical, smoking and performance status; weight and comorbidity review",
+        "Contrast CT chest/upper abdomen; PET-CT for candidates for curative therapy",
+        "Brain MRI for stage II or higher, or any neurologic symptom",
+        "Pathologic mediastinal staging (EBUS +/- mediastinoscopy) when it changes management",
+        { "label": "Molecular panel on non-squamous (and selected squamous)", "sub": "EGFR, ALK, ROS1, BRAF, KRAS G12C, MET exon-14, RET, NTRK plus PD-L1 TPS" },
+        "Pulmonary function tests before resection or definitive radiation"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_nsclc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "NSCLC clinical stage",
+      "title": "NSCLC: clinical stage / resectability",
       "section": "Staging",
-      "pills": ["stage", "setting"],
+      "description": "Select the clinical scenario. Early-stage and resectable locally advanced disease are curative-intent; unresectable stage III is chemoradiation with consolidation; stage IV is molecularly driven palliative therapy.",
+      "path": "Lung / NSCLC / Stage",
+      "pills": ["NSCLC", "stage"],
       "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "NSCLC stage groups (simplified) and default track",
+          "headers": ["Stage", "Rough TNM", "Primary track"],
+          "rows": [
+            ["I", "T1-2a N0 M0", "Surgery (lobectomy) or SBRT if inoperable"],
+            ["II", "T1-2 N1 or T3 N0 M0", "Surgery + perioperative systemic therapy"],
+            ["IIIA/B resectable", "T3-4 N1 or selected N2, M0", "Perioperative chemo-immunotherapy around surgery"],
+            ["III unresectable", "Bulky/multistation N2-3, M0", "Concurrent chemoradiation + durvalumab"],
+            ["IV", "M1a/b/c (effusion, distant, brain)", "Molecular + PD-L1 directed systemic therapy"]
+          ]
+        }
+      ],
       "options": [
-        { "id": "resectable", "label": "Resectable early-stage (II-III) - peri-operative chemotherapy", "sets": { "setting": "adjuvant", "intent": "curative" } },
-        { "id": "unresectable3", "label": "Unresectable stage III - definitive chemoradiation", "sets": { "intent": "curative", "stage": "III" } },
-        { "id": "metastatic", "label": "Advanced / metastatic (stage IV)", "sets": { "setting": "metastatic", "intent": "palliative", "stage": "IV" } }
+        { "id": "early", "label": "Stage I (early, node-negative)", "sets": { "stage": "I", "intent": "curative" }, "pills": ["stage I"] },
+        { "id": "resectable", "label": "Resectable stage II-IIIA (perioperative therapy)", "sets": { "stage": "II-III", "intent": "curative" }, "pills": ["resectable"] },
+        { "id": "unresectable3", "label": "Unresectable stage III (chemoradiation)", "sets": { "stage": "III", "intent": "curative" }, "pills": ["stage III unres"] },
+        { "id": "metastatic", "label": "Advanced / metastatic (stage IV)", "sets": { "stage": "IV", "intent": "palliative" }, "pills": ["stage IV"] }
       ]
     },
     {
-      "id": "n_ldriver",
-      "linkId": "nsclc_driver",
-      "nodeCategory": "criteria",
-      "nodeType": "question",
-      "template": "main",
-      "name": "Actionable driver",
-      "title": "Actionable molecular driver",
-      "description": "In metastatic NSCLC, test for actionable drivers before immunotherapy/chemotherapy. An EGFR sensitizing mutation or ALK rearrangement directs targeted therapy first.",
-      "path": "Lung / NSCLC / Driver",
-      "section": "Biomarkers",
-      "pills": ["biomarker", "EGFR", "ALK"],
-      "required": true,
-      "options": [
-        { "id": "egfr", "label": "EGFR sensitizing mutation (exon 19 del / L858R)", "sets": { "biomarkers.EGFR": "positive" }, "pills": ["EGFR+"] },
-        { "id": "alk", "label": "ALK rearrangement (fusion)", "sets": { "biomarkers.ALK": "positive" }, "pills": ["ALK+"] },
-        { "id": "none", "label": "No actionable driver (EGFR/ALK wild-type)", "setsValue": null, "pills": ["driver-neg"] }
-      ]
-    },
-    {
-      "id": "n_lpdl1",
-      "linkId": "nsclc_pdl1",
-      "nodeCategory": "criteria",
-      "nodeType": "question",
-      "template": "main",
-      "name": "PD-L1 expression",
-      "title": "PD-L1 tumour proportion score",
-      "description": "For driver-negative metastatic NSCLC, PD-L1 expression guides single-agent immunotherapy vs chemo-immunotherapy.",
-      "path": "Lung / NSCLC / PD-L1",
-      "section": "Biomarkers",
-      "pills": ["biomarker", "PD-L1"],
-      "required": true,
-      "phenotypeKey": "biomarkers.PD_L1",
-      "options": [
-        { "id": "high", "label": "High (TPS >= 50%)", "setsValue": "high", "pills": ["TPS>=50"] },
-        { "id": "lowneg", "label": "Low / negative (TPS < 50%)", "setsValue": "low", "pills": ["TPS<50"] }
-      ]
+      "id": "n_tx_nsclc_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Stage I NSCLC",
+      "title": "Stage I NSCLC: surgery or SBRT",
+      "section": "Treatment",
+      "description": "Curative local therapy; systemic therapy is generally not required at true stage I.",
+      "path": "Lung / NSCLC / Stage I",
+      "pills": ["NSCLC", "curative", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Lobectomy with mediastinal nodal sampling/dissection is the standard; sublobar resection for small peripheral tumors or limited reserve",
+        "Stereotactic body radiation (SBRT) for medically inoperable or patient-declined surgery",
+        "Adjuvant chemotherapy generally not indicated for stage IA; consider for high-risk resected IB",
+        "Adjuvant osimertinib if a resected tumor is EGFR-mutant (see footnote)"
+      ],
+      "footnotes": ["c"]
     },
     {
       "id": "n_tx_nsclc_resectable",
-      "linkId": "tx_nsclc_resectable",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Resectable NSCLC chemotherapy",
-      "title": "Resectable NSCLC: platinum-doublet chemotherapy",
-      "description": "Peri-operative platinum-doublet chemotherapy, matched to histology (pemetrexed only in non-squamous). Physician selects; the existing dose engine computes doses.",
-      "path": "Lung / NSCLC / Resectable",
+      "name": "Resectable II-III NSCLC",
+      "title": "Resectable stage II-IIIA NSCLC: perioperative therapy",
       "section": "Treatment",
+      "description": "Surgery combined with perioperative platinum-doublet chemotherapy plus immunotherapy; adjuvant targeted therapy for a driver mutation. Backbone matches histology.",
+      "path": "Lung / NSCLC / Resectable",
       "pills": ["NSCLC", "curative", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["lung-cis-pemetrexed", "lung-carbo-pemetrexed", "lung-cis-gemcitabine", "lung-carbo-paclitaxel"]
+      "evidenceCategory": ["1"],
+      "footnotes": ["a", "c"],
+      "bullets": [
+        "Neoadjuvant platinum-doublet + a checkpoint inhibitor, then surgery (or adjuvant chemo +/- immunotherapy after upfront resection)",
+        "Pemetrexed doublet only for non-squamous; use a gemcitabine or paclitaxel doublet for squamous",
+        "Adjuvant osimertinib for resected EGFR-mutant disease; adjuvant alectinib for resected ALK-positive disease",
+        "Withhold perioperative immunotherapy when a targetable EGFR/ALK driver is present",
+        "Chemotherapy regimens referenced below"
+      ],
+      "protocolRefs": ["lung-cis-pemetrexed", "lung-carbo-pemetrexed", "lung-cis-gemcitabine", "lung-carbo-paclitaxel", "lung-osimertinib"]
     },
     {
       "id": "n_tx_nsclc_stage3",
-      "linkId": "tx_nsclc_stage3",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Unresectable stage III NSCLC",
-      "title": "Unresectable stage III: chemoradiation + consolidation",
-      "description": "Definitive concurrent platinum-doublet chemoradiation, followed by durvalumab consolidation in non-progressors. Histology matches the chemotherapy backbone. Physician selects.",
-      "path": "Lung / NSCLC / Stage III",
+      "name": "Unresectable III NSCLC",
+      "title": "Unresectable stage III NSCLC: chemoradiation + durvalumab",
       "section": "Treatment",
+      "description": "Definitive concurrent platinum-doublet chemoradiation, then durvalumab consolidation in non-progressors. Backbone matches histology.",
+      "path": "Lung / NSCLC / Stage III",
       "pills": ["NSCLC", "curative", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Concurrent platinum-doublet chemotherapy with thoracic radiation (60 Gy in conventional fractionation)",
+        "Pemetrexed doublet only for non-squamous; gemcitabine or paclitaxel doublet for squamous",
+        "Durvalumab consolidation for up to 1 year in patients without progression after chemoradiation",
+        "Reassess for targeted therapy if an EGFR/ALK driver is found (consolidation immunotherapy less favored)",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["lung-durvalumab-consolidation", "lung-cis-pemetrexed", "lung-carbo-pemetrexed", "lung-cis-gemcitabine", "lung-carbo-paclitaxel"]
     },
     {
-      "id": "n_tx_nsclc_egfr",
-      "linkId": "tx_nsclc_egfr",
+      "id": "n_nsclc_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Actionable driver",
+      "title": "Metastatic NSCLC: actionable molecular driver",
+      "section": "Biomarkers",
+      "description": "In stage IV (or recurrent) NSCLC, an actionable driver directs first-line targeted therapy and takes priority over immunotherapy. Choose the dominant driver; if none, proceed to PD-L1.",
+      "path": "Lung / NSCLC / Driver",
+      "pills": ["biomarker", "driver"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "tables": [
+        {
+          "title": "Actionable drivers in metastatic NSCLC and preferred first-line targeted agent",
+          "headers": ["Driver", "Typical prevalence (adeno)", "Preferred first-line agent(s)"],
+          "rows": [
+            ["EGFR exon 19del / L858R", "~15% (higher in never-smokers)", "Osimertinib"],
+            ["ALK fusion", "~4%", "Alectinib / brigatinib / lorlatinib"],
+            ["ROS1 fusion", "~1-2%", "Entrectinib / repotrectinib / crizotinib"],
+            ["BRAF V600E", "~2%", "Dabrafenib + trametinib / encorafenib + binimetinib"],
+            ["KRAS G12C", "~13%", "Sotorasib / adagrasib (after prior therapy)"],
+            ["MET exon-14 skip", "~3%", "Capmatinib / tepotinib"],
+            ["RET fusion", "~1-2%", "Selpercatinib / pralsetinib"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "egfr", "label": "EGFR sensitizing mutation (exon 19del / L858R)", "sets": { "biomarkers.EGFR": "positive" }, "pills": ["EGFR+"] },
+        { "id": "alk", "label": "ALK rearrangement", "sets": { "biomarkers.ALK": "positive" }, "pills": ["ALK+"] },
+        { "id": "ros1", "label": "ROS1 fusion", "sets": { "biomarkers.ROS1": "positive" }, "pills": ["ROS1+"] },
+        { "id": "braf", "label": "BRAF V600E mutation", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
+        { "id": "kras", "label": "KRAS G12C mutation", "sets": { "biomarkers.KRAS": "G12C" }, "pills": ["KRAS G12C"] },
+        { "id": "met", "label": "MET exon-14 skipping", "sets": { "biomarkers.MET": "positive" }, "pills": ["MET ex14"] },
+        { "id": "ret", "label": "RET fusion", "sets": { "biomarkers.RET": "positive" }, "pills": ["RET+"] },
+        { "id": "none", "label": "No actionable driver", "setsValue": null, "pills": ["driver-neg"] }
+      ]
+    },
+    {
+      "id": "n_egfr_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "EGFR line of therapy",
+      "title": "EGFR-mutant metastatic NSCLC: line of therapy",
+      "section": "Treatment",
+      "description": "First-line uses a third-generation EGFR TKI. On progression, re-biopsy (tissue or plasma) to define resistance and switch to chemotherapy-based therapy.",
+      "path": "Lung / NSCLC / EGFR / Line",
+      "pills": ["EGFR+", "sequencing"],
+      "required": true,
+      "options": [
+        { "id": "firstline", "label": "First line (treatment-naive)", "sets": { "line": "first" }, "pills": ["1st line"] },
+        { "id": "progressed", "label": "Progressed on an EGFR TKI", "sets": { "line": "progressed" }, "pills": ["post-TKI"] }
+      ]
+    },
+    {
+      "id": "n_tx_egfr_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "EGFR-targeted therapy",
-      "title": "EGFR-mutant metastatic NSCLC: targeted therapy",
-      "description": "EGFR sensitizing mutation - a first-line EGFR tyrosine-kinase inhibitor is preferred over chemotherapy or immunotherapy. Physician selects.",
-      "path": "Lung / NSCLC / EGFR",
+      "name": "EGFR first line",
+      "title": "EGFR-mutant metastatic NSCLC: first-line TKI",
       "section": "Treatment",
+      "description": "A third-generation EGFR TKI is preferred over chemotherapy or immunotherapy first line.",
+      "path": "Lung / NSCLC / EGFR / 1L",
       "pills": ["EGFR+", "targeted", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Osimertinib is the preferred first-line agent (CNS activity, favorable tolerability)",
+        "Consider adding chemotherapy or amivantamab-based combinations for higher-risk disease per current labels",
+        "Do not use single-agent immunotherapy in EGFR-mutant disease (low benefit, added toxicity with sequential TKI)",
+        "Regimen referenced below"
+      ],
       "protocolRefs": ["lung-osimertinib"]
     },
     {
-      "id": "n_tx_nsclc_alk",
-      "linkId": "tx_nsclc_alk",
+      "id": "n_tx_egfr_prog",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "ALK-targeted therapy",
-      "title": "ALK-rearranged metastatic NSCLC: targeted therapy",
-      "description": "ALK rearrangement - a first-line ALK tyrosine-kinase inhibitor is preferred over chemotherapy or immunotherapy. Physician selects.",
-      "path": "Lung / NSCLC / ALK",
+      "name": "EGFR post-TKI",
+      "title": "EGFR-mutant NSCLC: after TKI progression",
       "section": "Treatment",
+      "description": "Re-biopsy to define resistance; most patients transition to platinum-doublet chemotherapy.",
+      "path": "Lung / NSCLC / EGFR / post-TKI",
+      "pills": ["EGFR+", "post-TKI", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Re-test (tissue or plasma) for resistance mechanisms and histologic transformation (small-cell/squamous)",
+        "Platinum-pemetrexed chemotherapy is the usual next step (non-squamous); consider adding a VEGF pathway or antibody-drug conjugate per current data",
+        "Osimertinib remains appropriate if progression occurred on an earlier-generation TKI with acquired T790M",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["lung-carbo-pemetrexed", "lung-cis-pemetrexed"]
+    },
+    {
+      "id": "n_tx_alk",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "ALK-positive",
+      "title": "ALK-rearranged metastatic NSCLC: targeted therapy",
+      "section": "Treatment",
+      "description": "A next-generation ALK TKI is preferred first line over chemotherapy or immunotherapy.",
+      "path": "Lung / NSCLC / ALK",
       "pills": ["ALK+", "targeted", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Preferred first-line: alectinib, brigatinib, or lorlatinib (strong CNS penetration)",
+        "On progression, switch to an alternative next-generation ALK TKI guided by resistance mutation, then platinum-pemetrexed chemotherapy",
+        "Avoid single-agent immunotherapy in ALK-positive disease",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["lung-alectinib", "lung-alk-tki-other"]
     },
     {
-      "id": "n_tx_nsclc_iohigh",
-      "linkId": "tx_nsclc_iohigh",
+      "id": "n_tx_ros1",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "PD-L1-high immunotherapy",
-      "title": "Driver-negative, PD-L1 high: immunotherapy options",
-      "description": "Driver-negative metastatic NSCLC with PD-L1 TPS >= 50%: single-agent pembrolizumab is a preferred option (listed first); chemo-immunotherapy and platinum doublets are also applicable, matched to histology. Physician selects.",
-      "path": "Lung / NSCLC / PD-L1 high",
+      "name": "ROS1-positive",
+      "title": "ROS1-rearranged metastatic NSCLC: targeted therapy",
       "section": "Treatment",
-      "pills": ["driver-neg", "PD-L1 high", "treatment"],
+      "description": "A ROS1 TKI is preferred first line. No dedicated dose protocol here yet; regimen shown as guidance.",
+      "path": "Lung / NSCLC / ROS1",
+      "pills": ["ROS1+", "targeted", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["lung-pembro-mono", "lung-keynote189", "lung-keynote407", "lung-carbo-pemetrexed", "lung-cis-pemetrexed", "lung-carbo-paclitaxel", "lung-cis-gemcitabine"]
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Preferred first-line: entrectinib or repotrectinib (CNS-active); crizotinib is an alternative without CNS disease",
+        "On progression: switch ROS1 TKI by resistance profile, then platinum-pemetrexed chemotherapy (non-squamous)",
+        "No StewardMD dose protocol for ROS1 TKIs at present - prescribe per current label / dose engine"
+      ]
     },
     {
-      "id": "n_tx_nsclc_chemoio",
-      "linkId": "tx_nsclc_chemoio",
+      "id": "n_tx_braf",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Chemo-immunotherapy",
-      "title": "Driver-negative, PD-L1 low: chemo-immunotherapy",
-      "description": "Driver-negative metastatic NSCLC with PD-L1 TPS < 50%: platinum chemo-immunotherapy, matched to histology (KEYNOTE-189 non-squamous, KEYNOTE-407 squamous). Physician selects.",
-      "path": "Lung / NSCLC / Chemo-IO",
+      "name": "BRAF V600E",
+      "title": "BRAF V600E metastatic NSCLC: targeted therapy",
       "section": "Treatment",
+      "description": "Combined BRAF + MEK inhibition. No dedicated dose protocol here yet; regimen shown as guidance.",
+      "path": "Lung / NSCLC / BRAF",
+      "pills": ["BRAF+", "targeted", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Dabrafenib + trametinib, or encorafenib + binimetinib, for BRAF V600E disease",
+        "Chemo-immunotherapy is an alternative if targeted therapy is not tolerated",
+        "No StewardMD dose protocol for these combinations at present - prescribe per current label"
+      ]
+    },
+    {
+      "id": "n_tx_kras",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "KRAS G12C",
+      "title": "KRAS G12C metastatic NSCLC: therapy",
+      "section": "Treatment",
+      "description": "First line is usually chemo-immunotherapy; a KRAS G12C inhibitor is used after prior therapy. No dedicated dose protocol here yet.",
+      "path": "Lung / NSCLC / KRAS",
+      "pills": ["KRAS G12C", "targeted", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "First line: standard PD-L1 / chemo-immunotherapy (KRAS is not yet a first-line target)",
+        "After progression: sotorasib or adagrasib (KRAS G12C inhibitors)",
+        "No StewardMD dose protocol for KRAS G12C inhibitors at present - prescribe per current label"
+      ]
+    },
+    {
+      "id": "n_tx_met",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MET exon-14",
+      "title": "MET exon-14 skipping metastatic NSCLC: targeted therapy",
+      "section": "Treatment",
+      "description": "A MET inhibitor is preferred. No dedicated dose protocol here yet; regimen shown as guidance.",
+      "path": "Lung / NSCLC / MET",
+      "pills": ["MET ex14", "targeted", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Capmatinib or tepotinib for MET exon-14 skipping alterations",
+        "Chemo-immunotherapy is an alternative first line if a MET inhibitor is unavailable",
+        "No StewardMD dose protocol for MET inhibitors at present - prescribe per current label"
+      ]
+    },
+    {
+      "id": "n_tx_ret",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RET fusion",
+      "title": "RET-rearranged metastatic NSCLC: targeted therapy",
+      "section": "Treatment",
+      "description": "A selective RET inhibitor is preferred. No dedicated dose protocol here yet; regimen shown as guidance.",
+      "path": "Lung / NSCLC / RET",
+      "pills": ["RET+", "targeted", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Selpercatinib or pralsetinib for RET fusion-positive disease",
+        "Chemo-immunotherapy is an alternative if a RET inhibitor is not tolerated",
+        "No StewardMD dose protocol for RET inhibitors at present - prescribe per current label"
+      ]
+    },
+    {
+      "id": "n_nsclc_pdl1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "PD-L1 expression",
+      "title": "Driver-negative metastatic NSCLC: PD-L1 tumor proportion score",
+      "section": "Biomarkers",
+      "description": "For driver-negative disease, PD-L1 expression guides single-agent immunotherapy vs chemo-immunotherapy.",
+      "path": "Lung / NSCLC / PD-L1",
+      "pills": ["biomarker", "PD-L1"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "options": [
+        { "id": "high", "label": "High (TPS >= 50%)", "sets": { "biomarkers.PD_L1": "high" }, "pills": ["TPS>=50"] },
+        { "id": "lowneg", "label": "Low / negative (TPS < 50%)", "sets": { "biomarkers.PD_L1": "low" }, "pills": ["TPS<50"] }
+      ]
+    },
+    {
+      "id": "n_tx_io_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "PD-L1-high IO",
+      "title": "Driver-negative, PD-L1 >= 50%: immunotherapy",
+      "section": "Treatment",
+      "description": "Single-agent pembrolizumab is a preferred option; chemo-immunotherapy is an alternative, matched to histology.",
+      "path": "Lung / NSCLC / PD-L1 high",
+      "pills": ["driver-neg", "PD-L1 high", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Single-agent pembrolizumab (preferred for high PD-L1, good performance status)",
+        "Platinum chemo-immunotherapy is a reasonable alternative, especially for bulky/symptomatic disease",
+        "Match the chemotherapy backbone to histology (pemetrexed non-squamous only)",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": ["lung-pembro-mono", "lung-keynote189", "lung-keynote407"]
+    },
+    {
+      "id": "n_tx_chemoio",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Chemo-immunotherapy",
+      "title": "Driver-negative, PD-L1 < 50%: chemo-immunotherapy",
+      "section": "Treatment",
+      "description": "Platinum chemo-immunotherapy, matched to histology (pembrolizumab + pemetrexed-platinum for non-squamous; pembrolizumab + carboplatin-taxane for squamous).",
+      "path": "Lung / NSCLC / Chemo-IO",
       "pills": ["driver-neg", "PD-L1 low", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Non-squamous: pembrolizumab + platinum + pemetrexed",
+        "Squamous: pembrolizumab + carboplatin + a taxane",
+        "Chemotherapy alone if immunotherapy is contraindicated",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["lung-keynote189", "lung-keynote407", "lung-carbo-pemetrexed", "lung-cis-pemetrexed", "lung-carbo-paclitaxel", "lung-cis-gemcitabine"]
     },
     {
-      "id": "n_lsclc_stage",
-      "linkId": "sclc_stage",
+      "id": "n_nsclc_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "NSCLC surveillance",
+      "title": "NSCLC: surveillance after curative-intent therapy",
+      "section": "Surveillance",
+      "description": "Follow-up after curative resection or chemoradiation; investigate new symptoms promptly.",
+      "path": "Lung / NSCLC / Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "History, physical and contrast CT chest every 6 months for 2-3 years, then annually (annual low-dose CT long-term)",
+        "Smoking cessation support at every visit",
+        "No routine brain MRI or PET in asymptomatic patients; image on symptoms",
+        "Biopsy suspected recurrence and re-profile molecular markers"
+      ],
+      "linkTo": "n_nsclc_biomarker",
+      "linkLabel": "If recurrence / metastatic disease: enter the driver-directed metastatic pathway"
+    },
+    {
+      "id": "n_sclc_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "SCLC workup",
+      "title": "SCLC: workup and staging",
+      "section": "Workup",
+      "description": "Small cell lung cancer is aggressive and usually disseminated; complete staging including brain imaging drives the limited vs extensive decision.",
+      "path": "Lung / SCLC / Workup",
+      "pills": ["SCLC", "workup"],
+      "required": true,
+      "footnotes": ["d"],
+      "bullets": [
+        "History, physical, performance status; paraneoplastic review (SIADH, Cushing, LEMS)",
+        "Contrast CT chest/abdomen/pelvis and PET-CT",
+        "Brain MRI (or CT) for all patients - CNS involvement is common",
+        "Bloods including LDH, sodium and marrow-reserve assessment before chemotherapy"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_sclc_stage",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
       "name": "SCLC stage",
-      "title": "SCLC stage",
-      "description": "Small cell lung cancer stage guides therapy: limited-stage (chemoradiation-eligible) vs extensive-stage (chemo-immunotherapy) vs relapsed.",
-      "path": "Lung / SCLC / Stage",
+      "title": "SCLC: stage",
       "section": "Staging",
+      "description": "Limited-stage disease fits a tolerable radiation field and is treated with concurrent chemoradiation; extensive-stage adds immunotherapy to chemotherapy; relapse follows a distinct track.",
+      "path": "Lung / SCLC / Stage",
       "pills": ["SCLC", "stage"],
       "required": true,
-      "phenotypeKey": "stage",
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "SCLC stage and default approach",
+          "headers": ["Stage", "Definition", "Approach"],
+          "rows": [
+            ["Limited", "Confined to one hemithorax / a safe RT field (roughly I-III)", "Concurrent platinum-etoposide + thoracic RT +/- PCI"],
+            ["Extensive", "Beyond a tolerable RT field / distant metastases (IV)", "Platinum-etoposide + a checkpoint inhibitor"],
+            ["Relapsed", "Progression after first-line therapy", "Second-line chemotherapy by treatment-free interval"]
+          ]
+        }
+      ],
       "options": [
-        { "id": "ls", "label": "Limited-stage", "setsValue": "limited-stage", "pills": ["LS-SCLC"] },
-        { "id": "es", "label": "Extensive-stage", "setsValue": "extensive-stage", "pills": ["ES-SCLC"] },
-        { "id": "relapsed", "label": "Relapsed / subsequent line", "setsValue": "relapsed", "pills": ["relapsed"] }
+        { "id": "ls", "label": "Limited-stage", "sets": { "stage": "limited" }, "pills": ["LS-SCLC"] },
+        { "id": "es", "label": "Extensive-stage", "sets": { "stage": "extensive" }, "pills": ["ES-SCLC"] },
+        { "id": "relapsed", "label": "Relapsed / subsequent line", "sets": { "stage": "relapsed" }, "pills": ["relapsed"] }
       ]
     },
     {
       "id": "n_tx_sclc_ls",
-      "linkId": "tx_sclc_ls",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
       "name": "Limited-stage SCLC",
-      "title": "Limited-stage SCLC: platinum-etoposide",
-      "description": "Platinum-etoposide chemotherapy, given with concurrent thoracic radiotherapy in limited-stage disease. Physician selects.",
-      "path": "Lung / SCLC / Limited",
+      "title": "Limited-stage SCLC: chemoradiation",
       "section": "Treatment",
-      "pills": ["SCLC", "treatment"],
+      "description": "Platinum-etoposide with concurrent thoracic radiation; consider prophylactic cranial irradiation in responders.",
+      "path": "Lung / SCLC / Limited",
+      "pills": ["SCLC", "curative", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Cisplatin (or carboplatin) + etoposide for 4 cycles",
+        "Concurrent thoracic radiotherapy started early (twice-daily or high-dose once-daily)",
+        "Prophylactic cranial irradiation for responders after chemoradiation",
+        "Regimen referenced below"
+      ],
       "protocolRefs": ["sclc-platinum-etoposide"]
     },
     {
       "id": "n_tx_sclc_es",
-      "linkId": "tx_sclc_es",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
       "name": "Extensive-stage SCLC",
-      "title": "Extensive-stage SCLC: platinum-etoposide + immunotherapy",
-      "description": "Platinum-etoposide with an added checkpoint inhibitor (atezolizumab or durvalumab) in extensive-stage disease. Physician selects.",
-      "path": "Lung / SCLC / Extensive",
+      "title": "Extensive-stage SCLC: chemo-immunotherapy",
       "section": "Treatment",
+      "description": "Platinum-etoposide with an added checkpoint inhibitor (atezolizumab or durvalumab), continued as maintenance.",
+      "path": "Lung / SCLC / Extensive",
       "pills": ["SCLC", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Carboplatin + etoposide + atezolizumab, or platinum-etoposide + durvalumab, then immunotherapy maintenance",
+        "Consider consolidative thoracic radiation in selected responders and PCI or MRI surveillance for the brain",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["sclc-platinum-etoposide", "sclc-atezolizumab", "sclc-durvalumab"]
     },
     {
-      "id": "n_tx_sclc_relapsed",
-      "linkId": "tx_sclc_relapsed",
+      "id": "n_tx_sclc_relapse",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
       "name": "Relapsed SCLC",
-      "title": "Relapsed SCLC: subsequent-line therapy",
-      "description": "Subsequent-line therapy for relapsed small cell lung cancer. Physician selects.",
+      "title": "Relapsed SCLC: second-line therapy",
+      "section": "Recurrence",
+      "description": "Second-line therapy guided by the interval since first-line platinum.",
       "path": "Lung / SCLC / Relapsed",
-      "section": "Treatment",
       "pills": ["SCLC", "relapsed", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Platinum-sensitive relapse (>= ~6 months): re-challenge with platinum-etoposide",
+        "Platinum-resistant relapse: topotecan, lurbinectedin, or a taxane / other single agent",
+        "Best supportive care for poor performance status",
+        "Regimen referenced below"
+      ],
       "protocolRefs": ["sclc-topotecan"]
     },
     {
-      "id": "n_tx_meso",
-      "linkId": "tx_meso",
+      "id": "n_sclc_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "SCLC surveillance",
+      "title": "SCLC: surveillance after therapy",
+      "section": "Surveillance",
+      "description": "Frequent follow-up given the high relapse rate; act quickly on progression.",
+      "path": "Lung / SCLC / Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "History, physical and CT imaging every 2-3 months in year 1, lengthening thereafter",
+        "Brain MRI surveillance if PCI was omitted",
+        "Smoking cessation support at every visit"
+      ],
+      "linkTo": "n_tx_sclc_relapse",
+      "linkLabel": "On relapse: enter the second-line SCLC pathway"
+    },
+    {
+      "id": "n_meso_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Mesothelioma workup",
+      "title": "Mesothelioma: workup and histology",
+      "section": "Workup",
+      "description": "Confirm mesothelioma and its histologic subtype; subtype and resectability drive therapy.",
+      "path": "Lung / Mesothelioma / Workup",
+      "pills": ["mesothelioma", "workup"],
+      "required": true,
+      "bullets": [
+        "Asbestos-exposure history; contrast CT chest/abdomen and PET-CT",
+        "Adequate tissue (thoracoscopic biopsy preferred) for subtype: epithelioid vs sarcomatoid/biphasic",
+        "Pleural fluid cytology alone is insufficient for definitive subtyping",
+        "Pulmonary and cardiac function assessment if aggressive surgery is contemplated"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_meso_type",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mesothelioma resectability",
+      "title": "Mesothelioma: resectable vs advanced",
+      "section": "Staging",
+      "description": "A minority of early epithelioid tumors are candidates for multimodality surgery; most patients present with unresectable disease treated systemically.",
+      "path": "Lung / Mesothelioma / Resectability",
+      "pills": ["mesothelioma", "stage"],
+      "required": true,
+      "options": [
+        { "id": "resectable", "label": "Resectable early-stage (surgical candidate)", "sets": { "stage": "resectable" }, "pills": ["resectable"] },
+        { "id": "advanced", "label": "Unresectable / advanced", "sets": { "stage": "advanced" }, "pills": ["advanced"] }
+      ]
+    },
+    {
+      "id": "n_tx_meso_resectable",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Mesothelioma",
-      "title": "Malignant pleural mesothelioma: systemic therapy",
-      "description": "Unresectable/advanced malignant pleural mesothelioma: platinum-pemetrexed chemotherapy or nivolumab-ipilimumab immunotherapy. Physician selects.",
-      "path": "Lung / Mesothelioma",
+      "name": "Resectable mesothelioma",
+      "title": "Resectable mesothelioma: multimodality therapy",
       "section": "Treatment",
-      "pills": ["mesothelioma", "treatment"],
+      "description": "Selected early epithelioid disease treated with surgery combined with chemotherapy and/or radiation at an experienced center.",
+      "path": "Lung / Mesothelioma / Resectable",
+      "pills": ["mesothelioma", "curative", "treatment"],
       "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Macroscopic complete resection (pleurectomy/decortication or extrapleural pneumonectomy) in fit, epithelioid, node-negative patients",
+        "Combine with cisplatin-pemetrexed chemotherapy (neoadjuvant or adjuvant) +/- radiation",
+        "Manage only at high-volume centers; benefit of aggressive surgery remains debated",
+        "Chemotherapy regimen referenced below"
+      ],
+      "protocolRefs": ["meso-cis-pemetrexed"]
+    },
+    {
+      "id": "n_meso_histo",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mesothelioma histology",
+      "title": "Advanced mesothelioma: histologic subtype",
+      "section": "Treatment",
+      "description": "Subtype guides the first-line choice between chemotherapy and dual immunotherapy; non-epithelioid tumors derive greater relative benefit from immunotherapy.",
+      "path": "Lung / Mesothelioma / Histology",
+      "pills": ["mesothelioma", "subtype"],
+      "required": true,
+      "options": [
+        { "id": "epithelioid", "label": "Epithelioid", "sets": { "histoSubtype": "epithelioid" }, "pills": ["epithelioid"] },
+        { "id": "nonepithelioid", "label": "Non-epithelioid (sarcomatoid / biphasic)", "sets": { "histoSubtype": "non-epithelioid" }, "pills": ["non-epi"] }
+      ]
+    },
+    {
+      "id": "n_tx_meso_epi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced epithelioid mesothelioma",
+      "title": "Advanced epithelioid mesothelioma: systemic therapy",
+      "section": "Treatment",
+      "description": "Either platinum-pemetrexed chemotherapy or nivolumab-ipilimumab immunotherapy is acceptable first line for epithelioid disease.",
+      "path": "Lung / Mesothelioma / Epithelioid",
+      "pills": ["mesothelioma", "epithelioid", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Cisplatin (or carboplatin) + pemetrexed, with the option to add a VEGF inhibitor",
+        "Nivolumab + ipilimumab is an alternative first-line option",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["meso-cis-pemetrexed", "meso-nivo-ipi"]
+    },
+    {
+      "id": "n_tx_meso_nonepi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced non-epithelioid mesothelioma",
+      "title": "Advanced non-epithelioid mesothelioma: dual immunotherapy",
+      "section": "Treatment",
+      "description": "Nivolumab-ipilimumab is preferred for sarcomatoid / biphasic disease, which responds poorly to chemotherapy.",
+      "path": "Lung / Mesothelioma / Non-epithelioid",
+      "pills": ["mesothelioma", "non-epi", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Nivolumab + ipilimumab is the preferred first-line therapy",
+        "Platinum-pemetrexed chemotherapy if immunotherapy is contraindicated",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": ["meso-nivo-ipi", "meso-cis-pemetrexed"]
     }
   ],
   "links": [
-    { "id": "l_h_nsq", "from": "n_lh", "to": "n_lnsclc_scenario", "fromOptions": ["nsq", "sq"], "enableBehavior": "any", "linkCategory": "conditional" },
-    { "id": "l_h_sclc", "from": "n_lh", "to": "n_lsclc_stage", "fromOptions": ["sclc"], "linkCategory": "conditional" },
-    { "id": "l_h_meso", "from": "n_lh", "to": "n_tx_meso", "fromOptions": ["meso"], "linkCategory": "conditional" },
-    { "id": "l_sc_resect", "from": "n_lnsclc_scenario", "to": "n_tx_nsclc_resectable", "fromOptions": ["resectable"], "linkCategory": "conditional" },
-    { "id": "l_sc_stage3", "from": "n_lnsclc_scenario", "to": "n_tx_nsclc_stage3", "fromOptions": ["unresectable3"], "linkCategory": "conditional" },
-    { "id": "l_sc_mets", "from": "n_lnsclc_scenario", "to": "n_ldriver", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
-    { "id": "l_dr_egfr", "from": "n_ldriver", "to": "n_tx_nsclc_egfr", "fromOptions": ["egfr"], "linkCategory": "conditional" },
-    { "id": "l_dr_alk", "from": "n_ldriver", "to": "n_tx_nsclc_alk", "fromOptions": ["alk"], "linkCategory": "conditional" },
-    { "id": "l_dr_none", "from": "n_ldriver", "to": "n_lpdl1", "fromOptions": ["none"], "linkCategory": "conditional" },
-    { "id": "l_pdl1_high", "from": "n_lpdl1", "to": "n_tx_nsclc_iohigh", "fromOptions": ["high"], "linkCategory": "conditional" },
-    { "id": "l_pdl1_low", "from": "n_lpdl1", "to": "n_tx_nsclc_chemoio", "fromOptions": ["lowneg"], "linkCategory": "conditional" },
-    { "id": "l_sclc_ls", "from": "n_lsclc_stage", "to": "n_tx_sclc_ls", "fromOptions": ["ls"], "linkCategory": "conditional" },
-    { "id": "l_sclc_es", "from": "n_lsclc_stage", "to": "n_tx_sclc_es", "fromOptions": ["es"], "linkCategory": "conditional" },
-    { "id": "l_sclc_rel", "from": "n_lsclc_stage", "to": "n_tx_sclc_relapsed", "fromOptions": ["relapsed"], "linkCategory": "conditional" }
+    { "id": "l_h_nsclc", "from": "n_histology", "to": "n_nsclc_workup", "fromOptions": ["nonsq", "sq"], "enableBehavior": "any", "linkCategory": "conditional" },
+    { "id": "l_h_sclc", "from": "n_histology", "to": "n_sclc_workup", "fromOptions": ["sclc"], "linkCategory": "conditional" },
+    { "id": "l_h_meso", "from": "n_histology", "to": "n_meso_workup", "fromOptions": ["meso"], "linkCategory": "conditional" },
+    { "id": "l_nwk_stage", "from": "n_nsclc_workup", "to": "n_nsclc_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_stage_early", "from": "n_nsclc_stage", "to": "n_tx_nsclc_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_stage_resect", "from": "n_nsclc_stage", "to": "n_tx_nsclc_resectable", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_stage_unres", "from": "n_nsclc_stage", "to": "n_tx_nsclc_stage3", "fromOptions": ["unresectable3"], "linkCategory": "conditional" },
+    { "id": "l_stage_mets", "from": "n_nsclc_stage", "to": "n_nsclc_biomarker", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_early_surv", "from": "n_tx_nsclc_early", "to": "n_nsclc_surveillance", "linkCategory": "conditional" },
+    { "id": "l_resect_surv", "from": "n_tx_nsclc_resectable", "to": "n_nsclc_surveillance", "linkCategory": "conditional" },
+    { "id": "l_stage3_surv", "from": "n_tx_nsclc_stage3", "to": "n_nsclc_surveillance", "linkCategory": "conditional" },
+    { "id": "l_bm_egfr", "from": "n_nsclc_biomarker", "to": "n_egfr_line", "fromOptions": ["egfr"], "linkCategory": "conditional" },
+    { "id": "l_bm_alk", "from": "n_nsclc_biomarker", "to": "n_tx_alk", "fromOptions": ["alk"], "linkCategory": "conditional" },
+    { "id": "l_bm_ros1", "from": "n_nsclc_biomarker", "to": "n_tx_ros1", "fromOptions": ["ros1"], "linkCategory": "conditional" },
+    { "id": "l_bm_braf", "from": "n_nsclc_biomarker", "to": "n_tx_braf", "fromOptions": ["braf"], "linkCategory": "conditional" },
+    { "id": "l_bm_kras", "from": "n_nsclc_biomarker", "to": "n_tx_kras", "fromOptions": ["kras"], "linkCategory": "conditional" },
+    { "id": "l_bm_met", "from": "n_nsclc_biomarker", "to": "n_tx_met", "fromOptions": ["met"], "linkCategory": "conditional" },
+    { "id": "l_bm_ret", "from": "n_nsclc_biomarker", "to": "n_tx_ret", "fromOptions": ["ret"], "linkCategory": "conditional" },
+    { "id": "l_bm_none", "from": "n_nsclc_biomarker", "to": "n_nsclc_pdl1", "fromOptions": ["none"], "linkCategory": "conditional" },
+    { "id": "l_egfr_1l", "from": "n_egfr_line", "to": "n_tx_egfr_1l", "fromOptions": ["firstline"], "linkCategory": "conditional" },
+    { "id": "l_egfr_prog", "from": "n_egfr_line", "to": "n_tx_egfr_prog", "fromOptions": ["progressed"], "linkCategory": "conditional" },
+    { "id": "l_pdl1_high", "from": "n_nsclc_pdl1", "to": "n_tx_io_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_pdl1_low", "from": "n_nsclc_pdl1", "to": "n_tx_chemoio", "fromOptions": ["lowneg"], "linkCategory": "conditional" },
+    { "id": "l_swk_stage", "from": "n_sclc_workup", "to": "n_sclc_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_sclc_ls", "from": "n_sclc_stage", "to": "n_tx_sclc_ls", "fromOptions": ["ls"], "linkCategory": "conditional" },
+    { "id": "l_sclc_es", "from": "n_sclc_stage", "to": "n_tx_sclc_es", "fromOptions": ["es"], "linkCategory": "conditional" },
+    { "id": "l_sclc_rel", "from": "n_sclc_stage", "to": "n_tx_sclc_relapse", "fromOptions": ["relapsed"], "linkCategory": "conditional" },
+    { "id": "l_ls_surv", "from": "n_tx_sclc_ls", "to": "n_sclc_surveillance", "linkCategory": "conditional" },
+    { "id": "l_es_surv", "from": "n_tx_sclc_es", "to": "n_sclc_surveillance", "linkCategory": "conditional" },
+    { "id": "l_mwk_type", "from": "n_meso_workup", "to": "n_meso_type", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_meso_resect", "from": "n_meso_type", "to": "n_tx_meso_resectable", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_meso_adv", "from": "n_meso_type", "to": "n_meso_histo", "fromOptions": ["advanced"], "linkCategory": "conditional" },
+    { "id": "l_meso_epi", "from": "n_meso_histo", "to": "n_tx_meso_epi", "fromOptions": ["epithelioid"], "linkCategory": "conditional" },
+    { "id": "l_meso_nonepi", "from": "n_meso_histo", "to": "n_tx_meso_nonepi", "fromOptions": ["nonepithelioid"], "linkCategory": "conditional" }
   ]
 }

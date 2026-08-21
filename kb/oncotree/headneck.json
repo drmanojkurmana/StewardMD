@@ -2,100 +2,1461 @@
   "guideline": "headneck",
   "title": "Head & Neck Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "head_and_neck_cancer",
+  "navigatorVersion": "2.0.0",
+  "diseaseId": "headneck_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "matchDisease": false,
-  "provenanceNote": "ONCOTREE navigator DRAFT for head and neck cancer. Captures clinical setting (locoregional vs recurrent/metastatic) and, for recurrent/metastatic disease, PD-L1 CPS status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Head and Neck Cancers; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Head and Neck Cancers. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_hn_setting"],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full pathway for squamous-cell head and neck cancer by subsite (oral cavity, oropharynx with HPV/p16 status, larynx/hypopharynx, nasopharynx), then workup -> AJCC staging / risk stratification -> early (single-modality) vs locally advanced (concurrent cisplatin-RT vs induction vs surgery + risk-directed adjuvant) treatment -> surveillance -> recurrent/metastatic systemic therapy by PD-L1 CPS and line of therapy. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; surgery, radiation, and regimens without a dose protocol are shown as checklist guidance with NO dose. Invents no dose/regimen/criterion. Structural pathway consistent with standard oncology references; no proprietary guideline text reproduced. DRAFT - not clinically activated; the physician decides.",
+  "sourceNote": "Structural pathway consistent with standard guidelines (NCCN Head and Neck Cancers, DeVita, Harrison). Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "startNodeIds": [
+    "n_hn_entry"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "High-risk pathologic features after resection - extranodal (extracapsular) extension and/or a positive surgical margin - are the accepted indications for adding concurrent cisplatin to postoperative radiation. Other adverse features (multiple positive nodes, perineural/lymphovascular invasion, pT3-4) favor postoperative radiation.",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "HPV/p16 status is prognostic in oropharyngeal cancer (p16-positive disease carries a markedly better prognosis) and drives 8th-edition staging, but treatment de-escalation for p16-positive disease remains investigational - treat to standard intensity off-protocol.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "In first-line recurrent/metastatic disease, PD-L1 CPS guides checkpoint-inhibitor selection: pembrolizumab monotherapy for CPS >= 1 (favored in lower-burden disease), pembrolizumab + platinum + 5-FU for any CPS (favored for higher tumor burden), and platinum + 5-FU + cetuximab (EXTREME) when immunotherapy is not suitable.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Nasopharyngeal carcinoma is a distinct entity (EBV-associated, chemoradiation-sensitive, not surgically resected as primary therapy). Plasma EBV DNA aids prognosis and post-treatment monitoring.",
+      "evidence": "2A"
+    }
+  },
   "nodes": [
     {
-      "id": "n_hn_setting",
-      "linkId": "hn_setting",
+      "id": "n_hn_entry",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Clinical setting",
-      "title": "Clinical setting",
-      "description": "Locoregionally advanced disease (stage III-IVB) is typically treated with definitive or adjuvant concurrent chemoradiation; recurrent or metastatic disease is treated with systemic therapy selected by PD-L1 status.",
-      "path": "Head & Neck / Setting",
+      "name": "Subsite",
+      "title": "Primary subsite / presentation",
+      "section": "Contents",
+      "description": "Squamous-cell head and neck cancer management branches first by primary subsite; nasopharynx is a distinct entity. Select the anatomic site, or enter directly at the recurrent/metastatic pathway.",
+      "path": "Head & Neck / Subsite",
+      "pills": [
+        "subsite"
+      ],
+      "required": true,
+      "bullets": [
+        "Oral cavity (lip, tongue, floor of mouth, buccal mucosa, gingiva, hard palate)",
+        "Oropharynx (tonsil, base of tongue, soft palate) - test HPV/p16",
+        "Larynx / hypopharynx",
+        "Nasopharynx (EBV-associated, distinct pathway)",
+        "Recurrent or metastatic disease (enter the systemic pathway)"
+      ],
+      "options": [
+        {
+          "id": "oral",
+          "label": "Oral cavity",
+          "sets": {
+            "subsite": "oral_cavity"
+          },
+          "pills": [
+            "oral cavity"
+          ]
+        },
+        {
+          "id": "oropharynx",
+          "label": "Oropharynx",
+          "sets": {
+            "subsite": "oropharynx"
+          },
+          "pills": [
+            "oropharynx"
+          ]
+        },
+        {
+          "id": "larynx",
+          "label": "Larynx / hypopharynx",
+          "sets": {
+            "subsite": "larynx_hypopharynx"
+          },
+          "pills": [
+            "larynx/hypopharynx"
+          ]
+        },
+        {
+          "id": "npc",
+          "label": "Nasopharynx",
+          "sets": {
+            "subsite": "nasopharynx"
+          },
+          "pills": [
+            "nasopharynx"
+          ]
+        },
+        {
+          "id": "rm",
+          "label": "Recurrent / metastatic",
+          "sets": {
+            "subsite": "recurrent_metastatic"
+          },
+          "pills": [
+            "recurrent / M1"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_wk_oral",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Oral cavity workup",
+      "title": "Oral cavity: workup",
+      "section": "Workup",
+      "description": "Confirm squamous histology, define local extent (bone, depth of invasion) and nodal/distant status.",
+      "path": "Head & Neck / Oral cavity / Workup",
+      "pills": [
+        "oral cavity",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "History and physical incl. complete head-and-neck exam and dental evaluation; biopsy confirming squamous-cell carcinoma",
+        "Contrast CT and/or MRI of primary and neck; assess mandibular/maxillary bone invasion and depth of invasion",
+        "Chest imaging; PET-CT for stage III-IVB or clinically node-positive disease to exclude distant metastases / second primary",
+        "Examination under anesthesia / panendoscopy as indicated; nutrition, speech-and-swallow, and smoking-cessation assessment",
+        "Multidisciplinary tumor-board review before treatment"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_wk_op",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Oropharynx workup",
+      "title": "Oropharynx: workup (incl. HPV/p16)",
+      "section": "Workup",
+      "description": "Standard head-and-neck workup plus HPV/p16 testing, which is prognostic and determines staging.",
+      "path": "Head & Neck / Oropharynx / Workup",
+      "pills": [
+        "oropharynx",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Biopsy confirming squamous-cell carcinoma; p16 immunohistochemistry (surrogate for HPV) on tumor or nodal metastasis",
+        "Contrast CT/MRI of primary and neck; PET-CT for staging and to identify an occult primary in nodal presentations",
+        "Chest imaging; dental, nutrition, and speech-and-swallow evaluation",
+        "For cystic neck node with unknown primary - HPV/p16 testing of the node points to an oropharyngeal origin",
+        "Multidisciplinary tumor-board review"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_wk_lx",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Larynx/hypopharynx workup",
+      "title": "Larynx / hypopharynx: workup",
+      "section": "Workup",
+      "description": "Define primary extent and laryngeal function to inform organ-preservation vs surgical options.",
+      "path": "Head & Neck / Larynx / Workup",
+      "pills": [
+        "larynx/hypopharynx",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Biopsy confirming squamous-cell carcinoma; laryngoscopy documenting vocal-cord mobility and airway",
+        "Contrast CT/MRI of primary and neck; assess cartilage invasion and pre-epiglottic/paraglottic spread",
+        "Chest imaging; PET-CT for stage III-IVB or node-positive disease",
+        "Baseline speech-and-swallow and pulmonary assessment (relevant to laryngectomy vs preservation)",
+        "Multidisciplinary tumor-board review"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_wk_npc",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Nasopharynx workup",
+      "title": "Nasopharynx: workup (incl. EBV)",
+      "section": "Workup",
+      "description": "Distinct EBV-associated entity - nasopharyngeal-specific imaging and EBV testing.",
+      "path": "Head & Neck / Nasopharynx / Workup",
+      "pills": [
+        "nasopharynx",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Nasopharyngeal endoscopy and biopsy; WHO histologic type",
+        "MRI of nasopharynx and skull base (superior for perineural/intracranial extent) plus neck; PET-CT for regional/distant staging",
+        "Plasma EBV DNA (prognostic and used for post-treatment monitoring)",
+        "Audiometry, dental, nutrition, and thyroid/pituitary baseline (radiation field considerations)",
+        "Multidisciplinary tumor-board review"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_oral_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Oral cavity stage",
+      "title": "Oral cavity: stage / risk stratification",
       "section": "Staging",
-      "pills": ["setting"],
+      "description": "Group by AJCC stage. Early (I-II) disease is treated with a single modality; locally advanced (III-IVB) disease needs combined-modality therapy.",
+      "path": "Head & Neck / Oral cavity / Staging",
+      "pills": [
+        "staging"
+      ],
       "required": true,
+      "tables": [
+        {
+          "title": "AJCC stage grouping (HPV-independent, simplified)",
+          "headers": [
+            "Stage",
+            "T / N (simplified)",
+            "General approach"
+          ],
+          "rows": [
+            [
+              "I",
+              "T1 N0",
+              "Single modality (surgery preferred)"
+            ],
+            [
+              "II",
+              "T2 N0",
+              "Single modality"
+            ],
+            [
+              "III",
+              "T3 N0, or T1-3 N1",
+              "Combined modality"
+            ],
+            [
+              "IVA-IVB",
+              "T4 or N2-3",
+              "Combined modality"
+            ]
+          ]
+        }
+      ],
       "options": [
-        { "id": "locoregional", "label": "Locoregional (stage III-IVB, definitive/adjuvant)", "sets": { "scenario": "locoregional" } },
-        { "id": "rm", "label": "Recurrent / metastatic", "sets": { "scenario": "recurrent-metastatic" } }
+        {
+          "id": "early",
+          "label": "Early (stage I-II, T1-2 N0)",
+          "sets": {
+            "stageGroup": "early"
+          },
+          "pills": [
+            "stage I-II"
+          ]
+        },
+        {
+          "id": "la",
+          "label": "Locally advanced (stage III-IVB)",
+          "sets": {
+            "stageGroup": "locally_advanced"
+          },
+          "pills": [
+            "stage III-IVB"
+          ]
+        }
       ]
     },
     {
-      "id": "n_hn_pdl1",
-      "linkId": "hn_pdl1",
+      "id": "n_tx_oral_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Oral cavity early",
+      "title": "Oral cavity, early (I-II): surgery",
+      "section": "Treatment",
+      "description": "Single-modality treatment; surgery is preferred for oral-cavity primaries.",
+      "path": "Head & Neck / Oral cavity / Early",
+      "pills": [
+        "stage I-II",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Wide surgical excision of the primary to negative margins, with neck dissection (elective for depth of invasion beyond a few mm or clinically node-positive)",
+        "Definitive radiation is an alternative when surgery would cause major functional loss or the patient is inoperable",
+        "Review final pathology for adverse features - if present, proceed to risk-directed adjuvant therapy",
+        "No routine systemic therapy for truly early, fully resected disease"
+      ]
+    },
+    {
+      "id": "n_oral_la_approach",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "PD-L1 CPS status",
-      "title": "PD-L1 CPS (recurrent/metastatic)",
-      "description": "PD-L1 Combined Positive Score (CPS) determines eligibility for immunotherapy-based regimens in recurrent/metastatic head and neck cancer; CPS below threshold is directed to chemotherapy/cetuximab-based regimens.",
-      "path": "Head & Neck / Biomarkers / PD-L1",
-      "section": "Biomarkers",
-      "pills": ["biomarker", "PD-L1"],
+      "name": "Oral cavity LA approach",
+      "title": "Oral cavity, locally advanced: primary approach",
+      "section": "Treatment",
+      "description": "Resectable oral-cavity cancer is treated with surgery first, then risk-directed adjuvant therapy. Unresectable disease is treated with definitive concurrent chemoradiation.",
+      "path": "Head & Neck / Oral cavity / LA / Approach",
+      "pills": [
+        "stage III-IVB"
+      ],
       "required": true,
       "options": [
-        { "id": "cpspos", "label": "PD-L1 CPS >= 1", "sets": { "biomarkers.PD_L1": "positive" } },
-        { "id": "cpsneg", "label": "PD-L1 CPS < 1 / negative", "sets": { "biomarkers.PD_L1": "negative" } }
+        {
+          "id": "surgery",
+          "label": "Resectable - surgery + risk-directed adjuvant",
+          "sets": {
+            "approach": "surgery_adjuvant"
+          },
+          "pills": [
+            "surgery first"
+          ]
+        },
+        {
+          "id": "defct",
+          "label": "Unresectable / inoperable - definitive chemoradiation",
+          "sets": {
+            "approach": "definitive_chemort"
+          },
+          "pills": [
+            "definitive CRT"
+          ]
+        }
       ]
     },
     {
-      "id": "n_tx_hn_locoregional",
-      "linkId": "tx_hn_locoregional",
+      "id": "n_tx_oral_la_defct",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Locoregional treatment",
-      "title": "Locoregional: concurrent chemoradiation",
-      "description": "Locoregionally advanced head and neck cancer - concurrent chemoradiation is the systemic-radiation backbone for definitive or adjuvant treatment. Physician selects.",
-      "path": "Head & Neck / Treatment / Locoregional",
+      "name": "Oral cavity LA definitive CRT",
+      "title": "Oral cavity, unresectable: definitive concurrent chemoradiation",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "description": "Definitive radiation with concurrent cisplatin for unresectable or inoperable locally advanced disease.",
+      "path": "Head & Neck / Oral cavity / LA / Definitive CRT",
+      "pills": [
+        "definitive CRT",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["hn-cisplatin-rt"]
+      "bullets": [
+        "Definitive radiation to the primary and neck with concurrent high-dose cisplatin",
+        "Cetuximab-radiation is an alternative when cisplatin is contraindicated (less effective than cisplatin)",
+        "Neck dissection for residual nodal disease after chemoradiation",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
     },
     {
-      "id": "n_tx_hn_io",
-      "linkId": "tx_hn_io",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "PD-L1 CPS-positive recurrent/metastatic treatment",
-      "title": "Recurrent/metastatic, PD-L1 CPS>=1: immunotherapy options",
-      "description": "Recurrent/metastatic head and neck cancer with PD-L1 CPS >= 1 - immune checkpoint inhibitor-based regimens are systemic options. Physician selects.",
-      "path": "Head & Neck / Treatment / Recurrent-metastatic / PD-L1 positive",
-      "section": "Treatment",
-      "pills": ["PD-L1+", "treatment"],
-      "showsRecommendation": true,
-      "protocolRefs": ["hn-pembro-mono", "hn-extreme", "hn-nivolumab"]
+      "id": "n_op_p16",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Oropharynx p16",
+      "title": "Oropharynx: HPV/p16 status",
+      "section": "Staging",
+      "description": "p16 status determines the AJCC staging system and prognosis for oropharyngeal cancer.",
+      "path": "Head & Neck / Oropharynx / p16",
+      "pills": [
+        "biomarker",
+        "p16"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "p16pos",
+          "label": "p16-positive (HPV-associated)",
+          "sets": {
+            "biomarkers.p16": "positive"
+          },
+          "pills": [
+            "p16+"
+          ]
+        },
+        {
+          "id": "p16neg",
+          "label": "p16-negative",
+          "sets": {
+            "biomarkers.p16": "negative"
+          },
+          "pills": [
+            "p16-"
+          ]
+        }
+      ]
     },
     {
-      "id": "n_tx_hn_chemo",
-      "linkId": "tx_hn_chemo",
+      "id": "n_op_stage_pos",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Oropharynx p16+ stage",
+      "title": "Oropharynx (p16+): stage grouping",
+      "section": "Staging",
+      "description": "p16-positive oropharyngeal cancer uses a distinct, more favorable staging system - many node-positive tumors are stage I-II.",
+      "path": "Head & Neck / Oropharynx / p16+ / Staging",
+      "pills": [
+        "p16+",
+        "staging"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "p16-positive oropharynx clinical stage (8th ed., simplified)",
+          "headers": [
+            "Stage",
+            "T / N (simplified)",
+            "Note"
+          ],
+          "rows": [
+            [
+              "I",
+              "T0-2 and N0-1 (ipsilateral <= 6 cm)",
+              "Node-positive can still be stage I"
+            ],
+            [
+              "II",
+              "T0-2 N2, or T3 N0-2",
+              "Favorable biology"
+            ],
+            [
+              "III",
+              "T4 or N3",
+              "Locally advanced"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "early",
+          "label": "Early (stage I-II)",
+          "sets": {
+            "stageGroup": "early"
+          },
+          "pills": [
+            "stage I-II"
+          ]
+        },
+        {
+          "id": "la",
+          "label": "Locally advanced (stage III / T4 / N3)",
+          "sets": {
+            "stageGroup": "locally_advanced"
+          },
+          "pills": [
+            "stage III"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_op_stage_neg",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Oropharynx p16- stage",
+      "title": "Oropharynx (p16-): stage grouping",
+      "section": "Staging",
+      "description": "p16-negative oropharyngeal cancer follows HPV-independent staging and behaves like other mucosal squamous cancers.",
+      "path": "Head & Neck / Oropharynx / p16- / Staging",
+      "pills": [
+        "p16-",
+        "staging"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "early",
+          "label": "Early (stage I-II, T1-2 N0)",
+          "sets": {
+            "stageGroup": "early"
+          },
+          "pills": [
+            "stage I-II"
+          ]
+        },
+        {
+          "id": "la",
+          "label": "Locally advanced (stage III-IVB)",
+          "sets": {
+            "stageGroup": "locally_advanced"
+          },
+          "pills": [
+            "stage III-IVB"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_op_early",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "PD-L1 CPS-negative recurrent/metastatic treatment",
-      "title": "Recurrent/metastatic, CPS<1: chemotherapy/cetuximab",
-      "description": "Recurrent/metastatic head and neck cancer with PD-L1 CPS < 1 - chemotherapy and cetuximab-based regimens are systemic options. Physician selects.",
-      "path": "Head & Neck / Treatment / Recurrent-metastatic / PD-L1 negative",
+      "name": "Oropharynx early",
+      "title": "Oropharynx, early (I-II): single modality",
       "section": "Treatment",
-      "pills": ["PD-L1-", "treatment"],
+      "description": "Early oropharyngeal cancer is treated with a single modality - definitive radiation or transoral surgery.",
+      "path": "Head & Neck / Oropharynx / Early",
+      "pills": [
+        "stage I-II",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
       "showsRecommendation": true,
-      "protocolRefs": ["hn-extreme", "hn-cetuximab", "hn-nivolumab"]
+      "bullets": [
+        "Definitive radiation to primary and neck, OR transoral (TORS) resection with neck dissection",
+        "Choice balances functional outcome (swallow, xerostomia) and patient factors; treat p16-positive disease to standard intensity (de-escalation is investigational)",
+        "Add risk-directed adjuvant therapy if surgery reveals adverse pathology",
+        "Elective nodal coverage/dissection given the high rate of occult nodal disease"
+      ],
+      "footnotes": [
+        "b"
+      ]
+    },
+    {
+      "id": "n_op_la_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Oropharynx LA approach",
+      "title": "Oropharynx, locally advanced: primary approach",
+      "section": "Treatment",
+      "description": "Locally advanced oropharyngeal cancer is managed by concurrent chemoradiation, induction chemotherapy followed by radiation, or transoral surgery with risk-directed adjuvant therapy.",
+      "path": "Head & Neck / Oropharynx / LA / Approach",
+      "pills": [
+        "stage III-IVB"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "chemort",
+          "label": "Definitive concurrent chemoradiation",
+          "sets": {
+            "approach": "concurrent_chemort"
+          },
+          "pills": [
+            "concurrent CRT"
+          ]
+        },
+        {
+          "id": "induction",
+          "label": "Induction chemotherapy, then radiation",
+          "sets": {
+            "approach": "induction"
+          },
+          "pills": [
+            "induction"
+          ]
+        },
+        {
+          "id": "surgery",
+          "label": "Transoral surgery (TORS) + risk-directed adjuvant",
+          "sets": {
+            "approach": "surgery_adjuvant"
+          },
+          "pills": [
+            "surgery first"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_op_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Oropharynx LA chemoRT",
+      "title": "Oropharynx, LA: concurrent chemoradiation",
+      "section": "Treatment",
+      "description": "Definitive radiation with concurrent high-dose cisplatin - the standard organ-preserving option for locally advanced disease.",
+      "path": "Head & Neck / Oropharynx / LA / ChemoRT",
+      "pills": [
+        "concurrent CRT",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive radiation to primary and neck with concurrent high-dose cisplatin",
+        "Cetuximab-radiation if cisplatin is contraindicated (inferior to cisplatin, particularly in p16-positive disease)",
+        "Neck dissection for residual nodal disease on post-treatment imaging",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_tx_op_induction",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Oropharynx LA induction",
+      "title": "Oropharynx, LA: induction then radiation",
+      "section": "Treatment",
+      "description": "Induction chemotherapy followed by radiation-based local therapy for selected high-burden disease.",
+      "path": "Head & Neck / Oropharynx / LA / Induction",
+      "pills": [
+        "induction",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2B"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Induction docetaxel + cisplatin + 5-FU (TPF), then radiation with a concurrent systemic agent",
+        "Considered for very bulky nodal disease or when rapid response is needed; not shown superior to concurrent chemoradiation upfront",
+        "Requires good performance status and close toxicity monitoring",
+        "Concurrent chemoradiation regimen referenced below (induction TPF has no dose protocol here - guidance only)"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_lx_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Larynx stage",
+      "title": "Larynx / hypopharynx: stage / risk stratification",
+      "section": "Staging",
+      "description": "Group by AJCC stage. Early disease is treated with a single modality; locally advanced disease is managed with organ-preservation or surgical strategies.",
+      "path": "Head & Neck / Larynx / Staging",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "AJCC stage grouping (larynx/hypopharynx, simplified)",
+          "headers": [
+            "Stage",
+            "T / N (simplified)",
+            "General approach"
+          ],
+          "rows": [
+            [
+              "I",
+              "T1 N0",
+              "Single modality (RT or endoscopic surgery)"
+            ],
+            [
+              "II",
+              "T2 N0",
+              "Single modality"
+            ],
+            [
+              "III",
+              "T3 N0, or T1-3 N1",
+              "Organ preservation or surgery"
+            ],
+            [
+              "IVA-IVB",
+              "T4 or N2-3",
+              "Combined modality; T4a favors laryngectomy"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "early",
+          "label": "Early (stage I-II)",
+          "sets": {
+            "stageGroup": "early"
+          },
+          "pills": [
+            "stage I-II"
+          ]
+        },
+        {
+          "id": "la",
+          "label": "Locally advanced (stage III-IVB)",
+          "sets": {
+            "stageGroup": "locally_advanced"
+          },
+          "pills": [
+            "stage III-IVB"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lx_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Larynx early",
+      "title": "Larynx / hypopharynx, early (I-II): single modality",
+      "section": "Treatment",
+      "description": "Early laryngeal cancer is treated with a single modality aimed at voice preservation.",
+      "path": "Head & Neck / Larynx / Early",
+      "pills": [
+        "stage I-II",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive radiation OR endoscopic/transoral laser resection (glottic T1-2), with comparable local control",
+        "Partial laryngectomy in selected patients",
+        "Choice driven by voice outcome, tumor location, and follow-up feasibility",
+        "No routine systemic therapy for early, single-modality disease"
+      ]
+    },
+    {
+      "id": "n_lx_la_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Larynx LA approach",
+      "title": "Larynx / hypopharynx, locally advanced: organ preservation vs surgery",
+      "section": "Treatment",
+      "description": "Locally advanced laryngeal/hypopharyngeal cancer is managed by concurrent chemoradiation (organ preservation), induction chemotherapy to select responders, or total laryngectomy with adjuvant therapy. Extensive T4a cartilage destruction favors upfront laryngectomy.",
+      "path": "Head & Neck / Larynx / LA / Approach",
+      "pills": [
+        "stage III-IVB"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "chemort",
+          "label": "Concurrent chemoradiation (organ preservation)",
+          "sets": {
+            "approach": "concurrent_chemort"
+          },
+          "pills": [
+            "concurrent CRT"
+          ]
+        },
+        {
+          "id": "induction",
+          "label": "Induction chemotherapy (larynx-preservation selection)",
+          "sets": {
+            "approach": "induction"
+          },
+          "pills": [
+            "induction"
+          ]
+        },
+        {
+          "id": "surgery",
+          "label": "Total laryngectomy + risk-directed adjuvant",
+          "sets": {
+            "approach": "surgery_adjuvant"
+          },
+          "pills": [
+            "laryngectomy"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lx_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Larynx LA chemoRT",
+      "title": "Larynx / hypopharynx, LA: concurrent chemoradiation",
+      "section": "Treatment",
+      "description": "Concurrent cisplatin-radiation preserves the larynx in appropriately selected locally advanced disease.",
+      "path": "Head & Neck / Larynx / LA / ChemoRT",
+      "pills": [
+        "concurrent CRT",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive radiation with concurrent high-dose cisplatin for larynx preservation",
+        "Cetuximab-radiation if cisplatin is contraindicated",
+        "Total laryngectomy reserved for salvage of persistent/recurrent disease or a non-functional larynx",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_tx_lx_induction",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Larynx LA induction",
+      "title": "Larynx / hypopharynx, LA: induction (preservation selection)",
+      "section": "Treatment",
+      "description": "Induction chemotherapy selects responders for larynx-preserving radiation; poor responders proceed to laryngectomy.",
+      "path": "Head & Neck / Larynx / LA / Induction",
+      "pills": [
+        "induction",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Induction docetaxel + cisplatin + 5-FU (TPF); assess laryngeal response",
+        "Good response - proceed to definitive radiation (+/- concurrent systemic agent) for larynx preservation",
+        "Poor response - total laryngectomy with adjuvant therapy",
+        "Concurrent chemoradiation regimen referenced below (induction TPF has no dose protocol here - guidance only)"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_npc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Nasopharynx stage",
+      "title": "Nasopharynx: stage grouping",
+      "section": "Staging",
+      "description": "Nasopharyngeal carcinoma is treated non-surgically. Stage I is radiation alone; higher stages need chemoradiation with or without induction/adjuvant chemotherapy.",
+      "path": "Head & Neck / Nasopharynx / Staging",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "tables": [
+        {
+          "title": "AJCC stage grouping (nasopharynx, simplified)",
+          "headers": [
+            "Stage",
+            "T / N (simplified)",
+            "General approach"
+          ],
+          "rows": [
+            [
+              "I",
+              "T1 N0",
+              "Radiation alone"
+            ],
+            [
+              "II",
+              "T0-1 N1, or T2 N0-1",
+              "Concurrent chemoradiation"
+            ],
+            [
+              "III-IVA",
+              "T3-4 or N2-3",
+              "Chemoradiation +/- induction / adjuvant chemotherapy"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "early",
+          "label": "Stage I (T1 N0)",
+          "sets": {
+            "stageGroup": "early"
+          },
+          "pills": [
+            "stage I"
+          ]
+        },
+        {
+          "id": "la",
+          "label": "Stage II-IVA (node-positive or T2-4)",
+          "sets": {
+            "stageGroup": "locally_advanced"
+          },
+          "pills": [
+            "stage II-IVA"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_npc_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Nasopharynx early",
+      "title": "Nasopharynx, stage I: radiation alone",
+      "section": "Treatment",
+      "description": "Early nasopharyngeal carcinoma is treated with definitive radiation alone.",
+      "path": "Head & Neck / Nasopharynx / Early",
+      "pills": [
+        "stage I",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Definitive intensity-modulated radiation to the nasopharynx and elective neck",
+        "No concurrent chemotherapy for true stage I disease",
+        "Post-treatment plasma EBV DNA and imaging for monitoring"
+      ],
+      "footnotes": [
+        "d"
+      ]
+    },
+    {
+      "id": "n_tx_npc_la",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Nasopharynx LA",
+      "title": "Nasopharynx, stage II-IVA: chemoradiation",
+      "section": "Treatment",
+      "description": "Concurrent cisplatin-radiation, with induction and/or adjuvant chemotherapy for higher-stage disease.",
+      "path": "Head & Neck / Nasopharynx / LA",
+      "pills": [
+        "stage II-IVA",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Concurrent high-dose cisplatin with definitive radiation",
+        "Add induction chemotherapy (e.g. gemcitabine + cisplatin) for stage III-IVA / bulky disease",
+        "Adjuvant chemotherapy in selected patients, guided by residual EBV DNA",
+        "Concurrent cisplatin-radiation regimen referenced below (induction gemcitabine-cisplatin has no dose protocol here - guidance only)"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ],
+      "footnotes": [
+        "d"
+      ]
+    },
+    {
+      "id": "n_adj_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Adjuvant risk",
+      "title": "Postoperative risk stratification",
+      "section": "Treatment",
+      "description": "After resection, adverse pathology determines adjuvant therapy. Extranodal extension or a positive margin (high risk) calls for concurrent chemoradiation; other adverse features favor radiation alone.",
+      "path": "Head & Neck / Adjuvant / Risk",
+      "pills": [
+        "adjuvant",
+        "risk"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "tables": [
+        {
+          "title": "Postoperative adverse features and adjuvant therapy",
+          "headers": [
+            "Risk group",
+            "Pathologic feature",
+            "Adjuvant therapy"
+          ],
+          "rows": [
+            [
+              "High",
+              "Extranodal (extracapsular) extension and/or positive margin",
+              "Concurrent chemoradiation (cisplatin-RT)"
+            ],
+            [
+              "Intermediate",
+              "pT3-4, N2-3, perineural/lymphovascular invasion, close margin",
+              "Radiation alone"
+            ],
+            [
+              "Low",
+              "None of the above, negative margins",
+              "Observation"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "high",
+          "label": "High risk (extranodal extension and/or positive margin)",
+          "sets": {
+            "adjRisk": "high"
+          },
+          "pills": [
+            "ECE / +margin"
+          ]
+        },
+        {
+          "id": "intermediate",
+          "label": "Intermediate risk (other adverse features)",
+          "sets": {
+            "adjRisk": "intermediate"
+          },
+          "pills": [
+            "intermediate"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adj_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant chemoRT",
+      "title": "Adjuvant: concurrent chemoradiation (high risk)",
+      "section": "Treatment",
+      "description": "High-risk pathology - postoperative radiation with concurrent cisplatin.",
+      "path": "Head & Neck / Adjuvant / ChemoRT",
+      "pills": [
+        "ECE / +margin",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Postoperative radiation with concurrent high-dose cisplatin",
+        "Start radiation promptly (ideally within ~6 weeks of surgery)",
+        "Cisplatin alternatives (e.g. weekly cisplatin, carboplatin) if high-dose cisplatin not tolerated",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-cisplatin-rt"
+      ]
+    },
+    {
+      "id": "n_tx_adj_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant RT",
+      "title": "Adjuvant: radiation alone (intermediate risk)",
+      "section": "Treatment",
+      "description": "Intermediate-risk pathology without extranodal extension or positive margin - postoperative radiation alone.",
+      "path": "Head & Neck / Adjuvant / RT",
+      "pills": [
+        "intermediate",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Postoperative radiation to the tumor bed and at-risk nodal levels",
+        "No concurrent chemotherapy in the absence of extranodal extension or a positive margin",
+        "Reassess for concurrent chemotherapy if final review reclassifies risk upward"
+      ],
+      "footnotes": [
+        "a"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Surveillance / follow-up",
+      "section": "Surveillance",
+      "description": "Follow-up after curative-intent therapy.",
+      "path": "Head & Neck / Surveillance",
+      "pills": [
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "History and physical with complete head-and-neck exam every 1-3 months in year 1, lengthening to annually by year 5",
+        "Post-treatment baseline imaging (PET-CT ~3 months after chemoradiation); further imaging for signs/symptoms",
+        "TSH every 6-12 months if the neck was irradiated; dental, speech, swallow, and smoking-cessation support",
+        "For nasopharynx - serial plasma EBV DNA; investigate new symptoms promptly"
+      ],
+      "linkTo": "n_rm_setting",
+      "linkLabel": "If recurrence or metastasis is detected: go to the Recurrence / Metastatic pathway"
+    },
+    {
+      "id": "n_rm_setting",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Recurrent/metastatic setting",
+      "title": "Recurrent / metastatic: setting",
+      "section": "Recurrence",
+      "description": "Distinguish an isolated, potentially salvageable locoregional recurrence from unresectable-recurrent or distant metastatic disease that needs systemic therapy.",
+      "path": "Head & Neck / Recurrent / Setting",
+      "pills": [
+        "recurrence"
+      ],
+      "required": true,
+      "bullets": [
+        "Biopsy to confirm recurrence; restage with PET-CT to define resectability and exclude distant disease",
+        "Obtain PD-L1 CPS (and review prior platinum exposure) before selecting systemic therapy"
+      ],
+      "options": [
+        {
+          "id": "salvage",
+          "label": "Isolated resectable locoregional recurrence",
+          "sets": {
+            "rmSetting": "locoregional_salvage"
+          },
+          "pills": [
+            "salvageable"
+          ]
+        },
+        {
+          "id": "systemic",
+          "label": "Unresectable recurrent / distant metastatic",
+          "sets": {
+            "rmSetting": "systemic"
+          },
+          "pills": [
+            "systemic"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rm_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Salvage local therapy",
+      "title": "Locoregional recurrence: salvage therapy",
+      "section": "Recurrence",
+      "description": "Isolated locoregional recurrence is treated with curative intent when feasible.",
+      "path": "Head & Neck / Recurrent / Salvage",
+      "pills": [
+        "salvageable",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Salvage surgery for resectable recurrence, when technically feasible",
+        "Re-irradiation (+/- concurrent systemic therapy) in previously irradiated fields for unresectable or high-risk recurrence",
+        "If salvage is not possible, treat as unresectable/metastatic with systemic therapy",
+        "Consider clinical trials"
+      ]
+    },
+    {
+      "id": "n_rm_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "R/M line of therapy",
+      "title": "Recurrent / metastatic: line of therapy",
+      "section": "Recurrence",
+      "description": "Systemic therapy is directed by whether this is first-line disease or progression after prior platinum-based therapy.",
+      "path": "Head & Neck / Recurrent / Line",
+      "pills": [
+        "systemic",
+        "line"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "first",
+          "label": "First-line (platinum-eligible)",
+          "sets": {
+            "line": "first"
+          },
+          "pills": [
+            "1st line"
+          ]
+        },
+        {
+          "id": "platref",
+          "label": "Progression after prior platinum",
+          "sets": {
+            "line": "platinum_refractory"
+          },
+          "pills": [
+            "post-platinum"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rm_pdl1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "R/M first-line PD-L1",
+      "title": "First-line R/M: PD-L1 CPS-directed selection",
+      "section": "Recurrence",
+      "description": "First-line systemic therapy is selected by PD-L1 CPS and disease burden. Immunotherapy-based options for PD-L1-expressing tumors; EXTREME when immunotherapy is not suitable.",
+      "path": "Head & Neck / Recurrent / First-line / PD-L1",
+      "pills": [
+        "biomarker",
+        "PD-L1"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "tables": [
+        {
+          "title": "PD-L1 CPS-directed first-line options",
+          "headers": [
+            "PD-L1 CPS",
+            "Preferred option",
+            "Alternative"
+          ],
+          "rows": [
+            [
+              "CPS >= 1, lower burden",
+              "Pembrolizumab monotherapy",
+              "Pembrolizumab + chemotherapy"
+            ],
+            [
+              "Any CPS, higher burden / rapid progression",
+              "Pembrolizumab + platinum + 5-FU",
+              "EXTREME"
+            ],
+            [
+              "IO not suitable / CPS negative",
+              "Platinum + 5-FU + cetuximab (EXTREME)",
+              "Platinum-based chemotherapy"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "pembro_mono",
+          "label": "CPS >= 1, lower burden - pembrolizumab monotherapy",
+          "sets": {
+            "biomarkers.PD_L1": "positive",
+            "rmRegimen": "pembro_mono"
+          },
+          "pills": [
+            "CPS >= 1"
+          ]
+        },
+        {
+          "id": "pembro_chemo",
+          "label": "Any CPS, higher burden - pembrolizumab + chemotherapy",
+          "sets": {
+            "rmRegimen": "pembro_chemo"
+          },
+          "pills": [
+            "pembro + chemo"
+          ]
+        },
+        {
+          "id": "extreme",
+          "label": "IO not suitable - EXTREME (platinum + 5-FU + cetuximab)",
+          "sets": {
+            "biomarkers.PD_L1": "negative",
+            "rmRegimen": "extreme"
+          },
+          "pills": [
+            "EXTREME"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rm_pembro_mono",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "R/M pembrolizumab mono",
+      "title": "First-line R/M: pembrolizumab monotherapy",
+      "section": "Recurrence",
+      "description": "PD-L1 CPS >= 1, lower-burden disease - single-agent checkpoint inhibition.",
+      "path": "Head & Neck / Recurrent / First-line / Pembro mono",
+      "pills": [
+        "CPS >= 1",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Pembrolizumab monotherapy for PD-L1 CPS >= 1 without high tumor burden or rapid progression",
+        "Add chemotherapy (see pembrolizumab + chemotherapy) if the disease is bulky or rapidly progressing",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-pembro-mono"
+      ]
+    },
+    {
+      "id": "n_tx_rm_pembro_chemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "R/M pembrolizumab + chemo",
+      "title": "First-line R/M: pembrolizumab + platinum + 5-FU",
+      "section": "Recurrence",
+      "description": "Checkpoint inhibition combined with chemotherapy - broadly active first-line option, favored for higher tumor burden.",
+      "path": "Head & Neck / Recurrent / First-line / Pembro + chemo",
+      "pills": [
+        "pembro + chemo",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Pembrolizumab + platinum (cisplatin or carboplatin) + 5-FU, then pembrolizumab maintenance",
+        "Preferred first-line for higher tumor burden or rapid progression, across CPS levels",
+        "Pembrolizumab component referenced below (the platinum + 5-FU backbone has no dedicated dose protocol here - guidance only)"
+      ],
+      "protocolRefs": [
+        "hn-pembro-mono"
+      ]
+    },
+    {
+      "id": "n_tx_rm_extreme",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "R/M EXTREME",
+      "title": "First-line R/M: EXTREME (platinum + 5-FU + cetuximab)",
+      "section": "Recurrence",
+      "description": "Chemotherapy plus cetuximab when immunotherapy is not suitable.",
+      "path": "Head & Neck / Recurrent / First-line / EXTREME",
+      "pills": [
+        "EXTREME",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Platinum (cisplatin or carboplatin) + 5-FU + cetuximab, then cetuximab maintenance",
+        "Option when checkpoint inhibition is contraindicated (e.g. active autoimmune disease) or unavailable",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": [
+        "hn-extreme"
+      ]
+    },
+    {
+      "id": "n_tx_rm_platref",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "R/M post-platinum",
+      "title": "R/M after prior platinum: checkpoint inhibitor / cetuximab",
+      "section": "Recurrence",
+      "description": "Progression after platinum-based therapy - checkpoint inhibition if not previously given, otherwise chemotherapy or cetuximab-based therapy.",
+      "path": "Head & Neck / Recurrent / Post-platinum",
+      "pills": [
+        "post-platinum",
+        "treatment"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Nivolumab (or pembrolizumab) if a checkpoint inhibitor was not already used - improves survival vs single-agent chemotherapy",
+        "If immunotherapy already given: single-agent chemotherapy (taxane, methotrexate) or cetuximab-based therapy",
+        "Best supportive care and clinical trials as appropriate",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": [
+        "hn-nivolumab",
+        "hn-cetuximab"
+      ]
     }
   ],
   "links": [
-    { "id": "l_hn_setting_locoregional", "from": "n_hn_setting", "to": "n_tx_hn_locoregional", "fromOptions": ["locoregional"], "linkCategory": "conditional" },
-    { "id": "l_hn_setting_rm", "from": "n_hn_setting", "to": "n_hn_pdl1", "fromOptions": ["rm"], "linkCategory": "conditional" },
-    { "id": "l_hn_pdl1_pos", "from": "n_hn_pdl1", "to": "n_tx_hn_io", "fromOptions": ["cpspos"], "linkCategory": "conditional" },
-    { "id": "l_hn_pdl1_neg", "from": "n_hn_pdl1", "to": "n_tx_hn_chemo", "fromOptions": ["cpsneg"], "linkCategory": "conditional" }
+    { "id": "l_entry_oral", "from": "n_hn_entry", "to": "n_wk_oral", "fromOptions": ["oral"], "linkCategory": "conditional" },
+    { "id": "l_entry_op", "from": "n_hn_entry", "to": "n_wk_op", "fromOptions": ["oropharynx"], "linkCategory": "conditional" },
+    { "id": "l_entry_lx", "from": "n_hn_entry", "to": "n_wk_lx", "fromOptions": ["larynx"], "linkCategory": "conditional" },
+    { "id": "l_entry_npc", "from": "n_hn_entry", "to": "n_wk_npc", "fromOptions": ["npc"], "linkCategory": "conditional" },
+    { "id": "l_entry_rm", "from": "n_hn_entry", "to": "n_rm_setting", "fromOptions": ["rm"], "linkCategory": "conditional" },
+
+    { "id": "l_wk_oral", "from": "n_wk_oral", "to": "n_oral_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_wk_op", "from": "n_wk_op", "to": "n_op_p16", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_wk_lx", "from": "n_wk_lx", "to": "n_lx_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_wk_npc", "from": "n_wk_npc", "to": "n_npc_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_oral_early", "from": "n_oral_stage", "to": "n_tx_oral_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_oral_la", "from": "n_oral_stage", "to": "n_oral_la_approach", "fromOptions": ["la"], "linkCategory": "conditional" },
+    { "id": "l_oral_la_surg", "from": "n_oral_la_approach", "to": "n_adj_risk", "fromOptions": ["surgery"], "linkCategory": "conditional" },
+    { "id": "l_oral_la_def", "from": "n_oral_la_approach", "to": "n_tx_oral_la_defct", "fromOptions": ["defct"], "linkCategory": "conditional" },
+    { "id": "l_oral_early_surv", "from": "n_tx_oral_early", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_oral_def_surv", "from": "n_tx_oral_la_defct", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_op_p16pos", "from": "n_op_p16", "to": "n_op_stage_pos", "fromOptions": ["p16pos"], "linkCategory": "conditional" },
+    { "id": "l_op_p16neg", "from": "n_op_p16", "to": "n_op_stage_neg", "fromOptions": ["p16neg"], "linkCategory": "conditional" },
+    { "id": "l_op_pos_early", "from": "n_op_stage_pos", "to": "n_tx_op_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_op_pos_la", "from": "n_op_stage_pos", "to": "n_op_la_approach", "fromOptions": ["la"], "linkCategory": "conditional" },
+    { "id": "l_op_neg_early", "from": "n_op_stage_neg", "to": "n_tx_op_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_op_neg_la", "from": "n_op_stage_neg", "to": "n_op_la_approach", "fromOptions": ["la"], "linkCategory": "conditional" },
+    { "id": "l_op_la_crt", "from": "n_op_la_approach", "to": "n_tx_op_chemort", "fromOptions": ["chemort"], "linkCategory": "conditional" },
+    { "id": "l_op_la_ind", "from": "n_op_la_approach", "to": "n_tx_op_induction", "fromOptions": ["induction"], "linkCategory": "conditional" },
+    { "id": "l_op_la_surg", "from": "n_op_la_approach", "to": "n_adj_risk", "fromOptions": ["surgery"], "linkCategory": "conditional" },
+    { "id": "l_op_early_surv", "from": "n_tx_op_early", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_op_crt_surv", "from": "n_tx_op_chemort", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_op_ind_surv", "from": "n_tx_op_induction", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_lx_early", "from": "n_lx_stage", "to": "n_tx_lx_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_lx_la", "from": "n_lx_stage", "to": "n_lx_la_approach", "fromOptions": ["la"], "linkCategory": "conditional" },
+    { "id": "l_lx_la_crt", "from": "n_lx_la_approach", "to": "n_tx_lx_chemort", "fromOptions": ["chemort"], "linkCategory": "conditional" },
+    { "id": "l_lx_la_ind", "from": "n_lx_la_approach", "to": "n_tx_lx_induction", "fromOptions": ["induction"], "linkCategory": "conditional" },
+    { "id": "l_lx_la_surg", "from": "n_lx_la_approach", "to": "n_adj_risk", "fromOptions": ["surgery"], "linkCategory": "conditional" },
+    { "id": "l_lx_early_surv", "from": "n_tx_lx_early", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_lx_crt_surv", "from": "n_tx_lx_chemort", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_lx_ind_surv", "from": "n_tx_lx_induction", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_npc_early", "from": "n_npc_stage", "to": "n_tx_npc_early", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_npc_la", "from": "n_npc_stage", "to": "n_tx_npc_la", "fromOptions": ["la"], "linkCategory": "conditional" },
+    { "id": "l_npc_early_surv", "from": "n_tx_npc_early", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_npc_la_surv", "from": "n_tx_npc_la", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_adj_high", "from": "n_adj_risk", "to": "n_tx_adj_chemort", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_adj_int", "from": "n_adj_risk", "to": "n_tx_adj_rt", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
+    { "id": "l_adj_crt_surv", "from": "n_tx_adj_chemort", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_adj_rt_surv", "from": "n_tx_adj_rt", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_rm_salvage", "from": "n_rm_setting", "to": "n_tx_rm_salvage", "fromOptions": ["salvage"], "linkCategory": "conditional" },
+    { "id": "l_rm_systemic", "from": "n_rm_setting", "to": "n_rm_line", "fromOptions": ["systemic"], "linkCategory": "conditional" },
+    { "id": "l_rm_first", "from": "n_rm_line", "to": "n_rm_pdl1", "fromOptions": ["first"], "linkCategory": "conditional" },
+    { "id": "l_rm_platref", "from": "n_rm_line", "to": "n_tx_rm_platref", "fromOptions": ["platref"], "linkCategory": "conditional" },
+    { "id": "l_rm_pembro_mono", "from": "n_rm_pdl1", "to": "n_tx_rm_pembro_mono", "fromOptions": ["pembro_mono"], "linkCategory": "conditional" },
+    { "id": "l_rm_pembro_chemo", "from": "n_rm_pdl1", "to": "n_tx_rm_pembro_chemo", "fromOptions": ["pembro_chemo"], "linkCategory": "conditional" },
+    { "id": "l_rm_extreme", "from": "n_rm_pdl1", "to": "n_tx_rm_extreme", "fromOptions": ["extreme"], "linkCategory": "conditional" }
   ]
 }
