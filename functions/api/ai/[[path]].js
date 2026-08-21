@@ -305,7 +305,7 @@ const vertexProvider = {
   name: "vertex",
   available: function (env) { return !!(env.GCP_PROJECT && env.GCP_SA_EMAIL && ((env.GCP_WIF_PRIVATE_KEY && env.GCP_WIF_AUDIENCE) || env.GCP_SA_PRIVATE_KEY)); },
   generate: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:generateContent`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
@@ -315,7 +315,7 @@ const vertexProvider = {
   },
   // Phase 2 — SSE streaming transport (returns the raw upstream Response; caller transforms).
   streamFetch: async function (env, parts, maxTokens, opts) {
-    const loc = env.GCP_LOCATION || "us-central1";
+    const loc = env.GCP_LOCATION || "asia-south1";
     const url = `https://${loc}-aiplatform.googleapis.com/v1/projects/${env.GCP_PROJECT}/locations/${loc}/publishers/google/models/${modelFor(env, opts)}:streamGenerateContent?alt=sse`;
     const token = await vertexAccessToken(env);
     let o = opts || {};
@@ -436,9 +436,9 @@ function providerOrder(env, opts) {
   // Azure/Foundry FIRST (Vertex→Developer as fallback) ONLY for a MaiK call (opts.maik). Every other
   // module (Vision, ECG/KardiQ, ThoreX, FundX, scribe, router, …) stays on Gemini/Vertex exactly as
   // before, regardless of AI_PROVIDER. AI_PROVIDER=developer uses the Developer API directly.
-  const sel = String(env.AI_PROVIDER || "vertex").toLowerCase();
+  const sel = String(env.AI_PROVIDER || "developer").toLowerCase();
   const forMaik = !!(opts && opts.maik);
-  let order = sel === "azure" ? ["azure", "vertex", "developer"] : sel === "developer" ? ["developer"] : ["vertex", "developer"];
+  let order = sel === "vertex" ? ["vertex", "developer"] : ["developer", "vertex"];   // AZURE REMOVED: developer-primary (edge, fast in India) + vertex failover
   if (!forMaik) order = order.filter(function (n) { return n !== "azure"; });              // non-MaiK → never Azure
   if (azureBreakerOpen()) order = order.filter(function (n) { return n !== "azure"; });     // auto-skip Azure while tripped
   return order.length ? order : ["vertex", "developer"];
@@ -529,7 +529,6 @@ const MEDICAL_ONLY =
   "Judge the QUESTION, not the retrieved knowledge. When a question IS medical but unfamiliar, or uses " +
   "an abbreviation or drug class you are unsure of, ANSWER IT as a clinical question: a doctor asking " +
   "about an obscure condition must never be told their question is not medical.";
-
 const KNOWLEDGE_SYS =
   "You are MaiK, a knowledgeable clinical AI assistant for qualified doctors, built into StewardMD. Talk like a sharp, warm senior colleague — natural, direct, and genuinely useful, the way a modern medical AI would. Answer the clinician's question (shown under 'CLINICIAN QUESTION'), and use the RECENT CONVERSATION for continuity. " +
   "Draw on solid, widely-accepted medical knowledge and use the RETRIEVED STEWARDMD KNOWLEDGE below to ground specifics (regimens, protocols, doses), preferring it where it applies. You MAY answer confidently from mainstream clinical knowledge — do NOT refuse or hedge just because the retrieved text looks thin. " +
@@ -1119,6 +1118,8 @@ export async function onRequest(context) {
     return json({
       enabled: enabled,
       provider: order[0],
+      ai_provider_env: (env.AI_PROVIDER || null),
+      live_stream_env: (env.MAIK_LIVE_STREAM || null),
       fallback_available: !!(fb && PROVIDERS[fb] && PROVIDERS[fb].available(env)),
       fallback_provider: fb,
       model: modelId(env),
@@ -1185,7 +1186,7 @@ export async function onRequest(context) {
   // bedside answer); streaming keeps perceived speed fine, and the model still adapts short answers
   // short. "detailed" depth doubles it. Override with MAIK_MAX_OUTPUT_TOKENS. Was 768/1400.
   const OUT_BASE = Math.max(256, Math.min(2048, Number(env.MAIK_MAX_OUTPUT_TOKENS) || 1100));
-  const MAX_OUT = (body && body.depth === "detailed") ? Math.min(2048, Math.round(OUT_BASE * 2)) : OUT_BASE;
+  const MAX_OUT = (body && body.depth === "detailed") ? Math.max(OUT_BASE, Math.min(8192, Number(env.MAIK_MAX_OUTPUT_TOKENS_DETAILED) || 6000)) : OUT_BASE;
   // Non-stream output cap. Native (capacitor://) CANNOT stream (CapacitorHttp buffers SSE) so it waits
   // for the ENTIRE answer before rendering; a bigger cap = a longer blank wait, so we keep it as tight
   // as SAFELY possible. BUT: gemini-2.5-flash on Vertex currently spends output tokens on internal
@@ -1253,7 +1254,7 @@ export async function onRequest(context) {
         // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
         // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
         // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
