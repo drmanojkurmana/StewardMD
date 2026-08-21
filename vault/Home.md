@@ -20,11 +20,13 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[KardiQ X]] — ECG interpretation + Learn atlas
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
+- [[OncoTree]] — oncology decision-tree navigator + protocol library + protocol sheet/maker
 
 ## Cross-cutting
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
 - [[Roadmap]] — pending / deferred work
+- [[Agent-Handoff]] — full owner-controlled project knowledge / handoff (2026-08-21)
 
 ## The shape of the thing
 The [[Medical Knowledge Base]] hierarchy (Harrison = disease reference → ICMR → guidelines → hospital
