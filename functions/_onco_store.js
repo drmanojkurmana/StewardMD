@@ -143,7 +143,9 @@ export async function createPlan(env, body, template, deps) {
     calculatedDoses: calculatedDoses,
     physicianModifications: [],
     confirmedDoses: [],
-    plannedCycles: Number((template && template.cycles) || 0),
+    // Clamp 0..60: guards against a mg dose leaking into template.cycles (would render a runaway
+    // cycle matrix). 60 = ~1yr of weekly dosing; any real regimen is <= that. ponytail: hard ceiling.
+    plannedCycles: Math.max(0, Math.min(60, Number((template && template.cycles) || 0) || 0)),
     plannedDates: [],
     status: "draft",   // "planned" in the plan lifecycle; kept as "draft" (draft -> active on CONFIRM & ACTIVATE)
     confirmations: [],

@@ -13,11 +13,18 @@
     var PW = opts.pathways || G.FollowCarePathways; var pw = PW && PW.get(pathwayId);
     if (!pw || typeof dischargeMs !== "number") return [];
     var hour = (typeof opts.sendHour === "number") ? opts.sendHour : 9;
-    return pw.schedule.map(function (d) {
+    var s = pw.schedule.map(function (d) {
       var due = dischargeMs + d * DAY;
       due = due - (due % DAY) + hour * 3600000;              // snap to sendHour that day (UTC-based; tz applied by caller)
       return { dayOffset: d, dueAtMs: due };
     }).sort(function (a, b) { return a.dueAtMs - b.dueAtMs; });
+    // Doctor-set "first follow-up" (opts.firstDueMs): shift the WHOLE schedule so the earliest check-in
+    // lands on that time, preserving the pathway's relative spacing. Ignored if invalid or no entries.
+    if (typeof opts.firstDueMs === "number" && isFinite(opts.firstDueMs) && s.length) {
+      var delta = opts.firstDueMs - s[0].dueAtMs;
+      if (delta) s = s.map(function (x) { return { dayOffset: x.dayOffset, dueAtMs: x.dueAtMs + delta }; });
+    }
+    return s;
   }
 
   // Whole days since discharge (never negative).
