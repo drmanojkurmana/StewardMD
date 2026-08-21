@@ -243,6 +243,7 @@
   function mapHtml(state) {
     var g = graphLayout(state);
     st._graphSize = { w: g.width, h: g.height };
+    st._graphPos = g.pos;
     var paths = g.edges.map(function (e) {
       return '<path class="ot-edge' + (e.active ? " active" : "") + (e.disabled ? " disabled" : "") + '" d="' + e.d + '"/>';
     }).join("");
@@ -266,8 +267,31 @@
         '<button class="ot-gctl" data-ot-act="graph-fit" aria-label="Fit">' + ms("fit_screen") + "</button>" +
         '<button class="ot-gctl" data-ot-act="graph-zoom" data-ot-arg="in" aria-label="Zoom in">' + ms("add") + "</button></div>" +
       '<div class="ot-graph-hint">' + ms("drag_pan") + "Drag to pan &middot; pinch to zoom &middot; tap a node</div>" +
+      tocHtml(state) +
       (st.mapSel ? mapPopHtml(st.mapSel, state) : "") +
       "</div>";
+  }
+  // Table-of-Contents / outline panel: nodes grouped by section, each a jump-to-node link. Collapsible.
+  function tocHtml(state) {
+    if (st.tocOpen === false) return '<button class="ot-toc-fab" data-ot-act="toc-toggle" aria-label="Contents">' + ms("list") + "</button>";
+    var order = asArr(state.order), secs = [], bySec = {};
+    order.forEach(function (id) {
+      var raw = st.byId[id]; if (!raw) return;
+      var sec = raw.section || "Other";
+      if (!bySec[sec]) { bySec[sec] = []; secs.push(sec); }
+      bySec[sec].push(raw);
+    });
+    var body = secs.map(function (sec) {
+      var items = bySec[sec].map(function (raw) {
+        var cat = CAT[raw.nodeCategory] || CAT.other, sn = state.nodes[raw.id];
+        var on = sn && sn.status === "active";
+        return '<button class="ot-toc-item' + (on ? " on" : "") + (st.mapSel === raw.id ? " sel" : "") + '" data-ot-act="toc-goto" data-ot-node="' + esc(raw.id) + '" style="--ot-c:' + cat.color + '">' + esc(raw.name || raw.title || raw.id) + "</button>";
+      }).join("");
+      return '<div class="ot-toc-sec"><div class="ot-toc-sec-h">' + esc(sec) + "</div>" + items + "</div>";
+    }).join("");
+    return '<div class="ot-toc"><div class="ot-toc-hd">' + ms("list") + "<span>Contents</span>" +
+      '<button class="ot-toc-x" data-ot-act="toc-toggle" aria-label="Collapse contents">' + ms("close") + "</button></div>" +
+      '<div class="ot-toc-body">' + body + "</div></div>";
   }
 
   // Bottom-sheet detail for a tapped map node - keeps the physician IN the map (interactive), shows the
@@ -451,6 +475,14 @@
     c.style.transform = "translate(" + t.x + "px," + t.y + "px) scale(" + t.s + ")";
     c.style.transformOrigin = "0 0";
   }
+  // Pan (keeping current zoom) so a given node is centered in the viewport - used by the Contents panel.
+  function centerOnNode(id) {
+    var vp = D && D.getElementById("otGraphVp"), pos = st._graphPos && st._graphPos[id];
+    if (!vp || !pos) return;
+    var s = (st.graphT && st.graphT.s) || 1;
+    st.graphT = { x: vp.clientWidth / 2 - (pos.x + NW / 2) * s, y: vp.clientHeight / 2 - (pos.y + NH / 2) * s, s: s };
+    applyGraphT();
+  }
   function graphFit() {
     var vp = D && D.getElementById("otGraphVp"), sz = st._graphSize; if (!vp || !sz) return;
     var pad = 20, s = Math.min((vp.clientWidth - pad * 2) / sz.w, (vp.clientHeight - pad * 2) / sz.h, 1);
@@ -510,6 +542,8 @@
     if (act === "view-map") { st.view = "map"; paint(); return; }
     if (act === "graph-zoom") { graphZoom(t.getAttribute("data-ot-arg")); return; }
     if (act === "graph-fit") { graphFit(); return; }
+    if (act === "toc-toggle") { st.tocOpen = !(st.tocOpen !== false); repaintBody(); return; }
+    if (act === "toc-goto") { st.mapSel = node; repaintBody(); centerOnNode(node); return; }
     if (act === "mapnode") { if (graphMoved) { graphMoved = false; return; } st.mapSel = (st.mapSel === node ? null : node); repaintBody(); return; }
     if (act === "mappop-close") { st.mapSel = null; repaintBody(); return; }
     if (act === "map-goto") { st.mapSel = null; st.view = "pathway"; editStep(node); return; }
