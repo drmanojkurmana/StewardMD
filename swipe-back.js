@@ -81,8 +81,24 @@
     var backs = top.filter(isBack);
     return backs.length ? backs[backs.length - 1] : top[top.length - 1];
   }
+  // Home is the true foreground screen (nothing covering it) — the same check refreshFab() in
+  // home.js uses for the FAB's own visibility. If home owns the screen center there is nowhere
+  // further "back" to go (see #3 in the file header), no matter what topBackControl()'s
+  // pattern-matching (BACK_SEL is necessarily broad — any "-close"/"-back" class or aria-label
+  // prefix) thinks it found on the page; a stray match there must never win over this.
+  function homeIsForeground() {
+    var h = document.getElementById("homeV2");
+    if (!h || !h.classList.contains("on")) return false;
+    var cs = window.getComputedStyle(h);
+    if (cs.display === "none" || cs.visibility === "hidden") return false;
+    try {
+      var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
+      return !!(el && h.contains(el));
+    } catch (e) { return false; }
+  }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
   function canGoBack() {
+    if (homeIsForeground()) return false;
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
