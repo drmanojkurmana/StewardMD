@@ -1,0 +1,92 @@
+{
+  "id": "uro-intravesical-gem-docetaxel",
+  "diseaseId": "bladder_cancer",
+  "name": "Intravesical gemcitabine + docetaxel (sequential, BCG-unresponsive NMIBC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "cyclesNote": "Sequential same-visit intravesical gemcitabine then docetaxel, weekly for 6 weeks (induction), followed by monthly maintenance for responders. A bladder-sparing option for BCG-unresponsive NMIBC in patients declining or unfit for cystectomy.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "none",
+    "note": "Sequential intravesical gemcitabine + docetaxel is a salvage bladder-sparing regimen for BCG-unresponsive non-muscle-invasive urothelial carcinoma. Cystectomy remains the preferred standard for fit patients. No molecular biomarker gates its use."
+  },
+  "stage": ["Ta high-grade", "T1", "Tis (CIS)"],
+  "treatmentSetting": "salvage intravesical (BCG-unresponsive NMIBC)",
+  "histology": "urothelial carcinoma (non-muscle-invasive)",
+  "premedications": [],
+  "supportiveCare": [
+    "Instill gemcitabine first (retain about 1-1.5 hours), have the patient void, then instill docetaxel (retain about 1-2 hours) at the same visit.",
+    "Confirm no active UTI or gross hematuria before each instillation.",
+    "Manage chemical cystitis symptomatically; disinfect voided urine per policy."
+  ],
+  "monitoring": [
+    "urinary symptoms before each instillation",
+    "cystoscopy + cytology at surveillance (about 3 months); low threshold to proceed to cystectomy"
+  ],
+  "clearanceChecks": [
+    "no active UTI / gross hematuria",
+    "prior-instillation tolerance"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant chemical cystitis",
+      "drug": "gemcitabine/docetaxel",
+      "action": "hold",
+      "text": "Hold instillations for severe local toxicity until recovery; consider dose/volume adjustment. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "gemcitabine (intravesical)",
+      "basis": "flat",
+      "dosePerUnit": 1000,
+      "unit": "mg",
+      "route": "intravesical",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "gemcitabine 1000 mg (commonly reconstituted in about 50-100 mL saline) instilled first and retained about 1-1.5 hours, then drained before docetaxel. A 2000 mg intravesical dose is an alternative. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Intravesical Therapy - sequential gemcitabine/docetaxel",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel (intravesical)",
+      "basis": "flat",
+      "dosePerUnit": 37.5,
+      "unit": "mg",
+      "route": "intravesical",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "DOCEtaxel 37.5 mg (in about 50 mL saline) instilled after the gemcitabine dwell is drained, retained about 1-2 hours. ISMP tall-man DOCEtaxel (distinguish from PACLitaxel). Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Intravesical Therapy - sequential gemcitabine/docetaxel",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

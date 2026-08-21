@@ -843,9 +843,9 @@
         "Conventional-dose VIP or TIP (paclitaxel-ifosfamide-cisplatin)",
         "High-dose chemotherapy with autologous stem-cell rescue is an alternative first salvage",
         "Reassess markers and imaging afterward on the salvage-restaging step",
-        "VIP backbone referenced below"
+        "VIP and TIP backbones referenced below"
       ],
-      "protocolRefs": ["gu-testicular-vip"]
+      "protocolRefs": ["gu-testicular-vip", "tgct-tip"]
     },
     {
       "id": "n_tx_salvage_hdct",
@@ -862,9 +862,10 @@
       "bullets": [
         "High-dose carboplatin/etoposide with autologous stem-cell rescue (often tandem cycles)",
         "Best delivered at an experienced transplant/germ-cell centre",
-        "No dedicated dose protocol here - delivered on a transplant protocol",
+        "Delivered on a transplant protocol; the high-dose backbone is referenced below",
         "Reassess markers and imaging afterward on the salvage-restaging step"
-      ]
+      ],
+      "protocolRefs": ["tgct-hdct-carbo-etoposide"]
     },
     {
       "id": "n_tx_late_relapse",

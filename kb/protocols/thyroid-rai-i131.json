@@ -1,0 +1,65 @@
+{
+  "id": "thyroid-rai-i131",
+  "diseaseId": "differentiated_thyroid_carcinoma",
+  "name": "Radioiodine I-131 (RAI-avid metastatic DTC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 180,
+  "cycles": 1,
+  "cyclesNote": "a single therapeutic administration per course; courses are repeated at roughly 6 to 12 month intervals while metastases stay iodine-avid and responding. Nuclear medicine sets the individual activity (empiric fixed activity, or dosimetry-guided in high-risk / diffuse pulmonary disease).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "stage": ["advanced", "metastatic", "recurrent"],
+  "treatmentSetting": "metastatic",
+  "histology": "iodine-avid distant-metastatic differentiated thyroid carcinoma (papillary / follicular / oncocytic)",
+  "premedications": [
+    { "name": "TSH stimulation", "notes": "raise TSH before dosing, either by thyroid-hormone withdrawal (stop levothyroxine, or switch to liothyronine then stop) targeting TSH above about 30 mIU/L, or by recombinant human TSH (thyrotropin alfa) on the two days before the activity." },
+    { "name": "Low-iodine diet", "notes": "approximately 1 to 2 weeks of a low-iodine diet beforehand; avoid recent iodinated contrast and amiodarone, which block uptake." }
+  ],
+  "supportiveCare": [
+    "confirm iodine avidity on a diagnostic or post-therapy scan before relying on radioiodine in metastatic disease.",
+    "obtain a pregnancy test in people of child-bearing potential; radioiodine is contraindicated in pregnancy and lactation.",
+    "hydrate well, use antiemetics, and encourage frequent voiding and salivary stimulation (sour candy / sialogogues) to limit sialadenitis and bladder / gonadal dose.",
+    "radiation-safety precautions and isolation per local regulations after administration.",
+    "continue TSH suppression (levothyroxine to TSH below 0.1 mIU/L) between treatments; add directed local therapy and a bone-modifying agent for symptomatic, dominant, or CNS / weight-bearing bone lesions."
+  ],
+  "monitoring": [
+    "post-therapy whole-body I-131 scan 5 to 8 days after the activity to map avid disease",
+    "thyroglobulin and anti-thyroglobulin antibody trend as the response marker",
+    "CBC (marrow suppression with repeated / high cumulative activity)",
+    "cross-sectional imaging for response assessment",
+    "salivary, lacrimal, and pulmonary (fibrosis with diffuse lung metastases) late effects"
+  ],
+  "clearanceChecks": ["pregnancy excluded", "TSH stimulated / low-iodine diet done", "iodine avidity confirmed", "cumulative I-131 activity reviewed", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "high cumulative lifetime I-131 activity (commonly reviewed above about 22 GBq / 600 mCi) or diffuse pulmonary metastases",
+      "drug": "iodine-131",
+      "action": "review/dosimetry",
+      "text": "Use dosimetry to cap the whole-body / lung retention (keep blood dose within accepted limits and 48-hour lung retention low) and review cumulative marrow and pulmonary-fibrosis risk before re-treating. Nuclear medicine and the physician decide."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "iodine-131",
+      "name": "Iodine-131 (sodium iodide)",
+      "basis": "flat",
+      "dosePerUnit": 5550,
+      "unit": "MBq",
+      "route": "PO",
+      "notes": "Therapeutic sodium iodide I-131, single oral activity after TSH stimulation and a low-iodine diet. A representative empiric fixed activity for iodine-avid distant metastases is about 5.5 GBq (150 mCi), commonly in the 3.7 to 7.4 GBq (100 to 200 mCi) range; dosimetry-guided activity is preferred for diffuse pulmonary or high-burden disease and to respect blood / lung retention limits. A weight-based estimate of roughly 74 MBq/kg (2 mCi/kg) is sometimes used. Nuclear medicine sets and administers the individual activity. Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1],
+      "modificationRules": []
+    }
+  ]
+}

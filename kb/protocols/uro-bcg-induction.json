@@ -1,0 +1,75 @@
+{
+  "id": "uro-bcg-induction",
+  "diseaseId": "bladder_cancer",
+  "name": "Intravesical BCG - induction (6 weekly instillations)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "cyclesNote": "Induction is a single 6-week course: one intravesical instillation weekly for 6 consecutive weeks (encoded as a 7-day cycle x 6). Start no sooner than 2-3 weeks after TURBT to allow mucosal healing and avoid intravasation.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "non-specific immune activation",
+    "note": "Intravesical BCG is a live attenuated Mycobacterium bovis immunotherapy for high-risk (and selected intermediate-risk) non-muscle-invasive urothelial carcinoma after complete TURBT. No molecular biomarker gates its use."
+  },
+  "stage": ["Ta high-grade", "T1", "Tis (CIS)"],
+  "treatmentSetting": "adjuvant intravesical (NMIBC)",
+  "histology": "urothelial carcinoma (non-muscle-invasive)",
+  "premedications": [],
+  "supportiveCare": [
+    "Confirm no gross hematuria, traumatic catheterization, active UTI, or febrile illness before each instillation; hold BCG until resolved (risk of systemic BCG infection).",
+    "Retain the instillation in the bladder for about 2 hours with position changes, then void seated; disinfect voided urine for 6 hours per institutional policy.",
+    "Manage cystitis symptoms with anticholinergics/analgesics; escalate persistent high fever or systemic symptoms to evaluation for BCG sepsis (may need anti-tuberculous therapy)."
+  ],
+  "monitoring": [
+    "symptom review before each weekly instillation (dysuria, fever, hematuria)",
+    "urinalysis / culture if UTI suspected",
+    "cystoscopy + cytology at first surveillance (about 3 months) to assess response"
+  ],
+  "clearanceChecks": [
+    "no active UTI / gross hematuria",
+    "no recent traumatic catheterization",
+    "afebrile",
+    "prior-cycle tolerance"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "severe local (grade >= 2 cystitis) or any systemic BCG reaction",
+      "drug": "bcg",
+      "action": "hold",
+      "text": "Hold BCG until symptoms resolve; treat symptomatic cystitis and consider a reduced dose or fluoroquinolone. Discontinue and evaluate for systemic BCG infection (fever, sepsis, granulomatous organ involvement). Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "bcg",
+      "name": "BCG (intravesical)",
+      "basis": "flat",
+      "dosePerUnit": 50,
+      "unit": "mg",
+      "route": "intravesical",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "One reconstituted vial instilled intravesically weekly for 6 weeks (induction). Dose is one strain-defined vial: TICE approximately 50 mg per vial, Connaught/Danish 1331 approximately 81 mg, RIVM approximately 2 x 10^8 to 3 x 10^9 CFU. Reconstitute in about 50 mL preservative-free saline. Strain and unit potency are not interchangeable across products; follow the specific product label. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Intravesical Therapy - BCG induction (6 weekly)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

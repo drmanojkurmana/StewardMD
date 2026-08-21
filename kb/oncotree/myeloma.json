@@ -1038,8 +1038,9 @@
         "Clinical trial is the preferred pathway for penta-refractory disease",
         "Re-challenge with a prior class combined with a new partner if any residual sensitivity",
         "Selinexor-based combinations or alkylator salvage (e.g. cyclophosphamide) for disease control",
-        "Integrate palliative care, bone support and symptom management; no StewardMD dose protocol for these salvage regimens"
-      ]
+        "Integrate palliative care, bone support and symptom management; the selinexor-dexamethasone salvage doublet is computable here, while clinical trial and best supportive care are not dose protocols"
+      ],
+      "protocolRefs": ["mm-selinexor-dex"]
     },
     {
       "id": "n_rr_post_immuno",
@@ -1060,8 +1061,10 @@
         "Switch antigen target (BCMA to GPRC5D or vice versa) where a product is available",
         "Re-challenge a prior class combined with a new partner if a treatment-free interval passed",
         "Clinical trial strongly preferred; account for prior T-cell exhaustion after CAR-T",
-        "Best supportive care and palliative input as disease and performance status dictate"
-      ]
+        "Best supportive care and palliative input as disease and performance status dictate",
+        "A mechanistically distinct non-immune salvage such as the selinexor-dexamethasone doublet is a computable option after immunotherapy failure"
+      ],
+      "protocolRefs": ["mm-selinexor-dex"]
     }
   ],
   "links": [

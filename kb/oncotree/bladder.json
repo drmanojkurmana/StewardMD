@@ -142,7 +142,8 @@
         "Single immediate intravesical chemotherapy (e.g. mitomycin or gemcitabine) within 24 hours of resection",
         "No induction / maintenance course needed for low risk",
         "Surveillance cystoscopy (see follow-up)"
-      ]
+      ],
+      "protocolRefs": ["uro-intravesical-mitomycin"]
     },
     {
       "id": "n_tx_nmibc_int",
@@ -163,7 +164,8 @@
         "Induction intravesical chemotherapy (mitomycin or gemcitabine), OR induction BCG, based on recurrence risk",
         "Maintenance course for higher-risk intermediate disease",
         "Surveillance cystoscopy (see follow-up)"
-      ]
+      ],
+      "protocolRefs": ["uro-intravesical-mitomycin", "uro-bcg-induction"]
     },
     {
       "id": "n_tx_nmibc_high",
@@ -185,7 +187,8 @@
         "Induction intravesical BCG - 6 weekly instillations",
         "Early radical cystectomy is a reasonable alternative for the highest-risk disease (e.g. extensive / multifocal high-grade T1, variant histology, prostatic-urethral CIS)",
         "Assess response at first surveillance (next step)"
-      ]
+      ],
+      "protocolRefs": ["uro-bcg-induction"]
     },
     {
       "id": "n_nmibc_response",
@@ -228,7 +231,8 @@
         "Maintenance BCG (3 weekly instillations at set intervals) for 1-3 years",
         "Ongoing cystoscopy + cytology surveillance",
         "Escalate to the BCG-unresponsive pathway on high-grade recurrence"
-      ]
+      ],
+      "protocolRefs": ["uro-bcg-maintenance"]
     },
     {
       "id": "n_tx_nmibc_bcgunresp",
@@ -249,7 +253,8 @@
         "Bladder-sparing salvage (for cystectomy-ineligible / declining, CIS-containing disease): intravesical / systemic pembrolizumab, nadofaragene firadenovec, or the N-803 (nogapendekin) + BCG combination - described as guidance, no dose protocol here",
         "Additional intravesical chemotherapy (e.g. gemcitabine + docetaxel) is an option for selected patients",
         "Close cystoscopic surveillance; low threshold to proceed to cystectomy"
-      ]
+      ],
+      "protocolRefs": ["uro-intravesical-gem-docetaxel", "uro-pembrolizumab"]
     },
 
     {
@@ -387,7 +392,8 @@
         "Mid-treatment / post-treatment cystoscopy + biopsy to confirm response",
         "Salvage radical cystectomy for incomplete response or invasive recurrence",
         "Lifelong cystoscopic surveillance (see follow-up)"
-      ]
+      ],
+      "protocolRefs": ["uro-tmt-cisplatin", "uro-tmt-mmc-5fu", "uro-tmt-gemcitabine"]
     },
     {
       "id": "n_mibc_adjuvant",

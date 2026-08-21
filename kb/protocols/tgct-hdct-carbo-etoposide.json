@@ -1,0 +1,113 @@
+{
+  "id": "tgct-hdct-carbo-etoposide",
+  "diseaseId": "testicular_cancer",
+  "name": "High-dose CARBOplatin / Etoposide + autologous stem-cell rescue (HDCT)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 2,
+  "cyclesNote": "Typically given as tandem/sequential high-dose cycles (commonly 2 to 3), each followed by autologous peripheral-blood stem-cell reinfusion",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Testicular Cancer - salvage (high-dose chemotherapy)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "AFP": "response marker",
+    "beta_hCG": "response marker",
+    "LDH": "response marker",
+    "note": "High-dose CARBOplatin plus etoposide with autologous stem-cell rescue is a myeloablative salvage strategy for relapsed or platinum-refractory germ cell tumor, delivered only at an experienced transplant/germ-cell centre with harvested peripheral-blood stem cells. Serum tumor markers track response. Dose and schedule in our own words for a DRAFT decision-support tool; the exact per-cycle CARBOplatin AUC target, number of cycles, and stem-cell logistics are set by the treating transplant protocol."
+  },
+  "stage": [
+    "III"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "germ cell tumor (seminoma and nonseminomatous germ cell tumor / NSGCT), relapsed or platinum-refractory",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis (high emetic risk)",
+      "notes": "High-dose CARBOplatin/etoposide is highly emetogenic; give guideline-based multi-agent prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "Autologous peripheral-blood stem cells must be harvested before high-dose therapy and reinfused after each myeloablative cycle.",
+    "Prolonged pancytopenia expected: neutropenic precautions, transfusion support, and G-CSF per transplant protocol.",
+    "Infection prophylaxis (antibacterial/antiviral/antifungal) and close inpatient monitoring during aplasia.",
+    "AUC dosing: compute high-dose CARBOplatin from measured/estimated GFR (Calvert); verify renal function before each cycle."
+  ],
+  "monitoring": [
+    "Serum tumor markers (AFP, beta-hCG, LDH) before each cycle and at restaging",
+    "CBC daily through the aplastic phase - deep and prolonged myelosuppression",
+    "Renal function and GFR before each cycle - required for AUC (Calvert) dosing",
+    "Audiometry and neurologic assessment - cumulative platinum ototoxicity/neuropathy"
+  ],
+  "clearanceChecks": [
+    "renal function / GFR for AUC dosing",
+    "CBC/platelets",
+    "adequate stem-cell harvest confirmed",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "impaired renal function",
+      "drug": "carboplatin",
+      "action": "recalculate",
+      "text": "Recalculate the AUC-based high-dose CARBOplatin from current GFR (Calvert). Physician/transplant protocol decides."
+    },
+    {
+      "condition": "failure of count recovery or organ toxicity between cycles",
+      "action": "delay/reassess",
+      "text": "Review required before the next high-dose cycle; delay or reassess suitability for further myeloablative therapy. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 8,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "notes": "High-dose CARBOplatin dosed to target approximately AUC 7 to 8 per day (Calvert formula, not mg/m2) on Days 1 to 3 of each myeloablative cycle. Tall-man per ISMP. Exact AUC target set by the transplant protocol; dose and schedule in our own words from standard high-dose salvage practice (general references NCCN/DeVita).",
+      "modificationRules": []
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 750,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "notes": "High-dose etoposide 750 mg/m2 IV on Days 1 to 3 of each myeloablative cycle, paired with high-dose CARBOplatin and followed by autologous stem-cell reinfusion. Dose and schedule in our own words from standard high-dose salvage practice (general references NCCN/DeVita).",
+      "modificationRules": []
+    }
+  ]
+}

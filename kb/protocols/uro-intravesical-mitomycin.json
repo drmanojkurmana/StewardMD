@@ -1,0 +1,73 @@
+{
+  "id": "uro-intravesical-mitomycin",
+  "diseaseId": "bladder_cancer",
+  "name": "Intravesical mitomycin (single instillation or induction)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "cyclesNote": "Two uses: (1) a single immediate post-TURBT instillation within 24 hours for low-risk NMIBC (cycles effectively 1), or (2) a 6-week induction course of weekly instillations for intermediate-risk disease (7-day cycle x 6). Gemcitabine is an accepted intravesical alternative agent.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "none",
+    "note": "Intravesical chemotherapy (mitomycin, or gemcitabine as an alternative) is used after complete TURBT to lower recurrence in low- and intermediate-risk NMIBC. No molecular biomarker gates its use."
+  },
+  "stage": ["Ta low-grade", "Ta", "T1 low-grade"],
+  "treatmentSetting": "adjuvant intravesical (NMIBC)",
+  "histology": "urothelial carcinoma (non-muscle-invasive)",
+  "premedications": [],
+  "supportiveCare": [
+    "Do NOT give an immediate post-operative instillation if bladder perforation or extensive resection is suspected (risk of extravasation and severe reaction).",
+    "Retain in the bladder for about 1-2 hours, then void; alkalinization and reduced fluid intake before instillation improve mitomycin efficacy.",
+    "Manage chemical cystitis symptomatically; avoid skin/genital contact with voided drug."
+  ],
+  "monitoring": [
+    "urinary symptoms after each instillation",
+    "cystoscopy + cytology at first surveillance (about 3 months)"
+  ],
+  "clearanceChecks": [
+    "no suspected bladder perforation",
+    "no active gross hematuria",
+    "prior-instillation tolerance"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant chemical cystitis or suspected extravasation",
+      "drug": "mitomycin",
+      "action": "hold",
+      "text": "Hold further instillations for severe cystitis; omit an immediate instillation entirely if perforation is suspected. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "mitomycin",
+      "name": "mitomycin",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "intravesical",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "mitomycin 40 mg instilled intravesically (reconstituted in about 20-40 mL sterile water or saline). Given as a single immediate post-TURBT dose (low-risk) or weekly x6 as induction (intermediate-risk). ISMP: 'mitomycin' is easily confused with mitoXANTRONE. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Intravesical Therapy - intravesical chemotherapy (mitomycin)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

@@ -362,7 +362,8 @@
         "Enforce a defined observation interval to select favorable biology",
         "Reassess resectability / transplant criteria after treatment",
         "Then re-stage against criteria (next step)"
-      ]
+      ],
+      "protocolRefs": ["hcc-tace", "hcc-y90-radioembolization"]
     },
     {
       "id": "n_downstage_response",
@@ -445,7 +446,8 @@
         "Repeat on-demand for viable disease; reassess response by imaging",
         "Continue liver-function monitoring between sessions",
         "Then assess response / refractoriness (next step)"
-      ]
+      ],
+      "protocolRefs": ["hcc-tace"]
     },
     {
       "id": "n_tx_y90",
@@ -464,7 +466,8 @@
         "Lobar or segmental (radiation-segmentectomy) delivery",
         "Option for bridging / downstaging toward transplant or resection",
         "Then assess response / refractoriness (next step)"
-      ]
+      ],
+      "protocolRefs": ["hcc-y90-radioembolization"]
     },
     {
       "id": "n_tace_response",
@@ -505,7 +508,8 @@
         "Reassess liver function before each session; stop if reserve declines",
         "Consider adding systemic therapy for bilobar / progressive disease per multidisciplinary review",
         "Then enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["hcc-tace", "hcc-y90-radioembolization"]
     },
     {
       "id": "n_sys_1l",
@@ -677,7 +681,8 @@
         "Restage every 8-12 weeks; monitor liver function and AFP trend",
         "Manage immune-related or TKI toxicities with dose modification / supportive care",
         "Then enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["hcc-atezo-bev", "hcc-durva-treme", "hcc-lenvatinib", "gi-hcc-sorafenib"]
     },
     {
       "id": "n_tx_switch_intol",
@@ -697,7 +702,8 @@
         "Optimize supportive care and dose before abandoning an effective class",
         "Re-confirm Child-Pugh A function",
         "Then follow the second-line selection pathway (next step)"
-      ]
+      ],
+      "protocolRefs": ["hcc-atezo-bev", "hcc-durva-treme", "hcc-lenvatinib", "gi-hcc-sorafenib"]
     },
     {
       "id": "n_sys_2l",
@@ -831,7 +837,8 @@
         "Clinical trial where available",
         "Reassess liver function and performance status before each new line",
         "Transition to best supportive care when Child-Pugh declines or PS is poor"
-      ]
+      ],
+      "protocolRefs": ["hcc-regorafenib", "hcc-cabozantinib"]
     },
     {
       "id": "n_tx_bsc_late",
