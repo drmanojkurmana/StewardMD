@@ -122,6 +122,32 @@
       ]
     },
     {
+      "id": "n_tx_bcs", "linkId": "tx_bcs", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "BCS + RT", "title": "Breast-conserving surgery + whole-breast RT", "section": "Treatment",
+      "description": "Breast conservation with radiation, then subtype-directed adjuvant systemic therapy.",
+      "path": "Breast / Locoregional / BCS", "pills": ["BCS", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "Lumpectomy to negative margins (no ink on tumor) + surgical axillary staging (sentinel-node biopsy; axillary dissection if node-positive)",
+        "Whole-breast radiation; boost to the tumor bed for high-risk features",
+        "Accelerated / partial-breast irradiation (APBI/PBI) for appropriately selected low-risk patients",
+        "Omission of radiation may be considered in selected older patients with low-risk, ER-positive tumors on endocrine therapy",
+        "Then subtype-directed adjuvant systemic therapy (next step)"
+      ]
+    },
+    {
+      "id": "n_tx_mastectomy", "linkId": "tx_mastectomy", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Mastectomy +/- PMRT", "title": "Total mastectomy +/- post-mastectomy RT (PMRT)", "section": "Treatment",
+      "description": "Mastectomy with post-mastectomy radiation as indicated by nodal status / tumor stage / margins, then adjuvant systemic therapy.",
+      "path": "Breast / Locoregional / Mastectomy", "pills": ["mastectomy", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "Total mastectomy +/- reconstruction + surgical axillary staging (sentinel-node biopsy; axillary dissection if node-positive)",
+        "PMRT (+ regional nodal irradiation) for node-positive disease, T3-4 tumors, or positive margins",
+        "PMRT generally not required for node-negative, <= T2, negative-margin (>= 1 mm) disease",
+        "Consider PMRT for node-negative disease with multiple high-risk features (young age, LVI, grade 3, ER-negative)",
+        "Then subtype-directed adjuvant systemic therapy (next step)"
+      ]
+    },
+    {
       "id": "n_tx_preop", "linkId": "tx_preop", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
       "name": "Neoadjuvant systemic", "title": "Preoperative (neoadjuvant) systemic therapy", "section": "Treatment",
       "description": "Neoadjuvant systemic therapy matched to subtype, then surgery, then adjuvant. Regimen is chosen by subtype (see the subtype step next).",
@@ -372,17 +398,54 @@
       ]
     },
     {
-      "id": "n_mbc_hrpos", "linkId": "tx_mbc_hrpos", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
-      "name": "Metastatic HR+/HER2-", "title": "Metastatic HR-positive / HER2-negative", "section": "Treatment",
-      "description": "Endocrine-based therapy first for most; chemotherapy for visceral crisis.", "path": "Breast / Metastatic / HR+",
-      "pills": ["HR+/HER2-", "treatment"], "showsRecommendation": true,
+      "id": "n_mbc_hr_line", "linkId": "breast_mbc_hr_line", "nodeCategory": "criteria", "nodeType": "question", "template": "main",
+      "name": "Metastatic HR+ line", "title": "Metastatic HR+/HER2-: line of therapy", "section": "Treatment",
+      "description": "Endocrine-based therapy is preferred while endocrine-sensitive; sequencing depends on prior therapy and biomarkers (PIK3CA/AKT/PTEN, ESR1, germline BRCA).",
+      "path": "Breast / Metastatic / HR+ / Line", "pills": ["HR+/HER2-", "sequencing"], "required": true,
+      "options": [
+        { "id": "first", "label": "First line (endocrine-sensitive)", "sets": { "line": "first" }, "pills": ["1st line"] },
+        { "id": "post_cdk", "label": "Progressed on endocrine + CDK4/6", "sets": { "line": "post_cdk" }, "pills": ["post-CDK4/6"] },
+        { "id": "refractory", "label": "Endocrine-refractory / visceral crisis", "sets": { "line": "refractory" }, "pills": ["refractory"] }
+      ]
+    },
+    {
+      "id": "n_mbc_hr_1l", "linkId": "tx_mbc_hr_1l", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Metastatic HR+ 1st line", "title": "Metastatic HR+/HER2-: first line", "section": "Treatment",
+      "description": "Endocrine therapy plus a CDK4/6 inhibitor.", "path": "Breast / Metastatic / HR+ / 1L",
+      "pills": ["HR+/HER2-", "1st line", "treatment"], "showsRecommendation": true,
       "bullets": [
-        "First line: aromatase inhibitor (or fulvestrant) + a CDK4/6 inhibitor",
-        "Later lines guided by biomarkers: fulvestrant, PIK3CA/AKT or mTOR inhibitor combinations, or elacestrant for ESR1-mutant",
-        "Olaparib / talazoparib for germline BRCA; chemotherapy for endocrine-refractory or visceral crisis",
+        "Aromatase inhibitor (or fulvestrant) + a CDK4/6 inhibitor (category 1)",
+        "Ovarian suppression added for premenopausal patients",
         "Regimens referenced below"
       ],
       "protocolRefs": ["breast-cdk46-ai", "breast-letrozole", "breast-fulvestrant"]
+    },
+    {
+      "id": "n_mbc_hr_2l", "linkId": "tx_mbc_hr_2l", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Metastatic HR+ 2nd line", "title": "Metastatic HR+/HER2-: after CDK4/6 (biomarker-directed)", "section": "Treatment",
+      "description": "Biomarker-directed endocrine + targeted therapy after progression on endocrine + CDK4/6.", "path": "Breast / Metastatic / HR+ / 2L",
+      "pills": ["HR+/HER2-", "post-CDK4/6", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "PIK3CA/AKT/PTEN-altered: fulvestrant + a PI3K/AKT inhibitor (alpelisib or capivasertib)",
+        "ESR1-mutant: elacestrant (an oral SERD)",
+        "Germline BRCA: a PARP inhibitor (olaparib or talazoparib)",
+        "Otherwise: fulvestrant +/- everolimus, or an alternate endocrine + targeted combination",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["breast-fulvestrant"]
+    },
+    {
+      "id": "n_mbc_hr_later", "linkId": "tx_mbc_hr_later", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Metastatic HR+ refractory", "title": "Metastatic HR+/HER2-: endocrine-refractory / visceral crisis", "section": "Treatment",
+      "description": "Cytotoxic therapy and antibody-drug conjugates once endocrine-refractory.", "path": "Breast / Metastatic / HR+ / Refractory",
+      "pills": ["HR+/HER2-", "refractory", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "Sequential single-agent chemotherapy (e.g. capecitabine, taxane)",
+        "Antibody-drug conjugates: sacituzumab govitecan, or trastuzumab deruxtecan if HER2-low (guidance where no dose protocol exists here)",
+        "Chemotherapy for visceral crisis regardless of endocrine sensitivity",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["breast-capecitabine"]
     },
     {
       "id": "n_mbc_her2pos", "linkId": "tx_mbc_her2pos", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
@@ -481,7 +544,10 @@
     { "id": "l_inv_wk", "from": "n_inv_wk", "to": "n_inv_approach", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_inv_up", "from": "n_inv_approach", "to": "n_locoregional", "fromOptions": ["upfront"], "linkCategory": "conditional" },
     { "id": "l_inv_pre", "from": "n_inv_approach", "to": "n_tx_preop", "fromOptions": ["preop"], "linkCategory": "conditional" },
-    { "id": "l_loc_sub", "from": "n_locoregional", "to": "n_subtype", "linkCategory": "conditional" },
+    { "id": "l_loc_bcs", "from": "n_locoregional", "to": "n_tx_bcs", "fromOptions": ["bcs"], "linkCategory": "conditional" },
+    { "id": "l_loc_mast", "from": "n_locoregional", "to": "n_tx_mastectomy", "fromOptions": ["mastectomy"], "linkCategory": "conditional" },
+    { "id": "l_bcs_sub", "from": "n_tx_bcs", "to": "n_subtype", "linkCategory": "conditional" },
+    { "id": "l_mast_sub", "from": "n_tx_mastectomy", "to": "n_subtype", "linkCategory": "conditional" },
     { "id": "l_preop_adj", "from": "n_tx_preop", "to": "n_adj_after_preop", "linkCategory": "conditional" },
     { "id": "l_adjpre_sub", "from": "n_adj_after_preop", "to": "n_subtype", "linkCategory": "conditional" },
 
@@ -511,7 +577,10 @@
     { "id": "l_rec_local", "from": "n_recur_type", "to": "n_local_recur", "fromOptions": ["local"], "linkCategory": "conditional" },
     { "id": "l_rec_reg", "from": "n_recur_type", "to": "n_regional_recur", "fromOptions": ["regional"], "linkCategory": "conditional" },
     { "id": "l_rec_dist", "from": "n_recur_type", "to": "n_mbc_subtype", "fromOptions": ["distant"], "linkCategory": "conditional" },
-    { "id": "l_mbc_hr", "from": "n_mbc_subtype", "to": "n_mbc_hrpos", "fromOptions": ["hrpos"], "linkCategory": "conditional" },
+    { "id": "l_mbc_hr", "from": "n_mbc_subtype", "to": "n_mbc_hr_line", "fromOptions": ["hrpos"], "linkCategory": "conditional" },
+    { "id": "l_mbc_hr_1l", "from": "n_mbc_hr_line", "to": "n_mbc_hr_1l", "fromOptions": ["first"], "linkCategory": "conditional" },
+    { "id": "l_mbc_hr_2l", "from": "n_mbc_hr_line", "to": "n_mbc_hr_2l", "fromOptions": ["post_cdk"], "linkCategory": "conditional" },
+    { "id": "l_mbc_hr_later", "from": "n_mbc_hr_line", "to": "n_mbc_hr_later", "fromOptions": ["refractory"], "linkCategory": "conditional" },
     { "id": "l_mbc_her2", "from": "n_mbc_subtype", "to": "n_mbc_her2pos", "fromOptions": ["her2pos"], "linkCategory": "conditional" },
     { "id": "l_mbc_tnbc", "from": "n_mbc_subtype", "to": "n_mbc_tnbc", "fromOptions": ["tnbc"], "linkCategory": "conditional" }
   ]
