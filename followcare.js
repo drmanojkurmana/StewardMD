@@ -152,12 +152,18 @@
       ".fc-hd b{font-size:16px;font-weight:800}.fc-hd .fc-x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:34px;height:34px;border-radius:9px;font-size:18px;cursor:pointer}",
       ".fc-bd{padding:16px 16px calc(16px + env(safe-area-inset-bottom));flex:1}",
       ".fc-sum{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}",
+      ".fc-sect{font:800 11px var(--sans,system-ui);letter-spacing:.08em;color:var(--slate,#5a7184);margin:18px 0 8px;padding:0 2px}",
       ".fc-pill{border-radius:999px;padding:6px 12px;font-size:12.5px;font-weight:700}",
       ".fc-btn{background:#0e6e63;color:#fff;border:none;border-radius:12px;padding:12px 16px;font-weight:750;font-size:14px;cursor:pointer;min-height:46px}",
       ".fc-btn.sec{background:transparent;color:#0e6e63;border:1.5px solid #0e6e63}",
       ".fc-row{border:1px solid var(--line,#dbe4e2);border-radius:14px;padding:13px 14px;margin-bottom:10px;display:flex;align-items:center;gap:12px;cursor:pointer;background:var(--panel,#fff)}",
-      ".fc-row .fc-badge{flex:0 0 auto;border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800}",
+      // min-width + centered text: a fixed badge column so every row's title starts at the SAME x,
+      // regardless of whether the label is "Watch" or "On track" (was drifting per row before).
+      ".fc-row .fc-badge{flex:0 0 auto;min-width:74px;text-align:center;border-radius:10px;padding:5px 9px;font-size:12px;font-weight:800}",
       ".fc-row .fc-meta{flex:1;min-width:0}.fc-row .fc-meta .fc-t{font-weight:700;font-size:14.5px}.fc-row .fc-meta .fc-s{color:var(--slate,#5a7184);font-size:12.5px}",
+      // Each segment is its own nowrap span (see episodeRow) — wraps land BETWEEN segments, not mid-word.
+      ".fc-row .fc-meta .fc-s-seg{white-space:nowrap}",
+      ".fc-row .fc-flag{flex:0 0 auto;color:#b3261e;font-size:14px;line-height:1;margin-left:2px}",
       ".fc-field{margin-bottom:14px}.fc-field label{display:block;font-weight:650;font-size:13.5px;margin-bottom:6px}",
       ".fc-field input,.fc-field select{width:100%;padding:11px 12px;border:1.5px solid var(--line,#dbe4e2);border-radius:11px;font-size:15px;background:var(--panel,#fff);color:var(--ink,#14202b);min-height:46px}",
       ".fc-err{color:#b3261e;font-size:12.5px;margin-top:4px}",
@@ -187,21 +193,22 @@
       // whatever light/dark mode the doctor has the app in.
       "body.dark .fc-sheet,body.v3-dark .fc-sheet{--panel:#132030;--ink:#e8edf2;--slate:#9bb0c2;--line:#294050}",
       "body.dark .fc-link,body.v3-dark .fc-link{background:#0f2b22;border-color:#245}",
-      // ═══════════ premium UI v2 (flag smd_followcare_ui2 → .fcui2 on the overlay + sheet) ═══════════
-      ".fc-ov.fcui2{background:radial-gradient(1200px 700px at 50% -12%,rgba(14,110,99,.30),transparent 60%),rgba(6,16,20,.60);backdrop-filter:blur(9px) saturate(1.1)}",
-      ".fc-sheet.fcui2{max-width:640px;background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 94%,#0e6e63 6%),var(--panel,#fff));box-shadow:0 40px 90px -30px rgba(0,0,0,.55)}",
-      ".fc-sheet.fcui2 .fc-hd{background:linear-gradient(135deg,#0e6e63,#12b39c);box-shadow:0 10px 26px -14px rgba(14,110,99,.7)}",
+      // ═══════════ UI v2 (flag smd_followcare_ui2 → .fcui2 on the overlay + sheet) — classic,
+      // restrained: flat panels + a clean border, not gradients/glow. A dashboard read at a glance
+      // shouldn't compete with its own decoration. ═══════════
+      ".fc-ov.fcui2{background:rgba(10,22,26,.55);backdrop-filter:blur(6px)}",
+      ".fc-sheet.fcui2{max-width:640px;box-shadow:0 24px 60px -32px rgba(0,0,0,.4)}",
+      ".fc-sheet.fcui2 .fc-hd{background:#0e6e63}",
       ".fc-hd .fc-hd-logo{display:none}.fc-sheet.fcui2 .fc-hd .fc-hd-logo{display:inline-flex;font-size:18px;margin-right:2px}",
       ".fc-sheet.fcui2 .fc-hd b{letter-spacing:-.01em}",
       ".fc-sheet.fcui2 .fc-bd{padding:18px 16px 30px}",
-      ".fc-sheet.fcui2 .fc-btn{border-radius:14px;background:linear-gradient(145deg,#0e6e63,#12a892);box-shadow:0 14px 30px -15px rgba(14,110,99,.85);transition:transform .12s,filter .2s;font-weight:800}",
-      ".fc-sheet.fcui2 .fc-btn:active{transform:translateY(1px) scale(.99)}.fc-sheet.fcui2 .fc-btn:hover{filter:brightness(1.05)}",
-      ".fc-sheet.fcui2 .fc-btn.sec{background:transparent;box-shadow:none;border:1.6px solid #0e6e63}",
-      ".fc-sheet.fcui2 .fc-row{border-radius:18px;border:1px solid color-mix(in srgb,var(--line,#dbe4e2) 65%,transparent);background:linear-gradient(180deg,color-mix(in srgb,var(--panel,#fff) 96%,#0e6e63 4%),var(--panel,#fff));box-shadow:0 16px 36px -26px rgba(8,40,36,.55);transition:transform .14s,box-shadow .2s;padding:14px 15px}",
-      ".fc-sheet.fcui2 .fc-row:hover{transform:translateY(-2px);box-shadow:0 22px 44px -24px rgba(8,40,36,.6)}",
+      ".fc-sheet.fcui2 .fc-btn{border-radius:12px;font-weight:750;transition:filter .15s,transform .1s}",
+      ".fc-sheet.fcui2 .fc-btn:active{transform:scale(.99)}.fc-sheet.fcui2 .fc-btn:hover{filter:brightness(1.06)}",
+      ".fc-sheet.fcui2 .fc-btn.sec{background:transparent;border:1.5px solid #0e6e63}",
+      ".fc-sheet.fcui2 .fc-row{border-radius:14px;border:1px solid var(--line,#dbe4e2);transition:border-color .15s,transform .1s}",
+      ".fc-sheet.fcui2 .fc-row:hover{border-color:#0e6e63}",
       ".fc-sheet.fcui2 .fc-row:active{transform:scale(.99)}",
-      ".fc-sheet.fcui2 .fc-row .fc-badge{border-radius:12px;font-weight:800;box-shadow:0 6px 14px -8px rgba(0,0,0,.35)}",
-      ".fc-sheet.fcui2 .fc-pill{border-radius:999px;font-weight:800}",
+      ".fc-sheet.fcui2 .fc-pill{border-radius:999px;font-weight:700}",
       ".fc-sheet.fcui2 .fc-field input,.fc-sheet.fcui2 .fc-field select,.fc-sheet.fcui2 .fc-ta,.fc-sheet.fcui2 input,.fc-sheet.fcui2 select,.fc-sheet.fcui2 textarea{border-radius:13px}",
       ".fc-sheet.fcui2 .fc-tl{border-left:none;padding-left:4px}",
       ".fc-sheet.fcui2 .fc-tl .fc-ev{position:relative;padding:11px 13px 11px 26px;margin-bottom:9px;border-radius:13px;background:color-mix(in srgb,var(--panel,#fff) 96%,#0e6e63 4%);border:1px solid color-mix(in srgb,var(--line,#dbe4e2) 55%,transparent)}",
@@ -323,10 +330,11 @@
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
-      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: HEART_SVG + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
+      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
       body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
       if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
+      body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
       var rows = list.map(function (ep) { var r = episodeRow(ep); body.appendChild(r); return r; });
       if (ui2()) mStagger(rows);
     }).catch(function () { body.innerHTML = ""; body.appendChild(h("div", { "class": "fc-empty", text: "Could not load the recovery board. Check your connection." })); });
@@ -335,12 +343,17 @@
   function ccBox(n, label) { return h("div", { "class": "fc-cc", style: "flex:1 1 auto;min-width:72px;text-align:center;background:var(--panel,#fff);border:1px solid var(--line,#dbe4e2);border-radius:12px;padding:10px 8px" }, [h("div", { style: "font-size:21px;font-weight:850;color:var(--fc-accent,#0e6e63)", text: String(n) }), h("div", { style: "font-size:11.5px;color:var(--slate,#5a7184)", text: label })]); }
   function episodeRow(ep) {
     var m = escalationMeta(ep.escalation);
+    // Each "· segment" gets its own nowrap span so a narrow row wraps BETWEEN segments, never
+    // mid-phrase (the joined-string version could strand a lone word like "review" on its own line).
+    var segs = [statusMeta(ep.status), "next " + fmtWhen(ep.nextDueMs)];
+    if (ep.riskPercent) segs.push(ep.riskPercent + "% readmit risk");
     return h("div", { "class": "fc-row", onclick: function () { renderDetail(ep.episodeId); } }, [
       h("span", { "class": "fc-badge", style: "background:" + m.bg + ";color:" + m.color, text: m.icon + " " + m.label }),
       h("div", { "class": "fc-meta" }, [
         h("div", { "class": "fc-t", text: (ep.disease || "Recovery") + (ep.score != null && ep.score >= 0 ? "  ·  " + ep.score + "/100" : "") }),
-        h("div", { "class": "fc-s", text: statusMeta(ep.status) + "  ·  next " + fmtWhen(ep.nextDueMs) + (ep.riskPercent ? "  ·  " + ep.riskPercent + "% readmit risk" : "") + (ep.needsReview ? "  ·  ⚑ needs review" : "") })
-      ])
+        h("div", { "class": "fc-s" }, segs.map(function (s, i) { return h("span", { "class": "fc-s-seg", text: (i ? " · " : "") + s }); }))
+      ]),
+      ep.needsReview ? h("span", { "class": "fc-flag", title: "Needs review", "aria-label": "Needs review" }, ["⚑"]) : null
     ]);
   }
 
@@ -937,7 +950,6 @@
   // Branded AI-recovery-companion dashboard inside FollowCare: at-a-glance recovery metrics, the red-flag
   // triage list, voice-calling status, and a jump to voice/escalation settings. Reuses the FollowCare API,
   // stat components and escalation palette so it stays one design language. No new endpoint, no new script.
-  var HEART_SVG = '<svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 20s-7-4.6-9.2-9C1.3 8 3 4.7 6.2 4.7c2 0 3.2 1.2 3.8 2.2C10.6 5.9 11.8 4.7 13.8 4.7 17 4.7 18.7 8 21.2 11 19 15.4 12 20 12 20z"/></svg>';
   function maitriWindows(v) {
     if (!v) return "";
     function hh(n) { n = +n || 0; return (n < 10 ? "0" + n : n) + ":00"; }
