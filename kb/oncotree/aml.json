@@ -1178,6 +1178,310 @@
         "Lower-intensity therapy (hypomethylating agent +/- venetoclax if not previously used)",
         "Best supportive care and early palliative-care involvement per goals of care"
       ]
+    },
+    {
+      "id": "n_apl_molresp",
+      "linkId": "aml_apl_molresp",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "APL molecular response",
+      "title": "APL: molecular response after consolidation",
+      "section": "Treatment",
+      "description": "After ATRA/ATO induction and consolidation, confirm molecular response by PML-RARA PCR. A negative PCR defines molecular remission; a positive or rising PCR signals molecular relapse and pre-emptive salvage.",
+      "path": "AML / APL / Molecular response",
+      "pills": [
+        "APL",
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "pcrneg",
+          "label": "PML-RARA PCR-negative (molecular CR)",
+          "sets": {
+            "aplMol": "neg"
+          },
+          "pills": [
+            "PCR-"
+          ]
+        },
+        {
+          "id": "pcrpos",
+          "label": "PCR-positive / rising (molecular relapse)",
+          "sets": {
+            "aplMol": "pos"
+          },
+          "pills": [
+            "PCR+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_apl_molcr",
+      "linkId": "tx_apl_molcr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "APL molecular CR",
+      "title": "APL: molecular remission - maintenance / surveillance",
+      "section": "Treatment",
+      "description": "PCR-negative APL after ATO-based therapy has an excellent prognosis; low-risk disease needs no cytotoxic maintenance and monitoring transitions to surveillance.",
+      "path": "AML / APL / Molecular CR",
+      "pills": [
+        "APL",
+        "PCR-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Confirm two sequential PCR-negative marrows to define durable molecular remission",
+        "No cytotoxic maintenance is required after ATRA + arsenic trioxide for low/intermediate-risk disease",
+        "Serial PML-RARA PCR monitoring for the first 2-3 years; higher-risk disease is monitored more closely",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_apl_molrelapse",
+      "linkId": "tx_apl_molrelapse",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "APL molecular relapse",
+      "title": "APL: molecular relapse - pre-emptive salvage",
+      "section": "Recurrence",
+      "description": "A positive or rising PML-RARA PCR (molecular relapse) is treated pre-emptively, before overt hematologic relapse.",
+      "path": "AML / APL / Molecular relapse",
+      "pills": [
+        "APL",
+        "PCR+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Confirm on a repeat marrow before acting on a single positive PCR",
+        "Arsenic-trioxide-based reinduction (with ATRA) for patients previously in ATO-based remission",
+        "Autologous transplant for a second molecular remission; allogeneic transplant if PCR-positivity persists",
+        "Reassess in the relapsed/refractory pathway (next step)"
+      ]
+    },
+    {
+      "id": "n_fav_mrd",
+      "linkId": "aml_fav_mrd",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Favorable MRD",
+      "title": "Favorable risk: measurable residual disease after consolidation",
+      "section": "Treatment",
+      "description": "After high-dose cytarabine consolidation, measurable residual disease (molecular CBF/NPM1 transcripts or multiparameter flow) refines relapse risk and can change post-remission strategy.",
+      "path": "AML / Consolidation / Favorable / MRD",
+      "pills": [
+        "favorable",
+        "MRD"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "mrdneg",
+          "label": "MRD-negative",
+          "sets": {
+            "mrd": "neg"
+          },
+          "pills": [
+            "MRD-"
+          ]
+        },
+        {
+          "id": "mrdpos",
+          "label": "MRD-positive / rising transcripts",
+          "sets": {
+            "mrd": "pos"
+          },
+          "pills": [
+            "MRD+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fav_mrdneg",
+      "linkId": "tx_fav_mrdneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Favorable MRD-negative",
+      "title": "Favorable, MRD-negative: complete chemotherapy consolidation",
+      "section": "Treatment",
+      "description": "MRD-negative favorable-risk disease continues chemotherapy consolidation without transplant.",
+      "path": "AML / Consolidation / Favorable / MRD-",
+      "pills": [
+        "favorable",
+        "MRD-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Complete the planned cycles of high-dose cytarabine consolidation",
+        "Continue serial MRD monitoring (CBF or NPM1 transcripts) through and after consolidation",
+        "Reserve allogeneic transplant for MRD reappearance or hematologic relapse",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_fav_mrdpos",
+      "linkId": "tx_fav_mrdpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Favorable MRD-positive",
+      "title": "Favorable, MRD-positive: escalate / consider transplant",
+      "section": "Treatment",
+      "description": "Persistent or rising MRD in favorable-risk disease predicts relapse and shifts management toward transplant.",
+      "path": "AML / Consolidation / Favorable / MRD+",
+      "pills": [
+        "favorable",
+        "MRD+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Confirm rising MRD on a repeat assay before changing strategy",
+        "Refer for allogeneic transplant evaluation - persistent MRD reclassifies a favorable patient toward higher relapse risk",
+        "Add or continue the matched targeted agent (e.g. FLT3 inhibitor) where applicable",
+        "Enroll on an MRD-directed clinical trial where available; then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_rr_flt3_resp",
+      "linkId": "aml_rr_flt3_resp",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "R/R FLT3 response",
+      "title": "Relapsed FLT3: response to gilteritinib",
+      "section": "Recurrence",
+      "description": "Reassess after starting gilteritinib. A response is a bridge to allogeneic transplant; no response or later progression moves to a further line of therapy.",
+      "path": "AML / Relapsed / FLT3 / Response",
+      "pills": [
+        "FLT3",
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "response",
+          "label": "Response - fit for transplant",
+          "sets": {
+            "rrFlt3Resp": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "No response / progression",
+          "sets": {
+            "rrFlt3Resp": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rr_flt3_transplant",
+      "linkId": "tx_rr_flt3_transplant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FLT3 salvage to transplant",
+      "title": "Relapsed FLT3: bridge to allogeneic transplant",
+      "section": "Recurrence",
+      "description": "A gilteritinib response in fit patients is consolidated with allogeneic transplant, the main curative option at relapse.",
+      "path": "AML / Relapsed / FLT3 / Transplant",
+      "pills": [
+        "FLT3",
+        "transplant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Proceed to allogeneic transplant once a second remission is achieved on gilteritinib",
+        "Give post-transplant FLT3-inhibitor maintenance for FLT3-mutated disease where used",
+        "Continue donor search and transplant work-up in parallel with the FLT3 inhibitor",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_rr_flt3_later",
+      "linkId": "tx_rr_flt3_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FLT3 later line",
+      "title": "Relapsed FLT3: later-line therapy after a FLT3 inhibitor",
+      "section": "Recurrence",
+      "description": "After progression on a FLT3 inhibitor, later-line therapy prioritizes trials and non-cross-resistant approaches.",
+      "path": "AML / Relapsed / FLT3 / Later",
+      "pills": [
+        "FLT3",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "bullets": [
+        "Clinical-trial enrollment is preferred (FLT3-inhibitor resistance mechanisms, novel combinations)",
+        "Venetoclax-based lower-intensity therapy if not previously used",
+        "Best supportive care and palliative-care involvement per goals of care",
+        "Consider an alternate FLT3 inhibitor only if a distinct resistance profile supports it"
+      ]
     }
   ],
   "links": [
@@ -1368,8 +1672,38 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_hidac_surv",
+      "id": "l_hidac_mrd",
       "from": "n_cons_hidac",
+      "to": "n_fav_mrd",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrd_neg",
+      "from": "n_fav_mrd",
+      "to": "n_fav_mrdneg",
+      "fromOptions": [
+        "mrdneg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrd_pos",
+      "from": "n_fav_mrd",
+      "to": "n_fav_mrdpos",
+      "fromOptions": [
+        "mrdpos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrdneg_surv",
+      "from": "n_fav_mrdneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrdpos_surv",
+      "from": "n_fav_mrdpos",
       "to": "n_surveillance",
       "linkCategory": "conditional"
     },
@@ -1500,15 +1834,45 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_apllow_surv",
+      "id": "l_apllow_mol",
       "from": "n_apl_low",
+      "to": "n_apl_molresp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplhigh_mol",
+      "from": "n_apl_high",
+      "to": "n_apl_molresp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmol_neg",
+      "from": "n_apl_molresp",
+      "to": "n_apl_molcr",
+      "fromOptions": [
+        "pcrneg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmol_pos",
+      "from": "n_apl_molresp",
+      "to": "n_apl_molrelapse",
+      "fromOptions": [
+        "pcrpos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmolcr_surv",
+      "from": "n_apl_molcr",
       "to": "n_surveillance",
       "linkCategory": "conditional"
     },
     {
-      "id": "l_aplhigh_surv",
-      "from": "n_apl_high",
-      "to": "n_surveillance",
+      "id": "l_aplmolrel_rr",
+      "from": "n_apl_molrelapse",
+      "to": "n_relapsed",
       "linkCategory": "conditional"
     },
     {
@@ -1518,6 +1882,36 @@
       "fromOptions": [
         "flt3"
       ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gilt_resp",
+      "from": "n_rr_gilt",
+      "to": "n_rr_flt3_resp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3resp_tx",
+      "from": "n_rr_flt3_resp",
+      "to": "n_rr_flt3_transplant",
+      "fromOptions": [
+        "response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3resp_prog",
+      "from": "n_rr_flt3_resp",
+      "to": "n_rr_flt3_later",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3tx_surv",
+      "from": "n_rr_flt3_transplant",
+      "to": "n_surveillance",
       "linkCategory": "conditional"
     },
     {
