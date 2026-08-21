@@ -104,3 +104,11 @@ foreground/background handoff. **Status**: reverted, background-only shipped.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.
 - **No em-dash** in app-facing text (MaiK AI *output* exempt).
 - **Mobile-only**: the web code IS the app (Capacitor renders local `www/`).
+
+## 2026-08-21 — Never deploy a subset of a branch by copying whole files
+Hand-copying `functions/api/ai/[[path]].js` from a feature branch onto main (`6064c197`) silently
+REVERTED three later main commits and took MaiK Cloud down with HTTP 500 (no provider failover).
+Cherry-pick hunks instead, and prove the result: `git show <target>:<file> > /tmp/x && diff /tmp/x <file>`.
+A correct server fix was then masked for another hour because the **WebView had cached the failure** -
+clearing `cache/` + `app_webview/Default/Cache` fixed it without wiping login or the 2.5 GB models.
+Full write-up: `vault/handoff/2026-08-21-maik-cloud-outage.md`.
