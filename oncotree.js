@@ -469,9 +469,13 @@
         '<span class="ot-disease-t"><b>' + esc(d.title) + "</b><span>" + esc(d.sub) + "</span></span>" +
         (d.ready ? ms("chevron_right") : '<span class="ot-soon">soon</span>') + "</button>";
     }).join("");
+    var maker = G.SMD_PROTOMAKER ? '<button class="ot-disease ot-disease-maker" data-ot-act="proto-maker">' +
+        '<span class="ot-disease-ic">' + ms("note_add") + "</span>" +
+        '<span class="ot-disease-t"><b>Custom protocol</b><span>Build or open your own regimen (new guideline, off-list)</span></span>' +
+        ms("chevron_right") + "</button>" : "";
     return '<div class="ot-picker"><div class="ot-picker-h">Choose a cancer</div>' +
       '<div class="ot-picker-sub">Navigate the disease pathway to applicable StewardMD Standard Protocols. Decision support only; the physician decides and the existing dose engine computes doses.</div>' +
-      cards + "</div>";
+      cards + maker + "</div>";
   }
 
   // Breadcrumb trail across cross-page link jumps (guideline switches + in-graph rebases).
@@ -713,6 +717,7 @@
     if (act === "toggle-excluded") { st.showExcluded = !st.showExcluded; repaintBody(); return; }
     if (act === "view-proto") { st.openedProtocol = proto; paint(); return; }
     if (act === "close-proto") { st.openedProtocol = null; paint(); return; }
+    if (act === "proto-maker") { if (G.SMD_PROTOMAKER) { var c0 = st.ctx || {}; G.SMD_PROTOMAKER.open({ patient: { name: c0.name || "", age: c0.age || null, sex: c0.sex || "", heightCm: c0.heightCm || null, weightKg: c0.weightKg || null, diagnosis: c0.diagnosis || "" } }); } return; }
     if (act === "proto-sheet") { openProtocolSheet(proto); return; }
     if (act === "select-proto") { selectProtocol(proto); return; }
     if (act === "back-pathway") { st.selection = null; st.openedProtocol = null; paint(); return; }
