@@ -2,11 +2,11 @@
   "guideline": "testicular",
   "title": "Testicular Cancer (germ cell)",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "navigatorVersion": "3.0.0",
   "diseaseId": "testicular_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full germ-cell pathway: workup -> histology / disease state -> stage and IGCCCG risk stratification -> stage/subtype/marker-directed treatment arms with per-node checklists -> post-chemotherapy residual-mass management, surveillance, and relapse. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; modalities without a dose protocol (surveillance, radiotherapy, RPLND, high-dose chemo/ASCT) are shown as checklist guidance with NO dose. Workup, staging, risk, and surveillance content is standard oncology in our own words; no proprietary guideline text reproduced. Invents no dose/regimen. DRAFT - not clinically activated.",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) in our own words - the physician decides. Full germ-cell pathway: workup -> histology / disease state -> stage and IGCCCG risk stratification -> stage/subtype/marker-directed FIRST-LINE arms -> RESPONSE-ADAPTED restaging after chemotherapy (complete response vs residual mass vs rising markers) -> residual-mass surgery with post-resection-histology-directed adjuvant -> surveillance -> relapse pathway with LINE-OF-THERAPY salvage (platinum-sensitive conventional-dose, refractory high-dose + ASCT, later-line) . Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; modalities without a dose protocol (surveillance, radiotherapy, RPLND, high-dose chemo/ASCT) are shown as checklist guidance with NO dose. Workup, staging, risk, response, and surveillance content is standard oncology in our own words; no proprietary guideline text reproduced. Invents no dose/regimen. DRAFT - not clinically activated.",
   "sourceNote": "Structural pathway consistent with standard guidelines (NCCN/DeVita/Harrison), Testicular Cancer. Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
   "startNodeIds": ["n_workup"],
   "footnotes": {
@@ -24,6 +24,10 @@
     },
     "d": {
       "text": "After first-line chemotherapy, re-image and repeat markers. Rising markers signal active disease and route to salvage systemic therapy, not surgery; normalised markers with a residual mass route to resection (post-chemotherapy RPLND in NSGCT; PET-directed observation vs biopsy/resection in seminoma).",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Histology of the resected post-chemotherapy residual mass directs further therapy: necrosis/fibrosis needs no more treatment; mature teratoma is cured by complete resection alone; viable germ-cell tumour with adverse features may prompt two cycles of adjuvant chemotherapy.",
       "evidence": "2A"
     }
   },
@@ -112,7 +116,7 @@
         { "id": "stage_I", "label": "Stage I (organ-confined)", "sets": { "stage": "I" }, "pills": ["stage I"] },
         { "id": "stage_IIab", "label": "Stage IIA / IIB (nodes <= 5 cm)", "sets": { "stage": "IIab" }, "pills": ["stage II"] },
         { "id": "stage_adv", "label": "Stage IIC / III (advanced)", "sets": { "stage": "advanced" }, "pills": ["advanced"] },
-        { "id": "post_chemo", "label": "Post-chemotherapy residual mass / restaging", "sets": { "phase": "post_chemo" }, "pills": ["residual"] }
+        { "id": "post_chemo", "label": "Post-chemotherapy restaging", "sets": { "phase": "post_chemo" }, "pills": ["restaging"] }
       ]
     },
     {
@@ -143,7 +147,7 @@
       "nodeType": "end",
       "name": "Stage I seminoma surveillance",
       "title": "Stage I seminoma: active surveillance",
-      "description": "No adjuvant therapy; structured imaging and marker follow-up.",
+      "description": "No adjuvant therapy; structured imaging and marker follow-up, then routine surveillance.",
       "path": "Testicular / Seminoma / Surveillance",
       "section": "Surveillance",
       "pills": ["seminoma", "surveillance"],
@@ -162,7 +166,7 @@
       "nodeType": "end",
       "name": "Stage I seminoma carboplatin",
       "title": "Stage I seminoma: adjuvant carboplatin",
-      "description": "Single-agent carboplatin (AUC-based), typically one cycle, to lower relapse.",
+      "description": "Single-agent carboplatin (AUC-based), typically one cycle, to lower relapse, then surveillance.",
       "path": "Testicular / Seminoma / Carboplatin",
       "section": "Treatment",
       "pills": ["seminoma", "adjuvant"],
@@ -171,7 +175,7 @@
       "bullets": [
         "One cycle of AUC-dosed carboplatin; convenient, low acute toxicity",
         "Reduces relapse versus surveillance without the RT late-effect profile",
-        "Continue post-treatment surveillance"
+        "Enter routine post-treatment surveillance"
       ],
       "protocolRefs": ["gu-seminoma-carboplatin"]
     },
@@ -181,7 +185,7 @@
       "nodeType": "end",
       "name": "Stage I seminoma RT",
       "title": "Stage I seminoma: adjuvant radiotherapy",
-      "description": "Para-aortic (or dog-leg) radiotherapy; no dose protocol here - guidance only.",
+      "description": "Para-aortic (or dog-leg) radiotherapy; no dose protocol here - guidance only, then surveillance.",
       "path": "Testicular / Seminoma / RT",
       "section": "Treatment",
       "pills": ["seminoma", "RT"],
@@ -190,27 +194,69 @@
       "bullets": [
         "Low-dose para-aortic strip radiotherapy is highly effective at relapse control",
         "Now used less than carboplatin/surveillance because of late second-cancer and cardiovascular risk",
-        "Radiotherapy is planned and delivered by radiation oncology - no systemic dose protocol"
+        "Radiotherapy is planned and delivered by radiation oncology - no systemic dose protocol",
+        "Enter routine post-treatment surveillance"
       ]
     },
     {
-      "id": "n_tx_sem_IIab",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "name": "Stage IIA/B seminoma",
-      "title": "Stage IIA / IIB seminoma: RT or chemotherapy",
-      "description": "Node-limited seminoma; radiotherapy or cisplatin-based chemotherapy.",
+      "id": "n_sem_IIab",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Stage IIA/B seminoma choice",
+      "title": "Stage IIA / IIB seminoma: RT vs chemotherapy",
+      "description": "Node-limited seminoma; select radiotherapy for non-bulky nodes or cisplatin-based chemotherapy for bulkier disease.",
       "path": "Testicular / Seminoma / Stage II",
       "section": "Treatment",
       "pills": ["seminoma", "stage II"],
-      "showsRecommendation": true,
-      "evidenceCategory": ["1"],
+      "required": true,
       "bullets": [
         "Retroperitoneal RT is a long-standing option for non-bulky (IIA, small IIB) nodes",
         "Cisplatin-based chemotherapy (EP x4 or BEP x3) is preferred for bulkier IIB and reduces in-field relapse",
-        "Chemotherapy backbone regimens referenced below; RT is delivered by radiation oncology"
+        "Chemotherapy routes into response-adapted restaging; RT routes to surveillance"
       ],
-      "protocolRefs": ["gu-testicular-ep", "gu-testicular-bep"]
+      "options": [
+        { "id": "rt", "label": "Retroperitoneal radiotherapy (non-bulky)", "sets": { "arm": "rt" }, "pills": ["RT"] },
+        { "id": "chemo", "label": "Cisplatin-based chemotherapy", "sets": { "arm": "chemo" }, "pills": ["chemo"] }
+      ]
+    },
+    {
+      "id": "n_tx_sem_IIab_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Stage IIA/B seminoma RT",
+      "title": "Stage IIA / IIB seminoma: retroperitoneal radiotherapy",
+      "description": "Radiotherapy to involved retroperitoneal nodes for non-bulky stage II seminoma, then surveillance.",
+      "path": "Testicular / Seminoma / Stage II / RT",
+      "section": "Treatment",
+      "pills": ["seminoma", "RT"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Modified dog-leg / para-aortic field covering the involved nodes for IIA and small IIB",
+        "High local control; chemotherapy is preferred as nodal bulk increases",
+        "Radiotherapy is delivered by radiation oncology - no systemic dose protocol",
+        "Enter routine post-treatment surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_sem_IIab_chemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Stage IIA/B seminoma chemotherapy",
+      "title": "Stage IIA / IIB seminoma: BEP x3 or EP x4",
+      "description": "Cisplatin-based chemotherapy for node-limited seminoma, then response-adapted restaging.",
+      "path": "Testicular / Seminoma / Stage II / Chemo",
+      "section": "Treatment",
+      "pills": ["seminoma", "chemotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "BEP x3 or EP x4 as for good-risk metastatic seminoma; preferred for bulkier IIB",
+        "Lower in-field relapse than RT for larger nodes",
+        "Reassess markers and imaging afterward on the restaging step",
+        "Backbones referenced below"
+      ],
+      "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
     },
     {
       "id": "n_sem_adv_risk",
@@ -239,7 +285,7 @@
       "nodeType": "end",
       "name": "Good-risk seminoma",
       "title": "Good-risk advanced seminoma: BEP x3 or EP x4",
-      "description": "Standard first-line cisplatin-based chemotherapy for good-risk seminoma.",
+      "description": "Standard first-line cisplatin-based chemotherapy for good-risk seminoma, then restaging.",
       "path": "Testicular / Seminoma / Good risk",
       "section": "Treatment",
       "pills": ["seminoma", "good risk"],
@@ -247,7 +293,8 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "BEP x3 or EP x4 (EP avoids bleomycin lung toxicity in suitable patients)",
-        "Reassess with markers and imaging after chemotherapy",
+        "Do not dose-reduce or delay without cause; dose intensity drives cure",
+        "Reassess with markers and imaging on the restaging step",
         "Backbone regimens referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
@@ -258,7 +305,7 @@
       "nodeType": "end",
       "name": "Intermediate-risk seminoma",
       "title": "Intermediate-risk advanced seminoma: BEP x4",
-      "description": "Intensified first-line chemotherapy for intermediate-risk seminoma.",
+      "description": "Intensified first-line chemotherapy for intermediate-risk seminoma, then restaging.",
       "path": "Testicular / Seminoma / Intermediate risk",
       "section": "Treatment",
       "pills": ["seminoma", "intermediate"],
@@ -266,18 +313,41 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "BEP x4 is standard; VIP x4 is an alternative if bleomycin is contraindicated",
-        "Reassess with markers and imaging; manage any residual mass on the post-chemo pathway",
+        "Reassess with markers and imaging on the restaging step",
         "BEP backbone referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep"]
+    },
+    {
+      "id": "n_sem_restage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Seminoma restaging",
+      "title": "Seminoma: response-adapted restaging after chemotherapy",
+      "description": "Re-image and repeat markers after first-line chemotherapy; the response pattern chooses the next step.",
+      "path": "Testicular / Seminoma / Restaging",
+      "section": "Treatment",
+      "pills": ["seminoma", "restaging"],
+      "required": true,
+      "footnotes": ["d"],
+      "bullets": [
+        "Complete response (markers normal, no residual mass): move to surveillance",
+        "Residual mass with normalised markers: size and FDG-PET decide observation vs intervention",
+        "Rising / plateaued markers: active disease - go to the relapse / salvage pathway"
+      ],
+      "options": [
+        { "id": "cr", "label": "Complete response (markers normal, no mass)", "sets": { "response": "cr" }, "pills": ["CR"] },
+        { "id": "residual", "label": "Residual mass, markers normalised", "sets": { "response": "residual" }, "pills": ["residual"] },
+        { "id": "rising", "label": "Rising / plateaued markers", "sets": { "response": "progression" }, "pills": ["progression"] }
+      ]
     },
     {
       "id": "n_sem_residual",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "name": "Seminoma residual mass",
-      "title": "Seminoma: post-chemotherapy residual mass",
-      "description": "Residual seminoma masses are usually fibrosis; FDG-PET (>= 6 weeks post-chemo) helps select the few needing intervention.",
+      "title": "Seminoma: residual mass characterisation",
+      "description": "Residual seminoma masses are usually fibrosis; FDG-PET (>= 6 weeks post-chemo) selects the few needing intervention.",
       "path": "Testicular / Seminoma / Residual",
       "section": "Recurrence",
       "pills": ["seminoma", "residual"],
@@ -299,7 +369,7 @@
       "nodeType": "end",
       "name": "Seminoma residual observe",
       "title": "Seminoma residual (PET-negative): observation",
-      "description": "PET-negative or small residual masses are observed, not resected.",
+      "description": "PET-negative or small residual masses are observed, not resected, then routine surveillance.",
       "path": "Testicular / Seminoma / Residual / Observe",
       "section": "Surveillance",
       "pills": ["seminoma", "observe"],
@@ -317,7 +387,7 @@
       "nodeType": "end",
       "name": "Seminoma residual viable",
       "title": "Seminoma residual (PET-positive): biopsy / resection / salvage",
-      "description": "PET-positive residual suggests viable tumour and needs tissue confirmation or treatment.",
+      "description": "PET-positive residual suggests viable tumour and needs tissue confirmation or systemic salvage.",
       "path": "Testicular / Seminoma / Residual / Viable",
       "section": "Recurrence",
       "pills": ["seminoma", "viable"],
@@ -325,8 +395,8 @@
       "evidenceCategory": ["2A"],
       "bullets": [
         "Confirm with biopsy or resection where feasible (surgery is technically demanding)",
-        "Viable seminoma after first-line chemo is treated with salvage systemic therapy",
-        "Discuss at multidisciplinary tumour board"
+        "Viable seminoma after first-line chemo is treated on the relapse / salvage pathway",
+        "Discuss at a multidisciplinary germ-cell tumour board"
       ]
     },
 
@@ -357,7 +427,7 @@
         { "id": "stage_I", "label": "Stage I (organ-confined)", "sets": { "stage": "I" }, "pills": ["stage I"] },
         { "id": "stage_IIab", "label": "Stage IIA / IIB (nodes <= 5 cm)", "sets": { "stage": "IIab" }, "pills": ["stage II"] },
         { "id": "stage_adv", "label": "Stage IIC / III (advanced)", "sets": { "stage": "advanced" }, "pills": ["advanced"] },
-        { "id": "post_chemo", "label": "Post-chemotherapy residual mass / restaging", "sets": { "phase": "post_chemo" }, "pills": ["residual"] }
+        { "id": "post_chemo", "label": "Post-chemotherapy restaging", "sets": { "phase": "post_chemo" }, "pills": ["restaging"] }
       ]
     },
     {
@@ -387,7 +457,7 @@
       "nodeType": "end",
       "name": "Stage I NSGCT low risk",
       "title": "Stage I NSGCT (low risk): surveillance preferred",
-      "description": "No LVI - surveillance is preferred, with primary RPLND or one BEP as alternatives.",
+      "description": "No LVI - surveillance is preferred, with primary RPLND or one BEP as alternatives, then surveillance.",
       "path": "Testicular / NSGCT / Stage I / Low",
       "section": "Surveillance",
       "pills": ["NSGCT", "surveillance"],
@@ -407,7 +477,7 @@
       "nodeType": "end",
       "name": "Stage I NSGCT high risk",
       "title": "Stage I NSGCT (high risk): one cycle BEP or surveillance",
-      "description": "LVI present - adjuvant BEP x1 markedly lowers relapse; surveillance or RPLND remain options.",
+      "description": "LVI present - adjuvant BEP x1 markedly lowers relapse; surveillance or RPLND remain options, then surveillance.",
       "path": "Testicular / NSGCT / Stage I / High",
       "section": "Treatment",
       "pills": ["NSGCT", "high risk"],
@@ -448,7 +518,7 @@
       "nodeType": "end",
       "name": "Stage IIA/B NSGCT markers negative",
       "title": "Stage IIA / IIB NSGCT (markers normal): RPLND or chemotherapy",
-      "description": "Marker-negative node-limited NSGCT can go to primary RPLND or BEP/EP.",
+      "description": "Marker-negative node-limited NSGCT can go to primary RPLND or BEP/EP, then restaging.",
       "path": "Testicular / NSGCT / Stage II / Marker-negative",
       "section": "Treatment",
       "pills": ["NSGCT", "RPLND"],
@@ -456,7 +526,7 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Nerve-sparing primary RPLND, with adjuvant chemo if pN+ with high nodal burden",
-        "Or primary cisplatin-based chemotherapy (BEP x3 / EP x4)",
+        "Or primary cisplatin-based chemotherapy (BEP x3 / EP x4) then response-adapted restaging",
         "Teratoma elements respond poorly to chemo and favour a surgical route",
         "Chemotherapy backbones referenced below; RPLND is a surgical option"
       ],
@@ -468,7 +538,7 @@
       "nodeType": "end",
       "name": "Stage IIA/B NSGCT markers positive",
       "title": "Stage IIA / IIB NSGCT (markers elevated): chemotherapy",
-      "description": "Persistently raised markers mean systemic disease - treat with first-line chemotherapy.",
+      "description": "Persistently raised markers mean systemic disease - treat with first-line chemotherapy, then restaging.",
       "path": "Testicular / NSGCT / Stage II / Marker-positive",
       "section": "Treatment",
       "pills": ["NSGCT", "chemotherapy"],
@@ -476,7 +546,7 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Cisplatin-based chemotherapy (BEP x3 or EP x4) as for good-risk metastatic disease",
-        "Manage any residual mass afterwards on the post-chemotherapy pathway",
+        "Manage any residual mass afterwards on the response-adapted restaging pathway",
         "Backbones referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
@@ -516,7 +586,7 @@
       "nodeType": "end",
       "name": "Good-risk NSGCT",
       "title": "Good-risk NSGCT: BEP x3 or EP x4",
-      "description": "Standard first-line chemotherapy for good-risk metastatic NSGCT.",
+      "description": "Standard first-line chemotherapy for good-risk metastatic NSGCT, then response-adapted restaging.",
       "path": "Testicular / NSGCT / Good risk",
       "section": "Treatment",
       "pills": ["NSGCT", "good risk"],
@@ -525,7 +595,7 @@
       "bullets": [
         "BEP x3, or EP x4 when bleomycin is best avoided (lung disease, older age, smoker)",
         "Do not dose-reduce or delay without cause; dose intensity drives cure",
-        "Reassess markers and imaging; resect residual masses (post-chemo pathway)",
+        "Reassess markers and imaging on the restaging step",
         "Backbones referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep", "gu-testicular-ep"]
@@ -536,7 +606,7 @@
       "nodeType": "end",
       "name": "Intermediate-risk NSGCT",
       "title": "Intermediate-risk NSGCT: BEP x4",
-      "description": "Four cycles of BEP for intermediate-risk metastatic NSGCT.",
+      "description": "Four cycles of BEP for intermediate-risk metastatic NSGCT, then restaging.",
       "path": "Testicular / NSGCT / Intermediate risk",
       "section": "Treatment",
       "pills": ["NSGCT", "intermediate"],
@@ -545,7 +615,7 @@
       "bullets": [
         "BEP x4 is standard; VIP x4 if bleomycin is contraindicated",
         "Consider a marker-decline check to identify unfavourable kinetics",
-        "Resect residual masses after chemotherapy (post-chemo pathway)",
+        "Reassess markers and imaging on the restaging step",
         "BEP backbone referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep"]
@@ -556,7 +626,7 @@
       "nodeType": "end",
       "name": "Poor-risk NSGCT",
       "title": "Poor-risk NSGCT: BEP x4 (or VIP x4)",
-      "description": "Four cycles of BEP or VIP at a high-volume centre for poor-risk NSGCT.",
+      "description": "Four cycles of BEP or VIP at a high-volume centre for poor-risk NSGCT, then restaging.",
       "path": "Testicular / NSGCT / Poor risk",
       "section": "Treatment",
       "pills": ["NSGCT", "poor risk"],
@@ -566,72 +636,174 @@
         "BEP x4 (or VIP x4 if bleomycin contraindicated); manage at a high-volume centre",
         "Slow marker decline may prompt treatment intensification on protocol",
         "Brain imaging and prophylaxis considerations for high-hCG / extensive lung disease",
-        "Resect residual masses after chemotherapy (post-chemo pathway)",
+        "Reassess markers and imaging on the restaging step",
         "Backbones referenced below"
       ],
       "protocolRefs": ["gu-testicular-bep", "gu-testicular-vip"]
     },
     {
-      "id": "n_nsgct_residual",
+      "id": "n_nsgct_restage",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "name": "NSGCT residual mass",
-      "title": "NSGCT: post-chemotherapy residual mass",
-      "description": "After first-line chemo, marker status decides surgery vs salvage for any residual mass.",
-      "path": "Testicular / NSGCT / Residual",
-      "section": "Recurrence",
-      "pills": ["NSGCT", "residual"],
+      "name": "NSGCT restaging",
+      "title": "NSGCT: response-adapted restaging after chemotherapy",
+      "description": "Re-image and repeat markers after first-line chemotherapy; the response pattern chooses surgery, surveillance, or salvage.",
+      "path": "Testicular / NSGCT / Restaging",
+      "section": "Treatment",
+      "pills": ["NSGCT", "restaging"],
       "required": true,
       "footnotes": ["d"],
       "bullets": [
-        "NSGCT residual masses may harbour teratoma or viable tumour and are resected, not observed",
-        "Confirm marker trajectory first: normalised vs rising"
+        "Complete response (markers normal, no residual mass): move to surveillance",
+        "Residual mass with normalised markers: resect all sites (post-chemotherapy RPLND) - not observed",
+        "Rising / plateaued markers: active disease - go to salvage systemic therapy, not surgery"
       ],
       "options": [
-        { "id": "normal_mass", "label": "Markers normalised, residual mass present", "sets": { "residual": "resectable" }, "pills": ["resect"] },
-        { "id": "rising", "label": "Rising / plateaued markers", "sets": { "residual": "active" }, "pills": ["salvage"] }
+        { "id": "cr", "label": "Complete response (markers normal, no mass)", "sets": { "response": "cr" }, "pills": ["CR"] },
+        { "id": "residual", "label": "Residual mass, markers normalised", "sets": { "response": "residual" }, "pills": ["resect"] },
+        { "id": "rising", "label": "Rising / plateaued markers", "sets": { "response": "progression" }, "pills": ["salvage"] }
       ]
     },
     {
-      "id": "n_tx_nsgct_pcrplnd",
+      "id": "n_tx_pcrplnd",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "Post-chemo RPLND",
       "title": "NSGCT residual (markers normal): resect all residual masses",
-      "description": "Post-chemotherapy RPLND and resection of all residual sites when markers have normalised.",
+      "description": "Post-chemotherapy RPLND and resection of all residual sites when markers have normalised; histology directs what follows.",
       "path": "Testicular / NSGCT / Residual / Resect",
       "section": "Recurrence",
       "pills": ["NSGCT", "RPLND"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
+      "footnotes": ["e"],
       "bullets": [
         "Resect all residual masses >= ~1 cm (post-chemotherapy RPLND +/- other sites) at a high-volume centre",
-        "Histology guides next steps: necrosis/fibrosis -> observe; teratoma -> complete resection, no more chemo; viable germ-cell tumour -> consider adjuvant chemotherapy",
         "Surgery is not for rising markers - those go to salvage",
+        "Resected histology (necrosis vs teratoma vs viable tumour) directs the next step",
         "RPLND is a surgical procedure - no systemic dose protocol"
       ]
     },
     {
-      "id": "n_tx_nsgct_res_salvage",
+      "id": "n_post_rplnd_histo",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Post-RPLND histology",
+      "title": "Post-RPLND histology: what the resected mass showed",
+      "description": "The pathology of the resected residual mass decides whether observation or adjuvant chemotherapy follows.",
+      "path": "Testicular / NSGCT / Residual / Histology",
+      "section": "Treatment",
+      "pills": ["NSGCT", "histology"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "Necrosis / fibrosis only: no further therapy",
+        "Mature teratoma: complete resection is curative; no chemotherapy",
+        "Viable germ-cell tumour: consider two cycles of adjuvant chemotherapy, especially with adverse features / incomplete resection"
+      ],
+      "options": [
+        { "id": "necrosis", "label": "Necrosis / fibrosis", "sets": { "histo": "necrosis" }, "pills": ["necrosis"] },
+        { "id": "teratoma", "label": "Mature teratoma", "sets": { "histo": "teratoma" }, "pills": ["teratoma"] },
+        { "id": "viable", "label": "Viable germ-cell tumour", "sets": { "histo": "viable" }, "pills": ["viable"] }
+      ]
+    },
+    {
+      "id": "n_tx_postrplnd_observe",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Post-RPLND necrosis",
+      "title": "Post-RPLND necrosis/fibrosis: observation",
+      "description": "Necrosis or fibrosis only - no further therapy; enter surveillance.",
+      "path": "Testicular / NSGCT / Residual / Necrosis",
+      "section": "Surveillance",
+      "pills": ["NSGCT", "observe"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Necrosis/fibrosis carries an excellent prognosis; no adjuvant chemotherapy",
+        "Enter routine post-treatment surveillance",
+        "Late relapse remains possible - keep to the surveillance schedule"
+      ]
+    },
+    {
+      "id": "n_tx_postrplnd_teratoma",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "NSGCT residual salvage",
-      "title": "NSGCT residual (rising markers): salvage chemotherapy",
-      "description": "Rising or plateaued markers after first-line chemo indicate active disease - treat systemically.",
-      "path": "Testicular / NSGCT / Residual / Salvage",
+      "name": "Post-RPLND teratoma",
+      "title": "Post-RPLND mature teratoma: complete resection alone",
+      "description": "Mature teratoma is chemo-resistant but cured by complete surgical resection; no further chemotherapy.",
+      "path": "Testicular / NSGCT / Residual / Teratoma",
+      "section": "Treatment",
+      "pills": ["NSGCT", "teratoma"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Teratoma does not respond to chemotherapy - completeness of resection is what matters",
+        "Ensure all residual sites are cleared; residual teratoma can grow or transform",
+        "No adjuvant chemotherapy; enter routine post-treatment surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_postrplnd_viable",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Post-RPLND viable GCT",
+      "title": "Post-RPLND viable germ-cell tumour: adjuvant chemotherapy",
+      "description": "Viable tumour in the resected mass with adverse features prompts two cycles of adjuvant chemotherapy, then surveillance.",
+      "path": "Testicular / NSGCT / Residual / Viable",
+      "section": "Treatment",
+      "pills": ["NSGCT", "viable"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Two cycles of adjuvant cisplatin-based chemotherapy for adverse features (>10% viable cells, incomplete resection, high-risk primary)",
+        "Complete resection with only focal viable tumour may be observed after multidisciplinary review",
+        "Then enter routine post-treatment surveillance",
+        "EP backbone referenced below"
+      ],
+      "protocolRefs": ["gu-testicular-ep"]
+    },
+    {
+      "id": "n_tx_nsgct_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "NSGCT restaging salvage",
+      "title": "NSGCT restaging (rising markers): salvage chemotherapy",
+      "description": "Rising or plateaued markers after first-line chemo indicate active disease - route to the relapse / salvage pathway.",
+      "path": "Testicular / NSGCT / Restaging / Salvage",
       "section": "Recurrence",
       "pills": ["NSGCT", "salvage"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
         "Rising markers mean surgery will not cure - proceed to salvage systemic therapy",
-        "Options: conventional-dose VIP/TIP, or high-dose chemotherapy with autologous stem-cell rescue",
-        "Refer to a high-volume germ-cell centre; enter the relapse pathway",
-        "VIP backbone referenced below"
+        "Refer to a high-volume germ-cell centre and enter the relapse pathway",
+        "VIP backbone referenced below",
+        "Options include conventional-dose salvage or high-dose chemotherapy with stem-cell rescue"
       ],
       "protocolRefs": ["gu-testicular-vip"]
     },
 
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance / follow-up",
+      "description": "Monitoring after curative therapy; most relapses are early and salvageable. A confirmed relapse routes to the relapse pathway.",
+      "path": "Testicular / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Markers (AFP, beta-hCG, LDH) and clinical review, most intensively in the first 2-3 years",
+        "Cross-sectional imaging of chest/abdomen/pelvis at intervals; taper over ~5 years",
+        "A confirmed marker rise or new mass re-enters the relapse pathway",
+        "Monitor late effects: cardiovascular risk, hypogonadism, secondary malignancy, neuropathy/ototoxicity"
+      ],
+      "linkLabel": "If relapse is confirmed: go to the relapse / salvage pathway"
+    },
     {
       "id": "n_relapse",
       "nodeCategory": "criteria",
@@ -661,7 +833,7 @@
       "nodeType": "end",
       "name": "Conventional salvage",
       "title": "Platinum-sensitive relapse: conventional-dose salvage (VIP / TIP)",
-      "description": "Standard-dose cisplatin-based salvage combinations for platinum-sensitive relapse.",
+      "description": "Standard-dose cisplatin-based salvage combinations for platinum-sensitive relapse, then salvage restaging.",
       "path": "Testicular / Relapse / Conventional salvage",
       "section": "Recurrence",
       "pills": ["salvage", "sensitive"],
@@ -670,7 +842,7 @@
       "bullets": [
         "Conventional-dose VIP or TIP (paclitaxel-ifosfamide-cisplatin)",
         "High-dose chemotherapy with autologous stem-cell rescue is an alternative first salvage",
-        "Resect residual masses after salvage as in first-line",
+        "Reassess markers and imaging afterward on the salvage-restaging step",
         "VIP backbone referenced below"
       ],
       "protocolRefs": ["gu-testicular-vip"]
@@ -681,7 +853,7 @@
       "nodeType": "end",
       "name": "High-dose salvage",
       "title": "Platinum-refractory relapse: high-dose chemo + ASCT",
-      "description": "High-dose chemotherapy with autologous stem-cell transplant for refractory disease.",
+      "description": "High-dose chemotherapy with autologous stem-cell transplant for refractory disease, then salvage restaging.",
       "path": "Testicular / Relapse / High-dose",
       "section": "Recurrence",
       "pills": ["salvage", "refractory"],
@@ -690,8 +862,8 @@
       "bullets": [
         "High-dose carboplatin/etoposide with autologous stem-cell rescue (often tandem cycles)",
         "Best delivered at an experienced transplant/germ-cell centre",
-        "Clinical trials and later-line agents for platinum-refractory disease; no dose protocol here",
-        "Consider resection of any resectable residual disease"
+        "No dedicated dose protocol here - delivered on a transplant protocol",
+        "Reassess markers and imaging afterward on the salvage-restaging step"
       ]
     },
     {
@@ -712,24 +884,64 @@
         "Manage at a high-volume centre with germ-cell surgical expertise"
       ]
     },
-
     {
-      "id": "n_surveillance",
-      "nodeCategory": "surveillance",
+      "id": "n_salvage_restage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Salvage restaging",
+      "title": "Salvage: response-adapted restaging",
+      "description": "After salvage chemotherapy, marker and imaging response decide resection of residual disease vs later-line therapy.",
+      "path": "Testicular / Relapse / Restaging",
+      "section": "Recurrence",
+      "pills": ["salvage", "restaging"],
+      "required": true,
+      "footnotes": ["d"],
+      "bullets": [
+        "Markers normalised with a residual mass: resect all residual sites (desperation surgery in selected cases)",
+        "Rising / plateaued markers: platinum-refractory - move to later-line / trial therapy",
+        "Manage at a high-volume germ-cell centre"
+      ],
+      "options": [
+        { "id": "resectable", "label": "Markers normalised, residual mass", "sets": { "salvageResponse": "resectable" }, "pills": ["resect"] },
+        { "id": "progression", "label": "Rising / plateaued markers", "sets": { "salvageResponse": "progression" }, "pills": ["later-line"] }
+      ]
+    },
+    {
+      "id": "n_tx_salvage_resect",
+      "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Surveillance",
-      "title": "Post-treatment surveillance / follow-up",
-      "description": "Monitoring after curative therapy; most relapses are early and salvageable.",
-      "path": "Testicular / Surveillance",
-      "section": "Surveillance",
-      "pills": ["surveillance"],
+      "name": "Post-salvage resection",
+      "title": "Post-salvage residual (markers normal): resection",
+      "description": "Resect all residual masses after salvage when markers have normalised.",
+      "path": "Testicular / Relapse / Resection",
+      "section": "Recurrence",
+      "pills": ["salvage", "resect"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
-        "Markers (AFP, beta-hCG, LDH) and clinical review, most intensively in the first 2-3 years",
-        "Cross-sectional imaging of chest/abdomen/pelvis at intervals; taper over ~5 years",
-        "A confirmed marker rise or new mass re-enters the relapse pathway",
-        "Monitor late effects: cardiovascular risk, hypogonadism, secondary malignancy, neuropathy/ototoxicity"
+        "Resect all residual masses after salvage as in first-line, at a high-volume centre",
+        "Histology (necrosis / teratoma / viable tumour) again guides prognosis and any further therapy",
+        "Even selected patients with slowly rising markers and resectable disease may benefit from desperation surgery",
+        "Then resume close surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_thirdline",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Later-line therapy",
+      "title": "Platinum-refractory after salvage: later-line / trial therapy",
+      "description": "Later-line systemic options and clinical trials for multiply-relapsed, platinum-refractory germ-cell tumour.",
+      "path": "Testicular / Relapse / Later-line",
+      "section": "Recurrence",
+      "pills": ["salvage", "later-line"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine + oxaliplatin (+/- paclitaxel), or other platinum-refractory regimens; no dedicated dose protocol here",
+        "Prioritise clinical-trial enrolment where available",
+        "Resect isolated resectable disease even in the refractory setting",
+        "Integrate palliative and supportive care"
       ]
     }
   ],
@@ -742,40 +954,81 @@
     { "id": "l_hist_fu", "from": "n_histology", "to": "n_surveillance", "fromOptions": ["followup"], "linkCategory": "conditional" },
 
     { "id": "l_sem_I", "from": "n_sem_stage", "to": "n_sem_I", "fromOptions": ["stage_I"], "linkCategory": "conditional" },
-    { "id": "l_sem_IIab", "from": "n_sem_stage", "to": "n_tx_sem_IIab", "fromOptions": ["stage_IIab"], "linkCategory": "conditional" },
+    { "id": "l_sem_IIab", "from": "n_sem_stage", "to": "n_sem_IIab", "fromOptions": ["stage_IIab"], "linkCategory": "conditional" },
     { "id": "l_sem_adv", "from": "n_sem_stage", "to": "n_sem_adv_risk", "fromOptions": ["stage_adv"], "linkCategory": "conditional" },
-    { "id": "l_sem_pc", "from": "n_sem_stage", "to": "n_sem_residual", "fromOptions": ["post_chemo"], "linkCategory": "conditional" },
+    { "id": "l_sem_pc", "from": "n_sem_stage", "to": "n_sem_restage", "fromOptions": ["post_chemo"], "linkCategory": "conditional" },
 
     { "id": "l_semI_surv", "from": "n_sem_I", "to": "n_tx_sem_surv", "fromOptions": ["surv"], "linkCategory": "conditional" },
     { "id": "l_semI_carbo", "from": "n_sem_I", "to": "n_tx_sem_carbo", "fromOptions": ["carbo"], "linkCategory": "conditional" },
     { "id": "l_semI_rt", "from": "n_sem_I", "to": "n_tx_sem_rt", "fromOptions": ["rt"], "linkCategory": "conditional" },
 
+    { "id": "l_semsurv_surv", "from": "n_tx_sem_surv", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_semcarbo_surv", "from": "n_tx_sem_carbo", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_semrt_surv", "from": "n_tx_sem_rt", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_semII_rt", "from": "n_sem_IIab", "to": "n_tx_sem_IIab_rt", "fromOptions": ["rt"], "linkCategory": "conditional" },
+    { "id": "l_semII_chemo", "from": "n_sem_IIab", "to": "n_tx_sem_IIab_chemo", "fromOptions": ["chemo"], "linkCategory": "conditional" },
+    { "id": "l_semIIrt_surv", "from": "n_tx_sem_IIab_rt", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_semIIchemo_rs", "from": "n_tx_sem_IIab_chemo", "to": "n_sem_restage", "linkCategory": "conditional" },
+
     { "id": "l_semadv_good", "from": "n_sem_adv_risk", "to": "n_tx_sem_good", "fromOptions": ["good"], "linkCategory": "conditional" },
     { "id": "l_semadv_int", "from": "n_sem_adv_risk", "to": "n_tx_sem_int", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
+    { "id": "l_semgood_rs", "from": "n_tx_sem_good", "to": "n_sem_restage", "linkCategory": "conditional" },
+    { "id": "l_semint_rs", "from": "n_tx_sem_int", "to": "n_sem_restage", "linkCategory": "conditional" },
+
+    { "id": "l_semrs_cr", "from": "n_sem_restage", "to": "n_surveillance", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_semrs_res", "from": "n_sem_restage", "to": "n_sem_residual", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_semrs_rise", "from": "n_sem_restage", "to": "n_relapse", "fromOptions": ["rising"], "linkCategory": "conditional" },
 
     { "id": "l_semres_neg", "from": "n_sem_residual", "to": "n_tx_sem_res_obs", "fromOptions": ["pet_neg"], "linkCategory": "conditional" },
     { "id": "l_semres_pos", "from": "n_sem_residual", "to": "n_tx_sem_res_pet", "fromOptions": ["pet_pos"], "linkCategory": "conditional" },
+    { "id": "l_semresobs_surv", "from": "n_tx_sem_res_obs", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_semrespet_rel", "from": "n_tx_sem_res_pet", "to": "n_relapse", "linkCategory": "conditional" },
 
     { "id": "l_nsgct_I", "from": "n_nsgct_stage", "to": "n_nsgct_I", "fromOptions": ["stage_I"], "linkCategory": "conditional" },
     { "id": "l_nsgct_IIab", "from": "n_nsgct_stage", "to": "n_nsgct_IIab", "fromOptions": ["stage_IIab"], "linkCategory": "conditional" },
     { "id": "l_nsgct_adv", "from": "n_nsgct_stage", "to": "n_nsgct_adv_risk", "fromOptions": ["stage_adv"], "linkCategory": "conditional" },
-    { "id": "l_nsgct_pc", "from": "n_nsgct_stage", "to": "n_nsgct_residual", "fromOptions": ["post_chemo"], "linkCategory": "conditional" },
+    { "id": "l_nsgct_pc", "from": "n_nsgct_stage", "to": "n_nsgct_restage", "fromOptions": ["post_chemo"], "linkCategory": "conditional" },
 
     { "id": "l_nsgctI_low", "from": "n_nsgct_I", "to": "n_tx_nsgct_I_low", "fromOptions": ["low"], "linkCategory": "conditional" },
     { "id": "l_nsgctI_high", "from": "n_nsgct_I", "to": "n_tx_nsgct_I_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_nsgctIlow_surv", "from": "n_tx_nsgct_I_low", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_nsgctIhigh_surv", "from": "n_tx_nsgct_I_high", "to": "n_surveillance", "linkCategory": "conditional" },
 
     { "id": "l_nsgctII_neg", "from": "n_nsgct_IIab", "to": "n_tx_nsgct_IIab_neg", "fromOptions": ["markers_neg"], "linkCategory": "conditional" },
     { "id": "l_nsgctII_pos", "from": "n_nsgct_IIab", "to": "n_tx_nsgct_IIab_pos", "fromOptions": ["markers_pos"], "linkCategory": "conditional" },
+    { "id": "l_nsgctIIneg_rs", "from": "n_tx_nsgct_IIab_neg", "to": "n_nsgct_restage", "linkCategory": "conditional" },
+    { "id": "l_nsgctIIpos_rs", "from": "n_tx_nsgct_IIab_pos", "to": "n_nsgct_restage", "linkCategory": "conditional" },
 
     { "id": "l_nsgctadv_good", "from": "n_nsgct_adv_risk", "to": "n_tx_nsgct_good", "fromOptions": ["good"], "linkCategory": "conditional" },
     { "id": "l_nsgctadv_int", "from": "n_nsgct_adv_risk", "to": "n_tx_nsgct_int", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
     { "id": "l_nsgctadv_poor", "from": "n_nsgct_adv_risk", "to": "n_tx_nsgct_poor", "fromOptions": ["poor"], "linkCategory": "conditional" },
+    { "id": "l_nsgctgood_rs", "from": "n_tx_nsgct_good", "to": "n_nsgct_restage", "linkCategory": "conditional" },
+    { "id": "l_nsgctint_rs", "from": "n_tx_nsgct_int", "to": "n_nsgct_restage", "linkCategory": "conditional" },
+    { "id": "l_nsgctpoor_rs", "from": "n_tx_nsgct_poor", "to": "n_nsgct_restage", "linkCategory": "conditional" },
 
-    { "id": "l_nsgctres_resect", "from": "n_nsgct_residual", "to": "n_tx_nsgct_pcrplnd", "fromOptions": ["normal_mass"], "linkCategory": "conditional" },
-    { "id": "l_nsgctres_salvage", "from": "n_nsgct_residual", "to": "n_tx_nsgct_res_salvage", "fromOptions": ["rising"], "linkCategory": "conditional" },
+    { "id": "l_nsgctrs_cr", "from": "n_nsgct_restage", "to": "n_surveillance", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_nsgctrs_res", "from": "n_nsgct_restage", "to": "n_tx_pcrplnd", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_nsgctrs_rise", "from": "n_nsgct_restage", "to": "n_tx_nsgct_salvage", "fromOptions": ["rising"], "linkCategory": "conditional" },
+
+    { "id": "l_pcrplnd_histo", "from": "n_tx_pcrplnd", "to": "n_post_rplnd_histo", "linkCategory": "conditional" },
+    { "id": "l_histo_nec", "from": "n_post_rplnd_histo", "to": "n_tx_postrplnd_observe", "fromOptions": ["necrosis"], "linkCategory": "conditional" },
+    { "id": "l_histo_ter", "from": "n_post_rplnd_histo", "to": "n_tx_postrplnd_teratoma", "fromOptions": ["teratoma"], "linkCategory": "conditional" },
+    { "id": "l_histo_via", "from": "n_post_rplnd_histo", "to": "n_tx_postrplnd_viable", "fromOptions": ["viable"], "linkCategory": "conditional" },
+    { "id": "l_prnec_surv", "from": "n_tx_postrplnd_observe", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_prter_surv", "from": "n_tx_postrplnd_teratoma", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_prvia_surv", "from": "n_tx_postrplnd_viable", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_nsgctsalv_rel", "from": "n_tx_nsgct_salvage", "to": "n_relapse", "linkCategory": "conditional" },
+
+    { "id": "l_surv_rel", "from": "n_surveillance", "to": "n_relapse", "linkCategory": "conditional" },
 
     { "id": "l_rel_conv", "from": "n_relapse", "to": "n_tx_salvage_conv", "fromOptions": ["sensitive"], "linkCategory": "conditional" },
     { "id": "l_rel_hdct", "from": "n_relapse", "to": "n_tx_salvage_hdct", "fromOptions": ["refractory"], "linkCategory": "conditional" },
-    { "id": "l_rel_late", "from": "n_relapse", "to": "n_tx_late_relapse", "fromOptions": ["late"], "linkCategory": "conditional" }
+    { "id": "l_rel_late", "from": "n_relapse", "to": "n_tx_late_relapse", "fromOptions": ["late"], "linkCategory": "conditional" },
+
+    { "id": "l_conv_rs", "from": "n_tx_salvage_conv", "to": "n_salvage_restage", "linkCategory": "conditional" },
+    { "id": "l_hdct_rs", "from": "n_tx_salvage_hdct", "to": "n_salvage_restage", "linkCategory": "conditional" },
+    { "id": "l_salvrs_res", "from": "n_salvage_restage", "to": "n_tx_salvage_resect", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_salvrs_prog", "from": "n_salvage_restage", "to": "n_tx_thirdline", "fromOptions": ["progression"], "linkCategory": "conditional" }
   ]
 }

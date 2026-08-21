@@ -658,6 +658,7 @@
             ["Prior platinum + immunotherapy, no EV yet", "Enfortumab vedotin"],
             ["Prior platinum, immunotherapy-naive", "Pembrolizumab (or other checkpoint inhibitor)"],
             ["FGFR2 / FGFR3 alteration, post-platinum", "Erdafitinib"],
+            ["HER2-expressing (IHC 3+ / 2+)", "Trastuzumab deruxtecan (tissue-agnostic)"],
             ["Options exhausted / no biomarker", "Sacituzumab govitecan or single-agent chemo"]
           ]
         }
@@ -666,6 +667,7 @@
         { "id": "ev", "label": "Enfortumab vedotin (if not used first-line)", "sets": { "laterLine": "ev" }, "pills": ["EV"] },
         { "id": "pembro", "label": "Pembrolizumab (immunotherapy-naive)", "sets": { "laterLine": "pembro" }, "pills": ["pembro"] },
         { "id": "fgfr", "label": "Erdafitinib (FGFR2/3-altered)", "sets": { "biomarkers.FGFR": "altered" }, "pills": ["FGFR+"] },
+        { "id": "her2", "label": "Trastuzumab deruxtecan (HER2-expressing)", "sets": { "biomarkers.HER2": "expressing" }, "pills": ["HER2+"] },
         { "id": "other", "label": "Sacituzumab / single-agent chemo", "sets": { "laterLine": "other" }, "pills": ["other"] }
       ]
     },
@@ -686,6 +688,7 @@
       "bullets": [
         "Enfortumab vedotin (nectin-4 ADC) after prior platinum and immunotherapy",
         "Monitor for skin reactions, hyperglycemia, peripheral neuropathy, and ocular effects",
+        "On progression, move to the subsequent-line pathway (next step)",
         "Regimen referenced below"
       ],
       "protocolRefs": ["gu-uro-enfortumab-vedotin"]
@@ -707,7 +710,8 @@
       "bullets": [
         "Pembrolizumab for immunotherapy-naive disease after platinum chemotherapy",
         "No dedicated urothelial dose protocol here - shown as guidance",
-        "Monitor for immune-related adverse events"
+        "Monitor for immune-related adverse events",
+        "On progression, move to the subsequent-line pathway (next step)"
       ]
     },
     {
@@ -728,7 +732,8 @@
       "bullets": [
         "Erdafitinib for confirmed FGFR2 / FGFR3 activating mutation or fusion after prior systemic therapy",
         "Monitor phosphate (hyperphosphatemia), ophthalmic exams (central serous retinopathy), nails / skin, and dry mouth",
-        "No dose protocol here - shown as guidance (physician arranges the erdafitinib regimen)"
+        "No dose protocol here - shown as guidance (physician arranges the erdafitinib regimen)",
+        "On progression, move to the subsequent-line pathway (next step)"
       ]
     },
     {
@@ -753,6 +758,183 @@
       ]
     },
 
+    {
+      "id": "n_int_response",
+      "linkId": "bladder_int_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Intermediate NMIBC response",
+      "title": "Intermediate-risk NMIBC: response after induction",
+      "description": "After the induction intravesical course, surveillance cystoscopy and cytology determine whether to continue observation or escalate for recurrence.",
+      "path": "Bladder / NMIBC / Intermediate / Response",
+      "section": "Treatment",
+      "pills": ["NMIBC", "intermediate", "response"],
+      "required": true,
+      "bullets": [
+        "First surveillance cystoscopy + cytology at about 3 months",
+        "No recurrence: continue risk-adapted surveillance",
+        "Low-grade recurrence: repeat TURBT and consider a maintenance intravesical course",
+        "High-grade recurrence or progression to T1 / CIS: manage as high-risk disease (induction BCG or restaging)"
+      ],
+      "options": [
+        { "id": "controlled", "label": "No recurrence / low-grade recurrence controlled", "sets": { "intResponse": "controlled" }, "pills": ["controlled"] },
+        { "id": "recurrence", "label": "High-grade recurrence / progression", "sets": { "intResponse": "recurrence" }, "pills": ["recurrence"] }
+      ]
+    },
+    {
+      "id": "n_tmt_response",
+      "linkId": "bladder_tmt_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Trimodality response",
+      "title": "Bladder preservation: response assessment",
+      "description": "After maximal TURBT and concurrent chemoradiation, restaging cystoscopy with biopsy (plus cytology and imaging) determines bladder preservation vs salvage cystectomy.",
+      "path": "Bladder / MIBC / Trimodality / Response",
+      "section": "Treatment",
+      "pills": ["MIBC", "bladder-sparing", "response"],
+      "required": true,
+      "bullets": [
+        "Restaging cystoscopy + biopsy of the tumor bed after chemoradiation, with cytology and cross-sectional imaging",
+        "Complete response: preserve the bladder and enter strict surveillance",
+        "Residual muscle-invasive disease or invasive recurrence: prompt salvage radical cystectomy",
+        "Non-muscle-invasive recurrence after preservation may be managed with intravesical therapy in selected patients"
+      ],
+      "options": [
+        { "id": "cr", "label": "Complete response (bladder preserved)", "sets": { "tmtResponse": "cr" }, "pills": ["CR"] },
+        { "id": "residual", "label": "Residual / invasive recurrence", "sets": { "tmtResponse": "residual" }, "pills": ["residual"] }
+      ]
+    },
+    {
+      "id": "n_tx_tmt_intact",
+      "linkId": "tx_tmt_intact",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Bladder preserved",
+      "title": "Complete response: bladder-intact surveillance",
+      "description": "Complete response to trimodality therapy; preserve the bladder with intensive surveillance.",
+      "path": "Bladder / MIBC / Trimodality / Preserved",
+      "section": "Treatment",
+      "pills": ["MIBC", "bladder-sparing", "CR", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Bladder preserved after a complete response to trimodality therapy",
+        "Intensive cystoscopy + cytology surveillance, with upper-tract and cross-sectional imaging",
+        "Low threshold for salvage cystectomy on muscle-invasive recurrence",
+        "Manage non-muscle-invasive recurrence with intravesical therapy where appropriate"
+      ]
+    },
+    {
+      "id": "n_tx_tmt_salvage",
+      "linkId": "tx_tmt_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Salvage cystectomy",
+      "title": "Residual / recurrent disease: salvage radical cystectomy",
+      "description": "Salvage radical cystectomy for residual muscle-invasive or invasive recurrent disease after bladder preservation, then adjuvant assessment.",
+      "path": "Bladder / MIBC / Trimodality / Salvage",
+      "section": "Treatment",
+      "pills": ["MIBC", "salvage", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Salvage radical cystectomy + bilateral pelvic lymph-node dissection and urinary diversion",
+        "Higher peri-operative morbidity than primary cystectomy - optimize with enhanced-recovery care",
+        "Send full pathology to guide adjuvant assessment (next step)",
+        "Consider adjuvant nivolumab for high-risk residual pathology"
+      ]
+    },
+    {
+      "id": "n_tx_met_tdxd",
+      "linkId": "tx_met_tdxd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trastuzumab deruxtecan",
+      "title": "Later-line: trastuzumab deruxtecan (HER2-expressing)",
+      "description": "HER2-directed antibody-drug conjugate for HER2-expressing urothelial carcinoma (tissue-agnostic use) after prior systemic therapy.",
+      "path": "Bladder / Metastatic / T-DXd",
+      "section": "Treatment",
+      "pills": ["metastatic", "HER2+", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Trastuzumab deruxtecan for HER2-expressing (IHC 3+, or IHC 2+) urothelial carcinoma after prior therapy",
+        "Monitor for interstitial lung disease / pneumonitis - hold and evaluate any new respiratory symptoms",
+        "No dedicated urothelial dose protocol here - shown as guidance",
+        "On progression, move to the subsequent-line pathway (next step)"
+      ]
+    },
+    {
+      "id": "n_met_later2",
+      "linkId": "bladder_met_later2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Subsequent-line option",
+      "title": "Metastatic subsequent-line: after later-line progression",
+      "description": "On progression through a later-line agent, choose a subsequent-line option not previously used; prioritize an antibody-drug conjugate or a clinical trial.",
+      "path": "Bladder / Metastatic / Subsequent line",
+      "section": "Treatment",
+      "pills": ["metastatic", "subsequent line"],
+      "required": true,
+      "bullets": [
+        "Confirm which agent classes have already been used (platinum, checkpoint inhibitor, enfortumab vedotin, FGFR inhibitor)",
+        "Sacituzumab govitecan is a preferred antibody-drug conjugate option after prior platinum and immunotherapy",
+        "Enfortumab vedotin if not previously received; erdafitinib if an FGFR2/3 alteration remains untargeted",
+        "Otherwise single-agent chemotherapy, a clinical trial, or best supportive care"
+      ],
+      "options": [
+        { "id": "saci", "label": "Sacituzumab govitecan (Trop-2 ADC)", "sets": { "subsequentLine": "saci" }, "pills": ["sacituzumab"] },
+        { "id": "bsc", "label": "Single-agent chemo / clinical trial / best supportive care", "sets": { "subsequentLine": "bsc" }, "pills": ["trial / BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_saci",
+      "linkId": "tx_met_saci",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Sacituzumab govitecan",
+      "title": "Subsequent-line: sacituzumab govitecan",
+      "description": "Trop-2 antibody-drug conjugate for previously treated metastatic urothelial carcinoma.",
+      "path": "Bladder / Metastatic / Sacituzumab",
+      "section": "Treatment",
+      "pills": ["metastatic", "sacituzumab", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Sacituzumab govitecan after platinum and a checkpoint inhibitor (typically after enfortumab vedotin)",
+        "Monitor for neutropenia (consider growth-factor support) and diarrhea",
+        "No dedicated urothelial dose protocol here - shown as guidance",
+        "On further progression, consider a clinical trial or best supportive care"
+      ]
+    },
+    {
+      "id": "n_tx_met_bsc",
+      "linkId": "tx_met_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trial / supportive care",
+      "title": "Subsequent-line: single-agent chemo / clinical trial / supportive care",
+      "description": "For heavily pretreated disease without a remaining actionable option.",
+      "path": "Bladder / Metastatic / Trial / BSC",
+      "section": "Treatment",
+      "pills": ["metastatic", "trial / BSC", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Single-agent chemotherapy (e.g. a taxane, or gemcitabine if not previously used)",
+        "Clinical-trial enrollment for novel agents or combinations",
+        "Integrate palliative and best supportive care; manage symptoms and performance status",
+        "Reassess goals of care at each progression"
+      ]
+    },
     {
       "id": "n_surveillance",
       "linkId": "bladder_surveillance",
@@ -788,7 +970,9 @@
     { "id": "l_nm_int", "from": "n_nmibc_risk", "to": "n_tx_nmibc_int", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
     { "id": "l_nm_high", "from": "n_nmibc_risk", "to": "n_tx_nmibc_high", "fromOptions": ["high"], "linkCategory": "conditional" },
     { "id": "l_nm_low_surv", "from": "n_tx_nmibc_low", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_nm_int_surv", "from": "n_tx_nmibc_int", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_nm_int_resp", "from": "n_tx_nmibc_int", "to": "n_int_response", "linkCategory": "conditional" },
+    { "id": "l_int_ctrl", "from": "n_int_response", "to": "n_surveillance", "fromOptions": ["controlled"], "linkCategory": "conditional" },
+    { "id": "l_int_rec", "from": "n_int_response", "to": "n_tx_nmibc_high", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
     { "id": "l_nm_high_resp", "from": "n_tx_nmibc_high", "to": "n_nmibc_response", "linkCategory": "conditional" },
     { "id": "l_nm_resp_maint", "from": "n_nmibc_response", "to": "n_tx_nmibc_maint", "fromOptions": ["responsive"], "linkCategory": "conditional" },
     { "id": "l_nm_resp_unresp", "from": "n_nmibc_response", "to": "n_tx_nmibc_bcgunresp", "fromOptions": ["unresponsive"], "linkCategory": "conditional" },
@@ -802,7 +986,11 @@
     { "id": "l_mi_local_cyst", "from": "n_mibc_local", "to": "n_tx_mibc_cystectomy", "fromOptions": ["cystectomy"], "linkCategory": "conditional" },
     { "id": "l_mi_local_tmt", "from": "n_mibc_local", "to": "n_tx_mibc_tmt", "fromOptions": ["bladder_preservation"], "linkCategory": "conditional" },
     { "id": "l_mi_cyst_adj", "from": "n_tx_mibc_cystectomy", "to": "n_mibc_adjuvant", "linkCategory": "conditional" },
-    { "id": "l_mi_tmt_surv", "from": "n_tx_mibc_tmt", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_mi_tmt_resp", "from": "n_tx_mibc_tmt", "to": "n_tmt_response", "linkCategory": "conditional" },
+    { "id": "l_tmt_cr", "from": "n_tmt_response", "to": "n_tx_tmt_intact", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_tmt_res", "from": "n_tmt_response", "to": "n_tx_tmt_salvage", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_tmt_intact_surv", "from": "n_tx_tmt_intact", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_tmt_salv_adj", "from": "n_tx_tmt_salvage", "to": "n_mibc_adjuvant", "linkCategory": "conditional" },
     { "id": "l_mi_adj_chemo", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_adjchemo", "fromOptions": ["adj_chemo"], "linkCategory": "conditional" },
     { "id": "l_mi_adj_nivo", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_adjnivo", "fromOptions": ["adj_nivo"], "linkCategory": "conditional" },
     { "id": "l_mi_adj_obs", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_observe", "fromOptions": ["observe"], "linkCategory": "conditional" },
@@ -824,10 +1012,16 @@
     { "id": "l_met_later_ev", "from": "n_met_later", "to": "n_tx_met_ev", "fromOptions": ["ev"], "linkCategory": "conditional" },
     { "id": "l_met_later_pembro", "from": "n_met_later", "to": "n_tx_met_pembro", "fromOptions": ["pembro"], "linkCategory": "conditional" },
     { "id": "l_met_later_fgfr", "from": "n_met_later", "to": "n_tx_met_erda", "fromOptions": ["fgfr"], "linkCategory": "conditional" },
+    { "id": "l_met_later_her2", "from": "n_met_later", "to": "n_tx_met_tdxd", "fromOptions": ["her2"], "linkCategory": "conditional" },
     { "id": "l_met_later_other", "from": "n_met_later", "to": "n_tx_met_other", "fromOptions": ["other"], "linkCategory": "conditional" },
-    { "id": "l_met_ev_surv", "from": "n_tx_met_ev", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_met_pembro_surv", "from": "n_tx_met_pembro", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_met_erda_surv", "from": "n_tx_met_erda", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_met_other_surv", "from": "n_tx_met_other", "to": "n_surveillance", "linkCategory": "conditional" }
+    { "id": "l_met_ev_l2", "from": "n_tx_met_ev", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_pembro_l2", "from": "n_tx_met_pembro", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_erda_l2", "from": "n_tx_met_erda", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_tdxd_l2", "from": "n_tx_met_tdxd", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_other_surv", "from": "n_tx_met_other", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_met_l2_saci", "from": "n_met_later2", "to": "n_tx_met_saci", "fromOptions": ["saci"], "linkCategory": "conditional" },
+    { "id": "l_met_l2_bsc", "from": "n_met_later2", "to": "n_tx_met_bsc", "fromOptions": ["bsc"], "linkCategory": "conditional" },
+    { "id": "l_met_saci_surv", "from": "n_tx_met_saci", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_met_bsc_surv", "from": "n_tx_met_bsc", "to": "n_surveillance", "linkCategory": "conditional" }
   ]
 }

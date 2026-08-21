@@ -2,10 +2,11 @@
   "guideline": "uterine",
   "title": "Uterine Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
+  "navigatorVersion": "2.0.0",
   "diseaseId": "uterine_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Structural pathway for uterine / endometrial cancer: entry by newly-diagnosed vs advanced/recurrent, histology (endometrioid, serous / clear-cell, carcinosarcoma, uterine sarcoma / LMS), molecular class (POLE / MMRd / p53abn / NSMP), surgery + risk-adapted adjuvant, then surveillance and a biomarker-directed advanced pathway by MMR / HER2 / hormone-receptor status. Treatment leaves reference existing StewardMD Standard Protocols by id where one fits; agents without a matching protocol are shown as checklist guidance with no dose. No proprietary guideline text reproduced; invents no dose.",
+  "provenanceNote": "ONCOTREE navigator DRAFT for uterine / endometrial cancer. Entry by newly-diagnosed vs advanced / recurrent, then histology (endometrioid, serous / clear-cell, carcinosarcoma, uterine sarcoma / LMS), molecular class (POLE / MMRd / p53abn / NSMP), primary surgery (with a fertility-sparing response-adapted branch), risk-adapted adjuvant therapy, response / restaging after definitive locoregional therapy, then surveillance and a biomarker-directed advanced pathway with explicit line-of-therapy progression sub-trees (first line -> on progression -> later line) for each molecular / receptor subgroup and for advanced leiomyosarcoma. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by id where one fits; agents and surgery / radiation without a matching dose protocol are shown as checklist guidance with NO dose. Workup / staging / subtype-stratification content is standard oncology, not proprietary guideline text; structural pathway consistent with standard references (NCCN / DeVita / Harrison). Invents no dose / regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses. FollowCare rules never alter these orders.",
   "sourceNote": "Structural pathway consistent with standard oncology references (NCCN, DeVita, Harrison). Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
   "startNodeIds": ["n_workup"],
   "footnotes": {
@@ -14,7 +15,7 @@
       "evidence": "2A"
     },
     "b": {
-      "text": "POLE ultramutated tumors have an excellent prognosis; de-escalation or omission of adjuvant therapy in early stage may be considered on a case-by-case basis and ideally within a trial.",
+      "text": "POLE ultramutated tumors have an excellent prognosis; de-escalation or omission of adjuvant therapy in early stage may be considered case-by-case, ideally within a trial.",
       "evidence": "2B"
     },
     "c": {
@@ -22,8 +23,16 @@
       "evidence": "1"
     },
     "d": {
-      "text": "Add an immune-checkpoint inhibitor to carboplatin / paclitaxel for advanced or recurrent endometrial carcinoma; benefit is largest in MMR-deficient / MSI-high tumors. FollowCare rules never alter these orders.",
+      "text": "Add an immune-checkpoint inhibitor to carboplatin / paclitaxel for advanced or recurrent endometrial carcinoma; benefit is largest in MMR-deficient / MSI-high tumors.",
       "evidence": "1"
+    },
+    "e": {
+      "text": "After progression on platinum in mismatch-repair-proficient disease, lenvatinib plus pembrolizumab improves survival versus chemotherapy; monitor for hypertension, proteinuria, and fatigue.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "For leiomyosarcoma avoid tumor morcellation; anthracycline-based therapy is a standard first-line option and gemcitabine / docetaxel an accepted alternative, with non-cross-resistant agents on later progression.",
+      "evidence": "2A"
     }
   },
   "nodes": [
@@ -42,8 +51,8 @@
         "History, exam including pelvic exam, performance status",
         "Endometrial biopsy or D&C with expert gyn-pathology review; record histology and grade",
         "CBC, chemistries, LFTs; consider CA-125 in high-risk histology",
-        "Imaging: pelvic MRI for local extent; CT chest/abdomen/pelvis or PET for suspected advanced disease",
-        {"label": "Molecular / IHC panel", "sub": "MMR / MSI, p53, and POLE where available; ER/PR and HER2 on serous or advanced disease"},
+        "Imaging: pelvic MRI for local extent; CT chest / abdomen / pelvis or PET for suspected advanced disease",
+        {"label": "Molecular / IHC panel", "sub": "MMR / MSI, p53, and POLE where available; ER / PR and HER2 on serous or advanced disease"},
         "Assess surgical candidacy and fertility-sparing wishes"
       ],
       "footnotes": ["a"],
@@ -109,7 +118,7 @@
           "headers": ["Subgroup", "Marker", "Prognosis", "Adjuvant lean"],
           "rows": [
             ["POLE ultramutated", "POLE exonuclease mutation", "Excellent", "Consider de-escalation / omit in early stage"],
-            ["MMRd / MSI-high", "Loss of MLH1/PMS2/MSH2/MSH6", "Intermediate", "Standard by stage; IO candidate if advanced"],
+            ["MMRd / MSI-high", "Loss of MLH1 / PMS2 / MSH2 / MSH6", "Intermediate", "Standard by stage; IO candidate if advanced"],
             ["p53 abnormal", "Aberrant p53 IHC (serous-like)", "Poor", "Escalate; add chemotherapy"],
             ["NSMP", "No specific molecular profile", "Intermediate", "Stage and grade driven"]
           ]
@@ -126,10 +135,10 @@
       "id": "n_surg_ec",
       "nodeCategory": "treatment",
       "nodeType": "question",
-      "name": "Surgery (EC)",
-      "title": "Primary surgery - endometrioid",
+      "name": "Primary therapy (EC)",
+      "title": "Primary therapy - endometrioid",
       "section": "Treatment",
-      "description": "Total hysterectomy + bilateral salpingo-oophorectomy with surgical staging; then assess pathologic risk.",
+      "description": "Standard is hysterectomy with surgical staging; a fertility-sparing progestin approach is an option only in highly selected grade-1 IA disease.",
       "path": "Uterine / Surgery",
       "pills": ["surgery"],
       "required": true,
@@ -138,10 +147,33 @@
         "Total hysterectomy + BSO (minimally invasive preferred when feasible)",
         "Sentinel-lymph-node mapping for nodal assessment; full lymphadenectomy selectively",
         "Peritoneal assessment and cytology; omental / peritoneal biopsies if serous features",
-        "Fertility-sparing (progestin) only in highly selected grade-1 IA disease with counseling"
+        "Fertility-sparing progestin only in highly selected grade-1 IA disease with counseling and close follow-up"
       ],
       "options": [
-        {"id": "continue", "label": "Surgery / staging done - assess risk", "pills": ["next"]}
+        {"id": "surgery", "label": "Hysterectomy + staging done - assess risk", "pills": ["surgery"]},
+        {"id": "fertility", "label": "Fertility-sparing progestin (selected grade-1 IA)", "sets": {"approach": "fertility"}, "pills": ["fertility-sparing"]}
+      ]
+    },
+    {
+      "id": "n_fertility_response",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Fertility-sparing response",
+      "title": "Fertility-sparing progestin - response assessment",
+      "section": "Treatment",
+      "description": "Re-biopsy at 3-6 months determines whether conservative therapy continues or definitive surgery is needed.",
+      "path": "Uterine / Fertility-sparing",
+      "pills": ["response"],
+      "required": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "Continuous progestin (oral or levonorgestrel IUD); endometrial sampling every 3-6 months",
+        "Complete response: attempt conception promptly; maintain surveillance sampling",
+        "Definitive hysterectomy after childbearing or for persistent / progressive disease"
+      ],
+      "options": [
+        {"id": "regression", "label": "Complete regression - continue surveillance", "pills": ["responder"]},
+        {"id": "persistent", "label": "Persistent / progressive - definitive surgery", "sets": {"approach": "surgery"}, "pills": ["non-responder"]}
       ]
     },
     {
@@ -161,10 +193,10 @@
           "title": "Simplified FIGO stage groups (endometrial)",
           "headers": ["Stage", "Extent"],
           "rows": [
-            ["I", "Confined to corpus (IA no/less-than-half myometrium; IB half or more)"],
+            ["I", "Confined to corpus (IA no / less-than-half myometrium; IB half or more)"],
             ["II", "Cervical stromal invasion, no extrauterine spread"],
             ["III", "Local / regional spread (serosa, adnexa, vagina, pelvic / para-aortic nodes)"],
-            ["IVA / IVB", "Bladder/bowel mucosa (IVA) or distant metastases (IVB)"]
+            ["IVA / IVB", "Bladder / bowel mucosa (IVA) or distant metastases (IVB)"]
           ]
         }
       ],
@@ -173,6 +205,26 @@
         {"id": "hir", "label": "Stage I high-intermediate risk (IB, grade 3, or LVSI)", "sets": {"risk": "hir"}, "pills": ["HIR"]},
         {"id": "stII", "label": "Stage II (cervical stroma)", "sets": {"risk": "stII"}, "pills": ["II"]},
         {"id": "advanced", "label": "Stage III-IVA (locoregional)", "sets": {"risk": "advanced"}, "pills": ["III-IVA"]}
+      ]
+    },
+    {
+      "id": "n_adj_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Low-risk observation",
+      "title": "Stage I low-risk - observation",
+      "section": "Treatment",
+      "description": "Excellent prognosis; no adjuvant therapy after complete surgery, proceed to surveillance.",
+      "path": "Uterine / Adjuvant",
+      "pills": ["observe"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "No adjuvant radiation or chemotherapy for stage IA grade 1-2 endometrioid",
+        "POLE-ultramutated tumors reinforce a de-escalation / observation choice",
+        "Vaginal brachytherapy only if isolated adverse features emerge on review",
+        "Then surveillance"
       ]
     },
     {
@@ -210,8 +262,7 @@
         "Vaginal-cuff brachytherapy over 3-5 fractions",
         "No cytotoxic chemotherapy for isolated HIR endometrioid",
         "Then surveillance"
-      ],
-      "linkTo": "n_surveillance"
+      ]
     },
     {
       "id": "n_hir_ebrt",
@@ -227,10 +278,10 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "External-beam pelvic RT +/- vaginal-brachytherapy boost",
-        "Add chemotherapy only if p53-abnormal or upstaged",
+        "Add carboplatin / paclitaxel only if p53-abnormal or upstaged",
         "Then surveillance"
       ],
-      "linkTo": "n_surveillance"
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"]
     },
     {
       "id": "n_adj_stII",
@@ -249,17 +300,16 @@
         "Add carboplatin / paclitaxel for grade-3, LVSI-heavy, or p53-abnormal disease",
         "Then surveillance"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"],
-      "linkTo": "n_surveillance"
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     },
     {
       "id": "n_adj_adv",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Stage III-IVA adjuvant",
+      "name": "Stage III-IVA definitive",
       "title": "Locoregional advanced - chemotherapy + radiation",
       "section": "Treatment",
-      "description": "Systemic chemotherapy is the backbone for stage III-IVA, with directed RT for local control.",
+      "description": "Systemic chemotherapy is the backbone for stage III-IVA, with directed RT for local control; then restage.",
       "path": "Uterine / Adjuvant",
       "pills": ["chemo", "RT"],
       "showsRecommendation": true,
@@ -269,10 +319,25 @@
         "Carboplatin / paclitaxel systemic chemotherapy",
         "Add an immune-checkpoint inhibitor, benefit greatest if MMRd / MSI-high",
         "Tumor-directed / pelvic RT for local control as indicated",
-        "Then surveillance"
+        "Then restage to decide surveillance vs continued systemic therapy"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"],
-      "linkTo": "n_surveillance"
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
+    },
+    {
+      "id": "n_adv_loco_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Locoregional response",
+      "title": "Response after definitive locoregional therapy",
+      "section": "Treatment",
+      "description": "Restaging after chemoradiation determines whether the patient enters surveillance or moves to advanced systemic therapy.",
+      "path": "Uterine / Response",
+      "pills": ["response"],
+      "required": true,
+      "options": [
+        {"id": "cr", "label": "Complete / no residual disease - surveillance", "pills": ["responder"]},
+        {"id": "residual", "label": "Residual or progressive disease - systemic therapy", "sets": {"scope": "advanced"}, "pills": ["residual"]}
+      ]
     },
     {
       "id": "n_surg_hi",
@@ -330,8 +395,7 @@
         "Add trastuzumab for HER2-positive uterine serous carcinoma",
         "Then surveillance"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"],
-      "linkTo": "n_surveillance"
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     },
     {
       "id": "n_hi_adv",
@@ -340,7 +404,7 @@
       "name": "Advanced high-risk",
       "title": "Stage II-IVA high-risk histology - chemotherapy +/- RT",
       "section": "Treatment",
-      "description": "Systemic chemotherapy backbone with directed RT; biomarker add-ons where positive.",
+      "description": "Systemic chemotherapy backbone with directed RT; biomarker add-ons where positive, then restage.",
       "path": "Uterine / Adjuvant",
       "pills": ["chemo", "RT"],
       "showsRecommendation": true,
@@ -350,10 +414,25 @@
         "Carboplatin / paclitaxel chemotherapy",
         "Add trastuzumab if HER2-positive serous; add checkpoint inhibitor if MMRd",
         "Tumor-directed RT for local control",
-        "Then surveillance"
+        "Then restage to decide surveillance vs continued systemic therapy"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"],
-      "linkTo": "n_surveillance"
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
+    },
+    {
+      "id": "n_hi_adv_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "High-risk response",
+      "title": "Response after primary systemic therapy - high-risk histology",
+      "section": "Treatment",
+      "description": "Restaging determines surveillance versus transition to biomarker-directed advanced therapy.",
+      "path": "Uterine / Response",
+      "pills": ["response"],
+      "required": true,
+      "options": [
+        {"id": "cr", "label": "Complete response - surveillance", "pills": ["responder"]},
+        {"id": "residual", "label": "Residual / progressive - advanced systemic therapy", "sets": {"scope": "advanced"}, "pills": ["residual"]}
+      ]
     },
     {
       "id": "n_sarcoma_type",
@@ -383,6 +462,7 @@
       "path": "Uterine / Sarcoma",
       "pills": ["LMS"],
       "required": true,
+      "footnotes": ["f"],
       "options": [
         {"id": "localized", "label": "Localized, resected (uterus-limited)", "sets": {"lms_stage": "localized"}, "pills": ["localized"]},
         {"id": "advanced", "label": "Advanced / metastatic / unresectable", "sets": {"lms_stage": "advanced"}, "pills": ["advanced"]}
@@ -400,28 +480,29 @@
       "pills": ["surgery"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
+      "footnotes": ["f"],
       "bullets": [
         "Total hysterectomy without morcellation; BSO individualized",
         "No routine adjuvant chemotherapy or RT for uterus-limited disease",
         "Consider adjuvant therapy or a trial for high-risk cases after discussion",
         "Then close surveillance including chest imaging"
-      ],
-      "linkTo": "n_surveillance"
+      ]
     },
     {
       "id": "n_lms_systemic",
       "nodeCategory": "treatment",
       "nodeType": "question",
       "name": "LMS systemic",
-      "title": "Advanced LMS - systemic therapy line",
+      "title": "Advanced LMS - start systemic therapy",
       "section": "Treatment",
-      "description": "Choose line of therapy for advanced or metastatic leiomyosarcoma.",
+      "description": "Begin first-line systemic therapy for advanced or metastatic leiomyosarcoma; consider metastasectomy for isolated disease.",
       "path": "Uterine / Sarcoma",
       "pills": ["systemic"],
       "required": true,
+      "footnotes": ["f"],
       "options": [
-        {"id": "first", "label": "First-line systemic therapy", "pills": ["1L"]},
-        {"id": "later", "label": "Second-line / later therapy", "pills": ["2L+"]}
+        {"id": "first", "label": "Begin first-line systemic therapy", "pills": ["1L"]},
+        {"id": "metastasectomy", "label": "Resect isolated (e.g. pulmonary) metastases first", "pills": ["surgery"]}
       ]
     },
     {
@@ -433,15 +514,69 @@
       "section": "Treatment",
       "description": "Doxorubicin-based or gemcitabine / docetaxel combinations are standard first-line options.",
       "path": "Uterine / Sarcoma",
-      "pills": ["chemo"],
+      "pills": ["chemo", "1L"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
+      "footnotes": ["f"],
       "bullets": [
         "Doxorubicin single-agent or anthracycline-based combination",
         "Gemcitabine / docetaxel is an accepted alternative first-line doublet",
-        "Consider resection of isolated (e.g. pulmonary) metastases in selected patients"
+        "Assess response by imaging every 2-3 cycles",
+        "On progression, move to a non-cross-resistant later line"
       ],
       "protocolRefs": ["gyn-uterine-lms-doxorubicin", "gyn-uterine-lms-gem-docetaxel"]
+    },
+    {
+      "id": "n_lms_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "LMS 1L outcome",
+      "title": "Advanced LMS - outcome on first line",
+      "section": "Treatment",
+      "description": "Continue first-line therapy while it controls disease; switch on progression.",
+      "path": "Uterine / Sarcoma",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - switch to later line", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue current therapy", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_lms_second",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "LMS second line",
+      "title": "Advanced LMS - second-line therapy",
+      "section": "Treatment",
+      "description": "Switch to a non-cross-resistant regimen after first-line progression.",
+      "path": "Uterine / Sarcoma",
+      "pills": ["chemo", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["f"],
+      "bullets": [
+        "Gemcitabine / docetaxel if an anthracycline was used first-line (or the reverse)",
+        "Consider trabectedin or pazopanib as active single agents",
+        "Reassess response; on further progression move to a later line or trial"
+      ],
+      "protocolRefs": ["gyn-uterine-lms-gem-docetaxel"]
+    },
+    {
+      "id": "n_lms_prog2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "LMS 2L outcome",
+      "title": "Advanced LMS - outcome on second line",
+      "section": "Treatment",
+      "description": "Continue while controlled; on further progression move to later-line single agents or a trial.",
+      "path": "Uterine / Sarcoma",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - later-line options", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue current therapy", "pills": ["stable"]}
+      ]
     },
     {
       "id": "n_lms_later",
@@ -452,15 +587,15 @@
       "section": "Treatment",
       "description": "Non-cross-resistant single agents after progression; trials encouraged.",
       "path": "Uterine / Sarcoma",
-      "pills": ["chemo"],
+      "pills": ["chemo", "3L+"],
       "showsRecommendation": true,
-      "evidenceCategory": ["2A"],
+      "evidenceCategory": ["2B"],
+      "footnotes": ["f"],
       "bullets": [
-        "Gemcitabine / docetaxel if not used first-line",
         "Other active single agents: trabectedin, pazopanib, dacarbazine, eribulin",
-        "Clinical trial and best supportive care as appropriate"
-      ],
-      "protocolRefs": ["gyn-uterine-lms-gem-docetaxel"]
+        "Clinical trial strongly encouraged",
+        "Best supportive care and symptom-directed palliation as appropriate"
+      ]
     },
     {
       "id": "n_ess_low",
@@ -479,8 +614,7 @@
         "Adjuvant or palliative endocrine therapy: aromatase inhibitor or progestin",
         "Avoid estrogen replacement",
         "Then surveillance"
-      ],
-      "linkTo": "n_surveillance"
+      ]
     },
     {
       "id": "n_sarc_highgrade",
@@ -489,18 +623,19 @@
       "name": "High-grade sarcoma",
       "title": "High-grade / undifferentiated uterine sarcoma",
       "section": "Treatment",
-      "description": "Aggressive; resection when feasible plus systemic chemotherapy, mirror LMS systemic options.",
+      "description": "Aggressive; resection when feasible plus systemic chemotherapy, mirroring LMS systemic options.",
       "path": "Uterine / Sarcoma",
       "pills": ["surgery", "chemo"],
       "showsRecommendation": true,
       "evidenceCategory": ["2B"],
+      "footnotes": ["f"],
       "bullets": [
         "Resection if operable; multidisciplinary sarcoma review",
         "Systemic anthracycline- or gemcitabine-based chemotherapy for advanced disease",
         "Test high-grade ESS for hormone receptors; targeted options if fusion-defined",
-        "Strong consideration for clinical trial"
+        "Strong consideration for clinical trial, then surveillance"
       ],
-      "protocolRefs": ["gyn-uterine-lms-doxorubicin"]
+      "protocolRefs": ["gyn-uterine-lms-doxorubicin", "gyn-uterine-lms-gem-docetaxel"]
     },
     {
       "id": "n_surveillance",
@@ -554,6 +689,7 @@
       "required": true,
       "options": [
         {"id": "local", "label": "Isolated vaginal / pelvic recurrence", "sets": {"recur": "local"}, "pills": ["local"]},
+        {"id": "regional", "label": "Regional nodal recurrence", "sets": {"recur": "regional"}, "pills": ["regional"]},
         {"id": "metastatic", "label": "Disseminated / metastatic disease", "sets": {"recur": "metastatic"}, "pills": ["metastatic"]}
       ]
     },
@@ -572,7 +708,27 @@
       "bullets": [
         "RT-naive vaginal recurrence: external-beam RT + brachytherapy (curative intent)",
         "Prior pelvic RT: surgical resection / exenteration in selected patients",
-        "Restage to exclude occult distant disease first"
+        "Restage to exclude occult distant disease first",
+        "Add systemic therapy by biomarker if disease is not truly isolated"
+      ]
+    },
+    {
+      "id": "n_regional_recur_tx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Regional salvage",
+      "title": "Regional nodal recurrence - directed therapy",
+      "section": "Recurrence",
+      "description": "Isolated nodal recurrence treated with directed local therapy plus systemic therapy.",
+      "path": "Uterine / Recurrence",
+      "pills": ["RT", "chemo"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "External-beam RT to the involved nodal basin if not previously irradiated",
+        "Surgical resection of resectable nodal disease in selected patients",
+        "Add biomarker-directed systemic therapy for control of micrometastatic disease",
+        "Restage to exclude distant spread"
       ]
     },
     {
@@ -582,20 +738,20 @@
       "name": "Advanced biomarker",
       "title": "Metastatic carcinoma - biomarker-directed systemic therapy",
       "section": "Recurrence",
-      "description": "Select systemic therapy by MMR status, HER2, and hormone-receptor / grade.",
+      "description": "Select the first-line systemic approach by MMR status, HER2, and hormone-receptor / grade; each arm then has an on-progression sub-tree.",
       "path": "Uterine / Recurrence",
       "pills": ["biomarker"],
       "required": true,
-      "footnotes": ["d"],
+      "footnotes": ["d", "e"],
       "tables": [
         {
           "title": "Biomarker-directed advanced endometrial carcinoma",
-          "headers": ["Biomarker", "Preferred systemic approach"],
+          "headers": ["Biomarker", "First line", "On progression"],
           "rows": [
-            ["MMRd / MSI-high", "Chemo + checkpoint inhibitor; single-agent IO on later progression"],
-            ["MMR-proficient (pMMR)", "Carbo/paclitaxel + IO; lenvatinib + pembrolizumab on progression"],
-            ["HER2-positive (serous)", "Carbo/paclitaxel + trastuzumab; HER2 antibody-drug conjugate later"],
-            ["ER/PR-positive low-grade", "Endocrine therapy for indolent, low-volume disease"]
+            ["MMRd / MSI-high", "Carbo / paclitaxel + checkpoint inhibitor", "Single-agent checkpoint inhibitor"],
+            ["MMR-proficient (pMMR)", "Carbo / paclitaxel + checkpoint inhibitor", "Lenvatinib + pembrolizumab, then chemo / ADC"],
+            ["HER2-positive (serous)", "Carbo / paclitaxel + trastuzumab", "HER2 antibody-drug conjugate (T-DXd)"],
+            ["ER / PR-positive low-grade", "Endocrine therapy", "Add CDK4/6 inhibitor, then chemotherapy"]
           ]
         }
       ],
@@ -603,85 +759,258 @@
         {"id": "mmrd", "label": "MMRd / MSI-high", "sets": {"biomarkers.mmr": "deficient"}, "pills": ["MMRd"]},
         {"id": "pmmr", "label": "MMR-proficient (pMMR)", "sets": {"biomarkers.mmr": "proficient"}, "pills": ["pMMR"]},
         {"id": "her2", "label": "HER2-positive serous", "sets": {"biomarkers.her2": "positive"}, "pills": ["HER2+"]},
-        {"id": "hr_low", "label": "ER/PR-positive, low-grade, indolent", "sets": {"biomarkers.hr": "positive"}, "pills": ["HR+"]}
+        {"id": "hr_low", "label": "ER / PR-positive, low-grade, indolent", "sets": {"biomarkers.hr": "positive"}, "pills": ["HR+"]}
       ]
     },
     {
-      "id": "n_adv_mmrd",
+      "id": "n_adv_mmrd_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Advanced MMRd",
-      "title": "Metastatic MMRd - chemo-immunotherapy",
+      "name": "MMRd first line",
+      "title": "Metastatic MMRd - first-line chemo-immunotherapy",
       "section": "Recurrence",
       "description": "MMR-deficient tumors are highly immunotherapy-responsive; combine with the chemo backbone up front.",
       "path": "Uterine / Recurrence",
-      "pills": ["chemo", "IO"],
+      "pills": ["chemo", "IO", "1L"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["d"],
       "bullets": [
         "Carboplatin / paclitaxel plus a checkpoint inhibitor (dostarlimab or pembrolizumab)",
-        "Single-agent checkpoint inhibitor on later progression",
-        "Durable responses common; continue IO maintenance per regimen"
+        "Continue checkpoint-inhibitor maintenance per regimen after chemotherapy completion",
+        "Assess response by imaging every 2-3 cycles",
+        "On progression, move to single-agent immunotherapy or later options"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"]
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     },
     {
-      "id": "n_adv_pmmr",
+      "id": "n_adv_mmrd_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "MMRd 1L outcome",
+      "title": "Metastatic MMRd - outcome on first line",
+      "section": "Recurrence",
+      "description": "Continue immunotherapy maintenance while it controls disease; switch on progression.",
+      "path": "Uterine / Recurrence",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - later-line therapy", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue maintenance", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_adv_mmrd_2l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Advanced pMMR",
-      "title": "Metastatic pMMR - chemo-IO then lenvatinib + pembrolizumab",
+      "name": "MMRd later line",
+      "title": "Metastatic MMRd - later-line therapy",
       "section": "Recurrence",
-      "description": "Chemo plus checkpoint inhibitor first-line; lenvatinib + pembrolizumab after platinum progression.",
+      "description": "Later-line options after progression on chemo-immunotherapy.",
       "path": "Uterine / Recurrence",
-      "pills": ["chemo", "IO", "TKI"],
+      "pills": ["IO", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Single-agent checkpoint inhibitor if not continued as maintenance",
+        "Sequential single-agent chemotherapy for immunotherapy-refractory disease",
+        "Consider a clinical trial; best supportive care as appropriate"
+      ]
+    },
+    {
+      "id": "n_adv_pmmr_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "pMMR first line",
+      "title": "Metastatic pMMR - first-line chemo-immunotherapy",
+      "section": "Recurrence",
+      "description": "Chemotherapy plus checkpoint inhibitor is now first line for mismatch-repair-proficient advanced disease.",
+      "path": "Uterine / Recurrence",
+      "pills": ["chemo", "IO", "1L"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["d"],
       "bullets": [
-        "First-line carboplatin / paclitaxel + checkpoint inhibitor",
-        "On progression after platinum: lenvatinib + pembrolizumab",
-        "Monitor and manage TKI toxicity (hypertension, proteinuria, fatigue)"
+        "Carboplatin / paclitaxel plus a checkpoint inhibitor, then maintenance",
+        "Assess response by imaging every 2-3 cycles",
+        "On progression after platinum, move to lenvatinib + pembrolizumab"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"]
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     },
     {
-      "id": "n_adv_her2",
+      "id": "n_adv_pmmr_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "pMMR 1L outcome",
+      "title": "Metastatic pMMR - outcome on first line",
+      "section": "Recurrence",
+      "description": "Continue maintenance while controlled; switch to the lenvatinib + pembrolizumab doublet on progression.",
+      "path": "Uterine / Recurrence",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - lenvatinib + pembrolizumab", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue maintenance", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_adv_pmmr_2l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Advanced HER2+",
-      "title": "HER2-positive serous - chemo + HER2 therapy",
+      "name": "pMMR second line",
+      "title": "Metastatic pMMR - lenvatinib + pembrolizumab",
+      "section": "Recurrence",
+      "description": "After platinum progression, lenvatinib + pembrolizumab improves survival versus chemotherapy.",
+      "path": "Uterine / Recurrence",
+      "pills": ["TKI", "IO", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["e"],
+      "bullets": [
+        "Lenvatinib + pembrolizumab after progression on platinum",
+        "Monitor and manage TKI toxicity (hypertension, proteinuria, fatigue); dose-modify as needed",
+        "Assess response by imaging; on further progression move to chemotherapy / ADC"
+      ]
+    },
+    {
+      "id": "n_adv_pmmr_prog2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "pMMR 2L outcome",
+      "title": "Metastatic pMMR - outcome on second line",
+      "section": "Recurrence",
+      "description": "Continue the doublet while controlled; on further progression move to later-line therapy.",
+      "path": "Uterine / Recurrence",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - later-line therapy", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue therapy", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_adv_pmmr_3l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "pMMR later line",
+      "title": "Metastatic pMMR - later-line therapy",
+      "section": "Recurrence",
+      "description": "Sequential single agents and antibody-drug conjugates after the lenvatinib + pembrolizumab doublet.",
+      "path": "Uterine / Recurrence",
+      "pills": ["chemo", "ADC", "3L+"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "Sequential single-agent chemotherapy (e.g. doxorubicin, weekly paclitaxel)",
+        "Antibody-drug conjugate where biomarker-matched (guidance where no dose protocol exists here)",
+        "Clinical trial strongly encouraged; best supportive care as appropriate"
+      ]
+    },
+    {
+      "id": "n_adv_her2_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HER2+ first line",
+      "title": "HER2-positive serous - first-line chemo + HER2 therapy",
       "section": "Recurrence",
       "description": "Add HER2-directed therapy to the chemotherapy backbone for HER2-positive uterine serous carcinoma.",
       "path": "Uterine / Recurrence",
-      "pills": ["chemo", "HER2"],
+      "pills": ["chemo", "HER2", "1L"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
         "Carboplatin / paclitaxel + trastuzumab (HER2-positive serous)",
-        "HER2 antibody-drug conjugate (e.g. trastuzumab deruxtecan) as a later option",
-        "Confirm HER2 status by validated IHC / ISH"
+        "Confirm HER2 status by validated IHC / ISH before starting",
+        "Assess response by imaging; on progression move to a HER2 antibody-drug conjugate"
       ],
-      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel"]
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     },
     {
-      "id": "n_adv_hormonal",
+      "id": "n_adv_her2_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "HER2+ 1L outcome",
+      "title": "HER2-positive serous - outcome on first line",
+      "section": "Recurrence",
+      "description": "Continue while controlled; switch to a HER2 antibody-drug conjugate on progression.",
+      "path": "Uterine / Recurrence",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression - HER2 antibody-drug conjugate", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue therapy", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_adv_her2_2l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Advanced endocrine",
-      "title": "Low-grade ER/PR-positive - endocrine therapy",
+      "name": "HER2+ later line",
+      "title": "HER2-positive serous - HER2 antibody-drug conjugate",
       "section": "Recurrence",
-      "description": "Endocrine therapy for indolent, low-volume, hormone-receptor-positive recurrent disease.",
+      "description": "Trastuzumab deruxtecan and other HER2-directed options after first-line progression.",
       "path": "Uterine / Recurrence",
-      "pills": ["endocrine"],
+      "pills": ["ADC", "HER2", "2L"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
-        "Progestin, aromatase inhibitor, or tamoxifen for ER/PR-positive low-grade disease",
-        "Consider CDK4/6 inhibitor added to endocrine therapy where appropriate",
-        "Switch to cytotoxic chemotherapy for rapid progression or symptomatic bulk"
+        "Trastuzumab deruxtecan (T-DXd) after progression on chemo + trastuzumab",
+        "Monitor for interstitial lung disease / pneumonitis on the ADC",
+        "Sequential single-agent chemotherapy or trial on further progression"
       ]
+    },
+    {
+      "id": "n_adv_hr_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HR+ endocrine first line",
+      "title": "Low-grade ER / PR-positive - first-line endocrine therapy",
+      "section": "Recurrence",
+      "description": "Endocrine therapy for indolent, low-volume, hormone-receptor-positive recurrent disease.",
+      "path": "Uterine / Recurrence",
+      "pills": ["endocrine", "1L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Progestin, aromatase inhibitor, or tamoxifen for ER / PR-positive low-grade disease",
+        "Reserve for low-volume, slow-growing, asymptomatic disease",
+        "On progression, intensify endocrine therapy or move to chemotherapy"
+      ]
+    },
+    {
+      "id": "n_adv_hr_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "HR+ 1L outcome",
+      "title": "Low-grade ER / PR-positive - outcome on endocrine therapy",
+      "section": "Recurrence",
+      "description": "Continue endocrine therapy while it controls disease; intensify or switch on progression or symptomatic bulk.",
+      "path": "Uterine / Recurrence",
+      "pills": ["progression"],
+      "required": true,
+      "options": [
+        {"id": "progression", "label": "Progression / symptomatic - intensify or switch", "pills": ["progression"]},
+        {"id": "stable", "label": "Response / stable - continue endocrine therapy", "pills": ["stable"]}
+      ]
+    },
+    {
+      "id": "n_adv_hr_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "HR+ later line",
+      "title": "Low-grade ER / PR-positive - later-line therapy",
+      "section": "Recurrence",
+      "description": "Add a CDK4/6 inhibitor to endocrine therapy or switch to cytotoxic chemotherapy on progression.",
+      "path": "Uterine / Recurrence",
+      "pills": ["endocrine", "chemo", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Add a CDK4/6 inhibitor to an aromatase inhibitor where appropriate",
+        "Switch to carboplatin / paclitaxel chemotherapy for rapid progression or symptomatic bulk",
+        "Reassess biomarkers; consider a clinical trial"
+      ],
+      "protocolRefs": ["gyn-endometrial-carbo-paclitaxel", "gyn-carbo-paclitaxel"]
     }
   ],
   "links": [
@@ -692,31 +1021,61 @@
     {"id": "l_h_ser", "from": "n_histology", "to": "n_surg_hi", "fromOptions": ["serouscc", "carcinosarcoma"], "linkCategory": "conditional"},
     {"id": "l_h_sarc", "from": "n_histology", "to": "n_sarcoma_type", "fromOptions": ["sarcoma"], "linkCategory": "conditional"},
     {"id": "l_mol", "from": "n_molecular", "to": "n_surg_ec", "fromOptions": ["pole", "mmrd", "p53abn", "nsmp"], "linkCategory": "conditional"},
-    {"id": "l_surg", "from": "n_surg_ec", "to": "n_stage_risk", "fromOptions": ["continue"], "linkCategory": "conditional"},
-    {"id": "l_r_low", "from": "n_stage_risk", "to": "n_surveillance", "fromOptions": ["low"], "linkCategory": "conditional"},
+    {"id": "l_surg_stage", "from": "n_surg_ec", "to": "n_stage_risk", "fromOptions": ["surgery"], "linkCategory": "conditional"},
+    {"id": "l_surg_fert", "from": "n_surg_ec", "to": "n_fertility_response", "fromOptions": ["fertility"], "linkCategory": "conditional"},
+    {"id": "l_fert_surv", "from": "n_fertility_response", "to": "n_surveillance", "fromOptions": ["regression"], "linkCategory": "conditional"},
+    {"id": "l_fert_surg", "from": "n_fertility_response", "to": "n_stage_risk", "fromOptions": ["persistent"], "linkCategory": "conditional"},
+    {"id": "l_r_low", "from": "n_stage_risk", "to": "n_adj_low", "fromOptions": ["low"], "linkCategory": "conditional"},
     {"id": "l_r_hir", "from": "n_stage_risk", "to": "n_adj_hir", "fromOptions": ["hir"], "linkCategory": "conditional"},
     {"id": "l_r_stII", "from": "n_stage_risk", "to": "n_adj_stII", "fromOptions": ["stII"], "linkCategory": "conditional"},
     {"id": "l_r_adv", "from": "n_stage_risk", "to": "n_adj_adv", "fromOptions": ["advanced"], "linkCategory": "conditional"},
+    {"id": "l_low_surv", "from": "n_adj_low", "to": "n_surveillance", "linkCategory": "conditional"},
     {"id": "l_hir_vbt", "from": "n_adj_hir", "to": "n_hir_vbt", "fromOptions": ["vbt"], "linkCategory": "conditional"},
     {"id": "l_hir_ebrt", "from": "n_adj_hir", "to": "n_hir_ebrt", "fromOptions": ["ebrt"], "linkCategory": "conditional"},
     {"id": "l_hir_obs", "from": "n_adj_hir", "to": "n_surveillance", "fromOptions": ["obs"], "linkCategory": "conditional"},
+    {"id": "l_vbt_surv", "from": "n_hir_vbt", "to": "n_surveillance", "linkCategory": "conditional"},
+    {"id": "l_ebrt_surv", "from": "n_hir_ebrt", "to": "n_surveillance", "linkCategory": "conditional"},
+    {"id": "l_stII_surv", "from": "n_adj_stII", "to": "n_surveillance", "linkCategory": "conditional"},
+    {"id": "l_adv_resp", "from": "n_adj_adv", "to": "n_adv_loco_response", "linkCategory": "conditional"},
+    {"id": "l_locoresp_surv", "from": "n_adv_loco_response", "to": "n_surveillance", "fromOptions": ["cr"], "linkCategory": "conditional"},
+    {"id": "l_locoresp_sys", "from": "n_adv_loco_response", "to": "n_adv_biomarker", "fromOptions": ["residual"], "linkCategory": "conditional"},
     {"id": "l_shi", "from": "n_surg_hi", "to": "n_stage_hi", "fromOptions": ["continue"], "linkCategory": "conditional"},
     {"id": "l_hi_i", "from": "n_stage_hi", "to": "n_hi_stI", "fromOptions": ["stI"], "linkCategory": "conditional"},
     {"id": "l_hi_a", "from": "n_stage_hi", "to": "n_hi_adv", "fromOptions": ["advanced"], "linkCategory": "conditional"},
+    {"id": "l_histI_surv", "from": "n_hi_stI", "to": "n_surveillance", "linkCategory": "conditional"},
+    {"id": "l_hiadv_resp", "from": "n_hi_adv", "to": "n_hi_adv_response", "linkCategory": "conditional"},
+    {"id": "l_hiresp_surv", "from": "n_hi_adv_response", "to": "n_surveillance", "fromOptions": ["cr"], "linkCategory": "conditional"},
+    {"id": "l_hiresp_sys", "from": "n_hi_adv_response", "to": "n_adv_biomarker", "fromOptions": ["residual"], "linkCategory": "conditional"},
     {"id": "l_s_lms", "from": "n_sarcoma_type", "to": "n_lms_stage", "fromOptions": ["lms"], "linkCategory": "conditional"},
     {"id": "l_s_ess", "from": "n_sarcoma_type", "to": "n_ess_low", "fromOptions": ["ess_low"], "linkCategory": "conditional"},
     {"id": "l_s_hg", "from": "n_sarcoma_type", "to": "n_sarc_highgrade", "fromOptions": ["highgrade"], "linkCategory": "conditional"},
     {"id": "l_lms_e", "from": "n_lms_stage", "to": "n_lms_early", "fromOptions": ["localized"], "linkCategory": "conditional"},
-    {"id": "l_lms_a", "from": "n_lms_stage", "to": "n_lms_systemic", "fromOptions": ["advanced"], "linkCategory": "conditional"},
-    {"id": "l_lms_1", "from": "n_lms_systemic", "to": "n_lms_first", "fromOptions": ["first"], "linkCategory": "conditional"},
-    {"id": "l_lms_2", "from": "n_lms_systemic", "to": "n_lms_later", "fromOptions": ["later"], "linkCategory": "conditional"},
+    {"id": "l_lms_sys", "from": "n_lms_stage", "to": "n_lms_systemic", "fromOptions": ["advanced"], "linkCategory": "conditional"},
+    {"id": "l_lms_1", "from": "n_lms_systemic", "to": "n_lms_first", "fromOptions": ["first", "metastasectomy"], "enableBehavior": "any", "linkCategory": "conditional"},
+    {"id": "l_lms_1prog", "from": "n_lms_first", "to": "n_lms_prog", "linkCategory": "conditional"},
+    {"id": "l_lms_2", "from": "n_lms_prog", "to": "n_lms_second", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_lms_2prog", "from": "n_lms_second", "to": "n_lms_prog2", "linkCategory": "conditional"},
+    {"id": "l_lms_3", "from": "n_lms_prog2", "to": "n_lms_later", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_ess_surv", "from": "n_ess_low", "to": "n_surveillance", "linkCategory": "conditional"},
+    {"id": "l_hg_surv", "from": "n_sarc_highgrade", "to": "n_surveillance", "linkCategory": "conditional"},
     {"id": "l_surv_rec", "from": "n_surveillance", "to": "n_recur_site", "fromOptions": ["recurrence"], "linkCategory": "conditional"},
     {"id": "l_surv_none", "from": "n_surveillance", "to": "n_surv_none", "fromOptions": ["no_recur"], "linkCategory": "conditional"},
     {"id": "l_rec_local", "from": "n_recur_site", "to": "n_local_recur_tx", "fromOptions": ["local"], "linkCategory": "conditional"},
+    {"id": "l_rec_reg", "from": "n_recur_site", "to": "n_regional_recur_tx", "fromOptions": ["regional"], "linkCategory": "conditional"},
     {"id": "l_rec_met", "from": "n_recur_site", "to": "n_adv_biomarker", "fromOptions": ["metastatic"], "linkCategory": "conditional"},
-    {"id": "l_b_mmrd", "from": "n_adv_biomarker", "to": "n_adv_mmrd", "fromOptions": ["mmrd"], "linkCategory": "conditional"},
-    {"id": "l_b_pmmr", "from": "n_adv_biomarker", "to": "n_adv_pmmr", "fromOptions": ["pmmr"], "linkCategory": "conditional"},
-    {"id": "l_b_her2", "from": "n_adv_biomarker", "to": "n_adv_her2", "fromOptions": ["her2"], "linkCategory": "conditional"},
-    {"id": "l_b_hr", "from": "n_adv_biomarker", "to": "n_adv_hormonal", "fromOptions": ["hr_low"], "linkCategory": "conditional"}
+    {"id": "l_b_mmrd", "from": "n_adv_biomarker", "to": "n_adv_mmrd_1l", "fromOptions": ["mmrd"], "linkCategory": "conditional"},
+    {"id": "l_mmrd_prog", "from": "n_adv_mmrd_1l", "to": "n_adv_mmrd_prog", "linkCategory": "conditional"},
+    {"id": "l_mmrd_2l", "from": "n_adv_mmrd_prog", "to": "n_adv_mmrd_2l", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_b_pmmr", "from": "n_adv_biomarker", "to": "n_adv_pmmr_1l", "fromOptions": ["pmmr"], "linkCategory": "conditional"},
+    {"id": "l_pmmr_prog", "from": "n_adv_pmmr_1l", "to": "n_adv_pmmr_prog", "linkCategory": "conditional"},
+    {"id": "l_pmmr_2l", "from": "n_adv_pmmr_prog", "to": "n_adv_pmmr_2l", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_pmmr_prog2", "from": "n_adv_pmmr_2l", "to": "n_adv_pmmr_prog2", "linkCategory": "conditional"},
+    {"id": "l_pmmr_3l", "from": "n_adv_pmmr_prog2", "to": "n_adv_pmmr_3l", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_b_her2", "from": "n_adv_biomarker", "to": "n_adv_her2_1l", "fromOptions": ["her2"], "linkCategory": "conditional"},
+    {"id": "l_her2_prog", "from": "n_adv_her2_1l", "to": "n_adv_her2_prog", "linkCategory": "conditional"},
+    {"id": "l_her2_2l", "from": "n_adv_her2_prog", "to": "n_adv_her2_2l", "fromOptions": ["progression"], "linkCategory": "conditional"},
+    {"id": "l_b_hr", "from": "n_adv_biomarker", "to": "n_adv_hr_1l", "fromOptions": ["hr_low"], "linkCategory": "conditional"},
+    {"id": "l_hr_prog", "from": "n_adv_hr_1l", "to": "n_adv_hr_prog", "linkCategory": "conditional"},
+    {"id": "l_hr_2l", "from": "n_adv_hr_prog", "to": "n_adv_hr_2l", "fromOptions": ["progression"], "linkCategory": "conditional"}
   ]
 }

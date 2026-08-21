@@ -2,16 +2,16 @@
   "guideline": "colorectal",
   "title": "Colorectal Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "navigatorVersion": "3.0.0",
   "diseaseId": "colorectal_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides.",
-  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN Colon / Rectal Cancer, DeVita, Harrison). Regimen leaves reference existing StewardMD Standard Protocols by id; agents with no dose protocol (anti-EGFR, bevacizumab, encorafenib, HER2-directed, regorafenib/trifluridine-tipiracil) are shown as checklist guidance with NO dose. Invents no dose/regimen/criterion. DRAFT - not clinically activated.",
+  "provenanceNote": "ONCOTREE navigator DRAFT for colorectal cancer. Full pathway by primary site (colon vs rectum), then workup -> pathologic / clinical stage -> risk- and biomarker-adapted adjuvant or neoadjuvant therapy -> response reassessment -> surveillance, then a recurrence branch and a full metastatic line-of-therapy sub-tree (molecular workup -> resectability -> MMR -> RAS / BRAF / HER2 / sidedness -> first line -> response reassessment -> second line -> progression -> refractory / best supportive care). Every curative arm routes through adjuvant / response steps into surveillance; every advanced arm is refined by line of therapy before a recommendation. Treatment leaves reference APPLICABLE existing StewardMD Standard Protocols by id; agents without a dose protocol (anti-EGFR, bevacizumab, encorafenib, HER2-directed antibodies, regorafenib / trifluridine-tipiracil / fruquintinib) are shown as checklist guidance with NO dose. Invents no dose / regimen / criterion. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (Standard Guidelines (NCCN) Colon / Rectal Cancer, DeVita, Harrison). Regimen leaves reference existing StewardMD Standard Protocols; the dose engine computes patient doses. No proprietary guideline text reproduced.",
   "startNodeIds": ["n_crc_entry"],
   "footnotes": {
     "a": {
-      "text": "Universal MMR/MSI testing on all colorectal cancers screens for Lynch syndrome and predicts immunotherapy benefit; deficient-MMR stage II colon cancer has a favorable prognosis and derives little benefit from single-agent fluoropyrimidine.",
+      "text": "Universal MMR / MSI testing on all colorectal cancers screens for Lynch syndrome and predicts immunotherapy benefit; deficient-MMR stage II colon cancer has a favorable prognosis and derives little benefit from single-agent fluoropyrimidine.",
       "evidence": "1"
     },
     "b": {
@@ -19,11 +19,19 @@
       "evidence": "1"
     },
     "c": {
-      "text": "Anti-EGFR antibodies (cetuximab / panitumumab) benefit only RAS wild-type (KRAS/NRAS exons 2/3/4) tumors and are most effective in left-sided primaries; they are ineffective or harmful in RAS-mutant disease and less effective in right-sided tumors.",
+      "text": "Anti-EGFR antibodies (cetuximab / panitumumab) benefit only RAS wild-type (KRAS / NRAS exons 2/3/4) tumors and are most effective in left-sided primaries; they are ineffective or harmful in RAS-mutant disease and less effective in right-sided tumors.",
       "evidence": "1"
     },
     "d": {
-      "text": "Nonoperative 'watch-and-wait' management after a clinical complete response to total neoadjuvant therapy for rectal cancer requires strict protocolized surveillance; it is an option for organ preservation but carries a local regrowth risk and is not standard for every patient.",
+      "text": "Nonoperative watch-and-wait management after a clinical complete response to total neoadjuvant therapy for rectal cancer requires strict protocolized surveillance; it is an organ-preservation option that carries a local regrowth risk and is not standard for every patient.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "After ~4-6 months of induction doublet, de-escalation to fluoropyrimidine (5-FU / leucovorin or capecitabine) with or without bevacizumab as maintenance limits cumulative oxaliplatin neuropathy while preserving disease control; reintroduce the full doublet on progression.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "Refractory-line oral agents (regorafenib, trifluridine-tipiracil with or without bevacizumab, fruquintinib) and biomarker re-use strategies (bevacizumab beyond progression, ctDNA-guided anti-EGFR rechallenge in RAS wild-type) have no dose protocol here and are shown as agent-level guidance; clinical-trial enrollment is encouraged.",
       "evidence": "2A"
     }
   },
@@ -41,7 +49,8 @@
       "required": true,
       "bullets": [
         "Colon (cecum to sigmoid): surgery first, then risk-adapted adjuvant chemotherapy",
-        "Rectum (within ~15 cm of the anal verge): pelvic MRI drives neoadjuvant sequencing"
+        "Rectum (within ~15 cm of the anal verge): pelvic MRI drives neoadjuvant sequencing",
+        "Either site with M1 disease routes to the shared metastatic line-of-therapy pathway"
       ],
       "options": [
         { "id": "colon", "label": "Colon cancer", "sets": { "site": "colon" }, "pills": ["colon"] },
@@ -63,7 +72,7 @@
       "bullets": [
         "History and physical; colonoscopy with biopsy confirming adenocarcinoma; clear the whole colon (repeat within 3-6 months if obstructing)",
         "CT chest / abdomen / pelvis with contrast for staging; baseline CEA",
-        "Universal MMR/MSI testing on the tumor (Lynch screen + immunotherapy predictor)",
+        "Universal MMR / MSI testing on the tumor (Lynch screen + immunotherapy predictor)",
         "Extended molecular panel (RAS, BRAF-V600E, HER2) if metastatic or if metastatic disease is anticipated",
         "CBC, comprehensive metabolic panel; surgical / anesthesia fitness assessment"
       ],
@@ -134,7 +143,8 @@
       "footnotes": ["a"],
       "bullets": [
         "High-risk features: T4 (pT4a/b), poorly differentiated / high grade (non-dMMR), lymphovascular or perineural invasion, bowel obstruction or perforation, < 12 nodes sampled, positive margin",
-        "dMMR/MSI-H stage II has an excellent prognosis and does not benefit from single-agent fluoropyrimidine"
+        "dMMR / MSI-H stage II has an excellent prognosis and does not benefit from single-agent fluoropyrimidine",
+        "Consider a validated recurrence assay / ctDNA to refine the small absolute chemotherapy benefit"
       ],
       "options": [
         { "id": "low", "label": "Low risk (no high-risk features)", "sets": { "risk": "low" }, "pills": ["low risk"] },
@@ -149,7 +159,7 @@
       "name": "Stage II observe",
       "title": "Stage II colon: observation (low-risk or dMMR)",
       "section": "Treatment",
-      "description": "Low-risk or dMMR/MSI-H stage II colon cancer: surgery with observation; chemotherapy is generally not recommended.",
+      "description": "Low-risk or dMMR / MSI-H stage II colon cancer: surgery with observation; chemotherapy is generally not recommended.",
       "path": "Colorectal / Colon / Stage II / Observe",
       "pills": ["stage II", "observation"],
       "showsRecommendation": true,
@@ -175,35 +185,101 @@
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
-        "Fluoropyrimidine alone (infusional 5-FU/leucovorin or capecitabine) for high-risk disease without T4",
-        "Add oxaliplatin (FOLFOX or CAPOX) for T4 or multiple high-risk features",
+        "Fluoropyrimidine alone (infusional 5-FU / leucovorin or capecitabine) for high-risk disease without T4",
+        "Add oxaliplatin (FOLFOX; or CAPOX described as guidance) for T4 or multiple high-risk features",
         "Duration up to ~6 months; weigh oxaliplatin neurotoxicity against small absolute benefit",
         "Regimens referenced below; the dose engine computes patient doses"
       ],
-      "protocolRefs": ["modified-folfox-6", "gi-gastric-capox", "simplified-lv5fu2"],
+      "protocolRefs": ["modified-folfox-6", "simplified-lv5fu2"],
       "linkTo": "n_surveillance"
     },
     {
-      "id": "n_tx_colon_iii",
+      "id": "n_colon_iii_idea",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Stage III duration",
+      "title": "Stage III colon: IDEA risk group and adjuvant duration",
+      "section": "Treatment",
+      "description": "Node-positive colon cancer receives adjuvant oxaliplatin-doublet chemotherapy; the IDEA framework individualizes duration by relapse risk to balance efficacy against cumulative oxaliplatin neuropathy.",
+      "path": "Colorectal / Colon / Stage III / IDEA",
+      "pills": ["stage III", "duration"],
+      "required": true,
+      "footnotes": ["b"],
+      "bullets": [
+        "Low-risk (T1-3 N1): 3 months of CAPOX is non-inferior for most and limits neuropathy",
+        "High-risk (T4 and/or N2): 6 months of oxaliplatin-doublet is preferred",
+        "Patients unfit for oxaliplatin: fluoropyrimidine alone for ~6 months",
+        "Biologics (bevacizumab, anti-EGFR) have NO role in the adjuvant setting"
+      ],
+      "options": [
+        { "id": "low", "label": "Low-risk (T1-3 N1)", "sets": { "ideaRisk": "low" }, "pills": ["T1-3 N1"] },
+        { "id": "high", "label": "High-risk (T4 and/or N2)", "sets": { "ideaRisk": "high" }, "pills": ["T4 / N2"] },
+        { "id": "unfit", "label": "Unfit for oxaliplatin", "sets": { "ideaRisk": "unfit" }, "pills": ["fluoropyrimidine only"] }
+      ]
+    },
+    {
+      "id": "n_tx_colon_iii_low",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Stage III adjuvant",
-      "title": "Stage III colon: adjuvant oxaliplatin-based chemotherapy",
+      "name": "Stage III low-risk 3mo",
+      "title": "Stage III colon, low-risk: 3 months CAPOX (or 6 months FOLFOX)",
       "section": "Treatment",
-      "description": "Node-positive colon cancer: adjuvant oxaliplatin-doublet chemotherapy is standard curative-intent therapy; duration is individualized by risk (IDEA).",
-      "path": "Colorectal / Colon / Stage III",
+      "description": "Low-risk node-positive colon cancer: a shorter oxaliplatin-doublet course preserves efficacy while limiting neurotoxicity.",
+      "path": "Colorectal / Colon / Stage III / Low-risk",
       "pills": ["stage III", "adjuvant", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["b"],
       "bullets": [
-        "FOLFOX or CAPOX is the standard adjuvant backbone",
-        "IDEA duration: 3 months of CAPOX reasonable for low-risk (T1-3 N1); 6 months for high-risk (T4 or N2)",
-        "Fluoropyrimidine alone (no oxaliplatin) for patients unfit for oxaliplatin or with pre-existing neuropathy",
-        "Biologics (bevacizumab, anti-EGFR) have NO role in the adjuvant setting",
-        "Regimens referenced below"
+        "3 months of CAPOX (capecitabine + oxaliplatin, described as guidance) for T1-3 N1",
+        "Alternatively 3-6 months of FOLFOX; stop oxaliplatin early for grade 2+ persistent neuropathy and continue the fluoropyrimidine",
+        "Then proceed to surveillance",
+        "FOLFOX / fluoropyrimidine backbone referenced below"
       ],
-      "protocolRefs": ["modified-folfox-6", "folfox-4", "gi-gastric-capox", "simplified-lv5fu2"],
+      "protocolRefs": ["modified-folfox-6", "folfox-4", "simplified-lv5fu2"],
+      "linkTo": "n_surveillance"
+    },
+    {
+      "id": "n_tx_colon_iii_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Stage III high-risk 6mo",
+      "title": "Stage III colon, high-risk: 6 months oxaliplatin-doublet",
+      "section": "Treatment",
+      "description": "High-risk node-positive colon cancer (T4 and/or N2): a full 6-month oxaliplatin-doublet course is the standard adjuvant backbone.",
+      "path": "Colorectal / Colon / Stage III / High-risk",
+      "pills": ["stage III", "adjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "6 months of FOLFOX (or CAPOX as guidance) for T4 and/or N2 disease",
+        "Monitor cumulative oxaliplatin neuropathy; hold oxaliplatin and continue fluoropyrimidine if grade 2+ persists",
+        "Then proceed to surveillance",
+        "FOLFOX backbone referenced below"
+      ],
+      "protocolRefs": ["modified-folfox-6", "folfox-4"],
+      "linkTo": "n_surveillance"
+    },
+    {
+      "id": "n_tx_colon_iii_unfit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Stage III fluoropyrimidine",
+      "title": "Stage III colon, oxaliplatin-unfit: fluoropyrimidine alone",
+      "section": "Treatment",
+      "description": "For patients unfit for oxaliplatin (pre-existing neuropathy, frailty), single-agent fluoropyrimidine retains meaningful adjuvant benefit.",
+      "path": "Colorectal / Colon / Stage III / Fluoropyrimidine",
+      "pills": ["stage III", "adjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Infusional 5-FU / leucovorin or capecitabine for ~6 months",
+        "No oxaliplatin (contraindicated by neuropathy or frailty)",
+        "Then proceed to surveillance",
+        "Fluoropyrimidine backbone referenced below"
+      ],
+      "protocolRefs": ["simplified-lv5fu2"],
       "linkTo": "n_surveillance"
     },
     {
@@ -223,7 +299,7 @@
         "Colonoscopy with biopsy; CEA",
         "Pelvic MRI (preferred) for T stage, mesorectal nodes, circumferential resection margin, and extramural vascular invasion",
         "CT chest / abdomen / pelvis to exclude distant disease",
-        "Universal MMR/MSI testing; extended molecular panel if metastatic"
+        "Universal MMR / MSI testing; extended molecular panel if metastatic"
       ],
       "options": [
         { "id": "continue", "label": "Workup reviewed - continue to staging", "setsValue": null }
@@ -283,18 +359,20 @@
       "name": "LARC neoadjuvant",
       "title": "Locally advanced rectal: neoadjuvant approach",
       "section": "Treatment",
-      "description": "Locally advanced rectal cancer is treated with neoadjuvant therapy before TME. Total neoadjuvant therapy (all chemo + RT before surgery) improves compliance and enables organ preservation.",
+      "description": "Locally advanced rectal cancer is treated with neoadjuvant therapy before TME. Total neoadjuvant therapy (all chemo + RT before surgery) improves compliance and enables organ preservation; dMMR tumors may be treated with neoadjuvant immunotherapy.",
       "path": "Colorectal / Rectal / LARC / Approach",
       "pills": ["LARC", "neoadjuvant"],
       "required": true,
       "bullets": [
-        "Total neoadjuvant therapy (TNT): long-course chemoRT (or short-course RT) plus consolidation/induction FOLFOX or CAPOX, then TME",
+        "Total neoadjuvant therapy (TNT): long-course chemoRT (or short-course RT) plus consolidation / induction FOLFOX or CAPOX, then TME",
         "Neoadjuvant chemoRT alone (capecitabine-sensitized long-course RT), then TME, then adjuvant chemotherapy",
+        "dMMR / MSI-H LARC: neoadjuvant PD-1 blockade can produce high complete-response rates and organ preservation",
         "Selective non-radiation strategy (neoadjuvant FOLFOX alone) for lower-risk cT3 N0/N1 tumors with clear CRM"
       ],
       "options": [
         { "id": "tnt", "label": "Total neoadjuvant therapy (TNT)", "sets": { "approach": "tnt" }, "pills": ["TNT"] },
-        { "id": "chemort", "label": "Neoadjuvant chemoRT then adjuvant", "sets": { "approach": "chemoRT" }, "pills": ["chemoRT"] }
+        { "id": "chemort", "label": "Neoadjuvant chemoRT then adjuvant", "sets": { "approach": "chemoRT" }, "pills": ["chemoRT"] },
+        { "id": "immuno", "label": "dMMR / MSI-H: neoadjuvant immunotherapy", "sets": { "approach": "immuno", "biomarkers.MMR": "deficient" }, "pills": ["dMMR IO"] }
       ]
     },
     {
@@ -311,11 +389,11 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Long-course chemoRT (capecitabine-sensitized) or short-course RT (5 x 5 Gy), sequenced with FOLFOX or CAPOX (induction or consolidation)",
-        "For dMMR/MSI-H locally advanced rectal cancer, neoadjuvant immunotherapy (PD-1 blockade) can produce high complete-response rates - refer to the metastatic dMMR leaf for the agent",
+        "Consolidation TNT (chemoRT then chemotherapy) maximizes the clinical-complete-response rate for organ preservation",
         "Reassess response at completion before committing to surgery vs organ preservation",
         "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["modified-folfox-6", "gi-gastric-capox"],
+      "protocolRefs": ["modified-folfox-6"],
       "linkTo": "n_rectal_reassess"
     },
     {
@@ -333,11 +411,33 @@
       "bullets": [
         "Long-course pelvic RT with concurrent capecitabine (radiosensitizer)",
         "TME ~8-12 weeks after chemoRT",
-        "Adjuvant FOLFOX or CAPOX to complete ~6 months of perioperative chemotherapy",
+        "Adjuvant FOLFOX (or CAPOX as guidance) to complete ~6 months of perioperative chemotherapy",
         "Reassess response before surgery",
         "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["modified-folfox-6", "gi-gastric-capox"],
+      "protocolRefs": ["modified-folfox-6", "folfox-4"],
+      "linkTo": "n_rectal_reassess"
+    },
+    {
+      "id": "n_tx_rectal_immuno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Rectal dMMR IO",
+      "title": "Rectal dMMR / MSI-H: neoadjuvant immunotherapy",
+      "section": "Treatment",
+      "description": "Deficient-MMR locally advanced rectal cancer is exquisitely immunotherapy-sensitive; neoadjuvant PD-1 blockade can yield durable clinical complete responses and rectal preservation.",
+      "path": "Colorectal / Rectal / LARC / Immuno",
+      "pills": ["dMMR IO", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a"],
+      "bullets": [
+        "Neoadjuvant PD-1 blockade (checkpoint inhibitor) for dMMR / MSI-H LARC",
+        "High rate of clinical complete response supporting non-operative organ preservation",
+        "Reassess response before deciding surgery vs watch-and-wait",
+        "Immunotherapy dosing referenced below"
+      ],
+      "protocolRefs": ["gi-crc-msi-pembro"],
       "linkTo": "n_rectal_reassess"
     },
     {
@@ -353,12 +453,14 @@
       "required": true,
       "footnotes": ["d"],
       "bullets": [
-        "Clinical complete response (cCR): no visible/palpable tumor, normal MRI/endoscopy - candidate for watch-and-wait",
-        "Residual disease: proceed to total mesorectal excision"
+        "Clinical complete response (cCR): no visible / palpable tumor, normal MRI / endoscopy - candidate for watch-and-wait",
+        "Residual disease: proceed to total mesorectal excision",
+        "Frank progression / distant spread on restaging: enter the metastatic pathway"
       ],
       "options": [
         { "id": "ccr", "label": "Clinical complete response", "sets": { "response": "cCR" }, "pills": ["cCR"] },
-        { "id": "residual", "label": "Residual tumor", "sets": { "response": "residual" }, "pills": ["residual"] }
+        { "id": "residual", "label": "Residual tumor", "sets": { "response": "residual" }, "pills": ["residual"] },
+        { "id": "progression", "label": "Progression / distant disease", "sets": { "response": "progression", "stage": "IV" }, "pills": ["progressed"] }
       ]
     },
     {
@@ -396,9 +498,11 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Total mesorectal excision (low anterior or abdominoperineal resection) to negative CRM",
-        "Complete adjuvant FOLFOX/CAPOX if not fully delivered pre-op (TNT often completes chemotherapy before surgery)",
-        "Proceed to surveillance"
+        "Complete adjuvant FOLFOX / CAPOX if not fully delivered pre-op (TNT often completes chemotherapy before surgery)",
+        "Proceed to surveillance",
+        "Chemotherapy backbone referenced below"
       ],
+      "protocolRefs": ["modified-folfox-6"],
       "linkTo": "n_surveillance"
     },
     {
@@ -435,8 +539,9 @@
       "pills": ["recurrence"],
       "required": true,
       "bullets": [
-        "Biopsy to confirm recurrence; obtain / update full molecular panel (MMR, RAS, BRAF, HER2)",
-        "Restage with CT +/- PET-CT; liver MRI if liver-limited disease is suspected"
+        "Biopsy to confirm recurrence; obtain / update the full molecular panel (MMR, RAS, BRAF, HER2)",
+        "Restage with CT +/- PET-CT; liver MRI if liver-limited disease is suspected",
+        "Re-testing may reveal actionable drivers not present at diagnosis"
       ],
       "options": [
         { "id": "locoregional", "label": "Isolated locoregional recurrence", "sets": { "recur": "locoregional" }, "pills": ["locoregional"] },
@@ -450,7 +555,7 @@
       "name": "Locoregional recurrence",
       "title": "Isolated locoregional recurrence",
       "section": "Recurrence",
-      "description": "Resectable isolated locoregional recurrence is managed with curative intent.",
+      "description": "Resectable isolated locoregional recurrence is managed with curative intent, then systemic therapy is considered.",
       "path": "Colorectal / Recurrence / Locoregional",
       "pills": ["locoregional", "treatment"],
       "showsRecommendation": true,
@@ -477,11 +582,11 @@
       "required": true,
       "footnotes": ["a", "c"],
       "bullets": [
-        "MMR/MSI (dMMR/MSI-H predicts immunotherapy benefit)",
-        "Extended RAS (KRAS/NRAS exons 2/3/4) and BRAF-V600E",
-        "HER2 (ERBB2) amplification / overexpression",
+        "MMR / MSI (dMMR / MSI-H predicts immunotherapy benefit)",
+        "Extended RAS (KRAS / NRAS exons 2/3/4) and BRAF-V600E",
+        "HER2 (ERBB2) amplification / overexpression; NTRK fusion in RAS/BRAF wild-type",
         "Primary tumor sidedness (left = splenic flexure to rectum; right = cecum to transverse)",
-        "CT chest/abdomen/pelvis; liver MRI and multidisciplinary review if liver- or lung-limited disease may be resectable"
+        "CT chest / abdomen / pelvis; liver MRI and multidisciplinary review if liver- or lung-limited disease may be resectable"
       ],
       "options": [
         { "id": "continue", "label": "Molecular panel reviewed - continue", "setsValue": null }
@@ -494,7 +599,7 @@
       "name": "Resectability",
       "title": "Metastatic: resectability",
       "section": "Treatment",
-      "description": "Liver- or lung-limited oligometastatic disease may be curable with metastasectomy; widespread disease is treated with palliative systemic therapy.",
+      "description": "Liver- or lung-limited oligometastatic disease may be curable with metastasectomy; widespread disease is treated with palliative systemic therapy directed by biomarkers.",
       "path": "Colorectal / Metastatic / Resectability",
       "pills": ["metastatic", "resectability"],
       "required": true,
@@ -519,6 +624,7 @@
         "Perioperative FOLFOX (about 3 months pre and 3 months post) around metastasectomy, or upfront resection then adjuvant chemotherapy",
         "R0 metastasectomy of liver / lung disease; two-stage or staged resection as needed",
         "Convert borderline-resectable disease with intensive first-line therapy (see biomarker leaves), then re-evaluate for resection",
+        "After curative metastasectomy, resume standard surveillance; on later relapse re-enter this pathway",
         "Chemotherapy backbone referenced below"
       ],
       "protocolRefs": ["modified-folfox-6", "folfox-4"],
@@ -531,7 +637,7 @@
       "name": "Metastatic MMR",
       "title": "Metastatic: MMR / MSI status",
       "section": "Treatment",
-      "description": "Deficient MMR / MSI-high metastatic disease is treated with first-line immunotherapy; proficient MMR disease is chemotherapy-based and directed by RAS/BRAF/HER2 and sidedness.",
+      "description": "Deficient MMR / MSI-high metastatic disease is treated with first-line immunotherapy; proficient MMR disease is chemotherapy-based and directed by RAS / BRAF / HER2 and sidedness.",
       "path": "Colorectal / Metastatic / MMR",
       "pills": ["metastatic", "MMR"],
       "required": true,
@@ -541,25 +647,27 @@
       ]
     },
     {
-      "id": "n_tx_met_msi",
+      "id": "n_tx_met_msi_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Metastatic dMMR",
-      "title": "Metastatic dMMR/MSI-H: first-line immunotherapy",
+      "name": "Metastatic dMMR 1L",
+      "title": "Metastatic dMMR / MSI-H: first-line immunotherapy",
       "section": "Treatment",
       "description": "First-line PD-1 blockade is preferred for deficient-MMR / MSI-high metastatic colorectal cancer and outperforms chemotherapy.",
-      "path": "Colorectal / Metastatic / dMMR",
-      "pills": ["dMMR/MSI-H", "treatment"],
+      "path": "Colorectal / Metastatic / dMMR / 1L",
+      "pills": ["dMMR/MSI-H", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
+      "footnotes": ["a"],
       "bullets": [
-        "Single-agent pembrolizumab (PD-1 blockade) is preferred first-line (KEYNOTE-177)",
-        "Nivolumab +/- ipilimumab is an alternative immunotherapy option",
+        "Single-agent pembrolizumab (PD-1 blockade) is preferred first line (KEYNOTE-177)",
+        "Dual checkpoint blockade (nivolumab + ipilimumab) is an alternative immunotherapy option",
         "Reserve chemotherapy for immunotherapy-refractory disease",
-        "Regimen referenced below"
+        "Watch for pseudoprogression; confirm progression before switching",
+        "Immunotherapy dosing referenced below"
       ],
       "protocolRefs": ["gi-crc-msi-pembro"],
-      "linkTo": "n_met_later"
+      "linkTo": "n_met_prog1"
     },
     {
       "id": "n_met_molecular",
@@ -580,7 +688,7 @@
             ["RAS wild-type, left-sided", "Anti-EGFR (cetuximab / panitumumab)", "FOLFOX or FOLFIRI"],
             ["RAS wild-type, right-sided", "Bevacizumab (anti-EGFR less effective)", "FOLFOX or FOLFIRI"],
             ["RAS-mutant", "Bevacizumab (no anti-EGFR)", "FOLFOX / CAPOX or FOLFIRI"],
-            ["BRAF-V600E", "Encorafenib + cetuximab (after 1st line)", "FOLFOX/FOLFIRI (+/- bevacizumab) 1st line"],
+            ["BRAF-V600E", "Encorafenib + cetuximab (after 1st line)", "FOLFOX / FOLFIRI (+/- bevacizumab) 1st line"],
             ["HER2-amplified (RAS-wt)", "HER2 blockade (trastuzumab + tucatinib / pertuzumab)", "After chemo; anti-EGFR generally avoided"]
           ]
         }
@@ -593,76 +701,77 @@
       ]
     },
     {
-      "id": "n_tx_met_braf",
+      "id": "n_tx_met_braf_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Metastatic BRAF-V600E",
-      "title": "Metastatic BRAF-V600E",
+      "name": "Metastatic BRAF 1L",
+      "title": "Metastatic BRAF-V600E: first line",
       "section": "Treatment",
-      "description": "BRAF-V600E confers a poor prognosis; targeted BRAF/EGFR blockade is used after first-line chemotherapy.",
-      "path": "Colorectal / Metastatic / BRAF",
-      "pills": ["BRAF-V600E", "treatment"],
+      "description": "BRAF-V600E confers a poor prognosis; first-line therapy is an intensive chemotherapy backbone, with targeted BRAF / EGFR blockade held for progression.",
+      "path": "Colorectal / Metastatic / BRAF / 1L",
+      "pills": ["BRAF-V600E", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "bullets": [
-        "First line: chemotherapy backbone (FOLFOX / FOLFIRI or FOLFOXIRI) +/- bevacizumab",
-        "Second line and beyond: encorafenib + cetuximab (BRAF + EGFR blockade); no dose protocol here - describe agents only",
+        "First line: chemotherapy backbone (FOLFOX / FOLFIRI, or FOLFOXIRI in fit patients as guidance) +/- bevacizumab",
         "Anti-EGFR monotherapy is ineffective in BRAF-V600E disease",
+        "Plan early biomarker-directed second line given aggressive biology",
         "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["folfiri", "folfirinox"],
-      "linkTo": "n_met_later"
+      "protocolRefs": ["folfiri", "modified-folfox-6"],
+      "linkTo": "n_met_prog1"
     },
     {
-      "id": "n_tx_met_her2",
+      "id": "n_tx_met_her2_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Metastatic HER2+",
-      "title": "Metastatic HER2-amplified (RAS wild-type)",
+      "name": "Metastatic HER2 1L",
+      "title": "Metastatic HER2-amplified (RAS wild-type): first line",
       "section": "Treatment",
-      "description": "HER2 amplification is an actionable target in RAS wild-type metastatic disease, typically after first-line chemotherapy.",
-      "path": "Colorectal / Metastatic / HER2",
-      "pills": ["HER2+", "treatment"],
+      "description": "HER2 amplification is an actionable target; first line is standard chemotherapy, with HER2-directed therapy typically reserved for later lines.",
+      "path": "Colorectal / Metastatic / HER2 / 1L",
+      "pills": ["HER2+", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["2A"],
       "bullets": [
         "First line: standard chemotherapy backbone +/- bevacizumab",
-        "HER2-directed therapy for RAS wild-type disease: trastuzumab + tucatinib, trastuzumab + pertuzumab/lapatinib, or trastuzumab deruxtecan (no dose protocol here - agents only)",
         "Avoid anti-EGFR antibodies in HER2-amplified tumors (predict poor benefit)",
+        "Reserve HER2-directed therapy (trastuzumab + tucatinib / pertuzumab, or trastuzumab deruxtecan) for later lines",
         "Chemotherapy backbone referenced below"
       ],
       "protocolRefs": ["modified-folfox-6", "folfiri"],
-      "linkTo": "n_met_later"
+      "linkTo": "n_met_prog1"
     },
     {
-      "id": "n_tx_met_rasmut",
+      "id": "n_tx_met_rasmut_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Metastatic RAS-mutant",
-      "title": "Metastatic RAS-mutant: chemo + bevacizumab",
+      "name": "Metastatic RAS-mut 1L",
+      "title": "Metastatic RAS-mutant: first-line chemo + bevacizumab",
       "section": "Treatment",
-      "description": "RAS-mutant disease is not a candidate for anti-EGFR therapy; use a chemotherapy doublet with bevacizumab.",
-      "path": "Colorectal / Metastatic / RAS-mutant",
-      "pills": ["RAS-mut", "treatment"],
+      "description": "RAS-mutant disease is not a candidate for anti-EGFR therapy; first line is a chemotherapy doublet with bevacizumab.",
+      "path": "Colorectal / Metastatic / RAS-mutant / 1L",
+      "pills": ["RAS-mut", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["c"],
       "bullets": [
-        "FOLFOX / CAPOX or FOLFIRI + bevacizumab first line (FOLFOXIRI + bevacizumab for fit, high-tumor-burden patients)",
+        "FOLFOX / CAPOX or FOLFIRI + bevacizumab first line (FOLFOXIRI + bevacizumab, as guidance, for fit high-burden patients)",
         "NO anti-EGFR antibody (ineffective / harmful in RAS-mutant disease)",
-        "Bevacizumab is added as guidance (no dose protocol here); chemotherapy backbone referenced below"
+        "Bevacizumab is added as guidance (no dose protocol here)",
+        "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["modified-folfox-6", "gi-gastric-capox", "folfiri", "folfirinox"],
-      "linkTo": "n_met_later"
+      "protocolRefs": ["modified-folfox-6", "folfiri"],
+      "linkTo": "n_met_prog1"
     },
     {
       "id": "n_met_sidedness",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "name": "Sidedness",
-      "title": "Metastatic RAS/BRAF wild-type: primary sidedness",
+      "title": "Metastatic RAS / BRAF wild-type: primary sidedness",
       "section": "Treatment",
-      "description": "In RAS/BRAF wild-type disease, primary tumor sidedness selects the first-line biologic: anti-EGFR for left-sided primaries, bevacizumab for right-sided.",
+      "description": "In RAS / BRAF wild-type disease, primary tumor sidedness selects the first-line biologic: anti-EGFR for left-sided primaries, bevacizumab for right-sided.",
       "path": "Colorectal / Metastatic / Sidedness",
       "pills": ["RAS/BRAF-wt", "sidedness"],
       "required": true,
@@ -673,67 +782,298 @@
       ]
     },
     {
-      "id": "n_tx_met_left_egfr",
+      "id": "n_tx_met_left_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Left RAS-wt anti-EGFR",
-      "title": "Left-sided RAS/BRAF wild-type: chemo + anti-EGFR",
+      "name": "Left RAS-wt 1L anti-EGFR",
+      "title": "Left-sided RAS / BRAF wild-type: first-line chemo + anti-EGFR",
       "section": "Treatment",
-      "description": "Left-sided RAS/BRAF wild-type disease derives the greatest benefit from anti-EGFR antibodies added to a chemotherapy doublet.",
-      "path": "Colorectal / Metastatic / Left RAS-wt",
-      "pills": ["left-sided", "RAS-wt", "treatment"],
+      "description": "Left-sided RAS / BRAF wild-type disease derives the greatest benefit from anti-EGFR antibodies added to a chemotherapy doublet.",
+      "path": "Colorectal / Metastatic / Left RAS-wt / 1L",
+      "pills": ["left-sided", "RAS-wt", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["c"],
       "bullets": [
         "FOLFOX or FOLFIRI + an anti-EGFR antibody (cetuximab or panitumumab) first line",
-        "Anti-EGFR is guidance only (no dose protocol here); chemotherapy backbone referenced below",
-        "Bevacizumab + doublet is an acceptable alternative"
+        "Anti-EGFR is guidance only (no dose protocol here)",
+        "Bevacizumab + doublet is an acceptable alternative",
+        "Chemotherapy backbone referenced below"
       ],
       "protocolRefs": ["modified-folfox-6", "folfiri"],
-      "linkTo": "n_met_later"
+      "linkTo": "n_met_prog1"
     },
     {
-      "id": "n_tx_met_right_bev",
+      "id": "n_tx_met_right_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Right RAS-wt bevacizumab",
-      "title": "Right-sided RAS/BRAF wild-type: chemo + bevacizumab",
+      "name": "Right RAS-wt 1L bevacizumab",
+      "title": "Right-sided RAS / BRAF wild-type: first-line chemo + bevacizumab",
       "section": "Treatment",
       "description": "Right-sided primaries respond poorly to anti-EGFR therapy; a chemotherapy doublet with bevacizumab is preferred first line.",
-      "path": "Colorectal / Metastatic / Right RAS-wt",
-      "pills": ["right-sided", "RAS-wt", "treatment"],
+      "path": "Colorectal / Metastatic / Right RAS-wt / 1L",
+      "pills": ["right-sided", "RAS-wt", "1st line", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "footnotes": ["c"],
       "bullets": [
         "FOLFOX / CAPOX or FOLFIRI + bevacizumab first line",
         "Anti-EGFR is less effective for right-sided tumors and is not preferred here",
-        "Bevacizumab is guidance only (no dose protocol here); chemotherapy backbone referenced below"
+        "Bevacizumab is guidance only (no dose protocol here)",
+        "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["modified-folfox-6", "gi-gastric-capox", "folfiri"],
-      "linkTo": "n_met_later"
+      "protocolRefs": ["modified-folfox-6", "folfiri"],
+      "linkTo": "n_met_prog1"
     },
     {
-      "id": "n_met_later",
+      "id": "n_met_prog1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "First-line response",
+      "title": "Metastatic: response after first-line therapy",
+      "section": "Treatment",
+      "description": "Restage after ~4-6 months of first-line therapy. Response determines whether to attempt conversion surgery, de-escalate to maintenance, or move to second line.",
+      "path": "Colorectal / Metastatic / Response-1L",
+      "pills": ["1st line", "reassessment"],
+      "required": true,
+      "footnotes": ["e"],
+      "tables": [
+        {
+          "title": "Metastatic colorectal: line-of-therapy sequencing",
+          "headers": ["Line", "Trigger", "Typical strategy"],
+          "rows": [
+            ["1L", "Newly metastatic", "Biomarker-directed doublet + biologic (or IO for dMMR)"],
+            ["Maintenance", "Response / stable after induction", "Fluoropyrimidine +/- bevacizumab; reintroduce doublet on progression"],
+            ["2L", "Progression", "Switch backbone; add / switch biologic by biomarker"],
+            ["Refractory", "Progression after 2L", "Regorafenib, trifluridine-tipiracil, fruquintinib, or trial"]
+          ]
+        }
+      ],
+      "bullets": [
+        "Deep response / conversion: reassess liver- or lung-limited disease for metastasectomy",
+        "Response or stable disease: de-escalate to maintenance to limit cumulative toxicity",
+        "Progression on first line: proceed to second-line selection"
+      ],
+      "options": [
+        { "id": "conversion", "label": "Converted to resectable (deep response)", "sets": { "response1": "conversion", "resectable": "yes" }, "pills": ["conversion"] },
+        { "id": "maintenance", "label": "Response / stable - de-escalate to maintenance", "sets": { "response1": "maintenance" }, "pills": ["maintenance"] },
+        { "id": "progressed", "label": "Progression - second line", "sets": { "response1": "progressed" }, "pills": ["progressed"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_conversion",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Later-line metastatic",
-      "title": "Metastatic: later-line / refractory therapy",
+      "name": "Conversion metastasectomy",
+      "title": "Converted to resectable: metastasectomy",
       "section": "Treatment",
-      "description": "On progression, sequence the alternate chemotherapy backbone and biologics, then move to refractory oral agents; maintain best supportive care throughout.",
-      "path": "Colorectal / Metastatic / Later-line",
-      "pills": ["later-line", "treatment"],
+      "description": "A deep response to intensive first-line therapy can render initially unresectable liver- or lung-limited disease resectable with curative intent.",
+      "path": "Colorectal / Metastatic / Conversion",
+      "pills": ["conversion", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Multidisciplinary re-evaluation for R0 metastasectomy after maximal response",
+        "Do not over-treat before surgery (avoid excess hepatotoxicity / vanishing lesions); operate at best response",
+        "Consider perioperative continuation of the effective backbone after resection",
+        "After curative resection, resume standard surveillance; on later relapse re-enter the metastatic pathway",
+        "Chemotherapy backbone referenced below"
+      ],
+      "protocolRefs": ["modified-folfox-6", "folfox-4"],
+      "linkLabel": "After curative conversion resection, resume standard surveillance"
+    },
+    {
+      "id": "n_tx_met_maint",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Maintenance",
+      "title": "Maintenance after first-line induction",
+      "section": "Treatment",
+      "description": "After induction response, de-escalate to fluoropyrimidine-based maintenance to limit cumulative oxaliplatin neuropathy while preserving disease control.",
+      "path": "Colorectal / Metastatic / Maintenance",
+      "pills": ["maintenance", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["e"],
+      "bullets": [
+        "Fluoropyrimidine (capecitabine or infusional 5-FU / leucovorin) +/- bevacizumab as maintenance",
+        "Drop oxaliplatin after ~4-6 months or for grade 2+ persistent neuropathy",
+        "Reintroduce the full induction doublet on progression before declaring true second line",
+        "On confirmed progression despite reintroduction, proceed to second-line selection",
+        "Maintenance fluoropyrimidine backbone referenced below"
+      ],
+      "protocolRefs": ["simplified-lv5fu2"],
+      "linkTo": "n_met_2l"
+    },
+    {
+      "id": "n_met_2l",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Second-line selection",
+      "title": "Metastatic: second-line selection",
+      "section": "Treatment",
+      "description": "On progression, switch the chemotherapy backbone and choose the biologic / targeted layer by biomarker and prior exposure.",
+      "path": "Colorectal / Metastatic / 2L",
+      "pills": ["2nd line", "sequencing"],
+      "required": true,
+      "footnotes": ["c"],
+      "bullets": [
+        "Switch backbone: FOLFIRI after FOLFOX (or FOLFOX after FOLFIRI)",
+        "Continue / switch the biologic by RAS status (bevacizumab beyond progression, or anti-EGFR if RAS wild-type and not yet used)",
+        "BRAF-V600E: encorafenib + cetuximab; HER2-amplified: HER2-directed therapy",
+        "dMMR progressing on immunotherapy: switch to a chemotherapy doublet + biologic"
+      ],
+      "options": [
+        { "id": "egfr", "label": "RAS wild-type, anti-EGFR not yet used", "sets": { "line2": "egfr" }, "pills": ["anti-EGFR"] },
+        { "id": "braf", "label": "BRAF-V600E: targeted doublet", "sets": { "line2": "braf" }, "pills": ["enco+cetux"] },
+        { "id": "her2", "label": "HER2-amplified: HER2-directed", "sets": { "line2": "her2" }, "pills": ["HER2 Rx"] },
+        { "id": "switch", "label": "Switch backbone + biologic", "sets": { "line2": "switch" }, "pills": ["switch"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_2l_egfr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "2L anti-EGFR",
+      "title": "Second line: switch backbone + anti-EGFR (RAS wild-type)",
+      "section": "Treatment",
+      "description": "For RAS wild-type disease not previously exposed to anti-EGFR, add cetuximab or panitumumab to the alternate chemotherapy backbone.",
+      "path": "Colorectal / Metastatic / 2L / anti-EGFR",
+      "pills": ["2nd line", "anti-EGFR", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "FOLFIRI (or FOLFOX if not used first) + anti-EGFR antibody",
+        "Anti-EGFR is guidance only (no dose protocol here)",
+        "Confirm ongoing RAS wild-type status (consider ctDNA before rechallenge)",
+        "Chemotherapy backbone referenced below"
+      ],
+      "protocolRefs": ["folfiri", "modified-folfox-6"],
+      "linkTo": "n_met_prog2"
+    },
+    {
+      "id": "n_tx_met_2l_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "2L BRAF targeted",
+      "title": "Second line: encorafenib + cetuximab (BRAF-V600E)",
+      "section": "Treatment",
+      "description": "After first-line chemotherapy, BRAF-V600E disease is treated with BRAF + EGFR blockade.",
+      "path": "Colorectal / Metastatic / 2L / BRAF",
+      "pills": ["2nd line", "BRAF-V600E", "treatment"],
       "showsRecommendation": true,
       "evidenceCategory": ["1"],
       "bullets": [
-        "Switch backbone: FOLFIRI if FOLFOX first, or FOLFOX if FOLFIRI first, continuing / switching the biologic by RAS status",
-        "Anti-EGFR (RAS wild-type) may be introduced in later lines if not used earlier",
-        "Refractory disease: regorafenib or trifluridine-tipiracil (+/- bevacizumab); fruquintinib as a further option - agents only, no dose protocol here",
-        "Continue best supportive care; enroll in a clinical trial where available",
+        "Encorafenib + cetuximab (BRAF + EGFR blockade); no dose protocol here - agents only",
+        "Anti-EGFR monotherapy remains ineffective without BRAF blockade",
+        "May combine with a chemotherapy backbone in selected fit patients (guidance)",
+        "Optional chemotherapy backbone referenced below"
+      ],
+      "protocolRefs": ["folfiri"],
+      "linkTo": "n_met_prog2"
+    },
+    {
+      "id": "n_tx_met_2l_her2",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "2L HER2-directed",
+      "title": "Second line: HER2-directed therapy (HER2-amplified, RAS wild-type)",
+      "section": "Treatment",
+      "description": "HER2-amplified RAS wild-type disease is treated with HER2-directed regimens after first-line chemotherapy.",
+      "path": "Colorectal / Metastatic / 2L / HER2",
+      "pills": ["2nd line", "HER2+", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Trastuzumab + tucatinib, trastuzumab + pertuzumab / lapatinib, or trastuzumab deruxtecan; no dose protocol here - agents only",
+        "Avoid anti-EGFR antibodies in HER2-amplified tumors",
+        "Optional chemotherapy backbone referenced below"
+      ],
+      "protocolRefs": ["folfiri"],
+      "linkTo": "n_met_prog2"
+    },
+    {
+      "id": "n_tx_met_2l_switch",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "2L switch backbone",
+      "title": "Second line: switch backbone + biologic",
+      "section": "Treatment",
+      "description": "For RAS-mutant disease or after anti-EGFR exposure, switch the chemotherapy backbone and continue an anti-angiogenic biologic.",
+      "path": "Colorectal / Metastatic / 2L / Switch",
+      "pills": ["2nd line", "switch", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "FOLFIRI after FOLFOX (or FOLFOX after FOLFIRI) + an anti-angiogenic biologic",
+        "Bevacizumab beyond progression, or aflibercept / ramucirumab with FOLFIRI (guidance only, no dose protocol here)",
+        "NO anti-EGFR in RAS-mutant disease",
         "Chemotherapy backbone referenced below"
       ],
-      "protocolRefs": ["folfiri", "modified-folfox-6"]
+      "protocolRefs": ["folfiri", "modified-folfox-6"],
+      "linkTo": "n_met_prog2"
+    },
+    {
+      "id": "n_met_prog2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Second-line progression",
+      "title": "Metastatic: progression after second line",
+      "section": "Treatment",
+      "description": "On progression after second line, fitness and performance status determine whether to offer refractory-line systemic therapy or transition to best supportive care.",
+      "path": "Colorectal / Metastatic / Response-2L",
+      "pills": ["2nd line", "reassessment"],
+      "required": true,
+      "footnotes": ["f"],
+      "bullets": [
+        "Fit (ECOG 0-1), organ function preserved: refractory-line oral agents or a clinical trial",
+        "Declining performance status: best supportive care and symptom-directed measures",
+        "Reassess goals of care and palliative-care involvement at each transition"
+      ],
+      "options": [
+        { "id": "fit", "label": "Fit for further therapy", "sets": { "line3": "refractory" }, "pills": ["refractory line"] },
+        { "id": "bsc", "label": "Declining PS - best supportive care", "sets": { "line3": "bsc" }, "pills": ["BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_refractory",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Refractory line",
+      "title": "Metastatic: refractory-line therapy",
+      "section": "Treatment",
+      "description": "Chemorefractory disease in fit patients is treated with oral multikinase / antimetabolite agents or biomarker re-use strategies, ideally within a clinical trial.",
+      "path": "Colorectal / Metastatic / Refractory",
+      "pills": ["refractory line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["f"],
+      "bullets": [
+        "Regorafenib, trifluridine-tipiracil (+/- bevacizumab), or fruquintinib; no dose protocol here - agents only",
+        "ctDNA-guided anti-EGFR rechallenge for RAS wild-type disease with cleared resistance clones (guidance)",
+        "Tissue-agnostic options: larotrectinib / entrectinib for NTRK fusions; targeted therapy for rare drivers",
+        "Continue best supportive care and enroll in a clinical trial where available"
+      ]
+    },
+    {
+      "id": "n_tx_met_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Best supportive care",
+      "title": "Metastatic: best supportive care",
+      "section": "Treatment",
+      "description": "For patients with declining performance status not fit for further systemic therapy, care focuses on symptom control and quality of life.",
+      "path": "Colorectal / Metastatic / BSC",
+      "pills": ["BSC", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Symptom-directed palliative care: pain, obstruction, bleeding, nutrition",
+        "Palliative interventions as needed (stent / diverting stoma for obstruction, palliative RT for bleeding or pain)",
+        "Early palliative-care integration and advance-care planning",
+        "No further cytotoxic therapy; reassess if performance status recovers"
+      ]
     }
   ],
   "links": [
@@ -742,24 +1082,32 @@
     { "id": "l_colon_wk", "from": "n_colon_wk", "to": "n_colon_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_colon_s1", "from": "n_colon_stage", "to": "n_tx_colon_s1", "fromOptions": ["s1"], "linkCategory": "conditional" },
     { "id": "l_colon_s2", "from": "n_colon_stage", "to": "n_colon_ii_risk", "fromOptions": ["s2"], "linkCategory": "conditional" },
-    { "id": "l_colon_s3", "from": "n_colon_stage", "to": "n_tx_colon_iii", "fromOptions": ["s3"], "linkCategory": "conditional" },
+    { "id": "l_colon_s3", "from": "n_colon_stage", "to": "n_colon_iii_idea", "fromOptions": ["s3"], "linkCategory": "conditional" },
     { "id": "l_colon_s4", "from": "n_colon_stage", "to": "n_met_wk", "fromOptions": ["s4"], "linkCategory": "conditional" },
     { "id": "l_ii_low", "from": "n_colon_ii_risk", "to": "n_tx_colon_ii_obs", "fromOptions": ["low", "dmmr"], "linkCategory": "conditional" },
     { "id": "l_ii_high", "from": "n_colon_ii_risk", "to": "n_tx_colon_ii_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_iii_low", "from": "n_colon_iii_idea", "to": "n_tx_colon_iii_low", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_iii_high", "from": "n_colon_iii_idea", "to": "n_tx_colon_iii_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_iii_unfit", "from": "n_colon_iii_idea", "to": "n_tx_colon_iii_unfit", "fromOptions": ["unfit"], "linkCategory": "conditional" },
     { "id": "l_rectal_wk", "from": "n_rectal_wk", "to": "n_rectal_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_rectal_early", "from": "n_rectal_stage", "to": "n_tx_rectal_early", "fromOptions": ["early"], "linkCategory": "conditional" },
     { "id": "l_rectal_la", "from": "n_rectal_stage", "to": "n_rectal_la_approach", "fromOptions": ["la"], "linkCategory": "conditional" },
     { "id": "l_rectal_m1", "from": "n_rectal_stage", "to": "n_met_wk", "fromOptions": ["m1"], "linkCategory": "conditional" },
     { "id": "l_la_tnt", "from": "n_rectal_la_approach", "to": "n_tx_rectal_tnt", "fromOptions": ["tnt"], "linkCategory": "conditional" },
     { "id": "l_la_chemort", "from": "n_rectal_la_approach", "to": "n_tx_rectal_chemort", "fromOptions": ["chemort"], "linkCategory": "conditional" },
+    { "id": "l_la_immuno", "from": "n_rectal_la_approach", "to": "n_tx_rectal_immuno", "fromOptions": ["immuno"], "linkCategory": "conditional" },
     { "id": "l_tnt_reassess", "from": "n_tx_rectal_tnt", "to": "n_rectal_reassess", "linkCategory": "conditional" },
     { "id": "l_chemort_reassess", "from": "n_tx_rectal_chemort", "to": "n_rectal_reassess", "linkCategory": "conditional" },
+    { "id": "l_immuno_reassess", "from": "n_tx_rectal_immuno", "to": "n_rectal_reassess", "linkCategory": "conditional" },
     { "id": "l_reassess_ccr", "from": "n_rectal_reassess", "to": "n_tx_rectal_waw", "fromOptions": ["ccr"], "linkCategory": "conditional" },
     { "id": "l_reassess_res", "from": "n_rectal_reassess", "to": "n_tx_rectal_tme", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_reassess_prog", "from": "n_rectal_reassess", "to": "n_met_wk", "fromOptions": ["progression"], "linkCategory": "conditional" },
     { "id": "l_s1_surv", "from": "n_tx_colon_s1", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_iiobs_surv", "from": "n_tx_colon_ii_obs", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_iihigh_surv", "from": "n_tx_colon_ii_high", "to": "n_surveillance", "linkCategory": "conditional" },
-    { "id": "l_iii_surv", "from": "n_tx_colon_iii", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_iiilow_surv", "from": "n_tx_colon_iii_low", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_iiihigh_surv", "from": "n_tx_colon_iii_high", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_iiiunfit_surv", "from": "n_tx_colon_iii_unfit", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_early_surv", "from": "n_tx_rectal_early", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_waw_surv", "from": "n_tx_rectal_waw", "to": "n_surveillance", "linkCategory": "conditional" },
     { "id": "l_tme_surv", "from": "n_tx_rectal_tme", "to": "n_surveillance", "linkCategory": "conditional" },
@@ -770,19 +1118,33 @@
     { "id": "l_met_wk", "from": "n_met_wk", "to": "n_met_resectable", "fromOptions": ["continue"], "linkCategory": "conditional" },
     { "id": "l_met_resect", "from": "n_met_resectable", "to": "n_tx_met_resect", "fromOptions": ["resectable"], "linkCategory": "conditional" },
     { "id": "l_met_unresect", "from": "n_met_resectable", "to": "n_met_mmr", "fromOptions": ["unresectable"], "linkCategory": "conditional" },
-    { "id": "l_met_dmmr", "from": "n_met_mmr", "to": "n_tx_met_msi", "fromOptions": ["dmmr"], "linkCategory": "conditional" },
+    { "id": "l_met_dmmr", "from": "n_met_mmr", "to": "n_tx_met_msi_1l", "fromOptions": ["dmmr"], "linkCategory": "conditional" },
     { "id": "l_met_pmmr", "from": "n_met_mmr", "to": "n_met_molecular", "fromOptions": ["pmmr"], "linkCategory": "conditional" },
-    { "id": "l_mol_braf", "from": "n_met_molecular", "to": "n_tx_met_braf", "fromOptions": ["braf"], "linkCategory": "conditional" },
-    { "id": "l_mol_her2", "from": "n_met_molecular", "to": "n_tx_met_her2", "fromOptions": ["her2"], "linkCategory": "conditional" },
-    { "id": "l_mol_rasmut", "from": "n_met_molecular", "to": "n_tx_met_rasmut", "fromOptions": ["rasmut"], "linkCategory": "conditional" },
+    { "id": "l_mol_braf", "from": "n_met_molecular", "to": "n_tx_met_braf_1l", "fromOptions": ["braf"], "linkCategory": "conditional" },
+    { "id": "l_mol_her2", "from": "n_met_molecular", "to": "n_tx_met_her2_1l", "fromOptions": ["her2"], "linkCategory": "conditional" },
+    { "id": "l_mol_rasmut", "from": "n_met_molecular", "to": "n_tx_met_rasmut_1l", "fromOptions": ["rasmut"], "linkCategory": "conditional" },
     { "id": "l_mol_raswt", "from": "n_met_molecular", "to": "n_met_sidedness", "fromOptions": ["raswt"], "linkCategory": "conditional" },
-    { "id": "l_side_left", "from": "n_met_sidedness", "to": "n_tx_met_left_egfr", "fromOptions": ["left"], "linkCategory": "conditional" },
-    { "id": "l_side_right", "from": "n_met_sidedness", "to": "n_tx_met_right_bev", "fromOptions": ["right"], "linkCategory": "conditional" },
-    { "id": "l_msi_later", "from": "n_tx_met_msi", "to": "n_met_later", "linkCategory": "conditional" },
-    { "id": "l_braf_later", "from": "n_tx_met_braf", "to": "n_met_later", "linkCategory": "conditional" },
-    { "id": "l_her2_later", "from": "n_tx_met_her2", "to": "n_met_later", "linkCategory": "conditional" },
-    { "id": "l_rasmut_later", "from": "n_tx_met_rasmut", "to": "n_met_later", "linkCategory": "conditional" },
-    { "id": "l_left_later", "from": "n_tx_met_left_egfr", "to": "n_met_later", "linkCategory": "conditional" },
-    { "id": "l_right_later", "from": "n_tx_met_right_bev", "to": "n_met_later", "linkCategory": "conditional" }
+    { "id": "l_side_left", "from": "n_met_sidedness", "to": "n_tx_met_left_1l", "fromOptions": ["left"], "linkCategory": "conditional" },
+    { "id": "l_side_right", "from": "n_met_sidedness", "to": "n_tx_met_right_1l", "fromOptions": ["right"], "linkCategory": "conditional" },
+    { "id": "l_msi_prog1", "from": "n_tx_met_msi_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_braf_prog1", "from": "n_tx_met_braf_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_her2_prog1", "from": "n_tx_met_her2_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_rasmut_prog1", "from": "n_tx_met_rasmut_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_left_prog1", "from": "n_tx_met_left_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_right_prog1", "from": "n_tx_met_right_1l", "to": "n_met_prog1", "linkCategory": "conditional" },
+    { "id": "l_prog1_conv", "from": "n_met_prog1", "to": "n_tx_met_conversion", "fromOptions": ["conversion"], "linkCategory": "conditional" },
+    { "id": "l_prog1_maint", "from": "n_met_prog1", "to": "n_tx_met_maint", "fromOptions": ["maintenance"], "linkCategory": "conditional" },
+    { "id": "l_prog1_prog", "from": "n_met_prog1", "to": "n_met_2l", "fromOptions": ["progressed"], "linkCategory": "conditional" },
+    { "id": "l_maint_2l", "from": "n_tx_met_maint", "to": "n_met_2l", "linkCategory": "conditional" },
+    { "id": "l_2l_egfr", "from": "n_met_2l", "to": "n_tx_met_2l_egfr", "fromOptions": ["egfr"], "linkCategory": "conditional" },
+    { "id": "l_2l_braf", "from": "n_met_2l", "to": "n_tx_met_2l_braf", "fromOptions": ["braf"], "linkCategory": "conditional" },
+    { "id": "l_2l_her2", "from": "n_met_2l", "to": "n_tx_met_2l_her2", "fromOptions": ["her2"], "linkCategory": "conditional" },
+    { "id": "l_2l_switch", "from": "n_met_2l", "to": "n_tx_met_2l_switch", "fromOptions": ["switch"], "linkCategory": "conditional" },
+    { "id": "l_2legfr_prog2", "from": "n_tx_met_2l_egfr", "to": "n_met_prog2", "linkCategory": "conditional" },
+    { "id": "l_2lbraf_prog2", "from": "n_tx_met_2l_braf", "to": "n_met_prog2", "linkCategory": "conditional" },
+    { "id": "l_2lher2_prog2", "from": "n_tx_met_2l_her2", "to": "n_met_prog2", "linkCategory": "conditional" },
+    { "id": "l_2lswitch_prog2", "from": "n_tx_met_2l_switch", "to": "n_met_prog2", "linkCategory": "conditional" },
+    { "id": "l_prog2_fit", "from": "n_met_prog2", "to": "n_tx_met_refractory", "fromOptions": ["fit"], "linkCategory": "conditional" },
+    { "id": "l_prog2_bsc", "from": "n_met_prog2", "to": "n_tx_met_bsc", "fromOptions": ["bsc"], "linkCategory": "conditional" }
   ]
 }
