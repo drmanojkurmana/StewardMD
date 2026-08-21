@@ -100,11 +100,26 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
         (try? dir())?.appendingPathComponent(name) ?? URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(name)
     }
 
-    private static func sidecarFor(_ name: String) -> URL { pathFor(name + ".parts") }
+    static func sidecarFor(_ name: String) -> URL { pathFor(name + ".parts") }
 
     static func sizeOf(_ name: String) -> Int64 {
         guard let a = try? FileManager.default.attributesOfItem(atPath: pathFor(name).path) else { return 0 }
         return (a[.size] as? Int64) ?? 0
+    }
+
+    /**
+     * Is this file a PARTIAL chunked download?
+     *
+     * Size alone cannot answer that: the chunked downloader creates the final file at its FULL length
+     * up front so parts can be written at their own offsets, so an incomplete 2.49 GB model measures
+     * exactly 2.49 GB on disk. The `.parts` sidecar is the authority - it is written when a transfer
+     * starts and deleted only when every part has landed.
+     *
+     * Without this, `modelPath` reported a complete-looking size, the JS layer concluded "already
+     * downloaded", and an incomplete model was both never resumed AND offered as ready to run.
+     */
+    static func isPartial(_ name: String) -> Bool {
+        FileManager.default.fileExists(atPath: sidecarFor(name).path)
     }
 
     static func freeBytes() -> Int64 {

@@ -319,8 +319,11 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
         guard let name = call.getString("name"), !name.isEmpty else {
             call.reject("Missing name", LlamaErr.badArguments.rawValue); return
         }
+        // `partial` matters because `bytes` CANNOT answer "is it complete": the chunked downloader
+        // preallocates the final file at full length, so an unfinished model measures full size.
         call.resolve(["path": ModelDownloader.pathFor(name).path,
                       "bytes": ModelDownloader.sizeOf(name),
+                      "partial": ModelDownloader.isPartial(name),
                       "freeBytes": ModelDownloader.freeBytes()])
     }
 

@@ -387,11 +387,25 @@
     return (typeof btoa !== "undefined") ? btoa(bin) : Buffer.from(bytes).toString("base64");
   }
 
-  // ── on-disk size of one file (0 when absent) ──
+  /* ── on-disk size of one file (0 when absent, and 0 when INCOMPLETE) ──
+   *
+   * A partial chunked download reports 0, not its byte count, and that is deliberate. The native
+   * chunked downloader creates the final file at its FULL length up front so parts can be written at
+   * their own offsets, so an unfinished 2.49 GB model measures exactly 2.49 GB on disk. Every
+   * completeness test here compares size against the expected size, so without this a half-downloaded
+   * model was reported INSTALLED - it was never resumed, and it was offered as ready to run.
+   *
+   * Observed: a download stranded at 24/38 parts by an app update, with the UI calling it complete.
+   *
+   * Only the native path can be partial in this sense; the web chunked loop appends progressively and
+   * writes no sidecar, so its callers (resume offset, verify) are unaffected.
+   */
   function sizeOf(name) {
     var L = llama();
     if (isNative() && L && L.modelPath) {
-      return L.modelPath({ name: name }).then(function (r) { return (r && r.bytes) || 0; }).catch(function () { return 0; });
+      return L.modelPath({ name: name })
+        .then(function (r) { return (r && r.partial) ? 0 : ((r && r.bytes) || 0); })
+        .catch(function () { return 0; });
     }
     var F = fs(); if (!F) return Promise.resolve(0);
     return F.stat({ path: relPath(name), directory: DIR })
@@ -549,7 +563,9 @@
     }
 
     return L.modelPath({ name: f.name }).then(function (mp) {
-      if (mp && mp.bytes && f.bytes && mp.bytes === f.bytes) return "already";
+      // `partial` is what distinguishes "2.49 GB of finished model" from "2.49 GB of preallocated
+      // file with 14 parts still missing". Size alone cannot tell them apart.
+      if (mp && !mp.partial && mp.bytes && f.bytes && mp.bytes === f.bytes) return "already";
       // The final file is created at full length up front and parts are written into it in place, so
       // the overhead is only the parts in flight (8 x 64 MB), not a second copy of the model.
       if (mp && mp.freeBytes > 0 && f.bytes && mp.freeBytes < f.bytes * 1.05 + 600e6) {

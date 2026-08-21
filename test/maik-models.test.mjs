@@ -534,5 +534,57 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("adding vision did NOT change the base model download size", M.totalBytes("maik-mxcore") === 2489894976);
 }
 
+
+/* ── A PREALLOCATED file is not a finished download ─────────────────────────────────────────────
+ * Real bug, found on device the morning after: the chunked downloader creates the final file at its
+ * FULL length up front so parts can be written at their own offsets, so an unfinished 2.49 GB model
+ * measures exactly 2.49 GB. Every completeness test compared size against expected size, so the app
+ * reported a model stranded at 24/38 parts as INSTALLED - never resumed it, and offered it as ready
+ * to run. `partial` (the .parts sidecar, deleted only on completion) is the authority.
+ */
+{
+  // modelPath reports a full-size file that is still partial.
+  const calls = { start: 0 };
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "77" }; },
+    downloadStatus: async () => ({ state: "paused", bytes: 24 * 64 * 1024 * 1024, total: 2489894976, onDisk: 2489894976 }),
+    downloadCancel: async () => {},
+    modelPath: async () => ({ path: "/x/m.gguf", bytes: 2489894976, partial: true, freeBytes: 50e9 }),
+    modelDelete: async () => ({ ok: true })
+  };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {} } } };
+  const ls = fakeLS();
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  const M = win.SMD_MAIK_MODELS;
+
+  const inst = await M.installed("maik-mxcore");
+  ok("a partial model is NOT reported installed", inst === false);
+  ok("and the install marker is cleared, not left stale", ls._s["smd_maik_pack_maik-mxcore"] !== "1");
+
+  // The download must actually start rather than short-circuit to "already".
+  M.ensure("maik-mxcore").catch(() => {});
+  await new Promise((r) => setTimeout(r, 40));
+  ok("a partial model resumes instead of short-circuiting to already-downloaded", calls.start > 0);
+}
+
+{
+  // Control: a genuinely complete file (no sidecar, so partial:false) still short-circuits.
+  const calls = { start: 0 };
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "77" }; },
+    downloadStatus: async () => ({ state: "done", bytes: 2489894976, total: 2489894976, onDisk: 2489894976 }),
+    downloadCancel: async () => {},
+    modelPath: async () => ({ path: "/x/m.gguf", bytes: 2489894976, partial: false, freeBytes: 50e9 }),
+    modelDelete: async () => ({ ok: true })
+  };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {} } } };
+  const ls = fakeLS();
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  const M = win.SMD_MAIK_MODELS;
+  ok("a complete model IS reported installed", (await M.installed("maik-mxcore")) === true);
+  await M.ensure("maik-mxcore").catch(() => {});
+  ok("a complete model does not re-download", calls.start === 0);
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
