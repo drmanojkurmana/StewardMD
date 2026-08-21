@@ -246,7 +246,10 @@
       ".mai-hero{background:linear-gradient(135deg,#0e7d70,#0b544c);box-shadow:0 14px 34px -14px rgba(14,110,99,.7)}",
       "body.dark .fc-sheet.fcai .mai-hero,body.v3-dark .fc-sheet.fcai .mai-hero{background:linear-gradient(130deg,#0a3b3a 0%,#0e6e63 42%,#0a8fb0 100%);box-shadow:0 24px 66px -22px rgba(20,184,166,.6),0 0 0 1px rgba(94,234,212,.28)}",
       ".mai-aura{position:absolute;inset:-45%;z-index:0;pointer-events:none;background:radial-gradient(circle at 28% 22%,rgba(94,234,212,.4),transparent 42%),radial-gradient(circle at 82% 78%,rgba(56,189,248,.34),transparent 46%);animation:maiAura 8s ease-in-out infinite}",
-      ".mai-dot{animation:maiPulse 2.4s ease-out infinite}"
+      ".mai-dot{animation:maiPulse 2.4s ease-out infinite}",
+      // StewardMD corner watermark — same masked-logo technique as ONCqis's .oh-hero-mark
+      // (onco-home.css), so every module hero card carries the identical brand mark.
+      ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}"
     ].join("");
   }
   function ensureStyle() { if (mounted) return; var s = document.createElement("style"); s.id = "fc-style"; s.textContent = css(); document.head.appendChild(s); mounted = true; }
@@ -949,12 +952,13 @@
         '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
       '<div style="position:relative;z-index:1">' +
         '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:88px;height:88px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
-        '<div style="font-family:\'Space Grotesk\',Inter,system-ui,sans-serif;font-weight:700;font-size:33px;letter-spacing:2px;line-height:1;text-shadow:0 2px 20px rgba(94,234,212,.5)">MA<span style="color:#5eead4;text-transform:lowercase">i</span>TRI</div>' +
-        '<div style="font-size:11px;opacity:.92;margin-top:9px;line-height:1.5;letter-spacing:.2px">Medical Adaptive Intelligence for Treatment &amp; Recovery Integration</div>' +
+        // The real brand lockup (title + tagline, cropped from the official logo file) rather than a
+        // CSS re-typeset — guarantees an exact match to the "MAiTRI" wordmark and its rounded "i".
+        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:6px auto 0;width:210px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
         '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
           '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
       '</div>' +
-      '<div style="position:absolute;right:12px;bottom:8px;z-index:1;font-size:9px;font-weight:800;letter-spacing:.6px;color:rgba(233,246,243,.34);text-transform:uppercase">◈ StewardMD</div>';
+      '<span class="mai-mark" aria-hidden="true"></span>';
     return wrap;
   }
   function maitriStatus(sv) {

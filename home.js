@@ -1756,7 +1756,10 @@
           dy = e.touches[0].clientY - sy;
           sh.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
         }, { passive: true });
-        function end() { if (!drag) return; drag = false; sh.style.transition = ""; var far = dy > 90; sh.style.transform = ""; if (far) closeSheet(); }
+        // Past the threshold: leave the transform at its dragged offset and let dialog-motion.js's
+        // Motion-driven close (.hv-sheet is in its SEL) carry it the rest of the way down — one
+        // continuous slide, not a snap back to open followed by a separate close animation.
+        function end() { if (!drag) return; drag = false; sh.style.transition = ""; var far = dy > 90; if (far) closeSheet(); else sh.style.transform = ""; }
         sh.addEventListener("touchend", end); sh.addEventListener("touchcancel", end);
       })(s);
       try { injectCSS(); } catch (e) {}
@@ -4493,6 +4496,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (op) maikOpenConv(op.getAttribute("data-conv"));
     });
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
+    // Drag the top bar (grab handle + header) down to dismiss — same gesture as the More sheet
+    // (BUG-19). Scoped to the header only, not the whole sheet, since #maikBody scrolls independently
+    // and dragging a chat transcript shouldn't also drag the sheet. Skips buttons/the model chip so
+    // their own taps still work.
+    (function () {
+      var hd = sheet.querySelector(".maik-hd");
+      var sy = 0, dy = 0, drag = false;
+      function start(e) {
+        if ((e.target.closest && e.target.closest("button")) || !e.touches || !e.touches.length) { drag = false; return; }
+        sy = e.touches[0].clientY; dy = 0; drag = true; sheet.style.transition = "none";
+      }
+      function move(e) {
+        if (!drag || !e.touches || !e.touches.length) return;
+        dy = e.touches[0].clientY - sy;
+        sheet.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
+      }
+      // Past the threshold: leave the transform at its dragged offset and let dialog-motion.js's
+      // Motion-driven close (#maikSheet is in its SEL) carry it the rest of the way down — one
+      // continuous slide, not a snap back to open followed by a separate close animation.
+      function end() { if (!drag) return; drag = false; sheet.style.transition = ""; var far = dy > 90; if (far) close(); else sheet.style.transform = ""; }
+      [_grab, hd].forEach(function (el) {
+        if (!el) return;
+        el.addEventListener("touchstart", start, { passive: true });
+        el.addEventListener("touchmove", move, { passive: true });
+        el.addEventListener("touchend", end); el.addEventListener("touchcancel", end);
+      });
+    })();
     scrim.addEventListener("click", close);
     // One button, two jobs: STOP while a turn is in flight, SEND otherwise. Routed here rather than
     // by swapping listeners, so there is no window where the button is bound to the wrong action.

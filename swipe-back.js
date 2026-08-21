@@ -163,7 +163,22 @@
     }
     return false;
   }
-  function syncHandle() { try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl()) ? "flex" : "none"; } catch (e) {} }
+  // hasTopLeftControl() only catches a BACK_SEL match sitting top-left. A bottom sheet like MaiK
+  // (height:86vh) leaves home's OWN top-left header button genuinely visible above it, while MaiK's
+  // Close sits top-RIGHT — so hasTopLeftControl sees no top-left match and would show our button
+  // right on top of home's. Detect that by asking whether the topmost overlay's own root even
+  // reaches the top of the viewport: if it doesn't, home is exposed above it and our button would
+  // double up on home's control regardless of where the overlay's own control sits. A full-screen
+  // overlay (root.top===0) doesn't expose home, so this never falsely suppresses the button on a
+  // dead-end screen that has no back control of its own.
+  function topExposesHome() {
+    var ctrl = topBackControl();
+    var root = ctrl && overlayRootOf(ctrl);
+    return !!(root && root.getBoundingClientRect().top > 8);
+  }
+  function syncHandle() {
+    try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl() && !topExposesHome()) ? "flex" : "none"; } catch (e) {}
+  }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
