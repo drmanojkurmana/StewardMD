@@ -1,0 +1,652 @@
+{
+  "guideline": "dlbcl",
+  "title": "DLBCL Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "dlbcl_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides.",
+  "sourceNote": "Structural pathway for diffuse large B-cell lymphoma (DLBCL): workup and pathology -> disease state -> Ann Arbor stage / IPI risk / cell-of-origin and double-hit status / CNS risk -> stage- and biomarker-directed first-line arms -> response assessment -> relapsed / refractory pathway (CAR-T vs salvage + autologous transplant vs bispecific). Workup, staging, risk-stratification and surveillance content is standard oncology, not proprietary guideline text. The single leaf with a dose protocol references the existing R-CHOP Standard Protocol; arms without a dose protocol (pola-R-CHP, DA-EPOCH-R, CNS prophylaxis, CAR-T, salvage + ASCT, bispecifics) are shown as checklist guidance with NO dose. Invents no dose/regimen. DRAFT - not clinically activated.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "Risk in DLBCL is scored by the International Prognostic Index (IPI): one point each for age >60, stage III-IV, elevated LDH, ECOG >=2, and >1 extranodal site. The NCCN-IPI refines age and LDH into graded bands. Higher score predicts lower cure rate and helps select treatment intensity.", "evidence": "2A" },
+    "b": { "text": "For previously untreated patients with intermediate-to-high risk (IPI 2-5), substituting polatuzumab vedotin for vincristine (pola-R-CHP) improved progression-free survival versus R-CHOP in a randomized trial, with similar overall survival at first report.", "evidence": "1" },
+    "c": { "text": "CNS prophylaxis is considered for patients at high risk of central-nervous-system relapse (high CNS-IPI, or high-risk sites such as testis, breast, kidney/adrenal, paranasal sinus, or epidural). Options include high-dose intravenous methotrexate and/or intrathecal chemotherapy. Benefit is debated; the physician weighs risk against toxicity.", "evidence": "2A" },
+    "d": { "text": "In primary-refractory disease or relapse within 12 months of first-line chemoimmunotherapy, second-line CD19 CAR T-cell therapy (axicabtagene ciloleucel or lisocabtagene maraleucel) improved event-free survival versus salvage chemotherapy plus autologous transplant in randomized trials. Late relapse (>=12 months) remains a candidate for salvage + autologous transplant.", "evidence": "1" }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup and diagnosis",
+      "description": "Baseline evaluation once DLBCL is suspected or confirmed. Establish histology, extent of disease, and fitness before therapy.",
+      "path": "DLBCL / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "Excisional / core biopsy with expert hematopathology review", "sub": "confirm CD20-positive large B-cell histology; avoid relying on fine-needle aspirate alone" },
+        { "label": "Immunohistochemistry and cell-of-origin", "sub": "CD20, CD10, BCL6, MUM1 (Hans algorithm: germinal-center vs non-germinal-center)" },
+        { "label": "FISH for MYC, and if positive, BCL2 and BCL6 rearrangements", "sub": "identify high-grade double- / triple-hit lymphoma" },
+        { "label": "Contrast CT neck/chest/abdomen/pelvis and whole-body FDG-PET/CT for staging" },
+        { "label": "Bone-marrow biopsy if PET is equivocal for marrow involvement" },
+        { "label": "CBC, complete metabolic panel, LDH, uric acid; hepatitis B/C and HIV serology" },
+        { "label": "Baseline echo / MUGA for ejection fraction before anthracycline" },
+        { "label": "Assess CNS-relapse risk; lumbar puncture if high-risk features or neurologic signs" },
+        { "label": "Fertility counseling; comorbidity and performance-status assessment" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_state",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Disease state",
+      "title": "Disease state",
+      "description": "Choose the current clinical state. This drives whether to enter the newly-diagnosed staging pathway, the response-assessment pathway, or the relapsed / refractory pathway.",
+      "path": "DLBCL / State",
+      "section": "Staging",
+      "pills": ["disease state"],
+      "required": true,
+      "options": [
+        { "id": "newly_dx", "label": "Newly diagnosed, treatment-naive", "sets": { "diseaseState": "newly_dx" }, "pills": ["newly diagnosed"] },
+        { "id": "restaging", "label": "On / end of first-line therapy - response assessment", "sets": { "diseaseState": "restaging" }, "pills": ["restaging"] },
+        { "id": "relapsed", "label": "Relapsed or refractory after prior therapy", "sets": { "diseaseState": "relapsed" }, "pills": ["relapsed/refractory"] },
+        { "id": "surveillance", "label": "In remission - post-treatment surveillance", "sets": { "diseaseState": "surveillance" }, "pills": ["surveillance"] }
+      ]
+    },
+    {
+      "id": "n_pathology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Pathology / biomarker",
+      "title": "Pathology and biomarker subtype",
+      "description": "Confirm the biology. Cell-of-origin and MYC / BCL2 / BCL6 rearrangement status separate ordinary DLBCL from high-grade double- / triple-hit lymphoma and from transformed indolent lymphoma, which are treated differently.",
+      "path": "DLBCL / Pathology",
+      "section": "Staging",
+      "pills": ["biomarker"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Cell-of-origin and rearrangement subtypes",
+          "headers": ["Subtype", "Defining features", "Bearing on therapy"],
+          "rows": [
+            ["DLBCL, NOS (GCB or non-GCB)", "CD20+ large B-cells; Hans GCB vs non-GCB by IHC", "Standard R-CHOP backbone; pola-R-CHP if IPI 2-5"],
+            ["High-grade B-cell, double- / triple-hit", "MYC rearrangement plus BCL2 and/or BCL6 rearrangement", "Consider intensified DA-EPOCH-R; higher CNS risk"],
+            ["Transformed indolent (e.g. from follicular)", "Large-cell transformation of prior low-grade lymphoma", "Treat as DLBCL; prior therapy affects options"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "dlbcl_nos", "label": "DLBCL, NOS", "sets": { "biomarkers.subtype": "dlbcl_nos" }, "pills": ["DLBCL NOS"] },
+        { "id": "high_grade", "label": "High-grade double- / triple-hit", "sets": { "biomarkers.doubleHit": "positive" }, "pills": ["double-hit"] },
+        { "id": "transformed", "label": "Transformed indolent lymphoma", "sets": { "biomarkers.subtype": "transformed" }, "pills": ["transformed"] }
+      ]
+    },
+    {
+      "id": "n_staging",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Ann Arbor stage",
+      "title": "Staging and disease extent",
+      "description": "Assign Ann Arbor stage from PET/CT. Limited (non-bulky I-II) and advanced (III-IV, or bulky II) disease follow different first-line pathways.",
+      "path": "DLBCL / Staging",
+      "section": "Staging",
+      "pills": ["stage"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Ann Arbor stage (Lugano modification)",
+          "headers": ["Stage", "Involvement"],
+          "rows": [
+            ["I", "One node region or one extranodal site"],
+            ["II", "Two or more node regions on the same side of the diaphragm"],
+            ["III", "Node regions on both sides of the diaphragm"],
+            ["IV", "Diffuse extranodal involvement (e.g. marrow, liver, lung)"],
+            ["Bulk / suffix", "Bulky mass (commonly >=7.5 cm) or B symptoms modify risk"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "limited", "label": "Limited (non-bulky stage I-II)", "sets": { "stageGroup": "limited" }, "pills": ["limited"] },
+        { "id": "advanced", "label": "Advanced (stage III-IV, or bulky II)", "sets": { "stageGroup": "advanced" }, "pills": ["advanced"] }
+      ]
+    },
+    {
+      "id": "n_limited_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Limited risk",
+      "title": "Limited-stage: risk features",
+      "description": "Within limited stage, the presence of bulk or adverse risk factors (elevated LDH, age >60, ECOG >=2, stage II) determines whether an abbreviated PET-guided course or a full six-cycle course is used.",
+      "path": "DLBCL / Limited / Risk",
+      "section": "Staging",
+      "pills": ["limited", "risk"],
+      "required": true,
+      "footnotes": ["a"],
+      "options": [
+        { "id": "favorable", "label": "Favorable (non-bulky, no adverse factors)", "sets": { "limitedRisk": "favorable" }, "pills": ["favorable"] },
+        { "id": "unfavorable", "label": "Unfavorable (bulky or adverse factors)", "sets": { "limitedRisk": "unfavorable" }, "pills": ["unfavorable"] }
+      ]
+    },
+    {
+      "id": "n_limited_pet",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Interim PET",
+      "title": "Favorable limited: PET-guided abbreviation",
+      "description": "For favorable non-bulky disease an interim FDG-PET after a few cycles guides whether a shortened course (chemoimmunotherapy plus involved-site radiation, or a slightly longer chemo-only course) is sufficient.",
+      "path": "DLBCL / Limited / Interim PET",
+      "section": "Treatment",
+      "pills": ["limited", "interim PET"],
+      "required": true,
+      "options": [
+        { "id": "pet_neg", "label": "Interim PET negative (Deauville 1-3)", "sets": { "interimPET": "negative" }, "pills": ["PET-negative"] },
+        { "id": "pet_pos", "label": "Interim PET positive (Deauville 4-5)", "sets": { "interimPET": "positive" }, "pills": ["PET-positive"] }
+      ]
+    },
+    {
+      "id": "n_tx_limited_abbrev",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Abbreviated R-CHOP",
+      "title": "Favorable limited, PET-negative: abbreviated R-CHOP",
+      "description": "PET-negative favorable limited-stage disease can be cured with a shortened course.",
+      "path": "DLBCL / Limited / Abbreviated",
+      "section": "Treatment",
+      "pills": ["limited", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "R-CHOP x 3 cycles followed by involved-site radiation, OR R-CHOP x 4-6 cycles with no radiation",
+        "Confirm end-of-treatment PET (Deauville 1-3) documents complete metabolic response",
+        "The dose engine computes the R-CHOP regimen referenced below"
+      ],
+      "protocolRefs": ["rchop"]
+    },
+    {
+      "id": "n_tx_limited_ext",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Extended R-CHOP + RT",
+      "title": "Favorable limited, PET-positive: extend R-CHOP + radiation",
+      "description": "A positive interim PET calls for a full course and, usually, consolidative radiation to residual disease.",
+      "path": "DLBCL / Limited / Extended",
+      "section": "Treatment",
+      "pills": ["limited", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Complete R-CHOP to 6 cycles and add involved-site radiation to the PET-positive site",
+        "Biopsy a persistently PET-positive residual mass to exclude refractory disease",
+        "R-CHOP regimen referenced below"
+      ],
+      "protocolRefs": ["rchop"]
+    },
+    {
+      "id": "n_tx_limited_unfav",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Full R-CHOP +/- RT",
+      "title": "Unfavorable limited: full R-CHOP +/- radiation",
+      "description": "Bulky or adverse-factor limited disease is treated like advanced disease with a full course, with radiation to bulk.",
+      "path": "DLBCL / Limited / Unfavorable",
+      "section": "Treatment",
+      "pills": ["limited", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "R-CHOP x 6 cycles",
+        "Consolidative radiation to sites of bulky disease",
+        "Consider CNS-risk assessment as for advanced disease",
+        "R-CHOP regimen referenced below"
+      ],
+      "protocolRefs": ["rchop"]
+    },
+    {
+      "id": "n_cns_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "CNS risk",
+      "title": "Advanced: CNS-relapse risk",
+      "description": "Before or alongside systemic therapy, stratify CNS-relapse risk (CNS-IPI plus high-risk anatomic sites) to decide on prophylaxis.",
+      "path": "DLBCL / Advanced / CNS risk",
+      "section": "Treatment",
+      "pills": ["advanced", "CNS"],
+      "required": true,
+      "footnotes": ["c"],
+      "tables": [
+        {
+          "title": "CNS-IPI risk factors",
+          "headers": ["Factor", "Detail"],
+          "rows": [
+            ["IPI components", "Age >60, elevated LDH, ECOG >=2, stage III-IV, >1 extranodal site"],
+            ["Kidney / adrenal involvement", "Adds one point (independent of IPI)"],
+            ["High risk = 4-6 points", "Consider CNS prophylaxis"],
+            ["High-risk sites", "Testis, breast, epidural, paranasal sinus, uterus - consider prophylaxis regardless of score"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "cns_high", "label": "High CNS-relapse risk", "sets": { "cnsRisk": "high" }, "pills": ["high CNS risk"] },
+        { "id": "cns_low", "label": "Low CNS-relapse risk", "sets": { "cnsRisk": "low" }, "pills": ["low CNS risk"] }
+      ]
+    },
+    {
+      "id": "n_tx_cns",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "CNS prophylaxis",
+      "title": "High CNS risk: prophylaxis plus systemic therapy",
+      "description": "Add CNS-directed prophylaxis to standard systemic chemoimmunotherapy.",
+      "path": "DLBCL / Advanced / CNS prophylaxis",
+      "section": "Treatment",
+      "pills": ["advanced", "CNS", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["c"],
+      "bullets": [
+        "High-dose intravenous methotrexate and/or intrathecal chemotherapy alongside the systemic regimen",
+        "Then treat the systemic disease with the appropriate IPI-directed arm (R-CHOP or pola-R-CHP), or DA-EPOCH-R for double-hit disease",
+        "Benefit of prophylaxis is uncertain - individualize against renal function and toxicity",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_adv_fitness",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Fitness",
+      "title": "Advanced: fitness for full-dose therapy",
+      "description": "Physiologic fitness and cardiac reserve determine whether full-dose anthracycline-based therapy or an attenuated regimen is appropriate.",
+      "path": "DLBCL / Advanced / Fitness",
+      "section": "Treatment",
+      "pills": ["advanced", "fitness"],
+      "required": true,
+      "options": [
+        { "id": "fit", "label": "Fit for full-dose chemoimmunotherapy", "sets": { "fitness": "fit" }, "pills": ["fit"] },
+        { "id": "frail", "label": "Frail / elderly / reduced cardiac reserve", "sets": { "fitness": "frail" }, "pills": ["frail"] }
+      ]
+    },
+    {
+      "id": "n_tx_frail",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Attenuated therapy",
+      "title": "Frail / elderly: attenuated R-CHOP",
+      "description": "For patients unfit for full-dose therapy, a reduced-intensity regimen preserves curative intent while limiting toxicity.",
+      "path": "DLBCL / Advanced / Frail",
+      "section": "Treatment",
+      "pills": ["advanced", "frail", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "R-mini-CHOP (attenuated doses) for patients over about 80 or with limited reserve",
+        "Pre-phase steroids and careful cardiac monitoring; consider liposomal anthracycline or non-anthracycline backbone if EF is low",
+        "Growth-factor support and infection prophylaxis",
+        "R-CHOP-class regimen referenced below; the dose engine applies attenuation"
+      ],
+      "protocolRefs": ["rchop"]
+    },
+    {
+      "id": "n_adv_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Advanced biology",
+      "title": "Advanced (fit): double-hit vs standard",
+      "description": "High-grade double- / triple-hit lymphoma may warrant an intensified regimen; otherwise proceed to IPI-directed selection.",
+      "path": "DLBCL / Advanced / Biology",
+      "section": "Treatment",
+      "pills": ["advanced", "biomarker"],
+      "required": true,
+      "options": [
+        { "id": "double_hit", "label": "High-grade double- / triple-hit", "sets": { "biomarkers.doubleHit": "positive" }, "pills": ["double-hit"] },
+        { "id": "standard", "label": "Standard DLBCL biology", "sets": { "biomarkers.doubleHit": "negative" }, "pills": ["standard"] }
+      ]
+    },
+    {
+      "id": "n_tx_dhit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DA-EPOCH-R",
+      "title": "Double-hit: intensified DA-EPOCH-R",
+      "description": "High-grade double- / triple-hit lymphoma is often treated with a dose-adjusted infusional regimen with CNS prophylaxis.",
+      "path": "DLBCL / Advanced / Double-hit",
+      "section": "Treatment",
+      "pills": ["advanced", "double-hit", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Dose-adjusted EPOCH-R (rituximab, etoposide, prednisone, vincristine, cyclophosphamide, doxorubicin) with dose escalation by nadir counts",
+        "Include CNS prophylaxis given the higher CNS-relapse risk",
+        "Reassess with end-of-treatment PET; enroll in a trial where available",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_adv_ipi",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "IPI selection",
+      "title": "Advanced (fit, standard): IPI-directed backbone",
+      "description": "IPI risk selects between the R-CHOP backbone and the polatuzumab-containing pola-R-CHP backbone.",
+      "path": "DLBCL / Advanced / IPI",
+      "section": "Treatment",
+      "pills": ["advanced", "IPI"],
+      "required": true,
+      "footnotes": ["a", "b"],
+      "tables": [
+        {
+          "title": "International Prognostic Index (IPI)",
+          "headers": ["Risk group", "IPI score", "Typical backbone"],
+          "rows": [
+            ["Low", "0-1", "R-CHOP x 6"],
+            ["Low-intermediate", "2", "R-CHOP or pola-R-CHP"],
+            ["High-intermediate", "3", "pola-R-CHP (consider)"],
+            ["High", "4-5", "pola-R-CHP (consider)"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "ipi_low", "label": "IPI 0-1 (low)", "sets": { "ipi": "low" }, "pills": ["IPI 0-1"] },
+        { "id": "ipi_high", "label": "IPI 2-5 (intermediate-high)", "sets": { "ipi": "int_high" }, "pills": ["IPI 2-5"] }
+      ]
+    },
+    {
+      "id": "n_tx_rchop",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "R-CHOP",
+      "title": "Advanced, IPI 0-1: R-CHOP x 6",
+      "description": "Six cycles of R-CHOP is the standard backbone for low-risk advanced DLBCL.",
+      "path": "DLBCL / Advanced / R-CHOP",
+      "section": "Treatment",
+      "pills": ["advanced", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "R-CHOP x 6 cycles (rituximab, cyclophosphamide, doxorubicin, vincristine, prednisone)",
+        "Interim and end-of-treatment PET to confirm response",
+        "Growth-factor support and tumor-lysis prophylaxis for high burden",
+        "R-CHOP regimen referenced below"
+      ],
+      "protocolRefs": ["rchop"]
+    },
+    {
+      "id": "n_tx_polarchp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "pola-R-CHP",
+      "title": "Advanced, IPI 2-5: pola-R-CHP",
+      "description": "For intermediate-to-high-risk disease, polatuzumab vedotin replaces vincristine (pola-R-CHP), which improved progression-free survival versus R-CHOP.",
+      "path": "DLBCL / Advanced / pola-R-CHP",
+      "section": "Treatment",
+      "pills": ["advanced", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Pola-R-CHP x 6 cycles: polatuzumab vedotin + rituximab, cyclophosphamide, doxorubicin, prednisone (vincristine omitted)",
+        "Followed by 2 further doses of rituximab",
+        "Monitor for peripheral neuropathy and cytopenias",
+        "R-CHOP remains an acceptable alternative; no pola-R-CHP dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_response",
+      "nodeCategory": "surveillance",
+      "nodeType": "question",
+      "name": "Response",
+      "title": "End-of-treatment response assessment",
+      "description": "Restage with FDG-PET at the end of first-line therapy. A complete metabolic response moves to surveillance; residual disease enters the relapsed / refractory pathway.",
+      "path": "DLBCL / Response",
+      "section": "Surveillance",
+      "pills": ["response"],
+      "required": true,
+      "options": [
+        { "id": "cr", "label": "Complete metabolic response (Deauville 1-3)", "sets": { "response": "cr" }, "pills": ["CR"] },
+        { "id": "refractory", "label": "Residual / refractory disease (Deauville 4-5, biopsy-proven)", "sets": { "response": "refractory" }, "pills": ["refractory"] }
+      ]
+    },
+    {
+      "id": "n_rr_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Relapse workup",
+      "title": "Relapsed / refractory: confirm and restage",
+      "description": "Confirm relapse histologically and restage before choosing a second-line strategy.",
+      "path": "DLBCL / Relapse / Workup",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "workup"],
+      "required": true,
+      "bullets": [
+        "Biopsy to confirm relapse and exclude a different histology or transformation",
+        "PET/CT restaging; re-check LDH, organ function, hepatitis/HIV status",
+        "Assess fitness, prior anthracycline exposure, and candidacy for cellular therapy",
+        "Re-evaluate CNS risk and symptoms"
+      ],
+      "options": [
+        { "id": "continue", "label": "Relapse confirmed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_rr_eligibility",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Cellular-therapy fit",
+      "title": "Relapsed: fit for intensive / cellular therapy?",
+      "description": "Candidacy for CAR T-cell therapy or high-dose therapy with autologous transplant separates the intensive pathway from the non-intensive pathway.",
+      "path": "DLBCL / Relapse / Eligibility",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "eligibility"],
+      "required": true,
+      "options": [
+        { "id": "fit", "label": "Fit for CAR-T / transplant", "sets": { "cellularFit": "yes" }, "pills": ["fit"] },
+        { "id": "unfit", "label": "Not a cellular-therapy / transplant candidate", "sets": { "cellularFit": "no" }, "pills": ["unfit"] }
+      ]
+    },
+    {
+      "id": "n_rr_timing",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Relapse timing",
+      "title": "Fit relapse: timing / prior cellular therapy",
+      "description": "Timing of relapse relative to first-line therapy, and whether the patient has already had cellular therapy or transplant, selects the second-line strategy.",
+      "path": "DLBCL / Relapse / Timing",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "timing"],
+      "required": true,
+      "footnotes": ["d"],
+      "options": [
+        { "id": "early", "label": "Primary refractory or relapse < 12 months", "sets": { "relapseTiming": "early" }, "pills": ["early / refractory"] },
+        { "id": "late", "label": "Relapse >= 12 months after first line", "sets": { "relapseTiming": "late" }, "pills": ["late relapse"] },
+        { "id": "post_cellular", "label": "Progression after prior CAR-T or transplant", "sets": { "relapseTiming": "post_cellular" }, "pills": ["post-cellular"] }
+      ]
+    },
+    {
+      "id": "n_tx_cart",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "CAR T-cell",
+      "title": "Early / refractory relapse: second-line CD19 CAR-T",
+      "description": "For primary-refractory disease or relapse within 12 months, second-line CD19 CAR T-cell therapy is preferred over salvage plus transplant.",
+      "path": "DLBCL / Relapse / CAR-T",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Axicabtagene ciloleucel or lisocabtagene maraleucel (CD19 CAR-T)",
+        "Bridging therapy may be needed while cells are manufactured",
+        "Monitor for cytokine-release syndrome and neurotoxicity (ICANS); manage at a certified center",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_tx_salvage_asct",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Salvage + ASCT",
+      "title": "Late relapse: salvage chemo then autologous transplant",
+      "description": "For relapse at or beyond 12 months in a transplant-fit patient, platinum-based salvage followed by high-dose therapy and autologous stem-cell transplant remains standard.",
+      "path": "DLBCL / Relapse / Salvage + ASCT",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Platinum-based salvage chemoimmunotherapy (e.g. R-ICE, R-DHAP, R-GDP)",
+        "If chemosensitive: high-dose conditioning (e.g. BEAM) and autologous stem-cell transplant",
+        "If chemorefractory: proceed to CD19 CAR T-cell therapy",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_rr_unfit_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Non-intensive line",
+      "title": "Not transplant / CAR-T eligible: line of therapy",
+      "description": "For patients who are not cellular-therapy candidates, the number of prior lines guides selection among antibody-drug conjugates, immunomodulatory combinations, and bispecific antibodies.",
+      "path": "DLBCL / Relapse / Non-intensive",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "line"],
+      "required": true,
+      "options": [
+        { "id": "second_line", "label": "Second line (one prior therapy)", "sets": { "line": "second" }, "pills": ["2nd line"] },
+        { "id": "third_line", "label": "Third line or beyond", "sets": { "line": "third_plus" }, "pills": ["3rd line+"] }
+      ]
+    },
+    {
+      "id": "n_tx_pola_br",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pola-BR / Tafa-len",
+      "title": "Second line, non-transplant: pola-BR or tafasitamab-lenalidomide",
+      "description": "Transplant-ineligible second-line options combine targeted agents with chemotherapy or immunomodulation.",
+      "path": "DLBCL / Relapse / Non-intensive 2L",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Polatuzumab vedotin + bendamustine + rituximab (pola-BR)",
+        "Or tafasitamab + lenalidomide for transplant-ineligible patients",
+        "Or rituximab-gemcitabine-oxaliplatin (R-GemOx) for less-fit patients",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_tx_bispecific",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Bispecific antibody",
+      "title": "Third line or beyond: CD20xCD3 bispecific",
+      "description": "In the third-line-and-beyond setting, off-the-shelf CD20xCD3 bispecific antibodies provide durable responses.",
+      "path": "DLBCL / Relapse / Bispecific",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Glofitamab (fixed-duration) or epcoritamab (continuous) CD20xCD3 bispecific antibody",
+        "Step-up dosing with CRS monitoring and tumor-lysis precautions",
+        "Loncastuximab tesirine is an alternative single agent",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_tx_thirdline",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Post-cellular relapse",
+      "title": "Progression after CAR-T / transplant: next options",
+      "description": "After prior cellular therapy or transplant, options are non-cross-resistant agents, bispecifics, allogeneic transplant in selected fit patients, or a clinical trial.",
+      "path": "DLBCL / Relapse / Post-cellular",
+      "section": "Recurrence",
+      "pills": ["relapsed/refractory", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "CD20xCD3 bispecific antibody (glofitamab or epcoritamab) if not already used",
+        "Loncastuximab tesirine, tafasitamab-lenalidomide, or pola-BR depending on prior exposure",
+        "Consider allogeneic transplant in selected younger, fit, chemosensitive patients",
+        "Prioritize clinical-trial enrollment",
+        "No dose protocol here - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance",
+      "description": "Follow-up after a complete response. Most relapses occur within the first 2 years; routine surveillance imaging is limited.",
+      "path": "DLBCL / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "History, exam, and labs (CBC, LDH) every 3-6 months for 2 years, then every 6-12 months to 5 years",
+        "Routine surveillance CT/PET is not recommended in asymptomatic remission; image for symptoms or exam findings",
+        "Educate on relapse symptoms; biopsy any suspected relapse before treating",
+        "Monitor for late effects: cardiac (anthracycline), second malignancy, and infection risk"
+      ]
+    }
+  ],
+  "links": [
+    { "id": "l_wk_state", "from": "n_workup", "to": "n_state", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_state_newdx", "from": "n_state", "to": "n_pathology", "fromOptions": ["newly_dx"], "linkCategory": "conditional" },
+    { "id": "l_state_restage", "from": "n_state", "to": "n_response", "fromOptions": ["restaging"], "linkCategory": "conditional" },
+    { "id": "l_state_relapse", "from": "n_state", "to": "n_rr_workup", "fromOptions": ["relapsed"], "linkCategory": "conditional" },
+    { "id": "l_state_surv", "from": "n_state", "to": "n_surv", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
+
+    { "id": "l_path_nos", "from": "n_pathology", "to": "n_staging", "fromOptions": ["dlbcl_nos"], "linkCategory": "conditional" },
+    { "id": "l_path_hg", "from": "n_pathology", "to": "n_staging", "fromOptions": ["high_grade"], "linkCategory": "conditional" },
+    { "id": "l_path_tr", "from": "n_pathology", "to": "n_staging", "fromOptions": ["transformed"], "linkCategory": "conditional" },
+
+    { "id": "l_stg_limited", "from": "n_staging", "to": "n_limited_risk", "fromOptions": ["limited"], "linkCategory": "conditional" },
+    { "id": "l_stg_advanced", "from": "n_staging", "to": "n_cns_risk", "fromOptions": ["advanced"], "linkCategory": "conditional" },
+
+    { "id": "l_lim_fav", "from": "n_limited_risk", "to": "n_limited_pet", "fromOptions": ["favorable"], "linkCategory": "conditional" },
+    { "id": "l_lim_unfav", "from": "n_limited_risk", "to": "n_tx_limited_unfav", "fromOptions": ["unfavorable"], "linkCategory": "conditional" },
+
+    { "id": "l_pet_neg", "from": "n_limited_pet", "to": "n_tx_limited_abbrev", "fromOptions": ["pet_neg"], "linkCategory": "conditional" },
+    { "id": "l_pet_pos", "from": "n_limited_pet", "to": "n_tx_limited_ext", "fromOptions": ["pet_pos"], "linkCategory": "conditional" },
+
+    { "id": "l_cns_high", "from": "n_cns_risk", "to": "n_tx_cns", "fromOptions": ["cns_high"], "linkCategory": "conditional" },
+    { "id": "l_cns_low", "from": "n_cns_risk", "to": "n_adv_fitness", "fromOptions": ["cns_low"], "linkCategory": "conditional" },
+
+    { "id": "l_fit_fit", "from": "n_adv_fitness", "to": "n_adv_biomarker", "fromOptions": ["fit"], "linkCategory": "conditional" },
+    { "id": "l_fit_frail", "from": "n_adv_fitness", "to": "n_tx_frail", "fromOptions": ["frail"], "linkCategory": "conditional" },
+
+    { "id": "l_bio_dhit", "from": "n_adv_biomarker", "to": "n_tx_dhit", "fromOptions": ["double_hit"], "linkCategory": "conditional" },
+    { "id": "l_bio_std", "from": "n_adv_biomarker", "to": "n_adv_ipi", "fromOptions": ["standard"], "linkCategory": "conditional" },
+
+    { "id": "l_ipi_low", "from": "n_adv_ipi", "to": "n_tx_rchop", "fromOptions": ["ipi_low"], "linkCategory": "conditional" },
+    { "id": "l_ipi_high", "from": "n_adv_ipi", "to": "n_tx_polarchp", "fromOptions": ["ipi_high"], "linkCategory": "conditional" },
+
+    { "id": "l_resp_cr", "from": "n_response", "to": "n_surv", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_resp_ref", "from": "n_response", "to": "n_rr_workup", "fromOptions": ["refractory"], "linkCategory": "conditional" },
+
+    { "id": "l_rrwk_elig", "from": "n_rr_workup", "to": "n_rr_eligibility", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_elig_fit", "from": "n_rr_eligibility", "to": "n_rr_timing", "fromOptions": ["fit"], "linkCategory": "conditional" },
+    { "id": "l_elig_unfit", "from": "n_rr_eligibility", "to": "n_rr_unfit_line", "fromOptions": ["unfit"], "linkCategory": "conditional" },
+
+    { "id": "l_tim_early", "from": "n_rr_timing", "to": "n_tx_cart", "fromOptions": ["early"], "linkCategory": "conditional" },
+    { "id": "l_tim_late", "from": "n_rr_timing", "to": "n_tx_salvage_asct", "fromOptions": ["late"], "linkCategory": "conditional" },
+    { "id": "l_tim_post", "from": "n_rr_timing", "to": "n_tx_thirdline", "fromOptions": ["post_cellular"], "linkCategory": "conditional" },
+
+    { "id": "l_unfit_2l", "from": "n_rr_unfit_line", "to": "n_tx_pola_br", "fromOptions": ["second_line"], "linkCategory": "conditional" },
+    { "id": "l_unfit_3l", "from": "n_rr_unfit_line", "to": "n_tx_bispecific", "fromOptions": ["third_line"], "linkCategory": "conditional" }
+  ]
+}

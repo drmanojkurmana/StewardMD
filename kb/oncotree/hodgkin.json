@@ -1,0 +1,1487 @@
+{
+  "guideline": "hodgkin",
+  "title": "Hodgkin Lymphoma",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "hodgkin_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Pathway branches by histology (classical HL vs NLPHL vs pediatric/adolescent vs relapsed), then workup -> Ann Arbor staging and favorable/unfavorable or IPS risk -> stage/regimen-directed treatment (ABVD vs BV-AVD vs escalated BEACOPP) with interim-PET (Deauville) response adaptation -> surveillance -> relapsed/refractory salvage and transplant/cellular pathways. Treatment leaves show checklist guidance without invented doses; only pediatric leaves reference an existing StewardMD Standard Protocol. Structural content is standard oncology; no proprietary guideline text reproduced. DRAFT - not clinically activated.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN / DeVita / Harrison), Hodgkin Lymphoma. Pediatric regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "startNodeIds": [
+    "n_entry"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "Interim FDG-PET after 2 cycles is scored on the 5-point Deauville scale; Deauville 1-3 is treated as a negative (good) metabolic response and Deauville 4-5 as positive (inadequate) response.",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "Bleomycin carries a risk of cumulative pulmonary toxicity; response-adapted omission after a negative interim PET reduces lung exposure without loss of disease control in the settings where it has been studied.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Discuss fertility preservation before gonadotoxic chemotherapy or pelvic radiation, and counsel on long-term risks (second malignancy, cardiac, thyroid) that drive lifelong survivorship follow-up.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Escalated BEACOPP achieves high disease control at the cost of greater acute toxicity, infertility, and second-malignancy risk; reserve for selected fit, higher-risk younger patients and weigh against ABVD/BV-AVD.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Presentation",
+      "title": "Hodgkin lymphoma: histology / presentation",
+      "section": "Workup",
+      "description": "Management branches first by histologic subtype and treatment context. Choose the applicable category.",
+      "path": "Hodgkin / Type",
+      "pills": [
+        "type"
+      ],
+      "required": true,
+      "bullets": [
+        "Classical Hodgkin lymphoma (cHL) - newly diagnosed",
+        "Nodular lymphocyte-predominant Hodgkin lymphoma (NLPHL)",
+        "Pediatric / adolescent classical HL",
+        "Relapsed or refractory after first-line therapy"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "chl",
+          "label": "Classical Hodgkin lymphoma (newly diagnosed)",
+          "sets": {
+            "histology": "chl"
+          },
+          "pills": [
+            "cHL"
+          ]
+        },
+        {
+          "id": "nlphl",
+          "label": "Nodular lymphocyte-predominant (NLPHL)",
+          "sets": {
+            "histology": "nlphl"
+          },
+          "pills": [
+            "NLPHL"
+          ]
+        },
+        {
+          "id": "peds",
+          "label": "Pediatric / adolescent classical HL",
+          "sets": {
+            "histology": "peds"
+          },
+          "pills": [
+            "pediatric"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed / refractory after first-line",
+          "sets": {
+            "histology": "relapsed"
+          },
+          "pills": [
+            "relapsed / refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "cHL workup",
+      "title": "Classical HL: workup and staging studies",
+      "section": "Workup",
+      "description": "Confirm the diagnosis and complete pre-treatment staging and organ-function baselines.",
+      "path": "Hodgkin / cHL / Workup",
+      "pills": [
+        "cHL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional / core-needle nodal biopsy with hematopathology review confirming CD30-positive Reed-Sternberg cells",
+        "History and physical: assess B symptoms (fever, drenching night sweats, weight loss), pruritus, ECOG performance status",
+        "Whole-body FDG-PET/CT for staging (Ann Arbor with Lugano modifications); mark bulky disease",
+        "CBC, ESR, LDH, comprehensive metabolic panel, albumin; HIV, hepatitis B/C serologies",
+        "Baseline echocardiogram / MUGA before anthracycline and pulmonary function tests before bleomycin",
+        "Fertility counseling and preservation before gonadotoxic therapy; pregnancy test where applicable"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_chl_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "cHL stage group",
+      "title": "Classical HL: Ann Arbor stage group",
+      "section": "Staging",
+      "description": "Split into limited-stage (I-II) and advanced-stage (III-IV) disease; limited stage is further stratified by favorable vs unfavorable risk factors.",
+      "path": "Hodgkin / cHL / Stage",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "Ann Arbor / Lugano stage (simplified)",
+          "headers": [
+            "Stage",
+            "Extent"
+          ],
+          "rows": [
+            [
+              "I",
+              "Single nodal region or single extranodal site"
+            ],
+            [
+              "II",
+              "Two or more nodal regions, same side of the diaphragm"
+            ],
+            [
+              "III",
+              "Nodal regions on both sides of the diaphragm"
+            ],
+            [
+              "IV",
+              "Diffuse extranodal involvement (e.g. liver, marrow, lung)"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "limited",
+          "label": "Limited stage (I-II)",
+          "sets": {
+            "stage": "limited"
+          },
+          "pills": [
+            "stage I-II"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced stage (III-IV)",
+          "sets": {
+            "stage": "advanced"
+          },
+          "pills": [
+            "stage III-IV"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_chl_earlyrisk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Early risk group",
+      "title": "Limited-stage cHL: favorable vs unfavorable",
+      "section": "Staging",
+      "description": "Any listed adverse factor moves early-stage disease from favorable to unfavorable and intensifies therapy.",
+      "path": "Hodgkin / cHL / Early risk",
+      "pills": [
+        "risk"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "Common unfavorable factors in early-stage cHL",
+          "headers": [
+            "Factor",
+            "Unfavorable threshold (typical)"
+          ],
+          "rows": [
+            [
+              "Bulky mediastinal / nodal mass",
+              "Large mass by institutional criteria"
+            ],
+            [
+              "Elevated ESR / B symptoms",
+              "ESR >= 50 (or >= 30 with B symptoms)"
+            ],
+            [
+              "Number of nodal regions",
+              ">= 3 involved sites"
+            ],
+            [
+              "Extranodal extension",
+              "Present (E lesion)"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "favorable",
+          "label": "Favorable (no adverse factors)",
+          "sets": {
+            "risk": "favorable"
+          },
+          "pills": [
+            "favorable"
+          ]
+        },
+        {
+          "id": "unfavorable",
+          "label": "Unfavorable (>= 1 adverse factor)",
+          "sets": {
+            "risk": "unfavorable"
+          },
+          "pills": [
+            "unfavorable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_early_fav_pet",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Early favorable PET",
+      "title": "Early favorable cHL: interim PET after ABVD x2",
+      "section": "Treatment",
+      "description": "Start ABVD; reassess with interim FDG-PET after 2 cycles and adapt by Deauville response.",
+      "path": "Hodgkin / cHL / Early favorable / PET",
+      "pills": [
+        "favorable",
+        "PET-adapted"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Give ABVD x2 cycles, then interim FDG-PET (Deauville)",
+        "Negative interim PET supports abbreviating therapy and de-escalation",
+        "Positive interim PET prompts continued / intensified chemotherapy plus radiation"
+      ],
+      "options": [
+        {
+          "id": "pet_neg",
+          "label": "Interim PET negative (Deauville 1-3)",
+          "sets": {
+            "interimPET": "negative"
+          },
+          "pills": [
+            "PET-"
+          ]
+        },
+        {
+          "id": "pet_pos",
+          "label": "Interim PET positive (Deauville 4-5)",
+          "sets": {
+            "interimPET": "positive"
+          },
+          "pills": [
+            "PET+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ef_petneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Early fav PET-neg",
+      "title": "Early favorable, interim PET-negative: de-escalated therapy",
+      "section": "Treatment",
+      "description": "Complete abbreviated chemotherapy with or without involved-site radiation.",
+      "path": "Hodgkin / cHL / Early favorable / PET-neg",
+      "pills": [
+        "favorable",
+        "PET-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Option A: complete a short course of ABVD (total ~2-4 cycles) followed by involved-site radiation (ISRT) - combined-modality",
+        "Option B: chemotherapy alone (ABVD to a total of ~3-4 cycles) to spare radiation in selected patients",
+        "Consider omitting bleomycin in later cycles after a negative interim PET to reduce pulmonary toxicity",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_ef_petpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Early fav PET-pos",
+      "title": "Early favorable, interim PET-positive: escalate + ISRT",
+      "section": "Treatment",
+      "description": "Intensify systemic therapy and add involved-site radiation.",
+      "path": "Hodgkin / cHL / Early favorable / PET-pos",
+      "pills": [
+        "favorable",
+        "PET+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Continue full-intensity chemotherapy (complete ABVD, or escalate to escalated BEACOPP in fit patients)",
+        "Add involved-site radiation (ISRT) to residual / bulky sites",
+        "Re-biopsy a persistently PET-positive site to exclude refractory disease before declaring failure",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_early_unfav_pet",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Early unfavorable PET",
+      "title": "Early unfavorable cHL: interim PET after ABVD x2",
+      "section": "Treatment",
+      "description": "Start ABVD; reassess with interim FDG-PET after 2 cycles and adapt by Deauville response. Unfavorable disease generally receives more cycles and radiation to bulk.",
+      "path": "Hodgkin / cHL / Early unfavorable / PET",
+      "pills": [
+        "unfavorable",
+        "PET-adapted"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "pet_neg",
+          "label": "Interim PET negative (Deauville 1-3)",
+          "sets": {
+            "interimPET": "negative"
+          },
+          "pills": [
+            "PET-"
+          ]
+        },
+        {
+          "id": "pet_pos",
+          "label": "Interim PET positive (Deauville 4-5)",
+          "sets": {
+            "interimPET": "positive"
+          },
+          "pills": [
+            "PET+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_eu_petneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Early unfav PET-neg",
+      "title": "Early unfavorable, interim PET-negative: combined-modality",
+      "section": "Treatment",
+      "description": "Complete chemotherapy with involved-site radiation.",
+      "path": "Hodgkin / cHL / Early unfavorable / PET-neg",
+      "pills": [
+        "unfavorable",
+        "PET-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Complete ABVD (typically ~4 cycles total) followed by involved-site radiation (ISRT), especially to bulky sites",
+        "Chemotherapy-alone (extending ABVD cycles, omitting radiation) is an option in selected non-bulky patients to reduce late radiation risk",
+        "Consider dropping bleomycin after a negative interim PET to limit pulmonary toxicity",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_eu_petpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Early unfav PET-pos",
+      "title": "Early unfavorable, interim PET-positive: intensify + ISRT",
+      "section": "Treatment",
+      "description": "Escalate systemic therapy and consolidate with radiation.",
+      "path": "Hodgkin / cHL / Early unfavorable / PET-pos",
+      "pills": [
+        "unfavorable",
+        "PET+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Escalate systemic therapy (e.g. switch to escalated BEACOPP in fit patients) and add involved-site radiation (ISRT)",
+        "Re-biopsy a persistently PET-positive site to confirm active disease before treating as refractory",
+        "If truly refractory, route to the relapsed / refractory salvage pathway",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_adv_ips",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Advanced IPS",
+      "title": "Advanced cHL: International Prognostic Score (IPS)",
+      "section": "Staging",
+      "description": "The IPS counts adverse factors and informs regimen intensity for advanced-stage disease; it does not by itself mandate a specific drug.",
+      "path": "Hodgkin / cHL / Advanced / IPS",
+      "pills": [
+        "IPS",
+        "risk"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "IPS adverse factors (1 point each)",
+          "headers": [
+            "Factor",
+            "Adverse value"
+          ],
+          "rows": [
+            [
+              "Serum albumin",
+              "< 4 g/dL"
+            ],
+            [
+              "Hemoglobin",
+              "< 10.5 g/dL"
+            ],
+            [
+              "Sex",
+              "Male"
+            ],
+            [
+              "Age",
+              ">= 45 years"
+            ],
+            [
+              "Stage",
+              "Stage IV"
+            ],
+            [
+              "White cell count",
+              ">= 15,000/uL"
+            ],
+            [
+              "Lymphocyte count",
+              "< 600/uL or < 8% of WBC"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "low_ips",
+          "label": "Lower IPS (0-3)",
+          "sets": {
+            "ips": "low"
+          },
+          "pills": [
+            "IPS 0-3"
+          ]
+        },
+        {
+          "id": "high_ips",
+          "label": "Higher IPS (4-7)",
+          "sets": {
+            "ips": "high"
+          },
+          "pills": [
+            "IPS 4-7"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adv_regimen",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Advanced regimen",
+      "title": "Advanced cHL: frontline regimen choice",
+      "section": "Treatment",
+      "description": "Select the first-line backbone; ABVD is PET-adapted, BV-AVD front-loads brentuximab vedotin, and escalated BEACOPP is reserved for selected higher-risk fit younger patients.",
+      "path": "Hodgkin / cHL / Advanced / Regimen",
+      "pills": [
+        "regimen"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "abvd",
+          "label": "ABVD (PET-adapted)",
+          "sets": {
+            "regimen": "abvd"
+          },
+          "pills": [
+            "ABVD"
+          ]
+        },
+        {
+          "id": "bvavd",
+          "label": "BV-AVD (brentuximab + AVD)",
+          "sets": {
+            "regimen": "bvavd"
+          },
+          "pills": [
+            "BV-AVD"
+          ]
+        },
+        {
+          "id": "beacopp",
+          "label": "Escalated BEACOPP (selected fit / high-risk)",
+          "sets": {
+            "regimen": "beacopp"
+          },
+          "pills": [
+            "esc-BEACOPP"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adv_abvd_pet",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Advanced ABVD PET",
+      "title": "Advanced cHL on ABVD: interim PET after 2 cycles",
+      "section": "Treatment",
+      "description": "Adapt ABVD by interim FDG-PET (Deauville) after 2 cycles - de-escalate on a negative scan, escalate on a positive scan.",
+      "path": "Hodgkin / cHL / Advanced / ABVD / PET",
+      "pills": [
+        "ABVD",
+        "PET-adapted"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "options": [
+        {
+          "id": "pet_neg",
+          "label": "Interim PET negative (Deauville 1-3)",
+          "sets": {
+            "interimPET": "negative"
+          },
+          "pills": [
+            "PET-"
+          ]
+        },
+        {
+          "id": "pet_pos",
+          "label": "Interim PET positive (Deauville 4-5)",
+          "sets": {
+            "interimPET": "positive"
+          },
+          "pills": [
+            "PET+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adv_abvd_petneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced ABVD PET-neg",
+      "title": "Advanced cHL, ABVD interim PET-negative: drop bleomycin",
+      "section": "Treatment",
+      "description": "Continue AVD (bleomycin omitted) to complete therapy.",
+      "path": "Hodgkin / cHL / Advanced / ABVD / PET-neg",
+      "pills": [
+        "ABVD",
+        "PET-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Omit bleomycin and continue AVD to complete ~6 cycles total",
+        "End-of-treatment PET to confirm complete metabolic response",
+        "Radiation is generally not added for advanced-stage disease in complete metabolic response",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_adv_abvd_petpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced ABVD PET-pos",
+      "title": "Advanced cHL, ABVD interim PET-positive: escalate",
+      "section": "Treatment",
+      "description": "Switch to a more intensive regimen for an inadequate interim response.",
+      "path": "Hodgkin / cHL / Advanced / ABVD / PET-pos",
+      "pills": [
+        "ABVD",
+        "PET+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Escalate to escalated BEACOPP (in fit patients) for the remaining cycles",
+        "Consider radiation to residual bulky / focally PET-positive sites",
+        "Re-biopsy persistent PET positivity to confirm active disease; if refractory, route to the salvage pathway",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_adv_bvavd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced BV-AVD",
+      "title": "Advanced cHL: BV-AVD (brentuximab vedotin + AVD)",
+      "section": "Treatment",
+      "description": "Brentuximab vedotin replaces bleomycin in the AVD backbone as a first-line option.",
+      "path": "Hodgkin / cHL / Advanced / BV-AVD",
+      "pills": [
+        "BV-AVD",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Brentuximab vedotin + doxorubicin, vinblastine, dacarbazine (A+AVD) for ~6 cycles",
+        "Give primary G-CSF prophylaxis (higher neutropenia risk) and monitor for peripheral neuropathy",
+        "End-of-treatment PET to confirm response",
+        "No dedicated adult HL dose protocol exists in StewardMD yet - dosing is per standard references; guidance only",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_adv_beacopp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Advanced esc-BEACOPP",
+      "title": "Advanced cHL: escalated BEACOPP",
+      "section": "Treatment",
+      "description": "Intensive multi-agent regimen for selected fit, higher-risk younger patients.",
+      "path": "Hodgkin / cHL / Advanced / BEACOPP",
+      "pills": [
+        "esc-BEACOPP",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Escalated BEACOPP, number of cycles PET-adapted; high disease control but greater acute toxicity",
+        "Mandatory G-CSF support; counsel on infertility and second-malignancy risk before starting",
+        "Reserve for fit younger patients with higher IPS after explicit risk-benefit discussion",
+        "No dedicated adult HL dose protocol exists in StewardMD yet - dosing is per standard references; guidance only",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Survivorship surveillance / follow-up",
+      "section": "Surveillance",
+      "description": "Follow-up after curative-intent therapy, emphasizing relapse detection and late-effect screening.",
+      "path": "Hodgkin / Surveillance",
+      "pills": [
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "History and physical every 3-6 months for 1-2 years, then lengthening intervals; labs (CBC, ESR if elevated at baseline, TSH if neck irradiated)",
+        "Avoid routine surveillance PET in asymptomatic remission (false positives); image to evaluate new symptoms or findings",
+        "Screen for late effects: cardiac, thyroid, pulmonary, and second malignancies (including breast screening after chest radiation)",
+        "Reinforce vaccination and infection precautions; counsel on fertility and psychosocial survivorship needs",
+        "If relapse is suspected: biopsy-confirm and enter the relapsed / refractory pathway"
+      ],
+      "linkTo": "n_relapse_salvage",
+      "linkLabel": "If relapse is confirmed: go to the relapsed / refractory pathway"
+    },
+    {
+      "id": "n_nlphl_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "NLPHL workup",
+      "title": "NLPHL: workup",
+      "section": "Workup",
+      "description": "NLPHL is CD20-positive and CD30/CD15-negative, behaves more indolently, and is managed differently from classical HL.",
+      "path": "Hodgkin / NLPHL / Workup",
+      "pills": [
+        "NLPHL",
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "Excisional biopsy with immunohistochemistry (CD20+, CD45+, CD30-, CD15-) confirming NLPHL; assess for a variant / transformed pattern",
+        "FDG-PET/CT staging; note that transformation to aggressive B-cell lymphoma occurs in a minority",
+        "Baseline labs (CBC, LDH, metabolic panel); viral serologies before anti-CD20 therapy",
+        "Fertility counseling if chemotherapy is planned"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_nlphl_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "NLPHL stage",
+      "title": "NLPHL: stage / pattern",
+      "section": "Staging",
+      "description": "Treatment intensity is guided by stage and by whether a variant / transformed histology is present.",
+      "path": "Hodgkin / NLPHL / Stage",
+      "pills": [
+        "NLPHL",
+        "staging"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "early",
+          "label": "Early stage (IA / IIA, non-bulky)",
+          "sets": {
+            "stage": "early"
+          },
+          "pills": [
+            "stage IA-IIA"
+          ]
+        },
+        {
+          "id": "advanced",
+          "label": "Advanced / symptomatic (III-IV or B symptoms)",
+          "sets": {
+            "stage": "advanced"
+          },
+          "pills": [
+            "advanced"
+          ]
+        },
+        {
+          "id": "transformed",
+          "label": "Transformed to aggressive B-cell lymphoma",
+          "sets": {
+            "stage": "transformed"
+          },
+          "pills": [
+            "transformed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_nlphl_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "NLPHL early",
+      "title": "Early-stage NLPHL: radiation or observation",
+      "section": "Treatment",
+      "description": "Localized NLPHL is often cured with radiation alone; observation after complete excision is reasonable in select cases.",
+      "path": "Hodgkin / NLPHL / Early",
+      "pills": [
+        "NLPHL",
+        "early",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Involved-site radiation (ISRT) alone for early-stage disease",
+        "Observation after complete surgical excision is an option for a single fully resected node",
+        "Rituximab (anti-CD20) may be added or substituted in selected patients",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_nlphl_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "NLPHL advanced",
+      "title": "Advanced / symptomatic NLPHL: rituximab-based systemic therapy",
+      "section": "Treatment",
+      "description": "Systemic therapy incorporating an anti-CD20 antibody, with chemotherapy for higher burden.",
+      "path": "Hodgkin / NLPHL / Advanced",
+      "pills": [
+        "NLPHL",
+        "advanced",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Chemoimmunotherapy: rituximab + chemotherapy (e.g. ABVD-type or CHOP-type backbone) for symptomatic / advanced disease",
+        "Rituximab monotherapy is an option for low-burden, asymptomatic disease",
+        "Consolidative radiation to bulky sites as indicated",
+        "No dedicated NLPHL dose protocol exists in StewardMD yet - dosing is per standard references; guidance only",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_nlphl_transform",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "NLPHL transformed",
+      "title": "Transformed NLPHL: treat as aggressive B-cell lymphoma",
+      "section": "Treatment",
+      "description": "Histologic transformation is managed as aggressive large B-cell lymphoma.",
+      "path": "Hodgkin / NLPHL / Transformed",
+      "pills": [
+        "transformed",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Treat with anthracycline-based chemoimmunotherapy (R-CHOP-type) as for aggressive large B-cell lymphoma",
+        "Consider consolidative radiation to bulky / localized sites",
+        "Evaluate high-risk / relapsed transformation for autologous transplant per lymphoma pathways",
+        "Then survivorship surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_peds_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Pediatric stage",
+      "title": "Pediatric / adolescent cHL: risk group",
+      "section": "Staging",
+      "description": "Pediatric classical HL is treated with response-adapted multi-agent chemotherapy (interim-PET guided), minimizing radiation to reduce late effects in growing patients.",
+      "path": "Hodgkin / Pediatric / Risk",
+      "pills": [
+        "pediatric",
+        "risk"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "low",
+          "label": "Low risk (early favorable)",
+          "sets": {
+            "risk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        },
+        {
+          "id": "highadv",
+          "label": "Intermediate / high risk (advanced)",
+          "sets": {
+            "risk": "highadv"
+          },
+          "pills": [
+            "intermediate / high"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_peds_early",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pediatric low-risk",
+      "title": "Pediatric low-risk cHL: abbreviated response-adapted chemotherapy",
+      "section": "Treatment",
+      "description": "Short-course multi-agent chemotherapy with radiation only for slow responders.",
+      "path": "Hodgkin / Pediatric / Low risk",
+      "pills": [
+        "pediatric",
+        "low risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "Abbreviated response-adapted multi-agent chemotherapy (e.g. ABVE-PC backbone); minimize cumulative anthracycline and alkylator exposure",
+        "Reserve involved-site radiation for an inadequate interim-PET response (slow early responder)",
+        "Coordinate with pediatric oncology and long-term survivorship; the dose engine computes body-surface-area doses",
+        "Then survivorship surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "ped-hodgkin"
+      ]
+    },
+    {
+      "id": "n_peds_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pediatric high-risk",
+      "title": "Pediatric intermediate/high-risk cHL: intensified response-adapted chemotherapy",
+      "section": "Treatment",
+      "description": "More cycles of multi-agent chemotherapy with radiation to slow-responding / bulky sites.",
+      "path": "Hodgkin / Pediatric / High risk",
+      "pills": [
+        "pediatric",
+        "high risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "c"
+      ],
+      "bullets": [
+        "Intensified response-adapted multi-agent chemotherapy (e.g. ABVE-PC, more cycles); brentuximab-containing regimens are used in higher-risk protocols",
+        "Involved-site radiation to bulky or slow-responding (interim-PET positive) sites",
+        "Prioritize fertility preservation and late-effect minimization; the dose engine computes doses",
+        "Then survivorship surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "ped-hodgkin"
+      ]
+    },
+    {
+      "id": "n_relapse_salvage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Relapse candidacy",
+      "title": "Relapsed / refractory cHL: transplant candidacy",
+      "section": "Recurrence",
+      "description": "Biopsy-confirm relapse and restage. Transplant-eligible patients receive salvage chemotherapy to a chemosensitive response, then high-dose therapy and autologous stem-cell transplant.",
+      "path": "Hodgkin / Relapsed / Candidacy",
+      "pills": [
+        "relapsed",
+        "salvage"
+      ],
+      "required": true,
+      "bullets": [
+        "Confirm relapse histologically and restage with FDG-PET/CT",
+        "Assess transplant eligibility (age, comorbidity, prior therapy, chemosensitivity)"
+      ],
+      "options": [
+        {
+          "id": "transplant",
+          "label": "Transplant-eligible (first relapse)",
+          "sets": {
+            "salvage": "transplant"
+          },
+          "pills": [
+            "ASCT candidate"
+          ]
+        },
+        {
+          "id": "nontransplant",
+          "label": "Transplant-ineligible",
+          "sets": {
+            "salvage": "nontransplant"
+          },
+          "pills": [
+            "non-transplant"
+          ]
+        },
+        {
+          "id": "multiply",
+          "label": "Multiply relapsed / post-transplant",
+          "sets": {
+            "salvage": "multiply"
+          },
+          "pills": [
+            "multiply relapsed"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rr_asct",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Salvage + ASCT",
+      "title": "Salvage chemotherapy then autologous transplant",
+      "section": "Recurrence",
+      "description": "Second-line chemotherapy to a chemosensitive response, then high-dose therapy with autologous stem-cell rescue and risk-adapted maintenance.",
+      "path": "Hodgkin / Relapsed / ASCT",
+      "pills": [
+        "relapsed",
+        "ASCT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Salvage chemotherapy (e.g. platinum-based ICE / DHAP, or brentuximab-based or checkpoint-based salvage) aiming for a PET-negative response before transplant",
+        "High-dose chemotherapy + autologous stem-cell transplant (ASCT) for chemosensitive disease",
+        "Brentuximab vedotin maintenance for high-risk features (primary refractory, early relapse, extranodal relapse)",
+        "No dedicated adult HL salvage dose protocol exists in StewardMD yet - dosing is per standard references; guidance only",
+        "Post-transplant surveillance for relapse and late effects"
+      ]
+    },
+    {
+      "id": "n_rr_nontransplant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-transplant relapse",
+      "title": "Transplant-ineligible relapse: targeted / palliative systemic therapy",
+      "section": "Recurrence",
+      "description": "Sequential targeted and palliative therapy for patients not eligible for transplant.",
+      "path": "Hodgkin / Relapsed / Non-transplant",
+      "pills": [
+        "relapsed",
+        "non-transplant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Brentuximab vedotin (CD30-directed) or a PD-1 checkpoint inhibitor (nivolumab or pembrolizumab) as sequential single agents",
+        "Palliative chemotherapy or involved-site radiation for local symptom control",
+        "Best supportive care and clinical-trial referral where appropriate",
+        "No dedicated adult HL dose protocol exists in StewardMD yet - dosing is per standard references; guidance only"
+      ]
+    },
+    {
+      "id": "n_rr_cellular",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Multiply relapsed",
+      "title": "Multiply relapsed / post-ASCT: checkpoint inhibitor and allogeneic options",
+      "section": "Recurrence",
+      "description": "Later-line therapy after prior transplant, prioritizing checkpoint blockade and cellular / allogeneic approaches.",
+      "path": "Hodgkin / Relapsed / Multiply",
+      "pills": [
+        "multiply relapsed",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "PD-1 checkpoint inhibitor (nivolumab or pembrolizumab), with or without brentuximab vedotin, for CD30-positive relapse",
+        "Consider a second (allogeneic) transplant in selected fit patients with a chemosensitive response",
+        "Clinical-trial referral (e.g. cellular / novel agents); continued palliative and supportive care",
+        "No dedicated adult HL dose protocol exists in StewardMD yet - dosing is per standard references; guidance only"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_entry_chl",
+      "from": "n_entry",
+      "to": "n_workup",
+      "fromOptions": [
+        "chl"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_nlphl",
+      "from": "n_entry",
+      "to": "n_nlphl_workup",
+      "fromOptions": [
+        "nlphl"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_peds",
+      "from": "n_entry",
+      "to": "n_peds_stage",
+      "fromOptions": [
+        "peds"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_relapsed",
+      "from": "n_entry",
+      "to": "n_relapse_salvage",
+      "fromOptions": [
+        "relapsed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_wk_stage",
+      "from": "n_workup",
+      "to": "n_chl_stage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_stage_early",
+      "from": "n_chl_stage",
+      "to": "n_chl_earlyrisk",
+      "fromOptions": [
+        "limited"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_stage_adv",
+      "from": "n_chl_stage",
+      "to": "n_adv_ips",
+      "fromOptions": [
+        "advanced"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_fav",
+      "from": "n_chl_earlyrisk",
+      "to": "n_early_fav_pet",
+      "fromOptions": [
+        "favorable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_unfav",
+      "from": "n_chl_earlyrisk",
+      "to": "n_early_unfav_pet",
+      "fromOptions": [
+        "unfavorable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ef_neg",
+      "from": "n_early_fav_pet",
+      "to": "n_ef_petneg",
+      "fromOptions": [
+        "pet_neg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ef_pos",
+      "from": "n_early_fav_pet",
+      "to": "n_ef_petpos",
+      "fromOptions": [
+        "pet_pos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eu_neg",
+      "from": "n_early_unfav_pet",
+      "to": "n_eu_petneg",
+      "fromOptions": [
+        "pet_neg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eu_pos",
+      "from": "n_early_unfav_pet",
+      "to": "n_eu_petpos",
+      "fromOptions": [
+        "pet_pos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ips_regimen",
+      "from": "n_adv_ips",
+      "to": "n_adv_regimen",
+      "fromOptions": [
+        "low_ips"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ips_regimen_hi",
+      "from": "n_adv_ips",
+      "to": "n_adv_regimen",
+      "fromOptions": [
+        "high_ips"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_reg_abvd",
+      "from": "n_adv_regimen",
+      "to": "n_adv_abvd_pet",
+      "fromOptions": [
+        "abvd"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_reg_bvavd",
+      "from": "n_adv_regimen",
+      "to": "n_adv_bvavd",
+      "fromOptions": [
+        "bvavd"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_reg_beacopp",
+      "from": "n_adv_regimen",
+      "to": "n_adv_beacopp",
+      "fromOptions": [
+        "beacopp"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_abvd_neg",
+      "from": "n_adv_abvd_pet",
+      "to": "n_adv_abvd_petneg",
+      "fromOptions": [
+        "pet_neg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_abvd_pos",
+      "from": "n_adv_abvd_pet",
+      "to": "n_adv_abvd_petpos",
+      "fromOptions": [
+        "pet_pos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_efneg_surv",
+      "from": "n_ef_petneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_efpos_surv",
+      "from": "n_ef_petpos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_euneg_surv",
+      "from": "n_eu_petneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eupos_surv",
+      "from": "n_eu_petpos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_abvdneg_surv",
+      "from": "n_adv_abvd_petneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_abvdpos_surv",
+      "from": "n_adv_abvd_petpos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bvavd_surv",
+      "from": "n_adv_bvavd",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_beacopp_surv",
+      "from": "n_adv_beacopp",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphl_wk",
+      "from": "n_nlphl_workup",
+      "to": "n_nlphl_stage",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphl_early",
+      "from": "n_nlphl_stage",
+      "to": "n_nlphl_early",
+      "fromOptions": [
+        "early"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphl_adv",
+      "from": "n_nlphl_stage",
+      "to": "n_nlphl_adv",
+      "fromOptions": [
+        "advanced"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphl_trans",
+      "from": "n_nlphl_stage",
+      "to": "n_nlphl_transform",
+      "fromOptions": [
+        "transformed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphlearly_surv",
+      "from": "n_nlphl_early",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphladv_surv",
+      "from": "n_nlphl_adv",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nlphltrans_surv",
+      "from": "n_nlphl_transform",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_peds_low",
+      "from": "n_peds_stage",
+      "to": "n_peds_early",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_peds_high",
+      "from": "n_peds_stage",
+      "to": "n_peds_adv",
+      "fromOptions": [
+        "highadv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pedsearly_surv",
+      "from": "n_peds_early",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pedsadv_surv",
+      "from": "n_peds_adv",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_salv_asct",
+      "from": "n_relapse_salvage",
+      "to": "n_rr_asct",
+      "fromOptions": [
+        "transplant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_salv_nontx",
+      "from": "n_relapse_salvage",
+      "to": "n_rr_nontransplant",
+      "fromOptions": [
+        "nontransplant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_salv_multi",
+      "from": "n_relapse_salvage",
+      "to": "n_rr_cellular",
+      "fromOptions": [
+        "multiply"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}

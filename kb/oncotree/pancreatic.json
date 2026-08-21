@@ -1,0 +1,711 @@
+{
+  "guideline": "pancreatic",
+  "title": "Pancreatic Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "pancreatic_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. ONCOTREE navigator for pancreatic adenocarcinoma: workup -> resectability / stage stratification -> (resectable / borderline / locally advanced / metastatic) treatment arms by line of therapy, with germline-BRCA / MSI biomarker direction and maintenance -> surveillance and recurrence pathway. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference only; regimens without a dose protocol (gemcitabine + nab-paclitaxel, gemcitabine monotherapy, chemoradiation / SBRT, best supportive care) are shown as checklist guidance with NO dose. Invents no dose or regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses. FollowCare-style safety: never changes prescriptions, does not diagnose definitively, does not stop medications.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Pancreatic Adenocarcinoma, and general references (DeVita, Harrison). Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; no proprietary guideline text reproduced.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "Resectability is defined by the tumor relationship to the celiac axis, common hepatic artery, superior mesenteric artery and vein / portal vein on high-quality pancreatic-protocol CT; classify at a multidisciplinary tumor board.", "evidence": "2A" },
+    "b": { "text": "mFOLFIRINOX is preferred for fit patients (good performance status, adequate organ function, bilirubin controlled); gemcitabine + nab-paclitaxel is the main alternative when a triplet is not tolerable.", "evidence": "1" },
+    "c": { "text": "Offer germline testing to every patient with confirmed pancreatic adenocarcinoma, and somatic tumor profiling in metastatic disease (BRCA1/2, PALB2, MSI/MMR, NTRK, KRAS, HER2).", "evidence": "2A" },
+    "d": { "text": "Olaparib maintenance applies to a germline BRCA1/2 mutation with disease control after at least ~4 months of first-line platinum-based chemotherapy; it is not indicated after progression on platinum.", "evidence": "1" }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup and staging assessment",
+      "description": "Baseline evaluation before treatment. Confirm adenocarcinoma, assess extent of disease and biliary status, and send germline testing.",
+      "path": "Pancreatic / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History, physical, performance status", "sub": "weight loss, jaundice, pain, new-onset diabetes, family cancer history" },
+        { "label": "Pancreatic-protocol CT chest/abdomen/pelvis (multiphase)", "sub": "or MRI; defines resectability and metastatic disease" },
+        { "label": "Tissue confirmation of adenocarcinoma", "sub": "EUS-guided FNA/biopsy preferred; biopsy of a metastatic site if present" },
+        { "label": "Baseline CA 19-9 (after biliary decompression if obstructed)" },
+        { "label": "Manage biliary obstruction", "sub": "endoscopic stent before chemotherapy if bilirubin elevated" },
+        { "label": "Germline testing for all patients (BRCA1/2, PALB2, MMR)" },
+        { "label": "Somatic tumor profiling in metastatic disease (MSI/MMR, NTRK, KRAS, HER2)" },
+        { "label": "Nutrition, pancreatic enzyme replacement, and pain assessment" }
+      ],
+      "footnotes": ["a", "c"],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Stage / resectability",
+      "title": "Stage and resectability at presentation",
+      "description": "Classify the disease. Resectability of non-metastatic disease is decided by tumor-vessel contact on imaging at a multidisciplinary board.",
+      "path": "Pancreatic / Staging",
+      "section": "Staging",
+      "pills": ["staging"],
+      "required": true,
+      "bullets": [
+        { "label": "Resectable", "sub": "no arterial contact; no or minimal (<=180 degrees) venous contact without vein distortion" },
+        { "label": "Borderline resectable", "sub": "limited artery contact or reconstructable vein involvement (>180 degrees or short-segment occlusion)" },
+        { "label": "Locally advanced", "sub": "unresectable by vessel encasement, no distant metastases" },
+        { "label": "Metastatic", "sub": "distant spread (liver, peritoneum, lung, distant nodes)" }
+      ],
+      "tables": [
+        {
+          "title": "Resectability by tumor-vessel relationship (simplified)",
+          "headers": ["Category", "Arterial (SMA/CHA/celiac)", "Venous (SMV/PV)"],
+          "rows": [
+            ["Resectable", "No contact", "No contact, or <=180 degrees without distortion"],
+            ["Borderline", "Contact <=180 degrees, or CHA short-segment contact", ">180 degrees or short reconstructable occlusion"],
+            ["Locally advanced", ">180 degrees / encasement, unreconstructable", "Unreconstructable occlusion"],
+            ["Metastatic", "Any, with distant metastases", "Any, with distant metastases"]
+          ]
+        }
+      ],
+      "footnotes": ["a"],
+      "options": [
+        { "id": "resectable", "label": "Resectable (M0)", "sets": { "stage": "resectable" }, "pills": ["resectable"] },
+        { "id": "borderline", "label": "Borderline resectable (M0)", "sets": { "stage": "borderline" }, "pills": ["borderline"] },
+        { "id": "locally_advanced", "label": "Locally advanced / unresectable (M0)", "sets": { "stage": "locally_advanced" }, "pills": ["locally advanced"] },
+        { "id": "metastatic", "label": "Metastatic (M1)", "sets": { "stage": "metastatic" }, "pills": ["metastatic"] },
+        { "id": "surveillance", "label": "Post-treatment surveillance / follow-up", "sets": { "stage": "surveillance" }, "pills": ["surveillance"] }
+      ]
+    },
+
+    {
+      "id": "n_res_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Resectable: approach",
+      "title": "Resectable disease: upfront surgery vs neoadjuvant",
+      "description": "Choose surgery-first or neoadjuvant therapy. Favor neoadjuvant when high-risk features are present (markedly elevated CA 19-9, large primary, bulky nodes, borderline imaging).",
+      "path": "Pancreatic / Resectable / Approach",
+      "section": "Treatment",
+      "pills": ["resectable"],
+      "required": true,
+      "bullets": [
+        "Upfront resection is acceptable for clearly resectable disease without high-risk features",
+        "Neoadjuvant therapy is increasingly preferred to treat micrometastases early and select biology",
+        "Any approach: complete perioperative chemotherapy totalling about 6 months when tolerated"
+      ],
+      "footnotes": ["a", "b"],
+      "options": [
+        { "id": "upfront_surgery", "label": "Upfront surgery, then adjuvant therapy", "sets": { "resApproach": "upfront" }, "pills": ["surgery first"] },
+        { "id": "neoadjuvant", "label": "Neoadjuvant therapy first", "sets": { "resApproach": "neoadjuvant" }, "pills": ["neoadjuvant"] }
+      ]
+    },
+    {
+      "id": "n_res_adjuvant",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Adjuvant regimen",
+      "title": "After resection: choose adjuvant regimen",
+      "description": "Resection complete with recovery. Select adjuvant chemotherapy by fitness; aim to start within about 12 weeks.",
+      "path": "Pancreatic / Resectable / Adjuvant",
+      "section": "Treatment",
+      "pills": ["adjuvant"],
+      "required": true,
+      "bullets": [
+        "Confirm adequate recovery, performance status, and organ function",
+        "Total perioperative chemotherapy about 6 months",
+        "Discuss postoperative chemoradiation only in selected margin-positive / node-positive cases"
+      ],
+      "footnotes": ["b"],
+      "options": [
+        { "id": "adj_fit", "label": "Fit for a triplet (good PS)", "sets": { "adjFit": "fit" }, "pills": ["fit"] },
+        { "id": "adj_unfit", "label": "Not fit for a triplet", "sets": { "adjFit": "unfit" }, "pills": ["reduced fitness"] }
+      ]
+    },
+    {
+      "id": "n_tx_adj_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant mFOLFIRINOX",
+      "title": "Adjuvant mFOLFIRINOX (fit patients)",
+      "description": "Preferred adjuvant regimen after resection in fit patients; strongest survival benefit.",
+      "path": "Pancreatic / Resectable / Adjuvant / mFOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["adjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Modified FOLFIRINOX for about 6 months (dose engine computes patient doses)",
+        "Monitor for neutropenia, neuropathy, diarrhea; use growth-factor support as needed",
+        "Ensure pancreatic enzyme replacement and nutrition support"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+    {
+      "id": "n_tx_adj_gem",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant gemcitabine-based",
+      "title": "Adjuvant gemcitabine-based (reduced fitness)",
+      "description": "For patients not fit for a triplet.",
+      "path": "Pancreatic / Resectable / Adjuvant / Gemcitabine",
+      "section": "Treatment",
+      "pills": ["adjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Gemcitabine + capecitabine, or gemcitabine monotherapy, for about 6 months",
+        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
+        "Monitor counts and hepatic / renal function"
+      ]
+    },
+    {
+      "id": "n_res_neoadj",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Neoadjuvant regimen",
+      "title": "Neoadjuvant regimen for resectable disease",
+      "description": "Select neoadjuvant chemotherapy by fitness, then restage and proceed to resection if still resectable.",
+      "path": "Pancreatic / Resectable / Neoadjuvant",
+      "section": "Treatment",
+      "pills": ["neoadjuvant"],
+      "required": true,
+      "bullets": [
+        "Restage with CT and CA 19-9 after about 2-4 months",
+        "Proceed to resection if no progression, then complete perioperative chemotherapy"
+      ],
+      "footnotes": ["b"],
+      "options": [
+        { "id": "neo_fit", "label": "Fit for mFOLFIRINOX", "sets": { "neoFit": "fit" }, "pills": ["fit"] },
+        { "id": "neo_gemnab", "label": "Gemcitabine + nab-paclitaxel", "sets": { "neoFit": "gemnab" }, "pills": ["gem-nab"] }
+      ]
+    },
+    {
+      "id": "n_tx_neoadj_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neoadjuvant mFOLFIRINOX",
+      "title": "Neoadjuvant mFOLFIRINOX, then resection",
+      "description": "Preferred neoadjuvant option in fit patients.",
+      "path": "Pancreatic / Resectable / Neoadjuvant / mFOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["neoadjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Modified FOLFIRINOX, then restage and resect if still resectable",
+        "Complete remaining chemotherapy after surgery to total about 6 months",
+        "Consider preoperative chemoradiation only in selected cases"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+    {
+      "id": "n_tx_neoadj_gemnab",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neoadjuvant gem + nab-paclitaxel",
+      "title": "Neoadjuvant gemcitabine + nab-paclitaxel, then resection",
+      "description": "Alternative neoadjuvant option when a triplet is not suitable.",
+      "path": "Pancreatic / Resectable / Neoadjuvant / Gem-nab",
+      "section": "Treatment",
+      "pills": ["neoadjuvant", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine + nab-paclitaxel, then restage and resect if still resectable",
+        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
+        "Complete perioperative chemotherapy after surgery"
+      ]
+    },
+
+    {
+      "id": "n_borderline",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Borderline: neoadjuvant",
+      "title": "Borderline resectable: neoadjuvant strategy",
+      "description": "Neoadjuvant therapy is standard for borderline disease to improve margin-negative resection. Select the strategy, then restage for surgery.",
+      "path": "Pancreatic / Borderline / Neoadjuvant",
+      "section": "Treatment",
+      "pills": ["borderline", "neoadjuvant"],
+      "required": true,
+      "bullets": [
+        "Neoadjuvant chemotherapy is preferred; do not go directly to surgery",
+        "Restage after about 2-4 months; resect only if downstaged / stable and technically feasible",
+        "If progression to metastatic disease, move to the metastatic pathway"
+      ],
+      "footnotes": ["a", "b"],
+      "options": [
+        { "id": "bl_chemo_alone", "label": "Neoadjuvant chemotherapy (mFOLFIRINOX)", "sets": { "blStrategy": "chemo" }, "pills": ["chemo"] },
+        { "id": "bl_chemort", "label": "Induction chemo, then chemoradiation / SBRT", "sets": { "blStrategy": "chemort" }, "pills": ["chemo + RT"] }
+      ]
+    },
+    {
+      "id": "n_tx_bl_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Borderline neoadjuvant mFOLFIRINOX",
+      "title": "Borderline: neoadjuvant mFOLFIRINOX, then restage",
+      "description": "Preferred neoadjuvant chemotherapy for fit borderline patients.",
+      "path": "Pancreatic / Borderline / mFOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["borderline", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Modified FOLFIRINOX; gemcitabine + nab-paclitaxel is an alternative if a triplet is not tolerable",
+        "Restage with CT and CA 19-9; proceed to resection if margin-negative resection appears feasible",
+        "Complete perioperative chemotherapy after surgery"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+    {
+      "id": "n_tx_bl_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Borderline chemo then RT",
+      "title": "Borderline: induction chemotherapy then chemoradiation / SBRT",
+      "description": "Induction chemotherapy followed by radiation, especially where vessel margin is the concern.",
+      "path": "Pancreatic / Borderline / Chemo-RT",
+      "section": "Treatment",
+      "pills": ["borderline", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "Induction mFOLFIRINOX (or gemcitabine + nab-paclitaxel), then chemoradiation or SBRT",
+        "Radiation regimen has no dose protocol here - shown as guidance (radiation oncology plans)",
+        "Restage and proceed to resection if feasible"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+
+    {
+      "id": "n_la",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Locally advanced",
+      "title": "Locally advanced (unresectable, M0)",
+      "description": "Systemic therapy is the backbone; consolidative radiation is selective. Choose by performance status.",
+      "path": "Pancreatic / Locally advanced",
+      "section": "Treatment",
+      "pills": ["locally advanced"],
+      "required": true,
+      "bullets": [
+        "Induction systemic chemotherapy for about 4-6 months, then reassess",
+        "Consider consolidative chemoradiation / SBRT if no distant progression",
+        "A minority convert to resectable - re-evaluate at a tumor board"
+      ],
+      "footnotes": ["a", "b"],
+      "options": [
+        { "id": "la_fit", "label": "Good performance status", "sets": { "laFit": "fit" }, "pills": ["fit"] },
+        { "id": "la_poor", "label": "Poor performance status", "sets": { "laFit": "poor" }, "pills": ["reduced fitness"] }
+      ]
+    },
+    {
+      "id": "n_tx_la_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "LA induction mFOLFIRINOX",
+      "title": "Locally advanced: induction mFOLFIRINOX",
+      "description": "Preferred induction chemotherapy in fit locally advanced patients.",
+      "path": "Pancreatic / Locally advanced / mFOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["locally advanced", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Modified FOLFIRINOX induction, then reassess for consolidative chemoradiation / SBRT",
+        "Re-evaluate resectability if response is good",
+        "Gemcitabine + nab-paclitaxel is an alternative induction regimen"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+    {
+      "id": "n_tx_la_gem",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "LA gemcitabine-based",
+      "title": "Locally advanced: gemcitabine-based or supportive care",
+      "description": "For patients with poor performance status.",
+      "path": "Pancreatic / Locally advanced / Gemcitabine",
+      "section": "Treatment",
+      "pills": ["locally advanced", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine monotherapy (or gemcitabine + nab-paclitaxel if tolerable)",
+        "Best supportive care and symptom control if not a chemotherapy candidate",
+        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)"
+      ]
+    },
+
+    {
+      "id": "n_met_biomarker",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Metastatic biomarker",
+      "title": "Metastatic: biomarker direction",
+      "description": "Check germline and somatic profiling first. An actionable biomarker changes the pathway; otherwise choose first-line by fitness.",
+      "path": "Pancreatic / Metastatic / Biomarker",
+      "section": "Treatment",
+      "pills": ["metastatic", "biomarker"],
+      "required": true,
+      "bullets": [
+        "Confirm germline BRCA1/2 and PALB2, and tumor MSI/MMR, NTRK, KRAS, HER2",
+        "MSI-H / dMMR: immunotherapy is an option in any line",
+        "Germline BRCA/PALB2: use a platinum-based first line to enable maintenance"
+      ],
+      "tables": [
+        {
+          "title": "Actionable biomarkers in metastatic pancreatic cancer",
+          "headers": ["Biomarker", "Frequency (approx.)", "Directed option"],
+          "rows": [
+            ["Germline BRCA1/2 or PALB2", "~5-7%", "Platinum first line, then olaparib maintenance"],
+            ["MSI-H / dMMR", "~1%", "Pembrolizumab (tissue-agnostic)"],
+            ["NTRK fusion", "<1%", "TRK inhibitor (guidance only here)"],
+            ["No actionable target", "most", "Fitness-directed chemotherapy"]
+          ]
+        }
+      ],
+      "footnotes": ["c", "d"],
+      "options": [
+        { "id": "msi_high", "label": "MSI-H / dMMR", "sets": { "biomarkers.MMR": "deficient" }, "pills": ["MSI-H"] },
+        { "id": "brca_palb2", "label": "Germline BRCA1/2 or PALB2", "sets": { "biomarkers.BRCA": "positive" }, "pills": ["BRCA/PALB2"] },
+        { "id": "no_actionable", "label": "No actionable biomarker", "setsValue": null, "pills": ["no target"] }
+      ]
+    },
+    {
+      "id": "n_met_brca_fit",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "BRCA: platinum fitness",
+      "title": "Germline BRCA/PALB2: fitness for platinum",
+      "description": "Use a platinum-containing first line so that olaparib maintenance becomes available on disease control.",
+      "path": "Pancreatic / Metastatic / BRCA",
+      "section": "Treatment",
+      "pills": ["BRCA/PALB2"],
+      "required": true,
+      "bullets": [
+        "Platinum-based chemotherapy is preferred (FOLFIRINOX contains oxaliplatin)",
+        "Continue platinum first line for at least about 4 months before maintenance",
+        "Consider maintenance olaparib only if disease is controlled and platinum tolerated"
+      ],
+      "footnotes": ["d"],
+      "options": [
+        { "id": "brca_fit", "label": "Fit for platinum FOLFIRINOX", "sets": { "brcaFit": "fit" }, "pills": ["fit"] },
+        { "id": "brca_unfit", "label": "Not fit for platinum FOLFIRINOX", "sets": { "brcaFit": "unfit" }, "pills": ["reduced fitness"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_brca_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BRCA platinum FOLFIRINOX",
+      "title": "BRCA/PALB2: first-line FOLFIRINOX (platinum)",
+      "description": "Platinum-based first line for germline BRCA/PALB2 metastatic disease.",
+      "path": "Pancreatic / Metastatic / BRCA / FOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["BRCA/PALB2", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "FOLFIRINOX (oxaliplatin-containing) as the platinum backbone",
+        "On disease control after about 4+ months, transition to maintenance olaparib (see maintenance node)",
+        "Gemcitabine + cisplatin is an alternative platinum backbone (no dose protocol here)"
+      ],
+      "footnotes": ["b", "d"],
+      "protocolRefs": ["folfirinox"],
+      "linkTo": "n_tx_maint_olaparib"
+    },
+    {
+      "id": "n_tx_met_brca_gem",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BRCA gemcitabine-based",
+      "title": "BRCA/PALB2, reduced fitness: gemcitabine-based",
+      "description": "When platinum FOLFIRINOX is not tolerable.",
+      "path": "Pancreatic / Metastatic / BRCA / Gemcitabine",
+      "section": "Treatment",
+      "pills": ["BRCA/PALB2", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine + nab-paclitaxel, or gemcitabine + cisplatin if platinum is desired",
+        "Olaparib maintenance requires a platinum first line - not applicable without it",
+        "No dedicated dose protocol here yet - shown as guidance"
+      ],
+      "footnotes": ["d"]
+    },
+    {
+      "id": "n_tx_maint_olaparib",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Maintenance olaparib",
+      "title": "BRCA maintenance: olaparib",
+      "description": "Maintenance PARP inhibitor after disease control on platinum-based first line in germline BRCA1/2 disease.",
+      "path": "Pancreatic / Metastatic / Maintenance / Olaparib",
+      "section": "Treatment",
+      "pills": ["BRCA/PALB2", "maintenance", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Start olaparib after at least about 4 months of platinum first-line with disease control",
+        "Continue until progression or unacceptable toxicity; monitor counts (myelosuppression)",
+        "On progression, resume cytotoxic chemotherapy (second-line pathway)"
+      ],
+      "footnotes": ["d"],
+      "protocolRefs": ["gyn-olaparib-maint"]
+    },
+    {
+      "id": "n_tx_met_pembro",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "MSI-H immunotherapy",
+      "title": "MSI-H / dMMR: pembrolizumab",
+      "description": "Microsatellite-instability-high or mismatch-repair-deficient metastatic disease.",
+      "path": "Pancreatic / Metastatic / Immunotherapy",
+      "section": "Treatment",
+      "pills": ["MSI-H", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Pembrolizumab under the tissue-agnostic MSI-H / dMMR indication (any line)",
+        "Confirm MSI/MMR status on tumor tissue",
+        "Continue chemotherapy in parallel or reserve per response and tolerance"
+      ],
+      "footnotes": ["c"],
+      "protocolRefs": ["gi-crc-msi-pembro"]
+    },
+    {
+      "id": "n_met_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Metastatic first line",
+      "title": "Metastatic first line (no actionable biomarker)",
+      "description": "Choose first-line chemotherapy by performance status and organ function.",
+      "path": "Pancreatic / Metastatic / First line",
+      "section": "Treatment",
+      "pills": ["metastatic", "first line"],
+      "required": true,
+      "bullets": [
+        "Good PS: FOLFIRINOX preferred; moderate PS: gemcitabine + nab-paclitaxel",
+        "Poor PS: gemcitabine monotherapy or best supportive care",
+        "Reassess response and tolerance at intervals; plan for second line"
+      ],
+      "footnotes": ["b"],
+      "options": [
+        { "id": "met_folfirinox", "label": "FOLFIRINOX (good PS)", "sets": { "met1L": "folfirinox" }, "pills": ["FOLFIRINOX"] },
+        { "id": "met_gemnab", "label": "Gemcitabine + nab-paclitaxel (moderate PS)", "sets": { "met1L": "gemnab" }, "pills": ["gem-nab"] },
+        { "id": "met_gem", "label": "Gemcitabine mono / supportive care (poor PS)", "sets": { "met1L": "gem" }, "pills": ["gem / BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_folfirinox",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "First-line FOLFIRINOX",
+      "title": "Metastatic first line: FOLFIRINOX",
+      "description": "Preferred first line for fit metastatic patients.",
+      "path": "Pancreatic / Metastatic / First line / FOLFIRINOX",
+      "section": "Treatment",
+      "pills": ["metastatic", "first line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "FOLFIRINOX; monitor neutropenia, diarrhea, neuropathy",
+        "On progression, move to a non-cross-resistant second line (gemcitabine-based)",
+        "Continue supportive care, nutrition, and pain control"
+      ],
+      "footnotes": ["b"],
+      "protocolRefs": ["folfirinox"]
+    },
+    {
+      "id": "n_tx_met_gemnab",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "First-line gem + nab-paclitaxel",
+      "title": "Metastatic first line: gemcitabine + nab-paclitaxel",
+      "description": "Standard first line for patients with moderate performance status.",
+      "path": "Pancreatic / Metastatic / First line / Gem-nab",
+      "section": "Treatment",
+      "pills": ["metastatic", "first line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Gemcitabine + nab-paclitaxel; monitor cytopenias and neuropathy",
+        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
+        "On progression, move to a fluoropyrimidine-based second line (e.g. FOLFIRI / nal-IRI)"
+      ]
+    },
+    {
+      "id": "n_tx_met_gem_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "First-line gem / supportive",
+      "title": "Metastatic first line: gemcitabine mono or supportive care",
+      "description": "For patients with poor performance status.",
+      "path": "Pancreatic / Metastatic / First line / Gem-BSC",
+      "section": "Treatment",
+      "pills": ["metastatic", "first line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine monotherapy for borderline-fit patients",
+        "Best supportive care / hospice referral if not a chemotherapy candidate",
+        "Prioritize symptom control, biliary/GI patency, nutrition, and pain",
+        "No dedicated dose protocol here yet - shown as guidance"
+      ]
+    },
+    {
+      "id": "n_met_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Metastatic second line",
+      "title": "Metastatic second line (by prior regimen)",
+      "description": "Select a non-cross-resistant second line after first-line progression, based on what was already given.",
+      "path": "Pancreatic / Metastatic / Second line",
+      "section": "Treatment",
+      "pills": ["metastatic", "second line"],
+      "required": true,
+      "bullets": [
+        "After gemcitabine-based first line: switch to a fluoropyrimidine + irinotecan regimen",
+        "After FOLFIRINOX first line: switch to a gemcitabine-based regimen",
+        "Re-check performance status and organ function before second line"
+      ],
+      "options": [
+        { "id": "after_gem", "label": "Progressed after gemcitabine-based", "sets": { "met2L": "after_gem" }, "pills": ["post-gem"] },
+        { "id": "after_folfirinox", "label": "Progressed after FOLFIRINOX", "sets": { "met2L": "after_folfirinox" }, "pills": ["post-FOLFIRINOX"] }
+      ]
+    },
+    {
+      "id": "n_tx_2l_iri",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Second-line FOLFIRI / nal-IRI",
+      "title": "Second line after gemcitabine: fluoropyrimidine + irinotecan",
+      "description": "Non-cross-resistant second line after a gemcitabine-based first line.",
+      "path": "Pancreatic / Metastatic / Second line / Irinotecan",
+      "section": "Treatment",
+      "pills": ["second line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Liposomal irinotecan + 5-FU/leucovorin (nal-IRI); FOLFIRI is a practical alternative",
+        "Monitor diarrhea and neutropenia; irinotecan dose per UGT1A1 where relevant",
+        "The referenced FOLFIRI protocol supplies the irinotecan + 5-FU/LV backbone"
+      ],
+      "protocolRefs": ["folfiri"]
+    },
+    {
+      "id": "n_tx_2l_gemnab",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Second-line gemcitabine-based",
+      "title": "Second line after FOLFIRINOX: gemcitabine-based",
+      "description": "Switch to a gemcitabine-based regimen after FOLFIRINOX progression.",
+      "path": "Pancreatic / Metastatic / Second line / Gemcitabine",
+      "section": "Treatment",
+      "pills": ["second line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Gemcitabine + nab-paclitaxel, or gemcitabine monotherapy if less fit",
+        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
+        "Reassess for clinical-trial eligibility and continue supportive care"
+      ]
+    },
+
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "question",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance / follow-up",
+      "description": "Monitoring after curative-intent therapy; enter the metastatic pathway if recurrence is detected.",
+      "path": "Pancreatic / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "required": true,
+      "bullets": [
+        "History, physical, and CA 19-9 every 3-6 months for 2 years, then every 6-12 months",
+        "CT chest/abdomen/pelvis every 3-6 months for 2 years, then as indicated",
+        "Address exocrine insufficiency, diabetes, nutrition, and psychosocial needs",
+        "A rising CA 19-9 or new lesion prompts restaging"
+      ],
+      "options": [
+        { "id": "no_recurrence", "label": "No recurrence - continue surveillance", "sets": { "surv": "stable" }, "pills": ["stable"] },
+        { "id": "recurrence", "label": "Recurrence / metastases detected", "sets": { "surv": "recurrence" }, "pills": ["recurrence"] }
+      ]
+    },
+    {
+      "id": "n_tx_surv_continue",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Continue surveillance",
+      "title": "No recurrence: continue surveillance",
+      "description": "Maintain the monitoring schedule and survivorship care.",
+      "path": "Pancreatic / Surveillance / Continue",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Continue CA 19-9 and imaging cadence as above",
+        "Ongoing pancreatic enzyme replacement, glycemic control, and nutrition",
+        "Re-image promptly for new symptoms or a rising CA 19-9"
+      ]
+    }
+  ],
+  "links": [
+    { "id": "l_wk", "from": "n_workup", "to": "n_stage", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_stage_res", "from": "n_stage", "to": "n_res_approach", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_stage_bl", "from": "n_stage", "to": "n_borderline", "fromOptions": ["borderline"], "linkCategory": "conditional" },
+    { "id": "l_stage_la", "from": "n_stage", "to": "n_la", "fromOptions": ["locally_advanced"], "linkCategory": "conditional" },
+    { "id": "l_stage_met", "from": "n_stage", "to": "n_met_biomarker", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_stage_surv", "from": "n_stage", "to": "n_surveillance", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
+
+    { "id": "l_res_up", "from": "n_res_approach", "to": "n_res_adjuvant", "fromOptions": ["upfront_surgery"], "linkCategory": "conditional" },
+    { "id": "l_res_neo", "from": "n_res_approach", "to": "n_res_neoadj", "fromOptions": ["neoadjuvant"], "linkCategory": "conditional" },
+
+    { "id": "l_adj_fit", "from": "n_res_adjuvant", "to": "n_tx_adj_folfirinox", "fromOptions": ["adj_fit"], "linkCategory": "conditional" },
+    { "id": "l_adj_unfit", "from": "n_res_adjuvant", "to": "n_tx_adj_gem", "fromOptions": ["adj_unfit"], "linkCategory": "conditional" },
+
+    { "id": "l_neo_fit", "from": "n_res_neoadj", "to": "n_tx_neoadj_folfirinox", "fromOptions": ["neo_fit"], "linkCategory": "conditional" },
+    { "id": "l_neo_gemnab", "from": "n_res_neoadj", "to": "n_tx_neoadj_gemnab", "fromOptions": ["neo_gemnab"], "linkCategory": "conditional" },
+
+    { "id": "l_bl_chemo", "from": "n_borderline", "to": "n_tx_bl_folfirinox", "fromOptions": ["bl_chemo_alone"], "linkCategory": "conditional" },
+    { "id": "l_bl_chemort", "from": "n_borderline", "to": "n_tx_bl_chemort", "fromOptions": ["bl_chemort"], "linkCategory": "conditional" },
+
+    { "id": "l_la_fit", "from": "n_la", "to": "n_tx_la_folfirinox", "fromOptions": ["la_fit"], "linkCategory": "conditional" },
+    { "id": "l_la_poor", "from": "n_la", "to": "n_tx_la_gem", "fromOptions": ["la_poor"], "linkCategory": "conditional" },
+
+    { "id": "l_bm_msi", "from": "n_met_biomarker", "to": "n_tx_met_pembro", "fromOptions": ["msi_high"], "linkCategory": "conditional" },
+    { "id": "l_bm_brca", "from": "n_met_biomarker", "to": "n_met_brca_fit", "fromOptions": ["brca_palb2"], "linkCategory": "conditional" },
+    { "id": "l_bm_none", "from": "n_met_biomarker", "to": "n_met_1l", "fromOptions": ["no_actionable"], "linkCategory": "conditional" },
+
+    { "id": "l_brca_fit", "from": "n_met_brca_fit", "to": "n_tx_met_brca_folfirinox", "fromOptions": ["brca_fit"], "linkCategory": "conditional" },
+    { "id": "l_brca_unfit", "from": "n_met_brca_fit", "to": "n_tx_met_brca_gem", "fromOptions": ["brca_unfit"], "linkCategory": "conditional" },
+    { "id": "l_brca_maint", "from": "n_tx_met_brca_folfirinox", "to": "n_tx_maint_olaparib", "linkCategory": "conditional" },
+
+    { "id": "l_1l_folf", "from": "n_met_1l", "to": "n_tx_met_folfirinox", "fromOptions": ["met_folfirinox"], "linkCategory": "conditional" },
+    { "id": "l_1l_gemnab", "from": "n_met_1l", "to": "n_tx_met_gemnab", "fromOptions": ["met_gemnab"], "linkCategory": "conditional" },
+    { "id": "l_1l_gem", "from": "n_met_1l", "to": "n_tx_met_gem_bsc", "fromOptions": ["met_gem"], "linkCategory": "conditional" },
+
+    { "id": "l_folf_2l", "from": "n_tx_met_folfirinox", "to": "n_met_2l", "linkCategory": "conditional" },
+    { "id": "l_gemnab_2l", "from": "n_tx_met_gemnab", "to": "n_met_2l", "linkCategory": "conditional" },
+
+    { "id": "l_2l_gem", "from": "n_met_2l", "to": "n_tx_2l_iri", "fromOptions": ["after_gem"], "linkCategory": "conditional" },
+    { "id": "l_2l_folf", "from": "n_met_2l", "to": "n_tx_2l_gemnab", "fromOptions": ["after_folfirinox"], "linkCategory": "conditional" },
+
+    { "id": "l_surv_ok", "from": "n_surveillance", "to": "n_tx_surv_continue", "fromOptions": ["no_recurrence"], "linkCategory": "conditional" },
+    { "id": "l_surv_rec", "from": "n_surveillance", "to": "n_met_biomarker", "fromOptions": ["recurrence"], "linkCategory": "conditional" }
+  ]
+}

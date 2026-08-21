@@ -1,0 +1,656 @@
+{
+  "guideline": "anal",
+  "title": "Anal Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "anal_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Pathway: workup and biomarkers -> histology gate -> HIV/immune status -> extent of disease -> localized (local excision vs definitive chemoradiation) / metastatic (line and fitness directed) / surveillance and salvage. Treatment leaves reference existing StewardMD Standard Protocols only where a same-disease dose protocol exists; radiation, surgery, immunotherapy and reduced-intensity options are shown as checklist guidance with no invented dose. Not clinically activated.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Anal Carcinoma, and general oncology references (DeVita, Harrison). No proprietary guideline text reproduced. The dose engine computes patient doses for referenced protocols.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "Test DPYD before any fluoropyrimidine; a deficient variant sharply raises 5-FU toxicity and warrants dose reduction or avoidance.", "evidence": "2A" },
+    "b": { "text": "Anal squamous cancer is HPV-driven in most cases; p16 immunostaining is a surrogate for high-risk HPV. Assess HIV status, as immunosuppression affects treatment tolerance, not regimen choice.", "evidence": "2A" },
+    "c": { "text": "Carboplatin plus paclitaxel is a reasonable first-line doublet for metastatic anal squamous cancer, with a more favourable tolerability profile than cisplatin-fluorouracil in frontline randomized data.", "evidence": "1" },
+    "d": { "text": "After definitive chemoradiation, tumour regression may continue for up to 6 months; biopsy only for progression or clearly persistent disease, since early biopsy of a regressing tumour can mislead.", "evidence": "2A" }
+  },
+  "nodes": [
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup and staging evaluation",
+      "description": "Baseline evaluation before treatment: confirm tissue diagnosis, map local extent, and screen for distant disease.",
+      "path": "Anal / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History and exam including digital rectal exam and anoscopy", "sub": "document tumour size, distance from anal verge, sphincter involvement, performance status" },
+        { "label": "Inguinal node exam; biopsy or FNA of suspicious groin nodes" },
+        { "label": "Confirm histology on biopsy", "sub": "squamous cell carcinoma vs non-squamous" },
+        { "label": "Pelvic MRI for primary tumour and nodal extent" },
+        { "label": "CT chest/abdomen/pelvis, or PET/CT, to screen for distant metastases" },
+        { "label": "HIV test; if positive, obtain CD4 count and involve HIV care" },
+        { "label": "Women: cervical/vulvar screening given shared HPV aetiology" },
+        { "label": "Baseline bloods including CBC and renal/hepatic function; DPYD testing before fluoropyrimidine (footnote a)" }
+      ],
+      "footnotes": ["a"],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue" }
+      ]
+    },
+    {
+      "id": "n_biomarkers",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Biomarkers",
+      "title": "Biomarker and host-factor assessment",
+      "description": "Anal squamous cancer has few regimen-directing molecular gates; these markers inform prognosis, later-line options, and safety.",
+      "path": "Anal / Workup / Biomarkers",
+      "section": "Workup",
+      "pills": ["biomarker"],
+      "required": true,
+      "bullets": [
+        "p16/HPV: prognostic; most anal squamous cancers are HPV-associated",
+        "HIV status: affects tolerance, not first regimen choice",
+        "MMR/MSI and PD-L1: relevant to later-line immunotherapy decisions",
+        "DPYD: safety gate before fluorouracil"
+      ],
+      "tables": [
+        {
+          "title": "Biomarker panel and its role",
+          "headers": ["Marker", "How assessed", "Role in this pathway"],
+          "rows": [
+            ["p16 / high-risk HPV", "IHC / HPV testing", "Prognostic; p16-positive tends to respond better"],
+            ["HIV / CD4", "Serology, CD4 count", "Modifies supportive care and tolerance"],
+            ["MMR / MSI", "IHC / PCR", "MSI-high supports later-line immunotherapy"],
+            ["PD-L1 (CPS)", "IHC", "Supports checkpoint-inhibitor consideration in advanced disease"],
+            ["DPYD", "Genotype", "Deficiency requires 5-FU dose reduction or avoidance"]
+          ]
+        }
+      ],
+      "evidenceCategory": ["2A"],
+      "footnotes": ["b"],
+      "options": [
+        { "id": "continue", "label": "Biomarkers reviewed - continue" }
+      ]
+    },
+    {
+      "id": "n_histology",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Histology",
+      "title": "Histology gate",
+      "description": "This navigator covers anal squamous cell carcinoma. Non-squamous histologies follow a different pathway.",
+      "path": "Anal / Histology",
+      "section": "Staging",
+      "pills": ["histology"],
+      "required": true,
+      "options": [
+        { "id": "scc", "label": "Squamous cell carcinoma (incl. basaloid/cloacogenic)", "sets": { "histology": "scc" }, "pills": ["SCC"] },
+        { "id": "nonscc", "label": "Non-squamous (adenocarcinoma, melanoma, neuroendocrine, GIST)", "sets": { "histology": "nonscc" }, "pills": ["non-SCC"] }
+      ]
+    },
+    {
+      "id": "n_end_adeno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-squamous - off pathway",
+      "title": "Non-squamous anal cancer: treat on the appropriate pathway",
+      "description": "Non-squamous histologies are not managed by the anal squamous chemoradiation algorithm.",
+      "path": "Anal / Non-squamous",
+      "section": "Treatment",
+      "pills": ["non-SCC", "treatment"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Anal adenocarcinoma: manage like a rectal adenocarcinoma (neoadjuvant chemoradiation then surgery, systemic chemotherapy by stage)",
+        "Anal/anorectal melanoma: wide local excision where feasible; systemic therapy per melanoma pathway",
+        "Neuroendocrine or GIST: manage on the histology-specific pathway",
+        "Re-enter the correct disease navigator for dosing"
+      ]
+    },
+    {
+      "id": "n_hiv_status",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "HIV / immune status",
+      "title": "HIV and immune status",
+      "description": "HIV-positive patients tolerate curative chemoradiation but need closer toxicity management; regimen intent is unchanged.",
+      "path": "Anal / Workup / Immune status",
+      "section": "Workup",
+      "pills": ["host factor"],
+      "required": true,
+      "bullets": [
+        "Continue antiretroviral therapy through treatment; coordinate with HIV care",
+        "Expect more acute skin/mucosal toxicity; do not reflexively de-intensify curative therapy",
+        "Optimise CD4 and manage opportunistic-infection risk"
+      ],
+      "footnotes": ["b"],
+      "options": [
+        { "id": "hiv_pos", "label": "HIV-positive / immunocompromised", "sets": { "hiv": "positive" }, "pills": ["HIV+"] },
+        { "id": "hiv_neg", "label": "HIV-negative / immunocompetent", "sets": { "hiv": "negative" }, "pills": ["HIV-"] }
+      ]
+    },
+    {
+      "id": "n_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Extent of disease",
+      "title": "Extent of disease",
+      "description": "Choose the current clinical scenario; this sets the treatment intent.",
+      "path": "Anal / Extent",
+      "section": "Staging",
+      "pills": ["extent"],
+      "required": true,
+      "options": [
+        { "id": "localized", "label": "Localized / locoregional (M0)", "sets": { "extent": "localized" }, "pills": ["localized"] },
+        { "id": "metastatic", "label": "Metastatic (M1)", "sets": { "extent": "metastatic" }, "pills": ["metastatic"] },
+        { "id": "recurrence", "label": "Recurrence after prior definitive therapy", "sets": { "extent": "recurrence" }, "pills": ["recurrence"] },
+        { "id": "surveillance", "label": "Post-treatment surveillance / response assessment", "sets": { "extent": "surveillance" }, "pills": ["surveillance"] }
+      ]
+    },
+    {
+      "id": "n_loc_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Localized stage",
+      "title": "Localized: stage and local extent",
+      "description": "Stratify localized disease. Nearly all invasive anal squamous cancer is treated with organ-preserving chemoradiation; only small, well-differentiated anal-margin tumours are candidates for local excision alone.",
+      "path": "Anal / Localized / Stage",
+      "section": "Staging",
+      "pills": ["stage"],
+      "required": true,
+      "bullets": [
+        { "label": "Local excision candidate", "sub": "small superficial well-differentiated anal-margin lesion, node-negative, adequate margins achievable without sphincter loss" },
+        { "label": "Stage I-II", "sub": "invasive primary, clinically node-negative (N0)" },
+        { "label": "Stage III", "sub": "node-positive (perirectal/internal iliac/inguinal) or locally advanced primary" }
+      ],
+      "tables": [
+        {
+          "title": "Simplified clinical grouping (TNM-based)",
+          "headers": ["Group", "Primary (T)", "Nodes (N)", "Typical approach"],
+          "rows": [
+            ["Anal margin, early", "T1 superficial", "N0", "Local excision may suffice"],
+            ["Stage I", "T1 (<=2 cm)", "N0", "Definitive chemoradiation"],
+            ["Stage II", "T2-T3", "N0", "Definitive chemoradiation"],
+            ["Stage III", "any T (T4) or node+", "N1", "Chemoradiation with nodal coverage/boost"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "local_excision", "label": "Early anal-margin lesion - local excision candidate", "sets": { "stage": "early_margin" }, "pills": ["local excision"] },
+        { "id": "stage_i_ii", "label": "Stage I-II, node-negative", "sets": { "stage": "i_ii" }, "pills": ["stage I-II"] },
+        { "id": "stage_iii", "label": "Stage III / node-positive", "sets": { "stage": "iii" }, "pills": ["stage III"] }
+      ]
+    },
+    {
+      "id": "n_tx_local_excision",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Local excision",
+      "title": "Early anal-margin lesion: local excision",
+      "description": "Selected small, well-differentiated, node-negative anal-margin tumours.",
+      "path": "Anal / Localized / Local excision",
+      "section": "Treatment",
+      "pills": ["local excision", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Wide local excision aiming for clear margins with sphincter preservation",
+        "Re-excise or proceed to chemoradiation if margins are positive or pathology upstages",
+        "Enter surveillance after adequate excision",
+        "No systemic therapy for a completely excised early lesion"
+      ]
+    },
+    {
+      "id": "n_stage_iii_nodal",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Nodal management",
+      "title": "Node-positive: nodal radiation planning",
+      "description": "Node-positive disease is treated with definitive chemoradiation that covers involved and at-risk nodal basins, with a boost to gross nodes.",
+      "path": "Anal / Localized / Nodal",
+      "section": "Treatment",
+      "pills": ["nodal"],
+      "required": true,
+      "bullets": [
+        "Cover pelvic and inguinal nodal regions in the radiation field",
+        "Boost gross nodal disease to a higher dose",
+        "Elective groin irradiation rather than upfront dissection for most node-positive cases",
+        "Reserve node dissection for residual/recurrent groin disease after chemoradiation"
+      ],
+      "options": [
+        { "id": "continue", "label": "Nodal plan reviewed - continue to chemoradiation" }
+      ]
+    },
+    {
+      "id": "n_chemort_fitness",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Chemo fitness",
+      "title": "Definitive chemoradiation: mitomycin fitness",
+      "description": "Mitomycin plus fluorouracil with concurrent radiation is the standard backbone. Choose the concurrent chemotherapy based on marrow, renal, and general fitness.",
+      "path": "Anal / Localized / Chemoradiation",
+      "section": "Treatment",
+      "pills": ["chemoRT"],
+      "required": true,
+      "bullets": [
+        "Standard backbone: fluorouracil + mitomycin with concurrent radiation (organ-preserving)",
+        "Assess marrow reserve (mitomycin myelosuppression) and renal function",
+        "Confirm DPYD before fluorouracil (footnote a)"
+      ],
+      "footnotes": ["a"],
+      "options": [
+        { "id": "mmc_ok", "label": "Fit for mitomycin-based chemoradiation", "sets": { "fitness": "mmc_ok" }, "pills": ["MMC-eligible"] },
+        { "id": "mmc_unfit", "label": "Not fit for mitomycin (marrow/comorbidity)", "sets": { "fitness": "mmc_unfit" }, "pills": ["MMC-unfit"] }
+      ]
+    },
+    {
+      "id": "n_tx_chemort_mmc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "5FU-MMC chemoRT",
+      "title": "Definitive chemoradiation: fluorouracil + mitomycin",
+      "description": "Standard organ-preserving definitive treatment for localized anal squamous carcinoma.",
+      "path": "Anal / Localized / 5FU-MMC + RT",
+      "section": "Treatment",
+      "pills": ["chemoRT", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Fluorouracil + mitomycin delivered concurrently with a single definitive radiation course",
+        "Radiation field covers primary and at-risk/involved nodes; boost gross disease",
+        "Manage radiation dermatitis/proctitis and mitomycin myelosuppression during treatment",
+        "Avoid treatment breaks where possible; reassess response at about 8-12 weeks and then at 6 months (footnote d)"
+      ],
+      "footnotes": ["a", "d"],
+      "protocolRefs": ["gi-anal-5fu-mmc-rt"]
+    },
+    {
+      "id": "n_tx_chemort_alt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "chemoRT alternative",
+      "title": "Definitive chemoradiation without mitomycin",
+      "description": "For patients unsuitable for mitomycin (marrow suppression, significant comorbidity).",
+      "path": "Anal / Localized / chemoRT alt",
+      "section": "Treatment",
+      "pills": ["chemoRT", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Substitute a cisplatin-based fluoropyrimidine backbone concurrent with radiation where mitomycin is contraindicated",
+        "For frail patients, consider radiation with a reduced-intensity fluoropyrimidine, or radiation alone if chemotherapy is unsafe",
+        "No mitomycin dose protocol substitution here - physician selects and doses the concurrent agent",
+        "Same radiation intent and response-assessment schedule as the standard backbone"
+      ],
+      "footnotes": ["a"]
+    },
+    {
+      "id": "n_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "question",
+      "name": "Response / surveillance",
+      "title": "Post-treatment response and surveillance",
+      "description": "After definitive chemoradiation, follow with clinical exam, DRE, anoscopy, and imaging. Regression can continue for months; act on the confirmed pattern.",
+      "path": "Anal / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "required": true,
+      "bullets": [
+        "DRE, anoscopy, and inguinal node exam every 3-6 months for the first 2-3 years",
+        "Pelvic MRI and chest/abdomen/pelvis imaging periodically per risk",
+        "Biopsy only for progression or clearly persistent disease (footnote d)"
+      ],
+      "footnotes": ["d"],
+      "options": [
+        { "id": "cr", "label": "Complete clinical response", "sets": { "response": "cr" }, "pills": ["CR"] },
+        { "id": "persistent", "label": "Persistent / incompletely regressed disease", "sets": { "response": "persistent" }, "pills": ["persistent"] },
+        { "id": "locoreg_recur", "label": "Locoregional recurrence", "sets": { "response": "locoregional" }, "pills": ["locoregional"] },
+        { "id": "distant", "label": "Distant recurrence / new metastasis", "sets": { "response": "distant" }, "pills": ["distant"] }
+      ]
+    },
+    {
+      "id": "n_surv_cr",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Complete response",
+      "title": "Complete response: continued surveillance",
+      "description": "Sustained complete response after definitive therapy.",
+      "path": "Anal / Surveillance / CR",
+      "section": "Surveillance",
+      "pills": ["CR", "surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Continue exam, DRE, and anoscopy every 3-6 months for 2-3 years, then less often to 5 years",
+        "Periodic imaging for patients who were node-positive or locally advanced",
+        "Manage late radiation effects (proctitis, sexual/urinary, marrow)",
+        "Re-enter the recurrence pathway on any confirmed relapse"
+      ]
+    },
+    {
+      "id": "n_persistent_eval",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Persistent-disease evaluation",
+      "title": "Persistent disease: regressing vs confirmed",
+      "description": "Distinguish ongoing regression from true persistent disease before committing to salvage surgery.",
+      "path": "Anal / Surveillance / Persistent",
+      "section": "Recurrence",
+      "pills": ["persistent"],
+      "required": true,
+      "bullets": [
+        "Serial exam and MRI over weeks; regression may continue up to 6 months post-chemoradiation",
+        "Biopsy to confirm before salvage surgery"
+      ],
+      "footnotes": ["d"],
+      "options": [
+        { "id": "regressing", "label": "Still regressing - not biopsy-proven persistent", "sets": { "persistent": "regressing" }, "pills": ["regressing"] },
+        { "id": "confirmed", "label": "Biopsy-confirmed persistent/progressive disease", "sets": { "persistent": "confirmed" }, "pills": ["confirmed"] }
+      ]
+    },
+    {
+      "id": "n_tx_watchful",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Close observation",
+      "title": "Regressing tumour: close observation",
+      "description": "Incompletely regressed but still improving after chemoradiation.",
+      "path": "Anal / Surveillance / Observe",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Re-examine and re-image at short intervals up to 6 months post-treatment",
+        "Avoid premature biopsy or salvage surgery while the tumour is still regressing",
+        "Proceed to salvage evaluation only if disease fails to clear or progresses"
+      ],
+      "footnotes": ["d"]
+    },
+    {
+      "id": "n_met_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Metastatic workup",
+      "title": "Metastatic / advanced disease workup",
+      "description": "Confirm and characterise metastatic disease before selecting systemic therapy.",
+      "path": "Anal / Metastatic / Workup",
+      "section": "Treatment",
+      "pills": ["metastatic", "workup"],
+      "required": true,
+      "bullets": [
+        "Biopsy a metastatic site if diagnosis or histology is uncertain",
+        "Full restaging imaging (CT chest/abdomen/pelvis or PET/CT)",
+        "Confirm MMR/MSI and PD-L1 for immunotherapy planning",
+        "Assess performance status and organ function for regimen fitness"
+      ],
+      "options": [
+        { "id": "continue", "label": "Metastatic workup complete - continue" }
+      ]
+    },
+    {
+      "id": "n_met_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Metastatic line / fitness",
+      "title": "Metastatic: line of therapy and fitness",
+      "description": "Select first-line systemic therapy by fitness, or route to later-line options after platinum exposure.",
+      "path": "Anal / Metastatic / Line",
+      "section": "Treatment",
+      "pills": ["metastatic", "line"],
+      "required": true,
+      "options": [
+        { "id": "naive_fit", "label": "Treatment-naive, fit for a platinum doublet", "sets": { "line": "first", "fitness": "fit" }, "pills": ["1st line fit"] },
+        { "id": "naive_frail", "label": "Treatment-naive but frail / poor tolerance", "sets": { "line": "first", "fitness": "frail" }, "pills": ["1st line frail"] },
+        { "id": "progressed", "label": "Progressed after platinum-based therapy", "sets": { "line": "later" }, "pills": ["later line"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Carbo-paclitaxel",
+      "title": "Metastatic first-line: carboplatin + paclitaxel",
+      "description": "Preferred first-line doublet for fit patients with metastatic anal squamous carcinoma.",
+      "path": "Anal / Metastatic / 1st line",
+      "section": "Treatment",
+      "pills": ["metastatic", "1st line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Carboplatin + paclitaxel is the preferred frontline doublet (better tolerated than cisplatin-fluorouracil)",
+        "Cisplatin + fluorouracil, or modified DCF in very fit patients, are alternatives",
+        "Reassess with imaging every 2-3 cycles; continue to progression or unacceptable toxicity",
+        "Consider adding or switching to immunotherapy on later progression"
+      ],
+      "footnotes": ["c"],
+      "protocolRefs": ["gi-anal-carbo-paclitaxel"]
+    },
+    {
+      "id": "n_tx_met_reduced",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Reduced-intensity systemic",
+      "title": "Metastatic, frail: reduced-intensity systemic therapy",
+      "description": "First-line for patients unfit for a full platinum doublet.",
+      "path": "Anal / Metastatic / Reduced",
+      "section": "Treatment",
+      "pills": ["metastatic", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Single-agent or dose-attenuated therapy (e.g. a fluoropyrimidine, or a reduced carboplatin-paclitaxel schedule)",
+        "Immunotherapy monotherapy may suit selected patients who cannot tolerate cytotoxics",
+        "Prioritise symptom control and quality of life; reassess fitness for escalation",
+        "No reduced-dose protocol referenced here - physician selects and doses the agent"
+      ]
+    },
+    {
+      "id": "n_met_io_elig",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Later-line / immunotherapy",
+      "title": "Later-line: immunotherapy eligibility",
+      "description": "After platinum progression, checkpoint inhibition is a recognised option; some patients are better served by other cytotoxics or supportive care.",
+      "path": "Anal / Metastatic / Later line",
+      "section": "Treatment",
+      "pills": ["later line"],
+      "required": true,
+      "bullets": [
+        "Checkpoint inhibitors show activity in previously treated anal squamous cancer",
+        "MSI-high / high PD-L1 strengthen the case for immunotherapy",
+        "Weigh performance status and autoimmune history"
+      ],
+      "options": [
+        { "id": "io_yes", "label": "Candidate for checkpoint inhibitor", "sets": { "io": "yes" }, "pills": ["IO"] },
+        { "id": "io_no", "label": "Prefer other cytotoxic (IO unsuitable/exhausted)", "sets": { "io": "no" }, "pills": ["chemo"] },
+        { "id": "poor_ps", "label": "Poor performance status - supportive care", "sets": { "io": "bsc" }, "pills": ["BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Immunotherapy",
+      "title": "Later-line: checkpoint immunotherapy",
+      "description": "Previously treated metastatic anal squamous carcinoma, immunotherapy-eligible.",
+      "path": "Anal / Metastatic / Immunotherapy",
+      "section": "Treatment",
+      "pills": ["IO", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Anti-PD-1 monotherapy (e.g. pembrolizumab or nivolumab) after platinum progression",
+        "Monitor for immune-related adverse events",
+        "No anal-specific immunotherapy dose protocol here - physician arranges the checkpoint-inhibitor regimen",
+        "Continue to progression or unacceptable toxicity"
+      ]
+    },
+    {
+      "id": "n_tx_met_other",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Subsequent cytotoxic",
+      "title": "Later-line: alternative cytotoxic therapy",
+      "description": "Later-line when immunotherapy is unsuitable or exhausted.",
+      "path": "Anal / Metastatic / Other",
+      "section": "Treatment",
+      "pills": ["chemo", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "A taxane or fluoropyrimidine-based regimen not previously used, or re-challenge if durable prior benefit",
+        "Enrol in a clinical trial where available",
+        "No later-line dose protocol referenced here - physician selects and doses the agent",
+        "Integrate palliative care alongside systemic therapy"
+      ]
+    },
+    {
+      "id": "n_tx_bsc",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Supportive care",
+      "title": "Best supportive / palliative care",
+      "description": "Poor performance status where anticancer therapy offers little benefit.",
+      "path": "Anal / Metastatic / Supportive",
+      "section": "Treatment",
+      "pills": ["BSC"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Symptom-directed care: pain, local hygiene, bleeding, stoma needs",
+        "Early specialist palliative-care involvement",
+        "Palliative radiation for symptomatic local or metastatic sites",
+        "Reassess for systemic therapy if performance status improves"
+      ]
+    },
+    {
+      "id": "n_recurrence",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Recurrence pattern",
+      "title": "Recurrence after definitive therapy",
+      "description": "Restage to distinguish locoregional-only recurrence (potentially salvageable by surgery) from distant disease.",
+      "path": "Anal / Recurrence",
+      "section": "Recurrence",
+      "pills": ["recurrence"],
+      "required": true,
+      "bullets": [
+        "Biopsy to confirm recurrence; PET/CT and pelvic MRI to define extent",
+        "Locoregional-only recurrence may be curable with salvage surgery",
+        "Distant disease follows the metastatic pathway"
+      ],
+      "options": [
+        { "id": "locoregional", "label": "Locoregional recurrence only", "sets": { "recurrence": "locoregional" }, "pills": ["locoregional"] },
+        { "id": "distant", "label": "Distant recurrence / metastatic", "sets": { "recurrence": "distant" }, "pills": ["distant"] }
+      ]
+    },
+    {
+      "id": "n_salvage_locoregional",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Salvage assessment",
+      "title": "Locoregional salvage: resectability",
+      "description": "Assess whether locoregional recurrent or persistent disease is resectable for cure by abdominoperineal resection.",
+      "path": "Anal / Recurrence / Salvage",
+      "section": "Recurrence",
+      "pills": ["salvage"],
+      "required": true,
+      "bullets": [
+        "Multidisciplinary review; confirm no distant disease before radical surgery",
+        "Assess sphincter involvement, pelvic sidewall fixation, and fitness for major surgery"
+      ],
+      "options": [
+        { "id": "resectable", "label": "Resectable - fit for salvage APR", "sets": { "salvage": "resectable" }, "pills": ["resectable"] },
+        { "id": "unresectable", "label": "Unresectable / unfit for surgery", "sets": { "salvage": "unresectable" }, "pills": ["unresectable"] }
+      ]
+    },
+    {
+      "id": "n_tx_apr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Salvage APR",
+      "title": "Salvage abdominoperineal resection",
+      "description": "Potentially curative surgery for resectable locoregional recurrence or persistent disease after chemoradiation.",
+      "path": "Anal / Recurrence / Salvage APR",
+      "section": "Recurrence",
+      "pills": ["salvage", "surgery", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Abdominoperineal resection with permanent colostomy; consider plastic reconstruction of the perineum",
+        "Manage groin recurrence with therapeutic inguinal node dissection as indicated",
+        "Adjuvant systemic therapy is not standard; individualise by pathology",
+        "Enter surveillance after recovery"
+      ]
+    },
+    {
+      "id": "n_tx_reirradiation",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Unresectable salvage",
+      "title": "Unresectable locoregional recurrence: non-surgical salvage",
+      "description": "Locoregional recurrence not amenable to, or patient unfit for, salvage surgery.",
+      "path": "Anal / Recurrence / Non-surgical",
+      "section": "Recurrence",
+      "pills": ["salvage", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "Consider selective re-irradiation at experienced centres where prior dose allows",
+        "Systemic therapy per the metastatic pathway for uncontrolled locoregional disease",
+        "Palliative measures for symptom control including diverting stoma if needed",
+        "Discuss clinical trial options"
+      ]
+    }
+  ],
+  "links": [
+    { "id": "l_wk_bm", "from": "n_workup", "to": "n_biomarkers", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_bm_hist", "from": "n_biomarkers", "to": "n_histology", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_hist_scc", "from": "n_histology", "to": "n_hiv_status", "fromOptions": ["scc"], "linkCategory": "conditional" },
+    { "id": "l_hist_non", "from": "n_histology", "to": "n_end_adeno", "fromOptions": ["nonscc"], "linkCategory": "conditional" },
+
+    { "id": "l_hiv_pos", "from": "n_hiv_status", "to": "n_stage", "fromOptions": ["hiv_pos"], "linkCategory": "conditional" },
+    { "id": "l_hiv_neg", "from": "n_hiv_status", "to": "n_stage", "fromOptions": ["hiv_neg"], "linkCategory": "conditional" },
+
+    { "id": "l_st_loc", "from": "n_stage", "to": "n_loc_stage", "fromOptions": ["localized"], "linkCategory": "conditional" },
+    { "id": "l_st_met", "from": "n_stage", "to": "n_met_workup", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_st_rec", "from": "n_stage", "to": "n_recurrence", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
+    { "id": "l_st_surv", "from": "n_stage", "to": "n_surv", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
+
+    { "id": "l_loc_le", "from": "n_loc_stage", "to": "n_tx_local_excision", "fromOptions": ["local_excision"], "linkCategory": "conditional" },
+    { "id": "l_loc_iii", "from": "n_loc_stage", "to": "n_stage_iii_nodal", "fromOptions": ["stage_iii"], "linkCategory": "conditional" },
+    { "id": "l_loc_iii2", "from": "n_loc_stage", "to": "n_chemort_fitness", "fromOptions": ["stage_i_ii"], "linkCategory": "conditional" },
+    { "id": "l_nodal_ft", "from": "n_stage_iii_nodal", "to": "n_chemort_fitness", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_ft_mmc", "from": "n_chemort_fitness", "to": "n_tx_chemort_mmc", "fromOptions": ["mmc_ok"], "linkCategory": "conditional" },
+    { "id": "l_ft_alt", "from": "n_chemort_fitness", "to": "n_tx_chemort_alt", "fromOptions": ["mmc_unfit"], "linkCategory": "conditional" },
+
+    { "id": "l_sv_cr", "from": "n_surv", "to": "n_surv_cr", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_sv_pers", "from": "n_surv", "to": "n_persistent_eval", "fromOptions": ["persistent"], "linkCategory": "conditional" },
+    { "id": "l_sv_lr", "from": "n_surv", "to": "n_salvage_locoregional", "fromOptions": ["locoreg_recur"], "linkCategory": "conditional" },
+    { "id": "l_sv_dist", "from": "n_surv", "to": "n_met_workup", "fromOptions": ["distant"], "linkCategory": "conditional" },
+
+    { "id": "l_pe_reg", "from": "n_persistent_eval", "to": "n_tx_watchful", "fromOptions": ["regressing"], "linkCategory": "conditional" },
+    { "id": "l_pe_conf", "from": "n_persistent_eval", "to": "n_salvage_locoregional", "fromOptions": ["confirmed"], "linkCategory": "conditional" },
+
+    { "id": "l_mw_line", "from": "n_met_workup", "to": "n_met_line", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_ml_1l", "from": "n_met_line", "to": "n_tx_met_1l", "fromOptions": ["naive_fit"], "linkCategory": "conditional" },
+    { "id": "l_ml_red", "from": "n_met_line", "to": "n_tx_met_reduced", "fromOptions": ["naive_frail"], "linkCategory": "conditional" },
+    { "id": "l_ml_prog", "from": "n_met_line", "to": "n_met_io_elig", "fromOptions": ["progressed"], "linkCategory": "conditional" },
+
+    { "id": "l_io_yes", "from": "n_met_io_elig", "to": "n_tx_met_io", "fromOptions": ["io_yes"], "linkCategory": "conditional" },
+    { "id": "l_io_no", "from": "n_met_io_elig", "to": "n_tx_met_other", "fromOptions": ["io_no"], "linkCategory": "conditional" },
+    { "id": "l_io_bsc", "from": "n_met_io_elig", "to": "n_tx_bsc", "fromOptions": ["poor_ps"], "linkCategory": "conditional" },
+
+    { "id": "l_rec_lr", "from": "n_recurrence", "to": "n_salvage_locoregional", "fromOptions": ["locoregional"], "linkCategory": "conditional" },
+    { "id": "l_rec_dist", "from": "n_recurrence", "to": "n_met_workup", "fromOptions": ["distant"], "linkCategory": "conditional" },
+
+    { "id": "l_sal_res", "from": "n_salvage_locoregional", "to": "n_tx_apr", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_sal_unres", "from": "n_salvage_locoregional", "to": "n_tx_reirradiation", "fromOptions": ["unresectable"], "linkCategory": "conditional" }
+  ]
+}

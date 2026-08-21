@@ -37,7 +37,19 @@
     { id: "headneck", title: "Head & Neck Cancer", sub: "Locoregional / recurrent-metastatic; PD-L1", icon: "face", ready: true },
     { id: "ovarian", title: "Ovarian Cancer", sub: "Primary chemo; PARP maintenance by HRD", icon: "female", ready: true },
     { id: "myeloma", title: "Multiple Myeloma", sub: "Newly diagnosed / maintenance / relapsed", icon: "bloodtype", ready: true },
-    { id: "thyroid", title: "Thyroid Cancer", sub: "Anaplastic (BRAF) / medullary (RET)", icon: "biotech", ready: true }
+    { id: "thyroid", title: "Thyroid Cancer", sub: "Anaplastic (BRAF) / medullary (RET)", icon: "biotech", ready: true },
+    { id: "cervical", title: "Cervical Cancer", sub: "FIGO stage; chemoRT vs surgery; recurrent by PD-L1", icon: "female", ready: true },
+    { id: "uterine", title: "Uterine / Endometrial", sub: "Molecular class; risk-adapted adjuvant; MMR / HER2", icon: "female", ready: true },
+    { id: "pancreatic", title: "Pancreatic Cancer", sub: "Resectable vs metastatic; FOLFIRINOX vs gem-nab", icon: "gastroenterology", ready: true },
+    { id: "hcc", title: "Hepatocellular Carcinoma", sub: "BCLC + Child-Pugh; local vs systemic by line", icon: "gastroenterology", ready: true },
+    { id: "anal", title: "Anal Cancer", sub: "Definitive chemoRT; metastatic immunotherapy", icon: "gastroenterology", ready: true },
+    { id: "gist", title: "GI Stromal Tumor (GIST)", sub: "Risk-adapted imatinib; TKI by line + mutation", icon: "gastroenterology", ready: true },
+    { id: "sarcoma", title: "Soft Tissue Sarcoma", sub: "Grade / size; surgery +/- RT; histology-directed", icon: "healing", ready: true },
+    { id: "cns", title: "CNS / Glioma", sub: "IDH / 1p19q class; Stupp protocol; recurrence", icon: "neurology", ready: true },
+    { id: "aml", title: "Acute Myeloid Leukemia", sub: "ELN risk; fit vs unfit; targeted + transplant", icon: "bloodtype", ready: true },
+    { id: "cll", title: "Chronic Lymphocytic Leukemia", sub: "Watch vs treat; TP53 / IGHV; BTKi vs venetoclax", icon: "bloodtype", ready: true },
+    { id: "dlbcl", title: "Diffuse Large B-Cell Lymphoma", sub: "IPI; R-CHOP vs pola-R-CHP; relapsed CAR-T", icon: "bloodtype", ready: true },
+    { id: "hodgkin", title: "Hodgkin Lymphoma", sub: "Early vs advanced; PET-adapted ABVD / BV", icon: "bloodtype", ready: true }
   ];
 
   var st = {
