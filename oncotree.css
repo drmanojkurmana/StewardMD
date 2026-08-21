@@ -104,6 +104,13 @@ body.ot-open { overflow: hidden; }
 .ot-cat .material-symbols-outlined { font-size: 15px; }
 .ot-step-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin: 2px 0 6px; }
 .ot-step-desc { color: var(--ot-sub); font-size: 13.5px; margin: 0 0 14px; }
+/* Node checklist / criteria list (workup investigations, treatment components, follow-up) - NCCN-style */
+.ot-bullets { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.ot-bullets li { position: relative; padding-left: 20px; font-size: 13px; line-height: 1.4; color: var(--ot-ink, #14202b); }
+.ot-bullets li::before { content: ""; position: absolute; left: 3px; top: 6px; width: 8px; height: 8px; border-radius: 3px; border: 1.5px solid var(--ot-c, var(--ot-line)); }
+.ot-bl-sub { display: block; font-size: 11.5px; color: var(--ot-sub); margin-top: 1px; }
+.ot-mappop-desc + .ot-bullets { margin-top: 8px; }
+.ot-mappop-desc + .ot-bullets li { font-size: 12px; }
 
 .ot-opts { display: flex; flex-direction: column; gap: 8px; }
 .ot-opt {

@@ -2,14 +2,41 @@
   "guideline": "prostate",
   "title": "Prostate Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "2.0.0",
+  "navigatorVersion": "3.0.0",
   "diseaseId": "prostate_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for prostate cancer. Branches by disease state (localized/regional; biochemical recurrence; non-metastatic castration-resistant (nmCRPC/M0); metastatic castration-sensitive (mCSPC); metastatic castration-resistant (mCRPC)), then by localized risk group, metastatic volume, and mCRPC biomarker/burden (HRR/BRCA, MSI-H/dMMR, PSMA-positive, bone-predominant). Each option ROUTES to APPLICABLE existing StewardMD Standard Protocols by reference; modality-only options with no dose protocol (active surveillance, radium-223, tissue-agnostic pembrolizumab, surgery/radiation) are shown as guidance only with NO dose. Invents no dose/regimen/criterion; the physician selects and the existing dose engine computes patient doses. Risk-group and metastatic-volume stratification are standard oncology constructs; structural pathway consistent with Standard Guidelines (NCCN) Prostate Cancer, no proprietary content reproduced. DRAFT - not clinically activated.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Prostate Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_prostate_state"],
+  "provenanceNote": "ONCOTREE navigator DRAFT for prostate cancer. Full pathway: initial workup -> disease state -> (localized risk group / mCSPC volume / mCRPC biomarker + line of therapy) -> treatment with per-node checklists -> surveillance and biochemical-recurrence pathways. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference (same disease-stage scope only); modalities/agents without a dose protocol (active surveillance, radiation, surgery, apalutamide/darolutamide, pembrolizumab MSI-H, radium-223) are shown as checklist guidance with NO dose. Workup/risk-stratification/staging/surveillance content is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN) Prostate Cancer, no proprietary content reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Prostate Cancer. Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
+  "startNodeIds": ["n_workup"],
   "nodes": [
+    {
+      "id": "n_workup",
+      "linkId": "prostate_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Initial workup",
+      "title": "Initial workup and risk assessment",
+      "description": "Baseline evaluation before treatment. Confirm histology, establish grade group and clinical stage, and stratify risk.",
+      "path": "Prostate / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History and physical, including digital rectal exam (DRE)", "sub": "performance status, symptoms, family cancer history" },
+        { "label": "Serum PSA and testosterone (baseline)" },
+        { "label": "Prostate biopsy: ISUP grade group / Gleason score, number and % of positive cores" },
+        { "label": "Risk stratification: PSA, grade group, clinical T stage, % positive cores" },
+        { "label": "Staging imaging by risk", "sub": "bone scan + CT/MRI, or PSMA-PET (higher sensitivity) for unfavorable-intermediate risk and above / on biochemical recurrence" },
+        { "label": "Germline testing (BRCA1/2, HRR, MMR) if high-risk, node-positive, metastatic, or strong family history" },
+        { "label": "Consider a tumor genomic classifier (e.g. Decipher) to refine localized risk" },
+        { "label": "Assess bone health and comorbidity before androgen-deprivation therapy" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
     {
       "id": "n_prostate_state",
       "linkId": "prostate_state",
@@ -18,7 +45,7 @@
       "template": "main",
       "name": "Disease state",
       "title": "Disease state",
-      "description": "Prostate cancer therapy is defined first by disease state. Choose the current clinical state.",
+      "description": "Prostate cancer management is defined first by disease state. Choose the current clinical state.",
       "path": "Prostate / State",
       "section": "Staging",
       "pills": ["disease state"],
@@ -28,7 +55,8 @@
         { "id": "bcr", "label": "Biochemical recurrence after local therapy", "sets": { "diseaseState": "bcr" }, "pills": ["BCR"] },
         { "id": "nmcrpc", "label": "Non-metastatic castration-resistant (nmCRPC / M0 CRPC)", "sets": { "diseaseState": "nmcrpc" }, "pills": ["nmCRPC"] },
         { "id": "mcspc", "label": "Metastatic castration-sensitive (mCSPC)", "sets": { "diseaseState": "mcspc" }, "pills": ["mCSPC"] },
-        { "id": "mcrpc", "label": "Metastatic castration-resistant (mCRPC)", "sets": { "diseaseState": "mcrpc" }, "pills": ["mCRPC"] }
+        { "id": "mcrpc", "label": "Metastatic castration-resistant (mCRPC)", "sets": { "diseaseState": "mcrpc" }, "pills": ["mCRPC"] },
+        { "id": "followup", "label": "Post-treatment follow-up / surveillance", "sets": { "diseaseState": "followup" }, "pills": ["surveillance"] }
       ]
     },
 
@@ -40,11 +68,17 @@
       "template": "main",
       "name": "Localized risk group",
       "title": "Localized: risk group",
-      "description": "Stratify localized/regional disease by risk group (PSA, ISUP grade group / Gleason, clinical T stage, and % positive cores). Risk group drives whether systemic therapy is added to local therapy.",
+      "description": "Stratify localized / regional disease by risk group. Risk group drives whether, and how long, systemic therapy is added to local therapy.",
       "path": "Prostate / Localized / Risk",
       "section": "Staging",
       "pills": ["risk group"],
       "required": true,
+      "bullets": [
+        { "label": "Very-low / low", "sub": "PSA < 10, grade group 1, cT1-2a" },
+        { "label": "Favorable intermediate", "sub": "grade group 1-2, PSA 10-20 or cT2b-c, and < 50% positive cores" },
+        { "label": "Unfavorable intermediate", "sub": "grade group 3, or two-plus intermediate factors, or >= 50% positive cores" },
+        { "label": "High / very-high", "sub": "PSA > 20, grade group 4-5, cT3-4, or regional node-positive (N1)" }
+      ],
       "options": [
         { "id": "verylow_low", "label": "Very-low / low risk", "sets": { "riskGroup": "low" }, "pills": ["low risk"] },
         { "id": "fav_int", "label": "Favorable intermediate", "sets": { "riskGroup": "fav_intermediate" }, "pills": ["fav intermediate"] },
@@ -53,47 +87,6 @@
       ]
     },
     {
-      "id": "n_mcspc_vol",
-      "linkId": "prostate_mcspc_vol",
-      "nodeCategory": "criteria",
-      "nodeType": "question",
-      "template": "main",
-      "name": "mCSPC volume",
-      "title": "mCSPC: metastatic burden",
-      "description": "In metastatic castration-sensitive disease, metastatic volume (e.g. visceral disease and/or four or more bone metastases with at least one beyond the vertebral column/pelvis) and de-novo vs recurrent presentation guide the intensity of androgen-deprivation intensification.",
-      "path": "Prostate / mCSPC / Volume",
-      "section": "Staging",
-      "pills": ["mCSPC", "volume"],
-      "required": true,
-      "options": [
-        { "id": "high_volume", "label": "High-volume / high-risk (often de novo)", "sets": { "metVolume": "high" }, "pills": ["high-volume"] },
-        { "id": "low_volume", "label": "Low-volume", "sets": { "metVolume": "low" }, "pills": ["low-volume"] }
-      ]
-    },
-    {
-      "id": "n_prostate_mcrpc_opt",
-      "linkId": "prostate_mcrpc_opt",
-      "nodeCategory": "criteria",
-      "nodeType": "question",
-      "template": "main",
-      "name": "mCRPC option",
-      "title": "mCRPC: biomarker / burden",
-      "description": "In mCRPC, select the directing feature. Obtain germline + somatic HRR testing, MMR/MSI (or TMB), and PSMA-PET where available. Prior therapy also guides sequencing (an ARPI-first patient who progresses is typically offered a taxane, and vice-versa).",
-      "path": "Prostate / mCRPC / Option",
-      "section": "Treatment",
-      "pills": ["mCRPC", "biomarker"],
-      "required": true,
-      "options": [
-        { "id": "standard", "label": "Standard ARPI / taxane (no actionable biomarker)", "setsValue": null, "pills": ["ARPI/taxane"] },
-        { "id": "hrr", "label": "HRR / BRCA alteration (PARP inhibitor)", "sets": { "biomarkers.HRR": "positive" }, "pills": ["HRR+"] },
-        { "id": "msi", "label": "MSI-H / dMMR (immunotherapy)", "sets": { "biomarkers.MMR": "deficient" }, "pills": ["MSI-H"] },
-        { "id": "psma", "label": "PSMA-positive imaging (radioligand)", "sets": { "biomarkers.PSMA": "positive" }, "pills": ["PSMA+"] },
-        { "id": "bone_only", "label": "Symptomatic bone-predominant, no visceral (radium-223)", "sets": { "burden": "bone_only" }, "pills": ["bone-only"] },
-        { "id": "unk", "label": "Not yet determined", "setsValue": null }
-      ]
-    },
-
-    {
       "id": "n_tx_loc_surv",
       "linkId": "tx_loc_surv",
       "nodeCategory": "surveillance",
@@ -101,11 +94,17 @@
       "template": "end",
       "name": "Active surveillance",
       "title": "Very-low / low risk: active surveillance",
-      "description": "Very-low and low-risk localized disease is generally managed with active surveillance (serial PSA, DRE, and repeat biopsy/imaging), with definitive local therapy (radical prostatectomy or radiation) reserved for reclassification. No systemic therapy; monitoring only. Physician decides.",
+      "description": "Preferred for very-low and low-risk disease. Monitor and reserve definitive local therapy for reclassification. No systemic therapy.",
       "path": "Prostate / Localized / Surveillance",
       "section": "Surveillance",
       "pills": ["low risk", "surveillance"],
-      "showsRecommendation": true
+      "showsRecommendation": true,
+      "bullets": [
+        "PSA every 6 months; DRE every 12 months",
+        "Multiparametric MRI and confirmatory / repeat biopsy at 6-12 months, then per protocol",
+        "Definitive therapy (radical prostatectomy or radiation) on grade or volume reclassification",
+        "Radical prostatectomy or radiation are alternatives for patients who prefer treatment"
+      ]
     },
     {
       "id": "n_tx_loc_favint",
@@ -115,11 +114,17 @@
       "template": "end",
       "name": "Favorable intermediate",
       "title": "Favorable intermediate: local therapy",
-      "description": "Favorable-intermediate-risk disease: radiation (EBRT or brachytherapy) or radical prostatectomy; active surveillance remains an option for selected patients. Short-course ADT is generally NOT required. If ADT is used with radiation, the ADT regimen is referenced below; radiation/surgery are procedures the physician arranges.",
+      "description": "Definitive local therapy; short-course ADT is generally NOT required. Active surveillance remains an option for selected patients.",
       "path": "Prostate / Localized / Favorable",
       "section": "Treatment",
       "pills": ["fav intermediate", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "External-beam radiation (EBRT) or brachytherapy - ADT usually not added",
+        "Radical prostatectomy + pelvic lymph-node dissection if nomogram node risk is meaningful",
+        "Active surveillance for selected patients",
+        "If radiation is combined with ADT, the ADT backbone regimen is referenced below"
+      ],
       "protocolRefs": ["gu-prostate-adt"]
     },
     {
@@ -130,11 +135,17 @@
       "template": "end",
       "name": "Unfavorable intermediate",
       "title": "Unfavorable intermediate: RT + short-term ADT",
-      "description": "Unfavorable-intermediate-risk disease: radiation with short-term (about 4-6 months) androgen-deprivation therapy, or radical prostatectomy with pelvic lymph-node dissection. ADT regimen referenced below; physician selects and arranges local therapy.",
+      "description": "Radiation with short-term androgen-deprivation therapy, or surgery.",
       "path": "Prostate / Localized / Unfavorable",
       "section": "Treatment",
       "pills": ["unfav intermediate", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "EBRT + short-term ADT (about 4-6 months); brachytherapy boost is an option",
+        "Radical prostatectomy + pelvic lymph-node dissection",
+        "Consider adjuvant / early-salvage radiation after prostatectomy for adverse pathology",
+        "ADT backbone regimen referenced below"
+      ],
       "protocolRefs": ["gu-prostate-adt"]
     },
     {
@@ -144,30 +155,88 @@
       "nodeType": "end",
       "template": "end",
       "name": "High / very-high risk",
-      "title": "High / very-high risk: RT + long-term ADT (+/- abiraterone)",
-      "description": "High- and very-high-risk (and node-positive) disease: radiation with long-term (about 18-36 months) androgen-deprivation therapy, with abiraterone added for selected very-high-risk/regional disease; or radical prostatectomy with pelvic lymph-node dissection in appropriate candidates. ADT and abiraterone regimens referenced below.",
+      "title": "High / very-high risk: RT + long-term ADT (intensified)",
+      "description": "Multimodal therapy. Radiation with long-term ADT is standard; intensify for very-high-risk / node-positive disease.",
       "path": "Prostate / Localized / High",
       "section": "Treatment",
       "pills": ["high risk", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["gu-prostate-adt", "gu-prostate-abiraterone"]
+      "bullets": [
+        "EBRT + long-term ADT (about 18-36 months); EBRT + brachytherapy boost is an option",
+        "Add abiraterone to ADT for very-high-risk / node-positive disease (intensification)",
+        "Radical prostatectomy + extended pelvic lymph-node dissection in selected candidates (multimodal)",
+        "Manage bone health during long-term ADT",
+        "ADT backbone regimen referenced below; abiraterone is an mCRPC-scoped protocol here so it is listed as guidance"
+      ],
+      "protocolRefs": ["gu-prostate-adt"]
     },
 
     {
-      "id": "n_tx_bcr",
-      "linkId": "tx_bcr",
+      "id": "n_bcr_type",
+      "linkId": "prostate_bcr_type",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Recurrence setting",
+      "title": "Biochemical recurrence: prior local therapy",
+      "description": "Rising PSA after prior definitive local therapy. Restage (PSMA-PET where available); management differs by the primary treatment received.",
+      "path": "Prostate / BCR / Type",
+      "section": "Recurrence",
+      "pills": ["BCR"],
+      "required": true,
+      "bullets": [
+        "Confirm rising PSA and calculate PSA doubling-time",
+        "PSMA-PET (or CT + bone scan) to distinguish local vs regional vs distant recurrence"
+      ],
+      "options": [
+        { "id": "post_rp", "label": "After radical prostatectomy", "sets": { "bcrPrimary": "rp" }, "pills": ["post-RP"] },
+        { "id": "post_rt", "label": "After radiation therapy", "sets": { "bcrPrimary": "rt" }, "pills": ["post-RT"] }
+      ]
+    },
+    {
+      "id": "n_tx_bcr_rp",
+      "linkId": "tx_bcr_rp",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Biochemical recurrence",
-      "title": "Biochemical recurrence: restage + salvage",
-      "description": "Rising PSA after prior local therapy: restage (PSMA-PET where available) to distinguish local vs regional vs distant recurrence. Options: salvage radiation with or without ADT (after prostatectomy), salvage local therapy (after primary radiation), or observation when PSA doubling-time is long. ADT regimen referenced below; physician selects.",
-      "path": "Prostate / BCR",
-      "section": "Treatment",
-      "pills": ["BCR", "treatment"],
+      "name": "BCR after prostatectomy",
+      "title": "BCR after prostatectomy: salvage radiation +/- ADT",
+      "description": "Localized recurrence after surgery.",
+      "path": "Prostate / BCR / post-RP",
+      "section": "Recurrence",
+      "pills": ["post-RP", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "Salvage radiation to the prostate bed +/- pelvic nodes, ideally at low PSA",
+        "Add ADT to salvage radiation for higher-risk features",
+        "Observation if PSA doubling-time is long and life expectancy limited",
+        "If PSMA-PET shows distant disease, treat as metastatic (mCSPC pathway)"
+      ],
       "protocolRefs": ["gu-prostate-adt"]
     },
+    {
+      "id": "n_tx_bcr_rt",
+      "linkId": "tx_bcr_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BCR after radiation",
+      "title": "BCR after radiation: local salvage vs ADT",
+      "description": "Recurrence after primary radiation.",
+      "path": "Prostate / BCR / post-RT",
+      "section": "Recurrence",
+      "pills": ["post-RT", "treatment"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Biopsy to confirm local recurrence; restage with PSMA-PET",
+        "Local salvage (salvage prostatectomy, cryotherapy, HIFU, or brachytherapy) for confirmed local-only recurrence",
+        "ADT for regional / distant recurrence or non-candidates for local salvage",
+        "Observation if PSA doubling-time is long",
+        "ADT backbone regimen referenced below"
+      ],
+      "protocolRefs": ["gu-prostate-adt"]
+    },
+
     {
       "id": "n_tx_nmcrpc",
       "linkId": "tx_nmcrpc",
@@ -176,28 +245,43 @@
       "template": "end",
       "name": "nmCRPC",
       "title": "nmCRPC (M0 CRPC): continue ADT + next-generation ARPI",
-      "description": "Non-metastatic castration-resistant disease with a short PSA doubling-time (about 10 months or less): continue androgen-deprivation and add a next-generation androgen-receptor pathway inhibitor (apalutamide, darolutamide, or enzalutamide) to delay metastasis. Apalutamide/darolutamide are the same class as the enzalutamide regimen referenced below; physician selects the agent.",
+      "description": "Non-metastatic castration-resistant disease. Confirm castrate testosterone; the driver is a short PSA doubling-time.",
       "path": "Prostate / nmCRPC",
       "section": "Treatment",
       "pills": ["nmCRPC", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "Confirm castrate testosterone (< 50 ng/dL) and M0 status (PSMA-PET may reclassify to metastatic)",
+        "For PSA doubling-time <= 10 months: continue ADT and add apalutamide, darolutamide, or enzalutamide to delay metastasis",
+        "Apalutamide / darolutamide have no dedicated dose protocol here yet - shown as guidance (same ARPI class)",
+        "Bone-health monitoring on continued ADT",
+        "Enzalutamide dose protocol referenced below (same drug class)"
+      ],
       "protocolRefs": ["gu-prostate-enzalutamide"]
     },
 
     {
-      "id": "n_tx_mcspc_doublet",
-      "linkId": "tx_mcspc_doublet",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "mCSPC doublet",
-      "title": "mCSPC (low-volume): ADT + ARPI doublet",
-      "description": "Metastatic castration-sensitive, low-volume: androgen-deprivation therapy intensified with an androgen-receptor pathway inhibitor (abiraterone, apalutamide, or enzalutamide). ADT alone is no longer preferred. Physician selects the ARPI.",
-      "path": "Prostate / mCSPC / Doublet",
-      "section": "Treatment",
-      "pills": ["mCSPC", "low-volume", "treatment"],
-      "showsRecommendation": true,
-      "protocolRefs": ["gu-prostate-adt-arpi", "gu-prostate-abiraterone", "gu-prostate-enzalutamide"]
+      "id": "n_mcspc_vol",
+      "linkId": "prostate_mcspc_vol",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "mCSPC volume",
+      "title": "mCSPC: metastatic burden",
+      "description": "In metastatic castration-sensitive disease, volume and de-novo vs recurrent presentation guide how intensively to escalate ADT. ADT alone is no longer preferred.",
+      "path": "Prostate / mCSPC / Volume",
+      "section": "Staging",
+      "pills": ["mCSPC", "volume"],
+      "required": true,
+      "bullets": [
+        { "label": "High-volume", "sub": "visceral metastases and/or >= 4 bone metastases with >= 1 beyond the vertebral column / pelvis" },
+        { "label": "Low-volume", "sub": "does not meet high-volume criteria" },
+        "Start ADT backbone in all; add at least one intensification agent"
+      ],
+      "options": [
+        { "id": "high_volume", "label": "High-volume / high-risk (often de novo)", "sets": { "metVolume": "high" }, "pills": ["high-volume"] },
+        { "id": "low_volume", "label": "Low-volume", "sets": { "metVolume": "low" }, "pills": ["low-volume"] }
+      ]
     },
     {
       "id": "n_tx_mcspc_triplet",
@@ -207,28 +291,149 @@
       "template": "end",
       "name": "mCSPC triplet",
       "title": "mCSPC (high-volume): ADT + docetaxel + ARPI (triplet)",
-      "description": "Metastatic castration-sensitive, high-volume/de-novo: triplet therapy - androgen-deprivation plus docetaxel plus an androgen-receptor pathway inhibitor (abiraterone or darolutamide) for fit patients; ADT + ARPI doublet is an alternative. Component regimens referenced below.",
+      "description": "High-volume / de-novo disease in fit patients.",
       "path": "Prostate / mCSPC / Triplet",
       "section": "Treatment",
       "pills": ["mCSPC", "high-volume", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["gu-prostate-adt-docetaxel", "gu-prostate-abiraterone"]
+      "bullets": [
+        "Triplet: ADT + docetaxel + an ARPI (abiraterone or darolutamide) for fit patients",
+        "ADT + ARPI doublet is an acceptable alternative if docetaxel is not suitable",
+        "Bone-supportive therapy for bone metastases; continue ADT indefinitely",
+        "Component regimens referenced below"
+      ],
+      "protocolRefs": ["gu-prostate-adt-docetaxel", "gu-prostate-adt-arpi"]
     },
-
     {
-      "id": "n_tx_prostate_mcrpc_std",
-      "linkId": "tx_prostate_mcrpc_std",
+      "id": "n_tx_mcspc_doublet",
+      "linkId": "tx_mcspc_doublet",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "mCRPC standard",
-      "title": "mCRPC: standard ARPI / taxane",
-      "description": "mCRPC with no actionable biomarker: an androgen-receptor pathway inhibitor (abiraterone or enzalutamide) if not previously used, or taxane chemotherapy (docetaxel, then cabazitaxel on progression). Avoid sequential ARPI-to-ARPI where possible. Physician selects.",
-      "path": "Prostate / mCRPC / Standard",
+      "name": "mCSPC doublet",
+      "title": "mCSPC (low-volume): ADT + ARPI doublet",
+      "description": "Low-volume disease.",
+      "path": "Prostate / mCSPC / Doublet",
       "section": "Treatment",
-      "pills": ["mCRPC", "treatment"],
+      "pills": ["mCSPC", "low-volume", "treatment"],
       "showsRecommendation": true,
-      "protocolRefs": ["gu-prostate-abiraterone", "gu-prostate-enzalutamide", "gu-prostate-docetaxel-mcrpc", "gu-prostate-cabazitaxel"]
+      "bullets": [
+        "ADT + an ARPI (abiraterone, apalutamide, or enzalutamide)",
+        "Radiation to the primary is an option for low-volume disease",
+        "Bone-supportive therapy for bone metastases; continue ADT indefinitely",
+        "ADT + ARPI regimen referenced below"
+      ],
+      "protocolRefs": ["gu-prostate-adt-arpi"]
+    },
+
+    {
+      "id": "n_prostate_mcrpc_opt",
+      "linkId": "prostate_mcrpc_opt",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "mCRPC option",
+      "title": "mCRPC: biomarker / burden",
+      "description": "In mCRPC, select the directing feature. Obtain HRR (germline + somatic), MMR/MSI, and PSMA-PET where available.",
+      "path": "Prostate / mCRPC / Option",
+      "section": "Treatment",
+      "pills": ["mCRPC", "biomarker"],
+      "required": true,
+      "bullets": [
+        "Confirm castrate testosterone before labelling castration-resistant",
+        "Test HRR (BRCA1/2, ATM...), MMR/MSI (or TMB), and PSMA-PET status",
+        "Prior therapy guides sequencing (avoid ARPI-to-ARPI switching)"
+      ],
+      "options": [
+        { "id": "standard", "label": "Standard ARPI / taxane (no actionable biomarker)", "setsValue": null, "pills": ["ARPI/taxane"] },
+        { "id": "hrr", "label": "HRR / BRCA alteration (PARP inhibitor)", "sets": { "biomarkers.HRR": "positive" }, "pills": ["HRR+"] },
+        { "id": "msi", "label": "MSI-H / dMMR (immunotherapy)", "sets": { "biomarkers.MMR": "deficient" }, "pills": ["MSI-H"] },
+        { "id": "psma", "label": "PSMA-positive imaging (radioligand)", "sets": { "biomarkers.PSMA": "positive" }, "pills": ["PSMA+"] },
+        { "id": "bone_only", "label": "Symptomatic bone-predominant, no visceral (radium-223)", "sets": { "burden": "bone_only" }, "pills": ["bone-only"] },
+        { "id": "unk", "label": "Not yet determined", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_mcrpc_line",
+      "linkId": "prostate_mcrpc_line",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "mCRPC line",
+      "title": "mCRPC: line of therapy",
+      "description": "Sequencing in mCRPC without an actionable biomarker depends on what was already given in the castration-sensitive setting.",
+      "path": "Prostate / mCRPC / Line",
+      "section": "Treatment",
+      "pills": ["mCRPC", "sequencing"],
+      "required": true,
+      "options": [
+        { "id": "naive", "label": "No prior ARPI or taxane", "sets": { "line": "first" }, "pills": ["1st line"] },
+        { "id": "post_arpi", "label": "Progressed after an ARPI", "sets": { "line": "post_arpi" }, "pills": ["post-ARPI"] },
+        { "id": "post_taxane", "label": "Progressed after docetaxel", "sets": { "line": "post_taxane" }, "pills": ["post-taxane"] }
+      ]
+    },
+    {
+      "id": "n_tx_mcrpc_1l",
+      "linkId": "tx_mcrpc_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "mCRPC first line",
+      "title": "mCRPC, no prior ARPI/taxane: ARPI or docetaxel",
+      "description": "Treatment-naive mCRPC.",
+      "path": "Prostate / mCRPC / 1st line",
+      "section": "Treatment",
+      "pills": ["mCRPC", "1st line", "treatment"],
+      "showsRecommendation": true,
+      "bullets": [
+        "An ARPI (abiraterone + prednisone, or enzalutamide) is preferred for most",
+        "Docetaxel for symptomatic / rapidly progressive or visceral disease",
+        "Sipuleucel-T is an option for asymptomatic / minimally symptomatic disease (no dose protocol here)",
+        "Continue ADT; maintain bone health"
+      ],
+      "protocolRefs": ["gu-prostate-abiraterone", "gu-prostate-enzalutamide", "gu-prostate-docetaxel-mcrpc"]
+    },
+    {
+      "id": "n_tx_mcrpc_postarpi",
+      "linkId": "tx_mcrpc_postarpi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "mCRPC post-ARPI",
+      "title": "mCRPC after an ARPI: taxane (switch class)",
+      "description": "Progression on a prior ARPI. Avoid ARPI-to-ARPI switching where possible.",
+      "path": "Prostate / mCRPC / post-ARPI",
+      "section": "Treatment",
+      "pills": ["mCRPC", "post-ARPI", "treatment"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Docetaxel is preferred (switch mechanism of action)",
+        "PSMA-radioligand (if PSMA-positive) or a PARP inhibitor (if HRR-altered) are biomarker options",
+        "Re-test HRR / MSI / PSMA if not already done",
+        "Continue ADT; maintain bone health"
+      ],
+      "protocolRefs": ["gu-prostate-docetaxel-mcrpc"]
+    },
+    {
+      "id": "n_tx_mcrpc_posttax",
+      "linkId": "tx_mcrpc_posttax",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "mCRPC post-taxane",
+      "title": "mCRPC after docetaxel: cabazitaxel / next options",
+      "description": "Progression after docetaxel.",
+      "path": "Prostate / mCRPC / post-taxane",
+      "section": "Treatment",
+      "pills": ["mCRPC", "post-taxane", "treatment"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Cabazitaxel + steroid (post-docetaxel taxane)",
+        "An ARPI if not previously used; PSMA-radioligand if PSMA-positive; PARP inhibitor if HRR-altered",
+        "Radium-223 for symptomatic bone-predominant disease without visceral spread",
+        "Continue ADT; maintain bone health"
+      ],
+      "protocolRefs": ["gu-prostate-cabazitaxel"]
     },
     {
       "id": "n_tx_prostate_parp",
@@ -238,11 +443,16 @@
       "template": "end",
       "name": "mCRPC PARP",
       "title": "mCRPC, HRR / BRCA: PARP inhibitor",
-      "description": "mCRPC with a homologous-recombination-repair (HRR) or BRCA1/2 alteration: a PARP inhibitor (olaparib), typically after or combined with an ARPI. Physician selects.",
+      "description": "mCRPC with a homologous-recombination-repair or BRCA1/2 alteration.",
       "path": "Prostate / mCRPC / PARP",
       "section": "Treatment",
       "pills": ["HRR+", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "A PARP inhibitor (olaparib), typically after or combined with an ARPI",
+        "Confirm the HRR / BRCA alteration (germline and/or somatic)",
+        "Continue ADT; maintain bone health"
+      ],
       "protocolRefs": ["gu-prostate-olaparib"]
     },
     {
@@ -253,11 +463,16 @@
       "template": "end",
       "name": "mCRPC immunotherapy",
       "title": "mCRPC, MSI-H / dMMR: immunotherapy",
-      "description": "mCRPC that is microsatellite-instability-high (MSI-H) or mismatch-repair-deficient (dMMR): pembrolizumab under the tissue-agnostic indication. No prostate-specific dose protocol exists in StewardMD yet, so this is shown as guidance only - the physician arranges the tissue-agnostic pembrolizumab regimen. Guidance only; no dose computed here.",
+      "description": "Microsatellite-instability-high or mismatch-repair-deficient mCRPC.",
       "path": "Prostate / mCRPC / Immunotherapy",
       "section": "Treatment",
       "pills": ["MSI-H", "treatment"],
-      "showsRecommendation": true
+      "showsRecommendation": true,
+      "bullets": [
+        "Pembrolizumab under the tissue-agnostic MSI-H / dMMR indication",
+        "No prostate-specific dose protocol here yet - shown as guidance (physician arranges the pembrolizumab regimen)",
+        "Continue ADT; maintain bone health"
+      ]
     },
     {
       "id": "n_tx_prostate_lu177",
@@ -267,11 +482,16 @@
       "template": "end",
       "name": "mCRPC radioligand",
       "title": "mCRPC, PSMA-positive: radioligand therapy",
-      "description": "mCRPC with PSMA-positive imaging (and typically after an ARPI and a taxane): Lu-177-PSMA radioligand therapy. Physician selects.",
+      "description": "mCRPC with PSMA-positive imaging, typically after an ARPI and a taxane.",
       "path": "Prostate / mCRPC / Radioligand",
       "section": "Treatment",
       "pills": ["PSMA+", "treatment"],
       "showsRecommendation": true,
+      "bullets": [
+        "Lu-177-PSMA (PSMA-617) radioligand therapy",
+        "Requires PSMA-positive imaging and adequate marrow / renal function",
+        "Continue ADT; maintain bone health"
+      ],
       "protocolRefs": ["gu-prostate-lu177-psma"]
     },
     {
@@ -282,33 +502,70 @@
       "template": "end",
       "name": "mCRPC radium-223",
       "title": "mCRPC, bone-predominant: radium-223",
-      "description": "mCRPC with symptomatic bone metastases and no visceral disease: radium-223 (an alpha-emitter) prolongs survival and reduces symptomatic skeletal events; not combined with abiraterone/prednisone. No dose protocol exists in StewardMD yet, so this is shown as guidance only - the physician arranges the regimen. Guidance only; no dose computed here.",
+      "description": "Symptomatic bone-predominant mCRPC without visceral disease.",
       "path": "Prostate / mCRPC / Radium-223",
       "section": "Treatment",
       "pills": ["bone-only", "treatment"],
-      "showsRecommendation": true
+      "showsRecommendation": true,
+      "bullets": [
+        "Radium-223 (alpha-emitter): prolongs survival, reduces symptomatic skeletal events",
+        "Not combined with abiraterone + prednisone",
+        "No dose protocol here yet - shown as guidance (physician arranges the regimen)",
+        "Add a bone-modifying agent (denosumab or zoledronic acid) for skeletal protection"
+      ]
+    },
+
+    {
+      "id": "n_surv",
+      "linkId": "prostate_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance / follow-up",
+      "description": "Monitoring cadence after definitive or systemic therapy; escalate on PSA rise.",
+      "path": "Prostate / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "After definitive local therapy: PSA every 6-12 months for 5 years, then annually; DRE annually",
+        "A confirmed rising PSA defines biochemical recurrence - restage (PSMA-PET) and enter the recurrence pathway",
+        "On systemic therapy: PSA + testosterone, symptom and imaging assessment at intervals; watch for castration resistance",
+        "Ongoing bone-health monitoring and cardiovascular / metabolic care during ADT"
+      ]
     }
   ],
   "links": [
+    { "id": "l_wk", "from": "n_workup", "to": "n_prostate_state", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
     { "id": "l_pr_loc", "from": "n_prostate_state", "to": "n_loc_risk", "fromOptions": ["localized"], "linkCategory": "conditional" },
-    { "id": "l_pr_bcr", "from": "n_prostate_state", "to": "n_tx_bcr", "fromOptions": ["bcr"], "linkCategory": "conditional" },
+    { "id": "l_pr_bcr", "from": "n_prostate_state", "to": "n_bcr_type", "fromOptions": ["bcr"], "linkCategory": "conditional" },
     { "id": "l_pr_nmcrpc", "from": "n_prostate_state", "to": "n_tx_nmcrpc", "fromOptions": ["nmcrpc"], "linkCategory": "conditional" },
     { "id": "l_pr_mcspc", "from": "n_prostate_state", "to": "n_mcspc_vol", "fromOptions": ["mcspc"], "linkCategory": "conditional" },
     { "id": "l_pr_mcrpc", "from": "n_prostate_state", "to": "n_prostate_mcrpc_opt", "fromOptions": ["mcrpc"], "linkCategory": "conditional" },
+    { "id": "l_pr_fu", "from": "n_prostate_state", "to": "n_surv", "fromOptions": ["followup"], "linkCategory": "conditional" },
 
     { "id": "l_loc_surv", "from": "n_loc_risk", "to": "n_tx_loc_surv", "fromOptions": ["verylow_low"], "linkCategory": "conditional" },
     { "id": "l_loc_fav", "from": "n_loc_risk", "to": "n_tx_loc_favint", "fromOptions": ["fav_int"], "linkCategory": "conditional" },
     { "id": "l_loc_unfav", "from": "n_loc_risk", "to": "n_tx_loc_unfav", "fromOptions": ["unfav_int"], "linkCategory": "conditional" },
     { "id": "l_loc_high", "from": "n_loc_risk", "to": "n_tx_loc_high", "fromOptions": ["high_vhigh"], "linkCategory": "conditional" },
 
-    { "id": "l_mcspc_low", "from": "n_mcspc_vol", "to": "n_tx_mcspc_doublet", "fromOptions": ["low_volume"], "linkCategory": "conditional" },
+    { "id": "l_bcr_rp", "from": "n_bcr_type", "to": "n_tx_bcr_rp", "fromOptions": ["post_rp"], "linkCategory": "conditional" },
+    { "id": "l_bcr_rt", "from": "n_bcr_type", "to": "n_tx_bcr_rt", "fromOptions": ["post_rt"], "linkCategory": "conditional" },
+
     { "id": "l_mcspc_high", "from": "n_mcspc_vol", "to": "n_tx_mcspc_triplet", "fromOptions": ["high_volume"], "linkCategory": "conditional" },
     { "id": "l_mcspc_high_alt", "from": "n_mcspc_vol", "to": "n_tx_mcspc_doublet", "fromOptions": ["high_volume"], "linkCategory": "conditional" },
+    { "id": "l_mcspc_low", "from": "n_mcspc_vol", "to": "n_tx_mcspc_doublet", "fromOptions": ["low_volume"], "linkCategory": "conditional" },
 
-    { "id": "l_pr_std", "from": "n_prostate_mcrpc_opt", "to": "n_tx_prostate_mcrpc_std", "fromOptions": ["standard"], "linkCategory": "conditional" },
-    { "id": "l_pr_hrr", "from": "n_prostate_mcrpc_opt", "to": "n_tx_prostate_parp", "fromOptions": ["hrr"], "linkCategory": "conditional" },
-    { "id": "l_pr_msi", "from": "n_prostate_mcrpc_opt", "to": "n_tx_mcrpc_io", "fromOptions": ["msi"], "linkCategory": "conditional" },
-    { "id": "l_pr_psma", "from": "n_prostate_mcrpc_opt", "to": "n_tx_prostate_lu177", "fromOptions": ["psma"], "linkCategory": "conditional" },
-    { "id": "l_pr_bone", "from": "n_prostate_mcrpc_opt", "to": "n_tx_mcrpc_radium", "fromOptions": ["bone_only"], "linkCategory": "conditional" }
+    { "id": "l_mcrpc_std", "from": "n_prostate_mcrpc_opt", "to": "n_mcrpc_line", "fromOptions": ["standard"], "linkCategory": "conditional" },
+    { "id": "l_mcrpc_hrr", "from": "n_prostate_mcrpc_opt", "to": "n_tx_prostate_parp", "fromOptions": ["hrr"], "linkCategory": "conditional" },
+    { "id": "l_mcrpc_msi", "from": "n_prostate_mcrpc_opt", "to": "n_tx_mcrpc_io", "fromOptions": ["msi"], "linkCategory": "conditional" },
+    { "id": "l_mcrpc_psma", "from": "n_prostate_mcrpc_opt", "to": "n_tx_prostate_lu177", "fromOptions": ["psma"], "linkCategory": "conditional" },
+    { "id": "l_mcrpc_bone", "from": "n_prostate_mcrpc_opt", "to": "n_tx_mcrpc_radium", "fromOptions": ["bone_only"], "linkCategory": "conditional" },
+
+    { "id": "l_line_1l", "from": "n_mcrpc_line", "to": "n_tx_mcrpc_1l", "fromOptions": ["naive"], "linkCategory": "conditional" },
+    { "id": "l_line_parpi", "from": "n_mcrpc_line", "to": "n_tx_mcrpc_postarpi", "fromOptions": ["post_arpi"], "linkCategory": "conditional" },
+    { "id": "l_line_ptax", "from": "n_mcrpc_line", "to": "n_tx_mcrpc_posttax", "fromOptions": ["post_taxane"], "linkCategory": "conditional" }
   ]
 }

@@ -114,6 +114,7 @@
       '<div class="ot-step-head">' + catChip(node.nodeCategory) + (node.section ? '<span class="ot-step-sec">' + esc(node.section) + "</span>" : "") + "</div>" +
       '<h2 class="ot-step-title">' + esc(node.title || node.name) + "</h2>" +
       (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") +
+      bulletsHtml(node.bullets) +
       '<div class="ot-opts">' + opts + "</div></div>";
   }
 
@@ -143,6 +144,16 @@
       "</div></div>";
   }
   function asArr(v) { return v == null ? [] : (v instanceof Array ? v : [v]); }
+  // Rich checklist / criteria list on a node (workup investigations, treatment components, criteria, follow-up).
+  // Each item is a plain string, or { label, sub } for a two-line item. Renders like NCCN's node checklists.
+  function bulletsHtml(items) {
+    items = asArr(items);
+    if (!items.length) return "";
+    return '<ul class="ot-bullets">' + items.map(function (b) {
+      if (b && typeof b === "object") return "<li>" + esc(b.label || "") + (b.sub ? '<span class="ot-bl-sub">' + esc(b.sub) + "</span>" : "") + "</li>";
+      return "<li>" + esc(b) + "</li>";
+    }).join("") + "</ul>";
+  }
 
   function outcomeHtml(node, state) {
     var refs = asArr(node.protocolRefs);
@@ -157,9 +168,10 @@
     var applicable = refs.filter(function (r) { return matchById[r]; });
     var excludedByPheno = refs.filter(function (r) { return st.protocols[r] && !matchById[r]; });
     var cards = applicable.map(function (r) { return protocolCardHtml(r, matchById[r]); }).join("");
-    var head = '<div class="ot-outcome-head">' + catChip("treatment") +
+    var ocat = CAT[node.nodeCategory] || CAT.treatment;
+    var head = '<div class="ot-outcome-head" style="--ot-c:' + ocat.color + '">' + catChip(node.nodeCategory || "treatment") +
       '<h2 class="ot-step-title">' + esc(node.title || node.name) + "</h2>" +
-      (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + "</div>";
+      (node.description ? '<p class="ot-step-desc">' + esc(node.description) + "</p>" : "") + bulletsHtml(node.bullets) + "</div>";
     var count = '<div class="ot-outcome-count">' + applicable.length + " applicable protocol" + (applicable.length === 1 ? "" : "s") +
       ' <span class="ot-outcome-note">Decision support only. Physician selects; the existing dose engine computes doses.</span></div>';
     var exHtml = excludedByPheno.length
@@ -271,6 +283,7 @@
       '<div class="ot-mappop-cat">' + ms(cat.icon) + esc(cat.name) + " &middot; " + esc(statusTxt) + "</div>" +
       '<div class="ot-mappop-name">' + esc(raw.name || raw.title || id) + "</div>" +
       (raw.description ? '<div class="ot-mappop-desc">' + esc(raw.description) + "</div>" : "") +
+      bulletsHtml(raw.bullets) +
       (sel.length ? '<div class="ot-mappop-sel">' + ms("check_circle") + esc(sel[0].label) + "</div>" : "") +
       (why.length ? '<div class="ot-mappop-why">' + ms("block") + "Excluded because " + why.join("; ") + "</div>" : "") +
       (ns.status === "active" ? '<button class="ot-btn primary sm" data-ot-act="map-goto" data-ot-node="' + esc(id) + '">' + ms("my_location") + "Go to this step</button>" : "") +
