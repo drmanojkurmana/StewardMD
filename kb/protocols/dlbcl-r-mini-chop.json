@@ -1,0 +1,128 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-r-mini-chop",
+  "name": "R-mini-CHOP (attenuated R-CHOP for the frail/elderly)",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "premedications": [
+    {
+      "name": "Pre-phase steroid",
+      "notes": "consider a short prednisone pre-phase to improve performance status before cycle 1"
+    },
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine"
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF support (higher febrile-neutropenia risk in the elderly)",
+    "PJP + antiviral prophylaxis; hepatitis B screen",
+    "Careful attention to hydration, renal function and drug interactions in older patients"
+  ],
+  "monitoring": [
+    "LVEF at baseline and cardiac monitoring (reduced-dose anthracycline chosen for limited reserve)",
+    "CBC before each cycle",
+    "Geriatric assessment; reassess tolerance each cycle"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV day 1 (full dose)."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 400,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Attenuated 400 mg/m2 IV day 1 (about half of standard R-CHOP)."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "Doxorubicin",
+      "basis": "bsa",
+      "dosePerUnit": 25,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "Attenuated 25 mg/m2 IV day 1 (about half of standard) to limit cardiotoxicity."
+    },
+    {
+      "id": "vincristine",
+      "name": "Vincristine",
+      "basis": "flat",
+      "dosePerUnit": 1,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 1
+      },
+      "notes": "Attenuated flat 1 mg IV day 1."
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "40 mg/m2 PO daily, days 1-5."
+    }
+  ]
+}

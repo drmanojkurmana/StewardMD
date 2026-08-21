@@ -1,0 +1,45 @@
+{
+  "id": "ov-pld",
+  "diseaseId": "ovarian_cancer",
+  "name": "PLD (Pegylated Liposomal DOXOrubicin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT single-agent option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "PLD is low-to-moderate emetogenic; give per emetic-risk framework." }
+  ],
+  "supportiveCare": [
+    "Palmar-plantar erythrodysesthesia (hand-foot syndrome) and stomatitis are the dose-limiting toxicities: counsel on skin care, avoid heat/pressure, and dose-delay or reduce for grade 2-3.",
+    "Liposomal formulation reduces but does not eliminate anthracycline cardiotoxicity; track cumulative anthracycline exposure."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "skin and oral-mucosa assessment each cycle",
+    "cumulative anthracycline dose and LVEF if clinically indicated"
+  ],
+  "drugs": [
+    {
+      "id": "peg-liposomal-doxorubicin",
+      "name": "Pegylated Liposomal DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "PLD 40 mg/m2 IV on day 1 every 28 days, continued to response/progression or unacceptable toxicity. A common single agent for platinum-resistant epithelial ovarian cancer; may be combined with bevacizumab. Reduce/delay for hand-foot syndrome or mucositis per package insert. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

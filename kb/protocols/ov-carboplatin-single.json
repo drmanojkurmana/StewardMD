@@ -1,0 +1,45 @@
+{
+  "id": "ov-carboplatin-single",
+  "diseaseId": "ovarian_cancer",
+  "name": "Single-agent Carboplatin (attenuated / palliative)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT gentle single-agent option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Carboplatin is moderately emetogenic; give per emetic-risk framework." },
+    { "name": "Hypersensitivity awareness", "notes": "Carboplatin hypersensitivity rises with repeated platinum exposure; premedicate/desensitize as needed." }
+  ],
+  "supportiveCare": [
+    "For frail patients not fit for a doublet: single-agent carboplatin is a lower-toxicity option; individualize the AUC target to marrow reserve and renal function.",
+    "Thrombocytopenia is the characteristic dose-limiting toxicity."
+  ],
+  "monitoring": [
+    "CBC before each cycle (platelet nadir)",
+    "renal function / estimated GFR before each cycle (Calvert dosing)"
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Carboplatin AUC 5 IV on day 1 every 21 days (Calvert formula; attenuate to AUC 4 for frailty/poor marrow reserve) as a single agent for patients not fit for a platinum-taxane doublet. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

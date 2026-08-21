@@ -1,0 +1,77 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-tafa-len",
+  "name": "Tafasitamab + lenalidomide",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 12,
+  "premedications": [
+    {
+      "name": "Tafasitamab premedication",
+      "notes": "acetaminophen + antihistamine + steroid for the first infusions"
+    },
+    {
+      "name": "VTE prophylaxis",
+      "notes": "aspirin or anticoagulation with lenalidomide"
+    }
+  ],
+  "supportiveCare": [
+    "For transplant-ineligible relapsed disease",
+    "Lenalidomide given for up to 12 cycles, then tafasitamab continued as monotherapy until progression",
+    "PJP/antiviral prophylaxis"
+  ],
+  "monitoring": [
+    "CBC (neutropenia is the main lenalidomide toxicity - the 25 mg dose is reduced for renal impairment/cytopenias)",
+    "Tafasitamab loading: weekly in cycles 1-3, then every 2 weeks",
+    "Thromboembolism risk"
+  ],
+  "drugs": [
+    {
+      "id": "tafasitamab",
+      "name": "Tafasitamab",
+      "basis": "mgkg",
+      "dosePerUnit": 12,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "12 mg/kg IV. Cycle 1 also has an extra day-4 dose; days 1,8,15,22 weekly through cycle 3, then days 1,15 from cycle 4."
+    },
+    {
+      "id": "lenalidomide",
+      "name": "Lenalidomide",
+      "basis": "flat",
+      "dosePerUnit": 25,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "25 mg PO once daily on days 1-21 of each 28-day cycle, for up to 12 cycles. Reduce for renal impairment/cytopenias."
+    }
+  ]
+}

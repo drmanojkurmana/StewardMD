@@ -103,6 +103,30 @@ body.ot-open { overflow: hidden; }
 .ot-cat .material-symbols-outlined { font-size: 15px; }
 .ot-step-title { font-size: 20px; font-weight: 700; letter-spacing: -.01em; margin: 2px 0 6px; }
 .ot-step-desc { color: var(--ot-sub); font-size: 13.5px; margin: 0 0 14px; }
+/* Node checklist / criteria list (workup investigations, treatment components, follow-up) - NCCN-style */
+.ot-bullets { list-style: none; margin: 0 0 14px; padding: 0; display: flex; flex-direction: column; gap: 7px; }
+.ot-bullets li { position: relative; padding-left: 20px; font-size: 13px; line-height: 1.4; color: var(--ot-ink, #14202b); }
+.ot-bullets li::before { content: ""; position: absolute; left: 3px; top: 6px; width: 8px; height: 8px; border-radius: 3px; border: 1.5px solid var(--ot-c, var(--ot-line)); }
+.ot-bl-sub { display: block; font-size: 11.5px; color: var(--ot-sub); margin-top: 1px; }
+/* Standard-Guidelines schema: evidence-category badges + lettered footnote markers/sheet */
+.ot-ev { display: inline-flex; align-items: center; font: 800 10px system-ui; letter-spacing: .02em; border-radius: 5px; padding: 1px 5px; margin-left: 6px; vertical-align: 2px; border: 1px solid; }
+.ot-ev-1 { color: #15803d; background: #dcfce7; border-color: #86efac; }
+.ot-ev-2a { color: #b45309; background: #fef3c7; border-color: #fcd34d; }
+.ot-ev-2b { color: #9a3412; background: #ffedd5; border-color: #fdba74; }
+.ot-ev-3 { color: #b91c1c; background: #fee2e2; border-color: #fca5a5; }
+.ot-fnrow { display: inline; }
+.ot-fn { display: inline-flex; align-items: center; justify-content: center; min-width: 15px; height: 15px; margin-left: 3px; padding: 0 3px; font: 800 9px system-ui; color: var(--ot-primary, #0e6e63); background: color-mix(in srgb, var(--ot-primary, #0e6e63) 12%, transparent); border-radius: 4px; cursor: pointer; vertical-align: super; }
+.ot-fn:active { background: color-mix(in srgb, var(--ot-primary, #0e6e63) 24%, transparent); }
+.ot-gn-ev { position: absolute; right: 6px; top: 6px; }
+.ot-gn-ev .ot-ev { margin-left: 0; font-size: 8.5px; padding: 0 4px; }
+.ot-fn-ov { position: fixed; inset: 0; z-index: 40; background: rgba(12,22,38,.5); display: flex; align-items: flex-end; justify-content: center; }
+.ot-fn-sheet { width: 100%; max-width: 560px; max-height: 70%; overflow-y: auto; background: var(--ot-card, #fff); border-radius: 18px 18px 0 0; padding: 6px 16px 22px; box-shadow: 0 -14px 40px -12px rgba(0,0,0,.4); }
+.ot-fn-hd { display: flex; align-items: center; gap: 8px; padding: 12px 0 10px; position: sticky; top: 0; background: var(--ot-card, #fff); border-bottom: 1px solid var(--ot-line); }
+.ot-fn-hd b { font: 800 14px system-ui; color: var(--ot-ink, #14202b); }
+.ot-fn-x { margin-left: auto; border: none; background: none; color: var(--ot-sub); cursor: pointer; display: inline-flex; }
+.ot-fn-body { font: 500 13.5px/1.55 system-ui; color: var(--ot-ink, #14202b); padding-top: 12px; white-space: pre-wrap; }
+.ot-mappop-desc + .ot-bullets { margin-top: 8px; }
+.ot-mappop-desc + .ot-bullets li { font-size: 12px; }
 
 .ot-opts { display: flex; flex-direction: column; gap: 8px; }
 .ot-opt {
@@ -218,6 +242,31 @@ body.ot-open { overflow: hidden; }
   font: 600 11px var(--sans); color: var(--ot-sub); background: color-mix(in srgb, var(--ot-card) 80%, transparent);
   padding: 5px 9px; border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); pointer-events: none; max-width: 62%; }
 .ot-graph-hint .material-symbols-outlined { font-size: 14px; }
+/* Table-of-Contents / outline panel on the map (jump to any node by section) */
+.ot-toc-fab { position: absolute; left: 12px; top: 12px; z-index: 6; width: 40px; height: 40px; border: 1px solid var(--ot-line); border-radius: 12px; background: var(--ot-card); color: var(--ot-c, var(--ot-ink, #14202b)); display: flex; align-items: center; justify-content: center; cursor: pointer; box-shadow: 0 4px 14px -6px rgba(8,40,35,.4); }
+.ot-toc { position: absolute; left: 12px; top: 12px; z-index: 6; width: 232px; max-width: 68%; max-height: calc(100% - 88px); display: flex; flex-direction: column; background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 14px; box-shadow: 0 12px 34px -14px rgba(8,40,35,.5); overflow: hidden; }
+.ot-toc-hd { display: flex; align-items: center; gap: 7px; padding: 10px 10px 10px 13px; border-bottom: 1px solid var(--ot-line); font: 800 12px system-ui; letter-spacing: .04em; text-transform: uppercase; color: var(--ot-sub); }
+.ot-toc-hd .material-symbols-outlined { font-size: 17px; color: var(--ot-primary, #0e6e63); }
+.ot-toc-hd span { flex: 1; }
+.ot-toc-x { border: none; background: none; color: var(--ot-sub); cursor: pointer; padding: 2px; display: inline-flex; }
+.ot-toc-x .material-symbols-outlined { font-size: 18px; }
+.ot-toc-body { overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 6px; }
+.ot-toc-sec { margin-bottom: 6px; }
+.ot-toc-sec-h { font: 800 10px system-ui; letter-spacing: .06em; text-transform: uppercase; color: var(--ot-sub); padding: 6px 8px 3px; }
+.ot-toc-item { display: block; width: 100%; text-align: left; border: none; background: none; cursor: pointer; font: 600 12.5px system-ui; color: var(--ot-ink, #14202b); padding: 6px 8px 6px 14px; border-radius: 8px; border-left: 3px solid transparent; position: relative; }
+.ot-toc-item::before { content: ""; position: absolute; left: 5px; top: 11px; width: 6px; height: 6px; border-radius: 50%; background: var(--ot-c, var(--ot-line)); opacity: .5; }
+.ot-toc-item.on { color: var(--ot-c, var(--ot-primary)); font-weight: 800; }
+.ot-toc-item.on::before { opacity: 1; }
+.ot-toc-item.sel { background: color-mix(in srgb, var(--ot-c) 12%, transparent); }
+.ot-toc-item:active { background: color-mix(in srgb, var(--ot-c) 18%, transparent); }
+.ot-toc-search-wrap { display: flex; align-items: center; gap: 6px; padding: 8px 9px; border-bottom: 1px solid var(--ot-line); }
+.ot-toc-search-wrap .material-symbols-outlined { font-size: 17px; color: var(--ot-sub); }
+.ot-toc-search { flex: 1; min-width: 0; border: none; background: transparent; color: var(--ot-ink); font: 500 13px system-ui; outline: none; }
+.ot-toc-search::placeholder { color: var(--ot-sub); }
+.ot-toc-clear { border: none; background: none; color: var(--ot-sub); cursor: pointer; padding: 2px; display: inline-flex; }
+.ot-toc-clear .material-symbols-outlined { font-size: 16px; }
+.ot-toc-search:placeholder-shown ~ .ot-toc-clear { display: none; }
+.ot-toc-empty { padding: 14px 12px; font: 500 12.5px system-ui; color: var(--ot-sub); }
 
 .ot-mappop { position: absolute; left: 10px; right: 10px; bottom: 10px; z-index: 5; padding: 13px 15px 15px;
   border: 1px solid var(--ot-line); border-left: 4px solid var(--ot-c, var(--ot-accent)); border-radius: 16px;
@@ -229,6 +278,8 @@ body.ot-open { overflow: hidden; }
 .ot-mappop-name { font: 800 16px var(--sans); color: var(--ot-ink); margin: 3px 40px 0 0; }
 .ot-mappop-desc { font: 500 12.5px/1.4 var(--sans); color: var(--ot-sub); margin-top: 5px; }
 .ot-mappop-sel { display: flex; align-items: center; gap: 6px; font: 700 13px var(--sans); color: var(--sev-stable-fg); margin-top: 8px; }
+.ot-mappop-rx { display: flex; align-items: flex-start; gap: 6px; font: 600 12px/1.45 var(--sans); color: var(--ot-ink, #14202b); margin-top: 8px; }
+.ot-mappop-rx .material-symbols-outlined { font-size: 15px; color: var(--ot-c, var(--ot-primary, #0e6e63)); flex: 0 0 auto; margin-top: 1px; }
 .ot-mappop-sel .material-symbols-outlined, .ot-mappop-why .material-symbols-outlined { font-size: 17px; }
 .ot-mappop-why { display: flex; align-items: flex-start; gap: 6px; font: 600 12px/1.35 var(--sans); color: var(--sev-critical-fg); margin-top: 8px; }
 .ot-btn.sm { min-height: 38px; padding: 0 14px; font-size: 13px; margin-top: 11px; }
@@ -271,6 +322,33 @@ body.ot-open { overflow: hidden; }
 
 /* disclaimer */
 .ot-disclaimer { flex: 0 0 auto; padding: 8px 14px calc(env(safe-area-inset-bottom, 0px) + 8px); font-size: 10.5px; color: var(--ot-sub); text-align: center; border-top: 1px solid var(--ot-line); background: var(--ot-card); }
+
+/* staging / dosing / biomarker tables (node.tables) */
+.ot-tablewrap { margin: 4px 0 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--ot-line); border-radius: 12px; background: var(--ot-card); }
+.ot-table-cap { font: 800 10.5px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); padding: 9px 11px 5px; }
+.ot-table { width: 100%; border-collapse: collapse; font-size: 12.5px; }
+.ot-table th { text-align: left; font: 700 10.5px system-ui; text-transform: uppercase; letter-spacing: .04em; color: var(--ot-sub); padding: 8px 11px; border-bottom: 1px solid var(--ot-line); white-space: nowrap; }
+.ot-table td { padding: 8px 11px; border-bottom: 1px solid var(--ot-line); color: var(--ot-ink); vertical-align: top; }
+.ot-table tr:last-child td { border-bottom: none; }
+
+/* cross-page "see X" link node */
+.ot-linkcard { display: flex; align-items: center; gap: 10px; width: 100%; text-align: left; margin-top: 10px; padding: 13px 14px; cursor: pointer;
+  border: 1px solid color-mix(in srgb, var(--ot-c, var(--ot-accent)) 45%, var(--ot-line)); border-radius: 14px;
+  background: color-mix(in srgb, var(--ot-c, var(--ot-accent)) 8%, var(--ot-card)); color: var(--ot-ink); font: 700 14px system-ui; }
+.ot-linkcard .ot-linkcard-t { flex: 1; }
+.ot-linkcard .material-symbols-outlined { font-size: 20px; color: var(--ot-c, var(--ot-accent)); }
+.ot-linkcard:active { transform: scale(.995); }
+
+/* breadcrumb trail across link jumps */
+.ot-crumbs { display: flex; align-items: center; flex-wrap: wrap; gap: 2px; padding: 7px 12px; background: var(--ot-card); border-bottom: 1px solid var(--ot-line); }
+.ot-crumbs > .material-symbols-outlined { font-size: 16px; color: var(--ot-sub); margin-right: 4px; }
+.ot-crumbs .material-symbols-outlined { font-size: 15px; color: var(--ot-sub); }
+.ot-crumb { border: none; background: none; padding: 2px 3px; font: 700 12px system-ui; color: var(--ot-accent); cursor: pointer; max-width: 44%; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ot-crumb.cur { color: var(--ot-sub); cursor: default; }
+
+/* Summary segment button + sheet */
+.ot-sum-sheet { max-width: 620px; }
+.ot-sum-pre { white-space: pre-wrap; word-break: break-word; font: 500 12.5px/1.5 ui-monospace, SFMono-Regular, Menlo, monospace; color: var(--ot-ink); background: var(--ot-bg); border: 1px solid var(--ot-line); border-radius: 12px; padding: 12px 13px; margin: 10px 0 4px; max-height: 46vh; overflow-y: auto; }
 
 /* prevent horizontal overflow anywhere */
 .ot-overlay * { max-width: 100%; box-sizing: border-box; }

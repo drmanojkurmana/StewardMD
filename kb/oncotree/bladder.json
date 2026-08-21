@@ -2,117 +2,1040 @@
   "guideline": "bladder",
   "title": "Bladder / Urothelial Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
+  "navigatorVersion": "2.0.0",
   "diseaseId": "bladder_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "matchDisease": false,
-  "provenanceNote": "ONCOTREE navigator DRAFT for urothelial bladder cancer. Captures clinical setting (muscle-invasive peri-operative vs metastatic/locally advanced) and, for metastatic disease, line of therapy, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Bladder Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Bladder Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_bl_setting"],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Full pathway for urothelial bladder cancer: initial workup -> disease extent (non-muscle-invasive vs muscle-invasive vs metastatic) -> risk / eligibility stratification (with tables) -> stage-, eligibility-, and line-of-therapy-directed treatment with per-node checklists -> surveillance and recurrence / metastatic pathway. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; surgery, radiation, intravesical BCG, and agents with no dose protocol here (carboplatin-gemcitabine, pembrolizumab, erdafitinib, sacituzumab, nadofaragene, adjuvant nivolumab) are shown as checklist guidance with NO dose. Content authored in original wording from general oncology references; no proprietary guideline text reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with standard oncology practice (NCCN / DeVita / Harrison, general references). Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": {
+      "text": "High-risk NMIBC that responds to induction BCG is treated with maintenance BCG (a common schedule gives 3 weekly instillations at 3, 6, 12, 18, 24, 30, and 36 months). Maintenance improves recurrence-free and progression-free outcomes over induction alone.",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "Common cisplatin-ineligibility criteria (any one): ECOG performance status >= 2, creatinine clearance < 60 mL/min, grade >= 2 hearing loss, grade >= 2 peripheral neuropathy, or NYHA class >= III heart failure. Cisplatin should NOT be replaced by carboplatin in the curative peri-operative setting.",
+      "evidence": "2A"
+    },
+    "c": {
+      "text": "Switch-maintenance avelumab is offered to patients whose disease has not progressed (complete response, partial response, or stable disease) after 4-6 cycles of first-line platinum-based chemotherapy; it is started within about 4-10 weeks of the last chemotherapy dose.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "Erdafitinib requires a qualifying FGFR2 or FGFR3 alteration (activating mutation or fusion) on molecular testing; monitor for hyperphosphatemia and central serous retinopathy. It is not a substitute for immunotherapy or an antibody-drug conjugate in FGFR-wild-type disease.",
+      "evidence": "2A"
+    }
+  },
   "nodes": [
     {
-      "id": "n_bl_setting",
-      "linkId": "bl_setting",
+      "id": "n_workup",
+      "linkId": "bladder_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Initial workup",
+      "title": "Initial workup and staging",
+      "description": "Baseline evaluation before treatment. Confirm urothelial histology, define depth of invasion, and stage.",
+      "path": "Bladder / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        { "label": "History, physical, and hematuria evaluation", "sub": "smoking / occupational exposure, performance status, renal function" },
+        { "label": "Cystoscopy + transurethral resection of bladder tumor (TURBT)", "sub": "must sample muscularis propria (detrusor) to assess depth of invasion; re-resect T1 / high-grade / no-muscle specimens" },
+        { "label": "Pathology: grade, depth (Ta / T1 / CIS / >= T2), lymphovascular invasion, variant / non-urothelial histology" },
+        { "label": "Upper-tract imaging with CT / MR urography to exclude synchronous upper-tract disease" },
+        { "label": "Staging for invasive disease: CT chest / abdomen / pelvis; bone scan or targeted imaging if symptoms / alkaline phosphatase", "sub": "consider FDG-PET for equivocal nodal / distant disease" },
+        { "label": "Assess cisplatin eligibility (renal function, hearing, neuropathy, performance status, cardiac status) before peri-operative chemotherapy" }
+      ],
+      "tables": [
+        {
+          "title": "Depth of invasion (simplified T category)",
+          "headers": ["Category", "Extent"],
+          "rows": [
+            ["Ta", "Non-invasive papillary carcinoma (mucosa only)"],
+            ["Tis (CIS)", "Flat high-grade carcinoma in situ"],
+            ["T1", "Invades subepithelial connective tissue (lamina propria)"],
+            ["T2", "Invades muscularis propria (detrusor muscle)"],
+            ["T3", "Invades perivesical fat"],
+            ["T4", "Invades adjacent organs / pelvic or abdominal wall"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_entry",
+      "linkId": "bladder_extent",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "template": "main",
-      "name": "Setting",
-      "title": "Setting",
-      "description": "Muscle-invasive urothelial bladder cancer is treated with peri-operative (neoadjuvant or adjuvant) platinum-based chemotherapy around definitive local therapy; metastatic or locally advanced disease is treated with systemic therapy alone, sequenced by line.",
-      "path": "Bladder Cancer / Setting",
+      "name": "Disease extent",
+      "title": "Disease extent",
+      "description": "Management branches first by depth of invasion and spread. Choose the current disease extent.",
+      "path": "Bladder / Extent",
       "section": "Staging",
-      "pills": ["setting"],
+      "pills": ["disease extent"],
       "required": true,
       "options": [
-        { "id": "mibc", "label": "Muscle-invasive (peri-operative)", "sets": { "scenario": "mibc" } },
-        { "id": "metastatic", "label": "Metastatic / locally advanced", "sets": { "scenario": "metastatic" } }
+        { "id": "nmibc", "label": "Non-muscle-invasive (Ta / T1 / CIS)", "sets": { "extent": "nmibc" }, "pills": ["NMIBC"] },
+        { "id": "mibc", "label": "Muscle-invasive (cT2-T4a, N0, M0)", "sets": { "extent": "mibc" }, "pills": ["MIBC"] },
+        { "id": "metastatic", "label": "Locally advanced / metastatic (N+, M1)", "sets": { "extent": "metastatic" }, "pills": ["metastatic"] },
+        { "id": "surveillance", "label": "Post-treatment follow-up / surveillance", "sets": { "extent": "surveillance" }, "pills": ["surveillance"] }
       ]
     },
+
     {
-      "id": "n_bl_line",
-      "linkId": "bl_line",
+      "id": "n_nmibc_risk",
+      "linkId": "bladder_nmibc_risk",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "template": "main",
-      "name": "Metastatic line of therapy",
-      "title": "Metastatic line of therapy",
-      "description": "Metastatic/locally advanced urothelial cancer is sequenced by line: first-line platinum-based chemotherapy, switch-maintenance therapy after response to first-line platinum, or later-line therapy after progression.",
-      "path": "Bladder Cancer / Metastatic / Line of therapy",
-      "section": "Treatment",
-      "pills": ["line of therapy"],
+      "name": "NMIBC risk group",
+      "title": "NMIBC: risk stratification",
+      "description": "Risk group drives the intravesical strategy after complete TURBT. Grade, depth, size, multifocality, CIS, and recurrence set the group.",
+      "path": "Bladder / NMIBC / Risk",
+      "section": "Staging",
+      "pills": ["NMIBC", "risk group"],
       "required": true,
+      "bullets": [
+        { "label": "Low", "sub": "solitary, primary, low-grade Ta, < 3 cm, no CIS" },
+        { "label": "Intermediate", "sub": "low-grade but recurrent / multifocal / > 3 cm; or low-grade T1" },
+        { "label": "High", "sub": "any high-grade, any T1, any CIS, or high-grade Ta that is large / multifocal / recurrent" }
+      ],
+      "tables": [
+        {
+          "title": "NMIBC risk group and default intravesical strategy",
+          "headers": ["Risk group", "Typical features", "Default strategy"],
+          "rows": [
+            ["Low", "Solitary primary low-grade Ta < 3 cm", "TURBT + single immediate intravesical chemo"],
+            ["Intermediate", "Recurrent / multifocal / larger low-grade", "TURBT + induction intravesical chemo or BCG"],
+            ["High", "High-grade, T1, or CIS", "TURBT (re-resect) + induction and maintenance BCG"]
+          ]
+        }
+      ],
       "options": [
-        { "id": "firstline", "label": "First-line platinum", "sets": { "scenario": "1L" } },
-        { "id": "maint", "label": "Switch maintenance (after platinum response)", "sets": { "scenario": "maintenance" } },
-        { "id": "later", "label": "Later-line", "sets": { "scenario": "later" } }
+        { "id": "low", "label": "Low risk", "sets": { "nmibcRisk": "low" }, "pills": ["low"] },
+        { "id": "intermediate", "label": "Intermediate risk", "sets": { "nmibcRisk": "intermediate" }, "pills": ["intermediate"] },
+        { "id": "high", "label": "High risk", "sets": { "nmibcRisk": "high" }, "pills": ["high"] }
       ]
     },
     {
-      "id": "n_tx_bl_mibc",
-      "linkId": "tx_bl_mibc",
+      "id": "n_tx_nmibc_low",
+      "linkId": "tx_nmibc_low",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Muscle-invasive: neoadjuvant / adjuvant platinum chemotherapy",
-      "title": "Muscle-invasive: neoadjuvant / adjuvant platinum chemotherapy",
-      "description": "Muscle-invasive urothelial bladder cancer - peri-operative platinum-based combination chemotherapy given neoadjuvantly or adjuvantly around definitive local therapy. Physician selects the specific regimen.",
-      "path": "Bladder Cancer / Treatment / Peri-operative chemotherapy",
+      "name": "NMIBC low risk",
+      "title": "Low-risk NMIBC: TURBT + single instillation",
+      "description": "Complete resection with one immediate post-operative intravesical chemotherapy dose; no maintenance.",
+      "path": "Bladder / NMIBC / Low",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": ["NMIBC", "low", "treatment"],
+      "evidenceCategory": ["1"],
       "showsRecommendation": true,
+      "bullets": [
+        "Complete TURBT of all visible tumor",
+        "Single immediate intravesical chemotherapy (e.g. mitomycin or gemcitabine) within 24 hours of resection",
+        "No induction / maintenance course needed for low risk",
+        "Surveillance cystoscopy (see follow-up)"
+      ],
+      "protocolRefs": ["uro-intravesical-mitomycin"]
+    },
+    {
+      "id": "n_tx_nmibc_int",
+      "linkId": "tx_nmibc_int",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "NMIBC intermediate risk",
+      "title": "Intermediate-risk NMIBC: TURBT + induction intravesical therapy",
+      "description": "Complete resection with an induction course of intravesical chemotherapy or BCG.",
+      "path": "Bladder / NMIBC / Intermediate",
+      "section": "Treatment",
+      "pills": ["NMIBC", "intermediate", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Complete TURBT + immediate post-operative instillation",
+        "Induction intravesical chemotherapy (mitomycin or gemcitabine), OR induction BCG, based on recurrence risk",
+        "Maintenance course for higher-risk intermediate disease",
+        "Surveillance cystoscopy (see follow-up)"
+      ],
+      "protocolRefs": ["uro-intravesical-mitomycin", "uro-bcg-induction"]
+    },
+    {
+      "id": "n_tx_nmibc_high",
+      "linkId": "tx_nmibc_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "NMIBC high risk",
+      "title": "High-risk NMIBC: TURBT + induction BCG",
+      "description": "Restaging (re-)TURBT to confirm no muscle invasion, then induction intravesical BCG; assess response before choosing maintenance vs escalation.",
+      "path": "Bladder / NMIBC / High",
+      "section": "Treatment",
+      "pills": ["NMIBC", "high", "treatment"],
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Re-resection (re-TURBT) of high-grade / T1 tumors before intravesical therapy to confirm depth",
+        "Induction intravesical BCG - 6 weekly instillations",
+        "Early radical cystectomy is a reasonable alternative for the highest-risk disease (e.g. extensive / multifocal high-grade T1, variant histology, prostatic-urethral CIS)",
+        "Assess response at first surveillance (next step)"
+      ],
+      "protocolRefs": ["uro-bcg-induction"]
+    },
+    {
+      "id": "n_nmibc_response",
+      "linkId": "bladder_nmibc_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "BCG response",
+      "title": "High-risk NMIBC: response to BCG",
+      "description": "After induction BCG, response determines maintenance vs bladder-sparing salvage vs cystectomy. BCG-unresponsive disease is a defined high-risk category.",
+      "path": "Bladder / NMIBC / BCG response",
+      "section": "Treatment",
+      "pills": ["NMIBC", "BCG response"],
+      "required": true,
+      "bullets": [
+        "Cystoscopy + cytology at ~3 months (add upper-tract imaging if positive cytology)",
+        "BCG-unresponsive: persistent / recurrent high-grade disease despite adequate BCG (or T1 high-grade at first evaluation)"
+      ],
+      "options": [
+        { "id": "responsive", "label": "BCG-responsive (no high-grade disease)", "sets": { "bcgResponse": "responsive" }, "pills": ["responsive"] },
+        { "id": "unresponsive", "label": "BCG-unresponsive / recurrent high-grade", "sets": { "bcgResponse": "unresponsive" }, "pills": ["unresponsive"] }
+      ]
+    },
+    {
+      "id": "n_tx_nmibc_maint",
+      "linkId": "tx_nmibc_maint",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BCG maintenance",
+      "title": "BCG-responsive: maintenance BCG",
+      "description": "Continue maintenance BCG with ongoing surveillance.",
+      "path": "Bladder / NMIBC / Maintenance",
+      "section": "Treatment",
+      "pills": ["NMIBC", "maintenance", "treatment"],
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Maintenance BCG (3 weekly instillations at set intervals) for 1-3 years",
+        "Ongoing cystoscopy + cytology surveillance",
+        "Escalate to the BCG-unresponsive pathway on high-grade recurrence"
+      ],
+      "protocolRefs": ["uro-bcg-maintenance"]
+    },
+    {
+      "id": "n_tx_nmibc_bcgunresp",
+      "linkId": "tx_nmibc_bcgunresp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BCG-unresponsive",
+      "title": "BCG-unresponsive NMIBC: cystectomy vs bladder-sparing salvage",
+      "description": "Radical cystectomy is the standard for fit patients; bladder-sparing options exist for those who decline or are unfit.",
+      "path": "Bladder / NMIBC / BCG-unresponsive",
+      "section": "Treatment",
+      "pills": ["NMIBC", "BCG-unresponsive", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical cystectomy + pelvic lymph-node dissection - preferred standard for fit patients",
+        "Bladder-sparing salvage (for cystectomy-ineligible / declining, CIS-containing disease): intravesical / systemic pembrolizumab, nadofaragene firadenovec, or the N-803 (nogapendekin) + BCG combination - described as guidance, no dose protocol here",
+        "Additional intravesical chemotherapy (e.g. gemcitabine + docetaxel) is an option for selected patients",
+        "Close cystoscopic surveillance; low threshold to proceed to cystectomy"
+      ],
+      "protocolRefs": ["uro-intravesical-gem-docetaxel", "uro-pembrolizumab"]
+    },
+
+    {
+      "id": "n_mibc_ciselig",
+      "linkId": "bladder_mibc_ciselig",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MIBC cisplatin eligibility",
+      "title": "MIBC: cisplatin eligibility",
+      "description": "For non-metastatic muscle-invasive disease, cisplatin eligibility determines whether neoadjuvant chemotherapy precedes definitive local therapy. Cisplatin is not replaced by carboplatin in the curative setting.",
+      "path": "Bladder / MIBC / Cisplatin eligibility",
+      "section": "Staging",
+      "pills": ["MIBC", "eligibility"],
+      "required": true,
+      "footnotes": ["b"],
+      "tables": [
+        {
+          "title": "Cisplatin eligibility (all must be met)",
+          "headers": ["Parameter", "Eligible threshold"],
+          "rows": [
+            ["Performance status", "ECOG 0-1"],
+            ["Creatinine clearance", ">= 60 mL/min"],
+            ["Hearing loss", "<= grade 1"],
+            ["Peripheral neuropathy", "<= grade 1"],
+            ["Heart failure", "< NYHA class III"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "cis_eligible", "label": "Cisplatin-eligible", "sets": { "cisEligible": "yes" }, "pills": ["cis-eligible"] },
+        { "id": "cis_ineligible", "label": "Cisplatin-ineligible", "sets": { "cisEligible": "no" }, "pills": ["cis-ineligible"] }
+      ]
+    },
+    {
+      "id": "n_tx_mibc_neoadj",
+      "linkId": "tx_mibc_neoadj",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MIBC neoadjuvant chemo",
+      "title": "MIBC, cisplatin-eligible: neoadjuvant cisplatin-based chemotherapy",
+      "description": "Neoadjuvant cisplatin combination chemotherapy before definitive local therapy improves survival; then choose the local modality.",
+      "path": "Bladder / MIBC / Neoadjuvant",
+      "section": "Treatment",
+      "pills": ["MIBC", "neoadjuvant", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Neoadjuvant dose-dense MVAC or gemcitabine + cisplatin (about 3-4 cycles)",
+        "Restage after chemotherapy, then proceed to definitive local therapy (next step)",
+        "Do not substitute carboplatin for cisplatin in this curative setting",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": ["gu-uro-ddmvac", "gu-uro-gem-cisplatin"]
+    },
+    {
+      "id": "n_tx_mibc_ineli",
+      "linkId": "tx_mibc_ineli",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "MIBC cisplatin-ineligible",
+      "title": "MIBC, cisplatin-ineligible: proceed to definitive local therapy",
+      "description": "Cisplatin-ineligible patients should not receive neoadjuvant carboplatin; proceed to definitive local therapy, then reassess for adjuvant options.",
+      "path": "Bladder / MIBC / Cisplatin-ineligible",
+      "section": "Treatment",
+      "pills": ["MIBC", "cis-ineligible", "treatment"],
+      "evidenceCategory": ["2A"],
+      "footnotes": ["b"],
+      "showsRecommendation": true,
+      "bullets": [
+        "No proven benefit from neoadjuvant carboplatin - do not substitute it for cisplatin",
+        "Proceed directly to definitive local therapy (next step)",
+        "Reassess for adjuvant nivolumab after cystectomy for high-risk pathology",
+        "Clinical-trial enrollment (e.g. neoadjuvant immunotherapy) where available"
+      ]
+    },
+    {
+      "id": "n_mibc_local",
+      "linkId": "bladder_mibc_local",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MIBC local therapy",
+      "title": "MIBC: definitive local therapy",
+      "description": "Choose the definitive local modality: radical cystectomy or bladder-preserving trimodality therapy. Bladder preservation suits selected patients (unifocal T2, no extensive CIS, no hydronephrosis, good bladder function).",
+      "path": "Bladder / MIBC / Local therapy",
+      "section": "Treatment",
+      "pills": ["MIBC", "local therapy"],
+      "required": true,
+      "options": [
+        { "id": "cystectomy", "label": "Radical cystectomy + urinary diversion", "sets": { "localTx": "cystectomy" }, "pills": ["cystectomy"] },
+        { "id": "bladder_preservation", "label": "Bladder preservation (trimodality)", "sets": { "localTx": "tmt" }, "pills": ["bladder-sparing"] }
+      ]
+    },
+    {
+      "id": "n_tx_mibc_cystectomy",
+      "linkId": "tx_mibc_cystectomy",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Radical cystectomy",
+      "title": "Radical cystectomy + pelvic lymph-node dissection",
+      "description": "Definitive surgery with bilateral pelvic lymphadenectomy and urinary diversion, then adjuvant assessment.",
+      "path": "Bladder / MIBC / Cystectomy",
+      "section": "Treatment",
+      "pills": ["MIBC", "cystectomy", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical cystectomy + bilateral pelvic lymph-node dissection",
+        "Urinary diversion (ileal conduit or continent / orthotopic neobladder)",
+        "Send full pathology (ypT/pT, nodes, margins) to guide adjuvant therapy (next step)",
+        "Enhanced-recovery peri-operative care"
+      ]
+    },
+    {
+      "id": "n_tx_mibc_tmt",
+      "linkId": "tx_mibc_tmt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trimodality bladder preservation",
+      "title": "Bladder preservation: maximal TURBT + concurrent chemoradiation",
+      "description": "Organ-sparing trimodality therapy for well-selected patients, with strict cystoscopic surveillance and salvage cystectomy for non-response / recurrence.",
+      "path": "Bladder / MIBC / Trimodality",
+      "section": "Treatment",
+      "pills": ["MIBC", "bladder-sparing", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Maximal / complete TURBT of the tumor",
+        "External-beam radiation with a concurrent radiosensitizing regimen (e.g. cisplatin, or mitomycin + 5-FU, or low-dose gemcitabine) - radiosensitizer described as guidance",
+        "Mid-treatment / post-treatment cystoscopy + biopsy to confirm response",
+        "Salvage radical cystectomy for incomplete response or invasive recurrence",
+        "Lifelong cystoscopic surveillance (see follow-up)"
+      ],
+      "protocolRefs": ["uro-tmt-cisplatin", "uro-tmt-mmc-5fu", "uro-tmt-gemcitabine"]
+    },
+    {
+      "id": "n_mibc_adjuvant",
+      "linkId": "bladder_mibc_adjuvant",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MIBC adjuvant",
+      "title": "MIBC after cystectomy: adjuvant therapy",
+      "description": "Adjuvant strategy depends on prior neoadjuvant chemotherapy and surgical pathology risk.",
+      "path": "Bladder / MIBC / Adjuvant",
+      "section": "Treatment",
+      "pills": ["MIBC", "adjuvant"],
+      "required": true,
+      "options": [
+        { "id": "adj_chemo", "label": "No prior neoadjuvant + high-risk pathology (>= pT3 or pN+)", "sets": { "adjuvant": "chemo" }, "pills": ["adjuvant chemo"] },
+        { "id": "adj_nivo", "label": "High-risk pathology, cisplatin-ineligible or post-neoadjuvant residual", "sets": { "adjuvant": "nivo" }, "pills": ["adjuvant IO"] },
+        { "id": "observe", "label": "Organ-confined, node-negative, low risk", "sets": { "adjuvant": "observe" }, "pills": ["observe"] }
+      ]
+    },
+    {
+      "id": "n_tx_mibc_adjchemo",
+      "linkId": "tx_mibc_adjchemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant cisplatin chemo",
+      "title": "Adjuvant cisplatin-based chemotherapy",
+      "description": "For cisplatin-eligible patients with high-risk pathology who did not receive neoadjuvant chemotherapy.",
+      "path": "Bladder / MIBC / Adjuvant chemo",
+      "section": "Treatment",
+      "pills": ["MIBC", "adjuvant chemo", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant cisplatin combination (dose-dense MVAC or gemcitabine + cisplatin) for >= pT3 and/or pN+ disease when no neoadjuvant chemotherapy was given",
+        "Only for patients who remain cisplatin-eligible after surgery",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": ["gu-uro-ddmvac", "gu-uro-gem-cisplatin"]
+    },
+    {
+      "id": "n_tx_mibc_adjnivo",
+      "linkId": "tx_mibc_adjnivo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant nivolumab",
+      "title": "Adjuvant nivolumab (high-risk pathology)",
+      "description": "Adjuvant immunotherapy for high-risk muscle-invasive disease after cystectomy, especially cisplatin-ineligible or residual disease after neoadjuvant cisplatin.",
+      "path": "Bladder / MIBC / Adjuvant nivolumab",
+      "section": "Treatment",
+      "pills": ["MIBC", "adjuvant IO", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant nivolumab (about 1 year) improves disease-free survival for high-risk resected MIBC",
+        "Options: cisplatin-ineligible with >= pT3 / pN+, or residual >= ypT2 / ypN+ after neoadjuvant cisplatin",
+        "Adjuvant nivolumab regimen referenced below",
+        "Monitor for immune-related adverse events"
+      ],
+      "protocolRefs": ["uro-nivolumab-adjuvant"]
+    },
+    {
+      "id": "n_tx_mibc_observe",
+      "linkId": "tx_mibc_observe",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Adjuvant observation",
+      "title": "Observation (low-risk pathology)",
+      "description": "Organ-confined, node-negative disease - proceed to surveillance without adjuvant systemic therapy.",
+      "path": "Bladder / MIBC / Observation",
+      "section": "Treatment",
+      "pills": ["MIBC", "observe"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "No adjuvant systemic therapy for organ-confined (<= pT2), node-negative, margin-negative disease",
+        "Structured post-cystectomy surveillance (see follow-up)"
+      ]
+    },
+
+    {
+      "id": "n_met_workup",
+      "linkId": "bladder_met_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Metastatic workup",
+      "title": "Metastatic / locally advanced: workup and molecular testing",
+      "description": "Confirm extent and obtain predictive biomarkers before selecting first-line therapy.",
+      "path": "Bladder / Metastatic / Workup",
+      "section": "Workup",
+      "pills": ["metastatic", "workup"],
+      "required": true,
+      "bullets": [
+        { "label": "Cross-sectional restaging (CT chest / abdomen / pelvis); brain / bone imaging if symptomatic" },
+        { "label": "Reassess cisplatin eligibility (renal function, performance status, hearing, neuropathy)" },
+        { "label": "FGFR2 / FGFR3 molecular testing", "sub": "identifies candidates for erdafitinib in later lines" },
+        { "label": "Consider PD-L1, HER2 (for trastuzumab deruxtecan / tissue-agnostic use), and MSI / TMB where relevant" },
+        { "label": "Nectin-4 is the target of enfortumab vedotin (not a required predictive test)" }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_met_1l",
+      "linkId": "bladder_met_1l",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "First-line strategy",
+      "title": "Metastatic first-line: strategy",
+      "description": "Enfortumab vedotin + pembrolizumab is the preferred first-line regimen for most patients regardless of platinum eligibility; platinum-based chemotherapy remains an alternative.",
+      "path": "Bladder / Metastatic / First line",
+      "section": "Treatment",
+      "pills": ["metastatic", "1st line"],
+      "required": true,
+      "options": [
+        { "id": "ev_pembro", "label": "Enfortumab vedotin + pembrolizumab (preferred)", "sets": { "firstLine": "evp" }, "pills": ["EV + pembro"] },
+        { "id": "platinum", "label": "Platinum-based chemotherapy", "sets": { "firstLine": "platinum" }, "pills": ["platinum"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_evp",
+      "linkId": "tx_met_evp",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "EV + pembrolizumab",
+      "title": "First-line: enfortumab vedotin + pembrolizumab",
+      "description": "Preferred first-line regimen for metastatic urothelial carcinoma; improves survival over platinum chemotherapy.",
+      "path": "Bladder / Metastatic / EV + pembro",
+      "section": "Treatment",
+      "pills": ["metastatic", "EV + pembro", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Enfortumab vedotin (nectin-4 antibody-drug conjugate) + pembrolizumab",
+        "Monitor for EV skin reactions, hyperglycemia, peripheral neuropathy, ocular effects; pembrolizumab immune-related toxicity",
+        "Pembrolizumab has no dedicated dose protocol here - shown as guidance; enfortumab vedotin protocol referenced below",
+        "On progression, move to the later-line pathway (next step)"
+      ],
+      "protocolRefs": ["gu-uro-enfortumab-vedotin"]
+    },
+    {
+      "id": "n_met_platelig",
+      "linkId": "bladder_met_platelig",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Platinum eligibility",
+      "title": "Metastatic first-line chemotherapy: cisplatin eligibility",
+      "description": "If platinum chemotherapy is chosen, cisplatin eligibility selects the regimen. Cisplatin-ineligible patients receive carboplatin-based chemotherapy.",
+      "path": "Bladder / Metastatic / Platinum eligibility",
+      "section": "Treatment",
+      "pills": ["metastatic", "platinum", "eligibility"],
+      "required": true,
+      "footnotes": ["b"],
+      "options": [
+        { "id": "cis_eligible", "label": "Cisplatin-eligible", "sets": { "cisEligible": "yes" }, "pills": ["cis-eligible"] },
+        { "id": "cis_ineligible", "label": "Cisplatin-ineligible", "sets": { "cisEligible": "no" }, "pills": ["cis-ineligible"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_gc",
+      "linkId": "tx_met_gc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Cisplatin chemo (metastatic)",
+      "title": "First-line, cisplatin-eligible: gemcitabine + cisplatin or ddMVAC",
+      "description": "Cisplatin-based combination chemotherapy, then reassess for switch-maintenance immunotherapy.",
+      "path": "Bladder / Metastatic / Cisplatin",
+      "section": "Treatment",
+      "pills": ["metastatic", "cis-eligible", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Gemcitabine + cisplatin, or dose-dense MVAC, for 4-6 cycles",
+        "Assess response and offer switch-maintenance avelumab if no progression (next step)",
+        "Regimens referenced below"
+      ],
       "protocolRefs": ["gu-uro-gem-cisplatin", "gu-uro-ddmvac"]
     },
     {
-      "id": "n_tx_bl_1l",
-      "linkId": "tx_bl_1l",
+      "id": "n_tx_met_carbo",
+      "linkId": "tx_met_carbo",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Metastatic first-line: platinum chemotherapy",
-      "title": "Metastatic first-line: platinum chemotherapy",
-      "description": "Metastatic/locally advanced urothelial cancer, first-line - platinum-based combination chemotherapy. Physician selects the specific regimen.",
-      "path": "Bladder Cancer / Treatment / First-line chemotherapy",
+      "name": "Carboplatin chemo (metastatic)",
+      "title": "First-line, cisplatin-ineligible: carboplatin + gemcitabine",
+      "description": "Carboplatin-based chemotherapy for cisplatin-ineligible patients, then reassess for switch-maintenance immunotherapy.",
+      "path": "Bladder / Metastatic / Carboplatin",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": ["metastatic", "cis-ineligible", "treatment"],
+      "evidenceCategory": ["1"],
       "showsRecommendation": true,
-      "protocolRefs": ["gu-uro-gem-cisplatin", "gu-uro-ddmvac"]
+      "bullets": [
+        "Carboplatin + gemcitabine for 4-6 cycles",
+        "Assess response and offer switch-maintenance avelumab if no progression (next step)",
+        "Carboplatin is used only in the metastatic (non-curative) setting, not peri-operatively",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-carbo-gemcitabine"]
     },
     {
-      "id": "n_tx_bl_maint",
-      "linkId": "tx_bl_maint",
+      "id": "n_met_maint",
+      "linkId": "bladder_met_maint",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Maintenance decision",
+      "title": "After first-line platinum: response and maintenance",
+      "description": "Patients without progression after first-line platinum chemotherapy are offered switch-maintenance avelumab; those who progress move to later-line therapy.",
+      "path": "Bladder / Metastatic / Maintenance",
+      "section": "Treatment",
+      "pills": ["metastatic", "maintenance"],
+      "required": true,
+      "footnotes": ["c"],
+      "options": [
+        { "id": "response", "label": "No progression (CR / PR / stable) after platinum", "sets": { "platinumResponse": "controlled" }, "pills": ["controlled"] },
+        { "id": "progression", "label": "Progression on platinum", "sets": { "platinumResponse": "progression" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_avelumab",
+      "linkId": "tx_met_avelumab",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Metastatic switch-maintenance: avelumab",
-      "title": "Metastatic switch-maintenance: avelumab",
-      "description": "Metastatic/locally advanced urothelial cancer with response or stable disease after first-line platinum-based chemotherapy - switch-maintenance immunotherapy.",
-      "path": "Bladder Cancer / Treatment / Switch maintenance",
+      "name": "Avelumab maintenance",
+      "title": "Switch-maintenance avelumab",
+      "description": "Maintenance immunotherapy after disease control on first-line platinum improves survival; continue until progression / toxicity.",
+      "path": "Bladder / Metastatic / Avelumab maintenance",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": ["metastatic", "maintenance", "treatment"],
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
       "showsRecommendation": true,
+      "bullets": [
+        "Avelumab maintenance started within about 4-10 weeks of the last chemotherapy dose",
+        "Continue until progression or unacceptable toxicity; monitor for immune-related adverse events",
+        "On progression, move to the later-line pathway (next step)",
+        "Regimen referenced below"
+      ],
       "protocolRefs": ["gu-uro-avelumab-maintenance"]
     },
     {
-      "id": "n_tx_bl_later",
-      "linkId": "tx_bl_later",
+      "id": "n_met_later",
+      "linkId": "bladder_met_later",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Later-line option",
+      "title": "Metastatic later-line: biomarker / prior-therapy directed",
+      "description": "Later-line choice is directed by prior therapy and FGFR status. Avoid repeating an agent class already used first-line.",
+      "path": "Bladder / Metastatic / Later line",
+      "section": "Treatment",
+      "pills": ["metastatic", "later line"],
+      "required": true,
+      "footnotes": ["d"],
+      "tables": [
+        {
+          "title": "Later-line selection by prior therapy / biomarker",
+          "headers": ["Situation", "Preferred option"],
+          "rows": [
+            ["Prior platinum + immunotherapy, no EV yet", "Enfortumab vedotin"],
+            ["Prior platinum, immunotherapy-naive", "Pembrolizumab (or other checkpoint inhibitor)"],
+            ["FGFR2 / FGFR3 alteration, post-platinum", "Erdafitinib"],
+            ["HER2-expressing (IHC 3+ / 2+)", "Trastuzumab deruxtecan (tissue-agnostic)"],
+            ["Options exhausted / no biomarker", "Sacituzumab govitecan or single-agent chemo"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "ev", "label": "Enfortumab vedotin (if not used first-line)", "sets": { "laterLine": "ev" }, "pills": ["EV"] },
+        { "id": "pembro", "label": "Pembrolizumab (immunotherapy-naive)", "sets": { "laterLine": "pembro" }, "pills": ["pembro"] },
+        { "id": "fgfr", "label": "Erdafitinib (FGFR2/3-altered)", "sets": { "biomarkers.FGFR": "altered" }, "pills": ["FGFR+"] },
+        { "id": "her2", "label": "Trastuzumab deruxtecan (HER2-expressing)", "sets": { "biomarkers.HER2": "expressing" }, "pills": ["HER2+"] },
+        { "id": "other", "label": "Sacituzumab / single-agent chemo", "sets": { "laterLine": "other" }, "pills": ["other"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_ev",
+      "linkId": "tx_met_ev",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Metastatic later-line: enfortumab vedotin",
-      "title": "Metastatic later-line: enfortumab vedotin",
-      "description": "Metastatic/locally advanced urothelial cancer after progression on prior platinum-based chemotherapy (and/or immunotherapy) - later-line antibody-drug conjugate.",
-      "path": "Bladder Cancer / Treatment / Later-line",
+      "name": "Enfortumab vedotin (later line)",
+      "title": "Later-line: enfortumab vedotin",
+      "description": "Antibody-drug conjugate for patients previously treated with platinum and a checkpoint inhibitor who have not yet received it.",
+      "path": "Bladder / Metastatic / EV later",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": ["metastatic", "EV", "treatment"],
+      "evidenceCategory": ["1"],
       "showsRecommendation": true,
+      "bullets": [
+        "Enfortumab vedotin (nectin-4 ADC) after prior platinum and immunotherapy",
+        "Monitor for skin reactions, hyperglycemia, peripheral neuropathy, and ocular effects",
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
       "protocolRefs": ["gu-uro-enfortumab-vedotin"]
+    },
+    {
+      "id": "n_tx_met_pembro",
+      "linkId": "tx_met_pembro",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Pembrolizumab (later line)",
+      "title": "Later-line: pembrolizumab",
+      "description": "Checkpoint inhibitor for immunotherapy-naive patients after platinum-based chemotherapy.",
+      "path": "Bladder / Metastatic / Pembrolizumab",
+      "section": "Treatment",
+      "pills": ["metastatic", "pembro", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Pembrolizumab for immunotherapy-naive disease after platinum chemotherapy",
+        "Monitor for immune-related adverse events",
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-pembrolizumab"]
+    },
+    {
+      "id": "n_tx_met_erda",
+      "linkId": "tx_met_erda",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Erdafitinib",
+      "title": "Later-line: erdafitinib (FGFR2/3-altered)",
+      "description": "Oral FGFR inhibitor for patients with a qualifying FGFR2 / FGFR3 alteration after prior platinum-based therapy.",
+      "path": "Bladder / Metastatic / Erdafitinib",
+      "section": "Treatment",
+      "pills": ["metastatic", "FGFR+", "treatment"],
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Erdafitinib for confirmed FGFR2 / FGFR3 activating mutation or fusion after prior systemic therapy",
+        "Monitor phosphate (hyperphosphatemia), ophthalmic exams (central serous retinopathy), nails / skin, and dry mouth",
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-erdafitinib"]
+    },
+    {
+      "id": "n_tx_met_other",
+      "linkId": "tx_met_other",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Later-line other",
+      "title": "Later-line: sacituzumab govitecan / single-agent chemotherapy",
+      "description": "For patients without an actionable biomarker who have exhausted preferred options.",
+      "path": "Bladder / Metastatic / Other later",
+      "section": "Treatment",
+      "pills": ["metastatic", "other", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Sacituzumab govitecan (Trop-2 ADC) after platinum and immunotherapy - regimen referenced below",
+        "Single-agent chemotherapy (e.g. taxane, or gemcitabine if not previously used)",
+        "Trastuzumab deruxtecan is an option for HER2-expressing disease (tissue-agnostic) - guidance",
+        "Clinical-trial enrollment and best supportive / palliative care as appropriate"
+      ],
+      "protocolRefs": ["uro-sacituzumab"]
+    },
+
+    {
+      "id": "n_int_response",
+      "linkId": "bladder_int_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Intermediate NMIBC response",
+      "title": "Intermediate-risk NMIBC: response after induction",
+      "description": "After the induction intravesical course, surveillance cystoscopy and cytology determine whether to continue observation or escalate for recurrence.",
+      "path": "Bladder / NMIBC / Intermediate / Response",
+      "section": "Treatment",
+      "pills": ["NMIBC", "intermediate", "response"],
+      "required": true,
+      "bullets": [
+        "First surveillance cystoscopy + cytology at about 3 months",
+        "No recurrence: continue risk-adapted surveillance",
+        "Low-grade recurrence: repeat TURBT and consider a maintenance intravesical course",
+        "High-grade recurrence or progression to T1 / CIS: manage as high-risk disease (induction BCG or restaging)"
+      ],
+      "options": [
+        { "id": "controlled", "label": "No recurrence / low-grade recurrence controlled", "sets": { "intResponse": "controlled" }, "pills": ["controlled"] },
+        { "id": "recurrence", "label": "High-grade recurrence / progression", "sets": { "intResponse": "recurrence" }, "pills": ["recurrence"] }
+      ]
+    },
+    {
+      "id": "n_tmt_response",
+      "linkId": "bladder_tmt_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Trimodality response",
+      "title": "Bladder preservation: response assessment",
+      "description": "After maximal TURBT and concurrent chemoradiation, restaging cystoscopy with biopsy (plus cytology and imaging) determines bladder preservation vs salvage cystectomy.",
+      "path": "Bladder / MIBC / Trimodality / Response",
+      "section": "Treatment",
+      "pills": ["MIBC", "bladder-sparing", "response"],
+      "required": true,
+      "bullets": [
+        "Restaging cystoscopy + biopsy of the tumor bed after chemoradiation, with cytology and cross-sectional imaging",
+        "Complete response: preserve the bladder and enter strict surveillance",
+        "Residual muscle-invasive disease or invasive recurrence: prompt salvage radical cystectomy",
+        "Non-muscle-invasive recurrence after preservation may be managed with intravesical therapy in selected patients"
+      ],
+      "options": [
+        { "id": "cr", "label": "Complete response (bladder preserved)", "sets": { "tmtResponse": "cr" }, "pills": ["CR"] },
+        { "id": "residual", "label": "Residual / invasive recurrence", "sets": { "tmtResponse": "residual" }, "pills": ["residual"] }
+      ]
+    },
+    {
+      "id": "n_tx_tmt_intact",
+      "linkId": "tx_tmt_intact",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Bladder preserved",
+      "title": "Complete response: bladder-intact surveillance",
+      "description": "Complete response to trimodality therapy; preserve the bladder with intensive surveillance.",
+      "path": "Bladder / MIBC / Trimodality / Preserved",
+      "section": "Treatment",
+      "pills": ["MIBC", "bladder-sparing", "CR", "treatment"],
+      "evidenceCategory": ["1"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Bladder preserved after a complete response to trimodality therapy",
+        "Intensive cystoscopy + cytology surveillance, with upper-tract and cross-sectional imaging",
+        "Low threshold for salvage cystectomy on muscle-invasive recurrence",
+        "Manage non-muscle-invasive recurrence with intravesical therapy where appropriate"
+      ]
+    },
+    {
+      "id": "n_tx_tmt_salvage",
+      "linkId": "tx_tmt_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Salvage cystectomy",
+      "title": "Residual / recurrent disease: salvage radical cystectomy",
+      "description": "Salvage radical cystectomy for residual muscle-invasive or invasive recurrent disease after bladder preservation, then adjuvant assessment.",
+      "path": "Bladder / MIBC / Trimodality / Salvage",
+      "section": "Treatment",
+      "pills": ["MIBC", "salvage", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Salvage radical cystectomy + bilateral pelvic lymph-node dissection and urinary diversion",
+        "Higher peri-operative morbidity than primary cystectomy - optimize with enhanced-recovery care",
+        "Send full pathology to guide adjuvant assessment (next step)",
+        "Consider adjuvant nivolumab for high-risk residual pathology"
+      ]
+    },
+    {
+      "id": "n_tx_met_tdxd",
+      "linkId": "tx_met_tdxd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trastuzumab deruxtecan",
+      "title": "Later-line: trastuzumab deruxtecan (HER2-expressing)",
+      "description": "HER2-directed antibody-drug conjugate for HER2-expressing urothelial carcinoma (tissue-agnostic use) after prior systemic therapy.",
+      "path": "Bladder / Metastatic / T-DXd",
+      "section": "Treatment",
+      "pills": ["metastatic", "HER2+", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Trastuzumab deruxtecan for HER2-expressing (IHC 3+, or IHC 2+) urothelial carcinoma after prior therapy",
+        "Monitor for interstitial lung disease / pneumonitis - hold and evaluate any new respiratory symptoms",
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-trastuzumab-deruxtecan"]
+    },
+    {
+      "id": "n_met_later2",
+      "linkId": "bladder_met_later2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Subsequent-line option",
+      "title": "Metastatic subsequent-line: after later-line progression",
+      "description": "On progression through a later-line agent, choose a subsequent-line option not previously used; prioritize an antibody-drug conjugate or a clinical trial.",
+      "path": "Bladder / Metastatic / Subsequent line",
+      "section": "Treatment",
+      "pills": ["metastatic", "subsequent line"],
+      "required": true,
+      "bullets": [
+        "Confirm which agent classes have already been used (platinum, checkpoint inhibitor, enfortumab vedotin, FGFR inhibitor)",
+        "Sacituzumab govitecan is a preferred antibody-drug conjugate option after prior platinum and immunotherapy",
+        "Enfortumab vedotin if not previously received; erdafitinib if an FGFR2/3 alteration remains untargeted",
+        "Otherwise single-agent chemotherapy, a clinical trial, or best supportive care"
+      ],
+      "options": [
+        { "id": "saci", "label": "Sacituzumab govitecan (Trop-2 ADC)", "sets": { "subsequentLine": "saci" }, "pills": ["sacituzumab"] },
+        { "id": "bsc", "label": "Single-agent chemo / clinical trial / best supportive care", "sets": { "subsequentLine": "bsc" }, "pills": ["trial / BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_met_saci",
+      "linkId": "tx_met_saci",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Sacituzumab govitecan",
+      "title": "Subsequent-line: sacituzumab govitecan",
+      "description": "Trop-2 antibody-drug conjugate for previously treated metastatic urothelial carcinoma.",
+      "path": "Bladder / Metastatic / Sacituzumab",
+      "section": "Treatment",
+      "pills": ["metastatic", "sacituzumab", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Sacituzumab govitecan after platinum and a checkpoint inhibitor (typically after enfortumab vedotin)",
+        "Monitor for neutropenia (consider growth-factor support) and diarrhea",
+        "On further progression, consider a clinical trial or best supportive care",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-sacituzumab"]
+    },
+    {
+      "id": "n_tx_met_bsc",
+      "linkId": "tx_met_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trial / supportive care",
+      "title": "Subsequent-line: single-agent chemo / clinical trial / supportive care",
+      "description": "For heavily pretreated disease without a remaining actionable option.",
+      "path": "Bladder / Metastatic / Trial / BSC",
+      "section": "Treatment",
+      "pills": ["metastatic", "trial / BSC", "treatment"],
+      "evidenceCategory": ["2A"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Single-agent chemotherapy (e.g. a taxane, or gemcitabine if not previously used)",
+        "Clinical-trial enrollment for novel agents or combinations",
+        "Integrate palliative and best supportive care; manage symptoms and performance status",
+        "Reassess goals of care at each progression"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "linkId": "bladder_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Surveillance",
+      "title": "Surveillance / follow-up",
+      "description": "Follow-up after treatment; cadence depends on the primary disease extent. Escalate to the metastatic pathway on invasive recurrence.",
+      "path": "Bladder / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "NMIBC: cystoscopy + cytology at 3 months, then risk-adapted intervals; periodic upper-tract imaging for high-risk disease",
+        "After bladder preservation: cystoscopy + cytology every 3 months initially, with cross-sectional imaging",
+        "After cystectomy: cross-sectional imaging and labs (including renal function / B12 for continent diversions) at risk-adapted intervals",
+        "Investigate new symptoms; biopsy-proven muscle-invasive or metastatic recurrence enters the metastatic pathway"
+      ],
+      "linkTo": "n_met_workup",
+      "linkLabel": "If metastatic recurrence is detected: go to the metastatic pathway"
     }
   ],
   "links": [
-    { "id": "l_bl_setting_mibc", "from": "n_bl_setting", "to": "n_tx_bl_mibc", "fromOptions": ["mibc"], "linkCategory": "conditional" },
-    { "id": "l_bl_setting_metastatic", "from": "n_bl_setting", "to": "n_bl_line", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
-    { "id": "l_bl_line_firstline", "from": "n_bl_line", "to": "n_tx_bl_1l", "fromOptions": ["firstline"], "linkCategory": "conditional" },
-    { "id": "l_bl_line_maint", "from": "n_bl_line", "to": "n_tx_bl_maint", "fromOptions": ["maint"], "linkCategory": "conditional" },
-    { "id": "l_bl_line_later", "from": "n_bl_line", "to": "n_tx_bl_later", "fromOptions": ["later"], "linkCategory": "conditional" }
+    { "id": "l_wk", "from": "n_workup", "to": "n_entry", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_e_nmibc", "from": "n_entry", "to": "n_nmibc_risk", "fromOptions": ["nmibc"], "linkCategory": "conditional" },
+    { "id": "l_e_mibc", "from": "n_entry", "to": "n_mibc_ciselig", "fromOptions": ["mibc"], "linkCategory": "conditional" },
+    { "id": "l_e_met", "from": "n_entry", "to": "n_met_workup", "fromOptions": ["metastatic"], "linkCategory": "conditional" },
+    { "id": "l_e_surv", "from": "n_entry", "to": "n_surveillance", "fromOptions": ["surveillance"], "linkCategory": "conditional" },
+
+    { "id": "l_nm_low", "from": "n_nmibc_risk", "to": "n_tx_nmibc_low", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_nm_int", "from": "n_nmibc_risk", "to": "n_tx_nmibc_int", "fromOptions": ["intermediate"], "linkCategory": "conditional" },
+    { "id": "l_nm_high", "from": "n_nmibc_risk", "to": "n_tx_nmibc_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_nm_low_surv", "from": "n_tx_nmibc_low", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_nm_int_resp", "from": "n_tx_nmibc_int", "to": "n_int_response", "linkCategory": "conditional" },
+    { "id": "l_int_ctrl", "from": "n_int_response", "to": "n_surveillance", "fromOptions": ["controlled"], "linkCategory": "conditional" },
+    { "id": "l_int_rec", "from": "n_int_response", "to": "n_tx_nmibc_high", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
+    { "id": "l_nm_high_resp", "from": "n_tx_nmibc_high", "to": "n_nmibc_response", "linkCategory": "conditional" },
+    { "id": "l_nm_resp_maint", "from": "n_nmibc_response", "to": "n_tx_nmibc_maint", "fromOptions": ["responsive"], "linkCategory": "conditional" },
+    { "id": "l_nm_resp_unresp", "from": "n_nmibc_response", "to": "n_tx_nmibc_bcgunresp", "fromOptions": ["unresponsive"], "linkCategory": "conditional" },
+    { "id": "l_nm_maint_surv", "from": "n_tx_nmibc_maint", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_nm_unresp_surv", "from": "n_tx_nmibc_bcgunresp", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_mi_cis_e", "from": "n_mibc_ciselig", "to": "n_tx_mibc_neoadj", "fromOptions": ["cis_eligible"], "linkCategory": "conditional" },
+    { "id": "l_mi_cis_i", "from": "n_mibc_ciselig", "to": "n_tx_mibc_ineli", "fromOptions": ["cis_ineligible"], "linkCategory": "conditional" },
+    { "id": "l_mi_neoadj_local", "from": "n_tx_mibc_neoadj", "to": "n_mibc_local", "linkCategory": "conditional" },
+    { "id": "l_mi_ineli_local", "from": "n_tx_mibc_ineli", "to": "n_mibc_local", "linkCategory": "conditional" },
+    { "id": "l_mi_local_cyst", "from": "n_mibc_local", "to": "n_tx_mibc_cystectomy", "fromOptions": ["cystectomy"], "linkCategory": "conditional" },
+    { "id": "l_mi_local_tmt", "from": "n_mibc_local", "to": "n_tx_mibc_tmt", "fromOptions": ["bladder_preservation"], "linkCategory": "conditional" },
+    { "id": "l_mi_cyst_adj", "from": "n_tx_mibc_cystectomy", "to": "n_mibc_adjuvant", "linkCategory": "conditional" },
+    { "id": "l_mi_tmt_resp", "from": "n_tx_mibc_tmt", "to": "n_tmt_response", "linkCategory": "conditional" },
+    { "id": "l_tmt_cr", "from": "n_tmt_response", "to": "n_tx_tmt_intact", "fromOptions": ["cr"], "linkCategory": "conditional" },
+    { "id": "l_tmt_res", "from": "n_tmt_response", "to": "n_tx_tmt_salvage", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_tmt_intact_surv", "from": "n_tx_tmt_intact", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_tmt_salv_adj", "from": "n_tx_tmt_salvage", "to": "n_mibc_adjuvant", "linkCategory": "conditional" },
+    { "id": "l_mi_adj_chemo", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_adjchemo", "fromOptions": ["adj_chemo"], "linkCategory": "conditional" },
+    { "id": "l_mi_adj_nivo", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_adjnivo", "fromOptions": ["adj_nivo"], "linkCategory": "conditional" },
+    { "id": "l_mi_adj_obs", "from": "n_mibc_adjuvant", "to": "n_tx_mibc_observe", "fromOptions": ["observe"], "linkCategory": "conditional" },
+    { "id": "l_mi_adjchemo_surv", "from": "n_tx_mibc_adjchemo", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_mi_adjnivo_surv", "from": "n_tx_mibc_adjnivo", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_mi_obs_surv", "from": "n_tx_mibc_observe", "to": "n_surveillance", "linkCategory": "conditional" },
+
+    { "id": "l_met_wk", "from": "n_met_workup", "to": "n_met_1l", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_met_evp", "from": "n_met_1l", "to": "n_tx_met_evp", "fromOptions": ["ev_pembro"], "linkCategory": "conditional" },
+    { "id": "l_met_plat", "from": "n_met_1l", "to": "n_met_platelig", "fromOptions": ["platinum"], "linkCategory": "conditional" },
+    { "id": "l_met_evp_later", "from": "n_tx_met_evp", "to": "n_met_later", "linkCategory": "conditional" },
+    { "id": "l_met_pe_cis", "from": "n_met_platelig", "to": "n_tx_met_gc", "fromOptions": ["cis_eligible"], "linkCategory": "conditional" },
+    { "id": "l_met_pe_ineli", "from": "n_met_platelig", "to": "n_tx_met_carbo", "fromOptions": ["cis_ineligible"], "linkCategory": "conditional" },
+    { "id": "l_met_gc_maint", "from": "n_tx_met_gc", "to": "n_met_maint", "linkCategory": "conditional" },
+    { "id": "l_met_carbo_maint", "from": "n_tx_met_carbo", "to": "n_met_maint", "linkCategory": "conditional" },
+    { "id": "l_met_maint_avel", "from": "n_met_maint", "to": "n_tx_met_avelumab", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_met_maint_prog", "from": "n_met_maint", "to": "n_met_later", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_met_avel_later", "from": "n_tx_met_avelumab", "to": "n_met_later", "linkCategory": "conditional" },
+    { "id": "l_met_later_ev", "from": "n_met_later", "to": "n_tx_met_ev", "fromOptions": ["ev"], "linkCategory": "conditional" },
+    { "id": "l_met_later_pembro", "from": "n_met_later", "to": "n_tx_met_pembro", "fromOptions": ["pembro"], "linkCategory": "conditional" },
+    { "id": "l_met_later_fgfr", "from": "n_met_later", "to": "n_tx_met_erda", "fromOptions": ["fgfr"], "linkCategory": "conditional" },
+    { "id": "l_met_later_her2", "from": "n_met_later", "to": "n_tx_met_tdxd", "fromOptions": ["her2"], "linkCategory": "conditional" },
+    { "id": "l_met_later_other", "from": "n_met_later", "to": "n_tx_met_other", "fromOptions": ["other"], "linkCategory": "conditional" },
+    { "id": "l_met_ev_l2", "from": "n_tx_met_ev", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_pembro_l2", "from": "n_tx_met_pembro", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_erda_l2", "from": "n_tx_met_erda", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_tdxd_l2", "from": "n_tx_met_tdxd", "to": "n_met_later2", "linkCategory": "conditional" },
+    { "id": "l_met_other_surv", "from": "n_tx_met_other", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_met_l2_saci", "from": "n_met_later2", "to": "n_tx_met_saci", "fromOptions": ["saci"], "linkCategory": "conditional" },
+    { "id": "l_met_l2_bsc", "from": "n_met_later2", "to": "n_tx_met_bsc", "fromOptions": ["bsc"], "linkCategory": "conditional" },
+    { "id": "l_met_saci_surv", "from": "n_tx_met_saci", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_met_bsc_surv", "from": "n_tx_met_bsc", "to": "n_surveillance", "linkCategory": "conditional" }
   ]
 }

@@ -1,0 +1,104 @@
+{
+  "id": "uro-tmt-mmc-5fu",
+  "diseaseId": "bladder_cancer",
+  "name": "Mitomycin + fluorouracil with concurrent radiation (bladder trimodality)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 42,
+  "cycles": 1,
+  "cyclesNote": "Single concurrent chemoradiation course (BC2001-type radiosensitization): mitomycin once at the start of radiation plus fluorouracil infusion during weeks 1 and 4 of the radiation course. Encoded as one approximately 6-week course (cycles = 1).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "none",
+    "note": "Mitomycin plus fluorouracil is a cisplatin-free radiosensitizing option during bladder-preserving trimodality therapy, useful when cisplatin is unsuitable. DPYD testing is advised before fluoropyrimidine exposure."
+  },
+  "stage": ["cT2-T4a N0 M0 (selected, bladder preservation)"],
+  "treatmentSetting": "concurrent chemoradiation (trimodality)",
+  "histology": "urothelial carcinoma (muscle-invasive)",
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Give on chemotherapy days concurrent with radiation." }
+  ],
+  "supportiveCare": [
+    "Single definitive concurrent chemoradiation course (NOT a repeating cycle); fluorouracil infusion is timed to radiation weeks 1 and 4.",
+    "Fluoropyrimidine DPYD testing per FDA boxed warning before starting.",
+    "Monitor for mitomycin myelosuppression and radiation cystitis/proctitis; restaging cystoscopy + biopsy after the course."
+  ],
+  "monitoring": [
+    "CBC before each administration and during nadir (mitomycin/5-FU)",
+    "renal function and signs of hemolytic-uremic syndrome / thrombotic microangiopathy (mitomycin)",
+    "pulmonary symptoms (mitomycin pneumonitis)",
+    "radiation cystitis / proctitis during the course"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "DPYD status (fluoropyrimidine)"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant myelosuppression during chemoradiation",
+      "drug": "mitomycin/fluorouracil",
+      "action": "hold/reduce",
+      "text": "Adjust the second fluorouracil infusion for cytopenias; obtain clinical review. Physician decides."
+    },
+    {
+      "condition": "known DPYD deficiency",
+      "drug": "fluorouracil",
+      "action": "reduce/avoid",
+      "text": "Reduce dose or avoid fluorouracil in DPYD-deficient patients per FDA boxed warning; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "mitomycin",
+      "name": "mitomycin",
+      "basis": "bsa",
+      "dosePerUnit": 12,
+      "unit": "mg/m2",
+      "route": "IV bolus",
+      "days": [1],
+      "caps": { "perDose": 20 },
+      "notes": "mitomycin 12 mg/m2 IV bolus once on day 1 (start of radiation), each dose capped at about 20 mg. ISMP: 'mitomycin' is confused with mitoXANTRONE. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of bladder preservation - mitomycin + 5-FU radiosensitization (BC2001-type)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil (continuous infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 500,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion (per day)",
+      "days": [1, 2, 3, 4, 5, 22, 23, 24, 25, 26],
+      "caps": { "perDose": null },
+      "roundingRule": { "increment": 50 },
+      "notes": "Fluorouracil 500 mg/m2/day by continuous IV infusion during radiation weeks 1 and 4 (representative days shown). DPYD: FDA boxed warning advises testing before a fluoropyrimidine; dose-reduce or avoid in DPYD-deficient patients. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of bladder preservation - mitomycin + 5-FU radiosensitization (BC2001-type)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

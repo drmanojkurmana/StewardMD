@@ -1,0 +1,55 @@
+{
+  "id": "cll-acalabrutinib",
+  "diseaseId": "cll_cancer",
+  "name": "Acalabrutinib (covalent BTK inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 13,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), general reference",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care dosing (experimental; owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Continuous oral therapy given until disease progression or unacceptable toxicity; the cycle count here is a 28-day accounting frame, not a fixed stop point.",
+    "Antiviral prophylaxis per risk; consider PJP prophylaxis with prior purine-analog or steroid exposure.",
+    "Avoid concurrent proton-pump inhibitors with the standard capsule formulation (absorption is pH-dependent); separate H2 blockers and antacids in time.",
+    "Reconcile CYP3A interactions and antithrombotic agents before starting."
+  ],
+  "monitoring": [
+    "Blood pressure and rhythm review for atrial fibrillation at baseline and on treatment",
+    "Bleeding-risk review; hold around invasive procedures per practice",
+    "CBC periodically; watch for treatment-related lymphocytosis (a redistribution effect, not progression)",
+    "Infection surveillance"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 or higher non-hematologic toxicity or grade 4 cytopenia",
+      "drug": "acalabrutinib",
+      "action": "hold/reduce",
+      "text": "Hold until recovery and resume per standard stepwise reduction; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "acalabrutinib",
+      "name": "Acalabrutinib",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 100 mg by mouth twice daily (about every 12 hours), taken continuously until progression or intolerance. dosePerUnit is the single 100 mg dose; the schedule is twice daily every day of the cycle, shown on day 1 as the accounting anchor. A covalent second-generation BTK inhibitor preferred over first-generation agents for lower atrial-fibrillation and hypertension risk. Own wording; not copied from any source."
+    }
+  ]
+}

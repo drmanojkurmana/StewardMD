@@ -1,0 +1,69 @@
+{
+  "id": "cll-br",
+  "diseaseId": "cll_cancer",
+  "name": "BR (Bendamustine + Rituximab)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), general reference",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care dosing (experimental; owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Rituximab infusion-reaction prophylaxis", "notes": "antihistamine, antipyretic and (per practice) a corticosteroid before the infusion." },
+    { "name": "Antiemetic prophylaxis", "notes": "per emetic-risk framework before bendamustine." },
+    { "name": "Tumor-lysis-syndrome prophylaxis", "notes": "hydration and allopurinol for higher tumor burden." }
+  ],
+  "supportiveCare": [
+    "A gentler chemoimmunotherapy option than FCR for older or less-fit, TP53 wild-type patients; never use with del(17p)/TP53 mutation.",
+    "PJP and herpesvirus (VZV/HSV) prophylaxis per risk.",
+    "Hepatitis B reactivation prophylaxis if HBcAb-positive (anti-CD20 antibody).",
+    "The 90 mg/m2 bendamustine dose is used first-line; a reduced 70 mg/m2 is often used in the relapsed/refractory setting."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "renal and liver function before each cycle",
+    "skin review (bendamustine cutaneous reactions) and infection surveillance"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "hepatitis B status", "TP53 status (must be wild-type)", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 cytopenia or significant renal/hepatic impairment",
+      "drug": "bendamustine",
+      "action": "hold/reduce",
+      "text": "Delay or reduce bendamustine for significant cytopenia or organ impairment per standard practice; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "bendamustine",
+      "name": "Bendamustine",
+      "basis": "bsa",
+      "dosePerUnit": 90,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 90 mg/m2 IV on days 1 and 2 of a 28-day cycle for up to 6 cycles as first-line CLL therapy; a reduced 70 mg/m2 is commonly used for relapsed/refractory disease. Own wording; not copied from any source."
+    },
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 375 mg/m2 IV on day 1 of cycle 1, then 500 mg/m2 IV on day 1 of cycles 2 through 6. dosePerUnit is the first-cycle 375 mg/m2 dose; the 500 mg/m2 escalation from cycle 2 is noted here. Own wording; not copied from any source."
+    }
+  ]
+}

@@ -2,84 +2,1123 @@
   "guideline": "melanoma",
   "title": "Melanoma (cutaneous)",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "cutaneous_melanoma",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "melanoma_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for cutaneous melanoma. Captures setting/intent and BRAF V600 status, then routes to APPLICABLE existing StewardMD Standard Protocols by reference (BRAF/MEK-targeted therapy requires a BRAF V600 mutation; immunotherapy applies regardless of BRAF). Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Cutaneous Melanoma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Cutaneous Melanoma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_mel_setting"],
+  "provenanceNote": "DRAFT decision support authored from standard oncology references (NCCN/DeVita/Harrison) in the author's own words - the physician decides and the existing dose engine computes patient doses. Full cutaneous-melanoma pathway: diagnosis / subtype, workup and pathologic microstaging, molecular testing, AJCC staging and risk stratification, then stage-directed and biomarker-directed (BRAF V600) treatment. Every major arm is refined before a recommendation: localized disease routes through sentinel-node staging then risk-adapted adjuvant to surveillance; resectable stage III routes through a neoadjuvant-vs-upfront decision with response-adapted adjuvant escalation; advanced disease is a line-of-therapy sub-tree (first line -> on-progression question -> second line -> on-progression -> later line) for each of the BRAF-mutant (immunotherapy-first vs targeted-first) and BRAF wild-type (combination vs single-agent) subgroups; brain metastases and in-transit disease feed the same systemic lines; a recurrence pathway re-enters by relapse pattern. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; surgery, radiation, and local therapies (T-VEC, isolated limb infusion / perfusion, radiosurgery) are checklist guidance with NO dose. No proprietary guideline text reproduced; invents no dose / regimen. DRAFT - not clinically activated.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN / DeVita / Harrison), Cutaneous Melanoma. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "startNodeIds": ["n_entry"],
+  "footnotes": {
+    "a": {
+      "text": "Sentinel lymph node biopsy is generally discussed for a Breslow thickness at or above 0.8 mm, or for any ulcerated primary, and offered after a shared risk / benefit conversation; it is staging (not therapeutic) and is not needed for pure in-situ disease.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Adjuvant anti-PD-1 (nivolumab or pembrolizumab) and, for BRAF V600-mutant resected disease, adjuvant dabrafenib plus trametinib each reduce recurrence risk in resected stage III; the absolute benefit is weighed against immune-related or targeted-therapy toxicity and patient preference.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Combination nivolumab plus ipilimumab yields higher response rates and meaningful intracranial activity in asymptomatic brain metastases, at the cost of substantially more grade 3-4 immune-related toxicity than single-agent anti-PD-1.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "BRAF / MEK targeted therapy produces rapid, high-rate responses useful for symptomatic or high-burden disease, but immunotherapy responses are more often durable; first-line sequencing in BRAF-mutant disease is individualized, and the class not used first is generally held for the next line.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "After neoadjuvant checkpoint therapy, the pathologic response on the resection specimen is prognostic: a major or complete pathologic response predicts excellent outcome and supports de-escalated adjuvant therapy, whereas substantial residual viable tumor supports switching or intensifying adjuvant treatment.",
+      "evidence": "1"
+    }
+  },
   "nodes": [
     {
-      "id": "n_mel_setting",
-      "linkId": "mel_setting",
+      "id": "n_entry",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "Setting and intent",
-      "title": "Setting and intent",
-      "description": "Adjuvant therapy for resected stage III disease is curative-intent; unresectable stage III or stage IV disease is treated with palliative intent.",
-      "path": "Melanoma / Setting",
+      "name": "Diagnosis",
+      "title": "Cutaneous melanoma: histologic subtype",
+      "section": "Workup",
+      "description": "Confirmed cutaneous melanoma on biopsy. Note the subtype; management then follows depth and stage, not subtype, for most decisions.",
+      "path": "Melanoma / Diagnosis",
+      "pills": ["diagnosis", "subtype"],
+      "required": true,
+      "bullets": [
+        "Superficial spreading (most common)",
+        "Nodular (often thicker at presentation)",
+        "Lentigo maligna (chronically sun-damaged skin)",
+        "Acral lentiginous (palms, soles, subungual; consider KIT testing)",
+        "Desmoplastic (neurotropic; sentinel-node yield is lower)"
+      ],
+      "options": [
+        { "id": "ssm", "label": "Superficial spreading", "sets": { "subtype": "ssm" }, "pills": ["SSM"] },
+        { "id": "nodular", "label": "Nodular", "sets": { "subtype": "nodular" }, "pills": ["nodular"] },
+        { "id": "lentigo", "label": "Lentigo maligna", "sets": { "subtype": "lentigo" }, "pills": ["LM"] },
+        { "id": "acral", "label": "Acral lentiginous", "sets": { "subtype": "acral" }, "pills": ["acral"] },
+        { "id": "desmo", "label": "Desmoplastic", "sets": { "subtype": "desmoplastic" }, "pills": ["desmoplastic"] }
+      ]
+    },
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Initial workup",
+      "title": "Initial workup",
+      "section": "Workup",
+      "description": "Establish local extent, screen for regional and distant spread, and gather baseline data before staging.",
+      "path": "Melanoma / Workup",
+      "pills": ["workup"],
+      "required": true,
+      "bullets": [
+        "Full history and complete skin and regional lymph-node examination; document any satellite or in-transit lesions",
+        "Review the excisional / diagnostic biopsy pathology (see microstaging)",
+        "Photograph and map the primary site; note prior lesions and second primaries",
+        "Baseline labs including LDH for higher-stage disease",
+        "Cross-sectional imaging (CT or PET/CT) reserved for node-positive or symptomatic / high-risk disease, not routine for thin node-negative primaries"
+      ],
+      "options": [ { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null } ]
+    },
+    {
+      "id": "n_micro",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Microstaging",
+      "title": "Pathologic microstaging",
+      "section": "Workup",
+      "description": "The primary tumor's pathology drives T category, sentinel-node decisions, and prognosis.",
+      "path": "Melanoma / Workup / Microstaging",
+      "pills": ["pathology"],
+      "required": true,
+      "bullets": [
+        "Breslow thickness (mm) - the dominant primary-tumor prognostic factor",
+        "Ulceration present or absent (upstages within each T category)",
+        "Dermal mitotic rate",
+        "Deep and peripheral margin status on the diagnostic specimen",
+        "Microsatellites, lymphovascular invasion, and perineural invasion if reported"
+      ],
+      "options": [ { "id": "continue", "label": "Microstaging reviewed - continue", "setsValue": null } ]
+    },
+    {
+      "id": "n_molecular",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Molecular testing",
+      "title": "Molecular testing",
+      "section": "Workup",
+      "description": "Molecular results guide systemic-therapy eligibility, chiefly BRAF V600 status. Testing is essential for resected stage III and for advanced disease; it is not required for localized, node-negative disease that will only be excised.",
+      "path": "Melanoma / Workup / Molecular",
+      "pills": ["biomarker"],
+      "required": true,
+      "bullets": [
+        "BRAF V600 (E/K) mutation testing - enables BRAF / MEK targeted therapy",
+        "Consider NRAS and, for acral / mucosal primaries, KIT testing (largely trial-directed)",
+        "Send tissue for testing at diagnosis of stage III / IV so results are ready when systemic therapy is chosen"
+      ],
+      "options": [ { "id": "continue", "label": "Testing ordered / reviewed - continue", "setsValue": null } ]
+    },
+    {
+      "id": "n_staging",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "AJCC staging",
+      "title": "AJCC staging and risk stratification",
       "section": "Staging",
-      "pills": ["setting", "intent"],
+      "description": "Assign an AJCC stage group from T (Breslow / ulceration), N (nodal / in-transit), and M (distant). Select the applicable category to route treatment.",
+      "path": "Melanoma / Staging",
+      "pills": ["staging", "AJCC"],
       "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "Simplified AJCC framework (cutaneous melanoma)",
+          "headers": ["T (primary by Breslow / ulceration)", "N (regional)", "M (distant)", "Typical stage group"],
+          "rows": [
+            ["Tis - in situ", "N0", "M0", "Stage 0"],
+            ["T1 (<=1.0 mm)", "N0", "M0", "Stage IA / IB"],
+            ["T2-T3 (>1.0-4.0 mm)", "N0", "M0", "Stage IB / II"],
+            ["T4 (>4.0 mm), ulcerated", "N0", "M0", "Stage IIB / IIC"],
+            ["Any T", "N1-N3 nodal / in-transit / satellite", "M0", "Stage III"],
+            ["Any T", "Any N", "M1 (skin, lung, viscera, brain)", "Stage IV"]
+          ]
+        }
+      ],
       "options": [
-        { "id": "adjuvant", "label": "Adjuvant (resected stage III)", "sets": { "setting": "adjuvant", "intent": "curative" } },
-        { "id": "metastatic", "label": "Unresectable stage III / stage IV (advanced)", "sets": { "setting": "metastatic", "intent": "palliative" } }
+        { "id": "s0", "label": "Stage 0 (melanoma in situ)", "sets": { "stage": "0" }, "pills": ["in situ"] },
+        { "id": "s12", "label": "Stage I-II (localized, clinically node-negative)", "sets": { "stage": "I-II" }, "pills": ["localized"] },
+        { "id": "s3", "label": "Stage III (nodal, resectable candidate)", "sets": { "stage": "III" }, "pills": ["stage III"] },
+        { "id": "s3_intransit", "label": "Stage III (in-transit / satellite predominant)", "sets": { "stage": "III", "pattern": "in-transit" }, "pills": ["in-transit"] },
+        { "id": "s4", "label": "Stage IV or unresectable III (advanced)", "sets": { "stage": "IV" }, "pills": ["advanced"] },
+        { "id": "recurrent", "label": "Recurrent (previously treated)", "sets": { "setting": "recurrent" }, "pills": ["recurrent"] }
       ]
     },
     {
-      "id": "n_mel_braf",
-      "linkId": "mel_braf",
+      "id": "n_tx_insitu",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "In situ",
+      "title": "Melanoma in situ: wide excision",
+      "section": "Treatment",
+      "description": "Local surgery is curative; no nodal staging or systemic therapy. Route to lifelong skin surveillance.",
+      "path": "Melanoma / Treatment / In situ",
+      "pills": ["in situ", "surgery"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Wide local excision with roughly 0.5-1.0 cm clinical margins to a clear deep plane",
+        "No sentinel lymph node biopsy for pure in-situ disease",
+        "Consider staged excision or topical / radiation options for broad lentigo maligna where surgery is difficult",
+        "No systemic therapy; proceed to skin surveillance"
+      ]
+    },
+    {
+      "id": "n_localized_excision",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Localized surgery",
+      "title": "Stage I-II: wide local excision",
+      "section": "Treatment",
+      "description": "Wide local excision with margins scaled to Breslow thickness, then a sentinel-node decision.",
+      "path": "Melanoma / Treatment / Localized",
+      "pills": ["localized", "surgery"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "tables": [
+        {
+          "title": "Recommended clinical excision margin by Breslow thickness",
+          "headers": ["Breslow thickness", "Clinical margin"],
+          "rows": [
+            ["In situ", "0.5-1.0 cm"],
+            ["<=1.0 mm", "1.0 cm"],
+            [">1.0-2.0 mm", "1-2 cm"],
+            [">2.0 mm", "2.0 cm"]
+          ]
+        }
+      ],
+      "options": [ { "id": "continue", "label": "Excision planned - proceed to nodal staging", "setsValue": null } ]
+    },
+    {
+      "id": "n_slnb",
       "nodeCategory": "criteria",
       "nodeType": "question",
-      "template": "main",
-      "name": "BRAF status",
-      "title": "BRAF V600 mutation status",
-      "description": "A BRAF V600 activating mutation (V600E/K) enables BRAF/MEK-targeted therapy in addition to immunotherapy. BRAF wild-type disease is treated with immunotherapy.",
-      "path": "Melanoma / Biomarkers / BRAF",
-      "section": "Biomarkers",
-      "pills": ["biomarker", "BRAF"],
+      "name": "SLNB",
+      "title": "Sentinel lymph node biopsy",
+      "section": "Staging",
+      "description": "Sentinel-node status is the strongest regional prognostic factor and determines whether disease is upstaged to stage III.",
+      "path": "Melanoma / Staging / SLNB",
+      "pills": ["SLNB"],
       "required": true,
+      "footnotes": ["a"],
+      "bullets": [
+        "Discuss SLNB for Breslow at or above 0.8 mm, or for any ulcerated primary",
+        "Not required for thin, non-ulcerated, low-mitotic T1a lesions",
+        "Perform at the time of wide excision when feasible"
+      ],
       "options": [
-        { "id": "mut", "label": "BRAF V600E / V600K mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
-        { "id": "wt", "label": "BRAF wild-type", "sets": { "biomarkers.BRAF": "negative" }, "pills": ["BRAF WT"] },
-        { "id": "unk", "label": "Unknown / pending", "setsValue": null }
+        { "id": "sln_neg", "label": "SLNB negative (or not indicated)", "sets": { "node": "negative" }, "pills": ["N0"] },
+        { "id": "sln_pos", "label": "SLNB positive (upstaged to stage III)", "sets": { "node": "positive", "stage": "III" }, "pills": ["N+"] }
       ]
     },
     {
-      "id": "n_tx_mel_braf",
-      "linkId": "tx_mel_braf",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "BRAF-mutant melanoma",
-      "title": "BRAF V600-mutant: targeted therapy or immunotherapy",
-      "description": "BRAF V600-mutant melanoma - BRAF/MEK-targeted therapy and immunotherapy are both options (immunotherapy is often preferred first-line in advanced disease). Narrowed by setting. Physician selects.",
-      "path": "Melanoma / Treatment / BRAF-mutant",
+      "id": "n_stage2_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Node-negative risk",
+      "title": "Node-negative (stage I-II): primary-tumor risk",
       "section": "Treatment",
-      "pills": ["BRAF+", "treatment"],
-      "showsRecommendation": true,
-      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram", "skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+      "description": "After a negative sentinel node, the primary-tumor T category stratifies risk. Low-risk disease goes directly to surveillance; resected high-risk stage IIB-IIC now has an adjuvant immunotherapy option.",
+      "path": "Melanoma / Localized / Risk",
+      "pills": ["node-negative", "risk"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "tables": [
+        {
+          "title": "Node-negative risk and adjuvant consideration",
+          "headers": ["T category", "Approx. stage group", "Adjuvant consideration"],
+          "rows": [
+            ["T1-T2a (thin, non-ulcerated)", "IA-IB", "Surveillance only"],
+            ["T2b-T3a", "IIA", "Surveillance; individualize"],
+            ["T3b-T4a (thick or ulcerated)", "IIB", "Discuss adjuvant anti-PD-1"],
+            ["T4b (thick + ulcerated)", "IIC", "Discuss adjuvant anti-PD-1"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "low", "label": "Low-risk node-negative (stage IA-IIA)", "sets": { "risk": "low" }, "pills": ["low risk"] },
+        { "id": "high", "label": "High-risk node-negative (stage IIB-IIC)", "sets": { "risk": "high" }, "pills": ["IIB-IIC"] }
+      ]
     },
     {
-      "id": "n_tx_mel_io",
-      "linkId": "tx_mel_io",
+      "id": "n_tx_adj_stage2_io",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "BRAF wild-type melanoma",
-      "title": "BRAF wild-type: immunotherapy",
-      "description": "BRAF wild-type melanoma - immune checkpoint inhibition is the systemic backbone, narrowed by setting. Physician selects.",
-      "path": "Melanoma / Treatment / BRAF wild-type",
+      "name": "Stage II adjuvant IO",
+      "title": "High-risk stage IIB-IIC: adjuvant anti-PD-1",
       "section": "Treatment",
-      "pills": ["BRAF WT", "treatment"],
+      "description": "Adjuvant checkpoint immunotherapy reduces recurrence in resected high-risk node-negative disease, then surveillance.",
+      "path": "Melanoma / Localized / Adjuvant IO",
+      "pills": ["IIB-IIC", "adjuvant", "immunotherapy"],
       "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Adjuvant pembrolizumab (or nivolumab) for about one year after complete wide excision",
+        "Discuss the modest absolute recurrence-free-survival gain against immune-related toxicity",
+        "Observation with close surveillance remains a reasonable alternative after shared decision-making",
+        "Baseline thyroid / endocrine and organ-function labs before starting"
+      ],
+      "protocolRefs": ["skin-melanoma-pembro", "skin-melanoma-nivolumab"]
+    },
+    {
+      "id": "n_stage3_resect",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Resectability",
+      "title": "Stage III: resectability",
+      "section": "Treatment",
+      "description": "Determine whether nodal / regional disease can be completely resected; unresectable disease is treated as advanced.",
+      "path": "Melanoma / Stage III / Resectability",
+      "pills": ["stage III"],
+      "required": true,
+      "options": [
+        { "id": "resectable", "label": "Resectable regional disease", "sets": { "resectable": "yes" }, "pills": ["resectable"] },
+        { "id": "unresectable", "label": "Unresectable regional disease", "sets": { "resectable": "no" }, "pills": ["unresectable"] }
+      ]
+    },
+    {
+      "id": "n_neoadj",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Neoadjuvant",
+      "title": "Resectable stage III: neoadjuvant option",
+      "section": "Treatment",
+      "description": "For bulky clinically-node-positive disease, neoadjuvant immunotherapy before definitive surgery improves event-free survival and is increasingly preferred; otherwise proceed straight to surgery.",
+      "path": "Melanoma / Stage III / Neoadjuvant",
+      "pills": ["neoadjuvant"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "options": [
+        { "id": "neoadj_yes", "label": "Neoadjuvant immunotherapy, then surgery", "sets": { "neoadjuvant": "yes" }, "pills": ["neoadjuvant"] },
+        { "id": "neoadj_no", "label": "Upfront surgery", "sets": { "neoadjuvant": "no" }, "pills": ["surgery first"] }
+      ]
+    },
+    {
+      "id": "n_tx_neoadj",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neoadjuvant IO",
+      "title": "Neoadjuvant immunotherapy, then lymph-node surgery",
+      "section": "Treatment",
+      "description": "A short course of checkpoint immunotherapy before definitive lymph-node dissection; pathologic response on the resection specimen guides subsequent adjuvant therapy.",
+      "path": "Melanoma / Stage III / Neoadjuvant IO",
+      "pills": ["neoadjuvant", "immunotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["e"],
+      "bullets": [
+        "Neoadjuvant anti-PD-1 (pembrolizumab-based) or nivolumab plus ipilimumab for a limited number of cycles",
+        "Then wide local excision of the primary and therapeutic lymph-node dissection",
+        "The pathologic response drives the next step (response-adapted adjuvant)",
+        "Monitor for immune-related toxicity that could delay surgery"
+      ],
+      "protocolRefs": ["skin-melanoma-pembro", "skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab"]
+    },
+    {
+      "id": "n_neoadj_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Path response",
+      "title": "After neoadjuvant + surgery: pathologic response",
+      "section": "Treatment",
+      "description": "The pathologic response on the resection specimen is response-adapted: a major / complete response supports de-escalated adjuvant therapy, while significant residual viable tumor supports switching or intensifying.",
+      "path": "Melanoma / Stage III / Neoadjuvant response",
+      "pills": ["response"],
+      "required": true,
+      "footnotes": ["e"],
+      "options": [
+        { "id": "major", "label": "Major / complete pathologic response", "sets": { "pathResponse": "major" }, "pills": ["major response"] },
+        { "id": "residual", "label": "Partial / no response (residual viable tumor)", "sets": { "pathResponse": "residual" }, "pills": ["residual"] }
+      ]
+    },
+    {
+      "id": "n_tx_adj_responder",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Responder adjuvant",
+      "title": "Major pathologic response: complete / de-escalated adjuvant anti-PD-1",
+      "section": "Treatment",
+      "description": "A major or complete pathologic response predicts excellent outcome; complete the planned anti-PD-1 course, then surveillance.",
+      "path": "Melanoma / Stage III / Adjuvant / Responder",
+      "pills": ["major response", "adjuvant"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["e"],
+      "bullets": [
+        "Complete adjuvant anti-PD-1 (nivolumab or pembrolizumab) to about one year total therapy",
+        "De-escalation / early stopping is under study; individualize duration",
+        "No routine switch to targeted therapy given the favorable response",
+        "Continue immune-toxicity monitoring, then risk-adapted surveillance"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_tx_adj_residual",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Residual adjuvant",
+      "title": "Residual viable tumor: switch / intensify adjuvant therapy",
+      "section": "Treatment",
+      "description": "Significant residual tumor after neoadjuvant immunotherapy predicts higher relapse risk and supports changing the adjuvant strategy.",
+      "path": "Melanoma / Stage III / Adjuvant / Residual",
+      "pills": ["residual", "adjuvant"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["e"],
+      "bullets": [
+        "For BRAF V600-mutant disease, switch to adjuvant dabrafenib plus trametinib",
+        "For BRAF wild-type disease, complete / continue adjuvant anti-PD-1 (or enroll on a trial of intensification)",
+        "Consider adjuvant nodal-basin radiation only for selected high-risk pathologic features",
+        "Closer imaging surveillance given elevated relapse risk"
+      ],
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_regional_surg",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Nodal surgery",
+      "title": "Stage III (upfront): definitive surgery and nodal management",
+      "section": "Treatment",
+      "description": "Complete the primary excision and manage the nodal basin, then decide adjuvant systemic therapy by BRAF status.",
+      "path": "Melanoma / Stage III / Surgery",
+      "pills": ["stage III", "surgery"],
+      "required": true,
+      "bullets": [
+        "Wide local excision of the primary with stage-appropriate margins",
+        "For a positive sentinel node, nodal ultrasound surveillance is an accepted alternative to completion lymph-node dissection",
+        "Therapeutic lymph-node dissection for clinically / radiologically involved nodes",
+        "Consider adjuvant radiation to the basin only for selected high-risk features"
+      ],
+      "options": [ { "id": "continue", "label": "Surgery complete - decide adjuvant therapy", "setsValue": null } ]
+    },
+    {
+      "id": "n_adj_braf",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Adjuvant BRAF",
+      "title": "Resected stage III: BRAF status for adjuvant choice",
+      "section": "Treatment",
+      "description": "BRAF V600 status opens targeted adjuvant therapy in addition to immunotherapy.",
+      "path": "Melanoma / Adjuvant / BRAF",
+      "pills": ["adjuvant", "BRAF"],
+      "required": true,
+      "options": [
+        { "id": "mut", "label": "BRAF V600 mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
+        { "id": "wt", "label": "BRAF wild-type", "sets": { "biomarkers.BRAF": "negative" }, "pills": ["BRAF WT"] }
+      ]
+    },
+    {
+      "id": "n_tx_adj_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant IO",
+      "title": "Adjuvant anti-PD-1 immunotherapy (BRAF wild-type)",
+      "section": "Treatment",
+      "description": "Checkpoint immunotherapy reduces recurrence after complete resection of stage III disease, then surveillance.",
+      "path": "Melanoma / Adjuvant / Immunotherapy",
+      "pills": ["adjuvant", "immunotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Adjuvant nivolumab or pembrolizumab for about one year",
+        "Monitor for immune-related adverse events (thyroid, colitis, hepatitis, pneumonitis, endocrinopathy)",
+        "Observation is reasonable for the lowest-risk resected stage III after shared decision-making",
+        "Then risk-adapted surveillance"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_tx_adj_braf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant BRAF/MEK",
+      "title": "Adjuvant BRAF / MEK or anti-PD-1 (BRAF-mutant)",
+      "section": "Treatment",
+      "description": "BRAF V600-mutant resected stage III can receive adjuvant targeted therapy or adjuvant immunotherapy, then surveillance.",
+      "path": "Melanoma / Adjuvant / BRAF-mutant",
+      "pills": ["adjuvant", "BRAF+"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Adjuvant dabrafenib plus trametinib for about one year, or",
+        "Adjuvant anti-PD-1 (nivolumab or pembrolizumab)",
+        "Targeted therapy causes pyrexia, arthralgia, and transaminitis; immunotherapy causes immune-related events - factor comorbidity and preference",
+        "Then risk-adapted surveillance"
+      ],
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_intransit",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "In-transit",
+      "title": "In-transit / satellite disease: burden",
+      "section": "Treatment",
+      "description": "Regionally confined non-nodal spread. Burden and resectability decide between local control and systemic therapy.",
+      "path": "Melanoma / Stage III / In-transit",
+      "pills": ["in-transit"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "options": [
+        { "id": "limited", "label": "Limited / resectable lesions", "sets": { "burden": "limited" }, "pills": ["limited"] },
+        { "id": "extensive", "label": "Extensive / unresectable disease", "sets": { "burden": "extensive" }, "pills": ["extensive"] }
+      ]
+    },
+    {
+      "id": "n_tx_intransit_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "In-transit local",
+      "title": "Limited in-transit disease: local therapy",
+      "section": "Treatment",
+      "description": "Isolated, resectable in-transit lesions are managed with local control, then surveillance.",
+      "path": "Melanoma / Stage III / In-transit / Local",
+      "pills": ["in-transit", "local"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Complete surgical excision of isolated lesions to negative margins when feasible",
+        "Intralesional talimogene laherparepvec (T-VEC) for accessible cutaneous / subcutaneous lesions",
+        "Radiation for a symptomatic unresectable lesion",
+        "Then close surveillance for further in-transit or nodal spread"
+      ],
+      "protocolRefs": ["mel-tvec"]
+    },
+    {
+      "id": "n_tx_intransit_sys",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "In-transit systemic",
+      "title": "Extensive in-transit disease: systemic + regional therapy",
+      "section": "Treatment",
+      "description": "Extensive or unresectable limb / in-transit disease is treated with systemic immunotherapy and regional techniques; on progression it enters the advanced line-of-therapy pathway.",
+      "path": "Melanoma / Stage III / In-transit / Systemic",
+      "pills": ["in-transit", "systemic"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Systemic checkpoint immunotherapy (anti-PD-1, or nivolumab plus ipilimumab for higher burden)",
+        "Isolated limb infusion / perfusion for extensive limb disease at experienced centers",
+        "Intralesional T-VEC for accessible lesions as an adjunct",
+        "Reassess response; progression routes to the advanced systemic-therapy pathway"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro", "skin-melanoma-nivo-ipi", "mel-ili-melphalan", "mel-tvec"]
+    },
+    {
+      "id": "n_intransit_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "In-transit response",
+      "title": "In-transit disease: response to systemic therapy",
+      "section": "Treatment",
+      "description": "Response-adapted branch after systemic therapy for extensive in-transit disease.",
+      "path": "Melanoma / Stage III / In-transit / Response",
+      "pills": ["in-transit", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / disease controlled", "sets": { "response": "yes" }, "pills": ["controlled"] },
+        { "id": "progression", "label": "Progression (regional or distant)", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_advanced_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Advanced workup",
+      "title": "Advanced / metastatic workup",
+      "section": "Recurrence",
+      "description": "Define disease extent and biomarkers before systemic therapy for unresectable stage III or stage IV disease.",
+      "path": "Melanoma / Advanced / Workup",
+      "pills": ["advanced", "workup"],
+      "required": true,
+      "bullets": [
+        "LDH and organ-function labs (LDH is prognostic and defines M1 substage)",
+        "Whole-body PET/CT or CT chest / abdomen / pelvis",
+        "Brain MRI - required, as melanoma has a high propensity for CNS spread",
+        "Confirm BRAF V600 status (test now if not already done); consider broader NGS"
+      ],
+      "options": [ { "id": "continue", "label": "Staging complete - continue", "setsValue": null } ]
+    },
+    {
+      "id": "n_brain_check",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Brain mets",
+      "title": "Brain metastases present?",
+      "section": "Recurrence",
+      "description": "CNS involvement adds local-therapy decisions but still routes into the systemic line-of-therapy pathway.",
+      "path": "Melanoma / Advanced / CNS",
+      "pills": ["brain"],
+      "required": true,
+      "options": [
+        { "id": "brain_yes", "label": "Brain metastases present", "sets": { "cns": "yes" }, "pills": ["CNS+"] },
+        { "id": "brain_no", "label": "No brain metastases", "sets": { "cns": "no" }, "pills": ["CNS-"] }
+      ]
+    },
+    {
+      "id": "n_brain_mgmt",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Brain mgmt",
+      "title": "Brain metastases: symptom status",
+      "section": "Recurrence",
+      "description": "Symptom burden and lesion size determine whether upfront local therapy is needed alongside systemic treatment.",
+      "path": "Melanoma / Advanced / Brain",
+      "pills": ["brain"],
+      "required": true,
+      "options": [
+        { "id": "asx", "label": "Asymptomatic, small-volume", "sets": { "brainSx": "no" }, "pills": ["asymptomatic"] },
+        { "id": "sx", "label": "Symptomatic / large / edema", "sets": { "brainSx": "yes" }, "pills": ["symptomatic"] }
+      ]
+    },
+    {
+      "id": "n_tx_brain_sys",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Brain systemic",
+      "title": "Asymptomatic brain mets: upfront combination immunotherapy",
+      "section": "Recurrence",
+      "description": "Combination checkpoint immunotherapy has meaningful intracranial activity and can be used before local therapy in asymptomatic disease; then define BRAF status for the systemic line-of-therapy plan.",
+      "path": "Melanoma / Advanced / Brain / Systemic",
+      "pills": ["brain", "immunotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Nivolumab plus ipilimumab for asymptomatic, steroid-independent brain metastases",
+        "Consider stereotactic radiosurgery for lesions that persist or progress",
+        "Serial brain MRI to monitor intracranial response",
+        "Then proceed on the systemic (BRAF-directed) line-of-therapy pathway"
+      ],
+      "protocolRefs": ["skin-melanoma-nivo-ipi"]
+    },
+    {
+      "id": "n_tx_brain_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Brain local",
+      "title": "Symptomatic brain mets: local therapy then systemic",
+      "section": "Recurrence",
+      "description": "Symptomatic or large lesions need local control first; then continue on the systemic line-of-therapy pathway.",
+      "path": "Melanoma / Advanced / Brain / Local",
+      "pills": ["brain", "local"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Stereotactic radiosurgery for limited lesions, or surgery for a large / dominant symptomatic lesion",
+        "Whole-brain radiation reserved for extensive disease",
+        "Corticosteroids for symptomatic edema (note steroids blunt immunotherapy)",
+        "Once stabilized, proceed on the systemic (BRAF-directed) line-of-therapy pathway"
+      ],
+      "protocolRefs": ["skin-melanoma-nivo-ipi"]
+    },
+    {
+      "id": "n_adv_braf",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Advanced BRAF",
+      "title": "Advanced disease: BRAF V600 status",
+      "section": "Recurrence",
+      "description": "BRAF V600 status determines whether targeted therapy is available alongside immunotherapy for first-line and subsequent systemic therapy.",
+      "path": "Melanoma / Advanced / BRAF",
+      "pills": ["advanced", "BRAF"],
+      "required": true,
+      "options": [
+        { "id": "mut", "label": "BRAF V600 mutation positive", "sets": { "biomarkers.BRAF": "positive" }, "pills": ["BRAF+"] },
+        { "id": "wt", "label": "BRAF wild-type", "sets": { "biomarkers.BRAF": "negative" }, "pills": ["BRAF WT"] }
+      ]
+    },
+    {
+      "id": "n_adv_mut_choice",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Mutant first line",
+      "title": "BRAF-mutant advanced: first-line strategy",
+      "section": "Recurrence",
+      "description": "Both immunotherapy and BRAF / MEK targeted therapy are first-line options; choose by pace of disease, symptoms, and toxicity tolerance. The class not used first is generally held for second line.",
+      "path": "Melanoma / Advanced / BRAF-mutant / First line",
+      "pills": ["BRAF+", "first line"],
+      "required": true,
+      "footnotes": ["d"],
+      "tables": [
+        {
+          "title": "First-line options in BRAF V600-mutant advanced melanoma",
+          "headers": ["Attribute", "Immunotherapy", "BRAF / MEK targeted"],
+          "rows": [
+            ["Onset of response", "Slower", "Rapid"],
+            ["Durability", "Often durable", "Frequent later resistance"],
+            ["Best suited for", "Fit for immune toxicity, lower burden", "High burden / symptomatic, need quick control"],
+            ["Key toxicity", "Immune-related events", "Fever, arthralgia, transaminitis, skin"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "io", "label": "First-line immunotherapy", "sets": { "firstLine": "io" }, "pills": ["IO"] },
+        { "id": "targeted", "label": "First-line BRAF / MEK targeted", "sets": { "firstLine": "targeted" }, "pills": ["targeted"] }
+      ]
+    },
+    {
+      "id": "n_tx_mut_io_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mutant IO 1L",
+      "title": "BRAF-mutant: first-line immunotherapy",
+      "section": "Recurrence",
+      "description": "Checkpoint immunotherapy as the first systemic therapy in BRAF-mutant advanced disease; targeted therapy is held for progression.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 1L IO",
+      "pills": ["BRAF+", "1L", "immunotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Combination nivolumab plus ipilimumab for higher response, or single-agent anti-PD-1 for a gentler toxicity profile",
+        "Reserve BRAF / MEK therapy for later progression",
+        "Monitor closely for immune-related toxicity",
+        "Reassess with imaging; progression routes to second-line targeted therapy"
+      ],
       "protocolRefs": ["skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_mut_io_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mutant 1L IO response",
+      "title": "BRAF-mutant after first-line immunotherapy: response",
+      "section": "Recurrence",
+      "description": "Response-adapted: continue and monitor a responder, or switch class on progression.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 1L IO / Response",
+      "pills": ["BRAF+", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / durable control - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - switch to targeted therapy", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_mut_tgt_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mutant targeted 2L",
+      "title": "BRAF-mutant second line: BRAF / MEK targeted therapy",
+      "section": "Recurrence",
+      "description": "On progression after first-line immunotherapy, switch class to BRAF plus MEK inhibition.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 2L targeted",
+      "pills": ["BRAF+", "2L", "targeted"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Dabrafenib plus trametinib (a BRAF / MEK combination) for rapid, high-rate responses",
+        "Useful when disease is now bulky or symptomatic and quick control is needed",
+        "Watch for pyrexia, cutaneous events, and transaminitis; plan for eventual resistance",
+        "Reassess; further progression routes to later-line options"
+      ],
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram"]
+    },
+    {
+      "id": "n_mut_2l_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mutant 2L response",
+      "title": "BRAF-mutant after second line: response",
+      "section": "Recurrence",
+      "description": "Response-adapted branch after second-line therapy in BRAF-mutant disease.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 2L / Response",
+      "pills": ["BRAF+", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / disease controlled - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - later-line options", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_mut_tgt_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mutant targeted 1L",
+      "title": "BRAF-mutant: first-line targeted therapy",
+      "section": "Recurrence",
+      "description": "BRAF plus MEK inhibition for rapid control of BRAF V600-mutant disease; immunotherapy is held for progression.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 1L targeted",
+      "pills": ["BRAF+", "1L", "targeted"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Dabrafenib plus trametinib (a BRAF / MEK combination) for rapid, high-rate responses",
+        "Preferred when disease is bulky or symptomatic and quick control is needed",
+        "Watch for pyrexia, cutaneous events, and transaminitis; plan for eventual resistance",
+        "Reassess with imaging; progression routes to second-line immunotherapy"
+      ],
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram"]
+    },
+    {
+      "id": "n_mut_tgt_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mutant 1L targeted response",
+      "title": "BRAF-mutant after first-line targeted: response",
+      "section": "Recurrence",
+      "description": "Response-adapted: continue a responder, or switch class to immunotherapy on progression.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 1L targeted / Response",
+      "pills": ["BRAF+", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / durable control - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - switch to immunotherapy", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_mut_io_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Mutant IO 2L",
+      "title": "BRAF-mutant second line: immunotherapy",
+      "section": "Recurrence",
+      "description": "On progression after first-line targeted therapy, switch class to checkpoint immunotherapy.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 2L IO",
+      "pills": ["BRAF+", "2L", "immunotherapy"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Nivolumab plus ipilimumab for higher response, or single-agent anti-PD-1 by fitness / toxicity tolerance",
+        "Best started before the patient deteriorates, given slower onset of immune response",
+        "Monitor closely for immune-related toxicity",
+        "Reassess; further progression routes to later-line options"
+      ],
+      "protocolRefs": ["skin-melanoma-nivo-ipi", "skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_mut_io2_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Mutant 2L IO response",
+      "title": "BRAF-mutant after second-line immunotherapy: response",
+      "section": "Recurrence",
+      "description": "Response-adapted branch after second-line immunotherapy in BRAF-mutant disease.",
+      "path": "Melanoma / Advanced / BRAF-mutant / 2L IO / Response",
+      "pills": ["BRAF+", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / disease controlled - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - later-line options", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_adv_wt_choice",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "WT first line",
+      "title": "BRAF wild-type advanced: first-line strategy",
+      "section": "Recurrence",
+      "description": "Immunotherapy is the backbone; choose combination versus single-agent by risk, burden, and ability to tolerate toxicity.",
+      "path": "Melanoma / Advanced / BRAF-WT / First line",
+      "pills": ["BRAF WT", "first line"],
+      "required": true,
+      "footnotes": ["c"],
+      "options": [
+        { "id": "combo", "label": "Combination checkpoint immunotherapy", "sets": { "firstLine": "combo" }, "pills": ["nivo-ipi"] },
+        { "id": "mono", "label": "Single-agent anti-PD-1", "sets": { "firstLine": "mono" }, "pills": ["anti-PD-1"] }
+      ]
+    },
+    {
+      "id": "n_tx_wt_combo_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "WT combo 1L",
+      "title": "BRAF wild-type: first-line combination immunotherapy",
+      "section": "Recurrence",
+      "description": "Dual checkpoint blockade for higher response in fit patients.",
+      "path": "Melanoma / Advanced / BRAF-WT / 1L combo",
+      "pills": ["BRAF WT", "1L", "nivo-ipi"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Nivolumab plus ipilimumab for higher response rates, weighed against more grade 3-4 immune toxicity",
+        "Favored for higher burden or aggressive disease in patients able to tolerate combination toxicity",
+        "Structured immune-toxicity monitoring and prompt steroid management",
+        "Reassess with imaging; progression routes to second-line options"
+      ],
+      "protocolRefs": ["skin-melanoma-nivo-ipi"]
+    },
+    {
+      "id": "n_wt_combo_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "WT combo response",
+      "title": "BRAF wild-type after first-line combination: response",
+      "section": "Recurrence",
+      "description": "Response-adapted: continue a responder, or move to second line on progression.",
+      "path": "Melanoma / Advanced / BRAF-WT / 1L combo / Response",
+      "pills": ["BRAF WT", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / durable control - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - second-line options", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_wt_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "WT 2L",
+      "title": "BRAF wild-type second line",
+      "section": "Recurrence",
+      "description": "Options after progression on first-line immunotherapy in BRAF wild-type disease.",
+      "path": "Melanoma / Advanced / BRAF-WT / 2L",
+      "pills": ["BRAF WT", "2L"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Tumor-infiltrating lymphocyte (TIL) therapy (lifileucel) at experienced centers for anti-PD-1-refractory disease",
+        "Alternate anti-PD-1-based regimen or a clinical trial (e.g. LAG-3 combination)",
+        "For KIT-mutant acral / mucosal disease, consider a KIT inhibitor (trial-directed)",
+        "Reassess; further progression routes to later-line options"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_wt_2l_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "WT 2L response",
+      "title": "BRAF wild-type after second line: response",
+      "section": "Recurrence",
+      "description": "Response-adapted branch after second-line therapy in BRAF wild-type disease.",
+      "path": "Melanoma / Advanced / BRAF-WT / 2L / Response",
+      "pills": ["BRAF WT", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / disease controlled - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - later-line options", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_wt_mono_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "WT mono 1L",
+      "title": "BRAF wild-type: first-line single-agent anti-PD-1",
+      "section": "Recurrence",
+      "description": "Single-agent checkpoint inhibition with a more favorable toxicity profile.",
+      "path": "Melanoma / Advanced / BRAF-WT / 1L mono",
+      "pills": ["BRAF WT", "1L", "anti-PD-1"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Nivolumab or pembrolizumab monotherapy",
+        "Preferred when combination toxicity is a concern or comorbidity limits tolerance",
+        "Monitor for immune-related adverse events",
+        "Reassess with imaging; progression allows escalation to combination immunotherapy"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro"]
+    },
+    {
+      "id": "n_wt_mono_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "WT mono response",
+      "title": "BRAF wild-type after first-line single-agent: response",
+      "section": "Recurrence",
+      "description": "Response-adapted: continue a responder, or escalate to combination immunotherapy on progression.",
+      "path": "Melanoma / Advanced / BRAF-WT / 1L mono / Response",
+      "pills": ["BRAF WT", "response"],
+      "required": true,
+      "options": [
+        { "id": "response", "label": "Response / durable control - continue and monitor", "sets": { "response": "yes" }, "pills": ["response"] },
+        { "id": "progression", "label": "Progression - escalate to combination immunotherapy", "sets": { "response": "no" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_wt_mono_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "WT mono 2L",
+      "title": "BRAF wild-type second line: escalate to combination immunotherapy",
+      "section": "Recurrence",
+      "description": "On progression after single-agent anti-PD-1, escalate to dual checkpoint blockade, then reassess.",
+      "path": "Melanoma / Advanced / BRAF-WT / 2L escalate",
+      "pills": ["BRAF WT", "2L", "nivo-ipi"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Nivolumab plus ipilimumab in patients fit for combination toxicity",
+        "Structured immune-toxicity monitoring and prompt steroid management",
+        "Consider TIL therapy or a clinical trial if not a combination candidate",
+        "Reassess; further progression routes to later-line options"
+      ],
+      "protocolRefs": ["skin-melanoma-nivo-ipi"]
+    },
+    {
+      "id": "n_tx_adv_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Later line",
+      "title": "Later-line / refractory advanced disease",
+      "section": "Recurrence",
+      "description": "Options after both immunotherapy and (where applicable) targeted therapy have been used.",
+      "path": "Melanoma / Advanced / Later line",
+      "pills": ["later line", "refractory"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Clinical trial enrollment is preferred where available",
+        "Tumor-infiltrating lymphocyte (TIL) therapy (lifileucel) for immunotherapy-refractory disease at experienced centers",
+        "BRAF / MEK rechallenge in BRAF-mutant disease after a prior response and treatment interval",
+        "Cytotoxic chemotherapy or best supportive care for refractory disease; palliative radiation for symptomatic sites",
+        "Then continue supportive surveillance"
+      ],
+      "protocolRefs": ["skin-melanoma-braf-mek-dab-tram", "skin-melanoma-nivo-ipi"]
+    },
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Surveillance / follow-up",
+      "section": "Surveillance",
+      "description": "Risk-adapted follow-up after curative-intent or disease-controlling therapy.",
+      "path": "Melanoma / Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "History with full skin and lymph-node exam every 3-12 months, intensity scaled to stage, then annually long-term",
+        "Patient education on monthly skin self-exam and sun protection",
+        "Cross-sectional / brain imaging for higher-risk resected disease per risk; not routine for low-risk stage I-II",
+        "Lifelong annual skin surveillance (elevated second-primary risk)"
+      ],
+      "linkTo": "n_recurrence",
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+    },
+    {
+      "id": "n_recurrence",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Recurrence",
+      "title": "Recurrence pattern",
+      "section": "Recurrence",
+      "description": "Route by the pattern of relapse.",
+      "path": "Melanoma / Recurrence",
+      "pills": ["recurrence"],
+      "required": true,
+      "options": [
+        { "id": "local", "label": "Local / in-transit recurrence", "sets": { "recurrence": "local" }, "pills": ["local"] },
+        { "id": "regional", "label": "Regional nodal recurrence", "sets": { "recurrence": "regional" }, "pills": ["regional"] },
+        { "id": "distant", "label": "Distant / metastatic recurrence", "sets": { "recurrence": "distant" }, "pills": ["distant"] }
+      ]
+    },
+    {
+      "id": "n_tx_local_recur",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Local recurrence",
+      "title": "Local / in-transit recurrence",
+      "section": "Recurrence",
+      "description": "Re-establish local control; escalate to systemic therapy if disease is widespread.",
+      "path": "Melanoma / Recurrence / Local",
+      "pills": ["local", "recurrence"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Re-excise resectable local or in-transit recurrence to negative margins",
+        "Intralesional T-VEC, isolated limb infusion / perfusion, or radiation for multifocal limb disease",
+        "Restage; move to the advanced pathway if distant spread is found",
+        "Consider systemic immunotherapy for unresectable or rapidly recurring disease, then surveillance"
+      ],
+      "protocolRefs": ["skin-melanoma-nivolumab", "skin-melanoma-pembro"]
     }
   ],
   "links": [
-    { "id": "l_mel_setting_braf", "from": "n_mel_setting", "to": "n_mel_braf", "fromOptions": ["adjuvant", "metastatic"], "enableBehavior": "any", "linkCategory": "conditional" },
-    { "id": "l_mel_braf_mut", "from": "n_mel_braf", "to": "n_tx_mel_braf", "fromOptions": ["mut"], "linkCategory": "conditional" },
-    { "id": "l_mel_braf_wt", "from": "n_mel_braf", "to": "n_tx_mel_io", "fromOptions": ["wt"], "linkCategory": "conditional" }
+    { "id": "l_entry_workup", "from": "n_entry", "to": "n_workup", "linkCategory": "conditional" },
+    { "id": "l_workup_micro", "from": "n_workup", "to": "n_micro", "linkCategory": "conditional" },
+    { "id": "l_micro_molecular", "from": "n_micro", "to": "n_molecular", "linkCategory": "conditional" },
+    { "id": "l_molecular_staging", "from": "n_molecular", "to": "n_staging", "linkCategory": "conditional" },
+    { "id": "l_staging_insitu", "from": "n_staging", "to": "n_tx_insitu", "fromOptions": ["s0"], "linkCategory": "conditional" },
+    { "id": "l_staging_localized", "from": "n_staging", "to": "n_localized_excision", "fromOptions": ["s12"], "linkCategory": "conditional" },
+    { "id": "l_staging_s3", "from": "n_staging", "to": "n_stage3_resect", "fromOptions": ["s3"], "linkCategory": "conditional" },
+    { "id": "l_staging_intransit", "from": "n_staging", "to": "n_intransit", "fromOptions": ["s3_intransit"], "linkCategory": "conditional" },
+    { "id": "l_staging_s4", "from": "n_staging", "to": "n_advanced_workup", "fromOptions": ["s4"], "linkCategory": "conditional" },
+    { "id": "l_staging_recur", "from": "n_staging", "to": "n_recurrence", "fromOptions": ["recurrent"], "linkCategory": "conditional" },
+    { "id": "l_insitu_surv", "from": "n_tx_insitu", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_localized_slnb", "from": "n_localized_excision", "to": "n_slnb", "linkCategory": "conditional" },
+    { "id": "l_slnb_neg", "from": "n_slnb", "to": "n_stage2_risk", "fromOptions": ["sln_neg"], "linkCategory": "conditional" },
+    { "id": "l_slnb_pos", "from": "n_slnb", "to": "n_stage3_resect", "fromOptions": ["sln_pos"], "linkCategory": "conditional" },
+    { "id": "l_stage2_low", "from": "n_stage2_risk", "to": "n_surveillance", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_stage2_high", "from": "n_stage2_risk", "to": "n_tx_adj_stage2_io", "fromOptions": ["high"], "linkCategory": "conditional" },
+    { "id": "l_stage2io_surv", "from": "n_tx_adj_stage2_io", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_s3resect_yes", "from": "n_stage3_resect", "to": "n_neoadj", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+    { "id": "l_s3resect_no", "from": "n_stage3_resect", "to": "n_advanced_workup", "fromOptions": ["unresectable"], "linkCategory": "conditional" },
+    { "id": "l_neoadj_yes", "from": "n_neoadj", "to": "n_tx_neoadj", "fromOptions": ["neoadj_yes"], "linkCategory": "conditional" },
+    { "id": "l_neoadj_no", "from": "n_neoadj", "to": "n_regional_surg", "fromOptions": ["neoadj_no"], "linkCategory": "conditional" },
+    { "id": "l_txneoadj_resp", "from": "n_tx_neoadj", "to": "n_neoadj_response", "linkCategory": "conditional" },
+    { "id": "l_neoadjresp_major", "from": "n_neoadj_response", "to": "n_tx_adj_responder", "fromOptions": ["major"], "linkCategory": "conditional" },
+    { "id": "l_neoadjresp_resid", "from": "n_neoadj_response", "to": "n_tx_adj_residual", "fromOptions": ["residual"], "linkCategory": "conditional" },
+    { "id": "l_responder_surv", "from": "n_tx_adj_responder", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_residual_surv", "from": "n_tx_adj_residual", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_regional_adjbraf", "from": "n_regional_surg", "to": "n_adj_braf", "linkCategory": "conditional" },
+    { "id": "l_adjbraf_wt", "from": "n_adj_braf", "to": "n_tx_adj_io", "fromOptions": ["wt"], "linkCategory": "conditional" },
+    { "id": "l_adjbraf_mut", "from": "n_adj_braf", "to": "n_tx_adj_braf", "fromOptions": ["mut"], "linkCategory": "conditional" },
+    { "id": "l_adjio_surv", "from": "n_tx_adj_io", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_adjbrafmek_surv", "from": "n_tx_adj_braf", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_intransit_limited", "from": "n_intransit", "to": "n_tx_intransit_local", "fromOptions": ["limited"], "linkCategory": "conditional" },
+    { "id": "l_intransit_extensive", "from": "n_intransit", "to": "n_tx_intransit_sys", "fromOptions": ["extensive"], "linkCategory": "conditional" },
+    { "id": "l_intransitlocal_surv", "from": "n_tx_intransit_local", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_intransitsys_prog", "from": "n_tx_intransit_sys", "to": "n_intransit_prog", "linkCategory": "conditional" },
+    { "id": "l_intransitprog_resp", "from": "n_intransit_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_intransitprog_prog", "from": "n_intransit_prog", "to": "n_adv_braf", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_advwk_brain", "from": "n_advanced_workup", "to": "n_brain_check", "linkCategory": "conditional" },
+    { "id": "l_brain_yes", "from": "n_brain_check", "to": "n_brain_mgmt", "fromOptions": ["brain_yes"], "linkCategory": "conditional" },
+    { "id": "l_brain_no", "from": "n_brain_check", "to": "n_adv_braf", "fromOptions": ["brain_no"], "linkCategory": "conditional" },
+    { "id": "l_brainmgmt_asx", "from": "n_brain_mgmt", "to": "n_tx_brain_sys", "fromOptions": ["asx"], "linkCategory": "conditional" },
+    { "id": "l_brainmgmt_sx", "from": "n_brain_mgmt", "to": "n_tx_brain_local", "fromOptions": ["sx"], "linkCategory": "conditional" },
+    { "id": "l_brainsys_advbraf", "from": "n_tx_brain_sys", "to": "n_adv_braf", "linkCategory": "conditional" },
+    { "id": "l_brainlocal_advbraf", "from": "n_tx_brain_local", "to": "n_adv_braf", "linkCategory": "conditional" },
+    { "id": "l_advbraf_mut", "from": "n_adv_braf", "to": "n_adv_mut_choice", "fromOptions": ["mut"], "linkCategory": "conditional" },
+    { "id": "l_advbraf_wt", "from": "n_adv_braf", "to": "n_adv_wt_choice", "fromOptions": ["wt"], "linkCategory": "conditional" },
+    { "id": "l_mutchoice_io", "from": "n_adv_mut_choice", "to": "n_tx_mut_io_1l", "fromOptions": ["io"], "linkCategory": "conditional" },
+    { "id": "l_mutchoice_tgt", "from": "n_adv_mut_choice", "to": "n_tx_mut_tgt_1l", "fromOptions": ["targeted"], "linkCategory": "conditional" },
+    { "id": "l_mutio1l_prog", "from": "n_tx_mut_io_1l", "to": "n_mut_io_prog", "linkCategory": "conditional" },
+    { "id": "l_mutioprog_resp", "from": "n_mut_io_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_mutioprog_prog", "from": "n_mut_io_prog", "to": "n_tx_mut_tgt_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_muttgt2l_prog", "from": "n_tx_mut_tgt_2l", "to": "n_mut_2l_prog", "linkCategory": "conditional" },
+    { "id": "l_mut2lprog_resp", "from": "n_mut_2l_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_mut2lprog_prog", "from": "n_mut_2l_prog", "to": "n_tx_adv_later", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_muttgt1l_prog", "from": "n_tx_mut_tgt_1l", "to": "n_mut_tgt_prog", "linkCategory": "conditional" },
+    { "id": "l_muttgtprog_resp", "from": "n_mut_tgt_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_muttgtprog_prog", "from": "n_mut_tgt_prog", "to": "n_tx_mut_io_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_mutio2l_prog", "from": "n_tx_mut_io_2l", "to": "n_mut_io2_prog", "linkCategory": "conditional" },
+    { "id": "l_mutio2prog_resp", "from": "n_mut_io2_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_mutio2prog_prog", "from": "n_mut_io2_prog", "to": "n_tx_adv_later", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_wtchoice_combo", "from": "n_adv_wt_choice", "to": "n_tx_wt_combo_1l", "fromOptions": ["combo"], "linkCategory": "conditional" },
+    { "id": "l_wtchoice_mono", "from": "n_adv_wt_choice", "to": "n_tx_wt_mono_1l", "fromOptions": ["mono"], "linkCategory": "conditional" },
+    { "id": "l_wtcombo1l_prog", "from": "n_tx_wt_combo_1l", "to": "n_wt_combo_prog", "linkCategory": "conditional" },
+    { "id": "l_wtcomboprog_resp", "from": "n_wt_combo_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_wtcomboprog_prog", "from": "n_wt_combo_prog", "to": "n_tx_wt_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_wt2l_prog", "from": "n_tx_wt_2l", "to": "n_wt_2l_prog", "linkCategory": "conditional" },
+    { "id": "l_wt2lprog_resp", "from": "n_wt_2l_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_wt2lprog_prog", "from": "n_wt_2l_prog", "to": "n_tx_adv_later", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_wtmono1l_prog", "from": "n_tx_wt_mono_1l", "to": "n_wt_mono_prog", "linkCategory": "conditional" },
+    { "id": "l_wtmonoprog_resp", "from": "n_wt_mono_prog", "to": "n_surveillance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_wtmonoprog_prog", "from": "n_wt_mono_prog", "to": "n_tx_wt_mono_2l", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_wtmono2l_prog", "from": "n_tx_wt_mono_2l", "to": "n_wt_2l_prog", "linkCategory": "conditional" },
+    { "id": "l_advlater_surv", "from": "n_tx_adv_later", "to": "n_surveillance", "linkCategory": "conditional" },
+    { "id": "l_recur_local", "from": "n_recurrence", "to": "n_tx_local_recur", "fromOptions": ["local"], "linkCategory": "conditional" },
+    { "id": "l_recur_regional", "from": "n_recurrence", "to": "n_stage3_resect", "fromOptions": ["regional"], "linkCategory": "conditional" },
+    { "id": "l_recur_distant", "from": "n_recurrence", "to": "n_advanced_workup", "fromOptions": ["distant"], "linkCategory": "conditional" },
+    { "id": "l_localrecur_surv", "from": "n_tx_local_recur", "to": "n_surveillance", "linkCategory": "conditional" }
   ]
 }

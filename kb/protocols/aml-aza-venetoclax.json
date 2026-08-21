@@ -1,0 +1,98 @@
+{
+  "id": "aml-aza-venetoclax",
+  "diseaseId": "aml_cancer",
+  "name": "Azacitidine + Venetoclax (lower-intensity)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Tumor-lysis prophylaxis: hydration and allopurinol (or rasburicase if high risk); monitor potassium, phosphate, calcium, uric acid. Ramp venetoclax over the first cycle; reduce venetoclax dose with concomitant azole antifungals (strong CYP3A inhibitors).",
+    "Full neutropenic supportive care: infection prophylaxis, transfusion support for anemia/thrombocytopenia."
+  ],
+  "monitoring": [
+    "CBC with differential and marrow response after count recovery.",
+    "Marrow at end of cycle 1 to guide venetoclax duration.",
+    "Electrolytes/uric acid during ramp-up (TLS)."
+  ],
+  "drugs": [
+    {
+      "id": "azacitidine",
+      "name": "Azacitidine",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "SC",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "75 mg/m2 SC or IV on days 1-7 of each 28-day cycle (hypomethylating backbone). Decitabine 20 mg/m2 IV days 1-5 is an alternative. Standard Guidelines (NCCN) / DeVita, general reference."
+    },
+    {
+      "id": "venetoclax",
+      "name": "Venetoclax",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "frequency": "DAILY",
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Target 400 mg PO once daily; ramp up during cycle 1 (100 mg day 1, 200 mg day 2, 400 mg day 3 onward) with TLS prophylaxis. Reduce dose substantially with azole antifungals (strong CYP3A inhibitors). Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "id": "ov-paclitaxel-weekly",
+  "diseaseId": "ovarian_cancer",
+  "name": "Weekly Paclitaxel (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT single-agent option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Hypersensitivity prophylaxis", "notes": "Corticosteroid, H1- and H2-antihistamine before paclitaxel; weekly schedules often use attenuated steroid premedication after tolerance is established." }
+  ],
+  "supportiveCare": [
+    "Peripheral sensory neuropathy is cumulative and dose-limiting: assess each cycle and reduce/hold for grade 2-3.",
+    "Monitor for infusion reactions, myelosuppression, and arthralgia/myalgia."
+  ],
+  "monitoring": [
+    "CBC before each weekly dose",
+    "neuropathy assessment each cycle",
+    "liver function periodically"
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV over 1 hr",
+      "days": [1, 8, 15],
+      "caps": { "perDose": null },
+      "notes": "Paclitaxel 80 mg/m2 IV weekly on days 1, 8 and 15 every 28 days (a continuous weekly schedule is also used), for platinum-resistant relapse; may be combined with bevacizumab. Hold/reduce for grade 2-3 neuropathy. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

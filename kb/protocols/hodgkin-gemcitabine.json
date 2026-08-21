@@ -1,0 +1,54 @@
+{
+  "id": "hodgkin-gemcitabine",
+  "diseaseId": "hodgkin_cancer",
+  "name": "Gemcitabine (single agent, palliative)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Gemcitabine is low-to-moderate emetogenic; give antiemetic prophylaxis as needed."
+    }
+  ],
+  "supportiveCare": [
+    "Well-tolerated single-agent palliative option for transplant-ineligible, heavily pretreated relapsed classical Hodgkin lymphoma.",
+    "Monitor for myelosuppression (especially thrombocytopenia) and rare pulmonary toxicity.",
+    "Early palliative-care involvement and goals-of-care discussion in the refractory setting."
+  ],
+  "monitoring": [
+    "CBC with differential before each administration (hold day 15 for cytopenias)",
+    "liver and renal function periodically",
+    "symptom and performance-status assessment for palliative goals"
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "notes": "Gemcitabine 1000 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle (single-agent palliative dosing; the day-15 dose is commonly held for cytopenias). Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

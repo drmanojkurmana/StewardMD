@@ -1,0 +1,84 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-it-chemo",
+  "name": "Intrathecal triple chemotherapy (CNS prophylaxis)",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 4,
+  "premedications": [
+    {
+      "name": "Platelet check",
+      "notes": "confirm platelets adequate for safe lumbar puncture before each dose"
+    }
+  ],
+  "supportiveCare": [
+    "Deliver by lumbar puncture (or Ommaya) by a trained operator",
+    "Patient lies flat after the procedure per local practice"
+  ],
+  "monitoring": [
+    "CSF cytology/flow at the first tap to exclude occult CNS involvement",
+    "Neurologic assessment before each dose",
+    "Number of doses individualized to CNS-relapse risk"
+  ],
+  "drugs": [
+    {
+      "id": "methotrexate-it",
+      "name": "Methotrexate (intrathecal)",
+      "basis": "flat",
+      "dosePerUnit": 12,
+      "unit": "mg",
+      "route": "IT",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 15
+      },
+      "notes": "12 mg intrathecal, per dose. Age-adjusted; preservative-free only."
+    },
+    {
+      "id": "cytarabine-it",
+      "name": "Cytarabine (intrathecal)",
+      "basis": "flat",
+      "dosePerUnit": 50,
+      "unit": "mg",
+      "route": "IT",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "50 mg intrathecal, per dose (preservative-free)."
+    },
+    {
+      "id": "hydrocortisone-it",
+      "name": "Hydrocortisone (intrathecal)",
+      "basis": "flat",
+      "dosePerUnit": 15,
+      "unit": "mg",
+      "route": "IT",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "15 mg intrathecal to reduce arachnoiditis."
+    }
+  ]
+}

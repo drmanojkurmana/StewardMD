@@ -1,0 +1,82 @@
+{
+  "id": "cll-fcr",
+  "diseaseId": "cll_cancer",
+  "name": "FCR (Fludarabine + Cyclophosphamide + Rituximab)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), general reference",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care dosing (experimental; owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Rituximab infusion-reaction prophylaxis", "notes": "antihistamine, antipyretic and (per practice) a corticosteroid before the infusion." },
+    { "name": "Antiemetic prophylaxis", "notes": "per emetic-risk framework before chemotherapy." },
+    { "name": "Tumor-lysis-syndrome prophylaxis", "notes": "hydration and allopurinol for higher tumor burden." }
+  ],
+  "supportiveCare": [
+    "Chemoimmunotherapy reserved for fit, TP53 wild-type, IGHV-mutated patients; never use with del(17p)/TP53 mutation.",
+    "PJP and herpesvirus (VZV/HSV) prophylaxis throughout and after therapy (purine-analog T-cell suppression).",
+    "Irradiate cellular blood products (purine-analog transfusion-associated graft-versus-host risk).",
+    "Hepatitis B reactivation prophylaxis if HBcAb-positive (anti-CD20 antibody).",
+    "Counsel on cytopenias, infection, and a small risk of therapy-related myeloid neoplasm."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle and during cytopenias",
+    "renal function before each cycle (fludarabine and cyclophosphamide renal clearance)",
+    "infection surveillance",
+    "consider G-CSF support per febrile-neutropenia risk"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "hepatitis B status", "TP53 status (must be wild-type)", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "CrCl below about 70 mL/min, or grade 3 to 4 cytopenia",
+      "drug": "fludarabine",
+      "action": "hold/reduce",
+      "text": "Reduce or hold fludarabine and cyclophosphamide for renal impairment or significant cytopenia; avoid fludarabine at very low clearance; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "fludarabine",
+      "name": "Fludarabine",
+      "basis": "bsa",
+      "dosePerUnit": 25,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 25 mg/m2 IV on days 1 to 3 of a 28-day cycle for 6 cycles. An oral formulation at a higher mg/m2 is an alternative. Reduce for renal impairment. Own wording; not copied from any source."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 250,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 250 mg/m2 IV on days 1 to 3 of a 28-day cycle for 6 cycles. Own wording; not copied from any source."
+    },
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 375 mg/m2 IV on day 1 of cycle 1, then 500 mg/m2 IV on day 1 of cycles 2 through 6. dosePerUnit is the first-cycle 375 mg/m2 dose; the 500 mg/m2 escalation from cycle 2 is noted here. Own wording; not copied from any source."
+    }
+  ]
+}

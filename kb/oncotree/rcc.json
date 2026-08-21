@@ -2,65 +2,1071 @@
   "guideline": "rcc",
   "title": "Renal Cell Carcinoma",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "renal_cell_carcinoma",
-  "status": "draft",
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "rcc_cancer",
   "matchDisease": false,
-  "provenanceNote": "ONCOTREE navigator DRAFT for advanced/metastatic clear-cell renal cell carcinoma. Captures the first-line systemic approach (immunotherapy combination for intermediate/poor-risk disease vs tyrosine-kinase inhibitor monotherapy) and routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Kidney Cancer; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Kidney Cancer. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_rcc_approach"],
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard oncology references (NCCN/DeVita/Harrison) - the physician decides. Full pathway: workup -> presentation -> localized stage / post-nephrectomy risk / adjuvant; advanced clear-cell by IMDC risk with a line-of-therapy spine (first line -> response assessment -> second line -> response -> later line); non-clear-cell by subtype with a progression sub-step; recurrence and surveillance. Treatment leaves route to APPLICABLE existing StewardMD Standard Protocols by reference; modalities/agents without a dose protocol (surgery, ablation, adjuvant pembrolizumab, IO+TKI combinations, single-agent nivolumab, lenvatinib, belzutifan, platinum chemotherapy) are shown as checklist guidance with NO dose. Invents no dose/regimen/criterion. Content authored in original words; no proprietary guideline text reproduced. DRAFT - not clinically activated; the existing dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN/DeVita/Harrison), Kidney Cancer. Regimen options reference existing StewardMD Standard Protocols and their own evidence layers.",
+  "startNodeIds": ["n_workup"],
+  "footnotes": {
+    "a": { "text": "IMDC (International Metastatic RCC Database Consortium) risk model: 0 factors = favorable, 1-2 = intermediate, 3-6 = poor. Factors: less than 1 year from diagnosis to systemic therapy, Karnofsky PS under 80, anemia (Hgb below lower limit of normal), hypercalcemia (corrected Ca above upper limit), neutrophilia, thrombocytosis.", "evidence": "1" },
+    "b": { "text": "Adjuvant pembrolizumab for about 1 year improved disease-free (and later overall) survival in resected clear-cell RCC at increased risk of recurrence. Weigh against immune toxicity; no dedicated dose protocol here yet.", "evidence": "1" },
+    "c": { "text": "Dual checkpoint blockade (nivolumab + ipilimumab) is a category 1 first-line option for intermediate/poor-risk clear-cell disease; benefit is less established for favorable-risk, where an IO+TKI combination or TKI monotherapy are reasonable.", "evidence": "1" },
+    "d": { "text": "Non-clear-cell RCC is biologically heterogeneous; enrollment in a clinical trial is preferred where available. Data are largely extrapolated or drawn from smaller studies.", "evidence": "2A" },
+    "e": { "text": "Reassess disease with cross-sectional imaging (RECIST-style) at defined intervals; separate pseudoprogression on immunotherapy from true progression before switching lines. Response or durable stable disease continues therapy; unequivocal progression or intolerable toxicity triggers the next line.", "evidence": "2A" }
+  },
   "nodes": [
     {
-      "id": "n_rcc_approach",
-      "linkId": "rcc_approach",
-      "nodeCategory": "criteria",
+      "id": "n_workup",
+      "nodeCategory": "workup",
       "nodeType": "question",
-      "template": "main",
-      "name": "First-line approach",
-      "title": "First-line approach",
-      "description": "Advanced/metastatic clear-cell renal cell carcinoma is treated with an immune-checkpoint-inhibitor-based combination, generally favored in intermediate/poor-risk disease by IMDC criteria, or with tyrosine-kinase inhibitor monotherapy. Physician selects based on risk category and comorbidities.",
-      "path": "Renal Cell Carcinoma / Approach",
-      "section": "Treatment",
-      "pills": ["approach", "first-line"],
+      "name": "Initial workup",
+      "title": "Initial workup and staging",
+      "description": "Baseline evaluation of a suspected or confirmed renal mass before deciding on a management pathway.",
+      "path": "Renal Cell Carcinoma / Workup",
+      "section": "Workup",
+      "pills": ["workup"],
       "required": true,
+      "bullets": [
+        "History, physical, performance status; screen for a hereditary syndrome (VHL, hereditary papillary) if young or multifocal",
+        "Labs: CBC, LDH, corrected calcium, LFTs, renal function, urinalysis",
+        "Contrast CT or MRI of the abdomen and pelvis to characterize the mass and nodes; chest CT for staging",
+        "Biopsy the renal mass when it changes management (small mass, ablation candidate, suspected non-clear-cell, or before systemic therapy)",
+        "Confirm histology and grade (clear-cell vs non-clear-cell); note any sarcomatoid or rhabdoid features"
+      ],
       "options": [
-        { "id": "iocombo", "label": "Immunotherapy combination (intermediate/poor risk)", "sets": { "scenario": "io-combo" } },
-        { "id": "tki", "label": "Tyrosine-kinase inhibitor monotherapy", "sets": { "scenario": "tki" } }
+        { "id": "continue", "label": "Workup reviewed - continue", "setsValue": null }
       ]
     },
     {
-      "id": "n_tx_rcc_io",
-      "linkId": "tx_rcc_io",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "Advanced clear-cell RCC: immunotherapy combination",
-      "title": "Advanced clear-cell RCC: immunotherapy combination",
-      "description": "Advanced/metastatic clear-cell renal cell carcinoma, first-line - immune-checkpoint-inhibitor combination therapy. Physician selects the specific combination regimen.",
-      "path": "Renal Cell Carcinoma / Treatment / Immunotherapy combination",
-      "section": "Treatment",
-      "pills": ["treatment"],
-      "showsRecommendation": true,
-      "protocolRefs": ["gu-rcc-nivo-ipi"]
+      "id": "n_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Presentation",
+      "title": "Clinical presentation",
+      "description": "Management is defined first by disease extent and histology. Choose the current clinical picture.",
+      "path": "Renal Cell Carcinoma / Presentation",
+      "section": "Staging",
+      "pills": ["presentation"],
+      "required": true,
+      "options": [
+        { "id": "localized", "label": "Localized / locoregional (M0), surgical candidate", "sets": { "presentation": "localized" }, "pills": ["localized"] },
+        { "id": "met_1l", "label": "Advanced / metastatic clear-cell, treatment-naive", "sets": { "presentation": "met_1l" }, "pills": ["metastatic", "clear-cell"] },
+        { "id": "met_later", "label": "Advanced clear-cell, progressed on prior systemic therapy", "sets": { "presentation": "met_later" }, "pills": ["later line"] },
+        { "id": "nccrcc", "label": "Metastatic non-clear-cell RCC", "sets": { "presentation": "nccrcc" }, "pills": ["non-clear-cell"] },
+        { "id": "recurrence", "label": "Recurrence after prior nephrectomy", "sets": { "presentation": "recurrence" }, "pills": ["recurrence"] },
+        { "id": "followup", "label": "Post-treatment surveillance", "sets": { "presentation": "followup" }, "pills": ["surveillance"] }
+      ]
     },
     {
-      "id": "n_tx_rcc_tki",
-      "linkId": "tx_rcc_tki",
+      "id": "n_localized_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Localized stage",
+      "title": "Localized RCC: stage / tumor extent",
+      "description": "Stratify localized disease by primary tumor size and extent. This drives nephron-sparing vs radical surgery and the later adjuvant decision.",
+      "path": "Renal Cell Carcinoma / Localized / Stage",
+      "section": "Staging",
+      "pills": ["stage"],
+      "required": true,
+      "tables": [
+        {
+          "title": "Simplified AJCC-style T staging (renal cell carcinoma)",
+          "headers": ["T / N", "Definition", "Typical stage group"],
+          "rows": [
+            ["T1a", "Confined to kidney, 4 cm or less", "Stage I"],
+            ["T1b", "Confined to kidney, over 4 up to 7 cm", "Stage I"],
+            ["T2", "Confined to kidney, over 7 cm", "Stage II"],
+            ["T3", "Into renal vein / perinephric tissue, within Gerota fascia", "Stage III"],
+            ["T4", "Beyond Gerota fascia or into ipsilateral adrenal", "Stage IV"],
+            ["N1", "Regional lymph node involvement", "Stage III"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "small_mass", "label": "Small renal mass (cT1a, 4 cm or less)", "sets": { "locStage": "cT1a" }, "pills": ["cT1a"] },
+        { "id": "resectable", "label": "Larger / locally advanced (cT1b-T4 or N1)", "sets": { "locStage": "resectable" }, "pills": ["cT1b-T4/N1"] }
+      ]
+    },
+    {
+      "id": "n_small_mass",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Small renal mass",
+      "title": "Small renal mass (cT1a): management choice",
+      "description": "For a small renal mass, nephron-sparing approaches are preferred; observation is reasonable in selected patients.",
+      "path": "Renal Cell Carcinoma / Localized / Small mass",
+      "section": "Treatment",
+      "pills": ["cT1a"],
+      "required": true,
+      "bullets": [
+        "Partial nephrectomy is preferred to preserve renal function when technically feasible",
+        "Thermal ablation for smaller masses or poor surgical candidates",
+        "Active surveillance for frail patients or limited life expectancy, with serial imaging"
+      ],
+      "options": [
+        { "id": "partial", "label": "Partial nephrectomy", "sets": { "locTx": "partial" }, "pills": ["surgery"] },
+        { "id": "ablation", "label": "Thermal ablation", "sets": { "locTx": "ablation" }, "pills": ["ablation"] },
+        { "id": "as", "label": "Active surveillance", "sets": { "locTx": "surveillance" }, "pills": ["surveillance"] }
+      ]
+    },
+    {
+      "id": "n_tx_partial",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "template": "end",
-      "name": "Advanced clear-cell RCC: TKI monotherapy",
-      "title": "Advanced clear-cell RCC: TKI monotherapy",
-      "description": "Advanced/metastatic clear-cell renal cell carcinoma, first-line - tyrosine-kinase inhibitor monotherapy. Physician selects the specific agent.",
-      "path": "Renal Cell Carcinoma / Treatment / TKI monotherapy",
+      "name": "Partial nephrectomy",
+      "title": "cT1a: partial nephrectomy",
+      "description": "Nephron-sparing resection for a small renal mass; fully resected cT1a needs no adjuvant therapy and enters surveillance.",
+      "path": "Renal Cell Carcinoma / Localized / Partial nephrectomy",
       "section": "Treatment",
-      "pills": ["treatment"],
+      "pills": ["cT1a", "surgery"],
       "showsRecommendation": true,
-      "protocolRefs": ["gu-rcc-cabozantinib", "gu-rcc-pazopanib", "gu-rcc-sunitinib"]
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Partial nephrectomy (open, laparoscopic, or robotic) to negative margins",
+        "Preserves renal function versus radical nephrectomy for small masses",
+        "No adjuvant systemic therapy for fully resected cT1a",
+        "Enter risk-adapted surveillance (next step)"
+      ],
+      "linkTo": "n_surv",
+      "linkLabel": "Enter surveillance"
+    },
+    {
+      "id": "n_tx_ablation",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Ablation",
+      "title": "cT1a: thermal ablation",
+      "description": "Image-guided ablation for a small mass or a poor surgical candidate.",
+      "path": "Renal Cell Carcinoma / Localized / Ablation",
+      "section": "Treatment",
+      "pills": ["cT1a", "ablation"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Cryoablation or radiofrequency ablation for masses generally under 3 cm",
+        "Confirm histology by biopsy before or at ablation",
+        "Higher local recurrence than surgery; enter close imaging follow-up (next step)"
+      ],
+      "linkTo": "n_surv",
+      "linkLabel": "Enter surveillance"
+    },
+    {
+      "id": "n_tx_active_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Active surveillance",
+      "title": "cT1a: active surveillance",
+      "description": "Serial imaging for a small mass in a frail patient or one with limited life expectancy.",
+      "path": "Renal Cell Carcinoma / Localized / Active surveillance",
+      "section": "Surveillance",
+      "pills": ["cT1a", "surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Serial cross-sectional imaging (e.g. every 3-6 months initially, then annually)",
+        "Intervene on rapid growth, a size threshold, or patient preference",
+        "Consider biopsy to confirm histology and inform the threshold"
+      ]
+    },
+    {
+      "id": "n_tx_nephrectomy",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Radical nephrectomy",
+      "title": "Larger / locally advanced: nephrectomy",
+      "description": "Radical (or partial where feasible) nephrectomy for larger or locally advanced disease, then post-operative pathology review.",
+      "path": "Renal Cell Carcinoma / Localized / Nephrectomy",
+      "section": "Treatment",
+      "pills": ["surgery"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Radical nephrectomy for larger, central, or locally advanced tumors; regional lymphadenectomy for clinically involved nodes",
+        "Partial nephrectomy where feasible to preserve function (e.g. solitary kidney, CKD)",
+        "Resect a tumor thrombus (renal vein / IVC) with the appropriate surgical approach",
+        "Review final pathology to assign recurrence risk (next step)"
+      ],
+      "linkTo": "n_postop_path",
+      "linkLabel": "Post-operative pathology and risk"
+    },
+    {
+      "id": "n_postop_path",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Post-operative risk",
+      "title": "Post-nephrectomy pathology: recurrence risk",
+      "description": "Assign recurrence risk on final pathology to decide whether to consider adjuvant therapy.",
+      "path": "Renal Cell Carcinoma / Localized / Post-op risk",
+      "section": "Staging",
+      "pills": ["risk"],
+      "required": true,
+      "footnotes": ["b"],
+      "tables": [
+        {
+          "title": "Higher-risk resected clear-cell features",
+          "headers": ["Feature", "Comment"],
+          "rows": [
+            ["pT2 grade 4 or with sarcomatoid features", "Higher risk despite organ-confined"],
+            ["pT3 (any grade)", "Perinephric / renal-vein extension"],
+            ["pT4 or N1", "Locally advanced or node-positive"],
+            ["M1 with no evidence of disease after metastasectomy", "Fully resected oligometastatic"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "high_risk", "label": "Higher recurrence risk - consider adjuvant", "sets": { "adjRisk": "high" }, "pills": ["high risk"] },
+        { "id": "low_risk", "label": "Lower risk - observation", "sets": { "adjRisk": "low" }, "pills": ["low risk"] }
+      ]
+    },
+    {
+      "id": "n_adjuvant_decision",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Adjuvant decision",
+      "title": "Resected higher-risk clear-cell: adjuvant therapy",
+      "description": "For resected clear-cell RCC at increased risk of recurrence, adjuvant pembrolizumab is an option; weigh against immune toxicity.",
+      "path": "Renal Cell Carcinoma / Localized / Adjuvant",
+      "section": "Treatment",
+      "pills": ["adjuvant"],
+      "required": true,
+      "footnotes": ["b"],
+      "bullets": [
+        "Adjuvant pembrolizumab for about 1 year in eligible higher-risk resected clear-cell RCC",
+        "TKI adjuvant therapy is not routinely recommended (marginal, inconsistent benefit)",
+        "Shared decision: absolute risk reduction versus immune-related adverse events"
+      ],
+      "options": [
+        { "id": "pembro", "label": "Adjuvant pembrolizumab", "sets": { "adjTx": "pembro" }, "pills": ["pembrolizumab"] },
+        { "id": "observe", "label": "Observation", "sets": { "adjTx": "observe" }, "pills": ["observation"] }
+      ]
+    },
+    {
+      "id": "n_tx_adjuvant_pembro",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant pembrolizumab",
+      "title": "Adjuvant pembrolizumab (about 1 year)",
+      "description": "Adjuvant checkpoint inhibition for resected higher-risk clear-cell RCC.",
+      "path": "Renal Cell Carcinoma / Localized / Adjuvant pembrolizumab",
+      "section": "Treatment",
+      "pills": ["adjuvant", "pembrolizumab"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "bullets": [
+        "Pembrolizumab for approximately 1 year in eligible resected higher-risk clear-cell disease",
+        "Baseline and on-treatment thyroid, adrenal, hepatic, and glucose monitoring",
+        "Pembrolizumab 200 mg every 3 weeks (about 17 cycles) regimen referenced below",
+        "Enter surveillance on completion (next step)"
+      ],
+      "protocolRefs": ["rcc-pembrolizumab-adjuvant"],
+      "linkTo": "n_surv",
+      "linkLabel": "Enter surveillance"
+    },
+    {
+      "id": "n_tx_adjuvant_obs",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Observation",
+      "title": "Post-nephrectomy observation",
+      "description": "Surveillance after resection for lower-risk disease or when adjuvant therapy is declined.",
+      "path": "Renal Cell Carcinoma / Localized / Observation",
+      "section": "Surveillance",
+      "pills": ["observation"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Risk-adapted imaging and labs after resection",
+        "No adjuvant systemic therapy",
+        "Enter the recurrence pathway if disease returns (next step)"
+      ],
+      "linkTo": "n_surv",
+      "linkLabel": "Enter surveillance"
+    },
+    {
+      "id": "n_met_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Metastatic workup",
+      "title": "Metastatic clear-cell: pre-treatment assessment",
+      "description": "Before first-line systemic therapy, confirm histology and consider the role of surgery and metastasis-directed therapy.",
+      "path": "Renal Cell Carcinoma / Metastatic / Workup",
+      "section": "Workup",
+      "pills": ["metastatic", "workup"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "Confirm clear-cell histology; note sarcomatoid features (favor IO-based therapy)",
+        "Cytoreductive nephrectomy for selected good-performance-status, low-burden patients; not routine when prompt systemic therapy is needed",
+        "Metastasis-directed therapy (metastasectomy or SBRT) for oligometastatic disease",
+        "Assess performance status and organ function for IO / TKI eligibility"
+      ],
+      "options": [
+        { "id": "continue", "label": "Assessment reviewed - stratify risk", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_ccrcc_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "IMDC risk",
+      "title": "Advanced clear-cell: IMDC risk stratification",
+      "description": "First-line therapy is guided by IMDC risk category. Count the six prognostic factors.",
+      "path": "Renal Cell Carcinoma / Metastatic / IMDC risk",
+      "section": "Staging",
+      "pills": ["IMDC", "risk"],
+      "required": true,
+      "footnotes": ["a"],
+      "tables": [
+        {
+          "title": "IMDC risk model",
+          "headers": ["Factor", "Adverse if"],
+          "rows": [
+            ["Time from diagnosis to systemic therapy", "Less than 1 year"],
+            ["Karnofsky performance status", "Under 80"],
+            ["Hemoglobin", "Below lower limit of normal"],
+            ["Corrected calcium", "Above upper limit of normal"],
+            ["Neutrophils", "Above upper limit of normal"],
+            ["Platelets", "Above upper limit of normal"],
+            ["Category", "0 = favorable; 1-2 = intermediate; 3-6 = poor"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "favorable", "label": "Favorable risk (0 factors)", "sets": { "imdc": "favorable" }, "pills": ["favorable"] },
+        { "id": "intpoor", "label": "Intermediate / poor risk (1-6 factors)", "sets": { "imdc": "intermediate_poor" }, "pills": ["intermediate/poor"] }
+      ]
+    },
+    {
+      "id": "n_ccrcc_fav",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Favorable-risk first line",
+      "title": "Favorable-risk clear-cell: first-line choice",
+      "description": "For favorable-risk disease, an IO+TKI combination or TKI monotherapy are reasonable; dual IO is an option but its benefit is less established here.",
+      "path": "Renal Cell Carcinoma / Metastatic / Favorable / First line",
+      "section": "Treatment",
+      "pills": ["favorable", "first-line"],
+      "required": true,
+      "footnotes": ["c"],
+      "bullets": [
+        "IO+TKI combination (e.g. axitinib+pembrolizumab, lenvatinib+pembrolizumab, cabozantinib+nivolumab) for a high response rate",
+        "TKI monotherapy for patients preferring an oral single agent or with contraindications to IO",
+        "Dual IO (nivolumab+ipilimumab) is an option but favorable-risk benefit is less established"
+      ],
+      "options": [
+        { "id": "iotki", "label": "IO + TKI combination", "sets": { "firstLine": "io_tki" }, "pills": ["IO+TKI"] },
+        { "id": "tki", "label": "TKI monotherapy", "sets": { "firstLine": "tki" }, "pills": ["TKI"] },
+        { "id": "nivoipi", "label": "Dual immunotherapy (nivolumab+ipilimumab)", "sets": { "firstLine": "nivo_ipi" }, "pills": ["IO+IO"] }
+      ]
+    },
+    {
+      "id": "n_ccrcc_intpoor",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Intermediate/poor first line",
+      "title": "Intermediate / poor-risk clear-cell: first-line choice",
+      "description": "For intermediate/poor-risk disease, dual IO or an IO+TKI combination are preferred first-line; TKI monotherapy is an alternative.",
+      "path": "Renal Cell Carcinoma / Metastatic / Intermediate-poor / First line",
+      "section": "Treatment",
+      "pills": ["intermediate/poor", "first-line"],
+      "required": true,
+      "footnotes": ["c"],
+      "bullets": [
+        "Nivolumab + ipilimumab (dual IO) - durable responses, category 1",
+        "IO+TKI combination - high response rate, useful when prompt disease control is needed",
+        "TKI monotherapy (cabozantinib preferred) if IO is contraindicated"
+      ],
+      "options": [
+        { "id": "nivoipi", "label": "Dual immunotherapy (nivolumab+ipilimumab)", "sets": { "firstLine": "nivo_ipi" }, "pills": ["IO+IO"] },
+        { "id": "iotki", "label": "IO + TKI combination", "sets": { "firstLine": "io_tki" }, "pills": ["IO+TKI"] },
+        { "id": "tki", "label": "TKI monotherapy", "sets": { "firstLine": "tki" }, "pills": ["TKI"] }
+      ]
+    },
+    {
+      "id": "n_tx_nivo_ipi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Nivolumab + ipilimumab",
+      "title": "First-line: nivolumab + ipilimumab",
+      "description": "Dual checkpoint blockade for advanced clear-cell RCC, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / Nivo-ipi",
+      "section": "Treatment",
+      "pills": ["IO+IO", "first-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["c"],
+      "bullets": [
+        "Induction nivolumab + ipilimumab, then nivolumab maintenance",
+        "Monitor for immune-related adverse events; have a steroid taper plan",
+        "Preferred for intermediate/poor-risk; less established for favorable-risk",
+        "Reassess response before deciding to continue or switch (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-nivo-ipi"],
+      "linkTo": "n_1l_response",
+      "linkLabel": "First-line response assessment"
+    },
+    {
+      "id": "n_tx_io_tki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IO + TKI combination",
+      "title": "First-line: IO + TKI combination",
+      "description": "Checkpoint inhibitor plus an anti-angiogenic TKI, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / IO+TKI",
+      "section": "Treatment",
+      "pills": ["IO+TKI", "first-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Options include axitinib+pembrolizumab, lenvatinib+pembrolizumab, or cabozantinib+nivolumab",
+        "High objective response rate; useful when prompt disease control is needed",
+        "Overlapping toxicity: distinguish TKI effects (hypertension, diarrhea, hand-foot) from immune effects",
+        "Regimen options referenced below: axitinib+pembrolizumab, lenvatinib+pembrolizumab, cabozantinib+nivolumab",
+        "Reassess response before deciding to continue or switch (next step)"
+      ],
+      "protocolRefs": ["rcc-axitinib-pembrolizumab", "rcc-lenvatinib-pembrolizumab", "rcc-cabozantinib-nivolumab"],
+      "linkTo": "n_1l_response",
+      "linkLabel": "First-line response assessment"
+    },
+    {
+      "id": "n_tx_tki_mono",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "TKI monotherapy",
+      "title": "First-line: TKI monotherapy",
+      "description": "Single-agent anti-angiogenic tyrosine-kinase inhibitor, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / TKI monotherapy",
+      "section": "Treatment",
+      "pills": ["TKI", "first-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Cabozantinib, pazopanib, or sunitinib as an oral single agent",
+        "Cabozantinib is often preferred in intermediate/poor-risk disease",
+        "Reserve for IO-ineligible patients or a preference for oral monotherapy",
+        "Reassess response before deciding to continue or switch (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-cabozantinib", "gu-rcc-pazopanib", "gu-rcc-sunitinib"],
+      "linkTo": "n_1l_response",
+      "linkLabel": "First-line response assessment"
+    },
+    {
+      "id": "n_1l_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "First-line response",
+      "title": "First-line: response assessment",
+      "description": "Reassess disease on first-line therapy; response or durable stable disease continues therapy, unequivocal progression triggers second line.",
+      "path": "Renal Cell Carcinoma / Metastatic / First-line response",
+      "section": "Treatment",
+      "pills": ["response"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "Interval CT (RECIST-style) of chest/abdomen/pelvis at defined intervals",
+        "Distinguish immunotherapy pseudoprogression from true progression before switching",
+        "Manage toxicity; a treatment-limiting adverse event may also prompt a change"
+      ],
+      "options": [
+        { "id": "response", "label": "Response / durable stable disease - continue", "sets": { "line1Outcome": "response" }, "pills": ["responding"] },
+        { "id": "progression", "label": "Progression / intolerance - next line", "sets": { "line1Outcome": "progression" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_1l_maintenance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Continue first line",
+      "title": "First-line response: continue therapy",
+      "description": "Responding or stable disease continues first-line therapy with ongoing monitoring.",
+      "path": "Renal Cell Carcinoma / Metastatic / Continue first line",
+      "section": "Treatment",
+      "pills": ["responding", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Continue the effective first-line regimen; consider a defined immunotherapy duration if on IO",
+        "Ongoing imaging and toxicity surveillance",
+        "Switch to second line at confirmed progression or intolerance (next step)"
+      ],
+      "linkTo": "n_2l_choice",
+      "linkLabel": "At progression: second-line choice"
+    },
+    {
+      "id": "n_2l_choice",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Second-line choice",
+      "title": "Second-line: therapy selection",
+      "description": "Second-line therapy switches mechanism where possible, guided by the first-line class already used.",
+      "path": "Renal Cell Carcinoma / Metastatic / Second line",
+      "section": "Treatment",
+      "pills": ["second-line", "sequencing"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "After IO-based first line: an anti-angiogenic TKI (cabozantinib has robust data)",
+        "After TKI-only first line and IO-naive: single-agent nivolumab, or an alternate TKI",
+        "Switch class rather than repeat a regimen that already failed"
+      ],
+      "options": [
+        { "id": "cabo", "label": "Cabozantinib (post-IO)", "sets": { "secondLine": "cabo" }, "pills": ["cabozantinib"] },
+        { "id": "nivo_mono", "label": "Nivolumab monotherapy (post-TKI, IO-naive)", "sets": { "secondLine": "nivo" }, "pills": ["nivolumab"] },
+        { "id": "tki_switch", "label": "Alternate TKI", "sets": { "secondLine": "tki" }, "pills": ["alternate TKI"] }
+      ]
+    },
+    {
+      "id": "n_tx_cabo_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Cabozantinib (second line)",
+      "title": "Second-line: cabozantinib",
+      "description": "Anti-angiogenic / MET-AXL TKI after prior IO-based therapy, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / Cabozantinib second-line",
+      "section": "Treatment",
+      "pills": ["post-IO", "second-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Cabozantinib single agent after IO-based first line",
+        "Active against bone metastases; monitor blood pressure, diarrhea, hand-foot syndrome",
+        "Reassess response before deciding on later-line therapy (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-cabozantinib"],
+      "linkTo": "n_2l_response",
+      "linkLabel": "Second-line response assessment"
+    },
+    {
+      "id": "n_tx_nivo_mono",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Nivolumab (second line)",
+      "title": "Second-line: nivolumab monotherapy",
+      "description": "Single-agent checkpoint inhibitor after TKI-only first line, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / Nivolumab second-line",
+      "section": "Treatment",
+      "pills": ["post-TKI", "second-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Nivolumab monotherapy for patients who received TKI-only first line and are IO-naive",
+        "Monitor for immune-related adverse events",
+        "Nivolumab 240 mg every 2 weeks (or 480 mg every 4 weeks) regimen referenced below",
+        "Reassess response before deciding on later-line therapy (next step)"
+      ],
+      "protocolRefs": ["rcc-nivolumab"],
+      "linkTo": "n_2l_response",
+      "linkLabel": "Second-line response assessment"
+    },
+    {
+      "id": "n_tx_2l_tki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Alternate TKI (second line)",
+      "title": "Second-line: alternate TKI",
+      "description": "A different anti-angiogenic TKI than used first line, then response assessment.",
+      "path": "Renal Cell Carcinoma / Metastatic / Alternate TKI second-line",
+      "section": "Treatment",
+      "pills": ["second-line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Switch to a TKI not used first line (e.g. pazopanib or sunitinib after cabozantinib)",
+        "Monitor blood pressure, hand-foot syndrome, hepatic and thyroid function",
+        "Reassess response before deciding on later-line therapy (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-pazopanib", "gu-rcc-sunitinib"],
+      "linkTo": "n_2l_response",
+      "linkLabel": "Second-line response assessment"
+    },
+    {
+      "id": "n_2l_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Second-line response",
+      "title": "Second-line: response assessment",
+      "description": "Reassess disease on second-line therapy; response or durable stable disease continues, progression triggers later-line therapy.",
+      "path": "Renal Cell Carcinoma / Metastatic / Second-line response",
+      "section": "Treatment",
+      "pills": ["response"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "Interval imaging (RECIST-style) to classify response versus progression",
+        "Weigh cumulative toxicity and performance status against continued treatment",
+        "Confirmed progression or intolerance moves to later-line options"
+      ],
+      "options": [
+        { "id": "response", "label": "Response / durable stable disease - continue", "sets": { "line2Outcome": "response" }, "pills": ["responding"] },
+        { "id": "progression", "label": "Progression / intolerance - later line", "sets": { "line2Outcome": "progression" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_ongoing",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Continue second line",
+      "title": "Second-line response: continue therapy",
+      "description": "Responding or stable disease continues second-line therapy with ongoing monitoring.",
+      "path": "Renal Cell Carcinoma / Metastatic / Continue second line",
+      "section": "Treatment",
+      "pills": ["responding", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Continue the effective second-line regimen with imaging and toxicity surveillance",
+        "Reduce or interrupt the dose for toxicity rather than switch prematurely where feasible",
+        "Move to later-line therapy at confirmed progression (next step)"
+      ],
+      "linkTo": "n_3l_choice",
+      "linkLabel": "At progression: later-line choice"
+    },
+    {
+      "id": "n_3l_choice",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Later-line choice",
+      "title": "Later line: therapy selection",
+      "description": "After IO and anti-angiogenic therapy, choose a HIF-2-alpha inhibitor, a TKI + mTOR combination, or best supportive care.",
+      "path": "Renal Cell Carcinoma / Metastatic / Later line",
+      "section": "Treatment",
+      "pills": ["later line", "sequencing"],
+      "required": true,
+      "bullets": [
+        "Belzutifan (HIF-2-alpha inhibitor) after both a checkpoint inhibitor and an anti-angiogenic agent",
+        "Lenvatinib + everolimus as an alternate later-line combination",
+        "Best supportive care / clinical trial when performance status is poor or options are exhausted"
+      ],
+      "options": [
+        { "id": "belzutifan", "label": "Belzutifan (HIF-2-alpha inhibitor)", "sets": { "laterLine": "belzutifan" }, "pills": ["belzutifan"] },
+        { "id": "lenva_evero", "label": "Lenvatinib + everolimus", "sets": { "laterLine": "lenva_evero" }, "pills": ["lenva+evero"] },
+        { "id": "bsc", "label": "Best supportive care / clinical trial", "sets": { "laterLine": "bsc" }, "pills": ["supportive"] }
+      ]
+    },
+    {
+      "id": "n_tx_belzutifan",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Belzutifan",
+      "title": "Later line: belzutifan (HIF-2-alpha inhibitor)",
+      "description": "Oral HIF-2-alpha inhibitor after progression on IO and anti-angiogenic therapy.",
+      "path": "Renal Cell Carcinoma / Metastatic / Belzutifan",
+      "section": "Treatment",
+      "pills": ["belzutifan", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Belzutifan for advanced clear-cell RCC after both a checkpoint inhibitor and an anti-angiogenic agent",
+        "Class-specific anemia and hypoxia; monitor hemoglobin and oxygen saturation",
+        "Belzutifan 120 mg once daily regimen referenced below"
+      ],
+      "protocolRefs": ["rcc-belzutifan"]
+    },
+    {
+      "id": "n_tx_lenva_evero",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Lenvatinib + everolimus",
+      "title": "Later line: lenvatinib + everolimus",
+      "description": "TKI plus mTOR inhibitor after IO and anti-angiogenic therapy.",
+      "path": "Renal Cell Carcinoma / Metastatic / Lenva-evero",
+      "section": "Treatment",
+      "pills": ["lenva+evero", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Lenvatinib + everolimus as a later-line combination",
+        "Overlapping toxicity: fatigue, diarrhea, stomatitis, hyperglycemia, pneumonitis (everolimus)",
+        "Everolimus dosing referenced below; lenvatinib has no dedicated dose protocol here yet"
+      ],
+      "protocolRefs": ["gi-net-everolimus"]
+    },
+    {
+      "id": "n_tx_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Supportive care",
+      "title": "Best supportive care / clinical trial",
+      "description": "For poor performance status or exhausted systemic options.",
+      "path": "Renal Cell Carcinoma / Metastatic / Supportive care",
+      "section": "Treatment",
+      "pills": ["supportive"],
+      "showsRecommendation": true,
+      "bullets": [
+        "Best supportive and palliative care; symptom-directed radiation for painful sites",
+        "Bone-modifying agent for bone metastases",
+        "Clinical trial where available and appropriate"
+      ]
+    },
+    {
+      "id": "n_nccrcc_wk",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Non-clear-cell workup",
+      "title": "Metastatic non-clear-cell RCC: workup",
+      "description": "Confirm the non-clear-cell subtype and test for actionable alterations before selecting therapy; prefer a clinical trial.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Workup",
+      "section": "Workup",
+      "pills": ["non-clear-cell", "workup"],
+      "required": true,
+      "footnotes": ["d"],
+      "tables": [
+        {
+          "title": "Non-clear-cell subtypes and typical systemic approach",
+          "headers": ["Subtype", "Preferred systemic approach"],
+          "rows": [
+            ["Papillary", "Cabozantinib (test for MET alterations); IO+TKI"],
+            ["Chromophobe", "Lenvatinib + everolimus / TKI (less IO-responsive)"],
+            ["Collecting-duct / medullary", "Platinum-based cytotoxic chemotherapy"],
+            ["Sarcomatoid-predominant / unclassified", "IO-based therapy (dual IO or IO+TKI)"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - select subtype", "setsValue": null }
+      ]
+    },
+    {
+      "id": "n_nccrcc",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Non-clear-cell subtype",
+      "title": "Metastatic non-clear-cell RCC: subtype",
+      "description": "Non-clear-cell RCC is heterogeneous; a clinical trial is preferred. Select the histologic subtype.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Subtype",
+      "section": "Treatment",
+      "pills": ["non-clear-cell"],
+      "required": true,
+      "footnotes": ["d"],
+      "options": [
+        { "id": "papillary", "label": "Papillary", "sets": { "nccSubtype": "papillary" }, "pills": ["papillary"] },
+        { "id": "chromophobe", "label": "Chromophobe", "sets": { "nccSubtype": "chromophobe" }, "pills": ["chromophobe"] },
+        { "id": "medullary", "label": "Collecting-duct / medullary", "sets": { "nccSubtype": "medullary" }, "pills": ["medullary"] },
+        { "id": "sarcomatoid", "label": "Sarcomatoid-predominant / unclassified", "sets": { "nccSubtype": "sarcomatoid" }, "pills": ["sarcomatoid"] }
+      ]
+    },
+    {
+      "id": "n_tx_nccrcc_pap",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Papillary",
+      "title": "Papillary RCC: cabozantinib",
+      "description": "First-line systemic therapy for metastatic papillary RCC, then progression assessment.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Papillary",
+      "section": "Treatment",
+      "pills": ["papillary", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Cabozantinib preferred (superior to sunitinib in papillary disease)",
+        "IO+TKI combinations and clinical trials are reasonable alternatives",
+        "Test for MET alterations to inform targeted options",
+        "Reassess at progression (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-cabozantinib"],
+      "linkTo": "n_ncc_prog",
+      "linkLabel": "Non-clear-cell progression assessment"
+    },
+    {
+      "id": "n_tx_nccrcc_chromo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Chromophobe",
+      "title": "Chromophobe RCC: TKI / mTOR options",
+      "description": "First-line systemic therapy for metastatic chromophobe RCC, then progression assessment.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Chromophobe",
+      "section": "Treatment",
+      "pills": ["chromophobe", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Lenvatinib + everolimus or a TKI; chromophobe is relatively angiogenesis-driven and less IO-responsive",
+        "Everolimus dosing referenced below; lenvatinib has no dedicated dose protocol here yet",
+        "Clinical trial preferred where available",
+        "Reassess at progression (next step)"
+      ],
+      "protocolRefs": ["gi-net-everolimus"],
+      "linkTo": "n_ncc_prog",
+      "linkLabel": "Non-clear-cell progression assessment"
+    },
+    {
+      "id": "n_tx_nccrcc_medullary",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Medullary / collecting-duct",
+      "title": "Collecting-duct / medullary RCC: platinum chemotherapy",
+      "description": "Aggressive histologies treated like urothelial-type carcinoma, then progression assessment.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Medullary",
+      "section": "Treatment",
+      "pills": ["medullary", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Platinum-based cytotoxic chemotherapy (e.g. gemcitabine + platinum), treated like urothelial carcinoma",
+        "Medullary carcinoma associates with sickle-cell trait; confirm and counsel",
+        "Aggressive course - prioritize a clinical trial; gemcitabine + cisplatin regimen referenced below",
+        "Reassess at progression (next step)"
+      ],
+      "protocolRefs": ["gu-uro-gem-cisplatin"],
+      "linkTo": "n_ncc_prog",
+      "linkLabel": "Non-clear-cell progression assessment"
+    },
+    {
+      "id": "n_tx_nccrcc_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Sarcomatoid / unclassified",
+      "title": "Sarcomatoid-predominant / unclassified: IO-based therapy",
+      "description": "Sarcomatoid features respond preferentially to checkpoint blockade, then progression assessment.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Sarcomatoid",
+      "section": "Treatment",
+      "pills": ["sarcomatoid", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "IO-based therapy (dual IO or IO+TKI) - sarcomatoid disease is preferentially IO-responsive",
+        "Monitor for immune-related adverse events",
+        "Nivolumab + ipilimumab regimen referenced below",
+        "Reassess at progression (next step)"
+      ],
+      "protocolRefs": ["gu-rcc-nivo-ipi"],
+      "linkTo": "n_ncc_prog",
+      "linkLabel": "Non-clear-cell progression assessment"
+    },
+    {
+      "id": "n_ncc_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Non-clear-cell progression",
+      "title": "Non-clear-cell RCC: progression assessment",
+      "description": "Reassess disease on non-clear-cell therapy; response continues, progression moves to a later-line switch.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Progression",
+      "section": "Treatment",
+      "pills": ["response"],
+      "required": true,
+      "footnotes": ["d", "e"],
+      "bullets": [
+        "Interval imaging to classify response versus progression",
+        "Switch mechanism at progression (TKI to IO-based, or vice versa)",
+        "Re-offer a clinical trial at each decision point"
+      ],
+      "options": [
+        { "id": "response", "label": "Response / stable disease - continue", "sets": { "nccOutcome": "response" }, "pills": ["responding"] },
+        { "id": "progression", "label": "Progression - later-line switch", "sets": { "nccOutcome": "progression" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_tx_ncc_continue",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Continue non-clear-cell therapy",
+      "title": "Non-clear-cell: continue therapy",
+      "description": "Responding or stable non-clear-cell disease continues therapy with ongoing monitoring.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Continue",
+      "section": "Treatment",
+      "pills": ["responding", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Continue the effective regimen with imaging and toxicity surveillance",
+        "Manage dose for tolerability rather than switch prematurely where feasible",
+        "Switch at confirmed progression (later-line option)"
+      ]
+    },
+    {
+      "id": "n_tx_ncc_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-clear-cell later line",
+      "title": "Non-clear-cell: later-line switch",
+      "description": "Later-line therapy after progression on first-line non-clear-cell treatment.",
+      "path": "Renal Cell Carcinoma / Non-clear-cell / Later line",
+      "section": "Treatment",
+      "pills": ["later line", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Switch class: an anti-angiogenic TKI (e.g. cabozantinib) after IO-based first line, or IO-based therapy after a TKI",
+        "Everolimus-based combinations for a further later line",
+        "Prioritize a clinical trial; cabozantinib regimen referenced below"
+      ],
+      "protocolRefs": ["gu-rcc-cabozantinib"]
+    },
+    {
+      "id": "n_recurrence",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Recurrence",
+      "title": "Recurrence after nephrectomy: pattern",
+      "description": "Restage on recurrence; management differs for isolated local/oligometastatic disease versus widespread metastasis.",
+      "path": "Renal Cell Carcinoma / Recurrence",
+      "section": "Recurrence",
+      "pills": ["recurrence"],
+      "required": true,
+      "bullets": [
+        "Restage with cross-sectional imaging of chest / abdomen / pelvis",
+        "Biopsy if the diagnosis or histology is uncertain",
+        "Re-establish IMDC risk before starting systemic therapy"
+      ],
+      "options": [
+        { "id": "local", "label": "Local / oligometastatic recurrence", "sets": { "recurPattern": "local" }, "pills": ["oligometastatic"] },
+        { "id": "distant", "label": "Widespread metastatic recurrence", "sets": { "recurPattern": "distant" }, "pills": ["metastatic"] }
+      ]
+    },
+    {
+      "id": "n_tx_recur_local",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Local / oligometastatic recurrence",
+      "title": "Local / oligometastatic recurrence: metastasis-directed therapy",
+      "description": "Isolated or limited recurrence amenable to local control, then response assessment.",
+      "path": "Renal Cell Carcinoma / Recurrence / Local",
+      "section": "Recurrence",
+      "pills": ["oligometastatic", "treatment"],
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Metastasectomy or SBRT for isolated / oligometastatic recurrence",
+        "May defer systemic therapy after complete local control, with close surveillance",
+        "Reassess after local therapy (next step)"
+      ],
+      "linkTo": "n_recur_response",
+      "linkLabel": "Post-local-therapy assessment"
+    },
+    {
+      "id": "n_recur_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Post-local-therapy assessment",
+      "title": "Local recurrence: post-treatment assessment",
+      "description": "After metastasis-directed therapy, decide between surveillance for controlled disease and systemic therapy for further progression.",
+      "path": "Renal Cell Carcinoma / Recurrence / Post-local assessment",
+      "section": "Recurrence",
+      "pills": ["response"],
+      "required": true,
+      "footnotes": ["e"],
+      "bullets": [
+        "Controlled disease can enter close surveillance and defer systemic therapy",
+        "New or progressive metastases move to the systemic (metastatic) pathway",
+        "Re-stratify IMDC risk before starting systemic therapy"
+      ],
+      "options": [
+        { "id": "controlled", "label": "Disease controlled - surveillance", "sets": { "recurOutcome": "controlled" }, "pills": ["controlled"] },
+        { "id": "progression", "label": "Further progression - systemic therapy", "sets": { "recurOutcome": "progression" }, "pills": ["progression"] }
+      ]
+    },
+    {
+      "id": "n_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Post-treatment surveillance",
+      "description": "Risk-adapted follow-up after definitive local therapy; escalate on recurrence.",
+      "path": "Renal Cell Carcinoma / Surveillance",
+      "section": "Surveillance",
+      "pills": ["surveillance"],
+      "showsRecommendation": true,
+      "bullets": [
+        "History, exam, labs, and cross-sectional imaging on a risk-adapted schedule (more frequent for higher stage)",
+        "Chest and abdominal imaging to detect the common lung and local recurrences",
+        "Monitor renal function, especially after partial nephrectomy or in CKD",
+        "A confirmed recurrence enters the recurrence pathway"
+      ],
+      "linkTo": "n_recurrence",
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
     }
   ],
   "links": [
-    { "id": "l_rcc_approach_io", "from": "n_rcc_approach", "to": "n_tx_rcc_io", "fromOptions": ["iocombo"], "linkCategory": "conditional" },
-    { "id": "l_rcc_approach_tki", "from": "n_rcc_approach", "to": "n_tx_rcc_tki", "fromOptions": ["tki"], "linkCategory": "conditional" }
+    { "id": "l_wk", "from": "n_workup", "to": "n_presentation", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_pr_loc", "from": "n_presentation", "to": "n_localized_stage", "fromOptions": ["localized"], "linkCategory": "conditional" },
+    { "id": "l_pr_met1l", "from": "n_presentation", "to": "n_met_workup", "fromOptions": ["met_1l"], "linkCategory": "conditional" },
+    { "id": "l_pr_metlater", "from": "n_presentation", "to": "n_2l_choice", "fromOptions": ["met_later"], "linkCategory": "conditional" },
+    { "id": "l_pr_nccrcc", "from": "n_presentation", "to": "n_nccrcc_wk", "fromOptions": ["nccrcc"], "linkCategory": "conditional" },
+    { "id": "l_pr_recur", "from": "n_presentation", "to": "n_recurrence", "fromOptions": ["recurrence"], "linkCategory": "conditional" },
+    { "id": "l_pr_fu", "from": "n_presentation", "to": "n_surv", "fromOptions": ["followup"], "linkCategory": "conditional" },
+
+    { "id": "l_loc_small", "from": "n_localized_stage", "to": "n_small_mass", "fromOptions": ["small_mass"], "linkCategory": "conditional" },
+    { "id": "l_loc_resect", "from": "n_localized_stage", "to": "n_tx_nephrectomy", "fromOptions": ["resectable"], "linkCategory": "conditional" },
+
+    { "id": "l_sm_partial", "from": "n_small_mass", "to": "n_tx_partial", "fromOptions": ["partial"], "linkCategory": "conditional" },
+    { "id": "l_sm_ablation", "from": "n_small_mass", "to": "n_tx_ablation", "fromOptions": ["ablation"], "linkCategory": "conditional" },
+    { "id": "l_sm_as", "from": "n_small_mass", "to": "n_tx_active_surv", "fromOptions": ["as"], "linkCategory": "conditional" },
+
+    { "id": "l_neph_path", "from": "n_tx_nephrectomy", "to": "n_postop_path", "linkCategory": "conditional" },
+    { "id": "l_path_high", "from": "n_postop_path", "to": "n_adjuvant_decision", "fromOptions": ["high_risk"], "linkCategory": "conditional" },
+    { "id": "l_path_low", "from": "n_postop_path", "to": "n_tx_adjuvant_obs", "fromOptions": ["low_risk"], "linkCategory": "conditional" },
+
+    { "id": "l_adj_pembro", "from": "n_adjuvant_decision", "to": "n_tx_adjuvant_pembro", "fromOptions": ["pembro"], "linkCategory": "conditional" },
+    { "id": "l_adj_obs", "from": "n_adjuvant_decision", "to": "n_tx_adjuvant_obs", "fromOptions": ["observe"], "linkCategory": "conditional" },
+
+    { "id": "l_partial_surv", "from": "n_tx_partial", "to": "n_surv", "linkCategory": "conditional" },
+    { "id": "l_ablation_surv", "from": "n_tx_ablation", "to": "n_surv", "linkCategory": "conditional" },
+    { "id": "l_pembro_surv", "from": "n_tx_adjuvant_pembro", "to": "n_surv", "linkCategory": "conditional" },
+    { "id": "l_obs_surv", "from": "n_tx_adjuvant_obs", "to": "n_surv", "linkCategory": "conditional" },
+
+    { "id": "l_mw_risk", "from": "n_met_workup", "to": "n_ccrcc_risk", "fromOptions": ["continue"], "linkCategory": "conditional" },
+
+    { "id": "l_risk_fav", "from": "n_ccrcc_risk", "to": "n_ccrcc_fav", "fromOptions": ["favorable"], "linkCategory": "conditional" },
+    { "id": "l_risk_ip", "from": "n_ccrcc_risk", "to": "n_ccrcc_intpoor", "fromOptions": ["intpoor"], "linkCategory": "conditional" },
+
+    { "id": "l_fav_iotki", "from": "n_ccrcc_fav", "to": "n_tx_io_tki", "fromOptions": ["iotki"], "linkCategory": "conditional" },
+    { "id": "l_fav_tki", "from": "n_ccrcc_fav", "to": "n_tx_tki_mono", "fromOptions": ["tki"], "linkCategory": "conditional" },
+    { "id": "l_fav_nivoipi", "from": "n_ccrcc_fav", "to": "n_tx_nivo_ipi", "fromOptions": ["nivoipi"], "linkCategory": "conditional" },
+
+    { "id": "l_ip_nivoipi", "from": "n_ccrcc_intpoor", "to": "n_tx_nivo_ipi", "fromOptions": ["nivoipi"], "linkCategory": "conditional" },
+    { "id": "l_ip_iotki", "from": "n_ccrcc_intpoor", "to": "n_tx_io_tki", "fromOptions": ["iotki"], "linkCategory": "conditional" },
+    { "id": "l_ip_tki", "from": "n_ccrcc_intpoor", "to": "n_tx_tki_mono", "fromOptions": ["tki"], "linkCategory": "conditional" },
+
+    { "id": "l_nivoipi_resp", "from": "n_tx_nivo_ipi", "to": "n_1l_response", "linkCategory": "conditional" },
+    { "id": "l_iotki_resp", "from": "n_tx_io_tki", "to": "n_1l_response", "linkCategory": "conditional" },
+    { "id": "l_tki_resp", "from": "n_tx_tki_mono", "to": "n_1l_response", "linkCategory": "conditional" },
+
+    { "id": "l_1lresp_cont", "from": "n_1l_response", "to": "n_tx_1l_maintenance", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_1lresp_prog", "from": "n_1l_response", "to": "n_2l_choice", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_maint_2l", "from": "n_tx_1l_maintenance", "to": "n_2l_choice", "linkCategory": "conditional" },
+
+    { "id": "l_2l_cabo", "from": "n_2l_choice", "to": "n_tx_cabo_later", "fromOptions": ["cabo"], "linkCategory": "conditional" },
+    { "id": "l_2l_nivo", "from": "n_2l_choice", "to": "n_tx_nivo_mono", "fromOptions": ["nivo_mono"], "linkCategory": "conditional" },
+    { "id": "l_2l_tki", "from": "n_2l_choice", "to": "n_tx_2l_tki", "fromOptions": ["tki_switch"], "linkCategory": "conditional" },
+
+    { "id": "l_cabo_resp", "from": "n_tx_cabo_later", "to": "n_2l_response", "linkCategory": "conditional" },
+    { "id": "l_nivomono_resp", "from": "n_tx_nivo_mono", "to": "n_2l_response", "linkCategory": "conditional" },
+    { "id": "l_2ltki_resp", "from": "n_tx_2l_tki", "to": "n_2l_response", "linkCategory": "conditional" },
+
+    { "id": "l_2lresp_cont", "from": "n_2l_response", "to": "n_tx_ongoing", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_2lresp_prog", "from": "n_2l_response", "to": "n_3l_choice", "fromOptions": ["progression"], "linkCategory": "conditional" },
+    { "id": "l_ongoing_3l", "from": "n_tx_ongoing", "to": "n_3l_choice", "linkCategory": "conditional" },
+
+    { "id": "l_3l_belz", "from": "n_3l_choice", "to": "n_tx_belzutifan", "fromOptions": ["belzutifan"], "linkCategory": "conditional" },
+    { "id": "l_3l_lenva", "from": "n_3l_choice", "to": "n_tx_lenva_evero", "fromOptions": ["lenva_evero"], "linkCategory": "conditional" },
+    { "id": "l_3l_bsc", "from": "n_3l_choice", "to": "n_tx_bsc", "fromOptions": ["bsc"], "linkCategory": "conditional" },
+
+    { "id": "l_nccwk_sub", "from": "n_nccrcc_wk", "to": "n_nccrcc", "fromOptions": ["continue"], "linkCategory": "conditional" },
+    { "id": "l_ncc_pap", "from": "n_nccrcc", "to": "n_tx_nccrcc_pap", "fromOptions": ["papillary"], "linkCategory": "conditional" },
+    { "id": "l_ncc_chromo", "from": "n_nccrcc", "to": "n_tx_nccrcc_chromo", "fromOptions": ["chromophobe"], "linkCategory": "conditional" },
+    { "id": "l_ncc_med", "from": "n_nccrcc", "to": "n_tx_nccrcc_medullary", "fromOptions": ["medullary"], "linkCategory": "conditional" },
+    { "id": "l_ncc_sarc", "from": "n_nccrcc", "to": "n_tx_nccrcc_io", "fromOptions": ["sarcomatoid"], "linkCategory": "conditional" },
+
+    { "id": "l_pap_prog", "from": "n_tx_nccrcc_pap", "to": "n_ncc_prog", "linkCategory": "conditional" },
+    { "id": "l_chromo_prog", "from": "n_tx_nccrcc_chromo", "to": "n_ncc_prog", "linkCategory": "conditional" },
+    { "id": "l_med_prog", "from": "n_tx_nccrcc_medullary", "to": "n_ncc_prog", "linkCategory": "conditional" },
+    { "id": "l_sarc_prog", "from": "n_tx_nccrcc_io", "to": "n_ncc_prog", "linkCategory": "conditional" },
+
+    { "id": "l_nccprog_cont", "from": "n_ncc_prog", "to": "n_tx_ncc_continue", "fromOptions": ["response"], "linkCategory": "conditional" },
+    { "id": "l_nccprog_later", "from": "n_ncc_prog", "to": "n_tx_ncc_later", "fromOptions": ["progression"], "linkCategory": "conditional" },
+
+    { "id": "l_recur_local", "from": "n_recurrence", "to": "n_tx_recur_local", "fromOptions": ["local"], "linkCategory": "conditional" },
+    { "id": "l_recur_distant", "from": "n_recurrence", "to": "n_met_workup", "fromOptions": ["distant"], "linkCategory": "conditional" },
+    { "id": "l_recurlocal_resp", "from": "n_tx_recur_local", "to": "n_recur_response", "linkCategory": "conditional" },
+    { "id": "l_recurresp_ctrl", "from": "n_recur_response", "to": "n_surv", "fromOptions": ["controlled"], "linkCategory": "conditional" },
+    { "id": "l_recurresp_prog", "from": "n_recur_response", "to": "n_met_workup", "fromOptions": ["progression"], "linkCategory": "conditional" }
   ]
 }

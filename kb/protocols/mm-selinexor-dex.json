@@ -1,0 +1,124 @@
+{
+  "id": "mm-selinexor-dex",
+  "diseaseId": "myeloma_cancer",
+  "name": "Sd (Selinexor / Dexamethasone)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Selinexor is an oral selective inhibitor of nuclear export (XPO1 inhibitor). Used for penta-refractory / triple-class-exposed relapsed myeloma and after failure of BCMA/GPRC5D immunotherapy; not selected by a predictive biomarker. Physician decides."
+  },
+  "stage": [],
+  "treatmentSetting": "penta-refractory or post-immunotherapy relapsed/refractory multiple myeloma",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Selinexor is highly emetogenic by class; give prophylactic 5-HT3 antagonist (and consider olanzapine or NK1 antagonist) before and around dosing per emetic-risk framework. Continue standing plus rescue antiemetics."
+    }
+  ],
+  "supportiveCare": [
+    "Anti-nausea backbone is essential (5-HT3 antagonist +/- olanzapine); undertreated nausea drives discontinuation.",
+    "Ensure adequate oral hydration and appetite support; monitor weight and treat anorexia.",
+    "Thrombocytopenia is common and dose-limiting; hold or reduce for low platelets and support with transfusion as needed.",
+    "Hyponatremia surveillance and correction; often partly a pseudohyponatremia but check and manage.",
+    "Often given with a proteasome inhibitor or immunomodulatory partner (e.g. bortezomib as in the XVd triplet) as a separate agent; Sd doublet is the classic penta-refractory backbone."
+  ],
+  "monitoring": [
+    "CBC with platelets at least weekly during early cycles",
+    "serum sodium",
+    "body weight, appetite and nausea/vomiting assessment each visit",
+    "renal and hepatic function"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "serum sodium",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "platelets < 75k, significant nausea/weight loss, or symptomatic hyponatremia",
+      "drug": "selinexor",
+      "action": "hold/reduce",
+      "text": "Hold selinexor until recovery, then resume at a reduced dose (stepwise reductions, e.g. 80 to 60 to 40 mg) per tolerability; thrombocytopenia, GI toxicity and hyponatremia are the usual dose-limiting events. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "selinexor",
+      "name": "Selinexor",
+      "basis": "flat",
+      "dosePerUnit": 80,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        3,
+        8,
+        10,
+        15,
+        17,
+        22,
+        24
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Selinexor 80 mg orally twice weekly (each week on days 1 and 3, i.e. cycle days 1, 3, 8, 10, 15, 17, 22, 24) on a 28-day cycle, continued until progression or unacceptable toxicity. Reduce stepwise (80 to 60 to 40 mg) for thrombocytopenia, nausea/anorexia or hyponatremia. In the XVd triplet selinexor is given once weekly at 100 mg with bortezomib; the twice-weekly 80 mg schedule shown here is the Sd penta-refractory doublet. Own wording from standard-of-care knowledge; physician decides.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Multiple Myeloma",
+        "version": "draft",
+        "date": null,
+        "locator": "selinexor + dexamethasone (Sd), penta-refractory relapsed/refractory myeloma",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        3,
+        8,
+        10,
+        15,
+        17,
+        22,
+        24
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Dexamethasone 20 mg orally twice weekly on the same days as selinexor (cycle days 1, 3, 8, 10, 15, 17, 22, 24) of a 28-day cycle. Adjust for steroid intolerance, hyperglycemia or infection risk in frail patients. Own wording from standard-of-care knowledge; physician decides.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Multiple Myeloma",
+        "version": "draft",
+        "date": null,
+        "locator": "dexamethasone partner in the Sd doublet",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

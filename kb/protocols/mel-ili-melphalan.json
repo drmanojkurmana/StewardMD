@@ -1,0 +1,98 @@
+{
+  "id": "mel-ili-melphalan",
+  "diseaseId": "cutaneous_melanoma",
+  "name": "Isolated limb infusion (melphalan +/- dactinomycin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Single regional-chemotherapy procedure for extensive or bulky unresectable in-transit / satellite melanoma confined to a limb, performed at experienced centers. Delivered as a one-time low-flow isolated limb infusion (or isolated limb perfusion) with tourniquet-isolated limb circulation and mild hyperthermia; not a repeatedly cycled systemic regimen. A second procedure may be considered for later limb-confined recurrence at the treating team's discretion.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Regional cytotoxic chemotherapy for limb-confined in-transit melanoma; not biomarker-selected and used regardless of BRAF status. Selection is anatomic (bulky or numerous in-transit / satellite lesions limited to one extremity, not amenable to simple excision or intralesional therapy)."
+  },
+  "stage": [
+    "IIIB",
+    "IIIC",
+    "IIID (limb-confined in-transit)"
+  ],
+  "treatmentSetting": [
+    "locoregional"
+  ],
+  "histology": "cutaneous melanoma",
+  "premedications": [
+    {
+      "name": "Systemic anticoagulation",
+      "notes": "Heparin during limb isolation, per procedural protocol; reverse as indicated after infusion."
+    }
+  ],
+  "supportiveCare": [
+    "Limb toxicity monitoring (Wieberdink scale) for regional skin/muscle reaction, edema, and compartment syndrome; elevate and observe the limb after the procedure.",
+    "Watch for systemic melphalan leak (myelosuppression, nausea) if limb isolation is incomplete; serial limb and systemic drug leak monitoring during the infusion.",
+    "Creatine kinase trend as a marker of regional muscle injury."
+  ],
+  "monitoring": [
+    "limb perfusion, temperature, and Wieberdink toxicity grade during and after the procedure",
+    "CBC after the procedure to detect systemic melphalan exposure from isolation leak",
+    "creatine kinase and renal function for regional muscle injury / myoglobin load",
+    "clinical response of in-transit lesions over the following weeks"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "limb vascular status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "lower-limb versus upper-limb infusion",
+      "drug": "melphalan",
+      "action": "adjust dose",
+      "text": "Melphalan dose is scaled to measured limb volume (mg per litre of limb), with a lower per-litre dose typically used for the lower limb than the upper limb, and adjusted for ideal body weight in some protocols. Physician / regional-therapy team sets the exact dose."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "melphalan",
+      "name": "Melphalan",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "intra-arterial",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Regional low-flow isolated limb infusion. Dose is calculated from measured limb volume, roughly 7 to 10 mg per litre of limb for a lower limb and a higher per-litre dose for an upper limb (some protocols correct for ideal body weight). The flat 40 mg shown here is a representative single-procedure total for a typical lower limb and MUST be replaced by the limb-volume-based dose set by the regional-therapy team. Delivered into the isolated limb circulation under tourniquet with mild hyperthermia, not systemically. Own-wording summary; not a verbatim protocol copy."
+    },
+    {
+      "id": "dactinomycin",
+      "name": "Dactinomycin (actinomycin-D)",
+      "basis": "flat",
+      "dosePerUnit": 0.5,
+      "unit": "mg",
+      "route": "intra-arterial",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Optional second agent added to the melphalan infusate at some centers, dosed by limb volume (roughly 75 to 100 micrograms per litre of limb). The flat 0.5 mg shown is a representative single-procedure total and MUST be replaced by the limb-volume-based dose. Omit where melphalan is used alone. Own-wording summary; not a verbatim protocol copy."
+    }
+  ]
+}

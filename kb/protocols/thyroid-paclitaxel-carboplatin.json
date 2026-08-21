@@ -1,0 +1,74 @@
+{
+  "id": "thyroid-paclitaxel-carboplatin",
+  "diseaseId": "anaplastic_thyroid_carcinoma",
+  "name": "Weekly PACLitaxel + CARBOplatin (anaplastic thyroid carcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "weekly radiosensitizing / systemic dosing on days 1, 8, 15 of a 21-day cycle; often given concurrent with external-beam radiation for local control",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "stage": ["IVA", "IVB (unresectable)", "IVC (metastatic)"],
+  "treatmentSetting": ["adjuvant", "metastatic"],
+  "histology": "anaplastic (undifferentiated) thyroid carcinoma, BRAF wild-type without an actionable driver",
+  "premedications": [
+    { "name": "Taxane hypersensitivity prophylaxis", "notes": "corticosteroid plus H1 / H2 antihistamine before paclitaxel per standard practice." },
+    { "name": "Antiemetic prophylaxis", "notes": "carboplatin is moderately emetogenic; give per the standard emetic-risk framework." }
+  ],
+  "supportiveCare": [
+    "assess febrile-neutropenia risk; support with growth factors if indicated, especially during concurrent radiation.",
+    "monitor for peripheral neuropathy (paclitaxel), myelosuppression, and carboplatin hypersensitivity on later cycles.",
+    "clinical trial is preferred where available; airway and symptom management throughout.",
+    "prefer this only for fit patients seeking local control; otherwise best supportive / palliative care."
+  ],
+  "monitoring": [
+    "CBC before each dose",
+    "renal function (for AUC dosing)",
+    "peripheral neuropathy assessment",
+    "clinical and cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "neuropathy grade", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "ANC < 1000 or platelets < 100k on a treatment day",
+      "action": "delay",
+      "text": "Hold that weekly dose and reassess; reduce for recurrent cytopenias or grade 3 to 4 neuropathy per standard practice. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "PACLitaxel 60 mg/m2 IV weekly on days 1, 8, 15 as a radiosensitizing / systemic dose for anaplastic thyroid carcinoma (per standard guidelines / general reference; weekly taxane schedules ~50 to 90 mg/m2 are used, higher single-agent doses when not concurrent with radiation). Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1, 8, 15],
+      "modificationRules": []
+    },
+    {
+      "id": "carboplatin",
+      "name": "CARBOplatin",
+      "basis": "auc",
+      "dosePerUnit": 2,
+      "unit": "AUC",
+      "route": "IV",
+      "notes": "CARBOplatin AUC 2 IV weekly on days 1, 8, 15 (Calvert formula), paired with weekly paclitaxel for anaplastic thyroid carcinoma, commonly concurrent with external-beam radiation (per standard guidelines / general reference). An every-3-week AUC 5 to 6 schedule is an alternative when not radiosensitizing. Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1, 8, 15],
+      "modificationRules": []
+    }
+  ]
+}

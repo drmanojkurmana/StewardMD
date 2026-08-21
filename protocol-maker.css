@@ -1,0 +1,63 @@
+/* Custom Protocol Maker - mobile form overlay. Self-contained; light/dark aware. */
+.mkp-overlay {
+  --mkp-ink: #14202b; --mkp-muted: #5a7184; --mkp-line: #d7dee3; --mkp-bg: #f4f6f5; --mkp-card: #ffffff;
+  --mkp-primary: #0e6e63; --mkp-danger: #c0392b;
+  position: fixed; inset: 0; z-index: 72; display: none; background: var(--mkp-bg);
+  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--mkp-ink);
+}
+body.dark .mkp-overlay { --mkp-ink: #eceef2; --mkp-muted: #9aa0ab; --mkp-line: #2a2d34; --mkp-bg: #0e0f12; --mkp-card: #16181d; --mkp-primary: #4fd1c5; }
+.mkp-overlay .material-symbols-outlined { font-family: 'Material Symbols Outlined'; line-height: 1; vertical-align: middle; }
+.mkp-wrap { display: flex; flex-direction: column; height: 100%; }
+.mkp-overlay * { box-sizing: border-box; }
+
+.mkp-header { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 12px; padding-top: calc(env(safe-area-inset-top, 0px) + 10px); background: var(--mkp-card); border-bottom: 1px solid var(--mkp-line); }
+.mkp-hbtn { width: 40px; height: 40px; display: grid; place-items: center; border: none; background: transparent; color: var(--mkp-ink); cursor: pointer; border-radius: 10px; }
+.mkp-hbtn:active { background: color-mix(in srgb, var(--mkp-ink) 8%, transparent); }
+.mkp-htitle { flex: 1; display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.mkp-hkicker { font: 700 10px system-ui; letter-spacing: .08em; text-transform: uppercase; color: var(--mkp-primary); }
+.mkp-hname { font: 800 16px system-ui; }
+
+.mkp-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px; }
+
+.mkp-section { max-width: 780px; margin: 0 auto 16px; background: var(--mkp-card); border: 1px solid var(--mkp-line); border-radius: 14px; padding: 14px 15px 16px; }
+.mkp-sec-h { font: 800 11px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--mkp-muted); margin-bottom: 10px; }
+.mkp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.mkp-f { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+.mkp-f.mkp-wide { grid-column: 1 / -1; }
+.mkp-f > span { font: 600 11px system-ui; color: var(--mkp-muted); }
+.mkp-f input, .mkp-f select, .mkp-f textarea { width: 100%; border: 1px solid var(--mkp-line); border-radius: 9px; background: var(--mkp-bg); color: var(--mkp-ink); font: 500 14px system-ui; padding: 9px 10px; outline: none; }
+.mkp-f input:focus, .mkp-f select:focus, .mkp-f textarea:focus { border-color: var(--mkp-primary); }
+.mkp-f textarea { resize: vertical; font-size: 13px; }
+
+/* drug card */
+.mkp-drug { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; padding: 12px; border: 1px solid var(--mkp-line); border-left: 3px solid var(--mkp-primary); border-radius: 12px; margin-bottom: 12px; background: color-mix(in srgb, var(--mkp-primary) 3%, var(--mkp-card)); }
+.mkp-drug .mkp-f.mkp-wide { grid-column: 1 / -1; }
+.mkp-drug-hd { grid-column: 1 / -1; display: flex; align-items: center; justify-content: space-between; }
+.mkp-drug-n { font: 800 11px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--mkp-primary); }
+.mkp-drug .mkp-f input, .mkp-drug .mkp-f select { background: var(--mkp-card); }
+.mkp-iconbtn { width: 34px; height: 34px; display: grid; place-items: center; border: none; background: transparent; color: var(--mkp-muted); cursor: pointer; border-radius: 8px; }
+.mkp-iconbtn:active { background: color-mix(in srgb, var(--mkp-danger) 12%, transparent); color: var(--mkp-danger); }
+.mkp-iconbtn .material-symbols-outlined { font-size: 20px; }
+.mkp-exdose { grid-column: 1 / -1; display: flex; align-items: center; gap: 6px; font: 700 12px system-ui; color: var(--mkp-primary); background: color-mix(in srgb, var(--mkp-primary) 8%, transparent); border-radius: 8px; padding: 6px 10px; }
+.mkp-exdose .material-symbols-outlined { font-size: 16px; }
+
+.mkp-add { display: inline-flex; align-items: center; gap: 6px; border: 1px dashed color-mix(in srgb, var(--mkp-primary) 45%, var(--mkp-line)); background: transparent; color: var(--mkp-primary); font: 700 13px system-ui; padding: 10px 14px; border-radius: 10px; cursor: pointer; width: 100%; justify-content: center; }
+.mkp-add:active { background: color-mix(in srgb, var(--mkp-primary) 8%, transparent); }
+
+/* list */
+.mkp-list { max-width: 780px; margin: 0 auto; display: flex; flex-direction: column; gap: 8px; }
+.mkp-item { display: flex; align-items: center; gap: 4px; background: var(--mkp-card); border: 1px solid var(--mkp-line); border-radius: 12px; padding: 4px 6px 4px 4px; }
+.mkp-item-main { flex: 1; display: flex; flex-direction: column; gap: 2px; text-align: left; border: none; background: none; cursor: pointer; padding: 10px 12px; color: var(--mkp-ink); border-radius: 10px; min-width: 0; }
+.mkp-item-main:active { background: color-mix(in srgb, var(--mkp-primary) 6%, transparent); }
+.mkp-item-name { font: 700 15px system-ui; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.mkp-item-sub { font: 500 12px system-ui; color: var(--mkp-muted); }
+.mkp-empty { display: flex; flex-direction: column; align-items: center; gap: 8px; padding: 40px 20px; color: var(--mkp-muted); font: 500 13px system-ui; text-align: center; }
+.mkp-empty .material-symbols-outlined { font-size: 34px; opacity: .6; }
+
+.mkp-actionbar { flex: 0 0 auto; display: flex; gap: 10px; padding: 10px 14px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); background: var(--mkp-card); border-top: 1px solid var(--mkp-line); }
+.mkp-btn { flex: 1; min-height: 48px; border: none; border-radius: 13px; font: 700 15px system-ui; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+.mkp-btn.ghost { background: color-mix(in srgb, var(--mkp-primary) 8%, var(--mkp-card)); color: var(--mkp-primary); border: 1px solid color-mix(in srgb, var(--mkp-primary) 30%, transparent); }
+.mkp-btn.primary { background: var(--mkp-primary); color: #fff; }
+.mkp-btn:active { transform: scale(.99); }
+
+@media (max-width: 520px) { .mkp-drug { grid-template-columns: 1fr; } }

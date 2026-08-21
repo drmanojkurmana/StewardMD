@@ -1,0 +1,92 @@
+{
+  "id": "panc-gem",
+  "diseaseId": "pancreatic_cancer",
+  "name": "Gemcitabine (monotherapy)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "First cycle is weekly for 7 of 8 weeks in some schedules; thereafter days 1, 8 and 15 of a 28-day cycle. Continue until progression or unacceptable toxicity. For reduced-fitness / poor performance-status patients (locally advanced or metastatic).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Single-agent gemcitabine is not biomarker-restricted; it is the reduced-fitness backbone when a doublet or triplet is not tolerable."
+  },
+  "stage": [
+    "locally advanced/unresectable",
+    "metastatic"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "pancreatic adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "moderate emetic risk; give guideline-tier antiemetic prophylaxis before gemcitabine."
+    }
+  ],
+  "supportiveCare": [
+    "Monitor for myelosuppression; hold on a treatment day for cytopenias.",
+    "Watch for gemcitabine flu-like symptoms, transaminitis, and rare pneumonitis / haemolytic-uraemic syndrome.",
+    "Prioritise symptom control, biliary/GI patency, nutrition and pancreatic enzyme replacement."
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1, 8, 15) - myelosuppression",
+    "liver and renal function before each cycle",
+    "CA 19-9 and imaging to assess response"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "cytopenias on a treatment day",
+      "action": "hold/reduce",
+      "text": "Review required. Hold day 8 or 15 for neutropenia or thrombocytopenia and reduce at the next cycle per protocol. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Gemcitabine 1,000 mg/m2 IV on days 1, 8 and 15 of a 28-day cycle (weekly x7 of 8 in the first cycle in some schedules). Source: single-agent standard of care per NCCN Pancreatic Adenocarcinoma / DeVita general reference (own wording).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+        "version": null,
+        "date": null,
+        "locator": "single-agent gemcitabine; own wording",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

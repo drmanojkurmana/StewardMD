@@ -1,0 +1,40 @@
+{
+  "id": "dlbcl-beam",
+  "diseaseId": "dlbcl_cancer",
+  "name": "BEAM (carmustine/etoposide/cytarabine/melphalan) conditioning for autologous transplant",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 7,
+  "cycles": 1,
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "high-emetogenic multi-day conditioning; use a guideline-based multi-drug regimen" },
+    { "name": "Seizure/pulmonary precautions", "notes": "carmustine can cause pneumonitis and infusional hypotension; infuse slowly" }
+  ],
+  "supportiveCare": [
+    "Delivered as a single high-dose conditioning course immediately before autologous stem-cell reinfusion (conventionally days -6 to -1)",
+    "Full transplant supportive care: broad antimicrobial prophylaxis, transfusion support, mucositis care, and G-CSF per unit protocol",
+    "Cryopreserved autologous stem cells reinfused after melphalan clears"
+  ],
+  "monitoring": [
+    "Daily CBC and organ function through the aplastic period",
+    "Pulmonary status (carmustine pneumonitis) and mucositis",
+    "This is myeloablative - only give where stem-cell rescue is available"
+  ],
+  "drugs": [
+    { "id": "carmustine", "name": "Carmustine (BCNU)", "basis": "bsa", "dosePerUnit": 300, "unit": "mg/m2", "route": "IV", "days": [1], "caps": { "perDose": null }, "notes": "300 mg/m2 IV on day 1 (conventionally day -6). Slow infusion; monitor for hypotension and delayed pneumonitis." },
+    { "id": "etoposide", "name": "Etoposide", "basis": "bsa", "dosePerUnit": 200, "unit": "mg/m2", "route": "IV", "days": [2, 3, 4, 5], "caps": { "perDose": null }, "notes": "200 mg/m2 per day IV, days 2-5 (often split as 100 mg/m2 every 12 h)." },
+    { "id": "cytarabine", "name": "Cytarabine", "basis": "bsa", "dosePerUnit": 400, "unit": "mg/m2", "route": "IV", "days": [2, 3, 4, 5], "caps": { "perDose": null }, "notes": "400 mg/m2 per day IV, days 2-5 (200 mg/m2 every 12 h)." },
+    { "id": "melphalan", "name": "Melphalan", "basis": "bsa", "dosePerUnit": 140, "unit": "mg/m2", "route": "IV", "days": [6], "caps": { "perDose": null }, "notes": "140 mg/m2 IV on day 6 (day -1); ice-chip cryotherapy to reduce mucositis. Autologous cells reinfused after clearance." }
+  ]
+}

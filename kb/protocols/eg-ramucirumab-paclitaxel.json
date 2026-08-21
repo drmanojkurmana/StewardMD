@@ -1,0 +1,97 @@
+{
+  "id": "eg-ramucirumab-paclitaxel",
+  "diseaseId": "uppergi_cancer",
+  "name": "Ramucirumab + paclitaxel (second-line metastatic adenocarcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "Ramucirumab plus weekly paclitaxel for metastatic gastric / esophagogastric adenocarcinoma progressing after a first-line platinum-fluoropyrimidine (RAINBOW population); continue until progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD ONCOTREE draft protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Paclitaxel hypersensitivity prophylaxis",
+      "notes": "Corticosteroid plus H1 and H2 antihistamine before paclitaxel."
+    }
+  ],
+  "supportiveCare": [
+    "Anti-VEGFR2 antibody plus taxane; monitor blood pressure, proteinuria, bleeding, and wound healing on ramucirumab.",
+    "Monitor for peripheral neuropathy and myelosuppression from paclitaxel."
+  ],
+  "monitoring": [
+    "blood pressure before each ramucirumab dose",
+    "urine protein periodically",
+    "CBC before each weekly paclitaxel dose",
+    "peripheral neuropathy assessment each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "blood pressure",
+    "proteinuria",
+    "neuropathy grade",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "uncontrolled hypertension or grade 2+ proteinuria",
+      "drug": "ramucirumab",
+      "action": "hold/reduce",
+      "text": "Hold ramucirumab for uncontrolled hypertension or significant proteinuria; resume when controlled; physician decides."
+    },
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "reduce/hold",
+      "text": "Reduce or hold paclitaxel for significant sensory neuropathy; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "ramucirumab",
+      "name": "Ramucirumab",
+      "basis": "mgkg",
+      "dosePerUnit": 8,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1,
+        15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Ramucirumab 8 mg/kg IV on days 1 and 15 of a 28-day cycle, combined with weekly paclitaxel, for second-line metastatic gastric / esophagogastric adenocarcinoma. Monitor blood pressure, proteinuria, and bleeding. StewardMD standard-of-care wording; physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    },
+    {
+      "id": "paclitaxel",
+      "name": "Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Paclitaxel 80 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle (paclitaxel is omitted on day 22 in the RAINBOW schedule). Give hypersensitivity premedication. StewardMD standard-of-care wording; physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    }
+  ]
+}

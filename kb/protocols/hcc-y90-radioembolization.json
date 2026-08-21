@@ -1,0 +1,89 @@
+{
+  "id": "hcc-y90-radioembolization",
+  "diseaseId": "hcc_cancer",
+  "name": "Radioembolization (Yttrium-90 microspheres, intra-arterial)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 90,
+  "cycles": 1,
+  "cyclesNote": "Transarterial radioembolization delivers Yttrium-90 microspheres into the tumor-feeding hepatic artery as selective internal radiation. It is a single planned delivery per treated territory (lobar or segmental / radiation-segmentectomy), preceded by mapping angiography and a lung-shunt (Tc-99m MAA) assessment; re-treatment of a separate territory is planned individually. The activity below is a nominal planning placeholder only. Actual administered activity is individualized by dosimetry (BSA / partition / MIRD model), target-territory volume, and lung shunt fraction, and is computed by radiation oncology / interventional radiology.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Pre-treatment mapping and shunt assessment",
+      "notes": "Mandatory pre-treatment hepatic angiography with prophylactic coiling of aberrant vessels and Tc-99m MAA lung-shunt study before microsphere delivery; exclude a hepatopulmonary shunt that would deliver an unsafe lung radiation dose."
+    }
+  ],
+  "supportiveCare": [
+    "Lobar or segmental (radiation-segmentectomy) delivery to concentrate dose on tumor and spare normal parenchyma.",
+    "Radiation-safety precautions per institutional radioactive-materials policy.",
+    "Option for bridging / downstaging toward transplant or resection in selected candidates.",
+    "Continue antiviral therapy and hepatology co-management; watch for radioembolization-induced liver disease."
+  ],
+  "monitoring": [
+    "lung shunt fraction on pre-treatment Tc-99m MAA (contraindicated if excessive)",
+    "liver function and bilirubin before and after treatment",
+    "AFP trend and multiphasic CT / MRI response imaging",
+    "signs of radioembolization-induced liver disease over follow-up"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "renal",
+    "lung shunt fraction",
+    "target-territory dosimetry",
+    "prior-treatment status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "high lung shunt fraction on pre-treatment MAA study",
+      "drug": "y90-microspheres",
+      "action": "review/stop",
+      "text": "Reduce planned activity or defer treatment when the hepatopulmonary shunt would exceed the safe cumulative lung dose; radiation oncology recalculates or the patient is treated by another modality. Physician decides."
+    },
+    {
+      "condition": "inadequate liver reserve or bilirubin elevation",
+      "drug": "y90-microspheres",
+      "action": "review/stop",
+      "text": "Avoid lobar radioembolization in inadequate liver reserve; consider segmental delivery or an alternative. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "y90-microspheres",
+      "name": "Yttrium-90 microspheres",
+      "basis": "mgkg",
+      "dosePerUnit": 25,
+      "unit": "MBq/kg",
+      "route": "intra-arterial",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Yttrium-90 (glass or resin) microspheres delivered into the tumor-feeding hepatic artery as selective internal radiation. The value shown (about 25 MBq/kg as a rough per-weight planning estimate, typically a 1 to 3 GBq lobar activity) is a NOMINAL PLACEHOLDER ONLY. Actual administered activity is set by formal dosimetry (glass: target absorbed dose to the perfused volume, commonly around 120 Gy; resin: BSA / partition method), adjusted for lung shunt fraction and target-territory volume, and is computed and prescribed by radiation oncology / interventional radiology, not by this card. Authored from standard interventional-oncology practice.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "transarterial radioembolization (Y90), intermediate-stage / bridging HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

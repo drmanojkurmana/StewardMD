@@ -1,0 +1,74 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-glofitamab",
+  "name": "Glofitamab (CD20xCD3 bispecific, fixed duration)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 12,
+  "premedications": [
+    {
+      "name": "Obinutuzumab pretreatment",
+      "notes": "single 1000 mg obinutuzumab dose 7 days before the first glofitamab dose to deplete B cells and blunt cytokine-release syndrome"
+    },
+    {
+      "name": "CRS premedication",
+      "notes": "steroid + antihistamine + antipyretic before each step-up and the first full dose"
+    }
+  ],
+  "supportiveCare": [
+    "Step-up dosing during cycle 1 to mitigate cytokine-release syndrome; hospital observation per risk",
+    "Tumor-lysis prophylaxis",
+    "Fixed duration: stop after up to 12 cycles"
+  ],
+  "monitoring": [
+    "Cytokine-release syndrome and neurotoxicity (ICANS), highest at the first full dose",
+    "CBC; hepatitis B screen",
+    "Response by PET"
+  ],
+  "drugs": [
+    {
+      "id": "obinutuzumab-pretreat",
+      "name": "Obinutuzumab (pretreatment)",
+      "basis": "flat",
+      "dosePerUnit": 1000,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Single 1000 mg IV pretreatment dose ~7 days before glofitamab step-up."
+    },
+    {
+      "id": "glofitamab",
+      "name": "Glofitamab",
+      "basis": "flat",
+      "dosePerUnit": 30,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Step-up in cycle 1 (2.5 mg on day 8, 10 mg on day 15), then 30 mg IV on day 1 of cycles 2-12 (target full dose shown)."
+    }
+  ]
+}

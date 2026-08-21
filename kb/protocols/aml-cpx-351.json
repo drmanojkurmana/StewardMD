@@ -1,0 +1,74 @@
+{
+  "id": "aml-cpx-351",
+  "diseaseId": "aml_cancer",
+  "name": "CPX-351 (Liposomal Cytarabine-Daunorubicin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Full neutropenic supportive care: infection prophylaxis, transfusion support for anemia/thrombocytopenia.",
+    "Tumor-lysis prophylaxis: hydration and allopurinol (or rasburicase if high risk); monitor potassium, phosphate, calcium, uric acid.",
+    "Expect prolonged cytopenias; give full infection prophylaxis and transfusion support."
+  ],
+  "monitoring": [
+    "CBC with differential and marrow response after count recovery.",
+    "LVEF for anthracycline (liposomal daunorubicin still contributes to cumulative exposure).",
+    "Renal and hepatic panels."
+  ],
+  "drugs": [
+    {
+      "id": "cpx-cytarabine",
+      "name": "Cytarabine (liposomal, CPX-351)",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "units/m2",
+      "route": "IV",
+      "days": [
+        1,
+        3,
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Liposomal fixed-ratio (5:1) cytarabine 100 units/m2 IV over 90 min on days 1, 3 and 5 for first induction (days 1 and 3 for second induction and consolidation), for therapy-related AML or AML with myelodysplasia-related changes. Standard Guidelines (NCCN) / DeVita, general reference."
+    },
+    {
+      "id": "cpx-daunorubicin",
+      "name": "Daunorubicin (liposomal, CPX-351)",
+      "basis": "bsa",
+      "dosePerUnit": 44,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        3,
+        5
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "Liposomal fixed-ratio (5:1) daunorubicin 44 mg/m2 IV on days 1, 3 and 5 (days 1 and 3 for second induction/consolidation), paired with liposomal cytarabine as CPX-351. Track cumulative anthracycline exposure. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "id": "hodgkin-bv-avd",
+  "diseaseId": "hodgkin_cancer",
+  "name": "A+AVD (Brentuximab vedotin / DOXOrubicin / Vinblastine / Dacarbazine)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Give antiemetic prophylaxis before each administration per the standard emetic-risk framework."
+    }
+  ],
+  "supportiveCare": [
+    "Primary G-CSF prophylaxis is recommended with A+AVD (higher febrile-neutropenia risk than ABVD).",
+    "Brentuximab vedotin causes cumulative peripheral neuropathy; assess before each dose and dose-modify or hold for grade 2 or higher.",
+    "Bleomycin is replaced by brentuximab vedotin; do not co-administer bleomycin (pulmonary toxicity).",
+    "Baseline LVEF before anthracycline; track cumulative doxorubicin exposure."
+  ],
+  "monitoring": [
+    "CBC with differential before each administration; monitor for febrile neutropenia",
+    "peripheral neuropathy assessment before each brentuximab dose",
+    "cardiac assessment; cumulative doxorubicin tracking",
+    "end-of-treatment FDG-PET (Deauville)"
+  ],
+  "drugs": [
+    {
+      "id": "brentuximab-vedotin",
+      "name": "Brentuximab vedotin",
+      "basis": "mgkg",
+      "dosePerUnit": 1.2,
+      "unit": "mg/kg",
+      "route": "IV",
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        15
+      ],
+      "notes": "A+AVD 'A' (brentuximab). Brentuximab vedotin 1.2 mg/kg IV on days 1 and 15 of a 28-day cycle (front-line A+AVD dosing; body weight capped at 100 kg for dose calculation in practice). Cumulative peripheral neuropathy: assess and hold/reduce for grade 2 or higher. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 25,
+      "unit": "mg/m2",
+      "route": "IV",
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1,
+        15
+      ],
+      "notes": "A+AVD 'A' (doxorubicin). DOXOrubicin 25 mg/m2 IV on days 1 and 15 of a 28-day cycle. Anthracycline cumulative cardiotoxicity warn 450 / hard 550 mg/m2. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "vinblastine",
+      "name": "Vinblastine",
+      "basis": "bsa",
+      "dosePerUnit": 6,
+      "unit": "mg/m2",
+      "route": "IV",
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        15
+      ],
+      "notes": "A+AVD 'V'. Vinblastine 6 mg/m2 IV on days 1 and 15 of a 28-day cycle. IV only. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "dacarbazine",
+      "name": "Dacarbazine",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        15
+      ],
+      "notes": "A+AVD 'D'. Dacarbazine 375 mg/m2 IV on days 1 and 15 of a 28-day cycle. Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

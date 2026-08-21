@@ -1,0 +1,44 @@
+{
+  "id": "ov-gemcitabine",
+  "diseaseId": "ovarian_cancer",
+  "name": "Gemcitabine (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT single-agent option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Low emetogenic; give per emetic-risk framework." }
+  ],
+  "supportiveCare": [
+    "Myelosuppression is the main dose-limiting toxicity; hold day 8 for low counts.",
+    "Watch for transient flu-like symptoms and, rarely, pulmonary or hemolytic-uremic toxicity."
+  ],
+  "monitoring": [
+    "CBC on days 1 and 8 of each cycle",
+    "liver and renal function periodically"
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV over 30 min",
+      "days": [1, 8],
+      "caps": { "perDose": null },
+      "notes": "Gemcitabine 1000 mg/m2 IV on days 1 and 8 every 21 days as a single agent for recurrent ovarian cancer; may be combined with carboplatin (platinum-sensitive) or bevacizumab. Hold day 8 or reduce for cytopenias per package insert. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

@@ -1,0 +1,69 @@
+{
+  "id": "eg-irinotecan",
+  "diseaseId": "uppergi_cancer",
+  "name": "Irinotecan (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 6,
+  "cyclesNote": "Single-agent irinotecan as a later-line option for metastatic esophageal / esophagogastric cancer when a taxane or fluoropyrimidine-platinum has already been used; continue until progression or toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD ONCOTREE draft protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic + anticholinergic",
+      "notes": "Antiemetic prophylaxis; atropine available for acute cholinergic diarrhea; loperamide instructions for delayed diarrhea."
+    }
+  ],
+  "supportiveCare": [
+    "Single-agent topoisomerase-I inhibitor; counsel on early (cholinergic) and delayed diarrhea and manage promptly.",
+    "Monitor for neutropenia; consider UGT1A1 status in patients with severe toxicity."
+  ],
+  "monitoring": [
+    "CBC before each dose",
+    "liver function periodically",
+    "diarrhea and hydration status"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 diarrhea or neutropenia",
+      "drug": "irinotecan",
+      "action": "reduce/hold",
+      "text": "Hold and reduce irinotecan for severe diarrhea or neutropenia; consider UGT1A1*28 homozygosity; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "irinotecan",
+      "name": "Irinotecan",
+      "basis": "bsa",
+      "dosePerUnit": 180,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Irinotecan 180 mg/m2 IV on day 1 of a 14-day cycle as single-agent later-line therapy for metastatic esophageal / esophagogastric cancer. Manage cholinergic and delayed diarrhea; reduce for UGT1A1-related toxicity. StewardMD standard-of-care wording; physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    }
+  ]
+}

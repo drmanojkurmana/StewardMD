@@ -1,0 +1,156 @@
+{
+  "id": "hn-tpf",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "TPF Induction (Docetaxel / CISplatin / Fluorouracil), Locally Advanced Head and Neck Squamous Cell Carcinoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "TPF is a cytotoxic induction backbone used as a sequential (induction) strategy in locally advanced disease before radiation-based local therapy; it is not biomarker-selected."
+  },
+  "stage": [
+    "III",
+    "IVA",
+    "IVB"
+  ],
+  "treatmentSetting": [
+    "neoadjuvant",
+    "induction"
+  ],
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "Docetaxel corticosteroid premedication",
+      "notes": "corticosteroid premedication (e.g. dexamethasone) around each docetaxel dose per docetaxel labeling to reduce fluid retention and hypersensitivity."
+    },
+    {
+      "name": "CISplatin hydration and antiemetics",
+      "notes": "IV hydration and high-emetic-risk antiemetic prophylaxis before cisplatin."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetic prophylaxis: high emetic risk (cisplatin-containing); prophylaxis per emetogenicity tier.",
+    "G-CSF / antibacterial prophylaxis is commonly used with TPF given the febrile-neutropenia risk; assess per institutional practice.",
+    "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil; reduce or avoid in DPYD deficiency.",
+    "Mucositis and diarrhea supportive care during infusional fluorouracil."
+  ],
+  "monitoring": [
+    "CBC before each cycle and for febrile neutropenia between cycles",
+    "renal function (creatinine/GFR) before each cisplatin dose",
+    "serum magnesium and electrolytes (cisplatin)",
+    "audiometry / neuropathy assessment with cumulative cisplatin",
+    "response assessment after induction to guide the next local therapy step"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "magnesium/electrolytes",
+    "DPYD status (fluorouracil)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "renal impairment or cytopenia on day 1",
+      "drug": "cisplatin",
+      "action": "delay/reduce",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "febrile neutropenia or grade 3-4 mucositis in a prior cycle",
+      "action": "delay/reduce",
+      "text": "Consider dose reduction and growth-factor support before the next cycle; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "Docetaxel",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Docetaxel 75 mg/m2 IV on day 1, every 21 days for 3 induction cycles, given before cisplatin and infusional fluorouracil in the TPF induction sequence. Requires corticosteroid premedication. Dosing reflects the standard sequential-therapy TPF induction schedule (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "induction (sequential) chemotherapy, TPF",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "CISplatin 100 mg/m2 IV on day 1 (after docetaxel), every 21 days for 3 induction cycles, with adequate hydration. ISMP tall-man applied. Standard TPF induction platinum dose (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "induction (sequential) chemotherapy, TPF",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil (infusional)",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Infusional fluorouracil 1,000 mg/m2 per day by continuous IV infusion over 96 hours (days 1 to 4), every 21 days for 3 induction cycles. Consider DPYD testing before treatment; deficiency substantially increases fluoropyrimidine toxicity. Standard TPF induction fluorouracil schedule (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "induction (sequential) chemotherapy, TPF",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

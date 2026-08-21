@@ -1,0 +1,91 @@
+{
+  "id": "rcc-cabozantinib-nivolumab",
+  "diseaseId": "rcc_cancer",
+  "name": "Cabozantinib + Nivolumab (IO + TKI, first-line clear-cell RCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous therapy: cabozantinib 40 mg PO once daily every day, plus nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks). Continued until progression or unacceptable toxicity; nivolumab generally capped at about 2 years.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Note the combination cabozantinib dose is 40 mg once daily, LOWER than the 60 mg single-agent dose.",
+    "Distinguish TKI toxicity (hypertension, diarrhea, hand-foot skin reaction) from immune-related effects.",
+    "Blood pressure monitoring; assess for proteinuria; immune adverse event counseling."
+  ],
+  "monitoring": [
+    "blood pressure (cabozantinib hypertension)",
+    "liver function tests",
+    "thyroid function (TSH)",
+    "proteinuria",
+    "immune toxicity screen (TSH/free T4, LFTs, glucose) as indicated"
+  ],
+  "clearanceChecks": ["blood pressure", "liver", "thyroid", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hypertension, diarrhea, or hand-foot skin reaction",
+      "drug": "cabozantinib",
+      "action": "hold/reduce",
+      "text": "Hold cabozantinib and resume at a reduced dose (20 mg, then 20 mg every other day) per labeling for persistent grade 3 toxicity."
+    },
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold/steroids",
+      "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cabozantinib",
+      "name": "Cabozantinib",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+      "caps": { "perDose": null },
+      "notes": "Cabozantinib 40 mg PO once daily, continuous (shown across all cycle days). This combination dose (40 mg) is intentionally LOWER than the 60 mg single-agent cabozantinib dose. Authored from standard first-line clear-cell RCC practice (NCCN Kidney Cancer; CheckMate-9ER supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "cabozantinib 40 mg + nivolumab, first-line clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "days": [1, 15],
+      "caps": { "perDose": null },
+      "notes": "Nivolumab 240 mg IV flat every 2 weeks (days 1 and 15 of a 28-day cycle), or 480 mg every 4 weeks as a label-equivalent alternative. Combined with cabozantinib as first-line therapy. Authored from standard practice (CheckMate-9ER).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "cabozantinib + nivolumab, first-line clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

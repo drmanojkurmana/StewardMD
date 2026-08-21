@@ -1,0 +1,125 @@
+{
+  "id": "hn-gem-cisplatin",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "Gemcitabine plus CISplatin, Nasopharyngeal Carcinoma (Induction or Adjuvant)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers (Nasopharynx)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Gemcitabine plus cisplatin is the standard cytotoxic doublet for EBV-associated nasopharyngeal carcinoma, used as induction chemotherapy before chemoradiation for bulky stage III-IVA disease and as EBV-DNA-guided adjuvant chemotherapy. Not biomarker-selected beyond the nasopharyngeal indication; plasma EBV DNA guides adjuvant use."
+  },
+  "stage": [
+    "II",
+    "III",
+    "IVA"
+  ],
+  "treatmentSetting": [
+    "induction",
+    "adjuvant"
+  ],
+  "histology": "nasopharyngeal carcinoma (EBV-associated)",
+  "premedications": [
+    {
+      "name": "CISplatin hydration and antiemetics",
+      "notes": "IV hydration and high-emetic-risk antiemetic prophylaxis before cisplatin."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetic prophylaxis: high emetic risk (cisplatin-containing); prophylaxis per emetogenicity tier.",
+    "Monitor for gemcitabine myelosuppression, particularly thrombocytopenia, before the day 8 dose.",
+    "G-CSF / febrile-neutropenia risk assessment per institutional practice."
+  ],
+  "monitoring": [
+    "CBC before each dose (day 1 and day 8)",
+    "renal function (creatinine/GFR) before each cisplatin dose",
+    "serum magnesium and electrolytes (cisplatin)",
+    "audiometry / neuropathy assessment with cumulative cisplatin",
+    "plasma EBV DNA for response and adjuvant decision-making"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "magnesium/electrolytes",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "renal impairment or cytopenia on day 1",
+      "drug": "cisplatin",
+      "action": "delay/reduce",
+      "text": "Review required. Protocol-specific delay/reduce criteria may apply; physician decides."
+    },
+    {
+      "condition": "thrombocytopenia or neutropenia on day 8",
+      "drug": "gemcitabine",
+      "action": "hold/reduce",
+      "text": "Hold or reduce the day 8 gemcitabine dose for significant cytopenia; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Gemcitabine 1,000 mg/m2 IV on days 1 and 8, every 21 days. Standard gemcitabine dose in the nasopharyngeal gemcitabine-cisplatin doublet (general oncology reference). Check CBC before the day 8 dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers (Nasopharynx)",
+        "version": "general reference",
+        "date": null,
+        "locator": "nasopharynx, gemcitabine + cisplatin",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "CISplatin 80 mg/m2 IV on day 1, every 21 days, with adequate hydration. ISMP tall-man applied. Standard platinum dose in the nasopharyngeal gemcitabine-cisplatin doublet (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers (Nasopharynx)",
+        "version": "general reference",
+        "date": null,
+        "locator": "nasopharynx, gemcitabine + cisplatin",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

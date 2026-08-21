@@ -1,0 +1,65 @@
+{
+  "id": "thyroid-larotrectinib",
+  "diseaseId": "thyroid_cancer",
+  "name": "Larotrectinib (NTRK fusion-positive thyroid cancer)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous twice-daily dosing until disease progression or unacceptable toxicity; not a fixed cycle count",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "NTRK_fusion": "positive",
+    "note": "Tissue-agnostic TRK inhibitor gated to a confirmed NTRK1/2/3 gene fusion on validated NGS. Applies to radioiodine-refractory differentiated and to anaplastic thyroid carcinoma harboring an NTRK fusion."
+  },
+  "stage": ["advanced", "metastatic", "recurrent"],
+  "treatmentSetting": "metastatic",
+  "histology": "NTRK-fusion-positive thyroid carcinoma (differentiated or anaplastic)",
+  "premedications": [],
+  "supportiveCare": [
+    "confirm the NTRK fusion on validated NGS before starting.",
+    "monitor for dizziness, fatigue, hepatotoxicity (ALT/AST), and neurologic effects; caution driving early.",
+    "continue TSH suppression in differentiated disease; watch for acquired on-target resistance (e.g. solvent-front) at progression.",
+    "entrectinib is an accepted alternative TRK inhibitor for the same indication."
+  ],
+  "monitoring": [
+    "liver function (ALT/AST)",
+    "neurologic / cognitive symptoms",
+    "cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": ["biomarker NTRK fusion confirmed", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 hepatotoxicity or other serious toxicity",
+      "drug": "larotrectinib",
+      "action": "hold/reduce",
+      "text": "Interrupt and resume at a reduced dose per labeling once recovered; obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "larotrectinib",
+      "name": "Larotrectinib",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Larotrectinib 100 mg PO twice daily, continuous until progression or unacceptable toxicity, is the standard adult dose for NTRK fusion-positive solid tumors including thyroid cancer (per standard guidelines, general reference). Own wording - not a verbatim source copy. Entrectinib 600 mg PO once daily is an alternative TRK inhibitor.",
+      "caps": { "perDose": null },
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+      "modificationRules": [],
+      "dosesPerDay": 2,
+      "frequency": "BID"
+    }
+  ]
+}

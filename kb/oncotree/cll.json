@@ -1,0 +1,2002 @@
+{
+  "guideline": "cll",
+  "title": "Chronic Lymphocytic Leukemia",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "2.0.0",
+  "diseaseId": "cll_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. CLL/SLL pathway: presentation -> workup -> Rai/Binet staging -> iwCLL treatment indication (watch-and-wait vs treat) -> TP53 (del(17p)/TP53) and IGHV risk stratification -> first-line targeted therapy (covalent/non-covalent BTKi vs venetoclax-obinutuzumab vs select chemoimmunotherapy) -> response / tolerability adaptation (BTKi continuation vs intolerance switch; post-venetoclax MRD assessment) -> surveillance -> relapsed/refractory pathway by prior therapy class with line-of-therapy sequencing (post-BTKi venetoclax / non-covalent BTKi / cellular therapy) and Richter transformation (histology and fitness sub-tree). Structural pathway only; no proprietary guideline text reproduced, no doses invented. The only StewardMD dose protocol that clinically matches a CLL-pathway leaf is R-CHOP for DLBCL-type Richter transformation; all CLL-directed agents (BTK inhibitors, venetoclax, obinutuzumab, FCR/BR) have no existing dose protocol and are given as checklist guidance without doses. DRAFT - not clinically activated; the physician decides.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN / iwCLL / DeVita / Harrison). No CLL dose regimens are asserted; agents are named as classes for clinician selection. R-CHOP is referenced only for DLBCL-type Richter transformation.",
+  "startNodeIds": [
+    "n_presentation"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "iwCLL active-disease (treatment) indications include progressive marrow failure (worsening anemia or thrombocytopenia), massive or progressive/symptomatic splenomegaly or lymphadenopathy, progressive lymphocytosis with a short doubling time, autoimmune cytopenia poorly responsive to steroids, or constitutional symptoms. Absolute lymphocyte count alone is not an indication.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Test del(17p) by FISH and TP53 by sequencing before every line of therapy. TP53-aberrant disease responds poorly to chemoimmunotherapy; use targeted agents (BTK inhibitor or venetoclax-based).",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Venetoclax requires tumor-lysis-syndrome risk stratification, a weekly dose ramp-up, and hydration; monitor labs closely during escalation.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "IGHV mutation status is stable over the disease course; test once. IGHV-unmutated disease has shorter benefit from chemoimmunotherapy and generally favors targeted therapy.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "Undetectable measurable residual disease (uMRD, fewer than 1 CLL cell per 10,000 leukocytes by flow cytometry or PCR) after fixed-duration venetoclax predicts longer progression-free survival. MRD is a prognostic tool that guides follow-up intensity; it does not by itself mandate a change in therapy off a completed fixed-duration course.",
+      "evidence": "2A"
+    },
+    "f": {
+      "text": "Richter transformation (most often diffuse large B-cell lymphoma) carries a poor prognosis, worst when clonally related to the CLL. Treat as aggressive lymphoma, prioritize a clinical trial, and consolidate responders with allogeneic (or autologous) transplant when fit. Hodgkin-variant transformation has a better outlook and is treated with Hodgkin-directed therapy.",
+      "evidence": "2A"
+    },
+    "g": {
+      "text": "Non-covalent (reversible) BTK inhibitors retain activity despite BTK C481S resistance mutations that arise on covalent BTK inhibitors. BTK and PLCG2 mutation testing can inform sequencing after covalent BTK-inhibitor progression.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_presentation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Presentation",
+      "title": "CLL / SLL: presentation",
+      "section": "Workup",
+      "description": "Management branches first by presentation. Choose the applicable scenario.",
+      "path": "CLL / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Newly diagnosed CLL or SLL (tissue-equivalent small lymphocytic lymphoma)",
+        "Previously treated, now relapsed or refractory",
+        "Sudden clinical deterioration - suspect Richter (histologic) transformation"
+      ],
+      "options": [
+        {
+          "id": "newly_dx",
+          "label": "Newly diagnosed CLL / SLL",
+          "sets": {
+            "presentation": "newly"
+          },
+          "pills": [
+            "new"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed / refractory (previously treated)",
+          "sets": {
+            "presentation": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        },
+        {
+          "id": "richter",
+          "label": "Suspected Richter transformation",
+          "sets": {
+            "presentation": "richter"
+          },
+          "pills": [
+            "Richter"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Workup",
+      "title": "Diagnostic workup",
+      "section": "Workup",
+      "description": "Confirm the diagnosis and establish baseline disease burden and biology.",
+      "path": "CLL / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "History and physical; palpate all nodal areas, liver and spleen; note B-symptoms and performance status",
+        "CBC with differential and peripheral smear (smudge cells); confirm clonal B-lymphocytosis >= 5 x 10^9/L for CLL",
+        "Flow-cytometry immunophenotype: CD19+ CD5+ CD23+, dim surface immunoglobulin, kappa/lambda restriction",
+        "SLL if nodal/tissue disease without the required blood lymphocytosis (lymph-node biopsy)",
+        "Prognostic testing: FISH panel (del(13q), trisomy 12, del(11q), del(17p)), TP53 sequencing, IGHV mutation status",
+        {
+          "label": "Baseline labs",
+          "sub": "LDH, beta-2-microglobulin, comprehensive metabolic panel, immunoglobulins, DAT, hepatitis B/C and HIV serology before therapy"
+        }
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_staging",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Staging",
+      "title": "Clinical staging (Rai / Binet)",
+      "section": "Staging",
+      "description": "Assign a clinical stage; staging with prognostic markers frames the treatment-indication decision.",
+      "path": "CLL / Staging",
+      "pills": [
+        "staging"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "Rai and Binet clinical staging",
+          "headers": [
+            "System",
+            "Low",
+            "Intermediate",
+            "High"
+          ],
+          "rows": [
+            [
+              "Rai",
+              "0 (lymphocytosis only)",
+              "I-II (lymphadenopathy / organomegaly)",
+              "III-IV (anemia Hb <11, or platelets <100)"
+            ],
+            [
+              "Binet",
+              "A (<3 node areas, no cytopenia)",
+              "B (>=3 node areas)",
+              "C (anemia and/or thrombocytopenia)"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Stage assigned - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_iwcll",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Treatment indication",
+      "title": "iwCLL treatment indication: watch-and-wait vs treat",
+      "section": "Treatment",
+      "description": "Early-stage asymptomatic CLL is observed; treatment starts only when active-disease (iwCLL) criteria are met. There is no survival benefit to treating asymptomatic early disease.",
+      "path": "CLL / Treatment indication",
+      "pills": [
+        "iwCLL"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "watch",
+          "label": "No active-disease criteria - observe",
+          "sets": {
+            "indication": "watch"
+          },
+          "pills": [
+            "watch-and-wait"
+          ]
+        },
+        {
+          "id": "treat",
+          "label": "Meets iwCLL criteria - treat",
+          "sets": {
+            "indication": "treat"
+          },
+          "pills": [
+            "treat"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_watch",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Watch-and-wait",
+      "title": "Active surveillance (watch-and-wait)",
+      "section": "Surveillance",
+      "description": "Observation with periodic monitoring until an iwCLL treatment indication develops.",
+      "path": "CLL / Watch-and-wait",
+      "pills": [
+        "watch-and-wait"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "History, exam and CBC every 3-6 months (individualize by pace of disease)",
+        "Reassess for iwCLL indications at each visit; check the lymphocyte doubling time",
+        "Age-appropriate infection prophylaxis and vaccinations (avoid live vaccines); annual influenza, pneumococcal, COVID and zoster (non-live)",
+        "No routine CT imaging in asymptomatic patients; investigate new or progressive symptoms",
+        "Begin therapy when active-disease criteria are met"
+      ],
+      "linkTo": "n_iwcll",
+      "linkLabel": "When active-disease criteria develop: re-enter the treatment-indication step"
+    },
+    {
+      "id": "n_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "TP53 status",
+      "title": "Risk stratification: del(17p) / TP53",
+      "section": "Staging",
+      "description": "Before first-line therapy, stratify by TP53 status. TP53 aberration (del(17p) and/or TP53 mutation) is the dominant adverse marker and steers away from chemoimmunotherapy.",
+      "path": "CLL / Risk / TP53",
+      "pills": [
+        "TP53"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "tables": [
+        {
+          "title": "Key first-line prognostic markers",
+          "headers": [
+            "Marker",
+            "Favorable",
+            "Adverse",
+            "Impact"
+          ],
+          "rows": [
+            [
+              "del(17p) / TP53",
+              "Absent",
+              "Present",
+              "Chemoimmunotherapy inferior; use targeted agents"
+            ],
+            [
+              "IGHV",
+              "Mutated",
+              "Unmutated",
+              "Unmutated = shorter chemoimmunotherapy benefit"
+            ],
+            [
+              "del(11q)",
+              "Absent",
+              "Present",
+              "Adverse; targeted therapy overcomes much of the risk"
+            ],
+            [
+              "del(13q) sole",
+              "Present",
+              "-",
+              "Most favorable cytogenetic group"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "tp53_abn",
+          "label": "del(17p) and/or TP53-mutated",
+          "sets": {
+            "biomarkers.TP53": "aberrant"
+          },
+          "pills": [
+            "TP53 aberrant"
+          ]
+        },
+        {
+          "id": "tp53_wt",
+          "label": "TP53 wild-type (no del(17p) / no mutation)",
+          "sets": {
+            "biomarkers.TP53": "wildtype"
+          },
+          "pills": [
+            "TP53 WT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tp53_regimen",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "TP53-aberrant regimen",
+      "title": "First-line, TP53-aberrant: targeted regimen choice",
+      "section": "Treatment",
+      "description": "TP53-aberrant CLL is treated with continuous BTK inhibition or fixed-duration venetoclax-based therapy; chemoimmunotherapy is not used.",
+      "path": "CLL / First-line / TP53-aberrant",
+      "pills": [
+        "TP53 aberrant"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "options": [
+        {
+          "id": "btki",
+          "label": "Covalent BTK inhibitor (continuous)",
+          "sets": {
+            "regimen": "btki"
+          },
+          "pills": [
+            "BTKi"
+          ]
+        },
+        {
+          "id": "veno",
+          "label": "Venetoclax-obinutuzumab (fixed duration)",
+          "sets": {
+            "regimen": "veno"
+          },
+          "pills": [
+            "VenO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_tp53_btki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "TP53 aberrant - BTKi",
+      "title": "First-line TP53-aberrant: continuous BTK inhibitor",
+      "section": "Treatment",
+      "description": "A covalent second-generation BTK inhibitor is preferred for its cardiovascular tolerability; continue until progression or intolerance.",
+      "path": "CLL / First-line / TP53 / BTKi",
+      "pills": [
+        "TP53 aberrant",
+        "BTKi",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred over ibrutinib for atrial fibrillation and hypertension risk)",
+        "Continuous therapy until progression or unacceptable toxicity",
+        "Baseline and on-treatment cardiovascular review (blood pressure, atrial fibrillation, bleeding risk); reconcile anticoagulants and CYP3A interactions",
+        "This is a preferred option even with TP53 aberration (activity is largely independent of TP53)",
+        "Then assess response and tolerability at the next step"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib"
+      ]
+    },
+    {
+      "id": "n_tx_tp53_veno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "TP53 aberrant - VenO",
+      "title": "First-line TP53-aberrant: venetoclax-obinutuzumab (fixed duration)",
+      "section": "Treatment",
+      "description": "Fixed-duration venetoclax with obinutuzumab is an option offering a time-limited, chemotherapy-free course.",
+      "path": "CLL / First-line / TP53 / VenO",
+      "pills": [
+        "TP53 aberrant",
+        "VenO",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b",
+        "c"
+      ],
+      "bullets": [
+        "Venetoclax with obinutuzumab, given as a fixed-duration (approximately 12-month) course",
+        "Mandatory tumor-lysis-syndrome risk assessment, hydration and weekly venetoclax dose ramp-up",
+        "Obinutuzumab: infusion-reaction premedication and hepatitis B reactivation prophylaxis if HBcAb-positive",
+        "Durable remissions are shorter with TP53 aberration than in TP53 wild-type disease - plan close follow-up",
+        "Then complete-of-course response / MRD assessment at the next step"
+      ],
+      "protocolRefs": [
+        "cll-veno-obinutuzumab"
+      ]
+    },
+    {
+      "id": "n_ighv",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "IGHV status",
+      "title": "TP53 wild-type: IGHV mutation status",
+      "section": "Staging",
+      "description": "In TP53 wild-type disease, IGHV mutation status refines first-line options - specifically whether time-limited chemoimmunotherapy remains reasonable.",
+      "path": "CLL / Risk / IGHV",
+      "pills": [
+        "IGHV"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "unmut",
+          "label": "IGHV unmutated",
+          "sets": {
+            "biomarkers.IGHV": "unmutated"
+          },
+          "pills": [
+            "IGHV unmut"
+          ]
+        },
+        {
+          "id": "mut",
+          "label": "IGHV mutated",
+          "sets": {
+            "biomarkers.IGHV": "mutated"
+          },
+          "pills": [
+            "IGHV mut"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fl_unmut",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "IGHV-unmutated regimen",
+      "title": "First-line, TP53-WT / IGHV-unmutated: regimen choice",
+      "section": "Treatment",
+      "description": "IGHV-unmutated disease favors targeted therapy over chemoimmunotherapy; choose continuous BTK inhibition or fixed-duration venetoclax-obinutuzumab.",
+      "path": "CLL / First-line / IGHV-unmutated",
+      "pills": [
+        "IGHV unmut"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "btki",
+          "label": "Covalent BTK inhibitor (continuous)",
+          "sets": {
+            "regimen": "btki"
+          },
+          "pills": [
+            "BTKi"
+          ]
+        },
+        {
+          "id": "veno",
+          "label": "Venetoclax-obinutuzumab (fixed duration)",
+          "sets": {
+            "regimen": "veno"
+          },
+          "pills": [
+            "VenO"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_unmut_btki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IGHV-unmut - BTKi",
+      "title": "First-line IGHV-unmutated: continuous BTK inhibitor",
+      "section": "Treatment",
+      "description": "Continuous covalent BTK inhibition, preferred class for the tolerability profile.",
+      "path": "CLL / First-line / IGHV-unmut / BTKi",
+      "pills": [
+        "IGHV unmut",
+        "BTKi",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred over ibrutinib)",
+        "Continuous until progression or intolerance",
+        "Cardiovascular and bleeding surveillance; manage drug interactions",
+        "Avoid chemoimmunotherapy given the short benefit in IGHV-unmutated disease",
+        "Then assess response and tolerability at the next step"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib"
+      ]
+    },
+    {
+      "id": "n_tx_unmut_veno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IGHV-unmut - VenO",
+      "title": "First-line IGHV-unmutated: venetoclax-obinutuzumab (fixed duration)",
+      "section": "Treatment",
+      "description": "Fixed-duration chemotherapy-free option with high rates of undetectable measurable residual disease.",
+      "path": "CLL / First-line / IGHV-unmut / VenO",
+      "pills": [
+        "IGHV unmut",
+        "VenO",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Venetoclax + obinutuzumab, fixed-duration (approximately 12 months)",
+        "Tumor-lysis prophylaxis with staged venetoclax ramp-up",
+        "Hepatitis B reactivation prophylaxis with the anti-CD20 antibody",
+        "Time-limited course is attractive; IGHV-unmutated remissions run shorter than IGHV-mutated",
+        "Then complete-of-course response / MRD assessment at the next step"
+      ],
+      "protocolRefs": [
+        "cll-veno-obinutuzumab"
+      ]
+    },
+    {
+      "id": "n_fl_mut",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "IGHV-mutated regimen",
+      "title": "First-line, TP53-WT / IGHV-mutated: regimen choice",
+      "section": "Treatment",
+      "description": "Targeted therapy is preferred, but time-limited chemoimmunotherapy remains a reasonable option for fit, younger IGHV-mutated patients who prefer a finite course.",
+      "path": "CLL / First-line / IGHV-mutated",
+      "pills": [
+        "IGHV mut"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "btki",
+          "label": "Covalent BTK inhibitor (continuous)",
+          "sets": {
+            "regimen": "btki"
+          },
+          "pills": [
+            "BTKi"
+          ]
+        },
+        {
+          "id": "veno",
+          "label": "Venetoclax-obinutuzumab (fixed duration)",
+          "sets": {
+            "regimen": "veno"
+          },
+          "pills": [
+            "VenO"
+          ]
+        },
+        {
+          "id": "cit",
+          "label": "Chemoimmunotherapy (select fit patients)",
+          "sets": {
+            "regimen": "cit"
+          },
+          "pills": [
+            "CIT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_mut_btki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IGHV-mut - BTKi",
+      "title": "First-line IGHV-mutated: continuous BTK inhibitor",
+      "section": "Treatment",
+      "description": "Continuous covalent BTK inhibition.",
+      "path": "CLL / First-line / IGHV-mut / BTKi",
+      "pills": [
+        "IGHV mut",
+        "BTKi",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Covalent BTK inhibitor (acalabrutinib or zanubrutinib preferred)",
+        "Continuous until progression or intolerance",
+        "Cardiovascular / bleeding monitoring and interaction review",
+        "Then assess response and tolerability at the next step"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib"
+      ]
+    },
+    {
+      "id": "n_tx_mut_veno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IGHV-mut - VenO",
+      "title": "First-line IGHV-mutated: venetoclax-obinutuzumab (fixed duration)",
+      "section": "Treatment",
+      "description": "Fixed-duration chemotherapy-free therapy; IGHV-mutated disease achieves particularly durable remissions.",
+      "path": "CLL / First-line / IGHV-mut / VenO",
+      "pills": [
+        "IGHV mut",
+        "VenO",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Venetoclax + obinutuzumab, fixed-duration (approximately 12 months)",
+        "Tumor-lysis prophylaxis and staged ramp-up",
+        "Hepatitis B reactivation prophylaxis with the anti-CD20 antibody",
+        "IGHV-mutated disease typically reaches deep, durable undetectable-MRD remissions",
+        "Then complete-of-course response / MRD assessment at the next step"
+      ],
+      "protocolRefs": [
+        "cll-veno-obinutuzumab"
+      ]
+    },
+    {
+      "id": "n_tx_mut_cit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IGHV-mut - CIT",
+      "title": "First-line IGHV-mutated: chemoimmunotherapy (select patients)",
+      "section": "Treatment",
+      "description": "Time-limited chemoimmunotherapy remains an option only in young, fit, TP53-WT / IGHV-mutated patients; targeted therapy is otherwise preferred.",
+      "path": "CLL / First-line / IGHV-mut / CIT",
+      "pills": [
+        "IGHV mut",
+        "CIT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b",
+        "d"
+      ],
+      "bullets": [
+        "Fit patient: fludarabine-cyclophosphamide-rituximab (FCR) can give long remissions in IGHV-mutated disease",
+        "Less fit / older: bendamustine-rituximab (BR)",
+        "Only if TP53 wild-type; never use chemoimmunotherapy with del(17p) / TP53 mutation",
+        "Counsel on infection risk, cytopenias, and a small risk of therapy-related myeloid neoplasm; targeted therapy is the preferred alternative",
+        "Then move to supportive care and surveillance"
+      ],
+      "protocolRefs": [
+        "cll-fcr",
+        "cll-br"
+      ]
+    },
+    {
+      "id": "n_btki_course",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "BTKi response / tolerability",
+      "title": "On continuous BTK inhibitor: response and tolerability",
+      "section": "Treatment",
+      "description": "Continuous BTK inhibition is reviewed for disease response and for treatment-limiting toxicity. Most patients keep responding and continue; a minority need a within-class or mechanism switch for intolerance.",
+      "path": "CLL / First-line / BTKi / Course",
+      "pills": [
+        "BTKi",
+        "response"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Responding and tolerated - continue",
+          "sets": {
+            "btkiCourse": "continue"
+          },
+          "pills": [
+            "continue"
+          ]
+        },
+        {
+          "id": "intol",
+          "label": "Treatment-limiting toxicity - switch",
+          "sets": {
+            "btkiCourse": "intol"
+          },
+          "pills": [
+            "intolerance"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_btki_continue",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BTKi - continue",
+      "title": "Continue the covalent BTK inhibitor",
+      "section": "Treatment",
+      "description": "Disease responding and therapy tolerated: continue indefinitely with monitoring.",
+      "path": "CLL / First-line / BTKi / Continue",
+      "pills": [
+        "BTKi",
+        "continue",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Continue the covalent BTK inhibitor until progression or intolerance (partial responses deepen over time)",
+        "Ongoing cardiovascular surveillance (blood pressure, atrial fibrillation) and bleeding-risk review",
+        "Reinforce adherence; unplanned interruptions can cause transient disease flare",
+        "Recognize BTK-inhibitor treatment-related lymphocytosis as a response effect, not progression"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib"
+      ]
+    },
+    {
+      "id": "n_tx_btki_intol",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "BTKi - intolerance switch",
+      "title": "Covalent BTK-inhibitor intolerance: switch",
+      "section": "Treatment",
+      "description": "Treatment-limiting toxicity without progression: switch within class or to another mechanism.",
+      "path": "CLL / First-line / BTKi / Intolerance",
+      "pills": [
+        "BTKi",
+        "intolerance",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "bullets": [
+        "For covalent-BTK-inhibitor intolerance (not progression), switch within class (e.g. acalabrutinib <-> zanubrutinib) - many toxicities do not recur",
+        "Alternatively switch mechanism to fixed-duration venetoclax-based therapy",
+        "A non-covalent BTK inhibitor is another option for BTK-inhibitor intolerance",
+        "Distinguish intolerance from true progression before choosing (progression routes to the relapsed / refractory pathway)"
+      ],
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-veno-obinutuzumab",
+        "cll-pirtobrutinib"
+      ]
+    },
+    {
+      "id": "n_veno_response",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Post-venetoclax MRD",
+      "title": "End-of-course assessment after fixed-duration venetoclax-obinutuzumab",
+      "section": "Treatment",
+      "description": "After the fixed-duration (approximately 12-month) course, assess clinical response and, where available, measurable residual disease (MRD). Therapy stops regardless of MRD; response depth guides follow-up intensity and the expected time to relapse.",
+      "path": "CLL / First-line / VenO / Response",
+      "pills": [
+        "VenO",
+        "MRD"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e",
+        "c"
+      ],
+      "tables": [
+        {
+          "title": "End-of-course response bands after fixed-duration venetoclax",
+          "headers": [
+            "Response",
+            "MRD",
+            "Implication"
+          ],
+          "rows": [
+            [
+              "CR / CRi",
+              "Undetectable (uMRD)",
+              "Deep remission; longest expected treatment-free interval"
+            ],
+            [
+              "PR",
+              "Detectable / residual",
+              "Off-therapy per fixed design; earlier relapse expected, monitor closely"
+            ],
+            [
+              "Progression on therapy",
+              "-",
+              "Treat as relapsed / refractory (mechanism switch)"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "umrd",
+          "label": "Complete response, undetectable MRD",
+          "sets": {
+            "venoResponse": "umrd"
+          },
+          "pills": [
+            "uMRD"
+          ]
+        },
+        {
+          "id": "resid",
+          "label": "Partial response / detectable MRD",
+          "sets": {
+            "venoResponse": "resid"
+          },
+          "pills": [
+            "MRD+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_veno_umrd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "VenO - uMRD",
+      "title": "Fixed-duration venetoclax complete: undetectable MRD",
+      "section": "Treatment",
+      "description": "Deep remission after the completed fixed-duration course; stop therapy and observe.",
+      "path": "CLL / First-line / VenO / uMRD",
+      "pills": [
+        "VenO",
+        "uMRD",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Stop therapy per the fixed-duration design; do not continue venetoclax for uMRD",
+        "Longest expected treatment-free interval; standard surveillance schedule",
+        "Fixed-duration venetoclax retreatment is effective at a later relapse after a durable remission",
+        "Re-test del(17p)/TP53 only at the time of a future progression"
+      ]
+    },
+    {
+      "id": "n_tx_veno_resid",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "VenO - residual",
+      "title": "Fixed-duration venetoclax complete: partial response / detectable MRD",
+      "section": "Treatment",
+      "description": "Residual disease after the completed course; therapy still stops, with closer monitoring for earlier relapse.",
+      "path": "CLL / First-line / VenO / Residual",
+      "pills": [
+        "VenO",
+        "MRD+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Off-therapy per the fixed-duration design; detectable MRD does not by itself mandate more treatment",
+        "Monitor more closely - detectable MRD predicts an earlier relapse",
+        "Plan the next line (BTK inhibitor or venetoclax-based therapy) for when iwCLL progression criteria are met",
+        "Re-test del(17p)/TP53 at the time of clinical progression"
+      ]
+    },
+    {
+      "id": "n_supportive",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Supportive care",
+      "title": "Supportive care during / after therapy",
+      "section": "Treatment",
+      "description": "Supportive-care measures apply across all first-line regimens.",
+      "path": "CLL / Supportive care",
+      "pills": [
+        "supportive"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Infection prophylaxis per regimen (antiviral, and PJP prophylaxis with purine-analog or steroid exposure)",
+        "Vaccinate (non-live); avoid live vaccines; expect blunted responses on anti-CD20 therapy",
+        "Manage treatment-emergent autoimmune cytopenias; recognize tumor flare / lymphocytosis with BTK inhibitors",
+        "Tumor-lysis monitoring during venetoclax ramp-up; cardiovascular monitoring on BTK inhibitors"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Response assessment and surveillance",
+      "section": "Surveillance",
+      "description": "Assess response and follow after first-line therapy.",
+      "path": "CLL / Surveillance",
+      "pills": [
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Assess response by iwCLL criteria (exam, CBC); routine marrow and CT only if needed to confirm complete remission or clarify cytopenias",
+        "Follow-up history, exam and CBC every 3-6 months",
+        "Watch for autoimmune cytopenias and second cancers (skin surveillance)",
+        "At clinical relapse, re-test del(17p)/TP53 and re-stage before choosing next-line therapy"
+      ],
+      "linkTo": "n_rr_workup",
+      "linkLabel": "On relapse: enter the relapsed / refractory pathway"
+    },
+    {
+      "id": "n_rr_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Relapse workup",
+      "title": "Relapsed / refractory: reassessment",
+      "section": "Recurrence",
+      "description": "At relapse, re-confirm progression and repeat molecular testing; exclude Richter transformation before selecting therapy.",
+      "path": "CLL / Relapse / Workup",
+      "pills": [
+        "R/R",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Confirm progression by iwCLL criteria; distinguish true progression from BTK-inhibitor tumor flare",
+        "Repeat FISH del(17p) and TP53 sequencing (clonal evolution is common at relapse)",
+        "Assess for Richter transformation: rapid nodal growth, high LDH, B-symptoms, discordant PET avidity -> biopsy the most avid site",
+        "Review the prior regimen, response depth and duration, and reason for stopping (progression vs intolerance)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Reassessment complete - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_rr_priortx",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Prior therapy",
+      "title": "Relapsed / refractory: prior therapy class",
+      "section": "Recurrence",
+      "description": "Next-line therapy is chosen to switch mechanism relative to the prior regimen.",
+      "path": "CLL / Relapse / Prior therapy",
+      "pills": [
+        "R/R"
+      ],
+      "required": true,
+      "tables": [
+        {
+          "title": "Mechanism-switch sequencing at relapse",
+          "headers": [
+            "Prior class",
+            "Preferred next class",
+            "Later options"
+          ],
+          "rows": [
+            [
+              "Covalent BTK inhibitor",
+              "Venetoclax-based",
+              "Non-covalent BTKi; CAR-T / allo"
+            ],
+            [
+              "Fixed-duration venetoclax",
+              "BTK inhibitor (covalent if naive)",
+              "Venetoclax retreatment; cellular therapy"
+            ],
+            [
+              "Chemoimmunotherapy",
+              "BTK inhibitor or venetoclax-based",
+              "Alternate targeted class"
+            ]
+          ]
+        }
+      ],
+      "options": [
+        {
+          "id": "prior_btki",
+          "label": "Progressed on / after a covalent BTK inhibitor",
+          "sets": {
+            "priorTx": "btki"
+          },
+          "pills": [
+            "post-BTKi"
+          ]
+        },
+        {
+          "id": "prior_veno",
+          "label": "Progressed after fixed-duration venetoclax",
+          "sets": {
+            "priorTx": "veno"
+          },
+          "pills": [
+            "post-venetoclax"
+          ]
+        },
+        {
+          "id": "prior_cit",
+          "label": "Progressed after chemoimmunotherapy",
+          "sets": {
+            "priorTx": "cit"
+          },
+          "pills": [
+            "post-CIT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rr_postbtki",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "After BTKi",
+      "title": "Relapse after a covalent BTK inhibitor: next class",
+      "section": "Recurrence",
+      "description": "After progression on a covalent BTK inhibitor, switch mechanism to venetoclax-based therapy, a non-covalent BTK inhibitor, or cellular therapy in multiply-refractory disease.",
+      "path": "CLL / Relapse / Post-BTKi",
+      "pills": [
+        "post-BTKi"
+      ],
+      "required": true,
+      "footnotes": [
+        "b",
+        "c",
+        "g"
+      ],
+      "options": [
+        {
+          "id": "veno",
+          "label": "Venetoclax-based therapy",
+          "sets": {
+            "nextTx": "veno"
+          },
+          "pills": [
+            "venetoclax"
+          ]
+        },
+        {
+          "id": "ncbtki",
+          "label": "Non-covalent BTK inhibitor",
+          "sets": {
+            "nextTx": "ncbtki"
+          },
+          "pills": [
+            "pirtobrutinib"
+          ]
+        },
+        {
+          "id": "cart",
+          "label": "CAR-T / allogeneic transplant (double-refractory)",
+          "sets": {
+            "nextTx": "cellular"
+          },
+          "pills": [
+            "cellular"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rr_veno_after_btki",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Venetoclax after BTKi",
+      "title": "Post-BTKi: venetoclax-based therapy",
+      "section": "Recurrence",
+      "description": "Switching to venetoclax (with or without an anti-CD20 antibody) after covalent BTK-inhibitor failure.",
+      "path": "CLL / Relapse / Post-BTKi / Venetoclax",
+      "pills": [
+        "post-BTKi",
+        "venetoclax",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Venetoclax +/- rituximab; effective after BTK-inhibitor progression (non-cross-resistant mechanism)",
+        "Tumor-lysis risk assessment and weekly ramp-up",
+        "Consider continuous vs fixed-duration by prior exposure and remission depth",
+        "On later progression, a non-covalent BTK inhibitor or cellular therapy is the next step"
+      ],
+      "linkTo": "n_cart",
+      "linkLabel": "If subsequently double-refractory: consider cellular therapy",
+      "protocolRefs": [
+        "cll-venetoclax-rituximab"
+      ]
+    },
+    {
+      "id": "n_tx_rr_pirto",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-covalent BTKi",
+      "title": "Post-BTKi: non-covalent BTK inhibitor",
+      "section": "Recurrence",
+      "description": "A non-covalent (reversible) BTK inhibitor retains activity after covalent BTK-inhibitor failure, including with BTK C481 resistance mutations.",
+      "path": "CLL / Relapse / Post-BTKi / Non-covalent",
+      "pills": [
+        "post-BTKi",
+        "pirtobrutinib",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "g"
+      ],
+      "bullets": [
+        "Non-covalent BTK inhibitor (e.g. pirtobrutinib) - active after covalent BTK-inhibitor progression or intolerance",
+        "Useful bridge when venetoclax is unsuitable or already used",
+        "Continue until progression or intolerance",
+        "Then reassess response versus further progression at the next step"
+      ],
+      "protocolRefs": [
+        "cll-pirtobrutinib"
+      ]
+    },
+    {
+      "id": "n_ncbtki_prog",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "name": "Non-covalent BTKi course",
+      "title": "On a non-covalent BTK inhibitor: response vs further progression",
+      "section": "Recurrence",
+      "description": "Progression on a non-covalent BTK inhibitor after prior covalent BTK-inhibitor and (usually) venetoclax defines multiply-refractory disease, where cellular therapy and trials take priority.",
+      "path": "CLL / Relapse / Non-covalent / Course",
+      "pills": [
+        "pirtobrutinib",
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "g"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Responding - continue",
+          "sets": {
+            "ncCourse": "continue"
+          },
+          "pills": [
+            "continue"
+          ]
+        },
+        {
+          "id": "progress",
+          "label": "Progression (class-refractory)",
+          "sets": {
+            "ncCourse": "progress"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ncbtki_continue",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Non-covalent BTKi - continue",
+      "title": "Continue the non-covalent BTK inhibitor",
+      "section": "Recurrence",
+      "description": "Ongoing response on a non-covalent BTK inhibitor.",
+      "path": "CLL / Relapse / Non-covalent / Continue",
+      "pills": [
+        "pirtobrutinib",
+        "continue",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Continue the non-covalent BTK inhibitor until progression or intolerance",
+        "Monitor blood counts, infection and bleeding risk",
+        "Enroll on a clinical trial where available given the limited later-line options",
+        "Plan cellular therapy as the subsequent step if disease later progresses"
+      ],
+      "protocolRefs": [
+        "cll-pirtobrutinib"
+      ]
+    },
+    {
+      "id": "n_cart",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Cellular therapy",
+      "title": "Double-refractory: CAR-T / allogeneic transplant",
+      "section": "Recurrence",
+      "description": "For disease refractory to both BTK inhibitors and venetoclax, consider cellular therapy in appropriate candidates.",
+      "path": "CLL / Relapse / Cellular",
+      "pills": [
+        "cellular",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "bullets": [
+        "CD19 CAR-T is an option for BTK-inhibitor and venetoclax double-refractory CLL in fit patients",
+        "Allogeneic transplant for selected younger, fit patients with high-risk refractory disease",
+        "Enroll on a clinical trial where available",
+        "Coordinate at a cellular-therapy / transplant center"
+      ]
+    },
+    {
+      "id": "n_tx_rr_postveno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "After venetoclax",
+      "title": "Relapse after fixed-duration venetoclax",
+      "section": "Recurrence",
+      "description": "After a fixed-duration venetoclax course, options depend on remission duration and prior BTK-inhibitor exposure.",
+      "path": "CLL / Relapse / Post-venetoclax",
+      "pills": [
+        "post-venetoclax",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "BTK inhibitor (covalent if BTK-inhibitor-naive; otherwise non-covalent) as the mechanism switch",
+        "Venetoclax retreatment is reasonable after a long remission from a prior fixed-duration course",
+        "Re-test TP53; consider CAR-T / transplant if also BTK-inhibitor-refractory",
+        "Clinical trial where available"
+      ],
+      "linkTo": "n_cart",
+      "linkLabel": "If also BTK-inhibitor-refractory: consider cellular therapy",
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-pirtobrutinib",
+        "cll-venetoclax-rituximab"
+      ]
+    },
+    {
+      "id": "n_tx_rr_postcit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "After chemoimmunotherapy",
+      "title": "Relapse after chemoimmunotherapy",
+      "section": "Recurrence",
+      "description": "After prior chemoimmunotherapy, switch to targeted therapy; do not repeat chemoimmunotherapy.",
+      "path": "CLL / Relapse / Post-CIT",
+      "pills": [
+        "post-CIT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Continuous covalent BTK inhibitor, or fixed-duration venetoclax +/- rituximab",
+        "Choose by comorbidity, prior toxicity and patient preference for continuous vs time-limited therapy",
+        "Re-test del(17p)/TP53 - clonal evolution is common after chemoimmunotherapy",
+        "Avoid re-treating with chemoimmunotherapy"
+      ],
+      "linkTo": "n_rr_postbtki",
+      "linkLabel": "On a further relapse: follow the mechanism-switch sequencing",
+      "protocolRefs": [
+        "cll-acalabrutinib",
+        "cll-venetoclax-rituximab"
+      ]
+    },
+    {
+      "id": "n_richter_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Richter workup",
+      "title": "Suspected Richter transformation: workup",
+      "section": "Recurrence",
+      "description": "Confirm transformation histologically before changing strategy - the treatment and prognosis differ sharply from CLL.",
+      "path": "CLL / Richter / Workup",
+      "pills": [
+        "Richter",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "PET-CT to identify the most metabolically avid site (high SUV suggests transformation)",
+        "Excisional or core biopsy of the most avid node to confirm diffuse large B-cell (or, rarely, Hodgkin) histology",
+        "Establish clonal relationship to the CLL where feasible (clonally related disease carries a worse prognosis)",
+        "Baseline staging, LDH, and performance status"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Transformation confirmed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_richter_histo",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Richter histology",
+      "title": "Confirmed transformation: histology",
+      "section": "Recurrence",
+      "description": "Treatment and prognosis diverge by the transformed histology. Diffuse large B-cell lymphoma (DLBCL) is the common, aggressive form; the Hodgkin variant has a better outlook and is treated with Hodgkin-directed therapy.",
+      "path": "CLL / Richter / Histology",
+      "pills": [
+        "Richter",
+        "histology"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "dlbcl",
+          "label": "DLBCL-type Richter",
+          "sets": {
+            "richterHisto": "dlbcl"
+          },
+          "pills": [
+            "DLBCL"
+          ]
+        },
+        {
+          "id": "hodgkin",
+          "label": "Hodgkin-variant Richter",
+          "sets": {
+            "richterHisto": "hodgkin"
+          },
+          "pills": [
+            "Hodgkin"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_richter_hl",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Hodgkin-variant Richter",
+      "title": "Hodgkin-variant Richter: Hodgkin-directed therapy",
+      "section": "Recurrence",
+      "description": "Hodgkin-variant transformation is treated as classic Hodgkin lymphoma and has a more favorable prognosis than DLBCL-type Richter.",
+      "path": "CLL / Richter / Hodgkin",
+      "pills": [
+        "Richter",
+        "Hodgkin",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Treat with Hodgkin-lymphoma-directed chemotherapy (ABVD-type), with radiation to bulky / residual sites as indicated",
+        "Better prognosis than DLBCL-type Richter",
+        "Continue supportive / infection prophylaxis and manage the underlying CLL",
+        "Prioritize a clinical trial where available"
+      ],
+      "protocolRefs": [
+        "hodgkin-abvd"
+      ]
+    },
+    {
+      "id": "n_richter_fit",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Richter fitness",
+      "title": "DLBCL-type Richter: fitness for intensive therapy / transplant",
+      "section": "Recurrence",
+      "description": "DLBCL-type Richter is treated as aggressive lymphoma. Intensity and transplant consolidation are decided by fitness and transplant eligibility.",
+      "path": "CLL / Richter / DLBCL / Fitness",
+      "pills": [
+        "Richter",
+        "DLBCL"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "fit",
+          "label": "Fit / transplant-eligible",
+          "sets": {
+            "richterFit": "fit"
+          },
+          "pills": [
+            "fit"
+          ]
+        },
+        {
+          "id": "unfit",
+          "label": "Unfit / not transplant-eligible",
+          "sets": {
+            "richterFit": "unfit"
+          },
+          "pills": [
+            "unfit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_richter_dlbcl_fit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DLBCL Richter - fit",
+      "title": "DLBCL-type Richter (fit): immunochemotherapy + transplant consolidation",
+      "section": "Recurrence",
+      "description": "Anthracycline-based immunochemotherapy with transplant consolidation in responders; enroll on a trial wherever possible.",
+      "path": "CLL / Richter / DLBCL / Fit",
+      "pills": [
+        "Richter",
+        "DLBCL",
+        "fit",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Anthracycline-based immunochemotherapy (R-CHOP-type) for the diffuse large B-cell histology",
+        "Consolidate responders with allogeneic (or autologous) transplant given the high relapse risk",
+        "Prioritize a clinical trial - outcomes with standard chemotherapy are poor, especially in clonally related disease",
+        "CNS-risk assessment and prophylaxis as for high-risk aggressive lymphoma",
+        "Continue supportive / infection prophylaxis and manage the underlying CLL"
+      ],
+      "protocolRefs": [
+        "rchop"
+      ]
+    },
+    {
+      "id": "n_tx_richter_dlbcl_unfit",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "DLBCL Richter - unfit",
+      "title": "DLBCL-type Richter (unfit): attenuated therapy / trial / palliation",
+      "section": "Recurrence",
+      "description": "For patients not eligible for intensive therapy or transplant, use attenuated immunochemotherapy or palliative-intent care, favoring a clinical trial.",
+      "path": "CLL / Richter / DLBCL / Unfit",
+      "pills": [
+        "Richter",
+        "DLBCL",
+        "unfit",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Attenuated anthracycline-based immunochemotherapy (dose-reduced R-CHOP-type), or a non-anthracycline regimen if cardiac function precludes it",
+        "Prioritize a clinical trial (including novel targeted / cellular approaches)",
+        "No transplant consolidation; emphasize palliative and best supportive care with symptom control",
+        "Continue infection prophylaxis and manage the underlying CLL"
+      ],
+      "protocolRefs": [
+        "rchop"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_p_new",
+      "from": "n_presentation",
+      "to": "n_workup",
+      "fromOptions": [
+        "newly_dx"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_p_rel",
+      "from": "n_presentation",
+      "to": "n_rr_workup",
+      "fromOptions": [
+        "relapsed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_p_rich",
+      "from": "n_presentation",
+      "to": "n_richter_workup",
+      "fromOptions": [
+        "richter"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_wk_stg",
+      "from": "n_workup",
+      "to": "n_staging",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_stg_iw",
+      "from": "n_staging",
+      "to": "n_iwcll",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_iw_watch",
+      "from": "n_iwcll",
+      "to": "n_watch",
+      "fromOptions": [
+        "watch"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_iw_treat",
+      "from": "n_iwcll",
+      "to": "n_risk",
+      "fromOptions": [
+        "treat"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_risk_tp53",
+      "from": "n_risk",
+      "to": "n_tp53_regimen",
+      "fromOptions": [
+        "tp53_abn"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_risk_wt",
+      "from": "n_risk",
+      "to": "n_ighv",
+      "fromOptions": [
+        "tp53_wt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tp53_btki",
+      "from": "n_tp53_regimen",
+      "to": "n_tx_tp53_btki",
+      "fromOptions": [
+        "btki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tp53_veno",
+      "from": "n_tp53_regimen",
+      "to": "n_tx_tp53_veno",
+      "fromOptions": [
+        "veno"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ighv_unmut",
+      "from": "n_ighv",
+      "to": "n_fl_unmut",
+      "fromOptions": [
+        "unmut"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ighv_mut",
+      "from": "n_ighv",
+      "to": "n_fl_mut",
+      "fromOptions": [
+        "mut"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unmut_btki",
+      "from": "n_fl_unmut",
+      "to": "n_tx_unmut_btki",
+      "fromOptions": [
+        "btki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unmut_veno",
+      "from": "n_fl_unmut",
+      "to": "n_tx_unmut_veno",
+      "fromOptions": [
+        "veno"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mut_btki",
+      "from": "n_fl_mut",
+      "to": "n_tx_mut_btki",
+      "fromOptions": [
+        "btki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mut_veno",
+      "from": "n_fl_mut",
+      "to": "n_tx_mut_veno",
+      "fromOptions": [
+        "veno"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mut_cit",
+      "from": "n_fl_mut",
+      "to": "n_tx_mut_cit",
+      "fromOptions": [
+        "cit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tp53b_course",
+      "from": "n_tx_tp53_btki",
+      "to": "n_btki_course",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ub_course",
+      "from": "n_tx_unmut_btki",
+      "to": "n_btki_course",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mb_course",
+      "from": "n_tx_mut_btki",
+      "to": "n_btki_course",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_course_cont",
+      "from": "n_btki_course",
+      "to": "n_tx_btki_continue",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_course_intol",
+      "from": "n_btki_course",
+      "to": "n_tx_btki_intol",
+      "fromOptions": [
+        "intol"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_btkicont_sup",
+      "from": "n_tx_btki_continue",
+      "to": "n_supportive",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_btkiintol_sup",
+      "from": "n_tx_btki_intol",
+      "to": "n_supportive",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_tp53v_resp",
+      "from": "n_tx_tp53_veno",
+      "to": "n_veno_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_uv_resp",
+      "from": "n_tx_unmut_veno",
+      "to": "n_veno_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mv_resp",
+      "from": "n_tx_mut_veno",
+      "to": "n_veno_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_umrd",
+      "from": "n_veno_response",
+      "to": "n_tx_veno_umrd",
+      "fromOptions": [
+        "umrd"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_resid",
+      "from": "n_veno_response",
+      "to": "n_tx_veno_resid",
+      "fromOptions": [
+        "resid"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_umrd_sup",
+      "from": "n_tx_veno_umrd",
+      "to": "n_supportive",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resid_sup",
+      "from": "n_tx_veno_resid",
+      "to": "n_supportive",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_mc_sup",
+      "from": "n_tx_mut_cit",
+      "to": "n_supportive",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_sup_surv",
+      "from": "n_supportive",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_surv_rr",
+      "from": "n_surveillance",
+      "to": "n_rr_workup",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rrwk_prior",
+      "from": "n_rr_workup",
+      "to": "n_rr_priortx",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_btki",
+      "from": "n_rr_priortx",
+      "to": "n_rr_postbtki",
+      "fromOptions": [
+        "prior_btki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_veno",
+      "from": "n_rr_priortx",
+      "to": "n_tx_rr_postveno",
+      "fromOptions": [
+        "prior_veno"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_prior_cit",
+      "from": "n_rr_priortx",
+      "to": "n_tx_rr_postcit",
+      "fromOptions": [
+        "prior_cit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pbtki_veno",
+      "from": "n_rr_postbtki",
+      "to": "n_tx_rr_veno_after_btki",
+      "fromOptions": [
+        "veno"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pbtki_nc",
+      "from": "n_rr_postbtki",
+      "to": "n_tx_rr_pirto",
+      "fromOptions": [
+        "ncbtki"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pbtki_cart",
+      "from": "n_rr_postbtki",
+      "to": "n_cart",
+      "fromOptions": [
+        "cart"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pirto_prog",
+      "from": "n_tx_rr_pirto",
+      "to": "n_ncbtki_prog",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ncprog_cont",
+      "from": "n_ncbtki_prog",
+      "to": "n_tx_ncbtki_continue",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ncprog_cart",
+      "from": "n_ncbtki_prog",
+      "to": "n_cart",
+      "fromOptions": [
+        "progress"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rich_histo",
+      "from": "n_richter_workup",
+      "to": "n_richter_histo",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rhisto_dlbcl",
+      "from": "n_richter_histo",
+      "to": "n_richter_fit",
+      "fromOptions": [
+        "dlbcl"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rhisto_hl",
+      "from": "n_richter_histo",
+      "to": "n_tx_richter_hl",
+      "fromOptions": [
+        "hodgkin"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rfit_fit",
+      "from": "n_richter_fit",
+      "to": "n_tx_richter_dlbcl_fit",
+      "fromOptions": [
+        "fit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rfit_unfit",
+      "from": "n_richter_fit",
+      "to": "n_tx_richter_dlbcl_unfit",
+      "fromOptions": [
+        "unfit"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}

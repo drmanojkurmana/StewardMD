@@ -1,0 +1,122 @@
+{
+  "id": "panc-gem-nab",
+  "diseaseId": "pancreatic_cancer",
+  "name": "Gemcitabine + nab-Paclitaxel (MPACT)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative",
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "Continue until progression or unacceptable toxicity; 6 cycles shown as a planning default. Used first-line (moderate performance status), as neoadjuvant when a triplet is not tolerable, and as a gemcitabine-based second line after FOLFIRINOX.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The gemcitabine/nab-paclitaxel cytotoxic backbone is not biomarker-restricted. Germline BRCA1/2 and PALB2, and tumor MSI/MMR, NTRK, KRAS and HER2 are tested to direct platinum, PARP-inhibitor, immunotherapy or targeted options, not to select this backbone."
+  },
+  "stage": [
+    "metastatic",
+    "locally advanced/unresectable",
+    "neoadjuvant"
+  ],
+  "treatmentSetting": [
+    "metastatic",
+    "neoadjuvant"
+  ],
+  "histology": "pancreatic adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "moderate emetic risk; give guideline-tier antiemetic prophylaxis before gemcitabine + nab-paclitaxel."
+    }
+  ],
+  "supportiveCare": [
+    "Monitor for myelosuppression (neutropenia, thrombocytopenia, anaemia); hold or reduce for cytopenias on a treatment day.",
+    "Assess peripheral neuropathy each cycle (nab-paclitaxel); dose-reduce or hold for grade 2 or higher.",
+    "No routine steroid/antihistamine premedication is required for nab-paclitaxel (albumin-bound, solvent-free)."
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1, 8, 15) - myelosuppression",
+    "peripheral neuropathy assessment each cycle",
+    "liver and renal function before each cycle",
+    "CA 19-9 and imaging to assess response"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "neutropenia, thrombocytopenia, or grade 2+ neuropathy on a treatment day",
+      "action": "hold/reduce",
+      "text": "Review required. Hold day 8 or 15 for cytopenias and reduce nab-paclitaxel (and gemcitabine) at the next cycle per protocol; dose-reduce nab-paclitaxel for peripheral neuropathy. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nab-paclitaxel",
+      "name": "nab-Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 125,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "nab-Paclitaxel (albumin-bound) 125 mg/m2 IV on days 1, 8 and 15 of a 28-day cycle, given before gemcitabine. Dose per the MPACT metastatic pancreatic regimen; reduce for neuropathy or cytopenias. Source: standard of care per NCCN Pancreatic Adenocarcinoma / DeVita general reference (own wording).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+        "version": null,
+        "date": null,
+        "locator": "gemcitabine + nab-paclitaxel (MPACT); own wording",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Gemcitabine 1,000 mg/m2 IV on days 1, 8 and 15 of a 28-day cycle, given after nab-paclitaxel. Hold on a treatment day for cytopenias. Source: standard of care per NCCN Pancreatic Adenocarcinoma / DeVita general reference (own wording).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+        "version": null,
+        "date": null,
+        "locator": "gemcitabine + nab-paclitaxel (MPACT); own wording",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    }
+  ]
+}

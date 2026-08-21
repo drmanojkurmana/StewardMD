@@ -1,0 +1,89 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), NSCLC",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "fasting lipid panel",
+    "neurocognitive/mood assessment"
+  ],
+  "clearanceChecks": [
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [],
+  "id": "lung-lorlatinib",
+  "diseaseId": "nsclc",
+  "name": "Lorlatinib (next-generation ALK/ROS1 inhibitor)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "supportiveCare": [
+    "Continuous oral dosing until progression or unacceptable toxicity.",
+    "Monitor lipids, mood/cognitive effects (CNS), and weight."
+  ],
+  "drugs": [
+    {
+      "id": "lorlatinib",
+      "name": "Lorlatinib",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Lorlatinib 100 mg PO once daily, continuous, as a resistance-guided next-generation inhibitor after earlier ALK/ROS1 TKIs (repotrectinib is an alternative in ROS1-rearranged disease). Flat oral dose modeled per day of the cycle. My own wording.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), NSCLC",
+        "version": "current",
+        "date": null,
+        "locator": "resistance-guided next-generation ALK/ROS1 inhibitor (lorlatinib 100 mg daily)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

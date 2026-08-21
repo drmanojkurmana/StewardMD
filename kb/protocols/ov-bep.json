@@ -1,0 +1,70 @@
+{
+  "id": "ov-bep",
+  "diseaseId": "ovarian_cancer",
+  "name": "BEP (Bleomycin / Etoposide / Cisplatin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "cyclesNote": "3-4 cycles depending on stage/risk for malignant ovarian germ-cell tumors.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian germ-cell tumors (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT germ-cell backbone authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Cisplatin is highly emetogenic; use a 3-drug (NK1 + 5HT3 + steroid) regimen." },
+    { "name": "Hydration", "notes": "Vigorous pre- and post-cisplatin IV hydration with magnesium/potassium repletion to protect renal function." }
+  ],
+  "supportiveCare": [
+    "Bleomycin pulmonary toxicity: baseline and periodic pulmonary assessment, track cumulative bleomycin dose, and stop for early interstitial changes.",
+    "Cisplatin nephro-, oto- and neurotoxicity: audiometry and renal monitoring; consider growth-factor support for neutropenia."
+  ],
+  "monitoring": [
+    "CBC before each cycle and mid-cycle",
+    "renal function and electrolytes before each cisplatin dose",
+    "pulmonary symptoms/exam before each bleomycin dose",
+    "tumor markers (AFP, beta-hCG, LDH) each cycle"
+  ],
+  "drugs": [
+    {
+      "id": "bleomycin",
+      "name": "Bleomycin",
+      "basis": "flat",
+      "dosePerUnit": 30,
+      "unit": "units",
+      "route": "IV",
+      "days": [1, 8, 15],
+      "caps": { "perDose": null },
+      "notes": "Bleomycin 30 units IV weekly on days 1, 8 and 15 each 21-day cycle. Track cumulative lifetime dose and monitor for pulmonary toxicity; hold for early interstitial change. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3, 4, 5],
+      "caps": { "perDose": null },
+      "notes": "Etoposide 100 mg/m2 IV on days 1-5 every 21 days. Myelosuppressive; small long-term secondary-leukemia risk. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    },
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin",
+      "basis": "bsa",
+      "dosePerUnit": 20,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3, 4, 5],
+      "caps": { "perDose": null },
+      "notes": "Cisplatin 20 mg/m2 IV on days 1-5 every 21 days with vigorous hydration. Nephro-, oto- and neurotoxic; monitor renal function, electrolytes and audiometry. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

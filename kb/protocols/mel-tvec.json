@@ -1,0 +1,78 @@
+{
+  "id": "mel-tvec",
+  "diseaseId": "cutaneous_melanoma",
+  "name": "T-VEC (talimogene laherparepvec)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 12,
+  "cyclesNote": "Intralesional oncolytic immunotherapy for injectable cutaneous, subcutaneous, and nodal melanoma lesions (unresectable stage IIIB to IVM1a in-transit / satellite disease). First injection at the lower concentration; a second injection follows about 3 weeks later, then injections continue at the higher concentration every 2 weeks for at least 6 months, and beyond that until no injectable lesions remain, complete response, disease progression requiring another therapy, or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Melanoma: Cutaneous",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Genetically modified herpes-simplex-1 oncolytic immunotherapy expressing GM-CSF, injected directly into accessible melanoma lesions for local and locoregional control. No companion biomarker is required and it is used regardless of BRAF status. Selection is anatomic (injectable in-transit / satellite / nodal disease) rather than molecular."
+  },
+  "stage": [
+    "IIIB",
+    "IIIC",
+    "IIID",
+    "IV M1a (injectable in-transit / satellite / nodal)"
+  ],
+  "treatmentSetting": [
+    "locoregional",
+    "metastatic"
+  ],
+  "histology": "cutaneous melanoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Herpetic precautions: cover injection sites with an occlusive dressing; caregivers and clinicians handling the product should use gloves and eye protection; avoid direct contact for immunosuppressed or pregnant household contacts.",
+    "Aciclovir or other anti-herpetic agents can reduce T-VEC efficacy; if a herpetic infection is treated, note the potential interaction.",
+    "Manage common flu-like symptoms (fever, chills, fatigue) and injection-site pain symptomatically."
+  ],
+  "monitoring": [
+    "clinical assessment of injected and non-injected lesions for local and locoregional response before each injection",
+    "review for herpetic lesions in the patient and close contacts",
+    "flu-like symptom and injection-site review"
+  ],
+  "clearanceChecks": [
+    "immune status",
+    "active herpetic infection",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "no remaining injectable lesions but not yet complete response",
+      "drug": "talimogene-laherparepvec",
+      "action": "continue/reassess",
+      "text": "Continue therapy for at least 6 months; if all injectable lesions have resolved, hold and reassess, resuming if new injectable lesions appear. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "talimogene-laherparepvec",
+      "name": "Talimogene laherparepvec (T-VEC)",
+      "basis": "flat",
+      "dosePerUnit": 4,
+      "unit": "mL",
+      "route": "IT",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Intralesional (intratumoral) injection, total volume up to 4 mL per treatment distributed across lesions by lesion size. First dose at 10^6 (1 million) PFU/mL. Second dose about 3 weeks later, and all subsequent doses every 2 weeks, at 10^8 (100 million) PFU/mL. Volume per lesion is size-directed (roughly: >5 cm up to 4 mL; 2.5 to 5 cm up to 2 mL; 1.5 to 2.5 cm up to 1 mL; 0.5 to 1.5 cm up to 0.5 mL; <0.5 cm up to 0.1 mL). Dose here is expressed as maximum injected volume, not a body-size calculation; the concentration and per-lesion volume are the operative parameters. Own-wording summary of standard prescribing; not a verbatim label copy."
+    }
+  ]
+}

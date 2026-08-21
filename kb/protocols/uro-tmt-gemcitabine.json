@@ -1,0 +1,76 @@
+{
+  "id": "uro-tmt-gemcitabine",
+  "diseaseId": "bladder_cancer",
+  "name": "Low-dose gemcitabine radiosensitizer with concurrent radiation (bladder trimodality)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "cyclesNote": "Low-dose gemcitabine as a radiosensitizer given weekly (or twice weekly) through the external-beam radiation course of bladder-preserving trimodality therapy; number of doses tracks the radiation schedule.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "none",
+    "note": "Low-dose gemcitabine is a cisplatin-free radiosensitizing option during bladder-preserving trimodality therapy, an alternative when cisplatin is unsuitable."
+  },
+  "stage": ["cT2-T4a N0 M0 (selected, bladder preservation)"],
+  "treatmentSetting": "concurrent chemoradiation (trimodality)",
+  "histology": "urothelial carcinoma (muscle-invasive)",
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Low-emetogenic prophylaxis on chemotherapy days." }
+  ],
+  "supportiveCare": [
+    "Deliver gemcitabine on radiation-treatment days; coordinate timing with radiation.",
+    "Monitor for myelosuppression and radiation cystitis/proctitis.",
+    "Restaging cystoscopy + biopsy after chemoradiation; salvage cystectomy for non-response."
+  ],
+  "monitoring": [
+    "CBC before each dose (myelosuppression)",
+    "renal / liver function periodically",
+    "radiation cystitis / proctitis during the course"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-dose tolerance"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "significant cytopenia during chemoradiation",
+      "drug": "gemcitabine",
+      "action": "hold/reduce",
+      "text": "Hold or reduce gemcitabine for myelosuppression; radiation generally continues. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 27,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 4],
+      "caps": { "perDose": null },
+      "notes": "Low-dose gemcitabine 27 mg/m2 IV twice weekly as a radiosensitizer during RT. An alternative schedule is gemcitabine about 100 mg/m2 IV once weekly during RT. Radiosensitizing doses are far below systemic chemotherapy dosing. Own wording; standard reference dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of bladder preservation - low-dose gemcitabine radiosensitization",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

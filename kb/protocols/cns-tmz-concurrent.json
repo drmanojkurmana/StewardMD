@@ -1,0 +1,46 @@
+{
+  "id": "cns-tmz-concurrent",
+  "diseaseId": "cns_cancer",
+  "name": "Temozolomide, concurrent with radiation (Stupp concurrent phase)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 42,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Central Nervous System Cancers (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "temozolomide is low-to-moderate emetic risk; a serotonin (5-HT3) antagonist about an hour before each dose is usually sufficient." }
+  ],
+  "supportiveCare": [
+    "Pneumocystis (PJP) prophylaxis during the concurrent daily phase because of prolonged lymphopenia (for example co-trimoxazole on a physician-set schedule).",
+    "Take on an empty stomach at a consistent time to limit nausea; give with radiation on radiation days.",
+    "Steroid and anti-seizure medication as clinically needed; not routine for all patients."
+  ],
+  "monitoring": [
+    "CBC weekly during the concurrent phase (watch for lymphopenia and thrombocytopenia)",
+    "Liver function periodically",
+    "Neurologic status and post-radiation MRI to distinguish pseudoprogression from true progression"
+  ],
+  "drugs": [
+    {
+      "id": "temozolomide",
+      "name": "Temozolomide",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "75 mg/m2 by mouth once daily, every day (7 days per week) throughout the focal radiation course (about 6 weeks / 42 days), then a treatment break before adjuvant cycles. Concurrent daily dosing; day marker [1] denotes the start of a continuous daily schedule. Standard Stupp concurrent-phase dose (NCCN CNS / DeVita, general reference; own wording)."
+    }
+  ]
+}

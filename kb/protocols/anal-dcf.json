@@ -1,0 +1,128 @@
+{
+  "id": "anal-dcf",
+  "diseaseId": "anal_cancer",
+  "name": "Modified DCF (DOCEtaxel + CISplatin + Fluorouracil) (metastatic anal SCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 8,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Anal Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "The modified docetaxel/cisplatin/fluorouracil triplet is an intensive first-line option for metastatic anal squamous cell carcinoma in very fit patients, offering high response rates at the cost of greater toxicity than a platinum doublet. No routine molecular biomarker gate for regimen selection; DPYD testing advised before fluoropyrimidine exposure. General reference: Standard Guidelines (NCCN) / DeVita."
+  },
+  "stage": [
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "DOCEtaxel premedication",
+      "notes": "Corticosteroid premedication per docetaxel labeling to reduce hypersensitivity and fluid retention."
+    },
+    {
+      "name": "Cisplatin hydration + antiemetics",
+      "notes": "Pre- and post-cisplatin IV hydration with magnesium/potassium repletion; highly emetogenic antiemetic prophylaxis on treatment days."
+    }
+  ],
+  "supportiveCare": [
+    "Modified DCF given every 2 weeks (14-day cycle) for up to 8 cycles, the dose-attenuated schedule chosen to improve tolerability over classic 3-weekly DCF.",
+    "Prophylactic myeloid growth factor support is recommended given the febrile-neutropenia risk of the triplet.",
+    "Fluoropyrimidine DPYD testing before starting (FDA boxed warning).",
+    "Assess peripheral neuropathy (cisplatin/docetaxel) each cycle."
+  ],
+  "monitoring": [
+    "CBC before each cycle and around nadir",
+    "renal function, magnesium, and potassium before each cisplatin dose",
+    "peripheral neuropathy and hearing assessment (cumulative cisplatin)",
+    "fluid retention / edema (docetaxel)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status",
+    "DPYD status (fluoropyrimidine)"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 neutropenia, febrile neutropenia, or renal impairment",
+      "drug": "docetaxel/cisplatin/fluorouracil",
+      "action": "hold/reduce",
+      "text": "Delay and dose-reduce the triplet for cytopenias or declining renal function; add or intensify growth-factor support. Clinical review required."
+    },
+    {
+      "condition": "known DPYD deficiency",
+      "drug": "fluorouracil",
+      "action": "reduce/avoid",
+      "text": "Reduce dose or avoid fluorouracil in DPYD-deficient patients per FDA boxed warning; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "DOCEtaxel",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "DOCEtaxel 40 mg/m2 IV on day 1 of a 14-day cycle (modified DCF schedule). Requires corticosteroid premedication. ISMP tall-man: DOCEtaxel (distinguish from PACLitaxel). General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "CISplatin 40 mg/m2 IV on day 1 of a 14-day cycle (modified DCF schedule), with vigorous hydration and electrolyte repletion. ISMP tall-man: CISplatin (distinguish from CARBOplatin). General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil (continuous infusion)",
+      "basis": "bsa",
+      "dosePerUnit": 1200,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion (per day)",
+      "days": [
+        1,
+        2
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "roundingRule": {
+        "increment": 50
+      },
+      "notes": "Fluorouracil 1200 mg/m2/day by continuous IV infusion on days 1 and 2 (total 2400 mg/m2 over 46 hours) of a 14-day cycle, the modified DCF schedule. DPYD testing advised before starting (FDA boxed warning). General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    }
+  ]
+}

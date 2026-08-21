@@ -1,0 +1,100 @@
+{
+  "id": "hcc-regorafenib",
+  "diseaseId": "hcc_cancer",
+  "name": "Regorafenib (single-agent oral multikinase inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Second-line after tolerated progression on sorafenib. 160 mg once daily for the first 3 weeks of each 4-week cycle (days 1 to 21), then 1 week off (days 22 to 28). Repeat until progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Hand-foot skin reaction: prophylactic skin care and dose-modify per labeling (highest incidence in the first cycle).",
+    "Blood pressure control; monitor liver function closely (risk of severe hepatotoxicity)."
+  ],
+  "monitoring": [
+    "liver function tests (frequent, especially first 2 months - hepatotoxicity risk)",
+    "blood pressure at baseline and during therapy",
+    "hand-foot skin reaction assessment",
+    "liver function and AFP trend"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "blood pressure",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2-3 hand-foot skin reaction or other significant toxicity",
+      "drug": "regorafenib",
+      "action": "reduce",
+      "text": "Interrupt and dose-reduce stepwise (e.g. to 120 mg then 80 mg once daily) per labeling; clinical review."
+    },
+    {
+      "condition": "significant transaminase or bilirubin rise",
+      "drug": "regorafenib",
+      "action": "hold",
+      "text": "Hold for hepatotoxicity and reassess per labeling; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "regorafenib",
+      "name": "Regorafenib",
+      "basis": "flat",
+      "dosePerUnit": 160,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Regorafenib 160 mg PO once daily on days 1 to 21 of a 28-day cycle (3 weeks on, 1 week off). Second-line oral multikinase inhibitor for advanced HCC after tolerated progression on sorafenib, Child-Pugh A. Authored from standard practice (NCCN Hepatocellular Carcinoma; RESORCE supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "regorafenib, second-line post-sorafenib advanced HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": [],
+      "frequency": "once daily (3 weeks on, 1 week off)"
+    }
+  ]
+}

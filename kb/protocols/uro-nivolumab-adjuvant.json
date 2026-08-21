@@ -1,0 +1,93 @@
+{
+  "id": "uro-nivolumab-adjuvant",
+  "diseaseId": "bladder_cancer",
+  "name": "Nivolumab (adjuvant, single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 26,
+  "cyclesNote": "Adjuvant intent: continued for about 1 year (or until recurrence / unacceptable toxicity). A 480 mg every-4-weeks schedule is an accepted alternative to 240 mg every 2 weeks.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "PD-1",
+    "note": "Nivolumab is a PD-1 checkpoint inhibitor. Adjuvant use follows radical cystectomy for high-risk muscle-invasive urothelial carcinoma (>= pT3 / pN+, or residual >= ypT2 / ypN+ after neoadjuvant cisplatin, or cisplatin-ineligible high-risk disease). No companion biomarker test is required to treat, though PD-L1 status is often reported."
+  },
+  "stage": [
+    "II",
+    "III",
+    "muscle-invasive",
+    "locally advanced"
+  ],
+  "treatmentSetting": "adjuvant",
+  "histology": "urothelial carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Monitor for immune-related adverse events across organ systems (skin, colon, liver, endocrine glands, lungs, kidney); manage with holds and corticosteroids per severity.",
+    "Baseline and periodic thyroid, adrenal, and glucose assessment for endocrinopathies.",
+    "Educate the patient to report new diarrhea, dyspnea, jaundice, or rash promptly."
+  ],
+  "monitoring": [
+    "thyroid function (TSH/free T4) at baseline and periodically",
+    "liver function before each cycle (immune hepatitis)",
+    "clinical assessment for colitis, pneumonitis, dermatitis, and endocrinopathy each visit",
+    "renal function (immune nephritis) periodically"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "thyroid",
+    "clinical irAE screen",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2-3 immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold",
+      "text": "Hold nivolumab and start corticosteroids for grade 2-3 immune-related toxicity; resume after recovery to grade <= 1 and steroid taper. Physician decides."
+    },
+    {
+      "condition": "grade 4 or recurrent grade 3 immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "discontinue",
+      "text": "Permanently discontinue for grade 4 or recurrent severe immune-related toxicity per labeling; obtain specialty review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Nivolumab 240 mg IV flat dose on day 1 of a 14-day cycle, continued in the adjuvant setting for about 1 year. An alternative flat schedule gives 480 mg IV every 4 weeks. Standard checkpoint-inhibitor immune-related toxicity monitoring applies. Dose per standard urothelial adjuvant practice (Standard Guidelines / DeVita / Harrison, general reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Systemic Therapy, adjuvant immunotherapy for high-risk MIBC",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

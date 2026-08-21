@@ -1,0 +1,91 @@
+{
+  "id": "rcc-lenvatinib-pembrolizumab",
+  "diseaseId": "rcc_cancer",
+  "name": "Lenvatinib + Pembrolizumab (IO + TKI, first-line clear-cell RCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Continuous therapy: lenvatinib 20 mg PO once daily every day, plus pembrolizumab 200 mg IV every 3 weeks. Continued until progression or unacceptable toxicity; pembrolizumab generally capped at about 2 years.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Distinguish TKI toxicity (hypertension, diarrhea, fatigue, proteinuria) from immune-related effects.",
+    "Blood pressure monitoring and management; assess for proteinuria.",
+    "Immune-related adverse event counseling and prompt symptom reporting."
+  ],
+  "monitoring": [
+    "blood pressure (lenvatinib hypertension)",
+    "thyroid function (TSH)",
+    "liver function tests",
+    "proteinuria / renal function",
+    "immune toxicity screen (TSH/free T4, LFTs, glucose) as indicated"
+  ],
+  "clearanceChecks": ["blood pressure", "liver", "thyroid", "renal", "endocrine/immune status", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hypertension, diarrhea, or proteinuria",
+      "drug": "lenvatinib",
+      "action": "hold/reduce",
+      "text": "Hold lenvatinib and resume at a reduced dose (14 mg, then 10 mg, then 8 mg once daily) per labeling for persistent grade 3 toxicity."
+    },
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lenvatinib",
+      "name": "Lenvatinib",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21],
+      "caps": { "perDose": null },
+      "notes": "Lenvatinib 20 mg PO once daily, continuous (shown across all cycle days), combined with pembrolizumab. Reduce for toxicity (14/10/8 mg). Authored from standard first-line clear-cell RCC practice (NCCN Kidney Cancer; CLEAR study supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "lenvatinib + pembrolizumab, first-line clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Pembrolizumab 200 mg IV flat on day 1 of each 21-day cycle (400 mg every 6 weeks is a label-equivalent alternative). Combined with lenvatinib as first-line therapy. Authored from standard practice (CLEAR study).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "lenvatinib + pembrolizumab, first-line clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

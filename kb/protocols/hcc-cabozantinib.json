@@ -1,0 +1,101 @@
+{
+  "id": "hcc-cabozantinib",
+  "diseaseId": "hcc_cancer",
+  "name": "Cabozantinib (single-agent oral multikinase inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous once-daily oral dosing (represented as days 1 to 28 of a 28-day continuous-dosing accounting cycle; no drug-free interval). Second- or later-line option after one or two prior systemic agents, Child-Pugh A. Continue until progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Take on an empty stomach (no food 2 hours before and 1 hour after).",
+    "Hand-foot skin reaction, diarrhea, hypertension: monitor and dose-modify per labeling."
+  ],
+  "monitoring": [
+    "blood pressure at baseline and during therapy",
+    "hand-foot skin reaction assessment",
+    "liver function and AFP trend",
+    "symptom review for diarrhea and mucositis"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "blood pressure",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 or intolerable grade 2 toxicity",
+      "drug": "cabozantinib",
+      "action": "reduce",
+      "text": "Interrupt and dose-reduce stepwise (e.g. to 40 mg then 20 mg once daily) per labeling; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cabozantinib",
+      "name": "Cabozantinib",
+      "basis": "flat",
+      "dosePerUnit": 60,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Cabozantinib 60 mg PO once daily on an empty stomach, taken continuously. Second- or later-line oral multikinase inhibitor for advanced HCC after prior systemic therapy, Child-Pugh A. Authored from standard practice (NCCN Hepatocellular Carcinoma; CELESTIAL supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "cabozantinib, second/later-line advanced HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": [],
+      "frequency": "once daily"
+    }
+  ]
+}

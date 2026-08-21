@@ -1,0 +1,109 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-rgdp",
+  "name": "R-GDP (rituximab/gemcitabine/dexamethasone/cisplatin) salvage",
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "premedications": [
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine"
+    },
+    {
+      "name": "Hydration",
+      "notes": "cisplatin nephroprotection with electrolyte replacement"
+    }
+  ],
+  "supportiveCare": [
+    "Better-tolerated outpatient salvage alternative to R-DHAP/R-ICE",
+    "G-CSF per risk; plan stem-cell collection if transplant-intent",
+    "Antiemetics"
+  ],
+  "monitoring": [
+    "Response by PET",
+    "Renal function (cisplatin)",
+    "CBC (gemcitabine days 1 and 8)"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV day 1."
+    },
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "1000 mg/m2 IV on days 1 and 8."
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "40 mg PO daily, days 1-4."
+    },
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "75 mg/m2 IV day 1."
+    }
+  ]
+}

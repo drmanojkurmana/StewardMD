@@ -1,0 +1,46 @@
+{
+  "id": "cns-bevacizumab",
+  "diseaseId": "cns_cancer",
+  "name": "Bevacizumab single-agent",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 14,
+  "cycles": 12,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Central Nervous System Cancers (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "None routine", "notes": "no standard chemotherapy premedication; verify blood pressure and urine protein before each infusion." }
+  ],
+  "supportiveCare": [
+    "Helps corticosteroid-refractory edema and mass-effect symptoms; can allow steroid tapering.",
+    "Hold around surgery (about 4 weeks before and after) for wound-healing and to reduce bleeding risk.",
+    "Counsel on hypertension, proteinuria, bleeding, thromboembolism, and the rare bowel-perforation risk."
+  ],
+  "monitoring": [
+    "Blood pressure at each visit; treat hypertension",
+    "Urine protein (dipstick, then protein/creatinine ratio if positive)",
+    "MRI response assessment every 2-3 cycles - interpret with care because bevacizumab reduces enhancement"
+  ],
+  "drugs": [
+    {
+      "id": "bevacizumab",
+      "name": "Bevacizumab",
+      "basis": "mgkg",
+      "dosePerUnit": 10,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "10 mg/kg IV every 2 weeks (day 1 of a 14-day cycle) until progression or unacceptable toxicity; an equivalent 15 mg/kg every 3 weeks schedule is sometimes used. Anti-VEGF option at recurrent glioblastoma for symptom/edema control (NCCN CNS / DeVita, general reference; own wording)."
+    }
+  ]
+}

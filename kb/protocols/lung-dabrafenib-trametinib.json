@@ -1,0 +1,140 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), NSCLC",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "monitoring": [
+    "clinical/radiographic response assessment",
+    "temperature/pyrexia surveillance",
+    "LVEF (trametinib) and ophthalmologic assessment"
+  ],
+  "clearanceChecks": [
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [],
+  "id": "lung-dabrafenib-trametinib",
+  "diseaseId": "nsclc",
+  "name": "Dabrafenib + Trametinib (BRAF V600E NSCLC)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "supportiveCare": [
+    "Continuous oral dosing until progression or unacceptable toxicity.",
+    "Monitor for pyrexia (common with BRAF/MEK combination), skin toxicity, and ocular events."
+  ],
+  "drugs": [
+    {
+      "id": "dabrafenib",
+      "name": "Dabrafenib",
+      "basis": "flat",
+      "dosePerUnit": 150,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Dabrafenib 150 mg PO twice daily, continuous. Combined BRAF+MEK inhibition for BRAF V600E-mutant metastatic NSCLC. Twice-daily flat oral dose modeled per day of a 28-day cycle. My own wording from standard first-line targeted-therapy practice.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), NSCLC",
+        "version": "current",
+        "date": null,
+        "locator": "BRAF V600E NSCLC first-line (dabrafenib 150 mg BID)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "trametinib",
+      "name": "Trametinib",
+      "basis": "flat",
+      "dosePerUnit": 2,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Trametinib 2 mg PO once daily, continuous, given with dabrafenib. Encorafenib + binimetinib is an accepted alternative BRAF/MEK doublet. My own wording.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), NSCLC",
+        "version": "current",
+        "date": null,
+        "locator": "BRAF V600E NSCLC first-line (trametinib 2 mg daily)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

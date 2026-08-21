@@ -1,0 +1,79 @@
+{
+  "id": "mm-lenalidomide-smm",
+  "diseaseId": "myeloma_cancer",
+  "name": "Lenalidomide (single-agent, high-risk smoldering myeloma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Single-agent lenalidomide is offered for high-risk smoldering myeloma to delay progression to active disease; a clinical trial remains the preferred pathway. It is not biomarker-restricted. Physician decides."
+  },
+  "stage": [],
+  "treatmentSetting": "early intervention for high-risk smoldering (asymptomatic) myeloma",
+  "histology": "clonal plasma-cell disorder (smoldering multiple myeloma)",
+  "premedications": [],
+  "supportiveCare": [
+    "Lenalidomide: VTE thromboprophylaxis (aspirin for standard risk) and REMS-program dispensing (teratogen); dose-adjust for renal impairment.",
+    "Counsel on second-primary-malignancy risk with prolonged lenalidomide exposure.",
+    "Treat as active myeloma once a myeloma-defining event appears."
+  ],
+  "monitoring": [
+    "CBC with differential and platelets before each cycle",
+    "renal function and electrolytes",
+    "M-protein and serum free light chains for progression",
+    "second-primary-malignancy surveillance"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 neutropenia or thrombocytopenia",
+      "drug": "lenalidomide",
+      "action": "hold/reduce",
+      "text": "Hold and resume lenalidomide at a reduced dose per labeling for grade 3 to 4 cytopenia; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lenalidomide",
+      "name": "Lenalidomide",
+      "basis": "flat",
+      "dosePerUnit": 25,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Lenalidomide 25 mg PO once daily on days 1 to 21 of each 28-day cycle, continued until progression or intolerance. Dose is reduced for renal impairment or cytopenias. This mirrors the single-agent early-intervention schedule studied in high-risk smoldering myeloma; a lower continuous dose is sometimes used for tolerance. Requires VTE thromboprophylaxis and REMS-program dispensing (teratogen). Own wording from standard-of-care knowledge; physician decides.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Multiple Myeloma",
+        "version": "draft",
+        "date": null,
+        "locator": "high-risk smoldering myeloma early-intervention regimen (single-agent lenalidomide)",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

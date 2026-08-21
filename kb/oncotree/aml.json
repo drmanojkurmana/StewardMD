@@ -1,0 +1,2012 @@
+{
+  "guideline": "aml",
+  "title": "Acute Myeloid Leukemia Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "1.0.0",
+  "diseaseId": "aml_cancer",
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Pathway: presentation (newly diagnosed / APL / relapsed) -> workup checklist -> fitness for intensive therapy -> ELN risk by cytogenetics and molecular markers (FLT3/NPM1/IDH/CEBPA) -> biomarker-directed induction (7+3 +/- targeted, CPX-351, or azacitidine-venetoclax) -> response -> risk-directed consolidation / transplant -> surveillance -> relapsed/refractory pathway. No AML-specific dose protocol exists in this library, so treatment leaves give checklist guidance with NO doses and reference no protocol. Structural pathway only; no proprietary guideline text reproduced. DRAFT - not clinically activated.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN/DeVita/Harrison). Leaves are guidance checklists; the physician decides and any dosing is computed elsewhere.",
+  "startNodeIds": [
+    "n_entry"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "ELN 2022 genetic risk (favorable / intermediate / adverse) is defined by karyotype plus molecular markers and should be established before consolidation planning; risk can shift with FLT3-ITD allelic ratio and NPM1 status.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "Suspected acute promyelocytic leukemia is a medical emergency: start all-trans retinoic acid on clinical suspicion (before genetic confirmation) and aggressively support coagulopathy - do not wait for cytogenetics.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "Measurable residual disease (MRD) by multiparameter flow or molecular assay refines relapse risk and can inform transplant timing and post-remission monitoring.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Allogeneic transplant eligibility depends on age, performance status, comorbidity (e.g. HCT-CI), remission status, and donor availability - refer early for intermediate/adverse-risk disease in first remission.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_entry",
+      "linkId": "aml_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Presentation",
+      "title": "AML: presentation / disease category",
+      "section": "Contents",
+      "description": "Management branches first by presentation. Choose the applicable category.",
+      "path": "AML / Category",
+      "pills": [
+        "category"
+      ],
+      "required": true,
+      "bullets": [
+        "Newly diagnosed AML (>= 20% marrow/blood blasts, or an AML-defining genetic lesion)",
+        "Suspected acute promyelocytic leukemia (APL) - a medical emergency",
+        "Relapsed or refractory AML"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "options": [
+        {
+          "id": "newdx",
+          "label": "Newly diagnosed AML (non-APL)",
+          "sets": {
+            "presentation": "newdx"
+          },
+          "pills": [
+            "new dx"
+          ]
+        },
+        {
+          "id": "apl",
+          "label": "Suspected APL (promyelocytic)",
+          "sets": {
+            "presentation": "apl"
+          },
+          "pills": [
+            "APL"
+          ]
+        },
+        {
+          "id": "relapsed",
+          "label": "Relapsed / refractory AML",
+          "sets": {
+            "presentation": "relapsed"
+          },
+          "pills": [
+            "R/R"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_workup",
+      "linkId": "aml_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Workup",
+      "title": "Newly diagnosed AML: workup",
+      "section": "Workup",
+      "description": "Confirm diagnosis and gather the genetic and clinical data that drive risk and treatment.",
+      "path": "AML / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "bullets": [
+        "CBC with differential, peripheral smear, coagulation panel (PT/aPTT/fibrinogen/D-dimer), LDH, uric acid, renal/hepatic panels",
+        "Bone marrow aspirate + biopsy: morphology, flow cytometry immunophenotype, cytochemistry",
+        "Cytogenetics (karyotype + FISH) and molecular panel: FLT3-ITD/TKD, NPM1, CEBPA, IDH1/IDH2, TP53, RUNX1, ASXL1 (and a broad NGS myeloid panel)",
+        "Assess for tumor lysis and hyperleukocytosis/leukostasis; start allopurinol/hydration; leukapheresis if symptomatic hyperleukocytosis",
+        "HLA typing and early transplant referral if intensive therapy is a candidate; baseline echocardiogram before anthracycline; HBV/HCV/HIV serology",
+        "Lumbar puncture only if CNS symptoms (after excluding leukostasis/coagulopathy)"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_fitness",
+      "linkId": "aml_fitness",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Fitness",
+      "title": "Fitness for intensive induction",
+      "section": "Staging",
+      "description": "The first treatment fork is whether the patient can tolerate intensive (anthracycline-based) induction. Consider age, performance status, organ function, and comorbidity - not chronologic age alone.",
+      "path": "AML / Fitness",
+      "pills": [
+        "fitness"
+      ],
+      "required": true,
+      "bullets": [
+        "Fit: adequate performance status and organ function for anthracycline-based induction (often younger / limited comorbidity)",
+        "Unfit: older and/or significant comorbidity or poor performance status - candidate for lower-intensity therapy"
+      ],
+      "options": [
+        {
+          "id": "fit",
+          "label": "Fit for intensive induction",
+          "sets": {
+            "fitness": "fit"
+          },
+          "pills": [
+            "fit"
+          ]
+        },
+        {
+          "id": "unfit",
+          "label": "Unfit / candidate for lower-intensity",
+          "sets": {
+            "fitness": "unfit"
+          },
+          "pills": [
+            "unfit"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_eln",
+      "linkId": "aml_eln",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ELN risk",
+      "title": "Genetic risk stratification (ELN 2022)",
+      "section": "Staging",
+      "description": "For a fit patient, assign the genetic risk group from karyotype and molecular markers. Risk drives post-remission strategy (chemotherapy consolidation vs transplant).",
+      "path": "AML / Fit / Risk",
+      "pills": [
+        "risk"
+      ],
+      "required": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "fav",
+          "label": "Favorable risk",
+          "sets": {
+            "risk": "favorable"
+          },
+          "pills": [
+            "favorable"
+          ]
+        },
+        {
+          "id": "int",
+          "label": "Intermediate risk",
+          "sets": {
+            "risk": "intermediate"
+          },
+          "pills": [
+            "intermediate"
+          ]
+        },
+        {
+          "id": "adv",
+          "label": "Adverse risk",
+          "sets": {
+            "risk": "adverse"
+          },
+          "pills": [
+            "adverse"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "ELN 2022 genetic risk (representative)",
+          "headers": [
+            "Risk group",
+            "Representative genetics",
+            "Post-remission implication"
+          ],
+          "rows": [
+            [
+              "Favorable",
+              "t(8;21) or inv(16)/t(16;16) CBF; NPM1-mut without FLT3-ITD; in-frame bZIP CEBPA",
+              "Chemotherapy consolidation often sufficient"
+            ],
+            [
+              "Intermediate",
+              "NPM1-mut with FLT3-ITD; wild-type without adverse lesions; t(9;11)",
+              "Consider allogeneic transplant in first remission"
+            ],
+            [
+              "Adverse",
+              "Complex / monosomal karyotype; TP53; ASXL1 / RUNX1; myelodysplasia-related",
+              "Allogeneic transplant in first remission if eligible"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fit_target",
+      "linkId": "aml_fit_target",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Induction target",
+      "title": "Fit induction: biomarker / disease-type selection",
+      "section": "Treatment",
+      "description": "Choose the induction backbone. Targetable lesions and secondary-type disease modify standard 7+3 (cytarabine + anthracycline).",
+      "path": "AML / Fit / Induction",
+      "pills": [
+        "induction"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "flt3",
+          "label": "FLT3-mutated (ITD or TKD)",
+          "sets": {
+            "target": "flt3"
+          },
+          "pills": [
+            "FLT3+"
+          ]
+        },
+        {
+          "id": "cbf",
+          "label": "Core-binding-factor / CD33+ favorable",
+          "sets": {
+            "target": "cbf"
+          },
+          "pills": [
+            "CBF"
+          ]
+        },
+        {
+          "id": "secondary",
+          "label": "Therapy-related or AML-MRC (secondary-type)",
+          "sets": {
+            "target": "secondary"
+          },
+          "pills": [
+            "t-AML / MRC"
+          ]
+        },
+        {
+          "id": "standard",
+          "label": "No targetable lesion - standard 7+3",
+          "sets": {
+            "target": "standard"
+          },
+          "pills": [
+            "7+3"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "Targeted additions to intensive induction",
+          "headers": [
+            "Lesion / type",
+            "Added agent",
+            "Setting"
+          ],
+          "rows": [
+            [
+              "FLT3-ITD / TKD",
+              "Midostaurin added to 7+3",
+              "Newly diagnosed, fit"
+            ],
+            [
+              "CBF t(8;21) / inv(16), CD33+",
+              "Gemtuzumab ozogamicin added to 7+3",
+              "Favorable, fit"
+            ],
+            [
+              "Therapy-related / AML-MRC",
+              "CPX-351 (liposomal cytarabine-daunorubicin)",
+              "Secondary-type, fit"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ind_flt3",
+      "linkId": "tx_ind_flt3",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "7+3 + midostaurin",
+      "title": "Induction: 7+3 plus midostaurin (FLT3-mutated)",
+      "section": "Treatment",
+      "description": "Intensive induction with a FLT3 inhibitor added.",
+      "path": "AML / Fit / Induction / FLT3",
+      "pills": [
+        "FLT3+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Standard 7+3 induction (continuous-infusion cytarabine + an anthracycline) plus midostaurin on the specified days",
+        "Continue midostaurin through consolidation and as maintenance where used",
+        "Antifungal prophylaxis choice must account for azole-FLT3-inhibitor interactions",
+        "Reassess response by marrow after count recovery (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-midostaurin"
+      ]
+    },
+    {
+      "id": "n_ind_cbf",
+      "linkId": "tx_ind_cbf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "7+3 + gemtuzumab",
+      "title": "Induction: 7+3 plus gemtuzumab ozogamicin (CBF / CD33+)",
+      "section": "Treatment",
+      "description": "Intensive induction with an anti-CD33 antibody-drug conjugate added for favorable CD33-positive disease.",
+      "path": "AML / Fit / Induction / CBF",
+      "pills": [
+        "CBF",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Standard 7+3 induction plus fractionated gemtuzumab ozogamicin (anti-CD33)",
+        "Watch for veno-occlusive disease / sinusoidal obstruction, especially if transplant may follow",
+        "Core-binding-factor AML is favorable-risk and usually consolidated with cytarabine-based chemotherapy",
+        "Reassess response by marrow after count recovery (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3-gemtuzumab"
+      ]
+    },
+    {
+      "id": "n_ind_cpx",
+      "linkId": "tx_ind_cpx",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "CPX-351",
+      "title": "Induction: CPX-351 (therapy-related / AML-MRC)",
+      "section": "Treatment",
+      "description": "Liposomal fixed-ratio cytarabine-daunorubicin for secondary-type AML in fit patients.",
+      "path": "AML / Fit / Induction / Secondary",
+      "pills": [
+        "t-AML / MRC",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "CPX-351 (liposomal cytarabine-daunorubicin) for therapy-related AML or AML with myelodysplasia-related changes",
+        "Expect prolonged cytopenias; give full infection prophylaxis and transfusion support",
+        "Most are intermediate/adverse risk - plan early transplant referral",
+        "Reassess response by marrow after count recovery (next step)"
+      ],
+      "protocolRefs": [
+        "aml-cpx-351"
+      ]
+    },
+    {
+      "id": "n_ind_73",
+      "linkId": "tx_ind_73",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "7+3",
+      "title": "Induction: standard 7+3",
+      "section": "Treatment",
+      "description": "Standard intensive induction when no targetable lesion is present.",
+      "path": "AML / Fit / Induction / Standard",
+      "pills": [
+        "7+3",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Standard 7+3 induction: continuous-infusion cytarabine for 7 days + an anthracycline for 3 days",
+        "Consider a day-14 marrow to assess blast clearance; a second induction if residual leukemia",
+        "Full supportive care: neutropenic prophylaxis, transfusion support, tumor-lysis monitoring",
+        "Reassess response by marrow after count recovery (next step)"
+      ],
+      "protocolRefs": [
+        "aml-7-3"
+      ]
+    },
+    {
+      "id": "n_response",
+      "linkId": "aml_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Response",
+      "title": "Response assessment after induction",
+      "section": "Treatment",
+      "description": "Assess remission by marrow (with MRD where available) after count recovery. Complete remission enables consolidation; failure moves to the relapsed/refractory pathway.",
+      "path": "AML / Fit / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "cr",
+          "label": "Complete remission (CR / CRi)",
+          "sets": {
+            "response": "cr"
+          },
+          "pills": [
+            "CR"
+          ]
+        },
+        {
+          "id": "refractory",
+          "label": "Refractory (induction failure)",
+          "sets": {
+            "response": "refractory"
+          },
+          "pills": [
+            "refractory"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_consolidation",
+      "linkId": "aml_consolidation",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Consolidation",
+      "title": "Post-remission (consolidation) strategy by risk",
+      "section": "Treatment",
+      "description": "In first complete remission, post-remission therapy is directed by ELN risk and transplant eligibility.",
+      "path": "AML / Fit / Consolidation",
+      "pills": [
+        "consolidation"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "options": [
+        {
+          "id": "fav",
+          "label": "Favorable risk",
+          "sets": {
+            "risk": "favorable"
+          },
+          "pills": [
+            "favorable"
+          ]
+        },
+        {
+          "id": "int",
+          "label": "Intermediate risk",
+          "sets": {
+            "risk": "intermediate"
+          },
+          "pills": [
+            "intermediate"
+          ]
+        },
+        {
+          "id": "adv",
+          "label": "Adverse risk",
+          "sets": {
+            "risk": "adverse"
+          },
+          "pills": [
+            "adverse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_cons_hidac",
+      "linkId": "tx_cons_hidac",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "HiDAC consolidation",
+      "title": "Consolidation: high-dose cytarabine (favorable risk)",
+      "section": "Treatment",
+      "description": "Chemotherapy consolidation, usually without transplant, for favorable-risk disease in CR1.",
+      "path": "AML / Consolidation / Favorable",
+      "pills": [
+        "favorable",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Multiple cycles of high-dose cytarabine (HiDAC)",
+        "Add the induction-matched targeted agent through consolidation where used (e.g. midostaurin for FLT3, gemtuzumab for CBF)",
+        "Monitor cerebellar and ocular toxicity with high-dose cytarabine (neuro checks, steroid eye drops)",
+        "Transplant generally reserved for relapse; then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-hidac"
+      ]
+    },
+    {
+      "id": "n_cons_allo",
+      "linkId": "tx_cons_allo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Allo-HSCT (intermediate)",
+      "title": "Consolidation: allogeneic transplant (intermediate risk)",
+      "section": "Treatment",
+      "description": "Allogeneic transplant in first remission is favored for intermediate-risk disease in eligible patients; otherwise chemotherapy consolidation.",
+      "path": "AML / Consolidation / Intermediate",
+      "pills": [
+        "intermediate",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Allogeneic hematopoietic stem-cell transplant in CR1 for transplant-eligible patients with a suitable donor",
+        "If transplant-ineligible or no donor: high-dose cytarabine-based consolidation",
+        "MRD status and comorbidity refine the decision; bridge with consolidation while a donor is identified",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_cons_adv",
+      "linkId": "tx_cons_adv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Allo-HSCT + maintenance (adverse)",
+      "title": "Consolidation: allogeneic transplant +/- maintenance (adverse risk)",
+      "section": "Treatment",
+      "description": "Adverse-risk disease is consolidated with allogeneic transplant when feasible, with post-remission maintenance and trial enrollment strongly considered.",
+      "path": "AML / Consolidation / Adverse",
+      "pills": [
+        "adverse",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Allogeneic transplant in CR1 for eligible patients - the preferred consolidation for adverse-risk disease",
+        "Post-remission oral azacitidine maintenance for patients not proceeding to transplant",
+        "FLT3-inhibitor maintenance after transplant for FLT3-mutated disease where used",
+        "Prioritize clinical-trial enrollment; then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "linkId": "aml_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Surveillance",
+      "title": "Surveillance / follow-up",
+      "section": "Surveillance",
+      "description": "Monitoring after achieving and consolidating remission.",
+      "path": "AML / Surveillance",
+      "pills": [
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "CBC with differential every 1-3 months for 2 years, then every 3-6 months up to 5 years",
+        "Bone marrow / MRD testing for unexplained cytopenias or suspected relapse",
+        "Monitor for transplant complications (graft-versus-host disease, infection) where applicable",
+        "Survivorship: cardiac follow-up after anthracyclines, vaccination, secondary-malignancy awareness"
+      ],
+      "linkTo": "n_relapsed",
+      "linkLabel": "If relapse is detected: go to the relapsed/refractory pathway"
+    },
+    {
+      "id": "n_unfit_target",
+      "linkId": "aml_unfit_target",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Unfit therapy",
+      "title": "Unfit: lower-intensity therapy selection",
+      "section": "Treatment",
+      "description": "For patients not fit for intensive induction, select lower-intensity therapy, directed by molecular markers and frailty.",
+      "path": "AML / Unfit / Therapy",
+      "pills": [
+        "unfit"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "azaven",
+          "label": "Standard lower-intensity (no specific target)",
+          "sets": {
+            "unfitTx": "azaven"
+          },
+          "pills": [
+            "aza-ven"
+          ]
+        },
+        {
+          "id": "idh1",
+          "label": "IDH1-mutated",
+          "sets": {
+            "unfitTx": "idh1"
+          },
+          "pills": [
+            "IDH1"
+          ]
+        },
+        {
+          "id": "idh2",
+          "label": "IDH2-mutated",
+          "sets": {
+            "unfitTx": "idh2"
+          },
+          "pills": [
+            "IDH2"
+          ]
+        },
+        {
+          "id": "flt3",
+          "label": "FLT3-mutated",
+          "sets": {
+            "unfitTx": "flt3"
+          },
+          "pills": [
+            "FLT3"
+          ]
+        },
+        {
+          "id": "frail",
+          "label": "Frail / declines active therapy",
+          "sets": {
+            "unfitTx": "frail"
+          },
+          "pills": [
+            "frail"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_unfit_azaven",
+      "linkId": "tx_unfit_azaven",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Azacitidine + venetoclax",
+      "title": "Unfit: azacitidine + venetoclax",
+      "section": "Treatment",
+      "description": "Hypomethylating agent plus venetoclax is the standard lower-intensity regimen for unfit patients.",
+      "path": "AML / Unfit / Aza-Ven",
+      "pills": [
+        "aza-ven",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Azacitidine (or decitabine) + venetoclax with a careful ramp-up and tumor-lysis prophylaxis",
+        "Antifungal azoles markedly raise venetoclax exposure - reduce the venetoclax dose accordingly",
+        "Expect prolonged neutropenia; hold/adjust venetoclax duration by marrow response",
+        "For FLT3-mutated unfit disease, this backbone is used and a FLT3 inhibitor is reserved options at relapse",
+        "Assess response after the first cycles (next step)"
+      ],
+      "protocolRefs": [
+        "aml-aza-venetoclax"
+      ]
+    },
+    {
+      "id": "n_unfit_ivo",
+      "linkId": "tx_unfit_ivo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "IDH1 inhibitor",
+      "title": "Unfit: ivosidenib-based (IDH1-mutated)",
+      "section": "Treatment",
+      "description": "An oral IDH1 inhibitor, alone or with azacitidine, for IDH1-mutated unfit disease.",
+      "path": "AML / Unfit / IDH1",
+      "pills": [
+        "IDH1",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Ivosidenib + azacitidine (or ivosidenib monotherapy) for IDH1-mutated disease",
+        "Monitor for differentiation syndrome and QT prolongation; start corticosteroids promptly if differentiation syndrome is suspected",
+        "Azacitidine + venetoclax is an alternative lower-intensity option",
+        "Assess response after the first cycles (next step)"
+      ],
+      "protocolRefs": [
+        "aml-ivosidenib",
+        "aml-azacitidine"
+      ]
+    },
+    {
+      "id": "n_unfit_ena",
+      "linkId": "tx_unfit_ena",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "IDH2 inhibitor",
+      "title": "Unfit: enasidenib (IDH2-mutated)",
+      "section": "Treatment",
+      "description": "An oral IDH2 inhibitor for IDH2-mutated unfit disease.",
+      "path": "AML / Unfit / IDH2",
+      "pills": [
+        "IDH2",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Enasidenib for IDH2-mutated disease (monotherapy, or with a hypomethylating agent)",
+        "Monitor for differentiation syndrome and hyperbilirubinemia",
+        "Azacitidine + venetoclax is an alternative lower-intensity option",
+        "Assess response after the first cycles (next step)"
+      ],
+      "protocolRefs": [
+        "aml-enasidenib"
+      ]
+    },
+    {
+      "id": "n_unfit_bsc",
+      "linkId": "tx_unfit_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Low-intensity / BSC",
+      "title": "Frail: low-intensity therapy or best supportive care",
+      "section": "Treatment",
+      "description": "For the frailest patients or those declining active therapy.",
+      "path": "AML / Unfit / Frail",
+      "pills": [
+        "frail",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "bullets": [
+        "Single-agent hypomethylating agent (azacitidine or decitabine) or low-dose cytarabine",
+        "Best supportive care: transfusions, antimicrobials, hydroxyurea for count control",
+        "Early palliative-care involvement and goals-of-care discussion",
+        "Assess response / trajectory (next step)"
+      ],
+      "protocolRefs": [
+        "aml-azacitidine"
+      ]
+    },
+    {
+      "id": "n_unfit_response",
+      "linkId": "aml_unfit_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Unfit response",
+      "title": "Response after lower-intensity therapy",
+      "section": "Treatment",
+      "description": "Assess response after lower-intensity therapy; responders continue on maintenance-style therapy with monitoring, non-responders move to the relapsed/refractory pathway.",
+      "path": "AML / Unfit / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "response",
+          "label": "Response / stable disease",
+          "sets": {
+            "unfitResponse": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "No response / progression",
+          "sets": {
+            "unfitResponse": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_apl_workup",
+      "linkId": "aml_apl_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "APL workup",
+      "title": "Suspected APL: emergency workup",
+      "section": "Workup",
+      "description": "APL is a medical emergency dominated by coagulopathy. Start ATRA on suspicion and support coagulation while confirming the diagnosis.",
+      "path": "AML / APL / Workup",
+      "pills": [
+        "APL",
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Start all-trans retinoic acid (ATRA) immediately on clinical suspicion - do not wait for genetic confirmation",
+        "Confirm PML-RARA by PCR / FISH (and t(15;17) on karyotype); review smear for faggot cells",
+        "Aggressively support coagulopathy: transfuse to keep fibrinogen and platelets above threshold; monitor for DIC and bleeding",
+        "Avoid procedures (line placement, LP) until coagulopathy is corrected; watch for differentiation syndrome once ATRA starts"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "ATRA started, coagulopathy supported - continue",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_apl_risk",
+      "linkId": "aml_apl_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "APL risk",
+      "title": "APL: risk by presenting white-cell count",
+      "section": "Staging",
+      "description": "APL treatment is stratified by presenting white-cell count (a surrogate for risk).",
+      "path": "AML / APL / Risk",
+      "pills": [
+        "APL",
+        "risk"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "low",
+          "label": "Low / intermediate risk (WBC <= 10)",
+          "sets": {
+            "aplRisk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        },
+        {
+          "id": "high",
+          "label": "High risk (WBC > 10)",
+          "sets": {
+            "aplRisk": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_apl_low",
+      "linkId": "tx_apl_low",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ATRA + ATO",
+      "title": "APL, low/intermediate risk: ATRA + arsenic trioxide",
+      "section": "Treatment",
+      "description": "Chemotherapy-free ATRA + arsenic trioxide is standard for low/intermediate-risk APL.",
+      "path": "AML / APL / Low",
+      "pills": [
+        "APL",
+        "low risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "ATRA + arsenic trioxide (ATO) induction and consolidation - no cytotoxic chemotherapy needed",
+        "Monitor for differentiation syndrome (treat with corticosteroids) and QT prolongation on ATO",
+        "Continue coagulation support until the coagulopathy resolves",
+        "Confirm molecular remission (PML-RARA PCR-negative); then surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-atra-ato"
+      ]
+    },
+    {
+      "id": "n_apl_high",
+      "linkId": "tx_apl_high",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "ATRA + ATO + cytoreduction",
+      "title": "APL, high risk: ATRA + ATO + cytoreduction",
+      "section": "Treatment",
+      "description": "High-risk APL adds early cytoreduction to control the white-cell count.",
+      "path": "AML / APL / High",
+      "pills": [
+        "APL",
+        "high risk",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "ATRA + ATO with early cytoreduction (an anthracycline, or gemtuzumab ozogamicin) to control hyperleukocytosis",
+        "Aggressive differentiation-syndrome prophylaxis/treatment and coagulopathy support",
+        "CNS prophylaxis is considered in high-risk disease",
+        "Confirm molecular remission (PML-RARA PCR-negative); then surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-atra-ato"
+      ]
+    },
+    {
+      "id": "n_relapsed",
+      "linkId": "aml_relapsed",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Relapsed / refractory",
+      "title": "Relapsed / refractory AML: pathway",
+      "section": "Recurrence",
+      "description": "Re-biopsy and repeat molecular testing at relapse (targets can emerge or be lost). Direct therapy by actionable mutation and transplant eligibility, and prioritize clinical trials.",
+      "path": "AML / Relapsed",
+      "pills": [
+        "R/R"
+      ],
+      "required": true,
+      "bullets": [
+        "Repeat marrow with cytogenetics and molecular panel (FLT3, IDH1/2, and emerging targets)",
+        "Allogeneic transplant remains the main curative option for chemo-sensitive relapse",
+        "Enroll on a clinical trial whenever available"
+      ],
+      "options": [
+        {
+          "id": "flt3",
+          "label": "FLT3-mutated",
+          "sets": {
+            "rrTarget": "flt3"
+          },
+          "pills": [
+            "FLT3"
+          ]
+        },
+        {
+          "id": "idh1",
+          "label": "IDH1-mutated",
+          "sets": {
+            "rrTarget": "idh1"
+          },
+          "pills": [
+            "IDH1"
+          ]
+        },
+        {
+          "id": "idh2",
+          "label": "IDH2-mutated",
+          "sets": {
+            "rrTarget": "idh2"
+          },
+          "pills": [
+            "IDH2"
+          ]
+        },
+        {
+          "id": "intensive",
+          "label": "No target, fit - salvage to transplant",
+          "sets": {
+            "rrTarget": "intensive"
+          },
+          "pills": [
+            "salvage"
+          ]
+        },
+        {
+          "id": "trial",
+          "label": "Unfit - trial / lower-intensity / BSC",
+          "sets": {
+            "rrTarget": "trial"
+          },
+          "pills": [
+            "trial / BSC"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rr_gilt",
+      "linkId": "tx_rr_gilt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Gilteritinib",
+      "title": "Relapsed FLT3-mutated: gilteritinib",
+      "section": "Recurrence",
+      "description": "A FLT3 inhibitor for relapsed/refractory FLT3-mutated disease, as a bridge to transplant.",
+      "path": "AML / Relapsed / FLT3",
+      "pills": [
+        "FLT3",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Gilteritinib for relapsed/refractory FLT3-mutated AML",
+        "Monitor for differentiation syndrome and QT prolongation",
+        "Bridge responders to allogeneic transplant; consider FLT3-inhibitor maintenance after transplant"
+      ],
+      "protocolRefs": [
+        "aml-gilteritinib"
+      ]
+    },
+    {
+      "id": "n_rr_ivo",
+      "linkId": "tx_rr_ivo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Ivosidenib (R/R)",
+      "title": "Relapsed IDH1-mutated: ivosidenib",
+      "section": "Recurrence",
+      "description": "An IDH1 inhibitor for relapsed/refractory IDH1-mutated disease.",
+      "path": "AML / Relapsed / IDH1",
+      "pills": [
+        "IDH1",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Ivosidenib for relapsed/refractory IDH1-mutated AML",
+        "Monitor for differentiation syndrome and QT prolongation",
+        "Bridge responders to allogeneic transplant where eligible"
+      ],
+      "protocolRefs": [
+        "aml-ivosidenib"
+      ]
+    },
+    {
+      "id": "n_rr_ena",
+      "linkId": "tx_rr_ena",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Enasidenib (R/R)",
+      "title": "Relapsed IDH2-mutated: enasidenib",
+      "section": "Recurrence",
+      "description": "An IDH2 inhibitor for relapsed/refractory IDH2-mutated disease.",
+      "path": "AML / Relapsed / IDH2",
+      "pills": [
+        "IDH2",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "bullets": [
+        "Enasidenib for relapsed/refractory IDH2-mutated AML",
+        "Monitor for differentiation syndrome and hyperbilirubinemia",
+        "Bridge responders to allogeneic transplant where eligible"
+      ],
+      "protocolRefs": [
+        "aml-enasidenib"
+      ]
+    },
+    {
+      "id": "n_rr_intensive",
+      "linkId": "tx_rr_intensive",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Salvage to transplant",
+      "title": "Relapsed, fit: salvage chemotherapy then transplant",
+      "section": "Recurrence",
+      "description": "Reinduction/salvage chemotherapy in fit patients to achieve a second remission and proceed to allogeneic transplant.",
+      "path": "AML / Relapsed / Salvage",
+      "pills": [
+        "salvage",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Intensive salvage chemotherapy (e.g. high-dose cytarabine-based or other multi-agent regimens)",
+        "Goal is a second complete remission as a bridge to allogeneic transplant - the main curative option",
+        "Add the matched targeted agent if an actionable mutation is present",
+        "Donor search / transplant work-up in parallel with reinduction"
+      ],
+      "protocolRefs": [
+        "aml-flag-ida"
+      ]
+    },
+    {
+      "id": "n_rr_trial",
+      "linkId": "tx_rr_trial",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Trial / BSC",
+      "title": "Relapsed, unfit: clinical trial / lower-intensity / supportive care",
+      "section": "Recurrence",
+      "description": "For unfit patients at relapse, prioritize trials and lower-intensity or supportive approaches.",
+      "path": "AML / Relapsed / Trial",
+      "pills": [
+        "trial / BSC",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "bullets": [
+        "Clinical-trial enrollment is preferred",
+        "Lower-intensity therapy (hypomethylating agent +/- venetoclax if not previously used)",
+        "Best supportive care and early palliative-care involvement per goals of care"
+      ],
+      "protocolRefs": [
+        "aml-aza-venetoclax"
+      ]
+    },
+    {
+      "id": "n_apl_molresp",
+      "linkId": "aml_apl_molresp",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "APL molecular response",
+      "title": "APL: molecular response after consolidation",
+      "section": "Treatment",
+      "description": "After ATRA/ATO induction and consolidation, confirm molecular response by PML-RARA PCR. A negative PCR defines molecular remission; a positive or rising PCR signals molecular relapse and pre-emptive salvage.",
+      "path": "AML / APL / Molecular response",
+      "pills": [
+        "APL",
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "pcrneg",
+          "label": "PML-RARA PCR-negative (molecular CR)",
+          "sets": {
+            "aplMol": "neg"
+          },
+          "pills": [
+            "PCR-"
+          ]
+        },
+        {
+          "id": "pcrpos",
+          "label": "PCR-positive / rising (molecular relapse)",
+          "sets": {
+            "aplMol": "pos"
+          },
+          "pills": [
+            "PCR+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_apl_molcr",
+      "linkId": "tx_apl_molcr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "APL molecular CR",
+      "title": "APL: molecular remission - maintenance / surveillance",
+      "section": "Treatment",
+      "description": "PCR-negative APL after ATO-based therapy has an excellent prognosis; low-risk disease needs no cytotoxic maintenance and monitoring transitions to surveillance.",
+      "path": "AML / APL / Molecular CR",
+      "pills": [
+        "APL",
+        "PCR-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Confirm two sequential PCR-negative marrows to define durable molecular remission",
+        "No cytotoxic maintenance is required after ATRA + arsenic trioxide for low/intermediate-risk disease",
+        "Serial PML-RARA PCR monitoring for the first 2-3 years; higher-risk disease is monitored more closely",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_apl_molrelapse",
+      "linkId": "tx_apl_molrelapse",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "APL molecular relapse",
+      "title": "APL: molecular relapse - pre-emptive salvage",
+      "section": "Recurrence",
+      "description": "A positive or rising PML-RARA PCR (molecular relapse) is treated pre-emptively, before overt hematologic relapse.",
+      "path": "AML / APL / Molecular relapse",
+      "pills": [
+        "APL",
+        "PCR+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Confirm on a repeat marrow before acting on a single positive PCR",
+        "Arsenic-trioxide-based reinduction (with ATRA) for patients previously in ATO-based remission",
+        "Autologous transplant for a second molecular remission; allogeneic transplant if PCR-positivity persists",
+        "Reassess in the relapsed/refractory pathway (next step)"
+      ],
+      "protocolRefs": [
+        "aml-atra-ato"
+      ]
+    },
+    {
+      "id": "n_fav_mrd",
+      "linkId": "aml_fav_mrd",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Favorable MRD",
+      "title": "Favorable risk: measurable residual disease after consolidation",
+      "section": "Treatment",
+      "description": "After high-dose cytarabine consolidation, measurable residual disease (molecular CBF/NPM1 transcripts or multiparameter flow) refines relapse risk and can change post-remission strategy.",
+      "path": "AML / Consolidation / Favorable / MRD",
+      "pills": [
+        "favorable",
+        "MRD"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "mrdneg",
+          "label": "MRD-negative",
+          "sets": {
+            "mrd": "neg"
+          },
+          "pills": [
+            "MRD-"
+          ]
+        },
+        {
+          "id": "mrdpos",
+          "label": "MRD-positive / rising transcripts",
+          "sets": {
+            "mrd": "pos"
+          },
+          "pills": [
+            "MRD+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fav_mrdneg",
+      "linkId": "tx_fav_mrdneg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Favorable MRD-negative",
+      "title": "Favorable, MRD-negative: complete chemotherapy consolidation",
+      "section": "Treatment",
+      "description": "MRD-negative favorable-risk disease continues chemotherapy consolidation without transplant.",
+      "path": "AML / Consolidation / Favorable / MRD-",
+      "pills": [
+        "favorable",
+        "MRD-",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Complete the planned cycles of high-dose cytarabine consolidation",
+        "Continue serial MRD monitoring (CBF or NPM1 transcripts) through and after consolidation",
+        "Reserve allogeneic transplant for MRD reappearance or hematologic relapse",
+        "Then move to surveillance (next step)"
+      ],
+      "protocolRefs": [
+        "aml-hidac"
+      ]
+    },
+    {
+      "id": "n_fav_mrdpos",
+      "linkId": "tx_fav_mrdpos",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Favorable MRD-positive",
+      "title": "Favorable, MRD-positive: escalate / consider transplant",
+      "section": "Treatment",
+      "description": "Persistent or rising MRD in favorable-risk disease predicts relapse and shifts management toward transplant.",
+      "path": "AML / Consolidation / Favorable / MRD+",
+      "pills": [
+        "favorable",
+        "MRD+",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c",
+        "d"
+      ],
+      "bullets": [
+        "Confirm rising MRD on a repeat assay before changing strategy",
+        "Refer for allogeneic transplant evaluation - persistent MRD reclassifies a favorable patient toward higher relapse risk",
+        "Add or continue the matched targeted agent (e.g. FLT3 inhibitor) where applicable",
+        "Enroll on an MRD-directed clinical trial where available; then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_rr_flt3_resp",
+      "linkId": "aml_rr_flt3_resp",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "R/R FLT3 response",
+      "title": "Relapsed FLT3: response to gilteritinib",
+      "section": "Recurrence",
+      "description": "Reassess after starting gilteritinib. A response is a bridge to allogeneic transplant; no response or later progression moves to a further line of therapy.",
+      "path": "AML / Relapsed / FLT3 / Response",
+      "pills": [
+        "FLT3",
+        "response"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "response",
+          "label": "Response - fit for transplant",
+          "sets": {
+            "rrFlt3Resp": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "No response / progression",
+          "sets": {
+            "rrFlt3Resp": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_rr_flt3_transplant",
+      "linkId": "tx_rr_flt3_transplant",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FLT3 salvage to transplant",
+      "title": "Relapsed FLT3: bridge to allogeneic transplant",
+      "section": "Recurrence",
+      "description": "A gilteritinib response in fit patients is consolidated with allogeneic transplant, the main curative option at relapse.",
+      "path": "AML / Relapsed / FLT3 / Transplant",
+      "pills": [
+        "FLT3",
+        "transplant",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "d"
+      ],
+      "bullets": [
+        "Proceed to allogeneic transplant once a second remission is achieved on gilteritinib",
+        "Give post-transplant FLT3-inhibitor maintenance for FLT3-mutated disease where used",
+        "Continue donor search and transplant work-up in parallel with the FLT3 inhibitor",
+        "Then move to surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_rr_flt3_later",
+      "linkId": "tx_rr_flt3_later",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "FLT3 later line",
+      "title": "Relapsed FLT3: later-line therapy after a FLT3 inhibitor",
+      "section": "Recurrence",
+      "description": "After progression on a FLT3 inhibitor, later-line therapy prioritizes trials and non-cross-resistant approaches.",
+      "path": "AML / Relapsed / FLT3 / Later",
+      "pills": [
+        "FLT3",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "bullets": [
+        "Clinical-trial enrollment is preferred (FLT3-inhibitor resistance mechanisms, novel combinations)",
+        "Venetoclax-based lower-intensity therapy if not previously used",
+        "Best supportive care and palliative-care involvement per goals of care",
+        "Consider an alternate FLT3 inhibitor only if a distinct resistance profile supports it"
+      ],
+      "protocolRefs": [
+        "aml-aza-venetoclax"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_entry_newdx",
+      "from": "n_entry",
+      "to": "n_workup",
+      "fromOptions": [
+        "newdx"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_apl",
+      "from": "n_entry",
+      "to": "n_apl_workup",
+      "fromOptions": [
+        "apl"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_relapsed",
+      "from": "n_entry",
+      "to": "n_relapsed",
+      "fromOptions": [
+        "relapsed"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_workup_fitness",
+      "from": "n_workup",
+      "to": "n_fitness",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fit_eln",
+      "from": "n_fitness",
+      "to": "n_eln",
+      "fromOptions": [
+        "fit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fit_unfit",
+      "from": "n_fitness",
+      "to": "n_unfit_target",
+      "fromOptions": [
+        "unfit"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eln_fav",
+      "from": "n_eln",
+      "to": "n_fit_target",
+      "fromOptions": [
+        "fav"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eln_int",
+      "from": "n_eln",
+      "to": "n_fit_target",
+      "fromOptions": [
+        "int"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_eln_adv",
+      "from": "n_eln",
+      "to": "n_fit_target",
+      "fromOptions": [
+        "adv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_target_flt3",
+      "from": "n_fit_target",
+      "to": "n_ind_flt3",
+      "fromOptions": [
+        "flt3"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_target_cbf",
+      "from": "n_fit_target",
+      "to": "n_ind_cbf",
+      "fromOptions": [
+        "cbf"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_target_secondary",
+      "from": "n_fit_target",
+      "to": "n_ind_cpx",
+      "fromOptions": [
+        "secondary"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_target_standard",
+      "from": "n_fit_target",
+      "to": "n_ind_73",
+      "fromOptions": [
+        "standard"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3_resp",
+      "from": "n_ind_flt3",
+      "to": "n_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cbf_resp",
+      "from": "n_ind_cbf",
+      "to": "n_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cpx_resp",
+      "from": "n_ind_cpx",
+      "to": "n_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_73_resp",
+      "from": "n_ind_73",
+      "to": "n_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_cr",
+      "from": "n_response",
+      "to": "n_consolidation",
+      "fromOptions": [
+        "cr"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_resp_ref",
+      "from": "n_response",
+      "to": "n_relapsed",
+      "fromOptions": [
+        "refractory"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cons_fav",
+      "from": "n_consolidation",
+      "to": "n_cons_hidac",
+      "fromOptions": [
+        "fav"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cons_int",
+      "from": "n_consolidation",
+      "to": "n_cons_allo",
+      "fromOptions": [
+        "int"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cons_adv",
+      "from": "n_consolidation",
+      "to": "n_cons_adv",
+      "fromOptions": [
+        "adv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hidac_mrd",
+      "from": "n_cons_hidac",
+      "to": "n_fav_mrd",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrd_neg",
+      "from": "n_fav_mrd",
+      "to": "n_fav_mrdneg",
+      "fromOptions": [
+        "mrdneg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrd_pos",
+      "from": "n_fav_mrd",
+      "to": "n_fav_mrdpos",
+      "fromOptions": [
+        "mrdpos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrdneg_surv",
+      "from": "n_fav_mrdneg",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_favmrdpos_surv",
+      "from": "n_fav_mrdpos",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_allo_surv",
+      "from": "n_cons_allo",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_advcons_surv",
+      "from": "n_cons_adv",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfit_azaven",
+      "from": "n_unfit_target",
+      "to": "n_unfit_azaven",
+      "fromOptions": [
+        "azaven"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfit_idh1",
+      "from": "n_unfit_target",
+      "to": "n_unfit_ivo",
+      "fromOptions": [
+        "idh1"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfit_idh2",
+      "from": "n_unfit_target",
+      "to": "n_unfit_ena",
+      "fromOptions": [
+        "idh2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfit_flt3",
+      "from": "n_unfit_target",
+      "to": "n_unfit_azaven",
+      "fromOptions": [
+        "flt3"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfit_frail",
+      "from": "n_unfit_target",
+      "to": "n_unfit_bsc",
+      "fromOptions": [
+        "frail"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_azaven_resp",
+      "from": "n_unfit_azaven",
+      "to": "n_unfit_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ivo_resp",
+      "from": "n_unfit_ivo",
+      "to": "n_unfit_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ena_resp",
+      "from": "n_unfit_ena",
+      "to": "n_unfit_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_bsc_resp",
+      "from": "n_unfit_bsc",
+      "to": "n_unfit_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfitresp_ok",
+      "from": "n_unfit_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfitresp_prog",
+      "from": "n_unfit_response",
+      "to": "n_relapsed",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplwk_risk",
+      "from": "n_apl_workup",
+      "to": "n_apl_risk",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_apl_low",
+      "from": "n_apl_risk",
+      "to": "n_apl_low",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_apl_high",
+      "from": "n_apl_risk",
+      "to": "n_apl_high",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_apllow_mol",
+      "from": "n_apl_low",
+      "to": "n_apl_molresp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplhigh_mol",
+      "from": "n_apl_high",
+      "to": "n_apl_molresp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmol_neg",
+      "from": "n_apl_molresp",
+      "to": "n_apl_molcr",
+      "fromOptions": [
+        "pcrneg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmol_pos",
+      "from": "n_apl_molresp",
+      "to": "n_apl_molrelapse",
+      "fromOptions": [
+        "pcrpos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmolcr_surv",
+      "from": "n_apl_molcr",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_aplmolrel_rr",
+      "from": "n_apl_molrelapse",
+      "to": "n_relapsed",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_flt3",
+      "from": "n_relapsed",
+      "to": "n_rr_gilt",
+      "fromOptions": [
+        "flt3"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_gilt_resp",
+      "from": "n_rr_gilt",
+      "to": "n_rr_flt3_resp",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3resp_tx",
+      "from": "n_rr_flt3_resp",
+      "to": "n_rr_flt3_transplant",
+      "fromOptions": [
+        "response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3resp_prog",
+      "from": "n_rr_flt3_resp",
+      "to": "n_rr_flt3_later",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_flt3tx_surv",
+      "from": "n_rr_flt3_transplant",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_idh1",
+      "from": "n_relapsed",
+      "to": "n_rr_ivo",
+      "fromOptions": [
+        "idh1"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_idh2",
+      "from": "n_relapsed",
+      "to": "n_rr_ena",
+      "fromOptions": [
+        "idh2"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_intensive",
+      "from": "n_relapsed",
+      "to": "n_rr_intensive",
+      "fromOptions": [
+        "intensive"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rr_trial",
+      "from": "n_relapsed",
+      "to": "n_rr_trial",
+      "fromOptions": [
+        "trial"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}

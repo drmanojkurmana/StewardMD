@@ -1,0 +1,116 @@
+{
+  "id": "hcc-tace",
+  "diseaseId": "hcc_cancer",
+  "name": "Conventional TACE (DOXOrubicin or cisplatin, intra-arterial + embolization)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 42,
+  "cycles": 3,
+  "cyclesNote": "Transarterial chemoembolization is delivered on-demand, not on a fixed calendar. Sessions are repeated for viable/residual tumor at roughly 6 to 8 week intervals with response imaging and a liver-function check before each session; the cycle count here is a nominal planning default only. Conventional TACE is a single-agent choice: doxorubicin OR cisplatin emulsified in lipiodol, followed by embolic particles. Both agents are listed so either can be selected; they are not both given in one session by default.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic and analgesic cover",
+      "notes": "Peri-procedure antiemetic and analgesia for expected post-embolization symptoms; periprocedural antibiotic prophylaxis per interventional-radiology practice."
+    }
+  ],
+  "supportiveCare": [
+    "Selective / superselective delivery to spare non-tumor parenchyma and preserve liver reserve.",
+    "Anticipate and manage post-embolization syndrome (pain, fever, nausea, transient transaminitis).",
+    "Reassess Child-Pugh status before each session; avoid repeat sessions that would compromise liver reserve.",
+    "Continue antiviral therapy for viral hepatitis and hepatology co-management."
+  ],
+  "monitoring": [
+    "liver function and bilirubin before and after each session",
+    "AFP trend and multiphasic CT / MRI response imaging",
+    "renal function (contrast and cisplatin nephrotoxicity if cisplatin used)",
+    "cumulative anthracycline exposure if doxorubicin used"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "renal",
+    "CBC/platelets",
+    "cumulative anthracycline dose",
+    "prior-session status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "declining liver reserve (rising bilirubin, new ascites, Child-Pugh worsening)",
+      "action": "review/stop",
+      "text": "Do not repeat chemoembolization when liver reserve is declining; reassess for systemic therapy or best supportive care. Physician decides."
+    },
+    {
+      "condition": "cumulative intra-arterial DOXOrubicin approaching lifetime anthracycline limits",
+      "drug": "doxorubicin",
+      "action": "review/stop",
+      "text": "Track cumulative anthracycline exposure across all routes; approaching 450 mg/m2 warrants review and 550 mg/m2 is the conventional hard cap for cumulative cardiotoxicity. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin (intra-arterial)",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "intra-arterial",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "Conventional TACE option: DOXOrubicin about 50 mg/m2 (commonly 50 to 75 mg total) emulsified in lipiodol and delivered into the tumor-feeding hepatic artery, followed by embolic particles to stagnation. Single-agent choice (use doxorubicin OR cisplatin, not both). ISMP tall-man. Track cumulative anthracycline exposure for cardiotoxicity. Authored from standard interventional-oncology practice; the operator selects the actual per-session dose by tumor burden and liver reserve.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "conventional transarterial chemoembolization, intermediate-stage HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin (intra-arterial)",
+      "basis": "flat",
+      "dosePerUnit": 100,
+      "unit": "mg",
+      "route": "intra-arterial",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Alternative conventional TACE agent: cisplatin (about 100 mg per session, or roughly 2 mg/kg) emulsified in lipiodol and delivered intra-arterially, followed by embolization. Single-agent choice (use cisplatin OR doxorubicin, not both). Ensure adequate hydration and monitor renal function. Authored from standard interventional-oncology practice; the operator sets the actual per-session dose.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "conventional transarterial chemoembolization, intermediate-stage HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

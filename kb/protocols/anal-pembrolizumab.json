@@ -1,0 +1,77 @@
+{
+  "id": "anal-pembrolizumab",
+  "diseaseId": "anal_cancer",
+  "name": "Pembrolizumab (checkpoint immunotherapy, previously treated anal SCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Anal Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "Anti-PD-1 monotherapy is active in previously treated metastatic anal squamous cell carcinoma; MMR-deficient/MSI-high or high PD-L1 (CPS) status strengthens the case but is not required. Flat dosing is independent of body size. General reference: Standard Guidelines (NCCN) / DeVita."
+  },
+  "stage": [
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic (second-line and beyond)",
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "None routine",
+      "notes": "No routine premedication; manage infusion reactions if they occur."
+    }
+  ],
+  "supportiveCare": [
+    "Pembrolizumab flat 200 mg IV every 3 weeks (or 400 mg IV every 6 weeks), continued until progression or unacceptable toxicity.",
+    "Counsel on immune-related adverse events and provide a wallet card; have a management pathway for endocrinopathy, colitis, pneumonitis, and hepatitis."
+  ],
+  "monitoring": [
+    "thyroid, liver, renal function and glucose before dosing (immune-related toxicity surveillance)",
+    "symptom review for immune-related colitis, pneumonitis, dermatitis, endocrinopathy each visit",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2-4 immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and start corticosteroids per immune-related toxicity guidance; permanently discontinue for most grade 3-4 events. Clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Pembrolizumab flat 200 mg IV on day 1 of a 21-day cycle (alternative 400 mg IV every 6 weeks). Flat dose, not weight- or BSA-based. Nivolumab 240 mg every 2 weeks (or 480 mg every 4 weeks) is an equivalent anti-PD-1 alternative. General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    }
+  ]
+}

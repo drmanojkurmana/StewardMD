@@ -2,82 +2,1135 @@
   "guideline": "myeloma",
   "title": "Multiple Myeloma",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
-  "diseaseId": "plasma_cell_disorders",
-  "matchDisease": false,
+  "navigatorVersion": "3.0.0",
+  "diseaseId": "myeloma_cancer",
+  "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for multiple myeloma. Captures treatment phase (newly diagnosed, maintenance, relapsed/refractory) as a scenario tag, then routes to APPLICABLE existing StewardMD Standard Protocols by reference. Invents no dose/regimen/criterion. Structural pathway consistent with Standard Guidelines (NCCN) Multiple Myeloma; no proprietary content reproduced. DRAFT - not clinically activated; physician decides.",
-  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Multiple Myeloma. Options reference existing StewardMD Standard Protocols and their own evidence layers.",
-  "startNodeIds": ["n_mm_phase"],
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides.",
+  "sourceNote": "Structural pathway consistent with standard oncology references (NCCN/DeVita/Harrison); regimen leaves reference existing StewardMD Standard Protocols by id, and the dose engine computes patient doses. No proprietary guideline text reproduced. DRAFT - not clinically activated.",
+  "startNodeIds": ["n_entry"],
+  "footnotes": {
+    "a": {
+      "text": "Myeloma-defining events (any one, with clonal marrow plasma cells): CRAB features (hyperCalcemia, Renal insufficiency, Anemia, lytic Bone lesions) OR a SLiM biomarker (clonal plasma cells >=60%, involved:uninvolved serum free light-chain ratio >=100, or >1 focal MRI lesion).",
+      "evidence": "1"
+    },
+    "b": {
+      "text": "R-ISS integrates ISS stage (beta-2-microglobulin, albumin) with serum LDH and high-risk FISH; used here for prognosis, not to withhold therapy.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "High-risk cytogenetics by FISH: t(4;14), t(14;16), t(14;20), del(17p), and gain/amplification of 1q21. Presence of >=2 abnormalities is often termed double-hit disease.",
+      "evidence": "2A"
+    },
+    "d": {
+      "text": "Supportive care is concurrent, not optional: bone-modifying agent (zoledronic acid or denosumab), VTE prophylaxis while on an immunomodulatory drug, herpes-zoster prophylaxis with a proteasome inhibitor or anti-CD38 antibody, and infection/vaccination review.",
+      "evidence": "2A"
+    }
+  },
   "nodes": [
     {
-      "id": "n_mm_phase",
-      "linkId": "mm_phase",
+      "id": "n_entry",
+      "linkId": "mm_entry",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "template": "main",
-      "name": "Treatment phase",
-      "title": "Treatment phase",
-      "description": "Multiple myeloma management differs by treatment phase - newly diagnosed disease requiring induction therapy, post-induction maintenance therapy, or relapsed/refractory disease after prior treatment.",
-      "path": "Myeloma / Treatment phase",
-      "section": "Treatment planning",
-      "pills": ["phase", "treatment-planning"],
+      "name": "Plasma-cell disorder",
+      "title": "Plasma-cell disorder / disease phase",
+      "section": "Contents",
+      "description": "Select the plasma-cell disorder category or disease phase to route the pathway.",
+      "path": "Myeloma / Entry",
+      "pills": ["entry"],
       "required": true,
+      "bullets": [
+        "MGUS (monoclonal gammopathy of undetermined significance)",
+        "Smoldering (asymptomatic) multiple myeloma",
+        "Active (symptomatic) newly diagnosed multiple myeloma",
+        "Relapsed or refractory disease after prior therapy"
+      ],
       "options": [
-        { "id": "nd", "label": "Newly diagnosed", "sets": { "scenario": "newly-diagnosed" } },
-        { "id": "maint", "label": "Maintenance", "sets": { "scenario": "maintenance" } },
-        { "id": "relapsed", "label": "Relapsed / refractory", "sets": { "scenario": "relapsed" } }
+        { "id": "mgus", "label": "MGUS", "sets": { "phase": "mgus" }, "pills": ["MGUS"] },
+        { "id": "smm", "label": "Smoldering myeloma", "sets": { "phase": "smoldering" }, "pills": ["SMM"] },
+        { "id": "active", "label": "Active newly diagnosed MM", "sets": { "phase": "newly-diagnosed" }, "pills": ["NDMM"] },
+        { "id": "relapsed", "label": "Relapsed / refractory", "sets": { "phase": "relapsed" }, "pills": ["RRMM"] }
       ]
     },
     {
-      "id": "n_tx_mm_nd",
-      "linkId": "tx_mm_nd",
-      "nodeCategory": "treatment",
-      "nodeType": "end",
-      "template": "end",
-      "name": "Newly diagnosed: triplet / quadruplet induction",
-      "title": "Newly diagnosed: triplet / quadruplet induction",
-      "description": "Newly diagnosed multiple myeloma - triplet or quadruplet induction combining a proteasome inhibitor, immunomodulatory agent, and/or anti-CD38 antibody with dexamethasone is standard first-line therapy, with eligibility for autologous stem cell transplant guiding regimen choice. Physician selects.",
-      "path": "Myeloma / Treatment / Newly diagnosed",
-      "section": "Treatment",
-      "pills": ["newly-diagnosed", "treatment"],
-      "showsRecommendation": true,
-      "protocolRefs": ["heme-mm-vrd", "heme-mm-krd", "heme-mm-dara-rd"]
+      "id": "n_wk_mgus",
+      "linkId": "mm_wk_mgus",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "MGUS workup",
+      "title": "MGUS: workup",
+      "section": "Workup",
+      "description": "Confirm a small clone with no end-organ damage and stratify progression risk.",
+      "path": "Myeloma / MGUS / Workup",
+      "pills": ["MGUS", "workup"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "SPEP with immunofixation and serum free light chains; quantitate the M-protein",
+        "CBC, calcium, creatinine to exclude CRAB",
+        "Marrow biopsy and imaging only if intermediate/high-risk or unexplained CRAB",
+        "Risk factors: non-IgG isotype, M-protein >=1.5 g/dL, abnormal free light-chain ratio"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue" }
+      ]
     },
     {
-      "id": "n_tx_mm_maint",
-      "linkId": "tx_mm_maint",
-      "nodeCategory": "treatment",
+      "id": "n_tx_mgus",
+      "linkId": "mm_tx_mgus",
+      "nodeCategory": "surveillance",
       "nodeType": "end",
       "template": "end",
-      "name": "Maintenance: lenalidomide",
-      "title": "Maintenance: lenalidomide",
-      "description": "Post-induction (including post-transplant) maintenance therapy - lenalidomide maintenance is standard to prolong disease control. Physician selects.",
-      "path": "Myeloma / Treatment / Maintenance",
-      "section": "Treatment",
-      "pills": ["maintenance", "treatment"],
+      "name": "MGUS: observe",
+      "title": "MGUS: observation, no treatment",
+      "section": "Surveillance",
+      "description": "No treatment; periodic monitoring for progression.",
+      "path": "Myeloma / MGUS / Management",
+      "pills": ["MGUS", "observe"],
+      "required": false,
       "showsRecommendation": true,
-      "protocolRefs": ["heme-mm-lenalidomide-maintenance"]
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "No cytotoxic therapy - MGUS is precursor, not cancer",
+        "Recheck M-protein and CRAB labs at 6 months, then every 1-2 years by risk",
+        "Re-evaluate promptly for new anemia, bone pain, renal change or rising M-protein"
+      ]
     },
     {
-      "id": "n_tx_mm_relapsed",
-      "linkId": "tx_mm_relapsed",
+      "id": "n_wk_smm",
+      "linkId": "mm_wk_smm",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Smoldering workup",
+      "title": "Smoldering myeloma: workup",
+      "section": "Workup",
+      "description": "Confirm marrow clone and M-protein burden without myeloma-defining events.",
+      "path": "Myeloma / Smoldering / Workup",
+      "pills": ["SMM", "workup"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a"],
+      "bullets": [
+        "Marrow biopsy for clonal plasma-cell percentage and FISH",
+        "SPEP/UPEP with immunofixation, serum free light chains",
+        "Whole-body low-dose CT or PET/MRI to exclude lytic lesions and focal marrow disease",
+        "Confirm absence of CRAB and SLiM biomarkers"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue" }
+      ]
+    },
+    {
+      "id": "n_risk_smm",
+      "linkId": "mm_risk_smm",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Smoldering risk",
+      "title": "Smoldering myeloma: progression risk (20/2/20)",
+      "section": "Staging",
+      "description": "Stratify 2-year progression risk to decide observation versus early therapy or trial.",
+      "path": "Myeloma / Smoldering / Risk",
+      "pills": ["SMM", "risk"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "20/2/20 progression-risk model",
+          "headers": ["Risk factor", "Threshold"],
+          "rows": [
+            ["Marrow clonal plasma cells", "> 20%"],
+            ["Serum M-protein", "> 2 g/dL"],
+            ["Involved:uninvolved free light-chain ratio", "> 20"],
+            ["Low risk", "0 factors"],
+            ["Intermediate risk", "1 factor"],
+            ["High risk", ">= 2 factors"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "low", "label": "Low / intermediate risk (0-1 factor)", "sets": { "smm_risk": "low" }, "pills": ["low-int"] },
+        { "id": "high", "label": "High risk (>= 2 factors)", "sets": { "smm_risk": "high" }, "pills": ["high"] }
+      ]
+    },
+    {
+      "id": "n_tx_smm_low",
+      "linkId": "mm_tx_smm_low",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "SMM low: observe",
+      "title": "Smoldering, lower risk: observation",
+      "section": "Surveillance",
+      "description": "Active surveillance without therapy.",
+      "path": "Myeloma / Smoldering / Lower-risk",
+      "pills": ["SMM", "observe"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "No treatment outside a trial - overall survival benefit of early therapy is unproven at lower risk",
+        "M-protein and CRAB labs every 3-6 months",
+        "Repeat marrow and imaging on biochemical change"
+      ]
+    },
+    {
+      "id": "n_tx_smm_high",
+      "linkId": "mm_tx_smm_high",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "template": "end",
-      "name": "Relapsed/refractory: pomalidomide-dexamethasone",
-      "title": "Relapsed/refractory: pomalidomide-dexamethasone",
-      "description": "Relapsed or refractory multiple myeloma - pomalidomide with dexamethasone is an option for disease progressing after prior immunomodulatory- and proteasome inhibitor-based therapy. Physician selects.",
-      "path": "Myeloma / Treatment / Relapsed-refractory",
+      "name": "SMM high: trial / lenalidomide",
+      "title": "Smoldering, high risk: clinical trial or lenalidomide",
       "section": "Treatment",
-      "pills": ["relapsed", "treatment"],
+      "description": "Consider early intervention to delay progression; trial preferred.",
+      "path": "Myeloma / Smoldering / High-risk",
+      "pills": ["SMM", "high-risk"],
+      "required": false,
       "showsRecommendation": true,
-      "protocolRefs": ["heme-mm-pomalidomide-dex"]
+      "evidenceCategory": ["2A"],
+      "protocolRefs": ["mm-lenalidomide-smm"],
+      "bullets": [
+        "Clinical trial is the preferred pathway for high-risk smoldering disease",
+        "Off trial, single-agent lenalidomide can delay progression to active myeloma",
+        "Close monitoring; treat as active myeloma once a myeloma-defining event appears"
+      ]
+    },
+    {
+      "id": "n_wk_ndmm",
+      "linkId": "mm_wk_ndmm",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "NDMM workup",
+      "title": "Newly diagnosed MM: workup checklist",
+      "section": "Workup",
+      "description": "Establish diagnosis, tumor burden, cytogenetics and organ status before therapy.",
+      "path": "Myeloma / Newly diagnosed / Workup",
+      "pills": ["NDMM", "workup"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["a", "d"],
+      "bullets": [
+        "CBC, calcium, creatinine, albumin, LDH, beta-2-microglobulin",
+        "SPEP/UPEP with immunofixation, serum free light chains, 24h urine",
+        "Marrow aspirate/biopsy with FISH panel (del17p, t(4;14), t(14;16), 1q)",
+        "Whole-body imaging: low-dose CT, or PET/CT or whole-body MRI",
+        "Assess performance status, comorbidity and transplant candidacy"
+      ],
+      "options": [
+        { "id": "continue", "label": "Workup reviewed - continue" }
+      ]
+    },
+    {
+      "id": "n_crab",
+      "linkId": "mm_crab",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Myeloma-defining events",
+      "title": "Confirm active disease (CRAB / SLiM)",
+      "section": "Staging",
+      "description": "A myeloma-defining event distinguishes active myeloma from smoldering disease.",
+      "path": "Myeloma / Newly diagnosed / MDE",
+      "pills": ["CRAB", "SLiM"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["a"],
+      "bullets": [
+        "CRAB: hyperCalcemia, Renal insufficiency, Anemia, lytic Bone lesions",
+        "SLiM: >=60% clonal plasma cells, FLC ratio >=100, or >1 focal MRI lesion"
+      ],
+      "options": [
+        { "id": "mde", "label": "Myeloma-defining event present - active MM", "sets": { "active": "yes" }, "pills": ["active"] },
+        { "id": "nomde", "label": "No defining event - reclassify as smoldering", "sets": { "active": "no" }, "pills": ["smoldering"] }
+      ]
+    },
+    {
+      "id": "n_stage_iss",
+      "linkId": "mm_stage_iss",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "R-ISS stage",
+      "title": "Staging: Revised International Staging System",
+      "section": "Staging",
+      "description": "Assign R-ISS for prognosis; does not change the decision to treat.",
+      "path": "Myeloma / Newly diagnosed / R-ISS",
+      "pills": ["R-ISS", "staging"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "footnotes": ["b"],
+      "tables": [
+        {
+          "title": "R-ISS staging",
+          "headers": ["Stage", "Criteria"],
+          "rows": [
+            ["I", "ISS I (B2M < 3.5 and albumin >= 3.5) AND normal LDH AND no high-risk FISH"],
+            ["II", "Not stage I or III"],
+            ["III", "ISS III (B2M >= 5.5) AND (high LDH OR high-risk FISH)"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "rss1", "label": "R-ISS I", "sets": { "rss": "I" }, "pills": ["R-ISS I"] },
+        { "id": "rss2", "label": "R-ISS II", "sets": { "rss": "II" }, "pills": ["R-ISS II"] },
+        { "id": "rss3", "label": "R-ISS III", "sets": { "rss": "III" }, "pills": ["R-ISS III"] }
+      ]
+    },
+    {
+      "id": "n_risk_cyto",
+      "linkId": "mm_risk_cyto",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Cytogenetic risk",
+      "title": "Risk stratification: FISH cytogenetics",
+      "section": "Staging",
+      "description": "High-risk cytogenetics favor sustained/intensified therapy and inform prognosis.",
+      "path": "Myeloma / Newly diagnosed / Cytogenetics",
+      "pills": ["FISH", "risk"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["c"],
+      "tables": [
+        {
+          "title": "Cytogenetic risk (FISH)",
+          "headers": ["Category", "Markers"],
+          "rows": [
+            ["Standard risk", "Hyperdiploidy, t(11;14), t(6;14); none of the high-risk lesions"],
+            ["High risk", "t(4;14), t(14;16), t(14;20), del(17p), gain/amp 1q21"],
+            ["Double-hit", ">= 2 high-risk lesions together"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "standard", "label": "Standard risk", "sets": { "biomarkers.cyto": "standard" }, "pills": ["standard-risk"] },
+        { "id": "highrisk", "label": "High risk", "sets": { "biomarkers.cyto": "high" }, "pills": ["high-risk"] }
+      ]
+    },
+    {
+      "id": "n_supportive",
+      "linkId": "mm_supportive",
+      "nodeCategory": "other",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Supportive care",
+      "title": "Concurrent supportive care",
+      "section": "Treatment",
+      "description": "Start alongside anti-myeloma therapy, not after it.",
+      "path": "Myeloma / Newly diagnosed / Supportive",
+      "pills": ["supportive"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["d"],
+      "bullets": [
+        "Bone-modifying agent: zoledronic acid or denosumab (denosumab if renal impairment)",
+        "VTE prophylaxis (aspirin or anticoagulant) with any immunomodulatory drug",
+        "Herpes-zoster prophylaxis with a proteasome inhibitor or anti-CD38 antibody",
+        "Renal protection: hydration, avoid nephrotoxins; treat hypercalcemia",
+        "Vaccination and infection review"
+      ],
+      "options": [
+        { "id": "continue", "label": "Supportive care set - continue" }
+      ]
+    },
+    {
+      "id": "n_transplant_elig",
+      "linkId": "mm_transplant_elig",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Transplant eligibility",
+      "title": "Autologous transplant candidacy",
+      "section": "Treatment",
+      "description": "Candidacy is driven by physiologic fitness, organ function and comorbidity, not a rigid age cutoff.",
+      "path": "Myeloma / Newly diagnosed / Transplant candidacy",
+      "pills": ["ASCT", "eligibility"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "options": [
+        { "id": "eligible", "label": "Transplant eligible", "sets": { "transplant": "eligible" }, "pills": ["TE"] },
+        { "id": "ineligible", "label": "Transplant ineligible", "sets": { "transplant": "ineligible" }, "pills": ["TI"] }
+      ]
+    },
+    {
+      "id": "n_te_induction",
+      "linkId": "mm_te_induction",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "TE induction",
+      "title": "Transplant-eligible: induction",
+      "section": "Treatment",
+      "description": "Triplet or quadruplet induction to maximal response before stem-cell collection.",
+      "path": "Myeloma / Newly diagnosed / TE induction",
+      "pills": ["induction", "TE"],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-vrd"],
+      "bullets": [
+        "Quadruplet Dara-VRd (daratumumab + bortezomib + lenalidomide + dexamethasone) deepens response, favored especially for high-risk disease",
+        "Triplet VRd (bortezomib + lenalidomide + dexamethasone) is an accepted backbone",
+        "Give 3-4 cycles, then proceed to stem-cell collection",
+        "Avoid prolonged lenalidomide before collection to protect stem-cell yield"
+      ],
+      "options": [
+        { "id": "quad", "label": "Quadruplet (Dara-VRd)", "sets": { "te_induction": "dara-vrd" }, "pills": ["Dara-VRd"] },
+        { "id": "triplet", "label": "Triplet (VRd)", "sets": { "te_induction": "vrd" }, "pills": ["VRd"] }
+      ]
+    },
+    {
+      "id": "n_te_response",
+      "linkId": "mm_te_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Post-induction response",
+      "title": "Transplant-eligible: response before collection",
+      "section": "Treatment",
+      "description": "Grade depth of response after 3-4 induction cycles; suboptimal response prompts a change before stem-cell collection.",
+      "path": "Myeloma / Newly diagnosed / TE induction / Response",
+      "pills": ["induction", "response"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Assess IMWG response (M-protein, free light chains, marrow if indicated) after 3-4 cycles",
+        "Partial response or deeper: proceed to stem-cell mobilization and collection",
+        "Less than partial response or biochemical progression: switch to a non-cross-resistant induction",
+        "Do not prolong lenalidomide unnecessarily before collection (protects stem-cell yield)"
+      ],
+      "options": [
+        { "id": "deep", "label": "Partial response or better - proceed to collection", "sets": { "te_response": "adequate" }, "pills": [">=PR"] },
+        { "id": "subopt", "label": "Suboptimal response / progression - switch induction", "sets": { "te_response": "suboptimal" }, "pills": ["<PR"] }
+      ]
+    },
+    {
+      "id": "n_te_switch",
+      "linkId": "mm_te_switch",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Switch induction",
+      "title": "Suboptimal induction response: switch, then collect",
+      "section": "Treatment",
+      "description": "Change to a non-cross-resistant induction to deepen response before transplant.",
+      "path": "Myeloma / Newly diagnosed / TE induction / Switch",
+      "pills": ["induction", "switch"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "protocolRefs": ["heme-mm-krd"],
+      "bullets": [
+        "Switch a bortezomib-based induction to a carfilzomib-based regimen (e.g. KRd), or add daratumumab if not already used",
+        "Aim for at least a partial response before mobilization and collection",
+        "Reassess transplant candidacy if disease is primary-refractory",
+        "Then proceed to stem-cell collection and high-dose melphalan (next step)"
+      ]
+    },
+    {
+      "id": "n_asct",
+      "linkId": "mm_asct",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "ASCT",
+      "title": "Stem-cell collection and autologous transplant",
+      "section": "Treatment",
+      "description": "High-dose melphalan with autologous rescue after induction response.",
+      "path": "Myeloma / Newly diagnosed / ASCT",
+      "pills": ["ASCT"],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "Mobilize and collect stem cells (store enough for a possible second transplant)",
+        "High-dose melphalan conditioning followed by autologous stem-cell infusion",
+        "Early transplant deepens response and prolongs progression-free survival",
+        "Delayed transplant (collect now, transplant at first relapse) is an option in selected standard-risk patients"
+      ],
+      "options": [
+        { "id": "continue", "label": "Transplant completed - continue" }
+      ]
+    },
+    {
+      "id": "n_maint_te",
+      "linkId": "mm_maint_te",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "TE maintenance",
+      "title": "Post-transplant maintenance",
+      "section": "Treatment",
+      "description": "Continuous maintenance after transplant prolongs remission.",
+      "path": "Myeloma / Newly diagnosed / TE maintenance",
+      "pills": ["maintenance", "TE"],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-lenalidomide-maintenance"],
+      "bullets": [
+        "Lenalidomide maintenance until progression is standard for standard-risk disease",
+        "For high-risk cytogenetics, add a proteasome inhibitor (bortezomib or carfilzomib) to maintenance",
+        "Monitor blood counts and for second primary malignancy",
+        "Maintenance intensity is directed by baseline cytogenetic risk (choose below)"
+      ],
+      "options": [
+        { "id": "std", "label": "Standard-risk cytogenetics", "sets": { "maint_risk": "standard" }, "pills": ["standard-risk"] },
+        { "id": "highrisk", "label": "High-risk cytogenetics", "sets": { "maint_risk": "high" }, "pills": ["high-risk"] }
+      ]
+    },
+    {
+      "id": "n_maint_te_std",
+      "linkId": "mm_maint_te_std",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TE maintenance standard-risk",
+      "title": "Post-transplant maintenance: standard-risk",
+      "section": "Treatment",
+      "description": "Single-agent lenalidomide maintenance to progression.",
+      "path": "Myeloma / Newly diagnosed / TE maintenance / Standard-risk",
+      "pills": ["maintenance", "standard-risk"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-lenalidomide-maintenance"],
+      "bullets": [
+        "Lenalidomide maintenance until progression (overall-survival benefit shown)",
+        "Start after count recovery from transplant; dose-adjust for cytopenias and renal function",
+        "Aspirin thromboprophylaxis; monitor for second primary malignancy",
+        "Track MRD and M-protein to confirm sustained depth of response"
+      ]
+    },
+    {
+      "id": "n_maint_te_hr",
+      "linkId": "mm_maint_te_hr",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TE maintenance high-risk",
+      "title": "Post-transplant maintenance: high-risk (doublet)",
+      "section": "Treatment",
+      "description": "Lenalidomide plus a proteasome inhibitor for high-risk cytogenetics.",
+      "path": "Myeloma / Newly diagnosed / TE maintenance / High-risk",
+      "pills": ["maintenance", "high-risk"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "footnotes": ["c"],
+      "protocolRefs": ["heme-mm-lenalidomide-maintenance"],
+      "bullets": [
+        "Add a proteasome inhibitor (bortezomib or carfilzomib) to lenalidomide for high-risk cytogenetics",
+        "Continue the doublet to progression; consider indefinite duration for double-hit disease",
+        "Herpes-zoster prophylaxis while on a proteasome inhibitor",
+        "Monitor cardiac status if carfilzomib is used; escalate imaging on any new symptom"
+      ]
+    },
+    {
+      "id": "n_ti_induction",
+      "linkId": "mm_ti_induction",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "TI induction",
+      "title": "Transplant-ineligible: induction",
+      "section": "Treatment",
+      "description": "Continuous triplet therapy adapted to frailty.",
+      "path": "Myeloma / Newly diagnosed / TI induction",
+      "pills": ["induction", "TI"],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-dara-rd", "heme-mm-vrd"],
+      "bullets": [
+        "Dara-Rd (daratumumab + lenalidomide + dexamethasone) continuous therapy is a preferred option",
+        "VRd-lite (attenuated bortezomib + lenalidomide + dexamethasone) suits frailer or neuropathy-prone patients",
+        "Weekly subcutaneous bortezomib dosing and dexamethasone dose-reduction lower toxicity in older patients",
+        "Adjust doses to frailty; treat continuously to progression"
+      ],
+      "options": [
+        { "id": "darard", "label": "Dara-Rd", "sets": { "ti_induction": "dara-rd" }, "pills": ["Dara-Rd"] },
+        { "id": "vrdlite", "label": "VRd-lite", "sets": { "ti_induction": "vrd-lite" }, "pills": ["VRd-lite"] }
+      ]
+    },
+    {
+      "id": "n_ti_response",
+      "linkId": "mm_ti_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "TI response",
+      "title": "Transplant-ineligible: response-adapted continuation",
+      "section": "Treatment",
+      "description": "Reassess response and tolerance after the first cycles; inadequate response or intolerance prompts a class switch.",
+      "path": "Myeloma / Newly diagnosed / TI induction / Response",
+      "pills": ["induction", "response", "TI"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Grade IMWG response after 2-3 cycles and review frailty / toxicity",
+        "Responding and tolerating: continue the backbone as maintenance",
+        "Inadequate response or limiting toxicity: switch drug class and de-escalate dexamethasone",
+        "Keep bone-modifying, VTE and infection prophylaxis running throughout"
+      ],
+      "options": [
+        { "id": "responding", "label": "Responding and tolerating - continue backbone", "sets": { "ti_response": "responding" }, "pills": ["responding"] },
+        { "id": "inadequate", "label": "Inadequate response / intolerance - switch class", "sets": { "ti_response": "switch" }, "pills": ["switch"] }
+      ]
+    },
+    {
+      "id": "n_ti_switch",
+      "linkId": "mm_ti_switch",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "TI switch class",
+      "title": "Transplant-ineligible: switch to a new class",
+      "section": "Treatment",
+      "description": "Change to a pomalidomide- or proteasome-inhibitor-based regimen when the initial backbone fails.",
+      "path": "Myeloma / Newly diagnosed / TI induction / Switch",
+      "pills": ["induction", "switch", "TI"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "protocolRefs": ["heme-mm-pomalidomide-dex"],
+      "bullets": [
+        "If lenalidomide-based backbone fails: switch to a pomalidomide + anti-CD38 regimen",
+        "If bortezomib-limited by neuropathy: move to weekly carfilzomib or an anti-CD38 doublet",
+        "Attenuate doses to frailty; continue to progression or intolerance",
+        "Then follow the shared response-assessment step"
+      ]
+    },
+    {
+      "id": "n_maint_ti",
+      "linkId": "mm_maint_ti",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "TI maintenance",
+      "title": "Transplant-ineligible: continued therapy",
+      "section": "Treatment",
+      "description": "Continue the active backbone to progression.",
+      "path": "Myeloma / Newly diagnosed / TI maintenance",
+      "pills": ["maintenance", "TI"],
+      "required": true,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-lenalidomide-maintenance"],
+      "bullets": [
+        "Continue lenalidomide (with or without daratumumab) as maintenance/continuous therapy",
+        "De-escalate dexamethasone after the first cycles to reduce toxicity",
+        "Reassess frailty and tolerance at each cycle"
+      ],
+      "options": [
+        { "id": "continue", "label": "Maintenance started - continue" }
+      ]
+    },
+    {
+      "id": "n_response",
+      "linkId": "mm_response",
+      "nodeCategory": "surveillance",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Response / MRD",
+      "title": "Response assessment (IMWG) and MRD",
+      "section": "Surveillance",
+      "description": "Grade depth of response; MRD is prognostic.",
+      "path": "Myeloma / Response",
+      "pills": ["response", "MRD"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "IMWG response categories",
+          "headers": ["Category", "Definition (short)"],
+          "rows": [
+            ["Stringent CR", "CR plus normal FLC ratio and no clonal marrow plasma cells"],
+            ["Complete response", "Negative immunofixation, < 5% marrow plasma cells"],
+            ["Very good PR", "M-protein reduced >= 90% (or immunofixation+ only)"],
+            ["Partial response", "M-protein reduced >= 50%"],
+            ["MRD-negative", "No clone at >= 10^-5 by NGS or flow"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "continue", "label": "Response graded - continue to surveillance" }
+      ]
+    },
+    {
+      "id": "n_surv",
+      "linkId": "mm_surv",
+      "nodeCategory": "surveillance",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Surveillance",
+      "title": "Surveillance on therapy",
+      "section": "Surveillance",
+      "description": "Serial monitoring to detect relapse early.",
+      "path": "Myeloma / Surveillance",
+      "pills": ["surveillance"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "Monitoring schedule",
+          "headers": ["Test", "Interval"],
+          "rows": [
+            ["CBC, calcium, creatinine, SPEP, serum free light chains", "Every 1-3 months"],
+            ["24h urine / UPEP", "Periodically or if light-chain change"],
+            ["Imaging (CT/PET/MRI)", "For new symptoms or biochemical progression"],
+            ["Marrow + FISH", "At suspected relapse"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "sustained", "label": "Sustained response - continue monitoring", "sets": { "status": "responding" }, "pills": ["stable"] },
+        { "id": "progression", "label": "Biochemical or clinical progression", "sets": { "status": "progression" }, "pills": ["relapse"] }
+      ]
+    },
+    {
+      "id": "n_surv_stable",
+      "linkId": "mm_surv_stable",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Continued surveillance",
+      "title": "Sustained response: continue maintenance and monitoring",
+      "section": "Surveillance",
+      "description": "Ongoing maintenance with scheduled monitoring.",
+      "path": "Myeloma / Surveillance / Stable",
+      "pills": ["stable"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Continue maintenance to progression or intolerance",
+        "Keep serial M-protein and free light-chain trends",
+        "Re-enter the relapse pathway on confirmed progression"
+      ]
+    },
+    {
+      "id": "n_relapse_entry",
+      "linkId": "mm_relapse_entry",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Relapse workup",
+      "title": "Relapsed / refractory: restaging",
+      "section": "Recurrence",
+      "description": "Confirm relapse and re-characterize disease before selecting next-line therapy.",
+      "path": "Myeloma / Relapse / Workup",
+      "pills": ["RRMM", "workup"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Confirm IMWG progression (rising M-protein/FLC, new CRAB, or new lesions)",
+        "Repeat marrow with FISH to detect clonal evolution (e.g., new del17p, t(11;14))",
+        "Whole-body imaging for new bone or extramedullary disease",
+        "Catalog prior drug exposure and refractoriness (last regimen, best response, time to relapse)"
+      ],
+      "options": [
+        { "id": "continue", "label": "Restaging reviewed - continue" }
+      ]
+    },
+    {
+      "id": "n_relapse_strat",
+      "linkId": "mm_relapse_strat",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Relapse stratification",
+      "title": "Next line by prior exposure / refractoriness",
+      "section": "Recurrence",
+      "description": "Choose a regimen that does not repeat a drug the disease is refractory to; introduce a new class.",
+      "path": "Myeloma / Relapse / Stratify",
+      "pills": ["RRMM", "prior-exposure"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "tables": [
+        {
+          "title": "Relapse decision by prior therapy",
+          "headers": ["Prior status", "Preferred direction"],
+          "rows": [
+            ["Lenalidomide-sensitive", "Carfilzomib-based triplet (KRd)"],
+            ["Lenalidomide-refractory, anti-CD38-naive", "Pomalidomide + anti-CD38 (DPd)"],
+            ["Triple-class exposed/refractory", "BCMA CAR-T, bispecific, or belantamab"],
+            ["t(11;14) positive", "Venetoclax-based therapy"],
+            ["Long first remission, fit", "Consider salvage autologous transplant"]
+          ]
+        }
+      ],
+      "options": [
+        { "id": "lensens", "label": "Lenalidomide-sensitive", "sets": { "relapse_class": "len-sensitive" }, "pills": ["len-sens"] },
+        { "id": "lenref", "label": "Lenalidomide-refractory, CD38-naive", "sets": { "relapse_class": "len-refractory" }, "pills": ["len-ref"] },
+        { "id": "triple", "label": "Triple-class exposed / refractory", "sets": { "relapse_class": "triple-refractory" }, "pills": ["triple-exposed"] },
+        { "id": "t1114", "label": "t(11;14) positive", "sets": { "biomarkers.t1114": "positive" }, "pills": ["t(11;14)"] },
+        { "id": "lateasct", "label": "Long remission, fit - salvage ASCT", "sets": { "relapse_class": "salvage-asct" }, "pills": ["salvage-ASCT"] }
+      ]
+    },
+    {
+      "id": "n_tx_krd",
+      "linkId": "mm_tx_krd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "KRd",
+      "title": "Lenalidomide-sensitive relapse: KRd",
+      "section": "Recurrence",
+      "description": "Carfilzomib + lenalidomide + dexamethasone.",
+      "path": "Myeloma / Relapse / KRd",
+      "pills": ["RRMM", "KRd"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-krd"],
+      "bullets": [
+        "KRd (carfilzomib + lenalidomide + dexamethasone) for lenalidomide-sensitive relapse",
+        "Baseline and on-treatment cardiac assessment (carfilzomib cardiotoxicity)",
+        "Daratumumab-based lenalidomide triplets are an alternative if anti-CD38-naive"
+      ]
+    },
+    {
+      "id": "n_tx_dpd",
+      "linkId": "mm_tx_dpd",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "DPd",
+      "title": "Lenalidomide-refractory relapse: DPd",
+      "section": "Recurrence",
+      "description": "Daratumumab + pomalidomide + dexamethasone.",
+      "path": "Myeloma / Relapse / DPd",
+      "pills": ["RRMM", "DPd"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-pomalidomide-dex"],
+      "bullets": [
+        "Pomalidomide + dexamethasone backbone with an anti-CD38 antibody (daratumumab or isatuximab)",
+        "Switches both the immunomodulatory drug (to pomalidomide) and adds a new class",
+        "VTE prophylaxis and herpes-zoster prophylaxis"
+      ]
+    },
+    {
+      "id": "n_relapse_triple",
+      "linkId": "mm_relapse_triple",
+      "nodeCategory": "treatment",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Triple-refractory options",
+      "title": "Triple-class exposed: immunotherapy choice",
+      "section": "Recurrence",
+      "description": "Select a BCMA/GPRC5D-directed immunotherapy by access, fitness and logistics.",
+      "path": "Myeloma / Relapse / Triple-refractory",
+      "pills": ["RRMM", "immunotherapy"],
+      "required": true,
+      "evidenceCategory": ["1"],
+      "options": [
+        { "id": "cart", "label": "BCMA CAR-T", "sets": { "immuno": "car-t" }, "pills": ["CAR-T"] },
+        { "id": "bispecific", "label": "Bispecific antibody", "sets": { "immuno": "bispecific" }, "pills": ["bispecific"] },
+        { "id": "belamaf", "label": "Belantamab (ADC)", "sets": { "immuno": "belamaf" }, "pills": ["belamaf"] }
+      ]
+    },
+    {
+      "id": "n_tx_cart",
+      "linkId": "mm_tx_cart",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "BCMA CAR-T",
+      "title": "Triple-class exposed: BCMA CAR-T",
+      "section": "Recurrence",
+      "description": "Autologous BCMA-directed CAR T-cell therapy.",
+      "path": "Myeloma / Relapse / CAR-T",
+      "pills": ["RRMM", "CAR-T"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "bullets": [
+        "One-time BCMA CAR T-cell product (idecabtagene or ciltacabtagene) after >= prior lines",
+        "Needs apheresis and manufacturing time; use bridging therapy if disease is fast-moving",
+        "Monitor for cytokine-release syndrome and neurotoxicity at a certified center",
+        "No StewardMD dose protocol - cellular therapy, not a computed regimen"
+      ]
+    },
+    {
+      "id": "n_tx_bispecific",
+      "linkId": "mm_tx_bispecific",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Bispecific",
+      "title": "Triple-class exposed: bispecific antibody",
+      "section": "Recurrence",
+      "description": "Off-the-shelf T-cell-engaging bispecific antibody.",
+      "path": "Myeloma / Relapse / Bispecific",
+      "pills": ["RRMM", "bispecific"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["mm-teclistamab"],
+      "bullets": [
+        "BCMA-directed (teclistamab, elranatamab) or GPRC5D-directed (talquetamab)",
+        "Step-up dosing with inpatient monitoring for cytokine-release syndrome",
+        "Infection prophylaxis and immunoglobulin support; continuous dosing to progression",
+        "No StewardMD dose protocol - step-up schedule per product label"
+      ]
+    },
+    {
+      "id": "n_tx_belamaf",
+      "linkId": "mm_tx_belamaf",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Belantamab",
+      "title": "Triple-class exposed: belantamab mafodotin",
+      "section": "Recurrence",
+      "description": "BCMA antibody-drug conjugate.",
+      "path": "Myeloma / Relapse / Belantamab",
+      "pills": ["RRMM", "belamaf"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "protocolRefs": ["mm-belantamab"],
+      "bullets": [
+        "BCMA-directed antibody-drug conjugate, often combined with pomalidomide or bortezomib",
+        "Mandatory ophthalmology monitoring for keratopathy; dose-modify for ocular toxicity",
+        "Option where CAR-T or bispecifics are inaccessible",
+        "No StewardMD dose protocol - ocular-risk program applies"
+      ]
+    },
+    {
+      "id": "n_tx_venetoclax",
+      "linkId": "mm_tx_venetoclax",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Venetoclax",
+      "title": "t(11;14): venetoclax-based therapy",
+      "section": "Recurrence",
+      "description": "BCL2 inhibitor for t(11;14) relapse.",
+      "path": "Myeloma / Relapse / Venetoclax",
+      "pills": ["RRMM", "t(11;14)"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "protocolRefs": ["mm-venetoclax-dex"],
+      "bullets": [
+        "Venetoclax (with dexamethasone or bortezomib) is active in t(11;14) or BCL2-high disease",
+        "Restrict to t(11;14)-positive relapse; benefit is biomarker-defined and off-label",
+        "Watch for infection risk; monitor counts",
+        "No StewardMD dose protocol - biomarker-restricted use"
+      ]
+    },
+    {
+      "id": "n_tx_second_asct",
+      "linkId": "mm_tx_second_asct",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Salvage ASCT",
+      "title": "Salvage autologous transplant",
+      "section": "Recurrence",
+      "description": "Second autologous transplant after a durable first remission.",
+      "path": "Myeloma / Relapse / Salvage ASCT",
+      "pills": ["RRMM", "salvage-ASCT"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Consider if first remission was durable (roughly >= 36 months on maintenance) and the patient is fit",
+        "Reinduction to response, then high-dose melphalan with stored or re-collected stem cells",
+        "Follow with maintenance; otherwise pursue a novel-class regimen",
+        "No StewardMD dose protocol - conditioning per transplant unit"
+      ]
+    },
+    {
+      "id": "n_rr_second",
+      "linkId": "mm_rr_second",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Second relapse",
+      "title": "On progression after first-relapse therapy",
+      "section": "Recurrence",
+      "description": "At second relapse, choose the next line by classes now exhausted and any actionable biomarker.",
+      "path": "Myeloma / Relapse / Second line",
+      "pills": ["RRMM", "second-line"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Confirm progression and re-catalog refractoriness (IMiD, PI, anti-CD38)",
+        "Repeat FISH - clonal evolution can newly reveal del(17p) or t(11;14)",
+        "Pick a regimen that introduces at least one class the disease has not seen",
+        "Re-image for extramedullary or oligo-progressive disease that may need local therapy"
+      ],
+      "options": [
+        { "id": "triplet2", "label": "IMiD/PI class still available - next triplet", "sets": { "rr_line": "triplet2" }, "pills": ["next triplet"] },
+        { "id": "triplenow", "label": "Triple-class exposed - immunotherapy", "sets": { "rr_line": "triple" }, "pills": ["triple-exposed"] },
+        { "id": "t1114b", "label": "t(11;14) newly actionable - venetoclax", "sets": { "biomarkers.t1114": "positive" }, "pills": ["t(11;14)"] }
+      ]
+    },
+    {
+      "id": "n_tx_rr_triplet2",
+      "linkId": "mm_tx_rr_triplet2",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Second-relapse triplet",
+      "title": "Second relapse: next non-cross-resistant triplet",
+      "section": "Recurrence",
+      "description": "Switch the immunomodulatory drug and add an unused class.",
+      "path": "Myeloma / Relapse / Second-line triplet",
+      "pills": ["RRMM", "triplet"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["1"],
+      "protocolRefs": ["heme-mm-pomalidomide-dex", "heme-mm-krd"],
+      "bullets": [
+        "Pomalidomide + dexamethasone backbone plus an unused partner (anti-CD38, carfilzomib, or elotuzumab)",
+        "Carfilzomib + dexamethasone (Kd) if lenalidomide- and pomalidomide-exposed but PI-sensitive",
+        "Avoid re-using a drug the disease is refractory to",
+        "Then reassess at the next progression (later-line step)"
+      ]
+    },
+    {
+      "id": "n_rr_third",
+      "linkId": "mm_rr_third",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "template": "main",
+      "name": "Later-line relapse",
+      "title": "Later-line / progression after second relapse",
+      "section": "Recurrence",
+      "description": "Route later-line disease to immunotherapy if not yet used, otherwise to trial / best supportive care.",
+      "path": "Myeloma / Relapse / Later line",
+      "pills": ["RRMM", "later-line"],
+      "required": true,
+      "evidenceCategory": ["2A"],
+      "options": [
+        { "id": "immuno", "label": "BCMA/GPRC5D immunotherapy not yet used", "sets": { "rr_late": "immuno" }, "pills": ["immunotherapy"] },
+        { "id": "supportive", "label": "Immunotherapy exhausted - trial / supportive", "sets": { "rr_late": "supportive" }, "pills": ["trial / BSC"] }
+      ]
+    },
+    {
+      "id": "n_tx_rr_supportive",
+      "linkId": "mm_tx_rr_supportive",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Penta-refractory",
+      "title": "Penta-refractory: clinical trial or best supportive care",
+      "section": "Recurrence",
+      "description": "Options once all standard classes and immunotherapies are exhausted.",
+      "path": "Myeloma / Relapse / Penta-refractory",
+      "pills": ["RRMM", "penta-refractory"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2A"],
+      "bullets": [
+        "Clinical trial is the preferred pathway for penta-refractory disease",
+        "Re-challenge with a prior class combined with a new partner if any residual sensitivity",
+        "Selinexor-based combinations or alkylator salvage (e.g. cyclophosphamide) for disease control",
+        "Integrate palliative care, bone support and symptom management; the selinexor-dexamethasone salvage doublet is computable here, while clinical trial and best supportive care are not dose protocols"
+      ],
+      "protocolRefs": ["mm-selinexor-dex"]
+    },
+    {
+      "id": "n_rr_post_immuno",
+      "linkId": "mm_rr_post_immuno",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "template": "end",
+      "name": "Post-immunotherapy relapse",
+      "title": "Progression after BCMA/GPRC5D immunotherapy",
+      "section": "Recurrence",
+      "description": "Sequencing after CAR-T, a bispecific, or an antibody-drug conjugate.",
+      "path": "Myeloma / Relapse / Post-immunotherapy",
+      "pills": ["RRMM", "post-immunotherapy"],
+      "required": false,
+      "showsRecommendation": true,
+      "evidenceCategory": ["2B"],
+      "bullets": [
+        "Switch antigen target (BCMA to GPRC5D or vice versa) where a product is available",
+        "Re-challenge a prior class combined with a new partner if a treatment-free interval passed",
+        "Clinical trial strongly preferred; account for prior T-cell exhaustion after CAR-T",
+        "Best supportive care and palliative input as disease and performance status dictate",
+        "A mechanistically distinct non-immune salvage such as the selinexor-dexamethasone doublet is a computable option after immunotherapy failure"
+      ],
+      "protocolRefs": ["mm-selinexor-dex"]
     }
   ],
   "links": [
-    { "id": "l_mm_phase_nd", "from": "n_mm_phase", "to": "n_tx_mm_nd", "fromOptions": ["nd"], "linkCategory": "conditional" },
-    { "id": "l_mm_phase_maint", "from": "n_mm_phase", "to": "n_tx_mm_maint", "fromOptions": ["maint"], "linkCategory": "conditional" },
-    { "id": "l_mm_phase_relapsed", "from": "n_mm_phase", "to": "n_tx_mm_relapsed", "fromOptions": ["relapsed"], "linkCategory": "conditional" }
+    { "id": "l_entry_mgus", "from": "n_entry", "to": "n_wk_mgus", "fromOptions": ["mgus"], "linkCategory": "conditional" },
+    { "id": "l_entry_smm", "from": "n_entry", "to": "n_wk_smm", "fromOptions": ["smm"], "linkCategory": "conditional" },
+    { "id": "l_entry_active", "from": "n_entry", "to": "n_wk_ndmm", "fromOptions": ["active"], "linkCategory": "conditional" },
+    { "id": "l_entry_relapsed", "from": "n_entry", "to": "n_relapse_entry", "fromOptions": ["relapsed"], "linkCategory": "conditional" },
+
+    { "id": "l_wkmgus_tx", "from": "n_wk_mgus", "to": "n_tx_mgus", "linkCategory": "sequence" },
+
+    { "id": "l_wksmm_risk", "from": "n_wk_smm", "to": "n_risk_smm", "linkCategory": "sequence" },
+    { "id": "l_risksmm_low", "from": "n_risk_smm", "to": "n_tx_smm_low", "fromOptions": ["low"], "linkCategory": "conditional" },
+    { "id": "l_risksmm_high", "from": "n_risk_smm", "to": "n_tx_smm_high", "fromOptions": ["high"], "linkCategory": "conditional" },
+
+    { "id": "l_wkndmm_crab", "from": "n_wk_ndmm", "to": "n_crab", "linkCategory": "sequence" },
+    { "id": "l_crab_stage", "from": "n_crab", "to": "n_stage_iss", "fromOptions": ["mde"], "linkCategory": "conditional" },
+    { "id": "l_crab_smm", "from": "n_crab", "to": "n_wk_smm", "fromOptions": ["nomde"], "linkCategory": "conditional" },
+    { "id": "l_stage_cyto", "from": "n_stage_iss", "to": "n_risk_cyto", "linkCategory": "sequence" },
+    { "id": "l_cyto_support", "from": "n_risk_cyto", "to": "n_supportive", "linkCategory": "sequence" },
+    { "id": "l_support_elig", "from": "n_supportive", "to": "n_transplant_elig", "linkCategory": "sequence" },
+
+    { "id": "l_elig_te", "from": "n_transplant_elig", "to": "n_te_induction", "fromOptions": ["eligible"], "linkCategory": "conditional" },
+    { "id": "l_elig_ti", "from": "n_transplant_elig", "to": "n_ti_induction", "fromOptions": ["ineligible"], "linkCategory": "conditional" },
+
+    { "id": "l_teind_resp", "from": "n_te_induction", "to": "n_te_response", "linkCategory": "sequence" },
+    { "id": "l_teresp_asct", "from": "n_te_response", "to": "n_asct", "fromOptions": ["deep"], "linkCategory": "conditional" },
+    { "id": "l_teresp_switch", "from": "n_te_response", "to": "n_te_switch", "fromOptions": ["subopt"], "linkCategory": "conditional" },
+    { "id": "l_teswitch_asct", "from": "n_te_switch", "to": "n_asct", "linkCategory": "sequence" },
+    { "id": "l_asct_maint", "from": "n_asct", "to": "n_maint_te", "linkCategory": "sequence" },
+    { "id": "l_maintte_std", "from": "n_maint_te", "to": "n_maint_te_std", "fromOptions": ["std"], "linkCategory": "conditional" },
+    { "id": "l_maintte_hr", "from": "n_maint_te", "to": "n_maint_te_hr", "fromOptions": ["highrisk"], "linkCategory": "conditional" },
+    { "id": "l_mainttestd_resp", "from": "n_maint_te_std", "to": "n_response", "linkCategory": "sequence" },
+    { "id": "l_maintteHr_resp", "from": "n_maint_te_hr", "to": "n_response", "linkCategory": "sequence" },
+
+    { "id": "l_tiind_resp", "from": "n_ti_induction", "to": "n_ti_response", "linkCategory": "sequence" },
+    { "id": "l_tiresp_maint", "from": "n_ti_response", "to": "n_maint_ti", "fromOptions": ["responding"], "linkCategory": "conditional" },
+    { "id": "l_tiresp_switch", "from": "n_ti_response", "to": "n_ti_switch", "fromOptions": ["inadequate"], "linkCategory": "conditional" },
+    { "id": "l_tiswitch_resp", "from": "n_ti_switch", "to": "n_response", "linkCategory": "sequence" },
+    { "id": "l_maintti_resp", "from": "n_maint_ti", "to": "n_response", "linkCategory": "sequence" },
+
+    { "id": "l_resp_surv", "from": "n_response", "to": "n_surv", "linkCategory": "sequence" },
+    { "id": "l_surv_stable", "from": "n_surv", "to": "n_surv_stable", "fromOptions": ["sustained"], "linkCategory": "conditional" },
+    { "id": "l_surv_relapse", "from": "n_surv", "to": "n_relapse_entry", "fromOptions": ["progression"], "linkCategory": "conditional" },
+
+    { "id": "l_relentry_strat", "from": "n_relapse_entry", "to": "n_relapse_strat", "linkCategory": "sequence" },
+    { "id": "l_strat_krd", "from": "n_relapse_strat", "to": "n_tx_krd", "fromOptions": ["lensens"], "linkCategory": "conditional" },
+    { "id": "l_strat_dpd", "from": "n_relapse_strat", "to": "n_tx_dpd", "fromOptions": ["lenref"], "linkCategory": "conditional" },
+    { "id": "l_strat_triple", "from": "n_relapse_strat", "to": "n_relapse_triple", "fromOptions": ["triple"], "linkCategory": "conditional" },
+    { "id": "l_strat_veneto", "from": "n_relapse_strat", "to": "n_tx_venetoclax", "fromOptions": ["t1114"], "linkCategory": "conditional" },
+    { "id": "l_strat_salvage", "from": "n_relapse_strat", "to": "n_tx_second_asct", "fromOptions": ["lateasct"], "linkCategory": "conditional" },
+
+    { "id": "l_triple_cart", "from": "n_relapse_triple", "to": "n_tx_cart", "fromOptions": ["cart"], "linkCategory": "conditional" },
+    { "id": "l_triple_bispec", "from": "n_relapse_triple", "to": "n_tx_bispecific", "fromOptions": ["bispecific"], "linkCategory": "conditional" },
+    { "id": "l_triple_belamaf", "from": "n_relapse_triple", "to": "n_tx_belamaf", "fromOptions": ["belamaf"], "linkCategory": "conditional" },
+
+    { "id": "l_krd_second", "from": "n_tx_krd", "to": "n_rr_second", "linkCategory": "sequence" },
+    { "id": "l_dpd_second", "from": "n_tx_dpd", "to": "n_rr_second", "linkCategory": "sequence" },
+    { "id": "l_second_triplet2", "from": "n_rr_second", "to": "n_tx_rr_triplet2", "fromOptions": ["triplet2"], "linkCategory": "conditional" },
+    { "id": "l_second_triple", "from": "n_rr_second", "to": "n_relapse_triple", "fromOptions": ["triplenow"], "linkCategory": "conditional" },
+    { "id": "l_second_veneto", "from": "n_rr_second", "to": "n_tx_venetoclax", "fromOptions": ["t1114b"], "linkCategory": "conditional" },
+    { "id": "l_triplet2_third", "from": "n_tx_rr_triplet2", "to": "n_rr_third", "linkCategory": "sequence" },
+    { "id": "l_veneto_third", "from": "n_tx_venetoclax", "to": "n_rr_third", "linkCategory": "sequence" },
+    { "id": "l_third_immuno", "from": "n_rr_third", "to": "n_relapse_triple", "fromOptions": ["immuno"], "linkCategory": "conditional" },
+    { "id": "l_third_support", "from": "n_rr_third", "to": "n_tx_rr_supportive", "fromOptions": ["supportive"], "linkCategory": "conditional" },
+    { "id": "l_cart_post", "from": "n_tx_cart", "to": "n_rr_post_immuno", "linkCategory": "sequence" },
+    { "id": "l_bispec_post", "from": "n_tx_bispecific", "to": "n_rr_post_immuno", "linkCategory": "sequence" },
+    { "id": "l_belamaf_post", "from": "n_tx_belamaf", "to": "n_rr_post_immuno", "linkCategory": "sequence" }
   ]
 }

@@ -1,0 +1,51 @@
+{
+  "id": "hodgkin-brentuximab",
+  "diseaseId": "hodgkin_cancer",
+  "name": "Brentuximab vedotin (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 16,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "CD30-directed antibody-drug conjugate for relapsed/refractory classical Hodgkin lymphoma.",
+    "Cumulative peripheral neuropathy is dose-limiting; assess before each dose and hold or reduce for grade 2 or higher.",
+    "Monitor for infusion reactions and neutropenia."
+  ],
+  "monitoring": [
+    "peripheral neuropathy assessment before each dose",
+    "CBC with differential before each dose",
+    "liver function periodically",
+    "restaging imaging to assess response and duration"
+  ],
+  "drugs": [
+    {
+      "id": "brentuximab-vedotin",
+      "name": "Brentuximab vedotin",
+      "basis": "mgkg",
+      "dosePerUnit": 1.8,
+      "unit": "mg/kg",
+      "route": "IV",
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1
+      ],
+      "notes": "Brentuximab vedotin 1.8 mg/kg IV on day 1 every 21 days (single-agent relapsed/refractory dosing; body weight capped at 100 kg for dose calculation in practice, i.e. approximately 180 mg maximum per dose). Cumulative peripheral neuropathy: assess and hold/reduce for grade 2 or higher. Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

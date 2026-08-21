@@ -1,0 +1,46 @@
+{
+  "id": "crc-trifluridine-tipiracil",
+  "diseaseId": "colorectal_cancer",
+  "name": "Trifluridine-Tipiracil (TAS-102)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Colon / Rectal Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Low-to-moderate emetogenic oral therapy; provide antiemetic prophylaxis per emetic-risk framework as needed." }
+  ],
+  "supportiveCare": [
+    "Take within 1 hour after morning and evening meals.",
+    "Myelosuppression is dose-limiting; hold and dose-reduce for severe neutropenia, febrile neutropenia, or severe thrombocytopenia per standard refractory-line practice.",
+    "Bevacizumab may be combined in refractory metastatic colorectal cancer (separate biologic, no dose here)."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle and on day 15 of each cycle",
+    "Assess for febrile neutropenia and GI toxicity between cycles",
+    "Renal and hepatic function periodically"
+  ],
+  "drugs": [
+    {
+      "id": "trifluridine-tipiracil",
+      "name": "Trifluridine-Tipiracil",
+      "basis": "bsa",
+      "dosePerUnit": 35,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [1, 2, 3, 4, 5, 8, 9, 10, 11, 12],
+      "caps": { "perDose": 80 },
+      "notes": "Trifluridine-tipiracil 35 mg/m2/dose (based on the trifluridine component) orally twice daily on days 1-5 and 8-12 of a 28-day cycle, then 16 days off. Single-dose cap of 80 mg (trifluridine component); round to available tablet strengths. Refractory-line therapy for metastatic colorectal cancer after fluoropyrimidine, oxaliplatin, and irinotecan; may be given with bevacizumab. Dose derived from standard refractory-line practice (own wording, general references)."
+    }
+  ]
+}

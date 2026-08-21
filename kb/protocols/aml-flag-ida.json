@@ -1,0 +1,95 @@
+{
+  "id": "aml-flag-ida",
+  "diseaseId": "aml_cancer",
+  "name": "FLAG-IDA (salvage: Fludarabine / Cytarabine / Idarubicin + G-CSF)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 2,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "G-CSF (filgrastim) 5 mcg/kg/day SC from the day before chemotherapy through count recovery (the 'G' of FLAG, priming and support).",
+    "Full neutropenic supportive care: infection prophylaxis, transfusion support for anemia/thrombocytopenia.",
+    "Tumor-lysis prophylaxis: hydration and allopurinol (or rasburicase if high risk); monitor potassium, phosphate, calcium, uric acid."
+  ],
+  "monitoring": [
+    "CBC with differential and marrow response after count recovery.",
+    "LVEF for the anthracycline; track cumulative anthracycline exposure.",
+    "Renal and hepatic panels; neurologic checks with high-dose cytarabine."
+  ],
+  "drugs": [
+    {
+      "id": "fludarabine",
+      "name": "Fludarabine",
+      "basis": "bsa",
+      "dosePerUnit": 30,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "30 mg/m2 IV on days 1-5, given ahead of cytarabine to potentiate ara-C triphosphate accumulation (FLAG backbone). Standard Guidelines (NCCN) / DeVita, general reference."
+    },
+    {
+      "id": "cytarabine",
+      "name": "Cytarabine (high-dose)",
+      "basis": "bsa",
+      "dosePerUnit": 2000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "2000 mg/m2 IV over ~4 h on days 1-5, starting a few hours after fludarabine. Reduce for age/renal impairment. Corticosteroid eye drops for conjunctivitis prophylaxis. Standard Guidelines (NCCN) / DeVita, general reference."
+    },
+    {
+      "id": "idarubicin",
+      "name": "Idarubicin",
+      "basis": "bsa",
+      "dosePerUnit": 10,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 120,
+          "hard": 150,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "10 mg/m2 IV on days 1-3 (the 'IDA' of FLAG-IDA); omit for a G-CSF-priming-only FLAG in patients with cardiac limitation. Track cumulative anthracycline exposure. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

@@ -1,0 +1,54 @@
+{
+  "id": "aml-azacitidine",
+  "diseaseId": "aml_cancer",
+  "name": "Azacitidine (single-agent hypomethylating)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Full neutropenic supportive care: infection prophylaxis, transfusion support for anemia/thrombocytopenia.",
+    "Transfusion support and antimicrobials as needed."
+  ],
+  "monitoring": [
+    "CBC with differential and marrow response after count recovery.",
+    "Response assessment after 4-6 cycles (delayed responses are common)."
+  ],
+  "drugs": [
+    {
+      "id": "azacitidine",
+      "name": "Azacitidine",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "SC",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "75 mg/m2 SC or IV on days 1-7 of each 28-day cycle as single-agent lower-intensity therapy for unfit/frail patients (decitabine 20 mg/m2 IV days 1-5 or low-dose cytarabine are alternatives). Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

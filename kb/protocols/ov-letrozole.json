@@ -1,0 +1,50 @@
+{
+  "id": "ov-letrozole",
+  "diseaseId": "ovarian_cancer",
+  "name": "Letrozole (endocrine maintenance)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 1,
+  "cycles": 2,
+  "cyclesNote": "continuous once-daily oral dosing until progression or unacceptable toxicity (cycleLengthDays 1 represents continuous daily dosing).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer / Low-grade serous (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT endocrine option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "biomarkers": {
+    "ER_PR": "hormone-receptor expression favors endocrine benefit",
+    "note": "Low-grade serous carcinoma frequently expresses estrogen/progesterone receptors; aromatase inhibition is a well-tolerated maintenance or relapse option in postmenopausal (or ovarian-suppressed) patients."
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Aromatase inhibitors accelerate bone loss: baseline and periodic bone-density monitoring, calcium/vitamin D, and bone-directed therapy where indicated.",
+    "Counsel on arthralgia, hot flushes and lipid effects."
+  ],
+  "monitoring": [
+    "bone-mineral density periodically",
+    "lipids and symptom review",
+    "CA-125 and imaging for response"
+  ],
+  "drugs": [
+    {
+      "id": "letrozole",
+      "name": "Letrozole",
+      "basis": "flat",
+      "dosePerUnit": 2.5,
+      "unit": "mg",
+      "route": "PO daily",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Letrozole 2.5 mg PO once daily, taken continuously until progression or unacceptable toxicity, for hormone-receptor-positive low-grade serous ovarian carcinoma (adjuvant/maintenance or indolent relapse). Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference).",
+      "dosesPerDay": 1,
+      "frequency": "daily"
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "cervical-pembrolizumab",
+  "diseaseId": "cervical_cancer",
+  "name": "Pembrolizumab Monotherapy (anti-PD-1)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 35,
+  "cyclesNote": "flat-dose anti-PD-1 continued until disease progression or unacceptable toxicity; alternate schedule 400 mg every 42 days",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event surveillance (thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine).",
+    "Antiemetic prophylaxis not routinely required for single-agent checkpoint inhibitor (minimal emetic risk)."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen (TSH/free T4, LFTs, glucose, cortisol as indicated) during therapy",
+    "imaging every 2 to 3 cycles"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "renal",
+    "endocrine/immune status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Pembrolizumab 200 mg IV flat dose on day 1 every 21 days; alternate schedule 400 mg IV every 42 days. Flat milligram dosing (not weight-based). Used for biomarker-selected (dMMR/MSI-high, TMB-high) or PD-L1-positive recurrent/metastatic cervical cancer, or as part of biomarker-directed later-line therapy. Continue until progression or unacceptable toxicity. Standard Guidelines / DeVita / Harrison, general reference. DRAFT, experimental."
+    }
+  ]
+}

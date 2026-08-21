@@ -1,0 +1,2033 @@
+{
+  "guideline": "cervical",
+  "title": "Cervical Cancer",
+  "subtitle": "StewardMD ONCOTREE navigator (draft)",
+  "navigatorVersion": "2.0.0",
+  "diseaseId": "cervical_cancer",
+  "matchDisease": true,
+  "status": "draft",
+  "provenanceNote": "DRAFT decision support authored from standard oncology references (NCCN/DeVita/Harrison) - the physician decides. Full pathway: presentation/histology -> workup -> FIGO 2018 staging -> stage-directed local therapy (fertility-sparing vs radical surgery vs definitive chemoradiation), each curative arm routed through pathologic-risk or response/restaging decisions before adjuvant therapy or surveillance; locally advanced concurrent cisplatin-radiation +/- pembrolizumab with response-adapted salvage; recurrent disease split by pattern; and metastatic disease as a line-of-therapy sub-tree (first line by PD-L1 CPS -> on progression -> second line -> later line). Small-cell / neuroendocrine carcinoma is a separate platinum-etoposide pathway with response-adapted relapse therapy. Systemic leaves reference existing StewardMD Standard Protocols by id where a dose regimen fits; surgery, radiation, and agents without a dose protocol are shown as checklist guidance with NO dose. Structural pathway consistent with Standard Guidelines (NCCN) Cervical Cancer; no proprietary text reproduced; invents no dose. DRAFT - not clinically activated; the physician decides and the dose engine computes patient doses.",
+  "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Cervical Cancer. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
+  "startNodeIds": [
+    "n_entry"
+  ],
+  "footnotes": {
+    "a": {
+      "text": "FIGO 2018 permits imaging and pathologic findings to assign stage; documented nodal involvement raises the stage to IIIC (IIIC1 pelvic, IIIC2 para-aortic). Confirm histology and map local extent before committing to a treatment arm.",
+      "evidence": "2A"
+    },
+    "b": {
+      "text": "After radical hysterectomy, intermediate-risk features (Sedlis-type: bulky primary, deep stromal invasion, lymphovascular invasion) favor adjuvant pelvic radiation; high-risk features (positive margin, parametrial extension, or positive nodes; Peters-type) favor adjuvant concurrent chemoradiation.",
+      "evidence": "1"
+    },
+    "c": {
+      "text": "For higher-risk locally advanced disease (node-positive or bulky), adding pembrolizumab to concurrent cisplatin-radiation and continuing it as maintenance improved outcomes (KEYNOTE-A18 concept). Confirm eligibility and monitor for immune-related toxicity.",
+      "evidence": "1"
+    },
+    "d": {
+      "text": "In persistent, recurrent, or metastatic disease, adding pembrolizumab to platinum-doublet chemotherapy plus bevacizumab benefits PD-L1 CPS >= 1 tumors (KEYNOTE-826 concept). Assess PD-L1 CPS by a validated assay before first-line therapy.",
+      "evidence": "1"
+    },
+    "e": {
+      "text": "Small-cell / neuroendocrine carcinoma of the cervix behaves like small-cell carcinoma elsewhere: a platinum + etoposide backbone is prioritized even in localized disease because of the high rate of early distant relapse, and topotecan is a standard option at relapse. Consider brain imaging given the relapse pattern.",
+      "evidence": "2A"
+    }
+  },
+  "nodes": [
+    {
+      "id": "n_entry",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Presentation",
+      "title": "Cervical cancer: histology and presentation",
+      "section": "Workup",
+      "description": "Management branches first by histology and whether disease is confined to the pelvis or already disseminated. Choose the applicable category.",
+      "path": "Cervical / Presentation",
+      "pills": [
+        "presentation"
+      ],
+      "required": true,
+      "bullets": [
+        "Squamous cell carcinoma or adenocarcinoma (the common histologies) - the main staging pathway",
+        "Small-cell / neuroendocrine carcinoma (rare, aggressive - separate systemic-first pathway)",
+        "Metastatic (FIGO IVB) or recurrent disease at presentation - systemic pathway"
+      ],
+      "options": [
+        {
+          "id": "newdx",
+          "label": "Newly diagnosed, non-metastatic (squamous / adenocarcinoma)",
+          "sets": {
+            "presentation": "newdx"
+          },
+          "pills": [
+            "new dx"
+          ]
+        },
+        {
+          "id": "neuroendocrine",
+          "label": "Small-cell / neuroendocrine carcinoma",
+          "sets": {
+            "histology": "neuroendocrine"
+          },
+          "pills": [
+            "neuroendocrine"
+          ]
+        },
+        {
+          "id": "metsdx",
+          "label": "Metastatic (IVB) or recurrent at presentation",
+          "sets": {
+            "presentation": "metastatic"
+          },
+          "pills": [
+            "metastatic / recurrent"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_workup",
+      "nodeCategory": "workup",
+      "nodeType": "question",
+      "name": "Workup",
+      "title": "Workup and staging evaluation",
+      "section": "Workup",
+      "description": "Confirm histology and define local and distant extent before assigning a FIGO stage and treatment arm.",
+      "path": "Cervical / Workup",
+      "pills": [
+        "workup"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "bullets": [
+        "History and physical with pelvic (and rectovaginal) examination; biopsy-confirmed histology and grade",
+        "Pelvic MRI to define tumor size, stromal and parametrial extension",
+        "PET-CT (or CT chest/abdomen/pelvis) for nodal and distant disease",
+        "Cystoscopy / proctosigmoidoscopy when bladder or rectal invasion is suspected",
+        "CBC, renal and liver function, HIV testing; pregnancy status where relevant; fertility counseling if applicable"
+      ],
+      "options": [
+        {
+          "id": "continue",
+          "label": "Workup reviewed - continue to staging",
+          "setsValue": null
+        }
+      ]
+    },
+    {
+      "id": "n_figo",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "FIGO stage",
+      "title": "FIGO 2018 stage stratification",
+      "section": "Staging",
+      "description": "Assign the FIGO 2018 stage; treatment groups into microinvasive, early operable, locally advanced, and metastatic disease.",
+      "path": "Cervical / Staging",
+      "pills": [
+        "FIGO",
+        "staging"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "evidenceCategory": [
+        "2A"
+      ],
+      "options": [
+        {
+          "id": "ia1",
+          "label": "Stage IA1 (microinvasive, <= 3 mm depth)",
+          "sets": {
+            "stage": "ia1"
+          },
+          "pills": [
+            "IA1"
+          ]
+        },
+        {
+          "id": "early",
+          "label": "Early operable (IA2, IB1, IB2, IIA1)",
+          "sets": {
+            "stage": "early"
+          },
+          "pills": [
+            "early / operable"
+          ]
+        },
+        {
+          "id": "localadv",
+          "label": "Locally advanced (IB3, IIA2, IIB-IVA)",
+          "sets": {
+            "stage": "localadv"
+          },
+          "pills": [
+            "locally advanced"
+          ]
+        },
+        {
+          "id": "ivb",
+          "label": "Metastatic (IVB)",
+          "sets": {
+            "stage": "ivb"
+          },
+          "pills": [
+            "IVB"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "FIGO 2018 stage groups (simplified) and typical intent",
+          "headers": [
+            "Stage",
+            "Extent",
+            "Primary intent"
+          ],
+          "rows": [
+            [
+              "IA1",
+              "Microinvasive, stromal invasion <= 3 mm",
+              "Conservative surgery"
+            ],
+            [
+              "IA2-IB2, IIA1",
+              "Invasive, confined to cervix / upper vagina, <= 4 cm",
+              "Radical surgery or definitive RT"
+            ],
+            [
+              "IB3, IIA2, IIB-IVA",
+              "Bulky > 4 cm or beyond cervix (parametria, lower vagina, pelvic wall, bladder/rectum)",
+              "Definitive concurrent chemoradiation + brachytherapy"
+            ],
+            [
+              "IIIC",
+              "Pelvic (IIIC1) or para-aortic (IIIC2) nodal involvement",
+              "Chemoradiation (extended field for para-aortic)"
+            ],
+            [
+              "IVB",
+              "Distant metastasis",
+              "Systemic therapy +/- palliative RT"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ia1_lvsi",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "IA1 LVSI",
+      "title": "Stage IA1: lymphovascular space invasion (LVSI)",
+      "section": "Staging",
+      "description": "For IA1, the presence of LVSI escalates local therapy and nodal assessment.",
+      "path": "Cervical / IA1 / LVSI",
+      "pills": [
+        "IA1",
+        "LVSI"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "nolvsi",
+          "label": "No LVSI",
+          "sets": {
+            "lvsi": "no"
+          },
+          "pills": [
+            "LVSI-"
+          ]
+        },
+        {
+          "id": "lvsi",
+          "label": "LVSI present",
+          "sets": {
+            "lvsi": "yes"
+          },
+          "pills": [
+            "LVSI+"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ia1_cone",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "IA1 conservative",
+      "title": "Stage IA1 (no LVSI): conization or simple hysterectomy",
+      "section": "Treatment",
+      "description": "Microinvasive disease without LVSI is treated conservatively, then surveillance.",
+      "path": "Cervical / IA1 / Conservative",
+      "pills": [
+        "IA1",
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Fertility desired: cervical conization to negative margins; repeat cone if margins involved",
+        "Fertility not desired: simple (extrafascial) hysterectomy",
+        "No routine pelvic lymph node dissection when LVSI is absent",
+        "Then surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_fertility",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Fertility wish",
+      "title": "Early stage: is fertility preservation desired?",
+      "section": "Treatment",
+      "description": "For early operable disease (and IA1 with LVSI), fertility-sparing surgery may be an option for suitable tumors.",
+      "path": "Cervical / Early / Fertility",
+      "pills": [
+        "fertility"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "desired",
+          "label": "Fertility preservation desired",
+          "sets": {
+            "fertility": "desired"
+          },
+          "pills": [
+            "fertility-sparing"
+          ]
+        },
+        {
+          "id": "notdesired",
+          "label": "Fertility not desired",
+          "sets": {
+            "fertility": "notdesired"
+          },
+          "pills": [
+            "definitive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_fertility_elig",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Fertility eligibility",
+      "title": "Fertility-sparing eligibility",
+      "section": "Treatment",
+      "description": "Fertility-sparing surgery is limited to small tumors of favorable histology without high-risk features.",
+      "path": "Cervical / Early / Fertility / Eligibility",
+      "pills": [
+        "fertility"
+      ],
+      "required": true,
+      "bullets": [
+        "Generally IA2-IB1 (and selected IB2 up to 2 cm), squamous or usual-type adenocarcinoma",
+        "No suspicious nodes, no small-cell / neuroendocrine or gastric-type histology",
+        "Nodal assessment (sentinel node / pelvic lymphadenectomy) required first"
+      ],
+      "options": [
+        {
+          "id": "eligible",
+          "label": "Eligible for fertility-sparing surgery",
+          "sets": {
+            "fertilityElig": "yes"
+          },
+          "pills": [
+            "eligible"
+          ]
+        },
+        {
+          "id": "ineligible",
+          "label": "Not eligible (proceed to definitive treatment)",
+          "sets": {
+            "fertilityElig": "no"
+          },
+          "pills": [
+            "not eligible"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_fertility",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Fertility-sparing surgery",
+      "title": "Fertility-sparing surgery (trachelectomy / cone)",
+      "section": "Treatment",
+      "description": "Cervix-preserving resection with nodal staging in eligible early-stage patients; final pathology then guides next steps.",
+      "path": "Cervical / Early / Trachelectomy",
+      "pills": [
+        "fertility-sparing",
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical trachelectomy + pelvic lymph node assessment (IB, up to ~2 cm); cone or simple trachelectomy for very small IA2 tumors",
+        "Sentinel lymph node mapping where validated",
+        "Adjuvant radiation to a preserved uterus generally precludes future pregnancy - reassess if high-risk pathology is found",
+        "Review final pathology before clearing for surveillance and obstetric counseling (next step)"
+      ]
+    },
+    {
+      "id": "n_fert_path",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Trachelectomy pathology",
+      "title": "Fertility-sparing surgery: final pathology",
+      "section": "Treatment",
+      "description": "Final trachelectomy / nodal pathology determines whether fertility preservation holds or definitive adjuvant therapy is required.",
+      "path": "Cervical / Early / Trachelectomy / Pathology",
+      "pills": [
+        "fertility",
+        "pathology"
+      ],
+      "required": true,
+      "bullets": [
+        "Favorable: negative margins, negative nodes, no high-risk features - fertility preservation stands",
+        "Adverse: positive margin / parametria, positive nodes, or unexpected small-cell histology - definitive therapy needed"
+      ],
+      "options": [
+        {
+          "id": "favorable",
+          "label": "Favorable pathology (fertility preserved)",
+          "sets": {
+            "fertPath": "favorable"
+          },
+          "pills": [
+            "favorable"
+          ]
+        },
+        {
+          "id": "adverse",
+          "label": "Adverse features found (needs adjuvant / definitive therapy)",
+          "sets": {
+            "fertPath": "adverse"
+          },
+          "pills": [
+            "adverse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_early_surgery_vs_rt",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Surgery vs RT",
+      "title": "Early stage: radical surgery vs definitive radiation",
+      "section": "Treatment",
+      "description": "Early operable disease can be cured with radical surgery or with definitive radiation; combining both raises morbidity, so choose one primary modality.",
+      "path": "Cervical / Early / Modality",
+      "pills": [
+        "modality"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "surgery",
+          "label": "Radical hysterectomy + pelvic lymphadenectomy",
+          "sets": {
+            "modality": "surgery"
+          },
+          "pills": [
+            "radical surgery"
+          ]
+        },
+        {
+          "id": "rt",
+          "label": "Definitive radiation (+/- concurrent chemo)",
+          "sets": {
+            "modality": "rt"
+          },
+          "pills": [
+            "definitive RT"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_radical_hyst",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Radical hysterectomy",
+      "title": "Radical hysterectomy + pelvic lymphadenectomy",
+      "section": "Treatment",
+      "description": "Definitive surgery for early operable disease; pathology then guides adjuvant therapy.",
+      "path": "Cervical / Early / Radical surgery",
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Radical (type B/C) hysterectomy with pelvic lymph node dissection; open approach preferred for oncologic outcome",
+        "Sentinel lymph node mapping may supplement full lymphadenectomy in small tumors",
+        "Preserve ovaries in premenopausal squamous carcinoma when appropriate",
+        "Review surgical pathology for adjuvant risk (next step)"
+      ]
+    },
+    {
+      "id": "n_tx_definitive_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Definitive RT",
+      "title": "Definitive radiation for early stage",
+      "section": "Treatment",
+      "description": "External-beam radiation plus brachytherapy, with concurrent chemotherapy for higher-risk early tumors; then response is assessed.",
+      "path": "Cervical / Early / Definitive RT",
+      "pills": [
+        "RT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "External-beam pelvic radiation + intracavitary brachytherapy to a definitive dose",
+        "Add concurrent platinum chemotherapy for bulky or node-positive early tumors",
+        "An alternative to surgery with comparable cure rates; avoids combined-modality morbidity",
+        "Assess response at restaging before surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_early_rt_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Early RT response",
+      "title": "Definitive RT: response assessment",
+      "section": "Treatment",
+      "description": "Restage 3 months after definitive radiation to distinguish a complete response from persistent local disease.",
+      "path": "Cervical / Early / Definitive RT / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Examination +/- PET-CT at ~3 months; biopsy any suspicious residual mass",
+        "Complete response: enter surveillance",
+        "Persistent / progressive local disease: assess for salvage in the recurrence pathway"
+      ],
+      "options": [
+        {
+          "id": "complete",
+          "label": "Complete response",
+          "sets": {
+            "rtResponse": "complete"
+          },
+          "pills": [
+            "complete"
+          ]
+        },
+        {
+          "id": "residual",
+          "label": "Persistent / residual disease",
+          "sets": {
+            "rtResponse": "residual"
+          },
+          "pills": [
+            "residual"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_adjuvant_risk",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Adjuvant risk",
+      "title": "Post-hysterectomy pathologic risk",
+      "section": "Treatment",
+      "description": "Adjuvant therapy after radical hysterectomy is directed by pathologic risk features.",
+      "path": "Cervical / Adjuvant / Risk",
+      "pills": [
+        "adjuvant",
+        "risk"
+      ],
+      "required": true,
+      "footnotes": [
+        "b"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "options": [
+        {
+          "id": "high",
+          "label": "High risk (positive margin, parametria, or nodes)",
+          "sets": {
+            "adjRisk": "high"
+          },
+          "pills": [
+            "high risk"
+          ]
+        },
+        {
+          "id": "intermediate",
+          "label": "Intermediate risk (Sedlis-type features)",
+          "sets": {
+            "adjRisk": "intermediate"
+          },
+          "pills": [
+            "intermediate risk"
+          ]
+        },
+        {
+          "id": "low",
+          "label": "Low risk (no adverse features)",
+          "sets": {
+            "adjRisk": "low"
+          },
+          "pills": [
+            "low risk"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "Post-hysterectomy risk features and adjuvant therapy",
+          "headers": [
+            "Risk group",
+            "Pathologic features",
+            "Adjuvant therapy"
+          ],
+          "rows": [
+            [
+              "High (Peters)",
+              "Positive margin, parametrial extension, or positive pelvic node",
+              "Concurrent chemoradiation"
+            ],
+            [
+              "Intermediate (Sedlis)",
+              "Bulky primary + deep stromal invasion + LVSI combinations",
+              "Pelvic radiation +/- concurrent chemo"
+            ],
+            [
+              "Low",
+              "None of the above",
+              "Surveillance"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adj_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant chemoRT",
+      "title": "Adjuvant concurrent chemoradiation (high risk)",
+      "section": "Treatment",
+      "description": "High-risk pathology after surgery is treated with concurrent chemoradiation, then response is assessed.",
+      "path": "Cervical / Adjuvant / ChemoRT",
+      "pills": [
+        "adjuvant",
+        "chemoRT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "b"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Pelvic external-beam radiation with concurrent weekly cisplatin (single-agent radiosensitizer; dose per protocol - no dose asserted here)",
+        "Extend the radiation field for para-aortic nodal involvement",
+        "Vaginal brachytherapy boost for positive or close vaginal margins",
+        "Assess response at restaging (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly"
+      ]
+    },
+    {
+      "id": "n_adj_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Adjuvant response",
+      "title": "Adjuvant chemoradiation: response assessment",
+      "section": "Treatment",
+      "description": "Restage after adjuvant chemoradiation to confirm disease control or detect early treatment failure.",
+      "path": "Cervical / Adjuvant / ChemoRT / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "controlled",
+          "label": "Disease controlled - enter surveillance",
+          "sets": {
+            "adjResponse": "controlled"
+          },
+          "pills": [
+            "controlled"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Persistent / progressive disease",
+          "sets": {
+            "adjResponse": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_adj_rt",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Adjuvant RT",
+      "title": "Adjuvant pelvic radiation (intermediate risk)",
+      "section": "Treatment",
+      "description": "Intermediate-risk pathology is treated with adjuvant pelvic radiation to reduce local recurrence, then surveillance.",
+      "path": "Cervical / Adjuvant / RT",
+      "pills": [
+        "adjuvant",
+        "RT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "b"
+      ],
+      "bullets": [
+        "Adjuvant pelvic external-beam radiation for Sedlis-type intermediate-risk features",
+        "Concurrent chemotherapy may be added for higher intermediate-risk combinations",
+        "Then surveillance (next step)"
+      ]
+    },
+    {
+      "id": "n_localadv_node",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Locally advanced risk",
+      "title": "Locally advanced: nodal / risk status",
+      "section": "Treatment",
+      "description": "Concurrent chemoradiation is the backbone; adding immunotherapy is considered for higher-risk (node-positive or bulky) disease.",
+      "path": "Cervical / Locally advanced / Risk",
+      "pills": [
+        "locally advanced"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "standard",
+          "label": "Standard-risk locally advanced",
+          "sets": {
+            "laRisk": "standard"
+          },
+          "pills": [
+            "standard"
+          ]
+        },
+        {
+          "id": "highrisk",
+          "label": "Higher-risk (node-positive or bulky)",
+          "sets": {
+            "laRisk": "high"
+          },
+          "pills": [
+            "node+ / bulky"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Definitive chemoRT",
+      "title": "Definitive concurrent cisplatin-radiation + brachytherapy",
+      "section": "Treatment",
+      "description": "Standard curative treatment for locally advanced cervical cancer; response is then assessed.",
+      "path": "Cervical / Locally advanced / ChemoRT",
+      "pills": [
+        "chemoRT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "External-beam pelvic radiation with concurrent weekly cisplatin as a radiosensitizer (dose per protocol - no dose asserted here)",
+        "Image-guided intracavitary +/- interstitial brachytherapy to complete the definitive dose",
+        "Extended-field radiation for para-aortic nodal disease (IIIC2)",
+        "Complete treatment within an optimal overall time to preserve local control",
+        "Assess response at restaging (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly"
+      ]
+    },
+    {
+      "id": "n_tx_chemort_pembro",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "ChemoRT + pembrolizumab",
+      "title": "Concurrent chemoradiation plus pembrolizumab (higher risk)",
+      "section": "Treatment",
+      "description": "For higher-risk locally advanced disease, pembrolizumab is added to concurrent chemoradiation and continued as maintenance; response is then assessed.",
+      "path": "Cervical / Locally advanced / ChemoRT + IO",
+      "pills": [
+        "chemoRT",
+        "immunotherapy",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "c"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Concurrent cisplatin-radiation + brachytherapy (as above) with pembrolizumab added during and after chemoradiation",
+        "Continue pembrolizumab as maintenance per protocol; monitor for immune-related toxicity",
+        "Reserve for node-positive or bulky locally advanced disease meeting eligibility",
+        "Assess response at restaging (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly",
+        "cervical-pembrolizumab"
+      ]
+    },
+    {
+      "id": "n_la_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Locally advanced response",
+      "title": "Locally advanced chemoradiation: response assessment",
+      "section": "Treatment",
+      "description": "Restage ~3 months after chemoradiation (examination + PET-CT) to separate complete response, persistent local disease, and distant progression - each routes differently.",
+      "path": "Cervical / Locally advanced / Response",
+      "pills": [
+        "response"
+      ],
+      "required": true,
+      "bullets": [
+        "Complete metabolic response: enter surveillance",
+        "Persistent / residual local disease: consider salvage surgery or boost",
+        "Distant progression: move to systemic therapy by PD-L1"
+      ],
+      "options": [
+        {
+          "id": "complete",
+          "label": "Complete response",
+          "sets": {
+            "laResponse": "complete"
+          },
+          "pills": [
+            "complete"
+          ]
+        },
+        {
+          "id": "residual",
+          "label": "Persistent / residual local disease",
+          "sets": {
+            "laResponse": "residual"
+          },
+          "pills": [
+            "residual local"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Distant progression",
+          "sets": {
+            "laResponse": "progression"
+          },
+          "pills": [
+            "distant progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_la_salvage",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Residual-disease salvage",
+      "title": "Persistent local disease after chemoradiation: salvage",
+      "section": "Treatment",
+      "description": "Biopsy-proven persistent local disease after definitive chemoradiation is treated with salvage local therapy where feasible.",
+      "path": "Cervical / Locally advanced / Salvage",
+      "pills": [
+        "salvage",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Biopsy to confirm viable residual tumor before salvage",
+        "Salvage hysterectomy or pelvic exenteration for isolated, resectable central residual disease",
+        "Brachytherapy / boost if the definitive dose was not completed and tissue tolerance allows",
+        "Systemic therapy if unresectable or distant disease emerges; then surveillance if controlled"
+      ]
+    },
+    {
+      "id": "n_surveillance",
+      "nodeCategory": "surveillance",
+      "nodeType": "end",
+      "name": "Surveillance",
+      "title": "Surveillance / follow-up",
+      "section": "Surveillance",
+      "description": "Follow-up after curative-intent therapy.",
+      "path": "Cervical / Surveillance",
+      "pills": [
+        "surveillance"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "History and physical with speculum / pelvic exam every 3-6 months for 2 years, then 6-12 monthly",
+        "Cervical / vaginal cytology as indicated; educate on recurrence symptoms",
+        "Imaging (MRI / PET-CT) prompted by symptoms or exam findings, not routinely",
+        "Address treatment sequelae: vaginal health, ovarian / sexual function, lymphedema"
+      ],
+      "linkTo": "n_recur_pathway",
+      "linkLabel": "If recurrence is detected: go to the Recurrence pathway"
+    },
+    {
+      "id": "n_recur_pathway",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Recurrence pattern",
+      "title": "Recurrent disease: pattern and prior therapy",
+      "section": "Recurrence",
+      "description": "Salvage intent depends on the site of recurrence and whether the pelvis was previously irradiated.",
+      "path": "Cervical / Recurrence / Pattern",
+      "pills": [
+        "recurrence"
+      ],
+      "required": true,
+      "bullets": [
+        "Biopsy-confirm recurrence and restage (PET-CT) to define isolated vs disseminated disease"
+      ],
+      "options": [
+        {
+          "id": "central",
+          "label": "Central pelvic recurrence after prior radiation",
+          "sets": {
+            "recur": "central"
+          },
+          "pills": [
+            "central / post-RT"
+          ]
+        },
+        {
+          "id": "postsurg",
+          "label": "Pelvic recurrence, radiation-naive",
+          "sets": {
+            "recur": "postsurg"
+          },
+          "pills": [
+            "RT-naive pelvis"
+          ]
+        },
+        {
+          "id": "oligomet",
+          "label": "Oligometastatic recurrence",
+          "sets": {
+            "recur": "oligomet"
+          },
+          "pills": [
+            "oligometastatic"
+          ]
+        },
+        {
+          "id": "distant",
+          "label": "Disseminated / distant metastatic",
+          "sets": {
+            "recur": "distant"
+          },
+          "pills": [
+            "distant"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_exenteration",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pelvic exenteration",
+      "title": "Central pelvic recurrence: exenteration / salvage surgery",
+      "section": "Recurrence",
+      "description": "Isolated central recurrence after radiation may be curable with radical salvage surgery.",
+      "path": "Cervical / Recurrence / Exenteration",
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Pelvic exenteration for isolated central recurrence after prior full-dose radiation, when no distant disease",
+        "Radical hysterectomy may suffice for a small central recurrence in selected cases",
+        "Requires fitness assessment and reconstructive / stoma planning",
+        "Systemic therapy if unresectable or distant disease is found"
+      ]
+    },
+    {
+      "id": "n_tx_salvage_chemort",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Salvage chemoRT",
+      "title": "Radiation-naive pelvic recurrence: salvage chemoradiation",
+      "section": "Recurrence",
+      "description": "A pelvic recurrence in a previously non-irradiated field can be treated with curative-intent chemoradiation.",
+      "path": "Cervical / Recurrence / Salvage chemoRT",
+      "pills": [
+        "chemoRT",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Concurrent cisplatin-radiation + brachytherapy to the recurrence (dose per protocol - no dose asserted here)",
+        "Consider surgical resection first if isolated and resectable",
+        "Then surveillance or systemic therapy per response"
+      ],
+      "protocolRefs": [
+        "cervical-cisplatin-weekly"
+      ]
+    },
+    {
+      "id": "n_tx_oligomet",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Oligometastatic",
+      "title": "Oligometastatic recurrence: local ablation + systemic",
+      "section": "Recurrence",
+      "description": "Limited metastatic sites may be treated with local ablative therapy alongside systemic therapy directed by PD-L1.",
+      "path": "Cervical / Recurrence / Oligometastatic",
+      "pills": [
+        "oligometastatic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Stereotactic body radiation or metastasectomy to limited sites (e.g. isolated lung / node)",
+        "Add first-line systemic therapy directed by PD-L1 (next step)",
+        "Reassess for disseminated progression at follow-up"
+      ]
+    },
+    {
+      "id": "n_meta_pdl1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "PD-L1 (metastatic)",
+      "title": "Metastatic / recurrent: PD-L1 (CPS) stratification",
+      "section": "Recurrence",
+      "description": "First-line systemic therapy for persistent, recurrent, or metastatic disease is directed by PD-L1 combined positive score (CPS).",
+      "path": "Cervical / Metastatic / PD-L1",
+      "pills": [
+        "metastatic",
+        "PD-L1"
+      ],
+      "required": true,
+      "footnotes": [
+        "d"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "options": [
+        {
+          "id": "cpspos",
+          "label": "PD-L1 CPS >= 1 (positive)",
+          "sets": {
+            "biomarkers.PDL1": "positive"
+          },
+          "pills": [
+            "CPS >= 1"
+          ]
+        },
+        {
+          "id": "cpsneg",
+          "label": "PD-L1 CPS < 1 (negative)",
+          "sets": {
+            "biomarkers.PDL1": "negative"
+          },
+          "pills": [
+            "CPS < 1"
+          ]
+        }
+      ],
+      "tables": [
+        {
+          "title": "PD-L1 CPS and first-line systemic backbone",
+          "headers": [
+            "PD-L1 CPS",
+            "First-line regimen",
+            "Rationale"
+          ],
+          "rows": [
+            [
+              "CPS >= 1",
+              "Pembrolizumab + platinum-doublet chemotherapy + bevacizumab",
+              "Immunotherapy benefit in PD-L1-positive tumors"
+            ],
+            [
+              "CPS < 1",
+              "Platinum-doublet chemotherapy + bevacizumab",
+              "No established immunotherapy benefit"
+            ]
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_pembro_chemo_bev",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Pembro + chemo + bev",
+      "title": "First-line (PD-L1 CPS >= 1): pembrolizumab + chemo + bevacizumab",
+      "section": "Recurrence",
+      "description": "Add pembrolizumab to a platinum-doublet plus bevacizumab for PD-L1-positive metastatic / recurrent disease; on progression, move to second line.",
+      "path": "Cervical / Metastatic / 1L / Pembro-chemo-bev",
+      "pills": [
+        "immunotherapy",
+        "1st line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "d"
+      ],
+      "evidenceCategory": [
+        "1"
+      ],
+      "bullets": [
+        "Carboplatin (or cisplatin) + paclitaxel + bevacizumab, with pembrolizumab added and continued as maintenance",
+        "Confirm no bevacizumab contraindication (fistula, uncontrolled hypertension, recent bleeding)",
+        "Monitor for immune-related adverse events",
+        "Chemotherapy + bevacizumab backbone referenced below (pembrolizumab added on top - no dose asserted here)",
+        "On progression, proceed to second-line therapy (next step)"
+      ],
+      "protocolRefs": [
+        "gyn-carbo-paclitaxel-bev",
+        "gyn-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_tx_chemo_bev",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Chemo + bev",
+      "title": "First-line (PD-L1 CPS < 1): chemotherapy + bevacizumab",
+      "section": "Recurrence",
+      "description": "Platinum-doublet chemotherapy plus bevacizumab for PD-L1-negative metastatic / recurrent disease; on progression, move to second line.",
+      "path": "Cervical / Metastatic / 1L / Chemo-bev",
+      "pills": [
+        "chemotherapy",
+        "1st line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Carboplatin (or cisplatin) + paclitaxel + bevacizumab",
+        "Cisplatin-paclitaxel-bevacizumab is an alternative doublet backbone",
+        "Confirm no bevacizumab contraindication",
+        "Regimen referenced below",
+        "On progression, proceed to second-line therapy (next step)"
+      ],
+      "protocolRefs": [
+        "gyn-carbo-paclitaxel-bev",
+        "gyn-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_meta_second",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Second line",
+      "title": "Metastatic: second-line therapy (on progression)",
+      "section": "Recurrence",
+      "description": "After progression on first-line therapy, second-line options are directed by biomarkers and prior immunotherapy exposure.",
+      "path": "Cervical / Metastatic / 2L",
+      "pills": [
+        "2nd line"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "biomarker_io",
+          "label": "Biomarker-directed immunotherapy (dMMR/MSI-H, TMB-high, IO-naive)",
+          "sets": {
+            "secondLine": "io"
+          },
+          "pills": [
+            "IO"
+          ]
+        },
+        {
+          "id": "tisotumab",
+          "label": "Antibody-drug conjugate (tisotumab vedotin)",
+          "sets": {
+            "secondLine": "adc"
+          },
+          "pills": [
+            "ADC"
+          ]
+        },
+        {
+          "id": "bsc",
+          "label": "Best supportive / palliative care",
+          "sets": {
+            "secondLine": "bsc"
+          },
+          "pills": [
+            "supportive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_second_io",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Second-line IO",
+      "title": "Second-line immunotherapy",
+      "section": "Recurrence",
+      "description": "Immunotherapy for biomarker-selected or immunotherapy-naive recurrent disease; on progression, later-line options apply.",
+      "path": "Cervical / Metastatic / 2L / IO",
+      "pills": [
+        "immunotherapy",
+        "2nd line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Pembrolizumab for dMMR/MSI-high or TMB-high tumors (tissue-agnostic), if immunotherapy-naive",
+        "Single-agent anti-PD-1 for PD-L1-positive disease not previously treated with immunotherapy",
+        "Consider NTRK-fusion targeted therapy if an actionable fusion is present",
+        "No dose asserted here - agent regimen per protocol",
+        "On progression, proceed to later-line therapy (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-pembrolizumab"
+      ]
+    },
+    {
+      "id": "n_tx_tisotumab",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Tisotumab vedotin",
+      "title": "Second-line antibody-drug conjugate (tisotumab vedotin)",
+      "section": "Recurrence",
+      "description": "Tissue-factor-directed antibody-drug conjugate after progression on first-line therapy; on progression, later-line options apply.",
+      "path": "Cervical / Metastatic / 2L / ADC",
+      "pills": [
+        "ADC",
+        "2nd line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Tisotumab vedotin (tissue-factor-directed ADC) after prior systemic therapy",
+        "Monitor ocular toxicity (prophylactic eye care), bleeding, and peripheral neuropathy",
+        "No dose asserted here - agent regimen per protocol",
+        "On progression, proceed to later-line therapy (next step)"
+      ],
+      "protocolRefs": [
+        "cervical-tisotumab-vedotin"
+      ]
+    },
+    {
+      "id": "n_meta_later",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Later line",
+      "title": "Metastatic: later-line therapy (on further progression)",
+      "section": "Recurrence",
+      "description": "After progression on second-line therapy, options are single-agent chemotherapy, a clinical trial, or supportive care by performance status and goals.",
+      "path": "Cervical / Metastatic / Later line",
+      "pills": [
+        "later line"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "chemo",
+          "label": "Single-agent chemotherapy",
+          "sets": {
+            "laterLine": "chemo"
+          },
+          "pills": [
+            "chemo"
+          ]
+        },
+        {
+          "id": "trial",
+          "label": "Clinical trial",
+          "sets": {
+            "laterLine": "trial"
+          },
+          "pills": [
+            "trial"
+          ]
+        },
+        {
+          "id": "bsc",
+          "label": "Best supportive / palliative care",
+          "sets": {
+            "laterLine": "bsc"
+          },
+          "pills": [
+            "supportive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_later_chemo",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Later-line chemo",
+      "title": "Later-line single-agent chemotherapy",
+      "section": "Recurrence",
+      "description": "Sequential single-agent chemotherapy for platinum-resistant recurrent / metastatic disease.",
+      "path": "Cervical / Metastatic / Later / Chemo",
+      "pills": [
+        "chemotherapy",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Options: topotecan, gemcitabine, vinorelbine, pemetrexed, or a taxane not previously used",
+        "Platinum re-challenge for a long platinum-free interval",
+        "Modest response rates; weigh toxicity against performance status and goals of care",
+        "Regimens referenced below"
+      ],
+      "protocolRefs": [
+        "sclc-topotecan",
+        "gyn-carbo-paclitaxel"
+      ]
+    },
+    {
+      "id": "n_tx_trial",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Clinical trial",
+      "title": "Clinical trial enrollment",
+      "section": "Recurrence",
+      "description": "Enrollment in a clinical trial is encouraged for heavily pretreated recurrent / metastatic disease.",
+      "path": "Cervical / Metastatic / Later / Trial",
+      "pills": [
+        "trial",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Prioritize trials of novel ADCs, bispecifics, or targeted agents matched to molecular profiling",
+        "Broad molecular profiling (NGS) to identify actionable alterations",
+        "Maintain supportive care in parallel"
+      ]
+    },
+    {
+      "id": "n_tx_bsc",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Supportive care",
+      "title": "Best supportive / palliative care",
+      "section": "Recurrence",
+      "description": "Symptom-directed palliative care when disease-directed therapy is not appropriate or desired.",
+      "path": "Cervical / Metastatic / Supportive",
+      "pills": [
+        "supportive",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "bullets": [
+        "Palliative radiation for bleeding, pain, or obstructive symptoms",
+        "Manage pain, fistula, renal obstruction (nephrostomy / stent), and psychosocial needs",
+        "Early palliative-care and goals-of-care discussion"
+      ]
+    },
+    {
+      "id": "n_nec_stage",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Neuroendocrine extent",
+      "title": "Small-cell / neuroendocrine carcinoma: disease extent",
+      "section": "Treatment",
+      "description": "This aggressive histology is treated with early systemic chemotherapy integrated with local therapy; extent determines whether local therapy is combined with chemotherapy or chemotherapy is given alone.",
+      "path": "Cervical / Neuroendocrine / Extent",
+      "pills": [
+        "neuroendocrine"
+      ],
+      "required": true,
+      "footnotes": [
+        "e"
+      ],
+      "options": [
+        {
+          "id": "limited",
+          "label": "Limited (pelvis-confined) disease",
+          "sets": {
+            "necExtent": "limited"
+          },
+          "pills": [
+            "limited"
+          ]
+        },
+        {
+          "id": "extensive",
+          "label": "Extensive / metastatic disease",
+          "sets": {
+            "necExtent": "extensive"
+          },
+          "pills": [
+            "extensive"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_nec_limited",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neuroendocrine limited",
+      "title": "Neuroendocrine (limited): chemotherapy + local therapy",
+      "section": "Treatment",
+      "description": "Platinum-etoposide chemotherapy integrated with concurrent chemoradiation or surgery for pelvis-confined small-cell / neuroendocrine disease; response is then assessed.",
+      "path": "Cervical / Neuroendocrine / Limited",
+      "pills": [
+        "neuroendocrine",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Platinum + etoposide chemotherapy is the systemic backbone (small-cell pattern)",
+        "Combine with concurrent chemoradiation for local control, or surgery + adjuvant chemotherapy in early operable cases",
+        "Systemic therapy is prioritized even in localized disease given the high rate of early distant relapse",
+        "Backbone referenced below; assess response at restaging (next step)"
+      ],
+      "protocolRefs": [
+        "sclc-platinum-etoposide"
+      ]
+    },
+    {
+      "id": "n_tx_nec_extensive",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neuroendocrine extensive",
+      "title": "Neuroendocrine (extensive): systemic chemotherapy",
+      "section": "Treatment",
+      "description": "Platinum-etoposide systemic chemotherapy for extensive / metastatic small-cell / neuroendocrine disease; response is then assessed.",
+      "path": "Cervical / Neuroendocrine / Extensive",
+      "pills": [
+        "neuroendocrine",
+        "metastatic",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Platinum + etoposide systemic chemotherapy (small-cell pattern)",
+        "Palliative radiation to symptomatic sites as needed",
+        "Consider brain imaging given the relapse pattern",
+        "Backbone referenced below; assess response at restaging (next step)"
+      ],
+      "protocolRefs": [
+        "sclc-platinum-etoposide"
+      ]
+    },
+    {
+      "id": "n_nec_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Neuroendocrine response",
+      "title": "Neuroendocrine: response assessment",
+      "section": "Treatment",
+      "description": "Restage after platinum-etoposide chemotherapy to guide surveillance or relapse therapy.",
+      "path": "Cervical / Neuroendocrine / Response",
+      "pills": [
+        "neuroendocrine",
+        "response"
+      ],
+      "required": true,
+      "options": [
+        {
+          "id": "response",
+          "label": "Response / disease controlled",
+          "sets": {
+            "necResponse": "response"
+          },
+          "pills": [
+            "response"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Progression / relapse",
+          "sets": {
+            "necResponse": "progression"
+          },
+          "pills": [
+            "relapse"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_nec_relapse",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neuroendocrine relapse",
+      "title": "Neuroendocrine relapse: second-line chemotherapy",
+      "section": "Treatment",
+      "description": "Relapsed small-cell / neuroendocrine carcinoma is treated with second-line chemotherapy by platinum-free interval.",
+      "path": "Cervical / Neuroendocrine / Relapse",
+      "pills": [
+        "neuroendocrine",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Topotecan is a standard second-line option (small-cell pattern)",
+        "Platinum-etoposide re-challenge for a long platinum-free interval; consider a clinical trial",
+        "Supportive / palliative care in parallel by performance status",
+        "Second-line regimen referenced below"
+      ],
+      "protocolRefs": [
+        "sclc-topotecan"
+      ]
+    }
+  ],
+  "links": [
+    {
+      "id": "l_entry_new",
+      "from": "n_entry",
+      "to": "n_workup",
+      "fromOptions": [
+        "newdx"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_nec",
+      "from": "n_entry",
+      "to": "n_nec_stage",
+      "fromOptions": [
+        "neuroendocrine"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_entry_mets",
+      "from": "n_entry",
+      "to": "n_meta_pdl1",
+      "fromOptions": [
+        "metsdx"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_wk_figo",
+      "from": "n_workup",
+      "to": "n_figo",
+      "fromOptions": [
+        "continue"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_figo_ia1",
+      "from": "n_figo",
+      "to": "n_ia1_lvsi",
+      "fromOptions": [
+        "ia1"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_figo_early",
+      "from": "n_figo",
+      "to": "n_fertility",
+      "fromOptions": [
+        "early"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_figo_la",
+      "from": "n_figo",
+      "to": "n_localadv_node",
+      "fromOptions": [
+        "localadv"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_figo_ivb",
+      "from": "n_figo",
+      "to": "n_meta_pdl1",
+      "fromOptions": [
+        "ivb"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ia1_no",
+      "from": "n_ia1_lvsi",
+      "to": "n_tx_ia1_cone",
+      "fromOptions": [
+        "nolvsi"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ia1_lvsi",
+      "from": "n_ia1_lvsi",
+      "to": "n_fertility",
+      "fromOptions": [
+        "lvsi"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fert_yes",
+      "from": "n_fertility",
+      "to": "n_fertility_elig",
+      "fromOptions": [
+        "desired"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fert_no",
+      "from": "n_fertility",
+      "to": "n_early_surgery_vs_rt",
+      "fromOptions": [
+        "notdesired"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ferte_yes",
+      "from": "n_fertility_elig",
+      "to": "n_tx_fertility",
+      "fromOptions": [
+        "eligible"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ferte_no",
+      "from": "n_fertility_elig",
+      "to": "n_early_surgery_vs_rt",
+      "fromOptions": [
+        "ineligible"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fert_path",
+      "from": "n_tx_fertility",
+      "to": "n_fert_path",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fertpath_fav",
+      "from": "n_fert_path",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "favorable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_fertpath_adv",
+      "from": "n_fert_path",
+      "to": "n_adjuvant_risk",
+      "fromOptions": [
+        "adverse"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_surg",
+      "from": "n_early_surgery_vs_rt",
+      "to": "n_tx_radical_hyst",
+      "fromOptions": [
+        "surgery"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_early_rt",
+      "from": "n_early_surgery_vs_rt",
+      "to": "n_tx_definitive_rt",
+      "fromOptions": [
+        "rt"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_hyst_adj",
+      "from": "n_tx_radical_hyst",
+      "to": "n_adjuvant_risk",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_defrt_resp",
+      "from": "n_tx_definitive_rt",
+      "to": "n_early_rt_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ertresp_comp",
+      "from": "n_early_rt_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "complete"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ertresp_res",
+      "from": "n_early_rt_response",
+      "to": "n_recur_pathway",
+      "fromOptions": [
+        "residual"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_high",
+      "from": "n_adjuvant_risk",
+      "to": "n_tx_adj_chemort",
+      "fromOptions": [
+        "high"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_int",
+      "from": "n_adjuvant_risk",
+      "to": "n_tx_adj_rt",
+      "fromOptions": [
+        "intermediate"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adj_low",
+      "from": "n_adjuvant_risk",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "low"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjcrt_resp",
+      "from": "n_tx_adj_chemort",
+      "to": "n_adj_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjresp_ctrl",
+      "from": "n_adj_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "controlled"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjresp_prog",
+      "from": "n_adj_response",
+      "to": "n_meta_pdl1",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adjrt_surv",
+      "from": "n_tx_adj_rt",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_ia1cone_surv",
+      "from": "n_tx_ia1_cone",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_la_std",
+      "from": "n_localadv_node",
+      "to": "n_tx_chemort",
+      "fromOptions": [
+        "standard"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_la_high",
+      "from": "n_localadv_node",
+      "to": "n_tx_chemort_pembro",
+      "fromOptions": [
+        "highrisk"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_crt_resp",
+      "from": "n_tx_chemort",
+      "to": "n_la_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_crtio_resp",
+      "from": "n_tx_chemort_pembro",
+      "to": "n_la_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_laresp_comp",
+      "from": "n_la_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "complete"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_laresp_res",
+      "from": "n_la_response",
+      "to": "n_tx_la_salvage",
+      "fromOptions": [
+        "residual"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_laresp_prog",
+      "from": "n_la_response",
+      "to": "n_meta_pdl1",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lasalv_surv",
+      "from": "n_tx_la_salvage",
+      "to": "n_surveillance",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_surv_recur",
+      "from": "n_surveillance",
+      "to": "n_recur_pathway",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_central",
+      "from": "n_recur_pathway",
+      "to": "n_tx_exenteration",
+      "fromOptions": [
+        "central"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_postsurg",
+      "from": "n_recur_pathway",
+      "to": "n_tx_salvage_chemort",
+      "fromOptions": [
+        "postsurg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_oligo",
+      "from": "n_recur_pathway",
+      "to": "n_tx_oligomet",
+      "fromOptions": [
+        "oligomet"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rec_dist",
+      "from": "n_recur_pathway",
+      "to": "n_meta_pdl1",
+      "fromOptions": [
+        "distant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_oligo_meta",
+      "from": "n_tx_oligomet",
+      "to": "n_meta_pdl1",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pdl1_pos",
+      "from": "n_meta_pdl1",
+      "to": "n_tx_pembro_chemo_bev",
+      "fromOptions": [
+        "cpspos"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pdl1_neg",
+      "from": "n_meta_pdl1",
+      "to": "n_tx_chemo_bev",
+      "fromOptions": [
+        "cpsneg"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_pcb_2l",
+      "from": "n_tx_pembro_chemo_bev",
+      "to": "n_meta_second",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_cb_2l",
+      "from": "n_tx_chemo_bev",
+      "to": "n_meta_second",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_io",
+      "from": "n_meta_second",
+      "to": "n_tx_second_io",
+      "fromOptions": [
+        "biomarker_io"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_adc",
+      "from": "n_meta_second",
+      "to": "n_tx_tisotumab",
+      "fromOptions": [
+        "tisotumab"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_2l_bsc",
+      "from": "n_meta_second",
+      "to": "n_tx_bsc",
+      "fromOptions": [
+        "bsc"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_io_later",
+      "from": "n_tx_second_io",
+      "to": "n_meta_later",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_adc_later",
+      "from": "n_tx_tisotumab",
+      "to": "n_meta_later",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_later_chemo",
+      "from": "n_meta_later",
+      "to": "n_tx_later_chemo",
+      "fromOptions": [
+        "chemo"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_later_trial",
+      "from": "n_meta_later",
+      "to": "n_tx_trial",
+      "fromOptions": [
+        "trial"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_later_bsc",
+      "from": "n_meta_later",
+      "to": "n_tx_bsc",
+      "fromOptions": [
+        "bsc"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nec_limited",
+      "from": "n_nec_stage",
+      "to": "n_tx_nec_limited",
+      "fromOptions": [
+        "limited"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_nec_extensive",
+      "from": "n_nec_stage",
+      "to": "n_tx_nec_extensive",
+      "fromOptions": [
+        "extensive"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neclim_resp",
+      "from": "n_tx_nec_limited",
+      "to": "n_nec_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_necext_resp",
+      "from": "n_tx_nec_extensive",
+      "to": "n_nec_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_necresp_ok",
+      "from": "n_nec_response",
+      "to": "n_surveillance",
+      "fromOptions": [
+        "response"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_necresp_prog",
+      "from": "n_nec_response",
+      "to": "n_tx_nec_relapse",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "id": "aml-atra-ato",
+  "diseaseId": "aml_cancer",
+  "name": "ATRA + Arsenic Trioxide (APL)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Aggressive coagulopathy support until it resolves (fibrinogen, platelets, DIC monitoring).",
+    "Differentiation-syndrome prophylaxis/treatment with corticosteroids; hold offending agent for severe cases."
+  ],
+  "monitoring": [
+    "QT interval on arsenic trioxide (correct potassium/magnesium).",
+    "CBC, coagulation panel, and PML-RARA PCR to confirm molecular remission.",
+    "LFTs on arsenic trioxide."
+  ],
+  "drugs": [
+    {
+      "id": "tretinoin",
+      "name": "Tretinoin (ATRA)",
+      "basis": "bsa",
+      "dosePerUnit": 45,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "dosesPerDay": 2,
+      "frequency": "BID",
+      "caps": {
+        "perDose": null
+      },
+      "notes": "All-trans retinoic acid 45 mg/m2/day PO in two divided doses, from clinical suspicion of APL through induction (continued in consolidation cycles). Start before genetic confirmation. Standard Guidelines (NCCN) / DeVita, general reference."
+    },
+    {
+      "id": "arsenic-trioxide",
+      "name": "Arsenic Trioxide (ATO)",
+      "basis": "mgkg",
+      "dosePerUnit": 0.15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "0.15 mg/kg IV daily during induction until morphologic remission, then on the consolidation schedule; chemotherapy-free with ATRA for low/intermediate-risk APL. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

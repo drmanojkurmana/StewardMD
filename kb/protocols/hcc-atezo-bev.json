@@ -1,0 +1,109 @@
+{
+  "id": "hcc-atezo-bev",
+  "diseaseId": "hcc_cancer",
+  "name": "Atezolizumab + Bevacizumab (atezolizumab / bevacizumab)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative",
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Repeat every 21 days. Advanced/unresectable disease: continue until progression or unacceptable toxicity. Adjuvant high-risk resected setting: give for a defined fixed duration (about 1 year / 17 cycles) per the resected-disease approach. Endoscopy to screen and treat esophageal varices before starting because of the bevacizumab bleeding risk.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Screen for and manage esophageal varices by upper endoscopy before starting (bevacizumab bleeding risk).",
+    "Immune-related adverse event monitoring across organ systems; counsel prompt symptom reporting.",
+    "Blood pressure and urine protein monitoring (anti-VEGF component)."
+  ],
+  "monitoring": [
+    "blood pressure before each cycle",
+    "urine protein (dipstick/UPCR) for proteinuria",
+    "thyroid, liver, glucose for immune-related effects",
+    "symptom review for colitis, pneumonitis, hepatitis, endocrinopathy",
+    "liver function and AFP trend"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "renal",
+    "blood pressure",
+    "proteinuria",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "atezolizumab",
+      "action": "hold/steroids",
+      "text": "Hold atezolizumab and manage with corticosteroids per immune-related adverse event guidance; permanently discontinue for severe or recurrent grade 3-4 events. Clinical review before rechallenge."
+    },
+    {
+      "condition": "significant bleeding, grade 3-4 hypertension, or nephrotic-range proteinuria",
+      "drug": "bevacizumab",
+      "action": "hold",
+      "text": "Hold or discontinue bevacizumab per labeling; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "atezolizumab",
+      "name": "Atezolizumab",
+      "basis": "flat",
+      "dosePerUnit": 1200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Atezolizumab 1200 mg IV flat on day 1 every 21 days. PD-L1 checkpoint inhibitor backbone of the preferred first-line advanced-HCC doublet; also studied adjuvant after high-risk resection. Authored from standard practice (NCCN Hepatocellular Carcinoma; IMbrave150 / IMbrave050 supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "atezolizumab + bevacizumab, first-line advanced HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "bevacizumab",
+      "name": "Bevacizumab",
+      "basis": "mgkg",
+      "dosePerUnit": 15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Bevacizumab 15 mg/kg IV on day 1 every 21 days, given with atezolizumab. Anti-VEGF antibody; screen and treat esophageal varices before starting and monitor blood pressure and proteinuria. Authored from standard practice (NCCN Hepatocellular Carcinoma; IMbrave150 supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "atezolizumab + bevacizumab, first-line advanced HCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "id": "uro-trastuzumab-deruxtecan",
+  "diseaseId": "bladder_cancer",
+  "name": "Trastuzumab deruxtecan (T-DXd)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "Continued every 21 days until progression or unacceptable toxicity. Tissue-agnostic use for HER2-expressing (IHC 3+, or IHC 2+) urothelial carcinoma after prior systemic therapy.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "HER2",
+    "note": "Trastuzumab deruxtecan is a HER2-directed antibody-drug conjugate delivering a topoisomerase I inhibitor payload. Used tissue-agnostically for HER2-expressing tumors (IHC 3+, or IHC 2+) after prior systemic therapy, including urothelial carcinoma."
+  },
+  "stage": [
+    "IV",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "urothelial carcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "trastuzumab deruxtecan is moderately-to-highly emetogenic; give appropriate antiemetic prophylaxis before each infusion."
+    }
+  ],
+  "supportiveCare": [
+    "INTERSTITIAL LUNG DISEASE / PNEUMONITIS: monitor for new or worsening cough, dyspnea, or fever; hold and evaluate promptly, and permanently discontinue for grade >= 2 ILD.",
+    "Monitor CBC for neutropenia and anemia before each dose.",
+    "Assess left ventricular function periodically (HER2-directed therapy)."
+  ],
+  "monitoring": [
+    "chest imaging and pulmonary symptom review for interstitial lung disease before each dose",
+    "CBC before each dose (neutropenia, anemia)",
+    "LVEF at baseline and periodically",
+    "radiographic response assessment periodically"
+  ],
+  "clearanceChecks": [
+    "pulmonary status (ILD screen)",
+    "CBC/platelets",
+    "LVEF",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "any grade interstitial lung disease / pneumonitis",
+      "drug": "trastuzumab-deruxtecan",
+      "action": "hold/discontinue",
+      "text": "Interrupt for suspected ILD and evaluate; permanently discontinue for grade >= 2 ILD/pneumonitis and treat with corticosteroids per labeling. Physician decides."
+    },
+    {
+      "condition": "grade 4 neutropenia or febrile neutropenia",
+      "drug": "trastuzumab-deruxtecan",
+      "action": "hold/reduce",
+      "text": "Hold until recovery and reduce dose per labeling for grade 4 neutropenia or febrile neutropenia; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "trastuzumab-deruxtecan",
+      "name": "Trastuzumab deruxtecan",
+      "basis": "mgkg",
+      "dosePerUnit": 5.4,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Trastuzumab deruxtecan 5.4 mg/kg IV on day 1 of a 21-day cycle. Interstitial lung disease / pneumonitis is a serious risk requiring proactive monitoring and prompt interruption. Dose per standard tissue-agnostic HER2 practice (Standard Guidelines / DeVita / Harrison, general reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Systemic Therapy, HER2-expressing later-line (tissue-agnostic)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

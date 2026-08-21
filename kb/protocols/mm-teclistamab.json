@@ -1,0 +1,84 @@
+{
+  "id": "mm-teclistamab",
+  "diseaseId": "myeloma_cancer",
+  "name": "Teclistamab (BCMA x CD3 bispecific antibody)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Teclistamab is a BCMA-directed T-cell-engaging bispecific antibody for triple-class-exposed relapsed/refractory myeloma. BCMA is near-universally expressed; use is not by a selective biomarker. Physician decides."
+  },
+  "stage": [],
+  "treatmentSetting": "triple-class-exposed relapsed/refractory multiple myeloma",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [
+    {
+      "name": "CRS premedication (step-up doses)",
+      "notes": "Corticosteroid, antihistamine, and antipyretic before each step-up dose and the first full dose, per labeling, to reduce cytokine-release-syndrome severity."
+    }
+  ],
+  "supportiveCare": [
+    "Step-up (priming) dosing with inpatient monitoring for cytokine-release syndrome and immune-effector-cell neurotoxicity (ICANS) during initiation.",
+    "Infection prophylaxis (antiviral, PJP, and consider antibacterial) and immunoglobulin replacement for hypogammaglobulinemia.",
+    "Continuous weekly dosing to progression once the maintenance dose is reached."
+  ],
+  "monitoring": [
+    "CRS and neurotoxicity (ICANS) monitoring during step-up and first full dose",
+    "CBC with differential and platelets",
+    "serum immunoglobulins (hypogammaglobulinemia) and infection surveillance",
+    "myeloma response markers per follow-up schedule"
+  ],
+  "clearanceChecks": [
+    "CRS/ICANS resolved",
+    "CBC/platelets",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "cytokine-release syndrome or ICANS",
+      "drug": "teclistamab",
+      "action": "hold",
+      "text": "Hold teclistamab for cytokine-release syndrome or neurotoxicity; manage per grade (supportive care, tocilizumab, corticosteroids) and resume after recovery per labeling. Physician directs."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "teclistamab",
+      "name": "Teclistamab",
+      "basis": "mgkg",
+      "dosePerUnit": 1.5,
+      "unit": "mg/kg",
+      "route": "SC",
+      "days": [
+        1, 8, 15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Maintenance teclistamab 1.5 mg/kg subcutaneously once weekly (shown here on days 1, 8, and 15 of a 21-day cycle; dosing continues weekly to progression). Initiation uses step-up (priming) doses of 0.06 mg/kg then 0.3 mg/kg before the first full 1.5 mg/kg dose, each with CRS premedication and inpatient monitoring; the engine computes the steady-state weekly maintenance dose. Dosing is by actual body weight. Own wording from standard-of-care knowledge; physician decides.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Multiple Myeloma",
+        "version": "draft",
+        "date": null,
+        "locator": "teclistamab BCMAxCD3 bispecific, weekly maintenance dosing after step-up",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

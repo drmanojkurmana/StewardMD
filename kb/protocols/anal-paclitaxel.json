@@ -1,0 +1,79 @@
+{
+  "id": "anal-paclitaxel",
+  "diseaseId": "anal_cancer",
+  "name": "PACLitaxel (single-agent taxane, later-line anal SCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Anal Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "Single-agent weekly paclitaxel is a reasonable later-line cytotoxic for previously treated metastatic anal squamous cell carcinoma when a taxane has not been used, chosen for tolerability. No molecular biomarker gate for selection. General reference: Standard Guidelines (NCCN) / DeVita."
+  },
+  "stage": [
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic (second-line and beyond)",
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "PACLitaxel premedication",
+      "notes": "Corticosteroid, H1 and H2 antihistamine premedication per paclitaxel labeling (hypersensitivity prophylaxis)."
+    }
+  ],
+  "supportiveCare": [
+    "PACLitaxel 80 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle (weekly taxane), continued until progression or intolerance.",
+    "Assess peripheral neuropathy each cycle; hold/reduce for grade 2+ neuropathy."
+  ],
+  "monitoring": [
+    "CBC before each dose",
+    "peripheral neuropathy assessment each cycle",
+    "hypersensitivity monitoring during infusion",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3-4 neutropenia or grade 2+ peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "hold/reduce",
+      "text": "Hold and reduce paclitaxel per labeling; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "PACLitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "PACLitaxel 80 mg/m2 IV on days 1, 8, and 15 of a 28-day cycle (weekly taxane). Requires corticosteroid + H1/H2 antihistamine premedication. ISMP tall-man: PACLitaxel (distinguish from DOCEtaxel). General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    }
+  ]
+}

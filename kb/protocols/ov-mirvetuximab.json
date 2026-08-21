@@ -1,0 +1,50 @@
+{
+  "id": "ov-mirvetuximab",
+  "diseaseId": "ovarian_cancer",
+  "name": "Mirvetuximab Soravtansine (FRalpha-high)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT targeted-ADC option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "biomarkers": {
+    "FRalpha": "high expression required",
+    "note": "Folate-receptor-alpha (FRalpha) high expression by validated assay selects platinum-resistant patients for mirvetuximab soravtansine."
+  },
+  "premedications": [
+    { "name": "Ocular prophylaxis", "notes": "Lubricating and corticosteroid eye drops with each cycle plus a vasoconstrictor eye drop before infusion; baseline and periodic ophthalmologic exam for keratopathy." },
+    { "name": "Infusion-reaction prophylaxis", "notes": "Antihistamine, antipyretic and corticosteroid per package insert." }
+  ],
+  "supportiveCare": [
+    "Ocular toxicity (blurred vision, keratopathy) is characteristic: coordinate eye care and hold/reduce for grade 2-3 changes.",
+    "Monitor for peripheral neuropathy, pneumonitis and infusion reactions."
+  ],
+  "monitoring": [
+    "ophthalmologic exam at baseline and periodically",
+    "visual symptoms and neuropathy each cycle",
+    "CBC and liver function before each cycle"
+  ],
+  "drugs": [
+    {
+      "id": "mirvetuximab-soravtansine",
+      "name": "Mirvetuximab Soravtansine",
+      "basis": "mgkg",
+      "dosePerUnit": 6,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Mirvetuximab soravtansine 6 mg/kg (dosed on adjusted ideal body weight) IV on day 1 every 21 days for FRalpha-high, platinum-resistant epithelial ovarian cancer. Hold/reduce for ocular or other grade 2-3 toxicity per package insert. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

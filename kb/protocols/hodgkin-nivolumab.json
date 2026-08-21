@@ -1,0 +1,47 @@
+{
+  "id": "hodgkin-nivolumab",
+  "diseaseId": "hodgkin_cancer",
+  "name": "Nivolumab (PD-1 checkpoint inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 26,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "PD-1 checkpoint inhibitor for relapsed/refractory classical Hodgkin lymphoma.",
+    "Monitor for immune-related adverse events (thyroid, hepatitis, pneumonitis, colitis, endocrinopathies); manage with corticosteroids per severity.",
+    "Flat-dose schedule; 240 mg every 2 weeks or 480 mg every 4 weeks are interchangeable options."
+  ],
+  "monitoring": [
+    "thyroid, liver, and metabolic panels before dosing",
+    "assessment for immune-related adverse events at each visit",
+    "restaging imaging to assess response"
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Nivolumab 240 mg IV flat dose on day 1 every 14 days (alternative 480 mg every 28 days). Monitor for immune-related adverse events. Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}
