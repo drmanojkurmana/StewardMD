@@ -124,15 +124,57 @@
    * plausible label it cannot see, which on a drug box or a lab report is the most dangerous thing
    * this feature could do.
    */
+  /* INTERPRET, DO NOT TRANSCRIBE.
+   *
+   * The first version of this prompt said "Describe only what is actually visible" and "read the
+   * values as printed". Both are transcription instructions, and the model obeyed them exactly. Shown
+   * a cortisol report it produced eighteen lines of "The lab ID is 60812702855. The ref id is not
+   * visible. The uhid is not visible. The collection time is not visible." - a worse OCR than the OCR
+   * engine, with no clinical content and the patient's name echoed back for no reason.
+   *
+   * ChatGPT, same photo: two salient values, then an Interpretation heading saying 6.2 ug/dL is
+   * borderline-low for an 8 AM cortisol and NOT sufficient to diagnose or exclude adrenal
+   * insufficiency. That is the difference between reading a report and reading a patient.
+   *
+   * So the instruction is now inverted: pull only the values that carry meaning, then commit to what
+   * they mean. "Not visible" fields are dropped entirely - a doctor holding the document does not need
+   * to be told which boxes are empty. Identifiers are skipped on purpose: they add nothing clinically
+   * and keep PHI out of an answer that may be screenshotted or logged.
+   *
+   * The closing line still tells them to check the original, because a 4B reading a phone photo of a
+   * printout can misread a digit, and a misread digit is the whole answer.
+   */
   var SYSTEM_IMAGE =
-    "You are MaiK, clinical decision support for doctors. Answer in markdown.\n" +
-    "Describe only what is actually visible in the image. When text is blurred, cut off or you " +
-    "cannot read it, say which part you cannot read rather than guessing.\n" +
-    "Give the final answer only, never your reasoning. Use no section labels.\n" +
-    "For a medicine package or label, read back the drug name, strength and form exactly as printed.\n" +
-    "For a report or investigation, read the values as printed and flag the abnormal ones.\n" +
-    "This is an offline reading with no StewardMD sources. End with one line: " +
-    "\"Verify against the original document.\"";
+    "You are MaiK, clinical decision support for doctors reading a clinical image. Answer in markdown.\n" +
+    "Lead with the findings that MATTER, as a few short bullets: the test or parameter, its value with " +
+    "units, and the reference range when the image shows one. Skip empty fields, headers, barcodes and " +
+    "anything not clinically useful, and do not list what is missing.\n" +
+    "Never write out patient names, hospital IDs, UHIDs or accession numbers even when they are legible.\n" +
+    "Then a section headed \"Interpretation\": say what the finding MEANS. State whether each value is " +
+    "normal, borderline or clearly abnormal against the range shown or the standard adult range, and " +
+    "give the threshold you are using.\n" +
+    "Say plainly what the finding does and does not establish, and name the single most useful next " +
+    "step or confirmatory test.\n" +
+    "When a number is genuinely unreadable, say which one and stop guessing at that value; do not " +
+    "abandon the rest of the reading.\n" +
+    "Give the final answer only, never your reasoning.\n" +
+    "End with one line: \"Verify against the original document.\"";
+
+  /* A follow-up about an image already on screen.
+   *
+   * Without this the model re-reads the picture from scratch and repeats the whole summary, so "is
+   * this normal?" produced another transcription instead of an answer. Here the image is context and
+   * the QUESTION leads.
+   */
+  var SYSTEM_IMAGE_FOLLOWUP =
+    "You are MaiK, clinical decision support for doctors. The image is the one already being " +
+    "discussed. Answer in markdown.\n" +
+    "Answer the doctor's question about it DIRECTLY, in one or two sentences, then only the detail " +
+    "that supports the answer. Do not re-list the report or repeat the earlier summary.\n" +
+    "When the question asks whether something is normal, commit: say normal, borderline or abnormal, " +
+    "give the threshold you are using, and say what it does and does not establish.\n" +
+    "Never write out patient names or hospital identifiers.\n" +
+    "Give the final answer only, never your reasoning.";
 
   /** Can this pack see at all, and is its projector on disk? */
   function visionReady(packId) {
@@ -296,7 +338,19 @@
         var pk = (models() && models().PACKS[packId]) || {};
         var common = {
           prompt: prompt,
-          system: images.length ? SYSTEM_IMAGE : SYSTEM,
+          /* Which prompt runs is the whole difference between a useful answer and a useless one.
+           *
+           *   systemOverride  a caller doing STRUCTURED EXTRACTION (ICU autofill wants JSON fields).
+           *                   The interpretive prompt below would fight that request and return prose.
+           *   imageFollowUp   a question about an image already on screen. Without this the model
+           *                   re-reads the picture and repeats the whole summary, so "is this normal?"
+           *                   came back as another transcription instead of an answer.
+           *   SYSTEM_IMAGE    a first look at an image: findings, then interpretation.
+           */
+          system: (opts && opts.systemOverride) ? opts.systemOverride
+                : !images.length ? SYSTEM
+                : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
+                : SYSTEM_IMAGE,
           nPredict: pk.nPredict || 512,
           temperature: (opts && typeof opts.temperature === "number") ? opts.temperature : 0,
           stream: typeof onDelta === "function"
@@ -397,6 +451,7 @@
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
     isFollowUp: isFollowUp, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
+    SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;

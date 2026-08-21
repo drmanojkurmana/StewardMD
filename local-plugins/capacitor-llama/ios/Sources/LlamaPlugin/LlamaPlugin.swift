@@ -136,8 +136,34 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
     }
 
     @objc private func appDidEnterBackground() {
+        idleTimer?.invalidate(); idleTimer = nil
         engine.cancel()
         engine.release()
+    }
+
+    /* IDLE RELEASE.
+     *
+     * The model used to stay resident between questions for the whole time the app was open, holding
+     * its Metal buffers. Those are dirty pages that cost power to keep alive and bring the app closer
+     * to a jetsam kill, for a model that may not be asked anything again.
+     *
+     * mmap makes the reload cheap, so the trade is clearly worth it: a couple of seconds on the next
+     * question against not holding a multi-GB GPU allocation open while a clinician reads the answer.
+     * 120 s is long enough that a normal back-and-forth never pays the reload.
+     */
+    private var idleTimer: Timer?
+    private static let idleSeconds: TimeInterval = 120
+
+    private func armIdleRelease() {
+        DispatchQueue.main.async { [weak self] in
+            guard let self else { return }
+            self.idleTimer?.invalidate()
+            self.idleTimer = Timer.scheduledTimer(withTimeInterval: Self.idleSeconds, repeats: false) { [weak self] _ in
+                guard let self, !self.engine.isGenerating else { return }
+                llamaPerf("PERF idle release after \(Int(Self.idleSeconds))s")
+                self.engine.release()
+            }
+        }
     }
 
     // MARK: - Capability
@@ -231,6 +257,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                                   onToken: onToken) { [weak self] result in
             switch result {
             case .success(let text):
+                self?.armIdleRelease()
                 call.resolve(["text": text, "ms": Int(Date().timeIntervalSince(t0) * 1000), "images": paths.count])
             case .failure(let err):
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)
@@ -259,6 +286,7 @@ public class LlamaPlugin: CAPPlugin, CAPBridgedPlugin {
                         temperature: temperature, seed: seed, onToken: onToken) { [weak self] result in
             switch result {
             case .success(let text):
+                self?.armIdleRelease()
                 call.resolve(["text": text, "ms": Int(Date().timeIntervalSince(t0) * 1000)])
             case .failure(let err):
                 let e = err as? LlamaError ?? LlamaError(.generationFailure, err.localizedDescription)

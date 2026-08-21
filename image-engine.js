@@ -235,21 +235,83 @@
    * returns prose, so it is surfaced as { mode:"lines" } - the shape the callers already handle for a
    * reading with no structured fields.
    */
+  /* The SAME field schema the cloud engine is asked for.
+   *
+   * Deliberately copied from VISION_SYS in functions/api/ai/[[path]].js rather than invented here. ICU
+   * autofill maps the cloud engine's keys already, so emitting the same keys means the on-device
+   * engine feeds the identical review screen with no translation layer - and a translation layer is
+   * exactly where a value silently lands in the wrong field.
+   */
+  var LOCAL_SCHEMA = {
+    monitor: '{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num,"cvp":num,"etco2":num}',
+    ventilator: '{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}',
+    abg: '{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num}',
+    labs: '{"na":num,"k":num,"cl":num,"hco3":num,"ca":num,"mg":num,"glu":num,"creat":num,"urea":num,"wbc":num,"hb":num,"plt":num,"inr":num,"crp":num,"bili":num,"ast":num,"alt":num,"lactate":num}',
+    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}'
+  };
+
+  /* On-device reading. Two shapes, because the callers want different things.
+   *
+   * ICU snapshot AUTOFILLS fields, so for those kinds the model is asked for JSON in the cloud
+   * engine's own schema and the result is parsed. Returning prose there would have meant the doctor
+   * re-typing every value, which defeats the point of photographing the monitor.
+   *
+   * Scan Meds and a plain look at a document want prose, so those still get a reading.
+   */
   function routeLocal(image, kind) {
     var L = window.SMD_MAIK_LOCAL;
     if (!L || !L.answer || !localVisionReady()) {
       return Promise.reject(new Error("the on-device model cannot read images yet"));
     }
-    log("kind:", kind, "engine: local", "shape: none (on-device model, no upload)");
-    var ask = kind === "meds"
-      ? "Read this medicine package. Give the drug name, strength and form exactly as printed."
-      : "Read this clinical image. List the values or findings exactly as printed.";
-    return Promise.resolve(L.answer({ question: ask }, { images: [stripFileScheme(image)] }, null))
+    var schema = LOCAL_SCHEMA[kind] || (kind === "icu" || kind === "handover" ? LOCAL_SCHEMA.all : null);
+    log("kind:", kind, "engine: local", schema ? "shape: json fields" : "shape: prose lines");
+    var done = busy("Reading on this device…");
+
+    var ask = schema
+      ? "Read this clinical image and return ONLY JSON matching " + schema +
+        ". Omit any field you cannot read with confidence. No prose, no explanation, no code fence."
+      : (kind === "meds"
+          ? "Read this medicine package. Give the drug name, strength and form exactly as printed."
+          : "Read this clinical image and say what it shows.");
+
+    // Structured extraction needs a bare EXTRACTOR prompt. The default image prompt asks for findings
+    // plus an Interpretation section, which would return prose and break autofill.
+    var sysOverride = schema
+      ? "You read clinical images and return ONLY the JSON asked for. No prose, no explanation, no " +
+        "code fence, no commentary. Omit any field you cannot read with confidence. Never invent a value."
+      : null;
+    return Promise.resolve(L.answer({ question: ask },
+        { images: [stripFileScheme(image)], systemOverride: sysOverride }, null))
       .then(function (r) {
+        done();
         if (!r || r.error) throw new Error((r && r.error) || "on-device reading failed");
-        var lines = String(r.text || "").split(/\n+/).map(function (t) { return t.trim(); }).filter(Boolean);
+        var text = String(r.text || "");
+        if (schema) {
+          var f = parseLooseJson(text);
+          // Fall through to lines rather than failing: a partial reading the doctor can see beats an
+          // error, and the review screen accepts lines.
+          if (f && Object.keys(f).length) { log("local success: fields"); return { mode: "fields", fields: f, lines: [], engine: "local" }; }
+          log("local: no parseable fields, falling back to lines");
+        }
+        var lines = text.split(/\n+/).map(function (t) { return t.trim(); }).filter(Boolean);
         return { mode: "lines", lines: lines, engine: "local" };
-      });
+      })
+      .catch(function (e) { done(); throw e; });
+  }
+
+  /* A 4B asked for JSON will wrap it in a code fence, add a sentence before it, or trail a comma.
+   * Pull the outermost object out and repair the cheap mistakes rather than discarding a good reading
+   * over punctuation. Anything still unparseable returns null and the caller shows prose instead.
+   */
+  function parseLooseJson(t) {
+    var s = String(t || "").replace(/```[a-z]*/gi, "").trim();
+    var a = s.indexOf("{"), b = s.lastIndexOf("}");
+    if (a < 0 || b <= a) return null;
+    var body = s.slice(a, b + 1).replace(/,\s*([}\]])/g, "$1");
+    try {
+      var o = JSON.parse(body);
+      return (o && typeof o === "object") ? o : null;
+    } catch (e) { return null; }
   }
 
   /** mtmd wants a filesystem path; a file:// URI would be read as a literal filename. */

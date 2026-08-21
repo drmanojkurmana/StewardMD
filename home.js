@@ -2903,7 +2903,7 @@
           // the selected engine is on-device AND that pack can see AND its projector is downloaded.
           // Cloud/KB answers have no image path, so showing it there would be a dead button.
           '<button class="maik-img" id="maikImg" type="button" hidden title="Read an image offline" aria-label="Read an image with the on-device model">' + svg("camera", "smd-ico") + '</button>' +
-          '<input type="file" id="maikImgFile" accept="image/*" hidden>' +
+          '<input type="file" id="maikImgFile" accept="image/*,application/pdf" hidden>' +
           '<textarea class="maik-ta" id="maikQ" rows="1" placeholder="Ask a clinical question…"></textarea>' +
           '<button class="maik-send" id="maikSend" type="button" title="Send" aria-label="Send">' + MK.send + '</button>' +
         '</div>' +
@@ -3093,6 +3093,7 @@ body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0
 .maik-cmp-in:focus-within{border-color:var(--mk-teal)}
 .maik-mic{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
 .maik-img{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-attach{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:8px 10px;border:1px solid var(--mk-bd);border-radius:12px;background:var(--mk-soft)}.maik-attach-th{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:0 0 auto;background:var(--mk-bd)}.maik-attach-th.ph{display:flex;align-items:center;justify-content:center;color:var(--mk-mut)}.maik-attach-meta{display:flex;flex-direction:column;min-width:0;flex:1}.maik-attach-nm{font:600 12.5px/1.3 'Inter';color:var(--mk-ink,inherit);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.maik-attach-sub{font:500 11px/1.35 'Inter';color:var(--mk-mut);margin-top:1px}.maik-attach-x{width:28px;height:28px;border:none;border-radius:50%;background:transparent;color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}.maik-b.you .maik-sent-img{display:block;max-width:180px;max-height:180px;border-radius:12px;margin:0 0 8px auto;object-fit:cover}
 .maik-img.has{background:var(--teal,#0e6e63);color:#fff}
 .maik-img[hidden]{display:none}
 .maik-mic:hover{color:var(--mk-teal);background:var(--mk-tsoft)}
@@ -4281,7 +4282,16 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
       try { scAbort(); } catch (e) {}   // sending stops any active dictation (red off) + keeps the box clear
       try { var _ex = sheet.querySelector("#maikExtract"); if (_ex) _ex.classList.remove("show"); } catch (e) {}
-      _maikHist.push({ q: q }); bubble("you", maikEscH(q));
+      /* Show the attached image INSIDE the question, the way any chat assistant does.
+       *
+       * Owner comparison against ChatGPT: their conversation shows the photo thumbnail above the
+       * answer, ours showed nothing at all, so there was no record of what had actually been read.
+       * A thumbnail in the user's own bubble is that record, and it stays in the saved thread.
+       */
+      var _sentThumb = "";
+      try { if (window.__MAIK_IMAGES && window.__MAIK_IMAGES.attached().length) _sentThumb = window.__MAIK_IMAGES.thumb() || ""; } catch (e) {}
+      _maikHist.push({ q: q });
+      bubble("you", (_sentThumb ? '<img class="maik-sent-img" alt="Attached image" src="' + _sentThumb + '">' : "") + maikEscH(q));
       try { if (qEl) qEl.placeholder = "Ask a follow-up…"; } catch (e) {}
       // Research Mode (Evidence Review): clinician literature review, not the KB/answer pipeline.
       if (_researchMode) { maikRunResearch(q); return; }
@@ -4563,7 +4573,9 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * downloading while the sheet is sitting open.
      */
     var imgBtn = sheet.querySelector("#maikImg"), imgFile = sheet.querySelector("#maikImgFile");
-    var _pendingImages = [];
+    // The attached image persists across turns (see __MAIK_IMAGES below); _asked tracks whether it has
+    // already been read once, so a second question is a FOLLOW-UP rather than a fresh reading.
+    var _pendingImages = [], _pendingThumb = "", _pendingName = "", _asked = false;
     function maikVisionAvailable() {
       try {
         var E = window.SMD_MAIK_ENGINE, L = window.SMD_MAIK_LOCAL;
@@ -4577,6 +4589,43 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var on = maikVisionAvailable();
       if (on) imgBtn.removeAttribute("hidden"); else imgBtn.setAttribute("hidden", "");
       imgBtn.classList.toggle("has", _pendingImages.length > 0);
+      maikRenderAttachChip();
+    }
+
+    /* THE ATTACHED-FILE CHIP.
+     *
+     * Owner report: "whenever I upload or select a photo there is no confirmation as image selected or
+     * uploaded". There genuinely was none - the file went straight into a variable and the only hint
+     * was a toast that vanished. So the composer now shows the thumbnail, the file name and a remove
+     * button until the image is cleared, which is also what tells the doctor the NEXT question will
+     * still be about this image.
+     */
+    function maikRenderAttachChip() {
+      var cmp = sheet.querySelector(".maik-cmp");
+      if (!cmp) return;
+      var host = cmp.querySelector("#maikAttach");
+      if (!_pendingImages.length) { if (host) host.remove(); return; }
+      if (!host) {
+        host = document.createElement("div");
+        host.id = "maikAttach";
+        host.className = "maik-attach";
+        cmp.insertBefore(host, cmp.querySelector(".maik-cmp-in"));
+      }
+      host.innerHTML =
+        (_pendingThumb ? '<img class="maik-attach-th" alt="" src="' + _pendingThumb + '">'
+                       : '<span class="maik-attach-th ph" aria-hidden="true">' + svg("upload", "smd-ico") + '</span>') +
+        '<span class="maik-attach-meta">' +
+          '<span class="maik-attach-nm">' + maikEscH(_pendingName || "Image") + '</span>' +
+          '<span class="maik-attach-sub">' + (_asked ? "Ask another question about this" : "Attached. Ask your question.") + '</span>' +
+        '</span>' +
+        '<button type="button" class="maik-attach-x" id="maikAttachX" title="Remove" aria-label="Remove the attached image">' + svg("x", "smd-ico") + '</button>';
+      var x = host.querySelector("#maikAttachX");
+      if (x) x.addEventListener("click", function () { maikClearImages(); });
+    }
+
+    function maikClearImages() {
+      _pendingImages = []; _pendingThumb = ""; _pendingName = ""; _asked = false;
+      maikSyncImageBtn();
     }
     if (imgBtn && imgFile) {
       imgBtn.addEventListener("click", function () { try { imgFile.value = ""; imgFile.click(); } catch (e) {} });
@@ -4589,32 +4638,90 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         maikStageImage(f);
       });
     }
+    /* Stage a photo or a PDF for the next question.
+     *
+     * PDF is accepted because a clinician's report usually arrives as one, but the vision encoder
+     * takes PIXELS - it cannot parse a PDF. So page 1 is rasterised to a JPEG first and that is what
+     * the model sees. Page 1 only, deliberately: each image costs hundreds of prompt tokens and a
+     * 4096 context has no room for a multi-page document.
+     */
     function maikStageImage(file) {
       var FS = (window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Filesystem) || null;
       if (!FS) { toast("Image reading needs the app."); return; }
-      var rd = new FileReader();
-      rd.onload = function () {
-        var b64 = String(rd.result || "").split(",")[1] || "";
+      var isPdf = /pdf$/i.test(file.type || "") || /\.pdf$/i.test(file.name || "");
+      // Show the doctor something IMMEDIATELY. Writing the file and rasterising a PDF both take a
+      // moment, and silence there is exactly the "no confirmation" complaint.
+      _pendingName = file.name || (isPdf ? "Document.pdf" : "Image");
+      _pendingThumb = ""; _asked = false;
+      _pendingImages = ["pending"];
+      maikSyncImageBtn();
+
+      (isPdf ? maikPdfFirstPageDataUrl(file) : maikFileDataUrl(file)).then(function (dataUrl) {
+        var b64 = String(dataUrl || "").split(",")[1] || "";
+        if (!b64) throw new Error("empty");
+        _pendingThumb = dataUrl;                       // the chip shows the real page/photo
         var name = "maik-img-" + Date.now() + ".jpg";
-        FS.writeFile({ path: "maik-images/" + name, data: b64, directory: "DATA", recursive: true })
-          .then(function () { return FS.getUri({ path: "maik-images/" + name, directory: "DATA" }); })
-          .then(function (u) {
-            var p = String((u && u.uri) || "").replace(/^file:\/\//, "");
-            if (!p) throw new Error("no path");
-            _pendingImages = [p];            // one at a time keeps the 4096 context usable
-            maikSyncImageBtn();
-            if (!(qEl.value || "").trim()) qEl.value = "What does this show?";
-            try { qEl.focus(); } catch (e) {}
-            toast("Image attached. Ask your question, then send.");
-          })
-          .catch(function () { toast("Could not attach that image."); });
-      };
-      rd.onerror = function () { toast("Could not read that image."); };
-      rd.readAsDataURL(file);
+        return FS.writeFile({ path: "maik-images/" + name, data: b64, directory: "DATA", recursive: true })
+          .then(function () { return FS.getUri({ path: "maik-images/" + name, directory: "DATA" }); });
+      }).then(function (u) {
+        var p = String((u && u.uri) || "").replace(/^file:\/\//, "");
+        if (!p) throw new Error("no path");
+        _pendingImages = [p];              // one at a time keeps the 4096 context usable
+        maikSyncImageBtn();
+        if (!(qEl.value || "").trim()) qEl.value = isPdf ? "What does this report show?" : "What does this show?";
+        try { qEl.focus(); } catch (e) {}
+      }).catch(function () {
+        maikClearImages();
+        toast(isPdf ? "Could not read that PDF." : "Could not attach that image.");
+      });
     }
-    // Consumed by the send path, then cleared so the next question is not silently about the old photo.
-    function maikTakePendingImages() { var a = _pendingImages; _pendingImages = []; maikSyncImageBtn(); return a; }
-    try { window.__MAIK_IMAGES = { pending: function () { return _pendingImages.slice(); }, take: maikTakePendingImages, sync: maikSyncImageBtn }; } catch (e) {}
+
+    function maikFileDataUrl(file) {
+      return new Promise(function (res, rej) {
+        var rd = new FileReader();
+        rd.onload = function () { res(String(rd.result || "")); };
+        rd.onerror = function () { rej(new Error("read failed")); };
+        rd.readAsDataURL(file);
+      });
+    }
+
+    /** Rasterise page 1 of a PDF to a JPEG data URL, since the vision encoder needs pixels. */
+    function maikPdfFirstPageDataUrl(file) {
+      var lib = window.pdfjsLib || null;
+      if (!lib) return Promise.reject(new Error("no pdf renderer"));
+      return file.arrayBuffer().then(function (buf) {
+        return lib.getDocument({ data: new Uint8Array(buf) }).promise;
+      }).then(function (doc) { return doc.getPage(1); }).then(function (page) {
+        // ~1600 px on the long edge: enough for the model to read printed lab values, small enough
+        // that the encode stays quick and the base64 write does not spike memory.
+        var vp1 = page.getViewport({ scale: 1 });
+        var scale = Math.min(3, Math.max(1, 1600 / Math.max(vp1.width, vp1.height)));
+        var vp = page.getViewport({ scale: scale });
+        var cv = document.createElement("canvas");
+        cv.width = Math.round(vp.width); cv.height = Math.round(vp.height);
+        return page.render({ canvasContext: cv.getContext("2d"), viewport: vp }).promise
+          .then(function () { return cv.toDataURL("image/jpeg", 0.9); });
+      });
+    }
+
+    /* The attached image STAYS attached across turns.
+     *
+     * It used to be taken and cleared on send, so the obvious next question - "is this normal?" -
+     * reached the model with no image and could not be answered about it. Now the engine reads
+     * attached() every turn, and markAsked() records that the picture has been read once so the second
+     * question uses the follow-up prompt instead of re-reading the whole report.
+     * Cleared by the chip's remove button, or when a new file is chosen.
+     */
+    try {
+      window.__MAIK_IMAGES = {
+        attached: function () { return _pendingImages.filter(function (p) { return p !== "pending"; }); },
+        asked: function () { return _asked; },
+        markAsked: function () { _asked = true; maikRenderAttachChip(); },
+        thumb: function () { return _pendingThumb; },
+        clear: maikClearImages,
+        sync: maikSyncImageBtn
+      };
+    } catch (e) {}
     maikSyncImageBtn();
 
     // ---- MaiK Scribe: voice dictation into the chat box + inline findings extraction (spec C2) ----

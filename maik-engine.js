@@ -152,14 +152,24 @@
     if (kind === "refine") return Promise.resolve(null);          // no local router; KB terms are enough
     var pkg = args[0], opts = args[1], onDelta = args[2];
     if (kind === "explain") { pkg = { summary: args[0], question: args[1] || "" }; opts = null; onDelta = null; }
-    // Attach any image the composer staged, and CONSUME it, so the next question is not silently
-    // answered about the previous photo. Taken here rather than in home.js so every caller of the
-    // decorated SMD_AI gets the same behaviour.
+    /* Attach the staged image, and KEEP it for follow-ups.
+     *
+     * It used to be consumed on send, so the picture was gone by the time the doctor asked the obvious
+     * next question - "is this normal?" reached the model with no image and could not be answered
+     * about it. An image stays attached to the conversation until it is replaced or cleared, exactly
+     * as it does in any chat assistant.
+     *
+     * The SECOND and later questions about the same image are flagged imageFollowUp so the prompt can
+     * answer the question instead of re-reading the whole report.
+     */
     try {
-      var stagedTake = window.__MAIK_IMAGES && window.__MAIK_IMAGES.take;
-      if (stagedTake) {
-        var imgs = stagedTake();
-        if (imgs && imgs.length) opts = Object.assign({}, opts || {}, { images: imgs });
+      var IM = window.__MAIK_IMAGES;
+      if (IM && IM.attached) {
+        var imgs = IM.attached();
+        if (imgs && imgs.length) {
+          opts = Object.assign({}, opts || {}, { images: imgs, imageFollowUp: !!IM.asked() });
+          if (IM.markAsked) IM.markAsked();
+        }
       }
     } catch (e) {}
     return Promise.resolve(window.SMD_MAIK_LOCAL.answer(pkg, opts, onDelta))

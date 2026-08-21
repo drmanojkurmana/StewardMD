@@ -240,6 +240,57 @@ const { L } = load();
      L.stripReasoning("<think>weighing options</think>Pip-tazo 3.375 g IV q8h") === "Pip-tazo 3.375 g IV q8h");
 }
 
+
+/* ── Image answers must INTERPRET, not transcribe ───────────────────────────────────────────────
+ * From a side-by-side the owner ran: shown a cortisol report, ours produced eighteen lines of "The
+ * lab ID is 60812702855. The ref id is not visible. The uhid is not visible." while ChatGPT gave two
+ * salient values then an Interpretation section saying 6.2 ug/dL is borderline-low for an 8 AM
+ * cortisol and NOT sufficient to diagnose or exclude adrenal insufficiency.
+ *
+ * The cause was my own prompt: "Describe only what is actually visible" and "read the values as
+ * printed" are transcription instructions and the model obeyed them exactly.
+ */
+{
+  const { L } = load();
+
+  ok("image prompt asks for the findings that MATTER", /findings that MATTER/i.test(L.SYSTEM_IMAGE));
+  ok("image prompt demands an Interpretation section", /Interpretation/.test(L.SYSTEM_IMAGE));
+  ok("image prompt asks what the finding MEANS", /what the finding MEANS/i.test(L.SYSTEM_IMAGE));
+  ok("image prompt asks for the threshold used", /threshold/i.test(L.SYSTEM_IMAGE));
+  ok("image prompt asks what it does and does not establish", /does and does not establish/i.test(L.SYSTEM_IMAGE));
+  ok("image prompt asks for the next step", /next step|confirmatory/i.test(L.SYSTEM_IMAGE));
+
+  // The exact instructions that produced the transcription are gone.
+  ok("no longer says 'describe only what is visible'", !/Describe only what is actually visible/i.test(L.SYSTEM_IMAGE));
+  ok("no longer asks to read values as printed", !/read the values as printed/i.test(L.SYSTEM_IMAGE));
+  ok("explicitly says to skip empty fields", /Skip empty fields/i.test(L.SYSTEM_IMAGE));
+  ok("explicitly says not to list what is missing", /do not list what is missing/i.test(L.SYSTEM_IMAGE));
+
+  // PHI: the transcription echoed the patient's name back for no clinical reason.
+  ok("image prompt forbids writing out patient identifiers",
+     /Never write out patient names/i.test(L.SYSTEM_IMAGE) && /UHID/i.test(L.SYSTEM_IMAGE));
+  ok("follow-up prompt forbids identifiers too", /Never write out patient names/i.test(L.SYSTEM_IMAGE_FOLLOWUP));
+
+  // Still honest about a misread digit.
+  ok("still tells the doctor to check the original", /Verify against the original document/.test(L.SYSTEM_IMAGE));
+  ok("still handles an unreadable number without abandoning the reading",
+     /unreadable/i.test(L.SYSTEM_IMAGE) && /do not\s+abandon the rest/i.test(L.SYSTEM_IMAGE));
+}
+
+/* ── A follow-up about the image answers the QUESTION ───────────────────────────────────────────
+ * "is this normal?" used to re-read the picture and repeat the whole summary, because the image was
+ * consumed on send and the first prompt ran again.
+ */
+{
+  const { L } = load();
+  ok("follow-up prompt exists", typeof L.SYSTEM_IMAGE_FOLLOWUP === "string" && L.SYSTEM_IMAGE_FOLLOWUP.length > 80);
+  ok("follow-up answers directly", /answer the doctor's question about it DIRECTLY/i.test(L.SYSTEM_IMAGE_FOLLOWUP));
+  ok("follow-up must not re-list the report", /Do not re-list the report/i.test(L.SYSTEM_IMAGE_FOLLOWUP));
+  ok("follow-up commits on normal vs abnormal", /say normal, borderline or abnormal/i.test(L.SYSTEM_IMAGE_FOLLOWUP));
+  ok("follow-up knows the image is already in play", /already being discussed/i.test(L.SYSTEM_IMAGE_FOLLOWUP));
+  ok("the two image prompts are different", L.SYSTEM_IMAGE !== L.SYSTEM_IMAGE_FOLLOWUP);
+}
+
 console.log(`\nmaik-local: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
 

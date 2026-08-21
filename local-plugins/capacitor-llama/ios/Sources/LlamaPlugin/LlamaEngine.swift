@@ -1,5 +1,6 @@
 import Foundation
 import os.log
+import UIKit
 import llama
 
 /// Timing goes to the device log so it can be read with `idevicesyslog` / Console. iOS has no JS
@@ -11,6 +12,63 @@ func llamaPerf(_ parts: Any...) {
     print("[LLAMA-PERF] " + parts.map { String(describing: $0) }.joined(separator: " "))
     fflush(stdout)
 }   // llama.cpp b10502 prebuilt XCFramework (module `llama`)
+
+
+/* THERMAL AND POWER GOVERNOR.
+ *
+ * Owner report: the on-device model drains the battery fast and makes the phone hot. Both are real,
+ * and the obvious fix is the wrong one.
+ *
+ * Moving layers OFF the GPU would make it worse. LLM decode on Apple silicon is memory-bandwidth
+ * bound, and Metal is several times faster AND more energy-efficient per token than CPU threads, so
+ * reducing nGpuLayers makes the phone work longer for the same answer and burn more total energy.
+ * Energy per answer is what drains a battery; watts is what makes it hot. They are different problems.
+ *
+ * So the GPU offload stays, and what changes is the DUTY CYCLE. The decode loop used to run flat out
+ * with no yield and no awareness of what the OS was already telling us:
+ *
+ *   .nominal / .fair  full speed, no change
+ *   .serious          yield between tokens - same answer, lower sustained watts, heat stops climbing
+ *   .critical         STOP and say so, rather than being killed mid-answer by the OS
+ *
+ * Low Power Mode and a nearly-flat battery also shorten the token budget, because fewer tokens is
+ * strictly less work and a clinician on 8% battery would rather have four lines than eight.
+ */
+enum ThermalGovernor {
+
+    /// Milliseconds to yield between decoded tokens at the current thermal state.
+    static var yieldUsPerToken: UInt32 {
+        switch ProcessInfo.processInfo.thermalState {
+        case .nominal, .fair: return 0
+        case .serious:        return 12_000     // ~12 ms: roughly halves duty cycle at ~4 tok/s
+        case .critical:       return 40_000
+        @unknown default:     return 0
+        }
+    }
+
+    /// True when the phone is hot enough that continuing is worse than stopping.
+    static var shouldStop: Bool { ProcessInfo.processInfo.thermalState == .critical }
+
+    static var stateName: String {
+        switch ProcessInfo.processInfo.thermalState {
+        case .nominal: return "nominal"
+        case .fair: return "fair"
+        case .serious: return "serious"
+        case .critical: return "critical"
+        @unknown default: return "unknown"
+        }
+    }
+
+    /// Trim the token budget when the phone is saving power. Never raises it.
+    static func budget(_ requested: Int32) -> Int32 {
+        var b = requested
+        if ProcessInfo.processInfo.isLowPowerModeEnabled { b = min(b, 320) }
+        let lvl = UIDevice.current.batteryLevel        // -1 when unknown
+        if lvl >= 0, lvl < 0.15, UIDevice.current.batteryState != .charging { b = min(b, 256) }
+        if ProcessInfo.processInfo.thermalState == .serious { b = min(b, 384) }
+        return max(64, b)
+    }
+}
 
 /// Stable, user-facing error codes — mirror the Android `LlamaErr` 1:1.
 enum LlamaErr: String {
@@ -286,10 +344,23 @@ final class LlamaEngine {
         var full = ""
         var produced: Int32 = 0
         let tDecode = Date()
-        let budget = nPredict > 0 ? nPredict : Self.defaultNPredict
+        // The governor only ever LOWERS the budget (Low Power Mode, flat battery, already hot).
+        let budget = ThermalGovernor.budget(nPredict > 0 ? nPredict : Self.defaultNPredict)
+        let thermalAtStart = ThermalGovernor.stateName
+        var stoppedHot = false
 
         while produced < budget && Int32(consumed) + produced < nCtx {
             if cancelFlag.value { break }
+            /* Thermal check every 8 tokens: thermalState is a cheap read but not free, and 8 tokens is
+             * ~2 s at the measured ~4 tok/s, which is fast enough to react before the OS throttles us.
+             *
+             * At .critical we STOP and return what we have. Being killed by the OS mid-answer loses
+             * the whole answer and looks like a crash; stopping deliberately keeps the text and lets
+             * the UI say why.
+             */
+            if produced % 8 == 0 {
+                if ThermalGovernor.shouldStop { stoppedHot = true; break }
+            }
             var id = llama_sampler_sample(smpl, c, -1)
             if llama_vocab_is_eog(vocab, id) { break }
 
@@ -300,11 +371,20 @@ final class LlamaEngine {
             var nb = llama_batch_get_one(&id, 1)
             guard llama_decode(c, nb) == 0 else { break }
             _ = nb
+
+            // Duty-cycle when hot. Same answer, lower sustained watts, heat stops accumulating.
+            let nap = ThermalGovernor.yieldUsPerToken
+            if nap > 0 { usleep(nap) }
+        }
+        if stoppedHot {
+            full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._"
         }
         let decodeMs = Int(Date().timeIntervalSince(tDecode) * 1000)
         let tps = decodeMs > 0 ? Double(produced) / (Double(decodeMs) / 1000.0) : 0
-        llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=%", decodeMs, Int(produced), tps,
-               prefillMs > 0 ? Double(consumed) / (Double(prefillMs) / 1000.0) : 0)
+        llamaPerf("PERF decode_ms=% tokens=% tok_per_sec=% prefill_tok_per_sec=% thermal_start=% thermal_end=% budget=% stopped_hot=%",
+               decodeMs, Int(produced), tps,
+               prefillMs > 0 ? Double(consumed) / (Double(prefillMs) / 1000.0) : 0,
+               thermalAtStart, ThermalGovernor.stateName, Int(budget), stoppedHot)
         return full
     }
 
