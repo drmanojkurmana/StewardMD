@@ -3138,7 +3138,7 @@ body.dark .maik-exp{box-shadow:0 12px 34px rgba(0,0,0,.55)}
 .maik-exp .ic{color:var(--mk-teal);display:flex;flex:0 0 auto}
 .maik-ta{flex:1;border:none;background:transparent;outline:none;resize:none;font:500 14px 'Inter';color:var(--mk-ink);max-height:88px;padding:8px 0}
 .maik-ta::placeholder{color:var(--mk-faint)}
-.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}
+.maik-send{width:40px;height:40px;border-radius:50%;border:none;background:var(--mk-send);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;box-shadow:0 6px 16px rgba(15,118,110,.5)}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu,#maikSheet .maik-more,#maikSheet [role=button],#maikSheet label{-webkit-tap-highlight-color:transparent;tap-highlight-color:transparent}#maikSheet button,#maikSheet .maik-hd,#maikSheet .maik-cmp,#maikSheet .maik-disc,#maikSheet .maik-chip,#maikSheet .maik-fu{-webkit-user-select:none;user-select:none}#maikSheet .maik-b,#maikSheet .maik-b *{-webkit-user-select:text;user-select:text}#maikSheet button,#maikSheet .maik-chip,#maikSheet .maik-fu{touch-action:manipulation}.maik-send{transition:transform .09s ease,box-shadow .12s ease,background .12s ease}.maik-send:active{transform:scale(.88);box-shadow:0 2px 6px rgba(15,118,110,.45)}.maik-mic:active,.maik-img:active,.maik-research:active{transform:scale(.9)}.maik-chip:active,.maik-fu:active{transform:scale(.97);opacity:.85}#maikSheet button:focus{outline:none}#maikSheet button:focus-visible{outline:2px solid var(--mk-teal,#0e6e63);outline-offset:2px}
 .maik-send:active{transform:scale(.94)}
 
 @keyframes maikGlow{0%,100%{opacity:.5;transform:scale(1)}50%{opacity:.92;transform:scale(1.08)}}
@@ -3473,12 +3473,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         .replace(/^\s*(there|doc|doctor|team|everyone|all|maik|sir|ma'?am|maam)\b/i, "")
         .replace(/[\s,!.?]+/g, " ").trim();
       var greetOnly = afterGreet.split(" ").filter(function (w) { return w.length >= 2 && MAIK_CASUAL.indexOf(w) < 0; }).length === 0;
-      // Greetings, thanks, acknowledgements and sign-offs are answered BY THE MODEL, in MaiK's own
-      // voice. They used to return fixed strings from here; a doctor typing "Hi" got a scripted
-      // paragraph that never varied and never reached the engine they had selected.
-      // COST: a greeting now costs one model turn (cheap on cloud, a few seconds on-device). That is
-      // the price of not sounding like a scripted bot, and it was the owner's explicit call.
-      if (byeHit || (casualHit && isShort && greetOnly)) return { kind: "clinical" };
+      /* A GREETING IS ROUTED BY WHO PAYS FOR IT.
+       *
+       * These were once fixed strings, then they were sent to the model so MaiK answered in its own
+       * voice. Both are right, for different engines:
+       *
+       *   MaiK Cloud  a paid Gemini turn to answer "hi" is money spent on nothing. Answer locally.
+       *   KB only     the clinician has explicitly asked not to spend tokens; there is also no KB
+       *               entry for "hello", so the templated path has nothing to say.
+       *   On-device   the model is free and offline, so it may as well greet in its own voice. This is
+       *               the case the scripted reply was removed for.
+       *
+       * The replies are deliberately ONE short line. The old version was a scripted paragraph listing
+       * everything MaiK could do, which is what made it read as a bot rather than an assistant.
+       */
+      if (byeHit || (casualHit && isShort && greetOnly)) {
+        var _eng = "cloud";
+        try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) _eng = window.SMD_MAIK_ENGINE.effective(); } catch (e) {}
+        if (_eng === "local") return { kind: "clinical" };          // free and offline: let it answer
+        if (byeHit) return { kind: "casual", reply: "Goodbye." };
+        return { kind: "casual", reply: "Hello. What would you like to look at?" };
+      }
+      // Thanks and acknowledgements: same reasoning, same split.
+      if (isShort && /^(thanks|thank you|thankyou|thx|ty|ok|okay|got it|cool|great)\b/.test(n)) {
+        var _eng2 = "cloud";
+        try { if (window.SMD_MAIK_ENGINE && window.SMD_MAIK_ENGINE.effective) _eng2 = window.SMD_MAIK_ENGINE.effective(); } catch (e) {}
+        if (_eng2 !== "local") return { kind: "casual", reply: "Anytime." };
+      }
       // B product/help
       if (/what (can|do) you do|what is maik|who are you|how (do i|to) use|how (do i|to) start|how does this work|where('?s| is)? (the )?(drug|calculator|calc|ward|icu|dx)/.test(n)) return { kind: "help" };
       // E patient-specific (existing detector) with no active case → guided assessment
@@ -4474,9 +4495,32 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     scrim.addEventListener("click", close);
     // One button, two jobs: STOP while a turn is in flight, SEND otherwise. Routed here rather than
     // by swapping listeners, so there is no window where the button is bound to the wrong action.
+    /* A tap should be FELT, not just seen.
+     *
+     * On iOS the missing haptic is most of why a web view reads as a website: every native control
+     * answers the finger. SMD_HAPTICS is iOS-only and already respects the user's own haptics setting,
+     * so this is additive and silent everywhere else.
+     *
+     * Distinct feedback per meaning: a light tap for send, a firmer one for stop, because stopping is
+     * a different kind of decision and should not feel identical to sending.
+     */
+    function maikHaptic(kind) {
+      try {
+        var H = window.SMD_HAPTICS;
+        if (!H) return;
+        if (kind === "stop") H.medium(); else H.tap();
+      } catch (e) {}
+    }
+
     sendBtn.addEventListener("click", function () {
-      if (_maikBusy) { maikStopNow(); return; }
+      if (_maikBusy) { maikHaptic("stop"); maikStopNow(); return; }
+      maikHaptic("send");
       send();
+    });
+    // The other composer controls get the same light tap, so the whole bar feels consistent.
+    ["#maikMic", "#maikImg", "#maikResearch"].forEach(function (sel) {
+      var b = sheet.querySelector(sel);
+      if (b) b.addEventListener("click", function () { maikHaptic("send"); });
     });
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
     // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.

@@ -36,16 +36,50 @@ const route = grab(/function maikRoute\(q, active\)\s*\{[\s\S]*?\n {4}\}/, "maik
 // The real firewall, not a stub: maikRoute asks it whether a short query has clinical signal, which
 // is the whole point of the fix that removed maikRoute's own rival keyword list.
 const MaiKScope = createRequire(import.meta.url)("../kb/ai/maik-scope.js");
-const maikRoute = new Function("window", `${norm}\n${lev}\n${cas}\nfunction isPatientSpecific(){return false;}\n${route}\nreturn maikRoute;`)({ MaiKScope });
+// Routing now depends on WHICH ENGINE would pay for the answer, so the harness can set it.
+let ENGINE = "cloud";
+const maikRoute = new Function("window", `${norm}\n${lev}\n${cas}\nfunction isPatientSpecific(){return false;}\n${route}\nreturn maikRoute;`)(
+  { MaiKScope, SMD_MAIK_ENGINE: { effective: () => ENGINE } });
+const setEngine = (e) => { ENGINE = e; };
 const kind = (q) => maikRoute(q, false).kind;
 
 // FIX: a greeting followed by a real question is answered (clinical), not swallowed as casual
 [["Hi rx of uti"], ["hi what is dengue"], ["hey dose of atropine"], ["hello treatment of malaria"], ["hi c diff rx"]]
   .forEach(([q]) => ok(kind(q) === "clinical", "FIX greeting+question routes clinical: " + JSON.stringify(q) + " → " + kind(q)));
 
-// A pure greeting now reaches the MODEL instead of returning a fixed string.
-[["hi"], ["hello"], ["hey there"], ["hi doctor"], ["good morning"], ["hi how are you"], ["bye"]]
-  .forEach(([q]) => ok(kind(q) === "clinical", "greeting reaches the model: " + JSON.stringify(q) + " → " + kind(q)));
+/* A GREETING IS ROUTED BY WHO PAYS FOR IT.
+ *
+ * Owner: "bring back Hi hello greeting routing in MAIK CLOUD and KB as they may waste ai tokens for
+ * simple hi hello greetings". Correct - a paid Gemini turn to answer "hi" is money spent on nothing,
+ * and KB-only means the clinician has explicitly asked not to spend. On-device is free and offline,
+ * which is the case the scripted reply was removed for in the first place.
+ */
+setEngine("cloud");
+[["hi"], ["hello"], ["hey there"], ["hi doctor"], ["good morning"], ["bye"], ["thanks"], ["ok"]]
+  .forEach(([q]) => ok(kind(q) === "casual", "CLOUD answers a greeting locally, no tokens: " + JSON.stringify(q) + " → " + kind(q)));
+
+setEngine("rag");
+[["hi"], ["hello"], ["good morning"], ["thanks"]]
+  .forEach(([q]) => ok(kind(q) === "casual", "KB-only answers a greeting locally: " + JSON.stringify(q) + " → " + kind(q)));
+
+setEngine("local");
+[["hi"], ["hello"], ["hey there"], ["hi doctor"], ["good morning"], ["bye"]]
+  .forEach(([q]) => ok(kind(q) === "clinical", "ON-DEVICE lets the model greet (free, offline): " + JSON.stringify(q) + " → " + kind(q)));
+
+// The reply is ONE short line. The old scripted paragraph listing every capability is what made it
+// read as a bot; bringing the routing back must not bring that back with it.
+setEngine("cloud");
+const hi = maikRoute("hi", false);
+ok("greeting reply is one short line", hi.reply.length < 60 && hi.reply.split("\n").length === 1);
+ok("greeting reply does not recite a capability list", !/calculator|drug information|patient assessment/i.test(hi.reply));
+ok("sign-off is its own reply", maikRoute("bye", false).reply === "Goodbye.");
+
+// A greeting WITH a real question still gets answered on every engine - the original bug.
+["cloud", "rag", "local"].forEach((e) => {
+  setEngine(e);
+  ok("greeting+question still answers on " + e, kind("hi rx of uti") === "clinical");
+});
+setEngine("cloud");
 
 // A non-clinical TOPIC is still deflected deterministically and for free. That is scope enforcement,
 // not a greeting, and it is the one canned reply that stays.
