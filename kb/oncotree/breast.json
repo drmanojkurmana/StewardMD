@@ -165,18 +165,64 @@
       ]
     },
     {
-      "id": "n_adj_hrpos_her2neg", "linkId": "tx_adj_hrpos_her2neg", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
-      "name": "Adjuvant HR+/HER2-", "title": "Adjuvant: HR-positive / HER2-negative", "section": "Treatment",
-      "description": "Chemotherapy decision is guided by a genomic-recurrence assay and clinical risk; endocrine therapy for all.",
-      "path": "Breast / Adjuvant / HR+HER2-", "pills": ["HR+/HER2-", "treatment"], "showsRecommendation": true,
+      "id": "n_hrpos_meno", "linkId": "breast_hrpos_meno", "nodeCategory": "criteria", "nodeType": "question", "template": "main",
+      "name": "HR+/HER2- menopausal", "title": "Adjuvant HR-positive / HER2-negative: menopausal status", "section": "Treatment",
+      "description": "For HR-positive / HER2-negative disease, adjuvant chemotherapy selection and endocrine therapy differ by menopausal status (and, in premenopausal patients, nodal status).",
+      "path": "Breast / Adjuvant / HR+HER2- / Menopause", "pills": ["HR+/HER2-"], "required": true,
+      "options": [
+        { "id": "post", "label": "Postmenopausal", "sets": { "menopause": "post" }, "pills": ["postmenopausal"] },
+        { "id": "pre", "label": "Premenopausal", "sets": { "menopause": "pre" }, "pills": ["premenopausal"] }
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_post", "linkId": "tx_adj_hrpos_post", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Adjuvant HR+/HER2- postmeno", "title": "Adjuvant HR+/HER2- (postmenopausal)", "section": "Treatment",
+      "description": "Chemotherapy is selected by a genomic-recurrence assay plus clinical risk; endocrine therapy for all.",
+      "path": "Breast / Adjuvant / HR+HER2- / Postmenopausal", "pills": ["HR+/HER2-", "postmenopausal", "treatment"], "showsRecommendation": true,
       "bullets": [
-        "Use a genomic assay (e.g. 21-gene recurrence score) to select who benefits from chemotherapy",
+        "Genomic assay (e.g. 21-gene recurrence score) guides who benefits from chemotherapy",
         "Chemotherapy (e.g. TC, or anthracycline + taxane) for high genomic / clinical risk",
-        "Adjuvant endocrine therapy for all (see next step); add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease",
-        "Add olaparib for germline BRCA-mutated high-risk disease",
+        "Adjuvant endocrine therapy for all (aromatase-inhibitor based - see next step)",
+        "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease; olaparib for germline BRCA",
         "Chemotherapy regimens referenced below"
       ],
-      "protocolRefs": ["breast-tc", "breast-ac-th", "breast-ddac-t"]
+      "protocolRefs": ["breast-tc", "breast-ac-th"]
+    },
+    {
+      "id": "n_hrpos_pre_nodal", "linkId": "breast_hrpos_pre_nodal", "nodeCategory": "criteria", "nodeType": "question", "template": "main",
+      "name": "HR+/HER2- premeno nodal", "title": "Adjuvant HR+/HER2- (premenopausal): nodal status", "section": "Treatment",
+      "description": "In premenopausal HR-positive / HER2-negative disease, chemotherapy decisions differ by pathologic nodal status.",
+      "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / Nodal", "pills": ["premenopausal"], "required": true,
+      "options": [
+        { "id": "pn0", "label": "Node-negative (pT1-3, pN0)", "sets": { "nodal": "pn0" }, "pills": ["pN0"] },
+        { "id": "pnpos", "label": "Node-positive (pT1-3, pN+)", "sets": { "nodal": "pnpos" }, "pills": ["pN+"] }
+      ]
+    },
+    {
+      "id": "n_adj_hrpos_pre_pn0", "linkId": "tx_adj_hrpos_pre_pn0", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Adjuvant HR+/HER2- premeno pN0", "title": "Adjuvant HR+/HER2- (premenopausal, node-negative)", "section": "Treatment",
+      "description": "Genomic-assay-guided chemotherapy; endocrine therapy for all.",
+      "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / pN0", "pills": ["HR+/HER2-", "premenopausal", "pN0", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "Genomic assay (e.g. 21-gene recurrence score) guides chemotherapy benefit; most low-score node-negative patients can omit chemotherapy",
+        "Chemotherapy (e.g. TC or AC-T) for high recurrence score / high clinical risk",
+        "Adjuvant endocrine therapy for all - tamoxifen, or ovarian suppression + an AI / tamoxifen for higher risk (see next step)",
+        "Chemotherapy regimens referenced below"
+      ],
+      "protocolRefs": ["breast-tc", "breast-ac-th"]
+    },
+    {
+      "id": "n_adj_hrpos_pre_pnpos", "linkId": "tx_adj_hrpos_pre_pnpos", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
+      "name": "Adjuvant HR+/HER2- premeno pN+", "title": "Adjuvant HR+/HER2- (premenopausal, node-positive)", "section": "Treatment",
+      "description": "Chemotherapy is generally recommended, followed by ovarian-suppression-based endocrine therapy.",
+      "path": "Breast / Adjuvant / HR+HER2- / Premenopausal / pN+", "pills": ["HR+/HER2-", "premenopausal", "pN+", "treatment"], "showsRecommendation": true,
+      "bullets": [
+        "Adjuvant chemotherapy (anthracycline + taxane, e.g. dose-dense AC-T) is generally recommended",
+        "Then endocrine therapy with ovarian function suppression + an AI or tamoxifen (see next step)",
+        "Add a CDK4/6 inhibitor (abemaciclib) for high-risk node-positive disease; olaparib for germline BRCA",
+        "Chemotherapy regimens referenced below"
+      ],
+      "protocolRefs": ["breast-ddac-t", "breast-tac", "breast-ac-th"]
     },
     {
       "id": "n_adj_hrpos_her2pos", "linkId": "tx_adj_hrpos_her2pos", "nodeCategory": "treatment", "nodeType": "end", "template": "end",
@@ -439,13 +485,19 @@
     { "id": "l_preop_adj", "from": "n_tx_preop", "to": "n_adj_after_preop", "linkCategory": "conditional" },
     { "id": "l_adjpre_sub", "from": "n_adj_after_preop", "to": "n_subtype", "linkCategory": "conditional" },
 
-    { "id": "l_sub_a", "from": "n_subtype", "to": "n_adj_hrpos_her2neg", "fromOptions": ["hrpos_her2neg"], "linkCategory": "conditional" },
+    { "id": "l_sub_a", "from": "n_subtype", "to": "n_hrpos_meno", "fromOptions": ["hrpos_her2neg"], "linkCategory": "conditional" },
+    { "id": "l_hrpos_post", "from": "n_hrpos_meno", "to": "n_adj_hrpos_post", "fromOptions": ["post"], "linkCategory": "conditional" },
+    { "id": "l_hrpos_pre", "from": "n_hrpos_meno", "to": "n_hrpos_pre_nodal", "fromOptions": ["pre"], "linkCategory": "conditional" },
+    { "id": "l_pre_pn0", "from": "n_hrpos_pre_nodal", "to": "n_adj_hrpos_pre_pn0", "fromOptions": ["pn0"], "linkCategory": "conditional" },
+    { "id": "l_pre_pnpos", "from": "n_hrpos_pre_nodal", "to": "n_adj_hrpos_pre_pnpos", "fromOptions": ["pnpos"], "linkCategory": "conditional" },
+    { "id": "l_apost_endo", "from": "n_adj_hrpos_post", "to": "n_endocrine", "linkCategory": "conditional" },
+    { "id": "l_apn0_endo", "from": "n_adj_hrpos_pre_pn0", "to": "n_endocrine", "linkCategory": "conditional" },
+    { "id": "l_apnpos_endo", "from": "n_adj_hrpos_pre_pnpos", "to": "n_endocrine", "linkCategory": "conditional" },
     { "id": "l_sub_b", "from": "n_subtype", "to": "n_adj_hrpos_her2pos", "fromOptions": ["hrpos_her2pos"], "linkCategory": "conditional" },
     { "id": "l_sub_c", "from": "n_subtype", "to": "n_adj_hrneg_her2pos", "fromOptions": ["hrneg_her2pos"], "linkCategory": "conditional" },
     { "id": "l_sub_d", "from": "n_subtype", "to": "n_adj_tnbc", "fromOptions": ["tnbc"], "linkCategory": "conditional" },
     { "id": "l_sub_e", "from": "n_subtype", "to": "n_adj_favorable", "fromOptions": ["favorable"], "linkCategory": "conditional" },
 
-    { "id": "l_a_endo", "from": "n_adj_hrpos_her2neg", "to": "n_endocrine", "linkCategory": "conditional" },
     { "id": "l_b_endo", "from": "n_adj_hrpos_her2pos", "to": "n_endocrine", "linkCategory": "conditional" },
     { "id": "l_e_endo", "from": "n_adj_favorable", "to": "n_endocrine", "linkCategory": "conditional" },
     { "id": "l_endo_post", "from": "n_endocrine", "to": "n_endo_post", "fromOptions": ["post"], "linkCategory": "conditional" },
