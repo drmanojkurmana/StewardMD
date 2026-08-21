@@ -520,11 +520,30 @@
       var existing = lget(KEY_DLID + id);
       if (!existing) return fresh();
       return L.downloadStatus({ id: existing, name: f.name }).then(function (s) {
-        if (s && (s.state === "running" || s.state === "pending" || s.state === "paused")) {
+        /* Re-attach ONLY to a transfer that is genuinely running.
+         *
+         * This used to accept state "paused" as proof that a transfer existed. On iOS "paused" is
+         * exactly what status() returns when there is NO live task but committed parts are on disk -
+         * which is the state after every app relaunch or update. So the poller re-attached to nothing
+         * and sat there reporting "Waiting for a connection" while the download never moved. Observed
+         * as a model stuck at 24/38 parts across several launches.
+         *
+         * `live` is reported by the native side and is true only when a task object actually exists.
+         * Anything else means start the missing parts - and start() is safe to call, because it reads
+         * the sidecar and re-queues only what has not landed.
+         */
+        // A plugin that predates the `live` flag falls back to the old state test, so an older build
+        // keeps working. When the flag IS present it is authoritative, because only the platform knows
+        // whether its own "paused" means "waiting for network" (Android) or "no task exists" (iOS).
+        var isLive = (s && s.live !== undefined)
+          ? !!s.live
+          : !!(s && (s.state === "running" || s.state === "pending" || s.state === "paused"));
+        if (isLive) {
           startBytes = s.bytes || 0;
           report(s.bytes || 0, "Resuming in the background");
           return existing;
         }
+        if (s && (s.bytes || 0) > 0) report(s.bytes, "Resuming where it stopped");
         return fresh();
       }).catch(fresh);
     }

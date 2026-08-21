@@ -239,6 +239,11 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
             out["state"] = j.state
             out["bytes"] = bytes
             out["total"] = j.total
+            // LIVE means a task object actually exists in this process. The JS layer needs this to
+            // tell "in flight, re-attach and poll" from "nothing is running, start the missing parts".
+            // Without it, a relaunched app saw state:"paused", re-attached to a transfer that did not
+            // exist, and polled it forever while the download never moved.
+            out["live"] = (j.state == "running" || j.state == "pending")
             if let e = j.error { out["reason"] = e }
         } else {
             // No job in memory. A COMPLETE file means done; a part-written file means resumable, and
@@ -248,6 +253,7 @@ final class ModelDownloader: NSObject, URLSessionDownloadDelegate {
             out["state"] = chunks ? "paused" : (onDisk > 0 ? "done" : "none")
             out["bytes"] = chunks ? committedBytesOnDisk(name) : onDisk
             out["total"] = onDisk
+            out["live"] = false        // no job in this process, so nothing is transferring
         }
         return out
     }

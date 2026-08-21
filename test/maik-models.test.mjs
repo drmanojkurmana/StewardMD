@@ -586,5 +586,56 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
   ok("a complete model does not re-download", calls.start === 0);
 }
 
+
+/* ── "paused" is not proof that a transfer exists ────────────────────────────────────────────────
+ * Real bug, watched on device: the model sat at 24/38 parts across several launches while the UI said
+ * "Waiting for a connection". begin() accepted native state "paused" as evidence of a live transfer
+ * and re-attached to it - but on iOS "paused" is exactly what status() returns when there is NO live
+ * task and committed parts are on disk, which is the state after every relaunch or app update. So the
+ * poller polled nothing, forever, and the download never moved.
+ */
+{
+  const SIZE = 2489894976;
+  const calls = { start: 0, status: 0 };
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "99" }; },
+    // Post-relaunch shape: paused, real committed bytes, and live:false.
+    downloadStatus: async () => { calls.status++; return { state: "paused", live: false, bytes: 24 * 64 * 1024 * 1024, total: SIZE, onDisk: SIZE }; },
+    downloadCancel: async () => {},
+    modelPath: async () => ({ path: "/x/m.gguf", bytes: SIZE, partial: true, freeBytes: 50e9 }),
+    modelDelete: async () => ({ ok: true })
+  };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {} } } };
+  const ls = fakeLS();
+  ls.setItem("smd_maik_dlid_maik-mxcore", "99");     // a stored id from the previous launch
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  const M = win.SMD_MAIK_MODELS;
+
+  M.ensure("maik-mxcore").catch(() => {});
+  await new Promise((r) => setTimeout(r, 60));
+  ok("a paused-but-not-live transfer is RESTARTED, not re-attached to", calls.start > 0);
+}
+
+{
+  // Control: a genuinely running transfer must NOT be restarted, or two transfers race for one file.
+  const SIZE = 2489894976;
+  const calls = { start: 0 };
+  const Llama = {
+    downloadStart: async () => { calls.start++; return { id: "99" }; },
+    downloadStatus: async () => ({ state: "running", live: true, bytes: 5e8, total: SIZE, onDisk: SIZE }),
+    downloadCancel: async () => {},
+    modelPath: async () => ({ path: "/x/m.gguf", bytes: SIZE, partial: true, freeBytes: 50e9 }),
+    modelDelete: async () => ({ ok: true })
+  };
+  const win = { Capacitor: { isNativePlatform: () => true, Plugins: { Llama, Filesystem: {} } } };
+  const ls = fakeLS();
+  ls.setItem("smd_maik_dlid_maik-mxcore", "99");
+  new Function("window", "localStorage", "Buffer", SRC)(win, ls, Buffer);
+  const M = win.SMD_MAIK_MODELS;
+  M.ensure("maik-mxcore").catch(() => {});
+  await new Promise((r) => setTimeout(r, 60));
+  ok("a LIVE transfer is re-attached to, never duplicated", calls.start === 0);
+}
+
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

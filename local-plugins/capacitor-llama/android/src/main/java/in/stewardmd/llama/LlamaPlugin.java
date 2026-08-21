@@ -77,7 +77,17 @@ public class LlamaPlugin extends Plugin {
         long id;
         try { id = Long.parseLong(idStr); } catch (Throwable t) { call.resolve(out.put("state", "none")); return; }
         ModelDownloader.Status s = downloader.status(id);
+        /* `live` = the OS is still carrying this transfer.
+         *
+         * The semantics differ from iOS on purpose. DownloadManager owns the transfer, so PAUSED here
+         * is a genuinely live download waiting for a network - restarting it would be wrong. On iOS
+         * "paused" is what status() reports when NO task exists and only committed parts remain, which
+         * is the post-relaunch state. The JS layer cannot tell those apart from the state string, so
+         * each platform says which it means.
+         */
+        boolean live = "running".equals(s.state) || "pending".equals(s.state) || "paused".equals(s.state);
         call.resolve(out.put("state", s.state).put("bytes", s.bytes).put("total", s.total)
+            .put("live", live)
             .put("reason", s.reason).put("localPath", s.path));
     }
 
