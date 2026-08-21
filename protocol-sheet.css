@@ -2,7 +2,7 @@
 .ps-overlay {
   --ps-ink: #14202b; --ps-muted: #5a7184; --ps-line: #d7dee3; --ps-bg: #f4f6f5; --ps-card: #ffffff;
   --ps-primary: #0e6e63; --ps-danger: #c0392b; --ps-x: #b6bfc7;
-  position: fixed; inset: 0; z-index: 70; display: none; background: var(--ps-bg);
+  position: fixed; inset: 0; z-index: 74; display: none; background: var(--ps-bg);
   font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--ps-ink);
 }
 body.dark .ps-overlay { --ps-ink: #eceef2; --ps-muted: #9aa0ab; --ps-line: #2a2d34; --ps-bg: #0e0f12; --ps-card: #16181d; --ps-primary: #4fd1c5; }
@@ -49,7 +49,10 @@ body.dark .ps-warns { color: #fbbf24; background: #3a2e05; }
 .ps-dname { font-weight: 700; white-space: nowrap; }
 .ps-cap { font: 700 8.5px system-ui; text-transform: uppercase; color: #fff; background: var(--ps-danger); border-radius: 4px; padding: 1px 4px; vertical-align: middle; }
 .ps-ddesc b { font-weight: 800; color: var(--ps-primary); white-space: nowrap; }
+.ps-daily { font: 800 11px system-ui; color: var(--ps-ink); white-space: nowrap; }
 .ps-permetre { display: block; color: var(--ps-muted); font-size: 10.5px; margin-top: 1px; }
+.ps-dnote { display: block; color: var(--ps-muted); font-size: 10px; margin-top: 2px; font-style: italic; }
+.ps-custombadge { font: 800 9px system-ui; letter-spacing: .06em; color: #fff; background: #b45309; border-radius: 5px; padding: 2px 6px; vertical-align: middle; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
 .ps-cyc { text-align: center; font: 600 11px system-ui; white-space: nowrap; }
 .ps-cyc.x { color: var(--ps-x); font-weight: 700; }
 .ps-vh { text-align: center; }

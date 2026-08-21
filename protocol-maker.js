@@ -23,7 +23,7 @@
   function newDrug() { return { name: "", basis: "bsa", dosePerUnit: "", unit: "mg/m2", route: "IV", days: "1", frequency: "", notes: "" }; }
 
   function loadCustoms() { try { return JSON.parse(G.localStorage.getItem(LSKEY) || "[]"); } catch (e) { return []; } }
-  function saveCustoms(a) { try { G.localStorage.setItem(LSKEY, JSON.stringify(a)); } catch (e) {} }
+  function saveCustoms(a) { try { G.localStorage.setItem(LSKEY, JSON.stringify(a)); return true; } catch (e) { return false; } }
   function slug(s) { return String(s || "rx").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "").slice(0, 40) || "rx"; }
   function stamp() { try { return "" + (new (G.Date)()).getTime(); } catch (e) { return "0"; } }
   function today() { try { var d = new (G.Date)(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e) { return ""; } }
@@ -38,16 +38,22 @@
       name: m.name || "Custom protocol", version: "1.0",
       lifecycleState: "custom", experimental: true, custom: true,
       intentOptions: [m.intent || "curative"],
-      cycles: num(m.cycles) || 1, cycleLengthDays: num(m.cycleLengthDays) || 21, caps: "protocol",
+      cycles: Math.max(1, num(m.cycles) || 1), cycleLengthDays: Math.max(1, num(m.cycleLengthDays) || 21), caps: "protocol",
       source: { nccn: "Clinician-authored (custom protocol)", textbook: "" },
       premedications: lines(m.premeds).map(function (t) { return { name: t }; }),
       supportiveCare: lines(m.supportive), monitoring: lines(m.monitoring),
       specialInstructions: (m.instructions || ""),
-      drugs: (m.drugs || []).filter(function (d) { return d.name; }).map(function (d) {
-        return { id: slug(d.name), name: d.name, basis: d.basis || "flat", dosePerUnit: num(d.dosePerUnit),
-          unit: d.unit || UNIT[d.basis] || "mg", route: d.route || "IV", days: parseDays(d.days),
-          frequency: d.frequency || "", notes: d.notes || "", caps: { perDose: null } };
-      }),
+      drugs: (function () {
+        var ids = {};
+        return (m.drugs || []).filter(function (d) { return d.name; }).map(function (d) {
+          var base = slug(d.name), id = base, n = 2;
+          while (ids[id]) { id = base + "-" + n; n++; }   // unique ids so two same-named drugs don't share a verify checkbox
+          ids[id] = 1;
+          return { id: id, name: d.name, basis: d.basis || "flat", dosePerUnit: num(d.dosePerUnit),
+            unit: d.unit || UNIT[d.basis] || "mg", route: d.route || "IV", days: parseDays(d.days),
+            frequency: d.frequency || "", notes: d.notes || "", caps: { perDose: null } };
+        });
+      })(),
       author: ctx.author || "", createdAt: today()
     };
   }
@@ -154,7 +160,11 @@
     if (!mk.name) errs.push("Give the protocol a name.");
     var real = (mk.drugs || []).filter(function (d) { return d.name; });
     if (!real.length) errs.push("Add at least one drug.");
-    real.forEach(function (d) { if (d.basis !== "auc" && (d.dosePerUnit === "" || d.dosePerUnit == null)) errs.push(d.name + ": enter a dose."); });
+    real.forEach(function (d) {
+      if (d.basis === "auc") return; // AUC dose = a target number (e.g. 5); validated by the engine
+      var dv = num(d.dosePerUnit);
+      if (dv == null || dv <= 0) errs.push(d.name + ": enter a dose greater than 0.");
+    });
     return errs;
   }
 
@@ -165,9 +175,9 @@
     var saved = loadCustoms();
     var idx = -1; for (var i = 0; i < saved.length; i++) if (saved[i].id === proto.id) idx = i;
     if (idx >= 0) saved[idx] = proto; else saved.unshift(proto);
-    saveCustoms(saved);
+    var okSave = saveCustoms(saved);
     mk.id = proto.id;
-    try { G.toast && G.toast("Custom protocol saved."); } catch (e2) {}
+    try { G.toast && G.toast(okSave ? "Custom protocol saved." : "Storage full - not saved; opening for this session only."); } catch (e2) {}
     if (G.SMD_PROTOSHEET) { close(); G.SMD_PROTOSHEET.open(proto, ctx.patient || {}, { today: today(), onAssign: ctx.onAssign }); }
     else { view = "list"; paint(); }
   }
@@ -206,7 +216,7 @@
   function findCustom(id) { var a = loadCustoms(); for (var i = 0; i < a.length; i++) if (a[i].id === id) return a[i]; return null; }
   function fromProtocol(p) {
     return {
-      id: p.id, name: p.name || "", diseaseId: (p.diseaseId || "").replace(/_cancer$/, ""),
+      id: p.id, name: p.name || "", diseaseId: (p.diseaseId === "custom" ? "" : (p.diseaseId || "").replace(/_cancer$/, "")),
       intent: (p.intentOptions || ["curative"])[0], cycles: p.cycles || 1, cycleLengthDays: p.cycleLengthDays || 21,
       drugs: (p.drugs || []).map(function (d) { return { name: d.name || "", basis: d.basis || "bsa", dosePerUnit: d.dosePerUnit == null ? "" : d.dosePerUnit, unit: d.unit || "", route: d.route || "IV", days: (d.days || []).join(","), frequency: d.frequency || "", notes: d.notes || "" }; }) || [newDrug()],
       premeds: (p.premedications || []).map(function (x) { return x.name || x; }).join("\n"),

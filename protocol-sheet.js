@@ -29,7 +29,7 @@
     var p = st.patient || {};
     if (!DOSE()) return null;
     try {
-      return DOSE().doseForDrug(drug, { height: num(p.heightCm), weight: num(p.weightKg), bsa: bsa(), sex: p.sex, age: num(p.age) });
+      return DOSE().doseForDrug(drug, { height: num(p.heightCm), weight: num(p.weightKg), bsa: bsa(), sex: p.sex, age: num(p.age), creatinine: num(p.creatinine) });
     } catch (e) { return null; }
   }
   // per-drug: mg/m2 (or per-unit), computed total mg, route, per-cycle day markers
@@ -37,11 +37,19 @@
     var line = doseLine(drug);
     var perUnit = drug.dosePerUnit != null ? drug.dosePerUnit + " " + (drug.unit || "") : "verify";
     var total = line && line.final != null ? line.final : null;
-    var unitBase = (drug.unit || "").replace("/m2", "").replace("/kg", "") || "mg";
+    // Calvert (AUC) returns mg, so never label an AUC total as "AUC".
+    var unitBase = drug.basis === "auc" ? "mg" : ((drug.unit || "").replace("/m2", "").replace("/kg", "") || "mg");
+    // BID/TID: the engine keeps `final` per-administration and computes dailyDose; surface both so a
+    // twice-daily oral drug is never read as once-daily / at a single administration's mg.
+    var perDay = line && line.dosesPerDay > 1 ? line.dosesPerDay : 1;
+    var daily = (total != null && perDay > 1 && line.dailyDose != null) ? line.dailyDose : null;
+    var miss = drug.basis === "auc" ? "enter creatinine + age" : (drug.basis === "bsa" || drug.basis === "mgkg" ? "enter ht/wt" : perUnit);
     return {
-      id: drug.id, name: drug.name || drug.id, perUnit: perUnit, route: drug.route || "",
-      basis: drug.basis, total: total, totalTxt: total != null ? (round2(total) + " " + unitBase) : (drug.basis === "bsa" || drug.basis === "auc" ? "enter ht/wt" : perUnit),
-      days: asArr(drug.days), notes: drug.notes || "", warn: line ? asArr(line.warnings) : [], capApplied: line && line.capApplied,
+      id: drug.id, name: drug.name || drug.id, perUnit: perUnit, route: drug.route || "", basis: drug.basis,
+      total: total, totalTxt: total != null ? (round2(total) + " " + unitBase) : miss,
+      dailyTxt: daily != null ? (round2(daily) + " " + unitBase + "/day") : null,
+      frequency: drug.frequency || "", days: asArr(drug.days), notes: drug.notes || "",
+      warn: line ? asArr(line.warnings) : [], capApplied: line && line.capApplied,
       cycleSchedule: drug.cycleSchedule || null
     };
   }
@@ -67,7 +75,7 @@
     return '<div class="ps-inst"><div class="ps-inst-name">' + esc(inst.name) + "</div>" +
         '<div class="ps-inst-dept">' + esc(inst.dept) + "</div>" +
         (inst.line ? '<div class="ps-inst-line">' + esc(inst.line) + "</div>" : "") + "</div>" +
-      '<div class="ps-title">Treatment Protocol</div>' +
+      '<div class="ps-title">Treatment Protocol' + ((pr.custom || pr.lifecycleState === "custom") ? ' <span class="ps-custombadge">CUSTOM / DRAFT</span>' : "") + "</div>" +
       '<div class="ps-hgrid">' +
         field("Case No", "caseNo", p.caseNo) +
         field("Name", "name", p.name) +
@@ -76,6 +84,7 @@
         field("Plan No", "planNo", p.planNo) +
         field("Height (cm)", "heightCm", p.heightCm, "number") +
         field("Weight (kg)", "weightKg", p.weightKg, "number") +
+        field("Creatinine (mg/dL)", "creatinine", p.creatinine, "number") +
         '<div class="ps-f"><span>BSA (m2)</span><b>' + (b ? (Math.round(b * 100) / 100) : "-") + "</b></div>" +
         '<div class="ps-f"><span>Protocol</span><b>' + esc(pr.name || "-") + "</b></div>" +
         '<div class="ps-f"><span>No. of Cycles</span><b>' + esc(pr.cycles || "-") + "</b></div>" +
@@ -99,7 +108,9 @@
       var vk = st.verify[r.id];
       return '<tr>' +
         '<td class="ps-dname">' + esc(r.name) + (r.capApplied ? ' <span class="ps-cap" title="dose cap applied">cap</span>' : "") + "</td>" +
-        '<td class="ps-ddesc"><b>' + esc(r.totalTxt) + '</b> <span class="ps-permetre">' + esc(r.perUnit) + (r.route ? " " + esc(r.route) : "") + "</span></td>" +
+        '<td class="ps-ddesc"><b>' + esc(r.totalTxt) + "</b>" + (r.dailyTxt ? ' <span class="ps-daily">(' + esc(r.dailyTxt) + ")</span>" : "") +
+          ' <span class="ps-permetre">' + esc(r.perUnit) + (r.route ? " " + esc(r.route) : "") + (r.frequency ? " &middot; " + esc(r.frequency) : "") + "</span>" +
+          (r.notes ? '<span class="ps-dnote">' + esc(r.notes) + "</span>" : "") + "</td>" +
         cells +
         '<td class="ps-verify"><label class="ps-chk"><input type="checkbox" data-ps-verify="' + esc(r.id) + '"' + (vk ? " checked" : "") + '><span class="ps-chk-box">' + ms("check") + "</span></label></td>" +
         "</tr>";
@@ -120,6 +131,7 @@
   function warningsHtml() {
     var pr = st.protocol || {}, b = bsa();
     var w = [];
+    if (pr.custom || pr.lifecycleState === "custom") w.push("Clinician-authored custom protocol - no automatic dose caps applied; verify every dose, unit, route, and schedule.");
     if (!b) w.push("Enter height and weight to compute per-drug total doses.");
     asArr(pr.drugs).map(drugRow).forEach(function (r) { r.warn.forEach(function (x) { w.push(r.name + ": " + x); }); });
     if (!w.length) return "";
@@ -216,11 +228,16 @@
     for (var i = 0; i < inputs.length; i++) { var k = inputs[i].getAttribute("data-ps-field"); st.patient[k] = inputs[i].value; }
   }
   function onInput(e) {
+    // Capture the value live (so nothing is lost) but DO NOT re-render here - re-rendering while the
+    // field is focused destroys the input and drops the mobile keyboard mid-digit. Recompute on blur.
     var f = e.target && e.target.getAttribute && e.target.getAttribute("data-ps-field");
     if (!f) return;
     st.patient = st.patient || {}; st.patient[f] = e.target.value;
-    // live-recompute doses when the anthropometrics change
-    if (f === "heightCm" || f === "weightKg") {
+  }
+  // Recompute doses when an input the maths depends on is committed (blur / Enter) - focus is already gone.
+  function onChange(e) {
+    var f = e.target && e.target.getAttribute && e.target.getAttribute("data-ps-field");
+    if (f === "heightCm" || f === "weightKg" || f === "creatinine" || f === "age") {
       var scroll = D.querySelector(".ps-scroll"); if (scroll) { var y = scroll.scrollTop; scroll.innerHTML = sheetHtml(); wireSig(); scroll.scrollTop = y; }
     }
   }
@@ -250,6 +267,7 @@
       D.body.appendChild(el);
       el.addEventListener("click", onClick);
       el.addEventListener("input", onInput);
+      el.addEventListener("change", onChange);
     }
     return el;
   }
