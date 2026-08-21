@@ -1,0 +1,233 @@
+{
+  "site": "thyroid",
+  "name": "Thyroid (differentiated)",
+  "system": "Oncology / Thyroid",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition differentiated (papillary and follicular) thyroid carcinoma staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging applies to differentiated thyroid carcinoma (papillary and follicular, including oncocytic/Hurthle cell). The defining feature of the 8th edition is that stage grouping is AGE-DEPENDENT, using an age-at-diagnosis cut-off of 55 years: patients younger than 55 can only be Stage I (M0) or Stage II (M1) no matter the T or N, whereas patients 55 or older follow a conventional T/N/M grouping (I through IVB). Both age tables are provided below and are labelled accordingly.\n\nThe 8th edition also revised the T category, removing minimal/microscopic extrathyroidal extension from the T3 definition and splitting T3 into T3a (size-based, > 4 cm) and T3b (gross strap-muscle invasion), which generally down-stages many patients relative to the 7th edition. A key nuance is that post-treatment thyroglobulin trend and the ATA risk-of-recurrence category complement anatomic stage in guiding surveillance and therapy. Anaplastic and medullary thyroid carcinomas use separate staging systems.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour <= 2 cm in greatest dimension, limited to the thyroid",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumour <= 1 cm, limited to the thyroid",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumour > 1 cm and <= 2 cm, limited to the thyroid",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour > 2 cm and <= 4 cm, limited to the thyroid",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour > 4 cm limited to the thyroid, OR gross extrathyroidal extension invading only the strap muscles",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a",
+          "label": "Tumour > 4 cm, limited to the thyroid",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b",
+          "label": "Gross extrathyroidal extension invading only the strap muscles (sternohyoid, sternothyroid, thyrohyoid, or omohyoid), from a tumour of any size",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Advanced disease with gross extrathyroidal extension beyond the strap muscles",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Gross extrathyroidal extension invading subcutaneous soft tissue, larynx, trachea, esophagus, or recurrent laryngeal nerve, from a tumour of any size",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Gross extrathyroidal extension invading prevertebral fascia, or encasing the carotid artery or mediastinal vessels, from a tumour of any size",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No evidence of regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0a",
+          "label": "One or more cytologically or histologically confirmed benign lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0b",
+          "label": "No radiologic or clinical evidence of locoregional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis to regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1a",
+          "label": "Metastasis to level VI or VII (pretracheal, paratracheal, prelaryngeal/Delphian, or upper mediastinal) nodes; unilateral or bilateral",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1b",
+          "label": "Metastasis to unilateral, bilateral, or contralateral lateral neck nodes (levels I, II, III, IV, or V) or to retropharyngeal nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I (age < 55)",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Age at diagnosis < 55 years with no distant metastasis is Stage I regardless of T and N.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (age < 55)",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Age at diagnosis < 55 years with any distant metastasis is Stage II.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I (age >= 55)",
+          "t": "T1",
+          "n": "N0/NX",
+          "m": "M0",
+          "basis": "Age >= 55, tumour <= 2 cm, node-negative, no metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I (age >= 55)",
+          "t": "T2",
+          "n": "N0/NX",
+          "m": "M0",
+          "basis": "Age >= 55, tumour > 2 to <= 4 cm, node-negative, no metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (age >= 55)",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Age >= 55, tumour <= 2 cm with regional nodal metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (age >= 55)",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Age >= 55, tumour > 2 to <= 4 cm with regional nodal metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (age >= 55)",
+          "t": "T3a",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Age >= 55, tumour > 4 cm limited to thyroid, any nodal status.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II (age >= 55)",
+          "t": "T3b",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Age >= 55, gross strap-muscle invasion, any nodal status.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III (age >= 55)",
+          "t": "T4a",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Age >= 55, gross extrathyroidal extension into soft tissue/larynx/trachea/esophagus/recurrent laryngeal nerve, any nodal status.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA (age >= 55)",
+          "t": "T4b",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Age >= 55, extension to prevertebral fascia or encasement of carotid/mediastinal vessels, any nodal status.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB (age >= 55)",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Age >= 55 with any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the central compartment (level VI and VII: pretracheal, paratracheal, prelaryngeal/Delphian, and upper mediastinal), the lateral cervical nodes (levels I to V), and the retropharyngeal nodes.",
+      "histologicGrade": "Differentiated thyroid carcinoma is not conventionally assigned a numeric grade; histologic subtype and features such as tall-cell, columnar, hobnail, or solid variants, and the newer high-grade differentiated category, carry prognostic significance.",
+      "histopathologicTypes": "Papillary thyroid carcinoma (and variants: classic, follicular, tall-cell, columnar, hobnail, and others), follicular thyroid carcinoma, and oncocytic (Hurthle cell) carcinoma. Medullary and anaplastic (undifferentiated) carcinomas are staged separately.",
+      "prognosticFactors": [
+        "Age at diagnosis (the 55-year cut-off drives stage grouping)",
+        "Distant metastasis",
+        "Gross extrathyroidal extension and completeness of resection",
+        "Tumour size and multifocality",
+        "Aggressive histologic variant (tall-cell, columnar, hobnail, solid)",
+        "Vascular invasion (especially in follicular/oncocytic carcinoma)",
+        "Response to therapy and post-treatment thyroglobulin trend",
+        "ATA risk-of-recurrence category and BRAF/TERT mutation status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

@@ -16,5 +16,13 @@
 	<array>
 		<string>applinks:stewardmd.in</string>
 	</array>
+	<!-- On-device MaiK model (capacitor-llama). A ~2.5 GB mmap plus its KV cache exceeds the default
+	     per-app footprint iOS allows before jetsam on an 8 GB device (iPhone 15 Pro / 16 Pro).
+	     increased-memory-limit raises that ceiling; extended-virtual-addressing allows the large
+	     mapping itself. Both are inert unless the on-device engine is actually used. -->
+	<key>com.apple.developer.kernel.increased-memory-limit</key>
+	<true/>
+	<key>com.apple.developer.kernel.extended-virtual-addressing</key>
+	<true/>
 </dict>
 </plist>

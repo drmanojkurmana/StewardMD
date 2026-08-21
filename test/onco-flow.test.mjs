@@ -69,12 +69,14 @@ test("buildDigitalProtocol computes patient-specific doses via SMD_ONCODOSE (nev
 test("renderDigitalProtocol: Tata matrix + visible lineage + 'Not scheduled' + all 6 actions", () => {
   const d = FLOW.buildDigitalProtocol(PROTO, FLOW.derivePhenotype(CTX), FLOW.deriveParams(CTX), CTX);
   const html = FLOW.renderDigitalProtocol(d);
-  assert.match(html, /PATIENT-SPECIFIC DIGITAL PROTOCOL/);
+  assert.match(html, /Patient-specific digital protocol/);
   assert.match(html, /oe-onco-tbl/, "reuses the SMD_ONCOUI Tata matrix");
   assert.match(html, /600 mg/, "patient-specific proposed dose in the matrix");
   assert.match(html, /Not scheduled/, "prednisolone absent from cycles 2 and 3");
   assert.match(html, /Dose lineage \(patient-specific\)/);
-  assert.match(html, /protocol 375 mg\/m2.*proposed 600 mg/);
+  // stepped lineage rows (label + value), replacing the old run-on "protocol ... -> proposed ..." string
+  assert.match(html, /Protocol dose<\/span><span class="of-lin-c">375 mg\/m2/);
+  assert.match(html, /Proposed<\/span><span class="of-lin-c">600 mg/);
   ["edit", "viewcalc", "viewev", "compareguide", "print", "create"].forEach((a) => {
     assert.ok(html.indexOf('data-of-act="' + a + '"') >= 0, "action present: " + a);
   });
@@ -83,7 +85,7 @@ test("renderDigitalProtocol: Tata matrix + visible lineage + 'Not scheduled' + a
 
 test("renderCompare: side-by-side with regimen + cycle + evidence status", () => {
   const html = FLOW.renderCompare([PROTO]);
-  assert.match(html, /COMPARE PROTOCOLS/);
+  assert.match(html, /Compare protocols/);
   assert.match(html, /Rituximab/);
   assert.match(html, /Cycle length/);
   assert.match(html, /Evidence status/);

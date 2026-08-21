@@ -1,0 +1,25 @@
+{
+  "name": "@stewardmd/capacitor-llama",
+  "version": "1.0.0",
+  "description": "On-device LLM inference (llama.cpp) for MaiK's offline answer engine. The prompt and the answer never leave the device; only the GGUF model file is downloaded, once, with a pinned SHA-256 per shard.",
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  },
+  "files": [
+    "ios/Sources",
+    "android/src",
+    "android/build.gradle",
+    "Package.swift",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
+  "author": "StewardMD",
+  "license": "MIT",
+  "_vendored": "StewardMD-authored local plugin, forked from capacitor-whisper (same ggml core, same build flags). Links llama.cpp b10502 (MIT). No JS dist - accessed via Capacitor.Plugins.Llama. iOS links the PREBUILT llama-b10502-xcframework.zip (pinned url + sha256 in Package.swift; verified minos 16.4, which matches the app's existing IPHONEOS_DEPLOYMENT_TARGET, so no deployment-target change is needed). NOTE: that xcframework ships ios-arm64 + macos only - there is NO iOS SIMULATOR slice, so simulator builds will fail to link; test on a real device. Android vendors the SAME tag as a nested git submodule at android/src/main/cpp/llama-cpp - run `git submodule update --init --recursive` if empty. The arm64 native payload is ~49MB (libllama.so alone is 38MB because llama.cpp compiles every model architecture), which is much larger than whisper's ~6MB; trimming architectures is a later optimisation. To disable Android, remove the \"android\" capacitor entry + the android/* files entries and re-run `npx cap sync android`."
+}

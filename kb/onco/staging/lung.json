@@ -1,17 +1,19 @@
 {
   "site": "lung",
-  "name": "Lung",
-  "system": "Oncology / Thoracic",
+  "name": "Lung (NSCLC)",
+  "system": "Oncology / Lung (NSCLC)",
   "versions": [
     {
-      "version": "AJCC 8th",
+      "version": "8th edition",
       "seeded": true,
       "requiresR1Verification": true,
-      "provenance": "Generic UICC/AJCC TNM conceptual framework used as a scaffold only. Lung-specific T, N and M criteria (tumour size cut-offs, nodal station levels, metastasis subcategories) and the full anatomic stage grouping are NOT included here and require the licensed AJCC 8th Edition manual plus R1 clinical verification before use.",
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition lung (NSCLC) TNM, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to non-small cell lung carcinoma; the same TNM is also applied to small cell lung cancer and bronchopulmonary carcinoid. T is driven mainly by tumour size in centimetres plus local invasion and separate tumour nodules, N by the location and laterality of involved intrathoracic nodes, and M by intrathoracic spread (M1a) versus a single (M1b) or multiple (M1c) extrathoracic metastases.\n\nCompared with the 7th Edition, 8th edition introduced finer size-based T subcategories and split distant disease into M1a, M1b and M1c. Note that this is the 8th edition, not the later IASLC/UICC 9th Edition: in the 8th Edition N2 and M1c are not subdivided (the N2a/N2b and M1c1/M1c2 subcategories belong to the newer 9th Edition revision).",
       "t": [
         {
           "code": "TX",
-          "label": "Primary tumour cannot be assessed",
+          "label": "Primary tumour cannot be assessed, or tumour proven by malignant cells in sputum or bronchial washings but not visualised by imaging or bronchoscopy",
           "requiresR1Verification": true
         },
         {
@@ -21,27 +23,57 @@
         },
         {
           "code": "Tis",
-          "label": "Carcinoma in situ",
+          "label": "Carcinoma in situ (squamous cell carcinoma in situ or adenocarcinoma in situ)",
           "requiresR1Verification": true
         },
         {
           "code": "T1",
-          "label": "Primary tumour, lowest size/extent category (site-specific criteria pending licensed AJCC data)",
+          "label": "Tumour <= 3 cm in greatest dimension, surrounded by lung or visceral pleura, without bronchoscopic evidence of invasion more proximal than the lobar bronchus (not in the main bronchus)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1mi",
+          "label": "Minimally invasive adenocarcinoma: adenocarcinoma <= 3 cm with a predominantly lepidic pattern and <= 5 mm of invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumour <= 1 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumour > 1 cm but <= 2 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c",
+          "label": "Tumour > 2 cm but <= 3 cm in greatest dimension",
           "requiresR1Verification": true
         },
         {
           "code": "T2",
-          "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)",
+          "label": "Tumour > 3 cm but <= 5 cm; or tumour that involves the main bronchus regardless of distance to the carina but without involving the carina, invades the visceral pleura, or is associated with atelectasis or obstructive pneumonitis extending to the hilar region involving part or all of the lung",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Tumour > 3 cm but <= 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Tumour > 4 cm but <= 5 cm in greatest dimension",
           "requiresR1Verification": true
         },
         {
           "code": "T3",
-          "label": "Increasing tumour size/local extent (site-specific criteria pending licensed AJCC data)",
+          "label": "Tumour > 5 cm but <= 7 cm; or directly invades any of the parietal pleura, chest wall (including superior sulcus tumours), phrenic nerve, or parietal pericardium; or separate tumour nodule(s) in the same lobe as the primary",
           "requiresR1Verification": true
         },
         {
           "code": "T4",
-          "label": "Tumour with direct extension / highest local category (site-specific criteria pending licensed AJCC data)",
+          "label": "Tumour > 7 cm; or invades any of the diaphragm, mediastinum, heart, great vessels, trachea, recurrent laryngeal nerve, oesophagus, vertebral body, or carina; or separate tumour nodule(s) in a different ipsilateral lobe from the primary",
           "requiresR1Verification": true
         }
       ],
@@ -58,17 +90,17 @@
         },
         {
           "code": "N1",
-          "label": "Regional lymph node involvement, lowest category (site-specific criteria pending licensed AJCC data)",
+          "label": "Metastasis in ipsilateral peribronchial and/or ipsilateral hilar lymph nodes and intrapulmonary nodes, including involvement by direct extension",
           "requiresR1Verification": true
         },
         {
           "code": "N2",
-          "label": "Increasing regional lymph node involvement (site-specific criteria pending licensed AJCC data)",
+          "label": "Metastasis in ipsilateral mediastinal and/or subcarinal lymph node(s)",
           "requiresR1Verification": true
         },
         {
           "code": "N3",
-          "label": "Highest regional lymph node category (site-specific criteria pending licensed AJCC data)",
+          "label": "Metastasis in contralateral mediastinal, contralateral hilar, ipsilateral or contralateral scalene, or supraclavicular lymph node(s)",
           "requiresR1Verification": true
         }
       ],
@@ -82,39 +114,216 @@
           "code": "M1",
           "label": "Distant metastasis present",
           "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Separate tumour nodule(s) in a contralateral lobe; tumour with pleural or pericardial nodules; or malignant pleural or pericardial effusion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Single extrathoracic metastasis in a single distant organ (including a single non-regional node)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1c",
+          "label": "Multiple extrathoracic metastases in one or several organs",
+          "requiresR1Verification": true
         }
       ],
       "stageGroups": [
+        {
+          "stage": "Occult carcinoma",
+          "t": "TX",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Malignant cells in sputum/washings, tumour not visualised",
+          "requiresR1Verification": true
+        },
         {
           "stage": "0",
           "t": "Tis",
           "n": "N0",
           "m": "M0",
-          "basis": "Carcinoma in situ, node-negative, no metastasis is Stage 0 (universal TNM convention).",
+          "basis": "Carcinoma in situ",
           "requiresR1Verification": true
         },
         {
-          "stage": "I",
-          "t": "T1",
+          "stage": "IA1",
+          "t": "T1mi or T1a",
           "n": "N0",
           "m": "M0",
-          "basis": "Small primary tumour, node-negative, no metastasis maps to Stage I in the conceptual TNM framework (exact site-specific boundary pending licensed AJCC data).",
+          "basis": "",
           "requiresR1Verification": true
         },
         {
-          "stage": "IV",
-          "t": "any",
-          "n": "any",
-          "m": "M1",
-          "basis": "Any distant metastasis (M1) is Stage IV (universal TNM convention).",
+          "stage": "IA2",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA3",
+          "t": "T1c",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1a, T1b or T1c",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2a or T2b",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1a, T1b or T1c",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T2a or T2b",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T4",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T1a, T1b or T1c",
+          "n": "N3",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T2a or T2b",
+          "n": "N3",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4",
+          "n": "N2",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T3",
+          "n": "N3",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T4",
+          "n": "N3",
+          "m": "M0",
+          "basis": "",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1a or M1b",
+          "basis": "Intrathoracic spread or single extrathoracic metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1c",
+          "basis": "Multiple extrathoracic metastases",
           "requiresR1Verification": true
         }
       ],
-      "partial": true,
-      "gapNote": "Intermediate stage groups (II and III and their sub-stages) are site-specific and are NOT included. They require licensed AJCC 8th Edition data plus R1 sign-off."
+      "regionalNodes": "Intrathoracic lymph nodes classified by the IASLC nodal map, including ipsilateral peribronchial and intrapulmonary nodes and ipsilateral hilar nodes (N1); ipsilateral mediastinal and subcarinal nodes (N2); and contralateral mediastinal or hilar, ipsilateral or contralateral scalene, and supraclavicular nodes (N3). Laterality (ipsilateral versus contralateral) is what separates N1/N2 from N3.",
+      "histologicGrade": "GX to G4 (well to undifferentiated). For invasive non-mucinous adenocarcinoma, a pattern-based grade (predominant histologic pattern plus the proportion of any high-grade pattern) is increasingly used; squamous cell carcinoma is graded by degree of keratinisation and differentiation.",
+      "histopathologicTypes": "Non-small cell lung cancer comprises adenocarcinoma (most common), squamous cell carcinoma, and large cell carcinoma, with adenosquamous and sarcomatoid carcinomas less often. Small cell lung carcinoma and bronchopulmonary carcinoid are staged with the same TNM but are distinct entities.",
+      "prognosticFactors": [
+        "Stage (TNM)",
+        "Performance status",
+        "Weight loss and constitutional symptoms",
+        "Histologic type and grade",
+        "Actionable molecular alterations (EGFR, ALK, ROS1, BRAF, MET, RET, KRAS and others)",
+        "PD-L1 tumour proportion score",
+        "Completeness of resection (R status)"
+      ]
     },
     {
-      "version": "AJCC 7th",
+      "version": "7th edition",
       "seeded": false
     }
   ]

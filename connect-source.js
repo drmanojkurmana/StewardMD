@@ -105,6 +105,23 @@
     });
   }
 
+  // Doctor list from a connected hospital EMR (FHIR Practitioner?name=). Empty query -> the active list.
+  // -> Promise<{ ok:true, doctors:[{id,name}] } | { error }>
+  function listDoctors(opts) {
+    opts = opts || {};
+    if (!opts.tenantId) return Promise.resolve({ ok: true, doctors: [] });
+    return token().then(function (t) {
+      if (!t) return { error: "not-signed-in" };
+      return fetch(apiBase() + "/api/connect/practitioners/search", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", Authorization: "Bearer " + t },
+        body: JSON.stringify({ tenantId: opts.tenantId, query: opts.query || "", connectorId: opts.connectorId || "fhir-r4" }),
+      }).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); })
+        .then(function (x) { return (x.s === 200 && x.d && x.d.ok) ? { ok: true, doctors: x.d.doctors || [] } : { error: (x.d && x.d.error) || ("http-" + x.s) }; })
+        .catch(function () { return { error: "network" }; });
+    });
+  }
+
   // A connected hospital's FHIR connections (to pick a connectionId for the worklist). -> Promise<[{connectionId,name,...}]>
   function connections(tenantId) {
     if (!tenantId) return Promise.resolve([]);
@@ -132,5 +149,5 @@
     });
   }
 
-  window.SMD_CONNECT = { tenants: tenants, connections: connections, worklist: worklist, pullContext: pullContext, resourcesOfType: resourcesOfType, searchPatients: searchPatients, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
+  window.SMD_CONNECT = { tenants: tenants, connections: connections, worklist: worklist, pullContext: pullContext, resourcesOfType: resourcesOfType, searchPatients: searchPatients, listDoctors: listDoctors, DEFAULT_SCOPE: DEFAULT_SCOPE, apiBase: apiBase };
 })();

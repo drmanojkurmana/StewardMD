@@ -4,7 +4,7 @@
  * oncology disease) and asserts:
  *   - SMD_ONCOHOME.open() renders the dashboard (context strip + tool grid)
  *   - the patient-context strip renders from an injected context, labelled "Patient data"
- *   - placeholders for staging/CTCAE/IO-toxicity render without throwing (and are not clickable)
+ *   - flag-off tools (staging/CTCAE/IO-toxicity) are omitted entirely (no greyed placeholder tiles)
  *   - typing a query shows categorized search results (a calculator + a disease)
  *   - clicking a calculator result invokes the REAL window.MEDCALC.open (stubbed) with the right id
  *   - clicking a disease result invokes window.DX.openRef (stubbed) with the right id
@@ -53,15 +53,19 @@ try {
   ok(ctxText.indexOf("BSA") >= 0, "a BSA chip is computed from the injected height/weight (reuses SMD_ONCODOSE.bsaMosteller when present, else silently omitted)");
   ok(/verify|edit/i.test(ctxText), "the strip nudges verify/edit, never presenting the data as a decision");
 
-  // ---- grouped tool grid + placeholders render without throwing ----
+  // ---- grouped tool grid renders; flag-off tools are OMITTED entirely (no greyed placeholder tiles) ----
   const cardCount = await ev(`return document.querySelectorAll(".oh-card").length;`);
   ok(Number(cardCount) > 0, `the tool grid renders real cards (${cardCount})`);
   const phCount = await ev(`return document.querySelectorAll(".oh-card-ph").length;`);
-  ok(Number(phCount) >= 3, `staging/CTCAE/IO-toxicity render as labelled placeholders, not broken links (${phCount} found)`);
-  const phText = (await ev(`return document.querySelector(".oh-card-ph").textContent;`)) || "";
-  ok(/coming in p1|coming in p2/i.test(phText), 'a placeholder card says "Coming in P1/P2": ' + JSON.stringify(phText));
-  const phIsButton = await ev(`return document.querySelector(".oh-card-ph").tagName;`);
-  ok(phIsButton !== "BUTTON", "a placeholder is not an interactive/clickable element (never a broken link)");
+  ok(Number(phCount) === 0, `no greyed "coming soon" placeholder tiles — flag-off tools are dropped, not disabled (${phCount} found)`);
+  const stagingTile = await ev(`return !!document.querySelector('[data-oh-act="staging-open"]');`);
+  ok(stagingTile === false, "a flag-off tool (staging) renders no tile at all (never a disabled/broken link)");
+  const everyCardIsButton = await ev(`return Array.prototype.every.call(document.querySelectorAll(".oh-card"), function(c){return c.tagName==="BUTTON";});`);
+  ok(everyCardIsButton === true, "every rendered tool tile is an interactive button, with an icon");
+  const cardHasIcon = await ev(`return !!document.querySelector(".oh-card .oh-card-ic .material-symbols-rounded");`);
+  ok(cardHasIcon === true, "tool cards use the icon+body structure (oh-card-ic + Material Symbol)");
+  const heroPresent = await ev(`return !!document.querySelector(".oh-hero .oh-hero-title");`);
+  ok(heroPresent === true, "the ONCqis landing hero renders (module identity)");
 
   // ---- typing a query shows categorized results ----
   await ev(`var i=document.getElementById("ohSearch"); i.value="khorana"; i.dispatchEvent(new Event("input",{bubbles:true})); return 1;`);

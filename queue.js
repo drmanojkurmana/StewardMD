@@ -6,9 +6,6 @@
 (function () {
   "use strict";
   var G = (typeof window !== "undefined") ? window : globalThis;
-  // Open an external URL. Raw window.open(...,"_blank") is a silent no-op inside the native
-  // Capacitor webview, so route through the app's Capacitor-aware helper when present.
-  function openExt(u) { try { if (G.openExternal) return G.openExternal(u); } catch (e) {} try { window.open(u, "_blank"); } catch (x) {} }
   var API = "/api/queue";
   var POLL_MS = 8000;
   var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
@@ -16,15 +13,6 @@
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
   function initials(n) { n = String(n || "").trim(); if (!n) return "DR"; var p = n.split(/\s+/); return ((p[0][0] || "") + (p[1] ? p[1][0] : (p[0][1] || ""))).toUpperCase(); }
-  // The signed-in user's Google account photo (via SMD_ACCOUNT, loaded before queue.js). "" if none.
-  function _photo() { try { return (G.SMD_ACCOUNT && SMD_ACCOUNT.profile && SMD_ACCOUNT.profile().picture) || ""; } catch (e) { return ""; } }
-  // Avatar contents: the real Google photo when available, else initials. onerror (blocked/expired photo)
-  // falls back to initials. Used for the header, sidebar and profile-sheet avatars.
-  function avatarInner(name) {
-    var ini = String(initials(name)).replace(/[^A-Za-z0-9]/g, "") || "DR", pic = _photo();
-    if (!pic) return esc(ini);
-    return '<img class="q-avatar-img" style="width:100%;height:100%;border-radius:50%;object-fit:cover;display:block" src="' + esc(pic) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'' + ini + '\'">';
-  }
   function mins(msDiff) { return Math.max(0, Math.round(msDiff / 60000)); }
   function isQueued(s) { return s === "registered" || s === "waiting" || s === "called"; }
   function now() { return Date.now(); }
@@ -72,12 +60,13 @@
         '<div class="q-pos">' + (idx + 1) + "</div>" +
         '<div class="q-tl-info"><div class="q-tl-nm">' + esc(t.name || "Patient") + '<span class="id">#' + esc(t.mrnLast4 || "") + "</span>" + pri + "</div>" + line + "</div>" +
         '<div class="q-tl-acts">' +
-          '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" +
+          (t.status !== "called" ? '<button class="q-ic" title="Call" data-q-act="call:' + esc(t.id) + '">' + ms("campaign") + "</button>" : "") +   // an already-called patient can't be re-called (server rejects called->called); show Send-back instead
+          (t.status === "called" ? '<button class="q-ic" title="Send back to waiting" data-q-act="sendback:' + esc(t.id) + '">' + ms("undo") + "</button>" : "") +
           '<button class="q-ic" title="Start" data-q-act="start:' + esc(t.id) + '">' + ms("play_arrow") + "</button>" +
           '<button class="q-ic" title="Priority" data-q-act="prio:' + esc(t.id) + '">' + ms("priority_high") + "</button>" +
           '<button class="q-ic q-rm" title="Remove (mistaken / duplicate / wrongly-routed)" data-q-act="remove:' + esc(t.id) + '">' + ms("person_remove") + "</button>" +
           (emrOn() && t.ghisPatientId ? '<button class="q-ic" title="View EMR profile" data-q-act="profile:' + esc(t.id) + '">' + ms("clinical_notes") + "</button>" : "") +
-          (emrOn() ? '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" : "") +
+          '<button class="q-ic" title="Assessment + Ask MaiK" data-q-act="assess:' + esc(t.id) + '">' + ms("assignment") + "</button>" +   // every patient gets an Assessment button (clinic + hospital); opens the consult record
         "</div></div>";
   }
   function orderedTickets(state) {
@@ -113,7 +102,8 @@
           '<div class="q-swipe-knob" id="qSwipeKnob">' + ms("chevron_right") + "</div>" +
         "</div>" +
         '<div class="q-cta-row' + (emrOn() ? "" : " one") + '">' +
-          (emrOn() ? '<button class="q-cta-btn assess" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Assessment</span></button>" : "") +
+          '<button class="q-cta-btn assess" data-q-act="assess:' + esc(cur.id) + '">' + ms("assignment") + "<span>Assessment</span></button>" +   // the in-consult patient always has an Assessment button (shown right after Start/Play)
+          '<button class="q-cta-btn" data-q-act="sendback:' + esc(cur.id) + '">' + ms("undo") + "<span>Send back</span></button>" +
           '<button class="q-cta-btn emerg" data-q-act="emergency">' + ms("warning") + "<span>Emergency</span></button>" +
         "</div>" +
       "</div></div></div>";
@@ -121,7 +111,7 @@
 
   function sidebar(view, doctorName, dept) {
     return '<aside class="q-side">' +
-      '<div class="q-side-hd"><div class="q-avatar">' + avatarInner(doctorName) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
+      '<div class="q-side-hd"><div class="q-avatar">' + esc(initials(doctorName)) + "</div><div class=\"who\"><b>" + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       navItem("dashboard", "Dashboard", view === "dashboard") +
       '<button class="q-nav" data-q-act="savedpatients" title="Patients seen (saved)">' + ms("recent_actors") + "<span>Patients</span></button>" +
       navItem("analytics", "Analytics", view === "analytics") +
@@ -140,9 +130,8 @@
       "</section>";
     var searchBox = ordered.length >= 6 ? '<div class="q-tl-search-wrap">' + ms("search") + '<input class="q-tl-search" type="search" autocomplete="off" autocapitalize="off" placeholder="Search name or ID…" value="' + esc(state.search || "") + '" oninput="try{window.QUEUE&&QUEUE._search&&QUEUE._search(this.value)}catch(e){}"><button class="q-tl-search-x" data-q-act="clearsearch" title="Clear" style="' + (state.search ? "" : "display:none") + '">' + ms("close") + "</button></div>" : "";
     var timeline = '<div class="q-tl"><div class="q-tl-head"><span>Patient</span><span class="r">' + ordered.length + ' in queue</span></div>' + searchBox +
-      '<div id="qTlRows">' + timelineRows(state) + "</div>" +
-      '<div class="q-tl-foot"><a data-q-act="viewall">View full queue (' + ordered.length + ")</a></div></div>";
-    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p><button class="q-ai-send" data-q-act="notify:' + esc(ins.t.id) + '">Send notification</button></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';
+      '<div id="qTlRows">' + timelineRows(state) + "</div></div>";   // the timeline already lists the full ordered queue; the old "View full queue" foot link was a dead no-op
+    var ai = ins ? '<div class="q-ai"><div class="q-ai-icon">' + ms("auto_awesome") + "</div><div style=\"flex:1\"><h4>AI Insights</h4><p>" + esc(ins.msg) + '</p></div><button class="q-ai-x" data-q-act="dismiss">' + ms("close") + "</button></div>" : '<div class="q-ai calm"><div class="q-ai-icon">' + ms("check_circle") + '</div><div style="flex:1"><h4>AI Insights</h4><p style="margin:0">Queue is flowing smoothly. No one has waited over 30 minutes.</p></div></div>';   // removed the dead "Send notification" CTA (no handler / no /notify route yet)
     return kpis + '<section class="q-grid"><div><h2 class="q-h2">' + ms("play_circle") + "Currently Consulting</h2>" + renderConsult(cur) +
       '<button class="q-pause" data-q-act="pause">' + ms("pause_circle") + (paused ? " Resume Queue" : " Pause Queue") + "</button></div>" +
       '<div class="q-side-col"><h2 class="q-h2">' + ms("view_list", false) + 'Queue Timeline<span class="r">Next ' + Math.min(3, ordered.length) + "</span></h2>" + timeline + ai + "</div></section>";
@@ -150,13 +139,15 @@
   function _render(state) {
     var s = state.session || {}, view = state.view || "dashboard";
     var doctorName = state.ghisDoctorName || (state.ghisToken && state.ghisUser ? ("Dr " + state.ghisUser) : "") || s.doctorName || state.me.name || "Doctor", dept = s.department || state.me.dept || "OPD", paused = s.status === "paused";
-    var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" aria-label="Back" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
+    var header = '<header class="q-top"><div class="q-top-in"><button class="q-iconbtn" data-q-act="switch" title="Switch clinic or hospital">' + ms("arrow_back") + '</button><div class="q-brand"><span class="q-logo-mark" aria-hidden="true"></span><span class="q-wordmark">Steward<span>MD</span></span></div><div class="q-top-r">' +
       '<button class="q-online" data-q-act="docstatus"><span class="dot"></span>' + esc(paused ? "Paused" : (s.doctorStatus ? cap(s.doctorStatus) : "System Online")) + "</button>" +
-      (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Import today\'s OPD list from Ward Sync">' + ms("download") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
-      // Avatar is the doctor-profile entry (sign-out lives inside it now, so the top bar stays uncluttered).
-      (state.ghisToken
-        ? '<button class="q-avatar q-avatar-btn" data-q-act="profile" title="Doctor profile" aria-label="Doctor profile">' + avatarInner(doctorName) + "</button>"
-        : '<div class="q-avatar" title="' + esc(doctorName) + '">' + avatarInner(doctorName) + "</div>") +
+      (view === "dashboard" ? '<button class="q-iconbtn" data-q-act="importopd" title="Refresh queue (imports from the hospital/EMR when one is connected)">' + ms("refresh") + '</button><button class="q-iconbtn" data-q-act="add" title="Add patient">' + ms("person_add") + "</button>" : "") +
+      // Avatar is the doctor-profile entry (sign-out + Clinic ID/staff admin live inside it). Tappable for ANY
+      // real workplace - GHIS, Connect hospital, or personal clinic - not just GHIS (else clinic doctors could
+      // never reach the profile sheet or their staff-admin panel, which renders only for a personal clinic).
+      (state.session || state.ghisToken
+        ? '<button class="q-avatar q-avatar-btn" data-q-act="docprofile" title="Doctor profile" aria-label="Doctor profile">' + esc(initials(doctorName)) + "</button>"
+        : '<div class="q-avatar" title="' + esc(doctorName) + '">' + esc(initials(doctorName)) + "</div>") +
       "</div></div></header>";
     var canvas = view === "analytics" ? analyticsCanvas(state) : view === "settings" ? settingsCanvas(state) : dashboardCanvas(state);
     // "Patients" opens the saved-patients list of the active clinic store (My Clinic device / Shared Clinic
@@ -167,15 +158,64 @@
     return '<div class="q-app">' + sidebar(view, doctorName, dept) + main + (state.profileOpen ? renderProfile(state, doctorName, dept) : "") + "</div>";
   }
   function cap(s) { s = String(s || ""); return s.charAt(0).toUpperCase() + s.slice(1); }
+  // ---- Clinic & staff admin (owner, native clinic): Clinic ID + add nursing/reception/billing with a
+  // PIN so they sign in at stewardmd.in/opd. Reuses the live server endpoints (GET /org, GET /members,
+  // POST /member [+ /member/pin]); owner authority via STAFF_ADMIN. GHIS/hospital sessions are skipped
+  // (staff there are managed in the hospital's own system). ----
+  function loadClinicAdmin() {
+    if (!st.orgId || st.ghisToken) { st.clinicAdmin = null; return; }
+    st.clinicAdmin = st.clinicAdmin || {};
+    apiGet("/org?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok && r.org) { st.clinicAdmin.code = r.org.code || ""; st.clinicAdmin.name = r.org.name || ""; if (st.profileOpen) paint(); } }).catch(function () {});
+    apiGet("/members?orgId=" + encodeURIComponent(st.orgId)).then(function (r) { if (r && r.ok) { st.clinicAdmin.members = r.members || []; if (st.profileOpen) paint(); } }).catch(function () {});
+  }
+  function roleLabel(r) { return r === "nurse" ? "Nursing" : r === "cashier" ? "Billing" : r === "reception" ? "Reception" : r === "admin" ? "Admin" : r === "doctor" ? "Doctor" : r === "supervisor" ? "Supervisor" : (r || "Staff"); }
+  function addStaff() {
+    var nameEl = document.getElementById("qStaffName"), roleEl = document.getElementById("qStaffRole"), pinEl = document.getElementById("qStaffPin");
+    var identity = ((nameEl && nameEl.value) || "").trim().toLowerCase(), role = (roleEl && roleEl.value) || "nurse", pin = ((pinEl && pinEl.value) || "").trim();   // lowercase so it always matches the staff login (mobile keyboards auto-capitalize; server match is case-sensitive)
+    if (!identity) { try { G.toast && G.toast("Enter a login name"); } catch (e) {} return; }
+    if (!/^\d{4,6}$/.test(pin)) { try { G.toast && G.toast("PIN must be 4 to 6 digits"); } catch (e) {} return; }
+    apiPost("/member", { orgId: st.orgId, identity: identity, role: role }).then(function (r) {
+      if (!r || !r.ok) { try { G.toast && G.toast("Could not add staff"); } catch (e) {} return null; }
+      return apiPost("/member/pin", { orgId: st.orgId, identity: identity, pin: pin });
+    }).then(function (r) {
+      if (r && r.ok) { try { G.toast && G.toast("Staff added: " + identity); } catch (e) {} if (nameEl) nameEl.value = ""; if (pinEl) pinEl.value = ""; loadClinicAdmin(); }
+    }).catch(function () { try { G.toast && G.toast("Could not add staff"); } catch (e) {} });
+  }
+  function clinicAdminHtml(state) {
+    if (!state.orgId || state.ghisToken) return "";   // only a StewardMD-native clinic the doctor owns
+    var ca = state.clinicAdmin || {};
+    var code = ca.code ? esc(ca.code) : "loading…";
+    var members = ca.members || [];
+    var rows = members.length
+      ? members.map(function (m) {
+          return '<div class="q-staff-row"><div class="q-staff-id"><b>' + esc(m.identity || m.email || "staff") + "</b><span>" + esc(roleLabel(m.role)) + (m.hasPin ? " · PIN set" : " · no PIN") + (m.active === false ? " · disabled" : "") + "</span></div>" +
+            '<button class="q-ic q-rm" title="Remove access" data-q-act="staffremove:' + esc(m.identity) + '">' + ms("person_remove") + "</button></div>";
+        }).join("")
+      : '<div class="q-staff-empty">No team members yet. Add doctors, nursing, reception or billing below.</div>';
+    return '<div class="q-profile-sec"><div class="q-sec-h">Clinic &amp; staff</div>' +
+      '<div class="q-profile-row q-clinic-id"><span>' + ms("badge") + " Clinic ID</span><b class=\"mono\">" + code + '</b><button class="q-ic" title="Copy Clinic ID" data-q-act="copyclinic:' + code + '">' + ms("content_copy") + "</button></div>" +
+      '<div class="q-hint" style="margin:2px 0 10px">Staff sign in at <b>stewardmd.in/opd</b> with this Clinic ID + their login and PIN.</div>' +
+      '<div class="q-staff-list">' + rows + "</div>" +
+      '<div class="q-staff-add">' +
+        '<input id="qStaffName" placeholder="Login name (e.g. nurse1)" autocomplete="off" autocapitalize="none">' +
+        '<div class="q-staff-add-r">' +
+          '<select id="qStaffRole"><option value="nurse">Nursing</option><option value="reception">Reception</option><option value="cashier">Billing</option><option value="doctor">Doctor</option><option value="supervisor">Supervisor</option></select>' +
+          '<input id="qStaffPin" placeholder="PIN (4-6 digits)" inputmode="numeric" maxlength="6">' +
+        "</div>" +
+        '<button class="q-pbtn" data-q-act="addstaff">' + ms("person_add") + "Add staff</button>" +
+      "</div></div>";
+  }
+
   // Doctor profile sheet - opened from the header avatar. Identity + status + switch clinic + sign out.
   function renderProfile(state, doctorName, dept) {
     var s = state.session || {};
     var status = s.doctorStatus ? cap(s.doctorStatus) : (s.status === "paused" ? "Paused" : "Online");
     return '<div class="q-sheet" data-q-act="profile-close"><div class="q-profile" data-q-act="profile-stop">' +
-      '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + avatarInner(doctorName) + "</div>" +
+      '<div class="q-profile-top"><div class="q-avatar q-avatar-lg">' + esc(initials(doctorName)) + "</div>" +
       '<div class="q-profile-id"><b>' + esc(doctorName) + "</b><span>" + esc(dept) + "</span></div></div>" +
       (state.ghisUser ? '<div class="q-profile-row">' + ms("badge") + "<span>GHIS ID</span><b>" + esc(state.ghisUser) + "</b></div>" : "") +
       '<div class="q-profile-row">' + ms("stethoscope") + "<span>Status</span><b>" + esc(status) + "</b></div>" +
+      clinicAdminHtml(state) +
       '<div class="q-profile-acts">' +
         '<button class="q-pbtn" data-q-act="switch">' + ms("swap_horiz") + "Switch clinic / hospital</button>" +
         (state.ghisToken ? '<button class="q-pbtn danger" data-q-act="logout">' + ms("logout") + "Sign out of GHIS</button>" : "") +
@@ -200,14 +240,23 @@
     var a = state.analytics;
     if (!a) return '<h2 class="q-h2">' + ms("analytics") + 'Performance analytics</h2><div class="q-grid2"><div class="q-card"><div class="q-skel" style="height:44px;width:55%;margin-bottom:12px"></div><div class="q-skel" style="height:13px;width:38%"></div></div><div class="q-card"><div class="q-skel" style="height:120px"></div></div></div>';
     var acc = a.etaAccuracyPct == null ? "-" : a.etaAccuracyPct + "%";
+    var tot = a.total || 0;
+    var noShowRate = tot ? Math.round((a.noShow / tot) * 100) : 0;      // no-show RATE, not just the count
+    var compRate = tot ? Math.round((a.completed / tot) * 100) : 0;     // completion rate
     var kpis = '<section class="q-kpis">' +
-      kpi("Completed", "task_alt", String(a.completed), "") + kpi("Avg. Wait", "schedule", a.avgWaitMin + "<u>m</u>", "") +
-      kpi("Avg. Consult", "timer", a.avgConsultMin + "<u>m</u>", "") + kpi("No-shows", "person_off", String(a.noShow), "") + "</section>";
+      kpi("Seen today", "task_alt", String(a.completed), "") + kpi("Avg. Wait", "schedule", a.avgWaitMin + "<u>m</u>", "") +
+      kpi("Avg. Consult", "timer", a.avgConsultMin + "<u>m</u>", "") + kpi("No-show rate", "person_off", noShowRate + "<u>%</u>", "") + "</section>";
     var eta = '<div class="q-card"><div class="q-card-h">' + ms("trending_up") + 'ETA accuracy</div><div class="q-bignum">' + acc + '</div><div class="q-sub">predictions within 10 minutes</div></div>';
     var peak = '<div class="q-card"><div class="q-card-h">' + ms("calendar_month") + "Peak hours (by registration)</div>" + peakChart(a.peakHours) + "</div>";
     var out = '<div class="q-card"><div class="q-card-h">' + ms("insights") + "Outcomes</div>" +
-      '<div class="q-out"><span>Completed</span><b>' + a.completed + "</b></div><div class=\"q-out\"><span>No-show</span><b>" + a.noShow + "</b></div>" +
-      '<div class="q-out"><span>Cancelled</span><b>' + a.cancelled + "</b></div><div class=\"q-out\"><span>In queue</span><b>" + a.waiting + "</b></div></div>";
+      '<div class="q-out"><span>Patients today</span><b>' + tot + "</b></div>" +
+      '<div class="q-out"><span>Completed</span><b>' + a.completed + " (" + compRate + "%)</b></div>" +
+      '<div class="q-out"><span>No-show</span><b>' + a.noShow + " (" + noShowRate + "%)</b></div>" +
+      '<div class="q-out"><span>Cancelled</span><b>' + a.cancelled + "</b></div>" +
+      '<div class="q-out"><span>In queue</span><b>' + a.waiting + "</b></div>" +
+      (a.revenueToday != null ? '<div class="q-out"><span>Revenue today</span><b>&#8377;' + a.revenueToday + "</b></div>" : "") +
+      (a.followupCompliancePct != null ? '<div class="q-out"><span>Follow-up compliance</span><b>' + a.followupCompliancePct + "%</b></div>" : "") +
+      "</div>";
     return '<h2 class="q-h2">' + ms("analytics") + "Performance analytics</h2>" + kpis + '<section class="q-grid2">' + eta + peak + out + "</section>";
   }
 
@@ -304,51 +353,7 @@
           tog("etaLearning", "ETA learning", c.etaLearning, "learn this doctor's consult durations") +
         "</div>"
       : '<div class="q-card"><div class="q-skel" style="height:16px;width:50%;margin-bottom:16px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px;margin-bottom:10px"></div><div class="q-skel" style="height:44px"></div></div>';
-    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>" + consoleCard(state);
-  }
-  function _ensureConsoleCss() {
-    if (document.getElementById("qConsoleCss")) return;
-    var s = document.createElement("style"); s.id = "qConsoleCss";
-    s.textContent = ".q-mini{border:1px solid var(--rds-line,#cbd5e1);background:var(--rds-surface,#fff);color:var(--rds-ink,#0f172a);border-radius:8px;padding:7px 11px;font-size:12.5px;font-weight:700;cursor:pointer}"
-      + ".q-mini.danger{color:#dc2626;border-color:#f0b4b4}.q-mini:active{transform:scale(.97)}"
-      + ".q-staff{border:1px solid var(--rds-line,#e2e8f0);border-radius:12px;padding:10px 12px;margin-bottom:8px}"
-      + ".q-staff input,.q-staff-add input,.q-staff-add select{padding:7px 9px;border:1px solid var(--rds-line,#e2e8f0);border-radius:8px;font-size:13px;background:var(--rds-surface,#fff);color:var(--rds-ink,#0f172a)}"
-      + ".q-staff-badge{font-size:11px;font-weight:700;color:var(--rds-primary,#0e6e63);background:rgba(14,110,99,.1);border-radius:999px;padding:2px 8px}";
-    document.head.appendChild(s);
-  }
-  // OPD Console management — only the clinic OWNER sees it (st.console is set only when st.orgId is one of
-  // the orgs /orgs returns, i.e. an org this Firebase user owns). Reads/writes the already-live q_members
-  // endpoints (server re-checks STAFF_ADMIN on every mutation, so the client gate is cosmetic).
-  function consoleCard(state) {
-    var cc = state.console; if (!cc || !cc.org) return "";
-    _ensureConsoleCss();
-    var org = cc.org, members = cc.members || [], ROLES = ["reception", "nurse", "cashier", "supervisor"];
-    var rows = members.length ? members.map(function (m) {
-      var id = esc(m.identity || ""), off = (m.active === false);
-      return '<div class="q-staff"' + (off ? ' style="opacity:.6"' : '') + '>' +
-        '<div style="display:flex;align-items:center;gap:8px;flex-wrap:wrap"><b style="font-size:14px">' + id + '</b>' +
-          '<span class="q-staff-badge">' + esc(m.role || "staff") + '</span>' +
-          (m.hasPin ? '<span style="font-size:11px;color:#16a34a">PIN set</span>' : '<span style="font-size:11px;color:#b45309">No PIN</span>') +
-          (off ? '<span style="font-size:11px;color:#dc2626">Disabled</span>' : '') + '</div>' +
-        '<div style="display:flex;gap:6px;margin-top:8px;flex-wrap:wrap;align-items:center">' +
-          '<input type="text" inputmode="numeric" maxlength="6" data-pin="' + id + '" placeholder="New PIN (4-6)" style="width:118px">' +
-          '<button class="q-mini" data-q-act="setpin:' + id + '">Set PIN</button>' +
-          '<button class="q-mini" data-q-act="' + (off ? "enablestaff" : "disablestaff") + ":" + id + '">' + (off ? "Enable" : "Disable") + '</button>' +
-          '<button class="q-mini danger" data-q-act="rmstaff:' + id + '">Remove</button>' +
-        '</div></div>';
-    }).join("") : '<div style="font-size:13px;color:var(--rds-muted,#64748b);padding:6px 0">No front-desk staff yet. Add one below so they can sign in to the OPD console.</div>';
-    return '<section style="margin-top:14px"><div class="q-card">' +
-      '<div class="q-card-h">' + ms("badge") + "OPD Console access</div>" +
-      '<div class="q-out"><span>Clinic code</span><b style="display:flex;align-items:center;gap:8px">' + esc(org.code || "-") + '<button class="q-mini" data-q-act="copycode">Copy</button></b></div>' +
-      '<div class="q-out"><span>Clinic</span><b>' + esc(org.name || "") + "</b></div>" +
-      '<div style="font-size:12px;color:var(--rds-muted,#64748b);margin:2px 0 12px">Front-desk staff sign in to the OPD console with this clinic code, their staff ID and PIN.</div>' +
-      '<button class="q-finish" style="font-size:13px;padding:9px 14px;margin-bottom:14px" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
-      '<div style="font-weight:700;font-size:13px;margin-bottom:8px">Front-desk staff</div>' + rows +
-      '<div class="q-staff-add" style="display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;align-items:center">' +
-        '<input id="qNewStaffId" type="text" placeholder="Staff ID / name" style="flex:1;min-width:130px">' +
-        '<select id="qNewStaffRole">' + ROLES.map(function (r) { return '<option value="' + r + '">' + r + "</option>"; }).join("") + "</select>" +
-        '<button class="q-mini" data-q-act="addstaff">Add staff</button>' +
-      "</div></div></section>";
+    return head + '<section class="q-grid2">' + storageCard() + cfgCards + "</section>";
   }
 
   // ---- API (server-authoritative) ---------------------------------------------------------
@@ -447,45 +452,24 @@
     st.view = view; paint();
     if (st.demo) return;   // demo has no server session to fetch analytics/config from
     if (view === "analytics" && st.session) apiGet("/analytics?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) { if (r && r.ok && st.view === "analytics") { st.analytics = r.analytics; paint(); } }).catch(function () {});
-    if (view === "settings") { apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {}); loadConsole(); }
+    if (view === "settings") apiGet("/config").then(function (r) { if (r && r.ok && st.view === "settings") { st.config = r.config; paint(); } }).catch(function () {});
   }
   function saveCfg() {
     var cfg = {};
     root().querySelectorAll("[data-cfg]").forEach(function (inp) { cfg[inp.getAttribute("data-cfg")] = inp.type === "checkbox" ? inp.checked : Number(inp.value); });
     apiPost("/config", { config: cfg }).then(function (r) { if (r && r.ok) { st.config = r.config; paint(); try { G.toast && G.toast("Settings saved"); } catch (e) {} } }).catch(function () {});
   }
-  // ---- OPD Console management (clinic owner only) -----------------------------------------
-  function _orgId() { return st.orgId || (st.console && st.console.org && st.console.org.id) || ""; }
-  function loadConsole() {
-    var oid = st.orgId; if (!oid) { st.console = null; return; }
-    apiGet("/orgs").then(function (r) {
-      var org = ((r && r.orgs) || []).filter(function (o) { return String(o.id) === String(oid); })[0];   // /orgs = only orgs THIS user owns
-      if (!org) { st.console = null; if (st.view === "settings") paint(); return; }
-      return apiGet("/members?orgId=" + encodeURIComponent(oid)).then(function (mr) {
-        st.console = { org: org, members: (mr && mr.members) || [] };
-        if (st.view === "settings") paint();
-      });
-    }).catch(function () {});
+
+  // Copy to clipboard that works on Android/iOS WebViews AND degrades honestly: the async clipboard API
+  // rejects in insecure/older WebViews, so we .catch() (never leak an unhandled rejection) and fall back to
+  // a hidden-textarea execCommand copy. The toast reflects what actually happened - no false "copied".
+  function legacyCopy(s) {
+    try { var ta = document.createElement("textarea"); ta.value = s; ta.setAttribute("readonly", ""); ta.style.position = "fixed"; ta.style.top = "-1000px"; ta.style.opacity = "0"; document.body.appendChild(ta); ta.select(); var okc = document.execCommand && document.execCommand("copy"); document.body.removeChild(ta); return !!okc; } catch (e) { return false; }
   }
-  function _staffMember(body) { body.orgId = _orgId(); return apiPost("/member", body).then(function (r) { loadConsole(); return r; }); }
-  function _staffAction(path, identity) { return apiPost(path, { orgId: _orgId(), identity: identity }).then(function (r) { loadConsole(); return r; }); }
-  function _setStaffPin(identity) {
-    var inp = null; root().querySelectorAll("[data-pin]").forEach(function (x) { if (x.getAttribute("data-pin") === identity) inp = x; });
-    var pin = inp ? String(inp.value || "").trim() : "";
-    if (!/^\d{4,6}$/.test(pin)) { try { G.toast && G.toast("Enter a 4-6 digit PIN"); } catch (e) {} return; }
-    apiPost("/member/pin", { orgId: _orgId(), identity: identity, pin: pin }).then(function (r) {
-      if (r && r.ok) { try { G.toast && G.toast("PIN set for " + identity); } catch (e) {} loadConsole(); }
-      else { try { G.toast && G.toast("Could not set PIN"); } catch (e) {} }
-    }).catch(function () {});
-  }
-  function _addStaff() {
-    var idEl = document.getElementById("qNewStaffId"), roleEl = document.getElementById("qNewStaffRole");
-    var identity = idEl ? String(idEl.value || "").trim() : "", role = roleEl ? roleEl.value : "reception";
-    if (!identity) { try { G.toast && G.toast("Enter a staff ID or name"); } catch (e) {} return; }
-    _staffMember({ identity: identity, role: role, active: true }).then(function (r) {
-      if (r && r.ok) { try { G.toast && G.toast("Staff added. Set a PIN for them."); } catch (e) {} }
-      else { try { G.toast && G.toast((r && r.error) || "Could not add staff"); } catch (e) {} }
-    });
+  function copyText(s) {
+    function done(okc) { try { G.toast && G.toast(okc ? "Clinic ID copied" : "Could not copy - long-press to select it"); } catch (e) {} }
+    try { if (navigator.clipboard && navigator.clipboard.writeText) { navigator.clipboard.writeText(s).then(function () { done(true); }, function () { done(legacyCopy(s)); }); return; } } catch (e) {}
+    done(legacyCopy(s));
   }
 
   function onClick(e) {
@@ -494,10 +478,13 @@
     if (cmd === "close") { close(); return; }
     if (cmd === "clearsearch") { st.search = ""; paint(); return; }
     if (cmd === "chooser") { _setWp(""); root().innerHTML = _chooseType(); return; }     // back to Hospital / Personal clinic (forgets remembered workplace)
-    if (cmd === "profile") { st.profileOpen = true; paint(); return; }
+    if (cmd === "docprofile") { st.profileOpen = true; paint(); loadClinicAdmin(); return; }
+    if (cmd === "copyclinic") { copyText(arg); return; }
+    if (cmd === "addstaff") { addStaff(); return; }
+    if (cmd === "staffremove") { var okrm = true; try { okrm = window.confirm("Remove this staff member's access?"); } catch (e) {} if (okrm) apiPost("/member", { orgId: st.orgId, identity: arg, remove: true }).then(function () { loadClinicAdmin(); }); return; }
     if (cmd === "profile-close") { st.profileOpen = false; paint(); return; }
     if (cmd === "profile-stop") return;   // click inside the profile card: do nothing (don't close)
-    if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered)
+    if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
     if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
@@ -505,15 +492,9 @@
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickroom") { var pr = arg.split("~"); loadRoom(pr[0], pr[1] || ""); return; }   // doctor picked their room
-    if (cmd === "newclinic") { openExt("https://stewardmd.in/opd"); return; }
-    if (cmd === "addhosp") { openExt("https://stewardmd.in/admin/connect-emr"); return; }  // reuse the Connect EMR onboarding wizard
-    if (cmd === "openconsole") { openExt("https://stewardmd.in/opd"); return; }
-    if (cmd === "copycode") { var code = (st.console && st.console.org && st.console.org.code) || ""; try { if (navigator.clipboard) navigator.clipboard.writeText(code); } catch (e) {} try { G.toast && G.toast("Clinic code copied"); } catch (e) {} return; }
-    if (cmd === "setpin") { _setStaffPin(arg); return; }
-    if (cmd === "disablestaff") { _staffAction("/member/disable", arg); return; }
-    if (cmd === "enablestaff") { _staffAction("/member/restore", arg); return; }
-    if (cmd === "rmstaff") { if (G.confirm && !G.confirm("Remove " + arg + " from the OPD console?")) return; _staffMember({ identity: arg, remove: true }); return; }
-    if (cmd === "addstaff") { _addStaff(); return; }
+    if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
+    if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
@@ -535,9 +516,17 @@
     if (cmd === "nav") { switchView(arg); return; }
     if (cmd === "savecfg") { saveCfg(); return; }
     if (cmd === "finish") act(sid, "/advance");
-    else if (cmd === "start") { act(sid, "/status", { ticketId: arg, status: "in_consultation" }); openAssessment(arg); }   // Start consult -> straight into the Initial Assessment (the consult record)
+    else if (cmd === "start") {
+      // Start consult -> straight into the Initial Assessment (the consult record). If another patient is
+      // still in the room (currentTicketId), send THEM back to waiting first so they are never stranded
+      // (a second Start used to overwrite currentTicketId, leaving the first consult open + invisible forever).
+      var curId = st.session && st.session.currentTicketId;
+      var startGo = function () { act(sid, "/status", { ticketId: arg, status: "in_consultation" }); openAssessment(arg); };
+      if (curId && curId !== arg) act(sid, "/status", { ticketId: curId, status: "waiting" }).then(startGo); else startGo();
+    }
     else if (cmd === "call") act(sid, "/status", { ticketId: arg, status: "called" });
-    else if (cmd === "prio") act(sid, "/priority", { ticketId: arg, priority: 2 });
+    else if (cmd === "sendback") act(sid, "/status", { ticketId: arg, status: "waiting" });   // reroute from the consulting room back to the waiting hall (personal + hospital)
+    else if (cmd === "prio") { var pt = (st.tickets || []).filter(function (x) { return x.id === arg; })[0]; act(sid, "/priority", { ticketId: arg, priority: (pt && pt.priority) ? 0 : 1 }); }   // toggle Priority (1) on/off; matches the "Priority" label + is reversible (does NOT set Emergency/2)
     else if (cmd === "remove") { var okr = true; try { okr = window.confirm("Remove this patient from your queue?\n\nUse for a mistaken, duplicate, or wrongly-routed entry. Recorded in the audit trail."); } catch (e) {} if (okr) act(sid, "/status", { ticketId: arg, status: "cancelled" }); }
     else if (cmd === "pause") act(sid, "/session/status", { status: st.session.status === "paused" ? "active" : "paused" });
     else if (cmd === "emergency") act(sid, "/session/status", { doctorStatus: st.session.doctorStatus === "emergency" ? "consulting" : "emergency" });
@@ -549,11 +538,23 @@
     // notify/nav/viewall/docstatus/skip: Phase 2/3
   }
 
+  // The header button is CONTEXT-AWARE. Personal clinic (no GHIS token, not a Connect worklist): it is a
+  // plain Refresh - re-pull the server queue so a reception-added patient shows at once (no GHIS login).
+  // Connected EMR (Connect worklist): re-pull the connector worklist. GHIS workplace: import today's GHIS
+  // OPD list. Never sends a personal-clinic doctor to a GHIS login.
   function importOpd(silent) {
     if (!st.session) return;
     var say = function (m) { if (silent) return; try { G.toast && G.toast(m); } catch (e) {} };
+    if (st.openOpts && st.openOpts.source === "connect") { importFromSource(silent); return; }
+    if (!st.ghisToken) {   // personal clinic -> Refresh only (the 8s poll already auto-syncs; this is the manual tap)
+      say("Refreshing queue…");
+      apiGet("/list?sessionId=" + encodeURIComponent(st.session.id)).then(function (r) {
+        if (r && r.ok) { st.tickets = r.tickets || []; paint(); say("Queue refreshed"); } else { say("Could not refresh"); }
+      }).catch(function () { say("Could not refresh"); });
+      return;
+    }
     say("Importing today's OPD list…");
-    var gh = { "Content-Type": "application/json" }; if (st.ghisToken) gh.Authorization = "Bearer " + st.ghisToken;
+    var gh = { "Content-Type": "application/json" }; gh.Authorization = "Bearer " + st.ghisToken;
     fetchRetry("/api/ghis/opd-patients", { headers: gh, credentials: "include" }).then(function (r) { return r.json(); }).then(function (r) {
       if (r && r.error === "login_required") { ghisReauth(); return; }   // expired -> silent re-login from remembered cred, else the gate (no manual sign-out)
       var rows = (r && r.rows) || [];
@@ -770,6 +771,7 @@
     st.view = "dashboard"; paint();
   }
   function loadSession() {
+    st.orgId = null; st.clinicAdmin = null;   // GHIS/Connect session: never carry a personal-clinic's orgId (or its staff list) over
     var opts = st.openOpts || {}, el = root();
     el.innerHTML = '<div class="q-empty" style="padding:80px">Loading your queue…</div>';
     var q = "?hospitalId=" + encodeURIComponent(opts.hospitalId || "manual") + "&department=" + encodeURIComponent(opts.department || "") + "&source=" + encodeURIComponent(opts.source || "manual");

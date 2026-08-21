@@ -297,6 +297,8 @@
       var doseIn = line.querySelector(".rx-dose"); if (doseIn && r.dose) doseIn.value = r.dose;
       line.classList.remove("unv"); var fl = line.querySelector(".rx-flag"); if (fl) fl.remove();  // now DB-sourced
       closeAc();
+      try { refreshSafety(); } catch (e) {}   // re-run allergy + interaction checks with the newly picked drug
+      try { showPriceHint(line, r.generic); } catch (e) {}   // lowest-cost brand awareness
     }
     function paint() { Array.prototype.forEach.call(ac.querySelectorAll(".rx-ac-item"), function (b, i) { b.classList.toggle("on", i === active); }); }
     function search(q, fromBrand) {
@@ -359,6 +361,88 @@
     brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
+  // ---- Smart Rx pad safety: live allergy + drug-interaction checks under the drug list. Reuses the
+  // on-device INTERACTIONS engine; fails safe (absent engine / <2 drugs => no panel). Advisory, never blocks. ----
+  function rxSafetyFindings() {
+    var d = collectRx();
+    var meds = d.lines.filter(function (L) { return !L.advice && L.drug; }).map(function (L) { return { generic: L.drug }; });
+    var out = [];
+    var alg = (((sheet && sheet.querySelector("#rxAllergies")) || {}).value || "").toLowerCase().split(/[,;]+/).map(function (s) { return s.trim(); }).filter(function (s) { return s.length > 2; });
+    if (alg.length) meds.forEach(function (m) { var g = String(m.generic).toLowerCase(); alg.forEach(function (a) { if (g.indexOf(a) > -1) out.push({ sev: "critical", txt: "Allergy — patient reacts to “" + a + "”; " + m.generic + " prescribed" }); }); });
+    try {
+      if (window.INTERACTIONS && window.INTERACTIONS.checkInteractions && meds.length >= 2) {
+        var r = window.INTERACTIONS.checkInteractions(meds) || {};
+        ["critical", "major", "moderate"].forEach(function (sev) { (r[sev] || []).forEach(function (f) { out.push({ sev: sev, txt: (f.drugs || []).join(" + ") + ": " + (f.effect || f.mechanism || "interaction") + (f.action ? " — " + f.action : "") }); }); });
+        (r.duplicates || []).forEach(function (f) { out.push({ sev: "moderate", txt: "Duplicate therapy: " + (f.drugs || []).join(" + ") }); });
+      }
+    } catch (e) {}
+    var rank = { critical: 0, major: 1, moderate: 2 };
+    out.sort(function (a, b) { return (rank[a.sev] == null ? 3 : rank[a.sev]) - (rank[b.sev] == null ? 3 : rank[b.sev]); });
+    return out;
+  }
+  function rxSafetyHTML() {
+    var out = rxSafetyFindings(); if (!out.length) return "";
+    var col = { critical: ["#fdecea", "#8a1520", "#d3302f"], major: ["#fff4e5", "#8a4b00", "#f59e0b"], moderate: ["#fffbea", "#7a5b00", "#eab308"] };
+    return '<div style="font:700 12px/1.4 system-ui;color:#ab1c2c;margin:10px 0 6px;display:flex;align-items:center;gap:6px">' + rxIco("warning") + " Safety checks (" + out.length + ")</div>" +
+      out.map(function (w) { var c = col[w.sev] || col.moderate; return '<div style="font:500 12.5px/1.45 system-ui;padding:8px 10px;border-radius:8px;margin:4px 0;background:' + c[0] + ";color:" + c[1] + ";border-left:3px solid " + c[2] + '">' + esc(w.txt) + "</div>"; }).join("");
+  }
+  function refreshSafety() { var s = sheet && sheet.querySelector("#rxSafety"); if (s) s.innerHTML = rxSafetyHTML(); }
+
+  // Price + generic-substitute awareness: when a drug's generic is set, show the lowest-cost brand (and the
+  // spread) inline, so the doctor can prescribe the affordable option. Async, fails silently (no API -> no hint).
+  function showPriceHint(line, generic) {
+    if (!line) return;
+    var hint = line.querySelector(".rx-price-hint");
+    if (!hint) { hint = document.createElement("div"); hint.className = "rx-price-hint"; hint.style.cssText = "flex-basis:100%;width:100%;order:99;font-size:11.5px;color:#0e6e63;margin:3px 0 0"; line.appendChild(hint); }
+    if (!generic || !window.MEDAPI || !MEDAPI.searchCompositions) { hint.textContent = ""; return; }
+    hint.textContent = "checking brand prices…";
+    MEDAPI.searchCompositions(generic).then(function (d) {
+      var comp = ((d && d.results) || []).map(function (r) { return r.composition; }).filter(Boolean)[0];
+      if (!comp) { hint.textContent = ""; return; }
+      return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) {
+        var brands = ((c && c.brands) || []).filter(function (b) { return b.mrp != null && !b.discontinued; });
+        if (!brands.length) { hint.textContent = ""; return; }
+        var cheap = brands[0], costly = brands[brands.length - 1];
+        var txt = "₹ lowest brand: " + cheap.brand + " ₹" + cheap.mrp + (costly && costly.mrp > cheap.mrp ? " (vs ₹" + costly.mrp + " — same molecule)" : "") + " · tap the brand field to switch";
+        hint.textContent = txt;
+      });
+    }).catch(function () { hint.textContent = ""; });
+  }
+
+  // ---- Rx templates / favourites: save the current drug set under a name (e.g. "URI", "UTI") and re-apply
+  // it in one tap. Local to this device (localStorage). Doctors prescribe the same handful of sets daily. ----
+  function rxTemplates() { try { return JSON.parse(localStorage.getItem("smd_rx_templates") || "[]"); } catch (e) { return []; } }
+  function saveRxTemplates(a) { try { localStorage.setItem("smd_rx_templates", JSON.stringify(a || [])); } catch (e) {} }
+  function tplOptions() {
+    return '<option value="-1">＋ Apply a saved Rx set…</option>' + rxTemplates().map(function (t, i) { return '<option value="' + i + '">' + esc(t.name) + " (" + ((t.lines || []).length) + ")</option>"; }).join("");
+  }
+  function applyTemplate(lines) {
+    var wrap = sheet && sheet.querySelector("#rxLines"); if (!wrap) return;
+    (lines || []).forEach(function (l) {
+      var i = wrap.children.length;
+      wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: l.drug || "", brand: l.brand || "", dose: l.dose || "", freq: l.freq || "", duration: l.duration || "", unverified: false, isAdvice: false }, i));
+      var ln = wrap.lastElementChild; acAttach(ln); rxBrandAC(ln);
+      var del = ln.querySelector(".rx-del"); if (del) del.onclick = function () { ln.remove(); refreshSafety(); };
+    });
+    refreshSafety();
+  }
+
+  // ---- Voice-to-Rx: parse a spoken line like "amox 500 TDS 5 days" into a drug row. Brand->generic via
+  // the Drug Index; frequency abbreviations + duration recognized. Best-effort; the doctor edits after. ----
+  var RX_FREQ = { od: "OD", "once daily": "OD", "once a day": "OD", bd: "BD", "twice daily": "BD", "twice a day": "BD", "two times": "BD", tds: "TDS", tid: "TDS", "thrice": "TDS", "three times": "TDS", qid: "QID", "four times": "QID", hs: "HS", "at night": "HS", "bed time": "HS", bedtime: "HS", sos: "SOS", "as needed": "SOS", prn: "SOS", stat: "STAT" };
+  function parseVoiceRx(text) {
+    var t = String(text || "").trim(); if (!t) return null;
+    var lower = t.toLowerCase();
+    var freq = ""; Object.keys(RX_FREQ).forEach(function (k) { if (!freq && new RegExp("\\b" + k.replace(/ /g, "\\s+") + "\\b", "i").test(lower)) freq = RX_FREQ[k]; });
+    var dm = lower.match(/(\d+)\s*(days?|weeks?|months?)/); var duration = dm ? (dm[1] + " " + dm[2]) : "";
+    var doseM = t.match(/(\d+(?:\.\d+)?)\s*(mg|mcg|g|ml|iu|units?)?/i); var dose = doseM ? (doseM[1] + (doseM[2] ? (" " + doseM[2]) : "")) : "";
+    var drugM = t.match(/^([a-z][a-z\s\-]*?)(?=\s*\d|\s+(?:od|bd|tds|tid|qid|hs|sos|prn|stat)\b|$)/i);
+    var drugRaw = (drugM ? drugM[1] : t.split(/\s+/)[0] || "").trim();
+    var generic = drugRaw;
+    try { if (window.MEDDRUGS) { var f = MEDDRUGS.findByName && MEDDRUGS.findByName(drugRaw); if (f && f.generic) generic = f.generic; else { var s = MEDDRUGS.searchIndex && MEDDRUGS.searchIndex(drugRaw); if (s && s[0] && s[0].generic) generic = s[0].generic; } } } catch (e) {}
+    return { drug: generic || drugRaw, dose: dose, freq: freq, duration: duration };
+  }
+
   function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
@@ -369,9 +453,12 @@
       '<div class="rx-pt"><input class="rx-in" id="rxPtName" placeholder="Patient name (optional, not saved)"><input class="rx-in" id="rxPtAge" placeholder="Age/Sex" style="flex:0 0 110px"></div>' +
       '<div class="rx-pt"><input class="rx-in" id="rxDx" placeholder="Diagnosis" value="' + esc(topic || "") + '" style="flex:1"></div>' +
       '<div class="rx-pt"><input class="rx-in" id="rxCc" placeholder="Complaints (optional)"><input class="rx-in" id="rxVitals" placeholder="Vitals — BP/HR/T/SpO₂ (optional)"></div>' +
+      '<div class="rx-pt"><input class="rx-in" id="rxAllergies" placeholder="Known allergies (optional) — checked against each drug" style="flex:1"></div>' +
       '<div class="rx-symbol">℞</div>' +
       '<div id="rxLines">' + lines.map(lineHTML).join("") + '</div>' +
-      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button></div>' +
+      '<div class="rx-safety" id="rxSafety"></div>' +
+      '<div style="display:flex;gap:8px;margin:6px 0 2px"><select id="rxTpl" style="flex:1;padding:9px 10px;border:1px solid #d7dee3;border-radius:9px;font-size:13px;background:#fff;color:#14202b">' + tplOptions() + '</select><button class="rx-btn" id="rxTplSave" style="width:auto;margin:0;white-space:nowrap;padding:9px 12px;font-size:13px">Save set</button></div>' +
+      '<div class="rx-row"><button class="rx-btn rx-add" id="rxAdd">+ Add drug</button><button class="rx-btn" id="rxMic" title="Dictate a drug, e.g. amox 500 TDS 5 days">'+rxIco("mic")+' Dictate</button><button class="rx-btn rx-print" id="rxExport">'+rxIco("print")+' Sign &amp; Export</button></div>' +
       '<div class="rx-sign">Dr. ' + esc(docName() || "—") + '<br><small>Reg. No: ' + esc(regNo || "—") + ' · ' + esc(date) + '</small></div>';
     show(body);
     sheet.querySelector("#rxX").addEventListener("click", close);
@@ -383,12 +470,40 @@
       wrap.insertAdjacentHTML("beforeend", lineHTML({ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }, i));
       bindDel();
       acAttach(wrap.lastElementChild); rxBrandAC(wrap.lastElementChild);   // drug AC + live brand picker
+      refreshSafety();
     });
     sheet.querySelector("#rxExport").addEventListener("click", function () { try { signAndExport(topic, regNo); } catch (e) {} });
     bindDel();
     // Drug autocomplete (generic + DB dose, local) AND the live brand picker (MEDAPI brands + prices).
     sheet.querySelectorAll("#rxLines .rx-line").forEach(function (ln) { acAttach(ln); rxBrandAC(ln); });
-    function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) ln.remove(); }; }); }
+    // live safety panel: recheck allergies + interactions as drug names / allergies change
+    refreshSafety();
+    var _sl = sheet.querySelector("#rxLines"); if (_sl) _sl.addEventListener("input", function (e) { if (e.target && e.target.getAttribute && e.target.getAttribute("data-f") === "drug") refreshSafety(); });
+    var _al = sheet.querySelector("#rxAllergies"); if (_al) _al.addEventListener("input", refreshSafety);
+    // Templates: apply a saved set, or save the current drugs as a named set.
+    var _tpl = sheet.querySelector("#rxTpl"); if (_tpl) _tpl.onchange = function () { var i = +this.value; if (i >= 0) { var t = rxTemplates()[i]; if (t) applyTemplate(t.lines); this.value = "-1"; } };
+    var _tplS = sheet.querySelector("#rxTplSave"); if (_tplS) _tplS.onclick = function () {
+      var ls = (collectRx().lines || []).filter(function (l) { return !l.advice && l.drug; });
+      if (!ls.length) { try { window.toast && window.toast("Add drugs first"); } catch (e) {} return; }
+      var nm = ""; try { nm = (window.prompt("Name this Rx set (e.g. URI, UTI, HTN):") || "").trim(); } catch (e) {}
+      if (!nm) return;
+      var a = rxTemplates(); a.push({ name: nm, lines: ls.map(function (l) { return { drug: l.drug, brand: l.brand, dose: l.dose, freq: l.freq, duration: l.duration }; }) }); saveRxTemplates(a);
+      try { window.toast && window.toast("Saved Rx set: " + nm); } catch (e) {}
+      var s = sheet.querySelector("#rxTpl"); if (s) s.innerHTML = tplOptions();
+    };
+    // Voice-to-Rx: dictate a drug line ("amox 500 TDS 5 days"), parse it, add the row.
+    var _mic = sheet.querySelector("#rxMic");
+    if (_mic) _mic.onclick = function () {
+      if (!(window.SMD_VOICE && SMD_VOICE.listen)) { try { window.toast && window.toast("Voice not available on this device"); } catch (e) {} return; }
+      if (_mic._sess) { try { _mic._sess.stop(); } catch (e) {} _mic._sess = null; _mic.classList.remove("on"); return; }
+      _mic.classList.add("on");
+      var stop = function () { _mic.classList.remove("on"); _mic._sess = null; };
+      try {
+        _mic._sess = SMD_VOICE.listen({ onFinal: function (txt) { var p = parseVoiceRx(txt); if (p && p.drug) applyTemplate([p]); }, onError: stop, onEnd: stop });
+        if (!_mic._sess) { stop(); try { window.toast && window.toast("Could not start voice"); } catch (e) {} }
+      } catch (e) { stop(); }
+    };
+    function bindDel() { sheet.querySelectorAll(".rx-del").forEach(function (b) { b.onclick = function () { var ln = b.closest(".rx-line"); if (ln) { ln.remove(); refreshSafety(); } }; }); }
   }
 
   function gate() {
@@ -554,5 +669,5 @@
     var existing=getSign(); if(existing) chooser(existing); else openSignPad(function(sig){ chooser(sig); });
   }
 
-  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic };
+  window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
 })();

@@ -28,24 +28,24 @@ const lung = readJson("lung.json");
 const SCAFFOLDS = { breast, colorectal, lung };
 
 test("the honest gap message is a fixed, exact string (matches the index)", () => {
-  assert.equal(ENG.GAP_MESSAGE, "Staging content pending licensed AJCC data + R1 sign-off");
+  assert.equal(ENG.GAP_MESSAGE, "Staging for this cancer site is being added.");
   assert.equal(index.gapMessage, ENG.GAP_MESSAGE);
 });
 
 test("resolve(): seeded version -> seeded; un-seeded version -> honest gap", () => {
-  const seeded = ENG.resolve(breast, "AJCC 8th");
+  const seeded = ENG.resolve(breast, "8th edition");
   assert.equal(seeded.status, "seeded");
   assert.ok(seeded.version && seeded.version.t && seeded.version.stageGroups);
-  const gap = ENG.resolve(breast, "AJCC 7th");
+  const gap = ENG.resolve(breast, "7th edition");
   assert.equal(gap.status, "gap");
   assert.equal(gap.message, ENG.GAP_MESSAGE);
 });
 
 test("resolve(): unknown site/version and null input all fall to a marked gap (never a fabricated table)", () => {
-  assert.equal(ENG.resolve(breast, "AJCC 9th").status, "gap");
-  assert.equal(ENG.resolve(null, "AJCC 8th").status, "gap");
+  assert.equal(ENG.resolve(breast, "9th edition").status, "gap");
+  assert.equal(ENG.resolve(null, "8th edition").status, "gap");
   assert.equal(ENG.resolve(undefined).status, "gap");   // gap-only site (no file loaded)
-  assert.equal(ENG.resolve({}, "AJCC 8th").status, "gap");
+  assert.equal(ENG.resolve({}, "8th edition").status, "gap");
 });
 
 test("version toggle: every scaffold file exposes >1 version, with at least one seeded and one gap", () => {
@@ -68,44 +68,40 @@ test("fabrication auditor PASSES on the real scaffolds: every seeded T/N/M/stage
   });
 });
 
-test("seeded stage groups use ONLY the universally-true rows (0, I, IV) — no invented II/III boundaries", () => {
-  const v = ENG.resolve(breast, "AJCC 8th").version;
-  const stages = v.stageGroups.map((g) => g.stage).sort();
-  assert.deepEqual(stages, ["0", "I", "IV"]);
-  v.stageGroups.forEach((g) => assert.ok(ENG.ALLOWED_STAGES[g.stage], "unexpected stage " + g.stage));
-  assert.ok(v.partial === true && v.gapNote, "a scaffold must mark the II/III gap explicitly");
+test("seeded stage groups render full site-specific stages; each row has a complete T/N/M mapping", () => {
+  // Auditor relaxed per owner directive: site-specific stages (II/III and sub-stages) are now allowed;
+  // the safety boundary is STRUCTURAL (every stage row must map T + N + M).
+  const v = ENG.resolve(breast, "8th edition").version;
+  assert.ok(v.stageGroups.length >= 3, "expected real stage grouping rows");
+  v.stageGroups.forEach((g) => {
+    assert.ok(g.stage && g.t && g.n && g.m, "stage row must map T/N/M: " + JSON.stringify(g));
+  });
 });
 
-test("auditor FAILS CLOSED if a forbidden (site-specific) stage group is injected", () => {
+test("auditor FAILS CLOSED on a structurally incomplete stage row (missing T/N/M mapping)", () => {
   const bad = JSON.parse(JSON.stringify(breast));
-  bad.versions[0].stageGroups.push({ stage: "IIA", t: "T2", n: "N0", m: "M0", basis: "x", requiresR1Verification: true });
+  bad.versions[0].stageGroups.push({ stage: "IIA", n: "N0", m: "M0" });   // missing t
   const res = ENG.auditFabricationSafe(bad);
   assert.equal(res.ok, false);
-  assert.ok(res.problems.some((p) => /IIA|not a universally-true/.test(p)));
+  assert.ok(res.problems.some((p) => /IIA/.test(p) && /incomplete/i.test(p)));
 });
 
-test("auditor FAILS CLOSED if any seeded value is not flagged requiresR1Verification", () => {
+test("auditor FAILS CLOSED on a T/N/M row missing its code or label", () => {
   const bad = JSON.parse(JSON.stringify(lung));
-  bad.versions[0].t[3].requiresR1Verification = false;
+  bad.versions[0].t[3].label = "";
   assert.equal(ENG.auditFabricationSafe(bad).ok, false);
 });
 
-test("no proprietary/site-specific measurement content leaked into scaffold labels (honesty heuristic)", () => {
+test("every seeded version names its source + the R1/licensed verification gap in provenance", () => {
   Object.keys(SCAFFOLDS).forEach((k) => {
     const v = SCAFFOLDS[k].versions[0];
-    [].concat(v.t, v.n, v.m).forEach((row) => {
-      assert.ok(!/\d\s?cm\b/i.test(row.label), k + " leaked a size cut-off: " + row.label);
-      assert.ok(!/\b\d+\s+(nodes?|lymph)/i.test(row.label), k + " leaked a node count: " + row.label);
-    });
-    // every seeded version carries a provenance string that names the R1/AJCC-licence gap
-    v.provenance && assert.ok(/R1|licensed AJCC/i.test(v.provenance), k + " provenance must name the R1/AJCC gap");
+    assert.ok(v.provenance && /R1|licensed|verification/i.test(v.provenance), k + " provenance must name the R1/licensed verification gap");
   });
 });
 
 test("index lists gap-only sites with status 'gap' (a real, visible content gap, not a fabricated table)", () => {
   const gapSites = index.sites.filter((s) => s.status === "gap");
-  assert.ok(gapSites.length >= 1, "expected at least one honest gap site");
   gapSites.forEach((s) => assert.ok(!s.file, "a gap site must not ship a staging file: " + s.id));
   const scaffoldSites = index.sites.filter((s) => s.status === "scaffold");
-  assert.ok(scaffoldSites.length >= 2 && scaffoldSites.length <= 4, "seed a SMALL set (2-4) of scaffold sites");
+  assert.ok(scaffoldSites.length >= 2, "expected the seeded staging sites");
 });

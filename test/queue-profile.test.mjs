@@ -17,7 +17,27 @@ const st = (extra) => Object.assign({ session: { doctorName: "Dr Asha", departme
 test("header avatar is a tappable profile button (signed in)", () => {
   const html = load()._render(st());
   assert.match(html, /q-avatar-btn/);
-  assert.match(html, /data-q-act="profile"/);
+  assert.match(html, /data-q-act="docprofile"/);   // renamed from "profile" to avoid colliding with the EMR patient-profile action (profile:<id>)
+});
+
+// Regression: a PERSONAL-CLINIC doctor (no GHIS token) must still be able to open the profile sheet —
+// it's the ONLY entry to the Clinic ID + staff-admin panel, which renders only for a personal clinic.
+// (Previously the avatar was a tappable button only when state.ghisToken was set, so clinic doctors were
+// locked out of their own staff management.)
+test("clinic doctor (no GHIS) can still open the profile sheet", () => {
+  const clinic = st({ ghisToken: null, ghisUser: "", ghisDoctorName: "", orgId: "org1" });
+  const html = load()._render(clinic);
+  assert.match(html, /q-avatar-btn/);
+  assert.match(html, /data-q-act="docprofile"/);
+});
+
+test("clinic profile sheet renders the Clinic ID + staff admin", () => {
+  const clinic = st({ ghisToken: null, ghisUser: "", ghisDoctorName: "", orgId: "org1", profileOpen: true,
+    clinicAdmin: { code: "SMD-CLN001", members: [{ identity: "nurse1", role: "nurse", hasPin: true, active: true }] } });
+  const html = load()._render(clinic);
+  assert.match(html, /SMD-CLN001/);                 // Clinic ID shown
+  assert.match(html, /data-q-act="addstaff"/);      // add-staff control present
+  assert.match(html, /nurse1/);                     // existing staff listed
 });
 
 test("sign-out is moved OFF the top bar (declutter)", () => {

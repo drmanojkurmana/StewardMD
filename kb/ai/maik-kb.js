@@ -166,6 +166,22 @@
   // Extract the disease phrase from a question by stripping the intent lead-in ("what is X",
   // "treatment of X", "dose of DRUG in X" → the disease after "in/for").
   var LEADIN_RE = /^(what is|what's|whats|define|definition of|overview of|tell me about|explain|about|treatment of|treating|management of|managing|how (to|do i) treat|how to manage|causes? of|differentials? of|ddx of|clinical features of|features of|symptoms of|presentation of|signs? of|investigations? (for|of)|workup of|work up of|red[- ]?flags? (in|of)|warning signs? (of|in)|prognosis of|pathophysiology of|severity of|dose of|dosing of|dosage of|complications? of)\s+/;
+  // Colloquial / abbreviation -> canonical KB name, so how doctors + patients actually phrase things
+  // resolves to the right topic (each target verified to resolve via the name tier). Whole-phrase match
+  // only (not substring), so it never hijacks a longer specific query. Grow this map as gaps surface in
+  // the eval (test/maik-eval.test.mjs). NOTE: no general "hypertension" topic exists in the KB yet -> that
+  // is a content gap for the symptom/coverage layer, not an alias.
+  var MAIK_ALIAS = {
+    "tb": "pulmonary tuberculosis", "tuberculosis": "pulmonary tuberculosis", "ptb": "pulmonary tuberculosis", "kochs": "pulmonary tuberculosis",
+    "stroke": "acute ischemic stroke", "cva": "acute ischemic stroke", "brain attack": "acute ischemic stroke",
+    "heart attack": "acute coronary syndrome", "mi": "acute coronary syndrome", "myocardial infarction": "acute coronary syndrome", "acs": "acute coronary syndrome",
+    "ihd": "ischemic heart disease", "cad": "ischemic heart disease", "coronary artery disease": "ischemic heart disease",
+    "sugar": "diabetes mellitus", "high sugar": "diabetes mellitus", "dm": "diabetes mellitus", "t1dm": "diabetes mellitus", "t2dm": "diabetes mellitus", "type 1 diabetes": "diabetes mellitus", "type 2 diabetes": "diabetes mellitus",
+    "ckd": "chronic kidney disease", "crf": "chronic kidney disease", "kidney failure": "chronic kidney disease", "renal failure": "chronic kidney disease",
+    "aki": "acute kidney injury", "arf": "acute kidney injury", "acute renal failure": "acute kidney injury",
+    "hypo": "hypoglycemia", "low sugar": "hypoglycemia", "low blood sugar": "hypoglycemia",
+    "high cholesterol": "dyslipidemia", "cholesterol": "dyslipidemia", "lipids": "dyslipidemia"
+  };
   function diseasePhrase(q) {
     var n = medNorm(expandAbbrev(q));
     if (/\bdos(e|ing|age)\b/.test(n)) { var m = n.match(/\b(?:in|for)\s+([a-z][a-z0-9 \-]{2,})$/); if (m) return m[1].trim(); }   // "dose of DRUG in DISEASE" → DISEASE
@@ -173,6 +189,8 @@
     core = core.replace(/\s+\b(in|for|during|with|among)\b\s+.*$/, "").trim();   // drop trailing context ("diabetes in pregnancy" → "diabetes")
     core = core.replace(/\s*\b(rx|tx|mx|mgmt|management|treatment|ddx|dx|dose|dosing|dosage|workup|work[- ]?up|w[-\/ ]?u|ix|investigation|investigations|prognosis|features|symptoms|overview|pep|ppx|prophylaxis|protocol|meds?|medications?|exac|exacerbation|staging|monitoring|complications?|abx|antibiotics?|empiric)\s*$/i, "").trim();   // trailing intent word ("diabetes rx" / "copd exac" → the disease)
     core = core.replace(/^(rx|tx|mx|dx|ddx|mgmt|meds?|prophylaxis|ppx|pep|protocol|workup|w[-\/ ]?u|dose|dosing|dosage|ix)\s+/i, "").trim();   // LEADING intent word ("rx malaria" → "malaria")
+    core = core.replace(/\s*\bnot\b.*$/i, "").trim();   // honour a correction ("metabolic acidosis NOT encephalopathy") — drop the negated tail so the guard sees the real topic, not the rejected one
+    core = MAIK_ALIAS[core] || core;   // colloquial/abbreviation → canonical KB name ("tb"→pulmonary tuberculosis, "heart attack"→ACS)
     return core;
   }
   // Canonical disease match: prefer an EXACT KB name match, else a "<phrase> <qualifier>" entry
@@ -213,6 +231,25 @@
     }
     return null;
   }
+  // Guard against a WEAK lexical match that shares only a common qualifier with the query but differs on
+  // the distinctive disease noun — the real "Metabolic Acidosis -> Metabolic Encephalopathy" bug. Fires
+  // ONLY when every shared word is a generic qualifier (metabolic/acute/syndrome…) AND the query's own
+  // distinctive noun is absent from the matched name. Synonyms (heart attack ↔ myocardial infarction) share
+  // no word, so they are never second-guessed; a real match (diabetes ↔ diabetes mellitus) shares the
+  // distinctive noun, so it passes. Returns false only for the suspect case. Pure — unit-tested.
+  var MATCH_QUAL = { metabolic: 1, acute: 1, chronic: 1, primary: 1, secondary: 1, severe: 1, mild: 1, moderate: 1, syndrome: 1, disease: 1, disorder: 1, failure: 1, deficiency: 1, acquired: 1, congenital: 1, systemic: 1, benign: 1, malignant: 1, essential: 1, type: 1, stage: 1, grade: 1, idiopathic: 1 };
+  function matchTrusted(phrase, matchedName) {
+    var pw = String(phrase || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 3; });
+    var nw = String(matchedName || "").toLowerCase().split(/[^a-z0-9]+/).filter(function (w) { return w.length >= 3; });
+    if (!pw.length || !nw.length) return true;
+    var nset = {}; nw.forEach(function (w) { nset[w] = 1; });
+    var shared = pw.filter(function (w) { return nset[w]; });
+    if (!shared.length) return true;                                   // no overlap -> synonym/other, trust grounding
+    if (shared.some(function (w) { return !MATCH_QUAL[w]; })) return true;   // shares a DISTINCTIVE word -> trust
+    var distinctive = pw.filter(function (w) { return !MATCH_QUAL[w] && w.length >= 4; });
+    if (!distinctive.length) return true;                             // query is all-qualifiers -> can't judge
+    return distinctive.some(function (w) { return nset[w]; });        // trusted only if a distinctive noun matches
+  }
   // Resolve the disease the question is about. Prefer a CANONICAL name match on the question's own
   // disease term; then the engine's package (pkg.grounding); then a name-index fallback.
   function resolveTarget(question, pkg) {
@@ -238,6 +275,9 @@
       if (best) { id = best.id; name = best.name; s = lookupStores(id); confident = false; match = "fallback"; }   // name-index hit is weaker than engine grounding
     }
     if (!s.E && !s.DX && !s.Traw) return null;
+    // Reject a weak lexical match that shares only a qualifier with the query (e.g. "metabolic acidosis" ->
+    // "metabolic encephalopathy"): better to fall through to limited-material/web than answer the wrong disease.
+    if ((match === "grounding" || match === "fallback") && !matchTrusted(diseasePhrase(question), name || displayName(id, s.E))) return null;
     var T = (pkg && pkg.treatment && (pkg.treatment.default || pkg.treatment.recommendations)) ? pkg.treatment : null;
     return {
       id: id, name: name || displayName(id, s.E),
@@ -355,6 +395,18 @@
   // Dose: only quote a dose that is in the KB regimen for the named agent. SAFETY: if the clinician
   // names a specific drug the KB regimen does NOT contain, DEFER (never present a different drug's
   // dose under that query, e.g. "dose of amiodarone" must not show metoprolol). Never invents a number.
+  // Dose-safety flags for a chat dose answer: intrinsic drug warnings (QT-prolonging, renal clearance) +
+  // a verify-this-patient line. Deterministic (curated lists), so it is node-testable and never wrong for
+  // the flagged drugs. The full patient-specific renal/allergy/interaction check lives in the Rx pad.
+  var QT_DRUGS = /\b(azithromycin|clarithromycin|erythromycin|ciprofloxacin|levofloxacin|moxifloxacin|ofloxacin|ondansetron|haloperidol|amiodarone|sotalol|quinine|chloroquine|hydroxychloroquine|citalopram|escitalopram|methadone|domperidone|fluconazole)\b/i;
+  var RENAL_DRUGS = /\b(vancomycin|gentamicin|amikacin|tobramycin|aminoglycoside|meropenem|imipenem|piperacillin|tazobactam|cefepime|ceftazidime|aciclovir|acyclovir|ganciclovir|valaciclovir|fluconazole|metformin|digoxin|enoxaparin|lithium|gabapentin|pregabalin|colchicine|allopurinol|dabigatran|atenolol)\b/i;
+  function doseSafetyNote(drugsText) {
+    var s = String(drugsText || ""), out = [];
+    var qt = (s.match(new RegExp(QT_DRUGS.source, "ig")) || []); if (qt.length) out.push("QT-prolonging (" + Array.from(new Set(qt.map(function (x) { return x.toLowerCase(); }))).join(", ") + "): avoid other QT-prolongers; check baseline QTc + K⁺/Mg²⁺.");
+    var rn = (s.match(new RegExp(RENAL_DRUGS.source, "ig")) || []); if (rn.length) out.push("Renally cleared (" + Array.from(new Set(rn.map(function (x) { return x.toLowerCase(); }))).join(", ") + "): adjust to renal function (CrCl).");
+    var note = "\n\n⚠ Safety: " + (out.length ? out.join(" ") + " " : "") + "Verify against THIS patient — renal/hepatic dose, interactions, allergies, pregnancy.";
+    return note;
+  }
   function composeDose(t, question) {
     var qn = norm(question);
     var refs = [];
@@ -372,7 +424,7 @@
     });
     if (!lines.filter(function (l) { return /—/.test(l); }).length) return { ok: false };   // no actual dose figure
     var lead = (wanted && hit.length) ? ("**" + cap(wanted) + " — dosing in " + t.name + "**") : ("**Dosing — " + t.name + "**");
-    return { ok: true, text: lead + "\n" + lines.join("\n") + "\n\n" + citeSrc(t) + " · standard references, verify locally" };
+    return { ok: true, text: lead + "\n" + lines.join("\n") + "\n\n" + citeSrc(t) + " · standard references, verify locally" + doseSafetyNote(show.map(function (r) { return r.name; }).join(" ")) };
   }
 
   var COMPOSERS = {
@@ -409,8 +461,22 @@
       var resolveQ = opts.concept || question;                      // prefer the semantic router's CANONICAL concept for resolution
       if (!resolveQ) return null;
       if (!opts.intent && isComplex(question)) return null;         // reasoning → Gemini (router-supplied intent bypasses this)
+      // A BARE presentation ("fever", "chest pain") -> the symptom first-approach BEFORE the disease KB,
+      // else "fever" resolves to a narrow entity (PUO) instead of the general approach a doctor wants.
+      // Specific queries ("pyrexia of unknown origin", "dengue fever") are not exact aliases -> fall to KB.
+      try {
+        var _sxE = (G.MAIK_SYMPTOMS && G.MAIK_SYMPTOMS.compose) ? G.MAIK_SYMPTOMS.compose(resolveQ, true) : null;
+        if (_sxE) return { text: _sxE.text, confidence: 0.7, intent: "symptom", mode: "kb-symptom", disease: _sxE.name, evidence: "StewardMD symptom guide (educational — verify)" };
+      } catch (e) {}
       var t = resolveTarget(resolveQ, pkg);
-      if (!t) return null;
+      if (!t) {
+        // KB-miss: last-chance contained-keyword symptom match before deferring to Gemini/web.
+        try {
+          var _sx = (G.MAIK_SYMPTOMS && G.MAIK_SYMPTOMS.compose) ? G.MAIK_SYMPTOMS.compose(resolveQ) : null;
+          if (_sx) return { text: _sx.text, confidence: 0.7, intent: "symptom", mode: "kb-symptom", disease: _sx.name, evidence: "StewardMD symptom guide (educational — verify)" };
+        } catch (e) {}
+        return null;
+      }
       if (!t.E) t.E = {};                                           // enrichment-absent (e.g. DX_MGMT-only toxicology) → composers stay null-safe
       if (!t.confident) return null;                                // ASSUME / weak → Gemini (it can caveat)
       var intent = opts.intent ? (INTENT_ALIAS[opts.intent] || opts.intent) : classifyIntent(question || resolveQ);
@@ -539,6 +605,9 @@
     expandAbbrev: expandAbbrev,
     resolveTarget: resolveTarget,
     isKnownConcept: isKnownConcept,
+    _matchTrusted: matchTrusted,
+    _diseasePhrase: diseasePhrase,
+    _doseSafetyNote: doseSafetyNote,
     _version: "v2.0"
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;   // node tests

@@ -14,6 +14,22 @@ import java.net.URL;
  */
 public class ModelDownloader {
 
+    /**
+     * Models currently being downloaded, keyed by model name.
+     *
+     * WHY: there was no re-entrancy guard, so a second tap on Download started a SECOND transfer of
+     * the same model. Two writers then raced for one staging file and progress jumped between them -
+     * the same duplicate-download bug seen with the MaiK on-device model. voice.js hides its Download
+     * button on tap, but renderModels() rebuilds the cards from scratch and restores that button
+     * mid-transfer, so the UI alone cannot be trusted to prevent it. The guard belongs HERE, where no
+     * UI path can bypass it.
+     */
+    private static final java.util.Set<String> inFlight =
+        java.util.Collections.synchronizedSet(new java.util.HashSet<String>());
+
+    /** Is this model already downloading? Lets callers report progress instead of starting a rival. */
+    public static boolean isDownloading(String model) { return inFlight.contains(model); }
+
     public interface Progress {
         void onProgress(double p);
     }
@@ -31,6 +47,19 @@ public class ModelDownloader {
     }
 
     public String download(String urlStr) throws WhisperException {
+        // One transfer per model, full stop. A duplicate call fails fast rather than racing the
+        // in-flight one for the staging file.
+        if (!inFlight.add(model)) {
+            throw new WhisperException(WhisperErr.MODEL_DOWNLOAD_FAILED, "already downloading");
+        }
+        try {
+            return downloadLocked(urlStr);
+        } finally {
+            inFlight.remove(model);
+        }
+    }
+
+    private String downloadLocked(String urlStr) throws WhisperException {
         // Refuse to start if there's clearly not enough room (~2x model headroom).
         if (ModelStore.availableBytes(context) < 400L * 1024 * 1024) {
             throw new WhisperException(WhisperErr.INSUFFICIENT_STORAGE);

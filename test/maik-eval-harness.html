@@ -1,0 +1,39 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>MaiK eval harness (real KB + grounding)</title>
+<script>
+  // flags MaiK reads (defaults are on, but be explicit so the harness is deterministic)
+  try { localStorage.setItem("smd_ai", "1"); localStorage.setItem("smd_maik_symptoms", "1"); } catch (e) {}
+  window.__evalReady = false; window.__evalErr = "";
+</script>
+<!-- Load the REAL KB + engine, in order (no defer — the eval needs them ready synchronously-ish). -->
+<script src="/kb/dist/kb.core.js"></script>
+<script src="/kb/dist/kb.enrichment.js"></script>
+<script src="/kb/dist/kb.enrichment.2.js"></script>
+<script src="/kb/dist/kb.rag.js"></script>
+<script src="/kb/dist/kb.clinical.js"></script>
+<script src="/kb/ai/maik-symptoms.js"></script>
+<script src="/kb/ai/steward-ai.browser.js"></script>
+<script src="/kb/ai/maik-kb.js"></script>
+</head><body>
+<script>
+  // Run one query through the REAL path: StewardRAG.buildPackage (grounding) -> MaiKKB.compose.
+  // Returns the resolved topic + mode + a text snippet so the driver can assert on real answers.
+  window.__evalQuery = function (q) {
+    return Promise.resolve().then(function () {
+      return (window.StewardRAG && StewardRAG.ready) ? StewardRAG.ready() : true;
+    }).then(function () {
+      return (window.StewardRAG && StewardRAG.buildPackage) ? StewardRAG.buildPackage({}, { question: q }) : {};
+    }).then(function (pkg) {
+      var r = window.MaiKKB && MaiKKB.compose ? MaiKKB.compose(q, pkg || {}, {}) : null;
+      var g = pkg && pkg.grounding && pkg.grounding[0] ? pkg.grounding[0].name : null;
+      return r ? { topic: r.disease || "", mode: r.mode || "", grounded: g, text: String(r.text || "").slice(0, 500) } : { topic: null, grounded: g };
+    }).catch(function (e) { return { error: String((e && e.message) || e) }; });
+  };
+  // signal ready once the engine object exists
+  (function poll(n) {
+    if (window.MaiKKB && window.StewardRAG) { window.__evalReady = true; return; }
+    if (n > 100) { window.__evalErr = "engine not loaded"; return; }
+    setTimeout(function () { poll(n + 1); }, 50);
+  })(0);
+</script>
+</body></html>

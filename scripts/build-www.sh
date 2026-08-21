@@ -82,6 +82,10 @@ done
 [ -d kb/protocols ] && cp -R kb/protocols/. "$WWW/kb/protocols/"
 # ONCOTREE navigator graphs (static JSON; same trust tier as kb/protocols).
 [ -d kb/oncotree ] && mkdir -p "$WWW/kb/oncotree" && cp -R kb/oncotree/. "$WWW/kb/oncotree/"
+# Oncology reference catalogs: AJCC/TNM staging index, CTCAE catalog, irAE (IO toxicity) catalog -
+# fetched at runtime by onco-staging.js / onco-ctcae.js / onco-iotox.js. (Was missing -> those views
+# rendered empty on the device because the data never reached www/.)
+[ -d kb/onco ] && mkdir -p "$WWW/kb/onco" && cp -R kb/onco/. "$WWW/kb/onco/"
 # MaiK Ask clinical pathways (fetched at runtime by pathways.js SMD_PATHWAYS.loadAll)
 # RadioAnatome: ship the JSON but NOT the .webp slices -- those stay on Pages and
 # atlas.js rewrites their URLs natively, mirroring kardiox-screens.js kxImg().

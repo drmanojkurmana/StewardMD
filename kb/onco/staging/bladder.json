@@ -1,0 +1,238 @@
+{
+  "site": "bladder",
+  "name": "Bladder (urothelial)",
+  "system": "Oncology / Bladder (urothelial)",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Public 8th edition references (American Cancer Society staging summary and standard 8th edition bladder TNM); Medscape staging article was paywalled",
+      "provenance": "8th edition urothelial (bladder) carcinoma TNM, rewritten in original wording from criteria published on public references (cancer.org and standard 8th edition bladder staging) after the Medscape article returned a paywall; invasion criteria, node criteria, and stage mappings preserved exactly. Interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to urothelial (bladder) carcinoma. The pivotal distinction is between non-muscle-invasive disease (Ta, Tis, T1) and muscle-invasive disease (T2 and higher). The T category tracks progressive invasion from the urothelial lining (Ta/Tis) through the lamina propria (T1), the inner and outer muscularis propria (T2a/T2b), perivesical fat (T3a microscopic, T3b macroscopic), and adjacent organs or the pelvic/abdominal wall (T4a/T4b).\n\nNodal disease is graded by the number and location of involved nodes: true-pelvis nodes are N1 (single) or N2 (multiple), common iliac nodes are N3, and M1 is split into distant nodal (M1a) and non-nodal (M1b) metastasis. 8th edition retained this framework from the 7th Edition; the main practical nuance is that any node above the aortic bifurcation is distant (M1a) rather than regional.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Ta",
+          "label": "Non-invasive papillary carcinoma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Urothelial carcinoma in situ: flat, non-invasive high-grade tumor confined to the urothelium",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumor invades the subepithelial connective tissue (lamina propria)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumor invades the muscularis propria (detrusor muscle)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Tumor invades the superficial (inner half of the) muscularis propria",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Tumor invades the deep (outer half of the) muscularis propria",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumor invades perivesical soft tissue",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a",
+          "label": "Tumor invades perivesical soft tissue microscopically",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b",
+          "label": "Tumor invades perivesical soft tissue macroscopically (extravesical mass)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumor invades any of: prostatic stroma, seminal vesicles, uterus, vagina, pelvic wall, or abdominal wall",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Tumor invades the prostatic stroma, seminal vesicles, uterus, or vagina",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Tumor invades the pelvic wall or abdominal wall",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in a single regional node in the true pelvis (perivesical, obturator, internal or external iliac, or sacral node)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in multiple regional nodes in the true pelvis (perivesical, obturator, internal or external iliac, or sacral nodes)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Metastasis in a common iliac lymph node or nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Distant metastasis limited to lymph nodes beyond the common iliac nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Non-lymph-node distant metastasis (for example bone, liver, lung)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0a",
+          "t": "Ta",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Non-invasive papillary carcinoma.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "0is",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Carcinoma in situ.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "I",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Invades lamina propria, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Invades superficial muscularis propria, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "II",
+          "t": "T2b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Invades deep muscularis propria, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3a/T3b/T4a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Perivesical or adjacent-organ extension, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1/T2/T3/T4a",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Single true-pelvis node with T1 to T4a primary.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T1/T2/T3/T4a",
+          "n": "N2 or N3",
+          "m": "M0",
+          "basis": "Multiple true-pelvis nodes or common iliac nodes with T1 to T4a primary.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4b",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Invasion of pelvic or abdominal wall.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1a",
+          "basis": "Distant nodal metastasis beyond the common iliac nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1b",
+          "basis": "Non-nodal distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the true-pelvis nodes: perivesical, obturator, internal iliac (hypogastric), external iliac, and presacral/sacral nodes, along with the common iliac nodes. Single true-pelvis node involvement is N1, multiple true-pelvis nodes is N2, and common iliac node involvement is N3. Nodes above the aortic bifurcation are distant metastasis (M1a).",
+      "histologicGrade": "Urothelial carcinoma is graded as low-grade or high-grade under the WHO 2004/2016 two-tier system (the older WHO 1973 grade 1 to 3 scheme may still be reported). Carcinoma in situ (Tis) is by definition high-grade.",
+      "histopathologicTypes": "Most bladder cancers are urothelial (transitional cell) carcinomas. Recognized aggressive variants include micropapillary, nested, plasmacytoid, sarcomatoid, and urothelial carcinoma with squamous or glandular differentiation. Pure squamous cell carcinoma, adenocarcinoma, and small cell (neuroendocrine) carcinoma also occur and carry distinct prognoses.",
+      "prognosticFactors": [
+        "Depth of invasion, especially non-muscle-invasive (Ta/Tis/T1) vs muscle-invasive (T2 and higher)",
+        "Histologic grade (low vs high)",
+        "Presence of concurrent carcinoma in situ",
+        "Regional node status and location (true pelvis vs common iliac)",
+        "Lymphovascular invasion",
+        "Variant (non-conventional) histology",
+        "Tumor multifocality and size",
+        "Response to intravesical therapy in non-muscle-invasive disease"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

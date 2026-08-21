@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>OPD doctor-app live-drive harness</title>
+<link rel="stylesheet" href="/queue.css">
+<style>html,body{margin:0;height:100%;background:#f7f9fb}</style>
+</head><body>
+<script>
+// ---- error capture (sync + async) ----
+window.__errs = [];
+window.addEventListener("error", function (e) { window.__errs.push("error: " + (e && (e.message || (e.error && e.error.message) || e.error) || "?")); });
+window.addEventListener("unhandledrejection", function (e) { window.__errs.push("reject: " + (e && e.reason && (e.reason.message || e.reason) || "?")); });
+window.__toasts = [];
+window.toast = function (m) { window.__toasts.push(String(m)); };
+window.confirm = function () { return true; };            // auto-confirm destructive prompts
+// openAdd() drives four prompts; feed canned answers so the add-patient path runs.
+window.__prompts = []; window.prompt = function (q) { window.__prompts.push(String(q)); if (/name/i.test(q)) return "Test Patient"; if (/number|mrn/i.test(q)) return "MR123"; if (/mobile/i.test(q)) return "9999999999"; if (/visit/i.test(q)) return "new"; return "x"; };
+// opd-emr.js isn't loaded in this harness; stub OPDEMR so assess/EMR buttons exercise the real handler path.
+window.OPDEMR = { openProfile: function (o) { window.__lastOpen = o; }, open: function (o) { window.__lastOpen = o; } };
+window.SMD_QUEUE_FLAGS = { on: function () { return true; }, bool: function (k) {
+  // emrOn true so EMR buttons render; queue_import ON is fine (poll import path guarded by ghisToken)
+  return true;
+} };
+
+// ---- fixed clock so ETA/wait math is deterministic ----
+var NOW = 1700000000000;
+
+function tickets() {
+  return [
+    { id: "t1", name: "Ramesh Kumar", status: "waiting",         registeredAt: NOW - 1800000, priority: 0, visitType: "new" },
+    { id: "t2", name: "Sita Devi",    status: "called",          registeredAt: NOW - 1200000, priority: 0, visitType: "followup", ghisPatientId: "P00123" },
+    { id: "t3", name: "Arjun Rao",    status: "in_consultation", registeredAt: NOW - 900000,  priority: 0, visitType: "new", consultStartAt: NOW - 300000, calledAt: NOW - 600000 },
+    { id: "t4", name: "Lakshmi N",    status: "waiting",         registeredAt: NOW - 600000,  priority: 2, visitType: "new" }
+  ];
+}
+function session() { return { id: "sess1", doctorName: "Dr Test", status: "active", doctorStatus: "consulting", currentTicketId: "t3" }; }
+
+// ---- mock every backend the doctor app hits; log paths for coverage ----
+window.__fetched = [];
+window.fetch = function (url, opts) {
+  url = String(url); window.__fetched.push((opts && opts.method || "GET") + " " + url);
+  function J(o) { return Promise.resolve({ ok: true, status: 200, json: function () { return Promise.resolve(o); } }); }
+  // personal-clinic flow
+  if (url.indexOf("/orgs") >= 0)      return J({ ok: true, orgs: [
+    { id: "org1", name: "Test Clinic", code: "CLN", mode: "clinic" },
+    { id: "h1",   name: "City Hospital", code: "CTY", mode: "connect", connectorId: "hapi" }
+  ] });
+  if (url.indexOf("/my-room") >= 0)   return J({ ok: true, resolved: true, session: session(), tickets: tickets(), room: { name: "Room 1", number: "1", department: "General Medicine" } });
+  if (url.indexOf("/list") >= 0)      return J({ ok: true, tickets: tickets(), session: session() });
+  if (url.indexOf("/org?") >= 0 || /\/org$/.test(url.split("?")[0])) return J({ ok: true, org: { code: "SMD-CLN001", name: "Test Clinic" } });
+  if (url.indexOf("/members") >= 0)   return J({ ok: true, members: [
+    { id: "m1", identity: "nurse1", role: "nurse",   hasPin: true,  active: true },
+    { id: "m2", identity: "front1", role: "reception", hasPin: false, active: true }
+  ] });
+  if (url.indexOf("/member") >= 0)    return J({ ok: true });   // add / pin / remove
+  if (url.indexOf("/analytics") >= 0) return J({ ok: true, analytics: { total: 4, waiting: 2, completed: 1, noShow: 0, cancelled: 0, avgWaitMin: 8, avgConsultMin: 11, etaAccuracyPct: 82, peakHours: [{ h: 10, count: 3 }, { h: 11, count: 1 }] } });
+  if (url.indexOf("/config") >= 0)    return J({ ok: true, config: { early: 5, prep: 2, noShowTimeoutMin: 10, defaultConsultMin: 12, etaLearning: true, smsEnabled: true, waEnabled: false, lateArrivalSlots: 3 } });
+  // status / priority / advance / session/status / add
+  return J({ ok: true, session: session(), tickets: tickets() });
+};
+window.__ready = false;
+</script>
+<script src="/queue.js" onload="window.__ready = !!(window.QUEUE && window.QUEUE.open)"></script>
+</body></html>

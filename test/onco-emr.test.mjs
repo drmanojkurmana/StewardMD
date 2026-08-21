@@ -32,11 +32,14 @@ function makeFakeIO() {
   return { io, docs, events };
 }
 
-// A fully-activatable RCHOP-shaped template (computable doses + core evidence + clearance + no VERIFY).
+// A fully-activatable RCHOP-shaped template (computable doses + core evidence + clearance + no VERIFY +
+// active/non-experimental so it clears the Phase-F activation gate; the on-disk protocol is still draft).
 const FULL = Object.assign({}, RCHOP, {
   clearanceChecks: ["CBC/platelets", "renal"],
   evidence: { core: [{ layer: "core", source: "DeVita 12th ed", evidenceStatus: "current" }] },
   verifyFields: [],
+  experimental: false,
+  lifecycleState: "active",
 });
 
 async function activePlan(io) {

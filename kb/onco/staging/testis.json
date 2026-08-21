@@ -1,0 +1,273 @@
+{
+  "site": "testis",
+  "name": "Testis (germ cell)",
+  "system": "Oncology / Testis",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition testicular germ cell tumour staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging applies to germ cell tumours of the testis (seminoma and nonseminoma). Unique to this site, staging combines T (usually pathologic pT, since the primary is assessed after radical orchiectomy), N, M, AND a serum tumour marker category S based on LDH, hCG, and AFP; because S is required to assign the prognostic stage groups, it is referenced in every stage row below.\n\nThe key nuance is that marker values for the S category should be the post-orchiectomy levels, drawn and interpreted with respect to their normal half-life decay; pre-orchiectomy markers are recorded but the S grouping uses the nadir/post-orchiectomy values, and LDH cut-offs are expressed as multiples of the institutional upper limit of normal (N). Persistent marker elevation after orchiectomy with no nodal or distant disease defines stage IS, and marker level (S1 to S3) further subdivides metastatic stage III. The IGCCCG risk classification (good/intermediate/poor) is used alongside TNMS for treatment planning.",
+      "t": [
+        {
+          "code": "pTX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pTis",
+          "label": "Germ cell neoplasia in situ (GCNIS)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT1",
+          "label": "Tumour limited to the testis (may include rete testis invasion) without lymphovascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT1a",
+          "label": "Pure seminoma only: tumour < 3 cm in size (subcategory applies only to pure seminoma)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT1b",
+          "label": "Pure seminoma only: tumour >= 3 cm in size (subcategory applies only to pure seminoma)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT2",
+          "label": "Tumour limited to the testis (with rete testis invasion) WITH lymphovascular invasion, OR tumour invading hilar soft tissue or the epididymis, or penetrating the visceral mesothelial layer covering the external surface of the tunica albuginea, with or without lymphovascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT3",
+          "label": "Tumour directly invades the spermatic cord soft tissue, with or without lymphovascular invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "pT4",
+          "label": "Tumour invades the scrotum, with or without lymphovascular invasion",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Clinical: nodal mass <= 2 cm, or multiple nodes none > 2 cm. (Pathologic pN1: metastasis in <= 5 nodes, none > 2 cm.)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Clinical: nodal mass > 2 cm but <= 5 cm, or multiple nodes any one > 2 cm but <= 5 cm. (Pathologic pN2: nodal mass > 2 cm but <= 5 cm; or > 5 positive nodes none > 5 cm; or extranodal extension.)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Clinical: nodal mass > 5 cm. (Pathologic pN3: nodal mass > 5 cm.)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Non-retroperitoneal nodal metastasis or pulmonary metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Non-pulmonary visceral metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "s": [
+        {
+          "code": "SX",
+          "label": "Serum marker studies not available or not performed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "S0",
+          "label": "Serum marker levels all within normal limits",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "S1",
+          "label": "LDH < 1.5 x N AND hCG < 5,000 mIU/mL AND AFP < 1,000 ng/mL",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "S2",
+          "label": "LDH 1.5 to 10 x N OR hCG 5,000 to 50,000 mIU/mL OR AFP 1,000 to 10,000 ng/mL",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "S3",
+          "label": "LDH > 10 x N OR hCG > 50,000 mIU/mL OR AFP > 10,000 ng/mL",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "pTis",
+          "n": "N0",
+          "m": "M0",
+          "s": "S0",
+          "basis": "Germ cell neoplasia in situ, node-negative, no metastasis, normal markers.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "pT1",
+          "n": "N0",
+          "m": "M0",
+          "s": "S0",
+          "basis": "Tumour limited to testis without lymphovascular invasion, node-negative, normal markers.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "pT2 to pT4",
+          "n": "N0",
+          "m": "M0",
+          "s": "S0",
+          "basis": "More locally advanced primary (pT2, pT3, or pT4), node-negative, normal markers.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IS",
+          "t": "Any pT/TX",
+          "n": "N0",
+          "m": "M0",
+          "s": "S1 to S3",
+          "basis": "Persistently elevated serum markers after orchiectomy with no nodal or distant disease.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "Any pT/TX",
+          "n": "N1",
+          "m": "M0",
+          "s": "S0 or S1",
+          "basis": "Small-volume retroperitoneal nodal disease, no metastasis, markers S0 or S1.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "Any pT/TX",
+          "n": "N2",
+          "m": "M0",
+          "s": "S0 or S1",
+          "basis": "Intermediate-volume nodal disease, no metastasis, markers S0 or S1.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIC",
+          "t": "Any pT/TX",
+          "n": "N3",
+          "m": "M0",
+          "s": "S0 or S1",
+          "basis": "Bulky nodal disease (> 5 cm), no metastasis, markers S0 or S1.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "Any pT/TX",
+          "n": "Any N",
+          "m": "M1a",
+          "s": "S0 or S1",
+          "basis": "Non-retroperitoneal nodal or pulmonary metastasis with markers S0 or S1.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "Any pT/TX",
+          "n": "N1 to N3",
+          "m": "M0",
+          "s": "S2",
+          "basis": "Nodal disease with intermediate marker elevation (S2), no distant metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "Any pT/TX",
+          "n": "Any N",
+          "m": "M1a",
+          "s": "S2",
+          "basis": "Non-retroperitoneal nodal or pulmonary metastasis with marker elevation S2.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "Any pT/TX",
+          "n": "N1 to N3",
+          "m": "M0",
+          "s": "S3",
+          "basis": "Nodal disease with high marker elevation (S3), no distant metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "Any pT/TX",
+          "n": "Any N",
+          "m": "M1a",
+          "s": "S3",
+          "basis": "Non-retroperitoneal nodal or pulmonary metastasis with high marker elevation S3.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "Any pT/TX",
+          "n": "Any N",
+          "m": "M1b",
+          "s": "Any S",
+          "basis": "Non-pulmonary visceral metastasis, any marker level.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the retroperitoneal (para-aortic/periaortic, precaval, interaortocaval, paracaval, preaortic, retrocaval, and retroaortic) nodes, plus intrapelvic and, after scrotal or inguinal surgery, inguinal nodes. Clinical N grades nodal disease by mass size (N1 <= 2 cm, N2 > 2 to <= 5 cm, N3 > 5 cm); pathologic pN also counts positive nodes and notes extranodal extension.",
+      "histologicGrade": "Germ cell tumours are not assigned a numeric grade; classification is by histologic type (seminoma vs nonseminoma) and the specific component tumours present.",
+      "histopathologicTypes": "Seminoma (pure). Nonseminomatous germ cell tumours: embryonal carcinoma, yolk sac tumour, choriocarcinoma, teratoma (mature/immature/with somatic-type malignancy), and mixed germ cell tumours. Spermatocytic tumour is a distinct entity.",
+      "prognosticFactors": [
+        "Serum tumour marker levels after orchiectomy (S category: LDH, hCG, AFP)",
+        "Histology (seminoma vs nonseminoma)",
+        "Site of primary (testicular/retroperitoneal vs mediastinal, the latter worse)",
+        "Presence and site of visceral (non-pulmonary) metastasis",
+        "Bulk/volume of retroperitoneal nodal disease",
+        "IGCCCG risk classification (good/intermediate/poor)",
+        "Lymphovascular invasion in the primary"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

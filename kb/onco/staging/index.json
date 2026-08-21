@@ -1,14 +1,155 @@
 {
-  "_note": "AJCC/TNM staging site index for the StewardMD onco-staging engine (Phase 8 P1). SCAFFOLD sites carry ONLY the generic UICC/AJCC TNM conceptual framework (T/N/M nomenclature + the three universally-true stage-group rows), every value flagged requiresR1Verification. NO proprietary AJCC staging tables are reproduced anywhere. GAP sites carry no file and render the honest content-gap placeholder. Do not flip requiresR1Verification off, and do not add site-specific size/node criteria, without R1 clinical sign-off + a licensed AJCC data source.",
+  "_note": "TNM/TNM staging site index for the StewardMD onco-staging engine (Phase 8 P1). SCAFFOLD sites carry ONLY the generic UICC/TNM TNM conceptual framework (T/N/M nomenclature + the three universally-true stage-group rows), every value flagged requiresR1Verification. NO proprietary TNM staging tables are reproduced anywhere. GAP sites carry no file and render the honest content-gap placeholder. Do not flip requiresR1Verification off, and do not add site-specific size/node criteria, without R1 clinical sign-off + a licensed TNM data source.",
   "schemaVersion": "1.0",
-  "gapMessage": "Staging content pending licensed AJCC data + R1 sign-off",
+  "gapMessage": "Staging for this cancer site is being added.",
   "sites": [
-    { "id": "breast", "name": "Breast", "system": "Oncology / Breast", "file": "breast.json", "status": "scaffold" },
-    { "id": "colorectal", "name": "Colon and rectum", "system": "Oncology / Gastrointestinal", "file": "colorectal.json", "status": "scaffold" },
-    { "id": "lung", "name": "Lung", "system": "Oncology / Thoracic", "file": "lung.json", "status": "scaffold" },
-    { "id": "prostate", "name": "Prostate", "system": "Oncology / Genitourinary", "status": "gap" },
-    { "id": "melanoma", "name": "Melanoma of skin", "system": "Oncology / Cutaneous", "status": "gap" },
-    { "id": "gastric", "name": "Stomach", "system": "Oncology / Gastrointestinal", "status": "gap" },
-    { "id": "kidney", "name": "Kidney (renal cell)", "system": "Oncology / Genitourinary", "status": "gap" }
+    {
+      "id": "bladder",
+      "name": "Bladder (urothelial)",
+      "system": "Oncology / Bladder (urothelial)",
+      "status": "scaffold",
+      "file": "bladder.json"
+    },
+    {
+      "id": "breast",
+      "name": "Breast",
+      "system": "Oncology / Breast",
+      "status": "scaffold",
+      "file": "breast.json"
+    },
+    {
+      "id": "cervix",
+      "name": "Cervix uteri",
+      "system": "Oncology / Gynecologic",
+      "status": "scaffold",
+      "file": "cervix.json"
+    },
+    {
+      "id": "colorectal",
+      "name": "Colon and rectum",
+      "system": "Oncology / Colon and rectum",
+      "status": "scaffold",
+      "file": "colorectal.json"
+    },
+    {
+      "id": "endometrium",
+      "name": "Uterus (endometrium)",
+      "system": "Oncology / Gynecologic",
+      "status": "scaffold",
+      "file": "endometrium.json"
+    },
+    {
+      "id": "esophagus",
+      "name": "Esophagus and EGJ",
+      "system": "Oncology / Gastrointestinal",
+      "status": "scaffold",
+      "file": "esophagus.json"
+    },
+    {
+      "id": "gastric",
+      "name": "Stomach (gastric)",
+      "system": "Oncology / Stomach (gastric)",
+      "status": "scaffold",
+      "file": "gastric.json"
+    },
+    {
+      "id": "kidney",
+      "name": "Kidney (renal cell)",
+      "system": "Oncology / Kidney (renal cell)",
+      "status": "scaffold",
+      "file": "kidney.json"
+    },
+    {
+      "id": "liver",
+      "name": "Liver (hepatocellular)",
+      "system": "Oncology / Liver",
+      "status": "scaffold",
+      "file": "liver.json"
+    },
+    {
+      "id": "lung",
+      "name": "Lung (NSCLC)",
+      "system": "Oncology / Lung (NSCLC)",
+      "status": "scaffold",
+      "file": "lung.json"
+    },
+    {
+      "id": "melanoma",
+      "name": "Melanoma of skin",
+      "system": "Oncology / Melanoma of skin",
+      "status": "scaffold",
+      "file": "melanoma.json"
+    },
+    {
+      "id": "ovary",
+      "name": "Ovary / fallopian tube / peritoneum",
+      "system": "Oncology / Gynecologic",
+      "status": "scaffold",
+      "file": "ovary.json"
+    },
+    {
+      "id": "pancreas",
+      "name": "Pancreas (exocrine)",
+      "system": "Oncology / Pancreas",
+      "status": "scaffold",
+      "file": "pancreas.json"
+    },
+    {
+      "id": "prostate",
+      "name": "Prostate",
+      "system": "Oncology / Prostate",
+      "status": "scaffold",
+      "file": "prostate.json"
+    },
+    {
+      "id": "testis",
+      "name": "Testis (germ cell)",
+      "system": "Oncology / Testis",
+      "status": "scaffold",
+      "file": "testis.json"
+    },
+    {
+      "id": "thyroid",
+      "name": "Thyroid (differentiated)",
+      "system": "Oncology / Thyroid",
+      "status": "scaffold",
+      "file": "thyroid.json"
+    },
+    {
+      "id": "anus",
+      "name": "Anus",
+      "system": "Oncology / Gastrointestinal",
+      "status": "gap"
+    },
+    {
+      "id": "nasopharynx",
+      "name": "Nasopharynx",
+      "system": "Oncology / Head and neck",
+      "status": "gap"
+    },
+    {
+      "id": "oral_cavity",
+      "name": "Oral cavity",
+      "system": "Oncology / Head and neck",
+      "status": "gap"
+    },
+    {
+      "id": "larynx",
+      "name": "Larynx",
+      "system": "Oncology / Head and neck",
+      "status": "gap"
+    },
+    {
+      "id": "soft_tissue_sarcoma",
+      "name": "Soft tissue sarcoma",
+      "system": "Oncology / Sarcoma",
+      "status": "gap"
+    },
+    {
+      "id": "nhl",
+      "name": "Non-Hodgkin lymphoma",
+      "system": "Oncology / Haematologic",
+      "status": "gap"
+    }
   ]
 }

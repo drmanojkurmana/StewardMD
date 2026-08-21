@@ -14,8 +14,8 @@
  *   - Protocols                       -> kb/protocols/index.json (id/name/lifecycleState metadata
  *     only) + window.OPDEMR.openProfile({tab:"onco"}) for the patient-scoped treatment-plan matrix
  *     (onco-protocols.js) — protocols are per-patient, so this needs a Ward Sync patient selected.
- *   - AJCC/TNM Staging, CTCAE, IO Toxicity -> NOT built yet (P1/P2). Rendered as labelled
- *     placeholders, never fabricated tables.
+ *   - TNM cancer staging, CTCAE, IO toxicity -> full modules; sites/content not yet added render as
+ *     labelled honest gaps, never fabricated tables.
  *
  * Search is a pure, deterministic function (substring + a small abbreviation map) — NO LLM ever
  * decides a dose/stage/score here. Flag: smd_onco_home (queue-flags.js), default OFF.
@@ -25,6 +25,8 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
+  // Material Symbols Rounded, self-hosted (never emoji). The shared onco-home.css styles these spans.
+  function ms(name) { return '<span class="material-symbols-rounded">' + name + "</span>"; }
 
   /* ==========================================================================================
    * Deterministic query expansion — a small oncology abbreviation/synonym map. Most KB entries
@@ -94,14 +96,15 @@
 
   // Protocol metadata only (id/name/diseaseId/lifecycleState) — the actual template content
   // (drugs/doses) lives server-side and is never fetched/duplicated here.
-  var _protocols = [];
+  var _protocols = [], _protoLoaded = false;
   function loadProtocols() {
-    if (!G.fetch) return;
+    if (!G.fetch) { _protoLoaded = true; return; }
     try {
       G.fetch("/kb/protocols/index.json").then(function (r) { return (r && r.ok) ? r.json() : null; })
-        .then(function (j) { var all = (j && (j.protocols || j)) || []; if (!(all instanceof Array)) all = []; _protocols = flag("smd_onco_protolib") ? all : all.filter(function (p) { return !(p && p.experimental); }); })
-        .catch(function () {});
-    } catch (e) {}
+        .then(function (j) { var all = (j && (j.protocols || j)) || []; if (!(all instanceof Array)) all = []; _protocols = all; })   // show the full library; each row carries a lifecycle/DRAFT badge, and the detail view is labelled reference-only (was filtered to non-experimental -> looked empty since 123/124 are experimental)
+        .catch(function () {})
+        .then(function () { _protoLoaded = true; renderResults(); });   // resolve any skeleton once the index arrives
+    } catch (e) { _protoLoaded = true; }
   }
 
   /* ==========================================================================================
@@ -155,7 +158,7 @@
     if (!favOn()) return "";
     st.favIndex[item.id] = item;
     var on = false; try { on = G.SMD_ONCOFAV.has(item.id); } catch (e) {}
-    return '<button class="oh-star' + (on ? " on" : "") + '" data-oh-fav="' + esc(item.id) + '" aria-label="' + (on ? "Remove favourite" : "Add favourite") + '">' + (on ? "★" : "☆") + "</button>";
+    return '<button class="oh-star' + (on ? " on" : "") + '" data-oh-fav="' + esc(item.id) + '" aria-label="' + (on ? "Remove favourite" : "Add favourite") + '">' + ms("star") + "</button>";
   }
   // Wrap navigational HTML with a star sibling (never nested inside the button) when favorites is on.
   function wrapStar(inner, item, cls) { var s = starHtml(item); return s ? '<div class="' + (cls || "oh-star-row") + '">' + inner + s + "</div>" : inner; }
@@ -166,24 +169,14 @@
   }
   function favSection() {
     if (!favOn()) return "";
-    var favs = [], recents = [];
+    var favs = [];
     try { favs = G.SMD_ONCOFAV.all() || []; } catch (e) {}
-    try { recents = G.SMD_ONCOFAV.recent() || []; } catch (e) {}
-    if (!favs.length && !recents.length) return "";
-    var out = "";
-    if (favs.length) out += '<div class="oh-grp"><div class="oh-grp-h">Favourites</div><div class="oh-favlist">' + favs.map(favRowHtml).join("") + "</div></div>";
-    if (recents.length) out += '<div class="oh-grp"><div class="oh-grp-h">Recent</div><div class="oh-favlist">' + recents.map(favRowHtml).join("") + "</div></div>";
-    return out;
+    if (!favs.length) return "";
+    return '<div class="oh-grp"><div class="oh-grp-h">Favourites</div><div class="oh-favlist">' + favs.map(favRowHtml).join("") + "</div></div>";
   }
   function toggleFav(id) {
     try { if (G.SMD_ONCOFAV) G.SMD_ONCOFAV.toggle(st.favIndex[id] || { id: id, label: id, act: "" }); } catch (e) {}
     renderResults();
-  }
-  function recordRecent(b, act) {
-    if (!favOn() || !act) return;
-    var labelEl = b && b.querySelector ? (b.querySelector(".oh-card-t") || b.querySelector(".oh-row-t") || b.querySelector(".oh-favchip-t")) : null;
-    var label = labelEl ? labelEl.textContent : (b && b.textContent) || act;
-    try { G.SMD_ONCOFAV.record({ id: act, label: String(label || act).trim(), act: act }); } catch (e) {}
   }
 
   function flagOn() { try { return !!(G.SMD_QUEUE_FLAGS && G.SMD_QUEUE_FLAGS.bool && G.SMD_QUEUE_FLAGS.bool("smd_onco_home")); } catch (e) { return false; } }
@@ -235,15 +228,18 @@
   function evForCalc(c) { try { return (G.SMD_ONCOEV && G.SMD_ONCOEV.forCalculator) ? G.SMD_ONCOEV.forCalculator({ id: c.id, title: c.title, cat: c.cat, interpretation: c.desc }) : ""; } catch (e) { return ""; } }
   function evForDisease(d) { try { return (G.SMD_ONCOEV && G.SMD_ONCOEV.forDisease) ? G.SMD_ONCOEV.forDisease(d) : ""; } catch (e) { return ""; } }
 
+  // Loading + empty presentation (shared): shimmering skeleton rows, and an iconful empty state.
+  function skelRows(n) { var s = ""; for (var i = 0; i < (n || 5); i++) s += '<div class="oh-skel"></div>'; return s; }
+  function emptyHtml(icon, text) { return '<div class="oh-empty">' + ms(icon) + "<span>" + esc(text) + "</span></div>"; }
   function resultSection(label, itemsHtml) { return itemsHtml ? '<div class="oh-sec"><div class="oh-sec-h">' + esc(label) + "</div>" + itemsHtml + "</div>" : ""; }
   function calcRowHtml(c) { var inner = '<button class="oh-row" data-oh-act="calc:' + esc(c.id) + '"><span class="oh-row-t">' + esc(c.title) + '</span><span class="oh-row-s">' + esc(c.cat || "") + "</span>" + evForCalc(c) + "</button>"; return wrapStar(inner, { id: "calc:" + c.id, label: c.title, act: "calc:" + c.id }, "oh-star-row"); }
   function diseaseRowHtml(d) { var inner = '<button class="oh-row" data-oh-act="kb:' + esc(d.id) + '"><span class="oh-row-t">' + esc(d.name) + '</span><span class="oh-row-s">' + esc(d.system || "") + "</span>" + evForDisease(d) + "</button>"; return wrapStar(inner, { id: "kb:" + d.id, label: d.name, act: "kb:" + d.id }, "oh-star-row"); }
   function drugRowHtml(d) { return '<button class="oh-row" data-oh-act="drug-browse"><span class="oh-row-t">' + esc(d.generic) + '</span><span class="oh-row-s">' + esc(d.cls || "") + "</span></button>"; }
-  function protocolRowHtml(p) { return '<button class="oh-row" data-oh-act="protocol-open"><span class="oh-row-t">' + esc(p.name || p.id) + '</span><span class="oh-row-s">' + esc(p.lifecycleState || "") + "</span></button>"; }
+  function protocolRowHtml(p) { return '<button class="oh-row" data-oh-act="protodetail:' + esc(p.id) + '"><span class="oh-row-t">' + esc(p.name || p.id) + '</span><span class="oh-row-s">' + esc(p.lifecycleState || "") + "</span></button>"; }
 
   function searchResultsHtml(r) {
     var any = r.calculators.length || r.diseases.length || r.drugs.length || r.protocols.length;
-    if (!any) return '<div class="oh-empty">No matches. Try a drug name, a calculator (e.g. Khorana), or a disease/abbreviation (e.g. NSCLC).</div>';
+    if (!any) return emptyHtml("search_off", "No matches. Try a drug name, a calculator (e.g. Khorana), or a disease/abbreviation (e.g. NSCLC).");
     return resultSection("Calculators & Scores", r.calculators.map(calcRowHtml).join("")) +
       resultSection("Diseases", r.diseases.map(diseaseRowHtml).join("")) +
       resultSection("Drugs", r.drugs.map(drugRowHtml).join("")) +
@@ -252,57 +248,56 @@
 
   function quickActionsHtml() {
     return '<div class="oh-quick">' +
-      '<button class="oh-qa" data-oh-act="calc-cat">Calculators</button>' +
-      '<button class="oh-qa" data-oh-act="drug-browse">Drugs</button>' +
-      '<button class="oh-qa" data-oh-act="drug-interactions">Interactions</button>' +
-      '<button class="oh-qa" data-oh-act="protocol-open">Protocols</button>' +
+      '<button class="oh-qa" data-oh-act="calc-cat">' + ms("calculate") + "Calculators</button>" +
+      '<button class="oh-qa" data-oh-act="drug-browse">' + ms("pill") + "Drugs</button>" +
+      '<button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + "Interactions</button>" +
+      '<button class="oh-qa" data-oh-act="protocol-open">' + ms("clinical_notes") + "Protocols</button>" +
       "</div>";
   }
 
   var GRID = [
     { group: "Diagnosis & Staging", cards: [
-      { title: "Diseases & Knowledge Base", sub: "Oncology reference (KB)", act: "kb-browse" },
-      { title: "AJCC / TNM Staging", sub: "TNM framework + honest gaps (R1-pending)", act: "staging-open", flag: "smd_onco_staging", phSub: "Coming in P1" }
+      { title: "Diseases & knowledge base", sub: "Oncology reference (KB)", act: "kb-browse", icon: "book_2" },
+      { title: "Cancer staging (TNM)", sub: "Full TNM staging by cancer site", act: "staging-open", flag: "smd_onco_staging", icon: "stairs" }
     ] },
     { group: "Treatment", cards: [
-      { title: "Treatment-Plan Protocols", sub: "Tata-style dose matrix (per patient)", act: "protocol-open" },
-      { title: "Protocol Reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref" }
+      { title: "Treatment-plan protocols", sub: "Regimens, dose calculator and printable sheet", act: "protocol-open", icon: "clinical_notes" },
+      { title: "Protocol reference", sub: "Read-only library (lifecycle badges)", act: "protoref-open", flag: "smd_onco_protoref", icon: "menu_book" }
     ] },
     { group: "Monitoring", cards: [
-      { title: "Toxicity / CTCAE", sub: "CTCAE v5.0 grading (R1-pending)", act: "ctcae-open", flag: "smd_onco_ctcae", phSub: "Coming in P2" },
-      { title: "IO Toxicity (irAE)", sub: "irAE management principles (ASCO / NCCN / SITC)", act: "iotox-open", flag: "smd_onco_iotox", phSub: "Coming in P2" }
+      { title: "Toxicity / CTCAE", sub: "CTCAE v5.0 grading", act: "ctcae-open", flag: "smd_onco_ctcae", icon: "warning" },
+      { title: "IO toxicity (irAE)", sub: "irAE management principles (ASCO / NCCN / SITC)", act: "iotox-open", flag: "smd_onco_iotox", icon: "immunology" }
     ] },
-    { group: "Response assessment", cards: [
-      { title: "RECIST 1.1", sub: "Target-lesion response calculator", act: "recist-open", flag: "smd_onco_recist", phSub: "Coming in P2" }
-    ] },
-    { group: "Medication", cards: [
-      { title: "Drug Info & Interaction", sub: "Formulary + interaction checker", act: "drug-browse" }
-    ] },
-    { group: "Prognosis", cards: [
-      { title: "Prognostic Scores", sub: "ECOG, Karnofsky, Khorana, IPI...", act: "calc-cat" }
-    ] },
-    { group: "Evidence", cards: [
-      { title: "Formulas", sub: "BSA, Calvert, Cockcroft-Gault...", act: "calc-cat" }
+    { group: "Calculators & tools", cards: [
+      { title: "RECIST 1.1", sub: "Target-lesion response calculator", act: "recist-open", flag: "smd_onco_recist", icon: "straighten" },
+      { title: "Drug info & interaction", sub: "Formulary + interaction checker", act: "drug-onco", icon: "pill" },
+      { title: "Prognostic scores", sub: "ECOG, Karnofsky, Khorana, IPI and more", act: "calc-cat", icon: "insights" },
+      { title: "Formulas", sub: "BSA, Calvert, Cockcroft-Gault and more", act: "calc-cat", icon: "function" }
     ] }
   ];
   function cardHtml(c) {
-    // A flag-gated card: when its flag is OFF, show a labelled placeholder if it has phSub, else omit
-    // entirely (never a broken/dead link). When ON, it is a real active card.
-    if (c.flag && !flag(c.flag)) {
-      if (!c.phSub) return "";
-      return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.phSub) + "</div></div>";
-    }
-    if (c.placeholder) return '<div class="oh-card oh-card-ph" aria-disabled="true"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></div>";
-    var inner = '<button class="oh-card" data-oh-act="' + esc(c.act) + '"><div class="oh-card-t">' + esc(c.title) + '</div><div class="oh-card-s">' + esc(c.sub) + "</div></button>";
+    // Flag-gated tool: render its tile ONLY when the flag is on. A flag-off (or placeholder) tool is
+    // omitted entirely — no greyed "coming soon" tile, never lead the landing with disabled cards.
+    if (c.flag && !flag(c.flag)) return "";
+    if (c.placeholder) return "";
+    var inner = '<button class="oh-card" data-oh-act="' + esc(c.act) + '">' +
+      '<span class="oh-card-ic">' + ms(c.icon || "chevron_right") + "</span>" +
+      '<div class="oh-card-body"><span class="oh-card-t">' + esc(c.title) + '</span><span class="oh-card-s">' + esc(c.sub) + "</span></div>" +
+      '<span class="oh-card-go">' + ms("chevron_right") + "</span></button>";
     return wrapStar(inner, { id: "card:" + c.act, label: c.title, act: c.act }, "oh-card-wrap");
   }
   function gridHtml() {
     return GRID.map(function (g) { return '<div class="oh-grp"><div class="oh-grp-h">' + esc(g.group) + '</div><div class="oh-grid">' + g.cards.map(cardHtml).join("") + "</div></div>"; }).join("");
   }
+  // ponytail: KB skeleton resolves on the next render, not a KB-ready event (none exists). KB is
+  // normally injected before Onco Home opens; wire a listener only if late-load shimmer is ever seen.
+  function kbLoading() { return !(G.KB_ENRICHMENT && G.KB_ENRICHMENT.byId); }
   function kbBrowseHtml() {
+    var back = '<button class="oh-back-inline" data-oh-act="kb-browse">&lsaquo; Back</button>';
+    if (kbLoading()) return back + '<div class="oh-sec-h">Oncology diseases</div>' + skelRows(6);
     var list = kbIndex();
-    return '<button class="oh-back-inline" data-oh-act="kb-browse">&lsaquo; Back</button>' +
-      '<div class="oh-sec-h">Oncology diseases (' + list.length + ")</div>" + list.map(diseaseRowHtml).join("");
+    if (!list.length) return back + emptyHtml("book_2", "No oncology entries in the knowledge base yet.");
+    return back + '<div class="oh-sec-h">Oncology diseases (' + list.length + ")</div>" + list.map(diseaseRowHtml).join("");
   }
 
   /* ---- Feature 3: oncology drug + interaction view (reuses MEDDRUGS + onco-tallman, never a new DB) ---- */
@@ -328,9 +323,9 @@
     }).join("");
     return '<button class="oh-back-inline" data-oh-act="home-dash">&lsaquo; Back</button>' +
       '<div class="oh-sec-h">Oncology drugs &amp; interactions</div>' +
-      '<div class="oh-quick"><button class="oh-qa" data-oh-act="drug-interactions">Interaction check</button><button class="oh-qa" data-oh-act="drug-formulary">Full formulary</button></div>' +
-      '<div class="oh-sec"><div class="oh-sec-h">Antineoplastic agents (tall-man names)</div>' + (tmRows || '<div class="oh-empty">Tall-man table unavailable.</div>') + tmEv + "</div>" +
-      '<div class="oh-sec"><div class="oh-sec-h">Oncology supportive care (from formulary)</div>' + (supRows || '<div class="oh-empty">No supportive-care drugs found in the formulary.</div>') + "</div>" +
+      '<div class="oh-quick"><button class="oh-qa" data-oh-act="drug-interactions">' + ms("compare_arrows") + 'Interaction check</button><button class="oh-qa" data-oh-act="drug-formulary">' + ms("medication") + "Full formulary</button></div>" +
+      '<div class="oh-sec"><div class="oh-sec-h">Antineoplastic agents (tall-man names)</div>' + (tmRows || emptyHtml("medication", "Tall-man table unavailable.")) + tmEv + "</div>" +
+      '<div class="oh-sec"><div class="oh-sec-h">Oncology supportive care (from formulary)</div>' + (supRows || emptyHtml("medication", "No supportive-care drugs found in the formulary.")) + "</div>" +
       '<div class="oh-ctx-note">Names shown for look-alike safety. Formulary doses are adult reference values, verify before use. No prescription is created here.</div>';
   }
 
@@ -341,12 +336,134 @@
   }
   function protoRefHtml() {
     var rows = (_protocols || []).map(function (p) {
-      return '<div class="oh-row oh-row-static"><span class="oh-row-t">' + esc(p.name || p.id) + " " + protoBadge(p.lifecycleState) + '</span><span class="oh-row-s">' + esc((p.diseaseId || "") + (p.version ? " · v" + p.version : "")) + "</span></div>";
+      return '<button class="oh-row" data-oh-act="protodetail:' + esc(p.id) + '"><span class="oh-row-t">' + esc(p.name || p.id) + " " + protoBadge(p.lifecycleState) + '</span><span class="oh-row-s">' + esc((p.diseaseId || "") + (p.version ? " · v" + p.version : "")) + "</span></button>";
     }).join("");
+    var body = rows || (_protoLoaded ? emptyHtml("clinical_notes", "No protocols in the reference library.") : skelRows(5));
     return '<button class="oh-back-inline" data-oh-act="home-dash">&lsaquo; Back</button>' +
-      '<div class="oh-sec-h">Protocol reference library (read-only)</div>' +
-      '<div class="oh-ctx-note" style="margin-bottom:12px">Reference only. Not for ordering or administration. Per-patient plans are built in the treatment-plan matrix.</div>' +
-      (rows || '<div class="oh-empty">Protocol index loading or unavailable.</div>');
+      '<div class="oh-sec-h">Protocol library</div>' +
+      '<div class="oh-ctx-note" style="margin-bottom:12px">Reference only. Not for ordering or administration. Tap a protocol for its full regimen, an optional patient-dose calculator and a printable sheet. No hospital or patient record needed.</div>' +
+      body;
+  }
+
+  // ---- Standalone protocol detail: full regimen from kb/protocols + an OPTIONAL patient-dose
+  // calculator (pure SMD_ONCODOSE) + a printable PDF (SMD_ONCOREPORT). Reference/educational, never an
+  // order. This is how a doctor WITHOUT a hospital reads a protocol and prints its sheet - no Ward Sync. ----
+  var _protoFull = {};
+  function loadProtoFull(id, cb) {
+    if (_protoFull[id]) { cb(_protoFull[id]); return; }
+    if (!G.fetch) { cb(null); return; }
+    G.fetch("/kb/protocols/" + encodeURIComponent(id) + ".json")
+      .then(function (r) { return (r && r.ok) ? r.json() : null; })
+      .then(function (j) { if (j) _protoFull[id] = j; cb(j || null); })
+      .catch(function () { cb(null); });
+  }
+  function openProtoDetail(id) {
+    st.mode = "protodetail"; st.detailId = id; st.detailProto = _protoFull[id] || null;
+    var c = st.ctx || {};   // seed the calculator from a Ward Sync patient when present (optional, never required)
+    st.calc = { height: c.heightCm || "", weight: c.weightKg || "", age: c.age || "", sex: c.sex || "", creatinine: c.creatinine || "" };
+    renderResults();
+    loadProtoFull(id, function (p) { if (st.mode === "protodetail" && st.detailId === id) { st.detailProto = p; renderResults(); } });
+  }
+  // dose-engine params (height/weight/... names) from the calc form; null when not entered (never invented)
+  function calcFromForm() {
+    function num(id) { var el = document.getElementById(id); var v = el ? parseFloat(el.value) : NaN; return isFinite(v) ? v : ""; }
+    var sx = document.getElementById("ocSex");
+    return { height: num("ocHt"), weight: num("ocWt"), age: num("ocAge"), sex: sx ? sx.value : "", creatinine: num("ocCr") };
+  }
+  function calcHasPt(c) { c = c || {}; return Number(c.height) > 0 && Number(c.weight) > 0; }
+  function doseParams(c) { c = c || {}; return { height: Number(c.height) || null, weight: Number(c.weight) || null, age: Number(c.age) || null, sex: c.sex || "", creatinine: Number(c.creatinine) || null }; }
+  function protoDoseMap(p, c) {
+    var m = {};
+    if (!calcHasPt(c)) return m;
+    try { (G.SMD_ONCODOSE.planDoses(p, doseParams(c)) || []).forEach(function (l) { if (l && l.drugId) m[l.drugId] = l; }); } catch (e) {}
+    return m;
+  }
+  // NB: named protoDrugRowHtml, NOT drugRowHtml - the latter already exists for drug SEARCH results
+  // (data-oh-act="drug-browse"); a duplicate name would hoist-override it and break drug search.
+  function protoDrugRowHtml(d, doseMap, showDose) {
+    var per = (d.dosePerUnit != null ? d.dosePerUnit + (d.unit ? " " + d.unit : "") : "verify");
+    var admin = per + (d.route ? " " + d.route : "") + (d.days && d.days.length ? ", D" + d.days.join(",") : "");
+    var dose = "";
+    if (showDose) { var lin = doseMap[d.id]; dose = '<span class="oh-drow-dose' + (lin && lin.final != null ? "" : " oh-drow-verify") + '">' + esc(lin && lin.final != null ? lin.final + " mg" : "verify") + "</span>"; }
+    return '<div class="oh-row oh-row-static"><span class="oh-row-t">' + esc(d.name || d.id) + '</span><span class="oh-row-s">' + esc(admin) + "</span>" + dose + "</div>";
+  }
+  function protoDetailHtml() {
+    var p = st.detailProto;
+    if (!p) return '<button class="oh-back-inline" data-oh-act="protoref-open">&lsaquo; Back to library</button>' + skelRows(6);
+    var drugs = p.drugs || (p.regimen && p.regimen.drugs) || [];
+    var has = calcHasPt(st.calc), doseMap = protoDoseMap(p, st.calc);
+    var meta = [];
+    if (p.diseaseId) meta.push(esc(p.diseaseId));
+    if (p.cycles) meta.push("Cycles " + Math.min(60, Number(p.cycles) || 0) + (p.cycleLengthDays ? " x " + p.cycleLengthDays + " days" : ""));
+    if (p.intentOptions && p.intentOptions.length) meta.push(esc(p.intentOptions.join(" / ")));
+    var regimen = drugs.length ? drugs.map(function (d) { return protoDrugRowHtml(d, doseMap, has); }).join("") : emptyHtml("clinical_notes", "No regimen detail in this protocol.");
+    var cv = st.calc || {};
+    var calc = '<div class="oh-sec-h">Calculate for a patient (optional)</div>' +
+      '<div class="oh-calc">' +
+      '<input id="ocHt" type="number" inputmode="decimal" placeholder="Height (cm)" value="' + esc(cv.height) + '">' +
+      '<input id="ocWt" type="number" inputmode="decimal" placeholder="Weight (kg)" value="' + esc(cv.weight) + '">' +
+      '<input id="ocAge" type="number" inputmode="numeric" placeholder="Age (years)" value="' + esc(cv.age) + '">' +
+      '<select id="ocSex"><option value="">Sex</option><option value="male"' + (cv.sex === "male" ? " selected" : "") + '>Male</option><option value="female"' + (cv.sex === "female" ? " selected" : "") + '>Female</option></select>' +
+      '<input id="ocCr" type="number" inputmode="decimal" placeholder="Creatinine (mg/dL)" value="' + esc(cv.creatinine) + '">' +
+      "</div>" +
+      '<div><button class="oh-cta ghost" data-oh-act="proto-calc">' + ms("calculate") + (has ? "Recalculate" : "Calculate doses") + "</button>" +
+      '<button class="oh-cta" data-oh-act="proto-pdf">' + ms("print") + "Print / Save PDF</button></div>";
+    var chart = (st.ctx && st.ctx.patient && st.ctx.patient.patientId && G.OPDEMR && G.OPDEMR.openProfile)
+      ? '<div style="margin-top:14px"><button class="oh-cta ghost" data-oh-act="proto-chart">' + ms("clinical_notes") + "Open in patient chart</button></div>" : "";
+    return '<button class="oh-back-inline" data-oh-act="protoref-open">&lsaquo; Back to library</button>' +
+      '<div class="oh-sec-h">' + esc(p.name || p.id) + " " + protoBadge(p.lifecycleState) + "</div>" +
+      (meta.length ? '<div class="oh-dmeta">' + meta.join(" &middot; ") + "</div>" : "") +
+      '<div class="oh-note-ref">Educational reference. Not a prescription or an order. Verify every dose against your institutional protocol; the physician and dose engine own dosing.</div>' +
+      '<div class="oh-sec-h">Regimen</div>' + regimen +
+      '<div style="height:14px"></div>' + calc + chart;
+  }
+  function protoPdf() {
+    var R = G.SMD_ONCOREPORT;
+    if (!R || !R.buildProtocolSheet) { toast("Print is not available on this build."); return; }
+    var p = st.detailProto; if (!p) return;
+    var has = calcHasPt(st.calc), params = doseParams(st.calc), bsa = null, doses = [];
+    if (has) { try { bsa = G.SMD_ONCODOSE.bsaMosteller(params.height, params.weight); } catch (e) {} try { doses = G.SMD_ONCODOSE.planDoses(p, params) || []; } catch (e2) {} }
+    var plan = {
+      protocolId: p.id || "", lockedTemplate: p, sourceProtocolId: p.id || "",
+      plannedCycles: Math.min(60, Number(p.cycles) || 0),
+      intent: (p.intentOptions && p.intentOptions[0]) || "",
+      patientParams: has ? { height: params.height, weight: params.weight, bsa: bsa, age: params.age, sex: params.sex, creatinine: params.creatinine } : {},
+      calculatedDoses: doses, confirmedDoses: [], status: "reference"
+    };
+    var html = R.buildProtocolSheet(plan, { patientName: (st.ctx && st.ctx.patient && st.ctx.patient.name) || "", diagnosis: (st.ctx && st.ctx.diagnosis) || "" });
+    exportHtmlDoc(html, "StewardMD-" + (plan.protocolId || "protocol"));
+  }
+  // Native fallback when the real-PDF plugin (VisionOcr.htmlToPdf) is absent: write the HTML to cache
+  // and open the share sheet (user picks Print / Save as PDF). Mirrors opd-emr.js oncoShareHtml.
+  function shareHtmlFile(html, name) {
+    try {
+      var P = G.Capacitor && G.Capacitor.Plugins;
+      if (P && P.Filesystem && P.Filesystem.writeFile && P.Filesystem.getUri && P.Share && P.Share.share) {
+        P.Filesystem.writeFile({ path: name + ".html", data: html, directory: "CACHE", encoding: "utf8" })
+          .then(function () { return P.Filesystem.getUri({ path: name + ".html", directory: "CACHE" }); })
+          .then(function (r) { return P.Share.share({ title: "StewardMD - Protocol sheet", files: [r.uri], dialogTitle: "Save as PDF / Print / Share" }); })
+          .catch(function () { toast("Export unavailable on this device."); });
+        return;
+      }
+    } catch (e) {}
+    toast("Export not available on this device.");
+  }
+  function exportHtmlDoc(html, filename) {
+    var name = (filename || "StewardMD-Protocol").replace(/[^\w.-]+/g, "-");
+    // NATIVE: real PDF if the renderer is present, else share the HTML file (share sheet -> Save as PDF).
+    if (G.SMD_IS_NATIVE) {
+      var N = G.SMD_NATIVE;
+      if (N && N.sharePdfFromHtml) { toast("Building PDF..."); N.sharePdfFromHtml(html, name, "StewardMD - Protocol sheet").catch(function () { shareHtmlFile(html, name); }); return; }
+      shareHtmlFile(html, name); return;
+    }
+    // WEB: hidden-iframe print (the browser dialog offers Save as PDF).
+    try {
+      var ifr = document.createElement("iframe"); ifr.setAttribute("aria-hidden", "true");
+      ifr.style.cssText = "position:fixed;right:0;bottom:0;width:0;height:0;border:0;opacity:0";
+      document.body.appendChild(ifr);
+      var d = ifr.contentWindow.document; d.open(); d.write(html); d.close();
+      setTimeout(function () { try { ifr.contentWindow.focus(); ifr.contentWindow.print(); } catch (e) {} setTimeout(function () { try { ifr.remove(); } catch (e2) {} }, 1500); }, 350);
+    } catch (e) { toast("Export unavailable."); }
   }
 
   // PURE: state -> HTML (repainted into #ohResults only, never the search input's shell).
@@ -357,6 +474,7 @@
     if (state.mode === "kb") return kbBrowseHtml();
     if (state.mode === "drugonco") return drugOncoHtml();
     if (state.mode === "protoref") return protoRefHtml();
+    if (state.mode === "protodetail") return protoDetailHtml();
     return favSection() + contextStrip(state.ctx) + quickActionsHtml() + gridHtml();
   }
 
@@ -383,39 +501,55 @@
     if (!b) return;
     var act = b.getAttribute("data-oh-act") || "";
     var i = act.indexOf(":"), verb = i >= 0 ? act.slice(0, i) : act, arg = i >= 0 ? act.slice(i + 1) : "";
-    // Recent: record navigational cards/rows/chips (never close/back/toggles). No-op unless favorites on.
-    if (b.classList && (b.classList.contains("oh-card") || b.classList.contains("oh-row") || b.classList.contains("oh-favchip"))) recordRecent(b, act);
     // These verbs open a SEPARATE full-screen overlay. Onco Home is z-index 875; the calculators (870),
-    // drugs (872) and onco sub-view (staging/CTCAE/irAE/RECIST, all 875) overlays sit at/below it, so a
-    // sub-view opened while Onco Home is still ON renders BEHIND it and looks like "nothing happened".
-    // Hide Onco Home first so the sub-view is always visible. In-place modes (kb-browse / protoref /
-    // drugonco / home-dash) are intentionally excluded - they repaint inside this overlay.
+    // drugs (872) and onco sub-views (staging/CTCAE/irAE/RECIST) sit at/below it. Rather than CLOSING
+    // Onco Home (which dropped the user to the app home when the sub-view was dismissed), we BACKGROUND
+    // it (z-index 865, still mounted) so the sub-view renders above and dismissing it returns HERE. Any
+    // other interaction foregrounds it again. In-place modes (kb-browse / protoref / protodetail /
+    // drugonco / home-dash) repaint inside this overlay and never background it.
     var OPENS_OVERLAY = { calc: 1, "calc-cat": 1, kb: 1, "staging-open": 1, "ctcae-open": 1, "iotox-open": 1, "recist-open": 1, "drug-formulary": 1, "drug-interactions": 1 };
-    if (OPENS_OVERLAY[verb]) close();
+    if (OPENS_OVERLAY[verb]) background(); else foreground();
     if (verb === "close") { close(); return; }
     if (verb === "calc-cat") { try { G.MEDCALC && G.MEDCALC.openList && G.MEDCALC.openList("Oncology"); } catch (e2) {} return; }
     if (verb === "calc") { try { G.MEDCALC && G.MEDCALC.open && G.MEDCALC.open(arg); } catch (e2) {} return; }
     if (verb === "kb-browse") { st.mode = (st.mode === "kb") ? null : "kb"; renderResults(); return; }
     if (verb === "kb") { try { G.DX && G.DX.openRef && G.DX.openRef(arg); } catch (e2) {} return; }
     if (verb === "home-dash") { st.mode = null; renderResults(); return; }
-    // Drug card: with the onco drug view flag ON, open the in-overlay onco drug view; else the P0 formulary.
+    // Drug tile -> the in-overlay onco drug view, which offers BOTH "Interaction check"
+    // (-> MEDDRUGS.openInteractions) and "Full formulary" (-> MEDDRUGS.openList). Search-result drug
+    // rows keep drug-browse below (open MEDDRUGS directly for that drug).
+    if (verb === "drug-onco") { st.mode = "drugonco"; renderResults(); return; }
+    // Drug SEARCH result / quick action: open the real MEDDRUGS browse overlay (flag routes to the split view).
     if (verb === "drug-browse") { if (flag("smd_onco_drugview")) { st.mode = "drugonco"; renderResults(); } else { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} } return; }
     if (verb === "drug-formulary") { try { G.MEDDRUGS && G.MEDDRUGS.openList && G.MEDDRUGS.openList(); } catch (e2) {} return; }
     if (verb === "drug-interactions") { try { G.MEDDRUGS && G.MEDDRUGS.openInteractions && G.MEDDRUGS.openInteractions(); } catch (e2) {} return; }
     if (verb === "protoref-open") { st.mode = "protoref"; renderResults(); return; }
+    if (verb === "protodetail") { openProtoDetail(arg); return; }
+    if (verb === "proto-calc") { st.calc = calcFromForm(); renderResults(); return; }
+    if (verb === "proto-pdf") { protoPdf(); return; }
+    if (verb === "proto-chart") { openProtocolContext(); return; }
     if (verb === "staging-open") { try { G.SMD_ONCOSTAGING && G.SMD_ONCOSTAGING.openList && G.SMD_ONCOSTAGING.openList(); } catch (e2) {} return; }
     if (verb === "ctcae-open") { try { G.SMD_ONCOCTCAE && G.SMD_ONCOCTCAE.openList && G.SMD_ONCOCTCAE.openList(); } catch (e2) {} return; }
     if (verb === "iotox-open") { try { G.SMD_ONCOIOTOX && G.SMD_ONCOIOTOX.openList && G.SMD_ONCOIOTOX.openList(); } catch (e2) {} return; }
     if (verb === "recist-open") { try { G.SMD_ONCORECIST && G.SMD_ONCORECIST.open && G.SMD_ONCORECIST.open(); } catch (e2) {} return; }
-    if (verb === "protocol-open") { openProtocolContext(); return; }
+    if (verb === "protocol-open") { st.mode = "protoref"; renderResults(); return; }   // browse the library -> tap a protocol for its regimen/calc/PDF (no hospital needed)
   }
 
+  // Landing identity: teal gradient hero card (masked logo). Painted once above the persistent search.
+  function heroHtml() {
+    return '<section class="oh-hero">' +
+      '<div class="oh-hero-eyebrow">ONCOLOGY</div>' +
+      '<div class="oh-hero-title">The Cancer Library</div>' +
+      '<div class="oh-hero-sub">Staging, toxicity, protocols, drugs and calculators in one place. StewardMD never invents a dose, stage or score.</div>' +
+      '<span class="oh-hero-mark" aria-hidden="true"></span></section>';
+  }
   function paintShell() {
     var el = rootEl();
     el.innerHTML =
       '<div class="oh-top"><button class="oh-back" data-oh-act="close" aria-label="Close">&lsaquo; Close</button>' +
-      '<div class="oh-title">ONCqis<span style="display:block;font-size:10px;font-weight:600;opacity:.6;letter-spacing:.05em;text-transform:uppercase;margin-top:2px">The Cancer Library</span></div><span style="width:64px"></span></div>' +
-      '<div class="oh-body"><input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
+      '<div class="oh-title">ONCqis</div><span style="width:64px"></span></div>' +
+      '<div class="oh-body">' + heroHtml() +
+      '<input id="ohSearch" class="oh-search" type="text" placeholder="Explore tools, drugs and content" autocomplete="off" value="' + esc(st.q) + '">' +
       '<div id="ohResults"></div></div>';
     var si = el.querySelector("#ohSearch");
     if (si) si.addEventListener("input", function () { st.q = si.value; renderResults(); });
@@ -432,9 +566,13 @@
     var el = rootEl();
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     paintShell();
-    el.classList.add("on"); document.body.classList.add("oh-lock");
+    el.classList.add("on"); el.classList.remove("oh-bg"); document.body.classList.add("oh-lock");
   }
-  function close() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("on"); document.body.classList.remove("oh-lock"); }
+  function close() { var el = document.getElementById("smdOncoHome"); if (el) { el.classList.remove("on"); el.classList.remove("oh-bg"); } document.body.classList.remove("oh-lock"); }
+  // Background: keep ONCqis mounted but below a sub-view overlay (so dismissing the sub returns here).
+  function background() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.add("oh-bg"); }
+  // Foreground: restore full z-index once the user interacts with ONCqis again (returned from a sub-view).
+  function foreground() { var el = document.getElementById("smdOncoHome"); if (el) el.classList.remove("oh-bg"); }
 
   try { document.addEventListener("keydown", function (e) { if (e.key === "Escape" && document.getElementById("smdOncoHome") && document.getElementById("smdOncoHome").classList.contains("on")) close(); }); } catch (e) {}
 
