@@ -67,6 +67,19 @@ body.dark #smdQueue { --bg: #191c1e; --surface: #191c1e; --on-surface: #eff1f3; 
 #smdQueue .q-profile-row span { color: var(--secondary); }
 #smdQueue .q-profile-row b { margin-left: auto; font-weight: 700; }
 #smdQueue .q-profile-acts { display: flex; flex-direction: column; gap: 9px; margin: 16px 0 9px; }
+/* Clinic & staff admin panel (doctor profile sheet) */
+#smdQueue .q-profile-sec { margin-top: 14px; padding-top: 6px; border-top: 1px solid var(--sc-low); }
+#smdQueue .q-sec-h { font: 800 11px var(--q-sans); text-transform: uppercase; letter-spacing: .08em; color: var(--secondary); margin: 6px 0 8px; }
+#smdQueue .q-clinic-id b.mono { flex: 1; font: 700 14px var(--mono, monospace); letter-spacing: .04em; color: var(--primary); }
+#smdQueue .q-staff-list { display: flex; flex-direction: column; margin: 4px 0 12px; }
+#smdQueue .q-staff-row { display: flex; align-items: center; gap: 10px; padding: 9px 0; border-top: 1px solid var(--sc-low); }
+#smdQueue .q-staff-id { flex: 1; min-width: 0; }
+#smdQueue .q-staff-id b { display: block; font: 600 14px var(--q-sans); color: var(--on-surface); }
+#smdQueue .q-staff-id span { display: block; font: 500 11.5px var(--q-sans); color: var(--secondary); margin-top: 1px; }
+#smdQueue .q-staff-empty { font: 500 12.5px var(--q-sans); color: var(--secondary); padding: 8px 0; }
+#smdQueue .q-staff-add { display: flex; flex-direction: column; gap: 8px; }
+#smdQueue .q-staff-add-r { display: flex; gap: 8px; }
+#smdQueue .q-staff-add input, #smdQueue .q-staff-add select { flex: 1; min-width: 0; font: 500 14px var(--q-sans); color: var(--on-surface); background: var(--sc-lowest); border: 1px solid var(--outline-variant); border-radius: 10px; padding: 11px 12px; box-sizing: border-box; }
 #smdQueue .q-pbtn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; box-sizing: border-box; padding: 13px; border: 1px solid var(--outline-variant); border-radius: 12px; background: var(--sc-lowest); color: var(--on-surface); font: 700 14px var(--q-sans); cursor: pointer; }
 #smdQueue .q-pbtn .material-symbols-outlined { font-size: 20px; }
 #smdQueue .q-pbtn.danger { border-color: color-mix(in srgb, var(--error) 40%, transparent); color: var(--error); }

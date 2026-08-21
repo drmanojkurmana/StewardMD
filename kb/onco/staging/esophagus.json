@@ -1,0 +1,514 @@
+{
+  "site": "esophagus",
+  "name": "Esophagus and EGJ",
+  "system": "Oncology / Gastrointestinal",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition esophagus and esophagogastric junction (EGJ) staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging covers carcinomas of the esophagus and esophagogastric junction (EGJ), and its defining feature is that it separates them into three distinct stage-grouping schemes: clinical (cTNM, before treatment), pathologic (pTNM, after resection without neoadjuvant therapy), and post-neoadjuvant (ypTNM, after preoperative therapy plus resection). Squamous cell carcinoma and adenocarcinoma have different clinical and pathologic stage tables, and for early node-negative tumors the pathologic group also depends on histologic grade (and, for squamous cell carcinoma, tumor location). The stageGroups below list the PATHOLOGIC (pTNM) anatomic groups for both histologies, and the postNeoadjuvant block holds the separate ypTNM table.\n\nN is defined by the NUMBER of involved regional nodes rather than their location (N1 = 1 to 2, N2 = 3 to 6, N3 = 7 or more). A key nuance is the anatomic split at the EGJ: a tumor with its epicenter within 2 cm of the cardia (Siewert I to II) is staged as esophageal, whereas an epicenter more than 2 cm into the stomach is staged as gastric. Response to neoadjuvant therapy (captured by the yp table) and completeness of resection are important prognostic factors.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "High-grade dysplasia, defined as malignant cells confined to the epithelium by the basement membrane",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumor invades the lamina propria, muscularis mucosae, or submucosa",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "T1a: Tumor invades the lamina propria or muscularis mucosae",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "T1b: Tumor invades the submucosa",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumor invades the muscularis propria",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumor invades the adventitia",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumor invades adjacent structures",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "T4a: Tumor invades the pleura, pericardium, azygos vein, diaphragm, or peritoneum",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "T4b: Tumor invades other adjacent structures such as the aorta, vertebral body, or airway",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "N1: Metastasis in 1 to 2 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "N2: Metastasis in 3 to 6 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "N3: Metastasis in 7 or more regional lymph nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic, pTNM); any grade, any location. High-grade dysplasia.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G1 or GX, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G2 to G3, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G1 to G3 or GX, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G1, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G2 to G3 or GX, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, lower esophagus.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G1, upper or middle esophagus.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); G2 to G3, upper or middle esophagus.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); GX any location, or any grade with location unknown (location X).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3",
+          "n": "N1 or N2",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4b",
+          "n": "N0 to N2",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Squamous cell carcinoma (pathologic); any grade, any location.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Squamous cell carcinoma (pathologic); distant metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic, pTNM); high-grade dysplasia.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G1 or GX.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G2.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G1 to G2 or GX.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IC",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G3.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IC",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G1 to G2.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); G3 or GX.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3",
+          "n": "N1 or N2",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4b",
+          "n": "N0 to N2",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N3",
+          "m": "M0",
+          "basis": "Adenocarcinoma (pathologic); any grade.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Adenocarcinoma (pathologic); distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "postNeoadjuvant": {
+        "note": "Applied after neoadjuvant therapy; uses ypT, ypN, ypM. In 8th edition the yp stage groups are identical for squamous cell carcinoma and adenocarcinoma (unlike the clinical and pathologic tables).",
+        "stageGroups": [
+          {
+            "stage": "I",
+            "t": "ypT0-2",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT3",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IIIA",
+            "t": "ypT0-2",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IIIB",
+            "t": "ypT3",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IIIB",
+            "t": "ypT0-3",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IIIB",
+            "t": "ypT4a",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IVA",
+            "t": "ypT4a",
+            "n": "ypN1-2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IVA",
+            "t": "ypT4a",
+            "n": "ypNX",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IVA",
+            "t": "ypT4b",
+            "n": "ypN0-2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IVA",
+            "t": "any ypT",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IVB",
+            "t": "any ypT",
+            "n": "any ypN",
+            "m": "M1",
+            "requiresR1Verification": true
+          }
+        ]
+      },
+      "regionalNodes": "Regional lymph nodes extend from periesophageal cervical nodes to the celiac nodes and include paraesophageal, paratracheal, subcarinal, diaphragmatic, paracardial, left gastric, common hepatic, splenic, and celiac nodes. N is defined by the NUMBER of involved regional nodes, not their anatomic location.",
+      "histologicGrade": "GX (not assessable), G1 (well differentiated), G2 (moderately differentiated), G3 (poorly differentiated or undifferentiated). For early node-negative tumors, grade participates in the pathologic stage grouping.",
+      "histopathologicTypes": "Squamous cell carcinoma (predominant in the upper and middle esophagus) and adenocarcinoma (predominant in the lower esophagus and esophagogastric junction, often arising in Barrett esophagus). The two histologies use separate pathologic stage-group tables.",
+      "prognosticFactors": [
+        "Depth of invasion (T) and number of involved regional lymph nodes (N)",
+        "Distant metastasis (M)",
+        "Histologic type (squamous cell carcinoma vs adenocarcinoma)",
+        "Histologic grade (particularly for early node-negative tumors)",
+        "Tumor location for squamous cell carcinoma (upper/middle vs lower)",
+        "Response to neoadjuvant therapy (ypTNM) and completeness of resection; lymphovascular invasion"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

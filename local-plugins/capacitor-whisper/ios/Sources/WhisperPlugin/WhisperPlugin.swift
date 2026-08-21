@@ -35,6 +35,9 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
 
     private let engine = WhisperEngine()
     private var downloader: ModelDownloader?          // strong ref while a download is in flight
+    /// Models with a transfer in flight. Static so it survives the plugin object being recreated,
+    /// and shared across calls - `downloader` above is a single slot and cannot serve as the guard.
+    private static var inFlightModels = Set<String>()
     private var lastLanguage = "auto"
     private var lastPrompt = ""
 
@@ -65,10 +68,22 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
         let existing = ModelStore.isInstalled(model)
         if existing.installed, let path = existing.path { call.resolve(["path": path]); return }
 
+        // ONE transfer per model. Without this a second tap started a rival download AND clobbered
+        // `self.downloader`, which is a single slot - so the first downloader lost its strong
+        // reference while still writing the same staging file. Two writers, one file, progress
+        // jumping between them: the duplicate-download bug reported for the voice models.
+        // voice.js hides its Download button on tap, but renderModels() rebuilds the cards and
+        // restores it mid-transfer, so the guard has to be here.
+        if Self.inFlightModels.contains(model) {
+            call.reject("already downloading", WhisperErr.modelDownloadFailed.rawValue); return
+        }
+        Self.inFlightModels.insert(model)
+
         let dl = ModelDownloader(
             model: model, expectedSha: sha,
             onProgress: { [weak self] p in self?.notifyListeners("whisperDownloadProgress", data: ["progress": p]) },
             completion: { [weak self] result in
+                Self.inFlightModels.remove(model)
                 self?.downloader = nil
                 switch result {
                 case .success(let path): call.resolve(["path": path])

@@ -29,6 +29,76 @@ Heavy, flag-gated module assets are stripped from the native bundle and fetched 
 ## 2026-07-29 · Intent Firewall = allow-list, not block-list
 See [[MaiK Intent Firewall]]. Require a positive medical signal; reject the rest. **Why**: a block-list can't enumerate all non-medical topics. **Invariant**: zero false-refusals. **Status**: live (gold1041).
 
+## 2026-08-20 · Intent Firewall: refuse only what we can NAME; the model handles the rest
+Amends the 2026-07-29 allow-list decision, which stood on one wrong assumption: that "no positive
+medical signal" means "not medical". It means "not in our vocabulary". A doctor's own device transcript
+had MaiK answering "What is PCOD?" and "What is SGLT2 drugs mechanism of action?" with "MaiK is for
+healthcare professionals. It answers only medical and clinical questions." The **invariant of zero
+false-refusals was being violated by the firewall's own default branch**, and no amount of vocabulary
+can close it - medicine is open-ended.
+
+**Now:** `classify()` returns `certain:true|false`. Gate on `MaiKScope.isRefusable(q)`, which is true
+only for a POSITIVELY identified non-clinical category (code / creative / general / lay). An
+unrecognised query goes to the model, and the model refuses non-medical itself (`MEDICAL_ONLY` in the
+Vertex prompts, and a medical-only line in the on-device SYSTEM prompt). The model has the world
+knowledge to tell PCOD from a state capital; a regex does not.
+
+**Cost accepted:** a genuinely non-medical query that we cannot name deterministically now costs one
+model call to refuse. The named shapes (code, creative, general knowledge, travel, sport) are still
+refused for free. That trade is the right way round: a wasted call is cheap, telling a doctor their
+clinical question is not medical is not.
+
+**Corollary:** the client gate and the server `firewallBlock()` must share ONE predicate. They had
+drifted - the server already excluded the uncertain bucket, the client did not, and the client is what
+doctors saw. **Status**: live. See [[MaiK Intent Firewall]].
+
+## 2026-08-21 · iOS background download is capped ~1 MB/s; chunking buys resilience, NOT speed
+**Measured, after two wrong turns.** The controlled comparison that settled the diagnosis was the
+owner's own: same Wi-Fi, same room, same hour, same 3.11 GB file on HuggingFace - **Android
+DownloadManager 10.5 MB/s vs iOS background URLSession 1.3 MB/s**. So the origin is not the cap and
+**R2 would not fix iOS**; the ceiling is client-side.
+
+**The burst-vs-sustained trap.** A DownloadProbe measured 20 MB bursts: default session 6.55 MB/s,
+background 1 stream 1.08 MB/s, background 4 range tasks 4.77 MB/s. The 4.4x looked like a per-task
+throttle, so a chunked downloader was built on it. The real sustained number, read off the `.parts`
+sidecar after a 2.49 GB attempt, was **1.04 MB/s across 8 parallel parts** - identical to one stream.
+**A 20 MB burst does not predict a 2.5 GB transfer**; iOS gives an initial allowance and then caps the
+session. Measure sustained throughput for a sustained feature.
+
+**Chunking was kept anyway, on different grounds:** 64 MB ranged parts written straight into the final
+file at their offset, with a `<name>.parts` sidecar. It buys resilience, not speed - a part is the most
+that can be lost, progress survives crashes AND app reinstalls (verified: 1.38 GB preserved across a
+reinstall), and a failure at 89% no longer costs 2.5 GB. The sidecar is also the best measurement tool
+available: pull it with `devicectl device copy from` and count '1's, no console needed.
+
+**Still untested:** whether a DEFAULT session sustains ~6 MB/s. Only the burst figure exists, and
+extrapolating it is exactly the mistake above. If it does, a foreground-first chunked download is worth
+building - and chunking is what makes it safe, because backgrounding would cost only the in-flight
+parts. **Status**: chunked background download shipped; speed unresolved and honestly so.
+
+## 2026-08-21 · On-device model download stays on ONE background URLSession
+**Rejected:** a foreground/background hybrid (default session for speed while on screen, handed to the
+background session on `didEnterBackgroundNotification`). It was built, shipped to a device, and
+**reverted the same night** because background downloads stopped working: `cancel(byProducingResumeData:)`
+is ASYNCHRONOUS, so it tears the running transfer down immediately and iOS suspends the app before the
+completion block can restart it on the background session. The download died the moment the app left
+the screen.
+
+**The mistake worth remembering** is not the API detail, it is the trade: a VERIFIED capability (a
+2.49 GB model completing with the app force-stopped) was risked for an UNMEASURED speed hypothesis.
+The 0.5 MB/s figure came off the UI and was never confirmed natively, and the diagnosis ("iOS
+background sessions are throttled") was inferred from a Mac-vs-phone comparison, not measured on the
+phone. Correctness that is proven outranks speed that is assumed.
+
+**What was kept:** native throughput printing (`[llama-dl] … MB/s`, readable via
+`devicectl --console`), so the speed question can finally be measured rather than argued.
+
+**If throughput does need work,** prefer options that keep a single background session: several
+concurrent background tasks over byte ranges (a background session may throttle per-task, and a Mac
+test showed only a 23% gain from parallelism on an UNTHROTTLED session, so the per-task theory is
+untested and worth measuring), or host the files closer to the user (R2, APAC). Do NOT reintroduce a
+foreground/background handoff. **Status**: reverted, background-only shipped.
+
 ## Standing principles
 - **Reversible changes**: big/risky changes go behind a feature **flag** + a git **recovery point** (tag/branch); made permanent only after owner approval.
 - **Test before you build** (owner mandate): unit + a real headless-browser test before shipping UI/logic.

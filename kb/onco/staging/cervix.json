@@ -1,0 +1,271 @@
+{
+  "site": "cervix",
+  "name": "Cervix uteri",
+  "system": "Oncology / Gynecologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition (and FIGO where applicable) cervix staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging of cervical carcinoma covers carcinomas of the cervix uteri and is aligned with the FIGO 2018 revision, so the T categories correspond directly to FIGO stages (shown in each label). The common histologies are squamous cell carcinoma, adenocarcinoma, and adenosquamous carcinoma; extension to the uterine corpus is disregarded for the primary tumour category.\n\nWhat is notable in 8th edition is that it follows FIGO 2018, which introduced size-based subdivisions of stage IB (IB1 tumour < 2 cm, IB2 2 to < 4 cm, IB3 >= 4 cm), removed horizontal tumour extent from the definition of stage IA, and added stage IIIC for lymph node metastasis (IIIC1 pelvic nodes, IIIC2 para-aortic nodes). Imaging and pathologic findings may be used to assign stage. A key nuance is that para-aortic nodes are regional (not distant) disease, and depth of stromal invasion, lymphovascular space invasion, and node status are the main prognostic drivers.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1 (FIGO I)",
+          "label": "T1 (FIGO I): Carcinoma confined to the cervix uteri; extension to the uterine corpus is disregarded",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a (FIGO IA)",
+          "label": "T1a (FIGO IA): Invasive carcinoma diagnosed only by microscopy, with a maximum depth of stromal invasion < 5 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a1 (FIGO IA1)",
+          "label": "T1a1 (FIGO IA1): Measured stromal invasion < 3 mm in depth",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a2 (FIGO IA2)",
+          "label": "T1a2 (FIGO IA2): Measured stromal invasion >= 3 mm and < 5 mm in depth",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b (FIGO IB)",
+          "label": "T1b (FIGO IB): Invasive carcinoma with measured deepest invasion >= 5 mm (beyond T1a), lesion limited to the cervix uteri",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b1 (FIGO IB1)",
+          "label": "T1b1 (FIGO IB1): Invasion >= 5 mm in depth and tumor < 2 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b2 (FIGO IB2)",
+          "label": "T1b2 (FIGO IB2): Tumor >= 2 cm and < 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b3 (FIGO IB3)",
+          "label": "T1b3 (FIGO IB3): Tumor >= 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2 (FIGO II)",
+          "label": "T2 (FIGO II): Carcinoma invades beyond the uterus but not onto the pelvic wall or the lower third of the vagina",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a (FIGO IIA)",
+          "label": "T2a (FIGO IIA): Involvement limited to the upper two-thirds of the vagina, without parametrial invasion",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a1 (FIGO IIA1)",
+          "label": "T2a1 (FIGO IIA1): Tumor < 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a2 (FIGO IIA2)",
+          "label": "T2a2 (FIGO IIA2): Tumor >= 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b (FIGO IIB)",
+          "label": "T2b (FIGO IIB): Parametrial invasion, but not extending to the pelvic wall",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3 (FIGO III)",
+          "label": "T3 (FIGO III): Tumor involves the lower third of the vagina and/or extends to the pelvic wall and/or causes hydronephrosis or a nonfunctioning kidney",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a (FIGO IIIA)",
+          "label": "T3a (FIGO IIIA): Tumor involves the lower third of the vagina, with no extension to the pelvic wall",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b (FIGO IIIB)",
+          "label": "T3b (FIGO IIIB): Extension to the pelvic wall and/or hydronephrosis or a nonfunctioning kidney (unless known to be due to another cause)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4 (FIGO IVA)",
+          "label": "T4 (FIGO IVA): Tumor invades the mucosa of the bladder or rectum and/or extends beyond the true pelvis (bullous edema alone does not qualify as T4; must be biopsy proven)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0(i+)",
+          "label": "Isolated tumor cells in regional lymph node(s) no larger than 0.2 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1 (FIGO IIIC)",
+          "label": "N1 (FIGO IIIC): Regional lymph node metastasis. FIGO subdivides by location: pelvic nodes only = IIIC1; para-aortic nodes = IIIC2 (para-aortic nodes are regional for cervix)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1 (FIGO IVB)",
+          "label": "M1 (FIGO IVB): Distant metastasis, including peritoneal spread; involvement of supraclavicular, mediastinal, or distant lymph nodes; and metastasis to lung, liver, or bone",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA1",
+          "t": "T1a1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Microscopic invasion < 3 mm deep, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA2",
+          "t": "T1a2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Microscopic invasion >= 3 to < 5 mm deep, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB1",
+          "t": "T1b1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Invasion >= 5 mm deep, tumor < 2 cm, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB2",
+          "t": "T1b2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumor >= 2 to < 4 cm, confined to cervix, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB3",
+          "t": "T1b3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumor >= 4 cm, confined to cervix, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA1",
+          "t": "T2a1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Upper two-thirds vaginal involvement, tumor < 4 cm, no parametrial invasion, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA2",
+          "t": "T2a2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Upper two-thirds vaginal involvement, tumor >= 4 cm, no parametrial invasion, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Parametrial invasion without pelvic wall extension, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Lower-third vaginal involvement without pelvic wall extension, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pelvic wall extension and/or hydronephrosis, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC1",
+          "t": "T1 to T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pelvic lymph node metastasis only, irrespective of tumor size/extent.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC2",
+          "t": "T1 to T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Para-aortic lymph node metastasis, irrespective of tumor size/extent.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "T4",
+          "n": "any N",
+          "m": "M0",
+          "basis": "Invasion of bladder/rectal mucosa or spread beyond the true pelvis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional lymph nodes include the paracervical, parametrial, hypogastric (internal iliac and obturator), external iliac, common iliac, presacral, and para-aortic nodes. Para-aortic nodal metastasis is regional (N1 / FIGO IIIC2), not distant.",
+      "histologicGrade": "GX (grade not assessable), G1 (well differentiated), G2 (moderately differentiated), G3 (poorly differentiated or undifferentiated).",
+      "histopathologicTypes": "Squamous cell carcinoma (most common), adenocarcinoma, adenosquamous carcinoma, and less common types including neuroendocrine (small cell and large cell) carcinoma, glassy cell carcinoma, and clear cell carcinoma.",
+      "prognosticFactors": [
+        "FIGO stage and tumor size (greatest dimension)",
+        "Depth of stromal invasion",
+        "Lymphovascular space invasion (LVSI)",
+        "Regional lymph node status (pelvic vs para-aortic)",
+        "Parametrial involvement and surgical margin status",
+        "Histologic type (neuroendocrine and adenosquamous carry a worse prognosis) and grade",
+        "HPV status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

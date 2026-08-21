@@ -1,0 +1,16 @@
+# Never commit model weights or audio — they are large and/or license-restricted.
+models/
+datasets/**/*.wav
+datasets/**/*.mp3
+datasets/**/*.flac
+datasets/**/*.tar*
+*.bin
+*.gguf
+*.onnx
+*.nemo
+*.mlmodel
+*.mlmodelc/
+*.mlpackage/
+*.pt
+*.safetensors
+# Keep: scripts/, README.md, reports/, results/*.jsonl (text-only ground truth + scores)

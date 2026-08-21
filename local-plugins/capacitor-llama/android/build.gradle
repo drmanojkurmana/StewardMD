@@ -1,0 +1,82 @@
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.android.tools.build:gradle:8.7.2'
+    }
+}
+
+apply plugin: 'com.android.library'
+
+android {
+    namespace "in.stewardmd.llama"
+    compileSdk project.hasProperty('compileSdkVersion') ? rootProject.ext.compileSdkVersion : 36
+    // NDK r27+ ships 16 KB-aligned prebuilts (libc++_shared.so) and, with
+    // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON below, links our .so with 16 KB LOAD-segment
+    // alignment — required for Android 15 devices with 16 KB memory pages (and Play compliance).
+    ndkVersion project.hasProperty('ndkVersion') ? rootProject.ext.ndkVersion : '27.2.12479018'
+    defaultConfig {
+        minSdkVersion project.hasProperty('minSdkVersion') ? rootProject.ext.minSdkVersion : 24
+        targetSdkVersion project.hasProperty('targetSdkVersion') ? rootProject.ext.targetSdkVersion : 36
+        versionCode 1
+        versionName '1.0'
+
+        // Native llama.cpp build. arm64-v8a FIRST (real devices); x86_64 emulators may not run
+        // inference — test on a real arm64 device (plan §3 "Android specifics").
+        ndk {
+            abiFilters 'arm64-v8a'
+        }
+        externalNativeBuild {
+            cmake {
+                cppFlags '-O3 -std=c++17 -fexceptions -frtti'
+                // CMAKE_BUILD_TYPE=Release is CRITICAL: the default `assembleDebug` builds native
+                // code at -O0, and ggml/llama.cpp at -O0 is ~50x slower (inference took >70s
+                // single-threaded on a 3s clip). Release → -O3 -DNDEBUG for the whole ggml subproject.
+                //
+                // ANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON links every .so with max-page-size=16384
+                // (16 KB-aligned LOAD segments) — required for Android 15 16 KB-page devices.
+                //
+                // GGML_CPU_ARM_ARCH: with GGML_NATIVE=OFF (required for cross-compile) ggml otherwise
+                // builds baseline armv8-a with NO dot-product SIMD (much slower q5_1 matmul).
+                // armv8.2-a+dotprod+fp16 enables the int8 dot-product kernels; supported by ~all
+                // arm64 phones from ~2018 on.
+                arguments '-DCMAKE_BUILD_TYPE=Release',
+                          '-DANDROID_STL=c++_shared',
+                          '-DANDROID_SUPPORT_FLEXIBLE_PAGE_SIZES=ON',
+                          '-DGGML_NATIVE=OFF',
+                          '-DGGML_CPU_ARM_ARCH=armv8.2-a+dotprod+fp16'
+            }
+        }
+    }
+    externalNativeBuild {
+        cmake {
+            path 'src/main/cpp/CMakeLists.txt'
+            version '3.22.1'
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_21
+        targetCompatibility JavaVersion.VERSION_21
+    }
+}
+
+repositories {
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation project(':capacitor-android')
+}

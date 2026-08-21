@@ -3,18 +3,17 @@
 
 .ot-overlay {
   /* LIGHT is the default palette; the body.dark rule below overrides all of them together. */
-  --ot-bg: #f4f5f7; --ot-ink: #16181d; --ot-card: #ffffff; --ot-line: #e5e7eb; --ot-sub: #6b7280; --ot-accent: #0a84ff;
+  --ot-bg: var(--paper, #f6f7f5); --ot-ink: var(--ink, #14202b); --ot-card: var(--panel, #ffffff); --ot-line: var(--line, #d7dee3); --ot-sub: var(--slate, #2d4356); --ot-accent: var(--teal, #0e6e63);
   position: fixed; inset: 0; z-index: 4000; display: none;
   background: var(--ot-bg);
   -webkit-tap-highlight-color: transparent;
-  font: 15px/1.45 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, system-ui, sans-serif;
+  font: 15px/1.45 var(--sans);
   color: var(--ot-ink);
 }
-/* Dark palette follows the APP's light/dark toggle (body.dark, managed by theme-sync.js) - the same
-   signal every other module uses - NOT the OS directly (@media prefers-color-scheme), so OncoTree
-   matches the rest of the app when you flip the in-app theme instead of staying dark on a dark OS.
-   Light is the default (no body.dark). */
-body.dark .ot-overlay { --ot-bg: #0e0f12; --ot-ink: #eceef2; --ot-card: #16181d; --ot-line: #2a2d34; --ot-sub: #9aa0ab; --ot-accent: #4aa3ff; }
+/* Dark palette (and the blue/ocean/etc. app themes) follow automatically: the app tokens mapped above
+   (var(--paper)/var(--ink)/var(--teal)/...) flip under body.dark - managed by theme-sync.js, the same
+   signal every other module uses, NOT the OS directly (@media prefers-color-scheme). No local dark
+   override needed. Light is the default (no body.dark). */
 body.ot-open { overflow: hidden; }
 
 /* Icon font binding. The app self-hosts 'Material Symbols Rounded' (redesign-system.css @font-face,
@@ -131,15 +130,15 @@ body.ot-open { overflow: hidden; }
 .ot-card-ctx { color: var(--ot-sub); font-size: 12.5px; margin-top: 4px; display: flex; flex-wrap: wrap; gap: 6px; }
 .ot-card-cyc { font-weight: 700; color: var(--ot-ink); }
 .ot-card-ver { color: var(--ot-sub); font-size: 11px; margin-top: 3px; font-variant-numeric: tabular-nums; }
-.ot-card-verify { display: flex; align-items: center; gap: 6px; font-size: 12px; color: #b45309; background: #fef3c7; border-radius: 9px; padding: 7px 10px; margin-top: 8px; }
+.ot-card-verify { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--sev-warning-fg); background: var(--sev-warning-bg); border-radius: 9px; padding: 7px 10px; margin-top: 8px; }
 .ot-card-verify .material-symbols-outlined { font-size: 16px; }
 .ot-card-actions { display: flex; gap: 8px; margin-top: 12px; }
 
 /* lifecycle badge - unmistakable */
 .ot-badge { flex: 0 0 auto; font-size: 10px; font-weight: 800; letter-spacing: .05em; text-transform: uppercase; padding: 4px 8px; border-radius: 7px; white-space: nowrap; }
-.ot-badge.ok { color: #065f46; background: #d1fae5; }
-.ot-badge.draft { color: #92400e; background: #fde68a; }
-.ot-badge.exp { color: #fff; background: #ea580c; }
+.ot-badge.ok { color: var(--sev-stable-fg); background: var(--sev-stable-bg); }
+.ot-badge.draft { color: var(--sev-done-fg); background: var(--sev-done-bg); }
+.ot-badge.exp { color: var(--sev-warning-fg); background: var(--sev-warning-bg); }
 
 /* buttons */
 .ot-btn { display: inline-flex; align-items: center; justify-content: center; gap: 6px; min-height: 44px; flex: 1; padding: 0 14px; border-radius: 12px; font-size: 14px; font-weight: 700; cursor: pointer; border: 1.5px solid transparent; transition: transform .05s; }
@@ -161,13 +160,13 @@ body.ot-open { overflow: hidden; }
 .ot-excl { border: 1px solid var(--ot-line); border-radius: 12px; padding: 10px 12px; background: var(--ot-card); opacity: .92; }
 .ot-excl-h { display: flex; align-items: center; gap: 8px; }
 .ot-excl-name { font-weight: 600; color: var(--ot-sub); text-decoration: line-through; }
-.ot-na { font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: #9ca3af; background: color-mix(in srgb, var(--ot-ink) 7%, transparent); border-radius: 6px; padding: 2px 6px; }
+.ot-na { font-size: 10.5px; font-weight: 700; text-transform: uppercase; color: var(--sev-done-fg); background: color-mix(in srgb, var(--ot-ink) 7%, transparent); border-radius: 6px; padding: 2px 6px; }
 .ot-why { margin-left: auto; background: transparent; border: 1px solid var(--ot-line); border-radius: 8px; color: var(--ot-accent); font-size: 12px; font-weight: 700; padding: 4px 10px; cursor: pointer; }
 .ot-excl-why { display: flex; align-items: flex-start; gap: 6px; margin-top: 8px; font-size: 12.5px; color: var(--ot-ink); }
-.ot-excl-why .material-symbols-outlined { font-size: 16px; color: #ef4444; }
+.ot-excl-why .material-symbols-outlined { font-size: 16px; color: var(--sev-critical-fg); }
 
 /* notes */
-.ot-missing, .ot-info { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #92400e; background: #fef3c7; border-radius: 10px; padding: 9px 12px; margin-bottom: 12px; }
+.ot-missing, .ot-info { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--sev-warning-fg); background: var(--sev-warning-bg); border-radius: 10px; padding: 9px 12px; margin-bottom: 12px; }
 .ot-missing .material-symbols-outlined { font-size: 17px; }
 
 /* ---- interactive MAP: pan/zoom node-graph ------------------------------------------------------ */
@@ -181,8 +180,8 @@ body.ot-open { overflow: hidden; }
 .ot-graph-canvas { position: absolute; top: 0; left: 0; transform-origin: 0 0; will-change: transform; }
 .ot-graph-svg { position: absolute; top: 0; left: 0; pointer-events: none; overflow: visible; }
 .ot-edge { fill: none; stroke: color-mix(in srgb, var(--ot-sub) 45%, transparent); stroke-width: 2; }
-.ot-edge.active { stroke: #10b981; stroke-width: 2.6; filter: drop-shadow(0 0 3px color-mix(in srgb, #10b981 45%, transparent)); }
-.ot-edge.disabled { stroke: #ef4444; stroke-width: 1.6; stroke-dasharray: 3 5; opacity: .38; }
+.ot-edge.active { stroke: var(--sev-stable-fg); stroke-width: 2.6; filter: drop-shadow(0 0 3px color-mix(in srgb, var(--sev-stable-fg) 45%, transparent)); }
+.ot-edge.disabled { stroke: var(--sev-critical-fg); stroke-width: 1.6; stroke-dasharray: 3 5; opacity: .38; }
 
 .ot-gnode { position: absolute; box-sizing: border-box; display: flex; flex-direction: column; gap: 2px; padding: 7px 9px;
   text-align: left; border: 1px solid var(--ot-line); border-top: 3px solid var(--ot-c, var(--ot-line));
@@ -191,18 +190,18 @@ body.ot-open { overflow: hidden; }
 .ot-gnode:active { transform: scale(.97); }
 .ot-gn-top { display: flex; align-items: center; gap: 5px; }
 .ot-gn-top .material-symbols-outlined { font-size: 15px; color: var(--ot-c, var(--ot-sub)); }
-.ot-gn-cat { flex: 1; font: 800 8.5px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ot-gn-cat { flex: 1; font: 800 8.5px var(--sans); text-transform: uppercase; letter-spacing: .05em; color: var(--ot-sub); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 .ot-gn-mark { font-size: 15px !important; color: var(--ot-sub); }
-.ot-gn-name { font: 700 12.5px/1.15 system-ui; color: var(--ot-ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
-.ot-gn-sel { font: 600 10.5px system-ui; color: var(--ot-c, var(--ot-accent)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.ot-gn-name { font: 700 12.5px/1.15 var(--sans); color: var(--ot-ink); display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+.ot-gn-sel { font: 600 10.5px var(--sans); color: var(--ot-c, var(--ot-accent)); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 /* status states */
 .ot-gnode.active { border-color: color-mix(in srgb, var(--ot-c) 55%, var(--ot-line)); }
-.ot-gnode.resolved .ot-gn-mark { color: #10b981; }
+.ot-gnode.resolved .ot-gn-mark { color: var(--sev-stable-fg); }
 .ot-gnode.frontier { box-shadow: 0 0 0 2px var(--ot-accent), 0 6px 18px color-mix(in srgb, var(--ot-accent) 30%, transparent); animation: otNodePulse 2s ease-in-out infinite; }
 .ot-gnode.frontier .ot-gn-mark { color: var(--ot-accent); }
-.ot-gnode.disabled, .ot-gnode.unreachable { opacity: .48; border-top-color: #ef4444; }
-.ot-gnode.disabled .ot-gn-name, .ot-gnode.unreachable .ot-gn-name { text-decoration: line-through; text-decoration-color: color-mix(in srgb, #ef4444 60%, transparent); }
-.ot-gnode.disabled .ot-gn-mark, .ot-gnode.unreachable .ot-gn-mark { color: #ef4444; }
+.ot-gnode.disabled, .ot-gnode.unreachable { opacity: .48; border-top-color: var(--sev-critical-fg); }
+.ot-gnode.disabled .ot-gn-name, .ot-gnode.unreachable .ot-gn-name { text-decoration: line-through; text-decoration-color: color-mix(in srgb, var(--sev-critical-fg) 60%, transparent); }
+.ot-gnode.disabled .ot-gn-mark, .ot-gnode.unreachable .ot-gn-mark { color: var(--sev-critical-fg); }
 .ot-gnode.unresolved { border-style: dashed; }
 .ot-gnode.end { border-radius: 16px; }
 .ot-gnode.sel { box-shadow: 0 0 0 2.5px var(--ot-c, var(--ot-accent)), 0 8px 22px color-mix(in srgb, var(--ot-c) 34%, transparent); transform: translateY(-1px); }
@@ -216,7 +215,7 @@ body.ot-open { overflow: hidden; }
 .ot-gctl:active { transform: scale(.94); }
 .ot-gctl .material-symbols-outlined { font-size: 22px; }
 .ot-graph-hint { position: absolute; left: 12px; bottom: 14px; display: flex; align-items: center; gap: 5px; z-index: 4;
-  font: 600 11px system-ui; color: var(--ot-sub); background: color-mix(in srgb, var(--ot-card) 80%, transparent);
+  font: 600 11px var(--sans); color: var(--ot-sub); background: color-mix(in srgb, var(--ot-card) 80%, transparent);
   padding: 5px 9px; border-radius: 999px; backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); pointer-events: none; max-width: 62%; }
 .ot-graph-hint .material-symbols-outlined { font-size: 14px; }
 
@@ -225,20 +224,20 @@ body.ot-open { overflow: hidden; }
   background: color-mix(in srgb, var(--ot-card) 96%, transparent); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
   box-shadow: 0 -4px 24px rgba(0,0,0,.18); }
 .ot-mappop-x { position: absolute; top: 9px; right: 9px; width: 30px; height: 30px; display: grid; place-items: center; border: none; background: transparent; color: var(--ot-sub); cursor: pointer; }
-.ot-mappop-cat { display: flex; align-items: center; gap: 6px; font: 800 10px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ot-c, var(--ot-sub)); }
+.ot-mappop-cat { display: flex; align-items: center; gap: 6px; font: 800 10px var(--sans); text-transform: uppercase; letter-spacing: .05em; color: var(--ot-c, var(--ot-sub)); }
 .ot-mappop-cat .material-symbols-outlined { font-size: 15px; }
-.ot-mappop-name { font: 800 16px system-ui; color: var(--ot-ink); margin: 3px 40px 0 0; }
-.ot-mappop-desc { font: 500 12.5px/1.4 system-ui; color: var(--ot-sub); margin-top: 5px; }
-.ot-mappop-sel { display: flex; align-items: center; gap: 6px; font: 700 13px system-ui; color: #10b981; margin-top: 8px; }
+.ot-mappop-name { font: 800 16px var(--sans); color: var(--ot-ink); margin: 3px 40px 0 0; }
+.ot-mappop-desc { font: 500 12.5px/1.4 var(--sans); color: var(--ot-sub); margin-top: 5px; }
+.ot-mappop-sel { display: flex; align-items: center; gap: 6px; font: 700 13px var(--sans); color: var(--sev-stable-fg); margin-top: 8px; }
 .ot-mappop-sel .material-symbols-outlined, .ot-mappop-why .material-symbols-outlined { font-size: 17px; }
-.ot-mappop-why { display: flex; align-items: flex-start; gap: 6px; font: 600 12px/1.35 system-ui; color: #ef4444; margin-top: 8px; }
+.ot-mappop-why { display: flex; align-items: flex-start; gap: 6px; font: 600 12px/1.35 var(--sans); color: var(--sev-critical-fg); margin-top: 8px; }
 .ot-btn.sm { min-height: 38px; padding: 0 14px; font-size: 13px; margin-top: 11px; }
 
 /* protocol detail */
 .ot-back { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: none; color: var(--ot-accent); font-size: 14px; font-weight: 600; cursor: pointer; padding: 4px 0 12px; }
 .ot-detail-head { display: flex; align-items: flex-start; gap: 10px; }
 .ot-detail-head h2 { flex: 1; font-size: 20px; font-weight: 700; margin: 0; }
-.ot-detail-warn { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: #92400e; background: #fef3c7; border-radius: 10px; padding: 10px 12px; margin: 12px 0; }
+.ot-detail-warn { display: flex; align-items: flex-start; gap: 8px; font-size: 12.5px; color: var(--sev-warning-fg); background: var(--sev-warning-bg); border-radius: 10px; padding: 10px 12px; margin: 12px 0; }
 .ot-detail-warn .material-symbols-outlined { font-size: 17px; }
 .ot-detail-meta { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 12px 0; }
 .ot-detail-meta > div { background: var(--ot-card); border: 1px solid var(--ot-line); border-radius: 10px; padding: 8px 10px; font-size: 13px; }
@@ -254,7 +253,7 @@ body.ot-open { overflow: hidden; }
 
 /* selection handoff */
 .ot-selection { text-align: center; padding: 24px 8px; }
-.ot-sel-icon { color: #10b981; display: grid; place-items: center; margin-bottom: 6px; }
+.ot-sel-icon { color: var(--sev-stable-fg); display: grid; place-items: center; margin-bottom: 6px; }
 .ot-sel-icon .material-symbols-outlined { font-size: 56px; }
 .ot-selection h2 { font-size: 20px; margin: 0 0 4px; }
 .ot-sel-name { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
@@ -267,7 +266,7 @@ body.ot-open { overflow: hidden; }
 /* states */
 .ot-loading, .ot-error, .ot-empty { display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 48px 16px; color: var(--ot-sub); text-align: center; }
 .ot-loading .material-symbols-outlined { font-size: 32px; animation: ot-spin 1s linear infinite; }
-.ot-error .material-symbols-outlined { font-size: 32px; color: #ef4444; }
+.ot-error .material-symbols-outlined { font-size: 32px; color: var(--sev-critical-fg); }
 @keyframes ot-spin { to { transform: rotate(360deg); } }
 
 /* disclaimer */

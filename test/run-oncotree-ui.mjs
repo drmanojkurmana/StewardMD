@@ -77,7 +77,7 @@ try {
   // protocol detail
   await clickAct(`[data-ot-act="view-proto"]`);
   ok(await ev(`return !!document.querySelector(".ot-drugs");`) === true, "protocol detail shows the regimen table");
-  ok((await ev(`return document.querySelector(".ot-detail-warn").textContent||"";`) || "").indexOf("not an approved") >= 0, "detail carries a DRAFT/not-approved warning");
+  ok((await ev(`return document.querySelector(".ot-detail-warn").textContent||"";`) || "").indexOf("Verify against your institutional protocol") >= 0, "detail carries a DRAFT/AI-drafted verify-against-protocol warning");
 
   // select -> handoff
   await clickAct(`[data-ot-act="select-proto"]`);

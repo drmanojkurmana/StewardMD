@@ -1,0 +1,214 @@
+{
+  "site": "pancreas",
+  "name": "Pancreas (exocrine)",
+  "system": "Oncology / Pancreas",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition pancreatic (exocrine) cancer staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging applies to exocrine carcinomas of the pancreas, principally ductal adenocarcinoma. In the 8th edition the T category for tumours confined to the pancreas is driven by size alone (T1 <= 2 cm, T2 > 2 to <= 4 cm, T3 > 4 cm), while T4 is defined by involvement of the major arteries (celiac axis, superior mesenteric artery, or common hepatic artery) regardless of size. Nodal disease is split by the number of involved regional nodes (N1 for 1 to 3, N2 for 4 or more), and at least 12 nodes should be examined.\n\nA key nuance is that anatomic TNM stage should be read alongside resectability, which is judged separately from tumour-vessel relationships on cross-sectional imaging (resectable, borderline resectable, or locally advanced/unresectable) and determines whether upfront surgery or neoadjuvant therapy is offered. Margin status (R0 vs R1 vs R2) and the CA 19-9 level are important prognostic factors. Pancreatic neuroendocrine tumours and ampullary or bile-duct cancers use separate staging systems.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ (includes high-grade PanIN, and IPMN, ITPN, or MCN with high-grade dysplasia)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumour <= 2 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumour <= 0.5 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumour > 0.5 cm and < 1 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c",
+          "label": "Tumour 1 to 2 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour > 2 cm and <= 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumour > 4 cm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour of any size involving the celiac axis, superior mesenteric artery, and/or common hepatic artery",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in 1 to 3 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in 4 or more regional lymph nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Carcinoma in situ, node-negative, no metastasis.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumour <= 2 cm, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumour > 2 to <= 4 cm, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumour > 4 cm, node-negative.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Tumour <= 2 cm with 1 to 3 positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Tumour > 2 to <= 4 cm with 1 to 3 positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Tumour > 4 cm with 1 to 3 positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T1",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Tumour <= 2 cm with 4 or more positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Tumour > 2 to <= 4 cm with 4 or more positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T3",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Tumour > 4 cm with 4 or more positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "III",
+          "t": "T4",
+          "n": "Any N",
+          "m": "M0",
+          "basis": "Major arterial involvement (celiac axis, SMA, or common hepatic artery), any nodal status.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional nodes are the peripancreatic nodes, which include nodes along the common hepatic artery, celiac axis, splenic artery, pyloric region, and superior/inferior body and head groups, as well as the superior mesenteric and portal/pericholedochal nodes. 8th edition recommends examining at least 12 regional lymph nodes for adequate staging.",
+      "histologicGrade": "Grade (G): GX not assessable; G1 well differentiated; G2 moderately differentiated; G3 poorly differentiated.",
+      "histopathologicTypes": "Ductal adenocarcinoma (most common) and its variants (adenosquamous, colloid/mucinous noncystic, hepatoid, medullary, signet-ring, undifferentiated, undifferentiated with osteoclast-like giant cells); acinar cell carcinoma; and carcinomas arising from IPMN, ITPN, or MCN. Pancreatic neuroendocrine tumours are staged separately.",
+      "prognosticFactors": [
+        "Resection margin status (R0 vs R1 vs R2)",
+        "Tumour size and number of involved regional nodes (lymph node ratio)",
+        "Histologic grade",
+        "Preoperative and postoperative CA 19-9 level",
+        "Lymphovascular and perineural invasion",
+        "Performance status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

@@ -1,0 +1,272 @@
+{
+  "site": "ovary",
+  "name": "Ovary / fallopian tube / peritoneum",
+  "system": "Oncology / Gynecologic",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition (and FIGO where applicable) ovarian, fallopian tube, and primary peritoneal carcinoma staging, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "8th edition staging covers epithelial carcinoma of the ovary, fallopian tube, and primary peritoneum under a single scheme aligned with the FIGO 2014 system, so each T category maps to a FIGO stage (shown in the labels). The same anatomic framework is also applied to malignant germ cell and sex cord-stromal tumours of the ovary.\n\nStaging is surgical and pathologic and depends on operative and cytologic findings such as capsule rupture (before vs during surgery), surface tumour, and malignant cells in ascites or washings, which together subdivide stage IC. A key nuance in the FIGO 2014/8th edition scheme is that retroperitoneal nodal metastasis alone is stage IIIA1, kept distinct from peritoneal spread. Completeness of cytoreduction (volume of residual disease), histologic type and grade (high-grade serous vs low-grade or other), and BRCA1/BRCA2 and homologous recombination deficiency status are the major prognostic and treatment determinants.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1 (FIGO I)",
+          "label": "T1 (FIGO I): Tumor limited to the ovaries (one or both) or fallopian tube(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a (FIGO IA)",
+          "label": "T1a (FIGO IA): Tumor limited to one ovary (capsule intact) or one fallopian tube; no tumor on the ovarian or tubal surface; no malignant cells in ascites or peritoneal washings",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b (FIGO IB)",
+          "label": "T1b (FIGO IB): Tumor limited to both ovaries (capsules intact) or both fallopian tubes; no tumor on the ovarian or tubal surface; no malignant cells in ascites or peritoneal washings",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c (FIGO IC)",
+          "label": "T1c (FIGO IC): Tumor limited to one or both ovaries or fallopian tubes, with any of the features below (T1c1 to T1c3)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c1 (FIGO IC1)",
+          "label": "T1c1 (FIGO IC1): Surgical spill intraoperatively",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c2 (FIGO IC2)",
+          "label": "T1c2 (FIGO IC2): Capsule ruptured before surgery or tumor on the ovarian or fallopian tube surface",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c3 (FIGO IC3)",
+          "label": "T1c3 (FIGO IC3): Malignant cells in ascites or peritoneal washings",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2 (FIGO II)",
+          "label": "T2 (FIGO II): Tumor involves one or both ovaries or fallopian tubes with pelvic extension below the pelvic brim, or primary peritoneal carcinoma",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a (FIGO IIA)",
+          "label": "T2a (FIGO IIA): Extension and/or implants on the uterus and/or fallopian tube(s) and/or ovaries",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b (FIGO IIB)",
+          "label": "T2b (FIGO IIB): Extension to and/or implants on other pelvic tissues",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3 (FIGO III)",
+          "label": "T3 (FIGO III): Tumor involves one or both ovaries or fallopian tubes, or primary peritoneal carcinoma, with microscopically confirmed peritoneal metastasis outside the pelvis and/or metastasis to the retroperitoneal (pelvic and/or para-aortic) lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a (FIGO IIIA2)",
+          "label": "T3a (FIGO IIIA2): Microscopic extrapelvic (above the pelvic brim) peritoneal involvement, with or without positive retroperitoneal lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b (FIGO IIIB)",
+          "label": "T3b (FIGO IIIB): Macroscopic peritoneal metastasis beyond the pelvis <= 2 cm in greatest dimension, with or without positive retroperitoneal lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3c (FIGO IIIC)",
+          "label": "T3c (FIGO IIIC): Macroscopic peritoneal metastasis beyond the pelvis > 2 cm in greatest dimension, with or without positive retroperitoneal lymph nodes (includes extension of tumor to the capsule of the liver and spleen without parenchymal involvement of either organ)",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0(i+)",
+          "label": "Isolated tumor cells in regional lymph node(s) no larger than 0.2 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1 (FIGO IIIA1)",
+          "label": "N1 (FIGO IIIA1): Positive retroperitoneal lymph nodes only (histologically confirmed)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1a (FIGO IIIA1i)",
+          "label": "N1a (FIGO IIIA1i): Nodal metastasis <= 10 mm in greatest dimension",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1b (FIGO IIIA1ii)",
+          "label": "N1b (FIGO IIIA1ii): Nodal metastasis > 10 mm in greatest dimension",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1 (FIGO IV)",
+          "label": "M1 (FIGO IV): Distant metastasis, excluding peritoneal metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a (FIGO IVA)",
+          "label": "M1a (FIGO IVA): Pleural effusion with positive cytology",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b (FIGO IVB)",
+          "label": "M1b (FIGO IVB): Parenchymal metastasis (e.g., liver, spleen) and metastasis to extra-abdominal organs, including inguinal lymph nodes and lymph nodes outside the abdominal cavity, and transmural involvement of the intestine",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumor limited to one ovary/tube, capsule intact, negative washings.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Tumor limited to both ovaries/tubes, capsules intact, negative washings.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IC1",
+          "t": "T1c1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Stage I disease with intraoperative surgical spill.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IC2",
+          "t": "T1c2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Stage I disease with preoperative capsule rupture or surface tumor.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IC3",
+          "t": "T1c3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Stage I disease with malignant cells in ascites or washings.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pelvic extension/implants on uterus, tubes, or ovaries.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Extension/implants on other pelvic tissues.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA1",
+          "t": "T1 or T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Positive retroperitoneal lymph nodes only (IIIA1i if <= 10 mm, IIIA1ii if > 10 mm).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA2",
+          "t": "T3a",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Microscopic extrapelvic peritoneal spread, with or without positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3b",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Macroscopic extrapelvic peritoneal metastasis <= 2 cm, with or without positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T3c",
+          "n": "N0 or N1",
+          "m": "M0",
+          "basis": "Macroscopic extrapelvic peritoneal metastasis > 2 cm, with or without positive nodes.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1a",
+          "basis": "Pleural effusion with positive cytology.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1b",
+          "basis": "Parenchymal and/or extra-abdominal metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional lymph nodes are the retroperitoneal nodes: para-aortic, common iliac, external iliac, internal iliac (hypogastric), obturator, lateral sacral, and inguinal nodes, plus pelvic nodes not otherwise specified. Retroperitoneal nodal metastasis alone is stage IIIA1.",
+      "histologicGrade": "Grading depends on histologic type. Serous carcinoma is classified as low grade or high grade (two-tier). Endometrioid carcinoma is graded G1 to G3. Clear cell carcinoma is considered high grade by convention. GX denotes grade not assessable.",
+      "histopathologicTypes": "High-grade serous carcinoma is the most common. Other epithelial types include low-grade serous, endometrioid, clear cell, mucinous, and undifferentiated carcinoma. The same anatomic framework is applied to malignant germ cell and sex cord-stromal tumors of the ovary.",
+      "prognosticFactors": [
+        "FIGO stage and extent of extrapelvic peritoneal disease",
+        "Volume of residual disease after cytoreductive (debulking) surgery",
+        "Histologic type and grade (high-grade serous vs low-grade/other)",
+        "Retroperitoneal lymph node status",
+        "Preoperative capsule rupture, surface tumor, and positive peritoneal cytology",
+        "BRCA1/BRCA2 mutation and homologous recombination deficiency (HRD) status; serum CA-125 trend"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

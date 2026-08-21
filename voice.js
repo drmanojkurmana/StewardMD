@@ -647,6 +647,10 @@
       '<div class="smdv-ms-foot" data-smdv-ms-foot></div>' +
     '</div>';
   }
+  // Which voice models are mid-download. Module scope on purpose: renderModels() rebuilds the cards,
+  // so per-card state cannot be trusted to remember an in-flight transfer.
+  var _dlInFlight = {};
+
   function wireModelSettings(container) {
     if (!container) return;
     injectCSS();
@@ -703,11 +707,18 @@
       var el = b.closest(".smdv-card"); if (!el) return; var key = el.getAttribute("data-key");
       if (b.hasAttribute("data-dl")) {
         if (!(N && N.downloadWhisperModel)) { (window.toast || function () {})("Available in the app."); return; }
+        // Guard against a SECOND transfer of the same model. The button is hidden below, but
+        // renderModels() rebuilds the cards from scratch (on a tier change, or a status refresh) and
+        // restores it mid-download - so the click itself has to check. The native downloader now
+        // refuses duplicates too; this just avoids the pointless round trip and the confusing toast.
+        _dlInFlight = _dlInFlight || {};
+        if (_dlInFlight[key]) { (window.toast || function () {})("Already downloading this model."); return; }
+        _dlInFlight[key] = true;
         var prog = el.querySelector("[data-prog]"), pct = el.querySelector("[data-pct]"), fill = el.querySelector("[data-fill]"), st = el.querySelector("[data-st]");
         b.style.display = "none"; prog.style.display = ""; st.textContent = "Downloading…"; st.className = "smdv-st dl";
         N.downloadWhisperModel(key, { onProgress: function (p) { var v = Math.round((p || 0) * 100); pct.textContent = v + "%"; fill.style.width = v + "%"; } })
-          .then(function () { (window.toast || function () {})("StewardVoice model ready."); refreshStatus(key); })
-          .catch(function () { prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed — tap to retry"; st.className = "smdv-st off"; });
+          .then(function () { _dlInFlight[key] = false; (window.toast || function () {})("StewardVoice model ready."); refreshStatus(key); })
+          .catch(function () { _dlInFlight[key] = false; prog.style.display = "none"; b.style.display = ""; st.textContent = "Download failed — tap to retry"; st.className = "smdv-st off"; });
         return;
       }
       if (b.hasAttribute("data-del")) {

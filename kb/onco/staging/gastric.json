@@ -1,0 +1,509 @@
+{
+  "site": "gastric",
+  "name": "Stomach (gastric)",
+  "system": "Oncology / Stomach (gastric)",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Public 8th edition references (American Cancer Society staging summary and standard 8th edition gastric TNM); Medscape staging article was paywalled",
+      "provenance": "8th edition gastric adenocarcinoma TNM, rewritten in original wording from criteria published on public references (cancer.org and standard 8th edition gastric staging) after the Medscape article returned a paywall; invasion depths, node counts, and stage mappings preserved exactly. Interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to gastric (stomach) adenocarcinoma. The T category reflects depth of invasion through the gastric wall layers, and the N category is defined strictly by the number of involved regional nodes (examination of at least 16, ideally 30 or more, is recommended for accurate pN). Tumors of the esophagogastric junction whose epicenter lies within 2 cm of the junction and extends into the esophagus are staged as esophageal cancers.\n\nA distinctive feature of 8th edition is that it provides separate stage-group tables for clinical (cTNM), pathological (pTNM), and post-neoadjuvant (ypTNM) staging, so the same T/N/M combination can map to different stages depending on the table used. The stage groups listed below are the PATHOLOGICAL (pTNM) groups, in which pN3 is split into pN3a and pN3b; the post-neoadjuvant (yp) table is given separately under postNeoadjuvant and collapses N3 into a single category.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Carcinoma in situ: intraepithelial tumor without invasion of the lamina propria, high-grade dysplasia",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Tumor invades the lamina propria, muscularis mucosae, or submucosa",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumor invades the lamina propria or muscularis mucosae",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumor invades the submucosa",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumor invades the muscularis propria",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Tumor penetrates the subserosal connective tissue without invasion of the visceral peritoneum or adjacent structures",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumor invades the serosa (visceral peritoneum) or adjacent structures",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Tumor invades the serosa (visceral peritoneum)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Tumor invades adjacent structures or organs",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in 1 to 2 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Metastasis in 3 to 6 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Metastasis in 7 or more regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Metastasis in 7 to 15 regional lymph nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Metastasis in 16 or more regional lymph nodes",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis (including distant nodes and peritoneal, hepatic, pulmonary, or other organ spread)",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T1",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T1",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T3",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1",
+          "n": "N3a",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T2",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T4a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T2",
+          "n": "N3a",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T3",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T4a",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T4a",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T4b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T1",
+          "n": "N3b",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T2",
+          "n": "N3b",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3",
+          "n": "N3a",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4a",
+          "n": "N3a",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4b",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T4b",
+          "n": "N2",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T3",
+          "n": "N3b",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T4a",
+          "n": "N3b",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T4b",
+          "n": "N3a",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T4b",
+          "n": "N3b",
+          "m": "M0",
+          "basis": "Pathological (pTNM) group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "postNeoadjuvant": {
+        "note": "Applied after neoadjuvant therapy; uses ypT, ypN, ypM. 8th edition provides a distinct yp stage-group table for gastric cancer in which N3 is not split into N3a and N3b.",
+        "stageGroups": [
+          {
+            "stage": "I",
+            "t": "ypT1",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "I",
+            "t": "ypT2",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "I",
+            "t": "ypT1",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT3",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT2",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT1",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT4a",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT3",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT2",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "II",
+            "t": "ypT1",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4a",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT3",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT2",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4b",
+            "n": "ypN0",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4b",
+            "n": "ypN1",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4a",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT3",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4b",
+            "n": "ypN2",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4b",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "III",
+            "t": "ypT4a",
+            "n": "ypN3",
+            "m": "M0",
+            "requiresR1Verification": true
+          },
+          {
+            "stage": "IV",
+            "t": "Any ypT",
+            "n": "Any ypN",
+            "m": "M1",
+            "requiresR1Verification": true
+          }
+        ]
+      },
+      "regionalNodes": "Regional nodes are the perigastric nodes along the lesser and greater curvatures and the nodes along the left gastric, common hepatic, splenic, and celiac arteries, plus hepatoduodenal nodes. Involvement of other intra-abdominal nodes (for example retropancreatic, para-aortic, portal, mesenteric) is classified as distant metastasis (M1). recommends removal and examination of at least 16 regional nodes (30 or more is preferred) for reliable pN staging.",
+      "histologicGrade": "Adenocarcinoma is graded G1 (well differentiated) to G3 (poorly differentiated), with G4/undifferentiated in some schemes; GX when grade cannot be assessed. The Lauren classification (intestinal vs diffuse vs mixed) is also commonly reported and carries prognostic weight.",
+      "histopathologicTypes": "The great majority are adenocarcinomas, subclassified by Lauren type into intestinal, diffuse, and mixed forms. Signet-ring cell carcinoma (a diffuse-type variant), mucinous, tubular, papillary, and poorly cohesive carcinomas are recognized WHO subtypes. Rare non-adenocarcinoma tumors (lymphoma, GIST, neuroendocrine) use separate staging systems.",
+      "prognosticFactors": [
+        "Depth of invasion (T category)",
+        "Number of involved regional nodes (N category) and total nodes examined",
+        "Distant metastasis including peritoneal spread (M category)",
+        "Resection margin status (R0 vs R1/R2)",
+        "Lauren classification (intestinal vs diffuse)",
+        "Histologic grade",
+        "HER2 status",
+        "Location including esophagogastric junction involvement",
+        "Lymphovascular invasion"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

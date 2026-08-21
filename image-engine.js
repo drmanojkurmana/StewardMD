@@ -113,14 +113,30 @@
     return function () { try { ov.remove(); } catch (e) {} };
   }
 
+  /* Is the OFFLINE model able to read images right now?
+   *
+   * Three things must hold: the on-device engine exists, the selected pack can see (Apex is Qwen3
+   * text-only), and its projector is downloaded. Offered as a third engine only then, because an
+   * option that can only fail is worse than no option.
+   */
+  function localVisionReady() {
+    try {
+      var L = window.SMD_MAIK_LOCAL;
+      return !!(L && L.visionReady && L.visionReady(L.currentPack()));
+    } catch (e) { return false; }
+  }
+
   function engineCard(engine, selected, kind) {
     var isAi = engine === "ai";
+    var isLocal = engine === "local";
     var rec = recommendFor(kind) === engine;
-    var title = isAi ? "AI Vision" : "Private Device OCR";
+    var title = isAi ? "AI Vision" : isLocal ? "On-device AI" : "Private Device OCR";
     var pill = isAi ? '<span class="ie-pill pro">Pro</span>' : '<span class="ie-pill free">Free</span>';
     var recPill = rec ? '<span class="ie-pill rec">Recommended</span>' : "";
     var desc = isAi
       ? "Secure cloud AI — the most accurate reading of any clinical image (labs, ABG, medication lists, monitor & ventilator screens). The image is sent for processing."
+      : isLocal
+      ? "The downloaded model reads the image on this phone. Nothing is sent anywhere and no AI tokens are used. It understands what it is looking at rather than only extracting text, but it is a small model and can be wrong, so check it against the original."
       : "Runs privately on this device (Apple Vision / ML Kit) — the image never leaves it, but it can be less accurate, especially for screens, handwriting or complex layouts.";
     return '<button type="button" class="ie-lrow' + (selected ? " sel" : "") + '" data-engine="' + engine + '" role="radio" aria-checked="' + selected + '">' +
       '<span class="ie-lmain"><span class="ie-lt">' + esc(title) + " " + pill + recPill + "</span>" +
@@ -146,6 +162,7 @@
           '<div class="ie-list" role="radiogroup" aria-label="Image engine">' +
           engineCard("device", sel === "device", kind) +
           engineCard("ai", sel === "ai", kind) +
+          (localVisionReady() ? engineCard("local", sel === "local", kind) : "") +
           '</div>' +
           warn +
           '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice</span></label>' +
@@ -206,7 +223,99 @@
       return route(choice.engine, image, kind);
     });
   }
-  function route(engine, image, kind) { return engine === "ai" ? routeAI(image, kind) : routeDevice(image, kind); }
+  function route(engine, image, kind) {
+    if (engine === "local") return routeLocal(image, kind);
+    return engine === "ai" ? routeAI(image, kind) : routeDevice(image, kind);
+  }
+
+  /* THIRD ENGINE: the downloaded on-device model reads the image itself.
+   *
+   * Different in kind from the other two, not just in accuracy: OCR extracts text and cloud AI reads
+   * a clinical image, while this one is a multimodal model UNDERSTANDING the picture offline. It
+   * returns prose, so it is surfaced as { mode:"lines" } - the shape the callers already handle for a
+   * reading with no structured fields.
+   */
+  /* The SAME field schema the cloud engine is asked for.
+   *
+   * Deliberately copied from VISION_SYS in functions/api/ai/[[path]].js rather than invented here. ICU
+   * autofill maps the cloud engine's keys already, so emitting the same keys means the on-device
+   * engine feeds the identical review screen with no translation layer - and a translation layer is
+   * exactly where a value silently lands in the wrong field.
+   */
+  var LOCAL_SCHEMA = {
+    monitor: '{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num,"cvp":num,"etco2":num}',
+    ventilator: '{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}',
+    abg: '{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num}',
+    labs: '{"na":num,"k":num,"cl":num,"hco3":num,"ca":num,"mg":num,"glu":num,"creat":num,"urea":num,"wbc":num,"hb":num,"plt":num,"inr":num,"crp":num,"bili":num,"ast":num,"alt":num,"lactate":num}',
+    all: '{"labs":{...},"abg":{"ph":num,"paco2":num,"pao2":num,"hco3":num,"be":num,"lactate":num,"fio2":num},"vitals":{"hr":num,"sbp":num,"dbp":num,"map":num,"rr":num,"spo2":num,"temp":num},"ventilator":{"mode":str,"fio2":num,"peep":num,"tv":num,"rr":num,"peak":num,"plateau":num}}'
+  };
+
+  /* On-device reading. Two shapes, because the callers want different things.
+   *
+   * ICU snapshot AUTOFILLS fields, so for those kinds the model is asked for JSON in the cloud
+   * engine's own schema and the result is parsed. Returning prose there would have meant the doctor
+   * re-typing every value, which defeats the point of photographing the monitor.
+   *
+   * Scan Meds and a plain look at a document want prose, so those still get a reading.
+   */
+  function routeLocal(image, kind) {
+    var L = window.SMD_MAIK_LOCAL;
+    if (!L || !L.answer || !localVisionReady()) {
+      return Promise.reject(new Error("the on-device model cannot read images yet"));
+    }
+    var schema = LOCAL_SCHEMA[kind] || (kind === "icu" || kind === "handover" ? LOCAL_SCHEMA.all : null);
+    log("kind:", kind, "engine: local", schema ? "shape: json fields" : "shape: prose lines");
+    var done = busy("Reading on this device…");
+
+    var ask = schema
+      ? "Read this clinical image and return ONLY JSON matching " + schema +
+        ". Omit any field you cannot read with confidence. No prose, no explanation, no code fence."
+      : (kind === "meds"
+          ? "Read this medicine package. Give the drug name, strength and form exactly as printed."
+          : "Read this clinical image and say what it shows.");
+
+    // Structured extraction needs a bare EXTRACTOR prompt. The default image prompt asks for findings
+    // plus an Interpretation section, which would return prose and break autofill.
+    var sysOverride = schema
+      ? "You read clinical images and return ONLY the JSON asked for. No prose, no explanation, no " +
+        "code fence, no commentary. Omit any field you cannot read with confidence. Never invent a value."
+      : null;
+    return Promise.resolve(L.answer({ question: ask },
+        { images: [stripFileScheme(image)], systemOverride: sysOverride }, null))
+      .then(function (r) {
+        done();
+        if (!r || r.error) throw new Error((r && r.error) || "on-device reading failed");
+        var text = String(r.text || "");
+        if (schema) {
+          var f = parseLooseJson(text);
+          // Fall through to lines rather than failing: a partial reading the doctor can see beats an
+          // error, and the review screen accepts lines.
+          if (f && Object.keys(f).length) { log("local success: fields"); return { mode: "fields", fields: f, lines: [], engine: "local" }; }
+          log("local: no parseable fields, falling back to lines");
+        }
+        var lines = text.split(/\n+/).map(function (t) { return t.trim(); }).filter(Boolean);
+        return { mode: "lines", lines: lines, engine: "local" };
+      })
+      .catch(function (e) { done(); throw e; });
+  }
+
+  /* A 4B asked for JSON will wrap it in a code fence, add a sentence before it, or trail a comma.
+   * Pull the outermost object out and repair the cheap mistakes rather than discarding a good reading
+   * over punctuation. Anything still unparseable returns null and the caller shows prose instead.
+   */
+  function parseLooseJson(t) {
+    var s = String(t || "").replace(/```[a-z]*/gi, "").trim();
+    var a = s.indexOf("{"), b = s.lastIndexOf("}");
+    if (a < 0 || b <= a) return null;
+    var body = s.slice(a, b + 1).replace(/,\s*([}\]])/g, "$1");
+    try {
+      var o = JSON.parse(body);
+      return (o && typeof o === "object") ? o : null;
+    } catch (e) { return null; }
+  }
+
+  /** mtmd wants a filesystem path; a file:// URI would be read as a literal filename. */
+  function stripFileScheme(p) { return String(p || "").replace(/^file:\/\//, ""); }
 
   function routeDevice(image, kind) {
     log("kind:", kind, "engine: device", "shape: none (on-device, no upload)");

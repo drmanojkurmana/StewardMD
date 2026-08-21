@@ -1,8 +1,20 @@
 /* Smart OPD Queue + Oncology — feature flags (mirrors followcare-flags.js). Resolution: ?query -> localStorage -> default.
- * PUBLIC-RELEASE POSTURE (App Store v2.1): the OPD Queue/EMR + onco write/admin/experimental flags ship
- * def:false (see the DEFS block); the OncoTree navigator + read-only onco reference ship def:true. The queue
- * module also fails SAFE server-side: even with a flag on but server secrets unprovisioned it shows a clean
- * "being set up" state and does nothing (isQueueConfigured() guard), no PHI processed, no message sent.
+ * CURRENT POSTURE (owner-approved 2026-08-21): EVERY flag here is def:true. This is a DEV/TESTING
+ * posture, not an App Store one - the previous header claimed the OPD Queue/EMR and onco
+ * write/admin/experimental flags shipped def:false, and leaving that text in place while the values
+ * said otherwise would have been worse than either choice.
+ *
+ * What limits exposure while they are on:
+ *   - the site-wide access gate (functions/_middleware.js) still fronts the app;
+ *   - writes remain DOUBLY gated: server needs QUEUE_EMR_WRITE=1 / QUEUE_ONCO_WRITE=1 and PRESCRIBE
+ *     stays server-hard-blocked, so a client default alone cannot write;
+ *   - the queue module fails SAFE server-side: with a flag on but secrets unprovisioned it shows a
+ *     clean "being set up" state and does nothing (isQueueConfigured() guard), no PHI, no message;
+ *   - smd_onco_protolib is the one to watch - it surfaces UNVERIFIED draft regimens. They are never
+ *     lifecycleState:active and the apply flow additionally needs write mode, but it is the flag to
+ *     re-close first before a public release.
+ *
+ * BEFORE A PUBLIC RELEASE: `grep PUBLIC-RELEASE-GATE` this file and re-close or owner-gate every hit.
  * Set ?q=1 (or localStorage) to preview. Exposes window.SMD_QUEUE_FLAGS. No PHI, no network. */
 (function () {
   "use strict";
@@ -20,12 +32,17 @@
   // docs/APP-STORE-SUBMISSION.md (localStorage). Writes stay doubly gated regardless: server needs
   // QUEUE_EMR_WRITE=1 / QUEUE_ONCO_WRITE=1, PRESCRIBE stays server-hard-blocked, every submit needs confirm().
   var DEFS = {
-    smd_opd_queue: { type: "bool", def: false, query: "q", desc: "Smart OPD Queue master flag. PUBLIC-RELEASE-GATE: def:false (dev/testing, server-provisioning-pending)." },
-    smd_opd_queue_patient: { type: "bool", def: false, query: "qpatient", desc: "Patient live tracking page. PUBLIC-RELEASE-GATE: def:false." },
-    smd_opd_queue_import: { type: "bool", def: false, query: "qimport", desc: "GHIS/EMR roster auto-import. PUBLIC-RELEASE-GATE: def:false." },
-    smd_opd_emr: { type: "bool", def: false, query: "qemr", desc: "Read-only OPD patient profile + reports (P1). PUBLIC-RELEASE-GATE: def:false." },
-    smd_opd_emr_write: { type: "bool", def: false, query: "qemrwrite", desc: "OPD write-back submit buttons (assessment + investigation orders live w/ QUEUE_EMR_WRITE; prescribe server-blocked). PUBLIC-RELEASE-GATE: def:false." },
-    smd_onco_protocols: { type: "bool", def: false, query: "qonco", desc: "Oncology treatment-plan engine (Protocol/Plan/Cycle/Administration). Writes double-gated by server QUEUE_ONCO_WRITE. PUBLIC-RELEASE-GATE: def:false." },
+    // ── OPD: def:TRUE for dev/testing, owner-approved 2026-08-21. ───────────────────────────────
+    // The tile was invisible on device purely because the master flag was def:false; all the OPD code
+    // was present and live. Each line KEEPS its PUBLIC-RELEASE-GATE token on purpose, so `grep
+    // PUBLIC-RELEASE-GATE` still lists everything that must be re-closed or owner-gated before a
+    // public release. Opt out per device with localStorage <flag>=0.
+    smd_opd_queue: { type: "bool", def: true, query: "q", desc: "Smart OPD Queue master flag. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21); re-close or owner-gate before public release." },
+    smd_opd_queue_patient: { type: "bool", def: true, query: "qpatient", desc: "Patient live tracking page. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
+    smd_opd_queue_import: { type: "bool", def: true, query: "qimport", desc: "GHIS/EMR roster auto-import. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21). Only imports when the session carries a GHIS token, so a clinic/Connect session must keep ghisToken null or hospital OPD cross-imports into the clinic queue." },
+    smd_opd_emr: { type: "bool", def: true, query: "qemr", desc: "Read-only OPD patient profile + reports (P1). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21). Read-only, so no write risk." },
+    smd_opd_emr_write: { type: "bool", def: true, query: "qemrwrite", desc: "OPD write-back submit buttons (assessment + investigation orders live w/ QUEUE_EMR_WRITE; prescribe server-blocked). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21). The ONLY OPD flag that writes to an EMR; still double-gated by server QUEUE_EMR_WRITE, so this client default alone cannot write." },
+    smd_onco_protocols: { type: "bool", def: true, query: "qonco", desc: "Oncology treatment-plan engine (Protocol/Plan/Cycle/Administration). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21). Writes stay double-gated by server QUEUE_ONCO_WRITE, so this client default alone cannot write a plan; re-close or owner-gate before public release." },
     smd_onco_home: { type: "bool", def: true, query: "qoncohome", desc: "Onco Home reference workbench (P0): global search + tool grid over MEDCALC/KB/drugs. Read-only, no writes." },
     smd_onco_staging: { type: "bool", def: true, query: "qoncostaging", desc: "AJCC/TNM staging engine (P1): versioned schema + version toggle. Seeded sites carry only a flagged generic TNM scaffold (R1-pending); other sites show an honest content gap. No proprietary AJCC tables. Read-only." },
     smd_onco_tallman: { type: "bool", def: true, query: "qoncotallman", desc: "Tall-man lettering (P1) for oncology drug names in the Onco drug view (ISMP List of Confused Drug Names). Display-only." },
@@ -35,13 +52,13 @@
     smd_onco_iotox: { type: "bool", def: true, query: "qoncoiotox", desc: "IO toxicity (irAE) reference (P2): grade-based management PRINCIPLES by organ, grounded in ASCO/NCCN/SITC (cited by name). No doses/thresholds (fail-closed on numerals). Read-only." },
     smd_onco_recist: { type: "bool", def: true, query: "qoncorecist", desc: "RECIST 1.1 response calculator (P2): real target-lesion sum -> percent change -> CR/PR/SD/PD with nadir + new-lesion handling. Reference calculation only. Read-only." },
     smd_onco_favorites: { type: "bool", def: true, query: "qoncofav", desc: "Onco Home Favorites + Recent (P2): localStorage-backed star/recent list across Onco Home. Pure UX, no clinical content, private-mode safe." },
-    smd_onco_recommend: { type: "bool", def: false, query: "qoncorecommend", desc: "ONCQIS Phase B protocol recommendation engine (onco-recommend.js): suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype and why. Decision-support only, never auto-selects/prescribes; always the full list w/ reviewRequired. Read-only (GET onco/recommend, QUEUE_VIEW). Default OFF." },
-    smd_onco_evidence_overlay: { type: "bool", def: false, query: "qoncoevidence", desc: "ONCQIS Phase C evidence overlay (onco-evidence.js): 3-layer evidence panel (core/guideline/institutional), UPDATE AVAILABLE guideline overlay, and per-field EVIDENCE DIVERGENCE view. Decision-support only; never silently reconciles evidence or auto-replaces a protocol - every action only records the physician's choice. Read-only. Default OFF." },
-    smd_onco_kb_admin: { type: "bool", def: false, query: "qoncokbadmin", desc: "ONCQIS Phase J-a Knowledge Center INGESTION (admin/oncology): guideline upload + AI evidence extraction + batch Update Impact Report over ACTIVE Standard Protocols. Admin-only, gated by the ONCQIS_PROTOCOL_AUTHOR cap + server env SMD_ONCO_KB_ADMIN. AI output lands ONLY in Evidence-Source/extraction/Impact-Report objects; NEVER writes an ACTIVE protocol/plan/dose. No PHI ever sent to the AI. Default OFF." },
-    smd_onco_protolib: { type: "bool", def: false, query: "qoncoprotolib", desc: "EXPERIMENTAL grounded Standard Protocol library (v2 zero-VERIFY regimens promoted into kb/protocols/ as lifecycleState:draft + experimental:true). When ON, the workbench also loads these experimental protocols for OWNER/DEVICE TEST ONLY; they are NEVER lifecycleState:active, so real clinical activation still requires a separate human decision. Default OFF. Requires smd_onco_protocols + write mode to reach the apply flow." },
+    smd_onco_recommend: { type: "bool", def: true, query: "qoncorecommend", desc: "ONCQIS Phase B protocol recommendation engine (onco-recommend.js): suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype and why. Decision-support only, never auto-selects/prescribes; always the full list w/ reviewRequired. Read-only (GET onco/recommend, QUEUE_VIEW). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
+    smd_onco_evidence_overlay: { type: "bool", def: true, query: "qoncoevidence", desc: "ONCQIS Phase C evidence overlay (onco-evidence.js): 3-layer evidence panel (core/guideline/institutional), UPDATE AVAILABLE guideline overlay, and per-field EVIDENCE DIVERGENCE view. Decision-support only; never silently reconciles evidence or auto-replaces a protocol - every action only records the physician's choice. Read-only. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
+    smd_onco_kb_admin: { type: "bool", def: true, query: "qoncokbadmin", desc: "ONCQIS Phase J-a Knowledge Center INGESTION (admin/oncology): guideline upload + AI evidence extraction + batch Update Impact Report over ACTIVE Standard Protocols. Admin-only, gated by the ONCQIS_PROTOCOL_AUTHOR cap + server env SMD_ONCO_KB_ADMIN, so this client default alone opens nothing. AI output lands ONLY in Evidence-Source/extraction/Impact-Report objects; NEVER writes an ACTIVE protocol/plan/dose. No PHI ever sent to the AI. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
+    smd_onco_protolib: { type: "bool", def: true, query: "qoncoprotolib", desc: "EXPERIMENTAL grounded Standard Protocol library (v2 zero-VERIFY regimens promoted into kb/protocols/ as lifecycleState:draft + experimental:true). When ON, the workbench also loads these experimental protocols for OWNER/DEVICE TEST ONLY; they are NEVER lifecycleState:active, so real clinical activation still requires a separate human decision. Requires smd_onco_protocols + write mode to reach the apply flow. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21) - THIS IS THE ONE THAT SURFACES UNVERIFIED REGIMENS, so it must be re-closed before public release." },
     smd_onco_navigator: { type: "bool", def: true, query: "qoncotree", desc: "ONCOTREE clinical navigator (oncotree.js): a deterministic disease pathway (phenotype -> applicable EXISTING Standard Protocols by reference). Decision support only; references protocol IDs/versions, never a second protocol DB, never selects/prescribes/doses (the existing dose engine + physician own that). Reads the same lifecycle badges as the library. Default ON (owner-approved go-live 2026-08-15; R1 GO on all verticals). Opt out with localStorage smd_onco_navigator=0." },
-    smd_opd_billing: { type: "bool", def: false, query: "qbill", desc: "Clinic operations BILLING station (lean MVP): patient registry + first-class orders + tariff + invoice + mark-paid (cashier role). Server-gated by CLINIC_BILLING_ENABLED; UI at /clinic-billing. Additive, mock-first. Default OFF." },
-    smd_opd_branding: { type: "bool", def: false, query: "qbrand", desc: "Pro white-label clinic branding: upload a clinic logo (owner/admin + Pro) shown on the patient page, wall board + FollowCare with 'powered by StewardMD'. Server serves it same-origin. Default OFF." }
+    smd_opd_billing: { type: "bool", def: true, query: "qbill", desc: "Clinic operations BILLING station (lean MVP): patient registry + first-class orders + tariff + invoice + mark-paid (cashier role). UI at /clinic-billing. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21); stays INERT until CLINIC_BILLING_ENABLED=1 server-side, so flipping this alone changes nothing a patient can reach." },
+    smd_opd_branding: { type: "bool", def: true, query: "qbrand", desc: "Pro white-label clinic branding: upload a clinic logo (owner/admin + Pro) shown on the patient page, wall board + FollowCare with 'powered by StewardMD'. Server serves it same-origin. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21); still needs a Pro org owner to upload anything." }
   };
 
   function raw(key) {

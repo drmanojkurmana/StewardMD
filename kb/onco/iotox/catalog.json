@@ -72,6 +72,138 @@
         "3": "Withhold until acute symptoms are controlled; hormone replacement; corticosteroids mainly for acute hypophysitis or adrenal crisis (mass effect / stress cover), not routinely for the endocrinopathy itself.",
         "4": "Withhold and stabilize (e.g. adrenal crisis, diabetic ketoacidosis); hormone replacement and acute inpatient management; endocrinology input."
       }
+    },
+    {
+      "id": "adrenal_insufficiency",
+      "organ": "Adrenal insufficiency",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; begin physiologic hydrocortisone replacement and monitor; endocrinology input. Do not use immunosuppressive corticosteroids to suppress the endocrinopathy itself.",
+        "2": "Often continue with hydrocortisone (and fludrocortisone if needed) replacement rather than immunosuppression; endocrinology input; educate on sick-day stress dosing.",
+        "3": "Withhold until acute symptoms are controlled; stress-dose hydrocortisone and supportive care; endocrinology input; resume once replaced and stable.",
+        "4": "Withhold and hospitalize; treat adrenal crisis with intravenous stress-dose hydrocortisone and fluids; endocrinology input; resume once replaced and stable."
+      }
+    },
+    {
+      "id": "hypophysitis",
+      "organ": "Hypophysitis",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; hormone replacement as indicated (hydrocortisone first, then levothyroxine if needed); monitor pituitary axes; endocrinology input.",
+        "2": "Often continue with hormone replacement rather than immunosuppression; MRI of the pituitary; endocrinology input; higher-dose corticosteroids only for mass effect, severe headache or visual changes.",
+        "3": "Withhold until acute symptoms are controlled; hormone replacement; higher-dose corticosteroids for severe headache, visual changes or mass effect; endocrinology input.",
+        "4": "Withhold and hospitalize; hormone replacement and acute stabilization; higher-dose corticosteroids for mass effect or visual compromise; urgent endocrinology and ophthalmology or neurosurgical input as needed."
+      }
+    },
+    {
+      "id": "hypothyroidism",
+      "organ": "Primary hypothyroidism",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor TSH; begin levothyroxine replacement if symptomatic. Corticosteroids are not indicated.",
+        "2": "Continue the checkpoint inhibitor with levothyroxine replacement; monitor TSH and titrate; endocrinology input if needed. Corticosteroids are not indicated.",
+        "3": "Withhold until symptoms are controlled; levothyroxine replacement; endocrinology input; resume once stable. Corticosteroids are not indicated for the endocrinopathy.",
+        "4": "Withhold and hospitalize for severe presentation (e.g. myxedema); levothyroxine replacement and supportive care; endocrinology input; resume once stable."
+      }
+    },
+    {
+      "id": "hyperthyroidism",
+      "organ": "Primary hyperthyroidism / thyroiditis",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor thyroid function; beta-blocker for symptoms. Thyrotoxicosis is usually transient and may progress to hypothyroidism.",
+        "2": "Continue or withhold per guideline; beta-blocker for symptomatic thyrotoxicosis; monitor for progression to hypothyroidism; endocrinology input. Corticosteroids are rarely needed.",
+        "3": "Withhold until symptoms are controlled; beta-blocker; corticosteroids only for severe thyroiditis; endocrinology input; monitor for progression to hypothyroidism.",
+        "4": "Withhold and hospitalize (e.g. thyroid storm); beta-blocker, supportive care and corticosteroids for severe thyroiditis; urgent endocrinology input."
+      }
+    },
+    {
+      "id": "diabetes",
+      "organ": "Diabetes / hyperglycaemia (type 1 / DKA)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor glucose; begin insulin if needed; endocrinology input. Corticosteroids do not reverse beta-cell loss.",
+        "2": "Continue or withhold per glycaemic control; insulin; assess for ketoacidosis; endocrinology input. Corticosteroids do not reverse beta-cell loss.",
+        "3": "Withhold until glycaemia is controlled; insulin; assess and treat diabetic ketoacidosis; endocrinology input; resume once stable.",
+        "4": "Withhold and hospitalize; treat diabetic ketoacidosis with intravenous fluids and insulin; endocrinology input; resume once glycaemia is controlled. Corticosteroids do not reverse beta-cell loss."
+      }
+    },
+    {
+      "id": "myocarditis",
+      "organ": "Cardiovascular (myocarditis, pericarditis, arrhythmias)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Any suspected myocarditis is high-acuity: withhold the checkpoint inhibitor and evaluate urgently; cardiology input; telemetry; high-dose systemic corticosteroids if myocarditis is confirmed.",
+        "2": "Withhold the checkpoint inhibitor; urgent cardiology input; high-dose systemic corticosteroids; telemetry; add second-line immunosuppression early if there is no rapid improvement.",
+        "3": "Permanently discontinue; hospitalize with telemetry; high-dose intravenous corticosteroids; urgent cardiology input; add second-line immunosuppression early.",
+        "4": "Permanently discontinue; hospitalize (ICU); high-intensity intravenous corticosteroids (pulse methylprednisolone for severe or unstable disease) and early second-line immunosuppression; urgent cardiology input and haemodynamic support."
+      }
+    },
+    {
+      "id": "nephritis",
+      "organ": "Renal toxicity (nephritis)",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor renal function; rule out other causes (dehydration, obstruction, nephrotoxic drugs, contrast).",
+        "2": "Withhold the checkpoint inhibitor; exclude other causes; systemic corticosteroids; nephrology input; resume when improved toward baseline.",
+        "3": "Withhold or permanently discontinue per guideline; systemic corticosteroids; nephrology input; if no improvement within the guideline window, add second-line immunosuppression.",
+        "4": "Permanently discontinue; hospitalize; systemic corticosteroids and second-line immunosuppression for refractory disease; nephrology input and renal replacement therapy if needed."
+      }
+    },
+    {
+      "id": "arthritis",
+      "organ": "Inflammatory arthritis / arthralgia",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; analgesia and NSAIDs; monitor symptoms.",
+        "2": "Continue or withhold per guideline; systemic corticosteroids if the response to NSAIDs is inadequate; rheumatology input.",
+        "3": "Withhold the checkpoint inhibitor; systemic corticosteroids; rheumatology input; consider DMARDs or biologics for refractory disease.",
+        "4": "Withhold or permanently discontinue per guideline; systemic corticosteroids and DMARDs or biologics for severe or refractory disease; rheumatology input."
+      }
+    },
+    {
+      "id": "neuropathy",
+      "organ": "Peripheral neuropathy",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor with close monitoring; exclude other causes. Watch for features of Guillain-Barre syndrome or myasthenia, which are neurologic emergencies.",
+        "2": "Withhold the checkpoint inhibitor; systemic corticosteroids; neurology input; exclude Guillain-Barre syndrome and myasthenia.",
+        "3": "Withhold or permanently discontinue per guideline; hospitalize; systemic corticosteroids; urgent neurology input; IVIG or plasmapheresis for Guillain-Barre-like or severe disease.",
+        "4": "Permanently discontinue; hospitalize (possible ICU) with respiratory monitoring; systemic corticosteroids and IVIG or plasmapheresis; urgent neurology input."
+      }
+    },
+    {
+      "id": "hemolytic_anemia",
+      "organ": "Haemolytic anaemia",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Continue the checkpoint inhibitor; monitor haemoglobin and haemolysis markers; haematology input if needed.",
+        "2": "Withhold the checkpoint inhibitor; systemic corticosteroids; transfusion support as needed; haematology input.",
+        "3": "Withhold or permanently discontinue per guideline; systemic corticosteroids; transfusion support; haematology input; second-line immunosuppression for refractory disease.",
+        "4": "Permanently discontinue; hospitalize; systemic corticosteroids, transfusion support and second-line immunosuppression for refractory disease; haematology input."
+      }
+    },
+    {
+      "id": "infusion_reaction",
+      "organ": "Infusion reactions",
+      "guidelineRefs": ["ASCO", "NCCN", "SITC"],
+      "requiresR1Verification": true,
+      "grades": {
+        "1": "Slow or interrupt the infusion; supportive care (antihistamine, antipyretic); monitor and resume at a slower rate once resolved. This is distinct from other irAEs and does not usually require immunosuppression.",
+        "2": "Interrupt the infusion; supportive care with antihistamine and antipyretic; consider corticosteroids; premedicate and slow the rate for future infusions.",
+        "3": "Interrupt or stop the infusion; treat with corticosteroids and supportive care; monitor closely; permanently discontinue for severe reactions per guideline.",
+        "4": "Permanently discontinue; treat anaphylaxis with epinephrine, corticosteroids, antihistamines and supportive care; hospitalize and monitor."
+      }
     }
   ]
 }

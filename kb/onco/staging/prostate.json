@@ -1,0 +1,229 @@
+{
+  "site": "prostate",
+  "name": "Prostate",
+  "system": "Oncology / Prostate",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Medscape (emedicine.medscape.com)",
+      "provenance": "8th edition prostate TNM, rewritten from criteria published on Medscape/public references; interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to adenocarcinoma of the prostate. The T categories shown are clinical (cT); pathologic staging has no pT1 category and pT2 is not subdivided. N is binary (N0 versus N1 for regional pelvic nodes), and M is subdivided into non-regional nodal (M1a), bone (M1b), and other visceral (M1c) metastasis.\n\nThe defining feature of 8th edition is that the prognostic stage groups combine anatomic T, N and M with the serum PSA level (ng/mL) and the Grade Group (ISUP grade derived from the Gleason score); two patients with the same T/N/M can fall into different stage groups depending on their PSA and Grade Group. The stage groups below give the anatomic T/N/M core, with the required PSA and Grade Group stated in each row's basis.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumour cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumour",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Clinically inapparent tumour that is not palpable",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Tumour is an incidental histologic finding in 5% or less of tissue resected",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Tumour is an incidental histologic finding in more than 5% of tissue resected",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1c",
+          "label": "Tumour identified by needle biopsy found in one or both sides, but not palpable",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Tumour is palpable and confined within the prostate",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Tumour involves one-half of one side or less",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Tumour involves more than one-half of one side but not both sides",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2c",
+          "label": "Tumour involves both sides",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Extraprostatic tumour that is not fixed and does not invade adjacent structures",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a",
+          "label": "Extraprostatic extension (unilateral or bilateral), including microscopic bladder neck involvement",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b",
+          "label": "Tumour invades the seminal vesicle(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Tumour is fixed or invades adjacent structures other than the seminal vesicles, such as the external sphincter, rectum, bladder, levator muscles, and/or pelvic wall",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional lymph nodes cannot be assessed",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional lymph node metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "Metastasis in regional (pelvic) lymph node(s)",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1",
+          "label": "Distant metastasis present",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Metastasis in non-regional lymph node(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Metastasis in bone(s)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1c",
+          "label": "Metastasis in other site(s), with or without bone disease",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "I",
+          "t": "cT1a-c or cT2a, or pT2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA < 10 ng/mL and Grade Group 1",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "cT1a-c or cT2a, or pT2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA >= 10 and < 20 ng/mL, Grade Group 1",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "cT2b or cT2c",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA < 20 ng/mL, Grade Group 1",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T1 or T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA < 20 ng/mL, Grade Group 2",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIC",
+          "t": "T1 or T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA < 20 ng/mL, Grade Group 3 or 4",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1 or T2",
+          "n": "N0",
+          "m": "M0",
+          "basis": "PSA >= 20 ng/mL, Grade Group 1 to 4",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T3 or T4",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Any PSA, Grade Group 1 to 4",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "any T",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Any PSA, Grade Group 5",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVA",
+          "t": "any T",
+          "n": "N1",
+          "m": "M0",
+          "basis": "Any PSA, any Grade Group",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IVB",
+          "t": "any T",
+          "n": "any N",
+          "m": "M1",
+          "basis": "Any PSA, any Grade Group",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Pelvic nodes below the aortic bifurcation, comprising the pelvic (NOS), hypogastric (internal iliac), obturator, external iliac, and sacral (lateral, presacral, or promontory) nodes. Laterality does not affect the N category. Common iliac, para-aortic, inguinal and other nodes above the bifurcation are non-regional and are classified as M1a.",
+      "histologicGrade": "Grade Group (ISUP), derived from the Gleason score: Grade Group 1 = Gleason <= 6 (patterns 3 or less); Grade Group 2 = Gleason 3 + 4 = 7; Grade Group 3 = Gleason 4 + 3 = 7; Grade Group 4 = Gleason 8 (4 + 4, 3 + 5, or 5 + 3); Grade Group 5 = Gleason 9 or 10.",
+      "histopathologicTypes": "Acinar adenocarcinoma is by far the most common type. Variants include ductal adenocarcinoma, mucinous (colloid) carcinoma, signet-ring cell carcinoma, and small cell / neuroendocrine carcinoma. The Gleason and Grade Group systems apply to acinar and ductal adenocarcinoma.",
+      "prognosticFactors": [
+        "Serum PSA level (formally incorporated into the stage group)",
+        "Grade Group / Gleason score (formally incorporated into the stage group)",
+        "Clinical and pathologic T category",
+        "Number and percentage of positive biopsy cores",
+        "Surgical margin status",
+        "Regional nodal status",
+        "Genomic classifier scores in selected cases"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}

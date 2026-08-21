@@ -1,0 +1,363 @@
+{
+  "site": "melanoma",
+  "name": "Melanoma of skin",
+  "system": "Oncology / Melanoma of skin",
+  "versions": [
+    {
+      "version": "8th edition",
+      "seeded": true,
+      "requiresR1Verification": true,
+      "source": "Public 8th edition references (American Cancer Society, /FACS staging summary, University of Iowa Head and Neck Protocols); Medscape staging article was paywalled",
+      "provenance": "8th edition cutaneous melanoma TNM, rewritten in original wording from criteria published on public references (cancer.org, /FACS, University of Iowa protocols) after the Medscape article returned a paywall; numeric cut-offs, node counts, and stage mappings preserved exactly. Interim content pending the licensed content and R1 clinical verification.",
+      "introduction": "The 8th edition staging system applies to cutaneous (skin) melanoma. The T category is defined by Breslow tumor thickness in millimeters plus ulceration status (a = no ulceration, b = ulceration); the T1 split now uses 0.8 mm rather than 1.0 mm, and mitotic rate no longer changes the T category. The N category counts tumor-involved regional nodes and separately captures non-nodal locoregional disease (microsatellite, satellite, and in-transit metastases), distinguishing clinically occult nodes (found on sentinel node biopsy) from clinically detected nodes. M1 is subdivided M1a to M1d by metastatic site, each with an LDH suffix ((0) normal, (1) elevated), and M1d (CNS metastasis) is new in the 8th Edition.\n\nThe stage groups listed here are the pathological prognostic groups, which introduce the Stage IIIA to IIID subgroups; clinical staging collapses node-positive M0 disease into a single Stage III (any T, N1 to N3, M0). Non-cutaneous melanomas (mucosal, uveal) use separate staging systems.",
+      "t": [
+        {
+          "code": "TX",
+          "label": "Primary tumor thickness cannot be assessed (for example after curettage or a severely regressed lesion)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T0",
+          "label": "No evidence of primary tumor (for example an unknown primary presenting with nodal or distant disease)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "Tis",
+          "label": "Melanoma in situ",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1",
+          "label": "Breslow thickness <= 1.0 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1a",
+          "label": "Thickness < 0.8 mm without ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T1b",
+          "label": "Thickness < 0.8 mm with ulceration, OR thickness 0.8 to 1.0 mm with or without ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2",
+          "label": "Breslow thickness > 1.0 to 2.0 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2a",
+          "label": "Thickness > 1.0 to 2.0 mm without ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T2b",
+          "label": "Thickness > 1.0 to 2.0 mm with ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3",
+          "label": "Breslow thickness > 2.0 to 4.0 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3a",
+          "label": "Thickness > 2.0 to 4.0 mm without ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T3b",
+          "label": "Thickness > 2.0 to 4.0 mm with ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4",
+          "label": "Breslow thickness > 4.0 mm",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4a",
+          "label": "Thickness > 4.0 mm without ulceration",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "T4b",
+          "label": "Thickness > 4.0 mm with ulceration",
+          "requiresR1Verification": true
+        }
+      ],
+      "n": [
+        {
+          "code": "NX",
+          "label": "Regional nodes not assessed and no in-transit, satellite, or microsatellite metastases identified (SLN biopsy not performed)",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N0",
+          "label": "No regional node metastasis and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1",
+          "label": "One tumor-involved node, OR any number of in-transit, satellite, or microsatellite metastases with no tumor-involved node",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1a",
+          "label": "One clinically occult node (detected on sentinel node biopsy) and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1b",
+          "label": "One clinically detected node and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N1c",
+          "label": "No regional node metastasis but any number of in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2",
+          "label": "Two or three tumor-involved nodes, OR one tumor-involved node plus any number of in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2a",
+          "label": "Two or three clinically occult nodes and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2b",
+          "label": "Two or three nodes, at least one clinically detected, and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N2c",
+          "label": "One clinically occult or clinically detected node plus any number of in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3",
+          "label": "Four or more tumor-involved nodes; OR two or more nodes plus any number of in-transit, satellite, or microsatellite metastases; OR any number of matted nodes",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3a",
+          "label": "Four or more clinically occult nodes and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3b",
+          "label": "Four or more nodes with at least one clinically detected, or any number of matted nodes, and no in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "N3c",
+          "label": "Two or more clinically occult or clinically detected nodes and/or any number of matted nodes, plus any number of in-transit, satellite, or microsatellite metastases",
+          "requiresR1Verification": true
+        }
+      ],
+      "m": [
+        {
+          "code": "M0",
+          "label": "No distant metastasis",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1a",
+          "label": "Distant metastasis to skin, soft tissue including muscle, and/or non-regional lymph node; LDH suffix (0) normal or (1) elevated",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1b",
+          "label": "Distant metastasis to lung, with or without M1a sites; LDH suffix (0) normal or (1) elevated",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1c",
+          "label": "Distant metastasis to visceral sites other than the CNS, with or without M1a or M1b involvement; LDH suffix (0) normal or (1) elevated",
+          "requiresR1Verification": true
+        },
+        {
+          "code": "M1d",
+          "label": "Distant metastasis to the CNS, with or without M1a, M1b, or M1c involvement; LDH suffix (0) normal or (1) elevated",
+          "requiresR1Verification": true
+        }
+      ],
+      "stageGroups": [
+        {
+          "stage": "0",
+          "t": "Tis",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Melanoma in situ.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IA",
+          "t": "T1b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group (T1b N0 is IA pathologically but IB clinically).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IB",
+          "t": "T2a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T2b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIA",
+          "t": "T3a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T3b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIB",
+          "t": "T4a",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIC",
+          "t": "T4b",
+          "n": "N0",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIA",
+          "t": "T1a/T1b/T2a",
+          "n": "N1a or N2a",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T0",
+          "n": "N1b or N1c",
+          "m": "M0",
+          "basis": "Pathological prognostic group (unknown primary with nodal disease).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T1a/T1b/T2a",
+          "n": "N1b/N1c/N2b",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIB",
+          "t": "T2b/T3a",
+          "n": "N1a/N1b/N1c/N2a/N2b",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T0",
+          "n": "N2b/N2c/N3b/N3c",
+          "m": "M0",
+          "basis": "Pathological prognostic group (unknown primary with nodal disease).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T1a/T1b/T2a/T2b/T3a",
+          "n": "N2c/N3a/N3b/N3c",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T3b/T4a",
+          "n": "Any N >= N1",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIIC",
+          "t": "T4b",
+          "n": "N1a/N1b/N1c/N2a/N2b/N2c",
+          "m": "M0",
+          "basis": "Pathological prognostic group.",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IIID",
+          "t": "T4b",
+          "n": "N3a/N3b/N3c",
+          "m": "M0",
+          "basis": "Pathological prognostic group (new 8th edition subgroup).",
+          "requiresR1Verification": true
+        },
+        {
+          "stage": "IV",
+          "t": "Any T",
+          "n": "Any N",
+          "m": "M1",
+          "basis": "Any distant metastasis.",
+          "requiresR1Verification": true
+        }
+      ],
+      "regionalNodes": "Regional lymph nodes are those of the drainage basin nearest the primary site (for example cervical, axillary, epitrochlear, inguinal, or popliteal, depending on tumor location). 8th edition separates clinically occult nodes (identified only on sentinel lymph node biopsy) from clinically detected nodes, and treats non-nodal locoregional spread (microsatellite, satellite, and in-transit metastases) as N-category disease.",
+      "histologicGrade": "Cutaneous melanoma is not assigned a conventional G1 to G4 differentiation grade in 8th edition. Instead, prognosis is driven by Breslow thickness, ulceration, and mitotic rate (mitoses are recorded but no longer alter the T category).",
+      "histopathologicTypes": "Major subtypes are superficial spreading melanoma, nodular melanoma, lentigo maligna melanoma, and acral lentiginous melanoma. Desmoplastic melanoma is a less common variant with distinct behavior. Rarer non-cutaneous forms (mucosal, uveal) use separate staging systems.",
+      "prognosticFactors": [
+        "Breslow tumor thickness",
+        "Ulceration status",
+        "Mitotic rate",
+        "Number of tumor-involved regional nodes and clinically occult vs clinically detected nodes",
+        "Presence of microsatellite, satellite, or in-transit metastases",
+        "Sentinel lymph node status",
+        "Serum LDH in metastatic (M1) disease",
+        "Anatomic site of metastasis (skin/soft tissue vs lung vs other viscera vs CNS)",
+        "BRAF and other actionable mutation status"
+      ]
+    },
+    {
+      "version": "7th edition",
+      "seeded": false
+    }
+  ]
+}
