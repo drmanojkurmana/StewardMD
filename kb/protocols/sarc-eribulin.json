@@ -1,0 +1,93 @@
+{
+  "id": "sarc-eribulin",
+  "diseaseId": "sarcoma_cancer",
+  "name": "Eribulin (single-agent) for Liposarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "continue to progression or unacceptable toxicity; eribulin has a survival benefit specifically in liposarcoma after an anthracycline. Physician determines duration.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Soft Tissue Sarcoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Eribulin is a histology-directed later-line agent with a demonstrated survival benefit in liposarcoma after anthracycline. Not molecularly biomarker-restricted."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "unresectable"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "liposarcoma (all subtypes) after prior anthracycline",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "eribulin is low-to-moderate emetic risk; give antiemetic prophylaxis per emetogenicity tier."
+    }
+  ],
+  "supportiveCare": [
+    "CBC before each dose; neutropenia is the dominant toxicity, hold for significant neutropenia or thrombocytopenia.",
+    "assess peripheral neuropathy before each dose; hold or reduce for grade 2 to 3.",
+    "monitor QT in patients with electrolyte abnormalities or on QT-prolonging drugs; correct potassium and magnesium."
+  ],
+  "monitoring": [
+    "CBC before each dose (days 1 and 8)",
+    "neuropathy assessment before each dose",
+    "electrolytes (potassium, magnesium) and QT as indicated"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "neuropathy grade",
+    "electrolytes/QT",
+    "liver",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 neutropenia, thrombocytopenia, or grade 2 or worse neuropathy",
+      "drug": "eribulin",
+      "action": "hold/reduce",
+      "text": "Hold until recovery then resume at a reduced dose per standard eribulin reduction steps (1.4 to 1.1 to 0.7 mg/m2). Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "eribulin",
+      "name": "Eribulin",
+      "basis": "bsa",
+      "dosePerUnit": 1.4,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Eribulin (mesylate) 1.4 mg/m2 IV over 2 to 5 minutes on days 1 and 8 every 21 days, single-agent. Standard dosing for advanced liposarcoma after anthracycline. Dose per the engine from patient BSA. General reference (NCCN / DeVita); own wording, DRAFT.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN) / DeVita, general reference",
+        "version": null,
+        "date": null,
+        "locator": "single-agent eribulin for liposarcoma (standard schedule)",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,85 @@
+{
+  "id": "mm-belantamab",
+  "diseaseId": "myeloma_cancer",
+  "name": "Belantamab Mafodotin (BCMA antibody-drug conjugate)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Multiple Myeloma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Belantamab mafodotin is a BCMA-directed antibody-drug conjugate for triple-class-exposed relapsed/refractory myeloma; BCMA is near-universally expressed, so use is not by a selective biomarker. Physician decides."
+  },
+  "stage": [],
+  "treatmentSetting": "triple-class-exposed relapsed/refractory multiple myeloma",
+  "histology": "plasma cell myeloma (multiple myeloma)",
+  "premedications": [
+    {
+      "name": "Corticosteroid eye drops",
+      "notes": "Preservative-free corticosteroid drops per ocular-toxicity program, started with each dose per labeling; use lubricating drops as directed."
+    }
+  ],
+  "supportiveCare": [
+    "Mandatory ophthalmology assessment at baseline and before each dose; dose-modify or delay for keratopathy (corneal exam findings) and visual-acuity change.",
+    "Counsel on ocular symptoms (dry eye, blurred vision); avoid contact lenses unless advised.",
+    "Infusion-reaction monitoring on the first doses.",
+    "Often combined with pomalidomide or bortezomib as a partner (separate agents)."
+  ],
+  "monitoring": [
+    "ophthalmic examination (keratopathy and best-corrected visual acuity) before each dose",
+    "CBC with differential and platelets before each cycle",
+    "hepatic and renal function",
+    "infusion-reaction surveillance"
+  ],
+  "clearanceChecks": [
+    "ophthalmology cleared",
+    "CBC/platelets",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "moderate to severe keratopathy or visual-acuity decline",
+      "drug": "belantamab-mafodotin",
+      "action": "hold/reduce",
+      "text": "Hold belantamab mafodotin until corneal findings and visual acuity recover, then resume at the same or a reduced dose per the ocular-toxicity program; permanently discontinue for the most severe ocular events. Ophthalmology directs."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "belantamab-mafodotin",
+      "name": "Belantamab Mafodotin",
+      "basis": "mgkg",
+      "dosePerUnit": 2.5,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Belantamab mafodotin 2.5 mg/kg IV on day 1 of each 21-day cycle (single-agent monotherapy dosing), continued until progression or unacceptable ocular/other toxicity. Dosing is by actual body weight. Mandatory pre-dose ophthalmology; hold/reduce for keratopathy per the ocular-risk program. Own wording from standard-of-care knowledge; physician decides.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Multiple Myeloma",
+        "version": "draft",
+        "date": null,
+        "locator": "belantamab mafodotin BCMA ADC, relapsed/refractory myeloma monotherapy dosing",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

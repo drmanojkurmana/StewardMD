@@ -1,0 +1,93 @@
+{
+  "id": "sarc-paclitaxel-weekly",
+  "diseaseId": "sarcoma_cancer",
+  "name": "Weekly Paclitaxel (single-agent) for Angiosarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "continue to progression or unacceptable toxicity; angiosarcoma is uniquely taxane-sensitive. Physician determines duration.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Soft Tissue Sarcoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Weekly paclitaxel is a histology-directed cytotoxic option; angiosarcoma is distinctively taxane-sensitive. Not molecularly biomarker-restricted."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "unresectable"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "angiosarcoma (taxane-sensitive vascular sarcoma)",
+  "premedications": [
+    {
+      "name": "Hypersensitivity prophylaxis",
+      "notes": "corticosteroid (e.g. dexamethasone), an H1 antihistamine, and an H2 blocker before paclitaxel to reduce infusion-reaction risk from the solvent vehicle. Weekly schedules often use a reduced steroid pre-med after the first tolerated doses, physician determined."
+    }
+  ],
+  "supportiveCare": [
+    "monitor for infusion / hypersensitivity reactions during the first minutes of each infusion.",
+    "peripheral sensory neuropathy is cumulative; assess before each dose and hold or reduce for grade 2 to 3.",
+    "CBC before each weekly dose; hold for significant neutropenia or thrombocytopenia."
+  ],
+  "monitoring": [
+    "CBC before each weekly dose",
+    "neuropathy assessment before each dose",
+    "liver function periodically"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "neuropathy grade",
+    "liver",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or worse peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "reduce/hold",
+      "text": "Hold until improvement then resume at a reduced dose; discontinue for persistent grade 3. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Paclitaxel 80 mg/m2 IV over about 1 hour on days 1, 8 and 15 of a 28-day cycle (weekly, single-agent), a standard weekly schedule used in taxane-sensitive angiosarcoma. Give hypersensitivity pre-medication. Dose per the engine from patient BSA. Standard weekly dosing, general reference (NCCN / DeVita); own wording, DRAFT.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN) / DeVita, general reference",
+        "version": null,
+        "date": null,
+        "locator": "weekly single-agent paclitaxel for angiosarcoma (standard schedule)",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

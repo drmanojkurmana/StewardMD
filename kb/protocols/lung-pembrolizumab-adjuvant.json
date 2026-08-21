@@ -1,0 +1,62 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), NSCLC",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "monitoring": [
+    "clinical/radiographic response and recurrence surveillance",
+    "thyroid and other endocrine function",
+    "immune-related adverse-event surveillance"
+  ],
+  "clearanceChecks": [
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [],
+  "id": "lung-pembrolizumab-adjuvant",
+  "diseaseId": "nsclc",
+  "name": "Pembrolizumab (adjuvant NSCLC checkpoint inhibitor)",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 17,
+  "supportiveCare": [
+    "Adjuvant checkpoint-inhibitor completion of planned perioperative immunotherapy (about 1 year total).",
+    "Monitor for immune-related adverse events (thyroid, hepatic, colitis, pneumonitis, endocrine)."
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Pembrolizumab 200 mg IV every 21 days to complete planned adjuvant checkpoint-inhibitor therapy after resection (up to about 1 year of total perioperative immunotherapy). 400 mg IV every 6 weeks is an accepted equivalent schedule. My own wording from standard perioperative NSCLC practice.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), NSCLC",
+        "version": "current",
+        "date": null,
+        "locator": "perioperative/adjuvant NSCLC immunotherapy (pembrolizumab 200 mg q3w)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "id": "cns-lomustine",
+  "diseaseId": "cns_cancer",
+  "name": "Lomustine (CCNU) single-agent",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 42,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Central Nervous System Cancers (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "give a 5-HT3 antagonist before the single dose; nitrosoureas are moderate-to-high emetic risk on the dosing day." }
+  ],
+  "supportiveCare": [
+    "Take on an empty stomach at bedtime to limit nausea.",
+    "Delayed, cumulative marrow suppression: the 6-week interval matches the late nadir - confirm count recovery before each dose.",
+    "Cumulative pulmonary and renal toxicity with prolonged use; monitor over multiple cycles."
+  ],
+  "monitoring": [
+    "CBC before each dose and at the week 4-6 nadir",
+    "Liver and renal function before each cycle",
+    "MRI response assessment every 2-3 cycles"
+  ],
+  "drugs": [
+    {
+      "id": "lomustine",
+      "name": "Lomustine (CCNU)",
+      "basis": "bsa",
+      "dosePerUnit": 110,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "110 mg/m2 by mouth once on day 1 of each 6-week (42-day) cycle (range 90 to 110 mg/m2; use the lower end for heavily pre-treated marrow). Common single-agent nitrosourea option at recurrent high-grade glioma (NCCN CNS / DeVita, general reference; own wording)."
+    }
+  ]
+}

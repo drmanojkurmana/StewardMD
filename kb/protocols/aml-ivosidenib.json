@@ -1,0 +1,76 @@
+{
+  "id": "aml-ivosidenib",
+  "diseaseId": "aml_cancer",
+  "name": "Ivosidenib (IDH1 inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Differentiation-syndrome vigilance: start corticosteroids and supportive care promptly if suspected; monitor for leukocytosis."
+  ],
+  "monitoring": [
+    "QT interval (baseline and periodic; avoid other QT-prolonging drugs).",
+    "CBC and signs of differentiation syndrome.",
+    "Response after several cycles."
+  ],
+  "drugs": [
+    {
+      "id": "ivosidenib",
+      "name": "Ivosidenib",
+      "basis": "flat",
+      "dosePerUnit": 500,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "frequency": "DAILY",
+      "caps": {
+        "perDose": null
+      },
+      "notes": "500 mg PO once daily, continuously, for IDH1-mutated AML (monotherapy, or combined with azacitidine as a separate agent). Avoid with strong CYP3A inhibitors/inducers. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

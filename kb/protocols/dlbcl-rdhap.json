@@ -1,0 +1,107 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-rdhap",
+  "name": "R-DHAP (rituximab/dexamethasone/high-dose cytarabine/cisplatin) salvage",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "premedications": [
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine"
+    },
+    {
+      "name": "Vigorous hydration",
+      "notes": "for cisplatin nephroprotection, with magnesium/potassium replacement"
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF support; plan stem-cell collection after a chemosensitive response",
+    "Steroid eye drops and cerebellar checks during high-dose cytarabine",
+    "Antiemetics (highly emetogenic cisplatin)"
+  ],
+  "monitoring": [
+    "Response by PET before high-dose therapy + autologous transplant",
+    "Renal function (cisplatin - substitute carboplatin/oxaliplatin if impaired)",
+    "Neuro/cerebellar exam (high-dose cytarabine)"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV day 1."
+    },
+    {
+      "id": "dexamethasone",
+      "name": "Dexamethasone",
+      "basis": "flat",
+      "dosePerUnit": 40,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "40 mg IV (or PO) daily, days 1-4."
+    },
+    {
+      "id": "cytarabine",
+      "name": "Cytarabine",
+      "basis": "bsa",
+      "dosePerUnit": 2000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "2000 mg/m2 IV every 12 h for two doses on day 2 (high-dose ara-C). Reduce for age/renal impairment."
+    },
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "100 mg/m2 by continuous IV infusion over 24 h on day 1."
+    }
+  ]
+}

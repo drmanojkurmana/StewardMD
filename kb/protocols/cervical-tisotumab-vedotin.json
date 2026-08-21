@@ -1,0 +1,71 @@
+{
+  "id": "cervical-tisotumab-vedotin",
+  "diseaseId": "cervical_cancer",
+  "name": "Tisotumab Vedotin (tissue-factor-directed antibody-drug conjugate)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 12,
+  "cyclesNote": "continued until disease progression or unacceptable toxicity",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Ocular prophylaxis",
+      "notes": "mandatory eye care to reduce ocular toxicity: topical vasoconstrictor and cooling eye pads at infusion plus topical corticosteroid eye drops around each dose; ophthalmologic examination at baseline and before each dose."
+    }
+  ],
+  "supportiveCare": [
+    "Ocular adverse-event prophylaxis and monitoring (conjunctivitis, keratitis, vision changes).",
+    "Monitor for bleeding and peripheral neuropathy.",
+    "Antiemetic prophylaxis per emetic-risk framework."
+  ],
+  "monitoring": [
+    "ophthalmologic examination before each dose",
+    "peripheral neuropathy assessment before each dose",
+    "bleeding assessment and CBC before each dose"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "ocular status",
+    "neuropathy",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher ocular toxicity or peripheral neuropathy",
+      "drug": "tisotumab-vedotin",
+      "action": "hold/reduce",
+      "text": "Hold and reduce tisotumab vedotin for significant ocular or neuropathic toxicity per prescribing guidance; the physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "tisotumab-vedotin",
+      "name": "Tisotumab Vedotin",
+      "basis": "mgkg",
+      "dosePerUnit": 2,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 200
+      },
+      "notes": "Tisotumab vedotin 2.0 mg/kg IV on day 1 every 21 days for recurrent/metastatic cervical cancer after prior systemic therapy. Weight-based dosing is capped at a body weight of 100 kg (a per-dose ceiling of about 200 mg). Requires ocular prophylaxis. Standard Guidelines / DeVita / Harrison, general reference. DRAFT, experimental."
+    }
+  ]
+}

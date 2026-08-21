@@ -1,0 +1,91 @@
+{
+  "id": "sarc-trabectedin",
+  "diseaseId": "sarcoma_cancer",
+  "name": "Trabectedin (single-agent) for Soft Tissue Sarcoma",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "continue to progression or unacceptable toxicity; highest activity in leiomyosarcoma and myxoid/round-cell liposarcoma after an anthracycline. Physician determines duration.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Soft Tissue Sarcoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Trabectedin is a histology-directed later-line agent for liposarcoma and leiomyosarcoma after anthracycline; myxoid/round-cell liposarcoma (FUS-DDIT3) is notably sensitive. Not molecularly biomarker-restricted for use."
+  },
+  "stage": [
+    "advanced",
+    "metastatic",
+    "unresectable"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "liposarcoma and leiomyosarcoma (L-sarcomas) after prior anthracycline",
+  "premedications": [
+    {
+      "name": "Dexamethasone",
+      "notes": "corticosteroid before each infusion for hepatoprotection and antiemesis (e.g. dexamethasone about 20 mg IV before trabectedin). Administer through a central venous line."
+    }
+  ],
+  "supportiveCare": [
+    "central venous access required for the 24-hour infusion.",
+    "monitor liver enzymes and creatine phosphokinase (rhabdomyolysis risk); hold for significant hepatic transaminase elevation or CPK rise.",
+    "CBC before each cycle; neutropenia is common."
+  ],
+  "monitoring": [
+    "liver function (transaminases, bilirubin) before each cycle",
+    "creatine phosphokinase (CPK) before each cycle",
+    "CBC before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "CPK",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "transaminase elevation, hyperbilirubinemia, or CPK rise",
+      "drug": "trabectedin",
+      "action": "hold/reduce",
+      "text": "Hold until recovery then resume at a reduced dose; discontinue for recurrent grade 3 to 4 hepatic toxicity or rhabdomyolysis. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "trabectedin",
+      "name": "Trabectedin",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Trabectedin 1.5 mg/m2 IV as a continuous infusion over 24 hours on day 1 every 21 days, through a central venous catheter, with dexamethasone pre-medication. Standard single-agent dosing for L-sarcomas after anthracycline. Dose per the engine from patient BSA. General reference (NCCN / DeVita); own wording, DRAFT.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN) / DeVita, general reference",
+        "version": null,
+        "date": null,
+        "locator": "single-agent trabectedin for liposarcoma/leiomyosarcoma (standard schedule)",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

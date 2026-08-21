@@ -1,0 +1,47 @@
+{
+  "id": "ut-pazopanib",
+  "diseaseId": "uterine_cancer",
+  "name": "Pazopanib (single-agent, advanced leiomyosarcoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous daily oral dosing; a 28-day cycle is used only as an accounting window. Continue until progression or unacceptable toxicity; physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Take on an empty stomach, at least 1 hour before or 2 hours after food.",
+    "Hold for uncontrolled hypertension; start or escalate antihypertensives as needed.",
+    "Reduce to 600 mg or 400 mg daily for significant toxicity per response and tolerance."
+  ],
+  "monitoring": [
+    "Blood pressure at baseline and regularly early in therapy.",
+    "Liver function (ALT/AST, bilirubin) at baseline and periodically; pazopanib carries a hepatotoxicity risk.",
+    "Thyroid function; urine protein for proteinuria.",
+    "Assess for bleeding, QT prolongation, and wound-healing concerns around surgery."
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "prior-cycle status"],
+  "drugs": [
+    {
+      "id": "pazopanib",
+      "name": "Pazopanib",
+      "basis": "flat",
+      "dosePerUnit": 800,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Pazopanib 800 mg by mouth once daily, taken continuously on an empty stomach. This is a standard-of-care oral multi-kinase inhibitor option for advanced soft-tissue sarcoma, used here as a later-line single agent for advanced uterine leiomyosarcoma after progression on cytotoxic chemotherapy. Reduce in 200 mg steps (to 600 mg, then 400 mg) for hypertension, transaminase elevation, or other toxicity. Dosing reflected as a flat once-daily dose so the engine does not scale by body size. Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

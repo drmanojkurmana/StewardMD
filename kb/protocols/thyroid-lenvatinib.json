@@ -1,0 +1,63 @@
+{
+  "id": "thyroid-lenvatinib",
+  "diseaseId": "differentiated_thyroid_carcinoma",
+  "name": "Lenvatinib (RAI-refractory DTC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous daily dosing until disease progression or unacceptable toxicity; not a fixed cycle count",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "stage": ["advanced", "metastatic", "recurrent"],
+  "treatmentSetting": "metastatic",
+  "histology": "radioiodine-refractory differentiated thyroid carcinoma (papillary / follicular / oncocytic)",
+  "premedications": [],
+  "supportiveCare": [
+    "control hypertension before starting and monitor closely - hypertension is the most common lenvatinib effect; have an antihypertensive plan.",
+    "monitor for proteinuria, diarrhea, fatigue, hand-foot skin reaction, and arterial thromboembolic / hemorrhagic events.",
+    "reserve for progressive or symptomatic disease; indolent metastases may be observed.",
+    "continue TSH suppression alongside; use directed local therapy for dominant lesions."
+  ],
+  "monitoring": [
+    "blood pressure (weekly early, then per visit)",
+    "urine protein",
+    "liver function",
+    "ECG / electrolytes for QT",
+    "cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": ["blood pressure controlled", "renal / proteinuria", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 hypertension, significant proteinuria, or other grade 3 to 4 toxicity",
+      "drug": "lenvatinib",
+      "action": "hold/reduce",
+      "text": "Interrupt and resume at a reduced dose (typical reductions 20 mg, then 14 mg, then 10 mg daily) once recovered; obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lenvatinib",
+      "name": "Lenvatinib",
+      "basis": "flat",
+      "dosePerUnit": 24,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Lenvatinib 24 mg PO once daily, taken continuously until progression or unacceptable toxicity, is the standard starting dose for radioiodine-refractory differentiated thyroid cancer (per standard guidelines, general reference; SELECT-trial dose). Reduce for hepatic / renal impairment or toxicity per labeling. Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+      "modificationRules": [],
+      "dosesPerDay": 1,
+      "frequency": "daily"
+    }
+  ]
+}

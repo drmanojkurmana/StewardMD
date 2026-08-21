@@ -1,0 +1,63 @@
+{
+  "id": "thyroid-vandetanib",
+  "diseaseId": "medullary_thyroid_carcinoma",
+  "name": "Vandetanib (advanced medullary thyroid carcinoma)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous daily dosing until disease progression or unacceptable toxicity; not a fixed cycle count",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "stage": ["advanced", "metastatic", "recurrent"],
+  "treatmentSetting": "metastatic",
+  "histology": "advanced / progressive medullary thyroid carcinoma (calcitonin-producing C-cell carcinoma)",
+  "premedications": [],
+  "supportiveCare": [
+    "baseline and periodic ECG - vandetanib carries a QT-prolongation risk; correct potassium, magnesium, and calcium before and during therapy and avoid concomitant QT-prolonging drugs.",
+    "monitor for diarrhea, hypertension, rash / photosensitivity, and rare torsades / sudden death.",
+    "reserve for progressive or symptomatic disease; observe indolent metastatic disease with a calcitonin / CEA doubling-time.",
+    "trend calcitonin and CEA as response markers."
+  ],
+  "monitoring": [
+    "ECG for QT and electrolytes (potassium, magnesium, calcium)",
+    "blood pressure",
+    "liver function",
+    "calcitonin and CEA trend",
+    "cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": ["QT / electrolytes", "blood pressure controlled", "liver", "no interacting QT-prolonging drugs", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "QTc prolongation (e.g. > 500 ms) or grade 3 to 4 toxicity",
+      "drug": "vandetanib",
+      "action": "hold/reduce",
+      "text": "Interrupt for QTc prolongation or serious toxicity; resume at a reduced dose (typical reductions 200 mg, then 100 mg daily) after recovery and QTc normalization. Obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "vandetanib",
+      "name": "Vandetanib",
+      "basis": "flat",
+      "dosePerUnit": 300,
+      "unit": "mg",
+      "route": "PO",
+      "notes": "Vandetanib 300 mg PO once daily, continuous until progression or unacceptable toxicity, is the standard dose for symptomatic or progressive advanced medullary thyroid cancer (per standard guidelines, general reference; ZETA-trial dose). Reduce to 200 mg for moderate renal impairment or QT / toxicity per labeling. Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+      "modificationRules": [],
+      "dosesPerDay": 1,
+      "frequency": "daily"
+    }
+  ]
+}

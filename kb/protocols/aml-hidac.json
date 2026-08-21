@@ -1,0 +1,53 @@
+{
+  "id": "aml-hidac",
+  "diseaseId": "aml_cancer",
+  "name": "HiDAC (High-Dose Cytarabine consolidation)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Full neutropenic supportive care: infection prophylaxis, transfusion support for anemia/thrombocytopenia.",
+    "Corticosteroid eye drops during and after cytarabine to prevent chemical conjunctivitis."
+  ],
+  "monitoring": [
+    "CBC with differential and marrow response after count recovery.",
+    "Cerebellar/neurologic checks before each dose (hold for cerebellar toxicity).",
+    "Renal function (reduce dose in impairment and age >= 60)."
+  ],
+  "drugs": [
+    {
+      "id": "cytarabine",
+      "name": "Cytarabine (high-dose)",
+      "basis": "bsa",
+      "dosePerUnit": 3000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        3,
+        5
+      ],
+      "dosesPerDay": 2,
+      "frequency": "BID",
+      "caps": {
+        "perDose": null
+      },
+      "notes": "3000 mg/m2 IV over 3 h every 12 h on days 1, 3 and 5 (favorable-risk consolidation, typically 3-4 cycles). Reduce to 1000-1500 mg/m2 in patients age >= 60 or with renal impairment. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

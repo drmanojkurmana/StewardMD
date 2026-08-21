@@ -1,0 +1,75 @@
+{
+  "id": "gu-prostate-radium223",
+  "diseaseId": "prostate_cancer",
+  "name": "Radium-223 dichloride (symptomatic bone-predominant mCRPC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol authored from standard-of-care oncology knowledge (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "note": "Radium-223 is an alpha-emitting bone-seeking radiopharmaceutical for symptomatic bone-predominant mCRPC without visceral metastases; it prolongs survival and delays symptomatic skeletal events. It is not combined with abiraterone plus prednisone. Continue ADT to maintain castrate testosterone."
+  },
+  "stage": [
+    "M1 CRPC (metastatic castration-resistant, symptomatic bone metastases, no visceral disease)"
+  ],
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "histology": "prostate adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Continue ADT to keep testosterone below 50 ng/dL; add a bone-modifying agent (denosumab or zoledronic acid) for skeletal-event prevention.",
+    "Do not co-administer with abiraterone plus prednisone (increased fracture / death risk in that combination).",
+    "Administer by a licensed nuclear-medicine facility with radiation-safety precautions; six injections at 4-week intervals."
+  ],
+  "monitoring": [
+    "CBC before each injection (hold for neutropenia or thrombocytopenia)",
+    "renal and hepatic function",
+    "PSA and serum testosterone (confirm castrate level)",
+    "bone-pain and skeletal-event assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "no visceral metastases",
+    "castrate testosterone maintained",
+    "prior-dose status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 to 4 hematologic toxicity (neutropenia / thrombocytopenia)",
+      "drug": "radium-223-dichloride",
+      "action": "hold/discontinue",
+      "text": "Hold until recovery and obtain hematologic review; discontinue if counts do not recover within the labeled interval. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "radium-223-dichloride",
+      "name": "Radium-223 dichloride",
+      "basis": "mgkg",
+      "dosePerUnit": 55,
+      "unit": "kBq/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Weight-based radioactivity: 55 kBq/kg IV as a slow injection on day 1, repeated every 4 weeks for 6 injections. UNIT NOTE: the dose is radioactivity per body weight (kBq/kg), not milligrams; the engine multiplies 55 by patient weight to give the per-injection activity in kBq. Alpha-emitter, no ISMP tall-man form; administer under nuclear-medicine radiation-safety protocol. Dose reflects standard radium-223 practice (general reference)."
+    }
+  ]
+}

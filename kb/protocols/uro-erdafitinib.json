@@ -1,0 +1,92 @@
+{
+  "id": "uro-erdafitinib",
+  "diseaseId": "bladder_cancer",
+  "name": "Erdafitinib (oral FGFR inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous daily oral dosing until progression or unacceptable toxicity; a 28-day cycle is used for administrative tracking. Uptitrate from 8 mg to 9 mg once daily on day 14-21 if serum phosphate is below target and no significant toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "target": "FGFR2/FGFR3",
+    "note": "Erdafitinib requires a qualifying FGFR2 or FGFR3 activating mutation or fusion on molecular testing. It is used after prior platinum-based systemic therapy and is not a substitute for immunotherapy or an antibody-drug conjugate in FGFR-wild-type disease."
+  },
+  "stage": [
+    "IV",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "urothelial carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Serum phosphate guides dose titration; manage hyperphosphatemia with a low-phosphate diet, phosphate binders, and dose modification.",
+    "Baseline and periodic ophthalmologic exams (including OCT) for central serous retinopathy / retinal pigment epithelial detachment; advise dry-eye prophylaxis.",
+    "Monitor nails and skin (onycholysis, hand-foot skin changes) and oral mucosa (stomatitis, dry mouth)."
+  ],
+  "monitoring": [
+    "serum phosphate at baseline, on day 14-21 (for uptitration), and periodically",
+    "ophthalmologic exam at baseline and periodically (central serous retinopathy)",
+    "nail, skin, and oral mucosal assessment each visit",
+    "radiographic response assessment periodically"
+  ],
+  "clearanceChecks": [
+    "serum phosphate",
+    "ophthalmic status",
+    "nail/skin/mucosal status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "hyperphosphatemia above target despite diet / binders",
+      "drug": "erdafitinib",
+      "action": "reduce",
+      "text": "Add phosphate binders and reduce or interrupt erdafitinib for persistent hyperphosphatemia per labeling thresholds; physician decides."
+    },
+    {
+      "condition": "central serous retinopathy / retinal pigment epithelial detachment",
+      "drug": "erdafitinib",
+      "action": "hold",
+      "text": "Hold erdafitinib for symptomatic or significant serous retinal detachment; resume reduced or discontinue based on ophthalmology assessment."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "erdafitinib",
+      "name": "Erdafitinib",
+      "basis": "flat",
+      "dosePerUnit": 8,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Erdafitinib 8 mg orally once daily, taken continuously (day 1 marks the start of continuous daily dosing). Uptitrate to 9 mg once daily on day 14-21 if serum phosphate is below the target threshold and there is no significant toxicity. Requires a qualifying FGFR2/FGFR3 alteration. Dose per standard urothelial practice (Standard Guidelines / DeVita / Harrison, general reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Systemic Therapy, FGFR-altered post-platinum",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

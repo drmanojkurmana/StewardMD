@@ -1,0 +1,159 @@
+{
+  "id": "hodgkin-esc-beacopp",
+  "diseaseId": "hodgkin_cancer",
+  "name": "Escalated BEACOPP (Bleomycin / Etoposide / DOXOrubicin / Cyclophosphamide / vinCRIStine / Procarbazine / Prednisone)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Escalated BEACOPP is highly emetogenic; give antiemetic prophylaxis before each cycle."
+    }
+  ],
+  "supportiveCare": [
+    "Mandatory primary G-CSF support (high-intensity myelosuppressive regimen).",
+    "Counsel on infertility and second-malignancy risk before starting; reserve for selected fit, higher-risk younger patients.",
+    "Bleomycin pulmonary toxicity: PFTs before use, monitor for pneumonitis.",
+    "Baseline LVEF before anthracycline; track cumulative doxorubicin exposure."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle; expect significant myelosuppression",
+    "pulmonary function / symptoms before bleomycin",
+    "peripheral neuropathy assessment before each vincristine dose",
+    "cardiac assessment; cumulative doxorubicin tracking",
+    "interim FDG-PET (Deauville) for cycle-number adaptation"
+  ],
+  "drugs": [
+    {
+      "id": "bleomycin",
+      "name": "Bleomycin",
+      "basis": "bsa",
+      "dosePerUnit": 10,
+      "unit": "units/m2",
+      "route": "IV",
+      "days": [
+        8
+      ],
+      "notes": "Escalated BEACOPP 'B'. Bleomycin 10 units/m2 IV on day 8 of a 21-day cycle. Pulmonary toxicity risk: PFTs before use, hold for pulmonary toxicity. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 200,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "notes": "Escalated BEACOPP 'E'. Etoposide 200 mg/m2 IV daily on days 1 to 3 of a 21-day cycle (escalated dose). Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "DOXOrubicin",
+      "basis": "bsa",
+      "dosePerUnit": 35,
+      "unit": "mg/m2",
+      "route": "IV",
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "days": [
+        1
+      ],
+      "notes": "Escalated BEACOPP 'A'. DOXOrubicin 35 mg/m2 IV on day 1 of a 21-day cycle (escalated dose). Anthracycline cumulative cardiotoxicity warn 450 / hard 550 mg/m2. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 1250,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "notes": "Escalated BEACOPP 'C'. Cyclophosphamide 1250 mg/m2 IV on day 1 of a 21-day cycle (escalated dose). Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "vincristine",
+      "name": "vinCRIStine",
+      "basis": "bsa",
+      "dosePerUnit": 1.4,
+      "unit": "mg/m2",
+      "route": "IV push (IV only, NEVER intrathecal)",
+      "caps": {
+        "perDose": 2
+      },
+      "days": [
+        8
+      ],
+      "notes": "Escalated BEACOPP 'O' (Oncovin). vinCRIStine 1.4 mg/m2 IV on day 8 of a 21-day cycle, 2 mg per-dose cap (ISMP safety default). IV only and fatal if given intrathecally. Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "procarbazine",
+      "name": "Procarbazine",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7
+      ],
+      "notes": "Escalated BEACOPP 'P' (procarbazine). Procarbazine 100 mg/m2 PO daily on days 1 to 7 of a 21-day cycle. Advise tyramine/alcohol precautions (MAOI-like). Standard dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "notes": "Escalated BEACOPP 'P' (prednisone). Prednisone 40 mg/m2 PO daily on days 1 to 14 of a 21-day cycle. Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

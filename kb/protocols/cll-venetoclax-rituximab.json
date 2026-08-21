@@ -1,0 +1,68 @@
+{
+  "id": "cll-venetoclax-rituximab",
+  "diseaseId": "cll_cancer",
+  "name": "VenR (Venetoclax + Rituximab), fixed duration",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), general reference",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care dosing (experimental; owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Rituximab infusion-reaction prophylaxis", "notes": "antihistamine, antipyretic and (per practice) a corticosteroid before the infusion." },
+    { "name": "Tumor-lysis-syndrome prophylaxis", "notes": "hydration and a uric-acid-lowering agent around the venetoclax ramp-up; risk-stratify by tumor burden and renal function." }
+  ],
+  "supportiveCare": [
+    "Relapsed/refractory fixed-duration regimen: rituximab for 6 monthly doses with venetoclax continued for about 24 months total.",
+    "Tumor-lysis-syndrome assessment with hydration and the weekly venetoclax ramp-up before the 400 mg target dose.",
+    "Hepatitis B reactivation prophylaxis if HBcAb-positive (anti-CD20 antibody).",
+    "Antiviral and PJP prophylaxis per risk."
+  ],
+  "monitoring": [
+    "Tumor-lysis labs during each venetoclax step-up, per a defined schedule",
+    "CBC before each cycle",
+    "Infusion-reaction monitoring with rituximab"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "tumor-lysis risk", "hepatitis B status", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "laboratory or clinical tumor lysis during ramp-up",
+      "drug": "venetoclax",
+      "action": "hold",
+      "text": "Hold venetoclax, correct the metabolic abnormality, and resume the ramp-up per standard practice; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "venetoclax",
+      "name": "Venetoclax",
+      "basis": "flat",
+      "dosePerUnit": 400,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): oral daily, started as a 5-week ramp-up (20 mg, then 50, 100, 200, 400 mg, escalating weekly) to reduce tumor-lysis risk, then 400 mg once daily continued to complete about 24 months of therapy in the relapsed/refractory setting. dosePerUnit is the 400 mg maintenance dose. Own wording; not copied from any source."
+    },
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 375 mg/m2 IV on day 1 of the first cycle, then 500 mg/m2 IV on day 1 of cycles 2 through 6 (6 monthly doses total). dosePerUnit is the first-cycle 375 mg/m2 dose; the 500 mg/m2 escalation from cycle 2 is noted here. Rituximab begins after the venetoclax ramp-up reaches the 400 mg dose. Own wording; not copied from any source."
+    }
+  ]
+}

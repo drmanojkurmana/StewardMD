@@ -1,0 +1,47 @@
+{
+  "id": "ut-trastuzumab-deruxtecan",
+  "diseaseId": "uterine_cancer",
+  "name": "Trastuzumab deruxtecan (T-DXd, HER2-directed ADC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "every 3 weeks until progression or unacceptable toxicity. Physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "T-DXd is moderately-to-highly emetogenic; give prophylaxis before each dose." }
+  ],
+  "supportiveCare": [
+    "Educate patient on respiratory symptoms; interstitial lung disease / pneumonitis is a class risk.",
+    "Antiemetic support across the cycle."
+  ],
+  "monitoring": [
+    "Interstitial lung disease surveillance: assess for cough, dyspnea, fever; hold and evaluate promptly if suspected.",
+    "CBC before each cycle; LVEF at baseline and periodically.",
+    "Response assessment by imaging every 2 to 3 cycles."
+  ],
+  "clearanceChecks": ["CBC/platelets", "LVEF", "pulmonary (ILD)", "prior-cycle status"],
+  "drugs": [
+    {
+      "id": "trastuzumab-deruxtecan",
+      "name": "Trastuzumab deruxtecan",
+      "basis": "mgkg",
+      "dosePerUnit": 5.4,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Trastuzumab deruxtecan 5.4 mg/kg IV on day 1 every 3 weeks. HER2-directed antibody-drug conjugate for HER2-positive/HER2-expressing uterine serous carcinoma progressing after a chemotherapy-plus-trastuzumab first line (tumor-agnostic HER2 activity). Hold and evaluate for any suspected interstitial lung disease. Dose scaled by body weight (engine multiplies by kg). Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

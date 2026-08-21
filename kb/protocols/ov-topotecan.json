@@ -1,0 +1,44 @@
+{
+  "id": "ov-topotecan",
+  "diseaseId": "ovarian_cancer",
+  "name": "Topotecan (single agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT single-agent option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "Low-to-moderate emetogenic; give per emetic-risk framework." }
+  ],
+  "supportiveCare": [
+    "Myelosuppression (especially neutropenia and thrombocytopenia) is the dose-limiting toxicity: reduce dose for prior grade 4 counts and consider growth-factor support.",
+    "Reduce dose in renal impairment per package insert (topotecan is renally cleared)."
+  ],
+  "monitoring": [
+    "CBC before each dose and mid-cycle if using the 5-day schedule",
+    "renal function before each cycle"
+  ],
+  "drugs": [
+    {
+      "id": "topotecan",
+      "name": "Topotecan",
+      "basis": "bsa",
+      "dosePerUnit": 1.5,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 2, 3, 4, 5],
+      "caps": { "perDose": null },
+      "notes": "Topotecan 1.5 mg/m2 IV on days 1-5 every 21 days for recurrent ovarian cancer (a weekly 4 mg/m2 schedule on days 1, 8, 15 is a better-tolerated alternative). Dose-reduce for cytopenias and renal impairment per package insert. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference)."
+    }
+  ]
+}

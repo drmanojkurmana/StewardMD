@@ -1,0 +1,136 @@
+{
+  "id": "panc-gem-cape",
+  "diseaseId": "pancreatic_cancer",
+  "name": "Gemcitabine + Capecitabine (GemCap, ESPAC-4)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "Adjuvant after resection; about 6 cycles (24 weeks) to complete roughly 6 months of perioperative therapy, deducting any neoadjuvant months given.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "The gemcitabine/capecitabine backbone is not biomarker-restricted; it is an adjuvant option for reduced-fitness patients not suited to an adjuvant triplet. Consider DPYD genotype/phenotype before a fluoropyrimidine (capecitabine)."
+  },
+  "stage": [
+    "resected"
+  ],
+  "treatmentSetting": [
+    "adjuvant"
+  ],
+  "histology": "pancreatic adenocarcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "moderate emetic risk on gemcitabine days; give guideline-tier antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "Counsel on capecitabine hand-foot syndrome, diarrhoea and mucositis; interrupt and dose-reduce per grade.",
+    "Screen for DPYD deficiency before starting a fluoropyrimidine.",
+    "Monitor for myelosuppression on gemcitabine days."
+  ],
+  "monitoring": [
+    "CBC before each gemcitabine dose (days 1, 8, 15)",
+    "liver and renal function before each cycle",
+    "capecitabine tolerance (hand-foot, diarrhoea, mucositis) each cycle",
+    "CA 19-9 and imaging on surveillance schedule"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2+ hand-foot syndrome, diarrhoea, mucositis, or cytopenias",
+      "action": "hold/reduce",
+      "text": "Review required. Interrupt capecitabine and reduce on recovery per fluoropyrimidine toxicity grading; hold gemcitabine on a treatment day for cytopenias. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "notes": "Gemcitabine 1,000 mg/m2 IV on days 1, 8 and 15 of a 28-day cycle. Source: adjuvant standard of care (GemCap / ESPAC-4 style) per NCCN Pancreatic Adenocarcinoma / DeVita general reference (own wording).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+        "version": null,
+        "date": null,
+        "locator": "adjuvant gemcitabine + capecitabine (GemCap); own wording",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "modificationRules": []
+    },
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 830,
+      "unit": "mg/m2",
+      "route": "PO",
+      "notes": "Capecitabine 830 mg/m2 orally twice daily (about 1,660 mg/m2 total per day) on days 1 to 21 of a 28-day cycle; dosePerUnit is the per-dose (twice-daily) mg/m2. Round to available tablet strengths. Screen DPYD. Source: adjuvant GemCap (ESPAC-4 style) per NCCN Pancreatic Adenocarcinoma / DeVita general reference (own wording).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Pancreatic Adenocarcinoma",
+        "version": null,
+        "date": null,
+        "locator": "adjuvant gemcitabine + capecitabine (GemCap); own wording",
+        "evidenceStatus": "unknown"
+      },
+      "caps": {
+        "perDose": null
+      },
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21
+      ],
+      "modificationRules": []
+    }
+  ]
+}

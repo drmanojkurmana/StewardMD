@@ -1,0 +1,106 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-rice",
+  "name": "R-ICE (rituximab/ifosfamide/carboplatin/etoposide) salvage",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "premedications": [
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine"
+    },
+    {
+      "name": "Mesna",
+      "notes": "uroprotection with ifosfamide, matched to the ifosfamide dose"
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF support (transplant-intent salvage - preserve stem-cell collection)",
+    "Antiemetics; vigorous hydration",
+    "Plan stem-cell mobilization/collection after a chemosensitive response"
+  ],
+  "monitoring": [
+    "Response by PET before proceeding to high-dose therapy + autologous transplant",
+    "CBC; renal function (carboplatin/ifosfamide)",
+    "Neurologic status (ifosfamide encephalopathy)"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV day 1."
+    },
+    {
+      "id": "ifosfamide",
+      "name": "Ifosfamide",
+      "basis": "bsa",
+      "dosePerUnit": 5000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "5000 mg/m2 by continuous IV infusion over 24 h on day 2, with mesna uroprotection."
+    },
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "caps": {
+        "perDose": 800
+      },
+      "notes": "AUC 5 (Calvert) IV day 2, capped at 800 mg."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "100 mg/m2 IV daily, days 1-3."
+    }
+  ]
+}

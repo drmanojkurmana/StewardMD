@@ -1,0 +1,152 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-da-epoch-r",
+  "name": "DA-EPOCH-R (dose-adjusted etoposide/prednisone/vincristine/cyclophosphamide/doxorubicin + rituximab)",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "premedications": [
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine before each rituximab infusion"
+    },
+    {
+      "name": "Tumor-lysis prophylaxis",
+      "notes": "hydration + allopurinol (rasburicase if high burden) for cycle 1"
+    }
+  ],
+  "supportiveCare": [
+    "G-CSF from day 6 of every cycle (mandatory - this is a dose-intense infusional regimen)",
+    "Central venous access for the 96-hour continuous infusion",
+    "PJP and antiviral prophylaxis; check hepatitis B before rituximab"
+  ],
+  "monitoring": [
+    "CBC twice weekly to find the nadir - the etoposide/doxorubicin/cyclophosphamide doses are escalated one level each cycle if the prior-cycle nadir ANC stayed above 500",
+    "LVEF at baseline (anthracycline)",
+    "CNS prophylaxis given the high CNS-relapse risk of high-grade disease"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV on day 1 of each 21-day cycle (given before the infusional block)."
+    },
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 50,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "50 mg/m2 per day by continuous IV infusion, days 1-4 (96 h). Dose-level 1 baseline; escalate per nadir counts."
+    },
+    {
+      "id": "vincristine",
+      "name": "Vincristine",
+      "basis": "bsa",
+      "dosePerUnit": 0.4,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "0.4 mg/m2 per day by continuous IV infusion, days 1-4. No 2 mg cap in EPOCH (infusional schedule)."
+    },
+    {
+      "id": "doxorubicin",
+      "name": "Doxorubicin",
+      "basis": "bsa",
+      "dosePerUnit": 10,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": {
+          "warn": 450,
+          "hard": 550,
+          "unit": "mg/m2"
+        }
+      },
+      "notes": "10 mg/m2 per day by continuous IV infusion, days 1-4. Track cumulative anthracycline exposure."
+    },
+    {
+      "id": "cyclophosphamide",
+      "name": "Cyclophosphamide",
+      "basis": "bsa",
+      "dosePerUnit": 750,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "750 mg/m2 IV bolus on day 5 (dose-level 1 baseline; escalate/de-escalate per nadir counts)."
+    },
+    {
+      "id": "prednisone",
+      "name": "Prednisone",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "60 mg/m2 PO twice daily, days 1-5."
+    }
+  ]
+}

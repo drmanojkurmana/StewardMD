@@ -1,0 +1,64 @@
+{
+  "id": "thyroid-pembrolizumab",
+  "diseaseId": "anaplastic_thyroid_carcinoma",
+  "name": "Pembrolizumab (anaplastic thyroid carcinoma, biomarker-selected)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "continuous every-3-week dosing until disease progression, unacceptable toxicity, or up to ~2 years; not a fixed cycle count",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Thyroid Carcinoma (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "io": "favorable (high TMB, MSI-high / dMMR, or high PD-L1)",
+    "note": "Checkpoint inhibitor used for BRAF wild-type anaplastic disease with a favorable immunotherapy biomarker, or added to continued BRAF/MEK blockade after BRAF-directed progression. Confirm the biomarker on validated testing."
+  },
+  "stage": ["IVB (unresectable)", "IVC (metastatic)"],
+  "treatmentSetting": "metastatic",
+  "histology": "anaplastic (undifferentiated) thyroid carcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "monitor for immune-related adverse events (pneumonitis, colitis, hepatitis, endocrinopathies including thyroiditis / hypophysitis, nephritis, skin) and manage per immunotherapy toxicity guidance.",
+    "check baseline and periodic thyroid, adrenal, and pituitary function.",
+    "may be combined with dabrafenib + trametinib after BRAF-directed progression, or given with cytotoxic chemoradiation.",
+    "continue multidisciplinary and palliative care with airway / symptom management."
+  ],
+  "monitoring": [
+    "thyroid, adrenal, and pituitary function panels",
+    "liver and renal function",
+    "symptoms of pneumonitis / colitis",
+    "cross-sectional imaging response assessment"
+  ],
+  "clearanceChecks": ["biomarker (TMB / MSI / PD-L1) confirmed", "liver", "renal", "no active uncontrolled autoimmune disease", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 to 4 immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold",
+      "text": "Hold for grade 2 and most grade 3 immune-related events, start corticosteroids, and permanently discontinue for grade 4 or recurrent serious events per immunotherapy toxicity guidance. Obtain clinical review. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "notes": "Pembrolizumab 200 mg IV over ~30 minutes on day 1 every 3 weeks (a 400 mg every-6-week schedule is an equivalent alternative), continued until progression, unacceptable toxicity, or about 2 years (per standard guidelines, general reference). Own wording - not a verbatim source copy.",
+      "caps": { "perDose": null },
+      "days": [1],
+      "modificationRules": []
+    }
+  ]
+}

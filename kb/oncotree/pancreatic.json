@@ -171,10 +171,10 @@
       "evidenceCategory": ["2A"],
       "bullets": [
         "Gemcitabine + nab-paclitaxel; monitor cytopenias and neuropathy",
-        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
         "Then restage before resection (next step)"
       ],
       "footnotes": ["b", "e"],
+      "protocolRefs": ["panc-gem-nab"],
       "linkTo": "n_res_restage",
       "linkLabel": "Restage after neoadjuvant therapy"
     },
@@ -288,9 +288,9 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Gemcitabine + capecitabine, or gemcitabine monotherapy, for about 6 months",
-        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
         "Monitor counts and hepatic / renal function; then surveillance (next step)"
       ],
+      "protocolRefs": ["panc-gem-cape", "panc-gem"],
       "linkTo": "n_surveillance",
       "linkLabel": "Proceed to surveillance"
     },
@@ -478,9 +478,9 @@
       "evidenceCategory": ["2A"],
       "bullets": [
         "Gemcitabine monotherapy (or gemcitabine + nab-paclitaxel if tolerable)",
-        "No dedicated dose protocol here yet - shown as guidance",
         "If not a chemotherapy candidate, move to best supportive care (next step)"
       ],
+      "protocolRefs": ["panc-gem", "panc-gem-nab"],
       "linkTo": "n_bsc",
       "linkLabel": "Best supportive care if not a chemotherapy candidate"
     },
@@ -808,10 +808,10 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Gemcitabine + nab-paclitaxel; monitor cytopenias and neuropathy",
-        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
         "Then reassess response to plan maintenance vs second line (next step)"
       ],
       "footnotes": ["b"],
+      "protocolRefs": ["panc-gem-nab"],
       "linkTo": "n_met_1l_response",
       "linkLabel": "Reassess response"
     },
@@ -834,6 +834,7 @@
         "Prioritize symptom control, biliary/GI patency, nutrition, and pain",
         "If not a chemotherapy candidate, move to best supportive care (next step)"
       ],
+      "protocolRefs": ["panc-gem"],
       "linkTo": "n_bsc",
       "linkLabel": "Best supportive care"
     },
@@ -941,9 +942,9 @@
       "evidenceCategory": ["2A"],
       "bullets": [
         "Gemcitabine + nab-paclitaxel, or gemcitabine monotherapy if less fit",
-        "No dedicated dose protocol here yet - shown as guidance (physician arranges the regimen)",
         "Then reassess response (next step)"
       ],
+      "protocolRefs": ["panc-gem-nab", "panc-gem"],
       "linkTo": "n_met_2l_response",
       "linkLabel": "Reassess response"
     },

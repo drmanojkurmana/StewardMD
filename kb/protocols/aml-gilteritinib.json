@@ -1,0 +1,76 @@
+{
+  "id": "aml-gilteritinib",
+  "diseaseId": "aml_cancer",
+  "name": "Gilteritinib (FLT3 inhibitor, R/R)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Acute Myeloid Leukemia",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Differentiation-syndrome vigilance: corticosteroids if suspected."
+  ],
+  "monitoring": [
+    "QT interval (baseline and periodic).",
+    "CBC and marrow response; bridge responders to allogeneic transplant.",
+    "CPK and LFTs periodically."
+  ],
+  "drugs": [
+    {
+      "id": "gilteritinib",
+      "name": "Gilteritinib",
+      "basis": "flat",
+      "dosePerUnit": 120,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "frequency": "DAILY",
+      "caps": {
+        "perDose": null
+      },
+      "notes": "120 mg PO once daily, continuously, for relapsed/refractory FLT3-mutated AML; may titrate to 200 mg/day for inadequate response. Bridge responders to allogeneic transplant; consider post-transplant FLT3-inhibitor maintenance. Standard Guidelines (NCCN) / DeVita, general reference."
+    }
+  ]
+}

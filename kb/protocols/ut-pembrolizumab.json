@@ -1,0 +1,45 @@
+{
+  "id": "ut-pembrolizumab",
+  "diseaseId": "uterine_cancer",
+  "name": "Pembrolizumab (single-agent checkpoint inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "continue every 3 weeks until progression or unacceptable toxicity (up to about 2 years); a 400 mg every-6-week schedule is an accepted alternative. Physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Baseline and periodic assessment for immune-related adverse events (skin, gut, liver, endocrine, lung).",
+    "Have a corticosteroid and immune-toxicity management pathway available."
+  ],
+  "monitoring": [
+    "Thyroid, adrenal/pituitary, glucose at baseline and periodically.",
+    "Liver and renal function each cycle; symptom-driven assessment for colitis and pneumonitis.",
+    "Response assessment by imaging every 2 to 3 cycles."
+  ],
+  "clearanceChecks": ["liver", "thyroid", "prior-cycle status"],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Pembrolizumab 200 mg IV over about 30 minutes on day 1 every 3 weeks (an alternative flat schedule is 400 mg every 6 weeks). Single-agent anti-PD-1 therapy for mismatch-repair-deficient / MSI-high advanced endometrial carcinoma progressing after chemo-immunotherapy, or where a chemo backbone is not appropriate. Flat fixed dose; not weight- or BSA-scaled. Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

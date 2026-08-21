@@ -1,0 +1,99 @@
+{
+  "id": "anal-capecitabine",
+  "diseaseId": "anal_cancer",
+  "name": "Capecitabine (single-agent fluoropyrimidine, reduced-intensity / maintenance anal SCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Anal Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "histology": "squamous cell carcinoma of the anus",
+    "note": "Single-agent oral capecitabine is a reduced-intensity fluoropyrimidine option for frail patients unfit for a platinum doublet, and a convenient maintenance fluoropyrimidine for durable responders. DPYD testing advised before starting. General reference: Standard Guidelines (NCCN) / DeVita."
+  },
+  "stage": [
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic (reduced-intensity or maintenance)",
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "None routine",
+      "notes": "Oral therapy; counsel on hand-foot syndrome, diarrhea, and adherence."
+    }
+  ],
+  "supportiveCare": [
+    "Capecitabine 1000 mg/m2 PO twice daily on days 1 to 14 of a 21-day cycle (sourced monotherapy range 1000 to 1250 mg/m2 twice daily); continue until progression or intolerance.",
+    "Fluoropyrimidine DPYD testing before starting (FDA boxed warning).",
+    "Prioritise symptom control and quality of life; dose-attenuate readily for frailty."
+  ],
+  "monitoring": [
+    "CBC and renal/hepatic function before each cycle",
+    "hand-foot syndrome and diarrhea assessment each cycle",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "DPYD status (fluoropyrimidine)"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2+ hand-foot syndrome, diarrhea, or renal impairment",
+      "drug": "capecitabine",
+      "action": "hold/reduce",
+      "text": "Hold until recovery then reduce dose per labeling; reduce starting dose for moderate renal impairment. Clinical review required."
+    },
+    {
+      "condition": "known DPYD deficiency",
+      "drug": "capecitabine",
+      "action": "reduce/avoid",
+      "text": "Reduce dose or avoid capecitabine in DPYD-deficient patients per FDA boxed warning; clinical review required."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "capecitabine",
+      "name": "Capecitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "dosesPerDay": 2,
+      "frequency": "BID",
+      "notes": "Capecitabine 1000 mg/m2 PO twice daily on days 1 to 14 of a 21-day cycle; dosePerUnit is the lower bound of the sourced monotherapy range 1000 to 1250 mg/m2 twice daily. DPYD testing advised before starting (FDA boxed warning). General reference: Standard Guidelines (NCCN) / DeVita.",
+      "modificationRules": []
+    }
+  ]
+}

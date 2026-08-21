@@ -1,0 +1,95 @@
+{
+  "id": "eg-cisplatin-5fu-rt",
+  "diseaseId": "uppergi_cancer",
+  "name": "Cisplatin + 5-FU with concurrent radiotherapy (definitive / neoadjuvant, esophageal SCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 2,
+  "cyclesNote": "Cisplatin plus infusional 5-FU given concurrently with definitive-dose radiotherapy (about 50 to 50.4 Gy) for locally advanced esophageal squamous cell carcinoma; commonly two cycles during radiation with further cycles after, per physician judgement.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD ONCOTREE draft protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Cisplatin is highly emetogenic; give a 5-HT3 antagonist plus dexamethasone and an NK1 antagonist before cisplatin per emetic-risk guidance."
+    },
+    {
+      "name": "Hydration",
+      "notes": "Pre- and post-cisplatin IV saline hydration with magnesium and potassium repletion to protect renal function."
+    }
+  ],
+  "supportiveCare": [
+    "Concurrent radiotherapy to a definitive dose (about 50 to 50.4 Gy); coordinate chemotherapy timing with the radiation plan.",
+    "Nutrition support and management of radiation esophagitis / dysphagia throughout treatment.",
+    "Aggressive antiemesis and renal-protective hydration around cisplatin."
+  ],
+  "monitoring": [
+    "renal function and serum magnesium before each cisplatin dose",
+    "CBC before each cycle and during concurrent radiation",
+    "audiometry / neuropathy assessment for cumulative cisplatin toxicity",
+    "swallowing, weight, and hydration status"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "electrolytes (Mg, K)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "CrCl < 60 mL/min or rising creatinine",
+      "drug": "cisplatin",
+      "action": "reduce/substitute",
+      "text": "Reduce or hold cisplatin, or substitute carboplatin, for declining renal function; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Cisplatin 75 mg/m2 IV on day 1 of a 28-day cycle, concurrent with definitive-dose radiotherapy for esophageal squamous cell carcinoma. Requires renal-protective hydration and magnesium repletion. Dose and schedule are a standard-of-care description (StewardMD wording); physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil (5-FU)",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "5-FU 1000 mg/m2 per day as a continuous IV infusion on days 1 to 4 (about 4000 mg/m2 per cycle), every 28 days, concurrent with radiotherapy. Standard esophageal chemoradiation backbone; monitor for mucositis, diarrhea, and hand-foot syndrome. StewardMD wording; physician decides.",
+      "modificationRules": []
+    }
+  ]
+}

@@ -1,0 +1,67 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), NSCLC",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Corticosteroid premedication",
+      "notes": "Dexamethasone starting the day before docetaxel to reduce fluid retention and hypersensitivity, per standard taxane practice."
+    }
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "liver function",
+    "fluid retention / neuropathy assessment"
+  ],
+  "clearanceChecks": [
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [],
+  "id": "lung-docetaxel",
+  "diseaseId": "nsclc",
+  "name": "Docetaxel +/- Ramucirumab (NSCLC later line)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "supportiveCare": [
+    "Assess febrile-neutropenia risk; consider myeloid growth-factor support per risk framework.",
+    "Ramucirumab (antiangiogenic) may be added for suitable non-squamous patients."
+  ],
+  "drugs": [
+    {
+      "id": "docetaxel",
+      "name": "Docetaxel",
+      "basis": "bsa",
+      "dosePerUnit": 75,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Docetaxel 75 mg/m2 IV day 1, every 21 days, for fit patients after platinum chemotherapy and immunotherapy. Ramucirumab 10 mg/kg IV day 1 (antiangiogenic) may be added for eligible non-squamous patients. My own wording from standard second-line NSCLC practice.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), NSCLC",
+        "version": "current",
+        "date": null,
+        "locator": "NSCLC subsequent-therapy (docetaxel 75 mg/m2 q21d)",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

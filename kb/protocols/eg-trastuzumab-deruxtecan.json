@@ -1,0 +1,76 @@
+{
+  "id": "eg-trastuzumab-deruxtecan",
+  "diseaseId": "uppergi_cancer",
+  "name": "Trastuzumab deruxtecan (T-DXd), HER2-positive second line",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "cyclesNote": "Trastuzumab deruxtecan for HER2-positive metastatic gastric / esophagogastric adenocarcinoma progressing after a trastuzumab-containing regimen (DESTINY-Gastric population); continue until progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD ONCOTREE draft protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "HER2": "required-positive",
+    "note": "Indicated for HER2-positive (IHC 3+ or IHC 2+/ISH-amplified) disease after prior trastuzumab."
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "Trastuzumab deruxtecan is moderately to highly emetogenic; give multi-agent antiemetic prophylaxis."
+    }
+  ],
+  "supportiveCare": [
+    "Single-agent HER2-directed antibody-drug conjugate; no cytotoxic chemotherapy backbone.",
+    "Educate patient to report new or worsening cough, dyspnea, or fever (interstitial lung disease / pneumonitis).",
+    "Monitor for nausea, myelosuppression, and left ventricular dysfunction."
+  ],
+  "monitoring": [
+    "chest imaging and symptom review for interstitial lung disease / pneumonitis before each cycle",
+    "CBC before each cycle",
+    "LVEF at baseline and periodically",
+    "clinical assessment for nausea and fatigue"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "pulmonary (ILD screen)",
+    "LVEF",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "any grade of interstitial lung disease / pneumonitis",
+      "drug": "trastuzumab-deruxtecan",
+      "action": "hold/steroids/discontinue",
+      "text": "Interrupt for suspected ILD, start corticosteroids, and permanently discontinue for grade 2 or higher ILD; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "trastuzumab-deruxtecan",
+      "name": "Trastuzumab deruxtecan",
+      "basis": "mgkg",
+      "dosePerUnit": 6.4,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Trastuzumab deruxtecan 6.4 mg/kg IV on day 1 every 21 days for HER2-positive metastatic gastric / esophagogastric adenocarcinoma after prior trastuzumab. Vigilant monitoring for interstitial lung disease. StewardMD standard-of-care wording; physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    }
+  ]
+}

@@ -392,10 +392,11 @@
       "bullets": [
         "Substitute a cisplatin-based fluoropyrimidine backbone concurrent with radiation where mitomycin is contraindicated",
         "For frail patients, consider radiation with a reduced-intensity fluoropyrimidine, or radiation alone if chemotherapy is unsafe",
-        "No mitomycin-substitution dose protocol here - the physician selects and doses the concurrent agent",
+        "Cisplatin + fluorouracil concurrent with radiation is the referenced mitomycin-sparing backbone; the physician confirms suitability and dosing",
         "Proceed to the same response-adapted restaging as the standard backbone (next step)"
       ],
-      "footnotes": ["a"]
+      "footnotes": ["a"],
+      "protocolRefs": ["anal-cisplatin-5fu-rt"]
     },
     {
       "id": "n_response",
@@ -649,10 +650,11 @@
       "bullets": [
         "Modified DCF (docetaxel, cisplatin, fluorouracil) offers high response rates at the cost of more toxicity",
         "Reserve for excellent performance status; use growth-factor support and confirm DPYD (footnote a)",
-        "No anal-specific DCF dose protocol here - the physician selects and doses the triplet",
+        "Modified DCF (2-weekly, attenuated) is the referenced schedule; the physician confirms fitness and dosing",
         "Then move to the progression assessment (next step)"
       ],
-      "footnotes": ["a"]
+      "footnotes": ["a"],
+      "protocolRefs": ["anal-dcf"]
     },
     {
       "id": "n_tx_met_reduced",
@@ -669,9 +671,10 @@
       "bullets": [
         "Single-agent or dose-attenuated therapy (a fluoropyrimidine, or a reduced carboplatin-paclitaxel schedule)",
         "Checkpoint-inhibitor monotherapy may suit selected patients who cannot tolerate cytotoxics",
-        "Prioritise symptom control and quality of life; no reduced-dose protocol referenced here",
+        "Prioritise symptom control and quality of life; single-agent capecitabine is the referenced reduced-intensity option, dose-attenuate as needed",
         "Then move to the progression assessment (next step)"
-      ]
+      ],
+      "protocolRefs": ["anal-capecitabine"]
     },
     {
       "id": "n_met_progression",
@@ -702,10 +705,11 @@
       "showsRecommendation": true,
       "bullets": [
         "Continue the effective regimen to progression or cumulative toxicity (e.g. platinum/taxane neuropathy)",
-        "Consider a treatment holiday or a maintenance fluoropyrimidine for durable responders",
+        "Consider a treatment holiday or a maintenance fluoropyrimidine (capecitabine, referenced) for durable responders",
         "Re-image every 2-3 cycles; re-enter the later-line pathway at progression",
         "Integrate palliative care for symptom burden"
-      ]
+      ],
+      "protocolRefs": ["anal-capecitabine"]
     },
     {
       "id": "n_met_2l_elig",
@@ -744,11 +748,12 @@
       "evidenceCategory": ["2A"],
       "bullets": [
         "Anti-PD-1 monotherapy (e.g. pembrolizumab or nivolumab) after platinum progression",
-        "Monitor for immune-related adverse events; no anal-specific immunotherapy dose protocol here",
+        "Monitor for immune-related adverse events; pembrolizumab flat dosing is the referenced schedule (nivolumab an equivalent alternative)",
         "Continue to progression or unacceptable toxicity",
         "On progression, move to the later-line assessment (next step)"
       ],
-      "footnotes": ["e"]
+      "footnotes": ["e"],
+      "protocolRefs": ["anal-pembrolizumab"]
     },
     {
       "id": "n_tx_met_other",
@@ -764,10 +769,11 @@
       "evidenceCategory": ["2B"],
       "bullets": [
         "A taxane or fluoropyrimidine-based regimen not previously used, or re-challenge if durable prior benefit",
-        "No later-line dose protocol referenced here - the physician selects and doses the agent",
+        "Single-agent weekly paclitaxel is the referenced taxane option; the physician selects by prior exposure and tolerability",
         "Integrate palliative care alongside systemic therapy",
         "On progression, move to the later-line assessment (next step)"
-      ]
+      ],
+      "protocolRefs": ["anal-paclitaxel"]
     },
     {
       "id": "n_met_3l",
@@ -800,9 +806,10 @@
       "bullets": [
         "Prioritise clinical-trial enrolment where available (novel HPV-directed or checkpoint combinations)",
         "Otherwise a single agent not previously used, chosen for tolerability",
-        "No later-line dose protocol referenced here - the physician selects and doses the agent",
+        "Single-agent weekly paclitaxel is the referenced option where a taxane has not been used; the physician selects and doses the agent",
         "Reassess performance status frequently; transition to supportive care when the burden outweighs benefit"
-      ]
+      ],
+      "protocolRefs": ["anal-paclitaxel"]
     },
     {
       "id": "n_tx_bsc",

@@ -1,0 +1,109 @@
+{
+  "id": "hcc-lenvatinib",
+  "diseaseId": "hcc_cancer",
+  "name": "Lenvatinib (single-agent oral multikinase inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous once-daily oral dosing (represented as days 1 to 28 of a 28-day continuous-dosing accounting cycle; no drug-free interval). Weight-based: 12 mg once daily for body weight 60 kg or more, 8 mg once daily for under 60 kg. First-line TKI alternative to sorafenib.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Blood pressure control before and during therapy (VEGF-pathway inhibitor); treat hypertension promptly.",
+    "Monitor for proteinuria, thyroid dysfunction, hand-foot skin reaction, diarrhea; dose-modify per labeling."
+  ],
+  "monitoring": [
+    "blood pressure at baseline and during therapy",
+    "thyroid function (TSH)",
+    "urine protein for proteinuria",
+    "liver function and AFP trend"
+  ],
+  "clearanceChecks": [
+    "liver",
+    "blood pressure",
+    "thyroid",
+    "proteinuria",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "body weight under 60 kg",
+      "drug": "lenvatinib",
+      "action": "reduce",
+      "text": "Starting dose is 8 mg once daily for body weight under 60 kg (versus 12 mg for 60 kg or more). Physician decides."
+    },
+    {
+      "condition": "grade 3 or persistent grade 2 toxicity",
+      "drug": "lenvatinib",
+      "action": "reduce",
+      "text": "Interrupt and dose-reduce stepwise per labeling; clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "lenvatinib",
+      "name": "Lenvatinib",
+      "basis": "flat",
+      "dosePerUnit": 12,
+      "unit": "mg",
+      "route": "PO",
+      "days": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Lenvatinib 12 mg PO once daily for body weight 60 kg or more, or 8 mg PO once daily for under 60 kg, taken continuously. First-line oral multikinase inhibitor for advanced HCC in Child-Pugh A. Authored from standard practice (NCCN Hepatocellular Carcinoma; REFLECT supporting evidence). dosePerUnit shows the 12 mg starting dose; apply the 8 mg starting dose for weight under 60 kg.",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Hepatocellular Carcinoma",
+        "version": null,
+        "date": null,
+        "locator": "lenvatinib, first-line advanced HCC (weight-based)",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": [],
+      "frequency": "once daily"
+    }
+  ]
+}

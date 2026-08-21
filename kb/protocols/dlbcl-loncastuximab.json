@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-loncastuximab",
+  "name": "Loncastuximab tesirine (anti-CD19 antibody-drug conjugate)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 8,
+  "premedications": [
+    {
+      "name": "Dexamethasone",
+      "notes": "4 mg PO twice daily for 3 days starting the day before each infusion, to reduce edema/effusions"
+    }
+  ],
+  "supportiveCare": [
+    "Single-agent option after two or more prior lines",
+    "Monitor for fluid retention (edema, pleural/pericardial effusions) - a class effect of the PBD-dimer payload",
+    "Photosensitivity precautions"
+  ],
+  "monitoring": [
+    "CBC (cytopenias); liver enzymes; GGT",
+    "Edema/effusions and weight",
+    "Dose reduced from 0.15 to 0.075 mg/kg after the first 2 cycles"
+  ],
+  "drugs": [
+    {
+      "id": "loncastuximab",
+      "name": "Loncastuximab tesirine",
+      "basis": "mgkg",
+      "dosePerUnit": 0.15,
+      "unit": "mg/kg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "0.15 mg/kg IV on day 1 of each 21-day cycle for the first 2 cycles, then reduce to 0.075 mg/kg for subsequent cycles."
+    }
+  ]
+}

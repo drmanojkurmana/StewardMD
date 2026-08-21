@@ -1,0 +1,72 @@
+{
+  "id": "eg-paclitaxel",
+  "diseaseId": "uppergi_cancer",
+  "name": "Paclitaxel (single agent, weekly)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "cyclesNote": "Single-agent weekly paclitaxel for second-line metastatic esophageal / esophagogastric cancer; continue until progression or unacceptable toxicity.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD ONCOTREE draft protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Hypersensitivity prophylaxis",
+      "notes": "Corticosteroid plus H1 and H2 antihistamine before paclitaxel to reduce infusion hypersensitivity reactions."
+    }
+  ],
+  "supportiveCare": [
+    "Single-agent taxane; monitor for peripheral neuropathy and myelosuppression.",
+    "Nutrition and dysphagia support as needed."
+  ],
+  "monitoring": [
+    "CBC before each weekly dose",
+    "peripheral neuropathy assessment each cycle",
+    "liver function periodically"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "liver",
+    "neuropathy grade",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher peripheral neuropathy",
+      "drug": "paclitaxel",
+      "action": "reduce/hold",
+      "text": "Reduce or hold paclitaxel for significant sensory neuropathy; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Paclitaxel 80 mg/m2 IV weekly on days 1, 8, and 15 of a 28-day cycle (a common second-line schedule for metastatic esophageal / esophagogastric cancer). Give hypersensitivity premedication. StewardMD standard-of-care wording; physician decides and the dose engine computes the patient dose.",
+      "modificationRules": []
+    }
+  ]
+}

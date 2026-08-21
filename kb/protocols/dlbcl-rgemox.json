@@ -1,0 +1,88 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-rgemox",
+  "name": "R-GemOx (rituximab/gemcitabine/oxaliplatin)",
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 8,
+  "premedications": [
+    {
+      "name": "Rituximab premedication",
+      "notes": "acetaminophen + antihistamine"
+    },
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "per emetic-risk framework"
+    }
+  ],
+  "supportiveCare": [
+    "Non-transplant salvage for less-fit patients (no need for stem-cell collection)",
+    "Hepatitis B screen; PJP/antiviral prophylaxis as indicated"
+  ],
+  "monitoring": [
+    "Cumulative oxaliplatin peripheral neuropathy",
+    "CBC; renal/liver function",
+    "Response by PET"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "375 mg/m2 IV day 1 of each 14-day cycle."
+    },
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "1000 mg/m2 IV day 1."
+    },
+    {
+      "id": "oxaliplatin",
+      "name": "Oxaliplatin",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "100 mg/m2 IV day 1."
+    }
+  ]
+}

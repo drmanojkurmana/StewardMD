@@ -1,0 +1,152 @@
+{
+  "id": "hn-pembro-chemo",
+  "diseaseId": "head_and_neck_cancer",
+  "name": "Pembrolizumab plus Platinum and Infusional Fluorouracil, First-Line Recurrent or Metastatic Head and Neck Squamous Cell Carcinoma, then Pembrolizumab Maintenance",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Head and Neck Cancers",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "PD_L1": "not required (active across CPS levels)",
+    "note": "Pembrolizumab plus platinum plus infusional fluorouracil is a first-line option in recurrent or metastatic disease regardless of PD-L1 CPS, favored for higher tumor burden or rapid progression. After the platinum/fluorouracil phase, pembrolizumab continues as maintenance."
+  },
+  "stage": [],
+  "treatmentSetting": [
+    "recurrent",
+    "metastatic"
+  ],
+  "histology": "squamous cell carcinoma",
+  "premedications": [
+    {
+      "name": "CISplatin hydration and antiemetics",
+      "notes": "IV hydration and high-emetic-risk antiemetic prophylaxis before cisplatin (or carboplatin per emetogenicity)."
+    }
+  ],
+  "supportiveCare": [
+    "Antiemetic prophylaxis for the platinum-containing cycles per emetogenicity tier.",
+    "Immune-related adverse event surveillance (pembrolizumab): thyroid, hepatic, pulmonary, colitis, dermatologic, endocrine.",
+    "Fluoropyrimidine safety: consider DPYD genotyping before fluorouracil; reduce or avoid in DPYD deficiency.",
+    "Mucositis and diarrhea supportive care during infusional fluorouracil.",
+    "G-CSF / febrile-neutropenia risk assessment per institutional practice."
+  ],
+  "monitoring": [
+    "CBC before each cycle",
+    "renal function (creatinine/GFR) before each platinum dose",
+    "serum magnesium and electrolytes (cisplatin)",
+    "thyroid and other endocrine panels for immune-related toxicity",
+    "imaging every 2 to 3 cycles in the recurrent/metastatic setting"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "magnesium/electrolytes",
+    "DPYD status (fluorouracil)",
+    "thyroid/endocrine (immune-related)",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/reduce",
+      "text": "Hold pembrolizumab and manage with corticosteroids per immune-related adverse event guidance; permanent discontinuation for severe or recurrent events. Physician decides."
+    },
+    {
+      "condition": "renal impairment or cytopenia on day 1",
+      "drug": "cisplatin",
+      "action": "delay/reduce",
+      "text": "Review required; consider carboplatin substitution in cisplatin-ineligible patients. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Pembrolizumab 200 mg IV flat dose on day 1 every 21 days (400 mg every 6 weeks is an alternative flat schedule). Given with platinum plus infusional fluorouracil for up to about 6 chemotherapy cycles, then continued as maintenance monotherapy. Flat immunotherapy dose (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "first-line recurrent/metastatic, pembrolizumab + platinum + fluorouracil",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "cisplatin",
+      "name": "CISplatin",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "CISplatin 100 mg/m2 IV on day 1 every 21 days, with adequate hydration. Carboplatin AUC 5 IV day 1 is the accepted alternative for cisplatin-ineligible patients (dosed by Calvert). ISMP tall-man applied. Standard platinum dose in the first-line pembrolizumab-chemotherapy combination (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "first-line recurrent/metastatic, pembrolizumab + platinum + fluorouracil",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "fluorouracil",
+      "name": "Fluorouracil (infusional)",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV continuous infusion",
+      "days": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Infusional fluorouracil 1,000 mg/m2 per day by continuous IV infusion over 96 hours (days 1 to 4) every 21 days for the chemotherapy phase (about 6 cycles). Consider DPYD testing before treatment. Standard fluorouracil backbone of the first-line pembrolizumab-chemotherapy combination (general oncology reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Head and Neck Cancers",
+        "version": "general reference",
+        "date": null,
+        "locator": "first-line recurrent/metastatic, pembrolizumab + platinum + fluorouracil",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

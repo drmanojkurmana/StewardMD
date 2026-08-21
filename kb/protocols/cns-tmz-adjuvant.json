@@ -1,0 +1,46 @@
+{
+  "id": "cns-tmz-adjuvant",
+  "diseaseId": "cns_cancer",
+  "name": "Temozolomide, adjuvant / maintenance (5-day monthly)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative", "palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Central Nervous System Cancers (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "give a 5-HT3 antagonist before each daily dose; temozolomide is moderate emetic risk on the 5-day schedule." }
+  ],
+  "supportiveCare": [
+    "Take on an empty stomach at the same time each day for the 5-day pulse.",
+    "Continue PJP prophylaxis if lymphopenia persists from the concurrent phase.",
+    "Dose may be escalated from 150 to 200 mg/m2 from cycle 2 if cycle 1 was tolerated without significant myelosuppression."
+  ],
+  "monitoring": [
+    "CBC on day 22 of each cycle and on day 1 before the next cycle (nadir counts guide the next dose)",
+    "Liver function before each cycle",
+    "MRI response assessment every 2-3 cycles"
+  ],
+  "drugs": [
+    {
+      "id": "temozolomide",
+      "name": "Temozolomide",
+      "basis": "bsa",
+      "dosePerUnit": 150,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [1, 2, 3, 4, 5],
+      "caps": { "perDose": null },
+      "notes": "150 mg/m2 by mouth once daily on days 1 to 5 of a 28-day cycle, for up to 6 cycles; escalate to 200 mg/m2 from cycle 2 if the first cycle is well tolerated (adequate counts). Standard adjuvant / maintenance Stupp dose, also used as monotherapy in lower-grade glioma and at recurrence (NCCN CNS / DeVita, general reference; own wording)."
+    }
+  ]
+}

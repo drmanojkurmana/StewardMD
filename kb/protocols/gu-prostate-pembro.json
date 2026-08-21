@@ -1,0 +1,73 @@
+{
+  "id": "gu-prostate-pembro",
+  "diseaseId": "prostate_cancer",
+  "name": "Pembrolizumab (MSI-H / dMMR mCRPC, tissue-agnostic)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCOTREE draft protocol authored from standard-of-care oncology knowledge (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "MMR_MSI": "microsatellite instability-high (MSI-H) or mismatch-repair deficient (dMMR)",
+    "note": "Single-agent PD-1 blockade in prostate cancer is used only under the tissue-agnostic MSI-H / dMMR (or high tumor mutational burden) indication after progression on standard therapy; it is not effective in microsatellite-stable disease. Continue ADT to maintain castrate testosterone. General reference: standard guidelines and oncology texts."
+  },
+  "stage": [
+    "M1 CRPC (metastatic castration-resistant, MSI-H / dMMR)"
+  ],
+  "treatmentSetting": "mCRPC (metastatic castration-resistant)",
+  "histology": "prostate adenocarcinoma",
+  "premedications": [],
+  "supportiveCare": [
+    "Continue ADT to keep testosterone below 50 ng/dL through immunotherapy.",
+    "Pembrolizumab is given until progression, unacceptable toxicity, or the labeled maximum duration; each 21-day cycle repeats the same single dose.",
+    "Counsel on immune-related adverse events and provide a patient wallet card."
+  ],
+  "monitoring": [
+    "immune-related toxicity screen before cycles (TSH / free T4, LFTs, glucose, cortisol as indicated)",
+    "symptom review for immune colitis, pneumonitis, hepatitis, dermatitis, and endocrinopathies",
+    "PSA and radiographic response (watch for pseudoprogression on immunotherapy)"
+  ],
+  "clearanceChecks": [
+    "endocrine/immune status",
+    "liver",
+    "castrate testosterone maintained",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "pembrolizumab",
+      "action": "hold/steroids",
+      "text": "Hold pembrolizumab and treat with corticosteroids per immune-related adverse event guidance; obtain clinical review before rechallenge and discontinue permanently for severe or recurrent grade 3-4 events. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Pembrolizumab 200 mg IV on day 1 of a 21-day cycle (an equivalent alternative schedule is 400 mg IV every 6 weeks). Used here under the tissue-agnostic MSI-H / dMMR indication for mCRPC; continue ADT. Dose reflects standard PD-1 checkpoint-inhibitor practice (general reference). No ISMP tall-man form."
+    }
+  ]
+}

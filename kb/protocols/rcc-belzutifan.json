@@ -1,0 +1,63 @@
+{
+  "id": "rcc-belzutifan",
+  "diseaseId": "rcc_cancer",
+  "name": "Belzutifan (HIF-2-alpha inhibitor, later-line clear-cell RCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous oral belzutifan 120 mg once daily until progression or unacceptable toxicity. Used after both a checkpoint inhibitor and an anti-angiogenic agent.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Class-specific anemia and hypoxia are expected; monitor hemoglobin and oxygen saturation.",
+    "Counsel that supplemental oxygen may be needed; avoid masking hypoxia symptoms.",
+    "Assess for fatigue."
+  ],
+  "monitoring": [
+    "hemoglobin / CBC (belzutifan anemia)",
+    "oxygen saturation (belzutifan hypoxia)",
+    "clinical/radiographic response assessment"
+  ],
+  "clearanceChecks": ["CBC/hemoglobin", "oxygen saturation", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "symptomatic or grade 3 anemia or hypoxia",
+      "drug": "belzutifan",
+      "action": "hold/reduce",
+      "text": "Hold belzutifan for grade 3 anemia (transfuse as indicated) or grade 3 hypoxia; resume at a reduced dose (e.g. 80 mg then 40 mg once daily) per labeling once recovered. Discontinue for grade 4 or recurrent grade 3 hypoxia."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "belzutifan",
+      "name": "Belzutifan",
+      "basis": "flat",
+      "dosePerUnit": 120,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28],
+      "caps": { "perDose": null },
+      "notes": "Belzutifan 120 mg PO once daily, continuous (shown across all cycle days). Oral HIF-2-alpha inhibitor for advanced clear-cell RCC after a checkpoint inhibitor and an anti-angiogenic agent. Anemia and hypoxia are class effects requiring hemoglobin and oxygen-saturation monitoring. Authored from standard later-line RCC practice (NCCN Kidney Cancer; LITESPARK-005 supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "belzutifan, later-line advanced clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

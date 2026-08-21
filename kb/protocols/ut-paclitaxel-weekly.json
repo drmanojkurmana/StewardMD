@@ -1,0 +1,47 @@
+{
+  "id": "ut-paclitaxel-weekly",
+  "diseaseId": "uterine_cancer",
+  "name": "Paclitaxel (weekly single-agent)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "weekly dosing, commonly 3 weeks on then 1 week off within a 28-day cycle; continue while controlled and tolerated. Physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Corticosteroid + H1/H2 antihistamine", "notes": "standard taxane hypersensitivity premedication before each dose." }
+  ],
+  "supportiveCare": [
+    "Monitor for infusion/hypersensitivity reactions, especially early doses.",
+    "Assess peripheral neuropathy each visit; dose-reduce or hold for grade 2 or higher."
+  ],
+  "monitoring": [
+    "CBC before each weekly dose.",
+    "Liver function periodically.",
+    "Neuropathy assessment; response imaging every 2 to 3 cycles."
+  ],
+  "clearanceChecks": ["CBC/platelets", "liver", "neuropathy", "prior-cycle status"],
+  "drugs": [
+    {
+      "id": "paclitaxel",
+      "name": "Paclitaxel",
+      "basis": "bsa",
+      "dosePerUnit": 80,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [1, 8, 15],
+      "caps": { "perDose": null },
+      "notes": "Paclitaxel 80 mg/m2 IV over about 1 hour weekly (days 1, 8, 15 of a 28-day cycle, with a week off), given with standard taxane premedication. Sequential single-agent cytotoxic option for later-line advanced/recurrent endometrial carcinoma after progression through prior systemic therapy. Dose scaled by BSA (engine multiplies by body-surface area). Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

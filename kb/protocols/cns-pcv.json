@@ -1,0 +1,68 @@
+{
+  "id": "cns-pcv",
+  "diseaseId": "cns_cancer",
+  "name": "PCV (Procarbazine / Lomustine / Vincristine)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["curative"],
+  "cycleLengthDays": 42,
+  "cycles": 6,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Central Nervous System Cancers (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard guidelines (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    { "name": "Antiemetic prophylaxis", "notes": "lomustine day is high-to-moderate emetic risk; give a 5-HT3 antagonist (and consider a longer-acting agent) before the lomustine dose and before procarbazine days." }
+  ],
+  "supportiveCare": [
+    "Procarbazine is a weak MAO inhibitor: counsel on avoiding tyramine-rich foods and interacting drugs/alcohol during procarbazine days.",
+    "Delayed and cumulative myelosuppression from the nitrosourea (lomustine): the 6-week cycle length reflects the late count nadir - do not shorten it.",
+    "Vincristine is a vesicant given by slow IV push; monitor for peripheral neuropathy and constipation."
+  ],
+  "monitoring": [
+    "CBC before each cycle and at the expected nadir (weeks 4-6 for lomustine)",
+    "Liver and renal function before each cycle",
+    "Neurologic exam for vincristine neuropathy; hold or reduce for significant neuropathy"
+  ],
+  "drugs": [
+    {
+      "id": "lomustine",
+      "name": "Lomustine (CCNU)",
+      "basis": "bsa",
+      "dosePerUnit": 110,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "110 mg/m2 by mouth once on day 1 of each 6-week (42-day) cycle. Nitrosourea backbone; expect delayed marrow nadir, so cycles are spaced 6 weeks apart (NCCN CNS / DeVita, general reference; own wording)."
+    },
+    {
+      "id": "procarbazine",
+      "name": "Procarbazine",
+      "basis": "bsa",
+      "dosePerUnit": 60,
+      "unit": "mg/m2",
+      "route": "PO",
+      "days": [8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21],
+      "caps": { "perDose": null },
+      "notes": "60 mg/m2 by mouth once daily on days 8 to 21 of each 6-week cycle. MAO-inhibitor dietary precautions apply during dosing (NCCN CNS / DeVita, general reference; own wording)."
+    },
+    {
+      "id": "vincristine",
+      "name": "Vincristine",
+      "basis": "bsa",
+      "dosePerUnit": 1.4,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [8, 29],
+      "caps": { "perDose": 2 },
+      "notes": "1.4 mg/m2 IV push on days 8 and 29 of each 6-week cycle, capped at 2 mg per dose. Vesicant; hold/reduce for grade 2+ neuropathy (NCCN CNS / DeVita, general reference; own wording)."
+    }
+  ]
+}

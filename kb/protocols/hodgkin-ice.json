@@ -1,0 +1,83 @@
+{
+  "id": "hodgkin-ice",
+  "diseaseId": "hodgkin_cancer",
+  "name": "ICE salvage (Ifosfamide / Carboplatin / Etoposide)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 3,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "ICE is highly emetogenic; give antiemetic prophylaxis before each cycle."
+    },
+    {
+      "name": "Mesna uroprotection",
+      "notes": "Give mesna with and after ifosfamide to prevent hemorrhagic cystitis; ensure adequate hydration."
+    }
+  ],
+  "supportiveCare": [
+    "Second-line salvage before autologous stem-cell transplant; aim for a chemosensitive (PET-negative) response, then mobilize/collect stem cells.",
+    "G-CSF support and monitoring for cytopenias (transplant-intent, marrow-sparing sequencing).",
+    "Ifosfamide neurotoxicity: monitor mental status; consider methylene blue for encephalopathy."
+  ],
+  "monitoring": [
+    "CBC with differential before each cycle",
+    "renal function (carboplatin AUC and ifosfamide) before each cycle",
+    "urine for hematuria (ifosfamide/mesna)",
+    "restaging FDG-PET after salvage to assess chemosensitivity before transplant"
+  ],
+  "drugs": [
+    {
+      "id": "etoposide",
+      "name": "Etoposide",
+      "basis": "bsa",
+      "dosePerUnit": 100,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        2,
+        3
+      ],
+      "notes": "ICE 'E'. Etoposide 100 mg/m2 IV daily on days 1 to 3 of a 21-day cycle. Standard salvage dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "auc",
+      "dosePerUnit": 5,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "notes": "ICE 'C'. Carboplatin dosed by Calvert formula to AUC 5 on day 2 (commonly capped at an absolute 800 mg per dose in practice). Standard salvage dosing (NCCN / DeVita general reference)."
+    },
+    {
+      "id": "ifosfamide",
+      "name": "Ifosfamide",
+      "basis": "bsa",
+      "dosePerUnit": 5000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        2
+      ],
+      "notes": "ICE 'I'. Ifosfamide 5000 mg/m2 IV by 24-hour continuous infusion on day 2, given with mesna uroprotection. Standard salvage dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

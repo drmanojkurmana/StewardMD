@@ -1,0 +1,55 @@
+{
+  "id": "hodgkin-rituximab",
+  "diseaseId": "hodgkin_cancer",
+  "name": "Rituximab (single agent, NLPHL)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Hodgkin Lymphoma (general reference)",
+    "textbook": "DeVita / Harrison, general reference"
+  },
+  "institution": {
+    "provenance": "StewardMD draft decision-support protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Infusion-reaction prophylaxis",
+      "notes": "Premedicate with acetaminophen and an antihistamine (and consider a corticosteroid) before rituximab to reduce infusion reactions; screen hepatitis B before anti-CD20 therapy."
+    }
+  ],
+  "supportiveCare": [
+    "Anti-CD20 monotherapy option for CD20-positive nodular lymphocyte-predominant Hodgkin lymphoma (low-burden or asymptomatic disease).",
+    "Hepatitis B reactivation risk: screen and provide antiviral prophylaxis for HBsAg-positive or core-antibody-positive patients.",
+    "Weekly induction schedule (4 doses); maintenance schedules may be considered separately."
+  ],
+  "monitoring": [
+    "hepatitis B serologies before therapy",
+    "monitor for infusion reactions during administration",
+    "restaging imaging to assess response"
+  ],
+  "drugs": [
+    {
+      "id": "rituximab",
+      "name": "Rituximab",
+      "basis": "bsa",
+      "dosePerUnit": 375,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8,
+        15,
+        22
+      ],
+      "notes": "Rituximab 375 mg/m2 IV weekly on days 1, 8, 15, and 22 (4-dose induction). Premedicate for infusion reactions; screen hepatitis B. Standard dosing (NCCN / DeVita general reference)."
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "id": "cervical-cisplatin-weekly",
+  "diseaseId": "cervical_cancer",
+  "name": "Weekly Cisplatin Radiosensitizer (concurrent chemoradiation)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 7,
+  "cycles": 6,
+  "cyclesNote": "single-agent cisplatin given weekly as a radiosensitizer during external-beam pelvic radiation, typically 5 to 6 weekly doses spanning the radiation course",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [
+    {
+      "name": "Cisplatin hydration and antiemetic prophylaxis",
+      "notes": "pre- and post-cisplatin IV hydration with attention to urine output; give antiemetic prophylaxis before each weekly dose (cisplatin is a highly emetogenic agent even at the weekly radiosensitizing dose)."
+    }
+  ],
+  "supportiveCare": [
+    "IV hydration with each weekly cisplatin dose to protect renal function.",
+    "Antiemetics before each dose per emetic-risk framework.",
+    "Coordinate each dose to fall on a radiation treatment day for radiosensitization."
+  ],
+  "monitoring": [
+    "renal function (creatinine/GFR) and magnesium before each weekly dose",
+    "CBC before each weekly dose",
+    "audiometry / neuropathy assessment as clinically indicated"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "magnesium",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "creatinine clearance reduced or rising creatinine",
+      "drug": "cisplatin",
+      "action": "hold/review",
+      "text": "Hold or reduce cisplatin for declining renal function; the physician decides on a per-dose basis."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "cisplatin",
+      "name": "Cisplatin",
+      "basis": "bsa",
+      "dosePerUnit": 40,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": 70
+      },
+      "notes": "Cisplatin 40 mg/m2 IV once weekly as a single-agent radiosensitizer given concurrently with external-beam pelvic radiation, commonly 5 to 6 weekly doses over the radiation course. A conventional per-dose cap of about 70 mg is applied to the weekly radiosensitizing dose. Standard Guidelines / DeVita / Harrison, general reference. DRAFT, experimental."
+    }
+  ]
+}

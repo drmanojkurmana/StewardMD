@@ -396,10 +396,11 @@
       "bullets": [
         "Larotrectinib or entrectinib (tissue-agnostic TRK inhibitor indication) - high, durable response rates",
         "Confirm the NTRK fusion on validated NGS",
-        "No dedicated dose protocol here - shown as guidance; the physician arranges the regimen",
+        "Referenced dose protocol below (larotrectinib; entrectinib is an alternative)",
         "Continue TSH suppression; monitor for the disease response and for acquired resistance",
         "On progression: reassess for a next-line option"
-      ]
+      ],
+      "protocolRefs": ["thyroid-larotrectinib"]
     },
     {
       "id": "n_dtc_trk_prog",
@@ -433,9 +434,10 @@
         "Re-biopsy / plasma NGS to identify an on-target resistance kinase-domain mutation (e.g. solvent-front)",
         "A next-generation TRK inhibitor (e.g. selitrectinib / repotrectinib, trial or off-label) for an on-target mechanism",
         "Otherwise switch to a multikinase inhibitor (lenvatinib) as for driver-negative disease",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below is the lenvatinib multikinase-inhibitor option",
         "Continue TSH suppression; re-enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["thyroid-lenvatinib"]
     },
     {
       "id": "n_tx_ret_fusion",
@@ -491,9 +493,10 @@
         "Re-biopsy / plasma NGS for an acquired RET resistance mutation (e.g. solvent-front G810) or a bypass driver",
         "Lenvatinib (or sorafenib / cabozantinib) multikinase inhibitor as the next line",
         "A next-generation RET inhibitor on trial for an on-target solvent-front mutation where available",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below is the lenvatinib multikinase-inhibitor option",
         "Continue TSH suppression; re-enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["thyroid-lenvatinib"]
     },
     {
       "id": "n_tx_dtc_braf",
@@ -511,9 +514,10 @@
         "BRAF-directed therapy (dabrafenib +/- trametinib) for progressive BRAF V600E-mutant disease",
         "Redifferentiation with a BRAF / MEK inhibitor to restore iodine avidity is an investigational strategy in selected patients",
         "Lenvatinib remains an accepted first-line multikinase option if BRAF-directed therapy is not chosen",
-        "No dedicated dose protocol here for this differentiated indication - shown as guidance",
+        "Referenced dose protocol is the anaplastic-scoped dabrafenib + trametinib protocol (same drugs / doses); the physician confirms the fit",
         "Continue TSH suppression; reassess at progression"
-      ]
+      ],
+      "protocolRefs": ["thyroid-anaplastic-dab-tram"]
     },
     {
       "id": "n_dtc_braf_prog",
@@ -547,9 +551,10 @@
         "Switch to a multikinase inhibitor (lenvatinib, then sorafenib or cabozantinib) as for driver-negative disease",
         "Reassess NGS for a new actionable alteration or dedifferentiation to anaplastic transformation",
         "Directed local therapy for dominant or symptomatic lesions",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below is the lenvatinib multikinase-inhibitor option",
         "Continue TSH suppression; re-enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["thyroid-lenvatinib"]
     },
     {
       "id": "n_tx_dtc_mki",
@@ -566,10 +571,11 @@
       "bullets": [
         "Lenvatinib is the preferred multikinase inhibitor (higher response rate); sorafenib is an alternative",
         "Reserve systemic therapy for progressive or symptomatic disease - indolent metastases can be observed",
-        "No dedicated dose protocol here - shown as guidance; manage hypertension, proteinuria, diarrhea, hand-foot skin reaction, and thromboembolic / bleeding risk",
+        "Referenced dose protocol below is lenvatinib; manage hypertension, proteinuria, diarrhea, hand-foot skin reaction, and thromboembolic / bleeding risk",
         "Continue TSH suppression; use directed local therapy for dominant lesions",
         "On progression: reassess for a next-line multikinase inhibitor"
-      ]
+      ],
+      "protocolRefs": ["thyroid-lenvatinib"]
     },
     {
       "id": "n_dtc_mki_prog",
@@ -603,9 +609,10 @@
         "Cabozantinib is an accepted option after progression on prior VEGFR-directed multikinase therapy",
         "Sorafenib or lenvatinib if not already used; re-send NGS to catch a late actionable driver",
         "Clinical trial or best supportive care per performance status and goals",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below is cabozantinib",
         "Continue TSH suppression; re-enter surveillance"
-      ]
+      ],
+      "protocolRefs": ["thyroid-cabozantinib"]
     },
     {
       "id": "n_dtc_surv",
@@ -828,8 +835,9 @@
         "Cabozantinib or vandetanib multikinase inhibitor as the next line",
         "A next-generation RET inhibitor on trial for an on-target solvent-front mutation where available",
         "Directed local therapy and a bone-modifying agent for symptomatic or skeletal lesions",
-        "No dedicated dose protocol here - shown as guidance; enter medullary surveillance"
-      ]
+        "Referenced dose protocol below is the vandetanib multikinase-inhibitor option; enter medullary surveillance"
+      ],
+      "protocolRefs": ["thyroid-vandetanib"]
     },
     {
       "id": "n_tx_mtc_mki",
@@ -845,11 +853,12 @@
       "evidenceCategory": ["1"],
       "bullets": [
         "Cabozantinib or vandetanib (multikinase inhibitors) for progressive / symptomatic disease",
-        "No dedicated dose protocol here - shown as guidance; vandetanib requires QT / ECG monitoring, cabozantinib requires wound / GI-perforation and hemorrhage vigilance",
+        "Referenced dose protocol below is vandetanib (requires QT / ECG monitoring); cabozantinib is an alternative requiring wound / GI-perforation and hemorrhage vigilance",
         "Observe indolent, asymptomatic metastatic disease with a calcitonin / CEA doubling-time",
         "Directed local therapy and a bone-modifying agent for symptomatic or skeletal lesions",
         "On progression: reassess for a next-line option"
-      ]
+      ],
+      "protocolRefs": ["thyroid-vandetanib"]
     },
     {
       "id": "n_mtc_mki_prog",
@@ -883,9 +892,10 @@
         "Switch to the alternate multikinase inhibitor (cabozantinib after vandetanib, or vice versa)",
         "Re-send NGS to catch a late actionable driver (rare somatic RET, high TMB / MSI)",
         "Clinical trial or best supportive care per performance status and goals",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below is the vandetanib multikinase-inhibitor option",
         "Enter medullary surveillance"
-      ]
+      ],
+      "protocolRefs": ["thyroid-vandetanib"]
     },
     {
       "id": "n_mtc_surv",
@@ -1066,9 +1076,10 @@
         "Add or switch to an immune-checkpoint inhibitor (e.g. pembrolizumab) combined with continued BRAF / MEK blockade where feasible",
         "Re-send NGS for a second actionable driver (NTRK, RET fusion, high TMB / MSI)",
         "Cytotoxic chemotherapy (a taxane +/- platinum) or a clinical trial for fit patients; otherwise best supportive care",
-        "No dedicated cytotoxic protocol here for this indication - shown as guidance",
+        "Referenced dose protocol below is the pembrolizumab checkpoint-inhibitor option",
         "Continue palliative care and airway / symptom management"
-      ]
+      ],
+      "protocolRefs": ["thyroid-pembrolizumab"]
     },
     {
       "id": "n_atc_wt_bio",
@@ -1105,9 +1116,10 @@
       "bullets": [
         "Larotrectinib or entrectinib (tissue-agnostic TRK inhibitor indication) - can produce rapid responses even in anaplastic disease",
         "Confirm the NTRK fusion on validated NGS; start without delay given prognosis",
-        "No dedicated dose protocol here - shown as guidance",
+        "Referenced dose protocol below (larotrectinib; entrectinib is an alternative)",
         "Continue multidisciplinary and palliative care; consider local therapy for airway control"
-      ]
+      ],
+      "protocolRefs": ["thyroid-larotrectinib"]
     },
     {
       "id": "n_tx_atc_ret",
@@ -1146,9 +1158,10 @@
       "bullets": [
         "An immune-checkpoint inhibitor (e.g. pembrolizumab), alone or added to cytotoxic chemoradiation, for high TMB / MSI-high / PD-L1-high disease",
         "Enroll on a clinical trial where available",
-        "No dedicated dose protocol here - shown as guidance; monitor for immune-related adverse events",
+        "Referenced dose protocol below is pembrolizumab; monitor for immune-related adverse events",
         "Continue multidisciplinary and palliative care; local therapy for airway control"
-      ]
+      ],
+      "protocolRefs": ["thyroid-pembrolizumab"]
     },
     {
       "id": "n_tx_atc_chemo",
@@ -1167,9 +1180,10 @@
         "Clinical trial is strongly preferred where available",
         "Cytotoxic chemoradiation (a taxane +/- platinum) for local control in fit patients",
         "Best supportive care and early palliative care per goals when systemic therapy is not appropriate",
-        "No dedicated cytotoxic protocol here for this indication - shown as guidance",
+        "Referenced dose protocol below is weekly paclitaxel + carboplatin (radiosensitizing) for fit patients",
         "Airway and symptom management throughout"
-      ]
+      ],
+      "protocolRefs": ["thyroid-paclitaxel-carboplatin"]
     },
     {
       "id": "n_atc_surv",

@@ -1,0 +1,46 @@
+{
+  "id": "ut-letrozole",
+  "diseaseId": "uterine_cancer",
+  "name": "Letrozole (aromatase inhibitor, endocrine therapy)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "continuous daily oral dosing; a 28-day cycle is only an accounting window. Continue while disease is controlled; physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Confirm postmenopausal status (or ovarian suppression) before an aromatase inhibitor.",
+    "Ensure adequate calcium and vitamin D; assess bone health.",
+    "Avoid estrogen replacement in hormone-driven uterine tumors."
+  ],
+  "monitoring": [
+    "Bone-mineral density periodically given long-term estrogen deprivation.",
+    "Lipids and symptom review (arthralgia, hot flashes).",
+    "Response assessment by imaging every few months given the indolent setting."
+  ],
+  "clearanceChecks": ["prior-cycle status"],
+  "drugs": [
+    {
+      "id": "letrozole",
+      "name": "Letrozole",
+      "basis": "flat",
+      "dosePerUnit": 2.5,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Letrozole 2.5 mg by mouth once daily, taken continuously. Non-steroidal aromatase inhibitor used as endocrine therapy for hormone-receptor-positive, low-grade uterine disease (low-grade endometrial stromal sarcoma and indolent ER/PR-positive recurrent endometrial carcinoma). A progestin (e.g. megestrol) or tamoxifen are accepted alternatives where an aromatase inhibitor is unsuitable. Flat daily dose so the engine does not scale by body size. Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

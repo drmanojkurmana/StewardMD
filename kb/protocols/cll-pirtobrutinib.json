@@ -1,0 +1,54 @@
+{
+  "id": "cll-pirtobrutinib",
+  "diseaseId": "cll_cancer",
+  "name": "Pirtobrutinib (non-covalent BTK inhibitor)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 13,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), general reference",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care dosing (experimental; owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Continuous oral therapy until progression or intolerance; the cycle count is a 28-day accounting frame.",
+    "Retains activity after covalent BTK-inhibitor failure, including with BTK C481 resistance mutations.",
+    "Antiviral and other infection prophylaxis per risk.",
+    "Review antithrombotic co-medication and bleeding risk."
+  ],
+  "monitoring": [
+    "CBC periodically; watch for cytopenias and infection",
+    "Blood pressure and rhythm review; atrial fibrillation risk appears lower than with covalent agents but still monitored",
+    "Bleeding-risk review around procedures"
+  ],
+  "clearanceChecks": ["CBC/platelets", "renal", "liver", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 3 or higher toxicity",
+      "drug": "pirtobrutinib",
+      "action": "hold/reduce",
+      "text": "Hold until recovery and resume at a reduced step per standard practice; physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "pirtobrutinib",
+      "name": "Pirtobrutinib",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Standard dosing (NCCN / DeVita, general reference): 200 mg by mouth once daily, taken continuously until progression or intolerance. A non-covalent (reversible) BTK inhibitor used after progression on or intolerance to a covalent BTK inhibitor. dosePerUnit is the single daily 200 mg dose. Own wording; not copied from any source."
+    }
+  ]
+}

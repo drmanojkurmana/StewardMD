@@ -6,7 +6,7 @@
   "diseaseId": "ovarian_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for epithelial ovarian / fallopian-tube / primary-peritoneal cancer. Full pathway: workup -> setting -> histology -> molecular testing -> FIGO stage / risk -> primary debulking vs neoadjuvant (with a response-adapted interval-debulking step) -> platinum-taxane +/- bevacizumab -> biomarker-directed first-line maintenance -> surveillance, then a line-of-therapy recurrence sub-tree keyed to the platinum-free interval (sensitive -> doublet -> relapse maintenance -> second relapse; resistant -> FRalpha-directed; refractory). Low-grade serous, mucinous, and non-epithelial tumors follow their own arms. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; surgery and agents without a dose protocol (bevacizumab single-agent schedules, PLD, gemcitabine, topotecan, mirvetuximab, endocrine / MEK therapy, BEP) are shown as checklist guidance with NO dose. Workup / staging / risk / biomarker / surveillance content is standard oncology, authored in StewardMD's words, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN), DeVita, Harrison. Invents no dose/regimen/criterion. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "provenanceNote": "ONCOTREE navigator DRAFT for epithelial ovarian / fallopian-tube / primary-peritoneal cancer. Full pathway: workup -> setting -> histology -> molecular testing -> FIGO stage / risk -> primary debulking vs neoadjuvant (with a response-adapted interval-debulking step) -> platinum-taxane +/- bevacizumab -> biomarker-directed first-line maintenance -> surveillance, then a line-of-therapy recurrence sub-tree keyed to the platinum-free interval (sensitive -> doublet -> relapse maintenance -> second relapse; resistant -> FRalpha-directed; refractory). Low-grade serous, mucinous, and non-epithelial tumors follow their own arms. Each systemic-therapy treatment leaf routes to APPLICABLE StewardMD Standard Protocols by reference (shared gyn- backbones plus disease-scoped ov- DRAFT single-agent / regimen protocols: PLD, weekly paclitaxel, topotecan, gemcitabine, single-agent carboplatin, mirvetuximab, letrozole endocrine, trametinib MEK, BEP); surgery-only and pure observation / best-supportive-care leaves carry no dose protocol and are shown as checklist guidance. Workup / staging / risk / biomarker / surveillance content is standard oncology, authored in StewardMD's words, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN), DeVita, Harrison. Invents no dose/regimen/criterion. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN Ovarian Cancer), DeVita, Harrison. Regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
   "startNodeIds": ["n_workup"],
   "footnotes": {
@@ -331,7 +331,8 @@
         "Switch to a non-platinum single agent (with bevacizumab where appropriate) or a clinical trial",
         "Interval debulking is generally deferred unless a meaningful response is achieved",
         "Early palliative care and goals-of-care discussion; still assess maintenance if disease is controlled (next step)"
-      ]
+      ],
+      "protocolRefs": ["ov-pld", "ov-paclitaxel-weekly"]
     },
     {
       "id": "n_tx_unresectable_bsc",
@@ -351,6 +352,7 @@
         "Reassess fitness - a good response may make interval surgery or fuller chemotherapy possible",
         "Goals-of-care discussion"
       ],
+      "protocolRefs": ["ov-carboplatin-single"],
       "linkTo": "n_surv"
     },
     {
@@ -735,6 +737,7 @@
         "No dose protocol for these single agents here - physician arranges the regimen",
         "Prioritize quality of life and clinical trials"
       ],
+      "protocolRefs": ["ov-pld", "ov-paclitaxel-weekly", "ov-topotecan", "ov-gemcitabine"],
       "linkTo": "n_surv"
     },
     {
@@ -777,6 +780,7 @@
         "No dose protocol here - physician arranges the regimen",
         "Reassess and continue surveillance after treatment"
       ],
+      "protocolRefs": ["ov-mirvetuximab"],
       "linkTo": "n_surv"
     },
     {
@@ -798,6 +802,7 @@
         "Rotate agents sequentially on progression; avoid re-challenging with platinum",
         "No dose protocol for these single agents here - physician arranges the regimen"
       ],
+      "protocolRefs": ["ov-pld", "ov-paclitaxel-weekly", "ov-topotecan", "ov-gemcitabine"],
       "linkTo": "n_surv"
     },
     {
@@ -819,6 +824,7 @@
         "Early palliative care; goals-of-care discussion",
         "No dose protocol for these agents here - physician arranges the regimen"
       ],
+      "protocolRefs": ["ov-pld", "ov-paclitaxel-weekly"],
       "linkTo": "n_surv"
     },
     {
@@ -873,7 +879,8 @@
         "Bone-health monitoring on an aromatase inhibitor",
         "No dose protocol for endocrine therapy here - physician arranges the regimen",
         "Treat progression on the low-grade recurrence step (next step)"
-      ]
+      ],
+      "protocolRefs": ["ov-letrozole"]
     },
     {
       "id": "n_tx_lgsc_obs",
@@ -928,6 +935,7 @@
         "No dose protocol here - physician arranges the regimen",
         "Continue surveillance and re-assess at progression"
       ],
+      "protocolRefs": ["ov-trametinib"],
       "linkTo": "n_surv"
     },
     {
@@ -948,6 +956,7 @@
         "No dose protocol here - physician arranges the regimen",
         "Continue surveillance and re-assess at progression"
       ],
+      "protocolRefs": ["ov-letrozole"],
       "linkTo": "n_surv"
     },
     {
@@ -1071,7 +1080,8 @@
         "BEP (bleomycin-etoposide-cisplatin) chemotherapy for most tumors beyond stage IA",
         "Follow tumor markers (AFP, beta-hCG, LDH) for response and surveillance",
         "No dose protocol for BEP here - physician arranges the regimen"
-      ]
+      ],
+      "protocolRefs": ["ov-bep"]
     },
     {
       "id": "n_tx_sexcord",
@@ -1090,7 +1100,8 @@
         "Inhibin / anti-Mullerian hormone as tumor markers",
         "Chemotherapy (platinum-based) or endocrine therapy for advanced / recurrent disease",
         "No dose protocol for these regimens here - physician arranges them"
-      ]
+      ],
+      "protocolRefs": ["gyn-carbo-paclitaxel", "ov-bep", "ov-letrozole"]
     }
   ],
   "links": [

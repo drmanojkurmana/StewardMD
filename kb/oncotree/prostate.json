@@ -6,7 +6,7 @@
   "diseaseId": "prostate_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "ONCOTREE navigator DRAFT for prostate cancer. Full pathway: initial workup -> disease state -> (localized risk group -> local modality -> pathology / intensification sub-step; biochemical recurrence -> restage -> salvage vs metastatic; mCSPC volume -> fitness -> intensification -> progression; nmCRPC PSADT -> ARPI -> progression; mCRPC biomarker -> line of therapy -> on-progression second / third line) -> surveillance. Progression arms from nmCRPC and mCSPC converge into the shared mCRPC line-of-therapy subtree, mirroring real sequencing. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; modalities without a dose protocol (active surveillance, radiation, surgery, apalutamide/darolutamide, pembrolizumab MSI-H, radium-223, sipuleucel-T) are shown as checklist guidance with NO dose. Workup / risk-stratification / staging / surveillance content is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN) Prostate Cancer, no proprietary content reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
+  "provenanceNote": "ONCOTREE navigator DRAFT for prostate cancer. Full pathway: initial workup -> disease state -> (localized risk group -> local modality -> pathology / intensification sub-step; biochemical recurrence -> restage -> salvage vs metastatic; mCSPC volume -> fitness -> intensification -> progression; nmCRPC PSADT -> ARPI -> progression; mCRPC biomarker -> line of therapy -> on-progression second / third line) -> surveillance. Progression arms from nmCRPC and mCSPC converge into the shared mCRPC line-of-therapy subtree, mirroring real sequencing. Each treatment leaf routes to APPLICABLE existing StewardMD Standard Protocols by reference; modalities without a dose protocol (active surveillance, radiation, surgery, apalutamide/darolutamide, sipuleucel-T) are shown as checklist guidance with NO dose. Workup / risk-stratification / staging / surveillance content is standard oncology, not proprietary guideline text; structural pathway consistent with Standard Guidelines (NCCN) Prostate Cancer, no proprietary content reproduced. Invents no dose/regimen. DRAFT - not clinically activated; the physician decides and the existing dose engine computes patient doses.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN), Prostate Cancer. Regimen options reference existing StewardMD Standard Protocols and their own evidence layers; the dose engine computes patient doses.",
   "startNodeIds": ["n_workup"],
   "footnotes": {
@@ -1425,9 +1425,10 @@
       "showsRecommendation": true,
       "bullets": [
         "Pembrolizumab under the tissue-agnostic MSI-H / dMMR indication",
-        "No prostate-specific dose protocol here yet - guidance (physician arranges the regimen)",
-        "Continue ADT; maintain bone health"
-      ]
+        "Continue ADT; maintain bone health",
+        "Pembrolizumab regimen referenced below"
+      ],
+      "protocolRefs": ["gu-prostate-pembro"]
     },
     {
       "id": "n_tx_prostate_lu177",
@@ -1470,9 +1471,10 @@
       "bullets": [
         "Radium-223 (alpha-emitter): prolongs survival, reduces symptomatic skeletal events",
         "Not combined with abiraterone + prednisone",
-        "No dose protocol here yet - guidance (physician arranges the regimen)",
-        "Add a bone-modifying agent (denosumab or zoledronic acid)"
-      ]
+        "Add a bone-modifying agent (denosumab or zoledronic acid)",
+        "Radium-223 regimen referenced below"
+      ],
+      "protocolRefs": ["gu-prostate-radium223"]
     },
 
     {

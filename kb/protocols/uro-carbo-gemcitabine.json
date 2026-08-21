@@ -1,0 +1,115 @@
+{
+  "id": "uro-carbo-gemcitabine",
+  "diseaseId": "bladder_cancer",
+  "name": "Carboplatin + Gemcitabine",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 6,
+  "cyclesNote": "First-line for cisplatin-ineligible metastatic urothelial carcinoma; typically 4-6 cycles, then reassess for switch-maintenance avelumab if no progression. Carboplatin is used only in the metastatic (non-curative) setting, not peri-operatively.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Bladder Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "cytotoxicBackboneRestricted": false,
+    "note": "Carboplatin/gemcitabine is a cytotoxic backbone that is not biomarker-restricted. It is the standard platinum option for cisplatin-ineligible metastatic urothelial carcinoma (inadequate renal function, performance status, hearing, or neuropathy)."
+  },
+  "stage": [
+    "IV",
+    "locally advanced",
+    "metastatic"
+  ],
+  "treatmentSetting": "metastatic",
+  "histology": "urothelial carcinoma",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis",
+      "notes": "carboplatin plus gemcitabine is a moderate-emetic-risk combination; give a moderate-emetic-risk antiemetic regimen before chemotherapy."
+    }
+  ],
+  "supportiveCare": [
+    "Carboplatin dosed by the Calvert formula to a target AUC; verify the GFR estimate before dosing.",
+    "CBC before each dose (gemcitabine day 8 is frequently held or reduced for cytopenias).",
+    "Monitor cumulative myelosuppression, especially thrombocytopenia, over successive cycles.",
+    "Carboplatin hypersensitivity risk rises after multiple cycles - watch for infusion reactions."
+  ],
+  "monitoring": [
+    "CBC (including platelets) before each dose",
+    "renal function before each cycle (for Calvert AUC dosing)",
+    "clinical/radiographic response assessment every 2-3 cycles"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "day 8 cytopenias",
+      "drug": "gemcitabine",
+      "action": "hold",
+      "text": "Hold or reduce gemcitabine on day 8 for significant neutropenia or thrombocytopenia per protocol; obtain clinical review."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "carboplatin",
+      "name": "Carboplatin",
+      "basis": "auc",
+      "dosePerUnit": 4.5,
+      "unit": "AUC",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Carboplatin AUC 4.5 IV on day 1 of a 21-day cycle, dosed by the Calvert formula (dose in mg = AUC x [GFR + 25]). An AUC of 5 is an accepted alternative in fitter patients. Dose per standard cisplatin-ineligible urothelial practice (Standard Guidelines / DeVita / Harrison, general reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Systemic Therapy, cisplatin-ineligible first-line",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    },
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "Gemcitabine 1000 mg/m2 IV on days 1 and 8 of a 21-day cycle. Day 8 is frequently held or reduced for cytopenias. Dose per standard urothelial practice (Standard Guidelines / DeVita / Harrison, general reference).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Bladder Cancer",
+        "version": "general reference",
+        "date": null,
+        "locator": "Principles of Systemic Therapy, cisplatin-ineligible first-line",
+        "evidenceStatus": "current"
+      },
+      "modificationRules": []
+    }
+  ]
+}

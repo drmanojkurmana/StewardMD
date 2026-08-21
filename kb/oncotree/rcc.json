@@ -257,9 +257,10 @@
       "bullets": [
         "Pembrolizumab for approximately 1 year in eligible resected higher-risk clear-cell disease",
         "Baseline and on-treatment thyroid, adrenal, hepatic, and glucose monitoring",
-        "No dedicated dose protocol here yet - the physician arranges the pembrolizumab regimen",
+        "Pembrolizumab 200 mg every 3 weeks (about 17 cycles) regimen referenced below",
         "Enter surveillance on completion (next step)"
       ],
+      "protocolRefs": ["rcc-pembrolizumab-adjuvant"],
       "linkTo": "n_surv",
       "linkLabel": "Enter surveillance"
     },
@@ -421,9 +422,10 @@
         "Options include axitinib+pembrolizumab, lenvatinib+pembrolizumab, or cabozantinib+nivolumab",
         "High objective response rate; useful when prompt disease control is needed",
         "Overlapping toxicity: distinguish TKI effects (hypertension, diarrhea, hand-foot) from immune effects",
-        "No combination dose protocol here yet - the physician arranges the specific regimen",
+        "Regimen options referenced below: axitinib+pembrolizumab, lenvatinib+pembrolizumab, cabozantinib+nivolumab",
         "Reassess response before deciding to continue or switch (next step)"
       ],
+      "protocolRefs": ["rcc-axitinib-pembrolizumab", "rcc-lenvatinib-pembrolizumab", "rcc-cabozantinib-nivolumab"],
       "linkTo": "n_1l_response",
       "linkLabel": "First-line response assessment"
     },
@@ -550,9 +552,10 @@
       "bullets": [
         "Nivolumab monotherapy for patients who received TKI-only first line and are IO-naive",
         "Monitor for immune-related adverse events",
-        "No single-agent nivolumab dose protocol here yet - the physician arranges the regimen",
+        "Nivolumab 240 mg every 2 weeks (or 480 mg every 4 weeks) regimen referenced below",
         "Reassess response before deciding on later-line therapy (next step)"
       ],
+      "protocolRefs": ["rcc-nivolumab"],
       "linkTo": "n_2l_response",
       "linkLabel": "Second-line response assessment"
     },
@@ -656,8 +659,9 @@
       "bullets": [
         "Belzutifan for advanced clear-cell RCC after both a checkpoint inhibitor and an anti-angiogenic agent",
         "Class-specific anemia and hypoxia; monitor hemoglobin and oxygen saturation",
-        "No dose protocol here yet - the physician arranges the regimen"
-      ]
+        "Belzutifan 120 mg once daily regimen referenced below"
+      ],
+      "protocolRefs": ["rcc-belzutifan"]
     },
     {
       "id": "n_tx_lenva_evero",
@@ -802,11 +806,12 @@
       "evidenceCategory": ["2A"],
       "footnotes": ["d"],
       "bullets": [
-        "Platinum-based cytotoxic chemotherapy (e.g. gemcitabine + platinum)",
+        "Platinum-based cytotoxic chemotherapy (e.g. gemcitabine + platinum), treated like urothelial carcinoma",
         "Medullary carcinoma associates with sickle-cell trait; confirm and counsel",
-        "Aggressive course - prioritize a clinical trial; no dose protocol here yet",
+        "Aggressive course - prioritize a clinical trial; gemcitabine + cisplatin regimen referenced below",
         "Reassess at progression (next step)"
       ],
+      "protocolRefs": ["gu-uro-gem-cisplatin"],
       "linkTo": "n_ncc_prog",
       "linkLabel": "Non-clear-cell progression assessment"
     },

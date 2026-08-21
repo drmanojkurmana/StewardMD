@@ -539,9 +539,9 @@
         "Induction gemcitabine + cisplatin (or docetaxel/cisplatin/5-FU) before chemoradiation for stage III-IVA / bulky nodal disease",
         "Then concurrent high-dose cisplatin with definitive radiation",
         "Post-treatment plasma EBV DNA guides adjuvant chemotherapy (next step)",
-        "Concurrent cisplatin-radiation regimen referenced below (induction gemcitabine-cisplatin has no dose protocol here - guidance only)"
+        "Concurrent cisplatin-radiation and induction gemcitabine-cisplatin regimens referenced below"
       ],
-      "protocolRefs": ["hn-cisplatin-rt"]
+      "protocolRefs": ["hn-gem-cisplatin", "hn-cisplatin-rt"]
     },
     {
       "id": "n_tx_op_induction",
@@ -560,8 +560,9 @@
         "Induction docetaxel + cisplatin + 5-FU (TPF) for very bulky nodal disease or when rapid response is needed",
         "Not shown superior to concurrent chemoradiation given upfront; requires good performance status and close toxicity monitoring",
         "Assess response, then proceed to radiation-based local therapy or surgery (next step)",
-        "Induction TPF has no dose protocol here - guidance only"
-      ]
+        "Induction TPF regimen referenced below"
+      ],
+      "protocolRefs": ["hn-tpf"]
     },
     {
       "id": "n_induction_response",
@@ -637,8 +638,9 @@
         "Induction docetaxel + cisplatin + 5-FU (TPF) as a larynx-preservation selection strategy",
         "Assess laryngeal response after induction (next step)",
         "Requires good performance status and reliable follow-up",
-        "Induction TPF has no dose protocol here - guidance only"
-      ]
+        "Induction TPF regimen referenced below"
+      ],
+      "protocolRefs": ["hn-tpf"]
     },
     {
       "id": "n_lx_induction_response",
@@ -910,8 +912,9 @@
         "Adjuvant chemotherapy (e.g. gemcitabine + cisplatin, or capecitabine) for detectable EBV DNA / residual disease",
         "Reassess distant disease before committing to adjuvant chemotherapy",
         "Then structured surveillance with serial plasma EBV DNA (next step)",
-        "Adjuvant chemotherapy has no dedicated dose protocol here - guidance only"
-      ]
+        "Adjuvant gemcitabine-cisplatin regimen referenced below"
+      ],
+      "protocolRefs": ["hn-gem-cisplatin"]
     },
     {
       "id": "n_surveillance",
@@ -1055,9 +1058,9 @@
         "Pembrolizumab + platinum (cisplatin or carboplatin) + 5-FU, then pembrolizumab maintenance",
         "Preferred first-line for higher tumor burden or rapid progression, across CPS levels",
         "On progression, move to second-line therapy (next step)",
-        "Pembrolizumab component referenced below (the platinum + 5-FU backbone has no dedicated dose protocol here - guidance only)"
+        "Pembrolizumab + platinum + 5-FU regimen referenced below"
       ],
-      "protocolRefs": ["hn-pembro-mono"]
+      "protocolRefs": ["hn-pembro-chemo"]
     },
     {
       "id": "n_tx_rm_extreme",

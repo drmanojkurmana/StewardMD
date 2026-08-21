@@ -2,18 +2,18 @@
   "guideline": "sarcoma",
   "title": "Soft Tissue Sarcoma Cancer",
   "subtitle": "StewardMD ONCOTREE navigator (draft)",
-  "navigatorVersion": "1.0.0",
+  "navigatorVersion": "2.0.0",
   "diseaseId": "sarcoma_cancer",
   "matchDisease": true,
   "status": "draft",
-  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - physician decides. Structural pathway for soft tissue sarcoma: presentation (extremity/trunk, retroperitoneal/intra-abdominal, advanced/metastatic) -> workup -> grade/size/depth risk stratification -> surgery +/- radiation +/- doxorubicin-based systemic therapy -> surveillance -> recurrence / histology-directed metastatic therapy. Treatment leaves reference existing StewardMD Standard Protocols by id where one clinically fits; agents/modalities without a dose protocol are shown as checklist guidance with NO dose. No proprietary guideline text is reproduced and no dose/regimen is invented. DRAFT - not clinically activated.",
+  "provenanceNote": "DRAFT decision support authored from standard guidelines (NCCN/DeVita/Harrison) - the physician decides. Structural pathway for soft tissue sarcoma: presentation (extremity/trunk, retroperitoneal/intra-abdominal, advanced/metastatic) -> workup -> grade/size/depth risk stratification -> surgery +/- radiation +/- doxorubicin-based systemic therapy, with response-adapted restaging after neoadjuvant/induction therapy and margin-directed adjuvant therapy -> surveillance -> recurrence -> histology-directed advanced disease refined through line of therapy (first line -> on progression -> second line -> later line). Treatment leaves reference existing StewardMD Standard Protocols by id where one clinically fits; agents/modalities without a dose protocol are shown as checklist guidance with NO dose. No proprietary guideline text is reproduced and no dose/regimen is invented. DRAFT - not clinically activated; the dose engine computes patient doses.",
   "sourceNote": "Structural pathway consistent with Standard Guidelines (NCCN) Soft Tissue Sarcoma; regimen options reference existing StewardMD Standard Protocols; the dose engine computes patient doses.",
   "startNodeIds": [
     "n_entry"
   ],
   "footnotes": {
     "a": {
-      "text": "Adjuvant/neoadjuvant radiation lowers local recurrence for high-grade or deep tumors and after close/positive margins; it does not clearly improve overall survival. Preoperative RT uses a smaller field/lower dose but has more acute wound complications than postoperative RT.",
+      "text": "Neoadjuvant/adjuvant radiation lowers local recurrence for high-grade or deep tumors and after close/positive margins; it does not clearly improve overall survival. Preoperative RT uses a smaller field/lower dose but has more acute wound complications than postoperative RT.",
       "evidence": "2A"
     },
     "b": {
@@ -26,6 +26,14 @@
     },
     "d": {
       "text": "Surveillance intensity tracks grade: high-grade tumors need more frequent cross-sectional imaging of the primary site and chest (the lung is the dominant site of distant spread) than low-grade tumors.",
+      "evidence": "2A"
+    },
+    "e": {
+      "text": "For advanced/metastatic STS in a fit patient, doxorubicin-based therapy is the standard first-line backbone; a lifetime anthracycline cumulative-dose limit and baseline/serial cardiac function assessment apply, and the dose engine computes the patient dose.",
+      "evidence": "1"
+    },
+    "f": {
+      "text": "Later-line and histology-specific agents (gemcitabine + docetaxel, trabectedin, pazopanib for non-adipocytic subtypes, eribulin for liposarcoma, taxanes for angiosarcoma, high-dose ifosfamide) are chosen by prior therapy and histology; several have no dedicated dose protocol here and are shown as guidance only.",
       "evidence": "2A"
     }
   },
@@ -96,10 +104,10 @@
       ],
       "required": true,
       "bullets": [
-        "History and physical; measure tumor size and note depth relative to fascia",
+        "History and physical; measure tumor size and note depth relative to the investing fascia",
         "MRI of the primary site with contrast (CT if MRI contraindicated)",
-        "Core-needle biopsy (image-guided) before resection; place the tract so it can be excised at surgery - avoid excisional biopsy of an undiagnosed mass",
-        "Expert sarcoma pathology review: histologic type, grade (e.g. FNCLCC), margins",
+        "Image-guided core-needle biopsy before resection; place the tract so it can be excised at surgery - avoid excisional biopsy of an undiagnosed mass",
+        "Expert sarcoma pathology review: histologic type, FNCLCC grade, margins",
         "Chest CT to screen for pulmonary metastases; consider PET in selected cases",
         "Multidisciplinary sarcoma-center referral before definitive treatment"
       ],
@@ -203,6 +211,36 @@
               "Distant (pulmonary) metastasis"
             ]
           ]
+        },
+        {
+          "title": "AJCC-style extremity/trunk stage grouping (simplified)",
+          "headers": [
+            "Stage",
+            "Grade / size",
+            "Behavior"
+          ],
+          "rows": [
+            [
+              "IA / IB",
+              "Grade 1 (any size, N0, M0)",
+              "Local disease, low metastatic risk"
+            ],
+            [
+              "II",
+              "Grade 2-3, <= 5 cm (T1), N0, M0",
+              "High-grade but small"
+            ],
+            [
+              "IIIA / IIIB",
+              "Grade 2-3, > 5 cm (T2-4), N0, M0",
+              "High-grade, high metastatic risk"
+            ],
+            [
+              "IV",
+              "Any N1 or M1",
+              "Regional nodal or distant spread"
+            ]
+          ]
         }
       ]
     },
@@ -276,7 +314,11 @@
         "sequencing"
       ],
       "required": true,
+      "evidenceCategory": [
+        "2B"
+      ],
       "footnotes": [
+        "a",
         "b"
       ],
       "options": [
@@ -306,10 +348,10 @@
       "id": "n_tx_ext_neoadj",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Neoadjuvant extremity",
-      "title": "High-grade large: preoperative RT +/- chemo, then surgery",
+      "name": "Neoadjuvant given",
+      "title": "High-grade large: preoperative RT +/- doxorubicin-based chemo",
       "section": "Treatment",
-      "description": "Preoperative radiation (and, for selected high-risk chemosensitive tumors, doxorubicin-based chemotherapy), then limb-sparing resection.",
+      "description": "Deliver preoperative radiation (and, for selected high-risk chemosensitive tumors, doxorubicin-based chemotherapy), then restage before surgery.",
       "path": "Sarcoma / Extremity / Neoadjuvant",
       "pills": [
         "neoadjuvant",
@@ -326,14 +368,114 @@
       "bullets": [
         "Preoperative radiation to reduce local recurrence and facilitate limb-sparing surgery",
         "Consider preoperative doxorubicin-based chemotherapy for large, deep, high-grade chemosensitive tumors (individualized)",
-        "Then limb-sparing wide local excision to negative margins; re-image response before surgery",
         "Watch for postoperative wound-healing complications after preoperative RT",
         "Doxorubicin-based regimen referenced below (dose engine computes the patient dose)",
+        "Then restage the primary and chest before surgery (next step)"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_ext_neoadj_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Neoadjuvant response",
+      "title": "After preoperative therapy: restaging response",
+      "section": "Treatment",
+      "description": "Re-image the primary and chest after neoadjuvant therapy. Response guides whether to proceed to limb-sparing resection or to treat as systemically progressive disease.",
+      "path": "Sarcoma / Extremity / Neoadjuvant / Response",
+      "pills": [
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Stable / responding, limb-sparing resection feasible",
+          "sets": {
+            "response": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Local progression or new distant metastases",
+          "sets": {
+            "response": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_ext_postneo_surg",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Post-neoadjuvant surgery",
+      "title": "Responding tumor: limb-sparing resection + adjuvant",
+      "section": "Treatment",
+      "description": "Proceed to definitive limb-sparing resection; complete radiation and consider adjuvant chemotherapy by margin and risk.",
+      "path": "Sarcoma / Extremity / Neoadjuvant / Surgery",
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Limb-sparing wide local excision to negative margins",
+        "Complete radiation to the tumor bed if a preoperative course was used (boost for close/positive margin)",
+        "Consider completing adjuvant doxorubicin-based chemotherapy if a neoadjuvant course was started and tolerated",
+        "Doxorubicin-based regimen referenced below",
         "Then surveillance"
       ],
       "protocolRefs": [
         "sarc-sts-doxorubicin"
       ]
+    },
+    {
+      "id": "n_tx_ext_neoadj_prog",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Neoadjuvant progression",
+      "title": "Progression on neoadjuvant therapy",
+      "section": "Treatment",
+      "description": "Local progression or new metastases during neoadjuvant therapy signals aggressive biology; switch strategy to systemic / histology-directed therapy.",
+      "path": "Sarcoma / Extremity / Neoadjuvant / Progression",
+      "pills": [
+        "progression",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "b",
+        "f"
+      ],
+      "bullets": [
+        "Reassess resectability; salvage surgery (including amputation) only if durable local control is achievable and no distant disease",
+        "New distant metastases: transition to histology-directed systemic therapy",
+        "Palliative radiation for local symptoms if surgery is not appropriate",
+        "Multidisciplinary re-review before the next line of therapy"
+      ],
+      "linkTo": "n_met_histo",
+      "linkLabel": "Go to histology-directed systemic therapy"
     },
     {
       "id": "n_ext_upfront_margin",
@@ -441,10 +583,10 @@
       "id": "n_tx_ext_unresect",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Unresectable extremity",
-      "title": "Locally advanced / not limb-sparing resectable",
+      "name": "Downstaging attempt",
+      "title": "Locally advanced: preoperative downstaging therapy",
       "section": "Treatment",
-      "description": "Downstage with preoperative therapy to try to convert to limb-sparing surgery; amputation reserved for tumors not otherwise controllable.",
+      "description": "Deliver preoperative therapy to try to convert to limb-sparing surgery, then restage.",
       "path": "Sarcoma / Extremity / Unresectable",
       "pills": [
         "treatment"
@@ -460,13 +602,112 @@
       "bullets": [
         "Preoperative radiation and/or doxorubicin-based chemotherapy to attempt downstaging to a limb-sparing resection",
         "Consider regional approaches (e.g. isolated limb perfusion) at experienced centers",
-        "Amputation reserved for tumors not controllable with limb-sparing therapy or with major neurovascular involvement",
         "Doxorubicin-based regimen referenced below",
-        "Then surveillance if rendered resectable"
+        "Then restage to decide resectability (next step)"
       ],
       "protocolRefs": [
         "sarc-sts-doxorubicin"
       ]
+    },
+    {
+      "id": "n_ext_unresect_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Downstaging response",
+      "title": "After downstaging therapy: resectability",
+      "section": "Treatment",
+      "description": "Re-image to decide whether the tumor is now resectable with an acceptable functional limb, or remains unresectable.",
+      "path": "Sarcoma / Extremity / Unresectable / Response",
+      "pills": [
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "converted",
+          "label": "Converted to limb-sparing resectable",
+          "sets": {
+            "response": "converted"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "still_unresect",
+          "label": "Still unresectable / not limb-sparing",
+          "sets": {
+            "response": "still_unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_ext_unresect_conv",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Converted to resectable",
+      "title": "Downstaged: limb-sparing resection",
+      "section": "Treatment",
+      "description": "Proceed to limb-sparing resection with adjuvant radiation and individualized chemotherapy.",
+      "path": "Sarcoma / Extremity / Unresectable / Converted",
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "a",
+        "b"
+      ],
+      "bullets": [
+        "Limb-sparing wide local excision to negative margins",
+        "Complete radiation to the tumor bed if not fully delivered preoperatively",
+        "Consider completing adjuvant doxorubicin-based chemotherapy if started and tolerated",
+        "Doxorubicin-based regimen referenced below",
+        "Then surveillance"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_ext_unresect_fail",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Still unresectable",
+      "title": "Refractory locally advanced disease",
+      "section": "Treatment",
+      "description": "Not convertible to a functional limb-sparing resection; choose amputation only for durable local control, otherwise continued systemic / palliative therapy.",
+      "path": "Sarcoma / Extremity / Unresectable / Refractory",
+      "pills": [
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "b",
+        "f"
+      ],
+      "bullets": [
+        "Amputation reserved for tumors not controllable with limb-sparing therapy or with major neurovascular involvement (and no distant disease)",
+        "Continue histology-directed systemic therapy for unresectable or metastatic disease",
+        "Palliative radiation for local symptoms",
+        "Multidisciplinary re-review before the next line"
+      ],
+      "linkTo": "n_met_histo",
+      "linkLabel": "Go to histology-directed systemic therapy"
     },
     {
       "id": "n_rp_wk",
@@ -536,11 +777,50 @@
       ]
     },
     {
-      "id": "n_tx_rp_resect",
+      "id": "n_rp_approach",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "RP sequencing",
+      "title": "Retroperitoneal, resectable: sequencing",
+      "section": "Treatment",
+      "description": "Choose upfront en-bloc resection versus a preoperative therapy trial (selective, e.g. for borderline resectability or on a protocol) before surgery.",
+      "path": "Sarcoma / Retroperitoneal / Sequencing",
+      "pills": [
+        "sequencing"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "upfront",
+          "label": "Upfront en-bloc resection",
+          "sets": {
+            "rpapproach": "upfront"
+          },
+          "pills": [
+            "upfront surgery"
+          ]
+        },
+        {
+          "id": "preop",
+          "label": "Preoperative therapy trial, then reassess",
+          "sets": {
+            "rpapproach": "preop"
+          },
+          "pills": [
+            "preop trial"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rp_upfront",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "RP resectable",
-      "title": "Retroperitoneal, resectable: en-bloc resection",
+      "name": "RP en-bloc resection",
+      "title": "Retroperitoneal: upfront en-bloc resection",
       "section": "Treatment",
       "description": "Complete en-bloc resection with adherent organs; radiation selective, chemotherapy not standard.",
       "path": "Sarcoma / Retroperitoneal / Resect",
@@ -563,14 +843,14 @@
       ]
     },
     {
-      "id": "n_tx_rp_unresect",
+      "id": "n_tx_rp_preop",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "RP unresectable",
-      "title": "Retroperitoneal, unresectable / metastatic",
+      "name": "RP preoperative therapy",
+      "title": "Retroperitoneal: preoperative therapy trial",
       "section": "Treatment",
-      "description": "Consider preoperative therapy to convert to resectable; otherwise histology-directed systemic therapy / palliation.",
-      "path": "Sarcoma / Retroperitoneal / Unresectable",
+      "description": "Deliver a preoperative therapy trial for borderline resectability, then restage before surgery.",
+      "path": "Sarcoma / Retroperitoneal / Preop",
       "pills": [
         "treatment"
       ],
@@ -583,9 +863,135 @@
         "c"
       ],
       "bullets": [
-        "Preoperative doxorubicin-based chemotherapy and/or radiation to attempt conversion to a resectable tumor in a fit patient",
-        "If still unresectable or metastatic, treat by histology (see the histology-directed systemic pathway)",
-        "Palliative measures for obstruction / pain / bleeding as needed"
+        "Preoperative doxorubicin-based chemotherapy and/or selective radiation for a borderline-resectable tumor in a fit patient (ideally on a protocol)",
+        "Re-image to reassess the plane to adjacent organs and vessels",
+        "Doxorubicin-based regimen referenced below",
+        "Then restage to decide en-bloc resection (next step)"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_rp_response",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "RP preop response",
+      "title": "After preoperative therapy: resectability",
+      "section": "Treatment",
+      "description": "Re-image to decide whether complete en-bloc resection is now feasible, or the tumor is unresectable / metastatic.",
+      "path": "Sarcoma / Retroperitoneal / Preop / Response",
+      "pills": [
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "c"
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Resectable - proceed to en-bloc resection",
+          "sets": {
+            "rpresponse": "resectable"
+          },
+          "pills": [
+            "resectable"
+          ]
+        },
+        {
+          "id": "progression",
+          "label": "Unresectable / progression / new metastases",
+          "sets": {
+            "rpresponse": "progression"
+          },
+          "pills": [
+            "progression"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_rp_resected",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RP resected after preop",
+      "title": "Downstaged retroperitoneal: en-bloc resection",
+      "section": "Treatment",
+      "description": "Proceed to complete en-bloc resection after a preoperative therapy trial.",
+      "path": "Sarcoma / Retroperitoneal / Preop / Resected",
+      "pills": [
+        "surgery",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "c"
+      ],
+      "bullets": [
+        "Complete en-bloc resection of the tumor with adherent organs at a high-volume center",
+        "Adjuvant chemotherapy is not standard even after preoperative therapy",
+        "Consider intraoperative / postoperative radiation only within a protocol",
+        "Then surveillance"
+      ]
+    },
+    {
+      "id": "n_tx_rp_prog",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RP preop progression",
+      "title": "Retroperitoneal progression on preoperative therapy",
+      "section": "Treatment",
+      "description": "Progression or persistent unresectability signals a shift to histology-directed systemic therapy.",
+      "path": "Sarcoma / Retroperitoneal / Preop / Progression",
+      "pills": [
+        "progression",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Do not force a non-curative debulking; re-review resectability at a sarcoma center",
+        "Transition to histology-directed systemic therapy",
+        "Palliative measures for obstruction / pain / bleeding as needed",
+        "Best supportive care if performance status is poor"
+      ],
+      "linkTo": "n_met_histo",
+      "linkLabel": "Go to histology-directed systemic therapy"
+    },
+    {
+      "id": "n_tx_rp_unresect",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "RP unresectable",
+      "title": "Retroperitoneal, unresectable / metastatic",
+      "section": "Treatment",
+      "description": "Not resectable at presentation; treat by histology-directed systemic therapy with palliation.",
+      "path": "Sarcoma / Retroperitoneal / Unresectable",
+      "pills": [
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "c",
+        "f"
+      ],
+      "bullets": [
+        "Treat by histology (see the histology-directed systemic pathway)",
+        "Palliative measures for obstruction / pain / bleeding as needed",
+        "Reassess resectability only if there is a major response to systemic therapy",
+        "Best supportive care if performance status is poor"
       ],
       "linkTo": "n_met_histo",
       "linkLabel": "Go to histology-directed systemic therapy"
@@ -681,7 +1087,7 @@
       "name": "Histology-directed",
       "title": "Advanced STS: histology-directed systemic therapy",
       "section": "Treatment",
-      "description": "First-line systemic therapy for advanced STS is directed by histologic subtype; oligometastatic disease may instead be treated with local therapy.",
+      "description": "First-line systemic therapy for advanced STS is directed by histologic subtype; each subtype is then refined through line of therapy. Oligometastatic disease may instead be treated with local therapy.",
       "path": "Sarcoma / Metastatic / Histology",
       "pills": [
         "histology"
@@ -689,6 +1095,10 @@
       "required": true,
       "evidenceCategory": [
         "2A"
+      ],
+      "footnotes": [
+        "e",
+        "f"
       ],
       "options": [
         {
@@ -732,6 +1142,16 @@
           ]
         },
         {
+          "id": "kaposi",
+          "label": "Kaposi sarcoma",
+          "sets": {
+            "histology": "kaposi"
+          },
+          "pills": [
+            "Kaposi"
+          ]
+        },
+        {
           "id": "oligomet",
           "label": "Oligometastatic (limited, resectable)",
           "sets": {
@@ -770,44 +1190,42 @@
               "Synovial / spindle",
               "Doxorubicin +/- ifosfamide",
               "High-dose ifosfamide, pazopanib"
+            ],
+            [
+              "Kaposi",
+              "Pegylated liposomal doxorubicin",
+              "Taxane; treat HIV / reduce immunosuppression"
             ]
-          ]
-        }
-      ]
-    },
-    {
-      "id": "n_met_lms_line",
-      "nodeCategory": "criteria",
-      "nodeType": "question",
-      "name": "LMS line",
-      "title": "Leiomyosarcoma: line of therapy",
-      "section": "Treatment",
-      "description": "Choose first-line versus later-line therapy for advanced leiomyosarcoma.",
-      "path": "Sarcoma / Metastatic / LMS / Line",
-      "pills": [
-        "LMS",
-        "line"
-      ],
-      "required": true,
-      "options": [
-        {
-          "id": "first",
-          "label": "First line",
-          "sets": {
-            "line": "first"
-          },
-          "pills": [
-            "1st line"
           ]
         },
         {
-          "id": "later",
-          "label": "Later line (progressed on anthracycline)",
-          "sets": {
-            "line": "later"
-          },
-          "pills": [
-            "later line"
+          "title": "Selected molecular / biomarker pearls by subtype",
+          "headers": [
+            "Subtype",
+            "Marker / driver",
+            "Therapeutic relevance"
+          ],
+          "rows": [
+            [
+              "Dedifferentiated liposarcoma",
+              "MDM2 / CDK4 amplification",
+              "Pazopanib excluded (adipocytic); trials of CDK4/MDM2 inhibitors"
+            ],
+            [
+              "Myxoid/round-cell liposarcoma",
+              "FUS-DDIT3 fusion",
+              "Notably trabectedin- and radiation-sensitive"
+            ],
+            [
+              "Synovial sarcoma",
+              "SS18-SSX fusion",
+              "Ifosfamide-sensitive; MAGE-A4 cell-therapy trials"
+            ],
+            [
+              "Any subtype",
+              "NTRK fusion (rare)",
+              "TRK inhibitor if fusion-positive"
+            ]
           ]
         }
       ]
@@ -816,7 +1234,7 @@
       "id": "n_tx_lms_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "LMS 1st line",
+      "name": "LMS first line",
       "title": "Leiomyosarcoma: first line",
       "section": "Treatment",
       "description": "Anthracycline-based therapy; gemcitabine + docetaxel is an active alternative.",
@@ -830,10 +1248,15 @@
       "evidenceCategory": [
         "1"
       ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Doxorubicin-based chemotherapy (single-agent or doxorubicin-containing combination)",
         "Gemcitabine + docetaxel is an active alternative first-line combination for leiomyosarcoma",
-        "Regimens referenced below (dose engine computes the patient dose)"
+        "Assess cardiac reserve and track the anthracycline cumulative dose",
+        "Regimens referenced below (dose engine computes the patient dose)",
+        "Then reassess response for the next line (next step)"
       ],
       "protocolRefs": [
         "gyn-uterine-lms-doxorubicin",
@@ -841,14 +1264,125 @@
       ]
     },
     {
+      "id": "n_lms_prog1",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "LMS response to 1L",
+      "title": "Leiomyosarcoma: response to first line",
+      "section": "Treatment",
+      "description": "Re-image after first-line therapy. Continue/observe on control, or move to second line on progression.",
+      "path": "Sarcoma / Metastatic / LMS / 1L / Response",
+      "pills": [
+        "LMS",
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "progression",
+          "label": "Progression - switch to second line",
+          "sets": {
+            "lmsline": "second"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "control",
+          "label": "Response / stable - continue or observe",
+          "sets": {
+            "lmsline": "control"
+          },
+          "pills": [
+            "disease control"
+          ]
+        }
+      ]
+    },
+    {
       "id": "n_tx_lms_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "LMS second line",
+      "title": "Leiomyosarcoma: second line",
+      "section": "Treatment",
+      "description": "Gemcitabine + docetaxel if not used first line; then trabectedin.",
+      "path": "Sarcoma / Metastatic / LMS / 2L",
+      "pills": [
+        "LMS",
+        "2nd line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Gemcitabine + docetaxel (if not used first line)",
+        "Trabectedin is active in leiomyosarcoma after anthracycline (guidance where no dose protocol exists here)",
+        "Gemcitabine + docetaxel regimen referenced below",
+        "Then reassess response for later-line therapy (next step)"
+      ],
+      "protocolRefs": [
+        "gyn-uterine-lms-gem-docetaxel"
+      ]
+    },
+    {
+      "id": "n_lms_prog2",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "LMS response to 2L",
+      "title": "Leiomyosarcoma: response to second line",
+      "section": "Treatment",
+      "description": "Re-image after second-line therapy; on progression, offer later-line therapy or a trial.",
+      "path": "Sarcoma / Metastatic / LMS / 2L / Response",
+      "pills": [
+        "LMS",
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "progression",
+          "label": "Progression - later line",
+          "sets": {
+            "lmsline": "later"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "control",
+          "label": "Response / stable - continue or observe",
+          "sets": {
+            "lmsline": "control2"
+          },
+          "pills": [
+            "disease control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lms_3l",
       "nodeCategory": "treatment",
       "nodeType": "end",
       "name": "LMS later line",
       "title": "Leiomyosarcoma: later line",
       "section": "Treatment",
-      "description": "Gemcitabine + docetaxel if not used first line; then trabectedin or pazopanib.",
-      "path": "Sarcoma / Metastatic / LMS / 2L",
+      "description": "Pazopanib is active in non-adipocytic sarcoma after chemotherapy; dacarbazine or a trial is an option.",
+      "path": "Sarcoma / Metastatic / LMS / later",
       "pills": [
         "LMS",
         "later line",
@@ -858,17 +1392,22 @@
       "evidenceCategory": [
         "2A"
       ],
+      "footnotes": [
+        "f"
+      ],
       "bullets": [
-        "Gemcitabine + docetaxel (if not used first line)",
-        "Then trabectedin, pazopanib, or dacarbazine-based therapy (guidance where no dose protocol exists here)",
-        "Gemcitabine + docetaxel regimen referenced below"
+        "Pazopanib (leiomyosarcoma is non-adipocytic and eligible) after prior chemotherapy",
+        "Trabectedin is active in leiomyosarcoma; dacarbazine-based therapy is an alternative if not already used",
+        "Prioritize a clinical trial where available",
+        "Pazopanib and trabectedin regimens referenced below (dose engine computes the patient dose)"
       ],
       "protocolRefs": [
-        "gyn-uterine-lms-gem-docetaxel"
+        "gu-rcc-pazopanib",
+        "sarc-trabectedin"
       ]
     },
     {
-      "id": "n_met_liposarc_type",
+      "id": "n_met_lipo_type",
       "nodeCategory": "criteria",
       "nodeType": "question",
       "name": "Liposarcoma subtype",
@@ -880,6 +1419,9 @@
         "liposarcoma"
       ],
       "required": true,
+      "footnotes": [
+        "f"
+      ],
       "options": [
         {
           "id": "wd_dd",
@@ -904,104 +1446,377 @@
       ]
     },
     {
-      "id": "n_tx_lipo_wd",
+      "id": "n_tx_lipo_wd_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Liposarcoma WD/DD",
-      "title": "Well-differentiated / dedifferentiated liposarcoma",
+      "name": "Liposarcoma WD/DD 1L",
+      "title": "Well-differentiated / dedifferentiated liposarcoma: first line",
       "section": "Treatment",
-      "description": "Doxorubicin-based first line; trabectedin/eribulin later.",
-      "path": "Sarcoma / Metastatic / Liposarcoma / WD-DD",
+      "description": "Doxorubicin-based first line; then reassess for later-line therapy.",
+      "path": "Sarcoma / Metastatic / Liposarcoma / WD-DD / 1L",
       "pills": [
         "liposarcoma",
+        "1st line",
         "treatment"
       ],
       "showsRecommendation": true,
       "evidenceCategory": [
         "2A"
       ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
         "Doxorubicin-based chemotherapy first line",
-        "Trabectedin or eribulin at later lines (guidance where no dose protocol exists here)",
-        "Doxorubicin-based regimen referenced below"
+        "Consider adding dacarbazine or ifosfamide for a response-priority setting",
+        "Pazopanib is NOT indicated for adipocytic (liposarcoma) histology",
+        "Doxorubicin-based regimen referenced below",
+        "Then reassess response for the next line (next step)"
       ],
       "protocolRefs": [
         "sarc-sts-doxorubicin"
       ]
     },
     {
-      "id": "n_tx_lipo_myxoid",
+      "id": "n_tx_lipo_myx_1l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Liposarcoma myxoid",
-      "title": "Myxoid / round-cell liposarcoma",
+      "name": "Liposarcoma myxoid 1L",
+      "title": "Myxoid / round-cell liposarcoma: first line",
       "section": "Treatment",
-      "description": "Doxorubicin-based first line; particularly sensitive to trabectedin.",
-      "path": "Sarcoma / Metastatic / Liposarcoma / Myxoid",
+      "description": "Doxorubicin-based first line; particularly sensitive to trabectedin at later lines.",
+      "path": "Sarcoma / Metastatic / Liposarcoma / Myxoid / 1L",
       "pills": [
         "liposarcoma",
+        "1st line",
         "treatment"
       ],
       "showsRecommendation": true,
       "evidenceCategory": [
         "2A"
       ],
+      "footnotes": [
+        "e",
+        "f"
+      ],
       "bullets": [
         "Doxorubicin-based chemotherapy first line",
-        "Myxoid/round-cell liposarcoma is notably sensitive to trabectedin (and to radiation) at later lines",
-        "Doxorubicin-based regimen referenced below"
+        "Myxoid/round-cell liposarcoma is notably sensitive to trabectedin and to radiation",
+        "Pazopanib is NOT indicated for adipocytic (liposarcoma) histology",
+        "Doxorubicin-based regimen referenced below",
+        "Then reassess response for the next line (next step)"
       ],
       "protocolRefs": [
         "sarc-sts-doxorubicin"
       ]
     },
     {
-      "id": "n_tx_angiosarc",
+      "id": "n_lipo_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Liposarcoma response to 1L",
+      "title": "Liposarcoma: response to first line",
+      "section": "Treatment",
+      "description": "Re-image after first-line therapy; on progression, move to a subtype-appropriate later line.",
+      "path": "Sarcoma / Metastatic / Liposarcoma / Response",
+      "pills": [
+        "liposarcoma",
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "progression",
+          "label": "Progression - later line",
+          "sets": {
+            "lipoline": "later"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "control",
+          "label": "Response / stable - continue or observe",
+          "sets": {
+            "lipoline": "control"
+          },
+          "pills": [
+            "disease control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_lipo_2l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Angiosarcoma",
-      "title": "Angiosarcoma: taxane-based",
+      "name": "Liposarcoma later line",
+      "title": "Liposarcoma: later line",
       "section": "Treatment",
-      "description": "Angiosarcoma is uniquely taxane-sensitive; doxorubicin is an alternative.",
-      "path": "Sarcoma / Metastatic / Angiosarcoma",
+      "description": "Trabectedin (especially myxoid/round-cell) or eribulin after anthracycline.",
+      "path": "Sarcoma / Metastatic / Liposarcoma / later",
+      "pills": [
+        "liposarcoma",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Trabectedin after anthracycline (highest activity in myxoid/round-cell liposarcoma)",
+        "Eribulin has a survival benefit specifically in liposarcoma",
+        "Do NOT use pazopanib (adipocytic histology)",
+        "Trabectedin and eribulin regimens referenced below (dose engine computes the patient dose); prioritize a clinical trial where available"
+      ],
+      "protocolRefs": [
+        "sarc-trabectedin",
+        "sarc-eribulin"
+      ]
+    },
+    {
+      "id": "n_tx_angio_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Angiosarcoma first line",
+      "title": "Angiosarcoma: first line",
+      "section": "Treatment",
+      "description": "Angiosarcoma is uniquely taxane-sensitive; doxorubicin is an active alternative.",
+      "path": "Sarcoma / Metastatic / Angiosarcoma / 1L",
       "pills": [
         "angiosarcoma",
+        "1st line",
         "treatment"
       ],
       "showsRecommendation": true,
       "evidenceCategory": [
         "2A"
       ],
+      "footnotes": [
+        "e",
+        "f"
+      ],
       "bullets": [
-        "Taxane (paclitaxel) is preferred first line - angiosarcoma is uniquely taxane-sensitive (no dedicated dose protocol here yet - guidance)",
-        "Doxorubicin-based chemotherapy is an active alternative",
-        "Consider anti-angiogenic therapy at later lines"
+        "Taxane (weekly paclitaxel) is preferred first line - angiosarcoma is uniquely taxane-sensitive",
+        "Doxorubicin-based chemotherapy is an active alternative first line",
+        "Weekly paclitaxel and doxorubicin regimens referenced below (dose engine computes the patient dose)",
+        "Then reassess response for the next line (next step)"
+      ],
+      "protocolRefs": [
+        "sarc-paclitaxel-weekly",
+        "sarc-sts-doxorubicin"
       ]
     },
     {
-      "id": "n_tx_synovial",
+      "id": "n_angio_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Angiosarcoma response to 1L",
+      "title": "Angiosarcoma: response to first line",
+      "section": "Treatment",
+      "description": "Re-image after first-line therapy; on progression, move to later-line anti-angiogenic or alternate cytotoxic therapy.",
+      "path": "Sarcoma / Metastatic / Angiosarcoma / Response",
+      "pills": [
+        "angiosarcoma",
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "progression",
+          "label": "Progression - later line",
+          "sets": {
+            "angioline": "later"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "control",
+          "label": "Response / stable - continue or observe",
+          "sets": {
+            "angioline": "control"
+          },
+          "pills": [
+            "disease control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_angio_2l",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Synovial / spindle",
-      "title": "Synovial / other spindle-cell sarcoma",
+      "name": "Angiosarcoma later line",
+      "title": "Angiosarcoma: later line",
+      "section": "Treatment",
+      "description": "Switch cytotoxic class or add anti-angiogenic therapy after first-line progression.",
+      "path": "Sarcoma / Metastatic / Angiosarcoma / later",
+      "pills": [
+        "angiosarcoma",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "Switch class: taxane if doxorubicin used first, or doxorubicin if taxane used first",
+        "Consider anti-angiogenic therapy (e.g. pazopanib) at later lines",
+        "Gemcitabine-based therapy is an alternative",
+        "Weekly paclitaxel and doxorubicin regimens referenced below (dose engine computes the patient dose); prioritize a clinical trial"
+      ],
+      "protocolRefs": [
+        "sarc-paclitaxel-weekly",
+        "sarc-sts-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_tx_syn_1l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Synovial first line",
+      "title": "Synovial / spindle-cell sarcoma: first line",
       "section": "Treatment",
       "description": "Doxorubicin +/- ifosfamide; these histologies are relatively chemosensitive.",
-      "path": "Sarcoma / Metastatic / Synovial",
+      "path": "Sarcoma / Metastatic / Synovial / 1L",
       "pills": [
         "synovial",
+        "1st line",
         "treatment"
       ],
       "showsRecommendation": true,
       "evidenceCategory": [
         "2A"
       ],
+      "footnotes": [
+        "e"
+      ],
       "bullets": [
-        "Doxorubicin +/- ifosfamide (synovial sarcoma is relatively chemosensitive)",
-        "High-dose ifosfamide or pazopanib at later lines (guidance where no dose protocol exists here)",
-        "Doxorubicin-based regimen referenced below"
+        "Doxorubicin +/- ifosfamide (synovial sarcoma is relatively chemosensitive; a response-priority setting favors adding ifosfamide)",
+        "Assess cardiac reserve and track the anthracycline cumulative dose",
+        "Doxorubicin-based regimen referenced below",
+        "Then reassess response for the next line (next step)"
       ],
       "protocolRefs": [
         "sarc-sts-doxorubicin"
+      ]
+    },
+    {
+      "id": "n_syn_prog",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Synovial response to 1L",
+      "title": "Synovial: response to first line",
+      "section": "Treatment",
+      "description": "Re-image after first-line therapy; on progression, move to later-line therapy or a trial.",
+      "path": "Sarcoma / Metastatic / Synovial / Response",
+      "pills": [
+        "synovial",
+        "restaging"
+      ],
+      "required": true,
+      "footnotes": [
+        "f"
+      ],
+      "options": [
+        {
+          "id": "progression",
+          "label": "Progression - later line",
+          "sets": {
+            "synline": "later"
+          },
+          "pills": [
+            "progression"
+          ]
+        },
+        {
+          "id": "control",
+          "label": "Response / stable - continue or observe",
+          "sets": {
+            "synline": "control"
+          },
+          "pills": [
+            "disease control"
+          ]
+        }
+      ]
+    },
+    {
+      "id": "n_tx_syn_2l",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Synovial later line",
+      "title": "Synovial / spindle-cell sarcoma: later line",
+      "section": "Treatment",
+      "description": "High-dose ifosfamide or pazopanib after anthracycline; consider cell-therapy trials.",
+      "path": "Sarcoma / Metastatic / Synovial / later",
+      "pills": [
+        "synovial",
+        "later line",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "f"
+      ],
+      "bullets": [
+        "High-dose ifosfamide is active in synovial sarcoma (guidance where no dose protocol exists here)",
+        "Pazopanib (synovial is non-adipocytic and eligible) after prior chemotherapy",
+        "Consider MAGE-A4-directed engineered cell-therapy trials for HLA-eligible synovial sarcoma",
+        "Pazopanib regimen referenced below (dose engine computes the patient dose)"
+      ],
+      "protocolRefs": [
+        "gu-rcc-pazopanib"
+      ]
+    },
+    {
+      "id": "n_tx_kaposi",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Kaposi sarcoma",
+      "title": "Kaposi sarcoma: liposomal doxorubicin",
+      "section": "Treatment",
+      "description": "Restore immune function and treat advanced disease with pegylated liposomal doxorubicin.",
+      "path": "Sarcoma / Metastatic / Kaposi",
+      "pills": [
+        "Kaposi",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2A"
+      ],
+      "footnotes": [
+        "e"
+      ],
+      "bullets": [
+        "Optimize antiretroviral therapy in HIV-associated disease; reduce iatrogenic immunosuppression where possible",
+        "Pegylated liposomal doxorubicin for advanced/visceral or extensive cutaneous disease",
+        "Taxane (paclitaxel) for anthracycline-refractory disease (guidance where no dose protocol exists here)",
+        "Liposomal doxorubicin regimen referenced below (dose engine computes the patient dose)"
+      ],
+      "protocolRefs": [
+        "sarc-kaposi-liposomal-doxorubicin"
       ]
     },
     {
@@ -1021,11 +1836,18 @@
       "evidenceCategory": [
         "2B"
       ],
+      "footnotes": [
+        "b"
+      ],
       "bullets": [
         "Metastasectomy (e.g. pulmonary metastasectomy) for resectable, limited disease in a fit patient",
         "Stereotactic body radiation as a local option for unresectable oligometastases",
-        "Consider peri-procedural histology-directed systemic therapy",
+        "Consider peri-procedural doxorubicin-based systemic therapy for high-grade histology",
+        "Doxorubicin-based regimen referenced below",
         "Then surveillance"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
       ]
     },
     {
@@ -1097,14 +1919,54 @@
       ]
     },
     {
+      "id": "n_recur_local_margin",
+      "nodeCategory": "criteria",
+      "nodeType": "question",
+      "name": "Local recurrence resectability",
+      "title": "Isolated local recurrence: resectability",
+      "section": "Recurrence",
+      "description": "Decide whether the local recurrence can be re-resected to negative margins with limb preservation, or requires a systemic/salvage approach.",
+      "path": "Sarcoma / Recurrence / Local / Resectability",
+      "pills": [
+        "local",
+        "resectability"
+      ],
+      "required": true,
+      "footnotes": [
+        "a"
+      ],
+      "options": [
+        {
+          "id": "resectable",
+          "label": "Re-resectable with limb preservation",
+          "sets": {
+            "recurresect": "resectable"
+          },
+          "pills": [
+            "re-resectable"
+          ]
+        },
+        {
+          "id": "unresectable",
+          "label": "Not re-resectable / limb-threatening",
+          "sets": {
+            "recurresect": "unresectable"
+          },
+          "pills": [
+            "unresectable"
+          ]
+        }
+      ]
+    },
+    {
       "id": "n_tx_local_recur",
       "nodeCategory": "treatment",
       "nodeType": "end",
-      "name": "Local recurrence",
-      "title": "Isolated local recurrence: re-resection",
+      "name": "Local recurrence resected",
+      "title": "Resectable local recurrence: re-resection",
       "section": "Recurrence",
       "description": "Treated with curative intent - re-resection and radiation if not previously given.",
-      "path": "Sarcoma / Recurrence / Local",
+      "path": "Sarcoma / Recurrence / Local / Resected",
       "pills": [
         "local",
         "treatment"
@@ -1114,14 +1976,49 @@
         "2A"
       ],
       "footnotes": [
-        "a"
+        "a",
+        "b"
       ],
       "bullets": [
-        "Re-resection to negative margins when feasible (limb-sparing if possible)",
+        "Re-resection to negative margins (limb-sparing if possible)",
         "Radiation to the recurrence bed if not previously delivered",
-        "Amputation only if limb-sparing control is not achievable",
-        "Consider histology-directed systemic therapy for high-grade / rapidly recurrent disease"
+        "Consider perioperative doxorubicin-based systemic therapy for high-grade / rapidly recurrent disease",
+        "Doxorubicin-based regimen referenced below",
+        "Then surveillance"
+      ],
+      "protocolRefs": [
+        "sarc-sts-doxorubicin"
       ]
+    },
+    {
+      "id": "n_tx_local_recur_unresect",
+      "nodeCategory": "treatment",
+      "nodeType": "end",
+      "name": "Local recurrence unresectable",
+      "title": "Unresectable local recurrence",
+      "section": "Recurrence",
+      "description": "Not re-resectable with limb preservation; use radiation, amputation for durable control, or systemic therapy.",
+      "path": "Sarcoma / Recurrence / Local / Unresectable",
+      "pills": [
+        "local",
+        "treatment"
+      ],
+      "showsRecommendation": true,
+      "evidenceCategory": [
+        "2B"
+      ],
+      "footnotes": [
+        "a",
+        "f"
+      ],
+      "bullets": [
+        "Radiation to the recurrence if not previously delivered",
+        "Amputation only if it achieves durable local control and there is no distant disease",
+        "Otherwise treat as advanced disease with histology-directed systemic therapy",
+        "Palliative measures for local symptoms"
+      ],
+      "linkTo": "n_met_histo",
+      "linkLabel": "Go to histology-directed systemic therapy"
     }
   ],
   "links": [
@@ -1216,6 +2113,42 @@
       "linkCategory": "conditional"
     },
     {
+      "id": "l_neo_resp",
+      "from": "n_tx_ext_neoadj",
+      "to": "n_ext_neoadj_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neoresp_surg",
+      "from": "n_ext_neoadj_response",
+      "to": "n_ext_postneo_surg",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neoresp_prog",
+      "from": "n_ext_neoadj_response",
+      "to": "n_tx_ext_neoadj_prog",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_postneo_surv",
+      "from": "n_ext_postneo_surg",
+      "to": "n_surv",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_neoprog_histo",
+      "from": "n_tx_ext_neoadj_prog",
+      "to": "n_met_histo",
+      "linkCategory": "conditional"
+    },
+    {
       "id": "l_up_neg",
       "from": "n_ext_upfront_margin",
       "to": "n_tx_ext_upfront_neg",
@@ -1246,12 +2179,6 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_extneo_surv",
-      "from": "n_tx_ext_neoadj",
-      "to": "n_surv",
-      "linkCategory": "conditional"
-    },
-    {
       "id": "l_upneg_surv",
       "from": "n_tx_ext_upfront_neg",
       "to": "n_surv",
@@ -1264,9 +2191,39 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_extunres_surv",
+      "id": "l_unresect_resp",
       "from": "n_tx_ext_unresect",
+      "to": "n_ext_unresect_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unresp_conv",
+      "from": "n_ext_unresect_response",
+      "to": "n_tx_ext_unresect_conv",
+      "fromOptions": [
+        "converted"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unresp_fail",
+      "from": "n_ext_unresect_response",
+      "to": "n_tx_ext_unresect_fail",
+      "fromOptions": [
+        "still_unresect"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unconv_surv",
+      "from": "n_tx_ext_unresect_conv",
       "to": "n_surv",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_unfail_histo",
+      "from": "n_tx_ext_unresect_fail",
+      "to": "n_met_histo",
       "linkCategory": "conditional"
     },
     {
@@ -1281,7 +2238,7 @@
     {
       "id": "l_rp_resect",
       "from": "n_rp_resect",
-      "to": "n_tx_rp_resect",
+      "to": "n_rp_approach",
       "fromOptions": [
         "resectable"
       ],
@@ -1297,9 +2254,69 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_rpres_surv",
-      "from": "n_tx_rp_resect",
+      "id": "l_rp_up",
+      "from": "n_rp_approach",
+      "to": "n_tx_rp_upfront",
+      "fromOptions": [
+        "upfront"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rp_preop",
+      "from": "n_rp_approach",
+      "to": "n_tx_rp_preop",
+      "fromOptions": [
+        "preop"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpup_surv",
+      "from": "n_tx_rp_upfront",
       "to": "n_surv",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rppreop_resp",
+      "from": "n_tx_rp_preop",
+      "to": "n_rp_response",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpresp_res",
+      "from": "n_rp_response",
+      "to": "n_tx_rp_resected",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpresp_prog",
+      "from": "n_rp_response",
+      "to": "n_tx_rp_prog",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpresected_surv",
+      "from": "n_tx_rp_resected",
+      "to": "n_surv",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpprog_histo",
+      "from": "n_tx_rp_prog",
+      "to": "n_met_histo",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_rpunres_histo",
+      "from": "n_tx_rp_unresect",
+      "to": "n_met_histo",
       "linkCategory": "conditional"
     },
     {
@@ -1332,7 +2349,7 @@
     {
       "id": "l_histo_lms",
       "from": "n_met_histo",
-      "to": "n_met_lms_line",
+      "to": "n_tx_lms_1l",
       "fromOptions": [
         "lms"
       ],
@@ -1341,7 +2358,7 @@
     {
       "id": "l_histo_lipo",
       "from": "n_met_histo",
-      "to": "n_met_liposarc_type",
+      "to": "n_met_lipo_type",
       "fromOptions": [
         "liposarc"
       ],
@@ -1350,7 +2367,7 @@
     {
       "id": "l_histo_angio",
       "from": "n_met_histo",
-      "to": "n_tx_angiosarc",
+      "to": "n_tx_angio_1l",
       "fromOptions": [
         "angiosarc"
       ],
@@ -1359,9 +2376,18 @@
     {
       "id": "l_histo_syn",
       "from": "n_met_histo",
-      "to": "n_tx_synovial",
+      "to": "n_tx_syn_1l",
       "fromOptions": [
         "synovial"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_histo_kaposi",
+      "from": "n_met_histo",
+      "to": "n_tx_kaposi",
+      "fromOptions": [
+        "kaposi"
       ],
       "linkCategory": "conditional"
     },
@@ -1375,27 +2401,39 @@
       "linkCategory": "conditional"
     },
     {
-      "id": "l_lms_1l",
-      "from": "n_met_lms_line",
-      "to": "n_tx_lms_1l",
+      "id": "l_lms1l_prog",
+      "from": "n_tx_lms_1l",
+      "to": "n_lms_prog1",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lmsprog1_2l",
+      "from": "n_lms_prog1",
+      "to": "n_tx_lms_2l",
       "fromOptions": [
-        "first"
+        "progression"
       ],
       "linkCategory": "conditional"
     },
     {
-      "id": "l_lms_2l",
-      "from": "n_met_lms_line",
-      "to": "n_tx_lms_2l",
+      "id": "l_lms2l_prog",
+      "from": "n_tx_lms_2l",
+      "to": "n_lms_prog2",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lmsprog2_3l",
+      "from": "n_lms_prog2",
+      "to": "n_tx_lms_3l",
       "fromOptions": [
-        "later"
+        "progression"
       ],
       "linkCategory": "conditional"
     },
     {
       "id": "l_lipo_wd",
-      "from": "n_met_liposarc_type",
-      "to": "n_tx_lipo_wd",
+      "from": "n_met_lipo_type",
+      "to": "n_tx_lipo_wd_1l",
       "fromOptions": [
         "wd_dd"
       ],
@@ -1403,10 +2441,61 @@
     },
     {
       "id": "l_lipo_myx",
-      "from": "n_met_liposarc_type",
-      "to": "n_tx_lipo_myxoid",
+      "from": "n_met_lipo_type",
+      "to": "n_tx_lipo_myx_1l",
       "fromOptions": [
         "myxoid_rc"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lipowd_prog",
+      "from": "n_tx_lipo_wd_1l",
+      "to": "n_lipo_prog",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lipomyx_prog",
+      "from": "n_tx_lipo_myx_1l",
+      "to": "n_lipo_prog",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_lipoprog_2l",
+      "from": "n_lipo_prog",
+      "to": "n_tx_lipo_2l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_angio1l_prog",
+      "from": "n_tx_angio_1l",
+      "to": "n_angio_prog",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_angioprog_2l",
+      "from": "n_angio_prog",
+      "to": "n_tx_angio_2l",
+      "fromOptions": [
+        "progression"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_syn1l_prog",
+      "from": "n_tx_syn_1l",
+      "to": "n_syn_prog",
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_synprog_2l",
+      "from": "n_syn_prog",
+      "to": "n_tx_syn_2l",
+      "fromOptions": [
+        "progression"
       ],
       "linkCategory": "conditional"
     },
@@ -1419,7 +2508,7 @@
     {
       "id": "l_recur_local",
       "from": "n_recur",
-      "to": "n_tx_local_recur",
+      "to": "n_recur_local_margin",
       "fromOptions": [
         "local"
       ],
@@ -1431,6 +2520,24 @@
       "to": "n_met_histo",
       "fromOptions": [
         "distant"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recloc_res",
+      "from": "n_recur_local_margin",
+      "to": "n_tx_local_recur",
+      "fromOptions": [
+        "resectable"
+      ],
+      "linkCategory": "conditional"
+    },
+    {
+      "id": "l_recloc_unres",
+      "from": "n_recur_local_margin",
+      "to": "n_tx_local_recur_unresect",
+      "fromOptions": [
+        "unresectable"
       ],
       "linkCategory": "conditional"
     }

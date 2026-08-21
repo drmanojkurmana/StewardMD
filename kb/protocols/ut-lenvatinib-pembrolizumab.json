@@ -1,0 +1,57 @@
+{
+  "id": "ut-lenvatinib-pembrolizumab",
+  "diseaseId": "uterine_cancer",
+  "name": "Lenvatinib + Pembrolizumab (pMMR advanced endometrial)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 21,
+  "cycles": 1,
+  "cyclesNote": "lenvatinib is continuous daily; pembrolizumab every 3 weeks (or 400 mg every 6 weeks). Continue until progression or unacceptable toxicity. Physician determined.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD draft Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Start blood-pressure control before lenvatinib; treat hypertension promptly.",
+    "Manage lenvatinib toxicity (proteinuria, diarrhea, fatigue, hand-foot skin reaction) with interruptions and 4 mg dose-reduction steps.",
+    "Have an immune-toxicity (corticosteroid) pathway available for pembrolizumab."
+  ],
+  "monitoring": [
+    "Blood pressure frequently early on; urine protein periodically.",
+    "Thyroid, liver, and renal function; immune-related adverse-event surveillance.",
+    "Response assessment by imaging every 2 to 3 cycles."
+  ],
+  "clearanceChecks": ["liver", "blood pressure", "thyroid", "prior-cycle status"],
+  "drugs": [
+    {
+      "id": "lenvatinib",
+      "name": "Lenvatinib",
+      "basis": "flat",
+      "dosePerUnit": 20,
+      "unit": "mg",
+      "route": "PO",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Lenvatinib 20 mg by mouth once daily, taken continuously. Oral multi-kinase (VEGFR) inhibitor combined with pembrolizumab for mismatch-repair-proficient advanced/recurrent endometrial carcinoma after progression on platinum. Reduce in 4 mg steps (16 mg, 12 mg, 8 mg) for hypertension, proteinuria, or other toxicity. Flat daily dose; not body-size scaled. Author's own wording; general reference NCCN / DeVita."
+    },
+    {
+      "id": "pembrolizumab",
+      "name": "Pembrolizumab",
+      "basis": "flat",
+      "dosePerUnit": 200,
+      "unit": "mg",
+      "route": "IV",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Pembrolizumab 200 mg IV over about 30 minutes on day 1 every 3 weeks (or 400 mg every 6 weeks). Anti-PD-1 partner to lenvatinib. Flat fixed dose; not weight- or BSA-scaled. Author's own wording; general reference NCCN / DeVita."
+    }
+  ]
+}

@@ -1,0 +1,64 @@
+{
+  "id": "rcc-nivolumab",
+  "diseaseId": "rcc_cancer",
+  "name": "Nivolumab (single agent, previously treated clear-cell RCC)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 28,
+  "cycles": 1,
+  "cyclesNote": "Continuous single-agent nivolumab 240 mg IV every 2 weeks (or 480 mg every 4 weeks) until progression or unacceptable toxicity. Used after prior anti-angiogenic (TKI) therapy in IO-naive patients.",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Kidney Cancer",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "Immune-related adverse event monitoring across organ systems; counsel prompt symptom reporting.",
+    "Baseline and periodic thyroid, hepatic, adrenal, and glucose assessment."
+  ],
+  "monitoring": [
+    "thyroid function (TSH/free T4) before cycles and as indicated",
+    "liver function tests",
+    "glucose (immune-mediated hyperglycemia)",
+    "symptom review for colitis, pneumonitis, dermatitis, endocrinopathy",
+    "renal function (immune nephritis)"
+  ],
+  "clearanceChecks": ["endocrine/immune status", "liver", "renal", "CBC", "prior-cycle status"],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2 or higher immune-related adverse event",
+      "drug": "nivolumab",
+      "action": "hold/steroids",
+      "text": "Hold nivolumab and manage with corticosteroids per immune-related adverse event guidance; permanently discontinue for severe or recurrent grade 3-4 events. Obtain clinical review before rechallenge."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "nivolumab",
+      "name": "Nivolumab",
+      "basis": "flat",
+      "dosePerUnit": 240,
+      "unit": "mg",
+      "route": "IV",
+      "days": [1, 15],
+      "caps": { "perDose": null },
+      "notes": "Nivolumab 240 mg IV flat every 2 weeks (days 1 and 15 of a 28-day cycle), or 480 mg every 4 weeks as a label-equivalent alternative. Single-agent second-line therapy for clear-cell RCC after prior TKI in IO-naive patients. Authored from standard practice (NCCN Kidney Cancer; CheckMate-025 supporting evidence).",
+      "provenance": {
+        "layer": "guideline",
+        "source": "Standard Guidelines (NCCN), Kidney Cancer",
+        "version": null,
+        "date": null,
+        "locator": "single-agent nivolumab, previously treated clear-cell RCC",
+        "evidenceStatus": "unknown"
+      },
+      "modificationRules": []
+    }
+  ]
+}

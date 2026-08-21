@@ -446,9 +446,10 @@
       "bullets": [
         "Adjuvant nivolumab (about 1 year) improves disease-free survival for high-risk resected MIBC",
         "Options: cisplatin-ineligible with >= pT3 / pN+, or residual >= ypT2 / ypN+ after neoadjuvant cisplatin",
-        "No dedicated urothelial dose protocol here - shown as guidance (physician arranges the nivolumab regimen)",
+        "Adjuvant nivolumab regimen referenced below",
         "Monitor for immune-related adverse events"
-      ]
+      ],
+      "protocolRefs": ["uro-nivolumab-adjuvant"]
     },
     {
       "id": "n_tx_mibc_observe",
@@ -589,10 +590,12 @@
       "evidenceCategory": ["1"],
       "showsRecommendation": true,
       "bullets": [
-        "Carboplatin + gemcitabine for 4-6 cycles - no dedicated dose protocol here, shown as guidance",
+        "Carboplatin + gemcitabine for 4-6 cycles",
         "Assess response and offer switch-maintenance avelumab if no progression (next step)",
-        "Carboplatin is used only in the metastatic (non-curative) setting, not peri-operatively"
-      ]
+        "Carboplatin is used only in the metastatic (non-curative) setting, not peri-operatively",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-carbo-gemcitabine"]
     },
     {
       "id": "n_met_maint",
@@ -709,10 +712,11 @@
       "showsRecommendation": true,
       "bullets": [
         "Pembrolizumab for immunotherapy-naive disease after platinum chemotherapy",
-        "No dedicated urothelial dose protocol here - shown as guidance",
         "Monitor for immune-related adverse events",
-        "On progression, move to the subsequent-line pathway (next step)"
-      ]
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-pembrolizumab"]
     },
     {
       "id": "n_tx_met_erda",
@@ -732,9 +736,10 @@
       "bullets": [
         "Erdafitinib for confirmed FGFR2 / FGFR3 activating mutation or fusion after prior systemic therapy",
         "Monitor phosphate (hyperphosphatemia), ophthalmic exams (central serous retinopathy), nails / skin, and dry mouth",
-        "No dose protocol here - shown as guidance (physician arranges the erdafitinib regimen)",
-        "On progression, move to the subsequent-line pathway (next step)"
-      ]
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-erdafitinib"]
     },
     {
       "id": "n_tx_met_other",
@@ -751,11 +756,12 @@
       "evidenceCategory": ["2A"],
       "showsRecommendation": true,
       "bullets": [
-        "Sacituzumab govitecan (Trop-2 ADC) after platinum and immunotherapy - guidance, no dose protocol here",
+        "Sacituzumab govitecan (Trop-2 ADC) after platinum and immunotherapy - regimen referenced below",
         "Single-agent chemotherapy (e.g. taxane, or gemcitabine if not previously used)",
         "Trastuzumab deruxtecan is an option for HER2-expressing disease (tissue-agnostic) - guidance",
         "Clinical-trial enrollment and best supportive / palliative care as appropriate"
-      ]
+      ],
+      "protocolRefs": ["uro-sacituzumab"]
     },
 
     {
@@ -865,9 +871,10 @@
       "bullets": [
         "Trastuzumab deruxtecan for HER2-expressing (IHC 3+, or IHC 2+) urothelial carcinoma after prior therapy",
         "Monitor for interstitial lung disease / pneumonitis - hold and evaluate any new respiratory symptoms",
-        "No dedicated urothelial dose protocol here - shown as guidance",
-        "On progression, move to the subsequent-line pathway (next step)"
-      ]
+        "On progression, move to the subsequent-line pathway (next step)",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-trastuzumab-deruxtecan"]
     },
     {
       "id": "n_met_later2",
@@ -910,9 +917,10 @@
       "bullets": [
         "Sacituzumab govitecan after platinum and a checkpoint inhibitor (typically after enfortumab vedotin)",
         "Monitor for neutropenia (consider growth-factor support) and diarrhea",
-        "No dedicated urothelial dose protocol here - shown as guidance",
-        "On further progression, consider a clinical trial or best supportive care"
-      ]
+        "On further progression, consider a clinical trial or best supportive care",
+        "Regimen referenced below"
+      ],
+      "protocolRefs": ["uro-sacituzumab"]
     },
     {
       "id": "n_tx_met_bsc",

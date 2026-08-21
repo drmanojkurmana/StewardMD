@@ -1,0 +1,46 @@
+{
+  "id": "ov-trametinib",
+  "diseaseId": "ovarian_cancer",
+  "name": "Trametinib (MEK inhibitor, low-grade serous)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": ["palliative"],
+  "cycleLengthDays": 1,
+  "cycles": 2,
+  "cyclesNote": "continuous once-daily oral dosing until progression or unacceptable toxicity (cycleLengthDays 1 represents continuous daily dosing).",
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Ovarian Cancer / Low-grade serous (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "StewardMD DRAFT targeted option authored in-house from standard-of-care oncology; experimental, owner/device test only; not clinically activated.",
+    "approval": null
+  },
+  "premedications": [],
+  "supportiveCare": [
+    "MEK-inhibitor class toxicities: acneiform rash (skin care), diarrhea, and fatigue.",
+    "Monitor for retinal changes/retinal-vein occlusion, reduced ejection fraction, and hepatotoxicity; hold for grade 2-3 events."
+  ],
+  "monitoring": [
+    "LVEF at baseline and periodically",
+    "ophthalmologic review for visual symptoms",
+    "liver function and skin/GI assessment each visit"
+  ],
+  "drugs": [
+    {
+      "id": "trametinib",
+      "name": "Trametinib",
+      "basis": "flat",
+      "dosePerUnit": 2,
+      "unit": "mg",
+      "route": "PO daily",
+      "days": [1],
+      "caps": { "perDose": null },
+      "notes": "Trametinib 2 mg PO once daily, taken continuously on an empty stomach until progression or unacceptable toxicity, for recurrent low-grade serous ovarian carcinoma (MAPK-pathway directed). Dose-reduce for rash, cardiac or ocular toxicity per package insert. Authored in StewardMD's words from standard-of-care oncology (NCCN/DeVita general reference).",
+      "dosesPerDay": 1,
+      "frequency": "daily"
+    }
+  ]
+}

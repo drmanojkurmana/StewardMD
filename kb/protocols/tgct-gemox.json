@@ -1,0 +1,110 @@
+{
+  "id": "tgct-gemox",
+  "diseaseId": "testicular_germ_cell_tumor",
+  "name": "GemOx (Gemcitabine / Oxaliplatin)",
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "intentOptions": [
+    "palliative"
+  ],
+  "cycleLengthDays": 21,
+  "cycles": 4,
+  "caps": "protocol",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), Testicular Cancer (later-line / platinum-refractory)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "ONCQIS grounded Standard Protocol (experimental, owner/device test only; not clinically activated)",
+    "approval": null
+  },
+  "biomarkers": {
+    "AFP": "response marker",
+    "beta_hCG": "response marker",
+    "LDH": "response marker",
+    "note": "Non-cross-resistant doublet for multiply-relapsed, platinum-refractory germ cell tumor after failure of first-line cisplatin-based chemotherapy and salvage (conventional or high-dose). Paclitaxel may be added (GOP) at physician discretion. Serum tumor markers track response. In our own words for a DRAFT decision-support tool."
+  },
+  "stage": [
+    "III"
+  ],
+  "treatmentSetting": [
+    "metastatic"
+  ],
+  "histology": "germ cell tumor (seminoma and nonseminomatous germ cell tumor / NSGCT), platinum-refractory",
+  "premedications": [
+    {
+      "name": "Antiemetic prophylaxis (moderate emetic risk)",
+      "notes": "Oxaliplatin-containing doublet; provide prophylaxis per the standard emetic-risk framework."
+    }
+  ],
+  "supportiveCare": [
+    "Cold sensitivity counselling: oxaliplatin causes cold-induced acute dysesthesias; avoid cold food/drink and cold exposure around infusion.",
+    "Neuropathy: monitor cumulative oxaliplatin peripheral sensory neuropathy; consider dose reduction or holiday.",
+    "Myelosuppression: gemcitabine plus oxaliplatin is myelosuppressive; assess febrile-neutropenia risk and consider G-CSF support.",
+    "Paclitaxel may be added as a third agent (GOP) in fit patients; if used, add taxane premedication and monitor for neuropathy and hypersensitivity."
+  ],
+  "monitoring": [
+    "Serum tumor markers (AFP, beta-hCG, LDH) before each cycle and at restaging",
+    "CBC before each dose - myelosuppression",
+    "Peripheral neuropathy assessment each cycle - oxaliplatin",
+    "Liver and renal function before each cycle"
+  ],
+  "clearanceChecks": [
+    "CBC/platelets",
+    "renal",
+    "liver",
+    "neurologic status",
+    "prior-cycle status"
+  ],
+  "doseModificationRules": [
+    {
+      "condition": "grade 2+ persistent peripheral sensory neuropathy",
+      "drug": "oxaliplatin",
+      "action": "reduce/hold/review",
+      "text": "Review required; reduce oxaliplatin, hold, or introduce a treatment holiday. Physician decides."
+    },
+    {
+      "condition": "ANC < 1000 or platelets < 100k on treatment day",
+      "action": "delay/reduce",
+      "text": "Review required; delay or reduce per institutional criteria. Physician decides."
+    }
+  ],
+  "drugs": [
+    {
+      "id": "gemcitabine",
+      "name": "Gemcitabine",
+      "basis": "bsa",
+      "dosePerUnit": 1000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1,
+        8
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "notes": "Gemcitabine 1000 mg/m2 IV on Days 1 and 8, every 21 days. Non-cross-resistant partner used in platinum-refractory germ cell tumor salvage. Dose and schedule in our own words from standard later-line practice (general references NCCN/DeVita).",
+      "modificationRules": []
+    },
+    {
+      "id": "oxaliplatin",
+      "name": "Oxaliplatin",
+      "basis": "bsa",
+      "dosePerUnit": 130,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null,
+        "cumulativeLifetime": null
+      },
+      "notes": "Oxaliplatin 130 mg/m2 IV on Day 1, every 21 days. Cold-induced acute neuropathy and cumulative sensory neuropathy expected; counsel on cold avoidance. Dose and schedule in our own words from standard later-line practice (general references NCCN/DeVita).",
+      "modificationRules": []
+    }
+  ]
+}

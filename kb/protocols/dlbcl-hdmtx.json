@@ -1,0 +1,55 @@
+{
+  "version": "1.0",
+  "lifecycleState": "draft",
+  "experimental": true,
+  "caps": "protocol",
+  "diseaseId": "dlbcl_cancer",
+  "source": {
+    "nccn": "Standard Guidelines (NCCN), B-Cell Lymphomas (general reference)",
+    "textbook": "DeVita / Harrison (general reference)"
+  },
+  "institution": {
+    "provenance": "DRAFT decision-support protocol authored from standard-of-care knowledge (NCCN/DeVita/Harrison, general reference); experimental, not clinically activated",
+    "approval": null
+  },
+  "id": "dlbcl-hdmtx",
+  "name": "High-dose methotrexate (CNS prophylaxis)",
+  "intentOptions": [
+    "curative"
+  ],
+  "cycleLengthDays": 14,
+  "cycles": 3,
+  "premedications": [
+    {
+      "name": "Hydration + urinary alkalinization",
+      "notes": "IV fluids with sodium bicarbonate to keep urine pH >=7 before and during the infusion"
+    }
+  ],
+  "supportiveCare": [
+    "Leucovorin (folinic acid) rescue starting ~24 h after the infusion, titrated to methotrexate levels",
+    "Avoid drugs that delay methotrexate clearance (NSAIDs, penicillins, proton-pump inhibitors, trimethoprim)",
+    "Glucarpidase available for delayed clearance / nephrotoxicity"
+  ],
+  "monitoring": [
+    "Serial serum methotrexate levels until cleared (<0.1 micromol/L)",
+    "Renal function and urine pH each dose",
+    "Given interleaved with the systemic chemoimmunotherapy in CNS-high-risk patients"
+  ],
+  "drugs": [
+    {
+      "id": "methotrexate",
+      "name": "Methotrexate",
+      "basis": "bsa",
+      "dosePerUnit": 3000,
+      "unit": "mg/m2",
+      "route": "IV",
+      "days": [
+        1
+      ],
+      "caps": {
+        "perDose": null
+      },
+      "notes": "3000 mg/m2 (3 g/m2) IV over ~2-4 h on day 1, with mandatory leucovorin rescue and level monitoring. Interleave with systemic therapy; typically 2-4 doses."
+    }
+  ]
+}
