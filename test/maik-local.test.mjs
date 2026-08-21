@@ -253,12 +253,31 @@ const { L } = load();
 {
   const { L } = load();
 
-  ok("image prompt asks for the findings that MATTER", /findings that MATTER/i.test(L.SYSTEM_IMAGE));
-  ok("image prompt demands an Interpretation section", /Interpretation/.test(L.SYSTEM_IMAGE));
-  ok("image prompt asks what the finding MEANS", /what the finding MEANS/i.test(L.SYSTEM_IMAGE));
-  ok("image prompt asks for the threshold used", /threshold/i.test(L.SYSTEM_IMAGE));
-  ok("image prompt asks what it does and does not establish", /does and does not establish/i.test(L.SYSTEM_IMAGE));
-  ok("image prompt asks for the next step", /next step|confirmatory/i.test(L.SYSTEM_IMAGE));
+  /* The format is DEMONSTRATED, not described.
+   *
+   * A 4B copies a worked example far more reliably than it follows a description, and the described
+   * version demonstrably did not work. So the sentences that merely explained the shape were removed
+   * and the example carries them - which also kept prefill flat (1041 -> 1060 chars) instead of paying
+   * ~7 s more for an example bolted on top of the rules.
+   *
+   * These assertions therefore check what the EXAMPLE shows, not what the prose says.
+   */
+  ok("prompt says to report only what carries clinical meaning", /findings that carry clinical meaning/i.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates a value WITH its reference range", /6\.1 mmol\/L \(lab range 3\.5 to 5\.1\)/.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates an Interpretation section", /\*\*Interpretation\*\*/.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates committing with a threshold", /Above 6\.0 is where/.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates what it does NOT establish", /does not establish the cause/i.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates naming a next step", /^Next: /m.test(L.SYSTEM_IMAGE));
+  ok("example demonstrates the closing verify line", /Verify against the original document/.test(L.SYSTEM_IMAGE));
+
+  // CONTENT BLEED is the real hazard of few-shot on a small model: it will answer "potassium 6.1"
+  // for a sodium report unless told not to.
+  ok("prompt forbids reusing the example's content", /never reuse its test, its numbers or its conclusion/i.test(L.SYSTEM_IMAGE));
+  ok("example is fenced so the model can see where it ends", (L.SYSTEM_IMAGE.match(/\n---/g) || []).length === 2);
+  ok("example is labelled as shape only", /format example only/i.test(L.SYSTEM_IMAGE));
+
+  // Prefill is the whole latency story, so the prompt must stay bounded even with an example in it.
+  ok("prompt stays within its prefill budget", L.SYSTEM_IMAGE.length < 1200);
 
   // The exact instructions that produced the transcription are gone.
   ok("no longer says 'describe only what is visible'", !/Describe only what is actually visible/i.test(L.SYSTEM_IMAGE));

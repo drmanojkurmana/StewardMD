@@ -2824,6 +2824,18 @@
   // full rendered conversation (questions + answers); persisted device-local so it survives reloads/app relaunch (cleared with the New button). It is the app's own escaped markup, restored the same way the in-session copy already was.
   var _maikBodyHTML = (function () { try { return localStorage.getItem(maikThreadKey()) || ""; } catch (e) { return ""; } })();
   var _maikBusy = false;          // idempotency guard: one in-flight provider call at a time
+  /* STOP BUTTON.
+   *
+   * An on-device answer takes 8-20 s of prefill before a single word appears, and longer on a hot
+   * phone. Until now the send button was simply DISABLED for that whole time, so a clinician who had
+   * asked the wrong thing, attached the wrong photo, or just changed their mind could only sit and
+   * wait. Worse on-device: that wait is the phone heating up for an answer nobody wants.
+   *
+   * So the send button becomes a STOP button while generating, the way any chat assistant behaves.
+   * `_maikStop` holds whatever cancels the current turn; it is set when a turn starts and cleared when
+   * it settles, so a stale handler can never cancel the NEXT question.
+   */
+  var _maikStop = null;
   var _maikCache = {};            // session cache: normalized clinical query → rendered answer HTML
   // Session-only conversation topic memory (smd_maik_v2): current canonical clinical topic so
   // follow-ups ("give in detail", "what antibiotics?", "dose?", "what next?") resolve against it
@@ -2848,6 +2860,8 @@
     book: '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 5h6a3 3 0 0 1 3 3 3 3 0 0 1 3-3h6v13h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3H3Z"/></svg>',
     chevron: '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 6 6 6-6 6"/></svg>',
     mic: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0"/><line x1="12" y1="18" x2="12" y2="21"/><line x1="8" y1="21" x2="16" y2="21"/></svg>',
+    // Filled square: the universal "stop generating" affordance in a chat composer.
+    stop: '<svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" stroke="none"><rect x="6" y="6" width="12" height="12" rx="2.5"/></svg>',
     // menu_book — Research Mode (evidence review over trusted journals/guidelines)
     research: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>',
     send: '<svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5"/><path d="m5 12 7-7 7 7"/></svg>',
@@ -3092,7 +3106,7 @@ body.dark .maik-verify{color:#fcd34d;background:rgba(146,64,14,.18);border-color
 body.dark .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px 20px rgba(0,0,0,.3)}
 .maik-cmp-in:focus-within{border-color:var(--mk-teal)}
 .maik-mic{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
-.maik-img{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
+.maik-img{width:36px;height:36px;border-radius:50%;border:none;background:var(--mk-soft);color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}.maik-send.stopping{background:var(--mk-soft);color:var(--mk-ink,#14202b);border:1px solid var(--mk-bd)}
 .maik-attach{display:flex;align-items:center;gap:10px;margin:0 0 8px;padding:8px 10px;border:1px solid var(--mk-bd);border-radius:12px;background:var(--mk-soft)}.maik-attach-th{width:40px;height:40px;border-radius:8px;object-fit:cover;flex:0 0 auto;background:var(--mk-bd)}.maik-attach-th.ph{display:flex;align-items:center;justify-content:center;color:var(--mk-mut)}.maik-attach-meta{display:flex;flex-direction:column;min-width:0;flex:1}.maik-attach-nm{font:600 12.5px/1.3 'Inter';color:var(--mk-ink,inherit);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.maik-attach-sub{font:500 11px/1.35 'Inter';color:var(--mk-mut);margin-top:1px}.maik-attach-x{width:28px;height:28px;border:none;border-radius:50%;background:transparent;color:var(--mk-mut);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto}.maik-b.you .maik-sent-img{display:block;max-width:180px;max-height:180px;border-radius:12px;margin:0 0 8px auto;object-fit:cover}
 .maik-img.has{background:var(--teal,#0e6e63);color:#fff}
 .maik-img[hidden]{display:none}
@@ -3324,6 +3338,41 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { if (window.StewardRAG && StewardRAG.ready) StewardRAG.ready(); } catch (e) {}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
+
+    /* The one place the send/stop button's state lives.
+     *
+     * It used to be twelve scattered `sendBtn.disabled = ...` assignments, and every one of them
+     * contradicted a stop button by disabling the only control that could cancel. Centralised so the
+     * two states cannot drift apart.
+     */
+    function maikSetSendMode(busy) {
+      _maikBusy = busy;
+      if (!sendBtn) return;
+      sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
+      sendBtn.classList.toggle("stopping", !!busy);
+      sendBtn.innerHTML = busy ? MK.stop : MK.send;
+      sendBtn.title = busy ? "Stop" : "Send";
+      sendBtn.setAttribute("aria-label", busy ? "Stop generating" : "Send");
+      if (!busy) _maikStop = null;
+    }
+
+    /* Stop the turn in flight.
+     *
+     * On-device this really does halt the model: the plugin sets an abort flag the decode loop and
+     * llama.cpp's own abort callback both read, so the phone stops working immediately - which is the
+     * point, since the wait IS the heat.
+     *
+     * On the cloud path the request is already in flight and cannot be recalled, so this stops the
+     * RENDER and frees the composer. That is an honest partial: the tokens are already being spent,
+     * and pretending otherwise would be worse than saying so.
+     */
+    function maikStopNow() {
+      var stopped = false;
+      try { if (window.SMD_MAIK_LOCAL && SMD_MAIK_LOCAL.cancel) { SMD_MAIK_LOCAL.cancel(); stopped = true; } } catch (e) {}
+      try { if (typeof _maikStop === "function") { _maikStop(); stopped = true; } } catch (e) {}
+      maikSetSendMode(false);
+      try { toast(stopped ? "Stopped." : "Stopping."); } catch (e) {}
+    }
     function close() {
       try {
         if (body && body.innerHTML.trim()) {
@@ -3605,14 +3654,14 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     //    attribution + a "used of 2 today" counter. Server enforces the 2/day cap + 7-day cache.
     function maikRunResearch(q) {
       if (_maikBusy) return;
-      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      _maikBusy = true; maikSetSendMode(true);
       // NATIVE: pause Firestore during the evidence-review round-trip (same thread-starvation fix as
       // maikRunWeb / the clinical answer #568), so a signed-in session's Firestore sync can't stall it.
       var _fsR2 = false, _fsResumeR = function () { if (_fsR2) return; _fsR2 = true; try { if (window.SMD_DB && SMD_DB.enableNetwork) SMD_DB.enableNetwork(); } catch (e) {} };
       try { if (window.SMD_IS_NATIVE && window.SMD_DB && SMD_DB.disableNetwork) { SMD_DB.disableNetwork(); setTimeout(_fsResumeR, 60000); } } catch (e) {}
       var think = bubble("ai", maikBufferHTML("Reviewing the evidence", "maik-webbusy"));
       window.SMD_AI.research(q, "evidence-review", _maikTurns.slice(-4)).then(function (r) {
-        _fsResumeR(); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _fsResumeR(); _maikBusy = false; maikSetSendMode(false);
         // Over the 2/day cap -> a clear message, NOT an error.
         if (r && r.over) {
           think.innerHTML = '<div class="maik-welcome">' + maikEscH(r.message || "You've used your 2 evidence reviews today. Resets at midnight.") + '</div>';
@@ -3642,7 +3691,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         try { scroll(); } catch (e) {}
         try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
       }).catch(function () {
-        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _maikBusy = false; maikSetSendMode(false);
         try { think.innerHTML = '<div class="maik-welcome">Evidence review is unavailable right now. Please verify against a reference source.</div>'; scroll(); _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
       });
     }
@@ -3732,7 +3781,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // requestAnimationFrame typewriter (explainGroundedStream fallback replay) that held _maikBusy
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
-      _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+      _maikBusy = false; maikSetSendMode(false);
       if (r && r.error === "quota") { think.innerHTML = '<div class="maik-welcome">' + (r.reason === "module-daily" && r.message ? String(r.message) : r.reason === "rate" ? 'One moment — you’re asking questions quickly. Please try again in a few seconds.' : 'MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.') + '</div>'; return; }
       if (r && r.error === "ai-off") {
         think.innerHTML = '<div class="maik-welcome">MaiK is switched off. Turn it on to get grounded clinical answers.</div>';
@@ -3869,7 +3918,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function runClinical(question, retrieval, depth, active, topicLabel) {
       var cacheKey = maikNorm(question) + (active ? "|case" : "");
       if (!active && _maikCache[cacheKey]) { bubble("ai", _maikCache[cacheKey]); if (maikV2()) _maikTopic = { topic: topicLabel, question: question, depth: depth, lastDrug: (_maikTopic && _maikTopic.lastDrug) || null, ts: Date.now() }; return; }
-      _maikBusy = true; if (sendBtn) sendBtn.disabled = true;
+      _maikBusy = true; maikSetSendMode(true);
       var think = bubble("ai", maikBufferHTML("Searching StewardMD knowledge", "maik-thinking"));
       // Tie the answer to the CONVERSATION, not this sheet instance. If the user closes MaiK and reopens
       // (the thread is restored from localStorage), the still-running generation must render its answer
@@ -3904,7 +3953,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // narrower predicate - the client was the stricter of the two, and the one doctors saw.)
       if (_scope && _scope.medical === false && _scope.certain === true) {
         try { console.debug("[MaiK firewall] blocked non-clinical query (" + _scope.category + ") before AI pipeline; ~1 LLM/RAG call saved"); } catch (e) {}
-        _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
         _maikRefuse(think);
         return;
       }
@@ -3924,7 +3973,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         if (_br && _br.decision === "ask" && _br.ambiguity && _br.ambiguity.kind === "lexical" && _br.ambiguity.options && _br.ambiguity.options.length) {
           try { console.debug("[MaiK brain] never-guess: disambiguating (" + _br.ambiguity.kind + ")"); } catch (e) {}
           try { if (window.MaiKCopilot) MaiKCopilot.gapLog("clarify", question); } catch (e) {}   // Stage-9 gap signal (anonymous)
-          _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+          _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
           think.innerHTML = '<div class="maik-welcome">' + maikEscH(_br.ambiguity.kind === "lexical" ? "That abbreviation has more than one meaning — which did you mean?" : "Which did you mean?") + '</div>';
           var _w = document.createElement("div"); _w.className = "maik-fus";
           _br.ambiguity.options.slice(0, 5).forEach(function (o) {
@@ -3962,7 +4011,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var _rl = _tw.querySelector(".maik-retry");
           if (_rl) _rl.addEventListener("click", function (ev) { ev.preventDefault(); try { _tw.parentNode && _tw.parentNode.removeChild(_tw); } catch (e) {} runClinical(question, retrieval, depth, active, topicLabel); });
         } catch (e) {}
-        _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+        _maikBusy = false; maikSetSendMode(false);
         try { console.warn("[MaiK] knowledge search timed out after " + MAIK_TO_MS + "ms with no progress:", question); } catch (e) {}
         try { scroll(); } catch (e) {}
       }
@@ -4069,7 +4118,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             try { _brainAugment(_h, pkgForKb); } catch (e) {}
             try { _answerFeedback(_h); } catch (e) {}
             if (maikPerfOn()) { try { var _kt = (maikNow() - _perfT0).toFixed(0); var _pe = document.createElement("div"); _pe.className = "maik-perf"; _pe.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9"; _pe.textContent = "⚡ " + (label || "instant") + " · KB · " + _kt + "ms · " + kb.intent; _h.appendChild(_pe); } catch (e) {} }
-            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
             try { scroll(); } catch (e) {}
           }
           // MaiK Brain answer-generation enrichment (flag smd_maik_brain). Builds a RANKED,
@@ -4182,7 +4231,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
             });
           }
           function _askAmbiguous(options, header) {   // genuine ambiguity / underspecified concept → ask, never guess
-            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+            _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
             think.innerHTML = '<div class="maik-welcome">' + maikEscH(header || "Did you mean:") + '</div>';
             var w = document.createElement("div"); w.className = "maik-fus";
             (options || []).slice(0, 5).forEach(function (o) { var lbl = (typeof o === "string") ? o : (o.label || o.name); var val = (typeof o === "string") ? o : (o.name || o.value || o.label); var b = document.createElement("button"); b.className = "maik-fu"; b.textContent = lbl; b.addEventListener("click", function () { try { qEl.value = val; } catch (e) {} send(); }); w.appendChild(b); });
@@ -4255,7 +4304,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           var _routeP = _kbOn ? getRoute(question).catch(function () { return null; }) : Promise.resolve(null);
           return _routeP.then(function (route) {
             if (route && route.outOfScope) {   // non-medical query → INSTANT refusal; no KB / answer / web-research
-              _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false;
+              _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false);
               _maikRefuse(think);
               return;
             }
@@ -4275,7 +4324,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
           });
         })
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
-        .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; if (sendBtn) sendBtn.disabled = false; });
+        .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
     function send() {
       if (_maikBusy) return;
@@ -4423,7 +4472,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     });
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
     scrim.addEventListener("click", close);
-    sendBtn.addEventListener("click", send);
+    // One button, two jobs: STOP while a turn is in flight, SEND otherwise. Routed here rather than
+    // by swapping listeners, so there is no window where the button is bound to the wrong action.
+    sendBtn.addEventListener("click", function () {
+      if (_maikBusy) { maikStopNow(); return; }
+      send();
+    });
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
     // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
     function maikBufferHTML(stage, cls) {

@@ -143,22 +143,50 @@
    *
    * The closing line still tells them to check the original, because a 4B reading a phone photo of a
    * printout can misread a digit, and a misread digit is the whole answer.
+   *
+   * WHY A WORKED EXAMPLE, AND WHY IT REPLACED THE DESCRIPTION RATHER THAN JOINING IT.
+   *
+   * A 4B copies a demonstrated format far more reliably than it follows a described one, and the
+   * described version demonstrably did not work. But prefill is the whole latency story here - the
+   * prompt was already 13 s of prefill before the image's own encode cost - so bolting an example on
+   * top of the rules would have made a slow feature slower.
+   *
+   * So the example now CARRIES the format and the sentences that merely described it are gone: the
+   * bullet with value and range, the Interpretation heading, committing with a threshold, saying what
+   * it does not establish, the next step, and the closing verify line are all shown rather than
+   * explained. Net length is roughly unchanged.
+   *
+   * The rules that SURVIVE are the ones an example cannot enforce: skip the noise, never write out
+   * identifiers, name an unreadable number instead of guessing, and no reasoning. Those are safety and
+   * privacy constraints, not formatting.
+   *
+   * CONTENT BLEED is the real hazard of few-shot on a small model - it will happily answer
+   * "potassium 6.1" for a sodium report. Hence the explicit "never reuse its test, its numbers or its
+   * conclusion", and a deliberately distinctive example (hyperkalaemia) so that if bleed does happen
+   * it is obvious on sight rather than a plausible wrong number.
    */
   var SYSTEM_IMAGE =
     "You are MaiK, clinical decision support for doctors reading a clinical image. Answer in markdown.\n" +
-    "Lead with the findings that MATTER, as a few short bullets: the test or parameter, its value with " +
-    "units, and the reference range when the image shows one. Skip empty fields, headers, barcodes and " +
-    "anything not clinically useful, and do not list what is missing.\n" +
+    "Report only the findings that carry clinical meaning. Skip empty fields, headers and barcodes, and " +
+    "do not list what is missing.\n" +
     "Never write out patient names, hospital IDs, UHIDs or accession numbers even when they are legible.\n" +
-    "Then a section headed \"Interpretation\": say what the finding MEANS. State whether each value is " +
-    "normal, borderline or clearly abnormal against the range shown or the standard adult range, and " +
-    "give the threshold you are using.\n" +
-    "Say plainly what the finding does and does not establish, and name the single most useful next " +
-    "step or confirmatory test.\n" +
-    "When a number is genuinely unreadable, say which one and stop guessing at that value; do not " +
-    "abandon the rest of the reading.\n" +
+    "When a number is genuinely unreadable, say which one; do not guess it and do not abandon the rest.\n" +
     "Give the final answer only, never your reasoning.\n" +
-    "End with one line: \"Verify against the original document.\"";
+    "Match the SHAPE of this example exactly. It is a format example only: never reuse its test, its " +
+    "numbers or its conclusion.\n" +
+    "---\n" +
+    "- Serum potassium: 6.1 mmol/L (lab range 3.5 to 5.1)\n" +
+    "\n" +
+    "**Interpretation**\n" +
+    "\n" +
+    "6.1 mmol/L is clearly raised. Above 6.0 is where arrhythmia risk begins, so this needs treating " +
+    "now rather than a repeat sample alone. It does not establish the cause: sample haemolysis, renal " +
+    "impairment and potassium-sparing drugs all produce this.\n" +
+    "\n" +
+    "Next: an ECG, and a repeat sample drawn without a tourniquet to exclude a spurious result.\n" +
+    "\n" +
+    "Verify against the original document.\n" +
+    "---";
 
   /* A follow-up about an image already on screen.
    *
