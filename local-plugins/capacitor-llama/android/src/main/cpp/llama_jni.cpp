@@ -17,6 +17,7 @@
 #include <atomic>
 #include <string>
 #include <vector>
+#include <unistd.h>
 #include <android/log.h>
 #include "llama.h"
 
@@ -27,6 +28,30 @@
 // Set by cancelGenerate() from any thread; read by the token loop and by llama.cpp's abort
 // callback (so a long prefill on a slow device can be interrupted too, not just decoding).
 static std::atomic<bool> g_cancel{false};
+
+/* THERMAL AND POWER GOVERNOR (mirrors the iOS ThermalGovernor).
+ *
+ * Measured on a Pixel 9 during a real answer: 542% CPU (five-plus cores flat out), 3.4 GB resident,
+ * 69 C on the little cores. The decode loop had no backoff of any kind - it simply ran until it was
+ * done, which is precisely the reported "sucks up battery and overheats my phone".
+ *
+ * Written from Java (PowerManager.getCurrentThermalStatus, the official API) rather than read from
+ * sysfs, because thermal_zone naming is not portable across devices. Read here with a relaxed atomic
+ * so the hot loop pays almost nothing for it.
+ *
+ * Android PowerManager levels: 0 NONE, 1 LIGHT, 2 MODERATE, 3 SEVERE, 4 CRITICAL, 5 EMERGENCY,
+ * 6 SHUTDOWN. Same policy as iOS: yield at SEVERE, stop at CRITICAL, because being killed by the OS
+ * mid-answer loses the whole answer while stopping deliberately keeps the text.
+ */
+static std::atomic<int> g_thermal{0};
+
+static inline int thermal_yield_us() {
+    const int t = g_thermal.load(std::memory_order_relaxed);
+    if (t >= 4) return 40000;      // CRITICAL and above
+    if (t == 3) return 12000;      // SEVERE: roughly halves the duty cycle
+    return 0;
+}
+static inline bool thermal_should_stop() { return g_thermal.load(std::memory_order_relaxed) >= 4; }
 static std::atomic<bool> g_backend_ready{false};
 
 static bool abort_cb(void* /*data*/) { return g_cancel.load(std::memory_order_relaxed); }
@@ -112,6 +137,14 @@ Java_in_stewardmd_llama_LlamaNative_freeContext(JNIEnv*, jobject, jlong h) {
 JNIEXPORT void JNICALL
 Java_in_stewardmd_llama_LlamaNative_cancelGenerate(JNIEnv*, jobject) {
     g_cancel.store(true, std::memory_order_relaxed);
+}
+
+/* Java pushes the OS thermal status in; the decode loop reads it with a relaxed atomic.
+ * Pushed rather than pulled because PowerManager is a Java API and calling back into the JVM from the
+ * hot loop would cost more than the throttling saves. */
+JNIEXPORT void JNICALL
+Java_in_stewardmd_llama_LlamaNative_setThermalStatus(JNIEnv*, jobject, jint level) {
+    g_thermal.store(static_cast<int>(level), std::memory_order_relaxed);
 }
 
 // Last generate()'s split of prefill vs decode, so a tuning sweep can attribute the cost.
@@ -271,6 +304,18 @@ Java_in_stewardmd_llama_LlamaNative_generate(
 
         llama_batch nb = llama_batch_get_one(&id, 1);
         if (llama_decode(ctx, nb) != 0) { LOGE("decode failed at %d", produced); break; }
+
+        /* Back off when the phone is hot. Same answer, lower sustained power, heat stops climbing.
+         * Checked every 8 tokens (~2 s at the measured rate) so the atomic read is negligible. */
+        if ((produced & 7) == 0) {
+            if (thermal_should_stop()) {
+                LOGI("stopping at %d tokens: thermal status critical", produced);
+                full += "\n\n_Stopped early: the phone is too hot to keep generating. Let it cool, or use MaiK Cloud._";
+                break;
+            }
+        }
+        const int nap = thermal_yield_us();
+        if (nap > 0) usleep(nap);
     }
 
     LOGI("generate: %d prompt tokens, prefill %lld ms, %d produced%s", ntok, (long long) prefill_ms,

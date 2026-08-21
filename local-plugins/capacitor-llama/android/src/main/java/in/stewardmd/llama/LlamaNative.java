@@ -39,6 +39,15 @@ public final class LlamaNative {
     public static native void initBackend();
 
     /**
+     * Push the OS thermal status down to the decode loop (0 NONE .. 6 SHUTDOWN, PowerManager's own
+     * scale). The native side yields between tokens at SEVERE and stops at CRITICAL.
+     *
+     * Pushed from Java because PowerManager is a Java API; calling back into the JVM from the token
+     * loop would cost more than the throttling saves.
+     */
+    public static native void setThermalStatus(int level);
+
+    /**
      * mmap a GGUF from disk into a model handle (0 on failure). Split models named
      * {@code <name>-00001-of-0000N.gguf} are loaded whole from the FIRST shard's path.
      *

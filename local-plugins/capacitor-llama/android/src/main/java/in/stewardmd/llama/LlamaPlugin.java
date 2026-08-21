@@ -1,5 +1,8 @@
 package in.stewardmd.llama;
 
+import android.os.Build;
+import android.os.PowerManager;
+
 import com.getcapacitor.JSObject;
 import com.getcapacitor.Plugin;
 import com.getcapacitor.PluginCall;
@@ -8,6 +11,8 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 /**
  * On-device LLM inference for MaiK's offline answer engine (Android).
@@ -164,6 +169,39 @@ public class LlamaPlugin extends Plugin {
      * full text. The JS side feeds those events into MaiK's existing typewriter render.
      */
     @PluginMethod
+    /* THERMAL WATCH.
+     *
+     * Measured on a Pixel 9 mid-answer: 542% CPU, 3.4 GB resident, 69 C on the little cores, and the
+     * decode loop had no backoff at all. That is the reported "sucks up battery and overheats my
+     * phone", and it was an ANDROID-only gap - the iOS side already had a governor.
+     *
+     * PowerManager.getCurrentThermalStatus() is the official signal (API 29+). Polled every 2 s while
+     * generating and pushed into the native atomic, so the token loop never calls back into the JVM.
+     * Stopped as soon as generation ends, because a timer that outlives the work is its own drain.
+     */
+    private ScheduledExecutorService thermalWatch;
+
+    private synchronized void startThermalWatch() {
+        if (thermalWatch != null) return;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.Q) return;   // no API to read; leave it at NONE
+        final PowerManager pm = (PowerManager) getContext().getSystemService(android.content.Context.POWER_SERVICE);
+        if (pm == null) return;
+        thermalWatch = Executors.newSingleThreadScheduledExecutor();
+        thermalWatch.scheduleWithFixedDelay(new Runnable() {
+            @Override public void run() {
+                try { LlamaNative.setThermalStatus(pm.getCurrentThermalStatus()); } catch (Throwable ignore) {}
+            }
+        }, 0, 2, TimeUnit.SECONDS);
+    }
+
+    private synchronized void stopThermalWatch() {
+        if (thermalWatch == null) return;
+        try { thermalWatch.shutdownNow(); } catch (Throwable ignore) {}
+        thermalWatch = null;
+        // Clear it, or a stale SEVERE would throttle the NEXT answer on a phone that has since cooled.
+        try { LlamaNative.setThermalStatus(0); } catch (Throwable ignore) {}
+    }
+
     public void generate(PluginCall call) {
         final String system = call.getString("system", "");
         final String user = call.getString("prompt", "");
@@ -175,6 +213,7 @@ public class LlamaPlugin extends Plugin {
 
         worker.execute(() -> {
             long t0 = System.currentTimeMillis();
+            startThermalWatch();
             try {
                 LlamaNative.TokenSink sink = stream
                     ? (piece) -> notifyListeners("llamaToken", new JSObject().put("text", piece))
@@ -188,6 +227,9 @@ public class LlamaPlugin extends Plugin {
                 call.reject(e.detail, e.err.code);
             } catch (Throwable t) {
                 call.reject(String.valueOf(t.getMessage()), LlamaErr.GENERATION_FAILURE.code);
+            } finally {
+                // finally, not after resolve: an exception must not leave the poller running.
+                stopThermalWatch();
             }
         });
     }
