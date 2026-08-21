@@ -429,7 +429,9 @@
       "</div>" +
       (drugs ? '<div class="ot-detail-sec">Regimen (per-administration dose; the dose engine computes patient doses)</div><table class="ot-drugs"><thead><tr><th>Drug</th><th>Dose</th><th>Route / days</th></tr></thead><tbody>' + drugs + "</tbody></table>" : "") +
       (src ? '<div class="ot-detail-src"><b>Evidence source</b> ' + esc(src) + "</div>" : "") +
-      '<div class="ot-detail-actions"><button class="ot-btn primary lg" data-ot-act="select-proto" data-ot-proto="' + esc(ref) + '">' + ms("check_circle") + "Select this protocol</button></div>" +
+      '<div class="ot-detail-actions">' +
+        (G.SMD_PROTOSHEET ? '<button class="ot-btn ghost lg" data-ot-act="proto-sheet" data-ot-proto="' + esc(ref) + '">' + ms("description") + "Protocol sheet</button>" : "") +
+        '<button class="ot-btn primary lg" data-ot-act="select-proto" data-ot-proto="' + esc(ref) + '">' + ms("check_circle") + "Select this protocol</button></div>" +
       "</div>";
   }
 
@@ -711,6 +713,7 @@
     if (act === "toggle-excluded") { st.showExcluded = !st.showExcluded; repaintBody(); return; }
     if (act === "view-proto") { st.openedProtocol = proto; paint(); return; }
     if (act === "close-proto") { st.openedProtocol = null; paint(); return; }
+    if (act === "proto-sheet") { openProtocolSheet(proto); return; }
     if (act === "select-proto") { selectProtocol(proto); return; }
     if (act === "back-pathway") { st.selection = null; st.openedProtocol = null; paint(); return; }
     if (act === "handoff") { doHandoff(); return; }
@@ -780,6 +783,27 @@
     G.SMD_ONCOTREE._lastSelection = st.selection;
     st.openedProtocol = null;
     paint();
+  }
+
+  // Open the printable/assignable Protocol Sheet for a protocol, carrying any patient context from the
+  // chart so the dose engine can compute per-drug totals. Assign routes back through the same handoff event.
+  function openProtocolSheet(ref) {
+    if (!G.SMD_PROTOSHEET) { try { G.toast && G.toast("Protocol sheet unavailable."); } catch (e) {} return; }
+    var p = st.protocols[ref]; if (!p) return;
+    var c = st.ctx || {};
+    var today = "";
+    try { var d = new (G.Date)(); today = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); } catch (e2) {}
+    var patient = {
+      caseNo: c.caseNo || c.patientId || "", name: c.name || "", age: c.age || null, sex: c.sex || "",
+      heightCm: c.heightCm || null, weightKg: c.weightKg || null,
+      diagnosis: c.diagnosis || st.guideline || "", intent: (asArr(p.intentOptions)[0] || ""), consultant: c.consultant || ""
+    };
+    G.SMD_PROTOSHEET.open(p, patient, {
+      today: today,
+      onAssign: function (payload) {
+        try { if (D && D.dispatchEvent) D.dispatchEvent(new CustomEvent("smd-oncotree-select", { detail: { protocolId: ref, template: p, patient: payload.patient, protocolSheet: payload } })); } catch (e3) {}
+      }
+    });
   }
 
   // Hand off to the EXISTING oncology workflow. Emits a CustomEvent the host (opd-emr / onco home) can

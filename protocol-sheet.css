@@ -1,0 +1,103 @@
+/* Chemotherapy Protocol Sheet - mobile overlay + print-to-PDF (A4). Self-contained; light/dark aware. */
+.ps-overlay {
+  --ps-ink: #14202b; --ps-muted: #5a7184; --ps-line: #d7dee3; --ps-bg: #f4f6f5; --ps-card: #ffffff;
+  --ps-primary: #0e6e63; --ps-danger: #c0392b; --ps-x: #b6bfc7;
+  position: fixed; inset: 0; z-index: 70; display: none; background: var(--ps-bg);
+  font-family: 'Inter', -apple-system, 'Segoe UI', Roboto, sans-serif; color: var(--ps-ink);
+}
+body.dark .ps-overlay { --ps-ink: #eceef2; --ps-muted: #9aa0ab; --ps-line: #2a2d34; --ps-bg: #0e0f12; --ps-card: #16181d; --ps-primary: #4fd1c5; }
+.ps-overlay .material-symbols-outlined { font-family: 'Material Symbols Outlined'; line-height: 1; vertical-align: middle; }
+.ps-wrap { display: flex; flex-direction: column; height: 100%; }
+
+/* header */
+.ps-header { flex: 0 0 auto; display: flex; align-items: center; gap: 8px; padding: 10px 12px; padding-top: calc(env(safe-area-inset-top, 0px) + 10px);
+  background: var(--ps-card); border-bottom: 1px solid var(--ps-line); }
+.ps-hbtn { width: 40px; height: 40px; display: grid; place-items: center; border: none; background: transparent; color: var(--ps-ink); cursor: pointer; border-radius: 10px; }
+.ps-hbtn:active { background: color-mix(in srgb, var(--ps-ink) 8%, transparent); }
+.ps-htitle { flex: 1; display: flex; flex-direction: column; line-height: 1.15; min-width: 0; }
+.ps-hkicker { font: 700 10px system-ui; letter-spacing: .08em; text-transform: uppercase; color: var(--ps-primary); }
+.ps-hname { font: 800 16px system-ui; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+.ps-scroll { flex: 1 1 auto; overflow-y: auto; -webkit-overflow-scrolling: touch; padding: 14px; }
+
+/* the sheet */
+.ps-sheet { max-width: 820px; margin: 0 auto; background: var(--ps-card); border: 1px solid var(--ps-line); border-radius: 14px; padding: 20px 20px 22px; box-shadow: 0 1px 3px rgba(0,0,0,.05); }
+.ps-inst { text-align: center; border-bottom: 2px solid var(--ps-ink); padding-bottom: 8px; margin-bottom: 8px; }
+.ps-inst-name { font: 800 18px system-ui; letter-spacing: .01em; }
+.ps-inst-dept { font: 600 12px system-ui; color: var(--ps-muted); margin-top: 2px; }
+.ps-inst-line { font: 500 10.5px system-ui; color: var(--ps-muted); }
+.ps-title { text-align: center; font: 800 15px system-ui; letter-spacing: .04em; text-transform: uppercase; margin: 6px 0 12px; }
+
+.ps-hgrid { display: grid; grid-template-columns: 1fr 1fr; gap: 7px 16px; margin-bottom: 12px; }
+.ps-f { display: flex; align-items: baseline; gap: 6px; font-size: 12.5px; min-width: 0; }
+.ps-f > span { color: var(--ps-muted); font-weight: 600; white-space: nowrap; }
+.ps-f > b { font-weight: 700; overflow: hidden; text-overflow: ellipsis; }
+.ps-f input { flex: 1; min-width: 0; border: none; border-bottom: 1px solid var(--ps-line); background: transparent; color: var(--ps-ink); font: 700 12.5px system-ui; padding: 2px 0; outline: none; }
+.ps-f input:focus { border-bottom-color: var(--ps-primary); }
+
+.ps-legend { font-size: 10.5px; color: var(--ps-muted); margin: 6px 0 6px; }
+.ps-warns { display: flex; gap: 8px; align-items: flex-start; font-size: 11.5px; color: #92400e; background: #fef3c7; border-radius: 9px; padding: 8px 10px; margin: 8px 0; }
+body.dark .ps-warns { color: #fbbf24; background: #3a2e05; }
+.ps-warns .material-symbols-outlined { font-size: 16px; flex: 0 0 auto; }
+
+/* drug table */
+.ps-tablewrap { overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--ps-line); border-radius: 10px; }
+.ps-table { width: 100%; border-collapse: collapse; font-size: 12px; min-width: 520px; }
+.ps-table th { text-align: left; font: 700 10px system-ui; text-transform: uppercase; letter-spacing: .03em; color: var(--ps-muted); padding: 8px 9px; border-bottom: 1.5px solid var(--ps-line); background: color-mix(in srgb, var(--ps-primary) 5%, var(--ps-card)); white-space: nowrap; }
+.ps-table td { padding: 8px 9px; border-bottom: 1px solid var(--ps-line); vertical-align: top; }
+.ps-table tr:last-child td { border-bottom: none; }
+.ps-dname { font-weight: 700; white-space: nowrap; }
+.ps-cap { font: 700 8.5px system-ui; text-transform: uppercase; color: #fff; background: var(--ps-danger); border-radius: 4px; padding: 1px 4px; vertical-align: middle; }
+.ps-ddesc b { font-weight: 800; color: var(--ps-primary); white-space: nowrap; }
+.ps-permetre { display: block; color: var(--ps-muted); font-size: 10.5px; margin-top: 1px; }
+.ps-cyc { text-align: center; font: 600 11px system-ui; white-space: nowrap; }
+.ps-cyc.x { color: var(--ps-x); font-weight: 700; }
+.ps-vh { text-align: center; }
+.ps-verify { text-align: center; }
+.ps-chk { display: inline-flex; cursor: pointer; }
+.ps-chk input { position: absolute; opacity: 0; width: 0; height: 0; }
+.ps-chk-box { width: 22px; height: 22px; border: 1.6px solid var(--ps-line); border-radius: 6px; display: grid; place-items: center; color: transparent; transition: .12s; }
+.ps-chk-box .material-symbols-outlined { font-size: 16px; }
+.ps-chk input:checked + .ps-chk-box { background: var(--ps-primary); border-color: var(--ps-primary); color: #fff; }
+
+/* blocks */
+.ps-block { margin-top: 14px; }
+.ps-block-h { font: 800 10.5px system-ui; text-transform: uppercase; letter-spacing: .05em; color: var(--ps-muted); margin-bottom: 5px; }
+.ps-block ul { margin: 0; padding-left: 18px; }
+.ps-block li, .ps-block p { font-size: 12px; line-height: 1.5; margin: 2px 0; }
+
+/* signature */
+.ps-sig-row { display: flex; gap: 16px; margin-top: 18px; flex-wrap: wrap; align-items: flex-end; }
+.ps-sig-pad { flex: 1 1 260px; }
+.ps-sig-pad canvas { width: 100%; height: 120px; border: 1px dashed var(--ps-line); border-radius: 10px; background: color-mix(in srgb, var(--ps-primary) 3%, var(--ps-card)); touch-action: none; }
+.ps-sig-actions { margin-top: 4px; }
+.ps-linkbtn { border: none; background: none; color: var(--ps-primary); font: 600 11.5px system-ui; cursor: pointer; display: inline-flex; align-items: center; gap: 4px; padding: 2px 0; }
+.ps-linkbtn .material-symbols-outlined { font-size: 15px; }
+.ps-sig-label { font: 600 10.5px system-ui; color: var(--ps-muted); margin-top: 2px; }
+.ps-sig-meta { flex: 0 0 auto; display: flex; flex-direction: column; gap: 6px; min-width: 150px; }
+.ps-foot { margin-top: 16px; padding-top: 10px; border-top: 1px solid var(--ps-line); font-size: 10px; color: var(--ps-muted); line-height: 1.4; }
+
+/* action bar */
+.ps-actionbar { flex: 0 0 auto; display: flex; gap: 10px; padding: 10px 14px; padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 10px); background: var(--ps-card); border-top: 1px solid var(--ps-line); }
+.ps-btn { flex: 1; min-height: 48px; border: none; border-radius: 13px; font: 700 15px system-ui; display: inline-flex; align-items: center; justify-content: center; gap: 8px; cursor: pointer; }
+.ps-btn.ghost { background: color-mix(in srgb, var(--ps-primary) 8%, var(--ps-card)); color: var(--ps-primary); border: 1px solid color-mix(in srgb, var(--ps-primary) 30%, transparent); }
+.ps-btn.primary { background: var(--ps-primary); color: #fff; }
+.ps-btn:active { transform: scale(.99); }
+.ps-loading { display: grid; place-items: center; height: 100%; color: var(--ps-muted); gap: 8px; }
+.ps-overlay * { box-sizing: border-box; }
+
+/* ---------- PRINT (Save as PDF) : isolate the sheet, format A4 ---------- */
+@media print {
+  body.ps-open > *:not(.ps-overlay) { display: none !important; }
+  .ps-overlay { position: static !important; display: block !important; background: #fff !important; --ps-card: #fff; --ps-ink: #000; --ps-muted: #333; --ps-line: #999; }
+  .ps-header, .ps-actionbar, .ps-sig-actions, .ps-vh, .ps-verify .ps-chk input { display: none !important; }
+  .ps-wrap { height: auto !important; }
+  .ps-scroll { overflow: visible !important; padding: 0 !important; }
+  .ps-sheet { border: none !important; box-shadow: none !important; border-radius: 0 !important; max-width: 100% !important; padding: 8mm 6mm !important; }
+  .ps-tablewrap { overflow: visible !important; border: 1px solid #000 !important; }
+  .ps-table { min-width: 0 !important; }
+  .ps-table th, .ps-table td { border: 1px solid #666 !important; }
+  .ps-chk-box { border-color: #000 !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  .ps-sig-pad canvas { border: 1px solid #000 !important; }
+  @page { size: A4; margin: 8mm; }
+}
