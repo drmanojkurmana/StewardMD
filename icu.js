@@ -2277,8 +2277,8 @@
     var sel = d.analytes || [], q = (d.q || "").trim();
     var total = 0; TREND_GROUPS.forEach(function (grp) { grp.keys.forEach(function (k) { if (TREND_INTERP[k]) total++; }); });
     var ctrl = '<div class="icu-lw-allrow" style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin-bottom:8px">' +
-      '<button class="icu-lw-grpall' + (total && sel.length >= total ? " on" : "") + '" data-icu-act="lwall">' + (total && sel.length >= total ? ico("check","✓") + " " : "") + 'Select all</button>' +
-      '<button class="icu-lw-grpall" data-icu-act="lwclear">Clear</button>' +
+      '<button class="icu-lw-seg' + (total && sel.length >= total ? " on" : "") + '" data-icu-act="lwall">' + (total && sel.length >= total ? ico("check","✓") + " " : "") + 'Select all</button>' +
+      '<button class="icu-lw-seg" data-icu-act="lwclear">Clear</button>' +
       '<span style="margin-left:auto;font:600 11.5px var(--font,system-ui);color:var(--muted,#94a3b8)">' + sel.length + ' / ' + total + ' selected</span>' +
       '</div>';
     var groups = TREND_GROUPS.map(function (grp) {
