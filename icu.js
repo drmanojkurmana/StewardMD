@@ -1234,6 +1234,10 @@
       '#icuRoot.icu-v2 .icu-v2-fchip.on{background:var(--primary);border-color:var(--primary);color:#fff}' +
       // patient card
       '#icuRoot.icu-v2 .icu-v2-card{display:block;width:100%;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:5px solid var(--primary);border-radius:16px;padding:0;cursor:pointer;overflow:hidden;box-shadow:var(--sh);margin-bottom:10px}' +
+      // swipe-to-remove row: the red action sits BEHIND the (opaque) card and is revealed by dragging left
+      '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
+      '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:10px;width:104px;border:none;border-radius:16px;background:var(--danger);color:#fff;font:700 12px var(--font);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;cursor:pointer;padding-left:14px}' +
       '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}' +
       '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 15px 11px}' +
       '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:10px}' +
@@ -3682,6 +3686,13 @@
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + shead("close", "Switch unit", sub) +
       '<div style="padding:14px 16px">' + sections + '</div></div>';
   }
+  /* WhatsApp-style swipe-to-remove: drag a board card left to reveal a red action. The swipe itself
+   * NEVER deletes — the action opens a chooser (Discharge · Clear patient · Cancel). Removing a
+   * patient is irreversible, so the confirmation stays mandatory. Gesture: swStart/swMove/swEnd. */
+  function v2SwipeRow(id, cardHTML) {
+    return '<div class="icu-v2-swipe"><button class="icu-v2-swipe-act" data-icu-act="ptswipe:' + encodeURIComponent(id) + '" tabindex="-1" aria-label="Discharge or remove this patient">' +
+      ico("trash", "🗑") + '<span>Remove</span></button>' + cardHTML + '</div>';
+  }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
     var list = v2BoardList();
@@ -3724,7 +3735,7 @@
       var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
       var vits = v2CardVitals(p.snap);
       var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
-      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+      return v2SwipeRow(p.id, '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
         '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
@@ -3733,7 +3744,7 @@
           return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
         }).join("") + '</div></div>' +
         '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
-        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>';
+        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>');
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
     return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + attnHTML + filters + cards + foot + '</div></div>';
@@ -4343,7 +4354,7 @@
       var footAv = esc(v2Initials(lu && lu.byName ? lu.byName : v2AccountName()));
       var footTxt = lu && lu.text ? esc(lu.text) : (p.reviewed ? "Reviewed" : "Updated");
       var footAgo = esc(fmtAgo((lu && lu.at) || p.savedAt) || fmtWhen((lu && lu.at) || p.savedAt));
-      return '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+      return v2SwipeRow(p.id, '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
         '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
         '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
         '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
@@ -4353,7 +4364,7 @@
         }).join("") + '</div></div>' +
         '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + footAv + '</span><span class="icu-v2-foot-txt">' + footTxt + '</span>' +
         (tOpen > 0 ? '<span class="icu-v2-foot-tasks" aria-label="' + tOpen + ' open task' + (tOpen > 1 ? 's' : '') + '">' + ico("rounds", "🗒") + ' ' + tOpen + ' task' + (tOpen > 1 ? 's' : '') + '</span>' : '') +
-        '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>';
+        '<span class="icu-v2-foot-ago">' + (p.reviewed ? "" : '<span class="icu-v2-unrev">Not reviewed</span> ') + footAgo + '</span></div></button>');
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
     return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + errNote + grpPushNoteHTML() + attnHTML + filters + cards + foot + '</div></div>';
@@ -7416,8 +7427,104 @@
     modalEl.classList.add("on");
   }
 
+  /* -------------------------------------------- board swipe-to-remove gesture
+   * Drag a patient card left → reveal the red Remove action (WhatsApp chat row). Vertical drags
+   * still scroll the board (axis lock). The gesture only reveals; deletion always goes through
+   * v2SwipeChooser. Delegated on #icuRoot, so re-renders need no re-binding. */
+  var SW_W = 104;                                    // matches .icu-v2-swipe-act width
+  var _swEl = null, _swOpen = null, _swX = 0, _swY = 0, _swBase = 0, _swDx = 0, _swLock = "", _swTapKill = false;
+  function swSet(el, x, anim) { if (!el) return; el.style.transition = anim ? "transform .2s ease" : "none"; el.style.transform = x ? "translateX(" + x + "px)" : ""; }
+  function swClose() {
+    if (_swOpen && document.body.contains(_swOpen)) swSet(_swOpen, 0, true);
+    _swOpen = null;
+  }
+  function swStart(e) {
+    if (!e.touches || e.touches.length !== 1 || !e.target.closest) return;
+    var c = e.target.closest(".icu-v2-swipe > .icu-v2-card");
+    if (_swOpen && _swOpen !== c) swClose();
+    if (!c) return;
+    _swEl = c; _swX = e.touches[0].clientX; _swY = e.touches[0].clientY;
+    _swBase = (_swOpen === c) ? -SW_W : 0; _swDx = 0; _swLock = "";
+  }
+  function swMove(e) {
+    if (!_swEl || !e.touches || !e.touches.length) return;
+    var dx = e.touches[0].clientX - _swX, dy = e.touches[0].clientY - _swY;
+    if (!_swLock) {
+      if (Math.abs(dy) > 10 && Math.abs(dy) >= Math.abs(dx)) { _swEl = null; return; }   // vertical scroll wins
+      if (Math.abs(dx) > 10) _swLock = "x"; else return;
+    }
+    _swDx = dx;
+    swSet(_swEl, Math.max(-SW_W - 20, Math.min(0, _swBase + dx)), false);
+  }
+  function swEnd() {
+    var el = _swEl; _swEl = null;
+    if (!el || _swLock !== "x") return;
+    _swTapKill = true;                               // the click this gesture generates is not a tap
+    setTimeout(function () { _swTapKill = false; }, 400);   // ...but never swallow a later, real tap
+    if (_swBase + _swDx < -SW_W / 2) { swSet(el, -SW_W, true); _swOpen = el; }
+    else { swSet(el, 0, true); if (_swOpen === el) _swOpen = null; }
+  }
+  // Swipe → Remove → chooser. Never deletes on its own: Discharge (write a summary first),
+  // Clear patient (remove now), or Cancel.
+  function v2SwipeChooser(id) {
+    swClose(); ensureModal();
+    var list = grpActive() ? grpEnrichedList() : v2BoardList();
+    var p = list.filter(function (x) { return x.id === id; })[0] || {};
+    var nm = p.name || "this patient";
+    var canDel = true, note = "";
+    if (grpActive()) {
+      var api = groupsApi();
+      canDel = !!(api && api.removePatient && api.canInstruct && api.canInstruct(_grp && _grp.myRole));
+      if (!canDel) note = '<p class="icu-doc-sub" style="margin:0 0 10px;color:var(--warn)">Only instructing roles can remove a patient from a shared unit.</p>';
+    }
+    var eid = encodeURIComponent(id);
+    modalEl.innerHTML = '<div class="icu-sheet" role="dialog" aria-modal="true" aria-label="Discharge or remove patient"><h3>' + ico("trash", "🗑") + ' ' + esc(nm) + '</h3>' +
+      '<p class="icu-doc-sub" style="margin:0 0 14px">' + (p.bed ? "Bed " + esc(p.bed) + " · " : "") + 'Write a discharge summary first, or clear this patient from the board. Clearing cannot be undone.</p>' + note +
+      '<button class="icu-btn" data-icu-act="ptswdis:' + eid + '">' + ico("rounds", "📝") + ' Discharge — write summary</button>' +
+      (canDel ? '<button class="icu-btn ghost" data-icu-act="ptswrm:' + eid + '" style="margin-top:8px;color:var(--danger);border-color:var(--danger)">' + ico("trash", "🗑") + ' Clear patient from board</button>' : "") +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Cancel</button></div>';
+    modalEl.classList.add("on");
+  }
+  // Discharge path: open the patient on its Discharge tab (Discharge Creator + remove card). Loading
+  // a case can be async (cloud pull), so we route by tab rather than popping the Creator on stale data.
+  function v2SwipeDischarge(id) {
+    closeForm();
+    _screen = "patient"; _ws = "documents"; _active = "discharge"; _wsLast.documents = "discharge";
+    if (grpActive()) grpOpenPatient(id);
+    else if (id !== ((_raw.patient && _raw.patient._id) || "cur")) loadPatient(id);
+    _paintTop = true; paint();
+  }
+  // Clear path: the chooser WAS the confirmation, so this removes immediately (solo: roster + cloud;
+  // group: the shared patient doc, role-gated in icu-collab's rules too).
+  function v2SwipeRemove(id) {
+    closeForm();
+    if (grpActive()) {
+      var api = groupsApi();
+      if (!api || !api.removePatient) return;
+      if (!(api.canInstruct && api.canInstruct(_grp && _grp.myRole))) { if (window.toast) toast("Only instructing roles can remove a patient"); return; }
+      api.removePatient(_grp.id, id).then(function () {
+        if (window.toast) toast("Patient removed from unit");
+      }, function (e) { _grpErr = grpErrText(e); if (window.toast) toast("Couldn’t remove — instructing roles only"); if (ICU.isOpen()) paint(); });
+      if (id === _grpPtId) grpTeardownPatient();
+    } else {
+      rosterRemove(id);
+      if (id === ((_raw.patient && _raw.patient._id) || "cur")) {
+        ICU.reset(); _lytesExp = {}; _wsLast = {};
+      }
+      if (window.toast) toast("Patient removed");
+    }
+    _screen = "board"; _active = "overview"; _ws = "overview"; _paintTop = true; paint();
+  }
+
   /* ------------------------------------------------------ event delegation */
   function onClick(e) {
+    // A finished swipe fires a click on release — swallow it, and let a tap on an OPEN row close it.
+    if (_swTapKill) {
+      _swTapKill = false;
+      // Only the swiped CARD's click is bogus — a quick tap on the revealed action must still land.
+      if (e.target.closest && e.target.closest(".icu-v2-swipe > .icu-v2-card")) { e.preventDefault(); e.stopPropagation(); return; }
+    }
+    if (_swOpen && e.target.closest && e.target.closest(".icu-v2-card") === _swOpen) { e.preventDefault(); e.stopPropagation(); swClose(); return; }
     var t = e.target.closest ? e.target.closest("[data-icu-act]") : null; if (!t) return;
     var act = t.getAttribute("data-icu-act"); if (!act) return;
     e.preventDefault(); e.stopPropagation();
@@ -7438,6 +7545,10 @@
       case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
+      // swipe-to-remove on a board card: reveal → chooser → discharge / clear / cancel
+      case "ptswipe": v2SwipeChooser(decodeURIComponent(arg)); break;
+      case "ptswdis": v2SwipeDischarge(decodeURIComponent(arg)); break;
+      case "ptswrm": v2SwipeRemove(decodeURIComponent(arg)); break;
       // ---- Unit picker: hospital → category (ICU|Ward) → unit type ----
       case "unitpick": _screen = "units"; _pickStep = "units"; _pickCat = null; _paintTop = true; paint(); break;
       case "unithosp": _unit.hospital = decodeURIComponent(arg); unitSavePref(); _pickStep = "units"; _paintTop = true; paint(); break;
@@ -7889,6 +8000,10 @@
         rootEl = document.createElement("div"); rootEl.id = "icuRoot";
         document.body.appendChild(rootEl);
         rootEl.addEventListener("click", onClick);
+        rootEl.addEventListener("touchstart", swStart, { passive: true });
+        rootEl.addEventListener("touchmove", swMove, { passive: true });
+        rootEl.addEventListener("touchend", swEnd);
+        rootEl.addEventListener("touchcancel", swEnd);
         // Phase 4: reflect connectivity promptly (offline strip + sync indicator) — repaint only
         // when a shared unit is open. Attached once; a no-op while the dashboard is closed.
         try {
