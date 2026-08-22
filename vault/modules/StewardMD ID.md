@@ -42,6 +42,15 @@ using a feature.
 - The ID card (`.icu-v2-idcard`) renders on BOTH ICU Team screens, solo and shared — a resident needs
   to read their ID out *before* they are in any unit.
 
+## Where a doctor sees it
+The **profile page** — `openAccount()` in `home.js`, exported as `window.SMD_openProfile` so every
+entry point opens the same sheet: the sidebar identity block (`#smdSbProfile` — your own photo/name),
+More → Profile, and Settings → Account → "Profile & StewardMD ID" (`sidebar-redesign.js` ACT
+`profile`). The page shows identity → StewardMD ID (copyable) → professional details (reg no,
+hospital/college, city, phone, edited in place) → account → danger zone. Also on both ICU Team
+screens. Note "Account & Verification" (verify.js) is a DIFFERENT sheet — the registration
+certificate flow — and is reached from the same Settings section.
+
 ## History
 Built as Phase 1 of the 4-phase identity/entitlement initiative (PR #545, all phases merged
 flag-OFF). Until 2026-08-22 the mint was reachable only through ICU's group-mode subscription, so an

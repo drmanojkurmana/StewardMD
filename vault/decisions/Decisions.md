@@ -161,3 +161,21 @@ public roster — the same exposure ICU users already had, now for all users.
 sign-out → sign-in as someone else happens inside one page lifetime, so account B would have been
 handed account A's ID — and it would have travelled into referrals, invites and the directory. Both
 caches are now keyed on uid and `my(uid)` refuses a mismatch. See [[StewardMD ID]].
+
+## 2026-08-22 — One profile page, and it never renders a shorter version of you
+The account sheet had three problems: the StewardMD ID was absent (the only place to read your own
+ID was ICU → Team), the professional details (reg no · hospital/college · city · phone) were
+appended ONLY inside a successful Firestore `.then()`, and edits went through `window.prompt()`.
+
+The second one is the real bug: when the read was slow, the user signed out, or `SMD_DB` wasn't up
+yet, the rows simply never appeared — so the page looked like a profile with nothing filled in
+rather than a profile that failed to load. **A UI that degrades by omission lies about the data.**
+Every row now renders in every state (loading / loaded / empty / unreadable), with an explicit
+"Couldn't load your details · Retry".
+
+Also: `openAccount()` is exported as `window.SMD_openProfile` so all entry points open ONE page —
+the sidebar identity block (tapping your own photo, which was previously inert), More → Profile, and
+a new Settings → Account → "Profile & StewardMD ID" row. `window.prompt` is replaced by in-place row
+editing (hospital keeps the searchable directory picker). Test: `test/run-profile-ui.mjs`, which
+drives the real sheet and asserts the failure state still renders all four rows. See
+[[StewardMD ID]].
