@@ -246,26 +246,45 @@
   // Adult-derived / adult-validated scores — flagged when the patient is a child (R1 M3): qSOFA, SOFA,
   // APACHE II, NEWS2 and the liver scores are not validated in paediatrics.
   var ADULT_ONLY = { qsofa: 1, sofa: 1, apache2: 1, news2: 1, meld: 1, childpugh: 1 };
+  function computeDef(def, state, byId, peds) {
+    var c = byId[def.id]; if (!c) return null;
+    var v = def.adapt(state);
+    if (v && v.__missing) return { id: def.id, label: def.label, missing: v.__missing };
+    var r; try { r = c.compute(v); } catch (e) { return null; }
+    if (!r || r.err) return { id: def.id, label: def.label, missing: ["valid inputs"] };
+    var pedCaveat = (peds && ADULT_ONLY[def.id]);
+    var interp = (pedCaveat ? "Adult score, not validated in children (<16y) - interpret with caution. " : "") + (r.i || "") + (def.note ? " " + def.note : "");
+    return { id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: interp, peds: !!pedCaveat, used: Object.keys(v), inputs: v };
+  }
+  function pedsOf(state) {
+    var age = state.patient && state.patient.age;
+    return (age != null && age !== "" && !isNaN(+age) && +age < 16);
+  }
   function compute(state, medcalc) {
     medcalc = medcalc || window.MEDCALC;
     var byId = {}; ((medcalc && medcalc._calcs) || []).forEach(function (c) { byId[c.id] = c; });
     var dx = (state.patient && state.patient.diagnosis) || "";
-    var age = state.patient && state.patient.age;
-    var peds = (age != null && age !== "" && !isNaN(+age) && +age < 16);
+    var peds = pedsOf(state);
     var out = [];
     DEFS.forEach(function (def) {
       if (!def.always) { if (!def.dx || !def.dx.test(dx)) return; }
-      var c = byId[def.id]; if (!c) return;
-      var v = def.adapt(state);
-      if (v && v.__missing) { out.push({ id: def.id, label: def.label, missing: v.__missing }); return; }
-      var r; try { r = c.compute(v); } catch (e) { return; }
-      if (!r || r.err) { out.push({ id: def.id, label: def.label, missing: ["valid inputs"] }); return; }
-      var pedCaveat = (peds && ADULT_ONLY[def.id]);
-      var interp = (pedCaveat ? "Adult score, not validated in children (<16y) - interpret with caution. " : "") + (r.i || "") + (def.note ? " " + def.note : "");
-      out.push({ id: def.id, label: def.label, value: r.v, unit: r.u || "", interp: interp, peds: !!pedCaveat, used: Object.keys(v), inputs: v });
+      var r = computeDef(def, state, byId, peds);
+      if (r) out.push(r);
     });
     return out;
   }
+  // BUG B3 (2026-08-22 ward-round audit): "the app already computes NEWS2 and qSOFA... the board
+  // never asks." Full compute() walks every DEF (SOFA, qSOFA, anion gap, Child-Pugh, ...) - too
+  // heavy to call per card on a 10-40 patient board render. computeOne() reuses the SAME DEFS/adapt/
+  // MEDCALC pipeline for a single score, so the board's number is guaranteed identical to the
+  // Monitoring tab's, never a second hand-rolled copy that can quietly drift from it.
+  function computeOne(state, id, medcalc) {
+    medcalc = medcalc || window.MEDCALC;
+    var byId = {}; ((medcalc && medcalc._calcs) || []).forEach(function (c) { byId[c.id] = c; });
+    var def = null; for (var i = 0; i < DEFS.length; i++) { if (DEFS[i].id === id) { def = DEFS[i]; break; } }
+    if (!def) return null;
+    return computeDef(def, state, byId, pedsOf(state));
+  }
 
-  window.ICU_AUTOSCORES = { DEFS: DEFS, compute: compute };
+  window.ICU_AUTOSCORES = { DEFS: DEFS, compute: compute, computeOne: computeOne };
 })();

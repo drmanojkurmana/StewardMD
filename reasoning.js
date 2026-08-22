@@ -1198,7 +1198,7 @@
     // --- progressive consultant workflow ---
     var html = "";
     // reversibility toggle: flip the unified "v2" reasoning on/off instantly (no redeploy)
-    html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button id="dxV2Tog" style="font:700 11px var(--sans,sans-serif);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:4px 11px;cursor:pointer;background:' + (reasonV2() ? "var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)" : "var(--panel,#fff);color:var(--slate-soft,#5a7184)") + '" title="Toggle the new unified reasoning experience on/off">⚙ Reasoning v2 · ' + (reasonV2() ? "ON" : "OFF") + '</button></div>';
+    html += '<div style="display:flex;justify-content:flex-end;margin-bottom:6px"><button id="dxV2Tog" style="font:700 11px var(--sans,sans-serif);border:1px solid var(--line,#d7dee3);border-radius:999px;padding:4px 11px;cursor:pointer;background:' + (reasonV2() ? "var(--teal-soft,#e3f1ee);color:var(--teal,#0e6e63)" : "var(--panel,#fff);color:var(--slate-soft,#5a7184)") + '" title="Toggle the new unified reasoning experience on/off">Reasoning v2 · ' + (reasonV2() ? "ON" : "OFF") + '</button></div>';
     // Step 1 · general findings
     var gen = GENERAL.filter(function (k) { return !S.f[k] && LABEL[k]; });
     html += '<div class="dx-step"><div class="dx-step-h"><span class="dx-step-n">1</span> General findings</div><div class="dx-chips">' +
@@ -2345,7 +2345,7 @@
     var comp = {}; list.forEach(function (x) { if (x.type === "region") comp[x.region] = x; });
     var icmr = list.filter(function (x) { return x.id === "ICMR"; })[0];
     var h = '<optgroup label="National">';
-    if (icmr) h += opt("ICMR", icmr.name, " ⭐");
+    if (icmr) h += opt("ICMR", icmr.name);
     studiesOf("national").forEach(function (s) { h += opt(s.id, "↳ " + s.name); });
     h += '</optgroup>';
     [["south", "South India"], ["north", "North India"], ["east", "East & NE India"], ["west", "West & Central India"]].forEach(function (rr) {
