@@ -1,10 +1,12 @@
-/* Lab Watch (Phase 1, in-app) + Discharge Creator — 17 Lab Watch cases + Discharge checks.
+/* Lab Watch (Phase 1, in-app) + Discharge/Lab-Watch integration — 17 Lab Watch cases + 1 cross-
+ * feature Discharge check.
  *
  * Lab Watch proves: flag + kill-switch; setup sheet + analyte search; start/scope; deterministic
  * detection by sensitivity mode (critical/meaningful/every); dedup by reading timestamp; seed so a
  * pre-existing backlog never alerts; badge; tap→Trends highlight; pause/resume; expiry; stop;
- * device-delivery does not crash; Ward-Sync entry point. Discharge: draft from recorded data +
- * bracketed placeholders; editable sheet; "until discharge" watch ends on discharge. Deterministic
+ * device-delivery does not crash; Ward-Sync entry point. The one Discharge case here is scoped to
+ * the Lab Watch integration point (an "until discharge" watch ends when a discharge summary is
+ * created) - the Discharge Creator itself is covered by test/run-icu-discharge.mjs. Deterministic
  * (no AI). USAGE: node test/run-icu-labwatch.mjs
  */
 import { spawn } from "node:child_process";
@@ -50,6 +52,11 @@ try {
 
   // helper to push a lab reading at a given ISO date
   const feed = (test, result, date) => `ICU.ingestWardHistory({ source:'Ward Sync', labs:[{ test:'${test}', result:${result}, units:'', date:'${date}' }] });`;
+  // The Trends tab only shows the last 24h by default (icu.js `_trendWin`) - a FIXED calendar
+  // date ages out of that window the moment "now" moves past it, silently breaking #12 every
+  // time this file is run more than a day after it was written. Compute dates relative to the
+  // actual run time instead, so the test never goes stale on its own.
+  const recentTs = (hoursAgo) => { const d = new Date(Date.now() - hoursAgo * 3600000); const p = (n) => String(n).padStart(2, "0"); return `${d.getFullYear()}-${p(d.getMonth() + 1)}-${p(d.getDate())} ${p(d.getHours())}:${p(d.getMinutes())}`; };
 
   // ===== #1 flag + kill-switch =====
   ok(await ev(`return ICU.labWatchOn() === true;`) === true, "#1 Lab Watch ON by default (smd_lab_watch)");
@@ -147,7 +154,7 @@ try {
 
   // ===== #12 tap→Trends highlights the analyte =====
   const c12 = await J(`ICU.reset(); ICU.ingestPatient({name:"HL",age:60,sex:"M"});
-    ${feed("Potassium", 4.0, "2026-07-08 08:00")} ${feed("Potassium", 6.9, "2026-07-08 14:00")}
+    ${feed("Potassium", 4.0, recentTs(3))} ${feed("Potassium", 6.9, recentTs(1))}
     ICU.open(); var root=document.getElementById('icuRoot');
     var b=document.createElement('button'); b.setAttribute('data-icu-act','lwopen:k'); root.appendChild(b); b.click(); b.remove();
     var seg=root.querySelector('.icu-seg.on'); var hi=root.querySelector('.icu-tr-card.lw-hi');
@@ -155,16 +162,12 @@ try {
   ok(c12.onTrends === "tab:trends" && c12.highlighted, "#12 tapping a Lab Watch result opens Trends with the analyte highlighted");
 
   // ===== Discharge Creator =====
-  const cd1 = await J(`ICU.reset(); ICU.ingestPatient({name:"DISCH",age:66,sex:"M",diagnosis:"Septic shock",complaints:"Fever, breathlessness"});
-    ICU.ingestMonitor({ hr:110, sbp:95, dbp:60, spo2:94 }); ICU.ingestLabs({ k:5.1, creat:180, hb:9.2 });
-    var d=ICU.buildDischarge();
-    return JSON.stringify({ hasHdr:/ICU DISCHARGE SUMMARY/.test(d), hasDx:/Septic shock/.test(d), hasCourse:/HOSPITAL COURSE/.test(d), hasStatus:/STATUS AT DISCHARGE/.test(d), hasMeds:/DISCHARGE MEDICATIONS: \\[ complete \\]/.test(d), hasFollow:/FOLLOW-UP/.test(d) });`);
-  ok(cd1.hasHdr && cd1.hasDx && cd1.hasCourse && cd1.hasStatus && cd1.hasMeds && cd1.hasFollow, "Discharge — draft carries diagnosis + course + status + bracketed placeholders to complete");
-  const cd2 = await J(`ICU.open(); var root=document.getElementById('icuRoot');
-    var b=document.createElement('button'); b.setAttribute('data-icu-act','discharge'); root.appendChild(b); b.click(); b.remove();
-    var m=document.getElementById('icuModal'); var ta=m.querySelector('#icuDischargeText');
-    return JSON.stringify({ editable: !!ta, draftVal: ta ? /ICU DISCHARGE SUMMARY/.test(ta.value) : false });`);
-  ok(cd2.editable && cd2.draftVal, "Discharge — the Discharge Creator opens an editable draft (was a stub before)");
+  // cd1/cd2 used to assert the ORIGINAL stub Discharge Creator's plain-textarea output (a single
+  // #icuDischargeText field, "STATUS AT DISCHARGE", "DISCHARGE MEDICATIONS: [ complete ]" on one
+  // line). The Discharge Creator has since been fully rebuilt into a structured per-section form
+  // (renamed "CONDITION AT DISCHARGE", multi-line meds placeholder, MaiK-drafted narrative) -
+  // test/run-icu-discharge.mjs now covers that real UI end to end (21 cases). Removed the two
+  // dead-API checks here rather than re-patch them to duplicate that file's job.
   const cd3 = await J(`ICU.reset(); ICU.ingestPatient({name:"DD",age:60,sex:"M"});
     ICU._lwStartWith({ analytes:['k'], mode:'every', dur:'discharge' });
     var before = ICU._lwGet()!==null;
