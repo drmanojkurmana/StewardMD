@@ -25,6 +25,14 @@
   /* ---------------------------------------------------------------- utils */
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function nowTs() { return Date.now(); }
+  // BUG B1 (2026-08-22 ward-round audit): every patient id used to be JUST nowTs() (or a fallback
+  // to it), so two patients admitted in the same millisecond collided into ONE record — reproduced:
+  // admit Mrs Lakshmi (septic shock) then Mr Rao (post-op) in the same tick, board showed only Mr
+  // Rao. Local roster upsert-by-id AND the Firestore doc key are both this id, so the loss is
+  // silent on both the device and the cloud copy. A random suffix makes two calls in the same
+  // millisecond distinguishable; used only as a FALLBACK where no stable id (a ward patientId)
+  // already exists, so a re-sync of the SAME ward patient still resolves to the SAME record.
+  function uniqSuffix() { return nowTs() + "_" + Math.random().toString(36).slice(2, 8); }
   function num(v) { if (v === "" || v == null) return null; var n = +v; return isFinite(n) ? n : null; }
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function pick(o, keys) { var r = {}; keys.forEach(function (k) { if (o[k] != null && o[k] !== "") r[k] = o[k]; }); return r; }
@@ -799,15 +807,20 @@
     // (needed for the EMR workspace + Initial Assessment write-back). Travels with the shared unit too.
     if (bundle && bundle.episodeId) { st.wardSync = st.wardSync || {}; st.wardSync.episodeId = String(bundle.episodeId); }
     if (grpActive() && _grp && _grp.id) {
-      var api = groupsApi(), pid = "w_" + (wardId || nowTs());
+      var api = groupsApi(), pid = "w_" + (wardId || uniqSuffix());
       st.patient._id = pid;
       if (api && api.upsertPatient) return api.upsertPatient(_grp.id, pid, st, "Added from Ward Sync");
       return Promise.reject(new Error("group-api-unavailable"));
     }
-    var id = "pw_" + (wardId || nowTs());
+    var id = "pw_" + (wardId || uniqSuffix());
     st.patient._id = id;
     var entry = { id: id, name: st.patient.name || "Unnamed", dx: st.patient.diagnosis || "", bed: st.patient.bed || "", mrn: st.patient.mrn || "", savedAt: nowTs(), state: st };
     var r = loadRoster(), found = false, i;
+    // BUG B5: this path supports ticking several ward patients in a row (a bulk import), so unlike
+    // the manual Save button a per-row confirm() would be the wrong interruption — surface the
+    // clash as a toast instead and let the import proceed; the clinician still sees it happened.
+    var clash = bedHolder(r, String(entry.bed || "").trim(), id);
+    if (clash && window.toast) toast("Bed " + entry.bed + " is now shared with " + (clash.name || "another patient"));
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
     if (!found) r.push(entry);
     saveRoster(capTen(r));
@@ -4324,7 +4337,7 @@
   function grpAdmit() {
     if (!grpActive()) return;
     grpTeardownPatient();
-    var id = "p" + nowTs();
+    var id = "p" + uniqSuffix();
     _grpPtId = id; _grpPtVM = { patient: null, timeline: [], tasks: [] }; _grpPresence = [];
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
@@ -7485,8 +7498,24 @@
   function cloudGet(id) { return cloudFetch("/" + encodeURIComponent(id)).then(function (r) { return r.json(); }).catch(function () { return null; }); }
   function cloudDel(id) { return cloudFetch("/" + encodeURIComponent(id), { method: "DELETE" }).then(function (r) { return r.json(); }).catch(function () { return null; }); }
 
+  // BUG B5 (2026-08-22 ward-round audit): two live patients could hold the same bed with nothing
+  // said. Bed number is how a nurse names a patient at 3am ("bed 7 needs review") — two patients in
+  // bed 7 makes every verbal instruction ambiguous. Not a hard block (a bed swap mid-transfer is
+  // real and must stay possible) but never silent: confirm, naming who else is already there.
+  function bedHolder(roster, bed, excludeId) {
+    if (!bed) return null;
+    for (var i = 0; i < roster.length; i++) {
+      if (roster[i].id !== excludeId && String(roster[i].bed || "").trim() === bed) return roster[i];
+    }
+    return null;
+  }
   function savePatient() {
-    var id = _raw.patient._id || ("p" + nowTs());
+    var id = _raw.patient._id || ("p" + uniqSuffix());
+    var bed = String(_raw.patient.bed || "").trim();
+    if (bed) {
+      var clash = bedHolder(loadRoster(), bed, id);
+      if (clash && !window.confirm("Bed " + bed + " is already assigned to " + (clash.name || "another patient") + ". Save anyway?")) return;
+    }
     STATE.patient._id = id;                                  // reactive write persists live state
     var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
     var entry = { id: id, name: _raw.patient.name || "Unnamed", dx: _raw.patient.diagnosis || "", bed: _raw.patient.bed || "", savedAt: nowTs(), state: snap };
