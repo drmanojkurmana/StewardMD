@@ -7430,10 +7430,32 @@
     try{ if(window.SMD_APPLE_WATCH_SYNC) window.SMD_APPLE_WATCH_SYNC(); }catch(e){}
   }
 
+  // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
+  function calcCardHTML(c){
+    var favOn=isWatchFav(c.id);
+    return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
+      '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
+      '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
+      (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
+    '</div>';
+  }
   function renderList(){
     var el=root.querySelector("#mcList");
+    // BUG (2026-08-23, WhatsApp bug report): typing already filtered live (see the #mcSearch
+    // "input" listener) — the actual gap was presentation: the category chips + grouped headers
+    // stayed on screen while searching, so a match could sit well below the fold instead of
+    // appearing right under the search box the way it does here (and in most search UIs).
+    // Active search now hides the chip row and drops the grouping for a flat "RESULTS: N" list —
+    // exactly the reference screenshot's layout. Browsing (no query) is completely unchanged.
+    var catsEl=root.querySelector("#mcCats"); if(catsEl) catsEl.style.display=q?"none":"";
     var list=CALCS.filter(matches);
     if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here (and to your Apple Watch).':'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
+    if(q){
+      el.innerHTML='<div class="mc-grp-h">Results <span>'+list.length+'</span></div><div class="mc-grid">'+list.map(calcCardHTML).join("")+'</div>';
+      wireListEvents(el);
+      if(openId) renderPanel(openId);
+      return;
+    }
     // group by category preserving order
     var html="";
     CAT_ORDER.forEach(function(cat){
@@ -7444,25 +7466,19 @@
         return c.cat===cat;
       });
       if(!inCat.length) return;
-      html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
-      inCat.forEach(function(c){
-        var favOn=isWatchFav(c.id);
-        html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
-          '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
-          '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
-          (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
-        '</div>';
-      });
-      html+='</div>';
+      html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">'+inCat.map(calcCardHTML).join("")+'</div>';
     });
     el.innerHTML=html;
+    wireListEvents(el);
+    if(openId) renderPanel(openId);
+  }
+  function wireListEvents(el){
     el.querySelectorAll("[data-open]").forEach(function(b){
       b.addEventListener("click", function(){ var id=b.getAttribute("data-open"); openId=(openId===id?null:id); renderList(); });
     });
     el.querySelectorAll("[data-fav]").forEach(function(b){
       b.addEventListener("click", function(ev){ ev.stopPropagation(); toggleWatchFav(b.getAttribute("data-fav")); renderList(); });
     });
-    if(openId) renderPanel(openId);
   }
 
   function inputHTML(c){
