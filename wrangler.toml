@@ -42,6 +42,14 @@ database_id = "788b1c85-acb4-4242-882c-24b402298b2c"
 binding = "FOLLOWCARE_R2"
 bucket_name = "stewardmd-followcare-media"
 
+# R2 — OTA update system (functions/_ota.js, functions/api/ota/[[path]].js). REUSES the existing
+# stewardmd-offline bucket (already bound in worker/wrangler.jsonc as OFFLINE_BUCKET for the paid
+# offline drug DB) under a dedicated ota/ prefix — no new bucket, no new cost. Phase 1: nothing in
+# the shipped app calls /api/ota/check yet; this binding only serves the admin console + CI staging.
+[[r2_buckets]]
+binding = "OTA_R2"
+bucket_name = "stewardmd-offline"
+
 # Plaintext config vars (NOT secrets — secrets stay in `wrangler pages secret put`).
 # DPDP §8(7) storage limitation: auto-erase a FollowCare episode 7 days after it is
 # recovered/closed (active follow-ups are never touched; see functions/_followcare_dispatch.js).
@@ -210,6 +218,10 @@ database_id = "788b1c85-acb4-4242-882c-24b402298b2c"
 [[env.production.r2_buckets]]
 binding = "FOLLOWCARE_R2"
 bucket_name = "stewardmd-followcare-media"
+
+[[env.production.r2_buckets]]
+binding = "OTA_R2"
+bucket_name = "stewardmd-offline"
 
 [env.production.ai]
 binding = "AI"

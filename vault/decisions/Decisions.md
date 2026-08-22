@@ -204,3 +204,40 @@ deliberately NOT inserted, so nothing unverified travels into the printed docume
 **Open question for the owner**: whether the printed summary should carry a provenance line saying
 parts were AI-drafted. It is stamped DRAFT and clinician-review-required either way, but the
 medico-legal answer is a product call, not an engineering one. Deliberately not decided here.
+
+## 2026-08-22 — OTA updates, Phase 1: rebuilding what was torn down, this time against the failure
+This exact system existed once — self-hosted OTA on Cloudflare (Worker + R2 + admin console),
+built 1 Aug 2026, deliberately torn down the SAME DAY. The retire commit is explicit:
+"...so it can't be re-armed and leave a stale bundle silently downgrading installs (which is what
+broke ICU once)." The user asked to rebuild it (22 Aug 2026), explicitly wanting a PUBG/Duolingo-
+style banner update, admin-console control, easy undo, "full user and my control." Full plan
+published as an artifact and approved before any code was written.
+
+**Phase 1 (server-only, this session) is deliberately shaped around the one sentence above:**
+- **Staging and going live are two different acts by two different systems.** CI (on every push to
+  `main`) can only ever write a `candidate` pointer — nothing a device would see. Only an owner
+  pressing "Push to devices" in the admin console moves the live channel. Confusing "a build
+  exists" with "a build is live" is precisely what the 1 Aug system never separated.
+- **The kill switch is the FIRST thing built, not an afterthought**, and is a single R2 JSON
+  object checked on every device request — flipping it needs no redeploy, no rebuild, no code
+  change. That is the direct fix for "the retire mechanism itself needed a redeploy to re-arm,"
+  which is the actual mechanism of the original failure, not just its symptom.
+- **Rollback republishes the OLD manifest under a NEW, higher version number**, never moving the
+  counter backward — so a device that only trusts "is this newer than mine" still takes the
+  rollback instead of silently ignoring it because the number went down.
+- A device is never offered a release its native build can't run (`minNativeBuild` gate), and a
+  missing/corrupt manifest fails the device check CLOSED, never with a half-answer.
+
+**What's built**: `functions/_ota.js` (pure, deps-injectable, 12 unit tests — the kill-switch ones
+are load-bearing), `functions/api/ota/[[path]].js` (HTTP surface), `scripts/ota-stage.mjs` +
+`.github/workflows/ota-stage.yml` (auto-stage on push, reusing existing `CLOUDFLARE_API_TOKEN`/
+`CLOUDFLARE_ACCOUNT_ID` secrets), a new `ota` pane in `admin/index.html` (18 UI tests against the
+REAL console), and an `OTA_R2` binding reusing the existing `stewardmd-offline` bucket — no new
+service, no new bucket, no new secret.
+
+**What's deliberately NOT built yet**: the native client (`native-ota.js`, the update banner,
+`notifyAppReady()` wiring) and the exact `@capgo/capacitor-updater` wire contract. Nothing in the
+shipped app calls `/api/ota/check`. Guessing the plugin's exact release-artifact shape now, before
+a real client exists to hold that guess accountable, is how a format mismatch would go unnoticed
+until the one time it matters — Phase 2 pins it down against whatever version is actually
+installed then. Full detail: [[OTA Updates]].
