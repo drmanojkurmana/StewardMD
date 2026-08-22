@@ -5951,7 +5951,7 @@
       FollowCare.openEnroll(prefill);
     }
   }
-  function openDischarge() {
+  function openDischarge(preset) {
     injectCSS(); ensureModal();
     lwOnDischarge();   // an "until discharge" Lab Watch ends when the discharge summary is created
     // No cross-session draft: fields auto-fill FRESH from this patient's recorded data each open (a
@@ -5960,7 +5960,9 @@
     _dischargeDefaults = dischargeDefaults();
     var p = _raw.patient || {};
     var fieldsHTML = DISCHARGE_FIELDS.map(function (fl) {
-      var v = _dischargeDefaults[fl.k] || "";
+      // `preset` carries the clinician's in-progress edits back through a round trip to the MaiK
+      // review sheet (which reuses this one modal), so drafting never costs them typed work.
+      var v = (preset && preset[fl.k] != null) ? preset[fl.k] : (_dischargeDefaults[fl.k] || "");
       var fid = "dis-" + fl.k, al = esc(fl.l);
       var inp = (fl.t === "textarea")
         ? '<textarea id="' + fid + '" data-k="' + fl.k + '" rows="' + (fl.rows || 2) + '" spellcheck="false" style="width:100%;box-sizing:border-box;font:500 13px/1.5 var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);resize:vertical">' + esc(v) + '</textarea>'
@@ -5970,6 +5972,7 @@
     modalEl.innerHTML = '<div class="icu-sheet"><h3>' + ico("rounds", "📝") + ' Discharge Creator <span style="font:700 11px var(--font);color:var(--warn);background:var(--warn-soft);padding:2px 7px;border-radius:999px;vertical-align:middle">DRAFT</span></h3>' +
       '<div style="font:700 14px var(--font);color:var(--ink);margin:-2px 0 2px">' + esc(dischargeHeaderLine(p)) + '</div>' +
       '<p class="icu-doc-sub" style="margin:0 0 12px">Auto-filled from recorded data (incl. discharge meds from the Treatment list). <b>Review &amp; complete every section</b>, then copy, print or share. Nothing is sent anywhere.</p>' +
+      disAiBtn() +
       '<div class="icu-grid2">' + fieldsHTML + '</div>' +
       '<button class="icu-btn" data-icu-act="dischargecopy">' + ico("copy", "📋") + ' Copy summary</button>' +
       '<button class="icu-btn ghost" data-icu-act="dischargeprint">' + ico("print", "🖨") + ' Print / PDF</button>' +
@@ -5978,6 +5981,193 @@
       '<button class="icu-btn ghost" data-icu-act="closeform">Close</button></div>';
     modalEl.classList.add("on");
   }
+  /* ===== Draft with MaiK — a guideline-based discharge narrative (flag smd_icu_dischargeai) ======
+   * The Discharge Creator already assembles everything the chart RECORDS. What it can't do is write
+   * the prose a receiving clinician actually reads: a hospital course that reads as a story, a
+   * condition-at-discharge paragraph, a follow-up interval that matches the condition, and the
+   * safety-netting advice that tells the patient when to come back. That is what MaiK drafts here,
+   * grounded on this patient's de-identified context through the SAME pipeline as Ask MaiK
+   * (StewardRAG.buildPackage -> SMD_AI.explainGrounded). No new endpoint, no new engine.
+   *
+   * TWO BOUNDARIES, both deliberate and both load-bearing:
+   *
+   * 1. MaiK NEVER writes the medication list. Discharge medication reconciliation is the single
+   *    highest-risk act in this document, and the existing R1 decision already refuses to auto-seed
+   *    it from running infusions. An AI that "helpfully" lists drugs it inferred is the same failure
+   *    with a better vocabulary. Meds stay exactly where they are: the clinician's Treatment list.
+   *    The same goes for the final diagnosis, which this module has never let AI set.
+   *
+   * 2. Nothing is written into the form until the clinician ticks the section and presses Insert.
+   *    A draft that silently fills fields is a draft nobody reads.
+   *
+   * Pending results are likewise left alone: asserting that a culture is pending when nobody
+   * recorded it is inventing clinical fact. */
+  var DIS_AI_FIELDS = [
+    { k: "course", h: "HOSPITAL COURSE", l: "Hospital course" },
+    { k: "condition", h: "CONDITION AT DISCHARGE", l: "Condition at discharge" },
+    { k: "followup", h: "FOLLOW UP", l: "Follow-up" },
+    { k: "advice", h: "ADVICE TO PATIENT", l: "Advice to patient / carer" }
+  ];
+  function dischargeAiOn() {
+    if (!icuAskMaikOn()) return false;                        // rides the Ask MaiK master switch
+    try {
+      var q = (location.search.match(/[?&]icudisai=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      var v = localStorage.getItem("smd_icu_dischargeai");
+      return v === null ? true : v === "1";
+    } catch (e) { return true; }
+  }
+  function disAiBtn() {
+    if (!dischargeAiOn()) return "";
+    return '<button class="icu-btn ghost" data-icu-act="disai" style="margin:0 0 12px">' + ico("spark", "✦") +
+      ' Draft with MaiK</button>';
+  }
+  // Normalise a line to a bare heading key: strips markdown, numbering, punctuation and case, so
+  // "## 3. Follow-up:" and "**FOLLOW UP**" both resolve to FOLLOW UP.
+  function disAiHeadKey(line) {
+    return String(line || "").replace(/[#*_`>]/g, " ").replace(/^\s*\d+[.)]\s*/, "")
+      .replace(/[^A-Za-z ]/g, " ").replace(/\s+/g, " ").trim().toUpperCase();
+  }
+  // Split MaiK's answer into the sections we asked for. Anything we can't place is kept in `_rest`
+  // so the clinician still sees it rather than us dropping model output on the floor.
+  function disAiParse(text) {
+    var MAP = {}; DIS_AI_FIELDS.forEach(function (f) { MAP[f.h] = f.k; });
+    MAP["GUIDELINE BASIS"] = "_basis";
+    var out = {}, cur = "_rest", buf = [];
+    String(text == null ? "" : text).replace(/@@REFINE:[\s\S]*?@@/gi, "").replace(/@@\s*MORE\s*@@/gi, "")
+      .split(/\r?\n/).forEach(function (line) {
+        var k = MAP[disAiHeadKey(line)];
+        if (k) { if (buf.length) out[cur] = (out[cur] ? out[cur] + "\n" : "") + buf.join("\n").trim(); cur = k; buf = []; return; }
+        buf.push(line);
+      });
+    if (buf.length) out[cur] = (out[cur] ? out[cur] + "\n" : "") + buf.join("\n").trim();
+    Object.keys(out).forEach(function (k) { out[k] = String(out[k] || "").trim(); if (!out[k]) delete out[k]; });
+    return out;
+  }
+  function disAiPrompt(vals) {
+    var p = _raw.patient || {};
+    var known = [];
+    if (vals.finalDx) known.push("Final diagnosis (clinician-entered): " + vals.finalDx);
+    if (vals.secondaryDx) known.push("Secondary diagnoses: " + vals.secondaryDx);
+    if (vals.complaints) known.push("Reason for admission: " + vals.complaints);
+    if (vals.course) known.push("Recorded course notes: " + vals.course);
+    if (vals.investigations) known.push("Key investigations: " + vals.investigations);
+    if (vals.condition) known.push("Recorded condition at discharge: " + vals.condition);
+    if (vals.procedures) known.push("Procedures: " + vals.procedures);
+    if (vals.allergies) known.push("Allergies: " + vals.allergies);
+    return "You are drafting the narrative sections of a hospital discharge summary for the " +
+      (_wardMode ? "ward" : "ICU") + " patient below, to the standard a receiving GP or physician expects.\n\n" +
+      "RULES\n" +
+      "1. Use ONLY the recorded data below. Never invent a value, a date, a culture result or an event that is not there. Where something important is missing, write it as a bracketed prompt such as [ confirm admission date ].\n" +
+      "2. Do NOT list, add, change or stop any medication, and do not mention specific drug doses unless they appear verbatim in the data below. Discharge medications are reconciled by the clinician in a separate section.\n" +
+      "3. Do not assert a diagnosis of your own. The final diagnosis above is the clinician's.\n" +
+      "4. Where a published guideline sets the follow-up interval, the monitoring needed, or the return criteria for this condition, follow it and name the guideline in GUIDELINE BASIS. Assume Indian practice where local context matters. If no guideline applies, say so rather than inventing one.\n" +
+      "5. Plain text. Short bullet lines starting with \"- \". No preamble, no closing remarks.\n\n" +
+      "Return EXACTLY these five headings, in this order, each on its own line:\n" +
+      "HOSPITAL COURSE\nCONDITION AT DISCHARGE\nFOLLOW UP\nADVICE TO PATIENT\nGUIDELINE BASIS\n\n" +
+      "HOSPITAL COURSE: what happened, in sequence, from presentation to discharge.\n" +
+      "CONDITION AT DISCHARGE: functional and physiological state on the day of discharge.\n" +
+      "FOLLOW UP: who, where, in what interval, and what to review or repeat at that visit.\n" +
+      "ADVICE TO PATIENT: what to do at home and the red-flag symptoms that mean return immediately.\n" +
+      "GUIDELINE BASIS: the standards you applied, one per line. Say \"General practice, no specific guideline\" if none.\n\n" +
+      "PATIENT CONTEXT (de-identified)\n" + askContextText() +
+      (known.length ? "\n\nDISCHARGE DOCUMENT SO FAR (clinician-entered)\n" + known.join("\n") : "") +
+      "\n\nAge band: " + (ageBandOf(p.age) || "not stated") + (p.sex ? " · " + p.sex : "");
+  }
+  var _disAi = { busy: false, vals: null, sections: null, raw: "", err: null };
+  function disAiDraft() {
+    if (_disAi.busy) return;
+    _disAi.vals = dischargeFieldVals();          // hold the clinician's edits across the round trip
+    _disAi.busy = true; _disAi.err = null; _disAi.sections = null; _disAi.raw = "";
+    disAiRender();
+    var prompt = disAiPrompt(_disAi.vals);
+    var ev = buildClinicalContext(), p = _raw.patient || {};
+    var caseData = {
+      findings: (ev.findings || []).filter(function (f) { return f.polarity !== "absent"; }).map(function (f) { return f.label; }),
+      abnormalLabs: ev.labs, radiologyImpressions: ev.img, sex: p.sex || undefined
+    };
+    var keys = dxFindingKeys(); correlationMappedKeys(ev).forEach(function (k) { keys[k] = true; });
+    var assess = { infectious: [], nonInfectious: [] };
+    try { if (window.SMD_REASON && SMD_REASON.assess && Object.keys(keys).length) assess = SMD_REASON.assess(keys) || assess; } catch (e) {}
+    var call;
+    if (window.StewardRAG && StewardRAG.buildPackage && window.SMD_AI && SMD_AI.explainGrounded) {
+      call = Promise.resolve(StewardRAG.buildPackage(assess, { question: prompt, caseData: caseData }))
+        .then(function (pkg) { if (!pkg) return { error: "no-package" }; pkg.question = prompt; return SMD_AI.explainGrounded(pkg, { depth: "full" }); })
+        .catch(function () { return { error: "server" }; });
+    } else if (window.SMD_AI && SMD_AI.explain) {
+      call = SMD_AI.explain(askContextText(), prompt);
+    } else {
+      call = Promise.resolve({ error: "ai-off" });
+    }
+    call.then(function (r) {
+      _disAi.busy = false;
+      var txt = (r && r.text) ? String(r.text) : "";
+      if (txt) { _disAi.raw = txt; _disAi.sections = disAiParse(txt); }
+      else _disAi.err = (r && r.error) || "server";
+      disAiRender();
+    }, function () { _disAi.busy = false; _disAi.err = "server"; disAiRender(); });
+  }
+  function disAiErrText(e) {
+    return e === "ai-off" ? "MaiK is turned off (cloud text disabled in Settings)."
+      : e === "quota" ? "AI usage limit reached. Try again later."
+      : e === "timeout" ? "MaiK took too long. Tap Draft again."
+      : "MaiK could not draft this right now. Tap Draft again.";
+  }
+  // The review sheet. It REPLACES the Discharge Creator in the one modal, which is why the
+  // clinician's field values were captured first and are restored on both Insert and Cancel.
+  function disAiRender() {
+    ensureModal();
+    var head = '<div class="icu-sheet" id="icuDisAiSheet" role="dialog" aria-modal="true" aria-label="Draft the discharge summary with MaiK"><h3>' +
+      ico("spark", "✦") + ' Draft with MaiK <span style="font:700 11px var(--font);color:var(--warn);background:var(--warn-soft);padding:2px 7px;border-radius:5px;vertical-align:middle">DRAFT</span></h3>';
+    var body;
+    if (_disAi.busy) {
+      body = '<p class="icu-doc-sub">MaiK is drafting the narrative sections from this patient\'s recorded data. This takes a few seconds.</p>' +
+        '<div class="icu-v2-loading"><div class="icu-v2-spin" aria-hidden="true"></div>Drafting the discharge narrative…</div>';
+    } else if (_disAi.err) {
+      body = '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(disAiErrText(_disAi.err)) + "</div>" +
+        '<button class="icu-btn" data-icu-act="disai" style="margin-top:10px">' + ico("spark", "✦") + ' Try again</button>';
+    } else {
+      var s = _disAi.sections || {};
+      var rows = DIS_AI_FIELDS.map(function (f) {
+        var v = s[f.k];
+        if (!v) return '<div class="icu-card" style="margin-bottom:8px;opacity:.7"><div class="icu-sec-lbl">' + esc(f.l) + '</div>' +
+          '<p class="icu-doc-sub" style="margin:0">MaiK did not return this section.</p></div>';
+        return '<div class="icu-card" style="margin-bottom:8px">' +
+          '<label style="display:flex;align-items:center;gap:9px;font:700 13px var(--font);color:var(--ink);cursor:pointer">' +
+            '<input type="checkbox" class="disai-pick" data-k="' + f.k + '" checked style="width:18px;height:18px;flex:0 0 auto;accent-color:var(--primary)">' + esc(f.l) + '</label>' +
+          '<div style="white-space:pre-wrap;font:500 13px/1.55 var(--font);color:var(--ink);background:var(--panel2);border:1px solid var(--border);border-radius:8px;padding:10px 11px;margin-top:9px;max-height:220px;overflow:auto">' + esc(v) + '</div></div>';
+      }).join("");
+      var basis = s._basis ? '<div class="icu-card" style="margin-bottom:8px"><div class="icu-sec-lbl">' + ico("book", "📖") + ' Guideline basis</div>' +
+        '<div style="white-space:pre-wrap;font:500 12.5px/1.55 var(--font);color:var(--muted)">' + esc(s._basis) + '</div>' +
+        '<p class="icu-doc-sub" style="margin:9px 0 0">Not inserted into the summary. Verify anything you rely on.</p></div>' : "";
+      var rest = s._rest ? '<div class="icu-card" style="margin-bottom:8px"><div class="icu-sec-lbl">Other output</div>' +
+        '<div style="white-space:pre-wrap;font:500 12.5px/1.5 var(--font);color:var(--muted);max-height:150px;overflow:auto">' + esc(s._rest) + '</div></div>' : "";
+      var any = DIS_AI_FIELDS.some(function (f) { return !!s[f.k]; });
+      body = '<p class="icu-doc-sub">Drafted from this patient\'s <b>de-identified</b> recorded data, grounded in StewardMD\'s knowledge base. ' +
+        '<b>Medications and the final diagnosis are never drafted</b> and stay exactly as you entered them. Read each section, untick anything you do not want, then insert.</p>' +
+        rows + basis + rest +
+        (any ? '<button class="icu-btn" data-icu-act="disaiapply">' + ico("check", "✓") + ' Insert selected sections</button>' : "") +
+        '<button class="icu-btn ghost" data-icu-act="disai" style="margin-top:8px">' + ico("spark", "✦") + ' Draft again</button>' +
+        '<button class="icu-btn ghost" data-icu-act="disaicancel" style="margin-top:8px">Back to the discharge summary</button>';
+    }
+    modalEl.innerHTML = head + body + "</div>";
+    modalEl.classList.add("on");
+  }
+  // Insert the ticked sections: reopen the Creator with the captured edits, then overwrite only the
+  // fields the clinician accepted. Everything else is exactly as they left it.
+  function disAiApply() {
+    var picked = {};
+    try {
+      modalEl.querySelectorAll(".disai-pick").forEach(function (cb) { if (cb.checked) picked[cb.getAttribute("data-k")] = true; });
+    } catch (e) {}
+    var vals = {}, base = _disAi.vals || {}, s = _disAi.sections || {}, n = 0;
+    DISCHARGE_FIELDS.forEach(function (fl) { vals[fl.k] = base[fl.k] || ""; });
+    DIS_AI_FIELDS.forEach(function (f) { if (picked[f.k] && s[f.k]) { vals[f.k] = s[f.k]; n++; } });
+    openDischarge(vals);
+    if (window.toast) toast(n ? (n + (n === 1 ? " section" : " sections") + " inserted — review before you sign") : "Nothing inserted");
+  }
+  function disAiCancel() { openDischarge(_disAi.vals || undefined); }
+
   // Collect the current field values from the open form, falling back to the auto-filled default.
   function dischargeFieldVals() {
     var vals = {}; var cur = (modalEl ? collectFormValues() : {});
@@ -7754,6 +7944,10 @@
       case "deepedit": closeForm(); openFindingPicker(); break;
       case "corrext": openEvidenceLookup(); break;
       case "askmaik": openAskMaik(); break;
+      // Discharge Creator → MaiK narrative draft (review sheet; nothing is written until Insert)
+      case "disai": disAiDraft(); break;
+      case "disaiapply": disAiApply(); break;
+      case "disaicancel": disAiCancel(); break;
       case "asksend": { var _aq = modalEl && modalEl.querySelector("#icuAskQ"); askSend(_aq ? _aq.value : ""); break; }
       case "askq": askSend(decodeURIComponent(arg)); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
@@ -8183,6 +8377,9 @@
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
     _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
+    // Discharge · MaiK draft — parser + prompt exposed so the section split and the safety rules in
+    // the prompt can be asserted without a live model.
+    _disAiParse: disAiParse, _disAiPrompt: function () { return disAiPrompt(dischargeFieldVals()); }, _disAiState: function () { return { busy: _disAi.busy, err: _disAi.err, sections: _disAi.sections }; },
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"

@@ -179,3 +179,28 @@ a new Settings → Account → "Profile & StewardMD ID" row. `window.prompt` is 
 editing (hospital keeps the searchable directory picker). Test: `test/run-profile-ui.mjs`, which
 drives the real sheet and asserts the failure state still renders all four rows. See
 [[StewardMD ID]].
+
+## 2026-08-22 — AI may draft the discharge narrative, never the prescription
+"Draft with MaiK" in the Discharge Creator writes prose into a medico-legal document, so the design
+is mostly a set of refusals. MaiK drafts exactly four sections — hospital course, condition at
+discharge, follow-up, advice to patient — and is explicitly forbidden, in the prompt and by having
+no field to write into, from touching:
+
+- **Discharge medications.** Medication reconciliation is the highest-risk act in the document. The
+  existing R1 decision already refuses to auto-seed it from running infusions (a summary must never
+  tell a GP the patient goes home on noradrenaline); an AI that lists drugs it inferred is that same
+  failure with better grammar. Meds stay the clinician's Treatment list.
+- **The final diagnosis.** Ask MaiK has never been allowed to set a Dx; drafting a discharge does not
+  change that.
+- **Pending results.** Asserting that a culture is pending when nobody recorded it is inventing
+  clinical fact.
+
+Two further rules: the prompt forbids inventing any value and requires missing data to come back as
+a bracketed prompt (`[ confirm admission date ]`) rather than a plausible guess; and **nothing is
+written into the form until the clinician ticks that section and presses Insert** — a draft that
+silently fills fields is a draft nobody reads. The guideline basis MaiK cites is shown for review and
+deliberately NOT inserted, so nothing unverified travels into the printed document.
+
+**Open question for the owner**: whether the printed summary should carry a provenance line saying
+parts were AI-drafted. It is stamped DRAFT and clinician-review-required either way, but the
+medico-legal answer is a product call, not an engineering one. Deliberately not decided here.
