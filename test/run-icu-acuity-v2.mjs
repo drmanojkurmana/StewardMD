@@ -144,11 +144,24 @@ try {
   `);
   ok(/\breview\b/.test(onSpo293.cls), `B3: SpO2 exactly 93 no longer clears the review boundary (${onSpo293.cls})`);
 
-  // ---- B7 escalation half: a STABLE read based on data >12h old demotes to Not assessed ----
+  // ---- B7 escalation half: a STABLE read based on data >24h old demotes to Not assessed ----
+  const onFresh24 = await J(`
+    ${clearRoster}
+    var real = Date.now;
+    Date.now = function(){ return real() - 20 * 3600000; };   // 20h ago - still WITHIN the 24h window
+    ICU.reset(); ICU.ingestPatient({ name: "Fresh-ish Stable", bed: "6" });
+    ICU.ingestMonitor({ hr: 80, sbp: 120, dbp: 78, spo2: 98, rr: 16, temp: 37, gcs: 15 });
+    Date.now = real;
+    ICU.savePatient();
+    ICU.open();
+    ${cardInfo}
+  `);
+  ok(/\bstable\b/.test(onFresh24.cls), `B7 boundary: 20h-old data is still WITHIN the 24h window, stays Stable (${onFresh24.cls})`);
+
   const onStale = await J(`
     ${clearRoster}
     var real = Date.now;
-    Date.now = function(){ return real() - 13 * 3600000; };   // 13h ago - past the 12h window
+    Date.now = function(){ return real() - 25 * 3600000; };   // 25h ago - past the 24h window
     ICU.reset(); ICU.ingestPatient({ name: "Stale Stable", bed: "7" });
     ICU.ingestMonitor({ hr: 80, sbp: 120, dbp: 78, spo2: 98, rr: 16, temp: 37, gcs: 15 });
     Date.now = real;
@@ -156,14 +169,14 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bunassessed\b/.test(onStale.cls), `B7: a Stable-looking read from 13h ago demotes to Not assessed (${onStale.cls})`);
+  ok(/\bunassessed\b/.test(onStale.cls), `B7: a Stable-looking read from 25h ago demotes to Not assessed (${onStale.cls})`);
 
   // ---- B7 escalation half, regression guard: staleness never DOWNGRADES an already-critical/
   // review verdict — a patient the board already flagged stays flagged, old data or not ----
   const onStaleCritical = await J(`
     ${clearRoster}
     var real = Date.now;
-    Date.now = function(){ return real() - 13 * 3600000; };
+    Date.now = function(){ return real() - 25 * 3600000; };
     ICU.reset(); ICU.ingestPatient({ name: "Stale Critical", bed: "8" });
     ICU.ingestMonitor({ hr: 130, sbp: 80, dbp: 45, spo2: 85, rr: 30, temp: 37, gcs: 15 });
     Date.now = real;
@@ -171,7 +184,7 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bcritical\b/.test(onStaleCritical.cls), `B7 regression guard: a genuinely critical patient stays critical even on 13h-old data, never demoted (${onStaleCritical.cls})`);
+  ok(/\bcritical\b/.test(onStaleCritical.cls), `B7 regression guard: a genuinely critical patient stays critical even on 25h-old data, never demoted (${onStaleCritical.cls})`);
 
   // ---- fresh, complete, normal vitals: still reads Stable (v2 engine doesn't over-trigger) ----
   const onFreshNormal = await J(`

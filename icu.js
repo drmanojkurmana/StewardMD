@@ -3599,7 +3599,7 @@
   // data no longer counts as reassurance. Deliberately only demotes FROM "stable" - a patient
   // already flagged critical/review on old data is already getting attention, so this is about
   // catching the one bucket where deterioration hides silently, not re-triaging everyone.
-  var ACUITY_STALE_MS = 12 * 3600000;   // 12h - a typical ward vitals-round cadence
+  var ACUITY_STALE_MS = 24 * 3600000;   // 24h, per owner's call (was 12h at first ship)
   // NEWS2 needs the FULL state (the vitals series + ventilator/ABG for the O2 point) - v2Snapshot's
   // summary fields aren't enough for it, so this reads st directly. Reuses icu-autoscores.js's own
   // NEWS2 adapter + MEDCALC formula via computeOne(), so the board's number is guaranteed identical
