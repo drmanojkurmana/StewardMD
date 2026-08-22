@@ -3582,17 +3582,18 @@
    * Phase 1 (single-device roster; presence/team/notifications are local stubs
    * clearly labelled until Phase 2 Firestore). All markup gated behind #icuRoot.icu-v2.
    */
-  // BUG B2/B3 (2026-08-22 ward-round audit, owner-approved 2026-08-23): a richer acuity engine -
-  // a genuine "Not assessed" state (for a patient with nothing charted, or nothing RECENT) and
-  // NEWS2-driven escalation on top of the original four raw thresholds. Flag-gated and OFF by
-  // default per this repo's standing rule for clinical-logic changes: build it, test it, let the
-  // owner watch it run before it's the thing every doctor sees by default.
+  // BUG B2/B3 (2026-08-22 ward-round audit, owner-approved 2026-08-23, turned ON 2026-08-23): a
+  // richer acuity engine - a genuine "Not assessed" state (for a patient with nothing charted, or
+  // nothing RECENT) and NEWS2-driven escalation on top of the original four raw thresholds. Shipped
+  // flag-gated OFF by default first, verified, then the owner reviewed the ranking design and
+  // turned it ON for everyone. DEFAULT ON now; kill-switch via ?acuityv2=0 or localStorage "0",
+  // same opt-out pattern as labWatchOn()/icuGroupsOn() - instant revert with no redeploy if needed.
   function icuAcuityV2On() {
     try {
       var q = (location.search.match(/[?&]acuityv2=([^&]+)/) || [])[1];
       if (q != null) return q === "1" || q === "on" || q === "true";
-      return localStorage.getItem("smd_icu_acuity_v2") === "1";
-    } catch (e) { return false; }
+      return localStorage.getItem("smd_icu_acuity_v2") !== "0";
+    } catch (e) { return true; }
   }
   // "Not assessed" staleness window (B7's escalation half): past this, a STABLE read based on old
   // data no longer counts as reassurance. Deliberately only demotes FROM "stable" - a patient
