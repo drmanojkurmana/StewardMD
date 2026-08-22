@@ -30,6 +30,15 @@ calculators, guided clinical workflow, imaging import, alerts, Lab Watch.
 - Alert-safety fix — `fix/icu-alert-safety` committed NOT pushed
 - Lab Watch — needs Google/Apple sign-in for 24/7
 
+## Visual design system
+All ICU styling is ONE place: `injectCSS()` in `icu.js` (tokens on `#icuRoot,.icu-modal,.icu-tour`,
+v2 rules scoped under `#icuRoot.icu-v2`). Tokens: `--bg/--panel/--panel2/--border/--border-soft`,
+`--ink/--ink2/--muted`, `--primary/--primary2/--primary3(+ -soft)`, `--ok/--warn/--danger(+ -soft)`,
+radii `--r:12 / --r-sm:10 / --r-xs:8 / --r-pill`, `--sh` (1px hairline) + `--sh-lift`.
+Rules of the system: hairlines separate (not shadows); status colour is reserved for status (a stable
+bed tile is neutral); header chrome is FLAT `--primary2`, never a gradient; numbers use tabular
+figures; selection is colour + weight, press is brightness. See [[Decisions]] (2026-08-22).
+
 ## Gotchas
 - Chips feed the engine with NO rebaseline (icu.js only).
 - SW-warmup flakiness in headless tests (warmup protocol).

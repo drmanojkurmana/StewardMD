@@ -112,3 +112,27 @@ Cherry-pick hunks instead, and prove the result: `git show <target>:<file> > /tm
 A correct server fix was then masked for another hour because the **WebView had cached the failure** -
 clearing `cache/` + `app_webview/Default/Cache` fixed it without wiping login or the 2.5 GB models.
 Full write-up: `vault/handoff/2026-08-21-maik-cloud-outage.md`.
+
+## 2026-08-22 — ICU visual design system (visual layer only, UX locked)
+The ICU dashboard was restyled to read as mature clinical software rather than a generic SaaS
+surface. The rule for the pass: **treat the UX as locked** and change only the design layer, so the
+whole redesign lives inside `icu.js` `injectCSS()` (plus the one inline `style=` on the unit-picker
+card). No component, action, screen, filter, alert rule or navigation path was added, removed or
+renamed; `git diff` on that commit contains only CSS declarations and comments.
+
+The system:
+- **Surfaces** — paper-grey ground (`--bg`), white `--panel`, recessed `--panel2`; separation is done
+  by hairline `--border`, not shadow (`--sh` is a single 1px lift; `--sh-lift` for pressed/raised).
+- **Radii** — a 12/10/8 step (`--r`/`--r-sm`/`--r-xs`) replacing 16px + pill-everything. `--r-pill`
+  is kept for the genuinely round things (avatars, dots, badges).
+- **Colour** — one deep teal accent (`--primary`/`--primary2`); status colours (danger/warn/ok) are
+  reserved for status, and acuity now tints the bed tile only when it means something (a stable bed
+  is neutral, so exceptions pop). Header chrome is flat `--primary2` — the gradients are gone.
+- **Type** — weights pulled down (800 → 600/700), eyebrows 10.5px/.11em, body copy at 400, and
+  **tabular figures on every measured number** so vitals/labs/doses stay column-aligned as they change.
+- **States** — no scale-bounce; press = brightness/surface change, selection = colour + weight (+ a
+  tinted plate in the bottom bar), so selection survives glare and colour-vision deficiency.
+
+Verified by re-running the ICU browser suites (nav, alerts, modal-color, safety-ux, dx-flow,
+swipe-remove) — unchanged, incl. the pre-existing failures in `run-icu-nav` / `run-icu-labwatch`
+which reproduce identically on the parent commit.
