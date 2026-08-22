@@ -3586,6 +3586,15 @@
     var L = (st.labs && st.labs.recent) || {};
     return { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, rr: lv.rr, pressors: press.length, k: L.k };
   }
+  // BUG B7 (2026-08-22 ward-round audit): the newest CHARTED observation (vitals or a lab), for the
+  // board card footer - deliberately separate from savedAt, which is when the app last wrote the
+  // record and says nothing about whether anyone has actually charted anything since.
+  function v2LastObsTs(st) {
+    st = st || {};
+    var vTs = (latestByTs(st.vitals || []).ts) || 0;
+    var lTs = (latestByTs((st.labs && st.labs.trends) || []).ts) || 0;
+    return Math.max(vTs, lTs) || null;
+  }
   function v2Severity(st) {
     var s = v2Snapshot(st);
     if ((s.map != null && s.map < 65) || (s.lactate != null && s.lactate > 4) || (s.spo2 != null && s.spo2 < 90) || s.pressors >= 1) return "critical";
@@ -3810,8 +3819,18 @@
         '<div class="icu-v2-vstrip">' + vits.map(function (v) {
           return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
         }).join("") + '</div></div>' +
-        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
-        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>';
+        // BUG B7 (2026-08-22 ward-round audit): this footer used to always say "Saved" + the age
+        // of the last SAVE - a claim about the app, not the patient. A board can look entirely
+        // green at 4pm because the morning's numbers were saved at 9am and nobody has charted
+        // since. Show the age of the newest actual OBSERVATION (vitals or labs) instead, when
+        // there is one - falling back to "Saved" only for a patient with nothing charted yet.
+        (function () {
+          var obsTs = v2LastObsTs(p.state);
+          var lbl = obsTs ? "Vitals" : "Saved";
+          var ago = esc(fmtAgo(obsTs || p.savedAt) || fmtWhen(obsTs || p.savedAt));
+          return '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">' + lbl + '</span>' +
+            '<span class="icu-v2-foot-ago">' + ago + '</span></div></button>';
+        })();
       return readOnly ? cardBtn : v2SwipeRow(p.id, cardBtn);
     }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
     var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
