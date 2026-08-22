@@ -986,7 +986,11 @@
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
       ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
-      ".hv-grab{width:38px;height:4px;border-radius:2px;background:var(--hbd);margin:8px auto 12px}",
+      // touch-action:none: #hv-sheet itself is the scroll container (overflow-y:auto). Without this,
+      // a touch that starts on the grab handle is still native-scroll territory (iOS rubber-bands the
+      // whole sheet) and fights our manual drag transform below — same drag JS, but only MaiK's
+      // version (no scrollable ancestor) actually worked on-device. This cedes the handle's touch to JS.
+      ".hv-grab{width:38px;height:4px;border-radius:2px;background:var(--hbd);margin:8px auto 12px;touch-action:none}",
       ".hv-sh-t{font:800 17px var(--hfont);margin:2px 0 12px}",
       ".hv-mi{display:flex;align-items:center;gap:13px;width:100%;text-align:left;background:transparent;border:none;border-radius:12px;padding:13px 8px;cursor:pointer;color:var(--hink)}.hv-mi:hover{background:var(--hbg)}.hv-mi:active{transform:scale(.99)}.hv-mi svg{width:21px;height:21px;color:var(--hp)}.hv-mi .ml{flex:1;font:600 14.5px var(--hfont)}.hv-mi .mc{font:500 12px var(--hfont);color:var(--hmut);margin-top:1px}.hv-mi .marr svg{stroke:var(--hmut);width:18px;height:18px}",
       ".hv-mi+.hv-mi{border-top:1px solid var(--hbd)}",
@@ -1756,7 +1760,10 @@
           dy = e.touches[0].clientY - sy;
           sh.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
         }, { passive: true });
-        function end() { if (!drag) return; drag = false; sh.style.transition = ""; var far = dy > 90; sh.style.transform = ""; if (far) closeSheet(); }
+        // Past the threshold: leave the transform at its dragged offset and let dialog-motion.js's
+        // Motion-driven close (.hv-sheet is in its SEL) carry it the rest of the way down — one
+        // continuous slide, not a snap back to open followed by a separate close animation.
+        function end() { if (!drag) return; drag = false; sh.style.transition = ""; var far = dy > 90; if (far) closeSheet(); else sh.style.transform = ""; }
         sh.addEventListener("touchend", end); sh.addEventListener("touchcancel", end);
       })(s);
       try { injectCSS(); } catch (e) {}
@@ -4493,6 +4500,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (op) maikOpenConv(op.getAttribute("data-conv"));
     });
     var _grab = sheet.querySelector("#maikGrab"); if (_grab) _grab.addEventListener("click", close);
+    // Drag the top bar (grab handle + header) down to dismiss — same gesture as the More sheet
+    // (BUG-19). Scoped to the header only, not the whole sheet, since #maikBody scrolls independently
+    // and dragging a chat transcript shouldn't also drag the sheet. Skips buttons/the model chip so
+    // their own taps still work.
+    (function () {
+      var hd = sheet.querySelector(".maik-hd");
+      var sy = 0, dy = 0, drag = false;
+      function start(e) {
+        if ((e.target.closest && e.target.closest("button")) || !e.touches || !e.touches.length) { drag = false; return; }
+        sy = e.touches[0].clientY; dy = 0; drag = true; sheet.style.transition = "none";
+      }
+      function move(e) {
+        if (!drag || !e.touches || !e.touches.length) return;
+        dy = e.touches[0].clientY - sy;
+        sheet.style.transform = dy > 0 ? "translateY(" + dy + "px)" : "";
+      }
+      // Past the threshold: leave the transform at its dragged offset and let dialog-motion.js's
+      // Motion-driven close (#maikSheet is in its SEL) carry it the rest of the way down — one
+      // continuous slide, not a snap back to open followed by a separate close animation.
+      function end() { if (!drag) return; drag = false; sheet.style.transition = ""; var far = dy > 90; if (far) close(); else sheet.style.transform = ""; }
+      [_grab, hd].forEach(function (el) {
+        if (!el) return;
+        el.addEventListener("touchstart", start, { passive: true });
+        el.addEventListener("touchmove", move, { passive: true });
+        el.addEventListener("touchend", end); el.addEventListener("touchcancel", end);
+      });
+    })();
     scrim.addEventListener("click", close);
     // One button, two jobs: STOP while a turn is in flight, SEND otherwise. Routed here rather than
     // by swapping listeners, so there is no window where the button is bound to the wrong action.

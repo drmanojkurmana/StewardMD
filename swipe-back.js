@@ -7,6 +7,8 @@
  *      screen back to the previous page instead of dismissing all the way to home).
  *   2. Else the clinical engine (5-step form / Clinical Decision output) → window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
+ * At HOME the same edge-drag has nothing to go back to, so it SLIDES THE MENU OPEN instead
+ * (gesture only — Android's hardware back still exits at root).
  * Reuses each screen's own back logic — no per-screen wiring. The edge-handle appears on
  * every screen that can go back, so no module is a dead-end even without its own button.
  *
@@ -81,8 +83,24 @@
     var backs = top.filter(isBack);
     return backs.length ? backs[backs.length - 1] : top[top.length - 1];
   }
+  // Home is the true foreground screen (nothing covering it) — the same check refreshFab() in
+  // home.js uses for the FAB's own visibility. If home owns the screen center there is nowhere
+  // further "back" to go (see #3 in the file header), no matter what topBackControl()'s
+  // pattern-matching (BACK_SEL is necessarily broad — any "-close"/"-back" class or aria-label
+  // prefix) thinks it found on the page; a stray match there must never win over this.
+  function homeIsForeground() {
+    var h = document.getElementById("homeV2");
+    if (!h || !h.classList.contains("on")) return false;
+    var cs = window.getComputedStyle(h);
+    if (cs.display === "none" || cs.visibility === "hidden") return false;
+    try {
+      var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
+      return !!(el && h.contains(el));
+    } catch (e) { return false; }
+  }
   // True when there is somewhere to go back to (drives the universal edge back-handle's visibility).
   function canGoBack() {
+    if (homeIsForeground()) return false;
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) return true; } catch (e) {}
     try { if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) return true; } catch (e) {}
     if (topBackControl()) return true;
@@ -108,6 +126,23 @@
       return true;
     }
     return false;                                              // 3) at root
+  }
+
+  // At HOME there is nowhere to go back to (step 3 above), so the same left-edge rightward drag
+  // opens the main menu instead of doing nothing — the drawer slides in on release (its own CSS
+  // transition). Gesture-only: the Android hardware back must still exit at root, so this is NOT
+  // inside goBack(). No-op when the drawer is already open or home isn't the foreground screen.
+  function openMenuAtHome() {
+    if (!homeIsForeground()) return false;
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return false; } catch (e) {}
+    try { if (window.SB && typeof SB.open === "function") { SB.open(); return true; } } catch (e) {}
+    return false;
+  }
+  // With the menu already open it covers the left edge, so a further RIGHTWARD drag on it is a
+  // no-op (it closes by swiping left, tapping the backdrop, or hardware back — all unchanged).
+  function edgeSwipeAction() {
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
+    return openMenuAtHome() || goBack();
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
@@ -163,7 +198,22 @@
     }
     return false;
   }
-  function syncHandle() { try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl()) ? "flex" : "none"; } catch (e) {} }
+  // hasTopLeftControl() only catches a BACK_SEL match sitting top-left. A bottom sheet like MaiK
+  // (height:86vh) leaves home's OWN top-left header button genuinely visible above it, while MaiK's
+  // Close sits top-RIGHT — so hasTopLeftControl sees no top-left match and would show our button
+  // right on top of home's. Detect that by asking whether the topmost overlay's own root even
+  // reaches the top of the viewport: if it doesn't, home is exposed above it and our button would
+  // double up on home's control regardless of where the overlay's own control sits. A full-screen
+  // overlay (root.top===0) doesn't expose home, so this never falsely suppresses the button on a
+  // dead-end screen that has no back control of its own.
+  function topExposesHome() {
+    var ctrl = topBackControl();
+    var root = ctrl && overlayRootOf(ctrl);
+    return !!(root && root.getBoundingClientRect().top > 8);
+  }
+  function syncHandle() {
+    try { ensureBackBtn().style.display = (canGoBack() && !hasTopLeftControl() && !topExposesHome()) ? "flex" : "none"; } catch (e) {}
+  }
 
   var enable = isNative || (window.matchMedia && window.matchMedia("(display-mode: standalone)").matches);
   if (enable) {
@@ -178,7 +228,7 @@
     }
     function endDrag(complete) {
       var el = dragEl; dragging = false; dragEl = null;
-      if (complete) { goBack(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
+      if (complete) { edgeSwipeAction(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
       else if (el) { setX(el, 0, true); setTimeout(function () { try { el.style.transition = ""; } catch (e) {} }, 220); }
     }
     document.addEventListener("touchstart", function (e) {
@@ -207,7 +257,7 @@
       var dx = t ? (t.clientX - sx) : curDx;
       var far = curDx >= vw() * 0.32 || (dx >= DIST && dt <= MAXTIME);
       if (dragging) endDrag(far);
-      else if (far) goBack();                                 // valid edge flick with no draggable overlay
+      else if (far) edgeSwipeAction();                          // valid edge flick with no draggable overlay (at home: opens the menu)
     }, { passive: true });
   }
 
@@ -226,5 +276,5 @@
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();
