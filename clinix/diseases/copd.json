@@ -1,0 +1,713 @@
+{
+  "_comment": "CliniX reference implementation. COPD is the vertical slice every other disease is replicated from. Note how little lives here: the pathway is mostly REFERENCES to shared core/respiratory skills plus per-chapter emphasis. Only genuinely COPD-specific knowledge is authored in this file.",
+  "id": "copd",
+  "name": "COPD",
+  "fullName": "Chronic obstructive pulmonary disease",
+  "system": "respiratory",
+  "kbRef": "chronic_obstructive_pulmonary_disease",
+  "oneLine": "Persistent respiratory symptoms with fixed airflow obstruction",
+  "estMinutes": 75,
+  "review": { "status": "ai_drafted" },
+  "version": 1,
+
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What COPD is, and what it is not",
+      "skills": ["skill.copd.basics"]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "The details that move the differential",
+      "skills": ["skill.particulars.demographics"],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected COPD, occupation and cooking fuel carry as much weight as age. A rural woman who has cooked on a wood or dung-cake stove in an unventilated kitchen for thirty years has a major COPD exposure and may have never smoked."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "The three cardinal symptoms, and their tempo",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical COPD presentation reads as years of one symptom with days of worsening, for example: breathlessness 4 years, cough with sputum 4 years, worsening breathlessness and increased sputum 5 days. That shape alone says acute-on-chronic before anything else is known."
+        },
+        "skill.hx.resp.dyspnea": {
+          "expect": "Expect breathlessness developing over years, progressive, worse on exertion, without significant orthopnoea or PND unless there is coexisting heart disease. Many patients have had symptoms for months to years before presenting, so ask what they could do a year ago and five years ago."
+        },
+        "skill.hx.resp.cough_sputum": {
+          "expect": "Expect chronic cough with mucoid sputum on most days, often worst in the morning. In an exacerbation, expect increased volume and a change to purulent colour. A cupful a day, or clubbing alongside, should make you doubt uncomplicated COPD and think bronchiectasis."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Exposure, treatment and the technique nobody checks",
+      "skills": [
+        "skill.hx.resp.smoking",
+        "skill.hx.resp.drug"
+      ],
+      "emphasis": {
+        "skill.hx.resp.smoking": {
+          "expect": "Quantify in pack-years and record the number. Then ask about biomass fuel regardless of the smoking answer. In a young patient, or a never-smoker with basal emphysema, ask about family history of early emphysema or liver disease, which raises alpha-1 antitrypsin deficiency."
+        },
+        "skill.hx.resp.drug": {
+          "expect": "Count courses of oral steroids and antibiotics in the last year and count hospital admissions. Two or more moderate exacerbations, or one admission, marks a patient at high future risk and changes treatment. Then ask them to demonstrate the inhaler."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Including the sign COPD does not cause",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the tripod position, pursed-lip breathing, accessory muscle use and cachexia. Weight loss in COPD is an independent poor prognostic factor, not an incidental finding. Check the bedside for inhalers, a nebuliser mask and home oxygen."
+        },
+        "skill.gen.clubbing": {
+          "expect": "Clubbing is NOT a feature of COPD. If you find it, you have found a second diagnosis: bronchial carcinoma, bronchiectasis, lung abscess or interstitial disease. New clubbing in a smoker warrants a cancer workup."
+        },
+        "skill.gen.edema": {
+          "expect": "Bilateral dependent pitting oedema with a raised JVP suggests cor pulmonale. Unilateral swelling in a suddenly more breathless COPD patient should make you think of deep vein thrombosis and pulmonary embolism, which is a classic missed cause of apparent exacerbation."
+        },
+        "skill.gen.vitals": {
+          "expect": "Note the respiratory rate properly and record saturation with the inspired oxygen. Many patients with advanced COPD are chronically hypercapnic, so a target saturation range of 88 to 92 percent may be appropriate rather than 94 or above. A falling respiratory rate with drowsiness is carbon dioxide narcosis, not improvement."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "Inspection carries the most weight",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance"
+      ],
+      "emphasis": {
+        "skill.exam.resp.inspection": {
+          "expect": "Expect a barrel-shaped chest with an increased anteroposterior diameter, accessory muscle use, pursed-lip breathing, indrawing of the lower intercostal spaces, and Hoover sign from a flattened diaphragm."
+        },
+        "skill.exam.resp.trachea": {
+          "expect": "The trachea stays central in COPD. What changes is the cricosternal distance, which shortens to two finger-breadths or less because hyperinflation pulls the trachea down. A deviated trachea in a COPD patient means something else has happened, most urgently a pneumothorax."
+        },
+        "skill.exam.resp.expansion": {
+          "expect": "Expect symmetrically reduced expansion. Asymmetry is not a COPD finding and should redirect you to pneumothorax, effusion, collapse or consolidation."
+        },
+        "skill.exam.resp.percussion": {
+          "expect": "Expect hyperresonance with loss of the normal cardiac and hepatic dullness, and a lowered liver border. Marked unilateral hyperresonance with tracheal shift is a pneumothorax until proven otherwise, and COPD patients with bullae are at particular risk."
+        },
+        "skill.exam.resp.auscultation": {
+          "expect": "Expect symmetrically reduced breath sounds with a prolonged expiratory phase. Bronchial breathing is not a COPD finding and suggests consolidation."
+        },
+        "skill.exam.resp.added_sounds": {
+          "expect": "Expect polyphonic expiratory wheeze and early coarse crackles that change with coughing. A silent chest in a distressed COPD patient means airflow too low to make a sound, and is an emergency."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the COPD picture together",
+      "blurb": "From a list of signs to a syndrome",
+      "skills": ["skill.copd.signs", "skill.copd.corpulmonale"]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": ["skill.copd.summary"]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else looks like this, and what argues against",
+      "skills": ["skill.copd.differential"]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One test makes the diagnosis; the rest do other jobs",
+      "skills": ["skill.ix.copd.spirometry", "skill.ix.copd.initial"]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Naming it, grading it, and stating the risk",
+      "skills": ["skill.copd.diagnosis"]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "What changes outcome, and what only changes symptoms",
+      "skills": ["skill.tx.copd.nonpharm", "skill.tx.copd.stable", "skill.tx.copd.exacerbation"]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": ["skill.present.copd"]
+    }
+  ],
+
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.copd.resp_exam",
+        "title": "Examine the respiratory system",
+        "task": "This 62-year-old man has been breathless for four years. Examine his respiratory system and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.trachea",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds"
+        ],
+        "examinerQuestions": [
+          "What is your diagnosis and what are the three findings that support it?",
+          "This patient has clubbing. Does that change your answer?",
+          "How would you confirm the diagnosis?"
+        ]
+      },
+      {
+        "id": "osce.copd.history",
+        "title": "Take a breathlessness history",
+        "task": "This 55-year-old woman has been breathless for two years. Take a focused history in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.resp.dyspnea",
+          "skill.hx.resp.cough_sputum",
+          "skill.hx.resp.smoking",
+          "skill.hx.resp.drug"
+        ],
+        "examinerQuestions": [
+          "She has never smoked. What exposure did you ask about?",
+          "Grade her breathlessness and justify the grade.",
+          "How many exacerbations has she had, and why does that number matter?"
+        ]
+      }
+    ]
+  },
+
+  "viva": {
+    "skills": [
+      "skill.copd.basics",
+      "skill.gen.clubbing",
+      "skill.exam.resp.inspection",
+      "skill.exam.resp.percussion",
+      "skill.exam.resp.added_sounds",
+      "skill.ix.copd.spirometry",
+      "skill.copd.differential",
+      "skill.tx.copd.exacerbation"
+    ]
+  },
+
+  "skills": {
+
+    "skill.copd.basics": {
+      "id": "skill.copd.basics",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "What COPD is",
+      "oneLine": "One definition, three overlapping processes, one spirometric hallmark",
+      "why": "Almost every mistake students make in COPD follows from a fuzzy definition. COPD is not a synonym for smoker's cough, it is not the same as chronic bronchitis, and it is not diagnosed on a chest radiograph. Getting the definition exact makes the investigations and the differential fall out automatically.",
+      "body": "COPD is persistent respiratory symptoms with airflow obstruction that is not fully reversible. The umbrella term spans three processes that coexist in varying proportions: emphysema, which is alveolar destruction with air-space enlargement; chronic bronchitis, which is a clinical diagnosis of cough and sputum on most days for three months in each of two consecutive years; and small airway disease, which is narrowing and loss of small bronchioles. The spirometric hallmark is a post-bronchodilator FEV1/FVC ratio that remains reduced, classically below 0.7.",
+      "keyPoints": [
+        "Persistent symptoms plus fixed airflow obstruction. Both halves are required.",
+        "Emphysema, chronic bronchitis and small airway disease coexist in varying proportions between patients.",
+        "Chronic bronchitis is defined clinically by time: cough with sputum most days, three months a year, two consecutive years.",
+        "The obstruction does not normalise after a bronchodilator. That is what separates it from asthma.",
+        "The three cardinal symptoms are cough, sputum and exertional dyspnoea.",
+        "Smokers with normal spirometry are not necessarily spared: many have reduced exercise capacity and CT changes, and may exacerbate. This is sometimes called pre-COPD."
+      ],
+      "pitfalls": [
+        "Diagnosing COPD without spirometry. The diagnosis is spirometric; the history only raises the suspicion.",
+        "Using COPD and chronic bronchitis interchangeably. One is a physiological diagnosis, the other a clinical one about time.",
+        "Believing a normal chest radiograph excludes COPD, or that an abnormal one confirms it.",
+        "Assuming a never-smoker cannot have COPD."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What is the spirometric hallmark of COPD?", "a": "A post-bronchodilator FEV1/FVC ratio below 0.7, that does not normalise with a bronchodilator.", "accept": ["fev1", "fvc", "0.7", "post-bronchodilator", "ratio"], "minMatch": 2 },
+        { "level": 2, "q": "Define chronic bronchitis.", "a": "Cough productive of sputum on most days for three months of the year in two consecutive years.", "accept": ["three months", "3 months", "two consecutive", "two years"], "minMatch": 1 },
+        { "level": 3, "q": "A smoker has cough and sputum for years but completely normal spirometry. Does he have COPD?", "a": "No, not by definition, because there is no airflow obstruction. He has chronic bronchitis, and may be described as pre-COPD. He is not necessarily spared: such patients can have reduced exercise capacity, emphysema on CT, and exacerbations, and he needs cessation support and follow-up.", "accept": ["no", "chronic bronchitis", "pre-copd", "not spared"], "minMatch": 1 },
+        { "level": 4, "q": "Which three pathological processes does the term COPD span, and how do they relate?", "a": "Emphysema (alveolar destruction with air-space enlargement), chronic bronchitis (cough and phlegm), and small airway disease (narrowing and loss of bronchioles). They coexist in varying proportions in different patients rather than being distinct diseases.", "accept": ["emphysema", "chronic bronchitis", "small airway"], "minMatch": 3 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" },
+        { "source": "GOLD Report", "locator": "Definition and diagnosis" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.copd.signs": {
+      "id": "skill.copd.signs",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The COPD picture",
+      "oneLine": "Hyperinflation, obstruction, and what does not belong",
+      "why": "A list of signs is not a diagnosis. What turns findings into a syndrome is recognising that most of the COPD signs are consequences of one thing, hyperinflation, and noticing the findings that do not fit, because those are the ones that point to a second disease.",
+      "body": "Nearly every physical sign in stable COPD follows from hyperinflation and expiratory airflow limitation. Understanding that one mechanism means you can derive the signs rather than memorise them.",
+      "keyPoints": [
+        "From hyperinflation: barrel chest with increased anteroposterior diameter; reduced cricosternal distance; hyperresonant percussion with loss of cardiac and hepatic dullness; a lowered liver border; reduced breath sounds; Hoover sign.",
+        "From airflow limitation: prolonged expiratory phase; polyphonic expiratory wheeze; pursed-lip breathing.",
+        "From increased work of breathing: accessory muscle use; tripod posture; tachypnoea; cachexia in advanced disease.",
+        "From chronic hypoxaemia and right heart strain: central cyanosis; raised JVP; parasternal heave; loud P2; dependent oedema, which together make cor pulmonale.",
+        "Findings that do NOT belong to COPD, and each of which means a second diagnosis: clubbing, asymmetrical expansion, bronchial breathing, stony dullness, a fixed monophonic wheeze, and fine late inspiratory crackles that do not clear with coughing."
+      ],
+      "pitfalls": [
+        "Learning the signs as an unlinked list rather than deriving them from hyperinflation and airflow limitation.",
+        "Explaining away a sign that does not fit, most importantly clubbing.",
+        "Missing the transition from COPD to cor pulmonale, because oedema is attributed to immobility or to the heart alone."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "Name four signs of hyperinflation.", "a": "Barrel chest, reduced cricosternal distance, hyperresonance with loss of cardiac and hepatic dullness, reduced breath sounds, and Hoover sign.", "accept": ["barrel", "cricosternal", "hyperreson", "cardiac dullness", "hepatic", "hoover", "reduced breath"], "minMatch": 3 },
+        { "level": 3, "q": "Name three findings that argue AGAINST uncomplicated COPD.", "a": "Clubbing, asymmetrical chest expansion, bronchial breathing, stony dullness, a fixed monophonic wheeze, or fine late inspiratory crackles that do not clear with coughing.", "accept": ["clubbing", "asymmetr", "bronchial", "stony", "monophonic", "fine", "late"], "minMatch": 2 },
+        { "level": 4, "q": "Derive, from first principles, why percussion is hyperresonant and cardiac dullness is lost.", "a": "Gas trapping increases lung volume. Hyperinflated, air-rich lung transmits a louder, lower-pitched percussion note, and the expanded lung margins slide over the heart and liver, replacing the normally dull areas with resonant lung.", "accept": ["gas trap", "air", "volume", "over the heart", "expand"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" },
+        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.copd.corpulmonale": {
+      "id": "skill.copd.corpulmonale",
+      "kind": "exam",
+      "system": "respiratory",
+      "title": "Looking for cor pulmonale",
+      "oneLine": "The right heart failing because of the lung",
+      "why": "Cor pulmonale marks a change in prognosis and in management, and every one of its signs is elicited during examinations students already know how to do. It is missed not because it is subtle but because nobody goes looking for it in a respiratory case.",
+      "steps": [
+        { "text": "Look at the JVP with the patient at 45 degrees, and identify its upper level relative to the sternal angle." },
+        { "text": "Feel for a parasternal (right ventricular) heave with the heel of the hand at the left sternal edge." },
+        { "text": "Listen at the pulmonary area for a loud pulmonary component of the second heart sound." },
+        { "text": "Listen for a pansystolic murmur at the lower left sternal edge that increases on inspiration, indicating functional tricuspid regurgitation." },
+        { "text": "Palpate for a pulsatile, tender liver edge and check for ascites." },
+        { "text": "Check for bilateral dependent pitting oedema, and the sacrum in a bed-bound patient." }
+      ],
+      "normal": "JVP not raised, no parasternal heave, normal second heart sound, no murmur, no hepatomegaly, no oedema.",
+      "abnormal": "Raised JVP, parasternal heave, loud P2, tricuspid regurgitation murmur, tender pulsatile hepatomegaly and dependent pitting oedema.",
+      "significance": "These findings together indicate right ventricular pressure overload and failure secondary to chronic lung disease. Their presence marks advanced disease, worsens prognosis, and prompts assessment for long-term oxygen therapy where criteria are met.",
+      "practice": "On any patient with chronic lung disease, deliberately add the four right-heart steps to the end of your respiratory examination until it becomes automatic.",
+      "pitfalls": [
+        "Not looking, because the case was labelled respiratory.",
+        "Assessing the JVP at the wrong angle, which makes it uninterpretable.",
+        "Attributing oedema to immobility without examining the JVP and the right ventricle.",
+        "Missing that a hyperinflated chest displaces the liver downwards, so a palpable liver edge is not by itself hepatomegaly. Percuss the upper border before calling it enlarged."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Where do you feel for a right ventricular heave?", "a": "At the left sternal edge, with the heel of the hand.", "accept": ["left sternal", "parasternal"], "minMatch": 1 },
+        { "level": 3, "q": "A COPD patient has a palpable liver edge 3 cm below the costal margin. Is that hepatomegaly?", "a": "Not necessarily. Hyperinflation pushes the liver down, so the lower edge is palpable with a normal-sized liver. Percuss the upper border and measure the span before calling it enlarged.", "accept": ["not necessar", "push", "displac", "span", "upper border", "percuss"], "minMatch": 1 },
+        { "level": 4, "q": "Why does chronic hypoxaemia cause right heart failure?", "a": "Alveolar hypoxia causes pulmonary arteriolar vasoconstriction. Sustained, this raises pulmonary vascular resistance and pulmonary artery pressure, imposing a pressure load on the right ventricle which hypertrophies and eventually fails.", "accept": ["vasoconstrict", "pulmonary", "resistance", "pressure", "hypertroph"], "minMatch": 2 }
+      ],
+      "rubric": [
+        { "id": "jvp", "text": "Assesses the JVP at 45 degrees" },
+        { "id": "heave", "text": "Palpates for a parasternal heave" },
+        { "id": "p2", "text": "Listens for a loud P2" },
+        { "id": "liver", "text": "Examines the liver and checks for oedema" }
+      ],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (cor pulmonale)" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.copd.summary": {
+      "id": "skill.copd.summary",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation: three sentences that contain the whole case",
+      "why": "A summary is not a shortened history, it is a translation. Converting the patient's story into abstract clinical terms is the single step that makes a diagnosis accessible, because it is the abstract version that matches what you have stored about disease. Students who cannot summarise cannot usually diagnose either.",
+      "body": "A problem representation has three parts: the patient in one clause with the risk factors that matter, the tempo of the illness, and the syndrome in abstract terms with the key positives and negatives.",
+      "keyPoints": [
+        "Name the patient and the epidemiology that changes probability: age, sex, and the exposure. Not the whole social history.",
+        "Give the tempo: chronic, progressive, acute-on-chronic, episodic. This alone excludes whole categories of disease.",
+        "State the syndrome in abstract terms, not the patient's words: 'chronic progressive exertional dyspnoea with productive cough and fixed airflow obstruction'.",
+        "Include the relevant negatives. Absent clubbing, absent orthopnoea and symmetrical findings are doing real work.",
+        "A worked example: 'A 62-year-old man with a 40 pack-year smoking history presents with four years of progressive exertional breathlessness and chronic productive cough, with five days of worsening breathlessness and purulent sputum. Examination shows a hyperinflated chest with reduced breath sounds and polyphonic expiratory wheeze, with no clubbing and symmetrical findings. This is an acute exacerbation on a background of chronic airflow obstruction.'"
+      ],
+      "pitfalls": [
+        "Reciting the history back in order rather than abstracting it.",
+        "Omitting the tempo, which is often the most discriminating single piece of information.",
+        "Leaving out relevant negatives, so the listener cannot tell what has been excluded.",
+        "Putting the diagnosis in the first sentence, which stops both you and the listener thinking."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "What are the three components of a problem representation?", "a": "The patient with relevant epidemiology, the tempo of the illness, and the syndrome in abstract terms with key positives and negatives.", "accept": ["epidemiolog", "patient", "tempo", "syndrome", "abstract"], "minMatch": 2 },
+        { "level": 3, "q": "Why abstract the patient's words instead of quoting them?", "a": "Abstract terms match the way disease knowledge is stored, so the summary can be pattern-matched against known syndromes. The patient's words are needed for the history, but not for reasoning.", "accept": ["match", "pattern", "stored", "syndrome", "compare"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "epi", "text": "States age, sex and the key risk exposure" },
+        { "id": "tempo", "text": "States the tempo of the illness" },
+        { "id": "abstract", "text": "States the syndrome in abstract terms" },
+        { "id": "negatives", "text": "Includes relevant negatives" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "Clinical reasoning" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.copd.differential": {
+      "id": "skill.copd.differential",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Differential diagnosis",
+      "oneLine": "What else does this, and what would argue against COPD",
+      "why": "Committing to COPD too early is how coexisting asthma, heart failure, bronchiectasis and lung cancer get missed, all of which are common in exactly this population. Reasoning properly means naming what would change your mind before you look for confirmation.",
+      "body": "For chronic progressive breathlessness with cough in an older smoker, the differential divides into airway disease, parenchymal disease, cardiac disease and vascular disease.",
+      "keyPoints": [
+        "Asthma: substantial overlap, especially in older patients. Favoured by episodic symptoms with clear triggers, diurnal variation, atopy, and significant bronchodilator reversibility. Overlap is common and is called asthma-COPD overlap.",
+        "Congestive heart failure: favoured by orthopnoea and PND, a displaced apex, a third heart sound, bibasal fine crackles and a raised JVP. It frequently coexists with COPD.",
+        "Bronchiectasis: favoured by large-volume purulent sputum, recurrent infections, haemoptysis, coarse crackles and clubbing.",
+        "Bronchial carcinoma: favoured by weight loss, haemoptysis, new clubbing, a change in the character of the cough, or a fixed monophonic wheeze.",
+        "Tuberculosis: in India this must be actively considered in any chronic cough, particularly with weight loss, fever, night sweats or haemoptysis.",
+        "Interstitial lung disease: favoured by fine late inspiratory crackles that do not clear with coughing, clubbing, and a restrictive rather than obstructive pattern.",
+        "Bronchiolitis obliterans and other small airway diseases in younger, non-smoking patients.",
+        "Pulmonary embolism, which is the classic mimic of an exacerbation and is over-represented in COPD."
+      ],
+      "pitfalls": [
+        "Accepting an existing COPD label without reviewing the spirometry that established it.",
+        "Not considering tuberculosis in a chronic cough in an endemic setting.",
+        "Treating a presumed exacerbation without considering pneumonia, pneumothorax, heart failure and pulmonary embolism, which is the standard differential for a deterioration.",
+        "Assuming asthma and COPD are mutually exclusive."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "Name four differentials for chronic progressive breathlessness with cough in a 60-year-old smoker.", "a": "COPD, asthma, congestive heart failure, bronchiectasis, bronchial carcinoma, tuberculosis and interstitial lung disease.", "accept": ["asthma", "heart failure", "bronchiectasis", "carcinoma", "cancer", "tuberculosis", "tb", "interstitial"], "minMatch": 3 },
+        { "level": 3, "q": "Which findings would argue for heart failure rather than COPD?", "a": "Orthopnoea and paroxysmal nocturnal dyspnoea, a displaced apex beat, a third heart sound, bibasal fine crackles and a raised JVP. Note the two commonly coexist.", "accept": ["orthopnoea", "orthopnea", "pnd", "third heart", "s3", "apex", "fine crackles"], "minMatch": 2 },
+        { "level": 4, "q": "A known COPD patient becomes suddenly more breathless. Give your differential for the deterioration.", "a": "Infective exacerbation, pneumonia, pneumothorax (particularly with bullae), pulmonary embolism, heart failure, arrhythmia, and non-adherence or poor inhaler technique. Pneumothorax and embolism are the two that are dangerous to miss.", "accept": ["pneumothorax", "embolism", "pneumonia", "heart failure", "arrhythmia", "exacerbation"], "minMatch": 3 }
+      ],
+      "rubric": [
+        { "id": "breadth", "text": "Offers a differential spanning airway, parenchymal and cardiac causes" },
+        { "id": "discriminate", "text": "States a finding that would favour each alternative" },
+        { "id": "danger", "text": "Includes the dangerous diagnoses (PE, pneumothorax, malignancy, TB)" }
+      ],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (differentials and mimics)" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.ix.copd.spirometry": {
+      "id": "skill.ix.copd.spirometry",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Spirometry",
+      "oneLine": "The test that makes the diagnosis, and the only one that can",
+      "why": "COPD is defined physiologically, so it is diagnosed physiologically. No history, no examination finding and no chest radiograph can establish it. Understanding what spirometry measures also explains why the obstruction is fixed and why the FVC falls in severe disease.",
+      "body": "Post-bronchodilator spirometry measures forced expiratory volume in one second (FEV1), forced vital capacity (FVC), and their ratio.",
+      "keyPoints": [
+        "The diagnosis requires a POST-bronchodilator FEV1/FVC below 0.7. Pre-bronchodilator values cannot distinguish COPD from asthma.",
+        "GOLD spirometric severity, based on post-bronchodilator FEV1 percent predicted: mild 80 percent or above; moderate 50 to under 80; severe 30 to under 50; very severe under 30.",
+        "The ATS/ERS alternative uses the lower limit of normal by Z-score rather than a fixed 0.7 ratio, which reduces overdiagnosis in the elderly and underdiagnosis in the young.",
+        "Significant bronchodilator reversibility favours asthma, but reversibility does not exclude COPD and many patients show some.",
+        "In severe disease FVC also falls, because gas trapping means the patient cannot exhale fully, so the ratio may look less abnormal than the disease is.",
+        "Do not perform spirometry to diagnose or manage an exacerbation. Unlike in asthma, testing during an exacerbation has not been shown to help."
+      ],
+      "pitfalls": [
+        "Diagnosing on a pre-bronchodilator ratio.",
+        "Performing spirometry during an exacerbation and acting on it.",
+        "Using FEV1 alone as the measure of severity or prognosis, when the multidimensional BODE index predicts mortality better.",
+        "Assuming any reversibility means the diagnosis is asthma."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What ratio establishes airflow obstruction?", "a": "A post-bronchodilator FEV1/FVC below 0.7.", "accept": ["0.7", "fev1", "fvc"], "minMatch": 2 },
+        { "level": 2, "q": "Give the GOLD severity bands by FEV1 percent predicted.", "a": "Mild 80 percent or above; moderate 50 to under 80; severe 30 to under 50; very severe under 30.", "accept": ["80", "50", "30"], "minMatch": 3 },
+        { "level": 3, "q": "Why must spirometry be post-bronchodilator?", "a": "Because the defining feature of COPD is obstruction that is not fully reversible. Only a post-bronchodilator measurement can demonstrate that the obstruction persists, and so distinguish it from asthma.", "accept": ["reversib", "persist", "asthma", "fixed"], "minMatch": 1 },
+        { "level": 4, "q": "In very severe COPD the FEV1/FVC ratio can appear less abnormal than expected. Why?", "a": "Severe gas trapping prevents complete exhalation, so the measured FVC falls as well as the FEV1. Since both terms of the ratio fall, the ratio understates the severity, and the FEV1 percent predicted is the better guide.", "accept": ["gas trap", "fvc fall", "both", "exhale", "trapping"], "minMatch": 1 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (spirometry, GOLD vs ATS/ERS Z-scores)" },
+        { "source": "GOLD Report", "locator": "Spirometric classification" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.ix.copd.initial": {
+      "id": "skill.ix.copd.initial",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "The other investigations, and what each is for",
+      "oneLine": "None of these makes the diagnosis; each answers a different question",
+      "why": "Investigations get ordered as a reflex list. Ordering them by the question they answer, rather than by habit, is what separates a student from a clinician, and it stops the chest radiograph being misread as diagnostic.",
+      "body": "Group investigations by purpose: confirm the diagnosis, exclude alternatives, assess severity, find complications, and identify aetiology.",
+      "keyPoints": [
+        "Confirm the diagnosis: post-bronchodilator spirometry. This is the only test that confirms COPD.",
+        "Exclude alternatives and complications: chest radiograph. It cannot diagnose COPD or establish chronicity, and it cannot reliably confirm emphysema, but it identifies pneumonia, pneumothorax, effusion, a mass and cardiomegaly.",
+        "Assess gas exchange: pulse oximetry in all, and arterial blood gas where saturation is low, in an exacerbation, or where hypercapnia is suspected. The ABG identifies respiratory acidosis with a PaCO2 above 45 mmHg, indicating acute ventilatory failure.",
+        "Assess severity and prognosis: FEV1 percent predicted, exercise capacity such as a six-minute walk, body mass index, and symptom scores. The multidimensional BODE index predicts mortality better than FEV1 alone.",
+        "Find complications: full blood count for secondary polycythaemia or anaemia; ECG and echocardiogram where cor pulmonale is suspected; sputum culture in exacerbations that fail to respond.",
+        "Identify aetiology: serum alpha-1 antitrypsin in early-onset disease, a never-smoker, basal-predominant emphysema, or a positive family history.",
+        "CT chest where bronchiectasis, malignancy or surgical or bronchoscopic volume reduction is being considered."
+      ],
+      "pitfalls": [
+        "Treating a chest radiograph as confirmation of emphysema. It cannot reliably do this.",
+        "Not doing an arterial blood gas in a drowsy or severely breathless patient, which is where hypercapnic failure is found.",
+        "Never testing alpha-1 antitrypsin in the young or never-smoking patient.",
+        "Ordering the whole panel on every patient rather than asking what question each test answers."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Can a chest radiograph diagnose COPD?", "a": "No. It cannot diagnose COPD or establish chronicity, and cannot reliably confirm emphysema. It is used to exclude alternatives and complications.", "accept": ["no", "cannot", "exclude"], "minMatch": 1 },
+        { "level": 2, "q": "When would you check alpha-1 antitrypsin?", "a": "Early-onset disease, a never-smoker, basal-predominant emphysema, or a family history of emphysema or liver disease.", "accept": ["young", "early", "never-smok", "basal", "family"], "minMatch": 1 },
+        { "level": 3, "q": "What PaCO2 defines acute ventilatory failure, and what does it change?", "a": "A PaCO2 above 45 mmHg with respiratory acidosis indicates acute ventilatory failure. It prompts consideration of non-invasive ventilation and senior review, and it changes oxygen targets.", "accept": ["45", "acidosis", "ventilat", "niv", "non-invasive"], "minMatch": 1 },
+        { "level": 4, "q": "Why does BODE predict mortality better than FEV1?", "a": "Because it is multidimensional: it combines body mass index, degree of airflow obstruction, dyspnoea and exercise capacity, capturing systemic effects and functional impact that FEV1 alone misses.", "accept": ["multidimension", "bmi", "exercise", "dyspnoea", "dyspnea", "systemic"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (investigations, BODE, prognosis)" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.copd.diagnosis": {
+      "id": "skill.copd.diagnosis",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Stating the diagnosis",
+      "oneLine": "Name it, grade it, stage the risk, and say what state it is in now",
+      "why": "A diagnosis of 'COPD' is incomplete and does not direct treatment. The modern statement has four parts, and each one changes what happens next.",
+      "body": "A complete COPD diagnosis names the disease, states the spirometric grade, states the symptom and exacerbation risk group, and states whether the patient is stable or exacerbating, plus any complications.",
+      "keyPoints": [
+        "The disease, confirmed by post-bronchodilator spirometry.",
+        "The spirometric grade by FEV1 percent predicted: GOLD 1 to 4.",
+        "The symptom burden and exacerbation risk, assessed with a symptom score such as mMRC or CAT together with the number of exacerbations and admissions in the past year. This is what determines initial inhaled therapy.",
+        "The current state: stable, or an acute exacerbation, and its severity.",
+        "Complications and comorbidity: cor pulmonale, chronic respiratory failure, secondary polycythaemia, cachexia, coexisting heart disease.",
+        "A worked example: 'COPD, GOLD grade 3, high symptom burden with two exacerbations in the past year, currently in acute infective exacerbation, with cor pulmonale.'"
+      ],
+      "pitfalls": [
+        "Stating COPD without a grade or a risk group, which does not guide treatment.",
+        "Grading from a pre-bronchodilator or an exacerbation-period spirometry.",
+        "Forgetting to state the current state, so a reader cannot tell whether this is a stable clinic patient or an acute admission.",
+        "Omitting comorbidity, which in COPD frequently drives outcome more than the lung disease."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "What four elements make a complete COPD diagnosis?", "a": "The disease confirmed spirometrically, the GOLD grade, the symptom and exacerbation risk group, and the current state with complications.", "accept": ["grade", "symptom", "exacerbation", "state", "spirometr"], "minMatch": 2 },
+        { "level": 3, "q": "Why does exacerbation history sit in the diagnosis rather than the history alone?", "a": "Because past exacerbations are the strongest predictor of future ones and directly determine the choice and escalation of inhaled therapy, so the diagnostic statement must carry it.", "accept": ["predict", "future", "therapy", "treatment", "escalat"], "minMatch": 1 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "GOLD Report", "locator": "Assessment and classification" },
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.tx.copd.nonpharm": {
+      "id": "skill.tx.copd.nonpharm",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "What actually changes the outcome",
+      "oneLine": "Two interventions alter survival, and neither is an inhaler",
+      "why": "Students reliably reach for inhalers first. In COPD the interventions with the strongest evidence for changing the natural history are stopping the exposure and, in selected hypoxaemic patients, long-term oxygen. Knowing that ordering is the difference between symptom control and disease modification.",
+      "body": "Non-pharmacological management leads, because it contains the interventions that modify the disease rather than only its symptoms.",
+      "keyPoints": [
+        "Smoking cessation is the single most effective intervention. It slows the accelerated decline in FEV1 and is the only treatment shown to alter the natural history in most patients. Offer behavioural support plus pharmacotherapy at every contact.",
+        "Reducing biomass fuel exposure, through improved stoves or ventilation or a change of fuel, is the equivalent intervention for patients whose exposure is not tobacco.",
+        "Long-term oxygen therapy improves survival in patients with chronic severe resting hypoxaemia who meet the criteria, and must be used for a sufficient number of hours per day to be effective. It is prescribed against defined blood gas criteria, not to relieve breathlessness.",
+        "Pulmonary rehabilitation improves exercise capacity, breathlessness and quality of life, and reduces admissions after an exacerbation. It is under-prescribed relative to its evidence.",
+        "Vaccination: influenza vaccination reduces serious illness, and pneumococcal vaccination is recommended. Follow the current national schedule.",
+        "Nutrition: cachexia and weight loss are independent poor prognostic factors and should be addressed actively.",
+        "Inhaler technique and adherence review at every visit, since the best regimen delivered badly is no regimen.",
+        "Advance care planning in severe disease, and consideration of surgical or bronchoscopic lung volume reduction or transplantation in selected patients."
+      ],
+      "pitfalls": [
+        "Discussing inhalers before discussing cessation.",
+        "Prescribing oxygen to relieve breathlessness rather than against blood gas criteria; it improves survival only in the hypoxaemic group that meets them.",
+        "Never referring to pulmonary rehabilitation.",
+        "Treating weight loss as incidental rather than prognostic."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What is the single most effective intervention in COPD?", "a": "Smoking cessation.", "accept": ["smoking cessation", "stop smoking", "cessation", "quit"], "minMatch": 1 },
+        { "level": 2, "q": "Name two interventions shown to improve survival in COPD.", "a": "Smoking cessation, and long-term oxygen therapy in patients with chronic severe resting hypoxaemia who meet criteria.", "accept": ["cessation", "smoking", "oxygen"], "minMatch": 2 },
+        { "level": 3, "q": "A very breathless COPD patient with a normal resting saturation asks for home oxygen. What do you say?", "a": "Long-term oxygen improves survival only in patients with chronic severe resting hypoxaemia meeting defined blood gas criteria. It is not a treatment for breathlessness in a non-hypoxaemic patient. Offer pulmonary rehabilitation, breathing techniques, optimised inhaled therapy and cessation support instead, and assess the gases formally.", "accept": ["criteria", "not", "hypox", "rehabilitation", "gases"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (management)" },
+        { "source": "GOLD Report", "locator": "Non-pharmacological management" }
+      ],
+      "review": { "status": "ai_drafted" },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Doses, product choices and oxygen criteria must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe."
+    },
+
+    "skill.tx.copd.stable": {
+      "id": "skill.tx.copd.stable",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Pharmacological management of stable COPD",
+      "oneLine": "Bronchodilators first, and inhaled steroids only where they earn their place",
+      "why": "Inhaled therapy in COPD is chosen by symptom burden and exacerbation risk, not by spirometric grade alone, and inhaled corticosteroids carry a real pneumonia risk that has to be set against a real exacerbation benefit. Understanding the logic prevents both undertreatment and reflexive triple therapy.",
+      "body": "Treatment is stepped according to symptoms and exacerbation history, and reviewed against response, technique and adherence.",
+      "keyPoints": [
+        "Short-acting bronchodilators (a short-acting beta-2 agonist, a short-acting antimuscarinic, or both) are for as-needed relief in all patients.",
+        "Long-acting bronchodilators are the maintenance backbone: a long-acting antimuscarinic (LAMA) or a long-acting beta-2 agonist (LABA), stepping to LAMA plus LABA where symptoms persist.",
+        "Inhaled corticosteroids are added for patients with continuing exacerbations despite long-acting bronchodilators, and their benefit is greatest with a higher blood eosinophil count or with coexisting asthma. They increase pneumonia risk, so the indication should be explicit.",
+        "Triple therapy (LABA plus LAMA plus ICS) is for continuing exacerbations on dual bronchodilation with the appropriate eosinophil or asthma phenotype, not a default starting point.",
+        "Before escalating any regimen, check inhaler technique, adherence and continued exposure. Most apparent treatment failure is one of those three.",
+        "Additional options in selected patients with continuing exacerbations include roflumilast in chronic bronchitis with severe obstruction, and long-term azithromycin, both of which carry their own risks and are specialist decisions.",
+        "Oral corticosteroids have no place in long-term maintenance of stable COPD.",
+        "Treat comorbidity actively. Cardioselective beta blockers are generally tolerated and should not be withheld reflexively from a COPD patient who needs one."
+      ],
+      "pitfalls": [
+        "Escalating therapy without ever watching the patient use the inhaler.",
+        "Starting inhaled corticosteroids reflexively in every patient, without an exacerbation or eosinophil indication, and accepting the pneumonia risk for no benefit.",
+        "Maintaining a patient on long-term oral steroids.",
+        "Choosing therapy on spirometric grade alone rather than on symptoms and exacerbation risk.",
+        "Withholding a needed cardioselective beta blocker because the patient has COPD."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What is the maintenance backbone of stable COPD treatment?", "a": "Long-acting bronchodilators: a LAMA, a LABA, or both.", "accept": ["lama", "laba", "long-acting", "bronchodilator"], "minMatch": 1 },
+        { "level": 2, "q": "Which patients benefit most from an inhaled corticosteroid?", "a": "Those with continuing exacerbations despite long-acting bronchodilators, particularly with a higher blood eosinophil count or coexisting asthma.", "accept": ["exacerbation", "eosinophil", "asthma"], "minMatch": 1 },
+        { "level": 3, "q": "What is the main risk of adding an inhaled corticosteroid in COPD?", "a": "An increased risk of pneumonia, which must be weighed against the exacerbation reduction.", "accept": ["pneumonia"] },
+        { "level": 4, "q": "A patient on triple therapy still exacerbates. What are the first three things to check before escalating further?", "a": "Inhaler technique, adherence, and continued exposure such as ongoing smoking or biomass. Then reconsider the diagnosis and look for coexisting bronchiectasis, heart failure or malignancy.", "accept": ["technique", "adherence", "smoking", "exposure", "diagnosis"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (management)" },
+        { "source": "GOLD Report", "locator": "Pharmacological treatment of stable COPD" }
+      ],
+      "review": { "status": "ai_drafted" },
+      "dosingNote": "Classes and principles only. Specific agents, doses and devices must come from your current national or institutional guideline. CliniX does not prescribe."
+    },
+
+    "skill.tx.copd.exacerbation": {
+      "id": "skill.tx.copd.exacerbation",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing an acute exacerbation",
+      "oneLine": "Controlled oxygen, bronchodilators, steroids, antibiotics if indicated, and ventilation when it is needed",
+      "why": "An exacerbation is where COPD kills people, and where the commonest serious error is made: giving uncontrolled high-flow oxygen to a chronically hypercapnic patient. Understanding target saturations and when to escalate to non-invasive ventilation is core, examinable and genuinely life-saving.",
+      "body": "Assess severity, exclude the mimics, then treat with controlled oxygen, bronchodilators, systemic corticosteroids, antibiotics where indicated, and ventilatory support where the gases demand it.",
+      "keyPoints": [
+        "First, exclude what else it could be: pneumonia, pneumothorax, pulmonary embolism, heart failure and arrhythmia all present as a deterioration.",
+        "Controlled oxygen. In a patient at risk of hypercapnic respiratory failure, target a saturation of 88 to 92 percent rather than 94 or above, and titrate. Uncontrolled high-flow oxygen can worsen hypercapnia and cause narcosis. Never withhold oxygen from a hypoxaemic patient, but control it.",
+        "Nebulised or inhaled short-acting bronchodilators, a beta-2 agonist with or without an antimuscarinic. Where hypercapnia is a concern, driving nebulisers with air and giving oxygen separately by nasal cannula avoids delivering a high oxygen load.",
+        "Systemic corticosteroids shorten recovery and improve lung function; a short course is used, and long courses add harm without benefit.",
+        "Antibiotics where there is increased sputum purulence with increased volume or increased breathlessness, or where ventilatory support is needed. Purulence is the most useful single indicator. Choice follows local resistance patterns.",
+        "Arterial blood gas to identify respiratory acidosis. Persisting respiratory acidosis despite optimal medical therapy is the indication for non-invasive ventilation, which reduces intubation and mortality.",
+        "Consider invasive ventilation where non-invasive ventilation fails or is contraindicated, guided by the patient's wishes and functional status.",
+        "Before discharge: review inhaler technique, start or reinforce cessation, arrange pulmonary rehabilitation and early follow-up, and make a written action plan."
+      ],
+      "pitfalls": [
+        "Giving uncontrolled high-flow oxygen to a chronically hypercapnic patient. This is the classic and most dangerous error.",
+        "Withholding oxygen entirely out of fear of hypercapnia, which is the opposite error and also kills.",
+        "Not doing a blood gas in a drowsy patient, and so missing carbon dioxide narcosis.",
+        "Treating every exacerbation with antibiotics regardless of purulence.",
+        "Missing pneumothorax or pulmonary embolism because the deterioration was assumed to be infective.",
+        "Discharging without reviewing inhaler technique or arranging follow-up, which is a major driver of readmission."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What oxygen saturation target is appropriate in a patient at risk of hypercapnic failure?", "a": "88 to 92 percent.", "accept": ["88", "92"], "minMatch": 2 },
+        { "level": 2, "q": "What is the indication for antibiotics in an exacerbation?", "a": "Increased sputum purulence together with increased volume or increased breathlessness, or the need for ventilatory support.", "accept": ["purulen", "volume", "breathless", "ventilat"], "minMatch": 1 },
+        { "level": 3, "q": "When is non-invasive ventilation indicated?", "a": "Persisting respiratory acidosis with hypercapnia despite optimal medical therapy. It reduces the need for intubation and reduces mortality.", "accept": ["acidosis", "hypercap", "despite", "medical therapy"], "minMatch": 1 },
+        { "level": 4, "q": "Explain why uncontrolled oxygen can worsen hypercapnia in COPD.", "a": "Several mechanisms act together: release of hypoxic pulmonary vasoconstriction worsens ventilation-perfusion matching and increases dead space; the Haldane effect reduces carbon dioxide carriage by oxygenated haemoglobin; and there is some reduction of hypoxic respiratory drive. Ventilation-perfusion mismatch is the dominant mechanism, not loss of drive alone.", "accept": ["v/q", "ventilation-perfusion", "haldane", "dead space", "vasoconstrict", "drive"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (exacerbation, respiratory failure)" },
+        { "source": "GOLD Report", "locator": "Management of exacerbations" }
+      ],
+      "review": { "status": "ai_drafted" },
+      "dosingNote": "Classes, targets and principles only. Steroid dose and duration, antibiotic choice and oxygen prescription must follow your current national or institutional guideline and local resistance data. CliniX does not prescribe."
+    },
+
+    "skill.present.copd": {
+      "id": "skill.present.copd",
+      "kind": "presentation",
+      "system": "respiratory",
+      "title": "Presenting the case",
+      "oneLine": "Two minutes, in a fixed order, ending with a plan",
+      "why": "A case presentation is a performance with a known structure, and it is assessed on structure as much as content. Students who know the material still lose marks by presenting it in the order they collected it rather than the order the listener needs it.",
+      "body": "Present in a fixed order and keep it to about two minutes for a focused case. The listener should be able to reach your diagnosis before you say it.",
+      "keyPoints": [
+        "Open with the problem representation: patient, epidemiology, tempo, syndrome. One or two sentences.",
+        "Give the relevant positive history, then the relevant negatives, and nothing else.",
+        "Give the relevant examination findings, positives then negatives, in the same order every time.",
+        "State your diagnosis with its grade and current state, and give the two or three findings that support it.",
+        "Give your differential briefly, and say what argues against each.",
+        "State what you would do next: the investigation that confirms, the investigations that exclude, and the immediate management.",
+        "Stop. Do not narrate everything you did."
+      ],
+      "pitfalls": [
+        "Presenting in the order the history was taken rather than in order of relevance.",
+        "Including every negative finding rather than the ones that discriminate.",
+        "Ending on the diagnosis without a plan.",
+        "Reading from notes rather than presenting.",
+        "Running to five minutes for a focused case."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "In what order should a focused case be presented?", "a": "Problem representation, relevant positive and negative history, relevant examination findings, diagnosis with supporting findings, brief differential, then plan.", "accept": ["summary", "problem", "history", "examination", "diagnosis", "differential", "plan"], "minMatch": 3 },
+        { "level": 3, "q": "Why present relevant negatives at all?", "a": "They show the listener what you actively excluded and narrow the differential. An absent finding that would have changed the diagnosis is doing as much work as a present one.", "accept": ["exclude", "narrow", "differential", "rule out"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "structure", "text": "Presents in a recognisable fixed order" },
+        { "id": "summary", "text": "Opens with a problem representation" },
+        { "id": "negatives", "text": "Includes discriminating negatives" },
+        { "id": "plan", "text": "Ends with a plan, not a diagnosis" },
+        { "id": "concise", "text": "Keeps a focused case to about two minutes" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "Presenting the case" }
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

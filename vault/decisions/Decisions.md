@@ -5,6 +5,47 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-22 · CliniX: one skill object, many runners, and two gates that fail closed
+New module for medical students (see [[CliniX]]), built behind `smd_clinix` def:false off tag
+`pre-clinix`. Three decisions worth keeping.
+
+**1. The atom is a Skill, and Learn / Case / OSCE / Viva / Competency are PROJECTIONS over it.**
+The alternative, which every LMS reaches for, is to author a lesson, then an OSCE station, then a
+viva bank. That triples the content and guarantees they drift. Here `compileLesson()`,
+`compileStation()` and `compileViva()` all read the same object, so an OSCE station is a *selection
+of skills plus a clock*, not authored content, and a single `competencyKey()` is what all three write
+against. A disease does not own skills, it references them and adds `emphasis` - which is what makes
+the fourth disease cheap rather than a fourth full authoring job.
+
+**2. CliniX is built like RadioAnatome, deliberately NOT like the KardiQ Learn atlas.** This is a
+measured call, not a stylistic one. `kardiox-content-pack.js` is 1.9 MB of JS parsed on every page
+load for every user whether or not they open Learn; `management` is `string[]` in 100 records and
+`""` in the other 1,041; user state (`status`, `masteryPct`, `bookmarked`) lives INSIDE content
+records and is therefore frozen at `"new"`/`0` forever; `tier:"atlas"` matches none of its own UI's
+tier chips, so **all 1,041 pack lessons are unreachable through the UI that ships with them**; and
+`assets/kardiox-learn/` holds 872 images with no manifest and no licence record. `atlas.js` already
+demonstrates the right answer in this repo: a small catalog, lazily fetched per-unit JSON, and
+`atlas-pipeline`'s `require_clear()` licence gate. CliniX takes that, and grounds content in
+`kb/reference/*` (4,664 Harrison-cited entries with per-entry review state) rather than authoring a
+parallel corpus.
+
+**3. Both gates fail CLOSED, and the module ships with them closed.** The review gate: content whose
+`review.status` is not `approved`/`published` never reaches a student, and a missing or garbled
+status reads as `draft`. The licence gate: media renders only when `cleared === true` with a real
+licence and attribution; **absence of a licence record is a refusal, not a default-allow**. The
+consequence is deliberate and visible: all Phase-1 COPD content is `ai_drafted` and no media is
+cleared, so a student today sees an explicit "Awaiting clinical review" state and lessons render
+captions rather than assets. That is the gate working. **Never flip `review.status` to `approved` to
+make a screen look finished** - the whole point is that the owner's clinical sign-off is the only
+thing that opens it.
+
+A fourth, smaller call: mastery requires repeated success on SEPARATE days, not one correct answer
+(which is what `kardiox-providers.js:112` does, and why no row in the ECG atlas ever shows mastered).
+**Status**: Phase 1 built, flag OFF. 55 unit + 36 real-browser checks green; full suite shows 104
+failures before and after, identical set, verified against `pre-clinix` in a clean worktree.
+**Open for the owner**: per-skill clinical sign-off, and the media work order in
+`clinix/media/manifest.json`.
+
 ## 2026-08-04 · SknX AI Phases 2-3 (educational report merged; clinician-Rx built OFF)
 See [[SknX]]. **Phase 2 (MERGED, PR #622):** evidence-grounded educational dermatology report using the REAL Gemini/Vertex transport (`functions/api/sknx` reuses `callGemini`, mirrors the audited thorex proxy) + Explain-Like + Compare. Three hard invariants, each tested: no raw image/PHI to the LLM (image-key reject + strict whitelist + recursive scan; TEXT-only prompt), no hallucinated citations (guidelineSummary/references only from the vetted `sknx-evidence.js` corpus; the LLM writes only the free-text discussion), no Rx (deterministic management principles; LLM discussion dropped if it looks like an Rx). R2 (AI-safety) + R1 (clinical) APPROVED; referral guardrail INTACT. **Phase 3 (built, branch `claude/sknx-phase3`, flag OFF):** `smd_sknx_rx` def:false. `sknx-rx.js` drafts a class-level first-line regimen (no patient dose) the clinician confirms/doses/signs in the existing `SMD_RX` pad; the affordance is impossible unless rxEligible + not-referral + flag-on + verified-prescriber, and malignant/urgent conditions (melanoma/BCC/SCC/cellulitis) are never draftable. **Decision: SknX never prescribes autonomously and never on a malignant/referral case; the `smd_sknx_rx` flag must NOT flip on without R1 clinical + R3-DPDP + R7 sign-off.** **Why:** prescribing is the one clinically-loaded capability; keep it clinician-confirmed, KB-grounded, reversible, and hard-gated. **Trade-off:** the real vision models (weights + native Core ML/TFLite) remain the one asset-dependent piece; everything else is real/mock-swappable. **Status:** Phase 2 merged (R1+R2 clean, 75 unit + 19 e2e); Phase 3 flag-OFF scaffold, 82 unit + 23 e2e green, pending R1 GO/NO-GO + its own PR.
 

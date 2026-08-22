@@ -1,0 +1,434 @@
+{
+  "_comment": "CliniX core skills - patient approach, particulars and general examination. These are SHARED by every disease in every system. A disease references them and may add emphasis; it never copies them. Edit here once and every pathway updates.",
+  "version": 1,
+  "system": "core",
+  "skills": {
+
+    "skill.approach.hygiene": {
+      "id": "skill.approach.hygiene",
+      "kind": "approach",
+      "system": "core",
+      "title": "Hand hygiene",
+      "oneLine": "Before you touch the patient, and after",
+      "why": "Healthcare-associated infection travels on hands more than on any other vehicle. In an examination it is also the first thing an examiner looks for, and forgetting it is the commonest avoidable critical error at the bedside.",
+      "steps": [
+        { "text": "Clean your hands in front of the patient, so they can see you do it." },
+        { "text": "Alcohol rub for visibly clean hands; soap and water if soiled, or after a patient with C. difficile or a spore-forming organism." },
+        { "text": "Cover all surfaces: palms, backs, between the fingers, thumbs, fingertips, wrists." },
+        { "text": "Roll sleeves above the elbow and remove wrist watch and rings before you start." },
+        { "text": "Repeat after you finish examining, before you touch anything else." }
+      ],
+      "practice": "Do a full alcohol rub while naming the six surfaces out loud. It should take about 20 seconds. Time yourself once.",
+      "pitfalls": [
+        "Cleaning your hands outside the room where the patient cannot see it. The examiner cannot see it either.",
+        "Missing the thumbs and fingertips, which are the two most commonly missed surfaces and the two that touch the patient most.",
+        "Washing before but not after."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "When do you clean your hands in relation to examining a patient?", "a": "Both before and after contact.", "accept": ["before", "after"], "minMatch": 2 },
+        { "level": 2, "q": "A patient has Clostridioides difficile diarrhoea. Why is alcohol rub not enough?", "a": "Alcohol does not kill spores; use soap and water for mechanical removal.", "accept": ["spore", "soap"] }
+      ],
+      "rubric": [
+        { "id": "hygiene", "text": "Cleans hands before patient contact", "critical": true },
+        { "id": "bare", "text": "Bare below the elbows (sleeves up, watch and rings off)" },
+        { "id": "after", "text": "Cleans hands after the examination" }
+      ],
+      "sources": [
+        { "source": "WHO Guidelines on Hand Hygiene in Health Care", "locator": "My 5 Moments for Hand Hygiene" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.approach.introduce": {
+      "id": "skill.approach.introduce",
+      "kind": "approach",
+      "system": "core",
+      "title": "Introduction and patient identity",
+      "oneLine": "Who you are, who they are, and checking you have the right patient",
+      "why": "Wrong-patient errors are a recognised source of serious harm, and the check costs five seconds. Introducing yourself by name and grade is also what converts an interrogation into a consultation: patients disclose more to someone who has told them who they are.",
+      "steps": [
+        { "text": "Greet the patient and give your full name and your grade or year." },
+        { "text": "State what you have come to do in plain language, without jargon." },
+        { "text": "Ask the patient to state their own name and age. Do not read it to them and ask them to agree." },
+        { "text": "Check the name against the wristband or the case record." },
+        { "text": "Ask how they would like to be addressed." }
+      ],
+      "practice": "Introduce yourself to a partner and take their identity in under 20 seconds without using a single abbreviation.",
+      "pitfalls": [
+        "Asking 'Are you Mr Rao?', which invites a confused or hard-of-hearing patient to say yes. Ask the patient to tell you their name.",
+        "Introducing yourself as 'doctor' when you are a student. Patients consent on the basis of who they think you are.",
+        "Skipping the introduction because the patient looks asleep. Say who you are anyway."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "How should you confirm a patient's identity?", "a": "Ask them to state their own name and age, then check it against the wristband or record.", "accept": ["state", "own name"], "minMatch": 1 },
+        { "level": 2, "q": "Why is 'Are you Mr Rao?' the wrong question?", "a": "It is a leading question; a confused, deaf or eager-to-please patient may simply agree.", "accept": ["leading", "agree", "confused"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "name", "text": "Gives own name and grade", "critical": true },
+        { "id": "identity", "text": "Confirms patient identity actively", "critical": true },
+        { "id": "address", "text": "Asks how the patient wishes to be addressed" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "The patient encounter" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.approach.consent": {
+      "id": "skill.approach.consent",
+      "kind": "approach",
+      "system": "core",
+      "title": "Explanation, consent and privacy",
+      "oneLine": "Say what you will do, ask permission, protect dignity",
+      "why": "Examining a patient without consent is a battery, however gentle the examination. Beyond the law, a patient who has been told what will happen is relaxed, and a relaxed abdomen or chest is a very different examination from a guarded one.",
+      "steps": [
+        { "text": "Explain what the examination involves, including that you will need to expose part of the body." },
+        { "text": "Say roughly how long it will take and that it should not hurt. Tell them to say if it does." },
+        { "text": "Ask explicitly for permission, and wait for the answer." },
+        { "text": "Offer a chaperone for any intimate examination, and record that you did." },
+        { "text": "Draw the curtains or close the door. Expose only the area you are examining, and cover it again afterwards." }
+      ],
+      "practice": "Explain and consent a respiratory examination to a partner, including the exposure required, in plain language and without saying 'auscultate' or 'palpate'.",
+      "pitfalls": [
+        "Asking 'Is it alright if I examine you?' while already reaching for the patient. Wait for the answer.",
+        "Exposing the whole trunk at the start and leaving the patient uncovered throughout. Expose region by region.",
+        "Forgetting to offer a chaperone, and forgetting to document the offer."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What three things does an explanation before an examination need to cover?", "a": "What you will do, that it involves exposure, and that they can stop you at any time.", "accept": ["what", "expos", "stop"], "minMatch": 2 },
+        { "level": 3, "q": "A patient agrees but looks uncomfortable when you mention exposure. What do you do?", "a": "Stop and explore the discomfort; offer a chaperone, a same-sex examiner, or to defer. Verbal agreement given reluctantly is not informed consent.", "accept": ["chaperone", "explore", "defer", "stop"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "explain", "text": "Explains the examination in plain language" },
+        { "id": "consent", "text": "Obtains explicit verbal consent before touching the patient", "critical": true },
+        { "id": "privacy", "text": "Ensures privacy and exposes only what is needed" },
+        { "id": "chaperone", "text": "Offers a chaperone where appropriate" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "The patient encounter" },
+        { "source": "Indian Medical Council (Professional Conduct) Regulations", "locator": "Duties towards patients" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.approach.position": {
+      "id": "skill.approach.position",
+      "kind": "approach",
+      "system": "core",
+      "title": "Positioning and exposure",
+      "oneLine": "The right position is part of the technique, not a preliminary",
+      "why": "Several signs exist only at the correct angle. The jugular venous pulse is only interpretable at 45 degrees; the apex beat may be impalpable supine and obvious in the left lateral position. Positioning badly does not make a sign harder to find, it makes it absent.",
+      "steps": [
+        { "text": "For a respiratory or cardiovascular examination, sit the patient at 45 degrees, supported." },
+        { "text": "Expose the chest fully for men; for women, expose in stages and use a gown or sheet to keep the breasts covered except when examining beneath them." },
+        { "text": "Ensure the light falls across the patient, not behind them, so you can see movement and colour." },
+        { "text": "Make sure the patient is warm and comfortable; shivering ruins palpation and auscultation." },
+        { "text": "Stand on the patient's right side to begin." }
+      ],
+      "practice": "Set a partner up at a true 45 degrees using a backrest or pillows. Check the angle from the side, not by eye from the foot of the bed.",
+      "pitfalls": [
+        "Calling any propped-up position 45 degrees. A patient at 30 or at 60 degrees gives a jugular venous pulse you cannot use.",
+        "Examining from the left side out of habit, which makes right-handed palpation of the apex and liver awkward.",
+        "Leaving the patient exposed and cold between stages of the examination."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "At what angle should the patient sit for a respiratory or cardiovascular examination?", "a": "45 degrees.", "accept": ["45"] },
+        { "level": 3, "q": "Why does the angle matter so much for the JVP specifically?", "a": "The vertical height of the venous column is measured from the sternal angle, and that reference only holds at about 45 degrees. At other angles the pulsation may be above the jaw or below the clavicle and simply not visible.", "accept": ["sternal angle", "height", "visible", "column"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "angle", "text": "Positions the patient at 45 degrees" },
+        { "id": "exposure", "text": "Exposes adequately while preserving dignity" },
+        { "id": "side", "text": "Examines from the patient's right side" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "General principles of examination" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.particulars.demographics": {
+      "id": "skill.particulars.demographics",
+      "kind": "history",
+      "system": "core",
+      "title": "Patient particulars",
+      "oneLine": "The details that change the differential before a single symptom is mentioned",
+      "why": "Particulars are not administrative. Age, sex, occupation and residence shift the pre-test probability of almost every diagnosis: the same cough means different things in a 22-year-old and a 68-year-old smoker, or in a stone-quarry worker and an office clerk. Recording who gave the history, and how reliable they are, tells the next reader how much weight the history can bear.",
+      "asks": [
+        { "text": "Name, age and sex." },
+        { "text": "Occupation, including what the work actually involves rather than the job title." },
+        { "text": "Residence, and whether rural or urban." },
+        { "text": "Date and time of admission, if an inpatient." },
+        { "text": "Who is giving the history: the patient, or a relative." },
+        { "text": "How reliable that informant is, and say why if not." }
+      ],
+      "practice": "Take the particulars from a partner playing a 58-year-old welder. Ask what the work involves rather than accepting the job title, and note one exposure it reveals.",
+      "pitfalls": [
+        "Recording 'labourer' or 'business' and stopping. Ask what they do all day, and what they breathe while doing it.",
+        "Omitting the informant when the patient is confused, which leaves the reader unable to judge the history.",
+        "Treating reliability as a judgement on the person. It is a statement about the information."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Besides name, age and sex, name two particulars that change a respiratory differential.", "a": "Occupation and residence, plus smoking and cooking-fuel exposure.", "accept": ["occupation", "residence", "rural", "urban"], "minMatch": 1 },
+        { "level": 2, "q": "Why record the informant and their reliability?", "a": "It tells any later reader how much weight the history can bear, particularly when the patient is confused, breathless or a child.", "accept": ["weight", "reliab", "confus"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "core", "text": "Records name, age, sex" },
+        { "id": "occupation", "text": "Explores what the occupation actually involves" },
+        { "id": "informant", "text": "Records the informant and reliability" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "The history" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.hx.chief_complaints": {
+      "id": "skill.hx.chief_complaints",
+      "kind": "history",
+      "system": "core",
+      "title": "Chief complaints",
+      "oneLine": "Symptom and duration, in the patient's words, in order of onset",
+      "why": "The chief complaints are the frame the whole case hangs on. Written properly they already suggest the diagnosis and its tempo; written as a diagnosis they hide it. 'Breathlessness for 3 years, worse for 4 days' tells a reader chronic disease with an acute deterioration before any other line is read.",
+      "asks": [
+        { "text": "What brought you to hospital? Let the patient answer without interruption first." },
+        { "text": "How long has that been going on?" },
+        { "text": "Anything else troubling you? Repeat until they have nothing to add." },
+        { "text": "Then order the complaints by time of onset, each with its duration." }
+      ],
+      "practice": "Listen to a partner describe three symptoms in a jumbled order. Write them as a chief-complaints list, in the patient's words, ordered by onset with durations.",
+      "pitfalls": [
+        "Writing a diagnosis instead of a symptom. 'COPD exacerbation for 4 days' is not a complaint; 'breathlessness for 4 days' is.",
+        "Translating the patient's word into a technical one too early. If they say chest heaviness, do not write angina.",
+        "Interrupting in the first 30 seconds. Patients who are allowed to finish give a more complete list, and it takes less time overall.",
+        "Listing complaints in the order they were mentioned rather than the order they began."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What two elements does every chief complaint need?", "a": "The symptom and its duration.", "accept": ["symptom", "duration"], "minMatch": 2 },
+        { "level": 2, "q": "A patient says 'I have COPD attack since Monday'. How do you record the chief complaint?", "a": "As the symptoms, with durations, in the patient's own words. For example breathlessness for 4 days, increased cough with sputum for 4 days. The diagnosis is not a complaint.", "accept": ["breathless", "symptom", "not a diagnosis", "cough"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "open", "text": "Begins with an open question and does not interrupt" },
+        { "id": "duration", "text": "Elicits a duration for every complaint" },
+        { "id": "order", "text": "Orders complaints chronologically" },
+        { "id": "words", "text": "Uses the patient's own words, not a diagnosis" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "The history" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.gen.appearance": {
+      "id": "skill.gen.appearance",
+      "kind": "general_exam",
+      "system": "core",
+      "title": "General appearance and build",
+      "oneLine": "The observation you make from the end of the bed, before you touch anything",
+      "why": "The end-of-bed assessment answers the only question that matters first: is this patient sick or not sick. It also catches findings that disappear once you start a formal examination, such as the patient's breathing pattern, their posture, and whether they can complete a sentence.",
+      "steps": [
+        { "text": "Stand at the end of the bed and look, without touching, for at least fifteen seconds." },
+        { "text": "Note whether the patient looks comfortable, distressed, or exhausted." },
+        { "text": "Note the posture: sitting forward, tripod position, propped on pillows, or lying flat." },
+        { "text": "Note the breathing: rate, effort, use of accessory muscles, pursed lips, audible wheeze or stridor." },
+        { "text": "Note build and nutrition: cachexia, obesity, muscle wasting at the temples and shoulders." },
+        { "text": "Note the surroundings: oxygen, inhalers, nebuliser, sputum pot, walking aid, cigarette packet." }
+      ],
+      "normal": "A comfortable patient of average build, breathing quietly and able to speak in full sentences, with no supportive equipment in use.",
+      "abnormal": "Distress, exhaustion, cachexia, an abnormal posture adopted to breathe, accessory muscle use, or inability to complete a sentence in one breath.",
+      "significance": "Inability to complete a sentence, exhaustion and a silent or paradoxical breathing pattern are markers of impending ventilatory failure and take priority over any other finding you might go on to elicit.",
+      "practice": "Stand at the foot of a bed for a full fifteen seconds and write down six observations before touching the patient. Most students stop at two.",
+      "pitfalls": [
+        "Walking straight to the wrist to feel the pulse. Everything visible from the end of the bed is lost the moment you do.",
+        "Ignoring the bedside table. A sputum pot, a nebuliser mask or an inhaler is history you did not have to ask for.",
+        "Recording 'general condition fair' and nothing else, which conveys no information at all."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What should you do before touching the patient?", "a": "Observe from the end of the bed: comfort, posture, breathing pattern, build, and the surroundings.", "accept": ["observe", "look", "end of the bed"], "minMatch": 1 },
+        { "level": 3, "q": "A breathless patient cannot finish a sentence. What does that tell you and what do you do?", "a": "It indicates severe respiratory distress and possible impending ventilatory failure. Assess and support airway, breathing and circulation, give oxygen guided by saturation targets, and call for senior help before continuing a formal examination.", "accept": ["severe", "failure", "oxygen", "help", "abc"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "endbed", "text": "Observes from the end of the bed before touching" },
+        { "id": "breathing", "text": "Comments on breathing pattern and effort" },
+        { "id": "surroundings", "text": "Notes bedside clues (oxygen, inhaler, sputum pot)" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "General examination" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.gen.clubbing": {
+      "id": "skill.gen.clubbing",
+      "kind": "general_exam",
+      "system": "core",
+      "title": "Clubbing",
+      "oneLine": "Loss of the nail-fold angle, and why it matters that COPD does not cause it",
+      "why": "Clubbing is one of the few signs that reliably redirects a diagnosis. It is a marker of suppurative lung disease, malignancy, interstitial disease, cyanotic heart disease and cirrhosis, and it is specifically not a feature of COPD or of asthma. Finding it in a patient labelled COPD is a reason to look for a second, unrecognised disease.",
+      "steps": [
+        { "text": "Look at the nail from the side, at eye level, for loss of the normal angle between nail and nail fold." },
+        { "text": "Feel the nail bed for fluctuation, rocking the nail gently between your fingers." },
+        { "text": "Assess for increased longitudinal and transverse curvature of the nail." },
+        { "text": "Ask the patient to place the dorsal surfaces of matching fingers together and look for the diamond-shaped window (Schamroth sign)." },
+        { "text": "Check all fingers and, where clubbing is present, the toes." }
+      ],
+      "normal": "A visible angle of about 160 degrees between the nail and the nail fold, a firm non-fluctuant nail bed, and a clear diamond-shaped window on the Schamroth test.",
+      "abnormal": "Loss or reversal of the nail-fold angle, a boggy fluctuant nail bed, increased nail curvature, and obliteration of the Schamroth window.",
+      "significance": "In a patient with chronic respiratory symptoms, clubbing points away from COPD and towards bronchiectasis, lung abscess, empyema, interstitial lung disease or bronchial carcinoma. New clubbing in a known smoker warrants investigation for lung cancer.",
+      "practice": "Perform the Schamroth test on yourself and on two other people. Learn what a normal diamond window looks like, so that its absence is obvious to you.",
+      "pitfalls": [
+        "Attributing clubbing to COPD itself. It is not a feature of COPD, and doing so delays a cancer diagnosis.",
+        "Looking at the nail from above rather than from the side, where the angle is actually visible.",
+        "Reporting clubbing on curvature alone, without checking for fluctuation or the Schamroth window."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "What is the Schamroth sign?", "a": "Loss of the normal diamond-shaped window seen when the dorsal surfaces of matching fingers are placed together.", "accept": ["diamond", "window"], "minMatch": 1 },
+        { "level": 2, "q": "Name three respiratory causes of clubbing.", "a": "Bronchiectasis, lung abscess or empyema, bronchial carcinoma, and interstitial lung disease.", "accept": ["bronchiectasis", "abscess", "empyema", "carcinoma", "cancer", "interstitial", "fibrosis"], "minMatch": 2 },
+        { "level": 3, "q": "A 62-year-old smoker labelled COPD has new clubbing. What is your concern?", "a": "Clubbing is not a feature of COPD. New clubbing in a smoker requires investigation for bronchial carcinoma, and also raises bronchiectasis and interstitial lung disease.", "accept": ["carcinoma", "cancer", "malignan", "not a feature"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "side", "text": "Inspects the nail from the side at eye level" },
+        { "id": "fluctuation", "text": "Tests for nail bed fluctuation" },
+        { "id": "schamroth", "text": "Performs the Schamroth test" }
+      ],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (clubbing is not attributable to COPD)" },
+        { "source": "Macleod's Clinical Examination", "locator": "The hands" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.gen.cyanosis": {
+      "id": "skill.gen.cyanosis",
+      "kind": "general_exam",
+      "system": "core",
+      "title": "Cyanosis",
+      "oneLine": "Central versus peripheral, and why the distinction changes what you do next",
+      "why": "Cyanosis is the visible expression of desaturated haemoglobin. Distinguishing central from peripheral separates a failing lung or a shunt from a cold or poorly perfused limb, and those two situations demand completely different responses.",
+      "steps": [
+        { "text": "Look at the tongue and the buccal mucosa in good light. This is where central cyanosis is judged." },
+        { "text": "Look at the lips, remembering that lipstick, betel and cold weather all confound them." },
+        { "text": "Then look at the fingers, toes, nose and ear lobes for peripheral cyanosis." },
+        { "text": "Feel the peripheries: peripheral cyanosis from poor perfusion is usually cold, central cyanosis is warm." },
+        { "text": "Correlate with pulse oximetry, and remember that oximetry can mislead." }
+      ],
+      "normal": "A pink tongue and buccal mucosa, with warm well-perfused peripheries.",
+      "abnormal": "Central: a blue tongue and mucosa, indicating arterial desaturation, right-to-left shunt or abnormal haemoglobin. Peripheral: blue extremities with a pink tongue, indicating slow peripheral flow, cold, or shock.",
+      "significance": "Central cyanosis in a breathless patient signals significant arterial desaturation and demands immediate assessment of oxygenation and ventilation. Peripheral cyanosis alone points to perfusion rather than to the lung.",
+      "practice": "Examine three people's tongues in daylight and again under ward fluorescent light. Notice how much the light changes your impression, which is why the finding must be correlated with oximetry.",
+      "pitfalls": [
+        "Judging central cyanosis from the lips alone. The tongue is the reliable site.",
+        "Missing cyanosis in anaemia. It requires an absolute amount of desaturated haemoglobin, so a profoundly anaemic patient can be dangerously hypoxaemic without looking blue.",
+        "Being falsely reassured by a normal oximeter reading in carbon monoxide poisoning, where the saturation reads high despite tissue hypoxia."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Where do you look for central cyanosis?", "a": "The tongue and buccal mucosa.", "accept": ["tongue", "mucosa"], "minMatch": 1 },
+        { "level": 3, "q": "Why can a severely anaemic patient be very hypoxaemic without visible cyanosis?", "a": "Cyanosis depends on an absolute concentration of desaturated haemoglobin, not on the saturation percentage. With little haemoglobin present, that absolute amount is never reached.", "accept": ["absolute", "concentration", "amount", "haemoglobin", "hemoglobin"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "tongue", "text": "Examines the tongue for central cyanosis" },
+        { "id": "periph", "text": "Examines the peripheries and comments on temperature" },
+        { "id": "distinguish", "text": "States whether cyanosis is central or peripheral" }
+      ],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "General examination" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.gen.edema": {
+      "id": "skill.gen.edema",
+      "kind": "general_exam",
+      "system": "core",
+      "title": "Peripheral oedema",
+      "oneLine": "Where to press, how long, and what pitting actually tells you",
+      "why": "In a patient with chronic lung disease, dependent oedema is the bedside signal of right heart involvement, and is one of the findings that turns COPD into cor pulmonale. Eliciting it properly also distinguishes it from the non-pitting swelling of lymphoedema and myxoedema.",
+      "steps": [
+        { "text": "Expose both legs to above the knee." },
+        { "text": "Press firmly with the pad of your thumb over the medial malleolus or the shin, against bone." },
+        { "text": "Hold the pressure for at least fifteen seconds. Brief pressure misses mild oedema." },
+        { "text": "Release and look, and also run your finger over the area to feel the pit." },
+        { "text": "Work upwards to find the upper level of the oedema, and check the sacrum in a patient who has been in bed." }
+      ],
+      "normal": "No pit after sustained pressure over a bony prominence.",
+      "abnormal": "A persisting indentation after pressure is released, recorded with its upper level. Non-pitting swelling suggests lymphoedema or myxoedema rather than fluid overload.",
+      "significance": "In chronic lung disease, bilateral dependent pitting oedema with a raised jugular venous pressure suggests cor pulmonale. Unilateral swelling raises deep vein thrombosis, which is a common and easily missed cause of sudden deterioration in a breathless patient.",
+      "practice": "Press over your own shin against bone and hold for a full fifteen seconds, counting it out. Most students release after three.",
+      "pitfalls": [
+        "Pressing for only a second or two, which misses mild oedema entirely.",
+        "Pressing on soft tissue rather than against bone.",
+        "Examining one leg only, and so missing the asymmetry that would suggest a deep vein thrombosis.",
+        "Forgetting the sacrum in a bed-bound patient, where fluid collects instead of the ankles."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "How long should you hold pressure when testing for pitting oedema?", "a": "At least fifteen seconds.", "accept": ["15", "fifteen"], "minMatch": 1 },
+        { "level": 2, "q": "A breathless patient has swelling of one leg only. What must you exclude?", "a": "Deep vein thrombosis, and therefore pulmonary embolism.", "accept": ["dvt", "deep vein", "thrombosis", "embolism"], "minMatch": 1 },
+        { "level": 3, "q": "Why check the sacrum in a bed-bound patient?", "a": "Oedema is dependent. In someone who has been lying down, fluid collects over the sacrum rather than at the ankles, so ankle examination alone may be falsely reassuring.", "accept": ["dependent", "lying", "sacrum"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "bone", "text": "Presses against a bony prominence" },
+        { "id": "hold", "text": "Holds pressure for at least fifteen seconds" },
+        { "id": "level", "text": "Determines the upper level of the oedema" },
+        { "id": "both", "text": "Examines both legs" }
+      ],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (cor pulmonale)" },
+        { "source": "Macleod's Clinical Examination", "locator": "The cardiovascular system" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.gen.vitals": {
+      "id": "skill.gen.vitals",
+      "kind": "general_exam",
+      "system": "core",
+      "title": "Vital signs",
+      "oneLine": "Respiratory rate is the one everybody fakes, and the one that matters most",
+      "why": "The respiratory rate is the earliest and most sensitive vital sign of deterioration, and it is the most frequently mis-recorded observation in hospital because it is the only one that cannot be read off a machine. Counting it properly is a genuine clinical skill.",
+      "steps": [
+        { "text": "Count the respiratory rate for a full sixty seconds while appearing to feel the pulse, so the patient does not alter their breathing." },
+        { "text": "Note the depth and pattern as you count, not only the rate." },
+        { "text": "Take the pulse: rate, rhythm, volume and character." },
+        { "text": "Measure the blood pressure with a correctly sized cuff, and look for pulsus paradoxus if there is severe airflow obstruction." },
+        { "text": "Record oxygen saturation, and state the inspired oxygen it was measured on." },
+        { "text": "Measure the temperature." }
+      ],
+      "normal": "Respiratory rate 12 to 20 per minute, regular pulse of normal volume, blood pressure appropriate for age, saturation 94 percent or above on room air.",
+      "abnormal": "Tachypnoea, bradypnoea, an irregular or paradoxical pattern, tachycardia, hypotension, or desaturation. In chronic hypercapnic disease, a lower target saturation range may be appropriate.",
+      "significance": "A rising respiratory rate is often the first sign of deterioration, preceding changes in pulse and blood pressure. A falling rate in an exhausted breathless patient is an ominous sign of impending respiratory arrest, not improvement.",
+      "practice": "Count a partner's respiratory rate for sixty seconds without telling them what you are doing, then tell them and count again. Compare the two numbers.",
+      "pitfalls": [
+        "Recording a respiratory rate of 18 or 20 without counting. This is the commonest fabricated observation in clinical practice.",
+        "Counting for fifteen seconds and multiplying, which magnifies any error fourfold and misses irregular patterns.",
+        "Recording a saturation without recording the oxygen the patient was breathing, which makes the number uninterpretable.",
+        "Reading a slowing respiratory rate in an exhausted patient as improvement."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "How long should you count the respiratory rate?", "a": "A full sixty seconds.", "accept": ["60", "sixty", "full minute", "one minute"], "minMatch": 1 },
+        { "level": 2, "q": "Why count the respiratory rate while apparently feeling the pulse?", "a": "Patients who know their breathing is being watched change it. Concealing the observation gives a truer rate.", "accept": ["change", "aware", "alter", "conscious"], "minMatch": 1 },
+        { "level": 4, "q": "An exhausted asthmatic's respiratory rate falls from 34 to 16 and they become quiet. Interpret this.", "a": "This is exhaustion and impending respiratory arrest, not improvement. A silent chest with a falling rate and rising carbon dioxide is a peri-arrest state requiring immediate senior and critical-care input.", "accept": ["exhaust", "arrest", "not improv", "silent", "peri-arrest"], "minMatch": 1 }
+      ],
+      "rubric": [
+        { "id": "rr", "text": "Counts respiratory rate for a full minute" },
+        { "id": "pulse", "text": "Assesses pulse rate, rhythm and character" },
+        { "id": "spo2", "text": "Records saturation with the inspired oxygen stated" },
+        { "id": "bp", "text": "Measures blood pressure with an appropriate cuff" }
+      ],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (respiratory failure)" },
+        { "source": "Macleod's Clinical Examination", "locator": "The general examination" }
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

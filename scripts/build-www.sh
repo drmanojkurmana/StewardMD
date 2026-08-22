@@ -95,6 +95,13 @@ if [ -d atlas ]; then
   for d in atlas/*/; do [ -f "$d/atlas.json" ] && mkdir -p "$WWW/$d" && cp "$d/atlas.json" "$WWW/$d"; done
 fi
 [ -d clinical-pathways ] && mkdir -p "$WWW/clinical-pathways" && cp -R clinical-pathways/. "$WWW/clinical-pathways/"
+# CliniX clinical-learning content (catalog + skill packs + disease pathways + the media licence
+# registry). All plain JSON, fetched at runtime by clinix-content.js on first open. This copy is
+# load-bearing: without it the module loads, the tile appears, and every pathway renders empty on the
+# device - exactly the kb/onco failure recorded above. Media assets are NOT copied: like
+# assets/kardiox-learn/, they stay on Pages and clinix-content.js cxMedia() rewrites their URLs
+# natively, so the native bundle never carries them.
+[ -d clinix ] && mkdir -p "$WWW/clinix" && cp -R clinix/. "$WWW/clinix/"
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),

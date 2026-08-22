@@ -812,6 +812,13 @@
       // non-free entitlement), so open() is already a complete no-op when the gate fails.
       if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
     },
+    clinix: function () {
+      // CliniX — clinical learning for medical students. Like SknX, it is not code-gated via
+      // SMD_XACCESS: CLINIX.open() checks smd_clinix itself and is a complete no-op when off.
+      // Persist the flag so the tile stays visible once a user has opened it from Settings.
+      try { localStorage.setItem("smd_clinix", "1"); } catch (e) {}
+      if (window.CLINIX && CLINIX.open) CLINIX.open(); else toast("CliniX loading…");
+    },
     insulin: function () {
       // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
       // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
@@ -1441,6 +1448,8 @@
       eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
       eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
+    { act: "clinix", ic: "school", tt: "CliniX", sub: "Clinical learning", feat: true,
+      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",

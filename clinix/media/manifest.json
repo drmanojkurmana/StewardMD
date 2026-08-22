@@ -1,0 +1,163 @@
+{
+  "_comment": "CliniX media registry AND licence gate. Nothing renders unless cleared === true with a real licence and attribution. This mirrors atlas-pipeline/sources.json require_clear(): the registry REFUSES uncleared media rather than documenting the problem in a comment. Contrast assets/kardiox-learn/, which holds 872 images with no manifest and no licence record at all.",
+
+  "_howToClear": [
+    "1. Confirm the licence permits use in a commercial mobile app (CC0, CC BY, CC BY-SA, public domain, or explicit permission).",
+    "2. For an embed, confirm the rights holder has left embedding enabled and that we link/iframe rather than re-host.",
+    "3. Fill licence, attribution, sourceUrl (and src for a hosted asset).",
+    "4. Set cleared: true. Only then does it render.",
+    "NEVER set cleared: true to make a screen look finished. An uncleared entry degrades to caption plus 'source pending', which is honest; a wrongly cleared one is a licence breach."
+  ],
+
+  "_status": "Phase 1 ships the registry and the gate with the COPD work order below. No entry is cleared yet, so every lesson currently renders its caption and a 'visual pending' note rather than an asset. That is the gate working, not a bug.",
+
+  "schemaVersion": 1,
+  "updated": "2026-08-22",
+
+  "media": {
+
+    "media.resp.inspection.barrel": {
+      "id": "media.resp.inspection.barrel",
+      "kind": "image",
+      "caption": "Barrel-shaped chest: increased anteroposterior diameter seen from the side",
+      "forSkill": "skill.exam.resp.inspection",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Needs an openly-licensed lateral photograph of a hyperinflated chest, or an owner-produced one with patient consent. Wikimedia Commons and Radiopaedia (CC BY-NC-SA, check commercial terms) are the first places to look."
+    },
+
+    "media.resp.inspection.pursedlip": {
+      "id": "media.resp.inspection.pursedlip",
+      "kind": "video",
+      "caption": "Pursed-lip breathing and accessory muscle use",
+      "forSkill": "skill.exam.resp.inspection",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Short clip. Owner-produced is the cleanest route: it is easy to demonstrate and needs no patient."
+    },
+
+    "media.resp.inspection.hoover": {
+      "id": "media.resp.inspection.hoover",
+      "kind": "gif",
+      "caption": "Hoover sign: inward movement of the lower costal margin on inspiration",
+      "forSkill": "skill.exam.resp.inspection",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "A short loop is far better than prose here. Consider an owner-produced animation rather than patient footage."
+    },
+
+    "media.resp.expansion.technique": {
+      "id": "media.resp.expansion.technique",
+      "kind": "video",
+      "caption": "Chest expansion: thumbs lifted clear of the chest wall",
+      "forSkill": "skill.exam.resp.expansion",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "The single highest-value clip in the respiratory set, because the floating-thumb detail is what students get wrong and is almost impossible to convey in text."
+    },
+
+    "media.resp.percussion.technique": {
+      "id": "media.resp.percussion.technique",
+      "kind": "video",
+      "caption": "Percussion technique: pleximeter placement and a loose wrist",
+      "forSkill": "skill.exam.resp.percussion",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Owner-produced or a permitted embed. Must show the side-to-side comparison order, not just the striking action."
+    },
+
+    "media.resp.auscultation.wheeze": {
+      "id": "media.resp.auscultation.wheeze",
+      "kind": "audio",
+      "caption": "Polyphonic expiratory wheeze",
+      "forSkill": "skill.exam.resp.added_sounds",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Audio is essential rather than decorative for added sounds. Look for openly-licensed teaching libraries; several university collections publish under CC. Verify commercial terms."
+    },
+
+    "media.resp.auscultation.crackles_coarse": {
+      "id": "media.resp.auscultation.crackles_coarse",
+      "kind": "audio",
+      "caption": "Early coarse crackles that change with coughing",
+      "forSkill": "skill.exam.resp.added_sounds",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Pair with the fine late inspiratory crackle below, so the contrast can be heard back to back. The contrast is the lesson."
+    },
+
+    "media.resp.auscultation.crackles_fine": {
+      "id": "media.resp.auscultation.crackles_fine",
+      "kind": "audio",
+      "caption": "Fine late inspiratory crackles that do not clear with coughing",
+      "forSkill": "skill.exam.resp.added_sounds",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Contrast pair for the coarse crackle above."
+    },
+
+    "media.gen.clubbing.schamroth": {
+      "id": "media.gen.clubbing.schamroth",
+      "kind": "image",
+      "caption": "Schamroth window: normal diamond, and its loss in clubbing",
+      "forSkill": "skill.gen.clubbing",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "A side-by-side normal and abnormal is worth more than either alone. Wikimedia Commons has candidate images; confirm the specific file's licence, not the category's."
+    },
+
+    "media.gen.cyanosis.central": {
+      "id": "media.gen.cyanosis.central",
+      "kind": "image",
+      "caption": "Central cyanosis of the tongue",
+      "forSkill": "skill.gen.cyanosis",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Needs a genuinely representative image; poor colour reproduction makes this actively misleading, so reject a marginal one."
+    },
+
+    "media.copd.spirometry.curve": {
+      "id": "media.copd.spirometry.curve",
+      "kind": "diagram",
+      "caption": "Flow-volume loop in obstruction compared with normal",
+      "forSkill": "skill.ix.copd.spirometry",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Best drawn in-house as an SVG. A self-authored diagram sidesteps the licence question entirely and can be made theme-aware and interactive."
+    },
+
+    "media.copd.pathophys.airtrapping": {
+      "id": "media.copd.pathophys.airtrapping",
+      "kind": "animation",
+      "caption": "Small airway collapse on expiration and gas trapping",
+      "forSkill": "skill.copd.signs",
+      "licence": "",
+      "attribution": "",
+      "sourceUrl": "",
+      "cleared": false,
+      "note": "Self-authored SVG animation. This is the mechanism most of the COPD signs derive from, so it earns a real animation."
+    }
+  }
+}

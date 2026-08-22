@@ -1,0 +1,54 @@
+{
+  "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
+  "schemaVersion": 1,
+  "contentVersion": "0.1.0-review-pending",
+  "updated": "2026-08-22",
+
+  "skillPacks": [
+    { "id": "core", "file": "skills/core.json", "title": "Patient approach and general examination", "shared": true },
+    { "id": "respiratory", "file": "skills/respiratory.json", "title": "Respiratory history and examination" }
+  ],
+
+  "systems": [
+    {
+      "id": "respiratory",
+      "title": "Respiratory",
+      "icon": "pulmonology",
+      "skillPacks": ["core", "respiratory"],
+      "diseases": [
+        {
+          "id": "copd",
+          "title": "COPD",
+          "subtitle": "Chronic obstructive pulmonary disease",
+          "file": "diseases/copd.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        }
+      ]
+    },
+    {
+      "id": "cardiovascular",
+      "title": "Cardiovascular",
+      "icon": "cardiology",
+      "skillPacks": ["core"],
+      "diseases": []
+    },
+    {
+      "id": "abdomen",
+      "title": "GIT and abdomen",
+      "icon": "gastroenterology",
+      "skillPacks": ["core"],
+      "diseases": []
+    },
+    {
+      "id": "neurology",
+      "title": "Neurology",
+      "icon": "neurology",
+      "skillPacks": ["core"],
+      "diseases": []
+    }
+  ],
+
+  "media": { "file": "media/manifest.json" }
+}
