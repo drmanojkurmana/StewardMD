@@ -213,11 +213,13 @@
         var sxActive = false; try { sxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) {}
         var mlActive = false; try { mlActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("maik_local")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
+        // BUG (2026-08-23, user report): this used to render at the tail of "Experimental Features",
+        // an odd, easy-to-miss home for a core update mechanism that isn't experimental or gated by
+        // an access code. Now its own top-level Settings group, same as Clinical Engine / AI Assistant.
         var otaBlk = "";
         try {
           if (window.SMD_OTA && SMD_OTA.available()) {
-            otaBlk = '<div class="smd-nav-note" style="margin-top:14px">' + svg("download", "smd-ico") + ' Software update</div>' +
-              swRow("ota_auto", "Automatic updates", "Fetch new versions in the background", SMD_OTA.isAuto()) +
+            otaBlk = swRow("ota_auto", "Automatic updates", "Fetch new versions in the background", SMD_OTA.isAuto()) +
               '<div class="smd-nav-sub" id="otaStatus" style="padding:0 0 6px">Version ' + (SMD_OTA.currentVersion() || "current") + '</div>' +
               '<button class="smd-nav-btn" id="otaCheck">' + svg("refresh", "smd-ico") + ' Check for updates</button>' +
               '<button class="smd-nav-btn" id="otaInstall" style="display:none">' + svg("download", "smd-ico") + ' Download &amp; install</button>';
@@ -228,8 +230,9 @@
           '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (mlActive ? ' on' : '') + '" data-xa-open="maik_local">' + (mlActive ? 'MaiK on-device model: enabled' : 'MaiK on-device model: enter access code') + '</button>' + otaBlk;
+          '<button class="smd-nav-btn' + (mlActive ? ' on' : '') + '" data-xa-open="maik_local">' + (mlActive ? 'MaiK on-device model: enabled' : 'MaiK on-device model: enter access code') + '</button>';
         setBody.insertAdjacentHTML("beforeend",
+          (otaBlk ? group("update", "Software Update", otaBlk, false) : "") +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
