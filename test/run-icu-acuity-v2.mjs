@@ -6,9 +6,11 @@
  *    the SpO2 boundary (was `< 93`, cleared at exactly 93) is corrected to `<= 93`.
  *  - B7 (staleness half): a "Stable" read older than the window demotes to "Not assessed" - only
  *    ever FROM stable, never downgrading an already-flagged critical/review patient.
- * Flag: smd_icu_acuity_v2 (localStorage) / ?acuityv2= (query), default OFF. The whole first half of
- * this file proves flag-OFF behaviour is BYTE-IDENTICAL to before - this is the load-bearing half,
- * since it's what every current user sees until the owner turns it on.
+ * Flag: smd_icu_acuity_v2 (localStorage) / ?acuityv2= (query). Shipped OFF by default, verified,
+ * then the owner reviewed the ranking design and turned it ON for everyone (2026-08-23) - default
+ * is now ON, opt-out via "0" (same kill-switch pattern as labWatchOn()/icuGroupsOn()). The first
+ * half of this file proves the OPT-OUT ("0") path is byte-identical to the pre-existing engine -
+ * that's the instant-revert path if this ever needs pulling back with no redeploy.
  * USAGE: node test/run-icu-acuity-v2.mjs
  */
 import { spawn } from "node:child_process";
@@ -52,8 +54,8 @@ try {
   if (!ready) throw new Error("ICU not loaded");
   await ev(`try { localStorage.setItem("smd_icu_groups","0"); } catch(e){} return 1;`);
 
-  // ===================== FLAG OFF (default) — nothing changes =====================
-  await ev(`try { localStorage.removeItem("smd_icu_acuity_v2"); } catch(e){} return 1;`);
+  // ===================== OPT-OUT ("0") — the instant-revert path =====================
+  await ev(`try { localStorage.setItem("smd_icu_acuity_v2","0"); } catch(e){} return 1;`);
 
   const offBlank = await J(`
     ${clearRoster}
@@ -61,7 +63,7 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bstable\b/.test(offBlank.cls) && !/\bunassessed\b/.test(offBlank.cls), `flag OFF: a blank patient still reads Stable, not Not-assessed (${offBlank.cls})`);
+  ok(/\bstable\b/.test(offBlank.cls) && !/\bunassessed\b/.test(offBlank.cls), `opt-out ("0"): a blank patient still reads Stable, not Not-assessed (${offBlank.cls})`);
   ok(offBlank.pillText === "Stable", `...pill still says "Stable" (got "${offBlank.pillText}")`);
 
   const offSpo293 = await J(`
@@ -72,10 +74,10 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bstable\b/.test(offSpo293.cls), `flag OFF: SpO2 exactly 93 still clears review (the old, unfixed boundary) — ${offSpo293.cls}`);
+  ok(/\bstable\b/.test(offSpo293.cls), `opt-out ("0"): SpO2 exactly 93 still clears review (the old, unfixed boundary) — ${offSpo293.cls}`);
 
   const offCensus = await J(`return JSON.stringify({ hasUnassessedChip: !!document.querySelector(".icu-v2-scount.unassessed") });`);
-  ok(offCensus.hasUnassessedChip === false, "flag OFF: no 'Not assessed' census tile is rendered at all");
+  ok(offCensus.hasUnassessedChip === false, `opt-out ("0"): no 'Not assessed' census tile is rendered at all`);
 
   const offNews2 = await J(`
     ${clearRoster}
@@ -85,10 +87,10 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bstable\b/.test(offNews2.cls), `flag OFF: the audit's own tachypnoea case (RR 34, otherwise normal) still reads Stable — reproduces B3 exactly (${offNews2.cls})`);
+  ok(/\bstable\b/.test(offNews2.cls), `opt-out ("0"): the audit's own tachypnoea case (RR 34, otherwise normal) still reads Stable — reproduces B3 exactly (${offNews2.cls})`);
 
-  // ===================== FLAG ON — the v2 engine =====================
-  await ev(`try { localStorage.setItem("smd_icu_acuity_v2","1"); } catch(e){} return 1;`);
+  // ===================== DEFAULT (unset) — the v2 engine is ON by default =====================
+  await ev(`try { localStorage.removeItem("smd_icu_acuity_v2"); } catch(e){} return 1;`);
 
   // ---- B2: nothing charted -> Not assessed, not Stable ----
   const onBlank = await J(`
@@ -97,7 +99,7 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bunassessed\b/.test(onBlank.cls), `B2, flag ON: a patient with nothing charted reads Not-assessed (${onBlank.cls})`);
+  ok(/\bunassessed\b/.test(onBlank.cls), `B2, default ON: a patient with nothing charted reads Not-assessed (${onBlank.cls})`);
   ok(onBlank.pillText === "Not assessed", `...pill says "Not assessed" (got "${onBlank.pillText}")`);
 
   const onCensus1 = await J(`
@@ -116,7 +118,7 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bcritical\b/.test(onNews2Crit.cls) && !/\breview\b/.test(onNews2Crit.cls), `B3, flag ON: the tachypnoea case (RR 34) now escalates via NEWS2 (${onNews2Crit.cls})`);
+  ok(/\bcritical\b/.test(onNews2Crit.cls) && !/\breview\b/.test(onNews2Crit.cls), `B3, default ON: the tachypnoea case (RR 34) now escalates via NEWS2 (${onNews2Crit.cls})`);
 
   // ---- B3: NEWS2 5-6 escalates to review, isolated from every raw threshold (MAP ~88, SpO2 94,
   // no pressor/lactate/K) so only the NEWS2 mechanism itself is under test here. RR 24(2) + SpO2
@@ -180,8 +182,8 @@ try {
     ICU.open();
     ${cardInfo}
   `);
-  ok(/\bstable\b/.test(onFreshNormal.cls), `flag ON: a genuinely well, fully-charted, fresh patient still reads Stable — no false escalation (${onFreshNormal.cls})`);
+  ok(/\bstable\b/.test(onFreshNormal.cls), `default ON: a genuinely well, fully-charted, fresh patient still reads Stable — no false escalation (${onFreshNormal.cls})`);
 
-  console.log(fails === 0 ? "\nALL GREEN — B2/B3/B7-escalation acuity v2 engine (flag-gated, OFF by default) working correctly" : `\n${fails} FAILED`);
+  console.log(fails === 0 ? "\nALL GREEN — B2/B3/B7-escalation acuity v2 engine (default ON, opt-out via \"0\") working correctly" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }
