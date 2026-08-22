@@ -39,6 +39,11 @@
     compositions: function (letter, limit, offset) {
       return api("/compositions?letter=" + encodeURIComponent(letter || "A") + "&limit=" + (limit || 200) + "&offset=" + (offset || 0));
     },
+    // Pharmacological class index + the molecules inside one class (browse by mechanism/class).
+    classes: function (limit) { return api("/classes?limit=" + (limit || 1000)); },
+    klass: function (name, limit, offset) {
+      return api("/class?name=" + encodeURIComponent(name || "") + "&limit=" + (limit || 300) + "&offset=" + (offset || 0));
+    },
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
     monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
     structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); },
@@ -191,8 +196,9 @@
     else if (!az.rows.length) body = '<div class="db-empty">No molecules listed under ' + esc(az.letter) + ".</div>";
     else body = az.rows.map(azRowHTML).join("") +
       (az.more ? '<button class="db-azmore" id="dbAzMore"' + (az.loading ? " disabled" : "") + ">" + (az.loading ? "Loading…" : "Show more") + "</button>" : "");
-    r.innerHTML = '<div class="db-sec-l">' + dbIco("flask") + " Molecules A-Z" +
+    r.innerHTML = browseTabsHTML() + '<div class="db-sec-l">' + dbIco("flask") + " Molecules A-Z" +
       (az.offline ? ' <span class="db-azoff">offline list</span>' : "") + "</div>" + azStripHTML() + body;
+    bindBrowseTabs(r);
     r.querySelectorAll("[data-az]").forEach(function (b) {
       b.addEventListener("click", function () { azLoad(b.getAttribute("data-az"), true); });
     });
@@ -221,6 +227,131 @@
     });
   }
 
+  /* ---- Browse by CLASS / mechanism (how a doctor actually groups drugs: "Cephalosporins: 1st
+   * generation", "Beta blocker- Cardioselective", "Calcium channel blockers- Dihydropyridines").
+   * Served by /classes + /class over the catalogue's action_class column; degrades to the
+   * on-device formulary grouped by its own class labels. */
+  var cls = { list: [], sel: null, rows: [], more: false, offset: 0, loading: false, offline: false, seq: 0, q: "" };
+  function localClasses() {
+    var by = {};
+    try {
+      ((window.MEDDRUGS && MEDDRUGS._list) || []).forEach(function (d) {
+        var c = String(d.cls || "").trim(); if (!c) return;
+        (by[c] = by[c] || []).push({ composition: String(d.generic || "").replace(/^./, function (m) { return m.toUpperCase(); }), "class": c });
+      });
+    } catch (e) {}
+    return by;
+  }
+  function localClassList() {
+    var by = localClasses();
+    return Object.keys(by).sort(function (a, b) { return a.localeCompare(b); })
+      .map(function (n) { return { name: n, molecules: by[n].length }; });
+  }
+  function clsRowHTML(c) {
+    return '<button class="db-comp" data-cls="' + esc(c.name) + '"><span class="db-comp-ic">' + dbIco("pills") + "</span>" +
+      '<span class="db-comp-main"><span class="db-comp-name">' + esc(c.name) + "</span>" +
+      '<span class="db-comp-sub">' + (c.molecules != null ? esc(String(c.molecules)) + " molecule" + (c.molecules === 1 ? "" : "s") : "") + "</span></span>" +
+      '<span class="db-chev">' + dbIco("chev") + "</span></button>";
+  }
+  function renderClasses() {
+    var r = root && root.querySelector("#dbResults"); if (!r) return;
+    var body;
+    if (cls.sel) {
+      var rows = cls.rows.length ? cls.rows.map(azRowHTML).join("") +
+        (cls.more ? '<button class="db-azmore" id="dbClsMore"' + (cls.loading ? " disabled" : "") + ">" + (cls.loading ? "Loading…" : "Show more") + "</button>" : "")
+        : (cls.loading ? '<div class="db-empty">Loading…</div>' : '<div class="db-empty">No molecules listed in this class.</div>');
+      body = '<button class="db-clsback" id="dbClsBack">' + dbIco("chev", "db-ico db-back-ic") + " All classes</button>" +
+        '<div class="db-sec-l">' + esc(cls.sel) + (cls.offline ? ' <span class="db-azoff">offline list</span>' : "") + "</div>" + rows;
+    } else if (cls.loading && !cls.list.length) {
+      body = '<div class="db-empty">Loading classes…</div>';
+    } else {
+      var q = cls.q.toLowerCase();
+      var shown = q ? cls.list.filter(function (c) { return c.name.toLowerCase().indexOf(q) >= 0; }) : cls.list;
+      body = '<div class="db-searchbar db-clsfilter">' + dbIco("search", "db-search-ic") +
+          '<input id="dbClsQ" class="db-search" type="text" placeholder="Filter classes (e.g. cephalosporin, blocker)…" autocomplete="off" value="' + esc(cls.q) + '"></div>' +
+        '<div class="db-sec-l">' + dbIco("pills") + " Pharmacological classes" + (cls.offline ? ' <span class="db-azoff">offline list</span>' : "") +
+          (shown.length ? ' <span class="db-azoff">' + shown.length + "</span>" : "") + "</div>" +
+        (shown.length ? shown.map(clsRowHTML).join("") : '<div class="db-empty">No class matches “' + esc(cls.q) + '”.</div>');
+    }
+    r.innerHTML = browseTabsHTML() + body;
+    bindBrowseTabs(r);
+    var ci = r.querySelector("#dbClsQ");
+    if (ci) {
+      ci.addEventListener("keydown", function (e) { e.stopPropagation(); });
+      ci.addEventListener("input", function () {
+        cls.q = ci.value; var pos = ci.selectionStart; renderClasses();
+        var n = root.querySelector("#dbClsQ"); if (n) { try { n.focus(); n.setSelectionRange(pos, pos); } catch (e) {} }
+      });
+    }
+    r.querySelectorAll("[data-cls]").forEach(function (b) {
+      b.addEventListener("click", function () { clsOpen(b.getAttribute("data-cls")); });
+    });
+    r.querySelectorAll(".db-comp[data-comp]").forEach(function (b) {
+      b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); });
+    });
+    var back = r.querySelector("#dbClsBack");
+    if (back) back.addEventListener("click", function () { cls.sel = null; cls.rows = []; cls.offset = 0; cls.more = false; renderClasses(); });
+    var more = r.querySelector("#dbClsMore"); if (more) more.addEventListener("click", function () { clsOpen(cls.sel, false); });
+  }
+  function clsLoadList() {
+    if (cls.list.length || cls.loading) { renderClasses(); return; }
+    cls.loading = true; renderClasses();
+    var seq = ++cls.seq;
+    MEDAPI.classes(1000).then(function (d) {
+      if (seq !== cls.seq) return;
+      cls.loading = false;
+      var rows = (d && d.results) || [];
+      if (!rows.length) { cls.list = localClassList(); cls.offline = true; }
+      else { cls.list = rows; cls.offline = false; }
+      renderClasses();
+    }).catch(function () {
+      if (seq !== cls.seq) return;
+      cls.loading = false; cls.list = localClassList(); cls.offline = true; renderClasses();
+    });
+  }
+  function clsOpen(name, fresh) {
+    if (cls.loading) return;
+    if (fresh !== false) { cls.sel = name; cls.rows = []; cls.offset = 0; cls.more = false; }
+    if (cls.offline) {   // offline: the class page comes from the same on-device grouping
+      var by = localClasses(); cls.rows = by[name] || []; cls.more = false; renderClasses(); return;
+    }
+    cls.loading = true; renderClasses();
+    var seq = ++cls.seq, off = cls.offset;
+    MEDAPI.klass(name, 300, off).then(function (d) {
+      if (seq !== cls.seq) return;
+      cls.loading = false;
+      var rows = (d && d.results) || [];
+      cls.rows = cls.rows.concat(rows); cls.more = !!(d && d.more); cls.offset = off + rows.length;
+      if (!cls.rows.length) { cls.rows = (localClasses()[name] || []); cls.offline = !!cls.rows.length; }
+      renderClasses();
+    }).catch(function () {
+      if (seq !== cls.seq) return;
+      cls.loading = false;
+      if (!cls.rows.length) { cls.rows = (localClasses()[name] || []); cls.offline = true; }
+      renderClasses();
+    });
+  }
+
+  /* ---- browse mode: A-Z or by class ---- */
+  var browseMode = "az";
+  function browseTabsHTML() {
+    return '<div class="db-btabs">' +
+      '<button class="db-btab' + (browseMode === "az" ? " on" : "") + '" data-bmode="az">A-Z</button>' +
+      '<button class="db-btab' + (browseMode === "class" ? " on" : "") + '" data-bmode="class">By class</button></div>';
+  }
+  function bindBrowseTabs(r) {
+    r.querySelectorAll("[data-bmode]").forEach(function (b) {
+      b.addEventListener("click", function () {
+        var m = b.getAttribute("data-bmode"); if (m === browseMode) return;
+        browseMode = m; renderBrowse(true);
+      });
+    });
+  }
+  function renderBrowse(fresh) {
+    if (browseMode === "class") clsLoadList();
+    else azLoad(az.letter, fresh !== false);
+  }
+
   /* ---- list/search view ---- */
   function renderList() {
     st.name = null; setTitle("Drugs Database", false);
@@ -236,13 +367,13 @@
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
     setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
     if (q2.length >= MINLEN) runList(q2);
-    else azLoad(az.letter, true);            // no query → the A-Z molecule browser, never an empty screen
+    else renderBrowse(true);                 // no query → the browser (A-Z or by class), never an empty screen
   }
   function onListInput(v) {
     q2 = (v || "").trim();
     if (t2) clearTimeout(t2);
     var r = root.querySelector("#dbResults");
-    if (q2.length < MINLEN) { az.seq++; azLoad(az.letter, true); return; }   // back to A-Z as the query is cleared
+    if (q2.length < MINLEN) { az.seq++; renderBrowse(true); return; }       // back to the browser as the query is cleared
     var q = q2;
     if (r) r.innerHTML = '<div class="db-empty">Searching…</div>';
     t2 = setTimeout(function () { if (q === q2) runList(q); }, DEBOUNCE);
@@ -618,6 +749,12 @@
       ".db-azb.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
       ".db-azmore{width:100%;box-sizing:border-box;margin:4px 0 2px;padding:10px;border:1px dashed var(--line,#e5e5e0);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;font:700 12.5px var(--sans,system-ui);cursor:pointer}",
       ".db-azoff{font:600 10px var(--sans,system-ui);color:var(--slate-soft,#888);text-transform:none;letter-spacing:0}",
+      ".db-btabs{display:flex;gap:6px;margin:0 0 10px}",
+      ".db-btab{flex:1;padding:8px 10px;border:1px solid var(--line,#e5e5e0);background:var(--panel,#fff);color:var(--slate,#2d4356);border-radius:10px;font:700 12.5px var(--sans,system-ui);cursor:pointer}",
+      ".db-btab.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
+      ".db-clsfilter{margin-bottom:8px}",
+      ".db-clsback{background:transparent;border:none;color:var(--teal,#0e6e63);font:700 12.5px var(--sans,system-ui);padding:4px 2px;cursor:pointer}",
+      ".db-back-ic{transform:rotate(180deg);vertical-align:-2px}",
       ".db-sec-l:first-child{margin-top:2px}",
       ".db-brandhit{border-left:3px solid var(--teal,#0a9396)}",
       ".db-brandhit .db-bh-comp{color:var(--teal,#0a9396);font-weight:700}",

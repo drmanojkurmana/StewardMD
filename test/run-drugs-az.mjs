@@ -34,6 +34,7 @@ let fails = 0; const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if
 const STUB = `
   window.__api = [];
   window.__apiFail = false;
+  try { if (localStorage.getItem("__apifail") === "1") window.__apiFail = true; } catch (e) {}
   var realFetch = window.fetch.bind(window);
   window.fetch = function (u, o) {
     var s = String(u);
@@ -49,6 +50,16 @@ const STUB = `
       if (L === "A") return J({ letter:"A", count:1, more:false, results:[{ composition:"Azithromycin", brands:900, class:"antibiotic" }] });
       if (L === "B") return J({ letter:"B", count:1, more:false, results:[{ composition:"Budesonide", brands:120, class:"steroid" }] });
       return J({ letter:L, count:0, more:false, results:[] });
+    }
+    if (s.indexOf("/classes") >= 0) return J({ count:3, results:[
+      { name:"Beta blocker- Cardioselective", molecules:6 },
+      { name:"Calcium channel blockers- Dihydropyridines (DHP)", molecules:9 },
+      { name:"Cephalosporins: 1st generation", molecules:4 }] });
+    if (s.indexOf("/class?") >= 0) {
+      var cn = decodeURIComponent((s.match(/name=([^&]+)/) || [,""])[1]);
+      if (/1st generation/.test(cn)) return J({ name:cn, count:2, more:false, results:[
+        { composition:"Cefadroxil", brands:200, class:"antibiotic" }, { composition:"Cefazolin", brands:120, class:"antibiotic" }] });
+      return J({ name:cn, count:1, more:false, results:[{ composition:"Atenolol", brands:300, class:"antihypertensive" }] });
     }
     if (s.indexOf("/search") >= 0) return J({ query:"pan", count:1, results:[{ composition:"Pantoprazole", class:"ppi", brands:900 }] });
     if (s.indexOf("/brand-search") >= 0) return J({ query:"pan", count:1, results:[{ brand:"Pantocid 40 Tablet", composition:"Pantoprazole", manufacturer:"Sun", form:"Tablet", mrp:120 }] });
@@ -122,6 +133,50 @@ try {
       names: Array.prototype.map.call(r.querySelectorAll('.db-comp-name'), function(n){return n.textContent;}).slice(0,3) });`));
   ok(OFF.n > 0 && OFF.offline === true, "when the drug API is unreachable it falls back to the on-device formulary (" + OFF.names.join(", ") + ")");
 
-  console.log(fails === 0 ? "\nALL GREEN — Drugs Database A-Z browse test passed" : `\n${fails} FAILED`);
+  // 7) browse BY CLASS / mechanism — the second tab
+  await ev(`window.__apiFail = false; MEDDB.close(); MEDDB.openList(); return 1;`); await sleep(600);
+  await ev(`document.querySelector('[data-bmode="class"]').click(); return 1;`); await sleep(600);
+  const C = JSON.parse(await ev(`
+    var r=document.getElementById('dbResults');
+    return JSON.stringify({ names: Array.prototype.map.call(r.querySelectorAll('.db-comp-name'), function(n){return n.textContent;}),
+      counts: /molecules/.test(r.textContent), tabOn: (r.querySelector('.db-btab.on')||{}).textContent });`));
+  ok(C.tabOn === "By class", "the Drugs Database has a \"By class\" browse tab beside A-Z");
+  ok(C.names.indexOf("Cephalosporins: 1st generation") >= 0 && C.names.indexOf("Calcium channel blockers- Dihydropyridines (DHP)") >= 0,
+    "classes list mechanism-level groups (1st-gen cephalosporins, dihydropyridine CCBs, cardioselective beta blockers)");
+  ok(C.counts === true, "each class shows how many molecules it holds");
+
+  // filtering the class list
+  await ev(`var i=document.getElementById('dbClsQ'); i.value="cephalo"; i.dispatchEvent(new Event('input')); return 1;`); await sleep(300);
+  ok(await ev(`
+    var n=Array.prototype.map.call(document.querySelectorAll('#dbResults .db-comp-name'), function(x){return x.textContent;});
+    return n.length===1 && /Cephalosporins/.test(n[0]);`) === true, "the class list can be filtered (e.g. \"cephalo\")");
+
+  // opening a class lists its molecules, composition names only
+  await ev(`document.querySelector('[data-cls]').click(); return 1;`); await sleep(600);
+  const CM = JSON.parse(await ev(`
+    var r=document.getElementById('dbResults');
+    return JSON.stringify({ names: Array.prototype.map.call(r.querySelectorAll('.db-comp-name'), function(n){return n.textContent;}),
+      hasBack: !!r.querySelector('#dbClsBack'), brandy: /Monocef|Reflin|Cefa 1g/i.test(r.textContent) });`));
+  ok(CM.names.join("|") === "Cefadroxil|Cefazolin", "opening a class lists the molecules in it");
+  ok(CM.brandy === false, "the class page shows composition names only — no brand names");
+  ok(CM.hasBack === true, "a class page can step back to the full class list");
+
+  // 8) class browse also survives an API outage — from a COLD start (a class list already fetched
+  //    this session is legitimately reused, so the offline path only shows on a fresh load).
+  await ev(`try{localStorage.setItem("__apifail","1");}catch(e){} return 1;`);
+  await call("Page.navigate", { url: BASE });
+  for (let i = 0; i < 80; i++) { await sleep(400); if (await ev(`return !!(window.MEDDB && MEDDB.openList && window.MEDDRUGS)`) === true) break; }
+  await ev(`["smdBootSplash","introPoster","splash","accountGate","introOverlay"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); MEDDB.openList(); return 1;`);
+  await sleep(700);
+  await ev(`document.querySelector('[data-bmode="class"]').click(); return 1;`); await sleep(900);
+  const CO = JSON.parse(await ev(`
+    var r=document.getElementById('dbResults');
+    return JSON.stringify({ n: r.querySelectorAll('.db-comp-name').length, offline: /offline list/i.test(r.textContent),
+      classy: /Beta-blocker|ACE inhibitor|Benzodiazepine/i.test(r.textContent) });`));
+  ok(CO.n > 0 && CO.offline === true, "the class browse falls back to the on-device formulary when the API is unreachable");
+  ok(CO.classy === true, "the offline class list still groups by real drug classes (e.g. beta-blocker / ACE inhibitor)");
+  await ev(`try{localStorage.removeItem("__apifail");}catch(e){} return 1;`);
+
+  console.log(fails === 0 ? "\nALL GREEN — Drugs Database browse (A-Z + by class) test passed" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
 finally { try { ws && ws.close(); } catch {} chrome.kill(); if (serveProc) serveProc.kill(); process.exit(fails === 0 ? 0 : 1); }

@@ -8,6 +8,9 @@
  *   GET /compositions?letter=&limit=&offset=
  *                                     A-to-Z browse: molecule/composition NAMES only
  *                                     (per-strength variants excluded), for learning
+ *   GET /classes?limit=               pharmacological CLASS index (action_class) with
+ *                                     molecule counts — browse by mechanism/class
+ *   GET /class?name=&limit=&offset=   the molecules inside one class
  *   GET /suggest?q=&limit=            composition-name autocomplete
  *   GET /composition?name=&sort=&limit=&offset=
  *                                     one generic: shared uses/side-effects +
@@ -126,6 +129,55 @@ async function handleCompositions(url, env) {
   } catch (err) {
     if (tableMissing(err)) return emptyNote({ letter: up, count: 0, more: false, results: [] });
     return json({ error: "compositions_failed" }, { status: 500 });
+  }
+}
+
+// /classes -> the PHARMACOLOGICAL CLASS index (browse by mechanism/class, the way a doctor thinks:
+// "Cephalosporins: 1st generation", "Beta blocker- Cardioselective", "Calcium channel blockers-
+// Dihydropyridines (DHP)", "Macrolides"). Built from `action_class` (the mechanism/class column;
+// `chem_class` is the chemical family and is deliberately not used here). Counts are DISTINCT
+// molecules, and per-strength composition variants are excluded, so the numbers match what the
+// class page then lists. Near-static data -> 24h TTL + edge cache; a full pass runs at most daily.
+async function handleClasses(url, env) {
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "1000", 10) || 1000, 2000);
+  try {
+    const { results } = await env.DB.prepare(
+      `SELECT action_class AS name, count(DISTINCT composition) AS molecules
+         FROM drugs
+        WHERE action_class IS NOT NULL AND trim(action_class) <> ''
+          AND composition IS NOT NULL AND composition NOT LIKE '%(%'
+        GROUP BY action_class HAVING molecules > 0
+        ORDER BY action_class COLLATE NOCASE LIMIT ?1`
+    ).bind(limit).all();
+    const rows = results.map((r) => ({ name: r.name, molecules: r.molecules }));
+    return json({ count: rows.length, results: rows }, { ttl: TTL.list });
+  } catch (err) {
+    if (tableMissing(err)) return emptyNote({ count: 0, results: [] });
+    return json({ error: "classes_failed" }, { status: 500 });
+  }
+}
+
+// /class?name= -> the molecules inside one pharmacological class (composition names only).
+async function handleClass(url, env) {
+  const name = (url.searchParams.get("name") || "").trim();
+  if (!name) return json({ error: "missing name" }, { status: 400 });
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "300", 10) || 300, 500);
+  const offset = Math.max(0, parseInt(url.searchParams.get("offset") || "0", 10) || 0);
+  try {
+    const { results } = await env.DB.prepare(
+      `SELECT composition, count(*) AS brands, max(class) AS class, max(chem_class) AS chem_class
+         FROM drugs
+        WHERE action_class = ?1 AND composition IS NOT NULL AND composition NOT LIKE '%(%'
+        GROUP BY composition ORDER BY composition COLLATE NOCASE LIMIT ?2 OFFSET ?3`
+    ).bind(name, limit + 1, offset).all();
+    const more = results.length > limit;
+    const rows = (more ? results.slice(0, limit) : results).map((r) => ({
+      composition: r.composition, brands: r.brands, class: r.class || "", chem_class: r.chem_class || "",
+    }));
+    return json({ name, count: rows.length, more, results: rows }, { ttl: TTL.list });
+  } catch (err) {
+    if (tableMissing(err)) return emptyNote({ name, count: 0, more: false, results: [] });
+    return json({ error: "class_failed" }, { status: 500 });
   }
 }
 
@@ -403,7 +455,7 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, "") || "/";
-    const cacheable = path === "/search" || path === "/compositions" || path === "/brand-search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
+    const cacheable = path === "/search" || path === "/compositions" || path === "/classes" || path === "/class" || path === "/brand-search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
 
     const cache = caches.default;
     let cacheKey = request;
@@ -418,6 +470,8 @@ export default {
     else if (path === "/search") res = await handleSearch(url, env);
     else if (path === "/brand-search") res = await handleBrandSearch(url, env);
     else if (path === "/compositions") res = await handleCompositions(url, env);
+    else if (path === "/classes") res = await handleClasses(url, env);
+    else if (path === "/class") res = await handleClass(url, env);
     else if (path === "/suggest") res = await handleSuggest(url, env);
     else if (path === "/composition") res = await handleComposition(url, env);
     else if (path === "/monograph") res = await handleMonograph(url, env);
