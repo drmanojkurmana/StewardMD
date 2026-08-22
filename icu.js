@@ -823,6 +823,12 @@
     if (clash && window.toast) toast("Bed " + entry.bed + " is now shared with " + (clash.name || "another patient"));
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
     if (!found) r.push(entry);
+    // BUG B4: same reasoning as the bed-clash toast above — a bulk import can't stop for a
+    // confirm() per row, so name the dropped patient in a toast instead of evicting them silently.
+    if (!found && r.length > MAX_CASES) {
+      var evicted = r.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
+      if (evicted && evicted.id !== id && window.toast) toast((evicted.name || "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
+    }
     saveRoster(capTen(r));
     try { if (ICU.isOpen()) paint(); } catch (e) {}
     return Promise.resolve(entry);
@@ -7512,9 +7518,20 @@
   function savePatient() {
     var id = _raw.patient._id || ("p" + uniqSuffix());
     var bed = String(_raw.patient.bed || "").trim();
+    var rChk = loadRoster();
     if (bed) {
-      var clash = bedHolder(loadRoster(), bed, id);
+      var clash = bedHolder(rChk, bed, id);
       if (clash && !window.confirm("Bed " + bed + " is already assigned to " + (clash.name || "another patient") + ". Save anyway?")) return;
+    }
+    // BUG B4 (2026-08-22 ward-round audit): saving past MAX_CASES used to silently drop the oldest
+    // saved patient's full record (vitals/labs/notes) with nothing said — a doctor could lose an
+    // active patient's chart and never know until they happened to open Saved patients. Warn BEFORE
+    // it happens, naming who would be dropped, so discharging someone first (or proceeding anyway)
+    // is the doctor's choice, not a silent side effect.
+    var isNewCase = !rChk.some(function (p) { return p.id === id; });
+    if (isNewCase && rChk.length >= MAX_CASES) {
+      var oldest = rChk.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
+      if (!window.confirm("You already have " + MAX_CASES + " saved patients (the maximum). Saving this one will remove " + (oldest && oldest.name ? oldest.name : "the oldest saved patient") + "'s saved record. Continue?")) return;
     }
     STATE.patient._id = id;                                  // reactive write persists live state
     var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
