@@ -573,7 +573,7 @@
   function resetState() {
     var d = clone(DEFAULT_STATE); Object.keys(d).forEach(function (k) { STATE[k] = d[k]; });
     _lwBadge = 0; _lwHighlight = null; _lwDraft = null;
-    _corrCache = {}; _corrErr = null; _corrBusy = false; _corrAnalysed = false;
+    _corrCache = {}; _corrErr = null; _corrBusy = false; _corrAnalysed = false; askReset();
     _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _dxPt = null; _corrPt = null;
   }
   // Load THIS context's solo current-patient buffer into STATE — used when switching ICU ↔ Ward so
@@ -3101,7 +3101,7 @@
     dx: function () {
       var p = _raw.patient;
       var pid = p._id || p.name || "cur";
-      if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _corrCache = {}; _corrErr = null; _corrBusy = false; }   // reset guided-dx + correlation state on patient switch (no cross-patient leak)
+      if (_dxPt !== pid) { _dxPt = pid; _dxShow = false; _dxWhy = {}; _dxAdvanced = false; _corrCache = {}; _corrErr = null; _corrBusy = false; askReset(); }   // reset guided-dx + correlation state on patient switch (no cross-patient leak)
       var cc = p.complaints ? esc(p.complaints) : '<span style="color:var(--muted)">Not documented yet.</span>';
       var dxTxt = p.diagnosis ? "<b>" + esc(p.diagnosis) + "</b>" : '<span style="color:var(--muted)">Not set</span>';
       var fchips = findChipsHTML(false);
@@ -3149,7 +3149,8 @@
           (extEvidenceOn()
             ? '<button class="icu-btn ghost" data-icu-act="corrext" style="margin-top:8px">' + ico("search", "🔎") + " Search trusted sources</button>"
             : '<button class="icu-btn ghost" disabled title="Turned off in Settings" style="margin-top:8px">' + ico("search", "🔎") + " Search trusted sources</button>") +
-          (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Use the review to choose a working diagnosis below, or search trusted sources for guideline support.</p>' : "") + '</div>';
+          askMaikBtn("margin-top:8px") +
+          (deepDone ? '<p class="icu-doc-sub" style="margin-top:6px">Use the review to choose a working diagnosis below, ask MaiK about it, or search trusted sources for guideline support.</p>' : "") + '</div>';
       }
 
       // 5) Working diagnosis — set from the review’s suggestion (deterministic differential) or KB
@@ -3192,7 +3193,8 @@
       var header = '<div class="icu-card"><div class="icu-sec-lbl">' + ico("camera", "🩻") + ' Imaging Notes</div>' +
         '<p class="icu-doc-sub">Radiology reports from Ward Sync (report text only) plus your manual notes. Any urgent-finding flag is a deterministic keyword prompt to review — never a diagnosis.</p>' +
         '<div class="icu-img-btns"><button class="icu-btn" data-icu-act="imgfetch">' + ico("hospital", "🏥") + ' Fetch imaging from Ward Sync</button>' +
-        '<button class="icu-btn ghost" data-icu-act="imgadd">' + ico("plus", "＋") + ' Add imaging note</button></div></div>';
+        '<button class="icu-btn ghost" data-icu-act="imgadd">' + ico("plus", "＋") + ' Add imaging note</button>' +
+        askMaikBtn("") + "</div></div>";
       if (!all.length) return header + '<div class="icu-empty">No imaging reports available from Ward Sync for this patient.</div>' + correlationCard();
       var filters = '<div class="icu-img-filters">' + IMG_FILTERS.map(function (f) {
         return '<button class="icu-img-chip ' + (_imgFilter === f.k ? "on" : "") + '" data-icu-act="imgfilter:' + f.k + '">' + esc(f.label) + "</button>";
@@ -6754,6 +6756,139 @@
   }
 
 
+  /* ===== Ask MaiK about this patient (flag smd_icu_askmaik, default ON) =====================
+   * A follow-up conversation on TOP of the deep review: "why this diagnosis?", "is a 5x3cm
+   * saccular aneurysm an indication for surgery?". Reuses the SAME MaiK pipeline the home chat
+   * uses (StewardRAG.buildPackage → SMD_AI.explainGrounded), grounded on this patient's
+   * DE-IDENTIFIED context + the deep-review output. No new endpoint, no new AI engine.
+   * PHI: only the de-identified correlation packet fields ever leave the device; the clinician's
+   * typed question passes through redactPHI as a backstop. Advisory only — never sets a Dx. */
+  function icuAskMaikOn() {
+    try {
+      var q = (location.search.match(/[?&]icuaskmaik=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      var v = localStorage.getItem("smd_icu_askmaik");
+      return v === null ? true : v === "1";
+    } catch (e) { return true; }
+  }
+  var _askLog = [], _askBusy = false, _askErr = null;
+  function askReset() { _askLog = []; _askBusy = false; _askErr = null; }
+  // The deep review for the CURRENT context, if one has been run (same cache key as runCorrelationDeep).
+  function askDeepResult() {
+    try { return _corrCache[(_raw.patient._id || "cur") + ":" + correlationHash(buildClinicalContext())] || null; } catch (e) { return null; }
+  }
+  // Compact, de-identified case text handed to MaiK as the grounding preamble.
+  function askContextText() {
+    var ev = buildClinicalContext(), p = _raw.patient || {}, L = [];
+    L.push("ICU patient · " + (ageBandOf(p.age) || "age not stated") + (p.sex ? " · " + p.sex : ""));
+    if (p.diagnosis) L.push("Working diagnosis: " + imgRedact(p.diagnosis));
+    if ((ev.findings || []).length) L.push("Findings: " + ev.findings.map(function (f) { return (f.polarity === "absent" ? "no " : f.polarity === "possible" ? "possible " : "") + f.label; }).join(", "));
+    if ((ev.clinical || []).length) L.push("Narrative: " + ev.clinical.map(imgRedact).join(" "));
+    if (ev.labs.length) L.push("Labs: " + ev.labs.join(", "));
+    if (ev.img.length) L.push("Imaging: " + ev.img.join(", "));
+    if ((ev.vitals || []).length) L.push("Vitals: " + ev.vitals.map(imgRedact).join(", "));
+    if (ev.crit.length) L.push("Flagged urgent: " + ev.crit.join(", "));
+    var d = askDeepResult(), s = d && (d.correlation || d);
+    if (s) {
+      var sec = function (lbl, v) { if (!v) return; var t = v.join ? v.join("; ") : String(v); if (t) L.push(lbl + ": " + t); };
+      L.push("— StewardMD deep clinical review (advisory) —");
+      sec("Correlation", s.clinicalCorrelation);
+      sec("Top considerations", s.topConsiderations);
+      sec("Why these fit", s.whyFit);
+      sec("Alternatives", s.alternatives);
+      sec("Does not fit", s.whatDoesntFit);
+      sec("Red flags", s.redFlags);
+      sec("Next checks", s.nextChecks);
+    }
+    return L.join("\n").slice(0, 3500);
+  }
+  // Prior turns so MaiK can be CONVERSED with, not just queried once. Last 3 turns, answers trimmed.
+  function askHistoryText() {
+    return _askLog.slice(-3).map(function (t) { return "Q: " + t.q + "\nA: " + String(t.a || "").slice(0, 600); }).join("\n\n");
+  }
+  function askSend(question) {
+    question = String(question == null ? "" : question).trim();
+    if (!question || _askBusy) return;
+    try { if (window.SMD_redactPHI) question = window.SMD_redactPHI(question); } catch (e) {}
+    question = question.slice(0, 500);
+    _askErr = null; _askBusy = true; _askLog.push({ q: question, a: "" }); askRender();
+    var prompt = "You are answering a bedside question about the ICU patient below. Use the patient context; " +
+      "if the context is insufficient to answer safely, say what is missing. Advisory only — the clinician decides.\n\n" +
+      "PATIENT CONTEXT (de-identified)\n" + askContextText() +
+      (_askLog.length > 1 ? "\n\nEARLIER IN THIS CONVERSATION\n" + askHistoryText() : "") +
+      "\n\nCLINICIAN QUESTION: " + question;
+    var ev = buildClinicalContext(), p = _raw.patient || {};
+    var caseData = {
+      findings: (ev.findings || []).filter(function (f) { return f.polarity !== "absent"; }).map(function (f) { return f.label; }),
+      abnormalLabs: ev.labs, radiologyImpressions: ev.img, sex: p.sex || undefined
+    };
+    var keys = dxFindingKeys(); correlationMappedKeys(ev).forEach(function (k) { keys[k] = true; });
+    var assess = { infectious: [], nonInfectious: [] };
+    try { if (window.SMD_REASON && SMD_REASON.assess && Object.keys(keys).length) assess = SMD_REASON.assess(keys) || assess; } catch (e) {}
+    var call;
+    if (window.StewardRAG && StewardRAG.buildPackage && window.SMD_AI && SMD_AI.explainGrounded) {
+      call = Promise.resolve(StewardRAG.buildPackage(assess, { question: prompt, caseData: caseData }))
+        .then(function (pkg) {
+          if (!pkg) return { error: "no-package" };
+          pkg.question = prompt;
+          return SMD_AI.explainGrounded(pkg, { depth: "concise" });
+        })
+        .catch(function () { return { error: "server" }; });
+    } else if (window.SMD_AI && SMD_AI.explain) {
+      call = SMD_AI.explain(askContextText(), question);
+    } else {
+      call = Promise.resolve({ error: "ai-off" });
+    }
+    call.then(function (r) {
+      _askBusy = false;
+      var txt = r && r.text ? String(r.text) : "";
+      txt = txt.replace(/@@REFINE:[\s\S]*?@@/gi, "").replace(/@@\s*MORE\s*@@/gi, "\n\n").trim();   // strip MaiK's chip/tier markers
+      if (txt) _askLog[_askLog.length - 1].a = txt;
+      else { _askLog.pop(); _askErr = (r && r.error) || "server"; }
+      askRender();
+    });
+  }
+  function askAnswerHTML(t) {
+    try { if (window.SMD_MaiK && SMD_MaiK.renderMarkdown) return SMD_MaiK.renderMarkdown(t); } catch (e) {}
+    return '<div style="white-space:pre-wrap">' + esc(t) + "</div>";
+  }
+  var ASK_STARTERS = ["Why do you think this diagnosis?", "What am I missing?", "What should I do next?", "What would change your answer?"];
+  function askRender() {
+    if (!modalEl || !modalEl.querySelector("#icuAskSheet")) return;
+    var d = askDeepResult();
+    var turns = _askLog.map(function (t) {
+      return '<div style="margin:10px 0"><div style="font:700 13px var(--font);color:var(--primary)">' + esc(t.q) + "</div>" +
+        (t.a ? '<div class="icu-assist-summary" style="margin-top:4px">' + askAnswerHTML(t.a) + "</div>"
+             : (_askBusy ? '<div class="icu-assist-msg" style="margin-top:4px">MaiK is thinking…</div>' : "")) + "</div>";
+    }).join("");
+    var err = _askErr ? '<div class="icu-assist-msg">' + ico("warn", "⚠️") + " " + esc(
+      _askErr === "ai-off" ? "MaiK is turned off (cloud text disabled in Settings)."
+      : _askErr === "quota" ? "AI usage limit reached — try again later."
+      : _askErr === "timeout" ? "MaiK took too long. Tap Ask again."
+      : "MaiK could not answer that right now. Tap Ask again.") + "</div>" : "";
+    var starters = _askLog.length ? "" : '<div class="icu-corr-chips" style="margin-bottom:8px">' + ASK_STARTERS.map(function (s) {
+      return '<button class="icu-corr-chip" data-icu-act="askq:' + encodeURIComponent(s) + '" style="cursor:pointer">' + esc(s) + "</button>";
+    }).join("") + "</div>";
+    modalEl.querySelector("#icuAskBody").innerHTML =
+      '<p class="icu-doc-sub">Ask about this patient. MaiK answers from this patient’s <b>de-identified</b> context' + (d ? " and the deep clinical review" : "") + ", grounded in StewardMD’s knowledge base. Advisory only — you decide.</p>" +
+      turns + err + starters +
+      '<textarea id="icuAskQ" rows="3" placeholder="e.g. 5x3 cm saccular aneurysm — is this an indication for surgery?" style="font:600 14px var(--font);padding:10px;border:1px solid var(--border);border-radius:10px;background:var(--panel2);color:var(--ink);width:100%"></textarea>' +
+      '<button class="icu-btn" data-icu-act="asksend"' + (_askBusy ? " disabled" : "") + ' style="margin-top:8px">' + ico("spark", "✦") + " Ask MaiK</button>" +
+      '<button class="icu-btn ghost" data-icu-act="closeform" style="margin-top:8px">Close</button>';
+    try { var sh = modalEl.querySelector("#icuAskSheet"); if (sh) sh.scrollTop = sh.scrollHeight; } catch (e) {}
+  }
+  function openAskMaik() {
+    ensureModal();
+    modalEl.innerHTML = '<div class="icu-sheet" id="icuAskSheet" role="dialog" aria-label="Ask MaiK about this patient"><h3>' + ico("spark", "✦") + " Ask MaiK about this patient</h3><div id=\"icuAskBody\"></div></div>";
+    modalEl.classList.add("on");
+    askRender();
+    setTimeout(function () { try { var q = modalEl.querySelector("#icuAskQ"); if (q) q.focus(); } catch (e) {} }, 60);
+  }
+  function askMaikBtn(style) {
+    if (!icuAskMaikOn()) return "";
+    return '<button class="icu-btn ghost" data-icu-act="askmaik"' + (style ? ' style="' + style + '"' : "") + ">" + ico("spark", "✦") + " Ask MaiK about this patient</button>";
+  }
+
   /* ---- External trusted-evidence fallback (Phase 4) — opt-in, de-identified TOPIC only ---- */
   var _evCache = {}, _evBusy = false, _evErr = null;
   function extEvidenceOn() { try { var q = (location.search.match(/[?&]extevidence=([^&]+)/) || [])[1]; if (q != null) return q === "1" || q === "on"; var v = localStorage.getItem("smd_ext_evidence"); return v === null ? true : v === "1"; } catch (e) { return true; } }
@@ -6869,7 +7004,7 @@
   function correlationCard() {
     if (!icuImagingOn()) return "";
     var pid = _raw.patient._id || _raw.patient.name || "cur";
-    if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; _corrBusy = false; _corrCache = {}; _corrErr = null; }   // reset ALL correlation state on patient switch (no cross-patient leak)
+    if (_corrPt !== pid) { _corrPt = pid; _corrAnalysed = false; _corrBusy = false; _corrCache = {}; _corrErr = null; askReset(); }   // reset ALL correlation state on patient switch (no cross-patient leak)
     var imgs = (_raw.imaging || []).filter(function (r) { return !r.hidden; }), labN = Object.keys(_raw.labs.recent || {}).length;
     var fN0 = icuDxFlowOn() ? (_raw.findings || []).length : 0, vN0 = icuDxFlowOn() ? latestVitalsSummary().length : 0;
     var header = '<div class="icu-sec-lbl" style="margin-top:14px">' + ico("pulse", "🧠") + ' Clinical Correlation</div>';
@@ -6911,7 +7046,7 @@
       '<div class="icu-img-btns" style="margin-top:10px">' +
         '<button class="icu-btn" data-icu-act="corrdeep"' + (_corrBusy ? " disabled" : "") + '>' + ico("pulse", "✨") + ' Deep clinical review</button>' +
         (extEvidenceOn() ? '<button class="icu-btn ghost" data-icu-act="corrext">Find evidence beyond StewardMD</button>' : '<button class="icu-btn ghost" disabled title="Turned off in Settings">Find evidence beyond StewardMD</button>') +
-      "</div>" + deepBlock +
+      "</div>" + deepBlock + askMaikBtn("margin-top:8px") +
       '<p class="icu-doc-sub" style="margin-top:8px">Advisory only. The deterministic engine owns the diagnosis; this never changes any ranking.</p></div>';
   }
 
@@ -7436,6 +7571,9 @@
       case "deepgo": closeForm(); runCorrelationDeep(); break;
       case "deepedit": closeForm(); openFindingPicker(); break;
       case "corrext": openEvidenceLookup(); break;
+      case "askmaik": openAskMaik(); break;
+      case "asksend": { var _aq = modalEl && modalEl.querySelector("#icuAskQ"); askSend(_aq ? _aq.value : ""); break; }
+      case "askq": askSend(decodeURIComponent(arg)); break;
       case "imghide": { var _ih = imgById(decodeURIComponent(arg)); if (_ih) _ih.hidden = !_ih.hidden; paint(); break; }
       case "win": _trendWin = isNaN(+arg) ? _trendWin : +arg; paint(); break;   // 0 = All (no window)
       case "round": { var rc = _raw.rounds[arg] || {}; STATE.rounds[arg] = { done: !rc.done, note: rc.note || "" }; break; }
@@ -7858,6 +7996,7 @@
     _buildClinicalContext: buildClinicalContext, _correlationHash: correlationHash, _latestVitalsSummary: latestVitalsSummary, dxFlowOn: icuDxFlowOn,
     _runWorkingDx: runWorkingDx, _pickWorkingDx: pickWorkingDx, _dxFindingKeys: dxFindingKeys,
     _openDeepReviewConfirm: openDeepReviewConfirm, _deepReviewUsable: deepReviewUsable, _deepReviewItems: deepReviewItems,
+    _openAskMaik: openAskMaik, _askSend: askSend, _askContextText: askContextText, _askLog: function () { return _askLog.slice(); }, _askReset: askReset,
     wardStatus: function () { return STATE.wardSync || {}; },
     clearNewUpdate: function () { if (STATE.wardSync) STATE.wardSync.newUpdate = false; },
     resolveConflict: function (key, choice) { // choice: "ward" | "manual"
