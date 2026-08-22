@@ -1702,9 +1702,13 @@
       else if (_fl) _fl.src = "/logo.png";
     } catch (e) {}
 
-    var scrim = document.getElementById("hvScrim");
-    if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
-    if (!document.getElementById("hvSheet")) { var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "StewardMD"); document.body.appendChild(sheet); }
+    // BUG (2026-08-22, WhatsApp report): this used to pre-create #hvScrim/#hvSheet inline, duplicating
+    // sheetEl()'s own "create if missing" check below - so by the time ANY sheet actually opened,
+    // sheetEl() found the nodes already there and skipped its `if (!s)` branch entirely, which is the
+    // ONLY place the swipe-to-dismiss touch handlers get bound. Every bottom sheet in the app (not just
+    // Customize tools) silently never had drag-to-close wired up. Routing through sheetEl() itself
+    // keeps this warm-render step but lets the real binding run exactly once, as intended.
+    sheetEl();
     fab = document.createElement("button"); fab.className = "hv-fab"; fab.id = "hvFab"; fab.setAttribute("aria-label", "StewardMD home");
     // Home FAB = house outline with the StewardMD logo mark inside it.
     fab.innerHTML = '<svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M4 23 L24 6 L44 23 M9 22 V43 H39 V22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><image href="/logo.png" xlink:href="/logo.png" x="15" y="26.5" width="18" height="13.5" preserveAspectRatio="xMidYMid meet"/></svg>';
@@ -1783,13 +1787,21 @@
     if (!s) {
       var scrim = document.getElementById("hvScrim");
       if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
-      s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet"; document.body.appendChild(s);
+      s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet";
+      s.setAttribute("role", "dialog"); s.setAttribute("aria-modal", "true"); s.setAttribute("aria-label", "StewardMD");
+      document.body.appendChild(s);
       // BUG-19: drag the sheet down (from the "—" grab handle / top) to dismiss it — iOS + Android.
-      // Only engages when the content is scrolled to the top, so it never fights inner scrolling.
+      // Content-area touches only engage when scrolled to the top, so they never fight inner scrolling.
+      // BUG (2026-08-22, WhatsApp report): the grab handle is a DEDICATED non-scrolling drag target
+      // (touch-action:none) but used to be gated behind the SAME scrollTop==0 check as the content -
+      // so once a long sheet (e.g. Customize tools' 10+ toggle rows) was scrolled down even slightly,
+      // dragging the handle stopped closing it. The handle must always start a drag.
       (function (sh) {
         var sy = 0, dy = 0, drag = false;
         sh.addEventListener("touchstart", function (e) {
-          if (sh.scrollTop > 0 || !e.touches || !e.touches.length) { drag = false; return; }
+          if (!e.touches || !e.touches.length) { drag = false; return; }
+          var onHandle = e.target && e.target.closest && e.target.closest(".hv-grab");
+          if (!onHandle && sh.scrollTop > 0) { drag = false; return; }
           sy = e.touches[0].clientY; dy = 0; drag = true; sh.style.transition = "none";
         }, { passive: true });
         sh.addEventListener("touchmove", function (e) {
@@ -5501,7 +5513,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     fetchDigest().then(function (dg) {
       if (!dg || !dg.data) { el.innerHTML = ""; return; }
       var d = dg.data;
-      el.innerHTML = '<button class="dg-banner" id="dgOpen"><div class="dg-badge">📰 This Week in Medicine</div>' +
+      el.innerHTML = '<button class="dg-banner" id="dgOpen"><div class="dg-badge">This Week in Medicine</div>' +
         '<div class="dg-h">' + nEsc(d.headline || "Weekly digest") + '</div>' +
         (d.intro ? '<div class="dg-sub">' + nEsc(String(d.intro).slice(0, 140)) + '</div>' : "") +
         '<div class="dg-go">Read the weekly digest ›</div></button>';
@@ -5515,7 +5527,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var secs = (d.sections || []).map(function (s) {
       return '<div class="dt-sec"><h4>' + nEsc(s.label || "") + '</h4><ul>' + (s.items || []).map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
     }).join("");
-    body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">📰 Weekly digest</span></div>' +
+    body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">Weekly digest</span></div>' +
       '<h2>' + nEsc(d.headline || "This Week in Medicine") + '</h2></div>' +
       (d.intro ? '<div class="dt-summary">' + nMd(d.intro) + '</div>' : "") +
       (hi ? '<div class="dt-sec"><h4>Highlights</h4><ul>' + hi + '</ul></div>' : "") + secs;

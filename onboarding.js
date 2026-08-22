@@ -487,7 +487,7 @@
   // ---- APP tour (real home) ----------------------------------------------------------------
   function appController() {
     return {
-      id: "app", icon: "🧭", live: false, steps: APP_TOUR,
+      id: "app", icon: obIco("grid"), live: false, steps: APP_TOUR,
       scope: function () { return document.getElementById("homeV2") || document; },
       resolve: function (s) { return firstPresent(s.sel, this.scope()); },
       enter: function (s, cb) { cb(); },
@@ -744,18 +744,19 @@
     injectCSS();
     if (!_replayEl) { _replayEl = document.createElement("div"); _replayEl.className = "smdt-replay"; _replayEl.setAttribute("role", "dialog"); _replayEl.setAttribute("aria-label", "Guided tours"); document.body.appendChild(_replayEl); }
     function card(emoji, name, sub, tour) { return '<div class="smdt-rp-card"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">' + esc(sub) + '</div></div><button class="smdt-rp-go" data-rp="' + tour + '">Replay</button></div>'; }
-    function soon(emoji, name) { return '<div class="smdt-rp-card soon"><span class="e">' + emoji + '</span><div class="m"><div class="n">' + esc(name) + '</div><div class="s">Coming soon</div></div><span class="soon-tag">Soon</span></div>'; }
+    // BUG (2026-08-22, WhatsApp report): a "MODULE TOURS" section listed Clinical Reasoning and
+    // Calculators as "Coming soon" - both are live, mature modules (405 validated calculators; the
+    // main reasoning engine), so the tag just read as stale/broken. Dropped until real tours for
+    // them are built, rather than advertise a module tour that will never arrive.
     _replayEl.innerHTML =
       '<div class="smdt-rp-head"><h2>About &amp; Help</h2><button class="smdt-rp-x" data-rp="close" aria-label="Close">' + obIco("close") + '</button></div>' +
       '<div class="smdt-rp-body">' +
         '<div class="smdt-rp-h">Guided tours</div><p class="smdt-rp-p">Replay any walkthrough at your own pace. Nothing you’ve entered is changed.</p>' +
         '<div class="smdt-rp-list">' +
           card(obIco("info"), "First-launch welcome", "Role pick & warm intro · 30s", "welcome") +
-          card("🧭", "App overview", "Find your way around home · 1 min", "app") +
+          card(obIco("grid"), "App overview", "Find your way around home · 1 min", "app") +
           card(obIco("heart"), "ICU Dashboard", "The full clinical workflow · 2 min", "icu") +
         "</div>" +
-        '<div class="smdt-rp-sec">MODULE TOURS</div>' +
-        '<div class="smdt-rp-list">' + soon(obIco("brain"), "Clinical Reasoning") + soon(obIco("calc"), "Calculators") + "</div>" +
       "</div>";
     _replayEl.style.display = "flex";
     _replayEl.onclick = function (e) {
