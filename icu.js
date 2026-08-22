@@ -3584,7 +3584,7 @@
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     var press = (st.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var L = (st.labs && st.labs.recent) || {};
-    return { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, pressors: press.length, k: L.k };
+    return { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, rr: lv.rr, pressors: press.length, k: L.k };
   }
   function v2Severity(st) {
     var s = v2Snapshot(st);
@@ -3638,10 +3638,21 @@
   }
   function v2CardVitals(s) {
     function mk(k, val, sst) { return { k: k, val: (val == null ? "—" : val), st: sst || "" }; }
+    // BUG B8 (2026-08-22 ward-round audit): pulse and respiratory rate — charted on every
+    // observation round, on every patient — appeared nowhere on the card. Reuse the SAME thresholds
+    // already used for these vitals elsewhere (renderLiveStatus/renderV2Banner) via vstat(), just
+    // dropping its "ok" down to "" to match this card's own tile styling vocabulary (only "crit"/
+    // "warn" carry a highlight class here).
+    function tileSt(v, lo, hi, clo, chi) { var r = vstat(v, lo, hi, clo, chi); return r === "ok" ? "" : r; }
     var v = [];
     v.push(mk("MAP", s.map, s.map == null ? "" : (s.map < 65 ? "crit" : s.map < 70 ? "warn" : "")));
-    v.push(mk("LACT", s.lactate, s.lactate == null ? "" : (s.lactate > 4 ? "crit" : s.lactate > 2 ? "warn" : "")));
+    if (s.hr != null) v.push(mk("HR", s.hr, tileSt(s.hr, 50, 110, 40, 140)));
     v.push(mk("SpO₂", s.spo2 == null ? null : (s.spo2 + "%"), s.spo2 == null ? "" : (s.spo2 < 90 ? "crit" : s.spo2 < 93 ? "warn" : "")));
+    if (s.rr != null) v.push(mk("RR", s.rr, tileSt(s.rr, 8, 24, null, 30)));
+    // BUG B8: lactate used to occupy a slot with a bare "—" even though it's blank for most ward
+    // patients most of the time, crowding out HR/RR on a card with room for only a few tiles. Only
+    // take a slot when there is an actual value.
+    if (s.lactate != null) v.push(mk("LACT", s.lactate, s.lactate > 4 ? "crit" : s.lactate > 2 ? "warn" : ""));
     if (s.pressors >= 1) v.push(mk("PRESS", s.pressors, "crit"));
     return v;
   }
