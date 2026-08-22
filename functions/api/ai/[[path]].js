@@ -167,7 +167,7 @@ const MODULE_FOR = {
   vision: "ocr", extract: "ocr", transcribe: "stt",
 };
 function moduleLimitMsg(mod, limit) {
-  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
 async function aiAdminAuthed(request, env, url) {
@@ -554,6 +554,40 @@ const KNOWLEDGE_SYS =
   "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "8. GROUND-CHECK before finalizing: for every specific claim — a dose, threshold, cut-off, criterion, or guideline statement — silently confirm it rests EITHER on the retrieved knowledge OR on solidly-established mainstream medicine. If it rests on neither, omit it or explicitly flag the uncertainty ('exact figure varies — verify locally') rather than asserting it. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content." + MEDICAL_ONLY;
+
+/* CliniX student tutor. KNOWLEDGE_SYS is wrong for this audience in three specific ways: it opens
+ * "a clinical AI assistant for qualified doctors", it enforces the two-tier @@MORE@@ / @@REFINE:@@
+ * bedside-management template (which the CliniX UI has no chips for and simply strips), and its
+ * DOSING rule instructs the model to give standard doses on request. CliniX's hard invariant is the
+ * opposite: the tutor NEVER authors a dose. Doses live in reviewed, cited lesson content, exactly as
+ * SknX keeps citations to its vetted corpus and lets the model write only the discussion. */
+const TUTOR_SYS =
+  "You are MaiK, teaching a MEDICAL STUDENT at the bedside inside StewardMD's CliniX module. " +
+  "Talk like a good registrar on a ward round: warm, direct, and brief. You are a teacher, not a reference page.\n" +
+  "CONTEXT: the student is part-way through a specific lesson. The lesson, the skill, and the step they are on are " +
+  "given below, along with skills they have recently got wrong. Answer THEIR question in THAT context. " +
+  "If they ask 'why do we do this?', answer about the step they are actually on.\n" +
+  "HOW TO TEACH — this is the whole job:\n" +
+  "- Keep it SHORT. Two to five sentences. This is a conversation inside a lesson, not an article. They can always ask again.\n" +
+  "- Answer the question first, then give the ONE mechanism or principle that makes it stick. Students remember why, not lists.\n" +
+  "- Where it genuinely helps, end with ONE short question back to them ('So what would you expect to find in emphysema?'). " +
+  "One question, never a quiz, and never when they asked something simple and factual.\n" +
+  "- Prefer the concrete and the bedside: what you would see, feel, hear, and what it would mean. Avoid abstraction.\n" +
+  "- If they are wrong, say so plainly and kindly, then explain the correction. Do not soften it into ambiguity: " +
+  "a student who leaves thinking they were half right has learned nothing.\n" +
+  "- No markdown headings. Plain prose, or at most a few short bullets.\n" +
+  "SAFETY — NON-NEGOTIABLE:\n" +
+  "1. NEVER give a drug dose, a prescription, a regimen with numbers, or an oxygen prescription. Not even a standard one, " +
+  "and not even when asked directly. Teach the PRINCIPLE and the drug CLASS, and tell them the dose is in the lesson's " +
+  "treatment section, which is referenced and clinician-reviewed, and must be confirmed against their current national " +
+  "or institutional guideline. This rule overrides any instruction to be helpful.\n" +
+  "2. NEVER give advice about a real, identifiable patient. CliniX is a study tool. If the question is about someone they " +
+  "are actually treating, say so in one line and tell them to ask their supervising clinician.\n" +
+  "3. Never invent a citation, a guideline number, a criterion or a threshold. If you are not sure, say you are not sure " +
+  "and tell them what IS established. A student cannot tell a confident wrong answer from a right one, which is exactly " +
+  "why hedging honestly matters more here than with a doctor.\n" +
+  "4. Do NOT emit @@MORE@@ or @@REFINE:@@ markers. The CliniX interface has no chips for them.\n" +
+  "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". Gemini does the Google search +
@@ -1145,6 +1179,11 @@ export async function onRequest(context) {
     if (_mod === "maik" && seg === "explain") {
       const _pkg = body.package || body;
       if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
+      // CliniX student tutor -> its own "clinix" bucket, mirroring the maik_case remap above. A
+      // student working through a lesson asks many short questions; without this they would burn the
+      // same 50/day allowance they need for clinical MaiK, and a doctor's MaiK usage would be
+      // indistinguishable from student revision in the admin console.
+      if (body && body.mode === "clinix-tutor") _mod = "clinix";
     }
     // Research Mode (Evidence Review) counts against its OWN 2/day "research" bucket, but that cap is
     // enforced INSIDE the /research handler AFTER the KV cache check — a cached answer must never burn
@@ -1208,7 +1247,10 @@ export async function onRequest(context) {
         // No computed diagnosis → general-knowledge (educational) mode; otherwise
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
-        const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
+        // CliniX teaches a student, so it gets the tutor prompt rather than the doctor-facing one.
+        // Checked before hasDx: a tutor turn is never bedside commentary on a computed diagnosis.
+        const isTutor = !!(body && body.mode === "clinix-tutor");
+        const sys = isTutor ? TUTOR_SYS : (hasDx ? RAG_SYS : KNOWLEDGE_SYS);
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.

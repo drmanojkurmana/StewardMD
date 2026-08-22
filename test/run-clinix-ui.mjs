@@ -264,6 +264,39 @@ try {
     "missing consent fails the station on safety, regardless of the total");
   ok(osce && osce.withoutConsent.passed === false, "and is not recorded as a pass");
 
+  /* ── 9. The tutor: affordance appears only behind its own flag ─────────── */
+  console.log("\n--- tutor ---");
+  ok((await ev("!document.querySelector('#clinixRoot [data-act=\"cx-ask\"]')")) === true,
+    "with smd_clinix_tutor off, a lesson shows NO Ask-MaiK affordance");
+
+  await attach(BASE + "?clinix=1&clinixdraft=1&clinixtutor=1");
+  await ev("window.CLINIX.open()");
+  await sleep(400);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  for (let i = 0; i < 40; i++) {
+    if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break;
+    await sleep(250);
+  }
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-rail-btn')].find(b => b.textContent.includes('Respiratory examination')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-lesson\"]').click()");
+  await sleep(300);
+  ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-ask\"]')")) === true,
+    "with the tutor flag on, the lesson offers Ask MaiK");
+
+  // The dose guard must be live in the browser, not only in node.
+  const guard = await ev(`(() => {
+    const T = window.SMD_CLINIX_TUTOR;
+    const bad = T.sanitize("Give prednisolone 40 mg daily for five days.");
+    const good = T.sanitize("You percuss side to side so you are always comparing like with like.");
+    return { blocked: bad.blocked, leaks: bad.text.indexOf("40 mg") >= 0, goodPassed: !good.blocked };
+  })()`);
+  ok(guard && guard.blocked === true, "DOSE GUARD is live in the browser");
+  ok(guard && guard.leaks === false, "and no dose survives into the displayed text");
+  ok(guard && guard.goodPassed === true, "while normal teaching passes through");
+
   /* ── 9. No prescribing surface anywhere in CliniX ──────────────────────── */
   console.log("\n--- safety ---");
   ok((await ev("!document.querySelector('#clinixRoot [class*=\"rx\"], #clinixRoot [data-act*=\"rx\"]')")) === true,

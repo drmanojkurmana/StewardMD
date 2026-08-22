@@ -340,6 +340,25 @@
 
 #clinixRoot .cx-vivalvl { margin: 14px 16px 0; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-teach); }
 
+/* ── tutor ────────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-tutor-ctx { display: flex; align-items: center; gap: 8px; margin: 14px 16px 0; padding: 10px 12px; background: var(--cx-teach-soft); color: var(--cx-teach); border-radius: var(--cx-r-ctl); font-size: 13px; }
+#clinixRoot .cx-tutor-ctx .material-symbols-rounded { font-size: 18px; }
+#clinixRoot .cx-tutor-log { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+/* The student's own question is right-aligned and tinted; the teaching reply is plain and full
+   width, so the reply reads as prose rather than as a chat bubble. This is a lesson, not a chat. */
+#clinixRoot .cx-tq { align-self: flex-end; max-width: 85%; padding: 10px 14px; background: var(--cx-primary); color: #fff; border-radius: 16px 16px 4px 16px; font-size: 14.5px; line-height: 1.45; }
+#clinixRoot .cx-ta { font-size: 15.5px; line-height: 1.6; white-space: pre-wrap; }
+#clinixRoot .cx-ta--pending { color: var(--cx-muted); }
+#clinixRoot .cx-ta--err { display: flex; align-items: center; gap: 8px; color: var(--cx-warn); font-size: 14px; }
+/* The dose guard's visible face: a refusal is teaching, so it is styled as a note, not an error. */
+#clinixRoot .cx-ta--blocked { padding: 14px; background: var(--cx-warn-bg); color: var(--cx-warn); border-radius: var(--cx-r-ctl); font-size: 14.5px; }
+#clinixRoot .cx-tutor-hints { padding: 8px 16px 0; display: flex; flex-direction: column; gap: 8px; }
+#clinixRoot .cx-hint { padding: 12px 14px; text-align: left; font-size: 14px; font-family: inherit; cursor: pointer; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); color: var(--cx-ink); }
+#clinixRoot .cx-tutor-input { display: flex; gap: 8px; align-items: flex-end; padding: 16px; }
+#clinixRoot .cx-tutor-input .cx-input { flex: 1 1 auto; }
+#clinixRoot .cx-tutor-input .cx-btn { flex: 0 0 auto; }
+
 /* ── weak areas ───────────────────────────────────────────────────────────── */
 
 #clinixRoot .cx-weak { padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); }

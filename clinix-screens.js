@@ -50,6 +50,7 @@
     stationChecked: {},
     stationEndsAt: 0,
     stationTimer: null,
+    tutorLog: [],
     viva: null,
     vivaState: null,
     vivaCurrent: null,
@@ -631,7 +632,8 @@
 
   var SCREENS = {
     home: renderHome, system: renderSystem, disease: renderDisease, chapter: renderChapter,
-    lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency
+    lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency,
+    tutor: renderTutor
   };
 
   function host() { return document.getElementById("clinixScroll"); }
@@ -681,6 +683,7 @@
     state.turnIndex = 0;
     state.answered = {};
     state.revealed = {};
+    state.tutorLog = [];
     if (P()) P().savePosition({ diseaseId: state.diseaseId, chapterId: state.chapterId, skillId: skillId, turnIndex: 0 });
     go("lesson");
   }
@@ -791,21 +794,100 @@
   }
 
   function askMaik() {
-    // Phase 2 wires the real MaiK tutor. Until then, say so rather than opening a dead sheet.
-    if (window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.ask) {
-      SMD_CLINIX_TUTOR.ask(tutorContext());
+    if (!(window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.available())) {
+      toast("The tutor needs MaiK, which is not available right now");
       return;
     }
-    toast("The MaiK tutor arrives in the next CliniX phase");
+    haptic("tap");
+    go("tutor");
   }
 
+  /* Everything MaiK needs to stop being generic: where the student is, what the lesson itself says
+   * about the current step, and what they keep getting wrong. */
   function tutorContext() {
     var t = state.turns[state.turnIndex] || {};
+    var b = state.built;
+    var sk = b ? C().skill(b, state.skillId) : null;
+    var chTitle = "";
+    if (b) {
+      var chs = (b.disease && b.disease.chapters) || [];
+      for (var i = 0; i < chs.length; i++) if (chs[i].id === state.chapterId) chTitle = chs[i].title;
+    }
     return {
-      system: state.systemId, diseaseId: state.diseaseId, chapterId: state.chapterId,
-      skillId: state.skillId, turnKind: t.kind, turnHeading: t.heading || "",
+      system: state.systemId,
+      systemTitle: b && b.system ? b.system.title : "",
+      diseaseId: state.diseaseId,
+      diseaseName: b && b.disease ? b.disease.name : "",
+      chapterId: state.chapterId,
+      chapterTitle: chTitle,
+      skillId: state.skillId,
+      skillTitle: sk ? sk.title : "",
+      turnKind: t.kind,
+      turnHeading: t.heading || "",
+      stepWhy: sk ? sk.why : "",
       recentMisses: P() ? P().misses(5) : []
     };
+  }
+
+  function renderTutor(host) {
+    var ctx = tutorContext();
+    var html = header("Ask MaiK", ctx.skillTitle || ctx.diseaseName);
+    html += '<div class="cx-tutor-ctx">' + ic("school") +
+      "<span>Teaching you about <b>" + esc(ctx.skillTitle || ctx.diseaseName || "this lesson") + "</b></span></div>";
+
+    html += '<div class="cx-tutor-log">';
+    for (var i = 0; i < state.tutorLog.length; i++) {
+      var turn = state.tutorLog[i];
+      html += '<div class="cx-tq">' + esc(turn.q) + "</div>";
+      if (turn.pending) {
+        html += '<div class="cx-ta cx-ta--pending">' + (turn.partial ? esc(turn.partial) : "Thinking...") + "</div>";
+      } else if (turn.error) {
+        html += '<div class="cx-ta cx-ta--err">' + ic("cloud_off") + " " + esc(turn.error) + "</div>";
+      } else {
+        html += '<div class="cx-ta' + (turn.blocked ? " cx-ta--blocked" : "") + '">' + esc(turn.a) + "</div>";
+      }
+    }
+    html += "</div>";
+
+    if (!state.tutorLog.length) {
+      html += '<div class="cx-tutor-hints"><div class="cx-sec-h">Try asking</div>';
+      var hints = ["Why do we do this step?", "What would I find in this disease?", "What do students usually get wrong here?"];
+      for (var h = 0; h < hints.length; h++) {
+        html += '<button type="button" class="cx-hint" data-act="cx-tutor-hint" data-q="' + esc(hints[h]) + '">' + esc(hints[h]) + "</button>";
+      }
+      html += "</div>";
+    }
+
+    html += '<div class="cx-tutor-input">' +
+      '<textarea class="cx-input" id="cxTutorQ" rows="2" placeholder="Ask about this step"></textarea>' +
+      '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-tutor-send">Ask</button></div>';
+    html += '<div class="cx-disclaimer">The tutor teaches. It does not give doses and it never advises about a real patient.</div>';
+    host.innerHTML = html;
+  }
+
+  function tutorSend(question) {
+    question = String(question || "").trim();
+    if (!question) { toast("Type a question first"); return; }
+    var entry = { q: question, pending: true, partial: "" };
+    state.tutorLog.push(entry);
+    repaint();
+
+    SMD_CLINIX_TUTOR.answer(tutorContext(), question, function (accumulated) {
+      entry.partial = accumulated;
+      if (state.stack[state.stack.length - 1] === "tutor") repaint();
+    }).then(function (r) {
+      entry.pending = false;
+      if (!r || r.error) {
+        entry.error = r && r.error === "quota"
+          ? "You have reached today's CliniX tutor limit. It resets at midnight."
+          : "MaiK could not answer just now. Try again in a moment.";
+      } else {
+        entry.a = r.text;
+        entry.blocked = !!r.blocked;
+      }
+      haptic("tap");
+      repaint();
+    });
   }
 
   function textAnswer() {
@@ -868,6 +950,13 @@
 
       case "cx-resume": resume(); return;
       case "cx-ask": askMaik(); return;
+      case "cx-tutor-hint": tutorSend(t.getAttribute("data-q")); return;
+      case "cx-tutor-send": {
+        var el = document.getElementById("cxTutorQ");
+        var q = el ? String(el.value || "").trim() : "";
+        if (el) el.value = "";
+        tutorSend(q); return;
+      }
       case "cx-authormode":
         try { SMD_CLINIX_FLAGS.set("smd_clinix_draft", true); } catch (er) {}
         C().reset();

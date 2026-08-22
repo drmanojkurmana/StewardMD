@@ -1,6 +1,6 @@
 ---
 tags: [module, education, respiratory]
-status: phase1-built (flag OFF, content ai_drafted pending R1 clinical sign-off)
+status: phase1+2 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
 flag: smd_clinix (client, def:false, ?clinix=1) + smd_clinix_draft (def:false, NEVER ship on) + smd_clinix_tutor (Phase 2, def:false) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
@@ -35,6 +35,7 @@ stony dullness". That indirection is what makes the fourth disease cheap.
   forget them. `cxMedia()` clones `kardiox-screens.js:13-20` kxImg() for native asset rewriting.
 - `clinix-store.js` — per-skill competency + resume position + miss log. Emits `learn` into the
   EXISTING `SMD_KU` ledger rather than being a fifth progress store.
+- `clinix-tutor.js` — MaiK as tutor. Context envelope + **the dose guard** (see invariants).
 - `clinix-screens.js` — router + **the lesson runner** (the product). `clinix.js` — flag gate +
   `#clinixRoot`. `clinix.css` — everything under `#clinixRoot` / `.cx-*`.
 - `clinix/**` — content as data. `manifest.json` (catalog) · `skills/core.json` (shared approach +
@@ -53,6 +54,11 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 - **Mastery is not one correct answer.** Requires repeated success on SEPARATE days (contrast
   `kardiox-providers.js:112`, which credits mastery on the first correct answer, which is why no row
   in the ECG atlas ever shows mastered).
+- **The tutor never authors a dose.** `TUTOR_SYS` says so, but a prompt is a request, not a
+  mechanism. `clinix-tutor.js` `sanitize()` is the mechanism: a reply matching a drug-dose pattern is
+  replaced WHOLESALE with a teaching refusal, client side, before it can render. Tested against 10
+  real dose shapes and 12 legitimate lesson strings (saturation targets, FEV1 bands, PaCO2
+  thresholds, pack-years, Harrison page numbers) that must NOT trip it. Mirrors SknX Phase 2.
 
 ## Why this is NOT built like the KardiQ Learn atlas
 Measured, not stylistic. `kardiox-content-pack.js` is 1.9 MB of JS parsed on every page load for
@@ -80,8 +86,31 @@ catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared
 - The CDP helper `ev()` wraps its argument in `return (...)`, so a multi-statement snippet must be
   written as an IIFE expression.
 
+## Phase 2: MaiK as tutor
+CliniX builds **no chatbot**; it calls `SMD_AI.explainGroundedStream` exactly as `icu.js:7231` does.
+Four small, additive changes outside the module:
+- `functions/_ai_usage.js` — a `clinix` entry in `AI_MODULES` (60/day). A Socratic lesson is many
+  SHORT turns, so it needs its own bucket; without it a student's revision silently eats the same
+  50/day `maik` allowance they need for clinical questions, and the admin console cannot tell
+  student revision from a doctor's MaiK usage.
+- `functions/api/ai/[[path]].js` — `body.mode === "clinix-tutor"` remaps `_mod` to `clinix` (same
+  place and shape as the existing `maik_case` and `research` remaps), and selects a new `TUTOR_SYS`.
+  `KNOWLEDGE_SYS` is wrong for a student in three specific ways: it opens "for qualified doctors", it
+  enforces the `@@MORE@@` / `@@REFINE:@@` bedside template CliniX has no chips for, and its DOSING
+  rule instructs the model to give standard doses on request.
+- `reasoning.js` — `mode` added to the body whitelist of `explainGrounded` and
+  `explainGroundedStream`. `undefined` for every existing caller, so their behaviour is byte-identical.
+- **Intent Firewall**: `clinix-tutor.js` widens `MaiKScope` with exam vocabulary (`jvp`, `percuss`,
+  `auscultat`, `clubbing`, `osce`...) **only when the CliniX flag is on**, preserving flag-off
+  no-op. Verified against the real classifier: "why do I check JVP?" already passes (via the
+  2026-08-20 `certain` amendment), but a bare **"JVP"** or **"percussion"** hits `home.js:3748`'s
+  two-token clarify trap and the student is asked to name a condition instead of being taught.
+  **Candidate improvement for the owner: this vocabulary is genuinely medical and would help doctors
+  too, so it is a reasonable app-wide widening rather than a CliniX-only one.**
+
 ## Status
-- **Phase 1 (engine + spine): built.** 55 unit tests + 36 real-browser checks green. Full suite:
+- **Phase 1 (engine + spine) and Phase 2 (tutor): built.** 92 unit tests + 41 real-browser checks
+  green. Full suite:
   104 failures before and after, identical set (zero regression, verified against `pre-clinix` in a
   clean worktree).
 - **Content: `ai_drafted`, NOT approved.** Drafted against Harrison 22e p.2249-2259 via
