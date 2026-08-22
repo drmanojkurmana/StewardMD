@@ -7,6 +7,8 @@
  *      screen back to the previous page instead of dismissing all the way to home).
  *   2. Else the clinical engine (5-step form / Clinical Decision output) → window._SMD_goBack().
  *   3. Else (home/root) → nothing (iOS); Android exits the app.
+ * At HOME the same edge-drag has nothing to go back to, so it SLIDES THE MENU OPEN instead
+ * (gesture only — Android's hardware back still exits at root).
  * Reuses each screen's own back logic — no per-screen wiring. The edge-handle appears on
  * every screen that can go back, so no module is a dead-end even without its own button.
  *
@@ -126,6 +128,23 @@
     return false;                                              // 3) at root
   }
 
+  // At HOME there is nowhere to go back to (step 3 above), so the same left-edge rightward drag
+  // opens the main menu instead of doing nothing — the drawer slides in on release (its own CSS
+  // transition). Gesture-only: the Android hardware back must still exit at root, so this is NOT
+  // inside goBack(). No-op when the drawer is already open or home isn't the foreground screen.
+  function openMenuAtHome() {
+    if (!homeIsForeground()) return false;
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return false; } catch (e) {}
+    try { if (window.SB && typeof SB.open === "function") { SB.open(); return true; } } catch (e) {}
+    return false;
+  }
+  // With the menu already open it covers the left edge, so a further RIGHTWARD drag on it is a
+  // no-op (it closes by swiping left, tapping the backdrop, or hardware back — all unchanged).
+  function edgeSwipeAction() {
+    try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
+    return openMenuAtHome() || goBack();
+  }
+
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
   // of the top back control (the module's overlay container). null → no element to drag (discrete back only).
   function overlayRootOf(el) {
@@ -209,7 +228,7 @@
     }
     function endDrag(complete) {
       var el = dragEl; dragging = false; dragEl = null;
-      if (complete) { goBack(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
+      if (complete) { edgeSwipeAction(); if (el) { try { el.style.transition = ""; el.style.transform = ""; el.style.boxShadow = ""; } catch (e) {} } setTimeout(syncHandle, 80); }
       else if (el) { setX(el, 0, true); setTimeout(function () { try { el.style.transition = ""; } catch (e) {} }, 220); }
     }
     document.addEventListener("touchstart", function (e) {
@@ -238,7 +257,7 @@
       var dx = t ? (t.clientX - sx) : curDx;
       var far = curDx >= vw() * 0.32 || (dx >= DIST && dt <= MAXTIME);
       if (dragging) endDrag(far);
-      else if (far) goBack();                                 // valid edge flick with no draggable overlay
+      else if (far) edgeSwipeAction();                          // valid edge flick with no draggable overlay (at home: opens the menu)
     }, { passive: true });
   }
 
@@ -257,5 +276,5 @@
     }
   } catch (e) {}
 
-  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
+  window.SMD_SWIPE_BACK = { goBack: goBack, canGoBack: canGoBack, openMenuAtHome: openMenuAtHome, edgeSwipeAction: edgeSwipeAction, enabled: enable, engineActive: engineActive, syncHandle: syncHandle };
 })();
