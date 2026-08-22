@@ -208,22 +208,56 @@
     });
   }
 
-  var _started = false;
+  function mintOn() {
+    try { return !window.SMD_STEWARD_ID_FLAGS || window.SMD_STEWARD_ID_FLAGS.bool("smd_steward_id_mint"); } catch (e) { return true; }
+  }
+
+  /* The StewardMD ID is this account's permanent handle — the thing a colleague adds you by, a
+   * referral is addressed to, and a support ticket is filed against. It therefore has to exist for
+   * EVERY signed-in user from their first sign-in, exactly like a national ID number: you do not
+   * earn one by joining a unit.
+   *
+   * It used to be minted from ONE place — icu-collab's ensureIdentity, reached only via
+   * grpEnsureGroupsSub — so it existed only after a user turned Group mode on AND a unit resolved.
+   * A resident who is simply added to someone else's unit, or who never opens ICU at all, had no
+   * ID, which is the wrong way round: they need the ID in order to BE added.
+   *
+   * Bootstrapping is deliberately not `if (window.firebase)` at parse time: index.html loads the
+   * Firebase SDK lazily on idle, so at this point it is essentially never there. We wait for it. */
+  var _started = false, _lastUid = null;
+  function onUser(user) {
+    if (!user) { _lastUid = null; return; }                       // signed out — next sign-in re-resolves
+    if (user.uid === _lastUid) return;                            // same account, repeat callback
+    _lastUid = user.uid;
+    if (!mintOn()) return;
+    var ensure = function (cb) { try { window.SMD_STEWARD_ID.ensure({}, cb); } catch (e) { cb && cb(null); } };
+    // The anchor-email capture UI stays behind smd_steward_id; only the ID mint is universal.
+    if (!flagOn()) { ensure(function () {}); return; }
+    run(user, {
+      ensure: ensure,
+      promptRealEmail: promptRealEmailBrowser,
+      writeAnchor: function (email, source) { writeAnchorBrowser(email, source, true); }
+    });
+  }
+  function watch() {
+    try { window.firebase.auth().onAuthStateChanged(onUser); } catch (e) {}
+  }
   function init() {
-    if (_started || !flagOn()) return; _started = true;
+    if (_started) return; _started = true;
     try {
-      window.firebase.auth().onAuthStateChanged(function (user) {
-        if (!user) return;
-        run(user, {
-          ensure: function (cb) { window.SMD_STEWARD_ID.ensure({}, cb); },
-          promptRealEmail: promptRealEmailBrowser,
-          writeAnchor: function (email, source) { writeAnchorBrowser(email, source, true); }
-        });
-      });
+      if (window.firebase && window.firebase.auth) { watch(); return; }
+      if (window.SMD_loadFirebase) { window.SMD_loadFirebase(function () { watch(); }); return; }
+      // No loader (a page that hosts these scripts on its own): poll briefly, then give up. Skipped
+      // outside a real browser so a test harness that stubs `window` isn't held open by the timer.
+      if (typeof document === "undefined") return;
+      var n = 0, iv = setInterval(function () {
+        if (window.firebase && window.firebase.auth) { clearInterval(iv); watch(); }
+        else if (++n > 60) clearInterval(iv);
+      }, 500);
     } catch (e) {}
   }
-  try { if (typeof window !== "undefined" && window.firebase) init(); } catch (e) {}
-  var API = { init: init, run: run, writeAnchor: writeAnchorBrowser, _flagOn: flagOn };
+  try { if (typeof window !== "undefined") init(); } catch (e) {}
+  var API = { init: init, run: run, writeAnchor: writeAnchorBrowser, _flagOn: flagOn, _mintOn: mintOn, _onUser: onUser };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_STEWARD_ONBOARD = API;
 })();

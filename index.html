@@ -1833,14 +1833,15 @@ window.openExternal = function (u) {
 <script src="/oncotree.js?v=op3-map" defer></script>
 <script src="/protocol-sheet.js?v=ps1" defer></script>
 <script src="/protocol-maker.js?v=pm1" defer></script>
-<!-- StewardMD ID · universal identity + verified-email/Apple-proxy flow (additive,
-     flag-gated smd_steward_id, DEFAULT OFF; enable with ?stewardid=1 or Settings).
-     Foundational registry for identity verification & anchor-email enrollment.
-     No-op when the flag is off. -->
-<script src="steward-id-flags.js"></script>
-<script src="steward-id.js"></script>
-<script src="anchor-email.js"></script>
-<script src="steward-id-onboard.js"></script>
+<!-- StewardMD ID · the account's permanent SMD-XXXXXX handle. The ID itself is
+     UNIVERSAL: minted on sign-in for every user (kill switch smd_steward_id_mint,
+     default ON), so a doctor has an ID to be added / referred / supported BY before
+     they ever open ICU or touch Group mode. The verified-email / Apple-proxy anchor
+     CAPTURE UI remains flag-gated (smd_steward_id, DEFAULT OFF; ?stewardid=1). -->
+<script src="steward-id-flags.js?v=smdid2"></script>
+<script src="steward-id.js?v=smdid2"></script>
+<script src="anchor-email.js?v=smdid2"></script>
+<script src="steward-id-onboard.js?v=smdid2"></script>
 <!-- GHIS Ward Sync (additive integration; flag-gated, reversible). The frontend
      ghis-ward.js self-injects a 🏥 Ward button + #ghisPanel. Each doctor signs in
      with their OWN GHIS id/password; the token is stored client-side and sent as

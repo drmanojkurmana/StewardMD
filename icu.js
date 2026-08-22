@@ -3858,6 +3858,32 @@
     return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-slist">' + note + body + '</div></div>';
   }
   // Care team — Phase 1 shows the signed-in user only; group mode shows the real unit roster + roles.
+  /* Your StewardMD ID — this account's permanent handle: what a colleague adds you by, what a
+   * referral is addressed to, what a support ticket is filed against. It is UNIVERSAL (minted at
+   * sign-in by steward-id.js), so it is shown on the solo Team screen too — a resident waiting to
+   * be added to someone else's unit needs to read their ID out BEFORE they are in any unit. */
+  function stewardIdVal() {
+    if (_grpDoctorId) return _grpDoctorId;
+    try { var s = window.SMD_STEWARD_ID; if (s && s.my) return s.my() || ""; } catch (e) {}
+    return "";
+  }
+  function stewardIdCard() {
+    var idVal = stewardIdVal();
+    return '<div class="icu-v2-idcard"><div class="icu-v2-idcard-l"><span class="icu-v2-idcard-lbl">Your StewardMD ID</span>' +
+      '<span class="icu-v2-idcard-code">' + (idVal ? esc(idVal) : "Generating…") + '</span></div>' +
+      (idVal ? '<button class="icu-v2-idcopy" data-icu-act="grpcopyid" aria-label="Copy your StewardMD ID">' + ico("copy", "📋") + ' Copy</button>' : "") +
+      '</div>';
+  }
+  // Resolve it (minting on first ever sign-in) and repaint the Team screen when it lands.
+  function ensureStewardId() {
+    if (stewardIdVal()) return;
+    var done = function (id) { if (id) { _grpDoctorId = id; if (ICU.isOpen() && _screen === "team") paint(); } };
+    try {
+      var api = groupsApi();
+      if (api && api.ensureIdentity) { api.ensureIdentity(done); return; }
+      if (window.SMD_STEWARD_ID && window.SMD_STEWARD_ID.ensure) window.SMD_STEWARD_ID.ensure({}, done);
+    } catch (e) {}
+  }
   function renderV2Team() {
     if (grpActive()) return renderV2TeamGroup();
     var name = v2AccountName(), p = v2AccountProfile(), email = (p && p.email) || "";
@@ -3870,7 +3896,8 @@
     var note = '<div class="icu-v2-note">' + ico("info", "ⓘ") + (groupMode()
       ? ' Group mode is <b>ON</b>. Open the <b>Unit</b> board to pick or create a shared unit — your team roster and roles appear here once you join one.'
       : ' Multi-doctor units — roles (who can give instructions vs. update status) and a shared audit trail — are available in Group mode. Turn it on in Settings.') + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + note + '</div></div>';
+    var idNote = '<p class="icu-doc-sub" style="margin:-2px 2px 2px">Your permanent StewardMD ID. Share it so a colleague can add you to their unit, or quote it in a support request.</p>';
+    return '<div class="icu-scroll icu-v2-scroll icu-v2-screen">' + header + '<div class="icu-v2-tlist">' + member + stewardIdCard() + idNote + note + '</div></div>';
   }
   /* ============================================================ ICU v2 GROUP MODE
    * (smd_icu_groups, Phase 2) — the LIVE Firestore collaboration layer wired into the v2
@@ -4433,12 +4460,8 @@
     var count = members ? members.length : null;
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">' + esc(g.name || "Care team") + '</div><div class="icu-v2-shead-s">' + (count != null ? (count + ' member' + (count === 1 ? "" : "s")) : "Loading team…") + (g.unit ? " · " + esc(g.unit) : "") + '</div></div></div>';
 
-    // Your StewardMD Doctor ID — copyable so a colleague can add you by it.
-    var idVal = _grpDoctorId || "";
-    var idCard = '<div class="icu-v2-idcard"><div class="icu-v2-idcard-l"><span class="icu-v2-idcard-lbl">Your StewardMD ID</span>' +
-      '<span class="icu-v2-idcard-code">' + (idVal ? esc(idVal) : "Generating…") + '</span></div>' +
-      (idVal ? '<button class="icu-v2-idcopy" data-icu-act="grpcopyid" aria-label="Copy your StewardMD ID">' + ico("copy", "📋") + ' Copy</button>' : "") +
-      '</div>';
+    // Your StewardMD ID — copyable so a colleague can add you by it. Same card as the solo screen.
+    var idCard = stewardIdCard();
 
     // Roster rows (from the live members subcollection).
     var rows;
@@ -4797,7 +4820,7 @@
     try { if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(String(txt || "")); } catch (e) {}
     if (window.toast) toast(msg || "Copied");
   }
-  function grpCopyId() { if (_grpDoctorId) grpCopyText(_grpDoctorId, "Your StewardMD ID copied"); }
+  function grpCopyId() { var id = stewardIdVal(); if (id) grpCopyText(id, "Your StewardMD ID copied"); }
   function grpDoLeave() {
     var api = groupsApi(); if (!api || !grpActive() || !api.leaveGroup) return;
     if (!window.confirm("Leave " + ((_grp && _grp.name) || "this unit") + "? You will lose access to its patients until you are added again.")) return;
@@ -7585,7 +7608,7 @@
       // ---- ICU v2 (smd_icu_v2) — board / alerts / team / admit / filter, all flag-only ----
       case "icuboard": if (grpActive()) grpTeardownPatient(); _screen = "board"; _paintTop = true; paint(); break;
       case "icualerts": if (grpActive()) grpNotifMarkSeen(); _screen = "alerts"; _paintTop = true; paint(); break;
-      case "icuteam": _screen = "team"; _paintTop = true; paint(); break;
+      case "icuteam": _screen = "team"; ensureStewardId(); _paintTop = true; paint(); break;
       case "icuadmit": { var _doAdmit = function () { _admitting = true; _screen = "patient"; if (grpActive()) grpAdmit(); else newPatient(); }; if (window.CONNECTPT && CONNECTPT.openAdmitChooser) CONNECTPT.openAdmitChooser(_doAdmit); else _doAdmit(); break; }
       case "icumore": _screen = "patient"; _active = "more"; _ws = "documents"; _paintTop = true; paint(); break;   // "more" is now the Tools sub-tab of the Records workspace
       case "icusettings": _screen = "settings"; _paintTop = true; paint(); break;   // unit-level settings (group mode + notifications), separate from per-patient tools

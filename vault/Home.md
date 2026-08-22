@@ -22,6 +22,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[FundX]] — smartphone fundus/retinal imaging
 
 ## Cross-cutting
+- [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
 - [[Roadmap]] — pending / deferred work

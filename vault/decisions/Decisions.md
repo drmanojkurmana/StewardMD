@@ -136,3 +136,28 @@ The system:
 Verified by re-running the ICU browser suites (nav, alerts, modal-color, safety-ux, dx-flow,
 swipe-remove) — unchanged, incl. the pre-existing failures in `run-icu-nav` / `run-icu-labwatch`
 which reproduce identically on the parent commit.
+
+## 2026-08-22 — The StewardMD ID is minted at sign-in, for everyone
+The `SMD-XXXXXX` ID was reachable through exactly ONE path: `icu-collab.ensureIdentity`, guarded by
+`icuGroupsOn()` and called only from `grpEnsureGroupsSub`. So an ID existed only after a user turned
+**Group mode on** AND a unit resolved. That is backwards: a resident does not create units — someone
+adds them to one, **by their ID** — so the people who most need an ID were the ones who could not
+get one without toggling Group mode purely to mint it. `steward-id.js` already implemented a
+universal mint (Phase 1, PR #545) but nothing ever called it: its bootstrap was flag-gated AND ran
+`if (window.firebase)` at parse time, while index.html loads the Firebase SDK lazily on idle.
+
+**Decision**: the ID is universal and unconditional, like a national ID number. It is minted on
+sign-in for every user (`steward-id-onboard.js`, waiting for `SMD_loadFirebase`), the `icuGroupsOn()`
+guard is gone from `ensureIdentity`, and the ID card shows on the solo ICU Team screen too.
+Reversibility is a **kill switch, not a rollout gate**: `smd_steward_id_mint` defaults ON and can be
+set to 0 to stop the per-user write without a redeploy. The verified-email / Apple-proxy **capture
+UI** stays behind `smd_steward_id` (default OFF) — it has open R3/R5 items; minting does not.
+
+**Consequence to know**: every signed-in user now gets a `doctorDirectory/{smdId}` entry holding
+`{uid, name}`. That collection is get-only and never listable (rules), so it is a lookup key, not a
+public roster — the same exposure ICU users already had, now for all users.
+
+**Latent bug this exposed and fixed**: identity was cached without its uid. With minting universal,
+sign-out → sign-in as someone else happens inside one page lifetime, so account B would have been
+handed account A's ID — and it would have travelled into referrals, invites and the directory. Both
+caches are now keyed on uid and `my(uid)` refuses a mismatch. See [[StewardMD ID]].

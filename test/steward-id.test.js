@@ -111,5 +111,20 @@ function depsFor(db, uid, name, email) {
   assert.ok(/^SMD-[A-Z2-9]{6}$/.test(id3), "intruder still gets its own id");
   assert.equal(dir3[eKey].uid, "owner-uid", "email index NOT clobbered — still points to the original owner");
   assert.ok(dir3[id3] && dir3[id3].uid === "intruder-uid", "intruder's by-id directory entry is written");
+
+  // ACCOUNT SWITCH: now that the ID is minted for EVERY signed-in user, a sign-out → sign-in as
+  // someone else happens inside one page lifetime. The cache must never hand account B the ID it
+  // resolved for account A (that ID travels into referrals, invites and the directory).
+  S._reset();
+  const profA = { self: { smdId: "SMD-AAAAA2" } };
+  const dirAB = {};
+  const idA = await new Promise(r => S.ensure(depsFor(makeFakeDb(profA, dirAB), "uidA", "Dr A", "a@h.org"), r));
+  assert.equal(idA, "SMD-AAAAA2", "account A resolves its own id");
+  assert.equal(S.my("uidA"), "SMD-AAAAA2", "my() returns it for its owner");
+  assert.equal(S.my("uidB"), null, "my() refuses to hand A's id to another uid");
+  const profB = { self: { smdId: "SMD-BBBBB3" } };
+  const idB = await new Promise(r => S.ensure(depsFor(makeFakeDb(profB, dirAB), "uidB", "Dr B", "b@h.org"), r));
+  assert.equal(idB, "SMD-BBBBB3", "account B resolves ITS id, not A's cached one");
+  assert.equal(S.my("uidB"), "SMD-BBBBB3", "cache now belongs to B");
   console.log("ok");
 })();
