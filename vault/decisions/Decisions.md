@@ -241,3 +241,39 @@ shipped app calls `/api/ota/check`. Guessing the plugin's exact release-artifact
 a real client exists to hold that guess accountable, is how a format mismatch would go unnoticed
 until the one time it matters — Phase 2 pins it down against whatever version is actually
 installed then. Full detail: [[OTA Updates]].
+
+## 2026-08-22 — OTA updates, Phase 2: the native client, contract pinned against the real plugin
+Phase 2 built the actual `native-ota.js` client (`window.SMD_OTA`) and, per the plan, pinned the
+exact `@capgo/capacitor-updater` wire contract against the plugin's real current docs rather than
+the stale Aug-1 assumption. Two corrections that came out of that verification:
+- `capacitor.config.json`'s `autoUpdate` is a STRING enum (`"off"|"atBackground"|...`), not the
+  boolean `false` the old plan assumed — using the wrong type would have silently left the plugin
+  on its default `"atBackground"` polling mode, fighting our own manual check/download logic.
+- Self-hosted delta-via-`manifest` support is ambiguous in the OSS docs. Rather than build against
+  an uncertain feature, Phase 2 ships ONE zip per release (`scripts/ota-stage.mjs` now also zips
+  `www/`, content-addressed like every other file) — simpler, verifiably matches `download({url,
+  version})`'s documented contract, and the per-file manifest `_ota.js` already produces stays
+  available for a real delta path later if it's confirmed to work self-hosted.
+- The plugin is MPL-2.0, not MIT as stated in conversation earlier this session — corrected here;
+  still free, still not the paid Capgo cloud (only their hosted service costs money).
+
+**Two more decisions, both direct extensions of the kill-switch principle from Phase 1:**
+- **The kill switch is enforced ON THE DEVICE, inside `check()` itself** — when the server reports
+  `disabled` and the device is on a non-builtin version, it calls `reset()` and clears its local
+  version right there. A device that already took a bad release does not sit on it waiting for
+  someone to reopen the admin console; the moment it can reach the server again, it reverts itself.
+- **Two install paths map to two different plugin calls, and nothing outside them is allowed to
+  invoke either**: an explicit user tap (banner or the pre-existing Settings button) calls `set()`
+  (immediate reload); the user's own opt-in "Automatic updates" toggle calls `next()` (queued for a
+  future natural restart, never interrupting a live session). This is the literal mechanism behind
+  "nothing applies without the user's own choice" — not a policy statement, an enforced code path.
+
+**Reuse note**: `home.js` already carried a full, correctly-shaped Settings-page integration for
+`window.SMD_OTA` (Automatic-updates toggle, Check for updates, Download & install), dormant since
+before the teardown and guarded by `if (window.SMD_OTA && SMD_OTA.available())`. Phase 2 is built
+to satisfy that EXISTING contract exactly, rather than design a new one — the row activates the
+moment `native-ota.js` defines the global correctly, no home.js change needed.
+
+Verified inert (zero exceptions, `available()===false`) in both non-target states: plain web, and
+native-WITHOUT-the-plugin-yet — which is the actual state of the shipped app the moment this PR
+merges, before the one Phase 3 native rebuild. Full detail: [[OTA Updates]].

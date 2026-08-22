@@ -59,6 +59,9 @@ export async function onRequest(context) {
     const version = parseInt(url.searchParams.get("version") || "0", 10);
     const nativeBuild = parseInt(url.searchParams.get("nativeBuild") || "0", 10);
     const result = await OTA.checkForDevice(r2, { version, nativeBuild });
+    // @capgo/capacitor-updater's download() fetches natively, outside the WebView — it needs an
+    // ABSOLUTE url, which only the router (not _ota.js) can construct from the live request.
+    if (result.ota && result.zipHash) result.zipUrl = new URL(request.url).origin + "/api/ota/file/" + result.zipHash;
     return json(result, 200, { "Cache-Control": "no-store" });   // never let an edge/browser cache "is there an update"
   }
   if (method === "GET" && seg[0] === "file" && seg[1]) {

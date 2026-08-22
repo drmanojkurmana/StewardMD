@@ -125,9 +125,14 @@ export async function checkForDevice(r2, state = {}) {
   }
   if (channel.version <= deviceVersion) return { ota: false, reason: "up-to-date" };
   const manifest = await getManifest(r2, channel.commit);
-  if (!manifest) return { ota: false, reason: "manifest-missing" };   // fail closed, never half-answer
+  if (!manifest || !manifest.zipHash) return { ota: false, reason: "manifest-missing" };   // fail closed
+  // zipUrl is deliberately NOT built here — this module has no notion of the request's own origin,
+  // and @capgo/capacitor-updater's download() needs an ABSOLUTE url (it fetches natively, outside
+  // the WebView's own relative-path resolution). The router adds it. files[] stays available for
+  // a future delta-manifest path; the zip is what Phase 2's client actually downloads.
   return {
     ota: true, version: channel.version, commit: channel.commit,
+    zipHash: manifest.zipHash, zipSize: manifest.zipSize || 0,
     files: (manifest.files || []).map((f) => ({ path: f.path, hash: f.hash, size: f.size })),
   };
 }

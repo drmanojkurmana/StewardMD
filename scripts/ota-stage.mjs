@@ -15,7 +15,7 @@
  * Usage: node scripts/ota-stage.mjs [--commit SHA] [--message "..."] [--dry-run]
  */
 import { createHash } from "node:crypto";
-import { readdirSync, statSync, readFileSync, mkdtempSync, writeFileSync, rmSync } from "node:fs";
+import { readdirSync, statSync, readFileSync, mkdtempSync, writeFileSync, rmSync, existsSync } from "node:fs";
 import { join, relative, extname, dirname } from "node:path";
 import { tmpdir } from "node:os";
 import { execFileSync } from "node:child_process";
@@ -116,10 +116,26 @@ async function main() {
   for (const e of entries) manifestFiles.push({ path: e.rel, hash: e.hash, size: e.size });
   manifestFiles.sort((a, b) => a.path.localeCompare(b.path));   // stable diffs between manifests
 
+  // @capgo/capacitor-updater's download() wants ONE zip URL (index.html at the root or inside a
+  // single top-level folder) — it does not fetch a per-file manifest itself. The per-file hashes
+  // above are still useful (admin diff stats, future delta path) but the zip is what a device
+  // actually pulls. `zip` is preinstalled on the GitHub Actions ubuntu-latest image.
+  const zipPath = join(mkdtempSync(join(tmpdir(), "ota-")), `${COMMIT}.zip`);
+  console.log("▸ zipping www/ …");
+  execFileSync("zip", ["-r", "-q", "-X", zipPath, "."], { cwd: WWW, stdio: "inherit" });   // local-only, safe under --dry-run too
+  let zipHash = null, zipSize = 0;
+  if (existsSync(zipPath)) {
+    const zipBuf = readFileSync(zipPath);
+    zipHash = sha256(zipBuf); zipSize = zipBuf.length;
+    if (!known.has(zipHash)) { r2PutFile(`ota/files/${zipHash}`, zipPath, "application/zip"); known.add(zipHash); }
+    console.log(`  zip: ${(zipSize / 1e6).toFixed(1)} MB, sha256 ${zipHash.slice(0, 12)}…`);
+  }
+
   const builtAt = new Date().toISOString();
   const manifest = {
     commit: COMMIT, message: MESSAGE, builtAt,
     totalFiles: entries.length, totalBytes, changedFiles: toUpload.length,
+    zipHash, zipSize,
     files: manifestFiles,
   };
   r2PutJSON(`ota/manifests/${COMMIT}.json`, manifest);
