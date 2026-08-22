@@ -268,7 +268,7 @@
   function copy(t,msg){ try { if(navigator.clipboard&&navigator.clipboard.writeText){ navigator.clipboard.writeText(t); toast(msg); return; } } catch(e){} toast(t); }
 
   function openPrompt(){
-    show('<div class="cs-head"><h3>🔎 Open shared case</h3><button class="cs-x" data-cs-x aria-label="Close">×</button></div>'
+    show('<div class="cs-head"><h3>Open shared case</h3><button class="cs-x" data-cs-x aria-label="Close">×</button></div>'
        + '<div class="cs-body"><div class="cs-sub">Enter a case code to retrieve it.</div>'
        + '<div class="cs-row"><input id="csCodeIn" placeholder="SMD-7K2Q9" autocapitalize="characters" autocomplete="off"><button class="cs-btn" id="csGo">Open</button></div>'
        + '<div class="cs-note">Codes expire 30 days after sharing.</div></div>');
