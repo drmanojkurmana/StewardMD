@@ -112,3 +112,95 @@ Cherry-pick hunks instead, and prove the result: `git show <target>:<file> > /tm
 A correct server fix was then masked for another hour because the **WebView had cached the failure** -
 clearing `cache/` + `app_webview/Default/Cache` fixed it without wiping login or the 2.5 GB models.
 Full write-up: `vault/handoff/2026-08-21-maik-cloud-outage.md`.
+
+## 2026-08-22 — ICU visual design system (visual layer only, UX locked)
+The ICU dashboard was restyled to read as mature clinical software rather than a generic SaaS
+surface. The rule for the pass: **treat the UX as locked** and change only the design layer, so the
+whole redesign lives inside `icu.js` `injectCSS()` (plus the one inline `style=` on the unit-picker
+card). No component, action, screen, filter, alert rule or navigation path was added, removed or
+renamed; `git diff` on that commit contains only CSS declarations and comments.
+
+The system:
+- **Surfaces** — paper-grey ground (`--bg`), white `--panel`, recessed `--panel2`; separation is done
+  by hairline `--border`, not shadow (`--sh` is a single 1px lift; `--sh-lift` for pressed/raised).
+- **Radii** — a 12/10/8 step (`--r`/`--r-sm`/`--r-xs`) replacing 16px + pill-everything. `--r-pill`
+  is kept for the genuinely round things (avatars, dots, badges).
+- **Colour** — one deep teal accent (`--primary`/`--primary2`); status colours (danger/warn/ok) are
+  reserved for status, and acuity now tints the bed tile only when it means something (a stable bed
+  is neutral, so exceptions pop). Header chrome is flat `--primary2` — the gradients are gone.
+- **Type** — weights pulled down (800 → 600/700), eyebrows 10.5px/.11em, body copy at 400, and
+  **tabular figures on every measured number** so vitals/labs/doses stay column-aligned as they change.
+- **States** — no scale-bounce; press = brightness/surface change, selection = colour + weight (+ a
+  tinted plate in the bottom bar), so selection survives glare and colour-vision deficiency.
+
+Verified by re-running the ICU browser suites (nav, alerts, modal-color, safety-ux, dx-flow,
+swipe-remove) — unchanged, incl. the pre-existing failures in `run-icu-nav` / `run-icu-labwatch`
+which reproduce identically on the parent commit.
+
+## 2026-08-22 — The StewardMD ID is minted at sign-in, for everyone
+The `SMD-XXXXXX` ID was reachable through exactly ONE path: `icu-collab.ensureIdentity`, guarded by
+`icuGroupsOn()` and called only from `grpEnsureGroupsSub`. So an ID existed only after a user turned
+**Group mode on** AND a unit resolved. That is backwards: a resident does not create units — someone
+adds them to one, **by their ID** — so the people who most need an ID were the ones who could not
+get one without toggling Group mode purely to mint it. `steward-id.js` already implemented a
+universal mint (Phase 1, PR #545) but nothing ever called it: its bootstrap was flag-gated AND ran
+`if (window.firebase)` at parse time, while index.html loads the Firebase SDK lazily on idle.
+
+**Decision**: the ID is universal and unconditional, like a national ID number. It is minted on
+sign-in for every user (`steward-id-onboard.js`, waiting for `SMD_loadFirebase`), the `icuGroupsOn()`
+guard is gone from `ensureIdentity`, and the ID card shows on the solo ICU Team screen too.
+Reversibility is a **kill switch, not a rollout gate**: `smd_steward_id_mint` defaults ON and can be
+set to 0 to stop the per-user write without a redeploy. The verified-email / Apple-proxy **capture
+UI** stays behind `smd_steward_id` (default OFF) — it has open R3/R5 items; minting does not.
+
+**Consequence to know**: every signed-in user now gets a `doctorDirectory/{smdId}` entry holding
+`{uid, name}`. That collection is get-only and never listable (rules), so it is a lookup key, not a
+public roster — the same exposure ICU users already had, now for all users.
+
+**Latent bug this exposed and fixed**: identity was cached without its uid. With minting universal,
+sign-out → sign-in as someone else happens inside one page lifetime, so account B would have been
+handed account A's ID — and it would have travelled into referrals, invites and the directory. Both
+caches are now keyed on uid and `my(uid)` refuses a mismatch. See [[StewardMD ID]].
+
+## 2026-08-22 — One profile page, and it never renders a shorter version of you
+The account sheet had three problems: the StewardMD ID was absent (the only place to read your own
+ID was ICU → Team), the professional details (reg no · hospital/college · city · phone) were
+appended ONLY inside a successful Firestore `.then()`, and edits went through `window.prompt()`.
+
+The second one is the real bug: when the read was slow, the user signed out, or `SMD_DB` wasn't up
+yet, the rows simply never appeared — so the page looked like a profile with nothing filled in
+rather than a profile that failed to load. **A UI that degrades by omission lies about the data.**
+Every row now renders in every state (loading / loaded / empty / unreadable), with an explicit
+"Couldn't load your details · Retry".
+
+Also: `openAccount()` is exported as `window.SMD_openProfile` so all entry points open ONE page —
+the sidebar identity block (tapping your own photo, which was previously inert), More → Profile, and
+a new Settings → Account → "Profile & StewardMD ID" row. `window.prompt` is replaced by in-place row
+editing (hospital keeps the searchable directory picker). Test: `test/run-profile-ui.mjs`, which
+drives the real sheet and asserts the failure state still renders all four rows. See
+[[StewardMD ID]].
+
+## 2026-08-22 — AI may draft the discharge narrative, never the prescription
+"Draft with MaiK" in the Discharge Creator writes prose into a medico-legal document, so the design
+is mostly a set of refusals. MaiK drafts exactly four sections — hospital course, condition at
+discharge, follow-up, advice to patient — and is explicitly forbidden, in the prompt and by having
+no field to write into, from touching:
+
+- **Discharge medications.** Medication reconciliation is the highest-risk act in the document. The
+  existing R1 decision already refuses to auto-seed it from running infusions (a summary must never
+  tell a GP the patient goes home on noradrenaline); an AI that lists drugs it inferred is that same
+  failure with better grammar. Meds stay the clinician's Treatment list.
+- **The final diagnosis.** Ask MaiK has never been allowed to set a Dx; drafting a discharge does not
+  change that.
+- **Pending results.** Asserting that a culture is pending when nobody recorded it is inventing
+  clinical fact.
+
+Two further rules: the prompt forbids inventing any value and requires missing data to come back as
+a bracketed prompt (`[ confirm admission date ]`) rather than a plausible guess; and **nothing is
+written into the form until the clinician ticks that section and presses Insert** — a draft that
+silently fills fields is a draft nobody reads. The guideline basis MaiK cites is shown for review and
+deliberately NOT inserted, so nothing unverified travels into the printed document.
+
+**Open question for the owner**: whether the printed summary should carry a provenance line saying
+parts were AI-drafted. It is stamped DRAFT and clinician-review-required either way, but the
+medico-legal answer is a product call, not an engineering one. Deliberately not decided here.

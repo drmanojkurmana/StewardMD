@@ -648,7 +648,7 @@
   // function below keeps its ORIGINAL inline body as a fallback for the (should-never-happen)
   // case where steward-id.js hasn't loaded yet — this rewire is strictly non-breaking for ICU.
   var SMD_ID_ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // 31 chars, no 0/O/1/I/L (fallback only)
-  var _identity = { smdId: null };
+  var _identity = { uid: null, smdId: null };   // keyed on its owner — see steward-id.js _cache
   function _sid() { return (typeof window !== "undefined" && window.SMD_STEWARD_ID) || null; }
   function randChar(alphabet) { return alphabet.charAt(Math.floor(Math.random() * alphabet.length)); }
   function genSmdId() {
@@ -680,18 +680,31 @@
     if (s && s.indexOf("SMD-") !== 0 && /^[A-Z0-9]{6}$/.test(s)) s = "SMD-" + s;
     return s;
   }
-  function myDoctorId() { return _identity.smdId || null; }
+  // My ID, if already resolved. Falls back to the shared universal module, which may have minted it
+  // on sign-in before ICU was ever opened. Stale entries from a previous account are never returned.
+  function myDoctorId() {
+    var uid = currentUid();
+    if (_identity.smdId && _identity.uid === uid) return _identity.smdId;
+    if (_identity.uid !== uid) { _identity.uid = uid; _identity.smdId = null; }
+    var sid = _sid();
+    try { return (sid && sid.my && sid.my(uid)) || null; } catch (e) { return null; }
+  }
   // Ensure this account has a Doctor ID (idempotent). cb (optional) is invoked with the id (or
-  // null) regardless of outcome — never throws to the caller. The icuGroupsOn() guard STAYS here
-  // (at the ICU entry point) — universal minting for non-ICU users is a later phase, not this one.
+  // null) regardless of outcome — never throws to the caller.
+  //
+  // The StewardMD ID is UNIVERSAL: there is deliberately NO icuGroupsOn() guard here any more. It
+  // used to gate this function, which made the ID a by-product of turning Group mode on and getting
+  // a unit to resolve — so a resident waiting to be ADDED to someone's unit had no ID to be added
+  // BY. The mint now also runs on sign-in (steward-id-onboard.js) for users who never open ICU;
+  // this entry point stays for ICU's own call sites and is idempotent against that one.
   //
   // When the shared module is present, we still resolve the db via icu-collab's own fs() callback
   // FIRST: SMD_STEWARD_ID.ensure() requires a SYNCHRONOUS getDb, but icu-collab's _db can be null
   // until fs() resolves persistence — so we hand the shared ensure() a getDb closure over the
   // already-resolved db, not a live read of _db.
   function ensureIdentity(cb) {
-    if (!icuGroupsOn()) { cb && cb(null); return; }
-    if (_identity.smdId) { cb && cb(_identity.smdId); return; }
+    var mine = myDoctorId();                       // uid-checked; also picks up a sign-in-time mint
+    if (mine) { cb && cb(mine); return; }
     var sid = _sid();
     if (sid) {
       fs(function (db) {
@@ -701,7 +714,7 @@
           getDb: function () { return db; },
           getUid: currentUid, getName: currentName, getEmail: currentEmail,
           serverTimestamp: function () { return fieldValue().serverTimestamp(); }
-        }, function (id) { _identity.smdId = id; cb && cb(id); });
+        }, function (id) { _identity.uid = uid; _identity.smdId = id; cb && cb(id); });
       });
       return;
     }
@@ -711,7 +724,7 @@
       if (!db || !uid) { cb && cb(null); return; }
       profRef(db, uid).get().then(function (snap) {
         var data = (snap && snap.exists) ? (snap.data() || {}) : {};
-        if (data.smdId) { _identity.smdId = data.smdId; cb && cb(data.smdId); return; }
+        if (data.smdId) { _identity.uid = uid; _identity.smdId = data.smdId; cb && cb(data.smdId); return; }
         mintIdentity(db, uid, 0, cb);
       }, function () { mintIdentity(db, uid, 0, cb); });
     });
@@ -730,7 +743,7 @@
         return smdId;
       });
     })).then(function () {
-      _identity.smdId = smdId;
+      _identity.uid = uid; _identity.smdId = smdId;
       try { profRef(db, uid).set({ smdId: smdId, name: name, at: fv.serverTimestamp() }, { merge: true }).catch(function () {}); } catch (e) {}
       try {
         var email = currentEmail();

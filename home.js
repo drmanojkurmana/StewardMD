@@ -1057,6 +1057,43 @@
       ".hv-acct-btn.out{background:transparent;border:1px solid var(--hbd);color:var(--hink)}",
       ".hv-acct-btn:active{transform:scale(.98)}",
       ".hv-acct-note{font:500 12px/1.5 var(--hfont);color:var(--hmut);margin-top:13px}",
+      // ── Profile page (the account sheet): identity → StewardMD ID → professional details →
+      // account → danger. Left-aligned rows on hairlines; the ID is the hero because it is the
+      // thing a colleague asks you for.
+      ".hv-pf{text-align:left;padding:2px 2px 4px}",
+      ".hv-pf-hd{display:flex;align-items:center;gap:13px;padding:2px 0 4px}",
+      ".hv-pf-pic{width:60px;height:60px;border-radius:50%;object-fit:cover;flex:0 0 auto;background:var(--hp,#0F766E)}",
+      ".hv-pf-ph{display:flex;align-items:center;justify-content:center;color:#fff;font:700 23px var(--hfont,system-ui)}",
+      ".hv-pf-who{flex:1;min-width:0}",
+      ".hv-pf-nm{font:700 18px var(--hfont,system-ui);color:var(--hink,#0f172a);letter-spacing:-.01em;overflow-wrap:anywhere}",
+      ".hv-pf-em{font:400 12.5px var(--hfont,system-ui);color:var(--hmut,#64748b);margin-top:2px;overflow-wrap:anywhere}",
+      ".hv-pf-badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}",
+      ".hv-pf-badge{font:600 10.5px var(--hfont,system-ui);letter-spacing:.03em;border-radius:5px;padding:3px 8px;background:rgba(100,116,139,.12);color:var(--hmut,#64748b);white-space:nowrap}",
+      ".hv-pf-badge.ok{background:rgba(16,122,72,.12);color:#107a48}",
+      ".hv-pf-badge.warn{background:rgba(180,110,20,.14);color:#8a5405}",
+      ".hv-pf-badge.pro{background:var(--hps,rgba(15,118,110,.12));color:var(--hp,#0F766E)}",
+      ".hv-pf-sec{font:700 10.5px var(--hfont,system-ui);letter-spacing:.11em;text-transform:uppercase;color:var(--hmut,#64748b);margin:20px 2px 8px}",
+      ".hv-pf-card{border:1px solid var(--hbd,#e2e8f0);border-radius:12px;background:var(--hpanel,#fff);overflow:hidden}",
+      ".hv-pf-row{display:flex;align-items:center;gap:10px;padding:11px 13px;border-top:1px solid var(--hbd,#e2e8f0);min-height:46px}",
+      ".hv-pf-row:first-child{border-top:none}",
+      ".hv-pf-k{font:500 12.5px var(--hfont,system-ui);color:var(--hmut,#64748b);flex:0 0 38%}",
+      ".hv-pf-v{flex:1;min-width:0;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a);text-align:right;overflow-wrap:anywhere}",
+      ".hv-pf-v.unset{font-weight:500;color:var(--hmut,#64748b)}",
+      ".hv-pf-edit{flex:0 0 auto;border:0;background:none;color:var(--hp,#0F766E);font:600 12.5px var(--hfont,system-ui);cursor:pointer;padding:6px 2px 6px 6px;min-height:34px}",
+      ".hv-pf-in{flex:1;min-width:0;border:1px solid var(--hp,#0F766E);border-radius:8px;padding:8px 10px;font:500 14px var(--hfont,system-ui);background:var(--hpanel,#fff);color:var(--hink,#0f172a)}",
+      ".hv-pf-in:focus{outline:none;box-shadow:0 0 0 3px var(--hps,rgba(15,118,110,.14))}",
+      ".hv-pf-ok{flex:0 0 auto;border:0;border-radius:8px;background:var(--hp,#0F766E);color:#fff;font:600 12.5px var(--hfont,system-ui);padding:9px 12px;cursor:pointer}",
+      ".hv-pf-cancel{flex:0 0 auto;border:0;background:none;color:var(--hmut,#64748b);font:600 12.5px var(--hfont,system-ui);cursor:pointer;padding:9px 4px}",
+      // The ID block: monospaced, generously tracked, sized to be read out loud over a phone.
+      ".hv-pf-id{display:flex;align-items:center;gap:12px;padding:13px}",
+      ".hv-pf-idl{flex:1;min-width:0}",
+      ".hv-pf-idcode{display:block;font:600 21px 'IBM Plex Mono',ui-monospace,SFMono-Regular,Menlo,monospace;letter-spacing:.08em;color:var(--hp,#0F766E)}",
+      ".hv-pf-idsub{display:block;font:400 11.5px/1.5 var(--hfont,system-ui);color:var(--hmut,#64748b);margin-top:4px}",
+      ".hv-pf-copy{flex:0 0 auto;min-height:40px;padding:0 14px;border:1px solid var(--hp,#0F766E);background:var(--hpanel,#fff);color:var(--hp,#0F766E);border-radius:9px;font:600 13px var(--hfont,system-ui);cursor:pointer}",
+      ".hv-pf-copy:active{background:var(--hps,rgba(15,118,110,.12))}",
+      ".hv-pf-note{font:400 12px/1.55 var(--hfont,system-ui);color:var(--hmut,#64748b);margin:8px 2px 0}",
+      ".hv-pf-retry{border:0;background:none;color:var(--hp,#0F766E);font:600 12.5px var(--hfont,system-ui);cursor:pointer;padding:0 2px}",
+      ".hv-pf-acts{margin-top:22px}",
       // About modal: tabs + version-history timeline + facts
       ".smd-ab-tabs{display:flex;gap:4px;margin:-4px 0 16px;border-bottom:1px solid var(--line);flex-wrap:wrap}",
       ".smd-ab-tab{border:none;background:none;font:700 12.5px var(--sans);color:var(--slate-soft);padding:8px 2px;margin-right:14px;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap}",
@@ -1841,7 +1878,7 @@
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
-      mi("user", "Account &amp; sign-in", "Google sign-in, guest session", "account") +
+      mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
@@ -2268,104 +2305,271 @@
       chain.then(function () { toast("Limits saved for " + email); });
     });
   }
+  /* ── The profile page ──────────────────────────────────────────────────────────────────────
+   * One screen that answers "who is StewardMD signed in as, and what does the rest of the system
+   * know about me": identity → StewardMD ID → professional details → account → danger zone.
+   *
+   * Two things it must not do, both of which it used to:
+   *  1) render a SHORTER profile when Firestore is slow or unavailable. The professional rows used
+   *     to be appended only on a successful read, so a failed/absent read looked like "I have no
+   *     city or hospital". Every row now renders immediately, with an explicit loading / retry
+   *     state, so the page never quietly under-reports what you filled in.
+   *  2) collect edits through window.prompt() — a desktop dialog in a mobile shell. Rows edit in
+   *     place instead (hospital keeps the searchable directory picker).
+   */
   function openAccount() {
     var a = readAccount();
-    var body;
-    // Profile is driven by the unified account layer (real provider, photo, name) with the
-    // legacy stored object as fallback.
     var P = (window.SMD_ACCOUNT && window.SMD_ACCOUNT.profile && window.SMD_ACCOUNT.profile()) || null;
     var signedIn = P ? P.signedIn : !!(a && (a.email || a.type === "google" || a.type === "apple"));
-    var dot = '<span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#16a34a;margin-right:6px;vertical-align:middle"></span>';
     var dangerBtn = 'style="width:100%;margin-top:10px;background:transparent;color:var(--hdanger,#c0392b);border:1px solid var(--hdanger,#c0392b);border-radius:12px;padding:12px;font:700 13px var(--hfont);cursor:pointer"';
-    // BUG-18: one details row for the account sheet (label ↔ value).
-    function acctRow(k, v) { return '<div style="display:flex;justify-content:space-between;gap:12px;padding:9px 2px;border-top:1px solid var(--hbd,#e2e8f0);font:600 13px var(--hfont,system-ui)"><span style="color:var(--hmut,#64748b)">' + k + '</span><span style="color:var(--hink,#0f172a);text-align:right;max-width:62%;overflow-wrap:anywhere">' + smdEsc(v == null || v === "" ? "—" : String(v)) + '</span></div>'; }
-    if (signedIn) {
-      var nm = (P && P.name) || (a && a.name) || "Signed in";
-      var em = (P && P.email) || (a && a.email) || "";
-      var pc = (P && P.picture) || (a && a.picture) || "";
-      var initial = (((nm || em || "U").trim()[0]) || "U").toUpperCase();
-      var pic = pc
-        ? '<img class="hv-acct-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-acct-pic hv-acct-ph&quot;>' + smdEsc(initial) + '</div>\'">'
-        : '<div class="hv-acct-pic hv-acct-ph">' + smdEsc(initial) + '</div>';
-      var tier = (window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync()) ? "Pro" : "Free";
-      body = '<div class="hv-acct">' + pic +
-        '<div class="hv-acct-name">' + smdEsc(nm) + '</div>' +
-        (em ? '<div class="hv-acct-email">' + smdEsc(em) + '</div>' : '') +
-        '<div class="hv-acct-badge">' + dot + acctProviderLabel(a, true) + '</div>' +
-        '<div id="acctDetails" style="width:100%;margin:12px 0 2px;text-align:left">' +
-          acctRow("Account", tier) +
-          acctRow("Name", nm) +
-          (em ? acctRow("Email", em) : "") +
-          '<div id="acctDetailsMore"></div>' +
-        '</div>' +
-        '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
-        '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button></div>';
-    } else {
-      body = '<div class="hv-acct">' +
+
+    if (!signedIn) {
+      openSheet('<div class="hv-sh-t">Profile</div><div class="hv-acct">' +
         '<div class="hv-acct-pic hv-acct-ph">?</div>' +
         '<div class="hv-acct-name">Guest mode</div>' +
         '<div class="hv-acct-email">Cases stay on this device only</div>' +
         '<button class="hv-acct-btn" data-acct="signin" type="button">Sign in to save your cases</button>' +
-        '<div class="hv-acct-note">Sign in with Google or Apple to sync your cases across devices, keep them safe, and share by code. Your current cases move with you.</div>' +
-        '<button data-acct="erase" type="button" ' + dangerBtn.replace("margin-top:10px", "margin-top:12px") + '>Erase all data on this device</button></div>';
+        '<div class="hv-acct-note">Sign in with Google or Apple to sync your cases across devices, keep them safe, and share by code. Your current cases move with you. Signing in also issues your StewardMD ID — the ID colleagues add you to a unit by.</div>' +
+        '<button data-acct="erase" type="button" ' + dangerBtn.replace("margin-top:10px", "margin-top:12px") + '>Erase all data on this device</button></div>');
+      var gs = sheetEl();
+      var gsi = gs.querySelector('[data-acct="signin"]');
+      if (gsi) gsi.addEventListener("click", function () { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} });
+      var ge = gs.querySelector('[data-acct="erase"]');
+      if (ge) ge.addEventListener("click", confirmDeleteAccount);
+      acctWatchAuth();
+      return;
     }
-    openSheet('<div class="hv-sh-t">Account &amp; sign-in</div>' + body);
+
+    var nm = (P && P.name) || (a && a.name) || "Signed in";
+    var em = (P && P.email) || (a && a.email) || "";
+    var pc = (P && P.picture) || (a && a.picture) || "";
+    var initial = (((nm || em || "U").trim()[0]) || "U").toUpperCase();
+    var pic = pc
+      ? '<img class="hv-pf-pic" src="' + smdEsc(pc) + '" referrerpolicy="no-referrer" alt="" onerror="this.outerHTML=\'<div class=&quot;hv-pf-pic hv-pf-ph&quot;>' + smdEsc(initial) + '</div>\'">'
+      : '<div class="hv-pf-pic hv-pf-ph">' + smdEsc(initial) + '</div>';
+    var isPro = !!(window.SMD_PRO && SMD_PRO.isProSync && SMD_PRO.isProSync());
+
+    // A row that shows a value and (optionally) edits in place. `key` names the Firestore field.
+    function row(label, key, opts) {
+      opts = opts || {};
+      return '<div class="hv-pf-row" data-row="' + smdEsc(key) + '">' +
+        '<span class="hv-pf-k">' + label + '</span>' +
+        '<span class="hv-pf-v' + (opts.unset ? " unset" : "") + '" data-val>' + smdEsc(opts.value == null || opts.value === "" ? (opts.placeholder || "Not set") : String(opts.value)) + '</span>' +
+        (opts.edit === false ? "" : '<button class="hv-pf-edit" data-edit="' + smdEsc(key) + '" type="button">' + (opts.editLabel || "Edit") + '</button>') +
+        '</div>';
+    }
+
+    var body = '<div class="hv-pf">' +
+      '<div class="hv-pf-hd">' + pic +
+        '<div class="hv-pf-who"><div class="hv-pf-nm">' + smdEsc(nm) + '</div>' +
+        (em ? '<div class="hv-pf-em">' + smdEsc(em) + '</div>' : '') +
+        '<div class="hv-pf-badges" id="pfBadges">' +
+          '<span class="hv-pf-badge">' + smdEsc(acctProviderLabel(a, false)) + '</span>' +
+          (isPro ? '<span class="hv-pf-badge pro">Pro</span>' : '<span class="hv-pf-badge">Free</span>') +
+        '</div></div>' +
+      '</div>' +
+
+      '<div class="hv-pf-sec">StewardMD ID</div>' +
+      '<div class="hv-pf-card"><div class="hv-pf-id">' +
+        '<span class="hv-pf-idl"><span class="hv-pf-idcode" id="pfIdCode">Generating…</span>' +
+        '<span class="hv-pf-idsub">Your permanent ID on StewardMD.</span></span>' +
+        '<button class="hv-pf-copy" id="pfIdCopy" type="button" hidden>Copy</button>' +
+      '</div></div>' +
+      '<p class="hv-pf-note">Share it so a colleague can add you to their ICU or ward unit, refer a patient to you, or so support can find your account. It never changes.</p>' +
+
+      '<div class="hv-pf-sec">Professional details</div>' +
+      '<div class="hv-pf-card" id="pfPro">' +
+        row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
+        row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
+      '</div>' +
+
+      '<div class="hv-pf-sec">Account</div>' +
+      '<div class="hv-pf-card">' +
+        row("Name", "name", { value: nm, edit: false }) +
+        (em ? row("Email", "email", { value: em, edit: false }) : "") +
+        row("Signed in with", "provider", { value: acctProviderLabel(a, true), edit: false }) +
+        row("Plan", "plan", { value: isPro ? "Pro" : "Free", edit: false }) +
+      '</div>' +
+      '<p class="hv-pf-note">Name and email come from your Google or Apple sign-in, so they are changed there, not here.</p>' +
+
+      '<div class="hv-pf-acts">' +
+        '<button class="hv-acct-btn out" data-acct="signout" type="button">Sign out</button>' +
+        '<button data-acct="delete" type="button" ' + dangerBtn + '>Delete account &amp; data</button>' +
+      '</div></div>';
+
+    openSheet('<div class="hv-sh-t">Profile</div>' + body);
     var s = sheetEl();
+
     var so = s.querySelector('[data-acct="signout"]');
     if (so) so.addEventListener("click", function () { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(openAccount, 150); });
-    var si = s.querySelector('[data-acct="signin"]');
-    if (si) si.addEventListener("click", function () { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} });   // open the email+Google login screen, not straight to Google
-    var del = s.querySelector('[data-acct="delete"], [data-acct="erase"]');
+    var del = s.querySelector('[data-acct="delete"]');
     if (del) del.addEventListener("click", confirmDeleteAccount);
-    // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
-    if (!openAccount._smdSub && window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) {
-      openAccount._smdSub = true;
-      window.SMD_ACCOUNT.onChange(function () { try { var sh = sheetEl(); if (sh && sh.querySelector(".hv-acct")) openAccount(); } catch (e) {} });
-    }
-    // BUG-18: pull the rest of the collected profile (Reg No, City, Hospital, Phone) from Firestore
-    // and append it to the details list. Fully guarded so it can never break the account sheet.
-    // Load the full profile (Reg No, City, Hospital, Phone) as EDITABLE rows. Name + Email stay
-    // read-only (they're the Google sign-in identity). Guarded throughout so it can't break the sheet.
-    if (signedIn) { try {
-      var uid = (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null;
-      var fdb = window.SMD_DB;
-      if (uid && fdb) {
-        var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
-        pref.get().then(function (snap) {
-          var d = (snap && snap.exists && snap.data()) || {};
-          var more = document.getElementById("acctDetailsMore"); if (!more) return;
-          function rowEdit(k, v, key) {
-            return '<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:9px 2px;border-top:1px solid var(--hbd,#e2e8f0);font:600 13px var(--hfont,system-ui)">' +
-              '<span style="color:var(--hmut,#64748b);flex:0 0 auto">' + k + '</span>' +
-              '<span style="display:flex;align-items:center;gap:8px;justify-content:flex-end;min-width:0">' +
-                '<span style="color:var(--hink,#0f172a);text-align:right;overflow-wrap:anywhere">' + smdEsc(v == null || v === "" ? "Not set" : String(v)) + '</span>' +
-                '<button data-edit="' + key + '" style="border:0;background:none;color:var(--hp,var(--teal,#12a594));font:700 12px var(--hfont,system-ui);cursor:pointer;padding:2px 3px;flex:0 0 auto">Edit</button>' +
-              '</span></div>';
-          }
-          more.innerHTML = rowEdit("Reg No", d.regNo, "regno") + rowEdit("City", d.city, "city") + rowEdit("Hospital", d.hospital, "hospital") + rowEdit("Phone", d.phone, "phone");
-          function save(obj) { return pref.set(obj, { merge: true }); }
-          more.querySelectorAll("[data-edit]").forEach(function (btn) {
-            btn.addEventListener("click", function () {
-              var f = btn.getAttribute("data-edit");
-              if (f === "hospital") { openHospitalPicker(function (h) { save({ hospital: h }).then(function () { openAccount(); }).catch(function () {}); }); return; }
-              if (f === "regno") {
-                var nr = window.prompt("Update your medical registration number", d.regNo || ""); if (nr == null) return; nr = String(nr).trim(); if (!nr) return;
-                // Editing the reg number invalidates prior verification — the certificate must be re-uploaded.
-                save({ regNo: nr, verified: false, regNoPendingCert: true }).then(function () {
-                  try { if (typeof toast === "function") toast("Re-upload your registration certificate to verify the new number."); } catch (e) {}
-                  try { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) { closeSheet(); setTimeout(function () { SMD_VERIFY.openPanel(); }, 80); } else openAccount(); } catch (e) { try { openAccount(); } catch (e2) {} }
-                }).catch(function () {});
-                return;
-              }
-              var label = (f === "city" ? "City" : "Phone");
-              var cur = (f === "city" ? (d.city || "") : (d.phone || ""));
-              var val = window.prompt("Update " + label, cur); if (val == null) return; val = String(val).trim();
-              var obj = {}; obj[f] = val; save(obj).then(function () { openAccount(); }).catch(function () {});
-            });
-          });
-        }).catch(function () {});
+    acctWatchAuth();
+    acctFillId(s);
+    acctFillVerified(s);
+    acctFillProfessional(s);
+  }
+  // Exported so every account surface opens the SAME page: the sidebar identity block, the More
+  // sheet, and Settings → Account (sidebar-redesign.js, which lives outside this closure).
+  try { window.SMD_openProfile = openAccount; } catch (e) {}
+
+  // Re-render the sheet live when auth resolves (sign-in can outlast a fixed timeout).
+  function acctWatchAuth() {
+    if (acctWatchAuth._sub || !(window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange)) return;
+    acctWatchAuth._sub = true;
+    window.SMD_ACCOUNT.onChange(function () {
+      try { var sh = sheetEl(); if (sh && (sh.querySelector(".hv-pf") || sh.querySelector(".hv-acct"))) openAccount(); } catch (e) {}
+    });
+  }
+
+  // The StewardMD ID. It is minted at sign-in (steward-id.js), so this is normally just a read;
+  // ensure() covers an account created before that existed, and fills in when it lands.
+  function acctFillId(s) {
+    var code = s.querySelector("#pfIdCode"), copy = s.querySelector("#pfIdCopy");
+    if (!code) return;
+    function show(id) {
+      if (!id) { code.textContent = "Not issued yet"; return; }
+      code.textContent = id;
+      if (copy) {
+        copy.hidden = false;
+        copy.onclick = function () {
+          try {
+            if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(id);
+            else { var t = document.createElement("textarea"); t.value = id; document.body.appendChild(t); t.select(); document.execCommand("copy"); document.body.removeChild(t); }
+            if (window.toast) toast("StewardMD ID copied");
+          } catch (e) {}
+        };
       }
-    } catch (e) {} }
+    }
+    var S = window.SMD_STEWARD_ID;
+    if (!S) { code.textContent = "Unavailable"; return; }
+    var have = null; try { have = S.my && S.my(); } catch (e) {}
+    if (have) { show(have); return; }
+    try { S.ensure({}, function (id) { try { if (document.body.contains(code)) show(id); } catch (e) {} }); }
+    catch (e) { code.textContent = "Not issued yet"; }
+  }
+
+  // Verification badge — the claim is authoritative and cheap to read.
+  function acctFillVerified(s) {
+    var box = s.querySelector("#pfBadges");
+    if (!box || !(window.SMD_VERIFY && SMD_VERIFY.isVerified)) return;
+    try {
+      SMD_VERIFY.isVerified().then(function (ok) {
+        try {
+          if (!document.body.contains(box)) return;
+          var b = document.createElement("span");
+          b.className = "hv-pf-badge " + (ok ? "ok" : "warn");
+          b.textContent = ok ? "Verified doctor" : "Not verified";
+          box.appendChild(b);
+        } catch (e) {}
+      }, function () {});
+    } catch (e) {}
+  }
+
+  /* Professional details: reg no · hospital/college · city · phone, from users/{uid}/profile/self —
+   * the same doc the ICU/units side reads. Rendered as real rows in every state (loading, loaded,
+   * empty, unreadable) so a slow or failed read can never masquerade as an empty profile. */
+  function acctFillProfessional(s) {
+    var card = s.querySelector("#pfPro"); if (!card) return;
+    var uid = null, fdb = null;
+    try { uid = (window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid) || null; fdb = window.SMD_DB || null; } catch (e) {}
+
+    function setRow(key, value, opts) {
+      opts = opts || {};
+      var r = card.querySelector('[data-row="' + key + '"]'); if (!r) return;
+      var v = r.querySelector("[data-val]"); if (!v) return;
+      var empty = (value == null || value === "");
+      v.textContent = empty ? (opts.placeholder || "Not set") : String(value);
+      v.className = "hv-pf-v" + (empty ? " unset" : "");
+      var btn = r.querySelector(".hv-pf-edit");
+      if (opts.edit === false) { if (btn) btn.remove(); return; }
+      if (!btn) {
+        btn = document.createElement("button");
+        btn.type = "button"; btn.className = "hv-pf-edit"; btn.setAttribute("data-edit", key);
+        r.appendChild(btn);
+      }
+      btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
+    }
+    function offline(msg) {
+      ["regno", "hospital", "city", "phone"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      var note = document.createElement("div");
+      note.className = "hv-pf-row";
+      note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
+      card.appendChild(note);
+      var rb = note.querySelector("[data-retry]");
+      if (rb) rb.addEventListener("click", function () { openAccount(); });
+    }
+    if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
+
+    var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
+    pref.get().then(function (snap) {
+      if (!document.body.contains(card)) return;
+      var d = (snap && snap.exists && snap.data()) || {};
+      var pendingCert = !!d.regNoPendingCert;
+      setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
+      setRow("hospital", d.hospital, { editLabel: d.hospital ? "Change" : "Choose" });
+      setRow("city", d.city);
+      setRow("phone", d.phone);
+
+      function save(obj) { return pref.set(obj, { merge: true }); }
+
+      // Edit in place: the value becomes an input with Save / Cancel. No window.prompt.
+      function inlineEdit(key, label, cur, onSave) {
+        var r = card.querySelector('[data-row="' + key + '"]'); if (!r) return;
+        var keep = r.innerHTML;
+        r.innerHTML = '<span class="hv-pf-k">' + label + '</span>' +
+          '<input class="hv-pf-in" type="text" value="' + smdEsc(cur || "") + '" aria-label="' + smdEsc(label) + '">' +
+          '<button class="hv-pf-ok" type="button" data-save>Save</button>' +
+          '<button class="hv-pf-cancel" type="button" data-cancel>Cancel</button>';
+        var input = r.querySelector("input");
+        if (input) { input.focus(); try { input.setSelectionRange(input.value.length, input.value.length); } catch (e) {} }
+        function restore() { r.innerHTML = keep; wire(); }
+        r.querySelector("[data-cancel]").addEventListener("click", restore);
+        r.querySelector("[data-save]").addEventListener("click", function () {
+          var val = String((input && input.value) || "").trim();
+          onSave(val, restore);
+        });
+        if (input) input.addEventListener("keydown", function (e) { if (e.key === "Enter") { var val = String(input.value || "").trim(); onSave(val, restore); } else if (e.key === "Escape") restore(); });
+      }
+
+      function wire() {
+        card.querySelectorAll("[data-edit]").forEach(function (btn) {
+          btn.onclick = function () {
+            var f = btn.getAttribute("data-edit");
+            if (f === "hospital") {
+              openHospitalPicker(function (h) { save({ hospital: h }).then(function () { d.hospital = h; setRow("hospital", h, { editLabel: "Change" }); wire(); if (window.toast) toast("Hospital updated"); }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); }); });
+              return;
+            }
+            if (f === "regno") {
+              inlineEdit("regno", "Medical reg. no", d.regNo, function (val, restore) {
+                if (!val) { restore(); return; }
+                // Changing the number invalidates prior verification: the certificate must be re-checked.
+                save({ regNo: val, verified: false, regNoPendingCert: true }).then(function () {
+                  d.regNo = val;
+                  try { if (window.toast) toast("Re-upload your registration certificate to verify the new number."); } catch (e) {}
+                  try {
+                    if (window.SMD_VERIFY && SMD_VERIFY.openPanel) { closeSheet(); setTimeout(function () { SMD_VERIFY.openPanel(); }, 80); return; }
+                  } catch (e) {}
+                  restore(); setRow("regno", val, { placeholder: "Awaiting certificate" }); wire();
+                }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); restore(); });
+              });
+              return;
+            }
+            var label = (f === "city" ? "City" : "Phone");
+            inlineEdit(f, label, (f === "city" ? d.city : d.phone), function (val, restore) {
+              var obj = {}; obj[f] = val;
+              save(obj).then(function () {
+                d[f] = val; restore(); setRow(f, val); wire();
+                if (window.toast) toast(label + " updated");
+              }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); restore(); });
+            });
+          };
+        });
+      }
+      wire();
+    }).catch(function () { try { if (document.body.contains(card)) offline("Unavailable offline"); } catch (e) {} });
   }
   // Submit a "please add this hospital" request → admin review (functions/api/hospital-request).
   // Attaches the Firebase ID token when signed in so the admin sees who asked. Resolves true/false.
@@ -6174,12 +6378,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       var pic = a.picture
         ? '<img class="smd-sba-pic" src="' + smdEsc(a.picture) + '" alt="" referrerpolicy="no-referrer" onerror="this.outerHTML=\'<div class=&quot;smd-sba-pic smd-sba-ph&quot;>' + smdEsc(initial) + '</div>\'">'
         : '<div class="smd-sba-pic smd-sba-ph">' + smdEsc(initial) + '</div>';
-      box.innerHTML = pic +
-        '<div class="smd-sba-info"><div class="smd-sba-name">' + smdEsc(a.name || "Signed in") + '</div>' +
-        '<div class="smd-sba-email">' + smdEsc(a.email) + '</div>' +
-        '<div class="smd-sba-prov">' + acctProviderLabel(a, false) + '</div>' +
-        ((a.hospital || a.hospitalName) ? '<div class="smd-sba-hosp" style="font:600 11.5px var(--sans,system-ui);color:var(--teal,#0e6e63);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + smdEsc(a.hospital || a.hospitalName) + '</div>' : '') +
-        '</div>' +
+      // Your photo + name is the way into the profile — tapping your own face should show you
+      // your account, not be decoration. One button wraps the photo and the identity lines; Sign
+      // out stays a separate control beside it.
+      box.innerHTML = '<button id="smdSbProfile" type="button" aria-label="Open your profile" style="display:flex;align-items:center;gap:10px;flex:1;min-width:0;border:0;background:none;padding:0;text-align:left;cursor:pointer;color:inherit">' + pic +
+        '<span class="smd-sba-info"><span class="smd-sba-name" style="display:block">' + smdEsc(a.name || "Signed in") + '</span>' +
+        '<span class="smd-sba-email" style="display:block">' + smdEsc(a.email) + '</span>' +
+        '<span class="smd-sba-prov" style="display:block">' + acctProviderLabel(a, false) + ' · View profile</span>' +
+        ((a.hospital || a.hospitalName) ? '<span class="smd-sba-hosp" style="display:block;font:600 11.5px var(--sans,system-ui);color:var(--teal,#0e6e63);margin-top:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + smdEsc(a.hospital || a.hospitalName) + '</span>' : '') +
+        '</span></button>' +
         '<button class="smd-sba-btn" id="smdSbSignOut" type="button">Sign out</button>';
     } else {
       box.innerHTML = '<div class="smd-sba-pic smd-sba-ph">?</div>' +
@@ -6197,7 +6404,18 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   // sign-in / sign-out buttons are re-created on each open → delegate.
   document.addEventListener("click", function (e) {
-    var t = e.target; if (!t || !t.id) return;
+    var t = e.target; if (!t) return;
+    // The profile button wraps the photo + name, so the tap usually lands on a CHILD element —
+    // match by closest(), not by e.target.id (which the other rows can rely on).
+    try {
+      if (t.closest && t.closest("#smdSbProfile")) {
+        e.preventDefault();
+        try { if (window.SB && SB.close) SB.close(); } catch (x) {}
+        setTimeout(function () { try { openAccount(); } catch (x) {} }, 60);
+        return;
+      }
+    } catch (x) {}
+    if (!t.id) return;
     if (t.id === "smdSbSignOut") { var b = document.getElementById("sessionSignOut"); if (b) b.click(); setTimeout(injectSbAccount, 80); }
     else if (t.id === "smdSbSignIn") { try { var ag = document.getElementById("accountGate"); if (ag) { ag.classList.remove("hidden"); var cb = document.getElementById("accountGateClose"); if (cb) cb.style.display = "block"; } else if (window.SMD_signInWithGoogle) window.SMD_signInWithGoogle(); } catch (_) {} }   // open the email+Google login screen, not straight to Google
     else if (t.id === "accountGateClose") { var agc = document.getElementById("accountGate"); if (agc) agc.classList.add("hidden"); }   // escape hatch when the gate was opened manually

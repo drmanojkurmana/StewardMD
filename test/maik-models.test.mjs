@@ -638,4 +638,9 @@ function loadNative({ script = [], onDisk = 0, freeBytes = 50e9, existingId = nu
 }
 
 console.log(`\nmaik-models: ${pass} passed, ${fail} failed`);
-if (fail) process.exit(1);
+// Exit explicitly. The last case re-attaches to a LIVE transfer, which starts the module's download
+// poll — a deliberately perpetual 1.5s loop that only ends when the native download reports done,
+// and nothing ever completes in the fake environment. Without this the process stayed alive after
+// every assertion had passed, which is what hung `node --test test/*.test.mjs` in CI until the
+// 15-minute timeout killed the job (ironically, only when the file was GREEN).
+process.exit(fail ? 1 : 0);

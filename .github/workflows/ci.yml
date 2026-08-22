@@ -18,8 +18,11 @@ jobs:
         with:
           node-version: '22'
       # Pure ES-module unit tests (no deps needed for the *.test.mjs suite).
+      # --experimental-test-module-mocks matches `npm test`: several suites use mock.module(), which
+      # without the flag throws "mock.module is not a function" and fails the file rather than the
+      # assertion. CI must run the suite the same way the repo's own script does.
       - name: Run unit tests
-        run: node --test test/*.test.mjs
+        run: node --test --experimental-test-module-mocks test/*.test.mjs
 
   atlas-checks:
     runs-on: ubuntu-latest

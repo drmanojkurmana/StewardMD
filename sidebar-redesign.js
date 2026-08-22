@@ -76,6 +76,9 @@
       document.body.classList.toggle("dark");
     },
     account: function () { if (window.SMD_VERIFY && SMD_VERIFY.openPanel) SMD_VERIFY.openPanel(); else toast("Account loading…"); },
+    // The full profile: StewardMD ID, hospital/college, city, plan. Distinct from "Account &
+    // Verification" above, which is the registration-certificate flow.
+    profile: function () { if (window.SMD_openProfile) SMD_openProfile(); else toast("Profile loading…"); },
     applewatch: function () { if (window.SMD_APPLE_WATCH && SMD_APPLE_WATCH.open) SMD_APPLE_WATCH.open(); else toast("Apple Watch settings loading…"); },
     wearos: function () { if (window.SMD_WEAROS && SMD_WEAROS.open) return SMD_WEAROS.open(); toast("StewardMD runs on your paired Wear OS watch. Open the app on the watch and sign in there. Your ward session syncs from this phone automatically."); },
     clinic: function () { if (window.SMD_CLINIC && SMD_CLINIC.open) SMD_CLINIC.open(); else toast("My Clinic loading…"); },
@@ -352,6 +355,7 @@
       '<header class="sbr-set-head"><button class="sbr-set-back" data-sset="close" aria-label="Back"><span class="sbr-set-chev">‹</span><span>Back</span></button><h2>Settings</h2></header>' +
       '<div class="sbr-set-body">' +
         '<div class="sbr-sec">Account</div>' +
+        row("profile", "steth", "Profile &amp; StewardMD ID") +
         '<button class="sbr-row" data-sbr-act="account" data-smd-verify="1">' + svg("shield") + '<span class="sbr-lbl">Account &amp; Verification</span></button>' +
         '<div class="sbr-sec">Preferences</div>' +
         row("notifications", "bell", "Notifications") +

@@ -6,7 +6,11 @@
 (function () {
   "use strict";
   var ALPHABET = "ABCDEFGHJKMNPQRSTUVWXYZ23456789";   // 31 chars, no 0/O/1/I/L
-  var _cache = { smdId: null };
+  // The cache is keyed on the UID it was resolved for. Once the ID is minted for every signed-in
+  // user (not just ICU group users), sign-out → sign-in as someone else happens in one page
+  // lifetime, and a uid-less cache would hand the second account the FIRST account's ID — which
+  // then travels into referrals, invites and the directory. Never cache identity without its owner.
+  var _cache = { uid: null, smdId: null };
   function randChar(a) { return a.charAt(Math.floor(Math.random() * a.length)); }
   function genId() { var s = ""; for (var i = 0; i < 6; i++) s += randChar(ALPHABET); return "SMD-" + s; }
   function emailHash(email) {
@@ -24,7 +28,15 @@
     if (s && s.indexOf("SMD-") !== 0 && /^[A-Z0-9]{6}$/.test(s)) s = "SMD-" + s;
     return s;
   }
-  function my() { return _cache.smdId || null; }
+  // my([uid]) — the resolved ID, or null. Pass the uid (or let it read the signed-in one) so a value
+  // cached for a PREVIOUS account is never handed out after a sign-out/sign-in.
+  function my(uid) {
+    if (!_cache.smdId) return null;
+    var who = uid;
+    if (who == null) { try { var u = bUser(); who = u && u.uid; } catch (e) { who = null; } }
+    if (who && _cache.uid && who !== _cache.uid) return null;
+    return _cache.smdId;
+  }
 
   // Browser defaults for deps (overridden in tests). Mirrors icu-collab's fs()/currentUid()/etc.
   function bDb() {
@@ -43,12 +55,13 @@
     var getName = deps.getName || function () { var u = bUser(); return (u && (u.displayName || "")) || ""; };
     var getEmail = deps.getEmail || function () { var u = bUser(); return (u && (u.email || "")) || ""; };
     var serverTs = deps.serverTimestamp || bServerTs;
-    if (_cache.smdId) { cb && cb(_cache.smdId); return; }
     var db = getDb(), uid = getUid();
     if (!db || !uid) { cb && cb(null); return; }
+    if (_cache.uid !== uid) { _cache.uid = uid; _cache.smdId = null; }   // account switched — re-resolve
+    if (_cache.smdId) { cb && cb(_cache.smdId); return; }
     profRef(db, uid).get().then(function (snap) {
       var data = (snap && snap.exists) ? (snap.data() || {}) : {};
-      if (data.smdId) { _cache.smdId = data.smdId; cb && cb(data.smdId); return; }
+      if (data.smdId) { _cache.uid = uid; _cache.smdId = data.smdId; cb && cb(data.smdId); return; }
       mint(db, uid, getName(), getEmail(), serverTs, 0, cb);
     }, function () { mint(db, uid, getName(), getEmail(), serverTs, 0, cb); });
   }
@@ -64,7 +77,7 @@
         return smdId;
       });
     }).then(function () {
-      _cache.smdId = smdId;
+      _cache.uid = uid; _cache.smdId = smdId;
       try { profRef(db, uid).set({ smdId: smdId, name: name, at: ts }, { merge: true }).catch(function () {}); } catch (e) {}
       // Email-index write is GUARDED: never overwrite an e_{hash} pointer that already belongs to a
       // DIFFERENT uid (one-email-one-account). Chained before cb so the write order is deterministic.
@@ -88,7 +101,7 @@
     });
   }
 
-  var API = { genId: genId, emailHash: emailHash, normalizeId: normalizeId, my: my, ensure: ensure, _reset: function () { _cache.smdId = null; } };
+  var API = { genId: genId, emailHash: emailHash, normalizeId: normalizeId, my: my, ensure: ensure, _reset: function () { _cache.uid = null; _cache.smdId = null; } };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_STEWARD_ID = API;
 })();
