@@ -3760,6 +3760,52 @@
     return '<div class="icu-v2-swipe"><button class="icu-v2-swipe-act" data-icu-act="ptswipe:' + encodeURIComponent(id) + '" tabindex="-1" aria-label="Discharge or remove this patient">' +
       ico("trash", "🗑") + '<span>Remove</span></button>' + cardHTML + '</div>';
   }
+  // Shared board-body renderer (attention strip + filters + patient cards + count footer) — the
+  // list itself may be the solo device roster (renderV2Board) or, since B6, that SAME device
+  // roster shown as a read-only fallback inside the group board when the shared unit is unreachable
+  // (renderV2BoardGroup). Extracted so both paths render identical cards, not two copies to drift.
+  function v2BoardBodyHTML(list, counts, opts) {
+    opts = opts || {};
+    // actPrefix: which data-icu-act opens a card — "openpt" (normal board) resolves local-vs-group
+    // from CURRENT mode, which is wrong for the B6 fallback (group mode is still ON, just
+    // unreachable, so "openpt" would try Firestore for a patient that only exists locally).
+    // readOnly: the B6 fallback is explicitly read-only (device roster shown while disconnected) -
+    // no swipe-to-remove, since that resolves local-vs-group the same wrong way.
+    var actPrefix = opts.actPrefix || "openpt", readOnly = !!opts.readOnly;
+    var attn = list.filter(function (p) { return p.sev !== "stable"; });
+    var attnHTML = (_v2Filter === "all" && attn.length)
+      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
+            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
+        }).join("") + '</div>'
+      : "";
+    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
+    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
+    }).join("") + '</div>';
+    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
+    var ini = esc(v2Initials(v2AccountName()));
+    var cards = shown.length ? shown.map(function (p) {
+      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
+      var vits = v2CardVitals(p.snap);
+      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
+      var cardBtn = '<button class="icu-v2-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
+        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
+        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
+          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
+        }).join("") + '</div></div>' +
+        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
+        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>';
+      return readOnly ? cardBtn : v2SwipeRow(p.id, cardBtn);
+    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
+    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
+    return attnHTML + filters + cards + foot;
+  }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
     var list = v2BoardList();
@@ -3783,38 +3829,7 @@
         '<p class="icu-v2-empty-p">Admit your first ' + ctxLabel() + ' patient to start tracking vitals, labs, instructions and a round-ready summary — all on this device.</p>' +
         '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
     }
-    var attn = list.filter(function (p) { return p.sev !== "stable"; });
-    var attnHTML = (_v2Filter === "all" && attn.length)
-      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
-          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
-            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
-            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
-            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
-        }).join("") + '</div>'
-      : "";
-    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
-    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
-      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
-    }).join("") + '</div>';
-    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
-    var ini = esc(v2Initials(v2AccountName()));
-    var cards = shown.length ? shown.map(function (p) {
-      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
-      var vits = v2CardVitals(p.snap);
-      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
-      return v2SwipeRow(p.id, '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
-        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
-        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
-        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
-        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
-        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
-          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
-        }).join("") + '</div></div>' +
-        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
-        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>');
-    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
-    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + attnHTML + filters + cards + foot + '</div></div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + v2BoardBodyHTML(list, counts) + '</div></div>';
   }
   // Board / alerts / team bottom bar: Unit · Alerts · Team · Admit.
   function renderV2BottomBar() {
@@ -4403,6 +4418,21 @@
         '</div>') : "") + '</div>';
     // Hard error state — takes precedence over loading/empty (never a raw error / blank screen).
     if (errFull) {
+      // BUG B6 (2026-08-22 ward-round audit): the shared unit being unreachable used to blank out
+      // patients the doctor ALREADY has, saved on this very device — a spinner, then a full error
+      // card, with no way to see them until the connection came back. Hospital wifi failing at 3am
+      // is exactly when this bites. Fall back to the device roster read-only (same cards, same tap-
+      // to-open), under a persistent banner so it's never mistaken for the live shared list.
+      var localList = v2BoardList();
+      if (localList.length) {
+        var localCounts = { total: localList.length, critical: 0, review: 0, stable: 0 };
+        localList.forEach(function (p) { localCounts[p.sev]++; });
+        var localBanner = '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") +
+          ' Shared unit unreachable · showing ' + localList.length + ' patient' + (localList.length === 1 ? "" : "s") + ' saved on this device' +
+          (grpErrIsPermission() ? "" : ' <button class="icu-btn ghost" data-icu-act="grpretry" aria-label="Retry connecting to the unit" style="margin-left:8px;padding:3px 10px;font-size:12px">' + ico("refresh", "↻") + ' Retry</button>') +
+          '</div>';
+        return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + localBanner + v2BoardBodyHTML(localList, localCounts, { actPrefix: "openptlocal", readOnly: true }) + '</div></div>';
+      }
       return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + grpErrCard() + '</div></div>';
     }
     // No unit selected → an inviting "open or create a unit" state (calm spinner while connecting).
@@ -7851,6 +7881,10 @@
       case "testpush": grpTestPush(); break;
       case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
+      // BUG B6: a card from the device-roster fallback (group unreachable) is ALWAYS a local patient,
+      // even though grpActive() is still true (group mode + a unit are selected, just unreachable) -
+      // "openpt" would wrongly route it through grpOpenPatient()/Firestore. Always load it locally.
+      case "openptlocal": { var _opl = decodeURIComponent(arg); _screen = "patient"; if (_opl === (_raw.patient._id || "cur") || _opl === "cur") { _paintTop = true; paint(); } else { loadPatient(_opl); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       // swipe-to-remove on a board card: reveal → chooser → discharge / clear / cancel
       case "ptswipe": v2SwipeChooser(decodeURIComponent(arg)); break;
