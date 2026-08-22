@@ -5,6 +5,9 @@
  *   GET /health                       liveness + D1 status
  *   GET /search?q=&limit=             distinct COMPOSITIONS (generics) matching q,
  *                                     each with class + brand count
+ *   GET /compositions?letter=&limit=&offset=
+ *                                     A-to-Z browse: molecule/composition NAMES only
+ *                                     (per-strength variants excluded), for learning
  *   GET /suggest?q=&limit=            composition-name autocomplete
  *   GET /composition?name=&sort=&limit=&offset=
  *                                     one generic: shared uses/side-effects +
@@ -27,7 +30,7 @@ const ALLOWED_ORIGINS = [
   "capacitor://localhost", "ionic://localhost", "http://localhost",
 ];
 const DEV_ORIGIN_RE = /^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
-const TTL = { search: 300, suggest: 600, comp: 600, drug: 86400 };
+const TTL = { search: 300, suggest: 600, comp: 600, drug: 86400, list: 86400 };
 // Bump to invalidate all edge/Worker-cached responses after a response-shape change.
 const CACHE_VERSION = "9";
 
@@ -92,6 +95,37 @@ async function handleSearch(url, env) {
   } catch (err) {
     if (tableMissing(err)) return emptyNote({ query: q, count: 0, results: [] });
     return json({ error: "search_failed" }, { status: 500 });
+  }
+}
+
+// /compositions -> A-to-Z BROWSE of molecule names (composition only; brands are not listed here).
+// The catalogue stores both the bare molecule ("Amoxycillin", "Amoxycillin + Clavulanic Acid",
+// which carry `class`) and per-strength variants ("Amoxycillin (500mg)"). A learner browsing A-Z
+// wants the molecules, so the strength variants are excluded — they are still reachable by search
+// and inside the molecule's own brand list. Both case ranges are used so the query stays on
+// idx_drugs_comp (BINARY collation) instead of a full-table LIKE scan.
+async function handleCompositions(url, env) {
+  const raw = (url.searchParams.get("letter") || "A").trim().slice(0, 1);
+  const limit = Math.min(parseInt(url.searchParams.get("limit") || "200", 10) || 200, 500);
+  const offset = Math.max(0, parseInt(url.searchParams.get("offset") || "0", 10) || 0);
+  if (!/[a-z]/i.test(raw)) return json({ letter: raw, count: 0, more: false, results: [] }, { ttl: TTL.list });
+  const up = raw.toUpperCase(), lowr = raw.toLowerCase();
+  const nextUp = String.fromCharCode(up.charCodeAt(0) + 1), nextLow = String.fromCharCode(lowr.charCodeAt(0) + 1);
+  try {
+    const { results } = await env.DB.prepare(
+      `SELECT composition, count(*) AS brands, max(class) AS class
+         FROM drugs
+        WHERE ((composition >= ?1 AND composition < ?2) OR (composition >= ?3 AND composition < ?4))
+          AND composition NOT LIKE '%(%'
+        GROUP BY composition ORDER BY composition COLLATE NOCASE LIMIT ?5 OFFSET ?6`
+    ).bind(up, nextUp, lowr, nextLow, limit + 1, offset).all();
+    const more = results.length > limit;
+    const rows = (more ? results.slice(0, limit) : results)
+      .map((r) => ({ composition: r.composition, brands: r.brands, class: r.class || "" }));
+    return json({ letter: up, count: rows.length, more, results: rows }, { ttl: TTL.list });
+  } catch (err) {
+    if (tableMissing(err)) return emptyNote({ letter: up, count: 0, more: false, results: [] });
+    return json({ error: "compositions_failed" }, { status: 500 });
   }
 }
 
@@ -369,7 +403,7 @@ export default {
 
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/+$/, "") || "/";
-    const cacheable = path === "/search" || path === "/brand-search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
+    const cacheable = path === "/search" || path === "/compositions" || path === "/brand-search" || path === "/suggest" || path === "/composition" || path === "/monograph" || path === "/structured" || path.startsWith("/drug/");
 
     const cache = caches.default;
     let cacheKey = request;
@@ -383,6 +417,7 @@ export default {
     if (path === "/" || path === "/health") res = await handleHealth(env);
     else if (path === "/search") res = await handleSearch(url, env);
     else if (path === "/brand-search") res = await handleBrandSearch(url, env);
+    else if (path === "/compositions") res = await handleCompositions(url, env);
     else if (path === "/suggest") res = await handleSuggest(url, env);
     else if (path === "/composition") res = await handleComposition(url, env);
     else if (path === "/monograph") res = await handleMonograph(url, env);

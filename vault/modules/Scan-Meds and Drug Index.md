@@ -24,6 +24,15 @@ or import from Ward Sync → interaction/duplicate/QT/renal/bleeding checks.
 - iPhone mapped wrong: `/vision` used the global model = `gemini-3.5-flash-lite` (weak OCR). Now pinned to a strong `VISION_MODEL` — see [[Decisions]].
 - Handwriting near-miss ("Atorvastain"→atorvastatin) → drug-fuzzy.
 
+## Drugs Database A-Z browse (2026-08-22)
+- `api.js` (`window.MEDDB`, `#dbOverlay`) used to land on a bare search box ("Type at least 3 letters…")
+  and read as empty. It now lands on an **A-Z browse of molecule names** (composition only, no brands).
+- Served by a NEW worker endpoint `GET /compositions?letter=&limit=&offset=` (`worker/src/index.js`):
+  index-ranged on `idx_drugs_comp` (both case ranges, so no full-table LIKE scan), `NOT LIKE '%(%'`
+  drops the per-strength variants ("Amoxycillin (500mg)") and keeps the molecules + combos, 24h TTL.
+- **Needs `wrangler deploy` of `stewardmd-api`** — until then the client degrades to the on-device
+  formulary (`MEDDRUGS._list`), labelled "offline list". Test: `test/run-drugs-az.mjs`.
+
 ## Gotchas
 - `resolveGeneric` matches the CLINICAL layer — `normIngredient` before grouping (product vs clinical). Compositions bake strength inline.
 - run-drug-index / run-maik-explain unreliable in sandbox.

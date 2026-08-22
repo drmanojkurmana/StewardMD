@@ -34,6 +34,11 @@
     composition: function (name, sort, tier, limit, offset, q) {
       return api("/composition?name=" + encodeURIComponent(name) + "&sort=" + (sort || "relevance") + "&tier=" + (tier || "all") + "&limit=" + (limit || PAGE) + "&offset=" + (offset || 0) + (q ? "&q=" + encodeURIComponent(q) : ""));
     },
+    // A-to-Z browse of molecule names (composition only — no brands). Null if the deployed API
+    // predates the endpoint, so the caller can fall back to the on-device formulary.
+    compositions: function (letter, limit, offset) {
+      return api("/compositions?letter=" + encodeURIComponent(letter || "A") + "&limit=" + (limit || 200) + "&offset=" + (offset || 0));
+    },
     drug: function (id) { return api("/drug/" + encodeURIComponent(id)); },
     monograph: function (name) { return api("/monograph?name=" + encodeURIComponent(name)); },
     structured: function (name) { return api("/structured?name=" + encodeURIComponent(name)); },
@@ -149,6 +154,73 @@
     MEDAPI.count().then(function (n) { var e2 = root && root.querySelector("#dbCount"); if (e2 && n) e2.textContent = n.toLocaleString(); }).catch(function () {});
   }
 
+  /* ---- A-to-Z molecule browse (the landing view; search-first left it looking empty) ----
+   * Composition/molecule NAMES only — brands live inside a molecule, not in this list. Served by
+   * /compositions; if that endpoint isn't deployed yet, or the device is offline, it degrades to
+   * the on-device formulary so the screen still teaches something instead of showing nothing. */
+  var AZ = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
+  var az = { letter: "A", rows: [], more: false, offset: 0, loading: false, offline: false, seq: 0 };
+  var AZ_PAGE = 200;
+  function localMolecules(letter) {
+    var out = [];
+    try {
+      ((window.MEDDRUGS && MEDDRUGS._list) || []).forEach(function (d) {
+        var g = String(d.generic || "");
+        if (g && g.charAt(0).toUpperCase() === letter) out.push({ composition: g.charAt(0).toUpperCase() + g.slice(1), "class": d.cls || "" });
+      });
+    } catch (e) {}
+    out.sort(function (a, b) { return a.composition.localeCompare(b.composition); });
+    return out;
+  }
+  function azStripHTML() {
+    return '<div class="db-az">' + AZ.map(function (L) {
+      return '<button class="db-azb' + (az.letter === L ? " on" : "") + '" data-az="' + L + '">' + L + "</button>";
+    }).join("") + "</div>";
+  }
+  function azRowHTML(x) {
+    var sub = x["class"] || "";
+    return '<button class="db-comp" data-comp="' + esc(x.composition) + '"><span class="db-comp-ic">' + dbIco("flask") + '</span>' +
+      '<span class="db-comp-main"><span class="db-comp-name">' + esc(x.composition) + "</span>" +
+      (sub ? '<span class="db-comp-sub">' + esc(sub) + "</span>" : "") + "</span>" +
+      '<span class="db-chev">' + dbIco("chev") + "</span></button>";
+  }
+  function renderAZ() {
+    var r = root && root.querySelector("#dbResults"); if (!r) return;
+    var body;
+    if (az.loading && !az.rows.length) body = '<div class="db-empty">Loading ' + esc(az.letter) + "…</div>";
+    else if (!az.rows.length) body = '<div class="db-empty">No molecules listed under ' + esc(az.letter) + ".</div>";
+    else body = az.rows.map(azRowHTML).join("") +
+      (az.more ? '<button class="db-azmore" id="dbAzMore"' + (az.loading ? " disabled" : "") + ">" + (az.loading ? "Loading…" : "Show more") + "</button>" : "");
+    r.innerHTML = '<div class="db-sec-l">' + dbIco("flask") + " Molecules A-Z" +
+      (az.offline ? ' <span class="db-azoff">offline list</span>' : "") + "</div>" + azStripHTML() + body;
+    r.querySelectorAll("[data-az]").forEach(function (b) {
+      b.addEventListener("click", function () { azLoad(b.getAttribute("data-az"), true); });
+    });
+    r.querySelectorAll(".db-comp").forEach(function (b) {
+      b.addEventListener("click", function () { openComposition(b.getAttribute("data-comp")); });
+    });
+    var more = r.querySelector("#dbAzMore"); if (more) more.addEventListener("click", function () { azLoad(az.letter, false); });
+  }
+  function azLoad(letter, fresh) {
+    if (az.loading) return;
+    if (fresh) { az.letter = letter; az.rows = []; az.offset = 0; az.more = false; az.offline = false; }
+    az.loading = true; renderAZ();
+    var seq = ++az.seq, want = az.letter, off = az.offset;
+    MEDAPI.compositions(want, AZ_PAGE, off).then(function (d) {
+      if (seq !== az.seq || q2.length >= MINLEN) return;
+      az.loading = false;
+      var rows = (d && d.results) || [];
+      if (!rows.length && !az.rows.length) { az.rows = localMolecules(want); az.offline = true; az.more = false; }
+      else { az.rows = az.rows.concat(rows); az.more = !!(d && d.more); az.offset = off + rows.length; }
+      renderAZ();
+    }).catch(function () {
+      if (seq !== az.seq) return;
+      az.loading = false;
+      if (!az.rows.length) { az.rows = localMolecules(want); az.offline = true; az.more = false; }
+      renderAZ();
+    });
+  }
+
   /* ---- list/search view ---- */
   function renderList() {
     st.name = null; setTitle("Drugs Database", false);
@@ -156,7 +228,7 @@
     var b = root.querySelector("#dbBody");
     b.innerHTML =
       '<div class="db-searchbar">' + dbIco("search", "db-search-ic") + '<input id="dbSearch" class="db-search" type="text" placeholder="Search a drug or brand (e.g. pantoprazole, augmentin, monocef)…" autocomplete="off" value="' + esc(q2) + '"></div>' +
-      '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, then open it for all brands &amp; prices.</div>' +
+      '<div class="db-note"><span id="dbCount">412,224</span> Indian brands · search a molecule or brand name, or browse the molecules A-Z below.</div>' +
       '<div id="dbResults" class="db-results"></div>';
     updateCount();
     var si = b.querySelector("#dbSearch");
@@ -164,12 +236,13 @@
     si.addEventListener("keydown", function (e) { e.stopPropagation(); });
     setTimeout(function () { try { si.focus(); } catch (e) {} }, 50);
     if (q2.length >= MINLEN) runList(q2);
+    else azLoad(az.letter, true);            // no query → the A-Z molecule browser, never an empty screen
   }
   function onListInput(v) {
     q2 = (v || "").trim();
     if (t2) clearTimeout(t2);
     var r = root.querySelector("#dbResults");
-    if (q2.length < MINLEN) { if (r) r.innerHTML = '<div class="db-empty">Type at least 3 letters…</div>'; return; }
+    if (q2.length < MINLEN) { az.seq++; azLoad(az.letter, true); return; }   // back to A-Z as the query is cleared
     var q = q2;
     if (r) r.innerHTML = '<div class="db-empty">Searching…</div>';
     t2 = setTimeout(function () { if (q === q2) runList(q); }, DEBOUNCE);
@@ -539,6 +612,12 @@
       ".db-comp-sub{display:block;font:500 11.5px var(--sans,system-ui);color:var(--slate-soft,#888);margin-top:2px}",
       ".db-chev{color:var(--slate-soft,#888);font-size:18px}",
       ".db-sec-l{font:800 11px var(--sans,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--slate-soft,#888);margin:12px 2px 8px}",
+      /* A-Z molecule browse */
+      ".db-az{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 12px}",
+      ".db-azb{min-width:30px;height:30px;padding:0 6px;border:1px solid var(--line,#e5e5e0);background:var(--panel,#fff);color:var(--slate,#2d4356);border-radius:8px;font:700 12.5px var(--sans,system-ui);cursor:pointer}",
+      ".db-azb.on{background:var(--teal,#0e6e63);border-color:var(--teal,#0e6e63);color:#fff}",
+      ".db-azmore{width:100%;box-sizing:border-box;margin:4px 0 2px;padding:10px;border:1px dashed var(--line,#e5e5e0);background:transparent;color:var(--teal,#0e6e63);border-radius:10px;font:700 12.5px var(--sans,system-ui);cursor:pointer}",
+      ".db-azoff{font:600 10px var(--sans,system-ui);color:var(--slate-soft,#888);text-transform:none;letter-spacing:0}",
       ".db-sec-l:first-child{margin-top:2px}",
       ".db-brandhit{border-left:3px solid var(--teal,#0a9396)}",
       ".db-brandhit .db-bh-comp{color:var(--teal,#0a9396);font-weight:700}",
