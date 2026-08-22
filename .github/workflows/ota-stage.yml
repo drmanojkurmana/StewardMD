@@ -19,7 +19,12 @@ concurrency:
 jobs:
   stage:
     runs-on: ubuntu-latest
-    timeout-minutes: 15
+    # BUG (2026-08-22/23): 15m was too tight for a first-ever (cold-cache) run - `wrangler r2
+    # object put`'s ~15-20s CLI overhead per file means 815 new files at 24-way concurrency needs
+    # ~10-15 min on its own, before checkout/build. Every push to main timed out here 3 times
+    # tonight. Generous margin for the cold case; a warm run (most files already known/deduped)
+    # finishes in well under a minute regardless.
+    timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4

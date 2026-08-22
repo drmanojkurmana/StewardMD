@@ -106,12 +106,24 @@ async function main() {
   const toUpload = entries.filter((e) => !known.has(e.hash));
   console.log(`▸ ${entries.length} files, ${(totalBytes / 1e6).toFixed(1)} MB total; ${toUpload.length} new (content-addressed dedup)`);
 
-  await pool(toUpload, 12, async (e) => {
-    r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
-    known.add(e.hash);
-    uploaded++;
-    if (uploaded % 50 === 0) console.log(`  … ${uploaded}/${toUpload.length} uploaded`);
-  });
+  // BUG (2026-08-22/23): a `wrangler r2 object put` invocation costs ~15-20s of CLI overhead per
+  // file (cold Node start + wrangler's own init), not network time - a first-ever run (all files
+  // "new") blew well past the 15-minute CI timeout 3 runs in a row tonight. Worse, known-hashes.json
+  // used to write only ONCE at the very end, so a timeout-killed run saved NO dedup progress - the
+  // next run started from zero and timed out again too, forever. Persist the cache every 100 files
+  // (and in `finally`, so even a hard kill leaves whatever got through), so a second run only has to
+  // upload what the first one didn't finish, converging instead of repeating.
+  try {
+    await pool(toUpload, 24, async (e) => {
+      r2PutFile(`ota/files/${e.hash}`, e.abs, mimeFor(e.rel));
+      known.add(e.hash);
+      uploaded++;
+      if (uploaded % 50 === 0) console.log(`  … ${uploaded}/${toUpload.length} uploaded`);
+      if (uploaded % 100 === 0) r2PutJSON("ota/known-hashes.json", Array.from(known));
+    });
+  } finally {
+    if (uploaded > 0) r2PutJSON("ota/known-hashes.json", Array.from(known));
+  }
 
   for (const e of entries) manifestFiles.push({ path: e.rel, hash: e.hash, size: e.size });
   manifestFiles.sort((a, b) => a.path.localeCompare(b.path));   // stable diffs between manifests
