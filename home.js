@@ -989,6 +989,12 @@
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
       ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      // BUG (2026-08-23, WhatsApp bug report): .hv-sheet (the "More" sheet + every other sheet
+      // openSheet() builds) is appended to document.body, not #homeV2 - so the dark-mode token
+      // overrides scoped to "body.dark #homeV2" never reached it, and the sheet stayed light-
+      // themed (light panel, dark ink) even with the rest of the app in dark mode. Same tokens,
+      // same values, just scoped to reach this element too.
+      "body.dark .hv-sheet{--hbg:#0B1220;--hpanel:#111B2E;--hbd:#1E2B43;--hink:#E7EDF5;--hmut:#8597AD;--hps:#0c2e2a}",
       // touch-action:none: #hv-sheet itself is the scroll container (overflow-y:auto). Without this,
       // a touch that starts on the grab handle is still native-scroll territory (iOS rubber-bands the
       // whole sheet) and fights our manual drag transform below — same drag JS, but only MaiK's
@@ -1882,17 +1888,14 @@
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
-      // In-app toggle for the redesign (so it can be enabled/reviewed on a native device
-      // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
-      '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')!==\'0\';localStorage.setItem(\'smd_redesign_nav\',on?\'0\':\'1\');location.reload();}catch(e){}">' +
-        svg("spark") + '<div class="ml">New design <span class="mc">' +
-        (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
-        '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
-      mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      // BUG (2026-08-23, WhatsApp bug report via a friend testing the app): this screen used to
+      // duplicate rows the live sidebar (sidebar-redesign.js) already surfaces — Calculators,
+      // Guidelines & References, About StewardMD, Acknowledgements — plus a "switch back to the
+      // old UI" toggle that, per the same report, should stop being offered. Removed all five
+      // rather than maintain the same destination from two different menus.
       mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
-      mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
       mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
@@ -1901,8 +1904,6 @@
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
-      mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
-      mi("calc", "Calculators", "50+ clinical tools", "calculators") +
       mi("play", "App tour", "Replay the guided tour", "apptour") +
       '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
       mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
@@ -5483,7 +5484,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var tag = TYPE_TAG[it.type] || NCAT.general;
     var hi = it.importance === "high" || it.importance === "critical";
     var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
-    var read = it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "";
+    var read = it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "";
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
@@ -5641,7 +5642,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var hi = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
     body.innerHTML =
       '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + (TYPE_TAG[it.type] || NCAT.general) + '</span>' + hi +
-        (it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "") + '</div>' +
+        (it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "") + '</div>' +
       '<h2>' + nEsc(it.title) + '</h2>' +
       '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
       ((s.summary || it.summary) ? '<div class="dt-summary">' + nMd(s.summary || it.summary) + '</div>' : "") +
@@ -5707,11 +5708,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // `safety:true` categories (tasks, critical & immediate values) CANNOT be disabled by a junior
   // resident or intern — a patient-safety rule enforced in the UI and re-asserted on save.
   var NOTIF_CATS = [
-    { k: "tasks",      ico: "🗒️", label: "Tasks & assignments",          desc: "Ward/unit tasks assigned to you, and reminders",     safety: true },
-    { k: "critical",   ico: "🚨", label: "Critical & immediate values",   desc: "Critical lab values and urgent patient alerts",      safety: true },
-    { k: "labs",       ico: "🧪", label: "Lab reports",                   desc: "Routine (non-critical) lab results",                 safety: false },
-    { k: "guidelines", ico: "📘", label: "Clinical guidelines & updates", desc: "New guidelines, drug approvals and safety alerts",   safety: false },
-    { k: "general",    ico: "📣", label: "General app notifications",      desc: "Announcements, tips and product updates",            safety: false }
+    { k: "tasks",      label: "Tasks & assignments",          desc: "Ward/unit tasks assigned to you, and reminders",     safety: true },
+    { k: "critical",   label: "Critical & immediate values",   desc: "Critical lab values and urgent patient alerts",      safety: true },
+    { k: "labs",       label: "Lab reports",                   desc: "Routine (non-critical) lab results",                 safety: false },
+    { k: "guidelines", label: "Clinical guidelines & updates", desc: "New guidelines, drug approvals and safety alerts",   safety: false },
+    { k: "general",    label: "General app notifications",      desc: "Announcements, tips and product updates",            safety: false }
   ];
   function defaultCategories() { return { tasks: true, critical: true, labs: true, guidelines: true, general: true }; }
   // Junior resident / intern → safety categories are locked ON. Role comes from ICU-group
@@ -5776,7 +5777,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var catRows = NOTIF_CATS.map(function (c) {
       var on = cats[c.k] !== false, lock = restricted && c.safety;
       return '<label class="np-crow' + (lock ? " np-locked" : "") + '">' +
-        '<span class="np-cico" aria-hidden="true">' + c.ico + '</span>' +
         '<span class="np-ctext"><span class="np-clabel">' + nEsc(c.label) + (lock ? '<span class="np-lockpill">Required</span>' : "") + '</span>' +
         '<span class="np-cdesc">' + nEsc(c.desc) + '</span></span>' +
         '<input type="checkbox" class="np-catck" value="' + c.k + '"' + ((on || lock) ? " checked" : "") + (lock ? " disabled" : "") + '></label>';
@@ -6273,7 +6273,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".np-cats{display:flex;flex-direction:column;gap:2px;margin:2px 0 16px}",
       ".np-crow{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);cursor:pointer}",
       ".np-crow.np-locked{cursor:default}",
-      ".np-cico{flex:0 0 auto;font-size:18px;line-height:1.5}",
       ".np-ctext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}",
       ".np-clabel{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);display:flex;align-items:center;gap:7px;flex-wrap:wrap}",
       ".np-cdesc{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.4}",
