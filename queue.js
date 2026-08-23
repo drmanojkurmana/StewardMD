@@ -562,12 +562,48 @@
       act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
     }).catch(function () { say("Could not reach Ward Sync"); });
   }
-  // View EMR profile (flag smd_opd_emr): look up the ticket locally for its full MR# + name, hand to OPDEMR.
-  function openEmrProfile(ticketId) {
+  // ONE decision point for "open this ticket's record". The WORKPLACE decides which EMR - never whether
+  // an MR number happens to be filled in.
+  //
+  // BUGFIX (2026-08-24): openAdd() asks for an "MR number" in EVERY workplace and the server stores
+  // whatever is typed as ghisPatientId (functions/_queue_engine.js), so a personal-clinic patient given
+  // the clinic's own file number took the GHIS branch. That branch passed NO `source`, opd-emr defaulted
+  // it to "ghis", GHIS.ensureSession() found no token (a clinic session nulls it - INVARIANT) and Ward
+  // Sync slid its GIMSR hospital-picker / sign-in over the queue AND returned, so Start never opened the
+  // assessment at all. Leaving the MRN blank happened to work, which is why it looked intermittent.
+  // Worse than the redirect: with a LIVE Ward Sync token it would have opened the hospital record for a
+  // personal-clinic patient - a wrong-record risk.
+  function inClinicWorkplace() { return !!st.orgId; }   // loadRoom() sets orgId; loadSession() clears it for GHIS/Connect
+  function openTicketEmr(ticketId, tab) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
+    var o = { name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id };
+    if (tab) o.tab = tab;
+    // Hospital workplace (GHIS / Connect) with a real hospital id -> the hospital record.
+    if (t.ghisPatientId && !inClinicWorkplace()) {
+      o.patientId = t.ghisPatientId || t.mrn || "";
+      o.episodeId = t.ghisEpisodeId || t.visitId || "";
+      o.visitId = t.visitId || t.ghisEpisodeId || "";
+      G.OPDEMR.openProfile(o);
+      return;
+    }
+    // Personal / shared clinic -> the on-device record. Never touches GHIS.
+    var oc = opdClinic();
+    if (oc.needUnlock) { try { G.toast && G.toast("Unlock your Shared Clinic to save this case."); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
+    var store = oc.store;
+    if (store && store.addPatient && store.localStore) {
+      var pid = localClinicId(t, store, oc.map);
+      var rec = (store.getPatient && store.getPatient(pid)) || {};
+      o.source = oc.source; o.localStore = store.localStore; o.patientId = pid; o.displayId = rec.mrn || "";
+      o.author = st.ghisDoctorName || (st.session && st.session.doctorName) || (st.me && st.me.name) || "Doctor";
+      G.OPDEMR.openProfile(o);
+      return;
+    }
+    o.noStore = true;                 // no local store on this device: decision-support only, nothing saved
+    G.OPDEMR.openProfile(o);
   }
+  // View EMR profile (flag smd_opd_emr) and Start-consult both route through openTicketEmr.
+  function openEmrProfile(ticketId) { openTicketEmr(ticketId, ""); }
   // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
   // the same patient reuses their record instead of creating a duplicate each time).
   function localClinicId(t, store, mapKey) {
@@ -582,31 +618,17 @@
     map[t.id] = id; try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {}
     return id;
   }
-  // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab). GHIS patients
-  // save to the hospital record; patients with no hospital MRN save to My Clinic on this device with
-  // encrypted Google Drive backup (reuses the personal-clinic backend) so nothing is lost.
-  function openAssessment(ticketId) {
-    var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
-    if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    if (!t.ghisPatientId) {
-      var oc = opdClinic();
-      if (oc.needUnlock) { try { G.toast && G.toast("Unlock your Shared Clinic to save this case."); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
-      var store = oc.store;
-      if (store && store.addPatient && store.localStore) {
-        var pid = localClinicId(t, store, oc.map);
-        var rec = (store.getPatient && store.getPatient(pid)) || {};
-        var author = st.ghisDoctorName || (st.session && st.session.doctorName) || (st.me && st.me.name) || "Doctor";
-        G.OPDEMR.openProfile({ source: oc.source, localStore: store.localStore, name: t.name || "", patientId: pid, displayId: rec.mrn || "", author: author, tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
-      } else {
-        G.OPDEMR.openProfile({ name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id, noStore: true });
-      }
-      return;
-    }
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
-  }
+  // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
+  function openAssessment(ticketId) { openTicketEmr(ticketId, "assess"); }
   function openAdd() {
     var name = prompt("Patient name?"); if (name == null) return;
-    var mrn = prompt("GHIS MR number (enables EMR profile + assessment for this patient)?") || "";
+    // Workplace-aware wording. Anything typed here is stored server-side as ghisPatientId
+    // (functions/_queue_engine.js), so asking a personal-clinic doctor for a "GHIS MR number" invited
+    // the exact mix-up that used to bounce them to the Ward Sync sign-in. A clinic patient needs no MRN:
+    // the clinic assigns SMD-<code>-nnn itself.
+    var mrn = prompt(inClinicWorkplace()
+      ? "Hospital MR number (optional - leave blank, your clinic assigns its own ID)?"
+      : "GHIS MR number (enables EMR profile + assessment for this patient)?") || "";
     var mobile = prompt("Mobile (optional)?") || "";
     var vt = (prompt("Visit type: new / followup", "new") || "new").toLowerCase();
     act(st.session.id, "/ticket", { name: name, mrn: mrn, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
@@ -861,6 +883,7 @@
   } catch (e) {}
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st,
+    _openTicketEmr: openTicketEmr,   // test seam: workplace-based EMR routing (see test/queue-clinic-emr-route.test.mjs)
     // Live filter of the queue timeline - updates ONLY the rows container so the search input
     // keeps focus while typing (no full repaint).
     _search: function (v) {
