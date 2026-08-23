@@ -27,6 +27,14 @@
   }
   function toast(m) { try { if (window.toast) window.toast(m); } catch (e) {} }
 
+  /* The shim must live on an https origin we control. It cannot be served locally: local means
+   * capacitor://, which is the very origin YouTube rejects.
+   * It sits under /_site/ deliberately - functions/_middleware.js 404s the app bundle from the
+   * public web (after a scraping incident) but passes /_site/* straight through, so the shim needs
+   * no hole in that wall. */
+  var YT_SHIM = "https://stewardmd.in/_site/yt.html";
+  var YT_TIMEOUT_MS = 5000;
+
   function C() { try { return window.SMD_CLINIX_CONTENT || null; } catch (e) { return null; } }
   function M() { try { return window.SMD_CLINIX_MODEL || null; } catch (e) { return null; } }
   function P() { try { return window.SMD_CLINIX_PROGRESS || null; } catch (e) { return null; } }
@@ -51,6 +59,8 @@
     stationChecked: {},
     stationEndsAt: 0,
     stationTimer: null,
+    ytFailed: {},
+    ytOk: {},
     diaFocus: "both",
     diaZone: null,
     diaMode: null,
@@ -507,25 +517,36 @@
         'Learn what to listen FOR, then listen to real patients.</span></figcaption></figure>';
     }
 
-    // 3. Video, played by the rights holder. NOT an inline iframe: YouTube's player refuses to run
-    //    when the embedding page's origin is not http(s), and a Capacitor WebView is
-    //    capacitor://localhost, which produces "Error 153: Video player configuration error".
-    //    Changing the app's scheme to https would fix the origin but ALSO change the storage
-    //    origin, orphaning every user's localStorage and IndexedDB - far too much to pay for
-    //    inline playback. So this is a real video card that hands off to the official YouTube
-    //    player (app if installed, browser otherwise). Nothing is downloaded or re-hosted; the
-    //    poster is YouTube's own thumbnail, used to link to the video.
+    // 3. Video, played INLINE by the rights holder's own player.
+    //    YouTube refuses to initialise when the embedding origin is not http(s), and this app is
+    //    capacitor://localhost - verified on device, three URL variants all loaded the iframe and
+    //    none ever reported onReady ("Error 153"). Switching the app scheme to https would fix the
+    //    origin but the origin IS the storage key, so it would orphan every user's localStorage.
+    //    Instead we iframe our own https shim, which gives YouTube an origin it accepts.
+    //    If the shim does not report in (offline, or not yet deployed), ytFailed flips and we fall
+    //    back to a card that hands off to the YouTube app.
     if (m.embeddable && m.videoId) {
+      var vid = m.videoId;
+      var credit = '<figcaption class="cx-media-cap">' + esc(m.caption) +
+        '<span class="cx-media-src">' + esc(m.title) + " \u00b7 " + esc(m.attribution) +
+        ' \u00b7 <a href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">on YouTube</a></span></figcaption>';
+
+      if (!state.ytFailed[vid]) {
+        watchYt(vid);
+        return head + '<figure class="cx-media cx-media--embed">' +
+          '<div class="cx-embed-frame"><iframe src="' + YT_SHIM + "?v=" + esc(vid) + '" ' +
+            'title="' + esc(m.title || m.caption) + '" frameborder="0" allowfullscreen ' +
+            'allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen"></iframe></div>' +
+          credit + "</figure>";
+      }
+      // Fallback: YouTube's own thumbnail, handing off to the official app or browser.
       return head + '<figure class="cx-media cx-media--embed">' +
-        '<button type="button" class="cx-ytcard" data-act="cx-watch" data-id="' + esc(m.videoId) + '" aria-label="Play ' + esc(m.title || m.caption) + ' on YouTube">' +
-          '<img class="cx-ytthumb" alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(m.videoId) + '/hqdefault.jpg" ' +
+        '<button type="button" class="cx-ytcard" data-act="cx-watch" data-id="' + esc(vid) + '" aria-label="Play ' + esc(m.title || m.caption) + ' on YouTube">' +
+          '<img class="cx-ytthumb" alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(vid) + '/hqdefault.jpg" ' +
             'onerror="this.style.display=\'none\';this.parentNode.classList.add(\'cx-ytcard--nothumb\')">' +
           '<span class="cx-ytplay">' + ic("play_arrow") + "</span>" +
           '<span class="cx-ytbadge">Watch on YouTube</span>' +
-        "</button>" +
-        '<figcaption class="cx-media-cap">' + esc(m.caption) +
-        '<span class="cx-media-src">' + esc(m.title) + " \u00b7 " + esc(m.attribution) +
-        " \u00b7 opens in YouTube</span></figcaption></figure>";
+        "</button>" + credit + "</figure>";
     }
 
     // 4. A hosted file (openly licensed or owner-produced).
@@ -1111,6 +1132,31 @@
     } catch (e) {}
     try { if (window.open(url, "_blank")) return; } catch (e) {}
     try { window.location.href = url; } catch (e) {}
+  }
+
+  /* The shim posts up as soon as it loads, and relays the player's own events. Silence means the
+   * shim never arrived (offline, or not deployed yet), so swap to the hand-off card rather than
+   * leaving a black rectangle. */
+  var _ytWired = false, _ytTimers = {};
+  function watchYt(vid) {
+    if (!_ytWired) {
+      _ytWired = true;
+      try {
+        window.addEventListener("message", function (e) {
+          var d = e && e.data;
+          if (!d || d.clinixYt !== true || !d.v) return;
+          state.ytOk[d.v] = true;
+          if (_ytTimers[d.v]) { clearTimeout(_ytTimers[d.v]); delete _ytTimers[d.v]; }
+        });
+      } catch (er) {}
+    }
+    if (state.ytOk[vid] || _ytTimers[vid]) return;
+    _ytTimers[vid] = setTimeout(function () {
+      delete _ytTimers[vid];
+      if (state.ytOk[vid]) return;
+      state.ytFailed[vid] = true;
+      if (state.stack[state.stack.length - 1] === "lesson") repaint();
+    }, YT_TIMEOUT_MS);
   }
 
   function stopAudio() {
