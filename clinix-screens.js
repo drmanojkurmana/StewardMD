@@ -389,7 +389,7 @@
     for (var i = 0; i < pathway.length; i++) if (pathway[i].id === state.chapterId) ch = pathway[i];
     if (!ch) { host.innerHTML = header("Chapter") + emptyState("error", "Chapter not found", "Go back to the pathway."); return; }
 
-    var html = header(ch.title, b.disease.name);
+    var html = header(ch.title, (b.disease && b.disease.name) || "");
     if (ch.blurb) html += '<div class="cx-blurb">' + esc(ch.blurb) + "</div>";
     html += '<div class="cx-rows cx-rows--pad">';
     for (var s = 0; s < ch.skills.length; s++) {
@@ -403,6 +403,17 @@
     }
     html += "</div>";
     host.innerHTML = html;
+  }
+
+  function skillKindLabel(kind) {
+    return kind === "approach" ? "Approaching the patient"
+      : kind === "history" ? "Taking a history"
+      : kind === "general_exam" ? "General examination"
+      : kind === "exam" ? "Systemic examination"
+      : kind === "investigation" ? "Investigations"
+      : kind === "reasoning" ? "Clinical reasoning"
+      : kind === "treatment" ? "Treatment principles"
+      : kind === "presentation" ? "Presenting a case" : "Examination skill";
   }
 
   function masteryIcon(level) {
@@ -429,7 +440,11 @@
     var t = state.turns[i];
     var pct = Math.round(((i + 1) / state.turns.length) * 100);
 
-    var html = header(sk.title, b.disease.name + " · step " + (i + 1) + " of " + state.turns.length);
+    // A skill opened from the Examination Skills library has NO disease. Reading b.disease.name
+    // unguarded threw here, show() swallowed it, and the screen silently never rendered - which
+    // presents as "nothing opens" rather than as an error.
+    var ctxName = (b.disease && b.disease.name) || skillKindLabel(sk.kind);
+    var html = header(sk.title, ctxName + " \u00b7 step " + (i + 1) + " of " + state.turns.length);
     html += '<div class="cx-lesson-prog">' + progressBar(pct) + "</div>";
     html += '<div class="cx-turn cx-turn--' + esc(t.kind) + '">' + turnHtml(t, i, sk) + "</div>";
     html += lessonNav(i, t);
@@ -946,7 +961,7 @@
     var v = state.viva;
     if (!v || !v.pool.length) { host.innerHTML = header("Viva") + emptyState("error", "Viva unavailable", "No approved questions yet."); return; }
     var cur = state.vivaCurrent;
-    var html = header("Viva", state.built.disease.name + " · level " + state.vivaState.level);
+    var html = header("Viva", ((state.built && state.built.disease && state.built.disease.name) || "CliniX") + " \u00b7 level " + state.vivaState.level);
 
     if (!cur) {
       html += emptyState("task_alt", "That is the end of this viva",
@@ -1039,7 +1054,20 @@
     if (!h || !fn) return;
     var prev = 0;
     try { prev = h.scrollTop || 0; } catch (e) {}
-    try { fn(h); } catch (e) { try { console.warn("[CliniX] screen " + key, e); } catch (_) {} }
+    try {
+      fn(h);
+    } catch (e) {
+      // Swallowing this silently left a BLANK screen, which reads as "nothing opens" and sent the
+      // owner and me hunting in the wrong place. A screen that fails must say so.
+      try { console.warn("[CliniX] screen " + key, e); } catch (_) {}
+      try {
+        h.innerHTML = header("Something went wrong", key) +
+          emptyState("error", "This screen could not be drawn",
+            "That is a bug in CliniX, not something you did. Go back and try another route.",
+            '<button type="button" class="cx-btn cx-btn--ghost" data-act="cx-back">Go back</button>') +
+          '<div class="cx-src">' + esc(String((e && e.message) || e)) + "</div>";
+      } catch (_) {}
+    }
     try { h.scrollTop = keepScroll ? prev : 0; } catch (_) {}
   }
 

@@ -314,6 +314,29 @@ try {
     return !!(a && a.renderable && t && t.renderable && t.diagramId === 'diagram.percussion.technique');
   })()`)) === true, "percussion teaches WHERE and HOW, both self-authored");
 
+  /* ── 7b. SKILLS LIBRARY: learn a skill with NO disease ─────────────────── */
+  console.log("\n--- examination skills library ---");
+  await attach(BASE + "?clinix=1");
+  await ev("window.CLINIX.open()"); await sleep(700);
+  ok((await ev("!!document.querySelector(\"#clinixRoot [data-act='cx-skills']\")")) === true,
+    "home offers Examination skills above the disease list");
+  await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
+  for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length > 0")) break; await sleep(250); }
+  const nSkills = await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length");
+  ok(Number(nSkills) >= 15, `the library lists skills (${nSkills})`);
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-sec-h').length >= 4")) === true,
+    "grouped by what you are DOING, not by disease");
+
+  // Opening a skill with no disease attached is the case that used to throw and render nothing.
+  await ev("(function(){ document.querySelector('#clinixRoot .cx-row--skill').click(); return 1; })()");
+  await sleep(700);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-turn')")) === true,
+    "NO-DISEASE REGRESSION: a standalone skill actually opens its lesson");
+  ok((await ev("!document.querySelector('#clinixRoot .cx-state--error, #clinixRoot .cx-state')")) === true,
+    "and does not fall into the error state");
+  ok((await ev("(document.querySelector('#clinixRoot .cx-head-sub')||{}).textContent || ''")).indexOf("step") >= 0,
+    "the header names the step even without a disease");
+
   /* ── 8a. OSCE SCROLL: the timer must not yank you to the top ───────────── */
   console.log("\n--- osce scroll ---");
   await attach(BASE + "?clinix=1");
