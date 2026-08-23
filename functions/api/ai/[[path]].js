@@ -208,12 +208,16 @@ function aiTimeoutMs(env) { const v = Number(env.MAIK_AI_TIMEOUT_MS); return Num
 // Deliver an already-computed answer over the SSE channel as one {delta}+{done} event. Lets the
 // client's stream consumer render a whole-answer (non-stream) result — the reliable path — with no
 // empty stream and no hang.
-function streamTextAsSSE(text) {
+function streamTextAsSSE(text, diag) {
   const enc = new TextEncoder();
   const rs = new ReadableStream({
     start(controller) {
       try { if (text) controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: String(text) }) + "\n\n")); } catch (e) {}
-      try { controller.enqueue(enc.encode('data: {"done":true}\n\n')); } catch (e) {}
+      // ?diag=1 on a STREAMING request: attach the breakdown to the done event. Without this the
+      // diag block further down is unreachable for a stream (the SSE returns first), so the two
+      // fields that say WHY live streaming did not happen - liveStream and streamErr - were
+      // invisible on exactly the requests they describe.
+      try { controller.enqueue(enc.encode("data: " + JSON.stringify(diag ? { done: true, _diag: diag } : { done: true }) + "\n\n")); } catch (e) {}
       controller.close();
     }
   });
@@ -1381,7 +1385,19 @@ export async function onRequest(context) {
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
         // Client asked for a stream: hand the reliable whole-answer back over the SSE channel it's
         // already listening on (one delta + done). Renders immediately — no empty stream, no hang.
-        if (wantStream) return withCors(request, streamTextAsSSE(text));
+        if (wantStream) {
+          const _wantDiag = new URL(request.url).searchParams.get("diag") === "1";
+          _at("gen");
+          return withCors(request, streamTextAsSSE(text, _wantDiag ? {
+            ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
+            model: (_lastGenMeta && _lastGenMeta.model) || modelId(env),
+            finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+            promptTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).promptTokenCount || 0,
+            thoughtsTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).thoughtsTokenCount || 0,
+            candTok: ((_lastGenMeta && _lastGenMeta.usage) || {}).candidatesTokenCount || 0,
+            chars: (text || "").length
+          } : null));
+        }
         const cites = [];
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         if (new URL(request.url).searchParams.get("diag") === "1") {
