@@ -1265,7 +1265,20 @@ export async function onRequest(context) {
         // Checked before hasDx: a tutor turn is never bedside commentary on a computed diagnosis.
         const isTutor = !!(body && body.mode === "clinix-tutor");
         const sys = isTutor ? TUTOR_SYS : (hasDx ? RAG_SYS : KNOWLEDGE_SYS);
-        const gate = await checkQuota(env, request, hasDx ? "case" : "general");
+        /* The quota gate (KV reads) and the cross-encoder re-rank (a Workers AI round trip) are
+         * INDEPENDENT, and were paid one after the other. Measured on production, n=20: gate 400ms p50
+         * then re-rank 360ms p50 - 760ms of the 763ms spent before Gemini even starts. Starting both
+         * together reclaims the shorter of the two.
+         *
+         * The re-rank is started before the gate's verdict is known, so a request that is about to be
+         * refused may run one wasted Workers AI call. That is bounded and cheap: it writes nothing,
+         * touches no PHI, and a refused request is the rare case. Never reordered the other way -
+         * the gate's REFUSAL still happens before any answer is generated. */
+        const _gateP = checkQuota(env, request, hasDx ? "case" : "general");
+        const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
+          ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
+          : null;
+        const gate = await _gateP;
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
@@ -1278,11 +1291,10 @@ export async function onRequest(context) {
         // answers still get a sensible (keyword-overlap) evidence order, just without the round trip.
         // _didRerank records whether the Workers AI ROUND TRIP actually happened, which is the thing
         // the ?diag=1 latency breakdown needs to attribute - a tutor call skips it.
-        const _didRerank = !!(pkg.retrieved && pkg.retrieved.length > 1) && !isTutor;
+        const _didRerank = !!_rerankP;
         try {
-          if (pkg.retrieved && pkg.retrieved.length > 1) {
-            pkg.retrieved = isTutor ? lexicalRank(pkg.question, pkg.retrieved) : await rerankRetrieved(env, pkg.question, pkg.retrieved);
-          }
+          if (isTutor && pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = lexicalRank(pkg.question, pkg.retrieved);
+          else if (_rerankP) { const _r = await _rerankP; if (_r) pkg.retrieved = _r; }   // null => keep the original order
         } catch (e) {}
         _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
