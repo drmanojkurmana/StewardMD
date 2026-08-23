@@ -241,7 +241,7 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
-      st.who=r; st.smdId=r.smdId||""; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
+      st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
@@ -249,7 +249,13 @@
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
-      if(st.who&&st.who.role==="cashier"){ location.replace("/clinic-billing"); return; }   // cashiers belong on the billing station, not the read-only queue board
+      // Station-bound roles open on their own station rather than the read-only queue board. Guarded on
+      // the SERVER's billing switch: the station is inert unless CLINIC_BILLING_ENABLED=1, and redirecting
+      // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
+      // because the redirect fired first. When it is off, they stay here and are told why.
+      var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
+      if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
+      if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
       loadDash();
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
@@ -547,7 +553,7 @@
   // Staff & roles = ORGANIZATION MEMBERSHIP (q_members). Owner/admin invites staff, assigns role, sets a
   // PIN or email login, and can disable/restore - all server-authorized. Identity = a chosen staff id
   // (private clinic) or "ghis:<employeeId>" (GITAM). No GHIS required.
-  var ROLES=["nurse","reception","supervisor","intern","resident","doctor","admin","viewer"];
+  var ROLES=["nurse","reception","supervisor","intern","resident","doctor","cashier","pharmacy","hr","admin","viewer"];
   function openStaffAdmin(){
     open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:8px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div><div id="slist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
@@ -814,8 +820,16 @@
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
   // Preview mode (?mock=1): render the central-routing control with sample data - no auth/network.
+  // The admin capabilities below are COSMETIC: every request is authorised independently on the
+  // server, so nothing here can read or write real data. A banner says so, because the Staff /
+  // Rooms / Branding controls render in full and a staff member landing on this URL would
+  // otherwise believe they had been given admin rights and report the failures as bugs.
   if(new URLSearchParams(location.search||"").get("mock")==="1"){
     st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    try { var pv=document.createElement("div"); pv.setAttribute("role","status");
+      pv.style.cssText="position:sticky;top:0;z-index:99;background:#8a5208;color:#fff;padding:8px 14px;font:700 12px/1.4 -apple-system,system-ui,sans-serif;text-align:center";
+      pv.textContent="Preview with sample data - not your clinic. Nothing here is saved.";
+      document.body.insertBefore(pv, document.body.firstChild); } catch(e){}
     var nm=Date.now();
     renderNurseStation({mode:"native",rooms:[
       {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[
