@@ -1318,7 +1318,7 @@ export async function onRequest(context) {
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; }
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
@@ -1353,7 +1353,12 @@ export async function onRequest(context) {
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
+        // CliniX tutor: force the same cheap/fast tier viva-judge already uses for a short
+        // classification-shaped call (measured live: the default model, gemini-2.5-flash, took
+        // 3.3s of pure generation for a 68-token, "keep it short" answer with a 901-token prompt -
+        // the model tier, not the output cap, was the real cost; the answer already finished at
+        // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
