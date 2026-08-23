@@ -33,7 +33,8 @@
   // NOTE: gate on Capacitor.Plugins.Whisper — NOT on SMD_NATIVE.transcribeWhisper, which is a JS
   // wrapper that exists on every native build (so it wrongly showed Clinical on Android, where the
   // whisper.cpp plugin isn't built → every Clinical tap failed with "clinical-unavailable"). This
-  // hides the Clinical selector on any platform that lacks the plugin (web + Android-until-shipped).
+  // hides the Clinical selector on any platform that lacks the plugin (web only, as of 2026-08-23 -
+  // both iOS and Android register WhisperPlugin natively now).
   function whisperPluginPresent() {
     try { var P = window.Capacitor && window.Capacitor.Plugins; return !!(P && P.Whisper && typeof P.Whisper.startTranscribe === "function"); } catch (e) { return false; }
   }
@@ -673,7 +674,7 @@
     function refreshStatus(key) {
       var el = modelsEl.querySelector('.smdv-card[data-key="' + key + '"]'); if (!el) return;
       var st = el.querySelector("[data-st]"), dl = el.querySelector("[data-dl]"), del = el.querySelector("[data-del]"), prog = el.querySelector("[data-prog]");
-      if (!(N && N.whisperModelInstalled)) { st.textContent = "iOS app only"; st.className = "smdv-st"; dl.style.display = "none"; return; }
+      if (!(N && N.whisperModelInstalled)) { st.textContent = "Native app only"; st.className = "smdv-st"; dl.style.display = "none"; return; }
       N.whisperModelInstalled(key).then(function (r) {
         var ok = r && r.installed;
         st.textContent = ok ? "Installed" : "Not installed"; st.className = "smdv-st " + (ok ? "ok" : "off");

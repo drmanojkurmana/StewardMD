@@ -1571,8 +1571,9 @@
     }
     function onPartial(t) { state.vivaPartial = String(t || ""); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
     function fail() { state.vivaListening = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); }
-    // SMD_VOICE.listen({engine:"clinical"}) calls onError SYNCHRONOUSLY (before it returns) when
-    // Whisper isn't built for this platform - true on every Android device today. That means the
+    // SMD_VOICE.listen({engine:"clinical"}) calls onError SYNCHRONOUSLY (before it returns) on any
+    // platform where Whisper isn't registered (a bug fixed for Android on 2026-08-23, but still the
+    // right defensive shape - e.g. a build with the plugin missing). When that happens, the
     // fallback started inside onError below already ran, and state.vivaListenHandle is already
     // correctly set (or fail() already toasted), by the time this outer call returns null. The
     // old code assigned that null straight into state.vivaListenHandle here, clobbering the
