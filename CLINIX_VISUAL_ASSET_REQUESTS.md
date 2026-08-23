@@ -175,16 +175,11 @@ on `skill.exam.ie.stigmata`), and three oEmbed-verified videos — Parkinsonian 
 syndrome (`media.vid.gbs`). Everything else the agents searched for and could not verify is
 logged below.
 
-## CLX-V014 — Consolidation triad (percussion/auscultation/vocal resonance)
-- **Clinical context:** Pneumonia disease-findings, `skill.pneumonia.signs`.
-- **Must show:** the dull-percussion / bronchial-breathing / increased-vocal-resonance triad over
-  a consolidated lobe, ideally side-by-side with the normal finding.
-- **Preferred format:** diagram or short video.
-- **Status:** OPEN (searched 2026-08-24 - no Commons diagram or on-topic video exists; the only
-  video candidate found was a generic percussion/auscultation technique clip, functionally
-  redundant with media.vid.respexam already on the shared skill. This concept is abstract
-  (a comparison, not a single photographable thing) and likely needs a self-authored diagram,
-  same as media.dia.percussion.)
+## CLX-V014 — Consolidation triad (percussion/auscultation/vocal resonance) — **FILLED** (2026-08-24, owner-produced)
+Owner supplied a custom-made 3-panel diagram (dullness / bronchial breath sounds / increased
+vocal resonance, with the "DBV" mnemonic) after this was logged open with no suitable real photo
+or video found. Saved as `clinix-consolidation-triad.jpg`, wired as
+`media.img.consolidationtriad` on `skill.pneumonia.signs`.
 
 ## CLX-V015 — Acute severe asthma: wheeze vs the silent chest
 - **Clinical context:** Bronchial asthma disease-findings, `skill.asthma.signs`.
