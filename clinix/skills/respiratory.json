@@ -1976,6 +1976,338 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.pneumonia.risk": {
+      "id": "skill.hx.pneumonia.risk",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Risk factors and severity clues",
+      "oneLine": "What made this patient get pneumonia, and what makes it dangerous",
+      "why": "The same syndrome in a fit 30-year-old and a frail 80-year-old with diabetes is a different disease in terms of the likely organism, the risk of deterioration, and the required level of care. These questions change the management plan, not just the differential.",
+      "asks": [
+        {
+          "text": "Age, and whether the patient is normally independent or frail."
+        },
+        {
+          "text": "Any chronic illness: diabetes, chronic kidney or liver disease, heart failure, COPD or other chronic lung disease."
+        },
+        {
+          "text": "Anything that suppresses immunity: HIV status if known, chemotherapy, long-term steroids, other immunosuppressants."
+        },
+        {
+          "text": "Alcohol use, in grams per day or units per week, because of the combined aspiration and pneumococcal risk."
+        },
+        {
+          "text": "Any problem with swallowing, a recent stroke, or reduced consciousness, which raises the possibility of aspiration."
+        },
+        {
+          "text": "Recent influenza-like illness, which predisposes to secondary bacterial pneumonia, classically with Staphylococcus aureus."
+        },
+        {
+          "text": "Vaccination history: pneumococcal and influenza vaccination."
+        },
+        {
+          "text": "Living situation: a hostel, barracks, care home or other crowded institutional setting."
+        }
+      ],
+      "practice": "Take this history from a partner playing an 80-year-old care-home resident with diabetes, and list the risk factors you found in order of how much each one worries you.",
+      "pitfalls": [
+        "Skipping the swallowing and aspiration questions because the patient looks alert at rest.",
+        "Not asking about recent influenza, which is a recognised setup for a severe secondary bacterial pneumonia.",
+        "Treating vaccination history as an afterthought rather than a modifiable risk factor worth acting on at discharge.",
+        "Forgetting that alcohol raises risk through two separate mechanisms, aspiration and impaired host defence, not one."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three factors that raise the risk of aspiration pneumonia.",
+          "a": "Reduced consciousness, a recent stroke, and a known swallowing problem. Alcohol intoxication is another.",
+          "accept": [
+            "conscious",
+            "stroke",
+            "swallow",
+            "alcohol"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why ask specifically about a recent influenza-like illness?",
+          "a": "Influenza predisposes to secondary bacterial pneumonia, classically with Staphylococcus aureus, which can be more severe and cavitating.",
+          "accept": [
+            "influenza",
+            "secondary",
+            "staph"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "An 82-year-old care-home resident with pneumonia looks comfortable and is not obviously confused. Should you still worry about severity?",
+          "a": "Yes. Elderly patients frequently under-present severity: fever may be blunted or absent, tachypnoea may be the only clue, and confusion is best judged against the patient's own baseline by asking a carer or relative, not by your own impression at the bedside.",
+          "accept": [
+            "blunted",
+            "baseline",
+            "carer",
+            "under-present",
+            "tachypnoea"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "comorbid",
+          "text": "Asks about relevant comorbidity and immunosuppression"
+        },
+        {
+          "id": "aspiration",
+          "text": "Actively screens for aspiration risk"
+        },
+        {
+          "id": "vaccination",
+          "text": "Asks about pneumococcal and influenza vaccination"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Pneumonia (risk factors)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: community-acquired pneumonia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.asthma.triggers": {
+      "id": "skill.hx.asthma.triggers",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Triggers, pattern and atopy",
+      "oneLine": "What sets it off, when it happens, and what runs in the family",
+      "why": "A trigger history does two jobs: it supports the diagnosis by showing a pattern that a fixed structural disease cannot produce, and it gives the patient something they can actually act on, which fixed-obstruction disease often cannot offer.",
+      "asks": [
+        {
+          "text": "What brings an attack on? Ask specifically about exercise, cold air, viral colds, pollen or seasonal change, dust, animal fur or feathers, strong smells, and emotional stress."
+        },
+        {
+          "text": "Is there a pattern across the day, worse at night or first thing in the morning?"
+        },
+        {
+          "text": "Is there a pattern across the year, worse in a particular season?"
+        },
+        {
+          "text": "Any personal history of eczema, allergic rhinitis (a runny, itchy, blocked nose) or food allergy?"
+        },
+        {
+          "text": "Any family history of asthma, eczema or allergic rhinitis?"
+        },
+        {
+          "text": "Does exercise itself bring on symptoms, and if so, how soon after starting?"
+        },
+        {
+          "text": "Any occupational exposure: flour and grain dust, isocyanates in spray paint, latex, solvents, or animal handling, and whether symptoms are better on days away from work or on holiday?"
+        },
+        {
+          "text": "Has taking aspirin, another NSAID, or a beta blocker, including as eye drops, ever brought on symptoms?"
+        }
+      ],
+      "practice": "Take a trigger history from a partner and, at the end, state out loud whether the pattern you found supports a variable, trigger-related disease or a fixed one.",
+      "pitfalls": [
+        "Asking only about allergens and missing exercise, cold air and viral infection as equally important triggers.",
+        "Not asking whether symptoms improve away from work, which is how occupational asthma gets missed.",
+        "Forgetting to ask about aspirin, NSAIDs and beta blockers, which can precipitate severe bronchospasm in a susceptible patient.",
+        "Treating the family history question as a formality rather than genuinely useful diagnostic information."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three common triggers for an asthma attack.",
+          "a": "Exercise, cold air, viral respiratory infection, allergens (pollen, dust, animal fur), strong smells, or emotional stress.",
+          "accept": [
+            "exercise",
+            "cold air",
+            "viral",
+            "allergen",
+            "pollen",
+            "dust"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A factory worker's wheeze is worse on work days and better on holiday. What does that suggest, and what should you ask next?",
+          "a": "Occupational asthma. Ask exactly what the work involves and what they are exposed to, such as flour, isocyanates, or latex, and whether colleagues have similar symptoms.",
+          "accept": [
+            "occupational",
+            "work",
+            "exposure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why ask specifically about aspirin, other NSAIDs and beta blockers, including eye drops?",
+          "a": "They can precipitate severe, sometimes life-threatening bronchospasm in a susceptible asthmatic, including through routes patients may not think to mention, such as an eye drop containing a beta blocker.",
+          "accept": [
+            "bronchospasm",
+            "precipitate",
+            "susceptible",
+            "eye drop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triggers",
+          "text": "Elicits at least three distinct trigger categories"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes diurnal or seasonal pattern"
+        },
+        {
+          "id": "atopy",
+          "text": "Asks about personal and family atopy"
+        },
+        {
+          "id": "drugs",
+          "text": "Asks about aspirin, NSAIDs and beta blockers"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (precipitating factors)"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.tb.exposure": {
+      "id": "skill.hx.tb.exposure",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Contact and exposure history",
+      "oneLine": "Who this patient has been near, and what has made them vulnerable",
+      "why": "TB is a disease that moves through households and communities, and the contact history is not a formality, it is how the next case gets found before they present with advanced disease. It also identifies the host factors that decide whether an exposure became an infection, and whether an infection became active disease.",
+      "asks": [
+        {
+          "text": "Has anyone in your household, or anyone you spend a lot of time with, ever had a chronic cough, or been diagnosed with or treated for TB?"
+        },
+        {
+          "text": "How many people live in your house, and how many rooms does it have? Ask this even if the answer to the first question is no."
+        },
+        {
+          "text": "Have you yourself ever been treated for TB before? If so, when, for how long, and did you complete the full course?"
+        },
+        {
+          "text": "Do you know your HIV status? Have you ever been tested?"
+        },
+        {
+          "text": "Do you have diabetes, or are you on any long-term steroid or other treatment that weakens the immune system?"
+        },
+        {
+          "text": "What is your occupation, and specifically, do you work with stone, sand, or in mining, which carries silica exposure?"
+        },
+        {
+          "text": "How is your appetite and weight been over the same period as the cough?"
+        },
+        {
+          "text": "Do you drink alcohol, and roughly how much?"
+        }
+      ],
+      "practice": "Take this history from a partner playing a patient who lives in a two-room house with six family members, and identify every modifiable and non-modifiable risk factor you found.",
+      "pitfalls": [
+        "Asking only about contact with a diagnosed TB patient, and not about a chronic cough in the household, which may represent an undiagnosed source case.",
+        "Skipping the previous-treatment question, which is essential: incomplete past treatment raises the possibility of drug-resistant disease this time.",
+        "Treating the HIV question as optional or awkward rather than a routine, essential part of the assessment.",
+        "Not asking about household crowding, which independently predicts transmission risk regardless of a named contact."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three questions that belong in a TB contact and exposure history.",
+          "a": "Contact with a chronic cough or known TB case, previous TB treatment and whether it was completed, HIV status, household crowding, diabetes, occupational silica exposure.",
+          "accept": [
+            "contact",
+            "previous treatment",
+            "hiv",
+            "crowding",
+            "diabetes",
+            "silica"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does it matter whether a patient completed a previous course of TB treatment?",
+          "a": "An incomplete previous course raises the risk of drug-resistant disease, which changes the investigation and treatment approach for the current episode.",
+          "accept": [
+            "resistan",
+            "incomplete",
+            "drug resistant"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient denies any known TB contact. Should that reassure you?",
+          "a": "Not fully. Transmission is often from a brief, unrecognised or asymptomatic-seeming contact, and household crowding alone raises risk independent of a named contact. A negative answer narrows but does not exclude the possibility.",
+          "accept": [
+            "not fully",
+            "unrecognised",
+            "crowding",
+            "does not exclude"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "contact",
+          "text": "Asks about household or close contact with a chronic cough or known TB"
+        },
+        {
+          "id": "priortreatment",
+          "text": "Asks about prior TB treatment and completion",
+          "critical": true
+        },
+        {
+          "id": "hiv",
+          "text": "Asks about HIV status"
+        },
+        {
+          "id": "hostfactors",
+          "text": "Asks about diabetes, immunosuppression and occupational exposure"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis (epidemiology and risk factors)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: pulmonary tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

@@ -1,0 +1,366 @@
+{
+  "_comment": "Jaundice is a SHORT CASE: differential diagnosis of icterus by mechanism (prehepatic/hepatic/posthepatic), a classic standalone short case distinct from the chronic-liver-disease long case. skill.gen.jaundice and the history/reasoning skills are new; exam of liver/spleen/gallbladder is entirely inherited from abdomen.json.",
+  "id": "jaundice",
+  "name": "Jaundice",
+  "fullName": "Jaundice (a short case)",
+  "system": "abdomen",
+  "kbRef": "jaundice",
+  "oneLine": "Yellow discolouration from bilirubin, and the three mechanisms that put it there",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Yellow discolouration from bilirubin, and where it becomes visible first",
+      "skills": [
+        "skill.gen.jaundice"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Urine, stool and itch: three questions that carry the differential",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.jaundice"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Grading it correctly, then looking for the one extra finding",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.jaundice"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look deliberately for pallor (prehepatic), stigmata of chronic liver disease (hepatic), and scratch marks from pruritus (posthepatic), since these are what convert 'jaundice present' into a working mechanism."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "The one extra finding that names the mechanism",
+      "skills": [
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.gallbladder_kidney",
+        "skill.jaundice.reasoning"
+      ],
+      "emphasis": {
+        "skill.exam.gi.gallbladder_kidney": {
+          "expect": "Deliberately test for a palpable gallbladder and apply Courvoisier's law: in a jaundiced patient, a palpable, non-tender gallbladder argues against a stone and for a malignant, smoothly obstructing lesion."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of jaundice",
+      "blurb": "Prehepatic, hepatic, posthepatic: one table, three mechanisms",
+      "skills": [
+        "skill.jaundice.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Fractionate the bilirubin first",
+      "skills": [
+        "skill.ix.jaundice.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Grade, mechanism, and leading cause",
+      "skills": [
+        "skill.jaundice.differential"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.jaundice.general",
+        "title": "Assess this jaundiced patient and give your differential",
+        "task": "This patient has noticed yellowing of the eyes for one week. Examine for jaundice and its likely mechanism, and present your findings with a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.jaundice",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen",
+          "skill.jaundice.reasoning"
+        ],
+        "examinerQuestions": [
+          "Where did you look first for jaundice, and why?",
+          "What one additional finding would most help you decide between a haemolytic and an obstructive cause?",
+          "This patient has a palpable, non-tender gallbladder. What does that change about your differential?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.gen.jaundice",
+      "skill.hx.gi.jaundice",
+      "skill.jaundice.reasoning",
+      "skill.jaundice.differential",
+      "skill.ix.jaundice.workup"
+    ]
+  },
+  "skills": {
+    "skill.jaundice.reasoning": {
+      "id": "skill.jaundice.reasoning",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Putting the jaundice picture together",
+      "oneLine": "Pallor, stigmata, or a palpable gallbladder: the one extra finding that names the mechanism",
+      "why": "Jaundice looks identical at first glance whatever its cause. The extra finding alongside it, pallor and splenomegaly, or the stigmata of chronic liver disease, or a painlessly palpable gallbladder, is what actually converts a sign into a working diagnosis at the bedside.",
+      "body": "Combine the jaundice with the rest of the general and abdominal examination, deliberately looking for the one additional finding that would confirm each mechanism.",
+      "pitfalls": [
+        "Examining the sclera and stopping there, without a deliberate search for the one additional finding that discriminates the mechanism.",
+        "Missing splenomegaly, which needs deliberate systematic palpation and is easy to skip in a jaundice-focused short case.",
+        "Forgetting to test for Courvoisier's sign in a jaundiced patient with a possible mass."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "A jaundiced patient has pallor and splenomegaly, with no stigmata of chronic liver disease. Which mechanism does this suggest?",
+          "a": "A prehepatic (haemolytic) cause.",
+          "accept": [
+            "haemolytic",
+            "prehepatic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "State Courvoisier's law and explain its logic in one sentence.",
+          "a": "In a jaundiced patient, a palpable gallbladder makes a common bile duct stone an unlikely cause, because gallstone disease usually scars and shrinks the gallbladder so it cannot distend, whereas a smoothly progressive malignant obstruction allows it to enlarge freely.",
+          "accept": [
+            "courvoisier",
+            "stone",
+            "unlikely",
+            "scar"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why does bradycardia occur in some cases of obstructive jaundice, and how does this help distinguish it from an acute hepatitic picture?",
+          "a": "It is attributed to the effect of circulating bile salts reaching the systemic circulation in cholestasis; this contrasts with the tachycardia more typical of an acute inflammatory hepatic process such as viral or alcoholic hepatitis, so pulse rate can be a small additional discriminator.",
+          "accept": [
+            "bile salts",
+            "bradycardia",
+            "tachycardia",
+            "cholestasis"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Prehepatic (haemolytic): pallor (from the associated anaemia), mild jaundice, splenomegaly is often present, no stigmata of chronic liver disease, and features of liver cell failure are absent.",
+        "Hepatic: moderate jaundice, variable splenomegaly, stigmata of chronic liver disease if the process is chronic, and features of liver cell failure appear EARLY relative to posthepatic causes.",
+        "Posthepatic (obstructive): often the most severe (deepest) jaundice, a palpable gallbladder in some cases, bradycardia can occur (from circulating bile salts), splenomegaly is typically absent, and features of liver cell failure are a LATE feature if they appear at all.",
+        "A palpably enlarged, non-tender gallbladder in a jaundiced patient (Courvoisier's sign) makes a common bile duct stone unlikely and raises a malignant, smoothly obstructing lesion, classically carcinoma of the head of the pancreas, as the leading cause.",
+        "Bradycardia in an obstructive jaundice is a genuine, examinable finding, thought to relate to circulating bile salts, distinct from the tachycardia more typical of an acute inflammatory hepatic process."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, clinical evaluation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: jaundice"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.jaundice.differential": {
+      "id": "skill.jaundice.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of jaundice",
+      "oneLine": "Prehepatic, hepatic and posthepatic, mapped against history, examination and the two liver enzyme groups",
+      "why": "This three-way table is the single most useful piece of reasoning in the whole jaundice short case, because it links history, examination and laboratory findings into one coherent picture for each mechanism, rather than three separate facts to memorise.",
+      "body": "Organise the differential along the three classical mechanisms: prehepatic (haemolytic), hepatic, and posthepatic (obstructive/surgical).",
+      "pitfalls": [
+        "Ordering the three mechanisms without being able to reproduce the discriminating findings for each.",
+        "Assuming any raised bilirubin with dark urine must be obstructive without checking whether stools are also pale and whether pruritus is present.",
+        "Not naming urine urobilinogen as a discriminator; its ABSENCE (with bilirubin present) is a specific pointer to complete biliary obstruction."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Give the urine and stool findings expected in obstructive (posthepatic) jaundice.",
+          "a": "Dark urine (bilirubin present) and pale, clay-coloured stools.",
+          "accept": [
+            "dark urine",
+            "pale stool",
+            "clay"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is urine urobilinogen absent in complete biliary obstruction?",
+          "a": "Urobilinogen is formed from bilirubin by gut bacteria after bile reaches the intestine; if bile flow is completely obstructed, no bilirubin reaches the gut, so no urobilinogen is formed or reabsorbed to appear in the urine.",
+          "accept": [
+            "gut bacteria",
+            "bile flow",
+            "no bilirubin reaches"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient has jaundice with normal urine, normal stool colour, no pruritus, and splenomegaly. Give the mechanism, two examples, and the expected liver enzyme pattern.",
+          "a": "Prehepatic (haemolytic) jaundice; examples include thalassaemia, hereditary spherocytosis, and malaria; liver enzymes (AST/ALT/ALP) are typically NOT raised, since the liver itself is not injured, though LDH is often raised from haemolysis.",
+          "accept": [
+            "haemolytic",
+            "prehepatic",
+            "not raised",
+            "ldh"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "threeway",
+          "text": "Correctly assigns findings to prehepatic, hepatic, or posthepatic mechanism"
+        },
+        {
+          "id": "enzymes",
+          "text": "Links the mechanism to the expected liver enzyme pattern"
+        }
+      ],
+      "keyPoints": [
+        "Prehepatic (haemolytic): urine normal, stools normal, pruritus absent, pallor present, splenomegaly present, mild jaundice, unconjugated bilirubin predominates, urine urobilinogen raised but urine bilirubin negative. Examples: thalassaemia, sickle cell disease, hereditary spherocytosis, malaria, immune haemolytic anaemia.",
+        "Hepatic: urine dark, stools normal, pruritus variable, pallor absent, splenomegaly variable, moderate jaundice, both unconjugated and conjugated bilirubin raised, both urine bilirubin and urobilinogen present. Examples: viral, alcoholic or drug-induced hepatitis, infiltrative disorders, ischaemic hepatitis.",
+        "Posthepatic (obstructive/surgical): urine dark, stools pale/clay-coloured, pruritus marked, pallor absent, splenomegaly absent, severe jaundice, conjugated bilirubin predominates, urine bilirubin present but urobilinogen absent (from complete or near-complete obstruction). Examples: common bile duct stones, helminths in the CBD, carcinoma of the head of the pancreas, primary biliary cirrhosis, primary sclerosing cholangitis.",
+        "The enzyme pattern reinforces this split: unconjugated (prehepatic) jaundice is not accompanied by a rise in liver enzymes at all, since the liver itself is not injured; hepatic jaundice raises AST and ALT disproportionately; posthepatic jaundice raises alkaline phosphatase disproportionately.",
+        "Bradycardia is a feature specifically associated with obstructive jaundice; it is not expected in the other two mechanisms."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice differential"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.jaundice.workup": {
+      "id": "skill.ix.jaundice.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up jaundice",
+      "oneLine": "Fractionate the bilirubin first, then let the pattern choose the rest of the panel",
+      "why": "The single most useful early test in jaundice is not a scan, it is fractionating the bilirubin into conjugated and unconjugated, because that one result narrows a three-way differential down to essentially one before anything else is ordered.",
+      "body": "Fractionate the bilirubin, read the enzyme pattern alongside it, then direct further testing by the mechanism that combination points towards.",
+      "pitfalls": [
+        "Ordering an ultrasound as the very first test before the fractionated bilirubin and enzyme pattern have actually narrowed the mechanism.",
+        "Sending a full autoimmune and viral panel on every jaundiced patient regardless of the fractionation result.",
+        "Missing a treatable drug-induced cause because the medication history was not specifically reviewed against the timeline."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most useful early laboratory test in undifferentiated jaundice?",
+          "a": "Fractionated (conjugated and unconjugated) serum bilirubin.",
+          "accept": [
+            "fractionat",
+            "conjugated",
+            "unconjugated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Unconjugated bilirubin predominates, with normal liver enzymes. What is the next set of tests to send?",
+          "a": "A haemolysis workup: full blood count, reticulocyte count, peripheral smear, LDH, haptoglobin, and a direct Coombs test.",
+          "accept": [
+            "reticulocyte",
+            "haemolysis",
+            "coombs",
+            "ldh"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Conjugated bilirubin predominates with a disproportionate rise in alkaline phosphatase. What is the recommended first imaging test, and what is it looking for?",
+          "a": "Ultrasound abdomen, looking for biliary duct dilation and the level of any obstruction.",
+          "accept": [
+            "ultrasound",
+            "duct dilation",
+            "obstruction"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Fractionated (conjugated and unconjugated) serum bilirubin: unconjugated predominance without a liver enzyme rise points prehepatic; a mixed or conjugated-predominant rise with raised transaminases or alkaline phosphatase points hepatic or posthepatic respectively.",
+        "If unconjugated and prehepatic is suspected: full blood count, reticulocyte count, peripheral smear, LDH, haptoglobin, and a direct Coombs test to look for haemolysis.",
+        "If hepatic is suspected: viral hepatitis serology, alcohol history correlated with AST-to-ALT ratio, autoimmune markers, and, where relevant, imaging for infiltrative disease.",
+        "If posthepatic is suspected: ultrasound abdomen first, to look for biliary duct dilation and a level of obstruction, followed by MRCP or endoscopic ultrasound where a stone, stricture or mass is suspected, and CA 19-9 where a pancreatic or biliary malignancy is being actively considered.",
+        "Urine bilirubin and urobilinogen, though a simple dipstick test, remain a genuinely useful bedside discriminator alongside the serum picture, in keeping with the classical differentiating table."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, laboratory evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

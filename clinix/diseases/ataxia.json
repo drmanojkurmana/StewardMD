@@ -1,0 +1,766 @@
+{
+  "_comment": "Ataxia is a SHORT CASE built directly on top of the already-shipped skill.exam.neuro.cerebellar and skill.exam.neuro.gait (DANISH, tandem gait, Romberg's already taught in full there), the same way cranial-nerve-palsy.json was built on skill.exam.neuro.cn7. The genuinely new content, and the core teaching goal, is the differential itself: cerebellar vs sensory vs vestibular ataxia, told apart by Romberg's behaviour, the effect of removing vision, nystagmus, dysarthria and the associated signs.",
+  "id": "ataxia",
+  "name": "Ataxia",
+  "fullName": "Ataxia (a short case)",
+  "system": "neurology",
+  "kbRef": "ataxia",
+  "oneLine": "Incoordination is the finding; Romberg's sign is what tells you which system failed",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "A finding, not a disease, and the systems that can produce it",
+      "skills": [
+        "skill.ataxia.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Worse at night, worse with the eyes shut: the patient is often already telling you which type",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.ataxia"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation is an unsteady, wide-based walk noticed by the patient or their family, sometimes framed as clumsiness or repeated stumbling rather than as weakness, because power itself is normal."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General and cerebellar examination",
+      "blurb": "The shared cerebellar and gait exam, read for which system has failed",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.exam.neuro.cerebellar",
+        "skill.exam.neuro.gait"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Watch how the patient sits and reaches for something before any formal testing starts: truncal swaying with the eyes open already, or a wide-based stance while just standing at the bedside, is informative before you have asked them to do anything."
+        },
+        "skill.exam.neuro.cerebellar": {
+          "expect": "This is the exam that separates cerebellar ataxia from the other types. Alongside DANISH, specifically test for pseudoathetosis: with the arms outstretched and the eyes closed, a wandering, writhing drift of one arm away from its original position is a sensory, not a cerebellar, finding, and is easy to miss if not tested for deliberately."
+        },
+        "skill.exam.neuro.gait": {
+          "expect": "Do Romberg's test properly and interpret it as a comparison, not a single observation: unsteady with the eyes OPEN as well as closed suggests a cerebellar or vestibular problem; steady with the eyes open but falling promptly once they close is the hallmark of a SENSORY ataxia. Also test tandem gait and ask about a history of falling into the wash-basin while washing the face, a recognised clue to sensory ataxia when vision is briefly removed in daily life."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Reading Romberg's sign correctly",
+      "blurb": "Two of three inputs keep you upright; Romberg's tells you which one is missing",
+      "skills": [
+        "skill.ataxia.romberg"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Cerebellar, sensory, or vestibular",
+      "blurb": "The same word, three different systems, three different bedside pictures",
+      "skills": [
+        "skill.ataxia.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Looking for a structural lesion, and for the causes that are actually treatable",
+      "skills": [
+        "skill.ix.ataxia.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Type, localisation, and whether this is one of the treatable causes",
+      "skills": [
+        "skill.ataxia.diagnosis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ataxia.exam",
+        "title": "Examine this patient's unsteady gait",
+        "seconds": 300,
+        "task": "This 58-year-old man has had six months of increasingly unsteady walking, worse in the dark. Examine his gait and cerebellar function, and say which type of ataxia this is.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.cerebellar",
+          "skill.exam.neuro.gait"
+        ],
+        "examinerQuestions": [
+          "Romberg's test is positive. On its own, does that tell you this is a sensory ataxia?",
+          "What single detail from the history already pointed you toward a sensory rather than a cerebellar cause?",
+          "Name one treatable cause of ataxia you would not want to miss here."
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.ataxia.dinesh",
+      "title": "A man who keeps missing the last step",
+      "opening": "Dinesh Rao, 58, has come with six months of increasingly unsteady walking. His wife says he seems clumsier in the evenings and once fell reaching for the tap with his eyes closed while washing his face. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Dinesh Rao",
+        "age": 58,
+        "sex": "male",
+        "occupation": "Retired railway clerk",
+        "residence": "Urban, strict vegetarian for over 30 years"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, my walking has become unsteady over the last six months. I feel like I am going to fall, especially in the evening or in a dark room.",
+          "key": true
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how did it start",
+            "sudden or gradual",
+            "onset"
+          ],
+          "reply": "It came on slowly, I cannot even say exactly when it began. It has just been getting worse over these months.",
+          "key": true
+        },
+        "night_worse": {
+          "cues": [
+            "worse at night",
+            "worse in the dark",
+            "dark room",
+            "evening"
+          ],
+          "reply": "Yes, much worse in the dark or in dim light. In good daylight I manage better.",
+          "key": true
+        },
+        "washbasin": {
+          "cues": [
+            "washing your face",
+            "wash basin",
+            "sink",
+            "eyes closed"
+          ],
+          "reply": "Actually yes, I nearly fell into the wash-basin last month while washing my face with my eyes closed. My wife had to catch me.",
+          "key": true
+        },
+        "limb_clumsiness": {
+          "cues": [
+            "hands",
+            "clumsy",
+            "dropping things",
+            "buttons"
+          ],
+          "reply": "My hands feel a little clumsy too, buttoning my shirt takes longer than it used to."
+        },
+        "numbness": {
+          "cues": [
+            "numbness",
+            "tingling",
+            "pins and needles"
+          ],
+          "reply": "Yes, my feet feel tingly and a bit numb, like I am walking on cotton wool."
+        },
+        "vertigo": {
+          "cues": [
+            "vertigo",
+            "spinning",
+            "dizzy",
+            "room spinning"
+          ],
+          "reply": "No, I do not feel the room spinning. It is more that I feel unsteady on my feet, not dizzy."
+        },
+        "hearing": {
+          "cues": [
+            "hearing",
+            "ringing in the ear",
+            "tinnitus"
+          ],
+          "reply": "My hearing is fine, no ringing in my ears."
+        },
+        "speech": {
+          "cues": [
+            "speech",
+            "slurred",
+            "talking"
+          ],
+          "reply": "My speech has not changed, my family has not commented on it."
+        },
+        "diet": {
+          "cues": [
+            "diet",
+            "vegetarian",
+            "meat",
+            "eating"
+          ],
+          "reply": "I have been a strict vegetarian, no eggs or dairy either, for over thirty years.",
+          "key": true
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking"
+          ],
+          "reply": "I do not drink alcohol at all."
+        },
+        "drugs": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablets",
+            "phenytoin",
+            "seizure medicine"
+          ],
+          "reply": "No regular medicines, and I have never been on any seizure medicine."
+        },
+        "bladder": {
+          "cues": [
+            "bladder",
+            "urine",
+            "bowel"
+          ],
+          "reply": "No problems with my bladder or bowel."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "hereditary",
+            "similar problem in family"
+          ],
+          "reply": "Nobody else in my family has anything like this."
+        },
+        "vision": {
+          "cues": [
+            "vision",
+            "eyesight",
+            "double vision"
+          ],
+          "reply": "My eyesight is fine, no double vision."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Mild pallor. Walks cautiously, watching his feet closely and using the wall for support. No tremor at rest.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 128/78, pulse 76 regular. No orthostatic drop.",
+          "abnormal": false
+        },
+        "skill.exam.neuro.cerebellar": {
+          "finding": "Finger-nose and heel-shin testing accurate with the eyes open, but heel-shin becomes wavering and inaccurate once the eyes are closed. No dysdiadochokinesia, no intention tremor, no nystagmus, speech normal (not scanning or staccato). Pseudoathetosis present: with arms outstretched and eyes closed, the fingers of both hands drift and writhe slowly out of position.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.gait": {
+          "finding": "Broad-based, high-stepping, stamping gait that watches the floor closely; noticeably worse with eyes closed. Romberg's test strongly positive: steady with eyes open, falls almost immediately on eye closure, caught before falling. Tandem gait impossible with eyes closed, markedly better with eyes open.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "b12",
+        "mri_spine",
+        "fbc_smear",
+        "nerve_conduction"
+      ],
+      "investigations": {
+        "b12": {
+          "label": "Serum vitamin B12",
+          "indicated": true,
+          "result": "98 pg/mL (low; reference range not stated here as this module does not assert specific numeric cutoffs).",
+          "note": "A low result in a longstanding strict vegetarian with a sensory (Romberg-positive, worse-in-the-dark, wash-basin-sign) ataxia strongly supports subacute combined degeneration from B12 deficiency, one of the genuinely treatable causes of ataxia."
+        },
+        "mri_spine": {
+          "label": "MRI cervical and thoracic spine",
+          "indicated": true,
+          "result": "Symmetric signal change in the posterior columns of the cervical cord.",
+          "note": "Supports a posterior column process rather than a peripheral neuropathy alone, consistent with subacute combined degeneration."
+        },
+        "fbc_smear": {
+          "label": "Full blood count and peripheral smear",
+          "indicated": true,
+          "result": "Mild macrocytic anaemia with hypersegmented neutrophils on smear.",
+          "note": "A classic haematological accompaniment of B12 deficiency, though it can be absent even when the neurological findings are pronounced, so a normal smear would not have excluded the diagnosis."
+        },
+        "nerve_conduction": {
+          "label": "Nerve conduction studies",
+          "indicated": true,
+          "result": "Reduced sensory nerve action potentials with relatively preserved motor conduction.",
+          "note": "Supports a sensory-predominant process, in keeping with the clinical pattern, and helps exclude a primarily demyelinating motor polyneuropathy as the explanation."
+        },
+        "mri_brain": {
+          "label": "MRI brain",
+          "indicated": false,
+          "result": "Not routinely indicated here.",
+          "note": "The exam found no cerebellar signs (no dysdiadochokinesia, no nystagmus, no scanning speech, no intention tremor) and no vertigo or hearing change, so a primary cerebellar or vestibular structural lesion is not the leading hypothesis; imaging the brain would not be the first test chosen."
+        },
+        "vestibular_testing": {
+          "label": "Formal vestibular function testing",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "No vertigo, no tinnitus or hearing change, and no directional nystagmus were found, so a vestibular cause is not supported and this test is not the next step."
+        },
+        "tsh": {
+          "label": "Thyroid-stimulating hormone",
+          "indicated": true,
+          "result": "Normal.",
+          "note": "Hypothyroidism is a recognised, treatable, and easily checked cause of a chronic ataxia, worth screening for even when another cause seems likely."
+        }
+      },
+      "differentialModel": {
+        "answer": "Sensory ataxia, most likely subacute combined degeneration from vitamin B12 deficiency given the strict long-term vegetarian diet, worse-in-the-dark pattern, positive Romberg's sign, wash-basin sign and pseudoathetosis. Consider cerebellar ataxia (against it here: no dysdiadochokinesia, nystagmus or scanning speech) and vestibular ataxia (against it here: no vertigo, tinnitus or hearing loss).",
+        "accept": [
+          "sensory ataxia",
+          "b12",
+          "subacute combined degeneration",
+          "cerebellar ataxia",
+          "vestibular ataxia"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Sensory ataxia from a posterior column/large-fibre sensory process, most likely subacute combined degeneration of the cord secondary to vitamin B12 deficiency in a longstanding strict vegetarian, a treatable cause.",
+        "accept": [
+          "sensory ataxia",
+          "subacute combined degeneration",
+          "b12 deficiency"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Confirm and correct the B12 deficiency under specialist guidance, investigate for and address the underlying cause of the deficiency (dietary in this case), screen for other treatable causes already sent (thyroid function), and arrange follow-up to assess neurological recovery, which can be incomplete if treatment is delayed. Any replacement regimen and dose is a specific prescribing decision outside what this module teaches.",
+        "accept": [
+          "b12",
+          "replace",
+          "correct",
+          "treatable",
+          "follow-up",
+          "dietary"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The history had already suggested the answer before the exam started: worse in the dark, and a near-fall at the wash-basin with his eyes closed, are both classic for a SENSORY, not a cerebellar, ataxia, because they describe what happens when the one compensating input, vision, is removed.",
+        "Romberg's sign is a comparison, not a single observation: steady eyes open, unsteady eyes closed, is the sensory pattern. A patient unsteady with the eyes already open needs a different explanation, usually cerebellar or vestibular.",
+        "Pseudoathetosis, the slow writhing drift of the outstretched fingers with the eyes closed, is easy to miss unless tested for deliberately, and it is a sensory, not a motor or cerebellar, sign.",
+        "The absence of cerebellar signs did real work here: no dysdiadochokinesia, no nystagmus, no scanning speech, and a normal heel-shin test with the eyes open, all argue against a cerebellar cause despite the ataxic gait.",
+        "This is one of the genuinely treatable causes of ataxia, and the diet history, thirty years strict vegetarian with no dairy or eggs, is what should have raised it well before any blood test came back."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.ataxia.basics",
+      "skill.exam.neuro.cerebellar",
+      "skill.exam.neuro.gait",
+      "skill.ataxia.romberg",
+      "skill.ataxia.differential",
+      "skill.ix.ataxia.workup"
+    ]
+  },
+  "skills": {
+    "skill.ataxia.basics": {
+      "id": "skill.ataxia.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What ataxia is",
+      "oneLine": "A finding, not a diagnosis: impaired coordination from one of several possible systems",
+      "why": "Students often use 'ataxia' as if it were itself a diagnosis. It is a physical finding, impaired coordination of voluntary movement, and naming which of several systems has failed is the actual clinical task, exactly the same way 'weakness' is a finding and 'upper versus lower motor neurone' is the diagnosis-shaping step.",
+      "body": "Ataxia is impaired coordination of voluntary muscle movement, affecting its rate, range, direction and force, without there necessarily being any weakness. It has several recognised types, arising from different parts of the nervous system.",
+      "keyPoints": [
+        "The three types that matter most at the bedside, and that this case is built around, are cerebellar, sensory and vestibular ataxia.",
+        "Two further, less common types exist and are worth naming even though they are not the focus here: optic ataxia (from bilateral posterior parietal lesions, with difficulty in visually guided reaching, part of Balint syndrome), and frontal (Bruns) ataxia, from subcortical small-vessel disease, which produces a cautious, magnetic, shuffling gait rather than true limb incoordination.",
+        "The key insight that organises the whole topic: normal balance depends on having at least two of three inputs intact, vision, proprioceptive/vestibular (non-visual) input, and a functioning cerebellum. Losing any ONE of the three can usually still be compensated for by the other two; it is why removing vision (Romberg's test) can unmask a deficit that was otherwise hidden.",
+        "Power is normal in ataxia. A patient who is also weak has a different, or an additional, problem, and that combination should be reasoned through separately rather than folded into 'ataxia'."
+      ],
+      "pitfalls": [
+        "Treating 'ataxia' as a final diagnosis rather than as a finding that still needs a type and a cause.",
+        "Assuming an ataxic gait means the patient is also weak.",
+        "Forgetting that balance needs only two of three inputs, which is the reason a single missing input can be silently compensated for until it is specifically tested."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Is ataxia a diagnosis or a physical finding?",
+          "a": "A physical finding: impaired coordination of voluntary movement. It still needs a type and a cause to become a diagnosis.",
+          "accept": [
+            "finding",
+            "not a diagnosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What three inputs does normal balance depend on, and how many of the three are needed at any one time?",
+          "a": "Vision, non-visual (proprioceptive and vestibular) input, and a functioning cerebellum; at least two of the three are needed to maintain balance.",
+          "accept": [
+            "vision",
+            "proprioceptive",
+            "vestibular",
+            "cerebellum",
+            "two"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: approach to ataxia"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: coordination and gait"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ataxia.romberg": {
+      "id": "skill.ataxia.romberg",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Reading Romberg's sign correctly",
+      "oneLine": "Two of three inputs keep a person upright; the test removes one of them on purpose",
+      "why": "Romberg's test is one of the most frequently misread signs in neurology, either skipped, or treated as simply 'positive versus negative' without the comparison that actually gives it meaning. Understanding the physiology behind it is what stops it being read backwards.",
+      "body": "Have the patient stand with their heels together, arms at their sides, first with the eyes open and then closed, staying close enough to catch a fall. Read the result as a COMPARISON between the two states, not as a single observation.",
+      "keyPoints": [
+        "The physiological basis: maintaining balance while standing still needs at least two of three inputs, vision, non-visual (proprioceptive and vestibular) input, and a functioning cerebellum. Closing the eyes deliberately removes one of the three.",
+        "A TRUE positive Romberg's sign is a patient who is reasonably steady with the eyes open but becomes markedly unsteady or falls once the eyes close. This pattern means the remaining input, proprioception or vestibular sense, is itself impaired, and vision had been silently compensating for it; it is the hallmark of a SENSORY ataxia.",
+        "A patient who is already unsteady with the eyes OPEN, and does not become materially worse on closing them, does not have a true positive Romberg's sign, even if they sway or need support throughout. This pattern instead points to a cerebellar problem, since the cerebellum's own contribution is not something closing the eyes can remove.",
+        "Vestibular ataxia can also worsen somewhat with the eyes closed, since vision partially compensates for vestibular loss too, but it is accompanied by its own distinguishing features, most importantly a directional nystagmus and often vertigo, tinnitus or hearing change, which is what separates it from a sensory cause on the same test.",
+        "Always be ready to catch the patient. In a genuinely severe sensory ataxia the fall on eye closure can be immediate and unguarded."
+      ],
+      "pitfalls": [
+        "Testing only the eyes-closed position and never establishing a genuine eyes-open baseline to compare it against.",
+        "Calling a patient who is unsteady with the eyes open 'Romberg positive' just because they are unsteady throughout the test.",
+        "Not standing close enough to safely catch a patient with a true sensory ataxia, who can fall abruptly and without warning."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many of the three balance inputs, vision, proprioception/vestibular sense, and cerebellar function, does a person need intact to stay balanced?",
+          "a": "At least two of the three.",
+          "accept": [
+            "two"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient sways markedly even with the eyes open, and is not materially worse with them closed. Is this a true positive Romberg's sign, and what does it suggest?",
+          "a": "No, this is not a true positive Romberg's sign, since there is no meaningful change on removing vision. It instead suggests a cerebellar (or, less commonly, a vestibular) cause, not a sensory one.",
+          "accept": [
+            "no",
+            "not positive",
+            "cerebellar"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Explain, from the physiology, why a true positive Romberg's sign specifically implicates the non-visual (proprioceptive/vestibular) input rather than the cerebellum.",
+          "a": "Because the patient could stay balanced with the eyes open using two of the three inputs (vision plus the impaired one), which is only possible if the cerebellum was functioning normally the whole time; removing vision then removes the input that was compensating, unmasking the underlying proprioceptive or vestibular deficit.",
+          "accept": [
+            "compensat",
+            "cerebellum normal",
+            "unmask"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "comparison",
+          "text": "Reads Romberg's as a comparison between eyes-open and eyes-closed, not a single observation",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Romberg's test"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: Romberg's test"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: Romberg's test, demonstration and interpretation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ataxia.differential": {
+      "id": "skill.ataxia.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Cerebellar, sensory, or vestibular ataxia",
+      "oneLine": "Three systems, three bedside pictures, told apart by five or six features read together",
+      "why": "This is the actual clinical task in almost every ataxia case: not spotting that the gait is abnormal, which is usually obvious, but working out which of the three main systems is responsible, because the cause, the urgency and the workup are different for each.",
+      "body": "Compare the three types across the same handful of features: base of stance, effect of removing vision, associated cranial or otological findings, and speech.",
+      "keyPoints": [
+        "Cerebellar ataxia: a WIDE-based stance and gait present with the eyes OPEN, an irregular, lurching, variable-speed stride, and Romberg's sign that is not reliably positive (the patient is similarly unsteady with eyes open or closed, since removing vision does not meaningfully change a cerebellar deficit). Look for the accompanying DANISH signs already taught in the shared cerebellar exam skill: dysdiadochokinesia, ataxic (limb) signs, nystagmus, intention tremor, scanning or staccato speech, and hypotonia, all on the SAME side as a unilateral hemispheric lesion.",
+        "Sensory ataxia: a NARROW-based, high-stepping, stamping gait, with the patient characteristically looking down at their own feet, a SLOW, deliberate stride, and a genuinely positive Romberg's sign, unsteady or falling once the eyes close, having been steady with them open. Vibration and joint position sense are lost together. Look specifically for pseudoathetosis (a slow writhing drift of the outstretched fingers with the eyes closed) and ask about the wash-basin sign and worsening in the dark. Speech and cranial nerve findings are typically absent.",
+        "Vestibular ataxia: unsteadiness with a tendency to veer or fall toward the side of the lesion, accompanied by vertigo and, depending on the cause, tinnitus or hearing loss. Nystagmus is present and its fast phase beats AWAY from the side of the lesion. Limb coordination (finger-nose, heel-shin) is typically preserved when tested lying down, which is a useful way to separate it from a cerebellar cause when the two are hard to tell apart on gait alone.",
+        "Two further points worth carrying into any viva: gait ataxia from a lesion of the anterior cerebellar vermis can occur with the LIMBS testing almost normally on a couch (heel-shin performed lying down), so a normal heel-shin test does not exclude a cerebellar cause if the gait itself is clearly ataxic; and postural instability and falls are typically an early, prominent feature in sensory ataxia but a comparatively LATE event in a pure cerebellar ataxia.",
+        "A quick worked comparison: a wide-based gait that is no worse with the eyes closed, plus nystagmus and scanning speech, is cerebellar. A narrow-based, foot-watching, stamping gait that is dramatically worse with the eyes closed, with normal speech, is sensory. A gait with vertigo, tinnitus and nystagmus beating away from the bad ear, with normal limb coordination lying down, is vestibular."
+      ],
+      "pitfalls": [
+        "Calling any wide-based gait 'cerebellar' without checking whether Romberg's sign is genuinely positive, which would instead suggest a sensory or vestibular cause.",
+        "Missing pseudoathetosis or the wash-basin history, and so underdiagnosing a sensory ataxia as cerebellar.",
+        "Forgetting to test limb coordination lying down in a patient with a wide-based gait but no obvious limb ataxia sitting up, since a vermis lesion can look this way.",
+        "Not asking about vertigo, tinnitus and hearing change, and so missing a vestibular cause entirely."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which type of ataxia gives a genuinely positive Romberg's sign: cerebellar, sensory, or vestibular?",
+          "a": "Sensory ataxia gives the classic, reliably positive Romberg's sign. Cerebellar ataxia does not reliably change with eye closure; vestibular ataxia can worsen somewhat but is identified mainly by its other features (vertigo, nystagmus).",
+          "accept": [
+            "sensory"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has a wide-based gait, nystagmus with the fast phase beating to the left, vertigo, and tinnitus in the left ear. What type of ataxia is this, and on which side is the lesion?",
+          "a": "Vestibular ataxia, with the lesion on the RIGHT: nystagmus beats away from the side of the lesion, so a fast phase to the left means the lesion is on the right; tinnitus, however, is usually on the same side as the lesion, so care is needed reading these two clues together rather than assuming they must agree.",
+          "accept": [
+            "vestibular"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Give two bedside features, beyond the gait itself, that distinguish sensory from cerebellar ataxia.",
+          "a": "Romberg's sign (genuinely positive in sensory, not reliably positive in cerebellar), pseudoathetosis with eyes closed (sensory), and the presence of DANISH-type findings, nystagmus, scanning speech, dysdiadochokinesia (cerebellar, typically absent in sensory ataxia).",
+          "accept": [
+            "romberg",
+            "pseudoathetosis",
+            "nystagmus",
+            "dysdiadochokinesia",
+            "speech"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "romberg",
+          "text": "Correctly uses Romberg's sign to help separate sensory from cerebellar ataxia",
+          "critical": true
+        },
+        {
+          "id": "associated",
+          "text": "Uses at least one associated finding (nystagmus, vertigo, dysarthria) for each type"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: differential of ataxia"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to ataxia, cerebellar vs sensory vs vestibular"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: coordination and gait"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ataxia.workup": {
+      "id": "skill.ix.ataxia.workup",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "Investigating a new ataxia",
+      "oneLine": "Look for a structural lesion, then actively hunt the causes that are actually treatable",
+      "why": "A meaningful number of causes of ataxia are treatable if found, hypothyroidism and vitamin deficiencies among them, and missing them because attention went straight to imaging is a genuine, avoidable failure of reasoning.",
+      "body": "Direct investigation by the type found on examination, and always screen for the treatable causes regardless of type.",
+      "keyPoints": [
+        "For a cerebellar pattern: MRI brain to look for a structural cause (infarction, haemorrhage, tumour, demyelination, an Arnold-Chiari malformation), and a directed history-led search for a toxic, drug, or nutritional cause where the onset and course fit.",
+        "For a sensory pattern: vitamin B12 level, with consideration of vitamin E level and coeliac serology (antigliadin/anti-tissue transglutaminase antibodies) where the picture fits; nerve conduction studies to characterise an underlying neuropathy or ganglionopathy; and MRI of the spine to look for posterior column change, as in subacute combined degeneration.",
+        "For a vestibular pattern: formal vestibular function testing and audiometry, guided by the ear, nose and throat or neuro-otology team.",
+        "Always actively screen for the recognised TREATABLE causes of ataxia regardless of the pattern found, since missing one is the single costliest error in this whole topic: hypothyroidism (thyroid-stimulating hormone), vitamin B12 deficiency, vitamin E deficiency, coeliac disease, Wilson's disease in a younger patient, and Wernicke's encephalopathy in a patient with a relevant nutritional or alcohol history.",
+        "A full blood count and peripheral smear are a simple, informative first step: macrocytosis with hypersegmented neutrophils supports B12 deficiency, though a normal smear does not exclude it if the neurological findings are otherwise convincing."
+      ],
+      "pitfalls": [
+        "Ordering MRI brain reflexively for every ataxia without first letting the exam pattern (cerebellar versus sensory versus vestibular) direct which investigation actually answers the question.",
+        "Not screening for treatable causes (thyroid, B12, vitamin E, coeliac disease) because a structural cause seems more likely.",
+        "Treating a normal peripheral smear as evidence against B12 deficiency."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three treatable causes of ataxia that should be actively screened for, whatever the clinical type.",
+          "a": "Hypothyroidism, vitamin B12 deficiency, vitamin E deficiency, coeliac disease, Wilson's disease, and Wernicke's encephalopathy (any three).",
+          "accept": [
+            "hypothyroid",
+            "b12",
+            "vitamin e",
+            "coeliac",
+            "wilson",
+            "wernicke"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient has a clearly sensory pattern of ataxia (positive Romberg's, pseudoathetosis, no nystagmus). What investigation targets the underlying peripheral process most directly?",
+          "a": "Nerve conduction studies, to characterise the underlying sensory neuropathy or ganglionopathy, alongside a vitamin B12 level.",
+          "accept": [
+            "nerve conduction",
+            "b12"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "treatable",
+          "text": "Actively screens for at least two treatable causes regardless of type",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: investigation of ataxia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ataxia.diagnosis": {
+      "id": "skill.ataxia.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Type, tempo, and whether this is one of the causes you must not miss",
+      "why": "'Ataxia' alone does not direct anyone's care. A complete statement names the type (cerebellar, sensory or vestibular), the tempo, and explicitly whether a treatable cause has been considered and either found or excluded.",
+      "body": "State the diagnosis in the same order the reasoning built it: the type, from the exam pattern; the tempo, from the history; and the probable cause, naming explicitly whether it is treatable.",
+      "keyPoints": [
+        "The type: cerebellar, sensory, or vestibular, stated from the pattern of findings, not assumed from the presenting complaint of 'unsteady gait' alone.",
+        "The tempo: acute, subacute, or chronic, and whether symmetrical or asymmetrical, since (as with every other neurological presentation) this narrows the cause substantially.",
+        "The probable cause, and an explicit statement of whether it is one of the recognised treatable causes, since finding one changes the urgency and the plan.",
+        "A worked example: 'Chronic, symmetrical sensory ataxia (positive Romberg's sign, pseudoathetosis, worse in the dark, no cerebellar or vestibular signs), most likely subacute combined degeneration from vitamin B12 deficiency in a longstanding strict vegetarian diet, a treatable cause.'"
+      ],
+      "pitfalls": [
+        "Writing 'ataxia' with no type stated.",
+        "Omitting the tempo, which narrows the differential as much here as anywhere else in neurology.",
+        "Not stating explicitly whether a treatable cause has been actively considered."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three elements make a complete ataxia diagnosis?",
+          "a": "The type (cerebellar, sensory or vestibular), the tempo, and the probable cause with an explicit statement of whether it is treatable.",
+          "accept": [
+            "type",
+            "tempo",
+            "cause",
+            "treatable"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "type",
+          "text": "States the type explicitly, from the exam pattern"
+        },
+        {
+          "id": "treatable",
+          "text": "States whether the cause is one of the treatable ones",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: ataxia diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

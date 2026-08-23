@@ -1,0 +1,882 @@
+{
+  "_comment": "Fourth disease. Same architecture: shared history/exam skills carry the load via emphasis. Asthma's own contribution is REVERSIBLE, episodic airflow obstruction as the mechanism (the opposite pole from COPD's fixed obstruction), the reversibility criterion that actually separates the two, and the acute severe attack as the safety-critical treatment topic.",
+  "id": "bronchial-asthma",
+  "name": "Bronchial asthma",
+  "fullName": "Bronchial asthma",
+  "system": "respiratory",
+  "kbRef": "bronchial_asthma",
+  "oneLine": "Episodic, reversible airflow obstruction, and the attack that is not like the others",
+  "estMinutes": 65,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What asthma is, and the one word, reversible, that separates it from COPD",
+      "skills": [
+        "skill.asthma.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Younger, and often with a story that starts in childhood",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Asthma commonly begins in childhood or early adult life, unlike the older-onset pattern of COPD. Occupation still matters: ask about exposure to flour, isocyanates, latex, solvents or animal dander, since occupational asthma is a real and under-diagnosed entity."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Episodes, not a slow decline, and a pattern across the day",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect an EPISODIC story rather than a steady decline: recurrent attacks of breathlessness and wheeze over months to years, often since childhood, interspersed with periods of feeling completely well. That pattern, well in between attacks, is the single feature that most separates asthma from COPD."
+        },
+        "skill.hx.resp.dyspnea": {
+          "expect": "Expect breathlessness that comes in attacks rather than a fixed baseline, classically worse at night and in the early morning, and triggered by identifiable factors. Ask directly whether the patient is completely well between attacks, since persistent breathlessness at baseline points away from simple asthma."
+        },
+        "skill.hx.resp.cough_sputum": {
+          "expect": "Expect a dry, irritating cough, often worse at night, sometimes the only symptom (cough-variant asthma). Sputum, when present, is mucoid and scanty, not the large volumes of chronic bronchitis or bronchiectasis. A cough that is the sole nocturnal symptom, with a normal daytime chest, is a recognised presentation and is easy to miss."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Triggers, atopy, and the reliever that is used too often",
+      "skills": [
+        "skill.hx.resp.smoking",
+        "skill.hx.asthma.triggers",
+        "skill.hx.resp.drug"
+      ],
+      "emphasis": {
+        "skill.hx.resp.smoking": {
+          "expect": "Smoking does not cause asthma the way it causes COPD, but it worsens control, accelerates lung function decline in an asthmatic, and blunts the response to inhaled corticosteroids. Ask about it as a modifiable factor in control, not as the cause."
+        },
+        "skill.hx.resp.drug": {
+          "expect": "Ask specifically how many times a day the reliever inhaler is used. Needing it more than about twice a week for symptoms, or more than once at night, marks poorly controlled asthma and should prompt a step up in treatment, not simply a bigger canister. Ask about aspirin, NSAIDs and beta blockers, including eye drops, which can precipitate bronchospasm in a susceptible patient."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Often entirely normal between attacks, which is itself the finding",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Between attacks, appearance is often entirely normal, which is itself informative and very different from COPD. During an attack, look for the same distress cues as any severe airflow obstruction: inability to complete a sentence, tripod posture, accessory muscle use and visible distress."
+        },
+        "skill.gen.vitals": {
+          "expect": "In a stable patient, vitals are typically normal. In an acute attack, look specifically for pulsus paradoxus, an exaggerated fall in systolic blood pressure of more than 10 mmHg during inspiration, which is a recognised feature of a severe attack, and for a rising respiratory rate and heart rate as objective markers of severity that do not depend on the patient's own perception."
+        },
+        "skill.gen.clubbing": {
+          "expect": "Clubbing is not a feature of asthma. If present, look for another cause, most importantly bronchiectasis or an alternative diagnosis such as allergic bronchopulmonary aspergillosis, which can complicate long-standing poorly controlled asthma."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "Cyanosis is a late and worrying sign in an acute attack. Its absence does not mean the attack is mild; oxygen saturation can be preserved even in a severe attack until relatively late, so do not let a reassuring saturation alone downgrade your assessment of severity."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "Widespread wheeze that varies with treatment, and the chest that goes quiet when it matters most",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance"
+      ],
+      "emphasis": {
+        "skill.exam.resp.inspection": {
+          "expect": "Between attacks, inspection is usually unremarkable. During an attack, expect accessory muscle use, a prolonged expiratory phase visible from the end of the bed, and an inability to complete a sentence in severe cases. Unlike COPD, this picture is not fixed, it changes visibly with treatment over minutes to hours."
+        },
+        "skill.exam.resp.trachea": {
+          "expect": "Central, as in COPD. Asthma does not deviate the trachea; if it is deviated, think of a complication such as a pneumothorax, which is a recognised complication of a severe attack."
+        },
+        "skill.exam.resp.expansion": {
+          "expect": "Normal between attacks. During an attack, expect symmetrically reduced expansion from hyperinflation, similar in character to COPD but reversible over hours with treatment rather than fixed."
+        },
+        "skill.exam.resp.percussion": {
+          "expect": "Normal between attacks. During a significant attack, expect hyperresonance from acute hyperinflation, the same finding as COPD but here it resolves as the attack settles."
+        },
+        "skill.exam.resp.auscultation": {
+          "expect": "Between attacks, breath sounds are often entirely normal. During an attack, expect a prolonged expiratory phase, and listen specifically for whether the chest is silent, which is a very different finding from a wheezy one and means something far more serious."
+        },
+        "skill.exam.resp.added_sounds": {
+          "expect": "Expect a widespread, polyphonic, mainly expiratory wheeze during an attack. The wheeze intensity does NOT reliably track severity: a SILENT CHEST in a distressed, tiring patient means airflow is too low to generate a sound at all, and is a marker of life-threatening asthma requiring immediate escalation, not reassurance that the attack has settled."
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "expect": "Usually normal or mildly reduced during an attack, in proportion to the reduced breath sounds. Not a discriminating finding in asthma the way it is in effusion or consolidation."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the asthma picture together",
+      "blurb": "A picture that changes with treatment, and the features that mean it is severe",
+      "skills": [
+        "skill.asthma.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case, plus the current severity",
+      "skills": [
+        "skill.asthma.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Not everything that wheezes is asthma",
+      "skills": [
+        "skill.asthma.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Reversibility is the test that names it",
+      "skills": [
+        "skill.ix.asthma.spirometry"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and severity",
+      "blurb": "Reversibility criteria, control, and the features of a life-threatening attack",
+      "skills": [
+        "skill.asthma.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Stepwise control between attacks, and the emergency in front of you",
+      "skills": [
+        "skill.tx.asthma.stable",
+        "skill.tx.asthma.acute"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.asthma.resp_exam",
+        "title": "Examine the respiratory system",
+        "task": "This 24-year-old woman has had episodic breathlessness and wheeze for six years. Examine her respiratory system and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds"
+        ],
+        "examinerQuestions": [
+          "Her chest examination today is entirely normal. Does that exclude asthma?",
+          "What single examination finding during an attack would most worry you, and why is a loud wheeze not that finding?",
+          "How would you confirm this diagnosis objectively?"
+        ]
+      },
+      {
+        "id": "osce.asthma.severity",
+        "title": "Assess an acute attack",
+        "task": "This known asthmatic has arrived breathless and wheezy. Assess her severity in five minutes and state your immediate plan.",
+        "seconds": 300,
+        "skills": [
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds",
+          "skill.tx.asthma.acute"
+        ],
+        "examinerQuestions": [
+          "List the features that would make you call this attack life-threatening rather than severe.",
+          "Her chest has gone quiet. Is that a good sign?",
+          "What is your immediate management, in order?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.asthma.basics",
+      "skill.exam.resp.added_sounds",
+      "skill.gen.vitals",
+      "skill.asthma.signs",
+      "skill.ix.asthma.spirometry",
+      "skill.asthma.diagnosis",
+      "skill.asthma.differential",
+      "skill.tx.asthma.acute"
+    ]
+  },
+  "skills": {
+    "skill.asthma.basics": {
+      "id": "skill.asthma.basics",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "What asthma is",
+      "oneLine": "Chronic airway inflammation with episodic, variable, and reversible airflow obstruction",
+      "why": "The word that separates asthma from COPD is reversible. Understanding asthma as inflammation that produces variable obstruction, rather than a fixed structural problem, explains why the findings come and go, why the treatment is anti-inflammatory first, and why a normal chest examination on a good day means nothing.",
+      "body": "Asthma is a chronic inflammatory disease of the airways causing recurrent episodes of wheeze, breathlessness, chest tightness and cough, associated with variable airflow obstruction that is often, though not always completely, reversible, either spontaneously or with treatment.",
+      "keyPoints": [
+        "Three components: chronic airway inflammation, bronchial hyperresponsiveness (airways that overreact to triggers most people tolerate), and variable, reversible airflow obstruction.",
+        "The obstruction VARIES over time and with treatment, unlike the fixed obstruction of COPD. This is the single most important conceptual difference between the two diseases.",
+        "Symptoms are classically worse at night and in the early morning, a pattern called diurnal variation, and are triggered by identifiable factors: allergens, cold air, exercise, viral infections, irritants and certain drugs.",
+        "Atopy, a personal or family history of allergic conditions such as eczema, allergic rhinitis or food allergy, is a common association and raises the pre-test probability.",
+        "Asthma-COPD overlap is real and common, particularly in older patients or smokers with asthma, and the two are not mutually exclusive."
+      ],
+      "pitfalls": [
+        "Assuming a normal chest examination excludes asthma. Between attacks it very often is normal.",
+        "Treating asthma and COPD as interchangeable labels for airflow obstruction.",
+        "Forgetting that a purely nocturnal cough, with no wheeze and a normal daytime examination, can be the only presentation.",
+        "Assuming asthma is a childhood disease that a patient has outgrown just because it has been quiet for years."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single word most separates asthma's airflow obstruction from COPD's?",
+          "a": "Reversible (or variable).",
+          "accept": [
+            "reversib",
+            "variable"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name the three pathophysiological components of asthma.",
+          "a": "Chronic airway inflammation, bronchial hyperresponsiveness, and variable reversible airflow obstruction.",
+          "accept": [
+            "inflammation",
+            "hyperresponsive",
+            "reversib",
+            "variable"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has a normal chest examination today but a clear history of episodic wheeze. Does the normal examination argue against asthma?",
+          "a": "No. Airflow obstruction in asthma is variable, and the chest is very often entirely normal between attacks. The history, not a single examination, carries the diagnosis; objective testing such as spirometry with reversibility, or serial peak flow, is what confirms it.",
+          "accept": [
+            "no",
+            "variable",
+            "between attacks",
+            "normal between"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Definition"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.signs": {
+      "id": "skill.asthma.signs",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The asthma picture",
+      "oneLine": "A picture that comes and goes, and the features that mean it is not going anywhere soon",
+      "why": "Unlike COPD, where the examination is largely a fixed snapshot, in asthma the examination is a moving picture that changes with treatment over minutes to hours. Reading severity correctly, and recognising that a quiet chest can mean the opposite of what it sounds like, is a genuinely life-saving skill.",
+      "body": "Between attacks the chest is usually normal. During an attack, findings follow from acute reversible airway narrowing and hyperinflation, and their trajectory over the following hour matters as much as their presence.",
+      "keyPoints": [
+        "Between attacks: normal inspection, normal percussion, normal or near-normal auscultation. A normal examination does not exclude the diagnosis.",
+        "During a moderate attack: audible or auscultated widespread polyphonic expiratory wheeze, a prolonged expiratory phase, mild accessory muscle use, and some reduction in expansion from acute hyperinflation.",
+        "Objective severity markers that do not depend on how the patient feels: inability to complete a sentence in one breath, a respiratory rate of 25 or more, a heart rate of 110 or more, and pulsus paradoxus.",
+        "LIFE-THREATENING FEATURES: a silent chest, cyanosis, exhaustion, confusion or a reduced level of consciousness, feeble respiratory effort, bradycardia or arrhythmia, and hypotension. Any one of these means the patient needs immediate escalation, not reassurance.",
+        "The silent chest is the trap: wheeze intensity does NOT track severity in a linear way. As airflow falls further and further, the wheeze can become quieter and then disappear entirely, because there is too little air movement left to generate a sound. A silent chest in a distressed or tiring patient is one of the most dangerous findings in respiratory medicine, not a reassuring one.",
+        "Track the trajectory. A patient improving over 30 minutes on treatment is a very different situation from one who looks the same or worse, even if the single-point findings look similar."
+      ],
+      "pitfalls": [
+        "Reassuring a patient or yourself because the wheeze has quietened, without checking whether that is because they are improving or because they are exhausted.",
+        "Examining once and not repeating the assessment, when the whole point of the asthma examination is that it changes with treatment.",
+        "Missing pulsus paradoxus because blood pressure was measured only once rather than checked across the respiratory cycle.",
+        "Underestimating severity because saturation is preserved. Oxygenation can be maintained until relatively late in a severe attack."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a silent chest mean in a distressed asthmatic?",
+          "a": "Life-threatening asthma: airflow is too low to generate a wheeze. It is a sign of severity, not improvement, and needs immediate escalation.",
+          "accept": [
+            "life-threatening",
+            "severe",
+            "not improvement",
+            "airflow too low"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three objective markers of a severe attack that do not rely on the patient's own report.",
+          "a": "Inability to complete a sentence, respiratory rate 25 or more, heart rate 110 or more, and pulsus paradoxus.",
+          "accept": [
+            "sentence",
+            "respiratory rate",
+            "heart rate",
+            "pulsus paradoxus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does wheeze intensity fail as a marker of severity as an attack worsens?",
+          "a": "Wheeze is generated by turbulent airflow through narrowed airways. As obstruction becomes critical and airflow falls further, there is not enough movement of air to generate sound at all, so the chest paradoxically goes quiet at the point of greatest danger.",
+          "accept": [
+            "airflow",
+            "turbulent",
+            "not enough",
+            "quiet"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "List the life-threatening features of an acute asthma attack.",
+          "a": "Silent chest, cyanosis, feeble respiratory effort, exhaustion, confusion or reduced consciousness, bradycardia or arrhythmia, and hypotension.",
+          "accept": [
+            "silent",
+            "cyanosis",
+            "exhaustion",
+            "confusion",
+            "bradycardia",
+            "hypotension"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (acute severe asthma)"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Managing exacerbations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.summary": {
+      "id": "skill.asthma.summary",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for a disease that comes and goes, plus today's severity",
+      "why": "An asthma summary has to carry two separate pieces of information the listener needs simultaneously: the underlying diagnosis (established from the pattern over years) and today's severity (which can change within the hour). Conflating the two, or omitting either, gives an incomplete picture.",
+      "body": "State the patient and atopic or trigger background, the pattern that establishes the diagnosis, and, separately, the current severity if presenting acutely.",
+      "keyPoints": [
+        "Name the patient with the relevant background: age of onset, atopy, known triggers.",
+        "State the pattern: episodic, variable, with symptom-free periods between attacks, and diurnal variation.",
+        "If presenting acutely, state the current severity explicitly and separately from the background diagnosis, since it is what changes the immediate plan.",
+        "A worked stable example: 'A 24-year-old woman with childhood-onset asthma and known allergic rhinitis presents for review of poorly controlled symptoms, using her reliever inhaler most days and waking at night twice a week, with a normal chest examination today.'",
+        "A worked acute example: 'A 24-year-old known asthmatic presents with two hours of worsening breathlessness and wheeze triggered by a viral cold. She cannot complete a sentence, her respiratory rate is 32, and there is widespread wheeze. This is an acute severe asthma attack.'"
+      ],
+      "pitfalls": [
+        "Presenting only the background history and forgetting to state today's severity when the presentation is acute.",
+        "Describing a single attack as though it were the whole disease, and missing the episodic pattern that defines it.",
+        "Omitting the trigger, when a clear one is known and directly relevant to prevention."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why does an asthma summary sometimes need two separate statements rather than one?",
+          "a": "Because the underlying diagnosis is established from a pattern over months to years, while the current severity, in an acute presentation, can change within the hour and needs to be stated on its own.",
+          "accept": [
+            "pattern",
+            "severity",
+            "current",
+            "separate"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the episodic pattern with symptom-free periods"
+        },
+        {
+          "id": "severity",
+          "text": "States current severity separately when presenting acutely"
+        },
+        {
+          "id": "trigger",
+          "text": "Names a relevant trigger where known"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.differential": {
+      "id": "skill.asthma.differential",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Differential diagnosis",
+      "oneLine": "Not everything that wheezes is asthma, and not every asthmatic label is correct",
+      "why": "Wheeze is a sound, not a diagnosis, and treating every wheeze as asthma delays the diagnosis of the conditions that mimic it, some of which are dangerous to miss. Equally, a substantial number of adults carry an asthma label they were never properly tested for.",
+      "body": "For episodic or persistent wheeze and breathlessness, work through airway, cardiac, upper airway and structural causes.",
+      "keyPoints": [
+        "COPD and asthma-COPD overlap: favoured by older age, a significant smoking history, and fixed rather than fully reversible obstruction on spirometry. The two are not mutually exclusive and often coexist.",
+        "Cardiac (cardiac asthma, acute pulmonary oedema): favoured by orthopnoea, PND, a cardiac history, bibasal fine crackles and a third heart sound, rather than a widespread polyphonic wheeze.",
+        "Upper airway obstruction (a foreign body, vocal cord dysfunction, angioedema, a tumour): favoured by a fixed, monophonic or predominantly inspiratory noise (stridor), sudden onset, or a poor response to bronchodilators.",
+        "Bronchiectasis: favoured by large-volume purulent sputum, recurrent infections and clubbing, none of which are typical asthma.",
+        "Pulmonary embolism: can present with acute breathlessness and wheeze in a patient with risk factors for venous thromboembolism, without the diurnal or trigger-related pattern of asthma.",
+        "Allergic bronchopulmonary aspergillosis: consider in a poorly controlled asthmatic with recurrent pulmonary infiltrates, high total IgE and eosinophilia.",
+        "Gastro-oesophageal reflux and chronic rhinosinusitis with post-nasal drip can both mimic or worsen asthma symptoms and are worth asking about directly in poorly controlled disease."
+      ],
+      "pitfalls": [
+        "Accepting an existing asthma label without ever confirming it with objective testing.",
+        "Missing an upper airway cause because a noisy breath sound was assumed to be wheeze without listening carefully to its timing and quality.",
+        "Treating every episode of breathlessness in a known asthmatic as an asthma attack, and missing a pulmonary embolism or pneumothorax presenting similarly.",
+        "Not considering allergic bronchopulmonary aspergillosis in an asthmatic with recurrent infiltrates that do not behave like simple infections."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three conditions that can mimic wheeze or breathlessness attributed to asthma.",
+          "a": "COPD, cardiac (pulmonary oedema), upper airway obstruction (foreign body, vocal cord dysfunction), bronchiectasis, and pulmonary embolism.",
+          "accept": [
+            "copd",
+            "cardiac",
+            "pulmonary oedema",
+            "upper airway",
+            "vocal cord",
+            "bronchiectasis",
+            "embolism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What feature of a noisy breath sound would make you suspect an upper airway cause rather than asthma?",
+          "a": "A fixed, monophonic, predominantly inspiratory sound (stridor), sudden onset, or a poor response to bronchodilators, rather than a widespread expiratory polyphonic wheeze.",
+          "accept": [
+            "stridor",
+            "monophonic",
+            "inspiratory",
+            "sudden"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A poorly controlled asthmatic has recurrent chest infiltrates on imaging. What should you consider?",
+          "a": "Allergic bronchopulmonary aspergillosis, which can complicate long-standing asthma and is suggested by recurrent infiltrates, eosinophilia and a markedly raised total IgE.",
+          "accept": [
+            "aspergillosis",
+            "abpa",
+            "eosinophilia",
+            "ige"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential beyond airway disease alone"
+        },
+        {
+          "id": "confirm",
+          "text": "Recognises the need to confirm, not assume, an existing asthma label"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (differential diagnosis)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.asthma.spirometry": {
+      "id": "skill.ix.asthma.spirometry",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Spirometry and reversibility",
+      "oneLine": "The obstruction that gets better is the one that names the disease",
+      "why": "A history strongly suggestive of asthma is still a working diagnosis until it is confirmed objectively. Demonstrating variable, reversible airflow obstruction is what turns 'probably asthma' into asthma, and it is the same physiological principle, applied in the opposite direction, as the fixed obstruction of COPD.",
+      "body": "Spirometry with bronchodilator reversibility testing, and where spirometry is unavailable or normal between attacks, serial peak expiratory flow monitoring.",
+      "keyPoints": [
+        "Spirometry may show a reduced FEV1/FVC ratio during symptomatic periods, consistent with obstruction, but can be entirely normal between attacks, which does not exclude the diagnosis.",
+        "REVERSIBILITY TESTING is the key step: spirometry is repeated after an inhaled short-acting bronchodilator. A significant improvement in FEV1 supports the diagnosis of asthma over COPD, where the obstruction is, by definition, not fully reversible.",
+        "Where spirometry is not immediately diagnostic, serial peak expiratory flow monitoring over one to two weeks, looking for significant diurnal or day-to-day variability, can support the diagnosis, particularly in primary care.",
+        "A bronchial provocation test (for example with methacholine) may be used in specialist practice where the diagnosis remains uncertain and baseline spirometry is normal, to demonstrate airway hyperresponsiveness.",
+        "Fractional exhaled nitric oxide and blood or sputum eosinophil counts are used in some settings to characterise the type of airway inflammation and guide therapy, particularly for biologic treatment decisions in severe asthma.",
+        "During an ACUTE attack, spirometry or peak flow, expressed as a percentage of the patient's own best or the predicted value, is used to grade severity at the bedside, not to make the underlying diagnosis for the first time."
+      ],
+      "pitfalls": [
+        "Excluding asthma because a single spirometry test, done when the patient is well, is normal.",
+        "Not repeating spirometry after a bronchodilator, and so never actually testing for reversibility.",
+        "Using peak flow interchangeably with spirometry for the initial diagnosis, when spirometry is the more reliable test where available.",
+        "Performing detailed pulmonary function testing during a severe acute attack, when a brief peak flow reading and clinical assessment are what is needed, not a full diagnostic workup."
+      ],
+      "media": [
+        "media.dia.flowvolume"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What test result supports asthma over COPD?",
+          "a": "Significant improvement in FEV1 after a bronchodilator, demonstrating reversible airflow obstruction.",
+          "accept": [
+            "reversib",
+            "bronchodilator",
+            "improve"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient's spirometry is entirely normal today. Does this exclude asthma?",
+          "a": "No. Airflow obstruction in asthma is variable and can be normal between attacks. Serial peak flow monitoring, provocation testing, or repeating spirometry during symptoms may be needed.",
+          "accept": [
+            "no",
+            "variable",
+            "between attacks",
+            "normal between"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What would peak flow monitoring over two weeks be looking for to support a diagnosis of asthma?",
+          "a": "Significant diurnal variability, characteristically a dip in the early morning, or significant day-to-day variability, rather than a stable reading.",
+          "accept": [
+            "diurnal",
+            "variab",
+            "morning dip"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (diagnosis)"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Confirming the diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.asthma.diagnosis": {
+      "id": "skill.asthma.diagnosis",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Diagnosis, control and severity",
+      "oneLine": "Name it, state how well controlled it is, and grade today's attack separately",
+      "why": "A diagnosis of 'asthma' alone does not direct treatment. What matters day to day is the level of CONTROL between attacks, which determines the maintenance step, and, separately, the severity of any current attack, which determines the emergency plan. These are two different assessments and must not be merged.",
+      "body": "State the diagnosis with its supporting evidence, the current level of control, and, where relevant, the severity of an acute presentation.",
+      "keyPoints": [
+        "The diagnosis rests on a compatible history of variable respiratory symptoms PLUS objective evidence of variable airflow obstruction, most commonly significant bronchodilator reversibility on spirometry.",
+        "Assess CONTROL over the preceding weeks using simple, specific questions: daytime symptoms more than twice a week, any night waking due to asthma, reliever use more than twice a week, and any activity limitation. More than one or two of these present suggests poorly controlled asthma and a need to step up treatment.",
+        "Grade an ACUTE attack separately, using objective bedside markers: ability to complete sentences, respiratory rate, heart rate, peak flow as a percentage of best or predicted, and the presence or absence of life-threatening features (silent chest, cyanosis, exhaustion, confusion, bradycardia, hypotension).",
+        "A worked diagnostic statement: 'Bronchial asthma, confirmed by significant bronchodilator reversibility, currently poorly controlled with reliever use most days and night waking twice weekly.'",
+        "A worked acute statement, kept separate: 'Acute severe asthma attack: unable to complete sentences, respiratory rate 32, heart rate 118, no life-threatening features at present.'"
+      ],
+      "pitfalls": [
+        "Diagnosing asthma from history alone without any objective confirmation, when it is practical to obtain.",
+        "Assessing control with a vague impression rather than the specific control questions.",
+        "Grading an acute attack using only how distressed the patient looks, rather than the objective markers.",
+        "Merging the chronic control assessment and the acute severity assessment into one muddled statement."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the four simple questions used to assess asthma control over recent weeks.",
+          "a": "Daytime symptoms more than twice a week, any night waking due to asthma, reliever use more than twice a week, and any activity limitation.",
+          "accept": [
+            "daytime",
+            "night",
+            "reliever",
+            "activity"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why must the level of control and the severity of an acute attack be stated as two separate assessments?",
+          "a": "Control reflects the pattern over recent weeks and determines the maintenance treatment step; acute severity reflects the immediate physiological state and determines the emergency management. They can move independently, and a well-controlled patient can still have a severe attack.",
+          "accept": [
+            "separate",
+            "maintenance",
+            "emergency",
+            "independent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "objective",
+          "text": "Bases the diagnosis on objective evidence of variable obstruction, not history alone"
+        },
+        {
+          "id": "control",
+          "text": "Assesses control using specific control questions"
+        },
+        {
+          "id": "acuteseparate",
+          "text": "Grades any acute presentation separately from baseline control"
+        }
+      ],
+      "sources": [
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Assessment of asthma control and severity"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.asthma.stable": {
+      "id": "skill.tx.asthma.stable",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing stable asthma",
+      "oneLine": "Anti-inflammatory treatment first, stepped by control, reviewed at every visit",
+      "why": "Asthma is fundamentally an inflammatory disease, and treatment that relies on a reliever alone, without any anti-inflammatory maintenance treatment, leaves the underlying process untreated even if symptoms feel manageable between attacks. Understanding the stepped logic prevents both undertreatment and reflexive escalation without checking the basics first.",
+      "body": "Treatment is anti-inflammatory led, stepped according to control, and reviewed for technique, adherence and trigger avoidance at every visit.",
+      "keyPoints": [
+        "Inhaled corticosteroids are the cornerstone of maintenance treatment, because asthma is primarily an inflammatory disease. Reliance on a short-acting bronchodilator alone, without any inhaled corticosteroid, is now recognised as inadequate treatment even in mild disease.",
+        "Treatment is stepped up or down according to the level of control, adding a long-acting bronchodilator and increasing the inhaled corticosteroid dose as needed, following your current national or institutional guideline.",
+        "Before stepping up, always check the same three things as in COPD: inhaler technique, adherence, and continued trigger exposure. Most apparent treatment failure is one of these three, not an inadequate regimen.",
+        "Trigger avoidance and control of coexisting allergic rhinitis are part of treatment, not an optional extra, and can meaningfully reduce the medication burden.",
+        "A written personalised action plan, describing what to do as symptoms worsen and when to seek urgent help, is associated with fewer severe attacks and should be given to every patient.",
+        "Regular review includes reassessing control, growth in children, and any side effects, and stepping down treatment once control has been good for a sustained period, rather than only ever stepping up.",
+        "Severe, difficult-to-control asthma despite optimised standard treatment is a reason for specialist referral and consideration of add-on or biologic therapy, guided by the inflammatory phenotype."
+      ],
+      "pitfalls": [
+        "Treating asthma with a reliever inhaler alone, with no anti-inflammatory maintenance treatment.",
+        "Escalating the regimen without checking technique, adherence and trigger exposure first.",
+        "Never stepping down treatment once control has been consistently good, leaving a patient overtreated indefinitely.",
+        "Sending a patient home without a written action plan after review or after an attack."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the cornerstone of maintenance treatment in asthma?",
+          "a": "Inhaled corticosteroids, because asthma is primarily an inflammatory disease.",
+          "accept": [
+            "inhaled corticosteroid",
+            "ics",
+            "steroid"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Before stepping up a patient's asthma treatment, what three things should you check first?",
+          "a": "Inhaler technique, adherence, and continued trigger or allergen exposure.",
+          "accept": [
+            "technique",
+            "adherence",
+            "trigger",
+            "exposure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is a written action plan given to every asthma patient rather than only the severe ones?",
+          "a": "It is associated with fewer severe attacks and hospital admissions across the whole range of severity, by helping the patient recognise early deterioration and act on it before it becomes an emergency.",
+          "accept": [
+            "fewer attacks",
+            "early",
+            "recogni",
+            "admission"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Stepwise management"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (treatment)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "Classes and principles only. Specific agents, doses, devices and step thresholds must come from your current national or institutional guideline. CliniX does not prescribe."
+    },
+    "skill.tx.asthma.acute": {
+      "id": "skill.tx.asthma.acute",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing an acute attack",
+      "oneLine": "Oxygen, bronchodilators, steroids early, and escalate on trajectory, not on a single snapshot",
+      "why": "Acute severe asthma remains a preventable cause of death, and most deaths involve a failure to recognise severity or a delay in escalating care, not a failure of the drugs themselves. Understanding the life-threatening features, and reassessing repeatedly rather than once, is genuinely life-saving knowledge.",
+      "body": "Assess severity using objective markers, treat promptly with oxygen, bronchodilators and early corticosteroid, and reassess frequently rather than at one point in time.",
+      "keyPoints": [
+        "Assess severity immediately using objective markers: ability to speak in sentences, respiratory rate, heart rate, peak flow as a percentage of best or predicted, and specifically look for the life-threatening features (silent chest, cyanosis, feeble effort, exhaustion, confusion, bradycardia or arrhythmia, hypotension).",
+        "Give supplemental oxygen to maintain a normal saturation target; unlike COPD, there is no reason to restrict oxygen in acute asthma unless there is a separate reason to do so.",
+        "Give repeated or nebulised short-acting beta-2 agonist bronchodilators as first-line treatment, with an inhaled antimuscarinic added in a more severe attack, since combining the two produces greater bronchodilation than either alone in severe attacks.",
+        "Give a systemic corticosteroid EARLY, since the benefit takes hours to appear and starting it late wastes that lead time; a short course is used, following your current guideline for dose and duration.",
+        "Escalation for a severe or life-threatening attack that is not responding follows a defined ladder in specialist settings (for example intravenous magnesium sulfate, and further options under senior and critical-care guidance); this module does not prescribe the specific agents or thresholds, which must come from your current protocol.",
+        "REASSESS REPEATEDLY, not once. Asthma severity changes over minutes, and a patient who looks the same or worse after appropriate initial treatment, or who develops any life-threatening feature, needs immediate senior and critical-care involvement.",
+        "Before discharge from an attack: check inhaler technique, review and adjust maintenance treatment, provide or update a written action plan, and arrange follow-up, since an attack severe enough to need this level of care marks a real change in risk."
+      ],
+      "pitfalls": [
+        "Restricting oxygen out of a reflex learned from COPD. It does not apply here in the same way.",
+        "Waiting to see whether bronchodilators alone work before giving a systemic corticosteroid. Give it early.",
+        "Treating a quietening chest as improvement without checking whether the patient is actually getting better or simply moving too little air to wheeze.",
+        "Assessing severity once at triage and not reassessing after treatment.",
+        "Discharging after a severe attack without reviewing technique, adjusting maintenance treatment, and giving a written action plan."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "When should a systemic corticosteroid be given in an acute asthma attack?",
+          "a": "Early, because its benefit takes hours to appear.",
+          "accept": [
+            "early",
+            "immediately",
+            "hours to appear"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Should oxygen be restricted in acute asthma the way it can be in a COPD exacerbation?",
+          "a": "No, not as a default. Give supplemental oxygen to a normal saturation target unless there is a specific separate reason to restrict it.",
+          "accept": [
+            "no",
+            "not restrict",
+            "normal target"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with a severe attack looks unchanged 20 minutes after initial treatment. What do you do?",
+          "a": "Reassess objectively rather than relying on impression, and escalate: involve a senior clinician and critical care early, since failure to improve on initial treatment, or any life-threatening feature, is an indication for urgent escalation, not simply repeating the same treatment and waiting.",
+          "accept": [
+            "escalate",
+            "senior",
+            "critical care",
+            "reassess"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Asthma (acute severe asthma, management)"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Managing exacerbations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "Classes, targets and principles only. Steroid dose and duration, bronchodilator dosing and interval, and escalation thresholds and agents must follow your current national or institutional guideline. CliniX does not prescribe."
+    }
+  }
+}

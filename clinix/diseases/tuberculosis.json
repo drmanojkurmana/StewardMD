@@ -1,0 +1,788 @@
+{
+  "_comment": "Fifth disease, completing the respiratory five. Same architecture: shared history/exam skills carry most of the load via emphasis. TB's own contribution is the contact/exposure history, apical fibrocavitary findings, smear/CBNAAT-based diagnosis, and national-programme treatment principles without doses.",
+  "id": "tuberculosis",
+  "name": "Pulmonary tuberculosis",
+  "fullName": "Pulmonary tuberculosis",
+  "system": "respiratory",
+  "kbRef": "pulmonary_tuberculosis",
+  "oneLine": "A subacute infection that hides in the apex, and the contact history that finds it",
+  "estMinutes": 65,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What pulmonary TB is, and why the apex matters",
+      "skills": [
+        "skill.tb.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, including infection control",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Where someone lives and who they live with is half the diagnosis",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "In suspected TB, residence and household crowding carry real diagnostic weight. Ask specifically who else lives in the house, how many rooms, and whether anyone nearby has ever had a chronic cough or a TB diagnosis. Occupation matters too: silica exposure in stone-cutting, sandblasting or mining substantially raises TB risk (silicotuberculosis)."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Weeks, not days, and the symptoms that come as a set",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation reads in weeks: cough for 3 or more weeks, evening rise of temperature, night sweats and weight loss over a similar period. That subacute tempo, longer than pneumonia and shorter than the years-long story of COPD, is itself a clue, and any cough of 2 weeks or more with any one of fever, weight loss, night sweats or haemoptysis should be treated as presumptive TB until proven otherwise."
+        },
+        "skill.hx.resp.dyspnea": {
+          "expect": "Breathlessness is often a late feature, appearing once there is substantial lung destruction, an associated pleural effusion, or extensive fibrosis. Its absence early on should not be reassuring; ask about it, but do not let a normal answer here soften your concern if the other cardinal features are present."
+        },
+        "skill.hx.resp.cough_sputum": {
+          "expect": "Expect a cough present for three weeks or more, at first dry and later productive of mucoid or mucopurulent sputum. Ask specifically and persistently about haemoptysis, from a streak to frank blood, since it can be the presenting feature, and about the evening rise of temperature and drenching night sweats that together with weight loss make up the classical constitutional triad."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Contact, prior treatment, and the conditions that let TB take hold",
+      "skills": [
+        "skill.hx.resp.smoking",
+        "skill.hx.tb.exposure"
+      ],
+      "emphasis": {
+        "skill.hx.resp.smoking": {
+          "expect": "Smoking and alcohol both independently raise the risk of active tuberculosis and of poor treatment outcomes. Ask about both, and about nutrition, since malnutrition is itself a major risk factor and a marker of a compromised immune response."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Wasting first, and the external markers most students never look for",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for wasting, pallor and a generally unwell, chronically ill appearance. Deliberately look beyond the chest for the EXTERNAL MARKERS OF TUBERCULOSIS: matted cervical lymph nodes, erythema nodosum (tender nodules, usually on the shins), phlyctenular conjunctivitis, discharging sinuses, scrofuloderma and lupus vulgaris of the skin, and a beaded vas deferens in a man. Any one of these, found on a general examination that was supposedly about the chest, should raise TB immediately."
+        },
+        "skill.gen.vitals": {
+          "expect": "Expect a low-grade, intermittent fever with a characteristic evening rise, in contrast to the continuous or sustained fever of lobar pneumonia. Weight should be checked and recorded, since serial weight is one of the simplest ways to monitor response to treatment."
+        },
+        "skill.gen.clubbing": {
+          "expect": "Clubbing is not a typical feature of straightforward pulmonary TB, but can develop with extensive fibrocavitary disease, an associated empyema, or bronchiectasis as a long-term sequela of healed TB. New clubbing should prompt a search for one of these complications, or for a second diagnosis."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "The apex speaks first: crackles that persist, and the signs of fibrosis and cavitation",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance"
+      ],
+      "emphasis": {
+        "skill.exam.resp.inspection": {
+          "expect": "In early disease, inspection can be entirely normal. In advanced or healed disease, look for asymmetry: flattening or reduced movement over an apex affected by fibrosis, or, in old healed disease, an obviously contracted, retracted hemithorax with the shoulder drawn down on that side."
+        },
+        "skill.exam.resp.trachea": {
+          "expect": "Central in early or localised disease. In advanced upper-lobe fibrosis, the trachea is characteristically PULLED TOWARDS the affected side, the same direction as any volume-losing process, and is one of the clearest bedside signs of significant upper-lobe destruction and shrinkage."
+        },
+        "skill.exam.resp.expansion": {
+          "expect": "Reduced over the affected apex or upper zone in localised disease. In advanced fibrotic disease it can be reduced over a large part of one side, reflecting the volume lost to fibrosis and retraction."
+        },
+        "skill.exam.resp.percussion": {
+          "expect": "Often normal early on. Expect impaired or dull percussion over apical fibrosis, and a distinctive hollow, amphoric or cracked-pot quality directly over a large superficial cavity. If there is an associated pleural effusion, which is common, expect stony dullness over the fluid in addition to the apical findings."
+        },
+        "skill.exam.resp.auscultation": {
+          "expect": "Expect bronchial breathing over an area of consolidation or a large cavity with a patent draining bronchus, and reduced breath sounds over fibrosis or an associated effusion. Amphoric breathing, a hollow, resonant quality, is classically described over a large cavity."
+        },
+        "skill.exam.resp.added_sounds": {
+          "expect": "The hallmark is PERSISTENT crackles localised to the apex or upper zone, present on more than one occasion and not simply clearing with coughing the way secretions do. Post-tussive crackles, heard immediately after a cough, are a classically taught finding over an active cavitary lesion."
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "expect": "Increased over an area of consolidation, and can be increased with a peculiar hollow quality (amphoric) over a large cavity. Reduced over fibrosis or an associated pleural effusion. The finding follows the same conducting-lung logic as elsewhere; the difference in TB is that several of these patterns can coexist in the same patient, consolidation, cavitation, fibrosis and effusion together."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the TB picture together",
+      "blurb": "One infection, several patterns of lung destruction, all at once",
+      "skills": [
+        "skill.tb.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that contain the case",
+      "skills": [
+        "skill.tb.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Everything that can mimic a subacute cavitary illness",
+      "skills": [
+        "skill.tb.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm the organism, do not just see the shadow",
+      "skills": [
+        "skill.ix.tb.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and case definition",
+      "blurb": "What actually makes the diagnosis, and what only suggests it",
+      "skills": [
+        "skill.tb.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Multidrug therapy, directly observed, under the national programme",
+      "skills": [
+        "skill.tx.tb"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.tb.resp_exam",
+        "title": "Examine the respiratory system",
+        "task": "This 34-year-old man has had cough, evening fever and weight loss for six weeks. Examine his respiratory system and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.trachea",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds"
+        ],
+        "examinerQuestions": [
+          "Where would you expect to find the earliest signs in reactivation TB, and why that site?",
+          "The trachea is pulled towards the right apex. What does that tell you?",
+          "Name two external markers of tuberculosis you would look for outside the chest."
+        ]
+      },
+      {
+        "id": "osce.tb.history",
+        "title": "Take a history with a contact and exposure focus",
+        "task": "This 34-year-old man has had a cough for six weeks. Take a focused history in six minutes, including his contact and exposure history.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.resp.cough_sputum",
+          "skill.hx.tb.exposure"
+        ],
+        "examinerQuestions": [
+          "What symptom duration should make you treat this as presumptive TB regardless of any other finding?",
+          "What questions define a close contact worth actively tracing?",
+          "He mentions a cousin who is HIV-positive. Why does that change your risk assessment for him specifically, not just the cousin?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.tb.basics",
+      "skill.hx.tb.exposure",
+      "skill.exam.resp.added_sounds",
+      "skill.tb.signs",
+      "skill.ix.tb.workup",
+      "skill.tb.diagnosis",
+      "skill.tb.differential",
+      "skill.tx.tb"
+    ]
+  },
+  "skills": {
+    "skill.tb.basics": {
+      "id": "skill.tb.basics",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "What pulmonary tuberculosis is",
+      "oneLine": "A slow, cell-mediated infection that favours the apex, and can wait years before it declares itself",
+      "why": "Understanding why TB behaves the way it does, why it prefers the apex, why it can lie dormant for decades, and why it presents subacutely rather than acutely, is what lets a student predict its findings rather than memorise them, and is essential in a country carrying a large share of the global TB burden.",
+      "body": "Pulmonary TB is infection with Mycobacterium tuberculosis, transmitted by airborne droplet nuclei from a person with active, usually smear-positive, pulmonary disease.",
+      "keyPoints": [
+        "Primary infection is often asymptomatic or mild, and is contained by cell-mediated immunity in most people, who then carry LATENT infection with no symptoms and no ability to transmit the organism.",
+        "Reactivation (post-primary or secondary TB) can occur years to decades later, when immunity wanes, classically in the apical and posterior segments of the upper lobes, where higher oxygen tension favours the aerobic organism.",
+        "Only a minority of those infected ever develop active disease in their lifetime, and the risk rises sharply with anything that weakens cell-mediated immunity: HIV infection is the single strongest risk factor, and diabetes, malnutrition, chronic steroid or other immunosuppressive treatment, chronic kidney disease, and silica exposure are all recognised risk factors.",
+        "The disease is transmitted by airborne droplet nuclei, which is why a sputum smear-positive patient is the one who matters most for transmission and for infection control, and why cough hygiene and, where available, isolation and ventilation measures matter around such a patient.",
+        "Post-primary TB can progress through consolidation, caseous necrosis, and CAVITATION, where liquefied necrotic material communicates with a draining bronchus, and this is the pattern that produces both the classical examination findings and the highest bacterial burden, and hence the highest infectiousness."
+      ],
+      "pitfalls": [
+        "Assuming a negative contact history excludes TB. Transmission is often from a brief or unrecognised contact, and reactivation from a remote, long-forgotten exposure is common.",
+        "Treating TB as an acute illness and expecting it to present like pneumonia.",
+        "Forgetting that latent TB carries no symptoms and is not infectious, which is why it is a different clinical and public health problem from active disease.",
+        "Not asking about HIV status, which is the single strongest modifiable risk factor for progression to active disease."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which part of the lung does post-primary (reactivation) TB classically favour, and why?",
+          "a": "The apical and posterior segments of the upper lobes, because the higher oxygen tension there favours this aerobic organism.",
+          "accept": [
+            "apical",
+            "apex",
+            "upper lobe",
+            "oxygen"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the single strongest risk factor for progression from latent to active TB?",
+          "a": "HIV infection.",
+          "accept": [
+            "hiv"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is a cavitary lesion clinically more significant than simple consolidation in TB?",
+          "a": "A cavity communicates with a draining bronchus and contains a very high bacterial load, making the patient highly infectious, and it is also the lesion most associated with the classical examination findings such as amphoric breathing and post-tussive crackles.",
+          "accept": [
+            "infectious",
+            "bacterial load",
+            "communicat",
+            "bronchus"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: pulmonary tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tb.signs": {
+      "id": "skill.tb.signs",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The TB picture",
+      "oneLine": "Several patterns of lung destruction in the same patient, and the markers found outside the chest",
+      "why": "TB is unusual in that a single patient can show consolidation, cavitation, fibrosis and effusion together, at different sites or even in the same area over time, and the diagnosis is often made as much from what is found OUTSIDE the chest as from the chest examination itself.",
+      "body": "The picture depends on the stage: early disease can be silent, cavitary disease gives the classical apical findings, and old healed disease gives fibrosis and retraction.",
+      "keyPoints": [
+        "Apical or upper-zone findings: reduced expansion, impaired or dull percussion, bronchial or amphoric breathing over a cavity, and persistent, often post-tussive, crackles that do not simply clear with coughing.",
+        "A large cavity gives a distinctive amphoric quality to breath sounds and to vocal resonance, hollow and resonant, from the resonating cavity acting like an empty vessel.",
+        "Advanced fibrotic disease pulls the trachea and mediastinum TOWARDS the affected side, and can produce visible retraction of that side of the chest, unlike the pushing-away pattern of an effusion or a pneumothorax.",
+        "A pleural effusion is a common complication or presentation of TB, and gives the same stony-dull, quiet, reduced-resonance triad as any effusion, sometimes alongside apical signs in the same patient.",
+        "EXTERNAL MARKERS OF TUBERCULOSIS, found away from the chest, carry real diagnostic weight and are frequently missed because students confine a respiratory case to the chest: matted cervical lymph nodes, erythema nodosum, phlyctenular conjunctivitis, choroid tubercles on fundoscopy, discharging sinuses, scrofuloderma, lupus vulgaris, and a beaded vas deferens.",
+        "Constitutional findings: wasting, pallor, and a low-grade fever with a characteristic evening rise, rather than the continuous fever of bacterial pneumonia."
+      ],
+      "pitfalls": [
+        "Confining the examination to the chest and missing the external markers that are often the fastest route to the diagnosis.",
+        "Expecting dramatic chest signs in early disease, when the examination can be entirely normal despite significant radiographic disease.",
+        "Mistaking amphoric breathing for ordinary bronchial breathing and missing the underlying cavity.",
+        "Attributing a pleural effusion in a young adult to another cause without actively considering TB, which is a leading cause in this age group in India."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two external markers of tuberculosis found outside the chest.",
+          "a": "Matted cervical lymph nodes, erythema nodosum, phlyctenular conjunctivitis, discharging sinuses, scrofuloderma, lupus vulgaris, or a beaded vas deferens.",
+          "accept": [
+            "lymph node",
+            "erythema nodosum",
+            "phlyctenular",
+            "scrofuloderma",
+            "lupus vulgaris",
+            "vas deferens"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What gives breath sounds and vocal resonance an amphoric quality?",
+          "a": "A large, superficial cavity with a patent draining bronchus, which resonates like an empty vessel.",
+          "accept": [
+            "cavity",
+            "resonat",
+            "vessel"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Advanced fibrotic TB in the right upper lobe. Which way does the trachea move, and why is that different from an effusion?",
+          "a": "It is pulled towards the right, the same side as the disease, because fibrosis is a volume-losing process. An effusion pushes the trachea to the opposite side because it takes up space. The direction of deviation is what tells the two apart at the bedside.",
+          "accept": [
+            "pulled",
+            "towards",
+            "same side",
+            "volume-losing"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tb.summary": {
+      "id": "skill.tb.summary",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The clinical summary",
+      "oneLine": "Problem representation for a subacute constitutional illness with a chest sign or two",
+      "why": "A TB summary needs to carry the tempo (weeks, not days or years), the constitutional triad, and the exposure context together, because each of those on its own is unremarkable and it is their combination that should trigger presumptive treatment pathways.",
+      "body": "Name the patient with the exposure context that matters, give the tempo, state the constitutional and respiratory syndrome, and note the key negatives.",
+      "keyPoints": [
+        "Name the patient with the relevant exposure or vulnerability: household contact, HIV status if known, diabetes, occupational silica exposure, or a history of incomplete prior treatment.",
+        "State the tempo: subacute, over weeks, distinct from the days of pneumonia and the years of COPD.",
+        "State the syndrome in abstract terms: 'a constitutional illness of cough, evening fever, night sweats and weight loss, with apical findings on examination'.",
+        "Include the relevant negatives: no history of chronic bronchitis or smoking-related airway disease, no acute onset, no clubbing (or, if present, note it as a marker of a possible complication).",
+        "A worked example: 'A 34-year-old man, living in a crowded two-room household, presents with six weeks of cough, evening fever, drenching night sweats and four kilograms of weight loss. Examination shows wasting, persistent post-tussive crackles at the right apex, and matted cervical lymph nodes. This is presumptive pulmonary tuberculosis, right upper zone, pending microbiological confirmation.'"
+      ],
+      "pitfalls": [
+        "Reporting the symptoms without the tempo, so the listener cannot distinguish this from an acute infection.",
+        "Omitting the exposure or vulnerability context, which is often what tips the differential towards TB.",
+        "Stating a firm diagnosis of TB before microbiological confirmation, rather than the correct 'presumptive TB, pending confirmation'."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What tempo word belongs in a TB summary, and how does it differ from pneumonia and COPD?",
+          "a": "Subacute, over weeks. Pneumonia is acute, over days; COPD is chronic, over years.",
+          "accept": [
+            "subacute",
+            "weeks"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why should a summary say 'presumptive TB, pending confirmation' rather than simply 'TB'?",
+          "a": "Because the clinical picture alone raises strong suspicion but is not diagnostic; microbiological confirmation (smear, culture or a molecular test) is what establishes the diagnosis, and the summary should reflect the actual state of evidence.",
+          "accept": [
+            "presumptive",
+            "confirm",
+            "microbiolog",
+            "pending"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "States the subacute tempo"
+        },
+        {
+          "id": "constitutional",
+          "text": "Names the constitutional triad"
+        },
+        {
+          "id": "exposure",
+          "text": "States relevant exposure or vulnerability context"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tb.differential": {
+      "id": "skill.tb.differential",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Differential diagnosis",
+      "oneLine": "The subacute cough that is not TB, and the TB that has already become something else",
+      "why": "TB shares its presentation with several other subacute and chronic illnesses, and treating every case as TB, or dismissing TB because another cause seems more likely, both carry real cost in a high-burden setting. TB itself can also lead to complications that then present as new problems in their own right.",
+      "body": "For a subacute constitutional illness with cough, work through infective, neoplastic and other granulomatous or chronic causes, then consider what TB itself may have caused.",
+      "keyPoints": [
+        "Lung cancer, particularly in an older smoker: favoured by a shorter, more relentless course, a change in the character of a chronic cough, clubbing, and a mass rather than cavitation on imaging, though the two can coexist and TB can complicate or mask an underlying malignancy.",
+        "Lung abscess and necrotising pneumonia: favoured by a more acute onset, foul-smelling sputum, and a predisposition to aspiration, though the radiographic cavity can look similar.",
+        "Fungal infection (for example histoplasmosis or aspergillosis, including an aspergilloma developing within an old TB cavity): consider especially where the response to standard treatment is poor or where a fungus ball is seen within a pre-existing cavity.",
+        "Sarcoidosis and other granulomatous or interstitial diseases: favoured by bilateral hilar lymphadenopathy, a more indolent course, and a lack of response to, or need for, antituberculosis therapy.",
+        "Non-tuberculous mycobacterial disease: consider particularly in a patient with pre-existing structural lung disease and a poor or partial response to standard antituberculosis therapy, which needs specific mycobacterial speciation to identify.",
+        "Bronchiectasis: can be a CAUSE of a subacute presentation that mimics TB, or a CONSEQUENCE of previous, healed TB, and the two frequently coexist in the same patient.",
+        "Community-acquired pneumonia and pulmonary embolism remain relevant differentials for a shorter or more acute presentation, as discussed in their own chapters."
+      ],
+      "pitfalls": [
+        "Assuming every cavity on a chest radiograph is TB without microbiological confirmation.",
+        "Missing an underlying malignancy because TB was diagnosed and treated first, without arranging follow-up imaging to confirm expected resolution.",
+        "Not considering non-tuberculous mycobacterial disease when a patient fails to respond as expected to standard treatment.",
+        "Forgetting that TB and its sequelae, particularly bronchiectasis and aspergilloma, can coexist and each need their own management."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three differentials for a subacute cavitary lung lesion.",
+          "a": "Lung cancer, lung abscess or necrotising pneumonia, fungal infection including aspergilloma, and non-tuberculous mycobacterial disease.",
+          "accept": [
+            "cancer",
+            "abscess",
+            "fungal",
+            "aspergilloma",
+            "mycobacter"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient treated for TB has completed therapy, but a residual cavity now contains a mobile round opacity. What should you consider?",
+          "a": "An aspergilloma (fungus ball) colonising the old TB cavity, which can present with recurrent or significant haemoptysis and needs its own specific assessment and management.",
+          "accept": [
+            "aspergilloma",
+            "fungus ball",
+            "aspergillus"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential beyond TB alone"
+        },
+        {
+          "id": "sequelae",
+          "text": "Recognises TB's own complications and sequelae as a separate consideration"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis (differential diagnosis and complications)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.tb.workup": {
+      "id": "skill.ix.tb.workup",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Confirming the organism",
+      "oneLine": "The shadow suggests it; the organism confirms it",
+      "why": "A chest radiograph can suggest TB strongly, but imaging alone cannot distinguish it reliably from several mimics. Understanding which test actually confirms the organism, and how quickly, is what prevents both a missed diagnosis and months of unnecessary treatment for the wrong disease.",
+      "body": "Group investigations by what they do: find the organism, image the disease, and check for factors that change management.",
+      "keyPoints": [
+        "SPUTUM MICROSCOPY for acid-fast bacilli is rapid and widely available, but has only moderate sensitivity; at least two samples are usually sent to improve the yield, and a negative smear does not exclude TB.",
+        "A RAPID MOLECULAR TEST (a nucleic acid amplification test, such as Xpert MTB/RIF or an equivalent, referred to in the Indian programme as CBNAAT) detects Mycobacterium tuberculosis DNA directly from sputum, is far more sensitive than smear, gives a result within hours rather than weeks, and simultaneously tests for rifampicin resistance, which is why it is now the preferred initial test wherever available.",
+        "SPUTUM CULTURE remains the reference standard for confirming viable organisms and for full drug-susceptibility testing, but takes weeks, so treatment decisions are not held up waiting for it once a rapid test or a strong clinical and radiographic picture supports starting therapy.",
+        "CHEST RADIOGRAPH supports the diagnosis, classically showing upper-zone patchy or nodular shadowing, cavitation, or, in old disease, fibrosis and calcification with volume loss, but the appearance is not specific enough to diagnose TB on its own.",
+        "The tuberculin skin test (Mantoux, using purified protein derivative) and interferon-gamma release assays detect prior exposure or infection, and are tools for diagnosing LATENT infection or supporting a diagnosis in children or extrapulmonary disease; they cannot distinguish latent from active disease and are not the primary test for a patient with a productive cough and an abnormal chest radiograph.",
+        "HIV testing should be offered to every patient newly diagnosed with TB, both because it changes management and because TB may be the first presentation of undiagnosed HIV infection.",
+        "For a patient unable to produce sputum, induced sputum or, where available, bronchoscopy with lavage can be used to obtain a sample."
+      ],
+      "pitfalls": [
+        "Diagnosing TB from a chest radiograph alone without any attempt at microbiological confirmation.",
+        "Excluding TB on the basis of a single negative sputum smear.",
+        "Using the Mantoux test to diagnose active disease in an adult with a productive cough, rather than as a test of infection or exposure.",
+        "Not offering an HIV test to a newly diagnosed TB patient."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a rapid molecular test such as Xpert MTB/RIF (CBNAAT) tell you that microscopy alone does not?",
+          "a": "It is more sensitive than smear microscopy, gives a result within hours, and simultaneously tests for rifampicin resistance.",
+          "accept": [
+            "sensitive",
+            "hours",
+            "rifampicin",
+            "resistance"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is sputum culture still sent even when a rapid molecular test is positive?",
+          "a": "Culture remains the reference standard, confirms viable organisms, and allows full drug-susceptibility testing beyond the single drug a rapid molecular test screens for.",
+          "accept": [
+            "reference standard",
+            "susceptibility",
+            "viable"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has a strongly suggestive chest radiograph and clinical picture, but the Mantoux test is negative. Does that exclude TB?",
+          "a": "No. The tuberculin skin test can be falsely negative, particularly in severe illness, malnutrition, immunosuppression or HIV infection, and it is a test of infection or exposure, not a diagnostic test for active disease. Pursue microbiological confirmation regardless of the result.",
+          "accept": [
+            "no",
+            "false negative",
+            "not diagnostic",
+            "exposure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis (diagnosis)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: pulmonary tuberculosis diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tb.diagnosis": {
+      "id": "skill.tb.diagnosis",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Diagnosis and case definition",
+      "oneLine": "Bacteriologically confirmed, or clinically diagnosed, and why the distinction matters",
+      "why": "TB programmes and clinicians both need a precise, shared language for how confident a diagnosis is, because it changes notification, contact tracing and how aggressively an alternative diagnosis should still be pursued if treatment does not go as expected.",
+      "body": "State whether the case is bacteriologically confirmed or clinically diagnosed, the site and extent, and the resistance status where known.",
+      "keyPoints": [
+        "BACTERIOLOGICALLY CONFIRMED TB: a biological specimen positive by smear microscopy, a rapid molecular test, or culture. This is the strongest form of diagnosis and the one that should be pursued actively before or alongside starting treatment wherever possible.",
+        "CLINICALLY DIAGNOSED TB: a patient who does not meet the bacteriological criteria but has been diagnosed with active TB by a clinician on the basis of a strongly suggestive clinical picture, X-ray abnormalities, or histology, and who has been decided to be treated with a full course of antituberculosis therapy. This category exists because a real proportion of true TB, particularly paucibacillary or extrapulmonary disease, is never microbiologically confirmed, but it should not become a shortcut around attempting confirmation first.",
+        "Presumptive TB is the category before either of the above is reached: a patient with symptoms and signs suggestive of TB, in whom investigation is in progress. Any cough of 2 weeks or more, with or without fever, weight loss, night sweats or haemoptysis, meets the threshold to investigate as presumptive TB.",
+        "State the site: pulmonary (involving the lung parenchyma) versus extrapulmonary, since a patient can have both, and the site changes the specimen needed for confirmation.",
+        "State the drug-resistance status where tested: drug-susceptible, rifampicin-resistant (which under most programmes triggers management as presumed multidrug-resistant TB pending fuller testing), or multidrug-resistant, since this changes the treatment regimen substantially.",
+        "A worked example: 'Bacteriologically confirmed pulmonary tuberculosis, right upper zone, CBNAAT positive, rifampicin sensitive, new patient with no history of prior treatment.'"
+      ],
+      "pitfalls": [
+        "Using 'clinically diagnosed' as a default rather than as a genuine fallback after a real attempt at bacteriological confirmation.",
+        "Omitting the resistance status when it has been tested, since it directly changes the regimen.",
+        "Not distinguishing a new patient from one with a history of previous treatment, which is essential for choosing the correct regimen and for considering resistance.",
+        "Forgetting that pulmonary and extrapulmonary disease can coexist in the same patient."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What distinguishes bacteriologically confirmed TB from clinically diagnosed TB?",
+          "a": "Bacteriological confirmation requires a positive specimen by smear, a rapid molecular test, or culture. Clinical diagnosis is made on a strongly suggestive picture, without a positive specimen, when a clinician decides to treat as active TB.",
+          "accept": [
+            "positive specimen",
+            "smear",
+            "molecular",
+            "culture",
+            "without"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What symptom duration defines a patient as 'presumptive TB' who should be investigated?",
+          "a": "Cough of two weeks or more, particularly with fever, weight loss, night sweats or haemoptysis.",
+          "accept": [
+            "two weeks",
+            "2 weeks"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why does the rifampicin-resistance result from a rapid molecular test change management immediately, before full drug-susceptibility testing is back?",
+          "a": "Rifampicin resistance is a strong marker for multidrug-resistant TB, so most programmes start the patient on a regimen for presumed drug-resistant disease straight away rather than waiting weeks for full culture-based susceptibility testing, since delaying appropriate treatment worsens outcomes and prolongs transmission.",
+          "accept": [
+            "mdr",
+            "multidrug",
+            "presumed",
+            "delay"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "confirmed_vs_clinical",
+          "text": "Distinguishes bacteriologically confirmed from clinically diagnosed TB"
+        },
+        {
+          "id": "site",
+          "text": "States the site, pulmonary versus extrapulmonary"
+        },
+        {
+          "id": "resistance",
+          "text": "States resistance status where tested"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis (case definitions)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: pulmonary tuberculosis case definitions"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.tb": {
+      "id": "skill.tx.tb",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing tuberculosis",
+      "oneLine": "Multidrug therapy for a defined duration, observed, notified, and followed to completion",
+      "why": "TB treatment fails less often because the drugs do not work and more often because treatment is interrupted, under-supervised, or the wrong regimen is used for resistant disease. Understanding the principles, rather than a specific dose, is what a clinician needs to supervise treatment safely and to recognise when something has gone wrong.",
+      "body": "Multidrug therapy for drug-susceptible disease, adherence support built into the programme, and a separate, longer, more complex pathway for drug-resistant disease.",
+      "keyPoints": [
+        "Standard treatment for drug-susceptible TB uses a combination of first-line drugs, typically isoniazid, rifampicin, pyrazinamide and ethambutol, given together in an intensive phase followed by a continuation phase with fewer drugs. Multiple drugs are used together specifically to prevent the emergence of resistance, which is why partial or single-drug treatment is dangerous.",
+        "Treatment in India is delivered under the National TB Elimination Programme, historically known as DOTS (directly observed treatment, short-course), which combines a standardised regimen with structured adherence support; the specific regimen, duration and monitoring schedule must be taken from the current national programme guideline, not memorised as a fixed number here.",
+        "TB is a NOTIFIABLE disease. Every diagnosed case must be notified to the public health system, which also triggers contact tracing among household and close contacts, some of whom may need investigation for active disease or preventive treatment for latent infection.",
+        "Directly observed or otherwise closely supervised treatment, with regular follow-up sputum smears to confirm bacteriological response, is central to preventing both treatment failure and the emergence of drug resistance through partial adherence.",
+        "Drug-resistant TB (rifampicin-resistant or multidrug-resistant disease) requires a longer, more complex regimen under specialist supervision, with its own monitoring requirements, and must never be treated with a standard first-line regimen.",
+        "Monitor for and counsel about drug-related adverse effects as part of routine follow-up, most importantly hepatotoxicity (with several of the first-line drugs) and visual disturbance (with ethambutol); the specific monitoring schedule and thresholds for action must follow the current programme protocol.",
+        "Alongside drug treatment: nutritional support, screening and management of comorbidity (particularly HIV and diabetes, both of which affect outcomes and may need coordinated treatment), infection control advice for the household during the infectious period, and adherence support addressing the practical and social barriers a patient faces."
+      ],
+      "pitfalls": [
+        "Using a single drug, or an incomplete combination, which is how resistance is created rather than prevented.",
+        "Not notifying a diagnosed case or not initiating contact tracing.",
+        "Treating drug-resistant disease with a standard first-line regimen.",
+        "Stopping treatment early once the patient feels better, rather than completing the full prescribed duration confirmed by the treating programme.",
+        "Overlooking hepatotoxicity or visual symptoms during follow-up because the patient is otherwise improving."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is TB treated with multiple drugs together rather than one at a time?",
+          "a": "To prevent the emergence of drug resistance. A single drug allows resistant organisms already present in a large bacterial population to be selected for and survive.",
+          "accept": [
+            "resistance",
+            "prevent",
+            "multiple",
+            "selected"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What are a clinician's two obligations beyond prescribing treatment once TB is diagnosed?",
+          "a": "Notify the case to the public health system, and initiate or support contact tracing among household and close contacts.",
+          "accept": [
+            "notify",
+            "contact tracing",
+            "public health"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient on standard first-line TB treatment develops jaundice. What do you do?",
+          "a": "Suspect drug-induced hepatotoxicity, stop the hepatotoxic drugs and assess liver function promptly, following your programme's specific protocol for reintroduction, rather than continuing treatment unchanged or stopping all drugs indefinitely without a plan to resume safely.",
+          "accept": [
+            "hepatotox",
+            "stop",
+            "liver",
+            "reintroduc"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Tuberculosis (treatment)"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: national TB programme principles"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle only. Specific drugs, doses, regimen duration, monitoring schedules and resistance-management pathways must be taken from the current national TB programme guideline in force at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}

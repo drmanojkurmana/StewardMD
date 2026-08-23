@@ -2751,6 +2751,762 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.rhd.rheumatic_fever": {
+      "id": "skill.hx.rhd.rheumatic_fever",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The rheumatic fever and prophylaxis history",
+      "oneLine": "A childhood sore throat and joint pains, then whether the injections actually happened",
+      "why": "This history is often the only place the aetiology of a valve lesion becomes clear, and the prophylaxis question is the only genuinely actionable item in the whole encounter. Both are routinely skipped because they require asking about events from years or decades ago that the patient may not immediately connect to today's breathlessness.",
+      "asks": [
+        {
+          "text": "As a child, did you ever have a fever together with painful, swollen joints that moved from one joint to another?"
+        },
+        {
+          "text": "Was there ever a rash, or jerky, uncontrolled movements, around that time?"
+        },
+        {
+          "text": "Did anyone ever tell you that you had a heart murmur, and if so, at what age was it first found?"
+        },
+        {
+          "text": "Have you ever been told you need a monthly (or three-weekly) injection to protect your heart? Are you still getting it?"
+        },
+        {
+          "text": "Since then, have you had any further episodes of sore throat with fever and joint pains?"
+        },
+        {
+          "text": "Any recent dental work, tooth extraction, or other procedure, and any fever since?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "What to listen for in a vague childhood story",
+          "body": "Most adult patients will not say 'I had rheumatic fever'. They will describe a fever with joint pains that moved around, sometimes with a rash or clumsiness that was never properly explained, usually in childhood or adolescence, usually never actually seen by a doctor.",
+          "note": "A migratory pattern, one joint settling as another flares, is the detail that most reliably separates this from a simple viral arthralgia."
+        },
+        {
+          "heading": "Why the prophylaxis question changes the plan",
+          "body": "A patient already diagnosed and on regular benzathine penicillin needs her regimen reviewed and continued. A patient who was told once, years ago, and never followed up needs prophylaxis restarted today, which is the single most correctable intervention in the whole visit.",
+          "note": "Ask HOW they take it, not just WHETHER: an oral regimen taken irregularly is a different problem from an injectable regimen the patient simply stopped attending for."
+        }
+      ],
+      "pitfalls": [
+        "Asking only 'did you have rheumatic fever' and accepting a 'no' without describing the symptom pattern in plain language.",
+        "Never asking specifically about prophylaxis adherence, which is the one thing you can fix today.",
+        "Forgetting to ask about recent dental or surgical procedures and subsequent fever, which raises endocarditis on an already-damaged valve."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What childhood symptom pattern should make you ask about rheumatic fever, even if the patient does not use that name?",
+          "a": "A fever with painful, swollen joints that move from one joint to another (migratory polyarthritis).",
+          "accept": [
+            "migrat",
+            "joint",
+            "fever"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is asking about prophylaxis adherence more useful than simply asking whether the patient is 'on treatment'?",
+          "a": "Because a patient can be nominally prescribed prophylaxis while actually missing most doses; adherence, not prescription, is what has been protecting the valve, and lapsed adherence is directly correctable.",
+          "accept": [
+            "adherence",
+            "missed",
+            "actually"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with known rheumatic mitral stenosis had a tooth extraction two weeks ago and now has fever. What must you specifically ask about and examine for?",
+          "a": "Infective endocarditis on the already-damaged valve: ask about the fever pattern, night sweats and weight loss, and examine for a changing murmur, splinter haemorrhages, Osler's nodes, Janeway lesions and splenomegaly.",
+          "accept": [
+            "endocarditis",
+            "murmur",
+            "splinter"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "throat",
+          "text": "Describes the migratory joint/fever pattern in plain language rather than only naming rheumatic fever",
+          "critical": true
+        },
+        {
+          "id": "prophylaxis",
+          "text": "Asks specifically about ongoing secondary prophylaxis and adherence"
+        },
+        {
+          "id": "recurrence",
+          "text": "Screens for further episodes and for recent procedures raising endocarditis risk"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: rheumatic fever history"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ccf.precipitants": {
+      "id": "skill.hx.ccf.precipitants",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "What tipped a stable patient into decompensation",
+      "oneLine": "Diet, drugs, infection, arrhythmia, ischaemia: the short, deliberate list you actually ask about",
+      "why": "A stable heart failure patient rarely decompensates for no reason. Finding the trigger is not an academic exercise, treating it is often as important as treating the congestion itself, and missing it means the same admission happens again.",
+      "asks": [
+        {
+          "text": "Have you missed any of your regular tablets recently, particularly your water tablet or your heart tablets? How many days?"
+        },
+        {
+          "text": "Any change in your diet lately: a celebration, eating out, extra salt, pickles or papad?"
+        },
+        {
+          "text": "Have you taken any new tablets, including over-the-counter painkillers or anti-inflammatories?"
+        },
+        {
+          "text": "Any fever, cough, or symptoms of an infection recently?"
+        },
+        {
+          "text": "Any new palpitations, or an irregular heartbeat?"
+        },
+        {
+          "text": "Any new or worsening chest pain?"
+        },
+        {
+          "text": "For a woman: could you be pregnant, or have you recently delivered?"
+        },
+        {
+          "text": "Any new or worsening kidney or thyroid problem that you know of?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Cardiac precipitants, ask about these first",
+          "points": [
+            {
+              "t": "Dietary or medication non-adherence.",
+              "d": "The single commonest precipitant. Ask specifically and non-judgementally; patients often under-report this unless asked directly."
+            },
+            {
+              "t": "A new arrhythmia, especially atrial fibrillation.",
+              "d": "Loss of the atrial contribution to filling and a fast ventricular rate both reduce cardiac output."
+            },
+            {
+              "t": "Myocardial ischaemia or infarction.",
+              "d": "A new event can decompensate a previously stable heart, sometimes without dramatic pain."
+            }
+          ],
+          "note": "These three account for most decompensations and are the ones a clinician should rule out by reflex."
+        },
+        {
+          "heading": "Systemic precipitants, easy to miss because they sit outside the heart",
+          "points": [
+            {
+              "t": "Infection.",
+              "d": "Increases metabolic demand and heart rate, and can precipitate decompensation even when mild."
+            },
+            {
+              "t": "A new drug.",
+              "d": "NSAIDs cause sodium and fluid retention; some calcium channel blockers, corticosteroids and thiazolidinediones can also precipitate or worsen congestion."
+            },
+            {
+              "t": "Uncontrolled hypertension.",
+              "d": "A sudden rise in afterload can precipitate acute pulmonary oedema even in a previously compensated ventricle."
+            },
+            {
+              "t": "Anaemia, thyroid disease, renal deterioration and pregnancy.",
+              "d": "Each increases demand on, or fluid retention by, an already-limited heart."
+            }
+          ],
+          "note": "Asking this list takes under two minutes and regularly changes both the immediate management and the discharge plan."
+        }
+      ],
+      "pitfalls": [
+        "Treating the congestion without ever asking what triggered this particular admission.",
+        "Accepting 'I take my tablets' without asking specifically about the last two weeks.",
+        "Forgetting that a common over-the-counter painkiller can be the whole explanation."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three common precipitants of acute decompensation in a previously stable heart failure patient.",
+          "a": "Dietary or medication non-adherence, a new arrhythmia, infection, myocardial ischaemia, or a new drug such as an NSAID.",
+          "accept": [
+            "non-adherence",
+            "arrhythmia",
+            "infection",
+            "ischaemia",
+            "nsaid"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why can an NSAID precipitate heart failure decompensation?",
+          "a": "NSAIDs cause sodium and fluid retention and can reduce renal perfusion, both of which promote congestion in a patient with limited cardiac reserve.",
+          "accept": [
+            "sodium",
+            "fluid retention",
+            "renal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is finding the precipitant as important as treating the congestion itself?",
+          "a": "Because treating congestion without addressing the trigger leaves the same vulnerability in place, and the patient is likely to decompensate again in the same way; identifying and correcting the precipitant is part of preventing readmission.",
+          "accept": [
+            "readmission",
+            "recur",
+            "same",
+            "prevent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "screen",
+          "text": "Systematically screens the short precipitant list rather than asking only about symptoms",
+          "critical": true
+        },
+        {
+          "id": "adherence",
+          "text": "Specifically checks recent medication and dietary adherence"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: precipitants of decompensated heart failure"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: precipitating factors"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ihd.riskfactors": {
+      "id": "skill.hx.ihd.riskfactors",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The coronary risk factor history",
+      "oneLine": "The modifiable and non-modifiable factors, asked by name, not assumed from age",
+      "why": "Pretest probability in chest pain is built almost entirely from the risk factor profile, and every one of these factors is also a treatment target once the diagnosis is made. Asking them by name, rather than a general 'any health problems', is what makes both the diagnosis and the secondary prevention plan complete.",
+      "asks": [
+        {
+          "text": "Do you have diabetes, and if so, for how long and how well controlled?"
+        },
+        {
+          "text": "Do you have high blood pressure? For how long, and are you taking your tablets regularly?"
+        },
+        {
+          "text": "Has your cholesterol ever been checked, and were you told it was high?"
+        },
+        {
+          "text": "Do you smoke, or have you ever smoked? How many, and for how long?"
+        },
+        {
+          "text": "Has anyone in your immediate family had a heart attack or sudden cardiac death, and at what age?"
+        },
+        {
+          "text": "Have you had a heart attack, angioplasty, stent, or bypass surgery before?"
+        },
+        {
+          "text": "How much do you exercise, and what does your usual diet look like?"
+        },
+        {
+          "text": "What is your weight and waist size, roughly, and has that changed recently?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why age at family history matters, not just its presence",
+          "body": "A family history only counts as a strong risk factor when it is PREMATURE: generally a first-degree relative affected before about 55 in a man or 65 in a woman. 'My father had a heart attack at 78' carries much less weight than 'my father had a heart attack at 48'.",
+          "note": "Ask the age specifically. Patients volunteer the fact readily but rarely the age unless asked."
+        },
+        {
+          "heading": "Non-modifiable versus modifiable, and why the split matters clinically",
+          "points": [
+            {
+              "t": "Non-modifiable.",
+              "d": "Age, male sex (or postmenopausal status in women), and family history of premature disease. These raise pretest probability but are not treatment targets themselves."
+            },
+            {
+              "t": "Modifiable.",
+              "d": "Diabetes, hypertension, dyslipidaemia, smoking, obesity, sedentary lifestyle and diet. Every one of these becomes a secondary prevention target the moment the diagnosis is confirmed."
+            }
+          ],
+          "note": "Documenting the modifiable factors is not just diagnostic bookkeeping, it is the first draft of the treatment plan."
+        }
+      ],
+      "pitfalls": [
+        "Asking about family history without asking the age it occurred.",
+        "Accepting 'my sugar is fine' without asking when it was last actually checked.",
+        "Treating risk factor history as background detail rather than the first draft of the secondary prevention plan."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four modifiable risk factors for ischaemic heart disease.",
+          "a": "Diabetes, hypertension, dyslipidaemia, smoking, obesity, and a sedentary lifestyle.",
+          "accept": [
+            "diabetes",
+            "hypertension",
+            "dyslipid",
+            "cholesterol",
+            "smoking",
+            "obesity"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "At what age of onset does a family history of coronary disease in a first-degree relative count as 'premature'?",
+          "a": "Roughly before 55 in a man, or before 65 in a woman.",
+          "accept": [
+            "55",
+            "65"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does asking risk factors 'by name' matter more here than in most other histories?",
+          "a": "Because each named factor both raises or lowers pretest probability for the current presentation and independently becomes a specific secondary prevention target once the diagnosis is confirmed, so a vague general question loses information that changes two separate downstream decisions.",
+          "accept": [
+            "pretest",
+            "prevention",
+            "target"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "byname",
+          "text": "Asks each major risk factor explicitly by name",
+          "critical": true
+        },
+        {
+          "id": "familyage",
+          "text": "Establishes the age of onset in a positive family history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: coronary risk factor history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Risk factors for coronary heart disease"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ie.history": {
+      "id": "skill.hx.ie.history",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The infective endocarditis history",
+      "oneLine": "A known valve, a recent portal of entry, and the fever pattern that has been going on longer than it should",
+      "why": "This history is where the diagnosis is usually first suspected, days before any test confirms it. Missing the portal-of-entry question is the single commonest reason the diagnosis is delayed.",
+      "asks": [
+        {
+          "text": "Do you have a known heart murmur, valve problem, or a prosthetic heart valve?"
+        },
+        {
+          "text": "How has your fever behaved: continuous, or coming and going, with chills or drenching sweats?"
+        },
+        {
+          "text": "Any dental work, tooth extraction, or ongoing dental problems in the last few months?"
+        },
+        {
+          "text": "Do you inject any drugs, or have you had any recent procedure, catheter, piercing or tattoo?"
+        },
+        {
+          "text": "Any weight loss, loss of appetite, or generalised joint and muscle aches?"
+        },
+        {
+          "text": "Any new skin spots, painful lumps on your fingers or toes, or changes in your vision?"
+        },
+        {
+          "text": "Any new weakness, numbness, or difficulty speaking, which could suggest a stroke from an embolus?"
+        },
+        {
+          "text": "Any breathlessness that might suggest the valve itself is now failing?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The portal of entry is a question you must ask, not wait to be told",
+          "body": "Patients rarely connect a tooth extraction three weeks ago with a fever today. Ask directly about dental work, injecting drug use, and any recent invasive procedure, since finding the portal both supports the diagnosis and identifies what needs addressing afterward.",
+          "note": "In practice, no portal of entry is found in a substantial proportion of cases, so a negative answer does not argue against the diagnosis; it simply means you did not find one this time."
+        },
+        {
+          "heading": "Read the fever, don't just record it",
+          "body": "A subacute course, low-grade or intermittent fever over weeks with malaise, weight loss and night sweats, points towards a less virulent organism on an already-damaged valve. A more acute, high, sustained fever with a rapidly unwell patient points towards a more virulent organism, often on a previously normal valve."
+        }
+      ],
+      "pitfalls": [
+        "Never asking specifically about dental work or intravenous drug use.",
+        "Treating a negative portal-of-entry history as evidence against the diagnosis.",
+        "Not asking about embolic symptoms (weakness, vision change, abdominal or flank pain) because the presenting complaint was simply 'fever'."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two classic portals of entry you should always ask about.",
+          "a": "Dental work or extraction, and intravenous drug use (or another recent invasive procedure or catheter).",
+          "accept": [
+            "dental",
+            "iv drug",
+            "catheter",
+            "procedure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What fever pattern, together with weeks of malaise and weight loss, suggests a subacute presentation?",
+          "a": "A low-grade, intermittent fever over an extended period, typically with a less virulent organism on an already-damaged valve.",
+          "accept": [
+            "low-grade",
+            "intermittent",
+            "weeks"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has fever and a known heart murmur but denies any dental work, drug use or recent procedure. Does this make endocarditis unlikely?",
+          "a": "No. A portal of entry is not identified in a substantial proportion of genuine cases, so its absence does not argue against the diagnosis; the fever and murmur combination still needs to be actively investigated.",
+          "accept": [
+            "no",
+            "not unlikely",
+            "still investigate"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "portal",
+          "text": "Actively asks about dental work, IV drug use and recent procedures",
+          "critical": true
+        },
+        {
+          "id": "feverpattern",
+          "text": "Characterises the fever pattern and its duration"
+        },
+        {
+          "id": "embolic",
+          "text": "Screens for embolic and immunologic symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.ie.stigmata": {
+      "id": "skill.exam.ie.stigmata",
+      "kind": "general_exam",
+      "system": "cardiovascular",
+      "title": "The peripheral stigmata of infective endocarditis",
+      "oneLine": "Splinter haemorrhages, Osler's nodes, Janeway lesions and Roth spots, and which mechanism produces each",
+      "why": "These findings are frequently taught as a list to memorise for an exam and then never actually looked for on the ward. Each one is genuinely a bedside sign of active endocarditis, and each is either embolic or immunologic in origin, which is the detail that makes them memorable rather than arbitrary.",
+      "steps": [
+        {
+          "text": "Examine both hands closely: the fingertip pulps for tender nodules, the nail beds under good light for linear haemorrhages, and the palms for small erythematous macules."
+        },
+        {
+          "text": "Examine the conjunctivae for petechiae and any subconjunctival haemorrhage."
+        },
+        {
+          "text": "Perform fundoscopy specifically looking for retinal haemorrhages with a pale centre."
+        },
+        {
+          "text": "Palpate the abdomen for splenomegaly."
+        },
+        {
+          "text": "Re-examine the fingers for clubbing, which develops later, in a more prolonged, subacute course."
+        }
+      ],
+      "normal": "No splinter haemorrhages, no tender nodules on the pulps, no palmar or plantar macules, no conjunctival petechiae, no retinal changes, no splenomegaly, no clubbing.",
+      "abnormal": "Splinter haemorrhages under the nails, tender erythematous nodules on the finger or toe pulps (Osler's nodes), painless erythematous or haemorrhagic macules on the palms or soles (Janeway lesions), retinal haemorrhages with a pale centre (Roth spots), conjunctival petechiae, splenomegaly, or clubbing.",
+      "significance": "Splinter haemorrhages, Janeway lesions and splenomegaly are embolic phenomena, from tiny fragments of the vegetation lodging distally. Osler's nodes, Roth spots and conjunctival petechiae are immunologic phenomena, from circulating immune complexes depositing in small vessels. Finding any of these in a febrile patient, especially with a known or changing murmur, should move endocarditis to the top of the differential.",
+      "teach": [
+        {
+          "heading": "Embolic versus immunologic, and why the distinction is worth keeping",
+          "table": {
+            "cols": [
+              "Embolic phenomena",
+              "Immunologic phenomena"
+            ],
+            "rows": [
+              [
+                "Splinter haemorrhages, Janeway lesions, splenomegaly, and, systemically, stroke or renal/splenic infarcts",
+                "Osler's nodes, Roth spots, conjunctival petechiae, and glomerulonephritis"
+              ]
+            ]
+          },
+          "note": "Osler's nodes are classically described as tender; Janeway lesions are classically described as painless. That single difference, tender versus painless, is the fastest way to tell them apart at the bedside."
+        },
+        {
+          "heading": "Where to actually look",
+          "points": [
+            {
+              "t": "Hands and nails.",
+              "d": "Splinter haemorrhages under the nail beds, and the finger pulps for Osler's nodes."
+            },
+            {
+              "t": "Palms and soles.",
+              "d": "Janeway lesions - flat, non-tender, and easy to miss unless you look directly."
+            },
+            {
+              "t": "Eyes.",
+              "d": "Conjunctival petechiae on the lower lid, and fundoscopy for Roth spots if you have an ophthalmoscope."
+            },
+            {
+              "t": "Urine and vitals.",
+              "d": "Dipstick for haematuria, and a fever chart, since the immunologic and embolic signs both sit alongside evidence of the underlying infective process."
+            }
+          ],
+          "note": "None of these signs is sensitive on its own. Finding two or more in a febrile patient with a murmur is what should prompt blood cultures and an echocardiogram."
+        }
+      ],
+      "pitfalls": [
+        "Examining only the hands and skipping fundoscopy and the abdomen.",
+        "Confusing Osler's nodes with Janeway lesions; the tender-versus-painless distinction is the key.",
+        "Treating the absence of stigmata as evidence against the diagnosis; they are far from universally present, especially early in the illness.",
+        "Forgetting that splinter haemorrhages have several non-infective causes, including trauma, and are not specific on their own."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two peripheral stigmata of infective endocarditis and where you would look for each.",
+          "a": "Splinter haemorrhages under the nails, and Osler's nodes on the finger or toe pulps (or Janeway lesions on the palms/soles, or Roth spots on fundoscopy).",
+          "accept": [
+            "splinter",
+            "osler",
+            "janeway",
+            "roth"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What is the key clinical difference between an Osler's node and a Janeway lesion?",
+          "a": "Osler's nodes are tender; Janeway lesions are painless.",
+          "accept": [
+            "tender",
+            "painless"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Classify Osler's nodes, Roth spots, splinter haemorrhages and Janeway lesions as embolic or immunologic.",
+          "a": "Splinter haemorrhages and Janeway lesions are embolic, from vegetation fragments; Osler's nodes and Roth spots are immunologic, from circulating immune complexes.",
+          "accept": [
+            "splinter embolic",
+            "janeway embolic",
+            "osler immunologic",
+            "roth immunologic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hands",
+          "text": "Examines the hands systematically for nodules and splinter haemorrhages"
+        },
+        {
+          "id": "fundoscopy",
+          "text": "Performs or documents fundoscopy specifically for Roth spots"
+        },
+        {
+          "id": "distinguish",
+          "text": "Correctly distinguishes Osler's nodes from Janeway lesions"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: peripheral signs of endocarditis"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: peripheral signs"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: infective endocarditis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.chd.history": {
+      "id": "skill.hx.chd.history",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The congenital heart disease history",
+      "oneLine": "Growth, effort tolerance, cyanotic spells, and the antenatal story",
+      "why": "In a child, growth and effort tolerance carry the diagnostic weight that breathlessness grading carries in an adult, and both parent and child need age-appropriate versions of the same questions. Missing the antenatal history and the family history means missing a clue to an associated syndrome that can point straight at the specific lesion.",
+      "asks": [
+        {
+          "text": "How has the child's growth been: is weight gain and height tracking normally on the growth chart?"
+        },
+        {
+          "text": "As a baby, did feeding take a long time, or did the baby get tired, sweaty or breathless while feeding?"
+        },
+        {
+          "text": "How is the child's effort tolerance compared to other children the same age: running, playing, keeping up?"
+        },
+        {
+          "text": "Has the child had recurrent chest infections, more than would be expected for age?"
+        },
+        {
+          "text": "Has anyone ever noticed the child turning blue, especially around the lips, or during crying or feeding?"
+        },
+        {
+          "text": "Does the child ever squat down suddenly after exertion?"
+        },
+        {
+          "text": "Was the pregnancy uneventful: any infection (particularly rubella), medication, or maternal illness such as diabetes during it?"
+        },
+        {
+          "text": "Is there any family history of congenital heart disease, or a known genetic syndrome?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Growth is the paediatric equivalent of grading breathlessness",
+          "body": "A significant left-to-right shunt increases metabolic demand and can cause difficulty feeding in infancy, from breathlessness and fatigue during feeds, leading to poor weight gain. Ask specifically about feeding as an infant, not just current appetite.",
+          "note": "A well-grown, asymptomatic child with an incidentally found murmur is itself useful evidence that the lesion is small, exactly as normal growth argued for a small VSD in the worked case."
+        },
+        {
+          "heading": "Squatting is a specific clue, not a general one",
+          "body": "Squatting after exertion is described classically in cyanotic lesions such as tetralogy of Fallot: it increases systemic vascular resistance, which transiently reduces the right-to-left shunt and improves oxygenation. Its presence points away from a simple acyanotic shunt and towards a cyanotic lesion instead.",
+          "note": "Absence of squatting in an otherwise well child is a genuine negative finding worth documenting, not just a box to tick."
+        }
+      ],
+      "pitfalls": [
+        "Asking about current appetite instead of feeding difficulty as an infant, which is the more specific historical clue.",
+        "Never asking about squatting, cyanotic spells, or antenatal exposures.",
+        "Treating an asymptomatic incidental murmur as needing no history at all, when growth and effort tolerance still need to be actively established."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why does poor weight gain matter in an infant with a suspected congenital heart lesion?",
+          "a": "A significant left-to-right shunt increases metabolic demand and can cause feeding difficulty from breathlessness and fatigue, leading to failure to thrive; poor growth is a genuine marker of a haemodynamically significant lesion.",
+          "accept": [
+            "metabolic demand",
+            "feeding",
+            "significant lesion"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What does squatting after exertion classically suggest?",
+          "a": "A cyanotic lesion, classically tetralogy of Fallot, since squatting increases systemic vascular resistance and transiently reduces the right-to-left shunt.",
+          "accept": [
+            "cyanotic",
+            "tetralogy",
+            "fallot"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is the antenatal history relevant to a suspected congenital heart lesion?",
+          "a": "Certain maternal exposures, particularly rubella infection, and certain maternal conditions such as diabetes, are recognised associations with specific congenital heart lesions, so the antenatal history can raise or narrow suspicion before any examination finding.",
+          "accept": [
+            "rubella",
+            "maternal",
+            "diabetes",
+            "exposure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "growth",
+          "text": "Establishes growth and infant feeding history",
+          "critical": true
+        },
+        {
+          "id": "cyanoticspells",
+          "text": "Screens for cyanosis and squatting"
+        },
+        {
+          "id": "antenatal",
+          "text": "Asks about the antenatal and family history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: congenital heart disease history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: history in congenital heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

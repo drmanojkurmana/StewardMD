@@ -1,0 +1,506 @@
+{
+  "_comment": "Parkinsonism is a SHORT CASE: a movement-disorder syndrome examined mostly through observation (posture, tremor, gait) rather than a full systemic workup. Structured like anaemia.json: no systemic_exam/past_personal_drug_family/summary/treatment chapters. Built almost entirely on the shared skill.exam.neuro.tone_power and skill.exam.neuro.gait, with emphasis overlays, plus the genuinely new content: tremor character, bradykinesia, and the secondary-versus-idiopathic distinction.",
+  "id": "parkinsonism",
+  "name": "Parkinsonism",
+  "fullName": "Parkinsonism (a short case)",
+  "system": "neurology",
+  "kbRef": "parkinsons_disease",
+  "oneLine": "Rest tremor, rigidity and bradykinesia, and the drug chart that can explain all three",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "The triad, and why it is always asymmetrical at first",
+      "skills": [
+        "skill.pd.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "The tremor's own character, and the drug chart",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.pd"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical presentation is a tremor of one hand at rest, noticed first by a family member or when the limb is relaxed, together with a vague sense of slowness or stiffness that has crept in over months to years."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General and movement examination",
+      "blurb": "Watch before you touch: the face and the posture say most of it",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.gait"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for the mask-like face with reduced blinking, a stooped posture, and reduced spontaneous movement before the patient has said a word. Watch the hands at rest in the lap for a pill-rolling tremor while you are still taking the history."
+        },
+        "skill.gen.vitals": {
+          "expect": "Check the blood pressure lying and then standing. A significant drop on standing (orthostatic hypotension) is a common non-motor feature of Parkinson's disease and is also the red flag that first raises multiple system atrophy instead."
+        },
+        "skill.exam.neuro.tone_power": {
+          "expect": "Expect 'lead-pipe' rigidity, increased tone through the WHOLE range of passive movement, unlike the tone of an upper motor neurone lesion which peaks and then gives way. When a tremor is superimposed on this rigidity it becomes ratchet-like, cogwheel rigidity, most easily felt at the wrist while distracting the patient with movement of the other limb. Power itself is normal; this is a movement disorder, not a weakness."
+        },
+        "skill.exam.neuro.gait": {
+          "expect": "Expect a stooped, shuffling, festinant gait: small, flat-footed steps that hurry to catch up with the forward-tipped centre of gravity, reduced arm swing (often asymmetrical, worse on the more affected side), difficulty initiating the first step, and freezing at doorways or turns. Retropulsion, small involuntary backward steps when gently pushed from in front while stopped, is a specific test worth doing deliberately."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "The triad, plus the sign that only appears under pressure",
+      "skills": [
+        "skill.pd.signs"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Idiopathic, secondary, or a Parkinson-plus syndrome",
+      "blurb": "The same tremor, three very different causes",
+      "skills": [
+        "skill.pd.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "This is a clinical diagnosis; investigations look for the exceptions",
+      "skills": [
+        "skill.ix.pd.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Naming it, and staging how far it has progressed",
+      "skills": [
+        "skill.pd.diagnosis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.pd.exam",
+        "title": "Examine this patient's gait and tremor",
+        "seconds": 300,
+        "task": "This 68-year-old man's family have noticed a tremor in his right hand and that he has become slower over the last year. Examine him and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.appearance",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.gait"
+        ],
+        "examinerQuestions": [
+          "How would you deliberately bring out cogwheel rigidity if it is not obvious at rest?",
+          "Name two features that would make you suspect a Parkinson-plus syndrome rather than idiopathic Parkinson's disease.",
+          "This patient started a new antiemetic three months before the tremor began. Does that change your thinking?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.pd.basics",
+      "skill.exam.neuro.tone_power",
+      "skill.exam.neuro.gait",
+      "skill.pd.signs",
+      "skill.pd.differential"
+    ]
+  },
+  "skills": {
+    "skill.pd.basics": {
+      "id": "skill.pd.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What parkinsonism is",
+      "oneLine": "A syndrome first, a disease second: idiopathic Parkinson's is only one cause of it",
+      "why": "Students routinely use 'Parkinson's disease' and 'parkinsonism' interchangeably. Parkinsonism is the clinical syndrome; idiopathic Parkinson's disease is its single most common cause, but treating every parkinsonian patient as automatically having Parkinson's disease is how a reversible drug-induced case, or a more aggressive Parkinson-plus syndrome, gets missed.",
+      "body": "Parkinsonism is a clinical syndrome of bradykinesia plus at least one of rest tremor or rigidity, with the classic gait and postural change that follow from them. It has many causes; idiopathic Parkinson's disease is the most common.",
+      "keyPoints": [
+        "The core motor features are bradykinesia (slowness and poverty of movement), rest tremor, rigidity, and postural instability with a characteristic gait.",
+        "Onset in idiopathic Parkinson's disease is always ASYMMETRICAL, one side affected more than, and usually before, the other, becoming bilateral only within a year or so; a patient with symmetrical onset from the very start should make you think of a secondary cause or a Parkinson-plus syndrome instead.",
+        "Non-motor features are just as much a part of the disease as the tremor: autonomic dysfunction (orthostatic hypotension, constipation, urinary symptoms), neuropsychiatric features (depression, anxiety, later dementia), sleep disorders, and a reduced sense of smell that can precede the motor signs by years.",
+        "Reduced sense of smell (hyposmia) preceding the motor signs is a genuinely useful early clue and is worth asking about specifically."
+      ],
+      "pitfalls": [
+        "Using 'parkinsonism' and 'Parkinson's disease' as synonyms.",
+        "Assuming symmetrical-onset tremor at presentation is still typical idiopathic disease.",
+        "Treating the non-motor features as incidental rather than as part of the same diagnosis, and so missing the autonomic and psychiatric burden of the disease."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the core motor features of the parkinsonian syndrome.",
+          "a": "Bradykinesia, rest tremor, rigidity, and postural instability with a characteristic gait.",
+          "accept": [
+            "bradykinesia",
+            "tremor",
+            "rigidity",
+            "postural"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Is idiopathic Parkinson's disease typically symmetrical or asymmetrical at onset?",
+          "a": "Asymmetrical, one side more affected than the other, becoming bilateral within about a year.",
+          "accept": [
+            "asymmetric"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Give two non-motor features of Parkinson's disease that can precede the motor signs.",
+          "a": "Reduced sense of smell (hyposmia) and sleep disturbance (such as REM sleep behaviour disorder) are both recognised to precede the motor signs, sometimes by years.",
+          "accept": [
+            "hyposmia",
+            "smell",
+            "sleep"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: parkinsonism, definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to Parkinson's disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pd.signs": {
+      "id": "skill.pd.signs",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "The parkinsonian picture",
+      "oneLine": "Four signs from one problem, plus the paradox that briefly cancels all of them",
+      "why": "Recognising that rigidity, bradykinesia, the mask face and the shuffling gait are different expressions of the same basal ganglia dysfunction, rather than an unlinked checklist, is what lets a student recognise the syndrome quickly and explain it coherently in a viva.",
+      "body": "Put the bedside findings together as one syndrome, and know the specific bedside signs that go beyond the basic triad.",
+      "keyPoints": [
+        "Myerson's sign: repetitive tapping over the glabella at about 2 Hz produces a SUSTAINED blink response in parkinsonism, where a normal subject habituates and stops blinking after the first few taps.",
+        "Kinesia paradoxa: a striking, well-documented phenomenon in which a patient who is usually markedly bradykinetic or even seemingly frozen can, under sudden need or strong emotional stimulus, briefly walk or even run normally. It illustrates that the problem is one of movement INITIATION rather than a fixed loss of the ability to move.",
+        "Widened palpebral fissures, infrequent blinking, and a fixed, mask-like facial expression (hypomimia) are part of the same bradykinesia affecting facial musculature.",
+        "The postural change, a stooped, flexed posture of the trunk, neck and limbs, together with reduced righting reflexes, is what underlies both the festinant gait and the tendency to fall forward.",
+        "None of these signs alone makes the diagnosis; the combination, together with asymmetry at onset, is what does."
+      ],
+      "pitfalls": [
+        "Testing the glabellar tap only once or twice, rather than repetitively, and so missing the failure to habituate.",
+        "Interpreting kinesia paradoxa as evidence the patient is exaggerating their disability, when it is a recognised feature of the disease itself.",
+        "Describing the face as 'flat affect' without recognising it as hypomimia, a motor sign, not a mood sign."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is Myerson's sign?",
+          "a": "A sustained blink response to repetitive glabellar tapping, where a normal subject habituates and stops blinking after a few taps.",
+          "accept": [
+            "sustained blink",
+            "glabellar",
+            "myerson"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Describe kinesia paradoxa and what it tells you about the underlying problem.",
+          "a": "A patient who is usually markedly bradykinetic can, under sudden need or emotional stress, briefly move normally, walking or even running. It shows the deficit is fundamentally one of movement initiation rather than a fixed structural inability to move.",
+          "accept": [
+            "brief",
+            "sudden",
+            "initiation",
+            "paradox"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "myerson",
+          "text": "Correctly elicits and interprets the glabellar tap"
+        },
+        {
+          "id": "syndrome",
+          "text": "Links rigidity, bradykinesia, facial and postural findings as one syndrome rather than a list"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: parkinsonian bedside signs"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: Parkinson's disease, clinical features"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pd.differential": {
+      "id": "skill.pd.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Idiopathic, secondary, or Parkinson-plus",
+      "oneLine": "The tremor looks the same; the red flags that separate the three do not",
+      "why": "Idiopathic Parkinson's disease, a reversible secondary parkinsonism, and a Parkinson-plus syndrome all present with the same core triad but have entirely different prognoses and treatment responses, and the discriminating features are specific, examinable red flags rather than a gut feeling.",
+      "body": "Screen for secondary causes first, since some are reversible, then screen for Parkinson-plus red flags, since they change the prognosis and the treatment response even though nothing is reversible.",
+      "keyPoints": [
+        "Secondary (reversible or treatable) parkinsonism: dopamine receptor blocking drugs (antiemetics, antipsychotics), vascular (multi-infarct) parkinsonism, normal pressure hydrocephalus, Wilson's disease in a young patient, and toxin exposure. A drug history and a careful search for a gait-cognition-incontinence triad (hydrocephalus) or a young age of onset (Wilson's) are the key screens.",
+        "Progressive supranuclear palsy: early falls, restricted downward gaze, and a characteristic startled or 'reptilian' stare; a poor or absent response to standard dopaminergic therapy is typical.",
+        "Multiple system atrophy: parkinsonism together with early, prominent autonomic failure (marked orthostatic hypotension, urinary symptoms) and/or cerebellar signs.",
+        "Corticobasal degeneration: markedly asymmetric, with apraxia, cortical sensory loss, or an alien-limb phenomenon in one hand.",
+        "Dementia with Lewy bodies: early, prominent visual hallucinations and cognitive fluctuation, with dementia appearing early rather than late as it can in longstanding idiopathic disease.",
+        "Idiopathic Parkinson's disease remains the default once these are screened for and excluded: asymmetric onset, a classic rest tremor, and a good, sustained response to dopaminergic treatment."
+      ],
+      "pitfalls": [
+        "Not screening the drug history before assuming a new parkinsonism is idiopathic.",
+        "Missing early falls or an eye-movement abnormality that would suggest progressive supranuclear palsy.",
+        "Attributing early, severe autonomic failure or hallucinations to 'just Parkinson's' rather than considering multiple system atrophy or Lewy body disease specifically.",
+        "Forgetting Wilson's disease in a young patient with any new movement disorder."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name two features that would raise suspicion of a Parkinson-plus syndrome rather than idiopathic Parkinson's disease.",
+          "a": "Early falls with restricted downward gaze (progressive supranuclear palsy); early, prominent autonomic failure or cerebellar signs (multiple system atrophy); marked early asymmetry with apraxia or alien-limb phenomenon (corticobasal degeneration); or early hallucinations and cognitive fluctuation (dementia with Lewy bodies).",
+          "accept": [
+            "falls",
+            "gaze",
+            "autonomic",
+            "cerebellar",
+            "hallucinations",
+            "apraxia"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 70-year-old with new gait difficulty, urinary incontinence and mild cognitive slowing. What treatable cause should be actively considered before labelling this Parkinson's disease?",
+          "a": "Normal pressure hydrocephalus, given the classic triad of gait disturbance, urinary incontinence and cognitive impairment.",
+          "accept": [
+            "hydrocephalus",
+            "normal pressure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "secondary",
+          "text": "Screens for a reversible secondary cause, especially drugs",
+          "critical": true
+        },
+        {
+          "id": "plus",
+          "text": "Names at least one red flag for a Parkinson-plus syndrome"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: parkinsonism differential"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: causes of secondary parkinsonism"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.pd.workup": {
+      "id": "skill.ix.pd.workup",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "Investigating a new parkinsonism",
+      "oneLine": "This is a clinical diagnosis; every test here is looking for an exception",
+      "why": "Idiopathic Parkinson's disease has no confirmatory blood test or routine scan finding, and understanding that changes how a student should think about investigations here: not as a route to the diagnosis, but as a targeted search for the secondary and Parkinson-plus causes that would change the plan.",
+      "body": "Idiopathic Parkinson's disease is diagnosed clinically. Investigations are ordered to exclude the alternatives suggested by the history, examination and red flags, not to confirm the diagnosis itself.",
+      "keyPoints": [
+        "In a typical, asymmetric-onset, older patient with a classic rest tremor and no red flags, imaging is often not required to make the clinical diagnosis.",
+        "MRI brain is indicated where a red flag is present: early falls, prominent early autonomic failure, marked early symmetry, or an atypical course, and can show findings supporting a specific Parkinson-plus syndrome, such as characteristic midbrain or pontine atrophy patterns, or can show vascular change supporting a vascular parkinsonism.",
+        "Serum caeruloplasmin and a slit-lamp examination for Kayser-Fleischer rings are indicated in any patient with onset before about 40 years, to look for Wilson's disease, which is treatable.",
+        "A thorough medication review is itself an investigation here: identifying and, where possible with the prescriber's involvement, withdrawing an implicated dopamine receptor blocking drug can be diagnostic as well as therapeutic.",
+        "A clear, sustained response to a trial of dopaminergic therapy supports the diagnosis of idiopathic disease, while a poor or absent response should prompt reconsideration of a Parkinson-plus syndrome; this response is assessed and interpreted by the treating specialist, not used casually as a bedside test."
+      ],
+      "pitfalls": [
+        "Ordering an MRI reflexively in every new parkinsonism when the clinical picture is entirely typical and there are no red flags.",
+        "Not checking for Wilson's disease in a young patient with a new movement disorder.",
+        "Treating a poor response to dopaminergic therapy as proof the patient is not adherent, rather than as a clue toward a Parkinson-plus syndrome."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Is idiopathic Parkinson's disease confirmed by a blood test or scan?",
+          "a": "No. It is a clinical diagnosis; investigations are used to exclude secondary causes and Parkinson-plus syndromes, not to confirm idiopathic disease.",
+          "accept": [
+            "no",
+            "clinical",
+            "exclude"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A 32-year-old presents with a new tremor and mild rigidity. What must be checked before any other workup?",
+          "a": "Serum caeruloplasmin and a slit-lamp examination for Kayser-Fleischer rings, to look for Wilson's disease, which is treatable and must not be missed in a young patient with a new movement disorder.",
+          "accept": [
+            "wilson",
+            "caeruloplasmin",
+            "kayser"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: parkinsonism investigation"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.pd.diagnosis": {
+      "id": "skill.pd.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Name it, exclude a secondary cause, and stage it functionally",
+      "why": "'Parkinson's disease' alone tells a colleague nothing about how disabled the patient is or how confident the diagnosis is. A complete statement names the type, notes that secondary and Parkinson-plus causes have been actively considered, and stages the functional severity.",
+      "body": "State the diagnosis in three parts: the type, the confidence (having actively screened for red flags), and the functional stage.",
+      "keyPoints": [
+        "Type: idiopathic Parkinson's disease, secondary (drug-induced, vascular, and so on), or a named Parkinson-plus syndrome.",
+        "Confidence: state explicitly that red flags for a secondary cause or a Parkinson-plus syndrome were actively sought and not found, rather than leaving this implicit.",
+        "Functional stage, using the Hoehn and Yahr scale: stage I is unilateral involvement only with minimal or no functional impairment; stage II is bilateral or midline involvement without impaired balance; stage III is the first sign of impaired postural (righting) reflexes with mild to moderate disability; stage IV is fully developed, severely disabling disease in a patient who can still stand and walk unassisted; stage V is confinement to a bed or wheelchair unless aided.",
+        "A worked example: 'Idiopathic Parkinson's disease, asymmetric right-sided rest tremor and rigidity with no red flags for a secondary cause or Parkinson-plus syndrome on history, examination or drug review; functionally Hoehn and Yahr stage II.'"
+      ],
+      "pitfalls": [
+        "Writing 'Parkinson's disease' with no functional stage.",
+        "Not stating that secondary causes and red flags were actively excluded, leaving the diagnosis unsupported.",
+        "Confusing Hoehn and Yahr stage with symptom duration; it measures functional and postural impairment, not how long the patient has had symptoms."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three elements make a complete parkinsonism diagnosis?",
+          "a": "The type (idiopathic, secondary, or Parkinson-plus), confirmation that red flags were sought and not found, and the functional (Hoehn and Yahr) stage.",
+          "accept": [
+            "type",
+            "red flag",
+            "hoehn",
+            "stage"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has bilateral involvement, and the first evidence of impaired postural righting reflexes, with mild to moderate disability. What Hoehn and Yahr stage is this?",
+          "a": "Stage III.",
+          "accept": [
+            "iii",
+            "3",
+            "stage 3"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "type",
+          "text": "States idiopathic, secondary, or Parkinson-plus explicitly"
+        },
+        {
+          "id": "stage",
+          "text": "States a functional stage"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: parkinsonism diagnosis and staging"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: Hoehn and Yahr staging, worked case summary"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

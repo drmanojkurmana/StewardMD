@@ -1,0 +1,370 @@
+{
+  "_comment": "Splenomegaly is a SHORT CASE: differential diagnosis of an isolated enlarged spleen. Same shape as anaemia.json - the grading and differential ARE the content, exam technique is entirely inherited from skill.exam.gi.spleen in abdomen.json.",
+  "id": "splenomegaly",
+  "name": "Splenomegaly",
+  "fullName": "Splenomegaly (a short case)",
+  "system": "abdomen",
+  "kbRef": "splenomegaly",
+  "oneLine": "An enlarged spleen, and the three categories of disease that produce it",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "It must double or triple before you can feel it",
+      "skills": [
+        "skill.exam.gi.spleen"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Fever, bleeding, and B symptoms",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.splenomegaly"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Pallor, nodes and stigmata, before the spleen is even felt",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Deliberately screen for lymphadenopathy in the neck, axilla and groin, and for stigmata of chronic liver disease, since either changes the leading category before the spleen is even palpated."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Grade, consistency, and what else is enlarged",
+      "skills": [
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen_cause"
+      ],
+      "emphasis": {
+        "skill.exam.gi.spleen": {
+          "expect": "Grade the spleen carefully by distance below the costal margin, note whether it crosses the midline, and describe surface and consistency, since a firm, notched, non-tender spleen versus a soft, tender one already changes the differential."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of splenomegaly",
+      "blurb": "Organised by size",
+      "skills": [
+        "skill.spleen.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The blood count and film do most of the sorting",
+      "skills": [
+        "skill.ix.spleen.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Grade plus likely category, not just 'splenomegaly'",
+      "skills": [
+        "skill.spleen.differential"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.spleen.general",
+        "title": "Assess this splenomegaly and give your differential",
+        "task": "This patient has been found to have an abdominal mass on routine examination. Confirm it is the spleen, grade it, and present a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.gi.spleen",
+          "skill.exam.gi.spleen_cause"
+        ],
+        "examinerQuestions": [
+          "What features on palpation and percussion confirm this is the spleen and not the left kidney?",
+          "How would you grade this spleen, and what does that grade change about your differential?",
+          "What is the single most useful first blood test, and why?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.gi.spleen",
+      "skill.hx.gi.splenomegaly",
+      "skill.exam.gi.spleen_cause",
+      "skill.spleen.differential",
+      "skill.ix.spleen.workup"
+    ]
+  },
+  "skills": {
+    "skill.exam.gi.spleen_cause": {
+      "id": "skill.exam.gi.spleen_cause",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Reading the cause from grade, consistency and company",
+      "oneLine": "How big, how hard, and what else is enlarged alongside it",
+      "why": "The degree of splenomegaly and its associated findings narrow the differential more than the finding of splenomegaly itself. A tip you can just feel and a spleen crossing the midline are, in practice, different diseases.",
+      "body": "Grade the spleen, note its consistency and surface, and deliberately look for company: lymphadenopathy, hepatomegaly, pallor, and stigmata of chronic liver disease.",
+      "pitfalls": [
+        "Reporting only 'splenomegaly, grade 2' without describing consistency, surface, or associated findings.",
+        "Assuming any splenomegaly with mild anaemia is hypersplenism without confirming the fuller criteria.",
+        "Missing lymphadenopathy because it was not deliberately checked for."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define massive splenomegaly.",
+          "a": "A spleen palpable more than 8 cm below the left costal margin, or with a drained weight of 1 kg or more.",
+          "accept": [
+            "8",
+            "1000",
+            "1 kg"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three common causes of massive splenomegaly.",
+          "a": "Chronic myeloid leukaemia, myelofibrosis, kala-azar, primary splenic lymphoma, extrahepatic portal vein thrombosis (tropical/hyper-reactive malarial splenomegaly is also accepted).",
+          "accept": [
+            "chronic myeloid",
+            "myelofibrosis",
+            "kala-azar",
+            "lymphoma",
+            "portal vein"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Define hypersplenism, and explain why it is a different concept from splenomegaly alone.",
+          "a": "Hypersplenism is splenomegaly plus one or more cytopenias (anaemia, leukopenia, thrombocytopenia), with compensatory bone marrow hyperplasia, and improvement after splenectomy. Splenomegaly alone is simply a large spleen and may have entirely normal blood counts.",
+          "accept": [
+            "cytopenia",
+            "marrow",
+            "splenectomy",
+            "improve"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Mild splenomegaly (roughly 1 to 3 cm below the costal margin) is the range for most acute infections, early portal hypertension, and rheumatological causes.",
+        "Moderate splenomegaly favours a non-neoplastic chronic process (cirrhosis with portal hypertension, chronic haemolytic anaemia, chronic infection) or an early neoplastic one.",
+        "Massive splenomegaly (defined as more than 8 cm below the costal margin, or a drained weight of 1 kg or more) has a short, specific list: chronic myeloid leukaemia, myelofibrosis, kala-azar, primary splenic lymphoma, and extrahepatic portal vein thrombosis are the common causes; Gaucher's disease and thalassaemia major are the uncommon ones worth naming.",
+        "A firm, non-tender spleen with generalised lymphadenopathy and hepatomegaly suggests a lymphoproliferative disorder.",
+        "A spleen with associated pallor, jaundice and a family history suggests chronic haemolysis.",
+        "A spleen alongside stigmata of chronic liver disease, ascites and caput medusae suggests portal hypertension.",
+        "Hypersplenism is a distinct concept from splenomegaly alone: it is splenomegaly PLUS cytopenia (anaemia, leukopenia or thrombocytopenia) plus compensatory marrow hyperplasia, and it improves after splenectomy, which is what defines it rather than size alone."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Splenomegaly, physical examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the spleen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.spleen.differential": {
+      "id": "skill.spleen.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of splenomegaly",
+      "oneLine": "Organised by size, because size itself changes the odds",
+      "why": "A flat list of 'causes of splenomegaly' is hard to use at the bedside. Organising the same causes by the grade you actually found is what makes the list usable in the exam and in practice.",
+      "body": "Use the grade found on examination as the first branch point, then narrow further using the history and associated findings.",
+      "pitfalls": [
+        "Treating the differential as one flat list rather than organising it by grade.",
+        "Forgetting malaria and kala-azar in an endemic setting.",
+        "Calling a spleen 'massive' from a single equivocal percussion finding without confirming it on palpation."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three causes of mild splenomegaly.",
+          "a": "Any of: acute infections (endocarditis, enteric fever, infectious mononucleosis), chronic infections (tuberculosis, brucellosis, HIV), malaria, kala-azar, rheumatoid arthritis, SLE, congestive cardiac failure, thalassaemia minor.",
+          "accept": [
+            "infect",
+            "malaria",
+            "rheumatoid",
+            "thalassaemia",
+            "cardiac failure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has moderate splenomegaly. Give two neoplastic and two non-neoplastic causes to consider.",
+          "a": "Neoplastic: lymphoma, acute leukaemia, chronic lymphocytic leukaemia, chronic myeloid leukaemia. Non-neoplastic: cirrhosis with portal hypertension, chronic haemolytic anaemia, malaria, kala-azar, amyloidosis, haemochromatosis, polycythaemia vera.",
+          "accept": [
+            "lymphoma",
+            "leukaemia",
+            "cirrhosis",
+            "haemolytic",
+            "amyloidosis"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "Traube's space is obliterated on percussion. Besides massive splenomegaly, name two other explanations.",
+          "a": "A left-sided pleural effusion, a pericardial effusion, an enlarged left lobe of the liver, or a full stomach/fundic mass.",
+          "accept": [
+            "pleural",
+            "pericardial",
+            "liver",
+            "stomach"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "grade_based",
+          "text": "Organises the differential by grade rather than a flat list"
+        },
+        {
+          "id": "endemic",
+          "text": "Actively considers malaria/kala-azar/TB in the differential"
+        }
+      ],
+      "keyPoints": [
+        "Mild splenomegaly: acute infections (septic shock, infective endocarditis, enteric fever, infectious hepatitis, infectious mononucleosis, brucellosis, cytomegalovirus, toxoplasmosis), chronic infections (tuberculosis, syphilis, brucellosis, HIV), parasitic infestation (malaria, kala-azar, schistosomiasis), inflammatory disease (rheumatoid arthritis, sarcoidosis, SLE), congestive cardiac failure, and thalassaemia minor.",
+        "Moderate splenomegaly: neoplastic (lymphoma, acute leukaemia, chronic lymphocytic leukaemia, chronic myeloid leukaemia) and non-neoplastic (cirrhosis with portal hypertension, chronic haemolytic anaemia, malaria, kala-azar, sarcoidosis, infectious mononucleosis, splenic abscess, amyloidosis, haemochromatosis, polycythaemia vera).",
+        "Massive splenomegaly: chronic myeloid leukaemia, myelofibrosis, kala-azar, primary splenic lymphomas (hairy cell, mantle cell, marginal B cell), portal hypertension from extrahepatic portal vein thrombosis, and hyper-reactive malarial (tropical) splenomegaly are the common causes; Gaucher's disease, Niemann-Pick disease and thalassaemia major are the uncommon ones.",
+        "In India specifically, malaria, kala-azar and tuberculosis must be actively considered at every grade, given endemic prevalence.",
+        "Traube's space obliteration on percussion supports splenomegaly but has its own differential: it is also obliterated by a left pleural effusion, a pericardial effusion, an enlarged left lobe of the liver, or simply a full stomach, so it must be interpreted alongside the palpation findings, not alone."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Splenomegaly, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: splenomegaly differential"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.spleen.workup": {
+      "id": "skill.ix.spleen.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up splenomegaly",
+      "oneLine": "The blood count and film do most of the sorting before imaging is even needed",
+      "why": "A full blood count with a peripheral smear is the single highest-yield first test in splenomegaly, because the pattern of the other cell lines usually tells you which of the three broad categories you are in before any imaging is done.",
+      "body": "Start with a full blood count and peripheral smear, then direct further tests by the pattern found and the leading category from the history and examination.",
+      "pitfalls": [
+        "Jumping straight to imaging or a marrow biopsy before a full blood count and smear have actually been reviewed.",
+        "Not sending a malaria smear in a febrile patient with splenomegaly in an endemic area.",
+        "Treating splenomegaly with a normal blood count as reassuring without considering an early or infective cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single highest-yield first investigation in splenomegaly?",
+          "a": "A full blood count with a peripheral smear.",
+          "accept": [
+            "full blood count",
+            "cbc",
+            "peripheral smear"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has splenomegaly with a very high white cell count and immature myeloid forms on the smear. What does this pattern suggest?",
+          "a": "Chronic myeloid leukaemia (or another myeloproliferative/leukaemic process), given the leucocytosis with immature forms.",
+          "accept": [
+            "leukaemia",
+            "leukemia",
+            "myeloproliferative"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Which two blood tests best support a haemolytic cause of splenomegaly?",
+          "a": "Reticulocyte count (raised) and indirect bilirubin (raised), often alongside a raised LDH and a positive or negative direct Coombs test depending on the mechanism.",
+          "accept": [
+            "reticulocyte",
+            "bilirubin",
+            "ldh"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Full blood count with peripheral smear first: pancytopenia or bicytopenia supports hypersplenism or marrow infiltration; a very high white cell count with immature forms supports leukaemia; a normal count with isolated splenomegaly keeps infective and early portal hypertensive causes open.",
+        "Ultrasound abdomen confirms the size objectively (correlating with, but not replacing, the clinical grade), assesses the liver and portal vein for a portal hypertensive cause, and looks for lymphadenopathy or a focal splenic lesion.",
+        "If infection is suspected: a malaria smear or rapid antigen test, blood cultures, a Widal or culture for enteric fever, and serology as directed by exposure history (brucellosis, HIV).",
+        "If a lymphoproliferative cause is suspected: LDH and uric acid (markers of high cell turnover), and, where indicated, a bone marrow examination and lymph node biopsy.",
+        "If a haemolytic cause is suspected: reticulocyte count, bilirubin (indirect predominant), LDH, and a direct Coombs test.",
+        "If portal hypertension is suspected: liver function tests, coagulation profile, and a Doppler ultrasound of the portal vein."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Splenomegaly, evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: splenomegaly workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

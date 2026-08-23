@@ -1,0 +1,1117 @@
+{
+  "_comment": "CliniX LONG case. CCF is a syndrome, not a single lesion, so this pathway leans hardest on skill.exam.cvs.heart_failure_signs and adds local skills for the syndrome definition, precipitant history, differential of the underlying cause, and GDMT principles.",
+  "id": "congestive-cardiac-failure",
+  "name": "Congestive cardiac failure",
+  "fullName": "Congestive cardiac failure",
+  "system": "cardiovascular",
+  "kbRef": "congestive_cardiac_failure",
+  "oneLine": "The heart cannot meet the body's demand, and the body floods trying to compensate",
+  "estMinutes": 75,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "A syndrome, not a diagnosis in itself",
+      "skills": [
+        "skill.ccf.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and comorbidity point straight at the likely cause",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age changes the likely underlying cause: ischaemic and hypertensive heart disease dominate in older patients, while rheumatic valve disease, peripartum cardiomyopathy and congenital lesions weigh more heavily in the young. Note occupation, diet (salt intake) and access to regular medication, since adherence and diet are the commonest reasons a previously stable patient decompensates."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "The symptom cluster, graded, and what tipped the balance",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.cvs.dyspnea_edema",
+        "skill.hx.ccf.precipitants"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical decompensation reads as weeks to months of gradually worsening exertional breathlessness and ankle swelling, then a clear step-change over days: more orthopnoea, needing more pillows, less urine, a few kilos of weight gain. Look for the tempo of chronic disease plus an acute trigger, exactly as in COPD, but here the trigger is usually cardiac, renal, infective, or simply dietary and pharmacological non-adherence."
+        },
+        "skill.hx.cvs.dyspnea_edema": {
+          "expect": "Grade the breathlessness by NYHA class explicitly, and compare it with the patient's baseline from a few months ago; the CHANGE in class often matters more than the absolute grade. Ask about weight, since patients frequently notice several kilos gained over days before the swelling itself becomes obvious to them."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The cause of the failure usually lives here",
+      "skills": [
+        "skill.hx.ccf.precipitants"
+      ],
+      "emphasis": {
+        "skill.hx.ccf.precipitants": {
+          "expect": "Go through the medication list by name and ask what has actually been taken in the last two weeks, not what was prescribed. Ask specifically about any new over-the-counter anti-inflammatory use, since NSAIDs are an easily missed precipitant of fluid retention."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Low output and fluid overload, read together",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for cool, pale, sweaty peripheries and a generally unwell, anxious appearance in acute decompensation; a comfortable, well-perfused patient with only mild ankle swelling is a very different acuity from one sitting bolt upright, gasping, and cold to the touch."
+        },
+        "skill.gen.vitals": {
+          "expect": "A resting tachycardia and a narrow pulse pressure both reflect a low cardiac output state trying to compensate. In severe decompensation, check for pulsus alternans, alternating strong and weak beats in a regular rhythm, which is a marker of severe left ventricular failure."
+        },
+        "skill.gen.edema": {
+          "expect": "Cardiac oedema is dependent, pitting, worse by evening, and improves after a night lying flat; ask directly whether that pattern fits, since a renal or hepatic cause of oedema needs a different workup entirely."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "The whole syndrome cluster, checked deliberately",
+      "skills": [
+        "skill.exam.cvs.pulse",
+        "skill.exam.cvs.jvp",
+        "skill.exam.cvs.inspection",
+        "skill.exam.cvs.precordium_palpation",
+        "skill.exam.cvs.apex",
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.bp",
+        "skill.exam.cvs.heart_failure_signs"
+      ],
+      "emphasis": {
+        "skill.exam.cvs.pulse": {
+          "expect": "A resting sinus tachycardia is common and simply reflects compensation. Check specifically for pulsus alternans in a patient who looks severely unwell; it is easy to miss unless you deliberately feel for an alternating strong-weak pattern over several beats."
+        },
+        "skill.exam.cvs.jvp": {
+          "expect": "A raised JVP is one of the single most useful bedside signs of decompensation and of the fluid status driving management; test the hepatojugular reflux specifically if the resting JVP is borderline."
+        },
+        "skill.exam.cvs.apex": {
+          "expect": "Expect a displaced, diffuse, often hyperdynamic apex in dilated left ventricular failure, reflecting a chamber that has enlarged to compensate for reduced contractility. A normal, undisplaced apex does not exclude heart failure with preserved ejection fraction, where the ventricle fails to relax rather than to contract."
+        },
+        "skill.exam.cvs.heartsounds": {
+          "expect": "An S3 gallop in a patient over 40 is one of the most specific bedside findings of significant left ventricular dysfunction, best heard with the bell at the apex in the left lateral position. An S4 reflects a stiff, non-compliant ventricle and is common in hypertensive or ischaemic heart disease even before overt failure."
+        },
+        "skill.exam.cvs.murmurs": {
+          "expect": "A soft, blowing pansystolic murmur at the apex can appear as the left ventricle dilates and stretches the mitral annulus, producing functional (secondary) mitral regurgitation that is a consequence of the failure rather than its original cause; it often lessens as the ventricle recompensates with treatment."
+        },
+        "skill.exam.cvs.heart_failure_signs": {
+          "expect": "Check both clusters deliberately, left-sided (basal crepitations, S3, a displaced apex) and right-sided (raised JVP, tender hepatomegaly, ascites, dependent oedema), and state explicitly whether this patient shows one, the other, or both together, which is what makes it congestive rather than isolated left or right failure."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the CCF picture together",
+      "blurb": "From a cluster of signs to a graded syndrome",
+      "skills": [
+        "skill.ccf.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "The syndrome, its severity, and its likely cause, in three sentences",
+      "skills": [
+        "skill.ccf.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else swells the legs and fills the lungs, and what caused the failure itself",
+      "skills": [
+        "skill.ccf.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm the syndrome, find its cause, and grade the pump",
+      "skills": [
+        "skill.ix.ccf.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Syndrome, ejection fraction category, NYHA class, and cause, not just 'CCF'",
+      "skills": [
+        "skill.dx.ccf"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Decongest first, then the four pillars that change survival",
+      "skills": [
+        "skill.tx.ccf"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ccf.cvs_exam",
+        "title": "Examine for congestive cardiac failure",
+        "task": "This 64-year-old man has been increasingly breathless and swollen for two weeks. Examine his cardiovascular system for signs of heart failure and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.cvs.jvp",
+          "skill.exam.cvs.apex",
+          "skill.exam.cvs.heartsounds",
+          "skill.exam.cvs.heart_failure_signs",
+          "skill.gen.edema"
+        ],
+        "examinerQuestions": [
+          "What is the single most useful bedside sign of right-sided decompensation, and how do you elicit it correctly?",
+          "You hear a third heart sound. What does it mean in this age group?",
+          "Are the crepitations you heard consistent with heart failure? What would make you doubt that?"
+        ]
+      },
+      {
+        "id": "osce.ccf.history",
+        "title": "Take a history in decompensated heart failure",
+        "task": "This patient with known heart disease has come in more breathless than usual. Take a focused history in six minutes, including what may have tipped the balance.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.cvs.dyspnea_edema",
+          "skill.hx.ccf.precipitants"
+        ],
+        "examinerQuestions": [
+          "Name three things you would ask about that could have precipitated this decompensation.",
+          "How did you grade this patient's breathlessness, and against what?",
+          "What in the drug history specifically would you check?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.ccf.dinesh",
+      "title": "A man who has put on five kilos in a week",
+      "opening": "Dinesh Rao, 64, a known hypertensive, has been brought to the emergency department by his son. He is sitting bolt upright, breathing rapidly, and looks unwell. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Dinesh Rao",
+        "age": 64,
+        "sex": "male",
+        "occupation": "Retired clerk",
+        "residence": "Urban, lives with his son's family"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, I cannot breathe. It has been building for two weeks but today I could not even lie down. My legs are also very swollen.",
+          "key": true
+        },
+        "dyspnea_grade": {
+          "cues": [
+            "how far can you walk",
+            "how much can you do",
+            "stairs",
+            "exertion",
+            "walking",
+            "breathless when",
+            "activities",
+            "climb"
+          ],
+          "reply": "Three months ago I could walk around the house freely. Two weeks ago I started getting breathless after a few steps. Now I am breathless even sitting still.",
+          "key": true
+        },
+        "orthopnea": {
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "orthopnoea",
+            "orthopnea",
+            "pillows",
+            "wake up at night",
+            "breathless at night",
+            "how do you sleep"
+          ],
+          "reply": "I used to sleep with one pillow. Now I need four, and even then I woke up gasping for air twice last night and had to sit at the window.",
+          "key": true
+        },
+        "swelling": {
+          "cues": [
+            "swelling",
+            "ankle",
+            "legs",
+            "oedema",
+            "edema",
+            "feet"
+          ],
+          "reply": "My legs have been swelling for a week, up to my knees now. My shoes do not fit anymore.",
+          "key": true
+        },
+        "weight": {
+          "cues": [
+            "weight",
+            "gained",
+            "kilos"
+          ],
+          "reply": "My son weighed me yesterday. I have put on about five kilos in the last week.",
+          "key": true
+        },
+        "urine": {
+          "cues": [
+            "urine",
+            "passing water",
+            "output"
+          ],
+          "reply": "I am passing less urine than usual, and it looks darker."
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest",
+            "tightness"
+          ],
+          "reply": "No chest pain right now, though I did have some tightness on exertion a few months back that I never mentioned to anyone.",
+          "key": true
+        },
+        "palpitations": {
+          "cues": [
+            "palpitation",
+            "heart racing",
+            "irregular"
+          ],
+          "reply": "I have not noticed my heart racing or being irregular."
+        },
+        "hypertension_history": {
+          "cues": [
+            "blood pressure",
+            "hypertension",
+            "bp tablets",
+            "how long have you had"
+          ],
+          "reply": "I have had high blood pressure for about fifteen years, on tablets.",
+          "key": true
+        },
+        "adherence": {
+          "cues": [
+            "taking your tablets",
+            "medication",
+            "regularly",
+            "missed any doses",
+            "compliance"
+          ],
+          "reply": "Honestly, I ran out of my water tablet ten days ago and did not go back for a refill, thought it would be fine for a few days.",
+          "key": true
+        },
+        "diet_salt": {
+          "cues": [
+            "salt",
+            "diet",
+            "food",
+            "eating outside",
+            "papad",
+            "pickle"
+          ],
+          "reply": "There was a wedding in the family last week, I ate a lot of rich, salty food over three days.",
+          "key": true
+        },
+        "nsaid": {
+          "cues": [
+            "painkiller",
+            "nsaid",
+            "anti-inflammatory",
+            "over the counter",
+            "joint pain tablet"
+          ],
+          "reply": "I took some tablets for knee pain that a neighbour gave me, for about five days.",
+          "key": true
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "infection",
+            "cough",
+            "cold"
+          ],
+          "reply": "No fever, no cough."
+        },
+        "diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood sugar"
+          ],
+          "reply": "Yes, I have diabetes too, on tablets for about ten years."
+        },
+        "smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "tobacco"
+          ],
+          "reply": "I smoked for twenty years, stopped about five years ago."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "father",
+            "heart attack",
+            "hereditary"
+          ],
+          "reply": "My father died of a heart attack in his sixties."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Sitting bolt upright, using accessory muscles, visibly anxious. Cool, pale, sweaty peripheries.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 112 regular. Blood pressure 108/78, narrow pulse pressure. Respiratory rate 28. SpO2 90 percent on room air. Temperature 36.9 C.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Bilateral pitting oedema to above the knees.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.pulse": {
+          "finding": "Regular, 112 per minute, low volume. No pulsus alternans detected.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.jvp": {
+          "finding": "Raised 8 cm above the sternal angle at 45 degrees, with a positive hepatojugular reflux.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.inspection": {
+          "finding": "No visible pulsations, no scars.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.precordium_palpation": {
+          "finding": "No parasternal heave, no thrill.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.apex": {
+          "finding": "6th left intercostal space, 2 cm lateral to the midclavicular line, diffuse and hyperdynamic.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.heartsounds": {
+          "finding": "S1 and S2 normal. A third heart sound is audible at the apex with the bell in the left lateral position.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.murmurs": {
+          "finding": "A soft, grade 2/6 pansystolic murmur at the apex radiating minimally toward the axilla.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.bp": {
+          "finding": "108/78 both arms.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.heart_failure_signs": {
+          "finding": "Raised JVP with positive hepatojugular reflux, tender hepatomegaly 3 cm below the costal margin, bilateral pitting oedema to the knees, bilateral fine late-inspiratory crepitations to the mid-zones, S3 gallop. Both left- and right-sided clusters present: congestive cardiac failure.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "ecg",
+        "cxr",
+        "echo",
+        "renal"
+      ],
+      "investigations": {
+        "ecg": {
+          "label": "12-lead ECG",
+          "indicated": true,
+          "result": "Sinus tachycardia. Left ventricular hypertrophy by voltage criteria. Old Q waves in the inferior leads (II, III, aVF), no acute ST changes.",
+          "note": "Left ventricular hypertrophy fits his long-standing hypertension. The inferior Q waves suggest a prior, previously unrecognised myocardial infarction, which reframes his risk-factor history and points to ischaemic as well as hypertensive contribution."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Cardiomegaly with a cardiothoracic ratio of 0.58. Upper zone vessel prominence (cephalisation). Bilateral small pleural effusions, more on the right. Kerley B lines at both bases.",
+          "note": "Confirms cardiomegaly and grades the pulmonary venous congestion: this is beyond simple cephalisation, into interstitial oedema."
+        },
+        "echo": {
+          "label": "Transthoracic echocardiogram",
+          "indicated": true,
+          "result": "Left ventricular ejection fraction 32 percent, global hypokinesia with regional inferior wall hypokinesia. Mild functional mitral regurgitation. Left ventricular hypertrophy. Estimated pulmonary artery systolic pressure 40 mmHg. No significant valve stenosis.",
+          "note": "This is the test that grades the pump and names the phenotype: heart failure with reduced ejection fraction, with a pattern (regional plus global hypokinesia) suggesting a mixed ischaemic and hypertensive cause."
+        },
+        "renal": {
+          "label": "Renal function and electrolytes",
+          "indicated": true,
+          "result": "Creatinine 1.6 mg/dL (baseline 1.1 six months ago), potassium 5.2 mmol/L, sodium 133 mmol/L.",
+          "note": "Worsening renal function and a rising potassium change the diuretic and renin-angiotensin therapy plan and need to be tracked, not just noted once."
+        },
+        "troponin": {
+          "label": "Cardiac troponin",
+          "indicated": true,
+          "result": "Mildly elevated at 0.08 ng/mL (local upper reference limit 0.04), without a clear rise-and-fall pattern on serial testing.",
+          "note": "A mild, static elevation in decompensated heart failure without a rise-and-fall pattern reflects chronic myocardial strain rather than an acute plaque event, but must be interpreted alongside the ECG and clinical picture, not read in isolation."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 11.8 g/dL, otherwise normal.",
+          "note": "Mild anaemia can both result from and worsen heart failure, and is worth characterising and addressing."
+        },
+        "tsh": {
+          "label": "Thyroid function",
+          "indicated": true,
+          "result": "Normal.",
+          "note": "A reasonable, low-cost screen for a reversible contributor in new or worsening heart failure."
+        },
+        "chestct": {
+          "label": "CT pulmonary angiogram",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated here: the clinical picture (weight gain, dietary indiscretion, missed diuretic, bilateral leg oedema, raised JVP, S3, bilateral crepitations) is a coherent decompensated heart failure picture with an identified trigger, not a presentation suggesting pulmonary embolism."
+        }
+      },
+      "differentialModel": {
+        "answer": "Decompensated congestive cardiac failure with reduced ejection fraction, likely mixed ischaemic and hypertensive in origin, precipitated by diuretic non-adherence, dietary salt indiscretion and NSAID use. Consider nephrotic syndrome, chronic liver disease and severe anaemia as alternative causes of bilateral oedema, and pneumonia or COPD exacerbation as alternative causes of the breathlessness.",
+        "accept": [
+          "heart failure",
+          "ccf",
+          "cardiac failure",
+          "nephrotic",
+          "liver disease",
+          "cirrhosis",
+          "anaemia",
+          "anemia",
+          "pneumonia",
+          "copd"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Congestive cardiac failure, heart failure with reduced ejection fraction (EF 32 percent), NYHA class IV at presentation, likely ischaemic and hypertensive in origin, precipitated by diuretic non-adherence, dietary indiscretion and NSAID use, with acute kidney injury.",
+        "accept": [
+          "congestive cardiac failure",
+          "heart failure",
+          "ccf"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Sit the patient up, give controlled oxygen, and start intravenous loop diuretic for decongestion with close monitoring of renal function and potassium. Withhold the NSAID. Once decongested and stable, restart and optimise the four pillars of guideline-directed therapy: a renin-angiotensin-system blocking agent (or ARNI), a beta blocker, a mineralocorticoid receptor antagonist and an SGLT2 inhibitor, uptitrated as tolerated. Treat the identified precipitants, reinforce fluid and salt restriction, and arrange structured follow-up.",
+        "accept": [
+          "diuretic",
+          "oxygen",
+          "ace inhibitor",
+          "arb",
+          "arni",
+          "beta blocker",
+          "mineralocorticoid",
+          "spironolactone",
+          "sglt2",
+          "sit up",
+          "salt restriction"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The story has the same shape as the COPD case, chronic disease plus an acute trigger, but the triggers here are different: missed medication, a salty diet, and an NSAID that quietly caused fluid retention. Naming the actual trigger matters as much as naming the syndrome.",
+        "His five-kilo weight gain in a week is fluid, not fat, and is one of the most sensitive markers of decompensation available, cheaper and earlier than almost anything on this investigation list.",
+        "Old inferior Q waves he never knew about reframe the whole case: what looked like purely hypertensive heart disease also has an ischaemic contribution, found on a test ordered for an entirely different reason.",
+        "The mild troponin rise here is a trap: read alone it looks like an acute coronary event, but without a rise-and-fall pattern, and in the context of chronic decompensated failure, it more likely reflects chronic myocardial strain. Context decides the interpretation, not the number alone.",
+        "His rising creatinine and potassium are not a reason to abandon renin-angiotensin-system blockade altogether; they are a reason to decongest carefully, monitor closely, and adjust doses, which is a different decision from stopping treatment.",
+        "The functional mitral regurgitation heard on auscultation is a consequence of his dilated, failing ventricle stretching the valve annulus, not a separate primary valve disease, and it may lessen once the ventricle is treated."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.ccf.basics",
+      "skill.hx.ccf.precipitants",
+      "skill.exam.cvs.jvp",
+      "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.heart_failure_signs",
+      "skill.ccf.differential",
+      "skill.ix.ccf.workup",
+      "skill.dx.ccf",
+      "skill.tx.ccf"
+    ]
+  },
+  "skills": {
+    "skill.ccf.basics": {
+      "id": "skill.ccf.basics",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "What heart failure is",
+      "oneLine": "A syndrome of insufficient perfusion or congestion, from any structural or functional heart disease",
+      "why": "Students often treat 'heart failure' as a single disease. It is a final common syndrome that any significant structural or functional heart disease can produce, and naming the underlying cause is exactly as important as naming the syndrome itself, because the cause changes what specifically needs treating.",
+      "body": "Heart failure is a complex clinical syndrome caused by structural or functional impairment of ventricular filling or ejection of blood, resulting in insufficient perfusion to meet the body's metabolic demands. Congestive cardiac failure describes the state where both the pulmonary and systemic circulations show congestion, from combined or sequential left- and right-sided failure.",
+      "keyPoints": [
+        "Heart failure is a syndrome, always secondary to an underlying structural or functional cause: ischaemic heart disease, hypertensive heart disease, valvular disease, cardiomyopathy, or a combination.",
+        "It is broadly divided by ejection fraction into heart failure with reduced ejection fraction (a failure of contraction) and heart failure with preserved ejection fraction (a failure of relaxation and filling, in a ventricle that contracts normally but fills poorly).",
+        "Left heart failure produces predominantly pulmonary congestion (breathlessness, orthopnoea, PND, basal crepitations); right heart failure produces predominantly systemic venous congestion (raised JVP, hepatomegaly, ascites, dependent oedema). When both clusters are present together, this is congestive cardiac failure.",
+        "Compensatory mechanisms, the renin-angiotensin-aldosterone system, sympathetic activation and natriuretic peptide release, initially maintain perfusion but ultimately worsen the syndrome, which is exactly why several of the most effective treatments work by blocking these same pathways.",
+        "Decompensation is usually not spontaneous: it is precipitated by an identifiable trigger in a large proportion of admissions, and finding that trigger is part of the diagnostic task, not an optional extra."
+      ],
+      "pitfalls": [
+        "Stopping at 'heart failure' without asking what caused it.",
+        "Assuming heart failure always means a poorly contracting ventricle, and missing heart failure with preserved ejection fraction in a patient with a normal-looking echo.",
+        "Treating decompensation as if it appeared without a cause, and never actively looking for the trigger."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Is heart failure a diagnosis on its own, or always secondary to something else?",
+          "a": "It is a syndrome that is always secondary to an underlying structural or functional heart disease; a complete diagnosis names that underlying cause.",
+          "accept": [
+            "syndrome",
+            "secondary",
+            "underlying"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the difference between heart failure with reduced and with preserved ejection fraction?",
+          "a": "Reduced ejection fraction reflects a failure of contraction; preserved ejection fraction reflects a failure of ventricular relaxation and filling, with the ventricle still contracting normally.",
+          "accept": [
+            "contraction",
+            "relaxation",
+            "filling"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can compensatory mechanisms that initially help ultimately worsen heart failure?",
+          "a": "The renin-angiotensin-aldosterone system and sympathetic activation initially maintain blood pressure and perfusion by increasing volume and contractility, but sustained activation increases afterload, causes remodelling, and worsens congestion, which is why blocking these same pathways is central to treatment.",
+          "accept": [
+            "renin",
+            "angiotensin",
+            "sympathetic",
+            "remodel"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart failure definition"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: pathophysiology and diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ccf.signs": {
+      "id": "skill.ccf.signs",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The congestive cardiac failure picture",
+      "oneLine": "Two clusters, low output plus congestion, and why you name which side predominates",
+      "why": "Heart failure findings sort neatly into a small number of mechanisms: reduced forward output, and congestion backed up behind the failing chamber, either the lungs or the systemic venous system. Recognising the mechanism behind each finding is what lets you predict which signs travel together.",
+      "body": "The whole picture follows from two linked processes: the heart cannot maintain forward output, and pressure backs up behind whichever chamber is struggling, producing pulmonary congestion from the left heart and systemic venous congestion from the right heart.",
+      "keyPoints": [
+        "From reduced forward output: fatigue, cool peripheries, a resting tachycardia, a narrow pulse pressure, and in severe cases pulsus alternans or hypotension.",
+        "From left-sided congestion: exertional dyspnoea, orthopnoea, PND, fine late-inspiratory basal crepitations, an S3 gallop, and a displaced, diffuse or hyperdynamic apex.",
+        "From right-sided congestion: a raised JVP, tender hepatomegaly (sometimes pulsatile if tricuspid regurgitation coexists), ascites, and dependent pitting oedema.",
+        "Congestive cardiac failure is simply both clusters present together, from combined or sequential failure of both sides; right heart failure is very commonly a late consequence of longstanding left heart failure, since the right ventricle eventually fails against the raised pulmonary pressures the left side has been generating.",
+        "A functional (secondary) murmur, most often mitral regurgitation from annular stretch in a dilated ventricle, can appear as a consequence of the failure rather than as its original cause, and may improve as the ventricle is treated."
+      ],
+      "pitfalls": [
+        "Diagnosing heart failure from a single sign, when no individual finding is sensitive or specific enough alone.",
+        "Missing right-sided signs because only the chest was examined.",
+        "Attributing a new murmur automatically to a primary valve lesion rather than considering it a consequence of ventricular dilation."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Which examination findings cluster together on the LEFT side of the heart failure picture?",
+          "a": "Basal crepitations, an S3, a displaced or diffuse apex, orthopnoea and PND.",
+          "accept": [
+            "crepitations",
+            "s3",
+            "apex",
+            "orthopnoea"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does right heart failure so often follow longstanding left heart failure?",
+          "a": "Because the left heart's failure raises pulmonary venous and then pulmonary arterial pressure over time, and the right ventricle, which is built to pump against a low-resistance circuit, eventually fails when it has to sustain that raised afterload indefinitely.",
+          "accept": [
+            "pulmonary pressure",
+            "afterload",
+            "right ventricle"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: signs of congestive cardiac failure"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: physical examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ccf.summary": {
+      "id": "skill.ccf.summary",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The clinical summary",
+      "oneLine": "Syndrome, severity and cause, abstracted into three sentences",
+      "why": "A summary that stops at 'in heart failure' has not actually reasoned about the case. The useful summary carries the tempo, the syndrome, and a working hypothesis for the underlying cause, because the cause is what the rest of the workup is aimed at confirming.",
+      "body": "Give the patient with the risk factors that matter, the tempo including the precipitant if known, and the syndrome abstracted with a working cause.",
+      "keyPoints": [
+        "Name the patient and the risk factors that raise probability of a particular cause: age, hypertension, diabetes, prior ischaemic symptoms, valve disease.",
+        "Give the tempo: chronic, slowly progressive symptoms with an acute decompensating trigger, and name the trigger if one was found.",
+        "State the syndrome abstractly with the clusters present: 'acute decompensated congestive cardiac failure with both left- and right-sided signs'.",
+        "A worked example: 'A 64-year-old man with longstanding hypertension and unrecognised prior myocardial infarction presents with two weeks of progressive breathlessness and leg swelling, precipitated by diuretic non-adherence, dietary indiscretion and NSAID use. Examination shows a raised JVP, bibasal crepitations, an S3 and bilateral pitting oedema. This is decompensated congestive cardiac failure, likely mixed ischaemic and hypertensive in origin.'"
+      ],
+      "pitfalls": [
+        "Stopping at 'heart failure' without a working cause.",
+        "Omitting the precipitant when one was actually found in the history.",
+        "Failing to state which clusters, left, right, or both, are present."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a complete summary of a decompensated heart failure patient include, beyond the symptom list?",
+          "a": "The tempo including any identified precipitant, and a working hypothesis for the underlying cause of the heart failure itself.",
+          "accept": [
+            "precipitant",
+            "cause",
+            "tempo"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "cause",
+          "text": "States a working underlying cause, not just the syndrome"
+        },
+        {
+          "id": "trigger",
+          "text": "Names the precipitant if one was found"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ccf.differential": {
+      "id": "skill.ccf.differential",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Differential diagnosis",
+      "oneLine": "What else swells the legs and floods the lungs, and what actually caused the failure",
+      "why": "Two separate differentials are needed in every heart failure case: what else could produce this same cluster of oedema and breathlessness, and, once heart failure is confirmed, what actually caused it. Skipping the second question is the commonest reasoning shortcut students take.",
+      "body": "First exclude non-cardiac causes of the same clinical picture, then, once heart failure itself is confirmed, work through its own differential.",
+      "keyPoints": [
+        "Non-cardiac causes of bilateral pitting oedema with breathlessness: nephrotic syndrome or another cause of hypoalbuminaemia, chronic liver disease with ascites, severe anaemia (high-output state), and chronic venous insufficiency (usually without significant breathlessness).",
+        "Non-cardiac causes of acute breathlessness that can mimic decompensation: pneumonia, an acute exacerbation of COPD or asthma, and pulmonary embolism; a normal JVP and the absence of dependent oedema both argue against a purely cardiac cause.",
+        "Once heart failure is confirmed, its own differential by underlying cause: ischaemic heart disease, hypertensive heart disease, valvular disease (particularly rheumatic in India), dilated or other cardiomyopathy, myocarditis, and, in a peripartum woman, peripartum cardiomyopathy.",
+        "Right heart failure with clear lung fields and no left-sided signs should prompt a search for cor pulmonale from chronic lung disease, rather than assuming a primarily cardiac cause.",
+        "Constrictive pericarditis can mimic right heart failure closely, with a raised JVP, ascites and oedema, but classically has a rapid y descent, a pericardial knock, and Kussmaul sign, a JVP that rises rather than falls on inspiration."
+      ],
+      "pitfalls": [
+        "Diagnosing heart failure and never asking what caused it.",
+        "Attributing bilateral oedema to the heart without checking albumin, liver function and a urine protein screen when the JVP is not actually raised.",
+        "Missing constrictive pericarditis, which needs a fundamentally different specialist management pathway from ordinary heart failure."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three non-cardiac causes of bilateral pitting oedema.",
+          "a": "Nephrotic syndrome or another cause of hypoalbuminaemia, chronic liver disease, and severe anaemia or chronic venous insufficiency.",
+          "accept": [
+            "nephrotic",
+            "hypoalbumin",
+            "liver",
+            "anaemia",
+            "anemia",
+            "venous"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has bilateral leg oedema but a normal JVP. Does this favour a cardiac or a non-cardiac cause?",
+          "a": "A normal JVP argues against a cardiac cause, since right-sided cardiac oedema is expected to travel with a raised JVP; a renal, hepatic or nutritional cause should be actively sought instead.",
+          "accept": [
+            "non-cardiac",
+            "against cardiac",
+            "renal",
+            "hepatic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "What bedside findings distinguish constrictive pericarditis from ordinary right heart failure?",
+          "a": "A rapid y descent in the JVP, a pericardial knock on auscultation, and Kussmaul sign, where the JVP rises rather than falls on inspiration.",
+          "accept": [
+            "kussmaul",
+            "pericardial knock",
+            "y descent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "twolevel",
+          "text": "Separates 'what mimics this' from 'what caused the heart failure'",
+          "critical": true
+        },
+        {
+          "id": "noncardiac",
+          "text": "Offers non-cardiac causes of the same oedema pattern"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart failure differential"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ccf.workup": {
+      "id": "skill.ix.ccf.workup",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "Working up congestive cardiac failure",
+      "oneLine": "Confirm and grade the pump, find the cause, and check for a reversible or dangerous complication",
+      "why": "Investigations in heart failure answer several different questions at once, and it is easy to order a panel without knowing which question each test is really for. Ordering by purpose is what lets a student explain a plan rather than just recite a list.",
+      "body": "Group investigations by purpose: confirm and grade the syndrome, find the underlying cause, look for a precipitant, and monitor for complications of both the disease and its treatment.",
+      "keyPoints": [
+        "Confirm and grade: transthoracic echocardiography measures ejection fraction, chamber sizes, wall motion, valve function and estimated pulmonary pressures, and is the single test that separates reduced from preserved ejection fraction.",
+        "Chest radiograph: cardiomegaly (an enlarged cardiothoracic ratio), and a graded pattern of pulmonary venous congestion, upper zone vessel prominence (cephalisation) at lower pulmonary venous pressures, progressing to Kerley B lines and then frank alveolar oedema as pressure rises further; it can also show a pleural effusion.",
+        "ECG: rarely diagnostic of heart failure itself, but essential for finding a cause or trigger, evidence of prior infarction (pathological Q waves), left ventricular hypertrophy, or a new arrhythmia such as atrial fibrillation.",
+        "Cardiac biomarkers (troponin) help identify an acute ischaemic trigger, but a mild, static elevation without a rise-and-fall pattern is common in chronic decompensated failure from myocardial strain and should not automatically be read as an acute coronary event.",
+        "Renal function and electrolytes are essential both because renal impairment can be a cause or consequence of heart failure and because they directly guide diuretic and renin-angiotensin-system therapy.",
+        "A basic screen for reversible or contributing causes: full blood count (anaemia), thyroid function, and, where the history suggests it, iron studies.",
+        "Investigate the underlying cause actively once the syndrome is confirmed: coronary assessment where ischaemia is suspected, and further valve assessment where echo suggests significant valvular disease."
+      ],
+      "pitfalls": [
+        "Treating a chest radiograph as sufficient to diagnose heart failure on its own, without echo.",
+        "Reading a mildly elevated troponin in a decompensated patient as automatic proof of an acute coronary event, without checking for a rise-and-fall pattern.",
+        "Never repeating renal function and electrolytes after starting or increasing diuretic and renin-angiotensin-system therapy.",
+        "Stopping the workup once the syndrome is confirmed, without actively pursuing the underlying cause."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single test both confirms heart failure and separates reduced from preserved ejection fraction?",
+          "a": "Transthoracic echocardiography.",
+          "accept": [
+            "echo",
+            "echocardiogram"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Describe the radiographic progression of pulmonary venous congestion as pressure rises.",
+          "a": "Upper zone vessel prominence (cephalisation) first, then Kerley B lines as interstitial oedema develops, then frank alveolar (bat-wing) pulmonary oedema at the highest pressures.",
+          "accept": [
+            "cephalisation",
+            "kerley",
+            "alveolar",
+            "bat-wing"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why should you not automatically treat a mildly elevated troponin in a decompensated heart failure patient as an acute coronary syndrome?",
+          "a": "Chronic myocardial strain from decompensated failure itself can cause a mild, static troponin elevation without the rise-and-fall pattern expected in an acute plaque event; the ECG and clinical trajectory, not the troponin alone, decide whether an acute event is actually occurring.",
+          "accept": [
+            "strain",
+            "rise and fall",
+            "static",
+            "chronic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why is checking renal function and potassium after starting therapy as important as checking them at baseline?",
+          "a": "Diuretics and renin-angiotensin-system blocking agents can themselves worsen renal function and raise potassium; ongoing monitoring is what allows the dose to be adjusted safely rather than either under-treating congestion out of caution or causing harm by pushing therapy blind.",
+          "accept": [
+            "monitor",
+            "adjust",
+            "potassium",
+            "renal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart failure workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: diagnostic evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.ccf": {
+      "id": "skill.dx.ccf",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Stating the diagnosis of congestive cardiac failure",
+      "oneLine": "Syndrome, ejection fraction category, functional class, cause, and any precipitant, never just 'CCF'",
+      "why": "'CCF' on its own directs nothing. A complete diagnostic statement names five separate things, and each one changes a different part of the management plan.",
+      "body": "State it in five parts: the syndrome and its acuity, the ejection fraction category, the NYHA functional class, the underlying cause, and any identified precipitant.",
+      "keyPoints": [
+        "The syndrome and its acuity: acute decompensated, or chronic stable, congestive (or isolated left- or right-sided) cardiac failure.",
+        "Ejection fraction category from echo: reduced, mildly reduced, or preserved, since this changes which trial-proven therapies apply most directly.",
+        "NYHA functional class (I to IV), which quantifies symptom burden and is tracked over time to judge response to treatment.",
+        "The underlying cause: ischaemic, hypertensive, valvular, a specific cardiomyopathy, or a combination, since this is what actually needs to be treated alongside the failure itself.",
+        "Any identified precipitant of the current decompensation, since correcting it is part of the treatment plan and of preventing recurrence.",
+        "A worked example: 'Acute decompensated congestive cardiac failure, heart failure with reduced ejection fraction (32 percent), NYHA class IV at presentation, likely ischaemic and hypertensive in origin, precipitated by diuretic non-adherence, dietary indiscretion and NSAID use.'"
+      ],
+      "pitfalls": [
+        "Writing 'CCF' with no ejection fraction category, functional class, cause, or precipitant.",
+        "Grading NYHA class from the current acute presentation rather than clarifying the patient's usual baseline as well.",
+        "Never stating an underlying cause, even a working hypothesis, when one has not yet been confirmed."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What five elements make a complete heart failure diagnosis?",
+          "a": "The syndrome and its acuity, the ejection fraction category, the NYHA class, the underlying cause, and any identified precipitant.",
+          "accept": [
+            "acuity",
+            "ejection fraction",
+            "nyha",
+            "cause",
+            "precipitant"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why does the ejection fraction category matter for the diagnostic statement, not just the workup?",
+          "a": "Because the evidence base for several of the most effective heart failure medications is strongest and most direct in reduced ejection fraction, so the category itself shapes which therapies are prioritised.",
+          "accept": [
+            "evidence",
+            "therapy",
+            "treatment"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "complete",
+          "text": "States all five elements of the diagnosis",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart failure diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.ccf": {
+      "id": "skill.tx.ccf",
+      "kind": "treatment",
+      "system": "cardiovascular",
+      "title": "Managing congestive cardiac failure",
+      "oneLine": "Decongest first, then the pillars of therapy that actually change survival",
+      "why": "Students reliably reach for a diuretic and stop there. Diuretics relieve symptoms; a separate group of therapies changes survival, and knowing that distinction, and that they are usually started together rather than one at a time, is what separates symptom control from disease-modifying treatment.",
+      "body": "Manage in two phases: acute decongestion and treatment of any precipitant, then initiation and uptitration of the therapies with proven mortality benefit.",
+      "keyPoints": [
+        "Acute decongestion: intravenous loop diuretic in significant congestion, with the patient sitting upright and given controlled oxygen if hypoxaemic, and close monitoring of renal function, electrolytes and urine output.",
+        "Identify and treat the precipitant actively: withhold an NSAID, control an arrhythmia, treat an infection, and correct uncontrolled hypertension.",
+        "Once stabilising, initiate and progressively uptitrate the four pillars of guideline-directed medical therapy in heart failure with reduced ejection fraction: a renin-angiotensin-system inhibitor (an ACE inhibitor, ARB, or an angiotensin receptor-neprilysin inhibitor where appropriate), a beta blocker, a mineralocorticoid receptor antagonist, and an SGLT2 inhibitor. These four classes are typically started in combination and uptitrated in parallel rather than strictly sequentially, since delay in starting any one of them delays its benefit.",
+        "In heart failure with preserved ejection fraction, management focuses on controlling congestion, blood pressure and any underlying cause, since the strongest reduced-ejection-fraction-specific evidence does not transfer directly, and specific evidence-based options here are more limited and guideline-dependent.",
+        "Non-pharmacological measures matter: fluid and salt restriction as individually appropriate, daily weight monitoring to catch early fluid retention, vaccination, and structured follow-up, which are exactly the kind of measure that prevents the next decompensation.",
+        "Device therapy (an implantable defibrillator, or cardiac resynchronisation therapy) and advanced options (mechanical support, transplantation) are considered in selected patients on optimised medical therapy, and are specialist decisions.",
+        "Treat the underlying cause specifically wherever one is identified: revascularisation in significant ischaemic disease, valve intervention in significant valvular disease, rate or rhythm control in an arrhythmia-mediated cardiomyopathy."
+      ],
+      "pitfalls": [
+        "Treating a diuretic as if it were disease-modifying therapy and stopping there.",
+        "Waiting to start the four pillars of guideline-directed therapy until the patient is fully asymptomatic, rather than starting and uptitrating them as tolerated once acutely stabilising.",
+        "Withholding all renin-angiotensin-system therapy indefinitely after a single episode of renal impairment or hyperkalaemia, rather than adjusting and monitoring.",
+        "Managing decompensation without ever correcting the precipitant that caused it.",
+        "Applying reduced-ejection-fraction therapy assumptions unmodified to a patient with preserved ejection fraction."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Do diuretics change survival in heart failure with reduced ejection fraction?",
+          "a": "No. They relieve congestive symptoms; the therapies with proven survival benefit are a separate group, including renin-angiotensin-system blockade, beta blockers, mineralocorticoid receptor antagonists and SGLT2 inhibitors.",
+          "accept": [
+            "no",
+            "symptom",
+            "not survival"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name the four pillars of guideline-directed medical therapy in heart failure with reduced ejection fraction.",
+          "a": "A renin-angiotensin-system inhibitor (ACE inhibitor, ARB, or ARNI), a beta blocker, a mineralocorticoid receptor antagonist, and an SGLT2 inhibitor.",
+          "accept": [
+            "ace",
+            "arb",
+            "arni",
+            "beta blocker",
+            "mineralocorticoid",
+            "sglt2"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why are the four pillars usually started together rather than one at a time, fully uptitrated, before adding the next?",
+          "a": "Because each class contributes independent benefit and delaying the start of any one of them delays that specific benefit; contemporary practice favours starting all four at low dose and uptitrating in parallel as tolerated, rather than a strict sequential approach.",
+          "accept": [
+            "parallel",
+            "delay",
+            "independent",
+            "together"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient's creatinine rises and potassium increases after starting a renin-angiotensin-system inhibitor and a mineralocorticoid receptor antagonist together. What is the right response?",
+          "a": "Reassess volume status and dosing, check for other contributing drugs, and adjust rather than reflexively stopping both agents; a modest, stable rise in creatinine is expected and tolerated with these agents, and ongoing monitoring guides whether to continue, adjust, or temporarily hold therapy.",
+          "accept": [
+            "adjust",
+            "monitor",
+            "not stop",
+            "reassess"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: heart failure management"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Heart failure: management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle and drug CLASS only. Specific agents, starting doses, uptitration schedules and monitoring intervals must be taken from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}

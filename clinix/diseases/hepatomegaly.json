@@ -1,0 +1,374 @@
+{
+  "_comment": "Hepatomegaly is a SHORT CASE: differential diagnosis of an isolated enlarged liver, distinct from the chronic-liver-disease long case. Exam technique is entirely inherited from skill.exam.gi.liver in abdomen.json; the new content here is the reasoning that reads a cause from margin/surface/consistency/tenderness.",
+  "id": "hepatomegaly",
+  "name": "Hepatomegaly",
+  "fullName": "Hepatomegaly (a short case)",
+  "system": "abdomen",
+  "kbRef": "hepatomegaly",
+  "oneLine": "An enlarged liver, and the five headings that explain it",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Span, not a palpable edge alone, defines hepatomegaly",
+      "skills": [
+        "skill.exam.gi.liver"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Tender or painless is the first, most efficient fork",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.hepatomegaly"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Jaundice, wasting and the cardiac clues",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look specifically for jaundice, cachexia, and stigmata of chronic liver disease, and check the JVP as part of the general survey, since a cardiac cause is found here, not in the abdomen."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Margin, surface, consistency, tenderness, pulsatility",
+      "skills": [
+        "skill.exam.gi.liver",
+        "skill.exam.gi.liver_cause"
+      ],
+      "emphasis": {
+        "skill.exam.gi.liver": {
+          "expect": "Confirm true hepatomegaly by span before describing anything else, then work through margin, surface, consistency, tenderness and pulsatility as a fixed set, every time, not only when a finding is obviously abnormal."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of hepatomegaly",
+      "blurb": "Five headings: infections, malignancy, infiltration, blood, vessels",
+      "skills": [
+        "skill.hepatomegaly.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The LFT pattern, then imaging",
+      "skills": [
+        "skill.ix.hepatomegaly.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Span, character, and the leading heading",
+      "skills": [
+        "skill.hepatomegaly.differential"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.hepatomegaly.general",
+        "title": "Assess this hepatomegaly and give your differential",
+        "task": "This patient has a liver edge palpable on routine examination. Confirm true hepatomegaly, characterise it, and present a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.liver_cause"
+        ],
+        "examinerQuestions": [
+          "How did you confirm this is true hepatomegaly rather than a liver pushed down?",
+          "Describe the margin, surface and consistency you found, and what each suggests.",
+          "Is this liver tender? What does that single fact do to your differential?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.gi.liver",
+      "skill.hx.gi.hepatomegaly",
+      "skill.exam.gi.liver_cause",
+      "skill.hepatomegaly.differential",
+      "skill.ix.hepatomegaly.workup"
+    ]
+  },
+  "skills": {
+    "skill.exam.gi.liver_cause": {
+      "id": "skill.exam.gi.liver_cause",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Reading the cause from margin, surface and consistency",
+      "oneLine": "Four characteristics, examined in order, turn a palpable edge into a differential",
+      "why": "Span alone confirms hepatomegaly. What actually narrows the cause is margin, surface, consistency and tenderness, examined and described as a deliberate set every time, not noted only when obviously abnormal.",
+      "body": "Once hepatomegaly is confirmed by span, describe the edge, margin, surface, consistency, tenderness and pulsatility as a fixed set, since together they are what point towards a cause.",
+      "pitfalls": [
+        "Reporting only 'liver enlarged, span 16 cm' without describing margin, surface or consistency.",
+        "Missing pulsatility, a genuine and examinable finding, because it was not deliberately tested for.",
+        "Assuming any nodular liver is cirrhosis rather than considering metastatic disease."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a nodular liver surface suggest?",
+          "a": "Metastatic cancer, hepatoma, or cirrhosis.",
+          "accept": [
+            "metasta",
+            "hepatoma",
+            "cirrhosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Distinguish the causes of a rounded versus a sharp hepatic margin.",
+          "a": "Rounded suggests infiltrative disease; sharp suggests metastases, hepatitis, or biliary obstruction.",
+          "accept": [
+            "rounded",
+            "infiltrat",
+            "sharp",
+            "metasta"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A liver is firm to hard, non-tender, with a nodular surface and a normal span-to-edge relationship is not applicable since the span itself is markedly increased at 14 cm. What is the leading concern?",
+          "a": "Hepatoma (hepatocellular carcinoma) or metastatic malignancy, given the firm nodular painless enlargement with a substantially increased span.",
+          "accept": [
+            "hepatoma",
+            "malignan",
+            "metasta",
+            "hepatocellular"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Rounded margin: infiltrative disease. Sharp margin: metastases, hepatitis (acute or chronic), or biliary obstruction.",
+        "Smooth surface: malaria, acute hepatitis, infiltrative disease. Nodular surface: metastatic cancer, hepatoma, or cirrhosis (classically micronodular in alcoholic disease, macronodular after hepatitis).",
+        "Firm-to-hard consistency: metastatic cancer and obstructive jaundice. A soft liver is typical of fatty change, early hepatitis, or congestion.",
+        "Tender: right heart failure, acute hepatitis, liver abscess, hepatoma, hepatic infarcts, acute Budd-Chiari syndrome. Painless: fatty liver, infiltrative disease, malaria, leukaemia, lymphoma.",
+        "Pulsatile: tricuspid regurgitation (systolic pulsation) or tricuspid stenosis (diastolic), and also described in hepatocellular carcinoma and haemangioma.",
+        "Massive hepatomegaly (over 10 cm below the costal margin, or a very large span) is a specific pattern most associated with hepatoma.",
+        "A palpable, hard, irregular Sister Mary Joseph node at the umbilicus alongside hepatomegaly should raise metastatic gastric, pancreatic or ovarian malignancy."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, physical examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the liver"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hepatomegaly.differential": {
+      "id": "skill.hepatomegaly.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of hepatomegaly",
+      "oneLine": "Five headings cover almost every cause: infections, malignancy, infiltration, blood, and vessels",
+      "why": "Causes of hepatomegaly are conventionally grouped under five headings, and learning the headings, not just the examples, is what lets you generate a reasonable differential for a cause you have not specifically memorised.",
+      "body": "Group the differential under five headings: infections, malignancies, infiltrative disorders, haematological disorders, and vascular disorders.",
+      "pitfalls": [
+        "Listing individual diseases without the organising headings, making the differential hard to generate under pressure.",
+        "Forgetting the vascular category (heart failure, Budd-Chiari) when the liver findings do not fit an obviously hepatic disease.",
+        "Not naming malaria or kala-azar in an endemic setting."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the five headings under which causes of hepatomegaly are conventionally grouped.",
+          "a": "Infections, malignancies, infiltrative disorders, haematological disorders, and vascular disorders.",
+          "accept": [
+            "infect",
+            "malignan",
+            "infiltrat",
+            "haematolog",
+            "hematolog",
+            "vascular"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 3,
+          "q": "Give two vascular causes of hepatomegaly.",
+          "a": "Right heart failure (or constrictive pericarditis) and Budd-Chiari syndrome (hepatic vein obstruction); veno-occlusive disease is also accepted.",
+          "accept": [
+            "heart failure",
+            "budd-chiari",
+            "constrictive",
+            "veno-occlusive"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "A patient has hepatomegaly with a raised JVP, bibasal crackles, and pedal oedema. Which of the five headings does this belong to, and name the mechanism.",
+          "a": "Vascular: congestive hepatomegaly from right heart failure, where a raised systemic venous pressure is transmitted back through the hepatic veins and engorges the liver.",
+          "accept": [
+            "vascular",
+            "congestive",
+            "heart failure",
+            "venous"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "headings",
+          "text": "Organises the differential under the five standard headings"
+        },
+        {
+          "id": "vascular",
+          "text": "Actively considers a vascular/cardiac cause"
+        }
+      ],
+      "keyPoints": [
+        "Infections: viral hepatitis (acute and chronic), amoebic or pyogenic liver abscess, malaria, kala-azar, tuberculosis, hydatid disease.",
+        "Malignancies: hepatocellular carcinoma (hepatoma), metastatic disease (commonly from GI, breast, lung primaries), and, involving the liver secondarily, lymphoma and leukaemia.",
+        "Infiltrative disorders: fatty liver (alcoholic or non-alcoholic), amyloidosis, glycogen storage disease, and other storage disorders.",
+        "Haematological disorders: chronic haemolytic anaemia, myeloproliferative disease, leukaemia, lymphoma.",
+        "Vascular disorders: right heart failure and constrictive pericarditis (congestive hepatomegaly), Budd-Chiari syndrome (hepatic vein obstruction), and veno-occlusive disease.",
+        "The tender/painless split and the margin-surface-consistency findings from examination are what select the leading heading, rather than working through all five equally in every patient."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly differential"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.hepatomegaly.workup": {
+      "id": "skill.ix.hepatomegaly.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up hepatomegaly",
+      "oneLine": "Liver function tests give the pattern; imaging gives the shape and the mass",
+      "why": "Liver function tests are ordered as a panel, but read as a PATTERN: which values are raised, and by how much relative to each other, points towards hepatocellular, cholestatic, or infiltrative disease before imaging is even done.",
+      "body": "Read the liver function tests as a pattern first, then image, then direct further tests by the leading category.",
+      "pitfalls": [
+        "Ordering liver function tests without interpreting the RATIO between transaminases and alkaline phosphatase, which is where the actual pattern lives.",
+        "Skipping alpha-fetoprotein in a cirrhotic patient with new or changing hepatomegaly.",
+        "Treating a normal ultrasound as excluding all hepatobiliary pathology in a patient with a strong clinical suspicion; a repeat or a different modality may still be needed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Distinguish a hepatocellular from a cholestatic liver function test pattern.",
+          "a": "Hepatocellular: AST/ALT disproportionately raised relative to alkaline phosphatase. Cholestatic: alkaline phosphatase (and gamma-GT) disproportionately raised relative to the transaminases.",
+          "accept": [
+            "ast",
+            "alt",
+            "alkaline phosphatase",
+            "cholestatic",
+            "hepatocellular"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which tumour marker is checked when hepatoma is suspected, particularly in a cirrhotic patient?",
+          "a": "Alpha-fetoprotein (AFP).",
+          "accept": [
+            "alpha-fetoprotein",
+            "afp"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What does ultrasound add over liver function tests alone in the hepatomegaly workup?",
+          "a": "It confirms the enlargement objectively, characterises the echotexture (fatty, nodular, or a focal lesion), and screens the biliary tree for dilation, none of which a blood test alone can show.",
+          "accept": [
+            "echotexture",
+            "focal lesion",
+            "biliary",
+            "confirm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Hepatocellular pattern: AST and ALT disproportionately raised relative to alkaline phosphatase, as in hepatitis.",
+        "Cholestatic pattern: alkaline phosphatase (and gamma-GT) disproportionately raised relative to the transaminases, as in obstructive jaundice or infiltrative disease.",
+        "Synthetic function: albumin and prothrombin time, which reflect chronic severity rather than the acute pattern.",
+        "Ultrasound abdomen: confirms the enlargement, assesses echotexture (fatty, nodular, or a focal lesion), and screens the biliary tree for dilation.",
+        "Alpha-fetoprotein where hepatoma is suspected, particularly with a background of cirrhosis or chronic hepatitis B.",
+        "Viral hepatitis serology where an infective hepatocellular pattern is found.",
+        "A peripheral smear and malaria/kala-azar testing where fever and travel history point that way.",
+        "CT or MRI, and biopsy, where ultrasound finds a focal lesion needing further characterisation."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

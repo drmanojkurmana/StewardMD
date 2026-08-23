@@ -1,0 +1,438 @@
+{
+  "_comment": "Ascites is a SHORT CASE: differential diagnosis of free peritoneal fluid, examined as its own syndrome rather than assumed to be the chronic-liver-disease long case. Same shape as anaemia.json: chapters lean on shared skills, minimal new local skills, differential IS the core content.",
+  "id": "ascites",
+  "name": "Ascites",
+  "fullName": "Ascites (a short case)",
+  "system": "abdomen",
+  "kbRef": "ascites",
+  "oneLine": "Free fluid in the peritoneum, and the four categories that put it there",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Free fluid in the peritoneal cavity, and how much each sign needs",
+      "skills": [
+        "skill.exam.gi.ascites"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Onset, order of swelling, and the four categories",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.ascites"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The JVP and the stigmata, not just the belly",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for stigmata of chronic liver disease, facial puffiness of a nephrotic pattern, and cachexia, each pointing towards a different one of the four categories before you have percussed a single flank."
+        },
+        "skill.gen.edema": {
+          "expect": "Note whether the oedema is dependent and pitting (cardiac, hepatic, renal) or periorbital and generalised (more typical of a nephrotic pattern), and whether it appeared before or after the abdominal swelling."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Ascites plus the one other finding that names the cause",
+      "skills": [
+        "skill.exam.gi.ascites",
+        "skill.exam.gi.gallbladder_kidney",
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.ascites_cause"
+      ],
+      "emphasis": {
+        "skill.exam.gi.ascites": {
+          "expect": "Grade the ascites (mild/moderate/large) and specifically check for tenderness or fever alongside it, which should raise spontaneous bacterial peritonitis if a hepatic cause is already suspected."
+        },
+        "skill.exam.gi.liver": {
+          "expect": "A firm, irregular, shrunken liver supports a hepatic cause; a smooth, tender, enlarged liver with a raised JVP supports a cardiac cause instead."
+        },
+        "skill.exam.gi.spleen": {
+          "expect": "Splenomegaly alongside ascites supports a portal hypertensive, usually hepatic, cause."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of ascites",
+      "blurb": "SAAG as the organising principle",
+      "skills": [
+        "skill.ascites.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One tap, sent correctly, answers most of the question",
+      "skills": [
+        "skill.ix.ascites.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Grade, SAAG category, leading cause",
+      "skills": [
+        "skill.dx.ascites"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ascites.general",
+        "title": "Assess this patient's ascites and give your differential",
+        "task": "This patient has noticed abdominal swelling for three weeks. Examine for ascites and its likely cause, and present your findings with a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.gi.ascites",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen",
+          "skill.exam.gi.ascites_cause"
+        ],
+        "examinerQuestions": [
+          "Roughly how much fluid is needed for the sign you elicited to become positive?",
+          "What single other examination finding would most help you decide between a cardiac and a hepatic cause?",
+          "If you tapped this ascites, what two values would you need to calculate a SAAG?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.gi.ascites",
+      "skill.hx.gi.ascites",
+      "skill.exam.gi.ascites_cause",
+      "skill.ascites.differential",
+      "skill.ix.ascites.workup",
+      "skill.dx.ascites"
+    ]
+  },
+  "skills": {
+    "skill.exam.gi.ascites_cause": {
+      "id": "skill.exam.gi.ascites_cause",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Reading the cause from the rest of the examination",
+      "oneLine": "Ascites plus one other finding usually names the category before any fluid is sent",
+      "why": "The fluid itself looks the same in the flanks whatever the cause. What actually narrows the differential at the bedside is everything found ALONGSIDE the ascites: the JVP, the stigmata, the oedema pattern, and the consistency of any mass.",
+      "body": "Examine ascites as part of a wider survey, deliberately looking for the finding that would confirm or refute each of the four broad categories.",
+      "pitfalls": [
+        "Examining the ascites in isolation without checking the JVP, which is the single fastest way to catch a cardiac cause.",
+        "Assuming ascites with mild pedal oedema must be hepatic without looking for stigmata to actually support that.",
+        "Missing a doughy abdomen or lymphadenopathy that would point towards tuberculosis or malignancy."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "A patient with ascites has a raised JVP with a prominent wave and bibasal crackles. What cause does this point towards?",
+          "a": "A cardiac cause, such as right heart failure or constrictive pericarditis, rather than a primary hepatic one.",
+          "accept": [
+            "cardiac",
+            "heart failure",
+            "constrictive"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Describe the classic abdominal palpation finding in tuberculous peritonitis.",
+          "a": "A 'doughy' abdomen: a diffuse, indistinct resistance to palpation, often with matted bowel loops or lymph nodes, rather than a discrete mass.",
+          "accept": [
+            "doughy",
+            "resistance",
+            "matted"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why does the absence of any stigmata of chronic liver disease, in a patient with new ascites and weight loss, change your leading differential?",
+          "a": "It argues against a hepatic cause and shifts the leading differential towards malignant or tuberculous peritoneal disease, or a renal cause, prompting a SAAG and cytology-directed rather than a purely hepatic workup.",
+          "accept": [
+            "malignan",
+            "tuberculous",
+            "shift",
+            "against hepatic"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Cardiac: raised JVP with a prominent wave, a displaced or abnormal apex, a third heart sound, bibasal crackles, and pitting oedema that is often as marked as the ascites itself.",
+        "Hepatic: stigmata of chronic liver disease (spider naevi, palmar erythema, gynaecomastia), splenomegaly from portal hypertension, and caput medusae with flow away from the umbilicus.",
+        "Renal/nephrotic: generalised oedema, notably periorbital and not just dependent, with relatively few stigmata of chronic liver disease.",
+        "Malignant/tuberculous: a hard, irregular, fixed abdominal or pelvic mass, matted lymphadenopathy, or a doughy, indistinctly resistant abdomen on palpation (the classic description in tuberculous peritonitis), often with cachexia.",
+        "A completely normal cardiac, hepatic and renal examination, with weight loss and low-grade fever, should raise tuberculous or malignant peritoneal disease even before any single confirmatory finding is present."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, physical examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: ascites"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ascites.differential": {
+      "id": "skill.ascites.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of ascites",
+      "oneLine": "The serum-ascites albumin gradient is the modern discriminator, not transudate versus exudate",
+      "why": "Ascites has a long list of causes, and memorising them unsorted is useless at the bedside. The serum-ascites albumin gradient (SAAG) sorts almost all of them into two physiologically distinct groups and should organise how you think about every new case.",
+      "body": "Calculate SAAG as serum albumin minus ascitic fluid albumin, and use it as the primary branch point in the differential.",
+      "pitfalls": [
+        "Sending an ascitic tap without a paired serum albumin, so the SAAG cannot actually be calculated.",
+        "Using the old transudate/exudate cutoffs for ascitic fluid rather than SAAG.",
+        "Forgetting that a high SAAG does not mean 'hepatic'; heart failure and Budd-Chiari also produce a high SAAG."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How is SAAG calculated, and what value predicts portal hypertension?",
+          "a": "Serum albumin minus ascitic fluid albumin; a gradient of 1.1 g/dL or more predicts portal hypertension with about 97 percent accuracy.",
+          "accept": [
+            "serum",
+            "ascitic",
+            "1.1"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name three causes of a HIGH SAAG ascites.",
+          "a": "Cirrhosis, alcoholic hepatitis, heart failure, constrictive pericarditis, massive hepatic metastases, Budd-Chiari syndrome, portal vein thrombosis.",
+          "accept": [
+            "cirrhosis",
+            "heart failure",
+            "budd-chiari",
+            "metastases"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has ascites with a SAAG of 0.6 g/dL. What broad category of cause does this point to, and name two examples.",
+          "a": "A low-SAAG, non-portal-hypertensive cause: peritoneal carcinomatosis, tuberculous peritonitis, nephrotic syndrome, pancreatic or biliary ascites, or bowel obstruction/infarction.",
+          "accept": [
+            "carcinomatosis",
+            "tuberculous",
+            "nephrotic",
+            "pancreatic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why has SAAG replaced the transudate/exudate classification specifically for ascites?",
+          "a": "Because SAAG is a better physiological discriminant for the causes of ascites (reflecting whether portal hypertension is driving the fluid) than the older protein-based transudate/exudate split, which performs less reliably in this fluid compared with, for example, pleural fluid.",
+          "accept": [
+            "better discriminant",
+            "physiolog",
+            "portal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "SAAG = serum albumin minus ascitic fluid albumin. A gradient of 1.1 g/dL or more predicts portal hypertension as the cause with about 97 percent accuracy.",
+        "High SAAG (1.1 g/dL or more, 'portal hypertensive'): cirrhosis, alcoholic hepatitis, cardiac causes (heart failure, constrictive pericarditis), massive hepatic metastases, Budd-Chiari syndrome, portal vein thrombosis.",
+        "Low SAAG (under 1.1 g/dL): peritoneal carcinomatosis, tuberculous peritonitis, pancreatic ascites, biliary ascites, nephrotic syndrome, bowel obstruction or infarction, serositis.",
+        "SAAG has replaced the older transudate-versus-exudate classification for ascites specifically, because it is a better physiological discriminant; the transudate-exudate framework remains useful for pleural fluid but is not the modern approach here.",
+        "Ascites appearing BEFORE generalised oedema ('ascites praecox') is a specific pattern associated with chronic constrictive pericarditis.",
+        "Ascites without significant leg oedema at all suggests chronic constrictive pericarditis, tuberculous or malignant peritonitis, pancreatic ascites, or acute Budd-Chiari syndrome, each of which causes ascites by a mechanism that does not also raise systemic venous pressure or lower albumin enough to cause dependent oedema."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: SAAG"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ascites.workup": {
+      "id": "skill.ix.ascites.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up new ascites",
+      "oneLine": "A diagnostic tap answers most of the question in one sitting",
+      "why": "Nearly every new ascites should be tapped once, deliberately, sending the right panel the first time, because a repeat tap for a forgotten test costs the patient a second procedure.",
+      "body": "A diagnostic paracentesis, paired with a same-day serum sample, does most of the discriminating work in one step; imaging and further tests follow the SAAG result.",
+      "pitfalls": [
+        "Tapping ascitic fluid without a same-day serum albumin, losing the SAAG.",
+        "Waiting for culture results before treating a neutrophil count of 250/mm3 or more.",
+        "Not inoculating culture bottles at the bedside, which significantly reduces the yield compared with sending fluid to the lab in a plain container.",
+        "Ordering a full malignancy and TB workup on every tap regardless of the SAAG and the clinical picture, rather than being directed by them."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What test must be sent alongside the ascitic albumin to actually calculate SAAG?",
+          "a": "A same-day serum albumin.",
+          "accept": [
+            "serum albumin",
+            "same day",
+            "paired"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What ascitic neutrophil count mandates immediate antibiotic treatment, without waiting for culture?",
+          "a": "250 cells per cubic millimetre or more.",
+          "accept": [
+            "250"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why should ascitic fluid be inoculated into blood culture bottles at the bedside rather than sent to the lab in a plain container?",
+          "a": "Bedside inoculation significantly improves the culture yield compared with sending fluid in a plain container, because it gets the fluid into an enriched medium immediately rather than after a delay.",
+          "accept": [
+            "yield",
+            "bedside",
+            "improve"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Diagnostic paracentesis: cell count with differential, albumin (for SAAG, needs a paired serum albumin sent the same day), total protein, and culture in a blood culture bottle at the bedside for the best yield.",
+        "A neutrophil count of 250 cells/mm3 or more in ascitic fluid is the threshold used to diagnose spontaneous bacterial peritonitis and demands immediate antibiotic treatment, not a wait for culture.",
+        "If tuberculosis is suspected: send adenosine deaminase (ADA) and consider cytology and, where available, fluid for AFB and TB-PCR alongside imaging.",
+        "If malignancy is suspected: cytology on the tapped fluid, and imaging (ultrasound or CT) to look for a primary and for peritoneal deposits.",
+        "Ultrasound abdomen confirms the ascites, assesses liver echotexture and portal flow, screens for a mass, and can guide the tap in a difficult abdomen.",
+        "Directed blood work follows the leading category: liver function tests and coagulation for a hepatic cause, a full renal panel with urine protein for a renal cause, and an echocardiogram where a cardiac cause is suspected."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, diagnostic paracentesis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.ascites": {
+      "id": "skill.dx.ascites",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Stating the diagnosis of ascites",
+      "oneLine": "Grade it, give the SAAG-based category, and name the leading cause",
+      "why": "'Ascites' alone is an observation. A complete statement grades how much fluid there is, states whether it is portal hypertensive or not, and commits to a leading cause.",
+      "body": "State it in three parts: grade, SAAG category, and leading cause pending or supported by the workup.",
+      "pitfalls": [
+        "Writing 'ascites' with no grade or SAAG category.",
+        "Naming a cause the SAAG result actually contradicts.",
+        "Omitting whether spontaneous bacterial peritonitis has been actively excluded when the cause is hepatic."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Give the three parts of a complete ascites diagnostic statement.",
+          "a": "The grade, the SAAG category (high or low), and the leading cause.",
+          "accept": [
+            "grade",
+            "saag",
+            "cause"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is 'ascites, likely hepatic' an incomplete statement even after a tap has been done?",
+          "a": "It omits the actual grade and the SAAG value that justifies calling it hepatic, and does not say whether spontaneous bacterial peritonitis has been looked for and excluded, all of which change immediate management.",
+          "accept": [
+            "saag",
+            "grade",
+            "sbp",
+            "incomplete"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Grade: mild (detectable only by ultrasound), moderate (moderate symmetrical distension), or large/gross (marked distension), following the International Ascites Club grading, or the older 1+ to 4+ traditional scale.",
+        "SAAG category: high (portal hypertensive) or low (non-portal-hypertensive), from the paired albumin measurement.",
+        "Leading cause, stated even when provisional: for example 'high-SAAG ascites, likely cirrhotic, pending confirmation of chronic liver disease' is a complete and honest statement.",
+        "Worked example: 'Large-volume ascites, SAAG 1.4 g/dL (high, portal hypertensive), most likely due to decompensated cirrhosis given the associated stigmata of chronic liver disease, with spontaneous bacterial peritonitis excluded on cell count.'"
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, grading and classification"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

@@ -2705,6 +2705,850 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.stroke.risk": {
+      "id": "skill.hx.stroke.risk",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The vascular risk history",
+      "oneLine": "The questions that explain WHY this happened, and that a preceding TIA is a missed warning, not a footnote",
+      "why": "The presenting complaint tells you a stroke happened; the risk history tells you why, and it is what secondary prevention is actually built on. A preceding TIA, in particular, is commonly under-reported by patients as 'nothing', because it resolved, and it is the single most important thing to ask about directly.",
+      "asks": [
+        {
+          "text": "Do you have high blood pressure, for how long, and do you take your tablets regularly?"
+        },
+        {
+          "text": "Do you have diabetes, and how well controlled has it been?"
+        },
+        {
+          "text": "Have you ever noticed a palpitation, a fluttering, or an irregular heartbeat?"
+        },
+        {
+          "text": "Have you ever had a similar weakness, numbness, or a visual or speech problem before that got completely better on its own, even if it only lasted minutes?"
+        },
+        {
+          "text": "Do you smoke, and has anyone checked your cholesterol?"
+        },
+        {
+          "text": "Is anyone in your family known to have had a stroke or a heart attack at a young age?"
+        },
+        {
+          "text": "What medicines do you take regularly, particularly anything that thins the blood, and in a woman of childbearing age, are you on an oral contraceptive?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "A prior TIA is a rehearsal, not a reassurance",
+          "body": "Patients very often do not volunteer a resolved episode because it went away and they assumed it was nothing, cramp, tiredness, a trapped nerve. Ask about it directly and specifically, because the short-term risk of a completed stroke after a TIA is genuinely high, and finding one changes how urgently the current presentation, and any future warning sign, should be treated."
+        },
+        {
+          "heading": "Why atrial fibrillation is asked about separately from 'any heart problems'",
+          "body": "A vague question about heart disease is easy for a patient to answer 'no' to if they have never been formally diagnosed with anything, even if they have felt an irregular heartbeat for years. Ask specifically about a fluttering or irregular sensation, because unrecognised atrial fibrillation is a common and correctable cause of cardioembolic stroke."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'no heart problems' without asking specifically about palpitations or a known irregular pulse.",
+        "Not asking directly about a prior transient episode, and so missing a preceding TIA that the patient dismissed as unimportant.",
+        "Recording 'hypertensive' without asking about actual adherence, which is often the real, modifiable problem."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name four vascular risk factors to ask about in a suspected stroke.",
+          "a": "Hypertension, diabetes, atrial fibrillation/palpitations, smoking, dyslipidaemia, and a prior TIA or stroke.",
+          "accept": [
+            "hypertension",
+            "diabetes",
+            "atrial fibrillation",
+            "smoking",
+            "dyslipid",
+            "tia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why ask specifically about a resolved episode of weakness in the past, rather than just 'any past neurological problems'?",
+          "a": "Patients commonly dismiss a resolved episode as unimportant because it went away; a specific question uncovers a prior TIA, which carries a real short-term risk of a completed stroke and should already have prompted urgent evaluation.",
+          "accept": [
+            "tia",
+            "dismiss",
+            "resolved",
+            "warning"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "coverage",
+          "text": "Covers hypertension, diabetes, cardiac rhythm and a prior transient episode"
+        },
+        {
+          "id": "tia",
+          "text": "Specifically asks about a prior resolved episode of neurological symptoms",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke risk-factor history"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cord.sphincter": {
+      "id": "skill.hx.cord.sphincter",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Asking about the sensory level and the sphincters",
+      "oneLine": "The questions patients least often volunteer, and most need to be asked directly",
+      "why": "A band-like sensory change and a bladder or bowel symptom are both things patients frequently do not mention unless asked directly, either from embarrassment or because they had not connected them to their legs. Both are core parts of the compressive-myelopathy triad and change the urgency of the case.",
+      "asks": [
+        {
+          "text": "Is there any tight, band-like, or belt-like feeling anywhere around your chest or abdomen?"
+        },
+        {
+          "text": "Did the weakness start in your feet and climb upward, or start in your hands and spread downward?"
+        },
+        {
+          "text": "Have you had any difficulty starting or controlling your urine, or any accidental leaking?"
+        },
+        {
+          "text": "Have you noticed any change in your bowel habit, constipation or loss of control?"
+        },
+        {
+          "text": "Any back pain, and if so, is it worse lying flat or at night?"
+        },
+        {
+          "text": "Any recent fever, night sweats or weight loss, and any known contact with tuberculosis?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why the band sensation is worth asking about specifically",
+          "body": "A tight or constricting feeling at the level of the lesion, sometimes called a girdle or funicular sensation, can be the earliest sensory clue to where the compression is, often before a clear level is found on formal testing. It is easily mistaken by the patient for a digestive or cardiac symptom and is rarely offered without a direct question."
+        },
+        {
+          "heading": "Sphincter symptoms are a red flag, not a footnote",
+          "body": "Urinary retention (often first noticed as hesitancy or straining, sometimes progressing to painless overflow), loss of bladder sensation, or new bowel incontinence or severe constipation all indicate that the lesion has already involved the autonomic pathways. Their presence changes this from an urgent case to an emergency one, because sphincter recovery is one of the outcomes most sensitive to how quickly decompression happens."
+        }
+      ],
+      "pitfalls": [
+        "Not asking about bladder and bowel function directly, and relying on the patient to volunteer it.",
+        "Treating night-worse back pain as mechanical or musculoskeletal without asking about constitutional symptoms.",
+        "Missing the ascending-versus-descending pattern, which by itself suggests extramedullary versus intramedullary."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three things this history is specifically built to uncover.",
+          "a": "A band-like (girdle) sensory level, bladder or bowel involvement, and the direction the weakness spread (ascending versus descending).",
+          "accept": [
+            "band",
+            "girdle",
+            "bladder",
+            "bowel",
+            "ascend",
+            "descend"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does finding sphincter involvement change the urgency of a compressive myelopathy case?",
+          "a": "It indicates the autonomic pathways are already involved, and recovery of sphincter function is particularly sensitive to how quickly decompression is achieved, so its presence pushes this from urgent toward emergency management.",
+          "accept": [
+            "autonomic",
+            "recovery",
+            "sensitive",
+            "delay"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sphincter",
+          "text": "Directly asks about bladder and bowel function",
+          "critical": true
+        },
+        {
+          "id": "band",
+          "text": "Asks about a band-like sensory sensation"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes whether the weakness spread ascending or descending"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cord compression history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to spinal cord disease, funicular pain"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Diseases of the spinal cord"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cord.aetiology": {
+      "id": "skill.hx.cord.aetiology",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The aetiology history",
+      "oneLine": "In this population, ask about tuberculosis before you ask about anything else",
+      "why": "The cause of a compressive myelopathy is often guessable from the history alone, and in an Indian setting tuberculosis of the spine is common enough, and treatable enough, that it must be actively asked about rather than left to imaging to discover.",
+      "asks": [
+        {
+          "text": "Any known tuberculosis contact, past TB treatment, or symptoms of active TB (cough, fever, night sweats, weight loss)?"
+        },
+        {
+          "text": "Any known cancer, in this patient or their close family, or unexplained weight loss?"
+        },
+        {
+          "text": "Any history of trauma to the back, however minor it seemed at the time?"
+        },
+        {
+          "text": "Any known bleeding disorder or anticoagulant use, relevant to a spontaneous epidural haematoma?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Why tuberculosis is asked about first in this setting",
+          "body": "Tuberculous (Pott's) spine is a leading cause of compressive myelopathy across age groups here, and unlike most other causes it has a specific, curable medical treatment. A constitutional symptom pattern, low fever, night sweats, weight loss, together with a subacute back pain that has been present for longer than the weakness, is the classic lead-in and is worth actively pursuing rather than waiting for imaging to suggest it."
+        },
+        {
+          "heading": "Other causes worth asking about",
+          "points": [
+            {
+              "t": "Malignancy.",
+              "d": "A known primary cancer, or unexplained weight loss and bone pain, raises metastatic cord compression, which is an oncological emergency."
+            },
+            {
+              "t": "Trauma.",
+              "d": "A recent fall or road traffic injury, even one that seemed minor at the time, especially in a patient with pre-existing spondylosis."
+            },
+            {
+              "t": "Degenerative disease.",
+              "d": "Chronic neck or back pain with a slowly progressive course points towards cervical or lumbar spondylotic myelopathy rather than an acute process."
+            },
+            {
+              "t": "Epidural abscess.",
+              "d": "Fever with back pain and a source of bacteraemia, such as a recent skin infection or intravenous drug use, should raise this even though it is less common than the causes above."
+            }
+          ],
+          "note": "Asking about all four takes under a minute and often narrows the differential before a single test is ordered."
+        }
+      ],
+      "pitfalls": [
+        "Not asking about constitutional symptoms or TB contact because the presenting complaint is 'weak legs', not 'cough'.",
+        "Assuming malignancy in an older patient without also asking the same TB-focused questions, since the two are not mutually exclusive and can coexist."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In an Indian clinical setting, which cause of compressive myelopathy must always be actively asked about?",
+          "a": "Tuberculosis of the spine (Pott's disease).",
+          "accept": [
+            "tuberculosis",
+            "tb",
+            "pott"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: aetiology of cord compression"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: causes of spastic paraplegia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.cord.spine": {
+      "id": "skill.exam.cord.spine",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Examining the spine itself",
+      "oneLine": "Look, then percuss, before you ever touch a reflex hammer",
+      "why": "The spine is examined before the neurological exam because a visible deformity or a tender segment can point straight at the level before a single reflex is tested, and because spinal tenderness is one of the features that helps separate an extradural from an intradural lesion.",
+      "steps": [
+        {
+          "text": "Inspect the whole spine from behind and from the side, specifically looking for a gibbus (a localised angular kyphotic deformity) or any other visible curve or swelling."
+        },
+        {
+          "text": "Palpate each spinous process for tenderness, and percuss gently down the spine with a closed fist, asking the patient to report any pain and noting exactly where it is."
+        },
+        {
+          "text": "Inspect and palpate for a paraspinal swelling or abscess."
+        },
+        {
+          "text": "Assess spinal movement (flexion, extension, lateral bending) only if it can be done safely, and stop immediately if it provokes or worsens neurological symptoms."
+        }
+      ],
+      "normal": "A straight spine with no deformity, no tenderness on palpation or percussion, and no paraspinal swelling.",
+      "abnormal": "A gibbus or other visible deformity; localised tenderness or pain on percussion at a specific level; a paraspinal swelling or abscess.",
+      "significance": "A gibbus deformity is the classic external sign of tuberculous spinal disease. Localised tenderness at percussion commonly matches the level found on imaging and on the sensory exam, and its presence, together with a symmetrical onset, favours an extradural process over an intradural one.",
+      "teach": [
+        {
+          "heading": "How to actually examine the spine",
+          "points": [
+            {
+              "t": "Inspect.",
+              "d": "Look from behind and from the side for a visible deformity, a gibbus, or scoliosis, and for any overlying skin change such as a sinus or a hairy patch."
+            },
+            {
+              "t": "Palpate.",
+              "d": "Run a finger down each spinous process feeling for a step or a gap, and press directly over each one for localised tenderness."
+            },
+            {
+              "t": "Percuss.",
+              "d": "A light tap over each spinous process can reproduce pain at the level of the lesion even when palpation alone does not."
+            }
+          ],
+          "note": "Do this before the limb examination. A tender or deformed level gives you a level to test against once you move on to sensation and reflexes."
+        },
+        {
+          "heading": "Extradural versus intradural, at the bedside before any scan",
+          "table": {
+            "cols": [
+              "Feature",
+              "Extradural",
+              "Intradural"
+            ],
+            "rows": [
+              [
+                "Onset",
+                "Usually symmetrical",
+                "Often asymmetrical"
+              ],
+              [
+                "Root pain",
+                "Less common",
+                "More common"
+              ],
+              [
+                "Spinal tenderness",
+                "Common",
+                "Uncommon"
+              ],
+              [
+                "Spinal deformity",
+                "Often present",
+                "Absent"
+              ]
+            ]
+          },
+          "note": "None of these is individually definitive, but together, symmetrical weakness with spinal tenderness and deformity, they build a reasonable case for an extradural process before imaging confirms it."
+        }
+      ],
+      "pitfalls": [
+        "Forcing spinal movement testing in a patient with a suspected unstable or actively compressive lesion, which can worsen the deficit.",
+        "Skipping spinal percussion because the neurological exam is 'the important part'; it is one of the few bedside clues to extradural versus intradural disease.",
+        "Missing a gibbus because the patient was examined only from the front."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is a gibbus, and what does it classically indicate?",
+          "a": "A localised, angular kyphotic deformity of the spine, classically the external sign of tuberculous (Pott's) spinal disease.",
+          "accept": [
+            "kyphotic",
+            "deformity",
+            "pott",
+            "tuberculous"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has symmetrical leg weakness, spinal tenderness at one level, and a visible deformity there. Does this pattern favour an extradural or an intradural lesion?",
+          "a": "Extradural: symmetrical onset, spinal tenderness and deformity are all features that favour an extradural process over an intradural one.",
+          "accept": [
+            "extradural"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "inspect",
+          "text": "Inspects the whole spine for deformity before palpating"
+        },
+        {
+          "id": "percuss",
+          "text": "Percusses the spine and localises any tenderness to a specific level",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: examination of the spine"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: extradural vs intradural lesion"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: spine examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.pd": {
+      "id": "skill.hx.pd",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The Parkinson's history",
+      "oneLine": "The tremor's own character, and the two questions that find a reversible cause",
+      "why": "The character of the tremor (rest versus action) and a careful drug history are what separate idiopathic disease from a reversible, drug-induced parkinsonism, and missing either is the commonest reason a treatable cause is overlooked.",
+      "asks": [
+        {
+          "text": "When is the tremor most noticeable: at rest, or when you are using the hand for something?"
+        },
+        {
+          "text": "Which side did it start on, and has the other side become involved since?"
+        },
+        {
+          "text": "Have you noticed becoming slower at everyday tasks, such as buttoning a shirt, or that your handwriting has become smaller?"
+        },
+        {
+          "text": "Any change in your walking, in your voice, or has anyone commented that your face looks less expressive?"
+        },
+        {
+          "text": "What medicines are you taking now, or have taken in the past year, particularly anything for nausea, vomiting, or a psychiatric condition?"
+        },
+        {
+          "text": "Any fainting or lightheadedness on standing, constipation, or urinary symptoms?"
+        },
+        {
+          "text": "Has anyone else in the family had a tremor or Parkinson's disease?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Rest tremor is the one that matters most here",
+          "body": "The classic parkinsonian tremor is present when the limb is fully relaxed and supported, at a frequency of roughly 4 to 6 cycles per second, often described by the patient or observed as a pill-rolling movement of the thumb and fingers.\n\nIt characteristically DISAPPEARS with voluntary movement and during sleep, which is the opposite behaviour to an action or intention tremor, and is worth asking about directly since patients often describe the tremor generically without this distinction."
+        },
+        {
+          "heading": "The drug history is not a formality here",
+          "body": "Dopamine receptor blocking drugs (many antiemetics and antipsychotics), and a handful of other agents, produce a parkinsonism that can be clinically identical to the idiopathic disease, and the most useful single clue is a temporal relationship between starting the drug and the onset of symptoms, plus a SYMMETRICAL onset, which is unusual for idiopathic disease."
+        }
+      ],
+      "pitfalls": [
+        "Not distinguishing rest tremor from action or intention tremor in the history, and so missing the discriminating feature.",
+        "Taking a superficial drug history that misses an antiemetic or antipsychotic started months earlier.",
+        "Not asking about non-motor symptoms (autonomic, sleep, mood), which are part of the same disease and matter to the patient as much as the tremor does."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What frequency and character is the classic parkinsonian tremor?",
+          "a": "A 4 to 6 Hz rest tremor, often described as pill-rolling, that improves with voluntary movement and disappears in sleep.",
+          "accept": [
+            "4",
+            "6",
+            "rest",
+            "pill-rolling",
+            "pill rolling"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the drug history matter so much in a new presentation of parkinsonism?",
+          "a": "Dopamine receptor blocking drugs (many antiemetics and antipsychotics) can cause a parkinsonism that looks clinically identical to idiopathic disease but is reversible on stopping the drug, and a temporal link to a new medication, especially with symmetrical onset, should raise this possibility.",
+          "accept": [
+            "dopamine",
+            "antiemetic",
+            "antipsychotic",
+            "reversible",
+            "drug-induced"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tremor",
+          "text": "Establishes whether the tremor is present at rest and improves with action"
+        },
+        {
+          "id": "drugs",
+          "text": "Takes a specific drug history including antiemetics and antipsychotics",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Parkinson's disease history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Parkinson's disease and other movement disorders"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: history in Parkinson's disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.neuropathy.ascending": {
+      "id": "skill.hx.neuropathy.ascending",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The ascending-weakness history",
+      "oneLine": "The infection they forgot, the direction it travelled, and the two questions that flag danger",
+      "why": "A preceding infection is easy for a patient to consider irrelevant and not mention, and the specific direction of spread, together with breathing and swallowing difficulty, are what turn a routine neurology history into a safety-critical one.",
+      "asks": [
+        {
+          "text": "Where did the weakness start, and has it spread since, and in which direction?"
+        },
+        {
+          "text": "Have you had a cold, sore throat, or an episode of diarrhoea in the last few weeks?"
+        },
+        {
+          "text": "Any numbness, tingling, or pain, and if so, where compared with the weakness?"
+        },
+        {
+          "text": "Any difficulty breathing, or does it feel harder to take a deep breath?"
+        },
+        {
+          "text": "Any difficulty swallowing, or has your voice changed?"
+        },
+        {
+          "text": "Any change in your bladder or bowel control?"
+        },
+        {
+          "text": "Any recent vaccination, surgery, or new medication?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The preceding infection is the single most useful question here",
+          "body": "A history of a gastrointestinal or upper respiratory infection one to three weeks before the weakness began is present in a large proportion of Guillain-Barre syndrome cases, and patients very often will not connect a resolved bout of diarrhoea, weeks earlier, to a new weakness now unless asked about it specifically."
+        },
+        {
+          "heading": "Ascending weakness, and why the direction matters",
+          "body": "'Ascending' weakness, first the legs, then the trunk, then the arms, then bulbar and respiratory muscles, is the classic Guillain-Barre pattern and mirrors the book's own worked example. The rarer Miller Fisher variant instead does the opposite, starting with the eye movements and face and descending. Establishing which direction it is travelling, and how fast, tells you how urgently to monitor breathing and swallowing."
+        },
+        {
+          "heading": "Breathing and swallowing are not optional questions",
+          "body": "Ask about them directly in every suspected case, even a mild one, because respiratory and bulbar involvement can progress over hours and is the reason this diagnosis is followed with serial monitoring rather than a single assessment."
+        }
+      ],
+      "pitfalls": [
+        "Not asking specifically about a preceding infection, and so missing the single most useful piece of supporting history.",
+        "Asking about breathing only once, rather than treating it as something to reassess if the weakness is still progressing.",
+        "Assuming a mild presentation cannot progress to respiratory involvement."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What preceding event should be actively asked about in any suspected Guillain-Barre syndrome?",
+          "a": "A gastrointestinal or upper respiratory infection in the preceding one to three weeks.",
+          "accept": [
+            "infection",
+            "diarrhoea",
+            "diarrhea",
+            "respiratory"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Describe the classic direction of weakness spread in Guillain-Barre syndrome, and name the variant that reverses it.",
+          "a": "Classically ascending: legs first, then trunk, then arms, then bulbar and respiratory muscles. The Miller Fisher variant instead is descending, starting with eye movements and the face.",
+          "accept": [
+            "ascending",
+            "miller fisher",
+            "descending"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "infection",
+          "text": "Asks specifically about a preceding infection"
+        },
+        {
+          "id": "safety",
+          "text": "Asks specifically about breathing and swallowing",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Guillain-Barre syndrome history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: Guillain-Barre syndrome"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Guillain-Barre syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cnpalsy": {
+      "id": "skill.hx.cnpalsy",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The isolated facial palsy history",
+      "oneLine": "The three questions that separate Bell's palsy from everything that mimics it",
+      "why": "Bell's palsy is diagnosed by having no other explanation, so the history has to actively hunt for the specific things that WOULD explain it: a rash, an ear problem, a systemic disease, or a second neurological sign, before it can be labelled idiopathic.",
+      "asks": [
+        {
+          "text": "Exactly how did it start, and over how long: sudden, or did it creep in over days or weeks?"
+        },
+        {
+          "text": "Any pain behind or below the ear before the weakness started?"
+        },
+        {
+          "text": "Any rash, blisters, or vesicles in or around the ear, or on the palate?"
+        },
+        {
+          "text": "Any ear discharge, hearing change, or a known ear infection?"
+        },
+        {
+          "text": "Any change in taste, or does sound seem unusually loud on that side?"
+        },
+        {
+          "text": "Any weakness, numbness, or clumsiness anywhere else in the body?"
+        },
+        {
+          "text": "Do you have diabetes, and are you pregnant, if relevant, both of which are recognised associations?"
+        },
+        {
+          "text": "Has this happened before, on either side?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Onset speed is still doing the same job it always does",
+          "body": "A genuinely sudden onset, noticed within a day, fits an idiopathic or viral-associated palsy or a vascular event; a palsy that has crept in gradually over weeks should make you think much harder about a structural cause, particularly a parotid or cerebellopontine angle tumour, rather than assume Bell's palsy."
+        },
+        {
+          "heading": "A rash changes the diagnosis, not just the severity",
+          "body": "A vesicular rash in the ear canal, on the pinna, or on the soft palate, together with the facial weakness, is Ramsay Hunt syndrome (herpes zoster oticus), which has a different course and a real risk of hearing loss, and is not the same diagnosis as Bell's palsy even though the facial weakness itself can look identical."
+        }
+      ],
+      "pitfalls": [
+        "Not asking specifically about a rash, and so missing Ramsay Hunt syndrome.",
+        "Not asking about weakness or sensation elsewhere in the body, and so missing a Guillain-Barre syndrome presenting with bilateral, or apparently unilateral, facial weakness.",
+        "Accepting 'sudden' without confirming the actual timescale, since a subacute, progressive course changes the differential substantially."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What history finding would make you diagnose Ramsay Hunt syndrome rather than Bell's palsy?",
+          "a": "A vesicular rash in the ear canal, on the pinna, or on the palate, accompanying the facial weakness.",
+          "accept": [
+            "rash",
+            "vesicle",
+            "zoster"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a facial palsy that has developed gradually over several weeks need a different level of concern than one that appeared overnight?",
+          "a": "A slowly progressive course is atypical for Bell's palsy and should prompt active consideration of a structural cause, particularly a parotid gland tumour or a cerebellopontine angle lesion, rather than being assumed idiopathic.",
+          "accept": [
+            "structural",
+            "tumour",
+            "tumor",
+            "atypical"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rash",
+          "text": "Asks specifically about a vesicular rash",
+          "critical": true
+        },
+        {
+          "id": "elsewhere",
+          "text": "Asks about weakness or sensory change elsewhere in the body"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: facial palsy history"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.ataxia": {
+      "id": "skill.hx.ataxia",
+      "kind": "history",
+      "system": "neurology",
+      "title": "The ataxia history",
+      "oneLine": "Worse in the dark, and a fall at the wash-basin, are the patient already telling you the type",
+      "why": "Two everyday details, whether the unsteadiness is worse when vision is reduced, and a history of losing balance with the eyes briefly closed during ordinary activities, are close bedside equivalents of Romberg's test and can point strongly toward a sensory cause before you have examined the patient at all.",
+      "asks": [
+        {
+          "text": "Is the unsteadiness worse in the dark, in dim light, or when walking through a narrow space?"
+        },
+        {
+          "text": "Have you ever lost your balance or fallen while washing your face at the sink, drying your face with a towel, or pulling a shirt over your head, times when your eyes are briefly closed?"
+        },
+        {
+          "text": "Any spinning sensation (vertigo), ringing in the ears, or hearing change?"
+        },
+        {
+          "text": "Any numbness, tingling, or a feeling of walking on cotton wool in the feet?"
+        },
+        {
+          "text": "What is your diet like, particularly how much meat, dairy and eggs you eat, and do you drink alcohol?"
+        },
+        {
+          "text": "What medicines do you take, or have taken for a long period, including any anti-seizure medication?"
+        },
+        {
+          "text": "Any change in speech, swallowing, or double vision?"
+        },
+        {
+          "text": "Is anyone else in the family affected by something similar?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Worse in the dark, and the wash-basin sign, are near-bedside Romberg's tests",
+          "body": "A sensory ataxia depends on vision to compensate for the lost proprioceptive input, so it characteristically worsens once vision is reduced or removed, in dim light, at night, or in the brief moment the eyes close to wash the face or pull on a shirt. A patient who volunteers a fall at the sink, or difficulty in a dark room, has essentially already described a positive Romberg's sign from their own daily life, before you have formally tested it."
+        },
+        {
+          "heading": "Vertigo, tinnitus and hearing loss point away from the cord and toward the ear",
+          "body": "These three symptoms travelling together with the unsteadiness point specifically toward a vestibular cause, and their absence is just as informative: a patient with a convincing sensory or cerebellar picture who denies all three has one more reason to look elsewhere for the cause."
+        },
+        {
+          "heading": "Diet, alcohol and drugs are not routine questions here, they are the differential",
+          "body": "A restrictive diet raises B12 or vitamin E deficiency; alcohol use raises both an acute toxic cerebellar effect and chronic nutritional (B1) causes; specific drugs, phenytoin, lithium and several chemotherapy agents among them, are recognised causes of a cerebellar ataxia in their own right."
+        }
+      ],
+      "pitfalls": [
+        "Not asking specifically about worsening in the dark or at the wash-basin, and so missing the history-level equivalent of a positive Romberg's test.",
+        "Skipping the diet and alcohol history because the presenting complaint is 'unsteady walking' rather than anything obviously nutritional.",
+        "Forgetting to ask about vertigo, tinnitus and hearing change as a specific set, rather than a generic 'any ear problems'."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient describes nearly falling while washing their face with their eyes closed. What type of ataxia does this suggest?",
+          "a": "Sensory ataxia, since the loss of balance specifically when vision is removed is the wash-basin sign, a bedside equivalent of a positive Romberg's test.",
+          "accept": [
+            "sensory"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three things in the history that should be actively asked about because they are recognised causes of a cerebellar ataxia.",
+          "a": "Alcohol use, specific drugs (phenytoin, lithium, certain chemotherapy agents), and a preceding viral or other infectious illness.",
+          "accept": [
+            "alcohol",
+            "phenytoin",
+            "lithium",
+            "chemotherapy",
+            "infection"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "dark",
+          "text": "Asks whether the unsteadiness is worse with reduced vision (dark, wash-basin sign)",
+          "critical": true
+        },
+        {
+          "id": "vestibular",
+          "text": "Asks specifically about vertigo, tinnitus and hearing change"
+        },
+        {
+          "id": "cause",
+          "text": "Takes a diet, alcohol and drug history aimed at the differential"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: ataxia history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to ataxia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

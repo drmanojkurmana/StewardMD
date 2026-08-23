@@ -1474,6 +1474,990 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.gi.cld": {
+      "id": "skill.hx.gi.cld",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The chronic liver disease history",
+      "oneLine": "Alcohol, exposure and the four questions that catch decompensation",
+      "why": "A patient with cirrhosis rarely volunteers the diagnosis. The history has two separate jobs: finding the likely cause, which needs a direct and specific alcohol and exposure history, and screening for decompensation, which needs four targeted questions asked of every patient regardless of how well they look.",
+      "asks": [
+        {
+          "text": "Quantify alcohol precisely: what, how much, for how long, and when the last drink was. Do not accept 'socially'."
+        },
+        {
+          "text": "Risk for viral hepatitis: transfusions, injections with reused needles, tattoos, unprotected exposure, IV drug use, family history of liver disease or jaundice."
+        },
+        {
+          "text": "Abdominal distension: onset, rate of increase, and any leg swelling alongside it."
+        },
+        {
+          "text": "Jaundice: ever noticed yellow eyes or urine, and when."
+        },
+        {
+          "text": "Gastrointestinal bleed: vomiting blood, or black tarry stools, ever."
+        },
+        {
+          "text": "Altered sensorium: any confusion, day-night reversal of sleep, or a family member noticing personality change, however mild."
+        },
+        {
+          "text": "Drug history: any known hepatotoxic drug, herbal or unregulated medication use, and current diuretics if already diagnosed."
+        },
+        {
+          "text": "Weight and appetite: unintentional weight loss argues for malignancy rather than simple decompensation."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Alcohol history has to be quantified, not accepted as a category",
+          "body": "Ask for the type of drink, the daily quantity, and the duration in years, then convert to grams per day if you can. A vague 'occasional drinker' hides enormous variation; a precise quantity changes both the differential and how strongly you can attribute the disease to alcohol.",
+          "note": "Average alcohol consumption reported in cirrhotic men in published series is around 160 g a day; asking for an actual number, not a category, is what lets you compare a patient's history against that kind of benchmark."
+        },
+        {
+          "heading": "Four questions that must never be skipped",
+          "points": [
+            {
+              "t": "Distension.",
+              "d": "Onset and rate of increase distinguishes ascites (progressive over weeks) from an acute surgical abdomen."
+            },
+            {
+              "t": "Jaundice.",
+              "d": "New or worsening jaundice in a known cirrhotic often signals superadded injury: alcohol binge, hepatitis, or a tumour."
+            },
+            {
+              "t": "GI bleed.",
+              "d": "Ask directly. A patient may not connect black stools to their liver disease at all."
+            },
+            {
+              "t": "Altered sensorium.",
+              "d": "Hepatic encephalopathy in its earliest grade is a subtle personality change that only a family member notices; the patient themselves often cannot report it."
+            }
+          ],
+          "note": "These four map directly onto the major decompensating events: ascites, GI bleed, jaundice/hepatitis, and encephalopathy. Asking about all four, in every patient, is what stops decompensation being missed on a 'well-looking' outpatient visit."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'I drink socially' instead of a quantified history.",
+        "Never asking the family whether the patient's personality or sleep pattern has changed, which is where early encephalopathy is actually caught.",
+        "Forgetting to ask about a prior GI bleed, since a first variceal bleed can present exactly like this one."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four questions that screen for decompensation in every chronic liver disease history.",
+          "a": "Abdominal distension, jaundice, GI bleeding, and altered sensorium/personality change.",
+          "accept": [
+            "distension",
+            "jaundice",
+            "bleed",
+            "sensorium",
+            "encephalopathy"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why ask a family member about personality change rather than only the patient?",
+          "a": "Early hepatic encephalopathy causes subtle changes in attention and behaviour that the patient themselves often cannot recognise or report, but a family member notices.",
+          "accept": [
+            "family",
+            "notice",
+            "subtle",
+            "personality"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient reports 'occasional' alcohol use. What do you do?",
+          "a": "Quantify precisely: the drink, the amount, the frequency and the duration, converted to an estimate of grams per day where possible, rather than accepting the vague category.",
+          "accept": [
+            "quantify",
+            "amount",
+            "duration",
+            "grams"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "alcohol",
+          "text": "Quantifies alcohol use rather than accepting a vague answer"
+        },
+        {
+          "id": "decompensation",
+          "text": "Screens all four decompensating events (ascites, jaundice, bleed, sensorium)",
+          "critical": true
+        },
+        {
+          "id": "exposure",
+          "text": "Asks about viral hepatitis risk exposures"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, history and risk factors"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: history taking"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.cld_stigmata": {
+      "id": "skill.exam.gi.cld_stigmata",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Peripheral stigmata of chronic liver disease",
+      "oneLine": "A head-to-hand survey that names the disease before the abdomen is even exposed",
+      "why": "Chronic liver disease announces itself outside the abdomen more often than in it. A deliberate survey of hands, chest, endocrine features and breath gathers most of its diagnostic weight before you have touched the liver at all, and several of the signs found here point towards a specific cause of the cirrhosis, not just the cirrhosis itself.",
+      "steps": [
+        {
+          "text": "Hands: look for palmar erythema (sparing the centre of the palm), leuconychia (white nails), clubbing, and Dupuytren's contracture."
+        },
+        {
+          "text": "Test for asterixis: extend both arms, dorsiflex the wrists, spread the fingers, and hold for 15 to 30 seconds, watching for an irregular flap."
+        },
+        {
+          "text": "Chest and trunk: examine the 'necklace' area above the nipples and the upper trunk for spider naevi; demonstrate one by compressing with a pinhead or glass slide and watching it fill from the centre outward on release."
+        },
+        {
+          "text": "Endocrine: look for gynaecomastia (a palpable subareolar nodule, not just fat), diminished body and axillary hair, and ask about testicular atrophy in men or menstrual irregularity in women."
+        },
+        {
+          "text": "Face: parotid and lacrimal gland enlargement, and smell the breath for fetor hepaticus, a sweet, pungent odour."
+        },
+        {
+          "text": "Look for jaundice in the sclera in good light, and for signs of the specific aetiology: tattoo marks (hepatitis B/C), xanthelasma (primary biliary cirrhosis), or skin hyperpigmentation (haemochromatosis)."
+        }
+      ],
+      "normal": "No spider naevi, palmar erythema, gynaecomastia, Dupuytren's contracture, or asterixis; breath unremarkable.",
+      "abnormal": "Spider naevi in the SVC-drained territory, palmar erythema sparing the palm centre, gynaecomastia, testicular atrophy, Dupuytren's contracture, asterixis, fetor hepaticus, or parotid enlargement.",
+      "significance": "Each stigma reflects a specific mechanism: spider naevi and palmar erythema from hyperoestrogenism due to reduced hepatic clearance of androstenedione; asterixis from encephalopathy; fetor hepaticus from portosystemic shunting. Together they turn a suspicion into a syndrome, and some point towards a specific cause.",
+      "teach": [
+        {
+          "heading": "Why so many of these signs are hormonal",
+          "body": "A cirrhotic liver clears androstenedione poorly, so more of it is converted peripherally to oestrogen. The resulting hyperoestrogenic state produces spider naevi, palmar erythema, gynaecomastia and testicular atrophy as one linked group, not four separate findings to memorise independently.",
+          "note": "Spider naevi occur only in the territory drained by the superior vena cava (head, neck, upper chest, arms) because that is where the physiology plays out; a lesion below the umbilicus is not a spider naevus."
+        },
+        {
+          "heading": "Demonstrating a spider naevus correctly",
+          "body": "Compress the central arteriole with a pinhead or the edge of a glass slide; the whole lesion blanches, and on release it refills from the centre outward, in that order. Fewer than a handful can occur normally (about 2 percent of healthy adults), so it is the NUMBER and the associated findings, not one lesion alone, that make the case."
+        },
+        {
+          "heading": "Testing for asterixis properly",
+          "body": "Ask the patient to extend both arms, dorsiflex the wrists fully and spread the fingers, then hold the position. Asterixis is a brief, irregular loss of tone at the wrist, a 'flap', from momentary silent periods in an otherwise tonically active muscle, not a rhythmic tremor. It can be demonstrated at the hip as well, by letting the knees fall apart with the patient supine and the feet flat.",
+          "note": "Asterixis is not specific to liver disease; it also occurs in uraemia, respiratory failure, and several drugs including phenytoin. Context decides the interpretation."
+        },
+        {
+          "heading": "Signs that point to a specific cause",
+          "table": {
+            "cols": [
+              "Finding",
+              "Points towards"
+            ],
+            "rows": [
+              [
+                "Parotid enlargement, Dupuytren's contracture",
+                "Alcohol"
+              ],
+              [
+                "Tattoo marks alongside jaundice",
+                "Hepatitis B or C"
+              ],
+              [
+                "Central obesity, features of metabolic syndrome",
+                "NASH"
+              ],
+              [
+                "Xanthelasma, obstructive jaundice pattern",
+                "Primary biliary cirrhosis"
+              ],
+              [
+                "Skin hyperpigmentation with organomegaly and diabetes",
+                "Haemochromatosis"
+              ],
+              [
+                "Emphysema alongside cirrhosis",
+                "Alpha-1 antitrypsin deficiency"
+              ]
+            ]
+          },
+          "note": "This table is worth learning as a set, since 'signs suggesting the cause' is a favourite viva question distinct from 'signs of cirrhosis' in general."
+        }
+      ],
+      "pitfalls": [
+        "Counting a single small spider naevus as diagnostic; a few can occur normally, and it is the pattern and number that matter.",
+        "Missing gynaecomastia because only the chest was glanced at rather than palpated for a true subareolar nodule.",
+        "Not testing asterixis in a patient who looks entirely well; grade 1 encephalopathy can be missed on inspection alone.",
+        "Failing to look for the signs that suggest a specific aetiology, and so stopping at 'cirrhosis' without a cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where on the body do spider naevi classically occur, and why there specifically?",
+          "a": "In the territory drained by the superior vena cava: head, neck, upper chest and arms, above the nipple line, because that is the physiological pattern of the hyperoestrogenic vascular change.",
+          "accept": [
+            "superior vena cava",
+            "svc",
+            "above the nipple",
+            "neck",
+            "upper chest"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Explain the mechanism linking spider naevi, palmar erythema and gynaecomastia.",
+          "a": "All three follow from hyperoestrogenism, caused by reduced hepatic clearance of androstenedione, its peripheral precursor, so more is converted to oestrogen.",
+          "accept": [
+            "oestrogen",
+            "estrogen",
+            "androstenedione",
+            "clearance"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How do you correctly elicit asterixis?",
+          "a": "Extend both arms with the wrists dorsiflexed and fingers spread, and hold the position for around 15 to 30 seconds, watching for an irregular flap from brief lapses of tone.",
+          "accept": [
+            "dorsiflex",
+            "extend",
+            "hold",
+            "flap"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "A patient with cirrhosis has parotid enlargement and Dupuytren's contracture. What does this pattern suggest about the aetiology, and why is this different from a random collection of signs?",
+          "a": "This combination is classically seen in alcohol-related liver disease, and recognising it as a set (rather than as isolated findings) is what lets the stigmata point towards a specific cause rather than only confirming that liver disease is present.",
+          "accept": [
+            "alcohol",
+            "combination",
+            "set",
+            "pattern"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hands",
+          "text": "Examines hands for palmar erythema, leuconychia, clubbing and Dupuytren's"
+        },
+        {
+          "id": "asterixis",
+          "text": "Correctly elicits asterixis",
+          "critical": true
+        },
+        {
+          "id": "naevi",
+          "text": "Looks for and correctly demonstrates spider naevi in the SVC territory"
+        },
+        {
+          "id": "endocrine",
+          "text": "Comments on endocrine features (gynaecomastia, hair loss)"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: examination"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, physical findings"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: general examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.ascites": {
+      "id": "skill.hx.gi.ascites",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The ascites history",
+      "oneLine": "Onset, rate, and the four questions that separate cardiac, hepatic, renal and malignant causes",
+      "why": "Ascites is a sign, not a diagnosis, and the history is where the four broad causes, cardiac, hepatic, renal and malignant, first start to separate, well before the abdomen is examined or a single test is sent.",
+      "asks": [
+        {
+          "text": "Onset and rate of increase: sudden versus gradual over weeks."
+        },
+        {
+          "text": "Which came first, leg swelling or abdominal swelling? Leg swelling first suggests a cardiac or renal cause; abdominal swelling first suggests a hepatic or malignant one."
+        },
+        {
+          "text": "Breathlessness or orthopnoea alongside the swelling, suggesting a cardiac cause."
+        },
+        {
+          "text": "Known liver disease, alcohol use, or risk factors for chronic hepatitis."
+        },
+        {
+          "text": "Frothy urine, or known kidney disease, suggesting a nephrotic cause."
+        },
+        {
+          "text": "Weight loss, loss of appetite, or a known malignancy, past or present."
+        },
+        {
+          "text": "Fever, night sweats, or contact with tuberculosis."
+        },
+        {
+          "text": "Menstrual history and any pelvic symptoms in a woman, given ovarian pathology as a cause."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The order swelling appears in is a genuine clue",
+          "body": "In cardiac and renal disease, dependent oedema of the legs typically appears before or alongside ascites, because the driving pressure is systemic venous or generalised fluid retention. In cirrhosis and in malignant or tuberculous peritoneal disease, the abdomen often distends first, sometimes for weeks, before any leg swelling appears at all.",
+          "note": "This single question, asked precisely, does real discriminating work before you have examined anything."
+        },
+        {
+          "heading": "Four causes, four question sets",
+          "table": {
+            "cols": [
+              "Suspected cause",
+              "Key questions"
+            ],
+            "rows": [
+              [
+                "Cardiac",
+                "Orthopnoea, paroxysmal nocturnal dyspnoea, leg swelling first, known heart disease"
+              ],
+              [
+                "Hepatic",
+                "Alcohol, jaundice, known liver disease, viral hepatitis risk"
+              ],
+              [
+                "Renal (nephrotic)",
+                "Frothy urine, facial puffiness on waking, known kidney disease"
+              ],
+              [
+                "Malignant / tuberculous",
+                "Weight loss, appetite, fever, night sweats, TB contact, known malignancy"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Assuming all ascites is hepatic without asking about orthopnoea or frothy urine.",
+        "Not asking which swelling, leg or abdomen, came first.",
+        "Missing a B symptom pattern (fever, weight loss, night sweats) that should raise tuberculosis or malignancy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single history question helps separate a cardiac/renal cause of ascites from a hepatic/malignant one?",
+          "a": "Whether leg swelling or abdominal swelling appeared first: legs first suggests cardiac or renal disease, abdomen first suggests hepatic or malignant disease.",
+          "accept": [
+            "leg",
+            "first",
+            "abdomen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name three symptoms that would make you suspect a malignant or tuberculous cause of ascites rather than cirrhosis.",
+          "a": "Weight loss, loss of appetite, fever, night sweats, or known TB contact.",
+          "accept": [
+            "weight loss",
+            "fever",
+            "night sweats",
+            "appetite"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why ask specifically about frothy urine in a patient with new ascites?",
+          "a": "It suggests heavy proteinuria and a nephrotic cause of ascites through hypoalbuminaemia, which needs a very different workup from a hepatic cause.",
+          "accept": [
+            "proteinuria",
+            "nephrotic",
+            "protein"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "onset",
+          "text": "Establishes onset and rate of increase"
+        },
+        {
+          "id": "order",
+          "text": "Asks which swelling, leg or abdomen, came first",
+          "critical": true
+        },
+        {
+          "id": "causes",
+          "text": "Screens cardiac, hepatic, renal and malignant/TB causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.splenomegaly": {
+      "id": "skill.hx.gi.splenomegaly",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The splenomegaly history",
+      "oneLine": "Fever, bleeding, and B symptoms: the three question sets behind an enlarged spleen",
+      "why": "A palpable spleen has already doubled or tripled in size, so it is never a trivial finding, and the history exists to sort it into infective, haematological, or portal hypertensive before a single test is sent.",
+      "asks": [
+        {
+          "text": "Fever, its pattern and duration, and any travel to or residence in a malaria- or kala-azar-endemic area."
+        },
+        {
+          "text": "Easy bruising, bleeding gums, or prolonged bleeding after minor cuts, suggesting thrombocytopenia."
+        },
+        {
+          "text": "Loss of weight, loss of appetite, drenching night sweats, and any lump felt elsewhere (lymph nodes), suggesting a lymphoproliferative cause."
+        },
+        {
+          "text": "Joint pains, skin rash, or photosensitivity, suggesting a connective tissue disease such as SLE or rheumatoid arthritis."
+        },
+        {
+          "text": "Alcohol use, jaundice, or known liver disease, suggesting a portal hypertensive cause."
+        },
+        {
+          "text": "Left upper quadrant pain radiating to the left shoulder, suggesting a splenic infarct."
+        },
+        {
+          "text": "Any known chronic haemolytic disorder, or a family history of one."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Three question sets, three categories",
+          "table": {
+            "cols": [
+              "Category",
+              "Ask about"
+            ],
+            "rows": [
+              [
+                "Infective",
+                "Fever pattern, travel/endemic exposure, contact with TB or infective endocarditis risk"
+              ],
+              [
+                "Haematological",
+                "Bruising, bleeding, B symptoms (weight loss, night sweats), lymph node swelling"
+              ],
+              [
+                "Portal hypertensive",
+                "Alcohol, jaundice, known liver disease, GI bleeding"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Left shoulder tip pain is a specific clue",
+          "body": "Pain in the left upper quadrant radiating to the tip of the left shoulder (Kehr's sign) suggests diaphragmatic irritation from a splenic infarct or, in the right context, splenic rupture, and should be asked about directly rather than left to a general pain question."
+        }
+      ],
+      "pitfalls": [
+        "Asking only about fever and missing the bleeding/bruising questions that point to a haematological cause.",
+        "Not asking about B symptoms, which are the single most useful screen for a lymphoproliferative cause.",
+        "Forgetting to ask about travel or residence in an endemic area for malaria or kala-azar."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three broad categories a splenomegaly history is trying to sort between.",
+          "a": "Infective, haematological (including lymphoproliferative), and portal hypertensive causes.",
+          "accept": [
+            "infect",
+            "haematolog",
+            "hematolog",
+            "portal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are 'B symptoms' and why ask about them specifically?",
+          "a": "Fever, drenching night sweats and unintentional weight loss; their presence raises suspicion of a lymphoproliferative malignancy such as lymphoma or leukaemia.",
+          "accept": [
+            "fever",
+            "night sweats",
+            "weight loss",
+            "lymphoma"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient with splenomegaly reports pain radiating to the left shoulder tip. What does this suggest?",
+          "a": "Diaphragmatic irritation, classically from a splenic infarct (Kehr's sign), and should prompt urgent evaluation.",
+          "accept": [
+            "infarct",
+            "kehr",
+            "diaphragm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fever",
+          "text": "Explores fever pattern and endemic exposure"
+        },
+        {
+          "id": "bleeding",
+          "text": "Asks about bruising/bleeding tendency",
+          "critical": true
+        },
+        {
+          "id": "bsymptoms",
+          "text": "Screens for B symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Splenomegaly, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: splenomegaly history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.hepatomegaly": {
+      "id": "skill.hx.gi.hepatomegaly",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The hepatomegaly history",
+      "oneLine": "Tender or painless is the first fork, and it separates the two differentials cleanly",
+      "why": "An enlarged liver divides early, on history alone, into tender and painless causes, and those two groups barely overlap. Asking about pain first, before anything else, is the single most efficient question in this short case.",
+      "asks": [
+        {
+          "text": "Right upper quadrant pain or discomfort: present or absent, and its character."
+        },
+        {
+          "text": "Jaundice, dark urine, or pale stools."
+        },
+        {
+          "text": "Fever, and its pattern and duration."
+        },
+        {
+          "text": "Alcohol use, quantified."
+        },
+        {
+          "text": "Weight loss and appetite."
+        },
+        {
+          "text": "Known malignancy elsewhere, past or present."
+        },
+        {
+          "text": "Breathlessness, orthopnoea, or known heart disease, suggesting a congestive cause."
+        },
+        {
+          "text": "Travel or residence in a malaria- or kala-azar-endemic area."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Tender versus painless splits the differential immediately",
+          "table": {
+            "cols": [
+              "Tender hepatomegaly",
+              "Painless hepatomegaly"
+            ],
+            "rows": [
+              [
+                "Right heart failure",
+                "Fatty liver"
+              ],
+              [
+                "Acute hepatitis",
+                "Infiltrative disease (amyloid, lymphoma)"
+              ],
+              [
+                "Liver abscess",
+                "Malaria"
+              ],
+              [
+                "Hepatoma (can be either)",
+                "Leukaemia"
+              ],
+              [
+                "Hepatic infarcts",
+                "Chronic (burnt-out) cirrhosis, if palpable"
+              ],
+              [
+                "Acute Budd-Chiari syndrome",
+                ""
+              ]
+            ]
+          },
+          "note": "This single question, asked first, does more work than any other in the hepatomegaly short case."
+        },
+        {
+          "heading": "Fever plus tenderness plus a travel or exposure history",
+          "body": "This combination should specifically raise a liver abscess (amoebic or pyogenic) or malaria, both of which are common, treatable causes of a tender liver in an endemic setting and are frequently missed if the history stops at 'fever'."
+        }
+      ],
+      "pitfalls": [
+        "Not asking specifically whether the liver enlargement is tender, and so missing the fastest branch point in the whole differential.",
+        "Skipping travel and endemic exposure history in a febrile patient with a tender liver.",
+        "Not asking about a known primary malignancy elsewhere when painless hepatomegaly is found."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single history question most efficiently splits the hepatomegaly differential?",
+          "a": "Whether the liver enlargement is tender or painless.",
+          "accept": [
+            "tender",
+            "painless",
+            "pain"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three causes of TENDER hepatomegaly.",
+          "a": "Right heart failure, acute hepatitis, liver abscess, hepatoma, hepatic infarcts, acute Budd-Chiari syndrome.",
+          "accept": [
+            "heart failure",
+            "hepatitis",
+            "abscess",
+            "hepatoma",
+            "budd-chiari"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A febrile patient has a tender liver and a history of travel to a rural area. What two treatable causes should you actively consider?",
+          "a": "Liver abscess (amoebic or pyogenic) and malaria.",
+          "accept": [
+            "abscess",
+            "malaria"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tenderness",
+          "text": "Asks explicitly whether the enlargement is tender or painless",
+          "critical": true
+        },
+        {
+          "id": "systemic",
+          "text": "Screens jaundice, fever, weight loss and cardiac symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.jaundice": {
+      "id": "skill.hx.gi.jaundice",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The jaundice history",
+      "oneLine": "Urine, stools and pruritus separate the three mechanisms before any test is sent",
+      "why": "Jaundice is a laboratory finding you can see. The history's job is to sort it into prehepatic, hepatic, or posthepatic using three questions that carry most of the discriminating power: the colour of the urine, the colour of the stool, and whether there is itching.",
+      "asks": [
+        {
+          "text": "Urine colour: normal, or dark/tea-coloured."
+        },
+        {
+          "text": "Stool colour: normal, or pale/clay-coloured."
+        },
+        {
+          "text": "Itching (pruritus): present or absent, and its severity."
+        },
+        {
+          "text": "Abdominal pain, its site and character, and any fever with chills."
+        },
+        {
+          "text": "Alcohol use, quantified, and any known chronic liver disease."
+        },
+        {
+          "text": "Risk factors for viral hepatitis: transfusion, injections, tattoos, unprotected exposure."
+        },
+        {
+          "text": "Drug history, including any new medication, herbal remedy, or unregulated supplement in the preceding weeks."
+        },
+        {
+          "text": "Family history of jaundice, anaemia, or gallstones, and, in a child or young adult, of early jaundice with a similar pattern."
+        },
+        {
+          "text": "Contact with jaundice, contaminated food or water, in the preceding weeks."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Three questions, most of the discriminating power",
+          "table": {
+            "cols": [
+              "Finding",
+              "Mechanism suggested"
+            ],
+            "rows": [
+              [
+                "Normal urine and stool, no pruritus",
+                "Prehepatic (haemolytic): unconjugated bilirubin is not water-soluble and is not excreted in urine"
+              ],
+              [
+                "Dark urine, normal stool, no or mild pruritus",
+                "Hepatic: some conjugated bilirubin is made and excreted in urine, biliary flow is not fully obstructed"
+              ],
+              [
+                "Dark urine, pale stool, marked pruritus",
+                "Posthepatic (obstructive): conjugated bilirubin cannot reach the gut, so stool loses its colour and bile salts accumulate in the skin"
+              ]
+            ]
+          },
+          "note": "This table is worth being able to reproduce cold; it is the single most examined piece of reasoning in the whole jaundice short case."
+        },
+        {
+          "heading": "Pain and fever add the surgical dimension",
+          "body": "Colicky right upper quadrant pain with fever and rigors (Charcot's triad, when jaundice is added as the third element) points towards ascending cholangitis from a stone or stricture, and is a different urgency from painless progressive jaundice, which should raise a malignant biliary obstruction instead."
+        }
+      ],
+      "pitfalls": [
+        "Asking 'any jaundice symptoms' as a single vague question instead of urine, stool and pruritus specifically.",
+        "Not asking about new drugs or herbal remedies, a common and reversible cause that is easy to miss.",
+        "Missing Charcot's triad in a patient with painful, febrile jaundice."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three history questions that carry the most weight in separating the mechanisms of jaundice.",
+          "a": "Urine colour, stool colour, and the presence of pruritus.",
+          "accept": [
+            "urine",
+            "stool",
+            "pruritus",
+            "itch"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient has dark urine, pale stools and marked itching. Which mechanism does this suggest, and why?",
+          "a": "Posthepatic (obstructive) jaundice: conjugated bilirubin cannot reach the gut, so the stool loses its normal colour, and accumulating bile salts in the skin cause the itching.",
+          "accept": [
+            "posthepatic",
+            "obstructive",
+            "conjugated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does prehepatic (haemolytic) jaundice typically NOT cause dark urine?",
+          "a": "The excess bilirubin is unconjugated and not water-soluble, so it is not filtered into the urine even though the serum level is raised.",
+          "accept": [
+            "unconjugated",
+            "water-soluble",
+            "not filtered"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triad",
+          "text": "Asks specifically about urine colour, stool colour and pruritus",
+          "critical": true
+        },
+        {
+          "id": "pain_fever",
+          "text": "Explores pain and fever pattern for a surgical/obstructive cause"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gen.jaundice": {
+      "id": "skill.gen.jaundice",
+      "kind": "general_exam",
+      "system": "abdomen",
+      "title": "Examining for jaundice",
+      "oneLine": "The sclera in daylight, and what its exact shade is trying to tell you",
+      "why": "Jaundice is graded and even sub-classified by simple inspection, done correctly: in adequate natural light, at the sclera first, because the sclera shows colour change before the skin does and is unaffected by skin pigmentation.",
+      "steps": [
+        {
+          "text": "Examine in good natural daylight wherever possible; artificial light, especially fluorescent or yellow-toned lighting, distorts colour judgement."
+        },
+        {
+          "text": "Ask the patient to look down while you gently retract the upper eyelid, exposing the sclera, and inspect it against the white of your own eye or a white background."
+        },
+        {
+          "text": "Then inspect the undersurface of the tongue and the hard palate, which are the next most sensitive sites."
+        },
+        {
+          "text": "Finally inspect the skin generally, noting the distribution and any additional colour: lemon-yellow, dark yellow, or greenish."
+        },
+        {
+          "text": "Grade as mild (sclera only) or moderate (skin also involved); note that no single standard grading scale is universally used, and describing what you actually see is preferred to forcing a grade."
+        }
+      ],
+      "normal": "No scleral or skin yellowing.",
+      "abnormal": "Scleral icterus, with or without generalised skin yellowing.",
+      "significance": "Clinically detectable jaundice requires a serum bilirubin of roughly 2 to 3 mg/dL or more; the scleral colour itself gives a further clue to the mechanism.",
+      "teach": [
+        {
+          "heading": "Why the sclera first",
+          "body": "The sclera is white, avascular connective tissue with a high affinity for bilirubin and no confounding skin pigment, so it shows colour change earlier and more reliably than skin, particularly in patients with darker skin tones where skin yellowing is harder to judge."
+        },
+        {
+          "heading": "Scleral colour is itself a clue",
+          "table": {
+            "cols": [
+              "Scleral colour",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Lemon yellow",
+                "Most likely haemolytic (prehepatic) jaundice"
+              ],
+              [
+                "Dark yellow",
+                "Obstructive (posthepatic) jaundice"
+              ],
+              [
+                "Greenish dark yellow",
+                "Longstanding obstructive jaundice, from oxidation of bilirubin to biliverdin"
+              ]
+            ]
+          },
+          "note": "This is a genuine bedside clue, though never a substitute for the urine/stool/pruritus history and the actual liver function tests."
+        }
+      ],
+      "pitfalls": [
+        "Examining under artificial or yellow-toned lighting and over- or under-calling jaundice as a result.",
+        "Stopping at the sclera and never checking the undersurface of the tongue, which is useful when scleral findings are equivocal.",
+        "Treating the presence of jaundice as itself a diagnosis rather than a sign needing a mechanism."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where should jaundice be looked for first, and why?",
+          "a": "The sclera, because it is white avascular tissue with no confounding skin pigment and shows colour change earlier than skin.",
+          "accept": [
+            "sclera",
+            "avascular",
+            "pigment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Roughly what serum bilirubin is needed before jaundice becomes clinically detectable?",
+          "a": "Around 2 to 3 mg/dL.",
+          "accept": [
+            "2",
+            "3"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient's sclera is described as lemon-yellow. What mechanism does this suggest, and how confident should you be in that alone?",
+          "a": "It suggests a haemolytic (prehepatic) cause, but scleral colour is a soft clue only and must be confirmed with the urine/stool/pruritus history and liver function tests, never relied on alone.",
+          "accept": [
+            "haemolytic",
+            "prehepatic",
+            "soft clue",
+            "confirm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "light",
+          "text": "Examines in adequate natural light"
+        },
+        {
+          "id": "sclera",
+          "text": "Checks sclera before skin",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "General examination: jaundice"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "General examination: jaundice"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

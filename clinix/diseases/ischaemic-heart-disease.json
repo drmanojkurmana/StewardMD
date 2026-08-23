@@ -1,0 +1,1155 @@
+{
+  "_comment": "CliniX LONG case. IHD/ACS is unusual among CVS long cases in that the cardiovascular examination is often near-normal; the teaching weight sits in the history (chest pain, already a deep shared skill), the ECG evolution, biomarkers, and management, with exam findings mostly used to detect COMPLICATIONS.",
+  "id": "ischaemic-heart-disease",
+  "name": "Ischaemic heart disease",
+  "fullName": "Ischaemic heart disease and acute coronary syndrome",
+  "system": "cardiovascular",
+  "kbRef": "ischaemic_heart_disease",
+  "oneLine": "A demand the coronary supply cannot meet, from stable angina to a dying muscle",
+  "estMinutes": 75,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "One spectrum, three names, and what separates them",
+      "skills": [
+        "skill.ihd.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question, and never a delay in a chest-pain patient",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age, sex and risk factors set the pretest probability before you ask a single question",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age and sex change pretest probability substantially: ischaemic pain is far more likely in an older man than a young woman with an identical description, though the diagnosis must never be dismissed on demographics alone. Note occupation and known risk factors up front, since they are about to matter in every later chapter."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "The character and the tempo of the pain, and the risk factor profile",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.cvs.chestpain",
+        "skill.hx.ihd.riskfactors"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "The tempo separates the three faces of ischaemic heart disease: a stable, unchanged pattern of exertional pain for months is chronic stable angina; a new, worsening, or rest pattern over days to weeks is an acute coronary syndrome; and sudden, severe, unremitting pain now, with breathlessness, sweating and nausea, is the classic presentation you must never sit on."
+        },
+        "skill.hx.cvs.chestpain": {
+          "expect": "Ask explicitly whether this pain is the same as before, or different: worse, longer, occurring at rest, or waking her from sleep, because any one of those makes it unstable regardless of how the pain itself is described. In a diabetic or elderly patient, actively screen for angina equivalents even when they deny chest pain outright."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Every risk factor is a question you must actually ask, not assume",
+      "skills": [
+        "skill.hx.ihd.riskfactors"
+      ],
+      "emphasis": {
+        "skill.hx.ihd.riskfactors": {
+          "expect": "Go through each modifiable risk factor by name rather than asking generally about 'health problems', and ask about premature coronary disease in a first-degree relative specifically, since a vague family history of 'heart trouble' understates its significance until you ask the age at which it happened."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Often unremarkable, which is itself a finding worth stating",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "In an uncomplicated presentation general examination can be entirely normal, and that is itself worth stating explicitly rather than skipped. Look specifically for pallor, sweating (diaphoresis) and distress during active pain, and for xanthelasma or corneal arcus as markers of dyslipidaemia."
+        },
+        "skill.gen.vitals": {
+          "expect": "Vitals during active ischaemia can show tachycardia from sympathetic activation, or, with inferior involvement, bradycardia and hypotension from vagal activation. A new gallop, crepitations, or hypotension all point towards a mechanical or pump complication and change the urgency of the assessment."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "Looking for a complication, since the murmur of the disease itself is often silence",
+      "skills": [
+        "skill.exam.cvs.pulse",
+        "skill.exam.cvs.jvp",
+        "skill.exam.cvs.apex",
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.bp",
+        "skill.exam.cvs.heart_failure_signs"
+      ],
+      "emphasis": {
+        "skill.exam.cvs.pulse": {
+          "expect": "Often normal in an uncomplicated presentation. Bradycardia and hypotension together during acute chest pain should raise concern for an inferior infarction with vagal or right ventricular involvement; an irregular pulse raises a new arrhythmia as a complication."
+        },
+        "skill.exam.cvs.bp": {
+          "expect": "Hypertension is both a risk factor to document and, during an acute event, can reflect sympathetic activation from pain; new hypotension in this context is concerning for cardiogenic shock or a right ventricular infarct and needs urgent attention, not reassurance."
+        },
+        "skill.exam.cvs.heartsounds": {
+          "expect": "An S4 is common even in stable angina, reflecting a stiff, ischaemic ventricle, and is not itself alarming. A new S3 during an acute presentation suggests significant left ventricular dysfunction and should prompt an urgent search for pump failure."
+        },
+        "skill.exam.cvs.murmurs": {
+          "expect": "The examination is often entirely silent in uncomplicated ischaemic heart disease. A NEW pansystolic murmur during or after an infarction is a mechanical emergency until proven otherwise: acute mitral regurgitation from papillary muscle rupture or dysfunction, or a new ventricular septal defect from septal rupture, both of which need immediate escalation."
+        },
+        "skill.exam.cvs.heart_failure_signs": {
+          "expect": "Actively check this cluster in every ACS presentation, since pump failure is one of the commonest and most dangerous complications; basal crepitations and a new S3 in this setting indicate acute left ventricular failure, which changes triage and monitoring immediately."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the ischaemic picture together",
+      "blurb": "Often a normal exam with an abnormal ECG, and why that is not a contradiction",
+      "skills": [
+        "skill.ihd.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Pain character, tempo, risk, and where on the spectrum this sits",
+      "skills": [
+        "skill.ihd.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "The five things chest pain must never be mistaken for",
+      "skills": [
+        "skill.ihd.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The ECG within minutes, the troponin over hours, and what each is really for",
+      "skills": [
+        "skill.ix.ihd.ecg",
+        "skill.ix.ihd.biomarkers"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and classification",
+      "blurb": "STEMI, NSTEMI, unstable angina, and the universal definition of infarction",
+      "skills": [
+        "skill.dx.ihd"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Reperfusion when it is a STEMI, and the pillars that follow every event",
+      "skills": [
+        "skill.tx.ihd"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ihd.history",
+        "title": "Take a chest pain history",
+        "task": "This 58-year-old man presents with chest pain that started two hours ago. Take a focused history in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.cvs.chestpain",
+          "skill.hx.ihd.riskfactors"
+        ],
+        "examinerQuestions": [
+          "What features of this pain make you concerned about an acute coronary syndrome rather than stable angina?",
+          "Give three differentials you must actively exclude in this presentation, and how you would screen for each.",
+          "What would make you classify this as unstable angina specifically?"
+        ]
+      },
+      {
+        "id": "osce.ihd.cvs_exam",
+        "title": "Examine for a complication of a recent myocardial infarction",
+        "task": "This patient was admitted three days ago with a myocardial infarction and has become more breathless overnight. Examine the cardiovascular system and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.cvs.jvp",
+          "skill.exam.cvs.apex",
+          "skill.exam.cvs.heartsounds",
+          "skill.exam.cvs.murmurs",
+          "skill.exam.cvs.heart_failure_signs"
+        ],
+        "examinerQuestions": [
+          "You hear a new pansystolic murmur. What are the two mechanical complications you must consider, and how would you distinguish them?",
+          "How would basal crepitations here change the urgency of your assessment?",
+          "What time course after infarction would make you most suspicious of a mechanical complication?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.ihd.arvind",
+      "title": "A man with crushing chest pain since breakfast",
+      "opening": "Arvind Mehta, 58, has been brought to the emergency department by his family with severe chest pain that began two hours ago. He is sweaty and anxious. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Arvind Mehta",
+        "age": 58,
+        "sex": "male",
+        "occupation": "Shopkeeper",
+        "residence": "Urban, lives with his wife"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, I have severe pain in the centre of my chest since two hours ago, right after breakfast. It has not gone away.",
+          "key": true
+        },
+        "site_character": {
+          "cues": [
+            "where exactly",
+            "point",
+            "what does it feel like",
+            "character",
+            "describe the pain",
+            "heaviness",
+            "tightness"
+          ],
+          "reply": "It is a heavy, crushing feeling right in the centre of my chest. I cannot point to one spot, it feels like a weight sitting on me.",
+          "key": true
+        },
+        "radiation": {
+          "cues": [
+            "does it go anywhere",
+            "radiate",
+            "spread",
+            "jaw",
+            "arm",
+            "back"
+          ],
+          "reply": "Yes, it goes into my left arm and up into my jaw.",
+          "key": true
+        },
+        "onset_progression": {
+          "cues": [
+            "when did it start",
+            "sudden",
+            "gradual",
+            "how did it come on",
+            "rest or exertion"
+          ],
+          "reply": "It came on suddenly while I was sitting having breakfast, not during any activity. It has stayed severe since then, it has not gone away or gotten better with rest.",
+          "key": true
+        },
+        "prior_episodes": {
+          "cues": [
+            "before",
+            "happened before",
+            "similar pain",
+            "previous episodes",
+            "usual pain"
+          ],
+          "reply": "I have had some chest tightness while climbing stairs over the last two months, but it always went away after a couple of minutes of resting. This is completely different, much worse, and it has not stopped.",
+          "key": true
+        },
+        "associated": {
+          "cues": [
+            "sweating",
+            "nausea",
+            "vomiting",
+            "breathless",
+            "anything else with it"
+          ],
+          "reply": "I am sweating a lot and I feel sick to my stomach. I am also quite breathless.",
+          "key": true
+        },
+        "syncope": {
+          "cues": [
+            "blackout",
+            "fainted",
+            "lost consciousness",
+            "dizzy"
+          ],
+          "reply": "I felt lightheaded for a moment but did not lose consciousness."
+        },
+        "risk_smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "tobacco"
+          ],
+          "reply": "I have smoked about ten cigarettes a day for thirty years.",
+          "key": true
+        },
+        "risk_diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood sugar"
+          ],
+          "reply": "Yes, I have had diabetes for about eight years, on tablets.",
+          "key": true
+        },
+        "risk_bp": {
+          "cues": [
+            "blood pressure",
+            "hypertension"
+          ],
+          "reply": "Yes, high blood pressure for about ten years, on tablets, though I miss doses sometimes.",
+          "key": true
+        },
+        "risk_lipids": {
+          "cues": [
+            "cholesterol",
+            "lipid",
+            "fat levels"
+          ],
+          "reply": "I was told my cholesterol was high a few years ago but never started any tablet for it."
+        },
+        "risk_family": {
+          "cues": [
+            "family",
+            "father",
+            "heart attack",
+            "hereditary",
+            "sudden death"
+          ],
+          "reply": "My father had a heart attack at fifty-two and died of a second one at sixty.",
+          "key": true
+        },
+        "prior_events": {
+          "cues": [
+            "heart attack before",
+            "stent",
+            "bypass",
+            "angioplasty"
+          ],
+          "reply": "No, this is the first time anything like this has happened to me."
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink"
+          ],
+          "reply": "Occasional social drinking, nothing regular."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, sweaty, visibly anxious and in distress from pain.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular. Blood pressure 148/94. Respiratory rate 22. SpO2 95 percent on room air. Temperature 37.0 C.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.pulse": {
+          "finding": "Regular, 104 per minute, normal volume, no delay.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.jvp": {
+          "finding": "Not raised, 2 cm above the sternal angle.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.apex": {
+          "finding": "5th left intercostal space, midclavicular line, normal character.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.heartsounds": {
+          "finding": "S1 and S2 normal. A fourth heart sound is audible at the apex. No S3.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.murmurs": {
+          "finding": "No murmur heard.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.bp": {
+          "finding": "148/94 in both arms, no significant difference.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.heart_failure_signs": {
+          "finding": "JVP not raised, no hepatomegaly, no oedema, lung bases clear, no S3. No evidence of heart failure at presentation.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "ecg",
+        "troponin",
+        "cxr"
+      ],
+      "investigations": {
+        "ecg": {
+          "label": "12-lead ECG",
+          "indicated": true,
+          "result": "ST elevation of 3 mm in leads V2 to V4, with reciprocal ST depression in II, III and aVF. Sinus rhythm.",
+          "note": "This is the test that decides everything else in the next ten minutes: ST elevation in the anterior leads with reciprocal change confirms an anterior STEMI, involving the left anterior descending artery territory, and triggers an immediate reperfusion pathway rather than waiting for any blood test."
+        },
+        "troponin": {
+          "label": "High-sensitivity cardiac troponin",
+          "indicated": true,
+          "result": "Elevated at presentation, with a further significant rise on a repeat sample.",
+          "note": "Confirms myocardial injury and supports the diagnosis, but in a STEMI it should never delay reperfusion therapy, which is decided from the ECG alone."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Normal heart size, clear lung fields, no widened mediastinum.",
+          "note": "Reasonable to obtain without delaying reperfusion; a widened mediastinum would have raised concern for aortic dissection, which changes management completely."
+        },
+        "lipid": {
+          "label": "Fasting lipid profile",
+          "indicated": true,
+          "result": "LDL cholesterol 168 mg/dL, total cholesterol 240 mg/dL.",
+          "note": "Confirms an important, previously untreated modifiable risk factor and sets a baseline before starting lipid-lowering therapy."
+        },
+        "hba1c": {
+          "label": "HbA1c",
+          "indicated": true,
+          "result": "8.2 percent.",
+          "note": "Documents his glycaemic control at the time of this event, relevant to secondary prevention planning."
+        },
+        "echo": {
+          "label": "Transthoracic echocardiogram",
+          "indicated": true,
+          "result": "Regional wall motion abnormality in the anterior and anteroseptal walls, left ventricular ejection fraction 42 percent. No mechanical complication. No significant valve disease.",
+          "note": "Confirms the territory affected, quantifies the resulting ejection fraction, and specifically excludes a mechanical complication."
+        },
+        "ddimer": {
+          "label": "D-dimer",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not useful here: the ECG has already given a clear, actionable diagnosis, and a D-dimer would neither change nor speed up the immediate reperfusion decision."
+        },
+        "amylase": {
+          "label": "Serum amylase",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: the pain character, radiation and ECG findings already point clearly to a cardiac cause rather than a pancreatic one."
+        }
+      },
+      "differentialModel": {
+        "answer": "ST-elevation myocardial infarction (anterior). Differentials that had to be actively excluded include aortic dissection, pulmonary embolism, pericarditis, pneumothorax and a perforated viscus.",
+        "accept": [
+          "myocardial infarction",
+          "stemi",
+          "acute coronary syndrome",
+          "dissection",
+          "pulmonary embolism",
+          "pericarditis",
+          "pneumothorax"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "ST-elevation myocardial infarction, anterior wall (left anterior descending territory), in a patient with poorly controlled hypertension, diabetes, dyslipidaemia, active smoking and a strong family history of premature coronary disease, with preceding two months of new exertional angina (unstable angina evolving to STEMI).",
+        "accept": [
+          "st-elevation",
+          "stemi",
+          "myocardial infarction",
+          "mi"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Immediate reperfusion, primary percutaneous coronary intervention where it can be delivered within the guideline time window, or thrombolysis if not, alongside dual antiplatelet therapy, anticoagulation, oxygen only if hypoxaemic, and analgesia. Then start and uptitrate secondary prevention: a beta blocker, an ACE inhibitor or ARB, high-intensity statin, and aggressive risk factor control including smoking cessation and diabetes management, plus cardiac rehabilitation.",
+        "accept": [
+          "reperfusion",
+          "pci",
+          "percutaneous",
+          "thrombolysis",
+          "antiplatelet",
+          "beta blocker",
+          "ace inhibitor",
+          "statin",
+          "cessation",
+          "rehabilitation"
+        ],
+        "minMatch": 4
+      },
+      "teachingPoints": [
+        "The ECG, not the troponin, is what triggered his treatment. In a STEMI, waiting for a biomarker result before activating reperfusion costs exactly the muscle you are trying to save.",
+        "His two months of new exertional chest pain, resolving with rest, was unstable angina by definition, since it was new-onset within the preceding four to six weeks. It should have been treated as an acute coronary syndrome at that first presentation, not dismissed as 'just some tightness'.",
+        "A fourth heart sound here is not itself alarming; it reflects a stiff, ischaemic ventricle and is common in this setting. What would have changed the urgency was a NEW third heart sound or a new murmur.",
+        "His risk factor profile was almost entirely modifiable and almost entirely untreated: known hypertension with poor adherence, known dyslipidaemia never treated, active smoking, and undiagnosed prior symptoms. This event was, in a real sense, predictable from the history alone.",
+        "The reciprocal ST depression in the inferior leads is not a separate finding to explain, it is the expected mirror-image change of an anterior STEMI and actually strengthens the diagnosis rather than confusing it.",
+        "Excluding aortic dissection mattered here specifically because he is about to receive antiplatelet, anticoagulant and possibly thrombolytic therapy, all of which would be catastrophic if the true diagnosis were dissection instead."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.ihd.basics",
+      "skill.hx.cvs.chestpain",
+      "skill.hx.ihd.riskfactors",
+      "skill.ihd.differential",
+      "skill.ix.ihd.ecg",
+      "skill.ix.ihd.biomarkers",
+      "skill.dx.ihd",
+      "skill.tx.ihd"
+    ]
+  },
+  "skills": {
+    "skill.ihd.basics": {
+      "id": "skill.ihd.basics",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "What ischaemic heart disease is",
+      "oneLine": "One spectrum, from a stable demand-supply mismatch to a dying muscle, and the names that mark where on it a patient sits",
+      "why": "Students memorise STEMI, NSTEMI and unstable angina as three separate diagnoses. They are three points on one continuous spectrum of myocardial oxygen supply failing to meet demand, and understanding that continuum is what makes the definitions, and the urgency each one demands, make sense together rather than as three things to recall separately.",
+      "body": "Ischaemic heart disease describes myocardial oxygen demand exceeding supply, almost always from atherosclerotic coronary disease. Acute coronary syndrome is the umbrella term for the spectrum of ST-elevation myocardial infarction, non-ST-elevation myocardial infarction, and unstable angina.",
+      "keyPoints": [
+        "Stable angina is a fixed, reproducible pattern of exertional pain from a stable atherosclerotic narrowing; the plaque itself is not acutely changing.",
+        "Acute coronary syndrome occurs when a plaque acutely ruptures or erodes, triggering thrombus formation that suddenly worsens flow, whether or not it fully occludes the vessel.",
+        "Unstable angina and NSTEMI share an identical mechanism and often an identical ECG picture (ST depression or T wave inversion, without ST elevation); NSTEMI is distinguished from unstable angina purely by the presence of myocardial necrosis, detected as a significant rise in cardiac troponin.",
+        "STEMI reflects a complete, sustained occlusion of a coronary artery, producing transmural ischaemia; it is diagnosed from the ECG alone, by new ST elevation meeting defined voltage criteria in the appropriate lead territory, in the absence of confounders such as left bundle branch block or left ventricular hypertrophy, and treatment is triggered by the ECG without waiting for troponin.",
+        "The distinction matters because it decides urgency and pathway: STEMI needs immediate reperfusion, measured in minutes; NSTEMI and unstable angina are risk-stratified and managed on a somewhat less immediate but still urgent timescale."
+      ],
+      "pitfalls": [
+        "Treating STEMI, NSTEMI and unstable angina as unrelated diagnoses rather than points on one spectrum.",
+        "Waiting for a troponin result before acting on a clear STEMI ECG.",
+        "Assuming a normal or unchanged ECG excludes an acute coronary syndrome, when NSTEMI and unstable angina can both present with subtle or even normal ECG findings."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single test distinguishes NSTEMI from unstable angina?",
+          "a": "Cardiac troponin: NSTEMI shows a significant rise, reflecting myocardial necrosis, while unstable angina does not.",
+          "accept": [
+            "troponin",
+            "necrosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How is STEMI diagnosed, and why does that matter for how quickly you must act?",
+          "a": "STEMI is diagnosed from the ECG alone, new ST elevation meeting defined criteria in the relevant leads, without waiting for troponin, because it reflects complete coronary occlusion and treatment delay directly costs viable myocardium.",
+          "accept": [
+            "ecg",
+            "st elevation",
+            "without troponin",
+            "occlusion"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What is the underlying mechanism that converts stable angina into an acute coronary syndrome?",
+          "a": "Acute rupture or erosion of an atherosclerotic plaque, triggering thrombus formation that suddenly and unpredictably worsens coronary flow, in contrast to the fixed, stable narrowing that produces reproducible exertional angina.",
+          "accept": [
+            "plaque rupture",
+            "thrombus",
+            "erosion"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: acute coronary syndrome definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "ST-elevation myocardial infarction; unstable angina and NSTEMI"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ihd.signs": {
+      "id": "skill.ihd.signs",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The ischaemic heart disease picture",
+      "oneLine": "Often a normal exam with an abnormal ECG, and why a normal exam never rules it out",
+      "why": "Unlike almost every other cardiovascular case in this pathway, a genuinely normal cardiovascular examination is entirely compatible with an active, dangerous coronary event. Students who expect a physical sign to confirm the diagnosis are looking in the wrong place; the exam here is mainly for finding complications, not for making the primary diagnosis.",
+      "body": "The primary diagnosis in ischaemic heart disease is made from the history, the ECG and biomarkers, not from the cardiovascular examination. The examination's real job is to detect complications and to risk-stratify.",
+      "keyPoints": [
+        "In uncomplicated stable angina or an early, uncomplicated acute coronary syndrome, the cardiovascular examination is frequently entirely normal, and stating that explicitly is a correct and useful finding, not a sign you have missed something.",
+        "An S4 is common even in uncomplicated ischaemic heart disease, reflecting a chronically stiff, ischaemic ventricle, and is not itself a marker of an acute complication.",
+        "A NEW S3, new basal crepitations, or new hypotension during or after an acute event indicate pump failure and change the urgency of management immediately.",
+        "A NEW murmur, particularly a new pansystolic murmur, is a mechanical emergency: acute mitral regurgitation from papillary muscle rupture or dysfunction, or a new ventricular septal defect from septal rupture. Both typically occur in the first days after a large infarction and need urgent escalation.",
+        "Vital signs can themselves be diagnostic clues: tachycardia and hypertension from sympathetic activation and pain are common; bradycardia and hypotension together, particularly with inferior ECG changes, suggest right ventricular involvement or a vagally mediated reflex, and change fluid management."
+      ],
+      "pitfalls": [
+        "Concluding a patient does not have an acute coronary syndrome because the cardiovascular examination is normal.",
+        "Missing a new murmur because auscultation was rushed or skipped once the ECG diagnosis was already clear.",
+        "Treating an S4 in this setting as an alarming new finding rather than a common, expected one."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Can the cardiovascular examination be entirely normal in an active acute coronary syndrome?",
+          "a": "Yes. The primary diagnosis is made from the history, ECG and biomarkers; the examination's main job here is detecting complications, and a normal exam does not exclude the diagnosis.",
+          "accept": [
+            "yes",
+            "normal exam"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient develops a new pansystolic murmur three days after an anterior myocardial infarction. What two mechanical complications must you consider?",
+          "a": "Acute mitral regurgitation from papillary muscle rupture or dysfunction, and a new ventricular septal defect from septal rupture.",
+          "accept": [
+            "papillary muscle",
+            "mitral regurgitation",
+            "ventricular septal defect",
+            "vsd"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why do bradycardia and hypotension together during inferior ischaemia point away from simple pain-related sympathetic activation?",
+          "a": "Inferior ischaemia can involve the right coronary artery territory including the sinoatrial and atrioventricular nodes, or trigger a vagally mediated (Bezold-Jarisch) reflex, producing bradycardia and hypotension rather than the tachycardia and hypertension expected from pain and sympathetic drive alone; it should also raise concern for right ventricular infarction, which changes fluid management.",
+          "accept": [
+            "vagal",
+            "right ventric",
+            "node",
+            "reflex"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: ischaemic heart disease examination"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "ST-elevation myocardial infarction: complications"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ihd.summary": {
+      "id": "skill.ihd.summary",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The clinical summary",
+      "oneLine": "Pain character, tempo, risk burden, and where on the spectrum this sits",
+      "why": "A summary that says only 'chest pain' has told the listener nothing useful. The abstracted version must place the patient on the ischaemic spectrum, because that placement is what determines the next ten minutes of management.",
+      "body": "Give the patient with their risk burden, the tempo and pattern of the pain, and the syndrome abstracted with where it sits on the spectrum.",
+      "keyPoints": [
+        "Name the patient and the risk factors that matter: age, sex, and the specific modifiable and non-modifiable factors present.",
+        "Give the tempo and pattern: stable and unchanged, new and worsening, or sudden and unremitting, since this alone places the patient on the spectrum before any test result.",
+        "State the syndrome abstractly: 'sudden-onset, severe, unremitting central chest pain with autonomic features, in a patient with multiple untreated coronary risk factors'.",
+        "A worked example: 'A 58-year-old man with untreated hypertension, diabetes, dyslipidaemia, active smoking and a strong family history presents with two hours of severe, unremitting central chest pain radiating to the left arm and jaw, with sweating and nausea, preceded by two months of new exertional angina. This is an acute coronary syndrome until the ECG says otherwise.'"
+      ],
+      "pitfalls": [
+        "Describing the pain without stating where it places the patient on the ischaemic spectrum.",
+        "Omitting the risk factor burden, which is doing real diagnostic work.",
+        "Waiting to commit to 'acute coronary syndrome until proven otherwise' until after the ECG, rather than carrying that working diagnosis from the moment the history is heard."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What must a complete summary of a chest pain patient state, beyond describing the pain itself?",
+          "a": "Where the presentation places the patient on the stable angina to acute coronary syndrome spectrum, and the risk factor burden supporting that placement.",
+          "accept": [
+            "spectrum",
+            "risk factor",
+            "acute coronary"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "placement",
+          "text": "States where the presentation sits on the ischaemic spectrum"
+        },
+        {
+          "id": "risk",
+          "text": "Carries the risk factor burden into the summary"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ihd.differential": {
+      "id": "skill.ihd.differential",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Differential diagnosis of chest pain",
+      "oneLine": "Five patterns that must never be missed, and what each one adds beyond ischaemia",
+      "why": "Chest pain has several mimics that kill just as fast as an infarct, and treating an ischaemic-pattern history as automatically ischaemic can mean missing a dissection you are about to anticoagulate, or a pneumothorax you are about to sedate through.",
+      "body": "For central or anterior chest pain, work through the classic differentiating features of the dangerous mimics before settling on ischaemia alone.",
+      "keyPoints": [
+        "Acute coronary syndrome: crushing, tightening, squeezing or pressure-like pain, retrosternal or left anterior chest or epigastric, radiating to either shoulder or arm or the jaw, with dyspnoea, diaphoresis and nausea.",
+        "Aortic dissection: ripping or tearing pain, midline and substernal, classically radiating to the interscapular area of the back; look for unequal pulses or a blood pressure difference between the arms, and for a secondary complication from an occluded branch such as paraplegia.",
+        "Pulmonary embolism: heaviness or tightness, affecting the whole chest if massive or a focal area if segmental, with dyspnoea, unstable vital signs and, in a massive embolism, a feeling of impending doom; tachycardia and tachypnoea in a segmental embolism.",
+        "Pericarditis (or cardiac tamponade): sharp, constant or pleuritic pain, substernal, with fever, dyspnoea and a pericardial friction rub; classically worse lying flat and better sitting forward.",
+        "Pneumothorax: sudden, sharp, lancinating, pleuritic pain, confined to one side of the chest, radiating to the shoulder or back, with dyspnoea; look for asymmetrical chest expansion and hyperresonance on the affected side.",
+        "A perforated oesophagus (Boerhaave syndrome): sudden, sharp substernal pain after forceful vomiting, radiating to the back, with diaphoresis and signs of sepsis; the history of preceding forceful vomiting is the key discriminator.",
+        "A screening principle: any one of dissection, massive pulmonary embolism or tamponade can be rapidly fatal and must be actively considered and reasonably excluded before treating a presentation purely as ischaemic, especially before giving antiplatelet, anticoagulant or thrombolytic therapy."
+      ],
+      "pitfalls": [
+        "Treating any crushing central chest pain as automatically ischaemic without checking pulses and blood pressure in both arms for dissection.",
+        "Giving thrombolysis or anticoagulation before considering aortic dissection as a possibility.",
+        "Missing pericarditis because the positional and pleuritic character of the pain was not specifically asked about.",
+        "Forgetting Boerhaave syndrome in a patient with pain following an episode of forceful vomiting."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three dangerous causes of chest pain other than acute coronary syndrome that must be actively excluded.",
+          "a": "Aortic dissection, pulmonary embolism, pericarditis or cardiac tamponade, pneumothorax, and a perforated oesophagus.",
+          "accept": [
+            "dissection",
+            "pulmonary embolism",
+            "pericarditis",
+            "tamponade",
+            "pneumothorax",
+            "perforat"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What finding on examination would make you suspect aortic dissection rather than a straightforward myocardial infarction?",
+          "a": "Unequal pulses, or a significant blood pressure difference between the two arms, with tearing pain radiating to the back.",
+          "accept": [
+            "unequal pulses",
+            "blood pressure difference",
+            "tearing"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why must aortic dissection be excluded, or at least seriously considered, before giving thrombolysis for a presumed STEMI?",
+          "a": "Thrombolysis in a patient who actually has an aortic dissection can precipitate catastrophic haemorrhage into the dissection or rupture, so any clinical clue suggesting dissection, such as tearing pain radiating to the back or unequal pulses, must be assessed before committing to thrombolytic therapy.",
+          "accept": [
+            "haemorrhage",
+            "rupture",
+            "catastrophic",
+            "contraindicat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "danger",
+          "text": "Actively screens for the dangerous mimics rather than assuming ischaemia",
+          "critical": true
+        },
+        {
+          "id": "discriminate",
+          "text": "States a discriminating feature for each alternative"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: chest pain differential"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: chest pain"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ihd.ecg": {
+      "id": "skill.ix.ihd.ecg",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "The ECG in ischaemic heart disease",
+      "oneLine": "The test done within minutes, that alone decides whether a patient needs reperfusion now",
+      "why": "The ECG is the single fastest, cheapest test that can change management within minutes, and it is the only test whose result alone triggers emergency reperfusion therapy, before any blood result is available. Knowing the sequence of change over time, and the lead-to-artery map, is what lets you read it with genuine understanding rather than pattern-matching.",
+      "body": "Obtain a 12-lead ECG within minutes of a chest pain presentation and read it for the pattern of ischaemia, injury or infarction, and for the coronary territory involved.",
+      "keyPoints": [
+        "Ischaemia: T wave inversion, ST depression, T wave flattening, or biphasic T waves.",
+        "Injury: ST segment elevation of at least 1 mm in two or more contiguous leads, or heightened, peaked T waves, reflecting a portion of myocardium rendered electrically inactive by ongoing injury.",
+        "Infarction: a significant, pathological Q wave (wider than 40 ms or deeper than one-third of the QRS height) where none previously existed, reflecting an area of dead tissue with no electrical activity for the recording electrode to detect.",
+        "STEMI criteria: ST elevation of at least 2 mm in men or 1.5 mm in women in leads V2 to V3, or at least 1 mm in two other contiguous chest or limb leads, in the absence of confounders such as left ventricular hypertrophy or left bundle branch block.",
+        "Sequential evolution in STEMI: hyperacute tall T waves and ST elevation within the first hour; loss of R wave height and pathological Q waves developing over the first 24 hours; persistence of T wave inversion over subsequent days as ST elevation resolves; and, weeks later, a normalised T wave with a persistent Q wave as the permanent electrical scar.",
+        "Lead-territory map: V1 to V4 for anterior/septal (left anterior descending artery); I, aVL, V5, V6 for the lateral wall (left circumflex); II, III, aVF for the inferior wall (right coronary artery in most patients); posterior chest leads for a posterior infarct, and right-sided leads for right ventricular involvement, both usually accompanying an inferior STEMI.",
+        "NSTEMI/unstable angina show ST depression or T wave inversion, without ST elevation; a true ST-elevation and Q wave pattern essentially does not occur in this group, which is part of what separates the two management pathways."
+      ],
+      "pitfalls": [
+        "Waiting for troponin before acting on a clear STEMI ECG.",
+        "Missing reciprocal ST depression as a confirmatory finding rather than a separate, confusing one.",
+        "Forgetting to check right-sided leads in an inferior STEMI, which can miss a right ventricular infarct that changes fluid management.",
+        "Reading ST elevation in the setting of a pre-existing left bundle branch block or left ventricular hypertrophy without the appropriate modified criteria."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What ECG finding alone is used to diagnose STEMI and trigger emergency reperfusion, without waiting for a blood test?",
+          "a": "New ST segment elevation meeting defined voltage criteria in the appropriate leads.",
+          "accept": [
+            "st elevation",
+            "st segment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which leads show ST changes in an inferior myocardial infarction, and which artery is usually involved?",
+          "a": "Leads II, III and aVF, usually involving the right coronary artery.",
+          "accept": [
+            "ii",
+            "iii",
+            "avf",
+            "right coronary"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Describe the sequence of ECG change over the first 24 hours of a STEMI.",
+          "a": "Hyperacute tall T waves with ST elevation at the very start, followed by a decrease in R wave height and the appearance of pathological Q waves as the infarct progresses over the following hours.",
+          "accept": [
+            "hyperacute",
+            "t wave",
+            "q wave",
+            "r wave"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why should you check right-sided ECG leads in a patient with an inferior STEMI?",
+          "a": "The right coronary artery, which usually supplies the inferior wall, often also supplies the right ventricle, so an inferior STEMI carries a meaningful risk of right ventricular infarction; right-sided leads can detect this, and finding it changes fluid and nitrate management because right ventricular infarction is preload-dependent.",
+          "accept": [
+            "right ventric",
+            "preload",
+            "fluid"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: ECG in myocardial infarction"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "ST-elevation myocardial infarction: diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ihd.biomarkers": {
+      "id": "skill.ix.ihd.biomarkers",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "Cardiac biomarkers and the universal definition of myocardial infarction",
+      "oneLine": "Troponin confirms necrosis and separates NSTEMI from unstable angina, but it never delays STEMI treatment",
+      "why": "Troponin is powerful but frequently misused: ordered as a rule-out test in isolation, or waited for before treating an obvious STEMI. Understanding what it actually measures, and the formal criteria for calling something an infarction, is what stops both errors.",
+      "body": "Cardiac troponin is a highly sensitive and specific marker of myocardial injury, measured at presentation and again after an interval to look for a rising or falling pattern.",
+      "keyPoints": [
+        "Detection of a rise and/or fall of cardiac troponin with at least one value above the 99th percentile of the upper reference limit, together with clinical evidence of acute myocardial ischaemia, defines acute myocardial injury consistent with infarction.",
+        "Evidence of ischaemia that completes the diagnosis alongside a rising troponin includes: symptoms of ischaemia, new ischaemic ECG changes, new pathological Q waves, imaging evidence of new loss of viable myocardium or a new regional wall motion abnormality, or identification of an intracoronary thrombus on angiography or autopsy.",
+        "A troponin rise WITHOUT the accompanying clinical or ECG evidence of ischaemia is myocardial injury, not myocardial infarction; the two are named differently for good reason, and it changes what workup and treatment follow.",
+        "A single troponin measurement cannot distinguish an acute event from chronic elevation; the RISE AND FALL pattern on serial testing is what establishes an acute process, particularly important in patients with chronic kidney disease or heart failure, who often have a chronically elevated baseline.",
+        "In a clear STEMI, troponin is sent for confirmation and prognostic information, but reperfusion therapy is never delayed for the result, since the ECG has already made the diagnosis.",
+        "In NSTEMI/unstable angina, the serial troponin trajectory is central both to confirming the diagnosis (distinguishing NSTEMI from unstable angina) and to risk-stratifying the patient for the urgency of angiography."
+      ],
+      "pitfalls": [
+        "Delaying reperfusion therapy in a clear STEMI to wait for a troponin result.",
+        "Treating any troponin elevation as automatic proof of an acute coronary event, without checking for a rise-and-fall pattern or considering chronic elevation.",
+        "Confusing 'myocardial injury' (a troponin rise alone) with 'myocardial infarction' (which additionally requires clinical or imaging evidence of ischaemia)."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Should you wait for a troponin result before giving reperfusion therapy in a clear STEMI?",
+          "a": "No. STEMI is diagnosed from the ECG alone, and reperfusion should never be delayed for a biomarker result.",
+          "accept": [
+            "no",
+            "should not wait",
+            "never delay"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What pattern on serial troponin testing establishes an ACUTE process rather than a chronic elevation?",
+          "a": "A significant rise and/or fall between serial samples, rather than a static, unchanging level.",
+          "accept": [
+            "rise and fall",
+            "rising",
+            "trajectory"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is the difference between 'myocardial injury' and 'myocardial infarction' by the universal definition?",
+          "a": "Myocardial injury is a troponin elevation above the 99th percentile alone; myocardial infarction additionally requires clinical evidence of ischaemia, such as symptoms, new ischaemic ECG changes, new pathological Q waves, or imaging evidence of new regional wall motion abnormality or loss of viable myocardium.",
+          "accept": [
+            "evidence of ischaemia",
+            "clinical evidence",
+            "symptoms",
+            "ecg change"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: cardiac biomarkers"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Biomarkers of myocardial injury"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.ihd": {
+      "id": "skill.dx.ihd",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Diagnosing and classifying an acute coronary syndrome",
+      "oneLine": "STEMI, NSTEMI or unstable angina, the artery and territory, and the risk factors it happened on",
+      "why": "The classification itself is a treatment decision, not just a label: it decides whether a patient goes for emergency reperfusion in minutes or a somewhat less immediate risk-stratified pathway. A vague diagnosis of 'ACS' without the type is an incomplete handover.",
+      "body": "Classify by the presence and pattern of ST elevation, then by biomarker evidence of necrosis, then state the territory and the risk factor context.",
+      "keyPoints": [
+        "STEMI: chest discomfort or an anginal equivalent with new ST elevation meeting defined criteria in the appropriate leads, in the absence of a confounder such as left bundle branch block or left ventricular hypertrophy. Diagnosed from the ECG; troponin confirms but does not decide reperfusion timing.",
+        "NSTEMI: an appropriate clinical setting, often with ST depression or T wave inversion, plus a positive biomarker rise-and-fall pattern, in the absence of ST elevation.",
+        "Unstable angina: an appropriate clinical setting with at least one of three features (rest or minimal-exertion pain lasting over 10 minutes, new-onset severe pain within 4 to 6 weeks, or a crescendo pattern), WITHOUT biomarker evidence of necrosis.",
+        "State the territory and likely artery from the ECG (for example anterior, left anterior descending), since this predicts likely complications and guides the interventional plan.",
+        "Carry the risk factor context into the diagnostic statement, since it is both explanatory and the starting point for secondary prevention.",
+        "A worked example: 'ST-elevation myocardial infarction, anterior wall (left anterior descending territory), in a patient with untreated hypertension, diabetes, dyslipidaemia, active smoking and a strong family history, with preceding unstable angina.'"
+      ],
+      "pitfalls": [
+        "Diagnosing 'acute coronary syndrome' without specifying STEMI, NSTEMI or unstable angina.",
+        "Diagnosing STEMI without stating the likely territory and artery.",
+        "Omitting the risk factor context from the diagnostic statement, when it is directly relevant to management."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three features, any one of which is sufficient, define unstable angina?",
+          "a": "Pain at rest or with minimal exertion lasting more than 10 minutes; new onset within the preceding 4 to 6 weeks; or a crescendo pattern of increasing severity, duration or frequency.",
+          "accept": [
+            "rest",
+            "new onset",
+            "crescendo"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What four elements make a complete diagnostic statement in an acute coronary syndrome?",
+          "a": "The specific type (STEMI, NSTEMI or unstable angina), the likely artery and territory, the risk factor context, and any preceding pattern such as antecedent unstable angina.",
+          "accept": [
+            "type",
+            "territory",
+            "artery",
+            "risk factor"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "type",
+          "text": "States the specific ACS type, not just 'acute coronary syndrome'",
+          "critical": true
+        },
+        {
+          "id": "territory",
+          "text": "States the likely artery and territory"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: acute coronary syndrome classification"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Acute coronary syndromes: classification"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.ihd": {
+      "id": "skill.tx.ihd",
+      "kind": "treatment",
+      "system": "cardiovascular",
+      "title": "Managing ischaemic heart disease and acute coronary syndrome",
+      "oneLine": "Reperfusion measured in minutes for a STEMI, risk-stratified urgency for the rest, and lifelong secondary prevention for everyone",
+      "why": "The single biggest determinant of outcome in a STEMI is TIME to reperfusion, which is why the treatment principle that must be internalised first is urgency, not the drug list. Everything after the acute phase is secondary prevention, which is where most of the long-term survival benefit actually comes from.",
+      "body": "Separate the immediate, time-critical phase from the secondary prevention phase that follows every acute coronary syndrome and every episode of stable angina alike.",
+      "keyPoints": [
+        "STEMI: immediate reperfusion is the overriding priority, primary percutaneous coronary intervention where it can be delivered within the guideline time window, or thrombolysis if it cannot, alongside dual antiplatelet therapy, anticoagulation, and analgesia; oxygen is given only if the patient is hypoxaemic, not routinely to a patient with normal saturation.",
+        "NSTEMI and unstable angina: risk-stratified urgency for angiography and revascularisation, guided by clinical risk scoring, alongside dual antiplatelet therapy, anticoagulation, and anti-ischaemic therapy.",
+        "Exclude the dangerous mimics, particularly aortic dissection, before committing to antiplatelet, anticoagulant or thrombolytic therapy, since giving any of these in a true dissection can be catastrophic.",
+        "Secondary prevention, started for essentially every patient after any acute coronary syndrome and continued long-term: dual antiplatelet therapy for a defined duration then single antiplatelet therapy, a high-intensity statin, a beta blocker, an ACE inhibitor or ARB (particularly with reduced ejection fraction or anterior infarction), and aggressive risk factor control.",
+        "Risk factor control is not an afterthought: smoking cessation, glycaemic control, blood pressure control, weight and diet management, and structured cardiac rehabilitation each independently reduce the risk of a further event.",
+        "Mechanical complications (acute mitral regurgitation from papillary muscle rupture, ventricular septal rupture, free wall rupture, cardiogenic shock) need urgent recognition and immediate escalation to specialist care; they are surgical or highly specialist emergencies, not managed on the general ward."
+      ],
+      "pitfalls": [
+        "Delaying reperfusion in a STEMI for any avoidable reason, including waiting for troponin.",
+        "Giving routine high-flow oxygen to a normoxic patient, which offers no proven benefit and may cause harm.",
+        "Treating secondary prevention as optional once the acute event is over, rather than as the phase that delivers most of the long-term survival benefit.",
+        "Missing a mechanical complication because a new murmur was not actively listened for.",
+        "Committing to antiplatelet or thrombolytic therapy without having reasonably excluded aortic dissection first."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single overriding priority in managing a STEMI?",
+          "a": "Immediate reperfusion, as fast as possible.",
+          "accept": [
+            "reperfusion",
+            "immediate",
+            "time"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three components of long-term secondary prevention after any acute coronary syndrome.",
+          "a": "Antiplatelet therapy, a high-intensity statin, a beta blocker, an ACE inhibitor or ARB, and risk factor control including smoking cessation.",
+          "accept": [
+            "antiplatelet",
+            "statin",
+            "beta blocker",
+            "ace inhibitor",
+            "smoking cessation"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Should routine high-flow oxygen be given to a STEMI patient with a normal oxygen saturation?",
+          "a": "No. Oxygen is reserved for hypoxaemic patients; routine oxygen in a normoxic patient has no proven benefit and should not be given as a default.",
+          "accept": [
+            "no",
+            "hypoxaemic only",
+            "not routine"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why must most of a STEMI patient's long-term survival benefit be attributed to secondary prevention rather than the acute reperfusion procedure alone?",
+          "a": "Reperfusion salvages myocardium at the time of the event, but ongoing plaque burden, risk factors and the underlying atherosclerotic process continue afterward; sustained antiplatelet therapy, statin, beta blocker, ACE inhibitor/ARB and risk factor control are what continue reducing the risk of a further event over years, which is where the larger share of long-term benefit accrues.",
+          "accept": [
+            "ongoing risk",
+            "sustained",
+            "long-term",
+            "continued"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: management of acute coronary syndrome"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "ST-elevation myocardial infarction: management; secondary prevention"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle and drug CLASS only. Reperfusion time windows, specific antiplatelet and anticoagulant regimens, statin intensity, and beta blocker or ACE inhibitor/ARB choice and dose must be taken from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}

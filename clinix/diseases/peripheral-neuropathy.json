@@ -1,0 +1,497 @@
+{
+  "_comment": "Peripheral neuropathy / Guillain-Barre syndrome is a SHORT CASE built on the shared exam skills (tone_power, reflexes, sensory, gait, cn7) with emphasis for a symmetrical, ascending, areflexic LMN pattern. What is genuinely new is the ascending-paralysis history, the axonal-vs-demyelinating and acute-vs-chronic (GBS-vs-CIDP) framework, and the CSF/nerve-conduction reasoning, all grounded in the book's own polyneuropathy tables.",
+  "id": "peripheral-neuropathy",
+  "name": "Peripheral neuropathy",
+  "fullName": "Peripheral neuropathy, with Guillain-Barre syndrome as the acute prototype",
+  "system": "neurology",
+  "kbRef": "guillain_barre_syndrome",
+  "oneLine": "Weakness that climbs, reflexes that vanish, and a preceding infection nobody thought to mention",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Axonal or demyelinating, acute or chronic: two axes that organise the whole topic",
+      "skills": [
+        "skill.neuropathy.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case, with one extra concern: the airway",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "The infection before the weakness, and the direction it travelled",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.neuropathy.ascending"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical Guillain-Barre presentation is progressive weakness that started in the legs and has climbed upward over days, in a patient who had a diarrhoeal or upper respiratory illness one to three weeks earlier and has usually forgotten to mention it unless asked directly."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General and neurological examination",
+      "blurb": "Symmetry and areflexia are the whole exam here",
+      "skills": [
+        "skill.gen.vitals",
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.reflexes",
+        "skill.exam.neuro.sensory",
+        "skill.exam.neuro.cn7"
+      ],
+      "emphasis": {
+        "skill.gen.vitals": {
+          "expect": "Measure and record the respiratory rate and vital capacity explicitly, not just the pulse and blood pressure. Autonomic instability, a swinging blood pressure or heart rate, is a recognised feature of Guillain-Barre syndrome and a marker of a more severe case."
+        },
+        "skill.exam.neuro.tone_power": {
+          "expect": "Expect symmetrical, flaccid (reduced tone) weakness that is often WORSE proximally than distally at first, in keeping with a demyelinating polyradiculoneuropathy rather than the distal-predominant pattern of a length-dependent axonal neuropathy. Ask the patient to rise from squatting and to comb their hair, both classic proximal-weakness tests."
+        },
+        "skill.exam.neuro.reflexes": {
+          "expect": "Expect deep tendon reflexes to be reduced or ABSENT early and globally, out of proportion to how weak the patient looks. This is one of the most useful bedside findings in the whole syndrome: brisk reflexes in a patient who looks this weak should make you reconsider the diagnosis."
+        },
+        "skill.exam.neuro.sensory": {
+          "expect": "Sensory findings are typically mild or even absent despite the degree of weakness, which is itself a discriminating feature; when present, expect symmetrical, distal, glove-and-stocking impairment rather than a sensory level."
+        },
+        "skill.exam.neuro.cn7": {
+          "expect": "Bilateral lower motor neurone facial weakness is common and, because it is symmetrical, can be easy to miss: look specifically for reduced forehead wrinkling and reduced blink on BOTH sides, comparing the whole face to how animated it should be, not side to side."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "The pattern that names it: symmetrical, ascending, areflexic",
+      "skills": [
+        "skill.neuropathy.pattern"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else causes acute flaccid weakness, and GBS versus CIDP",
+      "skills": [
+        "skill.neuropathy.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "CSF, nerve conduction, and the vital capacity you must trend",
+      "skills": [
+        "skill.ix.neuropathy.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Pattern, tempo, and the safety-critical monitoring it demands",
+      "skills": [
+        "skill.neuropathy.diagnosis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.neuropathy.exam",
+        "title": "Examine this patient's weakness",
+        "seconds": 300,
+        "task": "This 24-year-old man has had progressive weakness of both legs for four days, now involving his arms. Examine his nervous system and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.reflexes",
+          "skill.exam.neuro.sensory"
+        ],
+        "examinerQuestions": [
+          "The reflexes are absent everywhere but sensation is almost normal. What does that combination suggest?",
+          "What single bedside or ward measurement would most worry you right now, and why?",
+          "What did you ask about in the four weeks before this started?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.neuropathy.basics",
+      "skill.hx.neuropathy.ascending",
+      "skill.exam.neuro.reflexes",
+      "skill.neuropathy.pattern",
+      "skill.neuropathy.differential",
+      "skill.ix.neuropathy.workup"
+    ]
+  },
+  "skills": {
+    "skill.neuropathy.basics": {
+      "id": "skill.neuropathy.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What peripheral neuropathy is, and the two axes that organise it",
+      "oneLine": "Axonal or demyelinating; acute or chronic. Answer both, and most of the differential falls out",
+      "why": "A huge list of causes of neuropathy becomes manageable once it is sorted along just two axes. Getting a patient placed correctly on both, rather than memorising a flat list of causes, is what actually lets a student reason through an unfamiliar case.",
+      "body": "Peripheral neuropathy is damage to peripheral nerves producing weakness, sensory loss, or both. Two features do almost all the organising work: whether the underlying pathology is axonal or demyelinating, and whether the course is acute or chronic.",
+      "keyPoints": [
+        "Axonal neuropathy: usually gradual and insidious, length-dependent (longest nerves affected first, so the feet before the hands), distal muscle wasting is common, ankle jerks are lost early with proximal reflexes preserved longer, CSF protein is usually normal, and recovery is slow.",
+        "Demyelinating neuropathy: usually acute or subacute, can affect proximal segments as much as distal ones (it is a nerve-root and plexus process, not purely length-dependent), generalised weakness with relatively mild sensory loss, ALL reflexes are lost early and globally, CSF protein is typically elevated because the nerve roots themselves are involved, muscle wasting is comparatively uncommon, and recovery, once it starts, can be comparatively rapid.",
+        "Guillain-Barre syndrome (acute inflammatory demyelinating polyradiculoneuropathy, AIDP) is the acute prototype of an immune-mediated demyelinating polyneuropathy; chronic inflammatory demyelinating polyradiculoneuropathy (CIDP) is its chronic, and often relapsing-remitting, counterpart with an essentially identical pattern of findings but a course measured in months rather than days to weeks.",
+        "Polyneuropathy (the most common variety) affects fibres in a length-dependent pattern, typically toes and soles before hands, and usually reflects a metabolic, toxic or systemic disorder; this is distinct from mononeuropathy (a single nerve, usually from compression or entrapment) and mononeuritis multiplex (multiple separate nerves, classically from leprosy, diabetes or vasculitis)."
+      ],
+      "pitfalls": [
+        "Treating every peripheral neuropathy as the same length-dependent, distal, slowly progressive pattern, and so missing an acute demyelinating process that needs urgent recognition.",
+        "Forgetting that demyelinating neuropathies are NOT purely length-dependent and can produce marked proximal weakness.",
+        "Confusing mononeuritis multiplex (several separate nerves) with a polyneuropathy (a symmetrical, generalised process); the causes and workup are quite different."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two axes that organise the causes of peripheral neuropathy?",
+          "a": "Axonal versus demyelinating pathology, and acute versus chronic course.",
+          "accept": [
+            "axonal",
+            "demyelinating",
+            "acute",
+            "chronic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "In a demyelinating polyneuropathy, why can CSF protein be elevated while cell count stays normal?",
+          "a": "Because the pathology involves the nerve roots as they leave the spinal canal, and inflamed, demyelinated roots leak protein into the CSF without necessarily provoking a cellular response, giving the classic albuminocytological dissociation.",
+          "accept": [
+            "root",
+            "protein",
+            "dissociation"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is the relationship between Guillain-Barre syndrome and CIDP?",
+          "a": "Both are immune-mediated demyelinating polyradiculoneuropathies with an essentially similar pattern of findings; GBS is the acute (days to a few weeks) monophasic form, while CIDP is the chronic, often relapsing-remitting counterpart evolving over two months or more.",
+          "accept": [
+            "acute",
+            "chronic",
+            "relapsing",
+            "monophasic"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: peripheral neuropathy classification"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to peripheral neuropathy"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Peripheral neuropathy; Guillain-Barre syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.neuropathy.pattern": {
+      "id": "skill.neuropathy.pattern",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Putting the picture together",
+      "oneLine": "Symmetrical, ascending, areflexic, with sensation largely spared: a pattern that names itself",
+      "why": "Guillain-Barre syndrome is diagnosed largely on this single, recognisable clinical pattern, and being able to state it precisely, rather than as 'weak legs', is what actually distinguishes it from every other cause of acute weakness at the bedside.",
+      "body": "Read the exam as one pattern: symmetry, direction, the reflex finding, and how little sensation is actually involved relative to the weakness.",
+      "keyPoints": [
+        "Symmetry: the weakness is essentially symmetrical from very early on. Marked asymmetry should make you reconsider the diagnosis.",
+        "The classic worked pattern, close to how the book itself frames it: acute onset of symmetrical, ascending, flaccid weakness with no significant sensory, bowel or bladder involvement, and bilateral lower motor neurone facial weakness, the pathology being demyelination of the peripheral nerve.",
+        "Areflexia out of proportion to weakness is one of the most useful discriminating findings in the whole syndrome: reflexes are lost early and globally, often before the weakness is even severe.",
+        "Autonomic involvement (swinging blood pressure or heart rate, sweating abnormalities) can occur and needs monitoring, since it is a recognised feature rather than an unrelated complication.",
+        "Papilloedema can rarely occur in Guillain-Barre syndrome, from the elevated CSF protein reducing CSF reabsorption; it is a reminder that this syndrome's effects are not limited to the limbs."
+      ],
+      "pitfalls": [
+        "Describing the pattern only as 'weak legs' rather than stating symmetry, direction of spread, and the reflex finding explicitly.",
+        "Treating mild sensory symptoms as inconsistent with the diagnosis, when mild sensory involvement, or none at all, is typical.",
+        "Missing bilateral facial weakness because it is symmetrical and therefore easy to overlook without deliberately comparing to how animated the face should be."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "State the classic clinical pattern of Guillain-Barre syndrome in one sentence.",
+          "a": "Acute onset of symmetrical, ascending, flaccid (LMN) weakness with early, widespread areflexia and relatively little sensory involvement.",
+          "accept": [
+            "symmetrical",
+            "ascending",
+            "flaccid",
+            "areflexia"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why is areflexia out of proportion to the degree of weakness considered such a useful bedside finding?",
+          "a": "Because it points specifically to a process affecting the reflex arc itself (the peripheral nerve/root), rather than a central or muscular cause, and it can appear even when weakness is still relatively mild, making it an early, reliable clue.",
+          "accept": [
+            "reflex arc",
+            "peripheral",
+            "early"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States symmetry, direction and the reflex finding as one pattern",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Guillain-Barre syndrome clinical pattern"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: worked case summary, acute inflammatory polyneuropathy"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Guillain-Barre syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.neuropathy.differential": {
+      "id": "skill.neuropathy.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Differential diagnosis",
+      "oneLine": "What else causes acute flaccid weakness, and how to tell GBS from CIDP",
+      "why": "Several other conditions produce an acute, symmetrical, flaccid weakness that can be mistaken for Guillain-Barre syndrome at first glance, and several of them are managed completely differently, so this differential has to be worked through deliberately rather than assumed.",
+      "body": "Split the differential into other causes of acute flaccid weakness, and the chronic counterpart that shares nearly the same pattern.",
+      "keyPoints": [
+        "Other causes of acute flaccid (LMN-pattern) quadriparesis to actively consider: acute anterior poliomyelitis (typically asymmetric, with fever and meningism at onset, and no sensory involvement), myasthenia gravis (fatiguable weakness, often with ptosis and diplopia, normal reflexes and normal sensation), periodic paralysis (episodic, associated with abnormal potassium levels), botulism, diphtheritic polyneuropathy, porphyria, and toxin exposure (organophosphorus poisoning, snake bite) in the right clinical context.",
+        "Myasthenia gravis is the differential worth actively excluding at the bedside: unlike Guillain-Barre syndrome, reflexes are typically PRESERVED, sensation is entirely normal, and the weakness characteristically fatigues with sustained effort.",
+        "Guillain-Barre syndrome versus CIDP: the two share an essentially identical pattern of findings, and the distinction is made mainly on TIME COURSE. GBS reaches its nadir within about four weeks and is typically monophasic; CIDP evolves over two months or more and often follows a chronic progressive or relapsing-remitting course.",
+        "A spinal cord lesion (such as an acute transverse myelitis) can occasionally be confused with Guillain-Barre syndrome early on, but a sensory level, sphincter involvement, and preserved rather than absent reflexes below the lesion (once any initial spinal shock has passed) point instead to the cord."
+      ],
+      "pitfalls": [
+        "Not considering myasthenia gravis, and so missing a fatiguable, fluctuating weakness with preserved reflexes that is not Guillain-Barre syndrome at all.",
+        "Diagnosing CIDP in a patient whose weakness has, in fact, only been present for a week or two, which is still within the typical GBS time course.",
+        "Forgetting poliomyelitis and other acute flaccid paralysis causes purely because they are now uncommon; they remain a real part of the differential where clinically suggested."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "How do reflexes and sensation help distinguish myasthenia gravis from Guillain-Barre syndrome?",
+          "a": "In myasthenia gravis, reflexes are typically preserved and sensation is entirely normal, unlike the early, widespread areflexia of Guillain-Barre syndrome; the myasthenic weakness also characteristically fatigues with sustained effort.",
+          "accept": [
+            "preserved",
+            "normal sensation",
+            "fatigue"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is the main basis for distinguishing GBS from CIDP when the clinical pattern looks the same?",
+          "a": "Time course: GBS reaches its nadir within about four weeks and is typically monophasic, while CIDP evolves over two months or more, often chronically progressive or relapsing-remitting.",
+          "accept": [
+            "time course",
+            "four weeks",
+            "two months",
+            "chronic"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "mimic",
+          "text": "Actively considers myasthenia gravis as a mimic"
+        },
+        {
+          "id": "cidp",
+          "text": "States time course as the main GBS-vs-CIDP discriminator"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: differential of acute flaccid weakness"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: causes of flaccid quadriplegia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Guillain-Barre syndrome; chronic inflammatory demyelinating polyneuropathy"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.neuropathy.workup": {
+      "id": "skill.ix.neuropathy.workup",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "Working up a suspected demyelinating neuropathy",
+      "oneLine": "One number you trend at the bedside matters more than any test result",
+      "why": "The single most safety-critical measurement in this whole case is not in a laboratory report at all, it is the vital capacity, measured serially at the bedside, and confusing that with the diagnostic tests is a genuine and dangerous mistake to make.",
+      "body": "Separate bedside safety monitoring, which must never wait for a report, from the tests that support the diagnosis.",
+      "keyPoints": [
+        "Serial vital capacity (or an equivalent bedside respiratory measurement) is monitored repeatedly, not once, because respiratory muscle weakness can progress over hours; a falling trend, not a single reading, is what should trigger escalation and consideration of ventilatory support.",
+        "CSF analysis classically shows albuminocytological dissociation: an elevated protein with a normal or only mildly raised cell count. This supports the diagnosis but the CSF protein can still be normal in the first few days of illness, so a normal early CSF does not exclude Guillain-Barre syndrome.",
+        "Nerve conduction studies show features of demyelination (slowed conduction velocity, conduction block, prolonged distal latencies), distinguishing this from an axonal neuropathy, though they can also be normal early in the illness.",
+        "Baseline bloods (full blood count, electrolytes, renal function) and an ECG are reasonable given the risk of autonomic instability, and specific serology or stool studies for a preceding infective trigger (such as Campylobacter) may be sent where clinically relevant.",
+        "Investigations here support and refine a diagnosis that is made primarily on the clinical pattern; a normal early CSF or a normal early nerve conduction study should NOT be used to argue against the diagnosis if the clinical picture is convincing."
+      ],
+      "pitfalls": [
+        "Waiting for a laboratory or nerve conduction result before starting serial respiratory monitoring.",
+        "Treating a normal CSF protein in the first few days as evidence against the diagnosis.",
+        "Not trending the vital capacity, and only checking it once on admission."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most important bedside measurement to trend in suspected Guillain-Barre syndrome?",
+          "a": "Vital capacity (or an equivalent bedside respiratory measurement), monitored serially.",
+          "accept": [
+            "vital capacity",
+            "respiratory"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is albuminocytological dissociation, and why does it not always appear early in the illness?",
+          "a": "A raised CSF protein with a normal or only mildly raised cell count. It reflects the nerve roots leaking protein into the CSF, which can take several days to become detectable, so a normal early CSF protein does not exclude the diagnosis.",
+          "accept": [
+            "protein",
+            "cell count",
+            "days"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "safety",
+          "text": "Identifies serial vital capacity as the priority bedside measurement",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Guillain-Barre syndrome investigation"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Guillain-Barre syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.neuropathy.diagnosis": {
+      "id": "skill.neuropathy.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Pattern, tempo, and the safety status, stated together",
+      "why": "A diagnosis of 'Guillain-Barre syndrome' alone does not communicate how urgently the patient needs to be watched. A complete statement includes the current respiratory and bulbar status, because that is what actually determines the level of care.",
+      "body": "State the pattern, the tempo relative to onset, and, explicitly, the current respiratory and bulbar safety status.",
+      "keyPoints": [
+        "The pattern: acute, symmetrical, ascending, flaccid, areflexic weakness with minimal sensory involvement, plus or minus bilateral facial weakness.",
+        "The tempo: day of illness from onset, and whether the weakness is still progressing, has plateaued, or is recovering, since this changes how frequently monitoring is needed.",
+        "The likely cause: acute inflammatory demyelinating polyradiculoneuropathy (Guillain-Barre syndrome), with the preceding trigger if identified.",
+        "The safety status, stated explicitly and not left implicit: current vital capacity trend, ability to swallow and protect the airway, and any autonomic instability.",
+        "A worked example: 'Acute (day 4) symmetrical ascending flaccid areflexic weakness with bilateral facial weakness and minimal sensory signs, following a diarrhoeal illness three weeks ago: Guillain-Barre syndrome, weakness still progressing, vital capacity being trended, swallow currently safe.'"
+      ],
+      "pitfalls": [
+        "Stating the diagnosis without the current respiratory and bulbar safety status.",
+        "Omitting the day of illness and trajectory (progressing, plateaued, recovering), which determines monitoring frequency.",
+        "Naming CIDP in a patient who is still within the typical GBS time course."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Why must the current respiratory and bulbar status be stated as part of the diagnosis itself, not left for a separate note?",
+          "a": "Because it is the single factor that most directly determines the level of monitoring and care this patient needs right now, and stating it as part of the diagnosis ensures it is never overlooked or left implicit.",
+          "accept": [
+            "monitoring",
+            "level of care",
+            "safety"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the clinical pattern and tempo"
+        },
+        {
+          "id": "safety",
+          "text": "States current respiratory and bulbar safety status explicitly",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: Guillain-Barre syndrome diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Guillain-Barre syndrome"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}
