@@ -507,16 +507,25 @@
         'Learn what to listen FOR, then listen to real patients.</span></figcaption></figure>';
     }
 
-    // 3. Embedded video, through the rights holder's own player. Never downloaded, never re-hosted.
-    //    embeddable is only true when the YouTube oEmbed endpoint returned 200 for this video.
+    // 3. Video, played by the rights holder. NOT an inline iframe: YouTube's player refuses to run
+    //    when the embedding page's origin is not http(s), and a Capacitor WebView is
+    //    capacitor://localhost, which produces "Error 153: Video player configuration error".
+    //    Changing the app's scheme to https would fix the origin but ALSO change the storage
+    //    origin, orphaning every user's localStorage and IndexedDB - far too much to pay for
+    //    inline playback. So this is a real video card that hands off to the official YouTube
+    //    player (app if installed, browser otherwise). Nothing is downloaded or re-hosted; the
+    //    poster is YouTube's own thumbnail, used to link to the video.
     if (m.embeddable && m.videoId) {
       return head + '<figure class="cx-media cx-media--embed">' +
-        '<div class="cx-embed-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(m.videoId) +
-          '?rel=0&modestbranding=1&playsinline=1" title="' + esc(m.title || m.caption) +
-          '" frameborder="0" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' +
+        '<button type="button" class="cx-ytcard" data-act="cx-watch" data-id="' + esc(m.videoId) + '" aria-label="Play ' + esc(m.title || m.caption) + ' on YouTube">' +
+          '<img class="cx-ytthumb" alt="" loading="lazy" src="https://i.ytimg.com/vi/' + esc(m.videoId) + '/hqdefault.jpg" ' +
+            'onerror="this.style.display=\'none\';this.parentNode.classList.add(\'cx-ytcard--nothumb\')">' +
+          '<span class="cx-ytplay">' + ic("play_arrow") + "</span>" +
+          '<span class="cx-ytbadge">Watch on YouTube</span>' +
+        "</button>" +
         '<figcaption class="cx-media-cap">' + esc(m.caption) +
         '<span class="cx-media-src">' + esc(m.title) + " \u00b7 " + esc(m.attribution) +
-        ' \u00b7 <a href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">watch on YouTube</a></span></figcaption></figure>';
+        " \u00b7 opens in YouTube</span></figcaption></figure>";
     }
 
     // 4. A hosted file (openly licensed or owner-produced).
@@ -1093,6 +1102,17 @@
 
   /* Audio must never outlive the screen that started it. A breath sound still playing after the
    * student has moved on is disorienting and reads as a bug. */
+  /* Hand off to the platform. A bare <a target="_blank"> is unreliable inside a WKWebView, so try
+   * the Capacitor Browser plugin first, then window.open, then a plain navigation. */
+  function openExternal(url) {
+    try {
+      var P = window.Capacitor && Capacitor.Plugins;
+      if (P && P.Browser && P.Browser.open) { P.Browser.open({ url: url }); return; }
+    } catch (e) {}
+    try { if (window.open(url, "_blank")) return; } catch (e) {}
+    try { window.location.href = url; } catch (e) {}
+  }
+
   function stopAudio() {
     state.audioKind = null;
     try { if (window.SMD_CLINIX_AUDIO) SMD_CLINIX_AUDIO.stopAll(); } catch (e) {}
@@ -1418,6 +1438,10 @@
           if (snd) playAudio(snd);
         }
         haptic("tap"); repaint(); return;
+      }
+      case "cx-watch": {
+        openExternal("https://www.youtube.com/watch?v=" + id);
+        haptic("tap"); return;
       }
       case "cx-audio": {
         if (state.audioKind === id) stopAudio(); else playAudio(id);

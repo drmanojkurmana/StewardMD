@@ -168,6 +168,39 @@ test("THE ONE-MODEL CLAIM: the same skill teaches OPPOSITE findings in the two d
   assert.ok(/away/i.test(effTrachea.expect), "effusion: trachea pushed away");
 });
 
+test("ARCHITECTURE: a disease file never owns a skill that is not disease-specific", () => {
+  // An examination manoeuvre, a history question, an approach step or a case presentation is the
+  // same wherever you are: percussion does not change because the patient has COPD, only what you
+  // EXPECT changes, and that is what emphasis is for. Those kinds belong in a shared pack so every
+  // disease reuses one copy, and so the Examination Skills library can reach them at all.
+  // This rule was learned twice: skill.present.copd and skill.copd.corpulmonale both started life
+  // wrongly namespaced to a disease.
+  const SHARED_ONLY = ["approach", "history", "general_exam", "exam", "presentation"];
+  for (const file of ALL_DISEASES) {
+    const { localSkills } = loadDisease(file);
+    for (const id of Object.keys(localSkills)) {
+      const kind = localSkills[id].kind;
+      assert.ok(SHARED_ONLY.indexOf(kind) < 0,
+        `${file} owns '${id}' of kind '${kind}'. That kind is never disease-specific - move it to ` +
+        "a shared pack and use chapter emphasis for what differs.");
+    }
+  }
+});
+
+test("ARCHITECTURE: no skill id is defined in two places", () => {
+  // A disease-local skill silently SHADOWS a shared one of the same id, so a stale copy can win
+  // without anything failing. skill.present.case shadowed its own shared version this way.
+  const shared = loadAllSkills();
+  for (const file of ALL_DISEASES) {
+    const { localSkills } = loadDisease(file);
+    for (const id of Object.keys(localSkills)) {
+      assert.ok(!shared[id],
+        `'${id}' is defined BOTH in a shared pack and in ${file}. The disease copy shadows the ` +
+        "shared one, so the two will drift and nobody will notice.");
+    }
+  }
+});
+
 /* The projections must actually work on the real content -------------------- */
 
 test("every real skill compiles into a lesson with a why and a closing check", () => {

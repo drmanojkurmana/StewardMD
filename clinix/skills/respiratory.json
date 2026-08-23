@@ -1167,6 +1167,113 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.exam.resp.corpulmonale": {
+      "id": "skill.exam.resp.corpulmonale",
+      "kind": "exam",
+      "system": "respiratory",
+      "title": "Looking for cor pulmonale",
+      "oneLine": "The right heart failing because of the lung, whatever the lung disease is",
+      "why": "Cor pulmonale marks a change in prognosis and in management, and every one of its signs is elicited during examinations students already know how to do. It is missed not because it is subtle but because nobody goes looking for it in a respiratory case. It complicates any chronic lung disease severe enough to cause sustained hypoxaemia, not COPD alone.",
+      "steps": [
+        {
+          "text": "Look at the JVP with the patient at 45 degrees, and identify its upper level relative to the sternal angle."
+        },
+        {
+          "text": "Feel for a parasternal (right ventricular) heave with the heel of the hand at the left sternal edge."
+        },
+        {
+          "text": "Listen at the pulmonary area for a loud pulmonary component of the second heart sound."
+        },
+        {
+          "text": "Listen for a pansystolic murmur at the lower left sternal edge that increases on inspiration, indicating functional tricuspid regurgitation."
+        },
+        {
+          "text": "Palpate for a pulsatile, tender liver edge and check for ascites."
+        },
+        {
+          "text": "Check for bilateral dependent pitting oedema, and the sacrum in a bed-bound patient."
+        }
+      ],
+      "normal": "JVP not raised, no parasternal heave, normal second heart sound, no murmur, no hepatomegaly, no oedema.",
+      "abnormal": "Raised JVP, parasternal heave, loud P2, tricuspid regurgitation murmur, tender pulsatile hepatomegaly and dependent pitting oedema.",
+      "significance": "These findings together indicate right ventricular pressure overload and failure secondary to chronic lung disease. Their presence marks advanced disease, worsens prognosis, and prompts assessment for long-term oxygen therapy where criteria are met.",
+      "practice": "On any patient with chronic lung disease, deliberately add the four right-heart steps to the end of your respiratory examination until it becomes automatic.",
+      "pitfalls": [
+        "Not looking, because the case was labelled respiratory.",
+        "Assessing the JVP at the wrong angle, which makes it uninterpretable.",
+        "Attributing oedema to immobility without examining the JVP and the right ventricle.",
+        "Missing that a hyperinflated chest displaces the liver downwards, so a palpable liver edge is not by itself hepatomegaly. Percuss the upper border before calling it enlarged."
+      ],
+      "media": [
+        "media.vid.jvp"
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where do you feel for a right ventricular heave?",
+          "a": "At the left sternal edge, with the heel of the hand.",
+          "accept": [
+            "left sternal",
+            "parasternal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A COPD patient has a palpable liver edge 3 cm below the costal margin. Is that hepatomegaly?",
+          "a": "Not necessarily. Hyperinflation pushes the liver down, so the lower edge is palpable with a normal-sized liver. Percuss the upper border and measure the span before calling it enlarged.",
+          "accept": [
+            "not necessar",
+            "push",
+            "displac",
+            "span",
+            "upper border",
+            "percuss"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why does chronic hypoxaemia cause right heart failure?",
+          "a": "Alveolar hypoxia causes pulmonary arteriolar vasoconstriction. Sustained, this raises pulmonary vascular resistance and pulmonary artery pressure, imposing a pressure load on the right ventricle which hypertrophies and eventually fails.",
+          "accept": [
+            "vasoconstrict",
+            "pulmonary",
+            "resistance",
+            "pressure",
+            "hypertroph"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "jvp",
+          "text": "Assesses the JVP at 45 degrees"
+        },
+        {
+          "id": "heave",
+          "text": "Palpates for a parasternal heave"
+        },
+        {
+          "id": "p2",
+          "text": "Listens for a loud P2"
+        },
+        {
+          "id": "liver",
+          "text": "Examines the liver and checks for oedema"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259 (cor pulmonale)"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
