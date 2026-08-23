@@ -1,0 +1,434 @@
+{
+  "_comment": "CliniX neurology skills, shared across neurological disease pathways.",
+  "version": 1,
+  "system": "neurology",
+  "skills": {
+    "skill.hx.neuro.approach": {
+      "id": "skill.hx.neuro.approach",
+      "kind": "history",
+      "system": "neurology",
+      "title": "Localising from the history alone",
+      "oneLine": "Onset, course, and distribution answer WHERE before you touch the patient",
+      "why": "In neurology the history often localises the lesion before the examination confirms it. Three questions, onset, course over time, and distribution of the symptom, do most of that work.",
+      "asks": [
+        {
+          "text": "How did it start: sudden, over hours, over days, or gradually over months?"
+        },
+        {
+          "text": "Has it stayed the same, improved, worsened, or come and gone?"
+        },
+        {
+          "text": "Exactly which part of the body, and does it cross the midline?"
+        },
+        {
+          "text": "Any weakness, numbness, visual change, speech difficulty, or loss of consciousness alongside it?"
+        },
+        {
+          "text": "Headache, and if so, is it the worst of their life or different from their usual pattern?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Onset tells you the mechanism",
+          "table": {
+            "cols": [
+              "Onset",
+              "Think"
+            ],
+            "rows": [
+              [
+                "Seconds",
+                "Vascular: haemorrhage, embolic stroke"
+              ],
+              [
+                "Minutes to hours",
+                "Thrombotic stroke, migraine, seizure"
+              ],
+              [
+                "Days",
+                "Infective, inflammatory, abscess"
+              ],
+              [
+                "Weeks to months",
+                "Tumour, chronic subdural, degenerative disease"
+              ]
+            ]
+          },
+          "note": "A useful rule of thumb: the faster the onset, the more likely it is vascular; the slower, the more likely it is structural or degenerative."
+        },
+        {
+          "heading": "Course over time is the second axis",
+          "points": [
+            {
+              "t": "Monophasic, then improving.",
+              "d": "Typical of a vascular event once the initial insult is over."
+            },
+            {
+              "t": "Stepwise, worse in episodes.",
+              "d": "Recurrent small vascular events, or relapsing demyelination."
+            },
+            {
+              "t": "Steadily progressive.",
+              "d": "A growing structural lesion, or a progressive degenerative process."
+            },
+            {
+              "t": "Fluctuating within a day.",
+              "d": "Myasthenia, or a metabolic derangement."
+            }
+          ]
+        },
+        {
+          "heading": "Distribution: does it cross the midline",
+          "body": "A single, well-demarcated body part, or a whole side of the body, suggests a lesion in the central nervous system on the OPPOSITE side. Symptoms that cross the midline, or that follow a specific nerve or root rather than a whole limb, point to the peripheral nervous system instead."
+        }
+      ],
+      "pitfalls": [
+        "Not asking exactly how fast a symptom developed, which is the single most useful localising question in neurology.",
+        "Missing a 'worst headache of my life', which needs subarachnoid haemorrhage actively excluded."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A weakness developed over seconds. What category of cause does that suggest?",
+          "a": "A vascular event, such as a haemorrhage or embolic stroke.",
+          "accept": [
+            "vascular",
+            "haemorrhage",
+            "embolic",
+            "stroke"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Symptoms confined to one whole side of the body. Central or peripheral nervous system?",
+          "a": "Central, and on the side OPPOSITE the symptoms, because of the crossing of major motor and sensory pathways.",
+          "accept": [
+            "central",
+            "opposite",
+            "contralateral"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "onset",
+          "text": "Establishes the speed of onset"
+        },
+        {
+          "id": "course",
+          "text": "Establishes the course over time"
+        },
+        {
+          "id": "redflag",
+          "text": "Screens for red-flag headache or sudden severe symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: history and localisation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: history taking"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.tone_power": {
+      "id": "skill.exam.neuro.tone_power",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Tone and power",
+      "oneLine": "Two systems, two very different patterns of weakness",
+      "why": "Tone tells you upper or lower motor neurone before you have finished testing power. Getting this pattern right is what separates a stroke from Guillain-Barre syndrome at the bedside, long before any scan.",
+      "steps": [
+        {
+          "text": "Assess tone by passively moving each joint through its range, asking the patient to relax."
+        },
+        {
+          "text": "Test power against a fixed scale (MRC 0 to 5) for each muscle group, comparing both sides."
+        },
+        {
+          "text": "Test proximal and distal muscles separately in each limb."
+        },
+        {
+          "text": "Look specifically for a pattern: which limbs, proximal or distal, and symmetry."
+        }
+      ],
+      "normal": "Normal tone throughout, power 5/5 in all muscle groups, symmetrical.",
+      "abnormal": "Increased tone (spasticity or rigidity) or decreased tone (flaccidity), and reduced power in any distribution.",
+      "significance": "Increased tone with pyramidal-pattern weakness (extensors weaker than flexors in the arm, flexors weaker than extensors in the leg) means an upper motor neurone lesion. Flaccid tone with a glove-and-stocking or focal pattern means a lower motor neurone or peripheral problem.",
+      "teach": [
+        {
+          "heading": "Upper motor neurone versus lower motor neurone, the whole pattern",
+          "table": {
+            "cols": [
+              "",
+              "Upper motor neurone",
+              "Lower motor neurone"
+            ],
+            "rows": [
+              [
+                "Tone",
+                "Increased (spasticity)",
+                "Decreased (flaccid)"
+              ],
+              [
+                "Bulk",
+                "Preserved, late disuse atrophy",
+                "Wasting, often early"
+              ],
+              [
+                "Reflexes",
+                "Exaggerated",
+                "Reduced or absent"
+              ],
+              [
+                "Plantar",
+                "Extensor (up)",
+                "Flexor (down) or absent"
+              ],
+              [
+                "Fasciculations",
+                "Absent",
+                "May be present"
+              ]
+            ]
+          },
+          "note": "Learn this as ONE pattern, not five separate facts. A patient either fits the upper motor neurone row across the board or the lower motor neurone row; a mixed picture should make you reconsider the localisation."
+        },
+        {
+          "heading": "Grade power on the MRC scale",
+          "points": [
+            "0: no movement.",
+            "1: a flicker of contraction, no movement.",
+            "2: movement with gravity eliminated.",
+            "3: movement against gravity, not against resistance.",
+            "4: movement against some resistance.",
+            "5: normal power."
+          ],
+          "note": "Grade 4 is often subdivided (4-, 4, 4+) in practice, but do not blur 4 and 5. The difference between 'normal' and 'reduced' power matters clinically even when it is subtle."
+        }
+      ],
+      "pitfalls": [
+        "Testing power without first assessing tone, and so missing the pattern that would have told you where to look.",
+        "Not comparing proximal with distal, which is what separates a myopathy from a neuropathy.",
+        "Grading power as 'normal' without actually testing against resistance."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Spastic tone with an extensor plantar response. Upper or lower motor neurone?",
+          "a": "Upper motor neurone.",
+          "accept": [
+            "upper"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give the full lower motor neurone pattern: tone, bulk, reflexes, plantar.",
+          "a": "Reduced tone, wasting, reduced or absent reflexes, and a flexor or absent plantar response.",
+          "accept": [
+            "reduced tone",
+            "wasting",
+            "reduced reflex",
+            "flexor"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Proximal weakness in both legs, normal reflexes, normal sensation. What category of disease?",
+          "a": "Likely a myopathy, since proximal, symmetrical weakness with preserved reflexes and sensation is the classic myopathic pattern, unlike the distal pattern typical of most peripheral neuropathies.",
+          "accept": [
+            "myopath"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tone",
+          "text": "Assesses tone before testing power"
+        },
+        {
+          "id": "scale",
+          "text": "Grades power against the MRC scale"
+        },
+        {
+          "id": "pattern",
+          "text": "Compares proximal with distal and both sides"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: tone and power"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: motor system"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: motor system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.reflexes": {
+      "id": "skill.exam.neuro.reflexes",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Deep tendon reflexes and the plantar response",
+      "oneLine": "A reflex arc has two ends; knowing which end is broken localises the lesion",
+      "why": "A reflex is a simple arc: sensory afferent, spinal segment, motor efferent. An absent or exaggerated reflex tells you which part of that arc, and therefore which level of the nervous system, has failed.",
+      "steps": [
+        {
+          "text": "Ensure the limb is relaxed and positioned correctly for each reflex."
+        },
+        {
+          "text": "Strike the tendon briskly with the reflex hammer, letting the hammer fall under its own weight."
+        },
+        {
+          "text": "Compare both sides for every reflex tested."
+        },
+        {
+          "text": "If a reflex is absent, reinforce with a distraction manoeuvre (Jendrassik) and try again before calling it truly absent."
+        },
+        {
+          "text": "Test the plantar response last, stroking the lateral sole firmly with a blunt object."
+        }
+      ],
+      "normal": "Symmetrical, present reflexes, a flexor (downgoing) plantar response.",
+      "abnormal": "Exaggerated, reduced, absent, or asymmetrical reflexes, or an extensor (upgoing) plantar response.",
+      "significance": "Exaggerated reflexes with an extensor plantar mean an upper motor neurone lesion above the level tested. Absent reflexes mean a lesion of the reflex arc itself, at the nerve, root, or spinal segment level.",
+      "teach": [
+        {
+          "heading": "The segments, so you can localise",
+          "table": {
+            "cols": [
+              "Reflex",
+              "Segment"
+            ],
+            "rows": [
+              [
+                "Biceps",
+                "C5, C6"
+              ],
+              [
+                "Supinator",
+                "C5, C6"
+              ],
+              [
+                "Triceps",
+                "C7, C8"
+              ],
+              [
+                "Knee",
+                "L3, L4"
+              ],
+              [
+                "Ankle",
+                "S1, S2"
+              ]
+            ]
+          },
+          "note": "A reflex that is absent at one specific level with normal reflexes above and below points precisely at that segment, which is exactly how a single nerve root lesion is localised."
+        },
+        {
+          "heading": "Reading the plantar response correctly",
+          "body": "Stroke firmly along the lateral border of the sole from heel to the base of the little toe, then curving medially. A normal response is flexion (downgoing) of the great toe. Extension (upgoing), with or without fanning of the other toes, is the Babinski sign.",
+          "note": "The Babinski sign is present from birth until about 18 months, when the corticospinal tracts myelinate; an extensor response beyond that age is always abnormal and means an upper motor neurone lesion somewhere between the cortex and the spinal segment tested."
+        }
+      ],
+      "pitfalls": [
+        "Striking too gently, or not letting the hammer fall freely.",
+        "Not reinforcing before calling a reflex truly absent.",
+        "Confusing withdrawal from a ticklish sole with a genuine plantar response."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which segments does the ankle reflex test?",
+          "a": "S1 and S2.",
+          "accept": [
+            "s1",
+            "s2"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the Babinski sign, and what does it mean in an adult?",
+          "a": "Extension (upgoing) of the great toe on plantar stimulation, with or without fanning of the other toes. In an adult it always indicates an upper motor neurone lesion.",
+          "accept": [
+            "extension",
+            "upgoing",
+            "upper motor"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has an absent knee reflex on one side but a normal ankle reflex on the same side. What does that pattern suggest?",
+          "a": "A lesion affecting specifically the L3/L4 segment or its root on that side, since the reflex arc immediately above and below is intact.",
+          "accept": [
+            "l3",
+            "l4",
+            "root",
+            "segment"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "technique",
+          "text": "Uses correct hammer technique, letting it fall freely"
+        },
+        {
+          "id": "compare",
+          "text": "Compares both sides for every reflex",
+          "critical": true
+        },
+        {
+          "id": "reinforce",
+          "text": "Reinforces before calling a reflex absent"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: reflexes"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: reflexes"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: reflexes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

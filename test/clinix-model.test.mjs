@@ -89,6 +89,18 @@ test("validateSkill: 'why' is mandatory - a skill that cannot say why is not tea
   assert.ok(v.errors.some((e) => e.indexOf("skill.why required") === 0));
 });
 
+test("validateSkill: a wideTable needs more columns than the narrow table, and rectangular rows", () => {
+  const good = skill({ teach: [{ heading: "H", table: { cols: ["a","b"], rows: [["1","2"]] },
+    wideTable: { cols: ["a","b","c","d","e"], rows: [["1","2","3","4","5"]] } }] });
+  assert.deepEqual(M.validateSkill(good).errors, []);
+
+  const jagged = skill({ teach: [{ heading: "H", wideTable: { cols: ["a","b","c","d"], rows: [["1","2"]] } }] });
+  assert.equal(M.validateSkill(jagged).ok, false);
+
+  const notReallyWide = skill({ teach: [{ heading: "H", wideTable: { cols: ["a","b"], rows: [["1","2"]] } }] });
+  assert.equal(M.validateSkill(notReallyWide).ok, false, "a 2-column wideTable belongs in table, not wideTable");
+});
+
 test("validateSkill: an exam skill must state normal, abnormal and significance", () => {
   const v = M.validateSkill(skill({ normal: undefined, abnormal: undefined, significance: undefined }));
   assert.equal(v.ok, false);

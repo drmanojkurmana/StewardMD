@@ -623,7 +623,30 @@
       }
       html += "</tbody></table></div>";
     }
+    if (b.wideTable) html += wideTableHtml(b.wideTable);
     if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + esc(b.note) + "</span></div>";
+    return html;
+  }
+
+  /* The full comparison table the source actually prints, which is too wide for a portrait phone.
+   * Rather than crush it into six-point text, show a rotate prompt and render the real table full
+   * width for landscape (CSS shows/hides by orientation), while a "view anyway" fallback keeps it
+   * reachable, horizontally scrollable, for anyone who cannot or will not rotate. */
+  function wideTableHtml(wt) {
+    var id = "wt" + Math.random().toString(36).slice(2, 8);
+    var html = '<div class="cx-widewrap" id="' + id + '">' +
+      '<button type="button" class="cx-rotate-hint" data-act="cx-wide-toggle" data-id="' + id + '">' +
+        ic("screen_rotation") + '<span><b>Full comparison table</b><br>Rotate your phone for the easiest view, or tap to see it here</span>' +
+      "</button>" +
+      '<div class="cx-tablewrap cx-tablewrap--wide"><table class="cx-table"><thead><tr>';
+    for (var c = 0; c < wt.cols.length; c++) html += "<th>" + esc(wt.cols[c]) + "</th>";
+    html += "</tr></thead><tbody>";
+    for (var r = 0; r < wt.rows.length; r++) {
+      html += "<tr>";
+      for (var k = 0; k < wt.rows[r].length; k++) html += "<td>" + esc(wt.rows[r][k]) + "</td>";
+      html += "</tr>";
+    }
+    html += "</tbody></table></div></div>";
     return html;
   }
 
@@ -1565,6 +1588,11 @@
       case "cx-dia-mode": state.diaMode = id; haptic("tap"); repaint(); return;
       case "cx-dia-view": state.diaView = id; haptic("tap"); repaint(); return;
       case "cx-dia-zone": state.diaZone = (state.diaZone === id ? null : id); haptic("tap"); repaint(); return;
+      case "cx-wide-toggle": {
+        var w = document.getElementById(id);
+        if (w) w.classList.toggle("cx-widewrap--open");
+        haptic("tap"); return;
+      }
       // Tapping an auscultation site both selects it AND plays what you would hear there. That
       // pairing is the point: the site and the sound are one fact, not two.
       case "cx-dia-ausc": {

@@ -197,6 +197,16 @@
           if (!isArr(b.table.cols) || !b.table.cols.length) e.push(str(s.id) + ".teach[" + t + "].table needs cols");
           if (!isArr(b.table.rows) || !b.table.rows.length) e.push(str(s.id) + ".teach[" + t + "].table needs rows");
         }
+        // wideTable is the FULL comparison the book actually prints, deliberately wider than the
+        // portrait table above. It renders behind a "rotate your phone" prompt rather than being
+        // squeezed onto a portrait screen, so it can carry as many columns as the source needs.
+        if (isObj(b.wideTable)) {
+          if (!isArr(b.wideTable.cols) || b.wideTable.cols.length < 4) e.push(str(s.id) + ".teach[" + t + "].wideTable should have more columns than fit in portrait, or it belongs in table instead");
+          if (!isArr(b.wideTable.rows) || !b.wideTable.rows.length) e.push(str(s.id) + ".teach[" + t + "].wideTable needs rows");
+          for (var wr = 0; b.wideTable.rows && wr < b.wideTable.rows.length; wr++) {
+            if (b.wideTable.rows[wr].length !== b.wideTable.cols.length) e.push(str(s.id) + ".teach[" + t + "].wideTable row " + wr + " has the wrong cell count");
+          }
+        }
       }
     }
 

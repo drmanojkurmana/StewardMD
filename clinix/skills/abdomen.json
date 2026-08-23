@@ -1,0 +1,614 @@
+{
+  "_comment": "CliniX abdomen/GI skills, shared across abdominal disease pathways.",
+  "version": 1,
+  "system": "abdomen",
+  "skills": {
+    "skill.hx.gi.pain": {
+      "id": "skill.hx.gi.pain",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Abdominal pain",
+      "oneLine": "Site, character and radiation, mapped onto the nine regions",
+      "why": "Abdominal pain localises poorly to the organ that causes it, because visceral pain is felt in the midline zone that shares its embryological origin, not over the organ itself. Knowing that pattern is what lets you interpret vague pain instead of dismissing it.",
+      "asks": [
+        {
+          "text": "Where did it start, and where is it now? Ask them to point."
+        },
+        {
+          "text": "What does it feel like: colicky, constant, burning, tearing?"
+        },
+        {
+          "text": "Does it move anywhere: back, shoulder, groin?"
+        },
+        {
+          "text": "What makes it worse or better: food, movement, position, defecation?"
+        },
+        {
+          "text": "Any associated nausea, vomiting, fever, or change in bowel habit?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Visceral pain is midline and vague, for a reason",
+          "body": "Pain from an abdominal organ travels with autonomic fibres to the spinal segment that supplies its embryological origin, not the segment over its adult position. That is why early appendicitis is felt centrally, around the umbilicus, before localising to the right iliac fossa once the peritoneum itself becomes inflamed.",
+          "table": {
+            "cols": [
+              "Origin",
+              "Felt in"
+            ],
+            "rows": [
+              [
+                "Foregut (stomach, duodenum, biliary, pancreas)",
+                "Epigastrium"
+              ],
+              [
+                "Midgut (small bowel, appendix, right colon)",
+                "Periumbilical"
+              ],
+              [
+                "Hindgut (left colon, rectum)",
+                "Suprapubic"
+              ]
+            ]
+          },
+          "note": "Pain that MOVES from central to a fixed site, as in appendicitis, is one of the most reliable patterns in the whole history."
+        },
+        {
+          "heading": "Site once it localises",
+          "table": {
+            "cols": [
+              "Region",
+              "Common causes"
+            ],
+            "rows": [
+              [
+                "Right hypochondrium",
+                "Biliary colic, cholecystitis, hepatitis"
+              ],
+              [
+                "Epigastrium",
+                "Peptic ulcer, pancreatitis, early appendicitis"
+              ],
+              [
+                "Left hypochondrium",
+                "Splenic pathology, rarely"
+              ],
+              [
+                "Right iliac fossa",
+                "Appendicitis, ectopic pregnancy, right ureteric colic"
+              ],
+              [
+                "Suprapubic",
+                "Cystitis, pelvic pathology"
+              ],
+              [
+                "Left iliac fossa",
+                "Diverticulitis, left ureteric colic"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Character narrows it further",
+          "points": [
+            {
+              "t": "Colicky.",
+              "d": "Rises and falls, from a hollow viscus contracting against an obstruction: biliary, ureteric, intestinal."
+            },
+            {
+              "t": "Constant, sharp, worse on movement.",
+              "d": "Peritoneal irritation, once the process reaches the parietal peritoneum."
+            },
+            {
+              "t": "Burning, related to meals.",
+              "d": "Peptic ulcer disease."
+            },
+            {
+              "t": "Tearing, radiating to the back.",
+              "d": "Pancreatitis, or an aortic catastrophe if sudden and severe."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Accepting a vague location without asking about movement or change over time.",
+        "Missing the classic central-to-right-iliac-fossa migration of appendicitis.",
+        "Not asking about radiation to the back, shoulder tip or groin."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is early visceral pain felt in the midline rather than over the organ?",
+          "a": "It follows the autonomic nerve supply of the organ's embryological origin, which enters the spinal cord in midline segments, rather than the site of the adult organ.",
+          "accept": [
+            "embryolog",
+            "midline",
+            "autonomic",
+            "segment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Colicky pain. What kind of organ produces it?",
+          "a": "A hollow, muscular viscus contracting against an obstruction, such as the biliary tree, ureter, or bowel.",
+          "accept": [
+            "hollow",
+            "obstruct",
+            "contract"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Pain that starts central and localises to the right iliac fossa over hours. What is happening, mechanistically?",
+          "a": "Initial visceral (midgut) pain is periumbilical; as inflammation reaches the parietal peritoneum overlying the appendix, the pain becomes somatic and localises precisely to the right iliac fossa.",
+          "accept": [
+            "parietal",
+            "peritoneum",
+            "somatic",
+            "localis"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "site",
+          "text": "Establishes site and asks about movement/localisation"
+        },
+        {
+          "id": "character",
+          "text": "Elicits character (colicky vs constant vs burning)"
+        },
+        {
+          "id": "radiation",
+          "text": "Asks about radiation"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: pain"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.inspection": {
+      "id": "skill.exam.gi.inspection",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Inspection of the abdomen",
+      "oneLine": "Shape, movement, and the scars and veins that tell a history of their own",
+      "why": "Inspection of the abdomen, like the chest, carries real diagnostic weight and is routinely rushed. A visible peristalsis, a caput medusae, or a single scar can hand you the diagnosis before you touch the patient.",
+      "steps": [
+        {
+          "text": "Expose from the xiphisternum to the pubic symphysis, with the patient supine and comfortable."
+        },
+        {
+          "text": "Look tangentially, at eye level with the abdomen, for contour and any visible mass or pulsation."
+        },
+        {
+          "text": "Look for movement with respiration, and for visible peristalsis."
+        },
+        {
+          "text": "Examine the umbilicus, and look for scars, striae, and dilated veins."
+        },
+        {
+          "text": "Ask the patient to cough, watching for a bulge suggesting a hernia."
+        }
+      ],
+      "normal": "A flat or scaphoid abdomen, moving symmetrically with respiration, no visible peristalsis, masses, or abnormal veins.",
+      "abnormal": "Distension, visible peristalsis, engorged veins, scars, or an everted umbilicus.",
+      "significance": "Visible peristalsis in an adult suggests intestinal obstruction. Dilated periumbilical veins (caput medusae) suggest portal hypertension. The direction of flow in dilated veins distinguishes portal from caval obstruction.",
+      "teach": [
+        {
+          "heading": "The five Fs of distension",
+          "points": [
+            "Fat",
+            "Fluid (ascites)",
+            "Flatus",
+            "Faeces",
+            "Fetus"
+          ],
+          "note": "Say them in order when describing distension; it is a genuinely useful differential and examiners ask for it by name."
+        },
+        {
+          "heading": "Reading the veins",
+          "body": "Dilated abdominal wall veins are a real sign, but only if you determine the direction of flow. Empty a segment of vein with two fingers, release one end at a time, and watch which way it refills.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Flow away from the umbilicus in all directions",
+                "Portal hypertension (caput medusae)"
+              ],
+              [
+                "Flow upward below the umbilicus, downward above",
+                "Inferior vena cava obstruction"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Scars tell their own history",
+          "body": "A right subcostal scar suggests cholecystectomy; a right iliac fossa scar suggests appendicectomy; a midline scar could be almost anything and needs asking about directly. Always ask what the surgery was for, do not guess."
+        }
+      ],
+      "pitfalls": [
+        "Inspecting for only a few seconds instead of a full respiratory cycle.",
+        "Not looking tangentially, which is what reveals subtle peristalsis or pulsation.",
+        "Never checking the direction of venous flow when veins are visible."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "List the five Fs of abdominal distension.",
+          "a": "Fat, fluid, flatus, faeces, fetus.",
+          "accept": [
+            "fat",
+            "fluid",
+            "flatus",
+            "faeces",
+            "fetus"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "How do you determine the direction of flow in a dilated abdominal vein?",
+          "a": "Empty a segment with two fingers, release one end at a time, and observe which end refills first.",
+          "accept": [
+            "empty",
+            "release",
+            "refill"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Visible peristalsis in an adult. What does it suggest?",
+          "a": "Intestinal obstruction. Visible peristalsis is not normal in an adult with an intact abdominal wall.",
+          "accept": [
+            "obstruction"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "expose",
+          "text": "Exposes adequately, xiphisternum to symphysis pubis"
+        },
+        {
+          "id": "tangential",
+          "text": "Inspects tangentially for contour and movement"
+        },
+        {
+          "id": "scars",
+          "text": "Notes and asks about any scars"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: inspection"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: inspection"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.palpation": {
+      "id": "skill.exam.gi.palpation",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Palpation: superficial, deep, liver and spleen",
+      "oneLine": "Warm hands, watch the face, and start away from the pain",
+      "why": "Palpation is where a frightened, guarded abdomen becomes uninterpretable. Technique, not force, is what gets an accurate examination: a relaxed patient examined gently tells you more than a tense one examined firmly.",
+      "steps": [
+        {
+          "text": "Kneel or sit at the bedside so your forearm is level with the abdomen. Warm your hands first."
+        },
+        {
+          "text": "Ask if there is any pain, and start FAR from that area."
+        },
+        {
+          "text": "Superficial palpation first, light pressure, all nine regions, watching the patient's face throughout."
+        },
+        {
+          "text": "Deep palpation next, assessing for masses and organomegaly."
+        },
+        {
+          "text": "Palpate the liver from the right iliac fossa upward, asking the patient to breathe in, feeling for the edge meeting your fingers."
+        },
+        {
+          "text": "Palpate the spleen the same way, from the right iliac fossa diagonally toward the left costal margin; if not felt, roll the patient to the right lateral position and try again."
+        }
+      ],
+      "normal": "Soft, non-tender abdomen, no palpable masses, liver and spleen not palpable below the costal margin.",
+      "abnormal": "Tenderness, guarding, rigidity, a palpable mass, or an enlarged liver or spleen.",
+      "significance": "Guarding is voluntary, tensing in anticipation of pain. Rigidity is involuntary, a sign of peritonitis, and is a surgical emergency sign. A palpable spleen must have increased 2 to 3 times in size before it is felt at all, so any palpable spleen is significant.",
+      "teach": [
+        {
+          "heading": "Guarding versus rigidity, do not confuse them",
+          "table": {
+            "cols": [
+              "",
+              "Guarding",
+              "Rigidity"
+            ],
+            "rows": [
+              [
+                "What it is",
+                "Voluntary muscle tensing",
+                "Involuntary muscle spasm"
+              ],
+              [
+                "Can you overcome it",
+                "Yes, with reassurance and distraction",
+                "No"
+              ],
+              [
+                "Meaning",
+                "Anxiety, anticipated pain, or early peritonism",
+                "Peritonitis"
+              ]
+            ]
+          },
+          "note": "Distract the patient, talk to them, examine while they are focused elsewhere, and true guarding will relax. Rigidity will not, whatever you do."
+        },
+        {
+          "heading": "Why you feel FOR the liver, not press ONTO it",
+          "body": "Keep your palpating hand still and ask the patient to take a deep breath. The diaphragm pushes the liver edge down onto your fingers, rather than you chasing it. This is gentler and far more sensitive than pressing repeatedly.",
+          "note": "A liver edge felt below the costal margin is not automatically enlarged: it may simply be pushed down by a hyperinflated chest. Confirm with the upper border on percussion before calling it hepatomegaly."
+        },
+        {
+          "heading": "The spleen has to double before you can feel it",
+          "body": "An impalpable spleen does not exclude splenic disease; it means it has not yet enlarged enough. Once palpable, note its size, consistency, and whether you can get above it (you cannot, with a spleen, which is how you tell it from a large left kidney).",
+          "note": "Bimanual palpation with the patient in the right lateral position is the position of choice for a spleen you cannot feel supine."
+        }
+      ],
+      "pitfalls": [
+        "Starting palpation over the painful area, guaranteeing a guarded, uninterpretable examination.",
+        "Pressing onto the liver instead of feeling for the edge to meet you on inspiration.",
+        "Calling a palpable liver edge enlarged without percussing the upper border."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where do you begin palpation when the patient reports pain in the right iliac fossa?",
+          "a": "Away from it, starting in the region furthest from the pain and working towards it last.",
+          "accept": [
+            "away",
+            "furthest",
+            "last"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Distinguish guarding from rigidity.",
+          "a": "Guarding is voluntary and can be overcome with distraction and reassurance; rigidity is involuntary muscle spasm that persists regardless, and indicates peritonitis.",
+          "accept": [
+            "voluntary",
+            "involuntary",
+            "peritonitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "You feel a liver edge 3 cm below the costal margin. Is this hepatomegaly?",
+          "a": "Not necessarily. The edge could be pushed down by a hyperinflated chest with a normal-sized liver. Percuss the upper border and measure the total span before calling it enlarged.",
+          "accept": [
+            "not necessar",
+            "percuss",
+            "upper border",
+            "span"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How do you tell a palpable spleen from an enlarged left kidney?",
+          "a": "You cannot get above a spleen, it has a palpable notch, moves with respiration towards the right iliac fossa, and is dull to percussion; a kidney is ballotable and usually resonant in front due to overlying bowel.",
+          "accept": [
+            "cannot get above",
+            "notch",
+            "ballot",
+            "dull",
+            "resonant"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "start",
+          "text": "Starts away from the site of pain",
+          "critical": true
+        },
+        {
+          "id": "face",
+          "text": "Watches the patient's face throughout"
+        },
+        {
+          "id": "liver",
+          "text": "Palpates the liver correctly, feeling for the edge on inspiration"
+        },
+        {
+          "id": "spleen",
+          "text": "Attempts spleen palpation bimanually, including the lateral position if needed"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: palpation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: palpation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: palpation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.ascites": {
+      "id": "skill.exam.gi.ascites",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Detecting ascites",
+      "oneLine": "Shifting dullness needs about 1500 mL; a fluid thrill needs more",
+      "why": "Ascites is missed less often than it is over-called. Knowing how much fluid each test actually requires stops you diagnosing ascites in a patient who is simply obese, and stops you missing an early effusion that has not yet reached the volume a simple test can detect.",
+      "steps": [
+        {
+          "text": "Percuss from the midline outward to the flanks, marking where resonant becomes dull."
+        },
+        {
+          "text": "With your finger at that point, ask the patient to roll onto the opposite side."
+        },
+        {
+          "text": "Wait, then percuss again at the same mark: fluid that has shifted with gravity will now be resonant."
+        },
+        {
+          "text": "For a fluid thrill, have an assistant press the edge of their hand firmly onto the midline to stop transmission through fat, then flick one flank while feeling the other."
+        }
+      ],
+      "normal": "Resonant percussion throughout, no shift with position, no fluid thrill.",
+      "abnormal": "Dullness in the flanks that shifts with position (shifting dullness), or a palpable fluid thrill.",
+      "significance": "Shifting dullness reliably detects ascites once it reaches roughly 1500 mL. A fluid thrill needs a large volume and is unreliable in a thin patient without the damping manoeuvre, so absence of a thrill does not exclude ascites.",
+      "teach": [
+        {
+          "heading": "Why shifting dullness works",
+          "body": "Free fluid obeys gravity and pools in the flanks and pelvis when the patient is supine, while gas-filled bowel floats to the top. Percussion finds the border between resonant bowel above and dull fluid below; rolling the patient moves that border because the fluid redistributes."
+        },
+        {
+          "heading": "How much fluid each sign needs",
+          "table": {
+            "cols": [
+              "Sign",
+              "Approximate volume needed"
+            ],
+            "rows": [
+              [
+                "Shifting dullness",
+                "About 1500 mL"
+              ],
+              [
+                "Fluid thrill",
+                "Larger volumes, and easily missed in a thin patient without damping"
+              ],
+              [
+                "Puddle sign",
+                "As little as 120 mL, in the knee-elbow position, rarely used"
+              ]
+            ]
+          },
+          "note": "A negative shifting dullness in a patient you strongly suspect has ascites does not exclude a smaller volume. Ultrasound is far more sensitive and is the right next step."
+        }
+      ],
+      "pitfalls": [
+        "Not waiting long enough after rolling the patient for the fluid to actually redistribute.",
+        "Forgetting the damping hand for a fluid thrill, so the wave is falsely transmitted through the fat of the abdominal wall.",
+        "Calling obesity ascites without eliciting either sign."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Roughly how much ascitic fluid is needed for shifting dullness to be detectable?",
+          "a": "About 1500 mL.",
+          "accept": [
+            "1500",
+            "1.5"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does dullness shift when the patient rolls onto their side?",
+          "a": "Free fluid moves with gravity to the dependent flank while gas-filled bowel floats above it, moving the resonant-dull border.",
+          "accept": [
+            "gravity",
+            "dependent",
+            "float"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is a hand placed on the midline during the fluid thrill test?",
+          "a": "To damp transmission of the impulse through the abdominal wall fat, so that a true thrill is only felt if it has actually travelled through fluid.",
+          "accept": [
+            "damp",
+            "fat",
+            "transmission"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "percuss",
+          "text": "Percusses from midline to flank correctly"
+        },
+        {
+          "id": "wait",
+          "text": "Waits an adequate time after repositioning"
+        },
+        {
+          "id": "thrill",
+          "text": "Uses the damping hand if testing for a fluid thrill"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: percussion"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: ascites"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

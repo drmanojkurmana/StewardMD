@@ -693,3 +693,35 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 }
 #clinixRoot .cx-showans:active { background: var(--cx-surface-2); }
 #clinixRoot .cx-showans .material-symbols-rounded { font-size: 18px; }
+
+/* ── wide comparison tables: rotate-to-view ──────────────────────────────── */
+
+#clinixRoot .cx-widewrap { margin: 4px 0 14px; }
+#clinixRoot .cx-rotate-hint {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 14px; background: var(--cx-teach-soft); border: 0; border-radius: var(--cx-r-ctl);
+  color: var(--cx-teach); font-family: inherit; text-align: left; cursor: pointer;
+}
+#clinixRoot .cx-rotate-hint .material-symbols-rounded { font-size: 26px; flex: 0 0 auto; animation: cx-rotate-nudge 2.4s ease-in-out infinite; }
+#clinixRoot .cx-rotate-hint span { font-size: 13px; line-height: 1.45; color: var(--cx-ink); }
+#clinixRoot .cx-rotate-hint b { color: var(--cx-teach); }
+@keyframes cx-rotate-nudge { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-90deg); } }
+
+/* Portrait: the full table stays collapsed behind the hint until tapped. */
+#clinixRoot .cx-widewrap .cx-tablewrap--wide { display: none; margin-top: 10px; }
+#clinixRoot .cx-widewrap--open .cx-tablewrap--wide { display: block; }
+#clinixRoot .cx-tablewrap--wide .cx-table th,
+#clinixRoot .cx-tablewrap--wide .cx-table td { white-space: nowrap; }
+
+/* Landscape: the phone answered the prompt, so show the real table full width automatically and
+   fold the hint away rather than making the reader tap after they already rotated. */
+@media (orientation: landscape) {
+  #clinixRoot .cx-rotate-hint { display: none; }
+  #clinixRoot .cx-widewrap .cx-tablewrap--wide { display: block; margin-top: 0; }
+  #clinixRoot .cx-tablewrap--wide .cx-table th,
+  #clinixRoot .cx-tablewrap--wide .cx-table td { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-rotate-hint .material-symbols-rounded { animation: none; }
+}

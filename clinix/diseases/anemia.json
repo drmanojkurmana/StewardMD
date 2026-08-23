@@ -1,0 +1,274 @@
+{
+  "_comment": "Anaemia is a SHORT CASE: a syndrome examined across systems, not a disease of one organ. Structured like a disease pathway (same engine, no new code) but its chapters lean on general_exam skills rather than one systemic exam.",
+  "id": "anemia",
+  "name": "Anaemia",
+  "fullName": "Anaemia (a short case)",
+  "system": "general",
+  "kbRef": "anemia",
+  "oneLine": "Not enough haemoglobin, and the three ways that happens",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What anaemia is, and the three mechanisms",
+      "skills": [
+        "skill.gen.pallor"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Symptom, mechanism, then cause",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.anemia"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Pallor first, then the discriminating signs",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for glossitis, angular stomatitis, koilonychia and lymphadenopathy alongside the general appearance. These are the findings that separate one cause of anaemia from another."
+        },
+        "skill.gen.vitals": {
+          "expect": "Tachycardia and a wide pulse pressure reflect the compensatory high-output state of significant anaemia, not a separate cardiac diagnosis."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Pallor plus the extra sign that names a cause",
+      "skills": [
+        "skill.exam.anemia.signs"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "What kind of anaemia is this",
+      "blurb": "Production, loss, or destruction",
+      "skills": [
+        "skill.exam.anemia.signs"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One number confirms it, a few more explain it",
+      "skills": [
+        "skill.ix.anemia.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Severity and likely mechanism, not just the word 'anaemia'",
+      "skills": [
+        "skill.dx.anemia"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.anemia.general",
+        "title": "General examination for anaemia",
+        "seconds": 300,
+        "task": "This patient reports fatigue and breathlessness. Perform a general examination looking for anaemia and its cause, and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.gen.pallor",
+          "skill.gen.clubbing"
+        ],
+        "examinerQuestions": [
+          "Which sites did you check for pallor, and why those?",
+          "What single additional sign would point you towards iron deficiency?",
+          "What is the WHO haemoglobin threshold for anaemia in this patient's group?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.gen.pallor",
+      "skill.hx.anemia",
+      "skill.exam.anemia.signs"
+    ]
+  },
+  "skills": {
+    "skill.ix.anemia.workup": {
+      "id": "skill.ix.anemia.workup",
+      "kind": "investigation",
+      "system": "general",
+      "title": "Working up anaemia",
+      "oneLine": "One test confirms it, the next few tell you why",
+      "why": "A haemoglobin confirms anaemia but never explains it. The workup is a short, deliberate sequence, not a long panel ordered at once.",
+      "body": "Confirm, characterise, then investigate the mechanism the history and examination pointed towards.",
+      "keyPoints": [
+        "Confirm: full blood count, giving the haemoglobin and the red cell indices.",
+        "Characterise by size: mean corpuscular volume (MCV) divides anaemia into microcytic, normocytic and macrocytic, and each has its own short list of causes.",
+        "Microcytic: iron studies (ferritin, iron, TIBC). Low ferritin confirms iron deficiency; a normal or high ferritin with microcytosis suggests thalassaemia or anaemia of chronic disease.",
+        "Macrocytic: B12 and folate levels, and consider hypothyroidism and alcohol.",
+        "Normocytic: reticulocyte count first. A high reticulocyte count means the marrow is responding, as in acute blood loss or haemolysis; a low count means the marrow itself is underproducing.",
+        "If haemolysis is suspected: bilirubin, LDH, haptoglobin, and a peripheral smear.",
+        "If bleeding is suspected: stool occult blood, and imaging or endoscopy as indicated by the history.",
+        "Reticulocyte count is the hinge investigation in a normocytic anaemia: it tells you whether to look at the marrow or outside it."
+      ],
+      "pitfalls": [
+        "Ordering B12, folate, iron studies and a haemolysis screen all at once instead of letting the MCV and the history direct the workup.",
+        "Not checking a reticulocyte count in a normocytic anaemia, which is the test that decides the next step.",
+        "Treating a low ferritin as needing no further explanation in an older patient: iron deficiency in this group needs a source found, usually gastrointestinal."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single index first classifies an anaemia?",
+          "a": "The mean corpuscular volume (MCV): microcytic, normocytic, or macrocytic.",
+          "accept": [
+            "mcv",
+            "mean corpuscular"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "In a normocytic anaemia, which single test tells you whether the marrow is responding?",
+          "a": "The reticulocyte count.",
+          "accept": [
+            "reticulocyte"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "An older patient has new iron deficiency anaemia. What must you actively look for?",
+          "a": "A source of chronic blood loss, most often gastrointestinal, and this usually warrants endoscopic investigation rather than assuming a dietary cause.",
+          "accept": [
+            "source",
+            "bleed",
+            "gastrointestinal",
+            "endoscop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.anemia": {
+      "id": "skill.dx.anemia",
+      "kind": "reasoning",
+      "system": "general",
+      "title": "Stating the diagnosis of anaemia",
+      "oneLine": "Severity, morphology, and mechanism: never just the word 'anaemia'",
+      "why": "'Anaemia' on its own is an observation, not a diagnosis. A complete statement gives the severity, the red cell size, and, where known, the mechanism, because each of those changes what happens next.",
+      "body": "State it in three parts: how severe, what size, and why.",
+      "keyPoints": [
+        "Severity, by the WHO thresholds for the patient's age and sex group: mild, moderate, or severe.",
+        "Morphology: microcytic, normocytic, or macrocytic, from the MCV.",
+        "Mechanism, where established: for example iron deficiency secondary to chronic gastrointestinal blood loss.",
+        "A worked example: 'Moderate microcytic anaemia, likely iron deficiency secondary to menorrhagia, pending confirmatory iron studies.'",
+        "Where the mechanism is not yet known, say so explicitly rather than omitting it: 'normocytic anaemia, reticulocyte count pending' is a complete, honest statement."
+      ],
+      "pitfalls": [
+        "Writing 'anaemia' with no severity or morphology.",
+        "Naming a mechanism the tests have not actually confirmed.",
+        "Omitting the pending investigation that would establish the mechanism."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Give the three parts of a complete anaemia diagnosis.",
+          "a": "Severity, morphology (red cell size), and mechanism where known.",
+          "accept": [
+            "severity",
+            "morpholog",
+            "mechanism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is 'anaemia' alone not an acceptable diagnosis?",
+          "a": "It is an observation rather than a diagnosis: it does not say how severe it is, what kind it is, or why it is present, none of which can guide management.",
+          "accept": [
+            "observation",
+            "severity",
+            "why",
+            "guide"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia"
+        },
+        {
+          "source": "WHO",
+          "locator": "Haemoglobin thresholds"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

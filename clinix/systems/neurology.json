@@ -1,0 +1,99 @@
+{
+  "_comment": "System module: the whole workup for this system, disease-independent, shaped like a disease pathway on purpose.",
+  "id": "neuro-exam",
+  "name": "Examination of the Nervous System",
+  "fullName": "Examination of the Nervous System",
+  "system": "neurology",
+  "kind": "system-module",
+  "oneLine": "The whole system workup, before any particular disease",
+  "estMinutes": 65,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Name, age, and why each one is clinical data",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Onset and course localise before you touch the patient",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.neuro.approach"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "From the end of the bed inwards",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Motor examination",
+      "blurb": "Tone, power, reflexes, plantar response",
+      "skills": [
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.reflexes"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Presenting the case",
+      "blurb": "Two minutes, in a fixed order",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.neurology.full",
+        "title": "Examination of the Nervous System",
+        "task": "Examine this patient's motor system and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.reflexes"
+        ],
+        "examinerQuestions": [
+          "Give the full upper motor neurone pattern.",
+          "Which segments does the ankle reflex test?",
+          "What is the Babinski sign and what does it mean in an adult?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.neuro.tone_power",
+      "skill.exam.neuro.reflexes",
+      "skill.hx.neuro.approach"
+    ]
+  }
+}

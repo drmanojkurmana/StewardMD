@@ -1,0 +1,348 @@
+{
+  "_comment": "General/syndrome skills. A short case like anaemia is examined ACROSS systems, so it lives here rather than under any one organ system.",
+  "version": 1,
+  "system": "general",
+  "skills": {
+    "skill.gen.pallor": {
+      "id": "skill.gen.pallor",
+      "kind": "general_exam",
+      "system": "general",
+      "title": "Pallor",
+      "oneLine": "Where to look, and why the tongue is more reliable than the nail bed",
+      "why": "Pallor is subjective and confounded by skin tone, lighting and peripheral vasoconstriction. Checking it at the right sites, in good light, is what turns a guess into a genuine sign.",
+      "steps": [
+        {
+          "text": "Examine in good natural light where possible."
+        },
+        {
+          "text": "Lower conjunctiva: gently pull down the lower eyelid, compare the colour of the conjunctiva to the surrounding skin."
+        },
+        {
+          "text": "Tongue and oral mucosa: ask the patient to protrude the tongue, look at its colour and that of the buccal mucosa."
+        },
+        {
+          "text": "Palmar creases: compare the patient's palm, fingers extended, to your own."
+        },
+        {
+          "text": "Nail beds, though the least reliable site alone."
+        }
+      ],
+      "normal": "Pink conjunctivae, tongue and palmar creases.",
+      "abnormal": "Pale conjunctivae, tongue, oral mucosa, or palmar creases.",
+      "significance": "Clinical pallor is a poor quantitative tool: it is usually not detectable until haemoglobin has fallen substantially, and it does not reliably distinguish mild from moderate anaemia. It is a screening sign that should trigger a haemoglobin check, not a substitute for one.",
+      "teach": [
+        {
+          "heading": "Why the tongue and conjunctiva, not the nail",
+          "body": "The tongue and conjunctival mucosa have a dense, superficial capillary bed with little overlying pigment, so they reflect the colour of the blood in them fairly directly. Nail bed colour is affected by peripheral perfusion and can look normal even in significant anaemia, or pale from cold alone.",
+          "note": "Palmar crease pallor specifically is a useful sign in patients with dark skin, where conjunctival pallor can be harder to judge."
+        },
+        {
+          "heading": "Clinical pallor is late and imprecise",
+          "body": "By the time pallor is clinically visible, the anaemia is often already moderate to severe. A patient can have a genuinely low haemoglobin with no detectable pallor at all, particularly if the fall has been gradual and the patient has adapted.",
+          "note": "Never use the absence of pallor to exclude anaemia in a patient with a suggestive history. Send the test."
+        }
+      ],
+      "pitfalls": [
+        "Examining in poor or artificial light, which distorts colour judgement.",
+        "Relying on the nail bed alone.",
+        "Treating a normal-looking conjunctiva as ruling out anaemia."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two sites more reliable than the nail bed for assessing pallor.",
+          "a": "The lower palpebral conjunctiva and the tongue or oral mucosa.",
+          "accept": [
+            "conjunctiv",
+            "tongue",
+            "mucosa"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is the conjunctiva a reliable site?",
+          "a": "It has a dense, superficial capillary bed with minimal overlying pigment, so it reflects blood colour directly.",
+          "accept": [
+            "capillary",
+            "superficial",
+            "pigment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient looks well, with no visible pallor, but you strongly suspect anaemia from the history. What do you do?",
+          "a": "Check a haemoglobin regardless. Clinical pallor is insensitive and often absent until anaemia is moderate to severe, so a normal appearance does not exclude it.",
+          "accept": [
+            "check",
+            "haemoglobin",
+            "hemoglobin",
+            "insensitive"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "light",
+          "text": "Examines in adequate light"
+        },
+        {
+          "id": "sites",
+          "text": "Checks conjunctiva, tongue and palmar creases, not just the nail"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General examination: pallor"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "General examination: pallor"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "General examination: pallor"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.anemia": {
+      "id": "skill.hx.anemia",
+      "kind": "history",
+      "system": "general",
+      "title": "The anaemia history",
+      "oneLine": "Fatigue and breathlessness are not enough; ask what kind of anaemia this could be",
+      "why": "Anaemia is a laboratory finding with dozens of causes. The history is where you narrow from 'anaemia' to a mechanism, nutritional, haemolytic, or due to blood loss, before a single test comes back.",
+      "asks": [
+        {
+          "text": "Fatigue, breathlessness on exertion, palpitations, or dizziness: how long, and how severe?"
+        },
+        {
+          "text": "Any bleeding: black stools, blood in stool, heavy periods, blood in urine, nosebleeds?"
+        },
+        {
+          "text": "Diet: how much meat, green vegetables, and whether the diet is restricted for any reason."
+        },
+        {
+          "text": "Any jaundice, dark urine, or a family history of anaemia, jaundice, or gallstones?"
+        },
+        {
+          "text": "Any known chronic disease: kidney disease, rheumatoid arthritis, malignancy?"
+        },
+        {
+          "text": "Any drugs, including NSAIDs, which can cause both bleeding and marrow suppression."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Three mechanisms, three sets of questions",
+          "points": [
+            {
+              "t": "Not enough being made.",
+              "d": "Iron, B12 or folate deficiency; chronic disease; marrow failure. Ask about diet, chronic illness, and drugs."
+            },
+            {
+              "t": "Being lost.",
+              "d": "GI bleeding, menorrhagia, haematuria. Ask directly about black stools and menstrual history."
+            },
+            {
+              "t": "Being destroyed.",
+              "d": "Haemolysis. Ask about jaundice, dark urine, and a family history, since many haemolytic anaemias are inherited."
+            }
+          ],
+          "note": "Asking 'do you bleed from anywhere' is not enough. Ask specifically about stool colour and menstrual loss; patients rarely volunteer either unprompted."
+        },
+        {
+          "heading": "The WHO thresholds, so you know what you are talking about",
+          "table": {
+            "cols": [
+              "Group",
+              "Anaemia if Hb below"
+            ],
+            "rows": [
+              [
+                "Men, 15 years and above",
+                "13 g/dL"
+              ],
+              [
+                "Non-pregnant women, 15 years and above",
+                "12 g/dL"
+              ],
+              [
+                "Pregnant women",
+                "11 g/dL"
+              ],
+              [
+                "Children, 5 to 11 years",
+                "11.5 g/dL"
+              ]
+            ]
+          },
+          "note": "'Mild' anaemia by these thresholds is a misleading label. Iron deficiency is often already advanced by the time haemoglobin has fallen enough to be labelled even mild."
+        },
+        {
+          "heading": "What symptom severity tells you about speed",
+          "body": "Symptoms depend more on how FAST the haemoglobin fell than on the final number. A haemoglobin of 7 g/dL reached slowly over months can cause surprisingly few symptoms, because the body compensates; the same level reached acutely from bleeding causes collapse.",
+          "note": "A patient who looks remarkably well despite a very low haemoglobin has usually become anaemic slowly. That itself is a clue towards a chronic cause rather than acute blood loss."
+        }
+      ],
+      "pitfalls": [
+        "Asking only about fatigue and breathlessness, missing the mechanism entirely.",
+        "Not asking specifically about stool colour and menstrual history.",
+        "Assuming a well-looking patient cannot have severe anaemia."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three broad mechanisms of anaemia.",
+          "a": "Reduced production, increased loss (bleeding), and increased destruction (haemolysis).",
+          "accept": [
+            "production",
+            "loss",
+            "bleed",
+            "haemolysis",
+            "hemolysis",
+            "destruction"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What WHO haemoglobin threshold defines anaemia in a non-pregnant woman?",
+          "a": "Below 12 g/dL.",
+          "accept": [
+            "12"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can a patient with a haemoglobin of 6 g/dL look remarkably well?",
+          "a": "If the fall has been slow, over weeks to months, the body has time to compensate through increased cardiac output and other adaptations, so symptoms are often disproportionately mild compared to the same haemoglobin reached acutely.",
+          "accept": [
+            "slow",
+            "compensat",
+            "chronic",
+            "adapt"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "mechanism",
+          "text": "Explores production, loss and destruction"
+        },
+        {
+          "id": "bleeding",
+          "text": "Asks specifically about stool colour and menstrual history",
+          "critical": true
+        },
+        {
+          "id": "diet",
+          "text": "Takes a dietary history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia, approach to the patient"
+        },
+        {
+          "source": "WHO",
+          "locator": "Haemoglobin thresholds to define anaemia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.anemia.signs": {
+      "id": "skill.exam.anemia.signs",
+      "kind": "reasoning",
+      "system": "general",
+      "title": "The anaemia picture, and what points to a cause",
+      "oneLine": "Pallor is common to all anaemia; everything else points at a specific one",
+      "why": "Pallor alone never names a cause. It is the ADDITIONAL findings, koilonychia, jaundice, glossitis, lymphadenopathy, that turn a nonspecific sign into a differential you can actually work with.",
+      "body": "Examine generally for pallor, then look specifically for the findings that discriminate between causes.",
+      "keyPoints": [
+        "Pallor: conjunctiva, tongue, palmar creases. Present in anaemia of any cause, and tells you nothing about WHY.",
+        "Koilonychia (spoon nails) and angular stomatitis: chronic iron deficiency.",
+        "Glossitis, a smooth, sore, beefy-red tongue: B12 or folate deficiency.",
+        "Jaundice alongside pallor: haemolysis. Look for scleral icterus and ask about dark urine.",
+        "Lymphadenopathy or splenomegaly: consider a haematological malignancy or chronic haemolysis.",
+        "Bone tenderness: consider marrow infiltration or a haemoglobinopathy.",
+        "Signs of chronic liver or kidney disease: anaemia of chronic disease.",
+        "Tachycardia, a flow murmur, and a wide pulse pressure: the high-output state of severe or acute anaemia, not a separate diagnosis."
+      ],
+      "pitfalls": [
+        "Stopping at pallor and not looking for the additional signs that actually narrow the cause.",
+        "Missing splenomegaly, which needs deliberate, systematic palpation and is easy to skip.",
+        "Attributing a systolic flow murmur to structural heart disease rather than to the anaemia itself."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does koilonychia suggest?",
+          "a": "Chronic iron deficiency.",
+          "accept": [
+            "iron"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Pallor with jaundice together. What mechanism does that combination suggest?",
+          "a": "Haemolysis: red cell breakdown causes both the anaemia and the release of bilirubin producing jaundice.",
+          "accept": [
+            "haemolysis",
+            "hemolysis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why might a severely anaemic patient have a systolic murmur with no valve disease?",
+          "a": "Reduced blood viscosity and a compensatory high cardiac output produce a flow murmur across normal valves; it is a consequence of the anaemia, not of structural heart disease.",
+          "accept": [
+            "flow",
+            "viscosity",
+            "cardiac output",
+            "compensat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia signs"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The haematological system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

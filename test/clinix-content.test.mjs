@@ -406,7 +406,8 @@ test("SAFETY: every skill cites at least one real source with a locator", () => 
     const src = skills[id].sources;
     assert.ok(Array.isArray(src) && src.length > 0, `${id} has no source`);
     for (const s of src) {
-      assert.ok(s.source && s.source.length > 3, `${id} has a source with no name`);
+      // "WHO" is a real, short organisation name; require non-empty rather than an arbitrary length.
+      assert.ok(s.source && s.source.trim().length >= 2, `${id} has a source with no name`);
       assert.ok(s.locator && s.locator.length > 2,
         `${id} cites '${s.source}' with no locator. An unlocatable citation is not a citation.`);
     }
@@ -447,16 +448,38 @@ test("TEACHING: blocks are short and digestible, one idea per screen", () => {
   assert.ok(taught >= 4, `only ${taught} skills have a teaching section`);
 });
 
-test("TEACHING: content drawn from the book cites the book", () => {
-  // It is the owner's own book, used with permission and paraphrased, but provenance still gets
-  // recorded like any other source.
+test("TEACHING: taught content cites the standard texts, and never a private author", () => {
+  // The synthesis is credited to StewardMD Clinical KB; the knowledge itself is credited to the
+  // three standard texts it was built from. No individual is named anywhere in shipped content:
+  // the authors asked not to be, and a citation is not the place to overrule that.
   const shared = loadAllSkills();
-  const BOOK = "An Insider's Guide to Clinical Medicine";
+  const OK = ["StewardMD Clinical KB", "Macleod", "Alagappan", "Harrison", "GOLD", "WHO", "Indian Medical Council"];
   const taughtIds = Object.keys(shared).filter((id) => Array.isArray(shared[id].teach));
   assert.ok(taughtIds.length > 0);
   for (const id of taughtIds) {
-    const cited = (shared[id].sources || []).some((x) => String(x.source).indexOf(BOOK) >= 0);
-    assert.ok(cited, `${id} has taught content but does not cite the book it came from`);
+    const srcs = shared[id].sources || [];
+    assert.ok(srcs.length >= 2, `${id} cites only ${srcs.length} source(s); taught content needs its texts`);
+    for (const x of srcs) {
+      assert.ok(OK.some((k) => String(x.source).indexOf(k) >= 0),
+        `${id} cites an unrecognised source: "${x.source}"`);
+    }
+  }
+});
+
+test("PRIVACY: no personal author name appears anywhere in shipped content", () => {
+  // The owner and his co-author explicitly do not want to be named. This is a hard check rather
+  // than a convention, because a citation added later would otherwise reintroduce it silently.
+  const FORBIDDEN = ["An Insider's Guide", "Insider's Guide to Clinical Medicine"];
+  const files = [
+    "manifest.json", "media/manifest.json",
+    "skills/core.json", "skills/respiratory.json",
+    ...ALL_PATHWAYS
+  ];
+  for (const f of files) {
+    const raw = readFileSync(join(ROOT, "clinix", f), "utf8");
+    for (const bad of FORBIDDEN) {
+      assert.equal(raw.indexOf(bad), -1, `${f} names the private source text ("${bad}")`);
+    }
   }
 });
 

@@ -14,6 +14,26 @@
       "id": "respiratory",
       "file": "skills/respiratory.json",
       "title": "Respiratory history and examination"
+    },
+    {
+      "id": "cardiovascular",
+      "file": "skills/cardiovascular.json",
+      "title": "Cardiovascular history and examination"
+    },
+    {
+      "id": "abdomen",
+      "file": "skills/abdomen.json",
+      "title": "Abdominal history and examination"
+    },
+    {
+      "id": "neurology",
+      "file": "skills/neurology.json",
+      "title": "Neurological history and examination"
+    },
+    {
+      "id": "general",
+      "file": "skills/general.json",
+      "title": "General and short-case skills (syndromes, not organs)"
     }
   ],
   "systems": [
@@ -60,27 +80,77 @@
       "title": "Cardiovascular",
       "icon": "cardiology",
       "skillPacks": [
-        "core"
+        "core",
+        "cardiovascular"
       ],
-      "diseases": []
+      "diseases": [],
+      "module": {
+        "id": "cvs-exam",
+        "title": "Examination of the Cardiovascular System",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/cardiovascular.json",
+        "estMinutes": 75,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
     },
     {
       "id": "abdomen",
       "title": "GIT and abdomen",
       "icon": "gastroenterology",
       "skillPacks": [
-        "core"
+        "core",
+        "abdomen"
       ],
-      "diseases": []
+      "diseases": [],
+      "module": {
+        "id": "gi-exam",
+        "title": "Examination of the Abdomen",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/abdomen.json",
+        "estMinutes": 70,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
     },
     {
       "id": "neurology",
       "title": "Neurology",
       "icon": "neurology",
       "skillPacks": [
-        "core"
+        "core",
+        "neurology"
       ],
-      "diseases": []
+      "diseases": [],
+      "module": {
+        "id": "neuro-exam",
+        "title": "Examination of the Nervous System",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/neurology.json",
+        "estMinutes": 65,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "general",
+      "title": "Short cases",
+      "icon": "emergency",
+      "skillPacks": [
+        "core",
+        "general"
+      ],
+      "diseases": [
+        {
+          "id": "anemia",
+          "title": "Anaemia",
+          "subtitle": "A short case: not enough haemoglobin",
+          "file": "diseases/anemia.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        }
+      ]
     }
   ],
   "media": {
