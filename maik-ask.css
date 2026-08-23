@@ -39,3 +39,10 @@
 .mka-pickrow{display:flex;gap:8px;align-items:flex-start;cursor:pointer;padding:4px 0}
 .mka-pickrow input{margin-top:3px;flex:none;width:17px;height:17px;accent-color:var(--teal,#0e6e63)}
 .mka-findings li{list-style:none}
+
+/* Start-sheet options: question language + who reads the question aloud. */
+.mka-opt-lbl{font:700 12px var(--sans,system-ui);opacity:.7;margin:12px 0 6px}
+.mka-chips{display:flex;gap:6px;flex-wrap:wrap}
+.mka-chip{flex:1 1 auto;min-width:72px;border:1px solid var(--line,#e2e8f0);background:var(--panel,#fff);
+  color:var(--ink,#0f172a);font:700 12.5px var(--sans,system-ui);padding:9px 10px;border-radius:10px;cursor:pointer}
+.mka-chip.on{background:var(--teal,#0e6e63);color:#fff;border-color:var(--teal,#0e6e63)}

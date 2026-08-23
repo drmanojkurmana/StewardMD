@@ -31,17 +31,29 @@ final class WhisperEngine {
     // captured frames and fire `onEndpoint` once the patient has clearly spoken and then gone quiet
     // for that long. OFF (0) by default, so the ambient Scribe's fixed 15 s chunking is unchanged.
     //
-    // ponytail: fixed RMS threshold against a running noise floor - good enough for a consulting room,
-    // and it fails SAFE (never firing just leaves the old hard cap in charge). If a loud OPD hall
-    // proves it too eager or too deaf, the upgrade path is a proper VAD (WebRTC/Silero), not more
-    // constants. Both knobs below are deliberately left tunable rather than inlined.
+    // The threshold is MEASURED, not guessed. v1 used a hard-coded absolute floor (0.012) and failed
+    // on device: a short "no" never counted as speech, so the silence countdown never started and the
+    // turn ran to the hard cap. The session runs in `.measurement` mode, which disables input gain
+    // processing, so absolute levels here are much lower than an AGC'd mic would produce - any fixed
+    // number is a guess about a microphone and a room we cannot see.
+    //
+    // So: spend the first 0.4 s of each turn measuring the actual room noise, then require speech to
+    // clear a multiple of THAT. Recalibrated per turn, so it tracks a ward round into a quiet office.
+    // Fails safe: if it never fires, the hard cap still ends the turn (and the Done button always does).
+    // ponytail: energy-only detector. Upgrade path if a noisy OPD hall defeats it is a real VAD
+    // (WebRTC/Silero), not more constants.
     private var silenceEndpointMs: Int = 0
     private var vadSawSpeech = false
     private var vadFired = false
     private var vadLastVoiceAt: CFAbsoluteTime = 0
-    private var vadNoiseFloor: Float = 0.003          // adapts upward in quiet frames
-    private let vadSpeechFactor: Float = 3.0          // speech must exceed this * the noise floor
-    private let vadAbsoluteFloor: Float = 0.012       // ...and this, so a silent room can't self-trigger
+    private var vadNoiseFloor: Float = 0
+    private var vadCalibSamples = 0
+    private var vadCalibEnergy: Float = 0
+    private var vadPeak: Float = 0                    // diagnostics: loudest frame seen this turn
+    private let vadCalibSamplesNeeded = 6400          // 0.4 s @ 16 kHz
+    private let vadSpeechFactor: Float = 2.5          // speech must exceed this * the measured floor
+    private let vadAbsoluteFloor: Float = 0.0035      // ...and this, so a dead-silent room can't self-trigger
+    private let vadFloorCap: Float = 0.02             // measured floor can never exceed this (see CLAMP below)
 
     private var ctx: OpaquePointer?
     private var loadedModelPath: String?
@@ -96,7 +108,8 @@ final class WhisperEngine {
         guard !recording else { return }                       // duplicate-start guard
         cancelled = false
         self.silenceEndpointMs = max(0, silenceEndpointMs)
-        vadSawSpeech = false; vadFired = false; vadNoiseFloor = 0.003
+        vadSawSpeech = false; vadFired = false; vadNoiseFloor = 0
+        vadCalibSamples = 0; vadCalibEnergy = 0; vadPeak = 0
         vadLastVoiceAt = CFAbsoluteTimeGetCurrent()
 
         let perm = AVAudioSession.sharedInstance().recordPermission
@@ -175,21 +188,39 @@ final class WhisperEngine {
         var sum: Float = 0
         for i in 0..<n { let v = buf[i]; sum += v * v }
         let rms = (sum / Float(n)).squareRoot()
-        let speaking = rms > max(vadAbsoluteFloor, vadNoiseFloor * vadSpeechFactor)
+        if rms > vadPeak { vadPeak = rms }
         let now = CFAbsoluteTimeGetCurrent()
-        if speaking {
+
+        // Phase 1 - measure the room. Never end a turn while still calibrating.
+        if vadCalibSamples < vadCalibSamplesNeeded {
+            vadCalibSamples += n
+            vadCalibEnergy += sum
+            if vadCalibSamples >= vadCalibSamplesNeeded {
+                // CLAMP: if the patient starts answering during the calibration window we would
+                // measure speech as "the room" and then nothing could ever clear the threshold -
+                // the exact deadlock this whole fix exists to remove. Cap it at a level no quiet
+                // room reaches, so a fast answerer degrades to a slightly deaf detector, never a
+                // dead one.
+                vadNoiseFloor = min((vadCalibEnergy / Float(vadCalibSamples)).squareRoot(), vadFloorCap)
+                NSLog("[SV-vad] floor=%.5f thresh=%.5f", vadNoiseFloor,
+                      max(vadNoiseFloor * vadSpeechFactor, vadAbsoluteFloor))
+            }
+            vadLastVoiceAt = now
+            return
+        }
+
+        // Phase 2 - detect.
+        if rms > max(vadNoiseFloor * vadSpeechFactor, vadAbsoluteFloor) {
             vadSawSpeech = true
             vadLastVoiceAt = now
             return
         }
-        // Quiet frame: let the noise floor drift up towards the room, so a noisy clinic stops
-        // reading its own background as speech. Slow enough that a pause mid-sentence can't poison it.
-        vadNoiseFloor += (rms - vadNoiseFloor) * 0.05
         // Only ever end a turn the patient actually started - silence before any speech is just a
         // slow starter, and cutting there would drop the answer entirely.
         guard vadSawSpeech else { return }
         if (now - vadLastVoiceAt) * 1000.0 >= Double(silenceEndpointMs) {
             vadFired = true
+            NSLog("[SV-vad] endpoint peak=%.5f floor=%.5f", vadPeak, vadNoiseFloor)
             DispatchQueue.main.async { [weak self] in self?.onEndpoint?() }
         }
     }
@@ -199,6 +230,9 @@ final class WhisperEngine {
     /// Stop recording and transcribe the captured audio (async). Emits `whisperFinal`.
     func stopAndTranscribe(language: String, initialPrompt: String) {
         guard recording else { return }
+        if silenceEndpointMs > 0 && !vadFired {
+            NSLog("[SV-vad] NO endpoint: peak=%.5f floor=%.5f sawSpeech=%d", vadPeak, vadNoiseFloor, vadSawSpeech ? 1 : 0)
+        }
         recording = false
         stopCapture()
         teardownSession()

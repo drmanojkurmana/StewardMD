@@ -186,3 +186,34 @@ test("non-background mode still behaves exactly as before", async () => {
   const s = await ctl.promise;
   assert.ok(s.asked > 0 && s.findings.length > 0);
 });
+
+/* ------------------------------------------------- doctor-selected language / who asks */
+test("start sheet offers a question-language picker and a who-asks picker", () => {
+  const html = A._renderConfirm({ label: "Headache", maxQuestions: 7 }, { lang: "te", speak: false });
+  assert.match(html, /data-mka="lang"/);
+  assert.match(html, /data-lang="te"[^>]*aria-pressed="true"/, "the chosen language is marked pressed");
+  assert.match(html, /data-lang="en"/);
+  assert.match(html, /data-lang="hi"/);
+  assert.match(html, /data-lang="auto"/);
+  assert.match(html, /data-mode="voice"/);
+  assert.match(html, /data-mode="silent"[^>]*aria-pressed="true"/, "silent mode reflected");
+  assert.match(html, /data-mka="start"/, "Start still present");
+});
+
+test("start sheet defaults are sane when nothing is passed (legacy callers)", () => {
+  const html = A._renderConfirm({ label: "Headache" });
+  assert.match(html, /data-lang="auto"[^>]*aria-pressed="true"/, "defaults to Auto");
+  assert.match(html, /data-mode="voice"[^>]*aria-pressed="true"/, "defaults to MaiK speaking");
+});
+
+test("the doctor's language reaches the ASR, not just the question wording", () => {
+  const v = fakeVoice();
+  A._listenTurn({ listen: v.listen, maxMs: 50, graceMs: 50, language: "te" });
+  assert.equal(v.opts.language, "te", "explicit Telugu must be passed to Whisper (not 'auto')");
+});
+
+test("listen turn still defaults to auto when no language is chosen", () => {
+  const v = fakeVoice();
+  A._listenTurn({ listen: v.listen, maxMs: 50, graceMs: 50 });
+  assert.equal(v.opts.language, "auto");
+});

@@ -117,6 +117,7 @@
     var maxMs = deps.maxMs == null ? LISTEN_MAX_MS : deps.maxMs;
     var graceMs = deps.graceMs == null ? LISTEN_GRACE_MS : deps.graceMs;
     var silenceMs = deps.silenceMs == null ? SILENCE_ENDPOINT_MS : deps.silenceMs;
+    var language = deps.language || "auto";     // doctor's pick; "auto" lets Whisper detect
     var onPartial = deps.onPartial || function () {};
     var done = false, stopped = false, text = "", hardTmr = null, graceTmr = null, sess = null, settle;
     var promise = new Promise(function (res) {
@@ -136,7 +137,7 @@
     function skip() { if (done) return; stopped = true; stopMic(); settle(""); }
     if (typeof listen !== "function") { settle(""); return { promise: promise, done: endTurn, skip: skip }; }
     sess = listen({
-      engine: "clinical", language: "auto", noCloud: true, silenceEndpointMs: silenceMs,
+      engine: "clinical", language: language, noCloud: true, silenceEndpointMs: silenceMs,
       onPartial: function (t) { text = String(t == null ? "" : t); onPartial(text); },
       onFinal: function (t) { settle(t || text); },
       onError: function () { settle(""); }
@@ -316,6 +317,11 @@
   // ---- browser layer: native TTS + UI + start() --------------------------
   function esc(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   var LANG_MAP = { te: "te-IN", "te-en": "te-IN", hi: "hi-IN", "hi-en": "hi-IN", en: "en-IN", "en-in": "en-IN" };
+  // Doctor-selectable question language. "auto" keeps the old detect-from-complaint behaviour.
+  var ASK_LANGS = [{ id: "auto", label: "Auto" }, { id: "en", label: "English" }, { id: "te", label: "\u0c24\u0c46\u0c32\u0c41\u0c17\u0c41" }, { id: "hi", label: "\u0939\u093f\u0902\u0926\u0940" }];
+  var LANG_NAME = { en: "english", te: "telugu", hi: "hindi" };   // provider/TTS naming
+  function prefGet(k, d) { try { return (root.localStorage && localStorage.getItem(k)) || d; } catch (e) { return d; } }
+  function prefSet(k, v) { try { if (root.localStorage) localStorage.setItem(k, v); } catch (e) {} }
   function ttsLang(code) { code = String(code || "en").toLowerCase(); return LANG_MAP[code] || (code.indexOf("te") === 0 ? "te-IN" : code.indexOf("hi") === 0 ? "hi-IN" : "en-IN"); }
   // Native TTS (AVSpeechSynthesizer / Android TextToSpeech). Resolves when spoken, or immediately if
   // unavailable (web / missing voice) so the loop never blocks — the question is always on screen too.
@@ -331,12 +337,29 @@
     if (!el) { el = document.createElement("div"); el.id = "smdMaikAsk"; document.body.appendChild(el); }
     return el;
   }
-  function renderConfirm(pathway, langLabel) {
+  // sel: { lang: "auto|en|te|hi", speak: true|false }. The doctor picks the QUESTION LANGUAGE (rather
+  // than relying on detection from the complaint) and whether MaiK reads the question aloud or just
+  // puts it on screen for the doctor to ask. Silent mode is also the fastest: awaiting TTS playback was
+  // 2-5s of every question.
+  function renderConfirm(pathway, sel) {
+    sel = (sel && typeof sel === "object") ? sel : {};
+    var lang = sel.lang || "auto", speak = sel.speak !== false;
+    var chips = ASK_LANGS.map(function (l) {
+      return '<button class="mka-chip' + (l.id === lang ? " on" : "") + '" data-mka="lang" data-lang="' + l.id +
+        '" aria-pressed="' + (l.id === lang) + '">' + esc(l.label) + "</button>";
+    }).join("");
     return '<div class="mka-sheet"><div class="mka-card mka-confirm">' +
       '<div class="mka-brand">' + spark() + "<span>MaiK Ask</span></div>" +
       '<div class="mka-confirm-t">Let MaiK ask a few history questions?</div>' +
       '<div class="mka-confirm-s">MaiK will ask the patient a few relevant questions about the ' + esc(pathway.label || "complaint") +
-      " and add the answers to the clinical record for you to review. You can stop anytime." + (langLabel ? " Language: " + esc(langLabel) + "." : "") + "</div>" +
+      " and add the answers to the clinical record for you to review. You can stop anytime.</div>" +
+      '<div class="mka-opt-lbl">Question language</div>' +
+      '<div class="mka-chips" role="group" aria-label="Question language">' + chips + "</div>" +
+      '<div class="mka-opt-lbl">Who asks the questions</div>' +
+      '<div class="mka-chips" role="group" aria-label="Who asks the questions">' +
+        '<button class="mka-chip' + (speak ? " on" : "") + '" data-mka="mode" data-mode="voice" aria-pressed="' + speak + '">MaiK speaks</button>' +
+        '<button class="mka-chip' + (speak ? "" : " on") + '" data-mka="mode" data-mode="silent" aria-pressed="' + (!speak) + '">I read them out</button>' +
+      "</div>" +
       '<div class="mka-row"><button class="mka-btn ghost" data-mka="cancel" aria-label="Close">Cancel</button><button class="mka-btn primary" data-mka="start">Start</button></div>' +
       '<div class="mka-priv">' + lock() + "<span>On-device speech - only the answer text (no audio) is used. History aid only; MaiK does not diagnose or advise.</span></div>" +
       "</div></div>";
@@ -402,11 +425,14 @@
     if (!id) { toast("MaiK Ask does not have a question pathway for this complaint yet."); return; }
     var pathway = root.SMD_PATHWAYS.get(id);
     var known = root.SMD_PATHWAYS.knownFrom(opts.known || {}, pathway);
-    var lang = opts.language || (root.SMD_MAIK_REASON.detectLanguage(complaint || "").primary) || "";
-    var langLabel = { telugu: "Telugu", hindi: "Hindi", english: "English" }[lang] || "";
+    var detected = opts.language || (root.SMD_MAIK_REASON.detectLanguage(complaint || "").primary) || "";
+    // Doctor's explicit pick wins over detection, and is remembered for the next consult.
+    var sel = { lang: prefGet("smd_maik_ask_lang", "auto"), speak: prefGet("smd_maik_ask_voice", "1") !== "0" };
+    function askLangName() { return sel.lang === "auto" ? detected : (LANG_NAME[sel.lang] || detected); }
+    function askLangCode() { return sel.lang === "auto" ? "auto" : sel.lang; }
 
     var el = overlay(); el.classList.add("on");
-    el.innerHTML = renderConfirm(pathway, langLabel);
+    el.innerHTML = renderConfirm(pathway, sel);
     var ctl = null, cardState = { question: "", n: 0, of: pathway.maxQuestions, state: "start", demo: !!opts.demo, paused: false };
     var listenHandle = { done: null, skip: null };
     var lastSummary = null;
@@ -419,6 +445,7 @@
     function realListen() {
       var turn = _listenTurn({
         listen: (root.SMD_VOICE && root.SMD_VOICE.listen) ? function (o) { return root.SMD_VOICE.listen(o); } : null,
+        language: askLangCode(),          // doctor's pick drives the ASR too, not just the question
         onPartial: function (t) {
           cardState.partial = t;
           try { var e = el.querySelector(".mka-ans"); if (e) e.textContent = t; else paint(); } catch (x) {}
@@ -435,10 +462,12 @@
       cardState.state = "start"; cardState.partial = ""; paint();
       ctl = _runInterview({
         pathway: pathway, pathways: root.SMD_PATHWAYS, provider: root.SMD_MAIK_REASON,
-        known: known, language: lang, complaint: complaint, background: fast,
-        speak: opts.demo ? function () { return Promise.resolve(); } : nativeSpeak,
+        known: known, language: askLangName(), complaint: complaint, background: fast,
+        // "I read them out" skips TTS entirely: the question is already on the card, and awaiting
+        // playback was 2-5s of every single question.
+        speak: (opts.demo || !sel.speak) ? function () { return Promise.resolve(); } : nativeSpeak,
         listen: opts.demo ? demoListen : realListen,
-        onQuestion: function (q) { cardState.question = q.question; cardState.partial = ""; cardState.n = q.n; cardState.of = q.of; cardState.state = "speaking"; cardState.statusText = "MaiK is asking…"; paint(); },
+        onQuestion: function (q) { cardState.question = q.question; cardState.partial = ""; cardState.n = q.n; cardState.of = q.of; cardState.state = "speaking"; cardState.statusText = sel.speak ? "MaiK is asking…" : "Read this to the patient"; paint(); },
         onState: function (st, info) { if (st === "listening") { cardState.state = "listening"; paint(); } else if (st === "clarify") { cardState.statusText = "Sorry, could you say that again?"; paint(); } },
         onFinding: function () {},
         onRedFlag: function (rf) { cardState.redFlag = rf.ask ? ("Patient may have reported: " + rf.ask) : "A potentially important finding was reported."; paint(); }
@@ -457,6 +486,8 @@
       var b = ev.target && ev.target.closest && ev.target.closest("[data-mka]"); if (!b) return;
       var a = b.getAttribute("data-mka");
       if (a === "cancel" || a === "close") return close();
+      if (a === "lang") { sel.lang = b.getAttribute("data-lang") || "auto"; prefSet("smd_maik_ask_lang", sel.lang); el.innerHTML = renderConfirm(pathway, sel); return; }
+      if (a === "mode") { sel.speak = b.getAttribute("data-mode") !== "silent"; prefSet("smd_maik_ask_voice", sel.speak ? "1" : "0"); el.innerHTML = renderConfirm(pathway, sel); return; }
       if (a === "start") return runInterview();
       if (a === "pause") { if (!ctl) return; if (cardState.paused) { ctl.resume(); cardState.paused = false; } else { ctl.pause(); cardState.paused = true; } paint(); return; }
       if (a === "done") { if (listenHandle.done) listenHandle.done(); return; }   // answer finished -> transcribe now
