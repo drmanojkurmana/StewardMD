@@ -257,6 +257,9 @@ try {
 
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */
   console.log("\n--- 01 notes ---");
+  // The harness reuses --user-data-dir, so localStorage survives between runs. Clear the keys this
+  // section depends on, or a previous run's bypass silently turns the role-gate assertion green.
+  await ev("(() => { localStorage.removeItem('smd_verify_bypass'); window.SMD_SURGX_STORE.wipe(); return true; })()");
   await ev("window.SMD_SURGX_SCREENS.go('notes')");
   await sleep(500);
   const notesState = await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent");

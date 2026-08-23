@@ -62,7 +62,7 @@
     // protocols
     protoIndex: null, proto: null, protoSel: null, protoCat: "",
     // procedures
-    proc: null, procTab: "indications",
+    procList: null, proc: null, procTab: "indications",
     // evidence
     evList: null, evQuery: "",
     // cases
@@ -95,8 +95,12 @@
       ? '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>"
       : '<button class="sgx-hbtn sgx-back" data-sgx="back" aria-label="Back">' + ic("arrow_back") + "</button>";
     var right = opts.right || "";
+    // The eyebrow must not simply repeat the title. "Acute abdomen / Acute abdomen" is what
+    // category-as-subtitle produces for a protocol whose name IS its category.
+    if (sub && String(sub).toLowerCase() === String(title).toLowerCase()) sub = "";
     return '<div class="sgx-head">' + lead +
-      '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") + esc(title) + "</div>" +
+      '<div class="sgx-htitle">' + (sub ? '<span class="sgx-hsub">' + esc(sub) + "</span>" : "") +
+      (opts.rawTitle || esc(title)) + "</div>" +
       right +
       (isHome ? "" : '<button class="sgx-hbtn sgx-close" data-sgx="close" aria-label="Close SURGX">' + ic("close") + "</button>") +
       "</div>";
@@ -176,25 +180,41 @@
       (url ? '<a href="' + attr(url) + '" target="_blank" rel="noopener noreferrer">' + esc(txt) + "</a>" : esc(txt)) +
       "</span>";
   }
-  function currencyChip(compiled) {
-    var ev = EV(); if (!ev) return "";
-    var c = ev.currency(compiled, todayISO());
-    if (!c.count && !c.known) return "";
-    var bits = [];
-    if (c.count) bits.push(c.oldest === c.newest ? String(c.oldest) : (c.oldest + " to " + c.newest));
-    if (c.overdue) {
-      return '<div class="sgx-banner warn">' + ic("history") + " Review overdue" + (c.due ? " (due " + esc(c.due) + ")" : "") +
-        (bits.length ? ". Sources dated " + esc(bits.join("")) + "." : "") +
-        " Confirm against the current edition before relying on this.</div>";
+  /* ONE meta strip instead of three stacked banners.
+   *
+   * Draft state, source currency and the educational framing all have to be on the screen, but
+   * three full-width banners above every protocol pushed the RED FLAGS band below the fold on a
+   * 390px phone - which defeats the entire point of the seven-band spine. They are compressed into
+   * a row of small pills, and only a genuinely urgent fact (overdue review) is promoted back to a
+   * full banner. Nothing is dropped; it is only made proportionate. */
+  function metaStrip(compiled, extra) {
+    var ev = EV();
+    var pills = [], promoted = "";
+    var status = compiled.review;
+
+    if (status !== "approved" && status !== "published") {
+      pills.push('<span class="sgx-pill warn" title="Every recommendation here carries its source. Verify before acting.">' +
+        ic("edit_note") + " Draft, pending clinician review</span>");
     }
-    if (!bits.length) return "";
-    return '<div class="sgx-banner info">' + ic("verified") + " Sources dated " + esc(bits.join("")) +
-      (c.due ? ". Next review " + esc(c.due) + "." : "") + "</div>";
-  }
-  function draftBanner(status) {
-    if (status === "approved" || status === "published") return "";
-    return '<div class="sgx-banner warn">' + ic("edit_note") +
-      " Draft, pending clinician review. Every recommendation here carries its source; verify before acting.</div>";
+    if (extra) pills.push(extra);
+
+    if (ev) {
+      var c = ev.currency(compiled, todayISO());
+      if (c.count) {
+        var yrs = c.oldest === c.newest ? String(c.oldest) : (c.oldest + " to " + c.newest);
+        pills.push('<span class="sgx-pill">' + ic("verified") + " Sources " + esc(yrs) + "</span>");
+      }
+      if (c.overdue) {
+        // The one fact that earns a full banner: a guideline reference past its own review date is
+        // a clinical hazard, and it should not be a pill someone scrolls past.
+        promoted = '<div class="sgx-banner warn">' + ic("history") + " Review overdue" +
+          (c.due ? " (due " + esc(c.due) + ")" : "") +
+          ". Confirm against the current edition before relying on this.</div>";
+      } else if (c.due) {
+        pills.push('<span class="sgx-pill">' + ic("event") + " Next review " + esc(c.due) + "</span>");
+      }
+    }
+    return (pills.length ? '<div class="sgx-meta">' + pills.join("") + "</div>" : "") + promoted;
   }
 
   /* ═══════════════════════════════════════════════════════════════════════════
@@ -236,7 +256,7 @@
       }).join("");
     }
 
-    return head("SURGX", "", {}) +
+    return head("SURGX", "", { rawTitle: 'SURG<sup style="font-size:.62em;font-weight:700;position:relative;top:-.5em">x</sup>' }) +
       '<div class="sgx-hero"><div class="sgx-hero-mark">SURG<sup>x</sup></div>' +
       '<div class="sgx-hero-tag">Surgical Intelligence</div>' +
       '<div class="sgx-hero-note">Decision support for clinicians. Educational content is reference material, ' +
@@ -313,14 +333,12 @@
     return renderProtocol(state.proto);
   }
 
+  // The engine's assess() takes anything with .has(id) - a real Set in ws-surgery.js's own caller,
+  // this adapter here. Keeping the shape rather than the type means SURGX never has to copy the
+  // workspace's selection handling.
   function selSet() {
-    var s = {};
     var picked = state.protoSel || {};
-    return {
-      has: function (k) { return !!picked[k]; },
-      _raw: picked,
-      _unused: s
-    };
+    return { has: function (k) { return !!picked[k]; } };
   }
 
   function renderProtocol(p) {
@@ -331,21 +349,21 @@
       body += '<div class="sgx-headline' + (p.emergency ? " emerg" : "") + '">' +
         (p.emergency ? ic("warning") + " " : "") + esc(p.headline) + "</div>";
     }
-    body += draftBanner(p.review);
-    body += currencyChip(p);
-    if (p.interactive) {
-      body += '<div class="sgx-banner info">' + ic("touch_app") +
-        " Interactive. Tick the findings you actually have; the management below recalculates from the app's " +
-        "surgical decision engine, the same one the Surgery workspace uses.</div>";
-    }
+    body += metaStrip(p, p.interactive
+      ? '<span class="sgx-pill live">' + ic("touch_app") + " Live: tick your findings</span>"
+      : "");
 
     bands.forEach(function (b) {
       var crit = b.band === "red_flags" || b.band === "do_now";
       var filled = b.items.length > 0;
+      // The interactive explanation lives where it applies rather than as a banner at the top.
+      var hint = (p.interactive && b.band === "assess")
+        ? ". Ticking a finding re-runs the app's surgical decision engine, the same one the Surgery workspace uses."
+        : "";
       body += '<div class="sgx-band' + (filled ? " filled" : "") + (crit && filled ? " crit" : "") + '">' +
         '<span class="dot"></span>' +
         '<div class="bt">' + esc(b.title) + "</div>" +
-        '<div class="bb">' + esc(b.blurb) + "</div>" +
+        '<div class="bb">' + esc(b.blurb + hint) + "</div>" +
         '<div class="body">' + bandBody(p, b) + "</div></div>";
     });
 
@@ -354,7 +372,7 @@
         p.notes.map(function (n) { return '<div class="sgx-item"><span class="txt">' + esc(n) + "</span></div>"; }).join("") +
         "</div>";
     }
-    if (p.interactive && p.ladder != null) {
+    if (p.interactive && p.ladder != null && M()) {
       body += '<div class="sgx-card"><h4>Antimicrobial and management ladder</h4><div class="sgx-ladder">' +
         M().LADDER.map(function (r, i) {
           return '<div class="r' + (i === p.ladder ? " on" : "") + '"><span class="d"></span>' + esc(r) + "</div>";
@@ -369,7 +387,7 @@
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(p.disclaimer) + "</div>";
 
-    return head(p.title, CAT_TITLES[p.category] || "Protocol") + wrap(body);
+    return head(p.title, "02 · " + (CAT_TITLES[p.category] || "Protocol")) + wrap(body);
   }
 
   function bandBody(p, b) {
@@ -511,13 +529,13 @@
     }).join("") + "</div>";
 
     var body = "";
-    body += draftBanner(p.review);
-    body += '<div class="sgx-banner info">' + ic("school") + " Educational reference, not patient-specific advice.</div>";
+    body += metaStrip(p, '<span class="sgx-pill">' + ic("school") + " Educational reference</span>");
     if (p.pendingSteps) {
+      // Hidden content IS promoted to a banner: a procedure that is quietly short is a lie about
+      // the operation.
       body += '<div class="sgx-banner warn">' + ic("hourglass_empty") + " " + p.pendingSteps +
         " step" + (p.pendingSteps === 1 ? " is" : "s are") + " awaiting clinical sign-off and are not shown.</div>";
     }
-    body += currencyChip(p);
 
     if (active.id === "steps") {
       body += '<div class="sgx-card">' + (active.steps.length
@@ -678,6 +696,7 @@
       return head("Cases", "05") + emptyState("psychology", "No cases available", "Content is awaiting clinical review.");
     }
     var lv = caseLevel();
+    if (!M()) return head("Cases", "05") + errorState("SURGX did not finish loading.");
     var levelChips = M().CASE_LEVELS.map(function (l) {
       return '<button class="sgx-chip' + (l === lv ? " on" : "") + '" data-sgx="level" data-id="' + l + '">' +
         esc(l.charAt(0).toUpperCase() + l.slice(1)) + "</button>";
@@ -734,7 +753,7 @@
     var done = answered === dps.length;
 
     var body = '<div class="sgx-banner sim">' + ic("science") + " Simulated encounter. Not a real patient.</div>";
-    body += draftBanner(k.review);
+    body += metaStrip(k, '<span class="sgx-pill">' + ic("person") + " " + esc(k.level) + " level</span>");
     body += '<div class="sgx-stem">' + esc(k.stem);
     if (k.vitals) {
       var vs = "";
@@ -769,7 +788,7 @@
       "</div>";
     body += '<div class="sgx-disclaim">' + esc(k.disclaimer) + "</div>";
 
-    return head(k.title, "05 · " + esc(k.level)) + wrap(body);
+    return head(k.title, "05 · Case") + wrap(body);
   }
 
   function renderDecision(d, picked, k) {
@@ -798,9 +817,11 @@
         h += '<div class="alt">' + ic("alt_route") + " Reasonable alternatives: " + esc(d.alternatives.join(" ")) + "</div>";
       }
       h += "</div>";
-      if (d.stepRef) {
+      // Only offer the jump when there is somewhere real to jump to; "procedure/" with no id would
+      // route to a dead screen.
+      if (d.stepRef && k.procedureRef) {
         h += '<div class="sgx-chips" style="margin-top:10px"><button class="sgx-chip" data-sgx="go" data-r="procedure/' +
-          attr(k.procedureRef || "") + '">' + ic("content_cut") + " See the step</button></div>";
+          attr(k.procedureRef) + '">' + ic("content_cut") + " See the step</button></div>";
       }
     }
     return h + "</div>";
@@ -1155,10 +1176,12 @@
         toast("Drug index is loading"); return;
       }
       if (act === "ask") {
+        // window.SMD_askMaik(q) is the app's own seam (home.js:5224) and it CARRIES the question.
+        // The [data-act="askai"] fallback opens the sheet empty, so it is a last resort only.
         var q = t.getAttribute("data-q") || "";
         if (window.SURGX) window.SURGX.close();
         try {
-          if (window.HOME && HOME.askMaik) return HOME.askMaik(q);
+          if (typeof window.SMD_askMaik === "function") return window.SMD_askMaik(q);
           var b = document.querySelector('[data-act="askai"]');
           if (b) { b.click(); return; }
         } catch (er) {}

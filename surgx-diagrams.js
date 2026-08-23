@@ -12,7 +12,7 @@
  *   - each one is a MECHANISM that prose conveys badly. A sentence can say the taeniae converge on
  *     the appendix base; a picture shows you how to use that at the table.
  *
- * Every diagram is drawn on a 0 0 400 260 viewBox, uses currentColor and the --sgx-* tokens, and
+ * Every diagram is drawn on a 0 0 400 290 viewBox, uses currentColor and the --sgx-* tokens, and
  * carries a <title> for screen readers. No animation: this is a surgical reference, not a toy.
  *
  * window.SMD_SURGX_DIAGRAMS.get(id) -> svg string, or "" for an unknown id.
@@ -20,7 +20,10 @@
 (function () {
   "use strict";
 
-  var VB = 'viewBox="0 0 400 260" role="img" preserveAspectRatio="xMidYMid meet"';
+  // 290 tall rather than 260 so the footnote has room for two lines. SVG does not wrap text, so a
+  // one-line footnote longer than the viewBox is simply CLIPPED - which is how the Calot caption
+  // lost its last four words in the first render.
+  var VB = 'viewBox="0 0 400 290" role="img" preserveAspectRatio="xMidYMid meet"';
   var S = 'fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"';
 
   function wrap(title, body) {
@@ -28,10 +31,16 @@
       "<title>" + title + "</title>" +
       '<g ' + S + ">" + body + "</g></svg>";
   }
+  /* Every label gets a halo of the page background, painted UNDER the glyphs (paint-order:stroke).
+   * Anatomical diagrams are dense by nature and a label will always end up crossing a duct or a
+   * vessel somewhere; nudging coordinates fixes one collision and creates another. The halo fixes
+   * all of them at once, in both themes, because it is drawn in --sgx-bg rather than a fixed
+   * colour. */
   function label(x, y, t, opts) {
     opts = opts || {};
     return '<text x="' + x + '" y="' + y + '" fill="' + (opts.fill || "currentColor") +
-      '" stroke="none" font-size="' + (opts.size || 11) + '" font-weight="' + (opts.weight || 600) +
+      '" stroke="var(--sgx-bg)" stroke-width="3.4" paint-order="stroke" stroke-linejoin="round"' +
+      ' font-size="' + (opts.size || 11) + '" font-weight="' + (opts.weight || 600) +
       '" font-family="var(--sgx-sans, system-ui)"' + (opts.anchor ? ' text-anchor="' + opts.anchor + '"' : "") +
       ">" + t + "</text>";
   }
@@ -40,6 +49,23 @@
       '<text x="' + cx + '" y="' + (cy + 4) + '" fill="#fff" stroke="none" font-size="11" font-weight="700" ' +
       'text-anchor="middle" font-family="var(--sgx-mono, monospace)">' + n + "</text>";
   }
+  /* Footnote at the bottom of a diagram, wrapped by hand because SVG text does not wrap and an
+   * over-long line is silently clipped at the viewBox edge. ~78 characters is what fits at 9.5px
+   * from x=16 in a 400-wide box. */
+  function footnote(text, opts) {
+    opts = opts || {};
+    var words = String(text).split(" "), lines = [], cur = "";
+    for (var i = 0; i < words.length; i++) {
+      var next = cur ? cur + " " + words[i] : words[i];
+      if (next.length > 78 && cur) { lines.push(cur); cur = words[i]; } else { cur = next; }
+    }
+    if (cur) lines.push(cur);
+    var y = 290 - 10 - (lines.length - 1) * 13;
+    return lines.map(function (l, i) {
+      return label(16, y + i * 13, l, { fill: opts.fill || MUTED, size: 9.5, weight: opts.weight || 500 });
+    }).join("");
+  }
+
   var STEEL = "var(--sgx-steel)";
   var BAD = "var(--sgx-bad)";
   var MUTED = "var(--sgx-muted)";
@@ -67,7 +93,7 @@
       label(60, 200, "Caecum", { fill: MUTED }) +
       label(96, 224, "Appendix", { fill: BAD }) +
       label(158, 108, "BASE - the convergence", { fill: BAD, size: 10, weight: 700 }) +
-      label(16, 246, "Follow any one taenia distally. Where all three meet is the base, whatever the tip is doing.", { fill: MUTED, size: 9.5, weight: 500 })
+      footnote("Follow any one taenia distally. Where all three meet is the base, whatever the tip is doing.")
     );
   };
 
@@ -76,28 +102,28 @@
     return wrap("The hepatocystic triangle and the effect of traction direction on the cystic duct",
       // liver edge
       '<path d="M40 44 C 140 30, 260 34, 360 52" stroke="' + MUTED + '"/>' +
-      label(44, 34, "Inferior border of liver", { fill: MUTED, size: 9.5, weight: 500 }) +
+      label(44, 26, "Inferior border of liver", { fill: MUTED, size: 9.5, weight: 500 }) +
       // gallbladder
       '<path d="M96 78 C 70 96, 66 140, 88 166 C 110 190, 148 184, 158 154 C 166 130, 158 104, 146 90 Z"/>' +
       label(84, 132, "GB", { size: 11, weight: 700 }) +
       // cystic duct (correct, lateral traction)
       '<path d="M158 118 C 196 116, 218 128, 236 146" stroke="' + STEEL + '" stroke-width="2.6"/>' +
-      label(180, 108, "Cystic duct", { fill: STEEL, size: 10 }) +
+      label(168, 134, "Cystic duct", { fill: STEEL, size: 10 }) +
       // common hepatic / common bile duct
       '<path d="M236 60 L 236 146 L 236 216" stroke="currentColor" stroke-width="3"/>' +
       label(244, 74, "Common hepatic duct", { size: 10 }) +
       label(244, 212, "Common bile duct", { size: 10 }) +
       // cystic artery
       '<path d="M164 100 C 196 96, 214 106, 226 120" stroke="' + BAD + '" stroke-width="2"/>' +
-      label(170, 88, "Cystic artery", { fill: BAD, size: 9.5 }) +
+      label(196, 90, "Cystic artery", { fill: BAD, size: 9.5 }) +
       // the triangle, shaded by outline
       '<path d="M158 118 L 236 146 L 236 62 Z" stroke="' + STEEL + '" stroke-dasharray="4 4" stroke-width="1.6"/>' +
       // traction arrows
-      '<path d="M112 74 L 104 50" stroke="' + MUTED + '"/><path d="M104 50 l -5 8 M104 50 l 7 6" stroke="' + MUTED + '"/>' +
-      label(58, 46, "Fundus: cephalad", { fill: MUTED, size: 9.5, weight: 500 }) +
+      '<path d="M112 74 L 106 56" stroke="' + MUTED + '"/><path d="M106 56 l -5 8 M106 56 l 7 6" stroke="' + MUTED + '"/>' +
+      label(44, 52, "Fundus: cephalad", { fill: MUTED, size: 9.5, weight: 500 }) +
       '<path d="M158 152 L 196 170" stroke="' + STEEL + '"/><path d="M196 170 l -9 0 M196 170 l -4 -8" stroke="' + STEEL + '"/>' +
       label(196, 186, "Infundibulum: LATERAL, never up", { fill: STEEL, size: 9.5, weight: 700 }) +
-      label(16, 246, "Cephalad traction on the infundibulum aligns the cystic duct with the common bile duct. That is the injury.", { fill: BAD, size: 9.5, weight: 500 })
+      footnote("Cephalad traction on the infundibulum aligns the cystic duct with the common bile duct. That is the injury.", { fill: BAD, weight: 600 })
     );
   };
 
@@ -116,7 +142,7 @@
       label(56, 200, "Two, and only two.", { fill: STEEL, size: 10, weight: 700 }) +
       label(56, 216, "Not 'nearly'. If it cannot be", { fill: BAD, size: 10, weight: 600 }) +
       label(56, 230, "achieved, take a bail-out.", { fill: BAD, size: 10, weight: 600 }) +
-      label(16, 250, "The Critical View is a VIEW you confirm, not a manoeuvre you perform.", { fill: MUTED, size: 9.5, weight: 500 })
+      footnote("The Critical View is a VIEW you confirm, not a manoeuvre you perform.")
     );
   };
 
@@ -146,7 +172,7 @@
       '<path d="M118 176 C 108 196, 116 216, 136 218 C 156 220, 164 202, 156 184" stroke="' + BAD + '" stroke-width="2.4"/>' +
       '<circle cx="176" cy="182" r="9" stroke="' + MUTED + '" stroke-width="1.6"/>' +
       label(190, 186, "Femoral vein", { fill: MUTED, size: 9.5, weight: 500 }) +
-      label(100, 238, "FEMORAL - below the ligament, medial to the vein. The one that strangulates.", { fill: BAD, size: 9.5, weight: 700 })
+      footnote("FEMORAL - below the inguinal ligament, medial to the femoral vein. The one that strangulates.", { fill: BAD, weight: 700 })
     );
   };
 
@@ -164,7 +190,7 @@
       num(288, 162, "5") + label(224, 190, "Both paracolic gutters", { size: 10, anchor: "end" }) +
       num(200, 208, "6") + label(214, 212, "Pelvis, hernial orifices from inside", { size: 10 }) +
       label(16, 20, "Same sequence, every time.", { size: 10.5, weight: 700, fill: STEEL }) +
-      label(16, 256, "Finish the survey even after you find the pathology. Second diagnoses are missed by stopping early.", { fill: MUTED, size: 9.5, weight: 500 })
+      footnote("Finish the survey even after you find the pathology. Second diagnoses are missed by stopping early.")
     );
   };
 

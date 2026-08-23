@@ -201,6 +201,11 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   display: block; margin-top: 6px; font: 500 11px/1.45 var(--sgx-sans); color: var(--sgx-faint);
 }
 #surgxRoot .sgx-item .cite b { color: var(--sgx-muted); font-weight: 650; }
+/* Every link in the module takes the domain hue. Without this a citation inside a red DO NOW card
+   inherits the browser's default blue and is genuinely unreadable in dark mode. */
+#surgxRoot a { color: var(--sgx-steel); text-decoration-color: color-mix(in srgb, var(--sgx-steel) 45%, transparent); }
+#surgxRoot .sgx-item.tc a { color: var(--sgx-bad); text-decoration-color: currentColor; }
+body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { color: #FFB4BE; }
 #surgxRoot .sgx-empty {
   font: 500 12.5px/1.5 var(--sgx-sans); color: var(--sgx-faint);
   border: 1px dashed var(--sgx-line); border-radius: var(--sgx-r-ctl); padding: 11px 12px; margin-bottom: 6px;
@@ -232,6 +237,18 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
 #surgxRoot .sgx-banner.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.28); }
 #surgxRoot .sgx-banner.bad { color: var(--sgx-bad); background: var(--sgx-bad-bg); border-color: rgba(180,35,50,.3); }
 #surgxRoot .sgx-banner.sim { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.22); letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+
+/* The compressed meta strip: draft state, source currency and framing as small pills, so three
+   full-width banners never push RED FLAGS below the fold on a 390px phone. */
+#surgxRoot .sgx-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+#surgxRoot .sgx-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font: 600 11px/1.3 var(--sgx-sans); padding: 5px 9px; border-radius: 999px;
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-muted);
+}
+#surgxRoot .sgx-pill .material-symbols-rounded { font-size: 14px; }
+#surgxRoot .sgx-pill.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.32); }
+#surgxRoot .sgx-pill.live { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.3); }
 
 #surgxRoot .sgx-disclaim {
   font: 500 11.5px/1.6 var(--sgx-sans); color: var(--sgx-faint);
