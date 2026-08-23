@@ -216,11 +216,11 @@ oEmbed-verified video (Medzcool): `media.vid.mitralstenosis`, on `skill.exam.cvs
 oEmbed-verified video pair (Medzcool): `media.vid.s2fixed` + `media.vid.s2physiological`, both on
 `skill.chd.signs`.
 
-## CLX-V021 — STEMI sequential ECG evolution
-- **Clinical context:** Ischaemic heart disease investigations, `skill.ix.ihd.ecg`.
-- **Must show:** hyperacute T → ST elevation → Q wave → T inversion → resolution, as a strip series.
-- **Preferred format:** diagram/strip series.
-- **Status:** OPEN
+## CLX-V021 — STEMI sequential ECG evolution — **FILLED** (2026-08-24)
+Self-authored SVG (`diagram.stemi` in `clinix-diagrams.js`, `media.dia.stemi`), on
+`skill.ix.ihd.ecg`. No single Commons-licensed image legally covers this full five-stage
+sequence, so it is a StewardMD-original strip series: hyperacute T, ST elevation, Q wave
+forming, T inversion, resolution, each stage its own simplified single-lead trace.
 
 ## CLX-V022 — Asterixis (flapping tremor) — **FILLED** (2026-08-24)
 oEmbed-verified video (Doctor O'Donovan): `media.vid.asterixis`, on `skill.exam.gi.cld_stigmata`.

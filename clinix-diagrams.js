@@ -350,6 +350,37 @@
       '<div class="cx-dia-note">The bars breathe at their real relative rates. A <b>falling</b> rate in an exhausted, distressed patient is not improvement, it is impending respiratory arrest.</div>';
   }
 
+  function stemiEvolution() {
+    var STAGES = [
+      { name: "Hyperacute T", time: "first minutes", q: 0, st: 0, off: 42, bad: false },
+      { name: "ST elevation", time: "first hours", q: 0, st: 16, off: 12, bad: true },
+      { name: "Q wave forms", time: "hours to days", q: 7, st: 8, off: 6, bad: false },
+      { name: "T inversion", time: "days", q: 7, st: 0, off: -20, bad: false },
+      { name: "Resolution", time: "weeks onward", q: 6, st: 0, off: 8, bad: false }
+    ];
+    var b = 100; // baseline y, local to each 150-wide panel
+    function trace(s) {
+      var stY = b - s.st, apexY = stY - s.off;
+      var d = "M0," + b + " L20," + b + " Q26," + (b - 8) + " 32," + b + " L42," + b;
+      if (s.q) d += " L46," + (b + s.q);
+      d += " L58," + (b - 50) + " L66," + (b + 16) + " L70," + stY + " L100," + stY;
+      d += " Q120," + apexY + " 150," + b;
+      return d;
+    }
+    var w = 158, panels = "";
+    for (var i = 0; i < STAGES.length; i++) {
+      var s = STAGES[i], x = i * w + 8;
+      panels += '<g transform="translate(' + x + ',0)">' +
+        '<text class="cx-dia-lbl ' + (s.bad ? "cx-dia-lbl--bad" : "cx-dia-lbl--normal") + '" x="75" y="14" text-anchor="middle">' + esc(s.name) + "</text>" +
+        '<text class="cx-dia-lbl--faint" x="75" y="26" text-anchor="middle">' + esc(s.time) + "</text>" +
+        '<line class="cx-dia-div" x1="0" y1="' + b + '" x2="150" y2="' + b + '"/>' +
+        '<path class="cx-dia-normal" d="' + trace(s) + '"/>' +
+        "</g>";
+    }
+    return '<svg class="cx-dia" viewBox="0 0 ' + (STAGES.length * w + 6) + ' 150" role="img" aria-label="STEMI evolution on serial ECGs">' + panels + "</svg>" +
+      '<div class="cx-dia-note">Same lead, same territory, followed over time. The <b>ST elevation</b> stage is the one that changes management: it is what triggers urgent reperfusion, not the T wave or the Q wave. A pathological Q wave, once formed, usually never leaves.</div>';
+  }
+
   /* ── 13. Nine regions of the abdomen (interactive) ───────────────────────── */
 
   var ABD_REGIONS = [
@@ -446,7 +477,8 @@
     "diagram.breathing":    { title: "Breathing patterns", render: breathingPatterns },
     "diagram.abdregions":    { title: "Nine regions of the abdomen", render: abdRegions, interactive: true },
     "diagram.liverpalp":     { title: "Liver palpation, preferred method", render: liverPalp },
-    "diagram.spleenpalp":    { title: "Splenic enlargement, direction of spread", render: spleenPalp }
+    "diagram.spleenpalp":    { title: "Splenic enlargement, direction of spread", render: spleenPalp },
+    "diagram.stemi":         { title: "STEMI evolution on serial ECGs", render: stemiEvolution }
   };
 
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }
