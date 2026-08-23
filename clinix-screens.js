@@ -50,6 +50,12 @@
     stationChecked: {},
     stationEndsAt: 0,
     stationTimer: null,
+    caseDef: null,
+    casePhase: "history",
+    caseLog: [],
+    caseTaken: { asked: [], examined: [], investigated: [], differential: null, diagnosis: null, management: null },
+    caseReveal: {},
+    caseResult: null,
     tutorLog: [],
     viva: null,
     vivaState: null,
@@ -252,6 +258,19 @@
         (c.empty ? ic("lock") : ic("chevron_right")) + "</button></li>";
     }
     html += "</ol>";
+
+    var cases = C().casesFor(b);
+    if (cases.length) {
+      html += '<section class="cx-sec"><div class="cx-sec-h">Clinical cases</div><div class="cx-rows">';
+      for (var ci = 0; ci < cases.length; ci++) {
+        html += '<button type="button" class="cx-row" data-act="cx-case" data-id="' + esc(cases[ci].id) + '">' +
+          '<span class="cx-row-ic">' + ic("personal_injury") + "</span>" +
+          '<span class="cx-row-txt"><span class="cx-row-t">' + esc(cases[ci].title) + "</span>" +
+          '<span class="cx-row-s">A simulated patient. History, examination, tests, then commit.</span></span>' +
+          ic("chevron_right") + "</button>";
+      }
+      html += "</div></section>";
+    }
 
     var sts = (d.osce && d.osce.stations) || [];
     if (sts.length) {
@@ -547,6 +566,241 @@
     host.innerHTML = html;
   }
 
+  /* ── screen: CASE. A simulated patient over the same skills ──────────────── */
+
+  var CASE_STEPS = [
+    { id: "history", label: "History" },
+    { id: "examination", label: "Examination" },
+    { id: "investigations", label: "Tests" },
+    { id: "differential", label: "Differential" },
+    { id: "diagnosis", label: "Diagnosis" },
+    { id: "management", label: "Management" }
+  ];
+
+  function casePhaseBar() {
+    var html = '<ol class="cx-phases">';
+    var cur = 0, i;
+    for (i = 0; i < CASE_STEPS.length; i++) if (CASE_STEPS[i].id === state.casePhase) cur = i;
+    for (i = 0; i < CASE_STEPS.length; i++) {
+      var cls = i < cur ? "cx-phase cx-phase--done" : i === cur ? "cx-phase cx-phase--now" : "cx-phase";
+      html += '<li class="' + cls + '"><span>' + esc(CASE_STEPS[i].label) + "</span></li>";
+    }
+    return html + "</ol>";
+  }
+
+  function caseSkillTitle(id) {
+    var s = state.built ? C().skill(state.built, id) : null;
+    return s ? s.title : prettySkill(id);
+  }
+
+  function renderCase(host) {
+    var cd = state.caseDef;
+    if (!cd) { host.innerHTML = header("Case") + emptyState("error", "Case unavailable", "This case is not available yet."); return; }
+    if (state.caseResult) { renderCaseResult(host, cd); return; }
+
+    var html = header(cd.title, "Clinical case");
+    html += casePhaseBar();
+
+    if (state.casePhase === "history") html += casePhaseHistory(cd);
+    else if (state.casePhase === "examination") html += casePhaseExam(cd);
+    else if (state.casePhase === "investigations") html += casePhaseIx(cd);
+    else html += casePhaseFreeText(cd);
+
+    host.innerHTML = html;
+  }
+
+  function casePhaseHistory(cd) {
+    var html = '<div class="cx-case-open">' + esc(cd.opening) + "</div>";
+    html += '<div class="cx-case-log">';
+    for (var i = 0; i < state.caseLog.length; i++) {
+      var t = state.caseLog[i];
+      html += '<div class="cx-tq">' + esc(t.q) + "</div>";
+      html += '<div class="cx-pt' + (t.unmatched ? " cx-pt--unmatched" : "") + '">' +
+        '<span class="cx-pt-who">' + esc((cd.patient && cd.patient.name) || "Patient") + "</span>" +
+        esc(t.a) + "</div>";
+    }
+    html += "</div>";
+    html += '<div class="cx-tutor-input">' +
+      '<textarea class="cx-input" id="cxCaseQ" rows="2" placeholder="Ask the patient a question"></textarea>' +
+      '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-ask">Ask</button></div>';
+    html += '<div class="cx-case-count">' + state.caseTaken.asked.length + " topics covered</div>";
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Move to examination</button></div>';
+    return html;
+  }
+
+  function casePhaseExam(cd) {
+    var html = '<div class="cx-case-hint">Choose what you want to examine. You only see a finding for something you actually did.</div>';
+    html += '<div class="cx-rows cx-rows--pad">';
+    for (var id in cd.exam) {
+      if (!Object.prototype.hasOwnProperty.call(cd.exam, id)) continue;
+      var done = state.caseReveal["ex:" + id];
+      html += '<button type="button" class="cx-row cx-row--exam' + (done ? " cx-row--done" : "") + '" data-act="cx-case-exam" data-id="' + esc(id) + '">' +
+        '<span class="cx-row-ic">' + ic(done ? "visibility" : "touch_app") + "</span>" +
+        '<span class="cx-row-txt"><span class="cx-row-t">' + esc(caseSkillTitle(id)) + "</span>" +
+        (done ? '<span class="cx-finding">' + esc(cd.exam[id].finding) + "</span>" : '<span class="cx-row-s">Tap to perform</span>') +
+        "</span></button>";
+    }
+    html += "</div>";
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Move to investigations</button></div>';
+    return html;
+  }
+
+  function casePhaseIx(cd) {
+    var html = '<div class="cx-case-hint">Order only what you would actually order. Every test you request is recorded, including the ones that were not indicated.</div>';
+    html += '<div class="cx-rows cx-rows--pad">';
+    for (var id in cd.investigations) {
+      if (!Object.prototype.hasOwnProperty.call(cd.investigations, id)) continue;
+      var ix = cd.investigations[id];
+      var done = state.caseReveal["ix:" + id];
+      html += '<button type="button" class="cx-row cx-row--ix' + (done ? " cx-row--done" : "") + '" data-act="cx-case-ix" data-id="' + esc(id) + '">' +
+        '<span class="cx-row-ic">' + ic(done ? "lab_panel" : "add_circle") + "</span>" +
+        '<span class="cx-row-txt"><span class="cx-row-t">' + esc(ix.label) + "</span>" +
+        (done
+          ? '<span class="cx-finding">' + esc(ix.result) + "</span>" +
+            (ix.note ? '<span class="cx-ixnote">' + esc(ix.note) + "</span>" : "")
+          : '<span class="cx-row-s">Tap to order</span>') +
+        "</span></button>";
+    }
+    html += "</div>";
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">Give your differential</button></div>';
+    return html;
+  }
+
+  function casePhaseFreeText(cd) {
+    var prompts = {
+      differential: { q: "What are your differentials, and what argues for or against each?", ph: "List them, most likely first", next: "Commit to a diagnosis" },
+      diagnosis: { q: "What is your diagnosis? Name it, grade it, and state the current state.", ph: "Your full diagnostic statement", next: "Give your management" },
+      management: { q: "How would you manage this patient right now?", ph: "Immediate management, then before discharge", next: "Finish the case" }
+    };
+    var p = prompts[state.casePhase] || prompts.differential;
+    var existing = state.caseTaken[state.casePhase] || "";
+    return '<div class="cx-turn"><p class="cx-q">' + esc(p.q) + "</p>" +
+      '<div class="cx-free"><textarea class="cx-input" id="cxCaseText" rows="5" placeholder="' + esc(p.ph) + '">' + esc(existing) + "</textarea></div></div>" +
+      '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-case-next">' + esc(p.next) + "</button></div>";
+  }
+
+  function renderCaseResult(host, cd) {
+    var r = state.caseResult;
+    var html = header(cd.title, "How you did");
+
+    var verdictText = r.verdict === "good" ? "Well worked up"
+      : r.verdict === "right-answer-thin-workup" ? "Right answer, thin workup" : "Incomplete";
+    html += '<div class="cx-score ' + (r.verdict === "good" ? "cx-score--pass" : "cx-score--fail") + '">' +
+      '<div class="cx-score-v">' + esc(verdictText) + "</div>" +
+      '<div class="cx-score-l">' + esc(r.diagnosis.correct ? "Diagnosis correct" : "Diagnosis not reached") + "</div></div>";
+
+    // Reported as separate dimensions on purpose. A single percentage would let a student who
+    // guessed the diagnosis after two questions believe they had done well.
+    html += '<div class="cx-sec-h">Your workup</div><div class="cx-rows cx-rows--pad">';
+    html += caseMetric("History", r.history.asked + " of " + r.history.total + " topics", r.history.pct);
+    html += caseMetric("Key questions", r.history.keyAsked + " of " + r.history.keyTotal, r.history.keyTotal ? Math.round((r.history.keyAsked / r.history.keyTotal) * 100) : 0);
+    html += caseMetric("Examination", r.examination.done + " of " + r.examination.total + " steps", r.examination.pct);
+    html += caseMetric("Essential tests", r.investigations.essential + " of " + r.investigations.essentialTotal, r.investigations.essentialTotal ? Math.round((r.investigations.essential / r.investigations.essentialTotal) * 100) : 0);
+    html += "</div>";
+
+    if (r.history.missedKey.length) {
+      html += '<div class="cx-sec-h">Key questions you did not ask</div><ul class="cx-misslist">';
+      for (var i = 0; i < r.history.missedKey.length; i++) {
+        var k = r.history.missedKey[i];
+        var topic = cd.history[k];
+        html += "<li><b>" + esc(prettySkill(k)) + "</b>" + (topic && topic.reply ? "<br>He would have told you: " + esc(topic.reply) : "") + "</li>";
+      }
+      html += "</ul>";
+    }
+
+    if (r.investigations.unnecessary.length) {
+      html += '<div class="cx-notice cx-notice--review">' + ic("receipt_long") +
+        "<div><b>Tests that were not indicated</b><span>A panel is not a plan. Each of these costs money, time, and sometimes a further test to chase an incidental result.</span></div></div>";
+      html += '<ul class="cx-misslist">';
+      for (var u = 0; u < r.investigations.unnecessary.length; u++) {
+        var ixd = cd.investigations[r.investigations.unnecessary[u]];
+        html += "<li><b>" + esc(ixd.label) + "</b>" + (ixd.note ? "<br>" + esc(ixd.note) : "") + "</li>";
+      }
+      html += "</ul>";
+    }
+
+    html += '<div class="cx-sec-h">The diagnosis</div><div class="cx-turn"><p class="cx-body">' + esc(cd.diagnosis.answer) + "</p></div>";
+
+    if (cd.teachingPoints && cd.teachingPoints.length) {
+      html += '<div class="cx-sec-h">What this case was teaching</div><ul class="cx-qlist">';
+      for (var t = 0; t < cd.teachingPoints.length; t++) html += "<li>" + esc(cd.teachingPoints[t]) + "</li>";
+      html += "</ul>";
+    }
+
+    html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--ghost" data-act="cx-case-retry">Try again</button>' +
+      '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-back">Done</button></div>';
+    host.innerHTML = html;
+  }
+
+  function caseMetric(label, detail, pct) {
+    return '<div class="cx-weak"><div class="cx-weak-t">' + esc(label) + " &middot; " + esc(detail) + "</div>" +
+      '<div class="cx-weak-b">' + progressBar(pct) + "</div></div>";
+  }
+
+  function startCase(id) {
+    var cd = C().caseFor(state.built, id);
+    if (!cd) { toast("Case unavailable"); return; }
+    state.caseDef = cd;
+    state.casePhase = "history";
+    state.caseLog = [];
+    state.caseReveal = {};
+    state.caseResult = null;
+    state.caseTaken = { asked: [], examined: [], investigated: [], differential: null, diagnosis: null, management: null };
+    go("case");
+  }
+
+  function caseAsk(text) {
+    text = String(text || "").trim();
+    if (!text) { toast("Type a question first"); return; }
+    var cd = state.caseDef;
+    var hit = M().matchAsk(cd, text);
+    if (hit) {
+      state.caseLog.push({ q: text, a: hit.topic.reply });
+      if (state.caseTaken.asked.indexOf(hit.key) < 0) state.caseTaken.asked.push(hit.key);
+      haptic("tap");
+    } else {
+      // The patient does not improvise. An unscripted reply would be a clinical fact invented by a
+      // model, and a simulated patient that invents a symptom teaches a wrong pattern.
+      state.caseLog.push({ q: text, a: M().unmatchedReply(cd), unmatched: true });
+      haptic("warning");
+    }
+    repaint();
+  }
+
+  function caseNext() {
+    var order = ["history", "examination", "investigations", "differential", "diagnosis", "management"];
+    var el;
+    if (state.casePhase === "differential" || state.casePhase === "diagnosis" || state.casePhase === "management") {
+      el = document.getElementById("cxCaseText");
+      var v = el ? String(el.value || "").trim() : "";
+      if (!v) { toast("Write your answer first"); return; }
+      state.caseTaken[state.casePhase] = v;
+    }
+    var i = order.indexOf(state.casePhase);
+    if (i < 0 || i >= order.length - 1) { finishCase(); return; }
+    state.casePhase = order[i + 1];
+    haptic("tap");
+    repaint();
+  }
+
+  function finishCase() {
+    var r = M().scoreCase(state.caseDef, state.caseTaken);
+    state.caseResult = r;
+    // The encounter writes competency for every examination it actually performed, exactly like a
+    // lesson or a station does. One key, three modes.
+    if (P()) {
+      for (var i = 0; i < state.caseTaken.examined.length; i++) {
+        P().record(state.caseTaken.examined[i], true, { mode: "case" });
+      }
+      for (var k = 0; k < r.history.missedKey.length; k++) {
+        // A key question never asked is a real gap, recorded so revision can surface it.
+        P().record("skill.hx.chief_complaints", false, { mode: "case", probe: "Key history topic missed: " + r.history.missedKey[k] });
+      }
+    }
+    haptic(r.verdict === "good" ? "success" : "warning");
+    repaint();
+  }
+
   /* ── screen: viva ────────────────────────────────────────────────────────── */
 
   function renderViva(host) {
@@ -633,7 +887,7 @@
   var SCREENS = {
     home: renderHome, system: renderSystem, disease: renderDisease, chapter: renderChapter,
     lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency,
-    tutor: renderTutor
+    tutor: renderTutor, case: renderCase
   };
 
   function host() { return document.getElementById("clinixScroll"); }
@@ -936,6 +1190,25 @@
       case "cx-station-finish": finishStation(); return;
       case "cx-station-retry": startStation(state.stationDef.id); return;
 
+      case "cx-case": haptic("tap"); startCase(id); return;
+      case "cx-case-ask": {
+        var ce = document.getElementById("cxCaseQ");
+        var cq = ce ? String(ce.value || "").trim() : "";
+        if (ce) ce.value = "";
+        caseAsk(cq); return;
+      }
+      case "cx-case-exam": {
+        state.caseReveal["ex:" + id] = true;
+        if (state.caseTaken.examined.indexOf(id) < 0) state.caseTaken.examined.push(id);
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-case-ix": {
+        state.caseReveal["ix:" + id] = true;
+        if (state.caseTaken.investigated.indexOf(id) < 0) state.caseTaken.investigated.push(id);
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-case-next": caseNext(); return;
+      case "cx-case-retry": startCase(state.caseDef.id); return;
       case "cx-viva": haptic("tap"); startViva(); return;
       case "cx-viva-answer": {
         var va = textAnswer();

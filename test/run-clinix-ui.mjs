@@ -143,6 +143,8 @@ try {
     "and the reason is stated explicitly rather than showing an empty pathway");
   ok((await ev("!document.querySelector('#clinixRoot .cx-rail-btn:not([disabled])')")) === true,
     "no lesson is reachable");
+  ok((await ev("!document.querySelector('#clinixRoot [data-act=\"cx-case\"]')")) === true,
+    "REVIEW GATE: an unreviewed simulated patient is not offered either");
 
   /* ── 4. AUTHOR MODE: the same content becomes visible ──────────────────── */
   console.log("\n--- flag ON, author mode (review gate OPEN) ---");
@@ -263,6 +265,68 @@ try {
   ok(osce && osce.withoutConsent.failedOnCritical === true,
     "missing consent fails the station on safety, regardless of the total");
   ok(osce && osce.withoutConsent.passed === false, "and is not recorded as a pass");
+
+  /* ── 8b. CASE MODE: the simulated patient ──────────────────────────────── */
+  console.log("\n--- clinical case ---");
+  // Back to the disease page (we are currently deep in a lesson).
+  await attach(BASE + "?clinix=1&clinixdraft=1");
+  await ev("window.CLINIX.open()");
+  await sleep(400);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  for (let i = 0; i < 40; i++) {
+    if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-case\"]')")) break;
+    await sleep(250);
+  }
+  ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-case\"]')")) === true,
+    "the disease page offers a clinical case");
+
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case\"]').click()");
+  await sleep(300);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-case-open')")) === true, "the case opens with the presentation");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-phase').length === 6")) === true,
+    "the encounter shows all six phases, so the student knows where they are going");
+
+  // The patient answers from the script.
+  await ev("(function(){ document.getElementById('cxCaseQ').value = 'do you smoke?'; document.querySelector('#clinixRoot [data-act=\"cx-case-ask\"]').click(); return true; })()");
+  await sleep(250);
+  ok((await ev("document.querySelector('#clinixRoot .cx-pt').textContent.indexOf('bidis') >= 0")) === true,
+    "a scripted question gets the scripted reply");
+
+  // And does NOT improvise when asked something unscripted.
+  await ev("(function(){ document.getElementById('cxCaseQ').value = 'what is your favourite colour'; document.querySelector('#clinixRoot [data-act=\"cx-case-ask\"]').click(); return true; })()");
+  await sleep(250);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-pt--unmatched')")) === true,
+    "an unscripted question gets the fallback, never an invented symptom");
+
+  // Examination phase: a finding appears only for a step actually performed.
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");
+  await sleep(250);
+  ok((await ev("!document.querySelector('#clinixRoot .cx-finding')")) === true,
+    "no finding is visible before the student examines anything");
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-exam\"]').click()");
+  await sleep(250);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-finding')")) === true,
+    "performing an examination reveals its finding");
+
+  // Scoring: the guessing case is the one that matters.
+  const caseScore = await ev(`(() => {
+    const C = window.SMD_CLINIX_CONTENT, M = window.SMD_CLINIX_MODEL;
+    const built = C._cache().diseases['copd'];
+    const cd = C.caseFor(built, 'case.copd.ramesh');
+    if (!cd) return null;
+    const thin = M.scoreCase(cd, { asked: ['presenting'], examined: [], investigated: [], diagnosis: 'COPD' });
+    const full = M.scoreCase(cd, {
+      asked: Object.keys(cd.history), examined: Object.keys(cd.exam),
+      investigated: cd.essentialInvestigations, diagnosis: 'COPD with infective exacerbation'
+    });
+    return { thin: thin.verdict, thinCorrect: thin.diagnosis.correct, full: full.verdict };
+  })()`);
+  ok(caseScore && caseScore.thinCorrect === true, "guessing COPD after one question does give the right answer");
+  ok(caseScore && caseScore.thin === "right-answer-thin-workup",
+    "but the encounter is graded as a thin workup, not a pass");
+  ok(caseScore && caseScore.full === "good", "while a full workup with the right answer reads as good");
 
   /* ── 9. The tutor: affordance appears only behind its own flag ─────────── */
   console.log("\n--- tutor ---");

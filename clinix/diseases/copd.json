@@ -229,6 +229,177 @@
     ]
   },
 
+  "cases": [
+    {
+      "id": "case.copd.ramesh",
+      "title": "A man who cannot manage the stairs",
+      "opening": "Ramesh Patil, 62, has come to the medical outpatient department. He is sitting forward on the chair and looks breathless when he speaks. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Ramesh Patil",
+        "age": 62,
+        "sex": "male",
+        "occupation": "Retired bus mechanic, worked in the depot workshop for 34 years",
+        "residence": "Semi-urban, lives with his wife and son"
+      },
+      "history": {
+        "presenting": {
+          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help", "what is troubling"],
+          "reply": "Doctor, I get very short of breath. It has been getting worse for about four years now, but the last five days have been much worse. I also cough up phlegm every morning.",
+          "key": true
+        },
+        "dyspnea_grade": {
+          "cues": ["how far can you walk", "how much can you do", "stairs", "exertion", "walking", "breathless when", "activities", "climb"],
+          "reply": "Four years ago I could walk to the market, about a kilometre. Now I stop for breath after about a hundred metres on the flat. I cannot manage one flight of stairs without stopping twice.",
+          "key": true
+        },
+        "dyspnea_onset": {
+          "cues": ["when did the breathlessness", "how long have you been breathless", "when did it start", "onset", "since when"],
+          "reply": "It came on slowly. I first noticed it about four years ago, when I could not keep up with my friends on a walk.",
+          "key": true
+        },
+        "orthopnea": {
+          "cues": ["lying flat", "lie flat", "orthopnoea", "orthopnea", "pillows", "wake up at night", "breathless at night", "how do you sleep"],
+          "reply": "No, I sleep flat on one pillow. I do not wake up gasping at night.",
+          "key": true
+        },
+        "cough": {
+          "cues": ["cough", "how long have you had the cough"],
+          "reply": "I have coughed almost every morning for years. Six or seven years at least. It is worst when I first get up.",
+          "key": true
+        },
+        "sputum": {
+          "cues": ["sputum", "phlegm", "bring anything up", "spit", "what colour", "colour of", "how much do you bring"],
+          "reply": "Usually about two teaspoons in the morning, white or grey. But these last five days it has been more, maybe half a cup, and it has turned yellow-green.",
+          "key": true
+        },
+        "haemoptysis": {
+          "cues": ["blood", "haemoptysis", "hemoptysis", "cough up blood"],
+          "reply": "No, never any blood.",
+          "key": true
+        },
+        "wheeze": {
+          "cues": ["wheeze", "whistling", "noisy breathing"],
+          "reply": "Yes, my chest whistles, especially when I breathe out, and more so in the cold weather."
+        },
+        "chest_pain": {
+          "cues": ["chest pain", "pain in the chest", "tightness"],
+          "reply": "No real pain. It just feels tight when I am struggling for breath."
+        },
+        "fever": {
+          "cues": ["fever", "temperature", "chills", "rigors"],
+          "reply": "I felt a bit warm two days ago but I did not measure it."
+        },
+        "weight": {
+          "cues": ["weight", "appetite", "losing weight", "eating"],
+          "reply": "I have lost maybe five kilos over the last year. My clothes are loose. My appetite is not what it was.",
+          "key": true
+        },
+        "smoking": {
+          "cues": ["smoke", "smoking", "cigarette", "bidi", "tobacco", "pack year"],
+          "reply": "I smoked bidis from the age of twenty. About twenty a day. I stopped three years ago when the breathlessness got bad.",
+          "key": true
+        },
+        "biomass": {
+          "cues": ["cooking", "fuel", "stove", "wood", "kitchen", "chulha", "dung"],
+          "reply": "My wife cooks on gas now, but when I was young it was a wood chulha in the house."
+        },
+        "occupation_detail": {
+          "cues": ["your work", "what work", "job", "occupation", "what did you do", "dust", "fumes", "exposure"],
+          "reply": "I was a mechanic at the bus depot for thirty-four years. Plenty of diesel fumes and dust in that workshop.",
+          "key": true
+        },
+        "exacerbations": {
+          "cues": ["admitted", "hospital", "how many times", "steroid", "attacks", "last year", "antibiotics"],
+          "reply": "I have had three chest infections needing antibiotics in the last year. I was admitted once, about eight months ago, for four days.",
+          "key": true
+        },
+        "inhalers": {
+          "cues": ["inhaler", "medicine", "medication", "drugs", "puffer", "treatment", "taking anything"],
+          "reply": "I have two inhalers, a blue one I use when I am breathless and a brown one twice a day. Honestly I forget the brown one most days.",
+          "key": true
+        },
+        "inhaler_technique": {
+          "cues": ["show me how you use", "demonstrate", "technique", "how do you use the inhaler"],
+          "reply": "I press it and breathe in quickly, like this. Nobody has ever watched me do it before.",
+          "key": true
+        },
+        "ankle_swelling": {
+          "cues": ["swelling", "ankle", "legs", "oedema", "edema", "feet"],
+          "reply": "Yes, my ankles have been puffy for the last couple of months, worse by the evening.",
+          "key": true
+        },
+        "comorbidity": {
+          "cues": ["diabetes", "blood pressure", "hypertension", "heart", "past illness", "other illness", "tuberculosis", "operations"],
+          "reply": "I have high blood pressure, on a tablet for it. No diabetes. No TB. No operations."
+        },
+        "family": {
+          "cues": ["family", "parents", "brother", "sister", "hereditary", "anyone else"],
+          "reply": "My father had a bad chest too, but he also smoked heavily. Nobody in the family had liver trouble."
+        },
+        "allergy": {
+          "cues": ["allergy", "allergic", "reaction to any"],
+          "reply": "No allergies that I know of."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": { "finding": "Sitting forward, using accessory muscles, pursed-lip breathing. Visibly thin with temporal wasting. Speaks in short phrases, not full sentences.", "abnormal": true },
+        "skill.gen.vitals": { "finding": "Respiratory rate 26 per minute. Pulse 96 regular. Blood pressure 138/84. SpO2 88 percent on room air. Temperature 37.4 C.", "abnormal": true },
+        "skill.gen.cyanosis": { "finding": "Central cyanosis of the tongue is present.", "abnormal": true },
+        "skill.gen.clubbing": { "finding": "No clubbing. Schamroth window is preserved in all fingers.", "abnormal": false },
+        "skill.gen.edema": { "finding": "Bilateral pitting oedema to mid-shin, equal on both sides. No calf tenderness.", "abnormal": true },
+        "skill.exam.resp.inspection": { "finding": "Barrel-shaped chest with increased anteroposterior diameter. Accessory muscle use and indrawing of the lower intercostal spaces. Hoover sign is present.", "abnormal": true },
+        "skill.exam.resp.trachea": { "finding": "Trachea central. Cricosternal distance two finger-breadths.", "abnormal": true },
+        "skill.exam.resp.expansion": { "finding": "Chest expansion symmetrically reduced, about 2 cm.", "abnormal": true },
+        "skill.exam.resp.percussion": { "finding": "Hyperresonant throughout. Cardiac and hepatic dullness are lost. Liver border percusses at the seventh space.", "abnormal": true },
+        "skill.exam.resp.auscultation": { "finding": "Breath sounds symmetrically reduced with a prolonged expiratory phase. No bronchial breathing.", "abnormal": true },
+        "skill.exam.resp.added_sounds": { "finding": "Polyphonic expiratory wheeze throughout. Scattered coarse crackles at both bases that shift after coughing.", "abnormal": true },
+        "skill.exam.resp.vocal_resonance": { "finding": "Vocal resonance symmetrically reduced. No area of increased resonance.", "abnormal": true },
+        "skill.copd.corpulmonale": { "finding": "JVP raised 6 cm above the sternal angle. Parasternal heave present. Loud P2. Tender liver edge 3 cm below the costal margin, but the upper border is displaced downwards so the span is normal.", "abnormal": true }
+      },
+      "essentialInvestigations": ["spirometry", "cxr", "abg", "fbc", "ecg"],
+      "investigations": {
+        "spirometry": { "label": "Post-bronchodilator spirometry", "indicated": true, "result": "FEV1 1.02 L (34 percent predicted). FVC 2.55 L. FEV1/FVC 0.40, unchanged after bronchodilator. GOLD grade 3, severe.", "note": "This is the test that makes the diagnosis. Note it should be done when he is stable, not during this exacerbation." },
+        "cxr": { "label": "Chest radiograph", "indicated": true, "result": "Hyperinflated lung fields with more than six anterior ribs visible, flattened hemidiaphragms, a narrow vertical heart. No consolidation, no pneumothorax, no mass.", "note": "It did not diagnose COPD. It excluded pneumonia, pneumothorax and a mass, which is what it is for." },
+        "abg": { "label": "Arterial blood gas on room air", "indicated": true, "result": "pH 7.33, PaCO2 58 mmHg, PaO2 54 mmHg, HCO3 30 mmol/L.", "note": "Respiratory acidosis with hypercapnia and a raised bicarbonate: acute-on-chronic ventilatory failure." },
+        "fbc": { "label": "Full blood count", "indicated": true, "result": "Haemoglobin 17.8 g/dL, haematocrit 54 percent. White cells 12.4 x10^9/L with neutrophilia.", "note": "Secondary polycythaemia from chronic hypoxaemia, plus a neutrophilia fitting the infective exacerbation." },
+        "ecg": { "label": "ECG", "indicated": true, "result": "Sinus tachycardia. P pulmonale in lead II. Right axis deviation with dominant R in V1.", "note": "Right atrial and ventricular strain, supporting cor pulmonale." },
+        "echo": { "label": "Echocardiogram", "indicated": true, "result": "Dilated right ventricle with reduced function. Estimated pulmonary artery systolic pressure 52 mmHg. Normal left ventricular function.", "note": "Confirms pulmonary hypertension and right heart involvement." },
+        "sputum": { "label": "Sputum culture", "indicated": true, "result": "Sent. Growth pending at 48 hours.", "note": "Reasonable in a patient with frequent exacerbations, though it rarely changes initial therapy." },
+        "a1at": { "label": "Serum alpha-1 antitrypsin", "indicated": false, "result": "Normal at 1.4 g/L.", "note": "Not indicated here: he is 62, a heavy long-term smoker, with no family history of early emphysema or liver disease. Ordering it as a reflex is how a panel replaces a plan." },
+        "ctpa": { "label": "CT pulmonary angiogram", "indicated": false, "result": "No pulmonary embolus. Marked centrilobular and panlobular emphysema.", "note": "Not unreasonable to consider, since embolism is over-represented in COPD and is a classic missed cause. But with purulent sputum, fever and symmetrical findings, an infective exacerbation was the better first hypothesis. Cost him a contrast load and a delay." },
+        "dda": { "label": "D-dimer", "indicated": false, "result": "0.8 mg/L (raised).", "note": "Raised, as it is in most unwell inpatients. In a patient with an obvious infective trigger this mostly generates a scan you did not need." },
+        "tft": { "label": "Thyroid function", "indicated": false, "result": "Normal.", "note": "No clinical question was being asked here." },
+        "sputum_afb": { "label": "Sputum for acid-fast bacilli", "indicated": true, "result": "Two samples negative for AFB.", "note": "Reasonable in India with chronic cough and weight loss. Negative here, but asking the question was right." }
+      },
+      "differentialModel": {
+        "answer": "COPD with an infective exacerbation and cor pulmonale. Consider heart failure, pneumonia, bronchiectasis, tuberculosis, bronchial carcinoma and pulmonary embolism.",
+        "accept": ["copd", "heart failure", "pneumonia", "bronchiectasis", "tuberculosis", "carcinoma", "cancer", "embolism", "asthma"],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "COPD, GOLD grade 3, with an acute infective exacerbation and cor pulmonale, on a background of a 42 pack-year bidi history and occupational dust exposure.",
+        "accept": ["copd", "chronic obstructive"],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Controlled oxygen targeting 88 to 92 percent, nebulised short-acting bronchodilators, a short course of systemic corticosteroid, antibiotics given the purulent sputum, and an arterial blood gas to look for respiratory acidosis with non-invasive ventilation if it persists. Then before discharge: inhaler technique, adherence, pulmonary rehabilitation, vaccination, nutrition, assessment for long-term oxygen once stable, and an action plan.",
+        "accept": ["oxygen", "88", "92", "bronchodilator", "steroid", "corticosteroid", "antibiotic", "blood gas", "niv", "non-invasive", "rehabilitation", "inhaler technique"],
+        "minMatch": 4
+      },
+      "teachingPoints": [
+        "The tempo gives the diagnosis before any test: four years of progressive breathlessness with a chronic productive cough, then five days of worse breathlessness with purulent sputum. That shape is acute-on-chronic.",
+        "The absent findings did real work. No orthopnoea, no PND and no clubbing move you away from heart failure and away from carcinoma or bronchiectasis.",
+        "His ankle oedema is not incidental. With a raised JVP, a parasternal heave and a loud P2 it is cor pulmonale, which changes his prognosis and his oxygen assessment.",
+        "His liver edge is palpable but the span is normal, because hyperinflation pushed it down. Percussing the upper border is what stops that becoming a false hepatomegaly.",
+        "He has never had his inhaler technique watched, and admits missing the preventer most days. That is the commonest reversible cause of apparent treatment failure, and it costs nothing to find.",
+        "Weight loss of five kilos is an independent poor prognostic factor in COPD, not an incidental detail.",
+        "The dangerous next step is uncontrolled high-flow oxygen. His PaCO2 is already 58 with a pH of 7.33."
+      ],
+      "review": { "status": "ai_drafted" }
+    }
+  ],
+
   "viva": {
     "skills": [
       "skill.copd.basics",

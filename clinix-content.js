@@ -200,6 +200,27 @@
     return null;
   }
 
+  /* Cases pass the review gate like any other content: an unreviewed simulated patient teaches a
+   * pattern, and a wrong pattern is worse than no case at all. */
+  function caseFor(built, caseId) {
+    var M = model();
+    if (!M || !built) return null;
+    var list = (built.disease && built.disease.cases) || [];
+    for (var i = 0; i < list.length; i++) {
+      if (list[i].id !== caseId) continue;
+      return M.isRenderable(list[i], gateOpts()) ? list[i] : null;
+    }
+    return null;
+  }
+
+  function casesFor(built) {
+    var M = model();
+    if (!M || !built) return [];
+    var list = (built.disease && built.disease.cases) || [], out = [];
+    for (var i = 0; i < list.length; i++) if (M.isRenderable(list[i], gateOpts())) out.push(list[i]);
+    return out;
+  }
+
   function vivaFor(built) {
     var M = model();
     if (!M || !built) return null;
@@ -232,6 +253,8 @@
     pathwayFor: pathwayFor,
     lessonFor: lessonFor,
     stationFor: stationFor,
+    caseFor: caseFor,
+    casesFor: casesFor,
     vivaFor: vivaFor,
     skill: skill,
     media: media,

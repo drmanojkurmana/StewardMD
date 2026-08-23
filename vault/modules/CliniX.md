@@ -1,6 +1,6 @@
 ---
 tags: [module, education, respiratory]
-status: phase1+2 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
+status: phases 1,2,5,6,7 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
 flag: smd_clinix (client, def:false, ?clinix=1) + smd_clinix_draft (def:false, NEVER ship on) + smd_clinix_tutor (Phase 2, def:false) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
@@ -108,9 +108,27 @@ Four small, additive changes outside the module:
   **Candidate improvement for the owner: this vocabulary is genuinely medical and would help doctors
   too, so it is a reasonable app-wide widening rather than a CliniX-only one.**
 
+## Phase 5: Case mode
+A simulated patient (`clinix/diseases/copd.json` -> `cases[]`), run through six gated phases:
+history, examination, investigations, differential, diagnosis, management. Three decisions:
+- **The patient is DETERMINISTIC.** Replies are scripted and matched on cues; an unmatched question
+  gets a fallback ("I am not sure what you mean, doctor"), never a generated reply. A simulated
+  patient that invents a symptom teaches a wrong pattern, and that is worse than no case at all.
+- **Exam findings are keyed by SKILL ID**, so percussion in a case uses the object the lesson taught
+  and writes to the same competency key. The one-model rule, applied to cases.
+- **The score is NOT a single percentage.** History coverage, key questions, examination,
+  essential tests and the diagnosis are reported separately, and the verdict distinguishes
+  `good` from **`right-answer-thin-workup`** - a student who names COPD after one question got the
+  answer right and the encounter wrong, and a blended mark would hide that. Non-indicated tests are
+  counted and shown back with the reason ("a panel is not a plan").
+
+**Bug this suite caught:** cue matching was raw substring, so "what is your favourite colour" matched
+the SPUTUM topic via a bare `colour` cue. Fixed twice over: cues now match whole words only and are
+scored by matched-cue LENGTH (so "how much can you do" beats "how much"), and the genuinely
+ambiguous cues were tightened. Regression test: `test/clinix-case.test.mjs`.
+
 ## Status
-- **Phase 1 (engine + spine) and Phase 2 (tutor): built.** 92 unit tests + 41 real-browser checks
-  green. Full suite:
+- **Phases 1, 2, 5, 6 and 7 built.** 113 unit tests + 53 real-browser checks green. Full suite:
   104 failures before and after, identical set (zero regression, verified against `pre-clinix` in a
   clean worktree).
 - **Content: `ai_drafted`, NOT approved.** Drafted against Harrison 22e p.2249-2259 via

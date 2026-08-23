@@ -413,3 +413,25 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
   #clinixRoot .cx-skel-line::after,
   #clinixRoot .cx-skel-block::after { animation: none; }
 }
+
+/* ── clinical case ────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-phases { display: flex; list-style: none; margin: 12px 16px 0; padding: 0; gap: 4px; }
+#clinixRoot .cx-phase { flex: 1 1 0; min-width: 0; text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cx-faint); padding-top: 8px; border-top: 3px solid var(--cx-line); }
+#clinixRoot .cx-phase span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#clinixRoot .cx-phase--done { color: var(--cx-ok); border-top-color: var(--cx-ok); }
+#clinixRoot .cx-phase--now { color: var(--cx-primary); border-top-color: var(--cx-primary); }
+
+#clinixRoot .cx-case-open { margin: 16px; padding: 16px; background: var(--cx-teach-soft); border-radius: var(--cx-r); font-size: 15px; line-height: 1.55; }
+#clinixRoot .cx-case-hint { margin: 16px 16px 0; font-size: 13px; color: var(--cx-muted); line-height: 1.5; }
+#clinixRoot .cx-case-count { padding: 0 16px; font-size: 12px; color: var(--cx-faint); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-case-log { display: flex; flex-direction: column; gap: 12px; padding: 0 16px; }
+/* The patient's voice is set apart from the tutor's: a named speaker on a plain surface, so the
+   student is always clear whether they are being taught or being answered by the patient. */
+#clinixRoot .cx-pt { align-self: flex-start; max-width: 92%; padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: 16px 16px 16px 4px; font-size: 15px; line-height: 1.5; }
+#clinixRoot .cx-pt-who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-faint); margin-bottom: 4px; }
+#clinixRoot .cx-pt--unmatched { color: var(--cx-muted); font-style: italic; }
+
+#clinixRoot .cx-row--done { background: var(--cx-surface-2); }
+#clinixRoot .cx-finding { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-ixnote { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--cx-teach); }

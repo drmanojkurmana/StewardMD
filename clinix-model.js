@@ -487,6 +487,123 @@
     return wasCorrect ? Math.min(maxLevel || 4, level + 1) : Math.max(1, level - 1);
   }
 
+  /* ── Projection 4: CASE. A simulated patient, over the SAME skills ───────── */
+
+  /* An encounter walks these in order. Each phase is gated on the last, so a student cannot ask for
+   * investigations before examining, or name a diagnosis before committing to a differential -
+   * which is the whole point of teaching reasoning rather than recall. */
+  var CASE_PHASES = ["approach", "history", "examination", "investigations", "differential", "diagnosis", "management", "presentation"];
+
+  /* The patient answers DETERMINISTICALLY first. A scripted reply is reproducible, works offline,
+   * costs nothing, and cannot invent a symptom the author did not write - which matters more in a
+   * simulated patient than anywhere else in CliniX, because an invented finding teaches a wrong
+   * pattern. The tutor is a layer for unmatched questions, never the source of clinical fact. */
+  function matchAsk(caseDef, text) {
+    var q = normalizeAnswer(text);
+    if (!q || !caseDef || !caseDef.history) return null;
+    // Pad so a cue matches whole words only: " colour " will not match inside "colourful", and a
+    // cue can never fire on a fragment of a longer word.
+    var padded = " " + q + " ";
+    var best = null, bestScore = 0;
+    for (var key in caseDef.history) {
+      if (!Object.prototype.hasOwnProperty.call(caseDef.history, key)) continue;
+      var topic = caseDef.history[key];
+      var cues = topic.cues || [];
+      var score = 0;
+      for (var i = 0; i < cues.length; i++) {
+        var c = normalizeAnswer(cues[i]);
+        if (!c) continue;
+        if (padded.indexOf(" " + c + " ") >= 0) {
+          // Score by the LENGTH of the matched cue, not by how many matched. A long cue is a more
+          // specific question, so "how much can you do" beats a bare "how much", and "chest pain"
+          // beats "pain". Counting hits instead would let a topic with many vague cues win.
+          if (c.length > score) score = c.length;
+        }
+      }
+      if (score > bestScore) { bestScore = score; best = { key: key, topic: topic }; }
+    }
+    return bestScore > 0 ? best : null;
+  }
+
+  // What the patient says when the student asks something the author did not script.
+  function unmatchedReply(caseDef) {
+    return (caseDef && caseDef.fallback) || "I am not sure what you mean, doctor.";
+  }
+
+  // Exam findings are keyed by SKILL ID, so performing percussion in a case uses the same object the
+  // lesson taught and writes to the same competency key. That is the one-model rule applied to cases.
+  function caseFinding(caseDef, skillId) {
+    var ex = (caseDef && caseDef.exam) || {};
+    return Object.prototype.hasOwnProperty.call(ex, skillId) ? ex[skillId] : null;
+  }
+
+  function caseInvestigation(caseDef, ixId) {
+    var ix = (caseDef && caseDef.investigations) || {};
+    return Object.prototype.hasOwnProperty.call(ix, ixId) ? ix[ixId] : null;
+  }
+
+  /* Scoring an encounter. Deliberately NOT a single percentage: a student who reaches the right
+   * diagnosis having asked two questions has not done well, and a mark that hides that teaches them
+   * to guess. Coverage, reasoning and the answer are reported separately. */
+  function scoreCase(caseDef, taken) {
+    taken = taken || {};
+    var askedKeys = taken.asked || [];
+    var examIds = taken.examined || [];
+    var ixIds = taken.investigated || [];
+
+    var histTotal = 0, histKey = [];
+    for (var k in (caseDef.history || {})) {
+      if (!Object.prototype.hasOwnProperty.call(caseDef.history, k)) continue;
+      histTotal++;
+      if (caseDef.history[k].key) histKey.push(k);
+    }
+    var histHit = 0, keyHit = 0, i;
+    for (i = 0; i < askedKeys.length; i++) {
+      if (caseDef.history && caseDef.history[askedKeys[i]]) histHit++;
+      if (histKey.indexOf(askedKeys[i]) >= 0) keyHit++;
+    }
+
+    var examTotal = 0;
+    for (var e in (caseDef.exam || {})) if (Object.prototype.hasOwnProperty.call(caseDef.exam, e)) examTotal++;
+    var examHit = 0;
+    for (i = 0; i < examIds.length; i++) if (caseFinding(caseDef, examIds[i])) examHit++;
+
+    // Ordering an unhelpful investigation is not free: it is how a student learns that a panel is
+    // not a plan. Essential ones are credited, non-indicated ones are counted and shown back.
+    var essential = (caseDef.essentialInvestigations || []);
+    var essHit = 0, unnecessary = [];
+    for (i = 0; i < ixIds.length; i++) {
+      if (essential.indexOf(ixIds[i]) >= 0) essHit++;
+      else {
+        var def = caseInvestigation(caseDef, ixIds[i]);
+        if (def && def.indicated === false) unnecessary.push(ixIds[i]);
+      }
+    }
+
+    var dxRes = taken.diagnosis != null
+      ? markAnswer({ a: (caseDef.diagnosis && caseDef.diagnosis.answer) || "", accept: (caseDef.diagnosis && caseDef.diagnosis.accept) || [] }, taken.diagnosis)
+      : { correct: false, matched: [], missed: [] };
+
+    var ddxRes = taken.differential != null
+      ? markAnswer({ a: (caseDef.differentialModel && caseDef.differentialModel.answer) || "", accept: (caseDef.differentialModel && caseDef.differentialModel.accept) || [] }, taken.differential)
+      : { correct: false, matched: [], missed: [] };
+
+    function pct(n, d) { return d ? Math.round((n / d) * 100) : 0; }
+
+    return {
+      history: { asked: histHit, total: histTotal, pct: pct(histHit, histTotal), keyAsked: keyHit, keyTotal: histKey.length, missedKey: histKey.filter(function (x) { return askedKeys.indexOf(x) < 0; }) },
+      examination: { done: examHit, total: examTotal, pct: pct(examHit, examTotal) },
+      investigations: { essential: essHit, essentialTotal: essential.length, unnecessary: unnecessary },
+      differential: { correct: ddxRes.correct === true, matched: ddxRes.matched || [], missed: ddxRes.missed || [] },
+      diagnosis: { correct: dxRes.correct === true, given: taken.diagnosis || "" },
+      // The overall read is a judgement, not an average: the diagnosis is necessary but not
+      // sufficient, and a student who never asked the key questions has not passed the encounter.
+      verdict: (dxRes.correct === true && histKey.length > 0 && keyHit >= Math.ceil(histKey.length * 0.6) && examHit > 0)
+        ? "good"
+        : (dxRes.correct === true ? "right-answer-thin-workup" : "incomplete")
+    };
+  }
+
   /* ── Answer marking (deterministic; the LLM is never the sole judge) ──────── */
 
   function normalizeAnswer(s) {
@@ -584,6 +701,13 @@
     compileViva: compileViva,
     nextVivaQuestion: nextVivaQuestion,
     adaptLevel: adaptLevel,
+
+    CASE_PHASES: CASE_PHASES,
+    matchAsk: matchAsk,
+    unmatchedReply: unmatchedReply,
+    caseFinding: caseFinding,
+    caseInvestigation: caseInvestigation,
+    scoreCase: scoreCase,
 
     markAnswer: markAnswer,
     normalizeAnswer: normalizeAnswer,
