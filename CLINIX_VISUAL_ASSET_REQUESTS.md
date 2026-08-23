@@ -328,9 +328,6 @@ wired: it is closer to CLX-NEW-006's "pulse waveform shapes" ask than any wired 
 single continuous-trace graph rather than the shape-comparison chart that gap actually needs, so
 CLX-NEW-006 stays OPEN).
 
-**CLX-NEW-018 — pallor — still OPEN, flagged not used.** One candidate file was reviewed and
-NOT used: it reads as a real close-up clinical photo (individual eyelashes, skin texture, facial
-blemishes visible) rather than an owner-produced illustration or a verified stock/Commons asset,
-so its provenance cannot be confirmed as licence-clear or as a non-identifiable patient. Flagging
-for the owner rather than using it silently — either confirm this is a licensed/synthetic image
-(and its source), or a fresh Commons search / new capture is needed.
+**CLX-NEW-018 — pallor — FILLED** (2026-08-23, owner-confirmed AI-generated). Owner confirmed
+the image is AI-generated, not a real patient photo. Saved as `clinix-pallor.jpg`, wired as
+`media.gen.pallor.conjunctiva` on `skill.gen.pallor`.
