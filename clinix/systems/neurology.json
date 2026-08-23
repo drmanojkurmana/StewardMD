@@ -6,7 +6,7 @@
   "system": "neurology",
   "kind": "system-module",
   "oneLine": "The whole system workup, before any particular disease",
-  "estMinutes": 65,
+  "estMinutes": 150,
   "review": {
     "status": "ai_drafted"
   },
@@ -51,11 +51,23 @@
     },
     {
       "id": "systemic_exam",
-      "title": "Motor examination",
-      "blurb": "Tone, power, reflexes, plantar response",
+      "title": "Nervous system examination",
+      "blurb": "Higher mental functions, all twelve cranial nerves, motor, sensory, cerebellar, gait, and meningeal signs",
       "skills": [
+        "skill.exam.neuro.higher_mental",
+        "skill.exam.neuro.cn1_2",
+        "skill.exam.neuro.cn3_4_6",
+        "skill.exam.neuro.cn5",
+        "skill.exam.neuro.cn7",
+        "skill.exam.neuro.cn8",
+        "skill.exam.neuro.cn9_10",
+        "skill.exam.neuro.cn11_12",
         "skill.exam.neuro.tone_power",
-        "skill.exam.neuro.reflexes"
+        "skill.exam.neuro.reflexes",
+        "skill.exam.neuro.sensory",
+        "skill.exam.neuro.cerebellar",
+        "skill.exam.neuro.gait",
+        "skill.exam.neuro.meningeal"
       ]
     },
     {
@@ -72,19 +84,26 @@
       {
         "id": "osce.neurology.full",
         "title": "Examination of the Nervous System",
-        "task": "Examine this patient's motor system and present your findings.",
-        "seconds": 420,
+        "task": "Examine this patient's nervous system and present your findings.",
+        "seconds": 600,
         "skills": [
           "skill.approach.hygiene",
           "skill.approach.introduce",
           "skill.approach.consent",
+          "skill.exam.neuro.higher_mental",
+          "skill.exam.neuro.cn7",
           "skill.exam.neuro.tone_power",
-          "skill.exam.neuro.reflexes"
+          "skill.exam.neuro.reflexes",
+          "skill.exam.neuro.sensory",
+          "skill.exam.neuro.cerebellar",
+          "skill.exam.neuro.gait"
         ],
         "examinerQuestions": [
-          "Give the full upper motor neurone pattern.",
-          "Which segments does the ankle reflex test?",
-          "What is the Babinski sign and what does it mean in an adult?"
+          "Give the full upper motor neurone pattern: tone, bulk, reflexes, plantar.",
+          "A patient cannot wrinkle the forehead on one side, and the whole side of the face is weak. Is this an upper or lower motor neurone facial palsy, and why does the forehead matter?",
+          "What is the Babinski sign and what does it mean in an adult?",
+          "Distinguish cerebellar from sensory ataxia using the Romberg comparison.",
+          "Describe Kernig's sign and what a positive result means."
         ]
       }
     ]
@@ -93,6 +112,12 @@
     "skills": [
       "skill.exam.neuro.tone_power",
       "skill.exam.neuro.reflexes",
+      "skill.exam.neuro.sensory",
+      "skill.exam.neuro.cerebellar",
+      "skill.exam.neuro.gait",
+      "skill.exam.neuro.cn3_4_6",
+      "skill.exam.neuro.cn7",
+      "skill.exam.neuro.meningeal",
       "skill.hx.neuro.approach"
     ]
   }

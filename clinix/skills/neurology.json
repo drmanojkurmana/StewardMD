@@ -80,11 +80,30 @@
         {
           "heading": "Distribution: does it cross the midline",
           "body": "A single, well-demarcated body part, or a whole side of the body, suggests a lesion in the central nervous system on the OPPOSITE side. Symptoms that cross the midline, or that follow a specific nerve or root rather than a whole limb, point to the peripheral nervous system instead."
+        },
+        {
+          "heading": "What travels alongside the main complaint",
+          "points": [
+            {
+              "t": "Weakness or numbness on the same side as a visual or speech problem.",
+              "d": "Suggests one cortical territory, usually one vascular distribution."
+            },
+            {
+              "t": "A brief loss of consciousness before or after the event.",
+              "d": "Raises seizure as well as syncope; ask what the patient, and any witness, actually saw."
+            },
+            {
+              "t": "A headache that is the worst of the patient's life, or reaches maximum intensity within seconds (thunderclap).",
+              "d": "Needs subarachnoid haemorrhage actively excluded, not assumed away."
+            }
+          ],
+          "note": "Ask for a witness account whenever there was any alteration of consciousness. What the patient remembers and what actually happened are often two different histories."
         }
       ],
       "pitfalls": [
         "Not asking exactly how fast a symptom developed, which is the single most useful localising question in neurology.",
-        "Missing a 'worst headache of my life', which needs subarachnoid haemorrhage actively excluded."
+        "Missing a 'worst headache of my life', which needs subarachnoid haemorrhage actively excluded.",
+        "Taking the patient's own account of a blackout at face value without asking a witness what was actually seen."
       ],
       "probes": [
         {
@@ -109,6 +128,16 @@
             "contralateral"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient describes the worst headache of their life, reaching full intensity within seconds. What must be actively excluded?",
+          "a": "Subarachnoid haemorrhage.",
+          "accept": [
+            "subarachnoid",
+            "sah"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -122,7 +151,8 @@
         },
         {
           "id": "redflag",
-          "text": "Screens for red-flag headache or sudden severe symptoms"
+          "text": "Screens for red-flag headache or sudden severe symptoms",
+          "critical": true
         }
       ],
       "media": [],
@@ -144,30 +174,1378 @@
         "status": "ai_drafted"
       }
     },
+    "skill.exam.neuro.higher_mental": {
+      "id": "skill.exam.neuro.higher_mental",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Higher mental functions: consciousness, orientation, memory and speech",
+      "oneLine": "The GCS, orientation in three domains, three types of memory, and the six-domain language screen",
+      "why": "Higher mental function is examined before anything else, because an unreliable historian changes how you interpret every symptom that follows. A structured screen, level of consciousness, orientation, memory, calculation, and language, turns a vague impression of 'confused' into a testable, reproducible finding.",
+      "steps": [
+        {
+          "text": "Note the level of consciousness first, in the patient's own words if possible, and score it on the Glasgow Coma Scale (eye, verbal, motor) if there is any doubt."
+        },
+        {
+          "text": "Test orientation in three domains: time (year, season, month, date, day), place (country, state, city, hospital, floor), and person."
+        },
+        {
+          "text": "Test immediate memory (digit span, forward and backward) and recent memory (three objects, recalled after about 5 minutes of unrelated conversation)."
+        },
+        {
+          "text": "Test calculation: serial sevens from 100, or spelling a word backward."
+        },
+        {
+          "text": "Screen language across its domains: spontaneous fluency, comprehension of a command, repetition of a phrase, naming two objects, reading, and writing a sentence."
+        }
+      ],
+      "normal": "Fully conscious (GCS 15), oriented to time, place and person, normal digit span (7 plus or minus 2), recalls 3/3 objects at 5 minutes, completes serial sevens, and fluent, comprehending, intact speech across all six domains.",
+      "abnormal": "Any reduction in GCS; disorientation in any domain; an inability to register or recall; errors in calculation; or a defect in fluency, comprehension, repetition, naming, reading or writing.",
+      "significance": "The GCS gives a reproducible number that any clinician can trend over time; a falling score is itself the emergency. Which domains of memory and language fail, and which are spared, localises: recent memory loss with intact remote memory points to the medial temporal lobe, while the pattern of fluency, comprehension and repetition failure maps onto Broca's, Wernicke's or a conduction lesion.",
+      "teach": [
+        {
+          "heading": "The Glasgow Coma Scale, scored not just described",
+          "body": "Score each of the three domains separately, then sum them.",
+          "table": {
+            "cols": [
+              "Domain",
+              "Response",
+              "Score"
+            ],
+            "rows": [
+              [
+                "Eye opening",
+                "Spontaneous / to voice / to pain / none",
+                "4 / 3 / 2 / 1"
+              ],
+              [
+                "Verbal",
+                "Oriented / confused / inappropriate words / sounds / none",
+                "5 / 4 / 3 / 2 / 1"
+              ],
+              [
+                "Motor",
+                "Obeys / localises pain / withdraws / flexion (decorticate) / extension (decerebrate) / none",
+                "6 / 5 / 4 / 3 / 2 / 1"
+              ]
+            ]
+          },
+          "note": "Maximum 15, minimum 3. A GCS of 8 or less is, by definition, coma. In an intubated patient the verbal score is recorded as 'VT' rather than forced into a number."
+        },
+        {
+          "heading": "Naming the level of consciousness precisely",
+          "table": {
+            "cols": [
+              "Term",
+              "What it means"
+            ],
+            "rows": [
+              [
+                "Lethargy/drowsiness",
+                "Rouses easily, then promptly falls back asleep if left alone"
+              ],
+              [
+                "Obtundation",
+                "Needs a mild-to-moderate stimulus to rouse, and is slow once awake"
+              ],
+              [
+                "Stupor",
+                "Rouses only to a vigorous or painful stimulus, with no meaningful verbal or motor response"
+              ],
+              [
+                "Coma",
+                "Cannot be roused by any stimulus; no awareness, no voluntary movement, no sleep-wake cycle"
+              ],
+              [
+                "Delirium",
+                "Alert enough to be roused, but confused, restless and often inattentive or hallucinating; may be reversible"
+              ]
+            ]
+          },
+          "note": "Prefer describing the actual responsiveness, or the GCS number, over a single label like 'drowsy': the label means different things to different observers, the number does not."
+        },
+        {
+          "heading": "Three kinds of memory, and where each one lives",
+          "table": {
+            "cols": [
+              "Type",
+              "How it's tested",
+              "Roughly localises to"
+            ],
+            "rows": [
+              [
+                "Immediate",
+                "Digit span forward and backward, normal 7 plus or minus 2",
+                "Prefrontal cortex"
+              ],
+              [
+                "Recent",
+                "Three unrelated objects, recalled after about 5 minutes",
+                "Hippocampus and medial temporal structures"
+              ],
+              [
+                "Remote",
+                "The patient's own fund of information: schooling, major life and world events",
+                "Widespread neocortex"
+              ]
+            ]
+          },
+          "note": "Recent memory loss with a preserved fund of remote information is the classic early pattern in a medial temporal process; when it comes with confabulation, think Korsakoff's psychosis."
+        },
+        {
+          "heading": "Reading an aphasia off three simple bedside tests",
+          "body": "Score comprehension, repetition and fluency as intact or impaired, then read off the type.",
+          "wideTable": {
+            "cols": [
+              "Type",
+              "Usual site",
+              "Comprehension",
+              "Repetition",
+              "Fluency"
+            ],
+            "rows": [
+              [
+                "Broca's (expressive)",
+                "Superior frontal branch, dominant MCA",
+                "Intact",
+                "Impaired",
+                "Non-fluent"
+              ],
+              [
+                "Wernicke's (receptive)",
+                "Inferior division, dominant MCA",
+                "Impaired",
+                "Impaired",
+                "Fluent"
+              ],
+              [
+                "Conduction",
+                "Arcuate fasciculus",
+                "Intact",
+                "Impaired",
+                "Fluent"
+              ],
+              [
+                "Global",
+                "Large dominant frontoparietotemporal territory",
+                "Impaired",
+                "Impaired",
+                "Non-fluent"
+              ],
+              [
+                "Transcortical motor",
+                "Anterior watershed zone",
+                "Intact",
+                "Intact",
+                "Non-fluent"
+              ],
+              [
+                "Transcortical sensory",
+                "Posterior watershed zone",
+                "Impaired",
+                "Intact",
+                "Fluent"
+              ]
+            ]
+          },
+          "note": "Test comprehension, repetition and fluency first, in that order; only once those three are characterised does it make sense to go on and check reading, writing and naming."
+        },
+        {
+          "heading": "Aphasia is not dysarthria",
+          "body": "Aphasia is a disorder of LANGUAGE, from a dominant-hemisphere cortical lesion, and it also disturbs reading and writing. Dysarthria is a disorder of the motor production of speech, usually from a brainstem, cerebellar or neuromuscular problem, and it comes with other bulbar signs such as dysphagia rather than a reading or writing defect. A slurred, hard-to-understand patient can have either, and the distinction changes where you look for the lesion."
+        }
+      ],
+      "pitfalls": [
+        "Labelling a patient 'confused' without recording GCS or testing all three orientation domains separately.",
+        "Testing recall immediately instead of after several minutes of unrelated conversation, which makes recent memory look falsely intact.",
+        "Calling slurred speech 'aphasia' without checking comprehension, repetition and fluency, and so missing a dysarthria instead.",
+        "Skipping calculation and writing because the patient 'seems fine' in conversation, and missing a mild dominant parietal deficit."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What GCS score defines coma?",
+          "a": "8 or less.",
+          "accept": [
+            "8"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient recalls 0 of 3 objects at 5 minutes but can describe events from 20 years ago in detail. Which memory system is affected, and what does that localise to?",
+          "a": "Recent (short-term) memory is impaired with remote memory preserved, pointing to the hippocampus and medial temporal structures.",
+          "accept": [
+            "recent",
+            "hippocamp",
+            "medial temporal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient speaks fluently but the sentences make no sense, and they cannot follow a simple two-step command. Comprehension and repetition are both impaired. What type of aphasia is this, and roughly where is the lesion?",
+          "a": "Wernicke's (receptive) aphasia, from a lesion in the inferior division of the dominant middle cerebral artery territory (posterior superior temporal region).",
+          "accept": [
+            "wernicke"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Distinguish aphasia from dysarthria at the bedside.",
+          "a": "Aphasia is a disorder of language content, from a dominant cerebral lesion, and also impairs reading and writing; dysarthria is a disorder of the motor production of speech, usually of brainstem/neuromuscular origin, with language itself, and reading/writing, intact, but often accompanied by dysphagia.",
+          "accept": [
+            "language",
+            "motor production",
+            "articulation"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "gcs",
+          "text": "Records or scores level of consciousness explicitly",
+          "critical": true
+        },
+        {
+          "id": "orientation",
+          "text": "Tests all three orientation domains"
+        },
+        {
+          "id": "memory",
+          "text": "Tests immediate and recent memory with an appropriate delay"
+        },
+        {
+          "id": "language",
+          "text": "Screens comprehension, repetition and fluency before labelling a speech disorder"
+        }
+      ],
+      "media": [
+        "media.vid.gcs"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: higher mental functions"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: higher mental function"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Coma and disorders of consciousness; aphasia and disorders of speech"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn1_2": {
+      "id": "skill.exam.neuro.cn1_2",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN I and II: smell, acuity, fields, colour vision and the fundus",
+      "oneLine": "Olfactory nerve first, then the four-part optic nerve exam",
+      "why": "The olfactory and optic nerves are the two cranial nerves that never pass through the brainstem, so a normal exam here does not clear the brainstem the way a normal CN III to XII exam does. The optic nerve exam is done in four separate parts, and each one has its own differential.",
+      "steps": [
+        {
+          "text": "CN I: rule out nasal blockage first. With eyes closed, occlude one nostril and present a familiar, non-irritant smell (coffee, peppermint, soap) to the other; ask the patient to detect, then name it. Repeat for the other side, testing the suspected abnormal side first."
+        },
+        {
+          "text": "Never use ammonia or another irritant: it stimulates the trigeminal nerve directly and gives a false-positive response even with no sense of smell at all."
+        },
+        {
+          "text": "CN II, visual acuity: test each eye separately, corrected if the patient wears glasses, using a Snellen chart at 6 m (or finger counting if no chart is available)."
+        },
+        {
+          "text": "CN II, visual fields: confrontation testing at arm's length, one eye at a time, bringing a target in from each of the four quadrants."
+        },
+        {
+          "text": "CN II, colour vision: an Ishihara chart, each eye separately."
+        },
+        {
+          "text": "CN II, fundus: direct ophthalmoscopy in a dim room, following the red reflex to the disc, then examining all four quadrants and the macula."
+        }
+      ],
+      "normal": "Smell detected and identified equally on both sides; visual acuity 6/6 (or corrected to it); full visual fields to confrontation; correct colour plates identified; a sharp, pink disc with a normal cup, and normal vessels and macula.",
+      "abnormal": "Anosmia (uni- or bilateral); reduced acuity; any visual field defect; colour vision errors; papilloedema, optic atrophy, or retinopathy on the fundus.",
+      "significance": "The SITE of a visual field defect maps precisely onto where in the visual pathway the lesion sits, which is one of the most reliable localising findings in the whole nervous system. Papilloedema means raised intracranial pressure until proven otherwise.",
+      "teach": [
+        {
+          "heading": "Anosmia is not always a nose problem",
+          "body": "Local causes (rhinitis is the most common of all, plus heavy smoking) far outnumber neurological ones, but persistent, otherwise-unexplained anosmia is worth pursuing.",
+          "points": [
+            {
+              "t": "Foster Kennedy syndrome.",
+              "d": "Anosmia with optic atrophy in one eye and papilloedema in the other, from a frontal lobe tumour compressing one olfactory tract while raising pressure generally."
+            },
+            {
+              "t": "Also seen in.",
+              "d": "Parkinsonism, head trauma, meningitis, and as an early feature that can precede the motor signs of several neurodegenerative diseases."
+            }
+          ]
+        },
+        {
+          "heading": "Visual field defects localise the lesion along the pathway",
+          "body": "Work from the retina backward: where the defect straddles the midline (bitemporal) versus stays on one side (homonymous) is the first branch point.",
+          "table": {
+            "cols": [
+              "Site of lesion",
+              "Field defect"
+            ],
+            "rows": [
+              [
+                "Optic nerve (one side)",
+                "Total loss of vision in that eye"
+              ],
+              [
+                "Optic chiasm",
+                "Bitemporal hemianopia"
+              ],
+              [
+                "Optic tract",
+                "Homonymous hemianopia, opposite side"
+              ],
+              [
+                "Geniculocalcarine tract, upper fibres",
+                "Contralateral lower quadrantanopia"
+              ],
+              [
+                "Geniculocalcarine tract, lower fibres",
+                "Contralateral upper quadrantanopia"
+              ],
+              [
+                "Occipital cortex, macula spared",
+                "Homonymous hemianopia with macular sparing"
+              ]
+            ]
+          },
+          "note": "A chiasmal lesion (classically a pituitary tumour) is the one that gives a bitemporal pattern; everything behind the chiasm gives a homonymous pattern on the side opposite the lesion."
+        },
+        {
+          "heading": "Grading papilloedema",
+          "body": "Papilloedema is disc swelling from raised intracranial pressure, and it progresses through recognisable stages: blurring of the nasal disc margin first, then circumferential blurring, then obscuration of one or more vessels crossing the disc margin, and finally obscuration of all disc vessels.\n\nCauses span space-occupying lesions, diffuse cerebral oedema, blocked CSF flow (hydrocephalus), reduced CSF reabsorption (meningitis, venous sinus disease, Guillain-Barre's raised CSF protein), and systemic causes such as malignant hypertension."
+        },
+        {
+          "heading": "Colour vision is not just a party trick",
+          "body": "Congenital red-green defects are X-linked, so they overwhelmingly affect men. Acquired colour vision loss occurs in macular and optic nerve disease, and with certain drugs, ethambutol, chloroquine and digitalis among them, which is exactly why colour vision is checked on ethambutol."
+        }
+      ],
+      "pitfalls": [
+        "Using ammonia or another irritant to test smell, which stimulates the trigeminal nerve and gives a false result.",
+        "Testing visual fields without comparing both eyes to each other, missing a subtle quadrantanopia.",
+        "Skipping the red reflex step and 'hunting' for the disc, which usually means giving up before finding it.",
+        "Calling a field defect bitemporal without actually testing both temporal fields separately."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why should ammonia never be used to test the olfactory nerve?",
+          "a": "It directly stimulates trigeminal nerve endings in the nasal mucosa, so even a patient with no sense of smell will report detecting it.",
+          "accept": [
+            "trigeminal",
+            "irritant"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has bitemporal hemianopia. Where is the lesion?",
+          "a": "At the optic chiasm, classically from a pituitary lesion compressing the crossing nasal fibres.",
+          "accept": [
+            "chiasm",
+            "pituitary"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Right homonymous hemianopia with macular sparing. Localise it, and explain why the macula is spared.",
+          "a": "A lesion of the left occipital (calcarine) cortex; the macula is spared because it has a separate, dual blood supply (posterior and middle cerebral arteries), so an isolated posterior cerebral artery infarct can leave the macular representation intact.",
+          "accept": [
+            "occipital",
+            "macula",
+            "dual"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "What does papilloedema on fundoscopy require you to actively consider, and name two broad categories of cause.",
+          "a": "Raised intracranial pressure, from causes including a space-occupying lesion (tumour, abscess, haemorrhage), blocked CSF outflow (hydrocephalus), or reduced CSF reabsorption (meningitis, venous sinus thrombosis, or the raised CSF protein of Guillain-Barre syndrome).",
+          "accept": [
+            "raised intracranial pressure",
+            "icp",
+            "space-occupying",
+            "hydrocephalus"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "smell",
+          "text": "Tests each nostril separately with a non-irritant substance"
+        },
+        {
+          "id": "fields",
+          "text": "Tests visual fields by confrontation in all four quadrants, each eye"
+        },
+        {
+          "id": "fundus",
+          "text": "Follows the red reflex and examines all four quadrants plus macula",
+          "critical": true
+        }
+      ],
+      "media": [
+        "media.vid.cranialnerves"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerves I and II"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cranial nerve examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn3_4_6": {
+      "id": "skill.exam.neuro.cn3_4_6",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN III, IV, VI: eyelids, eye movements and pupils",
+      "oneLine": "One H-shaped test covers three nerves; the pupil tells you medical from surgical",
+      "why": "These three nerves move the eye, and are tested together because a single ocular movement usually depends on more than one of them. Whether the pupil is involved is the single fact that separates a IIIrd nerve palsy that needs urgent imaging from one that can be watched.",
+      "steps": [
+        {
+          "text": "Inspect the eyelids for ptosis and the eyes at rest for a squint or abnormal position."
+        },
+        {
+          "text": "Ask the patient to follow your finger through an H-shaped path about 60 cm from their face, watching for restricted movement in any direction and asking about diplopia at each extreme."
+        },
+        {
+          "text": "Test the direct and consensual light reflex in each eye with a torch, and the accommodation reflex by having the patient look from a distant to a near object."
+        },
+        {
+          "text": "Look for nystagmus at the extremes of gaze, holding each position for several seconds."
+        }
+      ],
+      "normal": "No ptosis, eyes parallel at rest, full smooth movement in all directions with no diplopia, pupils equal and briskly reactive to light and accommodation, no nystagmus.",
+      "abnormal": "Ptosis; a squint or restricted movement in the distribution of one nerve; a sluggish, unequal, or non-reactive pupil; sustained nystagmus.",
+      "significance": "The pupil decides urgency in a IIIrd nerve palsy: because parasympathetic fibres run on the outside of the nerve, a compressive lesion (aneurysm, tumour, uncal herniation) hits them early and dilates the pupil, while a microvascular (diabetic) infarct spares the centre-running pupillary fibres and leaves the pupil normal.",
+      "teach": [
+        {
+          "heading": "Which nerve does which movement",
+          "table": {
+            "cols": [
+              "Nerve",
+              "Palsy produces"
+            ],
+            "rows": [
+              [
+                "III (oculomotor)",
+                "Ptosis, a dilated pupil, and a 'down and out' eye from unopposed lateral rectus and superior oblique"
+              ],
+              [
+                "IV (trochlear)",
+                "Defective downward gaze in adduction; the patient tilts the head to the opposite side to compensate"
+              ],
+              [
+                "VI (abducens)",
+                "Failure of lateral gaze, a convergent squint, diplopia worse on looking to the affected side"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Pupil-sparing versus pupil-involving IIIrd nerve palsy",
+          "body": "The parasympathetic fibres to the pupil travel on the outer surface of the IIIrd nerve, supplied by their own small vessels. A compressive ('surgical') lesion from outside, a posterior communicating artery aneurysm above all, damages those outer fibres early and dilates the pupil. An ischaemic ('medical') lesion, as in longstanding diabetes, affects the core of the nerve first and typically spares the pupil.",
+          "note": "A new IIIrd nerve palsy WITH a dilated, poorly reactive pupil is a neurosurgical emergency until an aneurysm is excluded; a pupil-sparing IIIrd nerve palsy in a diabetic can usually be observed."
+        },
+        {
+          "heading": "Ptosis: work out which muscle, then which cause",
+          "table": {
+            "cols": [
+              "Feature",
+              "Points to"
+            ],
+            "rows": [
+              [
+                "Ptosis with a small pupil",
+                "Horner's syndrome"
+              ],
+              [
+                "Ptosis with a large, sluggish pupil",
+                "A compressive IIIrd nerve palsy"
+              ],
+              [
+                "Ptosis with a normal pupil",
+                "IIIrd nerve infarct, myasthenia gravis, or a myopathy"
+              ],
+              [
+                "Ptosis that worsens through the day or with sustained upgaze",
+                "Myasthenia gravis"
+              ]
+            ]
+          },
+          "note": "Bilateral ptosis suggests a systemic or neuromuscular cause (myasthenia, bilateral Horner's, myopathy); unilateral ptosis points to a local nerve or sympathetic-pathway lesion on that side."
+        },
+        {
+          "heading": "Reading the light reflex",
+          "body": "The light reflex has four neurons: retina to both pretectal nuclei (crossing partially), pretectal nucleus to both Edinger-Westphal nuclei (this is why light in ONE eye constricts BOTH pupils), Edinger-Westphal to the ciliary ganglion via the IIIrd nerve, and ciliary ganglion to the sphincter pupillae.\n\nBecause the reflex is wired to both sides, comparing the direct and consensual response in each eye localises the defect to the afferent (retina/optic nerve) or efferent (IIIrd nerve) limb."
+        }
+      ],
+      "pitfalls": [
+        "Not commenting on the pupil in a IIIrd nerve palsy, which is the single finding that decides whether urgent imaging is needed.",
+        "Testing eye movements without asking about diplopia, missing an early, subtle palsy before it is visible.",
+        "Missing a compensatory head tilt, which is the presenting clue in a IVth nerve palsy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has ptosis, a dilated pupil, and a 'down and out' eye. Which nerve is palsied?",
+          "a": "The IIIrd (oculomotor) nerve.",
+          "accept": [
+            "third",
+            "3rd",
+            "iii",
+            "oculomotor"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a compressive IIIrd nerve palsy involve the pupil while a diabetic (ischaemic) one usually spares it?",
+          "a": "The parasympathetic pupillary fibres run on the outer surface of the nerve; a compressive lesion from outside damages them early, while an ischaemic lesion affects the core of the nerve first and spares the peripheral pupillary fibres.",
+          "accept": [
+            "outer",
+            "peripher",
+            "compress",
+            "core"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A new IIIrd nerve palsy with a dilated, poorly reactive pupil. What must be urgently excluded?",
+          "a": "A compressive lesion, classically a posterior communicating artery aneurysm.",
+          "accept": [
+            "aneurysm",
+            "posterior communicating",
+            "compress"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "movements",
+          "text": "Tests eye movements in an H-shaped path and asks about diplopia"
+        },
+        {
+          "id": "pupil",
+          "text": "Explicitly comments on pupil involvement in any IIIrd nerve palsy",
+          "critical": true
+        },
+        {
+          "id": "reflex",
+          "text": "Tests both direct and consensual light reflex"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerves III, IV and VI"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of ocular movement and pupillary function"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn5": {
+      "id": "skill.exam.neuro.cn5",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN V: the trigeminal nerve",
+      "oneLine": "Sensation in three divisions, motor bulk and jaw deviation, then the corneal reflex and jaw jerk",
+      "why": "The trigeminal nerve is both the sensory supply to almost the whole face and the motor supply to the muscles of chewing, so a complete exam has two quite different halves. The jaw jerk is one of the few reflexes that is exaggerated only by a BILATERAL upper motor neurone lesion, which makes it a specific bedside test for pseudobulbar palsy.",
+      "steps": [
+        {
+          "text": "Test light touch and pin-prick in each of the three divisions (ophthalmic, maxillary, mandibular), comparing side to side and comparing the perioral region to the rest of the face."
+        },
+        {
+          "text": "Assess the motor component: palpate the masseters bilaterally as the patient clenches the jaw, feeling for symmetrical bulk and contraction."
+        },
+        {
+          "text": "Ask the patient to open the jaw against resistance and watch for deviation."
+        },
+        {
+          "text": "Elicit the corneal reflex by lightly touching the upper cornea, from the side, with a wisp of cotton."
+        },
+        {
+          "text": "Elicit the jaw jerk: rest a finger across the middle of the chin with the mouth relaxed and slightly open, and tap the finger with the reflex hammer."
+        }
+      ],
+      "normal": "Symmetrical sensation in all three divisions; symmetrical masseter bulk and contraction; jaw opens in the midline; brisk bilateral corneal blink; minimal or absent jaw jerk.",
+      "abnormal": "Sensory loss in one or more divisions; unilateral masseter wasting or weakness; jaw deviating to one side on opening; an absent corneal reflex; an exaggerated jaw jerk.",
+      "significance": "Unilateral motor weakness localises to the trigeminal motor root, ganglion or brainstem on that side. An exaggerated jaw jerk means bilateral corticobulbar (upper motor neurone) disease above the pons, as in pseudobulbar palsy or motor neurone disease; the corneal reflex tests the afferent limb of CN V against the efferent limb of CN VII, so an absent reflex can localise to either nerve depending on what else is found.",
+      "teach": [
+        {
+          "heading": "The jaw deviates TOWARD the weak side",
+          "body": "On opening the jaw, the unopposed action of the normal-side lateral pterygoid pushes the jaw across to the WEAK side. This is the 'pushing' half of the book's rule of 17 (the 12+5 rule): trigeminal and hypoglossal are both pushing muscles, so both deviate toward the affected side. The facial and vagus nerves, by contrast, are pulling muscles, and deviate the mouth or uvula toward the NORMAL side.",
+          "note": "Watching the midline notch between the upper and lower incisors as the jaw opens is the most reliable way to catch a subtle deviation."
+        },
+        {
+          "heading": "Corneal reflex: read the pattern to localise",
+          "body": "Stimulate one eye at a time and watch BOTH eyes, then work out which limb, afferent (V) or efferent (VII), explains the pattern.",
+          "wideTable": {
+            "cols": [
+              "Lesion",
+              "Direct reflex, stimulated eye",
+              "Consensual reflex, stimulated eye",
+              "Direct, opposite eye",
+              "Consensual, opposite eye"
+            ],
+            "rows": [
+              [
+                "Complete trigeminal (afferent) lesion",
+                "Absent",
+                "Absent",
+                "Present",
+                "Present"
+              ],
+              [
+                "Complete facial (efferent) lesion",
+                "Absent",
+                "Present",
+                "Present",
+                "Absent"
+              ]
+            ]
+          },
+          "note": "Stimulating the AFFECTED eye tells you about the afferent (trigeminal) limb; watching the RESPONSE in each eye tells you about the efferent (facial) limb on that side."
+        },
+        {
+          "heading": "The jaw jerk is specific for a bilateral upper motor neurone lesion",
+          "body": "A single, unilateral upper motor neurone lesion above the pons generally does NOT exaggerate the jaw jerk, because the trigeminal motor nucleus has bilateral corticobulbar input. A markedly brisk jaw jerk therefore points specifically to BILATERAL disease of the corticobulbar tracts, pseudobulbar palsy from bilateral strokes, or motor neurone disease being the classic examples."
+        },
+        {
+          "heading": "Trigeminal neuralgia, for pattern recognition",
+          "body": "Brief, severe, electric-shock-like unilateral facial pain, usually in the maxillary or mandibular division, triggered by touching the face, chewing, or cold air, is the classic history of trigeminal neuralgia (tic douloureux). It is most often caused by a vascular loop compressing the nerve root; bilateral trigeminal neuralgia should raise multiple sclerosis."
+        }
+      ],
+      "pitfalls": [
+        "Testing only touch and forgetting pain/temperature, missing a dissociated sensory loss.",
+        "Not watching the incisor midline carefully enough to catch a subtle jaw deviation.",
+        "Interpreting an absent corneal reflex without working out whether the afferent or efferent side is at fault.",
+        "Assuming a brisk jaw jerk in isolation is significant without checking for other bilateral upper motor neurone signs."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "On opening the jaw, it deviates to the left. Which side is weak?",
+          "a": "The left side (the jaw deviates toward the side of weakness).",
+          "accept": [
+            "left"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Touching the left cornea produces no blink in either eye, but touching the right cornea produces a blink in both eyes. Which limb of the reflex is affected, and on which side?",
+          "a": "The afferent (trigeminal, sensory) limb on the left, since stimulating the left eye gets no response anywhere, while stimulating the right eye still triggers a normal consensual response in the left eye.",
+          "accept": [
+            "afferent",
+            "trigeminal",
+            "left"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A markedly exaggerated jaw jerk. What does that specifically indicate?",
+          "a": "A bilateral lesion of the corticobulbar tracts above the trigeminal motor nucleus, as in pseudobulbar palsy or motor neurone disease, since a single unilateral upper motor neurone lesion does not exaggerate this reflex.",
+          "accept": [
+            "bilateral",
+            "corticobulbar",
+            "pseudobulbar"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sensory",
+          "text": "Tests all three divisions and compares both sides"
+        },
+        {
+          "id": "motor",
+          "text": "Palpates masseter bulk and checks jaw deviation on opening"
+        },
+        {
+          "id": "reflexes",
+          "text": "Elicits and correctly interprets the corneal reflex or jaw jerk"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerve V"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cranial nerve examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn7": {
+      "id": "skill.exam.neuro.cn7",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN VII: the facial nerve",
+      "oneLine": "The forehead-sparing test is the single most important thing this skill teaches",
+      "why": "Whether the forehead is spared or not is what separates a peripheral (Bell's) palsy from a stroke at the bedside, before any scan. Getting this wrong in either direction, treating a stroke as Bell's palsy or the reverse, has real consequences.",
+      "steps": [
+        {
+          "text": "Inspect at rest for facial asymmetry, a flattened nasolabial fold, and the frequency and symmetry of spontaneous blinking."
+        },
+        {
+          "text": "Ask the patient to wrinkle the forehead/raise the eyebrows (frontalis, temporal branch)."
+        },
+        {
+          "text": "Ask the patient to shut the eyes tightly while you try to prise them open (orbicularis oculi, zygomatic branch)."
+        },
+        {
+          "text": "Ask the patient to show their teeth or smile, and to puff out both cheeks against your fingers (buccal branch)."
+        },
+        {
+          "text": "If indicated, test taste on the anterior two-thirds of the protruded tongue, and comment on hyperacusis and lacrimation."
+        }
+      ],
+      "normal": "Symmetrical spontaneous expression and blinking, symmetrical forehead wrinkling, both eyes close fully against resistance, symmetrical smile, and both cheeks resist deflation equally.",
+      "abnormal": "Flattening of the nasolabial fold, weak or absent forehead wrinkling on one side, incomplete eye closure with the eyeball rolling up (Bell's phenomenon), a smile that pulls to the normal side, or air escaping from one puffed cheek.",
+      "significance": "The forehead has BILATERAL cortical (upper motor neurone) representation, so a supranuclear (stroke) lesion spares it and only weakens the lower face; a lower motor neurone (Bell's palsy, or any lesion of the nerve itself) lesion weakens the WHOLE side, forehead included. Getting this distinction right at the bedside is one of the highest-yield tests in the whole cranial nerve exam.",
+      "teach": [
+        {
+          "heading": "Upper motor neurone versus lower motor neurone facial palsy",
+          "table": {
+            "cols": [
+              "",
+              "Supranuclear (UMN, e.g. stroke)",
+              "Nuclear/infranuclear (LMN, e.g. Bell's palsy)"
+            ],
+            "rows": [
+              [
+                "Forehead",
+                "Spared, can wrinkle",
+                "Involved, cannot wrinkle"
+              ],
+              [
+                "Eye closure",
+                "Usually preserved or mildly weak",
+                "Cannot close fully; Bell's phenomenon"
+              ],
+              [
+                "Lower face",
+                "Weak, opposite side to the lesion",
+                "Weak, same side as the lesion"
+              ]
+            ]
+          },
+          "note": "This works because the forehead's motor neurones receive corticobulbar input from BOTH hemispheres, so one-sided cortical damage cannot fully silence it; the lower face receives input mainly from the opposite hemisphere alone."
+        },
+        {
+          "heading": "The rule of 10+7: which way the mouth deviates",
+          "body": "In a facial (or vagus) palsy, the muscles that pull the corner of the mouth (or the uvula) are weakened on the affected side, so the unopposed normal side PULLS the angle of the mouth, or the uvula, TOWARD ITSELF, the normal side. This is the opposite direction to a trigeminal or hypoglossal lesion, where the affected muscle PUSHES, and so the jaw or tongue deviates toward the weak side instead."
+        },
+        {
+          "heading": "Where in the facial canal the lesion sits changes what else is lost",
+          "table": {
+            "cols": [
+              "Site",
+              "Additional loss"
+            ],
+            "rows": [
+              [
+                "Cerebellopontine angle",
+                "Taste (anterior 2/3 tongue), salivary/lacrimal secretion, hyperacusis, plus possible VIII and V involvement, ipsilateral ataxia"
+              ],
+              [
+                "Facial canal, above the chorda tympani",
+                "Taste and salivary secretion lost, hyperacusis present"
+              ],
+              [
+                "Facial canal, below the chorda tympani (or after it exits, distal lesion)",
+                "Motor weakness only, taste and secretion unaffected"
+              ]
+            ]
+          },
+          "note": "Working out where taste and hyperacusis are also affected localises a peripheral facial palsy along the length of the facial canal, which a simple 'weak on one side' description cannot do."
+        }
+      ],
+      "pitfalls": [
+        "Diagnosing 'facial nerve palsy' without testing the forehead separately, which is exactly the step that distinguishes a stroke from Bell's palsy.",
+        "Missing Bell's phenomenon (the eyeball rolling up on attempted, incomplete closure), a genuine sign of lower motor neurone weakness.",
+        "Confusing the direction of mouth deviation, since it is the opposite convention to the trigeminal/hypoglossal 'pushing' pattern."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient cannot wrinkle either side of the forehead, and the whole left side of the face, including the forehead, is weak. UMN or LMN facial palsy?",
+          "a": "Lower motor neurone, because the forehead is involved.",
+          "accept": [
+            "lower",
+            "lmn"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does the forehead escape weakness in a supranuclear (UMN) facial palsy but not in a Bell's palsy?",
+          "a": "The forehead's motor neurones get corticobulbar input from both cerebral hemispheres, so a one-sided cortical lesion cannot fully silence them; a lesion of the nerve itself (LMN) removes all input to that side, forehead included.",
+          "accept": [
+            "bilateral",
+            "both hemispheres",
+            "corticobulbar"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with a left LMN facial palsy also has hyperacusis and loss of taste on the anterior two-thirds of the tongue. Roughly where in the facial canal is the lesion?",
+          "a": "Proximal to the chorda tympani (above where it branches off), since both taste and the nerve to stapedius (which prevents hyperacusis) are affected.",
+          "accept": [
+            "chorda tympani",
+            "proximal",
+            "above"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "forehead",
+          "text": "Tests forehead wrinkling separately from the lower face",
+          "critical": true
+        },
+        {
+          "id": "bell",
+          "text": "Checks for Bell's phenomenon on attempted eye closure"
+        },
+        {
+          "id": "pattern",
+          "text": "Correctly states whether the pattern is UMN or LMN"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerve VII"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn8": {
+      "id": "skill.exam.neuro.cn8",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN VIII: hearing and balance",
+      "oneLine": "Rinne's and Weber's for hearing; a bedside screen for vestibular function",
+      "why": "The two components of this nerve, cochlear and vestibular, fail in different diseases with different bedside tests. Rinne's and Weber's test together, rather than either alone, are what actually distinguish a conductive from a sensorineural hearing loss.",
+      "steps": [
+        {
+          "text": "Screen hearing gross by rubbing fingers near each ear, or whispering a number, comparing sides."
+        },
+        {
+          "text": "Rinne's test: strike a 512 Hz tuning fork, place it on the mastoid process until no longer heard, then move it beside the ear; ask which was louder or whether it is still audible beside the ear."
+        },
+        {
+          "text": "Weber's test: place the vibrating fork in the midline on the vertex, and ask where the sound is heard, in the midline or lateralised to one ear."
+        },
+        {
+          "text": "Screen vestibular function by asking about vertigo and observing for spontaneous or positional nystagmus."
+        }
+      ],
+      "normal": "Air conduction heard louder/longer than bone conduction on each side (Rinne positive, bilaterally); Weber's heard equally in the midline; no nystagmus or vertigo.",
+      "abnormal": "Bone conduction louder than air (Rinne negative); Weber's lateralising to one ear; nystagmus, especially triggered by a change in head position.",
+      "significance": "Rinne's and Weber's together localise a hearing loss to conductive or sensorineural, and to which ear, without any equipment beyond a tuning fork. The pattern of nystagmus (fast component, whether it is suppressed by visual fixation, whether vertigo and hearing loss travel with it) separates a peripheral, usually benign, cause from a central one that needs urgent imaging.",
+      "teach": [
+        {
+          "heading": "Rinne's and Weber's, read together",
+          "body": "Neither test alone is conclusive; read the pair as one pattern.",
+          "wideTable": {
+            "cols": [
+              "Pattern",
+              "Rinne's (affected ear)",
+              "Weber's",
+              "Type of loss"
+            ],
+            "rows": [
+              [
+                "Conductive loss",
+                "Negative (bone conduction louder than air, BC > AC)",
+                "Lateralises TO the abnormal ear",
+                "Middle/external ear (wax, otitis media, otosclerosis)"
+              ],
+              [
+                "Sensorineural loss",
+                "Positive (air still louder, as normal)",
+                "Lateralises AWAY, to the normal ear",
+                "Cochlea or CN VIII itself"
+              ]
+            ]
+          },
+          "note": "A single test can mislead on its own, a mild conductive loss can still leave Rinne's 'positive'; always read both tests as one pattern, not in isolation."
+        },
+        {
+          "heading": "Central versus peripheral vertigo, at the bedside",
+          "table": {
+            "cols": [
+              "Feature",
+              "Peripheral (labyrinth/vestibular nerve)",
+              "Central (brainstem/cerebellum)"
+            ],
+            "rows": [
+              [
+                "Onset",
+                "Acute, transient episodes",
+                "Can be long-lasting"
+              ],
+              [
+                "Hearing loss/tinnitus",
+                "Often present",
+                "Usually absent"
+              ],
+              [
+                "Suppressed by visual fixation",
+                "Yes",
+                "No"
+              ],
+              [
+                "Other neurological signs",
+                "Absent",
+                "Often present"
+              ]
+            ]
+          },
+          "note": "The COWS mnemonic for caloric testing (Cold water gives nystagmus to the Opposite side, Warm gives nystagmus to the Same side) is used mainly in the unconscious patient; at the bedside in an awake patient, the pattern in the table above does most of the work."
+        },
+        {
+          "heading": "The doll's-eye (oculocephalic) reflex tests far more than CN VIII",
+          "body": "Turning the head passively while watching the eyes tests the vestibular apparatus, the brainstem vestibular nuclei, the medial longitudinal fasciculus, and CN III and VI together. An INTACT reflex in an unconscious patient (eyes stay fixed on a point in space as the head turns) means much of the brainstem is functioning, and argues for a non-structural cause of the coma; an ABSENT reflex suggests destructive brainstem pathology."
+        }
+      ],
+      "pitfalls": [
+        "Interpreting Rinne's alone without Weber's, which can miss a mild conductive loss.",
+        "Not asking specifically about associated tinnitus or hearing loss when assessing vertigo, which is what points toward a peripheral cause.",
+        "Missing that nystagmus suppressed by visual fixation favours a peripheral, not central, cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In a conductive hearing loss, is Rinne's test positive or negative in the affected ear?",
+          "a": "Negative: bone conduction is heard louder than air conduction (BC > AC).",
+          "accept": [
+            "negative"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Weber's test lateralises to the LEFT ear. Rinne's is positive (normal) on both sides. What kind of hearing loss, and in which ear?",
+          "a": "A sensorineural loss in the RIGHT ear, since Weber's lateralises away from a sensorineural deficit, toward the better (normal) ear.",
+          "accept": [
+            "sensorineural",
+            "right"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Give two features that favour a peripheral over a central cause of vertigo.",
+          "a": "Associated hearing loss/tinnitus, and nystagmus that is suppressed by visual fixation (also: acute/transient course, absence of other neurological signs).",
+          "accept": [
+            "hearing",
+            "tinnitus",
+            "fixation",
+            "suppress"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rinne",
+          "text": "Performs Rinne's test correctly on each side"
+        },
+        {
+          "id": "weber",
+          "text": "Performs Weber's test and states the lateralisation"
+        },
+        {
+          "id": "vertigo",
+          "text": "Screens for associated hearing loss/tinnitus when assessing vertigo"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerve VIII"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cranial nerve examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn9_10": {
+      "id": "skill.exam.neuro.cn9_10",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN IX and X: the glossopharyngeal and vagus nerves",
+      "oneLine": "Palate, gag and voice, examined together because these two nerves are almost inseparable at the bedside",
+      "why": "The glossopharyngeal and vagus share so much overlapping supply, and leave the skull and travel through the neck together, that isolated CN IX dysfunction is rarely detectable on its own. In practice they are examined and interpreted as a pair.",
+      "steps": [
+        {
+          "text": "Listen to the voice for hoarseness or a nasal quality, and ask about any difficulty swallowing."
+        },
+        {
+          "text": "Ask the patient to say 'Ah' with the mouth open, and watch the soft palate rise symmetrically and the uvula stay midline."
+        },
+        {
+          "text": "Elicit the gag reflex by touching the posterior pharyngeal wall or tonsillar pillar on each side with a tongue depressor, watching for symmetrical elevation of the palate."
+        },
+        {
+          "text": "Assess swallowing directly if there is any suggestion of dysphagia."
+        }
+      ],
+      "normal": "A clear voice, symmetrical palatal elevation with a midline uvula, and a brisk, symmetrical gag reflex bilaterally.",
+      "abnormal": "A hoarse or nasal voice, palatal droop with the uvula pulled to one side, or an absent gag reflex on one side.",
+      "significance": "The uvula deviates AWAY from the weak side (toward the normal side), the same 'pulling' pattern as the facial nerve. A unilaterally absent gag reflex is a genuine lower motor neurone sign; gag reflex can be physiologically absent bilaterally in some normal people, so a BILATERALLY absent gag is far less specific than a one-sided absence.",
+      "teach": [
+        {
+          "heading": "Uvula deviation follows the facial nerve's 'pulling' rule",
+          "body": "Palatopharyngeus, supplied by the vagus, pulls the uvula toward its own side when it contracts. A weak side cannot pull, so the unopposed normal side pulls the uvula TOWARD ITSELF, away from the lesion. This is the same convention as the facial nerve (the 10+7 half of the book's rule of 17), and the opposite convention to the trigeminal and hypoglossal nerves, which push the jaw or tongue toward the weak side instead."
+        },
+        {
+          "heading": "The gag reflex: what it actually tests, and its limits",
+          "body": "The afferent limb is carried by CN IX, the efferent limb by CN IX and X together, with the reflex centre in the medulla. A UNILATERALLY absent gag is a genuine lower motor neurone finding. A bilaterally absent gag can be a normal variant in some healthy adults, so on its own it is far less useful; conversely, a HYPERACTIVE gag can occur with bilateral corticobulbar disease, as in pseudobulbar palsy."
+        },
+        {
+          "heading": "Bulbar palsy versus pseudobulbar palsy",
+          "table": {
+            "cols": [
+              "",
+              "Bulbar palsy (LMN)",
+              "Pseudobulbar palsy (bilateral UMN)"
+            ],
+            "rows": [
+              [
+                "Tongue",
+                "Wasted, fasciculating, lying still",
+                "Small, spastic, cannot protrude"
+              ],
+              [
+                "Gag reflex",
+                "Absent",
+                "Normal or exaggerated"
+              ],
+              [
+                "Jaw jerk",
+                "Absent or normal",
+                "Exaggerated"
+              ],
+              [
+                "Speech",
+                "Nasal, flaccid dysarthria",
+                "Slow, strained, 'hot potato' spastic dysarthria"
+              ],
+              [
+                "Emotion",
+                "Normal",
+                "Labile (pathological laughing/crying)"
+              ]
+            ]
+          },
+          "note": "Emotional lability is a genuinely useful bedside clue: it points to pseudobulbar palsy and a bilateral corticobulbar lesion, not to a lower motor neurone bulbar process."
+        },
+        {
+          "heading": "Recurrent laryngeal nerve palsy, a vagal branch worth knowing separately",
+          "body": "A hoarse voice from a unilateral recurrent laryngeal nerve palsy can come from mitral stenosis (left atrial enlargement), a bronchogenic carcinoma, an aortic aneurysm, or Hodgkin's disease compressing the nerve in the chest or neck; bilateral palsy, causing stridor, is seen after thyroid surgery or in Guillain-Barre syndrome."
+        }
+      ],
+      "pitfalls": [
+        "Interpreting a bilaterally absent gag reflex as pathological, when it can be a normal variant.",
+        "Missing that the uvula deviates toward the NORMAL side, and reading the finding backward.",
+        "Not listening to the voice and asking about swallowing, both of which are simple, high-yield screens for vagal function."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "On saying 'Ah', the uvula pulls to the right. Which side is weak?",
+          "a": "The left side; the uvula deviates toward the normal (right) side, away from the weak side.",
+          "accept": [
+            "left"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Is a bilaterally absent gag reflex, on its own, a reliable sign of disease?",
+          "a": "No; it can be a normal finding in some healthy individuals. A UNILATERALLY absent gag is the more reliable, localising finding.",
+          "accept": [
+            "normal",
+            "not reliable",
+            "variant"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has a wasted, fasciculating tongue lying still in the mouth, and an absent gag reflex. Bulbar or pseudobulbar palsy?",
+          "a": "Bulbar palsy (a lower motor neurone process).",
+          "accept": [
+            "bulbar"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "palate",
+          "text": "Watches palatal elevation and uvula position on phonation"
+        },
+        {
+          "id": "gag",
+          "text": "Elicits the gag reflex and interprets a unilateral versus bilateral absence correctly"
+        },
+        {
+          "id": "voice",
+          "text": "Comments on voice quality and asks about swallowing"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerves IX and X"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the glossopharyngeal and vagus nerves"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cn11_12": {
+      "id": "skill.exam.neuro.cn11_12",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "CN XI and XII: accessory and hypoglossal nerves",
+      "oneLine": "Shrug and turn for CN XI; protrude and push for CN XII",
+      "why": "These are the two purely motor cranial nerves left to test, and both give a mechanically simple, high-yield sign: a shoulder that will not shrug, or a tongue that deviates on protrusion. Both also follow the trigeminal's 'pushing' convention rather than the facial nerve's 'pulling' one.",
+      "steps": [
+        {
+          "text": "CN XI, sternocleidomastoid: ask the patient to turn the head to one side against your resisting hand, then repeat for the other side, feeling and watching the opposite muscle contract."
+        },
+        {
+          "text": "CN XI, trapezius: ask the patient to shrug both shoulders against downward resistance, comparing the two sides."
+        },
+        {
+          "text": "CN XII: inspect the resting tongue in the mouth for wasting or fasciculations, then ask the patient to protrude it, watching for deviation."
+        },
+        {
+          "text": "Ask the patient to push the tongue against the inside of each cheek while you give counter-resistance from outside."
+        }
+      ],
+      "normal": "Symmetrical, full-strength head turning and shoulder shrug; a tongue that protrudes in the midline with no wasting or fasciculation and pushes equally against both cheeks.",
+      "abnormal": "Weak head turning or shoulder shrug on one side; a wasted or fasciculating tongue; tongue deviation on protrusion.",
+      "significance": "For CN XI, weak turning of the head to the RIGHT tests the LEFT sternocleidomastoid (each SCM turns the head to the opposite side); a flat, non-contracting muscle on attempted turning localises the lesion. For CN XII, the tongue follows the trigeminal's 'pushing' convention: it deviates TOWARD the weak side on protrusion, because the normal-side genioglossus pushes it across.",
+      "teach": [
+        {
+          "heading": "Sternocleidomastoid turns the head to the OPPOSITE side",
+          "body": "Each SCM contracts to turn the head away from itself. So testing right head-turn against resistance is testing LEFT SCM strength, and a weak left SCM shows up as weakness turning the head to the right. Bilateral SCM weakness instead shows up as difficulty flexing the neck forward against resistance."
+        },
+        {
+          "heading": "Trapezius, tested properly",
+          "body": "The traditional shoulder shrug against resistance also recruits levator scapulae, so it can under-detect a mild trapezius weakness. A more specific test resists the patient's attempt to bring the back of the head toward the acromion (for upper trapezius), or pushes the elbow forward while the arm is held out horizontally, palm up (for middle/lower trapezius). Weakness of the middle trapezius produces winging of the scapula."
+        },
+        {
+          "heading": "Tongue deviation follows the 'pushing' rule, same as CN V",
+          "body": "The genioglossus PUSHES the tongue forward and to the opposite side. A weak genioglossus cannot push, so the tongue is pushed by the normal side instead and deviates TOWARD the weak side on protrusion. This is the second half of the book's rule of 17 ('12 + 5'): trigeminal and hypoglossal both push, and both deviate toward the affected side, the opposite convention to the facial and vagus nerves, which pull toward the normal side."
+        },
+        {
+          "heading": "Reading the tongue on inspection alone",
+          "table": {
+            "cols": [
+              "Finding",
+              "Pattern"
+            ],
+            "rows": [
+              [
+                "Wasted, fasciculating, lying still, deviates on protrusion",
+                "Lower motor neurone (LMN) XII palsy"
+              ],
+              [
+                "Small and stiff, cannot be fully protruded, no fasciculations",
+                "Upper motor neurone (UMN) XII palsy (usually bilateral, as part of pseudobulbar palsy)"
+              ]
+            ]
+          },
+          "note": "Fasciculations at rest, with the tongue relaxed inside a slightly open mouth, are the single most specific finding for a lower motor neurone process (motor neurone disease being the classic worry)."
+        }
+      ],
+      "pitfalls": [
+        "Forgetting that testing right head-turn tests LEFT sternocleidomastoid, and reporting the side backward.",
+        "Using only the shoulder shrug to test trapezius, which under-detects mild weakness because levator scapulae compensates.",
+        "Missing fasciculations because the tongue was inspected while protruded and moving rather than resting still in the mouth."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient is weak turning their head to the right. Which sternocleidomastoid is weak?",
+          "a": "The left sternocleidomastoid (each SCM turns the head to the opposite side).",
+          "accept": [
+            "left"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "On protrusion, the tongue deviates to the right, with wasting and fasciculations on that side. UMN or LMN, and which side is weak?",
+          "a": "Lower motor neurone, and the RIGHT side is weak (the tongue deviates toward the weak side because the normal-side genioglossus pushes it across).",
+          "accept": [
+            "lower",
+            "lmn",
+            "right"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is the traditional shoulder-shrug test an imperfect way to assess trapezius strength alone?",
+          "a": "Because levator scapulae also contributes to shoulder shrugging, so a mild isolated trapezius weakness can be masked; testing resisted head-to-acromion approximation or scapular winging is more specific.",
+          "accept": [
+            "levator scapulae",
+            "masked",
+            "compensat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "scm",
+          "text": "Tests SCM correctly and states the contralateral relationship"
+        },
+        {
+          "id": "trapezius",
+          "text": "Tests trapezius beyond the simple shrug when weakness is suspected"
+        },
+        {
+          "id": "tongue",
+          "text": "Inspects the resting tongue for fasciculations before asking for protrusion"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerves XI and XII"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cranial nerve examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
     "skill.exam.neuro.tone_power": {
       "id": "skill.exam.neuro.tone_power",
       "kind": "exam",
       "system": "neurology",
       "title": "Tone and power",
-      "oneLine": "Two systems, two very different patterns of weakness",
-      "why": "Tone tells you upper or lower motor neurone before you have finished testing power. Getting this pattern right is what separates a stroke from Guillain-Barre syndrome at the bedside, long before any scan.",
+      "oneLine": "Attitude and bulk first, then tone, then power against a fixed scale, and the drift tests for weakness too subtle to grade",
+      "why": "Tone tells you upper or lower motor neurone before you have finished testing power. Getting this pattern right is what separates a stroke from Guillain-Barre syndrome at the bedside, long before any scan; the drift tests then catch weakness too mild for the MRC scale to register at all.",
       "steps": [
         {
-          "text": "Assess tone by passively moving each joint through its range, asking the patient to relax."
+          "text": "Note the resting attitude of the limbs: a flexed arm and extended, internally rotated leg at rest is the classic hemiplegic posture."
         },
         {
-          "text": "Test power against a fixed scale (MRC 0 to 5) for each muscle group, comparing both sides."
+          "text": "Inspect and, where needed, measure muscle bulk at fixed points from a bony landmark, comparing the two sides."
         },
         {
-          "text": "Test proximal and distal muscles separately in each limb."
+          "text": "Assess tone by passively moving each joint through its range, asking the patient to relax; in the leg, roll the whole limb and watch the foot, or lift the knee suddenly and watch whether the heel drags."
         },
         {
-          "text": "Look specifically for a pattern: which limbs, proximal or distal, and symmetry."
+          "text": "Test power against a fixed scale (MRC 0 to 5) for each muscle group, comparing both sides, proximal and distal separately."
+        },
+        {
+          "text": "If power looks normal but a subtle lesion is suspected, test for pronator drift: arms out, palms up, eyes closed, held for 20 to 30 seconds."
         }
       ],
-      "normal": "Normal tone throughout, power 5/5 in all muscle groups, symmetrical.",
-      "abnormal": "Increased tone (spasticity or rigidity) or decreased tone (flaccidity), and reduced power in any distribution.",
-      "significance": "Increased tone with pyramidal-pattern weakness (extensors weaker than flexors in the arm, flexors weaker than extensors in the leg) means an upper motor neurone lesion. Flaccid tone with a glove-and-stocking or focal pattern means a lower motor neurone or peripheral problem.",
+      "normal": "Normal resting posture, no wasting, normal tone throughout, power 5/5 in all muscle groups symmetrically, no drift.",
+      "abnormal": "An abnormal resting attitude; wasting (more than 1 to 2 cm difference in circumference at a matched point); increased tone (spasticity or rigidity) or decreased tone (flaccidity); reduced power in any distribution; a positive pronator drift.",
+      "significance": "Increased tone with pyramidal-pattern weakness (extensors weaker than flexors in the arm, flexors weaker than extensors in the leg) means an upper motor neurone lesion. Flaccid tone with wasting and a focal or glove-and-stocking pattern means a lower motor neurone or peripheral problem. A positive drift with the eyes closed can mean either a motor or a sensory (posterior column) deficit, depending on exactly how the arm moves.",
       "teach": [
         {
           "heading": "Upper motor neurone versus lower motor neurone, the whole pattern",
@@ -208,6 +1586,44 @@
           "note": "Learn this as ONE pattern, not five separate facts. A patient either fits the upper motor neurone row across the board or the lower motor neurone row; a mixed picture should make you reconsider the localisation."
         },
         {
+          "heading": "Spasticity is not the same thing as rigidity",
+          "table": {
+            "cols": [
+              "",
+              "Spasticity",
+              "Rigidity"
+            ],
+            "rows": [
+              [
+                "Also called",
+                "Clasp-knife",
+                "Lead-pipe, or cog-wheel if tremor is superimposed"
+              ],
+              [
+                "Disease type",
+                "Pyramidal (corticospinal)",
+                "Extrapyramidal"
+              ],
+              [
+                "Through the range of movement",
+                "Tone increases then suddenly releases",
+                "Tone is increased throughout, uniformly"
+              ],
+              [
+                "Velocity dependence",
+                "Worse with a fast passive movement",
+                "Same at any speed"
+              ],
+              [
+                "Muscles chiefly involved",
+                "Antigravity muscles (arm flexors, leg extensors)",
+                "Both flexors and extensors equally"
+              ]
+            ]
+          },
+          "note": "Test the wrist by pronating/supinating the forearm and rolling the hand: a ratchet-like catch with tremor superimposed is cog-wheel rigidity, best felt with the other hand doing something else (like tapping) to bring it out."
+        },
+        {
           "heading": "Grade power on the MRC scale",
           "points": [
             "0: no movement.",
@@ -218,12 +1634,44 @@
             "5: normal power."
           ],
           "note": "Grade 4 is often subdivided (4-, 4, 4+) in practice, but do not blur 4 and 5. The difference between 'normal' and 'reduced' power matters clinically even when it is subtle."
+        },
+        {
+          "heading": "Bulk: what actually counts as wasting, and where to look",
+          "body": "A circumference difference of more than about 1 cm on the dominant limb, or 2 cm on the non-dominant limb, at a fixed distance from a bony landmark, counts as true wasting rather than normal asymmetry. Some sites (thenar and hypothenar eminences, the shoulder) are usually assessed by inspection alone, since wasting there is often obvious without a tape measure.",
+          "note": "The 'split hand' sign, wasting of the first dorsal interosseous and hypothenar muscles with the thenar eminence relatively spared, is highly specific for amyotrophic lateral sclerosis and does not fit any single nerve, root or plexus distribution."
+        },
+        {
+          "heading": "Pronator drift and its relatives catch what grading alone misses",
+          "body": "With eyes closed and arms held out, palms up, a weak side slowly pronates and drifts down; this is the classic sign of a contralateral corticospinal lesion. What accompanies the drift changes its meaning.",
+          "points": [
+            {
+              "t": "Drift present with eyes OPEN.",
+              "d": "A motor deficit."
+            },
+            {
+              "t": "Drift appears only once the eyes CLOSE.",
+              "d": "A sensory (posterior column/proprioceptive) deficit, since visual feedback was compensating for it."
+            },
+            {
+              "t": "Drift is outward and upward.",
+              "d": "Cerebellar, not corticospinal."
+            },
+            {
+              "t": "The arm rises overhead without the patient noticing ('updrift').",
+              "d": "A parietal lobe lesion with loss of position sense."
+            },
+            {
+              "t": "The arm drifts without any pronation.",
+              "d": "Suggests a functional (non-organic) rather than structural cause."
+            }
+          ]
         }
       ],
       "pitfalls": [
         "Testing power without first assessing tone, and so missing the pattern that would have told you where to look.",
         "Not comparing proximal with distal, which is what separates a myopathy from a neuropathy.",
-        "Grading power as 'normal' without actually testing against resistance."
+        "Grading power as 'normal' without actually testing against resistance.",
+        "Skipping the pronator drift in a patient with a normal formal power exam but a suggestive history, and missing a subtle hemiparesis."
       ],
       "probes": [
         {
@@ -255,6 +1703,17 @@
             "myopath"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient's outstretched arm drifts down only after their eyes are closed, not while their eyes are open. What does this suggest?",
+          "a": "A sensory (posterior column/proprioceptive) deficit rather than a pure motor one, since vision was compensating for the loss of position sense until it was removed.",
+          "accept": [
+            "sensory",
+            "proprioceptive",
+            "posterior column"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -269,6 +1728,10 @@
         {
           "id": "pattern",
           "text": "Compares proximal with distal and both sides"
+        },
+        {
+          "id": "drift",
+          "text": "Tests for pronator drift when a subtle deficit is suspected"
         }
       ],
       "media": [],
@@ -294,9 +1757,9 @@
       "id": "skill.exam.neuro.reflexes",
       "kind": "exam",
       "system": "neurology",
-      "title": "Deep tendon reflexes and the plantar response",
-      "oneLine": "A reflex arc has two ends; knowing which end is broken localises the lesion",
-      "why": "A reflex is a simple arc: sensory afferent, spinal segment, motor efferent. An absent or exaggerated reflex tells you which part of that arc, and therefore which level of the nervous system, has failed.",
+      "title": "Deep tendon reflexes, superficial reflexes and the plantar response",
+      "oneLine": "A reflex arc has two ends; knowing which end is broken localises the lesion, and clonus tells you how far it's broken",
+      "why": "A reflex is a simple arc: sensory afferent, spinal segment, motor efferent. An absent or exaggerated reflex tells you which part of that arc, and therefore which level of the nervous system, has failed. Superficial reflexes and clonus extend the same logic beyond the deep tendon reflexes alone.",
       "steps": [
         {
           "text": "Ensure the limb is relaxed and positioned correctly for each reflex."
@@ -305,18 +1768,21 @@
           "text": "Strike the tendon briskly with the reflex hammer, letting the hammer fall under its own weight."
         },
         {
-          "text": "Compare both sides for every reflex tested."
+          "text": "Compare both sides for every reflex tested, and grade each on a 0 to 4+ scale."
         },
         {
           "text": "If a reflex is absent, reinforce with a distraction manoeuvre (Jendrassik) and try again before calling it truly absent."
         },
         {
-          "text": "Test the plantar response last, stroking the lateral sole firmly with a blunt object."
+          "text": "Elicit the superficial abdominal and cremasteric reflexes by stroking, not tapping."
+        },
+        {
+          "text": "Test the plantar response, stroking the lateral sole firmly with a blunt object, and if the reflexes above it are brisk, check for ankle clonus."
         }
       ],
-      "normal": "Symmetrical, present reflexes, a flexor (downgoing) plantar response.",
-      "abnormal": "Exaggerated, reduced, absent, or asymmetrical reflexes, or an extensor (upgoing) plantar response.",
-      "significance": "Exaggerated reflexes with an extensor plantar mean an upper motor neurone lesion above the level tested. Absent reflexes mean a lesion of the reflex arc itself, at the nerve, root, or spinal segment level.",
+      "normal": "Symmetrical, grade 2+ reflexes, present superficial reflexes, a flexor (downgoing) plantar response, no clonus.",
+      "abnormal": "Exaggerated, reduced, absent, or asymmetrical deep tendon reflexes; absent superficial reflexes; an extensor (upgoing) plantar response; sustained clonus.",
+      "significance": "Exaggerated reflexes with an extensor plantar and absent superficial reflexes together mean an upper motor neurone (pyramidal) lesion above the level tested. Absent deep tendon reflexes mean a lesion of the reflex arc itself, at the nerve, root, or spinal segment level. Sustained clonus is simply a more marked form of hyperreflexia and carries the same significance as a very brisk reflex.",
       "teach": [
         {
           "heading": "The segments, so you can localise",
@@ -348,18 +1814,84 @@
               ]
             ]
           },
-          "note": "A reflex that is absent at one specific level with normal reflexes above and below points precisely at that segment, which is exactly how a single nerve root lesion is localised."
+          "note": "A reflex that is absent at one specific level with normal reflexes above and below points precisely at that segment, which is exactly how a single nerve root lesion is localised. Mnemonic, reading bottom to top: S1,2 : L3,4 : C5,6 : C7,8."
+        },
+        {
+          "heading": "Grade every reflex on the same 0 to 4+ scale",
+          "table": {
+            "cols": [
+              "Grade",
+              "Finding"
+            ],
+            "rows": [
+              [
+                "0",
+                "Absent, even with reinforcement"
+              ],
+              [
+                "1+",
+                "Present but reduced"
+              ],
+              [
+                "2+",
+                "Normal"
+              ],
+              [
+                "3+",
+                "Increased, not necessarily pathological"
+              ],
+              [
+                "4+",
+                "Markedly hyperactive, pathological, often with clonus"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Superficial reflexes work the opposite way to deep tendon reflexes",
+          "table": {
+            "cols": [
+              "Superficial reflex",
+              "How it's elicited",
+              "Root"
+            ],
+            "rows": [
+              [
+                "Abdominal (epigastric/mid/hypogastric)",
+                "Stroke the abdominal wall toward the umbilicus",
+                "T6-T9 / T9-T11 / T11-L1"
+              ],
+              [
+                "Cremasteric",
+                "Stroke the upper inner thigh; testis rises",
+                "L1, L2"
+              ],
+              [
+                "Anal",
+                "Stroke perianal skin; sphincter contracts",
+                "S2, S3"
+              ]
+            ]
+          },
+          "note": "Superficial reflexes are ABOLISHED by a pyramidal tract lesion, the opposite of what happens to deep tendon reflexes. An absent abdominal reflex, with brisk knee and ankle jerks, fits the same upper motor neurone picture as an extensor plantar."
+        },
+        {
+          "heading": "Clonus: how to elicit it, and what it means",
+          "body": "Ankle clonus is elicited by supporting the knee, then briskly dorsiflexing the foot and holding gentle pressure on the sole. A few beats that fade are unsustained clonus; rhythmic beats that continue as long as the pressure is held are sustained clonus, a pathological finding equivalent to a very brisk (4+) reflex.",
+          "note": "A few beats of unsustained clonus can occur in anxious, otherwise normal individuals, and in hyperthyroidism; SUSTAINED clonus is what should be treated as pathological."
         },
         {
           "heading": "Reading the plantar response correctly",
           "body": "Stroke firmly along the lateral border of the sole from heel to the base of the little toe, then curving medially. A normal response is flexion (downgoing) of the great toe. Extension (upgoing), with or without fanning of the other toes, is the Babinski sign.",
-          "note": "The Babinski sign is present from birth until about 18 months, when the corticospinal tracts myelinate; an extensor response beyond that age is always abnormal and means an upper motor neurone lesion somewhere between the cortex and the spinal segment tested."
+          "note": "The Babinski sign is present from birth until about 18 months, when the corticospinal tracts myelinate; an extensor response beyond that age is always abnormal and means an upper motor neurone lesion somewhere between the cortex and the spinal segment tested. If direct plantar stimulation is equivocal, Chaddock's method (stroking below the lateral malleolus) is the most useful alternative technique."
         }
       ],
       "pitfalls": [
         "Striking too gently, or not letting the hammer fall freely.",
         "Not reinforcing before calling a reflex truly absent.",
-        "Confusing withdrawal from a ticklish sole with a genuine plantar response."
+        "Confusing withdrawal from a ticklish sole with a genuine plantar response.",
+        "Recording a few beats of unsustained clonus as pathological, when only sustained clonus reliably is.",
+        "Forgetting to test the superficial abdominal reflexes, which carry the same localising weight as the plantar response."
       ],
       "probes": [
         {
@@ -394,6 +1926,16 @@
             "segment"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Absent abdominal reflexes plus brisk knee and ankle jerks and an extensor plantar. What single process explains all three findings together?",
+          "a": "An upper motor neurone (pyramidal) lesion: it abolishes superficial reflexes while exaggerating deep tendon reflexes and producing an extensor plantar, all from the same loss of descending inhibition.",
+          "accept": [
+            "upper motor",
+            "pyramidal"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -409,6 +1951,10 @@
         {
           "id": "reinforce",
           "text": "Reinforces before calling a reflex absent"
+        },
+        {
+          "id": "superficial",
+          "text": "Tests at least one superficial reflex alongside the deep tendon reflexes"
         }
       ],
       "media": [],
@@ -424,6 +1970,734 @@
         {
           "source": "Alagappan, Manual of Practical Medicine",
           "locator": "Nervous system: reflexes"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.sensory": {
+      "id": "skill.exam.neuro.sensory",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Sensory system examination",
+      "oneLine": "Two separate pathways, tested with two separate sets of tools, and a pattern of loss that names the lesion",
+      "why": "Pain and temperature travel by one spinal pathway, and touch, vibration and joint position by another, so testing only one of them can miss a lesion that spares the other completely. The PATTERN of what is lost, a single limb, a stocking distribution, or one side of the body below a level, is often more useful than any single finding.",
+      "steps": [
+        {
+          "text": "With the patient's eyes closed, test pin-prick (pain) over each dermatome, comparing side to side and asking whether it feels normal, reduced, or increased."
+        },
+        {
+          "text": "Test temperature with a cold and a warm object if pain sensation is abnormal, or if leprosy or a cord lesion is suspected."
+        },
+        {
+          "text": "Test light touch with a wisp of cotton, again with the eyes closed."
+        },
+        {
+          "text": "Test joint position sense at the most distal joint first (great toe metatarsophalangeal, finger distal interphalangeal); move it up or down and ask the patient to name the direction."
+        },
+        {
+          "text": "Test vibration with a 128 Hz tuning fork at the most distal bony point first, asking the patient to report when it stops; move proximally only if it is impaired distally."
+        },
+        {
+          "text": "If primary sensation is intact bilaterally, test cortical sensation: two-point discrimination, graphesthesia (tracing a number on the palm), and stereognosis (identifying an object by touch)."
+        },
+        {
+          "text": "Perform Romberg's test: feet together, arms at the sides, first with eyes open, then closed, watching for swaying or falling."
+        }
+      ],
+      "normal": "Symmetrical pain, temperature and touch throughout; joint position and vibration detected accurately at the most distal joint tested; intact two-point discrimination, graphesthesia and stereognosis; minimal sway on Romberg's with eyes open or closed.",
+      "abnormal": "Any asymmetry or loss of a primary modality; impaired joint position or vibration sense; loss of a cortical sensation despite normal primary sensation; a positive Romberg's sign (gross swaying or falling once the eyes close).",
+      "significance": "WHICH modalities are lost, and in what distribution, distinguishes a peripheral neuropathy (distal, symmetrical, glove-and-stocking, all modalities) from a cord lesion (a sensory level, often with dissociated loss) from a single nerve or root lesion (a defined patch matching that nerve or dermatome). Loss of cortical sensation with normal primary sensation localises specifically to the parietal lobe.",
+      "teach": [
+        {
+          "heading": "Two pathways, tested with two different toolkits",
+          "table": {
+            "cols": [
+              "Modality",
+              "Pathway",
+              "Tested with"
+            ],
+            "rows": [
+              [
+                "Pain and temperature (and crude touch)",
+                "Spinothalamic tract, crosses near the level it enters",
+                "Pin, warm/cold objects"
+              ],
+              [
+                "Fine touch, vibration, joint position",
+                "Posterior columns (gracile/cuneate), crosses in the medulla",
+                "Cotton wisp, 128 Hz tuning fork, joint movement"
+              ]
+            ]
+          },
+          "note": "Because these two pathways cross at different levels, a single cord lesion can produce DISSOCIATED sensory loss, pain and temperature lost on one side with touch and proprioception lost on the other, which is exactly the pattern seen in Brown-Sequard syndrome and in the lateral medullary (Wallenberg) syndrome."
+        },
+        {
+          "heading": "Primary sensation intact, cortical sensation lost, means one thing",
+          "body": "Two-point discrimination, graphesthesia, stereognosis and tactile localisation all require an intact PARIETAL LOBE to integrate a normally-transmitted signal. If pin-prick, touch and vibration are all normal but the patient cannot identify a coin by feel or a number traced on their palm, the lesion is cortical (contralateral parietal), not peripheral."
+        },
+        {
+          "heading": "Reading the pattern, not just the finding",
+          "table": {
+            "cols": [
+              "Pattern of loss",
+              "Points to"
+            ],
+            "rows": [
+              [
+                "Distal, symmetrical, glove-and-stocking, all modalities",
+                "Peripheral polyneuropathy"
+              ],
+              [
+                "A defined patch matching one nerve or one dermatome",
+                "A single peripheral nerve or nerve root lesion"
+              ],
+              [
+                "A clear level on the trunk, below which everything is lost, or dissociated (pain/temp one side, touch/proprioception the other)",
+                "A spinal cord lesion"
+              ],
+              [
+                "Loss over one whole side of the face and body, sparing the trunk midline",
+                "A lesion above the brainstem (thalamus or cortex)"
+              ]
+            ]
+          },
+          "note": "On the trunk, TRUE organic sensory loss typically stops just short of the midline because of overlap from the opposite side; loss that crosses the midline exactly should raise a non-organic cause. This rule does not hold on the face, where there is less midline overlap, so organic facial sensory loss can genuinely reach the midline."
+        },
+        {
+          "heading": "Vibration: the timed test is the most sensitive version",
+          "body": "Strike the tuning fork and place it over the most distal bony point (the great toe, then the medial malleolus if abnormal there). Time how long the patient reports feeling it. Normal is roughly 10 seconds or more in the lower limb and 20 seconds or more in the upper limb; a shorter duration than that is an early, sensitive sign of posterior column dysfunction, well before vibration is lost outright.",
+          "note": "128 Hz is preferred for routine bedside testing because it decays slowly enough to time properly; 256 Hz decays faster and can pick up very early loss, as in subacute combined degeneration of the cord."
+        },
+        {
+          "heading": "Romberg's sign is specifically a posterior column (proprioceptive) test",
+          "body": "Balance while standing needs at least two of three inputs: vision, proprioception, and an intact cerebellum. Romberg's isolates proprioception by removing vision: if the patient is steady with eyes open but sways or falls once the eyes close, the cerebellum is presumed intact and the deficit is sensory (posterior column or peripheral large-fibre).\n\nA patient who cannot stand steady even with eyes OPEN has a cerebellar or vestibular problem, not a Romberg-positive sensory one, and the test does not apply."
+        }
+      ],
+      "pitfalls": [
+        "Testing touch alone and skipping pain and temperature, missing a dissociated sensory loss.",
+        "Moving proximally to test vibration and joint position without first establishing that the distal joint is actually normal.",
+        "Testing cortical sensation (stereognosis, graphesthesia) in a patient whose primary sensation is already abnormal, which makes the result impossible to interpret.",
+        "Calling Romberg's test positive in a patient who was already unsteady with their eyes open, when the sign specifically requires a change between eyes open and eyes closed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which sensory pathway carries pain and temperature, and where does it cross?",
+          "a": "The spinothalamic tract, which crosses near the spinal level it enters (via the anterior white commissure).",
+          "accept": [
+            "spinothalamic",
+            "crosses"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has normal pin-prick, touch and vibration, but cannot identify a key placed in their hand with eyes closed, using either hand. What does this localise to?",
+          "a": "Bilateral parietal lobe dysfunction (a lesion affecting cortical/secondary sensory processing), since primary sensation is intact but stereognosis, a cortical sensation, is lost.",
+          "accept": [
+            "parietal",
+            "cortical"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient loses pain and temperature on the right side of the body below the umbilicus, and loses joint position and vibration on the left side below the same level. What syndrome is this, and why does it look this way?",
+          "a": "Brown-Sequard syndrome (cord hemisection): the spinothalamic tract has already crossed before ascending, so its loss appears on the side OPPOSITE the lesion, while the posterior columns have not yet crossed, so their loss appears on the SAME side as the lesion.",
+          "accept": [
+            "brown-sequard",
+            "hemisection"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient sways noticeably even with their eyes open, and this does not change much when their eyes close. Is this a positive Romberg's sign?",
+          "a": "No. Romberg's specifically tests the CHANGE between eyes open and eyes closed; a patient unsteady even with eyes open likely has a cerebellar or vestibular problem, and the test does not meaningfully apply.",
+          "accept": [
+            "no",
+            "cerebellar",
+            "vestibular",
+            "does not apply"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "modalities",
+          "text": "Tests pain/temperature and touch/vibration/proprioception as two distinct systems"
+        },
+        {
+          "id": "distal",
+          "text": "Starts testing vibration and joint position at the most distal joint"
+        },
+        {
+          "id": "pattern",
+          "text": "Describes the pattern of any loss, not just its presence"
+        },
+        {
+          "id": "romberg",
+          "text": "Performs Romberg's correctly, comparing eyes open to eyes closed",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: sensory system"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: sensory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Approach to the patient with sensory loss"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.cerebellar": {
+      "id": "skill.exam.neuro.cerebellar",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Cerebellar signs and coordination",
+      "oneLine": "DANISH, one test per letter, plus the Romberg comparison that tells cerebellar apart from sensory ataxia",
+      "why": "The cerebellum does not move anything itself; it times and scales movement that other systems generate, so its damage shows up as clumsiness and mistiming rather than weakness. A cerebellar lesion on one side produces signs on the SAME (ipsilateral) side of the body, unlike almost every other part of the motor system.",
+      "steps": [
+        {
+          "text": "Finger-nose test: ask the patient to touch their nose, then your finger held at arm's length, repeatedly and as accurately as possible; move your finger to vary the target."
+        },
+        {
+          "text": "Heel-shin test: with the patient supine, ask them to place one heel on the opposite knee and slide it smoothly down the shin to the ankle and back."
+        },
+        {
+          "text": "Dysdiadochokinesia: ask the patient to rapidly and repeatedly pronate and supinate the forearm, slapping one palm then the back of the hand on the other palm."
+        },
+        {
+          "text": "Rebound (Stewart-Holmes) test: have the patient pull against your resistance, then suddenly release it, protecting them from striking themselves."
+        },
+        {
+          "text": "Ask the patient to say a multisyllabic word (e.g. 'British constitution') and listen for scanning speech."
+        },
+        {
+          "text": "Observe for nystagmus at the extremes of gaze, and perform Romberg's test, comparing sway with eyes open and closed."
+        }
+      ],
+      "normal": "Smooth, accurate finger-nose and heel-shin movements with no tremor; rapid, regular alternating movements; a normal rebound check; clear, evenly-paced speech; no nystagmus; minimal sway on Romberg's, unchanged between eyes open and closed.",
+      "abnormal": "Past-pointing or an intention tremor worsening as the target is approached; a jerky, wavering heel-shin trace; slow, irregular, or clumsy alternating movements (dysdiadochokinesia); absent rebound check, with the limb continuing to move; scanning or staccato speech; nystagmus; a broad-based, unsteady gait that is NOT made worse by closing the eyes.",
+      "significance": "These signs localise to the SAME side as the lesion in a cerebellar hemisphere. Truncal instability without limb ataxia points to the vermis (midline), while limb dysmetria and dysdiadochokinesia point to a hemisphere. Crucially, cerebellar ataxia is not made materially worse by closing the eyes, which is what separates it from a sensory ataxia at the bedside.",
+      "teach": [
+        {
+          "heading": "DANISH: one letter, one test",
+          "table": {
+            "cols": [
+              "Letter",
+              "Sign",
+              "How it's shown"
+            ],
+            "rows": [
+              [
+                "D",
+                "Dysdiadochokinesia",
+                "Slow, irregular rapid alternating movements"
+              ],
+              [
+                "A",
+                "Ataxia (of gait/limb)",
+                "Wide-based, reeling gait; jerky finger-nose or heel-shin"
+              ],
+              [
+                "N",
+                "Nystagmus",
+                "Fast component toward the side of the lesion"
+              ],
+              [
+                "I",
+                "Intention tremor",
+                "Tremor that worsens as the target is approached"
+              ],
+              [
+                "S",
+                "Scanning/staccato speech",
+                "Undue separation of syllables"
+              ],
+              [
+                "H",
+                "Hypotonia",
+                "Reduced resistance to passive movement, pendular knee jerk"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Cerebellar signs are IPSILATERAL to the lesion",
+          "body": "This is the exception to remember: almost everything else in the motor exam (power, tone abnormalities from a corticospinal lesion) localises to the OPPOSITE side of a cerebral lesion, but a cerebellar hemisphere lesion produces incoordination on the SAME side, because the major cerebellar outflow pathways cross twice on their way to and from the cerebral cortex."
+        },
+        {
+          "heading": "Rebound tests something dysmetria alone does not",
+          "body": "Have the patient pull hard against your resistance, then let go suddenly; normally the antagonist muscles check the movement almost immediately. In a SPASTIC limb, an exaggerated rebound is seen. In CEREBELLAR disease, this checking response is essentially absent, and the limb keeps moving in the original direction, sometimes striking the patient, which is why you protect them during the test."
+        },
+        {
+          "heading": "Cerebellar ataxia versus sensory ataxia: the Romberg comparison decides it",
+          "table": {
+            "cols": [
+              "Feature",
+              "Cerebellar ataxia",
+              "Sensory ataxia"
+            ],
+            "rows": [
+              [
+                "Base while standing",
+                "Wide, unsteady even with eyes open",
+                "Normal-to-wide, but relatively steadier with eyes open"
+              ],
+              [
+                "Effect of closing the eyes",
+                "Little change",
+                "Markedly worse; patient may fall"
+              ],
+              [
+                "Heel-shin test",
+                "Jerky, wavering throughout",
+                "Reasonably accurate if slow and visually guided; worse eyes closed"
+              ],
+              [
+                "Associated finding",
+                "Nystagmus, dysarthria, hypotonia",
+                "Impaired vibration/joint position sense"
+              ]
+            ]
+          },
+          "note": "This distinction matters because it points to two completely different differentials, cerebellum/brainstem versus a peripheral neuropathy or posterior column lesion, using only a bedside test that takes seconds."
+        },
+        {
+          "heading": "Where the lesion sits changes the pattern",
+          "points": [
+            {
+              "t": "Midline (vermis).",
+              "d": "Truncal ataxia and gait instability, with little or no limb incoordination; often little dysarthria or nystagmus."
+            },
+            {
+              "t": "Hemisphere.",
+              "d": "Ipsilateral limb dysmetria and dysdiadochokinesia, most noticeable in fine finger movements and speech."
+            },
+            {
+              "t": "Pancerebellar.",
+              "d": "All of the above together, bilaterally; seen with toxic-metabolic causes, paraneoplastic disease, or diffuse infectious/inflammatory processes."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Localising a cerebellar sign to the opposite side out of habit, forgetting it is ipsilateral.",
+        "Not comparing Romberg's with eyes open to eyes closed properly, which is what actually separates cerebellar from sensory ataxia.",
+        "Testing heel-shin with the patient sitting rather than supine, which lets gravity assist the movement and can mask mild dysmetria.",
+        "Failing to protect the patient during the rebound test."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Expand the DANISH mnemonic for cerebellar signs.",
+          "a": "Dysdiadochokinesia, Ataxia, Nystagmus, Intention tremor, Scanning speech, Hypotonia.",
+          "accept": [
+            "dysdiadochokinesia",
+            "ataxia",
+            "nystagmus",
+            "intention",
+            "scanning",
+            "hypotonia"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A left cerebellar hemisphere lesion. Which side shows the limb incoordination?",
+          "a": "The left side (cerebellar signs are ipsilateral to the lesion).",
+          "accept": [
+            "left",
+            "ipsilateral",
+            "same side"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient sways on Romberg's testing with their eyes open, and it is not much worse with the eyes closed. Cerebellar or sensory ataxia?",
+          "a": "Cerebellar ataxia; cerebellar disease is not materially worsened by removing visual input, unlike sensory (posterior column) ataxia.",
+          "accept": [
+            "cerebellar"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "What does an absent rebound check, with the limb continuing to move after sudden release of resistance, indicate, and why must you protect the patient during this test?",
+          "a": "It indicates cerebellar disease, since the normal, near-immediate antagonist checking response is lost; the limb can continue moving unchecked and strike the patient, so the examiner must guard against this before releasing.",
+          "accept": [
+            "cerebellar",
+            "checking response",
+            "protect"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "finger_nose",
+          "text": "Performs finger-nose and heel-shin tests correctly"
+        },
+        {
+          "id": "ipsilateral",
+          "text": "Correctly states cerebellar findings are ipsilateral to the lesion",
+          "critical": true
+        },
+        {
+          "id": "romberg_compare",
+          "text": "Uses the eyes-open/eyes-closed Romberg comparison to distinguish cerebellar from sensory ataxia"
+        }
+      ],
+      "media": [
+        "media.vid.cerebellar"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cerebellum and coordination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cerebellar function"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Ataxic disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.gait": {
+      "id": "skill.exam.neuro.gait",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Gait examination",
+      "oneLine": "Watch first, name the pattern second: gait can localise a lesion faster than the rest of the exam combined",
+      "why": "Gait is a whole-system test that recruits motor, sensory, cerebellar and extrapyramidal function together, so an experienced observer can often localise a lesion within seconds of watching a patient walk, before any formal testing begins.",
+      "steps": [
+        {
+          "text": "Watch the patient rise from a chair without using their hands, if possible."
+        },
+        {
+          "text": "Observe walking away from you, then toward you, over several metres: posture, arm swing, step length and height, base width, and the ease of turning."
+        },
+        {
+          "text": "Ask the patient to walk heel-to-toe in a straight line (tandem gait)."
+        },
+        {
+          "text": "Ask the patient to walk on their heels, then on their toes."
+        },
+        {
+          "text": "If a proprioceptive problem is suspected, repeat plain walking with the eyes closed only once safety can be assured, or rely on the seated Romberg's test instead."
+        }
+      ],
+      "normal": "Rises without using the hands; walks with a normal base, full-length stride, symmetrical arm swing, and turns easily; tandem gait is steady; heel and toe walking are both possible.",
+      "abnormal": "Needing the hands to rise; an asymmetrical, circumducted, shuffling, broad-based, waddling, or high-stepping gait; unsteady or impossible tandem walking; inability to walk on heels (foot drop) or toes (calf weakness).",
+      "significance": "Each named gait pattern maps to a specific level of the nervous system, so correctly naming the pattern is itself a working localisation, hemiparesis, peripheral nerve palsy, myopathy, cerebellar disease, posterior column loss, and basal ganglia disease each produce a gait that looks nothing like the others.",
+      "teach": [
+        {
+          "heading": "The named gaits, and what each one means",
+          "body": "Watch first, then match what you saw to one row below.",
+          "table": {
+            "cols": [
+              "Gait",
+              "What it looks like",
+              "Cause"
+            ],
+            "rows": [
+              [
+                "Hemiplegic (circumduction)",
+                "The affected leg swings outward in an arc, extended and stiff; the arm is flexed and adducted",
+                "Upper motor neurone lesion (stroke)"
+              ],
+              [
+                "Paraparetic (scissoring/'walking in mud')",
+                "Both legs stiffly dragged, extended, sometimes crossing",
+                "Bilateral upper motor neurone lesion, e.g. cord compression, cerebral palsy"
+              ],
+              [
+                "High-stepping/foot drop",
+                "The foot slaps down; the knee is lifted higher to clear the floor",
+                "Lower motor neurone lesion, e.g. common peroneal nerve palsy, L5 radiculopathy"
+              ],
+              [
+                "Waddling (myopathic)",
+                "A broad-based, rolling gait, exaggerated lumbar lordosis, difficulty rising from sitting",
+                "Proximal muscle weakness, e.g. myopathy, muscular dystrophy"
+              ],
+              [
+                "Ataxic/broad-based (cerebellar)",
+                "Reeling, unsteady, wide base, worse turning, veers toward the affected side",
+                "Cerebellar disease"
+              ],
+              [
+                "Sensory ataxic (stamping)",
+                "Broad-based, high-stepping, watches the feet, much worse with eyes closed or in the dark",
+                "Posterior column loss (B12 deficiency, tabes dorsalis) or large-fibre neuropathy"
+              ],
+              [
+                "Shuffling/festinant (parkinsonian)",
+                "Stooped, small rapid steps, reduced arm swing, difficulty starting and stopping, may freeze",
+                "Parkinsonism"
+              ],
+              [
+                "Apraxic",
+                "Feet appear 'stuck to the floor'; power, sensation and cerebellar function are all normal on the bed",
+                "Bilateral frontal lobe disease, normal pressure hydrocephalus"
+              ]
+            ]
+          },
+          "note": "In hemiparesis the asymmetry is obvious; in bilateral (paraparetic) disease both legs are affected together and the asymmetry can be subtle, so compare the two sides carefully rather than looking for one abnormal leg."
+        },
+        {
+          "heading": "The eyes-open/eyes-closed rule works for gait too",
+          "body": "A sensory (posterior column) ataxic gait is dramatically worse with the eyes closed or in poor light, because the patient has been compensating for lost proprioception with vision; a cerebellar ataxic gait is not materially changed by removing vision, since the deficit is not a sensory one. This is the same logic as Romberg's test, applied to walking instead of standing still."
+        },
+        {
+          "heading": "Tandem gait is a more sensitive screen than plain walking",
+          "body": "Walking heel-to-toe narrows the base of support and removes the small margin for error that ordinary walking allows, so it can reveal a mild cerebellar or sensory ataxia that looks unremarkable during normal gait."
+        },
+        {
+          "heading": "A limp is not always neurological",
+          "body": "An antalgic (painful) gait, a shortened stance phase on the painful side, has an orthopaedic or rheumatological cause, not a neurological one, and should be distinguished from the gait patterns above before reaching for a neurological explanation."
+        }
+      ],
+      "pitfalls": [
+        "Only watching the patient walk away, and missing an arm swing asymmetry that is more visible walking toward you.",
+        "Not distinguishing a painful (antalgic) limp from a genuine neurological gait disorder.",
+        "Skipping tandem gait, missing a mild ataxia that plain walking does not reveal.",
+        "Assuming a broad-based gait is always cerebellar without checking whether it is much worse with the eyes closed, which would instead point to a sensory cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient's leg swings outward in an arc while walking, with the arm flexed against the chest on the same side. What is this gait called, and what does it suggest?",
+          "a": "A hemiplegic (circumduction) gait, suggesting an upper motor neurone lesion such as a stroke.",
+          "accept": [
+            "hemiplegic",
+            "circumduction"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A gait is broad-based and high-stepping, and becomes markedly worse when the patient's eyes are closed or the room is dark. What type of gait is this?",
+          "a": "A sensory ataxic (stamping) gait, from loss of proprioception (posterior column or large-fibre neuropathy).",
+          "accept": [
+            "sensory ataxic",
+            "stamping",
+            "posterior column"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does tandem gait reveal a mild ataxia that ordinary walking can miss?",
+          "a": "Walking heel-to-toe narrows the base of support and removes the margin for error that a normal walking base allows, making mild incoordination visible.",
+          "accept": [
+            "narrow",
+            "base",
+            "margin"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "observe",
+          "text": "Observes gait from both approaching and departing, and turning"
+        },
+        {
+          "id": "tandem",
+          "text": "Tests tandem gait"
+        },
+        {
+          "id": "name",
+          "text": "Correctly names the gait pattern and its likely level of lesion"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: gait"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: gait"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Gait disorders"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.neuro.meningeal": {
+      "id": "skill.exam.neuro.meningeal",
+      "kind": "exam",
+      "system": "neurology",
+      "title": "Meningeal signs",
+      "oneLine": "Neck stiffness, Kernig's, Brudzinski's and the tripod sign, all read as one set",
+      "why": "These signs exist because inflamed meninges hurt when they are stretched, so the body reflexively resists any movement that would stretch them. None is perfectly sensitive alone, which is exactly why they are elicited together rather than any one being relied on in isolation.",
+      "steps": [
+        {
+          "text": "With the patient supine, gently attempt to flex the neck, bringing the chin toward the chest, and note any resistance or pain."
+        },
+        {
+          "text": "For Kernig's sign: flex the hip and knee to a right angle, then slowly extend the knee, watching for resistance or pain before full extension."
+        },
+        {
+          "text": "For Brudzinski's neck sign: with one hand behind the head and the other on the chest to stop the trunk rising, passively flex the neck and watch the hips and knees for reflex flexion."
+        },
+        {
+          "text": "Ask the patient to sit up unaided from lying flat, and watch how they do it (the tripod/Amoss sign)."
+        }
+      ],
+      "normal": "The neck flexes freely with no pain; the knee extends fully past 135 degrees without resistance; no reflex hip/knee flexion on neck flexion; the patient sits up without needing to support themselves behind on extended arms.",
+      "abnormal": "Nuchal rigidity, with resistance and pain on neck flexion; a positive Kernig's sign, resistance or pain extending the knee before full extension; a positive Brudzinski's sign, reflex flexion of the hips and knees on neck flexion; a positive tripod sign, the patient propping themselves up behind with both arms to sit up.",
+      "significance": "Meningeal signs together suggest meningeal irritation, most importantly meningitis or subarachnoid haemorrhage, both of which need urgent evaluation. No single sign is sensitive enough to exclude meningitis on its own; a clinically convincing history should still prompt further workup even if these signs are negative, especially early in the illness or in an immunocompromised or very young or elderly patient.",
+      "teach": [
+        {
+          "heading": "Why these signs exist at all",
+          "body": "Inflammation of the meninges makes any manoeuvre that stretches them, flexing the neck, straightening a flexed hip's knee, painful, and the paravertebral and hamstring muscles reflexively resist that stretch. Nuchal rigidity classically shows a patient lying curled on their side, head extended, resisting any attempt at neck flexion, while rotation of the neck is relatively preserved and less painful."
+        },
+        {
+          "heading": "Kernig's sign, precisely",
+          "body": "With the hip already flexed to a right angle, slowly extend the knee. A positive sign is resistance or pain that appears BEFORE the knee reaches full extension (classically before about 135 degrees), from stretch transmitted to the inflamed meninges via the sciatic nerve roots and hamstrings."
+        },
+        {
+          "heading": "Brudzinski described four signs, but the neck sign is the one routinely tested",
+          "table": {
+            "cols": [
+              "Sign",
+              "Manoeuvre",
+              "Positive response"
+            ],
+            "rows": [
+              [
+                "Neck sign",
+                "Passive neck flexion, supine, trunk held down",
+                "Reflex flexion of both hips and knees"
+              ],
+              [
+                "Contralateral leg sign",
+                "Passive flexion of one hip/knee",
+                "Reflex flexion of the OPPOSITE leg"
+              ],
+              [
+                "Cheek sign",
+                "Pressure on both cheeks below the zygoma",
+                "Reflex flexion at the elbows"
+              ],
+              [
+                "Symphyseal sign",
+                "Pressure over the pubic symphysis",
+                "Reflex hip/knee flexion and leg abduction"
+              ]
+            ]
+          },
+          "note": "Only the neck sign is part of routine bedside screening; the other three are less commonly elicited but are worth recognising by name."
+        },
+        {
+          "heading": "The tripod (Amoss) sign",
+          "body": "Sitting up from lying flat normally needs active neck flexion. A patient with meningeal irritation avoids that flexion by pushing themselves up with both arms placed far behind them on the bed, like a tripod, to take the load off the spine. In severe irritation this can progress to a fully arched, opisthotonic posture with the neck extended and the arms braced behind the pelvis."
+        },
+        {
+          "heading": "Meningism is not the same as meningitis",
+          "body": "'Meningism' describes the clinical PICTURE of neck stiffness and headache without necessarily meaning infective or haemorrhagic meningeal inflammation.\n\nCervical spondylosis, Parkinson's disease, raised intracranial pressure with impending tonsillar herniation, tetanus, and strychnine poisoning can all produce resistance to neck movement that mimics true meningeal irritation, so the whole clinical picture, fever, photophobia, rash, and CSF findings, still decides the diagnosis."
+        }
+      ],
+      "pitfalls": [
+        "Relying on a single sign, most often neck stiffness alone, and stopping the exam there.",
+        "Missing that rotation of the neck can be relatively preserved in meningeal irritation even when flexion is markedly resisted.",
+        "Assuming all resistance to neck flexion is meningitis without considering cervical spondylosis, parkinsonism, or raised ICP with herniation risk.",
+        "Not escalating a clinically convincing history when the bedside signs are negative, since none of them is sensitive enough to exclude meningitis on its own."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Describe how Kernig's sign is elicited and what a positive result looks like.",
+          "a": "With the hip flexed to a right angle, the knee is slowly extended; resistance or pain appearing before full extension (roughly before 135 degrees) is a positive sign.",
+          "accept": [
+            "resistance",
+            "pain",
+            "extension"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the tripod (Amoss) sign?",
+          "a": "When asked to sit up from lying flat, a patient with meningeal irritation avoids neck flexion by supporting themselves with both arms placed far behind them on the bed, like a tripod.",
+          "accept": [
+            "tripod",
+            "support",
+            "behind"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has clear clinical features suggesting meningitis, but Kernig's and Brudzinski's signs are both negative. Does this exclude meningitis?",
+          "a": "No; none of the meningeal signs is sensitive enough on its own to exclude meningitis, and a convincing clinical picture should still prompt further workup (lumbar puncture, imaging as indicated) regardless of a negative bedside exam.",
+          "accept": [
+            "no",
+            "not sensitive",
+            "does not exclude"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "neck",
+          "text": "Assesses neck flexion for nuchal rigidity"
+        },
+        {
+          "id": "kernig",
+          "text": "Correctly performs Kernig's sign"
+        },
+        {
+          "id": "combine",
+          "text": "Interprets the signs together rather than relying on one alone",
+          "critical": true
+        }
+      ],
+      "media": [
+        "media.vid.meningeal"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: meningeal signs"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: meningeal irritation"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Acute meningitis and encephalitis"
         }
       ],
       "review": {

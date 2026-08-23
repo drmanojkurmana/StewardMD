@@ -56,13 +56,17 @@
     {
       "id": "systemic_exam",
       "title": "Cardiovascular examination",
-      "blurb": "Pulse, JVP, precordium, auscultation",
+      "blurb": "Inspection, pulse, BP, JVP, precordium, auscultation, and the signs of failure",
       "skills": [
+        "skill.exam.cvs.inspection",
         "skill.exam.cvs.pulse",
+        "skill.exam.cvs.bp",
         "skill.exam.cvs.jvp",
+        "skill.exam.cvs.precordium_palpation",
         "skill.exam.cvs.apex",
         "skill.exam.cvs.heartsounds",
-        "skill.exam.cvs.murmurs"
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.heart_failure_signs"
       ]
     },
     {
@@ -85,8 +89,11 @@
           "skill.approach.hygiene",
           "skill.approach.introduce",
           "skill.approach.consent",
+          "skill.exam.cvs.inspection",
           "skill.exam.cvs.pulse",
+          "skill.exam.cvs.bp",
           "skill.exam.cvs.jvp",
+          "skill.exam.cvs.precordium_palpation",
           "skill.exam.cvs.apex",
           "skill.exam.cvs.heartsounds",
           "skill.exam.cvs.murmurs"
@@ -94,7 +101,9 @@
         "examinerQuestions": [
           "Time the murmur you heard against the carotid pulse.",
           "What does the character of the apex beat tell you?",
-          "Describe the JVP waveform you would expect in tricuspid regurgitation."
+          "Describe the JVP waveform you would expect in tricuspid regurgitation.",
+          "Grade the parasternal heave you felt and explain how you'd distinguish a right ventricular heave from a left atrial one.",
+          "What cuff size would you have chosen for this patient's arm, and why does it matter?"
         ]
       }
     ]
@@ -104,6 +113,8 @@
       "skill.exam.cvs.jvp",
       "skill.exam.cvs.murmurs",
       "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.precordium_palpation",
+      "skill.exam.cvs.heart_failure_signs",
       "skill.hx.cvs.chestpain"
     ]
   }
