@@ -5,6 +5,36 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-23 · Arming OTA on a device DOWNGRADED it to the pre-CliniX bundle
+**Measured on the owner's iPhone 15 Pro, not inferred.** The first device ever built with
+`@capgo/capacitor-updater` linked in immediately hit `/api/ota/check`, downloaded a 36 MB bundle and
+served it over the fresh install. The app then reported `build 1`, no `clinix.js` (404), and the
+pre-CliniX `?v=` tokens, while the correct build sat unused in the app bundle.
+
+The server is the cause, and it is unambiguous:
+```
+GET /api/ota/check?version=builtin&nativeBuild=7
+  -> {"ota":true,"version":1,"commit":"b2b1bdcdbbd6d4df94e7598c595b370ae0073ded", ...}
+```
+`b2b1bdcd` is the commit immediately BEFORE CliniX. **The live channel is pinned to a stale
+commit**, so any device that arms the updater is silently downgraded to it. This is precisely the
+failure the 1 Aug system was torn down for ("a stale bundle silently downgrading installs"), now
+reproduced by the rebuild on its first real device.
+
+`CapacitorUpdater.reset()` and `delete()` did NOT hold - the bundle re-applied on the next launch.
+The only reliable local escape was to unlink the plugin and rebuild. **Decision: do not arm OTA on
+any device until the live channel is correct.** Fix the channel (or flip the Phase-1 kill switch,
+which is designed to make devices `reset()` themselves) FIRST, arm second. `autoUpdate:"off"` in
+`capacitor.config.json` and `isAuto()` in `native-ota.js` were both verified correct, so the apply
+path is either the update banner being tapped or something outside those two gates - **worth
+establishing before this is armed again.**
+
+**Method note worth keeping:** three wrong diagnoses (service worker, wrong `App.app`, WebView
+cache) were guessed before anyone looked. The answer took five minutes once
+`ios_webkit_debug_proxy` was pointed at the running WebView and it was asked directly. For a
+native WebView bug, attach the inspector FIRST. Note iOS needs the `Target.sendMessageToTarget`
+envelope; a bare `Runtime.evaluate` returns "'Runtime' domain was not found".
+
 ## 2026-08-22 · CliniX: one skill object, many runners, and two gates that fail closed
 New module for medical students (see [[CliniX]]), built behind `smd_clinix` def:false off tag
 `pre-clinix`. Three decisions worth keeping.
