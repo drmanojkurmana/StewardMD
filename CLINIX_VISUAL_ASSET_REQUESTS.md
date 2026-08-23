@@ -28,7 +28,12 @@ sourcing shortcut fails loudly rather than shipping unverified.
 
 ---
 
-## CLX-V001 — Liver palpation, preferred (bimanual) method
+## CLX-V001 — Liver palpation, preferred (bimanual) method — **FILLED** (2026-08-23, owner-produced)
+Owner supplied a real photo of the bimanual grip below the right costal margin. Saved as
+`clinix-liver-palpation.jpg`, wired as `media.gi.liver.bimanual` on `skill.exam.gi.liver`,
+alongside the existing full-exam video and self-authored SVG.
+
+## CLX-V001-original — Liver palpation, preferred (bimanual) method (superseded id above)
 - **Clinical context:** `skill.exam.gi.liver`, CliniX abdomen module.
 - **Must show:** examiner's two hands flat on the abdomen below the right costal margin, fingers
   pointing towards the ribs, palpating as the patient takes a deep breath — the edge meeting the
@@ -111,13 +116,10 @@ Nothing in the abdomen chapter beyond CLX-V001–003 currently needs an entry: `
 media attached yet at all (not even a placeholder) — flag before writing new teach content for
 them, rather than defaulting to another self-authored SVG.
 
-## CLX-V006 — BP cuff placement and sizing
-- **Clinical context:** `skill.exam.cvs.bp`, CliniX cardiovascular module.
-- **Must show:** correct cuff bladder placement over the brachial artery, lower edge ~3cm above
-  the elbow crease, plus the arm-circumference-to-cuff-size chart (small/regular/large/thigh).
-- **Preferred format:** static diagram or infographic.
-- **Where it appears:** blood-pressure-technique lesson.
-- **Status:** OPEN
+## CLX-V006 — BP cuff placement and sizing — **FILLED** (2026-08-23, owner-produced)
+Owner supplied a comprehensive infographic (cuff placement, correct/incorrect examples, arm
+circumference to cuff size chart). Saved as `clinix-bpcuff.jpg`, wired as `media.cvs.bp.cuff` on
+`skill.exam.cvs.bp`.
 
 ## CLX-V007 — Cardiac auscultation areas, labelled
 - **Clinical context:** `skill.exam.cvs.heartsounds`.
@@ -137,21 +139,15 @@ them, rather than defaulting to another self-authored SVG.
 - **Where it appears:** JVP lesson, waveform-interpretation teach block.
 - **Status:** OPEN
 
-## CLX-V009 — Six cardinal gaze positions
-- **Clinical context:** `skill.exam.neuro.cn3_4_6` (oculomotor/trochlear/abducens).
-- **Must show:** the H-pattern eye-movement test with the responsible muscle and cranial nerve
-  labelled at each of the 6 positions (SR/IO/LR/MR/IR/SO).
-- **Preferred format:** static diagram.
-- **Where it appears:** eye-movement testing step of the CN III/IV/VI lesson.
-- **Status:** OPEN
+## CLX-V009 — Six cardinal gaze positions — **FILLED** (2026-08-23, owner-produced)
+Owner supplied the H-pattern diagram, muscle + nerve labelled at each of the 6 positions. Saved
+as `clinix-gazepositions.jpg`, wired as `media.neuro.cn346.gaze` on `skill.exam.neuro.cn3_4_6`.
 
-## CLX-V010 — Trigeminal sensory divisions and onion-skin pattern
-- **Clinical context:** `skill.exam.neuro.cn5` (trigeminal).
-- **Must show:** the three trigeminal divisions (V1/V2/V3) on a face outline, plus the concentric
-  "onion-skin" (Dejerine) distribution seen in brainstem lesions.
-- **Preferred format:** static diagram.
-- **Where it appears:** trigeminal sensory-testing step.
-- **Status:** OPEN
+## CLX-V010 — Trigeminal sensory divisions and onion-skin pattern — **FILLED** (2026-08-23, owner-produced)
+Owner supplied two complementary comprehensive infographics (divisions/branches/nuclei/tracts,
+and divisions/motor component/intraoral supply) plus a technique panel for the CN V motor exam
+and corneal reflex. Saved as `clinix-trigeminal-a.jpg`, `clinix-trigeminal-b.jpg`,
+`clinix-cn5-motor-corneal.jpg`, wired on `skill.exam.neuro.cn5`.
 
 ## CLX-V011 — Rinne's and Weber's tuning-fork technique
 - **Clinical context:** `skill.exam.neuro.cn8` (vestibulocochlear).
@@ -272,3 +268,69 @@ logged below.
 - **Preferred format:** video.
 - **Status:** OPEN (searched, only found Osmosis's own hosted page — no independently
   oEmbed-verifiable YouTube id)
+
+---
+
+## Owner-supplied batch, 2026-08-23 — 20 images reviewed, all self-labelled with their CLX id
+
+Owner supplied 28 candidate images plus 8 YouTube links for the neurology reflex/cranial-nerve
+gaps. Reviewed each against the live gap list; 20 accepted (all `ownerProduced`), 6 skipped as
+redundant duplicates of a stronger accepted image, 1 flagged rather than used, 1 not reviewed
+further (self-labelled duplicate of an already-accepted id).
+
+**CLX-V004 — Barrel chest — re-filled.** Owner sent a second, more complete illustration
+(side-on photo comparison + key features + how-to-recognize panel). It replaces the earlier,
+less complete owner illustration at the same media id (`media.resp.inspection.barrel`), same
+file name (`clinix-barrelchest.jpg`) — not a duplicate slot, a straight upgrade.
+
+**CLX-NEW-001/021/022 — filled with one multi-technique panel.** `clxnew001.png` covers chest
+expansion, tactile fremitus and percussion technique in one 4-panel image — wired to all three
+skills (`skill.exam.resp.vocal_resonance`, `skill.exam.resp.expansion`, `skill.exam.resp.percussion`)
+rather than three separate images, since one panel legitimately covers three techniques.
+
+**CLX-NEW-003 (ascites) — filled, 3 images:** shifting dullness (2 techniques) + a percussion
+close-up, wired on `skill.exam.gi.ascites`.
+
+**CLX-NEW-004 (auscultation of the abdomen) — filled.** Bowel-sound quadrants + the 4 bruit
+sites, wired on `skill.exam.gi.auscultation`.
+
+**CLX-NEW-005 (gallbladder/kidney) — filled.** Bimanual kidney ballottement technique, wired on
+`skill.exam.gi.gallbladder_kidney`. (One candidate file named for this id actually showed a
+shifting-dullness percussion technique on review — filed under CLX-NEW-003 instead, by content,
+not by filename.)
+
+**CLX-NEW-007 (precordium inspection) — filled.** Tangential view at 45 degrees plus a
+what-to-look-for panel, wired on `skill.exam.cvs.inspection`.
+
+**CLX-NEW-008 (apex beat) — filled, 2 images:** supine and left-lateral positions, wired on
+`skill.exam.cvs.apex`.
+
+**CLX-NEW-009 (heart failure signs) — filled.** Reference sheet for the left- and right-sided
+sign clusters, wired on `skill.exam.cvs.heart_failure_signs`.
+
+**CLX-NEW-010 (CN V motor + corneal reflex) — filled.** Masseter/temporalis bulk and strength
+testing plus the corneal reflex technique, wired on `skill.exam.neuro.cn5`.
+
+**CLX-NEW-011 (CN VII facial palsy) — filled, 2 images**, superseding the Bell's-palsy Commons
+candidate that was judged too staged to use. Wired on `skill.exam.neuro.cn7`.
+
+**CLX-NEW-019 (hand hygiene) — filled.** The WHO 6-step technique poster, custom-branded, wired
+on `skill.approach.hygiene`.
+
+**CLX-NEW-012/013/014/015/016 — filled with video, not image** (2026-08-23): 8 oEmbed-verified
+YouTube links the owner supplied covering CN V corneal/temporalis, CN IX/X gag+uvula, CN XI/XII,
+tone/power, DTR, and gait, wired onto the matching `skill.exam.neuro.*` skills.
+
+**Skipped as redundant** (a stronger accepted image already covers the same ground): a plainer
+BP-cuff diagram, a second kidney-ballottement candidate, a plain-unlabelled ascites pair, a
+second precordium-pulse diagram (arterial pressure waveform trace — kept as a note here, not
+wired: it is closer to CLX-NEW-006's "pulse waveform shapes" ask than any wired skill, but is a
+single continuous-trace graph rather than the shape-comparison chart that gap actually needs, so
+CLX-NEW-006 stays OPEN).
+
+**CLX-NEW-018 — pallor — still OPEN, flagged not used.** One candidate file was reviewed and
+NOT used: it reads as a real close-up clinical photo (individual eyelashes, skin texture, facial
+blemishes visible) rather than an owner-produced illustration or a verified stock/Commons asset,
+so its provenance cannot be confirmed as licence-clear or as a non-identifiable patient. Flagging
+for the owner rather than using it silently — either confirm this is a licensed/synthetic image
+(and its source), or a fresh Commons search / new capture is needed.
