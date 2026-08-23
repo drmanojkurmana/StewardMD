@@ -507,3 +507,129 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
   #clinixRoot .cx-dia--anim .cx-dia-airway--collapse { animation: none; }
   #clinixRoot .cx-dia--anim .cx-dia-air--out { opacity: .35; }
 }
+
+/* ── embedded video (rights holder's own player) ──────────────────────────── */
+
+#clinixRoot .cx-media--embed { padding: 0; }
+/* 16:9 without aspect-ratio, so it holds up on older WKWebView too. */
+#clinixRoot .cx-embed-frame { position: relative; width: 100%; padding-top: 56.25%; background: #000; }
+#clinixRoot .cx-embed-frame iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; display: block; }
+#clinixRoot .cx-media-src a { color: var(--cx-teach); text-decoration: none; font-weight: 600; }
+
+/* ── synthesized auscultation player ──────────────────────────────────────── */
+
+#clinixRoot .cx-media--snd { padding: 0; border-style: solid; }
+#clinixRoot .cx-snd {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 16px; background: transparent; border: 0; cursor: pointer;
+  font-family: inherit; text-align: left; color: var(--cx-ink);
+}
+#clinixRoot .cx-snd:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-snd-ic { flex: 0 0 auto; color: var(--cx-primary); }
+#clinixRoot .cx-snd-ic .material-symbols-rounded { font-size: 34px; }
+#clinixRoot .cx-snd--on .cx-snd-ic { color: var(--cx-teach); }
+#clinixRoot .cx-snd-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#clinixRoot .cx-snd-t { font-weight: 600; font-size: 15px; }
+#clinixRoot .cx-snd-s { font-size: 12.5px; color: var(--cx-muted); }
+/* A little level meter so a playing sound is obviously playing, which matters when the phone is
+   on silent or the volume is down and nothing appears to happen. */
+#clinixRoot .cx-snd-wave { flex: 0 0 auto; display: flex; align-items: flex-end; gap: 3px; height: 22px; }
+#clinixRoot .cx-snd-wave i { width: 3px; height: 5px; border-radius: 2px; background: var(--cx-line); display: block; }
+#clinixRoot .cx-snd-wave--on i { background: var(--cx-teach); animation: cx-eq .9s ease-in-out infinite; }
+#clinixRoot .cx-snd-wave--on i:nth-child(2) { animation-delay: .12s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(3) { animation-delay: .24s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(4) { animation-delay: .36s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(5) { animation-delay: .48s; }
+@keyframes cx-eq { 0%, 100% { height: 5px; } 50% { height: 20px; } }
+#clinixRoot .cx-snd-hint { padding: 0 16px 12px; font-size: 13.5px; line-height: 1.5; color: var(--cx-muted); }
+
+/* ── diagram anatomy (shared) ─────────────────────────────────────────────── */
+
+#clinixRoot .cx-dia-lbl--bad { fill: var(--cx-bad); font-weight: 700; }
+#clinixRoot .cx-dia-lbl--faint { fill: var(--cx-faint); font-size: 8px; }
+#clinixRoot .cx-dia-arrowhead { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-skin { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-hand { fill: var(--cx-primary-2); opacity: .85; }
+#clinixRoot .cx-dia-thumb { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-finger { stroke: var(--cx-primary-2); stroke-width: 5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia-tip { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-press { stroke: var(--cx-primary); stroke-width: 2; fill: none; }
+#clinixRoot .cx-dia-arc { fill: none; stroke: var(--cx-teach); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-dim-line { stroke: var(--cx-muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-dim-line--em { stroke: var(--cx-teach); stroke-width: 2.5; stroke-dasharray: none; }
+
+/* percussion technique: the striking finger pivots from the wrist, twice, then rests */
+#clinixRoot .cx-dia--anim .cx-dia-strike { transform-origin: 186px 46px; animation: cx-tap 2.6s ease-in-out infinite; }
+@keyframes cx-tap {
+  0%, 40%, 100% { transform: rotate(0deg); }
+  10%, 22% { transform: rotate(13deg); }
+  16%, 28% { transform: rotate(0deg); }
+}
+
+/* chest expansion: the chest widens on inspiration; thumbs separate ONLY when floating */
+#clinixRoot .cx-dia-chest { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 2; }
+#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 170px 105px; animation: cx-breathe 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--float .cx-dia-thumbL { animation: cx-thumbL 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--float .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+/* anchored: the thumbs travel WITH the wall, so the gap never opens. That is the whole lesson. */
+#clinixRoot .cx-dia--anchored .cx-dia-thumbL,
+#clinixRoot .cx-dia--anchored .cx-dia-thumbR { animation: none; }
+@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.13); } }
+@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-15px); } }
+@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(15px); } }
+
+/* auscultation sites */
+#clinixRoot .cx-dia-zone--ausc circle { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--ausc text { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--ausc.cx-dia-zone--on circle { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-playing { display: block; margin-top: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cx-teach); }
+
+/* Hoover */
+#clinixRoot .cx-dia-ribs { fill: none; stroke: var(--cx-ink); stroke-width: 3; stroke-linecap: round; }
+#clinixRoot .cx-dia-dome { fill: none; stroke: var(--cx-primary); stroke-width: 3; }
+#clinixRoot .cx-dia-dome--flat { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-arrow-out { stroke: var(--cx-primary); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia-arrow-in { stroke: var(--cx-teach); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia--anim .cx-dia-ribs--out { animation: cx-ribout 3s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-ribs--in { animation: cx-ribin 3s ease-in-out infinite; }
+@keyframes cx-ribout { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(7px); } }
+@keyframes cx-ribin { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-7px); } }
+
+/* barrel chest / side profile */
+#clinixRoot .cx-dia-chest-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-chest-s--barrel { stroke: var(--cx-teach); }
+
+/* trachea */
+#clinixRoot .cx-dia-neck { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-trachea { fill: var(--cx-surface); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-clav { fill: none; stroke: var(--cx-line); stroke-width: 3; }
+#clinixRoot .cx-dia-arrow-shift { stroke: var(--cx-teach); stroke-width: 2.5; fill: none; }
+
+/* clubbing */
+#clinixRoot .cx-dia-finger-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-nail { fill: none; stroke: var(--cx-primary); stroke-width: 3; stroke-linecap: round; }
+#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-angle { stroke: var(--cx-muted); stroke-width: 1.5; }
+#clinixRoot .cx-dia-window { fill: none; stroke: var(--cx-primary); stroke-width: 2; }
+
+/* effusion */
+#clinixRoot .cx-dia-fluid { fill: var(--cx-teach); opacity: .3; stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-lung { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 2; }
+#clinixRoot .cx-dia-lung--collapsed { fill: var(--cx-surface-2); }
+
+/* breathing patterns: each bar breathes at its own real rate */
+#clinixRoot .cx-dia-breathbar { fill: var(--cx-primary); transform-origin: center; }
+#clinixRoot .cx-dia--anim .cx-dia-b-normal  { animation: cx-bar 4.0s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-b-tachy   { animation: cx-bar 1.6s ease-in-out infinite; fill: var(--cx-warn); }
+#clinixRoot .cx-dia--anim .cx-dia-b-pursed  { animation: cx-barlong 5.0s ease-in-out infinite; fill: var(--cx-teach); }
+#clinixRoot .cx-dia--anim .cx-dia-b-exhaust { animation: cx-bar 7.0s ease-in-out infinite; fill: var(--cx-bad); }
+@keyframes cx-bar { 0%, 100% { transform: scaleY(.55); } 40% { transform: scaleY(1); } }
+@keyframes cx-barlong { 0%, 100% { transform: scaleY(.5); } 22% { transform: scaleY(1); } 90% { transform: scaleY(.55); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-dia--anim * { animation: none !important; }
+  #clinixRoot .cx-snd-wave--on i { animation: none; height: 12px; }
+}
+#clinixRoot .cx-blurb--tight { padding: 0 0 8px; font-size: 12.5px; }
+#clinixRoot .cx-row-media { flex: 0 0 auto; color: var(--cx-teach); display: inline-flex; }
+#clinixRoot .cx-row-media .material-symbols-rounded { font-size: 20px; }

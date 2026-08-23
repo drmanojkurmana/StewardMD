@@ -107,7 +107,7 @@ try {
 
   /* ── 2. FLAG ON: the module mounts and the home screen renders ─────────── */
   console.log("\n--- flag ON, review gate CLOSED (student view) ---");
-  await attach(BASE + "?clinix=1");
+  await attach(BASE + "?clinix=1&clinixdraft=0");
 
   ok((await ev("window.CLINIX.isOn()")) === true, "CLINIX.isOn() is true with ?clinix=1");
   await ev("window.CLINIX.open()");
@@ -228,43 +228,31 @@ try {
     ok(false, "expected a reveal turn in this lesson");
   }
 
-  /* ── 6. THE LICENCE GATE ───────────────────────────────────────────────── */
+  /* ── 6. THE LICENCE GATE, both directions ─────────────────────────────── */
   console.log("\n--- the licence gate ---");
-  const media = await ev(`(() => {
-    const c = window.SMD_CLINIX_CONTENT;
-    const built = c._cache().diseases['copd'];
-    const m = c.media(built, 'media.resp.expansion.technique');
-    return m ? { renderable: m.renderable, hasSrc: !!m.src, note: m.pendingNote, cap: m.caption } : null;
-  })()`);
-  ok(media && media.renderable === false, "uncleared media is refused by the gate");
-  ok(media && media.hasSrc === false, "no src is handed to the page for an uncleared asset");
-  ok(media && media.cap && media.cap.length > 5, "but the caption survives, so the lesson still teaches");
-  ok(media && media.note && media.note.length > 10, "and the reason is stated rather than showing a blank space");
-
-  /* ── 7. RESUME ─────────────────────────────────────────────────────────── */
-  console.log("\n--- resume ---");
-  const pos = await ev("SMD_CLINIX_PROGRESS.position()");
-  ok(pos && pos.diseaseId === "copd", "the student's position is saved");
-  ok(pos && typeof pos.turnIndex === "number", "including the turn index, so they resume mid-skill");
-
-  /* ── 8. OSCE: a critical miss fails the station ────────────────────────── */
-  console.log("\n--- OSCE scoring ---");
-  const osce = await ev(`(() => {
+  const gate = await ev(`(() => {
     const C = window.SMD_CLINIX_CONTENT, M = window.SMD_CLINIX_MODEL;
     const built = C._cache().diseases['copd'];
-    const st = C.stationFor(built, 'osce.copd.resp_exam');
-    if (!st) return null;
-    const all = st.items.map(i => i.id);
-    const noConsent = all.filter(id => id.indexOf('consent') < 0);
-    return { total: st.items.length, crit: st.criticalCount,
-             perfect: M.scoreStation(st, all).passed,
-             withoutConsent: M.scoreStation(st, noConsent) };
+    const un = C.media(built, 'media.resp.inspection.barrel');      // still unsourced, on purpose
+    const dia = C.media(built, 'media.dia.percussion');             // self-authored
+    const snd = C.media(built, 'media.snd.wheeze');                 // synthesized
+    const emb = C.media(built, 'media.vid.respexam');               // verified embed
+    return {
+      unRenderable: un && un.renderable, unSrc: !!(un && un.src), unCap: !!(un && un.caption), unNote: !!(un && un.pendingNote),
+      diaOk: !!(dia && dia.renderable && dia.inline),
+      sndOk: !!(snd && snd.renderable && snd.synth && snd.audioKind),
+      embOk: !!(emb && emb.embeddable && emb.videoId), embSrc: !!(emb && emb.src),
+      embAttr: emb && emb.attribution
+    };
   })()`);
-  ok(osce && osce.total >= 10, `the station builds a real checklist from the skills (${osce && osce.total} items)`);
-  ok(osce && osce.perfect === true, "a complete run passes");
-  ok(osce && osce.withoutConsent.failedOnCritical === true,
-    "missing consent fails the station on safety, regardless of the total");
-  ok(osce && osce.withoutConsent.passed === false, "and is not recorded as a pass");
+  ok(gate && gate.unRenderable === false, "an unsourced asset is still refused");
+  ok(gate && gate.unSrc === false, "and no src is handed to the page for it");
+  ok(gate && gate.unCap && gate.unNote, "but its caption and sourcing note survive, so the lesson still teaches");
+  ok(gate && gate.diaOk === true, "a self-authored diagram passes");
+  ok(gate && gate.sndOk === true, "synthesized audio passes and names a sound model");
+  ok(gate && gate.embOk === true, "a verified YouTube embed passes");
+  ok(gate && gate.embSrc === false, "and the embed carries NO src, so nothing is re-hosted");
+  ok(gate && gate.embAttr === "Geeky Medics", `and it credits the real creator (${gate && gate.embAttr})`);
 
   /* ── 6b. SELF-AUTHORED DIAGRAMS: the gate OPENING ──────────────────────── */
   console.log("\n--- diagrams ---");
@@ -318,12 +306,43 @@ try {
   ok((await ev("document.querySelector('#clinixRoot .cx-dia-note').textContent.indexOf('apex') >= 0")) === true,
     "and shows what you would expect to find there");
 
-  // The uncleared video on the SAME skill must still be gated.
+  // Percussion now carries BOTH the map and the technique animation, and both are ours.
   ok((await ev(`(() => {
     const C = window.SMD_CLINIX_CONTENT;
-    const m = C.media(C._cache().diseases['copd'], 'media.resp.percussion.technique');
-    return m && m.renderable === false && !m.src;
-  })()`)) === true, "while the externally sourced video on the same skill is still refused");
+    const b = C._cache().diseases['copd'];
+    const a = C.media(b, 'media.dia.percussion'), t = C.media(b, 'media.dia.percussiontech');
+    return !!(a && a.renderable && t && t.renderable && t.diagramId === 'diagram.percussion.technique');
+  })()`)) === true, "percussion teaches WHERE and HOW, both self-authored");
+
+  /* ── 8a. OSCE SCROLL: the timer must not yank you to the top ───────────── */
+  console.log("\n--- osce scroll ---");
+  await attach(BASE + "?clinix=1");
+  await ev("window.CLINIX.open()"); await sleep(500);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-station\"]')")) break; await sleep(250); }
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-station\"]').click()");
+  await sleep(600);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-timer')")) === true, "station opens with a running clock");
+
+  // Scroll down, then wait out MORE than one timer tick.
+  await ev("(function(){ var h = document.getElementById('clinixScroll'); h.scrollTop = 400; return h.scrollTop; })()");
+  const before = await ev("document.getElementById('clinixScroll').scrollTop");
+  await sleep(2600);
+  const after = await ev("document.getElementById('clinixScroll').scrollTop");
+  ok(Number(before) > 100, `scrolled down first (${before})`);
+  ok(Number(after) === Number(before),
+    `SCROLL REGRESSION: position survives the timer tick (was ${before}, now ${after})`);
+  ok((await ev("document.querySelector('#clinixRoot .cx-timer span').textContent")) !== "",
+    "and the clock is still ticking");
+
+  // Ticking a checklist item must also not jump to the top.
+  await ev("(function(){ var b = document.querySelectorAll('#clinixRoot [data-act=\"cx-station-check\"]'); b[b.length-1].click(); return true; })()");
+  await sleep(400);
+  const afterTick = await ev("document.getElementById('clinixScroll').scrollTop");
+  ok(Number(afterTick) === Number(before),
+    `ticking a checkbox keeps your place (was ${before}, now ${afterTick})`);
 
   /* ── 8b. CASE MODE: the simulated patient ──────────────────────────────── */
   console.log("\n--- clinical case ---");

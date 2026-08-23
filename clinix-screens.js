@@ -37,7 +37,8 @@
   var state = {
     stack: [],
     catalog: null,
-    built: null,          // the loaded disease bundle
+    built: null,
+    skillsAll: null,          // the loaded disease bundle
     systemId: null,
     diseaseId: null,
     chapterId: null,
@@ -52,6 +53,9 @@
     stationTimer: null,
     diaFocus: "both",
     diaZone: null,
+    diaMode: null,
+    diaView: "both",
+    audioKind: null,
     caseDef: null,
     casePhase: "history",
     caseLog: [],
@@ -126,8 +130,14 @@
         '<div class="cx-resume-s">' + esc(label) + "</div></div>" + ic("play_arrow") + "</button></section>";
     }
 
+    // Learning the examination itself comes FIRST. A student who wants to know how to percuss
+    // should not have to pick a disease to get there.
+    html += '<section class="cx-sec"><div class="cx-sec-h">Learn the examination</div><div class="cx-rows">' +
+      row("cx-skills", "stethoscope", "Examination skills", "Technique, step by step, with demonstrations") +
+      "</div></section>";
+
     // Systems
-    html += '<section class="cx-sec"><div class="cx-sec-h">Systems</div><div class="cx-sys-grid">';
+    html += '<section class="cx-sec"><div class="cx-sec-h">Learn by disease</div><div class="cx-sys-grid">';
     var systems = cat.systems || [];
     for (var i = 0; i < systems.length; i++) {
       var s = systems[i];
@@ -215,6 +225,86 @@
     }
     html += "</div>";
     host.innerHTML = html;
+  }
+
+  /* ── screen: SKILLS LIBRARY ──────────────────────────────────────────────── */
+
+  /* The door that was missing. Skills were always teachable on their own - compileLesson() never
+   * needed a disease - but the only way in was through a disease pathway, so "teach me how to
+   * percuss" was unreachable. This lists every skill by what you are DOING. */
+  function renderSkills(host) {
+    var b = state.skillsAll;
+    if (!b) { host.innerHTML = header("Examination skills", "Learn the technique itself") + skeleton(); return; }
+    var groups = C().skillGroups(b);
+    var html = header("Examination skills", "Learn the technique, no disease needed");
+
+    if (!groups.length) {
+      html += emptyState("gpp_maybe", "Awaiting clinical review", "No skill is approved for students yet.");
+      host.innerHTML = html; return;
+    }
+    var totalIds = [], gi, si;
+    for (gi = 0; gi < groups.length; gi++) for (si = 0; si < groups[gi].skills.length; si++) totalIds.push(groups[gi].skills[si].id);
+    var comp = P() ? P().competency(totalIds) : { mastered: 0 };
+    html += '<div class="cx-pathhead">' + progressBar(
+      totalIds.length ? Math.round((comp.mastered / totalIds.length) * 100) : 0,
+      comp.mastered + " of " + totalIds.length + " skills mastered") + "</div>";
+
+    for (gi = 0; gi < groups.length; gi++) {
+      var g = groups[gi];
+      html += '<section class="cx-sec"><div class="cx-sec-h">' + esc(g.title) + "</div>" +
+        '<div class="cx-blurb cx-blurb--tight">' + esc(g.blurb) + "</div>" + '<div class="cx-rows">';
+      for (si = 0; si < g.skills.length; si++) {
+        var sk = g.skills[si];
+        var m = P() ? P().mastery(sk.id) : { level: "new", pct: 0 };
+        var nMedia = countRenderableMedia(b, sk);
+        html += '<button type="button" class="cx-row cx-row--skill" data-act="cx-skill" data-id="' + esc(sk.id) + '">' +
+          '<span class="cx-row-ic cx-m-' + esc(m.level) + '">' + ic(masteryIcon(m.level)) + "</span>" +
+          '<span class="cx-row-txt"><span class="cx-row-t">' + esc(sk.title) + "</span>" +
+          '<span class="cx-row-s">' + esc(sk.oneLine || "") + "</span>" +
+          '<span class="cx-row-meta">' + esc(masteryLabel(m)) + (nMedia ? " &middot; " + nMedia + " visual" + (nMedia > 1 ? "s" : "") : "") + "</span></span>" +
+          (nMedia ? '<span class="cx-row-media">' + ic("play_circle") + "</span>" : "") +
+          ic("chevron_right") + "</button>";
+      }
+      html += "</div></section>";
+    }
+    html += disclaimer();
+    host.innerHTML = html;
+  }
+
+  function countRenderableMedia(built, sk) {
+    var ids = sk.media || [], n = 0;
+    for (var i = 0; i < ids.length; i++) {
+      var m = C().media(built, ids[i]);
+      if (m && (m.renderable || m.embeddable)) n++;
+    }
+    return n;
+  }
+
+  function openSkills() {
+    state.loading = true;
+    go("skills");
+    C().loadAllSkills().then(function (b) {
+      state.skillsAll = b;
+      if (!b) { toast("Could not load the skill library"); back(); return; }
+      repaint();
+    });
+  }
+
+  /* Open a skill on its own: no disease, so no emphasis overlay. */
+  function openSkillLesson(skillId) {
+    var b = state.skillsAll;
+    if (!b) return;
+    state.built = b;
+    state.diseaseId = null;
+    state.chapterId = null;
+    state.skillId = skillId;
+    state.turns = C().lessonFor(b, skillId, null);
+    state.turnIndex = 0;
+    state.answered = {}; state.revealed = {}; state.tutorLog = [];
+    state.diaFocus = "both"; state.diaZone = null; state.diaMode = null; state.diaView = "both";
+    stopAudio();
+    if (!state.turns.length) { toast("That skill is not available yet"); return; }
+    go("lesson");
   }
 
   /* ── screen: disease pathway ─────────────────────────────────────────────── */
@@ -373,14 +463,48 @@
       return head + '<div class="cx-media cx-media--pending">' + ic("videocam_off") +
         '<div class="cx-media-cap">A demonstration for this step has not been added yet.</div></div>';
     }
-    // A self-authored inline diagram. It is the only media kind we can always clear, and because it
-    // is inline it inherits the theme and can be interactive.
+
+    // 1. Self-authored inline SVG. Always clearable, inherits the theme, and can be interactive.
     if (m.renderable && m.inline && m.diagramId && window.SMD_CLINIX_DIAGRAMS && SMD_CLINIX_DIAGRAMS.has(m.diagramId)) {
-      var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, { focus: state.diaFocus, selected: state.diaZone });
+      var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, {
+        focus: state.diaFocus, selected: state.diaZone, mode: state.diaMode, view: state.diaView
+      });
       return head + '<figure class="cx-media cx-media--dia">' + svg +
         '<figcaption class="cx-media-cap">' + esc(m.caption) +
         '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
     }
+
+    // 2. Synthesized audio. Generated at play time, so there is no recording and no rights holder,
+    //    but the student must be told it is a model rather than a patient.
+    if (m.renderable && m.synth && m.audioKind) {
+      var playing = state.audioKind === m.audioKind;
+      var hint = "";
+      try { if (window.SMD_CLINIX_AUDIO) hint = SMD_CLINIX_AUDIO.hintOf(m.audioKind); } catch (e) {}
+      return head + '<figure class="cx-media cx-media--snd">' +
+        '<button type="button" class="cx-snd' + (playing ? " cx-snd--on" : "") + '" data-act="cx-audio" data-id="' + esc(m.audioKind) + '">' +
+          '<span class="cx-snd-ic">' + ic(playing ? "stop_circle" : "play_circle") + "</span>" +
+          '<span class="cx-snd-txt"><span class="cx-snd-t">' + esc(m.caption.replace(" (synthesized)", "")) + "</span>" +
+          '<span class="cx-snd-s">' + esc(playing ? "playing three breaths" : "tap to listen") + "</span></span>" +
+          '<span class="cx-snd-wave' + (playing ? " cx-snd-wave--on" : "") + '"><i></i><i></i><i></i><i></i><i></i></span>' +
+        "</button>" +
+        (hint ? '<div class="cx-snd-hint">' + esc(hint) + "</div>" : "") +
+        '<figcaption class="cx-media-cap"><span class="cx-media-src">Synthesized teaching model, not a patient recording. ' +
+        'Learn what to listen FOR, then listen to real patients.</span></figcaption></figure>';
+    }
+
+    // 3. Embedded video, through the rights holder's own player. Never downloaded, never re-hosted.
+    //    embeddable is only true when the YouTube oEmbed endpoint returned 200 for this video.
+    if (m.embeddable && m.videoId) {
+      return head + '<figure class="cx-media cx-media--embed">' +
+        '<div class="cx-embed-frame"><iframe src="https://www.youtube-nocookie.com/embed/' + esc(m.videoId) +
+          '?rel=0&modestbranding=1&playsinline=1" title="' + esc(m.title || m.caption) +
+          '" frameborder="0" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>' +
+        '<figcaption class="cx-media-cap">' + esc(m.caption) +
+        '<span class="cx-media-src">' + esc(m.title) + " \u00b7 " + esc(m.attribution) +
+        ' \u00b7 <a href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">watch on YouTube</a></span></figcaption></figure>';
+    }
+
+    // 4. A hosted file (openly licensed or owner-produced).
     if (m.renderable && m.src) {
       var inner = m.kind === "audio"
         ? '<audio controls src="' + esc(m.src) + '"></audio>'
@@ -389,14 +513,10 @@
           : '<img alt="' + esc(m.caption) + '" src="' + esc(m.src) + '">';
       return head + '<figure class="cx-media">' + inner +
         '<figcaption class="cx-media-cap">' + esc(m.caption) +
-        '<span class="cx-media-src">' + esc(m.attribution) + " · " + esc(m.licence) + "</span></figcaption></figure>";
+        '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
     }
-    if (m.embeddable && m.sourceUrl) {
-      return head + '<div class="cx-media"><a class="cx-embed" href="' + esc(m.sourceUrl) + '" target="_blank" rel="noopener">' +
-        ic("play_circle") + "<span>" + esc(m.caption) + "</span></a>" +
-        '<div class="cx-media-cap">' + esc(m.attribution) + "</div></div>";
-    }
-    // The licence gate. Honest text beats a broken image or a blank space.
+
+    // 5. Not cleared. Honest text beats a broken image or a blank space.
     return head + '<div class="cx-media cx-media--pending">' + ic("image_not_supported") +
       '<div class="cx-media-cap"><b>' + esc(m.caption) + "</b>" +
       '<span class="cx-media-pending">' + esc(m.pendingNote) + "</span></div></div>";
@@ -906,35 +1026,60 @@
   var SCREENS = {
     home: renderHome, system: renderSystem, disease: renderDisease, chapter: renderChapter,
     lesson: renderLesson, station: renderStation, viva: renderViva, competency: renderCompetency,
-    tutor: renderTutor, case: renderCase
+    tutor: renderTutor, case: renderCase, skills: renderSkills
   };
 
   function host() { return document.getElementById("clinixScroll"); }
 
-  function show(key) {
+  /* keepScroll: a REPAINT of the screen you are already on must not move you. Only a real
+   * navigation resets to the top. Without this the OSCE station, which repaints on every timer
+   * tick and every checkbox, yanks you back to the top once a second and cannot be scrolled. */
+  function show(key, keepScroll) {
     var h = host(), fn = SCREENS[key];
     if (!h || !fn) return;
+    var prev = 0;
+    try { prev = h.scrollTop || 0; } catch (e) {}
     try { fn(h); } catch (e) { try { console.warn("[CliniX] screen " + key, e); } catch (_) {} }
-    try { h.scrollTop = 0; } catch (_) {}
+    try { h.scrollTop = keepScroll ? prev : 0; } catch (_) {}
   }
 
   function go(key) {
     key = String(key || "");
     if (!SCREENS[key]) return;
+    stopAudio();
     if (state.stack[state.stack.length - 1] !== key) state.stack.push(key);
     show(key);
   }
 
-  function repaint() { show(state.stack[state.stack.length - 1] || "home"); }
+  function repaint() { show(state.stack[state.stack.length - 1] || "home", true); }
 
   function back() {
     stopTimer();
+    stopAudio();
     if (state.stack.length <= 1) { haptic("light"); closeMod(); return; }
     state.stack.pop();
     show(state.stack[state.stack.length - 1] || "home");
   }
 
-  function closeMod() { try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
+  function closeMod() { stopAudio(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
+
+  /* Audio must never outlive the screen that started it. A breath sound still playing after the
+   * student has moved on is disorienting and reads as a bug. */
+  function stopAudio() {
+    state.audioKind = null;
+    try { if (window.SMD_CLINIX_AUDIO) SMD_CLINIX_AUDIO.stopAll(); } catch (e) {}
+  }
+  function playAudio(kind) {
+    try {
+      if (!(window.SMD_CLINIX_AUDIO && SMD_CLINIX_AUDIO.has(kind))) { toast("Sound unavailable on this device"); return; }
+      if (!SMD_CLINIX_AUDIO.available()) { toast("This device cannot play generated audio"); return; }
+      state.audioKind = kind;
+      SMD_CLINIX_AUDIO.play(kind, { breaths: 3, onEnd: function () {
+        state.audioKind = null;
+        if (state.stack[state.stack.length - 1] === "lesson") repaint();
+      } });
+    } catch (e) { state.audioKind = null; }
+  }
 
   /* ── actions ─────────────────────────────────────────────────────────────── */
 
@@ -959,12 +1104,16 @@
     state.tutorLog = [];
     state.diaFocus = "both";
     state.diaZone = null;
+    state.diaMode = null;
+    state.diaView = "both";
+    stopAudio();
     if (P()) P().savePosition({ diseaseId: state.diseaseId, chapterId: state.chapterId, skillId: skillId, turnIndex: 0 });
     go("lesson");
   }
 
   function nextTurn() {
     if (state.turnIndex < state.turns.length - 1) {
+      stopAudio();
       state.turnIndex++;
       if (P()) P().savePosition({ diseaseId: state.diseaseId, chapterId: state.chapterId, skillId: state.skillId, turnIndex: state.turnIndex });
       haptic("tap");
@@ -972,7 +1121,8 @@
     }
   }
   function prevTurn() {
-    if (state.turnIndex > 0) { state.turnIndex--; haptic("tap"); repaint(); }
+    if (state.turnIndex > 0) {
+      stopAudio(); state.turnIndex--; haptic("tap"); repaint(); }
   }
 
   function answer(given) {
@@ -1009,12 +1159,24 @@
     startTimer();
   }
 
+  /* Surgical tick: rewrite the clock text only. Repainting the whole station once a second was
+   * both the scroll bug above and a needless rebuild of a 34-item checklist. */
+  function tickTimer() {
+    var el = document.querySelector("#clinixRoot .cx-timer");
+    if (!el) { repaint(); return; }
+    var left = Math.max(0, Math.ceil((state.stationEndsAt - Date.now()) / 1000));
+    var mm = Math.floor(left / 60), ss = left % 60;
+    var span = el.querySelector("span");
+    if (span) span.textContent = mm + ":" + (ss < 10 ? "0" : "") + ss;
+    if (left <= 30) el.classList.add("cx-timer--low"); else el.classList.remove("cx-timer--low");
+  }
+
   function startTimer() {
     stopTimer();
     state.stationTimer = setInterval(function () {
       if (state.stack[state.stack.length - 1] !== "station" || state.stationResult) { stopTimer(); return; }
       if (Date.now() >= state.stationEndsAt) { finishStation(); return; }
-      repaint();
+      tickTimer();
     }, 1000);
   }
   function stopTimer() { if (state.stationTimer) { clearInterval(state.stationTimer); state.stationTimer = null; } }
@@ -1187,6 +1349,8 @@
       case "cx-chapter": state.chapterId = id; haptic("tap"); go("chapter"); return;
       case "cx-lesson": haptic("tap"); openLesson(id); return;
       case "cx-competency": haptic("tap"); go("competency"); return;
+      case "cx-skills": haptic("tap"); openSkills(); return;
+      case "cx-skill": haptic("tap"); openSkillLesson(id); return;
 
       case "cx-turn-next": nextTurn(); return;
       case "cx-turn-prev": prevTurn(); return;
@@ -1212,7 +1376,25 @@
       case "cx-station-retry": startStation(state.stationDef.id); return;
 
       case "cx-dia-focus": state.diaFocus = id; haptic("tap"); repaint(); return;
+      case "cx-dia-mode": state.diaMode = id; haptic("tap"); repaint(); return;
+      case "cx-dia-view": state.diaView = id; haptic("tap"); repaint(); return;
       case "cx-dia-zone": state.diaZone = (state.diaZone === id ? null : id); haptic("tap"); repaint(); return;
+      // Tapping an auscultation site both selects it AND plays what you would hear there. That
+      // pairing is the point: the site and the sound are one fact, not two.
+      case "cx-dia-ausc": {
+        var same = state.diaZone === id;
+        state.diaZone = same ? null : id;
+        stopAudio();
+        if (!same && window.SMD_CLINIX_DIAGRAMS && window.SMD_CLINIX_AUDIO) {
+          var snd = SMD_CLINIX_DIAGRAMS.soundFor(id);
+          if (snd) playAudio(snd);
+        }
+        haptic("tap"); repaint(); return;
+      }
+      case "cx-audio": {
+        if (state.audioKind === id) stopAudio(); else playAudio(id);
+        haptic("tap"); repaint(); return;
+      }
       case "cx-case": haptic("tap"); startCase(id); return;
       case "cx-case-ask": {
         var ce = document.getElementById("cxCaseQ");
@@ -1320,7 +1502,7 @@
   }
 
   /* Progress is per person and must not survive into the next account on this device. */
-  function wipe() { try { if (P() && P().deleteAll) P().deleteAll(); } catch (e) {} }
+  function wipe() { stopAudio(); try { if (P() && P().deleteAll) P().deleteAll(); } catch (e) {} }
   var _signoutWired = false;
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return;
