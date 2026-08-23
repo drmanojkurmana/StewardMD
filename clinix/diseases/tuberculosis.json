@@ -784,5 +784,378 @@
       },
       "dosingNote": "This module teaches management at the level of drug CLASS and principle only. Specific drugs, doses, regimen duration, monitoring schedules and resistance-management pathways must be taken from the current national TB programme guideline in force at the time of treatment. CliniX does not prescribe."
     }
-  }
+  },
+  "cases": [
+    {
+      "id": "case.tb.ganesh",
+      "title": "A construction worker with six weeks of cough and evening fever",
+      "opening": "Ganesh Waghmare, 34, has come to the chest clinic. He looks thin and tired, and coughs twice while you are still introducing yourself. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Ganesh Waghmare",
+        "age": 34,
+        "sex": "male",
+        "occupation": "Construction laborer",
+        "residence": "Urban, lives in a crowded chawl with his wife and two children"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, I have had a cough for about six weeks now, and fever most evenings. I have also lost weight.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "cough_duration": {
+          "cues": [
+            "cough",
+            "how long have you had the cough",
+            "when did the cough start"
+          ],
+          "reply": "It started about six weeks ago, gradually, and has not gone away since. I've never coughed like this before.",
+          "key": true,
+          "skillId": "skill.hx.resp.cough_sputum"
+        },
+        "sputum": {
+          "cues": [
+            "sputum",
+            "phlegm",
+            "bring anything up",
+            "spit",
+            "what colour"
+          ],
+          "reply": "Yes, I bring up whitish-yellow sputum most mornings, a small amount.",
+          "key": true
+        },
+        "haemoptysis": {
+          "cues": [
+            "blood",
+            "haemoptysis",
+            "hemoptysis",
+            "cough up blood",
+            "spitting blood"
+          ],
+          "reply": "Yes, twice in the last week I noticed streaks of blood in the sputum. Not a large amount, just streaks.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever",
+            "temperature",
+            "evening fever",
+            "chills",
+            "rigors",
+            "when do you feel warm"
+          ],
+          "reply": "I feel warm most evenings, it comes on by late afternoon and I feel almost normal again by morning.",
+          "key": true
+        },
+        "night_sweats": {
+          "cues": [
+            "night sweats",
+            "sweating at night",
+            "drenching sweats"
+          ],
+          "reply": "Yes, some nights my shirt is soaked through and I have to change it.",
+          "key": true
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight",
+            "eating"
+          ],
+          "reply": "I've lost about five kilos in the last month and a half. My appetite has really dropped.",
+          "key": true
+        },
+        "breathlessness": {
+          "cues": [
+            "breathless",
+            "short of breath",
+            "difficulty breathing"
+          ],
+          "reply": "A little, mostly with exertion, walking up stairs at the work site. Not at rest.",
+          "key": true,
+          "skillId": "skill.hx.resp.dyspnea"
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest"
+          ],
+          "reply": "A dull ache on the right side sometimes, nothing sharp."
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis",
+            "tb",
+            "contact with tb",
+            "anyone with a chronic cough at home",
+            "known case"
+          ],
+          "reply": "My uncle, who lived with us two years ago, had a long-standing cough and was on TB treatment. I'm not sure if he finished it.",
+          "key": true,
+          "skillId": "skill.hx.tb.exposure"
+        },
+        "prior_tb": {
+          "cues": [
+            "had tb before",
+            "treated for tb before",
+            "previous tuberculosis",
+            "old treatment"
+          ],
+          "reply": "No, I've never taken TB treatment myself before this.",
+          "key": true
+        },
+        "hiv_risk": {
+          "cues": [
+            "hiv",
+            "risk factors",
+            "tested before",
+            "sexual history"
+          ],
+          "reply": "I've never been tested for HIV. I'm willing to get tested now if it helps.",
+          "key": true
+        },
+        "diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood sugar"
+          ],
+          "reply": "No, I've never been told I have diabetes, though I haven't been checked in a few years.",
+          "key": true
+        },
+        "steroid_immunosuppression": {
+          "cues": [
+            "steroids",
+            "immunosuppressant",
+            "chronic illness",
+            "kidney disease",
+            "chemotherapy"
+          ],
+          "reply": "No, I've never taken steroids or any long-term medicines, and no kidney problems that I know of."
+        },
+        "smoking_alcohol": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "bidi",
+            "alcohol",
+            "drink"
+          ],
+          "reply": "I smoke about ten bidis a day, since I was about eighteen. I drink occasionally, nothing heavy.",
+          "key": true,
+          "skillId": "skill.hx.resp.smoking"
+        },
+        "occupational_exposure": {
+          "cues": [
+            "your work",
+            "what work",
+            "job",
+            "occupation",
+            "silica",
+            "stone",
+            "dust"
+          ],
+          "reply": "I do construction work, some of it involves breaking stone and there's a lot of dust."
+        },
+        "living_conditions": {
+          "cues": [
+            "living conditions",
+            "crowding",
+            "how many people",
+            "ventilation",
+            "room"
+          ],
+          "reply": "We live in one room, four of us including the children, not much airflow."
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "anyone else sick now",
+            "hereditary"
+          ],
+          "reply": "My wife and children are well right now, no cough or fever in them."
+        },
+        "vaccination_bcg": {
+          "cues": [
+            "bcg",
+            "vaccinated",
+            "vaccination as a child"
+          ],
+          "reply": "I don't remember, doctor, that would have been when I was a baby."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Thin, wasted appearance with visible loss of muscle bulk over the shoulders. Mildly pale. Coughs intermittently through the consultation.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Respiratory rate 20 per minute. Pulse 92 regular. Blood pressure 110/70. SpO2 96 percent on room air. Temperature 37.9 C, taken in the evening.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.resp.inspection": {
+          "finding": "Mild flattening and reduced movement of the right infraclavicular region compared with the left. No accessory muscle use, no barrel chest.",
+          "abnormal": true
+        },
+        "skill.exam.resp.trachea": {
+          "finding": "Trachea central.",
+          "abnormal": false
+        },
+        "skill.exam.resp.expansion": {
+          "finding": "Chest expansion reduced over the right upper zone. Normal elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.resp.percussion": {
+          "finding": "Impaired resonance, verging on dull, over the right infraclavicular area. Resonant elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.resp.auscultation": {
+          "finding": "Bronchial, amphoric-quality breath sounds over the right upper zone. Vesicular breathing elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.resp.added_sounds": {
+          "finding": "Persistent, post-tussive crackles at the right apex, not fully clearing with coughing. No wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "finding": "Increased vocal resonance over the right upper zone, matching the area of amphoric breathing.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "sputum_afb",
+        "cbnaat",
+        "cxr",
+        "hiv",
+        "fbc",
+        "sputum_culture"
+      ],
+      "investigations": {
+        "sputum_afb": {
+          "label": "Sputum smear for acid-fast bacilli",
+          "indicated": true,
+          "result": "Two samples sent. Smear positive, graded 2+ and 3+.",
+          "note": "Rapid and widely available, confirming the organism at the bedside, though its sensitivity is only moderate, which is why CBNAAT is sent alongside rather than instead of it."
+        },
+        "cbnaat": {
+          "label": "Rapid molecular test, CBNAAT",
+          "indicated": true,
+          "result": "Mycobacterium tuberculosis detected. Rifampicin sensitive.",
+          "note": "Confirms the organism within hours rather than weeks and screens for rifampicin resistance in the same test, which is why it is now the preferred initial confirmatory test."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Patchy and nodular shadowing with a thick-walled cavity in the right upper zone. No pleural effusion. No mediastinal shift.",
+          "note": "Strongly supports the diagnosis, but the appearance alone is not specific enough to diagnose tuberculosis; the organism confirms it."
+        },
+        "hiv": {
+          "label": "HIV test",
+          "indicated": true,
+          "result": "Non-reactive.",
+          "note": "Sent as a routine part of every newly diagnosed TB case, since HIV is the single strongest risk factor for reactivation and would change how he is monitored."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 10.2 g/dL, normocytic normochromic. Total leucocyte count normal.",
+          "note": "An anaemia of chronic disease fitting a six-week inflammatory illness. It does not change the diagnosis, but it informs his overall assessment before treatment."
+        },
+        "sputum_culture": {
+          "label": "Sputum culture with drug-susceptibility testing",
+          "indicated": true,
+          "result": "Sent, incubating. Result expected at 6 to 8 weeks.",
+          "note": "The reference standard for viable organisms and full drug-susceptibility testing, but treatment starts now on the strength of the smear and CBNAAT rather than waiting weeks for this result."
+        },
+        "cect_thorax": {
+          "label": "Contrast-enhanced CT thorax",
+          "indicated": false,
+          "result": "Thick-walled cavity in the right upper lobe. No mass. No lymphadenopathy suspicious for malignancy.",
+          "note": "Not needed to make this diagnosis: sputum smear and CBNAAT already confirmed the organism. Ordered here from habit rather than an unanswered question, at real cost and radiation exposure."
+        },
+        "tumor_markers": {
+          "label": "Tumor marker panel, CEA",
+          "indicated": false,
+          "result": "CEA normal.",
+          "note": "There was never a genuine clinical question about malignancy here: no long smoking history of the kind that raises real suspicion, no mass, and a positive smear already explaining the picture. A marker panel added nothing."
+        },
+        "d_dimer": {
+          "label": "D-dimer",
+          "indicated": false,
+          "result": "1.1 mg/L, raised.",
+          "note": "Raised in most unwell patients and adds nothing without a clinical suspicion of pulmonary embolism, which this subacute, apical, cavitary presentation never had."
+        }
+      },
+      "differentialModel": {
+        "answer": "Pulmonary tuberculosis, right upper zone, cavitary. Consider a lung abscess, a slowly resolving bacterial pneumonia, and, particularly in an older smoker, lung cancer.",
+        "accept": [
+          "tuberculosis",
+          "tb",
+          "abscess",
+          "pneumonia",
+          "cancer",
+          "carcinoma",
+          "malignancy"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Bacteriologically confirmed pulmonary tuberculosis, right upper zone, cavitary, rifampicin sensitive.",
+        "accept": [
+          "tuberculosis",
+          "tb"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Standard first-line multidrug antituberculosis therapy for an intensive phase followed by a continuation phase, under the national programme with directly observed or closely supervised treatment, notification and contact tracing, HIV testing already done, and follow-up sputum smears to confirm bacteriological response.",
+        "accept": [
+          "multidrug",
+          "antituberculous",
+          "dots",
+          "notify",
+          "notification",
+          "contact tracing",
+          "directly observed",
+          "follow-up sputum"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you away from pneumonia before a single test is run: six weeks, not the days of an acute infection.",
+        "Evening fever, night sweats and weight loss carry more diagnostic weight as a set than any one of them does alone.",
+        "Amphoric breath sounds and increased vocal resonance over the cavity can look similar to consolidation's increased resonance, but the story around them, subacute, apical, cavitary on the film, is what tells the two apart.",
+        "No clubbing here is reassuring, its presence would suggest a complication such as bronchiectasis or an aspergilloma developing in the cavity, not straightforward tuberculosis.",
+        "Two confirmatory tests, smear and CBNAAT, were sent together rather than one after the other, since neither is sensitive enough alone and treatment should not wait for a culture that takes six to eight weeks.",
+        "HIV testing was not an afterthought here. It is sent in every new tuberculosis diagnosis because HIV is the single strongest risk factor for reactivation.",
+        "A CT scan and a tumor marker panel added nothing once sputum smear and CBNAAT had already confirmed the organism. More tests are not the same as more diagnosis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
 }

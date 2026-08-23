@@ -132,6 +132,290 @@
       "skill.exam.anemia.signs"
     ]
   },
+  "cases": [
+    {
+      "id": "case.anemia.krishnamurthy",
+      "title": "An elderly man who feels breathless climbing to his flat",
+      "opening": "Krishnamurthy Iyer, 67, has come to the medicine outpatient department with his son. He looks pale and tired, and mentions he has been avoiding the stairs to his second-floor flat. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Krishnamurthy Iyer",
+        "age": 67,
+        "sex": "male",
+        "occupation": "Retired schoolteacher",
+        "residence": "Urban, lives with his son on the second floor of an apartment building without a lift"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, I have been feeling very tired for the last two or three months, and lately I get breathless just climbing to my flat, which never used to happen.",
+          "key": true
+        },
+        "duration_severity": {
+          "cues": [
+            "how long",
+            "how severe",
+            "getting worse",
+            "since when",
+            "duration"
+          ],
+          "reply": "It has crept up slowly over two or three months. At first it was just tiredness by evening, now I get breathless and my heart races even with mild exertion.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "gi_bleeding": {
+          "cues": [
+            "black stool",
+            "blood in stool",
+            "bleeding",
+            "melena",
+            "blood in motion",
+            "stool colour"
+          ],
+          "reply": "Now that you ask, my stools have looked darker than usual for a few weeks, almost black at times. I did not think much of it.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "other_bleeding": {
+          "cues": [
+            "nosebleed",
+            "blood in urine",
+            "gums bleeding",
+            "bruising",
+            "any other bleeding"
+          ],
+          "reply": "No nosebleeds, no blood in urine, no unusual bruising.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "gi_symptoms": {
+          "cues": [
+            "stomach pain",
+            "abdominal pain",
+            "indigestion",
+            "appetite",
+            "weight loss",
+            "vomiting"
+          ],
+          "reply": "I do get a burning pain in my upper stomach sometimes, especially if I skip a meal. My appetite has been a little poor, and I think I have lost some weight, my belt is looser.",
+          "key": true
+        },
+        "drug_history": {
+          "cues": [
+            "medicine",
+            "medication",
+            "painkillers",
+            "nsaid",
+            "aspirin",
+            "tablets for pain"
+          ],
+          "reply": "I take a tablet for my knee pain most days, sometimes more than one, an over-the-counter painkiller. I have been taking it for years.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "diet": {
+          "cues": [
+            "diet",
+            "meat",
+            "green vegetables",
+            "vegetarian",
+            "eating"
+          ],
+          "reply": "I eat a mixed diet, some meat, plenty of rice. Nothing restricted about it.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "jaundice_dark_urine": {
+          "cues": [
+            "jaundice",
+            "yellow eyes",
+            "dark urine",
+            "yellowish"
+          ],
+          "reply": "No, I have not noticed any yellowness of my eyes or dark urine.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "hereditary",
+            "gallstones",
+            "anaemia in family"
+          ],
+          "reply": "No one in the family has had anaemia, jaundice or gallstones that I know of."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "kidney disease",
+            "rheumatoid",
+            "chronic disease",
+            "cancer"
+          ],
+          "reply": "I have high blood pressure, on a tablet for years. No diabetes, no kidney disease, no known cancer.",
+          "key": true
+        },
+        "bowel_habit": {
+          "cues": [
+            "bowel habit",
+            "constipation",
+            "diarrhoea",
+            "change in stool"
+          ],
+          "reply": "My bowel habit has been fairly regular, apart from the dark colour I mentioned."
+        },
+        "prior_endoscopy": {
+          "cues": [
+            "endoscopy",
+            "colonoscopy",
+            "scope",
+            "previously checked"
+          ],
+          "reply": "No, I have never had a scope done, doctor."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, mildly built, comfortable at rest. Angular stomatitis at both corners of the mouth. No visible jaundice. No lymphadenopathy.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular. Blood pressure 128/62, a wide pulse pressure. Respiratory rate 18. SpO2 98 percent on room air. A soft systolic flow murmur audible at the left sternal edge.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "Marked pallor of the conjunctivae, tongue and palmar creases, examined in good light.",
+          "abnormal": true
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing. Koilonychia present in several fingernails, with mild spooning and ridging.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema. No ascites.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "iron_studies",
+        "stool_occult_blood",
+        "upper_gi_endoscopy"
+      ],
+      "investigations": {
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 7.8 g/dL, MCV 68 fL (microcytic), MCH 21 pg. White cells and platelets normal.",
+          "note": "Confirms a moderate to severe microcytic anaemia and directs the next step of the workup toward iron studies."
+        },
+        "iron_studies": {
+          "label": "Iron studies (ferritin, serum iron, TIBC)",
+          "indicated": true,
+          "result": "Ferritin 6 ng/mL (low), serum iron low, TIBC raised, transferrin saturation 4 percent.",
+          "note": "A low ferritin confirms iron deficiency. In this age group a normal or high ferritin with microcytosis would instead have suggested thalassaemia or anaemia of chronic disease."
+        },
+        "reticulocyte_count": {
+          "label": "Reticulocyte count",
+          "indicated": true,
+          "result": "1.2 percent, appropriately low for the degree of anaemia given the chronic, gradual iron-deficient picture.",
+          "note": "More useful as a hinge test in a normocytic anaemia; here it mainly confirms the marrow is not yet mounting a strong regenerative response, consistent with a slow, ongoing loss."
+        },
+        "stool_occult_blood": {
+          "label": "Stool occult blood",
+          "indicated": true,
+          "result": "Positive.",
+          "note": "Supports a gastrointestinal source for the blood loss, in keeping with the history of dark stools and NSAID use."
+        },
+        "upper_gi_endoscopy": {
+          "label": "Upper GI endoscopy",
+          "indicated": true,
+          "result": "A chronic gastric ulcer at the antrum with a visible vessel at the base, no active bleeding at the time of the scope.",
+          "note": "In an older patient with new iron deficiency, a source must be actively found, not assumed. This is the test that found it and explains the NSAID history and the melena together."
+        },
+        "b12_folate": {
+          "label": "Serum B12 and folate",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: the anaemia is clearly microcytic on the blood count, whereas B12 and folate deficiency cause a macrocytic picture. Ordering this as a reflex here answers a question the MCV has already ruled out."
+        },
+        "haemolysis_screen": {
+          "label": "Bilirubin, LDH, haptoglobin",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: there is no jaundice, no dark urine, and no family history, so there is no clinical suspicion of haemolysis to justify this panel."
+        },
+        "colonoscopy": {
+          "label": "Colonoscopy",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated as a first step once an upper GI source with a visible vessel has already been found and explains the whole clinical picture. It would be reconsidered only if the upper endoscopy had been unrevealing."
+        }
+      },
+      "differentialModel": {
+        "answer": "Iron deficiency anaemia from chronic upper gastrointestinal blood loss, most likely an NSAID-related gastric ulcer. Consider a colonic source, anaemia of chronic disease, and thalassaemia trait as causes of microcytosis.",
+        "accept": [
+          "iron deficiency",
+          "gastrointestinal",
+          "gi bleed",
+          "ulcer",
+          "chronic disease",
+          "thalassaemia",
+          "thalassemia",
+          "colonic",
+          "malignancy"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Severe microcytic anaemia due to iron deficiency, secondary to chronic blood loss from an NSAID-related gastric ulcer, confirmed on upper GI endoscopy.",
+        "accept": [
+          "iron deficiency",
+          "microcytic anaemia",
+          "microcytic anemia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Stop the NSAID and start a proton pump inhibitor for the ulcer. Correct the iron deficiency with iron replacement, oral where tolerated, or intravenous if oral is not tolerated or the deficit is large, and transfuse only if he is symptomatic or haemodynamically unstable rather than by a haemoglobin number alone. Test for Helicobacter pylori and treat if positive. Arrange follow-up endoscopy to confirm ulcer healing, and monitor the haemoglobin and iron indices as treatment progresses.",
+        "accept": [
+          "iron replacement",
+          "iron supplementation",
+          "stop nsaid",
+          "proton pump inhibitor",
+          "ppi",
+          "transfusion",
+          "helicobacter",
+          "h pylori",
+          "follow-up endoscopy"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "A wide pulse pressure and a soft flow murmur are not a separate cardiac diagnosis here, they are the high-output state of a haemoglobin of 7.8, and should prompt you to look for a cause of anaemia, not order an echocardiogram first.",
+        "The dark stools were not volunteered. He mentioned tiredness and breathlessness as his complaint and only confirmed melena once asked specifically, which is exactly the pattern the history skill warns about.",
+        "Koilonychia and angular stomatitis are what turn a nonspecific pallor into a specific cause. Pallor alone never named iron deficiency; these two signs did.",
+        "The years of over-the-counter painkiller use is the detail that connects the history, the exam and the endoscopy into one story: NSAID gastropathy causing chronic occult blood loss.",
+        "In a man of 67 with new iron deficiency, the reflex must be to find the source, not to prescribe iron and stop there. Iron deficiency in this age group is a symptom of a bleeding source until one is found.",
+        "The reticulocyte count is doing less work in this case than it would in a normocytic anaemia. The MCV had already told the real story; the reticulocyte count here mainly confirms a slow, chronic process rather than deciding where to look next.",
+        "B12, folate and a haemolysis screen were deliberately left undone. A clearly microcytic picture with no jaundice and no family history means those tests would not have answered any real clinical question, they would only have added a panel without a plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
   "skills": {
     "skill.ix.anemia.workup": {
       "id": "skill.ix.anemia.workup",

@@ -786,5 +786,392 @@
       },
       "dosingNote": "This module teaches management at the level of drug CLASS and principle. Specific agents, routes, combinations and durations must be taken from your current national or institutional guideline and local resistance data at the time of prescribing. CliniX does not prescribe."
     }
-  }
+  },
+  "cases": [
+    {
+      "id": "case.pneumonia.anil",
+      "title": "A farmer with three days of fever and a stitch in his side",
+      "opening": "Anil Kamble, 52, has been brought to the emergency department by his son. He is flushed, breathing fast, and wincing each time he takes a deep breath. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Anil Kamble",
+        "age": 52,
+        "sex": "male",
+        "occupation": "Farmer, grows cotton and sorghum",
+        "residence": "Rural, lives with his wife and two sons"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, since three days I have high fever, a bad cough, and this sharp pain in my right side when I breathe in deeply.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "onset",
+            "since when",
+            "sudden or gradual"
+          ],
+          "reply": "It came on quite suddenly, three days ago. One evening I was fine, and by the next morning I was shivering and could not get warm.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills",
+            "rigors",
+            "shivering",
+            "how high"
+          ],
+          "reply": "It has stayed high the whole time, not really coming down between doses of paracetamol. I had one bad bout of shivering the first night.",
+          "key": true
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest",
+            "pain in the side",
+            "stitch",
+            "where is the pain",
+            "worse on breathing"
+          ],
+          "reply": "It is on the right side, low down, like a stitch. It is much worse when I breathe in deeply or cough. If I hold my breath it settles a little.",
+          "key": true
+        },
+        "cough": {
+          "cues": [
+            "cough",
+            "how long have you had the cough"
+          ],
+          "reply": "The cough started the same day as the fever, three days ago. I never usually cough.",
+          "key": true,
+          "skillId": "skill.hx.resp.cough_sputum"
+        },
+        "sputum": {
+          "cues": [
+            "sputum",
+            "phlegm",
+            "bring anything up",
+            "spit",
+            "what colour",
+            "colour of",
+            "rusty"
+          ],
+          "reply": "Yes, I am bringing up sputum, it looks rust-coloured, almost like dried blood mixed in with it.",
+          "key": true
+        },
+        "haemoptysis": {
+          "cues": [
+            "blood",
+            "haemoptysis",
+            "hemoptysis",
+            "cough up blood",
+            "coughing blood"
+          ],
+          "reply": "No fresh blood, just this rusty colour in the phlegm since yesterday.",
+          "key": true
+        },
+        "breathlessness": {
+          "cues": [
+            "breathless",
+            "short of breath",
+            "difficulty breathing",
+            "breathing fast"
+          ],
+          "reply": "Yes, I feel breathless, especially when I try to walk to the toilet. Sitting still it is a little easier.",
+          "key": true,
+          "skillId": "skill.hx.resp.dyspnea"
+        },
+        "confusion": {
+          "cues": [
+            "confused",
+            "drowsy",
+            "not himself",
+            "memory",
+            "alert"
+          ],
+          "reply": "My son says I have been myself, just tired and unwell, not confused.",
+          "key": true
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight",
+            "eating",
+            "over the last months"
+          ],
+          "reply": "My appetite has been fine until these three days. I have not lost any weight before this, my clothes still fit the same.",
+          "key": true
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis",
+            "tb",
+            "contact with tb",
+            "anyone with a chronic cough",
+            "night sweats",
+            "evening fever"
+          ],
+          "reply": "No, nobody at home has TB or a long-standing cough. And I have not had this kind of fever pattern before, this only started three days back.",
+          "key": true,
+          "skillId": "skill.hx.tb.exposure"
+        },
+        "smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "bidi",
+            "tobacco"
+          ],
+          "reply": "No, I have never smoked.",
+          "key": true,
+          "skillId": "skill.hx.resp.smoking"
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking"
+          ],
+          "reply": "I drink occasionally at festivals, nothing regular."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "heart",
+            "past illness",
+            "other illness",
+            "kidney"
+          ],
+          "reply": "No diabetes, no blood pressure problems. I have never been admitted to hospital before this.",
+          "key": true
+        },
+        "prior_episodes": {
+          "cues": [
+            "pneumonia before",
+            "chest infection before",
+            "similar illness before",
+            "hospital before"
+          ],
+          "reply": "No, this has never happened to me before.",
+          "key": true
+        },
+        "medications": {
+          "cues": [
+            "medicine",
+            "medication",
+            "drugs",
+            "taking anything",
+            "steroids",
+            "immunosuppressant"
+          ],
+          "reply": "Just paracetamol tablets since yesterday, nothing else regularly.",
+          "key": true,
+          "skillId": "skill.hx.resp.drug"
+        },
+        "vaccination": {
+          "cues": [
+            "vaccine",
+            "vaccination",
+            "pneumonia vaccine",
+            "flu shot",
+            "immunised"
+          ],
+          "reply": "No, I have never had any vaccination for the chest, doctor."
+        },
+        "occupation_exposure": {
+          "cues": [
+            "your work",
+            "what work",
+            "job",
+            "occupation",
+            "dust",
+            "fumes",
+            "exposure"
+          ],
+          "reply": "I work in the fields, mostly outdoors. No factory dust or fumes."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "anyone else sick",
+            "household",
+            "hereditary"
+          ],
+          "reply": "Nobody else at home is unwell right now."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Flushed and unwell-looking, lying still on the right side to splint the chest wall. Breathing rapidly and shallowly, guarding the right lower chest with each breath.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 39.2 C. Respiratory rate 28 per minute. Pulse 110 regular. Blood pressure 112/72. SpO2 92 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central or peripheral cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.resp.inspection": {
+          "finding": "Visibly reduced movement of the right lower chest wall compared with the left. No accessory muscle use. No chest wall deformity.",
+          "abnormal": true
+        },
+        "skill.exam.resp.trachea": {
+          "finding": "Trachea central.",
+          "abnormal": false
+        },
+        "skill.exam.resp.expansion": {
+          "finding": "Chest expansion reduced on the right, localised to the lower zone. Left side normal.",
+          "abnormal": true
+        },
+        "skill.exam.resp.percussion": {
+          "finding": "Dull, woody note over the right lower zone posteriorly. Resonant elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.resp.auscultation": {
+          "finding": "Bronchial breathing over the right lower zone. Normal vesicular breathing elsewhere. No prolonged expiration.",
+          "abnormal": true
+        },
+        "skill.exam.resp.added_sounds": {
+          "finding": "Coarse crackles over the right lower zone, not clearing with cough. No wheeze.",
+          "abnormal": true
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "finding": "Increased vocal resonance over the right lower zone, with whispering pectoriloquy. Normal elsewhere.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cxr",
+        "fbc",
+        "urea",
+        "sputumcx",
+        "bloodcx"
+      ],
+      "investigations": {
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Right lower zone dense, homogeneous opacity with air bronchograms. No effusion. No cavitation. Heart borders and mediastinum normal.",
+          "note": "This confirms the new infiltrate the clinical picture already predicted, it is the second half of the diagnosis, not the first."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 13.4 g/dL. Total leucocyte count 16,800 per mm3 with 82 percent neutrophils.",
+          "note": "A neutrophil leucocytosis fits an acute bacterial process and helps grade how unwell he is."
+        },
+        "urea": {
+          "label": "Urea and electrolytes",
+          "indicated": true,
+          "result": "Urea 46 mg/dL, approximately 7.7 mmol/L. Creatinine 1.0 mg/dL. Sodium 133 mmol/L.",
+          "note": "Urea above 7 mmol/L is one CURB-65 point on its own, independent of how well he looks."
+        },
+        "sputumcx": {
+          "label": "Sputum Gram stain and culture",
+          "indicated": true,
+          "result": "Sent before the first antibiotic dose. Gram-positive diplococci seen on smear. Culture pending.",
+          "note": "Worth sending in a patient this unwell, but sending it must never delay the first dose of antibiotic."
+        },
+        "bloodcx": {
+          "label": "Blood cultures",
+          "indicated": true,
+          "result": "Sent, two sets. Result pending at 48 hours.",
+          "note": "Reasonable before the first antibiotic dose in a patient this febrile, again without delaying treatment."
+        },
+        "sputum_afb": {
+          "label": "Sputum for acid-fast bacilli",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated as a first step here: this is a three-day acute illness with lobar consolidation and rusty sputum, not the weeks-long subacute course, evening fever and weight loss that would raise tuberculosis. It stays on the list to reconsider only if he fails to improve."
+        },
+        "ctpa": {
+          "label": "CT pulmonary angiogram",
+          "indicated": false,
+          "result": "No embolus. Right lower lobe consolidation confirmed.",
+          "note": "Not indicated: he has no risk factors for venous thromboembolism, and the pleuritic pain has a straightforward explanation in the consolidation right under it. Ordered from reflex pattern-matching on pleuritic pain, at the cost of a contrast load he did not need."
+        },
+        "hiv": {
+          "label": "HIV test",
+          "indicated": false,
+          "result": "Negative.",
+          "note": "Not indicated as a universal reflex screen. It is appropriate when risk factors are present or the illness or its severity is otherwise unexplained, neither of which applies here."
+        }
+      },
+      "differentialModel": {
+        "answer": "Community-acquired pneumonia, right lower lobe. Consider pulmonary tuberculosis, pulmonary embolism with infarction, a lung abscess, and a parapneumonic effusion.",
+        "accept": [
+          "pneumonia",
+          "tuberculosis",
+          "tb",
+          "embolism",
+          "abscess",
+          "effusion",
+          "malignancy",
+          "heart failure"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Community-acquired pneumonia, right lower lobe, CURB-65 score 1.",
+        "accept": [
+          "pneumonia",
+          "cap"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Oxygen to correct the hypoxaemia, prompt empirical antibiotics chosen by severity and covering the likely organisms, antipyretics and fluids, review at 48 to 72 hours, and a follow-up chest radiograph at about six weeks to confirm the pneumonia has cleared.",
+        "accept": [
+          "oxygen",
+          "antibiotic",
+          "review",
+          "48",
+          "72",
+          "follow-up",
+          "chest radiograph",
+          "fluids"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The tempo alone should move you towards an acute infective process before a single test is run: three days, not the weeks of tuberculosis or the years of a chronic airway disease.",
+        "Increased vocal resonance with bronchial breathing over stony-sounding dullness is what separates consolidation from an effusion at the same base. Both are dull; they move the voice in opposite directions.",
+        "The trachea stayed central. Deviation here would mean something else has happened, usually a coexisting effusion or a mucus-plug collapse, and would need explaining.",
+        "Rusty sputum is a classic clue pointing towards pneumococcal disease, though the diagnosis never depends on identifying the organism before treating.",
+        "Urea crossing 7 mmol/L is one CURB-65 point in its own right, independent of how unwell he looks on the bed, which is why the score is calculated rather than eyeballed.",
+        "No clubbing, no weeks-long cough, and no weight loss beforehand: these negatives argue against tuberculosis and malignancy without needing further tests to invoke them.",
+        "Sending cultures should never delay the first antibiotic dose. His fever was already 39.2 C when he was seen, and that first dose matters more than any pending result."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
 }

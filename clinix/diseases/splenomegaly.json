@@ -125,6 +125,194 @@
       }
     ]
   },
+  "cases": [
+    {
+      "id": "case.splenomegaly.devendra",
+      "title": "A man whose belly feels full after a few bites",
+      "opening": "Devendra Naik, 45, has come to the medical outpatient department complaining of a dragging discomfort in his left upper abdomen. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Devendra Naik",
+        "age": 45,
+        "sex": "male",
+        "occupation": "Shopkeeper",
+        "residence": "Urban, lives with his wife and children"
+      },
+      "history": {
+        "presenting": {
+          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help"],
+          "reply": "Doctor, for about three months I have had a dragging, heavy feeling on my left side, and I feel full after just a few bites of food.",
+          "key": true
+        },
+        "early_satiety": {
+          "cues": ["early satiety", "full quickly", "how much can you eat", "appetite", "fullness"],
+          "reply": "I used to finish a full plate. Now I feel completely full after half of it, and my stomach feels tight.",
+          "key": true
+        },
+        "duration": {
+          "cues": ["how long", "when did it start", "onset", "since when"],
+          "reply": "It has been coming on slowly over about three months. It was not sudden."
+        },
+        "b_symptoms": {
+          "cues": ["weight loss", "night sweats", "fever", "drenching sweats"],
+          "reply": "I have lost around six kilos without trying. I also wake up drenched in sweat most nights, and I have had low fevers on and off.",
+          "key": true,
+          "skillId": "skill.hx.gi.splenomegaly"
+        },
+        "fatigue": {
+          "cues": ["tiredness", "fatigue", "weakness", "energy", "breathless"],
+          "reply": "I feel tired all the time, and I get breathless doing things that never used to bother me."
+        },
+        "bleeding": {
+          "cues": ["bruising", "bleeding gums", "bleeding", "cuts take long to stop"],
+          "reply": "No unusual bruising or bleeding that I have noticed.",
+          "key": true,
+          "skillId": "skill.hx.gi.splenomegaly"
+        },
+        "bone_pain": {
+          "cues": ["bone pain", "joint pain", "pain in the bones"],
+          "reply": "Actually yes, my sternum and shins have been aching in a way I cannot quite explain, especially at night."
+        },
+        "lymph_nodes": {
+          "cues": ["lumps", "lymph nodes", "swelling elsewhere", "neck swelling", "groin swelling"],
+          "reply": "No, I have not noticed any lumps in my neck, armpits or groin."
+        },
+        "shoulder_pain": {
+          "cues": ["left shoulder", "shoulder tip pain", "referred pain"],
+          "reply": "No pain in my shoulder, just the dragging feeling in my side."
+        },
+        "alcohol_jaundice": {
+          "cues": ["alcohol", "jaundice", "yellow eyes", "liver disease"],
+          "reply": "I do not drink alcohol, and I have never had yellow eyes or been told I have liver disease.",
+          "key": true
+        },
+        "travel_malaria": {
+          "cues": ["travel", "malaria", "kala-azar", "endemic area"],
+          "reply": "No recent travel outside the city, and I have not had malaria before that I know of."
+        },
+        "infections": {
+          "cues": ["frequent infections", "recurrent infections", "falling sick often"],
+          "reply": "I have not had unusual infections, no."
+        },
+        "family": {
+          "cues": ["family history", "hereditary", "blood disorder in family"],
+          "reply": "No one in my family has had a blood disorder that I know of."
+        },
+        "drug_history": {
+          "cues": ["medicine", "medication", "taking anything"],
+          "reply": "I only take a painkiller occasionally for the bone ache. Nothing regular."
+        },
+        "allergy": {
+          "cues": ["allergy", "allergic", "reaction to any"],
+          "reply": "No allergies."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Mildly pale, comfortable at rest. No palpable lymphadenopathy in the neck, axillae or groin. No stigmata of chronic liver disease.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 92 regular. Blood pressure 118/76. Respiratory rate 18. Temperature 37.6 C.",
+          "abnormal": false
+        },
+        "skill.gen.pallor": {
+          "finding": "Moderate conjunctival and palmar crease pallor.",
+          "abnormal": true
+        },
+        "skill.exam.gi.spleen": {
+          "finding": "A firm, non-tender mass palpable in the left upper quadrant, extending 11 cm below the costal margin, crossing the midline, with a notch felt on its medial border. Moves with respiration, cannot get above it, dull to percussion in front (Hackett grade 4 to 5).",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver": {
+          "finding": "Liver edge palpable 2 cm below the right costal margin, firm, smooth, non-tender, span 14 cm.",
+          "abnormal": true
+        },
+        "skill.exam.gi.spleen_cause": {
+          "finding": "Massive splenomegaly without lymphadenopathy and without stigmata of chronic liver disease, alongside a mildly enlarged liver, pallor and constitutional symptoms. The pattern favours a myeloproliferative process over a lymphoproliferative or portal hypertensive one.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": ["cbc_smear", "bcr_abl", "usg_abdomen", "ldh_uric_acid", "bone_marrow"],
+      "investigations": {
+        "cbc_smear": {
+          "label": "Full blood count with peripheral smear",
+          "indicated": true,
+          "result": "White cell count 186 x10^9/L with a full spectrum of myeloid precursors including myelocytes and metamyelocytes, basophilia present. Haemoglobin 9.8 g/dL. Platelets 520 x10^9/L.",
+          "note": "A leucoerythroblastic picture with basophilia and the full myeloid spectrum, rather than a single blast population, is the classic smear pattern of chronic myeloid leukaemia."
+        },
+        "bcr_abl": {
+          "label": "BCR-ABL1 by PCR / cytogenetics for the Philadelphia chromosome",
+          "indicated": true,
+          "result": "BCR-ABL1 positive.",
+          "note": "This is the confirmatory test: it names the disease rather than only describing a pattern."
+        },
+        "usg_abdomen": {
+          "label": "Ultrasound abdomen",
+          "indicated": true,
+          "result": "Spleen 19 cm in length, homogeneous echotexture, no focal lesion. Mild hepatomegaly. Portal vein normal calibre and flow. No ascites.",
+          "note": "Confirms the size objectively and, importantly, shows a normal portal vein, arguing against a portal hypertensive cause for this degree of splenomegaly."
+        },
+        "ldh_uric_acid": {
+          "label": "LDH and serum uric acid",
+          "indicated": true,
+          "result": "LDH markedly raised. Uric acid raised at 9.2 mg/dL.",
+          "note": "Both reflect the high cell turnover of a myeloproliferative process and matter practically because of the tumour lysis and gout risk once treatment starts."
+        },
+        "bone_marrow": {
+          "label": "Bone marrow aspirate and biopsy",
+          "indicated": true,
+          "result": "Hypercellular marrow with myeloid hyperplasia, blast count under 5 percent, consistent with chronic phase disease.",
+          "note": "Establishes the phase of the disease, chronic rather than accelerated or blast phase, which changes the urgency and the treatment plan."
+        },
+        "malaria_smear": {
+          "label": "Peripheral smear / rapid antigen for malaria",
+          "indicated": false,
+          "result": "Negative.",
+          "note": "Not indicated as a leading test here: there is no fever pattern typical of malaria and no recent travel to an endemic area, and the smear already shows a myeloid leukaemic picture rather than parasitised red cells."
+        },
+        "ana": {
+          "label": "Antinuclear antibody",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "No joint pain, rash or photosensitivity was elicited, so there was no real clinical question to ask a connective tissue disease panel here."
+        },
+        "viral_hep_serology": {
+          "label": "Viral hepatitis serology",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "There is no jaundice, no alcohol history and a normal portal vein on imaging, so a hepatic or portal hypertensive workup was not the leading question."
+        }
+      },
+      "differentialModel": {
+        "answer": "Massive splenomegaly due to chronic myeloid leukaemia. Consider myelofibrosis, kala-azar, primary splenic lymphoma, and portal hypertension from extrahepatic portal vein thrombosis.",
+        "accept": ["chronic myeloid leukaemia", "cml", "myelofibrosis", "kala-azar", "lymphoma", "portal hypertension"],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Chronic myeloid leukaemia, chronic phase, with massive splenomegaly (Hackett grade 4 to 5), confirmed on peripheral smear and BCR-ABL1 positivity.",
+        "accept": ["chronic myeloid leukaemia", "cml"],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Start a tyrosine kinase inhibitor as first-line therapy once the phase of disease is confirmed, with haematology referral for ongoing molecular monitoring. Hydration and a xanthine oxidase inhibitor to cover the tumour lysis and hyperuricaemia risk before treatment begins. Advise against contact sports or anything risking abdominal trauma given the size and fragility of the spleen. Reserve splenectomy for a massive, symptomatic spleen that fails to respond to treatment, not as a routine step.",
+        "accept": ["tyrosine kinase inhibitor", "imatinib", "hydration", "allopurinol", "tumour lysis", "haematology referral", "avoid trauma"],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Early satiety and left-sided dragging discomfort, without pain radiating to the shoulder, is the typical presentation of a slowly enlarging mass rather than an acute event like a splenic infarct.",
+        "The absence of palpable lymphadenopathy, despite a massively enlarged spleen, is itself discriminating: a lymphoproliferative process usually announces itself with nodes, and its absence here shifts weight towards a myeloproliferative cause.",
+        "B symptoms, weight loss, night sweats and low fevers, were present and screened for deliberately. Without asking, they are easy to attribute to 'just being unwell' rather than recognised as a specific pattern.",
+        "The spleen crossing the midline with a palpable notch is what confirms this is genuinely massive and genuinely the spleen, not an enlarged left kidney or another mass.",
+        "Mild hepatomegaly alongside the massive spleen is a real and expected finding in chronic myeloid leukaemia, not an incidental second diagnosis to chase separately.",
+        "A normal portal vein on Doppler ultrasound is doing real negative work: it argues against portal hypertension as the explanation for a spleen this size, even though portal hypertension is a common textbook cause of splenomegaly in general.",
+        "Vague sternal and shin ache, easy to dismiss as unrelated, reflects marrow expansion from the myeloproliferative process itself and fits the same diagnosis as the spleen and the blood count."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
   "viva": {
     "skills": [
       "skill.exam.gi.spleen",

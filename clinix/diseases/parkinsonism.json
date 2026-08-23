@@ -143,6 +143,276 @@
       "skill.pd.differential"
     ]
   },
+  "cases": [
+    {
+      "id": "case.parkinsonism.subhash",
+      "title": "A retired clerk whose handwriting has shrunk",
+      "opening": "Subhash Rao, 68, has come to the neurology outpatient department with his daughter. He sits quietly in the chair with his right hand resting and trembling gently in his lap, his face still and unblinking. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Subhash Rao",
+        "age": 68,
+        "sex": "male",
+        "occupation": "Retired bank clerk",
+        "residence": "Urban, lives with his wife and daughter"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, my daughter noticed my right hand shaking about a year ago, when I am just sitting. Lately I have also become slow, and my handwriting has become very small.",
+          "key": true
+        },
+        "tremor_character": {
+          "cues": [
+            "when is the tremor",
+            "at rest",
+            "using the hand",
+            "does it go away",
+            "when you move",
+            "worse when"
+          ],
+          "reply": "It is worst when my hand is just resting on my lap or the armrest, doctor. If I pick up my tea cup, it almost stops.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "tremor_side": {
+          "cues": [
+            "which side",
+            "started on",
+            "one side",
+            "other side",
+            "both sides",
+            "spread"
+          ],
+          "reply": "It started in my right hand only. In the last two or three months my left hand has started doing it a little too, but the right is still much worse.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "slowness": {
+          "cues": [
+            "slow",
+            "slower",
+            "buttoning",
+            "everyday tasks",
+            "handwriting",
+            "small writing",
+            "micrographia"
+          ],
+          "reply": "Everything takes longer now. Buttoning my shirt, getting up from the chair. My daughter says my handwriting has become tiny, I did not notice it myself until she showed me an old letter.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "gait_voice_face": {
+          "cues": [
+            "walking",
+            "voice",
+            "face",
+            "expressive",
+            "changed",
+            "falls"
+          ],
+          "reply": "My wife says I walk with smaller steps now and that my face does not show expression the way it used to. My voice has become a bit softer too. I have not fallen.",
+          "key": true
+        },
+        "drug_history": {
+          "cues": [
+            "medicine",
+            "medication",
+            "taking anything",
+            "nausea",
+            "vomiting",
+            "psychiatric",
+            "tablets"
+          ],
+          "reply": "No, I am not on any tablet for vomiting or for my nerves. Only a tablet for blood pressure, been on it for ten years, no change recently.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "autonomic": {
+          "cues": [
+            "fainting",
+            "lightheaded",
+            "dizzy on standing",
+            "constipation",
+            "urinary",
+            "bladder"
+          ],
+          "reply": "I do get a little constipated, doctor, but no fainting or dizziness when I stand up. No trouble with urination.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "smell": {
+          "cues": [
+            "smell",
+            "sense of smell",
+            "hyposmia"
+          ],
+          "reply": "Now that you ask, my sense of smell has been poor for a few years, even before the shaking started. I thought it was just old age."
+        },
+        "mood_sleep": {
+          "cues": [
+            "mood",
+            "depression",
+            "sleep",
+            "acting out dreams",
+            "anxious"
+          ],
+          "reply": "I have felt a bit low sometimes, but nothing I would call depression. My sleep is alright, though my wife says I sometimes talk in my sleep."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "father",
+            "mother",
+            "hereditary",
+            "anyone else",
+            "tremor in family"
+          ],
+          "reply": "No one else in the family has had a tremor or Parkinson's that I know of.",
+          "key": true,
+          "skillId": "skill.hx.pd"
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "past illness",
+            "operations",
+            "thyroid"
+          ],
+          "reply": "Just the blood pressure, well controlled. No diabetes, no thyroid problem, no operations."
+        },
+        "functional_impact": {
+          "cues": [
+            "manage at home",
+            "independent",
+            "help with",
+            "daily activities",
+            "work"
+          ],
+          "reply": "I can still dress and eat by myself, just slower. I retired eight years ago, well before any of this started, so it has not affected my work.",
+          "key": true
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Mask-like facial expression with reduced blinking. Stooped posture. Right hand shows a 4 to 6 Hz resting tremor with a pill-rolling character that reduces on voluntary movement. Reduced spontaneous movement generally.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 132/82 lying, 126/78 standing after two minutes, no symptomatic drop. Pulse 78 regular. No postural symptoms.",
+          "abnormal": false
+        },
+        "skill.exam.neuro.tone_power": {
+          "finding": "Lead-pipe rigidity at both wrists, right more than left, with a superimposed cogwheel quality on the right when the other limb is moved. Power full and symmetrical in all limbs, 5/5 throughout.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.gait": {
+          "finding": "Stooped, shuffling gait with small, flat-footed steps. Reduced right arm swing, left relatively preserved. Slow to initiate the first step. No freezing observed. Mild retropulsion on the pull test, recovers in two steps.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "clinical_diagnosis",
+        "drug_review",
+        "mri_brain"
+      ],
+      "investigations": {
+        "clinical_diagnosis": {
+          "label": "Clinical assessment (history and examination)",
+          "indicated": true,
+          "result": "Asymmetric-onset rest tremor, rigidity and bradykinesia with a shuffling gait and no red flags for a secondary cause or Parkinson-plus syndrome.",
+          "note": "This is what makes the diagnosis. Idiopathic Parkinson's disease has no confirmatory blood test or routine scan."
+        },
+        "drug_review": {
+          "label": "Medication review",
+          "indicated": true,
+          "result": "No dopamine receptor blocking drugs, antiemetics or antipsychotics in the current or recent drug history.",
+          "note": "Excludes drug-induced parkinsonism, which is reversible and the single most important mimic to rule out."
+        },
+        "orthostatic_bp": {
+          "label": "Lying and standing blood pressure",
+          "indicated": true,
+          "result": "No significant postural drop.",
+          "note": "Screens for early, prominent autonomic failure, which would raise multiple system atrophy instead of idiopathic disease."
+        },
+        "mri_brain": {
+          "label": "MRI brain",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated here: no red flags such as early falls, prominent early autonomic failure, or marked early symmetry. Imaging is reserved for atypical features, not ordered as a routine confirmatory test in a classic presentation."
+        },
+        "serum_ceruloplasmin": {
+          "label": "Serum caeruloplasmin",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated at 68 years old. This test is for Wilson's disease, which is a consideration in a new movement disorder under about 40, not here."
+        },
+        "dopaminergic_trial": {
+          "label": "Trial of dopaminergic therapy",
+          "indicated": false,
+          "result": "Not yet started.",
+          "note": "A sustained response would support the diagnosis, but this is a therapeutic decision for the treating specialist, not a bedside confirmatory test to order today."
+        }
+      },
+      "differentialModel": {
+        "answer": "Idiopathic Parkinson's disease. Consider drug-induced parkinsonism, vascular parkinsonism, essential tremor and a Parkinson-plus syndrome such as progressive supranuclear palsy or multiple system atrophy.",
+        "accept": [
+          "parkinson",
+          "drug-induced",
+          "vascular",
+          "essential tremor",
+          "progressive supranuclear",
+          "multiple system atrophy",
+          "parkinson-plus"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Idiopathic Parkinson's disease, asymmetric right-sided rest tremor, rigidity and bradykinesia with no red flags for a secondary cause or Parkinson-plus syndrome, functionally Hoehn and Yahr stage II.",
+        "accept": [
+          "parkinson",
+          "idiopathic"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Confirm the diagnosis clinically, actively exclude a drug cause and red flags for Parkinson-plus disease, then start dopaminergic therapy chosen for his age and functional needs. Alongside drug treatment: patient and family education, physiotherapy and gait training, a falls-risk assessment, and screening for non-motor features such as constipation, mood and sleep. Regular review to track progression and treatment response.",
+        "accept": [
+          "dopaminergic",
+          "levodopa",
+          "physiotherapy",
+          "education",
+          "falls",
+          "non-motor",
+          "review",
+          "gait training"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The story is told before he says a word: an unblinking face and a hand trembling at rest while he sits waiting. Observation starts the moment you see the patient, not when you start asking questions.",
+        "Asymmetry is the single most useful early feature here. It began in the right hand alone and only recently touched the left, which is exactly the pattern idiopathic disease should follow, and it argues against a Parkinson-plus syndrome or a toxic cause that would usually be symmetrical from the start.",
+        "The tremor going quiet when he lifts his tea cup is not a trivial detail, it is the defining behaviour of a rest tremor, and distinguishes it immediately from an action or intention tremor.",
+        "Power is completely normal. Rigidity and bradykinesia can look like weakness to an unwary student, but this is a movement disorder, not a motor neurone or muscle problem, and confirming full power is part of making the diagnosis, not an afterthought.",
+        "Hyposmia for years before the tremor, and sleep talking his wife noticed, are non-motor features that predated the motor disease. They matter both diagnostically and because they affect his life as much as the shaking does.",
+        "A completely normal drug history and no postural drop are not throwaway negatives. They are what let you commit to idiopathic disease rather than a reversible or Parkinson-plus alternative.",
+        "There is no scan or blood test that confirms this diagnosis. The MRI and the caeruloplasmin were left undone deliberately, because nothing in this history or exam suggested reaching for them."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
   "skills": {
     "skill.pd.basics": {
       "id": "skill.pd.basics",

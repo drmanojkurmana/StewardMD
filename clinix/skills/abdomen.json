@@ -2490,6 +2490,316 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.exam.gi.dre": {
+      "id": "skill.exam.gi.dre",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Digital rectal examination",
+      "oneLine": "Sphincter tone, the prostate, and what is on the glove",
+      "why": "A DRE that is never performed cannot find what it is looking for. It is skipped more often than any other part of the abdominal examination, yet it answers real questions a history alone cannot: is there fresh or altered blood, is the sphincter intact, is the prostate benign or suspicious, and is there a low rectal mass within reach of a finger.",
+      "steps": [
+        {
+          "text": "Explain the examination clearly, obtain explicit consent, and offer a chaperone regardless of the patient's or examiner's sex."
+        },
+        {
+          "text": "Position the patient in the left lateral position, hips and knees flexed, buttocks at the edge of the bed."
+        },
+        {
+          "text": "Inspect the perianal skin first: for fissures, external haemorrhoids, fistulae, skin tags, or a visible mass, before touching the patient."
+        },
+        {
+          "text": "Lubricate a gloved index finger and rest it on the anal margin; ask the patient to bear down gently, then insert slowly, following the natural posterior curve of the anal canal."
+        },
+        {
+          "text": "Assess resting sphincter tone, then ask the patient to squeeze around your finger to assess voluntary tone."
+        },
+        {
+          "text": "Sweep the finger circumferentially, feeling all quadrants of the rectal wall for a mass, and anteriorly for the prostate (male) or cervix (female)."
+        },
+        {
+          "text": "In a male patient, assess the prostate specifically: size, surface (smooth or nodular), consistency (firm or hard), symmetry, and whether the median sulcus is preserved."
+        },
+        {
+          "text": "Withdraw and inspect the glove: for stool colour and consistency, fresh blood, melaena, or mucus."
+        }
+      ],
+      "normal": "Normal sphincter tone. No mass, fissure, or haemorrhoid felt. Prostate (if assessed) smooth, firm, symmetrical, non-tender, with the median sulcus palpable. Glove clean or with normal-coloured stool, no blood.",
+      "abnormal": "Reduced sphincter tone (a cord-compression or cauda equina red flag). A hard, irregular, asymmetric prostate with the sulcus obliterated. A palpable rectal mass. Fresh blood, melaena, or mucus on the glove.",
+      "significance": "This single examination answers several different questions depending on why it was performed: sphincter tone in a patient with a possible cord or cauda equina lesion, a mass or blood in a patient with a change in bowel habit or PR bleeding, and the prostate's surface and consistency in a man with urinary symptoms. Read the finding in the context of why you did the test, not as a single generic 'PR exam normal/abnormal'.",
+      "teach": [
+        {
+          "heading": "Benign prostatic hyperplasia versus prostate cancer, by feel",
+          "table": {
+            "cols": [
+              "",
+              "BPH",
+              "Cancer"
+            ],
+            "rows": [
+              [
+                "Surface",
+                "Smooth",
+                "Nodular, irregular"
+              ],
+              [
+                "Consistency",
+                "Firm, rubbery",
+                "Hard, stony"
+              ],
+              [
+                "Symmetry",
+                "Symmetrically enlarged",
+                "Often asymmetric"
+              ],
+              [
+                "Median sulcus",
+                "Preserved",
+                "May be obliterated"
+              ]
+            ]
+          },
+          "note": "DRE alone is not sensitive enough to exclude prostate cancer; a suspicious feel is an indication for further workup (PSA, imaging, biopsy), not a diagnosis on its own."
+        },
+        {
+          "heading": "Sphincter tone is a cord-compression red flag, not just a bowel-habit check",
+          "body": "In a patient with back pain and leg weakness, reduced anal tone plus saddle sensory loss and urinary retention is cauda equina syndrome until proven otherwise - a surgical emergency needing urgent imaging, not a routine finding to note and move on from.",
+          "note": "This links directly to the sphincter-history question already taught in the cord-compression module - the exam finding and the history question are testing the same red flag."
+        }
+      ],
+      "pitfalls": [
+        "Skipping the examination altogether because it is uncomfortable to perform or to ask for - a change in bowel habit, PR bleeding, or a possible cord lesion cannot be safely assessed without it.",
+        "Not offering a chaperone, or not explaining the examination clearly before starting.",
+        "Reporting 'DRE normal' without stating what was actually assessed (tone, mass, prostate, blood) - a generic normal tells the next reader nothing.",
+        "Missing reduced sphincter tone in a patient with cord compression, because the exam was rushed or was not linked back to the sphincter-history question."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must you obtain before performing a digital rectal examination, beyond consent for the exam itself?",
+          "a": "An offer of a chaperone, regardless of the sex of the patient or examiner.",
+          "accept": [
+            "chaperone"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A prostate feels hard, irregular, and asymmetric with the median sulcus obliterated. What does this suggest, versus a smooth, firm, symmetrically enlarged prostate?",
+          "a": "A hard, irregular, asymmetric prostate with the sulcus obliterated raises suspicion of prostate cancer and needs further workup; a smooth, firm, symmetrically enlarged prostate is the classic feel of benign prostatic hyperplasia.",
+          "accept": [
+            "cancer",
+            "malignant",
+            "bph",
+            "benign"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "In a patient with back pain and leg weakness, why is sphincter tone on DRE assessed urgently rather than left for a routine review?",
+          "a": "Reduced anal tone, together with saddle sensory loss and urinary retention, points to cauda equina syndrome, a surgical emergency needing urgent imaging and decompression, not a routine finding.",
+          "accept": [
+            "cauda equina",
+            "emergency",
+            "urgent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "consent",
+          "text": "Explains the examination and obtains consent, offering a chaperone",
+          "critical": true
+        },
+        {
+          "id": "tone",
+          "text": "Assesses resting and voluntary sphincter tone"
+        },
+        {
+          "id": "glove",
+          "text": "Inspects the glove for blood, melaena, or mucus"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: digital rectal examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: rectal examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: per rectal examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.hernia": {
+      "id": "skill.exam.gi.hernia",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Examination of a hernia",
+      "oneLine": "Site, reducibility, cough impulse, and the emergency features that change the plan",
+      "why": "Most of what matters in a hernia examination is not naming the swelling but answering one question fast: is this reducible and asymptomatic, or is it irreducible, obstructed, or strangulated. The second group is a surgical emergency, and missing it because the exam stopped at 'cough impulse present' is a real and avoidable error.",
+      "steps": [
+        {
+          "text": "Inspect with the patient STANDING first, since a small hernia may reduce and disappear when lying flat."
+        },
+        {
+          "text": "Note the site, size, shape, and whether the overlying skin is normal, red, or discoloured."
+        },
+        {
+          "text": "Ask the patient to cough, or to strain, and watch for an expansile impulse at the swelling."
+        },
+        {
+          "text": "Palpate: define the swelling's borders, its consistency, and whether it is tender."
+        },
+        {
+          "text": "Attempt gentle reduction (only if not tender, not red, and not suspected to be strangulated): ask whether it goes back on its own lying down, or reduce it gently with sustained pressure."
+        },
+        {
+          "text": "For an inguinal hernia: after reduction, occlude the deep inguinal ring (midpoint of the inguinal ligament) with a finger and ask the patient to cough again. Controlled by occlusion, it is INDIRECT; still appearing despite occlusion, it is DIRECT."
+        },
+        {
+          "text": "Determine the relationship to the pubic tubercle: above and medial is inguinal; below and lateral is femoral."
+        },
+        {
+          "text": "Auscultate over the swelling for bowel sounds, which supports bowel as the contents."
+        },
+        {
+          "text": "Examine the contralateral side and the rest of the abdomen, and always complete the examination by examining both testes when assessing a groin swelling in a male."
+        }
+      ],
+      "normal": "No swelling on standing or with cough/strain. If a hernia is present but this is a screening exam, no reducible or expansile swelling is felt.",
+      "abnormal": "A swelling with an expansile cough impulse, reducible or otherwise. Tenderness, redness of the overlying skin, or a swelling that will not reduce all point towards a complication rather than a simple reducible hernia.",
+      "significance": "The occlusion test at the deep ring separates indirect from direct inguinal hernia; the relationship to the pubic tubercle separates inguinal from femoral. Both matter for planning surgery, but neither matters as much as first recognising a complicated hernia, which changes the plan from elective review to same-day surgical assessment.",
+      "teach": [
+        {
+          "heading": "Irreducible, obstructed, strangulated: escalating emergencies, not one category",
+          "table": {
+            "cols": [
+              "",
+              "Irreducible",
+              "Obstructed",
+              "Strangulated"
+            ],
+            "rows": [
+              [
+                "Reduces?",
+                "No, but otherwise well",
+                "No",
+                "No"
+              ],
+              [
+                "Bowel obstruction?",
+                "No",
+                "Yes - vomiting, distension, absolute constipation",
+                "Yes, plus vascular compromise"
+              ],
+              [
+                "Overlying skin",
+                "Normal",
+                "Normal or mildly tender",
+                "Red, tense, exquisitely tender"
+              ],
+              [
+                "Urgency",
+                "Urgent surgical review",
+                "Emergency",
+                "Immediate emergency"
+              ]
+            ]
+          },
+          "note": "A strangulated hernia is a surgical emergency: the bowel's blood supply is compromised and will become gangrenous if not operated on promptly. Do NOT attempt to forcibly reduce a tender, red, irreducible hernia - this can push non-viable or perforated bowel back into the abdomen."
+        },
+        {
+          "heading": "Indirect versus direct, by the occlusion test",
+          "body": "An INDIRECT inguinal hernia follows the inguinal canal through the deep ring, so occluding the deep ring with a finger controls it, and it does not reappear on coughing until the finger is released. A DIRECT hernia bulges straight through a weakness in the posterior wall (Hesselbach's triangle), medial to the inferior epigastric vessels, so it reappears despite occlusion of the deep ring."
+        }
+      ],
+      "pitfalls": [
+        "Examining only lying down, which can miss a hernia that reduces spontaneously when supine.",
+        "Attempting to reduce a tender, red, or clearly complicated hernia - this risks reducing non-viable bowel and masking the problem, not fixing it.",
+        "Forgetting to examine both testes in a male patient with a groin swelling, which can hide a testicular cause of the swelling or an associated finding.",
+        "Stopping at 'cough impulse present, likely hernia' without checking for the specific emergency features (tenderness, redness, irreducibility, obstruction) that change the urgency of referral."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single examination finding that most strongly suggests a swelling is a hernia?",
+          "a": "An expansile cough impulse.",
+          "accept": [
+            "cough impulse",
+            "expansile"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How do you clinically distinguish a direct from an indirect inguinal hernia at the bedside?",
+          "a": "Reduce the hernia, then occlude the deep inguinal ring (at the midpoint of the inguinal ligament) and ask the patient to cough: controlled by occlusion, it is indirect; still appearing despite occlusion, it is direct, bulging through the posterior wall medial to the deep ring.",
+          "accept": [
+            "occlu",
+            "deep ring",
+            "indirect",
+            "direct"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has a tender, red, irreducible groin swelling with vomiting and abdominal distension. What is this, and what must you NOT do?",
+          "a": "A strangulated (obstructed and vascularly compromised) hernia - a surgical emergency. Do not attempt to forcibly reduce it, since this can push non-viable or perforated bowel back into the abdomen.",
+          "accept": [
+            "strangulat",
+            "emergency",
+            "do not reduce",
+            "not reduce"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "standing",
+          "text": "Examines with the patient standing, not just lying down",
+          "critical": true
+        },
+        {
+          "id": "complication",
+          "text": "Actively checks for tenderness, redness, and reducibility, not just cough impulse alone",
+          "critical": true
+        },
+        {
+          "id": "occlusion",
+          "text": "Attempts the deep-ring occlusion test to distinguish direct from indirect"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: examination of a hernia"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: groin and hernial orifices"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: examination of hernia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

@@ -878,5 +878,360 @@
       },
       "dosingNote": "Classes, targets and principles only. Steroid dose and duration, bronchodilator dosing and interval, and escalation thresholds and agents must follow your current national or institutional guideline. CliniX does not prescribe."
     }
-  }
+  },
+  "cases": [
+    {
+      "id": "case.asthma.sneha",
+      "title": "A college student who cannot finish her sentences",
+      "opening": "Sneha Kulkarni, 22, has come to the emergency department with her mother. She is sitting upright, speaking in short phrases, with an audible wheeze. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Sneha Kulkarni",
+        "age": 22,
+        "sex": "female",
+        "occupation": "College student",
+        "residence": "Urban, lives in a hostel"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor... I can't... breathe properly... since this morning... it's been getting worse.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_today": {
+          "cues": [
+            "when did this start",
+            "how long has this been going on",
+            "onset",
+            "since when",
+            "today"
+          ],
+          "reply": "It started yesterday evening, just tightness, but since this morning the wheezing and breathlessness got much worse.",
+          "key": true
+        },
+        "trigger": {
+          "cues": [
+            "trigger",
+            "what set it off",
+            "cold",
+            "started after",
+            "any infection",
+            "runny nose"
+          ],
+          "reply": "I had a runny nose and sore throat for two days before this, like a viral cold. It usually sets my chest off.",
+          "key": true,
+          "skillId": "skill.hx.asthma.triggers"
+        },
+        "background_diagnosis": {
+          "cues": [
+            "known asthmatic",
+            "have you been diagnosed",
+            "since when do you have asthma",
+            "childhood"
+          ],
+          "reply": "I've had asthma since I was six years old. It runs in the family.",
+          "key": true
+        },
+        "baseline_control": {
+          "cues": [
+            "how often",
+            "daytime symptoms",
+            "how many days a week",
+            "usually how is your breathing"
+          ],
+          "reply": "Most days I need my blue inhaler, honestly, even without a cold. Maybe five or six days a week.",
+          "key": true
+        },
+        "night_waking": {
+          "cues": [
+            "wake up at night",
+            "night time symptoms",
+            "sleep",
+            "coughing at night"
+          ],
+          "reply": "I wake up coughing or wheezing about twice a week, even on an ordinary week.",
+          "key": true
+        },
+        "reliever_use": {
+          "cues": [
+            "inhaler",
+            "blue inhaler",
+            "reliever",
+            "puffer",
+            "how often do you use it"
+          ],
+          "reply": "I've used my blue inhaler maybe eight times since yesterday, it's barely helping now.",
+          "key": true
+        },
+        "preventer_use": {
+          "cues": [
+            "brown inhaler",
+            "preventer",
+            "steroid inhaler",
+            "daily inhaler",
+            "do you take it regularly"
+          ],
+          "reply": "I have a brown inhaler too, but honestly I only use it when I remember, maybe two or three times a week.",
+          "key": true
+        },
+        "inhaler_technique": {
+          "cues": [
+            "show me how you use",
+            "demonstrate",
+            "technique",
+            "how do you use the inhaler"
+          ],
+          "reply": "I just press and breathe in, like this. Nobody has checked how I do it since I was a child.",
+          "key": true
+        },
+        "prior_attacks": {
+          "cues": [
+            "admitted before",
+            "hospital before",
+            "icu",
+            "ventilator",
+            "how many times",
+            "attacks before"
+          ],
+          "reply": "I've been to the emergency room twice before, but never admitted, and never on a ventilator.",
+          "key": true
+        },
+        "atopy": {
+          "cues": [
+            "allergy",
+            "allergic",
+            "eczema",
+            "rhinitis",
+            "hay fever",
+            "skin rash"
+          ],
+          "reply": "I've had allergic rhinitis for years, sneezing and a blocked nose especially in the mornings. No eczema now, I had it as a small child.",
+          "key": true
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "parents",
+            "mother",
+            "father",
+            "hereditary",
+            "anyone else asthma"
+          ],
+          "reply": "My mother has asthma too, and my younger brother has eczema.",
+          "key": true
+        },
+        "exercise_trigger": {
+          "cues": [
+            "exercise",
+            "exertion",
+            "sports",
+            "running",
+            "physical activity"
+          ],
+          "reply": "Yes, running or playing badminton sets off my chest sometimes, I use my inhaler beforehand if I remember."
+        },
+        "cold_air_trigger": {
+          "cues": [
+            "cold air",
+            "weather",
+            "winter",
+            "air conditioning"
+          ],
+          "reply": "Cold air definitely makes it worse, and air-conditioned rooms too."
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest"
+          ],
+          "reply": "No real pain, just a tight feeling across my chest."
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills"
+          ],
+          "reply": "I felt a little warm yesterday with the cold, nothing like a high fever."
+        },
+        "sputum": {
+          "cues": [
+            "sputum",
+            "phlegm",
+            "cough up anything",
+            "productive cough"
+          ],
+          "reply": "Just a dry cough, nothing comes up."
+        },
+        "smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "tobacco"
+          ],
+          "reply": "No, I've never smoked.",
+          "key": true,
+          "skillId": "skill.hx.resp.smoking"
+        },
+        "occupational_pets": {
+          "cues": [
+            "pets",
+            "dust",
+            "hostel",
+            "mould",
+            "damp"
+          ],
+          "reply": "There's a cat in the hostel common room. My chest does feel worse after I've been near it."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Sitting upright, visibly anxious, speaking in short phrases rather than full sentences. Mild use of accessory neck muscles.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Respiratory rate 26 per minute. Pulse 112 regular. Blood pressure 118/76. SpO2 94 percent on room air. Temperature 37.6 C.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.resp.inspection": {
+          "finding": "Mild accessory muscle use at the neck. Chest otherwise normal shape, no barrel chest. No cyanosis.",
+          "abnormal": true
+        },
+        "skill.exam.resp.trachea": {
+          "finding": "Trachea central.",
+          "abnormal": false
+        },
+        "skill.exam.resp.expansion": {
+          "finding": "Chest expansion mildly reduced, symmetrical on both sides.",
+          "abnormal": true
+        },
+        "skill.exam.resp.percussion": {
+          "finding": "Resonant throughout, mildly hyperresonant at both bases.",
+          "abnormal": true
+        },
+        "skill.exam.resp.auscultation": {
+          "finding": "Widespread breath sounds present bilaterally with a prolonged expiratory phase. No focal reduction, no bronchial breathing.",
+          "abnormal": true
+        },
+        "skill.exam.resp.added_sounds": {
+          "finding": "Loud, widespread polyphonic expiratory wheeze throughout both lung fields. No crackles.",
+          "abnormal": true
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "finding": "Vocal resonance normal and symmetrical.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "peak_flow",
+        "spirometry_followup"
+      ],
+      "investigations": {
+        "peak_flow": {
+          "label": "Peak expiratory flow rate",
+          "indicated": true,
+          "result": "180 L/min, 55 percent of her personal best of 330 L/min.",
+          "note": "This number, not how loud the wheeze sounds, is what actually grades the attack: moderate to severe by this criterion."
+        },
+        "spirometry_followup": {
+          "label": "Spirometry with bronchodilator reversibility",
+          "indicated": true,
+          "result": "Not performed during this visit.",
+          "note": "Planned once the attack has settled. Attempting it during an acute attack is neither reliable nor kind to the patient, the same principle as deferring spirometry in a COPD exacerbation."
+        },
+        "abg": {
+          "label": "Arterial blood gas",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated here: her saturation is reassuring at 94 percent and there are no life-threatening features. A blood gas is reserved for a severe or worsening attack, where a normal or rising PaCO2 in a tiring patient is the finding that actually matters, not a routine test for every wheeze."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not routinely needed in a typical acute attack without atypical features such as fever, unilateral signs, or chest pain unrelated to coughing. Ordering it here would add radiation without changing the immediate plan."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "A viral trigger with widespread wheeze does not need a blood count to confirm; it would not change the immediate bronchodilator-and-steroid plan."
+        },
+        "allergy_panel": {
+          "label": "Total IgE and specific allergen panel",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not useful during an acute attack. Allergy testing, when it is indicated at all, belongs in a stable follow-up visit to guide trigger avoidance, not in the resuscitation room."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute exacerbation of bronchial asthma, triggered by a viral upper respiratory infection. Consider a chest infection, a pneumothorax, and other causes of acute wheeze.",
+        "accept": [
+          "asthma",
+          "copd",
+          "pneumothorax",
+          "pneumonia",
+          "cardiac",
+          "embolism",
+          "anaphylaxis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Known bronchial asthma, poorly controlled at baseline, presenting with a moderate to severe acute exacerbation triggered by a viral infection.",
+        "accept": [
+          "asthma",
+          "exacerbation",
+          "attack"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Controlled supplemental oxygen to a normal saturation target, repeated or nebulised short-acting bronchodilator with an antimuscarinic added for a more severe attack, an early systemic corticosteroid, and continuous reassessment for life-threatening features. Before discharge: check inhaler technique, address the missed preventer, and give a written action plan.",
+        "accept": [
+          "oxygen",
+          "bronchodilator",
+          "steroid",
+          "corticosteroid",
+          "action plan",
+          "inhaler technique",
+          "reassess"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "She cannot complete a sentence and her heart rate is climbing: those are the objective markers that grade the attack, not how loud the wheeze sounds.",
+        "A loud, widespread wheeze here is reassuring, not the danger sign. It is the silent chest, when there is too little airflow left to make a sound, that means the patient is about to arrest, not a noisy one.",
+        "A saturation of 94 percent and no life-threatening features are exactly why an arterial blood gas was not sent. Ordering one anyway would not have changed tonight's treatment.",
+        "She misses her preventer most days and nobody has watched her inhaler technique since childhood. That is the same reversible cause of apparent treatment failure taught in COPD, and it costs nothing to check.",
+        "The atopic background, allergic rhinitis, a mother with asthma, a childhood history of eczema, raises the pre-test probability and explains why a common cold set off this much wheeze.",
+        "Between attacks her chest examination would very likely be normal. A normal exam on a good day never excludes the diagnosis; today's attack is what makes the findings appear.",
+        "A chest film and a blood count were both skipped here, deliberately, because neither atypical features nor life-threatening signs were present. Choosing which test to skip is part of the diagnosis, not a shortcut around it."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
 }

@@ -148,6 +148,289 @@
       "skill.ix.neuropathy.workup"
     ]
   },
+  "cases": [
+    {
+      "id": "case.peripheral-neuropathy.arjun",
+      "title": "A young man whose legs stopped working after a bout of diarrhoea",
+      "opening": "Arjun Mehta, 24, has been brought to the emergency department by his brother. He is lying flat in the bed, unable to lift either leg off the mattress, and looks anxious. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Arjun Mehta",
+        "age": 24,
+        "sex": "male",
+        "occupation": "Delivery rider",
+        "residence": "Urban, lives with his brother"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, my legs have become weak over the last four days. It started in my feet and now I cannot even stand. Today my hands have also started feeling weak.",
+          "key": true
+        },
+        "onset_direction": {
+          "cues": [
+            "where did it start",
+            "start",
+            "spread",
+            "which direction",
+            "climbing",
+            "ascending"
+          ],
+          "reply": "It began in both my feet at the same time, doctor, not one side more than the other. Over four days it has climbed up, first my legs, now I can feel my hands getting clumsy too.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "preceding_illness": {
+          "cues": [
+            "cold",
+            "sore throat",
+            "diarrhoea",
+            "diarrhea",
+            "infection",
+            "unwell before",
+            "recent illness"
+          ],
+          "reply": "Now that you mention it, I had loose motions for two or three days, about two weeks before this weakness started. I didn't think it was connected, it settled on its own.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "sensory": {
+          "cues": [
+            "numbness",
+            "tingling",
+            "pins and needles",
+            "pain",
+            "sensation"
+          ],
+          "reply": "Some tingling in my feet and fingertips, but honestly the weakness bothers me far more than the tingling. It is not painful.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "breathing": {
+          "cues": [
+            "breathing",
+            "breathless",
+            "deep breath",
+            "short of breath"
+          ],
+          "reply": "It does feel a little harder to take a deep breath since this morning, doctor.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "swallowing": {
+          "cues": [
+            "swallowing",
+            "voice",
+            "speech",
+            "choking"
+          ],
+          "reply": "My voice sounds normal to me, and I have not had any trouble swallowing my food or water.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "bladder_bowel": {
+          "cues": [
+            "bladder",
+            "bowel",
+            "urination",
+            "incontinence",
+            "control"
+          ],
+          "reply": "No, I have full control, no problem passing urine or stool.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "vaccination_drugs": {
+          "cues": [
+            "vaccination",
+            "vaccine",
+            "surgery",
+            "new medicine",
+            "recent injection"
+          ],
+          "reply": "No vaccination or surgery recently. I am not on any regular medicines.",
+          "key": true,
+          "skillId": "skill.hx.neuropathy.ascending"
+        },
+        "face": {
+          "cues": [
+            "face",
+            "facial weakness",
+            "smile",
+            "close your eyes"
+          ],
+          "reply": "My brother said this morning that one side of my smile looked a bit off, but I had not noticed it myself."
+        },
+        "diet_alcohol": {
+          "cues": [
+            "diet",
+            "alcohol",
+            "drink",
+            "nutrition"
+          ],
+          "reply": "I eat normally, non-vegetarian, and I don't drink alcohol."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "hereditary",
+            "anyone else weak",
+            "similar illness in family"
+          ],
+          "reply": "No one else in the family has had anything like this."
+        },
+        "past_illness": {
+          "cues": [
+            "past illness",
+            "diabetes",
+            "thyroid",
+            "chronic disease",
+            "operations"
+          ],
+          "reply": "I have been completely healthy before this, no diabetes, no thyroid problem, no operations."
+        }
+      },
+      "exam": {
+        "skill.gen.vitals": {
+          "finding": "Pulse 104, occasionally irregular in rate on repeat checks. Blood pressure 148/92, checked twice and fluctuating. Respiratory rate 22, using some accessory muscles. SpO2 97 percent on room air. Single breath count 18.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.tone_power": {
+          "finding": "Symmetrical flaccid weakness, worse proximally than distally. Power: hip flexion 2/5 both sides, knee extension 3/5 both sides, ankle dorsiflexion 3/5 both sides. Shoulder abduction 3/5 both sides, grip 4/5 both sides. Tone reduced globally.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.reflexes": {
+          "finding": "Biceps, triceps, supinator, knee and ankle jerks absent bilaterally, out of proportion to the degree of weakness. Plantars mute bilaterally.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.sensory": {
+          "finding": "Mild, symmetrical glove-and-stocking impairment to light touch and pinprick in the distal hands and feet. No sensory level. Joint position sense intact.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.cn7": {
+          "finding": "Bilateral lower motor neurone facial weakness, mild, with reduced forehead wrinkling and a slightly incomplete eye closure on both sides. Symmetrical, so easy to miss without deliberate comparison to normal facial animation.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "vital_capacity",
+        "csf",
+        "ncs",
+        "fbc_electrolytes",
+        "ecg"
+      ],
+      "investigations": {
+        "vital_capacity": {
+          "label": "Serial vital capacity",
+          "indicated": true,
+          "result": "18 mL/kg on admission, trending down to 14 mL/kg over the next six hours.",
+          "note": "This is the single most safety-critical measurement in this case. A falling trend, not one reading, is what should trigger escalation and consideration of ventilatory support."
+        },
+        "csf": {
+          "label": "Cerebrospinal fluid analysis",
+          "indicated": true,
+          "result": "Protein 98 mg/dL (raised), white cell count 3 cells/microL. Albuminocytological dissociation.",
+          "note": "Supports the diagnosis. Note the protein can still be normal in the first few days of illness, so a normal early CSF would not have excluded it."
+        },
+        "ncs": {
+          "label": "Nerve conduction studies",
+          "indicated": true,
+          "result": "Slowed conduction velocities, prolonged distal latencies, and conduction block in multiple motor nerves, consistent with an acute demyelinating polyradiculoneuropathy.",
+          "note": "Confirms the demyelinating pattern and distinguishes it from an axonal neuropathy."
+        },
+        "fbc_electrolytes": {
+          "label": "Full blood count, electrolytes and renal function",
+          "indicated": true,
+          "result": "Within normal limits. Potassium 4.1 mmol/L.",
+          "note": "Baseline bloods, and useful to exclude a periodic paralysis from an abnormal potassium as a mimic."
+        },
+        "ecg": {
+          "label": "ECG",
+          "indicated": true,
+          "result": "Sinus tachycardia, rate varying between 96 and 112 on repeat strips. No arrhythmia.",
+          "note": "Reasonable given the autonomic instability already noted on vitals; a swinging heart rate is a recognised feature of this syndrome, not an incidental finding."
+        },
+        "stool_culture": {
+          "label": "Stool culture for the preceding infective trigger",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Reasonable to consider given the diarrhoeal illness two weeks earlier, but it would not change management now and the window for a positive stool culture has likely passed. Sending it as a reflex here would not answer a real clinical question at this point."
+        },
+        "acetylcholine_receptor_antibody": {
+          "label": "Acetylcholine receptor antibody",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: reflexes are absent here, whereas myasthenia gravis, the main reason to send this test, characteristically preserves reflexes and does not cause sensory symptoms. The exam findings already argue against it."
+        },
+        "mri_spine": {
+          "label": "MRI spine",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated: there is no sensory level, no sphincter involvement, and the reflexes are absent rather than preserved below a level, all of which argue against a cord lesion and make this test unlikely to add anything."
+        }
+      },
+      "differentialModel": {
+        "answer": "Guillain-Barre syndrome (acute inflammatory demyelinating polyradiculoneuropathy). Consider myasthenia gravis, acute poliomyelitis, periodic paralysis, and a spinal cord lesion.",
+        "accept": [
+          "guillain",
+          "gbs",
+          "demyelinating",
+          "myasthenia",
+          "poliomyelitis",
+          "polio",
+          "periodic paralysis",
+          "spinal cord",
+          "myelitis"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute (day 4) symmetrical ascending flaccid areflexic weakness with bilateral facial weakness and mild sensory signs, following a diarrhoeal illness two weeks earlier: Guillain-Barre syndrome, weakness still progressing, vital capacity trending down, swallow currently safe.",
+        "accept": [
+          "guillain",
+          "gbs",
+          "demyelinating polyradiculoneuropathy"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Admit for close monitoring, ideally in a high-dependency setting given the falling vital capacity. Serial respiratory and bulbar assessment with a low threshold for ventilatory support. Continuous or frequent cardiac monitoring for autonomic instability. Disease-modifying treatment with intravenous immunoglobulin or plasma exchange. Supportive care including DVT prophylaxis, pain control, and early physiotherapy, with attention to psychological support given the sudden and frightening nature of the illness.",
+        "accept": [
+          "immunoglobulin",
+          "ivig",
+          "plasma exchange",
+          "plasmapheresis",
+          "ventilat",
+          "monitor",
+          "respiratory",
+          "high dependency",
+          "intensive care",
+          "dvt prophylaxis"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The pattern names itself if you state it precisely: symmetrical from the start, ascending over four days, with reflexes absent everywhere and sensation almost spared. That sentence alone should produce the diagnosis before a single test is back.",
+        "Reflexes absent out of proportion to how weak he looks is the single most useful bedside finding in this whole case. He can still grip at 4/5, yet every reflex in all four limbs is gone.",
+        "The diarrhoeal illness two weeks earlier was not volunteered, it had to be asked for directly. Patients routinely do not connect a resolved bout of loose motions to a new weakness weeks later.",
+        "Weakness that is worse proximally than distally, with hip flexion weaker than ankle dorsiflexion, is the opposite of a length-dependent axonal neuropathy, and is exactly what a demyelinating, root-level process should look like.",
+        "The bilateral facial weakness was nearly missed because it is symmetrical: there is no normal side to compare against, so it takes a deliberate judgement against how animated a face should be, not a side-to-side comparison.",
+        "The vital capacity, not the CSF protein and not the nerve conduction study, is the number that changes management today. It is trended at the bedside, and a falling trend over hours is what should trigger escalation, not a single reading on admission.",
+        "A swinging pulse and blood pressure here are autonomic instability, a recognised part of the syndrome itself, not an incidental finding of anxiety or pain."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
   "skills": {
     "skill.neuropathy.basics": {
       "id": "skill.neuropathy.basics",

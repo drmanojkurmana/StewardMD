@@ -691,5 +691,393 @@
       },
       "dosingNote": "Classes, volumes and principles only. Antibiotic choice, antituberculosis regimens and drainage protocols must follow your current national or institutional guideline. CliniX does not prescribe."
     }
-  }
+  },
+  "cases": [
+    {
+      "id": "case.effusion.deepak",
+      "title": "A laborer with three weeks of breathlessness and evening fever",
+      "opening": "Deepak Sharma, 28, has walked into the outpatient department, breathless after climbing the stairs. He looks thin and unwell. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Deepak Sharma",
+        "age": 28,
+        "sex": "male",
+        "occupation": "Daily wage construction laborer",
+        "residence": "Urban, lives in a rented single room with three co-workers"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, since about three weeks I have been getting more and more breathless, and there is a dull ache on my right side of the chest.",
+          "key": true,
+          "skillId": "skill.hx.chief_complaints"
+        },
+        "onset_course": {
+          "cues": [
+            "when did it start",
+            "how long ago",
+            "onset",
+            "since when",
+            "gradual or sudden",
+            "getting worse"
+          ],
+          "reply": "It started slowly, maybe three weeks back, just a mild discomfort. It has been getting steadily worse since then, not sudden at all.",
+          "key": true
+        },
+        "breathlessness_grade": {
+          "cues": [
+            "how far can you walk",
+            "breathless when",
+            "exertion",
+            "stairs",
+            "walking",
+            "activities"
+          ],
+          "reply": "Two weeks ago I could still do my work, lifting bricks. Now I get breathless just walking to the market.",
+          "key": true,
+          "skillId": "skill.hx.resp.dyspnea"
+        },
+        "chest_discomfort": {
+          "cues": [
+            "chest pain",
+            "dull ache",
+            "where is the pain",
+            "side pain",
+            "worse on breathing"
+          ],
+          "reply": "It's a dull, heavy ache on the right side, not sharp like a stitch. It doesn't change much with breathing now, though it did in the first week.",
+          "key": true
+        },
+        "orthopnea": {
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "pillows",
+            "how do you sleep",
+            "wake up at night breathless"
+          ],
+          "reply": "I sleep sitting up a bit these days, two pillows, but I don't wake up gasping.",
+          "key": true
+        },
+        "cough": {
+          "cues": [
+            "cough",
+            "how long have you had the cough"
+          ],
+          "reply": "Yes, a dry cough on and off for the same three weeks, nothing comes up with it.",
+          "key": true,
+          "skillId": "skill.hx.resp.cough_sputum"
+        },
+        "haemoptysis": {
+          "cues": [
+            "blood",
+            "haemoptysis",
+            "hemoptysis",
+            "cough up blood"
+          ],
+          "reply": "No, never any blood in what little I cough up."
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever",
+            "temperature",
+            "evening fever",
+            "chills",
+            "rigors"
+          ],
+          "reply": "I get warm most evenings, feverish by night, and sweat through my clothes some nights. By morning I feel almost normal.",
+          "key": true
+        },
+        "night_sweats": {
+          "cues": [
+            "night sweats",
+            "sweating at night",
+            "drenching sweats"
+          ],
+          "reply": "Yes, some nights I have to change my clothes, they get so wet.",
+          "key": true
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight",
+            "eating"
+          ],
+          "reply": "I have lost weight, maybe five kilos in the last month. My appetite has gone down too.",
+          "key": true
+        },
+        "tb_contact": {
+          "cues": [
+            "tuberculosis",
+            "tb",
+            "contact with tb",
+            "anyone with a chronic cough at home"
+          ],
+          "reply": "One of the men I share the room with had a bad cough for months last year, he went to a government clinic for it, I don't know exactly what they said it was.",
+          "key": true,
+          "skillId": "skill.hx.tb.exposure"
+        },
+        "prior_tb": {
+          "cues": [
+            "had tb before",
+            "treated for tb",
+            "previous tuberculosis"
+          ],
+          "reply": "No, I have never been diagnosed with TB myself before this.",
+          "key": true
+        },
+        "hiv_risk": {
+          "cues": [
+            "hiv",
+            "risk factors",
+            "tested before",
+            "sexual history"
+          ],
+          "reply": "I have never been tested for HIV. I don't think I have any particular risk for it, but I'm willing to get tested.",
+          "key": true
+        },
+        "cardiac_history": {
+          "cues": [
+            "heart",
+            "heart failure",
+            "swelling of legs",
+            "palpitations",
+            "known heart disease"
+          ],
+          "reply": "No heart problems that I know of, and my legs are not swollen.",
+          "key": true
+        },
+        "renal_liver_history": {
+          "cues": [
+            "kidney",
+            "liver",
+            "jaundice",
+            "urine output",
+            "protein in urine"
+          ],
+          "reply": "No kidney or liver problems, no jaundice ever."
+        },
+        "diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood sugar"
+          ],
+          "reply": "No, I've never been told I have diabetes."
+        },
+        "smoking_alcohol": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "cigarette",
+            "bidi",
+            "alcohol",
+            "drink"
+          ],
+          "reply": "I smoke a few bidis a day, maybe five, since I was about twenty. I drink occasionally, nothing heavy.",
+          "key": true,
+          "skillId": "skill.hx.resp.smoking"
+        },
+        "living_conditions": {
+          "cues": [
+            "living conditions",
+            "crowding",
+            "how many people",
+            "ventilation",
+            "room"
+          ],
+          "reply": "Four of us share one small room, it doesn't have much of a window."
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "anyone else sick",
+            "hereditary"
+          ],
+          "reply": "Nobody in my family back in the village has had anything like this that I know of."
+        },
+        "trauma": {
+          "cues": [
+            "injury",
+            "trauma",
+            "fall",
+            "accident",
+            "hit the chest"
+          ],
+          "reply": "No injury to the chest, nothing like that."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Thin, wasted appearance with visible loss of muscle bulk. Mildly breathless at rest, comfortable sitting upright.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Respiratory rate 22 per minute. Pulse 96 regular. Blood pressure 110/70. SpO2 95 percent on room air. Temperature 37.8 C.",
+          "abnormal": true
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.resp.inspection": {
+          "finding": "Right hemithorax appears fuller and moves less than the left. No scars, no chest wall deformity.",
+          "abnormal": true
+        },
+        "skill.exam.resp.trachea": {
+          "finding": "Trachea shifted slightly away from the right side, towards the left.",
+          "abnormal": true
+        },
+        "skill.exam.resp.expansion": {
+          "finding": "Chest expansion reduced on the right, normal on the left.",
+          "abnormal": true
+        },
+        "skill.exam.resp.percussion": {
+          "finding": "Stony dull over the right lower and mid zones, with the upper border of dullness highest in the axilla. Resonant on the left and over the right upper zone.",
+          "abnormal": true
+        },
+        "skill.exam.resp.auscultation": {
+          "finding": "Breath sounds absent over the area of stony dullness. Bronchial breathing heard just above the fluid level, at the right upper zone.",
+          "abnormal": true
+        },
+        "skill.exam.resp.added_sounds": {
+          "finding": "No wheeze. No pleural rub now, though he reports a catching pain in the first week that has since eased as the fluid has increased.",
+          "abnormal": false
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "finding": "Vocal resonance reduced to absent over the dull area. Normal on the left.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "cxr",
+        "usg_chest",
+        "pleural_tap",
+        "serum_pl",
+        "sputum_afb",
+        "hiv"
+      ],
+      "investigations": {
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Right-sided homogeneous opacity with a meniscus obscuring the costophrenic angle, rising towards the axilla. Mild shift of the trachea and mediastinum away from the right. No cavity, no obvious mass.",
+          "note": "Confirms there is fluid and roughly how much. It does not say why the fluid is there, that is the next step."
+        },
+        "usg_chest": {
+          "label": "Pleural ultrasound",
+          "indicated": true,
+          "result": "Free-flowing, mildly complex effusion, moderate volume, no loculation, no obvious pleural nodularity. Safe aspiration site marked.",
+          "note": "Confirms fluid, estimates volume, and marks a safe site. A blind tap on the plain film alone is never acceptable."
+        },
+        "pleural_tap": {
+          "label": "Diagnostic pleural aspiration",
+          "indicated": true,
+          "result": "Straw-coloured fluid. Protein 4.8 g/dL. LDH 320 U/L. Glucose 68 mg/dL. Cell count 1,200 cells/mm3, 88 percent lymphocytes. Adenosine deaminase 62 U/L. AFB smear negative. Cytology negative for malignant cells.",
+          "note": "This is the test that actually answers the question. A lymphocytic exudate with a markedly raised ADA points strongly to tuberculosis, even with a negative smear, since a TB effusion is typically paucibacillary."
+        },
+        "serum_pl": {
+          "label": "Simultaneous serum protein and LDH",
+          "indicated": true,
+          "result": "Serum protein 6.5 g/dL, giving a pleural-to-serum protein ratio of 0.74. Serum LDH 210 U/L, giving a pleural-to-serum LDH ratio of 1.5.",
+          "note": "Sent at the same time as the tap. Without a paired serum sample, Light's criteria cannot be applied at all, and both ratios here confirm an exudate."
+        },
+        "sputum_afb": {
+          "label": "Sputum for acid-fast bacilli",
+          "indicated": true,
+          "result": "Two samples negative for AFB.",
+          "note": "Worth sending even though the diseased compartment here is the pleura, not the lung parenchyma. A negative sputum does not argue against the pleural diagnosis."
+        },
+        "hiv": {
+          "label": "HIV test",
+          "indicated": true,
+          "result": "Non-reactive.",
+          "note": "Sent as a routine part of any newly diagnosed TB, since HIV is the single strongest risk factor for reactivation and would change how closely he needs to be followed."
+        },
+        "cect_thorax": {
+          "label": "Contrast-enhanced CT thorax",
+          "indicated": false,
+          "result": "Right pleural effusion with mild pleural thickening. No discrete mass. Underlying lung parenchyma unremarkable.",
+          "note": "Not needed as a first step in a young man with a lymphocytic, ADA-high exudate. CT with pleural biopsy is reserved for when the fluid analysis is inconclusive or malignancy remains suspected, not ordered as a routine reflex alongside the tap."
+        },
+        "tumor_markers": {
+          "label": "Tumor marker panel, CEA and CA-125",
+          "indicated": false,
+          "result": "CEA 3.1 ng/mL, CA-125 mildly raised at 48 U/mL.",
+          "note": "Non-specific: both rise with any pleural inflammation, including tuberculosis, and do not distinguish it from malignancy. A marker panel here added nothing that the fluid analysis had not already answered."
+        },
+        "echo": {
+          "label": "Echocardiogram",
+          "indicated": false,
+          "result": "Normal biventricular function. No evidence of pulmonary hypertension.",
+          "note": "A unilateral exudative effusion in a young man with no cardiac history, no orthopnoea and no bilateral or basal-predominant pattern was never suggestive of heart failure. Ordered out of habit rather than a hypothesis."
+        }
+      },
+      "differentialModel": {
+        "answer": "Right-sided pleural effusion, most likely tuberculous, given the lymphocytic exudate and markedly raised ADA in a young adult with a TB contact and constitutional symptoms. Consider malignancy and a parapneumonic effusion, and, less likely here, a transudative cause such as heart failure.",
+        "accept": [
+          "tuberculosis",
+          "tb",
+          "malignancy",
+          "cancer",
+          "parapneumonic",
+          "pneumonia",
+          "heart failure",
+          "empyema"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Tuberculous pleural effusion, right side, exudative and lymphocyte-predominant with a raised ADA, pending microbiological confirmation.",
+        "accept": [
+          "tuberculous",
+          "tb effusion",
+          "tuberculosis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Standard antituberculosis therapy under the national programme, notification and contact tracing, therapeutic aspiration only for symptomatic relief or a large effusion rather than routine complete drainage, and follow-up to confirm resolution and watch for residual pleural thickening.",
+        "accept": [
+          "antituberculous",
+          "tb treatment",
+          "notify",
+          "notification",
+          "aspiration",
+          "drain",
+          "follow-up",
+          "dots"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The trachea was pulled slightly away from the effusion, not towards it. Away means fluid pushing the mediastinum; towards would mean collapse or a fibrothorax instead, a completely different diagnosis.",
+        "Reduced vocal resonance over stony dullness is what keeps this on the pleural side of the differential. Increased resonance over the same dullness would mean consolidation, not fluid.",
+        "Light's criteria needed a same-day paired serum sample. Sending pleural fluid without it would have made the criteria unusable, no matter how good the pleural result looked.",
+        "A negative sputum AFB did not clear tuberculosis here, because the diseased compartment is the pleura, not the lung. A TB effusion is classically paucibacillary and often smear-negative even when the diagnosis is correct.",
+        "Lymphocyte predominance and a markedly raised ADA carried more diagnostic weight here than any imaging test ordered afterward.",
+        "No clubbing, no long-standing productive cough, and no cardiac findings: absent findings that steer away from bronchiectasis and heart failure respectively, without needing to disprove either formally.",
+        "A CT, a tumor marker panel and an echocardiogram were all reasonable-sounding tests that added nothing once the tap itself had already answered the question. A panel is not a plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ]
 }

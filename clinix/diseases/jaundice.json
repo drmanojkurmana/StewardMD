@@ -129,6 +129,204 @@
       }
     ]
   },
+  "cases": [
+    {
+      "id": "case.jaundice.fatima",
+      "title": "A woman with fever, right-sided pain and yellow eyes",
+      "opening": "Fatima Sheikh, 58, has been brought to the emergency department by her son. She looks unwell and is shivering under a blanket despite the warm weather. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Fatima Sheikh",
+        "age": 58,
+        "sex": "female",
+        "occupation": "Homemaker",
+        "residence": "Urban, lives with her son's family"
+      },
+      "history": {
+        "presenting": {
+          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help"],
+          "reply": "Doctor, I have had a high fever with terrible shivering since this morning, pain under my right ribs, and my son says my eyes have gone yellow since yesterday.",
+          "key": true
+        },
+        "pain_character": {
+          "cues": ["pain", "character of the pain", "colicky", "constant", "where is the pain", "radiate", "does it move"],
+          "reply": "It is a constant ache under my right ribs, sometimes it comes in waves. It moves through to my back a little.",
+          "key": true,
+          "skillId": "skill.hx.gi.pain"
+        },
+        "fever_pattern": {
+          "cues": ["fever", "rigors", "chills", "shivering", "temperature", "how high"],
+          "reply": "It came on suddenly this morning with terrible shivering, and I felt burning hot afterwards. This is the third time today it has happened like that.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "urine": {
+          "cues": ["urine colour", "dark urine", "colour of your urine", "tea coloured"],
+          "reply": "My urine has been dark, like strong tea, for the last two days.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "stool": {
+          "cues": ["stool colour", "pale stool", "clay coloured", "colour of your motion"],
+          "reply": "My stools have looked pale, almost like putty, since yesterday.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "pruritus": {
+          "cues": ["itching", "itchy", "scratching", "pruritus"],
+          "reply": "A little itchy over the last day, yes, but it is not the main problem right now.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "previous_episodes": {
+          "cues": ["gallstones", "stones", "similar pain before", "previous episode", "attacks before"],
+          "reply": "I was told years ago I have gallstones, on a scan for something else. I have had this same kind of pain twice before, but never with fever like this.",
+          "key": true
+        },
+        "nausea_vomiting": {
+          "cues": ["nausea", "vomiting", "vomit", "feeling sick"],
+          "reply": "I have vomited twice since this morning."
+        },
+        "alcohol": {
+          "cues": ["alcohol", "drink", "drinking"],
+          "reply": "I have never taken alcohol in my life."
+        },
+        "weight_loss": {
+          "cues": ["weight loss", "losing weight", "appetite"],
+          "reply": "No, my weight has been steady, and my appetite was normal until this fever started.",
+          "key": true
+        },
+        "previous_surgery": {
+          "cues": ["operation", "surgery", "gallbladder removed", "cholecystectomy"],
+          "reply": "No, I was told about the stones but never had an operation for them."
+        },
+        "drug_history": {
+          "cues": ["medicine", "medication", "new drug", "herbal", "supplement", "taking anything"],
+          "reply": "Only a paracetamol for the fever today. Nothing new before that."
+        },
+        "family": {
+          "cues": ["family", "hereditary", "jaundice in family", "gallstones in family"],
+          "reply": "My mother also had gallstones in her old age."
+        },
+        "travel": {
+          "cues": ["travel", "contaminated food", "contaminated water", "contact with jaundice"],
+          "reply": "No recent travel, and I have not been near anyone with jaundice."
+        },
+        "allergy": {
+          "cues": ["allergy", "allergic", "reaction to any"],
+          "reply": "No allergies that I know of."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Looks acutely unwell and toxic, shivering, diaphoretic. No cachexia, no stigmata of chronic liver disease, no scratch marks.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 39.4 C. Pulse 118 regular. Blood pressure 96/60. Respiratory rate 24. SpO2 96 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "No pallor.",
+          "abnormal": false
+        },
+        "skill.gen.jaundice": {
+          "finding": "Sclera deep yellow in daylight. Undersurface of tongue also icteric.",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver": {
+          "finding": "Liver edge palpable 2 cm below the right costal margin, tender to palpation, smooth surface, span 12 cm, normal upper limit.",
+          "abnormal": true
+        },
+        "skill.exam.gi.spleen": {
+          "finding": "Spleen not palpable by any method. Castell's point resonant on full inspiration.",
+          "abnormal": false
+        },
+        "skill.exam.gi.gallbladder_kidney": {
+          "finding": "Gallbladder not palpable, and Murphy's sign could not be reliably assessed given generalised right upper quadrant tenderness and guarding. Kidneys not ballotable bilaterally.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": ["lft", "cbc", "blood_culture", "usg", "mrcp"],
+      "investigations": {
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin 6.8 mg/dL, mostly conjugated. Alkaline phosphatase markedly raised at 420 U/L. AST 110, ALT 96, disproportionately lower than the alkaline phosphatase.",
+          "note": "A cholestatic pattern, alkaline phosphatase raised out of proportion to the transaminases, fits obstruction rather than a primary hepatocellular process."
+        },
+        "cbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "White cell count 18.4 x10^9/L with neutrophilia. Haemoglobin 11.6 g/dL, platelets 240 x10^9/L.",
+          "note": "A marked neutrophilic leucocytosis fits an active bacterial infection, consistent with cholangitis rather than a sterile stone alone."
+        },
+        "blood_culture": {
+          "label": "Blood cultures, two sets",
+          "indicated": true,
+          "result": "Sent before antibiotics. Growth of a gram-negative organism at 24 hours, sensitivities pending.",
+          "note": "Bacteraemia from an ascending biliary infection is expected in cholangitis and should be sent before, not after, antibiotics are started."
+        },
+        "usg": {
+          "label": "Ultrasound abdomen",
+          "indicated": true,
+          "result": "Gallbladder contains multiple stones, wall not thickened. Common bile duct dilated to 11 mm with a shadowing stone visualised near the distal duct. Liver parenchyma normal echotexture. No focal lesion.",
+          "note": "Confirms a dilated common bile duct with a stone, and a normal liver parenchyma that argues against an infiltrative or malignant hepatic process."
+        },
+        "mrcp": {
+          "label": "MRCP",
+          "indicated": true,
+          "result": "Confirms a single stone impacted in the distal common bile duct, dilated proximal ductal system, gallbladder with multiple stones.",
+          "note": "Maps the obstruction precisely before ERCP, and confirms this is amenable to endoscopic drainage rather than needing surgery first."
+        },
+        "ca19_9": {
+          "label": "Serum CA 19-9",
+          "indicated": false,
+          "result": "Raised at 210 U/mL.",
+          "note": "Not indicated as a diagnostic test in acute cholangitis: CA 19-9 rises non-specifically with any cholestasis and active biliary infection, so a raised value here does not mean malignancy, and the sensible course is to treat the sepsis and re-check once the obstruction is relieved, not chase this number now."
+        },
+        "viral_hep_serology": {
+          "label": "Viral hepatitis serology",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "The pattern, cholestatic enzymes with a dilated duct and a visualised stone, already points to a surgical, obstructive cause; there is no clinical question here that hepatitis serology would answer."
+        },
+        "afp": {
+          "label": "Alpha-fetoprotein",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "There is no cirrhotic or nodular liver on imaging and no risk factors for hepatoma; ordering this was not answering any real question in this presentation."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute ascending cholangitis due to a common bile duct stone, causing posthepatic obstructive jaundice. Consider acute cholecystitis, carcinoma of the head of the pancreas, and viral or drug-induced hepatitis.",
+        "accept": ["cholangitis", "cbd stone", "gallstone", "obstructive", "cholecystitis", "pancreas", "hepatitis"],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute ascending cholangitis, with Charcot's triad of fever with rigors, right upper quadrant pain and jaundice, secondary to an impacted common bile duct stone.",
+        "accept": ["cholangitis", "charcot", "cbd stone", "obstructive jaundice"],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Intravenous fluids and empirical broad-spectrum antibiotics after blood cultures, following an early sepsis-recognition approach. Correct any coagulopathy before intervention. Arrange urgent biliary decompression, typically endoscopic, once she is stabilised, since source control cannot wait for a routine outpatient plan. Interval cholecystectomy once the acute infection has settled.",
+        "accept": ["antibiotics", "fluids", "biliary decompression", "ercp", "drainage", "sepsis", "cholecystectomy"],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Fever with rigors, right upper quadrant pain and jaundice together is Charcot's triad, and recognising the pattern by name is what stops this being managed as routine outpatient jaundice.",
+        "The gallbladder could not be reliably assessed for Murphy's sign because of diffuse tenderness, and it was not palpable as an enlarged, non-tender organ, which argues against a smoothly obstructing malignant lesion and fits a scarred, stone-bearing gallbladder instead: Courvoisier's law working in the negative direction.",
+        "Absent splenomegaly here is doing real work: a prehepatic, haemolytic mechanism would be expected to enlarge the spleen, and its absence supports the obstructive pattern already suggested by the pale stool and dark urine.",
+        "The liver is only mildly enlarged with a normal span and a smooth surface, which is exactly what an acute obstruction produces, in contrast to the shrunken, irregular liver of chronic cirrhotic disease.",
+        "The cholestatic enzyme pattern, alkaline phosphatase raised out of proportion to the transaminases, was predictable before the result even came back, once the urine, stool and pruritus history had already pointed to obstruction.",
+        "A raised CA 19-9 in the middle of an active biliary infection is a trap, not a cancer diagnosis: it rises with any cholestasis and needs to be reinterpreted only once the obstruction and sepsis have been treated.",
+        "This is a time-critical diagnosis. The urgency is in the decompression, not in waiting for every test to return before acting on the clinical picture already present at the bedside."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
   "viva": {
     "skills": [
       "skill.gen.jaundice",
