@@ -1128,11 +1128,12 @@
     if (voiceOn && state.vivaSpokenFor !== cur.key) { state.vivaSpokenFor = cur.key; speakText(cur.q.probe.q); }
     if (!a) {
       var listening = state.vivaListening;
+      var transcribing = state.vivaTranscribing;
       html += '<div class="cx-free">' +
         '<textarea class="cx-input" id="cxAnswer" rows="3" placeholder="Answer as you would to an examiner">' + esc(state.vivaPartial || "") + "</textarea>";
       if (voiceOn) {
-        html += '<button type="button" class="cx-mic-btn' + (listening ? " cx-mic-btn--on" : "") + '" data-act="cx-viva-mic">' +
-          ic(listening ? "mic" : "mic_none") + (listening ? "Listening\u2026 tap to stop" : "Tap to speak your answer") + "</button>";
+        html += '<button type="button" class="cx-mic-btn' + (listening ? " cx-mic-btn--on" : transcribing ? " cx-mic-btn--busy" : "") + '" data-act="cx-viva-mic">' +
+          (transcribing ? ic("progress_activity") + "Transcribing your answer\u2026" : ic(listening ? "mic" : "mic_none") + (listening ? "Listening\u2026 tap to stop" : "Tap to speak your answer")) + "</button>";
       }
       html += '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-answer">Answer</button>' +
         '<button type="button" class="cx-showans" data-act="cx-viva-show">' + ic("visibility") + "Show me the answer</button></div>";
@@ -1558,9 +1559,12 @@
     repaint();
   }
 
+  // Hard cleanup for navigating away entirely (go()/closeMod()) - always kills the session outright,
+  // transcribing or not, since there is no screen left to show the result on.
   function vivaStopListening() {
     if (state.vivaListenHandle) { try { state.vivaListenHandle.stop(); } catch (e) {} state.vivaListenHandle = null; }
     state.vivaListening = false;
+    state.vivaTranscribing = false;
   }
 
   // Whisper ("clinical") first, since the student explicitly wants it and it is the more accurate
@@ -1569,23 +1573,41 @@
   // here, retry once with the device's default on-device recognizer rather than leaving voice mode
   // dead - both keep audio on-device, this only changes which local model transcribes it.
   function vivaMicToggle() {
-    // Tapping to stop is the student saying "wait, let me check that" - it leaves the transcript in
-    // the textbox for them to read or edit and stops there; it does NOT submit. Only the mic ending
-    // on its own (onFinal, natural end of speech) submits automatically, the way a real oral answer
-    // reaches the examiner the moment you stop talking.
-    if (state.vivaListening) { vivaStopListening(); repaint(); return; }
+    // Whisper (the "clinical" engine, now registered on Android too) is a BATCH engine: it never
+    // streams live captions, and only produces a transcript once stop() is called, which then
+    // takes a few seconds of on-device CPU inference. The old code treated a manual stop tap as
+    // fully idle immediately (mic reverted to "tap to speak", empty textbox, no indication
+    // anything was happening) for that whole multi-second gap, then silently auto-submitted
+    // whatever came back - which reads exactly like "voice input does not work", and a student
+    // who taps the mic again during that silent gap orphans the pending transcript entirely (a
+    // fresh session supersedes it via the native-bridge session token, so it is discarded when it
+    // finally arrives). Show the gap honestly instead, and block a second tap during it.
+    if (state.vivaTranscribing) { toast("Still transcribing your answer - one moment"); return; }
+    if (state.vivaListening) {
+      state.vivaListening = false;
+      state.vivaTranscribing = true;
+      repaint();
+      try { if (state.vivaListenHandle) state.vivaListenHandle.stop(); } catch (e) {}
+      return;
+    }
     if (!(window.SMD_VOICE && SMD_VOICE.listen)) { toast("Voice input is not available on this device"); return; }
     state.vivaPartial = "";
     state.vivaListening = true;
+    // Captured so a transcript that arrives after the student has moved to a DIFFERENT viva
+    // question (not just left the screen, which vivaStopListening already handles) is discarded
+    // rather than wrongly answering the new question with old speech.
+    var startedFor = state.vivaCurrent;
     repaint();
     function onFinal(t) {
       state.vivaListenHandle = null;
       state.vivaListening = false;
+      state.vivaTranscribing = false;
+      if (state.vivaCurrent !== startedFor) { repaint(); return; }
       state.vivaPartial = String(t || "").trim();
       vivaSubmitVoiceAnswer();
     }
     function onPartial(t) { state.vivaPartial = String(t || ""); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
-    function fail() { state.vivaListening = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); }
+    function fail() { state.vivaListening = false; state.vivaTranscribing = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); }
     // SMD_VOICE.listen({engine:"clinical"}) calls onError SYNCHRONOUSLY (before it returns) on any
     // platform where Whisper isn't registered (a bug fixed for Android on 2026-08-23, but still the
     // right defensive shape - e.g. a build with the plugin missing). When that happens, the
