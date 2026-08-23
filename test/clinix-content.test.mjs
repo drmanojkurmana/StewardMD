@@ -375,6 +375,53 @@ test("SAFETY: every skill cites at least one real source with a locator", () => 
   }
 });
 
+test("TEACHING: blocks are short and digestible, one idea per screen", () => {
+  // The whole complaint about the first cut was that it read like a textbook. A teaching block that
+  // arrives as a wall of prose on a phone is the same failure in a new place.
+  const shared = loadAllSkills();
+  const localAll = {};
+  for (const file of ALL_DISEASES) Object.assign(localAll, loadDisease(file).localSkills);
+  const all = Object.assign({}, shared, localAll);
+
+  let taught = 0;
+  for (const id of Object.keys(all)) {
+    const blocks = all[id].teach;
+    if (!Array.isArray(blocks)) continue;
+    taught++;
+    assert.ok(blocks.length >= 2, `${id} has only ${blocks.length} teaching block(s); split it up`);
+    for (const b of blocks) {
+      assert.ok(b.heading && b.heading.length > 3, `${id} has a teaching block with no real heading`);
+      if (b.body) {
+        for (const para of String(b.body).split(/\n\s*\n/)) {
+          assert.ok(para.trim().length <= 460,
+            `${id} block "${b.heading}" has a ${para.trim().length}-char paragraph. ` +
+            "Break it with a blank line; this renders on a phone.");
+        }
+      }
+      if (b.table) {
+        assert.ok(b.table.cols.length <= 4, `${id} table "${b.heading}" has ${b.table.cols.length} columns; too wide for a phone`);
+        for (const row of b.table.rows) {
+          assert.equal(row.length, b.table.cols.length, `${id} table "${b.heading}" has a row with the wrong cell count`);
+        }
+      }
+    }
+  }
+  assert.ok(taught >= 4, `only ${taught} skills have a teaching section`);
+});
+
+test("TEACHING: content drawn from the book cites the book", () => {
+  // It is the owner's own book, used with permission and paraphrased, but provenance still gets
+  // recorded like any other source.
+  const shared = loadAllSkills();
+  const BOOK = "An Insider's Guide to Clinical Medicine";
+  const taughtIds = Object.keys(shared).filter((id) => Array.isArray(shared[id].teach));
+  assert.ok(taughtIds.length > 0);
+  for (const id of taughtIds) {
+    const cited = (shared[id].sources || []).some((x) => String(x.source).indexOf(BOOK) >= 0);
+    assert.ok(cited, `${id} has taught content but does not cite the book it came from`);
+  }
+});
+
 /* Content quality ----------------------------------------------------------- */
 
 test("no em-dash in student-facing content", () => {

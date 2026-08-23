@@ -32,7 +32,7 @@
    * It sits under /_site/ deliberately - functions/_middleware.js 404s the app bundle from the
    * public web (after a scraping incident) but passes /_site/* straight through, so the shim needs
    * no hole in that wall. */
-  var YT_SHIM = "https://stewardmd.in/_site/yt.html";
+  var YT_SHIM = "https://stewardmd.in/_site/yt";
   var YT_TIMEOUT_MS = 5000;
 
   function C() { try { return window.SMD_CLINIX_CONTENT || null; } catch (e) { return null; } }
@@ -465,6 +465,7 @@
   function turnHtml(t, i, sk) {
     switch (t.kind) {
       case "show": return showTurn(t);
+      case "teach": return teachTurn(t);
       case "tell": return tellTurn(t);
       case "ask": return askTurn(t, i, "Before we start");
       case "check": return askTurn(t, i, "Check yourself");
@@ -565,6 +566,45 @@
     return head + '<div class="cx-media cx-media--pending">' + ic("image_not_supported") +
       '<div class="cx-media-cap"><b>' + esc(m.caption) + "</b>" +
       '<span class="cx-media-pending">' + esc(m.pendingNote) + "</span></div></div>";
+  }
+
+  /* The teaching turn. One idea per screen, short paragraphs, and a quiet "2 of 5" so the student
+   * can see how much learning is left before they are asked to do anything. */
+  function teachTurn(t) {
+    var b = t.block || {};
+    var html = '<div class="cx-eyebrow cx-eyebrow--learn">' + ic("school") + " Learning" +
+      (t.total > 1 ? ' <span class="cx-eyebrow-n">' + (t.index + 1) + " of " + t.total + "</span>" : "") + "</div>";
+    html += '<h3 class="cx-teach-h">' + esc(b.heading) + "</h3>";
+
+    if (b.body) {
+      // Author paragraphs are split on blank lines so long prose never arrives as one wall.
+      var paras = String(b.body).split(/\n\s*\n/);
+      for (var p = 0; p < paras.length; p++) {
+        if (paras[p].trim()) html += '<p class="cx-body">' + esc(paras[p].trim()) + "</p>";
+      }
+    }
+    if (b.points && b.points.length) {
+      html += '<ul class="cx-teach-list">';
+      for (var i = 0; i < b.points.length; i++) {
+        var pt = b.points[i];
+        if (typeof pt === "string") html += "<li>" + esc(pt) + "</li>";
+        else html += "<li><b>" + esc(pt.t || "") + "</b> " + esc(pt.d || "") + "</li>";
+      }
+      html += "</ul>";
+    }
+    if (b.table && b.table.cols && b.table.rows) {
+      html += '<div class="cx-tablewrap"><table class="cx-table"><thead><tr>';
+      for (var c = 0; c < b.table.cols.length; c++) html += "<th>" + esc(b.table.cols[c]) + "</th>";
+      html += "</tr></thead><tbody>";
+      for (var r = 0; r < b.table.rows.length; r++) {
+        html += "<tr>";
+        for (var k = 0; k < b.table.rows[r].length; k++) html += "<td>" + esc(b.table.rows[r][k]) + "</td>";
+        html += "</tr>";
+      }
+      html += "</tbody></table></div>";
+    }
+    if (b.note) html += '<div class="cx-teach-note">' + ic("lightbulb") + "<span>" + esc(b.note) + "</span></div>";
+    return html;
   }
 
   function tellTurn(t) {

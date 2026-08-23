@@ -53,6 +53,7 @@
   // A lesson is a sequence of turns, not a page. This is what makes it feel taught rather than read.
   var TURN_KINDS = [
     "show",    // media first: watch the manoeuvre before reading about it
+    "teach",   // the actual teaching: one idea per block, before anything is asked
     "tell",    // a short prose block with a heading (never a wall of text)
     "ask",     // a question the student answers BEFORE the answer is shown
     "reveal",  // tap-to-reveal findings
@@ -180,6 +181,24 @@
       }
     }
     if (s.kind === "history" && !isArr(s.asks)) e.push("skill.asks required for a history skill (" + str(s.id) + ")");
+
+    /* teach[] is the LEARNING half. Without it a lesson jumps straight to asking a student
+     * questions about something nobody ever taught them, which is how the first cut read as an
+     * interactive quiz rather than a teacher. Each block is one digestible idea. */
+    if (s.teach != null) {
+      if (!isArr(s.teach)) e.push("skill.teach must be an array (" + str(s.id) + ")");
+      else for (var t = 0; t < s.teach.length; t++) {
+        var b = s.teach[t];
+        if (!isObj(b)) { e.push(str(s.id) + ".teach[" + t + "] not an object"); continue; }
+        if (!isStr(b.heading)) e.push(str(s.id) + ".teach[" + t + "] needs a heading");
+        var hasBody = isStr(b.body) || (isArr(b.points) && b.points.length) || isObj(b.table);
+        if (!hasBody) e.push(str(s.id) + ".teach[" + t + "] has no body, points or table");
+        if (isObj(b.table)) {
+          if (!isArr(b.table.cols) || !b.table.cols.length) e.push(str(s.id) + ".teach[" + t + "].table needs cols");
+          if (!isArr(b.table.rows) || !b.table.rows.length) e.push(str(s.id) + ".teach[" + t + "].table needs rows");
+        }
+      }
+    }
 
     if (s.probes != null) {
       if (!isArr(s.probes)) e.push("skill.probes must be an array");
@@ -324,10 +343,16 @@
       t.push(turn("show", { media: firstMedia, title: skill.title, caption: skill.oneLine || "" }));
     }
 
-    // 2. ASK - activate the student's thinking before any answer is on screen. A level-1 probe
-    //    doubles as the hook, which is why probes are authored on the skill rather than the quiz.
-    var hook = pickProbe(skill, 1);
-    if (hook) t.push(turn("ask", { probe: hook, intent: "hook" }));
+    // 2. TEACH. This comes BEFORE any question. The first version of this engine asked a hook
+    //    question second, which works for a student who already half-knows the material and is
+    //    useless for one meeting it for the first time: it quizzes them on something nobody
+    //    taught them. Teaching first, then asking, is the "Show me, teach me, let me do it"
+    //    order the product promises.
+    if (isArr(skill.teach)) {
+      for (i = 0; i < skill.teach.length; i++) {
+        t.push(turn("teach", { block: skill.teach[i], index: i, total: skill.teach.length }));
+      }
+    }
 
     // 3. TELL - how to perform it, as discrete steps (never one paragraph).
     if (isArr(skill.steps) && skill.steps.length) {
@@ -370,7 +395,12 @@
       t.push(turn("reveal", { heading: "Common mistakes", items: items }));
     }
 
-    // 8. DOIT - practice.
+    // 8. ASK - only now, once they have been taught. A level-1 probe is the bridge from learning
+    //    to practising: it checks the ground is solid before asking them to perform.
+    var hook = pickProbe(skill, 1);
+    if (hook) t.push(turn("ask", { probe: hook, intent: "hook" }));
+
+    // 9. DOIT - practice.
     if (skill.kind === "exam" || skill.kind === "general_exam" || skill.kind === "approach") {
       t.push(turn("doit", {
         heading: "Now you do it",
@@ -379,7 +409,7 @@
       }));
     }
 
-    // 9. CHECK - a harder probe closes the loop and writes competency.
+    // 10. CHECK - a harder probe closes the loop and writes competency.
     var close = pickProbe(skill, 2) || pickProbe(skill, 3);
     if (close && (!hook || close !== hook)) t.push(turn("check", { probe: close, intent: "close" }));
 

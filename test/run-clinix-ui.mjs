@@ -209,8 +209,14 @@ try {
   }
 
   // Tap-to-reveal must actually hide the finding until tapped.
+  // Reveal now comes BEFORE ask in the lesson order (teach, how, why, reveal, ask), so re-open the
+  // lesson rather than walking forward from the ask turn, which has already passed it.
+  await ev("(function(){ var b=document.querySelector('#clinixRoot [data-act=\"cx-back\"]'); if(b) b.click(); return 1; })()");
+  await sleep(400);
+  await ev("(function(){ var b=document.querySelector('#clinixRoot [data-act=\"cx-lesson\"]'); if(b) b.click(); return !!b; })()");
+  await sleep(500);
   let foundReveal = false;
-  for (let i = 0; i < 12; i++) {
+  for (let i = 0; i < 30; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-turn--reveal')")) { foundReveal = true; break; }
     const next = await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]')");
     if (!next) break;
@@ -313,6 +319,38 @@ try {
     const a = C.media(b, 'media.dia.percussion'), t = C.media(b, 'media.dia.percussiontech');
     return !!(a && a.renderable && t && t.renderable && t.diagramId === 'diagram.percussion.technique');
   })()`)) === true, "percussion teaches WHERE and HOW, both self-authored");
+
+  /* ── 7a. TEACHING BEFORE ASKING ───────────────────────────────────────── */
+  console.log("\n--- teaching layer ---");
+  await attach(BASE + "?clinix=1");
+  await ev("window.CLINIX.open()"); await sleep(600);
+  await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
+  for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length > 0")) break; await sleep(250); }
+  // Cough and sputum is the skill taught most fully from the book.
+  await ev("(function(){ var r=[].slice.call(document.querySelectorAll('#clinixRoot .cx-row--skill')).filter(function(x){return x.textContent.indexOf('Cough')>=0;})[0]; if(r) r.click(); return !!r; })()");
+  await sleep(700);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-turn--teach')")) === true,
+    "a lesson now OPENS on teaching, not on a question");
+  ok((await ev("!document.querySelector('#clinixRoot .cx-turn--ask')")) === true,
+    "TEACH BEFORE ASK: no question on the first screen");
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-teach-h')")) === true, "the teaching block has a heading");
+  ok((await ev("(document.querySelector('#clinixRoot .cx-eyebrow--learn')||{}).textContent||''")).indexOf("Learning") >= 0,
+    "and is signposted as Learning");
+
+  // Walk the teaching turns and confirm real substance arrives before any question.
+  let teachSeen = 0, sawTable = false, sawList = false;
+  for (let i = 0; i < 12; i++) {
+    if (await ev("!!document.querySelector('#clinixRoot .cx-turn--teach')")) teachSeen++;
+    if (await ev("!!document.querySelector('#clinixRoot .cx-table')")) sawTable = true;
+    if (await ev("!!document.querySelector('#clinixRoot .cx-teach-list')")) sawList = true;
+    if (await ev("!!document.querySelector('#clinixRoot .cx-turn--ask')")) break;
+    if (!(await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]')"))) break;
+    await ev("document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]').click()");
+    await sleep(180);
+  }
+  ok(teachSeen >= 3, `several teaching screens before any question (${teachSeen})`);
+  ok(sawTable, "clinical tables render (duration, sputum, haemoptysis clues)");
+  ok(sawList, "structured point lists render");
 
   /* ── 7b. SKILLS LIBRARY: learn a skill with NO disease ─────────────────── */
   console.log("\n--- examination skills library ---");

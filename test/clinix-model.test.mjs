@@ -179,17 +179,45 @@ test("validatePack: catches a key/id mismatch in the skill table", () => {
 
 /* LEARN projection ---------------------------------------------------------- */
 
-test("compileLesson: SHOW comes before TELL and ASK comes before REVEAL", () => {
-  const s = skill({ media: ["m1"] });
+test("compileLesson: TEACH comes before ASK - you cannot quiz someone you never taught", () => {
+  // The first version asked a hook question second, which only works for a student who already
+  // half-knows the material. For someone meeting it for the first time it is a quiz on something
+  // nobody taught them, which is exactly how the module read as interactive rather than as a
+  // teacher. Order is now: show, teach, how, why, reveal, ask, practise, check.
+  const s = skill({ media: ["m1"], teach: [{ heading: "What it is", body: "..." }, { heading: "Why", points: ["a"] }] });
   const t = M.compileLesson(s);
   const kinds = t.map((x) => x.kind);
 
   assert.equal(kinds[0], "show", "media leads - watch it before reading about it");
+
+  const firstTeach = kinds.indexOf("teach");
   const firstAsk = kinds.indexOf("ask");
-  const firstReveal = kinds.indexOf("reveal");
   const firstTell = kinds.indexOf("tell");
-  assert.ok(firstAsk >= 0 && firstAsk < firstTell, "the student is asked before being told");
-  assert.ok(firstReveal > firstTell, "findings are revealed only after the teaching");
+  const firstReveal = kinds.indexOf("reveal");
+
+  assert.ok(firstTeach >= 0, "a skill with teaching content produces teaching turns");
+  assert.ok(firstTeach < firstTell, "teaching comes before the how-to steps");
+  assert.ok(firstAsk > firstTeach, "THE RULE: the student is taught before being asked anything");
+  assert.ok(firstAsk > firstTell, "and after being told how to do it");
+  assert.ok(firstReveal > firstTell, "findings are still revealed only after the teaching");
+});
+
+test("compileLesson: every teaching block becomes its own turn, numbered", () => {
+  // One idea per screen. A wall of prose is the thing this module exists not to be.
+  const s = skill({ teach: [{ heading: "A", body: "x" }, { heading: "B", body: "y" }, { heading: "C", body: "z" }] });
+  const teaches = M.compileLesson(s).filter((x) => x.kind === "teach");
+  assert.equal(teaches.length, 3);
+  assert.equal(teaches[0].index, 0);
+  assert.equal(teaches[0].total, 3);
+  assert.equal(teaches[2].block.heading, "C");
+});
+
+test("compileLesson: a skill with NO teaching content still works", () => {
+  // Not every skill needs a taught section, and the ones that do not must not break.
+  const t = M.compileLesson(skill());
+  assert.equal(t.filter((x) => x.kind === "teach").length, 0);
+  assert.ok(t.some((x) => x.kind === "ask"), "it still asks");
+  assert.ok(t.some((x) => x.kind === "tell"), "and still tells");
 });
 
 test("compileLesson: every lesson explains WHY", () => {

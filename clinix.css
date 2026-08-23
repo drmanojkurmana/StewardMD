@@ -650,3 +650,21 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-blurb--tight { padding: 0 0 8px; font-size: 12.5px; }
 #clinixRoot .cx-row-media { flex: 0 0 auto; color: var(--cx-teach); display: inline-flex; }
 #clinixRoot .cx-row-media .material-symbols-rounded { font-size: 20px; }
+
+/* ── teaching turns ───────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-eyebrow--learn { display: flex; align-items: center; gap: 6px; color: var(--cx-teach); }
+#clinixRoot .cx-eyebrow--learn .material-symbols-rounded { font-size: 17px; }
+#clinixRoot .cx-eyebrow-n { color: var(--cx-faint); font-weight: 600; letter-spacing: .04em; }
+#clinixRoot .cx-teach-h { margin: 0 0 12px; font-size: 21px; line-height: 1.25; font-weight: 700; letter-spacing: -.01em; }
+#clinixRoot .cx-teach-list { margin: 4px 0 14px; padding-left: 20px; }
+#clinixRoot .cx-teach-list li { font-size: 15.5px; line-height: 1.55; margin-bottom: 9px; }
+#clinixRoot .cx-teach-list li b { font-weight: 650; }
+/* A wide clinical table must scroll inside itself, never make the page scroll sideways. */
+#clinixRoot .cx-tablewrap { margin: 4px 0 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); }
+#clinixRoot .cx-table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+#clinixRoot .cx-table th, #clinixRoot .cx-table td { text-align: left; padding: 9px 11px; vertical-align: top; border-bottom: 1px solid var(--cx-line); }
+#clinixRoot .cx-table th { background: var(--cx-surface-2); font-weight: 700; font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+#clinixRoot .cx-table tr:last-child td { border-bottom: 0; }
+#clinixRoot .cx-teach-note { display: flex; gap: 9px; align-items: flex-start; margin: 4px 0 12px; padding: 13px; background: var(--cx-teach-soft); border-radius: var(--cx-r-ctl); font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-teach-note .material-symbols-rounded { font-size: 19px; color: var(--cx-teach); flex: 0 0 auto; }

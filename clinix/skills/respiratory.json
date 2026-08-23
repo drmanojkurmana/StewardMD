@@ -98,8 +98,8 @@
       ],
       "sources": [
         {
-          "source": "Harrison's Principles of Internal Medicine 22e",
-          "locator": "COPD, p.2249-2259"
+          "source": "An Insider's Guide to Clinical Medicine (2020)",
+          "locator": "Ch.3C Respiratory: Discussion on Cardinal Symptoms"
         },
         {
           "source": "GOLD Report",
@@ -108,7 +108,132 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Breathlessness is a sensation, not a measurement",
+          "body": "Dyspnoea is the patient's own uncomfortable awareness of their breathing. It is subjective, which is exactly why you must anchor it to something you can measure.\n\nA patient can be severely hypoxaemic and not feel breathless, and can feel desperately breathless with normal saturations. Never let the oximeter overrule the history, or the other way round.",
+          "note": "This is why 'moderate breathlessness' is a useless phrase. It cannot be compared with the same patient in six months, or with anyone else."
+        },
+        {
+          "heading": "Why the patient feels it",
+          "body": "Knowing the mechanism tells you what to ask next, because each one comes with its own set of questions.",
+          "table": {
+            "cols": [
+              "Mechanism",
+              "Typical causes"
+            ],
+            "rows": [
+              [
+                "Increased work of breathing, airflow obstruction",
+                "Asthma, COPD, tracheal obstruction"
+              ],
+              [
+                "Increased work, stiff lungs",
+                "Pulmonary oedema, fibrosis, alveolitis"
+              ],
+              [
+                "Increased work, restricted chest",
+                "Kyphoscoliosis, ankylosing spondylitis"
+              ],
+              [
+                "Wasted ventilation, V/Q mismatch",
+                "Consolidation, collapse, effusion, embolism"
+              ],
+              [
+                "Chemoreceptor drive",
+                "Hypoxia, acidosis, hypercapnia"
+              ],
+              [
+                "J receptor stimulation",
+                "Pulmonary oedema, embolism, congestion. Gives rapid shallow breathing"
+              ],
+              [
+                "Weak respiratory muscles",
+                "Guillain-Barre, myasthenia, polio"
+              ],
+              [
+                "Central",
+                "Exertion, anxiety, thyrotoxicosis"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Grade it against an activity",
+          "body": "Convert the sensation into a number you can defend. The mMRC scale does this with one question: what makes you stop?",
+          "points": [
+            {
+              "t": "Grade 0.",
+              "d": "Breathless only on strenuous exercise."
+            },
+            {
+              "t": "Grade 1.",
+              "d": "Short of breath hurrying on the flat, or walking up a slight hill."
+            },
+            {
+              "t": "Grade 2.",
+              "d": "Walks slower than others of the same age, or stops for breath walking at their own pace."
+            },
+            {
+              "t": "Grade 3.",
+              "d": "Stops for breath after about 100 metres, or after a few minutes on the flat."
+            },
+            {
+              "t": "Grade 4.",
+              "d": "Too breathless to leave the house, or breathless while dressing."
+            }
+          ],
+          "note": "Always ask what they could do a year ago and five years ago. The grade tells you where they are; the change tells you how fast they are getting there, and that is often the more useful number."
+        },
+        {
+          "heading": "Separate orthopnoea from PND, they are not the same",
+          "body": "Both are breathlessness related to lying down, and students routinely merge them. The timing and the way the patient gets relief tell them apart.",
+          "table": {
+            "cols": [
+              "",
+              "Orthopnoea",
+              "Paroxysmal nocturnal dyspnoea"
+            ],
+            "rows": [
+              [
+                "When",
+                "Soon after lying down",
+                "Wakes them 2 to 3 hours into sleep"
+              ],
+              [
+                "What they do",
+                "Sits up, adds pillows, sleeps propped",
+                "Gets out of bed, sits with legs down, goes to a window"
+              ],
+              [
+                "How fast it settles",
+                "Quickly on sitting up",
+                "Takes 15 to 30 minutes"
+              ],
+              [
+                "Why",
+                "Blood shifts from the legs into the chest, and the diaphragm is pushed up",
+                "Reabsorbed fluid plus a depressed respiratory centre during sleep"
+              ]
+            ]
+          },
+          "note": "Neither is specific to the heart. Orthopnoea also occurs in severe COPD, gross ascites and marked obesity. It is the company it keeps that makes it cardiac."
+        },
+        {
+          "heading": "The questions that separate the causes",
+          "points": [
+            "How long: sudden over minutes suggests pneumothorax or embolism; days suggests infection or effusion; months to years suggests COPD, fibrosis or anaemia.",
+            "Constant or in attacks: episodic with triggers and diurnal variation points to asthma.",
+            "What brings it on and what relieves it, including inhalers.",
+            "Any chest pain, and whether it is pleuritic.",
+            "Orthopnoea, PND and ankle swelling, for the cardiac contribution.",
+            "Wheeze, cough, sputum, fever, weight loss, night sweats.",
+            "Occupation and exposures, including birds and biomass smoke."
+          ],
+          "note": "In COPD, ask specifically about arm work above shoulder height. It is disproportionately hard because those muscles are already being borrowed to breathe."
+        }
+      ]
     },
     "skill.hx.resp.cough_sputum": {
       "id": "skill.hx.resp.cough_sputum",
@@ -201,13 +326,180 @@
       ],
       "sources": [
         {
+          "source": "An Insider's Guide to Clinical Medicine (2020)",
+          "locator": "Ch.3C Respiratory: Discussion on Cardinal Symptoms"
+        },
+        {
           "source": "Harrison's Principles of Internal Medicine 22e",
           "locator": "COPD, p.2249-2259"
         }
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "What a cough actually is",
+          "body": "A cough is a sudden, forced push of air out of the lungs through the airways, loud enough to interrupt the normal rhythm of breathing.\n\nIt is a reflex, not a decision. Irritant receptors in the pharynx, larynx, large airways and lung tissue send signals up the vagus to the cough centre in the brainstem, which fires the diaphragm and the expiratory muscles.",
+          "points": [
+            {
+              "t": "A deep breath in.",
+              "d": "You cannot cough properly without one."
+            },
+            {
+              "t": "The glottis snaps shut.",
+              "d": "Pressure builds behind it."
+            },
+            {
+              "t": "The expiratory muscles contract hard.",
+              "d": "Against a closed glottis."
+            },
+            {
+              "t": "The glottis opens suddenly.",
+              "d": "Air blasts out and carries secretions with it."
+            }
+          ],
+          "note": "This matters clinically: anything that weakens any one of those four steps gives you a weak, ineffective cough. That is why a patient with vocal cord palsy or weak respiratory muscles cannot clear their chest."
+        },
+        {
+          "heading": "Ask the duration first, because it splits the differential",
+          "body": "Before anything else, find out how long the cough has been there. Duration alone divides the causes into three very different lists.",
+          "table": {
+            "cols": [
+              "Duration",
+              "Called",
+              "Think of"
+            ],
+            "rows": [
+              [
+                "Under 3 weeks",
+                "Acute",
+                "Tracheobronchitis, pneumonia, acute-on-chronic bronchitis. Sudden onset: asthma, foreign body, whooping cough"
+              ],
+              [
+                "3 to 8 weeks",
+                "Subacute",
+                "Tuberculosis, pneumonia, post-viral cough, bronchiectasis"
+              ],
+              [
+                "Over 8 weeks",
+                "Chronic",
+                "COPD, asthma, TB, interstitial lung disease, lung cancer, occupational lung disease"
+              ]
+            ]
+          },
+          "note": "Chronic cigarette smoking is the single commonest cause of a chronic cough. Also remember the non-respiratory causes at every duration: reflux, heart failure, and ACE inhibitors."
+        },
+        {
+          "heading": "Then ask what it sounds like",
+          "body": "The character of the cough is a real clue, and patients can usually demonstrate it if you ask them to.",
+          "table": {
+            "cols": [
+              "Type",
+              "What it suggests"
+            ],
+            "rows": [
+              [
+                "Dry",
+                "Pleural disease, interstitial disease, mediastinal lesions"
+              ],
+              [
+                "Productive",
+                "Suppurative lung disease, airway disease"
+              ],
+              [
+                "Brassy or metallic",
+                "Trachea compressed from outside, by a mass or an aneurysm"
+              ],
+              [
+                "Bovine, no explosive force",
+                "Recurrent laryngeal nerve palsy, so the glottis cannot close"
+              ],
+              [
+                "Paroxysmal, in bouts",
+                "Whooping cough, chronic bronchitis, asthma, foreign body"
+              ],
+              [
+                "Barking",
+                "Croup, epiglottis involvement"
+              ],
+              [
+                "Spluttering, on swallowing",
+                "Tracheo-oesophageal fistula, or aspiration"
+              ],
+              [
+                "Hacking",
+                "Heavy smoker, chronic pharyngitis or laryngitis"
+              ]
+            ]
+          },
+          "note": "A bovine cough is worth recognising on the spot. It means the cord cannot close, so the cough has no explosive phase, and it points you straight at a lesion on the recurrent laryngeal nerve."
+        },
+        {
+          "heading": "If anything comes up, describe it properly",
+          "body": "Do not ask whether the cough is productive; most patients do not know what that means. Ask whether anything comes up when they cough, and then pin down three things: how much, what it looks like, and whether it smells.",
+          "points": [
+            {
+              "t": "Quantity.",
+              "d": "Normal is only 10 to 15 mL a day and is swallowed unnoticed. Over 100 mL a day is bronchorrhoea. Offer household measures: a teaspoon, an eggcup, half a cup."
+            },
+            {
+              "t": "Colour and consistency.",
+              "d": "Mucoid and clear is chronic bronchitis or asthma. Purulent and yellow-green means infection. Rusty suggests pneumococcal pneumonia. Pink and frothy means pulmonary oedema. Currant-jelly and sticky suggests Klebsiella."
+            },
+            {
+              "t": "Odour.",
+              "d": "Foul-smelling sputum means anaerobes: think lung abscess or bronchiectasis."
+            },
+            {
+              "t": "Change.",
+              "d": "Ask what is different from usual. A change in volume or colour is what defines an exacerbation."
+            }
+          ],
+          "note": "Two findings are close to diagnostic on their own. Sputum that settles into three layers, foam on top, mucus in the middle, thick pus at the bottom, is bronchiectasis. And sputum that only comes up in certain positions means a cavity or a dilated airway is draining when gravity allows it."
+        },
+        {
+          "heading": "Always ask about blood, and mean it",
+          "body": "Haemoptysis is coughing blood from below the vocal cords. It runs from a streak in the sputum to frank blood with no sputum at all, and it always needs explaining.\n\nAsk it as a direct question. Patients often do not volunteer a small streak because they assume it came from the throat.",
+          "table": {
+            "cols": [
+              "Clue alongside the blood",
+              "Points towards"
+            ],
+            "rows": [
+              [
+                "Heavy smoker, weight loss",
+                "Lung cancer"
+              ],
+              [
+                "Copious purulent sputum, recurrent infections",
+                "Bronchiectasis or lung abscess"
+              ],
+              [
+                "Fever, productive cough",
+                "Pneumonia, acute bronchitis"
+              ],
+              [
+                "Night sweats, weight loss, contact history",
+                "Tuberculosis"
+              ],
+              [
+                "Pleuritic pain, calf tenderness",
+                "Pulmonary embolism or infarction"
+              ],
+              [
+                "Orthopnoea, PND, pink frothy sputum",
+                "Left ventricular failure, mitral stenosis"
+              ],
+              [
+                "On an anticoagulant",
+                "Medication effect or a clotting disorder"
+              ]
+            ]
+          },
+          "note": "Before calling it haemoptysis, make sure it was coughed and not vomited, and that it did not come from the nose or gums. Blood that is frothy and bright red with a cough is haemoptysis; dark blood with food and nausea is haematemesis."
+        }
+      ]
     },
     "skill.hx.resp.smoking": {
       "id": "skill.hx.resp.smoking",
