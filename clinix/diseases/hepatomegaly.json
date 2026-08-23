@@ -140,77 +140,177 @@
       },
       "history": {
         "presenting": {
-          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help"],
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
           "reply": "Doctor, I have been breathless and my legs have been swelling for about three weeks. Recently I noticed a dull ache under my right ribs too.",
           "key": true
         },
         "tenderness": {
-          "cues": ["tender", "painful", "does it hurt", "pain under the ribs", "sore"],
+          "cues": [
+            "tender",
+            "painful",
+            "does it hurt",
+            "pain under the ribs",
+            "sore"
+          ],
           "reply": "Yes, it is tender there, especially if I press on it myself or if someone touches it firmly.",
           "key": true,
           "skillId": "skill.hx.gi.hepatomegaly"
         },
         "orthopnea": {
-          "cues": ["lying flat", "lie flat", "pillows", "orthopnoea", "orthopnea", "breathless at night", "wake up gasping"],
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "pillows",
+            "orthopnoea",
+            "orthopnea",
+            "breathless at night",
+            "wake up gasping",
+            "lie down",
+            "lying down",
+            "pnd",
+            "paroxysmal nocturnal dyspnea",
+            "paroxysmal nocturnal dyspnoea",
+            "sit up to breathe"
+          ],
           "reply": "I cannot lie flat anymore, I need two pillows, and some nights I wake up gasping for breath and have to sit up.",
           "key": true
         },
         "exertional_dyspnea": {
-          "cues": ["breathless on exertion", "walking", "stairs", "how far can you walk", "exercise tolerance"],
+          "cues": [
+            "breathless on exertion",
+            "walking",
+            "stairs",
+            "how far can you walk",
+            "exercise tolerance",
+            "sob",
+            "short of breath",
+            "shortness of breath",
+            "breathlessness"
+          ],
           "reply": "I get breathless just walking to the bathroom now. A year ago I could walk to the market and back without trouble.",
           "key": true
         },
         "leg_swelling": {
-          "cues": ["leg swelling", "ankle swelling", "feet swelling", "oedema", "edema"],
+          "cues": [
+            "leg swelling",
+            "ankle swelling",
+            "feet swelling",
+            "oedema",
+            "edema"
+          ],
           "reply": "Both my ankles have been swelling, worse by evening, for about a month now.",
           "key": true
         },
         "jaundice": {
-          "cues": ["yellow eyes", "jaundice", "yellow urine", "yellowing"],
+          "cues": [
+            "yellow eyes",
+            "jaundice",
+            "yellow urine",
+            "yellowing"
+          ],
           "reply": "My daughter says my eyes look a little yellow, but I had not noticed it myself.",
           "key": true
         },
         "fever": {
-          "cues": ["fever", "chills", "rigors", "temperature"],
+          "cues": [
+            "fever",
+            "chills",
+            "rigors",
+            "temperature"
+          ],
           "reply": "No fever at all.",
           "key": true
         },
         "alcohol": {
-          "cues": ["alcohol", "drink", "drinking"],
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking"
+          ],
           "reply": "I have never had alcohol in my life, doctor.",
           "key": true
         },
         "weight_appetite": {
-          "cues": ["weight loss", "losing weight", "appetite", "eating"],
+          "cues": [
+            "weight loss",
+            "losing weight",
+            "appetite",
+            "eating"
+          ],
           "reply": "My appetite has been poor lately because everything feels heavy, but I have not deliberately lost weight."
         },
         "malignancy_history": {
-          "cues": ["cancer", "malignancy", "tumour", "lump elsewhere", "growth"],
+          "cues": [
+            "cancer",
+            "malignancy",
+            "tumour",
+            "lump elsewhere",
+            "growth"
+          ],
           "reply": "No, I have never been told I have cancer anywhere."
         },
         "cardiac_history": {
-          "cues": ["heart disease", "heart problem", "rheumatic fever", "valve", "murmur", "palpitations"],
+          "cues": [
+            "heart disease",
+            "heart problem",
+            "rheumatic fever",
+            "valve",
+            "murmur",
+            "palpitations"
+          ],
           "reply": "I was told as a child I had a murmur after a fever, but I never had it checked again after that. I have had high blood pressure for fifteen years.",
           "key": true
         },
         "chest_pain": {
-          "cues": ["chest pain", "pain in the chest", "tightness"],
+          "cues": [
+            "chest pain",
+            "pain in the chest",
+            "tightness"
+          ],
           "reply": "No real chest pain, just this tightness with the breathlessness."
         },
         "travel": {
-          "cues": ["travel", "malaria", "kala-azar", "endemic area", "rural exposure"],
+          "cues": [
+            "travel",
+            "malaria",
+            "kala-azar",
+            "endemic area",
+            "rural exposure"
+          ],
           "reply": "I have lived in the same city house my whole life. No recent travel."
         },
         "drug_history": {
-          "cues": ["medicine", "medication", "tablet", "diuretic", "taking anything"],
+          "cues": [
+            "medicine",
+            "medication",
+            "tablet",
+            "diuretic",
+            "taking anything"
+          ],
           "reply": "I take a tablet for blood pressure. I stopped taking my water tablet myself two weeks ago because it made me pass urine too often."
         },
         "family": {
-          "cues": ["family", "hereditary", "heart disease in family", "liver disease in family"],
+          "cues": [
+            "family",
+            "hereditary",
+            "heart disease in family",
+            "liver disease in family"
+          ],
           "reply": "My mother had heart trouble too, in her old age."
         },
         "allergy": {
-          "cues": ["allergy", "allergic", "reaction to any"],
+          "cues": [
+            "allergy",
+            "allergic",
+            "reaction to any"
+          ],
           "reply": "No allergies."
         }
       },
@@ -236,7 +336,13 @@
           "abnormal": true
         }
       },
-      "essentialInvestigations": ["ecg", "echo", "lft", "cbc", "usg"],
+      "essentialInvestigations": [
+        "ecg",
+        "echo",
+        "lft",
+        "cbc",
+        "usg"
+      ],
       "investigations": {
         "ecg": {
           "label": "ECG",
@@ -289,17 +395,35 @@
       },
       "differentialModel": {
         "answer": "Congestive hepatomegaly due to right heart failure from severe tricuspid regurgitation, with new atrial fibrillation as a likely trigger. Consider constrictive pericarditis, hepatoma, and infective or infiltrative causes of a tender liver.",
-        "accept": ["congestive", "heart failure", "tricuspid", "constrictive", "hepatoma", "infective"],
+        "accept": [
+          "congestive",
+          "heart failure",
+          "tricuspid",
+          "constrictive",
+          "hepatoma",
+          "infective"
+        ],
         "minMatch": 2
       },
       "diagnosis": {
         "answer": "Tender, pulsatile congestive hepatomegaly secondary to right heart failure from severe tricuspid regurgitation, decompensated by new atrial fibrillation and recent diuretic withdrawal.",
-        "accept": ["congestive", "heart failure", "right heart"],
+        "accept": [
+          "congestive",
+          "heart failure",
+          "right heart"
+        ],
         "minMatch": 1
       },
       "managementModel": {
         "answer": "Restart and optimise diuretic therapy, rate-control the atrial fibrillation, restrict salt, and refer for cardiology assessment of the tricuspid valve lesion. Correct the anaemia contributing to the workload on the heart, and monitor liver enzymes as a marker of congestion rather than treating them as primary liver disease. Avoid unnecessary hepatotoxic drugs while the congestion is being addressed.",
-        "accept": ["diuretic", "rate control", "salt restriction", "cardiology referral", "tricuspid", "heart failure treatment"],
+        "accept": [
+          "diuretic",
+          "rate control",
+          "salt restriction",
+          "cardiology referral",
+          "tricuspid",
+          "heart failure treatment"
+        ],
         "minMatch": 2
       },
       "teachingPoints": [

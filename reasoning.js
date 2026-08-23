@@ -3801,8 +3801,13 @@
       var call = aiHeaders().then(function (h) {
         return fetch(b + "/viva-judge", { method: "POST", headers: h, body: JSON.stringify({ question: String(question).slice(0, 400), keyPoints: String(keyPoints || "").slice(0, 600), answer: String(answer).slice(0, 800) }) });
       }).then(function (r) { return r.json(); })
-        .then(function (j) { return (j && j.verdict) ? j : null; })
-        .catch(function () { return null; });
+        // A quota/rate response carries a real, already-written user-facing message (e.g. "MaiK
+        // usage limit reached for now...") - collapsing every non-verdict response to a bare null
+        // threw that away, so the student only ever saw a generic "could not review" toast with no
+        // way to tell a real cap from a transient network blip. Pass the whole body through when
+        // there's no verdict; judgeVivaAnswer() picks a message off it.
+        .then(function (j) { return (j && j.verdict) ? j : (j || { error: "server" }); })
+        .catch(function () { return { error: "server" }; });
       // A tiny call should return fast; if the native CapacitorHttp path stalls (does not honour
       // AbortController - see raceTimeout's own comment above), fall back to null rather than leave
       // the student staring at "MaiK is examining your answer" forever.

@@ -1146,8 +1146,11 @@
       var label = a.correct === true ? "Good" : partial ? "Nearly there"
         : a.revealed ? "The answer" : a.correct === null ? "Model answer" : "Not quite";
       html += '<div class="cx-fb ' + cls + '">' +
-        '<div class="cx-fb-h">' + ic(icon) + " " + esc(label) + "</div>" +
-        '<p class="cx-fb-a">' + esc(cur.q.probe.a) + "</p>";
+        '<div class="cx-fb-h">' + ic(icon) + " " + esc(label) + "</div>";
+      if (!a.revealed && a.given) {
+        html += '<p class="cx-fb-given"><b>You answered:</b> ' + esc(a.given) + "</p>";
+      }
+      html += '<p class="cx-fb-a"><b>' + (a.correct === true ? "Model answer:" : "Correct answer:") + '</b> ' + esc(cur.q.probe.a) + "</p>";
       if (a.examinerFeedback) {
         html += '<p class="cx-fb-examiner"><b>MaiK, examining your answer:</b> ' + esc(a.examinerFeedback) + "</p>";
       }
@@ -1533,7 +1536,7 @@
       if (state.vivaCurrent !== cur || state.vivaState.lastAnswer !== a) return;
       a.pending = false;
       if (r && r.verdict) { a.examinerFeedback = r.feedback; a.examinerVerdict = r.verdict; }
-      else toast("MaiK could not review that just now");
+      else toast((r && r.message) || "MaiK could not review that just now");
       repaint();
     });
   }

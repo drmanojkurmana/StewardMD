@@ -200,7 +200,11 @@
     if (!vivaAvailable()) return Promise.resolve({ error: "ai-off" });
     var keyPoints = isStr(probe.a) ? probe.a : (isArr(probe.accept) ? probe.accept.join(", ") : "");
     return G.SMD_AI.vivaJudge(probe.q, keyPoints, given).then(function (r) {
-      if (!r || !r.verdict) return { error: "server" };
+      // A quota/rate response carries a real, server-written message ("MaiK usage limit reached
+      // for now...") - surface it verbatim rather than collapsing every non-verdict outcome to
+      // the same generic "server" error, which is honest about failing but tells the student
+      // nothing about WHY (a real cap looks identical to a dropped connection otherwise).
+      if (!r || !r.verdict) return { error: (r && r.error) || "server", message: r && r.message };
       var s = sanitize(r.feedback || "");
       return { verdict: r.verdict, feedback: s.text, blocked: s.blocked };
     }).catch(function () { return { error: "server" }; });

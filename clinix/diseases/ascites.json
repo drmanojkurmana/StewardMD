@@ -154,90 +154,206 @@
       },
       "history": {
         "presenting": {
-          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help", "what is troubling"],
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
           "reply": "Doctor, my belly has been swelling for about three months. It has been getting bigger and bigger, and now my clothes do not fit. My legs have also started swelling in the last month.",
           "key": true
         },
         "onset_order": {
-          "cues": ["which came first", "leg swelling or belly", "what started first", "order of swelling", "belly first or legs"],
+          "cues": [
+            "which came first",
+            "leg swelling or belly",
+            "what started first",
+            "order of swelling",
+            "belly first or legs"
+          ],
           "reply": "The belly started first, doctor, well before the legs. The legs only started about four weeks ago.",
           "key": true,
           "skillId": "skill.hx.gi.ascites"
         },
         "rate": {
-          "cues": ["how fast", "how quickly", "getting bigger", "sudden or slow", "gradual"],
+          "cues": [
+            "how fast",
+            "how quickly",
+            "getting bigger",
+            "sudden or slow",
+            "gradual"
+          ],
           "reply": "It came on slowly, week by week. It was not sudden at all.",
           "key": true
         },
         "alcohol": {
-          "cues": ["alcohol", "drink", "drinking", "toddy", "arrack", "how much do you drink"],
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking",
+            "toddy",
+            "arrack",
+            "how much do you drink"
+          ],
           "reply": "I drink country arrack most evenings, doctor. Maybe four to five drinks a day, for close to twenty-five years now. I have not touched it in the last two weeks because I have been unwell.",
           "key": true,
           "skillId": "skill.hx.gi.cld"
         },
         "jaundice": {
-          "cues": ["yellow eyes", "jaundice", "yellow urine", "yellowing"],
+          "cues": [
+            "yellow eyes",
+            "jaundice",
+            "yellow urine",
+            "yellowing"
+          ],
           "reply": "Yes, my wife told me my eyes looked a little yellow about two months ago. It has not gone away completely.",
           "key": true,
           "skillId": "skill.hx.gi.cld"
         },
         "gi_bleed": {
-          "cues": ["vomiting blood", "blood in vomit", "black stool", "tarry stool", "blood in stool"],
+          "cues": [
+            "vomiting blood",
+            "blood in vomit",
+            "black stool",
+            "tarry stool",
+            "blood in stool"
+          ],
           "reply": "No, doctor, I have never vomited blood, and my stools have always looked normal.",
           "key": true,
           "skillId": "skill.hx.gi.cld"
         },
         "sensorium": {
-          "cues": ["confusion", "personality change", "sleep pattern", "day night reversal", "behaviour change", "memory"],
+          "cues": [
+            "confusion",
+            "personality change",
+            "sleep pattern",
+            "day night reversal",
+            "behaviour change",
+            "memory"
+          ],
           "reply": "My son says I have been more forgetful lately and sleep during the day, then stay awake most of the night. I had not noticed it myself.",
           "key": true,
           "skillId": "skill.hx.gi.cld"
         },
         "orthopnea": {
-          "cues": ["lying flat", "lie flat", "breathless at night", "pillows", "orthopnoea", "orthopnea", "wake up gasping"],
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "breathless at night",
+            "pillows",
+            "orthopnoea",
+            "orthopnea",
+            "wake up gasping",
+            "lie down",
+            "lying down",
+            "pnd",
+            "paroxysmal nocturnal dyspnea",
+            "paroxysmal nocturnal dyspnoea",
+            "sit up to breathe"
+          ],
           "reply": "No, I sleep flat with one pillow and I do not wake up short of breath.",
           "key": true
         },
         "frothy_urine": {
-          "cues": ["frothy urine", "foamy urine", "kidney disease", "puffy face", "facial swelling"],
+          "cues": [
+            "frothy urine",
+            "foamy urine",
+            "kidney disease",
+            "puffy face",
+            "facial swelling"
+          ],
           "reply": "No, my urine looks normal, and my face has not been puffy in the mornings.",
           "key": true
         },
         "weight_appetite": {
-          "cues": ["weight loss", "losing weight", "appetite", "eating"],
+          "cues": [
+            "weight loss",
+            "losing weight",
+            "appetite",
+            "eating"
+          ],
           "reply": "My appetite has been poor for the last two months, but I think most of the swelling is fluid, not weight loss.",
           "key": true
         },
         "fever_ts": {
-          "cues": ["fever", "night sweats", "chills", "tuberculosis", "tb contact"],
+          "cues": [
+            "fever",
+            "night sweats",
+            "chills",
+            "tuberculosis",
+            "tb contact"
+          ],
           "reply": "No fever, no night sweats. Nobody at home has tuberculosis that I know of."
         },
         "abdominal_pain": {
-          "cues": ["pain", "belly pain", "tenderness", "does it hurt"],
+          "cues": [
+            "pain",
+            "belly pain",
+            "tenderness",
+            "does it hurt"
+          ],
           "reply": "It feels tight and heavy, but there is no real pain, and no fever with it."
         },
         "breathlessness": {
-          "cues": ["breathless", "short of breath", "difficulty breathing"],
+          "cues": [
+            "breathless",
+            "short of breath",
+            "difficulty breathing"
+          ],
           "reply": "Only when the belly is very full, then it is hard to take a deep breath. Otherwise I am fine walking around the farm."
         },
         "leg_swelling": {
-          "cues": ["leg swelling", "ankle swelling", "feet swelling", "oedema", "edema"],
+          "cues": [
+            "leg swelling",
+            "ankle swelling",
+            "feet swelling",
+            "oedema",
+            "edema"
+          ],
           "reply": "Both my ankles are puffy by evening, worse than in the morning."
         },
         "drug_history": {
-          "cues": ["medicine", "medication", "diuretic", "tablet", "painkiller", "taking anything"],
+          "cues": [
+            "medicine",
+            "medication",
+            "diuretic",
+            "tablet",
+            "painkiller",
+            "taking anything"
+          ],
           "reply": "I started a water tablet from a local doctor about three weeks ago. I do not know the name. I also take a painkiller sometimes for my knees."
         },
         "past_illness": {
-          "cues": ["diabetes", "blood pressure", "hypertension", "heart", "past illness", "operations", "tuberculosis"],
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "heart",
+            "past illness",
+            "operations",
+            "tuberculosis"
+          ],
           "reply": "No diabetes, no blood pressure problem, no heart disease that I know of. No operations."
         },
         "family": {
-          "cues": ["family", "father", "brother", "hereditary", "liver disease in family"],
+          "cues": [
+            "family",
+            "father",
+            "brother",
+            "hereditary",
+            "liver disease in family"
+          ],
           "reply": "No one in my family has had liver trouble that I know of."
         },
         "allergy": {
-          "cues": ["allergy", "allergic", "reaction to any"],
+          "cues": [
+            "allergy",
+            "allergic",
+            "reaction to any"
+          ],
           "reply": "No allergies."
         }
       },
@@ -279,7 +395,13 @@
           "abnormal": true
         }
       },
-      "essentialInvestigations": ["ascitic_tap", "lft", "coag", "cbc", "usg"],
+      "essentialInvestigations": [
+        "ascitic_tap",
+        "lft",
+        "coag",
+        "cbc",
+        "usg"
+      ],
       "investigations": {
         "ascitic_tap": {
           "label": "Diagnostic ascitic tap with paired serum albumin",
@@ -332,17 +454,40 @@
       },
       "differentialModel": {
         "answer": "Ascites due to decompensated alcoholic cirrhosis, high-SAAG and portal hypertensive. Consider cardiac ascites, nephrotic syndrome, and tuberculous or malignant peritonitis.",
-        "accept": ["cirrhosis", "alcoholic", "portal hypertension", "cardiac", "nephrotic", "tuberculous", "malignant", "hepatic"],
+        "accept": [
+          "cirrhosis",
+          "alcoholic",
+          "portal hypertension",
+          "cardiac",
+          "nephrotic",
+          "tuberculous",
+          "malignant",
+          "hepatic"
+        ],
         "minMatch": 3
       },
       "diagnosis": {
         "answer": "Decompensated alcoholic cirrhosis with moderate-volume, high-SAAG ascites, no spontaneous bacterial peritonitis, and early hepatic encephalopathy.",
-        "accept": ["cirrhosis", "decompensated", "alcoholic"],
+        "accept": [
+          "cirrhosis",
+          "decompensated",
+          "alcoholic"
+        ],
         "minMatch": 1
       },
       "managementModel": {
         "answer": "Sodium restriction and an aldosterone antagonist, adding a loop diuretic if the response is inadequate, with regular weight and renal function checks. Stop the unsupervised diuretic and the painkiller he has been taking. Treat the early encephalopathy, screen again for a GI bleed given the low platelets, and support alcohol cessation. Large-volume paracentesis with albumin replacement if the ascites becomes tense, and continued surveillance for spontaneous bacterial peritonitis and for hepatocellular carcinoma.",
-        "accept": ["sodium restriction", "diuretic", "spironolactone", "aldosterone", "paracentesis", "albumin", "alcohol cessation", "encephalopathy", "lactulose"],
+        "accept": [
+          "sodium restriction",
+          "diuretic",
+          "spironolactone",
+          "aldosterone",
+          "paracentesis",
+          "albumin",
+          "alcohol cessation",
+          "encephalopathy",
+          "lactulose"
+        ],
         "minMatch": 3
       },
       "teachingPoints": [
