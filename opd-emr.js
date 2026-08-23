@@ -2166,8 +2166,31 @@
       complaint: complaint || (demo ? "headache" : ""), known: v, demo: demo,
       demoAnswers: demo ? ["no", "no", "no", "gradually", "right side", "throbbing type", "very severe", "nausea undi"] : null,
       onFindings: demo ? function () {} : maikApplyFindings,     // demo never touches the EMR
+      onConfirm: demo ? function () {} : maikConfirm,            // fast path: doctor-confirmed write
       onReview: function () { switchTab("assess"); }
     });
+  }
+  // The doctor reviewed (and possibly edited) the interview transcript and tapped Save. This is the
+  // ONLY route that writes MaiK Ask output anywhere: the ticked findings go through the same guarded
+  // apply as before, the A-to-Z transcript is kept as the patient-reported history it actually is, and
+  // the whole thing is mirrored into the visit timeline so the summary covers the entire consult.
+  function maikConfirm(r) {
+    r = r || {};
+    maikApplyFindings(r.findings || []);
+    var tx = String(r.transcript || "").trim();
+    if (!tx) return;
+    st.assessVals = st.assessVals || {};
+    var key = "History_present_illness";
+    var block = "MaiK Ask (patient-reported history):\n" + tx;
+    var cur = st.assessVals[key] || "";
+    if (cur.indexOf(tx) === -1) {
+      st.assessVals[key] = cur ? (cur.replace(/\s+$/, "") + "\n\n" + block) : block;
+      try { putVoiceDom(key); } catch (e) {}
+    }
+    // Timeline is a real write, so it respects the same write gate as the assessment save.
+    if (writeFlagOn()) { try { addToTimeline("maik-ask", block); } catch (e) {} }
+    paint();
+    toast("MaiK Ask history added. Review it, then Save the assessment.");
   }
   function maikApplyFindings(findings) {
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.maikSources = st.maikSources || {};

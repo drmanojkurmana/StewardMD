@@ -187,7 +187,14 @@ export async function authorizeOrg(env, actor, orgId, cap, target) {
   if (!orgDoc) return { ok: false, reason: "org_not_found" };
   const actorId = actor && actor.id ? actor.id : "";
   if (M.isOwnerOfOrg(orgDoc, actorId)) return M.authorizeOrgAccess(orgDoc, null, actorId, orgId, cap, target);
-  const m = await getMembership(env, orgId, actorId);
+  let m = await getMembership(env, orgId, actorId);
+  // An invited doctor/staffer is added by EMAIL or login name (the console's member form), but a
+  // Firebase sign-in presents the account UID as actor.id - so the uid lookup misses and the person is
+  // "not a member" in the phone app while the SAME account works on the console (a staff session
+  // carries the identity as its id). Fall back to the email before deciding they have no membership.
+  // Owners never reach here: isOwnerOfOrg short-circuits above, which is why this only ever bit the
+  // second doctor in a clinic.
+  if (!m && actor && actor.email) m = await getMembership(env, orgId, actor.email);
   return M.authorizeOrgAccess(orgDoc, m, actorId, orgId, cap, target);
 }
 
