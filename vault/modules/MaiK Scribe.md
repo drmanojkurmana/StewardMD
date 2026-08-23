@@ -52,6 +52,20 @@ specialist for the rest of the session. The LLM `en` translation still recovers 
 English-speaking clinic should tap **EN** rather than Auto. A proper fix would run a detection-only
 pass on the multilingual weights for the first chunk, then route. Not done.
 
+## GOTCHA — iOS decoded segment text PER SEGMENT (second, independent cause)
+
+whisper.cpp emits byte-level BPE, so a multi-byte character can straddle a segment boundary.
+MEASURED: `whisper_full_get_segment_text()` returned a segment starting with the bare continuation
+byte `b9` where `e0 b0 b9` (హ) belongs — the `e0 b0` prefix sits at the end of the previous segment.
+`WhisperEngine.swift` decoded EACH segment with `String(cString:)`, whose repairing behaviour turns
+both halves into U+FFFD. This is why the very first Telugu letter was destroyed while the next one
+survived. Fixed by accumulating raw bytes across all segments and decoding once.
+
+**Android was already correct** (`whisper_jni.cpp` builds a `std::string`, one `NewStringUTF`) — that
+is why the bug was iPhone-only. Keep the two in step.
+Runnable proof: `xcrun swift local-plugins/capacitor-whisper/ios/segment-decode-check.swift`.
+Reaching the device needs `build-www` -> `cap sync` -> native rebuild.
+
 ## GOTCHA — garbage in, confabulation out
 `scribeExtractPrompt` instructs the LLM to "reconstruct the intended CLINICAL meaning" from garbled
 ASR. With a U+FFFD transcript that means it INVENTS a plausible consultation, which `_applyRefine`
