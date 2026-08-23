@@ -544,7 +544,20 @@ export async function onRequest(context) {
       if (seg === "pool") {   // register a department-level walk-in into the central unassigned pool
         const az = await azOrg(CAPS.QUEUE_ADD); if (!az.ok) return deny(az);
         const org = await ORG.getOrg(env, body.orgId);
-        const t = await Q.addToPool(env, org, body, actor.id);
+        let t = await Q.addToPool(env, org, body, actor.id);
+        // AUTO-ROUTE (2026-08-24): the pool exists so a big hospital's reception can triage into many
+        // rooms. A clinic with exactly ONE staffed room has nothing to triage - but the ticket still sat
+        // in the pool until someone tapped "Route to a room", and the doctor's app (which polls only its
+        // OWN room session) never saw the patient. Staff reasonably read "Add to pool" as done.
+        // So when there is exactly one room with a resolved doctor, route it there immediately.
+        // Multi-room orgs are untouched: they still get the explicit triage step.
+        try {
+          const staffed = (await ORG.listRooms(env, org.id)).filter((r) => resolveRoomDoctor(r));
+          if (staffed.length === 1) {
+            await Q.assignToRoom(env, org, t.id, staffed[0], { date: body.date }, actor.id);
+            t = (await Q.getTicket(env, t.id)) || t;
+          }
+        } catch (e) { /* routing is best-effort: the ticket still exists in the pool to route by hand */ }
         return json({ ok: true, ticket: (await ticketView(env, [t]))[0], board: await boardForOrg(env, org, body.date || "") }, 200, request);
       }
       if (seg === "assign-room") {   // nurse assigns a pool/room ticket to a specific room

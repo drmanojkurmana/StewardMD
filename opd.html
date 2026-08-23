@@ -163,7 +163,13 @@
 (function(){
   "use strict";
   var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital", LS_TT="smd_opd_toktype";
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
+  // The clinic DAY is IST, not UTC. The session key bakes the date in (functions/_queue_engine.js
+  // sessionId()), and the server computes it as now()+05:30 (opdDate). This page used to send
+  // new Date().toISOString().slice(0,10) - a UTC day - so between 00:00 and 05:30 IST the console wrote
+  // to YESTERDAY's session while the doctor's app read TODAY's, and console-added patients simply never
+  // appeared. Same clinic, same room, different bucket.
+  function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
