@@ -97,7 +97,8 @@
    Putting the close here also means "leave this screen" is in the same place on every CliniX
    screen, since every other one has its back button top-left. */
 #clinixRoot .cx-hero-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 8px; color: rgba(255,255,255,.9); }
-#clinixRoot .cx-hero-mark { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+#clinixRoot .cx-hero-mark { display: flex; align-items: center; gap: 8px; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+#clinixRoot .cx-hero-logo { flex: 0 0 auto; }
 #clinixRoot .cx-hero-tag { margin-top: 4px; font-size: 13px; opacity: .84; }
 
 /* ── sections and rows ────────────────────────────────────────────────────── */

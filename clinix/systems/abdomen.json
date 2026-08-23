@@ -6,7 +6,7 @@
   "system": "abdomen",
   "kind": "system-module",
   "oneLine": "The whole abdomen workup, before any particular disease",
-  "estMinutes": 70,
+  "estMinutes": 110,
   "review": {
     "status": "ai_drafted"
   },
@@ -55,10 +55,14 @@
     {
       "id": "systemic_exam",
       "title": "Abdominal examination",
-      "blurb": "Inspection, palpation, ascites",
+      "blurb": "Inspection, auscultation, palpation, liver, spleen, gallbladder, kidneys, ascites",
       "skills": [
         "skill.exam.gi.inspection",
+        "skill.exam.gi.auscultation",
         "skill.exam.gi.palpation",
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.gallbladder_kidney",
         "skill.exam.gi.ascites"
       ]
     },
@@ -83,21 +87,25 @@
           "skill.approach.introduce",
           "skill.approach.consent",
           "skill.exam.gi.inspection",
+          "skill.exam.gi.auscultation",
           "skill.exam.gi.palpation",
-          "skill.exam.gi.ascites"
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen"
         ],
         "examinerQuestions": [
-          "Distinguish guarding from rigidity.",
-          "How much fluid does shifting dullness need to detect?",
-          "Why do you feel FOR the liver rather than pressing onto it?"
+          "Which method did you use to palpate the liver, and name two others.",
+          "Describe Castell's sign and what a positive result means.",
+          "Distinguish an enlarged spleen from an enlarged left kidney using three features."
         ]
       }
     ]
   },
   "viva": {
     "skills": [
-      "skill.exam.gi.palpation",
+      "skill.exam.gi.liver",
+      "skill.exam.gi.spleen",
       "skill.exam.gi.ascites",
+      "skill.exam.gi.gallbladder_kidney",
       "skill.hx.gi.pain"
     ]
   }

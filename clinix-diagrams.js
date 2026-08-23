@@ -350,7 +350,84 @@
       '<div class="cx-dia-note">The bars breathe at their real relative rates. A <b>falling</b> rate in an exhausted, distressed patient is not improvement, it is impending respiratory arrest.</div>';
   }
 
+  /* ── 13. Nine regions of the abdomen (interactive) ───────────────────────── */
+
+  var ABD_REGIONS = [
+    { id: "rhyp", cx: 84, cy: 60, label: "Right hypochondrium", organs: "Liver, gallbladder, right kidney" },
+    { id: "epig", cx: 170, cy: 60, label: "Epigastrium", organs: "Stomach, pancreas, duodenum, aorta" },
+    { id: "lhyp", cx: 256, cy: 60, label: "Left hypochondrium", organs: "Spleen, splenic flexure, left kidney" },
+    { id: "rlum", cx: 84, cy: 140, label: "Right lumbar", organs: "Ascending colon, right kidney" },
+    { id: "umb", cx: 170, cy: 140, label: "Umbilical", organs: "Small bowel, aorta, para-aortic nodes" },
+    { id: "llum", cx: 256, cy: 140, label: "Left lumbar", organs: "Descending colon, left kidney" },
+    { id: "riif", cx: 84, cy: 220, label: "Right iliac fossa", organs: "Caecum, appendix" },
+    { id: "hyp", cx: 170, cy: 220, label: "Hypogastrium", organs: "Bladder, uterus (if enlarged)" },
+    { id: "liif", cx: 256, cy: 220, label: "Left iliac fossa", organs: "Sigmoid colon" }
+  ];
+
+  function abdRegions(o) {
+    var sel = (o && o.selected) || null, html = "", i;
+    html += '<svg class="cx-dia cx-dia--chest" viewBox="0 0 340 280" role="img" aria-label="Nine regions of the abdomen, tap to identify">' +
+      '<rect class="cx-dia-body" x="14" y="16" width="312" height="248" rx="24"/>' +
+      '<line class="cx-dia-mid" x1="127" y1="16" x2="127" y2="264"/>' +
+      '<line class="cx-dia-mid" x1="213" y1="16" x2="213" y2="264"/>' +
+      '<line class="cx-dia-mid" x1="14" y1="100" x2="326" y2="100"/>' +
+      '<line class="cx-dia-mid" x1="14" y1="180" x2="326" y2="180"/>';
+    for (i = 0; i < ABD_REGIONS.length; i++) {
+      var r = ABD_REGIONS[i], on = sel === r.id;
+      html += '<g class="cx-dia-zone cx-dia-zone--region' + (on ? " cx-dia-zone--on" : "") + '" data-act="cx-dia-region" data-id="' + r.id + '" role="button" tabindex="0" aria-label="' + esc(r.label) + '">' +
+        '<rect x="' + (r.cx - 40) + '" y="' + (r.cy - 34) + '" width="80" height="68" rx="8"/>' +
+        '<text x="' + r.cx + '" y="' + (r.cy + 4) + '" text-anchor="middle">' + esc(r.label.split(" ")[0]) + "</text></g>";
+    }
+    html += "</svg>";
+    var chosen = null;
+    for (i = 0; i < ABD_REGIONS.length; i++) if (ABD_REGIONS[i].id === sel) chosen = ABD_REGIONS[i];
+    html += '<div class="cx-dia-note">' + (chosen
+      ? "<b>" + esc(chosen.label) + "</b> " + esc(chosen.organs)
+      : "Tap a region to see what normally lies beneath it. Localised distension or tenderness is read against this map.") + "</div>";
+    return html;
+  }
+
+  /* ── 14. Liver palpation: the preferred (bimanual) method, animated ──────── */
+
+  function liverPalp() {
+    return '<svg class="cx-dia cx-dia--anim" viewBox="0 0 340 210" role="img" aria-label="Preferred method of liver palpation, hands rising to meet the descending edge on inspiration">' +
+      '<rect class="cx-dia-skin" x="20" y="70" width="300" height="110" rx="14"/>' +
+      '<path class="cx-dia-liver" d="M180 76 C230 70 280 78 296 96 L296 130 C260 118 210 116 182 126 Z"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="216" y="100">liver</text>' +
+      '<g class="cx-dia-liverhands">' +
+        '<path class="cx-dia-hand" d="M160 150 L296 150 L302 162 L154 162 Z"/>' +
+        '<text class="cx-dia-lbl cx-dia-lbl--normal" x="160" y="178">both hands flat, fingers towards the ribs</text>' +
+      "</g>" +
+      '<path class="cx-dia-press" d="M228 190 L228 168" marker-end="url(#cxArrow)"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="184" y="204">ask for a deep breath; the edge meets the fingertips</text>' +
+      '<defs><marker id="cxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">' +
+        '<path d="M0 0 L10 5 L0 10 z" class="cx-dia-arrowhead"/></marker></defs>' +
+      "</svg>" +
+      '<div class="cx-dia-note">The hand stays still. The DIAPHRAGM pushes the liver edge down onto your fingers on inspiration, rather than you chasing it down with repeated presses.</div>';
+  }
+
+  /* ── 15. Spleen: the diagonal sweep and where it enlarges towards ────────── */
+
+  function spleenPalp() {
+    return '<svg class="cx-dia cx-dia--anim" viewBox="0 0 340 210" role="img" aria-label="Splenic enlargement travels diagonally from the left upper quadrant towards the right iliac fossa">' +
+      '<rect class="cx-dia-skin" x="20" y="16" width="300" height="178" rx="16"/>' +
+      '<line class="cx-dia-mid" x1="170" y1="16" x2="170" y2="194"/>' +
+      '<line class="cx-dia-mid" x1="20" y1="105" x2="320" y2="105"/>' +
+      '<circle class="cx-dia-alv" cx="120" cy="60" r="16"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="60" y="40">normal spleen,</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="60" y="54">tucked under the ribs</text>' +
+      '<path class="cx-dia-spleenpath" d="M120 60 C150 100 190 140 230 172"/>' +
+      '<circle class="cx-dia-air cx-dia-air--trapped" cx="230" cy="172" r="10"/>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="200" y="192">enlarges towards the right iliac fossa</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="150">sweep the palpating hand</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="164">diagonally along this line</text>' +
+      "</svg>" +
+      '<div class="cx-dia-note">A spleen you can feel has already doubled or tripled in size, and it enlarges along this one diagonal, from the left costal margin towards the umbilicus and the right iliac fossa, never in a random direction.</div>';
+  }
+
   /* ── registry ────────────────────────────────────────────────────────────── */
+
+
 
   var DIAGRAMS = {
     "diagram.flowvolume":   { title: "Flow-volume loop", render: flowVolume, interactive: true },
@@ -364,7 +441,10 @@
     "diagram.trachea":      { title: "Tracheal position", render: trachea },
     "diagram.clubbing":     { title: "Clubbing and the Schamroth window", render: clubbing, interactive: true },
     "diagram.effusionshift":{ title: "Which way the mediastinum moves", render: effusionShift, interactive: true },
-    "diagram.breathing":    { title: "Breathing patterns", render: breathingPatterns }
+    "diagram.breathing":    { title: "Breathing patterns", render: breathingPatterns },
+    "diagram.abdregions":    { title: "Nine regions of the abdomen", render: abdRegions, interactive: true },
+    "diagram.liverpalp":     { title: "Liver palpation, preferred method", render: liverPalp },
+    "diagram.spleenpalp":    { title: "Splenic enlargement, direction of spread", render: spleenPalp }
   };
 
   function has(id) { return Object.prototype.hasOwnProperty.call(DIAGRAMS, id); }

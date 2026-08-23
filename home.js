@@ -1448,7 +1448,7 @@
       eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
       eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
-    { act: "clinix", ic: "school", tt: "CliniX", sub: "Clinical learning", feat: true,
+    { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
       eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
@@ -1493,7 +1493,12 @@
     derm: '<svg class="ai-anim ai-derm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle class="p" cx="10" cy="10" r="1.7"/><circle class="p p2" cx="15" cy="14" r="1.7"/><circle class="p p3" cx="9.5" cy="15" r="1.3"/></svg>',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
-    maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">'
+    maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
+    // CliniX mark: an interlocking C+X monogram, self-authored inline SVG (no hosted asset).
+    clinix: '<svg viewBox="0 0 100 70" width="30" height="21"><defs><linearGradient id="cxLogoGradHome" x1="0" y1="0" x2="100" y2="70">' +
+      '<stop offset="0" stop-color="#1b3a52"/><stop offset="1" stop-color="#2fb8b0"/></linearGradient></defs>' +
+      '<path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="url(#cxLogoGradHome)" stroke-width="9" stroke-linecap="round"/>' +
+      '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="url(#cxLogoGradHome)" stroke-width="9" stroke-linecap="round"/></svg>'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
