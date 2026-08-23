@@ -24,6 +24,14 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## Modules
+- [ ] **[[CliniX]] clinical sign-off** — content is `ai_drafted` and the review gate hides ALL of it
+      from students. Flip `review.status` to `approved` per skill after review. This is the ONLY
+      thing between the module and student testing.
+- [ ] **[[CliniX]] media sourcing** — 10 uncleared entries in `clinix/media/manifest.json`, each with
+      what is needed and where to look. Openly-licensed or permitted embeds only; the 3 that render
+      today are self-authored diagrams.
+- [ ] [[CliniX]] decide whether the exam-vocabulary firewall widening should apply app-wide (it would
+      fix the two-token clarify trap for doctors typing "JVP" too, not just students)
 - [ ] [[ICU]] v2 redesign deploy (rules+indexes, emulator + 2-device test); alert-safety push
 - [ ] [[KardiQ X]] photo-dx pivot (image-based model) — ≤$35 GPU-VM overnight build
 - [ ] [[Medical Knowledge Base]] — Obsidian → build pipeline for clinical content; dx-mgmt enrichment merge

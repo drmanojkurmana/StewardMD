@@ -235,3 +235,47 @@ Existing files touched (5): `index.html` (CSS link + script block), `home.js` (`
   behind the dev flag only; publishing to students needs your clinical sign-off.
 - Whether CliniX competency should ever be visible to a college/faculty account (currently: no, it is
   private to the student).
+
+---
+
+## Delivery status (2026-08-23)
+
+**Built: phases 1, 2, 3, 5, 6, 7, 8. Flag `smd_clinix` OFF. Recovery point: tag `pre-clinix`.**
+
+| Phase | Status |
+|---|---|
+| 1 · Engine and spine | Built. Model, loader, store, lesson runner, navigation, home tile. |
+| 2 · MaiK tutor | Built. Own quota, own system prompt, dose guard, scope widening. |
+| 3 · Media engine | Built. Licence gate + 3 self-authored inline diagrams (the only kind clearable today). |
+| 4 · Investigations + treatment | Built (authored into both disease packs, KB-grounded). |
+| 5 · Case mode | Built. Deterministic simulated patient, six gated phases, dimension-wise scoring. |
+| 6 · OSCE | Built. Stations generated from skills; a critical miss fails regardless of total. |
+| 7 · Viva | Built. Adaptive examiner over the same probes. |
+| 8 · Scale content | Two diseases (COPD, pleural effusion). Reuse measured at 68% and 77%. |
+
+Tests: **117 unit + 64 real-browser (CDP)** green. Full repo suite shows **104 failures before and
+after**, the identical set, verified against `pre-clinix` in a clean worktree.
+
+### What is deliberately NOT done, and why
+
+- **Content is `ai_drafted`, not approved.** Every skill is cited to Harrison 22e, GOLD or Macleod's
+  with a locator, but no clinician has signed it off, so the review gate hides all of it from a
+  student. **This is the gate working.** Flipping `review.status` to `approved` is the owner's call,
+  per skill, and is the single thing standing between this and a usable module.
+- **Ten media entries are uncleared.** `clinix/media/manifest.json` is the sourcing work order; each
+  entry names what is needed and where to look. The three that render are ones we drew.
+- **The `case` chapter of pleural effusion has no simulated patient yet.** COPD has one; the second
+  disease deliberately shipped without, to keep the reuse measurement honest.
+- **No voice.** `SMD_VOICE.listen` and the Capacitor TTS wrapper in `maik-ask.js:216` are the reusable
+  pieces when spoken tutoring is wanted.
+- **Native rebuild not run.** Client changes reach the app only after `build-www` (verified working,
+  `clinix/` ships) then `cap sync` and a native rebuild.
+
+### Owner decisions still open
+
+1. **Per-skill clinical sign-off.** Nothing reaches a student until this happens.
+2. **Media sourcing** against the work order, under the openly-licensed + permitted-embed policy.
+3. Whether the exam-vocabulary firewall widening (currently CliniX-only) should apply app-wide. It is
+   genuinely medical vocabulary and would fix the same clarify-trap for doctors typing "JVP".
+4. Whether CliniX competency should ever be visible to a college or faculty account. Currently it is
+   private to the student and syncs nowhere.
