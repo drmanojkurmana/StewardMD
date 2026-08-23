@@ -4497,7 +4497,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var ttft = _perfTTFT ? ((_perfTTFT - _perfT0) / 1000).toFixed(1) : null;
                   var el = document.createElement("div"); el.className = "maik-perf";
                   el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
-                  el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                  // Label it truthfully. On native there is NO live stream (reasoning.js explainGroundedStream
+                  // returns fallback(): fetch the whole answer, then type it out), so what used to be shown
+                  // as "first token" was really "the server finished" - and the gap after it was a cosmetic
+                  // animation, not generation. Calling that "first token" hid where the time actually went.
+                  var _replayed = !!(r && r.replayed);
+                  el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
+                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }

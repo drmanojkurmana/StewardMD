@@ -3831,15 +3831,25 @@
       // Reveal a finished answer progressively so it "flows" like a live stream. Native WebViews
       // buffer SSE (CapacitorHttp), so true token streaming isn't possible there — we fetch the whole
       // answer, then type it out via onDelta (reusing the exact streaming render). Web streams for real.
-      function replay(res) {
+      function replay(res, waitedMs) {
         var full = res && res.text;
         if (!full || typeof onDelta !== "function") return res;
+        try { if (res && typeof res === "object") res.replayed = true; } catch (e) {}   // it did NOT stream
         return new Promise(function (resolve) {
           // Word-paced reveal (ChatGPT feel): advance whole words at a steady rate, so a short
           // answer really types word-by-word and a long one reveals a few words per frame instead
-          // of one big burst. Capped at ~MAX_FRAMES so a very long answer still can't drag on.
+          // of one big burst.
+          //
+          // BUDGETED AGAINST THE WAIT (2026-08-24). The ceiling used to be a flat ~260 frames
+          // (~4.3s @60fps) no matter what. On native there is no real streaming - the whole answer is
+          // fetched, THEN typed out - so after a 10.5s round trip the clinician was made to watch
+          // another ~3.4s of animation over text the app already had in hand. That is not "streaming
+          // feel", it is just more waiting. The reveal is cosmetic, so spend the budget only where it
+          // buys something: a fast answer still types out, a slow one appears almost at once.
           var words = full.match(/\S+\s*/g) || [full];   // each token keeps its trailing space → join === full
-          var per = Math.max(1, Math.ceil(words.length / 260));   // words/frame; ~260 frames (~4.3s @60fps) ceiling
+          var w = Number(waitedMs) || 0;
+          var frames = w > 6000 ? 30 : (w > 3000 ? 60 : 150);   // ~0.5s / ~1s / ~2.5s @60fps
+          var per = Math.max(1, Math.ceil(words.length / frames));
           var raf = window.requestAnimationFrame || function (f) { return setTimeout(f, 16); };
           var n = 0, acc = "";
           (function tick() {
@@ -3850,20 +3860,49 @@
           })();
         });
       }
-      function fallback() { return Promise.resolve(self.explainGrounded(pkg, opts)).then(replay); }
+      // Time the round trip so replay() can budget its animation against how long the clinician has
+      // ALREADY waited, rather than adding a fixed few seconds on top of a slow answer.
+      function fallback() {
+        var t0 = Date.now();
+        return Promise.resolve(self.explainGrounded(pkg, opts))
+          .then(function (res) { return replay(res, Date.now() - t0); });
+      }
       // Transport. On NATIVE the app's window.fetch is the CapacitorHttp bridge, which BUFFERS SSE (can't
       // stream) — but window.CapacitorWebFetch is the PRISTINE WebView fetch that CAN stream a cross-origin
       // SSE (the /explain response echoes CORS, so capacitor:// is allowed). Web uses the normal fetch.
       // This lets native stream like the web (first token in seconds) instead of waiting for the whole
       // answer; if the pristine stream misbehaves we fall straight back to the proven whole-fetch path.
       var isNative = !!window.SMD_IS_NATIVE;
-      // NATIVE: WKWebView BUFFERS SSE (no progressive tokens arrive) AND CapacitorWebFetch's promise can
-      // ignore the AbortController, so a stalled live stream never settles → the 90s hang (#562). So we
-      // never open a live SSE on native. Instead take the bounded whole-answer fetch and TYPE IT OUT via
-      // replay() — the answer still reveals word-by-word like ChatGPT (just after the fetch, not during
-      // generation, which the WebView can't do). Web keeps true token streaming below.
-      if (isNative) return fallback();
-      var sfetch = (typeof fetch === "function") ? fetch : null;
+      /* REAL NATIVE STREAMING (2026-08-24).
+       *
+       * This whole path - the watchdog, the native first-token budget, the nsBad cooldown, the
+       * clean-completion requirement - was already written FOR native and then made unreachable by a
+       * blanket `if (isNative) return fallback();`. The result was a black wait: the app fetched the
+       * entire answer and only then typed it out, so nothing appeared on screen until generation had
+       * completely finished. The server has streamed all along (:streamGenerateContent?alt=sse ->
+       * text/event-stream with X-Accel-Buffering: no).
+       *
+       * Two things make opening it for real safe:
+       *
+       *  1. TRANSPORT. window.fetch on native is the CapacitorHttp bridge, which BUFFERS - streaming
+       *     through it delivers nothing, which is what "WKWebView buffers SSE" actually was.
+       *     window.CapacitorWebFetch is the PRISTINE WebView fetch and can stream a cross-origin SSE
+       *     (the /explain response echoes CORS, so capacitor:// is allowed). Use that on native. If it
+       *     is not present, keep the old behaviour rather than streaming through a buffering bridge.
+       *
+       *  2. THE 90s HANG (#562). CapacitorWebFetch's promise can ignore the AbortController, so
+       *     aborting a stalled stream may never settle it. We therefore no longer RELY on abort: a
+       *     hard deadline races the whole attempt and settles with the proven whole-answer fetch,
+       *     ABANDONING the stream instead of waiting for it to die. A leaked request is survivable;
+       *     a clinician staring at a spinner is not.
+       *
+       * Reversible: localStorage smd_maik_native_stream="0" restores the fetch-then-replay behaviour.
+       */
+      var nativeStreamOn = (function () { try { return localStorage.getItem("smd_maik_native_stream") !== "0"; } catch (e) { return true; } })();
+      // .bind(window): an unbound fetch throws "Illegal invocation" - native-bridge.js:631 binds it the same way.
+      var pristine = (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null;
+      if (isNative && (!nativeStreamOn || !pristine)) return fallback();
+      var sfetch = isNative ? pristine : ((typeof fetch === "function") ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
       // a momentary CORS/WebKit hiccup) must not force EVERY later query onto the slower whole-answer
@@ -3889,9 +3928,23 @@
       // (WKWebView quirk / CORS strip), abort fast and fall back rather than stalling the clinician.
       var FIRST_MS = isNative ? 6000 : 12000, STALL_MS = isNative ? 12000 : 15000;
       function arm(ms) { if (wd) clearTimeout(wd); wd = setTimeout(function () { if (!settled) { try { ctrl.abort(); } catch (e) {} } }, ms); }
-      function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } }
+      var hardTimer = null;
+      function done() { settled = true; if (wd) { clearTimeout(wd); wd = null; } if (hardTimer) { clearTimeout(hardTimer); hardTimer = null; } }
       arm(FIRST_MS);
-      return aiHeaders().then(function (h) {
+      // Settles even if the stream never does (#562: abort can be ignored). Whatever streamed so far
+      // is DISCARDED in favour of the proven fetch - a half-answer must never look like a whole one.
+      var HARD_MS = isNative ? 25000 : 45000;
+      var hardDeadline = new Promise(function (res) {
+        hardTimer = setTimeout(function () {
+          if (settled) return;
+          settled = true;
+          if (wd) { clearTimeout(wd); wd = null; }
+          try { ctrl.abort(); } catch (e) {}
+          if (isNative) nsBad(true);
+          res(fallback());
+        }, HARD_MS);
+      });
+      var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
         return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
@@ -3928,6 +3981,7 @@
           return fallback();
         });
       }).catch(function () { done(); if (isNative) nsBad(true); return fallback(); });
+      return Promise.race([attempt, hardDeadline]);
     },
     // Imaging Assist — clinician-invoked structured summary of ONE radiology report. Sends a
     // DE-IDENTIFIED packet (report text PHI-redacted client-side; NO name/MRN/bed/other-patient
