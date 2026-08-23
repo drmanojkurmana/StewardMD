@@ -476,18 +476,42 @@
    */
   function available() { return !!llama(); }
 
-  /* Is this a DEVELOPMENT build? Asked once at load and cached, because the engine picker needs the
-   * answer synchronously. Used only to open the experimental gate on a dev build - a release build
-   * reports false and still requires an access code. */
-  var _debugBuild = false;
-  function isDebugBuild() { return _debugBuild; }
-  (function probeDebug() {
+  /* Is this a DEVELOPMENT build? Cached, because the engine picker needs the answer synchronously.
+   * Used only to open the experimental gate on a dev build - a release build reports false and still
+   * requires an access code.
+   *
+   * BUGFIX (2026-08-24): this probe used to be ONE SHOT -
+   *     var L = llama(); if (!L || !L.available) return;
+   * Capacitor registers its plugins asynchronously, so when this module loaded first the plugin was
+   * not there yet, the probe gave up FOREVER, and _debugBuild stayed false for the whole session.
+   * gateActive() then read false, effective() silently downgraded "local" to "rag", and a clinician
+   * who had downloaded 2.5 GB got KB-only answers with no explanation. Now it retries until the
+   * bridge is up, and re-probes on demand so a caller is never stuck with a stale "no".
+   */
+  var _debugBuild = false, _debugProbed = false;
+  function isDebugBuild() { if (!_debugProbed) probeDebug(0); return _debugBuild; }
+  function debugProbed() { return _debugProbed; }
+  function probeDebug(tries) {
+    tries = (tries == null) ? PROBE_TRIES : tries;
     try {
       var L = llama();
-      if (!L || !L.available) return;
-      L.available().then(function (a) { _debugBuild = !!(a && a.debugBuild); }).catch(function () {});
-    } catch (e) {}
-  })();
+      if (!L || !L.available) {
+        if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+        return;
+      }
+      L.available().then(function (a) {
+        _debugBuild = !!(a && a.debugBuild); _debugProbed = true;
+      }).catch(function () {
+        if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+      });
+    } catch (e) {
+      if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+    }
+  }
+  // ~6 s of retries: the bridge is normally up in well under a second, and giving up quietly is the
+  // exact failure this replaces.
+  var PROBE_TRIES = 24, PROBE_DELAY_MS = 250;
+  probeDebug();
 
   /**
    * Load the model AND fault its pages in, ahead of any question.
@@ -531,7 +555,7 @@
     isFollowUp: isFollowUp, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
-    warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
+    warm: warm, isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;
