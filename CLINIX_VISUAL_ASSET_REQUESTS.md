@@ -149,29 +149,14 @@ and divisions/motor component/intraoral supply) plus a technique panel for the C
 and corneal reflex. Saved as `clinix-trigeminal-a.jpg`, `clinix-trigeminal-b.jpg`,
 `clinix-cn5-motor-corneal.jpg`, wired on `skill.exam.neuro.cn5`.
 
-## CLX-V011 — Rinne's and Weber's tuning-fork technique
-- **Clinical context:** `skill.exam.neuro.cn8` (vestibulocochlear).
-- **Must show:** fork placement on the mastoid vs beside the ear (Rinne's), and on the vertex
-  (Weber's).
-- **Preferred format:** short demonstration video (30-90s).
-- **Where it appears:** CN VIII bedside hearing-test step.
-- **Status:** OPEN
+## CLX-V011 — Rinne's and Weber's tuning-fork technique — **FILLED** (2026-08-24)
+oEmbed-verified video (Geeky Medics): `media.vid.rinneweber`, on `skill.exam.neuro.cn8`.
 
-## CLX-V012 — Dermatome map
-- **Clinical context:** `skill.exam.neuro.sensory`.
-- **Must show:** the standard anterior + posterior dermatome chart, for mapping pin-prick/touch
-  findings to a spinal root level.
-- **Preferred format:** static diagram, both views.
-- **Where it appears:** sensory-exam lesson.
-- **Status:** OPEN
+## CLX-V012 — Dermatome map — **FILLED** (already, tracker was stale)
+`media.img.dermatomes` on `skill.exam.neuro.sensory`.
 
-## CLX-V013 — Named gait patterns, reference video
-- **Clinical context:** `skill.exam.neuro.gait`.
-- **Must show:** each named gait (hemiplegic, high-stepping, waddling, ataxic, parkinsonian, and
-  the other patterns taught in the lesson) for a few seconds each, captioned.
-- **Preferred format:** short video compilation.
-- **Where it appears:** gait-examination lesson.
-- **Status:** OPEN
+## CLX-V013 — Named gait patterns, reference video — **FILLED** (already, tracker was stale)
+`media.vid.gaitex` on `skill.exam.neuro.gait`.
 
 ---
 
@@ -195,47 +180,46 @@ logged below.
 - **Must show:** the dull-percussion / bronchial-breathing / increased-vocal-resonance triad over
   a consolidated lobe, ideally side-by-side with the normal finding.
 - **Preferred format:** diagram or short video.
-- **Status:** OPEN
+- **Status:** OPEN (searched 2026-08-24 - no Commons diagram or on-topic video exists; the only
+  video candidate found was a generic percussion/auscultation technique clip, functionally
+  redundant with media.vid.respexam already on the shared skill. This concept is abstract
+  (a comparison, not a single photographable thing) and likely needs a self-authored diagram,
+  same as media.dia.percussion.)
 
 ## CLX-V015 — Acute severe asthma: wheeze vs the silent chest
 - **Clinical context:** Bronchial asthma disease-findings, `skill.asthma.signs`.
 - **Must show:** the contrast between a wheezy, distressed chest and a dangerously silent one
   (airflow too low to make a sound) — an audio pair would work as well as video.
 - **Preferred format:** audio or video pair.
-- **Status:** OPEN
+- **Status:** OPEN (searched 2026-08-24 - individual wheeze clips exist and are oEmbed-verifiable,
+  but nothing pairs wheeze against a genuine silent-chest recording, which is the actual point.)
 
-## CLX-V016 — External markers of tuberculosis
-- **Clinical context:** TB general examination, `skill.tb.signs`.
-- **Must show:** erythema nodosum, phlyctenular conjunctivitis, scrofuloderma/lupus vulgaris —
-  real clinical photos, licence-cleared.
-- **Preferred format:** image set.
-- **Status:** OPEN
+## CLX-V016 — External markers of tuberculosis — **FILLED, 3 of 4 markers** (2026-08-24)
+Commons-verified: erythema nodosum (`media.img.erythemanodosum`, CC BY 3.0, Biswarup Ganguly),
+scrofuloderma (`media.img.scrofuloderma`, CC BY-SA 4.0, Mohammad2018), lupus vulgaris
+(`media.img.lupusvulgaris`, public domain, George Henry Fox - a genuine but historical 1905
+clinical photo, no modern equivalent found). All three on `skill.tb.signs`.
 
-## CLX-V017 — TB chest X-ray patterns
-- **Clinical context:** TB investigations, `skill.ix.tb.workup`.
-- **Must show:** upper-zone cavitation vs fibrosis vs miliary pattern, as a comparison set.
-- **Preferred format:** image set.
-- **Status:** OPEN
+Phlyctenular conjunctivitis stays OPEN: the only Commons candidate found is an 1897 veterinary
+textbook illustration of a different species/tissue (keratitis, not conjunctivitis) - rejected as
+misleading. Real human clinical photos exist in PMC/journal case reports but are not openly
+licensed.
 
-## CLX-V018 — Osler's nodes vs Janeway lesions
-- **Clinical context:** Infective endocarditis, `skill.exam.ie.stigmata`.
-- **Must show:** tender pulp nodules (Osler's) vs painless palmar/plantar macules (Janeway) —
-  side by side, since the tender/painless distinction is the fastest way to tell them apart.
-- **Preferred format:** image pair.
-- **Status:** OPEN
+## CLX-V017 — TB chest X-ray patterns — **FILLED** (2026-08-24)
+Three Commons-verified radiographs, one per pattern: fibrotic (`media.img.tbcxr.fibrotic`, CC0,
+Boris Giller), cavitation (`media.img.tbcxr.cavitation`, CC BY-SA 4.0, Hellerhoff), miliary
+(`media.img.tbcxr.miliary`, CC BY-SA 2.0, Yale Rosen). All three on `skill.ix.tb.workup`.
 
-## CLX-V019 — Mitral stenosis auscultation
-- **Clinical context:** Rheumatic heart disease, `skill.exam.cvs.murmurs` emphasis.
-- **Must show:** the mid-diastolic rumble with presystolic accentuation, bell technique, left
-  lateral position.
-- **Preferred format:** short audio or video.
-- **Status:** OPEN
+## CLX-V018 — Osler's nodes vs Janeway lesions — **FILLED** (2026-08-24)
+Commons-verified pair: `media.img.oslernodes` (CC BY-SA 4.0, Roberto J. Galindo) and
+`media.img.janewaylesion` (CC BY-SA 4.0, Warfieldian), both on `skill.exam.ie.stigmata`.
 
-## CLX-V020 — Fixed vs physiological S2 splitting
-- **Clinical context:** Congenital heart disease (ASD), `skill.chd.signs`.
-- **Must show:** ASD's fixed split contrasted with the normal inspiratory-widening split.
-- **Preferred format:** animated diagram or short video.
-- **Status:** OPEN
+## CLX-V019 — Mitral stenosis auscultation — **FILLED** (2026-08-24)
+oEmbed-verified video (Medzcool): `media.vid.mitralstenosis`, on `skill.exam.cvs.murmurs`.
+
+## CLX-V020 — Fixed vs physiological S2 splitting — **FILLED** (2026-08-24)
+oEmbed-verified video pair (Medzcool): `media.vid.s2fixed` + `media.vid.s2physiological`, both on
+`skill.chd.signs`.
 
 ## CLX-V021 — STEMI sequential ECG evolution
 - **Clinical context:** Ischaemic heart disease investigations, `skill.ix.ihd.ecg`.
@@ -243,18 +227,13 @@ logged below.
 - **Preferred format:** diagram/strip series.
 - **Status:** OPEN
 
-## CLX-V022 — Asterixis (flapping tremor)
-- **Clinical context:** Chronic liver disease stigmata, `skill.exam.gi.cld_stigmata`.
-- **Must show:** the elicitation technique and the flap itself.
-- **Preferred format:** short video or GIF.
-- **Status:** OPEN
+## CLX-V022 — Asterixis (flapping tremor) — **FILLED** (2026-08-24)
+oEmbed-verified video (Doctor O'Donovan): `media.vid.asterixis`, on `skill.exam.gi.cld_stigmata`.
 
-## CLX-V023 — Spider naevi with diascopy
-- **Clinical context:** Chronic liver disease stigmata, `skill.exam.gi.cld_stigmata`.
-- **Must show:** a spider naevus, and the glass-slide (diascopy) technique showing it blanch and
-  refill from the centre.
-- **Preferred format:** photo, ideally a before/after diascopy pair.
-- **Status:** OPEN
+## CLX-V023 — Spider naevi with diascopy — **PARTIALLY FILLED** (2026-08-24)
+Commons-verified naevus-morphology photo (`media.img.spidernaevus`, CC BY 2.0), on
+`skill.exam.gi.cld_stigmata`. No genuine before/after diascopy pair found on Commons - that
+technique stays text-taught.
 
 ## CLX-V024 — Scleral icterus grades
 - **Clinical context:** Jaundice, `skill.gen.jaundice`.
@@ -262,12 +241,11 @@ logged below.
 - **Preferred format:** photo pair.
 - **Status:** OPEN
 
-## CLX-V025 — Spinal cord compression, examination/localisation video
-- **Clinical context:** Cord compression, `skill.exam.cord.spine`.
-- **Must show:** sensory-level mapping and the bedside extradural-vs-intradural discriminators.
-- **Preferred format:** video.
-- **Status:** OPEN (searched, only found Osmosis's own hosted page — no independently
-  oEmbed-verifiable YouTube id)
+## CLX-V025 — Spinal cord compression, examination/localisation video — **PARTIALLY FILLED** (2026-08-24)
+oEmbed-verified video (Geeky Medics) covering the sensory-level-mapping technique:
+`media.vid.sensorylevel`, on `skill.exam.cord.spine`. No video teaching the extradural-vs-
+intradural bedside discriminators was found on a second thorough search either - that content
+stays text-taught.
 
 ---
 
