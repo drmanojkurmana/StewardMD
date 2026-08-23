@@ -74,18 +74,20 @@ pressures, LV volume and the ECG — matches the teach block's prose exactly. Pr
 Replaced with Ralf Stephan's public-domain dermatome map, hotlinked (`media.img.dermatomes`),
 verified via the Commons API. Primary image on `skill.exam.neuro.sensory`.
 
-## CLX-V004 — Barrel chest, side-on comparison
-- **Clinical context:** `skill.exam.resp.inspection`, CliniX respiratory module.
-- **Must show:** a side-on (lateral) silhouette comparison of a normal chest versus a barrel
-  chest (increased AP diameter, ~1:1 AP:transverse ratio) — a shape-recognition sign, learned from
-  seeing real examples, not from a technique demonstration.
-- **Preferred format:** open-licence clinical photo pair or a professional anatomical illustration
-  comparison. Not a video — this is an appearance to recognise, not a manoeuvre to imitate.
-- **Where it appears:** `media.dia.barrel`, inspection lesson.
-- **Current placeholder:** self-authored inline SVG (`diagram.barrel` in clinix-diagrams.js) —
-  schematic outline comparison, functional but a real photo pair would teach the actual visual
-  recognition task far better.
-- **Status:** OPEN
+## CLX-V004 — Barrel chest, side-on comparison — **FILLED** (2026-08-23, owner-produced)
+Owner supplied an illustration (normal vs. barrel chest side profiles + matched CT cross-sections
+showing the AP:transverse diameter measurement) — not sourced from Wikimedia, so cleared via the
+new `ownerProduced` path (`clinix-model.js` `isOwnerProduced()`) rather than Commons verification:
+owner-captured/produced content has no third party to check a licence against, the same reason a
+self-authored diagram always clears. Saved as `clinix-barrelchest.jpg` (repo root, same pattern as
+`clinix-logo.png`), registered as `media.resp.inspection.barrel` (this id already existed as an
+open placeholder — filled in place rather than creating a new one), shown alongside the original
+self-authored SVG (`media.dia.barrel`), per "keep both".
+
+## CLX-NEW-002 — Superficial and deep palpation of the abdomen — **FILLED** (2026-08-23)
+Owner supplied a YouTube video (oEmbed-verified, HTTP 200): "Abdominal Examination - OSCE Guide
+(Latest)", Geeky Medics. Wired in as `media.vid.abdpalpation` on `skill.exam.gi.palpation`, which
+previously had no media at all.
 
 ## CLX-V005 — Clubbing and the Schamroth window — **FILLED** (2026-08-23)
 Replaced the self-authored SVG with a real photo of a POSITIVE Schamroth's window (the diamond

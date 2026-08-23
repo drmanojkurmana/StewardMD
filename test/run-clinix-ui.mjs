@@ -239,7 +239,7 @@ try {
   const gate = await ev(`(() => {
     const C = window.SMD_CLINIX_CONTENT, M = window.SMD_CLINIX_MODEL;
     const built = C._cache().diseases['copd'];
-    const un = C.media(built, 'media.resp.inspection.barrel');      // still unsourced, on purpose
+    const un = C.media(built, 'media.gen.cyanosis.central');        // still unsourced, on purpose
     const dia = C.media(built, 'media.dia.percussion');             // self-authored
     const snd = C.media(built, 'media.snd.wheeze');                 // synthesized
     const emb = C.media(built, 'media.vid.respexam');               // verified embed

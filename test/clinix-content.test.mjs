@@ -315,12 +315,13 @@ test("SAFETY: with the author flag on, the same content is fully visible", () =>
     pathway.filter((c) => c.empty).map((c) => c.id).join(", "));
 });
 
-test("SAFETY: every cleared asset is one of the four legally clean classes", () => {
-  // Only four things may render: something we drew, something we generate at play time,
-  // something embedded through the rights holder's own player, or a still image hotlinked from
-  // the rights holder's own file server (Wikimedia Commons) with its licence confirmed through
-  // Commons' own API. Anything else cleared would mean we had downloaded or re-hosted third-party
-  // media.
+test("SAFETY: every cleared asset is one of the five legally clean classes", () => {
+  // Only five things may render: something we drew, something we generate at play time,
+  // something embedded through the rights holder's own player, a still image hotlinked from the
+  // rights holder's own file server (Wikimedia Commons) with its licence confirmed through
+  // Commons' own API, or the owner's own captured/produced asset (no third party involved at
+  // all, so there is nothing to license-check - the same reason a diagram we drew always
+  // clears). Anything else cleared would mean we had downloaded or re-hosted third-party media.
   const cleared = Object.keys(mediaManifest.media).filter((id) => M.mediaRenderable(mediaManifest.media[id]) || M.isEmbeddable(mediaManifest.media[id]));
   assert.ok(cleared.length >= 20, `expected a substantial cleared set, got ${cleared.length}`);
   for (const id of cleared) {
@@ -329,8 +330,9 @@ test("SAFETY: every cleared asset is one of the four legally clean classes", () 
     const synthesized = m.synth === true && m.audioKind && m.attribution === "StewardMD";
     const embedded = m.kind === "embed" && m.embeddable === true && m.videoId && m.sourceUrl && m.attribution;
     const commonsImage = M.isCommonsVerified(m);
-    assert.ok(selfAuthored || synthesized || embedded || commonsImage,
-      `${id} is cleared but is none of: self-authored diagram, synthesized audio, verified embed, verified Commons image`);
+    const ownerImage = M.isOwnerProduced(m);
+    assert.ok(selfAuthored || synthesized || embedded || commonsImage || ownerImage,
+      `${id} is cleared but is none of: self-authored diagram, synthesized audio, verified embed, verified Commons image, owner-produced image`);
   }
 });
 
@@ -349,12 +351,13 @@ test("SAFETY: nothing embedded is ALSO re-hosted", () => {
 
 test("SAFETY: an externally sourced FILE is never cleared without a verified licence", () => {
   // Hosted files are the class that needs real licence diligence. A Wikimedia Commons image whose
-  // licence was actually checked via Commons' own API (isCommonsVerified) is allowed through, the
-  // same way a YouTube embed is allowed through once oEmbed confirms it - anything else hosted
-  // must stay unrendered with a sourcing note saying what is needed.
+  // licence was actually checked via Commons' own API (isCommonsVerified), or the owner's own
+  // captured/produced asset (isOwnerProduced - a repo-local src, nothing third-party to verify),
+  // is allowed through, the same way a YouTube embed is allowed through once oEmbed confirms it -
+  // anything else hosted must stay unrendered with a sourcing note saying what is needed.
   for (const id of Object.keys(mediaManifest.media)) {
     const m = mediaManifest.media[id];
-    const isOurs = m.inline === true || m.synth === true || m.kind === "embed" || M.isCommonsVerified(m);
+    const isOurs = m.inline === true || m.synth === true || m.kind === "embed" || M.isCommonsVerified(m) || M.isOwnerProduced(m);
     if (isOurs) continue;
     assert.equal(M.mediaRenderable(m), false,
       `${id} is an externally sourced file and must not render until its licence is verified`);

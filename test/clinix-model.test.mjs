@@ -94,6 +94,23 @@ test("licence gate: a hosted image needs Commons API verification, not just thre
     "src must actually be Commons' own file server, not a re-host");
 });
 
+test("licence gate: the owner's own captured/produced asset clears without a third-party check", () => {
+  // No third party is involved at all here, so there is nothing to verify against an external
+  // API - the same reason a self-authored diagram always clears. ownerProduced:true is a
+  // deliberate human decision, never inferred from a src alone.
+  const owned = {
+    id: "m5", kind: "image", caption: "Barrel chest, side-on comparison",
+    licence: "StewardMD original", attribution: "StewardMD", cleared: true,
+    src: "/clinix-barrelchest.jpg", ownerProduced: true
+  };
+  assert.equal(M.isOwnerProduced(owned), true);
+  assert.equal(M.mediaRenderable(owned), true);
+  assert.equal(M.mediaRenderable(Object.assign({}, owned, { ownerProduced: false })), false,
+    "a plain src is not enough - ownerProduced must be explicitly set");
+  assert.equal(M.mediaRenderable(Object.assign({}, owned, { src: "https://example.com/x.jpg" })), false,
+    "src must be repo-local, not an external URL - an http(s) src is a re-host, not owner-produced");
+});
+
 test("licence gate: an embed is only iframed when the rights holder permits it", () => {
   const base = { id: "m2", kind: "embed", caption: "Percussion technique", licence: "YouTube standard", attribution: "Osmosis", cleared: true, sourceUrl: "https://youtu.be/x" };
   assert.equal(M.isEmbeddable(base), false, "embeddable must be explicitly true");

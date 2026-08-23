@@ -373,11 +373,13 @@
       "kind": "image",
       "caption": "Barrel-shaped chest: increased anteroposterior diameter seen from the side",
       "forSkill": "skill.exam.resp.inspection",
-      "licence": "",
-      "attribution": "",
+      "licence": "StewardMD original",
+      "attribution": "StewardMD",
       "sourceUrl": "",
-      "cleared": false,
-      "note": "Needs an openly-licensed lateral photograph of a hyperinflated chest, or an owner-produced one with patient consent. Wikimedia Commons and Radiopaedia (CC BY-NC-SA, check commercial terms) are the first places to look."
+      "cleared": true,
+      "note": "Owner-produced illustration (normal vs barrel chest, with matched CT cross-sections showing the AP:transverse diameter measurement) - not a real patient photo.",
+      "src": "/clinix-barrelchest.jpg",
+      "ownerProduced": true
     },
     "media.gen.cyanosis.central": {
       "id": "media.gen.cyanosis.central",
@@ -632,6 +634,20 @@
       "cleared": true,
       "commonsVerified": true,
       "note": "Verified via the Commons API. Shows exactly what the grading teach block describes: which murmurs are systolic vs diastolic, and their characteristic shape."
+    },
+    "media.vid.abdpalpation": {
+      "id": "media.vid.abdpalpation",
+      "kind": "embed",
+      "embeddable": true,
+      "videoId": "PYAnF6GJY2I",
+      "sourceUrl": "https://www.youtube.com/watch?v=PYAnF6GJY2I",
+      "caption": "Full abdominal examination demonstrated end to end, including the superficial-to-deep palpation route",
+      "forSkill": "skill.exam.gi.palpation",
+      "title": "Abdominal Examination - OSCE Guide (Latest)",
+      "licence": "YouTube standard licence, embedded via the official player",
+      "attribution": "Geeky Medics",
+      "cleared": true,
+      "note": "Embeddability verified via the YouTube oEmbed endpoint (HTTP 200). Embedded, never downloaded or re-hosted."
     }
   }
 }
