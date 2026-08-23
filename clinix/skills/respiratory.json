@@ -37,7 +37,9 @@
         "Missing orthopnoea and paroxysmal nocturnal dyspnoea, which point towards a cardiac contribution that often coexists with COPD.",
         "Recording only the current grade and not the tempo, so an acute-on-chronic deterioration is invisible."
       ],
-      "media": [],
+      "media": [
+        "media.vid.resphistory"
+      ],
       "probes": [
         {
           "level": 1,
@@ -454,9 +456,10 @@
         "Describing a chest as barrel-shaped without comparing the anteroposterior and transverse diameters."
       ],
       "media": [
-        "media.resp.inspection.barrel",
-        "media.resp.inspection.pursedlip",
-        "media.resp.inspection.hoover"
+        "media.vid.respexam",
+        "media.dia.barrel",
+        "media.dia.hoover",
+        "media.resp.inspection.barrel"
       ],
       "probes": [
         {
@@ -561,7 +564,10 @@
         "Assessing with the head turned or the neck flexed, which displaces the trachea artificially.",
         "Reporting deviation without checking the apex beat to corroborate mediastinal shift."
       ],
-      "media": [],
+      "media": [
+        "media.dia.effusionshift",
+        "media.dia.trachea"
+      ],
       "probes": [
         {
           "level": 1,
@@ -662,7 +668,7 @@
         "Comparing sides using two different hand positions."
       ],
       "media": [
-        "media.resp.expansion.technique"
+        "media.dia.expansion"
       ],
       "probes": [
         {
@@ -771,7 +777,7 @@
       ],
       "media": [
         "media.dia.percussion",
-        "media.resp.percussion.technique"
+        "media.dia.percussiontech"
       ],
       "probes": [
         {
@@ -875,7 +881,14 @@
         "Letting the patient hyperventilate to the point of dizziness. Pause and let them rest.",
         "Reporting 'reduced air entry bilaterally' without comparing sides or considering that quiet breath sounds may simply reflect shallow breathing."
       ],
-      "media": [],
+      "media": [
+        "media.vid.auscultate",
+        "media.vid.lungsounds",
+        "media.dia.auscultation",
+        "media.snd.bronchial",
+        "media.snd.reduced",
+        "media.snd.vesicular"
+      ],
       "probes": [
         {
           "level": 1,
@@ -986,9 +999,12 @@
         "Mistaking transmitted upper airway sounds for wheeze. Listen at the mouth and over the trachea to compare."
       ],
       "media": [
-        "media.resp.auscultation.wheeze",
-        "media.resp.auscultation.crackles_coarse",
-        "media.resp.auscultation.crackles_fine"
+        "media.vid.lungsounds2",
+        "media.snd.coarse",
+        "media.snd.fine",
+        "media.snd.monophonic",
+        "media.snd.rub",
+        "media.snd.wheeze"
       ],
       "probes": [
         {

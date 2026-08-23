@@ -7,15 +7,18 @@
   "kbRef": "pleural_effusion",
   "oneLine": "Fluid in the pleural space, and the question of why it is there",
   "estMinutes": 45,
-  "review": { "status": "ai_drafted" },
+  "review": {
+    "status": "ai_drafted"
+  },
   "version": 1,
-
   "chapters": [
     {
       "id": "basics",
       "title": "Basics",
       "blurb": "What it is, and why the cause matters more than the fluid",
-      "skills": ["skill.effusion.basics"]
+      "skills": [
+        "skill.effusion.basics"
+      ]
     },
     {
       "id": "approach",
@@ -113,34 +116,44 @@
       "id": "disease_findings",
       "title": "Putting the effusion picture together",
       "blurb": "The triad, and what changes it",
-      "skills": ["skill.effusion.signs"]
+      "skills": [
+        "skill.effusion.signs"
+      ]
     },
     {
       "id": "differential",
       "title": "Differential diagnosis",
       "blurb": "A dull base is not always fluid",
-      "skills": ["skill.effusion.differential"]
+      "skills": [
+        "skill.effusion.differential"
+      ]
     },
     {
       "id": "investigations",
       "title": "Investigations",
       "blurb": "Confirm the fluid, then ask why it is there",
-      "skills": ["skill.ix.effusion.imaging", "skill.ix.effusion.tap"]
+      "skills": [
+        "skill.ix.effusion.imaging",
+        "skill.ix.effusion.tap"
+      ]
     },
     {
       "id": "treatment",
       "title": "Treatment",
       "blurb": "Drain what needs draining, treat the cause",
-      "skills": ["skill.tx.effusion"]
+      "skills": [
+        "skill.tx.effusion"
+      ]
     },
     {
       "id": "case",
       "title": "Case presentation",
       "blurb": "Present this patient to your consultant",
-      "skills": ["skill.present.case"]
+      "skills": [
+        "skill.present.case"
+      ]
     }
   ],
-
   "osce": {
     "stations": [
       {
@@ -168,7 +181,6 @@
       }
     ]
   },
-
   "viva": {
     "skills": [
       "skill.effusion.basics",
@@ -180,9 +192,7 @@
       "skill.tx.effusion"
     ]
   },
-
   "skills": {
-
     "skill.effusion.basics": {
       "id": "skill.effusion.basics",
       "kind": "reasoning",
@@ -206,20 +216,80 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "How much fluid is normally in the pleural space?", "a": "About 10 to 20 mL.", "accept": ["10", "20", "few millilitres"], "minMatch": 1 },
-        { "level": 2, "q": "What is the first and most useful division of the causes?", "a": "Transudate versus exudate.", "accept": ["transudate", "exudate"], "minMatch": 2 },
-        { "level": 2, "q": "Name three causes of a transudative effusion.", "a": "Heart failure, cirrhosis, nephrotic syndrome, hypoalbuminaemia.", "accept": ["heart failure", "cirrhosis", "nephrotic", "albumin", "liver"], "minMatch": 2 },
-        { "level": 3, "q": "Roughly how much fluid before an effusion is detectable clinically, and how much on a chest radiograph?", "a": "Around 500 mL to be clinically detectable; blunting of the costophrenic angle at roughly 200 to 300 mL on a plain film.", "accept": ["500", "200", "300"], "minMatch": 1 },
-        { "level": 4, "q": "A patient with known heart failure has a UNILATERAL effusion that does not resolve with diuresis. What do you do?", "a": "Investigate it rather than attributing it to the heart failure. A unilateral or non-resolving effusion needs a diagnostic tap to exclude infection, tuberculosis and malignancy, even when there is an obvious transudative explanation.", "accept": ["tap", "aspirate", "investigate", "thoracentesis", "malignan"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "How much fluid is normally in the pleural space?",
+          "a": "About 10 to 20 mL.",
+          "accept": [
+            "10",
+            "20",
+            "few millilitres"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the first and most useful division of the causes?",
+          "a": "Transudate versus exudate.",
+          "accept": [
+            "transudate",
+            "exudate"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name three causes of a transudative effusion.",
+          "a": "Heart failure, cirrhosis, nephrotic syndrome, hypoalbuminaemia.",
+          "accept": [
+            "heart failure",
+            "cirrhosis",
+            "nephrotic",
+            "albumin",
+            "liver"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Roughly how much fluid before an effusion is detectable clinically, and how much on a chest radiograph?",
+          "a": "Around 500 mL to be clinically detectable; blunting of the costophrenic angle at roughly 200 to 300 mL on a plain film.",
+          "accept": [
+            "500",
+            "200",
+            "300"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient with known heart failure has a UNILATERAL effusion that does not resolve with diuresis. What do you do?",
+          "a": "Investigate it rather than attributing it to the heart failure. A unilateral or non-resolving effusion needs a diagnostic tap to exclude infection, tuberculosis and malignancy, even when there is an obvious transudative explanation.",
+          "accept": [
+            "tap",
+            "aspirate",
+            "investigate",
+            "thoracentesis",
+            "malignan"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" },
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.effusion.signs": {
       "id": "skill.effusion.signs",
       "kind": "reasoning",
@@ -243,21 +313,75 @@
         "Reporting bronchial breathing over the fluid rather than above it, and so calling consolidation.",
         "Examining the front only. A modest effusion is often easiest to find at the back, with the patient sitting forward."
       ],
-      "media": [],
+      "media": [
+        "media.dia.effusionshift"
+      ],
       "probes": [
-        { "level": 1, "q": "Give the triad of a pleural effusion.", "a": "Stony dull percussion note, absent or reduced breath sounds, and reduced vocal resonance.", "accept": ["stony", "dull", "absent", "reduced", "vocal"], "minMatch": 3 },
-        { "level": 2, "q": "Which way does the trachea deviate with a large effusion?", "a": "Away from the side of the effusion.", "accept": ["away", "opposite", "contralateral"], "minMatch": 1 },
-        { "level": 3, "q": "The trachea is pulled TOWARDS a stony dull hemithorax. What does that tell you?", "a": "This is not a simple effusion. A pulling process is present: lung collapse, often behind an obstructing bronchial lesion, or a fibrothorax. It needs urgent imaging and usually bronchoscopy.", "accept": ["collapse", "obstruct", "fibrothorax", "not a simple effusion", "carcinoma"], "minMatch": 1 },
-        { "level": 4, "q": "Why can bronchial breathing be heard just above an effusion?", "a": "Lung immediately above the fluid is compressed but still patent and aerated. Compressed lung conducts sound from the central airways better than normal aerated lung, so bronchial breathing appears at the upper border while sounds over the fluid itself are absent.", "accept": ["compress", "conduct", "above", "aerated"], "minMatch": 2 }
+        {
+          "level": 1,
+          "q": "Give the triad of a pleural effusion.",
+          "a": "Stony dull percussion note, absent or reduced breath sounds, and reduced vocal resonance.",
+          "accept": [
+            "stony",
+            "dull",
+            "absent",
+            "reduced",
+            "vocal"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Which way does the trachea deviate with a large effusion?",
+          "a": "Away from the side of the effusion.",
+          "accept": [
+            "away",
+            "opposite",
+            "contralateral"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "The trachea is pulled TOWARDS a stony dull hemithorax. What does that tell you?",
+          "a": "This is not a simple effusion. A pulling process is present: lung collapse, often behind an obstructing bronchial lesion, or a fibrothorax. It needs urgent imaging and usually bronchoscopy.",
+          "accept": [
+            "collapse",
+            "obstruct",
+            "fibrothorax",
+            "not a simple effusion",
+            "carcinoma"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why can bronchial breathing be heard just above an effusion?",
+          "a": "Lung immediately above the fluid is compressed but still patent and aerated. Compressed lung conducts sound from the central airways better than normal aerated lung, so bronchial breathing appears at the upper border while sounds over the fluid itself are absent.",
+          "accept": [
+            "compress",
+            "conduct",
+            "above",
+            "aerated"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" },
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.effusion.differential": {
       "id": "skill.effusion.differential",
       "kind": "reasoning",
@@ -282,17 +406,62 @@
       ],
       "media": [],
       "probes": [
-        { "level": 2, "q": "How do you distinguish consolidation from effusion at the bedside?", "a": "Both are dull, but consolidation gives INCREASED vocal resonance and bronchial breathing, while an effusion gives reduced vocal resonance and absent breath sounds.", "accept": ["vocal resonance", "bronchial", "increas", "reduced"], "minMatch": 2 },
-        { "level": 3, "q": "Name four exudative causes.", "a": "Parapneumonic effusion and empyema, tuberculosis, malignancy, pulmonary embolism, connective tissue disease, pancreatitis.", "accept": ["pneumon", "empyema", "tuberculosis", "tb", "malignan", "cancer", "embolism", "rheumatoid", "lupus", "pancreatitis"], "minMatch": 3 },
-        { "level": 4, "q": "A 34-year-old with a unilateral lymphocytic exudate, three weeks of fever and weight loss. Most likely cause in India, and how would you pursue it?", "a": "Tuberculous pleural effusion. Pursue it with pleural fluid adenosine deaminase, lymphocyte predominance, mycobacterial testing including Xpert MTB/RIF, and pleural biopsy where the diagnosis remains uncertain, since fluid culture alone has low yield.", "accept": ["tuberculosis", "tb", "ada", "adenosine", "biopsy", "xpert"], "minMatch": 2 }
+        {
+          "level": 2,
+          "q": "How do you distinguish consolidation from effusion at the bedside?",
+          "a": "Both are dull, but consolidation gives INCREASED vocal resonance and bronchial breathing, while an effusion gives reduced vocal resonance and absent breath sounds.",
+          "accept": [
+            "vocal resonance",
+            "bronchial",
+            "increas",
+            "reduced"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Name four exudative causes.",
+          "a": "Parapneumonic effusion and empyema, tuberculosis, malignancy, pulmonary embolism, connective tissue disease, pancreatitis.",
+          "accept": [
+            "pneumon",
+            "empyema",
+            "tuberculosis",
+            "tb",
+            "malignan",
+            "cancer",
+            "embolism",
+            "rheumatoid",
+            "lupus",
+            "pancreatitis"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "A 34-year-old with a unilateral lymphocytic exudate, three weeks of fever and weight loss. Most likely cause in India, and how would you pursue it?",
+          "a": "Tuberculous pleural effusion. Pursue it with pleural fluid adenosine deaminase, lymphocyte predominance, mycobacterial testing including Xpert MTB/RIF, and pleural biopsy where the diagnosis remains uncertain, since fluid culture alone has low yield.",
+          "accept": [
+            "tuberculosis",
+            "tb",
+            "ada",
+            "adenosine",
+            "biopsy",
+            "xpert"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.ix.effusion.imaging": {
       "id": "skill.ix.effusion.imaging",
       "kind": "investigation",
@@ -315,17 +484,52 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "Which imaging test should guide a pleural tap?", "a": "Ultrasound.", "accept": ["ultrasound", "usg"], "minMatch": 1 },
-        { "level": 2, "q": "An opaque hemithorax with the trachea deviated away. What is it?", "a": "A massive pleural effusion.", "accept": ["effusion", "massive"], "minMatch": 1 },
-        { "level": 3, "q": "Why is ultrasound better than a plain film here?", "a": "It confirms that the opacity is fluid rather than solid, estimates the volume, shows septations and loculations that change management, and marks a safe puncture site in real time.", "accept": ["fluid", "septation", "loculat", "safe", "volume", "guide"], "minMatch": 2 }
+        {
+          "level": 1,
+          "q": "Which imaging test should guide a pleural tap?",
+          "a": "Ultrasound.",
+          "accept": [
+            "ultrasound",
+            "usg"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "An opaque hemithorax with the trachea deviated away. What is it?",
+          "a": "A massive pleural effusion.",
+          "accept": [
+            "effusion",
+            "massive"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is ultrasound better than a plain film here?",
+          "a": "It confirms that the opacity is fluid rather than solid, estimates the volume, shows septations and loculations that change management, and marks a safe puncture site in real time.",
+          "accept": [
+            "fluid",
+            "septation",
+            "loculat",
+            "safe",
+            "volume",
+            "guide"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.ix.effusion.tap": {
       "id": "skill.ix.effusion.tap",
       "kind": "investigation",
@@ -352,19 +556,69 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "State Light's criteria.", "a": "Exudate if any one of: pleural/serum protein above 0.5; pleural/serum LDH above 0.6; pleural LDH above two thirds of the upper limit of normal serum LDH.", "accept": ["0.5", "0.6", "two thirds", "2/3", "protein", "ldh"], "minMatch": 3 },
-        { "level": 2, "q": "What must you send alongside the pleural fluid?", "a": "Simultaneous serum protein and LDH. Without them Light's criteria cannot be applied.", "accept": ["serum", "protein", "ldh"], "minMatch": 2 },
-        { "level": 3, "q": "Pleural fluid pH is low with a low glucose in a parapneumonic effusion. What does that change?", "a": "It indicates a complicated parapneumonic effusion, which needs chest tube drainage in addition to antibiotics rather than antibiotics alone.", "accept": ["drain", "chest tube", "complicated", "tube"], "minMatch": 1 },
-        { "level": 4, "q": "The picture is clearly heart failure but Light's criteria call it an exudate. How do you resolve it?", "a": "Light's criteria are very sensitive and misclassify some transudates, especially after diuresis. Calculate the serum-to-pleural-fluid albumin gradient: a value above 1.2 g/dL supports a transudate despite Light's. Treat the heart failure and reassess rather than launching an exudate workup.", "accept": ["albumin gradient", "1.2", "diuretic", "diures", "transudate"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "State Light's criteria.",
+          "a": "Exudate if any one of: pleural/serum protein above 0.5; pleural/serum LDH above 0.6; pleural LDH above two thirds of the upper limit of normal serum LDH.",
+          "accept": [
+            "0.5",
+            "0.6",
+            "two thirds",
+            "2/3",
+            "protein",
+            "ldh"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What must you send alongside the pleural fluid?",
+          "a": "Simultaneous serum protein and LDH. Without them Light's criteria cannot be applied.",
+          "accept": [
+            "serum",
+            "protein",
+            "ldh"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Pleural fluid pH is low with a low glucose in a parapneumonic effusion. What does that change?",
+          "a": "It indicates a complicated parapneumonic effusion, which needs chest tube drainage in addition to antibiotics rather than antibiotics alone.",
+          "accept": [
+            "drain",
+            "chest tube",
+            "complicated",
+            "tube"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "The picture is clearly heart failure but Light's criteria call it an exudate. How do you resolve it?",
+          "a": "Light's criteria are very sensitive and misclassify some transudates, especially after diuresis. Calculate the serum-to-pleural-fluid albumin gradient: a value above 1.2 g/dL supports a transudate despite Light's. Treat the heart failure and reassess rather than launching an exudate workup.",
+          "accept": [
+            "albumin gradient",
+            "1.2",
+            "diuretic",
+            "diures",
+            "transudate"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura (Light's criteria)" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura (Light's criteria)"
+        }
       ],
-      "review": { "status": "ai_drafted" },
+      "review": {
+        "status": "ai_drafted"
+      },
       "dosingNote": "Thresholds and criteria only. Procedure technique, sedation and any drug must follow your current institutional protocol, and the procedure itself is performed under supervision. CliniX does not prescribe."
     },
-
     "skill.tx.effusion": {
       "id": "skill.tx.effusion",
       "kind": "treatment",
@@ -390,15 +644,51 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "How is an empyema managed?", "a": "Chest tube drainage plus antibiotics.", "accept": ["drain", "chest tube", "antibiotic"], "minMatch": 2 },
-        { "level": 2, "q": "Why drain a large effusion slowly?", "a": "To avoid re-expansion pulmonary oedema. Stop for chest tightness or persistent cough.", "accept": ["re-expansion", "reexpansion", "oedema", "edema"], "minMatch": 1 },
-        { "level": 3, "q": "A recurrent malignant effusion keeps returning after aspiration. What are the definitive options?", "a": "Pleurodesis or an indwelling pleural catheter, chosen with the patient and depending on whether the lung re-expands after drainage. Pleurodesis fails in a trapped lung.", "accept": ["pleurodesis", "indwelling", "catheter"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "How is an empyema managed?",
+          "a": "Chest tube drainage plus antibiotics.",
+          "accept": [
+            "drain",
+            "chest tube",
+            "antibiotic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why drain a large effusion slowly?",
+          "a": "To avoid re-expansion pulmonary oedema. Stop for chest tightness or persistent cough.",
+          "accept": [
+            "re-expansion",
+            "reexpansion",
+            "oedema",
+            "edema"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A recurrent malignant effusion keeps returning after aspiration. What are the definitive options?",
+          "a": "Pleurodesis or an indwelling pleural catheter, chosen with the patient and depending on whether the lung re-expands after drainage. Pleurodesis fails in a trapped lung.",
+          "accept": [
+            "pleurodesis",
+            "indwelling",
+            "catheter"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Disorders of the Pleura"
+        }
       ],
-      "review": { "status": "ai_drafted" },
+      "review": {
+        "status": "ai_drafted"
+      },
       "dosingNote": "Classes, volumes and principles only. Antibiotic choice, antituberculosis regimens and drainage protocols must follow your current national or institutional guideline. CliniX does not prescribe."
     }
   }

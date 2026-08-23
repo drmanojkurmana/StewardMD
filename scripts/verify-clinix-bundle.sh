@@ -19,7 +19,7 @@ bad() { fail=1; printf '  %-34s %s\n' "$1" "MISSING  <-- $2"; }
 echo "CliniX bundle check: $WWW"
 
 for f in clinix.js clinix-flags.js clinix-model.js clinix-content.js clinix-store.js \
-         clinix-tutor.js clinix-diagrams.js clinix-screens.js clinix.css; do
+         clinix-tutor.js clinix-diagrams.js clinix-audio.js clinix-screens.js clinix.css; do
   [ -f "$WWW/$f" ] && say "$f" "ok" || bad "$f" "root glob in build-www.sh"
 done
 

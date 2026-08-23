@@ -135,6 +135,58 @@
     for (var k in src) if (Object.prototype.hasOwnProperty.call(src, k)) dst[k] = src[k];
   }
 
+  /* Every skill in every pack, with NO disease attached. This is what makes "learn how to percuss"
+   * reachable on its own: a skill is the atom, so it was always teachable standalone - there simply
+   * was no door to it. Shaped like a loadDisease() result so every renderer works unchanged. */
+  var _allCache = null;
+  function loadAllSkills() {
+    if (_allCache) return Promise.resolve(_allCache);
+    return loadCatalog().then(function (cat) {
+      var packs = (cat.skillPacks || []).map(function (p) { return p.id; });
+      var jobs = [loadMedia()];
+      for (var i = 0; i < packs.length; i++) jobs.push(loadPack(packs[i]));
+      return Promise.all(jobs).then(function (res) {
+        var media = res[0] || {}, skills = {};
+        for (var k = 1; k < res.length; k++) if (res[k]) copyInto(skills, res[k]);
+        _allCache = { disease: null, system: null, skills: skills, media: media };
+        return _allCache;
+      });
+    }).catch(function () { return null; });
+  }
+
+  /* Group the skills the way a student would look for them: by what they are DOING, not by disease.
+   * Order is the order of the bedside encounter, so the library reads as the examination itself. */
+  var KIND_GROUPS = [
+    { kind: "approach", title: "Approaching the patient", blurb: "Before a single question" },
+    { kind: "history", title: "Taking a history", blurb: "What to ask, and why" },
+    { kind: "general_exam", title: "General examination", blurb: "From the end of the bed inwards" },
+    { kind: "exam", title: "Systemic examination", blurb: "The manoeuvres, step by step" },
+    { kind: "investigation", title: "Investigations", blurb: "What each test is actually for" },
+    { kind: "reasoning", title: "Clinical reasoning", blurb: "Turning findings into a diagnosis" },
+    { kind: "treatment", title: "Treatment principles", blurb: "Classes and principles, never doses" },
+    { kind: "presentation", title: "Presenting a case", blurb: "Two minutes, in a fixed order" }
+  ];
+
+  function skillGroups(built, opts) {
+    var M = model();
+    if (!M || !built) return [];
+    opts = opts || gateOpts();
+    var out = [], i, id;
+    for (i = 0; i < KIND_GROUPS.length; i++) {
+      var g = KIND_GROUPS[i], list = [];
+      for (id in built.skills) {
+        if (!Object.prototype.hasOwnProperty.call(built.skills, id)) continue;
+        var sk = built.skills[id];
+        if (sk.kind !== g.kind) continue;
+        if (!M.isRenderable(sk, opts)) continue;
+        list.push(sk);
+      }
+      list.sort(function (a, b) { return String(a.title).localeCompare(String(b.title)); });
+      if (list.length) out.push({ kind: g.kind, title: g.title, blurb: g.blurb, skills: list });
+    }
+    return out;
+  }
+
   /* ── The render-facing API. Gates applied here. ─────────────────────────── */
 
   function pathwayFor(built) {
@@ -168,6 +220,10 @@
       renderable: ok,
       inline: m.inline === true,
       diagramId: m.diagramId || "",
+      synth: m.synth === true,
+      audioKind: m.audioKind || "",
+      videoId: m.videoId || "",
+      title: m.title || "",
       src: ok && m.src ? cxMedia(m.src) : null,
       embeddable: M ? M.isEmbeddable(m) : false,
       sourceUrl: m.sourceUrl || "",
@@ -246,7 +302,7 @@
     return { total: total, visible: visible, pending: total - visible };
   }
 
-  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null }; }
+  function reset() { cache = { catalog: null, packs: {}, diseases: {}, media: null }; _allCache = null; }
 
   var API = {
     loadCatalog: loadCatalog,
@@ -254,6 +310,9 @@
     loadMedia: loadMedia,
     pathwayFor: pathwayFor,
     lessonFor: lessonFor,
+    loadAllSkills: loadAllSkills,
+    skillGroups: skillGroups,
+    KIND_GROUPS: KIND_GROUPS,
     stationFor: stationFor,
     caseFor: caseFor,
     casesFor: casesFor,

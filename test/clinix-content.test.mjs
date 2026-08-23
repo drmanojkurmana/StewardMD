@@ -244,28 +244,56 @@ test("SAFETY: with the author flag on, the same content is fully visible", () =>
     pathway.filter((c) => c.empty).map((c) => c.id).join(", "));
 });
 
-test("SAFETY: the ONLY cleared media is self-authored, and it says so", () => {
-  // An externally sourced asset must never be marked cleared without a verified licence. The one
-  // media kind we can always clear is a diagram we drew ourselves, which is exactly why Phase 3
-  // built the inline diagram set instead of waiting on sourcing.
-  const cleared = Object.keys(mediaManifest.media).filter((id) => M.mediaRenderable(mediaManifest.media[id]));
-  assert.ok(cleared.length > 0, "expected the self-authored diagrams to be cleared");
+test("SAFETY: every cleared asset is one of the three legally clean classes", () => {
+  // Only three things may render: something we drew, something we generate at play time, or
+  // something embedded through the rights holder's own player. Anything else cleared would mean
+  // we had downloaded or re-hosted third-party media.
+  const cleared = Object.keys(mediaManifest.media).filter((id) => M.mediaRenderable(mediaManifest.media[id]) || M.isEmbeddable(mediaManifest.media[id]));
+  assert.ok(cleared.length >= 20, `expected a substantial cleared set, got ${cleared.length}`);
   for (const id of cleared) {
     const m = mediaManifest.media[id];
-    assert.equal(m.attribution, "StewardMD",
-      `${id} is cleared but not attributed to StewardMD. Only self-authored media may be cleared without external verification.`);
-    assert.ok(m.licence.indexOf("StewardMD original") === 0, `${id} has a non-original licence but is cleared`);
-    assert.equal(m.inline, true, `${id} is cleared but is not an inline diagram`);
-    assert.ok(m.diagramId, `${id} is an inline diagram with no diagramId`);
+    const selfAuthored = m.inline === true && m.diagramId && m.attribution === "StewardMD";
+    const synthesized = m.synth === true && m.audioKind && m.attribution === "StewardMD";
+    const embedded = m.kind === "embed" && m.embeddable === true && m.videoId && m.sourceUrl && m.attribution;
+    assert.ok(selfAuthored || synthesized || embedded,
+      `${id} is cleared but is none of: self-authored diagram, synthesized audio, verified embed`);
   }
 });
 
-test("SAFETY: every EXTERNALLY sourced asset is still gated", () => {
-  const external = Object.keys(mediaManifest.media).filter((id) => mediaManifest.media[id].attribution !== "StewardMD");
-  assert.ok(external.length >= 8, "expected the sourcing work order to still be present");
-  for (const id of external) {
-    assert.equal(M.mediaRenderable(mediaManifest.media[id]), false,
-      `${id} is externally sourced and must not render until its licence is verified`);
+test("SAFETY: nothing embedded is ALSO re-hosted", () => {
+  // An embed must point at the rights holder's player and nothing else. A src on an embed would
+  // mean we had taken a copy of the file.
+  for (const id of Object.keys(mediaManifest.media)) {
+    const m = mediaManifest.media[id];
+    if (m.kind !== "embed") continue;
+    assert.ok(!m.src, `${id} is an embed but also carries a src, which implies a re-hosted copy`);
+    assert.ok(/^https:\/\/www\.youtube\.com\/watch\?v=/.test(m.sourceUrl), `${id} sourceUrl is not a canonical YouTube watch URL`);
+    assert.ok(m.attribution && m.attribution.length > 2, `${id} has no creator attribution`);
+    assert.ok(m.title && m.title.length > 4, `${id} has no video title to credit`);
+  }
+});
+
+test("SAFETY: an externally sourced FILE is never cleared without a verified licence", () => {
+  // Hosted files are the class that needs real licence diligence. Any still uncleared must carry a
+  // sourcing note saying what is needed.
+  for (const id of Object.keys(mediaManifest.media)) {
+    const m = mediaManifest.media[id];
+    const isOurs = m.inline === true || m.synth === true || m.kind === "embed";
+    if (isOurs) continue;
+    assert.equal(M.mediaRenderable(m), false,
+      `${id} is an externally sourced file and must not render until its licence is verified`);
+    assert.ok(m.note && m.note.length > 10, `${id} has no sourcing note`);
+  }
+});
+
+test("SAFETY: synthesized audio is labelled as a model, not a recording", () => {
+  const A = mediaManifest.media;
+  const synth = Object.keys(A).filter((id) => A[id].synth === true);
+  assert.ok(synth.length >= 6, "expected the synthesized auscultation set");
+  for (const id of synth) {
+    assert.ok(/synthes/i.test(A[id].licence),
+      `${id} must say in its licence that it is synthesized, so it is never mistaken for a patient recording`);
+    assert.ok(A[id].audioKind, `${id} names no sound model`);
   }
 });
 
