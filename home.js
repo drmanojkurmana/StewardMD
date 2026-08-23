@@ -1494,11 +1494,10 @@
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
-    // CliniX mark: an interlocking C+X monogram, self-authored inline SVG (no hosted asset).
-    // Solid white, not the gradient used on light backgrounds - this badge is dark teal, and the
-    // gradient's navy-to-teal range is nearly invisible against it.
-    clinix: '<svg viewBox="0 0 100 70" width="30" height="21"><path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>' +
-      '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>'
+    // The real CliniX logo (owner-supplied, clinix-logo.png - same pattern as maitri-logo.png
+    // above): brightness(0) invert(1) forces it white against this dark badge regardless of the
+    // source file's own color, since the PNG is alpha-masked, not a white-background image.
+    clinix: '<img class="ai-clinix-img" src="/clinix-logo.png" alt="" style="width:38px;height:auto;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);

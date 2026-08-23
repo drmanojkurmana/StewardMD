@@ -14,12 +14,11 @@
   /* ── helpers ─────────────────────────────────────────────────────────────── */
 
   function ic(n) { return '<span class="material-symbols-rounded" aria-hidden="true">' + n + "</span>"; }
-  // Self-authored inline SVG logomark (interlocking C+X), matches the one in home.js's ANIM_ICON.
-  // Solid white, not a gradient - .cx-hero is a dark teal banner, and a navy-to-teal gradient
-  // is nearly invisible against it.
-  var CX_LOGO_MARK = '<svg class="cx-hero-logo" viewBox="0 0 100 70" width="34" height="24" aria-hidden="true">' +
-    '<path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>' +
-    '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>';
+  // The real CliniX logo (owner-supplied, clinix-logo.png - same asset as home.js's live tile
+  // icon, same brightness(0) invert(1) white-forcing trick used for maitri-logo.png). STATIC
+  // here: the module banner is read, not glanced at from a grid, so no pulse.
+  var CX_LOGO_MARK = '<img class="cx-hero-logo" src="/clinix-logo.png" alt="" aria-hidden="true" ' +
+    'style="width:38px;height:auto;object-fit:contain;filter:brightness(0) invert(1)">';
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -158,10 +157,18 @@
     for (var i = 0; i < systems.length; i++) {
       var s = systems[i];
       var n = (s.diseases || []).length;
-      html += '<button type="button" class="cx-sys' + (n ? "" : " cx-sys--empty") + '" data-act="cx-system" data-id="' + esc(s.id) + '">' +
+      // A system with no diseases yet but a real examination module is NOT empty - it already
+      // has a full chapter-by-chapter workup. "Coming soon" only belongs to a system with
+      // neither, or a student will skip past real content thinking there is nothing there.
+      var chapters = s.module && s.module.chapters;
+      var label = n ? (n + (n === 1 ? " topic" : " topics"))
+        : chapters ? (chapters + (chapters === 1 ? " chapter" : " chapters"))
+        : "Coming soon";
+      var empty = !n && !chapters;
+      html += '<button type="button" class="cx-sys' + (empty ? " cx-sys--empty" : "") + '" data-act="cx-system" data-id="' + esc(s.id) + '">' +
         '<span class="cx-sys-ic">' + ic(s.icon || "stethoscope") + "</span>" +
         '<span class="cx-sys-t">' + esc(s.title) + "</span>" +
-        '<span class="cx-sys-n">' + (n ? n + (n === 1 ? " topic" : " topics") : "Coming soon") + "</span>" +
+        '<span class="cx-sys-n">' + esc(label) + "</span>" +
         "</button>";
     }
     html += "</div></section>";
