@@ -3,18 +3,28 @@
   "schemaVersion": 1,
   "contentVersion": "0.1.0-review-pending",
   "updated": "2026-08-22",
-
   "skillPacks": [
-    { "id": "core", "file": "skills/core.json", "title": "Patient approach and general examination", "shared": true },
-    { "id": "respiratory", "file": "skills/respiratory.json", "title": "Respiratory history and examination" }
+    {
+      "id": "core",
+      "file": "skills/core.json",
+      "title": "Patient approach and general examination",
+      "shared": true
+    },
+    {
+      "id": "respiratory",
+      "file": "skills/respiratory.json",
+      "title": "Respiratory history and examination"
+    }
   ],
-
   "systems": [
     {
       "id": "respiratory",
       "title": "Respiratory",
       "icon": "pulmonology",
-      "skillPacks": ["core", "respiratory"],
+      "skillPacks": [
+        "core",
+        "respiratory"
+      ],
       "diseases": [
         {
           "id": "copd",
@@ -24,6 +34,15 @@
           "estMinutes": 75,
           "chapters": 14,
           "review": "ai_drafted"
+        },
+        {
+          "id": "pleural-effusion",
+          "title": "Pleural effusion",
+          "subtitle": "Fluid in the pleural space",
+          "file": "diseases/pleural-effusion.json",
+          "estMinutes": 45,
+          "chapters": 10,
+          "review": "ai_drafted"
         }
       ]
     },
@@ -31,24 +50,31 @@
       "id": "cardiovascular",
       "title": "Cardiovascular",
       "icon": "cardiology",
-      "skillPacks": ["core"],
+      "skillPacks": [
+        "core"
+      ],
       "diseases": []
     },
     {
       "id": "abdomen",
       "title": "GIT and abdomen",
       "icon": "gastroenterology",
-      "skillPacks": ["core"],
+      "skillPacks": [
+        "core"
+      ],
       "diseases": []
     },
     {
       "id": "neurology",
       "title": "Neurology",
       "icon": "neurology",
-      "skillPacks": ["core"],
+      "skillPacks": [
+        "core"
+      ],
       "diseases": []
     }
   ],
-
-  "media": { "file": "media/manifest.json" }
+  "media": {
+    "file": "media/manifest.json"
+  }
 }

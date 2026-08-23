@@ -1,0 +1,405 @@
+{
+  "_comment": "The SECOND disease, and the proof of the architecture. Almost nothing here is a skill: the pathway is references to the same core and respiratory skills COPD uses, with the OPPOSITE emphasis at every step. Percussion is one authored skill; COPD says expect hyperresonance and this file says expect stony dullness. That contrast is also the best way to teach both.",
+  "id": "pleural-effusion",
+  "name": "Pleural effusion",
+  "fullName": "Pleural effusion",
+  "system": "respiratory",
+  "kbRef": "pleural_effusion",
+  "oneLine": "Fluid in the pleural space, and the question of why it is there",
+  "estMinutes": 45,
+  "review": { "status": "ai_drafted" },
+  "version": 1,
+
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What it is, and why the cause matters more than the fluid",
+      "skills": ["skill.effusion.basics"]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to every other bedside encounter",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "The same questions, pointing somewhere else",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "Expect a shorter history than COPD: breathlessness over days to weeks rather than years, often with pleuritic chest pain that eases as the fluid accumulates and separates the pleural surfaces."
+        },
+        "skill.hx.resp.dyspnea": {
+          "expect": "Expect breathlessness that is progressive but recent, and often positional. Ask specifically about pleuritic pain, fever, weight loss and night sweats, because in India tuberculosis is a leading cause and malignancy is the other."
+        },
+        "skill.hx.resp.cough_sputum": {
+          "expect": "Cough is usually dry and non-productive here, which is itself a point against COPD and chronic bronchitis. Haemoptysis raises malignancy, tuberculosis and infarction."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Looking for the cause, not the fluid",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.clubbing": {
+          "expect": "Unlike COPD, clubbing here is INFORMATIVE rather than a red flag against the diagnosis. It points to the underlying cause: bronchial carcinoma, empyema, bronchiectasis or mesothelioma."
+        },
+        "skill.gen.edema": {
+          "expect": "Bilateral oedema with a raised JVP suggests the effusion is a TRANSUDATE from heart failure, which changes the whole workup. Look also for the stigmata of chronic liver disease and for the puffiness of nephrotic syndrome."
+        },
+        "skill.gen.appearance": {
+          "expect": "Look for cachexia and lymphadenopathy, which point to malignancy or tuberculosis, and for the position the patient adopts: many lie on the side of the effusion, which splints it and lets the good lung expand."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "The same seven skills, every one of them the opposite of COPD",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance"
+      ],
+      "emphasis": {
+        "skill.exam.resp.inspection": {
+          "expect": "Expect a fuller, less mobile hemithorax on the affected side, with reduced movement there. Not the barrel chest of COPD: the asymmetry is the finding."
+        },
+        "skill.exam.resp.trachea": {
+          "expect": "A large effusion PUSHES the mediastinum AWAY from the affected side. If the trachea is pulled TOWARDS a dull hemithorax, this is not a simple effusion: think collapse behind an obstructing lesion, or a fibrothorax."
+        },
+        "skill.exam.resp.expansion": {
+          "expect": "Expect ASYMMETRICAL reduction, with the affected side lagging. This is the finding COPD never gives you, and it is why the floating-thumb technique matters."
+        },
+        "skill.exam.resp.percussion": {
+          "expect": "STONY dullness over the fluid, the most characteristic sign. Compare it with the hyperresonance of COPD: the same manoeuvre, the opposite note. The upper level is classically higher in the axilla than in front or behind."
+        },
+        "skill.exam.resp.auscultation": {
+          "expect": "Breath sounds are ABSENT or greatly reduced over the fluid, with normal sounds above. Bronchial breathing may be heard just above the fluid level, where compressed lung conducts sound."
+        },
+        "skill.exam.resp.added_sounds": {
+          "expect": "Usually none over the fluid. A pleural rub may be heard early, before much fluid has collected, and disappears as the surfaces separate. That disappearance is a sign, not an improvement."
+        },
+        "skill.exam.resp.vocal_resonance": {
+          "expect": "Reduced over the fluid. Completing the triad matters here: stony dullness plus absent breath sounds plus reduced vocal resonance IS the effusion, and any one of them alone is not."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the effusion picture together",
+      "blurb": "The triad, and what changes it",
+      "skills": ["skill.effusion.signs"]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "A dull base is not always fluid",
+      "skills": ["skill.effusion.differential"]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm the fluid, then ask why it is there",
+      "skills": ["skill.ix.effusion.imaging", "skill.ix.effusion.tap"]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Drain what needs draining, treat the cause",
+      "skills": ["skill.tx.effusion"]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": ["skill.present.case"]
+    }
+  ],
+
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.effusion.resp_exam",
+        "title": "Examine the respiratory system",
+        "task": "This 44-year-old woman has been breathless for three weeks. Examine her respiratory system and present your findings.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.trachea",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.vocal_resonance"
+        ],
+        "examinerQuestions": [
+          "Which way is the trachea deviated, and what would it mean if it were deviated the other way?",
+          "Give me the triad you found and what it localises.",
+          "How would you decide whether this is a transudate or an exudate?"
+        ]
+      }
+    ]
+  },
+
+  "viva": {
+    "skills": [
+      "skill.effusion.basics",
+      "skill.exam.resp.trachea",
+      "skill.exam.resp.percussion",
+      "skill.exam.resp.vocal_resonance",
+      "skill.effusion.differential",
+      "skill.ix.effusion.tap",
+      "skill.tx.effusion"
+    ]
+  },
+
+  "skills": {
+
+    "skill.effusion.basics": {
+      "id": "skill.effusion.basics",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "What a pleural effusion is",
+      "oneLine": "Fluid in a space that normally holds a few millilitres",
+      "why": "A pleural effusion is never a diagnosis on its own, it is a finding with a cause, and the entire clinical task is finding that cause. Students who stop at 'pleural effusion' have answered half the question.",
+      "body": "The pleural space normally contains only about 10 to 20 mL of fluid, continuously produced and reabsorbed. An effusion is an excess, arising when formation exceeds absorption.",
+      "keyPoints": [
+        "A pleural effusion is a SIGN, not a diagnosis. The question is always why the fluid is there.",
+        "The first division is transudate versus exudate, because it splits the causes into two very different lists.",
+        "A transudate arises from altered hydrostatic or oncotic pressure with normal pleural membranes: heart failure, cirrhosis, nephrotic syndrome, hypoalbuminaemia.",
+        "An exudate arises from an inflamed or diseased pleura leaking protein: infection including tuberculosis, malignancy, pulmonary embolism, connective tissue disease, pancreatitis.",
+        "About 500 mL is usually needed before the effusion is detectable clinically, though blunting of the costophrenic angle appears on a chest radiograph at around 200 to 300 mL.",
+        "In India tuberculosis is a leading cause of a lymphocytic exudative effusion in a young adult, and malignancy in an older one."
+      ],
+      "pitfalls": [
+        "Treating the effusion and never establishing the cause.",
+        "Assuming a small effusion in a patient with heart failure needs tapping, when a bilateral transudate consistent with the clinical picture often does not.",
+        "Forgetting that a unilateral effusion in a patient with heart failure, or one that fails to resolve with treatment, still needs investigating."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "How much fluid is normally in the pleural space?", "a": "About 10 to 20 mL.", "accept": ["10", "20", "few millilitres"], "minMatch": 1 },
+        { "level": 2, "q": "What is the first and most useful division of the causes?", "a": "Transudate versus exudate.", "accept": ["transudate", "exudate"], "minMatch": 2 },
+        { "level": 2, "q": "Name three causes of a transudative effusion.", "a": "Heart failure, cirrhosis, nephrotic syndrome, hypoalbuminaemia.", "accept": ["heart failure", "cirrhosis", "nephrotic", "albumin", "liver"], "minMatch": 2 },
+        { "level": 3, "q": "Roughly how much fluid before an effusion is detectable clinically, and how much on a chest radiograph?", "a": "Around 500 mL to be clinically detectable; blunting of the costophrenic angle at roughly 200 to 300 mL on a plain film.", "accept": ["500", "200", "300"], "minMatch": 1 },
+        { "level": 4, "q": "A patient with known heart failure has a UNILATERAL effusion that does not resolve with diuresis. What do you do?", "a": "Investigate it rather than attributing it to the heart failure. A unilateral or non-resolving effusion needs a diagnostic tap to exclude infection, tuberculosis and malignancy, even when there is an obvious transudative explanation.", "accept": ["tap", "aspirate", "investigate", "thoracentesis", "malignan"], "minMatch": 1 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" },
+        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.effusion.signs": {
+      "id": "skill.effusion.signs",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "The effusion picture",
+      "oneLine": "One triad, and the findings that mean it is not a simple effusion",
+      "why": "Effusion is the cleanest example in the whole respiratory examination of why findings are read as a PATTERN rather than a list. Any one of the three signs has other causes; together they are close to diagnostic, and their combination localises the problem to the pleural space rather than the lung.",
+      "body": "Over the fluid: stony dull percussion note, absent or greatly reduced breath sounds, and reduced vocal resonance. Everything else follows from the volume of fluid and from what caused it.",
+      "keyPoints": [
+        "THE TRIAD: stony dullness, absent breath sounds, reduced vocal resonance, all over the same area.",
+        "Reduced expansion on the affected side, and a fuller, less mobile hemithorax.",
+        "Mediastinal shift AWAY from the effusion when it is large. The trachea and the apex beat should agree with each other.",
+        "Bronchial breathing may appear just ABOVE the fluid level, where lung is compressed but still aerated and conducts sound.",
+        "A pleural rub may be present early and disappears as fluid separates the surfaces. Its disappearance is not improvement.",
+        "The upper border of dullness is classically highest in the axilla, following the curve of the fluid.",
+        "Findings that mean this is NOT a simple effusion: the trachea PULLED TOWARDS the dull side (collapse behind an obstructing lesion, or fibrothorax), or dullness with PRESERVED vocal resonance and bronchial breathing throughout (consolidation, not fluid)."
+      ],
+      "pitfalls": [
+        "Calling stony dullness alone an effusion. Consolidation, collapse and a raised hemidiaphragm are all dull.",
+        "Missing that the trachea is pulled towards rather than pushed away, which changes the diagnosis completely.",
+        "Reporting bronchial breathing over the fluid rather than above it, and so calling consolidation.",
+        "Examining the front only. A modest effusion is often easiest to find at the back, with the patient sitting forward."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Give the triad of a pleural effusion.", "a": "Stony dull percussion note, absent or reduced breath sounds, and reduced vocal resonance.", "accept": ["stony", "dull", "absent", "reduced", "vocal"], "minMatch": 3 },
+        { "level": 2, "q": "Which way does the trachea deviate with a large effusion?", "a": "Away from the side of the effusion.", "accept": ["away", "opposite", "contralateral"], "minMatch": 1 },
+        { "level": 3, "q": "The trachea is pulled TOWARDS a stony dull hemithorax. What does that tell you?", "a": "This is not a simple effusion. A pulling process is present: lung collapse, often behind an obstructing bronchial lesion, or a fibrothorax. It needs urgent imaging and usually bronchoscopy.", "accept": ["collapse", "obstruct", "fibrothorax", "not a simple effusion", "carcinoma"], "minMatch": 1 },
+        { "level": 4, "q": "Why can bronchial breathing be heard just above an effusion?", "a": "Lung immediately above the fluid is compressed but still patent and aerated. Compressed lung conducts sound from the central airways better than normal aerated lung, so bronchial breathing appears at the upper border while sounds over the fluid itself are absent.", "accept": ["compress", "conduct", "above", "aerated"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" },
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.effusion.differential": {
+      "id": "skill.effusion.differential",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "A dull base is not always fluid",
+      "oneLine": "What else gives that note, and which cause is behind the fluid",
+      "why": "There are two differentials here and students often answer only one. The first is what else produces a dull base; the second, and the important one, is what caused the effusion. Answering only the first leaves the patient undiagnosed.",
+      "body": "Work the two questions in order: is this fluid, and if so, why is it there.",
+      "keyPoints": [
+        "IS IT FLUID? Consolidation gives dullness but with INCREASED vocal resonance and bronchial breathing. Collapse gives dullness with the trachea pulled TOWARDS it. A raised hemidiaphragm and a pleural thickening or fibrothorax both give dullness with little else. Ultrasound settles it at the bedside.",
+        "WHY IS IT THERE, transudate: heart failure, cirrhosis, nephrotic syndrome, hypoalbuminaemia, peritoneal dialysis.",
+        "WHY IS IT THERE, exudate: parapneumonic effusion and empyema, TUBERCULOSIS, malignancy including mesothelioma, pulmonary embolism, connective tissue disease such as rheumatoid arthritis and lupus, pancreatitis, subphrenic abscess.",
+        "In an Indian adult with a unilateral lymphocytic exudate, fever and weight loss, tuberculosis is the leading diagnosis until excluded.",
+        "A bloody effusion narrows things sharply: malignancy, pulmonary infarction, trauma. A frankly purulent one is an empyema and is a drainage emergency.",
+        "Pulmonary embolism can produce either a transudate or an exudate, and is the classic cause that gets missed because the effusion is small."
+      ],
+      "pitfalls": [
+        "Stopping at 'pleural effusion' without naming a cause or a plan to find one.",
+        "Not considering tuberculosis in an endemic setting.",
+        "Attributing a unilateral effusion to heart failure without evidence, when heart failure effusions are usually bilateral or right-sided.",
+        "Forgetting embolism because the effusion is small and there is a more obvious explanation."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 2, "q": "How do you distinguish consolidation from effusion at the bedside?", "a": "Both are dull, but consolidation gives INCREASED vocal resonance and bronchial breathing, while an effusion gives reduced vocal resonance and absent breath sounds.", "accept": ["vocal resonance", "bronchial", "increas", "reduced"], "minMatch": 2 },
+        { "level": 3, "q": "Name four exudative causes.", "a": "Parapneumonic effusion and empyema, tuberculosis, malignancy, pulmonary embolism, connective tissue disease, pancreatitis.", "accept": ["pneumon", "empyema", "tuberculosis", "tb", "malignan", "cancer", "embolism", "rheumatoid", "lupus", "pancreatitis"], "minMatch": 3 },
+        { "level": 4, "q": "A 34-year-old with a unilateral lymphocytic exudate, three weeks of fever and weight loss. Most likely cause in India, and how would you pursue it?", "a": "Tuberculous pleural effusion. Pursue it with pleural fluid adenosine deaminase, lymphocyte predominance, mycobacterial testing including Xpert MTB/RIF, and pleural biopsy where the diagnosis remains uncertain, since fluid culture alone has low yield.", "accept": ["tuberculosis", "tb", "ada", "adenosine", "biopsy", "xpert"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.ix.effusion.imaging": {
+      "id": "skill.ix.effusion.imaging",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Imaging the effusion",
+      "oneLine": "The film shows it; ultrasound is what you actually use",
+      "why": "Understanding what each modality can and cannot answer prevents the two commonest errors: calling a dense hemithorax an effusion without confirming fluid, and attempting a blind tap.",
+      "body": "Plain film to detect, ultrasound to confirm and guide, CT to explain.",
+      "keyPoints": [
+        "Chest radiograph: blunting of the costophrenic angle at roughly 200 to 300 mL, with the classic rising meniscus laterally. A completely opaque hemithorax with the mediastinum pushed AWAY is a massive effusion; pulled TOWARDS is collapse.",
+        "A lateral decubitus film can show whether the fluid layers freely, and so whether it is loculated, though ultrasound has largely replaced it.",
+        "ULTRASOUND is the practical test: it confirms fluid, estimates volume, shows septations and loculations, and marks the safe site. Ultrasound guidance for pleural procedures reduces complications and is the standard of care.",
+        "CT with contrast, ideally with fluid still present, characterises the pleura: nodular or circumferential thickening suggests malignancy or empyema, and it shows the underlying lung and mediastinum.",
+        "NEVER perform a blind tap based on a plain film alone."
+      ],
+      "pitfalls": [
+        "Attempting aspiration without ultrasound, which is how iatrogenic pneumothorax and organ injury happen.",
+        "Reading an opaque hemithorax without checking which way the mediastinum has moved.",
+        "Draining all the fluid before CT, when pleural nodularity is easiest to see with fluid still there to outline it."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "Which imaging test should guide a pleural tap?", "a": "Ultrasound.", "accept": ["ultrasound", "usg"], "minMatch": 1 },
+        { "level": 2, "q": "An opaque hemithorax with the trachea deviated away. What is it?", "a": "A massive pleural effusion.", "accept": ["effusion", "massive"], "minMatch": 1 },
+        { "level": 3, "q": "Why is ultrasound better than a plain film here?", "a": "It confirms that the opacity is fluid rather than solid, estimates the volume, shows septations and loculations that change management, and marks a safe puncture site in real time.", "accept": ["fluid", "septation", "loculat", "safe", "volume", "guide"], "minMatch": 2 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+      ],
+      "review": { "status": "ai_drafted" }
+    },
+
+    "skill.ix.effusion.tap": {
+      "id": "skill.ix.effusion.tap",
+      "kind": "investigation",
+      "system": "respiratory",
+      "title": "Pleural aspiration and Light's criteria",
+      "oneLine": "The one test that answers why the fluid is there",
+      "why": "Everything before this narrows the possibilities; the tap decides. Light's criteria are worth knowing exactly, because they are highly sensitive for an exudate and misapplying them sends the whole workup down the wrong branch.",
+      "body": "A diagnostic aspiration under ultrasound guidance, sent for the tests that actually change management.",
+      "keyPoints": [
+        "LIGHT'S CRITERIA: the fluid is an EXUDATE if ANY ONE of these holds. Pleural fluid protein divided by serum protein greater than 0.5. Pleural fluid LDH divided by serum LDH greater than 0.6. Pleural fluid LDH greater than two thirds of the upper limit of the normal serum LDH.",
+        "Send simultaneous SERUM protein and LDH, or the criteria cannot be applied at all. This is the commonest practical error.",
+        "Always send: protein, LDH, glucose, pH, cell count with differential, Gram stain and culture, cytology.",
+        "In a suspected tuberculous effusion add adenosine deaminase and mycobacterial testing including a nucleic acid amplification test, and note the lymphocyte predominance.",
+        "Light's criteria are very sensitive for exudates but misclassify some transudates, particularly in a patient already on diuretics. Where the clinical picture says transudate, a serum-to-pleural-fluid albumin gradient above 1.2 g/dL supports a transudate.",
+        "A low pH and low glucose in a parapneumonic effusion indicate a complicated effusion needing DRAINAGE, not just antibiotics.",
+        "Frank pus means empyema: drain it.",
+        "Cytology has a moderate yield in malignancy from a single sample, so a negative cytology does not exclude it. Repeat sampling or pleural biopsy may be needed."
+      ],
+      "pitfalls": [
+        "Sending pleural fluid without simultaneous serum protein and LDH, making Light's criteria unusable.",
+        "Draining a large effusion too fast, risking re-expansion pulmonary oedema. Stop for chest tightness or persistent cough.",
+        "Taking a negative cytology as excluding malignancy.",
+        "Treating a complicated parapneumonic effusion with antibiotics alone when the pH and glucose say it needs a drain."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "State Light's criteria.", "a": "Exudate if any one of: pleural/serum protein above 0.5; pleural/serum LDH above 0.6; pleural LDH above two thirds of the upper limit of normal serum LDH.", "accept": ["0.5", "0.6", "two thirds", "2/3", "protein", "ldh"], "minMatch": 3 },
+        { "level": 2, "q": "What must you send alongside the pleural fluid?", "a": "Simultaneous serum protein and LDH. Without them Light's criteria cannot be applied.", "accept": ["serum", "protein", "ldh"], "minMatch": 2 },
+        { "level": 3, "q": "Pleural fluid pH is low with a low glucose in a parapneumonic effusion. What does that change?", "a": "It indicates a complicated parapneumonic effusion, which needs chest tube drainage in addition to antibiotics rather than antibiotics alone.", "accept": ["drain", "chest tube", "complicated", "tube"], "minMatch": 1 },
+        { "level": 4, "q": "The picture is clearly heart failure but Light's criteria call it an exudate. How do you resolve it?", "a": "Light's criteria are very sensitive and misclassify some transudates, especially after diuresis. Calculate the serum-to-pleural-fluid albumin gradient: a value above 1.2 g/dL supports a transudate despite Light's. Treat the heart failure and reassess rather than launching an exudate workup.", "accept": ["albumin gradient", "1.2", "diuretic", "diures", "transudate"], "minMatch": 1 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura (Light's criteria)" }
+      ],
+      "review": { "status": "ai_drafted" },
+      "dosingNote": "Thresholds and criteria only. Procedure technique, sedation and any drug must follow your current institutional protocol, and the procedure itself is performed under supervision. CliniX does not prescribe."
+    },
+
+    "skill.tx.effusion": {
+      "id": "skill.tx.effusion",
+      "kind": "treatment",
+      "system": "respiratory",
+      "title": "Managing the effusion",
+      "oneLine": "Treat the cause; drain only what needs draining",
+      "why": "The reflex to drain every effusion is wrong and occasionally harmful. Management divides cleanly by whether the fluid is a transudate, an uncomplicated parapneumonic effusion, a complicated one or an empyema, or malignant, and each takes a different path.",
+      "body": "Decide what the fluid is, then act.",
+      "keyPoints": [
+        "TRANSUDATE: treat the underlying cause. A heart-failure effusion usually resolves with treatment of the heart failure; drainage is for symptomatic relief only, and a non-resolving or unilateral one must be investigated.",
+        "UNCOMPLICATED PARAPNEUMONIC: antibiotics for the pneumonia and observation. No drain needed.",
+        "COMPLICATED PARAPNEUMONIC or EMPYEMA: chest tube drainage plus antibiotics. Delay causes a fibrothorax and a trapped lung. Intrapleural fibrinolytics or surgical decortication are considered where drainage fails.",
+        "TUBERCULOUS: standard antituberculosis therapy under the national programme. Most resolve without drainage; drain for symptoms or for a large effusion.",
+        "MALIGNANT: therapeutic aspiration for symptoms, then a definitive measure for recurrence, either pleurodesis or an indwelling pleural catheter, chosen with the patient and depending on whether the lung re-expands.",
+        "Drain slowly, generally not more than about 1.5 litres in one sitting, and stop for chest tightness or persistent cough, because of re-expansion pulmonary oedema.",
+        "Analgesia, oxygen where hypoxaemic, and treatment of the underlying condition run alongside all of these."
+      ],
+      "pitfalls": [
+        "Draining a bilateral transudate in obvious heart failure instead of treating the heart failure.",
+        "Treating an empyema with antibiotics alone. It is a drainage problem.",
+        "Draining too much too quickly and precipitating re-expansion pulmonary oedema.",
+        "Performing pleurodesis when the lung cannot re-expand, which will fail."
+      ],
+      "media": [],
+      "probes": [
+        { "level": 1, "q": "How is an empyema managed?", "a": "Chest tube drainage plus antibiotics.", "accept": ["drain", "chest tube", "antibiotic"], "minMatch": 2 },
+        { "level": 2, "q": "Why drain a large effusion slowly?", "a": "To avoid re-expansion pulmonary oedema. Stop for chest tightness or persistent cough.", "accept": ["re-expansion", "reexpansion", "oedema", "edema"], "minMatch": 1 },
+        { "level": 3, "q": "A recurrent malignant effusion keeps returning after aspiration. What are the definitive options?", "a": "Pleurodesis or an indwelling pleural catheter, chosen with the patient and depending on whether the lung re-expands after drainage. Pleurodesis fails in a trapped lung.", "accept": ["pleurodesis", "indwelling", "catheter"], "minMatch": 1 }
+      ],
+      "rubric": [],
+      "sources": [
+        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "Disorders of the Pleura" }
+      ],
+      "review": { "status": "ai_drafted" },
+      "dosingNote": "Classes, volumes and principles only. Antibiotic choice, antituberculosis regimens and drainage protocols must follow your current national or institutional guideline. CliniX does not prescribe."
+    }
+  }
+}

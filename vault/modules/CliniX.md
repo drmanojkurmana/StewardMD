@@ -1,6 +1,6 @@
 ---
 tags: [module, education, respiratory]
-status: phases 1,2,3,5,6,7 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
+status: phases 1,2,3,5,6,7,8 built (2 diseases) (flag OFF, content ai_drafted pending R1 clinical sign-off)
 flag: smd_clinix (client, def:false, ?clinix=1) + smd_clinix_draft (def:false, NEVER ship on) + smd_clinix_tutor (Phase 2, def:false) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
@@ -146,8 +146,35 @@ the SPUTUM topic via a bare `colour` cue. Fixed twice over: cues now match whole
 scored by matched-cue LENGTH (so "how much can you do" beats "how much"), and the genuinely
 ambiguous cues were tightened. Regression test: `test/clinix-case.test.mjs`.
 
+## Phase 8: the second disease, and the measured claim
+Pleural effusion was added to prove the architecture rather than to double the content. It is the
+strongest possible contrast to COPD because it drives every shared respiratory skill to the OPPOSITE
+finding: stony dull instead of hyperresonant, asymmetrical instead of symmetrically reduced, trachea
+pushed AWAY instead of central, breath sounds absent instead of symmetrically reduced. One authored
+percussion skill teaches both, and the contrast is itself the best way to teach either.
+
+**Measured:**
+
+| Disease | Skills in pathway | Reused | Authored | Reuse |
+|---|---|---|---|---|
+| COPD | 34 | 23 | 11 | 68% |
+| Pleural effusion | 26 | 20 | **6** | **77%** |
+
+The shared pool is 23 skills across `core` + `respiratory`. Adding a second respiratory disease cost
+six authored skills and a set of `emphasis` blocks. `test/clinix-content.test.mjs` now asserts this
+rather than asserting it in prose: a disease that reused fewer skills than it authored would fail.
+
+**Design error the validator caught:** `skill.present.copd` was namespaced to COPD, but the structure
+of a case presentation is identical for every patient. Pleural effusion could not reference it, which
+was the validator telling us the skill was in the wrong place. It moved to `core` as
+`skill.present.case`. **This is the referential check earning its keep**: without it the second
+disease would simply have rendered an empty Case chapter on a device.
+
+The per-disease content tests now loop over every disease in the manifest, so a third one is covered
+the moment it is listed.
+
 ## Status
-- **Phases 1, 2, 3, 5, 6 and 7 built.** 115 unit tests + 64 real-browser checks green. Full suite:
+- **Phases 1, 2, 3, 5, 6, 7 and 8 built.** 117 unit tests + 64 real-browser checks green. Full suite:
   104 failures before and after, identical set (zero regression, verified against `pre-clinix` in a
   clean worktree).
 - **Content: `ai_drafted`, NOT approved.** Drafted against Harrison 22e p.2249-2259 via

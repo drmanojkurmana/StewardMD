@@ -975,6 +975,92 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.present.case": {
+      "id": "skill.present.case",
+      "kind": "presentation",
+      "system": "core",
+      "title": "Presenting the case",
+      "oneLine": "Two minutes, in a fixed order, ending with a plan",
+      "why": "A case presentation is a performance with a known structure, and it is assessed on structure as much as content. Students who know the material still lose marks by presenting it in the order they collected it rather than the order the listener needs it.",
+      "body": "Present in a fixed order and keep it to about two minutes for a focused case. The listener should be able to reach your diagnosis before you say it.",
+      "keyPoints": [
+        "Open with the problem representation: patient, epidemiology, tempo, syndrome. One or two sentences.",
+        "Give the relevant positive history, then the relevant negatives, and nothing else.",
+        "Give the relevant examination findings, positives then negatives, in the same order every time.",
+        "State your diagnosis with its grade and current state, and give the two or three findings that support it.",
+        "Give your differential briefly, and say what argues against each.",
+        "State what you would do next: the investigation that confirms, the investigations that exclude, and the immediate management.",
+        "Stop. Do not narrate everything you did."
+      ],
+      "pitfalls": [
+        "Presenting in the order the history was taken rather than in order of relevance.",
+        "Including every negative finding rather than the ones that discriminate.",
+        "Ending on the diagnosis without a plan.",
+        "Reading from notes rather than presenting.",
+        "Running to five minutes for a focused case."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "In what order should a focused case be presented?",
+          "a": "Problem representation, relevant positive and negative history, relevant examination findings, diagnosis with supporting findings, brief differential, then plan.",
+          "accept": [
+            "summary",
+            "problem",
+            "history",
+            "examination",
+            "diagnosis",
+            "differential",
+            "plan"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why present relevant negatives at all?",
+          "a": "They show the listener what you actively excluded and narrow the differential. An absent finding that would have changed the diagnosis is doing as much work as a present one.",
+          "accept": [
+            "exclude",
+            "narrow",
+            "differential",
+            "rule out"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "structure",
+          "text": "Presents in a recognisable fixed order"
+        },
+        {
+          "id": "summary",
+          "text": "Opens with a problem representation"
+        },
+        {
+          "id": "negatives",
+          "text": "Includes discriminating negatives"
+        },
+        {
+          "id": "plan",
+          "text": "Ends with a plan, not a diagnosis"
+        },
+        {
+          "id": "concise",
+          "text": "Keeps a focused case to about two minutes"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Presenting the case"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

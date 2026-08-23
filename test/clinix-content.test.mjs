@@ -29,6 +29,10 @@ function loadDisease(file) {
   return { disease: d, localSkills: d.skills || {} };
 }
 
+// Every disease in the manifest, so a new one is covered by these tests the moment it is listed
+// rather than needing its own copy of them.
+const ALL_DISEASES = manifest.systems.flatMap((sys) => sys.diseases.map((d) => d.file));
+
 /* Manifest ------------------------------------------------------------------ */
 
 test("manifest: every declared skill pack file exists and parses", () => {
@@ -74,17 +78,20 @@ test("manifest: the advertised chapter count matches the disease file", () => {
 
 /* Whole-pack integrity ------------------------------------------------------ */
 
-test("COPD pack: passes full referential validation", () => {
+test("EVERY disease pack passes full referential validation", () => {
   const shared = loadAllSkills();
-  const { disease, localSkills } = loadDisease("diseases/copd.json");
-  const skills = Object.assign({}, shared, localSkills);
-  const v = M.validatePack({ skills, media: mediaManifest.media, diseases: [disease] });
-  assert.deepEqual(v.errors, [], "content errors:\n" + v.errors.join("\n"));
+  for (const file of ALL_DISEASES) {
+    const { disease, localSkills } = loadDisease(file);
+    const skills = Object.assign({}, shared, localSkills);
+    const v = M.validatePack({ skills, media: mediaManifest.media, diseases: [disease] });
+    assert.deepEqual(v.errors, [], `${file} content errors:\n` + v.errors.join("\n"));
+  }
 });
 
-test("COPD pack: every emphasis targets a skill that is actually in that chapter", () => {
+test("EVERY disease: emphasis targets a skill that is actually in that chapter", () => {
   const shared = loadAllSkills();
-  const { disease, localSkills } = loadDisease("diseases/copd.json");
+  for (const file of ALL_DISEASES) {
+  const { disease, localSkills } = loadDisease(file);
   const skills = Object.assign({}, shared, localSkills);
   for (const ch of disease.chapters) {
     const inChapter = new Set(ch.skills || []);
@@ -95,18 +102,70 @@ test("COPD pack: every emphasis targets a skill that is actually in that chapter
         "The emphasis would never be shown.");
     }
   }
+  }
 });
 
-test("COPD pack: OSCE stations and viva reference skills that exist", () => {
+test("EVERY disease: OSCE stations and viva reference skills that exist", () => {
   const shared = loadAllSkills();
-  const { disease, localSkills } = loadDisease("diseases/copd.json");
-  const skills = Object.assign({}, shared, localSkills);
-  for (const st of (disease.osce && disease.osce.stations) || []) {
-    for (const id of st.skills) assert.ok(skills[id], `station ${st.id} references unknown skill ${id}`);
+  for (const file of ALL_DISEASES) {
+    const { disease, localSkills } = loadDisease(file);
+    const skills = Object.assign({}, shared, localSkills);
+    for (const st of (disease.osce && disease.osce.stations) || []) {
+      for (const id of st.skills) assert.ok(skills[id], `${file} station ${st.id} references unknown skill ${id}`);
+    }
+    for (const id of (disease.viva && disease.viva.skills) || []) {
+      assert.ok(skills[id], `${file} viva references unknown skill ${id}`);
+    }
   }
-  for (const id of (disease.viva && disease.viva.skills) || []) {
-    assert.ok(skills[id], `viva references unknown skill ${id}`);
+});
+
+/* The architecture claim, measured ------------------------------------------ */
+
+test("THE ONE-MODEL CLAIM: a second disease mostly REFERENCES shared skills, it does not copy them", () => {
+  // The whole architecture rests on this. If a new disease had to author its own examination
+  // skills, the model would be a filing convention rather than a design.
+  const shared = loadAllSkills();
+  const sharedIds = new Set(Object.keys(shared));
+
+  const eff = loadDisease("diseases/pleural-effusion.json");
+  const referenced = new Set();
+  for (const ch of eff.disease.chapters) for (const id of (ch.skills || [])) referenced.add(id);
+
+  const reused = [...referenced].filter((id) => sharedIds.has(id));
+  const ownAuthored = [...referenced].filter((id) => !sharedIds.has(id));
+
+  assert.ok(reused.length >= 15,
+    `pleural effusion reuses only ${reused.length} shared skills; the sharing model is not paying off`);
+  assert.ok(reused.length > ownAuthored.length,
+    `more skills authored (${ownAuthored.length}) than reused (${reused.length})`);
+
+  // And crucially it reuses the EXAMINATION skills rather than writing its own.
+  for (const id of [
+    "skill.exam.resp.percussion", "skill.exam.resp.auscultation",
+    "skill.exam.resp.expansion", "skill.exam.resp.trachea", "skill.exam.resp.vocal_resonance"
+  ]) {
+    assert.ok(referenced.has(id), `pleural effusion does not reuse ${id}`);
   }
+});
+
+test("THE ONE-MODEL CLAIM: the same skill teaches OPPOSITE findings in the two diseases", () => {
+  // This is what emphasis is for, and it is also the best way to teach both: one authored
+  // percussion skill, hyperresonant in COPD and stony dull in an effusion.
+  function emphasisFor(file, chapterId, skillId) {
+    const { disease } = loadDisease(file);
+    const ch = disease.chapters.find((c) => c.id === chapterId);
+    return ((ch && ch.emphasis) || {})[skillId] || {};
+  }
+  const copdPerc = emphasisFor("diseases/copd.json", "systemic_exam", "skill.exam.resp.percussion");
+  const effPerc = emphasisFor("diseases/pleural-effusion.json", "systemic_exam", "skill.exam.resp.percussion");
+
+  assert.ok(/hyperresonan/i.test(copdPerc.expect), "COPD should expect hyperresonance");
+  assert.ok(/stony/i.test(effPerc.expect), "an effusion should expect stony dullness");
+
+  const copdTrachea = emphasisFor("diseases/copd.json", "systemic_exam", "skill.exam.resp.trachea");
+  const effTrachea = emphasisFor("diseases/pleural-effusion.json", "systemic_exam", "skill.exam.resp.trachea");
+  assert.ok(/central/i.test(copdTrachea.expect), "COPD: trachea central");
+  assert.ok(/away/i.test(effTrachea.expect), "effusion: trachea pushed away");
 });
 
 /* The projections must actually work on the real content -------------------- */
@@ -161,8 +220,10 @@ test("the viva pool spans more than one difficulty level", () => {
 
 test("SAFETY: nothing in the shipped pack is student-visible until it is reviewed", () => {
   const shared = loadAllSkills();
-  const { disease, localSkills } = loadDisease("diseases/copd.json");
-  const skills = Object.assign({}, shared, localSkills);
+  const localAll = {};
+  for (const file of ALL_DISEASES) Object.assign(localAll, loadDisease(file).localSkills);
+  const { disease } = loadDisease("diseases/copd.json");
+  const skills = Object.assign({}, shared, localAll);
   const visible = Object.keys(skills).filter((id) => M.isRenderable(skills[id]));
   assert.deepEqual(
     visible, [],
