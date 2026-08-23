@@ -12,15 +12,21 @@ globalThis.localStorage = {
 
 const { default: F } = await import("../clinix-flags.js");
 
-test("the master flag is OFF by default - this is the public release gate", () => {
-  assert.equal(F.bool("smd_clinix"), false);
+test("the master flag is ON by default (owner decision 2026-08-23: testers-only app)", () => {
+  assert.equal(F.bool("smd_clinix"), true);
 });
 
-test("the two authoring escape hatches are OFF by default and must never ship on", () => {
-  assert.equal(F.bool("smd_clinix_draft"), false,
-    "draft mode shows content that no clinician has approved");
-  assert.equal(F.bool("smd_clinix_uncleared_media"), false,
-    "uncleared media mode renders assets whose licence is unverified");
+test("draft mode is ON by default, because ALL content is ai_drafted", () => {
+  // With this off every pathway reads "Awaiting clinical review" and the module is unusable for
+  // testers. The per-lesson "Draft, pending clinician review" line and the source citations are
+  // what keep it honest, not this flag. Flip to false before any non-tester release.
+  assert.equal(F.bool("smd_clinix_draft"), true);
+});
+
+test("uncleared media stays OFF - that one is a licence question, not a review question", () => {
+  // Unlike the review gate, this cannot be waived by an owner decision: rendering media whose
+  // licence is unverified is a rights problem regardless of who the audience is.
+  assert.equal(F.bool("smd_clinix_uncleared_media"), false);
 });
 
 test("the tutor is OFF by default, so a lesson is deterministic content only", () => {

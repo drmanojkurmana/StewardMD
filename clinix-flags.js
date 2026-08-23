@@ -1,5 +1,10 @@
 /* clinix-flags.js — CliniX · flag registry. Sibling of thorex-flags.js / sknx-flags.js.
  *
+ * NOTE (2026-08-23, owner decision): smd_clinix and smd_clinix_draft both default ON. The app is
+ * distributed only to the owner and testers, so gating CliniX behind a flag only cost them time.
+ * The per-lesson "Draft, pending clinician review" line and the source citations stay on every
+ * screen, so nothing claims to be approved that is not. Flip both to false before wider release.
+ *
  * Resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_CLINIX_FLAGS for the browser.
  *
@@ -17,12 +22,16 @@
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
     smd_clinix: {
-      type: "bool", def: false, query: "clinix",
-      desc: "CliniX clinical-learning module master flag. PUBLIC-RELEASE-GATE."
+      type: "bool", def: true, query: "clinix",
+      desc: "CliniX clinical-learning module master flag. ON by default: the app ships only to the " +
+        "owner and testers, so CliniX is open to everyone who has it. Owner decision, 2026-08-23."
     },
     smd_clinix_draft: {
-      type: "bool", def: false, query: "clinixdraft",
-      desc: "Render content that is not clinician-approved (authoring only). NEVER ship on."
+      type: "bool", def: true, query: "clinixdraft",
+      desc: "Render content that is not clinician-approved. ON by default because ALL CliniX content " +
+        "is currently ai_drafted, so with this off every pathway reads 'Awaiting clinical review' and " +
+        "the module is unusable for testers. Every lesson still shows its own 'Draft, pending " +
+        "clinician review' line and its sources. Set to 0 before any non-tester release."
     },
     smd_clinix_tutor: {
       type: "bool", def: false, query: "clinixtutor",
