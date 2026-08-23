@@ -85,9 +85,14 @@
     return null;
   }
 
+  /* A system MODULE is the disease-independent workup for a whole system: the book's chapter on
+   * examining the respiratory system, before COPD or effusion specialise it. It is shaped exactly
+   * like a disease pathway on purpose, so every runner (lesson, OSCE, viva, competency) works on it
+   * with no new code, and it is resolved here alongside the diseases. */
   function diseaseEntry(cat, diseaseId) {
     var systems = (cat && cat.systems) || [];
     for (var i = 0; i < systems.length; i++) {
+      if (systems[i].module && systems[i].module.id === diseaseId) return { system: systems[i], disease: systems[i].module };
       var ds = systems[i].diseases || [];
       for (var j = 0; j < ds.length; j++) if (ds[j].id === diseaseId) return { system: systems[i], disease: ds[j] };
     }

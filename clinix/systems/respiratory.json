@@ -1,0 +1,138 @@
+{
+  "_comment": "The SYSTEM module: how to work up a respiratory patient, independent of any disease. This is Chapter 3 of the book turned into a pathway. A student does this FIRST, then goes to COPD or pleural effusion for what changes. It is shaped exactly like a disease pathway, so every runner (lesson, OSCE, viva, competency) works on it with no new code.",
+  "id": "resp-exam",
+  "name": "Examination of the Respiratory System",
+  "fullName": "Examination of the Respiratory System",
+  "system": "respiratory",
+  "kind": "system-module",
+  "oneLine": "The whole respiratory workup, before any particular disease",
+  "estMinutes": 90,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Name, age, occupation, and why each one is clinical data",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "The cardinal respiratory symptoms, one at a time",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.cough_sputum",
+        "skill.hx.resp.smoking",
+        "skill.hx.resp.drug"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "From the end of the bed inwards",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Respiratory examination",
+      "blurb": "Inspection, palpation, percussion, auscultation",
+      "skills": [
+        "skill.exam.resp.inspection",
+        "skill.exam.resp.trachea",
+        "skill.exam.resp.expansion",
+        "skill.exam.resp.percussion",
+        "skill.exam.resp.auscultation",
+        "skill.exam.resp.added_sounds",
+        "skill.exam.resp.vocal_resonance",
+        "skill.exam.resp.corpulmonale"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Reading the pattern",
+      "blurb": "Which disease do these findings make?",
+      "skills": [
+        "skill.resp.patterns"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Anatomical, pathological, aetiological, complications",
+      "skills": [
+        "skill.resp.diagnosis_format"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Presenting the case",
+      "blurb": "Two minutes, in a fixed order",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.resp.full",
+        "title": "Examine the respiratory system",
+        "task": "Examine this patient's respiratory system and present your findings, then give your diagnosis in full.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.resp.inspection",
+          "skill.exam.resp.trachea",
+          "skill.exam.resp.expansion",
+          "skill.exam.resp.percussion",
+          "skill.exam.resp.auscultation",
+          "skill.exam.resp.added_sounds",
+          "skill.exam.resp.vocal_resonance"
+        ],
+        "examinerQuestions": [
+          "Give me your findings as a pattern, not a list.",
+          "Which way is the mediastinum shifted, and what does that exclude?",
+          "State your diagnosis in all four parts."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.resp.patterns",
+      "skill.resp.diagnosis_format",
+      "skill.exam.resp.percussion",
+      "skill.exam.resp.vocal_resonance",
+      "skill.exam.resp.trachea",
+      "skill.hx.resp.cough_sputum",
+      "skill.hx.resp.dyspnea",
+      "skill.gen.clubbing"
+    ]
+  }
+}

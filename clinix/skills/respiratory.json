@@ -1566,6 +1566,316 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.resp.patterns": {
+      "id": "skill.resp.patterns",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Reading the pattern: which disease is this?",
+      "oneLine": "Four findings separate almost every respiratory case",
+      "why": "A list of signs is not a diagnosis. What turns findings into a disease is the PATTERN they make, and in the chest four findings do almost all of the work: where the trachea points, the percussion note, the breath sounds, and the vocal resonance. Learn the pattern and you can name the pathology at the bedside before any imaging.",
+      "teach": [
+        {
+          "heading": "Four findings, in this order",
+          "body": "Every respiratory case comes down to the same four questions. Ask them in this order and the answer usually falls out.\n\nWhere is the mediastinum? What is the percussion note? What are the breath sounds? What happens to the voice?",
+          "note": "Percussion and vocal resonance are the pair that separate the two commonest confusions: consolidation from effusion, and effusion from collapse."
+        },
+        {
+          "heading": "1. Which way does the mediastinum move",
+          "body": "Something that takes up space pushes it away. Something that loses volume pulls it towards.",
+          "table": {
+            "cols": [
+              "Condition",
+              "Trachea and mediastinum"
+            ],
+            "rows": [
+              [
+                "Fibrosis",
+                "PULLED to the same side"
+              ],
+              [
+                "Collapse",
+                "PULLED to the same side"
+              ],
+              [
+                "Pleural effusion",
+                "PUSHED to the opposite side"
+              ],
+              [
+                "Pneumothorax",
+                "PUSHED to the opposite side"
+              ],
+              [
+                "Consolidation",
+                "Central"
+              ]
+            ]
+          },
+          "note": "This is the single most useful discriminator you have. A dull hemithorax with the trachea PULLED towards it is collapse, not effusion, and usually means something is obstructing a bronchus."
+        },
+        {
+          "heading": "2. The percussion note",
+          "table": {
+            "cols": [
+              "Condition",
+              "Note"
+            ],
+            "rows": [
+              [
+                "Normal lung",
+                "Resonant"
+              ],
+              [
+                "Consolidation",
+                "Dull, woody"
+              ],
+              [
+                "Collapse",
+                "Dull"
+              ],
+              [
+                "Fibrosis",
+                "Impaired, slightly dull"
+              ],
+              [
+                "Pleural effusion",
+                "STONY dull"
+              ],
+              [
+                "Pneumothorax",
+                "Hyperresonant"
+              ],
+              [
+                "COPD, hyperinflation",
+                "Hyperresonant, with cardiac and liver dullness lost"
+              ]
+            ]
+          },
+          "note": "Stony dullness is a different quality, not just more dullness. Percuss your own thigh and then a full effusion and you will not forget it."
+        },
+        {
+          "heading": "3. Breath sounds and 4. the voice, together",
+          "body": "These two move in the same direction, and the direction is the answer. Solid lung CONDUCTS sound better, so both increase. Fluid or air BLOCKS it, so both fall.",
+          "table": {
+            "cols": [
+              "Condition",
+              "Breath sounds",
+              "Vocal resonance"
+            ],
+            "rows": [
+              [
+                "Consolidation",
+                "Bronchial, tubular",
+                "INCREASED, with whispering pectoriloquy"
+              ],
+              [
+                "Collapse",
+                "Absent or reduced",
+                "Reduced"
+              ],
+              [
+                "Pleural effusion",
+                "Absent over the fluid",
+                "Reduced"
+              ],
+              [
+                "Pneumothorax",
+                "Absent",
+                "Reduced"
+              ],
+              [
+                "Fibrosis",
+                "Diminished, fine late crackles",
+                "Reduced"
+              ],
+              [
+                "COPD",
+                "Reduced, prolonged expiration",
+                "Reduced"
+              ]
+            ]
+          },
+          "note": "Consolidation is the ONLY common cause where the voice gets LOUDER. If percussion is dull and the voice is louder, it is consolidation; if dull and quieter, think fluid or collapse."
+        },
+        {
+          "heading": "The two traps",
+          "points": [
+            {
+              "t": "Effusion against collapse.",
+              "d": "Both dull, both quiet. The trachea decides: pushed away is fluid, pulled towards is collapse."
+            },
+            {
+              "t": "Consolidation against effusion.",
+              "d": "Both dull. The voice decides: louder is consolidation, quieter is fluid."
+            },
+            {
+              "t": "Bronchial breathing just ABOVE an effusion.",
+              "d": "Compressed but still aerated lung sits above the fluid and conducts sound. Heard at the upper border it is expected; heard over the fluid it means consolidation."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Naming a disease from one finding. It is the combination that is diagnostic.",
+        "Forgetting to check the apex beat when the trachea suggests a shift. The two should agree.",
+        "Calling any dullness stony. Stony dullness is a distinct quality and it means fluid."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A stony dull left base with absent breath sounds and reduced vocal resonance. What is it?",
+          "a": "A left pleural effusion.",
+          "accept": [
+            "effusion",
+            "pleural"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Dull percussion note but the voice is LOUDER. What does that tell you?",
+          "a": "Consolidation. Solid lung conducts the voice better; fluid and collapse both reduce it.",
+          "accept": [
+            "consolidation"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A dull hemithorax with the trachea PULLED towards it. Effusion or collapse, and why does it matter?",
+          "a": "Collapse, because a volume-losing process pulls the mediastinum towards it while an effusion pushes it away. It matters because collapse usually means an obstructing lesion and needs imaging and often bronchoscopy.",
+          "accept": [
+            "collapse",
+            "obstruct",
+            "pull"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why do breath sounds and vocal resonance always move in the same direction?",
+          "a": "Both depend on how well the lung between the airway and your stethoscope conducts sound. Solid lung conducts better so both rise; interposed fluid or air conducts worse so both fall.",
+          "accept": [
+            "conduct",
+            "solid",
+            "fluid",
+            "transmit"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "An Insider's Guide to Clinical Medicine (2020)",
+          "locator": "Ch.3E Respiratory: Summary of Findings in Common Respiratory Diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.resp.diagnosis_format": {
+      "id": "skill.resp.diagnosis_format",
+      "kind": "reasoning",
+      "system": "respiratory",
+      "title": "Stating a respiratory diagnosis",
+      "oneLine": "Anatomical, then pathological, then aetiological, then complications",
+      "why": "Saying 'pleural effusion' answers a quarter of the question. A respiratory diagnosis has four parts, and examiners ask for all four because each one changes what happens to the patient next: where it is, what it is, why it happened, and what it has cost them.",
+      "teach": [
+        {
+          "heading": "The four parts, in order",
+          "points": [
+            {
+              "t": "Anatomical.",
+              "d": "Which side, which lobe, lung or pleura. Right upper lobe, left pleural space, bilateral."
+            },
+            {
+              "t": "Pathological.",
+              "d": "What the process is. Consolidation, collapse, fibrosis, effusion, pneumothorax, obstructive or restrictive disease."
+            },
+            {
+              "t": "Aetiological.",
+              "d": "Why. Tuberculosis, malignancy, smoking, occupation, trauma."
+            },
+            {
+              "t": "Complications.",
+              "d": "What it has caused. Respiratory failure, and which type. Cor pulmonale."
+            }
+          ],
+          "note": "Say all four even when one is uncertain. 'Aetiology not yet established, tuberculosis to be excluded' is a real answer and shows you know the slot exists."
+        },
+        {
+          "heading": "Three worked examples",
+          "points": [
+            "Right upper lobe fibrosis, post-tubercular in origin, with no evidence of respiratory failure or cor pulmonale.",
+            "Bilateral obstructive lung disease, emphysema secondary to smoking, with type 2 respiratory failure and cor pulmonale.",
+            "Left-sided pleural effusion secondary to malignancy, with no respiratory failure or cor pulmonale."
+          ],
+          "note": "Notice that each one ends by explicitly EXCLUDING the complications. Saying 'no evidence of respiratory failure or cor pulmonale' tells the examiner you looked, which is worth as much as finding it."
+        },
+        {
+          "heading": "Why the aetiology slot changes management",
+          "body": "The same effusion is drained, treated with antituberculosis therapy, or managed with pleurodesis depending only on the aetiology.\n\nThat is why a diagnosis that stops at the pathology is incomplete: it names the finding but gives nobody a plan."
+        }
+      ],
+      "pitfalls": [
+        "Stopping at the pathological diagnosis, which names the finding but not the patient.",
+        "Skipping the complications, so respiratory failure or cor pulmonale goes unstated.",
+        "Guessing an aetiology to fill the slot. Say what you would do to establish it instead."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four parts of a respiratory diagnosis.",
+          "a": "Anatomical, pathological, aetiological, and complications.",
+          "accept": [
+            "anatomic",
+            "patholog",
+            "etiolog",
+            "aetiolog",
+            "complication"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "State a full diagnosis for a smoker with emphysema, type 2 failure and cor pulmonale.",
+          "a": "Bilateral obstructive lung disease, emphysema secondary to smoking, with type 2 respiratory failure and cor pulmonale.",
+          "accept": [
+            "obstructive",
+            "emphysema",
+            "smoking",
+            "type 2",
+            "cor pulmonale"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why does the aetiological part matter so much?",
+          "a": "Because it determines management. The same effusion is drained, treated for tuberculosis, or managed with pleurodesis depending entirely on why it is there.",
+          "accept": [
+            "management",
+            "treat",
+            "changes",
+            "plan"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "An Insider's Guide to Clinical Medicine (2020)",
+          "locator": "Ch.3B Respiratory: Diagnosis Format"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

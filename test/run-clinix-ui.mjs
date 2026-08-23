@@ -129,10 +129,10 @@ try {
   /* ── 3. THE REVIEW GATE: unreviewed content must not reach a student ───── */
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(400);
-  ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-disease\"]')")) === true,
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-row--dz')")) === true,
     "the respiratory system lists COPD");
 
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-state, #clinixRoot .cx-rail')")) break;
     await sleep(250);
@@ -153,7 +153,7 @@ try {
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break;
     await sleep(250);
@@ -288,7 +288,7 @@ try {
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break;
     await sleep(250);
@@ -319,6 +319,34 @@ try {
     const a = C.media(b, 'media.dia.percussion'), t = C.media(b, 'media.dia.percussiontech');
     return !!(a && a.renderable && t && t.renderable && t.diagramId === 'diagram.percussion.technique');
   })()`)) === true, "percussion teaches WHERE and HOW, both self-authored");
+
+  /* ── 6c. SYSTEM MODULE comes before the diseases ───────────────────────── */
+  console.log("\n--- system module ---");
+  await attach(BASE + "?clinix=1");
+  await ev("window.CLINIX.open()"); await sleep(600);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(500);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-modcard')")) === true,
+    "the system offers 'Examination of the Respiratory System' as the primary action");
+  ok((await ev("document.querySelector('#clinixRoot .cx-modcard').textContent")).indexOf("Respiratory System") >= 0,
+    "and it is named as the whole-system examination");
+  const modFirst = await ev(`(function(){
+    var card = document.querySelector('#clinixRoot .cx-modcard');
+    var dz = document.querySelector('#clinixRoot .cx-row--dz');
+    if (!card || !dz) return 'missing';
+    return (card.getBoundingClientRect().top < dz.getBoundingClientRect().top) ? 'module-first' : 'disease-first';
+  })()`);
+  ok(modFirst === "module-first", "it sits ABOVE the disease list, not below it");
+
+  // and it opens into the full workup pathway
+  await ev("document.querySelector('#clinixRoot .cx-modcard').click()");
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break; await sleep(250); }
+  const modChapters = await ev("document.querySelectorAll('#clinixRoot .cx-rail-item').length");
+  ok(Number(modChapters) >= 8, `the module opens the full workup (${modChapters} chapters)`);
+  const railText = await ev("document.querySelector('#clinixRoot .cx-rail').textContent");
+  for (const need of ["particulars", "History", "General examination", "Respiratory examination", "pattern", "diagnosis"]) {
+    ok(String(railText).toLowerCase().indexOf(need.toLowerCase()) >= 0, `  chapter present: ${need}`);
+  }
 
   /* ── 7a. TEACHING BEFORE ASKING ───────────────────────────────────────── */
   console.log("\n--- teaching layer ---");
@@ -381,7 +409,7 @@ try {
   await ev("window.CLINIX.open()"); await sleep(500);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-station\"]')")) break; await sleep(250); }
   await ev("document.querySelector('#clinixRoot [data-act=\"cx-station\"]').click()");
   await sleep(600);
@@ -413,7 +441,7 @@ try {
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-case\"]')")) break;
     await sleep(250);
@@ -477,7 +505,7 @@ try {
   await sleep(400);
   await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
   await sleep(300);
-  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
   for (let i = 0; i < 40; i++) {
     if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break;
     await sleep(250);

@@ -32,6 +32,10 @@ function loadDisease(file) {
 // Every disease in the manifest, so a new one is covered by these tests the moment it is listed
 // rather than needing its own copy of them.
 const ALL_DISEASES = manifest.systems.flatMap((sys) => sys.diseases.map((d) => d.file));
+// A system module is a disease-shaped pathway (the whole workup, no disease attached), so it gets
+// exactly the same referential and safety checks.
+const ALL_MODULES = manifest.systems.filter((s) => s.module).map((s) => s.module.file);
+const ALL_PATHWAYS = ALL_DISEASES.concat(ALL_MODULES);
 
 /* Manifest ------------------------------------------------------------------ */
 
@@ -80,7 +84,7 @@ test("manifest: the advertised chapter count matches the disease file", () => {
 
 test("EVERY disease pack passes full referential validation", () => {
   const shared = loadAllSkills();
-  for (const file of ALL_DISEASES) {
+  for (const file of ALL_PATHWAYS) {
     const { disease, localSkills } = loadDisease(file);
     const skills = Object.assign({}, shared, localSkills);
     const v = M.validatePack({ skills, media: mediaManifest.media, diseases: [disease] });
@@ -105,9 +109,9 @@ test("EVERY disease: emphasis targets a skill that is actually in that chapter",
   }
 });
 
-test("EVERY disease: OSCE stations and viva reference skills that exist", () => {
+test("EVERY pathway: OSCE stations and viva reference skills that exist", () => {
   const shared = loadAllSkills();
-  for (const file of ALL_DISEASES) {
+  for (const file of ALL_PATHWAYS) {
     const { disease, localSkills } = loadDisease(file);
     const skills = Object.assign({}, shared, localSkills);
     for (const st of (disease.osce && disease.osce.stations) || []) {
@@ -117,6 +121,40 @@ test("EVERY disease: OSCE stations and viva reference skills that exist", () => 
       assert.ok(skills[id], `${file} viva references unknown skill ${id}`);
     }
   }
+});
+
+test("SYSTEM MODULE: respiratory teaches the whole workup with no disease attached", () => {
+  // The point of the module is that a student learns to examine a chest BEFORE choosing a disease.
+  const shared = loadAllSkills();
+  const mod = manifest.systems.find((s) => s.id === "respiratory").module;
+  assert.ok(mod, "respiratory has a system module");
+  const { disease, localSkills } = loadDisease(mod.file);
+  assert.equal(Object.keys(localSkills).length, 0,
+    "a system module owns NO skills of its own; it is pure references to the shared packs");
+
+  const ids = disease.chapters.map((c) => c.id);
+  for (const need of ["approach", "particulars", "history", "general_exam", "systemic_exam", "differential", "diagnosis"]) {
+    assert.ok(ids.includes(need), `the system module is missing the '${need}' chapter`);
+  }
+  // and it walks the canonical spine in order, like every pathway
+  const pos = ids.map((id) => M.CHAPTERS.indexOf(id));
+  for (let i = 1; i < pos.length; i++) assert.ok(pos[i] > pos[i - 1], `chapters out of order at '${ids[i]}'`);
+
+  for (const ch of disease.chapters) {
+    for (const id of ch.skills || []) assert.ok(shared[id], `module references unknown skill ${id}`);
+  }
+});
+
+test("SYSTEM MODULE: the pattern skill teaches the four discriminating findings", () => {
+  const shared = loadAllSkills();
+  const s = shared["skill.resp.patterns"];
+  assert.ok(s && Array.isArray(s.teach), "the pattern skill is taught, not just asserted");
+  const text = JSON.stringify(s.teach).toLowerCase();
+  for (const need of ["trachea", "percussion", "breath sounds", "vocal resonance"]) {
+    assert.ok(text.indexOf(need) >= 0, `the pattern teaching never mentions ${need}`);
+  }
+  // the two classic confusions must be named explicitly
+  assert.ok(text.indexOf("collapse") >= 0 && text.indexOf("effusion") >= 0);
 });
 
 /* The architecture claim, measured ------------------------------------------ */

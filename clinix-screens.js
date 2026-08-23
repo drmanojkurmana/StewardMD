@@ -217,14 +217,34 @@
     var sys = C() && C().systemById(cat, state.systemId);
     if (!sys) { host.innerHTML = header("Systems") + emptyState("error", "System not found", "Go back and pick another system."); return; }
 
-    var html = header(sys.title, "Choose a topic");
+    var html = header(sys.title, "Start with the examination, then the diseases");
+
+    /* The system MODULE comes first and is visually the primary action. A student who has never
+     * examined a chest should not have to pick a disease before they can learn how. The diseases
+     * below are specialisations of this, not alternatives to it. */
+    if (sys.module) {
+      html += '<section class="cx-sec"><div class="cx-sec-h">Start here</div>' +
+        '<button type="button" class="cx-modcard" data-act="cx-disease" data-id="' + esc(sys.module.id) + '">' +
+          '<span class="cx-modcard-ic">' + ic("stethoscope") + "</span>" +
+          '<span class="cx-modcard-txt">' +
+            '<span class="cx-modcard-t">' + esc(sys.module.title) + "</span>" +
+            '<span class="cx-modcard-s">' + esc(sys.module.subtitle || "") + "</span>" +
+            '<span class="cx-modcard-meta">' + esc(String(sys.module.chapters || 0)) + " chapters &middot; about " +
+              esc(String(sys.module.estMinutes || 0)) + " min</span>" +
+          "</span>" + ic("chevron_right") + "</button></section>";
+    }
+
     var ds = sys.diseases || [];
     if (!ds.length) {
-      html += emptyState("hourglass_top", sys.title + " is coming",
-        "The CliniX engine is system-agnostic, so this system needs content rather than code. Respiratory is the reference implementation.");
+      html += '<section class="cx-sec"><div class="cx-sec-h">Diseases</div></section>';
+      html += emptyState("hourglass_top", "Disease modules are coming",
+        "The engine is system-agnostic, so a new system needs content rather than code.");
       host.innerHTML = html; return;
     }
-    html += '<div class="cx-rows cx-rows--pad">';
+
+    html += '<section class="cx-sec"><div class="cx-sec-h">Then a disease</div>' +
+      '<div class="cx-blurb cx-blurb--tight">Each one assumes the examination above and teaches what changes.</div>' +
+      '<div class="cx-rows">';
     for (var i = 0; i < ds.length; i++) {
       var d = ds[i];
       html += '<button type="button" class="cx-row cx-row--dz" data-act="cx-disease" data-id="' + esc(d.id) + '">' +
@@ -233,7 +253,7 @@
         '<span class="cx-row-meta">' + esc(String(d.chapters || 0)) + " chapters &middot; about " + esc(String(d.estMinutes || 0)) + " min</span>" +
         "</span>" + ic("chevron_right") + "</button>";
     }
-    html += "</div>";
+    html += "</div></section>";
     host.innerHTML = html;
   }
 
