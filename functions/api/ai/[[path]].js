@@ -1247,6 +1247,13 @@ export async function onRequest(context) {
       // it to Gemini with the KB-primary system prompt. The whole KB never transits.
       const pkg = body.package || (body.grounding || body.reasoning ? body : null);
       if (pkg && (pkg.grounding || pkg.reasoning)) {
+        /* STAGE INSTRUMENTATION (?diag=1 only; no content, no PHI, no behaviour change).
+         * Retrieval happens ON DEVICE - the client posts an already-grounded package - so the server
+         * stages are: quota gate -> cross-encoder re-rank (Workers AI) -> Connect context -> runtime
+         * config (KV) -> prompt render -> Gemini -> post-processing. Each is a potential serial round
+         * trip and none of them was individually measurable before. */
+        const _mark = { t0: Date.now() };
+        const _at = (k) => { try { _mark[k] = Date.now() - _mark.t0; } catch (e) {} };
         // No computed diagnosis → general-knowledge (educational) mode; otherwise
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
@@ -1256,6 +1263,7 @@ export async function onRequest(context) {
         const sys = isTutor ? TUTOR_SYS : (hasDx ? RAG_SYS : KNOWLEDGE_SYS);
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+        _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
         // SKIP for the CliniX tutor: rerankRetrieved() is a real extra network round-trip to a
         // separate Workers AI model (@cf/baai/bge-reranker-base), paid SEQUENTIALLY before the
@@ -1264,11 +1272,15 @@ export async function onRequest(context) {
         // question (TUTOR_SYS's own instruction). lexicalRank is the same fallback this function
         // already uses when Workers AI is unavailable - free, synchronous, in-memory - so tutor
         // answers still get a sensible (keyword-overlap) evidence order, just without the round trip.
+        // _didRerank records whether the Workers AI ROUND TRIP actually happened, which is the thing
+        // the ?diag=1 latency breakdown needs to attribute - a tutor call skips it.
+        const _didRerank = !!(pkg.retrieved && pkg.retrieved.length > 1) && !isTutor;
         try {
           if (pkg.retrieved && pkg.retrieved.length > 1) {
             pkg.retrieved = isTutor ? lexicalRank(pkg.question, pkg.retrieved) : await rerankRetrieved(env, pkg.question, pkg.retrieved);
           }
         } catch (e) {}
+        _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
         // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
         // CANONICAL SCCM context into pkg. SECURITY: applyConnectContext adds ONLY the R7-gated LLM-
@@ -1276,7 +1288,9 @@ export async function onRequest(context) {
         // gate is closed it adds NOTHING to pkg. Fail-safe: any Connect error degrades to "no context"
         // and never breaks/delays the answer. Inert + byte-identical unless BOTH Connect flags are on.
         if (maikWiringOn(env)) { try { await applyConnectContext(env, request, pkg); } catch (e) {} }
+        _at("connect");
         let grounded = renderGroundedPrompt(pkg).slice(0, MAX_IN_CHARS);
+        _at("prompt");
         // MaiK Brain (Part 2): if the client sent a RANKED evidence bundle, synthesize from it
         // (StewardMD-first, deduped) and adapt tone to the inferred audience. Backward-compatible:
         // absent → sysA/grounded are unchanged.
@@ -1295,6 +1309,7 @@ export async function onRequest(context) {
         } catch (e) {}
         // Effective MaiK config = owner runtime overrides (AI Control Center, KV) layered over env.
         const _mcfg = await getMaikCfg(usageKv(env), env);
+        _at("cfg");
         // Cite-or-abstain safety directive (toggle in AI Control Center / MAIK_ABSTAIN). Never fabricate.
         try {
           if (_mcfg.abstain) {
@@ -1318,7 +1333,8 @@ export async function onRequest(context) {
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; }
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          _at("streamOpen"); _mark.liveStream = !!up;
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
@@ -1352,6 +1368,7 @@ export async function onRequest(context) {
         // "Searching…" wait). "detailed" still gets the full budget on explicit request.
         const nsCap = (body && (body.depth === "detailed" || body.tier === 2)) ? MAX_OUT : NONSTREAM_BASE;
         const nsSys = sysA;
+        _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
         // CliniX tutor: force the same cheap/fast tier viva-judge already uses for a short
         // classification-shaped call (measured live: the default model, gemini-2.5-flash, took
@@ -1369,7 +1386,9 @@ export async function onRequest(context) {
         (pkg.grounding || []).forEach((g) => (g.provenance || []).forEach((p) => { if (p && cites.indexOf(p) < 0) cites.push(p); }));
         if (new URL(request.url).searchParams.get("diag") === "1") {
           const u = (_lastGenMeta && _lastGenMeta.usage) || {};
-          const _diag = { ms: Date.now() - _t0, cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
+          _at("gen");
+          const _diag = { ms: Date.now() - _t0, total: Date.now() - _mark.t0, stages: _mark, rerank: _didRerank,
+            cap: nsCap, chars: (text || "").length, model: (_lastGenMeta && _lastGenMeta.model) || modelId(env), finishReason: (_lastGenMeta && _lastGenMeta.finishReason) || "",
             promptTok: u.promptTokenCount || 0, thoughtsTok: u.thoughtsTokenCount || 0, candTok: u.candidatesTokenCount || 0, totalTok: u.totalTokenCount || 0 };
           return json({ text: text, mode: "grounded", citations: cites, _diag: _diag });
         }

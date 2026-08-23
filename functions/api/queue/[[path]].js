@@ -27,6 +27,7 @@ import * as QT from "../../_queue_timeline.js";
 import { notifyTimeline } from "../../_queue_notify.js";
 import { importRoster, importFromSource } from "../../_queue_ghis.js";
 import * as ORG from "../../_opd_org_store.js";
+import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
 import { proFromRequest } from "../../_entitlement.js";
@@ -264,6 +265,36 @@ export async function onRequest(context) {
       await bkt.put(logoKey(orgId, v.ext), bytes, { httpMetadata: { contentType: ct } });
       const res = await putBranding(env, orgId, { clinicName: url.searchParams.get("name") || "", ext: v.ext, updatedBy: actor.id || "" });
       return json(Object.assign({ ok: true }, res), 200, request);
+    }
+
+    // ---- Patient registration (ABDM-ready identity + MR allocation) -----------------------------
+    // ONE place decides who issues the MR: the WORKPLACE, never whether a number was typed in.
+    // The client does not re-implement validation - it renders the field-keyed errors returned here.
+    if (seg === "patient") {
+      const body = method === "POST" ? await readBody(request) : {};
+      const pOrg = url.searchParams.get("orgId") || body.orgId || "";
+      if (sub === "register" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        const org = await ORG.getOrg(env, pOrg);
+        if (!org) return json({ ok: false, error: "org_not_found" }, 404, request);
+        const r = await PAT.registerPatient(env, org, body, actor.id || "");
+        // invalid / duplicate are EXPECTED outcomes the form renders, not server errors.
+        return json(r, r.ok ? 200 : 200, request);
+      }
+      if (sub === "get" && method === "GET") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_VIEW);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        const p = await PAT.getPatient(env, pOrg, url.searchParams.get("mrn") || "");
+        return json(p ? { ok: true, patient: p } : { ok: false, error: "not_found" }, 200, request);
+      }
+      // The hospital EMR issued a real MR for someone queued on a provisional id.
+      if (sub === "link-mrn" && method === "POST") {
+        const az = await ORG.authorizeOrg(env, actor, pOrg, CAPS.QUEUE_ADD);
+        if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
+        return json(await PAT.linkHospitalMrn(env, pOrg, body.provisionalMrn || "", body.mrn || "", body.mrSource || "ghis", actor.id || ""), 200, request);
+      }
+      return json({ ok: false, error: "not_found" }, 404, request);
     }
 
     // ---- Clinic operations: BILLING station (lean MVP). /api/queue/bill/<action>. Inert unless

@@ -154,6 +154,8 @@
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="/patient-register.css?v=preg1">
+<script src="/patient-register.js?v=preg1" defer></script>
 </head>
 <body>
 <div id="app"></div>
@@ -689,19 +691,24 @@
     };
   }
   function openPoolAdd(){
-    open('<h3>Register walk-in (unassigned)</h3>'+
-      '<input id="pn" placeholder="Patient name" style="margin-bottom:10px">'+
-      '<input id="pm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
-      '<input id="pd" placeholder="Department (optional)">'+
-      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add to pool</button></div>');
-    sheet.querySelector("#cx").onclick=close;
-    sheet.querySelector("#ok").onclick=function(){
-      var n=sheet.querySelector("#pn").value.trim(); if(!n){toast("Enter a name");return;}
-      var body={orgId:st.orgId,name:n,mobile:sheet.querySelector("#pm").value.trim(),department:sheet.querySelector("#pd").value.trim(),visitType:"new",date:st.date};
-      close();
-      api("pool",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
-    };
+    // The SAME check-in sheet the phone app uses (patient-register.js). It replaced a three-field
+    // sheet that captured no gender, age or date of birth - none of which ABDM can work without.
+    // The server validates and issues the MR number; this only carries the answers.
+    if(!(window.SMD_PATIENTREG&&SMD_PATIENTREG.open)){ toast("Patient check-in is unavailable."); return; }
+    var mode=(st.opd&&st.opd.mode==="connect")?"connect":"native";
+    SMD_PATIENTREG.open({
+      mode: mode,
+      clinicName: st.orgCode||"Check-in",
+      submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; return api("patient/register",{method:"POST",body:b}); },
+      onAdded: function(r){
+        // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
+        api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
+          mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date}})
+          .then(function(){ toast("Added - "+r.mrn); refresh(); });
+      }
+    });
   }
+
 
   // ---- ROOMS EDITOR (owner/admin): add rooms + assign/rotate doctors ----
   var ASSIGN_MODES=[["primary","One doctor"],["rotating","Rotating (multiple)"],["unassigned","No doctor (unassigned)"]];
