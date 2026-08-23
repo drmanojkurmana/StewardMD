@@ -184,3 +184,91 @@ and 3), each with real oEmbed-verified demonstration videos wired in where a goo
 (JVP, auscultation areas, parasternal heave/thrills, cranial nerve overview, cerebellar exam,
 GCS, meningeal signs). CLX-V006–013 above are the gaps their authors found and declined to fill
 with another self-authored placeholder.
+
+## The top-5 long/short cases (2026-08-23) — filled where a real asset existed
+21 new disease pathways landed across Respiratory/Cardiovascular/Abdomen/Neurology. Four items
+found by the build agents were re-verified and wired in immediately rather than logged as
+requests: a Commons-verified splinter-haemorrhage photo (`media.img.splinterhem`, public domain,
+on `skill.exam.ie.stigmata`), and three oEmbed-verified videos — Parkinsonian gait
+(`media.vid.pdgait`), the NIH Stroke Scale demonstration (`media.vid.nihss`), and Guillain-Barre
+syndrome (`media.vid.gbs`). Everything else the agents searched for and could not verify is
+logged below.
+
+## CLX-V014 — Consolidation triad (percussion/auscultation/vocal resonance)
+- **Clinical context:** Pneumonia disease-findings, `skill.pneumonia.signs`.
+- **Must show:** the dull-percussion / bronchial-breathing / increased-vocal-resonance triad over
+  a consolidated lobe, ideally side-by-side with the normal finding.
+- **Preferred format:** diagram or short video.
+- **Status:** OPEN
+
+## CLX-V015 — Acute severe asthma: wheeze vs the silent chest
+- **Clinical context:** Bronchial asthma disease-findings, `skill.asthma.signs`.
+- **Must show:** the contrast between a wheezy, distressed chest and a dangerously silent one
+  (airflow too low to make a sound) — an audio pair would work as well as video.
+- **Preferred format:** audio or video pair.
+- **Status:** OPEN
+
+## CLX-V016 — External markers of tuberculosis
+- **Clinical context:** TB general examination, `skill.tb.signs`.
+- **Must show:** erythema nodosum, phlyctenular conjunctivitis, scrofuloderma/lupus vulgaris —
+  real clinical photos, licence-cleared.
+- **Preferred format:** image set.
+- **Status:** OPEN
+
+## CLX-V017 — TB chest X-ray patterns
+- **Clinical context:** TB investigations, `skill.ix.tb.workup`.
+- **Must show:** upper-zone cavitation vs fibrosis vs miliary pattern, as a comparison set.
+- **Preferred format:** image set.
+- **Status:** OPEN
+
+## CLX-V018 — Osler's nodes vs Janeway lesions
+- **Clinical context:** Infective endocarditis, `skill.exam.ie.stigmata`.
+- **Must show:** tender pulp nodules (Osler's) vs painless palmar/plantar macules (Janeway) —
+  side by side, since the tender/painless distinction is the fastest way to tell them apart.
+- **Preferred format:** image pair.
+- **Status:** OPEN
+
+## CLX-V019 — Mitral stenosis auscultation
+- **Clinical context:** Rheumatic heart disease, `skill.exam.cvs.murmurs` emphasis.
+- **Must show:** the mid-diastolic rumble with presystolic accentuation, bell technique, left
+  lateral position.
+- **Preferred format:** short audio or video.
+- **Status:** OPEN
+
+## CLX-V020 — Fixed vs physiological S2 splitting
+- **Clinical context:** Congenital heart disease (ASD), `skill.chd.signs`.
+- **Must show:** ASD's fixed split contrasted with the normal inspiratory-widening split.
+- **Preferred format:** animated diagram or short video.
+- **Status:** OPEN
+
+## CLX-V021 — STEMI sequential ECG evolution
+- **Clinical context:** Ischaemic heart disease investigations, `skill.ix.ihd.ecg`.
+- **Must show:** hyperacute T → ST elevation → Q wave → T inversion → resolution, as a strip series.
+- **Preferred format:** diagram/strip series.
+- **Status:** OPEN
+
+## CLX-V022 — Asterixis (flapping tremor)
+- **Clinical context:** Chronic liver disease stigmata, `skill.exam.gi.cld_stigmata`.
+- **Must show:** the elicitation technique and the flap itself.
+- **Preferred format:** short video or GIF.
+- **Status:** OPEN
+
+## CLX-V023 — Spider naevi with diascopy
+- **Clinical context:** Chronic liver disease stigmata, `skill.exam.gi.cld_stigmata`.
+- **Must show:** a spider naevus, and the glass-slide (diascopy) technique showing it blanch and
+  refill from the centre.
+- **Preferred format:** photo, ideally a before/after diascopy pair.
+- **Status:** OPEN
+
+## CLX-V024 — Scleral icterus grades
+- **Clinical context:** Jaundice, `skill.gen.jaundice`.
+- **Must show:** mild vs moderate scleral icterus, side by side.
+- **Preferred format:** photo pair.
+- **Status:** OPEN
+
+## CLX-V025 — Spinal cord compression, examination/localisation video
+- **Clinical context:** Cord compression, `skill.exam.cord.spine`.
+- **Must show:** sensory-level mapping and the bedside extradural-vs-intradural discriminators.
+- **Preferred format:** video.
+- **Status:** OPEN (searched, only found Osmosis's own hosted page — no independently
+  oEmbed-verifiable YouTube id)
