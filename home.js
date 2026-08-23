@@ -4027,6 +4027,31 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
+  /* The engine hands back a REAL reason - out of memory, model not installed, no native runtime -
+   * and this used to discard it and print one opaque line. That is exactly what "I installed the
+   * on-device model and it just says MaiK is unavailable" looks like from the clinician's side: the
+   * app knew why and would not say. Name the cause and what to do about it.
+   * maik-engine.js localAnswer() maps any rejection to { error: <message> }. */
+  function maikErrorNotice(r) {
+    var e = String((r && r.error) || "");
+    var mem = e.match(/^not-enough-memory:(.+)$/);
+    if (mem) {
+      return "There is not enough free memory to load the on-device model right now (" + maikEscH(mem[1]) + ").<br><br>" +
+             "Close other apps and ask again, or tap the model name at the top and choose <b>MaiK Cloud</b>.";
+    }
+    if (/needs the native app|model manager unavailable/i.test(e)) {
+      return "On-device answering is not available in this build.<br><br>" +
+             "Tap the model name at the top and choose <b>MaiK Cloud</b>.";
+    }
+    if (/unknown model pack|not installed|model file/i.test(e)) {
+      return "That on-device model is not fully installed on this device.<br><br>" +
+             "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
+    }
+    if (/cancel/i.test(e)) return "That answer was cancelled.";
+    return "MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available." +
+           (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
+  }
+
       // requestAnimationFrame typewriter (explainGroundedStream fallback replay) that held _maikBusy
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
@@ -4042,7 +4067,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
-      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
