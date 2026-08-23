@@ -31,6 +31,7 @@ export const CAPS = {
   ORDER_READ: "order.read",         // read a patient's orders (cashier / later pharmacy / lab)
   BILLING_VIEW: "billing.view",     // see the billing station queue + tariff catalog
   BILLING_CHARGE: "billing.charge", // generate an invoice + record payment (cashier)
+  ORDER_DISPENSE: "order.dispense", // hand medicines to the patient + mark the order dispensed (pharmacy)
   // ---- ONCQIS (oncology protocol governance) caps -------------------------------------------
   // Strict role separation: authoring, clinical review, and institutional approval are DISTINCT
   // caps held by DISTINCT roles. Doctor/Nurse never hold any of these (they consume ACTIVE
@@ -68,16 +69,26 @@ export const ROLE_CAPS = {
   // console). Explicitly NO emr.treat (no orders/prescriptions/edits). This is the owner's core ask.
   nurse: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_REORDER, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN,
           C.EMR_VITALS, C.EMR_VIEW],
-  // Intern / resident: clinical trainees — see the queue, advance status, record vitals, view EMR. No
-  // reorder/assign/treat.
-  intern: [C.QUEUE_VIEW, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
-  resident: [C.QUEUE_VIEW, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
+  // Intern / resident: clinical trainees — see the queue, register a walk-in, advance status, record
+  // vitals, view EMR. QUEUE_ADD added 2026-08-24: an intern is often the person handed a walk-in, and
+  // withholding it meant they could move patients through consultation but not enter them. Reorder and
+  // assign stay OFF - deciding who is seen next is the nurse's authority, not a trainee's.
+  intern: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
+  resident: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
   // Reception / front desk: register walk-ins, mark arrived, assign to a doctor, and READ clinical
   // notes/history (view-only). No reorder/priority, no vitals, no treat/edit.
   reception: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_ASSIGN, C.EMR_VIEW],
   // Cashier / billing desk: see the billing queue + tariff, read a patient's orders, and generate +
   // settle invoices. No queue reorder, no vitals, no treatment. (Pharmacy/lab roles extend this pattern.)
   cashier: [C.QUEUE_VIEW, C.ORDER_READ, C.BILLING_VIEW, C.BILLING_CHARGE],
+  // Pharmacy: reads the patient's medication orders and marks them dispensed once paid. Deliberately
+  // NOT given EMR_VIEW - dispensing needs the order, not the consultation notes - and never
+  // BILLING_CHARGE, so the person handing over medicines is not the person taking the money.
+  pharmacy: [C.QUEUE_VIEW, C.ORDER_READ, C.ORDER_DISPENSE],
+  // HR / practice manager: runs the staff list and reads operational analytics. NO queue control, NO
+  // vitals, NO EMR, NO billing. Exists so onboarding a nurse does not require handing someone full
+  // admin (which carries every clinical and billing capability in the system).
+  hr: [C.QUEUE_VIEW, C.STAFF_ADMIN, C.ANALYTICS_VIEW],
   // ---- ONCQIS governance roles (oncology protocol lifecycle) --------------------------------
   // Protocol Author: create/edit DRAFT protocols + upload evidence. NO review, NO approval, NO
   // activation. Not a clinical or hospital approver.

@@ -8,3 +8,18 @@
   Referrer-Policy: strict-origin-when-cross-origin
   Strict-Transport-Security: max-age=31536000; includeSubDomains
   Permissions-Policy: geolocation=(), camera=(self), microphone=(self), payment=()
+
+# The CliniX video shim is the ONE page that must be framable cross-origin. The native app is a
+# Capacitor WebView whose origin is capacitor://localhost, so the site-wide X-Frame-Options
+# SAMEORIGIN above blocks it and YouTube never loads inside a lesson. This override is scoped to
+# that single path.
+#
+# What it exposes: a static page that renders the official YouTube iframe for one of six
+# allow-listed video ids and nothing else. No user data, no auth, no app code, no forms, noindex.
+# There is nothing on it to clickjack, which is what X-Frame-Options exists to prevent.
+#
+# frame-ancestors is the modern replacement for X-Frame-Options and browsers honour it in
+# preference when both are present.
+/_site/yt
+  X-Frame-Options: ALLOWALL
+  Content-Security-Policy: frame-ancestors 'self' capacitor: https://localhost http://localhost https://stewardmd.in

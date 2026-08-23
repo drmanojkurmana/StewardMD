@@ -3,8 +3,9 @@
 // Not node-testable (needs Firestore) - verify on-device. Additive + gated by CLINIC_BILLING_ENABLED.
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { encPHI, decPHI } from "./_queue.js";
-import { qAudit } from "./_queue_engine.js";
-import { makeMrn, buildInvoice, canOrderTransition, validateOrder, validateTariff } from "./_clinic_billing.js";
+import { qAudit, getSession, getTicket } from "./_queue_engine.js";
+import { appendTimeline } from "./_queue_timeline.js";
+import { makeMrn, buildInvoice, canOrderTransition, validateOrder, validateTariff, isDispensable } from "./_clinic_billing.js";
 
 // Server enable gate (wrangler.toml var, like QUEUE_ENABLED). Billing is inert unless set.
 export function billingEnabled(env) { return !!(env && env.CLINIC_BILLING_ENABLED === "1"); }
@@ -55,6 +56,26 @@ export async function billingQueue(env, orgId) {
   return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter((o) => o.status === "ordered");
 }
 
+// ---- pharmacy station ----------------------------------------------------------------------
+// What the pharmacy still owes patients: medication orders that are PAID but not yet handed over.
+// Investigations and services never appear here - they have no dispensing step.
+export async function pharmacyQueue(env, orgId) {
+  const rows = await fsQuery(env, "q_orders", { where: { field: "orgId", value: orgId }, limit: 500 }).catch(() => []);
+  return (rows || []).map((r) => Object.assign({ id: r.id }, r.fields)).filter(isDispensable);
+}
+// Hand the medicines over. Guarded by the state machine rather than by the pharmacist remembering:
+// only paid + medication can reach "dispensed", so an unpaid order cannot be released.
+export async function dispenseOrder(env, orgId, orderId, actor) {
+  const d = await fsGet(env, "q_orders/" + orderId).catch(() => null);
+  if (!d || !d.fields || d.fields.orgId !== orgId) return { ok: false, error: "not_found" };
+  const o = d.fields;
+  if (o.status === "dispensed") return { ok: true, already: true };
+  if (!isDispensable(Object.assign({ id: orderId }, o))) return { ok: false, error: "not_dispensable", status: o.status, kind: o.kind };
+  await fsCommit(env, [wUpdate(env, "q_orders/" + orderId, { status: "dispensed", dispensedAt: Date.now(), dispensedBy: actor || "", updatedAt: Date.now() })]);
+  await qAudit(env, { hospitalId: orgId, ticketId: o.patientId || "", actor: actor || "pharmacy", action: "order_dispense", meta: o.name || "" });
+  return { ok: true };
+}
+
 // ---- tariff (price catalog, integer paise) ----
 export async function listTariff(env, orgId) {
   const rows = await fsQuery(env, "q_tariff", { where: { field: "orgId", value: orgId }, limit: 500 }).catch(() => []);
@@ -90,6 +111,22 @@ export async function payInvoice(env, orgId, invoiceId, method, actor) {
   lines.forEach((l) => { if (l.orderId) writes.push(wUpdate(env, "q_orders/" + l.orderId, { status: "paid", updatedAt: Date.now() })); });
   await fsCommit(env, writes);
   await qAudit(env, { hospitalId: orgId, ticketId: d.fields.patientId, actor: actor || "cashier", action: "invoice_pay", meta: method || "cash" });
+  // Tell the VISIT the money is in. The cashier deliberately holds no queue capability - taking payment
+  // is not queue authority - so this is emitted by the payment itself, not by a person clicking twice.
+  // Only possible for orders the doctor raised from the EMR, which carry ticketId/sessionId; an order
+  // typed straight into the billing station has no thread back to a queue ticket, and is skipped.
+  try {
+    const seen = [];
+    for (const l of lines) {
+      if (!l.orderId) continue;
+      const od = await fsGet(env, "q_orders/" + l.orderId).catch(() => null);
+      const f = od && od.fields;
+      if (!f || !f.ticketId || !f.sessionId || seen.indexOf(f.ticketId) > -1) continue;
+      seen.push(f.ticketId);
+      const [sess, tkt] = await Promise.all([getSession(env, f.sessionId), getTicket(env, f.ticketId)]);
+      if (sess && tkt) await appendTimeline(env, sess, tkt, "status", "Payment received - " + (method || "cash"), actor || "Billing desk");
+    }
+  } catch (e) { /* the payment is already recorded; the visit note is best-effort */ }
   return { ok: true };
 }
 export async function getInvoice(env, orgId, invoiceId) {

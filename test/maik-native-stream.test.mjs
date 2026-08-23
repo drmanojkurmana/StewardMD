@@ -1,38 +1,82 @@
-/* Regression guard: MaiK streaming behaviour (design reversed after native-hang findings).
- *  - WEB live-streams the answer via SSE (explain?stream=1) so it types out like the Gemini app.
- *  - NATIVE deliberately does NOT live-stream: WKWebView BUFFERS SSE (no progressive tokens arrive) AND
- *    CapacitorWebFetch ignores the AbortController, so a stalled stream never fell back and hung to the
- *    90s watchdog ("MaiK took too long"). Native takes the bounded whole-answer path (explainGrounded).
- *  - Safety retained: require a clean {done} completion before using streamed text, else fall back to the
- *    proven whole-answer fetch; cache a native failure per session so it does not re-probe every query.
+/* test/maik-native-stream.test.mjs — REAL token streaming on native, not a typewriter.
  *
- * Source-shape assertions (explainGroundedStream is deep provider code, not unit-extractable). */
-import fs from "node:fs";
-import { dirname, join } from "node:path";
-import { fileURLToPath } from "node:url";
+ * REPORTED 2026-08-24: "why no negative streaming... while the LLM is giving output it should also
+ * start giving output here, so the user feels the answer is coming rather than a black wait. Fake
+ * streaming I don't want."
+ *
+ * The server has streamed all along (:streamGenerateContent?alt=sse -> text/event-stream with
+ * X-Accel-Buffering: no) and reasoning.js already contained a complete, native-aware SSE reader -
+ * watchdog, native first-token budget, nsBad cooldown, clean-completion requirement. All of it was
+ * unreachable behind a blanket `if (isNative) return fallback();`, so native fetched the WHOLE answer
+ * and then typed it out. Nothing appeared until generation had entirely finished.
+ *
+ * Deleting that line alone would have made it WORSE: on native window.fetch is the CapacitorHttp
+ * bridge, which buffers, so a "stream" through it delivers one lump at the end. The pristine
+ * window.CapacitorWebFetch is the one that can stream.
+ *
+ * node --test test/maik-native-stream.test.mjs
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 
-const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
-const rj = fs.readFileSync(join(ROOT, "reasoning.js"), "utf8");
-const hj = fs.readFileSync(join(ROOT, "home.js"), "utf8");
-let fails = 0;
-const ok = (c, m) => { console.log((c ? "✅ " : "❌ ") + m); if (!c) fails++; };
+const SRC = readFileSync(new URL("../reasoning.js", import.meta.url), "utf8");
+const block = SRC.slice(SRC.indexOf("REAL NATIVE STREAMING"), SRC.indexOf("REAL NATIVE STREAMING") + 4200);
 
-// WEB live-streams a real SSE (explain?stream=1) so the answer types out like Gemini
-ok(/explain\?stream=1/.test(rj) && /text\/event-stream/.test(rj), "web live-streams the answer via SSE (explain?stream=1)");
+test("REGRESSION: native is no longer short-circuited away from streaming", () => {
+  // a real statement starts its line; the phrase also appears in the comment explaining the removal
+  assert.equal(/^\s*if \(isNative\) return fallback\(\);\s*$/m.test(SRC), false,
+    "the blanket native bail-out must be gone");
+});
 
-// NATIVE deliberately does NOT live-stream (WKWebView buffers SSE + CapacitorWebFetch ignores the abort
-// -> a stalled stream used to hang to the 90s watchdog); it takes the bounded whole-answer path instead.
-ok(/if \(isNative\) return fallback\(\);/.test(rj), "native takes the bounded whole-answer path (no live SSE hang)");
+test("native streams over the PRISTINE fetch, not the buffering bridge", () => {
+  assert.match(block, /CapacitorWebFetch/, "the bridge buffers; this one streams");
+  assert.match(block, /\.bind\(window\)/, "an unbound fetch throws Illegal invocation");
+  assert.match(block, /sfetch = isNative \? pristine/, "native must use it");
+});
 
-// clean-completion safety: native only accepts a stream that signalled {done}
-ok(/if \(ev && ev\.done\) \{ gotDone = true/.test(rj), "tracks the {done} completion event");
-ok(/acc && \(gotDone \|\| !isNative\)/.test(rj), "native requires clean completion (gotDone) to use streamed text; else falls back");
+test("if the pristine fetch is missing we keep the old behaviour rather than buffering", () => {
+  assert.match(block, /if \(isNative && \(!nativeStreamOn \|\| !pristine\)\) return fallback\(\);/,
+    "streaming through a buffering transport would be worse than not streaming");
+});
 
-// per-session failure cache so a broken native stream doesn't re-probe every query
-ok(/function nsBad\(/.test(rj) && /smd_maik_nstream_bad/.test(rj), "caches a native stream failure for the session");
+test("it is reversible from the device", () => {
+  assert.match(block, /smd_maik_native_stream/);
+  assert.match(block, /!== "0"/, "default ON, '0' reverts");
+});
 
-// warm-up on MaiK open (client KB + backend), fire-and-forget, no tokens
-ok(/StewardRAG\.ready\(\)/.test(hj) && /\/api\/ai\/health/.test(hj), "MaiK-open warm-up primes KB + backend");
+test("SAFETY: a deadline settles even when abort is ignored (the #562 hang)", () => {
+  assert.match(SRC, /hardDeadline/);
+  assert.match(SRC, /HARD_MS = isNative \? 25000/);
+  assert.match(SRC, /Promise\.race\(\[attempt, hardDeadline\]\)/,
+    "the attempt must not be the only thing that can settle");
+  // and the deadline must resolve with the proven path, not with a partial answer
+  const dl = SRC.slice(SRC.indexOf("var hardDeadline"), SRC.indexOf("var hardDeadline") + 700);
+  assert.match(dl, /res\(fallback\(\)\)/, "a half-answer must never look complete");
+});
 
-console.log(fails === 0 ? "\nALL PASS — native streams with a safe fallback + warm-up" : `\n${fails} FAILED`);
-process.exit(fails === 0 ? 0 : 1);
+test("the deadline timer is cleared when the stream finishes normally", () => {
+  assert.match(SRC, /function done\(\) \{ settled = true;[\s\S]{0,160}hardTimer/,
+    "otherwise a dangling timer fires after a good answer");
+});
+
+test("the existing native safeguards are still in force", () => {
+  assert.match(SRC, /FIRST_MS = isNative \? 6000/, "short native first-token budget");
+  assert.match(SRC, /nsBad\(true\)/, "cooldown after a native stream failure");
+  assert.match(SRC, /if \(acc && \(gotDone \|\| !isNative\)\)/,
+    "native accepts streamed text only on CLEAN completion - never a truncated clinical answer");
+});
+
+test("the fallback typewriter is budgeted, for when streaming is unavailable", () => {
+  // Streaming is the fix; this only governs the path that still fetches-then-replays.
+  assert.match(SRC, /function replay\(res, waitedMs\)/);
+  assert.match(SRC, /frames = w > 6000 \? 30/, "after a long wait, show it almost at once");
+  assert.equal(/words\.length \/ 260/.test(SRC), false, "the flat 4.3s ceiling is gone");
+});
+
+test("the server side really does stream (the contract this relies on)", () => {
+  const api = readFileSync(new URL("../functions/api/ai/[[path]].js", import.meta.url), "utf8");
+  assert.match(api, /streamGenerateContent\?alt=sse/, "Gemini is asked to stream");
+  assert.match(api, /text\/event-stream/, "and it is relayed as SSE");
+  assert.match(api, /X-Accel-Buffering/, "with proxy buffering disabled");
+});

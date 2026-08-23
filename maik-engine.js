@@ -118,6 +118,18 @@
       var st = (M && M.state) ? M.state(pid) : { frac: 0, downloading: false };
       var why, how;
       if (!runtimeAvailable()) { why = "this build cannot run on-device models"; how = "Update the app, or switch to **MaiK Cloud**."; }
+      // The model IS fully installed and the runtime IS here, but the experimental gate is shut. Before
+      // this branch that case fell through to "only partly downloaded (100%) - select it again to
+      // resume", which is nonsense advice for a model that is already on the device, and is exactly
+      // what a clinician sees after downloading 2.5 GB. Say the true thing instead.
+      else if (packInstalled() && !gateActive()) {
+        var L0 = window.SMD_MAIK_LOCAL;
+        var checking = !!(L0 && L0.debugProbed && !L0.debugProbed());
+        why = "**" + label + "** is downloaded, but on-device answering is not unlocked on this build";
+        how = checking
+          ? "Still checking with the device - reopen this screen in a moment. If it stays locked, use **MaiK Cloud**."
+          : "Use **MaiK Cloud** for now, or enter the on-device access code in Settings.";
+      }
       else if (st.downloading) { why = "**" + label + "** is still downloading (" + (st.frac * 100).toFixed(0) + "%)"; how = "It will answer here as soon as the download finishes. Until then pick **MaiK Cloud** or **KB only**."; }
       else if (st.frac > 0) { why = "**" + label + "** is only partly downloaded (" + (st.frac * 100).toFixed(0) + "%)"; how = "Tap the model name at the top of this screen and select it again to resume the download."; }
       else { why = "**" + label + "** is not downloaded to this device yet"; how = "Tap the model name at the top of this screen and select it to start the download."; }

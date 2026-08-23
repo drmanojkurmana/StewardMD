@@ -335,7 +335,8 @@
     // falls back to any cloud transcription. Throws SYNCHRONOUSLY when the plugin is absent (web, or
     // Android — not built yet) so SMD_VOICE can offer Fast Dictation instead. Stop-to-transcribe:
     // startTranscribe → (speak) → stopWhisper() runs inference natively → onFinal.
-    // opts: { language?, model?, initialPrompt?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
+    // opts: { language?, model?, initialPrompt?, silenceEndpointMs?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
+    // silenceEndpointMs > 0 asks the native engine to auto-stop that long after speech ends (MaiK Ask).
     transcribeWhisper: function (opts) {
       opts = opts || {};
       var P = plugins(); var W = P && P.Whisper;
@@ -363,7 +364,8 @@
       function begin() {
         if (!current()) return;
         try { console.info("[SV-native] startTranscribe model=" + modelKey + " lang=" + lang); } catch (e) {}
-        W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "" })
+        W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "",
+            silenceEndpointMs: Number(opts.silenceEndpointMs) || 0 })
           .catch(function (e) { try { console.info("[SV-native] startTranscribe FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "recording-failure"); });
       }
       // Ensure the model is installed (download only if missing), then start recording.
