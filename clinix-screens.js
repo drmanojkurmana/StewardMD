@@ -662,11 +662,13 @@
           esc(p.options[o]) + "</button>";
       }
       html += "</div>";
+      if (!a) html += '<button type="button" class="cx-showans" data-act="cx-answer-show">' + ic("visibility") + "Show me the answer</button>";
     } else {
       html += '<div class="cx-free">' +
         '<textarea class="cx-input" id="cxAnswer" rows="3" placeholder="Answer in your own words"' + (a ? " disabled" : "") + ">" +
         (a ? esc(a.given) : "") + "</textarea>" +
         (a ? "" : '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-answer-text">Check my answer</button>') +
+        (a ? "" : '<button type="button" class="cx-showans" data-act="cx-answer-show">' + ic("visibility") + "Show me the answer</button>") +
         "</div>";
     }
 
@@ -675,10 +677,14 @@
       var unk = a.correct === null;
       html += '<div class="cx-fb ' + (good ? "cx-fb--ok" : unk ? "cx-fb--neutral" : "cx-fb--no") + '">' +
         '<div class="cx-fb-h">' + ic(good ? "check_circle" : unk ? "info" : "cancel") + " " +
-        esc(good ? "Correct" : unk ? "Here is the model answer" : "Not quite") + "</div>" +
+        esc(good ? "Correct" : a.revealed ? "The answer" : unk ? "Here is the model answer" : "Not quite") + "</div>" +
         '<p class="cx-fb-a">' + esc(p.a || "") + "</p>";
       if (a.missed && a.missed.length) {
         html += '<div class="cx-fb-missed">You did not mention: ' + esc(a.missed.join(", ")) + "</div>";
+      }
+      if (a.revealed) {
+        html += '<div class="cx-fb-missed">Shown without an attempt, so it does not count towards this skill. ' +
+          "Come back to it later and it will.</div>";
       }
       html += "</div>";
     }
@@ -1065,11 +1071,12 @@
     html += '<div class="cx-turn cx-turn--ask"><p class="cx-q">' + esc(cur.q.probe.q) + "</p>";
     if (!a) {
       html += '<div class="cx-free"><textarea class="cx-input" id="cxAnswer" rows="3" placeholder="Answer as you would to an examiner"></textarea>' +
-        '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-answer">Answer</button></div>';
+        '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-answer">Answer</button>' +
+        '<button type="button" class="cx-showans" data-act="cx-viva-show">' + ic("visibility") + "Show me the answer</button></div>";
     } else {
       html += '<div class="cx-fb ' + (a.correct === true ? "cx-fb--ok" : a.correct === null ? "cx-fb--neutral" : "cx-fb--no") + '">' +
         '<div class="cx-fb-h">' + ic(a.correct === true ? "check_circle" : a.correct === null ? "info" : "cancel") + " " +
-        esc(a.correct === true ? "Good" : a.correct === null ? "Model answer" : "Not quite") + "</div>" +
+        esc(a.correct === true ? "Good" : a.revealed ? "The answer" : a.correct === null ? "Model answer" : "Not quite") + "</div>" +
         '<p class="cx-fb-a">' + esc(cur.q.probe.a) + "</p></div>";
       html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-next">Next question</button></div>';
     }
@@ -1290,6 +1297,15 @@
     repaint();
   }
 
+  function revealAnswer() {
+    var i = state.turnIndex, t = state.turns[i];
+    if (!t || (t.kind !== "ask" && t.kind !== "check") || state.answered[i]) return;
+    state.answered[i] = { correct: null, given: "", revealed: true, missed: [] };
+    if (P()) P().record(state.skillId, null, { mode: "learn", probe: t.probe.q, given: "(shown)" });
+    haptic("tap");
+    repaint();
+  }
+
   function finishLesson() {
     if (P()) {
       P().completeLesson(state.skillId, state.diseaseId);
@@ -1370,6 +1386,18 @@
     state.vivaState.count++;
     if (P()) P().record(cur.q.skillId, res.correct, { mode: "viva", probe: cur.q.probe.q, given: String(given) });
     haptic(res.correct === true ? "success" : "warning");
+    repaint();
+  }
+
+  /* Same rule as the lesson: shown is not known. A real examiner would move you DOWN a level for
+   * not knowing, so revealing does too. */
+  function vivaReveal() {
+    var cur = state.vivaCurrent;
+    if (!cur || state.vivaState.lastAnswer) return;
+    state.vivaState.lastAnswer = { correct: null, given: "", revealed: true };
+    state.vivaState.count++;
+    if (P()) P().record(cur.q.skillId, null, { mode: "viva", probe: cur.q.probe.q, given: "(shown)" });
+    haptic("tap");
     repaint();
   }
 
@@ -1510,6 +1538,10 @@
       case "cx-turn-prev": prevTurn(); return;
       case "cx-lesson-done": finishLesson(); return;
       case "cx-answer": answer(parseInt(t.getAttribute("data-i"), 10)); return;
+      /* Revealing is allowed, but it is recorded as SEEN and never as correct. The store already
+       * treats a null result that way, so a revealed answer cannot mint mastery. Making it easy to
+       * peek is good teaching; letting a peek count as knowing it is not. */
+      case "cx-answer-show": revealAnswer(); return;
       case "cx-answer-text": {
         var v = textAnswer();
         if (!v) { toast("Write an answer first"); return; }
@@ -1578,6 +1610,7 @@
         if (!va) { toast("Write an answer first"); return; }
         vivaAnswer(va); return;
       }
+      case "cx-viva-show": vivaReveal(); return;
       case "cx-viva-next": vivaNext(); return;
 
       case "cx-practice-osce":

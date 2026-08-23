@@ -682,3 +682,14 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-modcard-t { font-weight: 700; font-size: 17px; line-height: 1.25; }
 #clinixRoot .cx-modcard-s { font-size: 13px; opacity: .85; }
 #clinixRoot .cx-modcard-meta { font-size: 11.5px; opacity: .7; font-variant-numeric: tabular-nums; }
+
+/* ── show-answer ──────────────────────────────────────────────────────────── */
+/* Deliberately quieter than "Check my answer": available without being the easy default. */
+#clinixRoot .cx-showans {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%; margin-top: 10px; padding: 12px;
+  background: transparent; border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  color: var(--cx-muted); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+#clinixRoot .cx-showans:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-showans .material-symbols-rounded { font-size: 18px; }

@@ -380,6 +380,48 @@ try {
   ok(sawTable, "clinical tables render (duration, sputum, haemoptysis clues)");
   ok(sawList, "structured point lists render");
 
+  /* ── 7a2. SHOW ANSWER: available, but it must not count ────────────────── */
+  console.log("\n--- show answer ---");
+  await attach(BASE + "?clinix=1");
+  await ev("window.CLINIX.open()"); await sleep(600);
+  await ev("(function(){ document.querySelector(\"#clinixRoot [data-act='cx-skills']\").click(); return 1; })()");
+  for (let i = 0; i < 40; i++) { if (await ev("document.querySelectorAll('#clinixRoot .cx-row--skill').length > 0")) break; await sleep(250); }
+  await ev("(function(){ document.querySelector('#clinixRoot .cx-row--skill').click(); return 1; })()");
+  await sleep(500);
+  // walk to the first question
+  let gotAsk = false;
+  for (let i = 0; i < 30; i++) {
+    if (await ev("!!document.querySelector('#clinixRoot .cx-turn--ask')")) { gotAsk = true; break; }
+    if (!(await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]')"))) break;
+    await ev("document.querySelector('#clinixRoot [data-act=\"cx-turn-next\"]').click()");
+    await sleep(150);
+  }
+  ok(gotAsk, "reached a question");
+  ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-answer-show\"]')")) === true,
+    "a Show-me-the-answer option is offered alongside checking");
+
+  // Measure the DELTA on this specific skill. Reading "the first record" picked up one the OSCE
+  // section had already filled, which is why the first version of this check passed nonsense.
+  const readRec = `(function(){
+    var st = SMD_CLINIX_SCREENS._state();
+    var r = SMD_CLINIX_PROGRESS.get(st.skillId) || { seen: 0, correct: 0 };
+    return JSON.stringify({ seen: r.seen || 0, correct: r.correct || 0 });
+  })()`;
+  const recBefore = JSON.parse(await ev(readRec));
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-answer-show\"]').click()");
+  await sleep(500);
+  const recAfter = JSON.parse(await ev(readRec));
+
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-fb')")) === true, "the model answer appears");
+  ok((await ev("document.querySelector('#clinixRoot .cx-fb').textContent")).indexOf("does not count") >= 0,
+    "and it says plainly that it does not count");
+  ok(recAfter.seen === recBefore.seen + 1,
+    `revealing is recorded as an attempt seen (${recBefore.seen} -> ${recAfter.seen})`);
+  ok(recAfter.correct === recBefore.correct,
+    `SHOWN IS NOT KNOWN: correct did not move (${recBefore.correct} -> ${recAfter.correct})`);
+  ok((await ev("SMD_CLINIX_PROGRESS.mastery(SMD_CLINIX_SCREENS._state().skillId).level")) !== "mastered",
+    "so a student cannot reveal their way to mastery");
+
   /* ── 7b. SKILLS LIBRARY: learn a skill with NO disease ─────────────────── */
   console.log("\n--- examination skills library ---");
   await attach(BASE + "?clinix=1");
