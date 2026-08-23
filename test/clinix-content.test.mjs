@@ -532,3 +532,26 @@ test("the COPD pathway covers the full clinical journey the product promises", (
       `chapters are out of canonical order at '${ids[i]}'`);
   }
 });
+
+test("REGRESSION: every embeddable video is registered in the YouTube inline shim's allow-list", () => {
+  // A CliniX video plays INLINE only if _site/yt.html's ALLOW list contains its id - anything
+  // missing silently falls back to the "Watch on YouTube" external card (clinix-screens.js's
+  // state.ytFailed path), which reads exactly like "videos redirect out of the app" even though
+  // the intended design is inline playback by default. This bug shipped silently across many
+  // commits: 20 of 26 real video ids were missing from the shim before this test existed. Catch
+  // any future drift here instead of relying on someone noticing on a real device.
+  const shimSrc = readFileSync(join(ROOT, "_site", "yt.html"), "utf8");
+  const allowMatch = shimSrc.match(/var ALLOW = \{([\s\S]*?)\n  \};/);
+  assert.ok(allowMatch, "could not find the ALLOW list in _site/yt.html - has its shape changed?");
+  const allowed = new Set((allowMatch[1].match(/"([A-Za-z0-9_-]{11})"\s*:\s*1/g) || [])
+    .map((m) => m.match(/"([A-Za-z0-9_-]{11})"/)[1]));
+  assert.ok(allowed.size > 0, "parsed zero video ids out of the shim - the regex is broken, not the shim");
+
+  const media = mediaManifest.media || mediaManifest;
+  const missing = [];
+  for (const id of Object.keys(media)) {
+    const m = media[id];
+    if (m.kind === "embed" && m.videoId && !allowed.has(m.videoId)) missing.push(`${id} (${m.videoId})`);
+  }
+  assert.deepEqual(missing, [], `these videos are wired into CliniX but missing from the inline shim's allow-list, so they fall back to external YouTube:\n${missing.join("\n")}`);
+});

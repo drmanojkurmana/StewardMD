@@ -239,7 +239,13 @@ try {
   const gate = await ev(`(() => {
     const C = window.SMD_CLINIX_CONTENT, M = window.SMD_CLINIX_MODEL;
     const built = C._cache().diseases['copd'];
-    const un = C.media(built, 'media.gen.cyanosis.central');        // still unsourced, on purpose
+    // Every real media id in the shipped manifest is now cleared (media.gen.cyanosis.central, this
+    // test's previous fixture, was itself filled during this session - the SAME staleness this
+    // synthetic fixture is built to survive). A synthetic, deliberately-uncleared entry injected
+    // directly into the live cache exercises the real code path (C.media -> M.mediaRenderable)
+    // without depending on any specific real content staying unsourced forever.
+    built.media['media.test.synthetic_uncleared'] = { id: 'media.test.synthetic_uncleared', kind: 'image', caption: 'Test fixture', licence: '', attribution: '', sourceUrl: '', cleared: false };
+    const un = C.media(built, 'media.test.synthetic_uncleared');    // synthetic, deliberately unsourced
     const dia = C.media(built, 'media.dia.percussion');             // self-authored
     const snd = C.media(built, 'media.snd.wheeze');                 // synthesized
     const emb = C.media(built, 'media.vid.respexam');               // verified embed
