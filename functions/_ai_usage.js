@@ -27,6 +27,7 @@ export const AI_MODULES = {
   fundx:       { id: "fundx",       label: "FundX AI",           group: "FundX",         daily: 20,  provider: "vertex" },
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
   kb:          { id: "kb",          label: "Knowledge Base",     group: "Knowledge Base", daily: 0,  provider: "local"  }, // semantic search — unlimited
+  clinix:      { id: "clinix",      label: "CliniX tutor",       group: "CliniX",        daily: 60,  provider: "vertex" }, // student tutor turns. Higher than maik's 50 because a Socratic lesson is many SHORT turns, not few long ones. Counted separately so a student's revision never eats their MaiK clinical allowance (and vice versa).
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
