@@ -99,7 +99,14 @@
   function mediaRenderable(m, opts) {
     if (!m) return false;
     if (opts && opts.allowUncleared) return true;
-    return isMediaCleared(m);
+    if (!isMediaCleared(m)) return false;
+    // A self-authored diagram, synthesized sound, or embed already proves its own provenance
+    // through its own required fields (diagramId/audioKind/embeddable). Anything else is a
+    // hosted external FILE, and cleared+licence+attribution alone is just three fields someone
+    // typed - it is not diligence. That class may only render once it also passes
+    // isCommonsVerified, the same way an embed may only render once it passes isEmbeddable.
+    if (m.inline === true || m.synth === true || m.kind === "embed") return true;
+    return isCommonsVerified(m);
   }
 
   // An embed (YouTube etc) is never re-hosted; we only ever point at it, and only when the rights
@@ -109,6 +116,19 @@
     // which is the rights holder's own switch. attribution/creator come from that same response,
     // so the credit shown is the channel's real name, not something we typed.
     return !!(m && m.kind === "embed" && m.embeddable === true && isStr(m.sourceUrl) && isStr(m.attribution));
+  }
+
+  // A hotlinked Wikimedia Commons image is the still-image counterpart of a YouTube embed: never
+  // downloaded, never re-hosted, `src` points at the rights holder's OWN file server
+  // (upload.wikimedia.org), and it clears the same way an embed does - through the platform's own
+  // machine-readable API, not a typed-in guess. commonsVerified:true is set ONLY after
+  // `action=query&prop=imageinfo&iiprop=extmetadata` on commons.wikimedia.org actually returned a
+  // licence for that exact file; licence/attribution are copied from that response.
+  function isCommonsVerified(m) {
+    return !!(m && m.kind === "image" && m.commonsVerified === true &&
+      isStr(m.src) && /^https:\/\/upload\.wikimedia\.org\//.test(m.src) &&
+      isStr(m.sourceUrl) && /^https:\/\/commons\.wikimedia\.org\/wiki\/File:/.test(m.sourceUrl) &&
+      isStr(m.licence) && isStr(m.attribution));
   }
 
   /* ── Validators ───────────────────────────────────────────────────────────── */
@@ -137,6 +157,12 @@
         if (!isStr(m.audioKind)) e.push("media.audioKind required for synthesized audio (" + str(m.id) + ")");
       } else if (!isStr(m.src)) {
         e.push("media.src required for a cleared asset (" + str(m.id) + ")");
+      } else if (m.kind === "image") {
+        // A hosted image is the one class where "cleared" cannot be self-evident from its own
+        // fields the way inline/synth/embed are - it needs the same platform-verified proof an
+        // embed needs. commonsVerified requires an actual Commons file-page sourceUrl, not just
+        // any src.
+        if (!isCommonsVerified(m)) e.push("media.commonsVerified (Commons API-checked licence) required for a cleared hosted image (" + str(m.id) + ")");
       }
     } else if (!isStr(m.note)) {
       e.push("media.note required for an uncleared asset - say what must be obtained (" + str(m.id) + ")");
@@ -736,6 +762,7 @@
     isMediaCleared: isMediaCleared,
     mediaRenderable: mediaRenderable,
     isEmbeddable: isEmbeddable,
+    isCommonsVerified: isCommonsVerified,
 
     validateMedia: validateMedia,
     validateSkill: validateSkill,

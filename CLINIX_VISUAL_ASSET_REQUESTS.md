@@ -7,7 +7,24 @@ log it here with a `CLX-Vnnn` id and keep building. When the owner supplies an a
 wire it into every skill/media entry that references that id.
 
 Status key: `OPEN` (no asset yet, self-authored SVG placeholder in use where noted) · `FILLED`
-(owner-supplied asset integrated).
+(a real asset — owner-supplied, or a verified Wikimedia Commons hotlink — is now wired in).
+
+**A real image beats a self-authored SVG whenever a good one exists** — check Wikimedia Commons
+first (`site:commons.wikimedia.org <topic>`), and only fall back to a self-drawn diagram for a
+genuinely abstract/mechanism concept (a flow-volume graph, a "why this happens" cartoon) that
+isn't a photographable thing in the first place. A candidate Commons file must be verified through
+Commons' own API before it can render — a human-read summary of a Commons page is not enough
+diligence:
+```
+curl "https://commons.wikimedia.org/w/api.php?action=query&titles=File:<name>&prop=imageinfo&iiprop=extmetadata|url&format=json"
+```
+Confirms the real licence + author straight from the source, the same rigor as the oEmbed check
+already used for YouTube videos. Wire the result in as `kind:"image"`, `cleared:true`,
+`commonsVerified:true`, `src` (the `upload.wikimedia.org` URL from the API — never re-hosted),
+`sourceUrl` (the `commons.wikimedia.org/wiki/File:...` page), `licence`, `attribution` — see
+`clinix-model.js`'s `isCommonsVerified()`. A hosted image missing `commonsVerified` will not
+render (enforced by `test/clinix-content.test.mjs` and `test/clinix-model.test.mjs`), so a
+sourcing shortcut fails loudly rather than shipping unverified.
 
 ---
 
@@ -37,19 +54,25 @@ Status key: `OPEN` (no asset yet, self-authored SVG placeholder in use where not
   oEmbed-verified).
 - **Status:** OPEN
 
-## CLX-V003 — Nine regions of the abdomen
-- **Clinical context:** `skill.exam.gi.inspection`, used as the orientation map for the whole
-  abdomen chapter.
-- **Must show:** the standard 4-quadrant/9-region grid on a torso outline, labelled, ideally
-  interactive (tap a region → see what organ lies beneath).
-- **Preferred format:** open-licence anatomical illustration, redrawn/adapted to be tappable, or an
-  SVG built from a licensed reference (with attribution) rather than fully original if a suitable
-  reference exists.
-- **Where it appears:** `media.dia.giregions`, first "show" turn of the inspection lesson.
-- **Current placeholder:** self-authored inline SVG (`diagram.abdregions`), already interactive
-  (tap-to-identify) — functional, but a professionally illustrated torso would read better than
-  the current schematic rectangle grid.
-- **Status:** OPEN
+## CLX-V003 — Nine regions of the abdomen — **FILLED** (2026-08-23)
+Replaced the self-authored schematic with a real illustration: OpenStax's "Abdominal Regions
+English.jpg" (CC BY 3.0), hotlinked from Wikimedia Commons (`media.img.abdregions`), verified via
+the Commons API. Now the primary image on `skill.exam.gi.inspection`.
+
+## CLX-V007 — Cardiac auscultation areas, labelled — **FILLED** (2026-08-23)
+Replaced with "Heart sounds auscultation areas.svg" (public domain, after Gray's Anatomy 1918),
+hotlinked (`media.img.auscultareas`), verified via the Commons API. Now the primary image on
+`skill.exam.cvs.heartsounds`, alongside the existing oEmbed technique video.
+
+## CLX-V008 — JVP waveform synced to the cardiac cycle — **FILLED** (2026-08-23)
+Replaced with the Wiggers diagram + jugular venous waveform composite (CC BY-SA 4.0), hotlinked
+(`media.img.jvpwave`), verified via the Commons API. Shows the a/c/x/v/y waveform against chamber
+pressures, LV volume and the ECG — matches the teach block's prose exactly. Primary image on
+`skill.exam.cvs.jvp`.
+
+## CLX-V012 — Dermatome map — **FILLED** (2026-08-23)
+Replaced with Ralf Stephan's public-domain dermatome map, hotlinked (`media.img.dermatomes`),
+verified via the Commons API. Primary image on `skill.exam.neuro.sensory`.
 
 ## CLX-V004 — Barrel chest, side-on comparison
 - **Clinical context:** `skill.exam.resp.inspection`, CliniX respiratory module.
@@ -64,18 +87,10 @@ Status key: `OPEN` (no asset yet, self-authored SVG placeholder in use where not
   recognition task far better.
 - **Status:** OPEN
 
-## CLX-V005 — Clubbing and the Schamroth window
-- **Clinical context:** `skill.gen.clubbing`, CliniX respiratory module (general examination).
-- **Must show:** a finger with clubbing (loss of the normal nail-fold angle, and the Schamroth
-  window sign — the diamond-shaped gap that disappears when two opposing fingertips are pressed
-  together, nail to nail) alongside a normal finger for comparison.
-- **Preferred format:** open-licence clinical photo (a dermatology/clinical-signs atlas image, not
-  a real patient photo sourced without clear licence) or a professional illustration.
-- **Where it appears:** `media.dia.clubbing`, general examination chapter.
-- **Current placeholder:** self-authored inline SVG (`diagram.clubbing`) — a real photo is
-  materially better here since clubbing is a subtle visual sign students consistently misjudge
-  from a line drawing.
-- **Status:** OPEN
+## CLX-V005 — Clubbing and the Schamroth window — **FILLED** (2026-08-23)
+Replaced the self-authored SVG with a real photo of a POSITIVE Schamroth's window (the diamond
+gap obliterated) by Rollcloud (CC BY 3.0), hotlinked (`media.img.clubbing`), verified via the
+Commons API. Primary image on `skill.gen.clubbing`.
 
 ---
 

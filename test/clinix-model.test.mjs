@@ -58,7 +58,9 @@ test("review gate: the draft flag opens everything except deprecated", () => {
 /* Licence gate -------------------------------------------------------------- */
 
 test("licence gate: media renders only when positively cleared", () => {
-  const cleared = { id: "m1", kind: "image", caption: "Barrel chest", licence: "CC BY 4.0", attribution: "Wikimedia", cleared: true, src: "/x.jpg" };
+  // A self-authored diagram proves its own provenance (diagramId), so it is the fixture for the
+  // baseline cleared/uncleared boundary.
+  const cleared = { id: "m1", kind: "diagram", caption: "Percussion zones", licence: "StewardMD original", attribution: "StewardMD", cleared: true, inline: true, diagramId: "diagram.percussion" };
   assert.equal(M.mediaRenderable(cleared), true);
   assert.equal(M.mediaRenderable(Object.assign({}, cleared, { cleared: false })), false);
   assert.equal(M.mediaRenderable(Object.assign({}, cleared, { cleared: undefined })), false,
@@ -66,6 +68,30 @@ test("licence gate: media renders only when positively cleared", () => {
   assert.equal(M.mediaRenderable(Object.assign({}, cleared, { licence: "" })), false);
   assert.equal(M.mediaRenderable(Object.assign({}, cleared, { attribution: "" })), false);
   assert.equal(M.mediaRenderable(null), false);
+});
+
+test("licence gate: a hosted image needs Commons API verification, not just three typed fields", () => {
+  // cleared+licence+attribution alone used to be enough for ANY hosted file - that was the exact
+  // gap that let an unverified image slip in. A hosted image now needs the same kind of
+  // platform-proof an embed needs (isEmbeddable requires embeddable:true from oEmbed).
+  const typed = { id: "m3", kind: "image", caption: "Barrel chest", licence: "CC BY 4.0", attribution: "Wikimedia", cleared: true, src: "/x.jpg" };
+  assert.equal(M.mediaRenderable(typed), false, "three typed fields with no Commons proof must not render");
+  assert.equal(M.isCommonsVerified(typed), false);
+
+  const verified = {
+    id: "m4", kind: "image", caption: "Dermatome map",
+    licence: "Public domain", attribution: "Ralf Stephan", cleared: true,
+    src: "https://upload.wikimedia.org/wikipedia/commons/4/47/Dermatoms.svg",
+    sourceUrl: "https://commons.wikimedia.org/wiki/File:Dermatoms.svg",
+    commonsVerified: true
+  };
+  assert.equal(M.isCommonsVerified(verified), true);
+  assert.equal(M.mediaRenderable(verified), true);
+  assert.equal(M.mediaRenderable(Object.assign({}, verified, { commonsVerified: false })), false);
+  assert.equal(M.mediaRenderable(Object.assign({}, verified, { sourceUrl: "https://example.com/x" })), false,
+    "sourceUrl must actually be a Commons file page");
+  assert.equal(M.mediaRenderable(Object.assign({}, verified, { src: "https://example.com/x.svg" })), false,
+    "src must actually be Commons' own file server, not a re-host");
 });
 
 test("licence gate: an embed is only iframed when the rights holder permits it", () => {
