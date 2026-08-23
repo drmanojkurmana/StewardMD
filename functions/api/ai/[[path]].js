@@ -1257,7 +1257,18 @@ export async function onRequest(context) {
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
-        try { if (pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
+        // SKIP for the CliniX tutor: rerankRetrieved() is a real extra network round-trip to a
+        // separate Workers AI model (@cf/baai/bge-reranker-base), paid SEQUENTIALLY before the
+        // actual answer generation even starts. Worth it for a clinician's deep multi-source
+        // differential grounding; wasted latency for a 2-5 sentence answer to a student's lesson
+        // question (TUTOR_SYS's own instruction). lexicalRank is the same fallback this function
+        // already uses when Workers AI is unavailable - free, synchronous, in-memory - so tutor
+        // answers still get a sensible (keyword-overlap) evidence order, just without the round trip.
+        try {
+          if (pkg.retrieved && pkg.retrieved.length > 1) {
+            pkg.retrieved = isTutor ? lexicalRank(pkg.question, pkg.retrieved) : await rerankRetrieved(env, pkg.question, pkg.retrieved);
+          }
+        } catch (e) {}
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
         // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
         // CANONICAL SCCM context into pkg. SECURITY: applyConnectContext adds ONLY the R7-gated LLM-
@@ -1296,10 +1307,15 @@ export async function onRequest(context) {
         const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
         // True live token streaming from the provider is UNRELIABLE in production (the SSE upstream
         // opens then delivers zero bytes, so the client stalls on an empty stream and only recovers via
-        // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
-        // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
-        // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
+        // a late fallback — the "MaiK took too long" hang, first diagnosed and fixed in #554/#559).
+        // Default OFF: serve stream requests from the RELIABLE whole-answer call below and hand the
+        // answer back over the SSE channel the client is already listening on (streamTextAsSSE).
+        // 2026-08-20's "developer API + streaming" perf commit silently flipped this fallback from ""
+        // to "1", re-enabling the exact hang this comment describes (the provider-order half of that
+        // commit - developer-first, vertex fallback - is a real, kept improvement; only the streaming
+        // flip regressed). Restored to OFF. Flip MAIK_LIVE_STREAM=1 to try true streaming again, but
+        // only after confirming the empty-stream failure mode above is actually fixed upstream.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; }
