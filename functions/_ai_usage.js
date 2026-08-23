@@ -27,6 +27,7 @@ export const AI_MODULES = {
   fundx:       { id: "fundx",       label: "FundX AI",           group: "FundX",         daily: 20,  provider: "vertex" },
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
   kb:          { id: "kb",          label: "Knowledge Base",     group: "Knowledge Base", daily: 0,  provider: "local"  }, // semantic search — unlimited
+  clinix:      { id: "clinix",      label: "CliniX tutor",       group: "CliniX",        daily: 60,  provider: "vertex" }, // student tutor turns. Higher than maik's 50 because a Socratic lesson is many SHORT turns, not few long ones. Counted separately so a student's revision never eats their MaiK clinical allowance (and vice versa).
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)
@@ -282,7 +283,14 @@ export async function setLimitOverride(store, moduleId, limit) {
 
 // ---- Phase 5: emergency override (kill switch), runtime budget, and admin audit log. ----
 export const EMERGENCY_MODES = ["off", "pause", "cheap"]; // off=normal, pause=block all AI, cheap=force cheapest
-export const CHEAP_MODEL = "gemini-2.5-flash-lite";
+// Confirmed live (2026-08-24, /api/ai/health's last_failover): "gemini-2.5-flash-lite" 404s on the
+// Developer API ("no longer available") - every call requesting it silently fails the lookup, THEN
+// retries on the slower Vertex fallback, which is worse than just resolving cleanly on a model that
+// still exists. "gemini-2.5-flash" (non-lite) is the confirmed-working default everywhere else in
+// this file, so it's the safe choice here too, even at a higher per-token rate, until a real
+// gemini-3.x-flash-lite id is verified end-to-end (it appears in ALLOWED_MODELS/MODEL_RATES as
+// "ESTIMATED", not yet confirmed live) and can replace this.
+export const CHEAP_MODEL = "gemini-2.5-flash";
 export async function getEmergency(store) {
   try { const e = store ? await store.get("ai:emergency", "json") : null; return (e && EMERGENCY_MODES.indexOf(e.mode) > -1) ? e : { mode: "off" }; } catch (e) { return { mode: "off" }; }
 }

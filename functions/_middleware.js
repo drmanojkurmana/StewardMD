@@ -223,7 +223,10 @@ export async function onRequest(context) {
   // marks each atlas module verified / needs-fix / rejected before the atlas is exposed to students, so it
   // must resolve for that anonymous reviewer. Its own passphrase plus the APPEND-ONLY /api/validation
   // record are what protect the sign-off; no PHI is involved at any point.
-  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation"];
+  // "subscribe" is the login-free (Google sign-in happens ON the page) web checkout for StewardMD Pro —
+  // stewardmd.in/subscribe — Razorpay Standard Checkout. Must resolve for anonymous visitors since the
+  // clinical app itself stays native-only; this is the ONLY way to buy Pro from a browser.
+  const PUBLIC_PAGES = ["privacy", "terms", "disclaimer", "support", "refunds", "delete-account", "copyright", "followcare", "queue", "opd", "opd-display", "validation", "subscribe"];
   if (PUBLIC_PAGES.indexOf(hitPath.replace(/\.html$/, "")) > -1) {
     return next();
   }

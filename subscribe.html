@@ -1,0 +1,170 @@
+<!doctype html>
+<html class="light" lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"/>
+<title>Subscribe · StewardMD Pro</title>
+<meta name="description" content="Subscribe to StewardMD Pro — clinical decision support for doctors.">
+<!-- Web checkout for StewardMD Pro, stewardmd.in/subscribe. The clinical app itself is native-only
+     (see docs/native-only-lock.md); this standalone page is the only way to buy Pro from a browser.
+     Google sign-in happens ON this page (no prior app session assumed) so the purchase can be tied to
+     an account; the SAME Firebase project as the app (account.js) so signing in here is the same
+     account a doctor uses in the app. Server is the source of truth: order create + webhook grant
+     Pro (functions/api/billing/[[path]].js) — this page never trusts its own success callback. -->
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-auth-compat.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>try{ firebase.initializeApp({ apiKey:"AIzaSyCaqxRQfMtq95j0J_vLj7EF4sxrN0FhO0I", authDomain:"stewardmd-498ec.firebaseapp.com", projectId:"stewardmd-498ec", appId:"1:911280405587:web:d09038e15e98d69dc79aa6" }); }catch(e){}</script>
+<style>
+  @font-face{ font-family:'Inter Variable'; font-style:normal; font-weight:100 900; font-display:swap; src:url(/assets/fonts/inter-variable.woff2) format('woff2'); }
+  :root{ --teal:#0e6e63; --teal-d:#0b5c56; --teal-soft:#e3f1ee; --ink:#14202b; --mut:#5a7184; --line:#d7dee3;
+    --bg:#f6f7f5; --card:#fff; --btn:#eef1f4; --ok:#1c7a4a; --ok-soft:#e2f2ea; --red:#ab1c2c; --gold:#b9852a;
+    --ease:cubic-bezier(.2,.7,.2,1); --sh:0 1px 3px rgba(20,32,43,.06); --sh-lg:0 12px 34px rgba(20,32,43,.16); }
+  @media (prefers-color-scheme:dark){ :root{ --teal:#3fc7b3; --teal-d:#2fb3a0; --teal-soft:#0d2e2a; --ink:#eaf0f2; --mut:#a9bcc3;
+    --line:#31424a; --bg:#0f1a1e; --card:#18242a; --btn:#223038; --ok:#5bd08f; --ok-soft:#12261b; --red:#f0868f; } }
+  *{ box-sizing:border-box } html,body{ margin:0 }
+  body{ background:var(--bg); color:var(--ink); font-family:'Inter Variable',system-ui,-apple-system,"Segoe UI",Roboto,sans-serif; min-height:100dvh; -webkit-font-smoothing:antialiased; }
+  header{ position:sticky; top:0; z-index:5; background:color-mix(in srgb,var(--card) 90%,transparent); backdrop-filter:blur(10px); -webkit-backdrop-filter:blur(10px); border-bottom:1px solid var(--line); }
+  .hd{ max-width:640px; margin:0 auto; display:flex; align-items:center; gap:9px; padding:calc(13px + env(safe-area-inset-top)) 20px 13px; }
+  .hd .mk{ width:24px; height:24px; background:var(--teal); -webkit-mask:url(/logo.png) center/contain no-repeat; mask:url(/logo.png) center/contain no-repeat; }
+  .hd h1{ font:800 19px 'Inter Variable',Inter; margin:0; letter-spacing:-.01em; } .hd h1 span{ color:var(--teal); }
+  main{ max-width:640px; margin:0 auto; padding:20px; display:flex; flex-direction:column; gap:16px; }
+  .card{ background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--sh); padding:18px; animation:rise .4s var(--ease) both; }
+  .msg{ text-align:center; color:var(--mut); padding:34px 10px; font:600 14px 'Inter Variable',Inter; }
+  .btn{ width:100%; margin-top:4px; background:var(--teal); color:#fff; border:none; border-radius:12px; padding:14px; font:700 15px 'Inter Variable',Inter; cursor:pointer; }
+  .btn:active{ transform:scale(.98) } .btn:hover{ background:var(--teal-d) } .btn:disabled{ opacity:.6; cursor:default; }
+  .btn.ghost{ background:var(--btn); color:var(--ink); }
+  .seg{ display:flex; gap:2px; background:var(--btn); border:1px solid var(--line); border-radius:11px; padding:3px; margin-bottom:14px; }
+  .seg button{ flex:1; padding:9px; border:none; border-radius:9px; background:transparent; color:var(--mut); font:800 12px 'Inter Variable',Inter; cursor:pointer; }
+  .seg button.on{ background:var(--teal); color:#fff; }
+  .tier{ width:100%; text-align:left; border:2px solid var(--line); background:var(--bg); border-radius:14px; padding:13px 14px; cursor:pointer; margin-bottom:9px; position:relative; }
+  .tier.on{ border-color:var(--teal); background:var(--teal-soft); }
+  .tier b{ display:block; font:800 15px 'Inter Variable',Inter; } .tier span{ font:600 12.5px 'Inter Variable',Inter; color:var(--mut); }
+  .tier .price{ float:right; font:800 15px 'Inter Variable',Inter; color:var(--teal-d); }
+  .badge{ position:absolute; top:-9px; right:12px; font:800 9px 'Inter Variable',Inter; letter-spacing:.04em; text-transform:uppercase; color:#fff; background:var(--teal); border-radius:999px; padding:3px 9px; }
+  .badge.gold{ background:var(--gold); }
+  .err{ color:var(--red); font:600 13px 'Inter Variable',Inter; min-height:16px; margin-top:8px; text-align:center; }
+  .who{ display:flex; align-items:center; gap:9px; margin-bottom:12px; font:600 13px 'Inter Variable',Inter; color:var(--mut); }
+  .who img{ width:26px; height:26px; border-radius:50%; }
+  @keyframes rise{ from{opacity:0;transform:translateY(10px)} to{opacity:1;transform:none} }
+  @media (prefers-reduced-motion:reduce){ *{ animation:none!important; transition:none!important } }
+</style>
+</head>
+<body>
+<header><div class="hd"><span class="mk" aria-hidden="true"></span><h1>Steward<span>MD</span> Pro</h1></div></header>
+<main id="app"></main>
+<script>
+(function () {
+  "use strict";
+  var app = document.getElementById("app");
+  var _plans = null, _status = null, _tier = "pro", _cycle = "monthly";
+  var TIER_ORDER = ["student", "coresident", "pro", "physician", "physicianpro"];
+  var TIER_BLURB = {
+    student: "Full MaiK AI, voice dictation, learn atlases",
+    coresident: "2 accounts, shared AI pool",
+    pro: "Imaging AI, Patient Summary, Lab Watch",
+    physician: "Your clinic, FollowCare, Scribe",
+    physicianpro: "Cloud clinic, OncoTree + ONCQIS included",
+  };
+
+  function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
+  function inr(paise) { return "₹" + Math.round((+paise || 0) / 100).toLocaleString("en-IN"); }
+  function fbToken() { try { var u = firebase.auth().currentUser; return u ? u.getIdToken() : Promise.resolve(""); } catch (e) { return Promise.resolve(""); } }
+  function api(path, opts) {
+    return fbToken().then(function (t) {
+      opts = opts || {}; var h = Object.assign({}, opts.headers || {}, t ? { "Authorization": "Bearer " + t } : {});
+      return fetch(path, Object.assign({}, opts, { headers: h })).then(function (r) { return r.json().then(function (d) { return { s: r.status, d: d }; }, function () { return { s: r.status, d: {} }; }); });
+    });
+  }
+
+  function signInView() {
+    app.innerHTML = '<section class="card"><div class="msg">Sign in with your StewardMD account to subscribe.</div>' +
+      '<button class="btn" id="signin">Sign in with Google</button></section>';
+    document.getElementById("signin").onclick = function () {
+      var p = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(p).catch(function () {});
+    };
+  }
+
+  function tierRow(id) {
+    var t = _plans.tiers[id]; if (!t) return "";
+    var annual = _cycle === "annual" && t.annual;
+    var amount = annual ? t.annual : t.amount;
+    var on = _tier === id;
+    var badge = t.premium ? '<span class="badge gold">Premium</span>' : (t.popular ? '<span class="badge">Popular</span>' : "");
+    return '<div class="tier' + (on ? " on" : "") + '" data-tier="' + id + '">' + badge +
+      '<span class="price">' + inr(amount) + (annual ? "/yr" : "/mo") + '</span>' +
+      '<b>' + esc(t.label) + '</b><span>' + esc(TIER_BLURB[id] || "") + '</span></div>';
+  }
+
+  function paint() {
+    var who = firebase.auth().currentUser;
+    var isPro = _status && (_status.pro || _status.promo);
+    var banner = isPro
+      ? '<div class="card"><div class="msg" style="color:var(--ok)">You already have Pro' + (_status.until ? " until " + esc(new Date(+_status.until).toLocaleDateString("en-IN")) : "") + '.</div></div>'
+      : "";
+    var html = banner + '<section class="card">' +
+      '<div class="who">' + (who && who.photoURL ? '<img src="' + esc(who.photoURL) + '">' : "") + 'Signed in as ' + esc((who && (who.displayName || who.email)) || "") + '</div>' +
+      '<div class="seg"><button data-cycle="monthly" class="' + (_cycle === "monthly" ? "on" : "") + '">Monthly</button><button data-cycle="annual" class="' + (_cycle === "annual" ? "on" : "") + '">Annual · 2 months free</button></div>' +
+      TIER_ORDER.map(tierRow).join("") +
+      '<button class="btn" id="buy" style="margin-top:8px">Subscribe — ' + esc(_plans.tiers[_tier].label) + '</button>' +
+      '<div class="err" id="err"></div></section>';
+    app.innerHTML = html;
+    Array.prototype.forEach.call(app.querySelectorAll("[data-cycle]"), function (b) { b.onclick = function () { _cycle = b.getAttribute("data-cycle"); paint(); }; });
+    Array.prototype.forEach.call(app.querySelectorAll(".tier"), function (b) { b.onclick = function () { _tier = b.getAttribute("data-tier"); paint(); }; });
+    document.getElementById("buy").onclick = buy;
+  }
+
+  function pollProUntilActive(tries) {
+    tries = tries == null ? 8 : tries;
+    return api("/api/billing/status").then(function (x) {
+      var st = x.d || {};
+      if (st.pro || tries <= 0) { _status = st; return st; }
+      return new Promise(function (r) { setTimeout(r, 1500); }).then(function () { return pollProUntilActive(tries - 1); });
+    });
+  }
+
+  function buy() {
+    var btn = document.getElementById("buy"), err = document.getElementById("err");
+    err.textContent = ""; btn.disabled = true; btn.textContent = "Starting checkout…";
+    api("/api/billing/razorpay/order", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ tier: _tier, cycle: _cycle }) })
+      .then(function (x) {
+        if (x.s !== 200 || !x.d || !x.d.orderId) {
+          btn.disabled = false; btn.textContent = "Try again";
+          err.textContent = x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again.");
+          return;
+        }
+        var o = x.d;
+        var rzp = new Razorpay({
+          key: o.keyId, amount: o.amount, currency: o.currency, order_id: o.orderId,
+          name: "StewardMD", description: o.label || "StewardMD Pro",
+          theme: { color: "#0e6e63" },
+          prefill: { email: (firebase.auth().currentUser && firebase.auth().currentUser.email) || "" },
+          handler: function () {
+            app.innerHTML = '<section class="card"><div class="msg">Payment received — activating…</div></section>';
+            pollProUntilActive().then(function (st) { paint(); });
+          },
+          modal: { ondismiss: function () { btn.disabled = false; btn.textContent = "Subscribe — " + _plans.tiers[_tier].label; } },
+        });
+        rzp.on("payment.failed", function () { btn.disabled = false; btn.textContent = "Try again"; err.textContent = "Payment failed — try again."; });
+        rzp.open();
+      })
+      .catch(function () { btn.disabled = false; btn.textContent = "Try again"; err.textContent = "Network error — try again."; });
+  }
+
+  function boot() {
+    app.innerHTML = '<section class="card"><div class="msg">Loading…</div></section>';
+    Promise.all([
+      fetch("/api/billing/plans").then(function (r) { return r.json(); }),
+      api("/api/billing/status").then(function (x) { return x.d || {}; }),
+    ]).then(function (res) { _plans = res[0].plans; _status = res[1]; paint(); });
+  }
+
+  try {
+    firebase.auth().onAuthStateChanged(function (u) { if (u) boot(); else signInView(); });
+  } catch (e) { signInView(); }
+})();
+</script>
+<footer style="text-align:center;padding:14px 16px calc(12px + env(safe-area-inset-bottom));color:#94a3b8;font:500 11px/1.5 -apple-system,system-ui,Segoe UI,Roboto,sans-serif">&copy; 2026 StewardMD &middot; All rights reserved &middot; <a href="/copyright" style="color:#94a3b8">MAIKNOWLEDGE LLP</a></footer>
+</body>
+</html>

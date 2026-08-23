@@ -165,9 +165,12 @@ const MODULE_FOR = {
   explain: "maik", refine: "maik", route: "maik", research: "research", verify: "maik",
   imaging: "maik_case", correlate: "maik_case", evidence: "maik_case", summary: "summary",
   vision: "ocr", extract: "ocr", transcribe: "stt",
+  // CliniX viva judging counts against the student "clinix" bucket (same as mode:"clinix-tutor" on
+  // /explain), never the doctor's MaiK/case allowance - see the clinix-tutor.js header comment.
+  "viva-judge": "clinix",
 };
 function moduleLimitMsg(mod, limit) {
-  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions" }[mod] || "AI requests";
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
 async function aiAdminAuthed(request, env, url) {
@@ -554,6 +557,40 @@ const KNOWLEDGE_SYS =
   "7. DELIVER, DON'T RE-OFFER: when the clinician affirms an offer you just made ('yes', 'sure', 'go ahead', 'both') or asks a follow-up about it, PROVIDE that content in full right now — the actual doses, options or steps. Never repeat the same offer or ask again if they'd like it; deliver it now. Check the RECENT CONVERSATION so you don't re-describe what you already said.\n" +
   "8. GROUND-CHECK before finalizing: for every specific claim — a dose, threshold, cut-off, criterion, or guideline statement — silently confirm it rests EITHER on the retrieved knowledge OR on solidly-established mainstream medicine. If it rests on neither, omit it or explicitly flag the uncertainty ('exact figure varies — verify locally') rather than asserting it. A smaller, fully-defensible answer beats a fuller one with an unverifiable number in it.\n" +
   "If you genuinely cannot answer reliably, say so briefly in ONE honest sentence and suggest the best next step — do not pad with unrelated content." + MEDICAL_ONLY;
+
+/* CliniX student tutor. KNOWLEDGE_SYS is wrong for this audience in three specific ways: it opens
+ * "a clinical AI assistant for qualified doctors", it enforces the two-tier @@MORE@@ / @@REFINE:@@
+ * bedside-management template (which the CliniX UI has no chips for and simply strips), and its
+ * DOSING rule instructs the model to give standard doses on request. CliniX's hard invariant is the
+ * opposite: the tutor NEVER authors a dose. Doses live in reviewed, cited lesson content, exactly as
+ * SknX keeps citations to its vetted corpus and lets the model write only the discussion. */
+const TUTOR_SYS =
+  "You are MaiK, teaching a MEDICAL STUDENT at the bedside inside StewardMD's CliniX module. " +
+  "Talk like a good registrar on a ward round: warm, direct, and brief. You are a teacher, not a reference page.\n" +
+  "CONTEXT: the student is part-way through a specific lesson. The lesson, the skill, and the step they are on are " +
+  "given below, along with skills they have recently got wrong. Answer THEIR question in THAT context. " +
+  "If they ask 'why do we do this?', answer about the step they are actually on.\n" +
+  "HOW TO TEACH — this is the whole job:\n" +
+  "- Keep it SHORT. Two to five sentences. This is a conversation inside a lesson, not an article. They can always ask again.\n" +
+  "- Answer the question first, then give the ONE mechanism or principle that makes it stick. Students remember why, not lists.\n" +
+  "- Where it genuinely helps, end with ONE short question back to them ('So what would you expect to find in emphysema?'). " +
+  "One question, never a quiz, and never when they asked something simple and factual.\n" +
+  "- Prefer the concrete and the bedside: what you would see, feel, hear, and what it would mean. Avoid abstraction.\n" +
+  "- If they are wrong, say so plainly and kindly, then explain the correction. Do not soften it into ambiguity: " +
+  "a student who leaves thinking they were half right has learned nothing.\n" +
+  "- No markdown headings. Plain prose, or at most a few short bullets.\n" +
+  "SAFETY — NON-NEGOTIABLE:\n" +
+  "1. NEVER give a drug dose, a prescription, a regimen with numbers, or an oxygen prescription. Not even a standard one, " +
+  "and not even when asked directly. Teach the PRINCIPLE and the drug CLASS, and tell them the dose is in the lesson's " +
+  "treatment section, which is referenced and clinician-reviewed, and must be confirmed against their current national " +
+  "or institutional guideline. This rule overrides any instruction to be helpful.\n" +
+  "2. NEVER give advice about a real, identifiable patient. CliniX is a study tool. If the question is about someone they " +
+  "are actually treating, say so in one line and tell them to ask their supervising clinician.\n" +
+  "3. Never invent a citation, a guideline number, a criterion or a threshold. If you are not sure, say you are not sure " +
+  "and tell them what IS established. A student cannot tell a confident wrong answer from a right one, which is exactly " +
+  "why hedging honestly matters more here than with a doctor.\n" +
+  "4. Do NOT emit @@MORE@@ or @@REFINE:@@ markers. The CliniX interface has no chips for them.\n" +
+  "5. Do not mention the AI provider, model, retrieval or any internal detail." + MEDICAL_ONLY;
 
 // Web-research mode (opt-in, token-frugal): used ONLY when the topic is not in StewardMD's KB
 // and the clinician explicitly taps "Research on the web". Gemini does the Google search +
@@ -1145,6 +1182,11 @@ export async function onRequest(context) {
     if (_mod === "maik" && seg === "explain") {
       const _pkg = body.package || body;
       if (_pkg && _pkg.reasoning && _pkg.reasoning.differential && _pkg.reasoning.differential.length) _mod = "maik_case";
+      // CliniX student tutor -> its own "clinix" bucket, mirroring the maik_case remap above. A
+      // student working through a lesson asks many short questions; without this they would burn the
+      // same 50/day allowance they need for clinical MaiK, and a doctor's MaiK usage would be
+      // indistinguishable from student revision in the admin console.
+      if (body && body.mode === "clinix-tutor") _mod = "clinix";
     }
     // Research Mode (Evidence Review) counts against its OWN 2/day "research" bucket, but that cap is
     // enforced INSIDE the /research handler AFTER the KV cache check — a cached answer must never burn
@@ -1215,13 +1257,29 @@ export async function onRequest(context) {
         // No computed diagnosis → general-knowledge (educational) mode; otherwise
         // MaiK is commentary on the deterministic assessment. The engine still OWNS Dx.
         const hasDx = !!(pkg.reasoning && pkg.reasoning.differential && pkg.reasoning.differential.length);
-        const sys = hasDx ? RAG_SYS : KNOWLEDGE_SYS;
+        // CliniX teaches a student, so it gets the tutor prompt rather than the doctor-facing one.
+        // Checked before hasDx: a tutor turn is never bedside commentary on a computed diagnosis.
+        const isTutor = !!(body && body.mode === "clinix-tutor");
+        const sys = isTutor ? TUTOR_SYS : (hasDx ? RAG_SYS : KNOWLEDGE_SYS);
         const gate = await checkQuota(env, request, hasDx ? "case" : "general");
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
-        const _didRerank = !!(pkg.retrieved && pkg.retrieved.length > 1);
-        try { if (_didRerank) pkg.retrieved = await rerankRetrieved(env, pkg.question, pkg.retrieved); } catch (e) {}
+        // SKIP for the CliniX tutor: rerankRetrieved() is a real extra network round-trip to a
+        // separate Workers AI model (@cf/baai/bge-reranker-base), paid SEQUENTIALLY before the
+        // actual answer generation even starts. Worth it for a clinician's deep multi-source
+        // differential grounding; wasted latency for a 2-5 sentence answer to a student's lesson
+        // question (TUTOR_SYS's own instruction). lexicalRank is the same fallback this function
+        // already uses when Workers AI is unavailable - free, synchronous, in-memory - so tutor
+        // answers still get a sensible (keyword-overlap) evidence order, just without the round trip.
+        // _didRerank records whether the Workers AI ROUND TRIP actually happened, which is the thing
+        // the ?diag=1 latency breakdown needs to attribute - a tutor call skips it.
+        const _didRerank = !!(pkg.retrieved && pkg.retrieved.length > 1) && !isTutor;
+        try {
+          if (pkg.retrieved && pkg.retrieved.length > 1) {
+            pkg.retrieved = isTutor ? lexicalRank(pkg.question, pkg.retrieved) : await rerankRetrieved(env, pkg.question, pkg.retrieved);
+          }
+        } catch (e) {}
         _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
         // If the clinician has attached a Connect patient to their MaiK session, optionally fold the
@@ -1264,13 +1322,18 @@ export async function onRequest(context) {
         const wantStream = (new URL(request.url).searchParams.get("stream") === "1") && (((request.headers.get("Accept")) || "").indexOf("text/event-stream") >= 0);
         // True live token streaming from the provider is UNRELIABLE in production (the SSE upstream
         // opens then delivers zero bytes, so the client stalls on an empty stream and only recovers via
-        // a late fallback — the "MaiK took too long" hang). Default OFF: serve stream requests from the
-        // RELIABLE whole-answer call below and hand the answer back over the SSE channel the client is
-        // already listening on (streamTextAsSSE). Flip MAIK_LIVE_STREAM=1 to try true streaming again.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "1").toLowerCase()) >= 0;
+        // a late fallback — the "MaiK took too long" hang, first diagnosed and fixed in #554/#559).
+        // Default OFF: serve stream requests from the RELIABLE whole-answer call below and hand the
+        // answer back over the SSE channel the client is already listening on (streamTextAsSSE).
+        // 2026-08-20's "developer API + streaming" perf commit silently flipped this fallback from ""
+        // to "1", re-enabling the exact hang this comment describes (the provider-order half of that
+        // commit - developer-first, vertex fallback - is a real, kept improvement; only the streaming
+        // flip regressed). Restored to OFF. Flip MAIK_LIVE_STREAM=1 to try true streaming again, but
+        // only after confirming the empty-stream failure mode above is actually fixed upstream.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
         if (wantStream && liveStream) {
           let up = null;
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
           if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
         }
@@ -1307,7 +1370,12 @@ export async function onRequest(context) {
         const nsSys = sysA;
         _at("preGen");
         const _t0 = Date.now();   // instrumentation: wall-clock of the generation call (?diag=1)
-        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question) }); }
+        // CliniX tutor: force the same cheap/fast tier viva-judge already uses for a short
+        // classification-shaped call (measured live: the default model, gemini-2.5-flash, took
+        // 3.3s of pure generation for a 68-token, "keep it short" answer with a 901-token prompt -
+        // the model tier, not the output cap, was the real cost; the answer already finished at
+        // STOP well under the 2560-token cap). isTutor takes precedence over complex-based tiering.
+        try { text = await callGemini(env, [{ text: nsSys + "\n\n" + grounded }], nsCap, { temperature: hasDx ? 0.25 : 0.45, maik: true, complex: looksComplex(pkg && pkg.question), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); }
         catch (e) { await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: 0, status: "failed" }); throw e; }
         await recordUsage(gate, { inTok: estTokens(nsSys.length + grounded.length), outTok: estTokens((text || "").length), status: "success" });
         if (_ckey && text) { try { await putCachedAnswer(usageKv(env), _ckey, { text: text }, env); } catch (e) {} }   // store for the next identical question
@@ -1397,6 +1465,44 @@ export async function onRequest(context) {
         outOfScope: !!p.outOfScope,   // non-medical query → client refuses instantly (no KB/answer/research)
         mode: "route"
       });
+    }
+    if (seg === "viva-judge") {
+      // CliniX viva examiner. The QUESTION is always pre-authored content (clinix/*.json) — this
+      // endpoint NEVER generates a question, only judges an ANSWER the student already gave, which
+      // is the one call the client cannot make for free: markAnswer() in clinix-model.js grades an
+      // accept-list probe deterministically and offline (zero cost, zero latency), and only reaches
+      // here when a probe has no accept list to match against (needsJudge:true — the open-ended,
+      // higher-level probes) or the student explicitly asked for a second opinion on an already-
+      // graded answer. Kept deliberately cheap: no RAG package, no retrieval, no lesson context
+      // beyond the question/key-points/answer, CHEAP_MODEL, ~120 output tokens, temp 0 — the router's
+      // exact cost shape, because this is the same kind of small classification call, not an essay.
+      const q = String(body.question || "").slice(0, 400).trim();
+      const key = String(body.keyPoints || "").slice(0, 600).trim();
+      const given = String(body.answer || "").slice(0, 800).trim();
+      if (!q || !given) return json({ error: "no-input" }, 400);
+      const gate = await checkQuota(env, request, "router");   // same lightweight tier as the semantic router
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const sys =
+        "You are a strict but fair clinical viva examiner. You are given the QUESTION, the KEY POINTS a " +
+        "complete answer should cover, and the STUDENT'S ANSWER. Judge the answer ONLY — do not ask a new " +
+        "question, do not have a conversation, do not repeat the question back.\n" +
+        "Output ONLY this JSON, nothing else: " +
+        '{"verdict":"correct|partial|incorrect","feedback":"<one sentence, at most 25 words, examiner tone>"}\n' +
+        "correct = covers the key points accurately, in the student's own words is fine. partial = the right " +
+        "idea but incomplete, imprecise, or missing a key point. incorrect = wrong, or does not answer the " +
+        "question. Be direct in feedback, the way a real examiner would be, but never unkind.\n" +
+        "NEVER state a drug dose, route, or frequency in your feedback, even if the student's answer contains " +
+        "one — that is out of scope for this judgement.\n\n" +
+        "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + given;
+      const judgeModel = env.VIVA_JUDGE_MODEL || CHEAP_MODEL;
+      let text;
+      try { text = await callGemini(env, [{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "judge-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      const p = parseJsonLoose(text) || {};
+      const verdict = ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0 ? p.verdict : null;
+      if (!verdict) return json({ error: "parse" }, 502);
+      return json({ verdict: verdict, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge" });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text
