@@ -374,9 +374,19 @@
 
     var firstMedia = (skill.media && skill.media.length) ? skill.media[0] : null;
 
-    // 1. SHOW - watch it before reading about it.
+    // 1. SHOW - watch it before reading about it. EVERY media item goes here, up front, not just
+    //    the first one. An earlier version pushed extra media to the very end of the lesson,
+    //    after the quiz, on the reasoning that it was "bonus" - in practice a student never
+    //    scrolled that far to find it, so a second reference (a comparison diagram alongside a
+    //    real photo, say) was invisible in any lesson that had one. Multiple things worth looking
+    //    at are worth looking at together, before teaching starts.
     if (firstMedia) {
       t.push(turn("show", { media: firstMedia, title: skill.title, caption: skill.oneLine || "" }));
+    }
+    if (skill.media && skill.media.length > 1) {
+      for (i = 1; i < skill.media.length; i++) {
+        t.push(turn("show", { media: skill.media[i], title: skill.title, secondary: true }));
+      }
     }
 
     // 2. TEACH. This comes BEFORE any question. The first version of this engine asked a hook
@@ -448,13 +458,6 @@
     // 10. CHECK - a harder probe closes the loop and writes competency.
     var close = pickProbe(skill, 2) || pickProbe(skill, 3);
     if (close && (!hook || close !== hook)) t.push(turn("check", { probe: close, intent: "close" }));
-
-    // Extra media becomes its own show turn rather than being buried.
-    if (skill.media && skill.media.length > 1) {
-      for (i = 1; i < skill.media.length; i++) {
-        t.push(turn("show", { media: skill.media[i], title: skill.title, secondary: true }));
-      }
-    }
 
     if (opts.skipShow) {
       t = t.filter(function (x) { return x.kind !== "show"; });

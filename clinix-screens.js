@@ -517,9 +517,10 @@
 
   function showTurn(t) {
     var m = C().media(state.built, t.media);
-    // A secondary media turn plays AFTER the quiz (compileLesson appends extra media at the very
-    // end rather than burying it), so it must not claim to come "first" - that is simply false here.
-    var verb = t.secondary ? "Also worth watching" : (m ? mediaVerb(m.kind) : "Look first");
+    // A secondary media turn sits right after the primary one (both up front, before teaching -
+    // see compileLesson), but it is still the SECOND thing shown, so it reads as "also" rather
+    // than re-claiming "first".
+    var verb = t.secondary ? "Also worth a look" : (m ? mediaVerb(m.kind) : "Look first");
     var head = '<div class="cx-eyebrow">' + esc(verb) + "</div>";
     if (!m) {
       return head + '<div class="cx-media cx-media--pending">' + ic("videocam_off") +
