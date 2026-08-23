@@ -10,7 +10,7 @@
    - On activate, the new SW RELOADS open tabs so a deploy can't leave a client stuck on
      stale JS (this is what un-sticks users running an old reasoning.js/app.js).
    IMPORTANT: bump CACHE on every deploy (keep in step with ?v=goldN) so old caches purge. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas1-maikllm1-wr1-clinix20";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas1-maikllm1-wr1-clinix20-surgx1";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

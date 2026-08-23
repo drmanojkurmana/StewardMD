@@ -1,0 +1,66 @@
+{
+  "id": "chest-trauma",
+  "title": "Chest trauma",
+  "subtitle": "The six that kill early",
+  "category": "trauma",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2026-06-30",
+  "sources": [
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" },
+    { "id": "nexus", "org": "NEXUS Chest investigators", "title": "NEXUS Chest decision instruments for blunt chest trauma imaging", "year": 2013, "url": "https://pubmed.ncbi.nlm.nih.gov/", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Tension pneumothorax: respiratory distress, absent breath sounds, hyperresonance, distended neck veins, tracheal deviation late." },
+      { "text": "Open pneumothorax: a sucking chest wound larger than about two-thirds of the tracheal diameter." },
+      { "text": "Massive haemothorax: a silent, dull hemithorax with shock." },
+      { "text": "Cardiac tamponade: hypotension, distended neck veins, muffled heart sounds; often only hypotension in a hypovolaemic patient." },
+      { "text": "Flail segment with paradoxical movement and rising oxygen requirement." },
+      { "text": "Tracheobronchial injury: massive air leak, persistent pneumothorax after a well-placed drain, surgical emphysema." }
+    ],
+    "do_now": [
+      { "text": "Decompress a tension pneumothorax immediately on clinical grounds. Finger or needle thoracostomy first, formal drain after.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Cover an open chest wound with a dressing sealed on three sides, then place a chest drain away from the wound.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "High-flow oxygen, analgesia adequate enough to allow deep breathing, and continuous monitoring.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Suspected tamponade in a peri-arrest patient goes to theatre or resuscitative thoracotomy, not to the CT scanner.", "timeCritical": true, "evidenceRef": "atls" }
+    ],
+    "assess": [
+      { "text": "Expose the whole chest, front and back. Count respiratory rate yourself; it is the earliest sign and the least recorded." },
+      { "text": "Percuss and auscultate both sides at matched levels, then palpate for crepitus, flail and tenderness." },
+      { "text": "Distended neck veins with shock narrow the diagnosis to tension pneumothorax, tamponade or cardiac contusion." },
+      { "text": "Track drain output and air leak continuously once a drain is in. The trend is the decision." },
+      { "text": "Apply a validated rule before imaging a stable blunt-trauma patient rather than scanning reflexively." }
+    ],
+    "investigate": [
+      { "text": "Supine chest radiograph in the resuscitation room. It is a screening film, not an exclusion test." },
+      { "text": "eFAST for pericardial fluid, pneumothorax and haemothorax at the bedside." },
+      { "text": "CT with contrast for the stabilised patient: it finds the aortic injury, the diaphragmatic tear and the occult pneumothorax." },
+      { "text": "ECG and troponin for suspected blunt cardiac injury; a normal ECG in a haemodynamically normal patient largely excludes it." },
+      { "text": "Arterial gas for oxygenation and ventilation trend in a flail chest or pulmonary contusion." }
+    ],
+    "resuscitate": [
+      { "text": "Aggressive multimodal analgesia including regional block for rib fractures. Pain control is the treatment that prevents pneumonia.", "evidenceRef": "atls" },
+      { "text": "Blood rather than crystalloid for a haemothorax with shock; the chest drain output is external blood loss.", "evidenceRef": "atls" },
+      { "text": "Chest physiotherapy, sitting up and early mobilisation from day one in blunt chest wall injury.", "evidenceRef": "atls" },
+      { "text": "Non-invasive ventilation or intubation for a failing flail chest, guided by work of breathing and gas trend rather than a single saturation.", "evidenceRef": "atls" }
+    ],
+    "definitive": [
+      { "text": "Chest drain for pneumothorax and haemothorax. Most chest trauma is treated with a drain and good analgesia.", "evidenceRef": "atls" },
+      { "text": "Thoracotomy for an immediate drain output above roughly 1500 mL, or a continuing loss of about 200 mL per hour for several hours, or for a patient who will not stabilise.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Surgical rib fixation is considered in selected flail chest and severely displaced fractures; it is a planned decision, not an emergency one.", "evidenceRef": "atls" },
+      { "text": "Persistent large air leak or failure of the lung to re-expand needs bronchoscopy and a thoracic surgical opinion.", "evidenceRef": "atls" }
+    ],
+    "escalate": [
+      { "text": "Cardiothoracic or major-trauma centre for suspected aortic injury, tracheobronchial injury, or penetrating mediastinal trauma." },
+      { "text": "Critical care for flail chest, significant contusion, or an oxygen requirement that is climbing." },
+      { "text": "Anyone with three or more rib fractures, or any rib fracture in an elderly patient, needs a higher level of observation than they look like they need." }
+    ]
+  },
+  "notes": [
+    "Most chest trauma is managed with oxygen, analgesia and a drain. The skill is spotting the minority who need more, early.",
+    "Elderly patients with a small number of rib fractures have a mortality that is consistently underestimated at the front door.",
+    "The review date on the ATLS reference has passed; confirm the current edition before teaching from this page."
+  ],
+  "calcs": ["gcs", "rts", "iss", "shock_index"]
+}

@@ -5,6 +5,48 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-24 · SURGX projects the existing surgery engine rather than re-authoring it
+New module (see [[SURGX]]), built behind `smd_surgx` off tag `pre-surgx`. Three decisions worth keeping.
+
+**1. `ws-surgery.js` was ABSORBED, not duplicated, and not edited.** The app already had a working
+surgical decision engine: 13 syndromes with focused findings, danger signs, a deterministic
+`assess()` returning an emergency flag, a management-ladder index, source control, referral, notes
+and empiric antibiotic regimens with an ICMR reference. The obvious move - author SURGX protocol
+JSON covering the same syndromes - would have produced two places where "acute abdomen" gets a
+recommendation, drifting apart. That is exactly the failure recorded above for the KardiQ content
+pack. Instead `compileEngineProtocol()` projects the engine's own output onto a seven-band spine, so
+**parity is structural rather than tested-for**, and `ws-surgery.js` has zero changes. Provenance,
+an INVESTIGATE band and calculator links live in a separately-reviewed overlay JSON. Eight authored
+protocols cover only what the engine does NOT model (ATLS, shock, sepsis, chest, head, burns, GI
+bleed, post-op deterioration).
+
+**The projection is deliberately non-interpretive.** `result.sc` is source control so it becomes
+DEFINITIVE; `result.ref` is referral so it becomes ESCALATION; `result.mgmt[]` is an unstructured
+note list so it is carried WHOLE rather than scattered across bands by keyword matching.
+Regex-splitting clinical prose into bands would silently relocate a safety-critical line, and that
+class of change is precisely what the module exists to prevent.
+
+**2. For Notes, only ONE of the four anti-fabrication layers is a prompt.** An operative note is a
+legal record. The prompt says "do not invent"; the server intersects the model's keys with the
+schema's `aiFillable:true` set and then applies a hard DENY list on top (counts, specimens,
+implants, consent, discharge medications, identifiers, attribution); the client voids any field
+containing a number absent from the transcript; and export is blocked until every required field is
+clinician-confirmed, behind a double press. Layers 2 to 4 are code. **A prompt is a request, not a
+mechanism** - the same conclusion `clinix-tutor.js` reached about dose refusal.
+
+**3. Notes reuse `SMD_RX.canPrescribe()` as the clinician gate rather than inventing a role check.**
+There is no client-facing role read in this app, and verify.js already draws the line in the right
+place: a student "unlocks StewardMD's learning tools" while "prescription and clinical-action
+features stay locked". Notes is on the locked side of that line. SURGX Notes does not prescribe, so
+this is STRICTER than needed - the correct direction to be wrong in, at zero cost. An unverified
+user SEES the section and is told what is needed; hiding it would read as a broken app.
+
+**Trade-off accepted:** notes are device-local only (AES-GCM via `SMD_CLINIC_CRYPTO`, key in
+localStorage). That defends against a backup or a storage-panel dump, not against code execution on
+an unlocked device, and it is written down as such rather than glossed. Moving the secret to
+Keychain/Keystore is the marked upgrade path. **Status: built, flag ON for testers, content
+ai_drafted pending R1.**
+
 ## 2026-08-23 · Arming OTA on a device DOWNGRADED it to the pre-CliniX bundle
 **Measured on the owner's iPhone 15 Pro, not inferred.** The first device ever built with
 `@capgo/capacitor-updater` linked in immediately hit `/api/ota/check`, downloaded a 36 MB bundle and

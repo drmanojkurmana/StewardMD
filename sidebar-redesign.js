@@ -106,7 +106,9 @@
     { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" },
     { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" },
     { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" },
-    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: false, key: "smd_clinix_tutor" }
+    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: false, key: "smd_clinix_tutor" },
+    { id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
+    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" }
   ];
   function setToggle(id, key, on) {
     try {

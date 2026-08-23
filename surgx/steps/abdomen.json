@@ -1,0 +1,96 @@
+{
+  "_comment": "Open abdominal steps, shared by laparotomy, open appendicectomy and open hernia repair.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.abd.midline": {
+      "id": "step.abd.midline", "kind": "access",
+      "title": "Midline laparotomy incision",
+      "why": "The midline is fast, bloodless and extensible in both directions, which is exactly what an unknown pathology needs.",
+      "how": [
+        "Incise through skin, fat and linea alba, staying in the midline: drifting off it bleeds and weakens the closure.",
+        "Enter the peritoneum between forceps under direct vision, then extend with fingers protecting the bowel.",
+        "Extend as far as the operation needs. An inadequate incision causes more harm than a long one."
+      ],
+      "structuresAtRisk": ["Bowel adherent to the undersurface of a previous midline scar", "Bladder at the lower end of a lower midline incision"],
+      "pitfalls": ["Entering blind through a scar.", "A short incision that forces retraction injury on the liver and spleen."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.exploration": {
+      "id": "step.abd.exploration", "kind": "checkpoint", "critical": true,
+      "title": "Systematic exploration",
+      "why": "The purpose of a laparotomy is to find out. A systematic sequence is the only way to be sure the second pathology was looked for rather than merely not seen.",
+      "how": [
+        "Follow the same sequence every time: liver and gallbladder, stomach and duodenum, spleen, small bowel from duodenojejunal flexure to caecum, colon and rectum, pelvis, retroperitoneum, hernial orifices from inside.",
+        "Run the small bowel hand over hand, both surfaces, in one direction.",
+        "Record what was normal as well as what was abnormal."
+      ],
+      "structuresAtRisk": ["Spleen, from retraction on the greater curve", "Serosal tears from handling distended bowel"],
+      "pitfalls": ["Stopping the exploration when the expected pathology is found.", "Missing a second perforation because the first explained the free fluid."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.bowel-handling": {
+      "id": "step.abd.bowel-handling", "kind": "dissection",
+      "title": "Handling and assessing bowel",
+      "why": "Bowel handled roughly becomes ileus, adhesions and, at the extreme, a serosal tear that becomes a leak.",
+      "how": [
+        "Handle with the whole hand and moist packs; grasp the mesentery, not the bowel wall.",
+        "Assess viability by colour, peristalsis, mesenteric pulsation and bleeding from a cut edge, and re-assess after warm packs and time.",
+        "When viability is genuinely uncertain in an unstable patient, resect, leave discontinuous and plan a second look."
+      ],
+      "structuresAtRisk": ["Serosa of distended bowel", "Marginal artery in the mesentery"],
+      "pitfalls": ["Deciding viability in the first 30 seconds.", "Anastomosing bowel of doubtful perfusion to avoid a stoma."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.lavage": {
+      "id": "step.abd.lavage", "kind": "resection",
+      "title": "Peritoneal toilet",
+      "why": "Removing contamination is part of source control, but lavage does not substitute for closing the hole that produced it.",
+      "how": [
+        "Remove particulate contamination mechanically from all four quadrants and the pelvis.",
+        "Irrigate with warm saline and aspirate it completely; fluid left behind is a collection.",
+        "Do not add antiseptic or antibiotic to the irrigation as a substitute for source control."
+      ],
+      "pitfalls": ["Lavage of a compartment that has not been fully opened, so the subphrenic collection is missed.", "Leaving irrigation fluid in the abdomen."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.drain": {
+      "id": "step.abd.drain", "kind": "closure",
+      "title": "Drain placement",
+      "why": "A drain tells you what is happening in a space you cannot see. It does not prevent a collection and it does not rescue an anastomosis.",
+      "how": [
+        "Place a drain when you want early warning of a specific complication, or to drain an established collection.",
+        "Bring it out through a separate stab wound in clean skin, secure it, and record the type and site in the note.",
+        "Decide in advance what output would change management, and hand that number over."
+      ],
+      "pitfalls": ["A drain placed 'just in case', which then becomes a route for infection.", "A drain not recorded in the operative note."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.mass-closure": {
+      "id": "step.abd.mass-closure", "kind": "closure", "critical": true,
+      "title": "Mass closure of the abdominal wall",
+      "why": "Burst abdomen and incisional hernia are closure failures, and closure technique is one of the few variables entirely under the surgeon's control.",
+      "how": [
+        "Use a continuous slowly-absorbable suture with a suture length to wound length ratio of at least four to one.",
+        "Take small bites close to the edge rather than large bites far from it.",
+        "Keep the bowel protected by an instrument or the assistant's hand for every single bite.",
+        "Do not close under tension. If the abdomen will not close, do not force it - manage it open."
+      ],
+      "structuresAtRisk": ["Small bowel caught in a closure bite"],
+      "pitfalls": ["Large bites taken quickly at the end of a long case.", "Closing an abdomen that is developing compartment syndrome."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.abd.stoma": {
+      "id": "step.abd.stoma", "kind": "reconstruction",
+      "title": "Stoma formation",
+      "why": "A badly sited stoma is a lifelong problem for the patient and a daily one for the stoma nurse. Siting is decided before the patient lies down, whenever there is time.",
+      "how": [
+        "Site away from the costal margin, the umbilicus, the belt line, scars and skin creases, through the rectus muscle, where the patient can see it.",
+        "Bring out a tension-free, well-perfused segment; check the colour after the abdomen is closed.",
+        "Evert and mature a spouted ileostomy; a colostomy may be flush."
+      ],
+      "structuresAtRisk": ["Marginal vessels of the bowel being brought out", "Inferior epigastric vessels at the trephine"],
+      "pitfalls": ["Siting the stoma under a skin fold that is only apparent when the patient sits up.", "A stoma under tension because the mesentery was not mobilised."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

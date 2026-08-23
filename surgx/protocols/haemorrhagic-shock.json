@@ -1,0 +1,64 @@
+{
+  "id": "haemorrhagic-shock",
+  "title": "Haemorrhagic shock",
+  "subtitle": "Recognise, stop the bleeding, resuscitate",
+  "category": "resuscitation",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" },
+    { "id": "nice-ng39", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "version": "NG39", "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "A narrowing pulse pressure with a rising heart rate. This precedes any fall in systolic pressure." },
+      { "text": "Transient responder: pressure improves with the first unit and falls again. That patient is still bleeding." },
+      { "text": "Base deficit worse than -6, or a lactate above 4 mmol/L, in a patient who looks compensated." },
+      { "text": "Agitation or confusion attributed to alcohol or pain. In a bleeding patient it is cerebral hypoperfusion until proven otherwise." },
+      { "text": "A young or pregnant patient with normal observations and a serious mechanism. They compensate until they do not." }
+    ],
+    "do_now": [
+      { "text": "Compress or clamp what you can see. External haemorrhage is the one cause you can treat with your hands.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Two large-bore cannulae, bloods, crossmatch, and activate the major haemorrhage protocol before you are certain you need it.", "timeCritical": true, "evidenceRef": "nice-ng39" },
+      { "text": "Give blood, not crystalloid, once haemorrhagic shock is recognised.", "timeCritical": true, "evidenceRef": "nice-ng39" },
+      { "text": "Tranexamic acid early in traumatic haemorrhage.", "timeCritical": true, "evidenceRef": "nice-ng39" }
+    ],
+    "assess": [
+      { "text": "Find the source: chest, abdomen, pelvis, long bones, external, and in the post-operative patient the operative field.", "calcs": ["shock_index", "modified_shock_index"] },
+      { "text": "Classify the response to the first transfusion - responder, transient responder, non-responder. That classification is the decision." },
+      { "text": "Look for the confounders: beta-blockade blunts tachycardia, a pacemaker fixes the rate, and pregnancy raises baseline volume." },
+      { "text": "Estimate allowable loss and transfusion need rather than guessing.", "calcs": ["allowable_blood_loss", "blood_volume"] }
+    ],
+    "investigate": [
+      { "text": "Serial venous or arterial gas: lactate and base deficit track resuscitation better than blood pressure." },
+      { "text": "Haemoglobin early is reassuringly normal in acute loss and must not be used to exclude bleeding." },
+      { "text": "Coagulation screen, fibrinogen, ionised calcium and platelets, repeated during massive transfusion." },
+      { "text": "Point-of-care viscoelastic testing where available, to direct component therapy rather than fixed ratios." },
+      { "text": "Imaging only when it changes the destination. A non-responder's investigation is a laparotomy." }
+    ],
+    "resuscitate": [
+      { "text": "Balanced component therapy in massive haemorrhage: red cells with plasma and platelets rather than red cells alone.", "evidenceRef": "nice-ng39" },
+      { "text": "Replace calcium during massive transfusion. Citrate chelates it and hypocalcaemia worsens both coagulopathy and cardiac output.", "evidenceRef": "nice-ng39" },
+      { "text": "Permissive hypotension until haemorrhage is controlled, in the absence of significant head injury. Aim for a radial pulse and a talking patient rather than a number.", "evidenceRef": "atls" },
+      { "text": "Actively rewarm. Hypothermia, acidosis and coagulopathy reinforce each other and the only one you fully control is temperature.", "evidenceRef": "atls" },
+      { "text": "Vasopressors do not treat an empty tank and mask the loss. Reserve them for the resuscitated patient with vasoplegia.", "evidenceRef": "atls" }
+    ],
+    "definitive": [
+      { "text": "Definitive treatment is surgical or radiological control of the bleeding point. Everything else buys time for it.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Damage control laparotomy for the exhausted patient: pack, control contamination, temporary closure, intensive care, planned return.", "evidenceRef": "atls" },
+      { "text": "In the post-operative patient, re-exploration is the answer far more often than another unit of blood.", "evidenceRef": "atls" }
+    ],
+    "escalate": [
+      { "text": "Consultant surgeon, consultant anaesthetist, interventional radiology and the blood bank, simultaneously and early." },
+      { "text": "Critical care must know at the point the major haemorrhage protocol is activated, not when the operation ends." },
+      { "text": "Transfer only after haemorrhage is controlled, unless the receiving unit is the only place control is possible - and then go with blood running." }
+    ]
+  },
+  "notes": [
+    "Blood pressure is the last thing to fall and the first thing everyone watches.",
+    "The commonest error is repeated crystalloid: it raises pressure, displaces clot, dilutes factors and cools the patient.",
+    "Every number in this protocol supports a decision that is fundamentally binary - is the bleeding controlled or not."
+  ],
+  "calcs": ["shock_index", "modified_shock_index", "allowable_blood_loss", "blood_volume", "anion_gap"]
+}

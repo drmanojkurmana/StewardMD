@@ -1,0 +1,229 @@
+{
+  "_comment": "PROVENANCE + INVESTIGATIONS overlay for the ws-surgery.js decision engine. This file adds NOTHING to the clinical decision: the emergency flag, management ladder, source control, referral, clinical notes and empiric antibiotic regimens all come from ws-surgery.js and have exactly one home. What lives here is (a) the source attribution that engine file does not carry per-syndrome, (b) an INVESTIGATE band the engine does not model, and (c) deep links into the existing StewardMD Calculators module. Reviewed separately from the engine; review.status governs whether it renders.",
+  "schemaVersion": 1,
+  "updated": "2026-08-24",
+  "syndromes": {
+
+    "acute_abdomen": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "kbRef": "acute_appendicitis",
+      "sources": [
+        { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Urine or serum beta-hCG in every woman of childbearing age, before imaging and before theatre." },
+        { "text": "FBC, U&E, LFT, amylase or lipase, CRP, lactate, group and save. Lactate is a resuscitation marker, not a diagnostic test." },
+        { "text": "Erect chest radiograph for free air. A normal film does not exclude perforation." },
+        { "text": "Ultrasound first for right upper quadrant and pelvic pain; CT with contrast when the diagnosis remains unclear and the patient is stable enough to travel.", "calcs": ["alvarado", "air_score"] },
+        { "text": "ECG in anyone over 50 or with epigastric pain: inferior myocardial infarction presents as an abdomen." }
+      ],
+      "calcs": ["alvarado", "air_score", "qsofa", "news2", "bisap"]
+    },
+
+    "gi_perforation": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Erect chest radiograph, then CT with contrast if stable and the film is normal but suspicion persists." },
+        { "text": "Lactate, arterial or venous blood gas, full blood count, U&E, coagulation, group and crossmatch." },
+        { "text": "Blood cultures before antibiotics where taking them will not delay the first dose." },
+        { "text": "Score severity to guide the level of post-operative care, not the decision to operate.", "calcs": ["qsofa", "sofa", "apache2"] }
+      ],
+      "calcs": ["qsofa", "sofa", "news2", "apache2", "asa"]
+    },
+
+    "bowel_obstruction": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "wses-asbo", "org": "World Society of Emergency Surgery (WSES)", "title": "Bologna guidelines for diagnosis and management of adhesive small bowel obstruction (ASBO)", "year": 2018, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Examine every hernial orifice and do a rectal examination before ordering anything." },
+        { "text": "U&E and a venous gas: the metabolic picture of vomiting and third-spacing drives resuscitation." },
+        { "text": "CT with contrast defines level, cause and any transition point, and is the test that finds a closed loop." },
+        { "text": "Water-soluble contrast study in adhesive small-bowel obstruction is both prognostic and often therapeutic." },
+        { "text": "Serial lactate if strangulation is a possibility. A rising lactate in this setting is a decision, not a data point." }
+      ],
+      "calcs": ["fena", "kdigo_aki", "news2", "asa"]
+    },
+
+    "cholecystitis": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "tg18", "org": "Tokyo Guidelines Steering Committee", "title": "Tokyo Guidelines 2018 (TG18): diagnostic criteria and severity grading of acute cholecystitis", "year": 2018, "version": "TG18", "url": "https://onlinelibrary.wiley.com/journal/18686982", "accessed": "2026-08-24" },
+        { "id": "wses-acc", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines on acute calculous cholecystitis", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Ultrasound is first-line: wall thickening, pericholecystic fluid, stones, and a sonographic Murphy sign.", "evidenceRef": "wses-acc" },
+        { "text": "FBC, CRP, LFT, amylase. A rising bilirubin or alkaline phosphatase points at the duct, not the gallbladder.", "evidenceRef": "tg18" },
+        { "text": "MRCP when the duct is suspected and the picture is not frank cholangitis.", "evidenceRef": "tg18" },
+        { "text": "Grade severity formally: it changes whether this is an early cholecystectomy, a drainage, or an intensive-care admission.", "evidenceRef": "tg18" }
+      ],
+      "calcs": ["qsofa", "news2", "asa", "rcri"]
+    },
+
+    "cholangitis": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "tg18-ac", "org": "Tokyo Guidelines Steering Committee", "title": "Tokyo Guidelines 2018 (TG18): diagnostic criteria and severity grading of acute cholangitis", "year": 2018, "version": "TG18", "url": "https://onlinelibrary.wiley.com/journal/18686982", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Blood cultures before the first antibiotic dose: bacteraemia is common and the isolate changes therapy." },
+        { "text": "LFT, coagulation, lactate, FBC, U&E." },
+        { "text": "Ultrasound first; MRCP or endoscopic ultrasound when the level of obstruction is unclear." },
+        { "text": "Grade severity formally. Grade III is the trigger for urgent drainage rather than a planned one." }
+      ],
+      "calcs": ["qsofa", "sofa", "news2", "childpugh"]
+    },
+
+    "liver_abscess": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Ultrasound then contrast CT to size, count and localise. Left-lobe and subcapsular collections behave differently." },
+        { "text": "Amoebic serology alongside blood cultures. In India the pyogenic-versus-amoebic split changes the whole plan." },
+        { "text": "Aspirate for culture when drainage is being done anyway; do not aspirate purely for diagnosis in a small abscess responding to therapy." }
+      ],
+      "calcs": ["childpugh", "qsofa", "news2"]
+    },
+
+    "colitis": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Daily abdominal radiograph while the colon is dilated: transverse colonic diameter is the number surgery tracks." },
+        { "text": "Stool culture and Clostridioides difficile testing before assuming inflammatory bowel disease." },
+        { "text": "CRP, albumin, lactate, FBC daily. A falling albumin with a rising CRP is the deterioration nobody notices." },
+        { "text": "CT if perforation, abscess or ischaemia is suspected." }
+      ],
+      "calcs": ["news2", "qsofa", "sofa"]
+    },
+
+    "hernia": {
+      "category": "abdomen",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "wses-hernia", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for emergency repair of complicated abdominal wall hernias", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Clinical diagnosis. Imaging is for doubt, not for confirmation of an obvious irreducible tender lump." },
+        { "text": "CT when the lump is equivocal, obese habitus, or a Richter or obturator hernia is possible." },
+        { "text": "Lactate, FBC, U&E and group and save if there is any suspicion of compromised bowel." }
+      ],
+      "calcs": ["asa", "rcri", "caprini"]
+    },
+
+    "nec_sti": {
+      "category": "infection",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "idsa-ssti", "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "This is a clinical and operative diagnosis. Do not delay exploration for any test." },
+        { "text": "Bloods and lactate are for resuscitation and critical-care planning, not for deciding whether to operate." },
+        { "text": "Imaging only if it will not delay theatre and the diagnosis is genuinely uncertain. Gas on a film supports the diagnosis; its absence excludes nothing." }
+      ],
+      "calcs": ["sofa", "qsofa", "news2", "apache2"]
+    },
+
+    "abscess": {
+      "category": "infection",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "idsa-ssti", "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Pus for culture at the time of drainage. A surface swab of intact skin answers a different question." },
+        { "text": "Ultrasound when fluctuance is uncertain, the collection is deep, or the patient is obese." },
+        { "text": "MRI for suspected ischiorectal, supralevator or horseshoe extension of a perianal abscess." },
+        { "text": "Capillary glucose and HbA1c: an abscess is often how diabetes presents." }
+      ],
+      "calcs": ["news2", "qsofa"]
+    },
+
+    "cellulitis": {
+      "category": "infection",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "idsa-ssti", "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Mark the margin with a pen and date it. That single act is worth more than most of the bloods." },
+        { "text": "Ultrasound if a drainable collection is possible: antibiotics do not drain an abscess." },
+        { "text": "Blood cultures only when systemically unwell, immunocompromised, or after immersion or animal exposure." },
+        { "text": "Look for the portal of entry - interdigital tinea, a venous ulcer, a bite - and treat it, or it recurs." }
+      ],
+      "calcs": ["news2", "qsofa", "crcl"]
+    },
+
+    "wound_infection": {
+      "category": "infection",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "who-ssi", "org": "World Health Organization", "title": "Global guidelines for the prevention of surgical site infection, 2nd edition", "year": 2018, "url": "https://www.who.int/publications/i/item/9789241550475", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Deep specimen at the time of opening or drainage. A superficial swab grows colonisers and misdirects therapy." },
+        { "text": "Ultrasound or CT for a suspected deep or organ-space collection: the outside can look almost normal." },
+        { "text": "CRP trend after day three is the most useful single number in post-operative infection." },
+        { "text": "Glucose control and nutritional status are part of the investigation, not an afterthought." }
+      ],
+      "calcs": ["news2", "qsofa", "crcl"]
+    },
+
+    "diabetic_foot": {
+      "category": "infection",
+      "review": { "status": "ai_drafted" },
+      "updated": "2026-08-24",
+      "nextReviewDue": "2027-02-28",
+      "sources": [
+        { "id": "iwgdf", "org": "International Working Group on the Diabetic Foot (IWGDF) / IDSA", "title": "Guidelines on the diagnosis and treatment of diabetes-related foot infections", "year": 2023, "url": "https://iwgdfguidelines.org/", "accessed": "2026-08-24" }
+      ],
+      "investigate": [
+        { "text": "Probe-to-bone at the bedside, then a plain radiograph; MRI when osteomyelitis is suspected and the film is normal." },
+        { "text": "Assess perfusion in every case: pedal pulses, ankle-brachial index, toe pressures. Infection does not clear an ischaemic foot." },
+        { "text": "Deep tissue or bone specimen for culture, not a superficial swab." },
+        { "text": "HbA1c, renal function and albumin. Renal function also decides the antibiotic dose.", "calcs": ["crcl"] }
+      ],
+      "calcs": ["crcl", "news2", "qsofa"]
+    }
+  }
+}
