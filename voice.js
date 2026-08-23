@@ -78,8 +78,10 @@
     if (lang === "te") return "telugu-small-q8_0";
     // Unknown language (Auto, before the first chunk is detected): open on the Telugu specialist on EVERY
     // tier. MEASURED (real Telugu consult audio): the multilingual small hallucinates repeated-syllable
-    // garbage on Telugu, while the specialist transcribes it near-perfectly AND still auto-detects/decodes
-    // English. So a Telugu opening is captured immediately; detection then routes the NEXT chunk below.
+    // garbage on Telugu, while the specialist transcribes it near-perfectly.
+    // CORRECTION (measured on the shipped q8_0 weights): the specialist does NOT safely "auto-detect"
+    // — decoding it with language "auto" produces invalid UTF-8 (the U+FFFD wall seen on device).
+    // listen() below pins the decode language to "te" whenever this model is chosen.
     if (!lang || lang === "auto") return "telugu-small-q8_0";
     // English / Hindi:
     // large-v3-turbo (~547MB) is Metal-fast on iOS but too slow on the Android CPU-only build, so
@@ -138,6 +140,26 @@
   }
 
   /* ------------------------------ capture ------------------------------ */
+  // CORRUPT-TRANSCRIPT GUARD. Whisper emits byte-level BPE fragments; when the decoder is forced into
+  // the wrong language (e.g. auto-detect on a single-language fine-tune) it produces byte sequences
+  // that are not valid UTF-8, and the native layer repairs each bad byte to U+FFFD (the "◇?" wall).
+  // Such a transcript is pure noise, and the scribe prompt tells the LLM to "reconstruct the intended
+  // clinical meaning" from garbled ASR -> it CONFABULATES a plausible consultation that then folds
+  // into the EMR. Patient safety: drop the chunk at the source instead, so nothing downstream (the
+  // VoiceNote display, the accumulated transcript, the LLM extract, the saved note) ever sees it.
+  function garbledRatio(t) {
+    t = String(t || ""); if (!t.length) return 0;
+    return t.replace(/[^�]/g, "").length / t.length;
+  }
+  // >=20% replacement chars over a non-trivial string = decoder garbage, not speech. A clean
+  // transcript has none, so this never trips on real Telugu/Hindi/English text.
+  function isGarbled(t) { t = String(t || "").trim(); return t.length >= 8 && garbledRatio(t) >= 0.2; }
+  // Wrap a transcript callback so a garbled chunk is swallowed (never forwarded downstream).
+  function dropGarbled(fn) {
+    if (typeof fn !== "function") return fn;
+    return function (t) { if (isGarbled(t)) { try { console.warn("[SV] dropped garbled chunk", garbledRatio(t)); } catch (e) {} return; } return fn.apply(this, arguments); };
+  }
+
   var _active = null;   // { engine, mode:'stream'|'record', stop }
   function stop() { if (_active && _active.stop) { try { _active.stop(); } catch (e) {} } _active = null; }
 
@@ -150,9 +172,18 @@
     if (opts.engine === "clinical") {
       if (whisperAvailable()) {
         try {
+          var reqLang = opts.language || WHISPER_LANG;
+          var wModel = opts.model || whisperModel(reqLang);
+          // LANGUAGE/MODEL COHERENCE. whisper.cpp treats language "auto" as *auto-detection*
+          // (src/whisper.cpp: language==nullptr || "auto" || detect_language -> whisper_lang_auto_detect).
+          // The Telugu specialist is a SINGLE-LANGUAGE fine-tune, so its detection head is unreliable:
+          // it can land on the wrong language token and the decoder then emits invalid-UTF-8 byte-BPE
+          // garbage (U+FFFD wall) instead of Telugu. Auto routes to that specialist (whisperModel()),
+          // so pin the decode language to the language the weights were actually fine-tuned for.
+          var decodeLang = (wModel === "telugu-small-q8_0" && (!opts.language || opts.language === "auto")) ? "te" : reqLang;
           var wstop = window.SMD_NATIVE.transcribeWhisper({
-            language: (opts.language || WHISPER_LANG), model: opts.model || whisperModel(opts.language || WHISPER_LANG), initialPrompt: opts.initialPrompt || buildInitialPrompt(opts.language || WHISPER_LANG),
-            onPartial: opts.onPartial, onFinal: opts.onFinal,
+            language: decodeLang, model: wModel, initialPrompt: opts.initialPrompt || buildInitialPrompt(reqLang),
+            onPartial: dropGarbled(opts.onPartial), onFinal: dropGarbled(opts.onFinal),
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }
           });
@@ -733,5 +764,6 @@
   window.SMD_VOICE = { listen: listen, stop: stop, openDialog: openDialog, modelSettingsHTML: modelSettingsHTML, wireModelSettings: wireModelSettings,
     pickModel: function (lang) { return whisperModel(lang); },                      // which on-device model a language routes to (tier-aware)
     modelCode: function (k) { return MODEL_CODE[k] || k; },                          // branded short code (SV-Telugu / SV-Ultra / …)
+    isGarbled: isGarbled,                                                            // corrupt-decoder guard (exposed for tests)
     available: function () { return { native: !!(window.SMD_NATIVE && window.SMD_NATIVE.transcribe), webspeech: !!(window.SpeechRecognition || window.webkitSpeechRecognition) && !isIOS(), aistt: !!(navigator.mediaDevices && navigator.mediaDevices.getUserMedia && window.MediaRecorder), whisper: whisperAvailable() }; } };
 })();

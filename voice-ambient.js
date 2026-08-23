@@ -181,6 +181,11 @@
       // DECODE language = "auto" in Auto mode so ONE person speaking a mixed Telugu+English+Hindi
       // utterance is transcribed in whichever language actually dominates that window (Whisper
       // auto-detects) instead of being force-decoded as a single language. Forced EN/TE keep their hint.
+      // CAVEAT (measured on the real q8_0 weights, same clip, only the flag changed): "auto" on the
+      // Telugu SPECIALIST yields INVALID UTF-8 ("�లో …", U+FFFD wall on device) while "te" yields
+      // clean Telugu ("హలో …"). whisper.cpp reads "auto" as auto-DETECTION, and a single-language
+      // fine-tune detects badly. SMD_VOICE.listen() therefore pins auto->te whenever it resolves the
+      // specialist; leaving "auto" here is still correct for the multilingual weights.
       var routedModel = opts.model || (root.SMD_VOICE.pickModel ? root.SMD_VOICE.pickModel(effLang) : undefined);
       var decodeLang = (reqLang === "auto") ? "auto" : reqLang;
       // Tell the caller which on-device model this chunk will use (for the "which model" chip).
