@@ -223,11 +223,28 @@ final class WhisperEngine {
         let ret: Int32 = audio.withUnsafeBufferPointer { buf in
             whisper_full(liveCtx, params, buf.baseAddress, Int32(buf.count))
         }
-        var text = ""
+        // MOJIBAKE FIX: accumulate the segments' RAW BYTES and decode ONCE at the end.
+        // whisper.cpp emits byte-level BPE, so a multi-byte character (any Indic script — Telugu
+        // హ is e0 b0 b9) can straddle a segment boundary: segment N ends with `e0 b0` and segment
+        // N+1 begins with the bare continuation byte `b9`. Decoding EACH segment separately (the
+        // old `text += String(cString: c)`) makes both halves individually invalid UTF-8, and
+        // Swift's repairing initialiser replaces them with U+FFFD — the "◇?" wall in the OPD
+        // Scribe VoiceNote. MEASURED: `whisper_full_get_segment_text` returned a leading `b9`
+        // exactly where `e0 b0 b9` belonged. Android already does it this way (whisper_jni.cpp
+        // accumulates into a std::string and calls NewStringUTF once); iOS now matches.
+        var bytes: [UInt8] = []
         if ret == 0 {
             let n = whisper_full_n_segments(liveCtx)
-            if n > 0 { for i in 0..<n { if let c = whisper_full_get_segment_text(liveCtx, i) { text += String(cString: c) } } }
+            if n > 0 {
+                for i in 0..<n {
+                    if let c = whisper_full_get_segment_text(liveCtx, i) {
+                        var p = c
+                        while p.pointee != 0 { bytes.append(UInt8(bitPattern: p.pointee)); p += 1 }
+                    }
+                }
+            }
         }
+        let text = String(decoding: bytes, as: UTF8.self)
         ctxLock.unlock()
         if cancelled { return }
         if ret != 0 { onError?(.transcriptionFailure, "whisper_full \(ret)"); return }
