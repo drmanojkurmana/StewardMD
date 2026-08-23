@@ -1570,20 +1570,29 @@
       vivaSubmitVoiceAnswer();
     }
     function onPartial(t) { state.vivaPartial = String(t || ""); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
-    state.vivaListenHandle = SMD_VOICE.listen({
+    function fail() { state.vivaListening = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); }
+    // SMD_VOICE.listen({engine:"clinical"}) calls onError SYNCHRONOUSLY (before it returns) when
+    // Whisper isn't built for this platform - true on every Android device today. That means the
+    // fallback started inside onError below already ran, and state.vivaListenHandle is already
+    // correctly set (or fail() already toasted), by the time this outer call returns null. The
+    // old code assigned that null straight into state.vivaListenHandle here, clobbering the
+    // fallback's real handle and toasting "unavailable" even though native STT had just started
+    // listening - orphaned, with no stop handle, and the mic UI wrongly showing off. Guard the
+    // assignment on truthiness so a genuine (non-Android) clinical success is still recorded, and
+    // a synchronous failure never overwrites what onError already decided.
+    var handle = SMD_VOICE.listen({
       engine: "clinical", language: "en", noCloud: true,
       onPartial: onPartial, onFinal: onFinal,
       onError: function (why) {
         if (why === "clinical-unavailable") {
-          state.vivaListenHandle = SMD_VOICE.listen({ language: "en", noCloud: true, onPartial: onPartial, onFinal: onFinal, onError: function () { state.vivaListening = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); } });
-          if (state.vivaListenHandle) return;
+          var fh = SMD_VOICE.listen({ language: "en", noCloud: true, onPartial: onPartial, onFinal: onFinal, onError: fail });
+          if (fh) state.vivaListenHandle = fh; else fail();
+          return;
         }
-        state.vivaListening = false; state.vivaListenHandle = null;
-        toast("Could not hear that - try again or type your answer");
-        repaint();
+        fail();
       }
     });
-    if (!state.vivaListenHandle) { state.vivaListening = false; toast("Voice input is not available on this device"); repaint(); }
+    if (handle) state.vivaListenHandle = handle;
   }
 
   // Spoken final answer submits directly - a real oral viva does not pause for the student to
