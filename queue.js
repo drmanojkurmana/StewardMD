@@ -621,18 +621,29 @@
   // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
   function openAssessment(ticketId) { openTicketEmr(ticketId, "assess"); }
   function openAdd() {
-    var name = prompt("Patient name?"); if (name == null) return;
-    // Workplace-aware wording. Anything typed here is stored server-side as ghisPatientId
-    // (functions/_queue_engine.js), so asking a personal-clinic doctor for a "GHIS MR number" invited
-    // the exact mix-up that used to bounce them to the Ward Sync sign-in. A clinic patient needs no MRN:
-    // the clinic assigns SMD-<code>-nnn itself.
-    var mrn = prompt(inClinicWorkplace()
-      ? "Hospital MR number (optional - leave blank, your clinic assigns its own ID)?"
-      : "GHIS MR number (enables EMR profile + assessment for this patient)?") || "";
-    var mobile = prompt("Mobile (optional)?") || "";
-    var vt = (prompt("Visit type: new / followup", "new") || "new").toLowerCase();
-    act(st.session.id, "/ticket", { name: name, mrn: mrn, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
+    // The check-in sheet (patient-register.js) is shared with the staff web console, so the two can
+    // never drift apart again. It replaced four sequential prompt() boxes. The SERVER validates and
+    // issues the MR number - this only carries the answers and renders the field errors it returns.
+    if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
+    var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : "native"));
+    G.SMD_PATIENTREG.open({
+      mode: mode,
+      clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
+      submit: function (body) {
+        body.orgId = st.orgId || st.hospital || "";
+        body.workplaceMode = mode;
+        return apiPost("/patient/register", body);
+      },
+      onAdded: function (r) {
+        // Registered -> put them in THIS doctor's queue with the identity we just created.
+        act(st.session.id, "/ticket", {
+          name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
+          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
+        });
+      }
+    });
   }
+
 
   // ---- OPD entry chooser: Doctor vs Staff; Doctor -> My clinic (StewardMD) vs Hospital (GITAM/GHIS) ----
   function _wrap(inner) {
