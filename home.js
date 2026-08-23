@@ -1495,10 +1495,10 @@
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
     maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
     // CliniX mark: an interlocking C+X monogram, self-authored inline SVG (no hosted asset).
-    clinix: '<svg viewBox="0 0 100 70" width="30" height="21"><defs><linearGradient id="cxLogoGradHome" x1="0" y1="0" x2="100" y2="70">' +
-      '<stop offset="0" stop-color="#1b3a52"/><stop offset="1" stop-color="#2fb8b0"/></linearGradient></defs>' +
-      '<path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="url(#cxLogoGradHome)" stroke-width="9" stroke-linecap="round"/>' +
-      '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="url(#cxLogoGradHome)" stroke-width="9" stroke-linecap="round"/></svg>'
+    // Solid white, not the gradient used on light backgrounds - this badge is dark teal, and the
+    // gradient's navy-to-teal range is nearly invisible against it.
+    clinix: '<svg viewBox="0 0 100 70" width="30" height="21"><path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>' +
+      '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);

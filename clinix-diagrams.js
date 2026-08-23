@@ -390,7 +390,7 @@
   /* ── 14. Liver palpation: the preferred (bimanual) method, animated ──────── */
 
   function liverPalp() {
-    return '<svg class="cx-dia cx-dia--anim" viewBox="0 0 340 210" role="img" aria-label="Preferred method of liver palpation, hands rising to meet the descending edge on inspiration">' +
+    return '<svg class="cx-dia cx-dia--anim" viewBox="0 0 340 222" role="img" aria-label="Preferred method of liver palpation, hands rising to meet the descending edge on inspiration">' +
       '<rect class="cx-dia-skin" x="20" y="70" width="300" height="110" rx="14"/>' +
       '<path class="cx-dia-liver" d="M180 76 C230 70 280 78 296 96 L296 130 C260 118 210 116 182 126 Z"/>' +
       '<text class="cx-dia-lbl cx-dia-lbl--copd" x="216" y="100">liver</text>' +
@@ -399,7 +399,8 @@
         '<text class="cx-dia-lbl cx-dia-lbl--normal" x="160" y="178">both hands flat, fingers towards the ribs</text>' +
       "</g>" +
       '<path class="cx-dia-press" d="M228 190 L228 168" marker-end="url(#cxArrow)"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="184" y="204">ask for a deep breath; the edge meets the fingertips</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="20" y="200">ask for a deep breath;</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--mute" x="20" y="212">the edge meets the fingertips</text>' +
       '<defs><marker id="cxArrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto">' +
         '<path d="M0 0 L10 5 L0 10 z" class="cx-dia-arrowhead"/></marker></defs>' +
       "</svg>" +
@@ -418,7 +419,8 @@
       '<text class="cx-dia-lbl cx-dia-lbl--mute" x="60" y="54">tucked under the ribs</text>' +
       '<path class="cx-dia-spleenpath" d="M120 60 C150 100 190 140 230 172"/>' +
       '<circle class="cx-dia-air cx-dia-air--trapped" cx="230" cy="172" r="10"/>' +
-      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="200" y="192">enlarges towards the right iliac fossa</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="150" y="190">enlarges towards</text>' +
+      '<text class="cx-dia-lbl cx-dia-lbl--copd" x="150" y="202">the right iliac fossa</text>' +
       '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="150">sweep the palpating hand</text>' +
       '<text class="cx-dia-lbl cx-dia-lbl--normal" x="26" y="164">diagonally along this line</text>' +
       "</svg>" +

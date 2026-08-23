@@ -15,10 +15,11 @@
 
   function ic(n) { return '<span class="material-symbols-rounded" aria-hidden="true">' + n + "</span>"; }
   // Self-authored inline SVG logomark (interlocking C+X), matches the one in home.js's ANIM_ICON.
-  var CX_LOGO_MARK = '<svg class="cx-hero-logo" viewBox="0 0 100 70" width="34" height="24" aria-hidden="true"><defs><linearGradient id="cxLogoGradHero" x1="0" y1="0" x2="100" y2="70">' +
-    '<stop offset="0" stop-color="#1b3a52"/><stop offset="1" stop-color="#2fb8b0"/></linearGradient></defs>' +
-    '<path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="url(#cxLogoGradHero)" stroke-width="9" stroke-linecap="round"/>' +
-    '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="url(#cxLogoGradHero)" stroke-width="9" stroke-linecap="round"/></svg>';
+  // Solid white, not a gradient - .cx-hero is a dark teal banner, and a navy-to-teal gradient
+  // is nearly invisible against it.
+  var CX_LOGO_MARK = '<svg class="cx-hero-logo" viewBox="0 0 100 70" width="34" height="24" aria-hidden="true">' +
+    '<path d="M40 12 A23 23 0 1 0 40 58" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/>' +
+    '<path d="M34 16 L64 54 M64 16 L34 54" fill="none" stroke="#fff" stroke-width="9" stroke-linecap="round"/></svg>';
   function esc(s) {
     return String(s == null ? "" : s).replace(/[&<>"']/g, function (c) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c];
@@ -509,7 +510,10 @@
 
   function showTurn(t) {
     var m = C().media(state.built, t.media);
-    var head = '<div class="cx-eyebrow">' + esc(m ? mediaVerb(m.kind) : "Look first") + "</div>";
+    // A secondary media turn plays AFTER the quiz (compileLesson appends extra media at the very
+    // end rather than burying it), so it must not claim to come "first" - that is simply false here.
+    var verb = t.secondary ? "Also worth watching" : (m ? mediaVerb(m.kind) : "Look first");
+    var head = '<div class="cx-eyebrow">' + esc(verb) + "</div>";
     if (!m) {
       return head + '<div class="cx-media cx-media--pending">' + ic("videocam_off") +
         '<div class="cx-media-cap">A demonstration for this step has not been added yet.</div></div>';

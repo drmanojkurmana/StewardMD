@@ -73,7 +73,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx13">
 <link rel="stylesheet" href="/insulin.css?v=ins11">
-<link rel="stylesheet" href="/clinix.css?v=cx11">
+<link rel="stylesheet" href="/clinix.css?v=cx12">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1584,7 +1584,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=mainmerge1-clinix2" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=mainmerge1-clinix3" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1744,15 +1744,15 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx11" defer></script>
-<script src="/clinix-model.js?v=cx11" defer></script>
-<script src="/clinix-content.js?v=cx11" defer></script>
-<script src="/clinix-diagrams.js?v=cx11" defer></script>
-<script src="/clinix-audio.js?v=cx11" defer></script>
-<script src="/clinix-store.js?v=cx11" defer></script>
-<script src="/clinix-tutor.js?v=cx11" defer></script>
-<script src="/clinix-screens.js?v=cx11" defer></script>
-<script src="/clinix.js?v=cx11" defer></script>
+<script src="/clinix-flags.js?v=cx12" defer></script>
+<script src="/clinix-model.js?v=cx12" defer></script>
+<script src="/clinix-content.js?v=cx12" defer></script>
+<script src="/clinix-diagrams.js?v=cx12" defer></script>
+<script src="/clinix-audio.js?v=cx12" defer></script>
+<script src="/clinix-store.js?v=cx12" defer></script>
+<script src="/clinix-tutor.js?v=cx12" defer></script>
+<script src="/clinix-screens.js?v=cx12" defer></script>
+<script src="/clinix.js?v=cx12" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
 <script src="/insulin-flags.js?v=ins12" defer></script>
