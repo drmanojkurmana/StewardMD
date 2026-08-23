@@ -73,6 +73,16 @@ CliniX follows **RadioAnatome** instead (`atlas/` + `atlas.js:308-323` + `atlas-
 catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared sources.
 
 ## Gotchas
+- **BUMP THE `?v=` TOKEN OF EVERY EXISTING FILE YOU EDIT.** This shipped to a real device and looked
+  like a total failure. CliniX lives in NEW files, so their fresh `?v=cx1` URLs were never cached and
+  loaded fine. But its two entry points are EDITS to existing files: the home tile in `home.js` and
+  the Settings toggle in `sidebar-redesign.js` (plus the tutor's `mode` passthrough in
+  `reasoning.js`). `sw.js:6` caches static assets **keyed on the full URL including the query
+  string**, so an unchanged `?v=` means the service worker serves the pre-CliniX copy forever. The
+  symptom is maximally misleading: the module is present and working on the device, and there is
+  simply no tile and no toggle to reach it with. Bumping `sw.js` `CACHE` does NOT save you, because
+  the old worker is still the one answering. `scripts/verify-clinix-bundle.sh` now fails if any of
+  those three tokens lacks a `clinix` marker.
 - **`scripts/build-www.sh` needs the explicit `cp -R clinix`** (root `*.js`/`*.css` are globbed, data
   dirs are not). Without it the tile appears and every pathway renders empty on the device - exactly
   the `kb/onco` bug recorded in that file's own comments.

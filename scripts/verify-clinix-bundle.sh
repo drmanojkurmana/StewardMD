@@ -33,6 +33,19 @@ n=$(grep -c 'clinix.*\.js?v=' "$WWW/index.html" 2>/dev/null || echo 0)
 grep -q 'clinix\.css?v=' "$WWW/index.html" && say "index.html css link" "ok" || bad "index.html css link" "add the <link>"
 grep -q 'act: "clinix"' "$WWW/home.js" && say "home tile (HOME_TOOLS)" "ok" || bad "home tile" "home.js ACT + HOME_TOOLS"
 grep -q 'id: "clinix"' "$WWW/sidebar-redesign.js" && say "Settings toggle" "ok" || bad "Settings toggle" "sidebar-redesign.js TOGGLES"
+# CliniX lives in NEW files (fresh ?v=, never cached) but its two entry points - the home tile and
+# the Settings toggle - are edits to EXISTING files. sw.js caches static assets keyed on the full
+# URL INCLUDING the query string, so an unchanged ?v= means the old copy is served forever: the
+# module loads, and the tile and toggle simply never appear. That shipped once. These assert the
+# hosting files carry a CliniX-bumped token.
+for hostfile in home.js sidebar-redesign.js reasoning.js; do
+  tok=$(grep -o "$hostfile?v=[^\"']*" "$WWW/index.html" 2>/dev/null | head -1)
+  case "$tok" in
+    *clinix*) say "$hostfile token" "${tok#*?v=}" ;;
+    "")       bad "$hostfile token" "not referenced in index.html" ;;
+    *)        bad "$hostfile ?v= NOT bumped" "SW will serve the pre-CliniX copy (${tok#*?v=})" ;;
+  esac
+done
 say "sw.js CACHE" "$(grep -o 'stewardmd-nb[^\"]*' "$WWW/sw.js" 2>/dev/null || echo '?')"
 say "clinix/ payload" "$(du -sh "$WWW/clinix" 2>/dev/null | cut -f1)"
 
