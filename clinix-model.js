@@ -324,6 +324,30 @@
           if (!skills[ek]) e.push("disease " + str(d.id) + " emphasises unknown skill '" + ek + "'");
         }
       }
+      // OSCE station / viva pool / case exam skill refs used to be checked only by hand-written
+      // node tests (easy to forget for a new disease), and stationFor()/vivaFor() silently drop a
+      // bad id rather than erroring - a typo just quietly shrinks a station/viva/case with no
+      // signal to the author or student. Fold the same reference check the chapters get above into
+      // the one shared gate every disease already goes through.
+      var stations = (d && d.osce && d.osce.stations) || [];
+      for (var oi = 0; oi < stations.length; oi++) {
+        var stSkills = stations[oi].skills || [];
+        for (var osi = 0; osi < stSkills.length; osi++) {
+          if (!skills[stSkills[osi]]) e.push("disease " + str(d.id) + " OSCE station '" + str(stations[oi].id) + "' references unknown skill '" + stSkills[osi] + "'");
+        }
+      }
+      var vivaSkills = (d && d.viva && d.viva.skills) || [];
+      for (var vi = 0; vi < vivaSkills.length; vi++) {
+        if (!skills[vivaSkills[vi]]) e.push("disease " + str(d.id) + " viva pool references unknown skill '" + vivaSkills[vi] + "'");
+      }
+      var cases = isArr(d && d.cases) ? d.cases : [];
+      for (var cai = 0; cai < cases.length; cai++) {
+        var exam = cases[cai].exam || {};
+        for (var exk in exam) {
+          if (!Object.prototype.hasOwnProperty.call(exam, exk)) continue;
+          if (!skills[exk]) e.push("disease " + str(d.id) + " case " + cai + " exam references unknown skill '" + exk + "'");
+        }
+      }
     }
     return { ok: e.length === 0, errors: e };
   }
@@ -512,6 +536,11 @@
       items: items,
       maxScore: items.reduce(function (a, b) { return a + b.weight; }, 0),
       criticalCount: criticalCount,
+      // Every station used to be graded at the same hardcoded 50%, regardless of stakes, with
+      // criticalCount computed but never used to inform it. Rather than invent an unvalidated
+      // scaling formula, this is now a per-station author lever (opts.passMark) - a high-stakes
+      // station can be authored with a stricter bar; the default stays 50 for every existing one.
+      passMark: typeof opts.passMark === "number" ? opts.passMark : 50,
       examinerQuestions: opts.examinerQuestions || []
     };
   }
@@ -534,7 +563,7 @@
     var pct = station.maxScore ? Math.round((score / station.maxScore) * 100) : 0;
     return {
       score: score, maxScore: station.maxScore, pct: pct,
-      passed: pct >= 50 && missedCritical.length === 0,
+      passed: pct >= (typeof station.passMark === "number" ? station.passMark : 50) && missedCritical.length === 0,
       failedOnCritical: missedCritical.length > 0,
       missedCritical: missedCritical, missed: missed,
       perSkill: perSkill
@@ -689,7 +718,12 @@
       diagnosis: { correct: dxRes.correct === true, given: taken.diagnosis || "" },
       // The overall read is a judgement, not an average: the diagnosis is necessary but not
       // sufficient, and a student who never asked the key questions has not passed the encounter.
-      verdict: (dxRes.correct === true && histKey.length > 0 && keyHit >= Math.ceil(histKey.length * 0.6) && examHit > 0)
+      // Examination and investigations use the SAME 60% bar as history (examHit>0/no gate at all
+      // used to let one exam tap, or zero investigations ordered, still read as "Well worked up" -
+      // a student could skip the confirmatory test entirely and still pass).
+      verdict: (dxRes.correct === true && histKey.length > 0 && keyHit >= Math.ceil(histKey.length * 0.6)
+        && examHit >= (examTotal > 0 ? Math.ceil(examTotal * 0.6) : 0)
+        && essHit >= (essential.length > 0 ? Math.ceil(essential.length * 0.6) : 0))
         ? "good"
         : (dxRes.correct === true ? "right-answer-thin-workup" : "incomplete")
     };
@@ -713,9 +747,14 @@
     var accept = isArr(probe.accept) ? probe.accept : [];
     if (!accept.length) return { correct: null, matched: [], missed: [], needsJudge: true };
     var g = normalizeAnswer(given), matched = [], missed = [];
+    // Pad so a term matches whole words only, same fix as matchAsk() above: unpadded substring
+    // matching let "no" fire inside "know"/"normal"/"known", so "I honestly do not know" was
+    // scored correct on a probe expecting "no". A short accept term is common (yes/no/left/right)
+    // and every one of them is a substring-collision risk without this.
+    var padded = " " + g + " ";
     for (var i = 0; i < accept.length; i++) {
       var term = normalizeAnswer(accept[i]);
-      if (term && g.indexOf(term) >= 0) matched.push(accept[i]); else missed.push(accept[i]);
+      if (term && padded.indexOf(" " + term + " ") >= 0) matched.push(accept[i]); else missed.push(accept[i]);
     }
     var need = typeof probe.minMatch === "number" ? probe.minMatch : Math.ceil(accept.length / 2);
     return { correct: matched.length >= need, matched: matched, missed: missed, need: need };

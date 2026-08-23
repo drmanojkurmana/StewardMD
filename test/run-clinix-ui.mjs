@@ -519,6 +519,32 @@ try {
   ok((await ev("!!document.querySelector('#clinixRoot .cx-finding')")) === true,
     "performing an examination reveals its finding");
 
+  // REGRESSION: tapping to reveal an exam finding used to mint free competency (record(..., true))
+  // for every tapped skill on finishCase(), with zero interpretation asked - breaking the "shown is
+  // not known" rule Learn/Viva already enforce for a revealed answer. Drive the case through to the
+  // end and confirm the tapped skill is recorded as SEEN, never CORRECT.
+  const examinedSkillId = await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-exam\"]').getAttribute('data-id')");
+  await ev(`(function(){ try { localStorage.removeItem("smd_clinix_skills_v1"); } catch(e) {} return true; })()`);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");   // -> investigations
+  await sleep(200);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-case-next\"]').click()");   // -> differential
+  await sleep(200);
+  await ev(`(function(){ document.getElementById('cxCaseText').value = 'COPD, heart failure, pneumonia'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
+  await sleep(200);   // -> diagnosis
+  await ev(`(function(){ document.getElementById('cxCaseText').value = 'COPD with an infective exacerbation'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
+  await sleep(200);   // -> management
+  await ev(`(function(){ document.getElementById('cxCaseText').value = 'bronchodilators, steroids, antibiotics'; document.querySelector('#clinixRoot [data-act="cx-case-next"]').click(); return true; })()`);
+  await sleep(300);   // finishCase() runs here
+  const examRecord = await ev(`(function(){
+    const S = window.SMD_CLINIX_PROGRESS;
+    if (!S || !S.get) return null;
+    const r = S.get(${JSON.stringify(examinedSkillId)});
+    return r ? { seen: r.seen, correct: r.correct } : null;
+  })()`);
+  ok(examRecord && examRecord.seen === 1, "the tapped exam skill was recorded as seen");
+  ok(examRecord && examRecord.correct === 0,
+    "REGRESSION: but never as correct - tapping to reveal a finding is not the same as interpreting it");
+
   // Scoring: the guessing case is the one that matters.
   const caseScore = await ev(`(() => {
     const C = window.SMD_CLINIX_CONTENT, M = window.SMD_CLINIX_MODEL;

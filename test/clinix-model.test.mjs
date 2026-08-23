@@ -311,6 +311,17 @@ test("compileStation: builds a checklist from skills, with no station authoring"
   assert.equal(st.maxScore, 2);
   assert.equal(st.criticalCount, 1);
   assert.equal(st.items[0].id, "skill.exam.resp.expansion/consent");
+  assert.equal(st.passMark, 50, "default pass mark, unchanged for every existing station");
+});
+
+test("compileStation: a high-stakes station can author a stricter pass mark", () => {
+  const st = M.compileStation([skill()], { passMark: 70 });
+  assert.equal(st.passMark, 70);
+  const noConsent = M.scoreStation(st, ["skill.exam.resp.expansion/position"]);
+  assert.equal(noConsent.pct, 50);
+  // 50% would have passed the old hardcoded bar; a 70%-authored station correctly still fails it
+  // even setting the critical miss aside.
+  assert.equal(noConsent.passed, false);
 });
 
 test("scoreStation: missing a CRITICAL item fails the station regardless of total", () => {
@@ -387,6 +398,16 @@ test("markAnswer: free text is marked deterministically, offline, without a mode
   assert.equal(M.markAnswer(p, "the lagging side").correct, true);
   assert.equal(M.markAnswer(p, "The LAGGING side!").correct, true, "case and punctuation insensitive");
   assert.equal(M.markAnswer(p, "the opposite side").correct, false);
+});
+
+test("REGRESSION: markAnswer matches whole words only, never a fragment of a longer word", () => {
+  // Found live against a real probe: accept:["no"] marked "I honestly do not know" correct,
+  // because unpadded substring matching let "no" fire inside "know". Same bug class matchAsk()
+  // was already fixed for (see clinix-case.test.mjs's own REGRESSION test).
+  const p = { level: 4, q: "Is there a cerebellar or vestibular cause?", a: "No.", accept: ["no", "cerebellar", "vestibular", "does not apply"], minMatch: 1 };
+  assert.equal(M.markAnswer(p, "I honestly do not know").correct, false, '"know" must not match the term "no"');
+  assert.equal(M.markAnswer(p, "no").correct, true, "a real whole-word match still passes");
+  assert.equal(M.markAnswer(p, "no cerebellar cause").correct, true);
 });
 
 test("markAnswer: a probe with no accept list asks for a judge rather than guessing", () => {

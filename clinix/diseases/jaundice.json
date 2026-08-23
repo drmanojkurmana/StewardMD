@@ -146,11 +146,12 @@
       "title": "Putting the jaundice picture together",
       "oneLine": "Pallor, stigmata, or a palpable gallbladder: the one extra finding that names the mechanism",
       "why": "Jaundice looks identical at first glance whatever its cause. The extra finding alongside it, pallor and splenomegaly, or the stigmata of chronic liver disease, or a painlessly palpable gallbladder, is what actually converts a sign into a working diagnosis at the bedside.",
-      "body": "Combine the jaundice with the rest of the general and abdominal examination, deliberately looking for the one additional finding that would confirm each mechanism.",
+      "body": "Combine the jaundice with the rest of the general and abdominal examination, deliberately looking for the one additional finding that would confirm each mechanism.\n\nA fourth pattern is a genuine emergency: fever with rigors, jaundice, and right upper quadrant pain (Charcot's triad) points to ascending cholangitis, infection ascending an obstructed biliary tree. This is the single most dangerous presentation of obstructive jaundice, and needs urgent recognition and biliary decompression, not routine outpatient workup.",
       "pitfalls": [
         "Examining the sclera and stopping there, without a deliberate search for the one additional finding that discriminates the mechanism.",
         "Missing splenomegaly, which needs deliberate systematic palpation and is easy to skip in a jaundice-focused short case.",
-        "Forgetting to test for Courvoisier's sign in a jaundiced patient with a possible mass."
+        "Forgetting to test for Courvoisier's sign in a jaundiced patient with a possible mass.",
+        "Missing Charcot's triad (fever with rigors, jaundice, right upper quadrant pain) - this is ascending cholangitis, a biliary sepsis emergency, not a routine obstructive-jaundice workup."
       ],
       "probes": [
         {
@@ -186,6 +187,18 @@
             "cholestasis"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A jaundiced patient has fever with rigors and right upper quadrant pain. What is this triad called, and what does it mean?",
+          "a": "Charcot's triad, which points to ascending cholangitis, a biliary sepsis emergency requiring urgent recognition and decompression.",
+          "accept": [
+            "charcot",
+            "cholangitis",
+            "sepsis",
+            "emergency"
+          ],
+          "minMatch": 2
         }
       ],
       "media": [],
@@ -194,7 +207,8 @@
         "Hepatic: moderate jaundice, variable splenomegaly, stigmata of chronic liver disease if the process is chronic, and features of liver cell failure appear EARLY relative to posthepatic causes.",
         "Posthepatic (obstructive): often the most severe (deepest) jaundice, a palpable gallbladder in some cases, bradycardia can occur (from circulating bile salts), splenomegaly is typically absent, and features of liver cell failure are a LATE feature if they appear at all.",
         "A palpably enlarged, non-tender gallbladder in a jaundiced patient (Courvoisier's sign) makes a common bile duct stone unlikely and raises a malignant, smoothly obstructing lesion, classically carcinoma of the head of the pancreas, as the leading cause.",
-        "Bradycardia in an obstructive jaundice is a genuine, examinable finding, thought to relate to circulating bile salts, distinct from the tachycardia more typical of an acute inflammatory hepatic process."
+        "Bradycardia in an obstructive jaundice is a genuine, examinable finding, thought to relate to circulating bile salts, distinct from the tachycardia more typical of an acute inflammatory hepatic process.",
+        "Fever with rigors, jaundice, and right upper quadrant pain (Charcot's triad) is ascending cholangitis, an emergency: infection ascending an obstructed biliary tree needs urgent recognition and biliary decompression, not a routine outpatient workup."
       ],
       "sources": [
         {

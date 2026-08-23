@@ -1076,15 +1076,26 @@
   function finishCase() {
     var r = M().scoreCase(state.caseDef, state.caseTaken);
     state.caseResult = r;
-    // The encounter writes competency for every examination it actually performed, exactly like a
-    // lesson or a station does. One key, three modes.
     if (P()) {
+      // Choosing to examine a relevant finding is a real clinical decision, but tapping to reveal
+      // it demonstrates neither reading nor interpreting it - no question is asked. Record null
+      // ("seen", never "correct"), the same "shown is not known" rule Learn and Viva already use
+      // for a revealed answer, so Case can no longer mint free mastery for a tap.
       for (var i = 0; i < state.caseTaken.examined.length; i++) {
-        P().record(state.caseTaken.examined[i], true, { mode: "case" });
+        P().record(state.caseTaken.examined[i], null, { mode: "case" });
       }
+      // A key history topic never asked is a real gap worth surfacing - but caseDef.history keys
+      // ("smoking", "dyspnea_grade", ...) are case-local topic labels, not skill ids: writing them
+      // straight to the skill table used to fall back to a single hardcoded id
+      // (skill.hx.chief_complaints) for EVERY miss, on EVERY case, corrupting that one shared
+      // skill's competency stats. Only record when the case data explicitly names the real skill
+      // this topic maps to; otherwise the miss still shows in the case-result screen (r.history),
+      // it just does not falsely blame an unrelated skill.
+      var hist = (state.caseDef && state.caseDef.history) || {};
       for (var k = 0; k < r.history.missedKey.length; k++) {
-        // A key question never asked is a real gap, recorded so revision can surface it.
-        P().record("skill.hx.chief_complaints", false, { mode: "case", probe: "Key history topic missed: " + r.history.missedKey[k] });
+        var topic = hist[r.history.missedKey[k]];
+        var sid = topic && topic.skillId;
+        if (sid) P().record(sid, false, { mode: "case", probe: "Key history topic missed: " + r.history.missedKey[k] });
       }
     }
     haptic(r.verdict === "good" ? "success" : "warning");
@@ -1252,7 +1263,7 @@
     show(state.stack[state.stack.length - 1] || "home");
   }
 
-  function closeMod() { stopAudio(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
+  function closeMod() { stopAudio(); vivaStopListening(); try { if (window.CLINIX && CLINIX.close) CLINIX.close(); } catch (e) {} }
 
   /* Audio must never outlive the screen that started it. A breath sound still playing after the
    * student has moved on is disorienting and reads as a bug. */
@@ -1315,6 +1326,10 @@
     state.loading = true;
     go("disease");
     C().loadDisease(id).then(function (built) {
+      // Open A, back out, open B before A's fetch resolves - A's response can land after B's. Only
+      // apply it if this disease is still the one the student is looking at (same guard shape as
+      // vivaAnswer's state.vivaCurrent !== cur check).
+      if (state.diseaseId !== id) return;
       state.loading = false;
       state.built = built;
       if (!built) { toast("Could not load this topic"); back(); return; }
@@ -1623,7 +1638,14 @@
     var s = state.vivaState, cur = state.vivaCurrent;
     if (!cur) return;
     s.asked[cur.key] = 1;
-    s.level = M().adaptLevel(s.level, s.lastAnswer && s.lastAnswer.correct === true, state.viva.maxLevel);
+    var la = s.lastAnswer;
+    // correct===null covers two very different cases: the student explicitly gave up
+    // (revealed:true - demote, same as always) and MaiK could not judge an AI-needed answer
+    // (offline/timeout/quota - not the student's fault, hold the level rather than punish them
+    // for an infrastructure failure they had no control over).
+    if (!(la && la.correct === null && !la.revealed)) {
+      s.level = M().adaptLevel(s.level, la && la.correct === true, state.viva.maxLevel);
+    }
     if (s.level > s.best) s.best = s.level;
     s.lastAnswer = null;
     state.vivaCurrent = M().nextVivaQuestion(state.viva, s);
@@ -1777,7 +1799,9 @@
         state.stationChecked[id] = !state.stationChecked[id];
         haptic("tap"); repaint(); return;
       case "cx-station-finish": finishStation(); return;
-      case "cx-station-retry": startStation(state.stationDef.id); return;
+      case "cx-station-retry":
+        if (!state.stationDef) { toast("Could not restart this station"); back(); return; }
+        startStation(state.stationDef.id); return;
 
       case "cx-dia-focus": state.diaFocus = id; haptic("tap"); repaint(); return;
       case "cx-dia-mode": state.diaMode = id; haptic("tap"); repaint(); return;
@@ -1867,6 +1891,9 @@
     state.chapterId = pos.chapterId;
     state.diseaseId = pos.diseaseId;
     C().loadDisease(pos.diseaseId).then(function (built) {
+      // Same stale-response guard as openDisease(): bail if the student navigated to a different
+      // disease while this fetch was in flight.
+      if (state.diseaseId !== pos.diseaseId) return;
       if (!built) { toast("Could not load that topic"); return; }
       state.built = built;
       state.systemId = built.system.id;

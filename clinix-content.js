@@ -32,6 +32,12 @@
   /* Native asset path. Clone of kardiox-screens.js kxImg(): content stores root-relative paths, and
    * on native they are rewritten to the live origin so heavy media is fetched rather than bundled.
    * assets/kardiox-learn/ alone is 177 MB; CliniX must never repeat that inside the app download. */
+  // Rewrites ONLY /assets/clinix/* - the (currently unused) path for a large, not-bundled CliniX
+  // asset, matching the reason kardiox-learn/ (177 MB) is fetched over HTTPS on native rather than
+  // shipped in the app bundle. Owner-produced media (clinix-*.jpg at the repo root, e.g. the barrel
+  // chest / trigeminal / pallor images) is small and IS bundled offline via build-www.sh's root
+  // *.jpg glob, so it correctly does NOT go through this rewrite - do not "fix" that by moving
+  // those files under /assets/clinix/, which would pull them out of the offline-bundled path.
   function cxMedia(u) {
     try {
       if (u && u.charAt(0) === "/" && u.indexOf("/assets/clinix/") === 0 && G.SMD_IS_NATIVE) {

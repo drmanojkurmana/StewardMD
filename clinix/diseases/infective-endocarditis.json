@@ -115,6 +115,14 @@
       "skills": [
         "skill.present.case"
       ]
+    },
+    {
+      "id": "treatment",
+      "title": "Managing infective endocarditis",
+      "blurb": "Antibiotics, active complication-watching, and knowing when surgery cannot wait",
+      "skills": [
+        "skill.tx.ie"
+      ]
     }
   ],
   "osce": {
@@ -782,6 +790,85 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.tx.ie": {
+      "id": "skill.tx.ie",
+      "kind": "treatment",
+      "system": "cardiovascular",
+      "title": "Managing infective endocarditis",
+      "oneLine": "Prolonged organism-directed antibiotics, watching for embolic and valve-destruction complications, and knowing when surgery cannot wait",
+      "why": "A student who can describe the stigmata but not the management has not actually learned the disease: endocarditis kills through delayed or inadequate treatment of the infection and its mechanical consequences, not through missing the diagnosis alone. The surgical-versus-medical decision, in particular, is time-critical and easy to under-teach if the module stops at diagnosis.",
+      "body": "Two threats run in parallel throughout treatment: the infection itself, and the mechanical damage it is doing to the valve and beyond (heart failure, an intracardiac abscess, and embolic events to the brain, spleen, kidney, or limbs). Both must be actively monitored for, not just the blood cultures.",
+      "keyPoints": [
+        "Blood cultures (three sets from different sites, before antibiotics) are drawn first, and empirical antibiotic therapy is started promptly once cultures are taken, then switched to organism-directed, prolonged (typically several weeks) intravenous therapy once sensitivities return; the specific agent, dose, and duration must follow current guideline recommendations for the identified organism and valve type (native versus prosthetic).",
+        "Monitor actively for embolic phenomena (stroke, splenic or renal infarction, limb ischaemia) and for progressive cardiac damage (new or worsening murmur, heart failure, conduction abnormality from an aortic root abscess extending to the conduction system) throughout treatment, not only at presentation - both can develop despite apparently adequate antibiotic therapy.",
+        "Early cardiothoracic surgical assessment, not just antibiotics, is indicated for: heart failure from valve destruction, uncontrolled infection (persistent bacteraemia or fever despite appropriate antibiotics, a paravalvular abscess), a large mobile vegetation with high embolic risk (particularly after a first embolic event), or fungal or other difficult-to-treat organisms. Recognising these indications promptly is often more important to outcome than the antibiotic choice itself.",
+        "Identify and address the likely portal of entry (dental sepsis, an infected line, a skin source, intravenous drug use) both to guide organism suspicion and because it may need its own treatment.",
+        "Before discharge: dental hygiene review, and a clear discussion of which future procedures need antibiotic prophylaxis under current guidance, since this patient now carries a lifelong elevated risk of a further episode on the damaged or prosthetic valve."
+      ],
+      "pitfalls": [
+        "Waiting for surgery until the patient is too unstable for it - heart failure or an uncontrolled infection are indications to involve surgery EARLY, not a last resort after medical therapy has clearly failed.",
+        "Treating a normal or falling white cell count as reassurance alone; ongoing fever, new emboli, or a new murmur during treatment all need re-assessment even if inflammatory markers are improving.",
+        "Stopping antibiotics early once the patient feels better - the duration is set by the organism and valve involved, not by symptom resolution.",
+        "Forgetting the portal of entry: missing an infected line or dental source lets the same event happen again."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is drawn BEFORE antibiotics are started in suspected infective endocarditis, and why does the timing matter?",
+          "a": "Blood cultures, ideally three sets from different sites - starting antibiotics first can sterilise the cultures and prevent the organism ever being identified.",
+          "accept": [
+            "blood culture",
+            "before antibiotics"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give two indications for early surgical assessment in infective endocarditis, beyond simply completing antibiotics.",
+          "a": "Heart failure from valve destruction, uncontrolled infection (persistent bacteraemia, paravalvular abscess), or a large mobile vegetation with high embolic risk.",
+          "accept": [
+            "heart failure",
+            "uncontrolled infection",
+            "abscess",
+            "vegetation",
+            "embolic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient on appropriate IV antibiotics for endocarditis develops a new conduction abnormality on ECG. What does this suggest, and what should happen next?",
+          "a": "Extension of infection into the conduction system, classically from an aortic root or paravalvular abscess - this is a red flag for surgery, not just a finding to note and continue antibiotics regardless.",
+          "accept": [
+            "abscess",
+            "conduction",
+            "surgery",
+            "extension"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis management"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: treatment and surgical indications"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: management of infective endocarditis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle only, never a specific antibiotic, dose, or duration. The organism-directed regimen, its duration, and the timing of any surgical intervention must be taken from your current national or institutional guideline and microbiology input at the time of treatment. CliniX does not prescribe."
     }
   }
 }

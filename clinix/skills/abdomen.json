@@ -458,6 +458,9 @@
         },
         {
           "text": "Then palpate DEEPLY, feeling in this order: left kidney, spleen, right kidney, liver, aorta and para-aortic nodes, femoral vessels, bladder, both groins, external genitalia."
+        },
+        {
+          "text": "If peritonism is suspected, test for rebound tenderness LAST, after guarding/rigidity: press slowly and deeply, then release quickly, and ask whether release hurts more than the pressing itself."
         }
       ],
       "normal": "Soft, non-tender throughout, no palpable masses.",
@@ -496,12 +499,18 @@
             ]
           },
           "note": "Distract the patient and talk to them while examining; true guarding relaxes, rigidity does not."
+        },
+        {
+          "heading": "Rebound tenderness completes the triad",
+          "body": "Guarding and rigidity are found on pressing; rebound tenderness is found on RELEASING. Pain that is worse on sudden release than on pressure itself means the inflamed peritoneum is being stretched, and is the third classic sign of peritonism alongside guarding and rigidity.",
+          "note": "Elicit it deliberately and last, once, rather than repeatedly - it is genuinely painful for the patient and does not need to be repeated to be believed."
         }
       ],
       "pitfalls": [
         "Starting over the painful area, guaranteeing a guarded, uninterpretable examination.",
         "Skipping straight to deep palpation without a light, screening pass first.",
-        "Palpating with cold hands, which reflexively tenses the abdominal wall."
+        "Palpating with cold hands, which reflexively tenses the abdominal wall.",
+        "Never testing for rebound tenderness at all, or testing it repeatedly out of habit once a peritonitic picture is already obvious - it is painful and only needs eliciting once."
       ],
       "probes": [
         {
@@ -537,6 +546,18 @@
             "femoral"
           ],
           "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is rebound tenderness, and how does it differ from guarding?",
+          "a": "Pain on sudden RELEASE of pressure, worse than on pressing itself, from stretching an inflamed peritoneum - guarding and rigidity are found on pressing, rebound is found on releasing; together they form the classic triad of peritonism.",
+          "accept": [
+            "rebound",
+            "release",
+            "peritoneum",
+            "peritonism"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -993,6 +1014,7 @@
         }
       ],
       "pitfalls": [
+        "Palpating vigorously or repeatedly on a large, tender liver - deep or repeated palpation of an acutely inflamed or congested liver is uncomfortable and unnecessary once hepatomegaly and tenderness are confirmed.",
         "Calling a palpable edge hepatomegaly without percussing the span.",
         "Using heavy percussion at the lower border, which underestimates the true extent.",
         "Not describing margin, surface and consistency, so the description gives no clue to the cause.",
@@ -1276,6 +1298,7 @@
         }
       ],
       "pitfalls": [
+        "Palpating vigorously or repeatedly on a large, soft, or tender spleen (malaria, infectious mononucleosis, leukaemia) - this carries a real risk of splenic rupture. Palpate gently and stop once splenomegaly is confirmed; do not repeat the manoeuvre to 'double check'.",
         "Concluding 'no splenomegaly' after only the classical method, without trying a second method or Castell's sign.",
         "Forgetting that the spleen must be roughly doubled before it is palpable, so a normal examination does not exclude early enlargement, which is exactly what Castell's percussion is for.",
         "Confusing spleen with left kidney by relying on only one discriminating feature."
@@ -1991,7 +2014,7 @@
         },
         {
           "heading": "Left shoulder tip pain is a specific clue",
-          "body": "Pain in the left upper quadrant radiating to the tip of the left shoulder (Kehr's sign) suggests diaphragmatic irritation from a splenic infarct or, in the right context, splenic rupture, and should be asked about directly rather than left to a general pain question."
+          "body": "Pain in the left upper quadrant radiating to the tip of the left shoulder (Kehr's sign) is classically taught as a sign of splenic rupture (blood irritating the diaphragm), and should prompt urgent evaluation for haemoperitoneum in the right context (trauma, or a known fragile spleen); the same referred-pain mechanism can also occur with a splenic infarct. Ask about it directly rather than leaving it to a general pain question."
         }
       ],
       "pitfalls": [
@@ -2027,9 +2050,9 @@
         {
           "level": 3,
           "q": "A patient with splenomegaly reports pain radiating to the left shoulder tip. What does this suggest?",
-          "a": "Diaphragmatic irritation, classically from a splenic infarct (Kehr's sign), and should prompt urgent evaluation.",
+          "a": "Kehr's sign, diaphragmatic irritation classically taught as a marker of splenic rupture, though it can also occur with a splenic infarct - either way it should prompt urgent evaluation.",
           "accept": [
-            "infarct",
+            "rupture",
             "kehr",
             "diaphragm"
           ],

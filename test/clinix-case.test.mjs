@@ -115,6 +115,28 @@ test("GUESSING IS CAUGHT: the right diagnosis after two questions is not a pass"
   assert.ok(r.history.missedKey.length > 5);
 });
 
+test("REGRESSION: examHit>0 used to be enough to pass - one exam tap, correct dx, full history is not a real workup", () => {
+  const r = M.scoreCase(CASE, {
+    asked: Object.keys(CASE.history),
+    examined: [Object.keys(CASE.exam)[0]],
+    investigated: CASE.essentialInvestigations,
+    diagnosis: "COPD with an infective exacerbation and cor pulmonale"
+  });
+  assert.equal(r.diagnosis.correct, true);
+  assert.equal(r.verdict, "right-answer-thin-workup", "one exam finding out of many must not read as 'good'");
+});
+
+test("REGRESSION: investigations never used to gate the verdict - ordering nothing is not a real workup", () => {
+  const r = M.scoreCase(CASE, {
+    asked: Object.keys(CASE.history),
+    examined: Object.keys(CASE.exam),
+    investigated: [],
+    diagnosis: "COPD with an infective exacerbation and cor pulmonale"
+  });
+  assert.equal(r.diagnosis.correct, true);
+  assert.equal(r.verdict, "right-answer-thin-workup", "skipping every investigation must not read as 'good'");
+});
+
 test("a thorough workup with the WRONG diagnosis reads as incomplete", () => {
   const r = M.scoreCase(CASE, {
     asked: Object.keys(CASE.history),

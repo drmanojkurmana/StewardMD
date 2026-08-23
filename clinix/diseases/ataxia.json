@@ -560,13 +560,15 @@
         "Sensory ataxia: a NARROW-based, high-stepping, stamping gait, with the patient characteristically looking down at their own feet, a SLOW, deliberate stride, and a genuinely positive Romberg's sign, unsteady or falling once the eyes close, having been steady with them open. Vibration and joint position sense are lost together. Look specifically for pseudoathetosis (a slow writhing drift of the outstretched fingers with the eyes closed) and ask about the wash-basin sign and worsening in the dark. Speech and cranial nerve findings are typically absent.",
         "Vestibular ataxia: unsteadiness with a tendency to veer or fall toward the side of the lesion, accompanied by vertigo and, depending on the cause, tinnitus or hearing loss. Nystagmus is present and its fast phase beats AWAY from the side of the lesion. Limb coordination (finger-nose, heel-shin) is typically preserved when tested lying down, which is a useful way to separate it from a cerebellar cause when the two are hard to tell apart on gait alone.",
         "Two further points worth carrying into any viva: gait ataxia from a lesion of the anterior cerebellar vermis can occur with the LIMBS testing almost normally on a couch (heel-shin performed lying down), so a normal heel-shin test does not exclude a cerebellar cause if the gait itself is clearly ataxic; and postural instability and falls are typically an early, prominent feature in sensory ataxia but a comparatively LATE event in a pure cerebellar ataxia.",
-        "A quick worked comparison: a wide-based gait that is no worse with the eyes closed, plus nystagmus and scanning speech, is cerebellar. A narrow-based, foot-watching, stamping gait that is dramatically worse with the eyes closed, with normal speech, is sensory. A gait with vertigo, tinnitus and nystagmus beating away from the bad ear, with normal limb coordination lying down, is vestibular."
+        "A quick worked comparison: a wide-based gait that is no worse with the eyes closed, plus nystagmus and scanning speech, is cerebellar. A narrow-based, foot-watching, stamping gait that is dramatically worse with the eyes closed, with normal speech, is sensory. A gait with vertigo, tinnitus and nystagmus beating away from the bad ear, with normal limb coordination lying down, is vestibular.",
+        "Tempo of onset is a danger signal, the same way it is for stroke or cord compression: a chronic, slowly progressive ataxia (months to years) is worked up routinely, but an ACUTE-onset cerebellar ataxia, especially with headache, vomiting, reduced consciousness, or a new gaze palsy, raises cerebellar haemorrhage or a large cerebellar infarct with swelling. This is a neurosurgical emergency (obstructive hydrocephalus and brainstem compression from a cramped posterior fossa) and needs urgent same-day imaging and neurosurgical input, not a routine outpatient ataxia workup."
       ],
       "pitfalls": [
         "Calling any wide-based gait 'cerebellar' without checking whether Romberg's sign is genuinely positive, which would instead suggest a sensory or vestibular cause.",
         "Missing pseudoathetosis or the wash-basin history, and so underdiagnosing a sensory ataxia as cerebellar.",
         "Forgetting to test limb coordination lying down in a patient with a wide-based gait but no obvious limb ataxia sitting up, since a vermis lesion can look this way.",
-        "Not asking about vertigo, tinnitus and hearing change, and so missing a vestibular cause entirely."
+        "Not asking about vertigo, tinnitus and hearing change, and so missing a vestibular cause entirely.",
+        "Working up an ACUTE-onset ataxia the same unhurried way as a chronic one - a sudden cerebellar syndrome is a posterior-fossa emergency (haemorrhage or a swelling infarct compressing the brainstem or fourth ventricle) until same-day imaging says otherwise."
       ],
       "media": [],
       "probes": [
@@ -598,6 +600,20 @@
             "nystagmus",
             "dysdiadochokinesia",
             "speech"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient develops a cerebellar-type ataxia over a few hours, with headache and vomiting. Why is this different from a patient with a similar gait that has been present for six months?",
+          "a": "Acute-onset cerebellar ataxia, especially with headache, vomiting, or reduced consciousness, raises cerebellar haemorrhage or a swelling infarct - a neurosurgical emergency (obstructive hydrocephalus, brainstem compression in a cramped posterior fossa) needing urgent same-day imaging, unlike a chronic ataxia which is worked up routinely.",
+          "accept": [
+            "emergency",
+            "haemorrhage",
+            "hydrocephalus",
+            "brainstem",
+            "urgent",
+            "posterior fossa"
           ],
           "minMatch": 2
         }
