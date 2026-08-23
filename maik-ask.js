@@ -19,6 +19,10 @@
   // PUBLIC-RELEASE-GATE: default ON for dev/testing (owner enable 2026-08-15). The clinical pathways are
   // reviewed:false — SET back to === "1" before any store/public release, pending clinician sign-off. Opt-out: smd_maik_ask="0".
   function flagOn() { try { return !!(root && root.localStorage) && localStorage.getItem("smd_maik_ask") !== "0"; } catch (e) { return true; } }
+  // Pipelined interview (silence endpointing + Done button + background extraction + doctor-confirmed
+  // transcript before anything is written). Default ON because the previous serial path was not just
+  // slow but lossy — it discarded the transcript on every turn. Opt out with smd_maik_ask_fast="0".
+  function fastOn() { try { return !!(root && root.localStorage) && localStorage.getItem("smd_maik_ask_fast") !== "0"; } catch (e) { return true; } }
 
   // ---- multilingual yes/no + deterministic answer extraction (cost control: LLM only when needed) ----
   function isPositive(text) {
@@ -93,6 +97,65 @@
     try { return (pathwaysApi._targets(pathway) || []).map(function (t) { return t.field; }); } catch (e) { return []; }
   }
 
+  // ---- one listening turn (extracted from the browser layer so its TIMING is unit-testable) -------
+  // BUGFIX (2026-08-23): the old inline version called `sess.stop()` and resolved with `text` in the
+  // SAME tick. `stop()` only STARTS whisper transcription, and clinical Whisper emits no partials
+  // (WhisperEngine.swift declares onPartial but never calls it), so it always resolved "" and the real
+  // `onFinal` was then dropped by `if (done) return`. Every question burned the full window and
+  // captured NOTHING, so the loop re-asked, then gave up with "__unable__". Now the cap only stops the
+  // mic and the promise settles on `onFinal` — with a grace timer so a lost final can never hang us.
+  //
+  // Endpointing: `silenceEndpointMs` asks the native engine to auto-stop shortly after the patient
+  // stops speaking (the big win — the old code always waited the full window). `done()` is the on-screen
+  // "Done" button (works everywhere, including builds without native VAD); `skip()` abandons the answer.
+  var LISTEN_MAX_MS = 15000;      // hard backstop only; VAD/Done normally end the turn far sooner
+  var LISTEN_GRACE_MS = 12000;    // Android CPU whisper can take ~7s after stop; leave headroom
+  var SILENCE_ENDPOINT_MS = 1500; // ponytail: tuned by ear in a quiet room; a noisy OPD may need more
+  function _listenTurn(deps) {
+    deps = deps || {};
+    var listen = deps.listen;
+    var maxMs = deps.maxMs == null ? LISTEN_MAX_MS : deps.maxMs;
+    var graceMs = deps.graceMs == null ? LISTEN_GRACE_MS : deps.graceMs;
+    var silenceMs = deps.silenceMs == null ? SILENCE_ENDPOINT_MS : deps.silenceMs;
+    var onPartial = deps.onPartial || function () {};
+    var done = false, stopped = false, text = "", hardTmr = null, graceTmr = null, sess = null, settle;
+    var promise = new Promise(function (res) {
+      settle = function (v) {
+        if (done) return; done = true;
+        if (hardTmr) { clearTimeout(hardTmr); hardTmr = null; }
+        if (graceTmr) { clearTimeout(graceTmr); graceTmr = null; }
+        res(String(v == null ? "" : v).trim());
+      };
+    });
+    function stopMic() { try { if (sess && sess.stop) sess.stop(); } catch (e) {} }
+    function endTurn() {                       // patient finished: stop the mic, then WAIT for the text
+      if (stopped || done) return; stopped = true;
+      stopMic();
+      graceTmr = setTimeout(function () { settle(text); }, graceMs);
+    }
+    function skip() { if (done) return; stopped = true; stopMic(); settle(""); }
+    if (typeof listen !== "function") { settle(""); return { promise: promise, done: endTurn, skip: skip }; }
+    sess = listen({
+      engine: "clinical", language: "auto", noCloud: true, silenceEndpointMs: silenceMs,
+      onPartial: function (t) { text = String(t == null ? "" : t); onPartial(text); },
+      onFinal: function (t) { settle(t || text); },
+      onError: function () { settle(""); }
+    });
+    hardTmr = setTimeout(endTurn, maxMs);
+    return { promise: promise, done: endTurn, skip: skip };
+  }
+
+  // The A-to-Z interview transcript. Built from EVERY turn, including ones that produced no finding —
+  // the old summary kept a transcript only on individual findings, so an unanswered or unclassified
+  // question vanished without trace. The doctor confirms THIS text before anything is saved.
+  function _buildTranscript(turns) {
+    return (turns || []).map(function (t) {
+      var q = String(t.question == null ? "" : t.question).trim();
+      var a = String(t.answer == null ? "" : t.answer).trim();
+      return "Q" + (t.n || "") + ". " + q + "\nA. " + (a || "(no answer heard)");
+    }).join("\n\n");
+  }
+
   // ---- the interview loop (pure-ish, async, dependency-injected) -----------
   // deps: { pathway, pathways, provider, known?, language?, maxQuestions?, listen, speak?, deterministic?,
   //         onQuestion?, onFinding?, onRedFlag?, onState?, complaint? }
@@ -113,12 +176,41 @@
     var onState = deps.onState || function () {};
     var allowed = allowedFieldNames(PW, pathway);
 
+    // background:true = pipelined mode (flag smd_maik_ask_fast). The on-device deterministic pass picks
+    // the next question immediately; a slow LLM extraction runs UNAWAITED and is reconciled at the end.
+    var background = !!deps.background;
     var running = true, paused = false, asked = 0, clarifies = 0, attempts = {};
-    var summary = { asked: 0, findings: [], stoppedReason: "" };
+    var summary = { asked: 0, findings: [], turns: [], transcript: "", known: null, stoppedReason: "" };
+    var pending = [];        // in-flight background extractions, drained by finish()
     var resolveOuter;
     var promise = new Promise(function (res) { resolveOuter = res; });
 
-    function finish(reason) { if (!running) return; running = false; summary.stoppedReason = reason; onState("done", reason); resolveOuter(summary); }
+    // finish() is ASYNC in background mode: it drains the in-flight extractions, folds their findings in,
+    // clears any "__pending__" sentinel, and only then builds the transcript and resolves.
+    function finish(reason) {
+      if (!running) return;
+      running = false; summary.stoppedReason = reason;
+      var wait = pending.length ? Promise.all(pending) : Promise.resolve([]);
+      if (pending.length) onState("reconciling", reason);
+      wait.then(function (results) {
+        (results || []).forEach(function (r) {
+          if (!r || !r.target) return;
+          (r.findings || []).forEach(function (f) {
+            if (!(f.field in known) || known[f.field] === "__pending__") known[f.field] = f.value;
+            var rec = { field: f.field, value: f.value, confidence: f.confidence, target: r.target.field,
+              emr: r.target.emr || "", source: "patient_spoken_via_MaiK", transcript: (summary.turns[r.ti] || {}).answer || "" };
+            summary.findings.push(rec);
+            if (summary.turns[r.ti]) summary.turns[r.ti].findings.push(rec);
+            try { onFinding(rec, r.target); } catch (e) {}
+          });
+        });
+        for (var k in known) if (known[k] === "__pending__") known[k] = "__unclear__";
+        summary.known = known;
+        summary.transcript = _buildTranscript(summary.turns);
+        onState("done", reason);
+        resolveOuter(summary);
+      });
+    }
     function waitIfPaused() { return new Promise(function (res) { (function tick() { if (!paused || !running) return res(); setTimeout(tick, 120); })(); }); }
 
     // Prefetch: while the patient answers question N, generate question N+1 in the background so it is
@@ -169,13 +261,17 @@
               onState("clarify", target.field); return step();
             }
             clarifies = 0;
+            // Record the turn BEFORE any extraction, so the transcript keeps the answer even when
+            // nothing is extracted from it (the old code lost those answers entirely).
+            var ti = summary.turns.length;
+            summary.turns.push({ n: asked, field: target.field, question: q.question, answer: transcript, findings: [] });
             var det = deterministic(transcript, target) || [];
             var applyFindings = function (findings) {
               findings = findings || [];
               findings.forEach(function (f) {
                 known[f.field] = f.value;
                 var rec = { field: f.field, value: f.value, confidence: f.confidence, target: target.field, emr: target.emr || "", source: "patient_spoken_via_MaiK", transcript: transcript };
-                summary.findings.push(rec); onFinding(rec, target);
+                summary.findings.push(rec); if (summary.turns[ti]) summary.turns[ti].findings.push(rec); onFinding(rec, target);
               });
               var rf = positiveRedFlag(target, findings);
               if (rf) { onRedFlag(rf); return finish("red-flag"); }
@@ -188,9 +284,19 @@
               return step();
             };
             if (det.length) return applyFindings(det);          // deterministic-first (no LLM call)
-            return provider.extractPatientAnswer({ complaint: deps.complaint || pathway.label, targetField: target.field, targetHint: target.ask,
-              targetKind: target.kind, allowedFields: allowed, question: q.question, pathway: pathway }, transcript)
-              .then(function (r) { return applyFindings((r && r.findings) || []); });
+            var pex = provider.extractPatientAnswer({ complaint: deps.complaint || pathway.label, targetField: target.field, targetHint: target.ask,
+              targetKind: target.kind, allowedFields: allowed, question: q.question, pathway: pathway }, transcript);
+            // SAFETY CARVE-OUT: red flags are NEVER pipelined. The deterministic pass only catches
+            // yes/no, so a descriptive positive ("numbness since this morning") is visible only to the
+            // LLM. Deferring it would let the interview carry on asking routine questions instead of
+            // stopping and alerting the doctor. Red-flag targets are few, so the wait is cheap.
+            if (!background || target.kind === "redflag") return pex.then(function (r) { return applyFindings((r && r.findings) || []); });
+            // Pipelined: claim the field so nextTarget moves on, run the extraction unawaited, and
+            // reconcile it in finish(). Never rejects out of the loop.
+            known[target.field] = "__pending__";
+            pending.push(pex.then(function (r) { return { findings: (r && r.findings) || [], target: target, ti: ti }; },
+              function () { return null; }));
+            return step();
           });
         }).catch(function () { if (running) return step(); });    // never die on one bad turn
       });
@@ -244,22 +350,35 @@
       '<div class="mka-meta">Question ' + (s.n || 1) + " of ~" + (s.of || 6) + "</div>" +
       '<div class="mka-status ' + (listening ? "on" : "") + '">' + (listening ? "&#128308; Listening…" : esc(s.statusText || "Thinking…")) + "</div>" +
       (s.redFlag ? '<div class="mka-alert">' + warn() + "<b>Possible important finding</b><span>" + esc(s.redFlag) + "</span></div>" : "") +
-      '<div class="mka-row"><button class="mka-btn ghost" data-mka="pause">' + (s.paused ? "Resume" : "Pause") + '</button>' +
+      '<div class="mka-row">' + (listening ? '<button class="mka-btn primary" data-mka="done">Done</button>' : "") +
+      '<button class="mka-btn ghost" data-mka="pause">' + (s.paused ? "Resume" : "Pause") + '</button>' +
       '<button class="mka-btn ghost" data-mka="skip">Skip</button>' +
       '<button class="mka-btn stop" data-mka="stop" aria-label="Close">Stop interview</button></div>' +
       "</div></div>";
   }
+  // Doctor-confirmation gate. The transcript is EDITABLE (MaiK mishears; the doctor is the authority)
+  // and every extracted field is a tick box, defaulting to on. Nothing reaches the record or the
+  // patient timeline until "Save to record" is tapped.
   function renderReview(summary, pathway) {
-    var rows = (summary.findings || []).map(function (f) {
-      return '<li><b>' + esc(prettyField(f.target || f.field)) + ":</b> " + esc(f.value) + "</li>";
+    var rows = (summary.findings || []).map(function (f, i) {
+      return '<li><label class="mka-pickrow"><input type="checkbox" class="mka-pick" data-i="' + i + '" checked>' +
+        "<span><b>" + esc(prettyField(f.target || f.field)) + ":</b> " + esc(f.value) + "</span></label></li>";
     }).join("");
     var alertHtml = summary.stoppedReason === "red-flag" ? '<div class="mka-alert">' + warn() + "<b>Stopped for doctor review</b><span>A potentially important finding was reported.</span></div>" : "";
+    var n = (summary.findings || []).length;
     return '<div class="mka-sheet"><div class="mka-card mka-review">' +
       '<div class="mka-brand">' + spark() + "<span>MaiK Ask complete</span></div>" +
       alertHtml +
-      '<div class="mka-review-h">' + (summary.asked || 0) + " question" + (summary.asked === 1 ? "" : "s") + " asked · " + (summary.findings || []).length + " field" + ((summary.findings || []).length === 1 ? "" : "s") + " to add</div>" +
-      (rows ? '<ul class="mka-findings">' + rows + "</ul>" : '<div class="mka-empty">No new history was captured.</div>') +
-      '<div class="mka-row"><button class="mka-btn ghost" data-mka="close">Continue consultation</button><button class="mka-btn primary" data-mka="review">Review in record</button></div>' +
+      '<div class="mka-review-h">' + (summary.asked || 0) + " question" + (summary.asked === 1 ? "" : "s") + " asked · " + n + " field" + (n === 1 ? "" : "s") + " to add</div>" +
+      (summary.transcript
+        ? '<div class="mka-review-sub">Transcript — edit anything MaiK misheard</div>' +
+          '<textarea class="mka-tx" id="mkaTx" rows="8" aria-label="Interview transcript">' + esc(summary.transcript) + "</textarea>"
+        : "") +
+      (rows ? '<div class="mka-review-sub">Add to the record</div><ul class="mka-findings">' + rows + "</ul>"
+            : '<div class="mka-empty">No new history was captured.</div>') +
+      '<div class="mka-row"><button class="mka-btn ghost" data-mka="close">Discard</button>' +
+      '<button class="mka-btn primary" data-mka="save">Save to record</button></div>' +
+      '<div class="mka-priv"><span>Nothing is saved until you tap Save. Patient-reported history, not a diagnosis.</span></div>' +
       "</div></div>";
   }
   function prettyField(f) { return String(f || "").replace(/_/g, " ").replace(/\b\w/g, function (c) { return c.toUpperCase(); }); }
@@ -289,25 +408,25 @@
     var el = overlay(); el.classList.add("on");
     el.innerHTML = renderConfirm(pathway, langLabel);
     var ctl = null, cardState = { question: "", n: 0, of: pathway.maxQuestions, state: "start", demo: !!opts.demo, paused: false };
-    var listenHandle = { setPartial: function () {}, onDone: null };
+    var listenHandle = { done: null, skip: null };
+    var lastSummary = null;
+    var fast = fastOn();
 
     function paint() { el.innerHTML = renderCard(cardState); }
     function close() { try { stopSpeaking(); } catch (e) {} el.classList.remove("on"); el.innerHTML = ""; }
     function stopSpeaking() { try { var P = root.Capacitor && root.Capacitor.Plugins && root.Capacitor.Plugins.TextToSpeech; if (P && P.stop) P.stop(); } catch (e) {} }
 
     function realListen() {
-      return new Promise(function (resolve) {
-        if (!root.SMD_VOICE || !root.SMD_VOICE.listen) return resolve("");
-        var done = false, text = "";
-        var sess = root.SMD_VOICE.listen({
-          engine: "clinical", language: "auto", noCloud: true,
-          onPartial: function (t) { text = t; cardState.partial = t; try { var e = el.querySelector(".mka-ans"); if (e) e.textContent = t; else paint(); } catch (x) {} },
-          onFinal: function (t) { if (done) return; done = true; resolve(String(t || text || "").trim()); },
-          onError: function () { if (done) return; done = true; resolve(""); }
-        });
-        listenHandle.onDone = function () { try { sess && sess.stop && sess.stop(); } catch (e) {} };
-        setTimeout(function () { try { sess && sess.stop && sess.stop(); } catch (e) {} if (!done) { done = true; resolve(String(text || "").trim()); } }, 14000);
+      var turn = _listenTurn({
+        listen: (root.SMD_VOICE && root.SMD_VOICE.listen) ? function (o) { return root.SMD_VOICE.listen(o); } : null,
+        onPartial: function (t) {
+          cardState.partial = t;
+          try { var e = el.querySelector(".mka-ans"); if (e) e.textContent = t; else paint(); } catch (x) {}
+        }
       });
+      listenHandle.done = turn.done;     // "Done" button: stop the mic, still wait for the transcript
+      listenHandle.skip = turn.skip;     // "Skip": abandon this answer immediately
+      return turn.promise;
     }
     var demoIdx = 0;
     function demoListen() { return Promise.resolve((opts.demoAnswers || [])[demoIdx++] || ""); }
@@ -316,7 +435,7 @@
       cardState.state = "start"; cardState.partial = ""; paint();
       ctl = _runInterview({
         pathway: pathway, pathways: root.SMD_PATHWAYS, provider: root.SMD_MAIK_REASON,
-        known: known, language: lang, complaint: complaint,
+        known: known, language: lang, complaint: complaint, background: fast,
         speak: opts.demo ? function () { return Promise.resolve(); } : nativeSpeak,
         listen: opts.demo ? demoListen : realListen,
         onQuestion: function (q) { cardState.question = q.question; cardState.partial = ""; cardState.n = q.n; cardState.of = q.of; cardState.state = "speaking"; cardState.statusText = "MaiK is asking…"; paint(); },
@@ -325,8 +444,10 @@
         onRedFlag: function (rf) { cardState.redFlag = rf.ask ? ("Patient may have reported: " + rf.ask) : "A potentially important finding was reported."; paint(); }
       });
       ctl.promise.then(function (summary) {
-        // Fold findings into the EXISTING EMR (draft) for the doctor to review — via the caller's guarded apply.
-        try { if (opts.onFindings) opts.onFindings(summary.findings || []); } catch (e) {}
+        lastSummary = summary;
+        // Legacy path folds findings straight into the EMR draft. In fast mode NOTHING is applied or
+        // saved until the doctor reviews the transcript and taps Save (handled in the click dispatcher).
+        if (!fast) { try { if (opts.onFindings) opts.onFindings(summary.findings || []); } catch (e) {} }
         el.innerHTML = renderReview(summary, pathway);
         try { if (opts.onDone) opts.onDone(summary); } catch (e) {}
       });
@@ -338,9 +459,27 @@
       if (a === "cancel" || a === "close") return close();
       if (a === "start") return runInterview();
       if (a === "pause") { if (!ctl) return; if (cardState.paused) { ctl.resume(); cardState.paused = false; } else { ctl.pause(); cardState.paused = true; } paint(); return; }
-      if (a === "skip") { if (listenHandle.onDone) listenHandle.onDone(); return; }   // stop listening -> loop moves on
+      if (a === "done") { if (listenHandle.done) listenHandle.done(); return; }   // answer finished -> transcribe now
+      if (a === "skip") { if (listenHandle.skip) listenHandle.skip(); return; }   // abandon this answer -> loop moves on
       if (a === "stop") { if (ctl) ctl.stop(); return; }
       if (a === "review") { close(); try { if (opts.onReview) opts.onReview(); } catch (e) {} return; }
+      if (a === "save") {                      // the ONLY route that writes anything to the record
+        var tx = ""; try { var ta = el.querySelector("#mkaTx"); tx = ta ? String(ta.value || "") : ""; } catch (e) {}
+        var picked = [];
+        try {
+          [].forEach.call(el.querySelectorAll(".mka-pick"), function (cb) {
+            if (!cb.checked) return;
+            var f = ((lastSummary && lastSummary.findings) || [])[parseInt(cb.getAttribute("data-i"), 10)];
+            if (f) picked.push(f);
+          });
+        } catch (e) {}
+        close();
+        try {
+          if (opts.onConfirm) opts.onConfirm({ transcript: tx, findings: picked, summary: lastSummary });
+          else if (opts.onFindings) opts.onFindings(picked);        // caller without a confirm handler
+        } catch (e) {}
+        return;
+      }
     };
   }
   function toast(m) { try { (root.toast || root.SMD_toast || function () {})(m); } catch (e) {} }
@@ -350,6 +489,8 @@
     flagOn: flagOn,
     start: start,
     _runInterview: _runInterview,
+    _listenTurn: _listenTurn,
+    _buildTranscript: _buildTranscript,
     _deterministicAnswer: deterministicAnswer,
     _isPositive: isPositive,
     _positiveRedFlag: positiveRedFlag,

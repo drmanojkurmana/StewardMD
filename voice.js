@@ -183,6 +183,7 @@
           var decodeLang = (wModel === "telugu-small-q8_0" && (!opts.language || opts.language === "auto")) ? "te" : reqLang;
           var wstop = window.SMD_NATIVE.transcribeWhisper({
             language: decodeLang, model: wModel, initialPrompt: opts.initialPrompt || buildInitialPrompt(reqLang),
+            silenceEndpointMs: Number(opts.silenceEndpointMs) || 0,   // >0 = auto-stop on end-of-speech (MaiK Ask)
             onPartial: dropGarbled(opts.onPartial), onFinal: dropGarbled(opts.onFinal),
             onError: opts.onError, onDownloadProgress: opts.onDownloadProgress,
             onStateChange: function (s) { if (opts.onState) opts.onState(s, "Clinical (on-device)"); }

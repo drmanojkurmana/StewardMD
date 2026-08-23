@@ -20,6 +20,28 @@ final class WhisperEngine {
     var onPartial: ((String) -> Void)?
     var onFinal: ((String) -> Void)?
     var onError: ((WhisperErr, String) -> Void)?
+    /// End-of-speech detected (opt-in, see `silenceEndpointMs`). The plugin turns this into the same
+    /// stop-and-transcribe the JS "stop" would do. Fires at most once per recording.
+    var onEndpoint: (() -> Void)?
+
+    // MARK: - Endpointing (VAD)
+    //
+    // MaiK Ask used to keep the mic open for a fixed 14 s per question no matter how short the answer
+    // was, which was most of the interview's wall-clock. When `silenceEndpointMs > 0` we watch the
+    // captured frames and fire `onEndpoint` once the patient has clearly spoken and then gone quiet
+    // for that long. OFF (0) by default, so the ambient Scribe's fixed 15 s chunking is unchanged.
+    //
+    // ponytail: fixed RMS threshold against a running noise floor - good enough for a consulting room,
+    // and it fails SAFE (never firing just leaves the old hard cap in charge). If a loud OPD hall
+    // proves it too eager or too deaf, the upgrade path is a proper VAD (WebRTC/Silero), not more
+    // constants. Both knobs below are deliberately left tunable rather than inlined.
+    private var silenceEndpointMs: Int = 0
+    private var vadSawSpeech = false
+    private var vadFired = false
+    private var vadLastVoiceAt: CFAbsoluteTime = 0
+    private var vadNoiseFloor: Float = 0.003          // adapts upward in quiet frames
+    private let vadSpeechFactor: Float = 3.0          // speech must exceed this * the noise floor
+    private let vadAbsoluteFloor: Float = 0.012       // ...and this, so a silent room can't self-trigger
 
     private var ctx: OpaquePointer?
     private var loadedModelPath: String?
@@ -69,9 +91,13 @@ final class WhisperEngine {
     // MARK: - Capture
 
     /// Begin recording. `modelPath` must already be installed & verified.
-    func start(modelPath: String) {
+    /// `silenceEndpointMs` > 0 enables end-of-speech auto-stop (see the VAD section above).
+    func start(modelPath: String, silenceEndpointMs: Int = 0) {
         guard !recording else { return }                       // duplicate-start guard
         cancelled = false
+        self.silenceEndpointMs = max(0, silenceEndpointMs)
+        vadSawSpeech = false; vadFired = false; vadNoiseFloor = 0.003
+        vadLastVoiceAt = CFAbsoluteTimeGetCurrent()
 
         let perm = AVAudioSession.sharedInstance().recordPermission
         if perm == .denied { onError?(.micPermissionDenied, ""); return }
@@ -136,10 +162,36 @@ final class WhisperEngine {
             self.sampleLock.lock()
             self.samples.append(contentsOf: UnsafeBufferPointer(start: ch[0], count: n))
             self.sampleLock.unlock()
+            self.checkEndpoint(ch[0], n)
         }
 
         engine.prepare()
         do { try engine.start() } catch { input.removeTap(onBus: 0); throw WhisperError(.recordingFailure, "engine") }
+    }
+
+    /// Frame-level end-of-speech detection. No-op unless `silenceEndpointMs > 0`.
+    private func checkEndpoint(_ buf: UnsafeMutablePointer<Float>, _ n: Int) {
+        guard silenceEndpointMs > 0, !vadFired, recording, n > 0 else { return }
+        var sum: Float = 0
+        for i in 0..<n { let v = buf[i]; sum += v * v }
+        let rms = (sum / Float(n)).squareRoot()
+        let speaking = rms > max(vadAbsoluteFloor, vadNoiseFloor * vadSpeechFactor)
+        let now = CFAbsoluteTimeGetCurrent()
+        if speaking {
+            vadSawSpeech = true
+            vadLastVoiceAt = now
+            return
+        }
+        // Quiet frame: let the noise floor drift up towards the room, so a noisy clinic stops
+        // reading its own background as speech. Slow enough that a pause mid-sentence can't poison it.
+        vadNoiseFloor += (rms - vadNoiseFloor) * 0.05
+        // Only ever end a turn the patient actually started - silence before any speech is just a
+        // slow starter, and cutting there would drop the answer entirely.
+        guard vadSawSpeech else { return }
+        if (now - vadLastVoiceAt) * 1000.0 >= Double(silenceEndpointMs) {
+            vadFired = true
+            DispatchQueue.main.async { [weak self] in self?.onEndpoint?() }
+        }
     }
 
     // MARK: - Stop / cancel

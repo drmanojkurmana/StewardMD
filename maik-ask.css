@@ -31,3 +31,11 @@
 #smdOpdEmr .oe-maikask-tx { display: flex; flex-direction: column; }
 #smdOpdEmr .oe-maikask-tx b { font: 700 14px var(--q-sans); }
 #smdOpdEmr .oe-maikask-tx span { font: 500 12px var(--q-sans); color: var(--secondary); }
+
+/* Review / confirm gate — editable transcript + per-field tick boxes (MaiK Ask fast path). */
+.mka-review-sub{font:700 12px var(--sans,system-ui);opacity:.7;margin:10px 0 4px}
+.mka-tx{width:100%;box-sizing:border-box;font:400 13.5px/1.5 var(--sans,system-ui);color:var(--ink,#0f172a);
+  background:var(--panel,#fff);border:1px solid var(--line,#e2e8f0);border-radius:10px;padding:10px;resize:vertical}
+.mka-pickrow{display:flex;gap:8px;align-items:flex-start;cursor:pointer;padding:4px 0}
+.mka-pickrow input{margin-top:3px;flex:none;width:17px;height:17px;accent-color:var(--teal,#0e6e63)}
+.mka-findings li{list-style:none}
