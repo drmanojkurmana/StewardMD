@@ -3793,6 +3793,21 @@
         .then(function (r) { return r.json(); }).then(function (j) { return (j && (j.topic || j.primaryConcept || j.ambiguous)) ? j : null; }).catch(function () { return null; });
     },
     route: function (q) { return window.SMD_AI.refine(q); },   // V3 alias — the universal semantic router (same endpoint, richer JSON)
+    // CliniX viva examiner — judges an already-given ANSWER against a pre-authored question and key
+    // points. Same shape as refine(): a tiny, cheap, non-streaming call, never a conversation. Returns
+    // {verdict, feedback} or null on any error/off-state so the caller can fall back cleanly.
+    vivaJudge: function (question, keyPoints, answer) {
+      var b = aiBase(); if (!b || !aiOn() || !question || !answer) return Promise.resolve(null);
+      var call = aiHeaders().then(function (h) {
+        return fetch(b + "/viva-judge", { method: "POST", headers: h, body: JSON.stringify({ question: String(question).slice(0, 400), keyPoints: String(keyPoints || "").slice(0, 600), answer: String(answer).slice(0, 800) }) });
+      }).then(function (r) { return r.json(); })
+        .then(function (j) { return (j && j.verdict) ? j : null; })
+        .catch(function () { return null; });
+      // A tiny call should return fast; if the native CapacitorHttp path stalls (does not honour
+      // AbortController - see raceTimeout's own comment above), fall back to null rather than leave
+      // the student staring at "MaiK is examining your answer" forever.
+      return raceTimeout(call, 15000, null);
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.

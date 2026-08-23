@@ -73,7 +73,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/thorex-screens.css?v=tx12">
 <link rel="stylesheet" href="/sknx-screens.css?v=sx13">
 <link rel="stylesheet" href="/insulin.css?v=ins11">
-<link rel="stylesheet" href="/clinix.css?v=cx12">
+<link rel="stylesheet" href="/clinix.css?v=cx14">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1552,7 +1552,7 @@ window.openExternal = function (u) {
 <script src="/dxmgmt.js?v=gold363" defer></script>
 <script src="/clinical-nlp.js?v=gold363" defer></script>
 <script src="/id-token.js?v=idtok2" defer></script>
-<script src="/reasoning.js?v=gold1079-wordreveal-clinix1" defer></script>
+<script src="/reasoning.js?v=gold1079-wordreveal-clinix2" defer></script>
 <script src="/renal-dose.js?v=rd1" defer></script>
 <!-- Privacy PR-A: SMD_PRIVACY config (version constants) + consent gate / versioned Privacy Notice
      (SMD_CONSENT). Loads after reasoning.js so it can guard SMD_AI. Reversible via localStorage
@@ -1744,14 +1744,14 @@ window.openExternal = function (u) {
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx12" defer></script>
+<script src="/clinix-flags.js?v=cx13" defer></script>
 <script src="/clinix-model.js?v=cx18" defer></script>
-<script src="/clinix-content.js?v=cx12" defer></script>
+<script src="/clinix-content.js?v=cx13" defer></script>
 <script src="/clinix-diagrams.js?v=cx12" defer></script>
 <script src="/clinix-audio.js?v=cx12" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
-<script src="/clinix-tutor.js?v=cx12" defer></script>
-<script src="/clinix-screens.js?v=cx15" defer></script>
+<script src="/clinix-tutor.js?v=cx13" defer></script>
+<script src="/clinix-screens.js?v=cx17" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->

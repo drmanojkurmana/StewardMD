@@ -570,6 +570,74 @@ try {
   ok(guard && guard.leaks === false, "and no dose survives into the displayed text");
   ok(guard && guard.goodPassed === true, "while normal teaching passes through");
 
+  /* ── 9b. Viva examiner: degrades honestly, never fakes a verdict ───────── */
+  console.log("\n--- viva examiner ---");
+  // reasoning.js IS loaded here (unlike the pure-Node clinix-tutor.test.mjs suite), so the CLIENT
+  // transport genuinely exists - vivaAvailable() correctly says true. There is no real /api/ai
+  // backend behind this static test server though, so the actual call must still fail cleanly
+  // (a real network/parse error), never fabricate a verdict out of a failed request.
+  const vivaGuard = await ev(`(async () => {
+    const T = window.SMD_CLINIX_TUTOR;
+    const avail = T.vivaAvailable();
+    const r = await T.judgeVivaAnswer({ q: "Discuss the pathophysiology." }, "something plausible");
+    return { avail, error: r && r.error, verdict: r && r.verdict };
+  })()`);
+  ok(vivaGuard && vivaGuard.avail === true, "the client transport exists here (reasoning.js is loaded) - vivaAvailable() correctly says so");
+  ok(vivaGuard && !!vivaGuard.error && !vivaGuard.verdict, "with no real backend behind this test server, judgeVivaAnswer() reports a real failure, never a fabricated verdict");
+
+  // A viva question still completes cleanly with no backend reachable - the offline check answers
+  // what it can, and any auto-judge attempt fails cleanly rather than hanging or crashing waiting
+  // for a server that isn't there. Same navigation path the OSCE-scroll test above uses, but for
+  // the "cx-viva" entry point instead of "cx-station".
+  await attach(BASE + "?clinix=1&clinixdraft=1&clinixtutor=1");
+  await ev("window.CLINIX.open()"); await sleep(500);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot .cx-row--dz').click()");
+  for (let i = 0; i < 40; i++) { if (await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-viva\"]')")) break; await sleep(250); }
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-viva\"]').click()");
+  await sleep(400);
+  const vivaScreen = await ev(`(() => {
+    const root = document.getElementById('clinixRoot');
+    const ta = root.querySelector('#cxAnswer');
+    if (ta) { ta.value = 'a reasonable attempt'; root.querySelector('[data-act="cx-viva-answer"]').click(); }
+    return { answered: !!root.querySelector('.cx-fb, .cx-viva-pending') };
+  })()`);
+  ok(vivaScreen && vivaScreen.answered === true, "the viva still marks the answer with no AI backend reachable");
+  await sleep(600);   // let any auto-judge attempt (needsJudge probes) settle before checking it did not get stuck
+  ok((await ev("!document.querySelector('#clinixRoot .cx-viva-pending')")) === true,
+    "and never gets stuck showing 'MaiK is examining' when the backend cannot be reached");
+
+  /* ── 9c. MBBS/PG tier + voice mode ──────────────────────────────────────── */
+  const tierBefore = await ev(`(() => {
+    const root = document.getElementById('clinixRoot');
+    return { mbbsOn: root.querySelector('[data-act="cx-viva-tier"][data-id="mbbs"]').classList.contains('cx-tier-btn--on'), hasPgBtn: !!root.querySelector('[data-act="cx-viva-tier"][data-id="pg"]') };
+  })()`);
+  ok(tierBefore && tierBefore.mbbsOn === true, "viva opens on the MBBS tier by default");
+  ok(tierBefore && tierBefore.hasPgBtn === true, "the PG tier is always offered as a switch, not a separate mode to hunt for");
+
+  await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-tier"][data-id="pg"]\').click()');
+  await sleep(400);
+  const afterPg = await ev(`(() => {
+    const root = document.getElementById('clinixRoot');
+    return { pgOn: root.querySelector('[data-act="cx-viva-tier"][data-id="pg"]').classList.contains('cx-tier-btn--on'), levelText: root.querySelector('.cx-head-sub')?.textContent || '' };
+  })()`);
+  ok(afterPg && afterPg.pgOn === true, "switching to PG restarts the viva and marks PG as the active tier");
+  ok(afterPg && /level 2/.test(afterPg.levelText), "PG starts one level harder than MBBS (level 2, not 1)");
+
+  // Voice mode: off by default, and turning it on must not crash the screen even though no real
+  // STT plugin exists in this headless test - the mic tap must degrade to a toast, never hang.
+  const voiceOff = await ev("!document.querySelector('#clinixRoot .cx-voice-btn--on')");
+  ok(voiceOff === true, "voice mode is off by default");
+  await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-voice-toggle"]\').click()');
+  await sleep(200);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-voice-btn--on')")) === true, "the voice toggle turns on and the UI reflects it");
+  ok((await ev("!!document.querySelector('#clinixRoot [data-act=\"cx-viva-mic\"]')")) === true, "a mic control appears once voice mode is on");
+  await ev('document.querySelector(\'#clinixRoot [data-act="cx-viva-mic"]\').click()');
+  await sleep(300);
+  ok((await ev("!!document.getElementById('clinixRoot')")) === true,
+    "tapping the mic with no real STT plugin present degrades safely - no real device here, so no crash is the whole test");
+
   /* ── 9. No prescribing surface anywhere in CliniX ──────────────────────── */
   console.log("\n--- safety ---");
   ok((await ev("!document.querySelector('#clinixRoot [class*=\"rx\"], #clinixRoot [data-act*=\"rx\"]')")) === true,

@@ -153,3 +153,18 @@ test("answer() degrades honestly when MaiK is absent", async () => {
   const r = await T.answer({}, "why?");
   assert.equal(r.error, "ai-off", "a missing transport is reported, never faked");
 });
+
+/* Viva examiner ------------------------------------------------------------- */
+
+test("judgeVivaAnswer() degrades honestly when MaiK is absent", async () => {
+  assert.equal(T.vivaAvailable(), false, "no window.SMD_AI.vivaJudge in node");
+  const r = await T.judgeVivaAnswer({ q: "What is a normal liver span?" }, "6 to 12 cm");
+  assert.equal(r.error, "ai-off", "a missing transport is reported, never faked, never silently marked correct");
+});
+
+test("judgeVivaAnswer() refuses to call out with no question or no answer", async () => {
+  const noAnswer = await T.judgeVivaAnswer({ q: "Define shock." }, "");
+  assert.equal(noAnswer.error, "no-input");
+  const noProbe = await T.judgeVivaAnswer(null, "something");
+  assert.equal(noProbe.error, "no-input");
+});

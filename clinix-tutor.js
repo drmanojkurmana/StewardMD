@@ -180,6 +180,35 @@
     }).catch(function () { return { error: "server" }; });
   }
 
+  /* ── Viva examiner ───────────────────────────────────────────────────────── */
+
+  /* THE COST DESIGN: the question is always pre-authored (clinix/*.json probes), never generated -
+   * MaiK is asked to judge ONE already-given answer, nothing else. The caller (clinix-screens.js)
+   * only reaches this when the free, offline, zero-token check in clinix-model.js's markAnswer()
+   * cannot decide (a probe with no accept[] list returns needsJudge:true) or the student explicitly
+   * asks for a second opinion on an already-graded answer - most probes have an accept list and are
+   * marked for free, so this is the exception path, not the default one. The call itself is the
+   * cheapest shape this app has: no RAG package, no retrieval, no lesson context, ~120 output tokens
+   * server-side, a dedicated cheap model (see functions/api/ai/[[path]].js "viva-judge"). */
+  function vivaAvailable() {
+    try { return !!(G.SMD_AI && G.SMD_AI.vivaJudge); } catch (e) { return false; }
+  }
+
+  function judgeVivaAnswer(probe, given) {
+    if (!probe || !isStr(probe.q) || !isStr(given) || !given.trim()) return Promise.resolve({ error: "no-input" });
+    widenScope();
+    if (!vivaAvailable()) return Promise.resolve({ error: "ai-off" });
+    var keyPoints = isStr(probe.a) ? probe.a : (isArr(probe.accept) ? probe.accept.join(", ") : "");
+    return G.SMD_AI.vivaJudge(probe.q, keyPoints, given).then(function (r) {
+      if (!r || !r.verdict) return { error: "server" };
+      var s = sanitize(r.feedback || "");
+      return { verdict: r.verdict, feedback: s.text, blocked: s.blocked };
+    }).catch(function () { return { error: "server" }; });
+  }
+
+  function isStr(x) { return typeof x === "string"; }
+  function isArr(x) { return Object.prototype.toString.call(x) === "[object Array]"; }
+
   var API = {
     // pure, node-testable
     buildPrompt: buildPrompt,
@@ -190,6 +219,8 @@
     DOSE_REFUSAL: DOSE_REFUSAL,
     // browser
     answer: answer,
+    judgeVivaAnswer: judgeVivaAnswer,
+    vivaAvailable: vivaAvailable,
     available: available,
     widenScope: widenScope
   };

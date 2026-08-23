@@ -33,6 +33,18 @@ test("the tutor is OFF by default, so a lesson is deterministic content only", (
   assert.equal(F.bool("smd_clinix_tutor"), false);
 });
 
+test("viva tier defaults to mbbs, and only accepts the two real values", () => {
+  assert.equal(F.get("smd_clinix_viva_tier"), "mbbs");
+  assert.equal(F.set("smd_clinix_viva_tier", "pg"), true);
+  assert.equal(F.get("smd_clinix_viva_tier"), "pg");
+  F.set("smd_clinix_viva_tier", "made-up-tier");   // enum: an out-of-range value is written...
+  assert.equal(F.get("smd_clinix_viva_tier"), "mbbs", "...but read back as the default, never as garbage");
+});
+
+test("viva voice mode is OFF by default (a per-device student opt-in, never forced on)", () => {
+  assert.equal(F.bool("smd_clinix_viva_voice"), false);
+});
+
 test("haptics default ON, matching the other modules", () => {
   assert.equal(F.bool("smd_clinix_haptics"), true);
 });

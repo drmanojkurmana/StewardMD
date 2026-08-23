@@ -44,6 +44,19 @@
     smd_clinix_uncleared_media: {
       type: "bool", def: false, query: "clinixmedia",
       desc: "Authoring escape hatch: render media whose licence is not cleared. NEVER ship on."
+    },
+    smd_clinix_viva_tier: {
+      type: "enum", values: ["mbbs", "pg"], def: "mbbs", query: "clinixtier",
+      desc: "Viva difficulty ceiling. mbbs = levels 1-3 (basics through bedside application). " +
+        "pg = starts at level 2 and reaches level 4 (postgraduate). A student preference, not a flag " +
+        "an author flips - persisted so it survives between viva sessions."
+    },
+    smd_clinix_viva_voice: {
+      type: "bool", def: false, query: "clinixvoice",
+      desc: "Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by " +
+        "voice (on-device Whisper via SMD_VOICE, same STT already used by MaiK Ask - falls back to " +
+        "the device's default on-device recognizer if Whisper is not built for this platform). " +
+        "Off by default; a student opts in per device."
     }
   };
 

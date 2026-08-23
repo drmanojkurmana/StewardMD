@@ -353,6 +353,20 @@ test("nextVivaQuestion: a student is never dead-ended when a level is exhausted"
   assert.ok(M.nextVivaQuestion(v, state), "falls back to an available level");
 });
 
+test("compileViva: MBBS/PG tier opts set the floor and ceiling, default unchanged", () => {
+  const noOpts = M.compileViva([skill()]);
+  assert.equal(noOpts.startLevel, 1, "no opts -> old default (byte-identical for every existing caller)");
+  assert.equal(noOpts.maxLevel, 4, "no opts -> old default");
+
+  const mbbs = M.compileViva([skill()], { startLevel: 1, maxLevel: 3 });
+  assert.equal(mbbs.startLevel, 1);
+  assert.equal(mbbs.maxLevel, 3, "MBBS never reaches postgraduate-level probes");
+
+  const pg = M.compileViva([skill()], { startLevel: 2, maxLevel: 4 });
+  assert.equal(pg.startLevel, 2, "PG starts one level harder");
+  assert.equal(pg.maxLevel, 4, "PG can reach the postgraduate tier MBBS cannot");
+});
+
 test("adaptLevel: escalates on correct, drops back on wrong, stays in bounds", () => {
   assert.equal(M.adaptLevel(1, true, 4), 2);
   assert.equal(M.adaptLevel(4, true, 4), 4);

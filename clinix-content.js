@@ -284,13 +284,13 @@
     return out;
   }
 
-  function vivaFor(built) {
+  function vivaFor(built, opts) {
     var M = model();
     if (!M || !built) return null;
     var ids = (built.disease.viva && built.disease.viva.skills) || [];
     var list = [];
     for (var i = 0; i < ids.length; i++) { var s = skill(built, ids[i]); if (s) list.push(s); }
-    return M.compileViva(list);
+    return M.compileViva(list, opts);
   }
 
   /* How much of this disease is actually available to this reader. The screens use it to show

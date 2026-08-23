@@ -165,6 +165,9 @@ const MODULE_FOR = {
   explain: "maik", refine: "maik", route: "maik", research: "research", verify: "maik",
   imaging: "maik_case", correlate: "maik_case", evidence: "maik_case", summary: "summary",
   vision: "ocr", extract: "ocr", transcribe: "stt",
+  // CliniX viva judging counts against the student "clinix" bucket (same as mode:"clinix-tutor" on
+  // /explain), never the doctor's MaiK/case allowance - see the clinix-tutor.js header comment.
+  "viva-judge": "clinix",
 };
 function moduleLimitMsg(mod, limit) {
   const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions" }[mod] || "AI requests";
@@ -1422,6 +1425,44 @@ export async function onRequest(context) {
         outOfScope: !!p.outOfScope,   // non-medical query → client refuses instantly (no KB/answer/research)
         mode: "route"
       });
+    }
+    if (seg === "viva-judge") {
+      // CliniX viva examiner. The QUESTION is always pre-authored content (clinix/*.json) — this
+      // endpoint NEVER generates a question, only judges an ANSWER the student already gave, which
+      // is the one call the client cannot make for free: markAnswer() in clinix-model.js grades an
+      // accept-list probe deterministically and offline (zero cost, zero latency), and only reaches
+      // here when a probe has no accept list to match against (needsJudge:true — the open-ended,
+      // higher-level probes) or the student explicitly asked for a second opinion on an already-
+      // graded answer. Kept deliberately cheap: no RAG package, no retrieval, no lesson context
+      // beyond the question/key-points/answer, CHEAP_MODEL, ~120 output tokens, temp 0 — the router's
+      // exact cost shape, because this is the same kind of small classification call, not an essay.
+      const q = String(body.question || "").slice(0, 400).trim();
+      const key = String(body.keyPoints || "").slice(0, 600).trim();
+      const given = String(body.answer || "").slice(0, 800).trim();
+      if (!q || !given) return json({ error: "no-input" }, 400);
+      const gate = await checkQuota(env, request, "router");   // same lightweight tier as the semantic router
+      if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
+      const sys =
+        "You are a strict but fair clinical viva examiner. You are given the QUESTION, the KEY POINTS a " +
+        "complete answer should cover, and the STUDENT'S ANSWER. Judge the answer ONLY — do not ask a new " +
+        "question, do not have a conversation, do not repeat the question back.\n" +
+        "Output ONLY this JSON, nothing else: " +
+        '{"verdict":"correct|partial|incorrect","feedback":"<one sentence, at most 25 words, examiner tone>"}\n' +
+        "correct = covers the key points accurately, in the student's own words is fine. partial = the right " +
+        "idea but incomplete, imprecise, or missing a key point. incorrect = wrong, or does not answer the " +
+        "question. Be direct in feedback, the way a real examiner would be, but never unkind.\n" +
+        "NEVER state a drug dose, route, or frequency in your feedback, even if the student's answer contains " +
+        "one — that is out of scope for this judgement.\n\n" +
+        "QUESTION: " + q + (key ? ("\nKEY POINTS: " + key) : "") + "\nSTUDENT'S ANSWER: " + given;
+      const judgeModel = env.VIVA_JUDGE_MODEL || CHEAP_MODEL;
+      let text;
+      try { text = await callGemini(env, [{ text: sys }], 120, { temperature: 0, model: judgeModel }); }
+      catch (e) { await recordUsage(gate, { inTok: estTokens(sys.length), outTok: 0, status: "failed" }); return json({ error: "judge-failed" }, 502); }
+      await recordUsage(gate, { inTok: estTokens(sys.length), outTok: estTokens((text || "").length), status: "success" });
+      const p = parseJsonLoose(text) || {};
+      const verdict = ["correct", "partial", "incorrect"].indexOf(p.verdict) >= 0 ? p.verdict : null;
+      if (!verdict) return json({ error: "parse" }, 502);
+      return json({ verdict: verdict, feedback: String(p.feedback || "").slice(0, 300), mode: "viva-judge" });
     }
     if (seg === "imaging") {
       // Clinician-invoked imaging summary. Packet is DE-IDENTIFIED client-side (report text

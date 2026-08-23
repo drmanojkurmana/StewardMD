@@ -1107,17 +1107,42 @@
     }
 
     var a = state.vivaState.lastAnswer;
-    html += '<div class="cx-vivalvl">' + levelName(cur.q.level) + "</div>";
+    var tier = state.vivaState.tier || "mbbs";
+    var voiceOn = flag("smd_clinix_viva_voice");
+    html += '<div class="cx-viva-toprow"><div class="cx-vivalvl">' + levelName(cur.q.level) + "</div>" +
+      '<div class="cx-viva-tier"><button type="button" class="cx-tier-btn' + (tier === "mbbs" ? " cx-tier-btn--on" : "") + '" data-act="cx-viva-tier" data-id="mbbs">MBBS</button>' +
+      '<button type="button" class="cx-tier-btn' + (tier === "pg" ? " cx-tier-btn--on" : "") + '" data-act="cx-viva-tier" data-id="pg">PG</button></div>' +
+      '<button type="button" class="cx-voice-btn' + (voiceOn ? " cx-voice-btn--on" : "") + '" data-act="cx-viva-voice-toggle" aria-label="Voice mode">' + ic(voiceOn ? "volume_up" : "volume_off") + "</button></div>";
     html += '<div class="cx-turn cx-turn--ask"><p class="cx-q">' + esc(cur.q.probe.q) + "</p>";
+    if (voiceOn && state.vivaSpokenFor !== cur.key) { state.vivaSpokenFor = cur.key; speakText(cur.q.probe.q); }
     if (!a) {
-      html += '<div class="cx-free"><textarea class="cx-input" id="cxAnswer" rows="3" placeholder="Answer as you would to an examiner"></textarea>' +
-        '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-answer">Answer</button>' +
+      var listening = state.vivaListening;
+      html += '<div class="cx-free">' +
+        '<textarea class="cx-input" id="cxAnswer" rows="3" placeholder="Answer as you would to an examiner">' + esc(state.vivaPartial || "") + "</textarea>";
+      if (voiceOn) {
+        html += '<button type="button" class="cx-mic-btn' + (listening ? " cx-mic-btn--on" : "") + '" data-act="cx-viva-mic">' +
+          ic(listening ? "mic" : "mic_none") + (listening ? "Listening\u2026 tap to stop" : "Tap to speak your answer") + "</button>";
+      }
+      html += '<button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-answer">Answer</button>' +
         '<button type="button" class="cx-showans" data-act="cx-viva-show">' + ic("visibility") + "Show me the answer</button></div>";
+    } else if (a.pending) {
+      html += '<div class="cx-viva-pending">' + ic("progress_activity") + " MaiK is examining your answer…</div>";
     } else {
-      html += '<div class="cx-fb ' + (a.correct === true ? "cx-fb--ok" : a.correct === null ? "cx-fb--neutral" : "cx-fb--no") + '">' +
-        '<div class="cx-fb-h">' + ic(a.correct === true ? "check_circle" : a.correct === null ? "info" : "cancel") + " " +
-        esc(a.correct === true ? "Good" : a.revealed ? "The answer" : a.correct === null ? "Model answer" : "Not quite") + "</div>" +
-        '<p class="cx-fb-a">' + esc(cur.q.probe.a) + "</p></div>";
+      var partial = a.examinerVerdict === "partial";
+      var cls = a.correct === true ? "cx-fb--ok" : partial ? "cx-fb--partial" : a.correct === null ? "cx-fb--neutral" : "cx-fb--no";
+      var icon = a.correct === true ? "check_circle" : partial ? "error" : a.correct === null ? "info" : "cancel";
+      var label = a.correct === true ? "Good" : partial ? "Nearly there"
+        : a.revealed ? "The answer" : a.correct === null ? "Model answer" : "Not quite";
+      html += '<div class="cx-fb ' + cls + '">' +
+        '<div class="cx-fb-h">' + ic(icon) + " " + esc(label) + "</div>" +
+        '<p class="cx-fb-a">' + esc(cur.q.probe.a) + "</p>";
+      if (a.examinerFeedback) {
+        html += '<p class="cx-fb-examiner"><b>MaiK, examining your answer:</b> ' + esc(a.examinerFeedback) + "</p>";
+      }
+      html += "</div>";
+      if (!a.revealed && !a.examinerVerdict && flag("smd_clinix_tutor") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.vivaAvailable()) {
+        html += '<button type="button" class="cx-askmaik-sm" data-act="cx-viva-ask-maik">' + ic("forum") + "Ask MaiK to review this answer</button>";
+      }
       html += '<div class="cx-nav"><button type="button" class="cx-btn cx-btn--primary" data-act="cx-viva-next">Next question</button></div>';
     }
     html += "</div>";
@@ -1212,6 +1237,7 @@
     key = String(key || "");
     if (!SCREENS[key]) return;
     stopAudio();
+    vivaStopListening();
     if (state.stack[state.stack.length - 1] !== key) state.stack.push(key);
     show(key);
   }
@@ -1409,24 +1435,166 @@
     repaint();
   }
 
+  // MBBS/PG is a student preference (persisted via SMD_CLINIX_FLAGS, same "?query -> localStorage
+  // -> default" pattern as every other CliniX flag), never an authoring flag. mbbs caps at level 3
+  // (no postgraduate-tier probes); pg starts one level higher and can reach level 4.
+  function vivaTier() { return flagVal("smd_clinix_viva_tier") === "pg" ? "pg" : "mbbs"; }
+  function vivaTierOpts(tier) { return tier === "pg" ? { startLevel: 2, maxLevel: 4 } : { startLevel: 1, maxLevel: 3 }; }
+  function flagVal(k) { try { return window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.get(k); } catch (e) { return null; } }
+
   function startViva() {
-    var v = C().vivaFor(state.built);
+    var tier = vivaTier(), opts = vivaTierOpts(tier);
+    var v = C().vivaFor(state.built, opts);
     if (!v || !v.pool.length) { toast("No viva questions available yet"); return; }
     state.viva = v;
-    state.vivaState = { level: 1, asked: {}, count: 0, best: 1, lastAnswer: null };
+    state.vivaState = { level: v.startLevel, asked: {}, count: 0, best: v.startLevel, lastAnswer: null, tier: tier };
     state.vivaCurrent = M().nextVivaQuestion(v, state.vivaState);
+    state.vivaSpokenFor = null;
     go("viva");
   }
 
+  // Switching tier ends the current viva and restarts fresh at the new tier's floor - a mid-session
+  // jump in difficulty would be a strange examiner, not an adaptive one.
+  function vivaSetTier(tier) {
+    try { window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.set("smd_clinix_viva_tier", tier); } catch (e) {}
+    if (state.viva) startViva();
+  }
+
+  // The AI examiner is used ONLY when the free, offline check in markAnswer() cannot decide
+  // (a probe with no accept[] list - res.needsJudge). Every probe WITH an accept list is graded
+  // for free, instantly, no network call - that is most probes, so this is the exception path,
+  // not the default one. That is the entire cost design: MaiK never generates a viva question,
+  // and is only ever asked to examine an answer the deterministic check could not grade itself.
   function vivaAnswer(given) {
     var cur = state.vivaCurrent;
     if (!cur || state.vivaState.lastAnswer) return;
     var res = M().markAnswer(cur.q.probe, given);
-    state.vivaState.lastAnswer = { correct: res.correct, given: given };
-    state.vivaState.count++;
-    if (P()) P().record(cur.q.skillId, res.correct, { mode: "viva", probe: cur.q.probe.q, given: String(given) });
-    haptic(res.correct === true ? "success" : "warning");
+    state.vivaState.count++;   // answering counts now, whether or not a verdict is in yet
+    if (res.needsJudge && flag("smd_clinix_tutor") && window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.vivaAvailable()) {
+      state.vivaState.lastAnswer = { correct: null, given: given, pending: true };
+      repaint();
+      SMD_CLINIX_TUTOR.judgeVivaAnswer(cur.q.probe, given).then(function (r) {
+        // The student may already have moved on (tapped Next while MaiK was still examining) -
+        // only apply the verdict if this is still the same unanswered question.
+        if (state.vivaCurrent !== cur || !state.vivaState.lastAnswer || !state.vivaState.lastAnswer.pending) return;
+        applyVivaVerdict(cur, given, r);
+      });
+      return;
+    }
+    finishVivaAnswer(cur, given, res.correct);
+  }
+
+  function finishVivaAnswer(cur, given, correct, examinerFeedback, examinerVerdict) {
+    state.vivaState.lastAnswer = { correct: correct, given: given, examinerFeedback: examinerFeedback || "", examinerVerdict: examinerVerdict || "" };
+    if (P()) P().record(cur.q.skillId, correct, { mode: "viva", probe: cur.q.probe.q, given: String(given) });
+    haptic(correct === true ? "success" : "warning");
     repaint();
+  }
+
+  function applyVivaVerdict(cur, given, r) {
+    if (!r || r.error) {
+      // MaiK could not judge it (offline, quota, timeout) - degrade honestly to the neutral
+      // "needs a human to check" state rather than pretending it was marked.
+      finishVivaAnswer(cur, given, null);
+      return;
+    }
+    // partial and incorrect both count as not-yet-correct for mastery (same strict rule as the
+    // keyword check: mastery is not one lucky answer), but the student still sees MaiK's real
+    // feedback distinguishing "nearly there" from "wrong".
+    var correct = r.verdict === "correct" ? true : false;
+    finishVivaAnswer(cur, given, correct, r.feedback, r.verdict);
+  }
+
+  // Opt-in second opinion on an answer the offline check already graded for free. Never automatic -
+  // the student explicitly taps for it, so it never adds cost unless they choose to spend it.
+  function vivaAskMaik() {
+    var cur = state.vivaCurrent, a = state.vivaState.lastAnswer;
+    if (!cur || !a || a.pending || a.revealed || a.examinerVerdict) return;
+    if (!(window.SMD_CLINIX_TUTOR && SMD_CLINIX_TUTOR.vivaAvailable())) { toast("MaiK is not available right now"); return; }
+    a.pending = true;
+    repaint();
+    SMD_CLINIX_TUTOR.judgeVivaAnswer(cur.q.probe, a.given).then(function (r) {
+      if (state.vivaCurrent !== cur || state.vivaState.lastAnswer !== a) return;
+      a.pending = false;
+      if (r && r.verdict) { a.examinerFeedback = r.feedback; a.examinerVerdict = r.verdict; }
+      else toast("MaiK could not review that just now");
+      repaint();
+    });
+  }
+
+  /* ── Voice mode: MaiK speaks the question, the student answers by voice ────
+   * Reuses the app's existing on-device speech stack rather than building anything new -
+   * native TextToSpeech (same Capacitor plugin maik-ask.js already uses for spoken history-
+   * taking) and SMD_VOICE.listen (the same on-device STT MaiK Ask and MaiK Scribe use). Audio
+   * never leaves the device either way, and this never touches the AI examiner endpoint - voice
+   * mode only changes how the ANSWER gets into the textbox, not who grades it. */
+  function speakText(text) {
+    text = String(text || "").trim(); if (!text) return;
+    try {
+      var P = window.Capacitor && window.Capacitor.Plugins && window.Capacitor.Plugins.TextToSpeech;
+      if (P && P.speak) P.speak({ text: text, lang: "en-IN", rate: 1.0, pitch: 1.0, category: "playback" }).catch(function () {});
+    } catch (e) {}
+  }
+
+  function vivaVoiceToggle() {
+    var on = flag("smd_clinix_viva_voice");
+    try { window.SMD_CLINIX_FLAGS && SMD_CLINIX_FLAGS.set("smd_clinix_viva_voice", !on); } catch (e) {}
+    if (on) vivaStopListening();
+    repaint();
+  }
+
+  function vivaStopListening() {
+    if (state.vivaListenHandle) { try { state.vivaListenHandle.stop(); } catch (e) {} state.vivaListenHandle = null; }
+    state.vivaListening = false;
+  }
+
+  // Whisper ("clinical") first, since the student explicitly wants it and it is the more accurate
+  // on-device model - but it is NOT built for every platform yet (see voice.js's own gating), and
+  // SMD_VOICE never silently falls back to the cloud for it. If Whisper genuinely is not available
+  // here, retry once with the device's default on-device recognizer rather than leaving voice mode
+  // dead - both keep audio on-device, this only changes which local model transcribes it.
+  function vivaMicToggle() {
+    // Tapping to stop is the student saying "wait, let me check that" - it leaves the transcript in
+    // the textbox for them to read or edit and stops there; it does NOT submit. Only the mic ending
+    // on its own (onFinal, natural end of speech) submits automatically, the way a real oral answer
+    // reaches the examiner the moment you stop talking.
+    if (state.vivaListening) { vivaStopListening(); repaint(); return; }
+    if (!(window.SMD_VOICE && SMD_VOICE.listen)) { toast("Voice input is not available on this device"); return; }
+    state.vivaPartial = "";
+    state.vivaListening = true;
+    repaint();
+    function onFinal(t) {
+      state.vivaListenHandle = null;
+      state.vivaListening = false;
+      state.vivaPartial = String(t || "").trim();
+      vivaSubmitVoiceAnswer();
+    }
+    function onPartial(t) { state.vivaPartial = String(t || ""); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
+    state.vivaListenHandle = SMD_VOICE.listen({
+      engine: "clinical", language: "en", noCloud: true,
+      onPartial: onPartial, onFinal: onFinal,
+      onError: function (why) {
+        if (why === "clinical-unavailable") {
+          state.vivaListenHandle = SMD_VOICE.listen({ language: "en", noCloud: true, onPartial: onPartial, onFinal: onFinal, onError: function () { state.vivaListening = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); } });
+          if (state.vivaListenHandle) return;
+        }
+        state.vivaListening = false; state.vivaListenHandle = null;
+        toast("Could not hear that - try again or type your answer");
+        repaint();
+      }
+    });
+    if (!state.vivaListenHandle) { state.vivaListening = false; toast("Voice input is not available on this device"); repaint(); }
+  }
+
+  // Spoken final answer submits directly - a real oral viva does not pause for the student to
+  // proofread before the examiner hears it. The transcript is still shown in the textbox first,
+  // so if it heard the answer wrong the student sees why, and can retype before tapping Answer if
+  // they stop the mic instead of letting it auto-submit (vivaMicToggle only auto-submits onFinal).
+  function vivaSubmitVoiceAnswer() {
+    var given = (state.vivaPartial || "").trim();
+    state.vivaPartial = "";
+    if (!given) { repaint(); return; }
+    vivaAnswer(given);
   }
 
   /* Same rule as the lesson: shown is not known. A real examiner would move you DOWN a level for
@@ -1657,6 +1825,10 @@
       }
       case "cx-viva-show": vivaReveal(); return;
       case "cx-viva-next": vivaNext(); return;
+      case "cx-viva-ask-maik": vivaAskMaik(); return;
+      case "cx-viva-tier": haptic("tap"); vivaSetTier(id === "pg" ? "pg" : "mbbs"); return;
+      case "cx-viva-voice-toggle": haptic("tap"); vivaVoiceToggle(); return;
+      case "cx-viva-mic": haptic("tap"); vivaMicToggle(); return;
 
       case "cx-practice-osce":
       case "cx-practice-viva":
