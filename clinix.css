@@ -87,11 +87,16 @@
 
 #clinixRoot .cx-hero {
   position: relative;
-  padding: calc(env(safe-area-inset-top, 0px) + 26px) 20px 24px;
+  /* Top padding clears the close button below, so the wordmark never sits under it. */
+  padding: calc(env(safe-area-inset-top, 0px) + 56px) 20px 24px;
   background: var(--cx-primary-2);
   color: #fff;
 }
-#clinixRoot .cx-hero-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); right: 8px; color: rgba(255,255,255,.9); }
+/* Top-LEFT, not top-right. swipe-back.js injects its own #smdTopBack whenever no BACK_SEL control
+   sits within 150px of the top-left corner, and it was landing directly on the CliniX wordmark.
+   Putting the close here also means "leave this screen" is in the same place on every CliniX
+   screen, since every other one has its back button top-left. */
+#clinixRoot .cx-hero-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 8px; color: rgba(255,255,255,.9); }
 #clinixRoot .cx-hero-mark { font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
 #clinixRoot .cx-hero-tag { margin-top: 4px; font-size: 13px; opacity: .84; }
 

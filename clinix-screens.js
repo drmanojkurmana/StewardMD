@@ -359,9 +359,16 @@
     }
   }
 
+  // The verb has to match the medium: you do not "watch" a percussion diagram or a breath sound.
+  function mediaVerb(kind) {
+    if (kind === "audio") return "Listen first";
+    if (kind === "video" || kind === "embed" || kind === "animation" || kind === "gif") return "Watch first";
+    return "Look first";
+  }
+
   function showTurn(t) {
     var m = C().media(state.built, t.media);
-    var head = '<div class="cx-eyebrow">Watch first</div>';
+    var head = '<div class="cx-eyebrow">' + esc(m ? mediaVerb(m.kind) : "Look first") + "</div>";
     if (!m) {
       return head + '<div class="cx-media cx-media--pending">' + ic("videocam_off") +
         '<div class="cx-media-cap">A demonstration for this step has not been added yet.</div></div>';
@@ -578,13 +585,15 @@
 
   /* ── screen: CASE. A simulated patient over the same skills ──────────────── */
 
+  // Short labels on purpose: six full words do not fit a 393px phone and truncated to
+  // "EXAMIN..." / "DIFFERE...". DDx and Dx are the shorthand students already use.
   var CASE_STEPS = [
     { id: "history", label: "History" },
-    { id: "examination", label: "Examination" },
+    { id: "examination", label: "Exam" },
     { id: "investigations", label: "Tests" },
-    { id: "differential", label: "Differential" },
-    { id: "diagnosis", label: "Diagnosis" },
-    { id: "management", label: "Management" }
+    { id: "differential", label: "DDx" },
+    { id: "diagnosis", label: "Dx" },
+    { id: "management", label: "Plan" }
   ];
 
   function casePhaseBar() {
