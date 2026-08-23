@@ -183,12 +183,40 @@ test("SAFETY: with the author flag on, the same content is fully visible", () =>
     pathway.filter((c) => c.empty).map((c) => c.id).join(", "));
 });
 
-test("SAFETY: no media is cleared, so the licence gate currently blocks every asset", () => {
+test("SAFETY: the ONLY cleared media is self-authored, and it says so", () => {
+  // An externally sourced asset must never be marked cleared without a verified licence. The one
+  // media kind we can always clear is a diagram we drew ourselves, which is exactly why Phase 3
+  // built the inline diagram set instead of waiting on sourcing.
   const cleared = Object.keys(mediaManifest.media).filter((id) => M.mediaRenderable(mediaManifest.media[id]));
-  assert.deepEqual(
-    cleared, [],
-    "Media marked cleared without a verified licence: " + cleared.join(", ")
-  );
+  assert.ok(cleared.length > 0, "expected the self-authored diagrams to be cleared");
+  for (const id of cleared) {
+    const m = mediaManifest.media[id];
+    assert.equal(m.attribution, "StewardMD",
+      `${id} is cleared but not attributed to StewardMD. Only self-authored media may be cleared without external verification.`);
+    assert.ok(m.licence.indexOf("StewardMD original") === 0, `${id} has a non-original licence but is cleared`);
+    assert.equal(m.inline, true, `${id} is cleared but is not an inline diagram`);
+    assert.ok(m.diagramId, `${id} is an inline diagram with no diagramId`);
+  }
+});
+
+test("SAFETY: every EXTERNALLY sourced asset is still gated", () => {
+  const external = Object.keys(mediaManifest.media).filter((id) => mediaManifest.media[id].attribution !== "StewardMD");
+  assert.ok(external.length >= 8, "expected the sourcing work order to still be present");
+  for (const id of external) {
+    assert.equal(M.mediaRenderable(mediaManifest.media[id]), false,
+      `${id} is externally sourced and must not render until its licence is verified`);
+  }
+});
+
+test("every cleared inline diagram exists in the diagram registry", async () => {
+  const D = (await import("../clinix-diagrams.js")).default;
+  for (const id of Object.keys(mediaManifest.media)) {
+    const m = mediaManifest.media[id];
+    if (!m.inline) continue;
+    assert.ok(D.has(m.diagramId), `${id} names diagram '${m.diagramId}', which is not in the registry`);
+    const svg = D.render(m.diagramId, {});
+    assert.ok(svg.indexOf("<svg") >= 0, `${m.diagramId} rendered nothing`);
+  }
 });
 
 test("SAFETY: every media entry still carries a caption, so a gated asset degrades to something useful", () => {

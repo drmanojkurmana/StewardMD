@@ -435,3 +435,70 @@ html.cx-lock .ghis-ward-fab { display: none !important; }
 #clinixRoot .cx-row--done { background: var(--cx-surface-2); }
 #clinixRoot .cx-finding { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
 #clinixRoot .cx-ixnote { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--cx-teach); }
+
+/* ── self-authored diagrams ───────────────────────────────────────────────── */
+/* Inline SVG, so everything here resolves against the module's own tokens and follows light/dark
+   and every accent theme with no duplicate palette. An <img> could not do this. */
+
+#clinixRoot .cx-media--dia { padding: 8px 8px 0; }
+#clinixRoot .cx-dia { display: block; width: 100%; height: auto; }
+#clinixRoot .cx-dia text { font-family: var(--cx-sans); font-size: 9px; fill: var(--cx-muted); }
+#clinixRoot .cx-dia-axis { stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-lbl { font-size: 9px; fill: var(--cx-muted); }
+#clinixRoot .cx-dia-lbl--mute { fill: var(--cx-faint); font-size: 8px; }
+#clinixRoot .cx-dia-lbl--normal { fill: var(--cx-primary); font-weight: 700; }
+#clinixRoot .cx-dia-lbl--copd { fill: var(--cx-teach); font-weight: 700; }
+
+#clinixRoot .cx-dia-normal { fill: none; stroke: var(--cx-primary); stroke-width: 2.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-copd { fill: none; stroke: var(--cx-teach); stroke-width: 2.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-insp { stroke-dasharray: 4 3; opacity: .75; }
+#clinixRoot .cx-dia-dot { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-dot--copd { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-arrow { fill: none; stroke: var(--cx-teach); stroke-width: 1.5; }
+/* Dimming rather than hiding: the other curve stays as a reference, which is the whole point of a
+   comparison figure. */
+#clinixRoot .cx-dia-dim { opacity: .18; }
+
+#clinixRoot .cx-dia-toggle { display: flex; gap: 6px; padding: 8px; }
+#clinixRoot .cx-dia-btn { flex: 1 1 0; padding: 8px; font-size: 12px; font-family: inherit; font-weight: 600; cursor: pointer; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); color: var(--cx-muted); }
+#clinixRoot .cx-dia-btn--on { background: var(--cx-primary); border-color: transparent; color: #fff; }
+
+/* air trapping */
+#clinixRoot .cx-dia-airway { fill: none; stroke: var(--cx-ink); stroke-width: 2.5; stroke-linecap: round; }
+#clinixRoot .cx-dia-alv { fill: none; stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-alv--big { stroke: var(--cx-teach); stroke-width: 2.5; }
+#clinixRoot .cx-dia-traction line { stroke: var(--cx-primary); stroke-width: 1.5; stroke-linecap: round; }
+#clinixRoot .cx-dia-div { stroke: var(--cx-line); stroke-width: 1; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-air { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-air--trapped, #clinixRoot .cx-dia-air--trapped2 { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-airway--collapse { stroke: var(--cx-teach); }
+
+/* The animation IS the teaching: air leaves the normal alveolus and does not leave the emphysematous
+   one. Static, both sides just look like drawings of an airway. */
+#clinixRoot .cx-dia--anim .cx-dia-air--out { animation: cx-escape 3.2s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-air--trapped { animation: cx-jiggle 3.2s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-air--trapped2 { animation: cx-jiggle 3.2s ease-in-out infinite .4s; }
+#clinixRoot .cx-dia--anim .cx-dia-airway--collapse { animation: cx-pinch 3.2s ease-in-out infinite; }
+@keyframes cx-escape { 0%, 10% { transform: translateX(36px); opacity: 1; } 60%, 100% { transform: translateX(-80px); opacity: 0; } }
+@keyframes cx-jiggle { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-4px, 2px); } }
+@keyframes cx-pinch { 0%, 100% { opacity: .45; } 55% { opacity: 1; } }
+
+/* percussion map */
+#clinixRoot .cx-dia-body { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-mid { stroke: var(--cx-line); stroke-width: 1; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-cmp { fill: none; stroke: var(--cx-primary); stroke-width: 1.5; stroke-dasharray: 3 3; opacity: .6; }
+#clinixRoot .cx-dia-zone { cursor: pointer; }
+#clinixRoot .cx-dia-zone circle { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.5; }
+#clinixRoot .cx-dia-zone text { fill: var(--cx-primary); font-size: 11px; font-weight: 700; }
+#clinixRoot .cx-dia-zone--on circle { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--on text { fill: #fff; }
+#clinixRoot .cx-dia-note { padding: 12px 14px; font-size: 13.5px; line-height: 1.55; color: var(--cx-muted); }
+#clinixRoot .cx-dia-note b { color: var(--cx-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-dia--anim .cx-dia-air--out,
+  #clinixRoot .cx-dia--anim .cx-dia-air--trapped,
+  #clinixRoot .cx-dia--anim .cx-dia-air--trapped2,
+  #clinixRoot .cx-dia--anim .cx-dia-airway--collapse { animation: none; }
+  #clinixRoot .cx-dia--anim .cx-dia-air--out { opacity: .35; }
+}

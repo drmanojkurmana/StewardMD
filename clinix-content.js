@@ -166,6 +166,8 @@
       kind: m.kind,
       caption: m.caption || "",
       renderable: ok,
+      inline: m.inline === true,
+      diagramId: m.diagramId || "",
       src: ok && m.src ? cxMedia(m.src) : null,
       embeddable: M ? M.isEmbeddable(m) : false,
       sourceUrl: m.sourceUrl || "",

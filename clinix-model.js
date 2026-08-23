@@ -123,6 +123,10 @@
       if (!isStr(m.attribution)) e.push("media.attribution required for a cleared asset (" + str(m.id) + ")");
       if (m.kind === "embed") {
         if (!isStr(m.sourceUrl)) e.push("media.sourceUrl required for an embed (" + str(m.id) + ")");
+      } else if (m.inline === true) {
+        // A self-authored inline SVG has no file to point at; it names a diagram in the registry.
+        // This is the one media kind we can always clear, because we drew it.
+        if (!isStr(m.diagramId)) e.push("media.diagramId required for an inline diagram (" + str(m.id) + ")");
       } else if (!isStr(m.src)) {
         e.push("media.src required for a cleared asset (" + str(m.id) + ")");
       }

@@ -1,6 +1,6 @@
 ---
 tags: [module, education, respiratory]
-status: phases 1,2,5,6,7 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
+status: phases 1,2,3,5,6,7 built (flag OFF, content ai_drafted pending R1 clinical sign-off)
 flag: smd_clinix (client, def:false, ?clinix=1) + smd_clinix_draft (def:false, NEVER ship on) + smd_clinix_tutor (Phase 2, def:false) + smd_clinix_uncleared_media (def:false, NEVER ship on) + smd_clinix_haptics (def:true)
 ---
 # CliniX
@@ -36,6 +36,8 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 - `clinix-store.js` — per-skill competency + resume position + miss log. Emits `learn` into the
   EXISTING `SMD_KU` ledger rather than being a fifth progress store.
 - `clinix-tutor.js` — MaiK as tutor. Context envelope + **the dose guard** (see invariants).
+- `clinix-diagrams.js` — self-authored inline SVG diagrams (flow-volume loop, air trapping,
+  interactive percussion map). The one media kind that can always be cleared.
 - `clinix-screens.js` — router + **the lesson runner** (the product). `clinix.js` — flag gate +
   `#clinixRoot`. `clinix.css` — everything under `#clinixRoot` / `.cx-*`.
 - `clinix/**` — content as data. `manifest.json` (catalog) · `skills/core.json` (shared approach +
@@ -108,6 +110,23 @@ Four small, additive changes outside the module:
   **Candidate improvement for the owner: this vocabulary is genuinely medical and would help doctors
   too, so it is a reasonable app-wide widening rather than a CliniX-only one.**
 
+## Phase 3: media, and the one kind we can always clear
+The licence gate means externally sourced media cannot ship until it is verified, so Phase 3 built
+what needs no sourcing: **self-authored inline SVG**. Three diagrams, each a MECHANISM that prose
+conveys badly - the scooped expiratory limb of a flow-volume loop, small airway collapse with gas
+trapping (animated), and an interactive percussion map whose numbering teaches the ORDER (side to
+side at matched levels) rather than just the sites.
+
+Inline rather than `<img>` for three reasons: they inherit `#clinixRoot`'s `--cx-*` variables so
+light/dark and every accent theme work for free; they can be interactive, which the spec asks for and
+an image cannot do; and we drew them, so `cleared: true` with licence "StewardMD original" is honest.
+`validateMedia` now accepts `inline: true` + `diagramId` in place of `src` for a cleared asset.
+
+**The test that matters here asserts the gate BOTH ways**: only self-authored media may be cleared
+(attribution must be `StewardMD`), and every externally sourced entry must still be refused. The
+sourcing work order in `clinix/media/manifest.json` is unchanged and now attached to the skills that
+need it, so an uncleared video renders its caption and note inside the real lesson.
+
 ## Phase 5: Case mode
 A simulated patient (`clinix/diseases/copd.json` -> `cases[]`), run through six gated phases:
 history, examination, investigations, differential, diagnosis, management. Three decisions:
@@ -128,15 +147,17 @@ scored by matched-cue LENGTH (so "how much can you do" beats "how much"), and th
 ambiguous cues were tightened. Regression test: `test/clinix-case.test.mjs`.
 
 ## Status
-- **Phases 1, 2, 5, 6 and 7 built.** 113 unit tests + 53 real-browser checks green. Full suite:
+- **Phases 1, 2, 3, 5, 6 and 7 built.** 115 unit tests + 64 real-browser checks green. Full suite:
   104 failures before and after, identical set (zero regression, verified against `pre-clinix` in a
   clean worktree).
 - **Content: `ai_drafted`, NOT approved.** Drafted against Harrison 22e p.2249-2259 via
   `kb/reference/chronic_obstructive_pulmonary_disease.json` (itself `review.status: ai_drafted`) plus
   GOLD and Macleod's, every skill cited with a locator. **The owner flips `review.status` to
   `approved` per skill after clinical review; nothing reaches a student until then.**
-- **Media: zero cleared.** `clinix/media/manifest.json` is the work order (12 entries, each with what
-  is needed and where to look). Owner chose openly-licensed sources + permitted YouTube embeds.
+- **Media: 3 cleared, all self-authored.** The 3 inline diagrams render now. The other 10 entries in
+  `clinix/media/manifest.json` are the sourcing work order (each says what is needed and where to
+  look) and are still refused by the gate. Owner chose openly-licensed sources + permitted YouTube
+  embeds for those.
 
 Deps: [[Medical Knowledge Base]] (`kb/reference/*` grounding) · [[MaiK]] (Phase 2 tutor via
 `SMD_AI.explainGroundedStream`) · [[AI Control Center]] (Phase 2 needs a `clinix` entry in

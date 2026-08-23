@@ -3,7 +3,6 @@
   "version": 1,
   "system": "respiratory",
   "skills": {
-
     "skill.hx.resp.dyspnea": {
       "id": "skill.hx.resp.dyspnea",
       "kind": "history",
@@ -12,12 +11,24 @@
       "oneLine": "Grade it against an activity, never against an adjective",
       "why": "Breathlessness is the symptom that tracks disease severity and predicts prognosis, but only if it is anchored to something measurable. 'Moderate breathlessness' is uninterpretable and unrepeatable; 'stops after 100 metres on level ground' can be compared with the same patient in six months and with any other patient in the world.",
       "asks": [
-        { "text": "When did you first notice you were getting short of breath? Months or years, not days, in chronic disease." },
-        { "text": "What can you do now before you have to stop, and what could you do a year ago?" },
-        { "text": "Grade it: breathless on strenuous exercise only (mMRC 0); hurrying or a slight hill (1); walks slower than others of the same age, or stops for breath at own pace on the level (2); stops after about 100 metres or a few minutes on the level (3); too breathless to leave the house or breathless on dressing (4)." },
-        { "text": "Is it worse lying flat, and do you wake at night short of breath?" },
-        { "text": "Is it constant, or does it come in attacks? What brings an attack on?" },
-        { "text": "Are arm activities above shoulder height particularly bad?" }
+        {
+          "text": "When did you first notice you were getting short of breath? Months or years, not days, in chronic disease."
+        },
+        {
+          "text": "What can you do now before you have to stop, and what could you do a year ago?"
+        },
+        {
+          "text": "Grade it: breathless on strenuous exercise only (mMRC 0); hurrying or a slight hill (1); walks slower than others of the same age, or stops for breath at own pace on the level (2); stops after about 100 metres or a few minutes on the level (3); too breathless to leave the house or breathless on dressing (4)."
+        },
+        {
+          "text": "Is it worse lying flat, and do you wake at night short of breath?"
+        },
+        {
+          "text": "Is it constant, or does it come in attacks? What brings an attack on?"
+        },
+        {
+          "text": "Are arm activities above shoulder height particularly bad?"
+        }
       ],
       "practice": "Take a breathlessness history from a partner and finish with an mMRC grade you can defend. If you cannot name the grade, you have not asked enough.",
       "pitfalls": [
@@ -28,23 +39,75 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "What does mMRC grade 3 mean?", "a": "Stops for breath after walking about 100 metres or after a few minutes on level ground.", "accept": ["100", "few minutes", "level"], "minMatch": 1 },
-        { "level": 2, "q": "Why ask what the patient could do a year ago?", "a": "It establishes the rate of decline, which distinguishes slowly progressive chronic disease from a recent, faster deterioration.", "accept": ["decline", "progress", "rate", "tempo", "change"], "minMatch": 1 },
-        { "level": 3, "q": "A COPD patient reports arm activity above shoulder height is disproportionately hard. Why?", "a": "Those activities recruit the accessory muscles that a hyperinflated patient already depends on for breathing, and they fix the shoulder girdle. Tasks that allow the arms to brace, such as pushing a trolley, are better tolerated.", "accept": ["accessory", "brace", "shoulder girdle", "hyperinflat"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "What does mMRC grade 3 mean?",
+          "a": "Stops for breath after walking about 100 metres or after a few minutes on level ground.",
+          "accept": [
+            "100",
+            "few minutes",
+            "level"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why ask what the patient could do a year ago?",
+          "a": "It establishes the rate of decline, which distinguishes slowly progressive chronic disease from a recent, faster deterioration.",
+          "accept": [
+            "decline",
+            "progress",
+            "rate",
+            "tempo",
+            "change"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A COPD patient reports arm activity above shoulder height is disproportionately hard. Why?",
+          "a": "Those activities recruit the accessory muscles that a hyperinflated patient already depends on for breathing, and they fix the shoulder girdle. Tasks that allow the arms to brace, such as pushing a trolley, are better tolerated.",
+          "accept": [
+            "accessory",
+            "brace",
+            "shoulder girdle",
+            "hyperinflat"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "onset", "text": "Establishes onset and duration" },
-        { "id": "grade", "text": "Grades breathlessness against a specific activity" },
-        { "id": "decline", "text": "Compares current function with the past" },
-        { "id": "cardiac", "text": "Asks about orthopnoea and PND" }
+        {
+          "id": "onset",
+          "text": "Establishes onset and duration"
+        },
+        {
+          "id": "grade",
+          "text": "Grades breathlessness against a specific activity"
+        },
+        {
+          "id": "decline",
+          "text": "Compares current function with the past"
+        },
+        {
+          "id": "cardiac",
+          "text": "Asks about orthopnoea and PND"
+        }
       ],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" },
-        { "source": "GOLD Report", "locator": "mMRC dyspnoea scale" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "mMRC dyspnoea scale"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.hx.resp.cough_sputum": {
       "id": "skill.hx.resp.cough_sputum",
       "kind": "history",
@@ -53,12 +116,24 @@
       "oneLine": "Duration, timing, and what actually comes up",
       "why": "Cough with sputum on most days for three months in two consecutive years is the definition of chronic bronchitis. The character and volume of sputum separates chronic bronchitis from bronchiectasis, and a change in an established smoker's cough is a cardinal warning of lung cancer.",
       "asks": [
-        { "text": "How long have you had the cough? Months and years, and whether it is present most days." },
-        { "text": "Is it worse at any particular time, especially first thing in the morning?" },
-        { "text": "Do you bring anything up? If so, roughly how much in a day, using a household measure such as a teaspoon or a cupful." },
-        { "text": "What colour is it, and has that changed recently?" },
-        { "text": "Have you ever coughed up blood?" },
-        { "text": "Has the character of your usual cough changed?" }
+        {
+          "text": "How long have you had the cough? Months and years, and whether it is present most days."
+        },
+        {
+          "text": "Is it worse at any particular time, especially first thing in the morning?"
+        },
+        {
+          "text": "Do you bring anything up? If so, roughly how much in a day, using a household measure such as a teaspoon or a cupful."
+        },
+        {
+          "text": "What colour is it, and has that changed recently?"
+        },
+        {
+          "text": "Have you ever coughed up blood?"
+        },
+        {
+          "text": "Has the character of your usual cough changed?"
+        }
       ],
       "practice": "Ask a partner to describe sputum volume without using the words 'a lot' or 'a little'. Practise offering household measures until you get a number you could write down.",
       "pitfalls": [
@@ -69,22 +144,69 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "What is the clinical definition of chronic bronchitis?", "a": "Cough productive of sputum on most days for three months of the year, for two consecutive years.", "accept": ["three months", "3 months", "two consecutive", "2 years", "two years"], "minMatch": 1 },
-        { "level": 2, "q": "A patient brings up a cupful of purulent sputum daily. Which diagnosis does volume alone raise?", "a": "Bronchiectasis. Large-volume purulent sputum is out of keeping with uncomplicated chronic bronchitis.", "accept": ["bronchiectasis"] },
-        { "level": 3, "q": "A 60-year-old smoker says his usual morning cough has changed over two months. Why does that matter?", "a": "A change in the character of a chronic smoker's cough is a recognised presenting feature of bronchial carcinoma and warrants imaging, regardless of how long the cough has been present.", "accept": ["carcinoma", "cancer", "malignan", "imaging", "x-ray"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "What is the clinical definition of chronic bronchitis?",
+          "a": "Cough productive of sputum on most days for three months of the year, for two consecutive years.",
+          "accept": [
+            "three months",
+            "3 months",
+            "two consecutive",
+            "2 years",
+            "two years"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient brings up a cupful of purulent sputum daily. Which diagnosis does volume alone raise?",
+          "a": "Bronchiectasis. Large-volume purulent sputum is out of keeping with uncomplicated chronic bronchitis.",
+          "accept": [
+            "bronchiectasis"
+          ]
+        },
+        {
+          "level": 3,
+          "q": "A 60-year-old smoker says his usual morning cough has changed over two months. Why does that matter?",
+          "a": "A change in the character of a chronic smoker's cough is a recognised presenting feature of bronchial carcinoma and warrants imaging, regardless of how long the cough has been present.",
+          "accept": [
+            "carcinoma",
+            "cancer",
+            "malignan",
+            "imaging",
+            "x-ray"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "duration", "text": "Establishes duration and whether present most days" },
-        { "id": "volume", "text": "Quantifies sputum volume with a usable measure" },
-        { "id": "colour", "text": "Asks about colour and any recent change" },
-        { "id": "haemoptysis", "text": "Asks specifically about haemoptysis" }
+        {
+          "id": "duration",
+          "text": "Establishes duration and whether present most days"
+        },
+        {
+          "id": "volume",
+          "text": "Quantifies sputum volume with a usable measure"
+        },
+        {
+          "id": "colour",
+          "text": "Asks about colour and any recent change"
+        },
+        {
+          "id": "haemoptysis",
+          "text": "Asks specifically about haemoptysis"
+        }
       ],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.hx.resp.smoking": {
       "id": "skill.hx.resp.smoking",
       "kind": "history",
@@ -93,12 +215,24 @@
       "oneLine": "Pack-years, and the exposures that are not tobacco",
       "why": "Smoking is the dominant cause of COPD, and pack-years quantify the dose in a way that can be compared and recorded. But a substantial share of COPD worldwide, and a very large share in Indian women, is caused by biomass cooking fuel, which is missed entirely if the only question asked is about cigarettes.",
       "asks": [
-        { "text": "Do you smoke, or have you ever smoked? Include bidis, hookah and cannabis, not only cigarettes." },
-        { "text": "How many per day, and for how many years? Calculate pack-years: packs per day multiplied by years, where one pack is twenty cigarettes." },
-        { "text": "If they have stopped, when, and what were they smoking before?" },
-        { "text": "What fuel is used for cooking at home, and is the kitchen ventilated? Ask about wood, dung cake, crop residue and coal." },
-        { "text": "Has anyone in the house smoked indoors?" },
-        { "text": "Do you use an electronic cigarette or vape?" }
+        {
+          "text": "Do you smoke, or have you ever smoked? Include bidis, hookah and cannabis, not only cigarettes."
+        },
+        {
+          "text": "How many per day, and for how many years? Calculate pack-years: packs per day multiplied by years, where one pack is twenty cigarettes."
+        },
+        {
+          "text": "If they have stopped, when, and what were they smoking before?"
+        },
+        {
+          "text": "What fuel is used for cooking at home, and is the kitchen ventilated? Ask about wood, dung cake, crop residue and coal."
+        },
+        {
+          "text": "Has anyone in the house smoked indoors?"
+        },
+        {
+          "text": "Do you use an electronic cigarette or vape?"
+        }
       ],
       "practice": "Calculate pack-years for three cases out loud: 20 a day for 30 years; 10 a day for 40 years; 40 a day for 15 years. All three are 30, 20 and 30 pack-years respectively.",
       "pitfalls": [
@@ -109,21 +243,68 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "How do you calculate pack-years?", "a": "Packs smoked per day multiplied by years smoked, where a pack is twenty cigarettes.", "accept": ["packs per day", "multiplied", "years", "20"], "minMatch": 2 },
-        { "level": 2, "q": "A 55-year-old woman who has never smoked has airflow obstruction. What exposure must you ask about?", "a": "Biomass cooking fuel: wood, dung cake, crop residue or coal, particularly in an unventilated kitchen.", "accept": ["biomass", "cooking", "wood", "dung", "fuel"], "minMatch": 1 },
-        { "level": 3, "q": "Why does establishing pack-years matter beyond attributing cause?", "a": "It quantifies risk for lung cancer as well as COPD, informs screening decisions, and gives a baseline against which cessation can be discussed and recorded.", "accept": ["cancer", "risk", "screening", "cessation"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "How do you calculate pack-years?",
+          "a": "Packs smoked per day multiplied by years smoked, where a pack is twenty cigarettes.",
+          "accept": [
+            "packs per day",
+            "multiplied",
+            "years",
+            "20"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A 55-year-old woman who has never smoked has airflow obstruction. What exposure must you ask about?",
+          "a": "Biomass cooking fuel: wood, dung cake, crop residue or coal, particularly in an unventilated kitchen.",
+          "accept": [
+            "biomass",
+            "cooking",
+            "wood",
+            "dung",
+            "fuel"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does establishing pack-years matter beyond attributing cause?",
+          "a": "It quantifies risk for lung cancer as well as COPD, informs screening decisions, and gives a baseline against which cessation can be discussed and recorded.",
+          "accept": [
+            "cancer",
+            "risk",
+            "screening",
+            "cessation"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "packyears", "text": "Calculates and records pack-years" },
-        { "id": "forms", "text": "Asks about bidis, hookah and other forms" },
-        { "id": "biomass", "text": "Asks about cooking fuel and indoor smoke" }
+        {
+          "id": "packyears",
+          "text": "Calculates and records pack-years"
+        },
+        {
+          "id": "forms",
+          "text": "Asks about bidis, hookah and other forms"
+        },
+        {
+          "id": "biomass",
+          "text": "Asks about cooking fuel and indoor smoke"
+        }
       ],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259 (cigarette smoke, biomass fuels, vaping)" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259 (cigarette smoke, biomass fuels, vaping)"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.hx.resp.drug": {
       "id": "skill.hx.resp.drug",
       "kind": "history",
@@ -132,14 +313,30 @@
       "oneLine": "Not what was prescribed, but what is actually taken and how",
       "why": "In chronic airway disease the commonest reason for apparent treatment failure is not the drug, it is the device. A patient who cannot coordinate a metered dose inhaler is receiving almost nothing, however good the prescription. Asking the patient to demonstrate is worth more than any list of names.",
       "asks": [
-        { "text": "What inhalers do you use? Ask to see the actual devices rather than relying on names." },
-        { "text": "How many times a day, and how many puffs each time?" },
-        { "text": "Which one do you use when you are breathless, and which every day?" },
-        { "text": "Ask the patient to demonstrate their technique with the device or a placebo." },
-        { "text": "How many days in the last month did you miss it, and what gets in the way?" },
-        { "text": "Have you needed steroid tablets or antibiotics for your chest in the last year, and how many times?" },
-        { "text": "Do you use home oxygen or a nebuliser, and for how many hours a day?" },
-        { "text": "Are you taking a beta blocker, and do you use any over-the-counter or traditional remedies?" }
+        {
+          "text": "What inhalers do you use? Ask to see the actual devices rather than relying on names."
+        },
+        {
+          "text": "How many times a day, and how many puffs each time?"
+        },
+        {
+          "text": "Which one do you use when you are breathless, and which every day?"
+        },
+        {
+          "text": "Ask the patient to demonstrate their technique with the device or a placebo."
+        },
+        {
+          "text": "How many days in the last month did you miss it, and what gets in the way?"
+        },
+        {
+          "text": "Have you needed steroid tablets or antibiotics for your chest in the last year, and how many times?"
+        },
+        {
+          "text": "Do you use home oxygen or a nebuliser, and for how many hours a day?"
+        },
+        {
+          "text": "Are you taking a beta blocker, and do you use any over-the-counter or traditional remedies?"
+        }
       ],
       "practice": "Ask someone to demonstrate a metered dose inhaler using a placebo device. Score them on shake, full exhalation, seal, slow deep inspiration with actuation, and a ten-second breath hold. Most people fail on at least two.",
       "pitfalls": [
@@ -150,23 +347,75 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "What is the most informative single question about inhaler use?", "a": "Ask the patient to show you how they use it.", "accept": ["demonstrate", "show", "technique"], "minMatch": 1 },
-        { "level": 2, "q": "Why count courses of oral steroids and antibiotics over the past year?", "a": "Exacerbation frequency is the best predictor of future exacerbations and drives escalation of inhaled therapy.", "accept": ["exacerbation", "frequency", "predict", "escalat"], "minMatch": 1 },
-        { "level": 4, "q": "A COPD patient with ischaemic heart disease is on a beta blocker. Is that a problem?", "a": "Cardioselective beta blockers are generally tolerated in COPD and their cardiac benefit usually outweighs the risk, so they should not be withheld reflexively. Non-selective agents are more likely to provoke bronchospasm. The decision is individualised and made with the treating clinician.", "accept": ["cardioselective", "tolerat", "not withheld", "benefit"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "What is the most informative single question about inhaler use?",
+          "a": "Ask the patient to show you how they use it.",
+          "accept": [
+            "demonstrate",
+            "show",
+            "technique"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why count courses of oral steroids and antibiotics over the past year?",
+          "a": "Exacerbation frequency is the best predictor of future exacerbations and drives escalation of inhaled therapy.",
+          "accept": [
+            "exacerbation",
+            "frequency",
+            "predict",
+            "escalat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A COPD patient with ischaemic heart disease is on a beta blocker. Is that a problem?",
+          "a": "Cardioselective beta blockers are generally tolerated in COPD and their cardiac benefit usually outweighs the risk, so they should not be withheld reflexively. Non-selective agents are more likely to provoke bronchospasm. The decision is individualised and made with the treating clinician.",
+          "accept": [
+            "cardioselective",
+            "tolerat",
+            "not withheld",
+            "benefit"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "devices", "text": "Identifies the actual devices in use" },
-        { "id": "technique", "text": "Asks the patient to demonstrate inhaler technique", "critical": true },
-        { "id": "adherence", "text": "Quantifies missed doses rather than asking if adherent" },
-        { "id": "exacerbations", "text": "Counts steroid and antibiotic courses in the past year" }
+        {
+          "id": "devices",
+          "text": "Identifies the actual devices in use"
+        },
+        {
+          "id": "technique",
+          "text": "Asks the patient to demonstrate inhaler technique",
+          "critical": true
+        },
+        {
+          "id": "adherence",
+          "text": "Quantifies missed doses rather than asking if adherent"
+        },
+        {
+          "id": "exacerbations",
+          "text": "Counts steroid and antibiotic courses in the past year"
+        }
       ],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" },
-        { "source": "GOLD Report", "locator": "Inhaler technique and adherence" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "Inhaler technique and adherence"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.inspection": {
       "id": "skill.exam.resp.inspection",
       "kind": "exam",
@@ -175,12 +424,24 @@
       "oneLine": "Shape, movement, effort, and the signs that only exist before you touch",
       "why": "Inspection carries more diagnostic weight in respiratory examination than any other step, and it is the one students hurry through. Hyperinflation, accessory muscle use, pursed-lip breathing and asymmetry of movement are all visible, and all are lost once the patient starts responding to your hands.",
       "steps": [
-        { "text": "With the patient at 45 degrees and the chest exposed, look from the foot of the bed and then from the side." },
-        { "text": "Note the shape: increased anteroposterior diameter (barrel chest), pectus deformity, kyphoscoliosis, or a flattened hemithorax." },
-        { "text": "Watch the movement for symmetry and for which part of the chest moves." },
-        { "text": "Look for accessory muscle use: sternocleidomastoid, scalenes, and the shoulders rising with each breath." },
-        { "text": "Look for pursed-lip breathing, and for indrawing of the lower intercostal spaces on inspiration (Hoover sign)." },
-        { "text": "Look for scars, including small thoracoscopy and chest-drain scars in the axillae, and for dilated veins." }
+        {
+          "text": "With the patient at 45 degrees and the chest exposed, look from the foot of the bed and then from the side."
+        },
+        {
+          "text": "Note the shape: increased anteroposterior diameter (barrel chest), pectus deformity, kyphoscoliosis, or a flattened hemithorax."
+        },
+        {
+          "text": "Watch the movement for symmetry and for which part of the chest moves."
+        },
+        {
+          "text": "Look for accessory muscle use: sternocleidomastoid, scalenes, and the shoulders rising with each breath."
+        },
+        {
+          "text": "Look for pursed-lip breathing, and for indrawing of the lower intercostal spaces on inspiration (Hoover sign)."
+        },
+        {
+          "text": "Look for scars, including small thoracoscopy and chest-drain scars in the axillae, and for dilated veins."
+        }
       ],
       "normal": "An anteroposterior diameter less than the transverse, symmetrical movement mainly of the lower chest, no accessory muscle use, quiet breathing through the nose or mouth without pursed lips.",
       "abnormal": "Barrel-shaped chest with a raised anteroposterior diameter, reduced or asymmetrical movement, accessory muscle use, pursed-lip breathing, intercostal or supraclavicular indrawing, and paradoxical inward movement of the lower ribs on inspiration.",
@@ -192,25 +453,80 @@
         "Forgetting to look in the axillae and on the back for scars.",
         "Describing a chest as barrel-shaped without comparing the anteroposterior and transverse diameters."
       ],
-      "media": [],
+      "media": [
+        "media.resp.inspection.barrel",
+        "media.resp.inspection.pursedlip",
+        "media.resp.inspection.hoover"
+      ],
       "probes": [
-        { "level": 1, "q": "What is Hoover sign?", "a": "Paradoxical inward movement of the lower costal margin during inspiration.", "accept": ["inward", "costal margin", "paradox"], "minMatch": 1 },
-        { "level": 2, "q": "Why does pursed-lip breathing help a patient with airflow obstruction?", "a": "It creates positive pressure in the airway during expiration, splinting open small airways that would otherwise collapse and trap gas.", "accept": ["positive pressure", "splint", "collapse", "trap"], "minMatch": 1 },
-        { "level": 3, "q": "Explain the mechanism of Hoover sign.", "a": "Severe hyperinflation flattens the diaphragm. A flat diaphragm contracting pulls the lower ribs inward instead of lifting them outward, reversing the normal bucket-handle movement.", "accept": ["flat", "diaphragm", "hyperinflat", "inward"], "minMatch": 2 }
+        {
+          "level": 1,
+          "q": "What is Hoover sign?",
+          "a": "Paradoxical inward movement of the lower costal margin during inspiration.",
+          "accept": [
+            "inward",
+            "costal margin",
+            "paradox"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does pursed-lip breathing help a patient with airflow obstruction?",
+          "a": "It creates positive pressure in the airway during expiration, splinting open small airways that would otherwise collapse and trap gas.",
+          "accept": [
+            "positive pressure",
+            "splint",
+            "collapse",
+            "trap"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Explain the mechanism of Hoover sign.",
+          "a": "Severe hyperinflation flattens the diaphragm. A flat diaphragm contracting pulls the lower ribs inward instead of lifting them outward, reversing the normal bucket-handle movement.",
+          "accept": [
+            "flat",
+            "diaphragm",
+            "hyperinflat",
+            "inward"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [
-        { "id": "exposure", "text": "Exposes and positions the patient adequately" },
-        { "id": "shape", "text": "Comments on chest shape and AP diameter" },
-        { "id": "effort", "text": "Comments on accessory muscle use and breathing pattern" },
-        { "id": "scars", "text": "Looks for scars front and back" }
+        {
+          "id": "exposure",
+          "text": "Exposes and positions the patient adequately"
+        },
+        {
+          "id": "shape",
+          "text": "Comments on chest shape and AP diameter"
+        },
+        {
+          "id": "effort",
+          "text": "Comments on accessory muscle use and breathing pattern"
+        },
+        {
+          "id": "scars",
+          "text": "Looks for scars front and back"
+        }
       ],
       "sources": [
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" },
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.trachea": {
       "id": "skill.exam.resp.trachea",
       "kind": "exam",
@@ -219,11 +535,21 @@
       "oneLine": "One finger, gently, and warn the patient first",
       "why": "Tracheal deviation localises upper mediastinal shift, and the direction distinguishes a process pulling the mediastinum (collapse, fibrosis) from one pushing it (large effusion, tension pneumothorax). It is uncomfortable if done badly, which is why technique matters as much as the finding.",
       "steps": [
-        { "text": "Warn the patient that this may be briefly uncomfortable, and ask them to look straight ahead with the neck relaxed." },
-        { "text": "Place the index finger in the suprasternal notch and feel gently for the trachea." },
-        { "text": "Compare the space between the trachea and the sternocleidomastoid heads on each side." },
-        { "text": "Assess the cricosternal distance, normally about three to four finger-breadths, as a measure of hyperinflation." },
-        { "text": "If shift is suspected, corroborate with the apex beat position." }
+        {
+          "text": "Warn the patient that this may be briefly uncomfortable, and ask them to look straight ahead with the neck relaxed."
+        },
+        {
+          "text": "Place the index finger in the suprasternal notch and feel gently for the trachea."
+        },
+        {
+          "text": "Compare the space between the trachea and the sternocleidomastoid heads on each side."
+        },
+        {
+          "text": "Assess the cricosternal distance, normally about three to four finger-breadths, as a measure of hyperinflation."
+        },
+        {
+          "text": "If shift is suspected, corroborate with the apex beat position."
+        }
       ],
       "normal": "Central trachea with equal spaces either side, and a cricosternal distance of three or more finger-breadths.",
       "abnormal": "Deviation to one side, or a reduced cricosternal distance of two finger-breadths or less indicating hyperinflation with a low-lying trachea.",
@@ -237,21 +563,67 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "How many fingers should you use to assess tracheal position?", "a": "One.", "accept": ["one", "1", "index"], "minMatch": 1 },
-        { "level": 2, "q": "A large left pleural effusion. Which way does the trachea deviate?", "a": "Away from the effusion, to the right.", "accept": ["away", "right", "opposite"], "minMatch": 1 },
-        { "level": 3, "q": "What is the cricosternal distance and what does a reduced distance mean?", "a": "The distance between the cricoid cartilage and the suprasternal notch, normally three to four finger-breadths. A reduction to two or fewer indicates hyperinflation with a low-lying trachea.", "accept": ["cricoid", "three", "four", "hyperinflat", "two"], "minMatch": 2 }
+        {
+          "level": 1,
+          "q": "How many fingers should you use to assess tracheal position?",
+          "a": "One.",
+          "accept": [
+            "one",
+            "1",
+            "index"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A large left pleural effusion. Which way does the trachea deviate?",
+          "a": "Away from the effusion, to the right.",
+          "accept": [
+            "away",
+            "right",
+            "opposite"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is the cricosternal distance and what does a reduced distance mean?",
+          "a": "The distance between the cricoid cartilage and the suprasternal notch, normally three to four finger-breadths. A reduction to two or fewer indicates hyperinflation with a low-lying trachea.",
+          "accept": [
+            "cricoid",
+            "three",
+            "four",
+            "hyperinflat",
+            "two"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [
-        { "id": "warn", "text": "Warns the patient before palpating", "critical": true },
-        { "id": "onefinger", "text": "Uses a single finger with gentle pressure" },
-        { "id": "compare", "text": "Compares the space on both sides" }
+        {
+          "id": "warn",
+          "text": "Warns the patient before palpating",
+          "critical": true
+        },
+        {
+          "id": "onefinger",
+          "text": "Uses a single finger with gentle pressure"
+        },
+        {
+          "id": "compare",
+          "text": "Compares the space on both sides"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.expansion": {
       "id": "skill.exam.resp.expansion",
       "kind": "exam",
@@ -260,12 +632,24 @@
       "oneLine": "Let your thumbs float, or you will measure your own hands",
       "why": "Chest expansion quantifies how much the lung is actually moving and, more usefully, whether the two sides move equally. Asymmetry localises disease to the side that lags. The technique has one critical detail: the thumbs must be free of the chest wall, or they move with the skin and the sign disappears.",
       "steps": [
-        { "text": "For the upper chest, place your hands over the upper anterior chest with the fingers gripping the sides." },
-        { "text": "For the lower chest, grip the lower rib cage from behind or in front with the fingers, and bring the thumbs together in the midline." },
-        { "text": "Lift the thumbs slightly off the chest wall so they are free to move." },
-        { "text": "Ask the patient to take a deep breath in." },
-        { "text": "Watch the distance each thumb travels from the midline, and compare the two sides." },
-        { "text": "Repeat at the upper, middle and lower zones, and compare front with back." }
+        {
+          "text": "For the upper chest, place your hands over the upper anterior chest with the fingers gripping the sides."
+        },
+        {
+          "text": "For the lower chest, grip the lower rib cage from behind or in front with the fingers, and bring the thumbs together in the midline."
+        },
+        {
+          "text": "Lift the thumbs slightly off the chest wall so they are free to move."
+        },
+        {
+          "text": "Ask the patient to take a deep breath in."
+        },
+        {
+          "text": "Watch the distance each thumb travels from the midline, and compare the two sides."
+        },
+        {
+          "text": "Repeat at the upper, middle and lower zones, and compare front with back."
+        }
       ],
       "normal": "Symmetrical movement, with each thumb moving about 2.5 to 5 cm from the midline on deep inspiration.",
       "abnormal": "Reduced total expansion, or one thumb moving less than the other, indicating reduced movement on that side.",
@@ -277,24 +661,76 @@
         "Not asking for a deep breath, or asking while the patient is mid-cycle.",
         "Comparing sides using two different hand positions."
       ],
-      "media": [],
+      "media": [
+        "media.resp.expansion.technique"
+      ],
       "probes": [
-        { "level": 1, "q": "Why must your thumbs be lifted off the chest wall?", "a": "So they move freely with the chest rather than travelling with the skin, which is what makes asymmetry visible.", "accept": ["free", "skin", "move", "float"], "minMatch": 1 },
-        { "level": 2, "q": "The left thumb moves less than the right. Which side is diseased?", "a": "The left, the lagging side.", "accept": ["left", "lagging", "same side"], "minMatch": 1 },
-        { "level": 3, "q": "What does symmetrically reduced expansion suggest?", "a": "A diffuse bilateral process such as hyperinflation in COPD, interstitial fibrosis, or a restrictive chest-wall or neuromuscular problem.", "accept": ["copd", "hyperinflat", "fibrosis", "bilateral", "restrictive"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "Why must your thumbs be lifted off the chest wall?",
+          "a": "So they move freely with the chest rather than travelling with the skin, which is what makes asymmetry visible.",
+          "accept": [
+            "free",
+            "skin",
+            "move",
+            "float"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "The left thumb moves less than the right. Which side is diseased?",
+          "a": "The left, the lagging side.",
+          "accept": [
+            "left",
+            "lagging",
+            "same side"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What does symmetrically reduced expansion suggest?",
+          "a": "A diffuse bilateral process such as hyperinflation in COPD, interstitial fibrosis, or a restrictive chest-wall or neuromuscular problem.",
+          "accept": [
+            "copd",
+            "hyperinflat",
+            "fibrosis",
+            "bilateral",
+            "restrictive"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "thumbs", "text": "Lifts the thumbs clear of the chest wall", "critical": true },
-        { "id": "zones", "text": "Assesses more than one zone" },
-        { "id": "compare", "text": "Explicitly compares the two sides" },
-        { "id": "instruct", "text": "Instructs the patient to take a deep breath" }
+        {
+          "id": "thumbs",
+          "text": "Lifts the thumbs clear of the chest wall",
+          "critical": true
+        },
+        {
+          "id": "zones",
+          "text": "Assesses more than one zone"
+        },
+        {
+          "id": "compare",
+          "text": "Explicitly compares the two sides"
+        },
+        {
+          "id": "instruct",
+          "text": "Instructs the patient to take a deep breath"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.percussion": {
       "id": "skill.exam.resp.percussion",
       "kind": "exam",
@@ -303,12 +739,24 @@
       "oneLine": "Compare like with like, side to side, and move the pleximeter finger",
       "why": "Percussion samples what lies immediately beneath the chest wall and separates air from fluid from solid. Its value is almost entirely comparative: an absolute note is hard to judge, but a difference between two matched points on opposite sides is unmistakable even to a beginner.",
       "steps": [
-        { "text": "Place the middle finger of your non-dominant hand flat against the chest wall, pressed firmly, in an intercostal space." },
-        { "text": "Strike the middle phalanx of that finger with the tip of your dominant middle finger, using a loose movement from the wrist." },
-        { "text": "Strike twice, then lift the finger away between sites." },
-        { "text": "Work from side to side at matched levels, not down one side and then the other." },
-        { "text": "Percuss the clavicle directly for the lung apex." },
-        { "text": "Include the axillae, and percuss the back with the patient's arms folded forward." }
+        {
+          "text": "Place the middle finger of your non-dominant hand flat against the chest wall, pressed firmly, in an intercostal space."
+        },
+        {
+          "text": "Strike the middle phalanx of that finger with the tip of your dominant middle finger, using a loose movement from the wrist."
+        },
+        {
+          "text": "Strike twice, then lift the finger away between sites."
+        },
+        {
+          "text": "Work from side to side at matched levels, not down one side and then the other."
+        },
+        {
+          "text": "Percuss the clavicle directly for the lung apex."
+        },
+        {
+          "text": "Include the axillae, and percuss the back with the patient's arms folded forward."
+        }
       ],
       "normal": "A resonant note throughout, with dullness over the cardiac area and the liver, and a normal area of cardiac and hepatic dullness.",
       "abnormal": "Hyperresonance (increased air), dullness (consolidation, collapse, fibrosis), or stony dullness (pleural effusion). Loss of the normal areas of cardiac and hepatic dullness indicates hyperinflation.",
@@ -321,24 +769,74 @@
         "Forgetting the axillae, where a surprising amount of lung lies.",
         "Percussing with a stiff arm rather than a loose wrist."
       ],
-      "media": [],
+      "media": [
+        "media.dia.percussion",
+        "media.resp.percussion.technique"
+      ],
       "probes": [
-        { "level": 1, "q": "In which direction should you percuss?", "a": "Side to side at matched levels, comparing the two sides.", "accept": ["side to side", "compar", "matched"], "minMatch": 1 },
-        { "level": 2, "q": "What does stony dullness at the left base suggest?", "a": "A pleural effusion.", "accept": ["effusion", "pleural"], "minMatch": 1 },
-        { "level": 3, "q": "Why is loss of cardiac and hepatic dullness significant in COPD?", "a": "Hyperinflated lung expands over the heart and liver, replacing the normally dull areas with resonant lung. It is a bedside sign of hyperinflation.", "accept": ["hyperinflat", "lung", "over", "expand"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "In which direction should you percuss?",
+          "a": "Side to side at matched levels, comparing the two sides.",
+          "accept": [
+            "side to side",
+            "compar",
+            "matched"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What does stony dullness at the left base suggest?",
+          "a": "A pleural effusion.",
+          "accept": [
+            "effusion",
+            "pleural"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is loss of cardiac and hepatic dullness significant in COPD?",
+          "a": "Hyperinflated lung expands over the heart and liver, replacing the normally dull areas with resonant lung. It is a bedside sign of hyperinflation.",
+          "accept": [
+            "hyperinflat",
+            "lung",
+            "over",
+            "expand"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "technique", "text": "Uses correct pleximeter placement and a loose wrist" },
-        { "id": "compare", "text": "Percusses side to side comparing matched levels", "critical": true },
-        { "id": "coverage", "text": "Includes apices, axillae and the back" }
+        {
+          "id": "technique",
+          "text": "Uses correct pleximeter placement and a loose wrist"
+        },
+        {
+          "id": "compare",
+          "text": "Percusses side to side comparing matched levels",
+          "critical": true
+        },
+        {
+          "id": "coverage",
+          "text": "Includes apices, axillae and the back"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" },
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.auscultation": {
       "id": "skill.exam.resp.auscultation",
       "kind": "exam",
@@ -347,12 +845,24 @@
       "oneLine": "Quality first, then intensity, then what is added",
       "why": "Breath sounds tell you whether air is reaching the alveoli and whether the lung between the alveoli and your stethoscope conducts sound normally. Reduced breath sounds and bronchial breathing are not degrees of the same thing; they mean opposite things about the underlying lung.",
       "steps": [
-        { "text": "Ask the patient to breathe deeply through an open mouth." },
-        { "text": "Use the diaphragm, applied firmly, and compare side to side at matched levels." },
-        { "text": "Listen through a full inspiration and expiration at each site." },
-        { "text": "Judge the quality first: vesicular or bronchial." },
-        { "text": "Then judge the intensity, comparing the two sides." },
-        { "text": "Cover apices, axillae, and the back, and listen for at least six sites on each side." }
+        {
+          "text": "Ask the patient to breathe deeply through an open mouth."
+        },
+        {
+          "text": "Use the diaphragm, applied firmly, and compare side to side at matched levels."
+        },
+        {
+          "text": "Listen through a full inspiration and expiration at each site."
+        },
+        {
+          "text": "Judge the quality first: vesicular or bronchial."
+        },
+        {
+          "text": "Then judge the intensity, comparing the two sides."
+        },
+        {
+          "text": "Cover apices, axillae, and the back, and listen for at least six sites on each side."
+        }
       ],
       "normal": "Vesicular breath sounds: a rustling inspiratory sound continuing without pause into a shorter, quieter expiration, of equal intensity on both sides.",
       "abnormal": "Reduced or absent breath sounds, or bronchial breathing, which is a hollow blowing sound with a gap between inspiration and expiration and an expiratory phase as long and as loud as inspiration.",
@@ -367,23 +877,80 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "Which part of the stethoscope do you use for breath sounds?", "a": "The diaphragm.", "accept": ["diaphragm"] },
-        { "level": 2, "q": "How does bronchial breathing differ from vesicular?", "a": "It is hollow and blowing, with a pause between inspiration and expiration, and the expiratory phase is as long and as loud as the inspiratory phase.", "accept": ["hollow", "pause", "gap", "expirat"], "minMatch": 1 },
-        { "level": 3, "q": "Why does consolidated lung produce bronchial breathing?", "a": "Solid lung conducts sound better than air-filled lung, so the sounds generated in the large central airways are transmitted to the chest wall instead of being filtered out.", "accept": ["conduct", "solid", "transmit"], "minMatch": 1 },
-        { "level": 4, "q": "A severe asthmatic has a silent chest. Is that reassuring?", "a": "No. A silent chest means airflow is too low to generate sound and is a sign of life-threatening obstruction requiring immediate senior and critical-care input.", "accept": ["no", "life-threatening", "severe", "not reassuring", "airflow"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "Which part of the stethoscope do you use for breath sounds?",
+          "a": "The diaphragm.",
+          "accept": [
+            "diaphragm"
+          ]
+        },
+        {
+          "level": 2,
+          "q": "How does bronchial breathing differ from vesicular?",
+          "a": "It is hollow and blowing, with a pause between inspiration and expiration, and the expiratory phase is as long and as loud as the inspiratory phase.",
+          "accept": [
+            "hollow",
+            "pause",
+            "gap",
+            "expirat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does consolidated lung produce bronchial breathing?",
+          "a": "Solid lung conducts sound better than air-filled lung, so the sounds generated in the large central airways are transmitted to the chest wall instead of being filtered out.",
+          "accept": [
+            "conduct",
+            "solid",
+            "transmit"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A severe asthmatic has a silent chest. Is that reassuring?",
+          "a": "No. A silent chest means airflow is too low to generate sound and is a sign of life-threatening obstruction requiring immediate senior and critical-care input.",
+          "accept": [
+            "no",
+            "life-threatening",
+            "severe",
+            "not reassuring",
+            "airflow"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "instruct", "text": "Instructs the patient to breathe deeply through the mouth" },
-        { "id": "quality", "text": "Comments on the quality of breath sounds" },
-        { "id": "compare", "text": "Compares side to side at matched levels", "critical": true },
-        { "id": "coverage", "text": "Auscultates apices, axillae and the back" }
+        {
+          "id": "instruct",
+          "text": "Instructs the patient to breathe deeply through the mouth"
+        },
+        {
+          "id": "quality",
+          "text": "Comments on the quality of breath sounds"
+        },
+        {
+          "id": "compare",
+          "text": "Compares side to side at matched levels",
+          "critical": true
+        },
+        {
+          "id": "coverage",
+          "text": "Auscultates apices, axillae and the back"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.added_sounds": {
       "id": "skill.exam.resp.added_sounds",
       "kind": "exam",
@@ -392,11 +959,21 @@
       "oneLine": "Wheeze, crackles and rub, and the timing that identifies each",
       "why": "Added sounds carry specific diagnostic information, but only when timed within the respiratory cycle. Early inspiratory crackles mean something different from late inspiratory crackles; a wheeze that is monophonic means something different from one that is polyphonic. Reporting 'crepitations present' discards nearly all of that information.",
       "steps": [
-        { "text": "At each auscultation site, listen specifically for sounds added to the breath sounds." },
-        { "text": "For any crackle, note whether it is early or late in inspiration, and whether it is fine or coarse." },
-        { "text": "For any wheeze, note whether it is inspiratory or expiratory, and whether it is a single note (monophonic) or many notes together (polyphonic)." },
-        { "text": "Ask the patient to cough, and listen again. Crackles that clear with coughing are usually secretions." },
-        { "text": "Listen for a pleural rub: a creaking sound present in both phases, unaffected by coughing, and often painful." }
+        {
+          "text": "At each auscultation site, listen specifically for sounds added to the breath sounds."
+        },
+        {
+          "text": "For any crackle, note whether it is early or late in inspiration, and whether it is fine or coarse."
+        },
+        {
+          "text": "For any wheeze, note whether it is inspiratory or expiratory, and whether it is a single note (monophonic) or many notes together (polyphonic)."
+        },
+        {
+          "text": "Ask the patient to cough, and listen again. Crackles that clear with coughing are usually secretions."
+        },
+        {
+          "text": "Listen for a pleural rub: a creaking sound present in both phases, unaffected by coughing, and often painful."
+        }
       ],
       "normal": "No added sounds.",
       "abnormal": "Wheeze (a musical continuous sound, usually expiratory), crackles (discontinuous popping sounds, fine or coarse, early or late in inspiration), or a pleural rub.",
@@ -408,24 +985,76 @@
         "Assuming all wheeze is asthma or COPD, and so missing a fixed monophonic wheeze from an obstructing tumour.",
         "Mistaking transmitted upper airway sounds for wheeze. Listen at the mouth and over the trachea to compare."
       ],
-      "media": [],
+      "media": [
+        "media.resp.auscultation.wheeze",
+        "media.resp.auscultation.crackles_coarse",
+        "media.resp.auscultation.crackles_fine"
+      ],
       "probes": [
-        { "level": 1, "q": "In which phase of respiration is wheeze usually heard in airflow obstruction?", "a": "Expiration.", "accept": ["expirat"] },
-        { "level": 2, "q": "What is the significance of a fixed monophonic wheeze?", "a": "It suggests narrowing of a single large airway, raising the possibility of tumour or a foreign body, and warrants imaging and bronchoscopy.", "accept": ["single", "tumour", "tumor", "foreign body", "obstruct"], "minMatch": 1 },
-        { "level": 3, "q": "How do crackles in COPD differ from those in pulmonary fibrosis?", "a": "COPD gives early, coarse crackles that often change or clear with coughing because they arise from secretions. Fibrosis gives fine, late inspiratory crackles that do not clear with coughing.", "accept": ["coarse", "early", "fine", "late", "cough"], "minMatch": 2 }
+        {
+          "level": 1,
+          "q": "In which phase of respiration is wheeze usually heard in airflow obstruction?",
+          "a": "Expiration.",
+          "accept": [
+            "expirat"
+          ]
+        },
+        {
+          "level": 2,
+          "q": "What is the significance of a fixed monophonic wheeze?",
+          "a": "It suggests narrowing of a single large airway, raising the possibility of tumour or a foreign body, and warrants imaging and bronchoscopy.",
+          "accept": [
+            "single",
+            "tumour",
+            "tumor",
+            "foreign body",
+            "obstruct"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How do crackles in COPD differ from those in pulmonary fibrosis?",
+          "a": "COPD gives early, coarse crackles that often change or clear with coughing because they arise from secretions. Fibrosis gives fine, late inspiratory crackles that do not clear with coughing.",
+          "accept": [
+            "coarse",
+            "early",
+            "fine",
+            "late",
+            "cough"
+          ],
+          "minMatch": 2
+        }
       ],
       "rubric": [
-        { "id": "timing", "text": "Times added sounds within the respiratory cycle", "critical": true },
-        { "id": "character", "text": "Describes character (fine/coarse, mono/polyphonic)" },
-        { "id": "cough", "text": "Asks the patient to cough and re-auscultates" }
+        {
+          "id": "timing",
+          "text": "Times added sounds within the respiratory cycle",
+          "critical": true
+        },
+        {
+          "id": "character",
+          "text": "Describes character (fine/coarse, mono/polyphonic)"
+        },
+        {
+          "id": "cough",
+          "text": "Asks the patient to cough and re-auscultates"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" },
-        { "source": "Harrison's Principles of Internal Medicine 22e", "locator": "COPD, p.2249-2259" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "COPD, p.2249-2259"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     },
-
     "skill.exam.resp.vocal_resonance": {
       "id": "skill.exam.resp.vocal_resonance",
       "kind": "exam",
@@ -434,11 +1063,21 @@
       "oneLine": "The same physiology, once with the stethoscope and once with the hand",
       "why": "Voice transmission distinguishes solid lung from fluid and from air, and it confirms what percussion and auscultation have already suggested. Consolidated lung conducts the voice better; fluid and air conduct it worse. Doing it after percussion turns a suspicion into a confirmed pattern.",
       "steps": [
-        { "text": "For vocal resonance, place the stethoscope diaphragm on the chest and ask the patient to say a repeated phrase such as ninety-nine or a local equivalent." },
-        { "text": "Compare the loudness at matched sites on both sides." },
-        { "text": "For tactile fremitus, use the ulnar border or the flat of the hand in the same positions while the patient repeats the phrase." },
-        { "text": "Where resonance is increased, test for whispering pectoriloquy by asking the patient to whisper the phrase." },
-        { "text": "Correlate with the percussion note and the breath sounds at the same site." }
+        {
+          "text": "For vocal resonance, place the stethoscope diaphragm on the chest and ask the patient to say a repeated phrase such as ninety-nine or a local equivalent."
+        },
+        {
+          "text": "Compare the loudness at matched sites on both sides."
+        },
+        {
+          "text": "For tactile fremitus, use the ulnar border or the flat of the hand in the same positions while the patient repeats the phrase."
+        },
+        {
+          "text": "Where resonance is increased, test for whispering pectoriloquy by asking the patient to whisper the phrase."
+        },
+        {
+          "text": "Correlate with the percussion note and the breath sounds at the same site."
+        }
       ],
       "normal": "Equal, muffled voice sounds on both sides, with the words indistinct.",
       "abnormal": "Increased resonance and fremitus with clearly audible whispered speech (whispering pectoriloquy) over consolidation, or reduced resonance and fremitus over an effusion or pneumothorax.",
@@ -452,19 +1091,66 @@
       ],
       "media": [],
       "probes": [
-        { "level": 1, "q": "What happens to vocal resonance over consolidation?", "a": "It is increased.", "accept": ["increas", "louder"], "minMatch": 1 },
-        { "level": 2, "q": "Give the full triad of percussion, breath sounds and vocal resonance for a pleural effusion.", "a": "Stony dull percussion note, absent or reduced breath sounds, and reduced vocal resonance.", "accept": ["stony", "dull", "reduced", "absent"], "minMatch": 2 },
-        { "level": 3, "q": "Why does consolidated lung transmit the voice better than normal lung?", "a": "Air-filled alveoli scatter and filter sound. When alveoli fill with exudate the lung becomes a better conducting medium, so higher-frequency voice components reach the chest wall.", "accept": ["conduct", "solid", "exudate", "air", "filter"], "minMatch": 1 }
+        {
+          "level": 1,
+          "q": "What happens to vocal resonance over consolidation?",
+          "a": "It is increased.",
+          "accept": [
+            "increas",
+            "louder"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give the full triad of percussion, breath sounds and vocal resonance for a pleural effusion.",
+          "a": "Stony dull percussion note, absent or reduced breath sounds, and reduced vocal resonance.",
+          "accept": [
+            "stony",
+            "dull",
+            "reduced",
+            "absent"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why does consolidated lung transmit the voice better than normal lung?",
+          "a": "Air-filled alveoli scatter and filter sound. When alveoli fill with exudate the lung becomes a better conducting medium, so higher-frequency voice components reach the chest wall.",
+          "accept": [
+            "conduct",
+            "solid",
+            "exudate",
+            "air",
+            "filter"
+          ],
+          "minMatch": 1
+        }
       ],
       "rubric": [
-        { "id": "matched", "text": "Tests at matched sites on both sides", "critical": true },
-        { "id": "both", "text": "Uses either vocal resonance or tactile fremitus competently" },
-        { "id": "integrate", "text": "Integrates the finding with percussion and auscultation" }
+        {
+          "id": "matched",
+          "text": "Tests at matched sites on both sides",
+          "critical": true
+        },
+        {
+          "id": "both",
+          "text": "Uses either vocal resonance or tactile fremitus competently"
+        },
+        {
+          "id": "integrate",
+          "text": "Integrates the finding with percussion and auscultation"
+        }
       ],
       "sources": [
-        { "source": "Macleod's Clinical Examination", "locator": "The respiratory system" }
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system"
+        }
       ],
-      "review": { "status": "ai_drafted" }
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

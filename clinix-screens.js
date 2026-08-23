@@ -50,6 +50,8 @@
     stationChecked: {},
     stationEndsAt: 0,
     stationTimer: null,
+    diaFocus: "both",
+    diaZone: null,
     caseDef: null,
     casePhase: "history",
     caseLog: [],
@@ -363,6 +365,14 @@
     if (!m) {
       return head + '<div class="cx-media cx-media--pending">' + ic("videocam_off") +
         '<div class="cx-media-cap">A demonstration for this step has not been added yet.</div></div>';
+    }
+    // A self-authored inline diagram. It is the only media kind we can always clear, and because it
+    // is inline it inherits the theme and can be interactive.
+    if (m.renderable && m.inline && m.diagramId && window.SMD_CLINIX_DIAGRAMS && SMD_CLINIX_DIAGRAMS.has(m.diagramId)) {
+      var svg = SMD_CLINIX_DIAGRAMS.render(m.diagramId, { focus: state.diaFocus, selected: state.diaZone });
+      return head + '<figure class="cx-media cx-media--dia">' + svg +
+        '<figcaption class="cx-media-cap">' + esc(m.caption) +
+        '<span class="cx-media-src">' + esc(m.attribution) + " \u00b7 " + esc(m.licence) + "</span></figcaption></figure>";
     }
     if (m.renderable && m.src) {
       var inner = m.kind === "audio"
@@ -938,6 +948,8 @@
     state.answered = {};
     state.revealed = {};
     state.tutorLog = [];
+    state.diaFocus = "both";
+    state.diaZone = null;
     if (P()) P().savePosition({ diseaseId: state.diseaseId, chapterId: state.chapterId, skillId: skillId, turnIndex: 0 });
     go("lesson");
   }
@@ -1190,6 +1202,8 @@
       case "cx-station-finish": finishStation(); return;
       case "cx-station-retry": startStation(state.stationDef.id); return;
 
+      case "cx-dia-focus": state.diaFocus = id; haptic("tap"); repaint(); return;
+      case "cx-dia-zone": state.diaZone = (state.diaZone === id ? null : id); haptic("tap"); repaint(); return;
       case "cx-case": haptic("tap"); startCase(id); return;
       case "cx-case-ask": {
         var ce = document.getElementById("cxCaseQ");

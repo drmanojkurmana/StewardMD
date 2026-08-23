@@ -266,6 +266,65 @@ try {
     "missing consent fails the station on safety, regardless of the total");
   ok(osce && osce.withoutConsent.passed === false, "and is not recorded as a pass");
 
+  /* ── 6b. SELF-AUTHORED DIAGRAMS: the gate OPENING ──────────────────────── */
+  console.log("\n--- diagrams ---");
+  const dia = await ev(`(() => {
+    const C = window.SMD_CLINIX_CONTENT, D = window.SMD_CLINIX_DIAGRAMS;
+    const built = C._cache().diseases['copd'];
+    const m = C.media(built, 'media.dia.percussion');
+    return {
+      renderable: m && m.renderable, inline: m && m.inline, id: m && m.diagramId,
+      attribution: m && m.attribution,
+      registered: !!(D && D.has('diagram.percussion')),
+      svg: D ? D.render('diagram.percussion', {}).indexOf('<svg') === 0 : false,
+      zones: D ? D.ZONES.length : 0
+    };
+  })()`);
+  ok(dia && dia.renderable === true, "a SELF-AUTHORED diagram passes the licence gate");
+  ok(dia && dia.inline === true && dia.id === "diagram.percussion", "and resolves to an inline diagram");
+  ok(dia && dia.attribution === "StewardMD", "attributed to us, which is why it can be cleared at all");
+  ok(dia && dia.registered && dia.svg, "the diagram registry renders real SVG");
+  ok(dia && dia.zones === 8, "the percussion map has all eight comparative zones");
+
+  // The percussion diagram must actually render inside a lesson, and be interactive. Navigate from
+  // a clean load: at this point the previous section left us deep inside a different lesson, where
+  // there are no rail buttons to click.
+  await attach(BASE + "?clinix=1&clinixdraft=1");
+  await ev("window.CLINIX.open()");
+  await sleep(400);
+  await ev("[...document.querySelectorAll('#clinixRoot .cx-sys')].find(b => b.textContent.includes('Respiratory')).click()");
+  await sleep(300);
+  await ev("document.querySelector('#clinixRoot [data-act=\"cx-disease\"]').click()");
+  for (let i = 0; i < 40; i++) {
+    if (await ev("!!document.querySelector('#clinixRoot .cx-rail-btn')")) break;
+    await sleep(250);
+  }
+  await ev("(function(){ var b = [...document.querySelectorAll('#clinixRoot .cx-rail-btn')].find(x => x.textContent.indexOf('Respiratory examination') >= 0); if (b) b.click(); return !!b; })()");
+  await sleep(300);
+  await ev("(function(){ var b = [...document.querySelectorAll('#clinixRoot [data-act=\"cx-lesson\"]')].find(x => x.textContent.indexOf('Percussion') >= 0); if (b) b.click(); return !!b; })()");
+  await sleep(350);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-dia')")) === true,
+    "the percussion lesson opens on its diagram");
+  ok((await ev("document.querySelectorAll('#clinixRoot .cx-dia-zone').length === 8")) === true,
+    "all eight zones render");
+  ok((await ev("!document.querySelector('#clinixRoot .cx-dia-zone--on')")) === true,
+    "no zone is selected initially");
+  // SVG elements have no .click() method (it lives on HTMLElement), so dispatch the real bubbling
+  // event a tap produces. This also proves the delegated listener on #clinixRoot handles SVG targets.
+  await ev("(function(){ var z = document.querySelector('#clinixRoot [data-act=\"cx-dia-zone\"]'); z.dispatchEvent(new MouseEvent('click', { bubbles: true })); return true; })()");
+  await sleep(250);
+  ok((await ev("!!document.querySelector('#clinixRoot .cx-dia-zone--on')")) === true,
+    "INTERACTIVE: tapping a zone selects it");
+  ok((await ev("document.querySelector('#clinixRoot .cx-dia-note').textContent.indexOf('apex') >= 0")) === true,
+    "and shows what you would expect to find there");
+
+  // The uncleared video on the SAME skill must still be gated.
+  ok((await ev(`(() => {
+    const C = window.SMD_CLINIX_CONTENT;
+    const m = C.media(C._cache().diseases['copd'], 'media.resp.percussion.technique');
+    return m && m.renderable === false && !m.src;
+  })()`)) === true, "while the externally sourced video on the same skill is still refused");
+
   /* ── 8b. CASE MODE: the simulated patient ──────────────────────────────── */
   console.log("\n--- clinical case ---");
   // Back to the disease page (we are currently deep in a lesson).
