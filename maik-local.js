@@ -348,7 +348,32 @@
       })
       .then(function () { return M.pathFor(packId); }).then(function (path) {
       return L.load({ path: path, nCtx: pk.nCtx || 4096 });
-    }).then(function () { _loadedPack = packId; return null; });
+    }).then(function () { _loadedPack = packId; return null; }, function (err) {
+      /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
+       *
+       * llama.cpp rejects a structurally bad file and the plugin reports "model-corrupted". Nothing
+       * used to act on that, so the pack stayed marked installed, every question failed, and there was
+       * no way out from inside the app - the clinician just saw "MaiK is unavailable" forever.
+       *
+       * Integrity here is byte-length + GGUF magic, deliberately not a full SHA of 2.5 GB read back
+       * through the bridge. A download RESUMED from the wrong offset can land on the exact expected
+       * length with corrupt bytes inside, pass that check, and be marked installed. This file's own
+       * header records that happening before ("resumed after a timeout and was not intact").
+       *
+       * So delete it. A file the loader will not accept has no value, keeping it wastes 2.5 GB, and
+       * leaving the marker alone would not help: installed() re-checks the SIZE, still matches, and
+       * marks it installed again. Removing it is what makes re-downloading possible.
+       */
+      var code = String((err && (err.code || err.message)) || "");
+      if (/model-corrupted|corrupt|failed to load/i.test(code)) {
+        _loadedPack = null;
+        try { if (M.remove) M.remove(packId); } catch (e) {}
+        var e2 = new Error("model-corrupted");
+        e2.code = "model-corrupted";
+        throw e2;
+      }
+      throw err;
+    });
   }
 
   /**

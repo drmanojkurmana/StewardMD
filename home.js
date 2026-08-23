@@ -4043,6 +4043,12 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return "On-device answering is not available in this build.<br><br>" +
              "Tap the model name at the top and choose <b>MaiK Cloud</b>.";
     }
+    if (/model-corrupted|corrupt/i.test(e)) {
+      return "The downloaded model file was damaged and could not be loaded, so it has been removed.<br><br>" +
+             "This usually happens when a download is interrupted and resumed. Tap the model name at the top " +
+             "to download it again - on Wi-Fi, and leave the app open until it finishes. " +
+             "In the meantime choose <b>MaiK Cloud</b> for answers.";
+    }
     if (/unknown model pack|not installed|model file/i.test(e)) {
       return "That on-device model is not fully installed on this device.<br><br>" +
              "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";

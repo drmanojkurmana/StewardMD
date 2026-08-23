@@ -79,3 +79,17 @@ test("no error means no notice text is fabricated", () => {
   assert.match(h, /MaiK is unavailable right now/);
   assert.equal(/Reason:/.test(h), false, "nothing to report, so report nothing");
 });
+
+/* ---------------------------------------------------------------- corrupt model recovery */
+test("a corrupt model is explained as damaged, with a way out", () => {
+  const h = N({ error: "model-corrupted" });
+  assert.match(h, /damaged/i);
+  assert.match(h, /removed/i, "it is deleted, so say so - the clinician just lost 2.5 GB");
+  assert.match(h, /download it again/i, "the recovery action");
+  assert.match(h, /interrupted and resumed/i, "and the likely cause, so it can be avoided");
+  assert.match(h, /MaiK Cloud/, "plus an answer right now");
+});
+
+test("corrupt is distinguished from not-installed", () => {
+  assert.notEqual(N({ error: "model-corrupted" }), N({ error: "unknown model pack" }));
+});
