@@ -51,10 +51,38 @@ test("entitlement: Notes is off when its flag is down, whatever the role", () =>
   assert.equal(off, "off");
 });
 
-test("entitlement: Notes requires the app's existing clinician gate", () => {
+test("entitlement: Notes requires the clinician gate WHEN smd_surgx_notes_verify is on", () => {
+  // flag:()=>true turns every flag on, including the verify gate - this is the gate-enabled path.
   const deps = { flag: () => true, bypass: () => false };
   assert.equal(ENT.notesAccess(Object.assign({ canPrescribe: () => false }, deps)), "verify_required");
   assert.equal(ENT.notesAccess(Object.assign({ canPrescribe: () => true }, deps)), "allowed");
+});
+
+test("entitlement: by DEFAULT the registration gate is off and Notes opens", () => {
+  /* Owner decision 2026-08-25: a surgical note is the surgeon's own record of what they did, not an
+   * order acting on a patient, so it does not carry the prescribing gate. Notes still cannot
+   * prescribe (SURGX exposes no Rx affordance at all) and the EMR write stays gated separately. */
+  assert.equal(ENT.notesAccess({
+    flag: (k) => k === "smd_surgx_notes",          // notes on, verify gate off (the shipped default)
+    canPrescribe: () => false,
+    bypass: () => false
+  }), "allowed");
+  assert.equal(F.DEFS.smd_surgx_notes_verify.def, false, "the gate must ship OFF");
+});
+
+test("entitlement: turning the gate back on needs no rebuild", () => {
+  // The whole point of doing this with a flag: it is reversible on a device.
+  assert.equal(F.DEFS.smd_surgx_notes_verify.type, "bool");
+  assert.ok(F.DEFS.smd_surgx_notes_verify.query, "must be settable via ?query too");
+  assert.equal(ENT.notesAccess({
+    flag: (k) => k === "smd_surgx_notes" || k === "smd_surgx_notes_verify",
+    canPrescribe: () => false,
+    bypass: () => false
+  }), "verify_required");
+});
+
+test("entitlement: the master Notes flag still wins over everything", () => {
+  assert.equal(ENT.notesAccess({ flag: () => false, canPrescribe: () => true, bypass: () => true }), "off");
 });
 
 test("entitlement: an unverified user SEES Notes and is told why, never silently hidden", () => {

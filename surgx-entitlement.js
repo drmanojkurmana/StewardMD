@@ -60,6 +60,13 @@
     var canRx = deps.canPrescribe || defCanPrescribe;
     var bypass = deps.bypass || defBypass;
     if (!flag("smd_surgx_notes")) return "off";
+    /* The registration gate is OFF by default (owner decision, 2026-08-25): a surgical note is the
+     * surgeon's own record of what they did, not an order acting on a patient, so it does not need
+     * the prescribing gate. Notes still cannot prescribe anything - SURGX exposes no Rx affordance
+     * at all (asserted in test/run-surgx-ui.mjs) - and the EMR write remains gated separately by
+     * QUEUE_EMR_WRITE plus a GHIS session.
+     * Reversible without a rebuild: set smd_surgx_notes_verify=1 to restore the old behaviour. */
+    if (!flag("smd_surgx_notes_verify")) return "allowed";
     if (canRx() || bypass()) return "allowed";
     return "verify_required";
   }
