@@ -392,8 +392,13 @@ const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure:
  * Whichever trips, the stream is CLOSED CLEANLY with a done event and the upstream reader is
  * cancelled — so the client always settles deterministically instead of waiting on a dead socket. */
 function streamConnectMs(env) { const v = Number(env.MAIK_STREAM_CONNECT_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
-function streamIdleMs(env) { const v = Number(env.MAIK_STREAM_IDLE_MS); return Number.isFinite(v) && v > 0 ? v : 12000; }
-function streamTotalMs(env) { const v = Number(env.MAIK_STREAM_TOTAL_MS); return Number.isFinite(v) && v > 0 ? v : 60000; }
+function streamIdleMs(env) { const v = Number(env.MAIK_STREAM_IDLE_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+/* 25s, not 60s. Measured on 128 device requests: the longest legitimate answer completed in ~11s,
+ * while one pathological stream ran the full 60s before dying. A deadline that generous is not a
+ * bound, it is a hang with extra steps. 25s stays clear of every real answer AND stays inside the
+ * client's 30s transport bound, so the server always ends first with a clean close that KEEPS the
+ * text streamed so far — a client-side abort would discard it. */
+function streamTotalMs(env) { const v = Number(env.MAIK_STREAM_TOTAL_MS); return Number.isFinite(v) && v > 0 ? v : 25000; }
 
 async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   const order = providerOrder(env, opts);
