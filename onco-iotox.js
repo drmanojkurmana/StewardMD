@@ -39,6 +39,11 @@
     var problems = [];
     if (!o || !o.id) return { ok: false, problems: ["organ missing id"] };
     if (!o.organ) problems.push(o.id + ": missing organ label");
+    // FAIL CLOSED on the R1 verification flag. Every shipped irAE record carries
+    // requiresR1Verification:true; a record that arrives without it (or with it cleared) has not
+    // been through clinical review, and irAE management principles are exactly the content where
+    // "looks plausible" is not good enough. Absence is a refusal, not a default-allow.
+    if (o.requiresR1Verification !== true) problems.push(o.id + ": requiresR1Verification is not set (unverified content)");
     var refs = o.guidelineRefs || [];
     if (!(refs instanceof Array) || !refs.length) problems.push(o.id + ": missing guidelineRefs");
     else if (!refs.some(function (g) { return ALLOWED_GUIDELINES[g]; })) problems.push(o.id + ": guidelineRefs must name ASCO/NCCN/SITC");
