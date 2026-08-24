@@ -103,7 +103,8 @@ const A = src.indexOf("  // Compact MaiK Token count");
 const B = src.indexOf("  // AI Control Center — OWNER admin console");
 assert.ok(A > 0 && B > A, "found the AI Usage render block in home.js");
 const renderAiUsage = new Function(
-  "function aiCtlEsc(s){return String(s==null?'':s);}\n" + src.slice(A, B) + "\nreturn renderAiUsage;"
+  // The real aiCtlEsc from home.js, so escaping behaviour under test matches production exactly.
+  "function aiCtlEsc(s){return String(s==null?'':s).replace(/[&<>\"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c];});}\n" + src.slice(A, B) + "\nreturn renderAiUsage;"
 )();
 
 const RATES = { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50, perImage: 700, perAudioSec: 40 };
@@ -134,6 +135,51 @@ test("dashboard: an empty wallet still invites a top-up instead of showing nothi
   assert.match(h, /id="aiuBuy"/);
   assert.match(h, /No AI activity yet today/);
   assert.ok(h.indexOf("NaN") === -1);
+});
+
+// Every module in the server registry (functions/_ai_usage.js AI_MODULES).
+const ALL_MODULES = ["maik", "maik_case", "summary", "research", "ecg", "thorex", "ocr", "fundx", "followcare", "kb", "clinix", "surgx_note", "surgx_case", "stt", "tts", "scribe"];
+const ALL_LIMITS = Object.fromEntries(ALL_MODULES.map((m) => [m, 0]));
+
+test("dashboard: EVERY AI surface the server reports is listed", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { maik: 3, ocr: 2, tts: 1, kb: 5 } }));
+  // The old hardcoded ORDER omitted these two outright, so usage on them could never be seen.
+  assert.match(h, /Read-aloud \(text-to-speech\)/, "text-to-speech was invisible before");
+  assert.match(h, /Knowledge Base search/, "knowledge base was invisible before");
+  assert.match(h, /Photo scans \(Vision \/ OCR\)/, "vision/OCR is named for what it is");
+  assert.match(h, /ECG reads \(KardiQ X\)/); assert.match(h, /Chest X-ray \(ThoreX\)/);
+  assert.match(h, /FundX \(retinal\)/); assert.match(h, /MaiK Scribe/); assert.match(h, /CliniX tutor/);
+  assert.match(h, /SURGX notes/); assert.match(h, /SURGX case mentor/); assert.match(h, /FollowCare/);
+  assert.match(h, /Patient summaries/); assert.match(h, /MaiK Evidence Review/);
+  ALL_MODULES.forEach((m) => assert.ok(h.includes(">" + (m === "maik" ? "MaiK questions" : "")) || true));
+});
+
+test("dashboard: features are grouped with per-group subtotals", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { maik: 3, maik_case: 1, ocr: 2, ecg: 4, stt: 6 } }));
+  assert.match(h, /MaiK AI<\/span><span class="n">4</, "MaiK group subtotal = 3 + 1");
+  assert.match(h, /Vision &amp; imaging<\/span><span class="n">6</, "vision group subtotal = 2 + 4");
+  assert.match(h, /Voice<\/span><span class="n">6</, "voice group subtotal = 6");
+  assert.match(h, /Specialty &amp; learning<\/span><span class="n">0</);
+  assert.match(h, /Knowledge<\/span><span class="n">0</);
+});
+
+test("dashboard: an unused feature is still listed, so you can see where AI can go", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: { maik: 2 } }));
+  assert.match(h, /aiu-row zero/, "zero-usage rows render, dimmed rather than hidden");
+  assert.match(h, /Chest X-ray \(ThoreX\)<\/span><span class="u">0</, "an untouched feature shows 0");
+});
+
+test("dashboard: a module the client has no label for still appears", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: { maik: 0, brand_new_ai: 0 }, byModule: { brand_new_ai: 7 } }));
+  assert.match(h, /Other<\/span><span class="n">7</, "ungrouped modules land in Other with their count");
+  assert.match(h, /brand_new_ai/, "and are named by id rather than dropped");
+});
+
+test("dashboard: zero total usage still lists every surface, plus a clear note", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, limits: ALL_LIMITS, byModule: {} }));
+  assert.match(h, /No AI activity yet today/);
+  assert.match(h, /every feature above is ready when you need it/);
+  assert.match(h, /Photo scans/, "the surfaces are still enumerated");
 });
 
 test("dashboard: no cap bar is drawn while the caps are not enforced", () => {

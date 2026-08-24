@@ -1989,7 +1989,11 @@
         ".aiu-stats .c{flex:1;min-width:0;background:var(--aiuCard);border:1px solid var(--line,#1e293b);border-radius:12px;padding:10px 6px;text-align:center}" +
         ".aiu-stats .n{font:800 17px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
         ".aiu-stats .l{font:600 9px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--hmut,#889);margin-top:3px}" +
+        ".aiu-grp{display:flex;justify-content:space-between;align-items:baseline;font:700 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#889);margin:14px 2px 8px;padding-top:9px;border-top:1px solid var(--line,#1e293b)}" +
+        ".aiu-grp:first-of-type{border-top:none;padding-top:0;margin-top:0}" +
+        ".aiu-grp .n{font:800 12px var(--hfont,system-ui);color:var(--ink,#e6edf3);letter-spacing:0}" +
         ".aiu-row{margin:0 0 13px}" +
+        ".aiu-row.zero .h{color:var(--hmut,#889)}" +   /* an unused feature stays listed, just recedes */
         ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
         ".aiu-row .u{flex:none;font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
         ".aiu-bar{height:8px;border-radius:6px;background:var(--line,#1e293b);overflow:hidden}" +
@@ -2068,8 +2072,18 @@
       (label ? ' aria-label="' + aiCtlEsc(label) + '"' : '') + '><span style="width:' + pct + '%"></span></div>';
   }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", tts: "Text-to-speech", scribe: "MaiK Scribe", fundx: "FundX", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base" };
-    var ORDER = ["maik", "maik_case", "summary", "research", "ecg", "thorex", "ocr", "stt", "scribe", "clinix", "surgx_note", "surgx_case", "fundx", "followcare"];
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud (text-to-speech)", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search" };
+    // Every AI surface, grouped the way a doctor thinks about them. This is PRESENTATION ORDER ONLY —
+    // the modules actually rendered come from what the SERVER reports (limits ∪ byModule), so a module
+    // added to the registry shows up here without a client change. The old hardcoded list silently
+    // dropped `tts` and `kb`: usage on those two could never appear on this screen at all.
+    var GROUPS = [
+      { label: "MaiK AI", ids: ["maik", "maik_case", "summary", "research"] },
+      { label: "Vision & imaging", ids: ["ocr", "ecg", "thorex", "fundx"] },
+      { label: "Voice", ids: ["stt", "scribe", "tts"] },
+      { label: "Specialty & learning", ids: ["clinix", "surgx_note", "surgx_case", "followcare"] },
+      { label: "Knowledge", ids: ["kb"] },
+    ];
     var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
 
     // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
@@ -2104,16 +2118,45 @@
 
     // ---- per feature. Only draw a cap bar when the caps are actually ENFORCED; otherwise a bar
     // would imply a limit that blocks nobody today. ----
-    var rows = "";
-    ORDER.forEach(function (id) {
-      if (!(id in limits)) return;
+    // The server is the source of truth for WHICH modules exist: limits carries every registry module,
+    // byModule carries anything actually used. Union them so nothing is invisible, and so a module the
+    // client has no label for still appears (by id) rather than vanishing.
+    var known = {}, all = [];
+    function addId(id) { if (id && !known[id]) { known[id] = 1; all.push(id); } }
+    Object.keys(limits).forEach(addId);
+    Object.keys(used).forEach(addId);
+
+    function moduleRow(id) {
       var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
-      if (!enforced) { if (!n) return; rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + '</span></div></div>'; return; }
-      if (lim === 0) { rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="aiu-unl">Unlimited</span></div></div>'; return; }
-      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' + aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
+      var zero = n === 0 ? " zero" : "";
+      if (!enforced) {
+        return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + '</span></div></div>';
+      }
+      if (lim === 0) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="aiu-unl">' + n + ' &middot; unlimited</span></div></div>';
+      return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' +
+        aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
+    }
+
+    var rendered = {}, body = "";
+    GROUPS.forEach(function (g) {
+      var ids = g.ids.filter(function (id) { return known[id]; });
+      if (!ids.length) return;
+      var sub = 0;
+      ids.forEach(function (id) { sub += used[id] | 0; rendered[id] = 1; });
+      body += '<div class="aiu-grp"><span>' + aiCtlEsc(g.label) + '</span><span class="n">' + sub + '</span></div>' +
+        ids.map(moduleRow).join("");
     });
-    out += '<div class="aiu-h">By feature' + (enforced ? '' : ' &middot; today') + '</div>' +
-      (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
+    // Anything the server reports that no group claims — future modules, so they are never dropped.
+    var rest = all.filter(function (id) { return !rendered[id]; });
+    if (rest.length) {
+      var restSub = 0; rest.forEach(function (id) { restSub += used[id] | 0; });
+      body += '<div class="aiu-grp"><span>Other</span><span class="n">' + restSub + '</span></div>' + rest.map(moduleRow).join("");
+    }
+
+    var totalCalls = 0; all.forEach(function (id) { totalCalls += used[id] | 0; });
+    out += '<div class="aiu-h">Where your AI went' + (enforced ? '' : ' &middot; today') + '</div>' +
+      (body || '<div class="ai-usage-note">No AI features are reporting yet.</div>') +
+      (totalCalls === 0 ? '<div class="ai-usage-note">No AI activity yet today — every feature above is ready when you need it.</div>' : '') +
       (enforced ? '<div class="ai-usage-note">Daily limits reset at midnight.</div>'
                 : '<div class="ai-usage-note">No per-feature daily limits are in force right now — usage is metered from your wallet.</div>');
 

@@ -38,7 +38,9 @@ const STUB = `
   window.SMD_PRO = { openPaywall: function () { window.__paywallOpened++; } };
   window.__usage = {
     day: "2026-08-25", req: 7, tokens: 18400, estCostInr: 1.25, avgLatencyMs: 2400,
-    byModule: { maik: 5, ecg: 2 }, limits: { maik: 50, maik_case: 25, ecg: 10 },
+    byModule: { maik: 5, ecg: 2, ocr: 3, tts: 1, kb: 4 },
+    limits: { maik: 50, maik_case: 25, summary: 15, research: 2, ecg: 10, thorex: 10, ocr: 50, fundx: 20,
+              followcare: 100, kb: 0, clinix: 60, surgx_note: 30, surgx_case: 40, stt: 50, tts: 50, scribe: 0 },
     capsEnforced: false, pooled: false, costCapOn: false,
     tokensUsedMt: 2500, balanceMt: 250000, dailyFreeMt: 0, mtPerInr: 2000,
     rates: { model: "gemini-2.5-flash", inPer1k: 14, outPer1k: 50, perImage: 700, perAudioSec: 40 }
@@ -108,6 +110,17 @@ try {
   ok(/gemini-2\.5-flash/.test(u.text || ""), "the rate card names the model it is quoting");
   ok(u.bars === 0 && !/5 ?\/ ?50/.test(u.text || ""), `no cap bars while the caps are not enforced (${u.bars} bars)`);
   ok(/MaiK questions ?5/.test(u.text || "") && /ECG reads \(KardiQ X\) ?2/.test(u.text || ""), "per-feature usage is still counted and shown");
+  // Every AI surface must be visible, including the two the old hardcoded list dropped entirely.
+  ok(/Read-aloud \(text-to-speech\) ?1/.test(u.text || ""), "text-to-speech usage appears (was invisible)");
+  ok(/Knowledge Base search ?4/.test(u.text || ""), "knowledge-base usage appears (was invisible)");
+  ok(/Photo scans \(Vision \/ OCR\) ?3/.test(u.text || ""), "vision/OCR usage appears");
+  ok(/Chest X-ray \(ThoreX\) ?0/.test(u.text || ""), "an unused surface is still listed at 0");
+  ok(/MaiK Scribe/.test(u.text || "") && /CliniX tutor/.test(u.text || "") && /FundX/.test(u.text || ""), "scribe, tutor and retinal surfaces are listed");
+  const groups = await ev(`return [].map.call(document.querySelectorAll("#aiUsageBody .aiu-grp"), function(g){return g.textContent;}).join("|");`);
+  ok(/MaiK AI5/.test(groups || ""), `MaiK group subtotal (${groups})`);
+  ok(/Vision & imaging5/.test(groups || ""), "vision group subtotal = ocr 3 + ecg 2");
+  ok(/Voice1/.test(groups || ""), "voice group subtotal = tts 1");
+  ok(/Knowledge4/.test(groups || ""), "knowledge group subtotal = kb 4");
   ok(!/undefined|NaN/.test(u.text || ""), "nothing renders as undefined/NaN");
 
   // The button must reach the paywall's token store.
