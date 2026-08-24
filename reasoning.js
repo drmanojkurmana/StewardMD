@@ -3921,7 +3921,12 @@
       var nativeStreamOn = (function () { try { return localStorage.getItem("smd_maik_native_stream") !== "0"; } catch (e) { return true; } })();
       // .bind(window): an unbound fetch throws "Illegal invocation" - native-bridge.js:631 binds it the same way.
       var pristine = (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null;
-      if (isNative && !nativeStreamOn) return fallback();
+      // `|| !pristine` restores what the block comment above still promises: with no pristine fetch
+      // on native we keep the old whole-answer behaviour instead of streaming through the buffering
+      // bridge. Behaviour-preserving - a null sfetch already fell back at the !sfetch check ~100
+      // lines below - but it says so HERE, next to the reasoning, and stops us doing a page of
+      // stream setup we are about to throw away. (test/maik-native-stream.test.mjs asserts it.)
+      if (isNative && (!nativeStreamOn || !pristine)) return fallback();
       var sfetch = isNative ? pristine : ((typeof fetch === "function") ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
