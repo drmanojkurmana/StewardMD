@@ -358,18 +358,51 @@ export async function poolKeyFor(store, doctorId) {
 // no store / unknown module / unlimited (daily=0) → allowed, uncounted. The count is per ATTEMPT
 // (recorded before the AI call) so the cap can never be exceeded by a slow/failed call; token/cost
 // detail is layered on separately by the endpoint's own precise metering.
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email) {
-  try { await warmBillingCfg(store); } catch (e) {}        // live enforce/cost-cap flags (cached 30s)
-  doctorId = await poolKeyFor(store, doctorId);            // co-resident pair shares ONE AI bucket
+/* waitUntil (optional): defer the ANALYTICS rollup past the response. Measured on production, this
+ * whole function cost ~1.1s in front of every answer — the single largest non-model stage.
+ *
+ * What must stay synchronous, and does: the per-module quota count. Its own contract is that the
+ * count is recorded per ATTEMPT, BEFORE the AI call, so a slow or failed call can never exceed the
+ * cap — deferring that would let a burst slip past the limit. The cost cap likewise still blocks
+ * before returning. Only recordAiUsage — the admin rollup, which gates nothing — is deferred.
+ *
+ * warmBillingCfg and poolKeyFor are independent of each other, so they are started together. */
+/* ownerExempt (optional): the caller is a verified OWNER (functions/_adminauth.js ownerOK).
+ *
+ * WHY: _usage.js checkQuota already exempts owners from its per-USER throttles, but this SECOND cap
+ * system did not — so an owner could be blocked by a limit meant for regular users while being
+ * exempt from the equivalent limit one layer up. That inconsistency is the bug.
+ *
+ * Scope of the exemption is deliberately narrow, mirroring checkQuota: it skips the per-module daily
+ * cap and the per-USER cost cap. It does NOT skip metering — recordAiUsage still runs, so owner spend
+ * is still counted in the dashboards and still feeds the PROJECT-WIDE daily-cost circuit breaker,
+ * which nothing exempts anybody from. An owner can be uncapped without being invisible. */
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt) {
+  const _t = { t0: Date.now() };
+  const [, pooled] = await Promise.all([
+    warmBillingCfg(store).catch(function () {}),           // live enforce/cost-cap flags (cached 30s)
+    poolKeyFor(store, doctorId)                            // co-resident pair shares ONE AI bucket
+  ]);
+  doctorId = pooled;
+  _t.warm = Date.now() - _t.t0;
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
-  if (!q.ok) return q;                                     // at the per-module daily cap → block
+  _t.quota = Date.now() - _t.t0;
+  // An owner is never blocked by the per-module cap — but usage is still recorded below.
+  if (!q.ok && !ownerExempt) return q;                     // at the per-module daily cap → block
   // Per-user daily AI-COST cap (rupees), then prepaid credits. Inert unless AI_COST_CAP_ON=1.
-  if (costCapOn(env)) {
+  if (costCapOn(env) && !ownerExempt) {
     const cap = await dailyCostCap(env, store, email, null);   // role-based cap wired in Phase 4
     const cc = await checkCostCap(env, store, doctorId, cap, now);
     if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
   }
-  try { await recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now); } catch (e) {}
+  _t.cost = Date.now() - _t.t0;
+  const rec = function () {
+    return recordAiUsage(env, store, buildUsageRecord({ doctorId: doctorId, module: moduleId, subscription: subscription, ts: now || 0, email: email }), now);
+  };
+  if (typeof waitUntil === "function") { try { waitUntil(rec().catch(function () {})); } catch (e) {} }
+  else { try { await rec(); } catch (e) {} }
+  _t.rec = Date.now() - _t.t0;
+  try { q._ms = _t; } catch (e) {}                         // stage attribution; callers ignore extras
   return q;                                                // allowed; carries used/limit/remaining
 }
 

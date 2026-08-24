@@ -97,6 +97,24 @@ export async function identify(request, env) {
   // EVERY signed-in user onto ONE shared id, so all accounts shared a single KU ledger + quota bucket
   // (balances appeared to "reset" to the shared total; metering merged). Per-account key = "fb:<uid>".
   if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok), name: fb.name || null }; }
+  /* GUEST IDENTITY: per DEVICE when we have one, per IP only as a fallback (2026-08-25).
+   *
+   * It used to be IP-only, which meant everyone behind one public address shared a SINGLE guest
+   * bucket. On a hospital or clinic NAT that is the whole building; on Indian mobile networks it is
+   * far worse, because carrier-grade NAT puts thousands of subscribers behind one address — so one
+   * heavy guest could lock out every other guest on that carrier IP. The tight cap was on the most
+   * SHARED key in the system, which is exactly backwards.
+   *
+   * The app already sends X-SMD-Device on every AI call (see aiHeaders in reasoning.js), so keying
+   * on it makes the guest cap behave the way it reads: per phone.
+   *
+   * A device id is client-supplied and resets on reinstall, so it is weaker than an IP against a
+   * determined abuser. That is precisely what the OTHER two controls are for and they are unchanged:
+   * the per-device daily cap (deviceCheck, MAIK_DEVICE_DAILY_CAP, default 300) and the project-wide
+   * daily-cost circuit breaker, which nothing exempts anyone from. Signed-in identity is untouched —
+   * this only affects callers who present no credentials at all. */
+  const dev = request.headers.get("X-SMD-Device");
+  if (dev) return { id: "dev:" + (await sha256hex(dev)), guest: true };
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }
@@ -151,31 +169,53 @@ function aiUnlimited(env) { try { return String(env && env.MAIK_ENFORCE_CAPS) !=
 export async function checkQuota(env, request, type, opts) {
   const store = usageKv(env); if (!store) return { ok: true, id: null, meter: false };
   const cfg = usageConfig(env);
-  const who = await identify(request, env); const id = who.id;
+  /* PARALLELISED (2026-08-24). This was nine SERIAL round trips — identity, owner check, entitlement,
+   * three global reads, then three per-user reads — and measured as the entire ~400ms of pre-Gemini
+   * time in front of every answer (gate/rerank/connect/prompt all landed on the same millisecond).
+   * They are independent, so they now run in waves: everything that needs no id starts at once, the
+   * per-user counters start as soon as identify() resolves.
+   *
+   * ORDER OF REFUSAL IS UNCHANGED: the circuit breaker is still evaluated before the rate limit,
+   * which is still evaluated before the per-user caps, and every check awaits its own read before
+   * deciding. Only the WAITING is overlapped, never the decisions. */
+  const _now0 = new Date(), _day0 = dayKey(_now0), _month0 = monthKey(_now0);
+  const _qt0 = Date.now(), _qms = {};
+  const _tap = (k, p) => Promise.resolve(p).then((v) => { _qms[k] = Date.now() - _qt0; return v; }, (e) => { _qms[k] = Date.now() - _qt0; throw e; });
+  const _whoP = _tap("id", identify(request, env));
+  const _adminP = _tap("own", ownerOK(request, env)).catch(function () { return false; });
+  const _proP = _tap("pro", proFromRequest(env, request)).catch(function () { return null; });
+  const _gP = _tap("glob", readJson(store, "maik:global:" + _day0));
+  const _boP = _tap("bud", store.get("ai:budget:daily")).catch(function () { return null; });
+  const _d1P = _tap("d1", readDailyCostInr(env, _day0)).catch(function () { return null; });
+  const who = await _whoP; const id = who.id;
+  // per-user reads need the id, so they start now rather than after the global reads have finished
+  const _lastP = _tap("rl", readJson(store, "maik:rl:" + id));
+  const _uP = _tap("u", readJson(store, "maik:u:" + id + ":" + _day0));
+  const _mP = _tap("m", readJson(store, "maik:m:" + id + ":" + _month0));
   // Admin/owner exemption (owner Google login OR X-Admin-Token = UPDATES_ADMIN_TOKEN|VERIFY_ADMIN_TOKEN):
   // skip the per-USER throttles (rate limit, daily/monthly token caps, per-category request counts) so
   // internal benchmarking/eval isn't blocked by the tiny per-user beta caps. Cost is STILL metered and
   // the project-wide daily-cost circuit breaker below still applies — real users are unaffected.
-  const admin = await ownerOK(request, env);
+  const admin = await _adminP;
   // exempt = owner/admin OR the launch "no per-user restrictions" default. Only the per-USER throttles
   // below are skipped; the global daily-cost breaker + metering still run for everyone.
   const exempt = admin || aiUnlimited(env);
   let isProCaller = true, callerUid = null, callerVerified = false;
-  try { const pr = await proFromRequest(env, request); isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } catch (e) {}
-  const now = new Date(), day = dayKey(now), month = monthKey(now);
+  try { const pr = await _proP; if (pr) { isProCaller = pr.pro; callerUid = pr.uid || null; callerVerified = !!(pr.claims && pr.claims.verified); } } catch (e) {}
+  const now = _now0, day = _day0, month = _month0;
   const QUOTA_MSG = "MaiK usage limit reached for now. Clinical reasoning, calculators, and reference tools remain available.";
   const PRO_MSG = "You've used your free MaiK allowance for this month. Upgrade to StewardMD Pro for unlimited clinical AI, imaging, and evidence review.";
 
   // global circuit breaker (project-wide daily cost). Hard-stop defaults from env but is ADMIN-EDITABLE
   // at runtime via KV ai:budget:daily (the AI Control Center budget editor). Fail-open: a bad/absent
   // value keeps the env default, so the breaker can never be accidentally disabled by a KV read error.
-  const g = (await readJson(store, "maik:global:" + day)) || { cost: 0, req: 0, blocked: 0 };
+  const g = (await _gP) || { cost: 0, req: 0, blocked: 0 };
   let hardStop = cfg.costHardStopInr;
-  try { const bo = Number(await store.get("ai:budget:daily")); if (Number.isFinite(bo) && bo > 0) hardStop = bo; } catch (e) {}
+  try { const bo = Number(await _boP); if (Number.isFinite(bo) && bo > 0) hardStop = bo; } catch (e) {}
   // Prefer the ATOMIC D1 daily-cost total (exact under concurrency) over the racy KV counter, so the
   // breaker trips reliably instead of undercounting; fall back to KV when D1 is unavailable.
   let breakerCost = g.cost;
-  { const d1c = await readDailyCostInr(env, day); if (d1c != null && d1c > breakerCost) breakerCost = d1c; }
+  { const d1c = await _d1P; if (d1c != null && d1c > breakerCost) breakerCost = d1c; }
   if (breakerCost >= hardStop && !(request.headers.get("X-Maik-Admin-Override") === (env.UPDATES_ADMIN_TOKEN || "\0"))) {
     return { ok: false, reason: "circuit-breaker", message: QUOTA_MSG, id };
   }
@@ -184,14 +224,14 @@ export async function checkQuota(env, request, type, opts) {
   // block the answer that follows it ~0.5s later. Cost is still bounded by the token caps + breaker.
   const rlKey = "maik:rl:" + id;
   if (type !== "router" && !exempt) {
-    const last = await readJson(store, rlKey);
+    const last = await _lastP;
     if (last && (Date.now() - last.t) < cfg.rateSeconds * 1000) return { ok: false, reason: "rate", message: QUOTA_MSG, id };
   }
 
   // per-user daily/monthly counters
   const uKey = "maik:u:" + id + ":" + day, mKey = "maik:m:" + id + ":" + month;
-  const u = (await readJson(store, uKey)) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
-  const m = (await readJson(store, mKey)) || { tokens: 0 };
+  const u = (await _uP) || { general: 0, case: 0, intent: 0, ocr: 0, pdfPages: 0, tokens: 0 };
+  const m = (await _mP) || { tokens: 0 };
 
   if (!exempt && u.tokens >= cfg.dailyTokens) return { ok: false, reason: "daily-tokens", message: QUOTA_MSG, id };
   let monthlyCap = isProCaller ? cfg.monthlyTokens : cfg.freeMonthlyTokens;
@@ -217,8 +257,19 @@ export async function checkQuota(env, request, type, opts) {
     }
   }
   // reserve the rate-limit slot immediately (best-effort; KV is not atomic). Router + admin are exempt.
-  if (type !== "router" && !exempt) await writeJson(store, rlKey, { t: Date.now() }, 60);
-  return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type, env };
+  /* Reserve the rate-limit slot. Measured: a KV write costs ~380ms here, and awaiting it was the LAST
+   * ~400ms of dead time in front of every answer (every read in this function finishes in <15ms).
+   * opts.waitUntil runs it CONCURRENTLY with the response rather than skipping it, so the slot is
+   * still written ~380ms later — well inside the 3s cooldown it enforces. This narrows the
+   * double-fire window from "none" to "~380ms" on a control the code already calls best-effort and
+   * non-atomic; without waitUntil the original awaited behaviour is kept. */
+  if (type !== "router" && !exempt) {
+    const _wr = () => writeJson(store, rlKey, { t: Date.now() }, 60);
+    if (opts && typeof opts.waitUntil === "function") { try { opts.waitUntil(_wr()); } catch (e) { await _wr(); } }
+    else await _wr();
+  }
+  _qms.total = Date.now() - _qt0;
+  return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type, env, _qms };
 }
 
 // Best-effort per-DEVICE daily abuse cap (anti account-farming). Device id = X-SMD-Device header
@@ -228,7 +279,10 @@ export function deviceDailyCap(env) {
   const v = Number(env && env.MAIK_DEVICE_DAILY_CAP);
   return Number.isFinite(v) && v >= 0 ? v : 300;
 }
-export async function deviceCheck(env, store, request, now) {
+/* waitUntil (optional): defer the counter WRITE past the response. The read still gates the cap —
+ * only the increment is deferred — and a KV write was measured adding real dead time in front of
+ * every answer. Omit it and the old awaited behaviour is kept, so existing callers are unchanged. */
+export async function deviceCheck(env, store, request, now, waitUntil) {
   const cap = deviceDailyCap(env);
   if (!store || !cap) return { ok: true };
   const dev = request.headers.get("X-SMD-Device");
@@ -238,7 +292,9 @@ export async function deviceCheck(env, store, request, now) {
   let used = 0;
   try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
   if (used >= cap) return { ok: false, reason: "device-cap", used: used, cap: cap };
-  try { await store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); } catch (e) {}
+  const put = function () { return store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); };
+  if (typeof waitUntil === "function") { try { waitUntil(put().catch(function () {})); } catch (e) {} }
+  else { try { await put(); } catch (e) {} }
   return { ok: true, used: used + 1, cap: cap };
 }
 

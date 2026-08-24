@@ -390,3 +390,74 @@ moment `native-ota.js` defines the global correctly, no home.js change needed.
 Verified inert (zero exceptions, `available()===false`) in both non-target states: plain web, and
 native-WITHOUT-the-plugin-yet — which is the actual state of the shipped app the moment this PR
 merges, before the one Phase 3 native rebuild. Full detail: [[OTA Updates]].
+
+---
+
+## 2026-08-24 — MaiK latency: the model was never the main problem
+
+Instrumented the WHOLE request instead of just the model call, and the long-held picture was wrong
+in two ways. All figures measured on production, `?stream=1` with timings on the done event.
+
+**Stage attribution (median), before → after:**
+
+| stage | before | after |
+|---|---|---|
+| head — request entry to the answer path | 1112ms | 12ms |
+| pre-Gemini — quota gate, re-rank, prompt render | 409ms | 76ms |
+| Gemini first token | ~1900ms | ~1900ms (unchanged) |
+| transport — real network | ~92ms | ~92ms |
+| **non-model overhead** | **~1613ms** | **~230ms** |
+
+**Decision 1 — "network latency" was a misattribution, and instrumentation is the fix.**
+The ~1.2s repeatedly blamed on the network is 92ms of actual transport. The rest was our own code
+running before the answer path started. `headMs` / `preMs` / `transport` are now reported separately
+on the stream's done event specifically so this cannot be hand-waved again. Attribution before
+optimisation — every guess made without it in this session was wrong.
+
+**Decision 2 — KV WRITES were the dead weight, not reads and not the model.**
+A KV write costs ~380ms in this Worker. `recordAiUsage` (the admin analytics rollup) was awaited in
+front of every clinical answer at ~1096ms, and `checkQuota`'s rate-limit slot write was the final
+~380ms. Both now run via `waitUntil`, CONCURRENTLY with the response. Every read in `checkQuota`
+finishes in 8-15ms once parallelised — the reads were never the problem.
+
+**What is deliberately NOT deferred**, because it gates: `checkModuleQuota` still counts per ATTEMPT
+before the AI call (its contract — deferring it lets a burst exceed the daily cap), the cost cap
+still blocks, `deviceCheck`'s READ still enforces the device cap. Refusal ORDER is unchanged:
+circuit breaker → rate limit → per-user caps, each awaiting its own read before deciding. Only the
+waiting is overlapped, never the decisions.
+
+**Accepted trade-off, stated plainly:** deferring the rate-limit slot write narrows the double-fire
+window from "none" to ~380ms on a control the code already documents as best-effort and non-atomic.
+It buys 380ms on every answer.
+
+**Decision 3 — prefill is NOT the TTFT floor, so context caching was NOT implemented.**
+Tested directly: adding ~6,000 tokens of prompt cost only ~356ms of TTFT (~0.06ms/token), so the
+whole 2,338-token system prompt contributes ~140ms of the ~1900ms. Vertex context caching would buy
+~0.3-0.6s at most and was declined on evidence, not preference. Recorded so it is not re-litigated.
+
+**Decision 4 — staying on `gemini-2.5-flash`, benchmarked not assumed.**
+`gemini-3.1-flash-lite` BROKE live streaming (fell back to whole-answer; reverted immediately).
+`gemini-2.5-flash-lite` gave ~200ms better TTFT but produced much longer answers, making total
+latency WORSE (stream total 5527ms vs 3877ms), and carries a known router parse-quality regression.
+The done event now reports the serving model so a model A/B is verifiable rather than assumed.
+
+**Decision 5 — the router, not Gemini, was the biggest single wait.**
+`/api/ai/refine` costs 6.0-7.7s and ran BEFORE the answer on every new question — 6.0s + 3.7s TTFV
+is the ~9.7s clinicians actually saw. Now cached server-side (7.695s → 1.557s, `cached:"kv"`) keyed
+by a SHA-256 of the normalised query, value = canonical concepts only, never the raw query; and
+warmed client-side on a typing pause. Same router, same text, same result — only earlier, or not
+repeated. Failed parses are never cached.
+
+**Reliability:** the streaming path had NO timeout anywhere — a stalled upstream held the SSE open
+until the phone gave up (measured: a 196-SECOND hang). Now bounded by connect/idle/total deadlines
+with one exit that always emits a done event; a deadline-closed stream carries `stalled:true` and
+the client refuses to surface it, so the new clean close cannot turn a truncated clinical answer
+into one that looks complete. The other device "failures" were HTTP 429 rate limiting — the limiter
+working correctly against a back-to-back benchmark, not a transport fault.
+
+**Method note worth keeping:** every latency number before this was taken from curl on a laptop,
+which is exactly how a 26.6s on-device regression shipped while curl looked fine. Device numbers now
+come from `test/device/maik-bench.html`, run inside the real WKWebView on a physical iPhone via a
+throwaway build launched with `devicectl ... --console`. Its control arm uses the PATCHED
+`window.fetch` and reliably shows `ttfv == total` — proof on-device that CapacitorHttp buffers and
+the pristine XHR transport is required.

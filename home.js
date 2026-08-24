@@ -3596,6 +3596,33 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
 
+    /* ROUTE PREFETCH (2026-08-24, measured on device).
+     *
+     * The universal semantic router costs ~6.0-7.7s on a cache miss and runs BEFORE the answer, so a
+     * NEW question pays router + answer serially: ~6s + ~3.7s TTFV = the ~9.7s a clinician actually
+     * waits (matches the 9.2s seen on the iPhone). But the router's input is only the QUESTION TEXT,
+     * which we already have while they are still typing — so warm it during the pause before send.
+     * getRoute() caches by normalised question, so the send-time call then resolves from that cache.
+     *
+     * Routing quality is UNCHANGED: same router, same text, same result — only earlier. A failed or
+     * unfinished prefetch changes nothing; send-time still calls getRoute() exactly as it does today.
+     *
+     * Bounded on purpose, because each prefetch is a real metered call: fires only after a 1s pause,
+     * needs a reasonably complete question, skips text it already warmed, and stops after 3 per
+     * composer session so a long edit cannot fan out into many router calls. */
+    var _preT = null, _preLast = "", _preN = 0;
+    if (qEl) qEl.addEventListener("input", function () {
+      var q = String(qEl.value || "").trim();
+      if (q.length < 15 || q === _preLast || _preN >= 3) return;
+      if (_preT) clearTimeout(_preT);
+      _preT = setTimeout(function () {
+        var cur = String(qEl.value || "").trim();
+        if (cur.length < 15 || cur === _preLast || _preN >= 3) return;
+        _preLast = cur; _preN++;
+        try { getRoute(cur); } catch (e) {}          // fire and forget — result lands in the route cache
+      }, 1000);
+    });
+
     /* The one place the send/stop button's state lives.
      *
      * It used to be twelve scattered `sendBtn.disabled = ...` assignments, and every one of them

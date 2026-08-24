@@ -31,6 +31,10 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
 - [[Roadmap]] — pending / deferred work
+- **Handoffs** — session-spanning records, in `vault/handoff/`. Read the most recent before
+  picking up a thread; they carry the open items and the temporary production values that must be
+  reverted. Latest: `2026-08-25-three-days-maik-opd-quotas.md` (MaiK latency/streaming, OPD,
+  quota + guest-identity fixes).
 
 ## The shape of the thing
 The [[Medical Knowledge Base]] hierarchy (Harrison = disease reference → ICMR → guidelines → hospital

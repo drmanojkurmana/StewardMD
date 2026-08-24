@@ -20,7 +20,13 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
 
 ## Flow detail
-`send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini. Native can't stream (CapacitorHttp buffers SSE) → whole-then-typed.
+`send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini.
+
+**Native DOES stream, since 2026-08-24** (this note previously said it could not). `window.fetch`
+on native is the CapacitorHttp bridge and buffers; `CapacitorWebFetch` does not stream in WKWebView
+AND ignores `AbortController`. Native therefore streams over the **pristine XHR**
+(`window.CapacitorWebXMLHttpRequest.fullObject`), whose `abort()` genuinely works — verified on a
+physical iPhone: 126/126 requests streamed with multiple deltas.
 
 ## Deps
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
@@ -32,3 +38,15 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
 - `smd_maik_llm_first` (default ON) makes standalone questions SKIP the templated Tier-0 KB path.
   The KB-only and On-device engines depend on Tier 0, so `SMD_MAIK_ENGINE.setPref()` forces it off
   for those two and restores the default for Cloud.
+- **The router (`/refine`) is the biggest non-model cost** — 6.0-7.7s, and it runs BEFORE the
+  answer on every NEW question. Cached server-side (hash of the normalised query → canonical
+  concepts; the raw query is never stored) and warmed client-side on a typing pause.
+- **Measure with the done event, never by guessing.** A stream's done event carries `headMs`,
+  `preMs`, `firstTokMs`, `totalMs` and `model`. A 1.2s "network latency" once turned out to be
+  92ms of network and 1.1s of our own KV writes.
+- **KV writes cost ~380ms each** in this Worker. Anything that does not GATE (analytics rollups,
+  counter increments) belongs in `waitUntil`, not in front of the answer.
+- **Device numbers only.** Laptop/curl numbers hid a 26.6s on-device regression. Use
+  `test/device/maik-bench.html` in a throwaway build; its control arm proves the buffering.
+- Stream deadlines: connect 10s / idle 10s / total 25s. A deadline-closed stream sets
+  `stalled:true` and the client MUST refuse it — otherwise a truncated clinical answer looks whole.
