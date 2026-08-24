@@ -1003,7 +1003,7 @@
       body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
         (state.ptSources || []).map(function (s) {
           return '<button class="sgx-btn" data-sgx="ptsrc" data-id="' + attr(s.id) + '" data-kind="' + attr(s.kind) + '">' +
-            ic("local_hospital") + " " + esc(s.name) + "</button>";
+            ic("local_hospital") + " " + esc(s.name) + (s.needsSignIn ? " · sign in" : "") + "</button>";
         }).join("") +
         (!(state.ptSources || []).length
           ? '<div class="sgx-disclaim" style="border:none">No hospital is connected. Sign in to Ward Sync, or connect a hospital under Connect EMR, or enter the patient manually.</div>'
@@ -1371,9 +1371,22 @@
         var kind = t.getAttribute("data-kind"), sid = t.getAttribute("data-id");
         if (kind === "ghis") {
           // GHIS patients are chosen in Ward Sync, which owns the roster and the visit context.
+          // Not signed in, or nothing open? Take them THERE rather than just refusing - SURGX
+          // closes because Ward Sync is a full-screen surface of its own.
+          if (!PT().ghisSession()) {
+            toast("Sign in to GHIS, then pick the patient");
+            if (window.SURGX) SURGX.close();
+            try { if (typeof window.openGHIS === "function") window.openGHIS(); } catch (er) {}
+            return;
+          }
           var sel = PT().ghisCurrent();
           var link = PT().linkFromGhis(sel);
-          if (!link) { toast("Open the patient in Ward Sync first"); return; }
+          if (!link) {
+            toast("Open the patient in Ward Sync first");
+            if (window.SURGX) SURGX.close();
+            try { if (typeof window.openGHIS === "function") window.openGHIS(); } catch (er) {}
+            return;
+          }
           state.note.patient = link; state.ptPick = null;
           saveNote(true).then(function () { toast("Patient linked"); render(); });
           return;

@@ -122,7 +122,11 @@
    * Always resolves; a failed tenant fetch degrades to whatever is available rather than erroring. */
   function sources() {
     var out = [];
-    if (ghisSession()) out.push({ id: "__ghis__", name: "GIMSR · GHIS", kind: GHIS_SOURCE });
+    /* GHIS is listed ALWAYS, signed in or not, and sign-in is prompted when it is picked - the same
+     * choice connect-patient.js's admit chooser makes. Hiding it when there is no session means a
+     * surgeon who wants GHIS sees no GHIS and no route to it: the option they need is invisible
+     * precisely when they have not set it up yet. (Found on device 2026-08-25.) */
+    out.push({ id: "__ghis__", name: "GIMSR · GHIS", kind: GHIS_SOURCE, needsSignIn: !ghisSession() });
     var c = connect();
     if (!c || !c.tenants) return Promise.resolve(out);
     return Promise.resolve(c.tenants()).then(function (ts) {

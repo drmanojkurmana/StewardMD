@@ -16,6 +16,44 @@ const require = createRequire(import.meta.url);
 const P = require(join(ROOT, "surgx-patient.js"));
 const DEST = require(join(ROOT, "surgx-destinations.js"));
 
+test("GHIS is always offered, signed in or not, and flags when sign-in is needed", async () => {
+  // Hiding GHIS when there is no session makes the option invisible precisely to the surgeon who
+  // has not set it up yet. It is listed always; picking it prompts sign-in.
+  delete global.SMD_CONNECT;
+  global.GHIS = { getToken: () => "" };                       // signed OUT
+  try {
+    let list = await P.sources();
+    let ghis = list.find((s) => s.kind === "ghis");
+    assert.ok(ghis, "GHIS must be listed even when signed out");
+    assert.equal(ghis.needsSignIn, true);
+
+    global.GHIS = { getToken: () => "tok" };                   // signed IN
+    list = await P.sources();
+    ghis = list.find((s) => s.kind === "ghis");
+    assert.equal(ghis.needsSignIn, false);
+  } finally { delete global.GHIS; }
+});
+
+test("the hospital list survives a Connect failure instead of erroring", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  global.SMD_CONNECT = { tenants: () => Promise.reject(new Error("offline")), searchPatients: () => {} };
+  try {
+    const list = await P.sources();
+    assert.ok(list.some((s) => s.kind === "ghis"), "GHIS must still be offered when Connect is down");
+  } finally { delete global.GHIS; delete global.SMD_CONNECT; }
+});
+
+test("Connect tenants are listed alongside GHIS", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  global.SMD_CONNECT = { tenants: () => Promise.resolve([{ tenantId: "t1", name: "Demo Hospital" }]), searchPatients: () => {} };
+  try {
+    const list = await P.sources();
+    assert.deepEqual(list.map((s) => s.kind), ["ghis", "connect"]);
+    assert.equal(list[1].name, "Demo Hospital");
+    assert.equal(list[1].id, "t1");
+  } finally { delete global.GHIS; delete global.SMD_CONNECT; }
+});
+
 test("a GHIS patient with a visit is the ONLY writable source", () => {
   assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
 });
