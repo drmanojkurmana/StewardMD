@@ -120,6 +120,7 @@ import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
+import { sseFrames, sseFrameText } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -409,13 +410,11 @@ function streamGeminiToSSE(upstream, onText) {
           return;
         }
         buf += dec.decode(value, { stream: true });
-        const blocks = buf.split("\n\n"); buf = blocks.pop();
-        for (const block of blocks) {
-          const data = block.split("\n").filter((l) => l.indexOf("data:") === 0).map((l) => l.slice(5).trim()).join("");
-          if (!data || data === "[DONE]") continue;
-          let j; try { j = JSON.parse(data); } catch (e) { continue; }
-          const cand = j.candidates && j.candidates[0];
-          const txt = (cand && cand.content && cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
+        // Frames are CRLF-delimited by Google. Splitting on "\n\n" here matched NOTHING and was the
+        // real cause of the blank-answer streaming outage — see functions/_sse_parse.js.
+        const { frames, rest } = sseFrames(buf); buf = rest;
+        for (const frame of frames) {
+          const txt = sseFrameText(frame);
           if (txt) { full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
