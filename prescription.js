@@ -670,4 +670,22 @@
   }
 
   window.SMD_RX = { open: open, canPrescribe: canPrescribe, verifiedInfo: verifiedInfo, _getNmc: getNmc, _setNmc: setNmc, getClinic: getClinic, _parseVoiceRx: parseVoiceRx };
+
+  /* Prime the verification cache at boot.
+   * canPrescribe() is a SYNCHRONOUS read of _vcache, but ONLY verifiedInfo() fills it — and that
+   * used to run just when the Rx pad opened. So any consumer asking earlier got a false negative
+   * on a fully verified account: SURGX Notes' gate (surgx-entitlement.js notesAccess()) returned
+   * "verify_required" and re-demanded verification from a doctor who was already verified
+   * (user report + device-confirmed 2026-08-24: claim verified:true, /api/verify-doctor
+   * "verified", yet canPrescribe() === false). Fixing it here rather than in each caller keeps
+   * one source of truth. Fire-and-forget; failures leave the cache as-is (fail-closed). */
+  (function primeVerified(n) {
+    function prime() { try { verifiedInfo(); } catch (e) {} }
+    var a = null;
+    try { a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth()); } catch (e) {}
+    if (a && a.onAuthStateChanged) { a.onAuthStateChanged(prime); }
+    else if (n < 80) { setTimeout(function () { primeVerified(n + 1); }, 250); return; }
+    try { if (window.SMD_ACCOUNT && window.SMD_ACCOUNT.onChange) window.SMD_ACCOUNT.onChange(prime); } catch (e) {}
+    prime();
+  })(0);
 })();

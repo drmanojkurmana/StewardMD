@@ -1,6 +1,6 @@
 ---
 tags: [module, infra]
-status: PHASE 1 + PHASE 2 built. **DO NOT ARM** - the live channel serves commit b2b1bdcd (pre-CliniX) and downgraded a real device on 2026-08-23. See [[Decisions]].
+status: PHASE 1 + PHASE 2 built. **ARMED 2026-08-24** - the live channel now serves commit 484543bf (current main: SURGX + CliniX + logo) at version 3, so the stale-downgrade hazard that blocked arming is resolved. Plugin re-linked on BOTH platforms via `npx cap sync`; devices need a native rebuild + reinstall to get the Settings "App updates" section back. Posture stays safe: native `autoUpdate:"off"` + JS `isAuto()` defaults false, so nothing downloads without an explicit opt-in. See [[Decisions]].
 flag: none — native-ota.js is a pure capability-check (isNative() && plugin() present), not a flag
 ---
 # OTA Updates

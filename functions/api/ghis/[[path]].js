@@ -584,6 +584,21 @@ function extractAssessmentForm(html) {
   }
   return out;
 }
+/* Append `add` to the existing field value `cur` instead of replacing it.
+ * Exported and pure so the rule can be tested directly - this is the one function standing between
+ * a surgical note and a doctor's overwritten management plan.
+ *  - empty `add`      -> leave the field exactly as it was (never blank a field by "appending" nothing)
+ *  - empty `cur`      -> the note becomes the value
+ *  - already present  -> unchanged, so a double-tap or a retry cannot write the note twice
+ * Separated by a blank line so the note reads as its own block in the GHIS textarea. */
+export function appendText(cur, add) {
+  const a = add == null ? '' : String(add);
+  const c = cur == null ? '' : String(cur);
+  if (!a) return c;
+  if (c.indexOf(a) !== -1) return c;
+  return c ? (c.replace(/\s+$/, '') + '\n\n' + a) : a;
+}
+
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
@@ -621,6 +636,18 @@ export async function saveAssessment(env, token, body) {
     const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
     all[name] = fields[k] == null ? '' : String(fields[k]);   // overlay the form's exact state, blanks included
                                                               // (a blank field is an intentional clear — supported by design)
+  });
+  /* APPEND (as opposed to the overlay above): add text to what is ALREADY in a field instead of
+   * replacing it. Used by the SURGX surgical-note write, where replacing management_plan would
+   * silently destroy whatever the treating doctor had written there — a plain overlay is safe for
+   * OPD because that form IS the doctor's own editor and shows them the current value first, but a
+   * note posted from another module never sees it. The current value comes from the same
+   * authoritative GET above, so we append to the live record, not to a stale client copy.
+   * Idempotence: if the exact block is already present we do not add it twice (double-tap, retry). */
+  const appendFields = body.appendFields || {};
+  Object.keys(appendFields).forEach(function (k) {
+    const name = /^(assessment|val)\./.test(k) ? k : ('assessment.' + k);
+    all[name] = appendText(all[name], appendFields[k]);
   });
   // The GET form is authoritative for the ids + antiforgery token — the doctor only edits clinical
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
@@ -754,6 +781,36 @@ export async function onRequest(context) {
     if (seg === 'assessment-save' && request.method === 'POST') {
       if (!emrWriteEnabled(env)) return writeGate();
       const r = await saveAssessment(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
+    }
+    /* SURGX surgical note -> hospital record, over the SAME verified transport as the OPD write.
+     *
+     * GHIS has no separate operative-note form that we have captured, so rather than invent an
+     * endpoint this APPENDS the note to the Initial Assessment's "Management plan"
+     * (assessment.management_plan) - a real, captured, doctor-authored free-text field on the
+     * patient's own visit. Everything that makes assessment-save safe applies unchanged, because
+     * it IS assessment-save: visit activation, re-serialising the live form for the authoritative
+     * doc_id, the patient_id mismatch abort, and the doc_id 0 refusal.
+     *
+     * APPEND, never overlay. The OPD form may legitimately overwrite management_plan because the
+     * doctor is looking at its current contents; a note posted from SURGX is not, so replacing it
+     * would silently destroy the treating doctor's plan. saveAssessment's appendFields adds to
+     * the value read from the authoritative GET, and skips if the identical block is already
+     * present so a double-tap or retry cannot duplicate it.
+     *
+     * Still behind QUEUE_EMR_WRITE like every other write into a live record. */
+    if (seg === 'surgx-note' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      const b = await request.json().catch(() => ({}));
+      const text = String(b.text || '').trim();
+      if (!text) return json({ error: 'empty_note' }, 400);
+      if (!b.patientId) return json({ error: 'no_patient' }, 400);
+      const r = await saveAssessment(env, token, {
+        patientId: b.patientId,
+        episodeId: b.episodeId || '',
+        docId: b.docId,
+        appendFields: { management_plan: text }
+      });
+      return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
