@@ -137,6 +137,45 @@
     }).catch(function () { return out; });
   }
 
+  /* The GHIS ward roster, fetched INSIDE SURGX so a surgeon can pick a patient without leaving the
+   * note. /api/ghis/patients is the inpatient worklist - the same endpoint Ward Sync's own roster
+   * uses - so this adds no new server surface and inherits its session handling.
+   *
+   * Rows come back as GHIS's own shape ({patientId, episodeId, patientFirstName, bedName, gender,
+   * age}); normalise here so the picker and linkFromGhis() never learn GHIS's field names.
+   * A row with no episodeId is kept but will be reported unwritable by writability() - better to
+   * show the patient and explain than to hide them and leave the surgeon hunting. */
+  function ghisRoster() {
+    var tok = "";
+    try { tok = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; } catch (e) {}
+    if (!tok) return Promise.resolve({ ok: false, patients: [], error: "ghis_signed_out" });
+    if (!G.fetch) return Promise.resolve({ ok: false, patients: [], error: "no_fetch" });
+    return G.fetch("/api/ghis/patients", { headers: { "Authorization": "Bearer " + tok } })
+      .then(function (r) {
+        return r.json().catch(function () { return null; }).then(function (j) {
+          if (!r.ok) return { ok: false, patients: [], error: (j && j.error) || ("http_" + r.status) };
+          var rows = Array.isArray(j) ? j : ((j && j.rows) || []);
+          return { ok: true, patients: rows.map(normaliseGhisRow).filter(function (p) { return !!p.patientId; }) };
+        });
+      })
+      .catch(function (e) { return { ok: false, patients: [], error: String((e && e.message) || e) }; });
+  }
+
+  function normaliseGhisRow(p) {
+    p = p || {};
+    var name = String(p.patientFirstName || p.name || "").trim();
+    var bits = [];
+    if (p.age) bits.push(String(p.age));
+    if (p.gender) bits.push(String(p.gender));
+    if (p.bedName) bits.push("Bed " + p.bedName);
+    return {
+      patientId: String(p.patientId || ""),
+      episodeId: String(p.episodeId || ""),
+      name: name || "(no name)",
+      detail: bits.join(" · ")
+    };
+  }
+
   function searchConnect(tenantId, query) {
     var c = connect();
     if (!c || !c.searchPatients) return Promise.resolve({ ok: false, patients: [], error: "connect_unavailable" });
@@ -149,6 +188,8 @@
   var API = {
     sources: sources,
     searchConnect: searchConnect,
+    ghisRoster: ghisRoster,
+    normaliseGhisRow: normaliseGhisRow,
     ghisCurrent: ghisCurrent,
     ghisSession: ghisSession,
     // pure

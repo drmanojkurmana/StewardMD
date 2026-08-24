@@ -54,6 +54,83 @@ test("Connect tenants are listed alongside GHIS", async () => {
   } finally { delete global.GHIS; delete global.SMD_CONNECT; }
 });
 
+test("the GHIS ward roster normalises GHIS's own field names", () => {
+  const row = P.normaliseGhisRow({ patientId: "MR1", episodeId: "EP9", patientFirstName: " Asha Rao ", bedName: "12", gender: "F", age: 54 });
+  assert.equal(row.patientId, "MR1");
+  assert.equal(row.episodeId, "EP9");
+  assert.equal(row.name, "Asha Rao");
+  assert.match(row.detail, /54/);
+  assert.match(row.detail, /Bed 12/);
+  // A nameless row must still be selectable, never render "undefined".
+  const bare = P.normaliseGhisRow({ patientId: "MR2" });
+  assert.equal(bare.name, "(no name)");
+  assert.equal(bare.episodeId, "");
+  assert.ok(!JSON.stringify(P.normaliseGhisRow({})).includes("undefined"));
+  assert.ok(!JSON.stringify(P.normaliseGhisRow(null)).includes("undefined"));
+});
+
+test("a roster row feeds linkFromGhis directly", () => {
+  // The picker hands a normalised row straight to linkFromGhis - the shapes must line up.
+  const link = P.linkFromGhis(P.normaliseGhisRow({ patientId: "MR1", episodeId: "EP9", patientFirstName: "Asha" }));
+  assert.equal(link.source, "ghis");
+  assert.equal(link.patientId, "MR1");
+  assert.equal(link.episodeId, "EP9");
+  assert.equal(P.writability(link).canWrite, true);
+});
+
+test("a rostered patient with no open visit links but is NOT writable", () => {
+  const link = P.linkFromGhis(P.normaliseGhisRow({ patientId: "MR3", patientFirstName: "No Visit" }));
+  assert.ok(link, "the patient must still be selectable");
+  const w = P.writability(link);
+  assert.equal(w.canWrite, false);
+  assert.match(w.reason, /visit/i);
+});
+
+test("the roster refuses to call the API when signed out, and never guesses", async () => {
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve([]) }); };
+  global.GHIS = { getToken: () => "" };
+  try {
+    const r = await P.ghisRoster();
+    assert.equal(r.ok, false);
+    assert.equal(r.error, "ghis_signed_out");
+    assert.equal(calls.length, 0, "no request may be made without a session");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the roster calls the SAME endpoint Ward Sync uses, with the GHIS bearer", async () => {
+  let seen = null;
+  global.fetch = (url, init) => { seen = { url, init }; return Promise.resolve({ ok: true, json: () => Promise.resolve([{ patientId: "MR1", episodeId: "EP1", patientFirstName: "A" }]) }); };
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    const r = await P.ghisRoster();
+    assert.equal(seen.url, "/api/ghis/patients");
+    assert.equal(seen.init.headers.Authorization, "Bearer tok");
+    assert.equal(r.ok, true);
+    assert.equal(r.patients.length, 1);
+    assert.equal(r.patients[0].patientId, "MR1");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the roster drops rows with no patient id and survives a bad payload", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve([{ patientId: "MR1" }, { patientFirstName: "ghost" }]) });
+    assert.equal((await P.ghisRoster()).patients.length, 1, "a row with no id is unusable");
+
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.reject(new Error("bad json")) });
+    const bad = await P.ghisRoster();
+    assert.equal(bad.ok, true);
+    assert.deepEqual(bad.patients, [], "unparseable body => empty list, not a crash");
+
+    global.fetch = () => Promise.resolve({ ok: false, status: 401, json: () => Promise.resolve({ error: "login_required" }) });
+    assert.equal((await P.ghisRoster()).error, "login_required");
+
+    global.fetch = () => Promise.reject(new Error("offline"));
+    assert.equal((await P.ghisRoster()).ok, false, "a network failure must resolve, not throw");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
 test("a GHIS patient with a visit is the ONLY writable source", () => {
   assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
 });
