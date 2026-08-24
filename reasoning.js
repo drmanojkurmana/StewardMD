@@ -3921,7 +3921,7 @@
       var nativeStreamOn = (function () { try { return localStorage.getItem("smd_maik_native_stream") !== "0"; } catch (e) { return true; } })();
       // .bind(window): an unbound fetch throws "Illegal invocation" - native-bridge.js:631 binds it the same way.
       var pristine = (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null;
-      if (isNative && (!nativeStreamOn || !pristine)) return fallback();
+      if (isNative && !nativeStreamOn) return fallback();
       var sfetch = isNative ? pristine : ((typeof fetch === "function") ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
@@ -3935,6 +3935,93 @@
           else sessionStorage.removeItem("smd_maik_nstream_bad");
         } catch (e) {}
         return false;
+      }
+      /* NATIVE TRANSPORT — XHR, not fetch (2026-08-24, second attempt).
+       *
+       * The pristine fetch stream does NOT stream in WKWebView: the body arrives buffered, no delta
+       * ever lands, and because CapacitorWebFetch ignores AbortController the first-token watchdog
+       * could not abort it either. So the request sat until the 25s hard deadline and only THEN
+       * refetched the whole answer. Measured on device: 26.6s to an answer that takes ~11s without
+       * streaming at all — enabling streaming made the app STRICTLY WORSE. That is why this is not
+       * a fetch stream any more.
+       *
+       * XHR is the transport that actually streams here: responseText grows progressively across
+       * onprogress events, and xhr.abort() genuinely aborts — so a stream that delivers nothing
+       * costs one short watchdog and nothing more, instead of 25 seconds. Use the PRISTINE XHR:
+       * CapacitorHttp patches the global one to buffer through the native bridge.
+       *
+       * Worst case is now ~4s + the normal whole-answer fetch, and it is remembered for 3 minutes
+       * (nsBad) so a device where this does not stream pays the probe once, not once per question.
+       */
+      if (isNative) {
+        if (nsBad()) return fallback();
+        var XHRc = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
+        if (typeof XHRc !== "function") return fallback();
+        /* HEDGE, don't kill (2026-08-24, measured). The first budget was 4000ms while the real first
+         * delta lands at 3.6-5.0s — so the watchdog was aborting streams that were about to work, and
+         * the app fell back every time (observed on device: "answer 9.2s", mode "grounded", never
+         * "grounded-stream"). Killing a slow-but-live stream is the wrong move.
+         *
+         * Instead: if no token has arrived by NX_FIRST, START THE FALLBACK IN PARALLEL and KEEP
+         * LISTENING. A stream that is merely slow still paints the moment its first token lands; a
+         * stream that is genuinely dead is covered by the fetch already in flight, so silence costs
+         * nothing. The duplicate request is only ever issued when the stream has produced nothing at
+         * all, and NX_HARD remains a floor so nothing can hang. */
+        /* SINGLE FLIGHT (2026-08-24). The earlier version HEDGED — on a slow first token it started a
+         * second, competing request. That made the fallback non-deterministic (two answers racing for
+         * the same bubble) and doubled the spend on exactly the slow calls. It existed only because
+         * the SERVER could stall forever; now the server bounds every stream (connect / idle / total)
+         * and always closes with a done event, so the client can be strictly one request at a time.
+         *
+         * Client budgets sit OUTSIDE the server's so the server's clean close always wins the race —
+         * a clean close carries the streamed text, a client abort throws it away. Measured device TTFV
+         * is p50 3.7s / p95 5.2s, so a 9s first-token backstop never fires on a healthy call. */
+        var NX_FIRST = 9000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
+        return aiHeaders().then(function (h) {
+          return new Promise(function (resolve) {
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
+            // One deterministic ending: abort this request, then take the proven whole-answer fetch.
+            // No second request is ever in flight at the same time.
+            function giveUp() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
+            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(giveUp, ms); }
+            function feed(chunk) {
+              nbuf += chunk;
+              var parts = nbuf.split(/\r?\n\r?\n/); nbuf = parts.pop();
+              for (var i = 0; i < parts.length; i++) {
+                var lines = parts[i].split(/\r?\n/), data = "";
+                for (var j = 0; j < lines.length; j++) if (lines[j].indexOf("data:") === 0) data += lines[j].slice(5).trim();
+                if (!data) continue;
+                var ev; try { ev = JSON.parse(data); } catch (e) { continue; }
+                if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
+                // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
+                // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
+              }
+            }
+            function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
+            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
+            for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
+            xhr.onprogress = function () { drain(); };
+            xhr.onload = function () {
+              drain();
+              // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
+              // answer must never look like a whole one. Anything else falls back to the proven fetch.
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              nsBad(true); settle(fallback());
+            };
+            xhr.onerror = function () { nsBad(true); settle(fallback()); };
+            xhr.ontimeout = function () { nsBad(true); settle(fallback()); };
+            // A real transport-level total bound. XHR honours this even when a socket goes quiet in a
+            // way no JS timer would catch — this is the backstop that makes a 196s hang impossible.
+            try { xhr.timeout = NX_TOTAL; } catch (e) {}
+            armx(NX_FIRST);
+            try {
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+            } catch (e) { nsBad(true); settle(fallback()); }
+          });
+        });
       }
       if (!sfetch || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
       if (isNative && nsBad()) return fallback();

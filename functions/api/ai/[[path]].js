@@ -120,6 +120,7 @@ import { getClientErrors, clearClientErrors } from "../../_clientlog.js";
 import { getRemoteConfig, setRemoteConfig } from "../../_remoteconfig.js";
 import { lookupUidByEmail, getUserRecord, setUserDisabled, mergeUserClaims } from "../../_fbadmin.js";
 import { getAnalytics } from "../../_analytics.js";
+import { sseFrames, sseFrameText } from "../../_sse_parse.js";
 import { listTickets as listSupportTickets, getTicket as getSupportTicket, addMessage as addSupportMessage, setStatus as setSupportStatus } from "../../_support.js";
 import { answerCacheKey, getCachedAnswer, putCachedAnswer, getRuntimeCfg as getMaikCfg, setRuntimeCfg as setMaikCfg } from "../../_maik_cache.js";
 import { applyConnectContext, maikWiringOn } from "../../_connect/maik-bridge/hook.js"; // Connect Track D (smd_connect_maik, default OFF)
@@ -256,7 +257,7 @@ const developerProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
     return fetch(`${DEV_HOST}/${modelFor(env, o)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -328,7 +329,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -382,46 +383,103 @@ const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure:
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
 // any gap). streamGeminiToSSE transforms Gemini's SSE into our compact {delta}/{done} event stream.
+/* Streaming deadlines (2026-08-24). The streaming path had NO timeout anywhere: the non-streaming
+ * path goes through fetchJsonWithTimeout, but geminiStreamUpstream used a bare fetch and the pump
+ * read with no idle deadline. A stalled upstream therefore held the SSE open indefinitely — measured
+ * on device as a 196-SECOND hang ending in xhr-error, one of 4 failures in 31 requests.
+ *
+ * Every stream now has three bounds: time to open the upstream, time between chunks, and total life.
+ * Whichever trips, the stream is CLOSED CLEANLY with a done event and the upstream reader is
+ * cancelled — so the client always settles deterministically instead of waiting on a dead socket. */
+function streamConnectMs(env) { const v = Number(env.MAIK_STREAM_CONNECT_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+function streamIdleMs(env) { const v = Number(env.MAIK_STREAM_IDLE_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+/* 25s, not 60s. Measured on 128 device requests: the longest legitimate answer completed in ~11s,
+ * while one pathological stream ran the full 60s before dying. A deadline that generous is not a
+ * bound, it is a hang with extra steps. 25s stays clear of every real answer AND stays inside the
+ * client's 30s transport bound, so the server always ends first with a clean close that KEEPS the
+ * text streamed so far — a client-side abort would discard it. */
+function streamTotalMs(env) { const v = Number(env.MAIK_STREAM_TOTAL_MS); return Number.isFinite(v) && v > 0 ? v : 25000; }
+
 async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (const name of order) {
     const p = PROVIDERS[name];
     if (!p || !p.available(env) || !p.streamFetch) { lastErr = new Error(name + " stream unavailable"); continue; }
+    // Bound how long we wait for the upstream to RESPOND. Without this a provider that never answers
+    // blocks the whole request, and the clinician waits on a connection that will never open.
+    const ctrl = new AbortController();
+    const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, streamConnectMs(env));
     try {
-      const r = await p.streamFetch(env, parts, maxTokens, opts);
-      if (r && r.ok && r.body) return r;
+      const r = await p.streamFetch(env, parts, maxTokens, Object.assign({}, opts || {}, { signal: ctrl.signal }));
+      if (r && r.ok && r.body) { clearTimeout(t); return r; }
       lastErr = new Error(name + " stream HTTP " + (r && r.status));
     } catch (e) { lastErr = e; }
+    finally { clearTimeout(t); }
   }
   throw lastErr || new Error("no streaming provider");
 }
-function streamGeminiToSSE(upstream, onText) {
+/* tStart (optional, ms) = when the upstream request was ISSUED. Lets the done event report where the
+ * time actually went: waiting for Gemini's first token vs generating the rest. Measured on device the
+ * first token took ~7.4s while the remaining 3.4k chars streamed in 5.3s — so the wait is TTFT, not
+ * generation and not buffering. Timings only; no PHI. */
+function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
+  const _t0 = typeof tStart === "number" ? tStart : Date.now();
+  const IDLE = (lim && lim.idleMs) || 12000;          // max gap BETWEEN chunks
+  const DEADLINE = _t0 + ((lim && lim.totalMs) || 60000);   // max life of the whole stream
+  let _tHdr = Date.now(), _tFirst = 0;
   let buf = "", full = "", closed = false;
+  /* One exit for every ending — upstream done, idle stall, or total deadline. Always emits a done
+   * event and closes, so the client settles deterministically and never waits on a dead socket. */
+  function finish(controller, reason) {
+    if (closed) return;
+    closed = true;
+    const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
+    if (lim && lim.model) _tm.model = lim.model;   // so a model A/B is verifiable, not assumed
+    // Everything WE spend before Gemini is even called (gate, re-rank, prompt render). Without this
+    // the client-vs-server gap is unattributable and "network" becomes a dumping ground for our work.
+    if (lim && typeof lim.preMs === "number") _tm.preMs = lim.preMs;
+    if (lim && typeof lim.headMs === "number") _tm.headMs = lim.headMs;   // request entry -> explain branch
+    if (lim && lim.hm) _tm.hm = lim.hm;
+    if (lim && lim.pm) _tm.pm = lim.pm;   // pre-Gemini sub-stages, so the remaining 400ms is attributable too
+    if (reason) _tm.endedBy = reason;
+    try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
+    try { controller.close(); } catch (e) {}
+    try { if (onText) onText(full); } catch (e) {}
+  }
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        const { value, done } = await reader.read();
+        // Race the read against the smaller of (idle budget, remaining total life). Without this a
+        // stalled upstream never resolves and the connection is held open until the phone gives up.
+        const budget = Math.max(1, Math.min(IDLE, DEADLINE - Date.now()));
+        let _tm2 = null;
+        const timeout = new Promise(function (res) { _tm2 = setTimeout(function () { res("__STALL__"); }, budget); });
+        const raced = await Promise.race([reader.read(), timeout]);
+        clearTimeout(_tm2);
+        if (raced === "__STALL__") {
+          try { reader.cancel(); } catch (e) {}     // settles the abandoned read and frees the socket
+          finish(controller, Date.now() >= DEADLINE ? "total" : "idle");
+          return;
+        }
+        const { value, done } = raced;
         if (done) {
-          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
-          try { if (onText) onText(full); } catch (e) {}
+          finish(controller, null);
           return;
         }
         buf += dec.decode(value, { stream: true });
-        const blocks = buf.split("\n\n"); buf = blocks.pop();
-        for (const block of blocks) {
-          const data = block.split("\n").filter((l) => l.indexOf("data:") === 0).map((l) => l.slice(5).trim()).join("");
-          if (!data || data === "[DONE]") continue;
-          let j; try { j = JSON.parse(data); } catch (e) { continue; }
-          const cand = j.candidates && j.candidates[0];
-          const txt = (cand && cand.content && cand.content.parts) ? cand.content.parts.map((p) => p.text || "").join("") : "";
-          if (txt) { full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
+        // Frames are CRLF-delimited by Google. Splitting on "\n\n" here matched NOTHING and was the
+        // real cause of the blank-answer streaming outage — see functions/_sse_parse.js.
+        const { frames, rest } = sseFrames(buf); buf = rest;
+        for (const frame of frames) {
+          const txt = sseFrameText(frame);
+          if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
-        if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
-        try { if (onText) onText(full); } catch (e2) {}
+        try { reader.cancel(); } catch (e2) {}
+        finish(controller, "error");
       }
     },
     cancel() { try { reader.cancel(); } catch (e) {} }
@@ -942,7 +1000,26 @@ async function pubmedGuidelines(env, topic, ptypeFilter) {
   return results;
 }
 
+/* Per-isolate router cache. The semantic router costs ~6s and its parse is a pure, stable function of
+ * the query, so the same question must never pay for it twice. Bounded and oldest-out; it holds only
+ * the parser's canonical-concept output, never the raw clinician query. Cloudflare reuses isolates
+ * heavily, so this alone absorbs the common questions even when no KV namespace is bound. */
+const _routeMem = new Map();
+const ROUTE_MEM_MAX = 500;
+/* Per-isolate cache of the two global AI-config values (emergency mode, model override). Non-PHI,
+ * identical for every user, and previously read from KV serially in front of every single request. */
+let _cfgCache = null;
+const CFG_TTL_MS = 30000;
+function routeMemPut(k, v) {
+  try {
+    if (_routeMem.has(k)) _routeMem.delete(k);
+    _routeMem.set(k, v);
+    while (_routeMem.size > ROUTE_MEM_MAX) _routeMem.delete(_routeMem.keys().next().value);
+  } catch (e) {}
+}
+
 export async function onRequest(context) {
+  const _reqT0 = Date.now();   // request entry — lets headMs separate OUR pre-branch work from network
   const { request, env, params } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -952,13 +1029,22 @@ export async function onRequest(context) {
 
   // AI Control Center: apply the admin model + emergency mode for THIS request. Emergency "cheap"
   // forces the cheapest model (overriding the admin choice); "pause" is enforced at dispatch below.
+  /* These are two rarely-changing CONFIG values that were read from KV SERIALLY on EVERY request,
+   * before any work began — pure dead time in front of every answer. They are non-PHI global config,
+   * so they are cached per-isolate for a short TTL and fetched in PARALLEL on a miss. Worst case a
+   * console change takes CFG_TTL_MS to reach an already-warm isolate, which is the same order as the
+   * KV edge cache it was already subject to. */
   let _emergency = { mode: "off" };
   try {
     const _s0 = usageKv(env);
     if (_s0) {
-      _emergency = await getEmergency(_s0);
-      const _ov0 = await getModelOverride(_s0);
-      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_ov0 || undefined);
+      const _now = Date.now();
+      if (!_cfgCache || _now > _cfgCache.exp) {
+        const [_em, _ov] = await Promise.all([getEmergency(_s0), getModelOverride(_s0)]);
+        _cfgCache = { emergency: _em, override: _ov, exp: _now + CFG_TTL_MS };
+      }
+      _emergency = _cfgCache.emergency;
+      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_cfgCache.override || undefined);
     }
   } catch (e) {}
 
@@ -1174,8 +1260,10 @@ export async function onRequest(context) {
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
+  const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
+  _hm.body = Date.now() - _reqT0;
 
   // ── AI Control Center (Phase 2b) ─────────────────────────────────────────────────────────────
   // (a) apply the admin "switch models" override for THIS request; (b) enforce the per-module DAILY
@@ -1212,22 +1300,34 @@ export async function onRequest(context) {
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
-    if (_mod || _isEvidReview) {
+    /* The device cap and the caller's identity are INDEPENDENT reads that were paid one after the
+     * other in front of every answer. Started together; both are still awaited before any generation,
+     * so a device-capped or over-quota caller is still refused before a single token is produced. */
+    const _dcP = (_mod || _isEvidReview)
+      ? deviceCheck(env, _acStore, request, Date.now(), context.waitUntil.bind(context)).catch(function () { return { ok: true }; })
+      : null;
+    // No .catch() here on purpose: it is awaited inside the try below, so a failure still fails open
+    // exactly as before. Swallowing it to null here would instead skip metering with a bad key.
+    const _whoP = (_mod && !_isEvidReview) ? identify(request, env) : null;
+    if (_dcP) {
       try {
-        const _dc = await deviceCheck(env, _acStore, request, Date.now());
+        const _dc = await _dcP;
+        _hm.dev = Date.now() - _reqT0;
         if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
     if (_mod && !_isEvidReview) {
       try {
-        const _who = await identify(request, env);
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
+        const _who = await _whoP;
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context));
+        try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) {
           if (_mq.reason === "ai-cost-cap") return json({ error: "quota", reason: "ai-cost-cap", resetAt: _mq.resetAt, cap: _mq.cap, dayCost: _mq.dayCost, credits: _mq.credits, message: "You've reached today's AI limit. It resets at midnight. Add credits or upgrade to keep going." }, 429);
           return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
         }
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
+      _hm.gate = Date.now() - _reqT0;
     }
   }
 
@@ -1283,11 +1383,28 @@ export async function onRequest(context) {
          * refused may run one wasted Workers AI call. That is bounded and cheap: it writes nothing,
          * touches no PHI, and a refused request is the rare case. Never reordered the other way -
          * the gate's REFUSAL still happens before any answer is generated. */
-        const _gateP = checkQuota(env, request, hasDx ? "case" : "general");
+        const _gateP = checkQuota(env, request, hasDx ? "case" : "general", { waitUntil: context.waitUntil.bind(context) });
         const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
           ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
           : null;
-        const gate = await _gateP;
+        /* BOUND THE GATE (2026-08-24). Measured on production: Gemini's first token is 2.0-4.2s, but
+         * the clinician waited up to 7.7s — because the quota gate's KV reads have a long tail (p95
+         * seen at several seconds, p50 ~400ms). That tail is dead time before Gemini is even called.
+         *
+         * Failing OPEN on a slow gate is not a new posture: checkQuota already returns {ok:true} when
+         * no KV store is bound, so "storage unavailable => allow" is the existing design. This bounds
+         * "storage is slow" the same way. The refusal path is unchanged whenever the gate answers in
+         * time, which is the overwhelming majority of calls; a timed-out gate skips metering for that
+         * one request rather than making a clinician wait seconds for a counter. */
+        const GATE_MS = 1200;
+        let _gateTimer = null;
+        const gate = await Promise.race([
+          _gateP.then((g) => { if (_gateTimer) clearTimeout(_gateTimer); return g; }),
+          new Promise((res) => { _gateTimer = setTimeout(() => res({ ok: true, id: null, meter: false, _slow: true }), GATE_MS); })
+        ]);
+        if (_gateTimer) clearTimeout(_gateTimer);
+        if (gate._slow) _mark.gateSlow = true;
+        try { _mark.qms = gate._qms; } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
@@ -1303,7 +1420,20 @@ export async function onRequest(context) {
         const _didRerank = !!_rerankP;
         try {
           if (isTutor && pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = lexicalRank(pkg.question, pkg.retrieved);
-          else if (_rerankP) { const _r = await _rerankP; if (_r) pkg.retrieved = _r; }   // null => keep the original order
+          // BOUND THE RE-RANK too (2026-08-24). Same finding as the gate: p95 was ~3.5s of dead time
+          // before Gemini is called. Timing out is already a supported outcome — null simply keeps the
+          // original evidence order, which is what a failed re-rank has always done — so a slow
+          // cross-encoder costs the budget and nothing else. Evidence is never dropped, only unsorted.
+          else if (_rerankP) {
+            const RERANK_MS = 900;
+            let _rt = null;
+            const _r = await Promise.race([
+              _rerankP.then((v) => { if (_rt) clearTimeout(_rt); return v; }),
+              new Promise((res) => { _rt = setTimeout(() => { _mark.rerankSlow = true; res(null); }, RERANK_MS); })
+            ]);
+            if (_rt) clearTimeout(_rt);
+            if (_r) pkg.retrieved = _r;   // null => keep the original order
+          }
         } catch (e) {}
         _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
@@ -1355,12 +1485,19 @@ export async function onRequest(context) {
         // commit - developer-first, vertex fallback - is a real, kept improvement; only the streaming
         // flip regressed). Restored to OFF. Flip MAIK_LIVE_STREAM=1 to try true streaming again, but
         // only after confirming the empty-stream failure mode above is actually fixed upstream.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        // Per-request opt-in (?livestream=1) so the live path can be exercised against REAL provider
+        // credentials without enabling it for anyone else. Preview deployments have no AI secrets
+        // (aiEnabled is false there), so a preview is not a usable staging environment for this.
+        // Default stays OFF: absent the param and the env flag, behaviour is byte-identical, so a
+        // regression here cannot reach a clinician who did not ask for it.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
+          || new URL(request.url).searchParams.get("livestream") === "1";
         if (wantStream && liveStream) {
           let up = null;
+          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
@@ -1461,6 +1598,26 @@ export async function onRequest(context) {
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
       if (firewallBlock(q)) return json({ outOfScope: true, primaryConcept: "", intent: "other", confidence: 1, source: "firewall" }); // deterministic: no router LLM
+      /* ROUTER CACHE (2026-08-24). Measured: this endpoint costs ~6.0-7.5s and runs BEFORE the answer
+       * on every new question — 6.0s router + 3.7s answer TTFV is the ~9.7s a clinician actually waits.
+       * The parse is a pure function of the query and is STABLE (a canonical concept does not change),
+       * so it is the single most cacheable thing in the pipeline.
+       *
+       * PHI: the raw query is never stored. The KV key is a SHA-256 of the normalised query, and the
+       * cached VALUE contains only canonical medical concepts the parser emitted — no patient text.
+       * The in-isolate Map is bounded and dies with the isolate. */
+      const _rkey = q.toLowerCase().replace(/\s+/g, " ").trim();
+      const _memHit = _routeMem.get(_rkey);
+      if (_memHit) return json(Object.assign({}, _memHit, { cached: "mem" }));
+      const _rkv = usageKv(env);
+      let _rkvKey = null;
+      if (_rkv) {
+        try {
+          _rkvKey = "maik:route:" + (await sha256hex(_rkey));
+          const _hit = await _rkv.get(_rkvKey, "json");
+          if (_hit && _hit.primaryConcept !== undefined) { routeMemPut(_rkey, _hit); return json(Object.assign({}, _hit, { cached: "kv" })); }
+        } catch (e) { _rkvKey = null; }
+      }
       const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys =
@@ -1489,7 +1646,7 @@ export async function onRequest(context) {
       const p = parseJsonLoose(text) || {};
       const concept = String(p.primaryConcept || p.topic || "").slice(0, 140);
       const opts = Array.isArray(p.options) ? p.options.map(function (x) { return String(x).slice(0, 80); }).filter(Boolean).slice(0, 4) : [];
-      return json({
+      const _routeOut = {
         primaryConcept: concept, topic: concept,   // topic = back-compat alias
         type: String(p.type || "").slice(0, 24),
         intent: normIntent(p.intent),
@@ -1501,7 +1658,14 @@ export async function onRequest(context) {
         options: opts,
         outOfScope: !!p.outOfScope,   // non-medical query → client refuses instantly (no KB/answer/research)
         mode: "route"
-      });
+      };
+      // Cache only a parse that actually resolved something — never cache a null/failed parse, or a
+      // transient failure would be pinned for every later clinician asking the same thing.
+      if (_routeOut.primaryConcept || _routeOut.ambiguous || _routeOut.outOfScope) {
+        routeMemPut(_rkey, _routeOut);
+        if (_rkv && _rkvKey) { try { context.waitUntil(_rkv.put(_rkvKey, JSON.stringify(_routeOut), { expirationTtl: 2592000 })); } catch (e) {} }
+      }
+      return json(_routeOut);
     }
     if (seg === "viva-judge") {
       // CliniX viva examiner. The QUESTION is always pre-authored content (clinix/*.json) — this
