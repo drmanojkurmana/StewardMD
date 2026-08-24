@@ -1345,7 +1345,13 @@ export async function onRequest(context) {
         // commit - developer-first, vertex fallback - is a real, kept improvement; only the streaming
         // flip regressed). Restored to OFF. Flip MAIK_LIVE_STREAM=1 to try true streaming again, but
         // only after confirming the empty-stream failure mode above is actually fixed upstream.
-        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0;
+        // Per-request opt-in (?livestream=1) so the live path can be exercised against REAL provider
+        // credentials without enabling it for anyone else. Preview deployments have no AI secrets
+        // (aiEnabled is false there), so a preview is not a usable staging environment for this.
+        // Default stays OFF: absent the param and the env flag, behaviour is byte-identical, so a
+        // regression here cannot reach a clinician who did not ask for it.
+        const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
+          || new URL(request.url).searchParams.get("livestream") === "1";
         if (wantStream && liveStream) {
           let up = null;
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
