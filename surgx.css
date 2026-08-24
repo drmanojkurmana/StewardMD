@@ -96,6 +96,11 @@ html.sgx-lock, html.sgx-lock body { overflow: hidden; }
   background: linear-gradient(160deg, #17414F 0%, #0E2C36 100%);
   color: #fff;
 }
+#surgxRoot .sgx-hero-logo {
+  display: block; width: 46px; height: auto; margin: 0 0 14px;
+  /* The source PNG is black + alpha-masked, so this forces it white on the hero gradient. */
+  filter: brightness(0) invert(1) drop-shadow(0 2px 4px rgba(0, 0, 0, .3));
+}
 #surgxRoot .sgx-hero-mark { font: 800 30px/1 var(--sgx-sans); letter-spacing: -.02em; }
 #surgxRoot .sgx-hero-mark sup { font-size: .56em; font-weight: 700; top: -.55em; position: relative; margin-left: 1px; }
 #surgxRoot .sgx-hero-tag { margin-top: 6px; font: 600 13px/1.45 var(--sgx-sans); color: rgba(255,255,255,.78); }

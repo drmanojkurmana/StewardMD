@@ -257,7 +257,13 @@
     }
 
     return head("SURGX", "", { rawTitle: 'SURG<sup style="font-size:.62em;font-weight:700;position:relative;top:-.5em">x</sup>' }) +
-      '<div class="sgx-hero"><div class="sgx-hero-mark">SURG<sup>x</sup></div>' +
+      '<div class="sgx-hero">' +
+      // The owner-supplied monogram, forced white against the hero gradient (the PNG is
+      // alpha-masked, so brightness(0) invert(1) yields clean white). The wordmark below stays LIVE
+      // TEXT rather than part of the image, so it scales with Dynamic Type and stays selectable -
+      // mark over wordmark is the supplied lockup either way.
+      '<img class="sgx-hero-logo" src="/surgx-logo.png" alt="" aria-hidden="true">' +
+      '<div class="sgx-hero-mark">SURG<sup>x</sup></div>' +
       '<div class="sgx-hero-tag">Surgical Intelligence</div>' +
       '<div class="sgx-hero-note">Decision support for clinicians. Educational content is reference material, ' +
       "not patient-specific advice. Everything here carries its source.</div></div>" +
