@@ -267,12 +267,23 @@ try {
   await ev("(() => { localStorage.removeItem('smd_verify_bypass'); return true; })()");
   await ev("window.SURGX.open('notes')");
   await sleep(500);
+  /* The registration gate is OFF by default (owner decision, 2026-08-25): a surgical note is the
+     surgeon's own record of what they did, not an order acting on a patient. So an unverified
+     session must reach the authoring surface, NOT a "verify first" wall. */
   const notesState = await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent");
-  const gated = /Verify to use Notes/.test(notesState);
-  ok(gated === true,
-    "ROLE GATE: an unverified session sees Notes and is told what is needed, rather than the section being hidden");
-  ok((await ev("!!document.querySelector('#surgxRoot [data-sgx=\"verify\"]')")) === true,
-    "and is given the route to verification");
+  ok(/Verify to use Notes/.test(notesState) === false,
+    "the registration gate is off by default: an unverified session reaches Notes");
+  ok((await ev("window.SMD_SURGX_ENTITLEMENT.notesAccess()")) === "allowed",
+    "and notesAccess() says so");
+  // But the gate must still WORK when switched back on, or "reversible" is a lie.
+  ok((await ev(`window.SMD_SURGX_ENTITLEMENT.notesAccess({
+      flag: (k) => k === "smd_surgx_notes" || k === "smd_surgx_notes_verify",
+      canPrescribe: () => false, bypass: () => false
+    })`)) === "verify_required",
+    "REVERSIBLE: with smd_surgx_notes_verify on, an unverified session is gated again");
+  // Notes being open must never mean prescribing is open - that gate is separate and untouched.
+  ok((await ev("!document.querySelector('#surgxRoot [data-sgx=\"prescribe\"], #surgxRoot .rx-btn')")) === true,
+    "SAFETY: opening Notes does not expose any prescription affordance");
 
   // Now exercise the editor itself, using the app's OWN existing beta bypass so we are testing the
   // real gate rather than working around it.

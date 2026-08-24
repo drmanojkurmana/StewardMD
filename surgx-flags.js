@@ -53,6 +53,14 @@
       type: "bool", def: true, query: "surgxhaptics",
       desc: "Haptic feedback on protocol band reveal and note field confirmation (native only)."
     },
+    smd_surgx_notes_verify: {
+      type: "bool", def: false, query: "surgxnotesverify",
+      desc: "Require a VERIFIED medical registration to author Surgical Notes. OFF by owner " +
+        "decision (2026-08-25): a note is the surgeon's own record of what they did, not an order " +
+        "acting on a patient, so it does not need the prescribing gate. Set to 1 to restore the " +
+        "gate without a rebuild. SURGX still exposes no prescription affordance at all, and the " +
+        "EMR write-back stays gated separately (QUEUE_EMR_WRITE + a live GHIS session)."
+    },
     smd_surgx_dest_drive: {
       type: "bool", def: true, query: "surgxdrive",
       desc: "Offer 'Google Drive' as a save destination for a finalised note. Native only (the " +
