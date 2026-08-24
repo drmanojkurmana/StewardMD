@@ -485,3 +485,12 @@ body.dark #surgxRoot .sgx-tab.on, body.v3-dark #surgxRoot .sgx-tab.on {
    keeps its normal stacking everywhere else in the app. 1300 stays far below
    the prescription pad (16000), which must remain on top of everything. */
 html.sgx-lock .mc-overlay { z-index: 1300; }
+
+/* Same trap, same fix, for every other app surface SURGX deep-links into. All of them sit BELOW the
+   SURGX overlay's 1255, so without a lift they open behind it, fully working and invisible:
+     .db-overlay — Drugs Database   (api.js,         z-index 880)
+     .abg        — Local antibiogram (antibiogram.js, z-index 950)
+   Scoped to html.sgx-lock so each keeps its normal stacking everywhere else in the app.
+   test/surgx-deeplinks.test.mjs asserts every one of these stays above SURGX and below the Rx pad. */
+html.sgx-lock .db-overlay { z-index: 1300; }
+html.sgx-lock .abg { z-index: 1300; }

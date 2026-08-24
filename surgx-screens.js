@@ -1286,14 +1286,19 @@
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }
+      /* MEDDB.openList() is the app's own Drugs Database entry point (api.js; the same call
+       * home.js's `drugs` action makes). MEDDRUGS is a DIFFERENT module - home.js uses it only for
+       * openInteractions - so do not "correct" this to that one.
+       * These buttons appeared dead not because of the globals but because their overlays
+       * (.db-overlay 880, .abg 950) sit below the SURGX overlay's 1255 and opened behind it. The
+       * lift lives in surgx.css. */
       if (act === "abg") {
         try { if (window.ABG && ABG.open) return ABG.open(); } catch (er) {}
-        try { if (window.MEDDB && MEDDB.openList) return MEDDB.openList(); } catch (er) {}
-        toast("Antibiogram is loading"); return;
+        toast("Antibiogram is still loading"); return;
       }
       if (act === "drugs") {
         try { if (window.MEDDB && MEDDB.openList) return MEDDB.openList(); } catch (er) {}
-        toast("Drug index is loading"); return;
+        toast("Drug index is still loading"); return;
       }
       if (act === "ask") {
         // window.SMD_askMaik(q) is the app's own seam (home.js:5224) and it CARRIES the question.
@@ -1404,7 +1409,19 @@
         PT().searchConnect(state.ptTenant, state.ptQuery).then(function (r) {
           state.ptBusy = false;
           state.ptResults = r.patients || [];
-          state.ptError = r.ok ? "" : "Search failed. Check the hospital connection.";
+          /* Say what to DO. "permission" from /api/connect/patients/search almost always means the
+           * tenant has no connector configured (engine.js: loadConnectorConfig -> PermissionError),
+           * not that the doctor lacks rights - they are usually an admin of the hospital they just
+           * picked. A generic "search failed" sent this exact case looking for a network fault
+           * (device-diagnosed 2026-08-25). */
+          state.ptError = r.ok ? "" :
+            (r.error === "permission"
+              ? "This hospital has no EMR connector set up yet. Configure it under Connect EMR, then search again."
+              : r.error === "not_found"
+                ? "This hospital's connector type is switched off for this build."
+                : r.error === "connect_unavailable"
+                  ? "Connect is not available in this build."
+                  : "Could not reach the hospital. Check the connection and try again.");
           render();
         });
         return;
