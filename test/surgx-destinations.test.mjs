@@ -12,7 +12,7 @@ import assert from "node:assert/strict";
 import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
-import { fileURLToPath } from "node:url";
+import { fileURLToPath, pathToFileURL } from "node:url";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 const require = createRequire(import.meta.url);
@@ -92,19 +92,91 @@ test("a flag being off blocks the destination even when the transport is ready",
   assert.equal(byId.emr.available, false);
 });
 
-test("the EMR destination flag defaults OFF and the Drive one defaults ON", () => {
-  // smd_surgx_dest_emr must never default on: no verified GHIS operative-note payload exists.
-  assert.equal(FLAGS.DEFS.smd_surgx_dest_emr.def, false);
+test("both export destination flags default ON", () => {
+  assert.equal(FLAGS.DEFS.smd_surgx_dest_emr.def, true);
   assert.equal(FLAGS.DEFS.smd_surgx_dest_drive.def, true);
 });
 
-test("the GHIS route for surgical notes is inert in the deployed function", () => {
-  // Guards against someone wiring a live write without a captured payload.
+test("the EMR write refuses without BOTH a patient and a visit", async () => {
+  // An Initial Assessment attaches to a VISIT. Without episodeId the GHIS form GET returns a blank
+  // doc_id 0 and the server would refuse anyway - failing here keeps us from claiming it sent.
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }); };
+  try {
+    global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "MR1", name: "x", episodeId: "" }) };
+    const r = await DEST.saveToEmr({}, "note", { confirmed: true });
+    assert.equal(r.error, "no_episode");
+    global.GHIS = { getToken: () => "tok", getSelectedPatient: () => null };
+    assert.equal((await DEST.saveToEmr({}, "note", { confirmed: true })).error, "no_patient_selected");
+    global.GHIS = { getToken: () => "", getSelectedPatient: () => null };
+    assert.equal((await DEST.saveToEmr({}, "note", { confirmed: true })).error, "ghis_signed_out");
+    assert.equal(calls.length, 0, "nothing may be sent when the preconditions fail");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the EMR write posts the note and both ids to the GHIS route", async () => {
+  let body = null;
+  global.fetch = (url, init) => {
+    body = { url, init: JSON.parse(init.body) };
+    return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) });
+  };
+  global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "MR1", name: "x", episodeId: "EP9" }) };
+  try {
+    const r = await DEST.saveToEmr({ type: "op" }, "OPERATIVE NOTE", { confirmed: true });
+    assert.equal(r.ok, true);
+    assert.equal(body.url, "/api/ghis/surgx-note");
+    assert.equal(body.init.patientId, "MR1");
+    assert.equal(body.init.episodeId, "EP9");
+    assert.equal(body.init.text, "OPERATIVE NOTE");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("a server REFUSAL is surfaced, never reported as success", async () => {
+  // saveAssessment reports refusals as {ok:false, resp:"..."} at HTTP 200. If resp were dropped the
+  // UI could not tell "correctly refused" from "network failed".
+  global.fetch = () => Promise.resolve({
+    ok: true, status: 200,
+    json: () => Promise.resolve({ ok: false, status: 409, resp: "patient_mismatch: loaded form for MR2, expected MR1 - save aborted" })
+  });
+  global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "MR1", name: "x", episodeId: "EP9" }) };
+  try {
+    const r = await DEST.saveToEmr({}, "note", { confirmed: true });
+    assert.equal(r.ok, false);
+    assert.match(r.resp, /patient_mismatch/);
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the GHIS surgical-note route appends to the assessment and stays behind the write gate", () => {
   const src = readFileSync(join(ROOT, "functions/api/ghis/[[path]].js"), "utf8");
   const i = src.indexOf("seg === 'surgx-note'");
   assert.ok(i > 0, "the surgx-note route should exist");
-  const block = src.slice(i, i + 700);
-  assert.ok(block.includes("501"), "the route must return 501");
-  assert.ok(block.includes("emrWriteEnabled"), "the route must sit behind the EMR write gate");
-  assert.ok(!/CreateDrugs|CreateinitialAssessment/.test(block), "no unverified GHIS payload may be wired here");
+  const block = src.slice(i, i + 900);
+  assert.ok(block.includes("emrWriteEnabled"), "must sit behind the EMR write gate");
+  assert.ok(block.includes("saveAssessment"), "must reuse the verified OPD transport");
+  assert.ok(block.includes("appendFields"), "must APPEND, never overlay");
+  assert.ok(!/\bfields:\s*\{/.test(block), "must not use the overwriting `fields` path for a note");
+});
+
+test("appendText never destroys an existing management plan", async () => {
+  // THE invariant of the EMR write: a surgical note is added to the doctor's management plan, it
+  // never replaces it. Tested on the real exported function, not on a grep of the source.
+  const { appendText } = await import(pathToFileURL(join(ROOT, "functions/api/ghis/[[path]].js")).href);
+
+  const plan = "Continue IV ceftriaxone. Review in 48h.";
+  const note = "OPERATIVE NOTE\nLap chole, CVS achieved.";
+
+  const merged = appendText(plan, note);
+  assert.ok(merged.startsWith(plan), "the existing plan must survive verbatim and stay first");
+  assert.ok(merged.includes(note), "the note must be present");
+  assert.ok(merged.includes("\n\n"), "the note reads as its own block");
+
+  // Idempotent: a double-tap or a retry must not write it twice.
+  assert.equal(appendText(merged, note), merged, "re-appending the same note is a no-op");
+
+  // An empty field takes the note as its value; an empty note never blanks the field.
+  assert.equal(appendText("", note), note);
+  assert.equal(appendText(plan, ""), plan, "appending nothing must not clear the plan");
+  assert.equal(appendText(plan, null), plan);
+  assert.equal(appendText(null, note), note);
+  assert.equal(appendText(null, null), "");
 });

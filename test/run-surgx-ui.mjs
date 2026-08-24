@@ -377,6 +377,12 @@ try {
       return Array.from(n).filter(b => b.disabled).every(b => (b.querySelector('.sb')||{}).textContent);
     })()`);
     ok(destReasons === true, "every unavailable destination states a reason");
+    // The EMR row is now OFFERED by default (it writes over the verified OPD transport), so in a
+    // browser with no GHIS session it must be blocked on the SESSION, not on the feature.
+    ok((await ev(`(() => {
+      const r = window.SMD_SURGX_DEST.availability().find(x => x.id === 'emr');
+      return r && !r.available && /GHIS/i.test(r.reason);
+    })()`)) === true, "with no GHIS session the EMR row is blocked on sign-in, not on the feature");
     ok((await ev(`document.querySelector('#surgxRoot .sgx-card h4') && Array.from(document.querySelectorAll('#surgxRoot .sgx-card h4')).some(h => h.textContent.trim() === 'Save to')`)) === true,
       "the destinations appear under a 'Save to' heading");
     ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('patient identifiers')")) === true,

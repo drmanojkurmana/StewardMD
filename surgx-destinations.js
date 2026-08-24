@@ -152,17 +152,17 @@
 
   /* saveToEmr(note, text, opts) -> Promise<{ok, error?, detail?}>
    *
-   * NOT YET A LIVE WRITE, AND DELIBERATELY SO. Writing into a live hospital record is gated three
-   * ways in this codebase (functions/api/ghis: server env QUEUE_EMR_WRITE=1, a client flag, and an
-   * explicit user confirm) and every gate exists because the GHIS payloads are reverse-engineered.
-   * There is no captured GHIS request for a free-text OPERATIVE NOTE - the verified write routes
-   * are inv-order, prescribe and assessment-save, none of which is an operative note. Mapping a
-   * surgical note onto the assessment form because it is the nearest available endpoint would put
-   * operative detail in the wrong part of a real patient's chart.
+   * Posts to /api/ghis/surgx-note, which writes over the SAME verified transport as the OPD EMR
+   * connect: it APPENDS the note to the Initial Assessment's "Management plan" on the patient's
+   * own visit, reusing saveAssessment's visit activation, authoritative form re-serialisation,
+   * patient_id mismatch abort and doc_id 0 refusal.
    *
-   * So this posts to /api/ghis/surgx-note, which is inert server-side, and surfaces the server's
-   * reason verbatim. When a real GHIS operative-note request is captured, the payload goes in that
-   * one route - the client, the picker and this call site need no change. */
+   * Requires BOTH ids. patientId alone is not enough: an Initial Assessment attaches to a VISIT,
+   * and without episodeId the form GET comes back blank (doc_id 0) and the server refuses the
+   * write rather than creating an orphan record. Failing here with a clear message beats letting
+   * the server reject it after the doctor thinks it sent.
+   *
+   * Still gated server-side by QUEUE_EMR_WRITE - writing into a live chart is never client-only. */
   function saveToEmr(note, text, opts) {
     opts = opts || {};
     if (opts.confirmed !== true) return Promise.resolve({ ok: false, error: "not_confirmed" });
@@ -172,12 +172,14 @@
     var patient = null;
     try { patient = (G.GHIS && G.GHIS.getSelectedPatient && G.GHIS.getSelectedPatient()) || null; } catch (e) {}
     if (!patient || !patient.patientId) return Promise.resolve({ ok: false, error: "no_patient_selected" });
+    if (!patient.episodeId) return Promise.resolve({ ok: false, error: "no_episode" });
 
     return fetch("/api/ghis/surgx-note", {
       method: "POST",
       headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok },
       body: JSON.stringify({
         patientId: patient.patientId,
+        episodeId: patient.episodeId,
         noteType: (note && note.type) || "",
         templateId: (note && note.templateId) || "",
         finalizedAt: (note && note.finalizedAt) || "",
@@ -185,8 +187,16 @@
       })
     }).then(function (r) {
       return r.json().catch(function () { return {}; }).then(function (j) {
-        if (r.ok && j && j.ok) return { ok: true };
-        return { ok: false, error: (j && j.error) || ("http_" + r.status), detail: (j && j.detail) || "" };
+        if (r.ok && j && j.ok) return { ok: true, resp: (j && j.resp) || "" };
+        // saveAssessment reports a REFUSAL as {ok:false, resp:"patient_mismatch: ..."} at HTTP 200,
+        // so resp must reach the caller - it is the difference between "refused for a good reason"
+        // and "the network failed", and the clinician needs to be told which.
+        return {
+          ok: false,
+          error: (j && j.error) || ("http_" + r.status),
+          detail: (j && j.detail) || "",
+          resp: (j && j.resp) || ""
+        };
       });
     }).catch(function (e) { return { ok: false, error: String((e && e.message) || e) }; });
   }

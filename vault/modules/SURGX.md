@@ -144,22 +144,32 @@ under a "Save to" card (inline, NOT an overlay — deliberately, to avoid anothe
 |----|------|-------|
 | `local` | — | works. AES-256-GCM via surgx-store.js. **System of record.** |
 | `drive` | `smd_surgx_dest_drive` (def **true**) | works on device. Doctor's own Drive, readable `.txt` in a "StewardMD Surgical Notes" folder. Native only (`SMD_getDriveToken` is null on web). |
-| `emr` | `smd_surgx_dest_emr` (def **false**) | **INERT.** `/api/ghis/surgx-note` returns 501. |
+| `emr` | `smd_surgx_dest_emr` (def **true**) | **LIVE** (server gate permitting). Appends the note to the Initial Assessment's **Management plan** via the same verified `saveAssessment` transport as OPD. Needs a GHIS session + a ward patient opened (for `episodeId`) + `QUEUE_EMR_WRITE=1`. |
 
 **Local is always written first**, on every destination — the exports layer on top of a successful
 local save, so a failed upload can never lose an operative note.
 
-### Why the EMR destination is inert
-There is **no captured GHIS request for a free-text operative note**. The three verified write
-routes (`inv-order`, `prescribe`, `assessment-save`) are an investigation order, a drug order and
-an OPD initial assessment — none is an operative note, and posting operative detail into the
-assessment form because it is the nearest endpoint would file it in the wrong part of a live
-patient's chart. The route deliberately contains **no payload builder**: an unverified field
-mapping sitting behind a flag is exactly what `QUEUE_EMR_WRITE` exists to prevent.
+### How the EMR write works (2026-08-24)
+GHIS has no captured operative-note form, so rather than invent an endpoint the note is **appended
+to `assessment.management_plan`** on the patient's own visit, through `saveAssessment` - the exact
+transport the OPD EMR connect uses. Everything that makes that safe applies unchanged: visit
+activation, re-serialising the live form for the authoritative `doc_id`, the `patient_id` mismatch
+abort, and the `doc_id 0` refusal.
 
-**To finish it:** capture the real GHIS operative/procedure-note POST from a browser session,
-verify the field names, add the builder in that one route, then flip `QUEUE_EMR_WRITE=1` and
-`smd_surgx_dest_emr`. The client, the picker and `saveToEmr()` need no change.
+**APPEND, never overlay.** `saveAssessment` gained `appendFields` (alongside the existing
+overwriting `fields`). OPD may overwrite `management_plan` because the doctor is looking at its
+current value; a note posted from SURGX is not, so replacing it would silently destroy the treating
+doctor's plan. The pure `appendText(cur, add)` helper is exported and unit-tested: keeps the
+existing value, separates with a blank line, and is **idempotent** so a double-tap or retry cannot
+write the note twice.
+
+**Requires `episodeId`.** An Initial Assessment attaches to a VISIT; without it the form GET returns
+a blank `doc_id 0` and the server refuses (correctly) rather than creating an orphan record.
+`GHIS._selectedPatient` did not store `episodeId` - `getSelectedPatient()` and the `SMD_WATCH` call
+site were reading a field that was **always `undefined`**. Now stored in `openLab()` and exposed.
+
+**Still server-gated by `QUEUE_EMR_WRITE=1`.** The client flag only controls whether the option is
+OFFERED; it can never by itself write to a live record.
 
 ### PHI posture
 Notes carry patient identifiers (`patientRef` is required + `phi:true`). Every non-local send needs

@@ -61,11 +61,13 @@
         "it needs an explicit per-save confirmation."
     },
     smd_surgx_dest_emr: {
-      type: "bool", def: false, query: "surgxemr",
-      desc: "Offer 'Hospital EMR (GHIS)' as a save destination. DEFAULT OFF and it must stay off " +
-        "until a real GHIS operative-note request has been captured and the payload verified - " +
-        "the server route is inert regardless (see functions/api/ghis). This flag only controls " +
-        "whether the option is OFFERED; it can never by itself cause a write to a live record."
+      type: "bool", def: true, query: "surgxemr",
+      desc: "Offer 'Hospital EMR (GHIS)' as a save destination. Writes over the SAME verified " +
+        "transport as the OPD EMR connect: appends the note to the Initial Assessment's " +
+        "Management plan on the patient's own visit (never overwrites it). This flag only " +
+        "controls whether the option is OFFERED - the write itself is still gated server-side by " +
+        "QUEUE_EMR_WRITE, needs a GHIS session and a selected ward patient, and takes an explicit " +
+        "second tap. It can never by itself cause a write to a live record."
     }
   };
 

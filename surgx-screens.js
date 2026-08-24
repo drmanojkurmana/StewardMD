@@ -1020,8 +1020,15 @@
     if (e === "no_drive_account") return "No Google account for Drive on this device";
     if (e === "ghis_signed_out") return "Sign in to GHIS first (Ward Sync)";
     if (e === "no_patient_selected") return "Select the patient in Ward Sync first";
-    if (e === "surgx_note_not_implemented" || e === "emr_write_disabled") {
-      return "Hospital record write is not available yet. The note is saved on this device.";
+    if (e === "no_episode") return "Open the patient from the ward list first (no visit selected)";
+    if (e === "emr_write_disabled") return "Hospital record writing is switched off on the server. The note is saved on this device.";
+    // The server's own refusals are specific and worth showing: they mean the write was correctly
+    // REFUSED, not that it silently failed.
+    if (e === "patient_mismatch" || /patient_mismatch/.test(String(r && r.resp))) {
+      return "Refused: the hospital form did not match this patient. Nothing was written.";
+    }
+    if (e === "no_active_assessment" || /no_active_assessment/.test(String(r && r.resp))) {
+      return "No active visit assessment for this patient. Open their visit in GHIS first.";
     }
     if (e.indexOf("http_401") === 0 || e.indexOf("http_403") === 0) return "Access refused. Sign in again.";
     if (e.indexOf("http_") === 0) return (dest === "drive" ? "Drive" : "The hospital record") + " refused the save (" + e.replace("http_", "") + ")";
