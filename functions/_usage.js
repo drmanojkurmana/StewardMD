@@ -97,6 +97,24 @@ export async function identify(request, env) {
   // EVERY signed-in user onto ONE shared id, so all accounts shared a single KU ledger + quota bucket
   // (balances appeared to "reset" to the shared total; metering merged). Per-account key = "fb:<uid>".
   if (tok) { const fb = await verifyFirebaseToken(tok, env); if (fb && fb.uid) return { id: "fb:" + fb.uid, guest: false, email: fb.email || emailFromBearer(tok), name: fb.name || null }; }
+  /* GUEST IDENTITY: per DEVICE when we have one, per IP only as a fallback (2026-08-25).
+   *
+   * It used to be IP-only, which meant everyone behind one public address shared a SINGLE guest
+   * bucket. On a hospital or clinic NAT that is the whole building; on Indian mobile networks it is
+   * far worse, because carrier-grade NAT puts thousands of subscribers behind one address — so one
+   * heavy guest could lock out every other guest on that carrier IP. The tight cap was on the most
+   * SHARED key in the system, which is exactly backwards.
+   *
+   * The app already sends X-SMD-Device on every AI call (see aiHeaders in reasoning.js), so keying
+   * on it makes the guest cap behave the way it reads: per phone.
+   *
+   * A device id is client-supplied and resets on reinstall, so it is weaker than an IP against a
+   * determined abuser. That is precisely what the OTHER two controls are for and they are unchanged:
+   * the per-device daily cap (deviceCheck, MAIK_DEVICE_DAILY_CAP, default 300) and the project-wide
+   * daily-cost circuit breaker, which nothing exempts anyone from. Signed-in identity is untouched —
+   * this only affects callers who present no credentials at all. */
+  const dev = request.headers.get("X-SMD-Device");
+  if (dev) return { id: "dev:" + (await sha256hex(dev)), guest: true };
   const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "0";
   return { id: "ip:" + (await sha256hex(ip)), guest: true };
 }

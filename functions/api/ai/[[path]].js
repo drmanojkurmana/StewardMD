@@ -1309,6 +1309,10 @@ export async function onRequest(context) {
     // No .catch() here on purpose: it is awaited inside the try below, so a failure still fails open
     // exactly as before. Swallowing it to null here would instead skip metering with a bad key.
     const _whoP = (_mod && !_isEvidReview) ? identify(request, env) : null;
+    // Owner check runs alongside the others so the exemption costs no extra wall time. checkQuota
+    // (_usage.js) already exempts owners from ITS per-user throttles; this makes the second cap
+    // system agree, instead of capping an owner one layer down.
+    const _ownerP = (_mod && !_isEvidReview) ? Promise.resolve(ownerOK(request, env)).catch(function () { return false; }) : null;
     if (_dcP) {
       try {
         const _dc = await _dcP;
@@ -1319,7 +1323,7 @@ export async function onRequest(context) {
     if (_mod && !_isEvidReview) {
       try {
         const _who = await _whoP;
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context));
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context), await _ownerP);
         try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) {
