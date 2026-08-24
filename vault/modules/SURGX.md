@@ -134,3 +134,95 @@ Deps: `ws-surgery.js` / [[Home|workspaces]] (the protocol engine) · [[CliniX]] 
 architecture this copies) · [[MaiK]] (Evidence Review, and Phase 2 mentor) · [[AI Control Center]]
 (the two new buckets) · `MEDCALC` (calculator deep links) · `SMD_CLINIC_CRYPTO` (note encryption) ·
 `SMD_RX.canPrescribe` (the Notes role gate).
+
+## Save destinations (Notes) — added 2026-08-24
+
+`surgx-destinations.js` → `window.SMD_SURGX_DEST`. Three destinations offered in the note editor
+under a "Save to" card (inline, NOT an overlay — deliberately, to avoid another stacking context).
+
+| id | flag | state |
+|----|------|-------|
+| `local` | — | works. AES-256-GCM via surgx-store.js. **System of record.** |
+| `drive` | `smd_surgx_dest_drive` (def **true**) | works on device. Doctor's own Drive, readable `.txt` in a "StewardMD Surgical Notes" folder. Native only (`SMD_getDriveToken` is null on web). |
+| `emr` | `smd_surgx_dest_emr` (def **true**) | **LIVE** (server gate permitting). Appends the note to the Initial Assessment's **Management plan** via the same verified `saveAssessment` transport as OPD. Needs a GHIS session + a ward patient opened (for `episodeId`) + `QUEUE_EMR_WRITE=1`. |
+
+**Local is always written first**, on every destination — the exports layer on top of a successful
+local save, so a failed upload can never lose an operative note.
+
+### How the EMR write works (2026-08-24)
+GHIS has no captured operative-note form, so rather than invent an endpoint the note is **appended
+to `assessment.management_plan`** on the patient's own visit, through `saveAssessment` - the exact
+transport the OPD EMR connect uses. Everything that makes that safe applies unchanged: visit
+activation, re-serialising the live form for the authoritative `doc_id`, the `patient_id` mismatch
+abort, and the `doc_id 0` refusal.
+
+**APPEND, never overlay.** `saveAssessment` gained `appendFields` (alongside the existing
+overwriting `fields`). OPD may overwrite `management_plan` because the doctor is looking at its
+current value; a note posted from SURGX is not, so replacing it would silently destroy the treating
+doctor's plan. The pure `appendText(cur, add)` helper is exported and unit-tested: keeps the
+existing value, separates with a blank line, and is **idempotent** so a double-tap or retry cannot
+write the note twice.
+
+**Requires `episodeId`.** An Initial Assessment attaches to a VISIT; without it the form GET returns
+a blank `doc_id 0` and the server refuses (correctly) rather than creating an orphan record.
+`GHIS._selectedPatient` did not store `episodeId` - `getSelectedPatient()` and the `SMD_WATCH` call
+site were reading a field that was **always `undefined`**. Now stored in `openLab()` and exposed.
+
+**Still server-gated by `QUEUE_EMR_WRITE=1`.** The client flag only controls whether the option is
+OFFERED; it can never by itself write to a live record.
+
+### PHI posture
+Notes carry patient identifiers (`patientRef` is required + `phi:true`). Every non-local send needs
+`confirmed:true` AND a second in-UI tap; there is no silent/background upload path. The patient
+reference never appears in a Drive **filename** (filenames leak into search results, "shared with
+me" lists and notification emails — a wider audience than the file itself).
+
+## Gotcha: deep-linked calculators need a z-index lift
+`.mc-overlay` is z-index **870**; the SURGX overlay is **1255**. A calculator opened from a score
+chip renders *underneath* SURGX — fully working and completely invisible, which reads as "the
+calculator links are broken". Fixed by `html.sgx-lock .mc-overlay { z-index: 1300 }` in surgx.css,
+scoped to the class surgx.js adds on open/removes on close so it reverts itself.
+
+## Gotcha: calculator ids are not greppable
+`calcChips()` is fail-soft — an id the catalog lacks is silently skipped, no error. `asa`, `iss` and
+`tbsa` shipped dead this way. `asa` looks valid to a naive grep because it is an **input field** id
+*inside* another calculator; only top-level entries (`{ id:"x", cat:...`) are real calculators.
+`test/surgx-calc-links.test.mjs` now resolves every id against the parsed catalog.
+
+## Patient linking (Notes) — added 2026-08-25
+
+`surgx-patient.js` → `window.SMD_SURGX_PATIENT`. A "Patient" card at the top of the note editor,
+two routes:
+
+- **From a hospital EMR** — one list with **GHIS (GIMSR) alongside every Connect-onboarded tenant**
+  (`SMD_CONNECT.tenants()`), the same presentation `connect-patient.js`'s admit chooser uses. GHIS
+  adopts the patient already open in Ward Sync (that is where the roster + visit context live);
+  a Connect hospital opens an inline search (`SMD_CONNECT.searchPatients`).
+- **Enter manually** — a free-text reference, for a surgeon working alone with no hospital EMR.
+
+The link `{source, tenantId, patientId, episodeId, name}` rides on the note and is persisted
+**inside the encrypted body** (`surgx-store.js`), never in the plaintext note index.
+
+### Writability is decided in ONE place
+`SMD_SURGX_PATIENT.writability(link)` — the picker, the EMR row and the error text all read it, so
+they cannot disagree:
+
+| source | writable | why |
+|--------|----------|-----|
+| `ghis` + `episodeId` | **yes** | the only verified write path |
+| `ghis` without a visit | no | an assessment attaches to a VISIT |
+| `connect` | no | Connect is **pull-only** — no note write-back endpoint exists |
+| `manual` | no | there is no hospital record to write to |
+
+`saveToEmr` checks the SOURCE before the id: a manual patient has no `patientId` by definition, and
+"no patient selected" would be a wrong and confusing thing to tell that surgeon.
+
+**The note's own linked patient wins over whoever is open in Ward Sync** — a note written this
+morning must never be filed against the patient opened this afternoon. Notes predating patient
+linking still fall back to the ward selection.
+
+## EMR write gate — CONFIRMED LIVE (2026-08-25)
+`QUEUE_EMR_WRITE = "1"` is set in `wrangler.toml` `[env.production.vars]` (this file IS the Pages
+config for project `stewardmd`). Verified against production, not assumed: a POST to
+`/api/ghis/assessment-save` with an invalid token returns **401 login_required**, not 501 — so the
+write gate is open and the request only failed on auth. Probe writes nothing (no valid session).

@@ -52,6 +52,22 @@
     smd_surgx_haptics: {
       type: "bool", def: true, query: "surgxhaptics",
       desc: "Haptic feedback on protocol band reveal and note field confirmation (native only)."
+    },
+    smd_surgx_dest_drive: {
+      type: "bool", def: true, query: "surgxdrive",
+      desc: "Offer 'Google Drive' as a save destination for a finalised note. Native only (the " +
+        "drive.file token does not exist on web). The note is ALWAYS saved to the device first; " +
+        "Drive is an export on top of that, never instead of it. Carries patient identifiers, so " +
+        "it needs an explicit per-save confirmation."
+    },
+    smd_surgx_dest_emr: {
+      type: "bool", def: true, query: "surgxemr",
+      desc: "Offer 'Hospital EMR (GHIS)' as a save destination. Writes over the SAME verified " +
+        "transport as the OPD EMR connect: appends the note to the Initial Assessment's " +
+        "Management plan on the patient's own visit (never overwrites it). This flag only " +
+        "controls whether the option is OFFERED - the write itself is still gated server-side by " +
+        "QUEUE_EMR_WRITE, needs a GHIS session and a selected ward patient, and takes an explicit " +
+        "second tap. It can never by itself cause a write to a live record."
     }
   };
 

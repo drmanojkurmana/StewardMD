@@ -74,7 +74,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/sknx-screens.css?v=sx13">
 <link rel="stylesheet" href="/insulin.css?v=ins11">
 <link rel="stylesheet" href="/clinix.css?v=cx16">
-<link rel="stylesheet" href="/surgx.css?v=sg2-logo">
+<link rel="stylesheet" href="/surgx.css?v=sg7-deeplink">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1508,7 +1508,7 @@ window.openExternal = function (u) {
      prescription.js; export is user-triggered so defer order is safe. -->
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
-<script src="/prescription.js?v=gold981-rx5night-mic1" defer></script>
+<script src="/prescription.js?v=gold981-rx5night-vfyprime-mic1" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -1764,15 +1764,17 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg1" defer></script>
+<script src="/surgx-flags.js?v=sg4-emr" defer></script>
 <script src="/surgx-model.js?v=sg1" defer></script>
 <script src="/surgx-content.js?v=sg1" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
-<script src="/surgx-store.js?v=sg1" defer></script>
+<script src="/surgx-store.js?v=sg5-pt" defer></script>
 <script src="/surgx-entitlement.js?v=sg1" defer></script>
+<script src="/surgx-patient.js?v=sg9-roster" defer></script>
+<script src="/surgx-destinations.js?v=sg5-pt" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg2-logo" defer></script>
+<script src="/surgx-screens.js?v=sg9-roster" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -1915,7 +1917,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1002"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1002-epi"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.

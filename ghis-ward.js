@@ -431,7 +431,7 @@
         _selectedPatient: null,
         // Public getter for the currently-selected Ward-Sync patient. Returns null when
         // none is selected (import stays disabled). name is display-only, id is required.
-        getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
+        getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name, episodeId: GHIS._selectedPatient.episodeId || '' } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
         // Persist a token another module obtained via the SAME /login proxy (e.g. the OPD
@@ -497,7 +497,11 @@
           if (GHIS._selectedPatient && String(GHIS._selectedPatient.patientId) !== String(patientId)) {
             try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
           }
-          GHIS._selectedPatient = { patientId: patientId, name: name };
+          // episodeId is the GHIS VISIT this selection belongs to. Store it: an Initial-Assessment
+          // write attaches to a visit, and without it the assessment GET returns a blank doc_id 0
+          // form and the write is (correctly) refused. SMD_WATCH below already read
+          // _selectedPatient.episodeId, which was always undefined until now.
+          GHIS._selectedPatient = { patientId: patientId, name: name, episodeId: episodeId || '' };
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
           var lwOk = !!(window.ICU && ICU.openLabWatch && (!ICU.labWatchOn || ICU.labWatchOn()));

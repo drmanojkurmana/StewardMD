@@ -21,3 +21,27 @@ tags: [infra]
 
 ## Secrets (NEVER commit / never in this vault)
 Mac password, admin token, 2Factor, Green-API, GHIS creds, keystore password, the Firebase-admin JSON in ~/Downloads (should be moved+rotated). Advise rotation.
+
+## iOS build toolchain (2026-08-25)
+`xcode-select -p` points at **`/Library/Developer/CommandLineTools`**, which has no iOS SDK - that is
+why device builds fail out of the box. The full Xcode is at
+**`/Users/diwakarkumar/Downloads/Xcode-beta 2.app`** (Xcode 27.0, build 27A5237l).
+
+Pass it per-command instead of switching the global toolchain (`xcode-select -s` needs sudo and
+changes it for every other session/worktree):
+
+```sh
+export DEVELOPER_DIR="/Users/diwakarkumar/Downloads/Xcode-beta 2.app/Contents/Developer"
+```
+
+**There is NO `.xcworkspace`** - this project is Capacitor SPM, not CocoaPods. Build the
+**`App` scheme of `ios/App/App.xcodeproj`**; `-workspace ios/App/App.xcworkspace` fails with
+"does not exist". Signing is Automatic, team `5QY4LUKX23`.
+
+```sh
+xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
+  -destination 'id=<device-udid>' -derivedDataPath ios/DerivedData \
+  -allowProvisioningUpdates build
+```
+
+Device list: `xcrun devicectl list devices` (needs the same DEVELOPER_DIR).
