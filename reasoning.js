@@ -3957,13 +3957,35 @@
         if (nsBad()) return fallback();
         var XHRc = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
         if (typeof XHRc !== "function") return fallback();
-        var NX_FIRST = 4000, NX_STALL = 8000;
+        /* HEDGE, don't kill (2026-08-24, measured). The first budget was 4000ms while the real first
+         * delta lands at 3.6-5.0s — so the watchdog was aborting streams that were about to work, and
+         * the app fell back every time (observed on device: "answer 9.2s", mode "grounded", never
+         * "grounded-stream"). Killing a slow-but-live stream is the wrong move.
+         *
+         * Instead: if no token has arrived by NX_FIRST, START THE FALLBACK IN PARALLEL and KEEP
+         * LISTENING. A stream that is merely slow still paints the moment its first token lands; a
+         * stream that is genuinely dead is covered by the fetch already in flight, so silence costs
+         * nothing. The duplicate request is only ever issued when the stream has produced nothing at
+         * all, and NX_HARD remains a floor so nothing can hang. */
+        var NX_FIRST = 4500, NX_STALL = 8000, NX_HARD = 15000;
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
             var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, fin = false, nt = null;
-            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
-            function bail() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
-            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(bail, ms); }
+            var hedged = false, hardT = null;
+            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } if (hardT) { clearTimeout(hardT); hardT = null; } resolve(v); }
+            // Silent stream: race a real fetch but do NOT abort — the stream may still be coming.
+            function startHedge() {
+              if (hedged) return; hedged = true;
+              Promise.resolve(fallback()).then(function (v) { if (!acc) { nsBad(true); settle(v); } });
+            }
+            function onSilent() {
+              startHedge();
+              if (hardT) clearTimeout(hardT);
+              hardT = setTimeout(function () { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }, NX_HARD);
+            }
+            // Text arrived and then stopped — that IS a broken stream, so abort and take the fetch.
+            function onStall() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
+            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(function () { if (acc) onStall(); else onSilent(); }, ms); }
             function feed(chunk) {
               nbuf += chunk;
               var parts = nbuf.split(/\r?\n\r?\n/); nbuf = parts.pop();

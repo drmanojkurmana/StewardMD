@@ -99,14 +99,31 @@ test("native uses the PRISTINE XHR, not fetch and not the patched global", () =>
     "progressive responseText is the whole point of using XHR here");
 });
 
-test("the native watchdog aborts for real — the 26.6s failure must be impossible", () => {
-  const bail = extractFn(RJ, "function bail() {");
-  assert.match(bail, /xhr\.abort\(\)/, "XHR abort actually works, unlike CapacitorWebFetch + AbortController");
-  assert.match(bail, /settle\(fallback\(\)\)/, "bailing must settle immediately with the proven fetch");
-  const m = RJ.match(/NX_FIRST = (\d+), NX_STALL = (\d+)/);
+test("a STALLED stream aborts for real — the 26.6s hang must be impossible", () => {
+  const onStall = extractFn(RJ, "function onStall() {");
+  assert.match(onStall, /xhr\.abort\(\)/, "XHR abort actually works, unlike CapacitorWebFetch + AbortController");
+  assert.match(onStall, /settle\(fallback\(\)\)/, "text-then-silence is a broken stream: take the proven fetch");
+});
+
+test("a merely SLOW stream is hedged, never killed — this is what made the app fall back every time", () => {
+  // Budget was 4000ms while the real first delta lands at 3.6-5.0s, so the watchdog aborted streams
+  // that were about to work and the app showed "answer 9.2s" (fallback) instead of "grounded-stream".
+  const onSilent = extractFn(RJ, "function onSilent() {");
+  assert.match(onSilent, /startHedge\(\)/, "no first token yet => hedge, do not abort");
+  const beforeHardStop = onSilent.split("hardT = setTimeout")[0];
+  assert.doesNotMatch(beforeHardStop, /xhr\.abort\(\)/,
+    "a stream that has simply not started yet must be left alive — it may still deliver");
+  const hedge = extractFn(RJ, "function startHedge() {");
+  assert.match(hedge, /if \(!acc\)/,
+    "the hedged fetch may only win while the stream has produced NOTHING — never overwrite streamed text");
+});
+
+test("the native budgets are explicit and bounded", () => {
+  const m = RJ.match(/NX_FIRST = (\d+), NX_STALL = (\d+), NX_HARD = (\d+)/);
   assert.ok(m, "the native budgets must be explicit");
-  assert.ok(Number(m[1]) <= 5000, `first-token budget ${m[1]}ms must stay small — it is paid on failure`);
+  assert.ok(Number(m[1]) >= 3000, `first budget ${m[1]}ms — below the measured first-delta range it would hedge on every call`);
   assert.ok(Number(m[2]) <= 10000, `stall budget ${m[2]}ms must stay small`);
+  assert.ok(Number(m[3]) <= 20000, `hard stop ${m[3]}ms must remain a real floor — nothing may hang`);
 });
 
 test("SAFETY: only a cleanly completed stream may surface as the answer", () => {
