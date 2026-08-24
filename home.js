@@ -4017,7 +4017,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Lazy two-tier generation (flag smd_maik_lazy, default OFF): the FIRST call fetches only the concise
     // bottom line (cheap + fast); the tier-2 detail is fetched on demand when "Know more" is tapped. Cuts
     // output tokens ~40-60% since most reads stop at the bottom line. Off by default → test then enable.
-    function maikLazyOn() { try { return localStorage.getItem("smd_maik_lazy") === "1"; } catch (e) { return false; } }
+    /* Two-tier answers, DEFAULT ON (2026-08-24). Measured on production, n=20: MaiK latency is
+     * output-token-bound - gen_ms ~= 1389 + 7.8 x outputTokens - so the first answer's LENGTH is the
+     * wait. Tier 1 asks for the bottom line PLUS everything safety-critical (red flags,
+     * contraindications, time-critical actions, drug cautions); the system prompt FORBIDS putting
+     * any of those behind @@MORE@@, and tier 2 is one tap away via the "Loading detail…" control.
+     * Same content, ordered - not a shorter answer. Opt out with smd_maik_lazy="0". */
+    function maikLazyOn() { try { return localStorage.getItem("smd_maik_lazy") !== "0"; } catch (e) { return true; } }
     var _maikLazyCtx = {}, _maikLazySeq = 0;
     function maikSplitMore(s) {
       var parts = String(s == null ? "" : s).split(/@@\s*MORE\s*@@/i);
