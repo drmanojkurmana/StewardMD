@@ -3921,7 +3921,7 @@
       var nativeStreamOn = (function () { try { return localStorage.getItem("smd_maik_native_stream") !== "0"; } catch (e) { return true; } })();
       // .bind(window): an unbound fetch throws "Illegal invocation" - native-bridge.js:631 binds it the same way.
       var pristine = (typeof window !== "undefined" && typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch.bind(window) : null;
-      if (isNative && (!nativeStreamOn || !pristine)) return fallback();
+      if (isNative && !nativeStreamOn) return fallback();
       var sfetch = isNative ? pristine : ((typeof fetch === "function") ? fetch : null);
       // Remember a native stream failure for the session so we don't keep paying the probe timeout.
       // Time-boxed, NOT a session-long latch: one transient stream failure (a flaky first request,
@@ -3935,6 +3935,67 @@
           else sessionStorage.removeItem("smd_maik_nstream_bad");
         } catch (e) {}
         return false;
+      }
+      /* NATIVE TRANSPORT — XHR, not fetch (2026-08-24, second attempt).
+       *
+       * The pristine fetch stream does NOT stream in WKWebView: the body arrives buffered, no delta
+       * ever lands, and because CapacitorWebFetch ignores AbortController the first-token watchdog
+       * could not abort it either. So the request sat until the 25s hard deadline and only THEN
+       * refetched the whole answer. Measured on device: 26.6s to an answer that takes ~11s without
+       * streaming at all — enabling streaming made the app STRICTLY WORSE. That is why this is not
+       * a fetch stream any more.
+       *
+       * XHR is the transport that actually streams here: responseText grows progressively across
+       * onprogress events, and xhr.abort() genuinely aborts — so a stream that delivers nothing
+       * costs one short watchdog and nothing more, instead of 25 seconds. Use the PRISTINE XHR:
+       * CapacitorHttp patches the global one to buffer through the native bridge.
+       *
+       * Worst case is now ~4s + the normal whole-answer fetch, and it is remembered for 3 minutes
+       * (nsBad) so a device where this does not stream pays the probe once, not once per question.
+       */
+      if (isNative) {
+        if (nsBad()) return fallback();
+        var XHRc = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
+        if (typeof XHRc !== "function") return fallback();
+        var NX_FIRST = 4000, NX_STALL = 8000;
+        return aiHeaders().then(function (h) {
+          return new Promise(function (resolve) {
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, fin = false, nt = null;
+            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
+            function bail() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
+            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(bail, ms); }
+            function feed(chunk) {
+              nbuf += chunk;
+              var parts = nbuf.split(/\r?\n\r?\n/); nbuf = parts.pop();
+              for (var i = 0; i < parts.length; i++) {
+                var lines = parts[i].split(/\r?\n/), data = "";
+                for (var j = 0; j < lines.length; j++) if (lines[j].indexOf("data:") === 0) data += lines[j].slice(5).trim();
+                if (!data) continue;
+                var ev; try { ev = JSON.parse(data); } catch (e) { continue; }
+                if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
+                if (ev && ev.done) sawDone = true;
+              }
+            }
+            function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
+            try { xhr.open("POST", b + "/explain?stream=1", true); } catch (e) { nsBad(true); settle(fallback()); return; }
+            try { xhr.setRequestHeader("Accept", "text/event-stream"); } catch (e) {}
+            for (var k in h) { if (Object.prototype.hasOwnProperty.call(h, k)) { try { xhr.setRequestHeader(k, h[k]); } catch (e) {} } }
+            xhr.onprogress = function () { drain(); };
+            xhr.onload = function () {
+              drain();
+              // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
+              // answer must never look like a whole one. Anything else falls back to the proven fetch.
+              if (acc && sawDone) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              nsBad(true); settle(fallback());
+            };
+            xhr.onerror = function () { nsBad(true); settle(fallback()); };
+            xhr.ontimeout = function () { nsBad(true); settle(fallback()); };
+            armx(NX_FIRST);
+            try {
+              xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
+            } catch (e) { nsBad(true); settle(fallback()); }
+          });
+        });
       }
       if (!sfetch || typeof ReadableStream === "undefined" || !window.TextDecoder || typeof AbortController === "undefined") return fallback();
       if (isNative && nsBad()) return fallback();
