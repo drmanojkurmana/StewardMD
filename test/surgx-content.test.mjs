@@ -498,6 +498,29 @@ test("index.html loads the SURGX bundle in the load-bearing order", () => {
   assert.ok(ws > 0 && ws < html.indexOf("/surgx.js?v="), "ws-surgery.js must load before surgx.js");
 });
 
+test("the SURGX logo ships and is ALPHA-MASKED, not a white-background image", () => {
+  // home.js and the hero both render this with `filter: brightness(0) invert(1)` to force it white
+  // on a dark background. That only works because the PNG is transparent + black ink: a
+  // white-BACKGROUND image would invert into a solid white block covering the badge. Cheap to get
+  // wrong when someone re-exports the logo, and very visible when they do.
+  const png = join(ROOT, "surgx-logo.png");
+  assert.ok(existsSync(png), "surgx-logo.png must exist at the repo root (build-www globs root *.png)");
+  const buf = readFileSync(png);
+  assert.equal(buf.slice(1, 4).toString("ascii"), "PNG", "must be a PNG");
+  // IHDR colour-type byte: 6 = RGBA, 4 = grey+alpha. Anything else has no alpha channel at all.
+  const colorType = buf[25];
+  assert.ok(colorType === 6 || colorType === 4,
+    "surgx-logo.png must have an alpha channel (IHDR colour type 6 or 4); got " + colorType);
+  assert.ok(buf.length < 400 * 1024, "keep the logo small; it is bundled into the app download");
+
+  // And it must actually be REFERENCED, or the asset silently rots.
+  const home = readFileSync(join(ROOT, "home.js"), "utf8");
+  const screens = readFileSync(join(ROOT, "surgx-screens.js"), "utf8");
+  assert.ok(/surgx-logo\.png/.test(home), "the home tile badge must use the logo");
+  assert.ok(/surgx-logo\.png/.test(screens), "the SURGX hero must use the logo");
+  assert.ok(/brightness\(0\) invert\(1\)/.test(home), "the tile badge must force it white on the dark badge");
+});
+
 test("edited existing files carry a surgx cache-bust marker", () => {
   // The CliniX incident: the module shipped and worked, but home.js and sidebar-redesign.js were
   // served from the service worker's pre-CliniX cache, so there was no tile and no toggle to

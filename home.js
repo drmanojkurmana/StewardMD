@@ -1458,7 +1458,7 @@
     // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
     // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
     // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
-    { act: "surgx", ic: "content_cut", tt: "SURGX", sub: "Surgical intelligence", feat: true, anim: "surgx",
+    { act: "surgx", ic: "content_cut", tt: "SURG\u02E3", sub: "Surgical intelligence", feat: true, anim: "surgx",
       eligible: function () { try { var q = (location.search.match(/[?&]surgx=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_surgx") !== "0"; } catch (e) { return true; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
@@ -1508,10 +1508,12 @@
     // above): brightness(0) invert(1) forces it white against this dark badge regardless of the
     // source file's own color, since the PNG is alpha-masked, not a white-background image.
     clinix: '<img class="ai-clinix-img" src="/clinix-logo.png" alt="" style="width:38px;height:auto;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
-    // SURGX: an inline scalpel mark rather than a Material ligature, so the tile never depends on a
-    // glyph being present in the font subset. Deliberately STATIC — the module's whole design brief
-    // is "not gamified", and an animating badge on a surgical tile reads wrong.
-    surgx: '<svg class="ai-anim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5 20.5 9.5 9 21H4v-5L14.5 3.5Z"/><path d="M12.5 5.5 18.5 11.5"/><path d="M4 16h5v5"/></svg>'
+    // SURGX: the real owner-supplied monogram (surgx-logo.png), same pattern as maitri/clinix above.
+    // brightness(0) invert(1) forces it WHITE on this dark badge regardless of the source colour,
+    // which works because the PNG is alpha-masked rather than a white-background image.
+    // Deliberately STATIC - the module's design brief is "not gamified", and an animating badge on
+    // a surgical tile reads wrong.
+    surgx: '<img class="ai-surgx-img" src="/surgx-logo.png" alt="" style="width:34px;height:auto;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
