@@ -367,7 +367,17 @@ export async function poolKeyFor(store, doctorId) {
  * before returning. Only recordAiUsage — the admin rollup, which gates nothing — is deferred.
  *
  * warmBillingCfg and poolKeyFor are independent of each other, so they are started together. */
-export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil) {
+/* ownerExempt (optional): the caller is a verified OWNER (functions/_adminauth.js ownerOK).
+ *
+ * WHY: _usage.js checkQuota already exempts owners from its per-USER throttles, but this SECOND cap
+ * system did not — so an owner could be blocked by a limit meant for regular users while being
+ * exempt from the equivalent limit one layer up. That inconsistency is the bug.
+ *
+ * Scope of the exemption is deliberately narrow, mirroring checkQuota: it skips the per-module daily
+ * cap and the per-USER cost cap. It does NOT skip metering — recordAiUsage still runs, so owner spend
+ * is still counted in the dashboards and still feeds the PROJECT-WIDE daily-cost circuit breaker,
+ * which nothing exempts anybody from. An owner can be uncapped without being invisible. */
+export async function gateAndCount(env, store, moduleId, doctorId, subscription, now, email, waitUntil, ownerExempt) {
   const _t = { t0: Date.now() };
   const [, pooled] = await Promise.all([
     warmBillingCfg(store).catch(function () {}),           // live enforce/cost-cap flags (cached 30s)
@@ -377,9 +387,10 @@ export async function gateAndCount(env, store, moduleId, doctorId, subscription,
   _t.warm = Date.now() - _t.t0;
   const q = await checkModuleQuota(env, store, moduleId, doctorId, now);
   _t.quota = Date.now() - _t.t0;
-  if (!q.ok) return q;                                     // at the per-module daily cap → block
+  // An owner is never blocked by the per-module cap — but usage is still recorded below.
+  if (!q.ok && !ownerExempt) return q;                     // at the per-module daily cap → block
   // Per-user daily AI-COST cap (rupees), then prepaid credits. Inert unless AI_COST_CAP_ON=1.
-  if (costCapOn(env)) {
+  if (costCapOn(env) && !ownerExempt) {
     const cap = await dailyCostCap(env, store, email, null);   // role-based cap wired in Phase 4
     const cc = await checkCostCap(env, store, doctorId, cap, now);
     if (!cc.ok) return cc;                                 // { ok:false, reason:"ai-cost-cap", resetAt, ... }
