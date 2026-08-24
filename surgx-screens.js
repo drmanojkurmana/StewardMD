@@ -26,6 +26,7 @@
   function M() { try { return window.SMD_SURGX_MODEL || null; } catch (e) { return null; } }
   function ST() { try { return window.SMD_SURGX_STORE || null; } catch (e) { return null; } }
   function DEST() { try { return window.SMD_SURGX_DEST || null; } catch (e) { return null; } }
+  function PT() { try { return window.SMD_SURGX_PATIENT || null; } catch (e) { return null; } }
   function EV() { try { return window.SMD_SURGX_EVIDENCE || null; } catch (e) { return null; } }
   function NS() { try { return window.SMD_SURGX_NOTE_SCHEMA || null; } catch (e) { return null; } }
   function ENT() { try { return window.SMD_SURGX_ENTITLEMENT || null; } catch (e) { return null; } }
@@ -984,6 +985,59 @@
     return renderNoteEditor();
   }
 
+  /* ── who the note is about ────────────────────────────────────────────────
+   * Two routes, because there are two kinds of surgeon using this: one attached to a hospital EMR,
+   * and one working alone. The hospital list puts GHIS and every Connect tenant side by side, the
+   * same way connect-patient.js's admit chooser does - no special case for the doctor to learn.
+   * Only a hospital link carries the ids an EMR write needs, so the card states the writability
+   * up front rather than letting them discover it at the end. */
+  function patientCard(n) {
+    var P = PT(); if (!P) return "";
+    var link = n.patient || null;
+    var w = P.writability(link);
+    var body = '<div class="sgx-row" style="cursor:default">' +
+      '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
+      '<span class="sb">' + esc(w.canWrite ? "Can be written to the hospital record." : w.reason) + "</span></span></div>";
+
+    if (state.ptPick === "sources") {
+      body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
+        (state.ptSources || []).map(function (s) {
+          return '<button class="sgx-btn" data-sgx="ptsrc" data-id="' + attr(s.id) + '" data-kind="' + attr(s.kind) + '">' +
+            ic("local_hospital") + " " + esc(s.name) + "</button>";
+        }).join("") +
+        (!(state.ptSources || []).length
+          ? '<div class="sgx-disclaim" style="border:none">No hospital is connected. Sign in to Ward Sync, or connect a hospital under Connect EMR, or enter the patient manually.</div>'
+          : "") +
+        '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
+    } else if (state.ptPick === "connect") {
+      body += '<div class="sgx-fld"><label for="sgxPtQuery">Search ' + esc(state.ptTenantName || "hospital") + '</label>' +
+        '<input id="sgxPtQuery" type="text" data-sgx-ptquery value="' + attr(state.ptQuery || "") + '" placeholder="Name or hospital number"></div>' +
+        '<div class="sgx-btnrow"><button class="sgx-btn pri" data-sgx="ptsearch">' + ic("search") + " Search</button>" +
+        '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
+      if (state.ptBusy) body += '<div class="sgx-disclaim" style="border:none">Searching…</div>';
+      else if (state.ptResults) {
+        body += state.ptResults.length
+          ? state.ptResults.map(function (p, i) {
+              return '<button class="sgx-row" data-sgx="ptpick" data-idx="' + i + '"><span class="tx">' +
+                '<span class="tt">' + esc(PT().patientLabel(p)) + "</span>" +
+                '<span class="sb">' + esc(PT().patientMrn(p) || "no hospital number") + "</span></span>" +
+                '<span class="go">' + ic("chevron_right") + "</span></button>";
+            }).join("")
+          : '<div class="sgx-disclaim" style="border:none">' + esc(state.ptError || "No patient matched.") + "</div>";
+      }
+    } else if (state.ptPick === "manual") {
+      body += '<div class="sgx-fld"><label for="sgxPtManual">Patient reference (initials or hospital number)</label>' +
+        '<input id="sgxPtManual" type="text" data-sgx-ptmanual value="' + attr((link && link.source === "manual" && link.name) || "") + '" placeholder="e.g. R.K. / 4471"></div>' +
+        '<div class="sgx-btnrow"><button class="sgx-btn pri" data-sgx="ptmanualsave">Use this patient</button>' +
+        '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
+    } else {
+      body += '<div class="sgx-btnrow">' +
+        '<button class="sgx-btn" data-sgx="ptfromemr">' + ic("local_hospital") + " From a hospital EMR</button>" +
+        '<button class="sgx-btn" data-sgx="ptmanual">' + ic("edit") + " Enter manually</button></div>";
+    }
+    return '<div class="sgx-card"><h4>Patient</h4>' + body + "</div>";
+  }
+
   /* ── save destinations (local / Drive / hospital EMR) ─────────────────────
    * The device is the system of record and is written FIRST on every one of these; Drive and the
    * EMR are exports layered on a successful local save, never alternatives to it. An unavailable
@@ -993,11 +1047,15 @@
   function destinationCard(n) {
     var D = DEST();
     if (!D || !D.availability) return "";
+    // The EMR row answers to the LINKED PATIENT, not just to the flags: a manual or Connect
+    // patient has no writable hospital record, and saying so here beats failing at the end.
+    var P = PT(), w = P ? P.writability(n.patient || null) : { canWrite: false, reason: "" };
     var rows = D.availability(), out = "", i, d;
     for (i = 0; i < rows.length; i++) {
       d = rows[i];
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
+      if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
       if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
       out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
@@ -1021,6 +1079,7 @@
     if (e === "ghis_signed_out") return "Sign in to GHIS first (Ward Sync)";
     if (e === "no_patient_selected") return "Select the patient in Ward Sync first";
     if (e === "no_episode") return "Open the patient from the ward list first (no visit selected)";
+    if (e === "source_not_writable") return "This patient is not from GHIS, so there is no hospital record to write to.";
     if (e === "emr_write_disabled") return "Hospital record writing is switched off on the server. The note is saved on this device.";
     // The server's own refusals are specific and worth showing: they mean the write was correctly
     // REFUSED, not that it silently failed.
@@ -1072,6 +1131,7 @@
       '<button class="sgx-btn" data-sgx="noteshare">' + ic("ios_share") + " Share</button>" +
       "</div></div>";
 
+    body += patientCard(n);
     body += destinationCard(n);
 
     if (n.id) {
@@ -1298,6 +1358,58 @@
         state.note.audit.push({ a: "confirm", k: fk });
         haptic("light");
         render();
+        return;
+      }
+      if (act === "ptfromemr") {
+        state.ptPick = "sources"; state.ptSources = null; render();
+        PT().sources().then(function (list) { state.ptSources = list || []; render(); });
+        return;
+      }
+      if (act === "ptmanual") { state.ptPick = "manual"; render(); return; }
+      if (act === "ptcancel") { state.ptPick = null; state.ptResults = null; state.ptError = ""; render(); return; }
+      if (act === "ptsrc") {
+        var kind = t.getAttribute("data-kind"), sid = t.getAttribute("data-id");
+        if (kind === "ghis") {
+          // GHIS patients are chosen in Ward Sync, which owns the roster and the visit context.
+          var sel = PT().ghisCurrent();
+          var link = PT().linkFromGhis(sel);
+          if (!link) { toast("Open the patient in Ward Sync first"); return; }
+          state.note.patient = link; state.ptPick = null;
+          saveNote(true).then(function () { toast("Patient linked"); render(); });
+          return;
+        }
+        state.ptPick = "connect"; state.ptTenant = sid;
+        state.ptTenantName = (state.ptSources || []).filter(function (s) { return s.id === sid; }).map(function (s) { return s.name; })[0] || "";
+        state.ptResults = null; state.ptError = ""; render();
+        return;
+      }
+      if (act === "ptsearch") {
+        var qEl = rootEl.querySelector("[data-sgx-ptquery]");
+        state.ptQuery = qEl ? qEl.value : "";
+        if (!state.ptQuery) { toast("Type a name or hospital number"); return; }
+        state.ptBusy = true; state.ptResults = null; render();
+        PT().searchConnect(state.ptTenant, state.ptQuery).then(function (r) {
+          state.ptBusy = false;
+          state.ptResults = r.patients || [];
+          state.ptError = r.ok ? "" : "Search failed. Check the hospital connection.";
+          render();
+        });
+        return;
+      }
+      if (act === "ptpick") {
+        var p = (state.ptResults || [])[+t.getAttribute("data-idx")];
+        var cl = PT().linkFromConnect(state.ptTenant, p);
+        if (!cl) { toast("Could not read that patient"); return; }
+        state.note.patient = cl; state.ptPick = null; state.ptResults = null;
+        saveNote(true).then(function () { toast("Patient linked"); render(); });
+        return;
+      }
+      if (act === "ptmanualsave") {
+        var mEl = rootEl.querySelector("[data-sgx-ptmanual]");
+        var ml = PT().linkManual(mEl ? mEl.value : "");
+        if (!ml) { toast("Enter a patient reference"); return; }
+        state.note.patient = ml; state.ptPick = null;
+        saveNote(true).then(function () { toast("Patient set"); render(); });
         return;
       }
       if (act === "notesave") { saveNote(false); return; }

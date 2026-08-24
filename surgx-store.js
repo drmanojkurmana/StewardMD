@@ -184,6 +184,9 @@
     var body = {
       id: id, type: note.type, templateId: note.templateId || "",
       label: String(note.label || ""),
+      // The linked patient (surgx-patient.js): source + ids + display name. Persisted INSIDE the
+      // encrypted body, never in the plaintext index below - it is patient-identifying.
+      patient: note.patient || null,
       values: note.values || {}, provenance: note.provenance || {},
       finalized: note.finalized === true,
       finalizedBy: note.finalizedBy || "", finalizedAt: note.finalizedAt || "",

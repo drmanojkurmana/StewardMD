@@ -169,9 +169,23 @@
     var tok = "";
     try { tok = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; } catch (e) {}
     if (!tok) return Promise.resolve({ ok: false, error: "ghis_signed_out" });
-    var patient = null;
-    try { patient = (G.GHIS && G.GHIS.getSelectedPatient && G.GHIS.getSelectedPatient()) || null; } catch (e) {}
-    if (!patient || !patient.patientId) return Promise.resolve({ ok: false, error: "no_patient_selected" });
+
+    /* The note's OWN linked patient decides where this goes - not whoever happens to be open in
+     * Ward Sync right now. A note written this morning must not be filed against the patient the
+     * surgeon opened this afternoon. Falls back to the ward selection only for a note that predates
+     * patient linking. */
+    var patient = (note && note.patient) || null;
+    if (!patient) {
+      try { patient = (G.GHIS && G.GHIS.getSelectedPatient && G.GHIS.getSelectedPatient()) || null; } catch (e) {}
+      if (patient) patient = { source: "ghis", patientId: patient.patientId, episodeId: patient.episodeId, name: patient.name };
+    }
+    if (!patient) return Promise.resolve({ ok: false, error: "no_patient_selected" });
+    /* Source is checked BEFORE the id: a manually-entered patient has no patientId by definition,
+     * and telling that surgeon "no patient selected" would be simply wrong - they selected one, it
+     * just has no hospital record behind it. Only a GHIS patient is writable (Connect is
+     * pull-only, manual has no record at all). */
+    if (patient.source && patient.source !== "ghis") return Promise.resolve({ ok: false, error: "source_not_writable" });
+    if (!patient.patientId) return Promise.resolve({ ok: false, error: "no_patient_selected" });
     if (!patient.episodeId) return Promise.resolve({ ok: false, error: "no_episode" });
 
     return fetch("/api/ghis/surgx-note", {

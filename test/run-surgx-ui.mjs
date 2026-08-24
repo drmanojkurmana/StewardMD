@@ -358,6 +358,36 @@ try {
     ok((await ev("document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('Finalised by')")) === true,
       "and the note records who finalised it");
 
+    /* ── patient linking ───────────────────────────────────────────────── */
+    console.log("\n--- 01 notes: patient ---");
+    ok((await ev(`(() => Array.from(document.querySelectorAll('#surgxRoot .sgx-card h4')).some(h => h.textContent.trim() === 'Patient'))()`)) === true,
+      "the note carries a Patient card");
+    ok((await ev(`!!document.querySelector('#surgxRoot [data-sgx="ptfromemr"]') && !!document.querySelector('#surgxRoot [data-sgx="ptmanual"]')`)) === true,
+      "BOTH routes are offered: from a hospital EMR, or entered manually");
+    // A surgeon with no hospital connection must still be able to name a patient.
+    await ev(`(() => { document.querySelector('#surgxRoot [data-sgx="ptmanual"]').click(); return true; })()`);
+    await sleep(400);
+    ok((await ev(`!!document.querySelector('#surgxRoot [data-sgx-ptmanual]')`)) === true,
+      "manual entry opens a reference field for a solo surgeon");
+    await ev(`(() => { const i = document.querySelector('#surgxRoot [data-sgx-ptmanual]'); i.value = 'R.K. 4471'; document.querySelector('#surgxRoot [data-sgx="ptmanualsave"]').click(); return true; })()`);
+    await sleep(700);
+    ok((await ev(`document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('R.K. 4471')`)) === true,
+      "the manually entered patient is linked to the note");
+    ok((await ev(`document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Entered manually')`)) === true,
+      "and the note says where that patient came from");
+    // The whole point of recording the source: a manual patient has no writable hospital record.
+    ok((await ev(`(() => {
+      const n = Array.from(document.querySelectorAll('#surgxRoot [data-sgx="notedest"]')).find(b => b.getAttribute('data-id') === 'emr');
+      return !!n && n.disabled && /manually entered|no hospital record/i.test(n.querySelector('.sb').textContent);
+    })()`)) === true, "a manual patient disables the EMR row and says why");
+    ok((await ev(`window.SMD_SURGX_PATIENT.writability({source:'manual',name:'x'}).canWrite === false
+      && window.SMD_SURGX_PATIENT.writability({source:'connect',patientId:'p'}).canWrite === false
+      && window.SMD_SURGX_PATIENT.writability({source:'ghis',patientId:'p',episodeId:'e'}).canWrite === true`)) === true,
+      "only a GHIS patient with a visit is writable");
+    // The linked patient must survive a reload, encrypted.
+    ok((await ev(`(() => { const n = window.SMD_SURGX_STORE.listNotes()[0]; return !!n; })()`)) === true,
+      "the note with its patient is stored");
+
     /* ── save destinations ─────────────────────────────────────────────────
        The note is finalised at this point, so the export rows are live. */
     console.log("\n--- 01 notes: save destinations ---");

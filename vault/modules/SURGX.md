@@ -188,3 +188,41 @@ scoped to the class surgx.js adds on open/removes on close so it reverts itself.
 `tbsa` shipped dead this way. `asa` looks valid to a naive grep because it is an **input field** id
 *inside* another calculator; only top-level entries (`{ id:"x", cat:...`) are real calculators.
 `test/surgx-calc-links.test.mjs` now resolves every id against the parsed catalog.
+
+## Patient linking (Notes) — added 2026-08-25
+
+`surgx-patient.js` → `window.SMD_SURGX_PATIENT`. A "Patient" card at the top of the note editor,
+two routes:
+
+- **From a hospital EMR** — one list with **GHIS (GIMSR) alongside every Connect-onboarded tenant**
+  (`SMD_CONNECT.tenants()`), the same presentation `connect-patient.js`'s admit chooser uses. GHIS
+  adopts the patient already open in Ward Sync (that is where the roster + visit context live);
+  a Connect hospital opens an inline search (`SMD_CONNECT.searchPatients`).
+- **Enter manually** — a free-text reference, for a surgeon working alone with no hospital EMR.
+
+The link `{source, tenantId, patientId, episodeId, name}` rides on the note and is persisted
+**inside the encrypted body** (`surgx-store.js`), never in the plaintext note index.
+
+### Writability is decided in ONE place
+`SMD_SURGX_PATIENT.writability(link)` — the picker, the EMR row and the error text all read it, so
+they cannot disagree:
+
+| source | writable | why |
+|--------|----------|-----|
+| `ghis` + `episodeId` | **yes** | the only verified write path |
+| `ghis` without a visit | no | an assessment attaches to a VISIT |
+| `connect` | no | Connect is **pull-only** — no note write-back endpoint exists |
+| `manual` | no | there is no hospital record to write to |
+
+`saveToEmr` checks the SOURCE before the id: a manual patient has no `patientId` by definition, and
+"no patient selected" would be a wrong and confusing thing to tell that surgeon.
+
+**The note's own linked patient wins over whoever is open in Ward Sync** — a note written this
+morning must never be filed against the patient opened this afternoon. Notes predating patient
+linking still fall back to the ward selection.
+
+## EMR write gate — CONFIRMED LIVE (2026-08-25)
+`QUEUE_EMR_WRITE = "1"` is set in `wrangler.toml` `[env.production.vars]` (this file IS the Pages
+config for project `stewardmd`). Verified against production, not assumed: a POST to
+`/api/ghis/assessment-save` with an invalid token returns **401 login_required**, not 501 — so the
+write gate is open and the request only failed on auth. Probe writes nothing (no valid session).
