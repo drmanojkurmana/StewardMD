@@ -755,6 +755,25 @@ export async function onRequest(context) {
       if (!emrWriteEnabled(env)) return writeGate();
       const r = await saveAssessment(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
+    /* SURGX surgical note -> hospital record. INERT, and not merely because of the write gate:
+     * there is NO captured GHIS request for a free-text operative note. The three verified write
+     * paths above (inv-order, prescribe, assessment-save) are an investigation order, a drug
+     * order and an OPD initial assessment - none is an operative note, and posting operative
+     * detail into the assessment form because it is the nearest endpoint would file it in the
+     * wrong part of a live patient's chart.
+     *
+     * Deliberately no payload builder here: an unverified field mapping sitting behind a flag is
+     * exactly the thing QUEUE_EMR_WRITE exists to prevent, because one day someone flips the flag.
+     * TO IMPLEMENT: capture the real GHIS operative/procedure-note POST from a browser session,
+     * verify the field names against it, add the builder here, and only then does this route stop
+     * returning 501. The client (surgx-destinations.js saveToEmr) needs no change. */
+    if (seg === 'surgx-note' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      return json({
+        error: 'surgx_note_not_implemented',
+        detail: 'Saving a surgical note into GHIS is not implemented yet: the operative-note request has not been captured, so there is no verified payload to send. The note is saved on the device.'
+      }, 501);
+    }
     return json({ error: 'unknown endpoint', seg }, 404);
   } catch (e) {
     return json({ error: String(e.message || e) }, 500);

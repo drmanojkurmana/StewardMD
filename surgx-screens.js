@@ -25,6 +25,7 @@
   function C() { try { return window.SMD_SURGX_CONTENT || null; } catch (e) { return null; } }
   function M() { try { return window.SMD_SURGX_MODEL || null; } catch (e) { return null; } }
   function ST() { try { return window.SMD_SURGX_STORE || null; } catch (e) { return null; } }
+  function DEST() { try { return window.SMD_SURGX_DEST || null; } catch (e) { return null; } }
   function EV() { try { return window.SMD_SURGX_EVIDENCE || null; } catch (e) { return null; } }
   function NS() { try { return window.SMD_SURGX_NOTE_SCHEMA || null; } catch (e) { return null; } }
   function ENT() { try { return window.SMD_SURGX_ENTITLEMENT || null; } catch (e) { return null; } }
@@ -983,6 +984,50 @@
     return renderNoteEditor();
   }
 
+  /* ── save destinations (local / Drive / hospital EMR) ─────────────────────
+   * The device is the system of record and is written FIRST on every one of these; Drive and the
+   * EMR are exports layered on a successful local save, never alternatives to it. An unavailable
+   * destination is shown greyed WITH its reason rather than hidden - a row that silently vanishes
+   * is the most confusing thing you can do to someone looking for it mid-list.
+   * Export needs a finalised note: a draft is explicitly not a record. */
+  function destinationCard(n) {
+    var D = DEST();
+    if (!D || !D.availability) return "";
+    var rows = D.availability(), out = "", i, d;
+    for (i = 0; i < rows.length; i++) {
+      d = rows[i];
+      var blocked = !d.available || (d.id !== "local" && !n.finalized);
+      var why = d.reason;
+      if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
+      out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
+        (blocked ? " disabled" : "") + '><span class="tx">' +
+        '<span class="tt">' + esc(d.label) + "</span>" +
+        '<span class="sb">' + esc(why || d.sub) + "</span></span>" +
+        '<span class="go">' + ic(blocked ? "block" : "chevron_right") + "</span></button>";
+    }
+    return '<div class="sgx-card"><h4>Save to</h4>' + out +
+      '<div class="sgx-disclaim" style="margin-top:8px;border:none;padding:6px 0 0">' +
+      "This note contains patient identifiers. Sending it to Drive or the hospital record is a " +
+      "disclosure and is confirmed each time. The encrypted copy on this device is kept either way." +
+      "</div></div>";
+  }
+
+  /* Transport errors say what the clinician should DO. The one case that must never read like a
+   * transient glitch is the EMR route: it is not implemented and no amount of retrying will change
+   * that, so it says so plainly and reminds them the device copy is safe. */
+  function destError(dest, r) {
+    var e = (r && r.error) || "failed";
+    if (e === "no_drive_account") return "No Google account for Drive on this device";
+    if (e === "ghis_signed_out") return "Sign in to GHIS first (Ward Sync)";
+    if (e === "no_patient_selected") return "Select the patient in Ward Sync first";
+    if (e === "surgx_note_not_implemented" || e === "emr_write_disabled") {
+      return "Hospital record write is not available yet. The note is saved on this device.";
+    }
+    if (e.indexOf("http_401") === 0 || e.indexOf("http_403") === 0) return "Access refused. Sign in again.";
+    if (e.indexOf("http_") === 0) return (dest === "drive" ? "Drive" : "The hospital record") + " refused the save (" + e.replace("http_", "") + ")";
+    return (dest === "drive" ? "Could not reach Drive" : "Could not reach the hospital record") + ". The note is saved on this device.";
+  }
+
   function renderNoteEditor() {
     var mm = M(), n = state.note, schema = state.noteSchema;
     if (!schema) return head("Note", "01") + errorState("Unknown note type.");
@@ -1019,6 +1064,8 @@
       '<button class="sgx-btn" data-sgx="notecopy">' + ic("content_copy") + " Copy</button>" +
       '<button class="sgx-btn" data-sgx="noteshare">' + ic("ios_share") + " Share</button>" +
       "</div></div>";
+
+    body += destinationCard(n);
 
     if (n.id) {
       body += '<div class="sgx-btnrow"><button class="sgx-btn danger" data-sgx="notedelete">' + ic("delete") + " Delete note</button></div>";
@@ -1247,6 +1294,39 @@
         return;
       }
       if (act === "notesave") { saveNote(false); return; }
+      if (act === "notedest") {
+        var dest = t.getAttribute("data-id");
+        // ALWAYS write the device copy first, whatever the destination. If the export then fails
+        // the note is already safe, and "local" is simply this step on its own.
+        saveNote(true).then(function (okLocal) {
+          if (okLocal === false) { toast("Could not save on this device"); return; }
+          if (dest === "local") { toast("Saved on this device"); render(); return; }
+          if (!state.note.finalized) { toast("Finalise the note before sending it anywhere"); return; }
+          var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
+          // Second tap confirms: this puts patient-identifying text outside the device.
+          if (t.getAttribute("data-armed") !== "1") {
+            t.setAttribute("data-armed", "1");
+            t.classList.add("danger");
+            var label = dest === "drive" ? "Confirm: send to Drive" : "Confirm: write to the hospital record";
+            t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
+              '<span class="sb">Contains patient identifiers. Tap again to send.</span></span>';
+            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 6000);
+            return;
+          }
+          var mm = M(), sc = state.noteSchema;
+          var text = mm.renderNoteText(sc.sections, state.note.values, state.note.provenance, {
+            title: sc.title, finalized: state.note.finalized,
+            finalizedBy: state.note.finalizedBy, finalizedAt: state.note.finalizedAt
+          });
+          toast(dest === "drive" ? "Sending to Drive…" : "Writing to the hospital record…");
+          D.send(dest, state.note, text, { confirmed: true }).then(function (r) {
+            if (r && r.ok) { toast(dest === "drive" ? "Saved to Google Drive" : "Written to the hospital record"); }
+            else { toast(destError(dest, r)); }
+            render();
+          });
+        });
+        return;
+      }
       if (act === "notefinal") {
         var mm = M();
         var comp = mm.noteCompleteness(state.noteSchema.sections, state.note.values, state.note.provenance);

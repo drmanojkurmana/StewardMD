@@ -134,3 +134,47 @@ Deps: `ws-surgery.js` / [[Home|workspaces]] (the protocol engine) · [[CliniX]] 
 architecture this copies) · [[MaiK]] (Evidence Review, and Phase 2 mentor) · [[AI Control Center]]
 (the two new buckets) · `MEDCALC` (calculator deep links) · `SMD_CLINIC_CRYPTO` (note encryption) ·
 `SMD_RX.canPrescribe` (the Notes role gate).
+
+## Save destinations (Notes) — added 2026-08-24
+
+`surgx-destinations.js` → `window.SMD_SURGX_DEST`. Three destinations offered in the note editor
+under a "Save to" card (inline, NOT an overlay — deliberately, to avoid another stacking context).
+
+| id | flag | state |
+|----|------|-------|
+| `local` | — | works. AES-256-GCM via surgx-store.js. **System of record.** |
+| `drive` | `smd_surgx_dest_drive` (def **true**) | works on device. Doctor's own Drive, readable `.txt` in a "StewardMD Surgical Notes" folder. Native only (`SMD_getDriveToken` is null on web). |
+| `emr` | `smd_surgx_dest_emr` (def **false**) | **INERT.** `/api/ghis/surgx-note` returns 501. |
+
+**Local is always written first**, on every destination — the exports layer on top of a successful
+local save, so a failed upload can never lose an operative note.
+
+### Why the EMR destination is inert
+There is **no captured GHIS request for a free-text operative note**. The three verified write
+routes (`inv-order`, `prescribe`, `assessment-save`) are an investigation order, a drug order and
+an OPD initial assessment — none is an operative note, and posting operative detail into the
+assessment form because it is the nearest endpoint would file it in the wrong part of a live
+patient's chart. The route deliberately contains **no payload builder**: an unverified field
+mapping sitting behind a flag is exactly what `QUEUE_EMR_WRITE` exists to prevent.
+
+**To finish it:** capture the real GHIS operative/procedure-note POST from a browser session,
+verify the field names, add the builder in that one route, then flip `QUEUE_EMR_WRITE=1` and
+`smd_surgx_dest_emr`. The client, the picker and `saveToEmr()` need no change.
+
+### PHI posture
+Notes carry patient identifiers (`patientRef` is required + `phi:true`). Every non-local send needs
+`confirmed:true` AND a second in-UI tap; there is no silent/background upload path. The patient
+reference never appears in a Drive **filename** (filenames leak into search results, "shared with
+me" lists and notification emails — a wider audience than the file itself).
+
+## Gotcha: deep-linked calculators need a z-index lift
+`.mc-overlay` is z-index **870**; the SURGX overlay is **1255**. A calculator opened from a score
+chip renders *underneath* SURGX — fully working and completely invisible, which reads as "the
+calculator links are broken". Fixed by `html.sgx-lock .mc-overlay { z-index: 1300 }` in surgx.css,
+scoped to the class surgx.js adds on open/removes on close so it reverts itself.
+
+## Gotcha: calculator ids are not greppable
+`calcChips()` is fail-soft — an id the catalog lacks is silently skipped, no error. `asa`, `iss` and
+`tbsa` shipped dead this way. `asa` looks valid to a naive grep because it is an **input field** id
+*inside* another calculator; only top-level entries (`{ id:"x", cat:...`) are real calculators.
+`test/surgx-calc-links.test.mjs` now resolves every id against the parsed catalog.

@@ -257,10 +257,15 @@ try {
 
   /* ── 8. NOTES: the finalise gate ───────────────────────────────────────── */
   console.log("\n--- 01 notes ---");
-  // The harness reuses --user-data-dir, so localStorage survives between runs. Clear the keys this
-  // section depends on, or a previous run's bypass silently turns the role-gate assertion green.
+  // The harness reuses --user-data-dir, so localStorage survives between runs, and the "verified
+  // session" section below deliberately SETS smd_verify_bypass. Clearing it mid-run is not enough:
+  // prescription.js primes its verification cache AT BOOT, so a page that booted with last run's
+  // bypass still answers canPrescribe() === true no matter what we delete afterwards. Clear the
+  // keys, then RE-BOOT so the gate is evaluated against the state we actually want to test.
   await ev("(() => { localStorage.removeItem('smd_verify_bypass'); window.SMD_SURGX_STORE.wipe(); return true; })()");
-  await ev("window.SMD_SURGX_SCREENS.go('notes')");
+  await attach(BASE + "?surgx=1");
+  await ev("(() => { localStorage.removeItem('smd_verify_bypass'); return true; })()");
+  await ev("window.SURGX.open('notes')");
   await sleep(500);
   const notesState = await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent");
   const gated = /Verify to use Notes/.test(notesState);
@@ -352,6 +357,33 @@ try {
       "the second press finalises it");
     ok((await ev("document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('Finalised by')")) === true,
       "and the note records who finalised it");
+
+    /* ── save destinations ─────────────────────────────────────────────────
+       The note is finalised at this point, so the export rows are live. */
+    console.log("\n--- 01 notes: save destinations ---");
+    const destRows = await ev(`(() => {
+      const n = document.querySelectorAll('#surgxRoot [data-sgx="notedest"]');
+      return Array.from(n).map(b => b.getAttribute('data-id') + (b.disabled ? ':off' : ':on')).join(',');
+    })()`);
+    ok(/local/.test(destRows) && /drive/.test(destRows) && /emr/.test(destRows),
+      "all three destinations are OFFERED (local, Drive, hospital EMR): " + destRows);
+    ok(/local:on/.test(destRows), "saving to this device is available");
+    // Headless Chrome has no native drive.file token and no GHIS session, so both exports must be
+    // shown-but-disabled rather than hidden - and must say why.
+    ok(/drive:off/.test(destRows) && /emr:off/.test(destRows),
+      "with no Drive account and no GHIS session, both exports are disabled rather than hidden");
+    const destReasons = await ev(`(() => {
+      const n = document.querySelectorAll('#surgxRoot [data-sgx="notedest"]');
+      return Array.from(n).filter(b => b.disabled).every(b => (b.querySelector('.sb')||{}).textContent);
+    })()`);
+    ok(destReasons === true, "every unavailable destination states a reason");
+    ok((await ev(`document.querySelector('#surgxRoot .sgx-card h4') && Array.from(document.querySelectorAll('#surgxRoot .sgx-card h4')).some(h => h.textContent.trim() === 'Save to')`)) === true,
+      "the destinations appear under a 'Save to' heading");
+    ok((await ev("document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('patient identifiers')")) === true,
+      "the card warns that sending the note off-device is a PHI disclosure");
+    // The export transports must refuse an unconfirmed send even if called directly.
+    ok((await ev("window.SMD_SURGX_DEST.send('drive', {}, 'x', {}).then(r => r.error)")) === "not_confirmed",
+      "a direct send() with no confirmation is refused");
 
     // Encrypted persistence, end to end: it must come back off disk decrypted.
     const stored = await ev("window.SMD_SURGX_STORE.listNotes().length");
