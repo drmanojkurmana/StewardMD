@@ -83,9 +83,10 @@ export const MODEL_RATES = {
   "gemini-2.5-flash-lite":  { in: 0.003, out: 0.012 },
   "gemini-2.5-pro":         { in: 0.110, out: 0.880 },
   // Gemini 3.x — ESTIMATED (Google's exact rates "to follow"); tune via AI_RATE_* env before relying on cost.
-  "gemini-3.5-flash":       { in: 0.008, out: 0.028 },
-  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012 },
-  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012 },
+  // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
+  "gemini-3.5-flash":       { in: 0.008, out: 0.028, est: true },
+  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012, est: true },
+  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012, est: true },
 };
 const DEFAULT_RATE = { in: 0.007, out: 0.025 };
 export function modelRate(env, model) {
@@ -93,6 +94,18 @@ export function modelRate(env, model) {
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
   const base = MODEL_RATES[model] || DEFAULT_RATE;
   return { in: Number.isFinite(rin) && rin >= 0 ? rin : base.in, out: Number.isFinite(rout) && rout >= 0 ? rout : base.out };
+}
+// Is this model's price a real published rate, or our own estimate? A doctor's rate card may only
+// ever show CONFIRMED numbers — quoting a guess to someone deciding what to spend is worse than
+// showing no rate card at all. An explicit AI_RATE_<MODEL>_IN/_OUT override counts as confirmed:
+// the owner has entered the published figure. Internal costing/metering still uses the estimate.
+export function rateConfirmed(env, model) {
+  const base = MODEL_RATES[model];
+  if (!base) return false;                       // unknown model → DEFAULT_RATE, i.e. a guess
+  if (!base.est) return true;
+  const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
+  const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
+  return Number.isFinite(rin) && rin >= 0 && Number.isFinite(rout) && rout >= 0;
 }
 // extras: { images, audioSeconds } — flat add-ons (image/audio cost, env-overridable).
 export function estCostInr(env, model, inTok, outTok, extras) {

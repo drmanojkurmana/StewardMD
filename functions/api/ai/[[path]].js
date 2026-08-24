@@ -112,7 +112,7 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, rateConfirmed, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
 import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
@@ -1258,13 +1258,19 @@ export async function onRequest(context) {
     // (_ai_usage.estCostInr), so the published rate can never drift from what is actually charged.
     try {
       const model = resolveModel(await getModelOverride(store), env);
-      const r = modelRate(env, model);
-      out.rates = {
-        model: model,
-        inPer1k: inrToMt(r.in), outPer1k: inrToMt(r.out),
-        perImage: inrToMt(aiEstCostInr(env, model, 0, 0, { images: 1 })),
-        perAudioSec: inrToMt(aiEstCostInr(env, model, 0, 0, { audioSeconds: 1 })),
-      };
+      // A rate card is a price quoted to someone deciding what to spend. Publish it ONLY for a model
+      // whose rates are confirmed — for a Gemini 3.x estimate the card is withheld, not guessed at.
+      if (rateConfirmed(env, model)) {
+        const r = modelRate(env, model);
+        out.rates = {
+          model: model,
+          inPer1k: inrToMt(r.in), outPer1k: inrToMt(r.out),
+          perImage: inrToMt(aiEstCostInr(env, model, 0, 0, { images: 1 })),
+          perAudioSec: inrToMt(aiEstCostInr(env, model, 0, 0, { audioSeconds: 1 })),
+        };
+      } else {
+        out.ratesProvisional = true;
+      }
     } catch (e) {}
     return json(out);
   }

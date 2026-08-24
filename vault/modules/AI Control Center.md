@@ -20,6 +20,14 @@ Internally everything is rupees; the UI only ever says **MaiK Tokens**. `MT_PER_
 read it. Token packs (`plans().tokens`) are fulfilled at their advertised `mt`, deliberately NOT
 through `CREDIT_CONVERSION` (which prices a raw rupee top-up, a different product).
 
+**Never quote an estimated price to a doctor.** `MODEL_RATES` entries carry `est: true` for the
+Gemini 3.x rows (Google's real figures are still "to follow"). `rateConfirmed(env, model)` gates the
+dashboard's rate card: for an estimated model the card is WITHHELD (`ratesProvisional: true`) and the
+page says rates are being confirmed, rather than printing a guess. Entering both `AI_RATE_<M>_IN` and
+`_OUT` marks a model confirmed. Internal costing/metering still uses the estimate — this is about what
+is published to someone deciding what to spend. Active model stays `gemini-2.5-flash`
+(`MODEL_HARD_DEFAULT`), whose rates are real.
+
 `GET /api/ai/usage` (More → AI Usage) returns, for the caller only: today's requests/tokens/spend,
 per-module counts, `capsEnforced`, wallet `balanceMt`, `dailyFreeMt`, and a `rates` card priced off
 `_ai_usage.estCostInr` so the published rate cannot drift from what is actually charged. It meters
@@ -27,7 +35,12 @@ under `poolKeyFor()`, so a co-resident pair reads the pool it actually spends fr
 
 Fulfilment: every payment path (Razorpay webhook, PhonePe webhook, StoreKit `iap/verify`) goes through
 `fulfilPurchase()` in `functions/api/billing/[[path]].js`. Before 2026-08-25 all three read `months` and
-granted Pro, so a token pack delivered a month of Pro and zero tokens.
+granted Pro, so a token pack delivered a month of Pro and zero tokens. `test/token-purchase.test.mjs`
+drives ₹499 → 750k MT → wallet → AI deduction through the real modules.
+
+**Pack payout is a pricing decision, not a bug:** ₹499 buys 750,000 MT = ₹375 of AI at our internal
+cost (75% payout). A raw rupee top-up via `addCredits` still uses `CREDIT_CONVERSION` (50%). Owner to
+confirm the packs' margin before launch — see [[Decisions]].
 
 ## Runtime-editable knobs (no redeploy, KV-backed, owner console)
 | knob | KV key | fallback |

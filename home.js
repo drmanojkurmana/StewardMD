@@ -2086,6 +2086,10 @@
         '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + r.perAudioSec + ' MT<span class="d">per second</span></td></tr>' +
         '</tbody></table>' +
         '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((r.inPer1k * 0.6) + (r.outPer1k * 0.8)) + ' MT. Rates are for ' + aiCtlEsc(r.model) + ' and are billed on actual usage, never rounded up per request.</div>';
+    } else if (u.ratesProvisional) {
+      // The active model's published rates are not confirmed yet. Say so plainly rather than quote a
+      // number we are guessing at — a doctor deciding what to spend must not be given an estimate.
+      out += '<div class="aiu-h">Rate card</div><div class="ai-usage-note">Rates for the model currently in use are being confirmed and are not published yet. Your spend above is exact, and nothing is charged beyond what you actually use.</div>';
     }
     out += '<div class="ai-usage-note">Metered per request, metadata only. Your questions, notes and patient data are never stored in these counts.</div>';
     return out;

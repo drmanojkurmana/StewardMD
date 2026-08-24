@@ -10,7 +10,7 @@ import { readFileSync } from "node:fs";
 import { dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 import { addTokens, getCredits, inrToMt, mtToInr, tokenPackFor, MT_PER_INR } from "../functions/_credits.js";
-import { modelRate, estCostInr, capsEnforced } from "../functions/_ai_usage.js";
+import { modelRate, estCostInr, capsEnforced, rateConfirmed, resolveModel, MODEL_HARD_DEFAULT } from "../functions/_ai_usage.js";
 
 const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
 function fakeKv(seed = {}) {
@@ -71,6 +71,26 @@ test("rate card is priced off the same cost model that debits the wallet", () =>
   assert.equal(inrToMt(modelRate({ AI_RATE_GEMINI_2_5_FLASH_IN: "0.01" }, model).in), 20);
 });
 
+test("a doctor is never quoted an ESTIMATED price", () => {
+  assert.equal(rateConfirmed({}, "gemini-2.5-flash"), true, "2.5 rates are published");
+  assert.equal(rateConfirmed({}, "gemini-2.5-pro"), true);
+  assert.equal(rateConfirmed({}, "gemini-3.5-flash"), false, "3.x rates are our own estimate");
+  assert.equal(rateConfirmed({}, "gemini-3.5-flash-lite"), false);
+  assert.equal(rateConfirmed({}, "gemini-3.1-flash-lite"), false);
+  assert.equal(rateConfirmed({}, "something-unknown"), false, "unknown model falls back to a guess");
+  // Once the owner enters the published figure, the card may be shown.
+  assert.equal(rateConfirmed({ AI_RATE_GEMINI_3_5_FLASH_IN: "0.009" }, "gemini-3.5-flash"), false, "half an override is not a rate");
+  assert.equal(rateConfirmed({ AI_RATE_GEMINI_3_5_FLASH_IN: "0.009", AI_RATE_GEMINI_3_5_FLASH_OUT: "0.03" }, "gemini-3.5-flash"), true);
+});
+
+test("the active model stays gemini-2.5-flash unless deliberately changed", () => {
+  assert.equal(MODEL_HARD_DEFAULT, "gemini-2.5-flash");
+  assert.equal(resolveModel(null, {}), "gemini-2.5-flash", "no override, no env → 2.5-flash");
+  assert.equal(resolveModel(null, { GEMINI_MODEL: "" }), "gemini-2.5-flash");
+  assert.equal(resolveModel("not-a-model", {}), "gemini-2.5-flash", "a junk override cannot take effect");
+  assert.equal(rateConfirmed({}, resolveModel(null, {})), true, "so the rate card IS publishable by default");
+});
+
 test("caps are reported as enforced only when the flag is on", () => {
   assert.equal(capsEnforced({}), false);
   assert.equal(capsEnforced({ MAIK_ENFORCE_CAPS: "0" }), false);
@@ -97,6 +117,15 @@ test("dashboard: wallet, buy button and rate card always render", () => {
   assert.match(h, /14 MT/); assert.match(h, /50 MT/); assert.match(h, /700 MT/); assert.match(h, /40 MT/);
   assert.match(h, /gemini-2\.5-flash/);
   assert.ok(h.indexOf("undefined") === -1 && h.indexOf("NaN") === -1, "no undefined/NaN leaks into the sheet");
+});
+
+test("dashboard: withholds the rate card entirely when rates are provisional", () => {
+  const u = Object.assign({}, base, { balanceMt: 1000, rates: undefined, ratesProvisional: true });
+  const h = renderAiUsage(u);
+  assert.match(h, /being confirmed and are not published yet/);
+  assert.ok(!/\d+ MT<|MT<\/span>|per 1,000 tokens/.test(h), "no per-unit price is printed");
+  assert.ok(h.indexOf("gemini-3") === -1, "and no estimated model is named with a price");
+  assert.match(h, /id="aiuBuy"/, "buying is still possible");
 });
 
 test("dashboard: an empty wallet still invites a top-up instead of showing nothing", () => {

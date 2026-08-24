@@ -62,7 +62,7 @@ function plans(env) {
 // Resolve what the client is buying -> { amount(paise), months, key, label, mt? }. Accepts the new
 // { tier, cycle } and { pack } / { addon }, and the legacy { plan:"monthly|annual" } (Pro). The `key`
 // rides in the payment metaInfo/notes so the webhook grants the right thing.
-function selectAmount(env, body) {
+export function selectAmount(env, body) {
   const P = plans(env); const b = body || {};
   if (b.tier && P.tiers[b.tier]) {
     const t = P.tiers[b.tier], annual = b.cycle === "annual" && t.annual;
@@ -82,17 +82,23 @@ function selectAmount(env, body) {
 // The token amount is re-read from the server price table — never from the payment note — so a
 // tampered note can't mint tokens. Credits are keyed by EMAIL (em:<email>), the same key the AI meter
 // uses, so a uid-only webhook must resolve the address first.
-async function fulfilPurchase(env, uid, planKey, months, source) {
+//
+// `deps` is injectable ONLY so this money path is testable without Firebase/KV (test/token-purchase
+// .test.mjs drives a real Razorpay webhook payload through it). Production passes nothing.
+export async function fulfilPurchase(env, uid, planKey, months, source, deps) {
+  const lookupUser = (deps && deps.lookupUser) || lookupUserByUid;
+  const kv = (deps && deps.kv) || usageKv(env);
+  const grant = (deps && deps.grantPro) || grantPro;
   const pack = tokenPackFor(planKey);
   if (pack) {
     const p = plans(env).tokens[pack];
     if (!p || !p.mt) return { ok: false, reason: "unknown-pack" };
-    const u = await lookupUserByUid(env, uid);
+    const u = await lookupUser(env, uid);
     if (!u || !u.email) return { ok: false, reason: "no-email" };
-    const r = await addTokens(usageKv(env), "em:" + u.email, p.mt);
+    const r = await addTokens(kv, "em:" + u.email, p.mt);
     return { ok: true, tokens: p.mt, balanceInr: r.balance, email: u.email };
   }
-  const g = await grantPro(env, uid, { months: Math.max(1, +months || 1), source });
+  const g = await grant(env, uid, { months: Math.max(1, +months || 1), source });
   return Object.assign({ ok: true }, g);
 }
 
