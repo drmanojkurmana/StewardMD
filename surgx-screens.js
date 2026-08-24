@@ -1009,6 +1009,23 @@
           ? '<div class="sgx-disclaim" style="border:none">No hospital is connected. Sign in to Ward Sync, or connect a hospital under Connect EMR, or enter the patient manually.</div>'
           : "") +
         '<button class="sgx-btn" data-sgx="ptcancel">Cancel</button></div>';
+    } else if (state.ptPick === "ghis") {
+      body += '<div class="sgx-btnrow"><button class="sgx-btn" data-sgx="ptghisreload">' + ic("refresh") +
+        " Reload ward list</button><button class=\"sgx-btn\" data-sgx=\"ptcancel\">Cancel</button></div>";
+      if (state.ptBusy) body += '<div class="sgx-disclaim" style="border:none">Loading the ward list…</div>';
+      else if (state.ptError) body += '<div class="sgx-disclaim" style="border:none">' + esc(state.ptError) + "</div>";
+      else if (state.ptResults) {
+        body += state.ptResults.length
+          ? state.ptResults.map(function (p, i) {
+              // A patient with no visit is shown, not hidden - writability() explains why the EMR
+              // row stays shut, which beats the surgeon hunting for a patient that silently vanished.
+              return '<button class="sgx-row" data-sgx="ptghispick" data-idx="' + i + '"><span class="tx">' +
+                '<span class="tt">' + esc(p.name) + "</span>" +
+                '<span class="sb">' + esc([p.detail, p.patientId, p.episodeId ? "" : "no visit"].filter(Boolean).join(" · ")) + "</span></span>" +
+                '<span class="go">' + ic("chevron_right") + "</span></button>";
+            }).join("")
+          : '<div class="sgx-disclaim" style="border:none">No patients on your GHIS ward list right now.</div>';
+      }
     } else if (state.ptPick === "connect") {
       body += '<div class="sgx-fld"><label for="sgxPtQuery">Search ' + esc(state.ptTenantName || "hospital") + '</label>' +
         '<input id="sgxPtQuery" type="text" data-sgx-ptquery value="' + attr(state.ptQuery || "") + '" placeholder="Name or hospital number"></div>' +
@@ -1375,30 +1392,52 @@
       if (act === "ptsrc") {
         var kind = t.getAttribute("data-kind"), sid = t.getAttribute("data-id");
         if (kind === "ghis") {
-          // GHIS patients are chosen in Ward Sync, which owns the roster and the visit context.
-          // Not signed in, or nothing open? Take them THERE rather than just refusing - SURGX
-          // closes because Ward Sync is a full-screen surface of its own.
+          // Signing in is a full-screen surface of its own, so that one still hands over to Ward
+          // Sync. Everything after it happens HERE: the ward list is pulled into the note rather
+          // than making the surgeon leave, pick, and navigate back.
           if (!PT().ghisSession()) {
             toast("Sign in to GHIS, then pick the patient");
             if (window.SURGX) SURGX.close();
             try { if (typeof window.openGHIS === "function") window.openGHIS(); } catch (er) {}
             return;
           }
-          var sel = PT().ghisCurrent();
-          var link = PT().linkFromGhis(sel);
-          if (!link) {
-            toast("Open the patient in Ward Sync first");
-            if (window.SURGX) SURGX.close();
-            try { if (typeof window.openGHIS === "function") window.openGHIS(); } catch (er) {}
-            return;
-          }
-          state.note.patient = link; state.ptPick = null;
-          saveNote(true).then(function () { toast("Patient linked"); render(); });
+          state.ptPick = "ghis"; state.ptBusy = true; state.ptResults = null; state.ptError = "";
+          render();
+          PT().ghisRoster().then(function (r) {
+            state.ptBusy = false;
+            state.ptResults = r.patients || [];
+            state.ptError = r.ok ? "" :
+              (r.error === "ghis_signed_out" || r.error === "http_401"
+                ? "Your GHIS session expired. Sign in again from Ward Sync."
+                : "Could not load the ward list. Check the GHIS connection.");
+            render();
+          });
           return;
         }
         state.ptPick = "connect"; state.ptTenant = sid;
         state.ptTenantName = (state.ptSources || []).filter(function (s) { return s.id === sid; }).map(function (s) { return s.name; })[0] || "";
         state.ptResults = null; state.ptError = ""; render();
+        return;
+      }
+      if (act === "ptghisreload") {
+        state.ptBusy = true; state.ptResults = null; state.ptError = ""; render();
+        PT().ghisRoster().then(function (r) {
+          state.ptBusy = false;
+          state.ptResults = r.patients || [];
+          state.ptError = r.ok ? "" : "Could not load the ward list. Check the GHIS connection.";
+          render();
+        });
+        return;
+      }
+      if (act === "ptghispick") {
+        var gp = (state.ptResults || [])[+t.getAttribute("data-idx")];
+        var glink = PT().linkFromGhis(gp);
+        if (!glink) { toast("Could not read that patient"); return; }
+        state.note.patient = glink; state.ptPick = null; state.ptResults = null;
+        saveNote(true).then(function () {
+          toast(glink.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
+          render();
+        });
         return;
       }
       if (act === "ptsearch") {
