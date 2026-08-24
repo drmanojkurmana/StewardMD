@@ -52,28 +52,47 @@ test("the answer cache stays fenced to generic knowledge", () => {
 });
 
 /* ---------------------------------------------------------------- 3. parallelise gate + re-rank */
+/* These are ORDERING invariants, so assert on positions rather than fixed-size slices — a slice
+ * window silently stops covering the code when anything above it grows, which is exactly how these
+ * four broke when the gate was bounded. */
+const iGateStart = API.indexOf("const _gateP = checkQuota(");
+const iRerank = API.indexOf("const _rerankP =");
+const iAwait = API.indexOf("const gate = await");
+
 test("the quota gate and the re-rank are started together, not serially", () => {
-  const blk = API.slice(API.indexOf("const _gateP"), API.indexOf("const _gateP") + 700);
-  assert.match(blk, /const _gateP = checkQuota\(/, "gate started, not awaited");
-  assert.match(blk, /const _rerankP =/, "re-rank started alongside it");
-  assert.ok(blk.indexOf("const _rerankP") < blk.indexOf("await _gateP"),
+  assert.ok(iGateStart >= 0, "gate started, not awaited");
+  assert.ok(iRerank > iGateStart, "re-rank started alongside it");
+  assert.ok(iAwait > iRerank,
     "the re-rank must be kicked off BEFORE the gate is awaited, or nothing is saved");
 });
 
 test("SAFETY: the gate's refusal still precedes any answer", () => {
-  const blk = API.slice(API.indexOf("const _gateP"), API.indexOf("const _gateP") + 900);
-  assert.match(blk, /const gate = await _gateP;[\s\S]{0,200}if \(!gate\.ok\) return json\(\{ error: "quota"/,
-    "a refused request must return before generation - parallelising must not reorder that");
+  const blk = API.slice(iAwait, iAwait + 900);
+  assert.match(blk, /if \(!gate\.ok\) return json\(\{ error: "quota"/,
+    "a refused request must return before generation - neither parallelising nor bounding may reorder that");
+  const iRefuse = API.indexOf('if (!gate.ok) return json({ error: "quota"', iAwait);
+  assert.ok(iRefuse > iAwait, "the refusal check must come after the gate resolves");
+});
+
+test("SAFETY: bounding the gate fails OPEN only on timeout, and says so", () => {
+  const blk = API.slice(iAwait - 200, iAwait + 900);
+  assert.match(blk, /GATE_MS/, "the bound must be an explicit named budget");
+  assert.match(blk, /res\(\{ ok: true, id: null, meter: false, _slow: true \}\)/,
+    "a timed-out gate allows the request and marks itself unmetered - it must never fabricate a refusal");
+  assert.match(blk, /if \(gate\._slow\) _mark\.gateSlow = true;/,
+    "a slow gate must be observable in the diagnostics, not silent");
+  const m = API.match(/const GATE_MS = (\d+);/);
+  assert.ok(m && Number(m[1]) <= 2000, `gate budget ${m && m[1]}ms must stay small - it is pure dead time`);
 });
 
 test("a failed re-rank degrades to the original order, never to an empty list", () => {
-  const blk = API.slice(API.indexOf("const _gateP"), API.indexOf("const _gateP") + 2600);
+  const blk = API.slice(iGateStart, iGateStart + 4000);
   assert.match(blk, /\.catch\(\(\) => null\)/, "a rejected re-rank resolves to null");
   assert.match(blk, /if \(_r\) pkg\.retrieved = _r;/, "null keeps the retrieved evidence untouched");
 });
 
 test("the tutor path still skips the Workers AI round trip (main's optimisation survives)", () => {
-  const blk = API.slice(API.indexOf("const _gateP"), API.indexOf("const _gateP") + 2600);
+  const blk = API.slice(iGateStart, iGateStart + 4000);
   assert.match(blk, /!isTutor/, "tutor never starts the cross-encoder");
   assert.match(blk, /isTutor && pkg\.retrieved && pkg\.retrieved\.length > 1\) pkg\.retrieved = lexicalRank/,
     "tutor still gets a sensible in-memory order");

@@ -397,16 +397,27 @@ async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   }
   throw lastErr || new Error("no streaming provider");
 }
-function streamGeminiToSSE(upstream, onText) {
+/* tStart (optional, ms) = when the upstream request was ISSUED. Lets the done event report where the
+ * time actually went: waiting for Gemini's first token vs generating the rest. Measured on device the
+ * first token took ~7.4s while the remaining 3.4k chars streamed in 5.3s — so the wait is TTFT, not
+ * generation and not buffering. Timings only; no PHI. */
+function streamGeminiToSSE(upstream, onText, tStart) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
+  const _t0 = typeof tStart === "number" ? tStart : Date.now();
+  let _tHdr = Date.now(), _tFirst = 0;
   let buf = "", full = "", closed = false;
   const rs = new ReadableStream({
     async pull(controller) {
       try {
         const { value, done } = await reader.read();
         if (done) {
-          if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
+          if (!closed) {
+            closed = true;
+            const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
+            controller.enqueue(enc.encode("data: " + JSON.stringify({ done: true, _t: _tm }) + "\n\n"));
+            controller.close();
+          }
           try { if (onText) onText(full); } catch (e) {}
           return;
         }
@@ -416,7 +427,7 @@ function streamGeminiToSSE(upstream, onText) {
         const { frames, rest } = sseFrames(buf); buf = rest;
         for (const frame of frames) {
           const txt = sseFrameText(frame);
-          if (txt) { full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
+          if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
         if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
@@ -1286,7 +1297,23 @@ export async function onRequest(context) {
         const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
           ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
           : null;
-        const gate = await _gateP;
+        /* BOUND THE GATE (2026-08-24). Measured on production: Gemini's first token is 2.0-4.2s, but
+         * the clinician waited up to 7.7s — because the quota gate's KV reads have a long tail (p95
+         * seen at several seconds, p50 ~400ms). That tail is dead time before Gemini is even called.
+         *
+         * Failing OPEN on a slow gate is not a new posture: checkQuota already returns {ok:true} when
+         * no KV store is bound, so "storage unavailable => allow" is the existing design. This bounds
+         * "storage is slow" the same way. The refusal path is unchanged whenever the gate answers in
+         * time, which is the overwhelming majority of calls; a timed-out gate skips metering for that
+         * one request rather than making a clinician wait seconds for a counter. */
+        const GATE_MS = 1200;
+        let _gateTimer = null;
+        const gate = await Promise.race([
+          _gateP.then((g) => { if (_gateTimer) clearTimeout(_gateTimer); return g; }),
+          new Promise((res) => { _gateTimer = setTimeout(() => res({ ok: true, id: null, meter: false, _slow: true }), GATE_MS); })
+        ]);
+        if (_gateTimer) clearTimeout(_gateTimer);
+        if (gate._slow) _mark.gateSlow = true;
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
@@ -1302,7 +1329,20 @@ export async function onRequest(context) {
         const _didRerank = !!_rerankP;
         try {
           if (isTutor && pkg.retrieved && pkg.retrieved.length > 1) pkg.retrieved = lexicalRank(pkg.question, pkg.retrieved);
-          else if (_rerankP) { const _r = await _rerankP; if (_r) pkg.retrieved = _r; }   // null => keep the original order
+          // BOUND THE RE-RANK too (2026-08-24). Same finding as the gate: p95 was ~3.5s of dead time
+          // before Gemini is called. Timing out is already a supported outcome — null simply keeps the
+          // original evidence order, which is what a failed re-rank has always done — so a slow
+          // cross-encoder costs the budget and nothing else. Evidence is never dropped, only unsorted.
+          else if (_rerankP) {
+            const RERANK_MS = 900;
+            let _rt = null;
+            const _r = await Promise.race([
+              _rerankP.then((v) => { if (_rt) clearTimeout(_rt); return v; }),
+              new Promise((res) => { _rt = setTimeout(() => { _mark.rerankSlow = true; res(null); }, RERANK_MS); })
+            ]);
+            if (_rt) clearTimeout(_rt);
+            if (_r) pkg.retrieved = _r;   // null => keep the original order
+          }
         } catch (e) {}
         _at("rerank");
         // ── StewardMD Connect Track D (flag smd_connect_maik, default OFF) ─────────────────────────
@@ -1363,9 +1403,10 @@ export async function onRequest(context) {
           || new URL(request.url).searchParams.get("livestream") === "1";
         if (wantStream && liveStream) {
           let up = null;
+          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }));
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
