@@ -1,0 +1,112 @@
+{
+  "_comment": "System module: the whole workup for this system, disease-independent, shaped like a disease pathway on purpose.",
+  "id": "gi-exam",
+  "name": "Examination of the Abdomen",
+  "fullName": "Examination of the Abdomen",
+  "system": "abdomen",
+  "kind": "system-module",
+  "oneLine": "The whole abdomen workup, before any particular disease",
+  "estMinutes": 110,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Name, age, and why each one is clinical data",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Pain, and what it maps onto",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.pain"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "From the end of the bed inwards",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "Inspection, auscultation, palpation, liver, spleen, gallbladder, kidneys, ascites",
+      "skills": [
+        "skill.exam.gi.inspection",
+        "skill.exam.gi.auscultation",
+        "skill.exam.gi.palpation",
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.gallbladder_kidney",
+        "skill.exam.gi.ascites"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Presenting the case",
+      "blurb": "Two minutes, in a fixed order",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.abdomen.full",
+        "title": "Examination of the Abdomen",
+        "task": "Examine this patient's abdomen and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.gi.inspection",
+          "skill.exam.gi.auscultation",
+          "skill.exam.gi.palpation",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen"
+        ],
+        "examinerQuestions": [
+          "Which method did you use to palpate the liver, and name two others.",
+          "Describe Castell's sign and what a positive result means.",
+          "Distinguish an enlarged spleen from an enlarged left kidney using three features."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.gi.liver",
+      "skill.exam.gi.spleen",
+      "skill.exam.gi.ascites",
+      "skill.exam.gi.gallbladder_kidney",
+      "skill.hx.gi.pain"
+    ]
+  }
+}

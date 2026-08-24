@@ -5,6 +5,119 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-24 · SURGX projects the existing surgery engine rather than re-authoring it
+New module (see [[SURGX]]), built behind `smd_surgx` off tag `pre-surgx`. Three decisions worth keeping.
+
+**1. `ws-surgery.js` was ABSORBED, not duplicated, and not edited.** The app already had a working
+surgical decision engine: 13 syndromes with focused findings, danger signs, a deterministic
+`assess()` returning an emergency flag, a management-ladder index, source control, referral, notes
+and empiric antibiotic regimens with an ICMR reference. The obvious move - author SURGX protocol
+JSON covering the same syndromes - would have produced two places where "acute abdomen" gets a
+recommendation, drifting apart. That is exactly the failure recorded above for the KardiQ content
+pack. Instead `compileEngineProtocol()` projects the engine's own output onto a seven-band spine, so
+**parity is structural rather than tested-for**, and `ws-surgery.js` has zero changes. Provenance,
+an INVESTIGATE band and calculator links live in a separately-reviewed overlay JSON. Eight authored
+protocols cover only what the engine does NOT model (ATLS, shock, sepsis, chest, head, burns, GI
+bleed, post-op deterioration).
+
+**The projection is deliberately non-interpretive.** `result.sc` is source control so it becomes
+DEFINITIVE; `result.ref` is referral so it becomes ESCALATION; `result.mgmt[]` is an unstructured
+note list so it is carried WHOLE rather than scattered across bands by keyword matching.
+Regex-splitting clinical prose into bands would silently relocate a safety-critical line, and that
+class of change is precisely what the module exists to prevent.
+
+**2. For Notes, only ONE of the four anti-fabrication layers is a prompt.** An operative note is a
+legal record. The prompt says "do not invent"; the server intersects the model's keys with the
+schema's `aiFillable:true` set and then applies a hard DENY list on top (counts, specimens,
+implants, consent, discharge medications, identifiers, attribution); the client voids any field
+containing a number absent from the transcript; and export is blocked until every required field is
+clinician-confirmed, behind a double press. Layers 2 to 4 are code. **A prompt is a request, not a
+mechanism** - the same conclusion `clinix-tutor.js` reached about dose refusal.
+
+**3. Notes reuse `SMD_RX.canPrescribe()` as the clinician gate rather than inventing a role check.**
+There is no client-facing role read in this app, and verify.js already draws the line in the right
+place: a student "unlocks StewardMD's learning tools" while "prescription and clinical-action
+features stay locked". Notes is on the locked side of that line. SURGX Notes does not prescribe, so
+this is STRICTER than needed - the correct direction to be wrong in, at zero cost. An unverified
+user SEES the section and is told what is needed; hiding it would read as a broken app.
+
+**Trade-off accepted:** notes are device-local only (AES-GCM via `SMD_CLINIC_CRYPTO`, key in
+localStorage). That defends against a backup or a storage-panel dump, not against code execution on
+an unlocked device, and it is written down as such rather than glossed. Moving the secret to
+Keychain/Keystore is the marked upgrade path. **Status: built, flag ON for testers, content
+ai_drafted pending R1.**
+
+## 2026-08-23 · Arming OTA on a device DOWNGRADED it to the pre-CliniX bundle
+**Measured on the owner's iPhone 15 Pro, not inferred.** The first device ever built with
+`@capgo/capacitor-updater` linked in immediately hit `/api/ota/check`, downloaded a 36 MB bundle and
+served it over the fresh install. The app then reported `build 1`, no `clinix.js` (404), and the
+pre-CliniX `?v=` tokens, while the correct build sat unused in the app bundle.
+
+The server is the cause, and it is unambiguous:
+```
+GET /api/ota/check?version=builtin&nativeBuild=7
+  -> {"ota":true,"version":1,"commit":"b2b1bdcdbbd6d4df94e7598c595b370ae0073ded", ...}
+```
+`b2b1bdcd` is the commit immediately BEFORE CliniX. **The live channel is pinned to a stale
+commit**, so any device that arms the updater is silently downgraded to it. This is precisely the
+failure the 1 Aug system was torn down for ("a stale bundle silently downgrading installs"), now
+reproduced by the rebuild on its first real device.
+
+`CapacitorUpdater.reset()` and `delete()` did NOT hold - the bundle re-applied on the next launch.
+The only reliable local escape was to unlink the plugin and rebuild. **Decision: do not arm OTA on
+any device until the live channel is correct.** Fix the channel (or flip the Phase-1 kill switch,
+which is designed to make devices `reset()` themselves) FIRST, arm second. `autoUpdate:"off"` in
+`capacitor.config.json` and `isAuto()` in `native-ota.js` were both verified correct, so the apply
+path is either the update banner being tapped or something outside those two gates - **worth
+establishing before this is armed again.**
+
+**Method note worth keeping:** three wrong diagnoses (service worker, wrong `App.app`, WebView
+cache) were guessed before anyone looked. The answer took five minutes once
+`ios_webkit_debug_proxy` was pointed at the running WebView and it was asked directly. For a
+native WebView bug, attach the inspector FIRST. Note iOS needs the `Target.sendMessageToTarget`
+envelope; a bare `Runtime.evaluate` returns "'Runtime' domain was not found".
+
+## 2026-08-22 · CliniX: one skill object, many runners, and two gates that fail closed
+New module for medical students (see [[CliniX]]), built behind `smd_clinix` def:false off tag
+`pre-clinix`. Three decisions worth keeping.
+
+**1. The atom is a Skill, and Learn / Case / OSCE / Viva / Competency are PROJECTIONS over it.**
+The alternative, which every LMS reaches for, is to author a lesson, then an OSCE station, then a
+viva bank. That triples the content and guarantees they drift. Here `compileLesson()`,
+`compileStation()` and `compileViva()` all read the same object, so an OSCE station is a *selection
+of skills plus a clock*, not authored content, and a single `competencyKey()` is what all three write
+against. A disease does not own skills, it references them and adds `emphasis` - which is what makes
+the fourth disease cheap rather than a fourth full authoring job.
+
+**2. CliniX is built like RadioAnatome, deliberately NOT like the KardiQ Learn atlas.** This is a
+measured call, not a stylistic one. `kardiox-content-pack.js` is 1.9 MB of JS parsed on every page
+load for every user whether or not they open Learn; `management` is `string[]` in 100 records and
+`""` in the other 1,041; user state (`status`, `masteryPct`, `bookmarked`) lives INSIDE content
+records and is therefore frozen at `"new"`/`0` forever; `tier:"atlas"` matches none of its own UI's
+tier chips, so **all 1,041 pack lessons are unreachable through the UI that ships with them**; and
+`assets/kardiox-learn/` holds 872 images with no manifest and no licence record. `atlas.js` already
+demonstrates the right answer in this repo: a small catalog, lazily fetched per-unit JSON, and
+`atlas-pipeline`'s `require_clear()` licence gate. CliniX takes that, and grounds content in
+`kb/reference/*` (4,664 Harrison-cited entries with per-entry review state) rather than authoring a
+parallel corpus.
+
+**3. Both gates fail CLOSED, and the module ships with them closed.** The review gate: content whose
+`review.status` is not `approved`/`published` never reaches a student, and a missing or garbled
+status reads as `draft`. The licence gate: media renders only when `cleared === true` with a real
+licence and attribution; **absence of a licence record is a refusal, not a default-allow**. The
+consequence is deliberate and visible: all Phase-1 COPD content is `ai_drafted` and no media is
+cleared, so a student today sees an explicit "Awaiting clinical review" state and lessons render
+captions rather than assets. That is the gate working. **Never flip `review.status` to `approved` to
+make a screen look finished** - the whole point is that the owner's clinical sign-off is the only
+thing that opens it.
+
+A fourth, smaller call: mastery requires repeated success on SEPARATE days, not one correct answer
+(which is what `kardiox-providers.js:112` does, and why no row in the ECG atlas ever shows mastered).
+**Status**: Phase 1 built, flag OFF. 55 unit + 36 real-browser checks green; full suite shows 104
+failures before and after, identical set, verified against `pre-clinix` in a clean worktree.
+**Open for the owner**: per-skill clinical sign-off, and the media work order in
+`clinix/media/manifest.json`.
+
 ## 2026-08-04 · SknX AI Phases 2-3 (educational report merged; clinician-Rx built OFF)
 See [[SknX]]. **Phase 2 (MERGED, PR #622):** evidence-grounded educational dermatology report using the REAL Gemini/Vertex transport (`functions/api/sknx` reuses `callGemini`, mirrors the audited thorex proxy) + Explain-Like + Compare. Three hard invariants, each tested: no raw image/PHI to the LLM (image-key reject + strict whitelist + recursive scan; TEXT-only prompt), no hallucinated citations (guidelineSummary/references only from the vetted `sknx-evidence.js` corpus; the LLM writes only the free-text discussion), no Rx (deterministic management principles; LLM discussion dropped if it looks like an Rx). R2 (AI-safety) + R1 (clinical) APPROVED; referral guardrail INTACT. **Phase 3 (built, branch `claude/sknx-phase3`, flag OFF):** `smd_sknx_rx` def:false. `sknx-rx.js` drafts a class-level first-line regimen (no patient dose) the clinician confirms/doses/signs in the existing `SMD_RX` pad; the affordance is impossible unless rxEligible + not-referral + flag-on + verified-prescriber, and malignant/urgent conditions (melanoma/BCC/SCC/cellulitis) are never draftable. **Decision: SknX never prescribes autonomously and never on a malignant/referral case; the `smd_sknx_rx` flag must NOT flip on without R1 clinical + R3-DPDP + R7 sign-off.** **Why:** prescribing is the one clinically-loaded capability; keep it clinician-confirmed, KB-grounded, reversible, and hard-gated. **Trade-off:** the real vision models (weights + native Core ML/TFLite) remain the one asset-dependent piece; everything else is real/mock-swappable. **Status:** Phase 2 merged (R1+R2 clean, 75 unit + 19 e2e); Phase 3 flag-OFF scaffold, 82 unit + 23 e2e green, pending R1 GO/NO-GO + its own PR.
 

@@ -28,6 +28,8 @@ export const AI_MODULES = {
   followcare:  { id: "followcare",  label: "FollowCare AI",      group: "FollowCare",    daily: 100, provider: "vertex" },
   kb:          { id: "kb",          label: "Knowledge Base",     group: "Knowledge Base", daily: 0,  provider: "local"  }, // semantic search — unlimited
   clinix:      { id: "clinix",      label: "CliniX tutor",       group: "CliniX",        daily: 60,  provider: "vertex" }, // student tutor turns. Higher than maik's 50 because a Socratic lesson is many SHORT turns, not few long ones. Counted separately so a student's revision never eats their MaiK clinical allowance (and vice versa).
+  surgx_note:  { id: "surgx_note",  label: "SURGX note structuring", group: "SURGX",     daily: 30,  provider: "vertex" }, // dictation -> note FIELD PLACEMENT only (never content). Its own bucket so a surgeon's documentation load is visible separately from their MaiK questions, and so exhausting one never blocks the other.
+  surgx_case:  { id: "surgx_case",  label: "SURGX Senior Surgeon Mode", group: "SURGX",  daily: 40,  provider: "vertex" }, // case mentor turns. Many SHORT turns per case, like the clinix tutor, so it is metered apart from maik's 50/day.
   stt:         { id: "stt",         label: "Speech-to-Text",     group: "Voice",         daily: 50,  provider: "vertex" },
   tts:         { id: "tts",         label: "Text-to-Speech",     group: "Voice",         daily: 50,  provider: "vertex" },
   scribe:      { id: "scribe",      label: "MaiK Scribe",        group: "Voice",         daily: 0,   provider: "vertex" }, // Pro-only voice EMR fill; capped by TIME not call-count (see scribeCaps/checkScribeTime)

@@ -1,6 +1,6 @@
 ---
 tags: [module, infra]
-status: PHASE 1 + PHASE 2 built. Client ships INERT until the owner's one native rebuild (Phase 3).
+status: PHASE 1 + PHASE 2 built. **DO NOT ARM** - the live channel serves commit b2b1bdcd (pre-CliniX) and downgraded a real device on 2026-08-23. See [[Decisions]].
 flag: none — native-ota.js is a pure capability-check (isNative() && plugin() present), not a flag
 ---
 # OTA Updates

@@ -1,0 +1,1112 @@
+{
+  "_comment": "Chronic liver disease / cirrhosis with portal hypertension: the major GIT long case. Structured like COPD - the pathway mostly references core/abdomen shared skills plus emphasis; only genuinely cirrhosis-specific reasoning and the stigmata survey are authored here.",
+  "id": "chronic-liver-disease",
+  "name": "Chronic liver disease",
+  "fullName": "Cirrhosis of the liver with portal hypertension",
+  "system": "abdomen",
+  "kbRef": "cirrhosis_of_liver",
+  "oneLine": "One architecture, reached by many causes, failing in two ways at once",
+  "estMinutes": 80,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What cirrhosis is, and what it is not",
+      "skills": [
+        "skill.cld.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "The details that move the differential",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Occupation and residence matter here for exposure, not epidemiology alone: a history of manual labour with heavy daily alcohol, or residence in a region with endemic viral hepatitis, both change the pre-test probability of a specific cause before a single symptom is asked about."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Distension, jaundice, bleed, sensorium",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.pain",
+        "skill.hx.gi.cld"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical decompensation reads as years of known or unrecognised liver disease with a recent, days-to-weeks change: for example, alcoholic liver disease 5 years, abdominal distension 10 days, altered behaviour 1 day. That shape says acute-on-chronic decompensation before any test is done."
+        },
+        "skill.hx.gi.pain": {
+          "expect": "Pain is not the leading complaint in most cirrhosis presentations. Right hypochondrial discomfort from a stretched liver capsule can occur, but severe pain should make you consider a complication such as spontaneous bacterial peritonitis or an alternative diagnosis."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Alcohol quantified, exposures listed, drugs reviewed",
+      "skills": [
+        "skill.hx.gi.cld"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The stigmata, before the abdomen is even exposed",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.clubbing",
+        "skill.gen.edema",
+        "skill.exam.gi.cld_stigmata"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look specifically for jaundice in good light, muscle wasting out of proportion to fat loss (sarcopenia), and the abdominal shape of ascites. Note whether the patient is oriented and appropriately interactive, since this is your first, informal screen for encephalopathy."
+        },
+        "skill.gen.vitals": {
+          "expect": "A patient with decompensated cirrhosis is often relatively hypotensive and tachycardic from a hyperdynamic circulation, not from bleeding alone. A widened pulse pressure is expected from the same peripheral vasodilatation; a genuinely new drop in blood pressure still needs an urgent bleeding workup."
+        },
+        "skill.gen.pallor": {
+          "expect": "Pallor here can come from chronic GI blood loss, hypersplenism, nutritional deficiency, or marrow suppression by alcohol, sometimes all at once; do not assume a single cause."
+        },
+        "skill.gen.edema": {
+          "expect": "Bilateral pitting oedema, worse by evening, tracks the low albumin rather than a separate cardiac diagnosis, though the two can coexist and should not be assumed apart without checking the JVP."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Abdominal examination",
+      "blurb": "The whole route, then the specific findings of cirrhosis",
+      "skills": [
+        "skill.exam.gi.inspection",
+        "skill.exam.gi.auscultation",
+        "skill.exam.gi.palpation",
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.ascites",
+        "skill.exam.gi.gallbladder_kidney"
+      ],
+      "emphasis": {
+        "skill.exam.gi.inspection": {
+          "expect": "Expect a distended, everted umbilicus if ascites is tense, striae from the rapid distension, and dilated abdominal wall veins. Trace the direction of flow in any dilated vein: flow AWAY from the umbilicus in all directions (caput medusae) means portal hypertension with a patent umbilical vein; flow away from the umbilicus in only one direction, upward or downward, suggests inferior or superior vena cava obstruction instead."
+        },
+        "skill.exam.gi.auscultation": {
+          "expect": "Listen specifically for the Cruveilhier-Baumgarten venous hum midway between the xiphisternum and umbilicus on the right. Its presence confirms a patent paraumbilical vein and excludes an extrahepatic cause of the portal hypertension."
+        },
+        "skill.exam.gi.liver": {
+          "expect": "The liver may be enlarged early, especially in alcoholic disease, NASH or haemochromatosis, but is often shrunken and impalpable in advanced disease. If palpable, describe the margin, surface and consistency: a firm, irregular, nodular liver supports cirrhosis; a smooth, tender, enlarging liver in a known cirrhotic should raise suspicion of superadded hepatocellular carcinoma."
+        },
+        "skill.exam.gi.spleen": {
+          "expect": "Splenomegaly here is from portal hypertension via congestive splenic enlargement, and is usually mild to moderate; it is one of the most sensitive bedside signs of portal hypertension and often precedes overt ascites."
+        },
+        "skill.exam.gi.ascites": {
+          "expect": "This is usually the dominant abdominal finding. Grade it (mild, moderate, or large/tense) and check for tenderness or fever alongside it, which would suggest spontaneous bacterial peritonitis rather than uncomplicated ascites."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the CLD picture together",
+      "blurb": "Two mechanisms, one patient",
+      "skills": [
+        "skill.cld.signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Cause, compensation, complication",
+      "skills": [
+        "skill.cld.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else produces this picture, and what argues against cirrhosis",
+      "skills": [
+        "skill.cld.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Confirm, find the cause, then grade the severity",
+      "skills": [
+        "skill.ix.cld.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis, staging and complications",
+      "blurb": "Child-Pugh, encephalopathy grade, and the current complication",
+      "skills": [
+        "skill.dx.cld"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "The cause first, then each complication on its own logic",
+      "skills": [
+        "skill.tx.cld.principles"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cld.abdo_exam",
+        "title": "Examine the abdomen for chronic liver disease",
+        "task": "This 50-year-old man has come in with distension of the abdomen for two weeks. Examine his abdomen and present your findings, including any relevant general examination findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.gi.cld_stigmata",
+          "skill.exam.gi.inspection",
+          "skill.exam.gi.auscultation",
+          "skill.exam.gi.palpation",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen",
+          "skill.exam.gi.ascites"
+        ],
+        "examinerQuestions": [
+          "What stigmata of chronic liver disease did you find, and what do they tell you mechanistically?",
+          "How would you grade this patient's ascites, and what would make you suspect infection in it?",
+          "This patient has asterixis. What does that add to your assessment?"
+        ]
+      },
+      {
+        "id": "osce.cld.history",
+        "title": "Take a chronic liver disease history",
+        "task": "This 45-year-old man has a known history of alcohol use and now reports abdominal swelling. Take a focused history in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.gi.cld"
+        ],
+        "examinerQuestions": [
+          "How did you quantify his alcohol use?",
+          "What four questions did you ask to screen for decompensation?",
+          "He mentions his family says he has been 'acting strange'. What does that raise, and what will you do next?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.cld.raju",
+      "title": "A man whose family says he is 'acting strange'",
+      "opening": "Raju Naik, 48, has been brought to the medical ward by his son, who says his father's abdomen has been swelling for two weeks and that he has seemed confused since this morning. Introduce yourself and take a history, from the son if needed.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Raju Naik",
+        "age": 48,
+        "sex": "male",
+        "occupation": "Daily wage construction labourer",
+        "residence": "Urban slum, lives with his wife and son"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, my father's stomach has been swelling for about two weeks, and since this morning he has been talking nonsense and does not seem to know where he is.",
+          "key": true
+        },
+        "distension_onset": {
+          "cues": [
+            "distension",
+            "swelling",
+            "when did the swelling",
+            "abdomen",
+            "how long has the stomach"
+          ],
+          "reply": "It started about two weeks ago, small at first, and has been getting bigger every few days.",
+          "key": true
+        },
+        "leg_swelling": {
+          "cues": [
+            "legs",
+            "ankle",
+            "feet",
+            "swelling in the legs"
+          ],
+          "reply": "Yes, his feet have been puffy for about ten days too, worse in the evening.",
+          "key": true
+        },
+        "sensorium": {
+          "cues": [
+            "confusion",
+            "confused",
+            "behaviour",
+            "acting strange",
+            "sensorium",
+            "consciousness",
+            "day night",
+            "sleep"
+          ],
+          "reply": "Since this morning he keeps saying odd things, does not recognise the time of day, and was awake all night pacing. Yesterday evening he seemed completely fine.",
+          "key": true
+        },
+        "jaundice": {
+          "cues": [
+            "jaundice",
+            "yellow",
+            "eyes",
+            "urine colour"
+          ],
+          "reply": "His eyes have looked a little yellow for about a week, and his urine has been dark.",
+          "key": true
+        },
+        "gi_bleed": {
+          "cues": [
+            "blood",
+            "vomit blood",
+            "black stool",
+            "melena",
+            "haematemesis"
+          ],
+          "reply": "No blood in vomit, and I have not seen black stools, but I have not checked carefully.",
+          "key": true
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills"
+          ],
+          "reply": "He felt warm yesterday evening but we did not measure it.",
+          "key": true
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking",
+            "liquor"
+          ],
+          "reply": "He drinks local arrack daily, has done for about twenty years. Some days a little, some days a lot, especially after he gets his wages.",
+          "key": true
+        },
+        "alcohol_quantify": {
+          "cues": [
+            "how much does he drink",
+            "how many",
+            "quantify",
+            "per day",
+            "bottles"
+          ],
+          "reply": "On his heavy days maybe half a bottle of arrack. He has never really stopped for more than a few days.",
+          "key": true
+        },
+        "last_drink": {
+          "cues": [
+            "last drink",
+            "when did he last drink",
+            "stopped drinking"
+          ],
+          "reply": "He drank two days ago, before the swelling got worse."
+        },
+        "hepatitis_risk": {
+          "cues": [
+            "transfusion",
+            "injection",
+            "tattoo",
+            "needle",
+            "hepatitis"
+          ],
+          "reply": "No transfusions that we know of. No tattoos. He has had injections from a local clinic in the past for fever."
+        },
+        "drug_history": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablet",
+            "drugs",
+            "taking anything",
+            "painkiller"
+          ],
+          "reply": "He sometimes buys a painkiller tablet from the pharmacy for body ache, we don't know the name."
+        },
+        "appetite_weight": {
+          "cues": [
+            "appetite",
+            "eating",
+            "weight",
+            "losing weight"
+          ],
+          "reply": "He has been eating less for a month, and his clothes are looser, but we thought it was just the swelling making him uncomfortable.",
+          "key": true
+        },
+        "past_illness": {
+          "cues": [
+            "past illness",
+            "diabetes",
+            "blood pressure",
+            "tuberculosis",
+            "previous admission",
+            "hospital before"
+          ],
+          "reply": "He was told two years ago at another hospital that his liver was 'weak' but he did not follow up regularly."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "father",
+            "mother",
+            "hereditary"
+          ],
+          "reply": "No one else in the family has liver problems that we know of."
+        },
+        "allergy": {
+          "cues": [
+            "allergy",
+            "allergic"
+          ],
+          "reply": "No known allergies."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Thin, wasted, drowsy but rousable to voice. Disoriented to time. Mild flexion posturing not sustained.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular, BP 100/62, temperature 38.1 C, respiratory rate 20/min, SpO2 97% on room air.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "Moderate pallor of conjunctiva and tongue.",
+          "abnormal": true
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.gen.edema": {
+          "finding": "Bilateral pitting oedema to mid-shin.",
+          "abnormal": true
+        },
+        "skill.exam.gi.cld_stigmata": {
+          "finding": "Multiple spider naevi over the upper chest and neck (six counted). Palmar erythema sparing the palm centre. Gynaecomastia, bilateral, with a palpable subareolar nodule. Testicular atrophy. Dupuytren's contracture of the right ring finger. Asterixis present bilaterally on wrist extension. Fetor hepaticus noted on breath. Mild scleral icterus.",
+          "abnormal": true
+        },
+        "skill.exam.gi.inspection": {
+          "finding": "Moderately distended abdomen, flanks full, everted umbilicus. Dilated veins over the anterior abdominal wall, flow away from the umbilicus in all directions. No visible peristalsis.",
+          "abnormal": true
+        },
+        "skill.exam.gi.auscultation": {
+          "finding": "Bowel sounds normal. A continuous venous hum heard midway between the xiphisternum and umbilicus on the right.",
+          "abnormal": true
+        },
+        "skill.exam.gi.palpation": {
+          "finding": "Diffusely mildly tender, no rebound or rigidity. No definite guarding.",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver": {
+          "finding": "Liver edge not definitely palpable; percussion span reduced at 8 cm in the midclavicular line, upper border at the sixth space.",
+          "abnormal": true
+        },
+        "skill.exam.gi.spleen": {
+          "finding": "Spleen palpable 3 cm below the left costal margin, firm, non-tender, moving with respiration, notch felt.",
+          "abnormal": true
+        },
+        "skill.exam.gi.ascites": {
+          "finding": "Shifting dullness positive. Fluid thrill not elicited (consistent with a moderate rather than tense volume).",
+          "abnormal": true
+        },
+        "skill.exam.gi.gallbladder_kidney": {
+          "finding": "Gallbladder not palpable, Murphy's sign negative. Kidneys not palpable bilaterally.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "lft",
+        "ascitic_tap",
+        "cbc",
+        "usg_abdomen",
+        "ammonia",
+        "coag"
+      ],
+      "investigations": {
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Total bilirubin 4.2 mg/dL (conjugated 2.6), AST 96, ALT 58, ALP 140, albumin 2.4 g/dL, globulin 3.8 g/dL.",
+          "note": "A low albumin with a disproportionately raised AST over ALT and a mixed bilirubin rise fits alcohol-related decompensated cirrhosis rather than acute viral hepatitis."
+        },
+        "coag": {
+          "label": "Prothrombin time / INR",
+          "indicated": true,
+          "result": "PT 22 seconds (control 12), INR 1.9.",
+          "note": "Confirms significant synthetic dysfunction, and feeds directly into the Child-Pugh score."
+        },
+        "ascitic_tap": {
+          "label": "Diagnostic ascitic tap",
+          "indicated": true,
+          "result": "Ascitic albumin 0.9 g/dL against a serum albumin of 2.4 g/dL (SAAG 1.5 g/dL). Neutrophil count 180/mm3. Culture pending.",
+          "note": "A SAAG of 1.5 g/dL (above 1.1) supports a portal hypertensive cause. The neutrophil count is below the 250/mm3 threshold used for spontaneous bacterial peritonitis, but with a fever present, a repeat or close review is still reasonable."
+        },
+        "cbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 9.1 g/dL, white cells 11.2 x10^9/L, platelets 88 x10^9/L.",
+          "note": "Thrombocytopenia fits hypersplenism from portal hypertension; the raised white cell count with a fever needs an infective source actively excluded, most importantly spontaneous bacterial peritonitis."
+        },
+        "ammonia": {
+          "label": "Serum ammonia",
+          "indicated": false,
+          "result": "68 micromol/L (mildly raised).",
+          "note": "Not required to diagnose hepatic encephalopathy, which is a clinical diagnosis. Sent here, but the diagnosis should already have been made at the bedside from asterixis and disorientation; a normal ammonia does not exclude encephalopathy and an elevated one does not confirm it in isolation."
+        },
+        "usg_abdomen": {
+          "label": "Ultrasound abdomen with portal Doppler",
+          "indicated": true,
+          "result": "Shrunken, coarsely nodular liver echotexture. Splenomegaly 14 cm. Moderate ascites. Portal vein diameter 14 mm with reduced flow. No focal liver lesion.",
+          "note": "Supports cirrhosis with portal hypertension and gives a baseline to compare a future scan against for a new mass."
+        },
+        "hbsag": {
+          "label": "Hepatitis B surface antigen and anti-HCV",
+          "indicated": true,
+          "result": "Both negative.",
+          "note": "A reasonable aetiology screen in any new cirrhosis diagnosis; here it argues against viral hepatitis as a contributing cause, supporting alcohol as the leading explanation alongside the history."
+        },
+        "afp": {
+          "label": "Alpha-fetoprotein",
+          "indicated": true,
+          "result": "12 ng/mL (normal).",
+          "note": "Part of routine hepatocellular carcinoma screening once cirrhosis is confirmed; reassuring here but does not exclude a small tumour on its own."
+        },
+        "ctpa": {
+          "label": "CT pulmonary angiogram",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Nothing in this presentation points to pulmonary embolism; ordering it here would not change management and exposes the patient to an unnecessary contrast load in the setting of an already compromised circulation."
+        },
+        "tft": {
+          "label": "Thyroid function tests",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "No clinical question being asked here; myxoedema is a recognised but distant cause of ascites and there is nothing in this case pointing towards it."
+        }
+      },
+      "differentialModel": {
+        "answer": "Decompensated chronic liver disease, most likely alcoholic cirrhosis, with new ascites, grade 2 hepatic encephalopathy and possible early spontaneous bacterial peritonitis. Consider viral hepatitis, other causes of cirrhosis, and cardiac or renal causes of ascites.",
+        "accept": [
+          "cirrhosis",
+          "chronic liver disease",
+          "hepatic encephalopathy",
+          "spontaneous bacterial peritonitis",
+          "sbp",
+          "hepatitis",
+          "heart failure",
+          "nephrotic"
+        ],
+        "minMatch": 3
+      },
+      "diagnosis": {
+        "answer": "Decompensated alcoholic cirrhosis, Child-Pugh class C, with portal hypertension, new-onset ascites, and grade 2 hepatic encephalopathy, with fever raising concern for spontaneous bacterial peritonitis.",
+        "accept": [
+          "cirrhosis",
+          "decompensated",
+          "child-pugh",
+          "encephalopathy"
+        ],
+        "minMatch": 2
+      },
+      "managementModel": {
+        "answer": "Admit, treat any precipitant (screen and empirically cover for spontaneous bacterial peritonitis given the fever), give lactulose titrated to soft stools for encephalopathy, salt restriction with a diuretic regimen for the ascites once infection is addressed, correct coagulopathy only if bleeding or before an invasive procedure, avoid sedatives and nephrotoxins, and involve the family in supportive care and counselling on alcohol cessation.",
+        "accept": [
+          "lactulose",
+          "precipitant",
+          "spontaneous bacterial peritonitis",
+          "antibiotic",
+          "salt restriction",
+          "diuretic",
+          "alcohol cessation"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The son's phrase 'acting strange' since this morning is the single most important sentence in this history: it is grade 2 hepatic encephalopathy in the family's own words, and asking for exactly this kind of detail is why the four decompensation questions exist.",
+        "His spider naevi, palmar erythema, gynaecomastia and testicular atrophy are one linked hyperoestrogenic finding, not four separate ones to list.",
+        "The liver is not palpable and the span is reduced, which fits advanced cirrhosis rather than arguing against it: a shrunken liver is common late in the disease.",
+        "The SAAG of 1.5 g/dL correctly attributes his ascites to portal hypertension, distinguishing it from a low-SAAG cause such as malignancy or tuberculous peritonitis.",
+        "A fever plus an ascitic neutrophil count close to, but just under, the diagnostic threshold for spontaneous bacterial peritonitis is a common real-world grey zone, and the safe teaching point is to treat clinical suspicion, not to wait for a number to cross a line.",
+        "Ammonia was sent, but was never needed to diagnose the encephalopathy, which is a bedside clinical diagnosis from disorientation and asterixis.",
+        "The dangerous next step here would be sedating a confused, agitated patient without first considering that the confusion itself IS the diagnosis to treat."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.cld.basics",
+      "skill.exam.gi.cld_stigmata",
+      "skill.exam.gi.ascites",
+      "skill.cld.signs",
+      "skill.cld.differential",
+      "skill.ix.cld.workup",
+      "skill.dx.cld",
+      "skill.tx.cld.principles"
+    ]
+  },
+  "skills": {
+    "skill.cld.basics": {
+      "id": "skill.cld.basics",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "What cirrhosis is",
+      "oneLine": "One end-stage architecture, reached by many different diseases",
+      "why": "Cirrhosis is not a diagnosis of cause, it is a diagnosis of architecture. Students who treat 'cirrhosis' as a single disease miss that the entire point of working up a cirrhotic patient is finding which of many possible diseases destroyed the liver, because several of those causes are treatable if caught before the architecture is beyond repair.",
+      "body": "Cirrhosis is defined as diffuse disruption of the normal liver architecture by fibrosis and regenerative nodules, replacing the orderly lobular structure. It is the common final pathway of many chronic liver injuries, not a disease in its own right.",
+      "pitfalls": [
+        "Writing 'cirrhosis' as a complete diagnosis without stating the likely cause.",
+        "Assuming cirrhosis is always symptomatic; compensated disease is often silent until decompensation.",
+        "Conflating hepatomegaly with cirrhosis; a cirrhotic liver is often shrunken, not enlarged, by the time it is symptomatic."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Define cirrhosis.",
+          "a": "Diffuse disruption of the normal liver architecture by fibrosis and regenerative nodule formation.",
+          "accept": [
+            "fibrosis",
+            "nodule",
+            "architecture"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name the two direct consequences of the architectural change in cirrhosis.",
+          "a": "Hepatocellular failure (loss of functioning liver tissue) and portal hypertension (distorted, compressed portal channels).",
+          "accept": [
+            "hepatocellular",
+            "portal hypertension",
+            "failure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What three elements belong in a complete cirrhosis diagnostic statement?",
+          "a": "The tempo (chronic, or acute-on-chronic), whether it is compensated or decompensated, and the likely aetiology.",
+          "accept": [
+            "tempo",
+            "compensat",
+            "decompensat",
+            "aetiology",
+            "etiology"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "keyPoints": [
+        "Definition: diffuse fibrosis plus nodule formation replacing normal liver architecture.",
+        "It is a common endpoint, not a cause. Alcohol, viral hepatitis B and C, non-alcoholic steatohepatitis (NASH), autoimmune and biliary disease, and haemochromatosis can all lead here.",
+        "Two consequences follow directly from the architecture change: hepatocellular failure, because functioning liver tissue is replaced by scar and nodules, and portal hypertension, because fibrous bands and nodules distort and compress the portal venous channels.",
+        "Compensated cirrhosis can be entirely asymptomatic; decompensation, marked by ascites, variceal bleeding, encephalopathy or jaundice, is the clinical turning point that changes prognosis and management.",
+        "The diagnostic statement in this book has three parts: duration and tempo (acute, subacute, chronic, or acute-on-chronic), compensated or decompensated, and the likely aetiology."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis and its complications"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the liver"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cld.signs": {
+      "id": "skill.cld.signs",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Putting the cirrhosis picture together",
+      "oneLine": "Two syndromes in one patient: hepatocellular failure and portal hypertension",
+      "why": "The findings of cirrhosis are not a random list; every one of them belongs to one of two mechanisms. Sorting a patient's findings into 'failure' and 'portal hypertension' is what turns a checklist into a working understanding of exactly how sick this particular liver is.",
+      "body": "Every finding in decompensated cirrhosis is explained by one of two mechanisms acting together: the liver failing to do its normal jobs, and blood being forced around it under pressure.",
+      "pitfalls": [
+        "Treating hepatomegaly as expected in every cirrhotic; a shrunken, impalpable liver is common and is not reassuring.",
+        "Missing early (grade 1) encephalopathy because it looks like ordinary tiredness or irritability rather than a neurological sign.",
+        "Attributing dependent oedema only to right heart strain and not to hypoalbuminaemia."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Sort these into hepatocellular failure versus portal hypertension: spider naevi, splenomegaly, caput medusae, gynaecomastia.",
+          "a": "Hepatocellular failure: spider naevi, gynaecomastia. Portal hypertension: splenomegaly, caput medusae.",
+          "accept": [
+            "spider",
+            "gynaecomastia",
+            "splenomegaly",
+            "caput"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Is hepatomegaly a reliable finding in advanced cirrhosis? Explain.",
+          "a": "No. Hepatomegaly is common early or in alcohol, NASH or haemochromatosis related disease, but late cirrhosis often produces a shrunken, non-palpable liver as fibrosis progresses, so its absence does not argue against the diagnosis.",
+          "accept": [
+            "shrunken",
+            "impalpable",
+            "late",
+            "not reliable"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why are ascites and encephalopathy specifically regarded as the marker of true decompensation, rather than any single stigma of chronic liver disease?",
+          "a": "They represent the clinical point at which the liver can no longer compensate for its combined failure and portal hypertension, changing prognosis and triggering consideration of definitive treatment such as transplantation, unlike an isolated stigma such as a spider naevus which can occur in otherwise compensated disease.",
+          "accept": [
+            "decompensat",
+            "prognosis",
+            "transplant"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "From hepatocellular failure: jaundice, spider naevi, palmar erythema, gynaecomastia, testicular atrophy, Dupuytren's contracture, fetor hepaticus, asterixis and encephalopathy, coagulopathy and bruising, low albumin with dependent oedema.",
+        "From portal hypertension: splenomegaly, ascites, dilated abdominal wall veins with flow away from the umbilicus (caput medusae), a Cruveilhier-Baumgarten venous hum, and, out of sight at the bedside, oesophageal and gastric varices.",
+        "Hepatomegaly is inconsistent: it is common early, and in alcohol-related disease, NASH or haemochromatosis, but late cirrhosis often SHRINKS the liver as fibrosis progresses, so a non-palpable liver does not argue against the diagnosis.",
+        "Jaundice itself is not the most reliable sign of cirrhosis; it is more typical of acute liver disease and is a late, not an early, feature of pure cirrhotic decompensation.",
+        "Ascites and encephalopathy together are the clinical marker of TRUE decompensation, the point at which prognosis changes and transplantation is considered."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis and its complications"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the liver"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cld.summary": {
+      "id": "skill.cld.summary",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "The clinical summary",
+      "oneLine": "Aetiology, compensation status, and complication, in one sentence each",
+      "why": "A cirrhosis summary that stops at 'chronic liver disease' has told the listener almost nothing useful. The abstraction that matters clinically is: probable cause, compensated or not, and which complication is driving today's presentation.",
+      "body": "A problem representation for cirrhosis states the patient and risk factor, the tempo, and the syndrome with its dominant complication.",
+      "pitfalls": [
+        "Stopping at 'cirrhosis' without stating a probable cause and the dominant complication.",
+        "Omitting the tempo, so a listener cannot tell whether this is stable chronic disease or an acute decompensation."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What three things must a cirrhosis summary state beyond the bare word 'cirrhosis'?",
+          "a": "The probable aetiology, whether it is compensated or decompensated, and the dominant complication driving the presentation.",
+          "accept": [
+            "aetiology",
+            "etiology",
+            "compensat",
+            "complication"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "aetiology",
+          "text": "States a probable aetiology from the history and stigmata"
+        },
+        {
+          "id": "decompensation",
+          "text": "States compensated vs decompensated and the dominant complication"
+        }
+      ],
+      "keyPoints": [
+        "Patient and risk factor: age, sex, and the single strongest aetiological clue (alcohol quantity, transfusion history, metabolic risk factors).",
+        "Tempo: chronic, or acute-on-chronic if there has been a recent deterioration such as a binge, infection, or bleed.",
+        "The syndrome in abstract terms: 'chronic liver disease with stigmata of hepatocellular failure and portal hypertension, presenting in decompensation with...' followed by the dominant complication (ascites, encephalopathy, variceal bleed, jaundice).",
+        "Worked example: 'A 48-year-old man with a 20-year history of daily alcohol use presents with two weeks of progressive abdominal distension and one day of altered behaviour, on a background of known alcoholic cirrhosis. Examination shows spider naevi, palmar erythema, ascites and grade 2 hepatic encephalopathy, with no stigmata of an alternative cause. This is decompensated alcoholic cirrhosis with new ascites and hepatic encephalopathy.'"
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cld.differential": {
+      "id": "skill.cld.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis",
+      "oneLine": "What else causes chronic liver disease, jaundice, ascites and splenomegaly together",
+      "why": "Committing to 'alcoholic cirrhosis' on stigmata alone risks missing a treatable cause of the same picture, or attributing a different disease's ascites and splenomegaly to a liver that turns out to be a bystander.",
+      "body": "Two separate differentials matter: the cause of the cirrhosis itself, and the cause of a chronic-liver-disease-LOOKING picture that may not be liver disease at all.",
+      "pitfalls": [
+        "Labelling every ascites-plus-splenomegaly picture as cirrhosis without checking the JVP and heart sounds for a cardiac cause.",
+        "Missing a treatable cause (Wilson's disease in a young patient, haemochromatosis with a strong family history) because alcohol was assumed by default.",
+        "Not considering Budd-Chiari in a tender, enlarged liver with ascites."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name four causes of cirrhosis besides alcohol.",
+          "a": "Chronic hepatitis B or C, NASH, autoimmune hepatitis, primary biliary cirrhosis, haemochromatosis, Wilson's disease, alpha-1 antitrypsin deficiency.",
+          "accept": [
+            "hepatitis",
+            "nash",
+            "autoimmune",
+            "biliary",
+            "haemochromatosis",
+            "wilson",
+            "antitrypsin"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "A patient has ascites, hepatomegaly and a raised JVP with a prominent y descent. What should you consider instead of primary liver disease?",
+          "a": "Constrictive pericarditis, which mimics chronic liver disease through venous congestion rather than primary hepatic pathology.",
+          "accept": [
+            "constrictive",
+            "pericarditis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why does an absent hepatojugular reflux, in a patient with a tender enlarged liver and ascites, point specifically towards Budd-Chiari syndrome rather than right heart failure?",
+          "a": "In right heart failure the hepatojugular reflux is typically present because the failing right heart cannot accommodate the extra venous return; in Budd-Chiari syndrome the obstruction is at the level of the hepatic veins themselves, downstream of a normal right heart, so pressing on the liver does not transmit back to the jugular veins in the same way.",
+          "accept": [
+            "hepatic vein",
+            "obstruction",
+            "right heart",
+            "absent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "aetiology_ddx",
+          "text": "Names at least three causes of cirrhosis beyond alcohol"
+        },
+        {
+          "id": "mimics",
+          "text": "Considers cardiac and renal mimics of the whole syndrome"
+        }
+      ],
+      "keyPoints": [
+        "Causes of cirrhosis to actively name: alcohol, chronic hepatitis B or C, NASH, autoimmune hepatitis, primary biliary cirrhosis, primary sclerosing cholangitis, haemochromatosis, Wilson's disease, alpha-1 antitrypsin deficiency, and cardiac cirrhosis from long-standing right heart failure.",
+        "Mimics of the whole syndrome: constrictive pericarditis and long-standing right heart failure can both produce ascites, hepatomegaly and dependent oedema without primary liver disease; look for a raised JVP with prominent y descent, and an early diastolic knock.",
+        "Budd-Chiari syndrome (hepatic vein obstruction) presents with a tender liver, ascites and, classically, an ABSENT hepatojugular reflux, a specific discriminator worth naming.",
+        "Nephrotic syndrome and protein-losing states cause ascites through hypoalbuminaemia alone, without portal hypertension; look for heavy proteinuria and generalised, not just dependent, oedema.",
+        "Malignant ascites (peritoneal carcinomatosis) and tuberculous peritonitis both cause ascites with a low SAAG, unlike cirrhotic ascites; consider these actively in a patient without clear stigmata of chronic liver disease."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, differential diagnosis and aetiology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.cld.workup": {
+      "id": "skill.ix.cld.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Investigating suspected cirrhosis",
+      "oneLine": "Confirm the syndrome, find the cause, then grade the severity",
+      "why": "Ordering every liver test at once is how a plan becomes a panel. The workup has a genuine sequence: confirm the pattern of liver injury, screen for a treatable cause, image the liver and portal system, and then, where indicated, sample the ascitic fluid or the liver itself.",
+      "body": "Group investigations by the question each answers: confirm and characterise, find the cause, stage the severity, and investigate a specific complication.",
+      "pitfalls": [
+        "Ordering an ascitic tap without sending albumin, and so losing the SAAG that actually discriminates the cause.",
+        "Treating a normal transaminase level as reassuring; in established cirrhosis the transaminases can be near-normal despite severe synthetic failure.",
+        "Never screening for hepatocellular carcinoma once cirrhosis is confirmed.",
+        "Skipping endoscopic screening for varices in a newly diagnosed cirrhotic."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which two liver tests best reflect true synthetic failure rather than cell injury?",
+          "a": "Serum albumin and prothrombin time (or INR).",
+          "accept": [
+            "albumin",
+            "prothrombin",
+            "inr"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What neutrophil count in ascitic fluid is used to diagnose spontaneous bacterial peritonitis?",
+          "a": "250 cells per cubic millimetre or more.",
+          "accept": [
+            "250"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A cirrhotic patient has near-normal transaminases. Does this argue against significant liver disease?",
+          "a": "No. In established cirrhosis the transaminases can be near-normal despite severe synthetic failure, because there is little remaining tissue left to release enzymes from; albumin and prothrombin time are the better guide to severity.",
+          "accept": [
+            "near-normal",
+            "synthetic",
+            "albumin",
+            "prothrombin"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Confirm and characterise: liver function tests. A low albumin and a prolonged prothrombin time reflect true synthetic failure, not just cell injury; a raised bilirubin, especially conjugated, tracks excretory failure.",
+        "Aetiology screen: viral hepatitis serology (HBsAg, anti-HCV), and, where the picture or age suggests it, autoimmune markers, ferritin and iron studies, caeruloplasmin, and alpha-1 antitrypsin level.",
+        "Imaging: ultrasound of the liver and portal system for nodularity, a shrunken liver, splenomegaly, ascites, and portal vein diameter or flow, plus a screen for hepatocellular carcinoma with alpha-fetoprotein.",
+        "Full blood count: thrombocytopenia is an early, sensitive clue to portal hypertension and hypersplenism, often preceding overt splenomegaly on examination.",
+        "Endoscopy: upper GI endoscopy to look for oesophageal or gastric varices once cirrhosis is diagnosed, since their presence changes bleeding-prevention management.",
+        "Diagnostic ascitic tap where ascites is new, or where infection is suspected: cell count with differential, albumin for the SAAG, and culture. A neutrophil count of 250 cells/mm3 or more in the fluid is the working threshold used to diagnose spontaneous bacterial peritonitis.",
+        "Liver biopsy or elastography where the diagnosis or the cause remains uncertain after non-invasive workup."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: cirrhosis workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.cld": {
+      "id": "skill.dx.cld",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Diagnosis, staging and severity",
+      "oneLine": "Naming it, staging it with Child-Pugh, and stating the current complication",
+      "why": "'Cirrhosis' alone tells nobody what to do next. Staging the severity is what actually predicts outcome and guides decisions such as transplant referral, and the diagnostic statement has to carry that grading, not just the label.",
+      "body": "A complete cirrhosis diagnosis names the disease, its probable cause, its severity by a validated score, and its current complications.",
+      "pitfalls": [
+        "Grading encephalopathy as simply 'present' rather than assigning a West Haven grade, which is what actually guides management and monitoring.",
+        "Forgetting that asterixis can be ABSENT in the most severe grades of encephalopathy, and treating its absence as reassuring in a comatose patient.",
+        "Omitting the Child-Pugh class from the diagnostic statement, which is what a transplant or surgical referral will actually ask for first."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "List the five variables in the Child-Turcotte-Pugh score.",
+          "a": "Bilirubin, albumin, prothrombin time (or INR), ascites, and encephalopathy.",
+          "accept": [
+            "bilirubin",
+            "albumin",
+            "prothrombin",
+            "ascites",
+            "encephalopathy"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 3,
+          "q": "A Child-Pugh score totals 8. What class is this?",
+          "a": "Class B (a total of 7 to 9).",
+          "accept": [
+            "b",
+            "class b"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Why can asterixis be absent in grade 4 hepatic encephalopathy despite the patient being far more unwell than in grade 1?",
+          "a": "Asterixis requires enough residual voluntary motor tone to demonstrate the flap; in coma (grade 4) the patient cannot sustain the posture needed to elicit it at all, so its absence there reflects severity rather than improvement.",
+          "accept": [
+            "coma",
+            "voluntary",
+            "cannot sustain",
+            "posture"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "The Child-Turcotte-Pugh score grades severity from five variables: bilirubin, albumin, prothrombin time (or INR), ascites, and encephalopathy, each scored 1 to 3.",
+        "Total score 5 to 6 is Child-Pugh class A; 7 to 9 is class B; 10 to 15 is class C. Rising class tracks worsening prognosis and operative risk.",
+        "Hepatic encephalopathy itself is graded, not just noted as present or absent: from grade 0/minimal (no detectable change) through grade 1 (trivial inattention, mild mood change) and grade 2 (lethargy, disorientation, asterixis present) to grade 3 (somnolent but rousable) and grade 4 (coma). Asterixis is typically present in grades 1 to 2 and often ABSENT again by grade 3 to 4, once voluntary motor effort itself is lost.",
+        "A complete statement: 'Decompensated chronic liver disease, cirrhosis probably secondary to alcohol, Child-Pugh class C, with portal hypertension, new ascites, and grade 2 hepatic encephalopathy, no evidence of spontaneous bacterial peritonitis.'"
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, prognosis and staging"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: Child-Pugh"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.cld.principles": {
+      "id": "skill.tx.cld.principles",
+      "kind": "treatment",
+      "system": "abdomen",
+      "title": "Principles of managing chronic liver disease",
+      "oneLine": "Treat the cause where possible, then manage each complication on its own logic",
+      "why": "Cirrhosis management is not one pathway; it is a set of separate problems, each with its own trigger and its own monitoring, that happen to occur in the same patient. Knowing which complication you are treating, and why, is what stops a reflex prescription.",
+      "body": "Management divides into treating the underlying cause where one is identified and treatable, general supportive measures, and a specific approach to each complication.",
+      "pitfalls": [
+        "Restricting dietary protein reflexively in a patient with encephalopathy; this is outdated practice and worsens nutritional status without proven benefit.",
+        "Treating hepatic encephalopathy with lactulose alone without ever looking for and treating the precipitant.",
+        "Prescribing a sedative or an NSAID in a cirrhotic patient without considering the added risk.",
+        "Missing the difference between primary and secondary prophylaxis for variceal bleeding, which changes what is offered to a patient who has never bled versus one who has."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single highest-yield intervention when a treatable cause of cirrhosis is found?",
+          "a": "Treating the underlying cause directly (for example alcohol cessation, antiviral therapy for viral hepatitis, or specific therapy for the identified cause).",
+          "accept": [
+            "cause",
+            "cessation",
+            "antiviral",
+            "treat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What is the essential first step in managing an episode of hepatic encephalopathy, before starting lactulose?",
+          "a": "Actively look for and treat the precipitant: infection, GI bleed, constipation, a new sedative, or an electrolyte disturbance.",
+          "accept": [
+            "precipitant",
+            "infection",
+            "bleed",
+            "constipation",
+            "sedative"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Is dietary protein restriction recommended in cirrhotic patients with encephalopathy?",
+          "a": "No, not routinely; it is outdated practice, worsens nutritional status, and adequate protein intake is now preferred alongside treating the actual precipitant.",
+          "accept": [
+            "no",
+            "not recommended",
+            "outdated",
+            "adequate protein"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Distinguish the management of a patient with known varices who has never bled from one who has just had a variceal bleed.",
+          "a": "The never-bled patient is managed with primary prophylaxis (typically a non-selective beta blocker or endoscopic banding, per current guidance); the actively bleeding patient needs emergency resuscitation, a vasoactive drug, endoscopic therapy and antibiotic prophylaxis together, followed by secondary prophylaxis once stable.",
+          "accept": [
+            "primary prophylaxis",
+            "secondary prophylaxis",
+            "emergency",
+            "resuscitation"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "keyPoints": [
+        "Treat the cause where possible: alcohol cessation with structured support, antiviral therapy for chronic hepatitis B or C, immunosuppression for autoimmune hepatitis, and specific therapy for haemochromatosis or Wilson's disease. This is the single highest-yield intervention where a treatable cause exists.",
+        "General measures: adequate protein-containing nutrition (protein restriction is NOT routinely recommended and can worsen outcomes), vaccination against hepatitis A and B if not already immune, avoidance of hepatotoxic drugs and unnecessary sedatives, and screening for varices and hepatocellular carcinoma at defined intervals.",
+        "Ascites: salt restriction as the first step, with a diuretic regimen (an aldosterone antagonist, with or without a loop diuretic) escalated against daily weight loss targets. Refractory ascites may need large-volume paracentesis with albumin replacement, or specialist procedures.",
+        "Hepatic encephalopathy: identify and treat the precipitant (infection, GI bleed, constipation, a new sedative, electrolyte disturbance) as the essential first step, alongside a non-absorbable disaccharide such as lactulose titrated to a defined number of soft stools a day.",
+        "Variceal bleeding: this is an emergency requiring resuscitation, a vasoactive drug, endoscopic therapy and antibiotic prophylaxis together; a patient with known varices who has never bled is managed with primary prophylaxis instead.",
+        "Spontaneous bacterial peritonitis: suspected on a raised ascitic neutrophil count, treated with antibiotics chosen for local resistance, with secondary prophylaxis considered after a first episode.",
+        "Transplant referral is considered once the disease reaches a defined severity or a decompensating event has occurred, and is a specialist decision made against a formal scoring system."
+      ],
+      "dosingNote": "This module teaches management at the level of drug CLASS and principle. Doses, product choices and specific regimens must be taken from your current national or institutional guideline at the time of prescribing. CliniX does not prescribe.",
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, management"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: cirrhosis management principles"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

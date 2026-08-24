@@ -24,6 +24,28 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
 - [ ] Per-endpoint precise per-module token cost (currently counts requests, rough cost)
 
 ## Modules
+- [ ] **[[SURGX]] clinical sign-off** — 8 authored protocols, 13 engine overlays, 5 procedures,
+      3 cases and 15 evidence records are all `ai_drafted`. Flip `review.status` per item after
+      review, then set `smd_surgx_draft` to 0. This is the ONLY thing between the module and use.
+- [ ] **[[SURGX]] media sourcing** — 3 uncleared entries in `surgx/media/manifest.json`, each with a
+      work order. One (`abscess-deloculation`) is authorable in-house as an inline SVG.
+- [ ] [[SURGX]] voice → note: `SMD_VOICE` target + the `/extract` kind `surgx-note` are built and
+      tested but not wired to a mic. Per-SECTION mic, not one global one (the opd-emr PR #648 rule).
+- [ ] [[SURGX]] Senior Surgeon Mode: `surgx_case` bucket + `mode:"surgx-mentor"` remap exist;
+      `MENTOR_SYS` still to be written. Cases are fully playable without it.
+- [ ] Missing surgical calculators for `calculators.js` (NOT for SURGX): POSSUM / P-POSSUM,
+      Clavien-Dindo, Tokyo Guidelines grading, LRINEC, Boey, Mannheim Peritonitis Index.
+- [ ] Apply SURGX's `?v=<contentVersion>` content-fetch fix to [[CliniX]] — `clinix-content.js`
+      fetches its JSON unversioned and `sw.js` caches on the full URL, so a content update may never
+      reach a device that has already cached it. Same exposure, not yet fixed there.
+- [ ] **[[CliniX]] clinical sign-off** — content is `ai_drafted` and the review gate hides ALL of it
+      from students. Flip `review.status` to `approved` per skill after review. This is the ONLY
+      thing between the module and student testing.
+- [ ] **[[CliniX]] media sourcing** — 10 uncleared entries in `clinix/media/manifest.json`, each with
+      what is needed and where to look. Openly-licensed or permitted embeds only; the 3 that render
+      today are self-authored diagrams.
+- [ ] [[CliniX]] decide whether the exam-vocabulary firewall widening should apply app-wide (it would
+      fix the two-token clarify trap for doctors typing "JVP" too, not just students)
 - [ ] [[ICU]] v2 redesign deploy (rules+indexes, emulator + 2-device test); alert-safety push
 - [ ] [[KardiQ X]] photo-dx pivot (image-based model) — ≤$35 GPU-VM overnight build
 - [ ] [[Medical Knowledge Base]] — Obsidian → build pipeline for clinical content; dx-mgmt enrichment merge

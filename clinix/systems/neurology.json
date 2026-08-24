@@ -1,0 +1,124 @@
+{
+  "_comment": "System module: the whole workup for this system, disease-independent, shaped like a disease pathway on purpose.",
+  "id": "neuro-exam",
+  "name": "Examination of the Nervous System",
+  "fullName": "Examination of the Nervous System",
+  "system": "neurology",
+  "kind": "system-module",
+  "oneLine": "The whole system workup, before any particular disease",
+  "estMinutes": 150,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "approach",
+      "title": "Approaching the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Name, age, and why each one is clinical data",
+      "skills": [
+        "skill.particulars.demographics"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Onset and course localise before you touch the patient",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.neuro.approach"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "From the end of the bed inwards",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ]
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Nervous system examination",
+      "blurb": "Higher mental functions, all twelve cranial nerves, motor, sensory, cerebellar, gait, and meningeal signs",
+      "skills": [
+        "skill.exam.neuro.higher_mental",
+        "skill.exam.neuro.cn1_2",
+        "skill.exam.neuro.cn3_4_6",
+        "skill.exam.neuro.cn5",
+        "skill.exam.neuro.cn7",
+        "skill.exam.neuro.cn8",
+        "skill.exam.neuro.cn9_10",
+        "skill.exam.neuro.cn11_12",
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.reflexes",
+        "skill.exam.neuro.sensory",
+        "skill.exam.neuro.cerebellar",
+        "skill.exam.neuro.gait",
+        "skill.exam.neuro.meningeal"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Presenting the case",
+      "blurb": "Two minutes, in a fixed order",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.neurology.full",
+        "title": "Examination of the Nervous System",
+        "task": "Examine this patient's nervous system and present your findings.",
+        "seconds": 600,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.higher_mental",
+          "skill.exam.neuro.cn7",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.reflexes",
+          "skill.exam.neuro.sensory",
+          "skill.exam.neuro.cerebellar",
+          "skill.exam.neuro.gait"
+        ],
+        "examinerQuestions": [
+          "Give the full upper motor neurone pattern: tone, bulk, reflexes, plantar.",
+          "A patient cannot wrinkle the forehead on one side, and the whole side of the face is weak. Is this an upper or lower motor neurone facial palsy, and why does the forehead matter?",
+          "What is the Babinski sign and what does it mean in an adult?",
+          "Distinguish cerebellar from sensory ataxia using the Romberg comparison.",
+          "Describe Kernig's sign and what a positive result means."
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.exam.neuro.tone_power",
+      "skill.exam.neuro.reflexes",
+      "skill.exam.neuro.sensory",
+      "skill.exam.neuro.cerebellar",
+      "skill.exam.neuro.gait",
+      "skill.exam.neuro.cn3_4_6",
+      "skill.exam.neuro.cn7",
+      "skill.exam.neuro.meningeal",
+      "skill.hx.neuro.approach"
+    ]
+  }
+}

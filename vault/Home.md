@@ -20,6 +20,8 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[KardiQ X]] — ECG interpretation + Learn atlas
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
+- [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
+- [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
 
 ## Cross-cutting
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).

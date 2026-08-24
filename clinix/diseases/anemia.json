@@ -1,0 +1,558 @@
+{
+  "_comment": "Anaemia is a SHORT CASE: a syndrome examined across systems, not a disease of one organ. Structured like a disease pathway (same engine, no new code) but its chapters lean on general_exam skills rather than one systemic exam.",
+  "id": "anemia",
+  "name": "Anaemia",
+  "fullName": "Anaemia (a short case)",
+  "system": "general",
+  "kbRef": "anemia",
+  "oneLine": "Not enough haemoglobin, and the three ways that happens",
+  "estMinutes": 40,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What anaemia is, and the three mechanisms",
+      "skills": [
+        "skill.gen.pallor"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Symptom, mechanism, then cause",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.anemia"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Pallor first, then the discriminating signs",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for glossitis, angular stomatitis, koilonychia and lymphadenopathy alongside the general appearance. These are the findings that separate one cause of anaemia from another."
+        },
+        "skill.gen.vitals": {
+          "expect": "Tachycardia and a wide pulse pressure reflect the compensatory high-output state of significant anaemia, not a separate cardiac diagnosis."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Pallor plus the extra sign that names a cause",
+      "skills": [
+        "skill.exam.anemia.signs"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "What kind of anaemia is this",
+      "blurb": "Production, loss, or destruction",
+      "skills": [
+        "skill.exam.anemia.signs"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One number confirms it, a few more explain it",
+      "skills": [
+        "skill.ix.anemia.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Severity and likely mechanism, not just the word 'anaemia'",
+      "skills": [
+        "skill.dx.anemia"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.anemia.general",
+        "title": "General examination for anaemia",
+        "seconds": 300,
+        "task": "This patient reports fatigue and breathlessness. Perform a general examination looking for anaemia and its cause, and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.appearance",
+          "skill.gen.vitals",
+          "skill.gen.pallor",
+          "skill.gen.clubbing"
+        ],
+        "examinerQuestions": [
+          "Which sites did you check for pallor, and why those?",
+          "What single additional sign would point you towards iron deficiency?",
+          "What is the WHO haemoglobin threshold for anaemia in this patient's group?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.gen.pallor",
+      "skill.hx.anemia",
+      "skill.exam.anemia.signs"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.anemia.krishnamurthy",
+      "title": "An elderly man who feels breathless climbing to his flat",
+      "opening": "Krishnamurthy Iyer, 67, has come to the medicine outpatient department with his son. He looks pale and tired, and mentions he has been avoiding the stairs to his second-floor flat. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Krishnamurthy Iyer",
+        "age": 67,
+        "sex": "male",
+        "occupation": "Retired schoolteacher",
+        "residence": "Urban, lives with his son on the second floor of an apartment building without a lift"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, I have been feeling very tired for the last two or three months, and lately I get breathless just climbing to my flat, which never used to happen.",
+          "key": true
+        },
+        "duration_severity": {
+          "cues": [
+            "how long",
+            "how severe",
+            "getting worse",
+            "since when",
+            "duration"
+          ],
+          "reply": "It has crept up slowly over two or three months. At first it was just tiredness by evening, now I get breathless and my heart races even with mild exertion.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "gi_bleeding": {
+          "cues": [
+            "black stool",
+            "blood in stool",
+            "bleeding",
+            "melena",
+            "blood in motion",
+            "stool colour"
+          ],
+          "reply": "Now that you ask, my stools have looked darker than usual for a few weeks, almost black at times. I did not think much of it.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "other_bleeding": {
+          "cues": [
+            "nosebleed",
+            "blood in urine",
+            "gums bleeding",
+            "bruising",
+            "any other bleeding"
+          ],
+          "reply": "No nosebleeds, no blood in urine, no unusual bruising.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "gi_symptoms": {
+          "cues": [
+            "stomach pain",
+            "abdominal pain",
+            "indigestion",
+            "appetite",
+            "weight loss",
+            "vomiting"
+          ],
+          "reply": "I do get a burning pain in my upper stomach sometimes, especially if I skip a meal. My appetite has been a little poor, and I think I have lost some weight, my belt is looser.",
+          "key": true
+        },
+        "drug_history": {
+          "cues": [
+            "medicine",
+            "medication",
+            "painkillers",
+            "nsaid",
+            "aspirin",
+            "tablets for pain"
+          ],
+          "reply": "I take a tablet for my knee pain most days, sometimes more than one, an over-the-counter painkiller. I have been taking it for years.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "diet": {
+          "cues": [
+            "diet",
+            "meat",
+            "green vegetables",
+            "vegetarian",
+            "eating"
+          ],
+          "reply": "I eat a mixed diet, some meat, plenty of rice. Nothing restricted about it.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "jaundice_dark_urine": {
+          "cues": [
+            "jaundice",
+            "yellow eyes",
+            "dark urine",
+            "yellowish"
+          ],
+          "reply": "No, I have not noticed any yellowness of my eyes or dark urine.",
+          "key": true,
+          "skillId": "skill.hx.anemia"
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "hereditary",
+            "gallstones",
+            "anaemia in family"
+          ],
+          "reply": "No one in the family has had anaemia, jaundice or gallstones that I know of."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "kidney disease",
+            "rheumatoid",
+            "chronic disease",
+            "cancer"
+          ],
+          "reply": "I have high blood pressure, on a tablet for years. No diabetes, no kidney disease, no known cancer.",
+          "key": true
+        },
+        "bowel_habit": {
+          "cues": [
+            "bowel habit",
+            "constipation",
+            "diarrhoea",
+            "change in stool"
+          ],
+          "reply": "My bowel habit has been fairly regular, apart from the dark colour I mentioned."
+        },
+        "prior_endoscopy": {
+          "cues": [
+            "endoscopy",
+            "colonoscopy",
+            "scope",
+            "previously checked"
+          ],
+          "reply": "No, I have never had a scope done, doctor."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, mildly built, comfortable at rest. Angular stomatitis at both corners of the mouth. No visible jaundice. No lymphadenopathy.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular. Blood pressure 128/62, a wide pulse pressure. Respiratory rate 18. SpO2 98 percent on room air. A soft systolic flow murmur audible at the left sternal edge.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "Marked pallor of the conjunctivae, tongue and palmar creases, examined in good light.",
+          "abnormal": true
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing. Koilonychia present in several fingernails, with mild spooning and ridging.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema. No ascites.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "fbc",
+        "iron_studies",
+        "stool_occult_blood",
+        "upper_gi_endoscopy"
+      ],
+      "investigations": {
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 7.8 g/dL, MCV 68 fL (microcytic), MCH 21 pg. White cells and platelets normal.",
+          "note": "Confirms a moderate to severe microcytic anaemia and directs the next step of the workup toward iron studies."
+        },
+        "iron_studies": {
+          "label": "Iron studies (ferritin, serum iron, TIBC)",
+          "indicated": true,
+          "result": "Ferritin 6 ng/mL (low), serum iron low, TIBC raised, transferrin saturation 4 percent.",
+          "note": "A low ferritin confirms iron deficiency. In this age group a normal or high ferritin with microcytosis would instead have suggested thalassaemia or anaemia of chronic disease."
+        },
+        "reticulocyte_count": {
+          "label": "Reticulocyte count",
+          "indicated": true,
+          "result": "1.2 percent, appropriately low for the degree of anaemia given the chronic, gradual iron-deficient picture.",
+          "note": "More useful as a hinge test in a normocytic anaemia; here it mainly confirms the marrow is not yet mounting a strong regenerative response, consistent with a slow, ongoing loss."
+        },
+        "stool_occult_blood": {
+          "label": "Stool occult blood",
+          "indicated": true,
+          "result": "Positive.",
+          "note": "Supports a gastrointestinal source for the blood loss, in keeping with the history of dark stools and NSAID use."
+        },
+        "upper_gi_endoscopy": {
+          "label": "Upper GI endoscopy",
+          "indicated": true,
+          "result": "A chronic gastric ulcer at the antrum with a visible vessel at the base, no active bleeding at the time of the scope.",
+          "note": "In an older patient with new iron deficiency, a source must be actively found, not assumed. This is the test that found it and explains the NSAID history and the melena together."
+        },
+        "b12_folate": {
+          "label": "Serum B12 and folate",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: the anaemia is clearly microcytic on the blood count, whereas B12 and folate deficiency cause a macrocytic picture. Ordering this as a reflex here answers a question the MCV has already ruled out."
+        },
+        "haemolysis_screen": {
+          "label": "Bilirubin, LDH, haptoglobin",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "Not indicated: there is no jaundice, no dark urine, and no family history, so there is no clinical suspicion of haemolysis to justify this panel."
+        },
+        "colonoscopy": {
+          "label": "Colonoscopy",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated as a first step once an upper GI source with a visible vessel has already been found and explains the whole clinical picture. It would be reconsidered only if the upper endoscopy had been unrevealing."
+        }
+      },
+      "differentialModel": {
+        "answer": "Iron deficiency anaemia from chronic upper gastrointestinal blood loss, most likely an NSAID-related gastric ulcer. Consider a colonic source, anaemia of chronic disease, and thalassaemia trait as causes of microcytosis.",
+        "accept": [
+          "iron deficiency",
+          "gastrointestinal",
+          "gi bleed",
+          "ulcer",
+          "chronic disease",
+          "thalassaemia",
+          "thalassemia",
+          "colonic",
+          "malignancy"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Severe microcytic anaemia due to iron deficiency, secondary to chronic blood loss from an NSAID-related gastric ulcer, confirmed on upper GI endoscopy.",
+        "accept": [
+          "iron deficiency",
+          "microcytic anaemia",
+          "microcytic anemia"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Stop the NSAID and start a proton pump inhibitor for the ulcer. Correct the iron deficiency with iron replacement, oral where tolerated, or intravenous if oral is not tolerated or the deficit is large, and transfuse only if he is symptomatic or haemodynamically unstable rather than by a haemoglobin number alone. Test for Helicobacter pylori and treat if positive. Arrange follow-up endoscopy to confirm ulcer healing, and monitor the haemoglobin and iron indices as treatment progresses.",
+        "accept": [
+          "iron replacement",
+          "iron supplementation",
+          "stop nsaid",
+          "proton pump inhibitor",
+          "ppi",
+          "transfusion",
+          "helicobacter",
+          "h pylori",
+          "follow-up endoscopy"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "A wide pulse pressure and a soft flow murmur are not a separate cardiac diagnosis here, they are the high-output state of a haemoglobin of 7.8, and should prompt you to look for a cause of anaemia, not order an echocardiogram first.",
+        "The dark stools were not volunteered. He mentioned tiredness and breathlessness as his complaint and only confirmed melena once asked specifically, which is exactly the pattern the history skill warns about.",
+        "Koilonychia and angular stomatitis are what turn a nonspecific pallor into a specific cause. Pallor alone never named iron deficiency; these two signs did.",
+        "The years of over-the-counter painkiller use is the detail that connects the history, the exam and the endoscopy into one story: NSAID gastropathy causing chronic occult blood loss.",
+        "In a man of 67 with new iron deficiency, the reflex must be to find the source, not to prescribe iron and stop there. Iron deficiency in this age group is a symptom of a bleeding source until one is found.",
+        "The reticulocyte count is doing less work in this case than it would in a normocytic anaemia. The MCV had already told the real story; the reticulocyte count here mainly confirms a slow, chronic process rather than deciding where to look next.",
+        "B12, folate and a haemolysis screen were deliberately left undone. A clearly microcytic picture with no jaundice and no family history means those tests would not have answered any real clinical question, they would only have added a panel without a plan."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "skills": {
+    "skill.ix.anemia.workup": {
+      "id": "skill.ix.anemia.workup",
+      "kind": "investigation",
+      "system": "general",
+      "title": "Working up anaemia",
+      "oneLine": "One test confirms it, the next few tell you why",
+      "why": "A haemoglobin confirms anaemia but never explains it. The workup is a short, deliberate sequence, not a long panel ordered at once.",
+      "body": "Confirm, characterise, then investigate the mechanism the history and examination pointed towards.",
+      "keyPoints": [
+        "Confirm: full blood count, giving the haemoglobin and the red cell indices.",
+        "Characterise by size: mean corpuscular volume (MCV) divides anaemia into microcytic, normocytic and macrocytic, and each has its own short list of causes.",
+        "Microcytic: iron studies (ferritin, iron, TIBC). Low ferritin confirms iron deficiency; a normal or high ferritin with microcytosis suggests thalassaemia or anaemia of chronic disease.",
+        "Macrocytic: B12 and folate levels, and consider hypothyroidism and alcohol.",
+        "Normocytic: reticulocyte count first. A high reticulocyte count means the marrow is responding, as in acute blood loss or haemolysis; a low count means the marrow itself is underproducing.",
+        "If haemolysis is suspected: bilirubin, LDH, haptoglobin, and a peripheral smear.",
+        "If bleeding is suspected: stool occult blood, and imaging or endoscopy as indicated by the history.",
+        "Reticulocyte count is the hinge investigation in a normocytic anaemia: it tells you whether to look at the marrow or outside it."
+      ],
+      "pitfalls": [
+        "Ordering B12, folate, iron studies and a haemolysis screen all at once instead of letting the MCV and the history direct the workup.",
+        "Not checking a reticulocyte count in a normocytic anaemia, which is the test that decides the next step.",
+        "Treating a low ferritin as needing no further explanation in an older patient: iron deficiency in this group needs a source found, usually gastrointestinal."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single index first classifies an anaemia?",
+          "a": "The mean corpuscular volume (MCV): microcytic, normocytic, or macrocytic.",
+          "accept": [
+            "mcv",
+            "mean corpuscular"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "In a normocytic anaemia, which single test tells you whether the marrow is responding?",
+          "a": "The reticulocyte count.",
+          "accept": [
+            "reticulocyte"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "An older patient has new iron deficiency anaemia. What must you actively look for?",
+          "a": "A source of chronic blood loss, most often gastrointestinal, and this usually warrants endoscopic investigation rather than assuming a dietary cause.",
+          "accept": [
+            "source",
+            "bleed",
+            "gastrointestinal",
+            "endoscop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.anemia": {
+      "id": "skill.dx.anemia",
+      "kind": "reasoning",
+      "system": "general",
+      "title": "Stating the diagnosis of anaemia",
+      "oneLine": "Severity, morphology, and mechanism: never just the word 'anaemia'",
+      "why": "'Anaemia' on its own is an observation, not a diagnosis. A complete statement gives the severity, the red cell size, and, where known, the mechanism, because each of those changes what happens next.",
+      "body": "State it in three parts: how severe, what size, and why.",
+      "keyPoints": [
+        "Severity, by the WHO thresholds for the patient's age and sex group: mild, moderate, or severe.",
+        "Morphology: microcytic, normocytic, or macrocytic, from the MCV.",
+        "Mechanism, where established: for example iron deficiency secondary to chronic gastrointestinal blood loss.",
+        "A worked example: 'Moderate microcytic anaemia, likely iron deficiency secondary to menorrhagia, pending confirmatory iron studies.'",
+        "Where the mechanism is not yet known, say so explicitly rather than omitting it: 'normocytic anaemia, reticulocyte count pending' is a complete, honest statement."
+      ],
+      "pitfalls": [
+        "Writing 'anaemia' with no severity or morphology.",
+        "Naming a mechanism the tests have not actually confirmed.",
+        "Omitting the pending investigation that would establish the mechanism."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Give the three parts of a complete anaemia diagnosis.",
+          "a": "Severity, morphology (red cell size), and mechanism where known.",
+          "accept": [
+            "severity",
+            "morpholog",
+            "mechanism"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is 'anaemia' alone not an acceptable diagnosis?",
+          "a": "It is an observation rather than a diagnosis: it does not say how severe it is, what kind it is, or why it is present, none of which can guide management.",
+          "accept": [
+            "observation",
+            "severity",
+            "why",
+            "guide"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "General: anaemia diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Anemia and Polycythemia"
+        },
+        {
+          "source": "WHO",
+          "locator": "Haemoglobin thresholds"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

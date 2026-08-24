@@ -342,6 +342,20 @@
   /* ───────────────────────────── specialty shell (interactive engine or framework) ───────────────────────────── */
   var _shell, LADCOL = { 0: "#047857", 1: "#65a30d", 2: "#0e6e63", 3: "#D97706", 4: "#b5460f", 5: "#ab1c2c" }, _es = null, _shellWs = null;
   function openSpecialtyShell(id) {
+    // SURGX bridge. When the Surgical Intelligence module is present and enabled, the Surgery
+    // workspace opens SURGX instead of this 5-step early-access shell — SURGX projects the SAME
+    // ws-surgery.js engine (window.SMD_WS_ENGINES.surgery) onto a fuller protocol UI, so this is a
+    // richer door to identical clinical logic rather than a second one. Guarded here, at the single
+    // point every caller routes through, so both the sidebar switcher and "start a case" get it.
+    // If SURGX is absent or its flag is off, behaviour below is byte-identical to before.
+    try {
+      if (id === "surgery" && window.SURGX && SURGX.isOn && SURGX.isOn()) {
+        if (_shell) _shell.classList.remove("on");
+        closeSheet();
+        SURGX.open("protocols");
+        return;
+      }
+    } catch (e) { /* fall through to the original shell */ }
     injectCSS();
     _shellWs = id;
     var r = meta(id), eng = (window.SMD_WS_ENGINES || {})[id];

@@ -1,0 +1,466 @@
+/* surgx.css — SURGX (SURGˣ · Surgical Intelligence).
+ *
+ * ALL selectors are scoped to #surgxRoot / .sgx-* — additive, zero global leakage (the same gate
+ * ThoreX / SknX / CliniX use). Reuses StewardMD design tokens (--rds-*) so light/dark and every
+ * accent theme flow through with no extra CSS. Module-local --sgx-* tokens are defined ON
+ * #surgxRoot only, never on body or :root.
+ *
+ * Flag-gated by smd_surgx via surgx.js; when off, #surgxRoot is never created, so none of this
+ * applies. The CSS scope IS part of the feature gate.
+ *
+ * DESIGN INTENT: a surgical workspace, not a learning app and not a chatbot. That means one
+ * domain hue (steel), hairline separation instead of shadow, a numbered vertical rail for the
+ * protocol spine so the eye can jump straight to a band, and RED USED FOR EXACTLY ONE THING —
+ * time-critical. Nothing bounces, nothing celebrates, there are no badges to collect.
+ */
+
+#surgxRoot {
+  /* Aliases with literal fallbacks so the module still renders if the design system is absent. */
+  --sgx-primary: var(--rds-primary, #0F766E);
+  --sgx-steel: #1F4E5F;                       /* SURGX's domain hue: instrument steel */
+  --sgx-steel-soft: #ECF3F6;
+  --sgx-bg: var(--rds-bg, #F5F8F9);
+  --sgx-surface: var(--rds-surface, #FFFFFF);
+  --sgx-surface-2: var(--rds-surface-2, #EEF3F5);
+  --sgx-ink: var(--rds-ink, #0D1B24);
+  --sgx-muted: var(--rds-muted, #5B7083);
+  --sgx-faint: var(--rds-faint, #8CA0AF);
+  --sgx-line: var(--rds-line, #E3EAEE);
+  --sgx-ok: var(--sev-stable-fg, #1B7F5C);
+  --sgx-ok-bg: var(--sev-stable-bg, #E7F5EF);
+  --sgx-warn: var(--sev-warning-fg, #92620A);
+  --sgx-warn-bg: var(--sev-warning-bg, #FDF3E2);
+  --sgx-bad: var(--sev-critical-fg, #B42332);
+  --sgx-bad-bg: var(--sev-critical-bg, #FCEDEF);
+  --sgx-r: var(--rds-r, 16px);
+  --sgx-r-ctl: var(--rds-r-ctl, 12px);
+  --sgx-ease: cubic-bezier(.2, .7, .2, 1);
+  --sgx-sans: var(--rds-font, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --sgx-mono: var(--rds-mono, "IBM Plex Mono", ui-monospace, monospace);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1255;
+  display: none;
+  flex-direction: column;
+  background: var(--sgx-bg);
+  color: var(--sgx-ink);
+  font-family: var(--sgx-sans);
+  -webkit-font-smoothing: antialiased;
+}
+#surgxRoot.sgx-open { display: flex; }
+html.sgx-lock, html.sgx-lock body { overflow: hidden; }
+
+#surgxRoot .sgx-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior: contain;
+  padding-bottom: calc(32px + env(safe-area-inset-bottom, 0px));
+}
+#surgxRoot .material-symbols-rounded {
+  font-family: "Material Symbols Rounded"; font-weight: 400; font-style: normal;
+  font-size: 22px; line-height: 1; letter-spacing: normal; text-transform: none;
+  display: inline-block; white-space: nowrap; direction: ltr;
+}
+
+/* ── header ───────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-head {
+  position: sticky; top: 0; z-index: 6;
+  display: flex; align-items: center; gap: 8px;
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 10px 10px;
+  background: var(--sgx-surface);
+  border-bottom: 1px solid var(--sgx-line);
+}
+#surgxRoot .sgx-hbtn {
+  flex: 0 0 auto; width: 38px; height: 38px; display: flex; align-items: center; justify-content: center;
+  border: none; background: none; color: var(--sgx-ink); cursor: pointer; border-radius: 10px;
+}
+#surgxRoot .sgx-hbtn:active { background: var(--sgx-surface-2); }
+#surgxRoot .sgx-htitle {
+  flex: 1 1 auto; min-width: 0;
+  font: 700 16px/1.25 var(--sgx-sans); color: var(--sgx-ink);
+  overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+}
+#surgxRoot .sgx-hsub {
+  display: block; font: 600 11px/1.3 var(--sgx-sans); color: var(--sgx-faint);
+  letter-spacing: .04em; text-transform: uppercase;
+}
+
+/* ── hero (home only) ─────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-hero {
+  padding: 22px 18px 20px;
+  background: linear-gradient(160deg, #17414F 0%, #0E2C36 100%);
+  color: #fff;
+}
+#surgxRoot .sgx-hero-mark { font: 800 30px/1 var(--sgx-sans); letter-spacing: -.02em; }
+#surgxRoot .sgx-hero-mark sup { font-size: .56em; font-weight: 700; top: -.55em; position: relative; margin-left: 1px; }
+#surgxRoot .sgx-hero-tag { margin-top: 6px; font: 600 13px/1.45 var(--sgx-sans); color: rgba(255,255,255,.78); }
+#surgxRoot .sgx-hero-note { margin-top: 12px; font: 500 11.5px/1.5 var(--sgx-sans); color: rgba(255,255,255,.62); }
+
+/* ── section list (the 5 sections) ────────────────────────────────────────── */
+
+#surgxRoot .sgx-wrap { padding: 14px 14px 0; max-width: 780px; margin: 0 auto; width: 100%; box-sizing: border-box; }
+#surgxRoot .sgx-seclabel {
+  font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--sgx-faint); margin: 18px 2px 8px;
+}
+#surgxRoot .sgx-sec {
+  display: flex; align-items: center; gap: 13px; width: 100%; box-sizing: border-box;
+  padding: 15px 15px; margin-bottom: 9px; text-align: left; cursor: pointer;
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r);
+  color: var(--sgx-ink); font-family: inherit;
+  transition: border-color .16s var(--sgx-ease), transform .12s var(--sgx-ease);
+}
+#surgxRoot .sgx-sec:active { transform: scale(.995); border-color: var(--sgx-steel); }
+#surgxRoot .sgx-sec .n {
+  flex: 0 0 auto; width: 30px; font: 700 11px/1 var(--sgx-mono); color: var(--sgx-steel); letter-spacing: .06em;
+}
+#surgxRoot .sgx-sec .tx { flex: 1 1 auto; min-width: 0; }
+#surgxRoot .sgx-sec .tt { display: block; font: 700 15.5px/1.25 var(--sgx-sans); }
+#surgxRoot .sgx-sec .sb { display: block; margin-top: 3px; font: 500 12.5px/1.4 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-sec .go { flex: 0 0 auto; color: var(--sgx-faint); }
+#surgxRoot .sgx-sec[disabled] { opacity: .55; cursor: default; }
+#surgxRoot .sgx-sec .lock { flex: 0 0 auto; font: 700 9.5px/1 var(--sgx-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--sgx-warn); background: var(--sgx-warn-bg); padding: 4px 7px; border-radius: 999px; }
+
+/* ── generic card / row ───────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-card {
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line);
+  border-radius: var(--sgx-r); padding: 14px 15px; margin-bottom: 10px;
+}
+#surgxRoot .sgx-card h4 {
+  margin: 0 0 9px; font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .09em;
+  text-transform: uppercase; color: var(--sgx-steel);
+}
+#surgxRoot .sgx-row {
+  display: flex; align-items: center; gap: 12px; width: 100%; box-sizing: border-box;
+  padding: 13px 14px; margin-bottom: 8px; text-align: left; cursor: pointer;
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
+  color: var(--sgx-ink); font-family: inherit;
+}
+#surgxRoot .sgx-row:active { border-color: var(--sgx-steel); }
+#surgxRoot .sgx-row .tx { flex: 1 1 auto; min-width: 0; }
+#surgxRoot .sgx-row .tt { display: block; font: 650 14.5px/1.3 var(--sgx-sans); }
+#surgxRoot .sgx-row .sb { display: block; margin-top: 2px; font: 500 12px/1.4 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-row .go { color: var(--sgx-faint); flex: 0 0 auto; }
+
+/* ── chips ────────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+#surgxRoot .sgx-chip {
+  font: 600 12.5px/1 var(--sgx-sans); padding: 8px 12px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface-2); color: var(--sgx-ink);
+  font-family: var(--sgx-sans);
+}
+#surgxRoot .sgx-chip.on { background: var(--sgx-steel); border-color: var(--sgx-steel); color: #fff; }
+#surgxRoot .sgx-chip.danger { border-color: rgba(180,35,50,.35); background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+#surgxRoot .sgx-chip.danger.on { background: var(--sgx-bad); border-color: var(--sgx-bad); color: #fff; }
+#surgxRoot .sgx-chip.calc { border-color: rgba(31,78,95,.4); background: var(--sgx-steel-soft); color: var(--sgx-steel); }
+#surgxRoot .sgx-chip[disabled] { opacity: .5; cursor: default; }
+
+/* ── the protocol spine ───────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-headline {
+  border-left: 4px solid var(--sgx-steel); padding: 12px 14px; margin-bottom: 12px;
+  background: var(--sgx-surface); border-radius: 0 var(--sgx-r-ctl) var(--sgx-r-ctl) 0;
+  font: 700 15px/1.4 var(--sgx-sans);
+}
+#surgxRoot .sgx-headline.emerg { border-left-color: var(--sgx-bad); background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+
+#surgxRoot .sgx-band { position: relative; padding-left: 30px; margin-bottom: 4px; }
+#surgxRoot .sgx-band::before {
+  content: ""; position: absolute; left: 9px; top: 26px; bottom: 0; width: 2px; background: var(--sgx-line);
+}
+#surgxRoot .sgx-band:last-of-type::before { display: none; }
+#surgxRoot .sgx-band > .dot {
+  position: absolute; left: 3px; top: 6px; width: 14px; height: 14px; border-radius: 50%;
+  background: var(--sgx-surface); border: 2px solid var(--sgx-line); box-sizing: border-box;
+}
+#surgxRoot .sgx-band.filled > .dot { border-color: var(--sgx-steel); background: var(--sgx-steel); }
+#surgxRoot .sgx-band.crit > .dot { border-color: var(--sgx-bad); background: var(--sgx-bad); }
+#surgxRoot .sgx-band > .bt {
+  font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--sgx-ink); padding-top: 4px;
+}
+#surgxRoot .sgx-band.crit > .bt { color: var(--sgx-bad); }
+#surgxRoot .sgx-band > .bb { font: 500 11.5px/1.3 var(--sgx-sans); color: var(--sgx-faint); margin: 2px 0 8px; }
+#surgxRoot .sgx-band > .body { padding-bottom: 16px; }
+
+#surgxRoot .sgx-item {
+  display: flex; gap: 9px; padding: 9px 12px; margin-bottom: 6px;
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
+  font: 500 13.5px/1.5 var(--sgx-sans); color: var(--sgx-ink);
+}
+#surgxRoot .sgx-item.tc { border-color: rgba(180,35,50,.4); background: var(--sgx-bad-bg); }
+#surgxRoot .sgx-item .txt { flex: 1 1 auto; min-width: 0; }
+#surgxRoot .sgx-item .cite {
+  display: block; margin-top: 6px; font: 500 11px/1.45 var(--sgx-sans); color: var(--sgx-faint);
+}
+#surgxRoot .sgx-item .cite b { color: var(--sgx-muted); font-weight: 650; }
+/* Every link in the module takes the domain hue. Without this a citation inside a red DO NOW card
+   inherits the browser's default blue and is genuinely unreadable in dark mode. */
+#surgxRoot a { color: var(--sgx-steel); text-decoration-color: color-mix(in srgb, var(--sgx-steel) 45%, transparent); }
+#surgxRoot .sgx-item.tc a { color: var(--sgx-bad); text-decoration-color: currentColor; }
+body.dark #surgxRoot .sgx-item.tc a, body.v3-dark #surgxRoot .sgx-item.tc a { color: #FFB4BE; }
+#surgxRoot .sgx-empty {
+  font: 500 12.5px/1.5 var(--sgx-sans); color: var(--sgx-faint);
+  border: 1px dashed var(--sgx-line); border-radius: var(--sgx-r-ctl); padding: 11px 12px; margin-bottom: 6px;
+}
+
+/* antibiotic block inside RESUSCITATE */
+#surgxRoot .sgx-abx { margin-top: 8px; border-top: 1px dashed var(--sgx-line); padding-top: 8px; }
+#surgxRoot .sgx-abx .k { font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .05em; text-transform: uppercase; color: var(--sgx-muted); margin: 8px 0 4px; }
+#surgxRoot .sgx-abx ul { margin: 0; padding-left: 17px; }
+#surgxRoot .sgx-abx li { font: 500 13px/1.5 var(--sgx-sans); margin: 3px 0; }
+#surgxRoot .sgx-abx li b { font-weight: 700; }
+#surgxRoot .sgx-abx .nt { color: var(--sgx-muted); }
+#surgxRoot .sgx-abx .ref { margin-top: 7px; font: 500 11px/1.45 var(--sgx-sans); color: var(--sgx-faint); }
+
+/* management ladder (mirrors the ws-surgery engine's six rungs) */
+#surgxRoot .sgx-ladder { display: flex; flex-direction: column; gap: 5px; margin-top: 6px; }
+#surgxRoot .sgx-ladder .r { display: flex; align-items: center; gap: 9px; font: 500 12.5px/1.35 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-ladder .r .d { width: 8px; height: 8px; border-radius: 50%; flex: 0 0 auto; background: var(--sgx-line); }
+#surgxRoot .sgx-ladder .r.on { font-weight: 700; color: var(--sgx-ink); }
+#surgxRoot .sgx-ladder .r.on .d { background: var(--sgx-steel); box-shadow: 0 0 0 3px rgba(31,78,95,.16); }
+
+/* ── banners ──────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-banner {
+  font: 600 12px/1.5 var(--sgx-sans); border-radius: var(--sgx-r-ctl);
+  padding: 10px 12px; margin-bottom: 12px; border: 1px solid transparent;
+}
+#surgxRoot .sgx-banner.info { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.22); }
+#surgxRoot .sgx-banner.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.28); }
+#surgxRoot .sgx-banner.bad { color: var(--sgx-bad); background: var(--sgx-bad-bg); border-color: rgba(180,35,50,.3); }
+#surgxRoot .sgx-banner.sim { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.22); letter-spacing: .04em; text-transform: uppercase; font-size: 10.5px; font-weight: 700; }
+
+/* The compressed meta strip: draft state, source currency and framing as small pills, so three
+   full-width banners never push RED FLAGS below the fold on a 390px phone. */
+#surgxRoot .sgx-meta { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 12px; }
+#surgxRoot .sgx-pill {
+  display: inline-flex; align-items: center; gap: 5px;
+  font: 600 11px/1.3 var(--sgx-sans); padding: 5px 9px; border-radius: 999px;
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-muted);
+}
+#surgxRoot .sgx-pill .material-symbols-rounded { font-size: 14px; }
+#surgxRoot .sgx-pill.warn { color: var(--sgx-warn); background: var(--sgx-warn-bg); border-color: rgba(146,98,10,.32); }
+#surgxRoot .sgx-pill.live { color: var(--sgx-steel); background: var(--sgx-steel-soft); border-color: rgba(31,78,95,.3); }
+
+#surgxRoot .sgx-disclaim {
+  font: 500 11.5px/1.6 var(--sgx-sans); color: var(--sgx-faint);
+  border-top: 1px solid var(--sgx-line); margin-top: 14px; padding: 12px 2px 4px;
+}
+
+/* ── states ───────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-state { padding: 46px 22px; text-align: center; }
+#surgxRoot .sgx-state .ic { color: var(--sgx-faint); }
+#surgxRoot .sgx-state .ic .material-symbols-rounded { font-size: 40px; }
+#surgxRoot .sgx-state .t { margin-top: 10px; font: 700 15px/1.3 var(--sgx-sans); color: var(--sgx-ink); }
+#surgxRoot .sgx-state .s { margin-top: 6px; font: 500 13px/1.55 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-state .sgx-btn { margin-top: 16px; display: inline-flex; }
+
+#surgxRoot .sgx-skel { padding: 14px; }
+#surgxRoot .sgx-skel i {
+  display: block; height: 62px; margin-bottom: 10px; border-radius: var(--sgx-r-ctl);
+  background: linear-gradient(90deg, var(--sgx-surface-2) 25%, var(--sgx-surface) 50%, var(--sgx-surface-2) 75%);
+  background-size: 220% 100%; animation: sgxShimmer 1.15s linear infinite;
+}
+@keyframes sgxShimmer { from { background-position: 120% 0; } to { background-position: -20% 0; } }
+
+/* ── buttons ──────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 7px;
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-ink);
+  border-radius: var(--sgx-r-ctl); padding: 11px 16px; cursor: pointer;
+  font: 650 13.5px/1 var(--sgx-sans);
+}
+#surgxRoot .sgx-btn.pri { background: var(--sgx-steel); border-color: var(--sgx-steel); color: #fff; }
+#surgxRoot .sgx-btn.danger { background: var(--sgx-bad); border-color: var(--sgx-bad); color: #fff; }
+#surgxRoot .sgx-btn.wide { width: 100%; }
+#surgxRoot .sgx-btn[disabled] { opacity: .45; cursor: default; }
+#surgxRoot .sgx-btnrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+#surgxRoot .sgx-btnrow .sgx-btn { flex: 1 1 auto; }
+
+/* ── notes ────────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-fld { margin-bottom: 13px; }
+#surgxRoot .sgx-fld label {
+  display: flex; align-items: center; gap: 7px; margin-bottom: 5px;
+  font: 650 12px/1.3 var(--sgx-sans); color: var(--sgx-ink);
+}
+#surgxRoot .sgx-fld label .req { color: var(--sgx-bad); font-weight: 800; }
+#surgxRoot .sgx-fld .help { margin: 3px 0 5px; font: 500 11px/1.5 var(--sgx-sans); color: var(--sgx-faint); }
+#surgxRoot .sgx-fld input, #surgxRoot .sgx-fld textarea {
+  width: 100%; box-sizing: border-box; border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
+  padding: 10px 11px; background: var(--sgx-surface); color: var(--sgx-ink);
+  font: 500 14px/1.5 var(--sgx-sans); resize: vertical; -webkit-appearance: none;
+}
+#surgxRoot .sgx-fld textarea { min-height: 44px; }
+#surgxRoot .sgx-fld input:focus, #surgxRoot .sgx-fld textarea:focus { outline: 2px solid var(--sgx-steel); outline-offset: -1px; border-color: var(--sgx-steel); }
+
+/* PROVENANCE. The whole point of the Notes design: a clinician can see at a glance which words
+   are theirs. Colour is doubled by a text label, never colour alone. */
+#surgxRoot .sgx-prov {
+  font: 700 9.5px/1 var(--sgx-sans); letter-spacing: .07em; text-transform: uppercase;
+  padding: 3px 6px; border-radius: 5px; margin-left: auto;
+}
+#surgxRoot .sgx-prov.clinician { color: var(--sgx-ok); background: var(--sgx-ok-bg); }
+#surgxRoot .sgx-prov.voice     { color: var(--sgx-steel); background: var(--sgx-steel-soft); }
+#surgxRoot .sgx-prov.ai        { color: var(--sgx-warn); background: var(--sgx-warn-bg); }
+#surgxRoot .sgx-prov.missing   { color: var(--sgx-bad); background: var(--sgx-bad-bg); }
+#surgxRoot .sgx-fld.is-missing input, #surgxRoot .sgx-fld.is-missing textarea { border-color: rgba(180,35,50,.45); background: var(--sgx-bad-bg); }
+#surgxRoot .sgx-fld.is-ai input, #surgxRoot .sgx-fld.is-ai textarea { border-color: rgba(146,98,10,.45); background: var(--sgx-warn-bg); }
+#surgxRoot .sgx-fld.is-clinician input, #surgxRoot .sgx-fld.is-clinician textarea { border-color: rgba(27,127,92,.35); }
+#surgxRoot .sgx-confirm {
+  margin-top: 6px; font: 650 11.5px/1 var(--sgx-sans); color: var(--sgx-steel);
+  background: none; border: 1px solid var(--sgx-line); border-radius: 999px; padding: 6px 11px; cursor: pointer;
+}
+#surgxRoot .sgx-confirm.done { color: var(--sgx-ok); border-color: rgba(27,127,92,.4); }
+
+#surgxRoot .sgx-notesec { margin-bottom: 6px; }
+#surgxRoot .sgx-notesec > .h {
+  font: 700 11px/1.2 var(--sgx-sans); letter-spacing: .1em; text-transform: uppercase;
+  color: var(--sgx-steel); margin: 18px 2px 10px; display: flex; align-items: center; gap: 8px;
+}
+#surgxRoot .sgx-notesec > .n { font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-faint); margin: -4px 2px 10px; }
+
+#surgxRoot .sgx-sticky {
+  position: sticky; bottom: 0; z-index: 5;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: var(--sgx-surface); border-top: 1px solid var(--sgx-line);
+  display: flex; align-items: center; gap: 10px;
+}
+#surgxRoot .sgx-sticky .stat { flex: 1 1 auto; min-width: 0; font: 600 11.5px/1.4 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-sticky .stat b { color: var(--sgx-bad); }
+#surgxRoot .sgx-sticky .stat.ok b { color: var(--sgx-ok); }
+
+#surgxRoot .sgx-pre {
+  font: 500 12.5px/1.6 var(--sgx-mono); white-space: pre-wrap; word-break: break-word;
+  background: var(--sgx-surface-2); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
+  padding: 12px; margin: 0;
+}
+
+/* ── procedure steps ──────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-step { display: flex; gap: 12px; padding: 12px 0; border-top: 1px solid var(--sgx-line); }
+#surgxRoot .sgx-step:first-child { border-top: none; }
+#surgxRoot .sgx-step .n {
+  flex: 0 0 auto; width: 25px; height: 25px; border-radius: 50%;
+  background: var(--sgx-steel-soft); color: var(--sgx-steel);
+  font: 700 12px/25px var(--sgx-mono); text-align: center;
+}
+#surgxRoot .sgx-step.crit .n { background: var(--sgx-bad-bg); color: var(--sgx-bad); }
+#surgxRoot .sgx-step .b { flex: 1 1 auto; min-width: 0; }
+#surgxRoot .sgx-step .t { font: 650 14px/1.35 var(--sgx-sans); }
+#surgxRoot .sgx-step .w { margin-top: 4px; font: 500 12.5px/1.55 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-step ul { margin: 7px 0 0; padding-left: 17px; }
+#surgxRoot .sgx-step li { font: 500 13px/1.55 var(--sgx-sans); margin: 3px 0; }
+#surgxRoot .sgx-step .risk { margin-top: 7px; font: 600 12px/1.5 var(--sgx-sans); color: var(--sgx-bad); }
+#surgxRoot .sgx-step .pit { margin-top: 6px; font: 500 12px/1.5 var(--sgx-sans); color: var(--sgx-warn); }
+
+#surgxRoot .sgx-tabs { display: flex; gap: 6px; overflow-x: auto; padding: 10px 14px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+#surgxRoot .sgx-tabs::-webkit-scrollbar { display: none; }
+#surgxRoot .sgx-tab {
+  flex: 0 0 auto; font: 650 12.5px/1 var(--sgx-sans); padding: 9px 13px; border-radius: 999px; cursor: pointer;
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-muted); font-family: var(--sgx-sans);
+}
+#surgxRoot .sgx-tab.on { background: var(--sgx-ink); border-color: var(--sgx-ink); color: var(--sgx-surface); }
+
+/* ── media ────────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-media { margin: 10px 0; }
+#surgxRoot .sgx-media img, #surgxRoot .sgx-media svg { width: 100%; height: auto; display: block; border-radius: var(--sgx-r-ctl); }
+#surgxRoot .sgx-media .cap { margin-top: 6px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-media .attr { margin-top: 3px; font: 500 10.5px/1.4 var(--sgx-sans); color: var(--sgx-faint); }
+#surgxRoot .sgx-media.pending {
+  border: 1px dashed var(--sgx-line); border-radius: var(--sgx-r-ctl); padding: 14px;
+  font: 500 12px/1.55 var(--sgx-sans); color: var(--sgx-faint);
+}
+
+/* ── cases ────────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-stem {
+  background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-left: 4px solid var(--sgx-steel);
+  border-radius: 0 var(--sgx-r) var(--sgx-r) 0; padding: 14px 15px; margin-bottom: 12px;
+  font: 500 14px/1.6 var(--sgx-sans);
+}
+#surgxRoot .sgx-vitals { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 10px; }
+#surgxRoot .sgx-vital {
+  font: 600 11.5px/1 var(--sgx-mono); padding: 6px 9px; border-radius: 7px;
+  background: var(--sgx-surface-2); color: var(--sgx-ink); border: 1px solid var(--sgx-line);
+}
+#surgxRoot .sgx-opt {
+  display: block; width: 100%; box-sizing: border-box; text-align: left; cursor: pointer;
+  padding: 12px 14px; margin-bottom: 8px; border-radius: var(--sgx-r-ctl);
+  border: 1px solid var(--sgx-line); background: var(--sgx-surface); color: var(--sgx-ink);
+  font: 500 13.5px/1.5 var(--sgx-sans);
+}
+#surgxRoot .sgx-opt:active { border-color: var(--sgx-steel); }
+#surgxRoot .sgx-opt.picked { border-color: var(--sgx-steel); background: var(--sgx-steel-soft); }
+#surgxRoot .sgx-opt.right { border-color: rgba(27,127,92,.55); background: var(--sgx-ok-bg); }
+#surgxRoot .sgx-opt.wrong { border-color: rgba(180,35,50,.5); background: var(--sgx-bad-bg); }
+#surgxRoot .sgx-opt[disabled] { cursor: default; }
+#surgxRoot .sgx-why {
+  margin-top: 4px; padding: 12px 14px; border-radius: var(--sgx-r-ctl);
+  background: var(--sgx-surface-2); border: 1px solid var(--sgx-line);
+  font: 500 13px/1.6 var(--sgx-sans);
+}
+#surgxRoot .sgx-why .h { font: 700 10.5px/1.2 var(--sgx-sans); letter-spacing: .09em; text-transform: uppercase; color: var(--sgx-steel); margin-bottom: 6px; }
+#surgxRoot .sgx-why .miss { margin-top: 9px; color: var(--sgx-bad); font-weight: 600; }
+#surgxRoot .sgx-why .alt { margin-top: 9px; color: var(--sgx-muted); }
+#surgxRoot .sgx-progress { display: flex; gap: 4px; margin-bottom: 12px; }
+#surgxRoot .sgx-progress i { flex: 1 1 auto; height: 3px; border-radius: 2px; background: var(--sgx-line); }
+#surgxRoot .sgx-progress i.on { background: var(--sgx-steel); }
+
+/* ── evidence ─────────────────────────────────────────────────────────────── */
+
+#surgxRoot .sgx-ev { padding: 13px 15px; margin-bottom: 9px; background: var(--sgx-surface); border: 1px solid var(--sgx-line); border-radius: var(--sgx-r); }
+#surgxRoot .sgx-ev .t { font: 650 14px/1.35 var(--sgx-sans); }
+#surgxRoot .sgx-ev .s { margin-top: 6px; font: 500 13px/1.6 var(--sgx-sans); color: var(--sgx-muted); }
+#surgxRoot .sgx-ev .src { margin-top: 9px; font: 500 11.5px/1.5 var(--sgx-sans); color: var(--sgx-faint); }
+#surgxRoot .sgx-ev .src a { color: var(--sgx-steel); }
+#surgxRoot .sgx-ev .own { margin-top: 8px; font: 600 10px/1.3 var(--sgx-sans); letter-spacing: .06em; text-transform: uppercase; color: var(--sgx-faint); }
+
+#surgxRoot .sgx-search {
+  width: 100%; box-sizing: border-box; border: 1px solid var(--sgx-line); border-radius: var(--sgx-r-ctl);
+  padding: 11px 13px; background: var(--sgx-surface); color: var(--sgx-ink);
+  font: 500 14px/1.4 var(--sgx-sans); -webkit-appearance: none; margin-bottom: 12px;
+}
+#surgxRoot .sgx-search:focus { outline: 2px solid var(--sgx-steel); outline-offset: -1px; }
+
+/* ── dark mode: the tokens already flip; only the hero needs a hand ───────── */
+
+body.dark #surgxRoot, body.v3-dark #surgxRoot {
+  --sgx-steel: #6FB4CC;
+  --sgx-steel-soft: rgba(111,180,204,.14);
+}
+body.dark #surgxRoot .sgx-hero, body.v3-dark #surgxRoot .sgx-hero {
+  background: linear-gradient(160deg, #12333E 0%, #0A1E26 100%);
+}
+body.dark #surgxRoot .sgx-tab.on, body.v3-dark #surgxRoot .sgx-tab.on {
+  background: var(--sgx-steel); border-color: var(--sgx-steel); color: #06222B;
+}
+
+/* ── responsive + accessibility ───────────────────────────────────────────── */
+
+@media (min-width: 720px) {
+  #surgxRoot .sgx-hero { padding: 30px 24px 26px; }
+  #surgxRoot .sgx-hero-mark { font-size: 36px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  #surgxRoot .sgx-skel i { animation: none; }
+  #surgxRoot .sgx-sec, #surgxRoot .sgx-sec:active { transition: none; transform: none; }
+}
+@media (prefers-contrast: more) {
+  #surgxRoot .sgx-item, #surgxRoot .sgx-card, #surgxRoot .sgx-row { border-width: 2px; }
+}
+/* Every tappable control clears the 44px minimum. */
+#surgxRoot button, #surgxRoot .sgx-chip, #surgxRoot .sgx-tab { min-height: 38px; }
+#surgxRoot .sgx-sec, #surgxRoot .sgx-row, #surgxRoot .sgx-opt, #surgxRoot .sgx-btn { min-height: 46px; }
+#surgxRoot :focus-visible { outline: 2px solid var(--sgx-steel); outline-offset: 2px; }

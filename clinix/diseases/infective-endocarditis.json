@@ -1,0 +1,874 @@
+{
+  "_comment": "CliniX SHORT case, matching anemia.json's shape. IE is a syndrome recognised by combining fever, a new or changing murmur, and peripheral stigmata; the local skills carry the history, the stigmata (a general_exam kind, since the core pack has no nails/peripheral-signs skill), the workup and the Duke criteria.",
+  "id": "infective-endocarditis",
+  "name": "Infective endocarditis",
+  "fullName": "Infective endocarditis (a short case)",
+  "system": "cardiovascular",
+  "kbRef": "infective_endocarditis",
+  "oneLine": "Fever, a changing murmur, and the peripheral signs that tie them together",
+  "estMinutes": 45,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "An infection growing on a valve, and why it needs a name of its own",
+      "skills": [
+        "skill.ie.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Fever, a damaged valve, and the route the organism took to reach it",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.ie.history"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The peripheral stigmata that make the diagnosis before you have listened to the heart",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.clubbing",
+        "skill.exam.ie.stigmata"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look for a low-grade, persistent fever pattern and pallor of chronic disease. Weight loss and malaise over weeks fit subacute endocarditis; a toxic, acutely unwell appearance fits a more acute, aggressive organism."
+        },
+        "skill.gen.clubbing": {
+          "expect": "Clubbing can develop in endocarditis that has run a subacute course over weeks to months, from chronic sepsis and hypoxaemia; it is a late sign and its absence does not argue against the diagnosis in an early presentation."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "The murmur that is new, or that has changed",
+      "skills": [
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs"
+      ],
+      "emphasis": {
+        "skill.exam.cvs.heartsounds": {
+          "expect": "Listen carefully for a new or muffled heart sound suggesting an abscess disrupting the conduction system, and compare today's findings explicitly against any prior documented examination."
+        },
+        "skill.exam.cvs.murmurs": {
+          "expect": "The single most useful cardiac sign is a NEW murmur, or a documented CHANGE in the character or intensity of an existing one, since vegetations can alter flow from one review to the next. A changing murmur is itself on the short list of murmurs whose character shifts moment to moment. Never assume a known murmur is unchanged without listening carefully and comparing."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the endocarditis picture together",
+      "blurb": "Fever plus a changing murmur plus the stigmata, as one syndrome",
+      "skills": [
+        "skill.ie.signs"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "What else looks like this",
+      "blurb": "Other causes of fever with a murmur, and other causes of the stigmata alone",
+      "skills": [
+        "skill.ie.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Blood cultures before antibiotics, and echo to see the vegetation",
+      "skills": [
+        "skill.ix.ie.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "The modified Duke criteria, not just a strong clinical suspicion",
+      "skills": [
+        "skill.dx.ie"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Managing infective endocarditis",
+      "blurb": "Antibiotics, active complication-watching, and knowing when surgery cannot wait",
+      "skills": [
+        "skill.tx.ie"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.ie.general",
+        "title": "Examine for the peripheral signs of infective endocarditis",
+        "seconds": 300,
+        "task": "This patient with a known heart murmur has had fever for ten days. Examine the hands, nails and eyes for peripheral stigmata and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.appearance",
+          "skill.gen.clubbing",
+          "skill.exam.ie.stigmata",
+          "skill.exam.cvs.murmurs"
+        ],
+        "examinerQuestions": [
+          "Name three peripheral stigmata of infective endocarditis and where you would look for each.",
+          "What is the difference between an Osler's node and a Janeway lesion?",
+          "Why is a CHANGING murmur, not just a murmur, so significant here?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.ie.farida",
+      "title": "A woman with a known murmur, ten days of fever",
+      "opening": "Farida Khatoon, 31, has a known heart murmur from childhood and has had fever for ten days. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Farida Khatoon",
+        "age": 31,
+        "sex": "female",
+        "occupation": "Tailor",
+        "residence": "Urban"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, I have had fever on and off for ten days now. I also feel very tired and I have lost my appetite.",
+          "key": true
+        },
+        "fever_pattern": {
+          "cues": [
+            "fever pattern",
+            "how high",
+            "continuous",
+            "intermittent",
+            "chills",
+            "rigors",
+            "sweats"
+          ],
+          "reply": "It comes and goes through the day, sometimes with chills. I have been sweating a lot, especially at night.",
+          "key": true
+        },
+        "known_murmur": {
+          "cues": [
+            "murmur",
+            "heart problem",
+            "told about your heart",
+            "valve",
+            "childhood"
+          ],
+          "reply": "Yes, a doctor found a heart murmur when I was a child. I was told it was from a fever I had when I was young. I never take any regular medicine for it.",
+          "key": true
+        },
+        "dental": {
+          "cues": [
+            "dental",
+            "tooth",
+            "teeth",
+            "extraction",
+            "dentist"
+          ],
+          "reply": "I had a tooth removed about three weeks ago at a local dental clinic.",
+          "key": true
+        },
+        "iv_drug_use": {
+          "cues": [
+            "inject",
+            "drugs",
+            "needle",
+            "iv drug"
+          ],
+          "reply": "No, I have never used injectable drugs."
+        },
+        "recent_procedure": {
+          "cues": [
+            "procedure",
+            "surgery",
+            "catheter",
+            "piercing",
+            "tattoo"
+          ],
+          "reply": "No other procedures recently, just the tooth extraction."
+        },
+        "joint_pain": {
+          "cues": [
+            "joint pain",
+            "muscle pain",
+            "aches"
+          ],
+          "reply": "Yes, my joints and muscles have been aching generally, all over."
+        },
+        "weight_loss": {
+          "cues": [
+            "weight",
+            "appetite",
+            "losing weight"
+          ],
+          "reply": "I think I have lost some weight, my clothes feel looser."
+        },
+        "skin_rash": {
+          "cues": [
+            "rash",
+            "spots",
+            "skin changes",
+            "red marks"
+          ],
+          "reply": "I noticed some small tender red spots on my fingertips a few days ago."
+        },
+        "breathlessness": {
+          "cues": [
+            "breathless",
+            "short of breath"
+          ],
+          "reply": "A little more breathless than usual on exertion, but nothing severe."
+        },
+        "vision": {
+          "cues": [
+            "vision",
+            "eyes",
+            "seeing"
+          ],
+          "reply": "No change in my vision."
+        },
+        "weakness": {
+          "cues": [
+            "weakness",
+            "numbness",
+            "one side"
+          ],
+          "reply": "No weakness or numbness anywhere."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Pale, thin, mildly unwell-looking but conscious and coherent. Temperature 38.6 C.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104 regular. Blood pressure 108/68. Respiratory rate 20. SpO2 97 percent.",
+          "abnormal": true
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.exam.ie.stigmata": {
+          "finding": "Tender, pea-sized erythematous nodules on the pulps of two fingers (Osler's nodes). Splinter haemorrhages present under three fingernails. No Janeway lesions seen. Fundoscopy not performed at the bedside; documented as pending.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.heartsounds": {
+          "finding": "S1 and S2 normal, no additional sounds.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.murmurs": {
+          "finding": "A pansystolic murmur at the apex, grade 3/6, radiating to the axilla. Old records from two years ago describe a grade 2/6 murmur at the same site: this represents an INCREASE in intensity.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "bloodculture",
+        "echo",
+        "fbc"
+      ],
+      "investigations": {
+        "bloodculture": {
+          "label": "Blood cultures, three sets from separate venepuncture sites",
+          "indicated": true,
+          "result": "Two of three sets positive for viridans streptococci, drawn more than 12 hours apart.",
+          "note": "Sent BEFORE any antibiotic was given. Two positive sets with a typical IE organism, drawn appropriately apart, meets a major Duke blood-culture criterion."
+        },
+        "echo": {
+          "label": "Transthoracic echocardiogram",
+          "indicated": true,
+          "result": "A mobile, oscillating mass on the mitral valve in the path of the regurgitant jet, consistent with a vegetation. Underlying rheumatic mitral valve changes. Moderate mitral regurgitation.",
+          "note": "Meets the major Duke echocardiographic criterion, and explains both the changing murmur and the underlying rheumatic valve she already had."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 10.2 g/dL, white cell count 13.8 x10^9/L with neutrophilia, ESR 68 mm/hr.",
+          "note": "A normocytic anaemia of chronic disease, a neutrophilia fitting active infection, and a raised ESR, none diagnostic alone but all consistent with the picture."
+        },
+        "urine": {
+          "label": "Urinalysis",
+          "indicated": true,
+          "result": "Microscopic haematuria, no red cell casts.",
+          "note": "Fits an immunologic or embolic renal phenomenon associated with endocarditis; useful supporting evidence, not a Duke criterion itself here."
+        },
+        "rf": {
+          "label": "Rheumatoid factor",
+          "indicated": true,
+          "result": "Positive at low titre.",
+          "note": "A positive rheumatoid factor is one of the recognised immunologic phenomena in the Duke minor criteria, alongside glomerulonephritis, Osler's nodes and Roth spots."
+        },
+        "crp": {
+          "label": "CRP",
+          "indicated": false,
+          "result": "Raised.",
+          "note": "Supports an inflammatory process generally but is not part of the Duke criteria and adds little once cultures and echo are already positive."
+        },
+        "ct_chest": {
+          "label": "CT chest",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated here: there is no clinical suggestion of septic pulmonary emboli, which would be the specific reason to obtain it in right-sided endocarditis."
+        }
+      },
+      "differentialModel": {
+        "answer": "Infective endocarditis on a background of chronic rheumatic mitral valve disease. Consider acute rheumatic fever recurrence, other causes of prolonged fever such as tuberculosis or enteric fever, and other causes of the peripheral lesions such as vasculitis.",
+        "accept": [
+          "infective endocarditis",
+          "rheumatic fever",
+          "tuberculosis",
+          "enteric fever",
+          "vasculitis"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Definite infective endocarditis by the modified Duke criteria (two major criteria: positive blood cultures with a typical organism, and positive echocardiographic findings), affecting a mitral valve already damaged by chronic rheumatic heart disease, portal of entry likely a recent dental extraction.",
+        "accept": [
+          "infective endocarditis",
+          "endocarditis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Prolonged organism-directed intravenous antibiotic therapy guided by culture sensitivities, started promptly once cultures are drawn, with close monitoring for embolic and cardiac complications, and cardiothoracic surgical assessment if heart failure, uncontrolled infection, or a large mobile vegetation develops. Identify and address the portal of entry, and review dental hygiene and future antibiotic prophylaxis needs.",
+        "accept": [
+          "antibiotic",
+          "culture",
+          "surgery",
+          "surgical",
+          "portal of entry",
+          "dental"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The murmur alone was not the finding, the CHANGE in the murmur was. Comparing today's examination against a documented prior one is what actually made this finding meaningful.",
+        "Blood cultures were drawn BEFORE any antibiotic. A single dose given first can sterilise the cultures and cost the one test most likely to identify the organism and guide definitive therapy.",
+        "Her dental extraction three weeks ago is the probable portal of entry, on a valve already damaged by rheumatic disease, which is exactly the combination, a pre-damaged valve plus a bacteraemic event, that produces endocarditis.",
+        "Two major Duke criteria (blood culture and echocardiographic) were enough on their own to call this DEFINITE infective endocarditis, without needing to lean on any of the minor criteria at all.",
+        "Osler's nodes and splinter haemorrhages are not decorative details, they are immunologic and embolic phenomena that belong on the same list you were taught for rheumatic fever and COPD: findings that, present or absent, actively change the diagnosis rather than just describing the patient."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.ie.basics",
+      "skill.hx.ie.history",
+      "skill.exam.ie.stigmata",
+      "skill.ie.differential",
+      "skill.ix.ie.workup",
+      "skill.dx.ie"
+    ]
+  },
+  "skills": {
+    "skill.ie.basics": {
+      "id": "skill.ie.basics",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "What infective endocarditis is",
+      "oneLine": "An infection colonising the endocardium, almost always on a valve, and almost always on one already abnormal",
+      "why": "Endocarditis is easy to miss because it presents as a fever, and fever has a long differential. Understanding why it happens, a bloodstream organism finding an abnormal surface to stick to, is what makes you actively look for both the fever's cardiac source and the portal that let the organism into the blood in the first place.",
+      "body": "Infective endocarditis is an infection of the endocardial surface of the heart, most often a native or prosthetic valve, caused by microorganisms, usually bacteria, that enter the bloodstream and adhere to a surface where normal blood flow has already been disturbed.",
+      "keyPoints": [
+        "A pre-existing abnormal valve, most often rheumatic, congenital, degenerative, or prosthetic, is the single biggest predisposing factor, since turbulent flow damages the endothelium and creates a surface for organisms and platelet-fibrin deposition.",
+        "The organism needs a route into the bloodstream: dental procedures and poor dental hygiene, intravenous drug use, indwelling catheters and lines, and other invasive procedures are the classic portals of entry.",
+        "The clinical course is broadly acute (rapidly progressive, more often with a more virulent organism such as Staphylococcus aureus, on a previously normal valve) or subacute (indolent, over weeks, more often with a less virulent organism such as viridans streptococci, on an already-damaged valve).",
+        "The clinical picture follows from three separate processes happening at once: local valve destruction (a new or changing murmur, heart failure), immunologic phenomena from circulating immune complexes (glomerulonephritis, Osler's nodes, Roth spots), and embolic phenomena from fragments of the vegetation breaking off (splinter haemorrhages, Janeway lesions, stroke, splenic or renal infarcts, septic pulmonary emboli in right-sided disease).",
+        "Right-sided endocarditis, classically associated with intravenous drug use, presents differently, often with septic pulmonary emboli and respiratory symptoms rather than the systemic embolic and immunologic picture of left-sided disease."
+      ],
+      "pitfalls": [
+        "Treating endocarditis as a diagnosis you reach only after excluding everything else, rather than actively considering it in any fever with a known or new murmur.",
+        "Forgetting to ask about the portal of entry, dental work, IV drug use, or a recent procedure.",
+        "Assuming endocarditis only affects a previously normal valve, when a previously damaged one is the more common substrate."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single biggest predisposing factor for infective endocarditis?",
+          "a": "A pre-existing abnormal valve (rheumatic, congenital, degenerative or prosthetic).",
+          "accept": [
+            "abnormal valve",
+            "damaged valve",
+            "pre-existing"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three classic portals of entry for the organism.",
+          "a": "Dental procedures or poor dental hygiene, intravenous drug use, and indwelling catheters or lines, or another invasive procedure.",
+          "accept": [
+            "dental",
+            "iv drug",
+            "catheter",
+            "procedure"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Explain how three separate mechanisms all contribute to the clinical picture of endocarditis.",
+          "a": "Local valve destruction produces a new or changing murmur and can cause heart failure; immunologic phenomena from circulating immune complexes produce findings such as glomerulonephritis, Osler's nodes and Roth spots; and embolic phenomena from fragments of the vegetation produce findings such as splinter haemorrhages, Janeway lesions, and stroke or organ infarcts.",
+          "accept": [
+            "local destruction",
+            "immunologic",
+            "embolic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ie.signs": {
+      "id": "skill.ie.signs",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The infective endocarditis picture",
+      "oneLine": "Fever plus a changing murmur plus embolic or immunologic stigmata, read as one syndrome",
+      "why": "No single finding in endocarditis is diagnostic on its own; fever is common to almost everything, a murmur alone can be entirely innocent, and any one stigma has other causes. It is the combination that raises suspicion enough to actively pursue the diagnosis.",
+      "body": "Combine three streams of evidence deliberately: a fever pattern that fits, cardiac evidence of a valve being actively affected, and peripheral evidence of embolic or immunologic phenomena.",
+      "keyPoints": [
+        "Fever, often prolonged, sometimes with drenching sweats, in a patient with a known or newly discovered structural heart abnormality.",
+        "A NEW murmur, or a documented CHANGE in an existing one, is the single most useful cardiac clue, since it reflects the vegetation actively altering flow across the valve.",
+        "Embolic phenomena support the diagnosis from a distance: splinter haemorrhages, Janeway lesions, splenomegaly, and, more seriously, a stroke or a splenic, renal or pulmonary infarct.",
+        "Immunologic phenomena support the diagnosis from another mechanism entirely: Osler's nodes, Roth spots, conjunctival petechiae, and glomerulonephritis with microscopic haematuria.",
+        "A portal of entry, when found, strengthens the whole picture but its absence does not weaken it; many confirmed cases never identify one."
+      ],
+      "pitfalls": [
+        "Requiring every classic sign to be present before considering the diagnosis, when most patients show only some of them.",
+        "Missing a changing murmur because no prior examination was available or sought for comparison.",
+        "Attributing a positive urinalysis or a mild anaemia to something else without considering it as supporting evidence in the right clinical context."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What is the single most useful cardiac clue in suspected infective endocarditis?",
+          "a": "A new murmur, or a documented change in an existing murmur.",
+          "accept": [
+            "new murmur",
+            "changing murmur",
+            "change in murmur"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does the absence of a portal of entry not argue against the diagnosis?",
+          "a": "Because a source is not identified in a substantial proportion of confirmed cases; its presence supports the diagnosis when found, but its absence carries little discriminating weight.",
+          "accept": [
+            "not identified",
+            "absence",
+            "no weight"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis signs"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: clinical manifestations"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ie.differential": {
+      "id": "skill.ie.differential",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Differential diagnosis",
+      "oneLine": "Other causes of prolonged fever with a murmur, and other causes of the stigmata alone",
+      "why": "Fever with a murmur is not automatically endocarditis, and stigmata like petechiae or splinter haemorrhages each have non-infective mimics. Reasoning properly means actively naming these before treating a working diagnosis as confirmed.",
+      "body": "Two separate differentials matter: other causes of prolonged fever in a patient who happens to have a murmur, and other causes of the individual peripheral findings.",
+      "keyPoints": [
+        "Other causes of prolonged fever that must be considered alongside endocarditis: tuberculosis, enteric fever, other occult sepsis, lymphoma and other malignancy, and connective tissue disease.",
+        "A recurrence of acute rheumatic fever can itself cause fever with a changing murmur in a patient with known rheumatic heart disease, and needs its own set of criteria (Jones criteria) to distinguish from endocarditis; the two can occasionally coexist.",
+        "Atrial myxoma can mimic endocarditis closely: it can cause fever, weight loss, a variable murmur, and even embolic phenomena, without any infection at all.",
+        "Non-infective (marantic) endocarditis, sterile vegetations associated with malignancy or a hypercoagulable state, can produce a similar valve picture with negative blood cultures.",
+        "Splinter haemorrhages have common non-infective causes, most often minor trauma, and are not specific on their own.",
+        "Vasculitis is a differential for the immunologic-type skin and renal findings (petechiae, glomerulonephritis) in the absence of a convincing cardiac source."
+      ],
+      "pitfalls": [
+        "Diagnosing endocarditis from stigmata alone without pursuing blood cultures and echocardiography.",
+        "Missing an atrial myxoma, which can mimic the syndrome closely but needs an entirely different treatment.",
+        "Assuming negative blood cultures exclude endocarditis outright, rather than considering culture-negative causes or prior antibiotic exposure."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name two other causes of prolonged fever that must be considered alongside endocarditis.",
+          "a": "Tuberculosis, enteric fever, lymphoma or another malignancy, or connective tissue disease.",
+          "accept": [
+            "tuberculosis",
+            "enteric fever",
+            "lymphoma",
+            "malignancy",
+            "connective tissue"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What condition can mimic endocarditis closely, including fever, a variable murmur and embolic phenomena, without any infection?",
+          "a": "Atrial myxoma.",
+          "accept": [
+            "myxoma"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient has the clinical picture of endocarditis but three sets of blood cultures are negative. What must you consider before abandoning the diagnosis?",
+          "a": "Prior antibiotic exposure suppressing culture positivity, a fastidious or difficult-to-culture organism (the HACEK group, Coxiella, Bartonella), and non-infective causes such as marantic endocarditis or atrial myxoma; culture-negative does not automatically mean endocarditis-negative.",
+          "accept": [
+            "prior antibiotic",
+            "fastidious",
+            "hacek",
+            "non-infective",
+            "marantic"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "twolevel",
+          "text": "Separates the differential of the fever from the differential of the individual stigmata"
+        },
+        {
+          "id": "myxoma",
+          "text": "Names atrial myxoma as a genuine mimic"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: endocarditis differential"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: differential diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.ie.workup": {
+      "id": "skill.ix.ie.workup",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "Working up suspected infective endocarditis",
+      "oneLine": "Blood cultures before a single dose of antibiotic, and echo to see the vegetation",
+      "why": "The two tests that actually make this diagnosis, blood cultures and echocardiography, are also the two most commonly compromised: cultures by antibiotics given before they were drawn, and echo by treating a normal transthoracic study as the final word when transoesophageal imaging is genuinely needed.",
+      "body": "The workup has one non-negotiable sequencing rule (cultures before antibiotics) and one escalation rule (transoesophageal echo when suspicion remains high despite a negative transthoracic study).",
+      "keyPoints": [
+        "Blood cultures: at least three sets, from separate venepuncture sites, drawn BEFORE any antibiotic is given wherever the patient's condition allows it. This sequencing is the single most important step in the entire workup, since even one dose can sterilise cultures for days.",
+        "Transthoracic echocardiography is the first-line imaging test in most patients, looking for a vegetation, an abscess, or new valve dysfunction.",
+        "Transoesophageal echocardiography is used when transthoracic images are inadequate, when a prosthetic valve is involved, or when clinical suspicion remains high (at least possible IE by clinical criteria) despite a negative or non-diagnostic transthoracic study, and it gives better views of the mitral valve and any paravalvular extension.",
+        "Full blood count, ESR and CRP support the picture (anaemia of chronic disease, a raised inflammatory response) but are not part of the diagnostic criteria themselves.",
+        "Urinalysis for microscopic haematuria, and rheumatoid factor, screen for immunologic phenomena that count as Duke minor criteria.",
+        "Further imaging (CT chest, or brain imaging) is directed by specific clinical concern, for example septic pulmonary emboli in right-sided disease, or a focal neurological deficit, rather than ordered routinely in every case."
+      ],
+      "pitfalls": [
+        "Starting empirical antibiotics before blood cultures are drawn, except where the patient is critically unstable and cannot safely wait.",
+        "Treating a single negative transthoracic echo as ruling out endocarditis when clinical suspicion remains high.",
+        "Sending only one blood culture set, which cannot distinguish a true bacteraemia from a contaminant.",
+        "Ordering a broad panel of inflammatory markers as if they were diagnostic criteria, when they are only supportive."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must happen BEFORE the first dose of antibiotic is given, wherever possible?",
+          "a": "At least three sets of blood cultures, from separate venepuncture sites, must be drawn.",
+          "accept": [
+            "blood culture",
+            "three sets"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "When is transoesophageal echocardiography indicated over transthoracic alone?",
+          "a": "When transthoracic images are inadequate, when a prosthetic valve is involved, or when clinical suspicion remains high despite a negative or non-diagnostic transthoracic study.",
+          "accept": [
+            "inadequate",
+            "prosthetic",
+            "high suspicion",
+            "negative"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is drawing cultures before antibiotics the single most important sequencing decision in this workup?",
+          "a": "Even one dose of antibiotic can sterilise subsequent blood cultures for days, and a positive culture with organism identification and sensitivities is central both to confirming the Duke criteria and to selecting definitive, organism-directed therapy; losing it can never fully be recovered later in the same illness.",
+          "accept": [
+            "sterilise",
+            "identification",
+            "sensitivities"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: endocarditis workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.ie": {
+      "id": "skill.dx.ie",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Diagnosing infective endocarditis: the modified Duke criteria",
+      "oneLine": "Two major, or one major plus three minor, or five minor: a structured answer, not a gut feeling",
+      "why": "Endocarditis is one of the few diagnoses in this pathway with an explicit, structured, named criteria system, and using it properly is what separates a defensible diagnosis from a hunch, particularly because the decision to commit a patient to weeks of intravenous antibiotics, and possibly surgery, deserves more than impression alone.",
+      "body": "Apply the modified Duke criteria: definite, possible, or rejected, based on combinations of pathological and clinical major and minor criteria.",
+      "keyPoints": [
+        "Definite infective endocarditis by pathological criteria: microorganisms demonstrated in a vegetation, embolised material, or an intracardiac abscess, either by culture or histology.",
+        "Definite infective endocarditis by clinical criteria: 2 major criteria, or 1 major plus 3 minor criteria, or 5 minor criteria.",
+        "Major criterion 1, positive blood cultures: typical organisms (viridans streptococci, Streptococcus gallolyticus, Staphylococcus aureus, the HACEK group, or community-acquired enterococci without a primary focus) from two separate cultures; or persistently positive cultures defined by strict timing rules; or a single positive culture for Coxiella burnetii, or a phase I IgG titre above 1:800.",
+        "Major criterion 2, evidence of endocardial involvement: a positive echocardiogram (an oscillating intracardiac mass, an abscess, or new partial dehiscence of a prosthetic valve) or new valvular regurgitation; a worsening or changing pre-existing murmur alone is explicitly NOT sufficient to count as this major criterion.",
+        "Minor criteria: a predisposing heart condition or intravenous drug use; fever above 38 degrees Celsius; vascular phenomena (major arterial emboli, septic pulmonary infarcts, a mycotic aneurysm, intracranial haemorrhage, conjunctival haemorrhages, Janeway lesions); immunologic phenomena (glomerulonephritis, Osler's nodes, Roth spots, a positive rheumatoid factor); and microbiological evidence not meeting a major criterion.",
+        "Possible infective endocarditis: 1 major plus 1 minor criterion, or 3 minor criteria; this category exists precisely for patients who do not meet the definite threshold but for whom the diagnosis should still be actively pursued and often still treated.",
+        "Rejected: a firm alternative diagnosis explains the picture, resolution of the syndrome with 4 days or less of antibiotics, no evidence of IE at surgery or autopsy after 4 days or less of antibiotics, or failure to meet the criteria for possible IE."
+      ],
+      "pitfalls": [
+        "Counting a changing murmur alone as the echocardiographic major criterion, when the criteria explicitly require a positive imaging finding or NEW regurgitation, not simply a change in an existing murmur's character.",
+        "Diagnosing 'endocarditis' purely from clinical suspicion without structuring the evidence against the major and minor criteria.",
+        "Treating 'possible' infective endocarditis as if it were excluded, when it is a genuine category that usually still needs treatment and further evaluation.",
+        "Forgetting that a predisposing heart condition itself only counts as a MINOR criterion, not a major one."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many major criteria, or what combination of major and minor criteria, are needed for DEFINITE infective endocarditis by clinical criteria?",
+          "a": "2 major criteria, or 1 major plus 3 minor criteria, or 5 minor criteria.",
+          "accept": [
+            "2 major",
+            "1 major",
+            "3 minor",
+            "5 minor"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name the two major Duke criteria.",
+          "a": "Positive blood cultures with a typical organism or persistently positive cultures, and evidence of endocardial involvement (a positive echocardiogram or new valvular regurgitation).",
+          "accept": [
+            "blood culture",
+            "echocardiogram",
+            "endocardial involvement"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Is a documented CHANGE in the character of a pre-existing murmur, on its own, sufficient to meet the echocardiographic/endocardial-involvement major criterion?",
+          "a": "No. The criterion requires a positive echocardiographic finding or genuinely NEW valvular regurgitation; a worsening or changing pre-existing murmur alone is explicitly stated as not sufficient.",
+          "accept": [
+            "no",
+            "not sufficient",
+            "not enough"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient has one major criterion (positive echocardiogram) and two minor criteria. What Duke category does this fall into, and what does that mean practically?",
+          "a": "This meets 'possible' infective endocarditis (1 major plus 1 minor already qualifies, and this patient exceeds that). It does not meet 'definite', but 'possible' is a genuine, actionable category: the diagnosis should still be actively pursued, and treatment is often still warranted while further evidence, such as repeat blood cultures, is gathered.",
+          "accept": [
+            "possible",
+            "still treat",
+            "further evidence"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "structure",
+          "text": "Structures the diagnosis explicitly against major and minor Duke criteria rather than stating a gut impression",
+          "critical": true
+        },
+        {
+          "id": "murmurcaveat",
+          "text": "Correctly states that a changing murmur alone does not meet the echocardiographic major criterion"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: modified Duke criteria"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: diagnosis, modified Duke criteria"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.ie": {
+      "id": "skill.tx.ie",
+      "kind": "treatment",
+      "system": "cardiovascular",
+      "title": "Managing infective endocarditis",
+      "oneLine": "Prolonged organism-directed antibiotics, watching for embolic and valve-destruction complications, and knowing when surgery cannot wait",
+      "why": "A student who can describe the stigmata but not the management has not actually learned the disease: endocarditis kills through delayed or inadequate treatment of the infection and its mechanical consequences, not through missing the diagnosis alone. The surgical-versus-medical decision, in particular, is time-critical and easy to under-teach if the module stops at diagnosis.",
+      "body": "Two threats run in parallel throughout treatment: the infection itself, and the mechanical damage it is doing to the valve and beyond (heart failure, an intracardiac abscess, and embolic events to the brain, spleen, kidney, or limbs). Both must be actively monitored for, not just the blood cultures.",
+      "keyPoints": [
+        "Blood cultures (three sets from different sites, before antibiotics) are drawn first, and empirical antibiotic therapy is started promptly once cultures are taken, then switched to organism-directed, prolonged (typically several weeks) intravenous therapy once sensitivities return; the specific agent, dose, and duration must follow current guideline recommendations for the identified organism and valve type (native versus prosthetic).",
+        "Monitor actively for embolic phenomena (stroke, splenic or renal infarction, limb ischaemia) and for progressive cardiac damage (new or worsening murmur, heart failure, conduction abnormality from an aortic root abscess extending to the conduction system) throughout treatment, not only at presentation - both can develop despite apparently adequate antibiotic therapy.",
+        "Early cardiothoracic surgical assessment, not just antibiotics, is indicated for: heart failure from valve destruction, uncontrolled infection (persistent bacteraemia or fever despite appropriate antibiotics, a paravalvular abscess), a large mobile vegetation with high embolic risk (particularly after a first embolic event), or fungal or other difficult-to-treat organisms. Recognising these indications promptly is often more important to outcome than the antibiotic choice itself.",
+        "Identify and address the likely portal of entry (dental sepsis, an infected line, a skin source, intravenous drug use) both to guide organism suspicion and because it may need its own treatment.",
+        "Before discharge: dental hygiene review, and a clear discussion of which future procedures need antibiotic prophylaxis under current guidance, since this patient now carries a lifelong elevated risk of a further episode on the damaged or prosthetic valve."
+      ],
+      "pitfalls": [
+        "Waiting for surgery until the patient is too unstable for it - heart failure or an uncontrolled infection are indications to involve surgery EARLY, not a last resort after medical therapy has clearly failed.",
+        "Treating a normal or falling white cell count as reassurance alone; ongoing fever, new emboli, or a new murmur during treatment all need re-assessment even if inflammatory markers are improving.",
+        "Stopping antibiotics early once the patient feels better - the duration is set by the organism and valve involved, not by symptom resolution.",
+        "Forgetting the portal of entry: missing an infected line or dental source lets the same event happen again."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is drawn BEFORE antibiotics are started in suspected infective endocarditis, and why does the timing matter?",
+          "a": "Blood cultures, ideally three sets from different sites - starting antibiotics first can sterilise the cultures and prevent the organism ever being identified.",
+          "accept": [
+            "blood culture",
+            "before antibiotics"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give two indications for early surgical assessment in infective endocarditis, beyond simply completing antibiotics.",
+          "a": "Heart failure from valve destruction, uncontrolled infection (persistent bacteraemia, paravalvular abscess), or a large mobile vegetation with high embolic risk.",
+          "accept": [
+            "heart failure",
+            "uncontrolled infection",
+            "abscess",
+            "vegetation",
+            "embolic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient on appropriate IV antibiotics for endocarditis develops a new conduction abnormality on ECG. What does this suggest, and what should happen next?",
+          "a": "Extension of infection into the conduction system, classically from an aortic root or paravalvular abscess - this is a red flag for surgery, not just a finding to note and continue antibiotics regardless.",
+          "accept": [
+            "abscess",
+            "conduction",
+            "surgery",
+            "extension"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: infective endocarditis management"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Infective endocarditis: treatment and surgical indications"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: management of infective endocarditis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle only, never a specific antibiotic, dose, or duration. The organism-directed regimen, its duration, and the timing of any surgical intervention must be taken from your current national or institutional guideline and microbiology input at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}
