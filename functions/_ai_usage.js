@@ -37,6 +37,10 @@ export const AI_MODULES = {
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
+// Are the per-module daily caps actually being ENFORCED right now? (See checkModuleQuota: at launch
+// they are not.) Exported so the doctor's dashboard can stop drawing "27 / 50" bars for a limit that
+// blocks nobody — showing a cap that isn't real is worse than showing no cap.
+export function capsEnforced(env) { return String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) === "1"; }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
 // Per-module daily limit, env-overridable via AI_LIMIT_<MODULE> (e.g. AI_LIMIT_ECG=20). 0 = unlimited.
@@ -207,7 +211,7 @@ export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
   // maik:50 / research:2 while guests/natives (ip-keyed) don't. Usage is still RECORDED for dashboards
   // (recordAiUsage runs regardless). Flip env MAIK_ENFORCE_CAPS="1" to re-enable the caps.
-  if (String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) !== "1") return { ok: true, unlimited: true, limit: 0 };
+  if (!capsEnforced(env)) return { ok: true, unlimited: true, limit: 0 };
   const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
   if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;

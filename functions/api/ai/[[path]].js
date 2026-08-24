@@ -112,7 +112,8 @@ function withCors(request, resp) {
  * Developer API. Future slots (openrouter/groq/openai/azure) drop into PROVIDERS.
  * =================================================================== */
 import { checkQuota, recordUsage, adminReport, estTokens, identify, usageKv, sha256hex, usageKeyFor, deviceCheck } from "../../_usage.js";
-import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime } from "../../_ai_usage.js";
+import { gateAndCount, checkModuleQuota, doctorUsageSummary, globalUsageReport, getModelOverride, setModelOverride, ALLOWED_MODELS, MODEL_RATES, limitOverrides, setLimitOverride, resolveLimit, moduleDailyLimit, aiModuleList, getEmergency, setEmergency, getBudget, setBudget, auditRecord, getAudit, CHEAP_MODEL, EMERGENCY_MODES, getAbuseThreshold, setAbuseThreshold, usersReport, getUserLimit, setUserLimit, scribeCaps, checkScribeTime, addScribeTime, poolKeyFor, capsEnforced, resolveModel, modelRate, estCostInr as aiEstCostInr } from "../../_ai_usage.js";
+import { getCredits, dailyCostCap, costCapOn, inrToMt, MT_PER_INR } from "../../_credits.js";
 import { proFromRequest } from "../../_entitlement.js";
 import { normalizeResearchQuery, researchCacheKey, RESEARCH_PUBTYPE_FILTER, researchTermFor, researchKeywords, sourceOnTopic, researchTopic } from "../../_research.js";
 import { ownerOK } from "../../_adminauth.js";
@@ -1236,7 +1237,36 @@ export async function onRequest(context) {
   if (seg === "usage") {
     const store = usageKv(env);
     const who = await identify(request, env);
-    return json(await doctorUsageSummary(env, store, usageKeyFor(who), Date.now()));
+    const selfKey = usageKeyFor(who);
+    // Meter under the SAME key the AI calls use — a co-resident pair meters as one pool, so reading
+    // the raw self key showed a pooled doctor a permanent zero while their spend landed elsewhere.
+    const key = await poolKeyFor(store, selfKey);
+    const out = await doctorUsageSummary(env, store, key, Date.now());
+    out.pooled = key !== selfKey;
+    // Whether those `limits` are actually enforced today. The dashboard must not draw a cap bar for
+    // a limit that blocks nobody.
+    out.capsEnforced = capsEnforced(env);
+    out.tokensUsedMt = inrToMt(out.estCostInr);
+    // Wallet + daily free allowance, in MaiK Tokens (the unit the paywall and rate card use).
+    out.mtPerInr = MT_PER_INR;
+    out.costCapOn = costCapOn(env);
+    try {
+      out.balanceMt = inrToMt(await getCredits(store, key));
+      out.dailyFreeMt = inrToMt(await dailyCostCap(env, store, who && who.email, null));
+    } catch (e) { out.balanceMt = 0; out.dailyFreeMt = 0; }
+    // Rate card: what one unit of AI costs, priced off the SAME cost model that debits the wallet
+    // (_ai_usage.estCostInr), so the published rate can never drift from what is actually charged.
+    try {
+      const model = resolveModel(await getModelOverride(store), env);
+      const r = modelRate(env, model);
+      out.rates = {
+        model: model,
+        inPer1k: inrToMt(r.in), outPer1k: inrToMt(r.out),
+        perImage: inrToMt(aiEstCostInr(env, model, 0, 0, { images: 1 })),
+        perAudioSec: inrToMt(aiEstCostInr(env, model, 0, 0, { audioSeconds: 1 })),
+      };
+    } catch (e) {}
+    return json(out);
   }
 
   if (seg === "health") {

@@ -22,7 +22,7 @@ import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
 import { createCoupon, redeemCoupon, revokeCoupon, listCoupons } from "../../_coupons.js";
 import { identify as usageIdentify, usageKeyFor, usageKv } from "../../_usage.js";
-import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool } from "../../_credits.js";
+import { getCredits, dailyCostCap, adminSetCredits, addCredits, setUserCostCap, costCapOn, foundingDailyCap, grantFoundingPool, addTokens, inrToMt, MT_PER_INR, tokenPackFor } from "../../_credits.js";
 import { getEntitlement, clinicLimit, deviceLimit } from "../../_entitlements.js";
 import { deviceLockOn } from "../../_devices.js";
 import { cfgPrice, warmBillingCfg, getBillingCfg, setBillingCfg } from "../../_billingcfg.js";
@@ -72,6 +72,28 @@ function selectAmount(env, body) {
   if (b.addon && P.addons[b.addon]) { const a = P.addons[b.addon]; return { amount: a.amount, months: 1, key: "addon:" + b.addon, label: a.label }; }
   const plan = P[b.plan] ? b.plan : "monthly";
   return { amount: P[plan].amount, months: P[plan].months, key: "pro:" + plan, label: P[plan].label };
+}
+
+// Fulfil ONE paid purchase. Every payment path (Razorpay webhook, PhonePe webhook, StoreKit verify)
+// routes through here, because they all had the same bug: they read `months` and granted Pro, so a
+// MaiK Token top-up silently delivered a month of Pro and zero tokens.
+//
+// planKey is the server-issued selection key ("tokens:plus", "pro:monthly", "student:annual", …).
+// The token amount is re-read from the server price table — never from the payment note — so a
+// tampered note can't mint tokens. Credits are keyed by EMAIL (em:<email>), the same key the AI meter
+// uses, so a uid-only webhook must resolve the address first.
+async function fulfilPurchase(env, uid, planKey, months, source) {
+  const pack = tokenPackFor(planKey);
+  if (pack) {
+    const p = plans(env).tokens[pack];
+    if (!p || !p.mt) return { ok: false, reason: "unknown-pack" };
+    const u = await lookupUserByUid(env, uid);
+    if (!u || !u.email) return { ok: false, reason: "no-email" };
+    const r = await addTokens(usageKv(env), "em:" + u.email, p.mt);
+    return { ok: true, tokens: p.mt, balanceInr: r.balance, email: u.email };
+  }
+  const g = await grantPro(env, uid, { months: Math.max(1, +months || 1), source });
+  return Object.assign({ ok: true }, g);
 }
 
 async function hmacSha256Hex(secret, message) {
@@ -146,6 +168,7 @@ export async function onRequest(context) {
       try { const who = await usageIdentify(request, env); if (who && who.email) costCap = await dailyCostCap(env, usageKv(env), who.email, role); } catch (e) {}
       return json(Object.assign({
         signedIn: !!uid, promoUntil: promoUntil(env), credits, costCap, costCapOn: costCapOn(env),
+        tokens: inrToMt(credits), costCapMt: inrToMt(costCap), mtPerInr: MT_PER_INR,   // MaiK Tokens = what the UI shows
         role: role || null, clinicLimit: clinicLimit(env, role), deviceLimit: deviceLimit(env, role), deviceLockOn: deviceLockOn(env),
       }, state));
     }
@@ -175,7 +198,7 @@ export async function onRequest(context) {
     }
     if (method === "GET" && seg === "plans") {
       // Public, user-identical pricing for the paywall. Safe to cache; changes rarely.
-      return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env) }, 200, "public, max-age=600");
+      return json({ currency: "INR", plans: plans(env), promoUntil: promoUntil(env), mtPerInr: MT_PER_INR }, 200, "public, max-age=600");
     }
 
     // ---- native IAP: the app POSTs a verified Play/App Store subscription purchase -> we confirm it with
@@ -190,6 +213,14 @@ export async function onRequest(context) {
       const v = await verifyPurchase(env, { platform: platform, productId: body.productId, purchaseToken: tok });
       if (!v.configured) return json({ error: "iap-not-configured", platform: platform, reason: v.reason }, 501);
       if (!v.valid) return json({ ok: false, valid: false, reason: v.reason || "invalid" }, 402);
+      // Consumable MaiK Token packs (in.stewardmd.tokens.<pack>) are NOT subscriptions: they have no
+      // expiry, so the days-from-expiry grant below would have handed out Pro instead of tokens.
+      const iapPack = /^in\.stewardmd\.tokens\.([a-z]+)$/.exec(String(body.productId || ""));
+      if (iapPack) {
+        const f = await fulfilPurchase(env, uid, "tokens:" + iapPack[1], 0, "iap-" + platform);
+        if (!f.ok) return json({ ok: false, valid: true, reason: f.reason }, 502);
+        return json({ ok: true, valid: true, platform: platform, tokens: f.tokens, balanceMt: inrToMt(f.balanceInr) });
+      }
       const g = await grantPro(env, uid, { days: daysFromExpiry(v.expiresAt), source: "iap-" + platform });
       return json(Object.assign({ ok: true, valid: true, platform: platform, expiresAt: v.expiresAt || null }, g));
     }
@@ -256,8 +287,7 @@ export async function onRequest(context) {
         const pay = (evt.payload && ((evt.payload.payment && evt.payload.payment.entity) || (evt.payload.order && evt.payload.order.entity))) || {};
         const notes = pay.notes || {};
         const uid = rawUid(String(notes.uid || ""));
-        const months = Math.max(1, +notes.months || 1);
-        if (uid) { try { await grantPro(env, uid, { months, source: "razorpay" }); } catch (e) {} }
+        if (uid) { try { await fulfilPurchase(env, uid, notes.plan, notes.months, "razorpay"); } catch (e) {} }
       }
       return json({ ok: true });   // always 200 so Razorpay doesn't retry-storm
     }
@@ -308,8 +338,7 @@ export async function onRequest(context) {
           if (sr.ok && String(s.state).toUpperCase() === "COMPLETED") {
             const mi = s.metaInfo || {};
             const uid = rawUid(String(mi.udf1 || ""));
-            const months = Math.max(1, +mi.udf2 || 1);
-            if (uid) await grantPro(env, uid, { months, source: "phonepe" });
+            if (uid) await fulfilPurchase(env, uid, mi.udf3, mi.udf2, "phonepe");
           }
         } catch (e) {}
       }

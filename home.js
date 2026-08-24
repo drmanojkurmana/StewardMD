@@ -1927,7 +1927,7 @@
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
       mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
-      mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
+      mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
@@ -1976,16 +1976,32 @@
     if (!document.getElementById("ai-usage-css")) {
       var st = document.createElement("style"); st.id = "ai-usage-css";
       st.textContent =
-        ".ai-usage{padding:2px 2px 8px}" +
-        ".aiu-head{font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin:2px 0 14px}" +
+        ".ai-usage{padding:2px 2px 8px;--aiuCard:#f1f5f9;--aiuBg:#ffffff}" +
+        "body.dark .ai-usage{--aiuCard:#0f172a;--aiuBg:#0b1220}" +
+        ".aiu-h{font:800 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:18px 2px 9px}" +
+        ".aiu-h:first-child{margin-top:2px}" +
+        ".aiu-wallet{background:var(--aiuCard);border:1px solid var(--line,#1e293b);border-radius:14px;padding:14px 15px}" +
+        ".aiu-wallet .bal{font:800 30px var(--hfont,system-ui);color:var(--ink,#e6edf3);line-height:1.1;letter-spacing:-.02em}" +
+        ".aiu-wallet .bl{font:700 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#14b8a6);margin-top:3px}" +
+        ".aiu-wallet .sub{font:500 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:7px;line-height:1.5}" +
+        ".aiu-buy{display:block;width:100%;margin-top:12px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 13px var(--hfont,system-ui);cursor:pointer}" +
+        ".aiu-stats{display:flex;gap:8px}" +
+        ".aiu-stats .c{flex:1;min-width:0;background:var(--aiuCard);border:1px solid var(--line,#1e293b);border-radius:12px;padding:10px 6px;text-align:center}" +
+        ".aiu-stats .n{font:800 17px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aiu-stats .l{font:600 9px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--hmut,#889);margin-top:3px}" +
         ".aiu-row{margin:0 0 13px}" +
-        ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
-        ".aiu-row .u{font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
+        ".aiu-row .u{flex:none;font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
         ".aiu-bar{height:8px;border-radius:6px;background:var(--line,#1e293b);overflow:hidden}" +
         ".aiu-bar>span{display:block;height:100%;border-radius:6px;background:var(--teal,#0e6e63);transition:width .3s}" +
         ".aiu-bar.amber>span{background:#d97706}.aiu-bar.red>span{background:#dc2626}" +
         ".aiu-unl{font:700 12px var(--hfont,system-ui);color:var(--teal,#14b8a6)}" +
-        ".ai-usage-note{font:500 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.5}" +
+        ".aiu-rate{width:100%;border-collapse:collapse}" +
+        ".aiu-rate td{padding:8px 2px;border-top:1px solid var(--line,#1e293b);font:600 12.5px var(--hfont,system-ui);color:var(--ink,#e6edf3);vertical-align:top}" +
+        ".aiu-rate tr:first-child td{border-top:none}" +
+        ".aiu-rate td.v{text-align:right;white-space:nowrap;color:var(--hmut,#889);font-weight:700}" +
+        ".aiu-rate td .d{display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:2px}" +
+        ".ai-usage-note{font:500 11.5px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.55}" +
         ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
       document.head.appendChild(st);
     }
@@ -2000,24 +2016,79 @@
     }).then(function (r) { return (r && r.ok) ? r.json() : null; }).then(function (data) {
       if (!host) return;
       host.innerHTML = data ? renderAiUsage(data) : '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>';
+      var buy = document.getElementById("aiuBuy");
+      // The token store already lives in the Pro paywall sheet — reuse it, don't build a second one.
+      if (buy) buy.onclick = function () { closeSheet(); setTimeout(function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall(); else toast("Loading…"); } catch (e) {} }, 120); };
     }).catch(function () { if (host) host.innerHTML = '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>'; });
   }
+  // Compact MaiK Token count: 1,240 · 50k · 1.2M — a wallet reads better than a 7-digit number.
+  function aiuMt(n) {
+    n = Math.max(0, Math.round(+n || 0));
+    if (n >= 1000000) return (Math.round(n / 100000) / 10) + "M";
+    if (n >= 10000) return Math.round(n / 1000) + "k";
+    return n.toLocaleString("en-IN");
+  }
+  function aiuBar(n, lim) {
+    var pct = lim > 0 ? Math.min(100, Math.round(n / lim * 100)) : 0;
+    var cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
+    return '<div class="aiu-bar' + cls + '"><span style="width:' + pct + '%"></span></div>';
+  }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", fundx: "FundX", followcare: "FollowCare", tts: "Text-to-speech" };
-    var ORDER = ["maik", "maik_case", "research", "ecg", "thorex", "ocr", "stt"];
-    var limits = u.limits || {}, used = u.byModule || {}, rows = "";
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", tts: "Text-to-speech", scribe: "MaiK Scribe", fundx: "FundX", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base" };
+    var ORDER = ["maik", "maik_case", "summary", "research", "ecg", "thorex", "ocr", "stt", "scribe", "clinix", "surgx_note", "surgx_case", "fundx", "followcare"];
+    var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
+
+    // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
+    var bal = u.balanceMt | 0, spent = u.tokensUsedMt | 0, free = u.dailyFreeMt | 0, per = u.mtPerInr || 2000;
+    out += '<div class="aiu-h">Your MaiK Tokens</div><div class="aiu-wallet">' +
+      '<div class="bal">' + aiuMt(bal) + '</div><div class="bl">Tokens in wallet</div>' +
+      '<div class="sub">' + (bal > 0 ? 'Worth about &#8377;' + (Math.round(bal / per * 10) / 10) + ' of AI. Tokens never expire and work across every AI feature.' : 'Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
+      (u.pooled ? '<br>Shared pool: this balance is shared with your linked account.' : '') + '</div>' +
+      '<button id="aiuBuy" class="aiu-buy" type="button">Buy MaiK Tokens</button></div>';
+    if (u.costCapOn && free > 0) {
+      out += '<div class="aiu-h">Today&rsquo;s free allowance</div><div class="aiu-row">' +
+        '<div class="h"><span>Included with your plan</span><span class="u">' + aiuMt(spent) + ' / ' + aiuMt(free) + '</span></div>' +
+        aiuBar(spent, free) +
+        '<div class="ai-usage-note">Resets at midnight. Past this, your wallet takes over — nothing stops mid-consult.</div></div>';
+    }
+
+    // ---- today ----
+    var req = u.req | 0;
+    out += '<div class="aiu-h">Today</div><div class="aiu-stats">' +
+      '<div class="c"><div class="n">' + req + '</div><div class="l">Requests</div></div>' +
+      '<div class="c"><div class="n">' + aiuMt(u.tokens) + '</div><div class="l">AI tokens</div></div>' +
+      '<div class="c"><div class="n">' + aiuMt(spent) + '</div><div class="l">Spent (MT)</div></div>' +
+      '<div class="c"><div class="n">' + (u.avgLatencyMs ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + 's' : '&mdash;') + '</div><div class="l">Avg reply</div></div>' +
+      '</div>';
+
+    // ---- per feature. Only draw a cap bar when the caps are actually ENFORCED; otherwise a bar
+    // would imply a limit that blocks nobody today. ----
+    var rows = "";
     ORDER.forEach(function (id) {
       if (!(id in limits)) return;
-      var lim = limits[id] | 0, n = used[id] | 0, lbl = LBL[id] || id;
+      var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
+      if (!enforced) { if (!n) return; rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + '</span></div></div>'; return; }
       if (lim === 0) { rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="aiu-unl">Unlimited</span></div></div>'; return; }
-      var pct = Math.min(100, Math.round(n / lim * 100)), cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
-      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' +
-        '<div class="aiu-bar' + cls + '"><span style="width:' + pct + '%"></span></div></div>';
+      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' + aiuBar(n, lim) + '</div>';
     });
-    var req = u.req | 0;
-    return '<div class="aiu-head">Today &middot; ' + req + ' AI request' + (req === 1 ? '' : 's') + '</div>' +
+    out += '<div class="aiu-h">By feature' + (enforced ? '' : ' &middot; today') + '</div>' +
       (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
-      '<div class="ai-usage-note">Daily limits reset at midnight. These per-doctor caps keep AI fast and available for everyone; your hospital can adjust them.</div>';
+      (enforced ? '<div class="ai-usage-note">Daily limits reset at midnight.</div>'
+                : '<div class="ai-usage-note">No per-feature daily limits are in force right now — usage is metered from your wallet.</div>');
+
+    // ---- rate card ----
+    var r = u.rates;
+    if (r) {
+      out += '<div class="aiu-h">Rate card</div><table class="aiu-rate"><tbody>' +
+        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + r.inPer1k + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + r.outPer1k + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + r.perImage + ' MT<span class="d">per image</span></td></tr>' +
+        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + r.perAudioSec + ' MT<span class="d">per second</span></td></tr>' +
+        '</tbody></table>' +
+        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((r.inPer1k * 0.6) + (r.outPer1k * 0.8)) + ' MT. Rates are for ' + aiCtlEsc(r.model) + ' and are billed on actual usage, never rounded up per request.</div>';
+    }
+    out += '<div class="ai-usage-note">Metered per request, metadata only. Your questions, notes and patient data are never stored in these counts.</div>';
+    return out;
   }
   // AI Control Center — OWNER admin console (Phase 4): switch the active model, see today's global
   // usage, and edit per-module daily caps live (no redeploy). All three APIs are owner-gated server-side
