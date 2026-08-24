@@ -1,0 +1,689 @@
+{
+  "_comment": "Hepatomegaly is a SHORT CASE: differential diagnosis of an isolated enlarged liver, distinct from the chronic-liver-disease long case. Exam technique is entirely inherited from skill.exam.gi.liver in abdomen.json; the new content here is the reasoning that reads a cause from margin/surface/consistency/tenderness.",
+  "id": "hepatomegaly",
+  "name": "Hepatomegaly",
+  "fullName": "Hepatomegaly (a short case)",
+  "system": "abdomen",
+  "kbRef": "hepatomegaly",
+  "oneLine": "An enlarged liver, and the five headings that explain it",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Span, not a palpable edge alone, defines hepatomegaly",
+      "skills": [
+        "skill.exam.gi.liver"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Tender or painless is the first, most efficient fork",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.hepatomegaly"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Jaundice, wasting and the cardiac clues",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look specifically for jaundice, cachexia, and stigmata of chronic liver disease, and check the JVP as part of the general survey, since a cardiac cause is found here, not in the abdomen."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "Margin, surface, consistency, tenderness, pulsatility",
+      "skills": [
+        "skill.exam.gi.liver",
+        "skill.exam.gi.liver_cause"
+      ],
+      "emphasis": {
+        "skill.exam.gi.liver": {
+          "expect": "Confirm true hepatomegaly by span before describing anything else, then work through margin, surface, consistency, tenderness and pulsatility as a fixed set, every time, not only when a finding is obviously abnormal."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of hepatomegaly",
+      "blurb": "Five headings: infections, malignancy, infiltration, blood, vessels",
+      "skills": [
+        "skill.hepatomegaly.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "The LFT pattern, then imaging",
+      "skills": [
+        "skill.ix.hepatomegaly.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Span, character, and the leading heading",
+      "skills": [
+        "skill.hepatomegaly.differential"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.hepatomegaly.general",
+        "title": "Assess this hepatomegaly and give your differential",
+        "task": "This patient has a liver edge palpable on routine examination. Confirm true hepatomegaly, characterise it, and present a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.liver_cause"
+        ],
+        "examinerQuestions": [
+          "How did you confirm this is true hepatomegaly rather than a liver pushed down?",
+          "Describe the margin, surface and consistency you found, and what each suggests.",
+          "Is this liver tender? What does that single fact do to your differential?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.hepatomegaly.savitri",
+      "title": "A woman with a tender, throbbing liver",
+      "opening": "Savitri Joshi, 68, has been referred from the medicine ward for an abdominal examination. She is sitting propped up on two pillows and looks mildly breathless. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Savitri Joshi",
+        "age": 68,
+        "sex": "female",
+        "occupation": "Retired schoolteacher",
+        "residence": "Urban, lives with her daughter's family"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, I have been breathless and my legs have been swelling for about three weeks. Recently I noticed a dull ache under my right ribs too.",
+          "key": true
+        },
+        "tenderness": {
+          "cues": [
+            "tender",
+            "painful",
+            "does it hurt",
+            "pain under the ribs",
+            "sore"
+          ],
+          "reply": "Yes, it is tender there, especially if I press on it myself or if someone touches it firmly.",
+          "key": true,
+          "skillId": "skill.hx.gi.hepatomegaly"
+        },
+        "orthopnea": {
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "pillows",
+            "orthopnoea",
+            "orthopnea",
+            "breathless at night",
+            "wake up gasping",
+            "lie down",
+            "lying down",
+            "pnd",
+            "paroxysmal nocturnal dyspnea",
+            "paroxysmal nocturnal dyspnoea",
+            "sit up to breathe"
+          ],
+          "reply": "I cannot lie flat anymore, I need two pillows, and some nights I wake up gasping for breath and have to sit up.",
+          "key": true
+        },
+        "exertional_dyspnea": {
+          "cues": [
+            "breathless on exertion",
+            "walking",
+            "stairs",
+            "how far can you walk",
+            "exercise tolerance",
+            "sob",
+            "short of breath",
+            "shortness of breath",
+            "breathlessness"
+          ],
+          "reply": "I get breathless just walking to the bathroom now. A year ago I could walk to the market and back without trouble.",
+          "key": true
+        },
+        "leg_swelling": {
+          "cues": [
+            "leg swelling",
+            "ankle swelling",
+            "feet swelling",
+            "oedema",
+            "edema"
+          ],
+          "reply": "Both my ankles have been swelling, worse by evening, for about a month now.",
+          "key": true
+        },
+        "jaundice": {
+          "cues": [
+            "yellow eyes",
+            "jaundice",
+            "yellow urine",
+            "yellowing"
+          ],
+          "reply": "My daughter says my eyes look a little yellow, but I had not noticed it myself.",
+          "key": true
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "chills",
+            "rigors",
+            "temperature"
+          ],
+          "reply": "No fever at all.",
+          "key": true
+        },
+        "alcohol": {
+          "cues": [
+            "alcohol",
+            "drink",
+            "drinking"
+          ],
+          "reply": "I have never had alcohol in my life, doctor.",
+          "key": true
+        },
+        "weight_appetite": {
+          "cues": [
+            "weight loss",
+            "losing weight",
+            "appetite",
+            "eating"
+          ],
+          "reply": "My appetite has been poor lately because everything feels heavy, but I have not deliberately lost weight."
+        },
+        "malignancy_history": {
+          "cues": [
+            "cancer",
+            "malignancy",
+            "tumour",
+            "lump elsewhere",
+            "growth"
+          ],
+          "reply": "No, I have never been told I have cancer anywhere."
+        },
+        "cardiac_history": {
+          "cues": [
+            "heart disease",
+            "heart problem",
+            "rheumatic fever",
+            "valve",
+            "murmur",
+            "palpitations"
+          ],
+          "reply": "I was told as a child I had a murmur after a fever, but I never had it checked again after that. I have had high blood pressure for fifteen years.",
+          "key": true
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest",
+            "tightness"
+          ],
+          "reply": "No real chest pain, just this tightness with the breathlessness."
+        },
+        "travel": {
+          "cues": [
+            "travel",
+            "malaria",
+            "kala-azar",
+            "endemic area",
+            "rural exposure"
+          ],
+          "reply": "I have lived in the same city house my whole life. No recent travel."
+        },
+        "drug_history": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablet",
+            "diuretic",
+            "taking anything"
+          ],
+          "reply": "I take a tablet for blood pressure. I stopped taking my water tablet myself two weeks ago because it made me pass urine too often."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "hereditary",
+            "heart disease in family",
+            "liver disease in family"
+          ],
+          "reply": "My mother had heart trouble too, in her old age."
+        },
+        "allergy": {
+          "cues": [
+            "allergy",
+            "allergic",
+            "reaction to any"
+          ],
+          "reply": "No allergies."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Sitting propped up, mildly breathless at rest. Raised JVP to the angle of the jaw, with a prominent systolic wave. Mild scleral icterus. Bilateral pitting pedal oedema visible to mid-shin.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 104, irregularly irregular. Blood pressure 128/78. Respiratory rate 22. SpO2 95 percent on room air. Temperature 36.9 C.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "Mild conjunctival pallor.",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver": {
+          "finding": "Liver edge palpable 4 cm below the right costal margin, tender, smooth surface, rounded margin. Span 16 cm (upper border by heavy percussion, lower by light). A systolic pulsation is felt at the edge.",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver_cause": {
+          "finding": "Tender, smooth, pulsatile, painful hepatomegaly with a raised JVP showing a prominent systolic wave and bilateral pitting oedema. No spider naevi, no palmar erythema, no ascites. The whole pattern points to a vascular, congestive cause rather than intrinsic liver disease.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "ecg",
+        "echo",
+        "lft",
+        "cbc",
+        "usg"
+      ],
+      "investigations": {
+        "ecg": {
+          "label": "ECG",
+          "indicated": true,
+          "result": "Atrial fibrillation, ventricular rate 104. Left ventricular hypertrophy pattern. No acute ST changes.",
+          "note": "Explains the irregularly irregular pulse and is a plausible trigger for acute decompensation on top of chronic hypertensive heart disease."
+        },
+        "echo": {
+          "label": "Echocardiogram",
+          "indicated": true,
+          "result": "Severe tricuspid regurgitation with a dilated right atrium and right ventricle. Estimated right ventricular systolic pressure 48 mmHg. Preserved left ventricular ejection fraction.",
+          "note": "Confirms tricuspid regurgitation as the lesion driving the systolic hepatic pulsation, and right heart failure as the mechanism for the tender, pulsatile liver."
+        },
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin 2.6 mg/dL, AST 88, ALT 64, alkaline phosphatase mildly raised, albumin 3.4 g/dL.",
+          "note": "A mixed, modestly abnormal pattern typical of hepatic congestion, sometimes called cardiac hepatopathy, rather than primary hepatocellular or cholestatic disease."
+        },
+        "cbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 10.8 g/dL, white cells 7.2 x10^9/L, platelets 220 x10^9/L.",
+          "note": "Mild normocytic anaemia of chronic disease. Normal platelets argue against portal hypertensive hypersplenism."
+        },
+        "usg": {
+          "label": "Ultrasound abdomen with Doppler",
+          "indicated": true,
+          "result": "Liver enlarged with a smooth surface, normal echotexture. Hepatic veins dilated. Inferior vena cava dilated with reduced respiratory collapse. No ascites, no splenomegaly.",
+          "note": "Dilated hepatic veins and a plethoric IVC are the imaging signature of congestive hepatopathy, and the smooth surface argues against cirrhosis or metastatic disease."
+        },
+        "afp": {
+          "label": "Alpha-fetoprotein",
+          "indicated": false,
+          "result": "Normal at 3 ng/mL.",
+          "note": "Not indicated here: the surface is smooth and pulsatile, not nodular, and there is no cirrhosis or chronic hepatitis in the background to raise hepatoma as a real concern."
+        },
+        "viral_hep_serology": {
+          "label": "Viral hepatitis serology",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "No risk exposure was elicited, and the pattern of tenderness, smoothness and pulsatility with a raised JVP already points away from a primary hepatic cause; sending this was not answering a real clinical question."
+        },
+        "malaria_smear": {
+          "label": "Peripheral smear for malaria",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "No fever and no travel or endemic exposure history. Ordering this as a reflex in every tender hepatomegaly, rather than in a febrile patient, adds nothing here."
+        }
+      },
+      "differentialModel": {
+        "answer": "Congestive hepatomegaly due to right heart failure from severe tricuspid regurgitation, with new atrial fibrillation as a likely trigger. Consider constrictive pericarditis, hepatoma, and infective or infiltrative causes of a tender liver.",
+        "accept": [
+          "congestive",
+          "heart failure",
+          "tricuspid",
+          "constrictive",
+          "hepatoma",
+          "infective"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Tender, pulsatile congestive hepatomegaly secondary to right heart failure from severe tricuspid regurgitation, decompensated by new atrial fibrillation and recent diuretic withdrawal.",
+        "accept": [
+          "congestive",
+          "heart failure",
+          "right heart"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Restart and optimise diuretic therapy, rate-control the atrial fibrillation, restrict salt, and refer for cardiology assessment of the tricuspid valve lesion. Correct the anaemia contributing to the workload on the heart, and monitor liver enzymes as a marker of congestion rather than treating them as primary liver disease. Avoid unnecessary hepatotoxic drugs while the congestion is being addressed.",
+        "accept": [
+          "diuretic",
+          "rate control",
+          "salt restriction",
+          "cardiology referral",
+          "tricuspid",
+          "heart failure treatment"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Tender plus smooth plus pulsatile is a specific triad. Once you feel a systolic pulsation at the edge, the cause is almost certainly vascular, not intrinsic liver disease, well before any test is sent.",
+        "The raised JVP was found on general examination, not on the abdomen, and it is what actually points you towards the diagnosis before you have even reached the liver.",
+        "Stopping her own diuretic two weeks before presenting is a plausible, and reversible, contributor to this decompensation, and is worth asking about directly rather than assuming spontaneous progression.",
+        "The absence of spider naevi, palmar erythema and ascites argues against cirrhosis just as strongly as the pulsatile liver argues for a cardiac cause. Both pieces of evidence point the same way.",
+        "Her childhood murmur, never followed up, is exactly the kind of history detail that explains a specific valve lesion decades later rather than a vague 'heart trouble'.",
+        "New atrial fibrillation in an already hypertensive heart is a common, treatable trigger for acute decompensation, and rate control is part of the management, not an afterthought.",
+        "Mildly deranged liver enzymes here reflect congestion, not primary liver disease, and chasing them with a full hepatology workup would have missed the actual diagnosis sitting in the neck veins."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.exam.gi.liver",
+      "skill.hx.gi.hepatomegaly",
+      "skill.exam.gi.liver_cause",
+      "skill.hepatomegaly.differential",
+      "skill.ix.hepatomegaly.workup"
+    ]
+  },
+  "skills": {
+    "skill.exam.gi.liver_cause": {
+      "id": "skill.exam.gi.liver_cause",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Reading the cause from margin, surface and consistency",
+      "oneLine": "Four characteristics, examined in order, turn a palpable edge into a differential",
+      "why": "Span alone confirms hepatomegaly. What actually narrows the cause is margin, surface, consistency and tenderness, examined and described as a deliberate set every time, not noted only when obviously abnormal.",
+      "body": "Once hepatomegaly is confirmed by span, describe the edge, margin, surface, consistency, tenderness and pulsatility as a fixed set, since together they are what point towards a cause.",
+      "pitfalls": [
+        "Reporting only 'liver enlarged, span 16 cm' without describing margin, surface or consistency.",
+        "Missing pulsatility, a genuine and examinable finding, because it was not deliberately tested for.",
+        "Assuming any nodular liver is cirrhosis rather than considering metastatic disease."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What does a nodular liver surface suggest?",
+          "a": "Metastatic cancer, hepatoma, or cirrhosis.",
+          "accept": [
+            "metasta",
+            "hepatoma",
+            "cirrhosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Distinguish the causes of a rounded versus a sharp hepatic margin.",
+          "a": "Rounded suggests infiltrative disease; sharp suggests metastases, hepatitis, or biliary obstruction.",
+          "accept": [
+            "rounded",
+            "infiltrat",
+            "sharp",
+            "metasta"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A liver is firm to hard, non-tender, with a nodular surface and a normal span-to-edge relationship is not applicable since the span itself is markedly increased at 14 cm. What is the leading concern?",
+          "a": "Hepatoma (hepatocellular carcinoma) or metastatic malignancy, given the firm nodular painless enlargement with a substantially increased span.",
+          "accept": [
+            "hepatoma",
+            "malignan",
+            "metasta",
+            "hepatocellular"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Rounded margin: infiltrative disease. Sharp margin: metastases, hepatitis (acute or chronic), or biliary obstruction.",
+        "Smooth surface: malaria, acute hepatitis, infiltrative disease. Nodular surface: metastatic cancer, hepatoma, or cirrhosis (classically micronodular in alcoholic disease, macronodular after hepatitis).",
+        "Firm-to-hard consistency: metastatic cancer and obstructive jaundice. A soft liver is typical of fatty change, early hepatitis, or congestion.",
+        "Tender: right heart failure, acute hepatitis, liver abscess, hepatoma, hepatic infarcts, acute Budd-Chiari syndrome. Painless: fatty liver, infiltrative disease, malaria, leukaemia, lymphoma.",
+        "Pulsatile: tricuspid regurgitation (systolic pulsation) or tricuspid stenosis (diastolic), and also described in hepatocellular carcinoma and haemangioma.",
+        "Massive hepatomegaly (over 10 cm below the costal margin, or a very large span) is a specific pattern most associated with hepatoma.",
+        "A palpable, hard, irregular Sister Mary Joseph node at the umbilicus alongside hepatomegaly should raise metastatic gastric, pancreatic or ovarian malignancy."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, physical examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the liver"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hepatomegaly.differential": {
+      "id": "skill.hepatomegaly.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of hepatomegaly",
+      "oneLine": "Five headings cover almost every cause: infections, malignancy, infiltration, blood, and vessels",
+      "why": "Causes of hepatomegaly are conventionally grouped under five headings, and learning the headings, not just the examples, is what lets you generate a reasonable differential for a cause you have not specifically memorised.",
+      "body": "Group the differential under five headings: infections, malignancies, infiltrative disorders, haematological disorders, and vascular disorders.",
+      "pitfalls": [
+        "Listing individual diseases without the organising headings, making the differential hard to generate under pressure.",
+        "Forgetting the vascular category (heart failure, Budd-Chiari) when the liver findings do not fit an obviously hepatic disease.",
+        "Not naming malaria or kala-azar in an endemic setting."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the five headings under which causes of hepatomegaly are conventionally grouped.",
+          "a": "Infections, malignancies, infiltrative disorders, haematological disorders, and vascular disorders.",
+          "accept": [
+            "infect",
+            "malignan",
+            "infiltrat",
+            "haematolog",
+            "hematolog",
+            "vascular"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 3,
+          "q": "Give two vascular causes of hepatomegaly.",
+          "a": "Right heart failure (or constrictive pericarditis) and Budd-Chiari syndrome (hepatic vein obstruction); veno-occlusive disease is also accepted.",
+          "accept": [
+            "heart failure",
+            "budd-chiari",
+            "constrictive",
+            "veno-occlusive"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "A patient has hepatomegaly with a raised JVP, bibasal crackles, and pedal oedema. Which of the five headings does this belong to, and name the mechanism.",
+          "a": "Vascular: congestive hepatomegaly from right heart failure, where a raised systemic venous pressure is transmitted back through the hepatic veins and engorges the liver.",
+          "accept": [
+            "vascular",
+            "congestive",
+            "heart failure",
+            "venous"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "headings",
+          "text": "Organises the differential under the five standard headings"
+        },
+        {
+          "id": "vascular",
+          "text": "Actively considers a vascular/cardiac cause"
+        }
+      ],
+      "keyPoints": [
+        "Infections: viral hepatitis (acute and chronic), amoebic or pyogenic liver abscess, malaria, kala-azar, tuberculosis, hydatid disease.",
+        "Malignancies: hepatocellular carcinoma (hepatoma), metastatic disease (commonly from GI, breast, lung primaries), and, involving the liver secondarily, lymphoma and leukaemia.",
+        "Infiltrative disorders: fatty liver (alcoholic or non-alcoholic), amyloidosis, glycogen storage disease, and other storage disorders.",
+        "Haematological disorders: chronic haemolytic anaemia, myeloproliferative disease, leukaemia, lymphoma.",
+        "Vascular disorders: right heart failure and constrictive pericarditis (congestive hepatomegaly), Budd-Chiari syndrome (hepatic vein obstruction), and veno-occlusive disease.",
+        "The tender/painless split and the margin-surface-consistency findings from examination are what select the leading heading, rather than working through all five equally in every patient."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly differential"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.hepatomegaly.workup": {
+      "id": "skill.ix.hepatomegaly.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up hepatomegaly",
+      "oneLine": "Liver function tests give the pattern; imaging gives the shape and the mass",
+      "why": "Liver function tests are ordered as a panel, but read as a PATTERN: which values are raised, and by how much relative to each other, points towards hepatocellular, cholestatic, or infiltrative disease before imaging is even done.",
+      "body": "Read the liver function tests as a pattern first, then image, then direct further tests by the leading category.",
+      "pitfalls": [
+        "Ordering liver function tests without interpreting the RATIO between transaminases and alkaline phosphatase, which is where the actual pattern lives.",
+        "Skipping alpha-fetoprotein in a cirrhotic patient with new or changing hepatomegaly.",
+        "Treating a normal ultrasound as excluding all hepatobiliary pathology in a patient with a strong clinical suspicion; a repeat or a different modality may still be needed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Distinguish a hepatocellular from a cholestatic liver function test pattern.",
+          "a": "Hepatocellular: AST/ALT disproportionately raised relative to alkaline phosphatase. Cholestatic: alkaline phosphatase (and gamma-GT) disproportionately raised relative to the transaminases.",
+          "accept": [
+            "ast",
+            "alt",
+            "alkaline phosphatase",
+            "cholestatic",
+            "hepatocellular"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Which tumour marker is checked when hepatoma is suspected, particularly in a cirrhotic patient?",
+          "a": "Alpha-fetoprotein (AFP).",
+          "accept": [
+            "alpha-fetoprotein",
+            "afp"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What does ultrasound add over liver function tests alone in the hepatomegaly workup?",
+          "a": "It confirms the enlargement objectively, characterises the echotexture (fatty, nodular, or a focal lesion), and screens the biliary tree for dilation, none of which a blood test alone can show.",
+          "accept": [
+            "echotexture",
+            "focal lesion",
+            "biliary",
+            "confirm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Hepatocellular pattern: AST and ALT disproportionately raised relative to alkaline phosphatase, as in hepatitis.",
+        "Cholestatic pattern: alkaline phosphatase (and gamma-GT) disproportionately raised relative to the transaminases, as in obstructive jaundice or infiltrative disease.",
+        "Synthetic function: albumin and prothrombin time, which reflect chronic severity rather than the acute pattern.",
+        "Ultrasound abdomen: confirms the enlargement, assesses echotexture (fatty, nodular, or a focal lesion), and screens the biliary tree for dilation.",
+        "Alpha-fetoprotein where hepatoma is suspected, particularly with a background of cirrhosis or chronic hepatitis B.",
+        "Viral hepatitis serology where an infective hepatocellular pattern is found.",
+        "A peripheral smear and malaria/kala-azar testing where fever and travel history point that way.",
+        "CT or MRI, and biopsy, where ultrasound finds a focal lesion needing further characterisation."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

@@ -1,0 +1,1199 @@
+{
+  "_comment": "CliniX LONG case. Mitral stenosis is the classic RHD lesion taught at the bedside in India. Most exam skills are shared cardiovascular skills with a heavy emphasis overlay; only the rheumatic-fever history, the RHD syndrome, the differential, the workup and the diagnostic criteria are authored locally.",
+  "id": "rheumatic-heart-disease",
+  "name": "Rheumatic heart disease",
+  "fullName": "Rheumatic heart disease with mitral stenosis",
+  "system": "cardiovascular",
+  "kbRef": "rheumatic_heart_disease",
+  "oneLine": "A childhood sore throat, years later, closing a valve",
+  "estMinutes": 75,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "From a strep throat to a stenosed valve",
+      "skills": [
+        "skill.rhd.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and background carry real weight here",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "RHD is a disease of young people from crowded housing with limited access to primary care: classically a patient in their teens to thirties, more often female, from a lower socioeconomic background where a childhood sore throat was never seen by a doctor. Note occupation and whether antenatal, since pregnancy is a recognised trigger for decompensation in previously compensated mitral stenosis."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "The breathlessness, and the throat nobody asked about before",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.cvs.dyspnea_edema",
+        "skill.hx.rhd.rheumatic_fever"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical story is years of slowly progressive exertional breathlessness, sometimes with palpitations once atrial fibrillation develops, and a recent decompensating trigger such as pregnancy, a chest infection or new-onset arrhythmia. Haemoptysis and hoarseness are less common but genuinely occur in longstanding mitral stenosis and are worth asking about directly."
+        },
+        "skill.hx.cvs.dyspnea_edema": {
+          "expect": "Ask specifically about palpitations with the breathlessness, since atrial fibrillation is what commonly converts a compensated, asymptomatic mitral stenosis into a decompensated one. A history of a stroke or a peripheral embolic event raises the possibility of a left atrial thrombus and should be asked about directly, not left to come up by chance."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "Prophylaxis compliance is a history item, not an afterthought",
+      "skills": [
+        "skill.hx.rhd.rheumatic_fever"
+      ],
+      "emphasis": {
+        "skill.hx.rhd.rheumatic_fever": {
+          "expect": "Ask directly whether the patient has ever been told they need a monthly injection, and whether they have actually been getting it. Missed secondary prophylaxis is the single most common reason a stable patient re-presents with a fresh episode of carditis on top of an already damaged valve."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The face gives it away before the stethoscope does",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look specifically for malar flush, a dusky pink to violaceous discolouration over the cheeks from chronically low cardiac output and cutaneous vasodilation. It is not sensitive, but when present in a young patient it is a strong pointer to severe mitral stenosis."
+        },
+        "skill.gen.vitals": {
+          "expect": "Check the pulse rhythm carefully before anything else: an irregularly irregular pulse in a young patient with a diastolic murmur is atrial fibrillation from left atrial enlargement until proven otherwise, and it changes the whole management plan."
+        },
+        "skill.gen.edema": {
+          "expect": "Bilateral pitting oedema in this patient means the pulmonary hypertension driven by the stenosed valve has progressed to right heart failure. It is a late finding, not an early one."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "One murmur, correctly elicited, makes the diagnosis",
+      "skills": [
+        "skill.exam.cvs.pulse",
+        "skill.exam.cvs.jvp",
+        "skill.exam.cvs.inspection",
+        "skill.exam.cvs.precordium_palpation",
+        "skill.exam.cvs.apex",
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.bp"
+      ],
+      "emphasis": {
+        "skill.exam.cvs.pulse": {
+          "expect": "Rhythm is the first thing to settle: regular in sinus rhythm, or irregularly irregular in atrial fibrillation. Volume is often normal or low in pure, tight mitral stenosis, since the fixed valve caps stroke volume regardless of preload."
+        },
+        "skill.exam.cvs.jvp": {
+          "expect": "Normal until pulmonary hypertension and right heart failure develop, at which point it rises, and a prominent a wave can appear if the patient is still in sinus rhythm with a hypertrophied, non-compliant right atrium working against a high pulmonary pressure."
+        },
+        "skill.exam.cvs.inspection": {
+          "expect": "In a patient whose disease began in childhood, before costal cartilage fusion around age 16, a precordial bulge from right ventricular enlargement can be visible. This is one of the few acquired lesions that can still produce it, because it begins early enough in life."
+        },
+        "skill.exam.cvs.precordium_palpation": {
+          "expect": "Feel specifically for a diastolic thrill at the apex in the left lateral position, and for a left parasternal heave, which tracks right ventricular pressure overload from secondary pulmonary hypertension. When mitral regurgitation coexists, both a left atrial and a right ventricular component can make the heave unusually prominent."
+        },
+        "skill.exam.cvs.apex": {
+          "expect": "Expect a tapping apex: an impulse of normal extent that feels unusually forceful because you are feeling a loud, palpable S1 rather than a true volume or pressure overload. The apex is typically not displaced in pure mitral stenosis; displacement should make you look for coexisting mitral regurgitation or another lesion."
+        },
+        "skill.exam.cvs.heartsounds": {
+          "expect": "Expect a loud S1, from the abruptly closing, still-mobile stenotic leaflets, and an opening snap 0.04 to 0.12 seconds after A2. Note the A2-to-opening-snap interval: it shortens as the stenosis worsens. A soft or absent S1, or an absent opening snap, suggests the leaflets have become calcified and immobile, which changes the balloon valvotomy candidacy."
+        },
+        "skill.exam.cvs.murmurs": {
+          "expect": "Listen at the apex, patient in the left lateral position, breath held in expiration, using the bell. Expect a low-pitched, rumbling mid-diastolic murmur with presystolic accentuation if the patient is in sinus rhythm; the presystolic component disappears in atrial fibrillation because there is no organised atrial contraction to produce it. If a separate high-pitched early diastolic murmur is heard at the pulmonary area, consider Graham Steell, the murmur of pulmonary regurgitation from severe pulmonary hypertension."
+        },
+        "skill.exam.cvs.bp": {
+          "expect": "Usually normal or with a slightly narrow pulse pressure. A wide pulse pressure or a collapsing pulse in this patient should make you look for coexisting aortic regurgitation, which is common in rheumatic valve disease."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the mitral stenosis picture together",
+      "blurb": "From individual signs to a graded valve lesion",
+      "skills": [
+        "skill.rhd.signs",
+        "skill.exam.cvs.heart_failure_signs"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "Three sentences that carry the valve, the rhythm and the state",
+      "skills": [
+        "skill.rhd.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "What else produces a diastolic murmur, and what argues against RHD",
+      "skills": [
+        "skill.rhd.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Echo makes the diagnosis; the rest grade it and look for triggers",
+      "skills": [
+        "skill.ix.rhd.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis and criteria",
+      "blurb": "Naming the acute illness that caused this, and the chronic valve it left behind",
+      "skills": [
+        "skill.dx.rhd"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "Prophylaxis first, then rate, rhythm, anticoagulation and the valve itself",
+      "skills": [
+        "skill.tx.rhd"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.rhd.cvs_exam",
+        "title": "Examine the cardiovascular system",
+        "task": "This 24-year-old woman has been breathless on exertion for two years. Examine her cardiovascular system and present your findings.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.approach.position",
+          "skill.exam.cvs.pulse",
+          "skill.exam.cvs.jvp",
+          "skill.exam.cvs.inspection",
+          "skill.exam.cvs.precordium_palpation",
+          "skill.exam.cvs.apex",
+          "skill.exam.cvs.heartsounds",
+          "skill.exam.cvs.murmurs"
+        ],
+        "examinerQuestions": [
+          "What is the murmur, and how would you position the patient and the stethoscope to hear it best?",
+          "The apex is tapping but not displaced. What does that tell you?",
+          "How would the findings change if this patient were in atrial fibrillation?"
+        ]
+      },
+      {
+        "id": "osce.rhd.history",
+        "title": "Take a history in suspected rheumatic heart disease",
+        "task": "This patient has a known diastolic murmur. Take a focused history in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.cvs.dyspnea_edema",
+          "skill.hx.rhd.rheumatic_fever"
+        ],
+        "examinerQuestions": [
+          "What features would you specifically ask about to support a past history of rheumatic fever?",
+          "Why does secondary prophylaxis adherence matter to your history?",
+          "What symptom would make you worry about a left atrial thrombus?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.rhd.savitri",
+      "title": "A young woman who gets breathless carrying water",
+      "opening": "Savitri Devi, 26, has come to the medical outpatient department with her husband. She looks well at rest but you notice a faint dusky discolouration over her cheeks. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Savitri Devi",
+        "age": 26,
+        "sex": "female",
+        "occupation": "Homemaker, from a rural household",
+        "residence": "Rural, joint family, walks to a shared well twice a day"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what is troubling"
+          ],
+          "reply": "Doctor, I get breathless carrying water from the well. It has become worse over the last two years, and for the last month my heart has also been fluttering irregularly.",
+          "key": true
+        },
+        "dyspnea_grade": {
+          "cues": [
+            "how far can you walk",
+            "how much can you do",
+            "stairs",
+            "exertion",
+            "walking",
+            "breathless when",
+            "activities",
+            "climb",
+            "sob",
+            "short of breath",
+            "shortness of breath",
+            "breathlessness"
+          ],
+          "reply": "Two years ago I could carry two pots without stopping. Now I have to stop halfway and put the pot down. Climbing to the upper floor of the house also leaves me breathless.",
+          "key": true
+        },
+        "orthopnea": {
+          "cues": [
+            "lying flat",
+            "lie flat",
+            "orthopnoea",
+            "orthopnea",
+            "pillows",
+            "wake up at night",
+            "breathless at night",
+            "how do you sleep",
+            "lie down",
+            "lying down",
+            "pnd",
+            "paroxysmal nocturnal dyspnea",
+            "paroxysmal nocturnal dyspnoea",
+            "wake up gasping",
+            "sit up to breathe"
+          ],
+          "reply": "I use two pillows now, one was enough before. I have not woken up gasping at night.",
+          "key": true
+        },
+        "palpitations": {
+          "cues": [
+            "palpitation",
+            "heart racing",
+            "flutter",
+            "irregular heartbeat",
+            "pounding"
+          ],
+          "reply": "Yes, for the last month my heart sometimes races and feels irregular, especially when I climb stairs.",
+          "key": true
+        },
+        "hemoptysis": {
+          "cues": [
+            "blood",
+            "haemoptysis",
+            "hemoptysis",
+            "cough up blood"
+          ],
+          "reply": "Once, about six months ago, I coughed up a small streak of blood. It has not happened since.",
+          "key": true
+        },
+        "hoarseness": {
+          "cues": [
+            "voice",
+            "hoarse",
+            "hoarseness"
+          ],
+          "reply": "No, my voice is normal."
+        },
+        "swelling": {
+          "cues": [
+            "swelling",
+            "ankle",
+            "legs",
+            "oedema",
+            "edema",
+            "feet"
+          ],
+          "reply": "No swelling of my legs."
+        },
+        "embolic": {
+          "cues": [
+            "stroke",
+            "weakness one side",
+            "paralysis",
+            "sudden weakness",
+            "vision loss"
+          ],
+          "reply": "No, nothing like that has ever happened."
+        },
+        "sore_throat_history": {
+          "cues": [
+            "sore throat",
+            "throat infection",
+            "child",
+            "childhood",
+            "school",
+            "joint pain as a child",
+            "fever as a child"
+          ],
+          "reply": "Now that you ask, I remember having a bad fever with painful, swollen knees and ankles when I was about nine years old. It moved from one joint to another over a week or two. We never saw a doctor for it, just gave me some tablets from the pharmacy.",
+          "key": true
+        },
+        "prophylaxis": {
+          "cues": [
+            "injection",
+            "monthly",
+            "penicillin",
+            "prophylaxis",
+            "regular treatment"
+          ],
+          "reply": "A doctor found a heart murmur when I was sixteen and told me to get a monthly injection, but the clinic was far and I stopped going after about a year.",
+          "key": true
+        },
+        "pregnancy": {
+          "cues": [
+            "pregnant",
+            "pregnancy",
+            "children",
+            "delivery"
+          ],
+          "reply": "I have one child, delivered four years ago. I was very breathless in the last two months of that pregnancy.",
+          "key": true
+        },
+        "fever": {
+          "cues": [
+            "fever",
+            "temperature",
+            "chills"
+          ],
+          "reply": "No fever now."
+        },
+        "chest_pain": {
+          "cues": [
+            "chest pain",
+            "pain in the chest"
+          ],
+          "reply": "No chest pain."
+        },
+        "comorbidity": {
+          "cues": [
+            "diabetes",
+            "blood pressure",
+            "hypertension",
+            "tuberculosis",
+            "past illness",
+            "operations"
+          ],
+          "reply": "No other illnesses, and no operations."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "parents",
+            "brother",
+            "sister",
+            "hereditary"
+          ],
+          "reply": "One of my younger sisters also has a heart murmur that the doctor is watching."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Comfortable at rest. A faint malar flush is visible over both cheeks.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 96, irregularly irregular. Blood pressure 106/74. Respiratory rate 18. SpO2 97 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.edema": {
+          "finding": "No pedal oedema.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.pulse": {
+          "finding": "Irregularly irregular, rate 96 by auscultation but 88 at the radial (a pulse deficit of 8). Normal volume. No radio-radial or radio-femoral delay.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.jvp": {
+          "finding": "Not raised, 2 cm above the sternal angle at 45 degrees. No prominent a wave, consistent with atrial fibrillation.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.inspection": {
+          "finding": "No precordial bulge, no scars, no visible pulsations.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.precordium_palpation": {
+          "finding": "A diastolic thrill is palpable at the apex in the left lateral position. No parasternal heave.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.apex": {
+          "finding": "5th left intercostal space, within the midclavicular line, tapping in character, not displaced.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.heartsounds": {
+          "finding": "Loud S1 at the apex. An opening snap is heard 0.08 seconds after A2. S2 normal. No S3, no S4.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.murmurs": {
+          "finding": "A low-pitched, rumbling mid-diastolic murmur, grade 3/4, best heard at the apex in the left lateral position with the bell in expiration. No presystolic accentuation, consistent with atrial fibrillation. No murmur elsewhere.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.bp": {
+          "finding": "106/74 in both arms. Pulse pressure 32.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.heart_failure_signs": {
+          "finding": "JVP not raised, no hepatomegaly, no ascites, no pedal oedema, lung bases clear, no S3. No signs of decompensated failure at this visit.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "ecg",
+        "echo",
+        "cxr"
+      ],
+      "investigations": {
+        "ecg": {
+          "label": "12-lead ECG",
+          "indicated": true,
+          "result": "Atrial fibrillation, ventricular rate around 90. No P waves seen. Right axis deviation with tall R in V1 suggesting right ventricular hypertrophy.",
+          "note": "Confirms the rhythm you felt at the pulse and shows early right ventricular strain from pulmonary hypertension."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Straightening of the left heart border, a double shadow along the right heart border (enlarged left atrium), splaying of the carina. Mild pulmonary venous prominence, no frank pulmonary oedema.",
+          "note": "The double atrial shadow and splayed carina are the classic radiographic markers of a big left atrium."
+        },
+        "echo": {
+          "label": "Transthoracic echocardiogram",
+          "indicated": true,
+          "result": "Mitral valve area 1.1 cm2 by planimetry, mean transmitral gradient 12 mmHg, pliable non-calcified leaflets, mild subvalvular thickening, no significant mitral regurgitation. Left atrium markedly dilated, no thrombus seen on transthoracic views. Estimated pulmonary artery systolic pressure 42 mmHg. Preserved left ventricular function.",
+          "note": "This is the test that makes the diagnosis and grades it: severe mitral stenosis by valve area, favourable leaflet morphology for balloon valvotomy."
+        },
+        "aso": {
+          "label": "Anti-streptolysin O titre",
+          "indicated": false,
+          "result": "Within the normal range for age.",
+          "note": "Not expected to be raised this many years after the original streptococcal infection. It is useful to support a diagnosis of ACTIVE or recent rheumatic fever, not a chronic, established valve lesion like this one."
+        },
+        "esr": {
+          "label": "ESR and CRP",
+          "indicated": false,
+          "result": "Normal.",
+          "note": "There is no clinical evidence of active carditis today; these are not needed to characterise an old, chronic valve lesion."
+        },
+        "inr": {
+          "label": "INR",
+          "indicated": true,
+          "result": "1.0 (not yet on anticoagulation).",
+          "note": "Baseline before starting anticoagulation for atrial fibrillation with mitral stenosis, a combination in which anticoagulation is not optional."
+        },
+        "tsh": {
+          "label": "Thyroid function",
+          "indicated": true,
+          "result": "Normal.",
+          "note": "Reasonable in any new atrial fibrillation, to look for a reversible driver."
+        },
+        "tee": {
+          "label": "Transoesophageal echocardiogram",
+          "indicated": false,
+          "result": "Not performed at this visit.",
+          "note": "Not needed for the initial diagnosis. It becomes relevant before balloon valvotomy specifically to exclude a left atrial appendage thrombus, once that procedure is actually being planned."
+        }
+      },
+      "differentialModel": {
+        "answer": "Rheumatic mitral stenosis with atrial fibrillation. Consider atrial myxoma, congenital mitral stenosis, Carey Coombs murmur of active carditis, and Austin Flint murmur of aortic regurgitation as mimics of the diastolic murmur.",
+        "accept": [
+          "mitral stenosis",
+          "rheumatic",
+          "myxoma",
+          "atrial fibrillation",
+          "austin flint",
+          "carey coombs"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Chronic rheumatic heart disease with severe mitral stenosis, in atrial fibrillation, with secondary pulmonary hypertension, currently compensated (NYHA class II), on a background of a probable childhood episode of acute rheumatic fever and lapsed secondary prophylaxis.",
+        "accept": [
+          "rheumatic heart disease",
+          "mitral stenosis"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Restart secondary antibiotic prophylaxis, control the ventricular rate, anticoagulate for atrial fibrillation with mitral stenosis, and refer for assessment for balloon mitral valvotomy given favourable valve morphology. Diuretics only if she develops congestive symptoms, and rheumatic fever and endocarditis prevention education for her sister as well.",
+        "accept": [
+          "prophylaxis",
+          "penicillin",
+          "rate control",
+          "anticoagulation",
+          "anticoagulate",
+          "valvotomy",
+          "balloon"
+        ],
+        "minMatch": 3
+      },
+      "teachingPoints": [
+        "The malar flush and the pulse told you the diagnosis before you had listened to anything: a young woman, a dusky-cheeked appearance, and an irregularly irregular pulse together should already suggest mitral stenosis with atrial fibrillation.",
+        "The presystolic accentuation of the murmur was ABSENT because she is in atrial fibrillation, not because the stenosis is mild. A textbook description assumes sinus rhythm, and real patients often are not in it.",
+        "The childhood story of migratory joint pain with fever, never seen by a doctor, is exactly how rheumatic fever presents in a population without ready access to primary care, and exactly why it is so easy to miss retrospectively unless you ask directly.",
+        "Lapsed secondary prophylaxis is not a background detail, it is the single most correctable thing in this history, and it is worth returning to explicitly with the patient before she leaves.",
+        "Echo answered three separate questions at once: the diagnosis (valve area), the severity (gradient and pulmonary pressure), and the treatment option (leaflet morphology for valvotomy), which is why it is ordered before deciding on anything else.",
+        "Anticoagulation here is not a judgement call weighed against bleeding risk the way it might be in isolated atrial fibrillation; mitral stenosis with atrial fibrillation is one of the situations where anticoagulation is essentially mandatory because of the very high stroke risk from left atrial stasis."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.rhd.basics",
+      "skill.hx.rhd.rheumatic_fever",
+      "skill.exam.cvs.apex",
+      "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.murmurs",
+      "skill.rhd.differential",
+      "skill.ix.rhd.workup",
+      "skill.dx.rhd",
+      "skill.tx.rhd"
+    ]
+  },
+  "skills": {
+    "skill.rhd.basics": {
+      "id": "skill.rhd.basics",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "What rheumatic heart disease is",
+      "oneLine": "An autoimmune reaction to strep throat that ends up scarring a valve, years later",
+      "why": "Students meet rheumatic heart disease as a fixed valve lesion and forget it started as a systemic illness of childhood. Understanding the timeline, throat infection, then acute rheumatic fever, then years of silence, then a scarred valve, is what makes the history make sense and explains why prevention is entirely about the throat, not the valve.",
+      "body": "Rheumatic heart disease is the chronic valvular damage that follows one or more episodes of acute rheumatic fever, an autoimmune response to infection with group A Streptococcus pyogenes, usually pharyngitis. Molecular mimicry between streptococcal antigens and cardiac tissue drives an immune reaction against the heart, joints, skin and central nervous system during the acute illness; the joints and skin recover completely, but valvular scarring can be permanent.",
+      "keyPoints": [
+        "The trigger is streptococcal pharyngitis, not a skin infection, and not the valve disease itself.",
+        "Only a minority of untreated strep throats lead to acute rheumatic fever, but each further episode of pharyngitis in a sensitised patient can cause more valvular damage, which is why secondary prevention targets every future sore throat.",
+        "The mitral valve is affected far more often than any other, followed by the aortic valve; the mitral valve is affected in isolation or in combination with the aortic valve in most cases.",
+        "Early rheumatic valvulitis tends to cause regurgitation, since the acute inflammatory phase makes leaflets floppy; stenosis develops later, over years, as the leaflets fibrose, thicken, calcify and fuse at the commissures.",
+        "Poverty, overcrowding and limited access to primary care and to penicillin are the drivers of continued high incidence, which is why the disease remains common in India despite being rare in settings with easy antibiotic access.",
+        "All-age prevalence thresholds are used epidemiologically to define low versus higher-risk populations, which in turn change which Jones criteria apply to a given patient."
+      ],
+      "pitfalls": [
+        "Treating rheumatic heart disease as a disease of the valve alone, forgetting it is the late scar of a systemic illness.",
+        "Assuming a patient with a rheumatic murmur must remember a dramatic childhood illness; many recall only a vague fever with joint pains, if they recall anything at all.",
+        "Believing the valve lesion, once established, is the end of the disease process; recurrent pharyngitis in a sensitised patient continues to cause fresh damage."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What triggers acute rheumatic fever?",
+          "a": "An autoimmune reaction to infection with group A Streptococcus, usually pharyngitis.",
+          "accept": [
+            "streptococc",
+            "strep throat",
+            "pharyngitis",
+            "group a"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Which valve is most commonly affected in rheumatic heart disease?",
+          "a": "The mitral valve, alone or together with the aortic valve.",
+          "accept": [
+            "mitral"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does acute rheumatic carditis tend to cause regurgitation, while chronic rheumatic heart disease is more often stenotic?",
+          "a": "Acute inflammation makes the valve leaflets floppy and poorly coapting, producing regurgitation; over years, repeated inflammation causes fibrosis, thickening, calcification and commissural fusion, which produces stenosis instead.",
+          "accept": [
+            "fibros",
+            "thicken",
+            "fuse",
+            "commissur",
+            "calcif"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why does secondary prophylaxis target every future sore throat rather than the heart itself?",
+          "a": "Because it is a further streptococcal pharyngitis in an already-sensitised patient that triggers another bout of carditis and further valve damage, so preventing or promptly treating the throat infection is what prevents further cardiac injury; there is no direct treatment that reverses the valve scarring itself.",
+          "accept": [
+            "sensitis",
+            "further",
+            "prevent",
+            "throat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: rheumatic heart disease"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Rheumatic fever and rheumatic heart disease"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: mitral stenosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rhd.signs": {
+      "id": "skill.rhd.signs",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The mitral stenosis picture",
+      "oneLine": "One murmur, correctly timed and positioned, plus what it does to the chambers behind it",
+      "why": "Mitral stenosis findings are not a random list; they follow directly from a fixed, narrowed valve orifice obstructing flow from a high-pressure left atrium into a normal left ventricle. Deriving the signs from that one mechanical fact is what turns them from trivia into something you can reconstruct under pressure in an exam.",
+      "body": "Everything in the mitral stenosis picture follows from one obstruction: a narrowed valve orifice that the left atrium has to push blood through under increasing pressure, protecting a left ventricle that is often entirely normal.",
+      "keyPoints": [
+        "From the obstruction itself: a loud S1 (still-mobile leaflets snapping shut), an opening snap (the leaflets tensing as they suddenly stop moving in early diastole), and a mid-diastolic murmur with presystolic accentuation in sinus rhythm.",
+        "From the pressure-loaded, dilated left atrium: atrial fibrillation, a risk of left atrial thrombus and systemic embolism, and on the chest radiograph a double atrial shadow and splayed carina.",
+        "From backward transmission of pressure into the lungs: exertional dyspnoea, orthopnoea, PND, and in severe or longstanding disease, haemoptysis and, rarely, hoarseness from a dilated left atrium compressing the left recurrent laryngeal nerve (Ortner's syndrome).",
+        "From secondary pulmonary hypertension: a parasternal heave, a loud P2 or a palpable P2, and if severe, a Graham Steell murmur of pulmonary regurgitation and, eventually, right heart failure with a raised JVP, hepatomegaly and oedema.",
+        "The left ventricle itself is usually normal or even small in pure mitral stenosis, which is why the apex is tapping rather than displaced; a displaced apex should make you look for coexisting mitral regurgitation, aortic valve disease, or another diagnosis altogether."
+      ],
+      "pitfalls": [
+        "Expecting presystolic accentuation of the murmur in a patient who is already in atrial fibrillation. It requires organised atrial contraction and disappears once that is lost.",
+        "Treating a displaced apex as compatible with pure mitral stenosis, when it should prompt a search for coexisting regurgitation or another lesion.",
+        "Missing early right heart failure because the JVP, and not just the legs, was not examined."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name the three auscultatory findings that together suggest mitral stenosis.",
+          "a": "A loud S1, an opening snap, and a mid-diastolic murmur with presystolic accentuation.",
+          "accept": [
+            "loud s1",
+            "opening snap",
+            "mid-diastolic",
+            "presystolic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is the apex usually tapping rather than displaced in pure mitral stenosis?",
+          "a": "Because the left ventricle itself is not volume- or pressure-overloaded in pure mitral stenosis; the impulse you feel is really a loud, palpable S1 rather than an enlarged or hyperdynamic ventricle.",
+          "accept": [
+            "s1",
+            "not overload",
+            "normal ventricle",
+            "left ventricle normal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "Trace the mechanism from a stenotic mitral valve to a right parasternal heave.",
+          "a": "The stenotic valve raises left atrial pressure, which transmits backward into the pulmonary veins and capillaries, causing pulmonary venous hypertension; sustained, this produces reactive pulmonary arterial hypertension, which loads the right ventricle with pressure, producing a sustained, forceful parasternal heave.",
+          "accept": [
+            "left atrial pressure",
+            "pulmonary",
+            "right ventric",
+            "pressure overload"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "derive",
+          "text": "Derives the signs from the mechanical obstruction rather than reciting a list"
+        },
+        {
+          "id": "rhythm",
+          "text": "Recognises the effect of atrial fibrillation on the presystolic component"
+        },
+        {
+          "id": "rightheart",
+          "text": "Identifies the right heart findings as a marker of secondary pulmonary hypertension"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: mitral stenosis signs"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: mitral stenosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rhd.summary": {
+      "id": "skill.rhd.summary",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The clinical summary",
+      "oneLine": "The valve, the rhythm, the pressure, and the state, in one abstracted sentence",
+      "why": "A summary that just says 'mitral stenosis' has thrown away most of the useful information. A complete summary carries the rhythm and the haemodynamic state as well, because both change management immediately.",
+      "body": "State the patient and the epidemiology, the tempo, and the syndrome abstracted with its rhythm and haemodynamic state.",
+      "keyPoints": [
+        "Name the patient and the epidemiology that raises probability: young, often female, from a background with limited access to primary care.",
+        "Give the tempo: years of slow progression, sometimes punctuated by an acute decompensating trigger such as pregnancy, infection, or new arrhythmia.",
+        "State the syndrome abstractly, including the rhythm: 'chronic, slowly progressive exertional dyspnoea with a mid-diastolic murmur, currently in atrial fibrillation'.",
+        "A worked example: 'A 26-year-old woman with a probable childhood episode of rheumatic fever and lapsed secondary prophylaxis presents with two years of progressive exertional dyspnoea and one month of palpitations. Examination shows a tapping, non-displaced apex, a loud S1, an opening snap, and a mid-diastolic murmur without presystolic accentuation, in an irregularly irregular pulse. This is rheumatic mitral stenosis with new atrial fibrillation.'"
+      ],
+      "pitfalls": [
+        "Naming the valve lesion and stopping there, without stating the rhythm.",
+        "Omitting whether the patient is currently compensated or in failure.",
+        "Reciting the history in narrative order instead of abstracting it."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Besides the valve lesion, what two things must a complete summary of this patient carry?",
+          "a": "The cardiac rhythm, and whether the patient is currently compensated or in heart failure.",
+          "accept": [
+            "rhythm",
+            "compensat",
+            "failure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rhythm",
+          "text": "States the rhythm"
+        },
+        {
+          "id": "state",
+          "text": "States the current haemodynamic state"
+        }
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "Clinical reasoning"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.rhd.differential": {
+      "id": "skill.rhd.differential",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Differential diagnosis of a mid-diastolic murmur",
+      "oneLine": "What else rumbles at the apex, and what argues against rheumatic mitral stenosis",
+      "why": "A mid-diastolic murmur is not automatically rheumatic mitral stenosis. Several mimics change the story completely, from a mobile tumour that can embolise or obstruct the valve outright, to a murmur that is not even coming from the mitral valve.",
+      "body": "For a mid-diastolic murmur at the apex, the differential spans a genuinely stenotic valve, a mimic of stenosis, and murmurs from elsewhere that are simply loudest at or near the apex.",
+      "keyPoints": [
+        "Atrial myxoma: a mobile left atrial tumour can produce an apical diastolic murmur, sometimes called a tumour plop, that changes with position; suspect it when there are constitutional symptoms (fever, weight loss, malaise) out of proportion to the cardiac findings, or when the murmur varies dramatically with posture.",
+        "Austin Flint murmur: a mid-to-late diastolic murmur heard in severe aortic regurgitation, caused by the regurgitant jet hitting the anterior mitral leaflet; distinguished by the presence of a genuine early diastolic murmur of aortic regurgitation and a collapsing pulse, and the absence of a loud S1 or opening snap.",
+        "Carey Coombs murmur: a soft, mid-diastolic murmur heard during active rheumatic carditis, from valvulitis rather than established stenosis; look for the other features of active carditis, arthritis, erythema marginatum, subcutaneous nodules, and a raised ESR or CRP.",
+        "Congenital mitral stenosis: rare, presents in infancy or early childhood, without the antecedent history of rheumatic fever.",
+        "Tricuspid stenosis: also gives a mid-diastolic murmur, but at the lower left sternal edge or epigastrium, louder on inspiration, with a prominent JVP a wave; almost always rheumatic and almost never occurs without accompanying mitral valve disease.",
+        "Left atrial ball-valve thrombus: can mimic mitral stenosis clinically and is itself a complication of mitral stenosis with atrial fibrillation, so it should be considered in a patient whose murmur changes with position or whose symptoms are unusually severe for the measured valve area."
+      ],
+      "pitfalls": [
+        "Assuming every apical diastolic murmur in a young Indian patient is rheumatic without considering myxoma, particularly when the murmur is positional or the patient has systemic symptoms.",
+        "Missing active carditis (Carey Coombs murmur) because the murmur was assumed to represent chronic, fixed stenosis.",
+        "Forgetting that severe aortic regurgitation can produce an apical diastolic murmur (Austin Flint) that superficially resembles mitral stenosis."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name two conditions other than rheumatic mitral stenosis that can produce an apical mid-diastolic murmur.",
+          "a": "Atrial myxoma, the Austin Flint murmur of severe aortic regurgitation, or Carey Coombs murmur of active rheumatic carditis.",
+          "accept": [
+            "myxoma",
+            "austin flint",
+            "carey coombs"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What features would make you suspect an atrial myxoma rather than rheumatic mitral stenosis?",
+          "a": "Constitutional symptoms such as fever, weight loss and malaise disproportionate to the cardiac findings, and a murmur that varies markedly with the patient's position.",
+          "accept": [
+            "constitutional",
+            "posture",
+            "position",
+            "fever",
+            "weight loss"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How do you distinguish an Austin Flint murmur from true mitral stenosis at the bedside?",
+          "a": "Austin Flint occurs with severe aortic regurgitation and is accompanied by a genuine early diastolic murmur of AR and a collapsing pulse; it lacks the loud S1 and opening snap of true mitral stenosis, since the mitral valve itself is structurally normal.",
+          "accept": [
+            "aortic regurgitation",
+            "collapsing",
+            "s1",
+            "opening snap"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "breadth",
+          "text": "Offers a differential beyond rheumatic mitral stenosis alone"
+        },
+        {
+          "id": "discriminate",
+          "text": "States a discriminating feature for each alternative"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: diastolic murmur differential"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: murmurs"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: murmurs"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.rhd.workup": {
+      "id": "skill.ix.rhd.workup",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "Working up suspected rheumatic mitral stenosis",
+      "oneLine": "Echo makes and grades the diagnosis; everything else looks for a trigger or a complication",
+      "why": "Ordering echo, ECG and a chest film as an undifferentiated panel misses what each one is actually for. Echo is the only test that both confirms and grades the lesion; the rest answer separate, specific questions.",
+      "body": "Group investigations by the question each answers: confirm and grade the valve lesion, characterise the rhythm, look at the chamber sizes and lung fields, and screen for a decompensating trigger.",
+      "keyPoints": [
+        "Confirm and grade: transthoracic echocardiography measures valve area (planimetry), the mean transmitral gradient, leaflet mobility and calcification, subvalvular thickening, left atrial size, the presence or absence of left atrial thrombus, and estimated pulmonary artery pressure. It also grades leaflet morphology, which decides candidacy for balloon mitral valvotomy versus surgery.",
+        "Characterise the rhythm: a 12-lead ECG identifies atrial fibrillation, P mitrale (a broad, notched P wave from left atrial enlargement) in sinus rhythm, and right ventricular hypertrophy from secondary pulmonary hypertension.",
+        "Chamber and lung findings: a chest radiograph can show straightening of the left heart border, a double shadow along the right heart border and splaying of the carina from left atrial enlargement, and, with pulmonary venous hypertension, upper zone vessel prominence (cephalisation) progressing to Kerley B lines as pressure rises.",
+        "Transoesophageal echocardiography is reserved for excluding a left atrial appendage thrombus before balloon valvotomy or cardioversion, or when transthoracic views are inadequate; it is not a first-line test.",
+        "Screen for an active or recent streptococcal trigger only when the clinical picture suggests ACTIVE carditis, not in an established, chronic lesion: anti-streptolysin O titre, throat swab, and ESR or CRP as supporting evidence for the Jones criteria.",
+        "Baseline INR and renal function before starting anticoagulation, and thyroid function in new atrial fibrillation, to look for a reversible driver."
+      ],
+      "pitfalls": [
+        "Ordering ASO titres and inflammatory markers routinely in a patient with an established, chronic valve lesion and no evidence of active carditis, when they are really meant to support a diagnosis of ACTIVE rheumatic fever.",
+        "Treating the chest radiograph as sufficient to diagnose or grade mitral stenosis; it cannot measure valve area.",
+        "Forgetting that leaflet morphology on echo, not just valve area, is what decides eligibility for balloon valvotomy.",
+        "Reflexively ordering a transoesophageal echo before it is actually needed for a specific procedural decision."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single test both confirms and grades mitral stenosis?",
+          "a": "Transthoracic echocardiography.",
+          "accept": [
+            "echo",
+            "echocardiogram"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What radiographic findings suggest left atrial enlargement?",
+          "a": "Straightening of the left heart border, a double shadow along the right heart border, and splaying of the carina.",
+          "accept": [
+            "double shadow",
+            "splaying",
+            "carina",
+            "straightening"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "When is a transoesophageal echocardiogram indicated in mitral stenosis?",
+          "a": "To exclude a left atrial appendage thrombus before balloon valvotomy or cardioversion, or when transthoracic image quality is inadequate. It is not routine.",
+          "accept": [
+            "thrombus",
+            "valvotomy",
+            "cardioversion"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient with a chronic, stable rheumatic mitral stenosis has a normal ASO titre and normal ESR. Does this argue against the diagnosis?",
+          "a": "No. These markers reflect a recent or active streptococcal or inflammatory process; a chronic, established valve lesion from an episode years or decades in the past is expected to have normal values, and ordering them here answers the wrong question.",
+          "accept": [
+            "no",
+            "chronic",
+            "expected normal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: mitral stenosis workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Valvular heart disease"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Investigations in valvular heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.rhd": {
+      "id": "skill.dx.rhd",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Diagnosing rheumatic fever, and stating rheumatic heart disease",
+      "oneLine": "The Jones criteria for the acute illness, and a complete statement for the chronic valve lesion it left",
+      "why": "Acute rheumatic fever and chronic rheumatic heart disease are diagnosed differently and need to be kept conceptually separate: one is a clinical diagnosis made with defined criteria at the time of the acute illness, the other is a structural diagnosis made on imaging, years later, in a patient who may never have been formally diagnosed with the first.",
+      "body": "For a patient with a possible ACUTE episode, apply the revised Jones criteria. For a patient presenting with an established valve lesion, state the diagnosis completely: the valve, the lesion and its severity, the rhythm, the haemodynamic state, and any complications.",
+      "keyPoints": [
+        "The 2015 revised Jones criteria require evidence of a preceding group A streptococcal infection, plus either two major criteria, or one major and two minor criteria, and the criteria used differ by whether the population is low-risk or moderate-to-high-risk.",
+        "Major criteria: carditis (clinical or subclinical, meaning echocardiographic valvulitis), arthritis (polyarthritis in low-risk populations; polyarthritis, monoarthritis or polyarthralgia in moderate-to-high-risk populations), chorea, erythema marginatum, and subcutaneous nodules.",
+        "Minor criteria: polyarthralgia (low-risk) or monoarthralgia (higher-risk populations), fever, a raised ESR or CRP by population-specific thresholds, and a prolonged PR interval (unless carditis is already counted as a major criterion). Joint involvement counts only once, as either a major or a minor criterion, never both.",
+        "For chronic rheumatic heart disease presenting years later, state four things: the valve or valves involved and the specific lesion (stenosis, regurgitation or mixed), its severity by echo, the cardiac rhythm, and the current haemodynamic state (compensated, or a defined degree of failure) with any complications such as a left atrial thrombus or pulmonary hypertension.",
+        "A worked example for the chronic diagnosis: 'Chronic rheumatic heart disease with severe mitral stenosis, in atrial fibrillation, with secondary pulmonary hypertension, currently NYHA class II, on a background of a probable childhood episode of acute rheumatic fever.'"
+      ],
+      "pitfalls": [
+        "Applying the Jones criteria to a chronic, established valve lesion when there is no suggestion of a current acute illness; they are diagnostic criteria for the ACUTE episode.",
+        "Stating 'rheumatic heart disease' without naming the valve, the lesion, its severity, the rhythm, and the current state.",
+        "Double-counting joint involvement as both a major and a minor criterion in the same patient.",
+        "Forgetting that echocardiographic valvulitis alone can satisfy the carditis criterion, even without a clinically audible murmur."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many major criteria, or how many major plus minor criteria, are needed for a Jones criteria diagnosis of acute rheumatic fever?",
+          "a": "Two major criteria, or one major plus two minor criteria, in the presence of evidence of a preceding streptococcal infection.",
+          "accept": [
+            "two major",
+            "one major",
+            "two minor"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name the five major Jones criteria.",
+          "a": "Carditis, arthritis, chorea, erythema marginatum, and subcutaneous nodules.",
+          "accept": [
+            "carditis",
+            "arthritis",
+            "chorea",
+            "erythema marginatum",
+            "subcutaneous nodules"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "What four elements make a complete diagnostic statement for a patient with established rheumatic heart disease?",
+          "a": "The valve and the lesion with its severity, the rhythm, the current haemodynamic state, and any complications.",
+          "accept": [
+            "valve",
+            "severity",
+            "rhythm",
+            "state",
+            "complication"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why do the Jones criteria differ between low-risk and moderate-to-high-risk populations?",
+          "a": "Because the pretest probability of rheumatic fever is much higher in populations with a high background prevalence, so a broader definition of arthritis (including monoarthritis and polyarthralgia) and lower fever and ESR/CRP thresholds are used without an unacceptable rise in overdiagnosis; the opposite thresholds would miss real cases in a high-prevalence population, or overdiagnose in a low-prevalence one.",
+          "accept": [
+            "prevalence",
+            "pretest",
+            "background",
+            "risk"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "jones",
+          "text": "Correctly applies the Jones criteria structure when an acute episode is being assessed"
+        },
+        {
+          "id": "chronic",
+          "text": "Gives a complete four-part statement for the chronic valve diagnosis",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: Jones criteria and rheumatic heart disease diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Acute rheumatic fever"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.rhd": {
+      "id": "skill.tx.rhd",
+      "kind": "treatment",
+      "system": "cardiovascular",
+      "title": "Managing rheumatic heart disease with mitral stenosis",
+      "oneLine": "Prophylaxis to stop new damage, rate and rhythm control, anticoagulation, and, when the valve itself needs fixing, valvotomy or replacement",
+      "why": "Treatment here has two entirely separate goals that are easy to conflate: preventing further valve damage (which is about the throat) and managing the damage already done (which is about the valve, the rhythm and the clot risk). Confusing the two is how a student ends up focused only on the murmur and forgets the one intervention that actually changes the disease's course.",
+      "body": "Manage this in layers: secondary prevention of further rheumatic damage, control of rate and rhythm, anticoagulation where indicated, symptomatic treatment of congestion, and, when the valve itself is severely diseased, a mechanical intervention.",
+      "keyPoints": [
+        "Secondary antibiotic prophylaxis against further streptococcal infection is the single intervention that prevents further valve damage, and it is a long-term or lifelong commitment whose duration and regimen must follow current guideline recommendations for this patient's risk category.",
+        "Rate control in atrial fibrillation, typically with a beta blocker or a rate-limiting calcium channel blocker, aims to control ventricular rate; rhythm control (cardioversion) is considered in selected patients, generally once anticoagulation has been established and left atrial thrombus excluded.",
+        "Anticoagulation is indicated in mitral stenosis with atrial fibrillation, a prior embolic event, or an identified left atrial thrombus, because the combination of a fixed valve orifice, a dilated left atrium and loss of organised atrial contraction produces a high thromboembolic risk.",
+        "Diuretics relieve pulmonary and systemic congestion symptomatically; they do not treat the underlying obstruction and should not be mistaken for definitive therapy.",
+        "Mechanical relief of the obstruction, percutaneous balloon mitral valvotomy in patients with favourable leaflet morphology and no significant regurgitation or left atrial thrombus, or surgical valve repair or replacement otherwise, is considered for symptomatic severe mitral stenosis or asymptomatic severe disease with high-risk features; the specific threshold and choice of procedure are specialist decisions.",
+        "Endocarditis risk awareness: patients with a damaged valve need to understand that dental and other procedures carry a risk of seeding infection onto that valve, and any current guideline on procedural antibiotic prophylaxis for endocarditis should be followed rather than assumed.",
+        "Pregnancy in a woman with significant mitral stenosis needs specialist joint cardio-obstetric planning, since the physiological rise in heart rate and plasma volume can precipitate decompensation, exactly as this patient's history illustrates."
+      ],
+      "pitfalls": [
+        "Treating the murmur and forgetting the prophylaxis, which is the one intervention that changes the disease's natural history.",
+        "Withholding anticoagulation in mitral stenosis with atrial fibrillation because the patient 'feels fine'; the stroke risk is present regardless of symptoms.",
+        "Attempting cardioversion without first considering left atrial thrombus.",
+        "Treating diuretics as if they fix the underlying lesion rather than only its congestive symptoms.",
+        "Overlooking that pregnancy is a recognised trigger for decompensation and needs specific anticipatory planning, not reassurance alone."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the one intervention that prevents FURTHER rheumatic valve damage?",
+          "a": "Secondary antibiotic prophylaxis against streptococcal infection.",
+          "accept": [
+            "prophylaxis",
+            "penicillin",
+            "secondary prevention"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Give two indications for anticoagulation in mitral stenosis.",
+          "a": "Atrial fibrillation, a prior embolic event, or a documented left atrial thrombus.",
+          "accept": [
+            "atrial fibrillation",
+            "embolic",
+            "thrombus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What echo features favour balloon mitral valvotomy over surgery?",
+          "a": "Favourable, pliable, non-calcified leaflet morphology with mild subvalvular disease, no significant mitral regurgitation, and no left atrial thrombus.",
+          "accept": [
+            "pliable",
+            "non-calcified",
+            "no regurgitation",
+            "no thrombus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why should cardioversion generally not be attempted before addressing anticoagulation and thrombus status in this patient group?",
+          "a": "Restoring organised atrial contraction after a period of atrial fibrillation can dislodge a pre-existing atrial thrombus and cause systemic embolism, so anticoagulation and exclusion of thrombus (often by transoesophageal echo) should precede elective cardioversion.",
+          "accept": [
+            "dislodge",
+            "embolism",
+            "thrombus",
+            "anticoagulat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: mitral stenosis management"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Valvular heart disease: mitral stenosis"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: management of mitral stenosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches management at the level of principle and drug CLASS only. The specific prophylaxis regimen and duration, anticoagulant choice and target, rate-control agent and dose, and the threshold and timing for valvotomy or surgery must be taken from your current national or institutional guideline at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}

@@ -1,0 +1,755 @@
+/* clinix.css — CliniX · clinical learning.
+ *
+ * ALL selectors are scoped to #clinixRoot / .cx-* - additive, zero global leakage (mirrors the
+ * ThoreX / SknX / KardioX gate). Reuses StewardMD design tokens (--rds-*) so light/dark and every
+ * accent theme flow through with no extra CSS. Module-local --cx-* tokens are defined ON #clinixRoot
+ * only, never on body or :root.
+ *
+ * Flag-gated by smd_clinix via clinix.js; when off, clinix.js never mounts #clinixRoot, so none of
+ * this applies. The CSS scope IS part of the feature gate.
+ *
+ * Design intent: this must read as a clinical teaching surface, not an LMS. That means restraint -
+ * one accent, hairline separation rather than shadow, generous type, and no decorative gradient.
+ * The one deliberate flourish is the hero, because a student should feel they have entered
+ * something distinct from the doctor-facing app.
+ */
+
+#clinixRoot {
+  /* Aliases with literal fallbacks, so the module still renders if the design system is absent. */
+  --cx-primary: var(--rds-primary, #0F766E);
+  --cx-primary-2: var(--rds-primary-2, #115E59);
+  --cx-teach: #1D4ED8;                       /* CliniX's domain hue: teaching, not clinical status */
+  --cx-teach-soft: #EFF4FF;
+  --cx-bg: var(--rds-bg, #F5F8F9);
+  --cx-surface: var(--rds-surface, #FFFFFF);
+  --cx-surface-2: var(--rds-surface-2, #EEF3F5);
+  --cx-ink: var(--rds-ink, #0D1B24);
+  --cx-muted: var(--rds-muted, #5B7083);
+  --cx-faint: var(--rds-faint, #8CA0AF);
+  --cx-line: var(--rds-line, #E3EAEE);
+  --cx-ok: var(--sev-stable-fg, #1B7F5C);
+  --cx-ok-bg: var(--sev-stable-bg, #E7F5EF);
+  --cx-warn: var(--sev-warning-fg, #92620A);
+  --cx-warn-bg: var(--sev-warning-bg, #FDF3E2);
+  --cx-bad: var(--sev-critical-fg, #B42332);
+  --cx-bad-bg: var(--sev-critical-bg, #FCEDEF);
+  --cx-r: var(--rds-r, 16px);
+  --cx-r-ctl: var(--rds-r-ctl, 12px);
+  --cx-ease: cubic-bezier(.2, .7, .2, 1);
+  --cx-sans: var(--rds-font, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --cx-mono: var(--rds-mono, "IBM Plex Mono", ui-monospace, monospace);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1250;
+  display: none;
+  flex-direction: column;
+  background: var(--cx-bg);
+  color: var(--cx-ink);
+  font-family: var(--cx-sans);
+  -webkit-font-smoothing: antialiased;
+}
+#clinixRoot.cx-open { display: flex; }
+
+#clinixRoot .cx-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(28px + env(safe-area-inset-bottom, 0px));
+}
+
+#clinixRoot .material-symbols-rounded { font-family: "Material Symbols Rounded"; font-weight: 400; font-style: normal; font-size: 22px; line-height: 1; letter-spacing: normal; text-transform: none; display: inline-block; white-space: nowrap; direction: ltr; }
+
+/* ── header ───────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-head {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; gap: 10px;
+  padding: calc(env(safe-area-inset-top, 0px) + 10px) 12px 10px;
+  background: var(--cx-surface);
+  border-bottom: 1px solid var(--cx-line);
+}
+#clinixRoot .cx-back,
+#clinixRoot .cx-close {
+  flex: 0 0 auto; width: 40px; height: 40px;
+  display: inline-flex; align-items: center; justify-content: center;
+  border: 0; border-radius: 999px; background: transparent;
+  color: var(--cx-ink); cursor: pointer;
+}
+#clinixRoot .cx-back:active,
+#clinixRoot .cx-close:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-head-txt { flex: 1 1 auto; min-width: 0; }
+#clinixRoot .cx-head-title { font-size: 16px; font-weight: 700; line-height: 1.2; }
+#clinixRoot .cx-head-sub { font-size: 12px; color: var(--cx-muted); margin-top: 2px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+/* ── hero ─────────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-hero {
+  position: relative;
+  /* Top padding clears the close button below, so the wordmark never sits under it. */
+  padding: calc(env(safe-area-inset-top, 0px) + 56px) 20px 24px;
+  background: var(--cx-primary-2);
+  color: #fff;
+}
+/* Top-LEFT, not top-right. swipe-back.js injects its own #smdTopBack whenever no BACK_SEL control
+   sits within 150px of the top-left corner, and it was landing directly on the CliniX wordmark.
+   Putting the close here also means "leave this screen" is in the same place on every CliniX
+   screen, since every other one has its back button top-left. */
+#clinixRoot .cx-hero-close { position: absolute; top: calc(env(safe-area-inset-top, 0px) + 10px); left: 8px; color: rgba(255,255,255,.9); }
+#clinixRoot .cx-hero-mark { display: flex; align-items: center; gap: 8px; font-size: 30px; font-weight: 800; letter-spacing: -.02em; }
+#clinixRoot .cx-hero-logo { flex: 0 0 auto; }
+#clinixRoot .cx-hero-tag { margin-top: 4px; font-size: 13px; opacity: .84; }
+
+/* ── sections and rows ────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-sec { padding: 18px 16px 0; }
+#clinixRoot .cx-sec-h { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-faint); margin: 18px 16px 8px; }
+#clinixRoot .cx-sec .cx-sec-h { margin: 0 0 8px; }
+#clinixRoot .cx-rows { display: flex; flex-direction: column; gap: 8px; }
+#clinixRoot .cx-rows--pad { padding: 12px 16px 0; }
+
+#clinixRoot .cx-row {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 14px; text-align: left;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); color: var(--cx-ink); cursor: pointer;
+  font-family: inherit; font-size: 15px;
+}
+#clinixRoot .cx-row:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-row-ic { flex: 0 0 auto; display: inline-flex; color: var(--cx-primary); }
+#clinixRoot .cx-row-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#clinixRoot .cx-row-t { font-weight: 600; }
+#clinixRoot .cx-row-s { font-size: 13px; color: var(--cx-muted); }
+#clinixRoot .cx-row-meta { font-size: 11.5px; color: var(--cx-faint); }
+#clinixRoot .cx-row--dz .cx-row-t { font-size: 17px; }
+
+#clinixRoot .cx-m-mastered { color: var(--cx-ok); }
+#clinixRoot .cx-m-learning { color: var(--cx-warn); }
+#clinixRoot .cx-m-struggling { color: var(--cx-bad); }
+#clinixRoot .cx-m-new { color: var(--cx-faint); }
+
+/* ── systems grid ─────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-sys-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+#clinixRoot .cx-sys {
+  display: flex; flex-direction: column; align-items: flex-start; gap: 6px;
+  padding: 16px 14px; background: var(--cx-surface);
+  border: 1px solid var(--cx-line); border-radius: var(--cx-r);
+  color: var(--cx-ink); cursor: pointer; font-family: inherit; text-align: left;
+}
+#clinixRoot .cx-sys:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-sys--empty { opacity: .55; }
+#clinixRoot .cx-sys-ic { color: var(--cx-primary); }
+#clinixRoot .cx-sys-ic .material-symbols-rounded { font-size: 26px; }
+#clinixRoot .cx-sys-t { font-weight: 700; font-size: 15px; }
+#clinixRoot .cx-sys-n { font-size: 12px; color: var(--cx-muted); }
+
+/* ── resume ───────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-resume {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 16px; text-align: left; cursor: pointer; font-family: inherit;
+  background: var(--cx-teach-soft); border: 1px solid transparent;
+  border-radius: var(--cx-r); color: var(--cx-teach);
+}
+#clinixRoot .cx-resume-txt { flex: 1 1 auto; min-width: 0; }
+#clinixRoot .cx-resume-t { font-weight: 700; font-size: 15px; }
+#clinixRoot .cx-resume-s { font-size: 13px; opacity: .8; text-transform: capitalize; }
+
+/* ── progress ─────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-prog { display: flex; flex-direction: column; gap: 6px; }
+#clinixRoot .cx-prog-track { height: 6px; background: var(--cx-surface-2); border-radius: 999px; overflow: hidden; }
+#clinixRoot .cx-prog-fill { height: 100%; background: var(--cx-primary); border-radius: 999px; transition: width .35s var(--cx-ease); }
+#clinixRoot .cx-prog-label { font-size: 12px; color: var(--cx-muted); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-pathhead { padding: 16px 16px 4px; }
+#clinixRoot .cx-lesson-prog { padding: 12px 16px 0; }
+
+/* ── pathway rail ─────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-rail { list-style: none; margin: 8px 0 0; padding: 0 16px; }
+#clinixRoot .cx-rail-item { position: relative; }
+/* The connecting line makes the pathway read as a journey rather than a menu. */
+#clinixRoot .cx-rail-item::before {
+  content: ""; position: absolute; left: 33px; top: 34px; bottom: -8px;
+  width: 2px; background: var(--cx-line);
+}
+#clinixRoot .cx-rail-item:last-child::before { display: none; }
+#clinixRoot .cx-rail-btn {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 10px 4px; margin-bottom: 8px; background: transparent; border: 0;
+  text-align: left; color: var(--cx-ink); cursor: pointer; font-family: inherit;
+}
+#clinixRoot .cx-rail-btn[disabled] { cursor: default; opacity: .5; }
+#clinixRoot .cx-rail-n {
+  flex: 0 0 auto; width: 34px; height: 34px; border-radius: 999px;
+  display: inline-flex; align-items: center; justify-content: center;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  font-size: 13px; font-weight: 700; font-variant-numeric: tabular-nums;
+  color: var(--cx-muted); position: relative; z-index: 1;
+}
+#clinixRoot .cx-rail-item--done .cx-rail-n { background: var(--cx-ok-bg); border-color: transparent; color: var(--cx-ok); }
+#clinixRoot .cx-rail-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+#clinixRoot .cx-rail-t { font-weight: 600; font-size: 15px; }
+#clinixRoot .cx-rail-s { font-size: 12.5px; color: var(--cx-muted); }
+
+/* ── lesson turns ─────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-turn { padding: 20px 16px 8px; }
+#clinixRoot .cx-eyebrow { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-primary); margin-bottom: 10px; }
+#clinixRoot .cx-eyebrow--em { color: var(--cx-teach); }
+#clinixRoot .cx-body { font-size: 16px; line-height: 1.55; margin: 0 0 12px; }
+#clinixRoot .cx-body--em { padding: 14px; background: var(--cx-teach-soft); border-radius: var(--cx-r-ctl); color: var(--cx-ink); }
+#clinixRoot .cx-blurb { padding: 12px 16px 0; font-size: 14px; color: var(--cx-muted); }
+
+#clinixRoot .cx-steps { margin: 0; padding-left: 22px; }
+#clinixRoot .cx-steps li { font-size: 15.5px; line-height: 1.5; margin-bottom: 10px; }
+
+/* media */
+#clinixRoot .cx-media { margin: 0 0 14px; border-radius: var(--cx-r); overflow: hidden; background: var(--cx-surface); border: 1px solid var(--cx-line); }
+#clinixRoot .cx-media img,
+#clinixRoot .cx-media video { display: block; width: 100%; height: auto; }
+#clinixRoot .cx-media audio { display: block; width: 100%; padding: 12px; }
+#clinixRoot .cx-media-cap { padding: 12px 14px; font-size: 13px; color: var(--cx-muted); display: flex; flex-direction: column; gap: 4px; }
+#clinixRoot .cx-media-src { font-size: 11.5px; color: var(--cx-faint); }
+/* The licence gate's visible face. Honest, and deliberately not styled like an error. */
+#clinixRoot .cx-media--pending { display: flex; gap: 12px; align-items: flex-start; padding: 16px; background: var(--cx-surface-2); border-style: dashed; }
+#clinixRoot .cx-media--pending .material-symbols-rounded { color: var(--cx-faint); }
+#clinixRoot .cx-media--pending .cx-media-cap { padding: 0; }
+#clinixRoot .cx-media-pending { font-size: 12px; color: var(--cx-faint); }
+#clinixRoot .cx-embed { display: flex; align-items: center; gap: 10px; padding: 18px; color: var(--cx-teach); text-decoration: none; font-weight: 600; }
+
+/* ask */
+#clinixRoot .cx-q { font-size: 18px; font-weight: 600; line-height: 1.4; margin: 0 0 16px; }
+#clinixRoot .cx-opts { display: flex; flex-direction: column; gap: 8px; }
+#clinixRoot .cx-opt {
+  padding: 14px; text-align: left; font-size: 15px; font-family: inherit;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); color: var(--cx-ink); cursor: pointer;
+}
+#clinixRoot .cx-opt:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-opt--right { background: var(--cx-ok-bg); border-color: var(--cx-ok); color: var(--cx-ok); font-weight: 600; }
+#clinixRoot .cx-opt--wrong { background: var(--cx-bad-bg); border-color: var(--cx-bad); color: var(--cx-bad); }
+#clinixRoot .cx-opt[disabled] { cursor: default; }
+
+#clinixRoot .cx-free { display: flex; flex-direction: column; gap: 10px; }
+#clinixRoot .cx-input {
+  width: 100%; padding: 12px; font-size: 15px; font-family: inherit; line-height: 1.45;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); color: var(--cx-ink); resize: vertical;
+}
+#clinixRoot .cx-input:focus { outline: 2px solid var(--cx-primary); outline-offset: -1px; }
+
+#clinixRoot .cx-fb { margin-top: 16px; padding: 14px; border-radius: var(--cx-r-ctl); }
+#clinixRoot .cx-fb--ok { background: var(--cx-ok-bg); }
+#clinixRoot .cx-fb--no { background: var(--cx-bad-bg); }
+#clinixRoot .cx-fb--neutral { background: var(--cx-surface-2); }
+#clinixRoot .cx-fb--partial { background: var(--cx-warn-bg); }
+#clinixRoot .cx-fb-h { display: flex; align-items: center; gap: 6px; font-weight: 700; font-size: 14px; margin-bottom: 8px; }
+#clinixRoot .cx-fb--ok .cx-fb-h { color: var(--cx-ok); }
+#clinixRoot .cx-fb--no .cx-fb-h { color: var(--cx-bad); }
+#clinixRoot .cx-fb--partial .cx-fb-h { color: var(--cx-warn); }
+#clinixRoot .cx-fb-given { margin: 0 0 8px; padding-bottom: 8px; border-bottom: 1px solid rgba(0,0,0,.08); font-size: 14px; line-height: 1.5; color: var(--cx-muted); }
+#clinixRoot .cx-fb-given b { font-weight: 700; color: var(--cx-ink); }
+#clinixRoot .cx-fb-a { margin: 0; font-size: 15px; line-height: 1.5; }
+#clinixRoot .cx-fb-a b { font-weight: 700; }
+#clinixRoot .cx-fb-missed { margin-top: 8px; font-size: 13px; color: var(--cx-muted); }
+#clinixRoot .cx-fb-examiner { margin: 8px 0 0; padding-top: 8px; border-top: 1px solid rgba(0,0,0,.08); font-size: 14px; line-height: 1.5; }
+#clinixRoot .cx-fb-examiner b { font-weight: 700; }
+#clinixRoot .cx-viva-pending { display: flex; align-items: center; gap: 8px; margin-top: 12px; padding: 12px 14px; border-radius: var(--cx-r-ctl); background: var(--cx-surface-2); color: var(--cx-muted); font-size: 14px; }
+#clinixRoot .cx-viva-pending .material-symbols-rounded { animation: cx-spin 1.1s linear infinite; }
+@keyframes cx-spin { to { transform: rotate(360deg); } }
+#clinixRoot .cx-askmaik-sm { margin-top: 10px; background: none; border: 1px solid var(--cx-line); border-radius: 999px; padding: 6px 14px; font-size: 13px; font-weight: 600; color: var(--cx-teach); display: inline-flex; align-items: center; gap: 6px; }
+#clinixRoot .cx-askmaik-sm .material-symbols-rounded { font-size: 16px; }
+#clinixRoot .cx-askmaik-sm:active { background: var(--cx-surface-2); }
+
+#clinixRoot .cx-viva-toprow { display: flex; align-items: center; gap: 10px; margin: 14px 16px 0; }
+#clinixRoot .cx-viva-toprow .cx-vivalvl { margin: 0; flex: 1; }
+#clinixRoot .cx-viva-tier { display: flex; border: 1px solid var(--cx-line); border-radius: 999px; overflow: hidden; }
+#clinixRoot .cx-tier-btn { background: none; border: none; padding: 5px 12px; font-size: 12px; font-weight: 700; color: var(--cx-muted); }
+#clinixRoot .cx-tier-btn--on { background: var(--cx-teach); color: #fff; }
+#clinixRoot .cx-voice-btn { width: 32px; height: 32px; border-radius: 50%; border: 1px solid var(--cx-line); background: none; color: var(--cx-muted); display: flex; align-items: center; justify-content: center; flex: none; }
+#clinixRoot .cx-voice-btn--on { background: var(--cx-teach); color: #fff; border-color: var(--cx-teach); }
+#clinixRoot .cx-voice-btn .material-symbols-rounded { font-size: 18px; }
+#clinixRoot .cx-mic-btn { display: flex; align-items: center; justify-content: center; gap: 8px; width: 100%; margin-top: 10px; padding: 12px; border-radius: var(--cx-r-ctl); border: 1px solid var(--cx-line); background: var(--cx-surface-2); color: var(--cx-ink); font-size: 14px; font-weight: 600; }
+#clinixRoot .cx-mic-btn--on { background: var(--cx-bad-bg); color: var(--cx-bad); border-color: var(--cx-bad); animation: cx-mic-pulse 1.4s ease-in-out infinite; }
+@keyframes cx-mic-pulse { 0%, 100% { opacity: 1; } 50% { opacity: .65; } }
+#clinixRoot .cx-mic-btn--busy { background: var(--cx-surface-2); color: var(--cx-muted); opacity: .85; pointer-events: none; }
+#clinixRoot .cx-mic-btn--busy .material-symbols-rounded { animation: cx-spin 1.1s linear infinite; }
+
+/* reveal */
+#clinixRoot .cx-reveals { display: flex; flex-direction: column; gap: 10px; }
+#clinixRoot .cx-reveal {
+  display: flex; flex-direction: column; gap: 6px; width: 100%;
+  padding: 14px; text-align: left; font-family: inherit; cursor: pointer;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); color: var(--cx-ink);
+}
+#clinixRoot .cx-reveal--open { cursor: default; }
+#clinixRoot .cx-reveal-l { font-size: 11px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-faint); }
+#clinixRoot .cx-reveal-b { font-size: 15px; line-height: 1.5; }
+#clinixRoot .cx-reveal-hint { display: flex; align-items: center; gap: 6px; font-size: 13.5px; color: var(--cx-primary); font-weight: 600; }
+#clinixRoot .cx-reveal-hint .material-symbols-rounded { font-size: 18px; }
+
+/* checklist */
+#clinixRoot .cx-checklist { margin-top: 12px; display: flex; flex-direction: column; gap: 6px; }
+#clinixRoot .cx-checklist-h { font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-faint); margin-bottom: 4px; }
+#clinixRoot .cx-check {
+  display: flex; align-items: center; gap: 10px; width: 100%;
+  padding: 12px; text-align: left; font-size: 14.5px; font-family: inherit;
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  border-radius: var(--cx-r-ctl); color: var(--cx-ink); cursor: pointer;
+}
+#clinixRoot .cx-check span { flex: 1 1 auto; }
+#clinixRoot .cx-check--on { background: var(--cx-ok-bg); border-color: transparent; }
+#clinixRoot .cx-check--on .material-symbols-rounded { color: var(--cx-ok); }
+#clinixRoot .cx-crit { flex: 0 0 auto !important; font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cx-bad); background: var(--cx-bad-bg); padding: 3px 6px; border-radius: 4px; }
+
+/* nav */
+#clinixRoot .cx-nav { display: flex; gap: 10px; padding: 16px; }
+#clinixRoot .cx-btn {
+  flex: 1 1 auto; padding: 14px 18px; border-radius: var(--cx-r-ctl);
+  font-size: 15px; font-weight: 600; font-family: inherit; cursor: pointer; border: 1px solid transparent;
+}
+#clinixRoot .cx-btn--primary { background: var(--cx-primary); color: #fff; }
+#clinixRoot .cx-btn--primary:active { filter: brightness(.94); }
+#clinixRoot .cx-btn--ghost { background: transparent; border-color: var(--cx-line); color: var(--cx-ink); }
+#clinixRoot .cx-prevturn { flex: 0 0 auto; }
+
+#clinixRoot .cx-ask-maik {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 0 16px 8px; padding: 12px; width: calc(100% - 32px);
+  background: var(--cx-teach-soft); border: 0; border-radius: var(--cx-r-ctl);
+  color: var(--cx-teach); font-weight: 600; font-size: 14px; font-family: inherit; cursor: pointer;
+}
+
+#clinixRoot .cx-src { padding: 4px 16px 20px; font-size: 11.5px; color: var(--cx-faint); line-height: 1.5; }
+#clinixRoot .cx-src-draft { display: block; color: var(--cx-warn); font-weight: 600; margin-bottom: 2px; }
+
+/* ── notices, states ──────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-notice { display: flex; gap: 10px; align-items: flex-start; margin: 14px 16px 0; padding: 14px; border-radius: var(--cx-r-ctl); font-size: 13px; line-height: 1.45; }
+#clinixRoot .cx-notice b { display: block; margin-bottom: 3px; }
+#clinixRoot .cx-notice span { color: var(--cx-muted); }
+#clinixRoot .cx-notice--review { background: var(--cx-warn-bg); color: var(--cx-warn); }
+#clinixRoot .cx-notice--review span { color: inherit; opacity: .85; }
+#clinixRoot .cx-notice--crit { background: var(--cx-bad-bg); color: var(--cx-bad); }
+#clinixRoot .cx-notice--crit span { color: inherit; opacity: .85; }
+
+#clinixRoot .cx-state { padding: 48px 28px; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 8px; }
+#clinixRoot .cx-state-icon .material-symbols-rounded { font-size: 40px; color: var(--cx-faint); }
+#clinixRoot .cx-state-title { font-size: 17px; font-weight: 700; }
+#clinixRoot .cx-state-msg { font-size: 14px; color: var(--cx-muted); line-height: 1.5; max-width: 34ch; }
+#clinixRoot .cx-state .cx-btn { flex: 0 0 auto; margin-top: 12px; }
+
+#clinixRoot .cx-disclaimer { margin: 28px 16px calc(20px + env(safe-area-inset-bottom, 0px)); font-size: 11.5px; line-height: 1.55; color: var(--cx-faint); }
+
+/* ── station ──────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-timer {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin: 14px 16px 0; padding: 14px; border-radius: var(--cx-r-ctl);
+  background: var(--cx-surface); border: 1px solid var(--cx-line);
+  font-size: 26px; font-weight: 700; font-family: var(--cx-mono); font-variant-numeric: tabular-nums;
+}
+#clinixRoot .cx-timer--low { background: var(--cx-bad-bg); color: var(--cx-bad); border-color: transparent; }
+#clinixRoot .cx-task { margin: 14px 16px 0; padding: 16px; background: var(--cx-teach-soft); border-radius: var(--cx-r-ctl); font-size: 15px; line-height: 1.5; }
+#clinixRoot .cx-station .cx-checklist,
+#clinixRoot .cx-turn .cx-checklist { padding: 0 16px; }
+
+#clinixRoot .cx-score { margin: 18px 16px 0; padding: 24px; border-radius: var(--cx-r); text-align: center; }
+#clinixRoot .cx-score--pass { background: var(--cx-ok-bg); color: var(--cx-ok); }
+#clinixRoot .cx-score--fail { background: var(--cx-bad-bg); color: var(--cx-bad); }
+#clinixRoot .cx-score-pct { font-size: 44px; font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; }
+#clinixRoot .cx-score-l { font-size: 13px; opacity: .8; margin-top: 6px; }
+#clinixRoot .cx-score-v { font-size: 15px; font-weight: 700; margin-top: 10px; }
+
+#clinixRoot .cx-misslist,
+#clinixRoot .cx-qlist { margin: 8px 16px 0; padding-left: 22px; }
+#clinixRoot .cx-misslist li,
+#clinixRoot .cx-qlist li { font-size: 14.5px; line-height: 1.5; margin-bottom: 8px; color: var(--cx-muted); }
+#clinixRoot .cx-miss--crit { color: var(--cx-bad); font-weight: 600; }
+
+#clinixRoot .cx-vivalvl { margin: 14px 16px 0; font-size: 11px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--cx-teach); }
+
+/* ── tutor ────────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-tutor-ctx { display: flex; align-items: center; gap: 8px; margin: 14px 16px 0; padding: 10px 12px; background: var(--cx-teach-soft); color: var(--cx-teach); border-radius: var(--cx-r-ctl); font-size: 13px; }
+#clinixRoot .cx-tutor-ctx .material-symbols-rounded { font-size: 18px; }
+#clinixRoot .cx-tutor-log { display: flex; flex-direction: column; gap: 12px; padding: 16px; }
+/* The student's own question is right-aligned and tinted; the teaching reply is plain and full
+   width, so the reply reads as prose rather than as a chat bubble. This is a lesson, not a chat. */
+#clinixRoot .cx-tq { align-self: flex-end; max-width: 85%; padding: 10px 14px; background: var(--cx-primary); color: #fff; border-radius: 16px 16px 4px 16px; font-size: 14.5px; line-height: 1.45; }
+#clinixRoot .cx-ta { font-size: 15.5px; line-height: 1.6; white-space: pre-wrap; }
+#clinixRoot .cx-ta--pending { color: var(--cx-muted); }
+#clinixRoot .cx-ta--err { display: flex; align-items: center; gap: 8px; color: var(--cx-warn); font-size: 14px; }
+/* The dose guard's visible face: a refusal is teaching, so it is styled as a note, not an error. */
+#clinixRoot .cx-ta--blocked { padding: 14px; background: var(--cx-warn-bg); color: var(--cx-warn); border-radius: var(--cx-r-ctl); font-size: 14.5px; }
+#clinixRoot .cx-tutor-hints { padding: 8px 16px 0; display: flex; flex-direction: column; gap: 8px; }
+#clinixRoot .cx-hint { padding: 12px 14px; text-align: left; font-size: 14px; font-family: inherit; cursor: pointer; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); color: var(--cx-ink); }
+#clinixRoot .cx-tutor-input { display: flex; gap: 8px; align-items: flex-end; padding: 16px; }
+#clinixRoot .cx-tutor-input .cx-input { flex: 1 1 auto; }
+#clinixRoot .cx-tutor-input .cx-btn { flex: 0 0 auto; }
+
+/* ── weak areas ───────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-weak { padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); }
+#clinixRoot .cx-weak-t { font-size: 14.5px; font-weight: 600; margin-bottom: 8px; }
+
+/* ── skeleton ─────────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-skel { padding: 20px 16px; display: flex; flex-direction: column; gap: 12px; }
+#clinixRoot .cx-skel-line,
+#clinixRoot .cx-skel-block { position: relative; overflow: hidden; background: var(--cx-surface-2); border-radius: 8px; }
+#clinixRoot .cx-skel-line { height: 14px; width: 70%; }
+#clinixRoot .cx-skel-sm { width: 40%; }
+#clinixRoot .cx-skel-block { height: 64px; }
+#clinixRoot .cx-skel-line::after,
+#clinixRoot .cx-skel-block::after {
+  content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.55), transparent);
+  transform: translateX(-100%); animation: cx-shimmer 1.4s infinite;
+}
+@keyframes cx-shimmer { 100% { transform: translateX(100%); } }
+
+/* ── dark ─────────────────────────────────────────────────────────────────── */
+
+body.dark #clinixRoot {
+  --cx-teach: #7CA0FF;
+  --cx-teach-soft: #16233A;
+  --cx-bg: var(--rds-bg, #0D1B26);
+  --cx-surface: var(--rds-surface, #132030);
+  --cx-surface-2: var(--rds-surface-2, #182B3D);
+  --cx-ink: var(--rds-ink, #E8EDF2);
+  --cx-muted: var(--rds-muted, #9BB0C0);
+  --cx-faint: var(--rds-faint, #6E8496);
+  --cx-line: var(--rds-line, #22384C);
+}
+body.dark #clinixRoot .cx-skel-line::after,
+body.dark #clinixRoot .cx-skel-block::after {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.08), transparent);
+}
+
+/* ── app chrome suppression while CliniX is open ──────────────────────────── */
+/* The ONLY intentionally global rules, keyed off the html lock class, matching thorex.css:209. */
+
+html.cx-lock .hv-fab,
+html.cx-lock #hvFab,
+html.cx-lock #infFab,
+html.cx-lock .inf-fab,
+html.cx-lock #dxLaunch,
+html.cx-lock .ghis-ward-fab { display: none !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-prog-fill { transition: none; }
+  #clinixRoot .cx-skel-line::after,
+  #clinixRoot .cx-skel-block::after { animation: none; }
+}
+
+/* ── clinical case ────────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-phases { display: flex; list-style: none; margin: 12px 16px 0; padding: 0; gap: 4px; }
+#clinixRoot .cx-phase { flex: 1 1 0; min-width: 0; text-align: center; font-size: 10px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; color: var(--cx-faint); padding-top: 8px; border-top: 3px solid var(--cx-line); }
+#clinixRoot .cx-phase span { display: block; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+#clinixRoot .cx-phase--done { color: var(--cx-ok); border-top-color: var(--cx-ok); }
+#clinixRoot .cx-phase--now { color: var(--cx-primary); border-top-color: var(--cx-primary); }
+
+#clinixRoot .cx-case-open { margin: 16px; padding: 16px; background: var(--cx-teach-soft); border-radius: var(--cx-r); font-size: 15px; line-height: 1.55; }
+#clinixRoot .cx-case-hint { margin: 16px 16px 0; font-size: 13px; color: var(--cx-muted); line-height: 1.5; }
+#clinixRoot .cx-case-count { padding: 0 16px; font-size: 12px; color: var(--cx-faint); font-variant-numeric: tabular-nums; }
+#clinixRoot .cx-case-log { display: flex; flex-direction: column; gap: 12px; padding: 0 16px; }
+/* The patient's voice is set apart from the tutor's: a named speaker on a plain surface, so the
+   student is always clear whether they are being taught or being answered by the patient. */
+#clinixRoot .cx-pt { align-self: flex-start; max-width: 92%; padding: 12px 14px; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: 16px 16px 16px 4px; font-size: 15px; line-height: 1.5; }
+#clinixRoot .cx-pt-who { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--cx-faint); margin-bottom: 4px; }
+#clinixRoot .cx-pt--unmatched { color: var(--cx-muted); font-style: italic; }
+
+#clinixRoot .cx-row--done { background: var(--cx-surface-2); }
+#clinixRoot .cx-finding { display: block; margin-top: 6px; font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-ixnote { display: block; margin-top: 6px; font-size: 12.5px; line-height: 1.5; color: var(--cx-teach); }
+
+/* ── self-authored diagrams ───────────────────────────────────────────────── */
+/* Inline SVG, so everything here resolves against the module's own tokens and follows light/dark
+   and every accent theme with no duplicate palette. An <img> could not do this. */
+
+#clinixRoot .cx-media--dia { padding: 8px 8px 0; }
+#clinixRoot .cx-dia { display: block; width: 100%; height: auto; }
+#clinixRoot .cx-dia text { font-family: var(--cx-sans); font-size: 9px; fill: var(--cx-muted); }
+#clinixRoot .cx-dia-axis { stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-lbl { font-size: 9px; fill: var(--cx-muted); }
+#clinixRoot .cx-dia-lbl--mute { fill: var(--cx-faint); font-size: 8px; }
+#clinixRoot .cx-dia-lbl--normal { fill: var(--cx-primary); font-weight: 700; }
+#clinixRoot .cx-dia-lbl--copd { fill: var(--cx-teach); font-weight: 700; }
+
+#clinixRoot .cx-dia-normal { fill: none; stroke: var(--cx-primary); stroke-width: 2.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-copd { fill: none; stroke: var(--cx-teach); stroke-width: 2.5; stroke-linejoin: round; }
+#clinixRoot .cx-dia-insp { stroke-dasharray: 4 3; opacity: .75; }
+#clinixRoot .cx-dia-dot { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-dot--copd { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-arrow { fill: none; stroke: var(--cx-teach); stroke-width: 1.5; }
+/* Dimming rather than hiding: the other curve stays as a reference, which is the whole point of a
+   comparison figure. */
+#clinixRoot .cx-dia-dim { opacity: .18; }
+
+#clinixRoot .cx-dia-toggle { display: flex; gap: 6px; padding: 8px; }
+#clinixRoot .cx-dia-btn { flex: 1 1 0; padding: 8px; font-size: 12px; font-family: inherit; font-weight: 600; cursor: pointer; background: var(--cx-surface); border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); color: var(--cx-muted); }
+#clinixRoot .cx-dia-btn--on { background: var(--cx-primary); border-color: transparent; color: #fff; }
+
+/* air trapping */
+#clinixRoot .cx-dia-airway { fill: none; stroke: var(--cx-ink); stroke-width: 2.5; stroke-linecap: round; }
+#clinixRoot .cx-dia-alv { fill: none; stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-alv--big { stroke: var(--cx-teach); stroke-width: 2.5; }
+#clinixRoot .cx-dia-traction line { stroke: var(--cx-primary); stroke-width: 1.5; stroke-linecap: round; }
+#clinixRoot .cx-dia-div { stroke: var(--cx-line); stroke-width: 1; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-air { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-air--trapped, #clinixRoot .cx-dia-air--trapped2 { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-airway--collapse { stroke: var(--cx-teach); }
+
+/* The animation IS the teaching: air leaves the normal alveolus and does not leave the emphysematous
+   one. Static, both sides just look like drawings of an airway. */
+#clinixRoot .cx-dia--anim .cx-dia-air--out { animation: cx-escape 3.2s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-air--trapped { animation: cx-jiggle 3.2s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-air--trapped2 { animation: cx-jiggle 3.2s ease-in-out infinite .4s; }
+#clinixRoot .cx-dia--anim .cx-dia-airway--collapse { animation: cx-pinch 3.2s ease-in-out infinite; }
+@keyframes cx-escape { 0%, 10% { transform: translateX(36px); opacity: 1; } 60%, 100% { transform: translateX(-80px); opacity: 0; } }
+@keyframes cx-jiggle { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-4px, 2px); } }
+@keyframes cx-pinch { 0%, 100% { opacity: .45; } 55% { opacity: 1; } }
+
+/* percussion map */
+#clinixRoot .cx-dia-body { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-mid { stroke: var(--cx-line); stroke-width: 1; stroke-dasharray: 3 3; }
+#clinixRoot .cx-dia-cmp { fill: none; stroke: var(--cx-primary); stroke-width: 1.5; stroke-dasharray: 3 3; opacity: .6; }
+#clinixRoot .cx-dia-zone { cursor: pointer; }
+#clinixRoot .cx-dia-zone circle { fill: var(--cx-surface); stroke: var(--cx-primary); stroke-width: 1.5; }
+#clinixRoot .cx-dia-zone text { fill: var(--cx-primary); font-size: 11px; font-weight: 700; }
+#clinixRoot .cx-dia-zone--on circle { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-zone--on text { fill: #fff; }
+#clinixRoot .cx-dia-note { padding: 12px 14px; font-size: 13.5px; line-height: 1.55; color: var(--cx-muted); }
+#clinixRoot .cx-dia-note b { color: var(--cx-ink); }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-dia--anim .cx-dia-air--out,
+  #clinixRoot .cx-dia--anim .cx-dia-air--trapped,
+  #clinixRoot .cx-dia--anim .cx-dia-air--trapped2,
+  #clinixRoot .cx-dia--anim .cx-dia-airway--collapse { animation: none; }
+  #clinixRoot .cx-dia--anim .cx-dia-air--out { opacity: .35; }
+}
+
+/* ── embedded video (rights holder's own player) ──────────────────────────── */
+
+#clinixRoot .cx-media--embed { padding: 0; overflow: hidden; }
+/* A real video card: YouTube's own thumbnail, a play affordance, and an honest "opens in YouTube"
+   badge. Not an iframe - see the note in clinix-screens.js showTurn() about Error 153. */
+#clinixRoot .cx-ytcard {
+  position: relative; display: block; width: 100%; padding: 0; border: 0; cursor: pointer;
+  background: #000; aspect-ratio: 16 / 9; overflow: hidden; font-family: inherit;
+}
+#clinixRoot .cx-ytthumb { display: block; width: 100%; height: 100%; object-fit: cover; }
+#clinixRoot .cx-ytcard--nothumb { background: var(--cx-surface-2); }
+#clinixRoot .cx-ytplay {
+  position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%);
+  width: 62px; height: 62px; border-radius: 999px; background: rgba(0, 0, 0, .62);
+  display: flex; align-items: center; justify-content: center; color: #fff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, .4);
+}
+#clinixRoot .cx-ytplay .material-symbols-rounded { font-size: 38px; }
+#clinixRoot .cx-ytcard:active .cx-ytplay { background: rgba(0, 0, 0, .8); }
+#clinixRoot .cx-ytbadge {
+  position: absolute; right: 10px; bottom: 10px; padding: 5px 9px; border-radius: 6px;
+  background: rgba(0, 0, 0, .7); color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .02em;
+}
+#clinixRoot .cx-media-src a { color: var(--cx-teach); text-decoration: none; font-weight: 600; }
+
+/* ── synthesized auscultation player ──────────────────────────────────────── */
+
+#clinixRoot .cx-media--snd { padding: 0; border-style: solid; }
+#clinixRoot .cx-snd {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 16px; background: transparent; border: 0; cursor: pointer;
+  font-family: inherit; text-align: left; color: var(--cx-ink);
+}
+#clinixRoot .cx-snd:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-snd-ic { flex: 0 0 auto; color: var(--cx-primary); }
+#clinixRoot .cx-snd-ic .material-symbols-rounded { font-size: 34px; }
+#clinixRoot .cx-snd--on .cx-snd-ic { color: var(--cx-teach); }
+#clinixRoot .cx-snd-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
+#clinixRoot .cx-snd-t { font-weight: 600; font-size: 15px; }
+#clinixRoot .cx-snd-s { font-size: 12.5px; color: var(--cx-muted); }
+/* A little level meter so a playing sound is obviously playing, which matters when the phone is
+   on silent or the volume is down and nothing appears to happen. */
+#clinixRoot .cx-snd-wave { flex: 0 0 auto; display: flex; align-items: flex-end; gap: 3px; height: 22px; }
+#clinixRoot .cx-snd-wave i { width: 3px; height: 5px; border-radius: 2px; background: var(--cx-line); display: block; }
+#clinixRoot .cx-snd-wave--on i { background: var(--cx-teach); animation: cx-eq .9s ease-in-out infinite; }
+#clinixRoot .cx-snd-wave--on i:nth-child(2) { animation-delay: .12s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(3) { animation-delay: .24s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(4) { animation-delay: .36s; }
+#clinixRoot .cx-snd-wave--on i:nth-child(5) { animation-delay: .48s; }
+@keyframes cx-eq { 0%, 100% { height: 5px; } 50% { height: 20px; } }
+#clinixRoot .cx-snd-hint { padding: 0 16px 12px; font-size: 13.5px; line-height: 1.5; color: var(--cx-muted); }
+
+/* ── diagram anatomy (shared) ─────────────────────────────────────────────── */
+
+#clinixRoot .cx-dia-lbl--bad { fill: var(--cx-bad); font-weight: 700; }
+#clinixRoot .cx-dia-lbl--faint { fill: var(--cx-faint); font-size: 8px; }
+#clinixRoot .cx-dia-arrowhead { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-skin { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-hand { fill: var(--cx-primary-2); opacity: .85; }
+#clinixRoot .cx-dia-thumb { fill: var(--cx-primary); }
+#clinixRoot .cx-dia-finger { stroke: var(--cx-primary-2); stroke-width: 5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia-tip { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-press { stroke: var(--cx-primary); stroke-width: 2; fill: none; }
+#clinixRoot .cx-dia-arc { fill: none; stroke: var(--cx-teach); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-dim-line { stroke: var(--cx-muted); stroke-width: 1.5; stroke-dasharray: 4 3; }
+#clinixRoot .cx-dia-dim-line--em { stroke: var(--cx-teach); stroke-width: 2.5; stroke-dasharray: none; }
+
+/* percussion technique: the striking finger pivots from the wrist, twice, then rests */
+#clinixRoot .cx-dia--anim .cx-dia-strike { transform-origin: 186px 46px; animation: cx-tap 2.6s ease-in-out infinite; }
+@keyframes cx-tap {
+  0%, 40%, 100% { transform: rotate(0deg); }
+  10%, 22% { transform: rotate(13deg); }
+  16%, 28% { transform: rotate(0deg); }
+}
+
+/* chest expansion: the chest widens on inspiration; thumbs separate ONLY when floating */
+#clinixRoot .cx-dia-chest { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 2; }
+#clinixRoot .cx-dia--anim .cx-dia-chest { transform-origin: 170px 105px; animation: cx-breathe 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--float .cx-dia-thumbL { animation: cx-thumbL 3.4s ease-in-out infinite; }
+#clinixRoot .cx-dia--float .cx-dia-thumbR { animation: cx-thumbR 3.4s ease-in-out infinite; }
+/* anchored: the thumbs travel WITH the wall, so the gap never opens. That is the whole lesson. */
+#clinixRoot .cx-dia--anchored .cx-dia-thumbL,
+#clinixRoot .cx-dia--anchored .cx-dia-thumbR { animation: none; }
+@keyframes cx-breathe { 0%, 100% { transform: scaleX(1); } 45% { transform: scaleX(1.13); } }
+@keyframes cx-thumbL { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-15px); } }
+@keyframes cx-thumbR { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(15px); } }
+
+/* auscultation sites */
+#clinixRoot .cx-dia-zone--ausc circle { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--ausc text { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-zone--ausc.cx-dia-zone--on circle { fill: var(--cx-teach); }
+#clinixRoot .cx-dia-playing { display: block; margin-top: 6px; font-size: 11.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--cx-teach); }
+
+/* Hoover */
+#clinixRoot .cx-dia-ribs { fill: none; stroke: var(--cx-ink); stroke-width: 3; stroke-linecap: round; }
+#clinixRoot .cx-dia-dome { fill: none; stroke: var(--cx-primary); stroke-width: 3; }
+#clinixRoot .cx-dia-dome--flat { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-arrow-out { stroke: var(--cx-primary); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia-arrow-in { stroke: var(--cx-teach); stroke-width: 2.5; stroke-linecap: round; fill: none; }
+#clinixRoot .cx-dia--anim .cx-dia-ribs--out { animation: cx-ribout 3s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-ribs--in { animation: cx-ribin 3s ease-in-out infinite; }
+@keyframes cx-ribout { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(7px); } }
+@keyframes cx-ribin { 0%, 100% { transform: translateX(0); } 45% { transform: translateX(-7px); } }
+
+/* barrel chest / side profile */
+#clinixRoot .cx-dia-chest-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-chest-s--barrel { stroke: var(--cx-teach); }
+
+/* trachea */
+#clinixRoot .cx-dia-neck { fill: var(--cx-surface-2); stroke: var(--cx-line); stroke-width: 1.5; }
+#clinixRoot .cx-dia-trachea { fill: var(--cx-surface); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-clav { fill: none; stroke: var(--cx-line); stroke-width: 3; }
+#clinixRoot .cx-dia-arrow-shift { stroke: var(--cx-teach); stroke-width: 2.5; fill: none; }
+
+/* clubbing */
+#clinixRoot .cx-dia-finger-s { fill: var(--cx-surface-2); stroke: var(--cx-ink); stroke-width: 2; }
+#clinixRoot .cx-dia-nail { fill: none; stroke: var(--cx-primary); stroke-width: 3; stroke-linecap: round; }
+#clinixRoot .cx-dia-nail--club { stroke: var(--cx-teach); }
+#clinixRoot .cx-dia-angle { stroke: var(--cx-muted); stroke-width: 1.5; }
+#clinixRoot .cx-dia-window { fill: none; stroke: var(--cx-primary); stroke-width: 2; }
+
+/* effusion */
+#clinixRoot .cx-dia-fluid { fill: var(--cx-teach); opacity: .3; stroke: var(--cx-teach); stroke-width: 2; }
+#clinixRoot .cx-dia-lung { fill: var(--cx-surface); stroke: var(--cx-line); stroke-width: 2; }
+#clinixRoot .cx-dia-lung--collapsed { fill: var(--cx-surface-2); }
+
+/* breathing patterns: each bar breathes at its own real rate */
+#clinixRoot .cx-dia-breathbar { fill: var(--cx-primary); transform-origin: center; }
+#clinixRoot .cx-dia--anim .cx-dia-b-normal  { animation: cx-bar 4.0s ease-in-out infinite; }
+#clinixRoot .cx-dia--anim .cx-dia-b-tachy   { animation: cx-bar 1.6s ease-in-out infinite; fill: var(--cx-warn); }
+#clinixRoot .cx-dia--anim .cx-dia-b-pursed  { animation: cx-barlong 5.0s ease-in-out infinite; fill: var(--cx-teach); }
+#clinixRoot .cx-dia--anim .cx-dia-b-exhaust { animation: cx-bar 7.0s ease-in-out infinite; fill: var(--cx-bad); }
+@keyframes cx-bar { 0%, 100% { transform: scaleY(.55); } 40% { transform: scaleY(1); } }
+@keyframes cx-barlong { 0%, 100% { transform: scaleY(.5); } 22% { transform: scaleY(1); } 90% { transform: scaleY(.55); } }
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-dia--anim * { animation: none !important; }
+  #clinixRoot .cx-snd-wave--on i { animation: none; height: 12px; }
+}
+#clinixRoot .cx-blurb--tight { padding: 0 0 8px; font-size: 12.5px; }
+#clinixRoot .cx-row-media { flex: 0 0 auto; color: var(--cx-teach); display: inline-flex; }
+#clinixRoot .cx-row-media .material-symbols-rounded { font-size: 20px; }
+
+/* ── teaching turns ───────────────────────────────────────────────────────── */
+
+#clinixRoot .cx-eyebrow--learn { display: flex; align-items: center; gap: 6px; color: var(--cx-teach); }
+#clinixRoot .cx-eyebrow--learn .material-symbols-rounded { font-size: 17px; }
+#clinixRoot .cx-eyebrow-n { color: var(--cx-faint); font-weight: 600; letter-spacing: .04em; }
+#clinixRoot .cx-teach-h { margin: 0 0 12px; font-size: 21px; line-height: 1.25; font-weight: 700; letter-spacing: -.01em; }
+#clinixRoot .cx-teach-list { margin: 4px 0 14px; padding-left: 20px; }
+#clinixRoot .cx-teach-list li { font-size: 15.5px; line-height: 1.55; margin-bottom: 9px; }
+#clinixRoot .cx-teach-list li b { font-weight: 650; }
+/* A wide clinical table must scroll inside itself, never make the page scroll sideways. */
+#clinixRoot .cx-tablewrap { margin: 4px 0 14px; overflow-x: auto; -webkit-overflow-scrolling: touch; border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl); }
+#clinixRoot .cx-table { border-collapse: collapse; width: 100%; font-size: 13.5px; }
+#clinixRoot .cx-table th, #clinixRoot .cx-table td { text-align: left; padding: 9px 11px; vertical-align: top; border-bottom: 1px solid var(--cx-line); }
+#clinixRoot .cx-table th { background: var(--cx-surface-2); font-weight: 700; font-size: 12px; letter-spacing: .02em; white-space: nowrap; }
+#clinixRoot .cx-table tr:last-child td { border-bottom: 0; }
+#clinixRoot .cx-teach-note { display: flex; gap: 9px; align-items: flex-start; margin: 4px 0 12px; padding: 13px; background: var(--cx-teach-soft); border-radius: var(--cx-r-ctl); font-size: 14px; line-height: 1.5; color: var(--cx-ink); }
+#clinixRoot .cx-teach-note .material-symbols-rounded { font-size: 19px; color: var(--cx-teach); flex: 0 0 auto; }
+
+/* ── system module card (the "start here" primary action) ─────────────────── */
+
+#clinixRoot .cx-modcard {
+  display: flex; align-items: center; gap: 14px; width: 100%;
+  padding: 18px 16px; text-align: left; cursor: pointer; font-family: inherit;
+  background: var(--cx-primary-2); color: #fff; border: 0; border-radius: var(--cx-r);
+}
+#clinixRoot .cx-modcard:active { filter: brightness(.94); }
+#clinixRoot .cx-modcard-ic .material-symbols-rounded { font-size: 30px; }
+#clinixRoot .cx-modcard-txt { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 3px; }
+#clinixRoot .cx-modcard-t { font-weight: 700; font-size: 17px; line-height: 1.25; }
+#clinixRoot .cx-modcard-s { font-size: 13px; opacity: .85; }
+#clinixRoot .cx-modcard-meta { font-size: 11.5px; opacity: .7; font-variant-numeric: tabular-nums; }
+
+/* ── show-answer ──────────────────────────────────────────────────────────── */
+/* Deliberately quieter than "Check my answer": available without being the easy default. */
+#clinixRoot .cx-showans {
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  width: 100%; margin-top: 10px; padding: 12px;
+  background: transparent; border: 1px solid var(--cx-line); border-radius: var(--cx-r-ctl);
+  color: var(--cx-muted); font-family: inherit; font-size: 14px; font-weight: 600; cursor: pointer;
+}
+#clinixRoot .cx-showans:active { background: var(--cx-surface-2); }
+#clinixRoot .cx-showans .material-symbols-rounded { font-size: 18px; }
+
+/* ── wide comparison tables: rotate-to-view ──────────────────────────────── */
+
+#clinixRoot .cx-widewrap { margin: 4px 0 14px; }
+#clinixRoot .cx-rotate-hint {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 14px; background: var(--cx-teach-soft); border: 0; border-radius: var(--cx-r-ctl);
+  color: var(--cx-teach); font-family: inherit; text-align: left; cursor: pointer;
+}
+#clinixRoot .cx-rotate-hint .material-symbols-rounded { font-size: 26px; flex: 0 0 auto; animation: cx-rotate-nudge 2.4s ease-in-out infinite; }
+#clinixRoot .cx-rotate-hint span { font-size: 13px; line-height: 1.45; color: var(--cx-ink); }
+#clinixRoot .cx-rotate-hint b { color: var(--cx-teach); }
+@keyframes cx-rotate-nudge { 0%, 100% { transform: rotate(0deg); } 50% { transform: rotate(-90deg); } }
+
+/* Portrait: the full table stays collapsed behind the hint until tapped. */
+#clinixRoot .cx-widewrap .cx-tablewrap--wide { display: none; margin-top: 10px; }
+#clinixRoot .cx-widewrap--open .cx-tablewrap--wide { display: block; }
+#clinixRoot .cx-tablewrap--wide .cx-table th,
+#clinixRoot .cx-tablewrap--wide .cx-table td { white-space: nowrap; }
+
+/* Landscape: the phone answered the prompt, so show the real table full width automatically and
+   fold the hint away rather than making the reader tap after they already rotated. */
+@media (orientation: landscape) {
+  #clinixRoot .cx-rotate-hint { display: none; }
+  #clinixRoot .cx-widewrap .cx-tablewrap--wide { display: block; margin-top: 0; }
+  #clinixRoot .cx-tablewrap--wide .cx-table th,
+  #clinixRoot .cx-tablewrap--wide .cx-table td { white-space: normal; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #clinixRoot .cx-rotate-hint .material-symbols-rounded { animation: none; }
+}

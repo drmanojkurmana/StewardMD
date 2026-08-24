@@ -1,0 +1,333 @@
+{
+  "_comment": "CliniX catalog. Small on purpose: the app fetches this first, then only the packs the student actually opens. Modelled on atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load).",
+  "schemaVersion": 1,
+  "contentVersion": "0.1.0-review-pending",
+  "updated": "2026-08-22",
+  "skillPacks": [
+    {
+      "id": "core",
+      "file": "skills/core.json",
+      "title": "Patient approach and general examination",
+      "shared": true
+    },
+    {
+      "id": "respiratory",
+      "file": "skills/respiratory.json",
+      "title": "Respiratory history and examination"
+    },
+    {
+      "id": "cardiovascular",
+      "file": "skills/cardiovascular.json",
+      "title": "Cardiovascular history and examination"
+    },
+    {
+      "id": "abdomen",
+      "file": "skills/abdomen.json",
+      "title": "Abdominal history and examination"
+    },
+    {
+      "id": "neurology",
+      "file": "skills/neurology.json",
+      "title": "Neurological history and examination"
+    },
+    {
+      "id": "general",
+      "file": "skills/general.json",
+      "title": "General and short-case skills (syndromes, not organs)"
+    }
+  ],
+  "systems": [
+    {
+      "id": "respiratory",
+      "title": "Respiratory",
+      "icon": "pulmonology",
+      "skillPacks": [
+        "core",
+        "respiratory"
+      ],
+      "diseases": [
+        {
+          "id": "copd",
+          "title": "COPD",
+          "subtitle": "Chronic obstructive pulmonary disease",
+          "file": "diseases/copd.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "pleural-effusion",
+          "title": "Pleural effusion",
+          "subtitle": "Fluid in the pleural space",
+          "file": "diseases/pleural-effusion.json",
+          "estMinutes": 45,
+          "chapters": 10,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "pneumonia",
+          "title": "Pneumonia",
+          "subtitle": "Community-acquired pneumonia",
+          "file": "diseases/pneumonia.json",
+          "estMinutes": 60,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "bronchial-asthma",
+          "title": "Bronchial asthma",
+          "subtitle": "Bronchial asthma",
+          "file": "diseases/bronchial-asthma.json",
+          "estMinutes": 65,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "tuberculosis",
+          "title": "Pulmonary tuberculosis",
+          "subtitle": "Pulmonary tuberculosis",
+          "file": "diseases/tuberculosis.json",
+          "estMinutes": 65,
+          "chapters": 14,
+          "review": "ai_drafted"
+        }
+      ],
+      "module": {
+        "id": "resp-exam",
+        "title": "Examination of the Respiratory System",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/respiratory.json",
+        "estMinutes": 90,
+        "chapters": 8,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "cardiovascular",
+      "title": "Cardiovascular",
+      "icon": "cardiology",
+      "skillPacks": [
+        "core",
+        "cardiovascular"
+      ],
+      "diseases": [
+        {
+          "id": "rheumatic-heart-disease",
+          "title": "Rheumatic heart disease",
+          "subtitle": "Rheumatic heart disease with mitral stenosis",
+          "file": "diseases/rheumatic-heart-disease.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "congestive-cardiac-failure",
+          "title": "Congestive cardiac failure",
+          "subtitle": "Congestive cardiac failure",
+          "file": "diseases/congestive-cardiac-failure.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "ischaemic-heart-disease",
+          "title": "Ischaemic heart disease",
+          "subtitle": "Ischaemic heart disease and acute coronary syndrome",
+          "file": "diseases/ischaemic-heart-disease.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "infective-endocarditis",
+          "title": "Infective endocarditis",
+          "subtitle": "A short case: fever, a changing murmur, and peripheral stigmata",
+          "file": "diseases/infective-endocarditis.json",
+          "estMinutes": 45,
+          "chapters": 11,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "congenital-heart-disease",
+          "title": "Congenital heart disease",
+          "subtitle": "Acyanotic congenital heart disease: VSD and ASD",
+          "file": "diseases/congenital-heart-disease.json",
+          "estMinutes": 50,
+          "chapters": 11,
+          "review": "ai_drafted"
+        }
+      ],
+      "module": {
+        "id": "cvs-exam",
+        "title": "Examination of the Cardiovascular System",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/cardiovascular.json",
+        "estMinutes": 100,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "abdomen",
+      "title": "GIT and abdomen",
+      "icon": "gastroenterology",
+      "skillPacks": [
+        "core",
+        "abdomen"
+      ],
+      "diseases": [
+        {
+          "id": "chronic-liver-disease",
+          "title": "Chronic liver disease",
+          "subtitle": "Cirrhosis of the liver with portal hypertension",
+          "file": "diseases/chronic-liver-disease.json",
+          "estMinutes": 80,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "ascites",
+          "title": "Ascites",
+          "subtitle": "Ascites (a short case)",
+          "file": "diseases/ascites.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "splenomegaly",
+          "title": "Splenomegaly",
+          "subtitle": "Splenomegaly (a short case)",
+          "file": "diseases/splenomegaly.json",
+          "estMinutes": 35,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "hepatomegaly",
+          "title": "Hepatomegaly",
+          "subtitle": "Hepatomegaly (a short case)",
+          "file": "diseases/hepatomegaly.json",
+          "estMinutes": 35,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "jaundice",
+          "title": "Jaundice",
+          "subtitle": "Jaundice (a short case)",
+          "file": "diseases/jaundice.json",
+          "estMinutes": 35,
+          "chapters": 9,
+          "review": "ai_drafted"
+        }
+      ],
+      "module": {
+        "id": "gi-exam",
+        "title": "Examination of the Abdomen",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/abdomen.json",
+        "estMinutes": 110,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "neurology",
+      "title": "Neurology",
+      "icon": "neurology",
+      "skillPacks": [
+        "core",
+        "neurology"
+      ],
+      "diseases": [
+        {
+          "id": "stroke",
+          "title": "Stroke",
+          "subtitle": "Cerebrovascular accident with hemiplegia",
+          "file": "diseases/stroke.json",
+          "estMinutes": 75,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "cord-compression",
+          "title": "Spinal cord compression",
+          "subtitle": "Compressive myelopathy presenting as spastic paraplegia",
+          "file": "diseases/cord-compression.json",
+          "estMinutes": 70,
+          "chapters": 14,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "parkinsonism",
+          "title": "Parkinsonism",
+          "subtitle": "A short case",
+          "file": "diseases/parkinsonism.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "peripheral-neuropathy",
+          "title": "Peripheral neuropathy",
+          "subtitle": "Guillain-Barre syndrome as the acute prototype",
+          "file": "diseases/peripheral-neuropathy.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "cranial-nerve-palsy",
+          "title": "Cranial nerve palsy",
+          "subtitle": "Isolated facial nerve palsy, worked as a localising case",
+          "file": "diseases/cranial-nerve-palsy.json",
+          "estMinutes": 35,
+          "chapters": 9,
+          "review": "ai_drafted"
+        },
+        {
+          "id": "ataxia",
+          "title": "Ataxia",
+          "subtitle": "A short case",
+          "file": "diseases/ataxia.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        }
+      ],
+      "module": {
+        "id": "neuro-exam",
+        "title": "Examination of the Nervous System",
+        "subtitle": "The whole workup, before any disease",
+        "file": "systems/neurology.json",
+        "estMinutes": 150,
+        "chapters": 6,
+        "review": "ai_drafted"
+      }
+    },
+    {
+      "id": "general",
+      "title": "Short cases",
+      "icon": "emergency",
+      "skillPacks": [
+        "core",
+        "general"
+      ],
+      "diseases": [
+        {
+          "id": "anemia",
+          "title": "Anaemia",
+          "subtitle": "A short case: not enough haemoglobin",
+          "file": "diseases/anemia.json",
+          "estMinutes": 40,
+          "chapters": 9,
+          "review": "ai_drafted"
+        }
+      ]
+    }
+  ],
+  "media": {
+    "file": "media/manifest.json"
+  }
+}

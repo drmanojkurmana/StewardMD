@@ -1,0 +1,1159 @@
+{
+  "_comment": "Stroke/hemiplegia is neurology's major long case. It is built almost entirely on the shared exam skills already taught in the examination-skills module (higher_mental, cn1_2, cn7, tone_power, reflexes, sensory, gait); what is authored here is the localising logic (cortex vs internal capsule vs brainstem vs high cervical cord), the ischemic-vs-haemorrhagic bedside differential, and management principles at the level of concept, never a dose.",
+  "id": "stroke",
+  "name": "Stroke",
+  "fullName": "Stroke (cerebrovascular accident) with hemiplegia",
+  "system": "neurology",
+  "kbRef": "stroke",
+  "oneLine": "A sudden focal deficit of vascular origin, and the signs that tell you where and what kind",
+  "estMinutes": 75,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "What a stroke is, and the two kinds it can be",
+      "skills": [
+        "skill.stroke.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Before a single question",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age and vascular risk move the differential before the history does",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Age changes the odds: a stroke under 45 pushes you to look harder for a cardioembolic source, a vasculitis, a clotting disorder, or venous sinus thrombosis rather than assuming atherosclerotic small-vessel disease by default."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History of presenting illness",
+      "blurb": "Exactly how it started, and exactly when",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.neuro.approach"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical stroke history is a deficit that was present within seconds to minutes and has not evolved since: weakness of one side of the body, noticed on waking or witnessed to come on suddenly. Ask exactly what the patient, and any witness, was doing at the moment it started."
+        },
+        "skill.hx.neuro.approach": {
+          "expect": "Onset in seconds to minutes, maximal at onset and then static or slowly improving, confined to one side of the body: that shape alone makes stroke the leading diagnosis before you have examined anything. Establish the exact clock time the patient was LAST KNOWN WELL, not the time they were found, because that time decides what time-critical treatment is even still on the table."
+        }
+      }
+    },
+    {
+      "id": "past_personal_drug_family",
+      "title": "Past, personal, drug and family history",
+      "blurb": "The vascular risk profile, taken deliberately, not as an afterthought",
+      "skills": [
+        "skill.hx.stroke.risk"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "The pulse, the pressure, and the neck",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Note the resting posture of the weak limbs and any facial asymmetry before you touch the patient. A patient lying with the affected arm flexed and the leg extended, doing nothing to move it, is showing you the pattern before the formal exam starts."
+        },
+        "skill.gen.vitals": {
+          "expect": "An irregularly irregular pulse raises atrial fibrillation as the embolic source. Blood pressure is very often markedly elevated in the first hours after a stroke as a physiological response to the event itself, and should not be treated aggressively on reflex. Listen over each carotid for a bruit, which favours a large-vessel atherosclerotic source."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Neurological examination",
+      "blurb": "The same exam skills you already know, read for one pattern: UMN, one side, one vascular territory",
+      "skills": [
+        "skill.exam.neuro.higher_mental",
+        "skill.exam.neuro.cn1_2",
+        "skill.exam.neuro.cn7",
+        "skill.exam.neuro.tone_power",
+        "skill.exam.neuro.reflexes",
+        "skill.exam.neuro.sensory",
+        "skill.exam.neuro.gait"
+      ],
+      "emphasis": {
+        "skill.exam.neuro.higher_mental": {
+          "expect": "In a dominant-hemisphere (usually left, in a right-handed patient) cortical stroke, expect an aphasia whose pattern (fluent or non-fluent, comprehension intact or not) maps onto the vascular territory involved. A purely subcortical (internal capsule) stroke can still produce a transcortical-type aphasia even though the cortex itself is spared."
+        },
+        "skill.exam.neuro.cn1_2": {
+          "expect": "Test visual fields specifically for a homonymous hemianopia. Its presence, together with a dense hemiplegia and hemisensory loss, is one of the findings that localises the lesion to the internal capsule or the optic radiation rather than the cortex, because it means the whole compact tract has been interrupted in one place."
+        },
+        "skill.exam.neuro.cn7": {
+          "expect": "Expect an UPPER motor neurone facial palsy: the lower face is weak on the same side as the limb weakness, but the forehead wrinkles normally because it has bilateral cortical representation. A facial weakness that also spares no part of the forehead on that side should make you reconsider whether this is a brainstem or peripheral lesion instead."
+        },
+        "skill.exam.neuro.tone_power": {
+          "expect": "In the acute phase tone can be reduced (neuronal or spinal shock over the affected side), only becoming the expected increased pyramidal tone after some days to weeks; do not be reassured by low tone alone in a fresh stroke. Power is reduced in a pyramidal distribution, weaker in the extensors of the arm and the flexors of the leg, on one side."
+        },
+        "skill.exam.neuro.reflexes": {
+          "expect": "Deep tendon reflexes may be initially depressed in the same acute shock phase before becoming exaggerated, and the plantar response is extensor (upgoing) on the affected side from the outset in a corticospinal lesion, which is why the plantar is more reliable than the tendon reflexes in the first hours."
+        },
+        "skill.exam.neuro.sensory": {
+          "expect": "Expect a hemisensory loss on the same side as the weakness, affecting the face, arm and leg together when the lesion is at the internal capsule or thalamus. A crossed pattern, pain and temperature lost on the face on one side and the body on the other, instead localises to the lateral medulla, a brainstem stroke."
+        },
+        "skill.exam.neuro.gait": {
+          "expect": "Once the patient can stand, expect a hemiplegic (circumducting) gait: the stiff, extended leg is swung outward in an arc because the hip and knee cannot flex normally, while the flexed arm is held close to the body and does not swing."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Localising the hemiplegia",
+      "blurb": "The company a hemiplegia keeps is what tells you where the lesion is",
+      "skills": [
+        "skill.stroke.localise"
+      ]
+    },
+    {
+      "id": "summary",
+      "title": "Clinical summary",
+      "blurb": "The problem representation this case is famous for",
+      "skills": [
+        "skill.stroke.summary"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Ischaemic or haemorrhagic, and what else can mimic a stroke",
+      "skills": [
+        "skill.stroke.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "One scan decides the treatment; the rest find the cause",
+      "skills": [
+        "skill.ix.stroke.imaging"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Diagnosis",
+      "blurb": "Type, territory, likely mechanism, and the risk factors that explain it",
+      "skills": [
+        "skill.stroke.diagnosis"
+      ]
+    },
+    {
+      "id": "treatment",
+      "title": "Treatment",
+      "blurb": "What is time-critical, what is protective, and what waits",
+      "skills": [
+        "skill.tx.stroke.principles"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.stroke.exam",
+        "title": "Examine this patient's weakness and localise the lesion",
+        "task": "This 58-year-old man was found on the floor by his wife two hours ago, unable to move his right arm and leg. Examine his nervous system and localise the lesion.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.higher_mental",
+          "skill.exam.neuro.cn7",
+          "skill.exam.neuro.tone_power",
+          "skill.exam.neuro.reflexes",
+          "skill.exam.neuro.sensory"
+        ],
+        "examinerQuestions": [
+          "Is the facial weakness upper or lower motor neurone, and how do you tell at the bedside?",
+          "Give three findings that would make you say this is an internal capsule lesion rather than a cortical one.",
+          "What is the single most time-critical investigation, and what is it actually deciding?"
+        ]
+      },
+      {
+        "id": "osce.stroke.history",
+        "title": "Take a focused history in a suspected acute stroke",
+        "task": "This 58-year-old man's wife brings him in with sudden right-sided weakness. Take a focused history in seven minutes, from the patient and the witness.",
+        "seconds": 420,
+        "skills": [
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.hx.chief_complaints",
+          "skill.hx.neuro.approach",
+          "skill.hx.stroke.risk"
+        ],
+        "examinerQuestions": [
+          "What single piece of timing information matters more than any other here, and why?",
+          "Name four vascular risk factors you must ask about.",
+          "What would make you suspect this is not a stroke at all?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.stroke.raghunath",
+      "title": "A man found on the floor by his wife",
+      "opening": "Raghunath Iyer, 58, is brought in by his wife, who found him on the bedroom floor two hours ago, unable to move his right side. He is alert and can speak, though his speech is a little slurred. Introduce yourself and take a history from him and his wife.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Raghunath Iyer",
+        "age": 58,
+        "sex": "male",
+        "occupation": "Retired bank clerk",
+        "residence": "Urban, lives with his wife"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help",
+            "what happened"
+          ],
+          "reply": "Doctor, my right arm and leg suddenly stopped working. My wife found me on the floor. I can talk but my words feel heavy in my mouth.",
+          "key": true
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "when did you notice",
+            "how did it start",
+            "sudden or gradual",
+            "onset"
+          ],
+          "reply": "It was sudden. My wife says I was completely normal when she left the room ten minutes earlier, and when she came back I was on the floor and could not get up.",
+          "key": true
+        },
+        "last_known_well": {
+          "cues": [
+            "last known well",
+            "last time you were normal",
+            "what time did it start",
+            "exact time",
+            "when exactly"
+          ],
+          "reply": "My wife checked the clock. It was 7:40 in the morning when she found me. She had left me at about 7:30.",
+          "key": true
+        },
+        "progression": {
+          "cues": [
+            "getting worse",
+            "improving",
+            "changed since",
+            "progressed",
+            "how has it been since"
+          ],
+          "reply": "It has not changed since it happened. Not better, not worse, as far as I can tell.",
+          "key": true
+        },
+        "speech": {
+          "cues": [
+            "speech",
+            "talking",
+            "slurred",
+            "difficulty speaking",
+            "word finding"
+          ],
+          "reply": "My words come out a bit thick, like my tongue is heavy. But I can find the words I want, I just cannot say them clearly.",
+          "key": true
+        },
+        "face": {
+          "cues": [
+            "face",
+            "facial",
+            "mouth",
+            "drooping"
+          ],
+          "reply": "My wife says the right side of my mouth is drooping. I can still close both eyes and wrinkle my forehead though.",
+          "key": true
+        },
+        "headache": {
+          "cues": [
+            "headache",
+            "head pain",
+            "worst headache"
+          ],
+          "reply": "No headache at all, before or since."
+        },
+        "vomiting": {
+          "cues": [
+            "vomiting",
+            "nausea",
+            "vomit"
+          ],
+          "reply": "No vomiting."
+        },
+        "consciousness": {
+          "cues": [
+            "lose consciousness",
+            "black out",
+            "faint",
+            "unconscious"
+          ],
+          "reply": "No, I never lost consciousness. My wife confirms I was awake and trying to speak when she found me."
+        },
+        "seizure": {
+          "cues": [
+            "fit",
+            "seizure",
+            "convulsion",
+            "shaking",
+            "jerking"
+          ],
+          "reply": "No shaking or jerking that my wife saw."
+        },
+        "vision": {
+          "cues": [
+            "vision",
+            "eyesight",
+            "seeing",
+            "blurred"
+          ],
+          "reply": "I feel like I am missing things on my right side, I bumped into the doorframe on that side just now."
+        },
+        "swallowing": {
+          "cues": [
+            "swallow",
+            "choking",
+            "difficulty eating"
+          ],
+          "reply": "I have not tried to eat or drink yet since this happened."
+        },
+        "hypertension": {
+          "cues": [
+            "blood pressure",
+            "hypertension",
+            "bp"
+          ],
+          "reply": "I have had high blood pressure for about twelve years. I take a tablet, but honestly I miss it two or three days a week.",
+          "key": true
+        },
+        "diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar",
+            "blood sugar"
+          ],
+          "reply": "Yes, diabetes for about eight years, on tablets.",
+          "key": true
+        },
+        "cardiac": {
+          "cues": [
+            "heart",
+            "palpitations",
+            "irregular heartbeat",
+            "atrial fibrillation"
+          ],
+          "reply": "I do get a fluttering feeling in my chest sometimes, comes and goes. No doctor has ever told me it is anything.",
+          "key": true
+        },
+        "prior_events": {
+          "cues": [
+            "before",
+            "previous",
+            "earlier episode",
+            "tia",
+            "mini stroke",
+            "happened before"
+          ],
+          "reply": "Now that you ask, about two months ago my right hand felt clumsy and weak for maybe twenty minutes one evening, then it went back to normal. I did not think much of it.",
+          "key": true
+        },
+        "smoking": {
+          "cues": [
+            "smoke",
+            "smoking",
+            "tobacco",
+            "cigarette"
+          ],
+          "reply": "I smoked ten cigarettes a day for about thirty years, stopped five years ago."
+        },
+        "cholesterol": {
+          "cues": [
+            "cholesterol",
+            "lipid",
+            "fat levels"
+          ],
+          "reply": "I was told my cholesterol was a little high a few years back, I do not remember the number."
+        },
+        "medications": {
+          "cues": [
+            "medicine",
+            "medication",
+            "tablets",
+            "drugs",
+            "what do you take"
+          ],
+          "reply": "A tablet for the pressure and a tablet for the sugar, that is all. Nothing that thins the blood."
+        },
+        "family": {
+          "cues": [
+            "family",
+            "father",
+            "mother",
+            "brother",
+            "hereditary"
+          ],
+          "reply": "My father had a stroke in his sixties too."
+        },
+        "trauma": {
+          "cues": [
+            "fall",
+            "head injury",
+            "trauma",
+            "hit your head"
+          ],
+          "reply": "No injury. I did not fall from a height, I just collapsed to the floor from standing."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Lying with the right arm flexed at the elbow and wrist, held close to the body, doing nothing to move it. Right corner of the mouth droops slightly at rest.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 178/100 mmHg. Pulse 88, irregularly irregular. Temperature 37.0 C. SpO2 97 percent on room air. Blood glucose by bedside meter 142 mg/dL.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.higher_mental": {
+          "finding": "Alert, GCS 15. Oriented to time, place and person. Speech is dysarthric but fluent, with intact comprehension of two-step commands, intact repetition, and correct naming of two objects. No aphasia.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.cn1_2": {
+          "finding": "Visual acuity intact bilaterally. Confrontation testing shows a right homonymous hemianopia. Fundus normal bilaterally.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.cn7": {
+          "finding": "Right lower facial weakness with flattening of the nasolabial fold and a droop of the mouth on smiling. Forehead wrinkles symmetrically and both eyes close fully.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.tone_power": {
+          "finding": "Tone reduced in the right arm and leg compared with the left. Power in the right upper limb 1/5, right lower limb 2/5. Left-sided power 5/5 throughout. Pronator drift not tested on the right due to inability to hold the arm up.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.reflexes": {
+          "finding": "Deep tendon reflexes reduced on the right compared with brisk on the left at this early stage. Right plantar response extensor (upgoing). Left plantar flexor.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.sensory": {
+          "finding": "Reduced pin-prick and light touch sensation over the right face, arm and leg together, in the same distribution as the weakness. Left side normal.",
+          "abnormal": true
+        },
+        "skill.exam.neuro.gait": {
+          "finding": "Not tested; the patient is unable to stand unsupported at this time.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "ct_head",
+        "glucose",
+        "ecg",
+        "fbc",
+        "coagulation"
+      ],
+      "investigations": {
+        "ct_head": {
+          "label": "Non-contrast CT head",
+          "indicated": true,
+          "result": "No haemorrhage. Subtle loss of grey-white differentiation in the left internal capsule and adjacent basal ganglia, consistent with an early ischaemic change. No mass, no midline shift.",
+          "note": "This is the test that decides the next hour of management: it excludes haemorrhage, which is the one thing that changes everything else that follows."
+        },
+        "glucose": {
+          "label": "Bedside blood glucose",
+          "indicated": true,
+          "result": "142 mg/dL.",
+          "note": "Checked immediately, because hypoglycaemia is a well-known stroke mimic and is instantly reversible. Normal here, so it does not explain the deficit."
+        },
+        "ecg": {
+          "label": "ECG",
+          "indicated": true,
+          "result": "Irregularly irregular rhythm with absent P waves, consistent with atrial fibrillation. Ventricular rate 90 per minute.",
+          "note": "A newly found source: atrial fibrillation is a common cause of cardioembolic stroke, and its discovery here changes long-term secondary prevention."
+        },
+        "fbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "Haemoglobin 13.8 g/dL. White cells and platelets normal.",
+          "note": "A baseline, and platelet count matters if any antithrombotic therapy is being considered."
+        },
+        "coagulation": {
+          "label": "Coagulation profile",
+          "indicated": true,
+          "result": "PT/INR and aPTT normal. Patient is not on any anticoagulant.",
+          "note": "Needed before any antithrombotic or reperfusion decision, and to exclude a bleeding tendency as a contributor."
+        },
+        "lipid": {
+          "label": "Fasting lipid profile",
+          "indicated": true,
+          "result": "LDL cholesterol 168 mg/dL.",
+          "note": "Identifies a modifiable risk factor for secondary prevention; it does not change acute management."
+        },
+        "echo": {
+          "label": "Echocardiogram",
+          "indicated": true,
+          "result": "Mildly dilated left atrium. No intracardiac thrombus seen. Normal left ventricular function.",
+          "note": "Reasonable here given the new atrial fibrillation, to look for a structural cardioembolic source."
+        },
+        "carotid_doppler": {
+          "label": "Carotid duplex ultrasound",
+          "indicated": false,
+          "result": "Not yet done.",
+          "note": "Worth doing before discharge, but with atrial fibrillation already identified as a probable cardioembolic source and a lesion that fits a single perforator or capsular territory, it does not change today's management."
+        },
+        "mri_brain": {
+          "label": "MRI brain with diffusion-weighted imaging",
+          "indicated": false,
+          "result": "Not done acutely.",
+          "note": "More sensitive than CT for very early ischaemia and useful when the diagnosis is uncertain, but it should not delay the CT-based decision that has already been made, and was not needed to change today's plan."
+        },
+        "lp": {
+          "label": "Lumbar puncture",
+          "indicated": false,
+          "result": "Not performed.",
+          "note": "Not indicated: there is no headache, no meningism, and the CT picture and history already fit an ischaemic stroke, not a subarachnoid haemorrhage."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute ischaemic stroke, most likely cardioembolic given newly found atrial fibrillation, in the left internal capsule/lenticulostriate territory. Consider intracerebral haemorrhage (excluded by CT), hypoglycaemia (excluded), Todd's paresis after an unwitnessed seizure, and, less likely given the CT and the fixed deficit, a complicated migraine or a functional deficit.",
+        "accept": [
+          "ischemic stroke",
+          "ischaemic stroke",
+          "cardioembolic",
+          "hemorrhage",
+          "haemorrhage",
+          "hypoglycemia",
+          "hypoglycaemia",
+          "todd",
+          "seizure",
+          "migraine"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute ischaemic stroke in the left internal capsule/lenticulostriate (MCA perforator) territory, probably cardioembolic given newly diagnosed atrial fibrillation, on a background of poorly controlled hypertension, diabetes and a preceding TIA two months ago.",
+        "accept": [
+          "ischemic stroke",
+          "ischaemic stroke",
+          "cva",
+          "cerebrovascular accident",
+          "internal capsule"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Airway, breathing and circulation first; keep nil by mouth until a formal swallow assessment; correct or exclude hypoglycaemia; do not lower blood pressure aggressively unless it is extreme or reperfusion therapy is being given; assess urgently and without delay for time-critical reperfusion therapy against the current stroke protocol, since eligibility is decided by exact time from last known well; start antiplatelet therapy once haemorrhage is excluded and reperfusion therapy is not being given; monitor for the rhythm found on ECG and plan anticoagulation for atrial fibrillation once safe to do so; DVT prophylaxis, early mobilisation and rehabilitation; and secondary prevention of hypertension, diabetes and dyslipidaemia going forward.",
+        "accept": [
+          "airway",
+          "swallow",
+          "glucose",
+          "blood pressure",
+          "reperfusion",
+          "thrombolysis",
+          "antiplatelet",
+          "anticoagulation",
+          "atrial fibrillation",
+          "rehabilitation",
+          "secondary prevention"
+        ],
+        "minMatch": 4
+      },
+      "teachingPoints": [
+        "The exact clock time he was last known well, 7:30 am, is worth more than almost any other single fact in this history, because it is what decides whether time-critical reperfusion therapy is even a live option.",
+        "His right facial weakness spares the forehead. That single bedside finding says the lesion is central (upper motor neurone), not a peripheral facial nerve palsy, before any scan is done.",
+        "The tendon reflexes are misleadingly reduced on the affected side in these first hours, from acute neuronal shock, while the plantar is already extensor. In a fresh stroke, trust the plantar over the tendon reflexes.",
+        "His two-month-old episode of a clumsy hand that resolved in twenty minutes was a transient ischaemic attack, a warning that was not acted on. Every TIA is a rehearsal for the stroke that follows it.",
+        "The irregular pulse found on general examination, later confirmed as atrial fibrillation on ECG, is not an incidental finding: it is the probable mechanism of his stroke and changes his long-term prevention plan.",
+        "The CT head did not diagnose his stroke, the history and examination did that. What it did was exclude haemorrhage, which is the one finding that would have changed every subsequent step."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.stroke.basics",
+      "skill.exam.neuro.cn7",
+      "skill.exam.neuro.tone_power",
+      "skill.exam.neuro.reflexes",
+      "skill.stroke.localise",
+      "skill.stroke.differential",
+      "skill.ix.stroke.imaging",
+      "skill.tx.stroke.principles"
+    ]
+  },
+  "skills": {
+    "skill.stroke.basics": {
+      "id": "skill.stroke.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What a stroke is",
+      "oneLine": "A sudden focal neurological deficit from a vascular cause, and the two ways it happens",
+      "why": "Every subsequent decision, whether to image before treating, whether to lower the blood pressure, whether to give an antithrombotic, hinges on the single word 'vascular' and on which of the two mechanisms is at work. Getting the definition precise is what stops a seizure or a hypoglycaemic episode being mislabelled and mistreated as a stroke.",
+      "body": "A stroke is a sudden onset of a focal (occasionally global) neurological deficit, caused by an interruption of the blood supply to part of the brain, that persists beyond 24 hours or is associated with infarction on imaging.",
+      "keyPoints": [
+        "Ischaemic stroke, roughly the large majority, results from occlusion of a vessel, whether by thrombosis in situ or by an embolus arriving from elsewhere, most often the heart or a proximal artery.",
+        "Haemorrhagic stroke results from bleeding into the brain parenchyma (intracerebral) or into the subarachnoid space, and behaves, and is managed, completely differently from an ischaemic one from the first hour.",
+        "A transient ischaemic attack (TIA) is a transient episode of neurological dysfunction caused by focal brain, spinal cord or retinal ischaemia, without evidence of acute infarction, and it is a warning that a completed stroke may follow.",
+        "'Time is brain' is not a slogan: reperfusion therapy in eligible ischaemic stroke is time-critical, decided against a defined early window measured from when the patient was last known to be well, not from when they were found.",
+        "The single most important early branch point in management is 'ischaemic or haemorrhagic', and that branch point is answered by imaging, not by the history or examination alone, because the two can look identical at the bedside."
+      ],
+      "pitfalls": [
+        "Assuming a sudden deficit is always ischaemic. Haemorrhage can look identical at the bedside and only imaging separates them reliably.",
+        "Treating 'time is brain' as a figure of speech rather than the reason last-known-well time is asked before almost anything else.",
+        "Dismissing a resolved deficit as unimportant because the patient looks normal by the time you see them: a TIA carries a real short-term risk of a completed stroke."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What are the two broad mechanisms of stroke?",
+          "a": "Ischaemic (vessel occlusion, thrombotic or embolic) and haemorrhagic (bleeding into the brain or subarachnoid space).",
+          "accept": [
+            "ischemic",
+            "ischaemic",
+            "hemorrhagic",
+            "haemorrhagic"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Define a TIA.",
+          "a": "A transient episode of neurological dysfunction from focal brain, spinal cord or retinal ischaemia, without evidence of acute infarction.",
+          "accept": [
+            "transient",
+            "ischemia",
+            "ischaemia",
+            "no infarction"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can the history and examination alone not tell you whether a stroke is ischaemic or haemorrhagic?",
+          "a": "The two can produce an identical acute focal deficit; some bedside features (headache, vomiting, meningism, reduced consciousness) statistically favour haemorrhage, but none is reliable enough on its own, so imaging is required before any treatment decision that depends on the distinction.",
+          "accept": [
+            "identical",
+            "overlap",
+            "imaging",
+            "unreliable"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke, definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: approach to hemiplegia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.stroke.localise": {
+      "id": "skill.stroke.localise",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Localising a hemiplegia",
+      "oneLine": "It is never the weakness alone that localises; it is what travels with it",
+      "why": "A hemiplegia looks the same at first glance whether the lesion is in the cortex, the internal capsule, the brainstem, or even the high cervical cord. Localisation comes entirely from the accompanying findings, aphasia, apraxia, the visual field, which cranial nerves are involved and on which side, and that is exactly why the exam is done fully rather than stopping once weakness is confirmed.",
+      "body": "Work outward from the pattern of weakness to what else is, or is not, affected, and read the combination as one localising statement.",
+      "keyPoints": [
+        "Cortical lesion: weakness is often NOT dense and may be a monoplegia (arm-predominant in MCA territory, leg-predominant in ACA territory) rather than a full hemiplegia, because the cortical representation is spread over a wide area. Expect seizures, and aphasia if the dominant hemisphere is involved, or apraxia/neglect if the non-dominant hemisphere is involved.",
+        "Internal capsule lesion: a small lesion here produces a DENSE, complete hemiplegia (face, arm and leg equally), because the corticospinal fibres are tightly packed together at this point, together with a contralateral hemisensory loss and often a homonymous hemianopia, all from one small lesion interrupting several compact tracts at once.",
+        "Brainstem lesion: the hallmark is a CROSSED pattern, a cranial nerve palsy on the SAME side as the lesion together with a hemiplegia on the OPPOSITE side, because the lesion sits above the point where the long tracts have crossed but at or below the level of the cranial nerve nucleus itself.",
+        "High cervical cord lesion (a stroke is a rare cause here, but the pattern generalises to any high cervical lesion): hemiplegia on the SAME side as the lesion, since the corticospinal tract has already crossed higher up in the medulla, with no cranial nerve involvement at all, because the lesion is well below the brainstem.",
+        "A dense hemiplegia with a homonymous hemianopia and no aphasia, in a right-handed patient, is a classic internal capsule pattern even though the deficit looks 'cortical' in its completeness; the absence of a cortical sign (aphasia, apraxia, seizures) is itself informative."
+      ],
+      "pitfalls": [
+        "Stopping the exam once weakness is confirmed, and so missing the combination of findings that actually localises the lesion.",
+        "Assuming any dense hemiplegia must be cortical, when a small, compact internal capsule lesion is the classic cause of the most complete hemiplegias.",
+        "Missing a crossed pattern in the cranial nerves, which is the single fact that says 'brainstem' rather than 'hemisphere'.",
+        "Forgetting that a purely subcortical (internal capsule) stroke can still produce a transcortical-type aphasia, so aphasia alone does not prove a cortical lesion."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has a dense, equal hemiplegia of the face, arm and leg, with a homonymous hemianopia, and no aphasia despite being right-handed. Roughly where is the lesion?",
+          "a": "The internal capsule (or optic radiation immediately adjacent), because a small lesion there interrupts the compact corticospinal, sensory and visual pathways together, producing a complete deficit without a cortical sign.",
+          "accept": [
+            "internal capsule"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What single pattern of findings points specifically to a brainstem lesion rather than a hemispheric one?",
+          "a": "A crossed pattern: a cranial nerve palsy on the SAME side as the lesion together with hemiplegia on the OPPOSITE side.",
+          "accept": [
+            "crossed",
+            "cranial nerve",
+            "opposite",
+            "same side"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can a cortical stroke produce a monoplegia rather than a full hemiplegia, while a small internal capsule stroke produces a complete, dense one?",
+          "a": "At the cortex, the motor representation for the face, arm and leg is spread over a wide area, so a small cortical lesion can affect only one part of it; in the internal capsule the same fibres are tightly packed together, so even a small lesion interrupts all of them together and produces an equally dense deficit throughout the face, arm and leg.",
+          "accept": [
+            "spread",
+            "wide area",
+            "packed",
+            "compact"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pattern",
+          "text": "States the pattern of weakness (monoplegia vs dense hemiplegia) and reads it correctly"
+        },
+        {
+          "id": "company",
+          "text": "Uses the accompanying findings (aphasia, visual field, cranial nerves) to localise, not weakness alone",
+          "critical": true
+        },
+        {
+          "id": "crossed",
+          "text": "Recognises a crossed brainstem pattern when present"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: localisation of hemiplegia"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: localization of hemiplegia"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.stroke.summary": {
+      "id": "skill.stroke.summary",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "The clinical summary",
+      "oneLine": "Onset, side, deficit, and the state the patient is in right now",
+      "why": "Neurology rewards a summary that is almost a formula, because the same handful of variables, onset, side, what is weak, what cranial nerve is involved, what stage the reflexes are in, recur in every hemiplegia case and are exactly what a consultant listens for first.",
+      "body": "State the tempo, the side and completeness of the deficit, the accompanying cranial nerve finding, and the current phase (acute neuronal shock versus established), then the probable mechanism and the risk factors that explain it.",
+      "keyPoints": [
+        "Tempo: sudden onset, maximal at onset, static since. This one phrase excludes most non-vascular causes immediately.",
+        "Side and completeness: which side, and whether it is a monoplegia, hemiparesis or dense hemiplegia.",
+        "The accompanying UMN cranial nerve sign, most often the facial palsy that spares the forehead, which confirms the lesion is central.",
+        "The current phase: many students omit this, but a fresh stroke can still be in a phase of reduced tone and reflexes on the affected side (neuronal shock) before the expected pyramidal signs appear, and saying so shows you understand why the exam looks the way it does today.",
+        "A worked example: 'Sudden onset, right dense hemiplegia with a right upper motor neurone facial palsy, currently in the early phase with reduced tone and reflexes on the right but an extensor plantar, in a 58-year-old man with poorly controlled hypertension, diabetes, and newly found atrial fibrillation, most likely a cardioembolic ischaemic stroke in the left internal capsule territory.'"
+      ],
+      "pitfalls": [
+        "Omitting the tempo, which does more work in this diagnosis than almost anything else.",
+        "Stating the deficit without saying which cranial nerve pattern (UMN or LMN) accompanies it.",
+        "Forgetting to state the current phase, so the listener cannot tell whether a low tone or reduced reflex is reassuring or expected."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements does a stroke problem representation need at minimum?",
+          "a": "The tempo of onset, the side and completeness of the deficit, the accompanying cranial nerve pattern, and the probable vascular mechanism with its risk factors.",
+          "accept": [
+            "tempo",
+            "onset",
+            "side",
+            "cranial nerve",
+            "mechanism",
+            "risk factor"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why does 'currently in the early phase' matter in a stroke summary?",
+          "a": "Because tendon reflexes and tone can be misleadingly low in the first hours from acute neuronal shock; stating the phase tells the listener you are interpreting today's findings correctly rather than being falsely reassured by a low tone.",
+          "accept": [
+            "shock",
+            "phase",
+            "reflexes",
+            "misleading"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tempo",
+          "text": "States the tempo of onset"
+        },
+        {
+          "id": "pattern",
+          "text": "States the side, completeness and accompanying cranial nerve pattern"
+        },
+        {
+          "id": "mechanism",
+          "text": "States the probable mechanism and risk factors"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke problem representation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cerebrovascular accident, worked case summary"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.stroke.differential": {
+      "id": "skill.stroke.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Differential diagnosis",
+      "oneLine": "Ischaemic versus haemorrhagic first, then the mimics that are not vascular at all",
+      "why": "The ischaemic-versus-haemorrhagic branch point decides the entire early treatment plan, and several common, correctable conditions can mimic a stroke closely enough to be mistaken for one at the bedside if they are not actively considered.",
+      "body": "Split the differential in two layers: which kind of stroke this is, and whether it is really a stroke at all.",
+      "keyPoints": [
+        "Favouring haemorrhage over ischaemia at the bedside: a severe headache at onset, vomiting, reduced consciousness early, and meningeal irritation. None of these is reliable enough alone, which is why imaging still decides it.",
+        "Favouring ischaemia over haemorrhage: a known atrial fibrillation or valvular heart disease, a carotid bruit, and a gradual stepwise or fluctuating evolution rather than one catastrophic event.",
+        "Hypoglycaemia can produce a focal deficit indistinguishable from stroke, and is instantly reversible, which is why bedside glucose is checked essentially immediately.",
+        "Todd's paresis, a focal weakness following a seizure, can be mistaken for a stroke if the seizure itself was unwitnessed; it typically resolves over hours.",
+        "A complicated or hemiplegic migraine can mimic a stroke, particularly in a younger patient with a personal or family history of migraine, though this diagnosis should be made with real caution and only after vascular causes are excluded.",
+        "A subdural haematoma, a mass lesion, or a functional (psychogenic) deficit are all on the broader differential for a focal neurological presentation and should be kept in mind if the pattern does not fit."
+      ],
+      "pitfalls": [
+        "Treating a normal early CT as proof there is no stroke; early ischaemic change can be subtle or absent on CT in the first hours.",
+        "Not checking bedside glucose before assuming a deficit is a stroke.",
+        "Labelling every stepwise or fluctuating deficit as 'not vascular', when recurrent small emboli can genuinely produce a stepwise course.",
+        "Diagnosing migraine or a functional deficit as a default when a vascular cause has not actually been excluded."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Name three bedside features that favour haemorrhage over ischaemic stroke.",
+          "a": "Severe headache at onset, vomiting, and reduced consciousness early (also meningeal irritation), though none is reliable enough alone to avoid imaging.",
+          "accept": [
+            "headache",
+            "vomiting",
+            "consciousness",
+            "meningeal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Give two important non-vascular mimics of an acute focal deficit, and how you would exclude one of them quickly.",
+          "a": "Hypoglycaemia, excluded immediately with a bedside glucose; and Todd's paresis following an unwitnessed seizure, suggested by a history of an episode of altered awareness or by a deficit that resolves over hours.",
+          "accept": [
+            "hypoglycemia",
+            "hypoglycaemia",
+            "todd",
+            "seizure"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "branch",
+          "text": "States the ischaemic-vs-haemorrhagic branch point and that imaging, not history, resolves it"
+        },
+        {
+          "id": "mimics",
+          "text": "Names at least two non-vascular mimics"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke differential"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: hemorrhage vs thrombosis vs embolism"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.stroke.imaging": {
+      "id": "skill.ix.stroke.imaging",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "Imaging and the source workup",
+      "oneLine": "One scan decides the next hour; the rest of the workup finds the mechanism",
+      "why": "In acute stroke, investigations serve two entirely different purposes that must not be confused: one urgent scan decides whether time-critical treatment is even possible, and a separate, slower workup looks for the source so it can be treated to prevent the next one.",
+      "body": "Order investigations by the question each one answers, and do the time-critical one first.",
+      "keyPoints": [
+        "Non-contrast CT head, immediately: its purpose is to exclude haemorrhage. It can be normal in the first hours of an ischaemic stroke, and a normal early CT does NOT exclude ischaemic stroke, it only excludes bleeding.",
+        "Bedside blood glucose, immediately: hypoglycaemia is a reversible stroke mimic and must be checked before anything else is assumed.",
+        "MRI with diffusion-weighted imaging is more sensitive than CT for very early ischaemia and is useful when the diagnosis is uncertain, but obtaining it should never delay a CT-based decision that is already time-critical.",
+        "ECG, looking specifically for atrial fibrillation, and an echocardiogram where a cardioembolic source is suspected.",
+        "Carotid duplex ultrasound, looking for a large-vessel atherosclerotic source, particularly relevant to an anterior circulation, cortical-type stroke.",
+        "Baseline full blood count, coagulation profile and renal function, needed before any antithrombotic or reperfusion decision.",
+        "Fasting lipid profile and, where clinically indicated, a young-stroke workup (autoimmune, prothrombotic, and cardiac-structural causes) in a patient without the usual risk factors."
+      ],
+      "pitfalls": [
+        "Treating a normal early CT as proof the deficit is not a stroke.",
+        "Delaying the CT, or the treatment decision it enables, to wait for an MRI.",
+        "Not checking glucose before assuming the deficit is vascular.",
+        "Ordering a full young-stroke workup reflexively in an older patient with an obvious source already found (here, new atrial fibrillation)."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single purpose of the immediate non-contrast CT head in suspected stroke?",
+          "a": "To exclude haemorrhage. It does not reliably exclude, or confirm, ischaemic stroke in the first hours.",
+          "accept": [
+            "exclude haemorrhage",
+            "exclude hemorrhage",
+            "rule out bleed"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is a normal early CT not reassuring in a patient with a convincing stroke history?",
+          "a": "Early ischaemic change can be subtle or entirely absent on CT within the first several hours; a normal scan only tells you there is no haemorrhage, it does not exclude an ischaemic stroke.",
+          "accept": [
+            "early ischemic change",
+            "subtle",
+            "absent",
+            "no haemorrhage only"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has a convincing stroke and new atrial fibrillation on ECG. What two further investigations are most directly justified, and why?",
+          "a": "An echocardiogram, to look for an intracardiac or structural cardioembolic source, and a coagulation profile plus renal and platelet parameters, needed before any decision about anticoagulation or antithrombotic therapy.",
+          "accept": [
+            "echocardiogram",
+            "echo",
+            "coagulation",
+            "renal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke investigations"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.stroke.diagnosis": {
+      "id": "skill.stroke.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Type, territory, mechanism, and the risk factors that explain it, every time",
+      "why": "'Stroke' alone directs nobody's care. A complete statement names the kind, the territory, the probable mechanism, and the risk factors, because each of those changes what happens next, from whether reperfusion therapy is even considered to what secondary prevention is started.",
+      "body": "Build the diagnosis in layers: confirm it is a stroke, state whether it is ischaemic or haemorrhagic, name the probable vascular territory from the localisation, state the probable mechanism, and list the risk factors that explain it.",
+      "keyPoints": [
+        "The type, established by imaging: ischaemic or haemorrhagic.",
+        "The territory, from the localising signs: for example, left internal capsule/lenticulostriate, or a named brainstem syndrome.",
+        "The probable mechanism: thrombotic (large-vessel atherosclerosis), embolic (typically cardioembolic), or, for a haemorrhage, hypertensive versus another structural cause.",
+        "The risk factors that explain it, stated explicitly rather than left implicit in the history.",
+        "A worked example: 'Acute ischaemic stroke, left internal capsule/lenticulostriate territory, probably cardioembolic from newly found atrial fibrillation, in a patient with poorly controlled hypertension and diabetes and a preceding TIA two months ago.'"
+      ],
+      "pitfalls": [
+        "Writing 'CVA' or 'stroke' with no type, territory or mechanism.",
+        "Naming a mechanism before imaging has actually excluded haemorrhage.",
+        "Leaving the risk factors implicit in the history rather than stated in the diagnosis, where they belong."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements make a complete stroke diagnosis?",
+          "a": "The type (ischaemic or haemorrhagic), the territory, the probable mechanism, and the risk factors that explain it.",
+          "accept": [
+            "type",
+            "territory",
+            "mechanism",
+            "risk factor"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "type",
+          "text": "States ischaemic or haemorrhagic, based on imaging"
+        },
+        {
+          "id": "territory",
+          "text": "States a territory or named syndrome consistent with the localising signs"
+        },
+        {
+          "id": "mechanism",
+          "text": "States a probable mechanism and the risk factors that explain it"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: stroke diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.tx.stroke.principles": {
+      "id": "skill.tx.stroke.principles",
+      "kind": "treatment",
+      "system": "neurology",
+      "title": "Acute management principles",
+      "oneLine": "What is time-critical, what waits, and the two reflex errors that cause real harm",
+      "why": "Two reflex errors kill or disable people in acute stroke: aggressively lowering the blood pressure out of habit, and feeding a patient before their swallow has been checked. Understanding the logic, not the exact drug or dose, is what protects against both.",
+      "body": "Manage acute stroke in a fixed order: stabilise, exclude reversible mimics, decide urgently on time-critical reperfusion eligibility, then move to protective and preventive measures.",
+      "keyPoints": [
+        "Airway, breathing and circulation first, as in any acute presentation.",
+        "Check and correct blood glucose immediately; hypoglycaemia is an instantly reversible stroke mimic.",
+        "Do NOT lower blood pressure aggressively in the acute phase of ischaemic stroke as a reflex. A markedly elevated pressure in the first hours is usually a physiological response to the event itself, and lowering it too far can worsen perfusion to the affected brain. Blood pressure targets differ specifically for a patient being considered for reperfusion therapy and for haemorrhagic stroke, and those decisions belong to the treating team's current protocol.",
+        "Assess urgently, without delay, whether the patient is a candidate for time-critical reperfusion therapy. Eligibility is decided against the exact time the patient was last known well and against imaging findings, following the treating institution's current stroke protocol; this module does not prescribe the eligibility window or the agent.",
+        "Keep the patient nil by mouth until a formal swallow assessment is done. Feeding before this is checked is a direct cause of aspiration.",
+        "Once haemorrhage is excluded and reperfusion therapy is not being given, antiplatelet therapy is generally started; where a cardioembolic source such as atrial fibrillation is found, anticoagulation is considered once it is judged safe to do so, in each case per current guideline and the individual bleeding risk.",
+        "General supportive care: DVT prophylaxis, careful positioning, early mobilisation once safe, and early involvement of physiotherapy, speech and swallow therapy, and occupational therapy.",
+        "Secondary prevention, addressed before discharge: control of hypertension, diabetes and dyslipidaemia, smoking cessation, and antithrombotic therapy appropriate to the mechanism found."
+      ],
+      "pitfalls": [
+        "Lowering blood pressure aggressively as a reflex in the acute phase of ischaemic stroke.",
+        "Giving oral food or fluids before a swallow assessment.",
+        "Delaying the urgent eligibility assessment for time-critical reperfusion therapy while waiting for non-essential investigations.",
+        "Forgetting secondary prevention because the acute event has been stabilised."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must be checked before any oral intake in an acute stroke patient?",
+          "a": "A formal swallow assessment, to prevent aspiration.",
+          "accept": [
+            "swallow"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why should blood pressure not be aggressively lowered in the acute phase of an ischaemic stroke?",
+          "a": "The elevated pressure is usually a physiological response to the event, and lowering it too far can worsen perfusion to the already compromised brain tissue around the lesion.",
+          "accept": [
+            "perfusion",
+            "worsen",
+            "physiological response"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What single piece of history decides eligibility for time-critical reperfusion therapy, and why is 'when the patient was found' not the same thing?",
+          "a": "The exact time the patient was last known to be well. 'When found' can be much later than onset if the deficit was unwitnessed, for example on waking, which would understate how long the brain has actually been ischaemic and could lead to a wrongly optimistic eligibility decision.",
+          "accept": [
+            "last known well",
+            "found",
+            "unwitnessed"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: acute stroke management principles"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Cerebrovascular diseases, management"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "dosingNote": "This module teaches acute stroke management at the level of principle and sequence only. Reperfusion-therapy eligibility, blood pressure targets, and antithrombotic or anticoagulant choice and timing must be taken from your institution's current stroke protocol and national guideline at the time of treatment. CliniX does not prescribe."
+    }
+  }
+}

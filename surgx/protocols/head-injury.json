@@ -1,0 +1,65 @@
+{
+  "id": "head-injury",
+  "title": "Head injury",
+  "subtitle": "Who scans, who transfers, who watches",
+  "category": "trauma",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "nice-ng232", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Head injury: assessment and early management (NG232)", "year": 2023, "version": "NG232", "url": "https://www.nice.org.uk/guidance/ng232", "accessed": "2026-08-24" },
+    { "id": "btf", "org": "Brain Trauma Foundation", "title": "Guidelines for the management of severe traumatic brain injury", "edition": "4th edition", "year": 2016, "url": "https://braintrauma.org/guidelines", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "GCS 8 or less, or any fall of 2 or more points sustained for 30 minutes." },
+      { "text": "A unilateral dilated pupil that is unreactive, or a new lateralising motor deficit." },
+      { "text": "Cushing response: rising blood pressure with bradycardia and irregular breathing. This is late." },
+      { "text": "Post-traumatic seizure, focal neurological deficit, or more than one episode of vomiting." },
+      { "text": "Suspected open or depressed skull fracture, or any sign of a base-of-skull fracture." },
+      { "text": "Anticoagulated or antiplatelet-treated patient with any head injury, however trivial the mechanism looks." }
+    ],
+    "do_now": [
+      { "text": "Airway with cervical spine control. Hypoxia and hypotension each independently worsen outcome in brain injury, and both are preventable.", "timeCritical": true, "evidenceRef": "btf" },
+      { "text": "Capillary glucose in every reduced conscious level, before attributing it to the head injury.", "timeCritical": true, "evidenceRef": "nice-ng232" },
+      { "text": "Intubate and ventilate for GCS 8 or less, loss of airway reflexes, or an agitated patient who cannot be scanned safely.", "timeCritical": true, "evidenceRef": "btf" },
+      { "text": "CT head within one hour of identifying any high-risk feature.", "timeCritical": true, "evidenceRef": "nice-ng232" }
+    ],
+    "assess": [
+      { "text": "Record GCS by component and repeat it. A single total conceals the change that matters.", "calcs": ["gcs"] },
+      { "text": "Pupils: size, symmetry, reaction. Document them at the same time as the GCS." },
+      { "text": "Mechanism, loss of consciousness, amnesia, seizure, vomiting, and any anticoagulation - these five answer the imaging question." },
+      { "text": "Examine for base-of-skull signs: periorbital or mastoid bruising, cerebrospinal fluid from nose or ear, haemotympanum." },
+      { "text": "Assume a cervical spine injury in every significant head injury until it is cleared clinically or radiologically." },
+      { "text": "Score haemorrhage volume and prognosis only after imaging, and only to inform discussion.", "calcs": ["ich", "hunt_hess"] }
+    ],
+    "investigate": [
+      { "text": "CT head, and CT cervical spine when indicated by mechanism, deficit, or an unassessable patient." },
+      { "text": "Coagulation screen in every anticoagulated patient, with the reversal agent identified before the scan result arrives." },
+      { "text": "Repeat CT for any unexplained deterioration, or per local policy in an anticoagulated patient with an initially normal scan." },
+      { "text": "Alcohol and drugs may coexist with an extradural. They are never the explanation until the scan says so." }
+    ],
+    "resuscitate": [
+      { "text": "Keep oxygen saturation and blood pressure normal. Avoid hypotension in particular; a single episode is associated with worse outcome.", "evidenceRef": "btf" },
+      { "text": "Nurse head-up at about 30 degrees with the neck neutral and no constricting collar tie, once the spine allows.", "evidenceRef": "btf" },
+      { "text": "Treat pain, agitation and seizures: each raises intracranial pressure. Reverse anticoagulation urgently on the basis of the scan.", "evidenceRef": "nice-ng232" },
+      { "text": "Hyperosmolar therapy for signs of herniation, as a bridge to a neurosurgical decision rather than a treatment in itself.", "evidenceRef": "btf" }
+    ],
+    "definitive": [
+      { "text": "Urgent neurosurgical evacuation for an extradural or acute subdural haematoma with mass effect or a deteriorating patient.", "timeCritical": true, "evidenceRef": "btf" },
+      { "text": "Intracranial pressure monitoring and intensive-care management for severe traumatic brain injury that is not immediately operative.", "evidenceRef": "btf" },
+      { "text": "Observation with a documented neurological observation schedule for the patient with a normal scan and a persistent abnormality of consciousness.", "evidenceRef": "nice-ng232" },
+      { "text": "Written head-injury advice, with a named person to stay with them, for anyone discharged.", "evidenceRef": "nice-ng232" }
+    ],
+    "escalate": [
+      { "text": "Discuss every abnormal CT with neurosurgery, including the ones you think need no operation. That conversation is the standard, not a favour." },
+      { "text": "Transfer intubated, with the scan images available, and with blood pressure and oxygenation stable before the ambulance moves." },
+      { "text": "An extradural haematoma in a lucid patient is the classic missed catastrophe. Speed of transfer, not speed of investigation, determines outcome." }
+    ]
+  },
+  "notes": [
+    "The two things that turn a survivable brain injury into a poor outcome are hypoxia and hypotension, and both are managed outside the head.",
+    "GCS trend beats GCS value. Record the components, record the time, and hand over both."
+  ],
+  "calcs": ["gcs", "ich", "hunt_hess", "nihss"]
+}

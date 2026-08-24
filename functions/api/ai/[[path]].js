@@ -129,6 +129,7 @@ import { assessmentExtractPrompt, sanitizeAssessmentFields } from "./_assessment
 import { scribeExtractPrompt, sanitizeScribeOutput } from "./_opd-scribe.js";
 import { maikNextPrompt, maikExtractPrompt, sanitizeMaikNext, sanitizeMaikExtract } from "./_maik-ask.js";
 import { opdSuggestPrompt, sanitizeOpdSuggest } from "./_opd-suggest.js";
+import { surgxNotePrompt, sanitizeSurgxNote } from "./_surgx-note.js";
 // The effective Gemini model. The admin "switch models" control (KV override, validated to a priced
 // model by setModelOverride) wins; otherwise the exact prior behaviour (env.GEMINI_MODEL || default).
 // env.__modelOverride is stamped once per request in onRequest from the KV override.
@@ -171,7 +172,7 @@ const MODULE_FOR = {
   "viva-judge": "clinix",
 };
 function moduleLimitMsg(mod, limit) {
-  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions" }[mod] || "AI requests";
+  const label = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "evidence reviews", ocr: "photo scans", ecg: "ECG uploads", thorex: "chest X-ray uploads", stt: "voice transcriptions", clinix: "CliniX tutor questions", surgx_note: "SURGX note dictations", surgx_case: "SURGX case questions" }[mod] || "AI requests";
   return "Daily limit reached: " + limit + " " + label + " per day. This resets at midnight. (Configurable per hospital.)";
 }
 async function aiAdminAuthed(request, env, url) {
@@ -1190,7 +1191,15 @@ export async function onRequest(context) {
       // same 50/day allowance they need for clinical MaiK, and a doctor's MaiK usage would be
       // indistinguishable from student revision in the admin console.
       if (body && body.mode === "clinix-tutor") _mod = "clinix";
+      // SURGX Senior Surgeon Mode -> its own bucket, same place and shape as the two remaps above.
+      // A case is many short challenge turns; without this they would burn the surgeon's clinical
+      // MaiK allowance, and the admin console could not tell case drilling from bedside questions.
+      if (body && body.mode === "surgx-mentor") _mod = "surgx_case";
     }
+    // SURGX note structuring is an /extract kind, which MODULE_FOR maps to the shared "ocr" bucket.
+    // Documentation load is a different thing from photo scanning and is metered separately, so a
+    // long operating list never exhausts the allowance for scanning a drug chart.
+    if (seg === "extract" && body && body.kind === "surgx-note") _mod = "surgx_note";
     // Research Mode (Evidence Review) counts against its OWN 2/day "research" bucket, but that cap is
     // enforced INSIDE the /research handler AFTER the KV cache check — a cached answer must never burn
     // a daily slot — so it opts OUT of this generic pre-count. Normal web-research is remapped back to
@@ -1825,6 +1834,23 @@ export async function onRequest(context) {
         await _chargeScribe();
         const sanitized = sanitizeScribeOutput(parseJsonLoose(text));
         return json({ kind: "opd-scribe", ...sanitized, mode: "opd-scribe" });
+      }
+      if (body.kind === "surgx-note") {
+        // SURGX: a surgeon's dictation -> WHICH FIELD each thing they said belongs in. Never what
+        // they said. The allow-list comes from the caller's note schema (aiFillable:true fields
+        // only) and is intersected server-side with a hard DENY list, so counts, specimens,
+        // implants, consent, discharge medications and identifiers are structurally unreachable
+        // however the model responds. A third guard (numericGuard) runs client-side afterwards and
+        // voids any field containing a number that is not in the transcript.
+        const allowed = Array.isArray(body.allowedFields) ? body.allowedFields.slice(0, 40) : [];
+        if (!allowed.length) return json({ error: "no allowedFields" }, 400);
+        const prompt = surgxNotePrompt(transcript, { noteType: body.noteType, allowedFields: allowed });
+        let text;
+        try { text = await callGemini(env, [{ text: prompt }], MAX_OUT, _scribeOpts); }
+        catch (e) { await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: 0, status: "failed" }); throw e; }
+        await recordUsage(gate, { inTok: estTokens(prompt.length), outTok: estTokens((text || "").length), status: "success" });
+        const clean = sanitizeSurgxNote(parseJsonLoose(text), allowed);
+        return json({ kind: "surgx-note", fields: clean.fields, dropped: clean.dropped, mode: "surgx-note" });
       }
       if (body.kind === "maik-ask-next") {
         // MaiK Ask: pathway-chosen target + patient language -> ONE natural history question. The client

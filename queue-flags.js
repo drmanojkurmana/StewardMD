@@ -1,6 +1,6 @@
 /* Smart OPD Queue + Oncology — feature flags (mirrors followcare-flags.js). Resolution: ?query -> localStorage -> default.
- * CURRENT POSTURE (owner-approved 2026-08-21): every flag here is def:true EXCEPT
- * smd_onco_protolib, which was re-closed the same day. This is a DEV/TESTING posture, not an App
+ * CURRENT POSTURE (owner-approved 2026-08-24): EVERY flag here is def:true, including
+ * smd_onco_protolib, which was re-opened on 2026-08-24. This is a DEV/TESTING posture, not an App
  * Store one - an earlier header claimed the OPD Queue/EMR and onco write/admin/experimental flags
  * shipped def:false, and leaving that text in place while the values said otherwise would have been
  * worse than either choice.
@@ -11,9 +11,15 @@
  *     stays server-hard-blocked, so a client default alone cannot write;
  *   - the queue module fails SAFE server-side: with a flag on but secrets unprovisioned it shows a
  *     clean "being set up" state and does nothing (isQueueConfigured() guard), no PHI, no message;
- *   - smd_onco_protolib is OFF. It is the one flag here that surfaces UNVERIFIED draft regimens to a
- *     clinician, so it stays off by default even while the rest are on for testing. Enable it per
- *     device with ?qoncoprotolib=1 when that is actually what you want to test.
+ *   - smd_onco_protolib is now ON (owner decision, 2026-08-24). It surfaces the EXPERIMENTAL draft
+ *     regimen library. The reason it is defensible: kb/protocols currently holds 124 protocols of
+ *     which ZERO are lifecycleState:active and 123 are experimental drafts, so with this flag OFF
+ *     the onco workbench had NO usable protocols at all (oncoUsable() in opd-emr.js accepts only
+ *     active-or-experimental). The choice was never "verified protocols vs draft ones", it was
+ *     "draft ones vs an empty library". Every one of them still renders an EXPERIMENTAL DRAFT
+ *     badge, none is lifecycleState:active, the recommender flags physician review on every
+ *     suggestion, and applying one still needs write mode plus a deliberate human action.
+ *     Opt out per device with ?qoncoprotolib=0 or localStorage smd_onco_protolib=0.
  *
  * BEFORE A PUBLIC RELEASE: `grep PUBLIC-RELEASE-GATE` this file and re-close or owner-gate every hit.
  * Set ?q=1 (or localStorage) to preview. Exposes window.SMD_QUEUE_FLAGS. No PHI, no network. */
@@ -23,10 +29,9 @@
   var LS = (function () { try { return G.localStorage; } catch (e) { return null; } })();
   var Q = (function () { try { return new URLSearchParams(G.location && G.location.search || ""); } catch (e) { return { get: function () { return null; } }; } })();
 
-  // POSTURE, 2026-08-21 (supersedes the App Store v2.1 note that used to sit here, which listed an
-  // OFF set this file no longer has):
-  //  ON by default: everything except smd_onco_protolib.
-  //  OFF by default: smd_onco_protolib ONLY - the one flag that surfaces UNVERIFIED draft regimens.
+  // POSTURE, 2026-08-24 (supersedes the 2026-08-21 note, which said smd_onco_protolib was off):
+  //  ON by default: EVERYTHING, including smd_onco_protolib (re-opened 2026-08-24 by owner
+  //  decision - with it off the workbench had no usable protocols at all, see the header).
   // This is a dev/testing posture. `grep PUBLIC-RELEASE-GATE` lists every line to re-close or
   // owner-gate before a public release; that is the checklist, not this comment.
   // Writes stay doubly gated regardless: server needs QUEUE_EMR_WRITE=1 / QUEUE_ONCO_WRITE=1,
@@ -55,7 +60,7 @@
     smd_onco_recommend: { type: "bool", def: true, query: "qoncorecommend", desc: "ONCQIS Phase B protocol recommendation engine (onco-recommend.js): suggests APPLICABLE ACTIVE Standard Protocols for a clinical phenotype and why. Decision-support only, never auto-selects/prescribes; always the full list w/ reviewRequired. Read-only (GET onco/recommend, QUEUE_VIEW). PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
     smd_onco_evidence_overlay: { type: "bool", def: true, query: "qoncoevidence", desc: "ONCQIS Phase C evidence overlay (onco-evidence.js): 3-layer evidence panel (core/guideline/institutional), UPDATE AVAILABLE guideline overlay, and per-field EVIDENCE DIVERGENCE view. Decision-support only; never silently reconciles evidence or auto-replaces a protocol - every action only records the physician's choice. Read-only. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
     smd_onco_kb_admin: { type: "bool", def: true, query: "qoncokbadmin", desc: "ONCQIS Phase J-a Knowledge Center INGESTION (admin/oncology): guideline upload + AI evidence extraction + batch Update Impact Report over ACTIVE Standard Protocols. Admin-only, gated by the ONCQIS_PROTOCOL_AUTHOR cap + server env SMD_ONCO_KB_ADMIN, so this client default alone opens nothing. AI output lands ONLY in Evidence-Source/extraction/Impact-Report objects; NEVER writes an ACTIVE protocol/plan/dose. No PHI ever sent to the AI. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21)." },
-    smd_onco_protolib: { type: "bool", def: false, query: "qoncoprotolib", desc: "EXPERIMENTAL grounded Standard Protocol library (v2 zero-VERIFY regimens promoted into kb/protocols/ as lifecycleState:draft + experimental:true). When ON, the workbench also loads these experimental protocols for OWNER/DEVICE TEST ONLY; they are NEVER lifecycleState:active, so real clinical activation still requires a separate human decision. Requires smd_onco_protocols + write mode to reach the apply flow. PUBLIC-RELEASE-GATE: def:FALSE - RE-CLOSED 2026-08-21. This is the one flag here that surfaces UNVERIFIED regimens to a clinician, so it stays off by default even while the rest are on for testing. Turn it on per device with ?qoncoprotolib=1 or localStorage smd_onco_protolib=1." },
+    smd_onco_protolib: { type: "bool", def: true, query: "qoncoprotolib", desc: "EXPERIMENTAL grounded Standard Protocol library (v2 regimens in kb/protocols/ as lifecycleState:draft + experimental:true). When ON the onco workbench loads these experimental protocols; they are NEVER lifecycleState:active, so clinical activation remains a separate human decision, and each renders an EXPERIMENTAL DRAFT badge. Requires smd_onco_protocols + write mode to reach the apply flow. PUBLIC-RELEASE-GATE: def:TRUE - RE-OPENED 2026-08-24 by owner decision. Context for that decision: kb/protocols holds 124 protocols of which ZERO are lifecycleState:active, so with this OFF the workbench had no usable protocols at all - the trade was draft regimens vs an empty library, not draft vs verified. It remains the flag here that surfaces UNVERIFIED regimens to a clinician, so it is the first one to re-close if that ever stops being true. Opt out per device with ?qoncoprotolib=0 or localStorage smd_onco_protolib=0." },
     smd_onco_navigator: { type: "bool", def: true, query: "qoncotree", desc: "ONCOTREE clinical navigator (oncotree.js): a deterministic disease pathway (phenotype -> applicable EXISTING Standard Protocols by reference). Decision support only; references protocol IDs/versions, never a second protocol DB, never selects/prescribes/doses (the existing dose engine + physician own that). Reads the same lifecycle badges as the library. Default ON (owner-approved go-live 2026-08-15; R1 GO on all verticals). Opt out with localStorage smd_onco_navigator=0." },
     smd_opd_billing: { type: "bool", def: true, query: "qbill", desc: "Clinic operations BILLING station (lean MVP): patient registry + first-class orders + tariff + invoice + mark-paid (cashier role). UI at /clinic-billing. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21); stays INERT until CLINIC_BILLING_ENABLED=1 server-side, so flipping this alone changes nothing a patient can reach." },
     smd_opd_branding: { type: "bool", def: true, query: "qbrand", desc: "Pro white-label clinic branding: upload a clinic logo (owner/admin + Pro) shown on the patient page, wall board + FollowCare with 'powered by StewardMD'. Server serves it same-origin. PUBLIC-RELEASE-GATE: def:TRUE for dev/testing (owner-approved 2026-08-21); still needs a Pro org owner to upload anything." }

@@ -1,0 +1,87 @@
+{
+  "id": "pod3-tachycardia",
+  "title": "Tachycardia on day three",
+  "subtitle": "Post-operative deterioration",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "postop-deterioration",
+  "procedureRef": "laparotomy",
+  "sources": [
+    { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+  ],
+  "stem": "A 62-year-old woman had an anterior resection three days ago for a sigmoid cancer. Overnight the nurse calls: her heart rate has been 110 to 120 since the early hours and she 'just does not look right'. She had been mobilising and drinking yesterday. Her drain output has fallen from 150 mL to 20 mL over the last shift.",
+  "vitals": { "Temp": "37.4 C", "HR": "116", "BP": "104/62", "RR": "24", "SpO2": "94% on 2 L", "Urine": "18 mL/h" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "It is 3am. What do you do first?",
+      "hint": "There is one answer here that cannot be done over the telephone.",
+      "options": [
+        { "id": "a", "text": "Go and see her, take a full set of observations yourself, and send a lactate", "correct": true, "feedback": "Correct. A deteriorating post-operative patient assessed over the phone is the classic route to a delayed re-laparotomy." },
+        { "id": "b", "text": "Prescribe a fluid bolus over the phone and review in the morning", "correct": false, "feedback": "The bolus may be right, but 'review in the morning' converts a treatable complication into an intensive-care admission." },
+        { "id": "c", "text": "Ask for an ECG and telephone the result", "correct": false, "feedback": "Useful data, wrong process. You still have not seen the patient." },
+        { "id": "d", "text": "Prescribe a beta-blocker for the tachycardia", "correct": false, "feedback": "Treating the number rather than the cause. The tachycardia is compensating for something." }
+      ],
+      "why": "Unexplained tachycardia after an anastomosis is a leak until imaging proves otherwise. The single most useful action at this point is physical presence: the respiratory rate, the abdomen, the drain and the wound cannot be assessed remotely.",
+      "missedRedFlags": ["A respiratory rate of 24 that nobody has commented on", "A drain output that fell rather than rose, which can mean a blocked drain rather than a resolving problem"]
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "Her abdomen is distended and diffusely tender, more than yesterday. The drain contains a small amount of cloudy brown fluid. What is the working diagnosis?",
+      "hint": "Day three, an anastomosis, and a change in the character of the drain fluid.",
+      "options": [
+        { "id": "a", "text": "Anastomotic leak", "correct": true, "feedback": "Correct. The timing, the increasing tenderness, the physiology and the drain character all point the same way." },
+        { "id": "b", "text": "Post-operative ileus", "correct": false, "feedback": "Ileus does not cause tachycardia, tachypnoea, oliguria and increasing tenderness. Attributing this to ileus is the commonest way a leak is missed." },
+        { "id": "c", "text": "Chest infection", "correct": false, "feedback": "Possible as a contributor, but it does not explain the abdominal signs or the drain fluid, and it must not become the comfortable explanation." },
+        { "id": "d", "text": "Pulmonary embolism", "correct": false, "feedback": "Worth considering with tachycardia, tachypnoea and hypoxia, and it should be excluded, but it does not explain the abdominal findings or the drain." }
+      ],
+      "why": "Anastomotic leaks classically declare between days three and five. Increasing rather than decreasing pain, a rising heart and respiratory rate, oliguria, and any change in drain character are the cluster. The absence of a fever does not exclude it.",
+      "missedRedFlags": ["The absence of fever used as reassurance", "New atrial fibrillation, which in this setting is a marker of a septic or ischaemic complication rather than a cardiology problem"],
+      "alternatives": ["Pulmonary embolism and myocardial injury are both reasonable parallel considerations and are excluded with an ECG, a gas and troponin at the same visit, not instead of the abdominal work-up."]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "What investigation do you arrange?",
+      "hint": "Choose the test that answers the question you actually have.",
+      "options": [
+        { "id": "a", "text": "CT abdomen and pelvis with intravenous and rectal contrast, urgently, after starting resuscitation", "correct": true, "feedback": "Correct. If the question is a leak, the answer is a CT, and rectal contrast substantially improves detection after a low colorectal anastomosis." },
+        { "id": "b", "text": "Plain abdominal radiograph", "correct": false, "feedback": "It will show dilated loops and answer nothing. Free air after a recent laparotomy is expected and cannot be interpreted." },
+        { "id": "c", "text": "Repeat bloods in six hours and decide then", "correct": false, "feedback": "Serial bloods in a patient who is already hypotensive and oliguric is delay, not monitoring." },
+        { "id": "d", "text": "Ultrasound abdomen", "correct": false, "feedback": "Poor in a distended post-operative abdomen full of gas, and it will not exclude a leak." }
+      ],
+      "why": "Contrast CT is the investigation that changes the plan. Resuscitation and antibiotics start before the scan, not after it, and the surgeon who did the operation is told at the same time as the radiologist.",
+      "missedRedFlags": ["Sending an unstable patient to the scanner without resuscitation, monitoring or an escort"],
+      "alternatives": ["If the patient is too unstable to travel, the answer is theatre, not a better scan."]
+    },
+    {
+      "id": "dp4", "phase": "decide",
+      "prompt": "CT shows free fluid, extraluminal gas around the anastomosis and contrast leak. She is now on 0.1 mcg/kg/min noradrenaline. What is the plan?",
+      "hint": "The physiology has already told you what kind of operation this is.",
+      "options": [
+        { "id": "a", "text": "Theatre for washout, take down the anastomosis and form an end colostomy, with critical care afterwards", "correct": true, "feedback": "Correct. In a vasopressor-dependent patient with faecal peritonitis, the safe operation is source control and a stoma, not a repair or a new anastomosis." },
+        { "id": "b", "text": "Percutaneous drainage and continue antibiotics", "correct": false, "feedback": "Reasonable for a contained collection in a stable patient. Not for generalised peritonitis in a patient on a vasopressor." },
+        { "id": "c", "text": "Theatre for washout and primary repair of the anastomosis", "correct": false, "feedback": "Repairing an anastomosis in a septic, vasopressor-dependent abdomen is how the second leak happens." },
+        { "id": "d", "text": "Continue antibiotics and reassess in 12 hours", "correct": false, "feedback": "There is a confirmed uncontrolled source. Antibiotics do not treat faecal peritonitis." }
+      ],
+      "why": "Source control is the treatment. The choice between repair, diversion and resection is decided by the patient's physiology and the degree of contamination, not by the surgeon's preference. A vasopressor-dependent patient with faecal contamination gets a stoma.",
+      "missedRedFlags": ["Attempting reconstruction in an unstable patient", "Delaying theatre to 'optimise' a patient whose only route to optimisation is source control"],
+      "alternatives": ["A defunctioning stoma with drainage is an option for a small, contained, early leak in a stable patient. That is a different patient from this one."],
+      "stepRef": "step.lapa.damage-control"
+    },
+    {
+      "id": "dp5", "phase": "postop",
+      "prompt": "Before she goes to theatre, what else must happen?",
+      "hint": "Two things, and neither of them is clinical.",
+      "options": [
+        { "id": "a", "text": "Inform the operating surgeon and the consultant, and have an honest conversation with the patient and family about a stoma and critical care", "correct": true, "feedback": "Correct. The operating surgeon holds information no chart contains, and consent for a stoma is a conversation that must not be squeezed into the anaesthetic room." },
+        { "id": "b", "text": "Nothing further; the emergency justifies proceeding immediately", "correct": false, "feedback": "The five minutes this takes does not delay a resuscitated patient, and skipping it damages everything afterwards." },
+        { "id": "c", "text": "Wait for the morning ward round so the whole team can decide", "correct": false, "feedback": "This is the opposite error. Inform people now; do not wait for them." },
+        { "id": "d", "text": "Obtain written consent only, with no verbal discussion", "correct": false, "feedback": "A signature is not consent, particularly when a permanent stoma is a possible outcome." }
+      ],
+      "why": "Two non-clinical steps materially change the outcome of this night: telling the operating surgeon, who knows what was technically difficult and what they were worried about, and having the stoma conversation properly. Both are frequently skipped under pressure and both are remembered for years afterwards.",
+      "missedRedFlags": ["Proceeding to a probable stoma without discussing it with the patient"],
+      "alternatives": ["If the patient lacks capacity, document the best-interests decision and the discussion with the family, and proceed."]
+    }
+  ]
+}

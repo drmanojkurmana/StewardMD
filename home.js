@@ -812,6 +812,18 @@
       // non-free entitlement), so open() is already a complete no-op when the gate fails.
       if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
     },
+    clinix: function () {
+      // CliniX — clinical learning for medical students. Like SknX, it is not code-gated via
+      // SMD_XACCESS: CLINIX.open() checks smd_clinix itself and is a complete no-op when off.
+      // Persist the flag so the tile stays visible once a user has opened it from Settings.
+      try { localStorage.setItem("smd_clinix", "1"); } catch (e) {}
+      if (window.CLINIX && CLINIX.open) CLINIX.open(); else toast("CliniX loading…");
+    },
+    surgx: function () {
+      // SURGX (SURGˣ) — Surgical Intelligence. Like SknX/CliniX it is not code-gated via
+      // SMD_XACCESS: SURGX.open() checks smd_surgx itself and is a complete no-op when off.
+      if (window.SURGX && SURGX.open) SURGX.open(); else toast("SURGX loading…");
+    },
     insulin: function () {
       // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
       // no Experimental Access gate at master level (the high-risk DKA/pediatric sub-workflows are gated
@@ -1441,6 +1453,13 @@
       eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
       eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
+    { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
+      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
+    // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
+    // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
+    // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
+    { act: "surgx", ic: "content_cut", tt: "SURGX", sub: "Surgical intelligence", feat: true, anim: "surgx",
+      eligible: function () { try { var q = (location.search.match(/[?&]surgx=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_surgx") !== "0"; } catch (e) { return true; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",
@@ -1484,7 +1503,15 @@
     derm: '<svg class="ai-anim ai-derm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle class="p" cx="10" cy="10" r="1.7"/><circle class="p p2" cx="15" cy="14" r="1.7"/><circle class="p p3" cx="9.5" cy="15" r="1.3"/></svg>',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
-    maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">'
+    maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
+    // The real CliniX logo (owner-supplied, clinix-logo.png - same pattern as maitri-logo.png
+    // above): brightness(0) invert(1) forces it white against this dark badge regardless of the
+    // source file's own color, since the PNG is alpha-masked, not a white-background image.
+    clinix: '<img class="ai-clinix-img" src="/clinix-logo.png" alt="" style="width:38px;height:auto;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">',
+    // SURGX: an inline scalpel mark rather than a Material ligature, so the tile never depends on a
+    // glyph being present in the font subset. Deliberately STATIC — the module's whole design brief
+    // is "not gamified", and an animating badge on a surgical tile reads wrong.
+    surgx: '<svg class="ai-anim" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 3.5 20.5 9.5 9 21H4v-5L14.5 3.5Z"/><path d="M12.5 5.5 18.5 11.5"/><path d="M4 16h5v5"/></svg>'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);

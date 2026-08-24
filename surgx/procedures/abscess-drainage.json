@@ -1,0 +1,99 @@
+{
+  "id": "abscess-drainage",
+  "title": "Abscess incision and drainage",
+  "subtitle": "Source control at its simplest",
+  "system": "soft tissue",
+  "aliases": ["I and D", "incision and drainage"],
+  "estMinutes": 20,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "idsa-ssti", "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" }
+  ],
+  "calcs": ["news2", "qsofa", "crcl"],
+  "chapters": {
+    "indications": [
+      "Any fluctuant, localised collection of pus.",
+      "A perianal abscess: drain it, do not wait for it to point.",
+      "A pilonidal abscess, drained off the midline.",
+      "Failure of an apparently simple cellulitis to respond, which frequently means an undrained collection."
+    ],
+    "contraindications": [
+      "Suspected necrotising soft-tissue infection: this needs urgent theatre and radical debridement, not a bedside incision.",
+      "A pulsatile 'abscess', which may be a false aneurysm. Image before incising anything pulsatile.",
+      "A collection overlying a joint, a major vessel, or the face in a critical zone, which needs the appropriate specialty.",
+      "Inadequate anaesthesia at the bedside is a reason to move to theatre, not a reason to proceed."
+    ],
+    "preparation": [
+      "Decide bedside versus theatre honestly: depth, site, size, patient factors and whether adequate anaesthesia is achievable.",
+      "Capillary glucose in every patient. An abscess is a common first presentation of diabetes.",
+      "Antibiotics are an adjunct, indicated for surrounding cellulitis, systemic features or immunocompromise. They are not the treatment.",
+      "Consent to include scarring, incomplete drainage, recurrence, the need for packing and repeat dressings, and for perianal abscess the possibility of a fistula."
+    ],
+    "positioning": [
+      "Position so the incision lies at the most dependent point of the cavity.",
+      "Lithotomy or prone jack-knife for perianal and pilonidal collections.",
+      "Good light and an assistant. Both are underrated."
+    ],
+    "equipment": [
+      "Scalpel, forceps, blunt probe or sinus forceps, culture swab or syringe.",
+      "Saline for irrigation, and a light dressing or packing material.",
+      "Local anaesthetic with a documented maximum safe dose for that patient.",
+      "Suction, because a large abscess will spray."
+    ],
+    "anatomy": [
+      "The skin overlying an abscess is thinned and inflamed; the true cavity is almost always larger and deeper than the surface suggests.",
+      "Perianal abscesses arise from the intersphincteric space and track into perianal, ischiorectal, intersphincteric or supralevator spaces. A horseshoe collection crosses the midline posteriorly.",
+      "In the hand and the neck, fascial planes direct spread and confine pus; incisions there need anatomical planning.",
+      "Fournier gangrene begins in the perineum and spreads along fascial planes, often with unremarkable overlying skin early on."
+    ],
+    "criticalSafety": [
+      "Reconsider the diagnosis in any patient with pain out of proportion, crepitus, dusky skin or systemic toxicity. That is necrotising infection, and this operation is the wrong one.",
+      "Break down every loculus. Partial drainage is the commonest reason a patient comes back.",
+      "Do not chase a fistula acutely in a perianal abscess; that is an elective decision after the inflammation settles."
+    ],
+    "structuresAtRisk": [
+      "Anal sphincter complex in a perianal abscess",
+      "Facial nerve branches in a parotid or facial collection",
+      "Neurovascular bundles in the limbs and the hand",
+      "Named vessels at the base of a deep neck collection"
+    ],
+    "commonErrors": [
+      "A stab incision too small to keep draining, so the cavity reforms.",
+      "Stopping at the first gush of pus without exploring the cavity.",
+      "No culture sent, then no way to guide therapy when the patient does not settle.",
+      "Tight packing that hurts and causes pressure necrosis.",
+      "Missing the diabetic patient, and missing the necrotising infection."
+    ],
+    "complications": [
+      "Recurrence from incomplete drainage.",
+      "Fistula-in-ano after a perianal abscess, in a substantial minority.",
+      "Bleeding, and scarring at a cosmetically important site.",
+      "Progression to necrotising infection in a diabetic or immunocompromised patient.",
+      "Bacteraemia and sepsis, particularly if drainage is delayed."
+    ],
+    "postop": [
+      "Arrange the first dressing change explicitly, and say who will do it.",
+      "Antibiotics only where indicated, with a stop date; review the culture when it returns.",
+      "Safety-net specifically: increasing pain, spreading redness, fever, or feeling systemically unwell means come straight back.",
+      "Arrange follow-up for a pilonidal abscess and a perianal abscess: both need a definitive plan after the acute episode.",
+      "Address the underlying cause: glycaemic control, hidradenitis, injecting drug use, immunosuppression."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout", "emphasis": "A bedside procedure still gets a check of identity, site, allergy and anticoagulation. The checklist scales down; it does not disappear." },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.st.local" },
+    { "ref": "step.st.incision" },
+    { "ref": "step.st.culture" },
+    { "ref": "step.st.deloculate" },
+    { "ref": "step.st.pack" },
+    { "ref": "step.core.specimen", "emphasis": "Send the wall of a chronic or atypical abscess for histology as well as culture: tuberculosis and malignancy both present this way." },
+    { "ref": "step.core.debrief" }
+  ],
+  "media": {
+    "steps": ["med.surgx.abscess-deloculation"]
+  }
+}

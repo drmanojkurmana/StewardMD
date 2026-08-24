@@ -1,0 +1,578 @@
+{
+  "_comment": "Jaundice is a SHORT CASE: differential diagnosis of icterus by mechanism (prehepatic/hepatic/posthepatic), a classic standalone short case distinct from the chronic-liver-disease long case. skill.gen.jaundice and the history/reasoning skills are new; exam of liver/spleen/gallbladder is entirely inherited from abdomen.json.",
+  "id": "jaundice",
+  "name": "Jaundice",
+  "fullName": "Jaundice (a short case)",
+  "system": "abdomen",
+  "kbRef": "jaundice",
+  "oneLine": "Yellow discolouration from bilirubin, and the three mechanisms that put it there",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Yellow discolouration from bilirubin, and where it becomes visible first",
+      "skills": [
+        "skill.gen.jaundice"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Urine, stool and itch: three questions that carry the differential",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.gi.jaundice"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Grading it correctly, then looking for the one extra finding",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.pallor",
+        "skill.gen.jaundice"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look deliberately for pallor (prehepatic), stigmata of chronic liver disease (hepatic), and scratch marks from pruritus (posthepatic), since these are what convert 'jaundice present' into a working mechanism."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the picture together",
+      "blurb": "The one extra finding that names the mechanism",
+      "skills": [
+        "skill.exam.gi.liver",
+        "skill.exam.gi.spleen",
+        "skill.exam.gi.gallbladder_kidney",
+        "skill.jaundice.reasoning"
+      ],
+      "emphasis": {
+        "skill.exam.gi.gallbladder_kidney": {
+          "expect": "Deliberately test for a palpable gallbladder and apply Courvoisier's law: in a jaundiced patient, a palpable, non-tender gallbladder argues against a stone and for a malignant, smoothly obstructing lesion."
+        }
+      }
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis of jaundice",
+      "blurb": "Prehepatic, hepatic, posthepatic: one table, three mechanisms",
+      "skills": [
+        "skill.jaundice.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Fractionate the bilirubin first",
+      "skills": [
+        "skill.ix.jaundice.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Grade, mechanism, and leading cause",
+      "skills": [
+        "skill.jaundice.differential"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.jaundice.general",
+        "title": "Assess this jaundiced patient and give your differential",
+        "task": "This patient has noticed yellowing of the eyes for one week. Examine for jaundice and its likely mechanism, and present your findings with a differential in six minutes.",
+        "seconds": 360,
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.gen.jaundice",
+          "skill.exam.gi.liver",
+          "skill.exam.gi.spleen",
+          "skill.jaundice.reasoning"
+        ],
+        "examinerQuestions": [
+          "Where did you look first for jaundice, and why?",
+          "What one additional finding would most help you decide between a haemolytic and an obstructive cause?",
+          "This patient has a palpable, non-tender gallbladder. What does that change about your differential?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.jaundice.fatima",
+      "title": "A woman with fever, right-sided pain and yellow eyes",
+      "opening": "Fatima Sheikh, 58, has been brought to the emergency department by her son. She looks unwell and is shivering under a blanket despite the warm weather. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Fatima Sheikh",
+        "age": 58,
+        "sex": "female",
+        "occupation": "Homemaker",
+        "residence": "Urban, lives with her son's family"
+      },
+      "history": {
+        "presenting": {
+          "cues": ["what brings you", "what is the problem", "why have you come", "complaint", "tell me about", "how can i help"],
+          "reply": "Doctor, I have had a high fever with terrible shivering since this morning, pain under my right ribs, and my son says my eyes have gone yellow since yesterday.",
+          "key": true
+        },
+        "pain_character": {
+          "cues": ["pain", "character of the pain", "colicky", "constant", "where is the pain", "radiate", "does it move"],
+          "reply": "It is a constant ache under my right ribs, sometimes it comes in waves. It moves through to my back a little.",
+          "key": true,
+          "skillId": "skill.hx.gi.pain"
+        },
+        "fever_pattern": {
+          "cues": ["fever", "rigors", "chills", "shivering", "temperature", "how high"],
+          "reply": "It came on suddenly this morning with terrible shivering, and I felt burning hot afterwards. This is the third time today it has happened like that.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "urine": {
+          "cues": ["urine colour", "dark urine", "colour of your urine", "tea coloured"],
+          "reply": "My urine has been dark, like strong tea, for the last two days.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "stool": {
+          "cues": ["stool colour", "pale stool", "clay coloured", "colour of your motion"],
+          "reply": "My stools have looked pale, almost like putty, since yesterday.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "pruritus": {
+          "cues": ["itching", "itchy", "scratching", "pruritus"],
+          "reply": "A little itchy over the last day, yes, but it is not the main problem right now.",
+          "key": true,
+          "skillId": "skill.hx.gi.jaundice"
+        },
+        "previous_episodes": {
+          "cues": ["gallstones", "stones", "similar pain before", "previous episode", "attacks before"],
+          "reply": "I was told years ago I have gallstones, on a scan for something else. I have had this same kind of pain twice before, but never with fever like this.",
+          "key": true
+        },
+        "nausea_vomiting": {
+          "cues": ["nausea", "vomiting", "vomit", "feeling sick"],
+          "reply": "I have vomited twice since this morning."
+        },
+        "alcohol": {
+          "cues": ["alcohol", "drink", "drinking"],
+          "reply": "I have never taken alcohol in my life."
+        },
+        "weight_loss": {
+          "cues": ["weight loss", "losing weight", "appetite"],
+          "reply": "No, my weight has been steady, and my appetite was normal until this fever started.",
+          "key": true
+        },
+        "previous_surgery": {
+          "cues": ["operation", "surgery", "gallbladder removed", "cholecystectomy"],
+          "reply": "No, I was told about the stones but never had an operation for them."
+        },
+        "drug_history": {
+          "cues": ["medicine", "medication", "new drug", "herbal", "supplement", "taking anything"],
+          "reply": "Only a paracetamol for the fever today. Nothing new before that."
+        },
+        "family": {
+          "cues": ["family", "hereditary", "jaundice in family", "gallstones in family"],
+          "reply": "My mother also had gallstones in her old age."
+        },
+        "travel": {
+          "cues": ["travel", "contaminated food", "contaminated water", "contact with jaundice"],
+          "reply": "No recent travel, and I have not been near anyone with jaundice."
+        },
+        "allergy": {
+          "cues": ["allergy", "allergic", "reaction to any"],
+          "reply": "No allergies that I know of."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Looks acutely unwell and toxic, shivering, diaphoretic. No cachexia, no stigmata of chronic liver disease, no scratch marks.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Temperature 39.4 C. Pulse 118 regular. Blood pressure 96/60. Respiratory rate 24. SpO2 96 percent on room air.",
+          "abnormal": true
+        },
+        "skill.gen.pallor": {
+          "finding": "No pallor.",
+          "abnormal": false
+        },
+        "skill.gen.jaundice": {
+          "finding": "Sclera deep yellow in daylight. Undersurface of tongue also icteric.",
+          "abnormal": true
+        },
+        "skill.exam.gi.liver": {
+          "finding": "Liver edge palpable 2 cm below the right costal margin, tender to palpation, smooth surface, span 12 cm, normal upper limit.",
+          "abnormal": true
+        },
+        "skill.exam.gi.spleen": {
+          "finding": "Spleen not palpable by any method. Castell's point resonant on full inspiration.",
+          "abnormal": false
+        },
+        "skill.exam.gi.gallbladder_kidney": {
+          "finding": "Gallbladder not palpable, and Murphy's sign could not be reliably assessed given generalised right upper quadrant tenderness and guarding. Kidneys not ballotable bilaterally.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": ["lft", "cbc", "blood_culture", "usg", "mrcp"],
+      "investigations": {
+        "lft": {
+          "label": "Liver function tests",
+          "indicated": true,
+          "result": "Bilirubin 6.8 mg/dL, mostly conjugated. Alkaline phosphatase markedly raised at 420 U/L. AST 110, ALT 96, disproportionately lower than the alkaline phosphatase.",
+          "note": "A cholestatic pattern, alkaline phosphatase raised out of proportion to the transaminases, fits obstruction rather than a primary hepatocellular process."
+        },
+        "cbc": {
+          "label": "Full blood count",
+          "indicated": true,
+          "result": "White cell count 18.4 x10^9/L with neutrophilia. Haemoglobin 11.6 g/dL, platelets 240 x10^9/L.",
+          "note": "A marked neutrophilic leucocytosis fits an active bacterial infection, consistent with cholangitis rather than a sterile stone alone."
+        },
+        "blood_culture": {
+          "label": "Blood cultures, two sets",
+          "indicated": true,
+          "result": "Sent before antibiotics. Growth of a gram-negative organism at 24 hours, sensitivities pending.",
+          "note": "Bacteraemia from an ascending biliary infection is expected in cholangitis and should be sent before, not after, antibiotics are started."
+        },
+        "usg": {
+          "label": "Ultrasound abdomen",
+          "indicated": true,
+          "result": "Gallbladder contains multiple stones, wall not thickened. Common bile duct dilated to 11 mm with a shadowing stone visualised near the distal duct. Liver parenchyma normal echotexture. No focal lesion.",
+          "note": "Confirms a dilated common bile duct with a stone, and a normal liver parenchyma that argues against an infiltrative or malignant hepatic process."
+        },
+        "mrcp": {
+          "label": "MRCP",
+          "indicated": true,
+          "result": "Confirms a single stone impacted in the distal common bile duct, dilated proximal ductal system, gallbladder with multiple stones.",
+          "note": "Maps the obstruction precisely before ERCP, and confirms this is amenable to endoscopic drainage rather than needing surgery first."
+        },
+        "ca19_9": {
+          "label": "Serum CA 19-9",
+          "indicated": false,
+          "result": "Raised at 210 U/mL.",
+          "note": "Not indicated as a diagnostic test in acute cholangitis: CA 19-9 rises non-specifically with any cholestasis and active biliary infection, so a raised value here does not mean malignancy, and the sensible course is to treat the sepsis and re-check once the obstruction is relieved, not chase this number now."
+        },
+        "viral_hep_serology": {
+          "label": "Viral hepatitis serology",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "The pattern, cholestatic enzymes with a dilated duct and a visualised stone, already points to a surgical, obstructive cause; there is no clinical question here that hepatitis serology would answer."
+        },
+        "afp": {
+          "label": "Alpha-fetoprotein",
+          "indicated": false,
+          "result": "Not sent.",
+          "note": "There is no cirrhotic or nodular liver on imaging and no risk factors for hepatoma; ordering this was not answering any real question in this presentation."
+        }
+      },
+      "differentialModel": {
+        "answer": "Acute ascending cholangitis due to a common bile duct stone, causing posthepatic obstructive jaundice. Consider acute cholecystitis, carcinoma of the head of the pancreas, and viral or drug-induced hepatitis.",
+        "accept": ["cholangitis", "cbd stone", "gallstone", "obstructive", "cholecystitis", "pancreas", "hepatitis"],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Acute ascending cholangitis, with Charcot's triad of fever with rigors, right upper quadrant pain and jaundice, secondary to an impacted common bile duct stone.",
+        "accept": ["cholangitis", "charcot", "cbd stone", "obstructive jaundice"],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Intravenous fluids and empirical broad-spectrum antibiotics after blood cultures, following an early sepsis-recognition approach. Correct any coagulopathy before intervention. Arrange urgent biliary decompression, typically endoscopic, once she is stabilised, since source control cannot wait for a routine outpatient plan. Interval cholecystectomy once the acute infection has settled.",
+        "accept": ["antibiotics", "fluids", "biliary decompression", "ercp", "drainage", "sepsis", "cholecystectomy"],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "Fever with rigors, right upper quadrant pain and jaundice together is Charcot's triad, and recognising the pattern by name is what stops this being managed as routine outpatient jaundice.",
+        "The gallbladder could not be reliably assessed for Murphy's sign because of diffuse tenderness, and it was not palpable as an enlarged, non-tender organ, which argues against a smoothly obstructing malignant lesion and fits a scarred, stone-bearing gallbladder instead: Courvoisier's law working in the negative direction.",
+        "Absent splenomegaly here is doing real work: a prehepatic, haemolytic mechanism would be expected to enlarge the spleen, and its absence supports the obstructive pattern already suggested by the pale stool and dark urine.",
+        "The liver is only mildly enlarged with a normal span and a smooth surface, which is exactly what an acute obstruction produces, in contrast to the shrunken, irregular liver of chronic cirrhotic disease.",
+        "The cholestatic enzyme pattern, alkaline phosphatase raised out of proportion to the transaminases, was predictable before the result even came back, once the urine, stool and pruritus history had already pointed to obstruction.",
+        "A raised CA 19-9 in the middle of an active biliary infection is a trap, not a cancer diagnosis: it rises with any cholestasis and needs to be reinterpreted only once the obstruction and sepsis have been treated.",
+        "This is a time-critical diagnosis. The urgency is in the decompression, not in waiting for every test to return before acting on the clinical picture already present at the bedside."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.gen.jaundice",
+      "skill.hx.gi.jaundice",
+      "skill.jaundice.reasoning",
+      "skill.jaundice.differential",
+      "skill.ix.jaundice.workup"
+    ]
+  },
+  "skills": {
+    "skill.jaundice.reasoning": {
+      "id": "skill.jaundice.reasoning",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Putting the jaundice picture together",
+      "oneLine": "Pallor, stigmata, or a palpable gallbladder: the one extra finding that names the mechanism",
+      "why": "Jaundice looks identical at first glance whatever its cause. The extra finding alongside it, pallor and splenomegaly, or the stigmata of chronic liver disease, or a painlessly palpable gallbladder, is what actually converts a sign into a working diagnosis at the bedside.",
+      "body": "Combine the jaundice with the rest of the general and abdominal examination, deliberately looking for the one additional finding that would confirm each mechanism.\n\nA fourth pattern is a genuine emergency: fever with rigors, jaundice, and right upper quadrant pain (Charcot's triad) points to ascending cholangitis, infection ascending an obstructed biliary tree. This is the single most dangerous presentation of obstructive jaundice, and needs urgent recognition and biliary decompression, not routine outpatient workup.",
+      "pitfalls": [
+        "Examining the sclera and stopping there, without a deliberate search for the one additional finding that discriminates the mechanism.",
+        "Missing splenomegaly, which needs deliberate systematic palpation and is easy to skip in a jaundice-focused short case.",
+        "Forgetting to test for Courvoisier's sign in a jaundiced patient with a possible mass.",
+        "Missing Charcot's triad (fever with rigors, jaundice, right upper quadrant pain) - this is ascending cholangitis, a biliary sepsis emergency, not a routine obstructive-jaundice workup."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "A jaundiced patient has pallor and splenomegaly, with no stigmata of chronic liver disease. Which mechanism does this suggest?",
+          "a": "A prehepatic (haemolytic) cause.",
+          "accept": [
+            "haemolytic",
+            "prehepatic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "State Courvoisier's law and explain its logic in one sentence.",
+          "a": "In a jaundiced patient, a palpable gallbladder makes a common bile duct stone an unlikely cause, because gallstone disease usually scars and shrinks the gallbladder so it cannot distend, whereas a smoothly progressive malignant obstruction allows it to enlarge freely.",
+          "accept": [
+            "courvoisier",
+            "stone",
+            "unlikely",
+            "scar"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "Why does bradycardia occur in some cases of obstructive jaundice, and how does this help distinguish it from an acute hepatitic picture?",
+          "a": "It is attributed to the effect of circulating bile salts reaching the systemic circulation in cholestasis; this contrasts with the tachycardia more typical of an acute inflammatory hepatic process such as viral or alcoholic hepatitis, so pulse rate can be a small additional discriminator.",
+          "accept": [
+            "bile salts",
+            "bradycardia",
+            "tachycardia",
+            "cholestasis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A jaundiced patient has fever with rigors and right upper quadrant pain. What is this triad called, and what does it mean?",
+          "a": "Charcot's triad, which points to ascending cholangitis, a biliary sepsis emergency requiring urgent recognition and decompression.",
+          "accept": [
+            "charcot",
+            "cholangitis",
+            "sepsis",
+            "emergency"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "media": [],
+      "keyPoints": [
+        "Prehepatic (haemolytic): pallor (from the associated anaemia), mild jaundice, splenomegaly is often present, no stigmata of chronic liver disease, and features of liver cell failure are absent.",
+        "Hepatic: moderate jaundice, variable splenomegaly, stigmata of chronic liver disease if the process is chronic, and features of liver cell failure appear EARLY relative to posthepatic causes.",
+        "Posthepatic (obstructive): often the most severe (deepest) jaundice, a palpable gallbladder in some cases, bradycardia can occur (from circulating bile salts), splenomegaly is typically absent, and features of liver cell failure are a LATE feature if they appear at all.",
+        "A palpably enlarged, non-tender gallbladder in a jaundiced patient (Courvoisier's sign) makes a common bile duct stone unlikely and raises a malignant, smoothly obstructing lesion, classically carcinoma of the head of the pancreas, as the leading cause.",
+        "Bradycardia in an obstructive jaundice is a genuine, examinable finding, thought to relate to circulating bile salts, distinct from the tachycardia more typical of an acute inflammatory hepatic process.",
+        "Fever with rigors, jaundice, and right upper quadrant pain (Charcot's triad) is ascending cholangitis, an emergency: infection ascending an obstructed biliary tree needs urgent recognition and biliary decompression, not a routine outpatient workup."
+      ],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, clinical evaluation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: jaundice"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.jaundice.differential": {
+      "id": "skill.jaundice.differential",
+      "kind": "reasoning",
+      "system": "abdomen",
+      "title": "Differential diagnosis of jaundice",
+      "oneLine": "Prehepatic, hepatic and posthepatic, mapped against history, examination and the two liver enzyme groups",
+      "why": "This three-way table is the single most useful piece of reasoning in the whole jaundice short case, because it links history, examination and laboratory findings into one coherent picture for each mechanism, rather than three separate facts to memorise.",
+      "body": "Organise the differential along the three classical mechanisms: prehepatic (haemolytic), hepatic, and posthepatic (obstructive/surgical).",
+      "pitfalls": [
+        "Ordering the three mechanisms without being able to reproduce the discriminating findings for each.",
+        "Assuming any raised bilirubin with dark urine must be obstructive without checking whether stools are also pale and whether pruritus is present.",
+        "Not naming urine urobilinogen as a discriminator; its ABSENCE (with bilirubin present) is a specific pointer to complete biliary obstruction."
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "Give the urine and stool findings expected in obstructive (posthepatic) jaundice.",
+          "a": "Dark urine (bilirubin present) and pale, clay-coloured stools.",
+          "accept": [
+            "dark urine",
+            "pale stool",
+            "clay"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why is urine urobilinogen absent in complete biliary obstruction?",
+          "a": "Urobilinogen is formed from bilirubin by gut bacteria after bile reaches the intestine; if bile flow is completely obstructed, no bilirubin reaches the gut, so no urobilinogen is formed or reabsorbed to appear in the urine.",
+          "accept": [
+            "gut bacteria",
+            "bile flow",
+            "no bilirubin reaches"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient has jaundice with normal urine, normal stool colour, no pruritus, and splenomegaly. Give the mechanism, two examples, and the expected liver enzyme pattern.",
+          "a": "Prehepatic (haemolytic) jaundice; examples include thalassaemia, hereditary spherocytosis, and malaria; liver enzymes (AST/ALT/ALP) are typically NOT raised, since the liver itself is not injured, though LDH is often raised from haemolysis.",
+          "accept": [
+            "haemolytic",
+            "prehepatic",
+            "not raised",
+            "ldh"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "threeway",
+          "text": "Correctly assigns findings to prehepatic, hepatic, or posthepatic mechanism"
+        },
+        {
+          "id": "enzymes",
+          "text": "Links the mechanism to the expected liver enzyme pattern"
+        }
+      ],
+      "keyPoints": [
+        "Prehepatic (haemolytic): urine normal, stools normal, pruritus absent, pallor present, splenomegaly present, mild jaundice, unconjugated bilirubin predominates, urine urobilinogen raised but urine bilirubin negative. Examples: thalassaemia, sickle cell disease, hereditary spherocytosis, malaria, immune haemolytic anaemia.",
+        "Hepatic: urine dark, stools normal, pruritus variable, pallor absent, splenomegaly variable, moderate jaundice, both unconjugated and conjugated bilirubin raised, both urine bilirubin and urobilinogen present. Examples: viral, alcoholic or drug-induced hepatitis, infiltrative disorders, ischaemic hepatitis.",
+        "Posthepatic (obstructive/surgical): urine dark, stools pale/clay-coloured, pruritus marked, pallor absent, splenomegaly absent, severe jaundice, conjugated bilirubin predominates, urine bilirubin present but urobilinogen absent (from complete or near-complete obstruction). Examples: common bile duct stones, helminths in the CBD, carcinoma of the head of the pancreas, primary biliary cirrhosis, primary sclerosing cholangitis.",
+        "The enzyme pattern reinforces this split: unconjugated (prehepatic) jaundice is not accompanied by a rise in liver enzymes at all, since the liver itself is not injured; hepatic jaundice raises AST and ALT disproportionately; posthepatic jaundice raises alkaline phosphatase disproportionately.",
+        "Bradycardia is a feature specifically associated with obstructive jaundice; it is not expected in the other two mechanisms."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, differential diagnosis"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice differential"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.jaundice.workup": {
+      "id": "skill.ix.jaundice.workup",
+      "kind": "investigation",
+      "system": "abdomen",
+      "title": "Working up jaundice",
+      "oneLine": "Fractionate the bilirubin first, then let the pattern choose the rest of the panel",
+      "why": "The single most useful early test in jaundice is not a scan, it is fractionating the bilirubin into conjugated and unconjugated, because that one result narrows a three-way differential down to essentially one before anything else is ordered.",
+      "body": "Fractionate the bilirubin, read the enzyme pattern alongside it, then direct further testing by the mechanism that combination points towards.",
+      "pitfalls": [
+        "Ordering an ultrasound as the very first test before the fractionated bilirubin and enzyme pattern have actually narrowed the mechanism.",
+        "Sending a full autoimmune and viral panel on every jaundiced patient regardless of the fractionation result.",
+        "Missing a treatable drug-induced cause because the medication history was not specifically reviewed against the timeline."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single most useful early laboratory test in undifferentiated jaundice?",
+          "a": "Fractionated (conjugated and unconjugated) serum bilirubin.",
+          "accept": [
+            "fractionat",
+            "conjugated",
+            "unconjugated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Unconjugated bilirubin predominates, with normal liver enzymes. What is the next set of tests to send?",
+          "a": "A haemolysis workup: full blood count, reticulocyte count, peripheral smear, LDH, haptoglobin, and a direct Coombs test.",
+          "accept": [
+            "reticulocyte",
+            "haemolysis",
+            "coombs",
+            "ldh"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Conjugated bilirubin predominates with a disproportionate rise in alkaline phosphatase. What is the recommended first imaging test, and what is it looking for?",
+          "a": "Ultrasound abdomen, looking for biliary duct dilation and the level of any obstruction.",
+          "accept": [
+            "ultrasound",
+            "duct dilation",
+            "obstruction"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "keyPoints": [
+        "Fractionated (conjugated and unconjugated) serum bilirubin: unconjugated predominance without a liver enzyme rise points prehepatic; a mixed or conjugated-predominant rise with raised transaminases or alkaline phosphatase points hepatic or posthepatic respectively.",
+        "If unconjugated and prehepatic is suspected: full blood count, reticulocyte count, peripheral smear, LDH, haptoglobin, and a direct Coombs test to look for haemolysis.",
+        "If hepatic is suspected: viral hepatitis serology, alcohol history correlated with AST-to-ALT ratio, autoimmune markers, and, where relevant, imaging for infiltrative disease.",
+        "If posthepatic is suspected: ultrasound abdomen first, to look for biliary duct dilation and a level of obstruction, followed by MRCP or endoscopic ultrasound where a stone, stricture or mass is suspected, and CA 19-9 where a pancreatic or biliary malignancy is being actively considered.",
+        "Urine bilirubin and urobilinogen, though a simple dipstick test, remain a genuinely useful bedside discriminator alongside the serum picture, in keeping with the classical differentiating table."
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, laboratory evaluation"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice workup"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

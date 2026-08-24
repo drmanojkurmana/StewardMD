@@ -751,4 +751,8 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   #homeV2.rnav .ai-oncotree .n { transform-origin: center; animation: aiOncoPulse 2.8s infinite; }
   #homeV2.rnav .ai-oncotree .n1 { animation-delay: .55s; } #homeV2.rnav .ai-oncotree .n2 { animation-delay: 1.1s; }
   @keyframes aiOncoPulse { 0%,100% { opacity: .3; transform: scale(.65); } 50% { opacity: 1; transform: scale(1.18); } }
+  /* CliniX mark: a slow breathing pulse on the home tile only - the module's own hero banner
+     uses the same clinix-logo.png with no animation class, so it sits still while read. */
+  #homeV2.rnav .ai-clinix-img { animation: cxBreathe 3.2s ease-in-out infinite; }
+  @keyframes cxBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 }

@@ -1,0 +1,66 @@
+{
+  "id": "surgical-sepsis",
+  "title": "Sepsis with a surgical source",
+  "subtitle": "Source control is the treatment",
+  "category": "resuscitation",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "ssc", "org": "Surviving Sepsis Campaign", "title": "International guidelines for management of sepsis and septic shock", "year": 2021, "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines", "accessed": "2026-08-24" },
+    { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
+    { "id": "icmr", "org": "Indian Council of Medical Research (ICMR)", "title": "Antimicrobial Resistance Surveillance Network annual report", "year": 2024, "url": "https://www.icmr.gov.in/", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Hypotension persisting after fluid, or a lactate above 4 mmol/L. This is septic shock, not sepsis." },
+      { "text": "New confusion or agitation in an elderly surgical patient. Often the only sign before collapse." },
+      { "text": "A source that cannot drain itself: an obstructed duct, an undrained collection, dead bowel, an infected implant." },
+      { "text": "Deterioration despite 24 to 48 hours of appropriate antibiotics. The source has not been controlled." },
+      { "text": "Mottled skin, prolonged capillary refill or a falling urine output with a normal blood pressure." }
+    ],
+    "do_now": [
+      { "text": "Cultures where they will not delay treatment, then broad-spectrum antimicrobials within the first hour for septic shock.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "Fluid resuscitation with balanced crystalloid, reassessing after each bolus rather than running a fixed volume.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "Measure lactate and repeat it. A lactate that does not fall is a source that is not controlled.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "Identify the anatomical source in the first hours and commit to how it will be controlled.", "timeCritical": true, "evidenceRef": "wses-iai" }
+    ],
+    "assess": [
+      { "text": "Screen and score. Use the score to escalate care, never to withhold it from a patient who looks unwell.", "calcs": ["qsofa", "sofa", "news2", "sirs"] },
+      { "text": "Systematic hunt for the source: abdomen, wound and drains, chest, urinary tract, lines and implants, soft tissue, perineum." },
+      { "text": "Examine the perineum and the back of every diabetic patient. Fournier gangrene and a sacral abscess are missed by not looking." },
+      { "text": "Review every device: central line, urinary catheter, drain, mesh, prosthesis. An infected device is a source." },
+      { "text": "Recent antimicrobials, hospital exposure and prior resistant isolates change empiric choice more than the syndrome does." }
+    ],
+    "investigate": [
+      { "text": "Two sets of blood cultures, plus culture of the suspected site, before or alongside the first dose." },
+      { "text": "Lactate, gas, FBC, U&E, LFT, CRP, coagulation, procalcitonin where it is used locally for de-escalation." },
+      { "text": "Contrast CT of the likely compartment is the highest-yield single investigation for an undrained surgical source." },
+      { "text": "Ultrasound at the bedside for the patient too unstable to travel: free fluid, hydronephrosis, a collection, cardiac filling." },
+      { "text": "Renal function drives dosing as much as the organism does.", "calcs": ["crcl", "kdigo_aki"] }
+    ],
+    "resuscitate": [
+      { "text": "Vasopressors for a mean arterial pressure target once fluid responsiveness is exhausted; start them through a peripheral line rather than delay for central access.", "evidenceRef": "ssc" },
+      { "text": "Choose the empiric regimen against the local antibiogram and ICMR data, not a memorised default; then de-escalate on culture.", "evidenceRef": "icmr" },
+      { "text": "Dose the first dose fully. Renal adjustment applies to subsequent doses, not the loading one.", "evidenceRef": "ssc" },
+      { "text": "Stress-dose steroid only for shock refractory to fluid and vasopressor.", "evidenceRef": "ssc" }
+    ],
+    "definitive": [
+      { "text": "Source control as early as the patient's physiology allows, and generally within 6 to 12 hours of recognition.", "timeCritical": true, "evidenceRef": "ssc" },
+      { "text": "Choose the least invasive effective option: percutaneous drainage of a discrete collection beats a laparotomy in a physiologically fragile patient.", "evidenceRef": "wses-iai" },
+      { "text": "Remove or exchange an infected device. Antibiotics do not sterilise a colonised prosthesis.", "evidenceRef": "wses-iai" },
+      { "text": "Re-look and re-image if the patient fails to improve. Undrained sepsis is the commonest reason for a failed regimen.", "evidenceRef": "wses-iai" }
+    ],
+    "escalate": [
+      { "text": "Critical care review at the point of persisting hypotension or a rising lactate, not after the vasopressor is running." },
+      { "text": "Interventional radiology for a drainable collection; theatre for anything that will not drain through a tube." },
+      { "text": "Antimicrobial stewardship review at 48 to 72 hours, with a documented stop or step-down date." }
+    ]
+  },
+  "notes": [
+    "The surgical version of the sepsis bundle has one extra element and it is the one that matters: find and control the source.",
+    "Antibiotics buy hours. They do not treat pus, dead tissue, an obstructed duct, or an infected implant.",
+    "A patient who is not improving on the right antibiotic almost never needs a broader antibiotic."
+  ],
+  "calcs": ["qsofa", "sofa", "news2", "sirs", "crcl", "kdigo_aki", "apache2"]
+}

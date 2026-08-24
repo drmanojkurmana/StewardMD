@@ -3793,6 +3793,26 @@
         .then(function (r) { return r.json(); }).then(function (j) { return (j && (j.topic || j.primaryConcept || j.ambiguous)) ? j : null; }).catch(function () { return null; });
     },
     route: function (q) { return window.SMD_AI.refine(q); },   // V3 alias — the universal semantic router (same endpoint, richer JSON)
+    // CliniX viva examiner — judges an already-given ANSWER against a pre-authored question and key
+    // points. Same shape as refine(): a tiny, cheap, non-streaming call, never a conversation. Returns
+    // {verdict, feedback} or null on any error/off-state so the caller can fall back cleanly.
+    vivaJudge: function (question, keyPoints, answer) {
+      var b = aiBase(); if (!b || !aiOn() || !question || !answer) return Promise.resolve(null);
+      var call = aiHeaders().then(function (h) {
+        return fetch(b + "/viva-judge", { method: "POST", headers: h, body: JSON.stringify({ question: String(question).slice(0, 400), keyPoints: String(keyPoints || "").slice(0, 600), answer: String(answer).slice(0, 800) }) });
+      }).then(function (r) { return r.json(); })
+        // A quota/rate response carries a real, already-written user-facing message (e.g. "MaiK
+        // usage limit reached for now...") - collapsing every non-verdict response to a bare null
+        // threw that away, so the student only ever saw a generic "could not review" toast with no
+        // way to tell a real cap from a transient network blip. Pass the whole body through when
+        // there's no verdict; judgeVivaAnswer() picks a message off it.
+        .then(function (j) { return (j && j.verdict) ? j : (j || { error: "server" }); })
+        .catch(function () { return { error: "server" }; });
+      // A tiny call should return fast; if the native CapacitorHttp path stalls (does not honour
+      // AbortController - see raceTimeout's own comment above), fall back to null rather than leave
+      // the student staring at "MaiK is examining your answer" forever.
+      return raceTimeout(call, 15000, null);
+    },
     // Grounded RAG explain: send the compact, de-identified, citable package
     // (deterministic reasoning + retrieved StewardMD knowledge + treatment) — the
     // KB is the primary source. Falls back to summary explain if RAG is unavailable.
@@ -3800,7 +3820,7 @@
       var b = aiBase(); if (!b || !aiOn()) return Promise.resolve({ error: "ai-off" });
       if (!pkg) return Promise.resolve({ error: "no-package" });
       try { if (window.SMD_MaiK && SMD_MaiK.sourceList && !pkg.sources) pkg.sources = SMD_MaiK.sourceList(pkg); } catch (e) {}
-      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined });
+      var body = JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined });
       // A 429 with reason "rate" is a transient 3s throttle, NOT a usage cap — retry ONCE
       // silently after the window so a fast follow-up never surfaces "usage limit reached".
       function attempt(retried) {
@@ -3946,7 +3966,7 @@
       });
       var attempt = aiHeaders().then(function (h) {
         var hh = Object.assign({}, h, { "Accept": "text/event-stream" });
-        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined }), signal: ctrl.signal });
+        return sfetch(b + "/explain?stream=1", { method: "POST", headers: hh, body: JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }), signal: ctrl.signal });
       }).then(function (r) {
         var ct = (r.headers && r.headers.get("Content-Type")) || "";
         if (!r.ok || !r.body || ct.indexOf("text/event-stream") < 0) { done(); if (isNative) nsBad(true); return fallback(); }

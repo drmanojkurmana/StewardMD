@@ -60,10 +60,18 @@ for (const file of graphs) {
 
   test(`${file}: question nodes have options with unique ids + labels`, () => {
     nodes.filter(n => n.nodeType === "question").forEach(n => {
-      assert.ok((n.options || []).length >= 2, n.id + " question needs >=2 options");
-      const oids = n.options.map(o => o.id);
+      const opts = n.options || [];
+      assert.ok(opts.length >= 1, n.id + " question has no options at all");
+      // Graph v3 introduced single-option "workup then continue" steps (n_dcis_wk, n_inv_wk ...):
+      // an acknowledge-and-proceed node, not a branch. Requiring >= 2 options was a v1.1 assumption
+      // that every question forks. A node that forks must still offer a real choice.
+      const isContinueStep = opts.length === 1 && /^(continue|next|proceed|ack)$/i.test(opts[0].id || "");
+      if (!isContinueStep) {
+        assert.ok(opts.length >= 2, n.id + " branching question needs >=2 options (or a single 'continue' step)");
+      }
+      const oids = opts.map(o => o.id);
       assert.equal(oids.length, new Set(oids).size, n.id + " duplicate option id");
-      n.options.forEach(o => { assert.ok(o.id && o.label, n.id + " option missing id/label"); });
+      opts.forEach(o => { assert.ok(o.id && o.label, n.id + " option missing id/label"); });
     });
   });
 
@@ -74,9 +82,21 @@ for (const file of graphs) {
     }));
   });
 
-  test(`${file}: treatment/end nodes that show recommendations carry protocolRefs`, () => {
+  test(`${file}: outcome nodes actually recommend something (protocol or written guidance)`, () => {
+    // v1.1 assumed every endpoint dispenses a systemic-therapy protocol, so it demanded protocolRefs.
+    // v3 added SURGICAL, LOCAL-THERAPY and SURVEILLANCE endpoints, which legitimately have no
+    // chemotherapy protocol to name - breast n_tx_dcis_erneg literally records "endocrine therapy is
+    // not indicated", so a protocolRef there would be WRONG, not missing.
+    //
+    // The safety property worth keeping is not "has a protocolRef", it is "is not an empty
+    // recommendation": an outcome node must hand the clinician either a named protocol or written
+    // guidance. That is what this now asserts.
     nodes.filter(n => n.showsRecommendation || n.nodeType === "end").forEach(n => {
-      assert.ok((n.protocolRefs || []).length >= 1, n.id + " outcome node has no protocolRefs");
+      const refs = (n.protocolRefs || []).length;
+      const bullets = (n.bullets || []).filter(b => String(b || "").trim()).length;
+      assert.ok(refs >= 1 || bullets >= 1,
+        n.id + " outcome node recommends nothing: no protocolRefs and no bullets");
     });
   });
+
 }
