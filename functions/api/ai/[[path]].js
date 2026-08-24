@@ -952,6 +952,20 @@ async function pubmedGuidelines(env, topic, ptypeFilter) {
   return results;
 }
 
+/* Per-isolate router cache. The semantic router costs ~6s and its parse is a pure, stable function of
+ * the query, so the same question must never pay for it twice. Bounded and oldest-out; it holds only
+ * the parser's canonical-concept output, never the raw clinician query. Cloudflare reuses isolates
+ * heavily, so this alone absorbs the common questions even when no KV namespace is bound. */
+const _routeMem = new Map();
+const ROUTE_MEM_MAX = 500;
+function routeMemPut(k, v) {
+  try {
+    if (_routeMem.has(k)) _routeMem.delete(k);
+    _routeMem.set(k, v);
+    while (_routeMem.size > ROUTE_MEM_MAX) _routeMem.delete(_routeMem.keys().next().value);
+  } catch (e) {}
+}
+
 export async function onRequest(context) {
   const { request, env, params } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
@@ -1507,6 +1521,26 @@ export async function onRequest(context) {
       const q = String(body.q || body.question || "").slice(0, 400).trim();
       if (!q) return json({ error: "no-query" }, 400);
       if (firewallBlock(q)) return json({ outOfScope: true, primaryConcept: "", intent: "other", confidence: 1, source: "firewall" }); // deterministic: no router LLM
+      /* ROUTER CACHE (2026-08-24). Measured: this endpoint costs ~6.0-7.5s and runs BEFORE the answer
+       * on every new question — 6.0s router + 3.7s answer TTFV is the ~9.7s a clinician actually waits.
+       * The parse is a pure function of the query and is STABLE (a canonical concept does not change),
+       * so it is the single most cacheable thing in the pipeline.
+       *
+       * PHI: the raw query is never stored. The KV key is a SHA-256 of the normalised query, and the
+       * cached VALUE contains only canonical medical concepts the parser emitted — no patient text.
+       * The in-isolate Map is bounded and dies with the isolate. */
+      const _rkey = q.toLowerCase().replace(/\s+/g, " ").trim();
+      const _memHit = _routeMem.get(_rkey);
+      if (_memHit) return json(Object.assign({}, _memHit, { cached: "mem" }));
+      const _rkv = usageKv(env);
+      let _rkvKey = null;
+      if (_rkv) {
+        try {
+          _rkvKey = "maik:route:" + (await sha256hex(_rkey));
+          const _hit = await _rkv.get(_rkvKey, "json");
+          if (_hit && _hit.primaryConcept !== undefined) { routeMemPut(_rkey, _hit); return json(Object.assign({}, _hit, { cached: "kv" })); }
+        } catch (e) { _rkvKey = null; }
+      }
       const gate = await checkQuota(env, request, "router");   // lightweight: no rate-limit slot, no request-count; token cost still metered
       if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
       const sys =
@@ -1535,7 +1569,7 @@ export async function onRequest(context) {
       const p = parseJsonLoose(text) || {};
       const concept = String(p.primaryConcept || p.topic || "").slice(0, 140);
       const opts = Array.isArray(p.options) ? p.options.map(function (x) { return String(x).slice(0, 80); }).filter(Boolean).slice(0, 4) : [];
-      return json({
+      const _routeOut = {
         primaryConcept: concept, topic: concept,   // topic = back-compat alias
         type: String(p.type || "").slice(0, 24),
         intent: normIntent(p.intent),
@@ -1547,7 +1581,14 @@ export async function onRequest(context) {
         options: opts,
         outOfScope: !!p.outOfScope,   // non-medical query → client refuses instantly (no KB/answer/research)
         mode: "route"
-      });
+      };
+      // Cache only a parse that actually resolved something — never cache a null/failed parse, or a
+      // transient failure would be pinned for every later clinician asking the same thing.
+      if (_routeOut.primaryConcept || _routeOut.ambiguous || _routeOut.outOfScope) {
+        routeMemPut(_rkey, _routeOut);
+        if (_rkv && _rkvKey) { try { context.waitUntil(_rkv.put(_rkvKey, JSON.stringify(_routeOut), { expirationTtl: 2592000 })); } catch (e) {} }
+      }
+      return json(_routeOut);
     }
     if (seg === "viva-judge") {
       // CliniX viva examiner. The QUESTION is always pre-authored content (clinix/*.json) — this

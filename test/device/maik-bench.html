@@ -1,0 +1,196 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>MaiK device bench</title>
+<style>
+  body { font: 13px/1.35 -apple-system, system-ui, sans-serif; margin: 0; padding: 8px; background: #fff; color: #111; }
+  h1 { font-size: 15px; margin: 4px 0 8px; }
+  #sum { font-weight: 700; white-space: pre; font-size: 12px; background: #eef6f0; padding: 6px; border-radius: 6px; }
+  #log { white-space: pre; font-size: 10px; margin-top: 8px; }
+  .bad { color: #b00; } .ok { color: #060; }
+</style>
+</head>
+<body>
+<h1>MaiK device bench</h1>
+<div id="sum">starting…</div>
+<div id="log"></div>
+<script>
+/* Device benchmark for MaiK streaming — runs INSIDE the real WKWebView on a physical iPhone.
+ *
+ * WHY THIS EXISTS: every latency number before this was taken from a laptop with curl/node, which is
+ * exactly how a 26.6s on-device regression shipped: curl streamed fine while the phone did not. This
+ * harness exercises the SAME transport the app uses (the PRISTINE XHR, since CapacitorHttp patches the
+ * global one to buffer through the native bridge) against production, and reports per-stage timings.
+ *
+ * It is NOT part of the shipped app: it lives under test/device/ and is copied over index.html only in
+ * a throwaway build used for measurement.
+ *
+ * The control arm deliberately uses the PATCHED window.fetch to demonstrate whether it buffers.
+ */
+var APP_HDR = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
+var BASE = "https://stewardmd.in/api/ai/explain";
+
+/* 32 queries across the categories the owner named. `tier:1` matches what the app sends by default. */
+var QUERIES = [
+  ["simple", "what is the half life of amiodarone"],
+  ["simple", "normal serum potassium range"],
+  ["simple", "what is the mechanism of action of metformin"],
+  ["simple", "define nephrotic syndrome"],
+  ["simple", "what is a normal anion gap"],
+  ["rx-malaria", "treatment of uncomplicated falciparum malaria in an adult"],
+  ["rx-malaria", "artesunate dosing in severe malaria"],
+  ["rx-malaria", "primaquine dose for vivax radical cure"],
+  ["rx-malaria", "chloroquine resistant malaria management"],
+  ["drug", "dose of enoxaparin in renal impairment"],
+  ["drug", "vancomycin loading dose and target trough"],
+  ["drug", "amoxicillin clavulanate dose in adults"],
+  ["drug", "metoprolol contraindications"],
+  ["drug", "warfarin interaction with fluconazole"],
+  ["kb-rag", "empirical antibiotics for community acquired pneumonia"],
+  ["kb-rag", "management of diabetic ketoacidosis in adults"],
+  ["kb-rag", "management of acute pulmonary oedema"],
+  ["kb-rag", "sepsis bundle first hour"],
+  ["kb-rag", "acute ischaemic stroke thrombolysis eligibility"],
+  ["kb-rag", "management of upper GI bleed"],
+  ["calculator", "curb 65 score components"],
+  ["calculator", "how do i calculate creatinine clearance"],
+  ["calculator", "wells score for pulmonary embolism"],
+  ["calculator", "child pugh score components"],
+  ["patient-ctx", "55 year old diabetic with fever and cough what should i consider"],
+  ["patient-ctx", "70 year old on warfarin presenting with melena"],
+  ["patient-ctx", "pregnant woman with fever and thrombocytopenia"],
+  ["patient-ctx", "elderly patient with confusion and hyponatremia"],
+  ["long", "detailed approach to the diagnosis and management of pyrexia of unknown origin in an adult including investigations"],
+  ["long", "comprehensive management of severe acute pancreatitis including fluids nutrition and complications"],
+  ["long", "complete workup and management of newly diagnosed heart failure with reduced ejection fraction"],
+  ["long", "approach to a patient with acute kidney injury including causes investigations and management"]
+];
+
+var PristineXHR = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
+var patched = (window.XMLHttpRequest !== PristineXHR);
+var results = [];
+var logEl = document.getElementById("log"), sumEl = document.getElementById("sum");
+
+function say(s, cls) {
+  var d = document.createElement("div"); if (cls) d.className = cls;
+  d.textContent = s; logEl.appendChild(d);
+  try { console.log("[BENCH] " + s); } catch (e) {}
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+function body(q) {
+  return JSON.stringify({
+    package: { question: q, audience: "doctor", grounding: [{ knowledge: [{ text: "clinical" }], provenance: ["H"] }] },
+    depth: "concise", tier: 1
+  });
+}
+
+/* One query over the PRISTINE XHR — the transport the app now uses. Records when the first
+ * onprogress fires, when the first DELTA is parsed, delta count, and total. */
+function runXHR(cat, q) {
+  return new Promise(function (resolve) {
+    var xhr = new PristineXHR(), t0 = Date.now();
+    var idx = 0, buf = "", acc = "", deltas = 0, tProg = null, tFirst = null, gaps = [], prev = null, done = false;
+    function feed(chunk) {
+      buf += chunk;
+      var parts = buf.split(/\r?\n\r?\n/); buf = parts.pop();
+      for (var i = 0; i < parts.length; i++) {
+        var lines = parts[i].split(/\r?\n/), data = "";
+        for (var j = 0; j < lines.length; j++) if (lines[j].indexOf("data:") === 0) data += lines[j].slice(5).trim();
+        if (!data) continue;
+        var ev; try { ev = JSON.parse(data); } catch (e) { continue; }
+        if (ev && ev.delta) {
+          deltas++; acc += ev.delta;
+          var now = Date.now();
+          if (tFirst === null) tFirst = now - t0; else gaps.push(now - prev);
+          prev = now;
+        }
+        if (ev && ev.done) done = true;
+      }
+    }
+    function drain() {
+      if (tProg === null) tProg = Date.now() - t0;
+      var t = xhr.responseText || "";
+      if (t.length > idx) { feed(t.slice(idx)); idx = t.length; }
+    }
+    xhr.open("POST", BASE + "?stream=1", true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.setRequestHeader("Accept", "text/event-stream");
+    xhr.setRequestHeader("X-SMD-App", APP_HDR);
+    xhr.onprogress = function () { drain(); };
+    xhr.onload = function () {
+      drain();
+      var total = Date.now() - t0;
+      var medGap = gaps.length ? gaps.slice().sort(function (a, b) { return a - b; })[Math.floor(gaps.length / 2)] : null;
+      resolve({ cat: cat, q: q, firstProgress: tProg, ttfv: tFirst, total: total, deltas: deltas,
+                chars: acc.length, done: done, medGap: medGap, status: xhr.status });
+    };
+    xhr.onerror = function () { resolve({ cat: cat, q: q, err: "xhr-error", total: Date.now() - t0 }); };
+    xhr.send(body(q));
+  });
+}
+
+/* Control: the PATCHED global fetch (CapacitorHttp bridge). Shows whether it can stream at all. */
+function runPatchedFetch(q) {
+  var t0 = Date.now();
+  return fetch(BASE + "?stream=1", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "Accept": "text/event-stream", "X-SMD-App": APP_HDR },
+    body: body(q)
+  }).then(function (r) {
+    var streamable = !!(r.body && typeof r.body.getReader === "function");
+    if (!streamable) return r.text().then(function (t) { return { streamable: false, ttfv: Date.now() - t0, total: Date.now() - t0, chars: t.length }; });
+    var reader = r.body.getReader(), dec = new TextDecoder(), tFirst = null, n = 0;
+    return (function pump() {
+      return reader.read().then(function (res) {
+        if (res.done) return { streamable: true, ttfv: tFirst, total: Date.now() - t0, chunks: n };
+        if (tFirst === null) tFirst = Date.now() - t0;
+        n++; return pump();
+      });
+    })();
+  }).catch(function (e) { return { err: String(e && e.message || e), total: Date.now() - t0 }; });
+}
+
+function pct(arr, p) {
+  if (!arr.length) return null;
+  var s = arr.slice().sort(function (a, b) { return a - b; });
+  return s[Math.min(s.length - 1, Math.floor(s.length * p))];
+}
+
+function summarise() {
+  var ok = results.filter(function (r) { return !r.err && r.deltas > 0; });
+  var ttfv = ok.map(function (r) { return r.ttfv; }).filter(function (v) { return v != null; });
+  var tot = ok.map(function (r) { return r.total; });
+  var streamed = ok.filter(function (r) { return r.deltas > 1; }).length;
+  var lines = [];
+  lines.push("n=" + results.length + "  streamed(>1 delta)=" + streamed + "/" + ok.length);
+  lines.push("TTFV  p50=" + pct(ttfv, 0.5) + "ms  p95=" + pct(ttfv, 0.95) + "ms");
+  lines.push("TOTAL p50=" + pct(tot, 0.5) + "ms  p95=" + pct(tot, 0.95) + "ms");
+  var cats = {};
+  results.forEach(function (r) { if (!r.err && r.ttfv != null) { (cats[r.cat] = cats[r.cat] || []).push(r.ttfv); } });
+  Object.keys(cats).forEach(function (c) { lines.push("  " + c + " TTFV p50=" + pct(cats[c], 0.5) + "ms  n=" + cats[c].length); });
+  sumEl.textContent = lines.join("\n");
+  try { console.log("[BENCH-SUMMARY] " + lines.join(" | ")); } catch (e) {}
+}
+
+(async function main() {
+  say("pristine XHR available: " + (!!PristineXHR) + " | global XHR patched by CapacitorHttp: " + patched);
+  var ctl = await runPatchedFetch("what is the half life of amiodarone");
+  say("CONTROL patched-fetch: streamable=" + ctl.streamable + " ttfv=" + ctl.ttfv + "ms total=" + ctl.total + "ms" + (ctl.err ? (" err=" + ctl.err) : ""),
+      ctl.streamable ? "ok" : "bad");
+  for (var i = 0; i < QUERIES.length; i++) {
+    var r = await runXHR(QUERIES[i][0], QUERIES[i][1]);
+    results.push(r);
+    say((i + 1) + "/" + QUERIES.length + " [" + r.cat + "] ttfv=" + r.ttfv + "ms prog=" + r.firstProgress +
+        "ms total=" + r.total + "ms deltas=" + r.deltas + " gap=" + r.medGap + "ms chars=" + r.chars +
+        (r.err ? (" ERR " + r.err) : ""), (r.deltas > 1 ? "ok" : "bad"));
+    summarise();
+  }
+  say("DONE");
+  summarise();
+})();
+</script>
+</body>
+</html>
