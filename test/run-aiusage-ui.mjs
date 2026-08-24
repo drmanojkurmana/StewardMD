@@ -49,8 +49,12 @@ const STUB = `
     var stub = function (input, init) {
       var url = (typeof input === "string" ? input : (input && input.url)) || "";
       if (url.indexOf("/usage") > -1 && url.indexOf("/ai") > -1) {
-        if (window.__usageFail) return Promise.resolve(new Response("nope", { status: 500 }));
-        return Promise.resolve(new Response(JSON.stringify(window.__usage), { status: 200, headers: { "Content-Type": "application/json" } }));
+        var mk = function () {
+          if (window.__usageFail) return new Response("nope", { status: 500 });
+          return new Response(JSON.stringify(window.__usage), { status: 200, headers: { "Content-Type": "application/json" } });
+        };
+        if (window.__usageDelay) return new Promise(function (res) { setTimeout(function () { res(mk()); }, window.__usageDelay); });
+        return Promise.resolve(mk());
       }
       return orig(input, init);
     };
@@ -137,11 +141,54 @@ try {
   const free = await J(READ);
   ok(/free allowance/i.test(free.text || "") && /15k \/ 20k/.test(free.text || ""), "today's included allowance is shown against what is spent");
 
-  // A failed read must say so, not leave a blank sheet.
+  // LOADING: a slow server must show the skeleton, not a blank sheet or a spinner-less gap.
+  await ev(`window.__usageDelay = 1500; return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(350);
+  const loading = await J(`
+    var host = document.getElementById("aiUsageBody");
+    return JSON.stringify({ skel: !!host.querySelector(".aiu-skel"), busy: (host.querySelector(".aiu-skel")||{}).getAttribute ? host.querySelector(".aiu-skel").getAttribute("aria-busy") : null });`);
+  ok(loading.skel === true, "a slow load shows the shaped skeleton");
+  ok(loading.busy === "true", "and announces itself as busy");
+  await sleep(1500);
+  ok(/Tokens in wallet/.test(((await J(READ)).text) || ""), "then resolves to the real dashboard");
+  await ev(`window.__usageDelay = 0; return 1;`);
+
+  // Never-purchased user: zero wallet, zero usage. Must still be a complete screen.
+  // capsEnforced back to false = today's real production state (MAIK_ENFORCE_CAPS off).
+  await ev(`window.__usage.capsEnforced = false; window.__usage.costCapOn = false; window.__usage.balanceMt = 0; window.__usage.req = 0;
+    window.__usage.tokens = 0; window.__usage.tokensUsedMt = 0; window.__usage.avgLatencyMs = 0;
+    window.__usage.byModule = {}; return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
+  const fresh = await J(READ);
+  ok(/haven.t added any tokens yet/i.test(fresh.text || ""), "a user who never purchased is told so plainly");
+  ok(fresh.buy === true && /Buy MaiK Tokens/.test(fresh.text || ""), "and is offered the top-up");
+  ok(/No AI activity yet today/.test(fresh.text || ""), "zero usage reads as zero, not as a broken screen");
+  ok(!/undefined|NaN/.test(fresh.text || ""), "no undefined/NaN in the empty state");
+
+  // LIGHT MODE: the card surfaces must flip with the theme (a sibling sheet shipped unreadable once).
+  await ev(`document.body.classList.remove("dark"); return 1;`);
+  await ev(OPEN); await sleep(600); await ev(TAP); await sleep(700);
+  const light = await J(`
+    var host = document.getElementById("aiUsageBody");
+    var w = host.querySelector(".aiu-wallet"), b = host.querySelector(".bal");
+    var cs = getComputedStyle(w), ts = getComputedStyle(b);
+    return JSON.stringify({ card: cs.backgroundColor, ink: ts.color });`);
+  ok(light.card === "rgb(241, 245, 249)", `wallet card uses the LIGHT surface (${light.card})`);
+  ok(light.ink !== light.card, `and the balance text is not the same colour as its card (${light.ink})`);
+  await ev(`document.body.classList.add("dark"); return 1;`);
+
+  // A failed read must say so, offer a retry, and that retry must work in place.
   await ev(`window.__usageFail = true; return 1;`);
   await ev(OPEN); await sleep(600); await ev(TAP); await sleep(800);
   const err = await J(READ);
-  ok(/unavailable right now/i.test(err.text || ""), "a failed usage read shows an error instead of an empty sheet");
+  ok(/could not be loaded/i.test(err.text || ""), "a failed usage read shows an error instead of an empty sheet");
+  ok(await ev(`return !!document.getElementById("aiuRetry");`) === true, "with a Try again button");
+  ok(/features are unaffected/i.test(err.text || ""), "and reassures that AI itself still works");
+
+  await ev(`window.__usageFail = false; document.getElementById("aiuRetry").click(); return 1;`);
+  await sleep(800);
+  const recovered = await J(READ);
+  ok(/Tokens in wallet/.test(recovered.text || ""), "Try again reloads the dashboard in place, without reopening the sheet");
 
   console.log(fails === 0 ? "\nALL GREEN — AI Usage dashboard: wallet, spend, rate card and a working buy route" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }

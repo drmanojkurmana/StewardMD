@@ -162,6 +162,51 @@ test("dashboard: a pooled co-resident is told the balance is shared", () => {
   assert.ok(renderAiUsage(Object.assign({}, base, { balanceMt: 5000 })).indexOf("shared with your linked account") === -1);
 });
 
+test("dashboard: a brand-new user (empty payload) renders a complete, honest screen", () => {
+  const h = renderAiUsage({});                       // every field missing
+  assert.ok(!/undefined|NaN|null/.test(h), "no undefined/NaN/null anywhere");
+  assert.match(h, /haven&rsquo;t added any tokens yet/, "explains the empty wallet");
+  assert.match(h, /Buy MaiK Tokens/, "and offers the top-up");
+  assert.match(h, /No AI activity yet today/);
+  assert.ok(h.indexOf("Rate card") === -1, "no rate card is invented when the server sent none");
+});
+
+test("dashboard: hostile/garbage values still render as numbers", () => {
+  const h = renderAiUsage({
+    req: "x", tokens: null, tokensUsedMt: -50, balanceMt: -1, avgLatencyMs: -3, mtPerInr: 0,
+    byModule: null, limits: null,
+    rates: { model: "", inPer1k: undefined, outPer1k: "abc", perImage: null, perAudioSec: -9 },
+  });
+  assert.ok(!/undefined|NaN/.test(h), "no undefined/NaN leaks");
+  assert.match(h, /0 MT/, "a malformed rate degrades to 0, not 'undefined MT'");
+  assert.ok(h.indexOf("-") === -1 || !/>-\d/.test(h), "no negative counts are printed");
+  assert.match(h, /&mdash;/, "unknown latency shows a dash");
+});
+
+test("dashboard: the buy button changes wording once a wallet exists", () => {
+  assert.match(renderAiUsage(Object.assign({}, base, { balanceMt: 0 })), /Buy MaiK Tokens/);
+  assert.match(renderAiUsage(Object.assign({}, base, { balanceMt: 250000 })), /Add more tokens/);
+});
+
+test("dashboard: the two kinds of 'token' are named apart", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 1000 }));
+  assert.match(h, /AI tokens/); assert.match(h, /MT spent/);
+  assert.match(h, /is how much text the model read and wrote/, "a legend disambiguates them");
+});
+
+test("dashboard: progress bars are readable to a screen reader", () => {
+  const h = renderAiUsage(Object.assign({}, base, { balanceMt: 0, capsEnforced: true }));
+  assert.match(h, /role="progressbar"/);
+  assert.match(h, /aria-valuenow="6"/, "3 of 50 = 6%");
+  assert.match(h, /aria-label="MaiK questions: 3 of 50 used today"/);
+});
+
+test("the sheet has a retry that reloads in place, and a skeleton while loading", () => {
+  assert.match(src, /aiuRetry[\s\S]{0,200}onclick = aiuLoad/, "retry re-runs the load without reopening the sheet");
+  assert.match(src, /aria-busy="true"/, "the loading state is announced");
+  assert.match(src, /prefers-reduced-motion/, "the skeleton pulse respects reduced motion");
+});
+
 test("the buy button routes to the existing paywall token store", () => {
   assert.match(src, /aiuBuy[\s\S]{0,400}SMD_PRO\.openPaywall/, "home.js wires #aiuBuy to SMD_PRO.openPaywall()");
 });

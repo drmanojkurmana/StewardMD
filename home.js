@@ -2001,25 +2001,57 @@
         ".aiu-rate tr:first-child td{border-top:none}" +
         ".aiu-rate td.v{text-align:right;white-space:nowrap;color:var(--hmut,#889);font-weight:700}" +
         ".aiu-rate td .d{display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:2px}" +
+        ".aiu-legend{font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin:7px 2px 0;line-height:1.5}" +
         ".ai-usage-note{font:500 11.5px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.55}" +
-        ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+        ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}" +
+        ".aiu-retry{margin-top:12px;padding:10px 20px;border:1px solid var(--line,#1e293b);border-radius:10px;background:var(--aiuCard);color:var(--ink,#e6edf3);font:800 13px var(--hfont,system-ui);cursor:pointer}" +
+        /* Loading skeleton — same block sizes as the real content, so nothing shifts when it lands. */
+        ".aiu-skel .s{background:var(--aiuCard);border-radius:10px;opacity:.65;animation:aiuPulse 1.4s ease-in-out infinite}" +
+        ".aiu-skel .s-h{height:11px;width:40%;margin:2px 2px 9px;border-radius:6px}" +
+        ".aiu-skel .s-card{height:150px;margin-bottom:18px;border-radius:14px}" +
+        ".aiu-skel .s-stats{height:60px;margin-bottom:18px;border-radius:12px}" +
+        ".aiu-skel .s-row{height:34px;margin-bottom:11px}" +
+        "@keyframes aiuPulse{0%,100%{opacity:.65}50%{opacity:.35}}" +
+        "@media (prefers-reduced-motion:reduce){.aiu-skel .s{animation:none}.aiu-bar>span{transition:none}}";
       document.head.appendChild(st);
     }
-    openSheet('<div class="hv-sh-t">AI Usage</div><div id="aiUsageBody" class="ai-usage"><div class="ai-usage-load">Loading your usage…</div></div>');
+    openSheet('<div class="hv-sh-t">AI Usage</div><div id="aiUsageBody" class="ai-usage">' + aiuSkeleton() + '</div>');
+    aiuLoad();
+  }
+  // A shaped placeholder rather than a spinner: the sheet does not jump when the data lands.
+  function aiuSkeleton() {
+    return '<div class="aiu-skel" aria-busy="true" aria-label="Loading your AI usage">' +
+      '<div class="s s-h"></div><div class="s s-card"></div>' +
+      '<div class="s s-h"></div><div class="s s-stats"></div>' +
+      '<div class="s s-h"></div><div class="s s-row"></div><div class="s s-row"></div></div>';
+  }
+  function aiuLoad() {
     var host = document.getElementById("aiUsageBody");
+    if (!host) return;
+    host.innerHTML = aiuSkeleton();
     var base = window.AI_PROXY || "/api/ai";
     var tokP;
     try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    function fail() {
+      if (!document.getElementById("aiUsageBody")) return;
+      document.getElementById("aiUsageBody").innerHTML =
+        '<div class="ai-usage-err"><div>Your usage could not be loaded.</div>' +
+        '<button id="aiuRetry" type="button" class="aiu-retry">Try again</button>' +
+        '<div class="ai-usage-note" style="text-align:center">Your AI features are unaffected — this screen only reports usage.</div></div>';
+      var rt = document.getElementById("aiuRetry"); if (rt) rt.onclick = aiuLoad;   // retry in place, no reopen
+    }
     tokP.then(function (t) {
       var h = {}; if (t) h["Authorization"] = "Bearer " + t;
       return fetch(base + "/usage", { headers: h, credentials: "same-origin" });
     }).then(function (r) { return (r && r.ok) ? r.json() : null; }).then(function (data) {
-      if (!host) return;
-      host.innerHTML = data ? renderAiUsage(data) : '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>';
+      var h2 = document.getElementById("aiUsageBody");
+      if (!h2) return;                                   // sheet closed while the request was in flight
+      if (!data || typeof data !== "object") return fail();
+      h2.innerHTML = renderAiUsage(data);
       var buy = document.getElementById("aiuBuy");
       // The token store already lives in the Pro paywall sheet — reuse it, don't build a second one.
       if (buy) buy.onclick = function () { closeSheet(); setTimeout(function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall(); else toast("Loading…"); } catch (e) {} }, 120); };
-    }).catch(function () { if (host) host.innerHTML = '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>'; });
+    }).catch(fail);
   }
   // Compact MaiK Token count: 1,240 · 50k · 1.2M — a wallet reads better than a 7-digit number.
   function aiuMt(n) {
@@ -2028,10 +2060,12 @@
     if (n >= 10000) return Math.round(n / 1000) + "k";
     return n.toLocaleString("en-IN");
   }
-  function aiuBar(n, lim) {
+  function aiuBar(n, lim, label) {
     var pct = lim > 0 ? Math.min(100, Math.round(n / lim * 100)) : 0;
     var cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
-    return '<div class="aiu-bar' + cls + '"><span style="width:' + pct + '%"></span></div>';
+    // A bar is the only carrier of "how much is left" here, so it must be readable to a screen reader too.
+    return '<div class="aiu-bar' + cls + '" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"' +
+      (label ? ' aria-label="' + aiCtlEsc(label) + '"' : '') + '><span style="width:' + pct + '%"></span></div>';
   }
   function renderAiUsage(u) {
     var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", tts: "Text-to-speech", scribe: "MaiK Scribe", fundx: "FundX", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base" };
@@ -2039,27 +2073,34 @@
     var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
 
     // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
-    var bal = u.balanceMt | 0, spent = u.tokensUsedMt | 0, free = u.dailyFreeMt | 0, per = u.mtPerInr || 2000;
+    var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
+    var free = Math.max(0, u.dailyFreeMt | 0), per = u.mtPerInr > 0 ? u.mtPerInr : 2000;
+    var worth = Math.round(bal / per * 10) / 10;   // ₹, one decimal — a wallet of 100 MT is ₹0.1, not "₹0"
     out += '<div class="aiu-h">Your MaiK Tokens</div><div class="aiu-wallet">' +
       '<div class="bal">' + aiuMt(bal) + '</div><div class="bl">Tokens in wallet</div>' +
-      '<div class="sub">' + (bal > 0 ? 'Worth about &#8377;' + (Math.round(bal / per * 10) / 10) + ' of AI. Tokens never expire and work across every AI feature.' : 'Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
+      '<div class="sub">' + (bal > 0
+        ? 'Worth about &#8377;' + worth + ' of AI. Tokens never expire and work across every AI feature.'
+        : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
       (u.pooled ? '<br>Shared pool: this balance is shared with your linked account.' : '') + '</div>' +
-      '<button id="aiuBuy" class="aiu-buy" type="button">Buy MaiK Tokens</button></div>';
+      '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>';
     if (u.costCapOn && free > 0) {
       out += '<div class="aiu-h">Today&rsquo;s free allowance</div><div class="aiu-row">' +
         '<div class="h"><span>Included with your plan</span><span class="u">' + aiuMt(spent) + ' / ' + aiuMt(free) + '</span></div>' +
-        aiuBar(spent, free) +
+        aiuBar(spent, free, "Free allowance used today") +
         '<div class="ai-usage-note">Resets at midnight. Past this, your wallet takes over — nothing stops mid-consult.</div></div>';
     }
 
-    // ---- today ----
+    // ---- today. NOTE the two different "tokens" on this screen: MaiK Tokens (MT) are the wallet
+    // currency, AI tokens are the model's own unit. Labelling both "tokens" read as one number
+    // twice, so they are named apart and the legend below says which is which. ----
     var req = u.req | 0;
     out += '<div class="aiu-h">Today</div><div class="aiu-stats">' +
-      '<div class="c"><div class="n">' + req + '</div><div class="l">Requests</div></div>' +
+      '<div class="c"><div class="n">' + req.toLocaleString("en-IN") + '</div><div class="l">Requests</div></div>' +
       '<div class="c"><div class="n">' + aiuMt(u.tokens) + '</div><div class="l">AI tokens</div></div>' +
-      '<div class="c"><div class="n">' + aiuMt(spent) + '</div><div class="l">Spent (MT)</div></div>' +
-      '<div class="c"><div class="n">' + (u.avgLatencyMs ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + 's' : '&mdash;') + '</div><div class="l">Avg reply</div></div>' +
-      '</div>';
+      '<div class="c"><div class="n">' + aiuMt(spent) + '</div><div class="l">MT spent</div></div>' +
+      '<div class="c"><div class="n">' + (u.avgLatencyMs > 0 ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + 's' : '&mdash;') + '</div><div class="l">Avg reply</div></div>' +
+      '</div>' +
+      '<div class="aiu-legend"><b>AI tokens</b> is how much text the model read and wrote. <b>MT</b> is what that cost your wallet.</div>';
 
     // ---- per feature. Only draw a cap bar when the caps are actually ENFORCED; otherwise a bar
     // would imply a limit that blocks nobody today. ----
@@ -2069,7 +2110,7 @@
       var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
       if (!enforced) { if (!n) return; rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + '</span></div></div>'; return; }
       if (lim === 0) { rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="aiu-unl">Unlimited</span></div></div>'; return; }
-      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' + aiuBar(n, lim) + '</div>';
+      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' + aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
     });
     out += '<div class="aiu-h">By feature' + (enforced ? '' : ' &middot; today') + '</div>' +
       (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
@@ -2079,13 +2120,17 @@
     // ---- rate card ----
     var r = u.rates;
     if (r) {
+      // Coerce: the card is a PRICE. A malformed field must render as a number, never "undefined MT".
+      var rIn = Math.max(0, r.inPer1k | 0), rOut = Math.max(0, r.outPer1k | 0);
+      var rImg = Math.max(0, r.perImage | 0), rAud = Math.max(0, r.perAudioSec | 0);
       out += '<div class="aiu-h">Rate card</div><table class="aiu-rate"><tbody>' +
-        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + r.inPer1k + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + r.outPer1k + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
-        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + r.perImage + ' MT<span class="d">per image</span></td></tr>' +
-        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + r.perAudioSec + ' MT<span class="d">per second</span></td></tr>' +
+        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + rIn + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + rOut + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + rImg + ' MT<span class="d">per image</span></td></tr>' +
+        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + rAud + ' MT<span class="d">per second</span></td></tr>' +
         '</tbody></table>' +
-        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((r.inPer1k * 0.6) + (r.outPer1k * 0.8)) + ' MT. Rates are for ' + aiCtlEsc(r.model) + ' and are billed on actual usage, never rounded up per request.</div>';
+        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((rIn * 0.6) + (rOut * 0.8)) + ' MT.' +
+        (r.model ? ' Rates are for ' + aiCtlEsc(r.model) + ' and are' : ' Rates are') + ' billed on actual usage, never rounded up per request.</div>';
     } else if (u.ratesProvisional) {
       // The active model's published rates are not confirmed yet. Say so plainly rather than quote a
       // number we are guessing at — a doctor deciding what to spend must not be given an estimate.
