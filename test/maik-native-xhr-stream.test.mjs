@@ -99,35 +99,46 @@ test("native uses the PRISTINE XHR, not fetch and not the patched global", () =>
     "progressive responseText is the whole point of using XHR here");
 });
 
-test("a STALLED stream aborts for real — the 26.6s hang must be impossible", () => {
-  const onStall = extractFn(RJ, "function onStall() {");
-  assert.match(onStall, /xhr\.abort\(\)/, "XHR abort actually works, unlike CapacitorWebFetch + AbortController");
-  assert.match(onStall, /settle\(fallback\(\)\)/, "text-then-silence is a broken stream: take the proven fetch");
+test("giving up aborts for real, then takes the proven fetch — the 26.6s hang must be impossible", () => {
+  const giveUp = extractFn(RJ, "function giveUp() {");
+  assert.match(giveUp, /xhr\.abort\(\)/, "XHR abort actually works, unlike CapacitorWebFetch + AbortController");
+  assert.match(giveUp, /settle\(fallback\(\)\)/, "one deterministic ending: the proven whole-answer fetch");
 });
 
-test("a merely SLOW stream is hedged, never killed — this is what made the app fall back every time", () => {
-  // Budget was 4000ms while the real first delta lands at 3.6-5.0s, so the watchdog aborted streams
-  // that were about to work and the app showed "answer 9.2s" (fallback) instead of "grounded-stream".
-  const onSilent = extractFn(RJ, "function onSilent() {");
-  assert.match(onSilent, /startHedge\(\)/, "no first token yet => hedge, do not abort");
-  const beforeHardStop = onSilent.split("hardT = setTimeout")[0];
-  assert.doesNotMatch(beforeHardStop, /xhr\.abort\(\)/,
-    "a stream that has simply not started yet must be left alive — it may still deliver");
-  const hedge = extractFn(RJ, "function startHedge() {");
-  assert.match(hedge, /if \(!acc\)/,
-    "the hedged fetch may only win while the stream has produced NOTHING — never overwrite streamed text");
+test("SINGLE FLIGHT: no hedged or competing second request", () => {
+  // The hedge started a second request on a slow first token — non-deterministic (two answers racing
+  // for one bubble) and double spend on exactly the slow calls. The server now bounds every stream,
+  // so the client is strictly one request at a time.
+  assert.doesNotMatch(RJ, /function startHedge\(\)/, "the hedge must be gone");
+  assert.doesNotMatch(RJ, /hedged = true/, "no hedge state may remain");
 });
 
-test("the native budgets are explicit and bounded", () => {
-  const m = RJ.match(/NX_FIRST = (\d+), NX_STALL = (\d+), NX_HARD = (\d+)/);
+test("a transport-level total bound exists — no JS timer can catch every dead socket", () => {
+  assert.match(RJ, /xhr\.timeout = NX_TOTAL/, "XHR's own timeout is the backstop against a 196s hang");
+  assert.match(RJ, /xhr\.ontimeout = function \(\) \{ nsBad\(true\); settle\(fallback\(\)\); \}/,
+    "a timed-out request must settle deterministically");
+});
+
+test("client budgets sit OUTSIDE the server's, so the server's clean close wins", () => {
+  const m = RJ.match(/NX_FIRST = (\d+), NX_STALL = (\d+), NX_TOTAL = (\d+)/);
   assert.ok(m, "the native budgets must be explicit");
-  assert.ok(Number(m[1]) >= 3000, `first budget ${m[1]}ms — below the measured first-delta range it would hedge on every call`);
-  assert.ok(Number(m[2]) <= 10000, `stall budget ${m[2]}ms must stay small`);
-  assert.ok(Number(m[3]) <= 20000, `hard stop ${m[3]}ms must remain a real floor — nothing may hang`);
+  const [, first, stall, total] = m.map(Number);
+  assert.ok(first >= 8000, `first-token backstop ${first}ms must clear the measured p95 (5.2s) and the server's 10s connect bound`);
+  assert.ok(stall > 12000, `client stall ${stall}ms must exceed the server's 12s idle bound — a clean close keeps the text, a client abort discards it`);
+  assert.ok(total <= 35000, `total ${total}ms must stay a real bound for a waiting clinician`);
+});
+
+test("SAFETY: a server-stalled stream is never shown as a complete clinical answer", () => {
+  // The server now always closes with a done event, including when it hit its own idle/total deadline.
+  // Accepting that text because "done arrived" would present a truncated answer as whole.
+  assert.match(RJ, /if \(ev\.stalled\) sawStalled = true;/, "the stalled flag must be read");
+  assert.match(RJ, /if \(acc && sawDone && !sawStalled\)/, "a stalled stream must fall back, never surface");
 });
 
 test("SAFETY: only a cleanly completed stream may surface as the answer", () => {
-  assert.match(RJ, /if \(acc && sawDone\) \{ nsBad\(false\); settle\(\{ text: acc, mode: "grounded-stream"/,
+  // Tightened once the server gained deadlines: a done event can now also mean "the server gave up",
+  // so completion requires done AND not-stalled.
+  assert.match(RJ, /if \(acc && sawDone && !sawStalled\) \{ nsBad\(false\); settle\(\{ text: acc, mode: "grounded-stream"/,
     "a truncated clinical answer must never be shown as a whole one");
 });
 

@@ -257,7 +257,7 @@ const developerProvider = {
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ google_search: {} }] });
     return fetch(`${DEV_HOST}/${modelFor(env, o)}:streamGenerateContent?alt=sse&key=${env.GEMINI_API_KEY}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -329,7 +329,7 @@ const vertexProvider = {
     const token = await vertexAccessToken(env);
     let o = opts || {};
     if (o.webSearch) o = Object.assign({}, o, { tools: [{ googleSearch: {} }] });
-    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)) });
+    return fetch(url, { method: "POST", headers: { "Authorization": "Bearer " + token, "Content-Type": "application/json" }, body: JSON.stringify(genBody(parts, maxTokens, o)), signal: o.signal });
   }
 };
 
@@ -383,17 +383,34 @@ const PROVIDERS = { vertex: vertexProvider, developer: developerProvider, azure:
 // Phase 2 — streaming plumbing. geminiStreamUpstream tries providers in order for a streamable
 // body (no mid-stream failover: once bytes flow we commit; the CLIENT falls back to non-stream on
 // any gap). streamGeminiToSSE transforms Gemini's SSE into our compact {delta}/{done} event stream.
+/* Streaming deadlines (2026-08-24). The streaming path had NO timeout anywhere: the non-streaming
+ * path goes through fetchJsonWithTimeout, but geminiStreamUpstream used a bare fetch and the pump
+ * read with no idle deadline. A stalled upstream therefore held the SSE open indefinitely — measured
+ * on device as a 196-SECOND hang ending in xhr-error, one of 4 failures in 31 requests.
+ *
+ * Every stream now has three bounds: time to open the upstream, time between chunks, and total life.
+ * Whichever trips, the stream is CLOSED CLEANLY with a done event and the upstream reader is
+ * cancelled — so the client always settles deterministically instead of waiting on a dead socket. */
+function streamConnectMs(env) { const v = Number(env.MAIK_STREAM_CONNECT_MS); return Number.isFinite(v) && v > 0 ? v : 10000; }
+function streamIdleMs(env) { const v = Number(env.MAIK_STREAM_IDLE_MS); return Number.isFinite(v) && v > 0 ? v : 12000; }
+function streamTotalMs(env) { const v = Number(env.MAIK_STREAM_TOTAL_MS); return Number.isFinite(v) && v > 0 ? v : 60000; }
+
 async function geminiStreamUpstream(env, parts, maxTokens, opts) {
   const order = providerOrder(env, opts);
   let lastErr = null;
   for (const name of order) {
     const p = PROVIDERS[name];
     if (!p || !p.available(env) || !p.streamFetch) { lastErr = new Error(name + " stream unavailable"); continue; }
+    // Bound how long we wait for the upstream to RESPOND. Without this a provider that never answers
+    // blocks the whole request, and the clinician waits on a connection that will never open.
+    const ctrl = new AbortController();
+    const t = setTimeout(function () { try { ctrl.abort(); } catch (e) {} }, streamConnectMs(env));
     try {
-      const r = await p.streamFetch(env, parts, maxTokens, opts);
-      if (r && r.ok && r.body) return r;
+      const r = await p.streamFetch(env, parts, maxTokens, Object.assign({}, opts || {}, { signal: ctrl.signal }));
+      if (r && r.ok && r.body) { clearTimeout(t); return r; }
       lastErr = new Error(name + " stream HTTP " + (r && r.status));
     } catch (e) { lastErr = e; }
+    finally { clearTimeout(t); }
   }
   throw lastErr || new Error("no streaming provider");
 }
@@ -401,24 +418,44 @@ async function geminiStreamUpstream(env, parts, maxTokens, opts) {
  * time actually went: waiting for Gemini's first token vs generating the rest. Measured on device the
  * first token took ~7.4s while the remaining 3.4k chars streamed in 5.3s — so the wait is TTFT, not
  * generation and not buffering. Timings only; no PHI. */
-function streamGeminiToSSE(upstream, onText, tStart) {
+function streamGeminiToSSE(upstream, onText, tStart, lim) {
   const enc = new TextEncoder(), dec = new TextDecoder();
   const reader = upstream.body.getReader();
   const _t0 = typeof tStart === "number" ? tStart : Date.now();
+  const IDLE = (lim && lim.idleMs) || 12000;          // max gap BETWEEN chunks
+  const DEADLINE = _t0 + ((lim && lim.totalMs) || 60000);   // max life of the whole stream
   let _tHdr = Date.now(), _tFirst = 0;
   let buf = "", full = "", closed = false;
+  /* One exit for every ending — upstream done, idle stall, or total deadline. Always emits a done
+   * event and closes, so the client settles deterministically and never waits on a dead socket. */
+  function finish(controller, reason) {
+    if (closed) return;
+    closed = true;
+    const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
+    if (lim && lim.model) _tm.model = lim.model;   // so a model A/B is verifiable, not assumed
+    if (reason) _tm.endedBy = reason;
+    try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
+    try { controller.close(); } catch (e) {}
+    try { if (onText) onText(full); } catch (e) {}
+  }
   const rs = new ReadableStream({
     async pull(controller) {
       try {
-        const { value, done } = await reader.read();
+        // Race the read against the smaller of (idle budget, remaining total life). Without this a
+        // stalled upstream never resolves and the connection is held open until the phone gives up.
+        const budget = Math.max(1, Math.min(IDLE, DEADLINE - Date.now()));
+        let _tm2 = null;
+        const timeout = new Promise(function (res) { _tm2 = setTimeout(function () { res("__STALL__"); }, budget); });
+        const raced = await Promise.race([reader.read(), timeout]);
+        clearTimeout(_tm2);
+        if (raced === "__STALL__") {
+          try { reader.cancel(); } catch (e) {}     // settles the abandoned read and frees the socket
+          finish(controller, Date.now() >= DEADLINE ? "total" : "idle");
+          return;
+        }
+        const { value, done } = raced;
         if (done) {
-          if (!closed) {
-            closed = true;
-            const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
-            controller.enqueue(enc.encode("data: " + JSON.stringify({ done: true, _t: _tm }) + "\n\n"));
-            controller.close();
-          }
-          try { if (onText) onText(full); } catch (e) {}
+          finish(controller, null);
           return;
         }
         buf += dec.decode(value, { stream: true });
@@ -430,8 +467,8 @@ function streamGeminiToSSE(upstream, onText, tStart) {
           if (txt) { if (!_tFirst) _tFirst = Date.now(); full += txt; controller.enqueue(enc.encode("data: " + JSON.stringify({ delta: txt }) + "\n\n")); }
         }
       } catch (e) {
-        if (!closed) { closed = true; controller.enqueue(enc.encode('data: {"done":true}\n\n')); controller.close(); }
-        try { if (onText) onText(full); } catch (e2) {}
+        try { reader.cancel(); } catch (e2) {}
+        finish(controller, "error");
       }
     },
     cancel() { try { reader.cancel(); } catch (e) {} }
@@ -1420,7 +1457,7 @@ export async function onRequest(context) {
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp));
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env) }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never

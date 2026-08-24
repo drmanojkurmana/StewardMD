@@ -3967,25 +3967,24 @@
          * stream that is genuinely dead is covered by the fetch already in flight, so silence costs
          * nothing. The duplicate request is only ever issued when the stream has produced nothing at
          * all, and NX_HARD remains a floor so nothing can hang. */
-        var NX_FIRST = 4500, NX_STALL = 8000, NX_HARD = 15000;
+        /* SINGLE FLIGHT (2026-08-24). The earlier version HEDGED — on a slow first token it started a
+         * second, competing request. That made the fallback non-deterministic (two answers racing for
+         * the same bubble) and doubled the spend on exactly the slow calls. It existed only because
+         * the SERVER could stall forever; now the server bounds every stream (connect / idle / total)
+         * and always closes with a done event, so the client can be strictly one request at a time.
+         *
+         * Client budgets sit OUTSIDE the server's so the server's clean close always wins the race —
+         * a clean close carries the streamed text, a client abort throws it away. Measured device TTFV
+         * is p50 3.7s / p95 5.2s, so a 9s first-token backstop never fires on a healthy call. */
+        var NX_FIRST = 9000, NX_STALL = 14000, NX_TOTAL = 30000;   // server: connect 10s, idle 12s
         return aiHeaders().then(function (h) {
           return new Promise(function (resolve) {
-            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, fin = false, nt = null;
-            var hedged = false, hardT = null;
-            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } if (hardT) { clearTimeout(hardT); hardT = null; } resolve(v); }
-            // Silent stream: race a real fetch but do NOT abort — the stream may still be coming.
-            function startHedge() {
-              if (hedged) return; hedged = true;
-              Promise.resolve(fallback()).then(function (v) { if (!acc) { nsBad(true); settle(v); } });
-            }
-            function onSilent() {
-              startHedge();
-              if (hardT) clearTimeout(hardT);
-              hardT = setTimeout(function () { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }, NX_HARD);
-            }
-            // Text arrived and then stopped — that IS a broken stream, so abort and take the fetch.
-            function onStall() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
-            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(function () { if (acc) onStall(); else onSilent(); }, ms); }
+            var xhr = new XHRc(), idx = 0, acc = "", nbuf = "", sawDone = false, sawStalled = false, fin = false, nt = null;
+            function settle(v) { if (fin) return; fin = true; if (nt) { clearTimeout(nt); nt = null; } resolve(v); }
+            // One deterministic ending: abort this request, then take the proven whole-answer fetch.
+            // No second request is ever in flight at the same time.
+            function giveUp() { try { xhr.abort(); } catch (e) {} nsBad(true); settle(fallback()); }
+            function armx(ms) { if (nt) clearTimeout(nt); nt = setTimeout(giveUp, ms); }
             function feed(chunk) {
               nbuf += chunk;
               var parts = nbuf.split(/\r?\n\r?\n/); nbuf = parts.pop();
@@ -3995,7 +3994,9 @@
                 if (!data) continue;
                 var ev; try { ev = JSON.parse(data); } catch (e) { continue; }
                 if (ev && ev.delta) { acc += ev.delta; armx(NX_STALL); try { if (onDelta) onDelta(acc); } catch (e) {} }
-                if (ev && ev.done) sawDone = true;
+                // stalled:true means the SERVER hit its idle/total deadline and closed early, so the
+                // text is INCOMPLETE even though a done event arrived. Never surface it as an answer.
+                if (ev && ev.done) { sawDone = true; if (ev.stalled) sawStalled = true; }
               }
             }
             function drain() { var txt = xhr.responseText || ""; if (txt.length > idx) { feed(txt.slice(idx)); idx = txt.length; } }
@@ -4007,11 +4008,14 @@
               drain();
               // Only a CLEANLY completed stream may surface as the answer — a truncated clinical
               // answer must never look like a whole one. Anything else falls back to the proven fetch.
-              if (acc && sawDone) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
+              if (acc && sawDone && !sawStalled) { nsBad(false); settle({ text: acc, mode: "grounded-stream", sources: pkg.sources }); return; }
               nsBad(true); settle(fallback());
             };
             xhr.onerror = function () { nsBad(true); settle(fallback()); };
             xhr.ontimeout = function () { nsBad(true); settle(fallback()); };
+            // A real transport-level total bound. XHR honours this even when a socket goes quiet in a
+            // way no JS timer would catch — this is the backstop that makes a 196s hang impossible.
+            try { xhr.timeout = NX_TOTAL; } catch (e) {}
             armx(NX_FIRST);
             try {
               xhr.send(JSON.stringify({ package: pkg, depth: (opts && opts.depth) || "concise", tier: (opts && opts.tier) || undefined, priorLead: (opts && opts.priorLead) || undefined, mode: (opts && opts.mode) || undefined }));
