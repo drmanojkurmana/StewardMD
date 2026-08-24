@@ -261,6 +261,32 @@ export async function recordAiUsage(env, store, rec, now) {
   } catch (e) { /* fail-open — never break the AI response on metering */ }
 }
 
+// Add REAL per-user spend to the day's rollup — the record checkCostCap reads to decide the free
+// allowance, the wallet debits from, and the AI Usage dashboard shows.
+//
+// WHY THIS EXISTS: recordAiUsage runs PRE-call (from gateAndCount), before any token is generated, so
+// every record it writes carries estCostInr 0 and totalTokens 0. `cost` and `tok` on aiu:doc therefore
+// stayed permanently zero, while the real figures went only to _usage.js's separate maik:* rollup. The
+// consequence was silent and total: with AI_COST_CAP_ON=1 the cap could never trigger, so a purchased
+// wallet could never be debited, and the dashboard's token/spend tiles always read 0. _usage.js
+// recordUsage now calls this once per completed call, where the true token counts exist.
+//
+// ponytail: KV read-modify-write, so concurrent calls can lose an increment. It fails in the SAFE
+// direction (under-counted spend = the doctor gets more free AI than they paid for, never less), and
+// the ceiling is one day's drift. For exact per-user accounting, mirror it into D1 the way
+// _usage.js addDailyCostInr does for the project-wide figure.
+export async function addAiSpend(store, costKey, day, inr, tokens) {
+  if (!store || !costKey || !day) return;
+  if (!(inr > 0) && !(tokens > 0)) return;
+  try {
+    const k = "aiu:doc:" + costKey + ":" + day;
+    const d = (await store.get(k, "json")) || { req: 0, tok: 0, cost: 0, latSum: 0, fail: 0, byModule: {} };
+    d.cost = Math.round(((d.cost || 0) + (inr || 0)) * 10000) / 10000;
+    d.tok = (d.tok || 0) + Math.max(0, tokens | 0);
+    await store.put(k, JSON.stringify(d), { expirationTtl: AIU_TTL });
+  } catch (e) { /* fail-open — metering must never break a clinical answer */ }
+}
+
 // Doctor's own daily summary (for the in-app AI Usage page). Never another doctor's data.
 export async function doctorUsageSummary(env, store, doctorId, now) {
   const day = _day(now);

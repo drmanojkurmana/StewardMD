@@ -38,6 +38,11 @@ Fulfilment: every payment path (Razorpay webhook, PhonePe webhook, StoreKit `iap
 granted Pro, so a token pack delivered a month of Pro and zero tokens. `test/token-purchase.test.mjs`
 drives ₹499 → 750k MT → wallet → AI deduction through the real modules.
 
+**The wallet is only ever debited when `AI_COST_CAP_ON` is on — it is OFF in production.** Two blockers
+had to be fixed/decided before it can be flipped (per-user spend was never recorded; role-based caps are
+not wired, so everyone would get the ₹0.50 free cap). Full procedure, both surfaces, pilot steps and
+rollback: [[Enable-AI-Cost-Cap]].
+
 **Pack payout is a pricing decision, not a bug:** ₹499 buys 750,000 MT = ₹375 of AI at our internal
 cost (75% payout). A raw rupee top-up via `addCredits` still uses `CREDIT_CONVERSION` (50%). Owner to
 confirm the packs' margin before launch — see [[Decisions]].
