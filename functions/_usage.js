@@ -228,7 +228,10 @@ export function deviceDailyCap(env) {
   const v = Number(env && env.MAIK_DEVICE_DAILY_CAP);
   return Number.isFinite(v) && v >= 0 ? v : 300;
 }
-export async function deviceCheck(env, store, request, now) {
+/* waitUntil (optional): defer the counter WRITE past the response. The read still gates the cap —
+ * only the increment is deferred — and a KV write was measured adding real dead time in front of
+ * every answer. Omit it and the old awaited behaviour is kept, so existing callers are unchanged. */
+export async function deviceCheck(env, store, request, now, waitUntil) {
   const cap = deviceDailyCap(env);
   if (!store || !cap) return { ok: true };
   const dev = request.headers.get("X-SMD-Device");
@@ -238,7 +241,9 @@ export async function deviceCheck(env, store, request, now) {
   let used = 0;
   try { used = Number(await store.get(key)) || 0; } catch (e) { return { ok: true }; }
   if (used >= cap) return { ok: false, reason: "device-cap", used: used, cap: cap };
-  try { await store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); } catch (e) {}
+  const put = function () { return store.put(key, String(used + 1), { expirationTtl: 60 * 60 * 24 * 2 }); };
+  if (typeof waitUntil === "function") { try { waitUntil(put().catch(function () {})); } catch (e) {} }
+  else { try { await put(); } catch (e) {} }
   return { ok: true, used: used + 1, cap: cap };
 }
 

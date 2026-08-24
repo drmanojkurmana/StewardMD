@@ -433,6 +433,11 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
     closed = true;
     const _tm = { hdrMs: _tHdr - _t0, firstTokMs: _tFirst ? _tFirst - _t0 : null, totalMs: Date.now() - _t0 };
     if (lim && lim.model) _tm.model = lim.model;   // so a model A/B is verifiable, not assumed
+    // Everything WE spend before Gemini is even called (gate, re-rank, prompt render). Without this
+    // the client-vs-server gap is unattributable and "network" becomes a dumping ground for our work.
+    if (lim && typeof lim.preMs === "number") _tm.preMs = lim.preMs;
+    if (lim && typeof lim.headMs === "number") _tm.headMs = lim.headMs;   // request entry -> explain branch
+    if (lim && lim.hm) _tm.hm = lim.hm;
     if (reason) _tm.endedBy = reason;
     try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
     try { controller.close(); } catch (e) {}
@@ -995,6 +1000,10 @@ async function pubmedGuidelines(env, topic, ptypeFilter) {
  * heavily, so this alone absorbs the common questions even when no KV namespace is bound. */
 const _routeMem = new Map();
 const ROUTE_MEM_MAX = 500;
+/* Per-isolate cache of the two global AI-config values (emergency mode, model override). Non-PHI,
+ * identical for every user, and previously read from KV serially in front of every single request. */
+let _cfgCache = null;
+const CFG_TTL_MS = 30000;
 function routeMemPut(k, v) {
   try {
     if (_routeMem.has(k)) _routeMem.delete(k);
@@ -1004,6 +1013,7 @@ function routeMemPut(k, v) {
 }
 
 export async function onRequest(context) {
+  const _reqT0 = Date.now();   // request entry — lets headMs separate OUR pre-branch work from network
   const { request, env, params } = context;
   // CORS preflight (native WebView streaming) — no auth; must precede authorise.
   if (request.method === "OPTIONS") return new Response(null, { status: 204, headers: corsHeaders(request) });
@@ -1013,13 +1023,22 @@ export async function onRequest(context) {
 
   // AI Control Center: apply the admin model + emergency mode for THIS request. Emergency "cheap"
   // forces the cheapest model (overriding the admin choice); "pause" is enforced at dispatch below.
+  /* These are two rarely-changing CONFIG values that were read from KV SERIALLY on EVERY request,
+   * before any work began — pure dead time in front of every answer. They are non-PHI global config,
+   * so they are cached per-isolate for a short TTL and fetched in PARALLEL on a miss. Worst case a
+   * console change takes CFG_TTL_MS to reach an already-warm isolate, which is the same order as the
+   * KV edge cache it was already subject to. */
   let _emergency = { mode: "off" };
   try {
     const _s0 = usageKv(env);
     if (_s0) {
-      _emergency = await getEmergency(_s0);
-      const _ov0 = await getModelOverride(_s0);
-      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_ov0 || undefined);
+      const _now = Date.now();
+      if (!_cfgCache || _now > _cfgCache.exp) {
+        const [_em, _ov] = await Promise.all([getEmergency(_s0), getModelOverride(_s0)]);
+        _cfgCache = { emergency: _em, override: _ov, exp: _now + CFG_TTL_MS };
+      }
+      _emergency = _cfgCache.emergency;
+      env.__modelOverride = (_emergency && _emergency.mode === "cheap") ? CHEAP_MODEL : (_cfgCache.override || undefined);
     }
   } catch (e) {}
 
@@ -1235,8 +1254,10 @@ export async function onRequest(context) {
   }
   if (!enabled) return json({ error: "ai-disabled", enabled: false }, 200);  // client falls back to rule-based
 
+  const _hm = {};   // sub-stage marks inside the "head" region, so its ~1.1s is attributable
   let body = {};
   try { if (request.method === "POST") body = await request.json(); } catch (e) {}
+  _hm.body = Date.now() - _reqT0;
 
   // ── AI Control Center (Phase 2b) ─────────────────────────────────────────────────────────────
   // (a) apply the admin "switch models" override for THIS request; (b) enforce the per-module DAILY
@@ -1273,22 +1294,34 @@ export async function onRequest(context) {
     if ((_mod || _isEvidReview) && _emergency && _emergency.mode === "pause") {
       return json({ error: "quota", reason: "emergency", message: "AI is temporarily paused by the administrator. Clinical reasoning, calculators, and reference tools remain available." }, 503);
     }
-    if (_mod || _isEvidReview) {
+    /* The device cap and the caller's identity are INDEPENDENT reads that were paid one after the
+     * other in front of every answer. Started together; both are still awaited before any generation,
+     * so a device-capped or over-quota caller is still refused before a single token is produced. */
+    const _dcP = (_mod || _isEvidReview)
+      ? deviceCheck(env, _acStore, request, Date.now(), context.waitUntil.bind(context)).catch(function () { return { ok: true }; })
+      : null;
+    // No .catch() here on purpose: it is awaited inside the try below, so a failure still fails open
+    // exactly as before. Swallowing it to null here would instead skip metering with a bad key.
+    const _whoP = (_mod && !_isEvidReview) ? identify(request, env) : null;
+    if (_dcP) {
       try {
-        const _dc = await deviceCheck(env, _acStore, request, Date.now());
+        const _dc = await _dcP;
+        _hm.dev = Date.now() - _reqT0;
         if (!_dc.ok) return json({ error: "quota", reason: "device-cap", message: "Daily AI limit for this device reached. Try again after midnight." }, 429);
       } catch (e) { /* fail-open */ }
     }
     if (_mod && !_isEvidReview) {
       try {
-        const _who = await identify(request, env);
-        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email);
+        const _who = await _whoP;
+        const _mq = await gateAndCount(env, _acStore, _mod, usageKeyFor(_who), _who.guest ? "guest" : "unknown", Date.now(), _who.email, context.waitUntil.bind(context));
+        try { _hm.gateMs = _mq && _mq._ms; } catch (e) {}
         // Mirror the existing quota response shape so the client's quota handling surfaces it unchanged.
         if (!_mq.ok) {
           if (_mq.reason === "ai-cost-cap") return json({ error: "quota", reason: "ai-cost-cap", resetAt: _mq.resetAt, cap: _mq.cap, dayCost: _mq.dayCost, credits: _mq.credits, message: "You've reached today's AI limit. It resets at midnight. Add credits or upgrade to keep going." }, 429);
           return json({ error: "quota", reason: "module-daily", module: _mod, used: _mq.used, limit: _mq.limit, message: moduleLimitMsg(_mod, _mq.limit) }, 429);
         }
       } catch (e) { /* fail-open — never block a clinical call on a metering error */ }
+      _hm.gate = Date.now() - _reqT0;
     }
   }
 
@@ -1457,7 +1490,7 @@ export async function onRequest(context) {
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env) }));
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
