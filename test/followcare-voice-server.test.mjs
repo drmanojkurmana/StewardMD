@@ -47,16 +47,31 @@ mock.module("../functions/_followcare_sms.js", { namedExports: { sendSms: async 
 mock.module("../functions/_followcare_whatsapp.js", { namedExports: { sendWhatsApp: async () => ({ ok: true }), waConfigured: () => false } });
 
 const V = await import("../functions/_followcare_voice.js");
+// tzDateKey is the shared day-key helper the server uses (tzDateKey(ms, tz)); used here so the
+// expected date is derived
+// from NOW rather than hard-coded (see the NOW comment above).
+const VoiceLib = (await import("../followcare-voice.js")).default;
 const { encPHI, getEpisode } = await import("../functions/_followcare.js");
 
 const KEY = Buffer.from(new Uint8Array(32).fill(7)).toString("base64url");
 const ENV = { FOLLOWCARE_PHI_KEY: KEY, FOLLOWCARE_TOKEN_SECRET: "x".repeat(40) };
-const NOW = Date.UTC(2026, 7, 16, 4, 0);   // 09:30 IST — inside the morning window
+// ANCHORED TO TODAY, not to a fixed date.
+//
+// submitVoiceResult() reads the real Date.now() rather than an injected clock, so a hard-coded NOW
+// silently rots. This file was pinned to 2026-08-16; on 2026-08-18 real time passed the fixture's
+// day-3 due time, so a call that should CANCEL ("the patient already responded") started scoring
+// day 3 instead, and six tests here began failing every single day - unnoticed, because CI was
+// already red. Deriving NOW from today keeps the intended property (09:30 IST, inside the morning
+// window) without the expiry date.
+const _today = new Date();
+const NOW = Date.UTC(_today.getUTCFullYear(), _today.getUTCMonth(), _today.getUTCDate(), 4, 0);   // 09:30 IST today
 
 async function seedEpisode(id, extra) {
   const phoneEnc = await encPHI(ENV, "919876543210");
   const nameEnc = await encPHI(ENV, "Ravi Kumar");
-  const schedule = [{ dayOffset: 1, dueAtMs: NOW - 30 * 3600000 }, { dayOffset: 3, dueAtMs: NOW + 48 * 3600000 }];
+  // 60h overdue: comfortably past the minimum noResponseDays (2 days = 48h) these tests set,
+  // so eligibility is satisfied and the tests exercise queueing rather than the threshold.
+  const schedule = [{ dayOffset: 1, dueAtMs: NOW - 60 * 3600000 }, { dayOffset: 3, dueAtMs: NOW + 48 * 3600000 }];
   store.set("fc_episodes/" + id, { fields: Object.assign({
     hospitalId: "H1", doctorUid: "D1", pathwayId: "pneumonia", disease: "Pneumonia", status: "active",
     dischargeMs: NOW - 72 * 3600000, lang: "en", scheduleJson: JSON.stringify(schedule),
@@ -64,8 +79,19 @@ async function seedEpisode(id, extra) {
   }, extra || {}), updateTime: "t" + (clock++) });
 }
 
+/* NOTE (2026-08-24): every hospital seeded here sets noResponseDays explicitly (2 = the minimum the setting clamps to).
+ *
+ * Commit 8382a8a8 replaced the old "fallbackHours" eligibility rule (default 24h) with a doctor-set
+ * "call after N days of no check-in" (default 3). These episodes are seeded 30 hours overdue, so
+ * under the new default they are correctly NOT yet eligible - and six tests in this file, which are
+ * about queueing/consuming/cancelling a call rather than about the threshold, started failing.
+ * test/followcare-voice.test.mjs was updated for the new rule at the time; this server-side file was
+ * missed, and then sat unnoticed inside a red CI.
+ *
+ * Setting it explicitly is the fix AND the point: these tests should never have depended on whatever
+ * the default happened to be. The threshold itself is covered in followcare-voice.test.mjs. */
 test("settings: set → get round-trips and clamps the daily cap to 1", async () => {
-  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true, maxCallsPerDay: 9 }, ambulance: { enabled: true, phone: "918888888888", method: "sms", contactName: "ER desk" } }, "test");
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true, maxCallsPerDay: 9, noResponseDays: 2 }, ambulance: { enabled: true, phone: "918888888888", method: "sms", contactName: "ER desk" } }, "test");
   const s = await V.getHospitalSettings(ENV, "H1");
   assert.equal(s.voice.enabled, true);
   assert.equal(s.voice.maxCallsPerDay, 1);           // hard cap survives a hostile store
@@ -84,7 +110,7 @@ test("queueVoiceCall: writes a call, consumes the day, and blocks a second same-
   assert.equal(vc.status, "scheduled");
   assert.equal(vc.episodeId, "ep1");
   const ep2 = await getEpisode(ENV, "ep1");
-  assert.equal(ep2.lastVoiceDate, "2026-08-16");     // day consumed at attempt (a later no-answer still counts)
+  assert.equal(ep2.lastVoiceDate, VoiceLib.tzDateKey(NOW, s.voice.tz));   // day consumed at attempt (a later no-answer still counts)
   const q2 = await V.queueVoiceCall(ENV, ep2, s, NOW, {});   // second call, same day
   assert.equal(q2.ok, false);
   assert.equal(q2.error, "already_called_today");    // doctor cannot bypass
@@ -114,9 +140,16 @@ test("submitVoiceResult: a completed call is a real check-in (advances lastDayDo
   const ep = await getEpisode(ENV, "ep2");
   assert.equal(ep.lastDayDone, 1);                              // the voice call counted as day-1 check-in
   assert.ok(store.get("fc_assessments/ep2_1"));                 // scored assessment persisted
-  assert.equal(smsCalls.length, 1);                            // ambulance contact messaged
-  assert.equal(smsCalls[0].toE164, "918888888888");
-  assert.ok(smsCalls[0].body.includes("AMBULANCE REQUESTED"));
+  // Two messages go out and both are correct: the ambulance alert to the emergency contact, and a
+  // separate acknowledgement to the patient (added after this test was written). Counting messages
+  // made the test brittle and hid the real assertion, so identify them by recipient instead.
+  const toAmbulance = smsCalls.filter(c => c.toE164 === "918888888888");
+  assert.equal(toAmbulance.length, 1, "exactly one ambulance alert");
+  assert.ok(toAmbulance[0].body.includes("AMBULANCE REQUESTED"));
+  const toPatient = smsCalls.filter(c => c.toE164 !== "918888888888");
+  assert.ok(toPatient.length <= 1, "at most one patient acknowledgement");
+  assert.ok(!toPatient.some(c => c.body.includes("AMBULANCE REQUESTED")),
+    "the ambulance alert must never be sent to the patient");
   const vc = store.get("fc_voice_calls/call-ep2").fields;
   assert.equal(vc.status, "completed");
   assert.equal(vc.ambulanceRequested, true);
@@ -141,7 +174,7 @@ test("submitVoiceResult: a no-answer is recorded without running the engine", as
 
 test("runVoiceScheduler: enqueues eligible non-responders inside the window and flags GPU start", async () => {
   store.clear();
-  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true }, ambulance: { enabled: false } }, "test");
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true, noResponseDays: 2 }, ambulance: { enabled: false } }, "test");
   await seedEpisode("s1");                          // eligible (30h overdue, unanswered)
   await seedEpisode("s2", { lastDayDone: 1 });      // responded → not eligible
   const sum = await V.runVoiceScheduler(ENV, NOW);
@@ -154,7 +187,7 @@ test("runVoiceScheduler: enqueues eligible non-responders inside the window and 
 // ---- Phase 3: dialer queue + live classify + status ----
 test("voiceQueueForDialing: returns scheduled calls with the ordered script + decrypted phone", async () => {
   store.clear();
-  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true } }, "test");
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true, noResponseDays: 2 } }, "test");
   await seedEpisode("d1");
   const s = await V.getHospitalSettings(ENV, "H1");
   const q = await V.queueVoiceCall(ENV, await getEpisode(ENV, "d1"), s, NOW, {});
@@ -171,7 +204,7 @@ test("voiceQueueForDialing: returns scheduled calls with the ordered script + de
 
 test("voiceQueueForDialing: cancels a scheduled call whose patient has since responded (spec §4)", async () => {
   store.clear();
-  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true } }, "test");
+  await V.setHospitalSettings(ENV, "H1", { voice: { enabled: true, noResponseDays: 2 } }, "test");
   await seedEpisode("d2");
   const s = await V.getHospitalSettings(ENV, "H1");
   const q = await V.queueVoiceCall(ENV, await getEpisode(ENV, "d2"), s, NOW, {});
