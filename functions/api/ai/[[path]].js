@@ -438,6 +438,7 @@ function streamGeminiToSSE(upstream, onText, tStart, lim) {
     if (lim && typeof lim.preMs === "number") _tm.preMs = lim.preMs;
     if (lim && typeof lim.headMs === "number") _tm.headMs = lim.headMs;   // request entry -> explain branch
     if (lim && lim.hm) _tm.hm = lim.hm;
+    if (lim && lim.pm) _tm.pm = lim.pm;   // pre-Gemini sub-stages, so the remaining 400ms is attributable too
     if (reason) _tm.endedBy = reason;
     try { controller.enqueue(enc.encode("data: " + JSON.stringify(reason ? { done: true, stalled: true, _t: _tm } : { done: true, _t: _tm }) + "\n\n")); } catch (e) {}
     try { controller.close(); } catch (e) {}
@@ -1377,7 +1378,7 @@ export async function onRequest(context) {
          * refused may run one wasted Workers AI call. That is bounded and cheap: it writes nothing,
          * touches no PHI, and a refused request is the rare case. Never reordered the other way -
          * the gate's REFUSAL still happens before any answer is generated. */
-        const _gateP = checkQuota(env, request, hasDx ? "case" : "general");
+        const _gateP = checkQuota(env, request, hasDx ? "case" : "general", { waitUntil: context.waitUntil.bind(context) });
         const _rerankP = (pkg.retrieved && pkg.retrieved.length > 1 && !isTutor)
           ? rerankRetrieved(env, pkg.question, pkg.retrieved).catch(() => null)
           : null;
@@ -1398,6 +1399,7 @@ export async function onRequest(context) {
         ]);
         if (_gateTimer) clearTimeout(_gateTimer);
         if (gate._slow) _mark.gateSlow = true;
+        try { _mark.qms = gate._qms; } catch (e) {}
         if (!gate.ok) return json({ error: "quota", reason: gate.reason, needsPro: !!gate.needsPro, message: gate.message }, gate.needsPro ? 402 : 429);
         _at("gate");
         // Phase 2 (deep) — cross-encoder re-rank the retrieved evidence before building the prompt.
@@ -1490,7 +1492,7 @@ export async function onRequest(context) {
           const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
           try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
           _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm }));
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never

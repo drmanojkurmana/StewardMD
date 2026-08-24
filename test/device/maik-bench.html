@@ -71,6 +71,13 @@ var QUERIES = [
 var PristineXHR = (window.CapacitorWebXMLHttpRequest && window.CapacitorWebXMLHttpRequest.fullObject) || window.XMLHttpRequest;
 var patched = (window.XMLHttpRequest !== PristineXHR);
 var results = [];
+/* ROUNDS x 32 queries, paced. The earlier 32-query run showed 4 failures that turned out to be HTTP
+ * 429 rate-limiting from firing back-to-back, not transport faults — so the run is paced and the
+ * HTTP status is recorded, to measure streaming rather than the rate limiter. */
+var ROUNDS = 4, GAP_MS = 2500;
+var PLAN = [];
+for (var _r = 0; _r < ROUNDS; _r++) for (var _q = 0; _q < QUERIES.length; _q++) PLAN.push(QUERIES[_q]);
+function sleep(ms) { return new Promise(function (r) { setTimeout(r, ms); }); }
 var logEl = document.getElementById("log"), sumEl = document.getElementById("sum");
 
 function say(s, cls) {
@@ -125,7 +132,7 @@ function runXHR(cat, q) {
       var total = Date.now() - t0;
       var medGap = gaps.length ? gaps.slice().sort(function (a, b) { return a - b; })[Math.floor(gaps.length / 2)] : null;
       resolve({ cat: cat, q: q, firstProgress: tProg, ttfv: tFirst, total: total, deltas: deltas,
-                chars: acc.length, done: done, medGap: medGap, status: xhr.status });
+                chars: acc.length, done: done, medGap: medGap, status: xhr.status, rateLimited: xhr.status === 429 });
     };
     xhr.onerror = function () { resolve({ cat: cat, q: q, err: "xhr-error", total: Date.now() - t0 }); };
     xhr.send(body(q));
@@ -160,12 +167,13 @@ function pct(arr, p) {
 }
 
 function summarise() {
+  var rl = results.filter(function (r) { return r.rateLimited; }).length;
   var ok = results.filter(function (r) { return !r.err && r.deltas > 0; });
   var ttfv = ok.map(function (r) { return r.ttfv; }).filter(function (v) { return v != null; });
   var tot = ok.map(function (r) { return r.total; });
   var streamed = ok.filter(function (r) { return r.deltas > 1; }).length;
   var lines = [];
-  lines.push("n=" + results.length + "  streamed(>1 delta)=" + streamed + "/" + ok.length);
+  lines.push("n=" + results.length + "  streamed(>1 delta)=" + streamed + "/" + ok.length + "  rate429=" + rl + "  hardErr=" + results.filter(function (r) { return r.err && !r.rateLimited; }).length);
   lines.push("TTFV  p50=" + pct(ttfv, 0.5) + "ms  p95=" + pct(ttfv, 0.95) + "ms");
   lines.push("TOTAL p50=" + pct(tot, 0.5) + "ms  p95=" + pct(tot, 0.95) + "ms");
   var cats = {};
@@ -180,10 +188,11 @@ function summarise() {
   var ctl = await runPatchedFetch("what is the half life of amiodarone");
   say("CONTROL patched-fetch: streamable=" + ctl.streamable + " ttfv=" + ctl.ttfv + "ms total=" + ctl.total + "ms" + (ctl.err ? (" err=" + ctl.err) : ""),
       ctl.streamable ? "ok" : "bad");
-  for (var i = 0; i < QUERIES.length; i++) {
-    var r = await runXHR(QUERIES[i][0], QUERIES[i][1]);
+  for (var i = 0; i < PLAN.length; i++) {
+    if (i) await sleep(GAP_MS);            // pace: a clinician does not fire 100 questions a minute
+    var r = await runXHR(PLAN[i][0], PLAN[i][1]);
     results.push(r);
-    say((i + 1) + "/" + QUERIES.length + " [" + r.cat + "] ttfv=" + r.ttfv + "ms prog=" + r.firstProgress +
+    say((i + 1) + "/" + PLAN.length + " [" + r.cat + "] http=" + r.status + " ttfv=" + r.ttfv + "ms prog=" + r.firstProgress +
         "ms total=" + r.total + "ms deltas=" + r.deltas + " gap=" + r.medGap + "ms chars=" + r.chars +
         (r.err ? (" ERR " + r.err) : ""), (r.deltas > 1 ? "ok" : "bad"));
     summarise();
