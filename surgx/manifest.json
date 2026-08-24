@@ -1,7 +1,7 @@
 {
   "_comment": "SURGX catalog. Small on purpose: the app fetches this first (no-store, so it is never the stale copy), then only the unit the clinician actually opened. Modelled on clinix/manifest.json and atlas/modules.json, deliberately NOT on kardiox-content-pack.js (a 1.9 MB array parsed on every page load). Protocols marked kind:'engine' are NOT authored here - they are projections of the ws-surgery.js decision engine, which remains the single home of that clinical logic.",
   "schemaVersion": 1,
-  "contentVersion": "0.1.0-review-pending",
+  "contentVersion": "0.1.1-review-pending",
   "updated": "2026-08-24",
   "categories": [
     { "id": "trauma", "title": "Trauma" },

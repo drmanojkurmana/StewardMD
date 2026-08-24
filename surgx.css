@@ -42,6 +42,8 @@
   inset: 0;
   z-index: 1255;
   display: none;
+  /* see the .mc-overlay lift rule at the end of this file - SURGX outranks the
+     Calculators overlay, so a deep-linked calculator must be raised above it. */
   flex-direction: column;
   background: var(--sgx-bg);
   color: var(--sgx-ink);
@@ -469,3 +471,17 @@ body.dark #surgxRoot .sgx-tab.on, body.v3-dark #surgxRoot .sgx-tab.on {
 #surgxRoot button, #surgxRoot .sgx-chip, #surgxRoot .sgx-tab { min-height: 38px; }
 #surgxRoot .sgx-sec, #surgxRoot .sgx-row, #surgxRoot .sgx-opt, #surgxRoot .sgx-btn { min-height: 46px; }
 #surgxRoot :focus-visible { outline: 2px solid var(--sgx-steel); outline-offset: 2px; }
+
+/* ── deep-linked calculators must render ABOVE the SURGX overlay ─────────────
+   SURGX has no calculators of its own; a score chip deep-links into the
+   Calculators module (MEDCALC.open). But .mc-overlay is z-index:870 while the
+   SURGX overlay is 1255, so the calculator opened UNDERNEATH SURGX: the sheet
+   was really there and interactive, just invisible, which reads as "the
+   calculator links don't work" (user report, device-confirmed 2026-08-24).
+
+   Scoped to html.sgx-lock - the class surgx.js adds on open and removes on
+   close - so the lift applies only while SURGX is the host and reverts itself
+   the moment SURGX closes. No cleanup path to get wrong, and the calculator
+   keeps its normal stacking everywhere else in the app. 1300 stays far below
+   the prescription pad (16000), which must remain on top of everything. */
+html.sgx-lock .mc-overlay { z-index: 1300; }

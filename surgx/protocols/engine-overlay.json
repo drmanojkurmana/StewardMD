@@ -37,7 +37,7 @@
         { "text": "Blood cultures before antibiotics where taking them will not delay the first dose." },
         { "text": "Score severity to guide the level of post-operative care, not the decision to operate.", "calcs": ["qsofa", "sofa", "apache2"] }
       ],
-      "calcs": ["qsofa", "sofa", "news2", "apache2", "asa"]
+      "calcs": ["qsofa", "sofa", "news2", "apache2"]
     },
 
     "bowel_obstruction": {
@@ -55,7 +55,7 @@
         { "text": "Water-soluble contrast study in adhesive small-bowel obstruction is both prognostic and often therapeutic." },
         { "text": "Serial lactate if strangulation is a possibility. A rising lactate in this setting is a decision, not a data point." }
       ],
-      "calcs": ["fena", "kdigo_aki", "news2", "asa"]
+      "calcs": ["fena", "kdigo_aki", "news2"]
     },
 
     "cholecystitis": {
@@ -73,7 +73,7 @@
         { "text": "MRCP when the duct is suspected and the picture is not frank cholangitis.", "evidenceRef": "tg18" },
         { "text": "Grade severity formally: it changes whether this is an early cholecystectomy, a drainage, or an intensive-care admission.", "evidenceRef": "tg18" }
       ],
-      "calcs": ["qsofa", "news2", "asa", "rcri"]
+      "calcs": ["qsofa", "news2", "rcri"]
     },
 
     "cholangitis": {
@@ -139,7 +139,7 @@
         { "text": "CT when the lump is equivocal, obese habitus, or a Richter or obturator hernia is possible." },
         { "text": "Lactate, FBC, U&E and group and save if there is any suspicion of compromised bowel." }
       ],
-      "calcs": ["asa", "rcri", "caprini"]
+      "calcs": ["rcri", "caprini"]
     },
 
     "nec_sti": {
