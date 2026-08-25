@@ -520,9 +520,14 @@ async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
    * what the form actually does rather than a guessed endpoint. No PHI: only markup around the
    * buttons and form tags. */
   const dbgAuth = [];
-  if (String(dbg || '') === 'auth') {
+  if (dbg) {
     const hay = String(html);
-    ['uthoriz', 'uthoris', 'type="submit"', '<form', 'formaction', 'asp-action'].forEach(function (kw) {
+    // ?dbg=auth gives the button/form markup; ?dbg=<anything else> searches for that literal, which is
+    // how the Authorize button's handler (signOff1) gets traced to the URL it actually posts to.
+    const kws = String(dbg) === 'auth'
+      ? ['uthoriz', 'uthoris', 'type="submit"', '<form', 'formaction', 'asp-action']
+      : [String(dbg)];
+    kws.forEach(function (kw) {
       let from = 0, n = 0;
       while (n < 4) {
         const i = hay.toLowerCase().indexOf(kw.toLowerCase(), from);
