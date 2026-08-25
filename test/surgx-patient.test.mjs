@@ -100,6 +100,80 @@ test("a GHIS patient with a visit is the ONLY writable source", () => {
   assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
 });
 
+test("A VISIT IS NOT AN ASSESSMENT: no Initial Assessment => not writable", () => {
+  /* Found on a live chart 2026-08-25: a real inpatient with an open visit and an empty management
+   * plan. The server refused with "no_active_assessment ... doc_id is 0" - correctly, but only
+   * AFTER the note was finalised and sent. writability() must say it at link time instead. */
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "none" });
+  assert.equal(w.canWrite, false);
+  assert.match(w.reason, /Initial Assessment/i);
+  assert.match(w.reason, /GHIS/);
+});
+
+test("an assessment probe that FAILED must not block the surgeon", () => {
+  // "unknown" means the probe itself failed. The server's guard is the real gate; a flaky network
+  // must never tell a surgeon their patient is unwritable.
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "unknown" }).canWrite, true);
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "active" }).canWrite, true);
+  // absent (older notes, probe not run yet) behaves as before
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
+});
+
+test("assessmentStatus reads the SAME doc_id the server refuses on", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    // a real assessment
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: "44821" }] }) });
+    let r = await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" });
+    assert.equal(r.state, "active");
+    assert.equal(r.docId, "44821");
+
+    // doc_id 0 == the exact condition saveAssessment refuses on
+    for (const v of ["0", "", null]) {
+      global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: v }] }) });
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none", `doc_id ${JSON.stringify(v)} means no document`);
+    }
+
+    // field absent entirely
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "something_else", value: "x" }] }) });
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus degrades to 'unknown' rather than throwing", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    for (const f of [
+      () => Promise.reject(new Error("offline")),
+      () => Promise.resolve({ ok: false, status: 500, json: () => Promise.resolve({}) }),
+      () => Promise.resolve({ ok: true, json: () => Promise.reject(new Error("bad json")) })
+    ]) {
+      global.fetch = f;
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    }
+  } finally { delete global.GHIS; delete global.fetch; }
+
+  // signed out: no request at all, and no false "none"
+  const calls = [];
+  global.GHIS = { getToken: () => "" };
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    assert.equal(calls.length, 0);
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus never probes a non-GHIS patient", async () => {
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "manual", name: "R.K." })).state, "n/a");
+    assert.equal((await P.assessmentStatus({ source: "connect", patientId: "p1" })).state, "n/a");
+    assert.equal((await P.assessmentStatus(null)).state, "n/a");
+    assert.equal(calls.length, 0, "no chart may be read for a patient we cannot write to");
+  } finally { delete global.fetch; }
+});
+
 test("every non-writable source explains itself, and none of them can write", () => {
   const cases = [
     null,

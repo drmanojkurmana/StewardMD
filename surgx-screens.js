@@ -1402,6 +1402,14 @@
                 saveNote(true).then(function () {
                   toast(picked.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
                   render();
+                  /* Ask NOW whether this patient actually has an Initial Assessment to file into.
+                   * An open visit is not one, and without it the server refuses the write - which
+                   * would otherwise only surface after the note is finalised and sent. */
+                  PT().assessmentStatus(picked).then(function (a) {
+                    if (!state.note || state.note.id !== backTo || !state.note.patient) return;
+                    state.note.patient.assessment = a.state;
+                    saveNote(true).then(function () { render(); });
+                  });
                 });
               }, 260);
             });
