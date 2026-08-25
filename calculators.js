@@ -3612,6 +3612,159 @@
       return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
     } },
 
+  { id:"ccs_angina", cat:"Cardiology", icon:"", title:"CCS Angina Grading",
+    desc:"Canadian Cardiovascular Society grade of effort angina.",
+    inputs:[
+      { id:"g", label:"Limitation of ordinary activity", type:"select", opts:[
+        {v:"0",t:"No angina with ordinary activity; only strenuous, rapid or prolonged exertion"},
+        {v:"1",t:"Slight limitation: angina on rapid walking or stairs, uphill, after meals, in cold or wind, or under stress"},
+        {v:"2",t:"Walks slower than peers on the level, or must stop for breath at own pace"},
+        {v:"3",t:"Marked limitation: angina walking one or two blocks, or one flight of stairs"},
+        {v:"4",t:"Unable to do any physical activity without discomfort; angina may be present at rest"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i=["Grade 0. Ordinary activity is not limited.",
+             "Grade 1. Slight limitation of ordinary activity.",
+             "Grade 2. Moderate limitation; slower than peers on the level.",
+             "Grade 3. Marked limitation of ordinary physical activity.",
+             "Grade 4. Angina with any activity, and possibly at rest."][g];
+      return { v:g, u:"CCS grade", i:i+" A rising grade over weeks is unstable angina until proven otherwise, whatever the absolute grade. Ref: Canadian Cardiovascular Society." };
+    } },
+
+  { id:"mrc_power", cat:"Neurology", icon:"", title:"MRC Muscle Power Grading",
+    desc:"Medical Research Council 0 to 5 scale for a single muscle group.",
+    inputs:[
+      { id:"g", label:"Best contraction observed", type:"select", opts:[
+        {v:"0",t:"0 - No contraction"},
+        {v:"1",t:"1 - Flicker or trace of contraction"},
+        {v:"2",t:"2 - Active movement with gravity eliminated"},
+        {v:"3",t:"3 - Active movement against gravity"},
+        {v:"4",t:"4 - Active movement against gravity and resistance"},
+        {v:"5",t:"5 - Normal power"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g<=1 ? "Essentially no useful movement."
+            : g===2 ? "Moves only with gravity eliminated. The change from 2 to 3 is the functionally important step."
+            : g===3 ? "Antigravity movement: the threshold at which a limb becomes functionally useful."
+            : g===4 ? "Against resistance but less than normal. Grade 4 spans a wide range, so record 4-, 4 or 4+."
+            : "Normal power for that muscle, age and build.";
+      return { v:g, u:"MRC grade", i:i+" Grade each muscle GROUP separately and record both sides; a single global number hides the pattern that localises the lesion. Ref: MRC scale." };
+    } },
+
+  { id:"ninds_reflex", cat:"Neurology", icon:"", title:"NINDS Myotactic Reflex Scale",
+    desc:"Standardised 0 to 4 grading of a deep tendon reflex.",
+    inputs:[
+      { id:"g", label:"Reflex response", type:"select", opts:[
+        {v:"0",t:"0 - Absent"},
+        {v:"1",t:"1 - Small, less than normal; trace, or present only with reinforcement"},
+        {v:"2",t:"2 - Lower half of the normal range"},
+        {v:"3",t:"3 - Upper half of the normal range"},
+        {v:"4",t:"4 - Enhanced, more than normal; includes clonus"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g===0 ? "Absent. Confirm with reinforcement before recording it as absent."
+            : g===1 ? "Diminished, or present only on reinforcement."
+            : (g===2||g===3) ? "Within the normal range."
+            : "Brisk. Note clonus separately in words if present.";
+      return { v:g, u:"NINDS grade", i:i+" Grades 2 and 3 are both NORMAL, which is why this scale is preferred to plus signs. Asymmetry between sides matters more than the absolute grade. Ref: Hallett M, Neurology 1993;43:2723." };
+    } },
+
+  { id:"levine_murmur", cat:"Cardiology", icon:"", title:"Levine Grading (Systolic Murmur)",
+    desc:"Freeman and Levine 1 to 6 grading of a systolic murmur.",
+    inputs:[
+      { id:"g", label:"Loudness", type:"select", opts:[
+        {v:"1",t:"1 - So faint it is heard only with special effort, after some seconds"},
+        {v:"2",t:"2 - Faint, but immediately audible"},
+        {v:"3",t:"3 - Moderately loud"},
+        {v:"4",t:"4 - Very loud"},
+        {v:"5",t:"5 - Extremely loud; audible with one edge of the stethoscope off the chest"},
+        {v:"6",t:"6 - Audible with the stethoscope just off the chest wall"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var thrill = g>=4 ? "A thrill is present by definition from grade 4 upwards." : "No thrill at this grade; a palpable thrill would make it at least grade 4.";
+      return { v:g, u:"/6", i:"Grade "+g+" of 6. "+thrill+" Loudness does NOT track severity: a small ventricular septal defect can be deafening and severe aortic stenosis can be quiet when the stroke volume falls. Ref: Levine SA, JAMA 1933;101:436." };
+    } },
+
+  { id:"diastolic_murmur", cat:"Cardiology", icon:"", title:"Diastolic Murmur Grading",
+    desc:"Four point grading of a diastolic murmur.",
+    inputs:[
+      { id:"g", label:"Loudness", type:"select", opts:[
+        {v:"1",t:"1 - Very soft"},
+        {v:"2",t:"2 - Soft"},
+        {v:"3",t:"3 - Loud"},
+        {v:"4",t:"4 - Very loud"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      return { v:g, u:"/4", i:"Grade "+g+" of 4. A thrill is present at grade 4. Diastolic murmurs are graded out of FOUR, not six; quoting a diastolic murmur out of six is a common and avoidable error. Any diastolic murmur is pathological. Ref: standard four point scale." };
+    } },
+
+  { id:"pulse_grade", cat:"Cardiology", icon:"", title:"Peripheral Pulse Grading",
+    desc:"Zero to 4+ grading of a palpated pulse.",
+    inputs:[
+      { id:"g", label:"Pulse", type:"select", opts:[
+        {v:"0",t:"0 - Not palpable"},
+        {v:"1",t:"1+ - Faint"},
+        {v:"2",t:"2+ - Slightly diminished"},
+        {v:"3",t:"3+ - Normal"},
+        {v:"4",t:"4+ - Bounding"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g===0 ? "Absent. Confirm with Doppler before recording absence, and compare with the other side."
+            : g===1 ? "Faint. Suggests reduced flow; compare sides and check the rest of the arterial tree."
+            : g===2 ? "Slightly diminished."
+            : g===3 ? "Normal."
+            : "Bounding. Consider a hyperdynamic circulation: anaemia, fever, thyrotoxicosis, aortic regurgitation, or CO2 retention.";
+      return { v:g, u:"+", i:i+" Note that 3+ is NORMAL on this scale, not 2+. Always record both sides. Ref: standard 0 to 4+ scale." };
+    } },
+
+  { id:"ehra_af", cat:"Cardiology", icon:"", title:"EHRA Symptom Score (Atrial Fibrillation)",
+    desc:"European Heart Rhythm Association grading of AF-related symptoms.",
+    inputs:[
+      { id:"g", label:"Symptoms attributable to AF", type:"select", opts:[
+        {v:"1",t:"I - No symptoms"},
+        {v:"2",t:"IIa - Mild symptoms; normal daily activity not affected"},
+        {v:"3",t:"IIb - Moderate symptoms; daily activity not affected but symptoms trouble the patient"},
+        {v:"4",t:"III - Severe symptoms; normal daily activity affected"},
+        {v:"5",t:"IV - Disabling symptoms; normal daily activity discontinued"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var lbl=["","I","IIa","IIb","III","IV"][g];
+      var i = g<=2 ? "Symptoms do not limit activity; a rate control strategy is usually reasonable."
+            : g===3 ? "Symptoms trouble the patient without limiting activity. The IIa to IIb distinction exists precisely to capture this."
+            : "Activity is limited or has stopped, which strengthens the case for a rhythm control strategy.";
+      return { v:lbl, u:"EHRA", i:"EHRA "+lbl+". "+i+" This scores SYMPTOMS only. It says nothing about stroke risk, which is CHA2DS2-VASc, or bleeding risk, which is HAS-BLED. Ref: EHRA/ESC." };
+    } },
+
+  { id:"framingham_hf", cat:"Cardiology", icon:"", title:"Framingham Criteria (Heart Failure)",
+    desc:"Two major, or one major and two minor, make the clinical diagnosis.",
+    inputs:[
+      { id:"major", label:"MAJOR criteria present", type:"number", step:"1",
+        hint:"PND or orthopnoea, neck vein distension, crackles, cardiomegaly, acute pulmonary oedema, S3 gallop, raised JVP >16 cmH2O, hepatojugular reflux, weight loss >4.5 kg in 5 days on treatment" },
+      { id:"minor", label:"MINOR criteria present", type:"number", step:"1",
+        hint:"Bilateral ankle oedema, nocturnal cough, dyspnoea on ordinary exertion, hepatomegaly, pleural effusion, tachycardia >120/min, vital capacity reduced by a third" }
+    ],
+    compute:function(v){
+      if(!ok(v.major)||!ok(v.minor)||v.major<0||v.minor<0) return ERR;
+      var met = (v.major>=2) || (v.major>=1 && v.minor>=2);
+      var i = met ? "Criteria MET for the clinical diagnosis of heart failure (2 major, or 1 major plus 2 minor)."
+                  : "Criteria NOT met (needs 2 major, or 1 major plus 2 minor).";
+      return { v: met?"Met":"Not met", u:"", i:i+" A minor criterion counts only if it is not attributable to another condition. These are CLINICAL criteria and do not replace echocardiography or natriuretic peptides. Ref: Framingham Heart Study." };
+    } },
+
   { id:"alcohol_units", cat:"General", icon:"", title:"Alcohol Units (UK) and weekly intake",
     desc:"Units in a drink from volume and ABV, plus the weekly total.",
     inputs:[
