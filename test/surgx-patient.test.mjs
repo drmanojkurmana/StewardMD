@@ -8,6 +8,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -54,85 +55,123 @@ test("Connect tenants are listed alongside GHIS", async () => {
   } finally { delete global.GHIS; delete global.SMD_CONNECT; }
 });
 
-test("the GHIS ward roster normalises GHIS's own field names", () => {
-  const row = P.normaliseGhisRow({ patientId: "MR1", episodeId: "EP9", patientFirstName: " Asha Rao ", bedName: "12", gender: "F", age: 54 });
-  assert.equal(row.patientId, "MR1");
-  assert.equal(row.episodeId, "EP9");
-  assert.equal(row.name, "Asha Rao");
-  assert.match(row.detail, /54/);
-  assert.match(row.detail, /Bed 12/);
-  // A nameless row must still be selectable, never render "undefined".
-  const bare = P.normaliseGhisRow({ patientId: "MR2" });
-  assert.equal(bare.name, "(no name)");
-  assert.equal(bare.episodeId, "");
-  assert.ok(!JSON.stringify(P.normaliseGhisRow({})).includes("undefined"));
-  assert.ok(!JSON.stringify(P.normaliseGhisRow(null)).includes("undefined"));
-});
-
-test("a roster row feeds linkFromGhis directly", () => {
-  // The picker hands a normalised row straight to linkFromGhis - the shapes must line up.
-  const link = P.linkFromGhis(P.normaliseGhisRow({ patientId: "MR1", episodeId: "EP9", patientFirstName: "Asha" }));
+test("a GHIS selection from Ward Sync feeds linkFromGhis directly", () => {
+  // GHIS.pickPatient hands back {episodeId, patientId, name}; that shape must link as-is.
+  const link = P.linkFromGhis({ patientId: "MR1", episodeId: "EP9", name: "Asha Rao" });
   assert.equal(link.source, "ghis");
   assert.equal(link.patientId, "MR1");
   assert.equal(link.episodeId, "EP9");
   assert.equal(P.writability(link).canWrite, true);
 });
 
-test("a rostered patient with no open visit links but is NOT writable", () => {
-  const link = P.linkFromGhis(P.normaliseGhisRow({ patientId: "MR3", patientFirstName: "No Visit" }));
+test("a Ward Sync selection with no visit links but is NOT writable", () => {
+  const link = P.linkFromGhis({ patientId: "MR3", name: "No Visit" });
   assert.ok(link, "the patient must still be selectable");
   const w = P.writability(link);
   assert.equal(w.canWrite, false);
   assert.match(w.reason, /visit/i);
 });
 
-test("the roster refuses to call the API when signed out, and never guesses", async () => {
-  const calls = [];
-  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve([]) }); };
-  global.GHIS = { getToken: () => "" };
-  try {
-    const r = await P.ghisRoster();
-    assert.equal(r.ok, false);
-    assert.equal(r.error, "ghis_signed_out");
-    assert.equal(calls.length, 0, "no request may be made without a session");
-  } finally { delete global.GHIS; delete global.fetch; }
+test("Ward Sync owns the roster: SURGX ships no second patient list", () => {
+  /* The ward list is HUNDREDS of patients (705 on the test account) and Ward Sync already has the
+   * search, filters and sign-in handling. A second list inside SURGX would duplicate all of it and
+   * then drift. SURGX hands off via GHIS.pickPatient and gets one selection back. */
+  const src = readFileSync(join(ROOT, "surgx-screens.js"), "utf8");
+  assert.match(src, /GHIS\.pickPatient\(/, "SURGX must hand the choice to Ward Sync");
+  assert.ok(!/data-sgx="ptghispick"/.test(src), "no in-SURGX roster rows may remain");
+  assert.ok(!/ghisRoster/.test(src), "SURGX must not fetch its own roster");
 });
 
-test("the roster calls the SAME endpoint Ward Sync uses, with the GHIS bearer", async () => {
-  let seen = null;
-  global.fetch = (url, init) => { seen = { url, init }; return Promise.resolve({ ok: true, json: () => Promise.resolve([{ patientId: "MR1", episodeId: "EP1", patientFirstName: "A" }]) }); };
-  global.GHIS = { getToken: () => "tok" };
-  try {
-    const r = await P.ghisRoster();
-    assert.equal(seen.url, "/api/ghis/patients");
-    assert.equal(seen.init.headers.Authorization, "Bearer tok");
-    assert.equal(r.ok, true);
-    assert.equal(r.patients.length, 1);
-    assert.equal(r.patients[0].patientId, "MR1");
-  } finally { delete global.GHIS; delete global.fetch; }
-});
-
-test("the roster drops rows with no patient id and survives a bad payload", async () => {
-  global.GHIS = { getToken: () => "tok" };
-  try {
-    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve([{ patientId: "MR1" }, { patientFirstName: "ghost" }]) });
-    assert.equal((await P.ghisRoster()).patients.length, 1, "a row with no id is unusable");
-
-    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.reject(new Error("bad json")) });
-    const bad = await P.ghisRoster();
-    assert.equal(bad.ok, true);
-    assert.deepEqual(bad.patients, [], "unparseable body => empty list, not a crash");
-
-    global.fetch = () => Promise.resolve({ ok: false, status: 401, json: () => Promise.resolve({ error: "login_required" }) });
-    assert.equal((await P.ghisRoster()).error, "login_required");
-
-    global.fetch = () => Promise.reject(new Error("offline"));
-    assert.equal((await P.ghisRoster()).ok, false, "a network failure must resolve, not throw");
-  } finally { delete global.GHIS; delete global.fetch; }
+test("the pick handoff is ONE-SHOT and cancellable", () => {
+  /* A stale callback must never hijack a later, unrelated patient tap: pickPatient clears the
+   * callback BEFORE firing it, and cancelPick drops it if the doctor backs out. */
+  const src = readFileSync(join(ROOT, "ghis-ward.js"), "utf8");
+  const i = src.indexOf("if (GHIS._pickCb)");
+  assert.ok(i > 0, "onPatient must check for a pending pick");
+  const block = src.slice(i, i + 400);
+  assert.match(block, /GHIS\._pickCb = null;[\s\S]{0,200}cb\(/, "cleared BEFORE the callback runs");
+  assert.match(src, /cancelPick: function\(\) \{ GHIS\._pickCb = null; \}/);
+  // and it must be checked before the other modes, or the ward drawer eats the tap
+  assert.ok(src.indexOf("if (GHIS._pickCb)") < src.indexOf("if (GHIS._importMode)"),
+    "the pick handoff must be checked before import/lab");
 });
 
 test("a GHIS patient with a visit is the ONLY writable source", () => {
   assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
+});
+
+test("A VISIT IS NOT AN ASSESSMENT: no Initial Assessment => not writable", () => {
+  /* Found on a live chart 2026-08-25: a real inpatient with an open visit and an empty management
+   * plan. The server refused with "no_active_assessment ... doc_id is 0" - correctly, but only
+   * AFTER the note was finalised and sent. writability() must say it at link time instead. */
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "none" });
+  assert.equal(w.canWrite, false);
+  assert.match(w.reason, /Initial Assessment/i);
+  assert.match(w.reason, /GHIS/);
+});
+
+test("an assessment probe that FAILED must not block the surgeon", () => {
+  // "unknown" means the probe itself failed. The server's guard is the real gate; a flaky network
+  // must never tell a surgeon their patient is unwritable.
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "unknown" }).canWrite, true);
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "active" }).canWrite, true);
+  // absent (older notes, probe not run yet) behaves as before
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
+});
+
+test("assessmentStatus reads the SAME doc_id the server refuses on", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    // a real assessment
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: "44821" }] }) });
+    let r = await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" });
+    assert.equal(r.state, "active");
+    assert.equal(r.docId, "44821");
+
+    // doc_id 0 == the exact condition saveAssessment refuses on
+    for (const v of ["0", "", null]) {
+      global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: v }] }) });
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none", `doc_id ${JSON.stringify(v)} means no document`);
+    }
+
+    // field absent entirely
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "something_else", value: "x" }] }) });
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus degrades to 'unknown' rather than throwing", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    for (const f of [
+      () => Promise.reject(new Error("offline")),
+      () => Promise.resolve({ ok: false, status: 500, json: () => Promise.resolve({}) }),
+      () => Promise.resolve({ ok: true, json: () => Promise.reject(new Error("bad json")) })
+    ]) {
+      global.fetch = f;
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    }
+  } finally { delete global.GHIS; delete global.fetch; }
+
+  // signed out: no request at all, and no false "none"
+  const calls = [];
+  global.GHIS = { getToken: () => "" };
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    assert.equal(calls.length, 0);
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus never probes a non-GHIS patient", async () => {
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "manual", name: "R.K." })).state, "n/a");
+    assert.equal((await P.assessmentStatus({ source: "connect", patientId: "p1" })).state, "n/a");
+    assert.equal((await P.assessmentStatus(null)).state, "n/a");
+    assert.equal(calls.length, 0, "no chart may be read for a patient we cannot write to");
+  } finally { delete global.fetch; }
 });
 
 test("every non-writable source explains itself, and none of them can write", () => {

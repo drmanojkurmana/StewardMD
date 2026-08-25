@@ -678,12 +678,32 @@
             if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
             return;
           }
+          // One-shot "pick a patient for another module" handoff (see pickPatient below). Checked
+          // before the import and lab paths so the caller gets the tap instead of the ward drawer.
+          if (GHIS._pickCb) {
+            var cb = GHIS._pickCb; GHIS._pickCb = null;
+            try { var pk = document.getElementById('ghisPanel'); if (pk) pk.classList.remove('open'); } catch (e) {}
+            try { cb({ episodeId: episodeId, patientId: patientId, name: name }); } catch (e) {}
+            return;
+          }
           if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }
           else { GHIS.openLab(episodeId, patientId, name); }
         },
         // Entry point for Dx My Patient -> Import Patient. Opens the ward picker in
         // import mode; selecting a patient assembles their reports and hands them to DX.
         startImport: function() { GHIS._importMode = true; try { window.openGHIS(); } catch (e) {} },
+        /* Generic one-shot patient picker for another module (SURGX notes uses it).
+         * Opens THIS roster - which already has the search, filters and sign-in handling - and
+         * calls cb({episodeId, patientId, name}) once, on the next patient tap. Rebuilding a
+         * second ward list inside another module would duplicate all of that and drift from it.
+         * The callback is cleared before firing, so a stale handoff can never hijack a later tap;
+         * cancel() drops it if the doctor backs out instead. */
+        pickPatient: function(cb) {
+          GHIS._pickCb = (typeof cb === 'function') ? cb : null;
+          GHIS._importMode = false;
+          try { window.openGHIS(); } catch (e) {}
+        },
+        cancelPick: function() { GHIS._pickCb = null; },
         // Assemble a ward patient's labs + imaging + culture and load into the reasoning
         // workspace (display + suggest-with-confirm — DX never auto-ticks findings).
         importPatientReports: function(patientId, name) {

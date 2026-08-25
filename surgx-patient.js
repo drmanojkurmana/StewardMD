@@ -80,8 +80,51 @@
     return { source: "manual", tenantId: "", patientId: "", episodeId: "", name: r };
   }
 
+  /* Does this GHIS patient actually have an Initial Assessment to append to?
+   *
+   * A VISIT IS NOT AN ASSESSMENT. episodeId proves the patient has an open visit; it does NOT mean
+   * GHIS has created an Initial Assessment document for it. Without one the form comes back with
+   * Initial_Assessment_doc_id = 0 and the server refuses the write ("no_active_assessment ...
+   * refusing to write a blank/duplicate") - correctly, but only AFTER the surgeon has finalised the
+   * note and pressed send. Found on a live chart 2026-08-25: a real inpatient, open visit, empty
+   * management plan, doc_id 0.
+   *
+   * So we ask the same question the server asks, at LINK time, and record the answer on the link.
+   * Resolves - never rejects - and returns "unknown" when the probe itself fails: a flaky network
+   * must not tell a surgeon their patient is unwritable.
+   */
+  function assessmentStatus(link) {
+    if (!link || link.source !== GHIS_SOURCE) return Promise.resolve({ state: "n/a", docId: "" });
+    if (!link.patientId || !link.episodeId) return Promise.resolve({ state: "none", docId: "" });
+    var tok = "";
+    try { tok = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; } catch (e) {}
+    if (!tok || !G.fetch) return Promise.resolve({ state: "unknown", docId: "" });
+    return G.fetch("/api/ghis/assessment?patientId=" + encodeURIComponent(link.patientId) +
+                   "&episodeId=" + encodeURIComponent(link.episodeId),
+                   { headers: { "Authorization": "Bearer " + tok } })
+      .then(function (r) {
+        if (!r.ok) return { state: "unknown", docId: "" };
+        return r.json().then(function (j) {
+          var fields = (j && j.fields) || [];
+          var doc = "";
+          for (var i = 0; i < fields.length; i++) {
+            if (fields[i] && /Initial_Assessment_doc_id/.test(String(fields[i].name || ""))) {
+              doc = String(fields[i].value == null ? "" : fields[i].value);
+              break;
+            }
+          }
+          // Same test as saveAssessment's refusal: missing, empty or "0" means there is no document.
+          var has = !!(doc && doc !== "0");
+          return { state: has ? "active" : "none", docId: doc };
+        }, function () { return { state: "unknown", docId: "" }; });
+      })
+      .catch(function () { return { state: "unknown", docId: "" }; });
+  }
+
   /* Can this linked patient be written back to a hospital record, and if not, why not?
-   * One place decides, so the picker, the save button and the error text cannot disagree. */
+   * One place decides, so the picker, the save button and the error text cannot disagree.
+   * Stays PURE and synchronous: the assessment probe above runs once at link time and its answer
+   * rides on link.assessment, so this never has to do IO to give a straight answer. */
   function writability(link) {
     if (!link) return { canWrite: false, reason: "No patient linked to this note." };
     if (link.source === "manual") {
@@ -94,6 +137,13 @@
     if (link.source === GHIS_SOURCE) {
       if (!link.patientId) return { canWrite: false, reason: "This GHIS patient has no id." };
       if (!link.episodeId) return { canWrite: false, reason: "Open the patient from the ward list first (no visit selected)." };
+      // A visit is not an assessment: without an Initial Assessment document there is nowhere to
+      // file the note, and the server will refuse. Say so now, not after the note is finalised.
+      if (link.assessment === "none") {
+        return { canWrite: false, reason: "This patient has no Initial Assessment in GHIS yet, so there is nowhere to file the note. Start their assessment in GHIS first." };
+      }
+      // "unknown" (probe failed) stays writable: the server's own guard is the real gate, and a
+      // flaky network must not tell a surgeon their patient is unwritable.
       return { canWrite: true, reason: "" };
     }
     return { canWrite: false, reason: "Unknown patient source." };
@@ -137,45 +187,6 @@
     }).catch(function () { return out; });
   }
 
-  /* The GHIS ward roster, fetched INSIDE SURGX so a surgeon can pick a patient without leaving the
-   * note. /api/ghis/patients is the inpatient worklist - the same endpoint Ward Sync's own roster
-   * uses - so this adds no new server surface and inherits its session handling.
-   *
-   * Rows come back as GHIS's own shape ({patientId, episodeId, patientFirstName, bedName, gender,
-   * age}); normalise here so the picker and linkFromGhis() never learn GHIS's field names.
-   * A row with no episodeId is kept but will be reported unwritable by writability() - better to
-   * show the patient and explain than to hide them and leave the surgeon hunting. */
-  function ghisRoster() {
-    var tok = "";
-    try { tok = (G.GHIS && G.GHIS.getToken && G.GHIS.getToken()) || ""; } catch (e) {}
-    if (!tok) return Promise.resolve({ ok: false, patients: [], error: "ghis_signed_out" });
-    if (!G.fetch) return Promise.resolve({ ok: false, patients: [], error: "no_fetch" });
-    return G.fetch("/api/ghis/patients", { headers: { "Authorization": "Bearer " + tok } })
-      .then(function (r) {
-        return r.json().catch(function () { return null; }).then(function (j) {
-          if (!r.ok) return { ok: false, patients: [], error: (j && j.error) || ("http_" + r.status) };
-          var rows = Array.isArray(j) ? j : ((j && j.rows) || []);
-          return { ok: true, patients: rows.map(normaliseGhisRow).filter(function (p) { return !!p.patientId; }) };
-        });
-      })
-      .catch(function (e) { return { ok: false, patients: [], error: String((e && e.message) || e) }; });
-  }
-
-  function normaliseGhisRow(p) {
-    p = p || {};
-    var name = String(p.patientFirstName || p.name || "").trim();
-    var bits = [];
-    if (p.age) bits.push(String(p.age));
-    if (p.gender) bits.push(String(p.gender));
-    if (p.bedName) bits.push("Bed " + p.bedName);
-    return {
-      patientId: String(p.patientId || ""),
-      episodeId: String(p.episodeId || ""),
-      name: name || "(no name)",
-      detail: bits.join(" · ")
-    };
-  }
-
   function searchConnect(tenantId, query) {
     var c = connect();
     if (!c || !c.searchPatients) return Promise.resolve({ ok: false, patients: [], error: "connect_unavailable" });
@@ -188,8 +199,7 @@
   var API = {
     sources: sources,
     searchConnect: searchConnect,
-    ghisRoster: ghisRoster,
-    normaliseGhisRow: normaliseGhisRow,
+    assessmentStatus: assessmentStatus,
     ghisCurrent: ghisCurrent,
     ghisSession: ghisSession,
     // pure
