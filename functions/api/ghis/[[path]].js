@@ -473,7 +473,7 @@ export async function resolveEpisode(env, token, mr, episodeId, deps) {
   return '';
 }
 
-async function getAssessmentForm(env, token, patientId, episodeId) {
+async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   const mrId = String(patientId || '');
   // Activate the patient's visit first (same Searchnew as save) so the form loads the EXISTING assessment
@@ -513,7 +513,26 @@ async function getAssessmentForm(env, token, patientId, episodeId) {
   // blanked+overwritten on every Save.
   const all = extractAssessmentForm(html), fields = [];
   Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^assessment\./, ''), value: all[k] }); });
-  return { fields: fields, raw: htmlToText(html).slice(0, 8000) };
+  /* dbg=auth: return the RAW HTML around the form's action buttons. GHIS's Initial Assessment ends
+   * with "Update" and "Authorize" — Authorize is what promotes the note into Clinical notes — and the
+   * plain-text `raw` below is both tag-stripped and truncated at 8000 chars, so the buttons and their
+   * targets never survive. This exposes just those fragments so the authorise call can be wired to
+   * what the form actually does rather than a guessed endpoint. No PHI: only markup around the
+   * buttons and form tags. */
+  const dbgAuth = [];
+  if (String(dbg || '') === 'auth') {
+    const hay = String(html);
+    ['uthoriz', 'uthoris', 'type="submit"', '<form', 'formaction', 'asp-action'].forEach(function (kw) {
+      let from = 0, n = 0;
+      while (n < 4) {
+        const i = hay.toLowerCase().indexOf(kw.toLowerCase(), from);
+        if (i < 0) break;
+        dbgAuth.push(kw + ' @' + i + ' :: ' + hay.slice(Math.max(0, i - 220), i + 260).replace(/\s+/g, ' '));
+        from = i + kw.length; n++;
+      }
+    });
+  }
+  return { fields: fields, raw: htmlToText(html).slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
 }
 // READ a patient's OP visit "opcard" — the clinical note the GHIS History tab shows (the doctor's
 // footprint for that visit). Activates the visit first (Searchnew, same as the assessment read — without
@@ -915,7 +934,7 @@ export async function onRequest(context) {
     // ---- OPD write-back: safe search/read GETs (NOT gated) ----
     if (seg === 'inv-search')      { const r = await getInvSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'drug-search')     { const r = await getDrugSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
-    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || '', q.get('dbg') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'history')         { const r = await getOpdHistory(env, token, q.get('patientId') || '', q.get('visitId') || '', q.get('episodeId') || '', q.get('dbg') === '1'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
 
     // ---- OPD write-back: WRITES (P2/P3/P4). Gate FIRST: inert (501, nothing hits GHIS) until QUEUE_EMR_WRITE=1 ----
