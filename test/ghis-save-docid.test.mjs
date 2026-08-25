@@ -79,7 +79,7 @@ test("the doctor is told what to DO, not handed a machine code", () => {
  * Searchnew activation is SKIPPED in BOTH the prefill and the save — so the form is blank at both
  * ends and there is no id to fall back to. GHIS's own OPD list knows the visit for that MR.
  */
-import { resolveEpisode } from "../functions/api/ghis/[[path]].js";
+import { resolveEpisode, parseOpdHtml } from "../functions/api/ghis/[[path]].js";
 
 const OPD_ROWS = [
   { patientId: "MR26097363", visitId: "OP99881", visitType: "OPD" },
@@ -118,9 +118,8 @@ test("no MR means no lookup", async () => {
   assert.equal(await resolveEpisode({}, "t", "", "", { listOpd: listing(OPD_ROWS) }), "");
 });
 
-test("SERVER: both the prefill and the save resolve the episode the same way", () => {
-  const uses = (GHIS.match(/await resolveEpisode\(/g) || []).length;
-  assert.ok(uses >= 2, "the prefill must activate too — a blank prefill leaves no doc_id to fall back on");
+test("SERVER: the prefill activates too — a blank prefill leaves no doc_id to fall back on", () => {
+  assert.match(GHIS, /await resolveEpisode\(env, token, mrId, ''\)/, "the prefill retries with GHIS's own visit");
 });
 
 /* ---- Third attempt. The first two assumed things instead of checking them -----------------------
@@ -142,9 +141,38 @@ test("SAVE: the caller's episode is verified, not trusted", () => {
   assert.match(SAVE, /if \(!got\.live\)/, "a blank form triggers the retry — this is what a WRONG episode looks like");
 });
 
-test("SAVE: the retry uses GHIS's own visit, and only when it differs", () => {
-  assert.match(SAVE, /const looked = await resolveEpisode\(env, token, mr, ''\)/, "asks GHIS which visit this MR is on");
-  assert.match(SAVE, /looked !== String\(body\.episodeId \|\| ''\)/, "no pointless second attempt with the same value");
+/* Fourth round. The trace from the device said "[tried caller=blank]" — ONE attempt, no opdlist line.
+ * The retry had been skipped as pointless because the looked-up value EQUALLED the caller's. Cause:
+ * parseOpdHtml maps visitid|opno|visitno|episode all onto `visitId`, first-column-wins, so on a table
+ * listing "OP No" before "Episode" the OP number takes the slot and the episode is DISCARDED. Both
+ * "candidates" were therefore the same wrong number. The save now tries BOTH ids off the row. */
+test("SAVE: every identifier GHIS gives for the visit is tried, not one guess", () => {
+  assert.match(SAVE, /cands\.push\(\['epi', row\.episodeId\], \['visit', row\.visitId\]\)/, "episode AND visit number");
+  assert.match(SAVE, /for \(let i = 0; i < cands\.length && !got\.live; i\+\+\)/, "stops at the first that activates");
+  assert.match(SAVE, /v === String\(body\.episodeId \|\| ''\)\) continue/, "never repeats the one already tried");
+});
+
+test("PARSE: the episode column is captured, not swallowed by the OP number", () => {
+  const rows = parseOpdHtml(
+    '<table><tr><th>MR No</th><th>OP No</th><th>Episode</th><th>Patient Name</th><th>Visit Type</th></tr>' +
+    '<tr><td>MR26097363</td><td>OP99881</td><td>EPI55512</td><td>A Patient</td><td>OPD</td></tr></table>');
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].visitId, "OP99881", "visitId keeps its old meaning for every existing caller");
+  assert.equal(rows[0].episodeId, "EPI55512", "…and the episode is no longer thrown away");
+});
+
+test("PARSE: a table with only an Episode column still fills both", () => {
+  const rows = parseOpdHtml(
+    '<table><tr><th>MRN</th><th>Episode</th><th>Name</th><th>Visit Type</th></tr>' +
+    '<tr><td>MR1</td><td>EPI7</td><td>B Patient</td><td>OPD</td></tr></table>');
+  assert.equal(rows[0].visitId, "EPI7", "unchanged: episode still satisfies visitId when it is the only id");
+  assert.equal(rows[0].episodeId, "EPI7");
+});
+
+test("the lookup prefers the real episode over the OP number", () => {
+  const rows = [{ patientId: "MR1", visitId: "OP9", episodeId: "EPI7", visitType: "OPD" }];
+  return resolveEpisode({}, "t", "MR1", "", { listOpd: async () => rows })
+    .then((e) => assert.equal(e, "EPI7", "recordNo wants the episode; the OP number is what was failing"));
 });
 
 test("SAVE: a failure reports which attempts GHIS rejected", () => {

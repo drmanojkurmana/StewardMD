@@ -187,12 +187,22 @@ export function parseOpdHtml(html) {
     if (/mobile|contact|phone/.test(t)) return 'mobile';
     return ''; };
   const head = (html.match(/<th[\s\S]*?<\/th>/gi) || []).map(fieldFor);
+  /* The EPISODE, captured separately. `visitId` above matches opno|visitno|episode and the row builder
+   * is first-column-wins, so on a table listing "OP No" before "Episode" the OP number takes visitId
+   * and the episode is DISCARDED. Activation needs recordNo = "<MR>-<episode>" and will not accept an
+   * OP number, which is why Save to GHIS refused with the two values resolving identically. Additive:
+   * visitId keeps exactly its old meaning for every existing caller. */
+  const headEpi = (html.match(/<th[\s\S]*?<\/th>/gi) || []).map((l) =>
+    /episode/.test(strip(l).toLowerCase().replace(/[^a-z]/g, '')) ? 'episodeId' : '');
   const rows = [];
   // Parse EVERY <tr> with data cells (works with or without <tbody>). First column mapping to a field wins,
   // so a later "Doctor name" can't overwrite the patient name. Keep only real OPD rows (a patient id present).
   (html.match(/<tr[\s\S]*?<\/tr>/gi) || []).forEach((tr) => {
     const tds = tr.match(/<td[\s\S]*?<\/td>/gi); if (!tds || tds.length < 4) return;
-    const o = {}; tds.forEach((td, i) => { const f = head[i]; if (f && !o[f]) o[f] = strip(td); });
+    const o = {}; tds.forEach((td, i) => {
+      const f = head[i]; if (f && !o[f]) o[f] = strip(td);
+      if (headEpi[i] && !o.episodeId) o.episodeId = strip(td);
+    });
     if (o.patientId && /[A-Za-z0-9]/.test(o.patientId) && (o.patientName || o.visitId)) rows.push(o);
   });
   return rows;
@@ -456,7 +466,8 @@ export async function resolveEpisode(env, token, mr, episodeId, deps) {
     const want = String(mr).trim().toUpperCase();
     for (let i = 0; i < rows.length; i++) {
       const r = rows[i] || {};
-      if (String(r.patientId || '').trim().toUpperCase() === want) return String(r.visitId || '');
+      // Prefer the real episode column; fall back to visitId (which on many tables IS the episode).
+      if (String(r.patientId || '').trim().toUpperCase() === want) return String(r.episodeId || r.visitId || '');
     }
   } catch (e) { /* best-effort: fall through to the doc_id guard */ }
   return '';
@@ -673,15 +684,26 @@ export async function saveAssessment(env, token, body) {
   let got = await activateAndLoad(String(body.episodeId || ''), 'caller');
   if (got.unauth) return got;
   if (!got.live) {
-    // The caller's episode did not activate anything (absent, or a visit number rather than the
-    // episode). Ask GHIS which visit this MR is actually on today, and try that.
-    const looked = await resolveEpisode(env, token, mr, '');
-    if (looked && looked !== String(body.episodeId || '')) {
-      const retry = await activateAndLoad(looked, 'opdlist');
+    /* Try EVERY identifier GHIS gives us for this patient's visit, not one guess. The OPD row carries
+     * an episode AND an OP/visit number and only one of them is the episode recordNo wants — and which
+     * is which varies with the table. Trying both costs one extra request on a path that is already
+     * failing, and removes a whole round of guessing. */
+    const cands = [];
+    try {
+      const rows = await getOpdPatients(env, token, '', false, '');
+      if (Array.isArray(rows)) {
+        const want = mr.trim().toUpperCase();
+        const row = rows.filter((r) => String((r || {}).patientId || '').trim().toUpperCase() === want)[0];
+        if (row) { cands.push(['epi', row.episodeId], ['visit', row.visitId]); }
+        else attempts.push('opdlist:no-row(' + rows.length + ')');
+      } else attempts.push('opdlist:unavailable');
+    } catch (e) { attempts.push('opdlist:error'); }
+    for (let i = 0; i < cands.length && !got.live; i++) {
+      const v = String(cands[i][1] || '');
+      if (!v || v === String(body.episodeId || '')) continue;   // already tried, or nothing to try
+      const retry = await activateAndLoad(v, cands[i][0]);
       if (retry.unauth) return retry;
       if (retry.live) got = retry;
-    } else if (!looked) {
-      attempts.push('opdlist:no-row');
     }
   }
   const all = got.form || {};

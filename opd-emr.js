@@ -2595,6 +2595,65 @@
   var _fieldSession = null;
   function fmicNode(name) { var l = document.querySelectorAll("#smdOpdEmr .oe-fmic"); for (var i = 0; i < l.length; i++) { if (l[i].getAttribute("data-oe-act") === "fieldmic:" + name) return l[i]; } return null; }
   function setFmicUI(name, on) { var b = fmicNode(name); if (b) { b.classList.toggle("on", !!on); b.innerHTML = ms(on ? "stop" : "mic"); } }
+  /* Dictation feedback. A red button was the ONLY sign anything was happening, and on iOS the Whisper
+   * plugin is record-then-transcribe — there are no partials — so between tapping the mic and the text
+   * landing the app looked frozen with nothing to confirm it had heard a word. This is a persistent
+   * strip: what is happening, for how long, and how to stop. Fixed, so it stays visible wherever the
+   * form is scrolled. */
+  var _fmicTmr = null, _fmicT0 = 0;
+  // Same plain sentences the Rx pad uses — a doctor cannot act on "mic-denied".
+  var RX_VOICE_ERR_OE = {
+    "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
+    "no-voice-engine": "This device has no dictation engine available.",
+    "stt-unavailable": "On-device dictation is not available on this build.",
+    "clinical-unavailable": "Clinical dictation is not ready on this device.",
+    "transcription-failed": "Could not transcribe that - try again.",
+    "speech-error": "Dictation stopped - try again.",
+  };
+  // Human label for the field being dictated ("BP systolic"), so the strip says what it is filling.
+  function fieldLabel(name) {
+    try {
+      var el = document.getElementById("oefld-" + name) || document.querySelector('#smdOpdEmr [data-k="' + name + '"]');
+      var lab = el && el.closest ? el.closest(".oe-fld") : null;
+      var l = lab && lab.querySelector ? lab.querySelector("label") : null;
+      if (l && l.textContent) return l.textContent.replace(/\s*\*\s*$/, "").trim();
+    } catch (e) {}
+    return String(name || "this field").replace(/_/g, " ");
+  }
+  function fmicBar() {
+    var el = document.getElementById("oeFmicBar");
+    if (!el) {
+      var host = document.getElementById("smdOpdEmr"); if (!host) return null;
+      el = document.createElement("div"); el.id = "oeFmicBar"; el.className = "oe-fmicbar";
+      el.setAttribute("role", "status"); el.setAttribute("aria-live", "polite");
+      host.appendChild(el);
+    }
+    return el;
+  }
+  function fmicSay(txt, kind) {
+    var el = fmicBar(); if (!el) return;
+    if (!txt) { el.classList.remove("on"); el.textContent = ""; return; }
+    el.className = "oe-fmicbar on" + (kind ? " " + kind : "");
+    el.textContent = txt;
+  }
+  function fmicElapsed() {
+    if (!_fmicT0) return "";
+    var s = Math.max(0, Math.round((now() - _fmicT0) / 1000));
+    return " " + Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
+  }
+  function fmicListening(label) {
+    _fmicT0 = now();
+    if (_fmicTmr) clearInterval(_fmicTmr);
+    var tick = function () { fmicSay("Listening" + fmicElapsed() + " - " + label + ". Tap the mic again to stop.", "live"); };
+    tick(); _fmicTmr = setInterval(tick, 1000);
+  }
+  function fmicDone(txt, kind) {
+    if (_fmicTmr) { clearInterval(_fmicTmr); _fmicTmr = null; }
+    _fmicT0 = 0;
+    if (!txt) { fmicSay(""); return; }
+    fmicSay(txt, kind);
+    setTimeout(function () { var el = document.getElementById("oeFmicBar"); if (el && el.textContent === txt) fmicSay(""); }, 3200);
+  }
   function stopFieldMic() {
     if (_fieldSession) { try { _fieldSession.stop(); } catch (x) {} _fieldSession = null; }
     if (st.fieldMic) { setFmicUI(st.fieldMic, false); st.fieldMic = null; }
@@ -2608,19 +2667,25 @@
   // phone) and degrades gracefully via voice.js. Never touches any other column - deterministic placement.
   function toggleFieldMic(name) {
     if (st.voiceOn || st.voiceProcessing) { toast("Stop MaiK Scribe first to dictate a single field."); return; }
-    if (st.fieldMic === name) { stopFieldMic(); return; }
+    // Tapping the live mic = "I've finished speaking". On a record-then-transcribe engine the words
+    // arrive AFTER this, so say "Transcribing…" rather than going blank and looking broken.
+    if (st.fieldMic === name) { fmicDone("Transcribing what you said…", "busy"); stopFieldMic(); return; }
     stopFieldMic();                                        // only one field mic at a time
     if (!G.SMD_VOICE || !G.SMD_VOICE.listen) { toast("On-device voice not available on this build."); return; }
     st.fieldMic = name; setFmicUI(name, true);
+    fmicListening(fieldLabel(name));
+    var heard = false;
     function put(transcript, done) {
       var v = coerceFieldValue(name, transcript);
-      if (v != null) { st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.assessVals[name] = v; st.assessTouched[name] = true; putVoiceDom(name); }
-      if (done) stopFieldMic();
+      if (v != null) { heard = true; st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.assessVals[name] = v; st.assessTouched[name] = true; putVoiceDom(name); }
+      if (done) { fmicDone(v != null ? ("Filled " + fieldLabel(name) + ": " + String(v).slice(0, 40)) : "Nothing was heard - try again, closer to the mic.", v != null ? "ok" : "warn"); stopFieldMic(); }
     }
     _fieldSession = G.SMD_VOICE.listen({
       language: (st.voiceLang && st.voiceLang !== "auto") ? st.voiceLang : undefined,
       noCloud: true,
-      onPartial: function (t) { put(t, false); },
+      // Partials only exist on streaming engines. When they do, echo them so the doctor can see it is
+      // hearing them; when they don't (on-device Whisper), the timer above is the only honest signal.
+      onPartial: function (t) { put(t, false); if (t) fmicSay("Heard: " + String(t).slice(0, 60), "live"); },
       onFinal: function (t) {
         var s = String(t || "");
         // GHIS + MaiK must be English — if the dictation is Telugu/Hindi, translate the final before filling.
@@ -2630,10 +2695,10 @@
             .catch(function () { put(s, true); setVoiceStatus(""); });
         } else { put(s, true); }
       },
-      onError: function () { setVoiceStatus("On-device voice unavailable"); stopFieldMic(); },
-      onState: function () {}
+      onError: function (code) { fmicDone(RX_VOICE_ERR_OE[code] || "Dictation stopped - try again.", "warn"); setVoiceStatus(""); stopFieldMic(); },
+      onState: function (s) { if (s === "transcribing") fmicSay("Transcribing what you said…", "busy"); }
     });
-    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); toast("On-device voice could not start. Type the value instead."); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
+    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); fmicDone("On-device voice could not start. Type the value instead.", "warn"); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
   }
 
   // ---- finish the consult (shown after a GHIS save) --------------------------------------------

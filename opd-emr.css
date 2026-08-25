@@ -293,7 +293,7 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 @keyframes oeMaikAurora { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 @keyframes oeMaikBloom { 0%, 100% { box-shadow: 0 3px 26px -3px rgba(99, 102, 241, .62), 0 0 0 1px rgba(124, 58, 237, .1); } 50% { box-shadow: 0 3px 30px -2px rgba(236, 72, 153, .62), 0 0 0 1px rgba(236, 72, 153, .12); } }
 @keyframes oeMaikPulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on, #smdOpdEmr .oe-maik-cta, #smdOpdEmr .oe-maik-glow { animation: none; } #smdOpdEmr .oe-maik-cta { box-shadow: 0 4px 18px -8px rgba(124, 58, 237, .45); } }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on, #smdOpdEmr .oe-fmicbar.live, #smdOpdEmr .oe-maik-cta, #smdOpdEmr .oe-maik-glow { animation: none; } #smdOpdEmr .oe-maik-cta { box-shadow: 0 4px 18px -8px rgba(124, 58, 237, .45); } }
 
 /* per-field dictation mic — dictate into ONE column only (deterministic placement) */
 #smdOpdEmr .oe-inp-wrap { display: flex; align-items: stretch; gap: 6px; }
@@ -302,6 +302,16 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-fmic .material-symbols-outlined { font-size: 20px; }
 #smdOpdEmr .oe-fmic:hover { background: var(--sc-high); }
 #smdOpdEmr .oe-fmic.on { background: var(--error); color: var(--on-error); border-color: var(--error); animation: oe-fmic-pulse 1.2s ease-in-out infinite; }
+/* Dictation status strip — the only honest signal on a record-then-transcribe engine, which produces
+   no partials. Sits above the save bar so it survives scrolling. */
+#smdOpdEmr .oe-fmicbar { position: fixed; left: 12px; right: 12px; bottom: 86px; z-index: 40; display: none;
+  padding: 11px 14px; border-radius: 12px; font: 600 13px/1.45 var(--font, system-ui);
+  background: #0f172a; color: #f8fafc; box-shadow: 0 8px 28px -10px rgba(0,0,0,.55); text-align: center; }
+#smdOpdEmr .oe-fmicbar.on { display: block; }
+#smdOpdEmr .oe-fmicbar.live { background: var(--error); color: var(--on-error); animation: oe-fmic-pulse 1.6s ease-in-out infinite; }
+#smdOpdEmr .oe-fmicbar.busy { background: #1e293b; }
+#smdOpdEmr .oe-fmicbar.ok { background: #14532d; }
+#smdOpdEmr .oe-fmicbar.warn { background: #7c2d12; }
 @keyframes oe-fmic-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 45%, transparent); } 50% { box-shadow: 0 0 0 6px transparent; } }
 
 /* post-save consult actions: swipe to close, or red button to send to Emergency (ER) */
