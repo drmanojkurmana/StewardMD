@@ -5,6 +5,9 @@ const ok = (n, c) => { if (c) pass++; else { fail++; console.log("  ✗ FAIL:", 
 const near = (a, b, e) => Math.abs(a - b) <= e;
 const read = (f) => readFileSync(new URL("../" + f, import.meta.url), "utf8");
 
+// Library + learning state is persisted in localStorage (kxProgress), so stub it before load.
+globalThis.localStorage = (() => { let m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; }, clear: () => { m = {}; } }; })();
+
 // Load models then providers into a shared fake window (providers reads window.SMD_KARDIOX_MODELS).
 const win = {};
 new Function("window", "module", read("kardiox-models.js"))(win, undefined);
@@ -60,10 +63,9 @@ await prov.library.toggleBookmark("e2");
 ok("library bookmark toggle", (await prov.library.bookmarks()).indexOf("e2") >= 0);
 const daily1 = await prov.learning.dailyChallenge("2026-07-20"), daily2 = await prov.learning.dailyChallenge("2026-07-20");
 ok("daily challenge deterministic per day", daily1 && daily1.id === daily2.id);
-ok("progress shape", (await prov.learning.progress()).total === 100);
+ok("progress total is the REAL library size, not a frozen 100", (await prov.learning.progress()).total === 2);
 
 // ── REAL quiz/daily/streak tracking (localStorage-backed kxProgress) ──
-globalThis.localStorage = (() => { let m = {}; return { getItem: k => (k in m ? m[k] : null), setItem: (k, v) => { m[k] = String(v); }, removeItem: k => { delete m[k]; }, clear: () => { m = {}; } }; })();
 const QC = [
   { id: "l1", title: "Atrial fibrillation", category: "Rhythm", ecgImage: "/assets/kardiox-learn/a.jpg", quiz: { questions: [{ stem: "Q1?", options: ["a", "b"], correctIndex: 1, explanation: "e" }] } },
   { id: "l2", title: "STEMI", category: "Ischemia", ecgImage: "/assets/kardiox-learn/b.jpg", quiz: { questions: [{ stem: "Q2?", options: ["a", "b"], correctIndex: 0, explanation: "e" }] } },
@@ -83,7 +85,15 @@ ok("fresh progress is real zeros (not fake 12)", p0.streakDays === 0 && p0.maste
 const r1 = await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }, { category: "Ischemia", lessonId: "l2", correct: false }, { category: "Blocks", lessonId: "l3", correct: true }], isDaily: false });
 ok("recordQuiz returns score", r1.correct === 2 && r1.total === 3);
 const p1 = await L.progress();
-ok("practice quiz updates mastery (perfect-per-lesson), NOT streak", p1.mastered === 2 && p1.streakDays === 0);
+ok("one correct answer on ONE day does not master a lesson", p1.mastered === 0 && p1.streakDays === 0);
+
+// Second SEPARATE day is what masters it. Seed a prior day into the store, then answer again today.
+const PKEY = "smd_kardiox_progress_v1";
+const seeded = JSON.parse(localStorage.getItem(PKEY));
+seeded.masteredOn.l1["2020-01-01"] = 1;
+localStorage.setItem(PKEY, JSON.stringify(seeded));
+await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }], isDaily: false });
+ok("correct on a SECOND, separate day masters the lesson", (await L.progress()).mastered === 1);
 ok("weakest topic = lowest-accuracy after >=3 seen", (() => { return p1.weakestTopic == null || typeof p1.weakestTopic.accuracyPct === "number"; })());
 
 // record today's daily challenge -> streak becomes 1 + today marked in weeklyDone
@@ -100,6 +110,18 @@ ok("achievements computed from real stats", ach.length === 3 && ach[0].id === "f
 // idempotent: recording the daily again the same day keeps streak at 1 (dedup by date)
 await L.recordQuiz({ items: [{ category: "Rhythm", lessonId: "l1", correct: true }], isDaily: true });
 ok("same-day daily is idempotent for streak", (await L.progress()).streakDays === 1);
+
+// ── Content records are read-only bundle data; live state must be overlaid from the store ──
+// (kardiox-content-pack.js ships 1,041 lessons with status:"new"/masteryPct:0 baked in, so a
+// library that renders them straight shows every row as "new · 0%" forever.)
+const OV = P.mockProviders({ content: QC }).library;
+const rows = await OV.ecgs();
+ok("mastery earned in the store shows on the library row", rows.find(e => e.id === "l1").status === "mastered");
+ok("a lesson with no stored mastery is left alone", rows.find(e => e.id === "l3").status !== "mastered");
+await OV.toggleBookmark("l2");
+ok("bookmarks persist through the store, not the content record", (await OV.bookmarks()).indexOf("l2") >= 0);
+ok("the bookmark shows on the row", (await OV.ecgs()).find(e => e.id === "l2").bookmarked === true);
+ok("overlay does not mutate the shipped content record", QC.find(e => e.id === "l2").bookmarked !== true);
 
 console.log(`\nkardiox-providers: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

@@ -10,6 +10,10 @@
  * Two gates are applied HERE, at the seam, so no screen can forget them:
  *   - the review gate drops content that is not clinician-approved
  *   - the licence gate turns uncleared media into a caption plus a "visual pending" note
+ *
+ * Content JSON is fetched with the catalog's contentVersion appended as ?v=, because sw.js caches
+ * static assets keyed on the FULL URL including the query string. Without it a content update can
+ * never reach a device that has already cached the old file. Same fix as surgx-content.js.
  */
 (function () {
   "use strict";
@@ -49,26 +53,36 @@
 
   var cache = { catalog: null, packs: {}, diseases: {}, media: null };
 
-  function getJSON(path) {
+  function ver() { return (cache.catalog && cache.catalog.contentVersion) || ""; }
+
+  function getJSON(path, opts) {
     if (!G.fetch) return Promise.resolve(null);
-    return G.fetch(BASE + path)
+    var v = (opts && opts.noVersion) ? "" : ver();
+    var url = BASE + path + (v ? ((path.indexOf("?") >= 0 ? "&" : "?") + "v=" + encodeURIComponent(v)) : "");
+    var init = (opts && opts.fresh) ? { cache: "no-store" } : undefined;
+    return G.fetch(url, init)
       .then(function (r) { return (r && r.ok) ? r.json() : null; })
       .catch(function () { return null; });
   }
 
+  /* The manifest itself is fetched no-store: it is the thing that carries the version everything
+   * else is keyed on, so it must never be the stale one. It is a few KB. */
   function loadCatalog() {
     if (cache.catalog) return Promise.resolve(cache.catalog);
-    return getJSON("manifest.json").then(function (j) {
-      cache.catalog = j || { systems: [], skillPacks: [] };
+    return getJSON("manifest.json", { noVersion: true, fresh: true }).then(function (j) {
+      cache.catalog = j || { contentVersion: "", systems: [], skillPacks: [] };
       return cache.catalog;
     });
   }
 
+  // Catalog first, so the media registry is fetched with the same ?v= as everything else.
   function loadMedia() {
     if (cache.media) return Promise.resolve(cache.media);
-    return getJSON("media/manifest.json").then(function (j) {
-      cache.media = (j && j.media) || {};
-      return cache.media;
+    return loadCatalog().then(function () {
+      return getJSON("media/manifest.json").then(function (j) {
+        cache.media = (j && j.media) || {};
+        return cache.media;
+      });
     });
   }
 

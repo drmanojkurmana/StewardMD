@@ -1712,6 +1712,9 @@
           '<button type="button" class="kx-lib-chip" data-tier="core" aria-pressed="false">Core</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="emergency" aria-pressed="false">Emergency</button>' +
           '<button type="button" class="kx-lib-chip" data-tier="rare" aria-pressed="false">Rare</button>' +
+          // The 1,041-lesson textbook pack is all tier:"atlas"; without this chip it is reachable
+          // only under "All", and every tier filter silently hides it.
+          '<button type="button" class="kx-lib-chip" data-tier="atlas" aria-pressed="false">Atlas</button>' +
         '</div>' +
         '<div id="kxLibSections"></div>' +
       '</div>';
