@@ -723,7 +723,12 @@
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
   function postConsultPanel() {
-    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Close the consult, or send to Emergency.</div>" +
+    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Authorise to sign off and move the queue on." +
+      (oeDocId() ? ' <span class="oe-postsave-id">Record ' + esc(oeDocId()) + "</span>" : "") + "</div>" +
+      // Authorise = the doctor's explicit sign-off. It ends the consult, which advances the OPD queue
+      // (queue.js listens for smd:consult-end), so sign-off happens here rather than back in GHIS.
+      // The swipe below still works; it was the ONLY way to finish before, which is easy to miss.
+      '<button class="oe-btn primary" data-oe-act="consult-authorise">' + ms("verified") + "Authorise &amp; sign off</button>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn" data-oe-act="rx-share">' + ms("share") + "Share prescription (WhatsApp / print)</button>" +
       '<button class="oe-btn" data-oe-act="rx-refer">' + ms("forward") + "Refer patient</button>" +
@@ -1142,6 +1147,7 @@
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
     if (cmd === "rx-share") return shareRx();
     if (cmd === "rx-refer") return shareReferral();
@@ -2703,6 +2709,20 @@
 
   // ---- finish the consult (shown after a GHIS save) --------------------------------------------
   // The queue (queue.js) owns the session, so we bridge with a DOM event it listens for.
+  /* Authorise = the doctor signing the note off. It is deliberately explicit (a confirm), because it
+   * ends the consult and advances the OPD queue to the next patient — the same thing the swipe did,
+   * but discoverable, and named for what the doctor is actually doing.
+   *
+   * Scope, stated plainly: this signs off in StewardMD's queue. GHIS exposes no authorise/finalise
+   * action on the Initial Assessment that I could find — the live form has no such field and the OPD
+   * list carries no such row action — so this does NOT set an authorisation flag inside GHIS. The note
+   * itself is already saved there. If GHIS does have one, point me at where you authorise today and
+   * this button can call it too. */
+  function authoriseConsult() {
+    if (!confirmed("Authorise this assessment and finish the consult?\n\nThe note is already saved in " + emrLabel() + ". This signs it off and moves the queue to the next patient.")) return;
+    try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
+    endConsult();
+  }
   function endConsult() {
     try { document.dispatchEvent(new CustomEvent("smd:consult-end", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();

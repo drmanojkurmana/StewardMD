@@ -254,6 +254,28 @@ test("REFUSAL still stands when there is nothing to attach to", () => {
   assert.match(save, /no_active_assessment: form doc_id is 0/, "no patient/visit -> still refused, no orphan");
 });
 
+/* ---- Sign-off from the queue ------------------------------------------------------------------
+ * Before this, the ONLY way to finish a consult after saving was a swipe control in the post-save
+ * panel — easy to miss, and not named for what the doctor is doing. */
+test("AUTHORISE: an explicit sign-off button appears once the note is saved", () => {
+  const panel = OPD.slice(OPD.indexOf("function postConsultPanel"), OPD.indexOf("function oncoTab"));
+  assert.match(panel, /data-oe-act="consult-authorise"/, "the button exists in the post-save panel");
+  assert.match(panel, /Authorise &amp; sign off/);
+  assert.match(panel, /oe-swipe/, "the original swipe still works — this is additive");
+});
+
+test("AUTHORISE: it confirms, then ends the consult so the queue advances", () => {
+  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /confirmed\(/, "signing off is deliberate, never a stray tap");
+  assert.match(fn, /endConsult\(\)/, "…and ends the consult, which queue.js turns into /advance");
+  assert.match(OPD, /if \(cmd === "consult-authorise"\) return authoriseConsult\(\)/, "the action is routed");
+});
+
+test("AUTHORISE: queue.js still advances on the consult-end event", () => {
+  const Q = readFileSync(new URL("../queue.js", import.meta.url), "utf8");
+  assert.match(Q, /smd:consult-end[\s\S]{0,120}\/advance/, "the sign-off actually moves the queue on");
+});
+
 test("the doctor still gets a plain sentence, with the trace appended for diagnosis", () => {
   const h = helpers()({}, () => "GHIS");
   const msg = h.ghisSay("no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried caller=blank opdlist=blank]");
