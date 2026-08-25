@@ -270,6 +270,38 @@ test("AUTHORISE: an explicit sign-off button appears once the note is saved", ()
  *   success when the response body is "Successfully signed off"
  * I had previously reported GHIS has no authorise action — wrong: /assessment truncates the page to
  * 8000 chars of tag-stripped text and the buttons sit at the end of a 355KB page. */
+/* The intended model, in the owner's words: "Save to GHIS for only editable save, and once he saves
+ * it the Authorise button appears for locked permanent save." GHIS enforces the lock — after sign-off
+ * the form renders read-only — so the app must mirror it rather than let a doctor edit a record that
+ * can no longer be written. */
+test("LOCK: the server reports whether the record is already authorised", () => {
+  assert.match(GHIS, /Authori\[sz\]ed\\s\+on\\s\+/, "parsed from GHIS's own 'Authorized on … by …' stamp");
+  assert.match(GHIS, /authorized: authorized/, "and returned with the form");
+});
+
+test("LOCK: three states — draft saves, saved offers Authorise, authorised offers neither", () => {
+  const bar = OPD.slice(OPD.indexOf("var lock = st.assessAuthorized"), OPD.indexOf("return consultBar(st)"));
+  assert.match(bar, /if \(lock\)/, "authorised renders the locked bar");
+  assert.match(bar, /oe-savebar locked/);
+  assert.match(bar, /Authorised/, "…naming who signed it off and when");
+  assert.match(bar, /oeDocId\(\)\)\s*\n?\s*\? '<button class="oe-btn authorise"/,
+    "Authorise appears on a SAVED record — by doc id, so reopening an earlier note still offers it");
+});
+
+test("LOCK: saving an authorised record is refused with an explanation", () => {
+  const fn = OPD.slice(OPD.indexOf("function submitAssessment"), OPD.indexOf("function clearAssessment"));
+  assert.match(fn, /if \(st\.assessAuthorized\)/, "blocked before the request");
+  assert.match(fn, /authorised and locked/, "and the doctor is told why, not shown a failure");
+});
+
+test("LOCK: authorising is spelled out as irreversible, and re-authorising is blocked", () => {
+  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /already authorised/, "no double sign-off");
+  assert.match(fn, /Save the assessment first/, "and nothing to sign off before a save");
+  assert.match(fn, /LOCKED/, "the confirm says plainly that it cannot be edited afterwards");
+  assert.match(fn, /st\.assessAuthorized = \{/, "the lock is reflected immediately on success");
+});
+
 test("AUTHORISE: the server calls GHIS's real sign-off endpoint", () => {
   assert.match(GHIS, /signoffinitialAssessmentnew/, "the exact URL signOff1 posts to");
   const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));

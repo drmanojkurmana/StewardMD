@@ -537,7 +537,15 @@ async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
       }
     });
   }
-  return { fields: fields, raw: htmlToText(html).slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
+  /* Is this record already AUTHORISED (GHIS: signed off)? Once it is, GHIS locks the form — the fields
+   * render read-only — so the app must stop offering Save for it, or the doctor edits a record that
+   * cannot be written and hits a failure with no explanation. GHIS stamps the page with
+   * "Authorized on 25-Aug-2026/ 11:36 PM by Dr. CHANDU GOPALA KRISHNA"; matched on the tag-stripped
+   * text so markup changes don't break it. */
+  const flat = htmlToText(html);
+  const am = flat.match(/Authori[sz]ed\s+on\s+([^\n]{0,48}?)\s+by\s+([^\n]{0,64})/i);
+  const authorized = am ? { on: am[1].trim(), by: am[2].trim() } : null;
+  return { fields: fields, authorized: authorized, raw: flat.slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
 }
 // READ a patient's OP visit "opcard" — the clinical note the GHIS History tab shows (the doctor's
 // footprint for that visit). Activates the visit first (Searchnew, same as the assessment read — without
