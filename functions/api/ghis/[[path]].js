@@ -690,8 +690,10 @@ export async function saveAssessment(env, token, body) {
    * report everything observed — activation status, whether Searchnew set any cookie, the size of each
    * form returned, and which id produced a real doc_id. This is instrumentation I should have added
    * before the first fix, not after the fourth. */
+  let epiUsed = '';                                     // the visit we actually activated against
   const activateAndLoad = async (epi, how) => {
     if (mr && epi) {
+      epiUsed = epi;
       try {
         const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
         const sc = (a && a.setCookie) || [];
@@ -753,7 +755,23 @@ export async function saveAssessment(env, token, body) {
   }
   const formDoc = all['assessment.Initial_Assessment_doc_id'];
   const clientDoc = (body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '';
-  if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc) {
+  /* doc_id 0 means TWO different things, and conflating them is what broke Save to GHIS.
+   *
+   *   (a) "this visit has no assessment yet"  -> 0 is CORRECT. This file's own header says so:
+   *       "New = docId 0". Posting the full model with patient_id + episode_id set is exactly how
+   *       GHIS's own form creates the first assessment for a visit.
+   *   (b) "the visit never activated"         -> 0 is an ORPHAN risk, which is what the guard is for.
+   *
+   * The guard refused BOTH since 2026-08-13, so the first-ever save for any visit was blocked — the
+   * regression behind "it used to work". Told apart by whether we have a real patient AND visit to
+   * attach the new record to: with both, this is a create, not an orphan. With neither, still refused.
+   *
+   * Proven against the live server: the form comes back fully rendered (175KB, 113 fields) with
+   * patient_id "" and doc_id 0, and Searchnew returns 200 setting no cookies — i.e. GHIS is handing us
+   * a blank NEW assessment form, not a failed activation. */
+  const attachTo = String(body.episodeId || '') || epiUsed;
+  const canCreate = !!(mr && attachTo);
+  if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc && !canCreate) {
     // Carry WHAT WAS TRIED. "not activated" alone cost two round-trips of guessing; this says whether
     // the caller's episode was absent or simply rejected, and whether GHIS's own OPD list had a row.
     return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried ' + (attempts.join(' ') || 'none') + ']' };
@@ -780,8 +798,11 @@ export async function saveAssessment(env, token, body) {
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
   // form's real episode/doc id with a stale client value makes GHIS reject the post ("Unable to process").
   if (!all['assessment.Initial_Assessment_doc_id'] && body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
+  // A NEW assessment (doc_id 0) MUST carry the patient and visit, or GHIS files it under nothing —
+  // that is the orphan the guard above exists to prevent. `epiUsed` covers the case where the episode
+  // came from the OPD-list lookup rather than the caller.
   if (!all['assessment.patient_id'] && body.patientId) all['assessment.patient_id'] = String(body.patientId);
-  if (!all['assessment.episode_id'] && body.episodeId) all['assessment.episode_id'] = String(body.episodeId);
+  if (!all['assessment.episode_id'] && attachTo) all['assessment.episode_id'] = String(attachTo);
   if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
   const p = new URLSearchParams();
   Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
@@ -798,7 +819,10 @@ export async function saveAssessment(env, token, body) {
   // check let "Unable to process" pass as success, so the app falsely reported "saved").
   const rb = String(r.body || '');
   const ok = /successfully\s+(submitted|updated)/i.test(rb);
-  return r.unauth ? r : { ok: ok, status: r.status, resp: rb.slice(0, 200) };
+  // Say whether this CREATED the visit's first assessment or updated an existing one — the two were
+  // indistinguishable, which is how a blocked create looked like a broken save.
+  const mode = (formDoc && String(formDoc) !== '0') || clientDoc ? 'update' : 'create';
+  return r.unauth ? r : { ok: ok, mode: mode, status: r.status, resp: rb.slice(0, 200) + (ok ? '' : ' [tried ' + attempts.join(' ') + ']') };
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
