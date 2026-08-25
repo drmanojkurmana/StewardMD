@@ -684,21 +684,35 @@ export async function saveAssessment(env, token, body) {
    * patient page for it), the activation simply never carried into the read. getDemographics works only
    * because it keeps its own jar across calls. */
   let cookie = s.cookie;
+  /* SECOND UNTESTED HYPOTHESIS, checked in the same pass: GetInitialAssessmentnew/?id=<MR> may be the
+   * wrong key. GHIS keys much of this flow by VISIT, so a valid MR can legitimately return a fresh
+   * blank form. Rather than guess again and cost another deploy, try the MR and then the visit id, and
+   * report everything observed — activation status, whether Searchnew set any cookie, the size of each
+   * form returned, and which id produced a real doc_id. This is instrumentation I should have added
+   * before the first fix, not after the fourth. */
   const activateAndLoad = async (epi, how) => {
     if (mr && epi) {
       try {
         const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
-        if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
-      } catch (e) {}
+        const sc = (a && a.setCookie) || [];
+        if (sc.length) cookie = mergeCookies(cookie, sc);
+        attempts.push(how + ':act' + ((a && a.status) || '?') + ':ck' + sc.length);
+      } catch (e) { attempts.push(how + ':act-threw'); }
+    } else attempts.push(how + ':no-epi');
+    let last = null;
+    const ids = epi && epi !== mr ? [['mr', mr], ['visit', epi]] : [['mr', mr]];
+    for (let i = 0; i < ids.length; i++) {
+      const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(ids[i][1]), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
+      if (r.unauth) return { unauth: true };
+      if (r.setCookie && r.setCookie.length) cookie = mergeCookies(cookie, r.setCookie);   // antiforgery for the POST
+      const form = extractAssessmentForm(r.body || '');
+      const doc = form['assessment.Initial_Assessment_doc_id'];
+      const live = !(doc == null || String(doc) === '' || String(doc) === '0');
+      attempts.push('id:' + ids[i][0] + '=' + (live ? 'ok' : 'blank') + ':len' + Math.round(String(r.body || '').length / 100));
+      last = { form: form, live: live, gr: r };
+      if (live) return last;
     }
-    const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
-    if (r.unauth) return { unauth: true };
-    if (r.setCookie && r.setCookie.length) cookie = mergeCookies(cookie, r.setCookie);   // antiforgery for the POST
-    const form = extractAssessmentForm(r.body || '');
-    const doc = form['assessment.Initial_Assessment_doc_id'];
-    const live = !(doc == null || String(doc) === '' || String(doc) === '0');
-    attempts.push(how + (epi ? '' : ':none') + '=' + (live ? 'ok' : 'blank'));
-    return { form: form, live: live, gr: r };
+    return last || { form: {}, live: false, gr: null };
   };
 
   let got = await activateAndLoad(String(body.episodeId || ''), 'caller');
