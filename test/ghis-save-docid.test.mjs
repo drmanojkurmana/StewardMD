@@ -122,3 +122,46 @@ test("SERVER: both the prefill and the save resolve the episode the same way", (
   const uses = (GHIS.match(/await resolveEpisode\(/g) || []).length;
   assert.ok(uses >= 2, "the prefill must activate too — a blank prefill leaves no doc_id to fall back on");
 });
+
+/* ---- Third attempt. The first two assumed things instead of checking them -----------------------
+ * Fix 1 sent the client's doc_id — useless when the PREFILL was also blank.
+ * Fix 2 looked the episode up — but only when episodeId was EMPTY. The queue sets
+ *   episodeId = ghisEpisodeId || visitId
+ * so a ticket without the real episode substitutes a VISIT NUMBER, which recordNo does not accept.
+ * Activation silently no-ops, the form comes back blank, and because episodeId was non-empty the
+ * lookup never ran. Both fixes reasoned about the code instead of checking what GHIS returned.
+ *
+ * The save now ACTIVATES, READS THE DOC_ID BACK, and retries with GHIS's own visit if it is blank.
+ */
+const SAVE = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+const PREFILL = GHIS.slice(GHIS.indexOf("async function getAssessmentForm"), GHIS.indexOf("// READ a patient's OP visit"));
+
+test("SAVE: the caller's episode is verified, not trusted", () => {
+  assert.match(SAVE, /activateAndLoad/, "activation and the read-back are one step");
+  assert.match(SAVE, /const live = !\(doc == null/, "the doc_id actually returned decides success");
+  assert.match(SAVE, /if \(!got\.live\)/, "a blank form triggers the retry — this is what a WRONG episode looks like");
+});
+
+test("SAVE: the retry uses GHIS's own visit, and only when it differs", () => {
+  assert.match(SAVE, /const looked = await resolveEpisode\(env, token, mr, ''\)/, "asks GHIS which visit this MR is on");
+  assert.match(SAVE, /looked !== String\(body\.episodeId \|\| ''\)/, "no pointless second attempt with the same value");
+});
+
+test("SAVE: a failure reports which attempts GHIS rejected", () => {
+  assert.match(SAVE, /\[tried '/, "the refusal carries the attempt trace");
+  assert.match(SAVE, /attempts\.push\(how \+/, "each attempt records caller/opdlist and ok/blank");
+  assert.match(SAVE, /opdlist:no-row/, "…including 'this MR is not on today's list at all'");
+});
+
+test("PREFILL: it verifies too — a blank prefill leaves no doc_id to fall back on", () => {
+  assert.match(PREFILL, /if \(!got\.live\)/, "the prefill retries on a blank form as well");
+  assert.match(PREFILL, /await resolveEpisode\(env, token, mrId, ''\)/);
+});
+
+test("the doctor still gets a plain sentence, with the trace appended for diagnosis", () => {
+  const h = helpers()({}, () => "GHIS");
+  const msg = h.ghisSay("no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried caller=blank opdlist=blank]");
+  assert.match(msg, /Reopen the patient/, "still actionable");
+  assert.match(msg, /\[tried caller=blank opdlist=blank\]/, "and the trace survives to the screenshot");
+  assert.ok(!/doc_id/.test(msg), "without leaking the internals around it");
+});

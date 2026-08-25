@@ -1833,7 +1833,12 @@
   // GHIS speaks in machine codes. A doctor mid-consult needs to know what to DO about it.
   function ghisSay(resp) {
     var r = String(resp || "");
-    if (/no_active_assessment/.test(r)) return "This visit is not open in " + emrLabel() + " right now. Reopen the patient from the queue, then save again - nothing you typed is lost.";
+    if (/no_active_assessment/.test(r)) {
+      // Keep the [tried ...] trace on screen. It names which activation attempts GHIS rejected, which
+      // is the difference between diagnosing this in one report and guessing at it across three.
+      var tried = (r.match(/\[tried [^\]]*\]/) || [""])[0];
+      return "This visit is not open in " + emrLabel() + " right now. Reopen the patient from the queue, then save again - nothing you typed is lost. " + tried;
+    }
     if (/patient_mismatch/.test(r)) return emrLabel() + " returned a different patient's form, so the save was stopped. Reopen this patient and try again.";
     return r ? ("GHIS: " + r.slice(0, 90)) : "Could not complete the request. Please try again.";
   }

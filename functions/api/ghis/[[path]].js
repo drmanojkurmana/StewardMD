@@ -464,12 +464,29 @@ export async function resolveEpisode(env, token, mr, episodeId, deps) {
 
 async function getAssessmentForm(env, token, patientId, episodeId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  const epi = await resolveEpisode(env, token, String(patientId || ''), episodeId);
+  const mrId = String(patientId || '');
   // Activate the patient's visit first (same Searchnew as save) so the form loads the EXISTING assessment
-  // instead of a blank one — the doctor edits rather than retypes.
-  if (patientId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(patientId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
-  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (r.unauth) return r;
+  // instead of a blank one — the doctor edits rather than retypes. Same activate-then-CHECK as the save:
+  // the caller's episodeId may be a visit number rather than the episode, which activates nothing. A
+  // blank prefill is not cosmetic — it also leaves the client with no doc_id to send back on save.
+  const load = async (epi) => {
+    if (mrId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mrId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
+    const rr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mrId), null, { 'X-Requested-With': 'XMLHttpRequest' });
+    if (rr.unauth) return rr;
+    const doc = extractAssessmentForm(rr.body || '')['assessment.Initial_Assessment_doc_id'];
+    return { r: rr, live: !(doc == null || String(doc) === '' || String(doc) === '0') };
+  };
+  let got = await load(String(episodeId || ''));
+  if (got.unauth) return got;
+  if (!got.live) {
+    const looked = await resolveEpisode(env, token, mrId, '');
+    if (looked && looked !== String(episodeId || '')) {
+      const retry = await load(looked);
+      if (retry.unauth) return retry;
+      if (retry.live) got = retry;
+    }
+  }
+  const r = got.r;
   const html = r.body || '';
   // Key by the schema's field name: strip ONLY the assessment. prefix. The val.* fields KEEP their
   // prefix (that's their real GHIS name + how ASSESS_SCHEMA/buildAssessVals look them up). Stripping
@@ -630,22 +647,44 @@ export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
   const mr = String(body.patientId || '');
-  // Resolve the visit from today's OPD list when the caller has no episode — without it the
-  // activation below is skipped and the form returns doc_id 0, which the guard then refuses.
-  const epi = await resolveEpisode(env, token, mr, body.episodeId);
-  // ACTIVATE THE VISIT first: POST Searchnew with recordNo=<MR>-<episode>, the same call getDemographics
-  // uses to load a patient's visit. Without it the assessment form GET returns a BLANK form (doc_id 0, no
-  // episode), so GHIS "Successfully submitted" an orphan record under no visit instead of UPDATING the real
-  // one on the doctor's screen. (Session context is server-side, keyed by the shared session cookie.)
-  if (mr && epi) {
-    try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {}
+  /* Activate, then CHECK — do not assume. The caller's episodeId is not trustworthy: the queue sets
+   * `episodeId = ghisEpisodeId || visitId`, so a ticket missing the real episode substitutes a visit
+   * number that recordNo does not accept. Activation then silently no-ops and the form comes back
+   * blank, which is indistinguishable from "no episode at all" — and a resolveEpisode that only fires
+   * when the episode is EMPTY never gets a chance to correct it.
+   *
+   * So: try the caller's value, look at the doc_id we actually got back, and if it is blank try again
+   * with the visit GHIS itself reports for this MR. Each attempt is recorded so a failure can say what
+   * was tried instead of just "not activated". */
+  const attempts = [];
+  const activateAndLoad = async (epi, how) => {
+    if (mr && epi) {
+      try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {}
+    }
+    const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
+    if (r.unauth) return { unauth: true };
+    const form = extractAssessmentForm(r.body || '');
+    const doc = form['assessment.Initial_Assessment_doc_id'];
+    const live = !(doc == null || String(doc) === '' || String(doc) === '0');
+    attempts.push(how + (epi ? '' : ':none') + '=' + (live ? 'ok' : 'blank'));
+    return { form: form, live: live };
+  };
+
+  let got = await activateAndLoad(String(body.episodeId || ''), 'caller');
+  if (got.unauth) return got;
+  if (!got.live) {
+    // The caller's episode did not activate anything (absent, or a visit number rather than the
+    // episode). Ask GHIS which visit this MR is actually on today, and try that.
+    const looked = await resolveEpisode(env, token, mr, '');
+    if (looked && looked !== String(body.episodeId || '')) {
+      const retry = await activateAndLoad(looked, 'opdlist');
+      if (retry.unauth) return retry;
+      if (retry.live) got = retry;
+    } else if (!looked) {
+      attempts.push('opdlist:no-row');
+    }
   }
-  // Reserialize the CURRENT form so GHIS gets the complete model + its own pre-allocated doc_id/token,
-  // then overlay the doctor's edits — exactly what GHIS's own "Save" posts. Without this, a partial body
-  // with doc_id 0 returns 200 but is never persisted ("No records found").
-  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (gr.unauth) return gr;
-  const all = extractAssessmentForm(gr.body || '');
+  const all = got.form || {};
   // SAFETY (GHIS keys the assessment form by DOCTOR token, not patient — a stale/interleaved request
   // can return a DIFFERENT patient's form, and a failed visit-activation returns a blank doc_id 0 form):
   //  (a) if the form carries a patient_id, it MUST match the one we're saving — else abort (never overlay
@@ -659,7 +698,9 @@ export async function saveAssessment(env, token, body) {
   const formDoc = all['assessment.Initial_Assessment_doc_id'];
   const clientDoc = (body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '';
   if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc) {
-    return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate' };
+    // Carry WHAT WAS TRIED. "not activated" alone cost two round-trips of guessing; this says whether
+    // the caller's episode was absent or simply rejected, and whether GHIS's own OPD list had a row.
+    return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried ' + (attempts.join(' ') || 'none') + ']' };
   }
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
