@@ -1805,10 +1805,37 @@
         if (st !== forPatient) return;
         st.assessLoading = false; st.assessLoaded = true;
         if (!res.ok || res.d.error === "login_required") st.assessErr = "Connect Ward Sync (GHIS) first, then reopen this tab.";
-        else st.assessVals = buildAssessVals(res.d.fields || []);
+        else {
+          st.assessVals = buildAssessVals(res.d.fields || []);
+          // Keep the record id this form was loaded under. The save re-activates the visit server-side,
+          // but if that activation does not stick (session moved on, another tab, a slow GHIS) the form
+          // comes back blank with doc_id 0 and the server REFUSES rather than write an orphan — which is
+          // the "GHIS: no_active_assessment" the doctor sees. Sending the id we just read gives the
+          // server the fallback it already supports, so a good load makes the save survive that.
+          st.assessDocId = oeFieldValue(res.d.fields, "Initial_Assessment_doc_id");
+        }
         paint();
       })
       .catch(function () { if (st !== forPatient) return; st.assessLoading = false; st.assessLoaded = true; st.assessErr = "Could not load the assessment form."; paint(); });
+  }
+
+  // Read one field out of the GHIS assessment form payload by its (prefix-stripped) name.
+  function oeFieldValue(fields, name) {
+    for (var i = 0; i < (fields || []).length; i++) {
+      var f = fields[i];
+      if (f && f.name === name) return f.value == null ? "" : String(f.value);
+    }
+    return "";
+  }
+  // The doc id to send with a save: "" when we never loaded a real one (0 / blank), so the server's
+  // own guard still fires rather than us pushing a bogus id at it.
+  function oeDocId() { var d = String(st.assessDocId || ""); return (d && d !== "0") ? d : ""; }
+  // GHIS speaks in machine codes. A doctor mid-consult needs to know what to DO about it.
+  function ghisSay(resp) {
+    var r = String(resp || "");
+    if (/no_active_assessment/.test(r)) return "This visit is not open in " + emrLabel() + " right now. Reopen the patient from the queue, then save again - nothing you typed is lost.";
+    if (/patient_mismatch/.test(r)) return emrLabel() + " returned a different patient's form, so the save was stopped. Reopen this patient and try again.";
+    return r ? ("GHIS: " + r.slice(0, 90)) : "Could not complete the request. Please try again.";
   }
 
   // Every write: explicit confirm() -> POST. 501 / disabled -> clean "being set up" toast (never a raw error).
@@ -1820,7 +1847,7 @@
         var d = res.d;
         if (res.status === 501 || d.error === "emr_write_disabled" || d.error === "assessment_write_not_captured") { toast("This is being set up and is not live yet."); return; }
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
-        if (!res.ok || d.ok === false) { toast(d.resp ? ("GHIS: " + String(d.resp).slice(0, 90)) : "Could not complete the request. Please try again."); return; }
+        if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
         if (tl && tl.text) { addToTimeline(tl.kind, tl.text); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
@@ -1849,7 +1876,7 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
@@ -1863,7 +1890,7 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared" });
   }
 
@@ -2616,7 +2643,7 @@
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
     var cur = st.assessVals.refered_management_plan || "";
     if (!/emergency/i.test(cur)) { st.assessVals.refered_management_plan = (cur ? cur + " " : "") + "Refer to Emergency (ER)."; st.assessTouched.refered_management_plan = true; }
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
     // 2) escalate in the queue + end the consult (works even when the GHIS write is off)
     try { document.dispatchEvent(new CustomEvent("smd:consult-emergency", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();
