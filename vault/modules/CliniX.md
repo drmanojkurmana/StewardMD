@@ -66,9 +66,12 @@ stony dullness". That indirection is what makes the fourth disease cheap.
 Measured, not stylistic. `kardiox-content-pack.js` is 1.9 MB of JS parsed on every page load for
 every user; `management` is `string[]` in 100 records and `""` in 1,041; `class19` is null 1,041
 times; `difficulty` is `"intermediate"` for 100% of the pack; user state (`status`, `masteryPct`,
-`bookmarked`) is frozen INSIDE content records; `tier:"atlas"` matches none of its own UI filters so
-**all 1,041 pack lessons are unreachable through the chips**; and `assets/kardiox-learn/` holds 872
-images (177 MB) with no manifest and no licence record.
+`bookmarked`) was frozen INSIDE content records; and `assets/kardiox-learn/` holds 872 images
+(177 MB) with no manifest and no licence record.
+Two of those were fixed in [[KardiQ X]] on 2026-08-26 (state is now overlaid from `kxProgress` at the
+library seam, and the missing `atlas` tier chip was added — the lessons always did render under
+"All", only the tier chips hid them). The 1.9 MB eager parse and the unlicensed media stand, and
+they are the load-bearing half of this argument.
 CliniX follows **RadioAnatome** instead (`atlas/` + `atlas.js:308-323` + `atlas-pipeline/`): a small
 catalog, lazily fetched per-unit JSON, and a licence gate that refuses uncleared sources.
 

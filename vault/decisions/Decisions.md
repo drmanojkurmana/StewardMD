@@ -5,6 +5,47 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · Audit sweep: four open items, each fixed at the seam every caller routes through
+
+Cleared from [[Roadmap]] and the 2026-08-25 handoff. Nothing here needed new architecture; each was
+a fix in the one place all callers already pass through, plus a test that pins it.
+
+**1. The MaiK answer cache was UNREACHABLE, not broken.** `maik:ans:*` stayed empty with
+`MAIK_ANSWER_CACHE=1` even though the router cache proved the KV binding good — the cause the
+handoff left open. The block sat BELOW the live-stream early return in `/explain`, so with
+`MAIK_LIVE_STREAM` (or `?livestream=1`) on, the handler returned the SSE response before reaching
+either the read or the write. Lookup hoisted above that return; the stream path now writes from its
+completion callback via `context.waitUntil` — the same pattern the router cache uses, which is
+exactly why that one always worked. **Trade-off:** none; flag-off is still byte-identical.
+
+**2. CliniX content could never be updated on a cached device.** SURGX's `?v=<contentVersion>` fix
+applied verbatim. See [[CliniX]].
+
+**3. KardiQ Learn state was frozen inside the content records.** `status`/`masteryPct`/`bookmarked`
+are fields of the shipped, read-only bundle, so the 1,041-lesson pack rendered "new · 0%" forever
+and bookmarks died on reload. Real state already existed in `kxProgress` (localStorage); the library
+now overlays it in `mockLibrary`, the single seam every screen reads through, and never mutates the
+content record. Two more in that layer: the progress ring's denominator was a hardcoded `100`
+against a 1,141-lesson library, and one lucky answer marked a lesson mastered — mastery now needs
+repeated success on SEPARATE days, which is what this log already said it should be.
+**Drift corrected:** the 2026-08-22 entry below says the `tier:"atlas"` mismatch makes all 1,041
+pack lessons "unreachable through the UI". Verified against the code: they DO render under the
+default "All" chip and in search; what was true is that no tier chip could ever surface them. An
+Atlas chip is added. The rest of that entry's critique (1.9 MB parsed on every load, no media
+licence manifest) stands unchanged, and so does the decision to build CliniX like RadioAnatome.
+
+**4. `functions/_research.test.mjs` had been red since #596** made per-module caps opt-in; it still
+asserted the old always-on 2/day. It now asks for `MAIK_ENFORCE_CAPS` the way `test/ai-usage.test.mjs`
+already did, and pins the launch default too. **The cap behaviour was never wrong — only the test.**
+
+Also corrected: `native-bridge.js` claimed `X-SMD-App` was INERT because no server code read
+`env.APP_GATE_KEY`. Three handlers read it and the secret has been in prod since 2026-08-16, so the
+header is load-bearing — acting on that comment would have locked the native app out of `/api/*`.
+
+**Status:** 2495/2495 unit green + `test/run-clinix-ui.mjs` green in a real browser. Client `?v=`
+tokens bumped. NOT deployed — server changes go live on push to `main`; the client needs
+build-www → cap sync → rebuild.
+
 ## 2026-08-24 · SURGX projects the existing surgery engine rather than re-authoring it
 New module (see [[SURGX]]), built behind `smd_surgx` off tag `pre-surgx`. Three decisions worth keeping.
 
