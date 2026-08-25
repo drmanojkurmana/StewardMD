@@ -186,6 +186,40 @@ test("PREFILL: it verifies too — a blank prefill leaves no doc_id to fall back
   assert.match(PREFILL, /await resolveEpisode\(env, token, mrId, ''\)/);
 });
 
+/* ---- The actual bug, found by asking the live server instead of reading code -------------------
+ * Verified against GHIS with real credentials:
+ *   - today's OPD list has NO Episode column (keys: age, department, doctor, gender, patientId,
+ *     patientName, queueStatus, visitId, visitType) — so the "discarded episode column" theory was
+ *     wrong too;
+ *   - recordNo "MR…-OPMR…" IS correct: Searchnew returns the patient page for it, and for nothing else;
+ *   - activating via /demographics and then reading the assessment STILL gives doc_id 0.
+ * Therefore the active visit is carried in a COOKIE Searchnew hands back, and ghisReq — which always
+ * sends the stored login cookie and only RETURNS setCookie — was dropping it between the activation
+ * and the read.
+ */
+test("COOKIE: the activation's Set-Cookie is carried into the form read and the save", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /let cookie = s\.cookie/, "one cookie is threaded through the whole sequence");
+  assert.match(save, /Searchnew[\s\S]{0,400}?'Cookie': cookie/, "the activation sends it");
+  assert.match(save, /if \(a && a\.setCookie && a\.setCookie\.length\) cookie = mergeCookies\(cookie, a\.setCookie\)/,
+    "…and merges what Searchnew hands back — dropping this is the whole bug");
+  assert.match(save, /GetInitialAssessmentnew[\s\S]{0,200}?'Cookie': cookie/, "the form read carries it");
+  assert.match(save, /const postCookie = cookie/, "and so does the save POST");
+});
+
+test("COOKIE: the prefill threads it too, or it loads a blank form", () => {
+  const pre = GHIS.slice(GHIS.indexOf("async function getAssessmentForm"), GHIS.indexOf("// READ a patient's OP visit"));
+  assert.match(pre, /let cookie = s\.cookie/);
+  assert.match(pre, /cookie = mergeCookies\(cookie, a\.setCookie\)/);
+  assert.match(pre, /GetInitialAssessmentnew[\s\S]{0,200}?'Cookie': cookie/);
+});
+
+test("REGRESSION: no dangling `gr` after the activate-then-check refactor", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.ok(!/mergeCookies\(s\.cookie, gr\.setCookie\)/.test(save),
+    "`gr` was removed by that refactor — this line would throw on the first save that got past the guard");
+});
+
 test("the doctor still gets a plain sentence, with the trace appended for diagnosis", () => {
   const h = helpers()({}, () => "GHIS");
   const msg = h.ghisSay("no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried caller=blank opdlist=blank]");
