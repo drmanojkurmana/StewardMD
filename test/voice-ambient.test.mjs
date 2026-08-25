@@ -118,7 +118,31 @@ test("chunk-cycling: clinical-unavailable falls back to device STT without recur
   ctl && ctl.stop();
 });
 
-test("chunk-cycling: onRefine does not fire for a window that finished while paused", () => {
+/* CONTRACT CHANGE (Pause showed nothing scribed). This test used to assert that a window landing
+ * after pause never refines. That conflated two different windows: the one pause FLUSHES (audio the
+ * doctor spoke BEFORE tapping Pause — their draft) and any window that lands while already paused
+ * (audio they did not ask to draft). Delivering neither is what made Pause show nothing while Stop
+ * worked. The flushed window now delivers; nothing is captured after the pause. */
+test("chunk-cycling: the window flushed BY pause delivers, and nothing is captured after it", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop: () => {} };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({
+    speaker: "doctor", getState: () => ({}), refineEveryChunks: 1,
+    onRefine: (t) => refined.push(t), chunkMs: 5,
+  });
+  ctl.pause();                                             // doctor taps Pause mid-window
+  sessions[0].opts.onFinal("words spoken before the pause");
+  assert.deepEqual(refined, ["words spoken before the pause"], "the doctor's own words must reach the draft");
+  assert.equal(sessions.length, 1, "and no new window is armed, so no audio is captured after the pause");
+  ctl.stop();
+});
+
+test("chunk-cycling: legacy shape — a window finishing while paused does not re-arm", () => {
   const sessions = [];
   const refined = [];
   const AMB2 = freshAmbientWithMockVoice((opts) => {
@@ -134,8 +158,9 @@ test("chunk-cycling: onRefine does not fire for a window that finished while pau
     chunkMs: 5
   });
   ctl.pause();                                             // doctor taps Pause mid-window
-  sessions[0].opts.onFinal("some transcript");             // in-flight window still folds in
-  assert.equal(refined.length, 0, "refine must not fire for audio captured after pause");
+  sessions[0].opts.onFinal("some transcript");             // the flushed window lands (and drafts)
+  assert.equal(sessions.length, 1, "the mic stays down until resume — nothing is captured after pause");
+  assert.equal(refined.length, 1, "exactly one draft, from the flushed window, not one per later window");
   ctl.stop();
 });
 
@@ -177,7 +202,11 @@ test("stop(): flushing an in-flight, un-paused chunk returns true, and that flus
   assert.equal(refined[0], "complete transcript", "with the COMPLETE (post-flush) transcript, not a stale one");
 });
 
-test("stop(): stopping while paused returns false (the flush won't call onRefine, so a caller-side fallback is still needed)", () => {
+/* CONTRACT CHANGE: stopping while a pause-flush is STILL IN FLIGHT now reports true and drafts the
+ * complete transcript. Under the old contract it reported false and the flush refused to refine, so
+ * a doctor who tapped Pause then Stop got no note at all. Stopping when already fully paused (the
+ * flush has landed, nothing in flight) still reports false — covered by the next test. */
+test("stop(): stopping while a pause-flush is in flight still drafts the complete transcript", () => {
   const sessions = [];
   const refined = [];
   const AMB2 = freshAmbientWithMockVoice((opts) => {
@@ -188,9 +217,23 @@ test("stop(): stopping while paused returns false (the flush won't call onRefine
   const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
   ctl.pause();
   const willRefine = ctl.stop();
-  assert.equal(willRefine, false, "stop() reports no refine is coming from the flush while paused");
+  assert.equal(willRefine, true, "the in-flight flush will deliver, so the caller must not double-refine");
   sessions[0].opts.onFinal("complete transcript");
-  assert.equal(refined.length, 0, "confirmed: the paused flush does not call onRefine");
+  assert.deepEqual(refined, ["complete transcript"], "…and the note is drafted from the complete transcript");
+});
+
+test("stop(): stopping when the pause has already fully landed returns false (caller refines itself)", () => {
+  const sessions = [];
+  const refined = [];
+  const AMB2 = freshAmbientWithMockVoice((opts) => {
+    const s = { opts: opts, stop() { const cb = opts.onFinal; if (cb) cb("flushed on pause"); } };
+    sessions.push(s);
+    return s;
+  });
+  const ctl = AMB2.start({ speaker: "doctor", getState: () => ({}), refineEveryChunks: 1, onRefine: (t) => refined.push(t), chunkMs: 5 });
+  ctl.pause();                                   // this mock's stop() delivers, so the flush completes here
+  assert.deepEqual(refined, ["flushed on pause"]);
+  assert.equal(ctl.stop(), false, "nothing left in flight, so the caller must make its own refine call");
 });
 
 test("stop(): no in-flight chunk (no ASR host) returns false, so the caller knows to make its own refine call", () => {

@@ -35,3 +35,37 @@ test("empty -> null; drug-only still returns the drug", () => {
   assert.equal(P()("   "), null);
   assert.equal(P()("azithromycin").drug, "azithromycin");
 });
+
+// ---- Dictate button wiring -------------------------------------------------------------------
+// The bug: prescription.js passed `onEnd` to SMD_VOICE.listen as its reset callback, but voice.js
+// never calls onEnd — it does not exist. So after a successful dictation the mic stayed stuck "on",
+// the next tap only cancelled it, and Dictate looked dead with no message ever shown.
+const VOICE_SRC = readFileSync(new URL("../voice.js", import.meta.url), "utf8");
+const MIC = SRC.slice(SRC.indexOf('sheet.querySelector("#rxMic")'), SRC.indexOf("function bindDel"));
+
+test("voice.js genuinely has no onEnd callback (the premise of the bug)", () => {
+  assert.equal(/\bonEnd\b/.test(VOICE_SRC), false, "if voice.js ever gains onEnd, revisit prescription.js");
+});
+
+test("Dictate must not rely on the callback voice.js never fires", () => {
+  assert.equal(/onEnd\s*:/.test(SRC), false, "prescription.js must not pass onEnd to SMD_VOICE.listen");
+});
+
+test("Dictate resets the button on BOTH outcomes voice.js actually delivers", () => {
+  assert.match(MIC, /onFinal:[\s\S]*?idle\(\)/, "onFinal resets the mic");
+  assert.match(MIC, /onError:[\s\S]*?idle\(\)/, "onError resets the mic");
+  assert.match(MIC, /onPartial:/, "and gives live feedback while listening");
+});
+
+test("every failure a doctor can hit has a plain-language message", () => {
+  ["mic-denied", "no-voice-engine", "stt-unavailable", "clinical-unavailable", "transcription-failed"]
+    .forEach((code) => assert.ok(SRC.includes('"' + code + '"'), code + " is explained, not swallowed"));
+  // voice.js must not be able to emit a code the Rx pad has no sentence for.
+  [...VOICE_SRC.matchAll(/onError\(["']([a-z-]+)["']\)/g)].map((m) => m[1])
+    .forEach((c) => assert.ok(SRC.includes('"' + c + '"'), "unhandled voice error code: " + c));
+});
+
+test("a dictation that parses to no drug tells the doctor instead of doing nothing", () => {
+  assert.match(MIC, /Could not read a drug/, "silence used to be indistinguishable from a broken button");
+  assert.match(MIC, /Nothing was heard/);
+});

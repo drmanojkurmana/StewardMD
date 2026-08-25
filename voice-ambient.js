@@ -117,7 +117,12 @@
     opts = opts || {};
     var speaker = opts.speaker || "doctor";
     var getState = opts.getState || function () { return {}; };
-    var running = true, paused = false, sentChars = 0, tmr = null, lastTranscript = "";
+    // `pausing` = a pause has been requested and the in-flight window is being flushed, but `paused`
+    // must stay FALSE until that window lands. Everything that delivers a chunk (tick -> the on-screen
+    // transcript, and onRefine -> the note draft) is gated on !paused, so setting paused up front
+    // silently threw away whatever was said since the last chunk boundary: Stop worked, Pause showed
+    // nothing. See the pause() handler below.
+    var running = true, paused = false, pausing = false, sentChars = 0, tmr = null, lastTranscript = "";
     var THROTTLE = opts.throttleMs || 1200;
     var chunkMs = opts.chunkMs || 15000;
     var refineEveryChunks = opts.refineEveryChunks;
@@ -285,10 +290,14 @@
       if ((opts.language || "auto") === "auto") { var d = detectScript(chunkText); if (d) detectedLang = d; }
       chunkN++;
       fullTranscript = accumulate(fullTranscript, chunkText);
+      // A pause-flush is a FINAL window for delivery purposes: let it reach the screen and the note
+      // draft first, and only then let the pause take effect. Ordering is the whole fix.
+      var pauseFlush = pausing; if (pauseFlush) pausing = false;
       tick(fullTranscript, stopping);
-      if (onRefine && !paused && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: stopping })) {
+      if (onRefine && !paused && needsRefine({ chunkN: chunkN, refineEveryChunks: refineEveryChunks, final: stopping || pauseFlush })) {
         try { onRefine(fullTranscript); } catch (e) {}
       }
+      if (pauseFlush) paused = true;                     // now the mic stays down until resume()
       if (stopping) { running = false; return; }
       if (running && !paused) armChunk();
     }
@@ -314,14 +323,20 @@
     }
     return {
       stop: teardown,
+      // Returns true when an in-flight window is being flushed AND that flush will deliver it (same
+      // contract as stop/teardown), so the caller must NOT also refine with its own stale transcript.
       pause: function () {   // BUGFIX: actually stop the mic on pause (was recording up to a full chunk after)
-        paused = true;
         if (rearmTimer) { clearTimeout(rearmTimer); rearmTimer = null; }
         if (chunkTimer) { clearTimeout(chunkTimer); chunkTimer = null; }
         if (fbTimer) { clearTimeout(fbTimer); fbTimer = null; }
-        if (curSession && curSession.stop) { try { curSession.stop(); } catch (e) {} }
+        if (running && curSession && curSession.stop) {
+          pausing = true;                                // paused is set by onChunkFinal, after delivery
+          try { curSession.stop(); return true; } catch (e) { pausing = false; }
+        }
+        paused = true;                                   // nothing in flight — pause immediately
+        return false;
       },
-      resume: function () { paused = false; if (running && !stopping && !curSession) armChunk(); },
+      resume: function () { paused = false; pausing = false; if (running && !stopping && !curSession) armChunk(); },
       _tick: tick                                       // exposed for the controller test
     };
   }

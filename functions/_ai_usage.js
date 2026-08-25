@@ -37,6 +37,10 @@ export const AI_MODULES = {
 import { costCapOn, dailyCostCap, checkCostCap } from "./_credits.js";
 import { cfgFlag, warmBillingCfg } from "./_billingcfg.js";
 export function isAiModule(m) { return Object.prototype.hasOwnProperty.call(AI_MODULES, m); }
+// Are the per-module daily caps actually being ENFORCED right now? (See checkModuleQuota: at launch
+// they are not.) Exported so the doctor's dashboard can stop drawing "27 / 50" bars for a limit that
+// blocks nobody — showing a cap that isn't real is worse than showing no cap.
+export function capsEnforced(env) { return String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) === "1"; }
 export function aiModuleList() { return Object.keys(AI_MODULES).map((k) => ({ id: k, label: AI_MODULES[k].label, group: AI_MODULES[k].group, daily: AI_MODULES[k].daily })); }
 
 // Per-module daily limit, env-overridable via AI_LIMIT_<MODULE> (e.g. AI_LIMIT_ECG=20). 0 = unlimited.
@@ -79,9 +83,10 @@ export const MODEL_RATES = {
   "gemini-2.5-flash-lite":  { in: 0.003, out: 0.012 },
   "gemini-2.5-pro":         { in: 0.110, out: 0.880 },
   // Gemini 3.x — ESTIMATED (Google's exact rates "to follow"); tune via AI_RATE_* env before relying on cost.
-  "gemini-3.5-flash":       { in: 0.008, out: 0.028 },
-  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012 },
-  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012 },
+  // `est: true` is load-bearing: a doctor is never shown a price we are guessing at (see rateConfirmed).
+  "gemini-3.5-flash":       { in: 0.008, out: 0.028, est: true },
+  "gemini-3.5-flash-lite":  { in: 0.003, out: 0.012, est: true },
+  "gemini-3.1-flash-lite":  { in: 0.003, out: 0.012, est: true },
 };
 const DEFAULT_RATE = { in: 0.007, out: 0.025 };
 export function modelRate(env, model) {
@@ -89,6 +94,18 @@ export function modelRate(env, model) {
   const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
   const base = MODEL_RATES[model] || DEFAULT_RATE;
   return { in: Number.isFinite(rin) && rin >= 0 ? rin : base.in, out: Number.isFinite(rout) && rout >= 0 ? rout : base.out };
+}
+// Is this model's price a real published rate, or our own estimate? A doctor's rate card may only
+// ever show CONFIRMED numbers — quoting a guess to someone deciding what to spend is worse than
+// showing no rate card at all. An explicit AI_RATE_<MODEL>_IN/_OUT override counts as confirmed:
+// the owner has entered the published figure. Internal costing/metering still uses the estimate.
+export function rateConfirmed(env, model) {
+  const base = MODEL_RATES[model];
+  if (!base) return false;                       // unknown model → DEFAULT_RATE, i.e. a guess
+  if (!base.est) return true;
+  const up = "AI_RATE_" + String(model || "").toUpperCase().replace(/[^A-Z0-9]/g, "_");
+  const rin = env && Number(env[up + "_IN"]), rout = env && Number(env[up + "_OUT"]);
+  return Number.isFinite(rin) && rin >= 0 && Number.isFinite(rout) && rout >= 0;
 }
 // extras: { images, audioSeconds } — flat add-ons (image/audio cost, env-overridable).
 export function estCostInr(env, model, inTok, outTok, extras) {
@@ -207,7 +224,7 @@ export async function checkModuleQuota(env, store, moduleId, doctorId, now) {
   // this is the SECOND cap system (aiu:mod:*) that must ALSO be uniform, else web-signed-in accounts hit
   // maik:50 / research:2 while guests/natives (ip-keyed) don't. Usage is still RECORDED for dashboards
   // (recordAiUsage runs regardless). Flip env MAIK_ENFORCE_CAPS="1" to re-enable the caps.
-  if (String(cfgFlag(env, "MAIK_ENFORCE_CAPS")) !== "1") return { ok: true, unlimited: true, limit: 0 };
+  if (!capsEnforced(env)) return { ok: true, unlimited: true, limit: 0 };
   const limit = resolveLimit(env, moduleId, await limitOverrides(store));   // KV override > env > default
   if (limit === 0) return { ok: true, unlimited: true, limit: 0 };
   const day = _day(now), key = "aiu:mod:" + doctorId + ":" + moduleId + ":" + day;
@@ -242,6 +259,32 @@ export async function recordAiUsage(env, store, rec, now) {
     g.docs[rec.doctorId] = (g.docs[rec.doctorId] || 0) + 1; // active-doctor count + top-users
     await store.put(gKey, JSON.stringify(g), { expirationTtl: AIU_TTL });
   } catch (e) { /* fail-open — never break the AI response on metering */ }
+}
+
+// Add REAL per-user spend to the day's rollup — the record checkCostCap reads to decide the free
+// allowance, the wallet debits from, and the AI Usage dashboard shows.
+//
+// WHY THIS EXISTS: recordAiUsage runs PRE-call (from gateAndCount), before any token is generated, so
+// every record it writes carries estCostInr 0 and totalTokens 0. `cost` and `tok` on aiu:doc therefore
+// stayed permanently zero, while the real figures went only to _usage.js's separate maik:* rollup. The
+// consequence was silent and total: with AI_COST_CAP_ON=1 the cap could never trigger, so a purchased
+// wallet could never be debited, and the dashboard's token/spend tiles always read 0. _usage.js
+// recordUsage now calls this once per completed call, where the true token counts exist.
+//
+// ponytail: KV read-modify-write, so concurrent calls can lose an increment. It fails in the SAFE
+// direction (under-counted spend = the doctor gets more free AI than they paid for, never less), and
+// the ceiling is one day's drift. For exact per-user accounting, mirror it into D1 the way
+// _usage.js addDailyCostInr does for the project-wide figure.
+export async function addAiSpend(store, costKey, day, inr, tokens) {
+  if (!store || !costKey || !day) return;
+  if (!(inr > 0) && !(tokens > 0)) return;
+  try {
+    const k = "aiu:doc:" + costKey + ":" + day;
+    const d = (await store.get(k, "json")) || { req: 0, tok: 0, cost: 0, latSum: 0, fail: 0, byModule: {} };
+    d.cost = Math.round(((d.cost || 0) + (inr || 0)) * 10000) / 10000;
+    d.tok = (d.tok || 0) + Math.max(0, tokens | 0);
+    await store.put(k, JSON.stringify(d), { expirationTtl: AIU_TTL });
+  } catch (e) { /* fail-open — metering must never break a clinical answer */ }
 }
 
 // Doctor's own daily summary (for the in-app AI Usage page). Never another doctor's data.
