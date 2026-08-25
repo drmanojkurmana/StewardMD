@@ -318,6 +318,8 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-postsave { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; padding: 16px 14px; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 16px; box-shadow: 0 -3px 14px rgba(20, 32, 43, .08); }
 #smdOpdEmr .oe-postsave-msg { display: flex; align-items: center; gap: 8px; font: 600 13px var(--q-sans); color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-postsave-msg .material-symbols-outlined { font-size: 20px; }
+/* The GHIS record id, so the doctor can see the note really landed (and quote it if asked). */
+#smdOpdEmr .oe-postsave-id { font: 600 11px var(--q-sans); color: var(--on-surface-variant); opacity: .85; }
 #smdOpdEmr .oe-swipe { position: relative; height: 54px; border-radius: 27px; background: var(--sc-high, #e7eef0); overflow: hidden; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
 #smdOpdEmr .oe-swipe-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: color-mix(in srgb, var(--primary) 22%, transparent); }
 #smdOpdEmr .oe-swipe-txt { position: relative; font: 700 14px var(--q-sans); color: var(--secondary); pointer-events: none; }
