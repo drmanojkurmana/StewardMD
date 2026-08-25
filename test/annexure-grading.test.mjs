@@ -123,9 +123,13 @@ test("CCS angina is I to IV with NO class 0", () => {
     ["I", "II", "III", "IV"],
     "CCS classes are I to IV in Roman numerals");
   // There must be no class 0, and asking for one must not silently produce a result.
-  const zero = run("ccs_angina", { g: "0" });
-  assert.ok(!zero || zero.value === undefined || zero.value === "" || zero.raw?.err,
-    "there is no CCS class 0");
+  // Must be a real refusal, not an empty-valued result: the device showed g:"0" returning
+  // {value:""} which reads as "computed successfully" to any caller checking for undefined.
+  for (const bad of ["0", "5", "-1"]) {
+    const r = run("ccs_angina", { g: bad });
+    assert.ok(!r || r.raw?.err || r.value === undefined,
+      `ccs_angina must REFUSE class ${bad}, got ${JSON.stringify(r)}`);
+  }
   assert.match(run("ccs_angina", { g: "2" }).interpretation, /NO CLASS 0/i);
   assert.match(run("ccs_angina", { g: "2" }).interpretation, /unstable/i);
   assert.match(run("ccs_angina", { g: "4" }).interpretation, /at rest/i);
