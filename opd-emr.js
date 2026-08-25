@@ -1870,7 +1870,7 @@
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
   var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
-  function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
+  function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
   // Live transcript into the Voice Consult box (updates the DOM without a full repaint; keeps it scrolled).
   function setTranscript(t) {
@@ -2314,13 +2314,20 @@
   // main double-call-on-Stop fix is in stopVoice(), which no longer races its own stale call
   // against the teardown flush's onRefine).
   var _lastRefinedTranscript = "";
+  // True between a doctor-initiated Pause/Stop and the moment the note is drafted. Every failure path
+  // in doRefine is SILENT by design during background ticks (a mid-consult hiccup must not nag), but
+  // when the doctor has explicitly finished, silence is indistinguishable from "MaiK Scribe is broken":
+  // the finishing animation ends and nothing appears. While this is set, failures say what happened.
+  var _finishPending = false;
+  function refineFail(msg) { if (_finishPending) { try { toast(msg); } catch (e) {} } finishProcessing(); }
   function doRefine(transcript) {
-    if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) { finishProcessing(); return; }
-    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine
+    if (!transcript) { refineFail("Nothing was transcribed - check the microphone and try again."); return; }
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { refineFail("Note drafting is unavailable on this build."); return; }
+    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
-      if (!r || r.error) return;
+      if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
@@ -2356,7 +2363,11 @@
         // doctor is mid-edit in the notes textarea (a late refine resolving after Stop would steal focus).
         if (added) { var ed = null; try { ed = document.getElementById("oeNotesEdit"); } catch (e) {} if (!ed || document.activeElement !== ed) paint(); }
       }
-    }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
+    }).catch(function () {
+      // Was silently swallowed: a dropped connection mid-consult looked exactly like a working Stop
+      // that produced nothing. The transcript is never lost, so say so and let the doctor retry.
+      if (_finishPending) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e) {} }
+    }).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
@@ -2390,6 +2401,7 @@
     try { _amb.pause(); } catch (x) {}
     st.voicePaused = true;
     st.voiceProcessing = true;                              // render checks processing first -> the finishing animation
+    _finishPending = true;                                  // doctor-initiated finish: failures must speak up
     if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
     _procTmr = setTimeout(finishProcessing, 15000);         // safety: never hang the panel
     paint();
@@ -2407,11 +2419,15 @@
     // Show a "Finishing…" state while the last chunk transcribes + notes draft (finishProcessing clears it).
     var willProcess = flushing || !!_lastFullTranscript;
     st.voiceProcessing = willProcess;
+    _finishPending = willProcess;                           // covers BOTH paths: our own doRefine below
+                                                            // and the flush's onRefine, which lands later.
     if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
     if (willProcess) _procTmr = setTimeout(finishProcessing, 15000);   // safety: never hang the panel
     if (!flushing) doRefine(_lastFullTranscript);           // fallback end-of-consult refine over the whole transcript
     paint();
-    if (!willProcess) finishProcessing();
+    // Stopped with no audio transcribed at all: previously the panel just returned to idle, which is
+    // exactly the "I pressed Stop and nothing showed up" report. Say it plainly.
+    if (!willProcess) { try { toast("Nothing was captured - check the microphone and try again."); } catch (e) {} finishProcessing(); }
   }
 
   // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
