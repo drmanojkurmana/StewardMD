@@ -3522,6 +3522,548 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.cvs.palpitations": {
+      "id": "skill.hx.cvs.palpitations",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Palpitations",
+      "oneLine": "Fast or slow, regular or irregular, and what the patient felt at the start and the end",
+      "why": "Palpitation is an awareness of the heartbeat, and the arrhythmia has usually gone by the time you see the patient. The history is often the only recording you will ever get, so it has to be taken as if you were reading a rhythm strip.",
+      "asks": [
+        {
+          "text": "Tap out on the table what your heart was doing. Ask them to actually do it."
+        },
+        {
+          "text": "Was it fast or slow, and was it regular or irregular?"
+        },
+        {
+          "text": "Did it start suddenly, like a switch, or build up gradually?"
+        },
+        {
+          "text": "How did it stop: suddenly, or did it fade away?"
+        },
+        {
+          "text": "How long did it last: seconds, minutes, or hours?"
+        },
+        {
+          "text": "What were you doing when it started? Standing up quickly, exertion, or at rest?"
+        },
+        {
+          "text": "Did you pass a lot of urine after the attack settled?"
+        },
+        {
+          "text": "Any blackout, chest pain, breathlessness or severe fatigue with it?"
+        },
+        {
+          "text": "Coffee, alcohol, tobacco, inhalers, thyroid symptoms, or new medicines?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Tapping it out is worth more than any adjective",
+          "body": "Ask the patient to tap the rhythm. A regular fast tapping, abrupt at both ends, is a paroxysmal supraventricular tachycardia. An irregularly irregular tapping is atrial fibrillation. A single thump followed by a pause is an ectopic beat and its compensatory pause, which is the commonest and most benign of all.",
+          "table": {
+            "cols": [
+              "What they describe",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Sudden on, sudden off, fast and regular",
+                "Paroxysmal supraventricular tachycardia"
+              ],
+              [
+                "Irregularly irregular, no pattern",
+                "Atrial fibrillation"
+              ],
+              [
+                "A skipped beat, then a thump",
+                "Ectopics with a compensatory pause"
+              ],
+              [
+                "Gradual onset and gradual offset, with anxiety",
+                "Sinus tachycardia"
+              ],
+              [
+                "Slow, with blackouts",
+                "Complete heart block"
+              ]
+            ]
+          },
+          "note": "Onset and offset are the most discriminating parts of the history. A switch-like start and stop means a re-entrant circuit."
+        },
+        {
+          "heading": "Post-palpitation diuresis",
+          "body": "A patient who passes a large volume of urine once the palpitation settles has given you a clue worth having. Atrial stretch during the tachycardia drives natriuretic peptide secretion, and the diuresis follows when the rhythm breaks. It points to an atrial arrhythmia, classically atrial fibrillation.",
+          "note": "Patients volunteer this rarely and remember it clearly once asked. It costs one question."
+        },
+        {
+          "heading": "The features that make this structural rather than benign",
+          "points": [
+            {
+              "t": "Syncope with the palpitation.",
+              "d": "Stokes-Adams attacks are sudden loss of consciousness from a transient arrest of cerebral perfusion, classically in complete heart block. This is not a benign palpitation."
+            },
+            {
+              "t": "Chest pain, breathlessness or severe fatigue with it.",
+              "d": "Suggests underlying structural heart disease rather than an isolated rhythm disturbance."
+            },
+            {
+              "t": "Occurring on exertion.",
+              "d": "Raises exercise-induced ventricular arrhythmia, which is dangerous."
+            },
+            {
+              "t": "Family history of sudden cardiac death.",
+              "d": "Ask it explicitly. It changes the urgency completely."
+            }
+          ]
+        },
+        {
+          "heading": "Posture and precipitant",
+          "body": "Palpitations that begin immediately on standing suggest orthostatic intolerance or atrioventricular nodal re-entry. Those tied to anxiety or panic are usually a sinus tachycardia secondary to the mental state, which is a diagnosis of exclusion and not a first assumption. Always ask about caffeine, alcohol, tobacco, inhaled beta agonists and thyroid symptoms."
+        }
+      ],
+      "pitfalls": [
+        "Recording 'palpitations' without rate, rhythm, onset and offset, which is the whole diagnosis.",
+        "Not asking the patient to tap it out, and settling for the word 'fast'.",
+        "Missing syncope accompanying the palpitation, which turns a benign symptom into an urgent one.",
+        "Attributing it to anxiety before asking about exertion, family history of sudden death, and thyroid symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Sudden onset, sudden offset, fast and regular. What rhythm?",
+          "a": "A paroxysmal supraventricular tachycardia. The abrupt start and stop reflect a re-entrant circuit beginning and terminating.",
+          "accept": [
+            "supraventric",
+            "svt",
+            "re-entr",
+            "reentr",
+            "paroxysmal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a patient pass a large volume of urine after an episode of atrial fibrillation settles?",
+          "a": "Atrial stretch during the tachycardia stimulates natriuretic peptide release, producing a diuresis once the rhythm converts. It points to an atrial arrhythmia.",
+          "accept": [
+            "natriuretic",
+            "atrial",
+            "stretch",
+            "peptide"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Palpitations with sudden loss of consciousness and rapid full recovery. What is the mechanism and what is the underlying rhythm likely to be?",
+          "a": "A Stokes-Adams attack: a transient failure of cardiac output, usually from complete heart block or a ventricular arrhythmia, causing abrupt cerebral hypoperfusion. Recovery is rapid and complete once the rhythm resumes, with no post-ictal confusion.",
+          "accept": [
+            "stokes",
+            "stoke",
+            "heart block",
+            "asystol",
+            "ventricular"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "rhythm",
+          "text": "Establishes rate and regularity, ideally by asking the patient to tap it out"
+        },
+        {
+          "id": "onsetoffset",
+          "text": "Asks about the manner of onset and offset"
+        },
+        {
+          "id": "diuresis",
+          "text": "Asks about post-palpitation diuresis"
+        },
+        {
+          "id": "danger",
+          "text": "Screens for syncope, exertional onset and family history of sudden death"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.syncope": {
+      "id": "skill.hx.cvs.syncope",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "Syncope and blackouts",
+      "oneLine": "Before, during and after, which is what separates cardiac syncope from a seizure and from a faint",
+      "why": "Syncope is a transient loss of consciousness from inadequate cerebral perfusion, with spontaneous recovery and no resuscitation. Roughly a third of people have an episode in their lifetime, and most are benign. The task is finding the cardiac ones, because about a quarter of those go on to a cardiac arrest.",
+      "asks": [
+        {
+          "text": "What were you doing at the moment it happened: standing, standing up, exerting, or sitting?"
+        },
+        {
+          "text": "Was there any warning: light-headedness, nausea, sweating, tunnel vision?"
+        },
+        {
+          "text": "Ask a witness. How long were you out, and were there any jerking movements?"
+        },
+        {
+          "text": "Were you confused afterwards, or clear-headed straight away?"
+        },
+        {
+          "text": "Any tongue biting, particularly the side, or incontinence?"
+        },
+        {
+          "text": "How many attacks, over what period?"
+        },
+        {
+          "text": "Any palpitation, chest pain or breathlessness just before?"
+        },
+        {
+          "text": "Any family history of sudden death under 40?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Syncope, seizure or a fall: the three-part history",
+          "table": {
+            "cols": [
+              "Feature",
+              "Cardiac syncope",
+              "Vasovagal faint",
+              "Seizure"
+            ],
+            "rows": [
+              [
+                "Warning",
+                "None, or brief palpitation",
+                "Nausea, sweating, tunnel vision",
+                "Aura may occur"
+              ],
+              [
+                "Posture",
+                "Any, including sitting or lying",
+                "Usually upright, prolonged standing",
+                "Any"
+              ],
+              [
+                "During",
+                "Pale, still; brief jerks possible",
+                "Pale, sweaty",
+                "Sustained rhythmic jerking"
+              ],
+              [
+                "Recovery",
+                "Immediate and complete",
+                "Rapid, may feel washed out",
+                "Confused for minutes"
+              ],
+              [
+                "Tongue",
+                "Not bitten",
+                "Not bitten",
+                "Lateral tongue bite"
+              ]
+            ]
+          },
+          "note": "Brief jerking during a faint is common and does NOT make it a seizure. Post-event confusion and a lateral tongue bite are what point to a seizure."
+        },
+        {
+          "heading": "The circumstance names the mechanism",
+          "points": [
+            {
+              "t": "On standing up.",
+              "d": "Orthostatic hypotension. Ask about diuretics, antihypertensives, alpha blockers, dehydration and autonomic neuropathy."
+            },
+            {
+              "t": "Prolonged standing, heat, pain, the sight of blood, venepuncture.",
+              "d": "Classical vasovagal syncope, with a clear prodrome."
+            },
+            {
+              "t": "DURING exertion.",
+              "d": "The dangerous one: aortic stenosis, hypertrophic cardiomyopathy, or an exercise-induced arrhythmia. Syncope on exertion is cardiac until proven otherwise."
+            },
+            {
+              "t": "After exertion stops.",
+              "d": "More often vasovagal, but does not exclude a cardiac cause."
+            },
+            {
+              "t": "On turning the head or with a tight collar.",
+              "d": "Carotid sinus hypersensitivity."
+            },
+            {
+              "t": "On micturition, coughing or swallowing.",
+              "d": "Situational syncope."
+            }
+          ]
+        },
+        {
+          "heading": "What makes it cardiac, and therefore urgent",
+          "body": "No prodrome, occurring while sitting or lying, occurring during exertion, preceded by palpitation, or in a patient with known structural heart disease or a family history of sudden death under 40. Any one of these moves the patient from reassurance to investigation.",
+          "note": "Presyncope carries the same significance as syncope. A patient who nearly blacked out on exertion needs the same workup as one who did."
+        }
+      ],
+      "pitfalls": [
+        "Taking the history only from the patient, when the useful part is what the witness saw.",
+        "Calling brief jerking a seizure, and missing a cardiac cause.",
+        "Not separating syncope ON exertion from syncope AFTER exertion.",
+        "Dismissing presyncope as less important than a completed blackout."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single feature most strongly suggests a seizure rather than a faint?",
+          "a": "Prolonged post-event confusion, along with a lateral tongue bite. Brief jerking alone occurs in faints too.",
+          "accept": [
+            "confus",
+            "post-ictal",
+            "postictal",
+            "tongue"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is syncope occurring DURING exertion so much more worrying than syncope after it?",
+          "a": "During exertion the demand for cardiac output is highest, so syncope implies a fixed obstruction such as aortic stenosis or hypertrophic cardiomyopathy, or an exercise-induced arrhythmia. Post-exertional syncope is more often vasovagal, as venous return falls when the muscle pump stops.",
+          "accept": [
+            "aortic stenos",
+            "obstruct",
+            "hypertroph",
+            "arrhythm",
+            "output"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient blacks out while seated, with no warning, and recovers fully within seconds. Why does the absence of a prodrome point to a cardiac cause?",
+          "a": "A vasovagal faint develops over seconds through autonomic activation, which produces nausea, sweating and visual dimming. An abrupt arrhythmic loss of cardiac output gives no time for any prodrome, so consciousness is lost without warning and returns as soon as the rhythm recovers.",
+          "accept": [
+            "arrhythm",
+            "abrupt",
+            "no warning",
+            "cardiac output",
+            "prodrome"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "circumstance",
+          "text": "Establishes posture and activity at the moment of the event"
+        },
+        {
+          "id": "prodrome",
+          "text": "Asks about warning symptoms"
+        },
+        {
+          "id": "witness",
+          "text": "Seeks a witness account of duration and movements"
+        },
+        {
+          "id": "recovery",
+          "text": "Distinguishes immediate recovery from post-event confusion"
+        },
+        {
+          "id": "danger",
+          "text": "Screens for exertional onset, palpitation and family history of sudden death"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.cvs.treatment": {
+      "id": "skill.hx.cvs.treatment",
+      "kind": "history",
+      "system": "cardiovascular",
+      "title": "The treatment history, and what it tells you",
+      "oneLine": "The schedule of a drug often names the diagnosis before the patient does",
+      "why": "Patients frequently cannot name their medicines but can describe how they take them. A dosing schedule, a monitoring blood test, or an injection interval is often enough to infer the diagnosis, and it is information no investigation will give you.",
+      "asks": [
+        {
+          "text": "Bring me everything you take, including the strips and the old prescriptions."
+        },
+        {
+          "text": "How often do you take each one? Every day, or only on certain days?"
+        },
+        {
+          "text": "Do you have a regular blood test for any of them? Which one, and how often?"
+        },
+        {
+          "text": "Do you get any injections? How often, and where do you get them?"
+        },
+        {
+          "text": "How long have you been on each, and has anything been stopped recently?"
+        },
+        {
+          "text": "Have you missed any doses in the last week? Ask how many, not whether."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Read the schedule, infer the diagnosis",
+          "body": "A patient who says only that they take 'a heart tablet' has still told you a great deal if you ask how and when.",
+          "table": {
+            "cols": [
+              "What the patient describes",
+              "Likely drug",
+              "Which implies"
+            ],
+            "rows": [
+              [
+                "Taken five days a week, with a gap",
+                "Digoxin",
+                "Atrial fibrillation or heart failure"
+              ],
+              [
+                "A regular blood test to adjust the dose",
+                "Warfarin, monitored by INR",
+                "A metallic valve, atrial fibrillation or venous thrombosis"
+              ],
+              [
+                "An intramuscular injection once every three weeks",
+                "Benzathine penicillin",
+                "Rheumatic heart disease, on secondary prophylaxis"
+              ],
+              [
+                "A tablet under the tongue for chest pain",
+                "Sublingual nitrate",
+                "Angina"
+              ],
+              [
+                "A water tablet, with the dose doubled on bad days",
+                "A loop diuretic",
+                "Heart failure with a self-adjusted regimen"
+              ]
+            ]
+          },
+          "note": "The three-weekly injection is the one most often missed, and it establishes rheumatic heart disease and adherence to prophylaxis in a single question."
+        },
+        {
+          "heading": "Adherence, asked in a way that gets an honest answer",
+          "body": "Do not ask whether the patient is compliant, because the answer is always yes. Ask how many doses they missed in the last week, and ask what they do when they run out or cannot afford the next strip. Cost and supply are among the commonest reasons for decompensation and are almost never volunteered."
+        },
+        {
+          "heading": "What was stopped, and when",
+          "body": "A recently stopped beta blocker, a diuretic held for a procedure, or an anticoagulant interrupted for dental work can each explain the presentation in front of you. Ask specifically about anything stopped in the last month, and who stopped it."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'some heart tablets' and moving on, when the schedule would have named them.",
+        "Not asking about injections, and missing benzathine penicillin prophylaxis.",
+        "Not asking about monitoring blood tests, and missing warfarin.",
+        "Asking whether the patient is compliant instead of how many doses were missed.",
+        "Failing to ask what was stopped recently, which often explains the admission."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has an intramuscular injection once every three weeks. What is it, and what does it imply?",
+          "a": "Benzathine penicillin for secondary prophylaxis of rheumatic fever, which implies established rheumatic heart disease.",
+          "accept": [
+            "benzathine",
+            "penicillin",
+            "rheumatic",
+            "prophylax"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient reports a regular blood test to adjust one of their tablets. Which drug, and what should you ask next?",
+          "a": "Warfarin, monitored by INR. Ask the target range, the most recent value, and the indication: a metallic valve, atrial fibrillation, or venous thromboembolism.",
+          "accept": [
+            "warfarin",
+            "inr",
+            "anticoag"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does a drug taken five days a week rather than daily suggest digoxin, and what must you check before increasing any cardiac drug in that patient?",
+          "a": "Digoxin has a narrow therapeutic index and a long half life, so drug-free days were a traditional way to limit accumulation. Before changing anything, check renal function and potassium, since both alter digoxin toxicity, and ask about nausea, visual disturbance and confusion.",
+          "accept": [
+            "digoxin",
+            "renal",
+            "potassium",
+            "toxic",
+            "narrow"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "inventory",
+          "text": "Obtains an actual inventory rather than a recollection"
+        },
+        {
+          "id": "schedule",
+          "text": "Uses schedule, monitoring and injections to infer the drug"
+        },
+        {
+          "id": "adherence",
+          "text": "Asks adherence in a way that permits an honest answer"
+        },
+        {
+          "id": "stopped",
+          "text": "Asks what was stopped recently, and by whom"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Palpitations and syncope"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

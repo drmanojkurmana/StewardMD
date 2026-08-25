@@ -2621,6 +2621,564 @@
           "body": "Cough for more than two weeks, evening rise of temperature, drenching night sweats, loss of appetite and loss of weight together make tuberculosis likely enough to test, even when the chest sounds normal. Quantify the weight loss and the duration of cough, because those two numbers are what justify sending sputum."
         }
       ]
+    },
+    "skill.hx.resp.haemoptysis": {
+      "id": "skill.hx.resp.haemoptysis",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Haemoptysis",
+      "oneLine": "Confirm it came from the chest, quantify it, then work out why",
+      "why": "Haemoptysis frightens patients and is often under-quantified by clinicians. Two things must happen before any differential: prove the blood is from the airway and not the gut or nose, and measure how much there is, because volume alone can make it an emergency.",
+      "asks": [
+        {
+          "text": "Did you cough it up, or vomit it, or was it dripping from the back of the nose?"
+        },
+        {
+          "text": "Was it bright red and frothy, or dark like coffee grounds?"
+        },
+        {
+          "text": "How much: streaks in the sputum, a teaspoon, a cup? Ask them to show you with a vessel."
+        },
+        {
+          "text": "How many times, and over how many days?"
+        },
+        {
+          "text": "What colour is the rest of the sputum, and how much do you bring up in a day?"
+        },
+        {
+          "text": "Any fever, night sweats, weight loss, or cough for more than two weeks?"
+        },
+        {
+          "text": "Any chest pain that catches when you breathe in, or swelling in one calf?"
+        },
+        {
+          "text": "Do you smoke, and for how many pack-years?"
+        },
+        {
+          "text": "Any blood thinners, or any bleeding elsewhere: gums, nose, urine?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "First prove it is haemoptysis",
+          "table": {
+            "cols": [
+              "Feature",
+              "Haemoptysis",
+              "Haematemesis"
+            ],
+            "rows": [
+              [
+                "How it came up",
+                "Coughed",
+                "Vomited, often with retching"
+              ],
+              [
+                "Colour",
+                "Bright red",
+                "Dark, coffee grounds"
+              ],
+              [
+                "Consistency",
+                "Frothy, mixed with sputum",
+                "May contain food"
+              ],
+              [
+                "Reaction",
+                "Alkaline",
+                "Acidic"
+              ],
+              [
+                "Preceding symptom",
+                "Cough, tickle in the chest",
+                "Nausea, epigastric discomfort"
+              ]
+            ]
+          },
+          "note": "Also examine the nose and throat. Blood tracking back from a posterior nosebleed is coughed up and mistaken for haemoptysis surprisingly often."
+        },
+        {
+          "heading": "Quantify it, because volume changes the plan",
+          "body": "Streaking of sputum is not the same problem as frank blood. Massive haemoptysis is a threat to the airway rather than to the haemoglobin: patients drown before they exsanguinate, which is why volume and rate are the urgent measurements and why the bleeding side matters for positioning.",
+          "points": [
+            {
+              "t": "Streaks in sputum.",
+              "d": "Usually infection or bronchitis, but still needs a cause in a smoker."
+            },
+            {
+              "t": "Frank blood, repeated.",
+              "d": "Bronchiectasis, tuberculosis, malignancy, pulmonary embolism."
+            },
+            {
+              "t": "Large volume over hours.",
+              "d": "An emergency. Protect the airway and lie the patient with the bleeding side DOWN to keep blood out of the good lung."
+            }
+          ]
+        },
+        {
+          "heading": "The pattern around the blood names the cause",
+          "table": {
+            "cols": [
+              "Company it keeps",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Cough over two weeks, evening fever, night sweats, weight loss",
+                "Pulmonary tuberculosis"
+              ],
+              [
+                "Large volumes of purulent sputum daily, for years",
+                "Bronchiectasis"
+              ],
+              [
+                "Smoker, over 40, weight loss, new or changed cough",
+                "Bronchogenic carcinoma"
+              ],
+              [
+                "Sudden pleuritic pain, breathlessness, calf swelling",
+                "Pulmonary embolism with infarction"
+              ],
+              [
+                "Rusty sputum with acute fever and pleuritic pain",
+                "Pneumococcal pneumonia"
+              ],
+              [
+                "Frothy pink sputum, orthopnoea",
+                "Pulmonary oedema, not a primary lung bleed"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Not establishing whether the blood was coughed or vomited before building a differential.",
+        "Recording haemoptysis without a volume, so nobody knows if it is streaking or frank blood.",
+        "Forgetting the nose and throat as a source.",
+        "Missing tuberculosis by not asking about duration of cough, evening fever and weight loss.",
+        "Not asking about anticoagulants and bleeding elsewhere."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name two features that separate haemoptysis from haematemesis.",
+          "a": "Haemoptysis is coughed, bright red, frothy, mixed with sputum and alkaline. Haematemesis is vomited, darker, may contain food, and is acidic.",
+          "accept": [
+            "cough",
+            "frothy",
+            "bright",
+            "alkal",
+            "vomit",
+            "acid",
+            "food"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "In massive haemoptysis, which side should be dependent, and why?",
+          "a": "The bleeding side down. The immediate danger is asphyxiation from blood flooding the airways, so gravity is used to keep blood out of the unaffected lung.",
+          "accept": [
+            "bleeding side",
+            "affected side",
+            "down",
+            "depend",
+            "asphyx",
+            "airway"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 60 year old smoker has haemoptysis, weight loss and a cough that changed character two months ago. Which two diagnoses lead, and which single question best separates them?",
+          "a": "Bronchogenic carcinoma and pulmonary tuberculosis, which overlap heavily in this presentation. Ask about evening rise of temperature, drenching night sweats and contact with a case of tuberculosis, which point to TB; a changed cough with weight loss in a heavy smoker points to malignancy. Both may need investigating together.",
+          "accept": [
+            "carcinoma",
+            "cancer",
+            "malignan",
+            "tubercul",
+            "tb",
+            "night sweat"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "confirm",
+          "text": "Establishes that the blood was coughed, not vomited or from the nose"
+        },
+        {
+          "id": "quantify",
+          "text": "Quantifies volume, frequency and duration"
+        },
+        {
+          "id": "pattern",
+          "text": "Asks about the sputum, fever, weight loss and duration of cough"
+        },
+        {
+          "id": "risk",
+          "text": "Covers smoking, anticoagulants and thromboembolic risk"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cough and haemoptysis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.resp.chestpain": {
+      "id": "skill.hx.resp.chestpain",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Pleuritic chest pain",
+      "oneLine": "Does it change with breathing? That one question moves the pain out of the heart and into the chest wall or pleura",
+      "why": "Chest pain that varies with respiration is behaving like pleura or chest wall, not like myocardium. Establishing that early stops a respiratory presentation being worked up as an infarct, and stops a pulmonary embolism being dismissed as muscular.",
+      "asks": [
+        {
+          "text": "Does the pain change when you breathe in deeply, or when you cough?"
+        },
+        {
+          "text": "Can you point to it with one finger, or is it spread across?"
+        },
+        {
+          "text": "Is it worse in any particular position, or lying on one side?"
+        },
+        {
+          "text": "Did it come on suddenly, over seconds, or build up over days?"
+        },
+        {
+          "text": "Any breathlessness that started at the same time?"
+        },
+        {
+          "text": "Any fever, cough or coloured sputum before the pain?"
+        },
+        {
+          "text": "Any calf pain or swelling, long journey, surgery or period of immobility?"
+        },
+        {
+          "text": "Any rash appearing in a band, or tenderness when I press here?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Respirophasic means pleura or chest wall",
+          "body": "The parietal pleura is pain sensitive and moves with every breath; the visceral pleura and the myocardium are not. So pain that sharpens on inspiration or coughing is arising from parietal pleura or the chest wall, which reframes the whole differential.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Sharp, worse on inspiration, localised",
+                "Pleuritic: infection, infarction, pneumothorax"
+              ],
+              [
+                "Sudden, with breathlessness, in a tall thin young man",
+                "Spontaneous pneumothorax"
+              ],
+              [
+                "Sudden, with breathlessness and risk factors",
+                "Pulmonary embolism"
+              ],
+              [
+                "Reproduced exactly by pressing on the spot",
+                "Musculoskeletal or costochondritis"
+              ],
+              [
+                "Band of pain, then vesicles days later",
+                "Herpes zoster, painful before the rash"
+              ],
+              [
+                "Central, heavy, unaffected by breathing, exertional",
+                "Cardiac. Leave the respiratory pathway."
+              ]
+            ]
+          },
+          "note": "Pain that you can reproduce exactly by palpating one spot is usually chest wall, but a pulmonary embolism can be tender too. Tenderness reassures only when the risk assessment is otherwise low."
+        },
+        {
+          "heading": "Pleuritic pain that STOPS is not necessarily better",
+          "body": "As a pleural effusion accumulates, the inflamed pleural surfaces are separated by fluid and stop rubbing, so the pain eases while the breathlessness worsens. A patient reporting that the pain has gone but breathing is harder has usually not improved."
+        },
+        {
+          "heading": "The one that must not be missed",
+          "body": "Pulmonary embolism presents as sudden pleuritic pain with breathlessness and often nothing to find on examination. Ask every time about calf swelling, recent immobility, long travel, surgery, malignancy, pregnancy and the oral contraceptive pill. The history is where the risk is established, not the chest examination."
+        }
+      ],
+      "pitfalls": [
+        "Not asking whether the pain varies with respiration, which is the single discriminating question.",
+        "Treating reproducible tenderness as proof of a musculoskeletal cause in a patient at risk of embolism.",
+        "Reading the resolution of pleuritic pain as improvement when an effusion is forming.",
+        "Missing zoster, which is painful for days before the rash appears."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single question separates pleuritic from cardiac chest pain?",
+          "a": "Does the pain change with breathing or coughing. Respirophasic pain points to parietal pleura or chest wall, not myocardium.",
+          "accept": [
+            "breath",
+            "inspir",
+            "cough",
+            "respir"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does pleuritic pain often ease as a pleural effusion grows?",
+          "a": "The fluid separates the inflamed parietal and visceral pleural surfaces so they no longer rub, removing the pain while the effusion continues to compromise ventilation.",
+          "accept": [
+            "separat",
+            "fluid",
+            "rub",
+            "surfaces"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A young man develops sudden right-sided pleuritic pain and breathlessness. Give two diagnoses and the feature of the history that separates them.",
+          "a": "Spontaneous pneumothorax and pulmonary embolism. Both begin abruptly. The embolism carries thrombotic risk factors, immobility, travel, surgery, malignancy or calf symptoms, while the pneumothorax typically occurs in a tall thin young man at rest with no such risk factors.",
+          "accept": [
+            "pneumothorax",
+            "embol",
+            "risk factor",
+            "calf",
+            "immobil"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "respirophasic",
+          "text": "Establishes whether the pain varies with respiration"
+        },
+        {
+          "id": "onset",
+          "text": "Establishes speed of onset and associated breathlessness"
+        },
+        {
+          "id": "vte",
+          "text": "Takes a thromboembolic risk history"
+        },
+        {
+          "id": "wall",
+          "text": "Examines for reproducible tenderness and looks for zoster"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cough and haemoptysis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.resp.wheeze": {
+      "id": "skill.hx.resp.wheeze",
+      "kind": "history",
+      "system": "respiratory",
+      "title": "Wheeze",
+      "oneLine": "Episodic or continuous, and whether it is really coming from the chest at all",
+      "why": "Wheeze is a musical sound from narrowed intrathoracic airways, and patients apply the word to almost any noisy breathing. Establishing that it is truly a wheeze, and whether it comes and goes, does most of the diagnostic work before a stethoscope is used.",
+      "asks": [
+        {
+          "text": "Make the sound for me, or describe it. Is it a musical whistle, or noisy breathing?"
+        },
+        {
+          "text": "Is it there all the time, or does it come and go with clear periods between?"
+        },
+        {
+          "text": "Is it worse at night or early morning?"
+        },
+        {
+          "text": "Is it worse breathing in, or breathing out?"
+        },
+        {
+          "text": "What brings it on: dust, smoke, cold air, exercise, a particular room or season?"
+        },
+        {
+          "text": "Any eczema, allergic rhinitis, or family history of asthma or allergy?"
+        },
+        {
+          "text": "Is it better on days away from work, or on holiday?"
+        },
+        {
+          "text": "Did it start suddenly, and could anything have been inhaled?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Episodic or continuous is the first fork",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Episodic, with completely clear periods",
+                "Asthma"
+              ],
+              [
+                "Continuous, slowly progressive, older smoker",
+                "COPD"
+              ],
+              [
+                "Fixed, localised, unilateral",
+                "Obstruction of one airway: tumour, foreign body"
+              ],
+              [
+                "Sudden onset in a child or a confused adult",
+                "Inhaled foreign body until excluded"
+              ],
+              [
+                "With orthopnoea and basal crackles",
+                "Cardiac, the so-called cardiac asthma"
+              ]
+            ]
+          },
+          "note": "A wheeze that is always in the same place and never moves is a localised obstruction, not asthma, however wheezy it sounds."
+        },
+        {
+          "heading": "Inspiratory noise is a different emergency",
+          "body": "Wheeze is predominantly expiratory, because intrathoracic airways narrow further on expiration. A noise that is loudest on INSPIRATION is stridor, arising from the larynx or trachea, and it signals large airway obstruction. Confusing the two delays an airway emergency, so ask which phase is noisier and listen over the neck as well as the chest.",
+          "note": "Stridor is a reason to call for help now. Wheeze rarely is."
+        },
+        {
+          "heading": "Atopy and the occupational question",
+          "points": [
+            {
+              "t": "Personal atopy.",
+              "d": "Eczema and allergic rhinitis raise the likelihood of asthma considerably."
+            },
+            {
+              "t": "Family history.",
+              "d": "Asthma, eczema or hay fever in first degree relatives."
+            },
+            {
+              "t": "Better away from work.",
+              "d": "Improvement at weekends and on holiday is the signature of occupational asthma, and it is only ever found by asking."
+            },
+            {
+              "t": "Drugs.",
+              "d": "Beta blockers, including eye drops, and aspirin or other NSAIDs can provoke it."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Accepting the patient's word 'wheeze' without establishing it is a musical, expiratory sound.",
+        "Missing stridor by not asking which phase of breathing is noisier.",
+        "Calling a fixed unilateral wheeze asthma.",
+        "Never asking whether it improves away from work, so occupational asthma is missed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Wheeze is loudest in which phase of respiration, and why?",
+          "a": "Expiration. Intrathoracic airways narrow further as pleural pressure rises during expiration, so a narrowed airway becomes more obstructed.",
+          "accept": [
+            "expir",
+            "narrow",
+            "pleural pressure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A noise loudest on inspiration, heard over the neck. What is it, and why does it matter more?",
+          "a": "Stridor, from obstruction of the larynx or trachea. Extrathoracic airways collapse inward on inspiration. It signals large airway obstruction and is an airway emergency rather than a bronchospasm to be nebulised.",
+          "accept": [
+            "stridor",
+            "laryn",
+            "trachea",
+            "upper airway",
+            "extrathoracic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A wheeze always heard in the same place, never varying, in a 60 year old smoker. Why is asthma the wrong answer?",
+          "a": "Asthma is diffuse and variable because bronchospasm affects airways throughout both lungs and changes over time. A fixed, localised, monophonic wheeze indicates narrowing of one airway, so a bronchial carcinoma or an inhaled foreign body must be excluded.",
+          "accept": [
+            "localis",
+            "localiz",
+            "fixed",
+            "monophonic",
+            "tumour",
+            "tumor",
+            "carcinoma",
+            "foreign"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "confirm",
+          "text": "Confirms the sound is a musical expiratory wheeze"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes episodic versus continuous, and diurnal variation"
+        },
+        {
+          "id": "stridor",
+          "text": "Excludes stridor by asking about the inspiratory phase"
+        },
+        {
+          "id": "atopy",
+          "text": "Covers atopy, family history, occupation and drugs"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Respiratory: wheeze"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        },
+        {
+          "source": "GINA Global Strategy for Asthma Management and Prevention",
+          "locator": "Diagnosis"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

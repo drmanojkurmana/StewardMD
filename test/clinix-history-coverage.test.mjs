@@ -29,21 +29,32 @@ const historyChapter = (system) =>
 
 /* The complaints each system must be able to take a history of. */
 const REQUIRED = {
-  abdomen: ["pain", "dyspepsia", "vomiting", "dysphagia", "diarrhoea", "constipation", "gibleed", "jaundice", "weightloss"],
+  abdomen: ["pain", "dyspepsia", "vomiting", "dysphagia", "diarrhoea", "constipation", "gibleed", "ascites", "jaundice", "weightloss"],
+  cardiovascular: ["chestpain", "dyspnea_edema", "palpitations", "syncope", "riskfactors", "treatment"],
+  respiratory: ["cough_sputum", "haemoptysis", "dyspnea", "wheeze", "chestpain", "smoking", "drug"],
+  neurology: ["approach", "weakness", "headache", "seizure", "vertigo", "stroke.risk"],
 };
 
-/* Still thin. Filling one means adding it to REQUIRED and deleting it here. */
+/* Still thin. Filling one means adding it to REQUIRED and deleting it here.
+ * All four systems now carry their core symptom set. What remains is a genuine but narrower gap:
+ * the cranial-nerve symptom history (visual loss, diplopia, facial numbness, hoarseness, nasal
+ * regurgitation) is taught in the EXAMINATION chapters but has no history skill of its own. */
 const KNOWN_GAPS = {
-  cardiovascular: ["palpitations", "syncope"],
-  respiratory: ["haemoptysis", "pleuritic chest pain", "wheeze"],
-  neurology: ["headache", "seizure or blackout", "dizziness and vertigo", "visual disturbance"],
+  neurology: ["cranial nerve symptom history: visual loss, diplopia, facial sensation, hoarseness"],
 };
 
-test("abdomen teaches the whole GI symptom set, not just abdominal pain", () => {
-  const skills = historyChapter("abdomen");
-  const missing = REQUIRED.abdomen.filter((c) => !skills.some((s) => s.includes(c)));
-  assert.deepEqual(missing, [], `abdomen history chapter is missing: ${missing.join(", ")}`);
-  assert.ok(skills.includes("skill.hx.chief_complaints"), "chief complaints must come first");
+test("every system teaches its whole symptom set, not just one complaint", () => {
+  /* Each system's history chapter used to carry two or three skills. A student could finish the
+   * abdomen module never having been taught to take a history of vomiting or GI bleeding, and the
+   * cardiovascular module without palpitations or syncope. */
+  const broken = [];
+  for (const [system, required] of Object.entries(REQUIRED)) {
+    const skills = historyChapter(system);
+    const missing = required.filter((c) => !skills.some((s) => s.includes(c)));
+    if (missing.length) broken.push(`${system} is missing: ${missing.join(", ")}`);
+    if (!skills.includes("skill.hx.chief_complaints")) broken.push(`${system}: chief complaints must come first`);
+  }
+  assert.deepEqual(broken, [], "history chapters missing their core complaints:\n  " + broken.join("\n  "));
 });
 
 test("every skill a history chapter references actually exists", () => {
@@ -101,5 +112,10 @@ test("the remaining history gaps stay visible instead of being forgotten", () =>
     assert.ok(gaps.length > 0, `${system} has an empty gap list - move it into REQUIRED instead`);
     assert.ok(historyChapter(system).length >= 2, `${system} history chapter looks empty`);
   }
-  assert.ok(!("abdomen" in KNOWN_GAPS), "abdomen is done and must not be listed as a gap");
+  for (const done of Object.keys(REQUIRED)) {
+    if (KNOWN_GAPS[done]) {
+      // A system may appear in both only if the remaining gap is narrower than its core set.
+      assert.ok(KNOWN_GAPS[done].length <= 2, `${done} is built; its gap list should be small or gone`);
+    }
+  }
 });
