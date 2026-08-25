@@ -3612,25 +3612,24 @@
       return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
     } },
 
-  { id:"ccs_angina", cat:"Cardiology", icon:"", title:"CCS Angina Grading",
-    desc:"Canadian Cardiovascular Society grade of effort angina.",
+  { id:"ccs_angina", cat:"Cardiology", icon:"", title:"CCS Angina Classification",
+    desc:"Canadian Cardiovascular Society class of effort angina (I to IV).",
     inputs:[
       { id:"g", label:"Limitation of ordinary activity", type:"select", opts:[
-        {v:"0",t:"No angina with ordinary activity; only strenuous, rapid or prolonged exertion"},
-        {v:"1",t:"Slight limitation: angina on rapid walking or stairs, uphill, after meals, in cold or wind, or under stress"},
-        {v:"2",t:"Walks slower than peers on the level, or must stop for breath at own pace"},
-        {v:"3",t:"Marked limitation: angina walking one or two blocks, or one flight of stairs"},
-        {v:"4",t:"Unable to do any physical activity without discomfort; angina may be present at rest"} ] }
+        {v:"1",t:"I - Ordinary activity does not cause angina; angina only with strenuous, rapid or prolonged exertion"},
+        {v:"2",t:"II - Slight limitation: angina on walking or climbing stairs rapidly, uphill, after meals, in cold or wind, under stress, or in the first hours after waking"},
+        {v:"3",t:"III - Marked limitation: angina walking one or two blocks on the level, or one flight of stairs at normal pace"},
+        {v:"4",t:"IV - Unable to carry out any physical activity without discomfort; angina may be present at rest"} ] }
     ],
     compute:function(v){
       if(v.g===undefined||v.g==="") return ERR;
-      var g=+v.g;
-      var i=["Grade 0. Ordinary activity is not limited.",
-             "Grade 1. Slight limitation of ordinary activity.",
-             "Grade 2. Moderate limitation; slower than peers on the level.",
-             "Grade 3. Marked limitation of ordinary physical activity.",
-             "Grade 4. Angina with any activity, and possibly at rest."][g];
-      return { v:g, u:"CCS grade", i:i+" A rising grade over weeks is unstable angina until proven otherwise, whatever the absolute grade. Ref: Canadian Cardiovascular Society." };
+      var g=+v.g, roman=["","I","II","III","IV"][g];
+      var i=["",
+        "Class I. Ordinary activity is not limited. Walking more than two blocks on the level and climbing more than one flight at a normal pace are tolerated.",
+        "Class II. Slight limitation of ordinary activity.",
+        "Class III. Marked limitation of ordinary physical activity.",
+        "Class IV. Angina with any activity, and possibly at rest."][g];
+      return { v:roman, u:"CCS class", i:i+" The CCS scale runs I to IV; THERE IS NO CLASS 0, and a class must be written in Roman numerals to avoid being read as NYHA. A class rising over days or weeks, or angina appearing at rest, is unstable angina regardless of the absolute class. Ref: Campeau L, Circulation 1976 (CCS grading)." };
     } },
 
   { id:"mrc_power", cat:"Neurology", icon:"", title:"MRC Muscle Power Grading",
@@ -3799,7 +3798,7 @@
       var band = si<100 ? "Mild smoker" : (si<=300 ? "Moderate smoker" : "Heavy smoker");
       var msg=band+" (SI <100 mild, 101-300 moderate, >300 heavy).";
       if(si>300) msg+=" Lung cancer is common above a smoking index of 300.";
-      msg+=" Smoking index is not the same as pack-years: it does not divide by 20, so the numbers are not interchangeable. Use pack-years for screening thresholds (low-dose CT if age 55 or over with 30 or more pack-years). Ref: standard definition.";
+      msg+=" Smoking index is not the same as pack-years: it does not divide by 20, so the numbers are not interchangeable. Use PACK-YEARS for screening: USPSTF 2021 recommends annual low-dose CT from age 50 to 80 with 20 or more pack-years, still smoking or quit within 15 years (the older age 55 / 30 pack-year rule is superseded). India has no LDCT screening programme and high TB prevalence raises false positives. The <100 / 101-300 / >300 bands and the lung-cancer association above 300 are Indian textbook convention. Ref: USPSTF 2021; smoking index per standard Indian texts.";
       return { v:r1(si), u:"", i:msg };
     } },
 

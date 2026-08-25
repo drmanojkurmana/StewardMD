@@ -107,10 +107,25 @@ test("murmurs: systolic out of six with a thrill from 4, diastolic out of four",
   assert.match(run("diastolic_murmur", { g: "1" }).interpretation, /pathological/i);
 });
 
-test("CCS angina returns the grade and flags a rising grade as unstable", () => {
-  for (let g = 0; g <= 4; g++) assert.equal(run("ccs_angina", { g: String(g) }).value, g);
+test("CCS angina is I to IV with NO class 0", () => {
+  /* R1 clinical review, 2026-08-25: the first version of this calculator was off by one. It
+   * offered a "Grade 0" that does not exist in the CCS scale and shifted every real class down by
+   * one, so a genuinely class III patient would have been referred as "CCS 2" and triaged down.
+   * This test previously ASSERTED that wrong scale, which is how it survived. */
+  assert.deepEqual(
+    [1, 2, 3, 4].map((g) => run("ccs_angina", { g: String(g) }).value),
+    ["I", "II", "III", "IV"],
+    "CCS classes are I to IV in Roman numerals");
+  // There must be no class 0, and asking for one must not silently produce a result.
+  const zero = run("ccs_angina", { g: "0" });
+  assert.ok(!zero || zero.value === undefined || zero.value === "" || zero.raw?.err,
+    "there is no CCS class 0");
+  assert.match(run("ccs_angina", { g: "2" }).interpretation, /NO CLASS 0/i);
   assert.match(run("ccs_angina", { g: "2" }).interpretation, /unstable/i);
   assert.match(run("ccs_angina", { g: "4" }).interpretation, /at rest/i);
+  // Class II must carry the CCS descriptor, not NYHA-style "walks slower than peers" language.
+  assert.ok(!/slower than people|slower than peers/i.test(JSON.stringify(MEDCALC.get("ccs_angina"))),
+    "class II must use the CCS descriptor, not spliced-in NYHA language");
 });
 
 test("EHRA scores symptoms only, and says so", () => {

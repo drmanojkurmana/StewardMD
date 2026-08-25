@@ -2139,7 +2139,8 @@
         "Skipping the swallowing and aspiration questions because the patient looks alert at rest.",
         "Not asking about recent influenza, which is a recognised setup for a severe secondary bacterial pneumonia.",
         "Treating vaccination history as an afterthought rather than a modifiable risk factor worth acting on at discharge.",
-        "Forgetting that alcohol raises risk through two separate mechanisms, aspiration and impaired host defence, not one."
+        "Forgetting that alcohol raises risk through two separate mechanisms, aspiration and impaired host defence, not one.",
+        "Scoring urea against 7 when the laboratory reported mg/dL, which reverses the answer."
       ],
       "media": [],
       "probes": [
@@ -2223,7 +2224,7 @@
               ],
               [
                 "Urea",
-                "Above 7 mmol/L"
+                "Above 7 mmol/L (about 42 mg/dL urea, or blood urea nitrogen above 20 mg/dL)"
               ],
               [
                 "Respiratory rate",
@@ -2236,10 +2237,22 @@
               [
                 "Age",
                 "65 or over"
+              ],
+              [
+                "SCORE 0 to 1",
+                "Suitable for outpatient management"
+              ],
+              [
+                "SCORE 2",
+                "Short stay or ward admission"
+              ],
+              [
+                "SCORE 3 or more",
+                "Severe: assess for critical care"
               ]
             ]
           },
-          "note": "Count the respiratory rate yourself for a full minute. It is the most frequently fabricated observation in the chart and one of the most predictive."
+          "note": "Count the respiratory rate yourself for a full minute. It is the most frequently fabricated observation in the chart and one of the most predictive. Indian laboratories usually report urea in mg/dL, not mmol/L, so read the units before scoring: 45 mg/dL is ABOVE the threshold, not below it."
         },
         {
           "heading": "Where it was acquired changes the likely organism",
@@ -2657,6 +2670,9 @@
         },
         {
           "text": "Any blood thinners, or any bleeding elsewhere: gums, nose, urine?"
+        },
+        {
+          "text": "Have you ever been treated for tuberculosis, or told you have a heart valve problem?"
         }
       ],
       "teach": [
@@ -2700,7 +2716,7 @@
         },
         {
           "heading": "Quantify it, because volume changes the plan",
-          "body": "Streaking of sputum is not the same problem as frank blood. Massive haemoptysis is a threat to the airway rather than to the haemoglobin: patients drown before they exsanguinate, which is why volume and rate are the urgent measurements and why the bleeding side matters for positioning.",
+          "body": "Streaking of sputum is not the same problem as frank blood. Massive haemoptysis is a threat to the airway rather than to the haemoglobin: patients drown before they exsanguinate, which is why volume and rate are the urgent measurements.",
           "points": [
             {
               "t": "Streaks in sputum.",
@@ -2712,9 +2728,14 @@
             },
             {
               "t": "Large volume over hours.",
-              "d": "An emergency. Protect the airway and lie the patient with the bleeding side DOWN to keep blood out of the good lung."
+              "d": "An emergency. Protect the airway and lie the patient with the bleeding side DOWN to keep blood out of the good lung. Call for help early: these patients asphyxiate rather than exsanguinate."
             }
           ]
+        },
+        {
+          "heading": "What counts as massive",
+          "body": "Conventionally 100 mL or more in 24 hours, though published definitions run from 100 to 600 mL.",
+          "note": "The number is not the whole rule. ANY volume that obstructs the airway, impairs gas exchange or causes haemodynamic compromise is life-threatening, whatever the measured total."
         },
         {
           "heading": "The pattern around the blood names the cause",
@@ -2747,6 +2768,14 @@
               [
                 "Frothy pink sputum, orthopnoea",
                 "Pulmonary oedema, not a primary lung bleed"
+              ],
+              [
+                "Known rheumatic heart disease, exertional breathlessness, a diastolic murmur",
+                "Mitral stenosis"
+              ],
+              [
+                "Previous treated tuberculosis, now recurrent or massive bleeding",
+                "Aspergilloma in a healed cavity, a leading cause of MASSIVE haemoptysis in a post-TB lung"
               ]
             ]
           }
@@ -2757,7 +2786,8 @@
         "Recording haemoptysis without a volume, so nobody knows if it is streaking or frank blood.",
         "Forgetting the nose and throat as a source.",
         "Missing tuberculosis by not asking about duration of cough, evening fever and weight loss.",
-        "Not asking about anticoagulants and bleeding elsewhere."
+        "Not asking about anticoagulants and bleeding elsewhere.",
+        "Not quantifying against the 100 mL in 24 hours mark, or forgetting that any airway-compromising volume counts."
       ],
       "probes": [
         {
@@ -2859,6 +2889,9 @@
           "text": "Is it worse in any particular position, or lying on one side?"
         },
         {
+          "text": "Is it better sitting forward and worse lying flat?"
+        },
+        {
           "text": "Did it come on suddenly, over seconds, or build up over days?"
         },
         {
@@ -2872,6 +2905,9 @@
         },
         {
           "text": "Any rash appearing in a band, or tenderness when I press here?"
+        },
+        {
+          "text": "Did it start abruptly and tear through to your back, and is it worst at the very start?"
         }
       ],
       "teach": [
@@ -2889,8 +2925,16 @@
                 "Pleuritic: infection, infarction, pneumothorax"
               ],
               [
+                "Sharp, retrosternal, WORSE LYING FLAT and relieved sitting forward",
+                "Acute pericarditis. Listen for a rub. Often post-viral; in India consider tuberculous pericarditis"
+              ],
+              [
+                "Abrupt, tearing, maximal AT ONSET, radiating between the shoulder blades",
+                "Aortic dissection. Check pulses and blood pressure in both arms"
+              ],
+              [
                 "Sudden, with breathlessness, in a tall thin young man",
-                "Spontaneous pneumothorax"
+                "Primary spontaneous pneumothorax. A SECONDARY one complicates COPD or old tuberculous lung and is far more dangerous"
               ],
               [
                 "Sudden, with breathlessness and risk factors",
@@ -2919,9 +2963,25 @@
         {
           "heading": "The one that must not be missed",
           "body": "Pulmonary embolism presents as sudden pleuritic pain with breathlessness and often nothing to find on examination. Ask every time about calf swelling, recent immobility, long travel, surgery, malignancy, pregnancy and the oral contraceptive pill. The history is where the risk is established, not the chest examination."
+        },
+        {
+          "heading": "The two that are missed because they sound pleuritic",
+          "points": [
+            {
+              "t": "Acute pericarditis.",
+              "d": "Positional and respirophasic, so it is easily filed as pleuritic. Worse supine, relieved leaning forward. Look for a friction rub and widespread saddle-shaped ST elevation. Tuberculous pericarditis is a real cause in India and presents subacutely with fever and weight loss."
+            },
+            {
+              "t": "Aortic dissection.",
+              "d": "The pain that most often kills the person who was told it was musculoskeletal. Abrupt, tearing, MAXIMAL AT ONSET rather than building, radiating between the scapulae. Check both arms for a pulse or pressure difference before accepting any benign label."
+            }
+          ],
+          "note": "Pleuritic pain that builds over hours behaves differently from dissection, which is worst in the first second. Ask when it was at its worst, not just when it started."
         }
       ],
       "pitfalls": [
+        "Filing positional, respirophasic pain as pleuritic without considering pericarditis.",
+        "Accepting a musculoskeletal label for pain that was maximal at onset, and missing dissection.",
         "Not asking whether the pain varies with respiration, which is the single discriminating question.",
         "Treating reproducible tenderness as proof of a musculoskeletal cause in a patient at risk of embolism.",
         "Reading the resolution of pleuritic pain as improvement when an effusion is forming.",
@@ -2964,6 +3024,17 @@
             "immobil"
           ],
           "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Chest pain that is worse lying flat and relieved by sitting forward. What is it, and what will you listen for?",
+          "a": "Acute pericarditis. Listen for a pericardial friction rub, and look for widespread concave ST elevation with PR depression on the ECG.",
+          "accept": [
+            "pericard",
+            "rub",
+            "st eleva"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -2982,6 +3053,10 @@
         {
           "id": "wall",
           "text": "Examines for reproducible tenderness and looks for zoster"
+        },
+        {
+          "id": "killers",
+          "text": "Considers pericarditis and aortic dissection before accepting a benign cause"
         }
       ],
       "media": [],
@@ -3012,6 +3087,12 @@
       "why": "Wheeze is a musical sound from narrowed intrathoracic airways, and patients apply the word to almost any noisy breathing. Establishing that it is truly a wheeze, and whether it comes and goes, does most of the diagnostic work before a stethoscope is used.",
       "asks": [
         {
+          "text": "Right now, can you complete a full sentence in one breath?"
+        },
+        {
+          "text": "Has the wheeze got QUIETER while the breathing got harder?"
+        },
+        {
           "text": "Make the sound for me, or describe it. Is it a musical whistle, or noisy breathing?"
         },
         {
@@ -3037,6 +3118,47 @@
         }
       ],
       "teach": [
+        {
+          "heading": "First: is this an emergency in front of you?",
+          "body": "Acute severe asthma kills, and it kills patients who were audibly wheezing an hour earlier. Severity is judged on effort and gas exchange, not on how loud the chest is.",
+          "table": {
+            "cols": [
+              "Sign",
+              "Means"
+            ],
+            "rows": [
+              [
+                "Cannot complete a sentence in one breath",
+                "Acute severe"
+              ],
+              [
+                "Respiratory rate 25 or more, pulse 110 or more",
+                "Acute severe"
+              ],
+              [
+                "Peak flow 33 to 50 percent of best or predicted",
+                "Acute severe"
+              ],
+              [
+                "SILENT CHEST, or a wheeze that is fading",
+                "LIFE-THREATENING: too little airflow to make the sound"
+              ],
+              [
+                "Exhaustion, confusion, drowsiness, poor respiratory effort",
+                "LIFE-THREATENING"
+              ],
+              [
+                "SpO2 below 92 percent, or cyanosis",
+                "LIFE-THREATENING"
+              ],
+              [
+                "Peak flow below 33 percent, or a normal or rising CO2",
+                "LIFE-THREATENING"
+              ]
+            ]
+          },
+          "note": "A QUIETENING CHEST IS NOT IMPROVEMENT. If the wheeze is disappearing while the patient works harder, airflow is failing. Treat and call for help; do not wait for the next peak flow."
+        },
         {
           "heading": "Episodic or continuous is the first fork",
           "table": {
@@ -3064,6 +3186,10 @@
               [
                 "With orthopnoea and basal crackles",
                 "Cardiac, the so-called cardiac asthma"
+              ],
+              [
+                "Sudden, with urticaria, lip or tongue swelling, or after a sting, food or drug",
+                "ANAPHYLAXIS: intramuscular adrenaline, not a bronchodilator alone"
               ]
             ]
           },
@@ -3072,7 +3198,7 @@
         {
           "heading": "Inspiratory noise is a different emergency",
           "body": "Wheeze is predominantly expiratory, because intrathoracic airways narrow further on expiration. A noise that is loudest on INSPIRATION is stridor, arising from the larynx or trachea, and it signals large airway obstruction. Confusing the two delays an airway emergency, so ask which phase is noisier and listen over the neck as well as the chest.",
-          "note": "Stridor is a reason to call for help now. Wheeze rarely is."
+          "note": "Stridor is a reason to call for help now. So is wheeze in a patient who cannot complete a sentence, or whose chest has gone quiet. Do not read either as reassurance."
         },
         {
           "heading": "Atopy and the occupational question",
@@ -3097,6 +3223,9 @@
         }
       ],
       "pitfalls": [
+        "Reading a quietening chest as improvement, when it is a failing airflow.",
+        "Judging severity by the loudness of the wheeze rather than by speech, effort and saturation.",
+        "Treating sudden wheeze with urticaria or facial swelling as asthma, and withholding adrenaline.",
         "Accepting the patient's word 'wheeze' without establishing it is a musical, expiratory sound.",
         "Missing stridor by not asking which phase of breathing is noisier.",
         "Calling a fixed unilateral wheeze asthma.",
@@ -3142,6 +3271,18 @@
             "foreign"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient with acute asthma was wheezing loudly; now the chest is quiet and they look exhausted. Better or worse?",
+          "a": "Much worse. A silent chest means airflow has fallen too low to generate a wheeze. Together with exhaustion it is life-threatening asthma needing immediate treatment and senior help, not reassurance.",
+          "accept": [
+            "silent chest",
+            "worse",
+            "life-threat",
+            "airflow"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -3160,6 +3301,10 @@
         {
           "id": "atopy",
           "text": "Covers atopy, family history, occupation and drugs"
+        },
+        {
+          "id": "severity",
+          "text": "Assesses acute severity: speech, effort, saturation, and a silent chest"
         }
       ],
       "media": [],
@@ -3252,7 +3397,7 @@
               "d": "Heavy smoker. Lung cancer is common above this level."
             }
           ],
-          "note": "For screening, the threshold that matters is pack-years: low-dose CT is considered from age 55 with 30 or more pack-years."
+          "note": "For screening, the threshold that matters is pack-years, not the smoking index. Current USPSTF guidance (2021) is annual low-dose CT from age 50 to 80 with 20 or more pack-years, in people who still smoke or quit within the past 15 years. The older age 55 and 30 pack-year rule is superseded. Note that India has no LDCT screening programme, and high background tuberculosis prevalence produces many false positives, so this is quoted for reference rather than as local practice."
         },
         {
           "heading": "Complications, by system",

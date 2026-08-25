@@ -3624,6 +3624,12 @@
         },
         {
           "text": "Any numbness, tingling, or trouble passing urine?"
+        },
+        {
+          "text": "Are you more breathless lying flat? Can you count to twenty in one breath?"
+        },
+        {
+          "text": "Any change in your voice, or choking on food or drink?"
         }
       ],
       "teach": [
@@ -3685,7 +3691,7 @@
               ],
               [
                 "Hours to days, ascending",
-                "Guillain-Barre syndrome"
+                "Guillain-Barre syndrome. Ask about BREATHING and SWALLOWING at once: it kills through neuromuscular respiratory failure and aspiration"
               ],
               [
                 "Days to weeks",
@@ -3698,6 +3704,10 @@
               [
                 "Fluctuating, worse with use and at day's end",
                 "Neuromuscular junction, as in myasthenia"
+              ],
+              [
+                "Sudden flaccid quadriparesis, often on waking, sparing breathing and swallowing",
+                "Hypokalaemic periodic paralysis. Check potassium; may be thyrotoxic or from renal tubular acidosis. Immediately treatable"
               ]
             ]
           },
@@ -3723,13 +3733,20 @@
               "d": "Mononeuropathy, so ask about entrapment, injury and diabetes."
             }
           ]
+        },
+        {
+          "heading": "Ascending weakness: the two questions that decide the bed",
+          "body": "In Guillain-Barre syndrome the limbs are what the patient notices and the diaphragm is what kills them. Breathlessness lying flat, a single breath count under twenty, a nasal voice or choking on liquids all mean the patient needs monitoring in a place that can ventilate, before any of it shows on a saturation probe.",
+          "note": "Oxygen saturation falls LATE in neuromuscular respiratory failure. Do not use it to reassure yourself."
         }
       ],
       "pitfalls": [
         "Asking the patient to rate their strength instead of asking what they cannot do.",
         "Not asking about the bladder in a patient with weakness of both legs.",
         "Missing the fatigable pattern of myasthenia by not asking about the end of the day.",
-        "Recording weakness without a time course, which is half the diagnosis."
+        "Recording weakness without a time course, which is half the diagnosis.",
+        "Watching the limbs in ascending weakness and not asking about breathing and swallowing.",
+        "Missing hypokalaemic periodic paralysis, which is common in India and reverses with potassium."
       ],
       "probes": [
         {
@@ -3840,6 +3857,9 @@
         },
         {
           "text": "How many days a month do you take painkillers for it?"
+        },
+        {
+          "text": "Any pain in or around one eye with blurred vision, haloes around lights, or vomiting?"
         }
       ],
       "teach": [
@@ -3877,7 +3897,15 @@
               ],
               [
                 "New headache in pregnancy or immunosuppression",
-                "Venous thrombosis, infection"
+                "Pre-eclampsia and eclampsia, cerebral venous thrombosis, infection. Check the blood pressure and urine"
+              ],
+              [
+                "Unilateral eye pain, red eye, haloes, blurred vision, vomiting",
+                "ACUTE ANGLE-CLOSURE GLAUCOMA: blinds the eye in hours"
+              ],
+              [
+                "Head injury, even weeks earlier, in the elderly, anticoagulated or heavy drinker",
+                "Chronic subdural haematoma"
               ]
             ]
           },
@@ -3925,18 +3953,20 @@
               ]
             ]
           },
-          "note": "Whether the patient lies still or paces is a genuinely useful discriminator: migraine keeps them still, cluster makes them restless."
+          "note": "Whether the patient lies still or paces is a genuinely useful discriminator: migraine keeps them still, cluster makes them restless. Beware the cluster mimic: unilateral periorbital pain with a RED EYE may be acute angle-closure glaucoma, which needs an eye pressure measured, not a triptan."
         },
         {
           "heading": "The one that is created by treatment",
-          "body": "Medication overuse headache is a daily or near-daily headache in a patient taking analgesia on more than about half the days of the month, often for an underlying migraine. Ask the number of days a month, not whether they take painkillers. Escalating the analgesia makes it worse."
+          "body": "Medication overuse headache is a daily or near-daily headache in someone taking acute treatment too often, for more than three months. The threshold depends on the drug: 15 or more days a month for simple analgesics such as paracetamol, aspirin or an NSAID, but only 10 or more days a month for triptans, ergots, opioids and combination analgesics. Ask the number of days a month, not whether they take painkillers. Escalating the analgesia makes it worse."
         }
       ],
       "pitfalls": [
         "Judging thunderclap by severity rather than by time to peak.",
         "Imaging a classical migraine while not asking about analgesic days per month.",
         "Missing giant cell arteritis in a new headache over 50 by not asking about scalp tenderness and jaw claudication.",
-        "Attributing headache worse on waking to stress without asking about cough and straining."
+        "Attributing headache worse on waking to stress without asking about cough and straining.",
+        "Using one analgesic threshold for every drug; triptans and opioids overuse at 10 days a month, not 15.",
+        "Diagnosing cluster headache in a red painful eye without excluding acute angle-closure glaucoma."
       ],
       "probes": [
         {
@@ -4025,6 +4055,9 @@
       "why": "The patient cannot describe the part of the event that matters, because they were unconscious for it. A seizure history is really two histories, and without the witness it is usually guesswork.",
       "asks": [
         {
+          "text": "Is the patient still fitting, or did they recover fully between events? Time it."
+        },
+        {
           "text": "What is the last thing you remember before it, and the first thing after?"
         },
         {
@@ -4050,9 +4083,31 @@
         },
         {
           "text": "Any sleep deprivation, alcohol, missed medication, fever, or flashing lights beforehand?"
+        },
+        {
+          "text": "Has anyone checked a blood sugar? If not, do it now."
         }
       ],
       "teach": [
+        {
+          "heading": "Two things before the history: is it still going, and what is the glucose?",
+          "body": "A history is taken from a patient who has stopped fitting. If they have not stopped, the history waits.",
+          "points": [
+            {
+              "t": "Five minutes.",
+              "d": "A convulsive seizure lasting five minutes or more, OR repeated seizures without full recovery of consciousness between them, is convulsive status epilepticus. It needs a benzodiazepine now, not observation."
+            },
+            {
+              "t": "Capillary glucose in EVERY seizure and every blackout.",
+              "d": "Hypoglycaemia is a fully reversible cause that is missed by taking a history instead of a reading. It costs seconds."
+            },
+            {
+              "t": "Then the reversible rest.",
+              "d": "Sodium, calcium, magnesium; pregnancy, because eclampsia can present with a first seizure and needs magnesium and delivery, not an anticonvulsant."
+            }
+          ],
+          "note": "Status epilepticus is defined by the CLOCK, not by how dramatic it looks. Note the time the seizure started; nobody remembers it afterwards."
+        },
         {
           "heading": "The three-part structure",
           "body": "Take it as before, during and after. The before belongs to the patient, the during belongs to the witness, and the after is the most discriminating part of the whole history.",
@@ -4100,6 +4155,18 @@
           "heading": "Provocation, and what it changes",
           "points": [
             {
+              "t": "Hypoglycaemia.",
+              "d": "Check it in every case. Reversible in minutes."
+            },
+            {
+              "t": "Hyponatraemia, hypocalcaemia, hypomagnesaemia.",
+              "d": "Treat the cause, not the seizure."
+            },
+            {
+              "t": "Pregnancy or the postpartum period.",
+              "d": "Eclampsia. Magnesium sulphate, and obstetric help."
+            },
+            {
               "t": "Sleep deprivation, alcohol excess or withdrawal, missed doses.",
               "d": "Provoked. Address the provocation rather than escalating drugs."
             },
@@ -4119,12 +4186,26 @@
         }
       ],
       "pitfalls": [
+        "Taking a history while the patient is still convulsing, instead of timing it and treating status.",
+        "Not checking a capillary glucose in a seizure or a blackout.",
         "Taking the history only from the patient, who was unconscious for the important part.",
         "Using incontinence to distinguish seizure from syncope; it does not.",
         "Missing a focal onset because the witness described only the generalised phase.",
         "Not asking where the tongue was bitten, when the side is what matters."
       ],
       "probes": [
+        {
+          "level": 1,
+          "q": "How long must a convulsive seizure last before it is status epilepticus, and what else counts?",
+          "a": "Five minutes or more. Repeated seizures without full recovery of consciousness in between also count, even if each one is shorter.",
+          "accept": [
+            "5",
+            "five",
+            "minute",
+            "recover"
+          ],
+          "minMatch": 1
+        },
         {
           "level": 1,
           "q": "Which two features best separate a seizure from a faint?",
@@ -4167,6 +4248,14 @@
         }
       ],
       "rubric": [
+        {
+          "id": "status",
+          "text": "Times the seizure and recognises status epilepticus at five minutes"
+        },
+        {
+          "id": "glucose",
+          "text": "Checks a capillary glucose"
+        },
         {
           "id": "witness",
           "text": "Obtains a witness account of the event itself"
@@ -4234,6 +4323,12 @@
         },
         {
           "text": "Does it happen on standing up from sitting or lying?"
+        },
+        {
+          "text": "Can you stand and walk unaided right now? Ask them to try, with someone alongside."
+        },
+        {
+          "text": "Any streptomycin, gentamicin or amikacin, now or in the past?"
         }
       ],
       "teach": [
@@ -4303,21 +4398,28 @@
                 "Sudden, with brainstem symptoms",
                 "Central: stroke or TIA",
                 "Diplopia, dysarthria, dysphagia, ataxia"
+              ],
+              [
+                "Recurrent, with migrainous headache, photophobia or aura",
+                "Vestibular migraine",
+                "Headache history; attacks may occur without headache"
               ]
             ]
           }
         },
         {
           "heading": "Peripheral or central",
-          "body": "Peripheral vertigo is usually more violent, with prominent nausea and vomiting, and it fatigues on repetition. Central vertigo may be milder but comes with company: double vision, dysarthria, dysphagia, facial numbness, limb ataxia or a new headache. Severity does not indicate seriousness here, and mild vertigo with any brainstem symptom outranks violent vertigo alone.",
-          "note": "Ask specifically about the Ds: diplopia, dysarthria, dysphagia, and unsteadiness that is worse than the vertigo would explain."
+          "body": "Peripheral vertigo is usually more violent, with prominent nausea and vomiting, and it fatigues on repetition. Central vertigo may be milder but often comes with company: double vision, dysarthria, dysphagia, facial numbness, limb ataxia or a new headache. BUT ISOLATED VERTIGO DOES NOT EXCLUDE A STROKE: a substantial minority of cerebellar and lateral medullary infarcts present as an acute vestibular syndrome with no other brainstem sign at all.",
+          "note": "The most useful single bedside test is whether they can STAND AND WALK UNAIDED. Truncal ataxia out of proportion to the vertigo is a cerebellar stroke until proven otherwise, however mild the spinning feels. Direction-changing nystagmus and vascular risk factors point the same way; HINTS is the referral-grade discriminator."
         }
       ],
       "pitfalls": [
         "Accepting the word dizzy without making the patient describe it.",
         "Not timing a single attack, which is what separates the causes of vertigo.",
         "Assuming severity indicates a peripheral cause and mildness a benign one.",
-        "Missing the brainstem symptoms that make it central."
+        "Missing the brainstem symptoms that make it central.",
+        "Taking isolated vertigo as proof of a peripheral cause, and not testing gait.",
+        "Not asking about aminoglycosides, which are still used in injectable anti-tuberculous regimens."
       ],
       "probes": [
         {
