@@ -258,7 +258,8 @@
     info = info || {}; close();
     var reset = info.resetAt ? new Date(+info.resetAt) : null;
     var resetTxt = reset ? reset.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }) : "midnight";
-    var mt = (typeof info.credits === "number") ? Math.round(info.credits * 2000) : null;   // ₹ credit → MaiK Tokens
+    // The server sends the balance in MaiK Tokens (creditsMt); the ₹ fallback is for an older payload.
+    var mt = (typeof info.creditsMt === "number") ? info.creditsMt : ((typeof info.credits === "number") ? Math.round(info.credits * 2000) : null);
     var msg = info.message || "You've used today's MaiK Tokens.";
     var inner = header("Today's MaiK Tokens are used up") +
       '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--sans);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +

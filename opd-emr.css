@@ -293,7 +293,7 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 @keyframes oeMaikAurora { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
 @keyframes oeMaikBloom { 0%, 100% { box-shadow: 0 3px 26px -3px rgba(99, 102, 241, .62), 0 0 0 1px rgba(124, 58, 237, .1); } 50% { box-shadow: 0 3px 30px -2px rgba(236, 72, 153, .62), 0 0 0 1px rgba(236, 72, 153, .12); } }
 @keyframes oeMaikPulse { 0%, 100% { opacity: 1; } 50% { opacity: .55; } }
-@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on, #smdOpdEmr .oe-maik-cta, #smdOpdEmr .oe-maik-glow { animation: none; } #smdOpdEmr .oe-maik-cta { box-shadow: 0 4px 18px -8px rgba(124, 58, 237, .45); } }
+@media (prefers-reduced-motion: reduce) { #smdOpdEmr .oe-maik-cta.busy .oe-maik-ico, #smdOpdEmr .oe-fmic.on, #smdOpdEmr .oe-fmicbar.live, #smdOpdEmr .oe-maik-cta, #smdOpdEmr .oe-maik-glow { animation: none; } #smdOpdEmr .oe-maik-cta { box-shadow: 0 4px 18px -8px rgba(124, 58, 237, .45); } }
 
 /* per-field dictation mic — dictate into ONE column only (deterministic placement) */
 #smdOpdEmr .oe-inp-wrap { display: flex; align-items: stretch; gap: 6px; }
@@ -302,12 +302,24 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-fmic .material-symbols-outlined { font-size: 20px; }
 #smdOpdEmr .oe-fmic:hover { background: var(--sc-high); }
 #smdOpdEmr .oe-fmic.on { background: var(--error); color: var(--on-error); border-color: var(--error); animation: oe-fmic-pulse 1.2s ease-in-out infinite; }
+/* Dictation status strip — the only honest signal on a record-then-transcribe engine, which produces
+   no partials. Sits above the save bar so it survives scrolling. */
+#smdOpdEmr .oe-fmicbar { position: fixed; left: 12px; right: 12px; bottom: 86px; z-index: 40; display: none;
+  padding: 11px 14px; border-radius: 12px; font: 600 13px/1.45 var(--font, system-ui);
+  background: #0f172a; color: #f8fafc; box-shadow: 0 8px 28px -10px rgba(0,0,0,.55); text-align: center; }
+#smdOpdEmr .oe-fmicbar.on { display: block; }
+#smdOpdEmr .oe-fmicbar.live { background: var(--error); color: var(--on-error); animation: oe-fmic-pulse 1.6s ease-in-out infinite; }
+#smdOpdEmr .oe-fmicbar.busy { background: #1e293b; }
+#smdOpdEmr .oe-fmicbar.ok { background: #14532d; }
+#smdOpdEmr .oe-fmicbar.warn { background: #7c2d12; }
 @keyframes oe-fmic-pulse { 0%, 100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--error) 45%, transparent); } 50% { box-shadow: 0 0 0 6px transparent; } }
 
 /* post-save consult actions: swipe to close, or red button to send to Emergency (ER) */
 #smdOpdEmr .oe-postsave { display: flex; flex-direction: column; gap: 12px; margin-top: 12px; padding: 16px 14px; background: var(--surface); border: 1px solid var(--outline-variant); border-radius: 16px; box-shadow: 0 -3px 14px rgba(20, 32, 43, .08); }
 #smdOpdEmr .oe-postsave-msg { display: flex; align-items: center; gap: 8px; font: 600 13px var(--q-sans); color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-postsave-msg .material-symbols-outlined { font-size: 20px; }
+/* The GHIS record id, so the doctor can see the note really landed (and quote it if asked). */
+#smdOpdEmr .oe-postsave-id { font: 600 11px var(--q-sans); color: var(--on-surface-variant); opacity: .85; }
 #smdOpdEmr .oe-swipe { position: relative; height: 54px; border-radius: 27px; background: var(--sc-high, #e7eef0); overflow: hidden; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
 #smdOpdEmr .oe-swipe-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: color-mix(in srgb, var(--primary) 22%, transparent); }
 #smdOpdEmr .oe-swipe-txt { position: relative; font: 700 14px var(--q-sans); color: var(--secondary); pointer-events: none; }

@@ -723,7 +723,12 @@
   // After a GHIS save the assessment IS the consult record; offer the two ways to finish: swipe to
   // close the consult (ends it / advances the queue) or the red button to send the patient to Emergency.
   function postConsultPanel() {
-    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Close the consult, or send to Emergency.</div>" +
+    return '<div class="oe-postsave"><div class="oe-postsave-msg">' + ms("check_circle") + "Saved to " + emrLabel() + " Initial Assessment. Authorise to sign off and move the queue on." +
+      (oeDocId() ? ' <span class="oe-postsave-id">Record ' + esc(oeDocId()) + "</span>" : "") + "</div>" +
+      // Authorise = the doctor's explicit sign-off. It ends the consult, which advances the OPD queue
+      // (queue.js listens for smd:consult-end), so sign-off happens here rather than back in GHIS.
+      // The swipe below still works; it was the ONLY way to finish before, which is easy to miss.
+      '<button class="oe-btn primary" data-oe-act="consult-authorise">' + ms("verified") + "Authorise &amp; sign off</button>" +
       '<div class="oe-swipe" id="oeSwipe" role="button" tabindex="0" aria-label="Close consult — swipe, or press Enter"><div class="oe-swipe-fill"></div><span class="oe-swipe-txt">Swipe to close consult</span><div class="oe-swipe-knob" id="oeSwipeKnob">' + ms("chevron_right") + "</div></div>" +
       '<button class="oe-btn" data-oe-act="rx-share">' + ms("share") + "Share prescription (WhatsApp / print)</button>" +
       '<button class="oe-btn" data-oe-act="rx-refer">' + ms("forward") + "Refer patient</button>" +
@@ -1142,6 +1147,7 @@
     if (cmd === "scribe-accept") { var p = String(arg).split(":"); return scribeAccept(p[0], +p[1]); }
     if (cmd === "scribe-acceptall") return scribeAcceptAll(arg);
     if (cmd === "fieldmic") return toggleFieldMic(arg);
+    if (cmd === "consult-authorise") return authoriseConsult();
     if (cmd === "consult-er") return consultToER();
     if (cmd === "rx-share") return shareRx();
     if (cmd === "rx-refer") return shareReferral();
@@ -1805,10 +1811,42 @@
         if (st !== forPatient) return;
         st.assessLoading = false; st.assessLoaded = true;
         if (!res.ok || res.d.error === "login_required") st.assessErr = "Connect Ward Sync (GHIS) first, then reopen this tab.";
-        else st.assessVals = buildAssessVals(res.d.fields || []);
+        else {
+          st.assessVals = buildAssessVals(res.d.fields || []);
+          // Keep the record id this form was loaded under. The save re-activates the visit server-side,
+          // but if that activation does not stick (session moved on, another tab, a slow GHIS) the form
+          // comes back blank with doc_id 0 and the server REFUSES rather than write an orphan — which is
+          // the "GHIS: no_active_assessment" the doctor sees. Sending the id we just read gives the
+          // server the fallback it already supports, so a good load makes the save survive that.
+          st.assessDocId = oeFieldValue(res.d.fields, "Initial_Assessment_doc_id");
+        }
         paint();
       })
       .catch(function () { if (st !== forPatient) return; st.assessLoading = false; st.assessLoaded = true; st.assessErr = "Could not load the assessment form."; paint(); });
+  }
+
+  // Read one field out of the GHIS assessment form payload by its (prefix-stripped) name.
+  function oeFieldValue(fields, name) {
+    for (var i = 0; i < (fields || []).length; i++) {
+      var f = fields[i];
+      if (f && f.name === name) return f.value == null ? "" : String(f.value);
+    }
+    return "";
+  }
+  // The doc id to send with a save: "" when we never loaded a real one (0 / blank), so the server's
+  // own guard still fires rather than us pushing a bogus id at it.
+  function oeDocId() { var d = String(st.assessDocId || ""); return (d && d !== "0") ? d : ""; }
+  // GHIS speaks in machine codes. A doctor mid-consult needs to know what to DO about it.
+  function ghisSay(resp) {
+    var r = String(resp || "");
+    if (/no_active_assessment/.test(r)) {
+      // Keep the [tried ...] trace on screen. It names which activation attempts GHIS rejected, which
+      // is the difference between diagnosing this in one report and guessing at it across three.
+      var tried = (r.match(/\[tried [^\]]*\]/) || [""])[0];
+      return "This visit is not open in " + emrLabel() + " right now. Reopen the patient from the queue, then save again - nothing you typed is lost. " + tried;
+    }
+    if (/patient_mismatch/.test(r)) return emrLabel() + " returned a different patient's form, so the save was stopped. Reopen this patient and try again.";
+    return r ? ("GHIS: " + r.slice(0, 90)) : "Could not complete the request. Please try again.";
   }
 
   // Every write: explicit confirm() -> POST. 501 / disabled -> clean "being set up" toast (never a raw error).
@@ -1820,7 +1858,7 @@
         var d = res.d;
         if (res.status === 501 || d.error === "emr_write_disabled" || d.error === "assessment_write_not_captured") { toast("This is being set up and is not live yet."); return; }
         if (res.status === 401 || d.error === "login_required") { toast("Connect Ward Sync (GHIS) first."); return; }
-        if (!res.ok || d.ok === false) { toast(d.resp ? ("GHIS: " + String(d.resp).slice(0, 90)) : "Could not complete the request. Please try again."); return; }
+        if (!res.ok || d.ok === false) { toast(ghisSay(d.resp)); return; }
         toast(okMsg);
         if (tl && tl.text) { addToTimeline(tl.kind, tl.text); setTimeout(loadTimeline, 600); }   // mirror this action into the visit summary + refresh the Profile timeline
         st.invDraft = {}; st.medDraft = {};
@@ -1849,7 +1887,7 @@
       st.savedConsult = true; loadTimeline(); toast("Saved to " + emrLabel() + " on this device."); paint(); return;
     }
     if (!confirmed("Save this assessment to " + emrLabel() + "?")) return;
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Saved to " + emrLabel() + ". It appears under the patient's Initial Assessment (not Clinical notes).",
       { kind: "assessment", text: assessSummary(st.assessVals) }, function () { st.savedConsult = true; paint(); });
   }
   // Clear every field and save the blank assessment to GHIS (deliberate wipe of the current Initial Assessment).
@@ -1863,14 +1901,14 @@
       toast("Assessment cleared in " + emrLabel() + "."); paint(); return;
     }
     paint();
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload({}) }, "Assessment cleared in " + emrLabel() + ".",
       { kind: "assessment", text: "Assessment cleared" });
   }
 
   // ---- voice fill (ambient dictation -> assessVals + live DOM, doctor edits protected) ----------
   var _amb = null, _elapsedTmr = null, _lastFullTranscript = "", _procTmr = null, _priorTranscript = "";
   // Clear the "Finishing your dictation…" state once the last chunk + refine have landed (or on a safety timeout).
-  function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
+  function finishProcessing() { if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; } _finishPending = false; if (!st.voiceProcessing) return; st.voiceProcessing = false; paint(); }
   function setVoiceStatus(t) { st.voiceStatus = t; try { var e = document.getElementById("oeVoiceStatus"); if (e) e.textContent = t; } catch (x) {} }
   // Live transcript into the Voice Consult box (updates the DOM without a full repaint; keeps it scrolled).
   function setTranscript(t) {
@@ -2314,13 +2352,20 @@
   // main double-call-on-Stop fix is in stopVoice(), which no longer races its own stale call
   // against the teardown flush's onRefine).
   var _lastRefinedTranscript = "";
+  // True between a doctor-initiated Pause/Stop and the moment the note is drafted. Every failure path
+  // in doRefine is SILENT by design during background ticks (a mid-consult hiccup must not nag), but
+  // when the doctor has explicitly finished, silence is indistinguishable from "MaiK Scribe is broken":
+  // the finishing animation ends and nothing appears. While this is set, failures say what happened.
+  var _finishPending = false;
+  function refineFail(msg) { if (_finishPending) { try { toast(msg); } catch (e) {} } finishProcessing(); }
   function doRefine(transcript) {
-    if (!transcript || !(G.SMD_AI && G.SMD_AI.extract)) { finishProcessing(); return; }
-    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine
+    if (!transcript) { refineFail("Nothing was transcribed - check the microphone and try again."); return; }
+    if (!(G.SMD_AI && G.SMD_AI.extract)) { refineFail("Note drafting is unavailable on this build."); return; }
+    if (_lastRefinedTranscript.indexOf(transcript) === 0) { finishProcessing(); return; }   // no new content since the last refine — genuinely nothing to say
     _lastRefinedTranscript = transcript;
     G.SMD_AI.extract(transcript, "opd-scribe").then(function (r) {
       if (r && r.error === "quota") { toast(r.message || "MaiK Scribe limit reached. Try again later."); try { stopVoice(); } catch (e) {} return; }
-      if (!r || r.error) return;
+      if (!r || r.error) { if (_finishPending) { try { toast("Could not draft the note from this dictation - the transcript is kept, try Stop again."); } catch (e) {} } return; }
       var sg = r.suggestions || {};
       var grounded = (G.SMD_SCRIBEGROUND && G.SMD_SCRIBEGROUND.ground) ? G.SMD_SCRIBEGROUND.ground(transcript, sg, groundOpts(transcript))
         : { ddx: (sg.ddx || []).map(function (l) { return { label: l, source: "ai" }; }), investigations: (sg.investigations || []).map(function (l) { return { label: l, source: "ai" }; }) };
@@ -2356,7 +2401,11 @@
         // doctor is mid-edit in the notes textarea (a late refine resolving after Stop would steal focus).
         if (added) { var ed = null; try { ed = document.getElementById("oeNotesEdit"); } catch (e) {} if (!ed || document.activeElement !== ed) paint(); }
       }
-    }).catch(function () {}).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
+    }).catch(function () {
+      // Was silently swallowed: a dropped connection mid-consult looked exactly like a working Stop
+      // that produced nothing. The transcript is never lost, so say so and let the doctor retry.
+      if (_finishPending) { try { toast("Could not reach MaiK to draft the note - check your connection, your transcript is safe."); } catch (e) {} }
+    }).then(finishProcessing);   // clear the "Finishing…" state whether it succeeded or not
   }
   function startVoice() {
     if (!G.SMD_AMBIENT) { toast("Voice engine not available on this build."); return; }
@@ -2387,13 +2436,18 @@
     // Pause = flush + process the audio so far: show "Finishing your dictation", refine the captured
     // transcript, then land on the paused state with the fresh transcript. Mirrors Stop but keeps the
     // session alive (resumable). The engine gates its own onRefine on !paused, so we refine here.
-    try { _amb.pause(); } catch (x) {}
+    // Same contract as stop(): true means the flushed window will deliver the COMPLETE transcript via
+    // onRefine, so refining here too would draft the note from the stale pre-flush text (or from
+    // nothing at all, which is what "Pause shows nothing scribed" was).
+    var pauseFlushing = false;
+    try { pauseFlushing = !!_amb.pause(); } catch (x) {}
     st.voicePaused = true;
     st.voiceProcessing = true;                              // render checks processing first -> the finishing animation
+    _finishPending = true;                                  // doctor-initiated finish: failures must speak up
     if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
     _procTmr = setTimeout(finishProcessing, 15000);         // safety: never hang the panel
     paint();
-    doRefine(st.voiceTranscript || _lastFullTranscript || "");   // updates the transcript; doRefine's .then(finishProcessing) clears the state
+    if (!pauseFlushing) doRefine(st.voiceTranscript || _lastFullTranscript || "");   // updates the transcript; doRefine's .then(finishProcessing) clears the state
   }
   function stopVoice() {
     // _amb.stop() returns true when an in-flight chunk is being flushed AND that flush will itself
@@ -2407,11 +2461,15 @@
     // Show a "Finishing…" state while the last chunk transcribes + notes draft (finishProcessing clears it).
     var willProcess = flushing || !!_lastFullTranscript;
     st.voiceProcessing = willProcess;
+    _finishPending = willProcess;                           // covers BOTH paths: our own doRefine below
+                                                            // and the flush's onRefine, which lands later.
     if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
     if (willProcess) _procTmr = setTimeout(finishProcessing, 15000);   // safety: never hang the panel
     if (!flushing) doRefine(_lastFullTranscript);           // fallback end-of-consult refine over the whole transcript
     paint();
-    if (!willProcess) finishProcessing();
+    // Stopped with no audio transcribed at all: previously the panel just returned to idle, which is
+    // exactly the "I pressed Stop and nothing showed up" report. Say it plainly.
+    if (!willProcess) { try { toast("Nothing was captured - check the microphone and try again."); } catch (e) {} finishProcessing(); }
   }
 
   // Doctor taps Accept on one suggestion row: writes ONLY that row into the assessment/an inv-order
@@ -2543,6 +2601,65 @@
   var _fieldSession = null;
   function fmicNode(name) { var l = document.querySelectorAll("#smdOpdEmr .oe-fmic"); for (var i = 0; i < l.length; i++) { if (l[i].getAttribute("data-oe-act") === "fieldmic:" + name) return l[i]; } return null; }
   function setFmicUI(name, on) { var b = fmicNode(name); if (b) { b.classList.toggle("on", !!on); b.innerHTML = ms(on ? "stop" : "mic"); } }
+  /* Dictation feedback. A red button was the ONLY sign anything was happening, and on iOS the Whisper
+   * plugin is record-then-transcribe — there are no partials — so between tapping the mic and the text
+   * landing the app looked frozen with nothing to confirm it had heard a word. This is a persistent
+   * strip: what is happening, for how long, and how to stop. Fixed, so it stays visible wherever the
+   * form is scrolled. */
+  var _fmicTmr = null, _fmicT0 = 0;
+  // Same plain sentences the Rx pad uses — a doctor cannot act on "mic-denied".
+  var RX_VOICE_ERR_OE = {
+    "mic-denied": "Microphone is blocked - allow mic access for StewardMD, then try again.",
+    "no-voice-engine": "This device has no dictation engine available.",
+    "stt-unavailable": "On-device dictation is not available on this build.",
+    "clinical-unavailable": "Clinical dictation is not ready on this device.",
+    "transcription-failed": "Could not transcribe that - try again.",
+    "speech-error": "Dictation stopped - try again.",
+  };
+  // Human label for the field being dictated ("BP systolic"), so the strip says what it is filling.
+  function fieldLabel(name) {
+    try {
+      var el = document.getElementById("oefld-" + name) || document.querySelector('#smdOpdEmr [data-k="' + name + '"]');
+      var lab = el && el.closest ? el.closest(".oe-fld") : null;
+      var l = lab && lab.querySelector ? lab.querySelector("label") : null;
+      if (l && l.textContent) return l.textContent.replace(/\s*\*\s*$/, "").trim();
+    } catch (e) {}
+    return String(name || "this field").replace(/_/g, " ");
+  }
+  function fmicBar() {
+    var el = document.getElementById("oeFmicBar");
+    if (!el) {
+      var host = document.getElementById("smdOpdEmr"); if (!host) return null;
+      el = document.createElement("div"); el.id = "oeFmicBar"; el.className = "oe-fmicbar";
+      el.setAttribute("role", "status"); el.setAttribute("aria-live", "polite");
+      host.appendChild(el);
+    }
+    return el;
+  }
+  function fmicSay(txt, kind) {
+    var el = fmicBar(); if (!el) return;
+    if (!txt) { el.classList.remove("on"); el.textContent = ""; return; }
+    el.className = "oe-fmicbar on" + (kind ? " " + kind : "");
+    el.textContent = txt;
+  }
+  function fmicElapsed() {
+    if (!_fmicT0) return "";
+    var s = Math.max(0, Math.round((now() - _fmicT0) / 1000));
+    return " " + Math.floor(s / 60) + ":" + (s % 60 < 10 ? "0" : "") + (s % 60);
+  }
+  function fmicListening(label) {
+    _fmicT0 = now();
+    if (_fmicTmr) clearInterval(_fmicTmr);
+    var tick = function () { fmicSay("Listening" + fmicElapsed() + " - " + label + ". Tap the mic again to stop.", "live"); };
+    tick(); _fmicTmr = setInterval(tick, 1000);
+  }
+  function fmicDone(txt, kind) {
+    if (_fmicTmr) { clearInterval(_fmicTmr); _fmicTmr = null; }
+    _fmicT0 = 0;
+    if (!txt) { fmicSay(""); return; }
+    fmicSay(txt, kind);
+    setTimeout(function () { var el = document.getElementById("oeFmicBar"); if (el && el.textContent === txt) fmicSay(""); }, 3200);
+  }
   function stopFieldMic() {
     if (_fieldSession) { try { _fieldSession.stop(); } catch (x) {} _fieldSession = null; }
     if (st.fieldMic) { setFmicUI(st.fieldMic, false); st.fieldMic = null; }
@@ -2556,19 +2673,25 @@
   // phone) and degrades gracefully via voice.js. Never touches any other column - deterministic placement.
   function toggleFieldMic(name) {
     if (st.voiceOn || st.voiceProcessing) { toast("Stop MaiK Scribe first to dictate a single field."); return; }
-    if (st.fieldMic === name) { stopFieldMic(); return; }
+    // Tapping the live mic = "I've finished speaking". On a record-then-transcribe engine the words
+    // arrive AFTER this, so say "Transcribing…" rather than going blank and looking broken.
+    if (st.fieldMic === name) { fmicDone("Transcribing what you said…", "busy"); stopFieldMic(); return; }
     stopFieldMic();                                        // only one field mic at a time
     if (!G.SMD_VOICE || !G.SMD_VOICE.listen) { toast("On-device voice not available on this build."); return; }
     st.fieldMic = name; setFmicUI(name, true);
+    fmicListening(fieldLabel(name));
+    var heard = false;
     function put(transcript, done) {
       var v = coerceFieldValue(name, transcript);
-      if (v != null) { st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.assessVals[name] = v; st.assessTouched[name] = true; putVoiceDom(name); }
-      if (done) stopFieldMic();
+      if (v != null) { heard = true; st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {}; st.assessVals[name] = v; st.assessTouched[name] = true; putVoiceDom(name); }
+      if (done) { fmicDone(v != null ? ("Filled " + fieldLabel(name) + ": " + String(v).slice(0, 40)) : "Nothing was heard - try again, closer to the mic.", v != null ? "ok" : "warn"); stopFieldMic(); }
     }
     _fieldSession = G.SMD_VOICE.listen({
       language: (st.voiceLang && st.voiceLang !== "auto") ? st.voiceLang : undefined,
       noCloud: true,
-      onPartial: function (t) { put(t, false); },
+      // Partials only exist on streaming engines. When they do, echo them so the doctor can see it is
+      // hearing them; when they don't (on-device Whisper), the timer above is the only honest signal.
+      onPartial: function (t) { put(t, false); if (t) fmicSay("Heard: " + String(t).slice(0, 60), "live"); },
       onFinal: function (t) {
         var s = String(t || "");
         // GHIS + MaiK must be English — if the dictation is Telugu/Hindi, translate the final before filling.
@@ -2578,14 +2701,28 @@
             .catch(function () { put(s, true); setVoiceStatus(""); });
         } else { put(s, true); }
       },
-      onError: function () { setVoiceStatus("On-device voice unavailable"); stopFieldMic(); },
-      onState: function () {}
+      onError: function (code) { fmicDone(RX_VOICE_ERR_OE[code] || "Dictation stopped - try again.", "warn"); setVoiceStatus(""); stopFieldMic(); },
+      onState: function (s) { if (s === "transcribing") fmicSay("Transcribing what you said…", "busy"); }
     });
-    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); toast("On-device voice could not start. Type the value instead."); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
+    if (!_fieldSession) { st.fieldMic = null; setFmicUI(name, false); fmicDone("On-device voice could not start. Type the value instead.", "warn"); }   // listen returned null (engine present but couldn't start) - tell the doctor instead of silently flicking the mic off
   }
 
   // ---- finish the consult (shown after a GHIS save) --------------------------------------------
   // The queue (queue.js) owns the session, so we bridge with a DOM event it listens for.
+  /* Authorise = the doctor signing the note off. It is deliberately explicit (a confirm), because it
+   * ends the consult and advances the OPD queue to the next patient — the same thing the swipe did,
+   * but discoverable, and named for what the doctor is actually doing.
+   *
+   * Scope, stated plainly: this signs off in StewardMD's queue. GHIS exposes no authorise/finalise
+   * action on the Initial Assessment that I could find — the live form has no such field and the OPD
+   * list carries no such row action — so this does NOT set an authorisation flag inside GHIS. The note
+   * itself is already saved there. If GHIS does have one, point me at where you authorise today and
+   * this button can call it too. */
+  function authoriseConsult() {
+    if (!confirmed("Authorise this assessment and finish the consult?\n\nThe note is already saved in " + emrLabel() + ". This signs it off and moves the queue to the next patient.")) return;
+    try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
+    endConsult();
+  }
   function endConsult() {
     try { document.dispatchEvent(new CustomEvent("smd:consult-end", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();
@@ -2596,7 +2733,7 @@
     st.assessVals = st.assessVals || {}; st.assessTouched = st.assessTouched || {};
     var cur = st.assessVals.refered_management_plan || "";
     if (!/emergency/i.test(cur)) { st.assessVals.refered_management_plan = (cur ? cur + " " : "") + "Refer to Emergency (ER)."; st.assessTouched.refered_management_plan = true; }
-    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
+    postWrite("/assessment-save", { patientId: st.patient.mrn || "", episodeId: st.episodeId || "", docId: oeDocId(), fields: buildAssessPayload(st.assessVals || {}) }, "Referred to Emergency (ER).", { kind: "assessment", text: "Referred to Emergency (ER)" });
     // 2) escalate in the queue + end the consult (works even when the GHIS write is off)
     try { document.dispatchEvent(new CustomEvent("smd:consult-emergency", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}
     close();

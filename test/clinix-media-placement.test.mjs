@@ -1,5 +1,11 @@
 /* CliniX: a video must appear ONLY on the skill it was chosen for.
  *
+ * MERGE NOTE (2026-08-25): another session found and fixed this same bug independently, from a
+ * Chronic liver disease case that opened "Chief complaints" and played "Respiratory History - OSCE
+ * Tips". Both test files landed with this name. This is the union of the two: the checks below are
+ * the broader set (audio as well as video, orphans, licence, one whole-exam video per system), plus
+ * the three assertions that only their version made, kept at the end with their reasoning.
+ *
  * Every media record carries `forSkill` — the one skill it was picked to illustrate. Nothing
  * enforced it, so "Respiratory History - OSCE Tips" was declared for the GENERIC
  * skill.hx.chief_complaints and therefore played inside every system's history section: a student
@@ -137,4 +143,40 @@ test("every video is embeddable and licence-cleared", () => {
     .filter(([, v]) => v.cleared !== true || v.embeddable !== true || !v.attribution)
     .map(([k]) => k);
   assert.deepEqual(bad, [], "videos not cleared/embeddable/attributed:\n  " + bad.join("\n  "));
+});
+
+/* ── from the other session's version of this file, kept because they are not duplicates ────────
+ * Their case was a Chronic liver disease pathway playing a respiratory history video on "Chief
+ * complaints". Same root cause, found from the other end. */
+
+test("every media id a skill references exists in the manifest", () => {
+  /* A DANGLING reference is worse than a wrong one: the renderer is fail-soft, so a typo in a media
+   * id shows the student nothing at all and logs no error. */
+  const known = new Set(Object.keys(manifest));
+  const dangling = [];
+  for (const [skillId, ids] of skillMedia()) {
+    for (const id of ids) if (!known.has(id)) dangling.push(`${skillId} -> ${id}`);
+  }
+  assert.deepEqual(dangling, [], "skills referencing media that is not in the manifest:\n  " + dangling.join("\n  "));
+});
+
+test("REGRESSION: the generic Chief complaints step carries no system-specific video", () => {
+  // The exact skill the bug was found on, named so it cannot silently reappear.
+  const core = JSON.parse(readFileSync(join(CLINIX, "skills/core.json"), "utf8")).skills;
+  const cc = core["skill.hx.chief_complaints"];
+  assert.ok(cc, "skill.hx.chief_complaints is missing");
+  const vids = (cc.media || []).filter((m) => String(m).startsWith("media."));
+  assert.deepEqual(vids, [],
+    "Chief complaints is reused by every case; it must carry no media of its own");
+});
+
+test("the respiratory history video still has a correct home", () => {
+  // Removing it from the generic step must not orphan it.
+  const rec = manifest["media.vid.resphistory"];
+  assert.ok(rec, "media.vid.resphistory vanished from the manifest");
+  assert.equal(rec.forSkill, "skill.hx.resp.dyspnea",
+    "its home is the respiratory history skill");
+  const used = skillMedia();
+  assert.ok([...used].some(([id, ids]) => id === "skill.hx.resp.dyspnea" && ids.includes("media.vid.resphistory")),
+    "it must actually be shown on that skill");
 });

@@ -187,12 +187,22 @@ export function parseOpdHtml(html) {
     if (/mobile|contact|phone/.test(t)) return 'mobile';
     return ''; };
   const head = (html.match(/<th[\s\S]*?<\/th>/gi) || []).map(fieldFor);
+  /* The EPISODE, captured separately. `visitId` above matches opno|visitno|episode and the row builder
+   * is first-column-wins, so on a table listing "OP No" before "Episode" the OP number takes visitId
+   * and the episode is DISCARDED. Activation needs recordNo = "<MR>-<episode>" and will not accept an
+   * OP number, which is why Save to GHIS refused with the two values resolving identically. Additive:
+   * visitId keeps exactly its old meaning for every existing caller. */
+  const headEpi = (html.match(/<th[\s\S]*?<\/th>/gi) || []).map((l) =>
+    /episode/.test(strip(l).toLowerCase().replace(/[^a-z]/g, '')) ? 'episodeId' : '');
   const rows = [];
   // Parse EVERY <tr> with data cells (works with or without <tbody>). First column mapping to a field wins,
   // so a later "Doctor name" can't overwrite the patient name. Keep only real OPD rows (a patient id present).
   (html.match(/<tr[\s\S]*?<\/tr>/gi) || []).forEach((tr) => {
     const tds = tr.match(/<td[\s\S]*?<\/td>/gi); if (!tds || tds.length < 4) return;
-    const o = {}; tds.forEach((td, i) => { const f = head[i]; if (f && !o[f]) o[f] = strip(td); });
+    const o = {}; tds.forEach((td, i) => {
+      const f = head[i]; if (f && !o[f]) o[f] = strip(td);
+      if (headEpi[i] && !o.episodeId) o.episodeId = strip(td);
+    });
     if (o.patientId && /[A-Za-z0-9]/.test(o.patientId) && (o.patientName || o.visitId)) rows.push(o);
   });
   return rows;
@@ -435,14 +445,67 @@ function parseAssessmentFields(html) {
   return out;
 }
 // GET the Initial Assessment form (same page getDemographics reads for phone). May 302 to SSO -> unauth.
-async function getAssessmentForm(env, token, patientId, episodeId) {
-  const s = await getSession(env, token); if (!s) return { unauth: true };
+/* Activation needs recordNo = "<MR>-<episode>". When the caller has no episode — a queue ticket
+ * created without ghisEpisodeId/visitId, a patient opened from a route that never carried one — the
+ * Searchnew below is SKIPPED, the assessment form comes back blank (doc_id 0), and the save is then
+ * correctly refused as an orphan write. From the doctor's side that is simply "Save to GHIS stopped
+ * working", with nothing they can do about it.
+ *
+ * GHIS itself knows the answer: today's OPD list carries one row per visit with both the MR and the
+ * visit id. So when the episode is missing, look it up rather than giving up. Best-effort and only on
+ * the missing path — a patient genuinely not on today's OPD list still falls through to the guard,
+ * which is the right outcome (there is no visit to attach an assessment to). */
+/* `deps.listOpd` is injectable ONLY so this is testable without a GHIS session. Production passes nothing. */
+export async function resolveEpisode(env, token, mr, episodeId, deps) {
   const epi = String(episodeId || '');
+  if (epi || !mr) return epi;
+  const listOpd = (deps && deps.listOpd) || getOpdPatients;
+  try {
+    const rows = await listOpd(env, token, '', false, '');
+    if (!Array.isArray(rows)) return '';
+    const want = String(mr).trim().toUpperCase();
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i] || {};
+      // Prefer the real episode column; fall back to visitId (which on many tables IS the episode).
+      if (String(r.patientId || '').trim().toUpperCase() === want) return String(r.episodeId || r.visitId || '');
+    }
+  } catch (e) { /* best-effort: fall through to the doc_id guard */ }
+  return '';
+}
+
+async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  const mrId = String(patientId || '');
   // Activate the patient's visit first (same Searchnew as save) so the form loads the EXISTING assessment
-  // instead of a blank one — the doctor edits rather than retypes.
-  if (patientId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(patientId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
-  const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(patientId || ''), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (r.unauth) return r;
+  // instead of a blank one — the doctor edits rather than retypes. Same activate-then-CHECK as the save:
+  // the caller's episodeId may be a visit number rather than the episode, which activates nothing. A
+  // blank prefill is not cosmetic — it also leaves the client with no doc_id to send back on save.
+  // Carry the activation cookie into the read — see saveAssessment: Searchnew's Set-Cookie IS the
+  // active-visit context, and dropping it is what returned a blank form.
+  let cookie = s.cookie;
+  const load = async (epi) => {
+    if (mrId && epi) {
+      try {
+        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mrId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
+      } catch (e) {}
+    }
+    const rr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mrId), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
+    if (rr.unauth) return rr;
+    const doc = extractAssessmentForm(rr.body || '')['assessment.Initial_Assessment_doc_id'];
+    return { r: rr, live: !(doc == null || String(doc) === '' || String(doc) === '0') };
+  };
+  let got = await load(String(episodeId || ''));
+  if (got.unauth) return got;
+  if (!got.live) {
+    const looked = await resolveEpisode(env, token, mrId, '');
+    if (looked && looked !== String(episodeId || '')) {
+      const retry = await load(looked);
+      if (retry.unauth) return retry;
+      if (retry.live) got = retry;
+    }
+  }
+  const r = got.r;
   const html = r.body || '';
   // Key by the schema's field name: strip ONLY the assessment. prefix. The val.* fields KEEP their
   // prefix (that's their real GHIS name + how ASSESS_SCHEMA/buildAssessVals look them up). Stripping
@@ -450,7 +513,31 @@ async function getAssessmentForm(env, token, patientId, episodeId) {
   // blanked+overwritten on every Save.
   const all = extractAssessmentForm(html), fields = [];
   Object.keys(all).forEach(function (k) { if (/verificationtoken/i.test(k)) return; fields.push({ name: k.replace(/^assessment\./, ''), value: all[k] }); });
-  return { fields: fields, raw: htmlToText(html).slice(0, 8000) };
+  /* dbg=auth: return the RAW HTML around the form's action buttons. GHIS's Initial Assessment ends
+   * with "Update" and "Authorize" — Authorize is what promotes the note into Clinical notes — and the
+   * plain-text `raw` below is both tag-stripped and truncated at 8000 chars, so the buttons and their
+   * targets never survive. This exposes just those fragments so the authorise call can be wired to
+   * what the form actually does rather than a guessed endpoint. No PHI: only markup around the
+   * buttons and form tags. */
+  const dbgAuth = [];
+  if (dbg) {
+    const hay = String(html);
+    // ?dbg=auth gives the button/form markup; ?dbg=<anything else> searches for that literal, which is
+    // how the Authorize button's handler (signOff1) gets traced to the URL it actually posts to.
+    const kws = String(dbg) === 'auth'
+      ? ['uthoriz', 'uthoris', 'type="submit"', '<form', 'formaction', 'asp-action']
+      : [String(dbg)];
+    kws.forEach(function (kw) {
+      let from = 0, n = 0;
+      while (n < 4) {
+        const i = hay.toLowerCase().indexOf(kw.toLowerCase(), from);
+        if (i < 0) break;
+        dbgAuth.push(kw + ' @' + i + ' :: ' + hay.slice(Math.max(0, i - 220), i + 260).replace(/\s+/g, ' '));
+        from = i + kw.length; n++;
+      }
+    });
+  }
+  return { fields: fields, raw: htmlToText(html).slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
 }
 // READ a patient's OP visit "opcard" — the clinical note the GHIS History tab shows (the doctor's
 // footprint for that visit). Activates the visit first (Searchnew, same as the assessment read — without
@@ -602,20 +689,84 @@ export function appendText(cur, add) {
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
-  const mr = String(body.patientId || ''), epi = String(body.episodeId || '');
-  // ACTIVATE THE VISIT first: POST Searchnew with recordNo=<MR>-<episode>, the same call getDemographics
-  // uses to load a patient's visit. Without it the assessment form GET returns a BLANK form (doc_id 0, no
-  // episode), so GHIS "Successfully submitted" an orphan record under no visit instead of UPDATING the real
-  // one on the doctor's screen. (Session context is server-side, keyed by the shared session cookie.)
-  if (mr && epi) {
-    try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {}
+  const mr = String(body.patientId || '');
+  /* Activate, then CHECK — do not assume. The caller's episodeId is not trustworthy: the queue sets
+   * `episodeId = ghisEpisodeId || visitId`, so a ticket missing the real episode substitutes a visit
+   * number that recordNo does not accept. Activation then silently no-ops and the form comes back
+   * blank, which is indistinguishable from "no episode at all" — and a resolveEpisode that only fires
+   * when the episode is EMPTY never gets a chance to correct it.
+   *
+   * So: try the caller's value, look at the doc_id we actually got back, and if it is blank try again
+   * with the visit GHIS itself reports for this MR. Each attempt is recorded so a failure can say what
+   * was tried instead of just "not activated". */
+  const attempts = [];
+  /* THE COOKIE IS THE WHOLE THING. Searchnew marks the active visit in GHIS's SERVER-SIDE session and
+   * hands the context back as a Set-Cookie. ghisReq always sends the STORED login cookie and merely
+   * RETURNS setCookie for the caller to merge — so throwing it away meant the very next GET arrived
+   * with no active visit and GHIS answered with a blank doc_id-0 form. Every "wrong episode" theory was
+   * wrong: MR-OPMR… is the correct recordNo (proved against the live server — Searchnew returns the
+   * patient page for it), the activation simply never carried into the read. getDemographics works only
+   * because it keeps its own jar across calls. */
+  let cookie = s.cookie;
+  /* SECOND UNTESTED HYPOTHESIS, checked in the same pass: GetInitialAssessmentnew/?id=<MR> may be the
+   * wrong key. GHIS keys much of this flow by VISIT, so a valid MR can legitimately return a fresh
+   * blank form. Rather than guess again and cost another deploy, try the MR and then the visit id, and
+   * report everything observed — activation status, whether Searchnew set any cookie, the size of each
+   * form returned, and which id produced a real doc_id. This is instrumentation I should have added
+   * before the first fix, not after the fourth. */
+  let epiUsed = '';                                     // the visit we actually activated against
+  const activateAndLoad = async (epi, how) => {
+    if (mr && epi) {
+      epiUsed = epi;
+      try {
+        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        const sc = (a && a.setCookie) || [];
+        if (sc.length) cookie = mergeCookies(cookie, sc);
+        attempts.push(how + ':act' + ((a && a.status) || '?') + ':ck' + sc.length);
+      } catch (e) { attempts.push(how + ':act-threw'); }
+    } else attempts.push(how + ':no-epi');
+    let last = null;
+    const ids = epi && epi !== mr ? [['mr', mr], ['visit', epi]] : [['mr', mr]];
+    for (let i = 0; i < ids.length; i++) {
+      const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(ids[i][1]), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
+      if (r.unauth) return { unauth: true };
+      if (r.setCookie && r.setCookie.length) cookie = mergeCookies(cookie, r.setCookie);   // antiforgery for the POST
+      const form = extractAssessmentForm(r.body || '');
+      const doc = form['assessment.Initial_Assessment_doc_id'];
+      const live = !(doc == null || String(doc) === '' || String(doc) === '0');
+      attempts.push('id:' + ids[i][0] + '=' + (live ? 'ok' : 'blank') + ':len' + Math.round(String(r.body || '').length / 100));
+      last = { form: form, live: live, gr: r };
+      if (live) return last;
+    }
+    return last || { form: {}, live: false, gr: null };
+  };
+
+  let got = await activateAndLoad(String(body.episodeId || ''), 'caller');
+  if (got.unauth) return got;
+  if (!got.live) {
+    /* Try EVERY identifier GHIS gives us for this patient's visit, not one guess. The OPD row carries
+     * an episode AND an OP/visit number and only one of them is the episode recordNo wants — and which
+     * is which varies with the table. Trying both costs one extra request on a path that is already
+     * failing, and removes a whole round of guessing. */
+    const cands = [];
+    try {
+      const rows = await getOpdPatients(env, token, '', false, '');
+      if (Array.isArray(rows)) {
+        const want = mr.trim().toUpperCase();
+        const row = rows.filter((r) => String((r || {}).patientId || '').trim().toUpperCase() === want)[0];
+        if (row) { cands.push(['epi', row.episodeId], ['visit', row.visitId]); }
+        else attempts.push('opdlist:no-row(' + rows.length + ')');
+      } else attempts.push('opdlist:unavailable');
+    } catch (e) { attempts.push('opdlist:error'); }
+    for (let i = 0; i < cands.length && !got.live; i++) {
+      const v = String(cands[i][1] || '');
+      if (!v || v === String(body.episodeId || '')) continue;   // already tried, or nothing to try
+      const retry = await activateAndLoad(v, cands[i][0]);
+      if (retry.unauth) return retry;
+      if (retry.live) got = retry;
+    }
   }
-  // Reserialize the CURRENT form so GHIS gets the complete model + its own pre-allocated doc_id/token,
-  // then overlay the doctor's edits — exactly what GHIS's own "Save" posts. Without this, a partial body
-  // with doc_id 0 returns 200 but is never persisted ("No records found").
-  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
-  if (gr.unauth) return gr;
-  const all = extractAssessmentForm(gr.body || '');
+  const all = got.form || {};
   // SAFETY (GHIS keys the assessment form by DOCTOR token, not patient — a stale/interleaved request
   // can return a DIFFERENT patient's form, and a failed visit-activation returns a blank doc_id 0 form):
   //  (a) if the form carries a patient_id, it MUST match the one we're saving — else abort (never overlay
@@ -628,8 +779,26 @@ export async function saveAssessment(env, token, body) {
   }
   const formDoc = all['assessment.Initial_Assessment_doc_id'];
   const clientDoc = (body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '';
-  if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc) {
-    return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate' };
+  /* doc_id 0 means TWO different things, and conflating them is what broke Save to GHIS.
+   *
+   *   (a) "this visit has no assessment yet"  -> 0 is CORRECT. This file's own header says so:
+   *       "New = docId 0". Posting the full model with patient_id + episode_id set is exactly how
+   *       GHIS's own form creates the first assessment for a visit.
+   *   (b) "the visit never activated"         -> 0 is an ORPHAN risk, which is what the guard is for.
+   *
+   * The guard refused BOTH since 2026-08-13, so the first-ever save for any visit was blocked — the
+   * regression behind "it used to work". Told apart by whether we have a real patient AND visit to
+   * attach the new record to: with both, this is a create, not an orphan. With neither, still refused.
+   *
+   * Proven against the live server: the form comes back fully rendered (175KB, 113 fields) with
+   * patient_id "" and doc_id 0, and Searchnew returns 200 setting no cookies — i.e. GHIS is handing us
+   * a blank NEW assessment form, not a failed activation. */
+  const attachTo = String(body.episodeId || '') || epiUsed;
+  const canCreate = !!(mr && attachTo);
+  if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc && !canCreate) {
+    // Carry WHAT WAS TRIED. "not activated" alone cost two round-trips of guessing; this says whether
+    // the caller's episode was absent or simply rejected, and whether GHIS's own OPD list had a row.
+    return { ok: false, status: 409, resp: 'no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried ' + (attempts.join(' ') || 'none') + ']' };
   }
   const fields = body.fields || {};
   Object.keys(fields).forEach(function (k) {
@@ -653,22 +822,31 @@ export async function saveAssessment(env, token, body) {
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
   // form's real episode/doc id with a stale client value makes GHIS reject the post ("Unable to process").
   if (!all['assessment.Initial_Assessment_doc_id'] && body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
+  // A NEW assessment (doc_id 0) MUST carry the patient and visit, or GHIS files it under nothing —
+  // that is the orphan the guard above exists to prevent. `epiUsed` covers the case where the episode
+  // came from the OPD-list lookup rather than the caller.
   if (!all['assessment.patient_id'] && body.patientId) all['assessment.patient_id'] = String(body.patientId);
-  if (!all['assessment.episode_id'] && body.episodeId) all['assessment.episode_id'] = String(body.episodeId);
+  if (!all['assessment.episode_id'] && attachTo) all['assessment.episode_id'] = String(attachTo);
   if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
   const p = new URLSearchParams();
   Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
   // The form's __RequestVerificationToken is paired with the .AspNetCore.Antiforgery cookie GHIS set on
   // THIS GET. Our login-time session cookie lacks it, so send the merged cookie on the POST — else GHIS
   // fails antiforgery and silently discards the save (200 "Unable to process").
-  const postCookie = mergeCookies(s.cookie, gr.setCookie);
+  // `cookie` already carries the activation context AND the antiforgery cookie from the form GET.
+  // (This read `gr.setCookie` after the activate-then-check refactor removed `gr` — a ReferenceError
+  // waiting for the first save that got past the guard above.)
+  const postCookie = cookie;
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': postCookie });
   // GHIS returns a PLAIN STRING at HTTP 200: "Successfully submitted" / "Successfully updated" on
   // success, else "Unable to process your request !". Key on the success string (the old error-keyword
   // check let "Unable to process" pass as success, so the app falsely reported "saved").
   const rb = String(r.body || '');
   const ok = /successfully\s+(submitted|updated)/i.test(rb);
-  return r.unauth ? r : { ok: ok, status: r.status, resp: rb.slice(0, 200) };
+  // Say whether this CREATED the visit's first assessment or updated an existing one — the two were
+  // indistinguishable, which is how a blocked create looked like a broken save.
+  const mode = (formDoc && String(formDoc) !== '0') || clientDoc ? 'update' : 'create';
+  return r.unauth ? r : { ok: ok, mode: mode, status: r.status, resp: rb.slice(0, 200) + (ok ? '' : ' [tried ' + attempts.join(' ') + ']') };
 }
 
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
@@ -761,7 +939,7 @@ export async function onRequest(context) {
     // ---- OPD write-back: safe search/read GETs (NOT gated) ----
     if (seg === 'inv-search')      { const r = await getInvSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'drug-search')     { const r = await getDrugSearch(env, token, q.get('q') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
-    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
+    if (seg === 'assessment')      { const r = await getAssessmentForm(env, token, q.get('patientId') || '', q.get('episodeId') || '', q.get('dbg') || ''); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
     if (seg === 'history')         { const r = await getOpdHistory(env, token, q.get('patientId') || '', q.get('visitId') || '', q.get('episodeId') || '', q.get('dbg') === '1'); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r); }
 
     // ---- OPD write-back: WRITES (P2/P3/P4). Gate FIRST: inert (501, nothing hits GHIS) until QUEUE_EMR_WRITE=1 ----

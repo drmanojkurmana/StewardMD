@@ -16,6 +16,7 @@
 import { proFromRequest } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
+import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
 
 const FB_PROJECT_DEFAULT = "stewardmd-498ec";
 const JWK_URL = "https://www.googleapis.com/service_accounts/v1/jwk/securetoken@system.gserviceaccount.com";
@@ -269,7 +270,10 @@ export async function checkQuota(env, request, type, opts) {
     else await _wr();
   }
   _qms.total = Date.now() - _qt0;
-  return { ok: true, id, guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type, env, _qms };
+  // costKey: the identity the WALLET and the cost cap use (em:<email>, else the device/ip id). It is
+  // deliberately not `id` — that is "fb:<uid>" for a signed-in doctor, while credits and the aiu:doc
+  // rollup are keyed by email, so recordUsage must bill against this one or the spend lands nowhere.
+  return { ok: true, id, costKey: usageKeyFor(who), guest: who.guest, meter: true, _day: day, _month: month, u, m, g, cfg, store, type, env, _qms };
 }
 
 // Best-effort per-DEVICE daily abuse cap (anti account-farming). Device id = X-SMD-Device header
@@ -322,6 +326,9 @@ export async function recordUsage(gate, info) {
   await writeJson(store, "maik:m:" + gate.id + ":" + gate._month, m, monTtl);
   await writeJson(store, "maik:global:" + gate._day, g, dayTtl);
   try { await addDailyCostInr(gate.env, gate._day, cost); } catch (e) {}   // atomic mirror (exact under concurrency)
+  // Per-USER spend, for the cost cap / prepaid wallet / AI Usage dashboard. Without this the aiu:doc
+  // rollup those three read carries only request COUNTS (see addAiSpend), so the cap never fires.
+  try { await addAiSpend(store, gate.costKey, gate._day, cost, inTok + outTok); } catch (e) {}
   return { cost, alert: g.cost >= cfg.costAlertInr && g.cost < cfg.costHardStopInr };
 }
 
