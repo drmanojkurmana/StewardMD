@@ -3179,6 +3179,205 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.annex.tobacco": {
+      "id": "skill.annex.tobacco",
+      "kind": "annexure",
+      "system": "respiratory",
+      "title": "Tobacco: pack-years, smoking index and complications",
+      "oneLine": "Two different numbers, two different uses, and they are not interchangeable",
+      "why": "Pack-years and the smoking index both quantify tobacco exposure, but they are calculated differently and used for different things. Confusing them overstates or understates exposure twentyfold.",
+      "calcs": [
+        "pack_years",
+        "smoking_index"
+      ],
+      "asks": [
+        {
+          "text": "How many cigarettes a day, and for how many years? Include bidis and hookah."
+        },
+        {
+          "text": "If you have stopped, when did you stop, and what were you smoking before?"
+        },
+        {
+          "text": "Does anyone smoke indoors at home?"
+        },
+        {
+          "text": "What fuel is used for cooking, and is the kitchen ventilated?"
+        },
+        {
+          "text": "Do you chew tobacco, gutkha or paan?"
+        },
+        {
+          "text": "Do you use an electronic cigarette or vape?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Two numbers, and when to use each",
+          "table": {
+            "cols": [
+              "Measure",
+              "Formula",
+              "Used for"
+            ],
+            "rows": [
+              [
+                "Pack-years",
+                "packs per day x years (1 pack = 20 cigarettes)",
+                "Screening thresholds and international comparison"
+              ],
+              [
+                "Smoking index",
+                "cigarettes per day x years",
+                "Bedside severity grading"
+              ]
+            ]
+          },
+          "note": "Twenty cigarettes a day for 30 years is 30 pack-years and a smoking index of 600. Same patient, same exposure, two very different numbers. Never quote one as the other."
+        },
+        {
+          "heading": "Grading by smoking index",
+          "points": [
+            {
+              "t": "Under 100.",
+              "d": "Mild smoker."
+            },
+            {
+              "t": "101 to 300.",
+              "d": "Moderate smoker."
+            },
+            {
+              "t": "Over 300.",
+              "d": "Heavy smoker. Lung cancer is common above this level."
+            }
+          ],
+          "note": "For screening, the threshold that matters is pack-years: low-dose CT is considered from age 55 with 30 or more pack-years."
+        },
+        {
+          "heading": "Complications, by system",
+          "table": {
+            "cols": [
+              "System",
+              "What to look for"
+            ],
+            "rows": [
+              [
+                "Respiratory",
+                "COPD, cancer of lung, bronchus and trachea, tuberculosis and other respiratory infection, interstitial lung disease, pneumothorax, post-operative complications"
+              ],
+              [
+                "Cardiovascular",
+                "Premature coronary disease, peripheral vascular disease and erectile dysfunction, cerebrovascular disease, aortic aneurysm"
+              ],
+              [
+                "Gastrointestinal",
+                "Gastro-oesophageal reflux, peptic ulceration, pancreatitis, Crohn disease, gallstones in women"
+              ],
+              [
+                "Obstetric",
+                "Spontaneous abortion, abruptio placentae, premature rupture of membranes, fetal and neonatal death, sudden infant death, postpartum thromboembolism"
+              ],
+              [
+                "Neurological and ocular",
+                "Dementia and cognitive decline, macular degeneration, cataract"
+              ],
+              [
+                "Other",
+                "Chronic kidney disease, diabetes, osteoporosis and hip fracture, and increased risk of many infections"
+              ]
+            ]
+          },
+          "note": "Three causes account for most smoking-related mortality: atherosclerotic cardiovascular disease, lung cancer, and COPD."
+        },
+        {
+          "heading": "The exposures that are not cigarettes",
+          "body": "Bidis, hookah, chewed tobacco, gutkha and paan all carry risk and are routinely denied when the question is 'do you smoke'. Biomass cooking fuel produces COPD in people who have never smoked, and it is the dominant cause in many Indian women. Second-hand smoke at home counts too. Ask each by name."
+        },
+        {
+          "heading": "Smoking changes how drugs behave",
+          "body": "Tobacco smoke induces hepatic microsomal enzymes, so the metabolism of several drugs increases and doses that were correct while smoking may become excessive after stopping. Propranolol and theophylline are the classic examples. Reassess doses at cessation rather than months later."
+        }
+      ],
+      "pitfalls": [
+        "Quoting a smoking index as pack-years, or the reverse.",
+        "Asking only about cigarettes, so bidis, hookah and chewed tobacco are missed.",
+        "Recording 'ex-smoker' with no quantity and no stop date.",
+        "Forgetting biomass fuel exposure in a never-smoker with COPD.",
+        "Not reviewing drug doses after cessation, when enzyme induction reverses."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Twenty cigarettes a day for 30 years. Give both the pack-years and the smoking index.",
+          "a": "Thirty pack-years, and a smoking index of 600. Pack-years divides by twenty; the smoking index does not.",
+          "accept": [
+            "30",
+            "600"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A never-smoker woman presents with COPD. What exposure must you ask about?",
+          "a": "Biomass cooking fuel: wood, dung cake, crop residue or coal burned in an unventilated kitchen, often for decades. It is a leading cause of COPD in Indian women.",
+          "accept": [
+            "biomass",
+            "wood",
+            "dung",
+            "cooking",
+            "fuel"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why might a patient stabilised on theophylline become toxic after they stop smoking?",
+          "a": "Tobacco smoke induces hepatic microsomal enzymes and accelerates theophylline metabolism. When smoking stops the induction reverses, clearance falls, and an unchanged dose produces rising levels and toxicity.",
+          "accept": [
+            "induc",
+            "enzyme",
+            "metabol",
+            "clearance"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Obtains cigarettes per day and years, and computes both measures correctly"
+        },
+        {
+          "id": "forms",
+          "text": "Asks about bidis, hookah, chewed tobacco and vaping"
+        },
+        {
+          "id": "biomass",
+          "text": "Asks about cooking fuel and second-hand smoke"
+        },
+        {
+          "id": "drugs",
+          "text": "Considers enzyme induction and dose review at cessation"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: tobacco use"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Nicotine addiction and tobacco-related disease"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "Risk factors: tobacco"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

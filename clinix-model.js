@@ -31,7 +31,9 @@
     "basics", "approach", "particulars", "history", "past_personal_drug_family",
     "general_exam", "systemic_exam", "disease_findings", "summary",
     "differential", "investigations", "diagnosis", "treatment",
-    "case", "osce", "viva"
+    "case", "osce", "viva",
+    // Reference material, looked up rather than walked through, so it sits after the pathway.
+    "annexures"
   ];
 
   var SKILL_KINDS = [
@@ -42,7 +44,8 @@
     "investigation", // why order it, expected findings, interpretation
     "reasoning",     // problem representation, differential, evidence
     "treatment",     // management (KB-grounded; never LLM-authored)
-    "presentation"   // case presentation to a consultant
+    "presentation",  // case presentation to a consultant
+    "annexure"       // reference material: units, indices, grading systems, normal values
   ];
 
   // Draft -> Under review -> Approved -> Published -> Deprecated (product rule 27).
@@ -53,6 +56,7 @@
   // A lesson is a sequence of turns, not a page. This is what makes it feel taught rather than read.
   var TURN_KINDS = [
     "show",    // media first: watch the manoeuvre before reading about it
+    "tools",   // calculators this skill links into; CliniX owns none of its own
     "teach",   // the actual teaching: one idea per block, before anything is asked
     "tell",    // a short prose block with a heading (never a wall of text)
     "ask",     // a question the student answers BEFORE the answer is shown
@@ -433,6 +437,13 @@
       for (i = 0; i < skill.teach.length; i++) {
         t.push(turn("teach", { block: skill.teach[i], index: i, total: skill.teach.length }));
       }
+    }
+
+    // 2b. TOOLS. An annexure that involves arithmetic links to the calculator that does it, rather
+    //     than repeating the formula in a second place where it can drift. CliniX owns no
+    //     calculators, exactly as SURGX does not.
+    if (isArr(skill.calcs) && skill.calcs.length) {
+      t.push(turn("tools", { heading: "Work it out", calcs: skill.calcs.slice() }));
     }
 
     // 3. TELL - how to perform it, as discrete steps (never one paragraph).

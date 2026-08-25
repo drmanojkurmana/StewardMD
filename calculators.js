@@ -3612,6 +3612,44 @@
       return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
     } },
 
+  { id:"alcohol_units", cat:"General", icon:"", title:"Alcohol Units (UK) and weekly intake",
+    desc:"Units in a drink from volume and ABV, plus the weekly total.",
+    inputs:[
+      { id:"ml", label:"Volume of the drink", type:"number", unit:"mL", step:"5" },
+      { id:"abv", label:"Alcohol by volume (ABV)", type:"number", unit:"%", step:"0.5" },
+      { id:"perweek", label:"Drinks of this size per week", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ml)||!ok(v.abv)||v.ml<0||v.abv<0||v.abv>100) return ERR;
+      var units=(v.ml*v.abv)/1000;                 // 1 UK unit = 10 mL (8 g) pure ethanol
+      var grams=units*8;
+      var msg="1 unit = 10 mL (8 g) pure ethanol. This drink = "+r1(units)+" units ("+r1(grams)+" g ethanol).";
+      if(ok(v.perweek)&&v.perweek>0){
+        var wu=units*v.perweek, wg=wu*8, gday=wg/7;
+        msg+=" Weekly: "+r1(wu)+" units ("+r1(wg)+" g). ";
+        msg+= wu>14 ? "ABOVE the 14 units/week low-risk threshold for men and women. " : "Within the 14 units/week low-risk threshold. ";
+        msg+= gday>=30 ? "Daily intake ~"+r1(gday)+" g/day is at or above the ~30 g/day threshold where alcohol-related liver disease risk begins." : "Daily average ~"+r1(gday)+" g/day.";
+      }
+      msg+=" Continuous daily drinking carries more liver risk than intermittent; at least two alcohol-free days a week are advised. Women reach higher blood ethanol levels than men for the same intake (smaller volume of distribution). Ref: standard UK unit definition.";
+      return { v:r1(units), u:"units", i:msg };
+    } },
+
+  { id:"smoking_index", cat:"General", icon:"", title:"Smoking Index",
+    desc:"Cigarettes per day x years smoked, with severity grading.",
+    inputs:[
+      { id:"cpd", label:"Cigarettes per day", type:"number", step:"1" },
+      { id:"years", label:"Years smoked", type:"number", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.cpd)||!ok(v.years)||v.cpd<0||v.years<0) return ERR;
+      var si=v.cpd*v.years;
+      var band = si<100 ? "Mild smoker" : (si<=300 ? "Moderate smoker" : "Heavy smoker");
+      var msg=band+" (SI <100 mild, 101-300 moderate, >300 heavy).";
+      if(si>300) msg+=" Lung cancer is common above a smoking index of 300.";
+      msg+=" Smoking index is not the same as pack-years: it does not divide by 20, so the numbers are not interchangeable. Use pack-years for screening thresholds (low-dose CT if age 55 or over with 30 or more pack-years). Ref: standard definition.";
+      return { v:r1(si), u:"", i:msg };
+    } },
+
   { id:"phq2", cat:"Psychiatry", icon:"", title:"PHQ-2 (Depression Screen)",
     desc:"Ultra-brief screen for depression over the past 2 weeks.",
     inputs:[

@@ -4049,6 +4049,242 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.annex.alcohol": {
+      "id": "skill.annex.alcohol",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Alcohol: units, thresholds and complications",
+      "oneLine": "Turn what the patient drinks into grams, then into risk",
+      "why": "A history that records 'drinks alcohol' is useless. Converting the drink into units makes intake comparable between patients and against the thresholds that actually predict harm, and it takes one multiplication.",
+      "calcs": [
+        "alcohol_units",
+        "auditc",
+        "cage",
+        "ciwa",
+        "gahs"
+      ],
+      "asks": [
+        {
+          "text": "What exactly do you drink: which drink, what size glass or bottle, and what strength?"
+        },
+        {
+          "text": "How many of those on a typical drinking day?"
+        },
+        {
+          "text": "How many days a week, and are there any alcohol-free days?"
+        },
+        {
+          "text": "Is it spread through the week, or concentrated into a few heavy sessions?"
+        },
+        {
+          "text": "How many years have you been drinking at this level?"
+        },
+        {
+          "text": "Has anyone ever suggested you cut down, or have you felt you should?"
+        },
+        {
+          "text": "When was the last drink? Any shakes, sweats or fits on stopping before?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The arithmetic",
+          "body": "One UK unit is 10 mL, which is 8 g, of pure ethanol. Units are volume in millilitres multiplied by the alcohol by volume percentage, divided by 1000. That single formula converts any drink anywhere.",
+          "table": {
+            "cols": [
+              "Drink",
+              "ABV",
+              "Volume",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Whisky, single measure",
+                "40%",
+                "25 mL",
+                "1"
+              ],
+              [
+                "Wine, large glass",
+                "12%",
+                "250 mL",
+                "3"
+              ],
+              [
+                "Lager, bottle",
+                "5%",
+                "330 mL",
+                "1.65"
+              ],
+              [
+                "Beer, pint",
+                "3.5%",
+                "568 mL",
+                "2"
+              ],
+              [
+                "Whisky, full bottle",
+                "40%",
+                "700 mL",
+                "28"
+              ]
+            ]
+          },
+          "note": "Open the Alcohol Units calculator for any drink not on this list. It also totals the week and compares it against the thresholds below."
+        },
+        {
+          "heading": "The thresholds that matter",
+          "points": [
+            {
+              "t": "14 units a week.",
+              "d": "The conservative low-risk threshold, and it is the same for men and women."
+            },
+            {
+              "t": "30 g of ethanol a day.",
+              "d": "Where the risk of alcohol-related liver disease begins. That is under four units a day."
+            },
+            {
+              "t": "160 g a day for over 8 years.",
+              "d": "The average intake of a man presenting with cirrhosis. Useful for putting a patient's own intake in perspective."
+            }
+          ],
+          "note": "Ethanol yields 7 kcal per gram, and many drinks add sugar on top. Obesity multiplies liver-related mortality in heavy drinkers several fold."
+        },
+        {
+          "heading": "Pattern matters as much as amount",
+          "body": "Continuous daily drinking damages the liver more than the same weekly total taken intermittently, because the liver gets no chance to recover. That is why at least two alcohol-free days a week are advised, and why the question 'do you have days off' belongs in every alcohol history.",
+          "points": [
+            {
+              "t": "Sex.",
+              "d": "Women reach higher blood ethanol levels than men after the same intake, because of a smaller volume of distribution. The same number of units is not the same exposure."
+            },
+            {
+              "t": "Genetics.",
+              "d": "Alcoholism is more concordant in monozygotic than dizygotic twins; PNPLA3 is implicated in both alcoholic and non-alcoholic fatty liver disease."
+            },
+            {
+              "t": "Nutrition.",
+              "d": "Obesity raises liver-related mortality in heavy drinkers over five-fold."
+            }
+          ]
+        },
+        {
+          "heading": "Complications worth screening for by system",
+          "table": {
+            "cols": [
+              "System",
+              "What to look for"
+            ],
+            "rows": [
+              [
+                "Neurological",
+                "Blackouts, withdrawal tremor, hallucinations, rum fits, delirium tremens, cerebellar degeneration, dementia, myopathy, autonomic neuropathy"
+              ],
+              [
+                "Gastrointestinal",
+                "Gastritis, diarrhoea, pancreatitis, fatty liver, alcoholic hepatitis, cirrhosis and its complications"
+              ],
+              [
+                "Cardiovascular",
+                "Cardiomyopathy, hypertension, arrhythmia"
+              ],
+              [
+                "Metabolic",
+                "Hyponatraemia, hypoglycaemia, hypokalaemia, hypomagnesaemia, hypocalcaemia, hypophosphataemia"
+              ],
+              [
+                "Malignancy",
+                "Oral cavity, oropharynx, oesophagus, colorectum, breast, hepatocellular carcinoma"
+              ],
+              [
+                "Musculoskeletal",
+                "Myopathy, osteoporosis, falls"
+              ]
+            ]
+          },
+          "note": "Withdrawal is the complication that kills in hospital. Ask the time of the last drink on every admission, and score withdrawal with CIWA-Ar rather than by impression."
+        }
+      ],
+      "pitfalls": [
+        "Recording 'social drinker' or 'occasional' instead of units per week.",
+        "Not asking the strength and the glass size, which is where the units actually come from.",
+        "Missing the pattern: the same weekly total is more harmful taken daily than intermittently.",
+        "Not asking the time of the last drink, so withdrawal is diagnosed after it has begun.",
+        "Applying a lower threshold to women for the wrong reason; the weekly threshold is the same, but the same intake produces higher blood levels."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many units in a 250 mL glass of 12% wine?",
+          "a": "Three. Units are millilitres multiplied by ABV divided by 1000, so 250 x 12 / 1000 = 3.",
+          "accept": [
+            "3",
+            "three"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient drinks the same weekly total as another, but spread over every day rather than two sessions. Who is at greater liver risk, and why?",
+          "a": "The daily drinker. Continuous exposure gives the liver no recovery period, which is why alcohol-free days are advised even when the weekly total is unchanged.",
+          "accept": [
+            "daily",
+            "continuous",
+            "recover",
+            "no break"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does the same intake carry higher risk in a woman than in a man?",
+          "a": "A smaller volume of distribution for alcohol produces higher blood ethanol concentrations for the same dose, so the exposure of the liver and other organs is greater despite an identical number of units.",
+          "accept": [
+            "volume of distribution",
+            "blood",
+            "concentration",
+            "body water"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Converts the drink into units per week"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes drinking pattern and alcohol-free days"
+        },
+        {
+          "id": "threshold",
+          "text": "Compares intake against the 14 unit and 30 g/day thresholds"
+        },
+        {
+          "id": "withdrawal",
+          "text": "Asks the time of the last drink and any previous withdrawal"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: alcohol use"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The history: alcohol and substance use"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Alcohol and alcoholic liver disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
