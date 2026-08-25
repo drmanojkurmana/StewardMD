@@ -1839,6 +1839,7 @@
   // GHIS speaks in machine codes. A doctor mid-consult needs to know what to DO about it.
   function ghisSay(resp) {
     var r = String(resp || "");
+    if (/no_saved_assessment/.test(r)) return "Save the assessment first, then authorise it.";
     if (/no_active_assessment/.test(r)) {
       // Keep the [tried ...] trace on screen. It names which activation attempts GHIS rejected, which
       // is the difference between diagnosing this in one report and guessing at it across three.
@@ -2719,9 +2720,14 @@
    * itself is already saved there. If GHIS does have one, point me at where you authorise today and
    * this button can call it too. */
   function authoriseConsult() {
-    if (!confirmed("Authorise this assessment and finish the consult?\n\nThe note is already saved in " + emrLabel() + ". This signs it off and moves the queue to the next patient.")) return;
-    try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
-    endConsult();
+    if (!confirmed("Authorise this assessment?\n\nThis signs it off in " + emrLabel() + " - the note moves into Clinical notes - and finishes the consult.")) return;
+    // GHIS's own Authorize button (signOff1 -> Home/signoffinitialAssessmentnew). The consult is only
+    // finished once GHIS confirms the sign-off, so a failed authorise never silently advances the queue.
+    postWrite("/assessment-authorize",
+      { patientId: (st.patient && st.patient.mrn) || "", episodeId: st.episodeId || "", docId: oeDocId() },
+      "Authorised in " + emrLabel() + ". It is now in Clinical notes.",
+      { kind: "assessment", text: "Authorised (signed off)" },
+      function () { try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {} endConsult(); });
   }
   function endConsult() {
     try { document.dispatchEvent(new CustomEvent("smd:consult-end", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}

@@ -264,6 +264,40 @@ test("AUTHORISE: an explicit sign-off button appears once the note is saved", ()
   assert.match(panel, /oe-swipe/, "the original swipe still works — this is additive");
 });
 
+/* The real GHIS action, read off the live form rather than guessed:
+ *   <button name="ButtonType" value="true" onclick="signOff1('20015')">Authorize</button>
+ *   signOff1 -> POST ./Home/signoffinitialAssessmentnew {__RequestVerificationToken, id:<doc_id>}
+ *   success when the response body is "Successfully signed off"
+ * I had previously reported GHIS has no authorise action — wrong: /assessment truncates the page to
+ * 8000 chars of tag-stripped text and the buttons sit at the end of a 355KB page. */
+test("AUTHORISE: the server calls GHIS's real sign-off endpoint", () => {
+  assert.match(GHIS, /signoffinitialAssessmentnew/, "the exact URL signOff1 posts to");
+  const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));
+  assert.match(fn, /'__RequestVerificationToken=' \+ encodeURIComponent\(csrf\) \+ '&id=' \+ encodeURIComponent\(docId\)/, "same payload shape");
+  assert.match(fn, /successfully\\s\+signed\\s\*off/, "keyed on GHIS's own success string");
+  assert.match(fn, /Searchnew[\s\S]{0,400}?'Cookie': cookie/, "activates the visit and threads the cookie, like the save");
+});
+
+test("AUTHORISE: never signs off a record that was never saved", () => {
+  const fn = GHIS.slice(GHIS.indexOf("export async function authorizeAssessment"), GHIS.indexOf("const json = (obj, status = 200)"));
+  assert.match(fn, /if \(!docId\) return \{ ok: false, status: 409, resp: 'no_saved_assessment/,
+    "doc_id 0 would sign off nothing");
+  assert.match(fn, /patient_mismatch/, "and the wrong-patient guard applies here too");
+});
+
+test("AUTHORISE: the route is write-gated like the save", () => {
+  assert.match(GHIS, /seg === 'assessment-authorize' && request\.method === 'POST'[\s\S]{0,120}emrWriteEnabled\(env\)/,
+    "authorising is a clinical record write");
+});
+
+test("AUTHORISE: the consult finishes only after GHIS confirms", () => {
+  const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
+  assert.match(fn, /postWrite\("\/assessment-authorize"/, "calls the endpoint");
+  assert.match(fn, /endConsult\(\)/, "…and ends the consult in the success callback");
+  assert.ok(fn.indexOf("endConsult()") > fn.indexOf("postWrite"),
+    "a failed authorise must never silently advance the queue");
+});
+
 test("AUTHORISE: it confirms, then ends the consult so the queue advances", () => {
   const fn = OPD.slice(OPD.indexOf("function authoriseConsult"), OPD.indexOf("function endConsult"));
   assert.match(fn, /confirmed\(/, "signing off is deliberate, never a stray tap");
