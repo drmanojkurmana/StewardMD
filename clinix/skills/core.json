@@ -1161,6 +1161,533 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.approach.history_framework": {
+      "id": "skill.approach.history_framework",
+      "kind": "approach",
+      "system": "core",
+      "title": "Taking a history: the framework",
+      "oneLine": "Not a checklist of symptoms, and not a one-way extraction of facts",
+      "why": "Ineffective communication is the commonest reason for complaints against doctors, and most malpractice allegations arise from communication failures rather than from technical error. The history is where that relationship is made or lost, and it is also where most diagnoses are made.",
+      "asks": [
+        {
+          "text": "Introduce yourself, say why you are here, and how long you will need."
+        },
+        {
+          "text": "State that what is discussed is confidential."
+        },
+        {
+          "text": "Open it: what has the problem been? What made you go to the doctor?"
+        },
+        {
+          "text": "Then stop talking. Let them speak uninterrupted for a couple of minutes."
+        },
+        {
+          "text": "When did it start? Is it new or old? How often? What starts it? How long does it last?"
+        },
+        {
+          "text": "What makes it worse, what makes it better, and does anything else happen at the same time?"
+        },
+        {
+          "text": "What have you taken for it, and did it help?"
+        },
+        {
+          "text": "How has this illness affected you generally? How does it make you feel?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "What the history is actually for",
+          "body": "It is not only information gathering. Done properly it does four things at once, and only the last of them is the diagnosis.",
+          "points": [
+            {
+              "t": "Establishes the relationship.",
+              "d": "Everything that follows, including consent and adherence, rests on it."
+            },
+            {
+              "t": "Surfaces their ideas, concerns and expectations.",
+              "d": "What they think it is, what they are afraid of, and what they want from you."
+            },
+            {
+              "t": "Maps the physical, psychological and social setting.",
+              "d": "The illness happens to a person in a household, not to an organ."
+            },
+            {
+              "t": "Often gives the diagnosis.",
+              "d": "Most diagnoses are made here, before any examination or test."
+            }
+          ]
+        },
+        {
+          "heading": "Let them finish. It is faster, not slower",
+          "body": "Allowing a patient to talk without interruption takes a couple of minutes and produces a fuller account, higher satisfaction and a more efficient interview. Interrupting in the first thirty seconds truncates the list of complaints and you spend longer retrieving what was cut off. Keep the flow going with encouragement, verbal and non-verbal, rather than with questions.",
+          "note": "Only after they have finished should you direct questions to test a hypothesis. If you suspect angina, that is when you ask whether the pain comes on with exertion."
+        },
+        {
+          "heading": "The two halves of the presenting illness",
+          "table": {
+            "cols": [
+              "Half",
+              "What you are eliciting"
+            ],
+            "rows": [
+              [
+                "The problem",
+                "Description and exploration, in the patient's own words first, then directed"
+              ],
+              [
+                "The person",
+                "How the illness has affected them personally, and what they believe it is"
+              ]
+            ]
+          },
+          "note": "The second half is the one that gets dropped under time pressure. It is also where depression surfaces, and where a patient decides whether they were listened to."
+        },
+        {
+          "heading": "Systemic enquiry, by system",
+          "table": {
+            "cols": [
+              "System",
+              "Ask about"
+            ],
+            "rows": [
+              [
+                "Respiratory",
+                "Breathlessness, wheeze, cough, sputum, haemoptysis, chest pain"
+              ],
+              [
+                "Cardiovascular",
+                "Chest pain, orthopnoea, paroxysmal nocturnal dyspnoea, ankle swelling, palpitations, claudication"
+              ],
+              [
+                "Gastrointestinal",
+                "Abdominal pain, nausea, vomiting, haematemesis, bowel habit, bleeding per rectum, melaena"
+              ],
+              [
+                "Urogenital",
+                "Frequency, nocturia, polydipsia, loin pain, haematuria; menarche, cycle, menopause, intermenstrual and postcoital bleeding"
+              ],
+              [
+                "Nervous",
+                "Headache, visual disturbance, sleep, hearing, tinnitus, light-headedness, blackouts, fits, unsteady gait, weakness, paraesthesiae"
+              ],
+              [
+                "Musculoskeletal",
+                "Myalgia, arthralgia, back pain, joint swelling"
+              ],
+              [
+                "Psychiatric",
+                "Mood and mental state. Depression is common and frequently coexists with physical illness"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The rest of the history, and the traps in each",
+          "points": [
+            {
+              "t": "Past medical history.",
+              "d": "Ask by name: hypertension, ischaemic heart disease, stroke or TIA, diabetes, asthma, jaundice, tuberculosis, rheumatic fever. Then surgery, transfusion and admissions. An open question alone misses all of these."
+            },
+            {
+              "t": "Family history.",
+              "d": "Parents, siblings, children. If a parent has died, ask of what and at what age; the age matters as much as the cause."
+            },
+            {
+              "t": "Social and personal.",
+              "d": "Diet, alcohol, smoking, recreational drugs, occupation, and the activities of daily living: dressing, washing and toileting, eating, walking, shopping. That last group tells you what support they need, which no investigation will."
+            },
+            {
+              "t": "Drug history.",
+              "d": "Every drug and dose, including over the counter and alternative medicines. Patients are vague about tablets; persevere rather than accepting a shrug."
+            },
+            {
+              "t": "Allergy.",
+              "d": "Not just what, but WHAT HAPPENED. A rash and anaphylaxis are recorded identically as 'allergic' and mean entirely different things."
+            },
+            {
+              "t": "Menstrual and obstetric.",
+              "d": "For every woman of reproductive age, not only when it seems relevant."
+            }
+          ]
+        },
+        {
+          "heading": "Finish with a summary you have prepared",
+          "body": "Two or three sentences: who the patient is, the problem and its duration, the key positives and relevant negatives, and a provisional or differential diagnosis if you can commit to one. You will be asked for this, and preparing it forces you to decide what the history actually showed."
+        }
+      ],
+      "pitfalls": [
+        "Interrupting in the first thirty seconds, which shortens the list and lengthens the interview.",
+        "Running the history as a symptom checklist and never asking how the illness has affected the person.",
+        "Asking about past illnesses only as an open question, so hypertension, diabetes, tuberculosis and rheumatic fever are missed.",
+        "Recording 'allergic to penicillin' without recording what happened.",
+        "Omitting activities of daily living, so the discharge plan is built without knowing what support exists.",
+        "Not preparing the summary, and presenting the history in the order it was obtained rather than in order of importance."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why let the patient talk uninterrupted at the start?",
+          "a": "It produces a fuller list of complaints, greater satisfaction and a more efficient interview overall. Interrupting early truncates the account and costs more time later.",
+          "accept": [
+            "fuller",
+            "complete",
+            "satisfact",
+            "efficien",
+            "truncat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is 'allergic to penicillin' an inadequate entry?",
+          "a": "Because it does not say what happened. A rash, nausea and anaphylaxis are all recorded that way and carry completely different consequences: one may be tolerable under supervision, another is an absolute contraindication.",
+          "accept": [
+            "what happen",
+            "rash",
+            "anaphyla",
+            "nature",
+            "reaction"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient recovering from a stroke is medically fit. Which part of the history determines whether they can go home, and why is it often missed?",
+          "a": "The activities of daily living within the social history: dressing, washing and toileting, eating, walking and shopping, and who is available to help. It is missed because it feels non-medical, yet no investigation can supply it and discharge fails without it.",
+          "accept": [
+            "activities of daily living",
+            "adl",
+            "social",
+            "support",
+            "home"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "open",
+          "text": "Introduces self, states purpose and confidentiality"
+        },
+        {
+          "id": "listen",
+          "text": "Allows an uninterrupted opening account"
+        },
+        {
+          "id": "person",
+          "text": "Asks how the illness has affected the patient personally"
+        },
+        {
+          "id": "named",
+          "text": "Asks past illnesses by name rather than only as an open question"
+        },
+        {
+          "id": "adl",
+          "text": "Covers activities of daily living and available support"
+        },
+        {
+          "id": "summary",
+          "text": "Closes with a prepared two to three sentence summary"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: history taking framework"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The history: general principles"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "The practice of medicine"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      },
+      "steps": [
+        {
+          "text": "Introduce yourself by name and role, and say why you have come."
+        },
+        {
+          "text": "Say roughly how long you will need, and that what is discussed is confidential."
+        },
+        {
+          "text": "Open with a broad question, then stop talking and let them speak."
+        },
+        {
+          "text": "Listen without interrupting for the first couple of minutes, encouraging the flow."
+        },
+        {
+          "text": "Now direct your questions to test the hypotheses their account has raised."
+        },
+        {
+          "text": "Ask how the illness has affected them personally, and what they think it is."
+        },
+        {
+          "text": "Run the systemic enquiry across the systems, briefly."
+        },
+        {
+          "text": "Take the past medical history by NAME, then surgery, transfusion and admissions."
+        },
+        {
+          "text": "Take the family history over three generations, and the social history including daily activities."
+        },
+        {
+          "text": "List every drug and dose, then allergies and what actually happened."
+        },
+        {
+          "text": "Summarise back to the patient, and invite correction."
+        },
+        {
+          "text": "Prepare two to three sentences for presentation, ending with a provisional diagnosis."
+        }
+      ]
+    },
+    "skill.annex.inheritance": {
+      "id": "skill.annex.inheritance",
+      "kind": "annexure",
+      "system": "core",
+      "title": "Pedigree charts and patterns of inheritance",
+      "oneLine": "Draw three generations, then read the pattern off the page",
+      "why": "A family history recorded as prose hides the pattern. Drawn as a pedigree it becomes visible, and one negative finding, the absence of male to male transmission, settles X-linked recessive inheritance on its own.",
+      "asks": [
+        {
+          "text": "Are your parents alive? If not, what did they die of, and at what age?"
+        },
+        {
+          "text": "How many brothers and sisters, and is any of them affected?"
+        },
+        {
+          "text": "Do you have children, and are any of them affected?"
+        },
+        {
+          "text": "Are your parents related to each other by blood?"
+        },
+        {
+          "text": "Has anyone in the family died young or suddenly, and was a cause ever found?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Drawing it",
+          "table": {
+            "cols": [
+              "Symbol",
+              "Means"
+            ],
+            "rows": [
+              [
+                "Circle",
+                "Female"
+              ],
+              [
+                "Square",
+                "Male"
+              ],
+              [
+                "Filled in",
+                "Affected by the trait"
+              ],
+              [
+                "Horizontal line joining two",
+                "A couple with children"
+              ],
+              [
+                "Vertical line",
+                "Parents to their children"
+              ],
+              [
+                "Roman numeral",
+                "The generation"
+              ],
+              [
+                "Digit",
+                "The individual within that generation"
+              ]
+            ]
+          },
+          "note": "Three generations is the standard, and consanguinity is worth marking: it raises the likelihood of an autosomal recessive condition considerably."
+        },
+        {
+          "heading": "Reading the pattern",
+          "table": {
+            "cols": [
+              "Pattern",
+              "What the pedigree shows"
+            ],
+            "rows": [
+              [
+                "Autosomal dominant",
+                "Affected in every generation; males and females affected equally; an affected child usually has an affected parent"
+              ],
+              [
+                "Autosomal recessive",
+                "Often skips generations; parents typically unaffected carriers; consanguinity raises the chance"
+              ],
+              [
+                "X-linked recessive",
+                "Almost only males affected; transmitted through unaffected carrier mothers; NO male to male transmission"
+              ],
+              [
+                "X-linked dominant",
+                "Affected females predominate; affected males often do not survive to be born"
+              ]
+            ]
+          },
+          "note": "NO MALE TO MALE TRANSMISSION is the single most useful negative in the whole pedigree. A father passes his Y to a son, not his X, so an affected father cannot pass an X-linked condition to a son. One such transmission in the chart excludes X-linkage."
+        },
+        {
+          "heading": "Examples worth knowing by system",
+          "table": {
+            "cols": [
+              "System",
+              "Autosomal dominant",
+              "Autosomal recessive"
+            ],
+            "rows": [
+              [
+                "Nervous",
+                "Huntington disease, neurofibromatosis, tuberous sclerosis",
+                "Friedreich ataxia, spinal muscular atrophy"
+              ],
+              [
+                "Skeletal",
+                "Marfan syndrome, achondroplasia, Noonan syndrome",
+                "Alkaptonuria, Ehlers-Danlos syndrome"
+              ],
+              [
+                "Metabolic",
+                "Familial hypercholesterolaemia, intermittent porphyria",
+                "Cystic fibrosis, phenylketonuria, galactosaemia, haemochromatosis, storage diseases"
+              ],
+              [
+                "Haematological",
+                "Hereditary spherocytosis, von Willebrand disease",
+                "Sickle cell anaemia, thalassaemia"
+              ],
+              [
+                "Renal",
+                "Polycystic kidney disease",
+                "Congenital adrenal hyperplasia"
+              ],
+              [
+                "Gastrointestinal",
+                "Familial adenomatous polyposis",
+                "Wilson disease"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "X-linked recessive conditions to recognise",
+          "points": [
+            {
+              "t": "Musculoskeletal.",
+              "d": "Duchenne muscular dystrophy."
+            },
+            {
+              "t": "Blood.",
+              "d": "Haemophilia A and B; glucose-6-phosphate dehydrogenase deficiency."
+            },
+            {
+              "t": "Immune.",
+              "d": "Agammaglobulinaemia."
+            },
+            {
+              "t": "Nervous.",
+              "d": "Fragile X syndrome."
+            }
+          ],
+          "note": "G6PD deficiency matters at the bedside in India: it changes which drugs are safe, including primaquine and some sulphonamides, so the family history has an immediate practical consequence."
+        }
+      ],
+      "pitfalls": [
+        "Recording the family history as prose, so the pattern never becomes visible.",
+        "Not asking about consanguinity, which is common in parts of India and shifts the likelihood towards recessive conditions.",
+        "Missing that a single instance of male to male transmission excludes X-linkage.",
+        "Asking only whether relatives are alive, and not what they died of and at what age.",
+        "Drawing one generation when three are needed to show a pattern that skips."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In a pedigree, what do a circle and a square represent?",
+          "a": "A circle is female and a square is male. A filled symbol means the individual is affected.",
+          "accept": [
+            "circle",
+            "female",
+            "square",
+            "male"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does the absence of male to male transmission point to X-linked inheritance?",
+          "a": "A father gives his son a Y chromosome, not his X, so he cannot transmit an X-linked condition to a son. A single father-to-son transmission therefore excludes X-linkage.",
+          "accept": [
+            "y chromosome",
+            "x",
+            "father",
+            "son"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Unaffected parents, an affected child, and the parents are first cousins. Which pattern, and what is the recurrence risk for a further child?",
+          "a": "Autosomal recessive. Both parents are heterozygous carriers, so each pregnancy carries a one in four risk of an affected child, one in two of a carrier, and one in four unaffected. Consanguinity raises the chance that both parents carry the same rare allele.",
+          "accept": [
+            "recessive",
+            "1 in 4",
+            "25",
+            "quarter",
+            "carrier"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "draw",
+          "text": "Draws three generations with correct symbols"
+        },
+        {
+          "id": "consang",
+          "text": "Asks about consanguinity"
+        },
+        {
+          "id": "pattern",
+          "text": "Reads the pattern, including the male to male rule"
+        },
+        {
+          "id": "cause",
+          "text": "Asks cause and age of death for deceased relatives"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: pedigree and inheritance"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Principles of human genetics"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The history: family history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
