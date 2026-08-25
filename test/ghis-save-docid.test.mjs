@@ -220,6 +220,40 @@ test("REGRESSION: no dangling `gr` after the activate-then-check refactor", () =
     "`gr` was removed by that refactor — this line would throw on the first save that got past the guard");
 });
 
+/* ---- THE REGRESSION, finally identified from live evidence --------------------------------------
+ * The live form comes back fully rendered (175KB, 113 fields) with patient_id "" and doc_id 0, while
+ * Searchnew returns 200 and sets NO cookies. That is not a failed activation — it is GHIS handing us
+ * a blank NEW assessment form. This file's own header says as much: "New = docId 0".
+ *
+ * The guard added 2026-08-13 refused EVERY doc_id 0, so the first-ever assessment for any visit could
+ * never be saved. That is the "it used to work and now it doesn't". The two meanings of 0 are told
+ * apart by whether we have a patient AND a visit to attach the new record to.
+ */
+test("CREATE: doc_id 0 with a patient and visit is a NEW assessment, not an orphan", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /const canCreate = !!\(mr && attachTo\)/, "a create needs both ids");
+  assert.match(save, /&& !clientDoc && !canCreate\)/, "…and only then is the refusal still correct");
+  assert.match(save, /const attachTo = String\(body\.episodeId \|\| ''\) \|\| epiUsed/,
+    "the visit may have come from the OPD-list lookup rather than the caller");
+});
+
+test("CREATE: a new record always carries the patient and the visit", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /all\['assessment\.patient_id'\] = String\(body\.patientId\)/);
+  assert.match(save, /all\['assessment\.episode_id'\] = String\(attachTo\)/,
+    "filing a new assessment under no visit IS the orphan the guard protects against");
+});
+
+test("CREATE: the response says whether it created or updated", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /const mode = \(formDoc && String\(formDoc\) !== '0'\) \|\| clientDoc \? 'update' : 'create'/);
+});
+
+test("REFUSAL still stands when there is nothing to attach to", () => {
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /no_active_assessment: form doc_id is 0/, "no patient/visit -> still refused, no orphan");
+});
+
 test("the doctor still gets a plain sentence, with the trace appended for diagnosis", () => {
   const h = helpers()({}, () => "GHIS");
   const msg = h.ghisSay("no_active_assessment: form doc_id is 0 (visit not activated) — refusing to write a blank/duplicate [tried caller=blank opdlist=blank]");
