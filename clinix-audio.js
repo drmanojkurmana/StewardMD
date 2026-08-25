@@ -117,7 +117,7 @@
     },
     stridor: {
       label: "Stridor",
-      hint: "INSPIRATORY, harsh, HIGH pitched, loudest over the neck. Upper airway obstruction. An emergency, and not a wheeze.",
+      hint: "Harsh, HIGH pitched, loudest over the neck. Upper airway obstruction, and an emergency. This model plays the INSPIRATORY pattern of laryngeal obstruction; the phase itself localises, so biphasic stridor points to the subglottis or trachea and expiratory stridor to an intrathoracic large airway.",
       insp: 1.9, exp: 1.0, gap: 0, rest: 0.6,
       // Turbulent noise centred HIGH: this is a supraglottic/tracheal sound, not a small-airway one.
       band: 950, q: 1.3, inspGain: 0.42, expGain: 0.10,

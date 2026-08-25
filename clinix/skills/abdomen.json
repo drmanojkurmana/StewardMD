@@ -3044,6 +3044,9 @@
       "why": "Dysphagia is one of the few symptoms where the history alone can localise the lesion and grade its urgency. Two questions, whether liquids are affected and whether it is progressing, do most of that work.",
       "asks": [
         {
+          "text": "Can you swallow your own saliva right now, or are you drooling?"
+        },
+        {
           "text": "Is it difficulty with solids, liquids, or both?"
         },
         {
@@ -3060,6 +3063,9 @@
         },
         {
           "text": "Have you lost weight, and how much?"
+        },
+        {
+          "text": "Have you ever swallowed acid or a corrosive liquid, even years ago?"
         }
       ],
       "teach": [
@@ -3087,6 +3093,14 @@
               [
                 "Long history, regurgitation of undigested food at night",
                 "Achalasia or a pouch"
+              ],
+              [
+                "Sudden, complete, drooling and unable to swallow saliva",
+                "Food bolus impaction. Same-day endoscopy"
+              ],
+              [
+                "Long-standing, after corrosive ingestion",
+                "Corrosive stricture, a common cause in India"
               ]
             ]
           },
@@ -3119,7 +3133,8 @@
         "Not asking about liquids, which is the single question that separates mechanical from motility.",
         "Accepting the level the patient points to as the level of the lesion.",
         "Missing coughing at the moment of swallowing, which is an aspiration risk rather than a diagnostic detail.",
-        "Treating progressive dysphagia with weight loss as reflux without endoscopy."
+        "Treating progressive dysphagia with weight loss as reflux without endoscopy.",
+        "Not asking whether the patient can swallow their own saliva, which distinguishes complete obstruction."
       ],
       "probes": [
         {
@@ -3395,6 +3410,12 @@
         },
         {
           "text": "Does fasting stop it?"
+        },
+        {
+          "text": "Are you passing urine as usual? Any dizziness on standing, or a dry mouth?"
+        },
+        {
+          "text": "Any blood with fever, or severe abdominal pain and distension?"
         }
       ],
       "teach": [
@@ -3432,6 +3453,29 @@
           "note": "Nocturnal diarrhoea that wakes the patient is organic until proven otherwise. Functional diarrhoea rarely does."
         },
         {
+          "heading": "Assess the patient before the stool",
+          "body": "Diarrhoea kills through volume loss, not through its cause. Before working out the mechanism, decide whether this patient is dry.",
+          "points": [
+            {
+              "t": "Postural dizziness, reduced urine output, dry mouth, sunken eyes.",
+              "d": "Hypovolaemia. Replace fluid first; oral rehydration where tolerated."
+            },
+            {
+              "t": "Tachycardia, hypotension, confusion, cold peripheries.",
+              "d": "Hypovolaemic shock. Resuscitate now."
+            },
+            {
+              "t": "Bloody diarrhoea with fever.",
+              "d": "Dysentery or inflammatory colitis. Do not give an antimotility agent."
+            },
+            {
+              "t": "Distension, severe pain, systemic toxicity.",
+              "d": "Toxic megacolon. Surgical involvement, not more antibiotics."
+            }
+          ],
+          "note": "In a child or an older adult, the fluid assessment matters more than the microbiology."
+        },
+        {
           "heading": "Osmotic, secretory or inflammatory",
           "points": [
             {
@@ -3454,14 +3498,43 @@
         },
         {
           "heading": "Duration decides the workup",
-          "body": "Under two weeks is usually infective and self-limiting, and the history should target contacts, travel, food and recent antibiotics. Beyond four weeks it is chronic, and the question becomes malabsorption, inflammation, or a colonic lesion, particularly if there is weight loss or blood."
+          "body": "Under two weeks is usually infective and self-limiting, and the history should target contacts, travel, food and recent antibiotics. Beyond four weeks it is chronic, and the question becomes malabsorption, inflammation, or a colonic lesion, particularly with weight loss or blood."
+        },
+        {
+          "heading": "The chronic causes that matter in India",
+          "points": [
+            {
+              "t": "Ileocaecal and abdominal tuberculosis.",
+              "d": "The principal mimic of Crohn disease. Ask about contact, fever, night sweats and weight loss."
+            },
+            {
+              "t": "Amoebic and bacillary dysentery.",
+              "d": "Blood and mucus; ask the water source."
+            },
+            {
+              "t": "Giardiasis.",
+              "d": "Bloating, foul steatorrhoea, no blood."
+            },
+            {
+              "t": "Tropical sprue.",
+              "d": "Malabsorption after a period in an endemic area."
+            },
+            {
+              "t": "HIV-associated diarrhoea.",
+              "d": "Ask about risk factors and prior testing."
+            }
+          ],
+          "note": "Chronic diarrhoea treated as inflammatory bowel disease without excluding intestinal tuberculosis is a recognised and serious error here: immunosuppression will make the tuberculosis worse."
         }
       ],
       "pitfalls": [
         "Not defining what the patient means, so frequent formed stool is worked up as diarrhoea.",
         "Missing nocturnal diarrhoea, which points away from a functional cause.",
         "Forgetting recent antibiotics, and missing Clostridioides difficile.",
-        "Overlooking steatorrhoea because the patient was never asked whether the stool floats or is hard to flush."
+        "Overlooking steatorrhoea because the patient was never asked whether the stool floats or is hard to flush.",
+        "Working out the mechanism before assessing whether the patient is dry.",
+        "Giving an antimotility drug in bloody diarrhoea with fever.",
+        "Treating chronic diarrhoea as inflammatory bowel disease without excluding intestinal tuberculosis."
       ],
       "probes": [
         {
@@ -3733,6 +3806,9 @@
         },
         {
           "text": "Does it ever come on with exertion and settle with rest?"
+        },
+        {
+          "text": "Have you ever been tested or treated for H. pylori?"
         }
       ],
       "teach": [
@@ -3785,14 +3861,14 @@
             },
             {
               "t": "New onset in an older patient.",
-              "d": "The threshold falls with age."
+              "d": "Conventionally new dyspepsia from about age 55, though a lower threshold is reasonable where gastric cancer is commoner."
             },
             {
               "t": "An epigastric mass.",
               "d": "Found on examination, not history, but it belongs on the list."
             }
           ],
-          "note": "Non-steroidals, aspirin and steroids raise ulcer risk and are frequently taken without being reported as medicines. Ask specifically."
+          "note": "Non-steroidals, aspirin and steroids raise ulcer risk and are frequently taken without being reported as medicines. Ask specifically. Without alarm features, the usual approach is to test for Helicobacter pylori and treat if positive, rather than to endoscope."
         },
         {
           "heading": "The mistake that matters most",
@@ -3914,6 +3990,9 @@
         },
         {
           "text": "How is your mood, and has anything changed at home?"
+        },
+        {
+          "text": "Any risk factors for HIV, or has an HIV test ever been done?"
         }
       ],
       "teach": [
@@ -3929,7 +4008,7 @@
               [
                 "Reduced",
                 "Intake falls",
-                "Malignancy, chronic infection, depression, uraemia, chronic liver disease"
+                "Malignancy, chronic infection including tuberculosis and HIV, depression, uraemia, chronic liver disease"
               ],
               [
                 "Normal or increased",
@@ -4141,12 +4220,12 @@
               "d": "The conservative low-risk threshold, and it is the same for men and women."
             },
             {
-              "t": "30 g of ethanol a day.",
-              "d": "Where the risk of alcohol-related liver disease begins. That is under four units a day."
+              "t": "About 30 g of ethanol a day in men, about 20 g in women.",
+              "d": "Where the risk of alcohol-related liver disease begins. Thirty grams is under four units. The lower figure for women follows from the smaller volume of distribution described below."
             },
             {
-              "t": "160 g a day for over 8 years.",
-              "d": "The average intake of a man presenting with cirrhosis. Useful for putting a patient's own intake in perspective."
+              "t": "Sustained heavy intake over years.",
+              "d": "Cirrhosis risk rises steeply with intake of roughly 160 to 180 g a day maintained for a decade or more. Treat this as an order of magnitude for counselling, not a diagnostic number."
             }
           ],
           "note": "Ethanol yields 7 kcal per gram, and many drinks add sugar on top. Obesity multiplies liver-related mortality in heavy drinkers several fold."
@@ -4373,7 +4452,7 @@
             },
             {
               "t": "Obscure bleeding.",
-              "d": "Visible or recurrent bleeding whose source remains unidentified after upper and lower endoscopy. It is a statement about the WORKUP, not about the patient."
+              "d": "Bleeding whose source is not found after upper and lower endoscopy. Current ACG and ASGE usage prefers SMALL BOWEL BLEEDING for this situation, reserving obscure for bleeding still unexplained after small bowel evaluation including capsule endoscopy."
             }
           ]
         },

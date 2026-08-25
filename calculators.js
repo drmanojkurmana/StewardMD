@@ -3682,8 +3682,8 @@
         {v:"2",t:"2 - Faint, but immediately audible"},
         {v:"3",t:"3 - Moderately loud"},
         {v:"4",t:"4 - Very loud"},
-        {v:"5",t:"5 - Extremely loud; audible with one edge of the stethoscope off the chest"},
-        {v:"6",t:"6 - Audible with the stethoscope just off the chest wall"} ] }
+        {v:"5",t:"5 - Very loud, with a thrill; audible with the chestpiece PARTLY off the chest"},
+        {v:"6",t:"6 - Audible with the chestpiece ENTIRELY off the chest wall"} ] }
     ],
     compute:function(v){
       if(v.g===undefined||v.g==="") return ERR;
@@ -3725,7 +3725,7 @@
             : g===2 ? "Slightly diminished."
             : g===3 ? "Normal."
             : "Bounding. Consider a hyperdynamic circulation: anaemia, fever, thyrotoxicosis, aortic regurgitation, or CO2 retention.";
-      return { v:g, u:"+", i:i+" Note that 3+ is NORMAL on this scale, not 2+. Always record both sides. Ref: standard 0 to 4+ scale." };
+      return { v:g, u:"+", i:i+" CAUTION, TWO SCALES ARE IN USE: on this 0 to 4+ scale 3+ is normal, but on the Bates 0 to 4+ scale 2+ is the normal expected pulse and 3+ means increased. State which scale you are using when you document, or the number means nothing to the next reader. Always record both sides. Ref: 0 to 4+ peripheral pulse scale." };
     } },
 
   { id:"ehra_af", cat:"Cardiology", icon:"", title:"EHRA Symptom Score (Atrial Fibrillation)",
@@ -3742,7 +3742,7 @@
       if(v.g===undefined||v.g==="") return ERR;
       var g=+v.g;
       var lbl=["","I","IIa","IIb","III","IV"][g];
-      var i = g<=2 ? "Symptoms do not limit activity; a rate control strategy is usually reasonable."
+      var i = g<=2 ? "Symptoms do not limit activity. Rate control has traditionally been reasonable here, but since EAST-AFNET 4 early rhythm control is favoured in selected patients regardless of symptom burden, so the score alone does not decide the strategy."
             : g===3 ? "Symptoms trouble the patient without limiting activity. The IIa to IIb distinction exists precisely to capture this."
             : "Activity is limited or has stopped, which strengthens the case for a rhythm control strategy.";
       return { v:lbl, u:"EHRA", i:"EHRA "+lbl+". "+i+" This scores SYMPTOMS only. It says nothing about stroke risk, which is CHA2DS2-VASc, or bleeding risk, which is HAS-BLED. Ref: EHRA/ESC." };
@@ -3758,10 +3758,11 @@
     ],
     compute:function(v){
       if(!ok(v.major)||!ok(v.minor)||v.major<0||v.minor<0) return ERR;
+      if(v.major>9||v.minor>7) return ERR;   // 9 major and 7 minor criteria exist; more means double counting
       var met = (v.major>=2) || (v.major>=1 && v.minor>=2);
       var i = met ? "Criteria MET for the clinical diagnosis of heart failure (2 major, or 1 major plus 2 minor)."
                   : "Criteria NOT met (needs 2 major, or 1 major plus 2 minor).";
-      return { v: met?"Met":"Not met", u:"", i:i+" A minor criterion counts only if it is not attributable to another condition. These are CLINICAL criteria and do not replace echocardiography or natriuretic peptides. Ref: Framingham Heart Study." };
+      return { v: met?"Met":"Not met", u:"", i:i+" EACH CRITERION COUNTS ONCE: neck vein distension and a measured venous pressure above 16 cmH2O are the same physical sign, not two findings. A minor criterion counts only if it is not attributable to another condition. These are CLINICAL criteria and do not replace echocardiography or natriuretic peptides. Ref: Framingham Heart Study." };
     } },
 
   { id:"alcohol_units", cat:"General", icon:"", title:"Alcohol Units (UK) and weekly intake",
@@ -3780,7 +3781,7 @@
         var wu=units*v.perweek, wg=wu*8, gday=wg/7;
         msg+=" Weekly: "+r1(wu)+" units ("+r1(wg)+" g). ";
         msg+= wu>14 ? "ABOVE the 14 units/week low-risk threshold for men and women. " : "Within the 14 units/week low-risk threshold. ";
-        msg+= gday>=30 ? "Daily intake ~"+r1(gday)+" g/day is at or above the ~30 g/day threshold where alcohol-related liver disease risk begins." : "Daily average ~"+r1(gday)+" g/day.";
+        msg+= gday>=20 ? "Daily intake ~"+r1(gday)+" g/day is at or above the threshold where alcohol-related liver disease risk begins: about 30 g/day for men and about 20 g/day for women." : "Daily average ~"+r1(gday)+" g/day.";
       }
       msg+=" Continuous daily drinking carries more liver risk than intermittent; at least two alcohol-free days a week are advised. Women reach higher blood ethanol levels than men for the same intake (smaller volume of distribution). Ref: standard UK unit definition.";
       return { v:r1(units), u:"units", i:msg };
@@ -3795,8 +3796,8 @@
     compute:function(v){
       if(!ok(v.cpd)||!ok(v.years)||v.cpd<0||v.years<0) return ERR;
       var si=v.cpd*v.years;
-      var band = si<100 ? "Mild smoker" : (si<=300 ? "Moderate smoker" : "Heavy smoker");
-      var msg=band+" (SI <100 mild, 101-300 moderate, >300 heavy).";
+      var band = si<100 ? "Mild smoker" : (si<=300 ? "Moderate smoker" : "Heavy smoker");   // 100 to 300 inclusive = moderate
+      var msg=band+" (SI under 100 mild, 100 to 300 moderate, above 300 heavy).";
       if(si>300) msg+=" Lung cancer is common above a smoking index of 300.";
       msg+=" Smoking index is not the same as pack-years: it does not divide by 20, so the numbers are not interchangeable. Use PACK-YEARS for screening: USPSTF 2021 recommends annual low-dose CT from age 50 to 80 with 20 or more pack-years, still smoking or quit within 15 years (the older age 55 / 30 pack-year rule is superseded). India has no LDCT screening programme and high TB prevalence raises false positives. The <100 / 101-300 / >300 bands and the lung-cancer association above 300 are Indian textbook convention. Ref: USPSTF 2021; smoking index per standard Indian texts.";
       return { v:r1(si), u:"", i:msg };

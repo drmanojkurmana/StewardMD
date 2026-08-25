@@ -87,12 +87,18 @@ test("NINDS reflex: grades 2 AND 3 are both normal", () => {
   assert.match(run("ninds_reflex", { g: "2" }).interpretation, /both NORMAL|asymmetr/i);
 });
 
-test("pulse grading: 3+ is normal, not 2+", () => {
+test("pulse grading names WHICH scale, because two are in common use", () => {
+  /* R1 review: the first version asserted flatly that "3+ is NORMAL on this scale, not 2+".
+   * Both the 0-4+ scale (3+ normal) and the Bates scale (2+ normal) are in mainstream texts, so
+   * stating one as fact causes exactly the miscommunication the note claimed to prevent. */
   assert.match(run("pulse_grade", { g: "3" }).interpretation, /^Normal|Normal\./);
   assert.match(run("pulse_grade", { g: "2" }).interpretation, /diminished/i);
   assert.match(run("pulse_grade", { g: "4" }).interpretation, /bounding/i);
   assert.match(run("pulse_grade", { g: "0" }).interpretation, /doppler/i);
-  assert.match(run("pulse_grade", { g: "3" }).interpretation, /3\+ is NORMAL/);
+  const i = run("pulse_grade", { g: "3" }).interpretation;
+  assert.match(i, /two scales/i, "must warn that two scales are in use");
+  assert.match(i, /bates/i, "must name the competing scale");
+  assert.match(i, /state which scale/i, "must tell the student to document which scale");
 });
 
 test("murmurs: systolic out of six with a thrill from 4, diastolic out of four", () => {

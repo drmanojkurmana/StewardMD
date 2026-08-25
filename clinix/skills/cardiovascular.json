@@ -3621,7 +3621,7 @@
         },
         {
           "heading": "Posture and precipitant",
-          "body": "Palpitations that begin immediately on standing suggest orthostatic intolerance or atrioventricular nodal re-entry. Those tied to anxiety or panic are usually a sinus tachycardia secondary to the mental state, which is a diagnosis of exclusion and not a first assumption. Always ask about caffeine, alcohol, tobacco, inhaled beta agonists and thyroid symptoms."
+          "body": "Palpitations that begin immediately on standing suggest orthostatic intolerance, including postural tachycardia syndrome. Those tied to anxiety or panic are usually a sinus tachycardia secondary to the mental state, which is a diagnosis of exclusion and not a first assumption. Always ask about caffeine, alcohol, tobacco, inhaled beta agonists and thyroid symptoms."
         }
       ],
       "pitfalls": [
@@ -3713,7 +3713,7 @@
       "system": "cardiovascular",
       "title": "Syncope and blackouts",
       "oneLine": "Before, during and after, which is what separates cardiac syncope from a seizure and from a faint",
-      "why": "Syncope is a transient loss of consciousness from inadequate cerebral perfusion, with spontaneous recovery and no resuscitation. Roughly a third of people have an episode in their lifetime, and most are benign. The task is finding the cardiac ones, because about a quarter of those go on to a cardiac arrest.",
+      "why": "Syncope is a transient loss of consciousness from inadequate cerebral perfusion, with spontaneous recovery and no resuscitation. Roughly a third of people have an episode in their lifetime and most are benign. The task is finding the cardiac ones, which carry a substantially worse prognosis: cardiac syncope is associated with around 30 percent mortality at one year in the Framingham cohort.",
       "asks": [
         {
           "text": "What were you doing at the moment it happened: standing, standing up, exerting, or sitting?"
@@ -3738,6 +3738,9 @@
         },
         {
           "text": "Any family history of sudden death under 40?"
+        },
+        {
+          "text": "Any black stools, vomiting of blood, abdominal or back pain? Any chance of pregnancy?"
         }
       ],
       "teach": [
@@ -3818,6 +3821,29 @@
           "heading": "What makes it cardiac, and therefore urgent",
           "body": "No prodrome, occurring while sitting or lying, occurring during exertion, preceded by palpitation, or in a patient with known structural heart disease or a family history of sudden death under 40. Any one of these moves the patient from reassurance to investigation.",
           "note": "Presyncope carries the same significance as syncope. A patient who nearly blacked out on exertion needs the same workup as one who did."
+        },
+        {
+          "heading": "Syncope as the first sign of blood loss",
+          "body": "Not every blackout is a rhythm or a reflex. Syncope can be the presenting feature of hypovolaemia, and these patients look well between episodes until they do not.",
+          "points": [
+            {
+              "t": "Gastrointestinal bleeding.",
+              "d": "Ask about melaena and haematemesis in every faint, particularly in an older patient on antiplatelets or anticoagulants."
+            },
+            {
+              "t": "Ruptured ectopic pregnancy.",
+              "d": "In any woman of reproductive age. Ask the date of the last period and do a pregnancy test."
+            },
+            {
+              "t": "Ruptured abdominal aortic aneurysm.",
+              "d": "Syncope with back or abdominal pain in an older patient."
+            },
+            {
+              "t": "Pulmonary embolism.",
+              "d": "Syncope is an under-recognised presentation, and implies a large clot burden."
+            }
+          ],
+          "note": "Two things belong in every first presentation of syncope: a capillary glucose and a 12 lead ECG."
         }
       ],
       "pitfalls": [
@@ -3886,6 +3912,10 @@
         {
           "id": "danger",
           "text": "Screens for exertional onset, palpitation and family history of sudden death"
+        },
+        {
+          "id": "bleed",
+          "text": "Considers occult blood loss and pregnancy as causes"
         }
       ],
       "media": [],
@@ -3947,8 +3977,8 @@
             "rows": [
               [
                 "Taken five days a week, with a gap",
-                "Digoxin",
-                "Atrial fibrillation or heart failure"
+                "Digoxin (historical practice)",
+                "Atrial fibrillation or heart failure. Drug holidays are obsolete; recognise it, do not copy it"
               ],
               [
                 "A regular blood test to adjust the dose",
@@ -3956,7 +3986,7 @@
                 "A metallic valve, atrial fibrillation or venous thrombosis"
               ],
               [
-                "An intramuscular injection once every three weeks",
+                "An intramuscular injection every three to four weeks",
                 "Benzathine penicillin",
                 "Rheumatic heart disease, on secondary prophylaxis"
               ],
@@ -3972,7 +4002,7 @@
               ]
             ]
           },
-          "note": "The three-weekly injection is the one most often missed, and it establishes rheumatic heart disease and adherence to prophylaxis in a single question."
+          "note": "The injection is the one most often missed, and it establishes rheumatic heart disease and adherence in a single question. The STANDARD interval is every 4 weeks (1.2 million units, or 0.6 million units under 27 kg). Three-weekly is reserved for higher risk: established rheumatic heart disease, breakthrough acute rheumatic fever, or a high-incidence setting, which is why it is common in Indian practice."
         },
         {
           "heading": "Adherence, asked in a way that gets an honest answer",
@@ -3985,7 +4015,7 @@
       ],
       "pitfalls": [
         "Accepting 'some heart tablets' and moving on, when the schedule would have named them.",
-        "Not asking about injections, and missing benzathine penicillin prophylaxis.",
+        "Not asking about injections, and missing benzathine penicillin prophylaxis, which may be 3 or 4 weekly.",
         "Not asking about monitoring blood tests, and missing warfarin.",
         "Asking whether the patient is compliant instead of how many doses were missed.",
         "Failing to ask what was stopped recently, which often explains the admission."
@@ -3993,8 +4023,8 @@
       "probes": [
         {
           "level": 1,
-          "q": "A patient has an intramuscular injection once every three weeks. What is it, and what does it imply?",
-          "a": "Benzathine penicillin for secondary prophylaxis of rheumatic fever, which implies established rheumatic heart disease.",
+          "q": "A patient has an intramuscular injection every three to four weeks. What is it, and what does it imply?",
+          "a": "Benzathine penicillin for secondary prophylaxis of rheumatic fever, implying established rheumatic heart disease. The standard interval is 4-weekly; 3-weekly is used in higher risk patients.",
           "accept": [
             "benzathine",
             "penicillin",
