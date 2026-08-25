@@ -2829,6 +2829,9 @@
         },
         {
           "text": "Are you still passing flatus and stool?"
+        },
+        {
+          "text": "Any vertigo, ringing in the ears, or spinning? That points away from the gut altogether."
         }
       ],
       "teach": [
@@ -2866,6 +2869,40 @@
           "body": "Raised intracranial pressure drives the vomiting centre directly, bypassing the nausea that normally precedes a peripheral cause. Effortless, projectile, early-morning vomiting with headache is neurological until proven otherwise, and no amount of abdominal examination will settle it."
         },
         {
+          "heading": "Does vomiting relieve the pain? The answer is diagnostic",
+          "body": "In bowel obstruction, vomiting decompresses the distended segment and the pain eases. In pancreatitis and cholecystitis the inflamed organ is untouched by emptying the stomach, so the patient vomits and the pain continues unchanged. Asking this one question separates a hollow viscus problem from an inflamed solid one.",
+          "table": {
+            "cols": [
+              "Vomiting",
+              "Effect on pain",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Relieves the pain",
+                "Pain eases after vomiting",
+                "Bowel obstruction, gastric outlet"
+              ],
+              [
+                "No effect",
+                "Pain continues unchanged",
+                "Pancreatitis, cholecystitis"
+              ],
+              [
+                "Within an hour of eating",
+                "Variable",
+                "Gastroparesis or pyloric obstruction"
+              ],
+              [
+                "Minutes after every meal, effortless",
+                "None",
+                "Rumination, rather than true vomiting"
+              ]
+            ]
+          },
+          "note": "Emesis of undigested food that was never acidified suggests it never reached the stomach: a pharyngeal pouch or achalasia rather than gastric outlet obstruction."
+        },
+        {
           "heading": "The three questions that change management",
           "points": [
             {
@@ -2881,6 +2918,24 @@
               "d": "Duration and volume, not the diagnosis, decide the fluid and potassium the patient needs first."
             }
           ]
+        },
+        {
+          "heading": "When the cause is not in the abdomen at all",
+          "points": [
+            {
+              "t": "Headache or visual field change.",
+              "d": "Intracranial. Projectile vomiting, forceful and typically without preceding nausea, is the classic sign of raised intracranial tension."
+            },
+            {
+              "t": "Vertigo or tinnitus.",
+              "d": "Labyrinthine disease. The vomiting is severe and the abdomen is entirely normal."
+            },
+            {
+              "t": "Drugs and metabolic.",
+              "d": "Opioids, digoxin, chemotherapy; uraemia, hypercalcaemia, ketoacidosis, pregnancy."
+            }
+          ],
+          "note": "Vomiting WITHOUT abdominal pain should push you to look outside the gut before investigating it further."
         }
       ],
       "pitfalls": [
@@ -2925,6 +2980,18 @@
             "pressure"
           ],
           "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient with severe epigastric pain vomits repeatedly, and the pain is unchanged afterwards. What does that tell you?",
+          "a": "That the pain is not from a distended hollow viscus. Emptying the stomach relieves obstruction but does nothing for an inflamed pancreas or gallbladder, so this pattern points to pancreatitis or cholecystitis.",
+          "accept": [
+            "pancreat",
+            "cholecyst",
+            "inflam",
+            "not obstruct"
+          ],
+          "minMatch": 1
         }
       ],
       "rubric": [
@@ -2943,6 +3010,10 @@
         {
           "id": "redflag",
           "text": "Screens for effortless or early morning vomiting with headache"
+        },
+        {
+          "id": "extraabdominal",
+          "text": "Screens for intracranial, labyrinthine, drug and metabolic causes"
         }
       ],
       "media": [],

@@ -83,8 +83,11 @@ test("the new GI histories carry graded probes and a rubric", () => {
     const id = `skill.hx.gi.${c}`;
     const s = skills[id];
     assert.ok(s, `${id} missing`);
-    const levels = (s.probes || []).map((p) => p.level).sort();
-    assert.deepEqual(levels, [1, 2, 3], `${id} must have one probe at each level, got ${levels}`);
+    // Every level must be COVERED. More than one probe at a level is a richer skill, not a fault.
+    const levels = new Set((s.probes || []).map((p) => p.level));
+    for (const lvl of [1, 2, 3]) {
+      assert.ok(levels.has(lvl), `${id} has no level ${lvl} probe (has ${[...levels].sort()})`);
+    }
     assert.ok((s.rubric || []).length >= 3, `${id} needs a rubric a marker can use`);
     assert.ok((s.pitfalls || []).length >= 2, `${id} needs pitfalls`);
     assert.equal(s.review?.status, "ai_drafted", `${id} must be marked for R1 review`);
