@@ -46,6 +46,47 @@
     return Promise.resolve();
   }
 
+  /* Tell the feature modules to wipe their per-person data.
+   *
+   * CliniX, SknX, ThoreX, KardioX and SURGX each register a wipe() on these event names and have
+   * done since they were written - but nothing in the app had ever DISPATCHED one, so every wipe
+   * was dead code (kardiox-screens.js even carries the note "hook the real signout"). The reload
+   * below hid it: fresh JS and a closed overlay look like a clean slate while the localStorage
+   * keys survive, so the next person to sign in on this device inherited the previous user's
+   * CliniX competency and misses, SURGX notes and KardioX/ThoreX study history.
+   *
+   * Dispatch BEFORE the reload - a wipe after it never runs. All four names are sent because the
+   * modules listen on all four, and each module guards its own handler.
+   */
+  function wipeModules() {
+    ["smd:signout", "smd-signout", "signout", "smd:logout"].forEach(function (ev) {
+      try { window.dispatchEvent(new Event(ev)); } catch (x) {
+        // Older WebViews: Event may not be constructible.
+        try { var e2 = document.createEvent("Event"); e2.initEvent(ev, false, false); window.dispatchEvent(e2); } catch (y) {}
+      }
+    });
+  }
+
+  /* SURGX notes are encrypted, device-local and have NO server copy, and wipe() destroys the
+   * encryption key along with them - so once the sign-out wipe above actually started running,
+   * signing out became an irreversible way to lose a surgeon's only copy of their notes. Nothing
+   * in the app asks before signing out. Ask only when there is something irreplaceable to lose;
+   * a sign-out with no notes stays a single tap. */
+  function confirmNoteLoss() {
+    var n = 0;
+    try {
+      var st = window.SMD_SURGX_STORE;
+      if (st && st.listNotes) n = (st.listNotes() || []).length;
+    } catch (x) { return true; }
+    if (!n) return true;
+    try {
+      return window.confirm(
+        "Signing out will permanently delete " + n + " SURG" + String.fromCharCode(0x02E3) + " note" +
+        (n === 1 ? "" : "s") + " from this device.\n\nThey are encrypted on this device only and " +
+        "there is no server copy, so they cannot be recovered.\n\nSign out anyway?");
+    } catch (x) { return true; }
+  }
+
   var signingOut = false;
   // Delegated + capture so it runs BEFORE app.js's own bubble/target handler. Covers the
   // session-badge button, the drawer button (#smdSbSignOut) and the account-sheet button —
@@ -53,6 +94,7 @@
   document.addEventListener("click", function (e) {
     var t = e.target && e.target.closest && e.target.closest("#sessionSignOut, #smdSbSignOut");
     if (!t || signingOut) return;
+    if (!confirmNoteLoss()) { e.preventDefault(); e.stopImmediatePropagation(); return; }
     signingOut = true;
     // Suppress app.js's synchronous location.reload() so our async teardown can complete.
     e.preventDefault();
@@ -61,6 +103,7 @@
     try { localStorage.removeItem(ACCOUNT_KEY); } catch (x) {}
     fullSignOut().then(function () {
       try { localStorage.removeItem(ACCOUNT_KEY); } catch (x) {}
+      wipeModules();
       try { location.reload(); } catch (x) { signingOut = false; }
     });
   }, true);

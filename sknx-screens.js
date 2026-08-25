@@ -514,12 +514,16 @@
   }
 
   // Sign-out wipe hook (privacy contract): wipe the encrypted store on StewardMD sign-out.
-  function wipe() { try { if (window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.list) { /* no bulk-delete API yet; local history is per-device and small. */ } } catch (e) {} }
+  function wipe() { try { if (window.SMD_SKNX_STORE && window.SMD_SKNX_STORE.deleteAll) window.SMD_SKNX_STORE.deleteAll(); } catch (e) {} }
   var _signoutWired = false;
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return; _signoutWired = true;
     ["smd:signout", "smd-signout", "signout", "smd:logout"].forEach(function (ev) { try { window.addEventListener(ev, wipe); } catch (e) {} });
   }
+
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
 
   var API = {
     mount: mount,

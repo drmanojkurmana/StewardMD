@@ -7,6 +7,7 @@
  * Linux: CHROME=/opt/pw-browsers/chromium-1194/chrome-linux/chrome node test/run-clinix-ui.mjs
  */
 import { spawn } from "node:child_process";
+import { rmSync } from "node:fs";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 // Node 22's built-in WebSocket, same as test/run-abx-ui.mjs. Do not import "ws": it is not a
@@ -27,6 +28,13 @@ async function ensureServer() {
   for (let i = 0; i < 40; i++) { try { await fetch(BASE); return; } catch { await sleep(200); } }
 }
 await ensureServer();
+
+/* A FRESH profile every run. CliniX flags persist to localStorage, and this harness deliberately
+ * toggles one (viva voice mode, smd_clinix_viva_voice) as part of its own assertions - so reusing
+ * the profile carried that ON into the next run and made "voice mode is off by default" fail,
+ * plus the two checks after it, against code that was perfectly fine. A test that fails because
+ * the LAST run of itself passed is worse than no test. */
+try { rmSync(userDir, { recursive: true, force: true }); } catch {}
 
 const chrome = spawn(CHROME, [
   ...(process.env.CHROME_FLAGS || "").split(" ").filter(Boolean),

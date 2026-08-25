@@ -461,3 +461,47 @@ come from `test/device/maik-bench.html`, run inside the real WKWebView on a phys
 throwaway build launched with `devicectl ... --console`. Its control arm uses the PATCHED
 `window.fetch` and reliably shows `ttfv == total` — proof on-device that CapacitorHttp buffers and
 the pristine XHR transport is required.
+
+---
+
+## 2026-08-26 — Sign-out never wiped anything, in any module
+
+**The gap.** CliniX, SknX, ThoreX, KardioX and SURGX each registered a `wipe()` on
+`smd:signout` / `smd-signout` / `signout` / `smd:logout`. **Nothing in the repo had ever
+dispatched one of those events.** Every module's privacy contract was dead code from the day it
+was written; `kardiox-screens.js` even carried the note "hook the real signout".
+
+Two things hid it. The real path (`signout-fix.js`) ends in `location.reload()`, so a fresh JS
+context and a closed overlay *look* like a clean slate while the localStorage keys survive
+untouched. And four of the five modules only called `wireSignout()` from `mount()`/`init()`, so
+even a dispatched event would have missed any module the student had not opened that session.
+
+**Consequence.** The next person to sign in on a shared device inherited the previous user's
+CliniX competency, misses and resume tile; their SknX dermatology history; their KardioX/ThoreX
+study records. On a shared ward device that is a real privacy failure, not a cosmetic one.
+
+**Decision.** The dispatch belongs in `signout-fix.js` (the one place that already owns the real
+teardown), fired BEFORE the reload — a wipe after the reload never runs. Modules wire their
+listener at LOAD, not on mount. `SMD_SKNX_STORE` gained the `deleteAll()` its `wipe()` had been
+missing (its handler was a comment reading "no bulk-delete API yet" while the store held up to
+100 analyses).
+
+**The consequence that needed a guard.** Making the wipe real also made sign-out an irreversible
+way to destroy data: **SURGX notes are encrypted, device-local, have no server copy, and the wipe
+deletes the encryption key with them.** Nothing in the app asked before signing out. Sign-out now
+confirms *only when there are notes to lose* — an empty store stays a single tap. Fixing a
+privacy leak must not quietly create a data-loss path.
+
+**Also, same day, in CliniX:** OSCE graded each skill all-or-nothing
+(`record(sid, ps.correct === ps.seen)`), so ticking 5 of 6 items filed one hard WRONG against the
+whole skill and a well-performed chest examination read as a weak area. It now records one attempt
+per checklist item, matching how Learn, Viva and Case record one per probe, and the miss log finally
+names *which step* was missed. A null viva verdict ("MaiK could not judge") no longer fires the
+wrong-answer haptic; reaching for the mic no longer erases what the student had already typed.
+
+**Test-harness note.** `test/run-clinix-ui.mjs` reused one Chrome profile across runs, and it
+toggles a *persisted* flag (`smd_clinix_viva_voice`) as part of its own assertions — so a passing
+run left the flag ON and made the next run fail three checks against correct code. It had been
+failing "viva opens on the MBBS tier by default" for the same reason. Fresh profile per run. A test
+that fails because the last run of itself passed is worse than no test. (Second harness-state bug of
+this exact shape this week; the first was `smd_verify_bypass`.)

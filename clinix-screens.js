@@ -1463,12 +1463,24 @@
     for (var k in state.stationChecked) if (state.stationChecked[k]) checked.push(k);
     var r = M().scoreStation(state.station, checked);
     state.stationResult = r;
-    // The station writes competency per skill, exactly like a lesson does.
+    /* One recorded attempt per CHECKLIST ITEM, exactly like Learn and Viva record one per probe.
+     *
+     * This used to collapse every item for a skill into a single verdict -
+     * record(sid, ps.correct === ps.seen) - so ticking 5 of 6 items filed one hard WRONG against
+     * the whole skill, and a student who examined the chest well twice was told chest expansion
+     * was a weak area. Recording each item keeps the store's seen/correct counters proportionate
+     * (5 right, 1 wrong) with no threshold to argue about, and gives the miss log the ONE thing
+     * that makes "Weak areas" useful: which step was actually missed. */
     if (P()) {
-      for (var sid in r.perSkill) {
-        if (!Object.prototype.hasOwnProperty.call(r.perSkill, sid)) continue;
-        var ps = r.perSkill[sid];
-        P().record(sid, ps.correct === ps.seen, { mode: "osce" });
+      for (var n = 0; n < state.station.items.length; n++) {
+        var it = state.station.items[n];
+        if (!it.skillId) continue;
+        var got = !!state.stationChecked[it.id];
+        P().record(it.skillId, got, {
+          mode: "osce",
+          probe: it.label || it.text || state.station.title,
+          given: got ? "(performed)" : "(not performed)"
+        });
       }
     }
     haptic(r.passed ? "success" : "error");
@@ -1527,7 +1539,10 @@
   function finishVivaAnswer(cur, given, correct, examinerFeedback, examinerVerdict) {
     state.vivaState.lastAnswer = { correct: correct, given: given, examinerFeedback: examinerFeedback || "", examinerVerdict: examinerVerdict || "" };
     if (P()) P().record(cur.q.skillId, correct, { mode: "viva", probe: cur.q.probe.q, given: String(given) });
-    haptic(correct === true ? "success" : "warning");
+    /* Three outcomes, three signals. `null` means MaiK could not judge the answer (offline, quota,
+     * timeout) - vivaNext deliberately refuses to demote the student for it, so buzzing the
+     * wrong-answer haptic contradicted the module's own rule and told them they had failed. */
+    haptic(correct === true ? "success" : correct === null ? "light" : "warning");
     repaint();
   }
 
@@ -1596,6 +1611,14 @@
   // SMD_VOICE never silently falls back to the cloud for it. If Whisper genuinely is not available
   // here, retry once with the device's default on-device recognizer rather than leaving voice mode
   // dead - both keep audio on-device, this only changes which local model transcribes it.
+  // Dictation continues what was typed rather than replacing it.
+  function joinSpoken(typed, spoken) {
+    var a = String(typed || "").trim(), b = String(spoken || "").trim();
+    if (!a) return b;
+    if (!b) return a;
+    return a + " " + b;
+  }
+
   function vivaMicToggle() {
     // Whisper (the "clinical" engine, now registered on Android too) is a BATCH engine: it never
     // streams live captions, and only produces a transcript once stop() is called, which then
@@ -1615,7 +1638,11 @@
       return;
     }
     if (!(window.SMD_VOICE && SMD_VOICE.listen)) { toast("Voice input is not available on this device"); return; }
-    state.vivaPartial = "";
+    /* #cxAnswer is re-rendered from state.vivaPartial on every repaint, and typed text lives only
+     * in the DOM until submit - so blanking vivaPartial here and repainting DESTROYED whatever the
+     * student had already written. Carry it over instead and let dictation continue the sentence. */
+    var typed = textAnswer();
+    state.vivaPartial = typed;
     state.vivaListening = true;
     // Captured so a transcript that arrives after the student has moved to a DIFFERENT viva
     // question (not just left the screen, which vivaStopListening already handles) is discarded
@@ -1627,10 +1654,10 @@
       state.vivaListening = false;
       state.vivaTranscribing = false;
       if (state.vivaCurrent !== startedFor) { repaint(); return; }
-      state.vivaPartial = String(t || "").trim();
+      state.vivaPartial = joinSpoken(typed, t);
       vivaSubmitVoiceAnswer();
     }
-    function onPartial(t) { state.vivaPartial = String(t || ""); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
+    function onPartial(t) { state.vivaPartial = joinSpoken(typed, t); try { var el = document.getElementById("cxAnswer"); if (el) el.value = state.vivaPartial; } catch (e) {} }
     function fail() { state.vivaListening = false; state.vivaTranscribing = false; state.vivaListenHandle = null; toast("Voice input is not available on this device"); repaint(); }
     // SMD_VOICE.listen({engine:"clinical"}) calls onError SYNCHRONOUSLY (before it returns) on any
     // platform where Whisper isn't registered (a bug fixed for Android on 2026-08-23, but still the
@@ -1774,13 +1801,20 @@
     question = String(question || "").trim();
     if (!question) { toast("Type a question first"); return; }
     var entry = { q: question, pending: true, partial: "" };
-    state.tutorLog.push(entry);
+    /* Captured so an answer that arrives after the student opened a DIFFERENT lesson is dropped.
+     * openLesson replaces state.tutorLog wholesale, and the old closure kept writing into the
+     * detached array - invisible, but it still fired a haptic and a repaint for an answer that
+     * belonged to a lesson no longer on screen. Same shape as the viva's startedFor guard. */
+    var log = state.tutorLog;
+    log.push(entry);
     repaint();
 
     SMD_CLINIX_TUTOR.answer(tutorContext(), question, function (accumulated) {
+      if (state.tutorLog !== log) return;
       entry.partial = accumulated;
       if (state.stack[state.stack.length - 1] === "tutor") repaint();
     }).then(function (r) {
+      if (state.tutorLog !== log) return;
       entry.pending = false;
       if (!r || r.error) {
         entry.error = r && r.error === "quota"
@@ -2013,10 +2047,15 @@
     window.SMD_CLINIX_WIPE = wipe;
   }
 
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
+
   var API = {
     mount: mount, go: go, back: back, wipe: wipe,
     SCREENS: SCREENS,
     _state: function () { return state; },
+    _finishStation: finishStation,
     _tutorContext: tutorContext,
     _prettySkill: prettySkill
   };
