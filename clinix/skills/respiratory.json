@@ -609,11 +609,72 @@
         {
           "source": "Harrison's Principles of Internal Medicine 22e",
           "locator": "COPD, p.2249-2259 (cigarette smoke, biomass fuels, vaping)"
+        },
+        {
+          "source": "GOLD Report",
+          "locator": "Risk factors: tobacco and biomass smoke exposure"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history, smoking and occupational exposure"
         }
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Pack-years are a dose, not a label",
+          "body": "Pack-years let you compare one smoker with another and track risk over time: packs per day multiplied by years smoked, where a pack is twenty cigarettes. Recording 'smoker' loses that entirely. Risk of COPD and of lung malignancy both rise with cumulative dose, which is why the number belongs in the notes rather than an adjective.",
+          "table": {
+            "cols": [
+              "Consumption",
+              "Duration",
+              "Pack-years"
+            ],
+            "rows": [
+              [
+                "20 a day (1 pack)",
+                "30 years",
+                "30"
+              ],
+              [
+                "10 a day (0.5 pack)",
+                "40 years",
+                "20"
+              ],
+              [
+                "40 a day (2 packs)",
+                "15 years",
+                "30"
+              ]
+            ]
+          },
+          "note": "Bidis, hookah and cannabis are frequently denied under the word 'smoking'. Name them, or the dose is understated."
+        },
+        {
+          "heading": "Biomass fuel is the exposure that gets missed",
+          "body": "A large share of COPD in Indian women occurs in people who have never smoked. The exposure is wood, dung cake, crop residue or coal burned in an unventilated kitchen, often for decades of daily cooking. If the only question asked is about cigarettes, the diagnosis is either missed or attributed to asthma.",
+          "points": [
+            {
+              "t": "Ask the fuel, not the habit.",
+              "d": "What is used for cooking, and is there a chimney or window."
+            },
+            {
+              "t": "Ask the years.",
+              "d": "Hours a day over decades is a cumulative dose like pack-years."
+            },
+            {
+              "t": "Ask about the childhood home too.",
+              "d": "Exposure often started long before the current house."
+            }
+          ]
+        },
+        {
+          "heading": "Stopping changes the trajectory, not the history",
+          "body": "Lung function lost to smoking does not return, but the accelerated rate of decline slows towards normal after cessation, so the date of stopping matters as much as the quantity. An ex-smoker of 40 pack-years still carries the risk that dose conferred, which is why 'ex-smoker' without a number is not a useful record."
+        }
+      ]
     },
     "skill.hx.resp.drug": {
       "id": "skill.hx.resp.drug",
@@ -724,7 +785,64 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Ask what they take, then watch them take it",
+          "body": "Reported adherence and actual delivery are different things. A large share of patients labelled as having uncontrolled asthma or COPD are using an adequate drug with an inadequate technique, so no dose increase will help. The history is incomplete until the device has been demonstrated back to you.",
+          "points": [
+            {
+              "t": "Which inhaler, and what colour.",
+              "d": "Patients recall colour and shape far better than drug names."
+            },
+            {
+              "t": "How many times a day, honestly.",
+              "d": "Ask how many days last week they missed, not whether they are compliant."
+            },
+            {
+              "t": "Reliever frequency.",
+              "d": "A short-acting reliever needed more than twice a week is uncontrolled disease, whatever the patient says."
+            },
+            {
+              "t": "Spacer.",
+              "d": "Ask whether one was ever supplied, and whether it is used."
+            }
+          ],
+          "note": "Rising reliever use is the earliest objective marker of losing control, and it is available from the history alone."
+        },
+        {
+          "heading": "Drugs that cause the symptom you are investigating",
+          "table": {
+            "cols": [
+              "Drug",
+              "Effect"
+            ],
+            "rows": [
+              [
+                "Beta blockers, including eye drops",
+                "Bronchoconstriction in asthma"
+              ],
+              [
+                "ACE inhibitors",
+                "Dry persistent cough, often months after starting"
+              ],
+              [
+                "Aspirin and other NSAIDs",
+                "Bronchospasm in aspirin-sensitive asthma"
+              ],
+              [
+                "Amiodarone, methotrexate, nitrofurantoin",
+                "Interstitial lung disease"
+              ]
+            ]
+          },
+          "note": "An ACE inhibitor cough is a diagnosis made by asking the start date, not by imaging."
+        },
+        {
+          "heading": "Steroids, past and present",
+          "body": "Ask about courses of oral steroids in the last year and about maintenance use. Frequency of rescue courses grades severity better than the patient's own account of how bad the disease is, and current or recent use changes the risk of infection and of adrenal suppression during an acute illness."
+        }
+      ]
     },
     "skill.exam.resp.inspection": {
       "id": "skill.exam.resp.inspection",
@@ -2087,7 +2205,67 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Severity is decided at the bedside, before any imaging",
+          "body": "The decision that matters in pneumonia is not the organism but the disposition: home, ward, or critical care. CURB-65 uses confusion, urea, respiratory rate, blood pressure and age over 65, and every component except urea comes from the history and examination.",
+          "table": {
+            "cols": [
+              "Component",
+              "Threshold"
+            ],
+            "rows": [
+              [
+                "Confusion",
+                "New disorientation"
+              ],
+              [
+                "Urea",
+                "Above 7 mmol/L"
+              ],
+              [
+                "Respiratory rate",
+                "30 or more per minute"
+              ],
+              [
+                "Blood pressure",
+                "Systolic under 90, or diastolic 60 or less"
+              ],
+              [
+                "Age",
+                "65 or over"
+              ]
+            ]
+          },
+          "note": "Count the respiratory rate yourself for a full minute. It is the most frequently fabricated observation in the chart and one of the most predictive."
+        },
+        {
+          "heading": "Where it was acquired changes the likely organism",
+          "points": [
+            {
+              "t": "Community.",
+              "d": "Pneumococcus most often, then atypicals."
+            },
+            {
+              "t": "Hospital, after 48 hours.",
+              "d": "Gram negatives and resistant organisms, so the empirical choice differs."
+            },
+            {
+              "t": "Aspiration risk.",
+              "d": "Stroke, reduced consciousness, alcohol, dysphagia. Ask about choking on swallowing."
+            },
+            {
+              "t": "Immunosuppression.",
+              "d": "Steroids, chemotherapy, diabetes, HIV. It widens the differential well beyond the usual organisms."
+            }
+          ]
+        },
+        {
+          "heading": "The features that suggest it is not simple pneumonia",
+          "body": "Ask about weight loss, night sweats and a cough lasting more than two weeks, because tuberculosis presents as a pneumonia that fails to resolve. Ask about a recent long journey or immobility, because pulmonary embolism with infarction mimics it. Failure to improve after 48 to 72 hours of appropriate treatment should send you back to the history rather than up the antibiotic ladder."
+        }
+      ]
     },
     "skill.hx.asthma.triggers": {
       "id": "skill.hx.asthma.triggers",
@@ -2199,7 +2377,77 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "Variability is the diagnosis",
+          "body": "Asthma is defined by airflow obstruction that varies, so the history is looking for change rather than severity. Diurnal variation, seasonal variation, and symptoms that appear on exposure and settle on removal are what separate it from COPD, which is comparatively fixed and progressive.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Asthma",
+              "COPD"
+            ],
+            "rows": [
+              [
+                "Onset",
+                "Often childhood or early adult",
+                "Usually after 40"
+              ],
+              [
+                "Course",
+                "Episodic, with well periods",
+                "Progressive, few well periods"
+              ],
+              [
+                "Night and early morning",
+                "Characteristically worse",
+                "Less diurnal"
+              ],
+              [
+                "Atopy",
+                "Eczema, allergic rhinitis, family history",
+                "Not typical"
+              ],
+              [
+                "Smoking",
+                "May be absent",
+                "Usually substantial"
+              ]
+            ]
+          },
+          "note": "Waking at night with cough or wheeze is both a diagnostic clue and a control marker, so ask about it at every visit."
+        },
+        {
+          "heading": "Triggers, asked by category",
+          "points": [
+            {
+              "t": "Allergens.",
+              "d": "Dust, pets, pollen, cockroach. Ask what the bedding and the room are like."
+            },
+            {
+              "t": "Irritants.",
+              "d": "Smoke, incense, cooking fumes, perfumes, cold air."
+            },
+            {
+              "t": "Exercise.",
+              "d": "Cough or wheeze minutes into exertion, settling with rest."
+            },
+            {
+              "t": "Drugs.",
+              "d": "Aspirin, NSAIDs, beta blockers including eye drops."
+            },
+            {
+              "t": "Occupation.",
+              "d": "Better at weekends and on holiday is the classic pattern of occupational asthma, and it is only found by asking."
+            }
+          ]
+        },
+        {
+          "heading": "Grading control without a spirometer",
+          "body": "Four questions grade control anywhere: daytime symptoms more than twice a week, any night waking, reliever use more than twice a week, and any limitation of activity. Any one of them present means the disease is not controlled, regardless of how well the patient says they are managing."
+        }
+      ]
     },
     "skill.hx.tb.exposure": {
       "id": "skill.hx.tb.exposure",
@@ -2312,7 +2560,67 @@
       ],
       "review": {
         "status": "ai_drafted"
-      }
+      },
+      "teach": [
+        {
+          "heading": "The exposure history is an epidemiological question, asked kindly",
+          "body": "Transmission needs a source, proximity and time. Ask who in the house or workplace has had a prolonged cough or has been treated for tuberculosis, how many people share the sleeping room, and how well it is ventilated. Household contact of a sputum positive case is the single highest yield question in the whole history.",
+          "points": [
+            {
+              "t": "Who else coughs.",
+              "d": "Household, workplace, and anyone treated for TB in the last two years."
+            },
+            {
+              "t": "Crowding.",
+              "d": "How many sleep in the room, and whether there is a window that opens."
+            },
+            {
+              "t": "Prior treatment.",
+              "d": "Any previous anti-tuberculous treatment, whether it was completed, and for how long. This drives resistance risk."
+            }
+          ],
+          "note": "Incomplete or interrupted prior treatment is the strongest historical pointer to drug resistance, and it changes the regimen entirely."
+        },
+        {
+          "heading": "Susceptibility, not just exposure",
+          "table": {
+            "cols": [
+              "Factor",
+              "Why it matters"
+            ],
+            "rows": [
+              [
+                "HIV",
+                "The strongest single risk for progression to active disease"
+              ],
+              [
+                "Diabetes",
+                "Common, and substantially increases risk"
+              ],
+              [
+                "Malnutrition and low body weight",
+                "Both a risk factor and a consequence"
+              ],
+              [
+                "Steroids and other immunosuppression",
+                "Includes anti-TNF therapy"
+              ],
+              [
+                "Silica exposure",
+                "Stone cutting, mining, sandblasting"
+              ],
+              [
+                "Smoking and alcohol",
+                "Independent risks, often coexisting"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The constitutional symptoms are the reason to ask at all",
+          "body": "Cough for more than two weeks, evening rise of temperature, drenching night sweats, loss of appetite and loss of weight together make tuberculosis likely enough to test, even when the chest sounds normal. Quantify the weight loss and the duration of cough, because those two numbers are what justify sending sputum."
+        }
+      ]
     }
   }
 }
