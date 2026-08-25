@@ -2398,14 +2398,18 @@
     // Pause = flush + process the audio so far: show "Finishing your dictation", refine the captured
     // transcript, then land on the paused state with the fresh transcript. Mirrors Stop but keeps the
     // session alive (resumable). The engine gates its own onRefine on !paused, so we refine here.
-    try { _amb.pause(); } catch (x) {}
+    // Same contract as stop(): true means the flushed window will deliver the COMPLETE transcript via
+    // onRefine, so refining here too would draft the note from the stale pre-flush text (or from
+    // nothing at all, which is what "Pause shows nothing scribed" was).
+    var pauseFlushing = false;
+    try { pauseFlushing = !!_amb.pause(); } catch (x) {}
     st.voicePaused = true;
     st.voiceProcessing = true;                              // render checks processing first -> the finishing animation
     _finishPending = true;                                  // doctor-initiated finish: failures must speak up
     if (_procTmr) { clearTimeout(_procTmr); _procTmr = null; }
     _procTmr = setTimeout(finishProcessing, 15000);         // safety: never hang the panel
     paint();
-    doRefine(st.voiceTranscript || _lastFullTranscript || "");   // updates the transcript; doRefine's .then(finishProcessing) clears the state
+    if (!pauseFlushing) doRefine(st.voiceTranscript || _lastFullTranscript || "");   // updates the transcript; doRefine's .then(finishProcessing) clears the state
   }
   function stopVoice() {
     // _amb.stop() returns true when an in-flight chunk is being flushed AND that flush will itself
