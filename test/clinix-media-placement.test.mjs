@@ -32,6 +32,12 @@ function jsonFiles(dir, out = []) {
 
 const manifest = JSON.parse(readFileSync(join(CLINIX, "media/manifest.json"), "utf8")).media;
 const videos = Object.fromEntries(Object.entries(manifest).filter(([k]) => k.startsWith("media.vid.")));
+/* AUDIO TOO. The original version of this file only checked media.vid.*, which is exactly how a
+ * stridor sound came to be attached to skill.gen.appearance - a CORE skill, so it played inside
+ * every system's general examination (owner report, 2026-08-25). Placement is placement whatever
+ * the medium. */
+const sounds = Object.fromEntries(Object.entries(manifest).filter(([k]) => k.startsWith("media.snd.")));
+const placeable = { ...videos, ...sounds };
 
 /* skill id -> the video ids attached to it, across every content file. */
 function skillMedia() {
@@ -44,8 +50,8 @@ function skillMedia() {
       if (Array.isArray(o)) return o.forEach(walk);
       if (!o || typeof o !== "object") return;
       if (o.id && Array.isArray(o.media)) {
-        const vids = o.media.filter((m) => String(m).startsWith("media.vid."));
-        if (vids.length) map.set(o.id, [...(map.get(o.id) || []), ...vids]);
+        const items = o.media.filter((m) => /^media\.(vid|snd)\./.test(String(m)));
+        if (items.length) map.set(o.id, [...(map.get(o.id) || []), ...items]);
       }
       Object.values(o).forEach(walk);
     })(data);
@@ -57,16 +63,16 @@ test("the manifest actually contains videos (guards the whole file)", () => {
   assert.ok(Object.keys(videos).length > 20, `expected the video library, found ${Object.keys(videos).length}`);
 });
 
-test("every video declares the ONE skill it was chosen for", () => {
-  const missing = Object.entries(videos).filter(([, v]) => !v.forSkill).map(([k]) => k);
-  assert.deepEqual(missing, [], "videos with no forSkill:\n  " + missing.join("\n  "));
+test("every video AND every sound declares the ONE skill it was chosen for", () => {
+  const missing = Object.entries(placeable).filter(([, v]) => !v.forSkill).map(([k]) => k);
+  assert.deepEqual(missing, [], "media with no forSkill:\n  " + missing.join("\n  "));
 });
 
 test("a video is never shown on a skill other than its declared one", () => {
   // The actual bug: a respiratory history video declared for the generic chief-complaints skill.
   const used = skillMedia();
   const wrong = [];
-  for (const [vid, rec] of Object.entries(videos)) {
+  for (const [vid, rec] of Object.entries(placeable)) {
     for (const [skillId, list] of used) {
       if (list.includes(vid) && rec.forSkill !== skillId) {
         wrong.push(`${vid} is for ${rec.forSkill} but is shown on ${skillId}`);
@@ -78,7 +84,7 @@ test("a video is never shown on a skill other than its declared one", () => {
 
 test("no video is licensed and then shown to nobody", () => {
   const used = new Set([...skillMedia().values()].flat());
-  const orphans = Object.keys(videos).filter((v) => !used.has(v));
+  const orphans = Object.keys(placeable).filter((v) => !used.has(v));
   assert.deepEqual(orphans, [], "orphaned videos:\n  " + orphans.join("\n  "));
 });
 
@@ -93,9 +99,10 @@ test("the system-agnostic core skills carry no system-specific video", () => {
     if (!o || typeof o !== "object") return;
     if (o.id && Array.isArray(o.media)) {
       for (const m of o.media) {
-        const rec = videos[m];
+        const rec = placeable[m];
         if (!rec) continue;
-        const label = `${rec.title || ""} ${rec.caption || ""}`;
+        // A sound has no title; its id and hint carry the meaning.
+        const label = `${rec.title || ""} ${rec.caption || ""} ${m}`;
         if (SYSTEM_WORDS.test(label)) offenders.push(`${o.id} shows "${rec.title}"`);
       }
     }
