@@ -4064,6 +4064,152 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.annex.defs.cvs": {
+      "id": "skill.annex.defs.cvs",
+      "kind": "annexure",
+      "system": "cardiovascular",
+      "title": "Definitions: the hypertension family",
+      "oneLine": "Resistant, refractory, pseudoresistant, masked and white coat are five different problems",
+      "why": "A patient whose blood pressure will not come down is not automatically resistant hypertension. Most are pseudoresistant, and the management of each of these five is completely different, so the label decides what happens next.",
+      "teach": [
+        {
+          "heading": "Five labels, five different next steps",
+          "table": {
+            "cols": [
+              "Term",
+              "What it means",
+              "What to do"
+            ],
+            "rows": [
+              [
+                "Resistant hypertension",
+                "Above target despite three drugs at optimal dose, one of them a diuretic",
+                "Confirm adherence, then screen for secondary causes"
+              ],
+              [
+                "Refractory hypertension",
+                "Above target despite five or more drugs including a diuretic and a mineralocorticoid antagonist",
+                "Specialist referral; a much smaller group"
+              ],
+              [
+                "Pseudoresistant",
+                "Appears resistant, but from poor technique, poor adherence, or white coat effect",
+                "Fix the measurement and the adherence FIRST"
+              ],
+              [
+                "White coat hypertension",
+                "Raised in clinic, normal outside it",
+                "Confirm with ambulatory or home readings"
+              ],
+              [
+                "Masked hypertension",
+                "Normal in clinic, raised outside it",
+                "The dangerous one, because it is missed"
+              ]
+            ]
+          },
+          "note": "Pseudoresistance is the commonest of these by a wide margin. Wrong cuff size, an unrested patient, and unreported non-adherence explain more apparent resistance than any endocrine cause."
+        },
+        {
+          "heading": "Emergency, urgency and malignant",
+          "points": [
+            {
+              "t": "Hypertensive emergency.",
+              "d": "Severe hypertension WITH acute target organ damage: encephalopathy, pulmonary oedema, dissection, acute kidney injury, eclampsia. The organ damage defines it, not the number."
+            },
+            {
+              "t": "Hypertensive urgency.",
+              "d": "Severe hypertension WITHOUT acute organ damage. Lowered over days with oral therapy, not acutely."
+            },
+            {
+              "t": "Malignant hypertension.",
+              "d": "Severe hypertension with retinal haemorrhages, exudates or papilloedema, and often renal impairment."
+            }
+          ],
+          "note": "The distinction between emergency and urgency is made by examining the patient, most usefully the fundi, not by the height of the reading."
+        },
+        {
+          "heading": "Pseudohypertension",
+          "body": "In heavily calcified, incompressible arteries the cuff must be inflated well above true intra-arterial pressure to occlude the vessel, so the recorded pressure is falsely high. Suspect it in an elderly patient with very high readings, few end-organ changes, and symptoms of over-treatment such as dizziness on standing."
+        }
+      ],
+      "pitfalls": [
+        "Labelling a patient resistant before excluding poor technique and non-adherence.",
+        "Deciding emergency versus urgency from the number rather than from target organ assessment.",
+        "Missing masked hypertension because clinic readings are normal and nobody measures outside.",
+        "Escalating drugs in an elderly patient with pseudohypertension, causing postural symptoms."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What separates a hypertensive emergency from an urgency?",
+          "a": "Acute target organ damage. The emergency has it; the urgency does not. The blood pressure reading itself does not decide.",
+          "accept": [
+            "organ",
+            "damage",
+            "end-organ",
+            "target"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why is masked hypertension more dangerous than white coat hypertension?",
+          "a": "Because it is missed. The clinic reading is normal, so the patient is never treated, while the pressure is genuinely raised for most of the day and organ damage accumulates.",
+          "accept": [
+            "missed",
+            "untreated",
+            "normal in clinic",
+            "damage"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "An 80 year old has readings of 200/110, no retinopathy, no left ventricular hypertrophy, and becomes dizzy on treatment. What should be suspected and why?",
+          "a": "Pseudohypertension. Calcified, incompressible arteries need cuff pressures far above the true intra-arterial pressure to occlude, so the recorded value overstates reality. Treating to the recorded number then produces genuine hypotension.",
+          "accept": [
+            "pseudohypertension",
+            "calcif",
+            "incompress",
+            "arterial"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "pseudo",
+          "text": "Excludes pseudoresistance before labelling resistance"
+        },
+        {
+          "id": "organ",
+          "text": "Separates emergency from urgency by target organ damage"
+        },
+        {
+          "id": "outside",
+          "text": "Considers masked hypertension when clinic readings are normal"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hypertensive vascular disease"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

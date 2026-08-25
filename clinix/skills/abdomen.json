@@ -4285,6 +4285,181 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.annex.defs.gi": {
+      "id": "skill.annex.defs.gi",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Definitions: vomiting and gastrointestinal bleeding",
+      "oneLine": "Nausea, retching, vomiting and regurgitation are four different events; so are the four ways blood appears",
+      "why": "These words are used interchangeably in notes and they are not interchangeable. Regurgitation recorded as vomiting sends the workup in the wrong direction, and melaena recorded loosely turns iron tablets into an upper GI bleed.",
+      "teach": [
+        {
+          "heading": "The emetic sequence, in order",
+          "table": {
+            "cols": [
+              "Term",
+              "What it is",
+              "Effort"
+            ],
+            "rows": [
+              [
+                "Nausea",
+                "The subjective sensation that vomiting is impending, felt in the epigastrium or throat",
+                "None"
+              ],
+              [
+                "Retching",
+                "Spasmodic respiratory movements against a CLOSED glottis, usually with intense nausea",
+                "Considerable"
+              ],
+              [
+                "Vomiting",
+                "Forceful expulsion of gastric or intestinal contents through the mouth",
+                "Forceful"
+              ],
+              [
+                "Regurgitation",
+                "Effortless return of contents into the oesophagus and sometimes the mouth",
+                "None"
+              ]
+            ]
+          },
+          "note": "Effort is the discriminator. Regurgitation is effortless and unheralded; vomiting is forceful and usually preceded by nausea and retching. Effortless return of undigested food points to achalasia or a pouch, not to a stomach problem."
+        },
+        {
+          "heading": "The four ways blood appears, and what each implies",
+          "table": {
+            "cols": [
+              "Term",
+              "What it looks like",
+              "Source"
+            ],
+            "rows": [
+              [
+                "Haematemesis",
+                "Vomited blood: red, or coffee grounds once altered by acid",
+                "Upper GI tract"
+              ],
+              [
+                "Melaena",
+                "Black, tarry, offensive stool",
+                "Usually upper; also small bowel or right colon"
+              ],
+              [
+                "Haematochezia",
+                "Bright red blood per rectum",
+                "Usually distal colon or anorectum; can be a brisk upper bleed"
+              ],
+              [
+                "Occult bleeding",
+                "Not visible at all; found on testing or as iron deficiency",
+                "Anywhere"
+              ]
+            ]
+          },
+          "note": "Melaena needs roughly 50 to 100 mL of blood and several hours in the gut. The black colour comes from bacterial and acid degradation of haemoglobin, which is why it takes time and implies a proximal source."
+        },
+        {
+          "heading": "Severe, occult and obscure mean specific things",
+          "points": [
+            {
+              "t": "Severe GI bleeding.",
+              "d": "Documented bleeding WITH shock or postural hypotension, or a fall in haematocrit of at least 6 percent (haemoglobin at least 2 g/dL), or transfusion of at least two units. It is defined by physiological impact, not by how alarming it looked."
+            },
+            {
+              "t": "Occult bleeding.",
+              "d": "Not clinically visible. Presents as iron deficiency anaemia or a positive faecal test."
+            },
+            {
+              "t": "Obscure bleeding.",
+              "d": "Visible or recurrent bleeding whose source remains unidentified after upper and lower endoscopy. It is a statement about the WORKUP, not about the patient."
+            }
+          ]
+        },
+        {
+          "heading": "Black stool that is not melaena",
+          "body": "Iron and bismuth both blacken stool. The distinguishing features are that melaena is tarry and characteristically offensive, whereas iron-related stool is simply dark and formed. Ask, before an admission is arranged."
+        }
+      ],
+      "pitfalls": [
+        "Recording effortless regurgitation as vomiting, which redirects the workup to the stomach.",
+        "Calling any black stool melaena without asking about iron, bismuth, tarriness and smell.",
+        "Using 'severe' loosely, when it has a definition based on shock, haematocrit fall or transfusion.",
+        "Confusing occult with obscure: one is invisible bleeding, the other is bleeding with an unfound source."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What distinguishes regurgitation from vomiting?",
+          "a": "Effort. Regurgitation is effortless and not preceded by nausea and retching; vomiting is a forceful expulsion.",
+          "accept": [
+            "effort",
+            "forceful",
+            "nausea",
+            "retch"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does melaena imply both a volume and a time?",
+          "a": "The black tarry appearance comes from acid and bacterial degradation of haemoglobin, which needs roughly 50 to 100 mL of blood and several hours in the gut. Less blood, or too rapid a transit, and the stool will not be melaenic.",
+          "accept": [
+            "degrad",
+            "haemoglobin",
+            "hemoglobin",
+            "50",
+            "hours",
+            "bacteri"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has recurrent visible bleeding, and upper and lower endoscopy are both normal. Which term applies, and what does it direct you towards?",
+          "a": "Obscure gastrointestinal bleeding. The term describes the state of the investigation, and it directs attention to the small bowel, which conventional endoscopy does not reach: capsule endoscopy or enteroscopy.",
+          "accept": [
+            "obscure",
+            "small bowel",
+            "capsule",
+            "enteroscop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sequence",
+          "text": "Distinguishes nausea, retching, vomiting and regurgitation by effort"
+        },
+        {
+          "id": "blood",
+          "text": "Uses haematemesis, melaena, haematochezia and occult correctly"
+        },
+        {
+          "id": "severity",
+          "text": "Applies the physiological definition of severe bleeding"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Gastrointestinal bleeding"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }

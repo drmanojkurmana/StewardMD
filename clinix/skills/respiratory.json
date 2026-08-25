@@ -3378,6 +3378,153 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.annex.defs.resp": {
+      "id": "skill.annex.defs.resp",
+      "kind": "annexure",
+      "system": "respiratory",
+      "title": "Definitions: breathlessness and its positional variants",
+      "oneLine": "Six words that all mean breathless, and the posture that separates them",
+      "why": "Orthopnoea, platypnoea, trepopnoea and bendopnoea are not synonyms and not interchangeable. Each names a specific relationship between posture and breathlessness, and each points somewhere different, so using the wrong word records the wrong sign.",
+      "teach": [
+        {
+          "heading": "Posture is the discriminator",
+          "table": {
+            "cols": [
+              "Term",
+              "Breathless when",
+              "Points to"
+            ],
+            "rows": [
+              [
+                "Dyspnoea",
+                "Any time. A subjective awareness of uncomfortable breathing",
+                "Anything"
+              ],
+              [
+                "Orthopnoea",
+                "Lying flat, relieved by sitting up",
+                "Raised left atrial pressure, heart failure"
+              ],
+              [
+                "Paroxysmal nocturnal dyspnoea",
+                "Waking from sleep, typically 1 to 3 hours after retiring",
+                "Heart failure"
+              ],
+              [
+                "Platypnoea",
+                "Sitting or standing UP, relieved by lying down",
+                "Right to left shunt, hepatopulmonary syndrome"
+              ],
+              [
+                "Trepopnoea",
+                "Lying on one particular side",
+                "Unilateral lung or pleural disease"
+              ],
+              [
+                "Bendopnoea",
+                "Bending forward, as when putting on shoes",
+                "Raised filling pressures in heart failure"
+              ]
+            ]
+          },
+          "note": "Platypnoea is the mirror image of orthopnoea. If you remember only one, remember that: upright makes it worse, lying down relieves it."
+        },
+        {
+          "heading": "Orthodeoxia is a measurement, not a symptom",
+          "body": "Orthodeoxia is arterial desaturation on standing up. It is what the oximeter shows while the patient describes platypnoea, and the two typically occur together. The mechanism is a right to left shunt that worsens when gravity redistributes blood towards dependent, shunting lung bases, classically in hepatopulmonary syndrome."
+        },
+        {
+          "heading": "Why trepopnoea localises",
+          "body": "Lying on one side makes that lung dependent, so it receives more perfusion. If that lung is the diseased one, perfusing it worsens ventilation and perfusion mismatch and the patient becomes more hypoxaemic. Patients therefore lie with the GOOD lung down in most unilateral disease, and the side they choose is a clinical sign worth recording."
+        },
+        {
+          "heading": "Two more that are often mixed up",
+          "points": [
+            {
+              "t": "Massive haemoptysis.",
+              "d": "Defined by volume and rate, not by appearance. The danger is asphyxiation rather than exsanguination, which is why airway protection and positioning come before transfusion."
+            },
+            {
+              "t": "Cough.",
+              "d": "A forced expiratory manoeuvre against an initially closed glottis. Classified by duration: acute under 3 weeks, subacute 3 to 8 weeks, chronic beyond 8 weeks. The duration bands, not the character, drive the differential."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Writing orthopnoea when the patient means platypnoea, which reverses the implication entirely.",
+        "Recording breathlessness without asking which posture changes it.",
+        "Treating orthodeoxia and platypnoea as separate findings rather than the same phenomenon measured two ways.",
+        "Not noting which side a patient with unilateral lung disease chooses to lie on."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient is breathless standing and better lying flat. Which term?",
+          "a": "Platypnoea. It is the opposite of orthopnoea.",
+          "accept": [
+            "platypn"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a patient with unilateral lung disease prefer to lie with the good lung down?",
+          "a": "The dependent lung receives more perfusion. With the good lung down, perfusion is matched to the lung that is ventilating properly. Lying on the diseased side perfuses the bad lung and worsens the mismatch and the hypoxaemia, which is trepopnoea.",
+          "accept": [
+            "perfus",
+            "dependent",
+            "mismatch",
+            "v/q"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Platypnoea with orthodeoxia in a patient with chronic liver disease. What is the mechanism?",
+          "a": "Hepatopulmonary syndrome: intrapulmonary vascular dilatations act as a right to left shunt, predominantly at the bases. Standing directs more blood to the bases, so shunting increases, saturation falls and breathlessness worsens, and both resolve on lying down.",
+          "accept": [
+            "hepatopulmonary",
+            "shunt",
+            "dilat",
+            "base"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "posture",
+          "text": "Establishes which posture provokes and which relieves"
+        },
+        {
+          "id": "term",
+          "text": "Uses the correct term rather than 'breathless'"
+        },
+        {
+          "id": "side",
+          "text": "Records which side the patient lies on in unilateral disease"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Dyspnea"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The respiratory system: the history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
