@@ -201,7 +201,7 @@ test("COOKIE: the activation's Set-Cookie is carried into the form read and the 
   const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
   assert.match(save, /let cookie = s\.cookie/, "one cookie is threaded through the whole sequence");
   assert.match(save, /Searchnew[\s\S]{0,400}?'Cookie': cookie/, "the activation sends it");
-  assert.match(save, /if \(a && a\.setCookie && a\.setCookie\.length\) cookie = mergeCookies\(cookie, a\.setCookie\)/,
+  assert.match(save, /if \(sc\.length\) cookie = mergeCookies\(cookie, sc\)/,
     "…and merges what Searchnew hands back — dropping this is the whole bug");
   assert.match(save, /GetInitialAssessmentnew[\s\S]{0,200}?'Cookie': cookie/, "the form read carries it");
   assert.match(save, /const postCookie = cookie/, "and so does the save POST");
