@@ -3623,7 +3623,10 @@
     ],
     compute:function(v){
       if(v.g===undefined||v.g==="") return ERR;
-      var g=+v.g, roman=["","I","II","III","IV"][g];
+      var g=+v.g;
+      // There is no CCS class 0. Anything outside I to IV is an error, not an empty result.
+      if(!(g>=1&&g<=4)) return ERR;
+      var roman=["","I","II","III","IV"][g];
       var i=["",
         "Class I. Ordinary activity such as walking or climbing stairs does not cause angina; it appears only with strenuous, rapid or prolonged exertion.",
         "Class II. Slight limitation of ordinary activity.",
