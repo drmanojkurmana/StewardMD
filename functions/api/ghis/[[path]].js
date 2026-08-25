@@ -480,9 +480,17 @@ async function getAssessmentForm(env, token, patientId, episodeId) {
   // instead of a blank one — the doctor edits rather than retypes. Same activate-then-CHECK as the save:
   // the caller's episodeId may be a visit number rather than the episode, which activates nothing. A
   // blank prefill is not cosmetic — it also leaves the client with no doc_id to send back on save.
+  // Carry the activation cookie into the read — see saveAssessment: Searchnew's Set-Cookie IS the
+  // active-visit context, and dropping it is what returned a blank form.
+  let cookie = s.cookie;
   const load = async (epi) => {
-    if (mrId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mrId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
-    const rr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mrId), null, { 'X-Requested-With': 'XMLHttpRequest' });
+    if (mrId && epi) {
+      try {
+        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mrId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
+      } catch (e) {}
+    }
+    const rr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mrId), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
     if (rr.unauth) return rr;
     const doc = extractAssessmentForm(rr.body || '')['assessment.Initial_Assessment_doc_id'];
     return { r: rr, live: !(doc == null || String(doc) === '' || String(doc) === '0') };
@@ -668,17 +676,29 @@ export async function saveAssessment(env, token, body) {
    * with the visit GHIS itself reports for this MR. Each attempt is recorded so a failure can say what
    * was tried instead of just "not activated". */
   const attempts = [];
+  /* THE COOKIE IS THE WHOLE THING. Searchnew marks the active visit in GHIS's SERVER-SIDE session and
+   * hands the context back as a Set-Cookie. ghisReq always sends the STORED login cookie and merely
+   * RETURNS setCookie for the caller to merge — so throwing it away meant the very next GET arrived
+   * with no active visit and GHIS answered with a blank doc_id-0 form. Every "wrong episode" theory was
+   * wrong: MR-OPMR… is the correct recordNo (proved against the live server — Searchnew returns the
+   * patient page for it), the activation simply never carried into the read. getDemographics works only
+   * because it keeps its own jar across calls. */
+  let cookie = s.cookie;
   const activateAndLoad = async (epi, how) => {
     if (mr && epi) {
-      try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {}
+      try {
+        const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+        if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
+      } catch (e) {}
     }
-    const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest' });
+    const r = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
     if (r.unauth) return { unauth: true };
+    if (r.setCookie && r.setCookie.length) cookie = mergeCookies(cookie, r.setCookie);   // antiforgery for the POST
     const form = extractAssessmentForm(r.body || '');
     const doc = form['assessment.Initial_Assessment_doc_id'];
     const live = !(doc == null || String(doc) === '' || String(doc) === '0');
     attempts.push(how + (epi ? '' : ':none') + '=' + (live ? 'ok' : 'blank'));
-    return { form: form, live: live };
+    return { form: form, live: live, gr: r };
   };
 
   let got = await activateAndLoad(String(body.episodeId || ''), 'caller');
@@ -754,7 +774,10 @@ export async function saveAssessment(env, token, body) {
   // The form's __RequestVerificationToken is paired with the .AspNetCore.Antiforgery cookie GHIS set on
   // THIS GET. Our login-time session cookie lacks it, so send the merged cookie on the POST — else GHIS
   // fails antiforgery and silently discards the save (200 "Unable to process").
-  const postCookie = mergeCookies(s.cookie, gr.setCookie);
+  // `cookie` already carries the activation context AND the antiforgery cookie from the form GET.
+  // (This read `gr.setCookie` after the activate-then-check refactor removed `gr` — a ReferenceError
+  // waiting for the first save that got past the guard above.)
+  const postCookie = cookie;
   const r = await ghisReq(env, token, 'POST', '/Doctor/Home/CreateinitialAssessmentnew', p.toString(), { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': postCookie });
   // GHIS returns a PLAIN STRING at HTTP 200: "Successfully submitted" / "Successfully updated" on
   // success, else "Unable to process your request !". Key on the success string (the old error-keyword
