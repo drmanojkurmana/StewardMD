@@ -689,9 +689,26 @@
     var saveBtn = st.noStore
       ? '<span class="oe-btn ghost" data-oe-act="storage-info" title="This case is not saved" style="cursor:default">' + ms("info") + "Not saved</span>"
       : '<button class="oe-btn primary" data-oe-act="assess-save">' + ms("save") + "Save to " + ((st && st.emrLabel) || "GHIS") + "</button>";
-    var bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
-      '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
-      saveBtn + "</div>";
+    /* Three states, matching how GHIS actually works:
+     *   draft      -> Save (editable; can be saved again and again)
+     *   saved      -> Save + Authorise (Authorise is the permanent, locking sign-off)
+     *   authorised -> neither. GHIS has locked the record; offering Save would only produce a failure.
+     * The Authorise button keys off a real doc id, not "saved in this session", so reopening a patient
+     * whose note was saved earlier still offers it. */
+    var lock = st.assessAuthorized;
+    var bar;
+    if (lock) {
+      bar = '<div class="oe-savebar locked"><div class="prog done">' + ms("lock") + "<span>Signed off</span></div>" +
+        '<div class="oe-lockmsg">' + ms("verified") + "Authorised" + (lock.by ? " by " + esc(lock.by) : "") + (lock.on ? " on " + esc(lock.on) : "") +
+        " &middot; locked in " + emrLabel() + "</div></div>";
+    } else {
+      var authBtn = (!st.noStore && oeDocId())
+        ? '<button class="oe-btn authorise" data-oe-act="consult-authorise" title="Sign off in ' + ((st && st.emrLabel) || "GHIS") + ' - this locks the record">' + ms("verified") + "Authorise</button>"
+        : "";
+      bar = '<div class="oe-savebar"><div class="prog' + (done ? " done" : "") + '" title="' + reqDone + " of " + reqAll + ' required fields filled">' + ms(done ? "check_circle" : "edit_note") + "<span>" + reqDone + "/" + reqAll + "</span></div>" +
+        '<button class="oe-btn ghost" data-oe-act="assess-clear" title="Clear every field and save a blank assessment">' + ms("delete_sweep") + "Clear</button>" +
+        saveBtn + authBtn + "</div>";
+    }
     return consultBar(st) + maikAskBtn(st) + oncoApplyOrReviewPanel(st) + '<div class="oe-accwrap">' + body + "</div>" + maikCta + suggestionsPanel(st) + bar + (st.savedConsult ? postConsultPanel() : "");
   }
   // Oncology apply-protocol suggestion (near provisional diagnosis, above the accordion, same spot
@@ -1819,6 +1836,9 @@
           // the "GHIS: no_active_assessment" the doctor sees. Sending the id we just read gives the
           // server the fallback it already supports, so a good load makes the save survive that.
           st.assessDocId = oeFieldValue(res.d.fields, "Initial_Assessment_doc_id");
+          // Authorised = signed off in GHIS = permanently locked there. Carried so the form can stop
+          // offering Save on a record GHIS will no longer accept writes for.
+          st.assessAuthorized = res.d.authorized || null;
         }
         paint();
       })
@@ -1839,6 +1859,7 @@
   // GHIS speaks in machine codes. A doctor mid-consult needs to know what to DO about it.
   function ghisSay(resp) {
     var r = String(resp || "");
+    if (/no_saved_assessment/.test(r)) return "Save the assessment first, then authorise it.";
     if (/no_active_assessment/.test(r)) {
       // Keep the [tried ...] trace on screen. It names which activation attempts GHIS rejected, which
       // is the difference between diagnosing this in one report and guessing at it across three.
@@ -1881,6 +1902,8 @@
       { kind: "medication", text: [d.drug.name, d.route, d.form, d.qty, d.frequency, d.duration].filter(Boolean).join(" ") + (d.remarks ? " - " + d.remarks : "") });
   }
   function submitAssessment() {
+    // An authorised record is locked in GHIS — a write would be rejected. Say so instead of failing.
+    if (st.assessAuthorized) { toast("This assessment is authorised and locked in " + emrLabel() + ". It can no longer be edited."); return; }
     if (usesLocal(st.source)) {   // personal/shared clinic: save the consult on-device (Shared syncs via the store)
       if (!confirmed("Save this consult to " + emrLabel() + " on this phone?")) return;
       try { if (_localStore && _localStore.saveConsult) _localStore.saveConsult(st.patient.mrn, buildAssessPayload(st.assessVals || {}), st.assessVals || {}, { author: st.author || "" }); } catch (e) {}
@@ -2719,9 +2742,22 @@
    * itself is already saved there. If GHIS does have one, point me at where you authorise today and
    * this button can call it too. */
   function authoriseConsult() {
-    if (!confirmed("Authorise this assessment and finish the consult?\n\nThe note is already saved in " + emrLabel() + ". This signs it off and moves the queue to the next patient.")) return;
-    try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
-    endConsult();
+    if (st.assessAuthorized) { toast("This assessment is already authorised."); return; }
+    if (!oeDocId()) { toast("Save the assessment first, then authorise it."); return; }
+    // Spelled out because it is irreversible: GHIS locks the record on sign-off.
+    if (!confirmed("Authorise this assessment?\n\nIt is signed off in " + emrLabel() + " and moves into Clinical notes. The record is then LOCKED - you cannot edit or save it again.")) return;
+    // GHIS's own Authorize button (signOff1 -> Home/signoffinitialAssessmentnew). The consult is only
+    // finished once GHIS confirms the sign-off, so a failed authorise never silently advances the queue.
+    postWrite("/assessment-authorize",
+      { patientId: (st.patient && st.patient.mrn) || "", episodeId: st.episodeId || "", docId: oeDocId() },
+      "Authorised in " + emrLabel() + ". It is now in Clinical notes.",
+      { kind: "assessment", text: "Authorised (signed off)" },
+      function () {
+        // Reflect the lock immediately: GHIS will no longer accept a write for this record.
+        st.assessAuthorized = { by: st.author || "", on: "" };
+        try { addToTimeline("assessment", "Authorised by " + (st.author || "the doctor")); } catch (e) {}
+        endConsult();
+      });
   }
   function endConsult() {
     try { document.dispatchEvent(new CustomEvent("smd:consult-end", { detail: { ticketId: st.ticketId || "" } })); } catch (e) {}

@@ -320,6 +320,12 @@ body.dark #smdOpdEmr .oe-maik-cta { background: var(--sc-lowest); border-color: 
 #smdOpdEmr .oe-postsave-msg .material-symbols-outlined { font-size: 20px; }
 /* The GHIS record id, so the doctor can see the note really landed (and quote it if asked). */
 #smdOpdEmr .oe-postsave-id { font: 600 11px var(--q-sans); color: var(--on-surface-variant); opacity: .85; }
+/* Authorise = the permanent, locking sign-off. Visually distinct from the editable Save so the two
+   are never confused at a glance mid-clinic. */
+#smdOpdEmr .oe-btn.authorise { background: var(--tertiary, #6b4fa1); color: #fff; border-color: transparent; }
+#smdOpdEmr .oe-savebar.locked { justify-content: flex-start; gap: 10px; }
+#smdOpdEmr .oe-lockmsg { display: flex; align-items: center; gap: 6px; font: 600 12.5px var(--q-sans); color: var(--on-surface-variant); }
+#smdOpdEmr .oe-lockmsg .material-symbols-outlined { font-size: 18px; color: var(--green, #1c7a4a); }
 #smdOpdEmr .oe-swipe { position: relative; height: 54px; border-radius: 27px; background: var(--sc-high, #e7eef0); overflow: hidden; display: flex; align-items: center; justify-content: center; user-select: none; touch-action: none; }
 #smdOpdEmr .oe-swipe-fill { position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: color-mix(in srgb, var(--primary) 22%, transparent); }
 #smdOpdEmr .oe-swipe-txt { position: relative; font: 700 14px var(--q-sans); color: var(--secondary); pointer-events: none; }

@@ -537,7 +537,15 @@ async function getAssessmentForm(env, token, patientId, episodeId, dbg) {
       }
     });
   }
-  return { fields: fields, raw: htmlToText(html).slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
+  /* Is this record already AUTHORISED (GHIS: signed off)? Once it is, GHIS locks the form — the fields
+   * render read-only — so the app must stop offering Save for it, or the doctor edits a record that
+   * cannot be written and hits a failure with no explanation. GHIS stamps the page with
+   * "Authorized on 25-Aug-2026/ 11:36 PM by Dr. CHANDU GOPALA KRISHNA"; matched on the tag-stripped
+   * text so markup changes don't break it. */
+  const flat = htmlToText(html);
+  const am = flat.match(/Authori[sz]ed\s+on\s+([^\n]{0,48}?)\s+by\s+([^\n]{0,64})/i);
+  const authorized = am ? { on: am[1].trim(), by: am[2].trim() } : null;
+  return { fields: fields, authorized: authorized, raw: flat.slice(0, 8000), htmlLen: html.length, dbgAuth: dbgAuth };
 }
 // READ a patient's OP visit "opcard" — the clinical note the GHIS History tab shows (the doctor's
 // footprint for that visit). Activates the visit first (Searchnew, same as the assessment read — without
@@ -849,6 +857,50 @@ export async function saveAssessment(env, token, body) {
   return r.unauth ? r : { ok: ok, mode: mode, status: r.status, resp: rb.slice(0, 200) + (ok ? '' : ' [tried ' + attempts.join(' ') + ']') };
 }
 
+/* AUTHORISE (GHIS calls it "sign off"). The Initial Assessment form ends with Update and Authorize;
+ * Authorize is what promotes the saved note into Clinical notes. Read straight off the live page
+ * rather than guessed — the button is
+ *     <button name="ButtonType" value="true" onclick="signOff1('20015')">Authorize</button>
+ * and signOff1 posts:
+ *     url: "./Home/signoffinitialAssessmentnew", data: { __RequestVerificationToken, id: <doc_id> }
+ *     success when the body is "Successfully signed off"
+ *
+ * It acts on a SAVED record, so the doc id must be real: authorising doc_id 0 would sign off nothing.
+ * The visit is activated first and the cookie threaded through, exactly as the save does, because the
+ * form GET is where the matching antiforgery token comes from. */
+export async function authorizeAssessment(env, token, body) {
+  const s = await getSession(env, token); if (!s) return { unauth: true };
+  body = body || {};
+  const mr = String(body.patientId || ''), epi = String(body.episodeId || '');
+  let cookie = s.cookie;
+  if (mr && epi) {
+    try {
+      const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+      if (a && a.setCookie && a.setCookie.length) cookie = mergeCookies(cookie, a.setCookie);
+    } catch (e) {}
+  }
+  const gr = await ghisReq(env, token, 'GET', '/Doctor/Home/GetInitialAssessmentnew/?id=' + encodeURIComponent(mr), null, { 'X-Requested-With': 'XMLHttpRequest', 'Cookie': cookie });
+  if (gr.unauth) return gr;
+  if (gr.setCookie && gr.setCookie.length) cookie = mergeCookies(cookie, gr.setCookie);
+  const form = extractAssessmentForm(gr.body || '');
+  const formPid = form['assessment.patient_id'];
+  if (formPid && mr && String(formPid) !== String(mr)) {
+    return { ok: false, status: 409, resp: 'patient_mismatch: loaded form for ' + formPid + ', expected ' + mr + ' — authorise aborted' };
+  }
+  const formDoc = form['assessment.Initial_Assessment_doc_id'];
+  const docId = (formDoc && String(formDoc) !== '0') ? String(formDoc)
+    : ((body.docId != null && String(body.docId) !== '' && String(body.docId) !== '0') ? String(body.docId) : '');
+  if (!docId) return { ok: false, status: 409, resp: 'no_saved_assessment: save the assessment before authorising' };
+  const csrf = form['__RequestVerificationToken'] || s.csrf || '';
+  const r = await ghisReq(env, token, 'POST', '/Doctor/Home/signoffinitialAssessmentnew',
+    '__RequestVerificationToken=' + encodeURIComponent(csrf) + '&id=' + encodeURIComponent(docId),
+    { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
+  if (r.unauth) return r;
+  const rb = String(r.body || '');
+  const ok = /successfully\s+signed\s*off/i.test(rb);
+  return { ok: ok, docId: docId, status: r.status, resp: rb.slice(0, 200) };
+}
+
 const json = (obj, status = 200) => new Response(JSON.stringify(obj), { status, headers: { 'Content-Type': 'application/json', 'Cache-Control': 'no-store' } });
 // The GHIS session token grants live patient PHI — accept it ONLY from headers, never the ?token= query
 // string (which would leak it into edge/proxy access logs, browser history, and Referer). The client always
@@ -955,6 +1007,13 @@ export async function onRequest(context) {
       if (env.QUEUE_EMR_PRESCRIBE_OK !== '1') return json({ error: 'prescribe_not_verified', detail: 'Prescribing is not enabled yet (CreateDrugs payload not verified). Assessment + investigation orders are live.' }, 501);
       if (!emrWriteEnabled(env)) return writeGate();
       const r = await prescribe(env, token, await request.json().catch(() => ({}))); return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
+    }
+    // Authorise = GHIS "sign off": promotes the SAVED assessment into Clinical notes. Same write gate
+    // as the save, since it is a clinical record action.
+    if (seg === 'assessment-authorize' && request.method === 'POST') {
+      if (!emrWriteEnabled(env)) return writeGate();
+      const r = await authorizeAssessment(env, token, await request.json().catch(() => ({})));
+      return unauth(r) ? json({ error: 'login_required' }, 401) : json(r);
     }
     if (seg === 'assessment-save' && request.method === 'POST') {
       if (!emrWriteEnabled(env)) return writeGate();
