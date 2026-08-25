@@ -435,9 +435,36 @@ function parseAssessmentFields(html) {
   return out;
 }
 // GET the Initial Assessment form (same page getDemographics reads for phone). May 302 to SSO -> unauth.
+/* Activation needs recordNo = "<MR>-<episode>". When the caller has no episode — a queue ticket
+ * created without ghisEpisodeId/visitId, a patient opened from a route that never carried one — the
+ * Searchnew below is SKIPPED, the assessment form comes back blank (doc_id 0), and the save is then
+ * correctly refused as an orphan write. From the doctor's side that is simply "Save to GHIS stopped
+ * working", with nothing they can do about it.
+ *
+ * GHIS itself knows the answer: today's OPD list carries one row per visit with both the MR and the
+ * visit id. So when the episode is missing, look it up rather than giving up. Best-effort and only on
+ * the missing path — a patient genuinely not on today's OPD list still falls through to the guard,
+ * which is the right outcome (there is no visit to attach an assessment to). */
+/* `deps.listOpd` is injectable ONLY so this is testable without a GHIS session. Production passes nothing. */
+export async function resolveEpisode(env, token, mr, episodeId, deps) {
+  const epi = String(episodeId || '');
+  if (epi || !mr) return epi;
+  const listOpd = (deps && deps.listOpd) || getOpdPatients;
+  try {
+    const rows = await listOpd(env, token, '', false, '');
+    if (!Array.isArray(rows)) return '';
+    const want = String(mr).trim().toUpperCase();
+    for (let i = 0; i < rows.length; i++) {
+      const r = rows[i] || {};
+      if (String(r.patientId || '').trim().toUpperCase() === want) return String(r.visitId || '');
+    }
+  } catch (e) { /* best-effort: fall through to the doc_id guard */ }
+  return '';
+}
+
 async function getAssessmentForm(env, token, patientId, episodeId) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
-  const epi = String(episodeId || '');
+  const epi = await resolveEpisode(env, token, String(patientId || ''), episodeId);
   // Activate the patient's visit first (same Searchnew as save) so the form loads the EXISTING assessment
   // instead of a blank one — the doctor edits rather than retypes.
   if (patientId && epi) { try { await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(patientId + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home' }); } catch (e) {} }
@@ -602,7 +629,10 @@ export function appendText(cur, add) {
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
-  const mr = String(body.patientId || ''), epi = String(body.episodeId || '');
+  const mr = String(body.patientId || '');
+  // Resolve the visit from today's OPD list when the caller has no episode — without it the
+  // activation below is skipped and the form returns doc_id 0, which the guard then refuses.
+  const epi = await resolveEpisode(env, token, mr, body.episodeId);
   // ACTIVATE THE VISIT first: POST Searchnew with recordNo=<MR>-<episode>, the same call getDemographics
   // uses to load a patient's visit. Without it the assessment form GET returns a BLANK form (doc_id 0, no
   // episode), so GHIS "Successfully submitted" an orphan record under no visit instead of UPDATING the real

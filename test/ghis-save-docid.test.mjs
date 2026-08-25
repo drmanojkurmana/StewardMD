@@ -72,3 +72,53 @@ test("the doctor is told what to DO, not handed a machine code", () => {
   assert.match(h.ghisSay("something novel"), /GHIS: something novel/, "unknown codes still surface for diagnosis");
   assert.match(h.ghisSay(""), /Could not complete/);
 });
+
+/* ---- Second cause: the visit was never activated because nobody knew the episode ----------------
+ * After the docId fallback shipped, the save still refused. That fallback only helps when the form
+ * loaded a real record; if the queue ticket carries no ghisEpisodeId/visitId, episodeId is "" and the
+ * Searchnew activation is SKIPPED in BOTH the prefill and the save — so the form is blank at both
+ * ends and there is no id to fall back to. GHIS's own OPD list knows the visit for that MR.
+ */
+import { resolveEpisode } from "../functions/api/ghis/[[path]].js";
+
+const OPD_ROWS = [
+  { patientId: "MR26097363", visitId: "OP99881", visitType: "OPD" },
+  { patientId: "MR26159243", visitId: "OP99882", visitType: "OPD" },
+];
+const listing = (rows) => async () => rows;
+
+test("an episode the caller already has is used as-is (no lookup)", async () => {
+  let called = false;
+  const epi = await resolveEpisode({}, "t", "MR26097363", "OP12345", { listOpd: async () => { called = true; return OPD_ROWS; } });
+  assert.equal(epi, "OP12345");
+  assert.equal(called, false, "never spend a round-trip when the caller already knows the visit");
+});
+
+test("REGRESSION: a missing episode is resolved from today's OPD list", async () => {
+  const epi = await resolveEpisode({}, "t", "MR26097363", "", { listOpd: listing(OPD_ROWS) });
+  assert.equal(epi, "OP99881", "this is what makes the visit activate, so the form is not blank");
+});
+
+test("the MR is matched case/whitespace-insensitively", async () => {
+  assert.equal(await resolveEpisode({}, "t", " mr26159243 ", "", { listOpd: listing(OPD_ROWS) }), "OP99882");
+});
+
+test("a patient not on today's list falls through to the guard, not to a wrong visit", async () => {
+  assert.equal(await resolveEpisode({}, "t", "MR-NOT-TODAY", "", { listOpd: listing(OPD_ROWS) }), "",
+    "attaching an assessment to someone else's visit would be far worse than refusing");
+});
+
+test("a broken or unauthenticated OPD list never throws into the save path", async () => {
+  assert.equal(await resolveEpisode({}, "t", "MR26097363", "", { listOpd: async () => { throw new Error("login_required"); } }), "");
+  assert.equal(await resolveEpisode({}, "t", "MR26097363", "", { listOpd: async () => ({ unauth: true }) }), "");
+  assert.equal(await resolveEpisode({}, "t", "MR26097363", "", { listOpd: async () => null }), "");
+});
+
+test("no MR means no lookup", async () => {
+  assert.equal(await resolveEpisode({}, "t", "", "", { listOpd: listing(OPD_ROWS) }), "");
+});
+
+test("SERVER: both the prefill and the save resolve the episode the same way", () => {
+  const uses = (GHIS.match(/await resolveEpisode\(/g) || []).length;
+  assert.ok(uses >= 2, "the prefill must activate too — a blank prefill leaves no doc_id to fall back on");
+});
