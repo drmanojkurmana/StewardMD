@@ -456,7 +456,8 @@
       : kind === "investigation" ? "Investigations"
       : kind === "reasoning" ? "Clinical reasoning"
       : kind === "treatment" ? "Treatment principles"
-      : kind === "presentation" ? "Presenting a case" : "Examination skill";
+      : kind === "presentation" ? "Presenting a case"
+      : kind === "annexure" ? "Reference" : "Examination skill";
   }
 
   function masteryIcon(level) {
@@ -499,6 +500,7 @@
     switch (t.kind) {
       case "show": return showTurn(t);
       case "teach": return teachTurn(t);
+      case "tools": return toolsTurn(t);
       case "tell": return tellTurn(t);
       case "ask": return askTurn(t, i, "Before we start");
       case "check": return askTurn(t, i, "Check yourself");
@@ -603,6 +605,25 @@
     return head + '<div class="cx-media cx-media--pending">' + ic("image_not_supported") +
       '<div class="cx-media-cap"><b>' + esc(m.caption) + "</b>" +
       '<span class="cx-media-pending">' + esc(m.pendingNote) + "</span></div></div>";
+  }
+
+  /* Calculator deep-links. CliniX owns no calculators; where an annexure needs arithmetic it opens
+   * the app's own Calculators module. A calculator this build does not have is simply not rendered,
+   * the same fail-soft behaviour calc-links.js relies on - but silence is how three dead ids shipped
+   * in SURGX, so test/clinix-annexure.test.mjs resolves every id against the real catalog. */
+  function toolsTurn(t) {
+    var ids = t.calcs || [], out = [], i, c;
+    for (i = 0; i < ids.length; i++) {
+      try { c = (window.MEDCALC && MEDCALC.get) ? MEDCALC.get(ids[i]) : null; } catch (e) { c = null; }
+      if (!c) continue;
+      out.push('<button class="cx-btn cx-calc" data-act="cx-calc" data-id="' + esc(ids[i]) + '">' +
+        ic("calculate") + " " + esc(c.title || ids[i]) + "</button>");
+    }
+    if (!out.length) return "";
+    return '<div class="cx-eyebrow">' + ic("calculate") + " " + esc(t.heading || "Work it out") + "</div>" +
+      '<div class="cx-btnrow">' + out.join("") + "</div>" +
+      '<div class="cx-teach-note">' + ic("lightbulb") +
+      "<span>Opens the StewardMD Calculators module. CliniX keeps no calculators of its own.</span></div>";
   }
 
   /* The teaching turn. One idea per screen, short paragraphs, and a quiet "2 of 5" so the student
@@ -1788,6 +1809,15 @@
     var id = t.getAttribute("data-id");
 
     switch (act) {
+      /* Open the app's own calculator. CliniX stays OPEN behind it: the lift rule in clinix.css
+       * (html.cx-lock .mc-overlay) puts it above the CliniX overlay, so the student returns to the
+       * same lesson step on closing it. Without that lift it opens invisibly behind. */
+      case "cx-calc":
+        haptic("tap");
+        try { if (window.MEDCALC && MEDCALC.open) { MEDCALC.open(id); return; } } catch (er) {}
+        toast("Calculators are still loading");
+        return;
+
       case "cx-close": haptic("light"); closeMod(); return;
       case "cx-back": haptic("light"); back(); return;
 

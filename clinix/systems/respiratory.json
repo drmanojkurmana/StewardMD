@@ -17,6 +17,7 @@
       "title": "Approaching the patient",
       "blurb": "Before a single question",
       "skills": [
+        "skill.approach.history_framework",
         "skill.approach.hygiene",
         "skill.approach.introduce",
         "skill.approach.consent",
@@ -37,8 +38,11 @@
       "blurb": "The cardinal respiratory symptoms, one at a time",
       "skills": [
         "skill.hx.chief_complaints",
-        "skill.hx.resp.dyspnea",
         "skill.hx.resp.cough_sputum",
+        "skill.hx.resp.haemoptysis",
+        "skill.hx.resp.dyspnea",
+        "skill.hx.resp.wheeze",
+        "skill.hx.resp.chestpain",
         "skill.hx.resp.smoking",
         "skill.hx.resp.drug"
       ]
@@ -92,6 +96,16 @@
       "blurb": "Two minutes, in a fixed order",
       "skills": [
         "skill.present.case"
+      ]
+    },
+    {
+      "id": "annexures",
+      "title": "Annexures",
+      "oneLine": "Reference material: units, indices and thresholds",
+      "skills": [
+        "skill.annex.tobacco",
+        "skill.annex.defs.resp",
+        "skill.annex.inheritance"
       ]
     }
   ],

@@ -2803,6 +2803,1746 @@
       "review": {
         "status": "ai_drafted"
       }
+    },
+    "skill.hx.gi.vomiting": {
+      "id": "skill.hx.gi.vomiting",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Nausea and vomiting",
+      "oneLine": "Timing, content and relief, which together say obstruction, irritation or brain",
+      "why": "Vomiting is a reflex with one motor pattern and many afferents, so the vomiting itself never tells you the cause. What discriminates is the company it keeps: when it happens, what comes up, and whether it relieves anything.",
+      "asks": [
+        {
+          "text": "How long after eating do you vomit, and does vomiting relieve the pain?"
+        },
+        {
+          "text": "What comes up: food you ate hours ago, bile, blood, or faeculent material?"
+        },
+        {
+          "text": "How much, and how many times a day?"
+        },
+        {
+          "text": "Is there nausea before it, or does it come without warning?"
+        },
+        {
+          "text": "Any headache, early morning timing, or vomiting that hits the wall?"
+        },
+        {
+          "text": "Are you still passing flatus and stool?"
+        },
+        {
+          "text": "Any vertigo, ringing in the ears, or spinning? That points away from the gut altogether."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Timing and content localise the level",
+          "body": "The higher the obstruction, the earlier the vomiting and the less bile it contains. The lower it is, the later, the more distended the abdomen, and the more the vomitus smells of bowel content.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Level suggested"
+            ],
+            "rows": [
+              [
+                "Vomiting soon after eating, no bile",
+                "At or above the pylorus"
+              ],
+              [
+                "Bile stained",
+                "Below the ampulla, so not gastric outlet"
+              ],
+              [
+                "Undigested food eaten many hours or a day earlier",
+                "Gastric outlet obstruction"
+              ],
+              [
+                "Faeculent, with distension and absolute constipation",
+                "Distal small bowel or colonic obstruction"
+              ]
+            ]
+          },
+          "note": "Vomiting that RELIEVES epigastric pain points to a peptic or gastric outlet cause. Vomiting that relieves nothing is more worrying."
+        },
+        {
+          "heading": "Vomiting without nausea is a red flag",
+          "body": "Raised intracranial pressure drives the vomiting centre directly, bypassing the nausea that normally precedes a peripheral cause. Effortless, projectile, early-morning vomiting with headache is neurological until proven otherwise, and no amount of abdominal examination will settle it."
+        },
+        {
+          "heading": "Does vomiting relieve the pain? The answer is diagnostic",
+          "body": "In bowel obstruction, vomiting decompresses the distended segment and the pain eases. In pancreatitis and cholecystitis the inflamed organ is untouched by emptying the stomach, so the patient vomits and the pain continues unchanged. Asking this one question separates a hollow viscus problem from an inflamed solid one.",
+          "table": {
+            "cols": [
+              "Vomiting",
+              "Effect on pain",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Relieves the pain",
+                "Pain eases after vomiting",
+                "Bowel obstruction, gastric outlet"
+              ],
+              [
+                "No effect",
+                "Pain continues unchanged",
+                "Pancreatitis, cholecystitis"
+              ],
+              [
+                "Within an hour of eating",
+                "Variable",
+                "Gastroparesis or pyloric obstruction"
+              ],
+              [
+                "Minutes after every meal, effortless",
+                "None",
+                "Rumination, rather than true vomiting"
+              ]
+            ]
+          },
+          "note": "Emesis of undigested food that was never acidified suggests it never reached the stomach: a pharyngeal pouch or achalasia rather than gastric outlet obstruction."
+        },
+        {
+          "heading": "The three questions that change management",
+          "points": [
+            {
+              "t": "Is it obstruction?",
+              "d": "Distension, absolute constipation and faeculent vomiting together mean obstruction until imaging says otherwise."
+            },
+            {
+              "t": "Is there blood?",
+              "d": "Frank blood or coffee grounds turns this into an upper GI bleed, with a different pathway and different urgency."
+            },
+            {
+              "t": "Is the patient dry?",
+              "d": "Duration and volume, not the diagnosis, decide the fluid and potassium the patient needs first."
+            }
+          ]
+        },
+        {
+          "heading": "When the cause is not in the abdomen at all",
+          "points": [
+            {
+              "t": "Headache or visual field change.",
+              "d": "Intracranial. Projectile vomiting, forceful and typically without preceding nausea, is the classic sign of raised intracranial tension."
+            },
+            {
+              "t": "Vertigo or tinnitus.",
+              "d": "Labyrinthine disease. The vomiting is severe and the abdomen is entirely normal."
+            },
+            {
+              "t": "Drugs and metabolic.",
+              "d": "Opioids, digoxin, chemotherapy; uraemia, hypercalcaemia, ketoacidosis, pregnancy."
+            }
+          ],
+          "note": "Vomiting WITHOUT abdominal pain should push you to look outside the gut before investigating it further."
+        }
+      ],
+      "pitfalls": [
+        "Recording the fact of vomiting without its timing relative to food, which is where the diagnosis lives.",
+        "Missing effortless early morning vomiting with headache, and working it up as gastritis.",
+        "Not asking about flatus and stool, so obstruction is missed in a patient who is still vomiting only bile.",
+        "Treating the vomiting and never quantifying it, so the dehydration and hypokalaemia are undertreated."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Vomiting of food eaten the previous day. What does that suggest?",
+          "a": "Gastric outlet obstruction: the stomach is not emptying, so retained food is vomited long after the meal.",
+          "accept": [
+            "outlet",
+            "gastric",
+            "pylor",
+            "obstruct"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does bile in the vomit tell you the obstruction is NOT at the gastric outlet?",
+          "a": "Bile enters at the ampulla in the second part of the duodenum. If bile is being vomited, the lumen is patent down to that point, so the block must be distal to it.",
+          "accept": [
+            "ampulla",
+            "duoden",
+            "distal",
+            "patent"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient vomits without any preceding nausea, worst on waking, with headache. Where is the lesion and why is there no nausea?",
+          "a": "Raised intracranial pressure stimulating the vomiting centre directly. Peripheral causes reach it through vagal and visceral afferents that also produce nausea; a central stimulus skips that, so the vomiting is effortless and unheralded.",
+          "accept": [
+            "intracranial",
+            "central",
+            "vomiting centre",
+            "pressure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient with severe epigastric pain vomits repeatedly, and the pain is unchanged afterwards. What does that tell you?",
+          "a": "That the pain is not from a distended hollow viscus. Emptying the stomach relieves obstruction but does nothing for an inflamed pancreas or gallbladder, so this pattern points to pancreatitis or cholecystitis.",
+          "accept": [
+            "pancreat",
+            "cholecyst",
+            "inflam",
+            "not obstruct"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "timing",
+          "text": "Relates vomiting to meals and asks whether it relieves pain"
+        },
+        {
+          "id": "content",
+          "text": "Establishes content: bile, blood, undigested food, faeculent"
+        },
+        {
+          "id": "obstruction",
+          "text": "Asks about flatus, stool and distension"
+        },
+        {
+          "id": "redflag",
+          "text": "Screens for effortless or early morning vomiting with headache"
+        },
+        {
+          "id": "extraabdominal",
+          "text": "Screens for intracranial, labyrinthine, drug and metabolic causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.dysphagia": {
+      "id": "skill.hx.gi.dysphagia",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Dysphagia",
+      "oneLine": "Solids or liquids, and whether it is getting worse, which separates obstruction from a motility problem",
+      "why": "Dysphagia is one of the few symptoms where the history alone can localise the lesion and grade its urgency. Two questions, whether liquids are affected and whether it is progressing, do most of that work.",
+      "asks": [
+        {
+          "text": "Can you swallow your own saliva right now, or are you drooling?"
+        },
+        {
+          "text": "Is it difficulty with solids, liquids, or both?"
+        },
+        {
+          "text": "Did it start with solids and then include liquids, or were both difficult from the start?"
+        },
+        {
+          "text": "Is it getting worse, and over how many weeks or months?"
+        },
+        {
+          "text": "Where do you feel the food sticking? Ask them to point."
+        },
+        {
+          "text": "Do you cough or choke when you swallow, or does food come back down the nose?"
+        },
+        {
+          "text": "Have you lost weight, and how much?"
+        },
+        {
+          "text": "Have you ever swallowed acid or a corrosive liquid, even years ago?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Solids then liquids means a narrowing lumen",
+          "body": "A mechanical stricture obstructs the largest bolus first, so solids fail before liquids and the difficulty progresses as the lumen narrows. A motility disorder disturbs the coordinated wave, which fails for both consistencies at once and often varies day to day.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Solids first, then liquids, steadily progressive",
+                "Mechanical: carcinoma, peptic stricture"
+              ],
+              [
+                "Solids and liquids equally, from the start, intermittent",
+                "Motility: achalasia, spasm"
+              ],
+              [
+                "Progressive over weeks with weight loss, older patient",
+                "Malignancy until excluded"
+              ],
+              [
+                "Long history, regurgitation of undigested food at night",
+                "Achalasia or a pouch"
+              ],
+              [
+                "Sudden, complete, drooling and unable to swallow saliva",
+                "Food bolus impaction. Same-day endoscopy"
+              ],
+              [
+                "Long-standing, after corrosive ingestion",
+                "Corrosive stricture, a common cause in India"
+              ]
+            ]
+          },
+          "note": "Progressive solid dysphagia with weight loss in an older patient is an urgent endoscopy, not a trial of a proton pump inhibitor."
+        },
+        {
+          "heading": "Oropharyngeal or oesophageal",
+          "body": "Ask where it sticks and what happens at the moment of swallowing. Difficulty initiating the swallow, coughing at the moment of swallowing, or nasal regurgitation is oropharyngeal and usually neuromuscular. Food sticking seconds later, felt retrosternally, is oesophageal.",
+          "points": [
+            {
+              "t": "Coughs at the moment of swallowing.",
+              "d": "Aspiration from a failed oropharyngeal phase. This patient is at risk now, not later."
+            },
+            {
+              "t": "Nasal regurgitation.",
+              "d": "Palatal weakness, so look for a bulbar cause."
+            },
+            {
+              "t": "Points to the suprasternal notch.",
+              "d": "Poorly localising; the lesion may be anywhere below."
+            }
+          ]
+        },
+        {
+          "heading": "Odynophagia is a different symptom",
+          "body": "Pain on swallowing suggests mucosal disease rather than obstruction: candidal or viral oesophagitis, or a pill ulcer. Ask about immunosuppression, inhaled steroids and doxycycline taken without water."
+        }
+      ],
+      "pitfalls": [
+        "Not asking about liquids, which is the single question that separates mechanical from motility.",
+        "Accepting the level the patient points to as the level of the lesion.",
+        "Missing coughing at the moment of swallowing, which is an aspiration risk rather than a diagnostic detail.",
+        "Treating progressive dysphagia with weight loss as reflux without endoscopy.",
+        "Not asking whether the patient can swallow their own saliva, which distinguishes complete obstruction."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Solids difficult first, liquids later. Mechanical or motility?",
+          "a": "Mechanical. A narrowing lumen obstructs the largest bolus first, so solids fail before liquids.",
+          "accept": [
+            "mechanic",
+            "stricture",
+            "obstruct",
+            "narrow"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does achalasia trouble liquids as much as solids from the outset?",
+          "a": "The problem is the coordinated peristaltic wave and a failure of lower oesophageal sphincter relaxation, not the calibre of the lumen, so bolus consistency does not matter.",
+          "accept": [
+            "peristal",
+            "sphincter",
+            "motil",
+            "coordinat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient coughs at the moment of swallowing and food returns through the nose. Which phase is failing, and what is the immediate risk?",
+          "a": "The oropharyngeal phase, from neuromuscular weakness including the palate. The immediate risk is aspiration, so swallowing should be assessed and held before further oral intake.",
+          "accept": [
+            "oropharyng",
+            "aspirat",
+            "bulbar",
+            "palat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "consistency",
+          "text": "Asks solids versus liquids, and the order in which they were affected"
+        },
+        {
+          "id": "progression",
+          "text": "Establishes progression and its time course"
+        },
+        {
+          "id": "level",
+          "text": "Asks where the food sticks, and distinguishes oropharyngeal from oesophageal"
+        },
+        {
+          "id": "alarm",
+          "text": "Screens for weight loss and aspiration"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.gibleed": {
+      "id": "skill.hx.gi.gibleed",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Gastrointestinal bleeding",
+      "oneLine": "Haematemesis, melaena and bleeding per rectum, and what each says about the level and the volume",
+      "why": "The colour of the blood is a clock and a map at once: it tells you roughly where the bleeding is and roughly how long it has been in the gut. Getting that right at the bedside decides the pathway before any endoscopy.",
+      "asks": [
+        {
+          "text": "Did you vomit blood? Was it fresh red, or dark like coffee grounds?"
+        },
+        {
+          "text": "Have your stools been black, tarry and offensive, or was there fresh red blood?"
+        },
+        {
+          "text": "Is the blood mixed through the stool, or on the surface and on the paper?"
+        },
+        {
+          "text": "How many episodes, and roughly how much each time?"
+        },
+        {
+          "text": "Any dizziness on standing, or have you fainted?"
+        },
+        {
+          "text": "Do you take aspirin, an anti-inflammatory, a steroid or a blood thinner? Any alcohol, or known liver disease?"
+        },
+        {
+          "text": "Any retching before the first vomit of blood?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Colour is a clock",
+          "body": "Blood turns black through acid and bacterial degradation of haemoglobin, which takes hours. So black means time in the gut, and time in the gut usually means a proximal source. Brisk enough bleeding from anywhere can arrive red.",
+          "table": {
+            "cols": [
+              "Finding",
+              "Usual level",
+              "Caveat"
+            ],
+            "rows": [
+              [
+                "Coffee ground vomit",
+                "Upper, blood altered by acid",
+                "Volume may be small but the source is upper"
+              ],
+              [
+                "Fresh red haematemesis",
+                "Upper, brisk",
+                "Suggests active or variceal bleeding"
+              ],
+              [
+                "Melaena, black tarry offensive",
+                "Upper, or small bowel or right colon",
+                "Needs roughly 50 mL and several hours"
+              ],
+              [
+                "Fresh red per rectum",
+                "Usually lower",
+                "A massive upper bleed can present this way, with shock"
+              ]
+            ]
+          },
+          "note": "Black stool that is not tarry or offensive may simply be iron or bismuth. Ask, before calling it melaena."
+        },
+        {
+          "heading": "Mixed through, or on the surface",
+          "points": [
+            {
+              "t": "Mixed through the stool.",
+              "d": "A source above the rectum, so colonic and proximal causes are in play."
+            },
+            {
+              "t": "On the surface and on the paper, with pain on defecation.",
+              "d": "Anorectal: fissure or haemorrhoids. Common, but never the assumption in an older patient."
+            },
+            {
+              "t": "With mucus and urgency.",
+              "d": "Think inflammatory or infective colitis rather than a simple anorectal cause."
+            }
+          ]
+        },
+        {
+          "heading": "The history that changes the resuscitation",
+          "body": "Ask about the drugs and the liver before anything else. Antiplatelets, anticoagulants and non-steroidals change both the risk and the reversal plan. Known liver disease or alcohol raises varices, which bleed differently and are managed differently. Retching that preceded the first haematemesis suggests a Mallory-Weiss tear.",
+          "note": "Postural dizziness or syncope estimates volume lost better than the patient's own description of the amount."
+        }
+      ],
+      "pitfalls": [
+        "Calling any black stool melaena without asking about iron, bismuth and the smell.",
+        "Assuming fresh red bleeding per rectum is always a lower source, and missing a massive upper bleed in a shocked patient.",
+        "Not taking the drug history, so an anticoagulant is discovered after the first hour.",
+        "Quantifying the bleed by what the patient says they lost rather than by postural symptoms and vital signs."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What makes melaena black?",
+          "a": "Degradation of haemoglobin by acid and gut bacteria over several hours, which requires a proximal source and time in the gut.",
+          "accept": [
+            "haemoglobin",
+            "hemoglobin",
+            "acid",
+            "bacteri",
+            "degrad"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A shocked patient passing fresh red blood per rectum. Why might the source still be upper?",
+          "a": "A large, brisk upper bleed transits too quickly to be degraded, so it arrives red. The shock is the clue that the volume is large and the source proximal.",
+          "accept": [
+            "brisk",
+            "rapid",
+            "transit",
+            "massive",
+            "upper"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Retching several times, then fresh haematemesis. What is the likely lesion, and how does that differ from variceal bleeding in the history?",
+          "a": "A Mallory-Weiss tear at the gastro-oesophageal junction, caused by the retching itself, so the bleeding FOLLOWS vomiting. Variceal bleeding is usually painless and unheralded, in a patient with stigmata or a history of chronic liver disease.",
+          "accept": [
+            "mallory",
+            "tear",
+            "junction",
+            "retch"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "character",
+          "text": "Establishes colour and character of blood in vomit and stool"
+        },
+        {
+          "id": "level",
+          "text": "Asks whether blood is mixed through or on the surface"
+        },
+        {
+          "id": "volume",
+          "text": "Estimates volume through postural symptoms, not description alone"
+        },
+        {
+          "id": "drugs",
+          "text": "Takes the drug, alcohol and liver disease history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.diarrhoea": {
+      "id": "skill.hx.gi.diarrhoea",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Diarrhoea",
+      "oneLine": "Small bowel or large bowel, and inflammatory or not, decided at the bedside",
+      "why": "Diarrhoea means different things to patients and to clinicians. Once you have defined it as increased frequency, fluidity or volume, two axes do the work: which part of the bowel, and whether there is inflammation.",
+      "asks": [
+        {
+          "text": "How many times a day, and is it waking you at night?"
+        },
+        {
+          "text": "Is it large and watery, or small, frequent and urgent?"
+        },
+        {
+          "text": "Any blood, mucus or pus in the stool?"
+        },
+        {
+          "text": "Does it float, look greasy, or is it difficult to flush?"
+        },
+        {
+          "text": "How long has it lasted: days, or more than four weeks?"
+        },
+        {
+          "text": "Any recent travel, antibiotics, new food, or others affected?"
+        },
+        {
+          "text": "Does fasting stop it?"
+        },
+        {
+          "text": "Are you passing urine as usual? Any dizziness on standing, or a dry mouth?"
+        },
+        {
+          "text": "Any blood with fever, or severe abdominal pain and distension?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Small bowel and large bowel behave differently",
+          "table": {
+            "cols": [
+              "Feature",
+              "Small bowel",
+              "Large bowel"
+            ],
+            "rows": [
+              [
+                "Volume",
+                "Large, watery",
+                "Small, frequent"
+              ],
+              [
+                "Urgency and tenesmus",
+                "Uncommon",
+                "Common"
+              ],
+              [
+                "Blood",
+                "Unusual",
+                "Common if inflammatory"
+              ],
+              [
+                "Periumbilical or right iliac pain",
+                "Typical",
+                "Lower abdominal, relieved by defecation"
+              ]
+            ]
+          },
+          "note": "Nocturnal diarrhoea that wakes the patient is organic until proven otherwise. Functional diarrhoea rarely does."
+        },
+        {
+          "heading": "Assess the patient before the stool",
+          "body": "Diarrhoea kills through volume loss, not through its cause. Before working out the mechanism, decide whether this patient is dry.",
+          "points": [
+            {
+              "t": "Postural dizziness, reduced urine output, dry mouth, sunken eyes.",
+              "d": "Hypovolaemia. Replace fluid first; oral rehydration where tolerated."
+            },
+            {
+              "t": "Tachycardia, hypotension, confusion, cold peripheries.",
+              "d": "Hypovolaemic shock. Resuscitate now."
+            },
+            {
+              "t": "Bloody diarrhoea with fever.",
+              "d": "Dysentery or inflammatory colitis. Do not give an antimotility agent."
+            },
+            {
+              "t": "Distension, severe pain, systemic toxicity.",
+              "d": "Toxic megacolon. Surgical involvement, not more antibiotics."
+            }
+          ],
+          "note": "In a child or an older adult, the fluid assessment matters more than the microbiology."
+        },
+        {
+          "heading": "Osmotic, secretory or inflammatory",
+          "points": [
+            {
+              "t": "Stops with fasting.",
+              "d": "Osmotic: an unabsorbed solute is drawing water in, as in lactose intolerance."
+            },
+            {
+              "t": "Continues despite fasting, large volume.",
+              "d": "Secretory: the mucosa is actively secreting, so fasting changes nothing."
+            },
+            {
+              "t": "Blood, mucus, fever, urgency.",
+              "d": "Inflammatory: infective colitis or inflammatory bowel disease."
+            },
+            {
+              "t": "Pale, greasy, floats, hard to flush.",
+              "d": "Steatorrhoea: fat malabsorption, so think pancreas or small bowel mucosa."
+            }
+          ]
+        },
+        {
+          "heading": "Duration decides the workup",
+          "body": "Under two weeks is usually infective and self-limiting, and the history should target contacts, travel, food and recent antibiotics. Beyond four weeks it is chronic, and the question becomes malabsorption, inflammation, or a colonic lesion, particularly with weight loss or blood."
+        },
+        {
+          "heading": "The chronic causes that matter in India",
+          "points": [
+            {
+              "t": "Ileocaecal and abdominal tuberculosis.",
+              "d": "The principal mimic of Crohn disease. Ask about contact, fever, night sweats and weight loss."
+            },
+            {
+              "t": "Amoebic and bacillary dysentery.",
+              "d": "Blood and mucus; ask the water source."
+            },
+            {
+              "t": "Giardiasis.",
+              "d": "Bloating, foul steatorrhoea, no blood."
+            },
+            {
+              "t": "Tropical sprue.",
+              "d": "Malabsorption after a period in an endemic area."
+            },
+            {
+              "t": "HIV-associated diarrhoea.",
+              "d": "Ask about risk factors and prior testing."
+            }
+          ],
+          "note": "Chronic diarrhoea treated as inflammatory bowel disease without excluding intestinal tuberculosis is a recognised and serious error here: immunosuppression will make the tuberculosis worse."
+        }
+      ],
+      "pitfalls": [
+        "Not defining what the patient means, so frequent formed stool is worked up as diarrhoea.",
+        "Missing nocturnal diarrhoea, which points away from a functional cause.",
+        "Forgetting recent antibiotics, and missing Clostridioides difficile.",
+        "Overlooking steatorrhoea because the patient was never asked whether the stool floats or is hard to flush.",
+        "Working out the mechanism before assessing whether the patient is dry.",
+        "Giving an antimotility drug in bloody diarrhoea with fever.",
+        "Treating chronic diarrhoea as inflammatory bowel disease without excluding intestinal tuberculosis."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Diarrhoea that stops when the patient fasts. Osmotic or secretory?",
+          "a": "Osmotic. The unabsorbed solute driving water into the lumen is no longer being ingested.",
+          "accept": [
+            "osmotic",
+            "solute",
+            "fast"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does large bowel diarrhoea come with urgency and tenesmus, while small bowel diarrhoea does not?",
+          "a": "The rectum is inflamed or distended and its stretch receptors signal the need to defecate, producing urgency and the sensation of incomplete evacuation. Small bowel disease produces volume without rectal irritation.",
+          "accept": [
+            "rectum",
+            "rectal",
+            "inflam",
+            "stretch",
+            "distend"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Chronic pale bulky stool that floats, with weight loss but a normal appetite. What is the mechanism, and where is the lesion?",
+          "a": "Fat malabsorption. Undigested fat makes the stool bulky, pale and difficult to flush, and calories are lost despite adequate intake. The lesion is pancreatic exocrine insufficiency or small bowel mucosal disease such as coeliac.",
+          "accept": [
+            "malabsorp",
+            "steatorrh",
+            "pancrea",
+            "coeliac",
+            "celiac",
+            "fat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define",
+          "text": "Defines what the patient means by diarrhoea"
+        },
+        {
+          "id": "localise",
+          "text": "Separates small bowel from large bowel by volume, urgency and blood"
+        },
+        {
+          "id": "mechanism",
+          "text": "Asks about fasting, steatorrhoea and inflammation"
+        },
+        {
+          "id": "context",
+          "text": "Takes travel, antibiotic, food and contact history"
+        },
+        {
+          "id": "hydration",
+          "text": "Assesses hydration and circulation before working out the mechanism"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.constipation": {
+      "id": "skill.hx.gi.constipation",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Constipation and change in bowel habit",
+      "oneLine": "What changed, when, and whether anything is passing at all",
+      "why": "Constipation is common and usually benign, which is exactly why the significant cases are missed. The history has to separate a lifelong pattern from a recent change, because a recent and persistent change in an older patient is a colonic lesion until excluded.",
+      "asks": [
+        {
+          "text": "What is normal for you, and what has changed?"
+        },
+        {
+          "text": "When did the change start, and has it persisted?"
+        },
+        {
+          "text": "Are you passing flatus? Any stool at all?"
+        },
+        {
+          "text": "Do you have to strain, or feel you have not finished?"
+        },
+        {
+          "text": "Any blood, weight loss, or thinner stools than before?"
+        },
+        {
+          "text": "What medicines are you taking, including opioids and iron?"
+        },
+        {
+          "text": "Any cold intolerance, weight gain, or known low potassium or high calcium?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Absolute constipation is a different symptom",
+          "body": "Constipation with no stool AND no flatus, with distension and vomiting, is intestinal obstruction, not slow transit. The presence of flatus is the single most useful discriminator at the bedside, and it takes one question.",
+          "note": "Absolute constipation plus vomiting plus distension is a surgical presentation until imaging says otherwise."
+        },
+        {
+          "heading": "New, persistent change in an older patient",
+          "table": {
+            "cols": [
+              "Feature",
+              "Why it matters"
+            ],
+            "rows": [
+              [
+                "Change over weeks, persisting",
+                "Colorectal carcinoma until excluded"
+              ],
+              [
+                "Blood mixed with stool",
+                "A source above the anorectum"
+              ],
+              [
+                "Thinner stools, tenesmus",
+                "A distal narrowing lesion"
+              ],
+              [
+                "Weight loss, anaemia",
+                "Raises the same concern sharply"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Secondary causes worth a single question each",
+          "points": [
+            {
+              "t": "Drugs.",
+              "d": "Opioids, anticholinergics, iron, calcium channel blockers. The commonest reversible cause, and easily missed."
+            },
+            {
+              "t": "Metabolic.",
+              "d": "Hypothyroidism, hypercalcaemia, hypokalaemia."
+            },
+            {
+              "t": "Neurological.",
+              "d": "Parkinson's disease, cord lesions, autonomic neuropathy. Ask about sphincter and urinary symptoms."
+            },
+            {
+              "t": "Mechanical and anorectal.",
+              "d": "Painful fissure or stricture causing avoidance rather than true slow transit."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Not asking what the patient's normal bowel habit is, so a change cannot be recognised.",
+        "Missing absolute constipation because flatus was never asked about.",
+        "Attributing a new change in an older patient to diet or age without excluding a colonic lesion.",
+        "Overlooking the drug chart, particularly opioids started recently."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single question separates constipation from intestinal obstruction at the bedside?",
+          "a": "Whether the patient is still passing flatus. Absolute constipation means neither stool nor flatus.",
+          "accept": [
+            "flatus",
+            "gas",
+            "wind"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a new, persistent change in bowel habit in an older patient demand investigation?",
+          "a": "Because colorectal carcinoma presents that way, and the change is often the only symptom before bleeding or obstruction appear.",
+          "accept": [
+            "carcinoma",
+            "cancer",
+            "malignan",
+            "colorectal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Constipation with cold intolerance and weight gain. What is the mechanism?",
+          "a": "Hypothyroidism reduces gut motility, slowing colonic transit. It is a secondary and fully reversible cause, so it should be sought before the constipation is treated symptomatically forever.",
+          "accept": [
+            "hypothyroid",
+            "thyroid",
+            "motility",
+            "transit"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "baseline",
+          "text": "Establishes the patient's normal habit and what changed"
+        },
+        {
+          "id": "absolute",
+          "text": "Asks about flatus, distension and vomiting"
+        },
+        {
+          "id": "alarm",
+          "text": "Screens for blood, weight loss and stool calibre"
+        },
+        {
+          "id": "secondary",
+          "text": "Covers drugs and metabolic causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.dyspepsia": {
+      "id": "skill.hx.gi.dyspepsia",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Dyspepsia and heartburn",
+      "oneLine": "Epigastric pain and reflux, and the alarm features that stop you treating empirically",
+      "why": "Most dyspepsia is benign and can be treated without endoscopy. The whole clinical skill is recognising the minority who must not be, and not mistaking cardiac pain for indigestion.",
+      "asks": [
+        {
+          "text": "Where is the discomfort, and does it burn or gnaw?"
+        },
+        {
+          "text": "Does it come up behind the breastbone, or bring acid or food into the throat?"
+        },
+        {
+          "text": "Is it worse lying flat, bending forward, or after large meals?"
+        },
+        {
+          "text": "Does food or an antacid relieve it, or make it worse?"
+        },
+        {
+          "text": "Any difficulty swallowing, vomiting, weight loss, or black stools?"
+        },
+        {
+          "text": "Do you take anti-inflammatories, aspirin or steroids?"
+        },
+        {
+          "text": "Does it ever come on with exertion and settle with rest?"
+        },
+        {
+          "text": "Have you ever been tested or treated for H. pylori?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Reflux, ulcer, or neither",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Retrosternal burning, worse lying flat or bending",
+                "Gastro-oesophageal reflux"
+              ],
+              [
+                "Epigastric pain relieved by food or antacid",
+                "Duodenal ulcer"
+              ],
+              [
+                "Epigastric pain worsened by food, with weight loss",
+                "Gastric ulcer or malignancy"
+              ],
+              [
+                "Discomfort with no alarm features, younger patient",
+                "Functional dyspepsia"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The alarm features",
+          "body": "These are the features that convert empirical treatment into endoscopy. They are worth knowing as a list because each one is a single question.",
+          "points": [
+            {
+              "t": "Dysphagia.",
+              "d": "Any difficulty swallowing."
+            },
+            {
+              "t": "Weight loss.",
+              "d": "Unintentional and quantified."
+            },
+            {
+              "t": "Persistent vomiting.",
+              "d": "Especially with a suggestion of outlet obstruction."
+            },
+            {
+              "t": "Bleeding or anaemia.",
+              "d": "Haematemesis, melaena, or iron deficiency."
+            },
+            {
+              "t": "New onset in an older patient.",
+              "d": "Conventionally new dyspepsia from about age 55, though a lower threshold is reasonable where gastric cancer is commoner."
+            },
+            {
+              "t": "An epigastric mass.",
+              "d": "Found on examination, not history, but it belongs on the list."
+            }
+          ],
+          "note": "Non-steroidals, aspirin and steroids raise ulcer risk and are frequently taken without being reported as medicines. Ask specifically. Without alarm features, the usual approach is to test for Helicobacter pylori and treat if positive, rather than to endoscope."
+        },
+        {
+          "heading": "The mistake that matters most",
+          "body": "Inferior myocardial ischaemia is felt in the epigastrium and is regularly treated as indigestion. Anything brought on by exertion and relieved by rest, or accompanied by sweating, nausea or breathlessness, is cardiac until an ECG says otherwise. An antacid response proves nothing."
+        }
+      ],
+      "pitfalls": [
+        "Treating exertional epigastric pain as dyspepsia without an ECG.",
+        "Not asking about anti-inflammatories, which patients rarely volunteer as drugs.",
+        "Missing alarm features because they were never asked as a checklist.",
+        "Taking relief with an antacid as proof the pain is not cardiac."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three alarm features in dyspepsia.",
+          "a": "Dysphagia, unintentional weight loss, persistent vomiting, bleeding or anaemia, new onset in an older patient, an epigastric mass.",
+          "accept": [
+            "dysphag",
+            "weight",
+            "vomit",
+            "bleed",
+            "anaem",
+            "anem",
+            "mass",
+            "age"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a duodenal ulcer classically relieved by food while a gastric ulcer is worsened by it?",
+          "a": "Food buffers acid in the duodenum, easing duodenal pain. In gastric ulceration eating stimulates acid secretion and distends the inflamed stomach, so pain increases and patients begin to avoid food, which is why weight loss is more typical.",
+          "accept": [
+            "buffer",
+            "acid",
+            "secret",
+            "distend"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 58 year old describes epigastric burning that comes on walking uphill and settles within minutes of stopping. What must be excluded first, and why does an antacid response not reassure?",
+          "a": "Myocardial ischaemia, particularly inferior. Exertional onset with rapid relief on rest is the pattern of angina regardless of where it is felt. Antacid relief is non-specific and coincidental relief is common, so it cannot exclude a cardiac cause.",
+          "accept": [
+            "ischaem",
+            "ischem",
+            "angina",
+            "cardiac",
+            "myocard",
+            "ecg"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "character",
+          "text": "Characterises the pain and its relation to food and posture"
+        },
+        {
+          "id": "alarm",
+          "text": "Runs the alarm feature checklist"
+        },
+        {
+          "id": "drugs",
+          "text": "Asks specifically about NSAIDs, aspirin and steroids"
+        },
+        {
+          "id": "cardiac",
+          "text": "Excludes exertional, cardiac-sounding pain"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.weightloss": {
+      "id": "skill.hx.gi.weightloss",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Anorexia and weight loss",
+      "oneLine": "Quantify it, then decide whether intake, absorption or demand is the problem",
+      "why": "Weight loss is only meaningful once it is quantified and confirmed. After that, a single question, what is the appetite doing, splits the causes into groups that need entirely different investigation.",
+      "asks": [
+        {
+          "text": "How much weight, over how long? Do you know it from a scale, or from your clothes?"
+        },
+        {
+          "text": "Was it intentional?"
+        },
+        {
+          "text": "What has your appetite been doing: reduced, normal, or increased?"
+        },
+        {
+          "text": "Are you eating less because it hurts, because you feel full quickly, or because you are not hungry?"
+        },
+        {
+          "text": "Any fever, night sweats, cough or change in bowel habit?"
+        },
+        {
+          "text": "Any pale greasy stool that is hard to flush?"
+        },
+        {
+          "text": "How is your mood, and has anything changed at home?"
+        },
+        {
+          "text": "Any risk factors for HIV, or has an HIV test ever been done?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Appetite splits the differential",
+          "table": {
+            "cols": [
+              "Appetite",
+              "Mechanism",
+              "Typical causes"
+            ],
+            "rows": [
+              [
+                "Reduced",
+                "Intake falls",
+                "Malignancy, chronic infection including tuberculosis and HIV, depression, uraemia, chronic liver disease"
+              ],
+              [
+                "Normal or increased",
+                "Calories lost or burned",
+                "Malabsorption, thyrotoxicosis, uncontrolled diabetes"
+              ]
+            ]
+          },
+          "note": "Weight loss with a good appetite is the more discriminating history, because it points away from the cachexia of malignancy and towards malabsorption or a hypermetabolic state."
+        },
+        {
+          "heading": "Quantify before you investigate",
+          "body": "Ask for a number and a timeframe, and corroborate it: a documented weight, a belt notch, clothes that no longer fit. Loss of more than five per cent of body weight over six months without intent is significant. An unquantified impression is not a symptom you can act on."
+        },
+        {
+          "heading": "Why the patient is eating less",
+          "points": [
+            {
+              "t": "It hurts to eat.",
+              "d": "Mesenteric angina, gastric ulcer, or oral and oesophageal pathology."
+            },
+            {
+              "t": "Early satiety.",
+              "d": "Gastric outlet or infiltration, or an abdominal mass."
+            },
+            {
+              "t": "No hunger at all.",
+              "d": "Systemic: malignancy, chronic infection including tuberculosis, depression."
+            },
+            {
+              "t": "Cannot afford or obtain food.",
+              "d": "Ask. It is common, it is rarely volunteered, and no investigation will reveal it."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Recording weight loss without a number and a timeframe.",
+        "Not asking what the appetite is doing, which is the question that splits the differential.",
+        "Attributing it to malignancy without asking about steatorrhoea, thyroid symptoms or diabetes.",
+        "Never asking about mood, food security or swallowing, so a treatable cause is missed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What makes weight loss clinically significant?",
+          "a": "Unintentional loss of more than about five per cent of body weight over six months, corroborated rather than estimated.",
+          "accept": [
+            "five",
+            "5",
+            "per cent",
+            "percent",
+            "unintent"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Weight loss with a normal or increased appetite. What does that point to?",
+          "a": "Calories are being lost or burned rather than not eaten: malabsorption, thyrotoxicosis, or uncontrolled diabetes.",
+          "accept": [
+            "malabsorp",
+            "thyrotox",
+            "thyroid",
+            "diabet"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient eats less because of abdominal pain that starts twenty minutes after every meal. What is the mechanism?",
+          "a": "Chronic mesenteric ischaemia. Post-prandial demand outstrips a narrowed splanchnic supply, so pain follows meals and the patient begins to avoid food, producing weight loss with an intact appetite.",
+          "accept": [
+            "mesenteric",
+            "ischaem",
+            "ischem",
+            "post-prandial",
+            "postprandial",
+            "food fear"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Quantifies and corroborates the loss"
+        },
+        {
+          "id": "appetite",
+          "text": "Establishes what the appetite is doing"
+        },
+        {
+          "id": "why",
+          "text": "Asks WHY intake fell: pain, early satiety, no hunger, access"
+        },
+        {
+          "id": "systemic",
+          "text": "Screens for fever, night sweats, steatorrhoea and mood"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.alcohol": {
+      "id": "skill.annex.alcohol",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Alcohol: units, thresholds and complications",
+      "oneLine": "Turn what the patient drinks into grams, then into risk",
+      "why": "A history that records 'drinks alcohol' is useless. Converting the drink into units makes intake comparable between patients and against the thresholds that actually predict harm, and it takes one multiplication.",
+      "calcs": [
+        "alcohol_units",
+        "auditc",
+        "cage",
+        "ciwa",
+        "gahs"
+      ],
+      "asks": [
+        {
+          "text": "What exactly do you drink: which drink, what size glass or bottle, and what strength?"
+        },
+        {
+          "text": "How many of those on a typical drinking day?"
+        },
+        {
+          "text": "How many days a week, and are there any alcohol-free days?"
+        },
+        {
+          "text": "Is it spread through the week, or concentrated into a few heavy sessions?"
+        },
+        {
+          "text": "How many years have you been drinking at this level?"
+        },
+        {
+          "text": "Has anyone ever suggested you cut down, or have you felt you should?"
+        },
+        {
+          "text": "When was the last drink? Any shakes, sweats or fits on stopping before?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The arithmetic",
+          "body": "One UK unit is 10 mL, which is 8 g, of pure ethanol. Units are volume in millilitres multiplied by the alcohol by volume percentage, divided by 1000. That single formula converts any drink anywhere.",
+          "table": {
+            "cols": [
+              "Drink",
+              "ABV",
+              "Volume",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Whisky, single measure",
+                "40%",
+                "25 mL",
+                "1"
+              ],
+              [
+                "Wine, large glass",
+                "12%",
+                "250 mL",
+                "3"
+              ],
+              [
+                "Lager, bottle",
+                "5%",
+                "330 mL",
+                "1.65"
+              ],
+              [
+                "Beer, pint",
+                "3.5%",
+                "568 mL",
+                "2"
+              ],
+              [
+                "Whisky, full bottle",
+                "40%",
+                "700 mL",
+                "28"
+              ]
+            ]
+          },
+          "note": "Open the Alcohol Units calculator for any drink not on this list. It also totals the week and compares it against the thresholds below."
+        },
+        {
+          "heading": "The thresholds that matter",
+          "points": [
+            {
+              "t": "14 units a week.",
+              "d": "The conservative low-risk threshold, and it is the same for men and women."
+            },
+            {
+              "t": "About 30 g of ethanol a day in men, about 20 g in women.",
+              "d": "Where the risk of alcohol-related liver disease begins. Thirty grams is under four units. The lower figure for women follows from the smaller volume of distribution described below."
+            },
+            {
+              "t": "Sustained heavy intake over years.",
+              "d": "Cirrhosis risk rises steeply with intake of roughly 160 to 180 g a day maintained for a decade or more. Treat this as an order of magnitude for counselling, not a diagnostic number."
+            }
+          ],
+          "note": "Ethanol yields 7 kcal per gram, and many drinks add sugar on top. Obesity multiplies liver-related mortality in heavy drinkers several fold."
+        },
+        {
+          "heading": "Pattern matters as much as amount",
+          "body": "Continuous daily drinking damages the liver more than the same weekly total taken intermittently, because the liver gets no chance to recover. That is why at least two alcohol-free days a week are advised, and why the question 'do you have days off' belongs in every alcohol history.",
+          "points": [
+            {
+              "t": "Sex.",
+              "d": "Women reach higher blood ethanol levels than men after the same intake, because of a smaller volume of distribution. The same number of units is not the same exposure."
+            },
+            {
+              "t": "Genetics.",
+              "d": "Alcoholism is more concordant in monozygotic than dizygotic twins; PNPLA3 is implicated in both alcoholic and non-alcoholic fatty liver disease."
+            },
+            {
+              "t": "Nutrition.",
+              "d": "Obesity raises liver-related mortality in heavy drinkers over five-fold."
+            }
+          ]
+        },
+        {
+          "heading": "Complications worth screening for by system",
+          "table": {
+            "cols": [
+              "System",
+              "What to look for"
+            ],
+            "rows": [
+              [
+                "Neurological",
+                "Blackouts, withdrawal tremor, hallucinations, rum fits, delirium tremens, cerebellar degeneration, dementia, myopathy, autonomic neuropathy"
+              ],
+              [
+                "Gastrointestinal",
+                "Gastritis, diarrhoea, pancreatitis, fatty liver, alcoholic hepatitis, cirrhosis and its complications"
+              ],
+              [
+                "Cardiovascular",
+                "Cardiomyopathy, hypertension, arrhythmia"
+              ],
+              [
+                "Metabolic",
+                "Hyponatraemia, hypoglycaemia, hypokalaemia, hypomagnesaemia, hypocalcaemia, hypophosphataemia"
+              ],
+              [
+                "Malignancy",
+                "Oral cavity, oropharynx, oesophagus, colorectum, breast, hepatocellular carcinoma"
+              ],
+              [
+                "Musculoskeletal",
+                "Myopathy, osteoporosis, falls"
+              ]
+            ]
+          },
+          "note": "Withdrawal is the complication that kills in hospital. Ask the time of the last drink on every admission, and score withdrawal with CIWA-Ar rather than by impression."
+        }
+      ],
+      "pitfalls": [
+        "Recording 'social drinker' or 'occasional' instead of units per week.",
+        "Not asking the strength and the glass size, which is where the units actually come from.",
+        "Missing the pattern: the same weekly total is more harmful taken daily than intermittently.",
+        "Not asking the time of the last drink, so withdrawal is diagnosed after it has begun.",
+        "Applying a lower threshold to women for the wrong reason; the weekly threshold is the same, but the same intake produces higher blood levels."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many units in a 250 mL glass of 12% wine?",
+          "a": "Three. Units are millilitres multiplied by ABV divided by 1000, so 250 x 12 / 1000 = 3.",
+          "accept": [
+            "3",
+            "three"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient drinks the same weekly total as another, but spread over every day rather than two sessions. Who is at greater liver risk, and why?",
+          "a": "The daily drinker. Continuous exposure gives the liver no recovery period, which is why alcohol-free days are advised even when the weekly total is unchanged.",
+          "accept": [
+            "daily",
+            "continuous",
+            "recover",
+            "no break"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does the same intake carry higher risk in a woman than in a man?",
+          "a": "A smaller volume of distribution for alcohol produces higher blood ethanol concentrations for the same dose, so the exposure of the liver and other organs is greater despite an identical number of units.",
+          "accept": [
+            "volume of distribution",
+            "blood",
+            "concentration",
+            "body water"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Converts the drink into units per week"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes drinking pattern and alcohol-free days"
+        },
+        {
+          "id": "threshold",
+          "text": "Compares intake against the 14 unit and 30 g/day thresholds"
+        },
+        {
+          "id": "withdrawal",
+          "text": "Asks the time of the last drink and any previous withdrawal"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: alcohol use"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The history: alcohol and substance use"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Alcohol and alcoholic liver disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.defs.gi": {
+      "id": "skill.annex.defs.gi",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Definitions: vomiting and gastrointestinal bleeding",
+      "oneLine": "Nausea, retching, vomiting and regurgitation are four different events; so are the four ways blood appears",
+      "why": "These words are used interchangeably in notes and they are not interchangeable. Regurgitation recorded as vomiting sends the workup in the wrong direction, and melaena recorded loosely turns iron tablets into an upper GI bleed.",
+      "teach": [
+        {
+          "heading": "The emetic sequence, in order",
+          "table": {
+            "cols": [
+              "Term",
+              "What it is",
+              "Effort"
+            ],
+            "rows": [
+              [
+                "Nausea",
+                "The subjective sensation that vomiting is impending, felt in the epigastrium or throat",
+                "None"
+              ],
+              [
+                "Retching",
+                "Spasmodic respiratory movements against a CLOSED glottis, usually with intense nausea",
+                "Considerable"
+              ],
+              [
+                "Vomiting",
+                "Forceful expulsion of gastric or intestinal contents through the mouth",
+                "Forceful"
+              ],
+              [
+                "Regurgitation",
+                "Effortless return of contents into the oesophagus and sometimes the mouth",
+                "None"
+              ]
+            ]
+          },
+          "note": "Effort is the discriminator. Regurgitation is effortless and unheralded; vomiting is forceful and usually preceded by nausea and retching. Effortless return of undigested food points to achalasia or a pouch, not to a stomach problem."
+        },
+        {
+          "heading": "The four ways blood appears, and what each implies",
+          "table": {
+            "cols": [
+              "Term",
+              "What it looks like",
+              "Source"
+            ],
+            "rows": [
+              [
+                "Haematemesis",
+                "Vomited blood: red, or coffee grounds once altered by acid",
+                "Upper GI tract"
+              ],
+              [
+                "Melaena",
+                "Black, tarry, offensive stool",
+                "Usually upper; also small bowel or right colon"
+              ],
+              [
+                "Haematochezia",
+                "Bright red blood per rectum",
+                "Usually distal colon or anorectum; can be a brisk upper bleed"
+              ],
+              [
+                "Occult bleeding",
+                "Not visible at all; found on testing or as iron deficiency",
+                "Anywhere"
+              ]
+            ]
+          },
+          "note": "Melaena needs roughly 50 to 100 mL of blood and several hours in the gut. The black colour comes from bacterial and acid degradation of haemoglobin, which is why it takes time and implies a proximal source."
+        },
+        {
+          "heading": "Severe, occult and obscure mean specific things",
+          "points": [
+            {
+              "t": "Severe GI bleeding.",
+              "d": "Documented bleeding WITH shock or postural hypotension, or a fall in haematocrit of at least 6 percent (haemoglobin at least 2 g/dL), or transfusion of at least two units. It is defined by physiological impact, not by how alarming it looked."
+            },
+            {
+              "t": "Occult bleeding.",
+              "d": "Not clinically visible. Presents as iron deficiency anaemia or a positive faecal test."
+            },
+            {
+              "t": "Obscure bleeding.",
+              "d": "Bleeding whose source is not found after upper and lower endoscopy. Current ACG and ASGE usage prefers SMALL BOWEL BLEEDING for this situation, reserving obscure for bleeding still unexplained after small bowel evaluation including capsule endoscopy."
+            }
+          ]
+        },
+        {
+          "heading": "Black stool that is not melaena",
+          "body": "Iron and bismuth both blacken stool. The distinguishing features are that melaena is tarry and characteristically offensive, whereas iron-related stool is simply dark and formed. Ask, before an admission is arranged."
+        }
+      ],
+      "pitfalls": [
+        "Recording effortless regurgitation as vomiting, which redirects the workup to the stomach.",
+        "Calling any black stool melaena without asking about iron, bismuth, tarriness and smell.",
+        "Using 'severe' loosely, when it has a definition based on shock, haematocrit fall or transfusion.",
+        "Confusing occult with obscure: one is invisible bleeding, the other is bleeding with an unfound source."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What distinguishes regurgitation from vomiting?",
+          "a": "Effort. Regurgitation is effortless and not preceded by nausea and retching; vomiting is a forceful expulsion.",
+          "accept": [
+            "effort",
+            "forceful",
+            "nausea",
+            "retch"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does melaena imply both a volume and a time?",
+          "a": "The black tarry appearance comes from acid and bacterial degradation of haemoglobin, which needs roughly 50 to 100 mL of blood and several hours in the gut. Less blood, or too rapid a transit, and the stool will not be melaenic.",
+          "accept": [
+            "degrad",
+            "haemoglobin",
+            "hemoglobin",
+            "50",
+            "hours",
+            "bacteri"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has recurrent visible bleeding, and upper and lower endoscopy are both normal. Which term applies, and what does it direct you towards?",
+          "a": "Obscure gastrointestinal bleeding. The term describes the state of the investigation, and it directs attention to the small bowel, which conventional endoscopy does not reach: capsule endoscopy or enteroscopy.",
+          "accept": [
+            "obscure",
+            "small bowel",
+            "capsule",
+            "enteroscop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sequence",
+          "text": "Distinguishes nausea, retching, vomiting and regurgitation by effort"
+        },
+        {
+          "id": "blood",
+          "text": "Uses haematemesis, melaena, haematochezia and occult correctly"
+        },
+        {
+          "id": "severity",
+          "text": "Applies the physiological definition of severe bleeding"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Gastrointestinal bleeding"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
     }
   }
 }
