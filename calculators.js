@@ -3617,7 +3617,7 @@
     inputs:[
       { id:"g", label:"Limitation of ordinary activity", type:"select", opts:[
         {v:"1",t:"I - Ordinary activity does not cause angina; angina only with strenuous, rapid or prolonged exertion"},
-        {v:"2",t:"II - Slight limitation: angina on walking or climbing stairs rapidly, uphill, after meals, in cold or wind, under stress, or in the first hours after waking"},
+        {v:"2",t:"II - Slight limitation: angina on walking or climbing stairs rapidly, uphill, after meals, in cold or wind, under stress, or in the first hours after waking. Walking MORE than two blocks on the level, or climbing MORE than one flight at a normal pace, is still possible"},
         {v:"3",t:"III - Marked limitation: angina walking one or two blocks on the level, or one flight of stairs at normal pace"},
         {v:"4",t:"IV - Unable to carry out any physical activity without discomfort; angina may be present at rest"} ] }
     ],
@@ -3625,7 +3625,7 @@
       if(v.g===undefined||v.g==="") return ERR;
       var g=+v.g, roman=["","I","II","III","IV"][g];
       var i=["",
-        "Class I. Ordinary activity is not limited. Walking more than two blocks on the level and climbing more than one flight at a normal pace are tolerated.",
+        "Class I. Ordinary activity such as walking or climbing stairs does not cause angina; it appears only with strenuous, rapid or prolonged exertion.",
         "Class II. Slight limitation of ordinary activity.",
         "Class III. Marked limitation of ordinary physical activity.",
         "Class IV. Angina with any activity, and possibly at rest."][g];

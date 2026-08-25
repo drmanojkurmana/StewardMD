@@ -1168,8 +1168,11 @@
       "system": "core",
       "title": "Taking a history: the framework",
       "oneLine": "Not a checklist of symptoms, and not a one-way extraction of facts",
-      "why": "Ineffective communication is the commonest reason for complaints against doctors, and most malpractice allegations arise from communication failures rather than from technical error. The history is where that relationship is made or lost, and it is also where most diagnoses are made.",
+      "why": "Communication failure is among the commonest contributors to complaints against doctors and to malpractice claims, more often than technical error alone. The history is where that relationship is made or lost, and it is also where most diagnoses are made.",
       "asks": [
+        {
+          "text": "Any fever, night sweats, loss of appetite or weight loss? Ask this of everyone."
+        },
         {
           "text": "Introduce yourself, say why you are here, and how long you will need."
         },
@@ -1196,6 +1199,25 @@
         }
       ],
       "teach": [
+        {
+          "heading": "Before any of this: is the patient stable?",
+          "body": "This framework describes a full history in a patient who can give one. It is not an obligation to complete in front of a sick patient.",
+          "points": [
+            {
+              "t": "Unstable, hypoxic or obtunded.",
+              "d": "ABCDE first. Take a focused history aimed at the immediate problem, and complete the rest once they are safe."
+            },
+            {
+              "t": "Cannot give a history.",
+              "d": "Take a collateral one, from family, the referral letter, the ambulance crew, old notes and the drug packets they arrived with. Record who gave it."
+            },
+            {
+              "t": "In pain or distressed.",
+              "d": "Treat first. A history taken through severe pain is both unkind and unreliable."
+            }
+          ],
+          "note": "Every symptom lesson in CliniX opens with its emergency. So does the consultation: stabilise, then take the history."
+        },
         {
           "heading": "What the history is actually for",
           "body": "It is not only information gathering. Done properly it does four things at once, and only the last of them is the diagnosis.",
@@ -1252,6 +1274,10 @@
             ],
             "rows": [
               [
+                "General",
+                "Fever, night sweats, appetite, weight loss, fatigue. In this setting these are the tuberculosis and malignancy screen, and they belong at the top rather than as an afterthought"
+              ],
+              [
                 "Respiratory",
                 "Breathlessness, wheeze, cough, sputum, haemoptysis, chest pain"
               ],
@@ -1265,7 +1291,7 @@
               ],
               [
                 "Urogenital",
-                "Frequency, nocturia, polydipsia, loin pain, haematuria; menarche, cycle, menopause, intermenstrual and postcoital bleeding"
+                "Frequency, nocturia, polydipsia, loin pain, haematuria; in men hesitancy, poor stream and terminal dribbling; menarche, cycle, menopause, intermenstrual and postcoital bleeding"
               ],
               [
                 "Nervous",
@@ -1307,7 +1333,7 @@
             },
             {
               "t": "Menstrual and obstetric.",
-              "d": "For every woman of reproductive age, not only when it seems relevant."
+              "d": "For every woman of reproductive age, not only when it seems relevant. Exclude pregnancy before imaging or prescribing."
             }
           ]
         },
@@ -1454,7 +1480,7 @@
       "system": "core",
       "title": "Pedigree charts and patterns of inheritance",
       "oneLine": "Draw three generations, then read the pattern off the page",
-      "why": "A family history recorded as prose hides the pattern. Drawn as a pedigree it becomes visible, and one negative finding, the absence of male to male transmission, settles X-linked recessive inheritance on its own.",
+      "why": "A family history recorded as prose hides the pattern. Drawn as a pedigree it becomes visible, and one POSITIVE finding settles a great deal: a single father to son transmission excludes X-linked inheritance outright, because a father gives his son a Y and not his X.",
       "asks": [
         {
           "text": "Are your parents alive? If not, what did they die of, and at what age?"
@@ -1508,6 +1534,18 @@
               [
                 "Digit",
                 "The individual within that generation"
+              ],
+              [
+                "Diagonal line through a symbol",
+                "Deceased"
+              ],
+              [
+                "Arrow",
+                "The proband, the individual through whom the family came to attention"
+              ],
+              [
+                "Double horizontal line",
+                "A consanguineous union"
               ]
             ]
           },
@@ -1535,7 +1573,15 @@
               ],
               [
                 "X-linked dominant",
-                "Affected females predominate; affected males often do not survive to be born"
+                "An affected father transmits to ALL his daughters and NO sons. Severity in males depends on the condition: in X-linked hypophosphataemic rickets and Alport syndrome males survive and are often more severely affected, while in male-lethal conditions such as incontinentia pigmenti and Rett syndrome affected males rarely survive to term, so affected females predominate"
+              ],
+              [
+                "Mitochondrial",
+                "Transmitted only by the mother, to all her children. Note this ALSO shows no male to male transmission, so it is the direct confounder for the X-linked rule"
+              ],
+              [
+                "Fragile X (X-linked dominant, reduced penetrance)",
+                "Anticipation through repeat expansion. About half of full-mutation females are affected, so a carrier mother is not necessarily unaffected. A normal transmitting male passes the premutation to ALL his daughters"
               ]
             ]
           },
@@ -1557,13 +1603,13 @@
               ],
               [
                 "Skeletal",
-                "Marfan syndrome, achondroplasia, Noonan syndrome",
-                "Alkaptonuria, Ehlers-Danlos syndrome"
+                "Marfan syndrome, achondroplasia, Noonan syndrome, most Ehlers-Danlos types including vascular",
+                "Alkaptonuria; only the kyphoscoliotic and dermatosparaxis types of Ehlers-Danlos"
               ],
               [
                 "Metabolic",
                 "Familial hypercholesterolaemia, intermittent porphyria",
-                "Cystic fibrosis, phenylketonuria, galactosaemia, haemochromatosis, storage diseases"
+                "Cystic fibrosis, phenylketonuria, galactosaemia, haemochromatosis, most storage diseases (but Fabry and Hunter are X-linked)"
               ],
               [
                 "Haematological",
@@ -1572,8 +1618,8 @@
               ],
               [
                 "Renal",
-                "Polycystic kidney disease",
-                "Congenital adrenal hyperplasia"
+                "Autosomal dominant polycystic kidney disease (ADPKD)",
+                "Autosomal recessive polycystic kidney disease (ARPKD), cystinuria"
               ],
               [
                 "Gastrointestinal",
@@ -1581,14 +1627,15 @@
                 "Wilson disease"
               ]
             ]
-          }
+          },
+          "note": "Congenital adrenal hyperplasia is autosomal recessive but adrenal rather than renal. Noonan syndrome is listed under skeletal by convention; its clinical weight is cardiac, with pulmonary stenosis and hypertrophic cardiomyopathy."
         },
         {
           "heading": "X-linked recessive conditions to recognise",
           "points": [
             {
               "t": "Musculoskeletal.",
-              "d": "Duchenne muscular dystrophy."
+              "d": "Duchenne and Becker muscular dystrophy."
             },
             {
               "t": "Blood.",
@@ -1596,14 +1643,36 @@
             },
             {
               "t": "Immune.",
-              "d": "Agammaglobulinaemia."
+              "d": "X-linked agammaglobulinaemia."
             },
             {
-              "t": "Nervous.",
-              "d": "Fragile X syndrome."
+              "t": "Storage.",
+              "d": "Fabry disease and Hunter syndrome (MPS II), which are X-linked rather than autosomal recessive."
             }
           ],
-          "note": "G6PD deficiency matters at the bedside in India: it changes which drugs are safe, including primaquine and some sulphonamides, so the family history has an immediate practical consequence."
+          "note": "G6PD deficiency matters at the bedside in India: it changes which drugs are safe, including primaquine, dapsone, nitrofurantoin and some sulphonamides, so the family history has an immediate practical consequence. FRAGILE X IS NOT ON THIS LIST: it is X-linked DOMINANT, see the pattern table above."
+        },
+        {
+          "heading": "When the pedigree breaks the rule",
+          "body": "A blank family history does not exclude a genetic condition, and this is the commonest reason a real pedigree does not look like the textbook.",
+          "points": [
+            {
+              "t": "New mutation.",
+              "d": "About 80 percent of achondroplasia and roughly a third of Duchenne muscular dystrophy arise de novo, so an affected child has unaffected parents and no family history at all."
+            },
+            {
+              "t": "Germline mosaicism.",
+              "d": "A parent can carry the mutation only in their gonadal cells, so recurrence risk after an apparently sporadic case is low but NOT zero. Never counsel it as zero."
+            },
+            {
+              "t": "Reduced penetrance and variable expression.",
+              "d": "A carrier may be unaffected or mildly affected, so a dominant condition can appear to skip a generation."
+            },
+            {
+              "t": "Non-paternity and small families.",
+              "d": "Both distort a pedigree. A pattern read from three individuals is not a pattern."
+            }
+          ]
         }
       ],
       "pitfalls": [
@@ -1611,7 +1680,10 @@
         "Not asking about consanguinity, which is common in parts of India and shifts the likelihood towards recessive conditions.",
         "Missing that a single instance of male to male transmission excludes X-linkage.",
         "Asking only whether relatives are alive, and not what they died of and at what age.",
-        "Drawing one generation when three are needed to show a pattern that skips."
+        "Drawing one generation when three are needed to show a pattern that skips.",
+        "Reading the ABSENCE of male to male transmission as proof of X-linkage; only its presence is informative, and it excludes.",
+        "Counselling recurrence risk as zero after an apparently new mutation, when germline mosaicism makes it low but not zero.",
+        "Filing Fragile X with the X-linked recessive conditions, which wrongly implies carrier females are unaffected."
       ],
       "probes": [
         {
@@ -1641,7 +1713,7 @@
         {
           "level": 3,
           "q": "Unaffected parents, an affected child, and the parents are first cousins. Which pattern, and what is the recurrence risk for a further child?",
-          "a": "Autosomal recessive. Both parents are heterozygous carriers, so each pregnancy carries a one in four risk of an affected child, one in two of a carrier, and one in four unaffected. Consanguinity raises the chance that both parents carry the same rare allele.",
+          "a": "Autosomal recessive. Both parents are heterozygous carriers, so each pregnancy carries a one in four risk of an affected child, a one in two chance of an unaffected carrier, and a one in four chance of a child who is neither affected nor a carrier. Consanguinity raises the chance that both parents carry the same rare allele.",
           "accept": [
             "recessive",
             "1 in 4",
