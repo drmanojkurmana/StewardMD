@@ -336,28 +336,76 @@
     var drugIn = line.querySelector('[data-f="drug"]'), brandIn = line.querySelector('[data-f="brand"]'), r1 = line.querySelector(".r1");
     if (!drugIn || !brandIn || !r1) return; line._brandWired = true;
     var box = null, brands = [], loadedFor = "", loading = false;
+    var typed = [], typedFor = "", typing = false, _deb = null;      // direct brand-name hits
     function closeB() { if (box) { box.remove(); box = null; } }
+    function rowsHTML(list) {
+      return list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
+    }
     function draw(msg) {
       if (!box) { box = document.createElement("div"); box.className = "rx-ac"; r1.insertAdjacentElement("afterend", box); }
       if (msg) { box.innerHTML = '<div class="rx-ac-empty">' + esc(msg) + '</div>'; return; }
       var q = (brandIn.value || "").trim().toLowerCase();
-      var list = q ? brands.filter(function (b) { return String(b.brand || "").toLowerCase().indexOf(q) >= 0; }) : brands;
-      if (!list.length) { box.innerHTML = '<div class="rx-ac-empty">' + (brands.length ? "No matching brand" : "Type the drug first, then tap here for brands") + '</div>'; return; }
-      box.innerHTML = list.slice(0, 50).map(function (b, i) { var meta = [b.manufacturer, b.form].filter(Boolean).join(" · "); return '<button type="button" class="rx-ac-item" data-i="' + i + '"><span class="rx-ac-g">' + esc(b.brand) + '</span>' + (b.mrp != null ? ' <span class="rx-ac-b">₹' + b.mrp + '</span>' : '') + (b.discontinued ? ' <span class="rx-ac-x">disc.</span>' : '') + (meta ? '<span class="rx-ac-d">' + esc(meta) + '</span>' : '') + '</button>'; }).join("");
-      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = list[+btn.getAttribute("data-i")].brand; closeB(); }); });
+      /* Merge in brands matched BY NAME (rx-brand-match.js owns the rules, and is unit-tested).
+       * Without this the field could only ever show brands of the molecule the drug field resolved
+       * to, so typing a brand the clinician actually knows found nothing whenever the drug field
+       * held a shorthand the composition index does not carry ("Amoxiclav" for Amoxycillin +
+       * Clavulanic Acid) - while the Drugs Database, which queries BOTH endpoints, listed those same
+       * brands instantly. Same backend, one missing query. */
+      var B = window.SMD_RX_BRANDS;
+      var merged = B ? B.merge(brands, typed, q) : brands;
+      if (!merged.length) {
+        var why = B ? B.emptyMessage(drugIn.value, q, loading || typing)
+          : "Type the drug first, then tap here for brands";
+        box.innerHTML = '<div class="rx-ac-empty">' + esc(why) + "</div>"; return;
+      }
+      box.innerHTML = rowsHTML(merged);
+      Array.prototype.forEach.call(box.querySelectorAll(".rx-ac-item"), function (btn) { btn.addEventListener("mousedown", function (e) { e.preventDefault(); brandIn.value = merged[+btn.getAttribute("data-i")].brand; closeB(); }); });
     }
+    /* Brand-name search, the same endpoint the Drugs Database pairs with the composition lookup. */
+    function loadTyped(q) {
+      q = String(q || "").trim();
+      var B0 = window.SMD_RX_BRANDS;
+      if (!(B0 ? B0.shouldSearchBrands(q) : q.length >= 3) || !window.MEDAPI || !MEDAPI.searchBrands) {
+        // Clearing the field must clear the suggestions too, and REDRAW: without the redraw the
+        // previous brand's hits stayed on screen under a drug they have nothing to do with.
+        var had = typed.length; typed = []; typedFor = q; typing = false;
+        if (had) draw();
+        return;
+      }
+      if (q === typedFor) return;
+      typing = true; typedFor = q;
+      MEDAPI.searchBrands(q, 20).then(function (d) {
+        if (String(brandIn.value || "").trim() !== q) return;    // a later keystroke superseded this
+        typed = ((d && d.results) || []).filter(Boolean);
+        typing = false; draw();
+      }).catch(function () { typing = false; typed = []; draw(); });
+    }
+    /* `if (loading) return` used to DROP a newer drug while an older lookup was still in flight, and
+     * loadedFor kept the stale value, so the field could sit on the wrong molecule's brands forever.
+     * Requests now supersede: the newest drug wins and late replies for a drug the user has already
+     * moved off are discarded. */
     function load(drug) {
-      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw("Type the drug first, then tap here for brands"); return; }
+      drug = (drug || "").trim(); if (!drug || !window.MEDAPI || !MEDAPI.searchCompositions) { draw(); return; }
       if (drug === loadedFor) { draw(); return; }
-      if (loading) return; loading = true; draw("Loading brands for " + drug + "…");
-      MEDAPI.searchCompositions(drug, 6).then(function (d) {
+      var want = drug; loading = true; draw();
+      var current = function () { return want === String(drugIn.value || "").trim(); };
+      MEDAPI.searchCompositions(want, 6).then(function (d) {
+        if (!current()) { loading = false; return; }
         var comp = ((d && d.results) || []).map(function (r) { return r.composition; }).filter(Boolean)[0];
-        if (!comp) { loading = false; brands = []; loadedFor = drug; draw("No match for “" + drug + "” — check the spelling"); return; }
-        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) { brands = (c && c.brands) || []; loadedFor = drug; loading = false; draw(); });
-      }).catch(function () { loading = false; brands = []; loadedFor = drug; draw("Couldn’t load brands — check connection"); });
+        // No composition is NOT a dead end any more: the brand-name search can still answer.
+        if (!comp) { loading = false; brands = []; loadedFor = want; draw(); return; }
+        return MEDAPI.composition(comp, "price", "all", 60, 0).then(function (c) {
+          if (!current()) { loading = false; return; }
+          brands = (c && c.brands) || []; loadedFor = want; loading = false; draw();
+        });
+      }).catch(function () { loading = false; if (current()) { brands = []; loadedFor = want; draw(); } });
     }
-    brandIn.addEventListener("focus", function () { load(drugIn.value); });
-    brandIn.addEventListener("input", function () { if ((drugIn.value || "").trim() === loadedFor) draw(); else load(drugIn.value); });
+    brandIn.addEventListener("focus", function () { load(drugIn.value); loadTyped(brandIn.value); });
+    brandIn.addEventListener("input", function () {
+      if ((drugIn.value || "").trim() !== loadedFor) load(drugIn.value);
+      draw();
+      clearTimeout(_deb); _deb = setTimeout(function () { loadTyped(brandIn.value); }, 220);
+    });
     brandIn.addEventListener("blur", function () { setTimeout(closeB, 200); });
   }
 
@@ -459,6 +507,16 @@
   function renderRx(topic, lines, regNo) {
     var now = new Date();
     var date = now.toISOString().slice(0, 10);
+    /* Opened with no regimen (the Hospital hub's Prescription tile, or any answer that carried no
+     * drugs) the pad rendered no DRUG row at all, so the first thing a doctor had to do was hunt for
+     * "+ Add drug" before they could type anything. Note the test is "no drug row", not "no rows":
+     * regimenFromCtx() always seeds a "Lifestyle & general measures" ADVICE row, which has no drug or
+     * brand input, so a length check alone never fires. An empty row collects as nothing until a drug
+     * is typed, so Sign & Export still refuses an empty prescription. */
+    lines = lines || [];
+    var _hasDrugRow = false;
+    for (var _li = 0; _li < lines.length; _li++) if (lines[_li] && !lines[_li].isAdvice) { _hasDrugRow = true; break; }
+    if (!_hasDrugRow) lines = lines.concat([{ drug: "", brand: "", dose: "", freq: "", duration: "", unverified: false, isAdvice: false }]);
     var body =
       '<div class="rx-head"><div class="rx-title">Prescription</div><button class="rx-x" id="rxX" aria-label="Close">'+rxIco("close")+'</button></div>' +
       '<div class="rx-disc">Draft prescription — verify every drug, dose, route and interaction against the patient and local protocol. The prescriber is responsible for what they sign.</div>' +

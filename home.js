@@ -765,15 +765,29 @@
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
         tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
+        // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
+        // prescription for the patient in front of you meant going through something else first.
+        // It belongs under the same roof as the other patient-facing tools.
+        tile("note", "Prescription", "Write and sign an Rx", "rx") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
+          setTimeout(function () {
+            if (a === "rx") { ACT.prescription(); return; }
+            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
+          }, 70);
         });
       });
+    },
+    // Open the prescription pad straight away, with no case and no pre-fill: SMD_RX.open() already
+    // handles the doctor-verification gate and shows its own "verify first" path, so there is nothing
+    // to duplicate here.
+    prescription: function () {
+      if (window.SMD_RX && SMD_RX.open) { try { SMD_RX.open({}); } catch (e) { toast("Prescription pad unavailable"); } }
+      else toast("Prescription pad loading…");
     },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
@@ -4748,7 +4762,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (tools.length) {
                 var tb = document.createElement("div"); tb.className = "maik-tools";
                 var tl = document.createElement("div"); tl.className = "maik-tools-lbl"; tl.textContent = "Open in StewardMD"; tb.appendChild(tl);
-                tools.slice(0, 4).forEach(function (t) { var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label; b.addEventListener("click", function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }); tb.appendChild(b); });
+                /* CLOSE MaiK FIRST. #maikSheet is z-index 999 while .db-overlay (Drugs Database) is
+                 * 880 and .mc-overlay (Calculators) is 870, so opening a module with the sheet still
+                 * up put it BEHIND MaiK: fully working, completely invisible, which is exactly what
+                 * "the chips don't do anything" looks like. The data-maik-tool chips below always
+                 * close() first, which is why those worked and these did not. Same trap as SURGX. */
+                tools.slice(0, 4).forEach(function (t) {
+                  var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label;
+                  b.addEventListener("click", function () {
+                    try { close(); } catch (e) {}
+                    setTimeout(function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }, 180);
+                  });
+                  tb.appendChild(b);
+                });
                 host.appendChild(tb);
               }
               try { scroll(); } catch (e) {}

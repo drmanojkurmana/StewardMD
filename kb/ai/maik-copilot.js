@@ -39,7 +39,15 @@
   // Only tools whose launcher is present are surfaced (never dangle a dead chip).
   var TOOLS = {
     calculator: { label: "Open calculator", probe: function () { return !!(G("MEDCALC") && G("MEDCALC").open); }, open: function (id) { try { G("MEDCALC").open(id); } catch (e) {} } },
-    drug: { label: "Drug database", probe: function () { return !!(G("MEDDRUGS") && G("MEDDRUGS").openList); }, open: function () { try { G("MEDDRUGS").openList(); } catch (e) {} } },
+    /* MEDDB (api.js) is the app's Drugs Database - the 4-lakh Indian brand index the Drugs tile and
+     * every other module opens. MEDDRUGS (drugs.js) is a DIFFERENT, much smaller local list that the
+     * app otherwise uses only for openInteractions, so routing this chip there sent the clinician to
+     * the wrong screen. Prefer MEDDB and keep MEDDRUGS purely as a fallback. */
+    drug: {
+      label: "Drug database",
+      probe: function () { return !!((G("MEDDB") && G("MEDDB").openList) || (G("MEDDRUGS") && G("MEDDRUGS").openList)); },
+      open: function () { try { var m = (G("MEDDB") && G("MEDDB").openList) ? G("MEDDB") : G("MEDDRUGS"); m.openList(); } catch (e) {} }
+    },
     ecg: { label: "KardiQ X (ECG)", probe: function () { return !!(G("SMD_KARDIOX") || G("KARDIOX")); }, open: function () { var m = G("SMD_KARDIOX") || G("KARDIOX"); try { (m.open || m.launch || function () {})(); } catch (e) {} } },
     cxr: { label: "ThoreX (chest X-ray)", probe: function () { return !!(G("SMD_THOREX") || G("THOREX")); }, open: function () { var m = G("SMD_THOREX") || G("THOREX"); try { (m.open || m.launch || function () {})(); } catch (e) {} } },
     fundus: { label: "FundX (fundus)", probe: function () { return !!G("FUNDX"); }, open: function () { var m = G("FUNDX"); try { (m.open || m.launch || function () {})(); } catch (e) {} } },
