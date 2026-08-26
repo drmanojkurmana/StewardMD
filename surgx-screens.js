@@ -997,6 +997,33 @@
       rows);
   }
 
+  function todayISO() {
+    try { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
+    catch (e) { return ""; }
+  }
+
+  /* A linked patient already IS the patient reference. Re-typing the UHID you just selected from
+   * the ward list is pure friction, and because patientRef is required on every note type it was
+   * blocking Finalise - which blocks the EMR write, which is the whole point of linking them.
+   *
+   * Only fills an EMPTY field: whatever the surgeon typed always wins. Marked "auto" rather than
+   * "clinician" so the provenance trail still distinguishes what a person actually wrote. */
+  function applyPatientToFields(link) {
+    if (!state.note || !link) return;
+    state.note.values = state.note.values || {};
+    state.note.provenance = state.note.provenance || {};
+    if (!String(state.note.values.patientRef || "").trim()) {
+      var ref = String(link.patientId || "").trim();
+      var nm = String(link.name || "").trim();
+      state.note.values.patientRef = ref && nm ? (nm + " (" + ref + ")") : (ref || nm);
+      state.note.provenance.patientRef = "auto";
+    }
+    if (!String(state.note.values.date || "").trim()) {
+      state.note.values.date = todayISO();
+      state.note.provenance.date = "auto";
+    }
+  }
+
   function createNote(typeId, templateId) {
     var schema = NS().schemaFor(typeId, templateId);
     if (!schema) { toast("Unknown note type"); return; }
@@ -1005,6 +1032,10 @@
       values[k] = schema.prefill[k];
       prov[k] = "ai";      // prefilled boilerplate is NOT the clinician's words until they confirm it
     }
+    /* `date` is required on EVERY note type and is always today. Making a surgeon type it is
+     * friction with no safety value - the note carries createdAt regardless - and it is one of the
+     * "required fields missing" that blocks Finalise, which in turn blocks the EMR write. */
+    if (!values.date) { values.date = todayISO(); prov.date = "auto"; }
     state.noteSchema = schema;
     state.note = {
       id: null, type: typeId, templateId: templateId || "",
@@ -1054,7 +1085,9 @@
     var w = P.writability(link);
     var body = '<div class="sgx-row" style="cursor:default">' +
       '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
-      '<span class="sb">' + esc(w.canWrite ? "Can be written to the hospital record." : w.reason) + "</span></span></div>";
+      '<span class="sb">' + esc(w.canWrite
+        ? (w.willCreate ? w.note : "Can be written to the hospital record.")
+        : w.reason) + "</span></span></div>";
 
     if (state.ptPick === "sources") {
       body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
@@ -1113,6 +1146,9 @@
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
       if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
+      // Writable, but this note will CREATE the Initial Assessment rather than append to one.
+      // Not a warning - a description, so the surgeon knows what they are about to start.
+      else if (d.id === "emr" && w.willCreate && n.finalized) why = w.note;
       if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
       out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
@@ -1504,6 +1540,7 @@
               setTimeout(function () {
                 if (!state.note || state.note.id !== backTo) return;   // they navigated away; don't overwrite
                 state.note.patient = picked;
+                applyPatientToFields(picked);
                 saveNote(true).then(function () {
                   toast(picked.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
                   render();
@@ -1555,7 +1592,7 @@
         var p = (state.ptResults || [])[+t.getAttribute("data-idx")];
         var cl = PT().linkFromConnect(state.ptTenant, p);
         if (!cl) { toast("Could not read that patient"); return; }
-        state.note.patient = cl; state.ptPick = null; state.ptResults = null;
+        state.note.patient = cl; applyPatientToFields(cl); state.ptPick = null; state.ptResults = null;
         saveNote(true).then(function () { toast("Patient linked"); render(); });
         return;
       }
@@ -1563,7 +1600,7 @@
         var mEl = rootEl.querySelector("[data-sgx-ptmanual]");
         var ml = PT().linkManual(mEl ? mEl.value : "");
         if (!ml) { toast("Enter a patient reference"); return; }
-        state.note.patient = ml; state.ptPick = null;
+        state.note.patient = ml; applyPatientToFields(ml); state.ptPick = null;
         saveNote(true).then(function () { toast("Patient set"); render(); });
         return;
       }

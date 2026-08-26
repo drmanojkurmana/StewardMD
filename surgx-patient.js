@@ -137,14 +137,29 @@
     if (link.source === GHIS_SOURCE) {
       if (!link.patientId) return { canWrite: false, reason: "This GHIS patient has no id." };
       if (!link.episodeId) return { canWrite: false, reason: "Open the patient from the ward list first (no visit selected)." };
-      // A visit is not an assessment: without an Initial Assessment document there is nowhere to
-      // file the note, and the server will refuse. Say so now, not after the note is finalised.
+      /* No Initial Assessment yet is NOT a blocker - it means this note CREATES one.
+       *
+       * This gate used to refuse ("nowhere to file the note, start their assessment in GHIS
+       * first"), on the belief that doc_id 0 meant unwritable. The live capture disproved it
+       * (docs/ghis/captured-initial-assessment-write.md): GHIS's own UI creates the first
+       * assessment for a visit by posting exactly that - doc_id 0, ids empty - and gets a 200. The
+       * server's saveAssessment has supported this all along via canCreate. So SURGX was refusing
+       * the one case the hospital system actually handles, on a real admitted patient whose empty
+       * assessment tab was sitting open in GHIS at the same moment (owner, 2026-08-26).
+       *
+       * It stays flagged as a create, because that IS different from appending to a chart the
+       * treating team has already written: it starts the record. The surgeon should be told which
+       * one they are doing, not stopped. */
       if (link.assessment === "none") {
-        return { canWrite: false, reason: "This patient has no Initial Assessment in GHIS yet, so there is nowhere to file the note. Start their assessment in GHIS first." };
+        return {
+          canWrite: true, willCreate: true,
+          reason: "",
+          note: "This starts the patient's Initial Assessment in GHIS - no one has written one for this visit yet."
+        };
       }
       // "unknown" (probe failed) stays writable: the server's own guard is the real gate, and a
       // flaky network must not tell a surgeon their patient is unwritable.
-      return { canWrite: true, reason: "" };
+      return { canWrite: true, willCreate: false, reason: "", note: "" };
     }
     return { canWrite: false, reason: "Unknown patient source." };
   }
