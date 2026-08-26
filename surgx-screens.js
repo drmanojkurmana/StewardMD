@@ -911,8 +911,9 @@
     var backupHTML = bk ? ('<div class="sgx-seclabel">Backup</div>' +
       '<div class="sgx-card"><div class="sgx-bk-h">Your own Google Drive</div>' +
       '<div class="sgx-bk-s">Notes live only on this device, so reinstalling the app destroys them. ' +
-      'A backup writes them to a folder in <b>your</b> Drive and can put them back afterwards. ' +
-      'Nothing is sent unless you tap.</div>' +
+      'A backup encrypts them <b>on this device</b> with a password only you know, then writes them to ' +
+      'a folder in <b>your</b> Drive. Google stores ciphertext; nothing but this app, with your ' +
+      'password, can open it. Nothing is sent unless you tap.</div>' +
       (bkAvail.ok
         ? '<div class="sgx-bk-row">' +
             '<button class="sgx-btn pri" data-sgx="bkup" ' + (list.length ? "" : "disabled ") + '>Back up ' + list.length + ' note' + (list.length === 1 ? "" : "s") + '</button>' +
@@ -1311,40 +1312,75 @@
        * that move patient data: the first tap arms and says what will happen, the second performs it.
        * That is the "second in-UI tap" the PHI posture requires, and it also means a mis-tap on
        * Restore cannot overwrite anything. */
+      /* Notes backup / restore. Tapping a button does NOT send: it opens the password form, which
+       * is the deliberate second step (and carries the warning that a lost password is final).
+       * The notes are encrypted on THIS device before anything reaches Google. */
       if (act === "bkup" || act === "bkrestore") {
         var BK = window.SMD_SURGX_BACKUP;
         var msg = rootEl.querySelector("#sgxBkMsg");
         if (!BK) { if (msg) msg.textContent = "Backup did not finish loading."; return; }
         var restoring = act === "bkrestore";
-        if (t.getAttribute("data-armed") !== "1") {
-          // Disarm the sibling so only one action is ever armed at a time.
-          var others = rootEl.querySelectorAll('[data-sgx="bkup"],[data-sgx="bkrestore"]');
-          for (var oi = 0; oi < others.length; oi++) {
-            if (others[oi] === t) continue;
-            others[oi].removeAttribute("data-armed");
-            if (others[oi]._sgxLabel) others[oi].textContent = others[oi]._sgxLabel;
-          }
-          t._sgxLabel = t._sgxLabel || t.textContent;
-          t.setAttribute("data-armed", "1");
-          t.textContent = restoring ? "Tap again to restore" : "Tap again to send to Drive";
-          if (msg) {
-            msg.textContent = restoring
-              ? "Restoring adds notes from your Drive backup. Notes already on this device are only replaced if the backup copy is newer."
-              : "This puts your notes, including patient references, into your own Google Drive.";
-          }
-          haptic("light");
-          return;
-        }
-        t.removeAttribute("data-armed");
-        t.disabled = true;
-        t.textContent = restoring ? "Restoring…" : "Backing up…";
+        var row = rootEl.querySelector(".sgx-bk-row");
+        if (!row) return;
         if (msg) msg.textContent = "";
-        (restoring ? BK.restoreNow({ confirmed: true }) : BK.backupNow({ confirmed: true })).then(function (res) {
-          if (msg) msg.textContent = BK.describe(res);
+        haptic("light");
+        row.innerHTML =
+          '<div class="sgx-bk-form" data-mode="' + (restoring ? "restore" : "backup") + '">' +
+            '<label class="sgx-bk-l" for="sgxBkPw">' + (restoring ? "Backup password" : "Set a backup password") + "</label>" +
+            '<input class="sgx-bk-in" id="sgxBkPw" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="' + (restoring ? "The password you used" : "At least 8 characters") + '">' +
+            (restoring ? "" :
+              '<input class="sgx-bk-in" id="sgxBkPw2" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="Type it again">') +
+            '<div class="sgx-bk-warn">' + ic("lock") +
+              (restoring
+                ? " Your notes were encrypted on your device before they were uploaded. Only this password can open them."
+                : " Your notes are encrypted on this device first, so Google stores only ciphertext. <b>If you lose this password nobody can open the backup - not you, not StewardMD. There is no reset.</b>") +
+            "</div>" +
+            '<div class="sgx-bk-actions">' +
+              '<button class="sgx-btn" data-sgx="bkcancel" type="button">Cancel</button>' +
+              '<button class="sgx-btn pri" data-sgx="bkgo" data-mode="' + (restoring ? "restore" : "backup") + '" type="button">' +
+                (restoring ? "Unlock and restore" : "Encrypt and back up") + "</button>" +
+            "</div>" +
+          "</div>";
+        var f = row.querySelector("#sgxBkPw"); if (f) { try { f.focus(); } catch (e) {} }
+        return;
+      }
+      if (act === "bkcancel") { render(); return; }
+      if (act === "bkgo") {
+        var BK2 = window.SMD_SURGX_BACKUP;
+        var msg2 = rootEl.querySelector("#sgxBkMsg");
+        if (!BK2) { if (msg2) msg2.textContent = "Backup did not finish loading."; return; }
+        var isRestore = t.getAttribute("data-mode") === "restore";
+        var p1 = rootEl.querySelector("#sgxBkPw"), p2 = rootEl.querySelector("#sgxBkPw2");
+        var pw = p1 ? String(p1.value || "") : "";
+        // A typo in a password nobody can reset is a permanent loss, so it is caught HERE, before
+        // anything is written, rather than months later at restore time.
+        if (!isRestore) {
+          var chk = BK2.checkPassword(pw);
+          if (!chk.ok) { if (msg2) msg2.textContent = BK2.describe({ error: chk.error }); return; }
+          if (!p2 || String(p2.value || "") !== pw) {
+            if (msg2) msg2.textContent = "The two passwords do not match.";
+            return;
+          }
+        } else if (!pw) { if (msg2) msg2.textContent = BK2.describe({ error: "password_required" }); return; }
+
+        t.disabled = true;
+        t.textContent = isRestore ? "Unlocking…" : "Encrypting…";
+        if (msg2) msg2.textContent = "";
+        (isRestore ? BK2.restoreNow({ confirmed: true, password: pw })
+                   : BK2.backupNow({ confirmed: true, password: pw })).then(function (res) {
+          // Do not leave the password sitting in a DOM node once it has been used.
+          try { if (p1) p1.value = ""; if (p2) p2.value = ""; } catch (e) {}
+          var text = BK2.describe(res);
+          if (res && res.ok) {
+            render();
+            var m2 = rootEl.querySelector("#sgxBkMsg"); if (m2) m2.textContent = text;
+            return;
+          }
           t.disabled = false;
-          t.textContent = t._sgxLabel || (restoring ? "Restore from Drive" : "Back up");
-          // A restore changes the list under the user, so redraw it rather than leave a stale screen.
-          if (res && res.ok && restoring && (res.added || res.replaced)) setTimeout(render, 700);
+          t.textContent = isRestore ? "Unlock and restore" : "Encrypt and back up";
+          if (msg2) msg2.textContent = text;
         });
         return;
       }

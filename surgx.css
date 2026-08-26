@@ -502,3 +502,12 @@ html.sgx-lock .abg { z-index: 1300; }
 #surgxRoot .sgx-bk-row .sgx-btn { flex: 1 1 auto; min-width: 46%; }
 #surgxRoot .sgx-bk-off { margin-top: 10px; font: 600 12px var(--sgx-font, system-ui); opacity: .7; }
 #surgxRoot .sgx-bk-msg:not(:empty) { margin-top: 10px; font: 600 12.5px/1.45 var(--sgx-font, system-ui); }
+
+#surgxRoot .sgx-bk-form { display: flex; flex-direction: column; gap: 8px; width: 100%; }
+#surgxRoot .sgx-bk-l { font: 700 11.5px/1 var(--sgx-font, system-ui); letter-spacing: .04em; text-transform: uppercase; opacity: .7; }
+#surgxRoot .sgx-bk-in { width: 100%; box-sizing: border-box; min-height: 46px; padding: 11px 12px; border-radius: 10px;
+  border: 1px solid var(--sgx-line, #d7dee3); background: var(--sgx-surface, #fff); color: var(--sgx-ink, #14202b);
+  font: 600 14px var(--sgx-font, system-ui); }
+#surgxRoot .sgx-bk-warn { font: 400 11.5px/1.5 var(--sgx-font, system-ui); opacity: .85; }
+#surgxRoot .sgx-bk-actions { display: flex; gap: 8px; }
+#surgxRoot .sgx-bk-actions .sgx-btn { flex: 1 1 0; }

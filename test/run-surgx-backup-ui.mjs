@@ -71,21 +71,49 @@ try {
   ok(await ev(`return !!document.querySelector('#surgxRoot [data-sgx="bkup"]');`) === true, "a Back up control is offered");
   ok(await ev(`return !!document.querySelector('#surgxRoot [data-sgx="bkrestore"]');`) === true, "a Restore control is offered");
 
-  /* THE safety property: one tap must ARM, not send. */
+  /* THE safety property: tapping a button must NOT send. It opens the password form, and the
+   * notes must be encrypted on this device before anything reaches Google. */
   await ev(`window.__sent = 0; var b = SMD_SURGX_BACKUP; b.__backupNow = b.backupNow; b.backupNow = function(o){ window.__sent++; return b.__backupNow(o); }; return 1;`);
-  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkrestore"]'); if(b) b.click(); return 1;`); await sleep(500);
-  ok(await ev(`return document.querySelector('#surgxRoot [data-sgx="bkrestore"]').getAttribute("data-armed");`) === "1",
-    "one tap ARMS the control rather than acting");
-  ok(/tap again/i.test(await ev(`return document.querySelector('#surgxRoot [data-sgx="bkrestore"]').textContent;`)),
-    "and the label says another tap is needed");
-  ok((await ev(`var e=document.querySelector("#sgxBkMsg"); return e?e.textContent.trim():"";`)).length > 10,
-    "with an explanation of what the second tap will do");
+  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkup"]'); if(b) b.click(); return 1;`); await sleep(500);
+  ok(await ev(`return !!document.querySelector("#surgxRoot #sgxBkPw");`) === true, "tapping Back up opens a password form, it does not send");
+  ok(await ev(`return window.__sent;`) === 0, "nothing has been sent to Drive");
+  ok(await ev(`return !!document.querySelector("#surgxRoot #sgxBkPw2");`) === true, "the password is confirmed twice, because a typo would be permanent");
+  ok(/no reset|nobody can open/i.test(await ev(`var e=document.querySelector("#surgxRoot .sgx-bk-warn"); return e?e.textContent:"";`)),
+    "and the form warns that a lost password cannot be recovered");
+  ok(await ev(`return document.querySelector("#surgxRoot #sgxBkPw").type;`) === "password", "the field is masked");
 
-  // Arming the other control must disarm this one, so a stray tap cannot fire the wrong action.
-  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkup"]'); if(b) b.click(); return 1;`); await sleep(400);
-  ok(await ev(`return document.querySelector('#surgxRoot [data-sgx="bkrestore"]').getAttribute("data-armed");`) === null,
-    "arming Back up disarms Restore (only one action armed at a time)");
-  ok(await ev(`return window.__sent;`) === 0, "nothing has been sent to Drive by any of this");
+  // A mismatch must be caught before anything is written.
+  await ev(`document.querySelector("#surgxRoot #sgxBkPw").value = "operative-notes-2026"; document.querySelector("#surgxRoot #sgxBkPw2").value = "operative-notes-2027"; return 1;`);
+  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkgo"]'); if(b) b.click(); return 1;`); await sleep(500);
+  ok(/do not match/i.test(await ev(`var e=document.querySelector("#sgxBkMsg"); return e?e.textContent:"";`)), "a mistyped confirmation is refused");
+  ok(await ev(`return window.__sent;`) === 0, "and still nothing has been sent");
+
+  // Too short is refused too.
+  await ev(`document.querySelector("#surgxRoot #sgxBkPw").value = "short"; document.querySelector("#surgxRoot #sgxBkPw2").value = "short"; return 1;`);
+  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkgo"]'); if(b) b.click(); return 1;`); await sleep(500);
+  ok(/8 characters/i.test(await ev(`var e=document.querySelector("#sgxBkMsg"); return e?e.textContent:"";`)), "a password too short to protect anything is refused");
+  ok(await ev(`return window.__sent;`) === 0, "still nothing sent");
+
+  /* Now let it through, with Drive stubbed, and prove the bytes leaving the device are ciphertext. */
+  await ev(`
+    window.__uploaded = "";
+    window.fetch = function(url, init){
+      var u = String(url), m = (init && init.method) || "GET";
+      if (u.indexOf("/drive/v3/files?q=") >= 0) return Promise.resolve({ ok:true, json:function(){ return Promise.resolve({ files: [] }); } });
+      if (u.indexOf("/upload/drive/v3/files") >= 0) { window.__uploaded = String(init.body); return Promise.resolve({ ok:true, json:function(){ return Promise.resolve({ id:"f1" }); } }); }
+      return Promise.resolve({ ok:false, status:404 });
+    };
+    return 1;`);
+  await ev(`document.querySelector("#surgxRoot #sgxBkPw").value = "operative-notes-2026"; document.querySelector("#surgxRoot #sgxBkPw2").value = "operative-notes-2026"; return 1;`);
+  await ev(`var b=document.querySelector('#surgxRoot [data-sgx="bkgo"]'); if(b) b.click(); return 1;`);
+  for (let i = 0; i < 40; i++) { await sleep(300); if ((await ev(`return window.__uploaded.length;`)) > 0) break; }
+  const uploaded = await ev(`return window.__uploaded;`);
+  ok(uploaded.length > 0, "the backup reached the upload call");
+  ok(uploaded.indexOf("Test note") === -1, "the note LABEL is not in the uploaded bytes");
+  ok(uploaded.indexOf('"payload"') >= 0 && uploaded.indexOf('"salt"') >= 0, "what is uploaded is an encrypted envelope");
+  ok(/"iterations":200000/.test(uploaded), "with the app's 200k PBKDF2 stretching recorded in it");
+  ok(/encrypted with your password/i.test(await ev(`var e=document.querySelector("#sgxBkMsg"); return e?e.textContent:"";`)),
+    "and the surgeon is told it was encrypted");
 
   console.log(fails === 0 ? "\nALL GREEN — the backup card is offered, explains itself, and never sends on one tap" : `\n${fails} FAILED`);
 } catch (e) { console.error("HARNESS ERROR:", e.message); fails++; }
