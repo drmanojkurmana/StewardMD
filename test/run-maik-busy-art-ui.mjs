@@ -1,9 +1,11 @@
-/* MaiK busy art — real headless browser.
+/* MaiK companion art — real headless browser.
  *
- * While an answer generates: Medibot (vector, 30 px) sits in the pending bubble, and one of two
- * DARK-TEAL pixel stethoscope characters walks the composer's top edge, alternating per turn.
- * Pinned here because all three are hand-authored art — a dropped frame, a stray colour or a
- * walker that never leaves are all invisible to a unit test.
+ * Stetho Buddy is a RESIDENT: he sits on the composer's top edge from the moment MaiK opens,
+ * idles in place (shuffle + blink, never travelling), perks up while an answer generates, and
+ * leaves when MaiK closes. Medibot joins him in the pending bubble once a question is sent.
+ * Pinned here because it is all hand-authored art on a hand-rolled frame clock — a dropped frame,
+ * a stray colour, a timer that outlives the sheet, or a character that starts walking again are
+ * all invisible to a unit test.
  *
  * USAGE: node test/run-maik-busy-art-ui.mjs
  */
@@ -32,27 +34,49 @@ try {
   await ev(`["introPoster","splash","accountGate","introOverlay","smdBootSplash"].forEach(function(k){var e=document.getElementById(k); if(e) e.remove();}); document.body.classList.add("dark"); return 1;`);
   await ev(`SMD_askMaik(""); return 1;`); await sleep(1400);
 
-  // the pending bubble, rendered by the real code path
+  // ── the resident: there from the moment MaiK opens, before anything is asked ──
+  ok(await ev(`return !!document.querySelector(".maik-cmp .mkw");`) === true, "Stetho Buddy is present as soon as MaiK opens");
+  const fills = await ev(`return [].slice.call(document.querySelectorAll(".mkw rect")).map(function(r){return r.getAttribute("fill");}).filter(function(v,i,a){return a.indexOf(v)===i;}).sort().join(",");`);
+  ok(fills === "#04211E,#0E6E63,#14807A,#2DD4BF", "dark-teal palette only — got " + fills);
+  const w = parseFloat(await ev(`return document.querySelector(".mkw svg").getAttribute("width");`));
+  ok(Math.abs(w - 13 * 2.3) < 0.01, "rendered 15% larger than the original 2x (" + w + "px, was 26)");
+  ok(await ev(`return document.querySelectorAll(".mkw .mkw-svg > g").length;`) === 3, "three frames: rest, step, blink");
+  const blinkEyes = await ev(`var g=document.querySelectorAll(".mkw .mkw-svg > g")[2]; return [].slice.call(g.querySelectorAll("rect")).filter(function(r){return r.getAttribute("fill")==="#04211E";}).length;`);
+  ok(blinkEyes === 0, "the blink frame has no open eyes");
+
+  // ── he does NOT travel ──
+  const anim = await ev(`return getComputedStyle(document.querySelector(".mkw-a")).animationName;`);
+  ok(anim === "mkwBreathe", "his animation is the in-place breathe, not a walk — got " + anim);
+  const x1 = await ev(`return Math.round(document.querySelector(".mkw-a").getBoundingClientRect().left);`);
+  await sleep(1200);
+  const x2 = await ev(`return Math.round(document.querySelector(".mkw-a").getBoundingClientRect().left);`);
+  ok(x1 === x2, "he stays put across a second of animation (" + x1 + " -> " + x2 + ")");
+
+  // ── he is alive: the frame actually changes over an idle cycle ──
+  const seen = {};
+  for (let i = 0; i < 55; i++) {
+    seen[await ev(`var g=document.querySelectorAll(".mkw .mkw-svg > g"); for (var n=0;n<g.length;n++) if (g[n].style.display==="block") return n; return -1;`)] = 1;
+    await sleep(120);
+  }
+  ok(Object.keys(seen).length >= 2, "he shuffles/blinks on his own — frames seen: " + Object.keys(seen).sort().join(","));
+
+  // ── sending a question perks him up AND brings Medibot ──
+  await ev(`__MAIK_TEST.buddyBusy(true); return 1;`); await sleep(150);
+  ok(await ev(`return document.querySelector(".mkw").classList.contains("busy");`) === true, "a question in flight perks him up");
   await ev(`
     var b=document.getElementById("maikBody");
     var d=document.createElement("div"); d.className="maik-b ai";
     d.innerHTML='<div class="maik-buffer"><div class="maik-buffer-head">'+__MAIK_TEST.botSVG(30)+'<span class="maik-buffer-txt">Reviewing the evidence</span></div><div class="maik-sk"><span></span><span></span><span></span></div></div>';
     b.appendChild(d); return 1;`);
-  ok(await ev(`return !!document.querySelector("#maikBody .maik-bot");`) === true, "Medibot renders in the pending bubble");
-  ok(await ev(`return document.querySelectorAll("#maikBody .maik-bot .mkb-ping").length;`) === 2, "its pulse rings are there");
+  ok(await ev(`return !!document.querySelector("#maikBody .maik-bot");`) === true, "Medibot appears in the pending bubble");
+  ok(await ev(`return document.querySelectorAll("#maikBody .maik-bot .mkb-ping").length;`) === 2, "with his chest rings");
+  ok(await ev(`return !!document.querySelector(".maik-cmp .mkw");`) === true, "and Buddy is still there alongside him");
+  await ev(`__MAIK_TEST.buddyBusy(false); return 1;`); await sleep(150);
+  ok(await ev(`return document.querySelector(".mkw").classList.contains("busy");`) === false, "he settles back when the answer lands");
 
-  // the walker
-  await ev(`__MAIK_TEST.walker(true); return 1;`); await sleep(300);
-  ok(await ev(`return !!document.querySelector(".maik-cmp .mkw");`) === true, "walker mounts on the composer edge");
-  const fills = await ev(`return [].slice.call(document.querySelectorAll(".mkw rect")).map(function(r){return r.getAttribute("fill");}).filter(function(v,i,a){return a.indexOf(v)===i;}).sort().join(",");`);
-  ok(fills === "#04211E,#0E6E63,#14807A,#2DD4BF", "dark-teal palette only — got " + fills);
-  ok(await ev(`return document.querySelectorAll(".mkw .mkw-f1, .mkw .mkw-f2").length;`) === 2, "two walk frames");
-  const first = await ev(`return document.querySelector(".mkw svg").getAttribute("width");`);
-  await ev(`__MAIK_TEST.walker(false); __MAIK_TEST.walker(true); return 1;`); await sleep(200);
-  const second = await ev(`return document.querySelector(".mkw svg").getAttribute("width");`);
-  ok(first !== second, "the two characters alternate per turn (" + first + "px then " + second + "px)");
-  await ev(`__MAIK_TEST.walker(false); return 1;`); await sleep(150);
-  ok(await ev(`return !document.querySelector(".maik-cmp .mkw");`) === true, "walker leaves when the turn ends");
+  // ── closing MaiK takes him with it (and stops his timer) ──
+  await ev(`var c=document.getElementById("maikClose"); if(c) c.click(); return 1;`); await sleep(500);
+  ok(await ev(`return !document.querySelector(".maik-cmp .mkw");`) === true, "he leaves when MaiK closes");
 
 } catch (e) { console.log("ERR", e); fails++; }
 finally { chrome.kill(); serve.kill(); }
