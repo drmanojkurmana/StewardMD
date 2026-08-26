@@ -282,3 +282,72 @@ test("a backup asking to be opened with WEAKER key stretching is refused", () =>
   const good = BK.wrapEnvelope("c2FsdA==", "blob", {});
   assert.equal(BK.parseEnvelope(JSON.stringify(good)).ok, true);
 });
+
+
+/* ── status(): the accessor other modules integrate against ────────────────── */
+
+/* signout-fix.js and the Notes banner both decide how alarming to be from this. They used to call
+ * describe(), which renders a RESULT into a SENTENCE and returns a string — so `d.hasBackup` was
+ * always undefined and the softer message could never appear. It failed safe, so nothing was
+ * harmed, but the feature never worked. This pins the shape those callers rely on. */
+test("describe() returns a SENTENCE and status() returns FACTS — they are not interchangeable", () => {
+  assert.equal(typeof BK.describe({ error: "no_backup_found" }), "string");
+  assert.equal(BK.describe().hasBackup, undefined, "a string has no fields — this is the old bug");
+  assert.equal(typeof BK.status, "function", "status() is what an integrator should call");
+});
+
+test("status() reports no backup on a device that has never made one", () => {
+  const prevWin = globalThis.window;
+  const mem = {};
+  globalThis.window = {
+    localStorage: { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = String(v); } },
+    SMD_SURGX_STORE: { uid: () => "surgeon-a" },
+  };
+  try {
+    const st = BK.status();
+    assert.equal(st.hasBackup, false);
+    assert.equal(st.lastBackupAt, 0);
+    assert.equal(st.lastBackupAtText, "", "nothing to show, so nothing is shown");
+  } finally { if (prevWin === undefined) delete globalThis.window; else globalThis.window = prevWin; }
+});
+
+test("the backup record is PER ACCOUNT — a shared ward phone must not mislead the next surgeon", async () => {
+  // A global key would tell surgeon B their notes are backed up, when what exists is surgeon A's
+  // backup in surgeon A's Drive. That is a lie told at the exact moment it costs notes.
+  await withDrive(async ({ store }) => {
+    store.set("n1", note("n1", 10));
+    const w = globalThis.window;
+    const mem = {};
+    w.localStorage = { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = String(v); } };
+
+    w.SMD_SURGX_STORE.uid = () => "surgeon-a";
+    assert.equal((await BK.backupNow({ confirmed: true, password: PW })).ok, true);
+    assert.equal(BK.status().hasBackup, true, "surgeon A backed up, so surgeon A is told so");
+
+    w.SMD_SURGX_STORE.uid = () => "surgeon-b";
+    assert.equal(BK.status().hasBackup, false,
+      "surgeon B, on the same phone, must NOT inherit surgeon A's backup state");
+
+    w.SMD_SURGX_STORE.uid = () => "surgeon-a";
+    assert.equal(BK.status().hasBackup, true, "and surgeon A still has theirs");
+  });
+});
+
+test("a successful RESTORE also records that a backup exists", async () => {
+  // The new device has no local record of the backup the old one made, so without this the banner
+  // would keep threatening permanent loss on a phone that just proved it can recover.
+  await withDrive(async ({ store }) => {
+    const mem = {};
+    globalThis.window.localStorage = { getItem: (k) => (k in mem ? mem[k] : null), setItem: (k, v) => { mem[k] = String(v); } };
+    store.set("n1", note("n1", 10));
+    await BK.backupNow({ confirmed: true, password: PW });
+
+    // the reinstall: notes gone, and the local record with them
+    store.clear();
+    for (const k of Object.keys(mem)) delete mem[k];
+    assert.equal(BK.status().hasBackup, false, "a wiped device knows nothing yet");
+
+    assert.equal((await BK.restoreNow({ confirmed: true, password: PW })).added, 1);
+    assert.equal(BK.status().hasBackup, true, "having restored, it now knows a backup exists");
+  });
+});

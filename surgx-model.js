@@ -107,7 +107,20 @@
   //   ai         — AI-derived STRUCTURE or placement, not yet confirmed.
   //   missing    — required and absent. Shown, never hidden: a UI that degrades by omission lies.
   var PROVENANCE = ["clinician", "voice", "ai", "missing"];
-  var CONFIRMED = { clinician: 1 };
+  /* What counts as "the surgeon has put their name to this".
+   *
+   * `clinician` - they typed it, or tapped Confirm on it.
+   * `auto`      - a DERIVED fact that is already the direct consequence of an explicit clinician
+   *               action, and carries no clinical judgement: the patient reference (they picked
+   *               that patient by name from the ward list) and the date (the clock). Asking them
+   *               to confirm the identity they just selected is a tap that adds no safety - and
+   *               note that patientRef is documentation text, NOT what routes the EMR write; that
+   *               is note.patient.patientId from the link itself (surgx-destinations.js).
+   *
+   * `ai` and `voice` are deliberately NOT here and must never be added. A dictated field that
+   * reads correctly is still not a field the surgeon has signed, which is the whole reason this
+   * gate exists. Anything carrying clinical judgement stays blocking. */
+  var CONFIRMED = { clinician: 1, auto: 1 };
 
   var CASE_LEVELS = ["student", "intern", "resident", "surgeon"];
   var CASE_PHASES = [

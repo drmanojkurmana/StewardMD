@@ -923,12 +923,46 @@
       '<div class="sgx-bk-msg" id="sgxBkMsg" role="status" aria-live="polite"></div></div>') : "";
 
     return head("Notes", "01") + wrap(
-      '<div class="sgx-banner info">' + ic("lock") +
-      " Encrypted on this device. There is no SURGX note server, by design - the only copy that ever " +
-      "leaves is a backup you ask for, into your own Drive. Sign out wipes them.</div>" +
+      notesBanner() +
       '<div class="sgx-seclabel">New note</div>' + newRows +
       '<div class="sgx-seclabel">On this device</div>' + listHTML +
       backupHTML);
+  }
+
+  /* The encrypted Drive backup lives in surgx-backup.js (the SMD_SURGX_BACKUP global), built in
+   * parallel by another session and kept because its crypto and PHI handling are stricter: its own
+   * password with double confirmation, an explicit no-escrow warning, only the KDF parameters and a
+   * timestamp outside the ciphertext, and plaintext backups refused on read. A duplicate
+   * surgx-sync.js of mine was removed rather than ship two backup systems.
+   *
+   * That module is NOT in main yet (PR #760). Until it lands this banner states the unconditional
+   * truth, and deliberately does not reach for a global nothing defines - test/surgx-deeplinks
+   * catches exactly that, and caught this. When surgx-backup.js merges it makes the wording
+   * conditional on whether a backup actually exists. */
+  /* Three different true statements, and which one is true depends on the device. Written as a
+   * ladder rather than one line because the harsh version, shown to a surgeon who HAS set up a
+   * backup, just teaches them to ignore the banner - and the reassuring version, shown to one who
+   * has not, is a lie that costs notes. FAILS TOWARDS THE HARDER WARNING: anything unproven reads
+   * as "permanent". */
+  function notesBanner() {
+    var B = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var st = null;
+    try { if (B && B.status) st = B.status(); } catch (e) { st = null; }
+    if (st && st.hasBackup) {
+      return '<div class="sgx-banner info">' + ic("lock") +
+        " Encrypted on this device, and backed up to your own Google Drive" +
+        (st.lastBackupAtText ? " (" + esc(st.lastBackupAtText) + ")" : "") +
+        ". Signing out or reinstalling removes them from this device; your backup password restores " +
+        "them.</div>";
+    }
+    if (B) {
+      return '<div class="sgx-banner warn">' + ic("lock") +
+        " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+        "signing out or reinstalling the app DELETES these notes permanently. Back them up below.</div>";
+    }
+    return '<div class="sgx-banner warn">' + ic("lock") +
+      " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+      "signing out or reinstalling the app DELETES these notes permanently.</div>";
   }
 
   /* Create a blank note of a type, optionally from a procedure template. */
@@ -961,6 +995,28 @@
       rows);
   }
 
+  /* A linked patient already IS the patient reference. Re-typing the UHID you just selected from
+   * the ward list is pure friction, and because patientRef is required on every note type it was
+   * blocking Finalise - which blocks the EMR write, which is the whole point of linking them.
+   *
+   * Only fills an EMPTY field: whatever the surgeon typed always wins. Marked "auto" rather than
+   * "clinician" so the provenance trail still distinguishes what a person actually wrote. */
+  function applyPatientToFields(link) {
+    if (!state.note || !link) return;
+    state.note.values = state.note.values || {};
+    state.note.provenance = state.note.provenance || {};
+    if (!String(state.note.values.patientRef || "").trim()) {
+      var ref = String(link.patientId || "").trim();
+      var nm = String(link.name || "").trim();
+      state.note.values.patientRef = ref && nm ? (nm + " (" + ref + ")") : (ref || nm);
+      state.note.provenance.patientRef = "auto";
+    }
+    if (!String(state.note.values.date || "").trim()) {
+      state.note.values.date = todayISO();
+      state.note.provenance.date = "auto";
+    }
+  }
+
   function createNote(typeId, templateId) {
     var schema = NS().schemaFor(typeId, templateId);
     if (!schema) { toast("Unknown note type"); return; }
@@ -969,6 +1025,10 @@
       values[k] = schema.prefill[k];
       prov[k] = "ai";      // prefilled boilerplate is NOT the clinician's words until they confirm it
     }
+    /* `date` is required on EVERY note type and is always today. Making a surgeon type it is
+     * friction with no safety value - the note carries createdAt regardless - and it is one of the
+     * "required fields missing" that blocks Finalise, which in turn blocks the EMR write. */
+    if (!values.date) { values.date = todayISO(); prov.date = "auto"; }
     state.noteSchema = schema;
     state.note = {
       id: null, type: typeId, templateId: templateId || "",
@@ -1018,7 +1078,9 @@
     var w = P.writability(link);
     var body = '<div class="sgx-row" style="cursor:default">' +
       '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
-      '<span class="sb">' + esc(w.canWrite ? "Can be written to the hospital record." : w.reason) + "</span></span></div>";
+      '<span class="sb">' + esc(w.canWrite
+        ? (w.willCreate ? w.note : "Can be written to the hospital record.")
+        : w.reason) + "</span></span></div>";
 
     if (state.ptPick === "sources") {
       body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
@@ -1077,6 +1139,9 @@
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
       if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
+      // Writable, but this note will CREATE the Initial Assessment rather than append to one.
+      // Not a warning - a description, so the surgeon knows what they are about to start.
+      else if (d.id === "emr" && w.willCreate && n.finalized) why = w.note;
       if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
       out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
@@ -1166,8 +1231,14 @@
     if (comp.missing.length) stat = "<b>" + comp.missing.length + " required field" + (comp.missing.length === 1 ? "" : "s") + " missing</b>";
     else if (comp.unconfirmed.length) stat = "<b>" + comp.unconfirmed.length + " field" + (comp.unconfirmed.length === 1 ? "" : "s") + " to confirm</b>";
     else { stat = "<b>Ready to finalise</b>"; cls = " ok"; }
-    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '">' + stat +
-      " · " + comp.filled + " of " + comp.total + " filled</div>" +
+    /* The count alone is a dead end on a twenty-field form: "6 required fields missing" does not say
+     * which, and they are above the preview while the sticky bar sits at the bottom, so the surgeon
+     * is told they are blocked and left to hunt (owner, 2026-08-26). Make the number the way there:
+     * tap it and it scrolls to the first blocking field and focuses it. */
+    var jumpTo = (comp.missing[0] || comp.unconfirmed[0] || {}).k || "";
+    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '"' +
+      (jumpTo ? ' data-sgx="notejump" data-k="' + attr(jumpTo) + '" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline"' : "") +
+      ">" + stat + " · " + comp.filled + " of " + comp.total + " filled</div>" +
       '<button class="sgx-btn" data-sgx="notesave">' + ic("save") + " Save</button>" +
       (n.finalized
         ? '<button class="sgx-btn" data-sgx="noteunfinal">Reopen</button>'
@@ -1453,6 +1524,16 @@
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
+      if (act === "notejump") {
+        var fk = t.getAttribute("data-k");
+        var el = fk && document.getElementById("sgxF-" + fk);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { try { el.scrollIntoView(); } catch (er) {} }
+        // Focus AFTER the scroll settles, or the keyboard opening fights the animation.
+        setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (er) {} } }, 320);
+        haptic("tap");
+        return;
+      }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
@@ -1497,6 +1578,7 @@
               setTimeout(function () {
                 if (!state.note || state.note.id !== backTo) return;   // they navigated away; don't overwrite
                 state.note.patient = picked;
+                applyPatientToFields(picked);
                 saveNote(true).then(function () {
                   toast(picked.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
                   render();
@@ -1548,7 +1630,7 @@
         var p = (state.ptResults || [])[+t.getAttribute("data-idx")];
         var cl = PT().linkFromConnect(state.ptTenant, p);
         if (!cl) { toast("Could not read that patient"); return; }
-        state.note.patient = cl; state.ptPick = null; state.ptResults = null;
+        state.note.patient = cl; applyPatientToFields(cl); state.ptPick = null; state.ptResults = null;
         saveNote(true).then(function () { toast("Patient linked"); render(); });
         return;
       }
@@ -1556,7 +1638,7 @@
         var mEl = rootEl.querySelector("[data-sgx-ptmanual]");
         var ml = PT().linkManual(mEl ? mEl.value : "");
         if (!ml) { toast("Enter a patient reference"); return; }
-        state.note.patient = ml; state.ptPick = null;
+        state.note.patient = ml; applyPatientToFields(ml); state.ptPick = null;
         saveNote(true).then(function () { toast("Patient set"); render(); });
         return;
       }
@@ -1572,12 +1654,16 @@
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
           if (t.getAttribute("data-armed") !== "1") {
+            /* Same two-tap discipline as finalise, and the same trap it had: a SIX second fuse that
+             * expired in silence, so reading the disclosure and then tapping just re-armed it. The
+             * confirmation is the point - the fuse is not - so give it the same 15s. */
             t.setAttribute("data-armed", "1");
             t.classList.add("danger");
-            var label = dest === "drive" ? "Confirm: send to Drive" : "Confirm: write to the hospital record";
+            var label = dest === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record";
             t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
-              '<span class="sb">Contains patient identifiers. Tap again to send.</span></span>';
-            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 6000);
+              '<span class="sb">Contains patient identifiers.</span></span>';
+            toast(dest === "drive" ? "Tap once more to send to Drive" : "Tap once more to write to the hospital record");
+            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 15000);
             return;
           }
           var mm = M(), sc = state.noteSchema;
@@ -1601,13 +1687,24 @@
         // Double-press gate: finalising a clinical record is never a single tap.
         // (Same discipline as discharge-ghis.js armSignOff().)
         if (t.getAttribute("data-armed") !== "1") {
+          /* Finalising a clinical record is deliberately two taps. But the window was FIVE seconds
+           * and expired in silence: a surgeon who taps once, reads "Confirm: this is final", thinks
+           * about it, and taps again at six seconds simply re-arms it - and can loop forever
+           * without the note ever finalising, which is exactly what "filled all 6, still can't send
+           * to GHIS" looked like (owner, 2026-08-26).
+           *
+           * Longer window, and say what the second tap is FOR rather than restating the warning. A
+           * toast too, because the button sits in a sticky bar the thumb is covering at the moment
+           * it changes. */
           t.setAttribute("data-armed", "1");
           t.classList.add("danger");
-          t.innerHTML = ic("warning") + " Confirm: this is final";
+          t.innerHTML = ic("warning") + " Tap again to finalise";
+          toast("Tap Finalise once more to sign this note");
           setTimeout(function () {
             if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.classList.remove("danger"); t.textContent = "Finalise";
-          }, 5000);
+            t.removeAttribute("data-armed"); t.classList.remove("danger");
+            t.innerHTML = "Finalise";   // innerHTML, not textContent: keep it consistent with the armed state
+          }, 15000);
           return;
         }
         state.note.finalized = true;

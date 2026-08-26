@@ -2983,8 +2983,12 @@
   function wireSignout() {
     if (_signoutWired || typeof window === "undefined") return; _signoutWired = true;
     ["smd:signout", "smd-signout", "signout", "smd:logout"].forEach(function (ev) { try { window.addEventListener(ev, wipe); } catch (e) {} });
-    window.SMD_KARDIOX_WIPE = wipe;   // StewardMD sign-out can call this directly. 🔧 hook the real signout.
+    window.SMD_KARDIOX_WIPE = wipe;   // Also callable directly; signout-fix.js dispatches the event.
   }
+
+  /* At LOAD, not on mount: a module the student never opened this session would otherwise
+   * keep the previous account's data through a sign-out. wireSignout() is idempotent. */
+  wireSignout();
 
   if (typeof window !== "undefined") window.SMD_KARDIOX_ROUTER = { mountLanding: mountLanding, nav: go, runPipeline: runPipeline, wipe: wipe };
 

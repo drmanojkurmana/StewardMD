@@ -61,6 +61,36 @@
   function CRYPTO() { try { var w = W(); return (w && w.SMD_CLINIC_CRYPTO) || null; } catch (e) { return null; } }
   function cryptoBox() { var c = CRYPTO(); return (c && c.create && c.newSalt) ? c : null; }
 
+  /* Was a backup ever made from THIS device, for THIS account?
+   *
+   * Scoped per account on purpose. A ward phone is shared: a global key would tell the next surgeon
+   * who signs in that their notes are backed up, when what exists is the PREVIOUS surgeon's backup
+   * in the PREVIOUS surgeon's Drive. The uid comes from surgx-store, the same scoping its note keys
+   * use, so the two can never disagree about whose device state this is.
+   *
+   * This is a LOCAL convenience record, not proof. It says "a backup was made", not "a backup is
+   * still there" - the surgeon could have deleted the file in Drive, and only a restore attempt can
+   * know. Every consumer must fail towards the harsher warning, never treat this as a guarantee. */
+  function markKey() {
+    var st = STORE();
+    var uid = "";
+    try { uid = (st && st.uid) ? String(st.uid() || "") : ""; } catch (e) { uid = ""; }
+    return "smd_surgx_bk_at_" + uid;
+  }
+  function ls() { try { var w = W(); return (w && w.localStorage) || null; } catch (e) { return null; } }
+  function noteBackupMade(now) {
+    try { var s2 = ls(); if (s2) s2.setItem(markKey(), String(now || 0)); } catch (e) {}
+  }
+  function status() {
+    var at = 0;
+    try { var s2 = ls(); if (s2) at = Number(s2.getItem(markKey())) || 0; } catch (e) { at = 0; }
+    var out = { hasBackup: at > 0, lastBackupAt: at, lastBackupAtText: "" };
+    if (at > 0) {
+      try { out.lastBackupAtText = new Date(at).toLocaleDateString(); } catch (e) { out.lastBackupAtText = ""; }
+    }
+    return out;
+  }
+
   /* ── pure ──────────────────────────────────────────────────────────────────────────────────── */
 
   /* The backup document. `notes` are full note bodies as surgx-store.loadNote() returns them. */
@@ -220,6 +250,7 @@
               body: multipart(boundary, meta, envelope)
             }).then(function (r) {
               if (!r.ok) return { ok: false, error: "drive_http_" + r.status };
+              noteBackupMade(now);
               return { ok: true, count: notes.length, locked: locked, encrypted: true };
             });
           });
@@ -263,6 +294,9 @@
             return todo.reduce(function (p, n) {
               return p.then(function () { return st.saveNote(n); });
             }, Promise.resolve()).then(function () {
+              // A restore that worked is also proof a backup exists, which matters on the NEW
+              // device: it has no local record of the backup the old one made.
+              try { noteBackupMade(env.exportedAt || 1); } catch (e) {}
               return { ok: true, added: plan.add.length, replaced: plan.replace.length, skipped: plan.skip.length };
             });
           }, function () {
@@ -324,6 +358,7 @@
 
   var API = {
     backupNow: backupNow, restoreNow: restoreNow, available: available, describe: describe,
+    status: status,
     // pure, for tests
     buildBackup: buildBackup, parseBackup: parseBackup, mergePlan: mergePlan,
     checkPassword: checkPassword, wrapEnvelope: wrapEnvelope, parseEnvelope: parseEnvelope,

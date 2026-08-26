@@ -7,6 +7,8 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
+const NS = () => require_schema;
+import require_schema from "../surgx-note-schema.js";
 import { createRequire } from "node:module";
 import { readFileSync } from "node:fs";
 import { join, dirname } from "node:path";
@@ -100,14 +102,23 @@ test("a GHIS patient with a visit is the ONLY writable source", () => {
   assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
 });
 
-test("A VISIT IS NOT AN ASSESSMENT: no Initial Assessment => not writable", () => {
-  /* Found on a live chart 2026-08-25: a real inpatient with an open visit and an empty management
-   * plan. The server refused with "no_active_assessment ... doc_id is 0" - correctly, but only
-   * AFTER the note was finalised and sent. writability() must say it at link time instead. */
+test("SUPERSEDED 2026-08-26: no Initial Assessment means CREATE one, not refuse", () => {
+  /* This test used to assert the opposite, and asserting it is how the wrong behaviour survived.
+   *
+   * The 2026-08-25 reasoning was: a live inpatient with an open visit and an empty management plan
+   * got "no_active_assessment ... doc_id is 0" from the server, so writability() should say so at
+   * link time rather than after the note was finalised. The premise was wrong. doc_id 0 does not
+   * mean unwritable - the live capture the next day showed GHIS's OWN UI creating the first
+   * assessment for a visit with exactly doc_id 0 and both ids empty, answered 200. The server's
+   * canCreate path handled it the whole time.
+   *
+   * So the note is writable and it STARTS the assessment. Kept under the old name so the reversal
+   * is visible rather than silently deleted. */
   const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "none" });
-  assert.equal(w.canWrite, false);
-  assert.match(w.reason, /Initial Assessment/i);
-  assert.match(w.reason, /GHIS/);
+  assert.equal(w.canWrite, true);
+  assert.equal(w.willCreate, true);
+  assert.ok(!/nowhere to file|Start their assessment in GHIS first/i.test(JSON.stringify(w)),
+    "the refusal this test used to demand must not come back");
 });
 
 test("an assessment probe that FAILED must not block the surgeon", () => {
@@ -282,4 +293,90 @@ test("the store persists the linked patient inside the ENCRYPTED body, not the i
   assert.ok(/patient:\s*note\.patient/.test(save), "the encrypted body must carry the patient");
   const idx = save.slice(save.indexOf("idx.unshift"));
   assert.ok(!/patient/.test(idx), "the plaintext index must NOT carry patient identity");
+});
+
+/* ── an absent Initial Assessment is a CREATE, not a refusal ──────────────── */
+
+test("a GHIS patient with no assessment yet is WRITABLE - the note starts one", () => {
+  /* Owner, 2026-08-26, on a real admitted patient (ward10-3, admitted 22-Aug): SURGX said "This
+   * patient has no Initial Assessment in GHIS yet, so there is nowhere to file the note" while
+   * that patient's Initial assessment tab was open and empty in GHIS at the same moment.
+   *
+   * The gate was built on the belief that doc_id 0 meant unwritable. The live capture disproved it:
+   * GHIS's own UI creates the first assessment for a visit by posting doc_id 0 with both ids empty,
+   * and gets a 200. saveAssessment has supported exactly that via canCreate all along. So SURGX was
+   * refusing the one case the hospital system actually handles. */
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "none" });
+  assert.equal(w.canWrite, true, "an unstarted assessment must not block the note");
+  assert.equal(w.willCreate, true, "but it must be flagged as a create");
+  assert.match(w.note, /starts the patient's Initial Assessment/i);
+  assert.ok(!/nowhere to file/i.test(JSON.stringify(w)), "the old refusal must not return");
+});
+
+test("an EXISTING assessment is an append, and says so differently", () => {
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "active" });
+  assert.equal(w.canWrite, true);
+  assert.ok(!w.willCreate, "appending to a chart the team already wrote is not a create");
+});
+
+test("the things that genuinely cannot be written still cannot", () => {
+  // Widening the assessment gate must not widen anything else.
+  const manual = P.writability({ source: "manual", patientId: "", episodeId: "" });
+  assert.equal(manual.canWrite, false);
+  const connect = P.writability({ source: "connect", tenantId: "t", patientId: "p" });
+  assert.equal(connect.canWrite, false, "Connect is pull-only");
+  const noVisit = P.writability({ source: "ghis", patientId: "MR1", episodeId: "", assessment: "none" });
+  assert.equal(noVisit.canWrite, false, "an assessment attaches to a VISIT; without one there is no target");
+  assert.match(noVisit.reason, /ward list|no visit/i);
+});
+
+test("a failed probe still errs towards letting the surgeon try", () => {
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "unknown" });
+  assert.equal(w.canWrite, true, "a flaky network must not declare a patient unwritable");
+  assert.equal(w.willCreate, false, "and must not claim to know it will create one");
+});
+
+/* ── the linked patient IS the patient reference ──────────────────────────── */
+
+test("patientRef and date are required on EVERY note type", () => {
+  /* Which is why leaving them for the surgeon to type blocked Finalise on all five - and Finalise
+   * is what gates the EMR write, so linking a patient and then being unable to send the note was
+   * the end state (owner, 2026-08-26: "8 required fields missing · 0 of 20 filled"). */
+  const S = NS();
+  for (const id of Object.keys(S.SCHEMAS)) {
+    const req = [];
+    (S.SCHEMAS[id].sections || []).forEach((sec) => (sec.fields || []).forEach((f) => { if (f.required) req.push(f.k); }));
+    assert.ok(req.includes("patientRef"), `${id} requires patientRef`);
+    assert.ok(req.includes("date"), `${id} requires date`);
+  }
+});
+
+test("linking a patient fills the reference instead of asking for it again", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function applyPatientToFields"), src.indexOf("function createNote"));
+  assert.match(fn, /values\.patientRef/);
+  assert.match(fn, /provenance\.patientRef = "auto"/,
+    'autofilled values must not be recorded as the clinician\'s own words');
+  assert.match(fn, /values\.date/);
+});
+
+test("what the surgeon typed always wins over the autofill", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function applyPatientToFields"), src.indexOf("function createNote"));
+  assert.match(fn, /if \(!String\(state\.note\.values\.patientRef \|\| ""\)\.trim\(\)\)/,
+    "only an EMPTY field is filled");
+  assert.match(fn, /if \(!String\(state\.note\.values\.date \|\| ""\)\.trim\(\)\)/);
+});
+
+test("all three link routes autofill, not just the GHIS one", () => {
+  // A manually entered patient and a Connect patient are still patients.
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const calls = (src.match(/applyPatientToFields\(/g) || []).length;
+  assert.ok(calls >= 4, `expected the definition plus three call sites, found ${calls}`);
+});
+
+test("a new note already knows today's date", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function createNote"), src.indexOf("function createNote") + 1200);
+  assert.match(fn, /values\.date = todayISO\(\)/);
 });

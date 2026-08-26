@@ -445,6 +445,18 @@ try {
     const roundTrip = await ev(`window.SMD_SURGX_STORE.loadNote(window.SMD_SURGX_STORE.listNotes()[0].id).then(n => !!(n && n.finalized && n.values && n.values.findings))`);
     ok(roundTrip === true, "and it decrypts back to a finalised note with its fields intact");
 
+    /* The encrypted Drive backup is surgx-backup.js's (window.SMD_SURGX_BACKUP), built in parallel
+     * by another session and kept over a duplicate surgx-sync.js of mine. Its own harnesses cover
+     * it (test/run-surgx-backup-{e2e,ui}.mjs); all this file asserts is that the notes screen tells
+     * the truth while no backup module is present - a blunt warning, not a false reassurance. */
+    console.log("\n--- 01 notes: device-only warning ---");
+    await ev("window.SURGX.open('notes')");
+    await sleep(300);
+    ok((await ev(`document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('signing out or reinstalling')`)) === true,
+      "with no backup module, the notes banner warns that sign-out destroys them");
+    ok((await ev(`!document.querySelector('#surgxRoot [data-sgx="bkToggle"]')`)) === true,
+      "and this screen no longer offers a second, competing backup control");
+
     // Sign-out must not leave PHI behind for the next account on this device.
     await ev("(() => { window.SMD_SURGX_STORE.wipe(); return true; })()");
     ok((await ev("window.SMD_SURGX_STORE.listNotes().length === 0")) === true, "sign-out wipes every note");

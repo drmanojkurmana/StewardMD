@@ -1499,7 +1499,7 @@ window.openExternal = function (u) {
 <script src="/account.js?v=gold364-thread" defer></script>
 <script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
-<script src="/signout-fix.js?v=gold339" defer></script>
+<script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
@@ -1697,7 +1697,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-acs.js?v=kx1" defer></script>
 <script src="/kardiox-feedback.js?v=kx1" defer></script>
 <script src="/kardiox-pdf.js?v=kx1" defer></script>
-<script src="/kardiox-screens.js?v=kx23-bmfix" defer></script>
+<script src="/kardiox-screens.js?v=kx24-bmfix-wipe" defer></script>
 <script src="/kardiox.js?v=kx7" defer></script>
 <!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
      enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
@@ -1713,7 +1713,7 @@ window.openExternal = function (u) {
 <script src="/thorex-report.js?v=tx8" defer></script>
 <script src="/thorex-llm.js?v=tx2" defer></script>
 <script src="/thorex-correlate.js?v=tx1" defer></script>
-<script src="/thorex-screens.js?v=tx14" defer></script>
+<script src="/thorex-screens.js?v=tx15-wipe" defer></script>
 <script src="/thorex.js?v=tx1" defer></script>
 <!-- SknX AI · on-device dermatology (lesion/rash) analysis (additive, flag-gated smd_sknx, DEFAULT ON
      in dev - gated before public release, see sknx-flags.js). Sibling of ThoreX/KardioX: scoped
@@ -1730,30 +1730,31 @@ window.openExternal = function (u) {
 <script src="/sknx-cloudvision.js?v=sx13" defer></script>
 <script src="/sknx-history.js?v=sx13" defer></script>
 <script src="/sknx-providers.js?v=sx13" defer></script>
-<script src="/sknx-store.js?v=sx13" defer></script>
+<script src="/sknx-store.js?v=sx15-wipe" defer></script>
 <script src="/sknx-evidence.js?v=sx13" defer></script>
 <script src="/sknx-llm.js?v=sx13" defer></script>
 <script src="/sknx-report.js?v=sx13" defer></script>
 <script src="/sknx-compare.js?v=sx13" defer></script>
 <script src="/sknx-rx.js?v=sx13" defer></script>
 <script src="/sknx.js?v=sx14-xagate" defer></script>
-<script src="/sknx-screens.js?v=sx13" defer></script>
-<!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT OFF;
-     reveal with ?clinix=1 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
+<script src="/sknx-screens.js?v=sx15-wipe" defer></script>
+<!-- CliniX · clinical learning for medical students (additive, flag-gated smd_clinix, DEFAULT ON
+     for testers per the 2026-08-23 owner decision - see clinix-flags.js, which is the authority;
+     force either way with ?clinix=1 / ?clinix=0 or Settings → Experimental). Scoped #clinixRoot + .cx-* + SMD_CLINIX_*
      globals. When the flag is off, clinix.js never mounts the root and nothing is fetched, so the
      whole module is a no-op.
      LOAD ORDER IS LOAD-BEARING: model before content (content resolves the model for its review and
      licence gates), and store before screens (screens read window.SMD_CLINIX_PROGRESS at mount).
      Content itself is NOT bundled here - it is lazily fetched from /clinix/*.json on first open,
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
-<script src="/clinix-flags.js?v=cx13" defer></script>
+<script src="/clinix-flags.js?v=cx14-session" defer></script>
 <script src="/clinix-model.js?v=cx20-annex" defer></script>
 <script src="/clinix-content.js?v=cx15-ver" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
 <script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
 <script src="/clinix-tutor.js?v=cx14" defer></script>
-<script src="/clinix-screens.js?v=cx23-annex" defer></script>
+<script src="/clinix-screens.js?v=cx24-session" defer></script>
 <script src="/clinix.js?v=cx12" defer></script>
 <!-- SURGX (SURGˣ) · Surgical Intelligence (additive, flag-gated smd_surgx; ON for testers, flip to
      false before any non-tester release - see surgx-flags.js). Scoped #surgxRoot + .sgx-* +
@@ -1765,18 +1766,18 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg10-nogate" defer></script>
-<script src="/surgx-model.js?v=sg1" defer></script>
+<script src="/surgx-flags.js?v=sg13-backup" defer></script>
+<script src="/surgx-model.js?v=sg16-confirm" defer></script>
 <script src="/surgx-content.js?v=sg1" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
-<script src="/surgx-store.js?v=sg5-pt" defer></script>
+<script src="/surgx-store.js?v=sg13-backup" defer></script>
 <script src="/surgx-entitlement.js?v=sg10-nogate" defer></script>
-<script src="/surgx-patient.js?v=sg12-assess" defer></script>
+<script src="/surgx-patient.js?v=sg14-create" defer></script>
 <script src="/surgx-destinations.js?v=sg6-bk" defer></script>
 <script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg14-bkenc" defer></script>
+<script src="/surgx-screens.js?v=sg20-bkenc" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -1919,7 +1920,7 @@ window.openExternal = function (u) {
   // #sbMenu is rebuilt on each SB.open, so re-inject the item every open (mirrors home.js).
   function ghisWrapSB() { try { if (window.SB && typeof SB.open === "function" && !SB.__ghisWrapped) { var o = SB.open; SB.open = function () { var r = o.apply(this, arguments); setTimeout(ghisSidebarItem, 50); return r; }; SB.__ghisWrapped = true; } } catch (e) {} }
   function loadGhis() {
-    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gold1002-pick"; document.body.appendChild(s); }
+    if (!document.getElementById("ghis-ward-script")) { var s = document.createElement("script"); s.id = "ghis-ward-script"; s.src = "/ghis-ward.js?v=gw-assess1"; document.body.appendChild(s); }
     // Auto-fetch (device-local, opt-in): keeps a linked Ward Sync patient's reports fresh on
     // launch/resume. Depends on window.GHIS above, so loaded right after it. Flag-gated with GHIS
     // itself — meaningless without Ward Sync. Consent + toggle live entirely in autofetch.js.
