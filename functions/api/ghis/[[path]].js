@@ -792,8 +792,19 @@ export async function saveAssessment(env, token, body) {
         const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
         const sc = (a && a.setCookie) || [];
         if (sc.length) cookie = mergeCookies(cookie, sc);
-        epiActivated = !!(a && a.status >= 200 && a.status < 300);
-        attempts.push(how + ':act' + ((a && a.status) || '?') + ':ck' + sc.length);
+        /* HTTP 200 PROVES NOTHING. Measured against the live server on 2026-08-26: an
+         * unauthenticated session and a working one BOTH answered 200 to this POST — the first
+         * returning a redirect stub, the second the patient's page. Gating a create on the status
+         * alone was therefore a guard that could not fail, which is worse than none now that the
+         * posted ids no longer target the record.
+         *
+         * What DOES separate them is the body: a real activation returns that patient's page and
+         * echoes their MR (13 occurrences for MR00000001-IPMR000000001, 0 in the failed case).
+         * Cheap, already in hand, and it confirms the identity rather than the transport.
+         * The body is never logged — only whether it referenced the MR we asked for. */
+        const echoed = String((a && a.body) || '').indexOf(mr) !== -1;
+        epiActivated = !!(a && a.status >= 200 && a.status < 300 && echoed);
+        attempts.push(how + ':act' + ((a && a.status) || '?') + ':ck' + sc.length + (echoed ? ':mr-ok' : ':mr-absent'));
       } catch (e) { attempts.push(how + ':act-threw'); }
     } else { epiActivated = false; attempts.push(how + ':no-epi'); }
     let last = null;

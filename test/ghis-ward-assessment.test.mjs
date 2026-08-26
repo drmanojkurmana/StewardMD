@@ -26,26 +26,26 @@ import { findWardRow, ipEpisodeCandidates } from "../functions/api/ghis/[[path]]
 const SRC = readFileSync(new URL("../functions/api/ghis/[[path]].js", import.meta.url), "utf8");
 
 /* A row shaped like the one in the recording. */
-const NUKARAJU = { patientId: "MR2472736", patientFirstName: "NUKARAJU", episodeId: "IPMR260025481", bed: "Ward2-3" };
+const NUKARAJU = { patientId: "MR00000004", patientFirstName: "NUKARAJU", episodeId: "IPMR000000004", bed: "Ward2-3" };
 
 test("the admitted patient from the ward list is found by MR number", () => {
   const rows = [
-    { patientId: "MR26160051", episodeId: "IPMR260025493" },
+    { patientId: "MR00000005", episodeId: "IPMR000000005" },
     NUKARAJU,
-    { patientId: "MR26160758", episodeId: "IPMR260025474" }
+    { patientId: "MR00000006", episodeId: "IPMR000000006" }
   ];
-  assert.equal(findWardRow(rows, "MR2472736"), NUKARAJU);
+  assert.equal(findWardRow(rows, "MR00000004"), NUKARAJU);
 });
 
 test("the MR match ignores case and stray whitespace", () => {
   // The id arrives from a note, a queue ticket or a hand-typed field; none of them are trimmed.
-  assert.equal(findWardRow([NUKARAJU], "  mr2472736 "), NUKARAJU);
+  assert.equal(findWardRow([NUKARAJU], "  mr00000004 "), NUKARAJU);
 });
 
 test("a patient who is not on the ward is not guessed at", () => {
   assert.equal(findWardRow([NUKARAJU], "MR99999999"), null);
-  assert.equal(findWardRow([], "MR2472736"), null);
-  assert.equal(findWardRow(null, "MR2472736"), null, "an unavailable roster must not throw");
+  assert.equal(findWardRow([], "MR00000004"), null);
+  assert.equal(findWardRow(null, "MR00000004"), null, "an unavailable roster must not throw");
   assert.equal(findWardRow([NUKARAJU], ""), null, "no MR means no match, never the first row");
 });
 
@@ -53,15 +53,15 @@ test("the MR is read whatever GHIS calls the column", () => {
   /* GetIPWL and the OPD DashboardUnit disagree on casing, and this has already cost one wrong
    * theory ("MR-OPMR… is the wrong recordNo") that turned out to be about cookies instead. */
   for (const key of ["patientId", "PatientId", "PatientID", "MRNo", "UHID", "mrn"]) {
-    const row = { [key]: "MR2472736", episodeId: "IPMR260025481" };
-    assert.ok(findWardRow([row], "MR2472736"), `an IP row keyed by ${key} must still match`);
+    const row = { [key]: "MR00000004", episodeId: "IPMR000000004" };
+    assert.ok(findWardRow([row], "MR00000004"), `an IP row keyed by ${key} must still match`);
   }
 });
 
 test("the admission visit id is offered as an episode candidate", () => {
   const c = ipEpisodeCandidates(NUKARAJU);
   assert.ok(c.length >= 1, "the row must yield something to activate against");
-  assert.equal(c[0][1], "IPMR260025481", "the ward row's episode is the first thing to try");
+  assert.equal(c[0][1], "IPMR000000004", "the ward row's episode is the first thing to try");
   assert.match(c[0][0], /^ip:/, "candidates are labelled so a failure says what was tried");
 });
 
@@ -125,16 +125,16 @@ test("the doc_id 0 refusal is still in place", () => {
 
 test("an admitted patient activates with the same <MR>-<visit> recordNo as an out-patient", () => {
   /* Captured 2026-08-26 by clicking a patient in the IP worklist:
-   *   POST /Doctor/Home/Searchnew   recordNo=MR26160934-IPMR260025490
-   * followed immediately by GET /Doctor/Home/GetInitialAssessmentnew/?id=MR26160934.
+   *   POST /Doctor/Home/Searchnew   recordNo=MR00000003-IPMR000000003
+   * followed immediately by GET /Doctor/Home/GetInitialAssessmentnew/?id=MR00000003.
    *
    * So the activation request never needed changing - only the VALUE was missing, because the
    * episode was looked up in the OPD list alone. Pinned because a future refactor that "tidies"
    * this into a different shape (an ip= param, a separate endpoint, a JSON body) would break the
    * ward path silently: a wrong recordNo does not error, it just activates nothing and the form
    * comes back blank with doc_id 0. */
-  const mr = "MR26160934", visit = "IPMR260025490";
-  assert.equal(mr + "-" + visit, "MR26160934-IPMR260025490");
+  const mr = "MR00000003", visit = "IPMR000000003";
+  assert.equal(mr + "-" + visit, "MR00000003-IPMR000000003");
   // Both live call sites must build exactly that, and both must send the CSRF token with it.
   const calls = SRC.match(/'\/Doctor\/Home\/Searchnew'[\s\S]{0,200}?recordNo=' \+ encodeURIComponent\((mrId|mr) \+ '-' \+ epi\)/g) || [];
   assert.ok(calls.length >= 2,
@@ -149,8 +149,35 @@ test("an admitted patient activates with the same <MR>-<visit> recordNo as an ou
 test("the ward episode reaches the activation unchanged", () => {
   // An IPMR id must survive the candidate pass verbatim - no trimming of the IP prefix, no
   // coercion to a number, both of which would produce a recordNo GHIS silently ignores.
-  const c = ipEpisodeCandidates({ patientId: "MR26160934", episodeId: "IPMR260025490" });
-  assert.equal(c[0][1], "IPMR260025490");
-  assert.equal("MR26160934" + "-" + c[0][1], "MR26160934-IPMR260025490",
+  const c = ipEpisodeCandidates({ patientId: "MR00000003", episodeId: "IPMR000000003" });
+  assert.equal(c[0][1], "IPMR000000003");
+  assert.equal("MR00000003" + "-" + c[0][1], "MR00000003-IPMR000000003",
     "the captured recordNo is reproduced exactly");
+});
+
+/* ── measured against the live server, 2026-08-26 ─────────────────────────── */
+
+test("a 200 from Searchnew is not evidence of anything on its own", () => {
+  /* Run against live GHIS for MR00000001-IPMR000000001 (an admitted patient):
+   *   unauthenticated session -> Searchnew 200, body a redirect stub, 0 references to the MR
+   *   authenticated session   -> Searchnew 200, body 82,509 bytes, 13 references to the MR
+   * Same status, opposite meaning. The first probe of this was itself invalid - a raw `-b` cookie
+   * STRING never enters curl's cookie engine, so every call after the first ran signed-out and
+   * produced a confident, meaningless result. Hence: confirm identity, not transport. */
+  assert.match(SRC, /HTTP 200 PROVES NOTHING/,
+    "the reasoning must stay next to the code it justifies");
+  const fn = SRC.slice(SRC.indexOf("export async function saveAssessment"));
+  assert.match(fn, /indexOf\(mr\) !== -1/, "the activation response must name the patient");
+  assert.ok(!/epiActivated = !!\(a && a\.status >= 200 && a\.status < 300\);/.test(fn),
+    "the status-only check must not come back");
+});
+
+test("the assessment form carries NO patient reference, so it cannot be the check", () => {
+  /* Also measured: GetInitialAssessmentnew for that patient returned 174,948 bytes and 208
+   * assessment fields with doc_id 0 and ZERO references to her MR. The form is a blank template
+   * bound to the session, which is why the payload posts the ids empty and why the form cannot be
+   * used to verify who is active. Documented so nobody "improves" the guard by grepping the form. */
+  const doc = readFileSync(new URL("../docs/ghis/captured-initial-assessment-write.md", import.meta.url), "utf8");
+  assert.match(doc, /174,948|174948/, "the measurement belongs in the record");
+  assert.match(doc, /208/, "field count");
 });

@@ -1,12 +1,18 @@
 # GHIS Initial Assessment — captured live requests (2026-08-26)
 
+> **PHI NOTE.** Every MR / IPMR identifier below is a SYNTHETIC stand-in (MR00000001,
+> IPMR000000001, …). The real values came from live GITAM patients and were redacted; this file is
+> git-tracked and public to anyone with repo access, and CLAUDE.md forbids committing PHI. What
+> matters here is the SHAPE of the requests, never the person — so the stand-ins cost nothing.
+> Keep it that way: if you capture a fresh request, redact the identifiers before committing it.
+
 Captured from the real GHIS UI in Chrome by the owner. These are the ground truth for the
 assessment read/write path; anything in our code that contradicts them is wrong.
 
 ## 1. READ the form
 
 ```
-GET /Doctor/Home/GetInitialAssessmentnew/?id=MR26159235
+GET /Doctor/Home/GetInitialAssessmentnew/?id=MR00000002
 x-requested-with: XMLHttpRequest
 referer: https://ghis.gitam.edu/Doctor/home
 (session cookies only)
@@ -98,17 +104,17 @@ content-type: application/x-www-form-urlencoded; charset=UTF-8
 x-requested-with: XMLHttpRequest
 origin + referer: https://ghis.gitam.edu
 
-__RequestVerificationToken=CfDJ8...&recordNo=MR26160934-IPMR260025490
+__RequestVerificationToken=CfDJ8...&recordNo=MR00000003-IPMR000000003
 ```
 
 Then, immediately after:
 
 ```
-GET /Doctor/Home/GetInitialAssessmentnew/?id=MR26160934
+GET /Doctor/Home/GetInitialAssessmentnew/?id=MR00000003
 ```
 
 **An in-patient activates with exactly the same `<MR>-<visit>` recordNo as an out-patient.** The
-only difference is the visit itself: `IPMR260025490`, the "Visit ID" column of the IP worklist,
+only difference is the visit itself: `IPMR000000003`, the "Visit ID" column of the IP worklist,
 where an out-patient carries an OP/episode number.
 
 This confirms the shape our code already builds (`mr + '-' + epi`). Nothing about the activation
@@ -133,3 +139,52 @@ accept: application/json, text/javascript, */*; q=0.01
 ```
 
 Used by the UI to keep the session alive (the header shows a visible "Session timeout" countdown).
+
+---
+
+## 5. MEASURED against the live server — 2026-08-26, an ADMITTED patient (ids redacted)
+
+Run directly against GHIS with the owner's own session, read-only. The first attempt was **invalid
+and produced a confident wrong answer**, which is worth recording as loudly as the result:
+
+> `curl -b '<cookie string>'` passes a raw header. Those cookies never enter curl's cookie engine,
+> so a companion `-c jar` writes a jar WITHOUT the session, and every later `-b jar` call runs
+> signed-out. `CheckSession` answered 200 with a null-filled body and `Searchnew` answered 200 with
+> nothing behind it. Both looked like clean negative results. They were an unauthenticated session.
+> Build the jar properly (Netscape format) before believing anything a probe tells you.
+
+With a correctly built cookie jar, for `MR00000001-IPMR000000001`:
+
+| step | result |
+|---|---|
+| `CheckSession` before | `patient_id: null` |
+| `POST Searchnew  recordNo=<MR>-<IPMR>` | **200, 82,509 bytes, MR echoed 13x** |
+| `CheckSession` after | `patient_id: null` |
+| `GET GetInitialAssessmentnew/?id=<MR>` | **200, 174,948 bytes, 208 assessment fields** |
+| - `assessment.Initial_Assessment_doc_id` | **`0`** |
+| - references to the patient MR inside the form | **0** |
+
+### What this establishes
+
+1. **The `IPMR...` activation works.** `Searchnew` returns that patient's own page and echoes their
+   MR 13 times. An admitted patient activates exactly like an out-patient, confirming the
+   ward-roster fix resolves the right value.
+2. **`CheckSession` does NOT report the active patient.** It returns a patient-shaped JSON skeleton,
+   null-filled before AND after a successful activation. It was briefly believed to be the
+   activation-confirmation endpoint. It is not. Do not build a guard on it.
+3. **The form carries no patient reference** - no `patient_id`, and the MR appears nowhere in
+   174,948 bytes. It is a blank template bound to the session, which is why the write posts both ids
+   EMPTY (section 2) and why the FORM cannot verify who is active either.
+4. **`doc_id 0` here is correct.** This patient had no assessment yet, so this is a genuine create -
+   exactly the case the pre-2026-08-26 code refused outright.
+
+### The activation signal, settled
+
+HTTP status is worthless: an unauthenticated session and a working one **both answered 200**. The
+only thing separating them was the body naming the patient. So `epiActivated` now requires the
+`Searchnew` response to reference the MR being activated, not merely a 2xx. The body is never
+logged - only whether it echoed the MR - and the attempt trail records `:mr-ok` / `:mr-absent`.
+
+### NOT done
+
+No write has been attempted against a live chart. Sections 1-5 are all reads.

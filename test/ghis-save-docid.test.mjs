@@ -248,8 +248,16 @@ test("CREATE: doc_id 0 needs a patient, a visit, AND a confirmed activation", ()
   assert.match(save, /&& !clientDoc && !canCreate\)/, "…and only then is the refusal still correct");
   assert.match(save, /const attachTo = String\(body\.episodeId \|\| ''\) \|\| epiUsed/,
     "the visit may have come from the roster lookup rather than the caller");
-  assert.match(save, /epiActivated = !!\(a && a\.status >= 200 && a\.status < 300\)/,
-    "activation counts only when Searchnew actually succeeded");
+  /* MEASURED against the live server, 2026-08-26: HTTP 200 proves nothing. An unauthenticated
+   * session and a working one BOTH answered 200 to Searchnew - the first a redirect stub, the
+   * second the patient's own page. A guard on the status alone could not fail. What separates them
+   * is the body echoing the MR that was activated (13 occurrences vs 0). */
+  assert.match(save, /const echoed = String\(\(a && a\.body\) \|\| ''\)\.indexOf\(mr\) !== -1/,
+    "activation is confirmed by the response naming the patient, not by the status");
+  assert.match(save, /epiActivated = !!\(a && a\.status >= 200 && a\.status < 300 && echoed\)/,
+    "both the transport AND the identity must agree");
+  assert.match(save, /:mr-ok' : ':mr-absent'/,
+    "the attempt trail distinguishes a real activation from a 200 that did nothing");
   assert.match(save, /\{ epiActivated = false; attempts\.push\(how \+ ':no-epi'\); \}/,
     "no episode means no activation, never a stale true from a previous candidate");
 });
