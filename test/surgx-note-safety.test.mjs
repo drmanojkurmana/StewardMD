@@ -330,30 +330,46 @@ test("a missing field never throws if it is not on screen", () => {
 
 /* ── the finalise gate must be passable ───────────────────────────────────── */
 
-test("finalise stays a DOUBLE press - that discipline is not relaxed", () => {
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
-  assert.match(h, /data-armed/, "signing a clinical record is never one tap");
-  assert.match(h, /if \(!comp\.canFinalize\)/, "and never possible with a required field outstanding");
+test("finalising is still a deliberate act, and still refuses an incomplete note", () => {
+  /* The two-tap arm became a confirm() for the same reason as the send: an armed button is
+   * invisible state with a clock on it, and it kept failing silently on a real phone. A dialog is a
+   * STRONGER confirmation - it cannot be half-completed and cannot expire. */
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /window\.confirm\(writable/, "signing is confirmed, never a bare single tap");
+  assert.match(h, /if \(!goSign\) return/, "declining must abort before anything is signed");
+  assert.match(h, /if \(!comp\.canFinalize\)/, "an incomplete note can never be signed");
+  assert.ok(h.indexOf("canFinalize") < h.indexOf("state.note.finalized = true"),
+    "completeness is checked before the signature");
 });
 
-test("the arming window is long enough to read the warning", () => {
-  /* It was 5s and expired SILENTLY, so tapping once, reading, and tapping again at six seconds
-   * just re-armed it - an unwinnable loop that looked like "I filled everything and still can't
-   * send". */
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
-  const ms = /\}, (\d+)\);/.exec(h);
-  assert.ok(ms, "the disarm timeout must still exist");
-  assert.ok(Number(ms[1]) >= 12000, `arming window is ${ms[1]}ms; too short to read and decide`);
+test("finalising OFFERS to send, because signing silently removes the send row", () => {
+  /* 2026-08-27 00:50: the owner tapped the big green Finalise button, saw "Finalised", and
+   * reasonably believed the note had gone to GHIS. It had not - the chart still showed the previous
+   * write. Worse, signing REMOVES the "Finalise and write to the hospital record" row (that row
+   * only exists on a draft) and replaces it with a plain destination needing a separate action. The
+   * most obvious button on the screen quietly took the send away. */
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /asked next whether to write it into the patient's hospital record/i,
+    "signing must warn that a send question follows");
+  assert.match(h, /Write it into the patient's hospital record now\?/, "and then actually ask");
+  assert.match(h, /D\.send\("emr"/, "and send it");
+  assert.match(h, /Signed\. Not sent/, "declining must say plainly that it was NOT sent");
 });
 
-test("the armed state says what the second tap DOES", () => {
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
-  assert.match(h, /Tap again to finalise/, "restating the warning does not tell them what to do next");
-  assert.match(h, /toast\(/, "the button is under the thumb at the moment it changes");
+test("the send offer only appears when there is a writable record", () => {
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /PT\(\)\.writability/);
+  assert.match(h, /if \(!writable\) \{ toast\("Finalised"\); return; \}/,
+    "a manual or Connect patient is signed and nothing more");
 });
+
+test("a failed send after finalising still says the note is signed and safe", () => {
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /SIGNED and saved on this phone, but it was NOT written/);
+  assert.match(h, /window\.openGHIS/, "an expired sign-in opens Ward Sync here too");
+});
+
+
 
 test("todayISO is defined exactly once", () => {
   /* A second declaration in the same IIFE silently overwrites the first for EVERY caller,
@@ -362,23 +378,147 @@ test("todayISO is defined exactly once", () => {
   assert.equal((src.match(/function todayISO\(\)/g) || []).length, 1);
 });
 
-test("the SEND confirmation is two taps, with a window long enough to read it", () => {
-  /* Sending PHI off-device stays a deliberate second tap. But it had the same 6s silent fuse as
-   * finalise: read the disclosure, tap, and you have only re-armed it. Same fix, same reasoning -
-   * the confirmation is the safety feature, the countdown never was. */
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notedest")'), src.indexOf('if (act === "notedest")') + 2600);
-  assert.match(h, /data-armed/, "sending patient-identifying text is never one tap");
-  assert.match(h, /Contains patient identifiers/, "and the disclosure must still be stated");
-  const ms = /\}, (\d+)\);/.exec(h);
-  assert.ok(ms && Number(ms[1]) >= 12000, `send arming window is ${ms && ms[1]}ms; too short to read and decide`);
-  assert.match(h, /Tap again to write to the hospital record/, "say what the second tap does");
+
+
+/* ── one confirmation, not four taps across two gates ─────────────────────── */
+
+const SCR = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+const FS = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+
+test("a complete note with a writable patient offers Finalise AND send as ONE action", () => {
+  /* It used to say "Finalise the note before sending it anywhere", and finalising was its own armed
+   * double-tap - four deliberate taps across two gates to file one note. The owner lost an hour to
+   * it on 2026-08-26: finalised, confirmed, and reasonably believed it had sent. */
+  const card = SCR.slice(SCR.indexOf("function destinationCard"), SCR.indexOf("function destError"));
+  assert.match(card, /act = "notefinalsend"/);
+  assert.match(card, /Finalise and write to the hospital record/);
+  assert.match(card, /readyToFinalize\(n\)/, "only offered when the note could actually be finalised");
 });
 
-test("the device copy is written BEFORE any export, always", () => {
-  // If the upload fails the note must already be safe; local is never a fallback.
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notedest")'), src.indexOf('if (act === "notedest")') + 2600);
-  assert.ok(h.indexOf("saveNote(true)") < h.indexOf("data-armed"),
-    "the local save happens first, whatever the destination");
+
+test("it refuses if the note is not actually complete", () => {
+  assert.match(FS, /if \(!fsComp\.canFinalize\)/);
+  assert.ok(FS.indexOf("canFinalize") < FS.indexOf("fsNote.finalized = true"),
+    "completeness is checked BEFORE anything is signed");
+});
+
+test("the note is signed and SAVED before the send is attempted", () => {
+  /* Order matters: if the upload failed first, an unsigned note could be reported as filed. */
+  assert.ok(FS.indexOf("fsNote.finalized = true") < FS.indexOf("D.send("),
+    "sign first");
+  assert.ok(FS.indexOf("saveNote(true)") < FS.indexOf("D.send("),
+    "and persist the signature locally before anything leaves the device");
+  assert.match(FS, /Could not save on this device - nothing was sent/,
+    "a failed local save must abort the send, not proceed");
+});
+
+
+test("a successful send is recorded in the audit trail", () => {
+  assert.match(FS, /audit\.push\(\{ a: "sent", to: fsDest \}\)/);
+});
+
+test("the plain send path still exists for an already-finalised note", () => {
+  // Reopening a finalised note and sending it later must keep working.
+  assert.match(SCR, /if \(act === "notedest"\)/);
+});
+
+/* ── armed confirmations survive a repaint ────────────────────────────────── */
+
+test("arming is held in STATE, not on the DOM node", () => {
+  /* Measured on a Pixel 9, 2026-08-26: tap, tap, and "Tap once more to sign and send" toasted
+   * TWICE with the note still unsigned. The armed flag was a `data-armed` attribute, and any
+   * repaint - the assessment probe resolving, a status refresh, a save completing - replaced the
+   * button and took the attribute with it. The second tap then re-armed instead of acting, which
+   * is an unwinnable loop and the likeliest original cause of a note finalised but never sent. */
+  assert.match(SCR, /function armKey\(act, id\)/);
+  assert.match(SCR, /function isArmed\(act, id\)/);
+  assert.match(SCR, /state\.armed = \{ key: armKey\(act, id\), until:/);
+  assert.ok(!/setAttribute\("data-armed"/.test(SCR),
+    "no confirmation may go back to storing its armed flag on the element");
+});
+
+
+test("an arm expires, and a stale one cannot be completed later", () => {
+  assert.match(SCR, /var ARM_MS = (\d+);/);
+  const ms = Number(/var ARM_MS = (\d+);/.exec(SCR)[1]);
+  assert.ok(ms >= 12000, `arming window ${ms}ms is too short to read the disclosure`);
+  assert.match(SCR, /a\.until > Date\.now\(\)/, "isArmed must check the clock, not just the key");
+});
+
+test("the armed appearance is rendered FROM state", () => {
+  // Otherwise a repaint mid-confirmation shows an un-armed row while state still says armed.
+  const card = SCR.slice(SCR.indexOf("function destinationCard"), SCR.indexOf("function destError"));
+  assert.match(card, /var isArm = isArmed\(act, d\.id\)/);
+  assert.match(card, /Tap again to sign and write to the record/);
+  assert.match(SCR, /isArmed\("notefinal", ""\) \? " danger"/, "the Finalise button too");
+});
+
+
+
+test("the note is signed and saved locally BEFORE anything is sent", () => {
+  const finalsend = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.ok(finalsend.indexOf("fsNote.finalized = true") < finalsend.indexOf("D.send("));
+  assert.ok(finalsend.indexOf("saveNote(true)") < finalsend.indexOf("D.send("));
+  assert.match(finalsend, /Could not save on this device - nothing was sent/);
+});
+
+/* ── confirmation is a DIALOG, because two taps kept failing on a real phone ── */
+
+test("sending to a chart is confirmed by a dialog, not a second tap", () => {
+  /* The armed two-tap gate failed for the owner repeatedly on a Pixel 9: the first tap armed
+   * VISIBLY, the second did nothing they could see. Whether the 15s window expired while they read
+   * the disclosure or a repaint intervened, the mechanism is the problem - invisible state with a
+   * clock on it, and no feedback when it goes wrong. A confirm() has no timer, survives any
+   * repaint, cannot be half-completed, and is a stronger confirmation than tapping twice. */
+  const fs = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.match(fs, /window\.confirm\(fsMsg\)/);
+  assert.match(fs, /if \(!goFs\) return/, "declining must abort before anything is signed");
+  assert.ok(!/isArmed\(/.test(fs), "the armed gate must be gone from this path");
+});
+
+test("the disclosure survives, and says WHERE the note lands", () => {
+  const fs = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.match(fs, /contains patient identifiers/i);
+  assert.match(fs, /Management plan/, "the owner spent an hour looking in Chief complaints for it");
+  assert.match(fs, /below whatever is already there/, "it appends, and the dialog says so");
+});
+
+test("BOTH outcomes are a dialog - a silent failed write is the worst case here", () => {
+  const fs = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.match(fs, /Written into the hospital record/);
+  assert.match(fs, /window\.alert\(/, "success is a dialog too, not just a toast");
+  assert.match(fs, /SIGNED and saved on this phone, but it was NOT written/,
+    "a failure must say the note is safe AND that the chart did not get it");
+  assert.match(fs, /destError\(fsDest, r\)/, "and name the actual reason");
+});
+
+test("the already-finalised send path got the same treatment", () => {
+  const nd = SCR.slice(SCR.indexOf('if (act === "notedest")'), SCR.indexOf('if (act === "notefinal")'));
+  assert.match(nd, /window\.confirm\(dMsg\)/);
+  assert.match(nd, /window\.alert\("NOT written to the hospital record/);
+  assert.ok(!/isArmed\("notedest"/.test(nd), "no armed gate left here either");
+});
+
+test("the note is still signed and saved locally BEFORE the send", () => {
+  const fs = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.ok(fs.indexOf("fsNote.finalized = true") < fs.indexOf("D.send("));
+  assert.ok(fs.indexOf("saveNote(true)") < fs.indexOf("D.send("));
+});
+
+test("an expired GHIS sign-in is named as such, not as a network fault", () => {
+  /* The server returns login_required when the stored GHIS session has timed out - GHIS expires in
+   * about 30 minutes, so this is the NORMAL state for a note written an hour after Ward Sync was
+   * last opened. It fell through to the generic "Could not reach the hospital record", which sent
+   * the owner hunting a network fault (twice, for an evening) for an expired sign-in. */
+  const fn = SCR.slice(SCR.indexOf("function destError"), SCR.indexOf("function destError") + 2200);
+  assert.match(fn, /e === "login_required"/);
+  assert.match(fn, /sign-in has expired/i);
+  assert.match(fn, /Ward Sync/, "and says where to fix it");
+});
+
+test("the failure dialog takes them to the sign-in they need", () => {
+  const fs = SCR.slice(SCR.indexOf('if (act === "notefinalsend")'), SCR.indexOf('if (act === "notedest")'));
+  assert.match(fs, /sign-in has expired/i);
+  assert.match(fs, /window\.openGHIS/, "an expired session is fixable right now - open Ward Sync");
+  assert.match(fs, /The note is safe - nothing is lost/, "and reassure them the note survived");
 });

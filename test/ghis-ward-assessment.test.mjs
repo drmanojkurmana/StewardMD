@@ -181,3 +181,48 @@ test("the assessment form carries NO patient reference, so it cannot be the chec
   assert.match(doc, /174,948|174948/, "the measurement belongs in the record");
   assert.match(doc, /208/, "field count");
 });
+
+/* ── a retry must not file the note twice ─────────────────────────────────── */
+
+function htmlToTextFn() {
+  const m = SRC.match(/function decodeEntities[\s\S]*?function htmlToText[^\n]*\n/);
+  assert.ok(m, "could not lift htmlToText out of the module");
+  return new Function(m[0] + "; return htmlToText;")();
+}
+
+test("numeric HTML entities are decoded, or the dedupe guard is dead", () => {
+  /* OBSERVED ON A LIVE CHART, 2026-08-26: the same surgical note appeared TWICE in a patient's
+   * management plan (1372 chars, two copies). appendText refuses to append text that is already
+   * present - but GHIS returns every newline in a textarea as &#xA; and a middot as &#xB7;, and
+   * htmlToText decoded only the NAMED entities. So the value read back never string-matched the
+   * text being written, the guard never fired, and every retry appended another copy. */
+  const htmlToText = htmlToTextFn();
+  assert.equal(htmlToText("a&#xA;b"), "a\nb", "&#xA; is a newline");
+  assert.equal(htmlToText("x &#xB7; y"), "x · y", "&#xB7; is a middot");
+  assert.equal(htmlToText("n&#38;m"), "n&m", "decimal entities too");
+  assert.equal(htmlToText("&amp;nbsp shows literally"), "&nbsp shows literally",
+    "&amp; is decoded LAST, so it cannot manufacture a second entity");
+});
+
+test("REGRESSION: a note read back from GHIS matches the note we sent", () => {
+  // This equality IS the dedupe guard. If it fails, retries duplicate clinical text in a chart.
+  const htmlToText = htmlToTextFn();
+  const sent = "PRE-OPERATIVE NOTE\nFinalised by: clinician · 2026-08-26\n\nASSESSMENT\nWorking diagnosis: x";
+  const asStored = sent.replace(/\n/g, "&#xA;").replace(/·/g, "&#xB7;");
+  assert.equal(htmlToText(asStored), sent);
+  assert.ok(htmlToText(asStored).indexOf(sent) !== -1,
+    "appendText's `already present` check must match on the decoded value");
+});
+
+test("appendText still refuses to duplicate an identical block", () => {
+  const appendText = (function () {
+    const m = SRC.match(/export function appendText[\s\S]*?\n\}/);
+    return new Function(m[0].replace("export ", "") + "; return appendText;")();
+  })();
+  const note = "PRE-OPERATIVE NOTE\nbody";
+  assert.equal(appendText(note, note), note, "a second identical append is a no-op");
+  assert.equal(appendText("", note), note);
+  assert.equal(appendText(note, ""), note, "appending nothing never blanks the field");
+  assert.match(appendText("doctor's plan", note), /doctor's plan[\s\S]*PRE-OPERATIVE NOTE/,
+    "an existing plan is kept and the note goes below it");
+});
