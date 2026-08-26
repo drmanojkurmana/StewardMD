@@ -1829,21 +1829,57 @@
         var mm = M();
         var comp = mm.noteCompleteness(state.noteSchema.sections, state.note.values, state.note.provenance);
         if (!comp.canFinalize) { toast("Complete and confirm every required field first"); return; }
-        // Double-press gate: finalising a clinical record is never a single tap.
-        // (Same discipline as discharge-ghis.js armSignOff().)
-        if (!isArmed("notefinal", "")) {
-          arm("notefinal", "");
-          toast("Tap Finalise once more to sign this note");
-          render();
-          return;
-        }
+        /* FINALISING DOES NOT SEND, and that caught the owner out at 00:50 on 2026-08-27: they
+         * tapped the big green Finalise button, saw "Finalised", and reasonably believed the note
+         * had gone to GHIS. It had not - the chart still showed the previous write. Worse, signing
+         * REMOVES the "Finalise and write to the hospital record" row (that row only exists on a
+         * draft) and replaces it with a plain destination that needs a separate action. So the most
+         * obvious button on the screen quietly took the send AWAY.
+         *
+         * Signing is still its own act - a surgeon may well sign now and file later. But the moment
+         * it is signed, if there is a writable hospital record waiting, ASK. */
+        var writable = false;
+        try { var wf = PT().writability(state.note.patient || null); writable = !!(wf && wf.canWrite); } catch (e) {}
+        var goSign = true;
+        try {
+          goSign = window.confirm(writable
+            ? "Sign this note as final?\n\nYou will be asked next whether to write it into the patient's hospital record."
+            : "Sign this note as final?\n\nIt can still be reopened afterwards.");
+        } catch (e) {}
+        if (!goSign) return;
         disarm();
         state.note.finalized = true;
         state.note.finalizedAt = todayISO();
         state.note.finalizedBy = "clinician";
         state.note.audit.push({ a: "finalize" });
         haptic("medium");
-        saveNote(true).then(function () { toast("Finalised"); render(); });
+        saveNote(true).then(function () {
+          render();
+          if (!writable) { toast("Finalised"); return; }
+          var sendNow = false;
+          try {
+            sendNow = window.confirm("Note signed.\n\nWrite it into the patient's hospital record now?\n\nIt goes into the Management plan of their Initial Assessment. Contains patient identifiers.");
+          } catch (e) {}
+          if (!sendNow) { toast("Signed. Not sent - use Hospital EMR when you are ready."); return; }
+          var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
+          var sc = state.noteSchema, nn = state.note;
+          var text = mm.renderNoteText(sc.sections, nn.values, nn.provenance, {
+            title: sc.title, finalized: nn.finalized, finalizedBy: nn.finalizedBy, finalizedAt: nn.finalizedAt
+          });
+          toast("Writing to the hospital record...");
+          D.send("emr", nn, text, { confirmed: true }).then(function (r) {
+            if (r && r.ok) {
+              nn.audit.push({ a: "sent", to: "emr" });
+              saveNote(true);
+              try { window.alert("Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              var whyN = destError("emr", r);
+              try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyN + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
+              if (/sign-in has expired/i.test(whyN)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
+            render();
+          });
+        });
         return;
       }
       if (act === "noteunfinal") {
