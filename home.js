@@ -2589,6 +2589,8 @@
       '<div class="hv-pf-card" id="pfPro">' +
         row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
         row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
@@ -2701,13 +2703,38 @@
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
     function offline(msg) {
-      ["regno", "hospital", "city", "phone"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
-      var note = document.createElement("div");
+      ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
+      // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
+      // second "Couldn't load your details" row underneath the first — visible in the wild.
+      var note = card.querySelector("[data-offnote]");
+      if (note) return;
+      note = document.createElement("div");
       note.className = "hv-pf-row";
+      note.setAttribute("data-offnote", "1");
       note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
       if (rb) rb.addEventListener("click", function () { openAccount(); });
+    }
+    /* Firestore is loaded LAZILY (window.SMD_loadFirebase, index.html) — window.SMD_DB simply does
+     * not exist yet on a cold start. Declaring "Offline" on that first look was wrong: the user is
+     * online, signed in, and every row reads Offline with no way back except a manual Retry. That is
+     * the reported bug. Boot Firebase and come back instead; only a real failure shows the notice. */
+    if (uid && !fdb && typeof window.SMD_loadFirebase === "function") {
+      ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
+      if (!acctFillProfessional._booting) {
+        acctFillProfessional._booting = true;
+        try {
+          window.SMD_loadFirebase(function () {
+            acctFillProfessional._booting = false;
+            // Re-fill the sheet that is on screen NOW: a re-render between the request and the
+            // callback leaves the captured card detached, and filling that shows the user nothing.
+            try { var live = sheetEl(); if (live && live.querySelector("#pfPro")) acctFillProfessional(live); } catch (e) {}
+          });
+        } catch (e) { acctFillProfessional._booting = false; }
+      }
+      return;   // a boot is in flight either way — never declare Offline while still waiting
     }
     if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
 
@@ -2718,6 +2745,8 @@
       var pendingCert = !!d.regNoPendingCert;
       setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
       setRow("hospital", d.hospital, { editLabel: d.hospital ? "Change" : "Choose" });
+      setRow("degree", d.degree, { editLabel: d.degree ? "Change" : "Choose" });
+      setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
 
@@ -2748,6 +2777,23 @@
             var f = btn.getAttribute("data-edit");
             if (f === "hospital") {
               openHospitalPicker(function (h) { save({ hospital: h }).then(function () { d.hospital = h; setRow("hospital", h, { editLabel: "Change" }); wire(); if (window.toast) toast("Hospital updated"); }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); }); });
+              return;
+            }
+            // Degree and speciality are CHOICES, not free text: the option lists live in
+            // profile-setup.js so the first-run form and this card can never drift apart.
+            if (f === "degree" || f === "speciality") {
+              var PS = window.SMD_PROFILE_SETUP;
+              var opts = PS ? (f === "degree" ? PS.DEGREES : PS.SPECIALITIES) : null;
+              if (!opts) { if (window.toast) toast("Still loading — try again in a moment"); return; }
+              openChoicePicker(f === "degree" ? "Choose your degree" : "Choose your speciality", opts, function (val) {
+                var obj = {}; obj[f] = val;
+                save(obj).then(function () {
+                  if (window.toast) toast((f === "degree" ? "Degree" : "Speciality") + " updated");
+                  // The picker replaced this sheet's contents, so re-open Profile to show the result
+                  // rather than writing into a card that is no longer on screen.
+                  openAccount();
+                }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); openAccount(); });
+              });
               return;
             }
             if (f === "regno") {
@@ -2840,6 +2886,32 @@
     load();
   }
   try { window.SMD_openHospitalAdmin = function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }; } catch (e) {}
+  /* Searchable single-choice picker for a plain list of strings (degree, speciality). Same shape and
+   * behaviour as openHospitalPicker below, minus the request-to-add flow, which only the institution
+   * directory has. The option lists themselves live in profile-setup.js so the first-run form and the
+   * Profile card always offer exactly the same choices. */
+  function openChoicePicker(title, opts, onPick) {
+    function render(q) {
+      q = String(q || "").toLowerCase().trim();
+      var hits = opts.filter(function (o) { return !q || String(o).toLowerCase().indexOf(q) >= 0; });
+      if (!hits.length) return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match.</div>';
+      return hits.map(function (o) {
+        return '<button class="hosp-opt" data-c="' + smdEsc(o) + '" style="display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:12px 4px;cursor:pointer;min-height:46px">' +
+          '<span style="display:block;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)">' + smdEsc(o) + "</span></button>";
+      }).join("");
+    }
+    openSheet('<div class="hv-sh-t">' + smdEsc(title) + "</div>" +
+      '<input id="choiceSearch" type="search" placeholder="Search" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
+      '<div id="choiceList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + "</div>");
+    var sh = sheetEl();
+    var inp = sh.querySelector("#choiceSearch"), lst = sh.querySelector("#choiceList");
+    if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
+    if (lst) lst.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-c]"); if (!b) return;
+      var val = b.getAttribute("data-c"); if (!val) return;
+      closeSheet(); setTimeout(function () { try { onPick(val); } catch (er) {} }, 60);
+    });
+  }
   // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
   function openHospitalPicker(onPick) {
     function opt(h) {
