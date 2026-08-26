@@ -997,11 +997,6 @@
       rows);
   }
 
-  function todayISO() {
-    try { var d = new Date(); return d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2); }
-    catch (e) { return ""; }
-  }
-
   /* A linked patient already IS the patient reference. Re-typing the UHID you just selected from
    * the ward list is pure friction, and because patientRef is required on every note type it was
    * blocking Finalise - which blocks the EMR write, which is the whole point of linking them.
@@ -1238,8 +1233,14 @@
     if (comp.missing.length) stat = "<b>" + comp.missing.length + " required field" + (comp.missing.length === 1 ? "" : "s") + " missing</b>";
     else if (comp.unconfirmed.length) stat = "<b>" + comp.unconfirmed.length + " field" + (comp.unconfirmed.length === 1 ? "" : "s") + " to confirm</b>";
     else { stat = "<b>Ready to finalise</b>"; cls = " ok"; }
-    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '">' + stat +
-      " · " + comp.filled + " of " + comp.total + " filled</div>" +
+    /* The count alone is a dead end on a twenty-field form: "6 required fields missing" does not say
+     * which, and they are above the preview while the sticky bar sits at the bottom, so the surgeon
+     * is told they are blocked and left to hunt (owner, 2026-08-26). Make the number the way there:
+     * tap it and it scrolls to the first blocking field and focuses it. */
+    var jumpTo = (comp.missing[0] || comp.unconfirmed[0] || {}).k || "";
+    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '"' +
+      (jumpTo ? ' data-sgx="notejump" data-k="' + attr(jumpTo) + '" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline"' : "") +
+      ">" + stat + " · " + comp.filled + " of " + comp.total + " filled</div>" +
       '<button class="sgx-btn" data-sgx="notesave">' + ic("save") + " Save</button>" +
       (n.finalized
         ? '<button class="sgx-btn" data-sgx="noteunfinal">Reopen</button>'
@@ -1448,6 +1449,16 @@
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
+      if (act === "notejump") {
+        var fk = t.getAttribute("data-k");
+        var el = fk && document.getElementById("sgxF-" + fk);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { try { el.scrollIntoView(); } catch (er) {} }
+        // Focus AFTER the scroll settles, or the keyboard opening fights the animation.
+        setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (er) {} } }, 320);
+        haptic("tap");
+        return;
+      }
       if (act === "bkToggle") {
         var sy0 = SY(); if (!sy0) return;
         var turningOn = !sy0.autoSyncOn();
@@ -1616,12 +1627,16 @@
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
           if (t.getAttribute("data-armed") !== "1") {
+            /* Same two-tap discipline as finalise, and the same trap it had: a SIX second fuse that
+             * expired in silence, so reading the disclosure and then tapping just re-armed it. The
+             * confirmation is the point - the fuse is not - so give it the same 15s. */
             t.setAttribute("data-armed", "1");
             t.classList.add("danger");
-            var label = dest === "drive" ? "Confirm: send to Drive" : "Confirm: write to the hospital record";
+            var label = dest === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record";
             t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
-              '<span class="sb">Contains patient identifiers. Tap again to send.</span></span>';
-            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 6000);
+              '<span class="sb">Contains patient identifiers.</span></span>';
+            toast(dest === "drive" ? "Tap once more to send to Drive" : "Tap once more to write to the hospital record");
+            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 15000);
             return;
           }
           var mm = M(), sc = state.noteSchema;
@@ -1645,13 +1660,24 @@
         // Double-press gate: finalising a clinical record is never a single tap.
         // (Same discipline as discharge-ghis.js armSignOff().)
         if (t.getAttribute("data-armed") !== "1") {
+          /* Finalising a clinical record is deliberately two taps. But the window was FIVE seconds
+           * and expired in silence: a surgeon who taps once, reads "Confirm: this is final", thinks
+           * about it, and taps again at six seconds simply re-arms it - and can loop forever
+           * without the note ever finalising, which is exactly what "filled all 6, still can't send
+           * to GHIS" looked like (owner, 2026-08-26).
+           *
+           * Longer window, and say what the second tap is FOR rather than restating the warning. A
+           * toast too, because the button sits in a sticky bar the thumb is covering at the moment
+           * it changes. */
           t.setAttribute("data-armed", "1");
           t.classList.add("danger");
-          t.innerHTML = ic("warning") + " Confirm: this is final";
+          t.innerHTML = ic("warning") + " Tap again to finalise";
+          toast("Tap Finalise once more to sign this note");
           setTimeout(function () {
             if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.classList.remove("danger"); t.textContent = "Finalise";
-          }, 5000);
+            t.removeAttribute("data-armed"); t.classList.remove("danger");
+            t.innerHTML = "Finalise";   // innerHTML, not textContent: keep it consistent with the armed state
+          }, 15000);
           return;
         }
         state.note.finalized = true;
