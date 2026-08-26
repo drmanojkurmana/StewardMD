@@ -60,8 +60,20 @@ This contradicts a comment in `functions/api/ghis/[[path]].js` which asserted th
 full model with patient_id + episode_id set is exactly how GHIS's own form creates the first
 assessment for a visit". It is not. The capture shows both posted empty.
 
-Consequences to weigh before changing the write payload (NOT changed on this evidence alone — it
-writes into live patient charts):
+### RESOLVED 2026-08-26: our payload now matches the capture
+
+Owner's call after the activation capture (section 3) confirmed the rest of the chain. We now send
+`assessment.patient_id` and `assessment.episode_id` exactly as the form gave them — empty for a new
+assessment — instead of filling them in. An UPDATE is unaffected: the form supplies the real ids and
+they pass through untouched.
+
+Because the ids no longer act as a backstop, `canCreate` now additionally requires a CONFIRMED
+activation (a `Searchnew` that actually returned 2xx), not merely an episode we could name. That
+requirement is load-bearing: with empty ids, the session's active visit is the only thing deciding
+which chart a create lands in, so an activation that quietly did not take would mean writing into
+whichever visit happened to be active from a previous request.
+
+Original notes, kept for the reasoning:
 
 - Our code fills `assessment.patient_id` / `assessment.episode_id` when the form omits them, which
   is precisely the case here. So every create we send deviates from the verified payload.

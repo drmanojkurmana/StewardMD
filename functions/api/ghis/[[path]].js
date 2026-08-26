@@ -775,16 +775,27 @@ export async function saveAssessment(env, token, body) {
    * form returned, and which id produced a real doc_id. This is instrumentation I should have added
    * before the first fix, not after the fourth. */
   let epiUsed = '';                                     // the visit we actually activated against
+  /* Did that activation actually SUCCEED for the visit we ended up using?
+   *
+   * This used to be irrelevant, because the POST carried assessment.patient_id and
+   * assessment.episode_id and those ids targeted the write. They no longer do (see the payload note
+   * below — the live capture shows GHIS's own UI posting both EMPTY), so the session's active visit
+   * is now the ONLY thing deciding which chart a create lands in. An activation that quietly did
+   * not take would mean writing into whichever visit happened to be active from a previous
+   * request — a cross-patient write. So it is recorded, and required before a create. */
+  let epiActivated = false;
   const activateAndLoad = async (epi, how) => {
     if (mr && epi) {
       epiUsed = epi;
+      epiActivated = false;
       try {
         const a = await ghisReq(env, token, 'POST', '/Doctor/Home/Searchnew', '__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo=' + encodeURIComponent(mr + '-' + epi), { 'X-Requested-With': 'XMLHttpRequest', 'Referer': GHIS + '/Doctor/home', 'Cookie': cookie });
         const sc = (a && a.setCookie) || [];
         if (sc.length) cookie = mergeCookies(cookie, sc);
+        epiActivated = !!(a && a.status >= 200 && a.status < 300);
         attempts.push(how + ':act' + ((a && a.status) || '?') + ':ck' + sc.length);
       } catch (e) { attempts.push(how + ':act-threw'); }
-    } else attempts.push(how + ':no-epi');
+    } else { epiActivated = false; attempts.push(how + ':no-epi'); }
     let last = null;
     const ids = epi && epi !== mr ? [['mr', mr], ['visit', epi]] : [['mr', mr]];
     for (let i = 0; i < ids.length; i++) {
@@ -896,7 +907,11 @@ export async function saveAssessment(env, token, body) {
    * patient_id "" and doc_id 0, and Searchnew returns 200 setting no cookies — i.e. GHIS is handing us
    * a blank NEW assessment form, not a failed activation. */
   const attachTo = String(body.episodeId || '') || epiUsed;
-  const canCreate = !!(mr && attachTo);
+  /* A create needs a CONFIRMED activation now, not merely an episode we could name. The posted ids
+   * no longer target the record (they are sent exactly as the form gave them, which for a new
+   * assessment is empty — matching GHIS's own UI), so "we know the episode" is no longer evidence
+   * that the write will land on it. Only a successful Searchnew is. */
+  const canCreate = !!(mr && attachTo && epiActivated);
   if ((formDoc == null || String(formDoc) === '' || String(formDoc) === '0') && !clientDoc && !canCreate) {
     // Carry WHAT WAS TRIED. "not activated" alone cost two round-trips of guessing; this says whether
     // the caller's episode was absent or simply rejected, and whether GHIS's own OPD list had a row.
@@ -924,11 +939,26 @@ export async function saveAssessment(env, token, body) {
   // fields. Use client-supplied ids ONLY as a fallback when the form omitted them: overriding the
   // form's real episode/doc id with a stale client value makes GHIS reject the post ("Unable to process").
   if (!all['assessment.Initial_Assessment_doc_id'] && body.docId != null && String(body.docId) !== '') all['assessment.Initial_Assessment_doc_id'] = String(body.docId);
-  // A NEW assessment (doc_id 0) MUST carry the patient and visit, or GHIS files it under nothing —
-  // that is the orphan the guard above exists to prevent. `epiUsed` covers the case where the episode
-  // came from the OPD-list lookup rather than the caller.
-  if (!all['assessment.patient_id'] && body.patientId) all['assessment.patient_id'] = String(body.patientId);
-  if (!all['assessment.episode_id'] && attachTo) all['assessment.episode_id'] = String(attachTo);
+  /* PAYLOAD: send the ids exactly as the form gave them — which for a new assessment means EMPTY.
+   *
+   * This file used to fill assessment.patient_id and assessment.episode_id in whenever the form
+   * omitted them, on the stated belief that "posting the full model with patient_id + episode_id
+   * set is exactly how GHIS's own form creates the first assessment for a visit". A live capture
+   * on 2026-08-26 (docs/ghis/captured-initial-assessment-write.md) shows that is not true: the real
+   * UI posts
+   *     assessment.Initial_Assessment_doc_id=0
+   *     assessment.episode_id=
+   *     assessment.patient_id=
+   * and GHIS answers 200. It resolves the target from the ACTIVE VISIT in its server-side session —
+   * the thing clicking a patient sets, and the thing Searchnew is our stand-in for.
+   *
+   * So every create we sent deviated from the one payload known to work. Matching it exactly
+   * removes that whole class of doubt; what it costs is that the ids are no longer a backstop, so
+   * the confirmed-activation requirement on canCreate above is now load-bearing rather than
+   * belt-and-braces. An UPDATE is unaffected: the form supplies the real ids and we pass them
+   * through untouched, exactly as before. */
+  if (!all['assessment.patient_id']) all['assessment.patient_id'] = '';
+  if (!all['assessment.episode_id']) all['assessment.episode_id'] = '';
   if (!all['__RequestVerificationToken'] && s.csrf) all['__RequestVerificationToken'] = s.csrf;   // form token preferred; session as fallback
   const p = new URLSearchParams();
   Object.keys(all).forEach(function (name) { if (all[name] !== undefined) p.set(name, all[name]); });
