@@ -3478,27 +3478,6 @@
     "...lllllll...",
     "...d.....d...",
     "..d.......d.."]];
-  var MAIK_STRIDER = [[
-    "..........tt..",
-    ".........t....",
-    "........t.....",
-    "...ttttt......",
-    "..llllll......",
-    ".dkddddkd.....",
-    ".dddddddd.....",
-    ".llllllll.....",
-    "..d...d.......",
-    "..d...d......."], [
-    "..........t...",
-    ".........tt...",
-    "........t.....",
-    "...ttttt......",
-    "..llllll......",
-    ".dkddddkd.....",
-    ".dddddddd.....",
-    ".llllllll.....",
-    ".d.....d......",
-    "d.......d....."]];
   // rows -> <g> of 1x1 rects. Pure string building so it drops into innerHTML anywhere.
   function maikPixG(rows, cls) {
     var out = '<g class="' + cls + '">', y, x, c;
@@ -3508,6 +3487,41 @@
       out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + MAIK_PIX[c] + '"/>';
     }
     return out + "</g>";
+  }
+  /* ONE clock for the resident, at module scope and reading the DOM each tick. It stops itself the
+   * moment his node is gone, so nothing has to remember to tear it down. Two independent schedules
+   * (foot-shuffle and blink) are why this is JS rather than CSS keyframes fighting over opacity. */
+  var _mkClock = null, _mkClockT = 0;
+  function maikBuddyFrames() { try { return document.querySelectorAll("#maikSheet .mkw .mkw-svg > g"); } catch (e) { return []; } }
+  function maikBuddyStop() { if (_mkClock) { clearInterval(_mkClock); _mkClock = null; } }
+  function maikBuddyStart() {
+    maikBuddyStop(); _mkClockT = 0;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { maikBuddyPose(0); return; }
+    _mkClock = setInterval(maikBuddyTick, 120);
+    maikBuddyTick();
+  }
+  function maikBuddyPose(i) {
+    var g = maikBuddyFrames();
+    for (var n = 0; n < g.length; n++) g[n].style.display = (n === i ? "block" : "none");
+    return g.length;
+  }
+  function maikBuddyTick() {
+    var busy = false;
+    try { var b = document.querySelector("#maikSheet .mkw"); busy = !!(b && b.classList.contains("busy")); } catch (e) {}
+    var rate = busy ? 0.55 : 1;                              // thinking: the same idle, quicker
+    _mkClockT += 120;
+    var stepC = _mkClockT % Math.round(MK_IDLE.step * rate);
+    var blinkC = _mkClockT % Math.round(MK_IDLE.blink * rate);
+    // two quick foot-shuffles, a blink later in the cycle, otherwise the resting pose
+    var frame = (stepC < 140 || (stepC >= 280 && stepC < 420)) ? 1 : (blinkC < 130 ? 2 : 0);
+    if (!maikBuddyPose(frame)) maikBuddyStop();              // he left; so does his clock
+  }
+  // Idle cadence, in ms. At module scope on purpose: openAskAi mounts the resident before its own
+  // `var` lines further down have run, so a var inside that closure is still undefined at first tick.
+  var MK_IDLE = { step: 5200, blink: 4400 };
+  // Blink is frame 1 with the eye pixels painted body-colour — one derived frame, no new art.
+  function maikBlinkFrame(rows) {
+    return rows.map(function (r) { return r.replace(/k/g, "d"); });
   }
   function maikPixSVG(frames, scale) {
     var w = frames[0][0].length, h = frames[0].length, i, g = "";
@@ -3932,19 +3946,18 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @keyframes mkbTick{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
 /* Stetho walkers — dark-teal pixel characters crossing the composer's top edge. */
 .maik-cmp{position:relative}
-.mkw{position:absolute;left:10px;right:10px;top:-30px;height:32px;overflow:hidden;pointer-events:none;z-index:1}
+.mkw{position:absolute;left:16px;top:-34px;height:34px;pointer-events:none;z-index:1}
 /* A dark-teal body is deliberately quiet; the glow is what keeps it legible on the
    night-shift theme without brightening the fill the owner picked. */
-.mkw-a{position:absolute;bottom:0;left:0;animation:mkwWalk 8s linear infinite;filter:drop-shadow(0 0 4px rgba(45,212,191,.38))}
-@keyframes mkwWalk{from{transform:translateX(-32px)}to{transform:translateX(calc(100vw + 32px))}}
+.mkw-a{display:block;animation:mkwBreathe 3.2s cubic-bezier(.45,0,.55,1) infinite;filter:drop-shadow(0 0 4px rgba(45,212,191,.38))}
+/* He stays put. The bob is the whole of his motion, so it is small enough to sit beside text. */
+@keyframes mkwBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.mkw.busy .mkw-a{animation-duration:1.5s;filter:drop-shadow(0 0 6px rgba(45,212,191,.55))}
 .mkw-svg{display:block}
-.mkw-f2{opacity:0}
-.mkw-f1{animation:mkwFrame .34s steps(1,end) infinite}
-.mkw-f2{animation:mkwFrame .34s steps(1,end) infinite;animation-delay:-.17s}
-@keyframes mkwFrame{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+.mkw-svg > g{display:none}
+.mkw-svg > g:first-child{display:block}
 @media (prefers-reduced-motion:reduce){
-  .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a,.mkw-f1,.mkw-f2{animation:none}
-  .mkw-a{transform:translateX(40px)} .mkw-f2{opacity:0}
+  .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a{animation:none}
 }
 .maik-buffer-txt{color:var(--mk-mut);font-weight:600}
 .maik-sk{display:flex;flex-direction:column;gap:8px}
@@ -4082,6 +4095,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
+    maikBuddyMount();          // the resident: present from the moment MaiK opens
     requestAnimationFrame(function () {
       scrim.classList.add("on"); sheet.classList.add("on");
       // Motion One spring: stagger the sheet content in on open (mk2 + Motion present, reduced-motion respected)
@@ -4136,24 +4150,37 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * contradicted a stop button by disabling the only control that could cancel. Centralised so the
      * two states cannot drift apart.
      */
-    var _mkWalkN = 0;
-    // One walker at a time, alternating the two characters per turn so the wait is not identical
-    // every time. Mounted in .maik-cmp (position:relative) so it rides the composer's top edge.
-    function maikWalker(on) {
+    /* Stetho Buddy lives on the composer's top edge for as long as MaiK is open — not only while
+     * an answer generates. He does NOT travel: he idles in place, shuffles his feet every few
+     * seconds and blinks, which reads as alive without dragging the eye across the screen while
+     * the clinician is reading. Frame choice is a tiny JS state machine because the three frames
+     * are on two independent schedules, which pure CSS keyframes cannot express without fighting
+     * each other over opacity. */
+    // Stetho Buddy is mounted here but CLOCKED at module scope (maikBuddyStart): a per-sheet timer
+    // died whenever a second MaiK sheet was created, leaving him frozen mid-step.
+    function maikBuddyMount() {
       try {
         var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
         var old = cmp.querySelector(".mkw"); if (old) old.remove();
-        if (!on) return;
-        var strider = !!(_mkWalkN++ % 2);
-        var which = strider ? MAIK_STRIDER : MAIK_BUDDY;
         var box = document.createElement("div"); box.className = "mkw";
-        box.innerHTML = '<span class="mkw-a">' + maikPixSVG(which, strider ? 3 : 2) + "</span>";
+        // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
+        box.innerHTML = '<span class="mkw-a">' + maikPixSVG([MAIK_BUDDY[0], MAIK_BUDDY[1], maikBlinkFrame(MAIK_BUDDY[0])], 2.3) + "</span>";
         cmp.appendChild(box);
+        maikBuddyStart();
       } catch (e) {}
+    }
+    function maikBuddyUnmount() {
+      try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
+      maikBuddyStop();
+    }
+    // Sending a question does not summon him — he is already there. It just perks him up, while
+    // Medibot appears in the pending bubble (maikBufferHTML).
+    function maikBuddyBusy(on) {
+      try { var b = sheet && sheet.querySelector(".mkw"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
       _maikBusy = busy;
-      maikWalker(!!busy);
+      maikBuddyBusy(!!busy);
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -4193,6 +4220,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
       // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
       _maikBusy = false;
+      maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
     function scroll() { body.scrollTop = body.scrollHeight; }
@@ -5274,7 +5302,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, walker: maikWalker, botSVG: maikBotSVG }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
