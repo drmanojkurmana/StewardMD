@@ -5,6 +5,42 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · ACCEPTED EXPOSURE: real patient identifiers are permanent in main's history
+
+**Owner decision: leave it, and record it here so it is not rediscovered as a surprise.**
+
+**What happened.** GHIS work captured against the live server used a real admitted patient. Real MR
+and IP numbers reached four files and were committed. `c47cdb47` ("GHIS: confirm activation by
+identity, not HTTP status; redact patient ids") replaced them with synthetic ids in the WORKING
+TREE — it stripped 32 identifier-shaped values (7-, 8- and 9-digit) across:
+
+- `docs/ghis/captured-initial-assessment-write.md`
+- `functions/api/ghis/[[path]].js`
+- `test/ghis-save-docid.test.mjs`
+- `test/ghis-ward-assessment.test.mjs`
+
+**A redaction commit does not remove anything.** The pre-redaction blobs remain reachable at
+`c47cdb47^` and its ancestors, and those commits are now in `main`. `git show <parent>:<file>`
+returns the real values to anyone who can clone. This is permanent short of a history rewrite.
+
+**Why it is being accepted rather than purged.** The repository is **private with 0 forks**, so the
+audience is exactly the people who already have repo access. Purging means `git filter-repo`/BFG
+plus a force-push to `main`, which invalidates every existing clone and all eight active worktrees —
+a real cost against an exposure that is already bounded. That trade is the owner's to make and they
+made it.
+
+**What this does NOT make acceptable.** `CLAUDE.md` says: never commit PHI. That rule is unchanged
+and this entry is not a precedent. The failure was not the redaction, which was correct and prompt —
+it was capturing against a **real patient** when a synthetic one would have proved the same thing.
+Capture against synthetic identifiers, or redact BEFORE the first commit, because after it there is
+no undo that does not hurt.
+
+**If the repo is ever made public, this must be revisited first.** Publishing without a history
+rewrite would publish these identifiers. Treat that as a hard gate on any decision to open the repo.
+
+**Found by:** the parallel session that did the GHIS work, which flagged it rather than quietly
+leaving it; verified independently here against `origin/main` before being recorded.
+
 ## 2026-08-26 · SURGX notes survive a reinstall, without a background sync
 
 **Decision:** an explicit, confirmed **backup + restore** to the surgeon's own Google Drive
