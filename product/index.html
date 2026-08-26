@@ -1,0 +1,1079 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>StewardMD · the decision, with its reasons</title>
+<meta name="description" content="Clinician-only decision support. Set the patient once and every panel derives from it: clearance, renal band, which source governs. StewardMD does not diagnose or prescribe on its own.">
+<meta name="theme-color" content="#0d1b26">
+<link rel="icon" href="assets/mark.webp" type="image/webp">
+<meta property="og:title" content="StewardMD · the decision, with its reasons">
+<meta property="og:description" content="Clinician-only decision support for the bedside. Set the patient once, and every panel derives from it.">
+<meta property="og:type" content="website">
+<link rel="stylesheet" href="scrollcraft.css">
+<style>
+  @font-face{
+    font-family:'Inter Variable'; font-style:normal; font-weight:100 900;
+    font-display:swap; src:url(assets/inter-variable.woff2) format('woff2');
+  }
+
+  /* The app's own dark tokens. A page that shows the product should be the
+     product's colour, not a marketing palette invented beside it. */
+  :root{
+    --sc-canvas:     #0d1b26;
+    --sc-surface:    #132030;
+    --sc-ink:        #e8edf2;
+    --sc-ink-soft:   #7690a6;
+    --sc-accent:     #3fc7b3;
+    --sc-accent-ink: #06141b;
+    --sc-font-display:'Inter Variable', system-ui, sans-serif;
+    --sc-font-text:   'Inter Variable', system-ui, sans-serif;
+    --sc-font-mono:   'IBM Plex Mono','SF Mono', ui-monospace, monospace;
+
+    /* clinical severity ramp, straight from the app. meaning, not decoration */
+    --ok:#4dd68c; --warn:#f0c060; --high:#f07040; --crit:#e85070;
+
+    --edge:#22394b;
+    --edge-soft:#1b2e3d;
+    --chrome-h:64px;
+  }
+
+  body{ font-feature-settings:"tnum" 0; }
+
+  /* not provided by the engine stylesheet */
+  .sr-only{
+    position:absolute; width:1px; height:1px; padding:0; margin:-1px;
+    overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0;
+  }
+
+  /* light text on dark: one step more weight, a touch more leading */
+  .sc-body{ font-weight:420; }
+
+  /* ─────────── app chrome: the patient strip. this is the nav ─────────── */
+  .chrome{
+    position:fixed; inset:0 0 auto 0; z-index:60;
+    background:color-mix(in srgb, var(--sc-canvas) 88%, #000);
+    backdrop-filter:blur(14px) saturate(1.2);
+    border-bottom:1px solid var(--edge);
+    min-height:var(--chrome-h);
+    display:flex; align-items:center; gap:var(--sc-4);
+    padding:var(--sc-2) var(--sc-5); flex-wrap:wrap;
+  }
+  .chrome__brand{ display:flex; align-items:center; gap:var(--sc-2); flex:0 0 auto; }
+  .chrome__brand img{ width:22px; height:22px; display:block; }
+  .chrome__name{
+    font:600 var(--sc-t-sm)/1 var(--sc-font-text);
+    letter-spacing:var(--sc-track-snug); white-space:nowrap;
+  }
+  .chrome__patient{
+    display:flex; align-items:center; gap:var(--sc-3);
+    flex:1 1 auto; flex-wrap:wrap; min-width:0;
+  }
+  .field{ display:flex; align-items:baseline; gap:6px; }
+  .field > label{
+    font:500 var(--sc-t-xs)/1 var(--sc-font-mono);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase;
+    color:var(--sc-ink-soft);
+  }
+  .field input, .field select{
+    font:600 var(--sc-t-sm)/1.2 var(--sc-font-mono);
+    color:var(--sc-ink); background:transparent;
+    border:0; border-bottom:1px solid var(--edge);
+    padding:3px 2px; width:5ch; text-align:center;
+    border-radius:2px;
+    transition:border-color 140ms var(--sc-ease-out), background-color 140ms var(--sc-ease-out);
+  }
+  .field select{ width:auto; text-align:left; }
+  /* the spinner stole the last glyph, so "1.8" rendered as "1." */
+  .field input[type=number]{ appearance:textfield; -moz-appearance:textfield; }
+  .field input::-webkit-outer-spin-button,
+  .field input::-webkit-inner-spin-button{ -webkit-appearance:none; margin:0; }
+  .field input:hover, .field select:hover{ border-bottom-color:var(--sc-accent); }
+  .field input:focus-visible, .field select:focus-visible{
+    outline:2px solid var(--sc-accent); outline-offset:3px;
+    border-bottom-color:transparent;
+    background:color-mix(in srgb, var(--sc-accent) 10%, transparent);
+  }
+  .field select option{ background:var(--sc-surface); color:var(--sc-ink); }
+  .field__unit{ font:400 var(--sc-t-xs)/1 var(--sc-font-mono); color:var(--sc-ink-soft); }
+
+  /* feel-check fix: on the peak act a passive scroller reads "clarity", not
+     "control", because nothing points at the control. Once, when the peak is
+     reached and no field has been touched, the inputs raise their hand. */
+  .chrome.hint .field input,
+  .chrome.hint .field select{ border-bottom-color:var(--sc-accent); }
+  @media (prefers-reduced-motion:no-preference){
+    .chrome.hint .field input,
+    .chrome.hint .field select{ animation:hint 1.5s var(--sc-ease-out) 2; }
+  }
+  @keyframes hint{
+    0%,100%{ background:transparent; }
+    45%    { background:color-mix(in srgb, var(--sc-accent) 20%, transparent); }
+  }
+
+  .chrome__out{
+    display:flex; align-items:center; gap:var(--sc-3);
+    flex:0 0 auto; margin-left:auto;
+  }
+  .readout{ text-align:right; line-height:1.15; }
+  .readout__v{
+    font:600 var(--sc-t-base)/1 var(--sc-font-mono);
+    font-variant-numeric:tabular-nums; color:var(--sc-accent);
+  }
+  .readout__k{
+    display:block; font:500 var(--sc-t-xs)/1.3 var(--sc-font-mono);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase; color:var(--sc-ink-soft);
+  }
+  .band{
+    font:600 var(--sc-t-xs)/1 var(--sc-font-mono);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase;
+    padding:5px 8px; border-radius:var(--sc-r-sm); white-space:nowrap;
+    border:1px solid currentColor;
+  }
+  .band[data-lvl="ok"]  { color:var(--ok); }
+  .band[data-lvl="warn"]{ color:var(--warn); }
+  .band[data-lvl="high"]{ color:var(--high); }
+  .band[data-lvl="crit"]{ color:var(--crit); }
+  .chrome__note{
+    font:500 var(--sc-t-xs)/1 var(--sc-font-mono);
+    color:var(--sc-ink-soft); white-space:nowrap;
+  }
+  .chrome__note b{ color:var(--sc-ink); font-weight:600; }
+
+  @media (max-width:900px){
+    :root{ --chrome-h:auto; }
+    .chrome{ gap:var(--sc-2) var(--sc-3); padding:var(--sc-2) var(--sc-3); }
+    .chrome__out{ margin-left:0; width:100%; justify-content:space-between; }
+    .chrome__note{ display:none; }
+  }
+
+  main{ padding-top:var(--chrome-h); }
+  @media (max-width:900px){ main{ padding-top:96px; } }
+
+  /* ─────────────────────── shared surface furniture ────────────────────── */
+  .panel{
+    background:var(--sc-surface);
+    border:1px solid var(--edge);
+    border-radius:var(--sc-r-lg);
+    box-shadow:0 1px 0 var(--sc-edge) inset, 0 18px 40px -24px var(--sc-shadow-color);
+  }
+  .statusline{
+    display:flex; align-items:center; gap:var(--sc-2); flex-wrap:wrap;
+    font:500 var(--sc-t-xs)/1.5 var(--sc-font-mono);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase;
+    color:var(--sc-ink-soft);
+  }
+  .statusline .dot{
+    width:6px; height:6px; border-radius:50%; background:var(--sc-accent);
+    flex:0 0 auto;
+  }
+  .sample{
+    color:var(--warn); border:1px solid currentColor;
+    padding:3px 7px; border-radius:var(--sc-r-sm);
+    font-size:var(--sc-t-xs); letter-spacing:var(--sc-track-wide);
+  }
+  /* .sc-stage is height:100vh with no centring of its own, so a short panel
+     lands at the top and leaves half an empty screen. Centre it here, and
+     reserve the fixed chrome's height so nothing hides under the bar. */
+  .stagewrap{
+    height:100%; display:grid; place-items:center;
+    padding:calc(var(--chrome-h) + var(--sc-4)) var(--sc-gutter) var(--sc-6);
+  }
+  .stagewrap > *{
+    width:min(100%, var(--sc-maxw));
+    max-height:100%; overflow:auto;
+  }
+  @media (max-width:900px){
+    .stagewrap{ padding-top:calc(96px + var(--sc-3)); }
+  }
+  .k{ color:var(--sc-ink-soft); }
+  .mono{ font-family:var(--sc-font-mono); font-variant-numeric:tabular-nums; }
+
+  /* ───────────────────────────── act 1 · case ──────────────────────────── */
+  .case{ padding:var(--sc-6); }
+  .case__top{ justify-content:space-between; margin-bottom:var(--sc-5); }
+  .case h1{
+    font:600 var(--sc-t-xl)/1.15 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0 0 var(--sc-2);
+    text-wrap:balance; max-width:22ch;
+  }
+  .case__sub{
+    font:400 var(--sc-t-base)/1.6 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0 0 var(--sc-5); max-width:52ch;
+    text-wrap:pretty;
+  }
+  .findings{
+    display:flex; gap:var(--sc-2); flex-wrap:wrap; list-style:none;
+    margin:0 0 var(--sc-5); padding:0;
+  }
+  .findings li{
+    font:500 var(--sc-t-xs)/1 var(--sc-font-mono);
+    border:1px solid var(--edge); border-radius:var(--sc-r-pill);
+    padding:7px 11px; color:var(--sc-ink);
+    background:color-mix(in srgb, var(--sc-canvas) 60%, transparent);
+  }
+  .emptystate{
+    border-top:1px solid var(--edge-soft); padding-top:var(--sc-4);
+    font:400 var(--sc-t-sm)/1.6 var(--sc-font-text); color:var(--sc-ink-soft);
+  }
+  .emptystate b{ color:var(--sc-ink); font-weight:600; }
+
+  /* ──────────────────────────── act 2 · doubt ──────────────────────────── */
+  .holding{ padding-block:var(--sc-8) var(--sc-9); }
+  .holding h2{
+    font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0 0 var(--sc-3);
+    max-width:26ch; text-wrap:balance;
+  }
+  .holding > .sc-wrap > p{
+    font:400 var(--sc-t-base)/1.65 var(--sc-font-text);
+    color:var(--sc-ink-soft); max-width:var(--sc-measure); margin:0 0 var(--sc-7);
+    text-wrap:pretty;
+  }
+  .holds{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+  .holds li{
+    display:grid; grid-template-columns:2.4rem 1fr; gap:var(--sc-4);
+    padding:var(--sc-4) 0; border-top:1px solid var(--edge-soft);
+    align-items:baseline;
+  }
+  .holds li:last-child{ border-bottom:1px solid var(--edge-soft); }
+  .holds .n{
+    font:500 var(--sc-t-xs)/1 var(--sc-font-mono);
+    color:var(--sc-accent); letter-spacing:var(--sc-track-wide);
+  }
+  .holds h3{
+    font:600 var(--sc-t-base)/1.4 var(--sc-font-text); margin:0 0 4px;
+  }
+  .holds p{
+    font:400 var(--sc-t-sm)/1.65 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0; max-width:58ch; text-wrap:pretty;
+  }
+
+  /* ──────────────────────── act 3 · source hierarchy ───────────────────── */
+  /* flow, not a pinned act: acts 3 and 4 were both pinned and adjacent, which
+     breaks the never-the-same-family-twice-in-a-row rule. the long tail here is
+     the AUTHORED SILENCE in front of the peak (see BRIEF.md), not dead scroll. */
+  .tiers-sec{ padding-block:var(--sc-8) calc(var(--sc-section) + 24vh); }
+  .tiers{ padding:var(--sc-6); }
+  .tiers h2{
+    font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0 0 var(--sc-5);
+    max-width:24ch; text-wrap:balance;
+  }
+  .stack{ list-style:none; margin:0 0 var(--sc-5); padding:0; display:grid; gap:var(--sc-2); }
+  .stack li{
+    display:grid; grid-template-columns:auto 1fr auto; gap:var(--sc-3);
+    align-items:center; padding:var(--sc-3) var(--sc-4);
+    border:1px solid var(--edge); border-radius:var(--sc-r-md);
+    background:color-mix(in srgb, var(--sc-canvas) 55%, transparent);
+  }
+  .stack li[data-governs="yes"]{
+    border-color:var(--sc-accent);
+    background:color-mix(in srgb, var(--sc-accent) 9%, transparent);
+  }
+  .stack .lvl{
+    font:500 var(--sc-t-xs)/1 var(--sc-font-mono); color:var(--sc-ink-soft);
+    letter-spacing:var(--sc-track-wide);
+  }
+  .stack .nm{ font:500 var(--sc-t-sm)/1.4 var(--sc-font-text); }
+  .stack .tag{
+    font:600 var(--sc-t-xs)/1 var(--sc-font-mono);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase;
+    color:var(--sc-accent);
+  }
+  .tiers__resolve{
+    font:400 var(--sc-t-base)/1.6 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0; max-width:54ch; text-wrap:pretty;
+  }
+  .tiers__resolve b{ color:var(--sc-ink); font-weight:600; }
+
+  /* ───────────────────────── act 4 · PEAK · derivation ─────────────────── */
+  .deriv{ padding:var(--sc-6); }
+  .deriv__top{ justify-content:space-between; margin-bottom:var(--sc-5); }
+  .deriv__prompt{
+    font:400 var(--sc-t-base)/1.6 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0 0 var(--sc-5); max-width:50ch;
+    text-wrap:pretty;
+  }
+  .deriv__prompt b{ color:var(--sc-ink); font-weight:600; }
+  .rows{ list-style:none; margin:0; padding:0; display:grid; gap:0; }
+  .rows li{
+    display:grid; grid-template-columns:1.6rem 1fr; gap:var(--sc-3);
+    padding:var(--sc-3) 0; border-top:1px solid var(--edge-soft);
+    align-items:baseline;
+    /* driven purely from the act's own --sc-p. no js for the reveal. */
+    opacity:clamp(0, (var(--sc-p, 0) - var(--at)) * 14, 1);
+    transform:translateY(calc(clamp(0, (var(--at) + 0.07 - var(--sc-p, 0)) * 14, 1) * 6px));
+  }
+  /* row 1 is the GROUND: present at p=0 so the panel is never a hollow frame
+     during the stage's entry slide (devices.md, ground-or-greet). only rows 2
+     to 5 are gated on scroll. */
+  .rows li:nth-child(1){ --at:-1 }
+  .rows li:nth-child(2){ --at:0.10 }
+  .rows li:nth-child(3){ --at:0.24 }
+  .rows li:nth-child(4){ --at:0.38 }
+  .rows li:nth-child(5){ --at:0.52 }
+  .rows .step{
+    font:500 var(--sc-t-xs)/1.6 var(--sc-font-mono); color:var(--sc-accent);
+  }
+  .rows .lbl{
+    font:500 var(--sc-t-xs)/1.5 var(--sc-font-mono); color:var(--sc-ink-soft);
+    letter-spacing:var(--sc-track-wide); text-transform:uppercase;
+    display:block; margin-bottom:4px;
+  }
+  .rows .val{
+    font:500 var(--sc-t-base)/1.5 var(--sc-font-mono);
+    font-variant-numeric:tabular-nums; color:var(--sc-ink);
+    word-break:break-word;
+  }
+  .rows .val em{ font-style:normal; color:var(--sc-accent); font-weight:600; }
+  .rows .val .muted{ color:var(--sc-ink-soft); }
+  .deriv__foot{
+    margin-top:var(--sc-5); padding-top:var(--sc-4);
+    border-top:1px solid var(--edge);
+    font:400 var(--sc-t-xs)/1.6 var(--sc-font-text); color:var(--sc-ink-soft);
+    max-width:62ch;
+  }
+  @media (prefers-reduced-motion:reduce){
+    .rows li{ opacity:1; transform:none; }
+  }
+
+  /* ───────────────────────── act 5 · verified numbers ──────────────────── */
+  .figures{ padding-block:var(--sc-8) var(--sc-9); }
+  .figures h2{
+    font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0 0 var(--sc-2);
+    max-width:24ch; text-wrap:balance;
+  }
+  .figures__lede{
+    font:400 var(--sc-t-base)/1.65 var(--sc-font-text); color:var(--sc-ink-soft);
+    margin:0 0 var(--sc-7); max-width:var(--sc-measure); text-wrap:pretty;
+  }
+  .figlist{ list-style:none; margin:0; padding:0; }
+  .figlist li{
+    display:grid; grid-template-columns:minmax(6.5rem,auto) 1fr;
+    gap:var(--sc-3) var(--sc-5); align-items:baseline;
+    padding:var(--sc-4) 0; border-top:1px solid var(--edge-soft);
+  }
+  .figlist li:last-child{ border-bottom:1px solid var(--edge-soft); }
+  .figlist .num{
+    font:600 var(--sc-t-2xl)/1 var(--sc-font-mono);
+    font-variant-numeric:tabular-nums; letter-spacing:var(--sc-track-tight);
+    color:var(--sc-ink);
+  }
+  .figlist .what{ font:500 var(--sc-t-base)/1.5 var(--sc-font-text); margin:0 0 4px; }
+  .figlist .src{
+    font:400 var(--sc-t-xs)/1.5 var(--sc-font-mono); color:var(--sc-ink-soft);
+    word-break:break-word;
+  }
+
+  /* ───────────────────────────── act 6 · rail ──────────────────────────── */
+  .rail{
+    display:flex; align-items:stretch; gap:var(--sc-5);
+    padding-inline:var(--sc-gutter); will-change:transform;
+  }
+  .rail__lead{
+    flex:0 0 min(30rem, 78vw); align-self:center;
+    display:flex; flex-direction:column; gap:var(--sc-3);
+  }
+  .rail__lead h2{
+    font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0; text-wrap:balance;
+  }
+  .rail__lead p{
+    font:400 var(--sc-t-base)/1.65 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0; text-wrap:pretty;
+  }
+  .mod{
+    /* sized so the rail keeps real overflow to travel at 1920 too. see
+       lab/measure.mjs: a rail narrower than the viewport travels zero and the
+       harness still reports it clean. */
+    flex:0 0 clamp(13rem, 19vw, 22rem);
+    display:flex; flex-direction:column; gap:var(--sc-3);
+    /* staggered settle off --sc-p, first item exempt (see :nth-child rules) */
+    opacity:clamp(.55, (var(--sc-p,0) - var(--at,0)) * 9, 1);
+    transform:translateY(calc(clamp(0, (var(--at,0) + 0.12 - var(--sc-p,0)) * 9, 1) * 14px));
+  }
+  .mod:nth-of-type(1){ --at:0.00 }
+  .mod:nth-of-type(2){ --at:0.10 }
+  .mod:nth-of-type(3){ --at:0.20 }
+  .mod:nth-of-type(4){ --at:0.30 }
+  .mod:nth-of-type(5){ --at:0.40 }
+  .mod__shot{
+    border:1px solid var(--edge); border-radius:var(--sc-r-lg);
+    overflow:hidden; background:var(--sc-surface);
+    box-shadow:0 24px 48px -30px var(--sc-shadow-color);
+  }
+  .mod__shot img{ width:100%; height:auto; display:block; }
+  .mod h3{
+    font:600 var(--sc-t-base)/1.3 var(--sc-font-text); margin:0;
+    letter-spacing:var(--sc-track-snug);
+  }
+  .mod p{
+    font:400 var(--sc-t-sm)/1.55 var(--sc-font-text);
+    color:var(--sc-ink-soft); margin:0; text-wrap:pretty;
+  }
+  .rail__trail{
+    flex:0 0 min(26rem, 76vw); align-self:center;
+    font:400 var(--sc-t-sm)/1.65 var(--sc-font-text); color:var(--sc-ink-soft);
+    text-wrap:pretty;
+  }
+  .rail__trail b{ color:var(--sc-ink); font-weight:600; }
+  @media (prefers-reduced-motion:reduce){
+    .mod{ opacity:1; transform:none; }
+  }
+
+  /* ──────────────────────── act 7 · the note (close) ───────────────────── */
+  .close{ padding:var(--sc-6); display:grid; gap:var(--sc-5); }
+  .close h2{
+    font:600 var(--sc-t-lg)/1.25 var(--sc-font-display);
+    letter-spacing:var(--sc-track-tight); margin:0; max-width:24ch;
+    text-wrap:balance;
+  }
+  .close__lede{
+    font:400 var(--sc-t-base)/1.65 var(--sc-font-text); color:var(--sc-ink-soft);
+    margin:0; max-width:56ch; text-wrap:pretty;
+  }
+  #note{
+    width:100%; min-height:13rem; resize:vertical;
+    background:color-mix(in srgb, var(--sc-canvas) 65%, #000);
+    color:var(--sc-ink); border:1px solid var(--edge);
+    border-radius:var(--sc-r-md); padding:var(--sc-4);
+    font:400 var(--sc-t-sm)/1.75 var(--sc-font-mono);
+    font-variant-numeric:tabular-nums;
+    transition:border-color 140ms var(--sc-ease-out);
+  }
+  #note:hover{ border-color:var(--sc-ink-soft); }
+  #note:focus-visible{ outline:2px solid var(--sc-accent); outline-offset:3px; border-color:transparent; }
+  .close__acts{ display:flex; gap:var(--sc-3); align-items:center; flex-wrap:wrap; }
+  .btn{
+    font:600 var(--sc-t-sm)/1 var(--sc-font-text);
+    padding:13px 18px; border-radius:var(--sc-r-md);
+    border:1px solid var(--edge); background:transparent; color:var(--sc-ink);
+    cursor:pointer; letter-spacing:var(--sc-track-snug);
+    transition:background-color 140ms var(--sc-ease-out), border-color 140ms var(--sc-ease-out), transform 100ms var(--sc-ease-out);
+  }
+  .btn:hover{ border-color:var(--sc-ink-soft); background:color-mix(in srgb, var(--sc-ink) 7%, transparent); }
+  .btn:active{ transform:translateY(1px); }
+  .btn:focus-visible{ outline:2px solid var(--sc-accent); outline-offset:3px; }
+  .btn--go{
+    background:var(--sc-accent); color:var(--sc-accent-ink);
+    border-color:var(--sc-accent); text-decoration:none; display:inline-block;
+  }
+  .btn--go:hover{ background:color-mix(in srgb, var(--sc-accent) 86%, #fff); border-color:transparent; }
+  .close__stores{
+    font:400 var(--sc-t-xs)/1.6 var(--sc-font-mono); color:var(--sc-ink-soft);
+  }
+  .close__stores a{ color:var(--sc-ink-soft); text-underline-offset:3px; }
+  .close__stores a:hover{ color:var(--sc-accent); }
+  .foot{
+    margin-top:var(--sc-5); padding-top:var(--sc-4);
+    border-top:1px solid var(--edge);
+    display:flex; gap:var(--sc-4) var(--sc-5); flex-wrap:wrap;
+    align-items:baseline;
+    font:400 var(--sc-t-xs)/1.7 var(--sc-font-text); color:var(--sc-ink-soft);
+  }
+  .foot a{ color:var(--sc-ink-soft); text-underline-offset:3px; }
+  .foot a:hover{ color:var(--sc-accent); }
+  .foot__legal{ flex:1 1 30ch; min-width:0; max-width:64ch; }
+
+  @media (max-width:640px){
+    .case, .tiers, .deriv, .close{ padding:var(--sc-5); }
+    /* the peak panel overran the stage and scrolled its own status line out of
+       view. the sample label is least droppable on the act that shows computed
+       numbers, so buy the room back from padding and leading instead. */
+    .deriv{ padding:var(--sc-4); }
+    .deriv__top{ flex-direction:column; align-items:flex-start; gap:6px; margin-bottom:var(--sc-4); }
+    .deriv__prompt{ margin-bottom:var(--sc-4); font-size:var(--sc-t-sm); }
+    .rows li{ padding:10px 0; }
+    .deriv__foot{ margin-top:var(--sc-4); padding-top:var(--sc-3); }
+    .figlist li{ grid-template-columns:1fr; gap:var(--sc-1); }
+    .holds li{ grid-template-columns:1fr; gap:var(--sc-1); }
+  }
+</style>
+</head>
+<body>
+
+<span data-sc-progress></span>
+<div class="sc-grain" aria-hidden="true"></div>
+
+<!-- ══ app chrome. in this grammar the chrome IS the navigation, and here it is
+     also the signature move: one patient, edited from anywhere, and every panel
+     below re-derives from it. ══ -->
+<header class="chrome">
+  <div class="chrome__brand">
+    <img src="assets/mark.webp" width="96" height="96" alt="StewardMD">
+    <span class="chrome__name">StewardMD</span>
+  </div>
+
+  <div class="chrome__patient" role="group" aria-label="Patient values. Every panel on this page derives from these.">
+    <span class="field">
+      <label for="p-age">Age</label>
+      <input id="p-age" type="number" inputmode="numeric" value="62" min="1" max="120" step="1">
+      <span class="field__unit" aria-hidden="true">y</span>
+    </span>
+    <span class="field">
+      <label for="p-wt">Weight</label>
+      <input id="p-wt" type="number" inputmode="decimal" value="68" min="1" max="300" step="1">
+      <span class="field__unit" aria-hidden="true">kg</span>
+    </span>
+    <span class="field">
+      <label for="p-scr">Creatinine</label>
+      <input id="p-scr" type="number" inputmode="decimal" value="1.8" min="0.1" max="20" step="0.1">
+      <span class="field__unit" aria-hidden="true">mg/dL</span>
+    </span>
+    <span class="field">
+      <label for="p-sex">Sex</label>
+      <select id="p-sex">
+        <option value="f" selected>Female</option>
+        <option value="m">Male</option>
+      </select>
+    </span>
+  </div>
+
+  <div class="chrome__out">
+    <p class="readout">
+      <span class="readout__v"><span id="crcl-v">35</span> mL/min</span>
+      <span class="readout__k">Cockcroft-Gault</span>
+    </p>
+    <span class="band" id="band" data-lvl="warn">Moderate</span>
+    <span class="chrome__note">note <b id="note-n">0</b> lines</span>
+  </div>
+</header>
+
+<main id="top">
+
+  <!-- ══ 1 · RECOGNITION · pin · 1.8 ══
+       the surface already in a state. no title screen: this grammar's hero is
+       the product mid-use. ground is present at p=0, so no empty stage. -->
+  <section data-sc-act="pin" data-sc-span="1.8" data-sc-drift="#0d1b26">
+    <div data-sc-stage>
+      <div class="stagewrap">
+        <article class="panel case">
+          <div class="statusline case__top">
+            <span><span class="dot"></span> Case open</span>
+            <span class="mono">02:14</span>
+            <span class="sample">Illustrative sample. Not a real patient.</span>
+          </div>
+
+          <h1>The decision is yours. The reasons should be on the screen.</h1>
+          <p class="case__sub">
+            StewardMD is clinician-only decision support. It assembles the
+            review, shows where every line came from, and leaves the
+            prescribing to you.
+          </p>
+
+          <!-- the headline greets (no cue = present at p=0). these two arrive
+               after it, so the act actually changes across its own span
+               instead of holding one frame for a viewport and a half. the
+               4-value form ends at 1 with no out-ramp, so nothing fades away
+               before the act hands over. -->
+          <ul class="findings" data-sc-cue="0.10 1 0.08 0">
+            <li>Fever 38.9</li>
+            <li>Flank pain</li>
+            <li>Creatinine 1.8</li>
+            <li>Urine culture sent</li>
+            <li>Penicillin allergy</li>
+          </ul>
+
+          <p class="emptystate" data-sc-cue="0.42 1 0.08 0">
+            <b>Nothing here is pre-filled for you.</b> The patient values sit in
+            the bar at the top of this page. Change any of them and every panel
+            below re-derives, the way the app does at the bedside.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 2 · DOUBT · flow + in · ~1.0 ══
+       the one act that should read like a document. reduced top padding: the
+       pinned stage above needs a viewport to clear. -->
+  <section class="sc-section holding" data-sc-drift="#0d1b26">
+    <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="60">
+      <h2>Four things you are holding at once.</h2>
+      <p>
+        None of them are hard on their own. The cost is holding all four in your
+        head, at 2am, while somebody waits for an answer.
+      </p>
+      <ol class="holds">
+        <li>
+          <span class="n">01</span>
+          <div>
+            <h3>The organism, and what it is likely to be</h3>
+            <p>The culture is not back. You are reasoning from syndrome, site and exposure.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">02</span>
+          <div>
+            <h3>This patient's kidneys, right now</h3>
+            <p>Clearance changes the safe dose of a large share of what you might reach for. It also changes hour to hour.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">03</span>
+          <div>
+            <h3>What is actually resistant in your hospital</h3>
+            <p>National guidance is written for a country. The organism in front of you is local.</p>
+          </div>
+        </li>
+        <li>
+          <span class="n">04</span>
+          <div>
+            <h3>Which guidance your unit follows when those disagree</h3>
+            <p>They do disagree. Knowing which one wins is most of the decision, and it is the part nobody writes down.</p>
+          </div>
+        </li>
+      </ol>
+    </div>
+  </section>
+
+  <!-- ══ 3 · ORIENTATION · reveal · 1.5 ══
+       a wipe is a change of state, which is exactly this beat. the reveal sits
+       on a WRAPPER, never on tight-leading type, or clip-path eats descenders.
+       the last stretch of this act is deliberately quiet: it is the silence in
+       front of the peak. see BRIEF.md, authored silence. -->
+  <section class="sc-section tiers-sec" data-sc-drift="#0d1b26">
+    <div class="sc-wrap" data-sc-in data-sc-stagger="60">
+      <div>
+        <article class="panel tiers">
+          <div class="statusline" style="margin-bottom:var(--sc-4)">
+            <span><span class="dot"></span> Source hierarchy</span>
+          </div>
+          <h2>Every line the app shows you knows where it came from.</h2>
+
+          <div data-sc-reveal="up" data-sc-reveal-at="0.15 0.55">
+            <ol class="stack">
+              <li><span class="lvl">01</span><span class="nm">Harrison, 22e. The disease reference floor.</span><span class="tag" aria-hidden="true"></span></li>
+              <li><span class="lvl">02</span><span class="nm">ICMR and NCDC. National guidance.</span><span class="tag" aria-hidden="true"></span></li>
+              <li><span class="lvl">03</span><span class="nm">Society guidelines for the syndrome.</span><span class="tag" aria-hidden="true"></span></li>
+              <li data-governs="yes"><span class="lvl">04</span><span class="nm">Your hospital's own overlay and antibiogram.</span><span class="tag">Governs</span></li>
+            </ol>
+          </div>
+
+          <p class="tiers__resolve">
+            When they disagree, <b>the local overlay wins</b>, and the app says so
+            on the line itself. That is the whole design: not one more opinion,
+            but a stated order of authority you can audit.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 4 · CONTROL · PEAK · pin + pointer + bespoke --sc-p · 3.8 ══
+       largest span on the page by a clear margin. the rows assemble off the
+       act's own --sc-p in pure CSS; their VALUES come live from the chrome.
+       scroll reveals the steps, the patient strip drives the numbers.
+       ground is present at p=0 (frame, status, prompt) so the stage is never
+       empty during the entry slide. -->
+  <section data-sc-act="pin" data-sc-span="3.8" data-sc-drift="#101f2b">
+    <div data-sc-stage>
+      <div class="stagewrap">
+        <article class="panel deriv" data-sc-tilt="4">
+          <div class="statusline deriv__top">
+            <span><span class="dot"></span> Derivation</span>
+            <span class="sample">Illustrative sample. Not a real patient.</span>
+          </div>
+
+          <p class="deriv__prompt">
+            <b>Change anything in the bar at the top.</b> Age, weight,
+            creatinine, sex. Every line below is computed from those four values
+            as you type, not fetched and not faked.
+          </p>
+
+          <ol class="rows">
+            <li>
+              <span class="step">01</span>
+              <div>
+                <span class="lbl">Patient</span>
+                <span class="val" id="d-patient">62 y, 68 kg, female, creatinine 1.8 mg/dL</span>
+              </div>
+            </li>
+            <li>
+              <span class="step">02</span>
+              <div>
+                <span class="lbl">Cockcroft-Gault</span>
+                <span class="val" id="d-formula">((140 - 62) x 68) / (72 x 1.8) x 0.85</span>
+              </div>
+            </li>
+            <li>
+              <span class="step">03</span>
+              <div>
+                <span class="lbl">Creatinine clearance</span>
+                <span class="val"><em id="d-crcl">35 mL/min</em> <span class="muted" id="d-band">moderate impairment (30 to 49)</span></span>
+              </div>
+            </li>
+            <li>
+              <span class="step">04</span>
+              <div>
+                <span class="lbl">Renal dose review</span>
+                <span class="val" id="d-review">Required. Clearance is below 50 mL/min.</span>
+              </div>
+            </li>
+            <li>
+              <span class="step">05</span>
+              <div>
+                <span class="lbl">Modules the app opens for this state</span>
+                <span class="val" id="d-modules">Drug Index renal check, Interactions, Antibiogram</span>
+              </div>
+            </li>
+          </ol>
+
+          <p class="deriv__foot">
+            What this page will not do is name a drug or a dose. That belongs
+            behind the clinician gate in the app, with the patient's full
+            context. Here the point is the derivation, not the answer.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 5 · CONFIDENCE · count · 1.2 ══
+       a counter is a truth claim with motion on it. every figure here is
+       re-derived from a file in the repository and the file is printed next to
+       it. no number without a source. -->
+  <section class="sc-section figures" data-sc-drift="#0d1b26">
+    <div class="sc-wrap sc-stack" data-sc-in data-sc-stagger="55">
+      <h2>Numbers, with the file they came from.</h2>
+      <p class="figures__lede">
+        Counted from the shipping data, not from a slide. If a figure is not in
+        a file, it is not on this page.
+      </p>
+      <ul class="figlist">
+        <li>
+          <span class="num sc-nums" data-sc-count="0 484" data-sc-count-at="0.05 0.4">0</span>
+          <div>
+            <p class="what">searchable diseases (141 diagnostic, 343 reference-only)</p>
+            <p class="src">kb/manifest/COVERAGE-GAP-REPORT.md</p>
+          </div>
+        </li>
+        <li>
+          <span class="num sc-nums" data-sc-count="0 310" data-sc-count-at="0.1 0.45">0</span>
+          <div>
+            <p class="what">drug interaction rules</p>
+            <p class="src">data/interaction-rules.json, rules[]</p>
+          </div>
+        </li>
+        <li>
+          <span class="num sc-nums" data-sc-count="0 3,307" data-sc-count-at="0.15 0.5">0</span>
+          <div>
+            <p class="what">generics indexed, across 2,620 classes and 292 brands</p>
+            <p class="src">data/interaction-rules.json</p>
+          </div>
+        </li>
+        <li>
+          <span class="num sc-nums" data-sc-count="0 267" data-sc-count-at="0.2 0.55">0</span>
+          <div>
+            <p class="what">clinical protocols</p>
+            <p class="src">kb/protocols/*.json</p>
+          </div>
+        </li>
+        <li>
+          <span class="num sc-nums" data-sc-count="0 20" data-sc-count-at="0.25 0.6">0</span>
+          <div>
+            <p class="what">antibiogram organism records (values stay local to your unit)</p>
+            <p class="src">data/antibiogram-raw.json</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ══ 6 · BREADTH · pan · 2.8 ══
+       lateral travel reads as range. real product captures, unframed, from
+       store-assets/raw-app-screens. lead card and trail note are in the rail
+       both because they earn their place and because they give the travel the
+       overflow it needs. -->
+  <section data-sc-act="pan" data-sc-span="2.8" data-sc-drift="#0d1b26">
+    <div data-sc-stage>
+      <div class="rail" data-sc-pan="0.05">
+        <div class="rail__lead">
+          <h2>One patient, seen five ways.</h2>
+          <p>
+            The same case, carried between modules without retyping it. These
+            are real screens from the shipping app.
+          </p>
+        </div>
+
+        <article class="mod">
+          <div class="mod__shot" data-sc-tilt="5">
+            <img src="assets/m-maik.webp" width="560" height="1214" alt="A differential reasoning workspace listing candidate diagnoses with supporting and opposing findings.">
+          </div>
+          <h3>Reasoning</h3>
+          <p>Differential built in the open, with what supports and what argues against.</p>
+        </article>
+
+        <article class="mod">
+          <div class="mod__shot" data-sc-tilt="5">
+            <img src="assets/m-drugs.webp" width="560" height="1214" alt="A medication safety check listing major interactions, duplicate therapy and QT risk.">
+          </div>
+          <h3>Interactions</h3>
+          <p>Major interactions, duplicates and QT risk across the whole list.</p>
+        </article>
+
+        <article class="mod">
+          <div class="mod__shot" data-sc-tilt="5">
+            <img src="assets/m-abx.webp" width="560" height="1214" alt="An antibiotic coverage grid showing spectrum of activity against organisms.">
+          </div>
+          <h3>Coverage</h3>
+          <p>Spectrum of activity as a grid, against your unit's own organisms.</p>
+        </article>
+
+        <article class="mod">
+          <div class="mod__shot" data-sc-tilt="5">
+            <img src="assets/m-icu.webp" width="560" height="1214" alt="Weight-based infusion pump rate calculations with a nurse-mode preparation view.">
+          </div>
+          <h3>Infusions</h3>
+          <p>Weight-based pump rates, with a preparation view for the nurse.</p>
+        </article>
+
+        <article class="mod">
+          <div class="mod__shot" data-sc-tilt="5">
+            <img src="assets/m-kb.webp" width="560" height="1214" alt="A searchable clinical knowledge library of conditions, drugs and guidelines.">
+          </div>
+          <h3>Library</h3>
+          <p>Conditions, drugs and guidelines. On the device, so a dead corridor signal does not take it with you.</p>
+        </article>
+
+        <p class="rail__trail">
+          <b>The engine assembles the review. It does not choose the
+          antibiotic.</b> Every module hands back to you at the same point: the
+          decision.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ 7 · READINESS · pin · 1.2 · CLOSE ══
+       this grammar's close is an actual input, not a button island. no magnet
+       and no spotlight: both are banned in Live surface. cues here take ONE
+       value so they hold, because this is the last act and the final screen
+       must still have something on it. footer lives inside the stage so there
+       is no dead tail. -->
+  <section id="get" data-sc-act="pin" data-sc-span="1.2" data-sc-drift="#0d1b26">
+    <div data-sc-stage>
+      <div class="stagewrap">
+        <article class="panel close">
+          <div class="statusline">
+            <span><span class="dot"></span> Note</span>
+            <span class="sample">Illustrative sample. Not a real patient.</span>
+          </div>
+
+          <h2 data-sc-cue="0 1 0 0">This is what you just derived.</h2>
+          <p class="close__lede" data-sc-cue="0 1 0 0">
+            Written as you scrolled, from the values you set. Edit it, copy it,
+            or change the patient above and watch it rewrite.
+          </p>
+
+          <label class="sr-only" for="note">Derived clinical note</label>
+          <textarea id="note" spellcheck="false" data-sc-cue="0 1 0 0" data-sc-rise="0"></textarea>
+
+          <div class="close__acts" data-sc-cue="0 1 0 0">
+            <button class="btn" type="button" id="copy">Copy note</button>
+            <a class="btn btn--go" href="https://stewardmd.in/">Get StewardMD</a>
+            <span class="close__stores">
+              <a href="https://apps.apple.com/app/stewardmd">App Store</a> ·
+              <a href="https://play.google.com/store/apps/details?id=in.stewardmd">Google Play</a>
+            </span>
+          </div>
+
+          <footer class="foot">
+            <p class="foot__legal">
+              Clinician-only decision support. StewardMD does not diagnose or
+              prescribe on its own; the treating doctor decides. The case on this
+              page is illustrative and contains no patient data.
+            </p>
+            <span>
+              <a href="https://stewardmd.in/privacy">Privacy</a> ·
+              <a href="https://stewardmd.in/terms">Terms</a> ·
+              <a href="https://stewardmd.in/disclaimer">Disclaimer</a> ·
+              <a href="https://stewardmd.in/support">Support</a>
+            </span>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script src="scrollcraft.js"></script>
+<script>
+ScrollCraft.mount(document.body);
+
+/* ── the signature move ───────────────────────────────────────────────────
+   one patient state, edited from the chrome, re-derived everywhere. real
+   arithmetic (Cockcroft-Gault) on values the visitor sets. deliberately never
+   outputs a drug or a dose: this page is public and has no clinician gate in
+   front of it, so it shows the derivation and stops there.            */
+(function () {
+  var $ = function (id) { return document.getElementById(id); };
+  var els = {
+    age: $('p-age'), wt: $('p-wt'), scr: $('p-scr'), sex: $('p-sex'),
+    crclV: $('crcl-v'), band: $('band'), noteN: $('note-n'),
+    dPatient: $('d-patient'), dFormula: $('d-formula'), dCrcl: $('d-crcl'),
+    dBand: $('d-band'), dReview: $('d-review'), dModules: $('d-modules'),
+    note: $('note'), copy: $('copy')
+  };
+
+  /* Cockcroft-Gault. published formula, not a StewardMD recommendation. */
+  function crcl(age, wt, scr, female) {
+    if (!(age > 0 && wt > 0 && scr > 0)) return null;
+    var v = ((140 - age) * wt) / (72 * scr);
+    return female ? v * 0.85 : v;
+  }
+
+  function band(v) {
+    if (v === null)  return { t: 'Incomplete', lvl: 'warn', full: 'not computable from the values given' };
+    if (v >= 50)     return { t: 'Normal',     lvl: 'ok',   full: 'no renal adjustment tier (50 and above)' };
+    if (v >= 30)     return { t: 'Moderate',   lvl: 'warn', full: 'moderate impairment (30 to 49)' };
+    if (v >= 15)     return { t: 'Severe',     lvl: 'high', full: 'severe impairment (15 to 29)' };
+    return             { t: 'Failure',   lvl: 'crit', full: 'kidney failure (below 15)' };
+  }
+
+  var seen = [];               /* acts passed, in order. the trace. */
+  var state = {};
+  var touched = false;         /* has the visitor edited the patient yet */
+
+  function read() {
+    var female = els.sex.value === 'f';
+    var age = parseFloat(els.age.value), wt = parseFloat(els.wt.value), scr = parseFloat(els.scr.value);
+    var v = crcl(age, wt, scr, female);
+    return {
+      age: age, wt: wt, scr: scr, female: female, v: v, b: band(v),
+      ok: v !== null
+    };
+  }
+
+  function fmt(v) { return v === null ? '--' : String(Math.round(v)); }
+
+  function render() {
+    var s = state = read();
+    var sexWord = s.female ? 'female' : 'male';
+
+    els.crclV.textContent = fmt(s.v);
+    els.band.textContent = s.b.t;
+    els.band.setAttribute('data-lvl', s.b.lvl);
+
+    els.dPatient.textContent = s.ok
+      ? s.age + ' y, ' + s.wt + ' kg, ' + sexWord + ', creatinine ' + s.scr + ' mg/dL'
+      : 'waiting on a complete set of values';
+
+    els.dFormula.textContent = s.ok
+      ? '((140 - ' + s.age + ') x ' + s.wt + ') / (72 x ' + s.scr + ')' + (s.female ? ' x 0.85' : '')
+      : '((140 - age) x weight) / (72 x creatinine)';
+
+    els.dCrcl.textContent = s.ok ? fmt(s.v) + ' mL/min' : 'not computable';
+    els.dBand.textContent = s.b.full;
+
+    els.dReview.textContent = !s.ok
+      ? 'Cannot be determined until age, weight and creatinine are all set.'
+      : (s.v < 50
+          ? 'Required. Clearance is below 50 mL/min.'
+          : 'Not triggered by clearance at this value.');
+
+    var mods = ['Interactions'];
+    if (s.ok && s.v < 50) mods.unshift('Drug Index renal check');
+    if (s.ok && s.v < 30) mods.push('ICU');
+    mods.push('Antibiogram');
+    els.dModules.textContent = mods.join(', ');
+
+    writeNote();
+  }
+
+  /* the note is the trace: only the acts actually passed contribute a line. */
+  var LINES = {
+    case:    function (s) { return 'Case opened. Illustrative sample, no patient data.'; },
+    holding: function (s) { return 'Reconciling: organism, renal function, local resistance, governing guidance.'; },
+    tiers:   function (s) { return 'Source order: hospital overlay > society guideline > ICMR > Harrison 22e.'; },
+    deriv:   function (s) {
+      if (!s.ok) return 'Derivation incomplete: age, weight and creatinine required.';
+      return 'Cockcroft-Gault ' + fmt(s.v) + ' mL/min, ' + s.b.full + '. Renal dose review '
+           + (s.v < 50 ? 'required.' : 'not triggered.');
+    },
+    figures: function (s) { return 'Reference base: 484 diseases, 310 interaction rules, 267 protocols.'; },
+    rail:    function (s) { return 'Modules available for this state: ' + els.dModules.textContent + '.'; }
+  };
+
+  function writeNote() {
+    var s = state;
+    var head = s.ok
+      ? s.age + ' y, ' + s.wt + ' kg, ' + (s.female ? 'F' : 'M') + ', creatinine ' + s.scr + ' mg/dL'
+      : 'patient values incomplete';
+    var body = seen.map(function (k, i) {
+      return String(i + 1).padStart(2, '0') + '. ' + LINES[k](s);
+    });
+    var out = ['PATIENT  ' + head, ''].concat(body);
+    if (seen.length) {
+      out.push('');
+      out.push('StewardMD assembles the review. It does not choose the antibiotic.');
+      out.push('Clinician-only decision support. The treating doctor decides.');
+    } else {
+      out.push('Scroll the page. Each section adds the line it derived.');
+    }
+    els.note.value = out.join('\n');
+    els.noteN.textContent = String(seen.length);
+  }
+
+  /* mark an act as passed once it has genuinely been on screen */
+  var keys = ['case', 'holding', 'tiers', 'deriv', 'figures', 'rail'];
+  var sections = document.querySelectorAll('main > section');
+  if ('IntersectionObserver' in window) {
+    /* threshold is a fraction of the TARGET, and a pinned act is several
+       viewports tall, so a ratio like 0.35 is unreachable for it and the act
+       never registers. Fire on any intersection, then require the section to
+       genuinely fill half the screen. */
+    var io = new IntersectionObserver(function (entries) {
+      var changed = false;
+      entries.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        if (e.intersectionRect.height < window.innerHeight * 0.5) return;
+        var i = Array.prototype.indexOf.call(sections, e.target);
+        var k = keys[i];
+        if (k && seen.indexOf(k) === -1) { seen.push(k); changed = true; }
+        /* the peak is reached and they have not touched anything yet: point at
+           the control, once. see the feel check in BRIEF.md. */
+        if (k === 'deriv' && !touched) document.querySelector('.chrome').classList.add('hint');
+      });
+      if (changed) writeNote();
+    }, { threshold: [0, 0.05, 0.25, 0.5, 1] });
+    Array.prototype.forEach.call(sections, function (s, i) { if (keys[i]) io.observe(s); });
+  } else {
+    seen = keys.slice();
+  }
+
+  function onEdit() {
+    if (!touched) {
+      touched = true;
+      document.querySelector('.chrome').classList.remove('hint');
+    }
+    render();
+  }
+  ['input', 'change'].forEach(function (ev) {
+    els.age.addEventListener(ev, onEdit);
+    els.wt.addEventListener(ev, onEdit);
+    els.scr.addEventListener(ev, onEdit);
+    els.sex.addEventListener(ev, onEdit);
+  });
+
+  els.copy.addEventListener('click', function () {
+    var done = function () {
+      els.copy.textContent = 'Copied';
+      setTimeout(function () { els.copy.textContent = 'Copy note'; }, 1600);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(els.note.value).then(done, function () { els.note.select(); });
+    } else {
+      els.note.select();
+      try { document.execCommand('copy'); done(); } catch (e) {}
+    }
+  });
+
+  render();
+})();
+</script>
+</body>
+</html>
