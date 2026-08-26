@@ -201,9 +201,6 @@
         finalized: body.finalized, createdAt: body.createdAt, updatedAt: body.updatedAt
       });
       writeIndex(idx);
-      /* Debounced encrypted backup to the surgeon's own Drive, if they turned it on. Fire-and-
-       * forget: a backup must never delay or fail a local save, which is the system of record. */
-      try { if (G.SMD_SURGX_SYNC && G.SMD_SURGX_SYNC.scheduleSync) G.SMD_SURGX_SYNC.scheduleSync(); } catch (e) {}
       return { ok: true, id: id };
     }).catch(function () { return { ok: false, reason: "encrypt-failed" }; });
   }

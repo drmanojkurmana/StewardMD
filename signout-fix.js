@@ -82,8 +82,18 @@
     /* If the surgeon turned on the encrypted Drive backup, the notes are recoverable and the
      * warning must say so - an alarming message about permanent loss, shown to someone who set up
      * a backup precisely so this would not be permanent, just teaches them to ignore the dialog. */
+    /* Does a recoverable backup exist? Asked of surgx-backup.js (SMD_SURGX_BACKUP), which owns the
+     * encrypted Drive backup. Tolerant of the module being absent or of its shape changing, and it
+     * FAILS TOWARDS THE HARDER WARNING: if we cannot prove a backup exists, say the notes are about
+     * to be destroyed permanently. Being wrongly alarmed costs a surgeon one dialog; being wrongly
+     * reassured costs them the notes. */
     var backed = false;
-    try { backed = !!(window.SMD_SURGX_SYNC && window.SMD_SURGX_SYNC.hasBackup()); } catch (x) {}
+    try {
+      // Optional by design: absent until surgx-backup.js lands (PR #760), and absence means
+      // `backed` stays false, i.e. the stronger warning. Never a hard dependency.
+      var B = window.SMD_SURGX_BACKUP;
+      if (B && B.describe) { var d = B.describe(); backed = !!(d && (d.hasBackup || d.lastBackupAt)); }
+    } catch (x) { backed = false; }
     var label = n + " SURG" + String.fromCharCode(0x02E3) + " note" + (n === 1 ? "" : "s");
     try {
       return window.confirm(backed
