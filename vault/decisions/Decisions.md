@@ -41,6 +41,55 @@ rewrite would publish these identifiers. Treat that as a hard gate on any decisi
 **Found by:** the parallel session that did the GHIS work, which flagged it rather than quietly
 leaving it; verified independently here against `origin/main` before being recorded.
 
+## 2026-08-26 · One icon treatment on Home, and one stroke weight across three glyph systems
+
+**The split was a selector, not a design decision.** The glossy sphere lived on
+`.rnav-tile.feat .rnav-badge`, and `feat` marks a **branded** module, not a more important one. So
+six tiles (FundX, SknX, CliniX, SURGX, MAiTRI, OncoTree) read as the product and twelve — FollowCare,
+OPD Queue, Dictate, Scan Meds, Guides and the rest — read as placeholders, for a reason that had
+nothing to do with them. The sphere is now the base `.rnav-badge`. `.feat` is kept as a hook: it no
+longer owns the sphere but still marks a branded module and still carries the status dot.
+
+`.addtool` opts OUT deliberately — an empty slot inviting a choice is not a tool and should not
+pretend to be one. It needs the inherited sheen and shadow explicitly cleared or it renders as a
+*broken* sphere.
+
+### The trap worth remembering: `stroke-width` is in USER units
+
+Measured on the real page, the badges disagreed badly:
+
+| glyph | artboard → box | effective |
+|---|---|---|
+| inline SVG | 24-wide viewBox at 32px | 2 × 1.333 = **2.67px** |
+| the ECG | **48**-wide viewBox at 36px | 2 × 0.75 = **1.50px** |
+| Material Symbols | `wght 400` at 28px | ≈ **2.30px** |
+| brand PNGs | inline-styled | **48 / 38 / 34px** |
+
+The ECG was drawing at *nearly half* the others, and nothing warned anyone: the same literal `2`
+draws a different thickness in every viewBox, so **an icon drawn on a wider artboard silently comes
+out thinner**. This will happen again to the next icon someone adds on a non-24 artboard.
+
+**The fix is `vector-effect: non-scaling-stroke`**, which takes the viewBox out of the equation —
+`stroke-width` then means SCREEN pixels, so ONE number governs every SVG however it was drawn.
+Everything is driven from `--rds-glyph-stroke: 2.5` in `redesign-system.css`, with Material's weight
+axis at 500 to sit on the same line. Solid shapes (`.pupil`, `.p`, `.n`, `.beam`) are explicitly
+excluded, or they take an outline and bloat.
+
+The three brand marks moved from inline `width:48/38/34px` to a shared `.ai-brandmark` class: one
+optical box, `object-fit: contain`, which also deleted a triplicated inline filter.
+
+**Verified by measurement and by screenshot in both themes**, not by reading the CSS — the only
+honest way to check a visual property. Every SVG reports `eff=2.50px`, every ligature 28px/`wght 500`,
+every brand mark inside a 38px box.
+
+**Known limit, not a bug:** `surgx-logo.png`, `maitri-logo.png` and `clinix-logo.png` are RASTER. Size
+and colour normalise; the drawn line weight cannot. They read slightly finer than a Material glyph at
+38px. Redrawing them as SVG at 2.5px is the only real fix, and that is illustration work.
+
+**Not touched, deliberately:** the top quick-action row (`.rnav-qa-btn`) and the bottom tab bar are
+different components and keep their compact outline style. Unifying them is one more selector if the
+owner wants it. See [[Flags]] for the module gating that decides which tiles appear at all.
+
 ## 2026-08-26 · SURGX notes survive a reinstall, without a background sync
 
 **Decision:** an explicit, confirmed **backup + restore** to the surgeon's own Google Drive
