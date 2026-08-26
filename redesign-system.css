@@ -707,23 +707,40 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
    a round badge; the featured tile gets the dark "signature" badge + dot. */
 #homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
 #homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
-#homeV2.rnav .rnav-badge { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background: color-mix(in srgb, var(--rds-primary) 13%, var(--rds-surface, #fff)); color: var(--rds-primary); }
-#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: inherit; margin: 0; }
-#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
-#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
-/* Round 3D glossy sphere for the AI tiles (light top sheen + dark base + drop shadow). */
-#homeV2.rnav .rnav-tile.feat .rnav-badge {
+/* EVERY tile badge is the glossy sphere. It used to be a flat mint disc with a dark outline glyph,
+ * and only `.feat` (the branded AI modules) got the sphere - so a home screen of eighteen tools read
+ * as two unrelated icon sets, six "real" and twelve placeholders. One treatment, one visual weight,
+ * and the module logos stop looking like a different product. `.addtool` still opts out below: it is
+ * an action, not a tool, and it should not pretend to be one. */
+#homeV2.rnav .rnav-badge {
+  width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; position: relative;
   background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
   color: #fff;
   box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
 }
-#homeV2.rnav .rnav-tile.feat .rnav-badge::before {
+/* The specular highlight, the thing that actually reads as "sphere" rather than "dark circle". */
+#homeV2.rnav .rnav-badge::before {
   content: ""; position: absolute; top: 9%; left: 21%; width: 34%; height: 26%; border-radius: 50%;
   background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%);
   pointer-events: none;
 }
+/* White, and a hair heavier: a 2px outline glyph that read well on pale mint goes thin and grey on a
+ * dark sphere, which is what made the branded logos look "designed" and the rest look unfinished. */
+#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: #fff; margin: 0; }
+#homeV2.rnav .rnav-badge svg { color: #fff; stroke: currentColor; }
+#homeV2.rnav .rnav-badge svg[stroke-width], #homeV2.rnav .rnav-badge svg * { vector-effect: non-scaling-stroke; }
+#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
+#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
+/* `.feat` no longer owns the sphere - every badge has it (above). What `.feat` still marks is a
+ * BRANDED module, which is why it keeps the status dot. Kept as a hook rather than deleted: the
+ * markup, the tools registry and the customise sheet all still set it. */
 #homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
-#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
+/* Add Tool opts OUT of the sphere on purpose: it is an empty slot inviting a choice, not a tool.
+ * Must also clear the inherited sheen and shadow, or it reads as a broken sphere. */
+#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); box-shadow: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge::before { display: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge .rds-icon, #homeV2.rnav .rnav-tile.addtool .rnav-badge svg { color: var(--rds-muted); }
 #homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }
 
 /* ── AI tile live-icon animations (dark feat badge) ────────────────────────────
