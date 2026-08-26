@@ -156,12 +156,31 @@ writes a **readable `.txt` per note** for a human, which the app cannot read bac
 trip, and it exists because **notes do not survive a reinstall** (every native install is a new
 container; two notes have been lost that way).
 
-- **One file**, `StewardMD-SURGX-notes-backup.json`, in the same "StewardMD Surgical Notes" folder,
-  **updated in place (PATCH)** so a surgeon's Drive does not fill with dated duplicates.
-- **It carries note BODIES, not ciphertext, and that is deliberate.** `surgx-store.js` encrypts with
-  a per-device, per-account random secret in `localStorage`; a reinstall wipes that secret, so
-  backed-up ciphertext would be permanently unreadable. Restoring re-encrypts with the NEW device's
-  secret. Same data class and same destination as the `.txt` export already sanctioned.
+- **END-TO-END ENCRYPTED with the surgeon's own password** (the WhatsApp model), added 2026-08-26:
+  `password --PBKDF2-SHA256, 200k, fresh 16-byte salt per backup--> AES-256-GCM`, derived by
+  `SMD_CLINIC_CRYPTO` — the SAME adapter personal-clinic and shared-clinic sync use, so there is
+  still exactly one place that decides how StewardMD derives a key. **No new crypto was written.**
+- **Google stores ciphertext.** Outside the encrypted payload there is only what a restore needs
+  before it can derive a key: envelope version, KDF parameters, salt, and a timestamp for the UI.
+  No note text, no label, no patient reference, no account id, **and not even the note count** (that
+  would leak clinical volume). Asserted by searching the actual uploaded bytes.
+- **There is no escrow and no reset.** StewardMD never sees the password and stores it nowhere; a
+  lost password means an unrecoverable backup. Hence: confirmed twice before the first backup,
+  minimum 8 characters, leading/trailing spaces refused (easy to lose when retyping months later) —
+  all caught BEFORE anything is written.
+- **Refusals that matter as much as the encryption:** a PLAINTEXT file is refused on read (there is
+  no unencrypted format to fall back to, so a hand-written note dump can never be imported); a
+  backup asking for WEAKER key stretching is refused (otherwise anyone who can write to the folder
+  could downgrade the KDF and hand it back); a wrong password fails the AES-GCM tag, so it cannot
+  yield plausible-looking notes, and nothing is half-restored.
+- **One file**, `StewardMD-SURGX-notes-backup.smdbk` (not `.json` — it is ciphertext and the name
+  should not invite a text editor), in the same "StewardMD Surgical Notes" folder, **updated in
+  place (PATCH)** so a surgeon's Drive does not fill with dated duplicates.
+- **It carries note BODIES, not the DEVICE ciphertext, and that is deliberate.** `surgx-store.js`
+  encrypts with a per-device, per-account random secret in `localStorage`; a reinstall wipes that
+  secret — the very event this backup exists to survive — so device ciphertext would be permanently
+  unreadable. The bodies are re-encrypted under the password for transit, and restoring re-encrypts
+  them under the NEW device secret.
 - **The PHI posture is unchanged, and constrained the design:** `confirmed:true` at the API for both
   directions, plus the arm-then-act double press in the UI (the `armSignOff()` discipline). Nothing
   runs on a timer, on save, or in the background — **there is still no silent upload path, and no
@@ -172,8 +191,14 @@ container; two notes have been lost that way).
 - Drive token + folder come from `SMD_SURGX_DEST` (now exported) — one Drive integration, not two.
 - A note that will not decrypt is **reported** in the result, never silently dropped from a file
   presented as complete.
-- Tests: `test/surgx-backup.test.mjs` (merge rules, confirmation contract, back-up → wipe → restore
-  round trip against a stubbed Drive) + `test/run-surgx-backup-ui.mjs` (one tap arms, never sends).
+- Tests: `test/surgx-backup.test.mjs` (18 — merge rules, password rules, leakage, wrong password,
+  weak-KDF and plaintext refusal, plus a REAL encrypt/decrypt round trip against the actual PBKDF2 +
+  AES-GCM adapter: back up → wipe the device → restore → readable again) +
+  `test/run-surgx-backup-ui.mjs` (one tap opens the password form and sends nothing; the uploaded
+  bytes carry no note text).
+- **Gotcha for whoever writes the next leakage test:** do not assert that a SHORT string is absent
+  from the uploaded bytes. Random base64 ciphertext contains a two-character note id by chance, and
+  the test fails intermittently for a reason unrelated to leakage. Use a long, distinctive fixture id.
 
 **The Notes banner was corrected**: it said notes are "never uploaded", which stops being true the
 moment the surgeon taps Back up. It now says the only copy that leaves is a backup they ask for.
