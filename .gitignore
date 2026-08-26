@@ -111,3 +111,9 @@ local-plugins/*/.build/
 # capacitor-whisper already avoids committing this - match it.
 local-plugins/*/android/.cxx/
 local-plugins/*/android/build/
+
+# Debug/scratch output that is NOT source. Both were swept into a commit by a `git add -A` on
+# 2026-08-26 - atlas/_tmp-brain-test/ landed inside atlas/ and failed atlas-checks, which is how it
+# was caught. Ignored so the next sweep cannot repeat it.
+.playwright-mcp/
+atlas/_tmp-brain-test/
