@@ -104,9 +104,10 @@ a signed-in user silently becomes a guest until they sign in again. This cost re
 - **TTFV p50 is 2333ms, not the ≤2s target.** Gemini's own first token (0.8-2.8s) is now
   essentially the entire wait. Going lower needs a faster model tier or provisioned Vertex
   capacity — an INFRASTRUCTURE decision, deliberately not taken unilaterally.
-- **The MaiK answer cache writes nothing.** `maik:ans:*` stays empty even with
-  `MAIK_ANSWER_CACHE=1` deployed. NOT the KV binding — that is proven bound (the router cache
-  returns `cached:"kv"` from the same namespace). Cause still unknown.
+- ~~**The MaiK answer cache writes nothing.**~~ **RESOLVED 2026-08-26** — the block sat below the
+  live-stream early return in `/explain`, so with `MAIK_LIVE_STREAM` on the handler returned the SSE
+  response without ever reading or writing it. Your instinct was right: not the KV binding. See
+  [[Decisions]]. Still empty in prod until the fix DEPLOYS (push to `main`).
 - **2 pre-existing failures in `functions/_research.test.mjs`** — verified pre-existing by running
   them against the pre-change file, where they fail identically. Not caused by this window's work.
 - The Gemini `streamGenerateContent?alt=sse` staging probe (`test/staging/gemini-sse-probe.js`) was

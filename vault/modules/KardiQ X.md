@@ -29,4 +29,20 @@ image→signal digitisation loses the diagnosis → pivot to IMAGE-based model (
   pack. Mastery needs correct answers on TWO SEPARATE days, so a single quiz never masters a lesson.
 - The 1,041-lesson pack is all `tier:"atlas"`; the library's tier chips must carry an Atlas chip or
   every filter hides it (only the default "All" chip and search reach it).
+- **One button, two click handlers.** The router owns a DELEGATED listener on `#kardioxRoot`
+  (`init()`), while individual screens set `host.onclick` on `#kxScroll`, a DESCENDANT. A screen
+  handler that does not stop propagation therefore runs AND then the router's `onClick` runs for the
+  same `data-act`. That is how the lesson bookmark ended up toggling the store twice and netting
+  zero. Rule: a `data-act` emitted by exactly one screen belongs to that screen — do not also add a
+  case for it to the router's switch.
+- Tests that swap providers must call `SMD_KARDIOX_PROVIDERS.use()` **after** `KARDIOX.open()`:
+  `open()` fires `checkBackend()`, whose health probe sets `_active = null` when it settles, silently
+  discarding an assembly injected beforehand. `?kardioxbackend=0` makes it early-return instead.
+
+## Tests
+- `node test/kardiox-providers.test.mjs` / `test/kardiox-screens.test.mjs` — unit (in the CI glob).
+- `node test/run-kardiox-progress-ui.mjs` — **real headless Chrome**, the Learn-progress regression
+  net: ring denominator, store overlay onto rows, Atlas chip filtering, and a bookmark surviving a
+  full reload. Not in CI (no browser job); run it by hand when touching the library/lesson screens.
+
 Deps: [[AI Control Center]] (ecg cap 10/day) · [[Infra]] R2.

@@ -2848,7 +2848,14 @@
       show("settings");
     } catch (e) {}
   }
-  function toggleBookmark() { var P = providers(); if (P && P.library && state.lessonId) { Promise.resolve(P.library.toggleBookmark(state.lessonId)).then(function () { haptic("light"); }); } }
+  /* NOTE: there is deliberately no router-level bookmark toggle. `data-act="kx-bookmark"` is emitted
+   * in exactly ONE place (the lesson screen, render09) and that screen handles it locally — it owns
+   * the aria-pressed/label update and the toast. A duplicate case here ALSO fired, because the
+   * screen's host.onclick sits on #kxScroll and the click then bubbles to this delegated listener on
+   * #kardioxRoot: one tap toggled the store twice and netted zero, so bookmarks never stuck. That was
+   * invisible while toggleBookmark only mutated the in-memory content record (already lost on reload);
+   * it became THE remaining bug once the 2026-08-26 sweep made the store real. Pinned by
+   * test/run-kardiox-progress-ui.mjs. */
 
   // Capture a real ECG image and return its bytes as a Blob. Native: Capacitor Camera (camera/photo) or
   // FilePicker (files/pdf); Web: a hidden <input type=file>. Rejects with {cancelled:true} on user cancel.
@@ -2963,7 +2970,7 @@
       case "kx-toggle-odimage": haptic("light"); toggleOdImage(); return;
       case "kx-toggle-parity": haptic("light"); toggleParity(); return;
       case "kx-ondevice-ai": haptic("light"); ondeviceAction(); return;
-      case "kx-bookmark": toggleBookmark(); return;
+      /* "kx-bookmark" is intentionally absent — render09 owns it locally (see the note by captureImage). */
     }
     if (act.indexOf("kxnav:") === 0) { deferred(act.slice(6)); return; }
     /* other data-act values are screen-internal (chips, quiz options, flip, tabs) — screens handle them. */

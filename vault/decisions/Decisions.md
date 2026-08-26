@@ -5,6 +5,44 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 (follow-up) · Closing the sweep's own caveats: verify by observation, not by reading
+
+The sweep below shipped with three stated caveats. Two are now closed by evidence; the third needs
+the owner. Closing them turned up a real bug the original fix had left standing.
+
+**Verification, not more code.** The answer-cache fix was pinned only by asserting the ORDER of two
+blocks in the handler's source. That is too weak for this particular bug: the original defect was
+code that was present, correct, and in a plausible-looking place — a source grep would have passed
+against the broken build. `test/maik-cache-wiring.test.mjs` now drives the real exported
+`onRequest()` over the live-stream path with a fake KV and a fake Gemini upstream and asserts on
+OBSERVED EFFECTS (a `maik:ans:*` key appears; the next identical question makes no upstream call).
+**Checked the check:** run against the pre-fix handler (`9f9e4770^`) the three live-stream tests
+FAIL and the three controls (non-stream, differential-not-cached, flag-off) still pass.
+
+**Confirmed against live prod, read-only.** `MAIK_KV` (`c110474d…`) holds 453 keys, 114 under
+`maik:`, including `maik:route:` — and **zero** under `maik:ans:`. `maik:cfg` reads
+`{"answerCache":true,...}`, so the KV runtime override is NOT the explanation. That is the reported
+symptom reproduced live and the last alternative cause ruled out. The FIX itself cannot be verified
+in prod until it deploys (server changes go live on push to `main`); the post-deploy check is
+`npx wrangler kv key list --namespace-id c110474def2947ddb657d93a6f9cbefe --prefix "maik:ans:" --remote`
+turning non-empty.
+
+**A browser test found what the unit tests could not.** KardiQ had no headless-browser harness, so
+the Learn-progress fix rested on unit tests plus a one-string UI edit. `test/run-kardiox-progress-ui.mjs`
+drives the real library + lesson screens in Chrome — and the bookmark still did not persist. Cause:
+`data-act="kx-bookmark"` had TWO live handlers, the lesson screen's `host.onclick` on `#kxScroll`
+and a duplicate `case` in the router's delegated listener on the ancestor `#kardioxRoot`. One tap
+toggled the store twice and netted zero. Invisible before the sweep (the toggle only mutated an
+in-memory record that was already lost on reload); once the store became real it WAS the bug.
+**Decision:** the router's duplicate case is deleted rather than the screen's handler silenced —
+`kx-bookmark` is emitted by exactly one screen, which also owns its `aria-pressed` and toast, and
+`render09` already documented the toggle as local. **Trade-off:** a future screen wanting the same
+`data-act` must handle it itself; there is no such screen. See [[KardiQ X]].
+
+**Still open — needs the owner.** `MAIK_GUEST_DAILY_LIMIT` is still **300** in prod (should be 15,
+which is also the code default in `functions/_usage.js`). Two attempts to write the secret were
+refused by this environment's permission policy, so it is untouched.
+
 ## 2026-08-26 · Audit sweep: four open items, each fixed at the seam every caller routes through
 
 Cleared from [[Roadmap]] and the 2026-08-25 handoff. Nothing here needed new architecture; each was
