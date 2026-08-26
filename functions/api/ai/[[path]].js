@@ -1537,13 +1537,29 @@ export async function onRequest(context) {
         // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
         // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
         // bug. The stream path now writes the finished answer back from its completion callback.
-        // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
-        // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
-        const _cacheEligible = _mcfg.answerCache && !hasDx && !(body && body.tier) && !maikWiringOn(env);
+        /* Only GENERIC knowledge answers: no computed Dx (case commentary), and never when
+         * Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
+         *
+         * LAZY TIERS USED TO BE EXCLUDED WHOLESALE, and that quietly disabled the cache for EVERYONE.
+         * maikLazyOn() in home.js defaults TRUE (`localStorage.getItem("smd_maik_lazy") !== "0"`), so
+         * the client sends `tier: 1` on essentially every question, `!(body.tier)` was therefore false
+         * on essentially every request, and `maik:ans:*` could never fill no matter what else was
+         * fixed. The exclusion was right in spirit and too blunt in practice.
+         *
+         * What actually must not be cached is a tier whose output depends on state NOT in the key:
+         * the tier-2 "more" call is conditioned on `priorLead` (the lead already shown), so two
+         * requests with the same question can legitimately need different detail. Tier 1 is a pure
+         * function of the question, exactly like an untiered answer.
+         *
+         * So: cache tier 1 and untiered, refuse anything carrying priorLead, and put the tier IN THE
+         * KEY so a short lead can never be served to a request that wanted the full answer. */
+        const _tier = (body && body.tier) || 0;
+        const _tierCacheable = (_tier === 0 || _tier === 1) && !(body && body.priorLead);
+        const _cacheEligible = _mcfg.answerCache && !hasDx && _tierCacheable && !maikWiringOn(env);
         let _ckey = null;
         if (_cacheEligible) {
           try {
-            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion });
+            _ckey = await answerCacheKey(sha256hex, env, { question: pkg.question, depth: body && body.depth, audience: pkg.audience, model: modelId(env), version: _mcfg.cacheVersion, tier: _tier });
             if (_ckey) {
               const _hit = await getCachedAnswer(usageKv(env), _ckey);
               if (_hit && _hit.text) {
