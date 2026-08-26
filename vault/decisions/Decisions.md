@@ -5,6 +5,91 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · ACCEPTED EXPOSURE: real patient identifiers are permanent in main's history
+
+**Owner decision: leave it, and record it here so it is not rediscovered as a surprise.**
+
+**What happened.** GHIS work captured against the live server used a real admitted patient. Real MR
+and IP numbers reached four files and were committed. `c47cdb47` ("GHIS: confirm activation by
+identity, not HTTP status; redact patient ids") replaced them with synthetic ids in the WORKING
+TREE — it stripped 32 identifier-shaped values (7-, 8- and 9-digit) across:
+
+- `docs/ghis/captured-initial-assessment-write.md`
+- `functions/api/ghis/[[path]].js`
+- `test/ghis-save-docid.test.mjs`
+- `test/ghis-ward-assessment.test.mjs`
+
+**A redaction commit does not remove anything.** The pre-redaction blobs remain reachable at
+`c47cdb47^` and its ancestors, and those commits are now in `main`. `git show <parent>:<file>`
+returns the real values to anyone who can clone. This is permanent short of a history rewrite.
+
+**Why it is being accepted rather than purged.** The repository is **private with 0 forks**, so the
+audience is exactly the people who already have repo access. Purging means `git filter-repo`/BFG
+plus a force-push to `main`, which invalidates every existing clone and all eight active worktrees —
+a real cost against an exposure that is already bounded. That trade is the owner's to make and they
+made it.
+
+**What this does NOT make acceptable.** `CLAUDE.md` says: never commit PHI. That rule is unchanged
+and this entry is not a precedent. The failure was not the redaction, which was correct and prompt —
+it was capturing against a **real patient** when a synthetic one would have proved the same thing.
+Capture against synthetic identifiers, or redact BEFORE the first commit, because after it there is
+no undo that does not hurt.
+
+**If the repo is ever made public, this must be revisited first.** Publishing without a history
+rewrite would publish these identifiers. Treat that as a hard gate on any decision to open the repo.
+
+**Found by:** the parallel session that did the GHIS work, which flagged it rather than quietly
+leaving it; verified independently here against `origin/main` before being recorded.
+
+## 2026-08-26 · One icon treatment on Home, and one stroke weight across three glyph systems
+
+**The split was a selector, not a design decision.** The glossy sphere lived on
+`.rnav-tile.feat .rnav-badge`, and `feat` marks a **branded** module, not a more important one. So
+six tiles (FundX, SknX, CliniX, SURGX, MAiTRI, OncoTree) read as the product and twelve — FollowCare,
+OPD Queue, Dictate, Scan Meds, Guides and the rest — read as placeholders, for a reason that had
+nothing to do with them. The sphere is now the base `.rnav-badge`. `.feat` is kept as a hook: it no
+longer owns the sphere but still marks a branded module and still carries the status dot.
+
+`.addtool` opts OUT deliberately — an empty slot inviting a choice is not a tool and should not
+pretend to be one. It needs the inherited sheen and shadow explicitly cleared or it renders as a
+*broken* sphere.
+
+### The trap worth remembering: `stroke-width` is in USER units
+
+Measured on the real page, the badges disagreed badly:
+
+| glyph | artboard → box | effective |
+|---|---|---|
+| inline SVG | 24-wide viewBox at 32px | 2 × 1.333 = **2.67px** |
+| the ECG | **48**-wide viewBox at 36px | 2 × 0.75 = **1.50px** |
+| Material Symbols | `wght 400` at 28px | ≈ **2.30px** |
+| brand PNGs | inline-styled | **48 / 38 / 34px** |
+
+The ECG was drawing at *nearly half* the others, and nothing warned anyone: the same literal `2`
+draws a different thickness in every viewBox, so **an icon drawn on a wider artboard silently comes
+out thinner**. This will happen again to the next icon someone adds on a non-24 artboard.
+
+**The fix is `vector-effect: non-scaling-stroke`**, which takes the viewBox out of the equation —
+`stroke-width` then means SCREEN pixels, so ONE number governs every SVG however it was drawn.
+Everything is driven from `--rds-glyph-stroke: 2.5` in `redesign-system.css`, with Material's weight
+axis at 500 to sit on the same line. Solid shapes (`.pupil`, `.p`, `.n`, `.beam`) are explicitly
+excluded, or they take an outline and bloat.
+
+The three brand marks moved from inline `width:48/38/34px` to a shared `.ai-brandmark` class: one
+optical box, `object-fit: contain`, which also deleted a triplicated inline filter.
+
+**Verified by measurement and by screenshot in both themes**, not by reading the CSS — the only
+honest way to check a visual property. Every SVG reports `eff=2.50px`, every ligature 28px/`wght 500`,
+every brand mark inside a 38px box.
+
+**Known limit, not a bug:** `surgx-logo.png`, `maitri-logo.png` and `clinix-logo.png` are RASTER. Size
+and colour normalise; the drawn line weight cannot. They read slightly finer than a Material glyph at
+38px. Redrawing them as SVG at 2.5px is the only real fix, and that is illustration work.
+
+**Not touched, deliberately:** the top quick-action row (`.rnav-qa-btn`) and the bottom tab bar are
+different components and keep their compact outline style. Unifying them is one more selector if the
+owner wants it. See [[Flags]] for the module gating that decides which tiles appear at all.
+
 ## 2026-08-26 · SURGX notes survive a reinstall, without a background sync
 
 **Decision:** an explicit, confirmed **backup + restore** to the surgeon's own Google Drive

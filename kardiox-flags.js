@@ -13,7 +13,7 @@
 
   // type: bool | int | tri (true/false/null) | enum. def: default when unset. query: ?alias (or null).
   var DEFS = {
-    smd_kardiox:            { type: "bool", def: false,     query: "kardiox",     desc: "KardioX AI master flag (home card + module). def:false = OFF by default for public/release (clinically unvalidated, regulatory-pending). Unlocked PER DEVICE via the sidebar Experimental access code (openKardiox sets smd_kardiox=1 on the passcode-verified unlock) or ?kardiox=1 for dev." },
+    smd_kardiox:            { type: "bool", def: true,      query: "kardiox",     desc: "KardiQ X AI master flag (home card + module). OWNER DECISION 2026-08-26: def:true, so the module is live for every user of this build rather than only on a passcode-unlocked device. THE CLINICAL POSITION IS UNCHANGED BY THIS FLAG - the model is still clinically unvalidated and regulatory-pending, and the in-module wording that says so must stay. Set def:false to close it again; ?kardiox=0 disables per device." },
     smd_kardiox_cloud:      { type: "tri",  def: null,      query: null,          desc: "Cloud ECG-analysis consent (null = ask once). Off = mock/offline only." },
     smd_kardiox_confidence: { type: "bool", def: true,      query: null,          desc: "Always show the AI confidence % (Settings · Intelligence)." },
     smd_kardiox_haptics:    { type: "bool", def: true,      query: null,          desc: "Haptic feedback for taps / report-ready / urgent / quiz." },

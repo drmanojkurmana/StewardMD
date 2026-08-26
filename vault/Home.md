@@ -30,6 +30,7 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
+- [[Flags]] — every feature flag: what is ON, what is OFF, and WHY (incl. the four that must never ship on)
 - [[Roadmap]] — pending / deferred work
 - **Handoffs** — session-spanning records, in `vault/handoff/`. Read the most recent before
   picking up a thread; they carry the open items and the temporary production values that must be
