@@ -61,6 +61,15 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
   renal/hepatic, pregnancy, paediatric, weight-based, infusions, interactions, comparisons, >8 words,
   or two drugs named. `MAIK_DOSE_NUANCE` has a whole-word group AND a stem group: inside `\b…\b`,
   "pregnan" never matches "pregnancy". Pinned by `test/run-maik-dose-lookup-ui.mjs`.
+- **The wait has art (2026-08-27).** `maikBufferHTML()` renders **Medibot** — an inline vector robot
+  listening to its own chest (`maikBotSVG(px)`, gradient ids suffixed per instance so several can
+  coexist) — and `maikSetSendMode()` mounts/unmounts a **dark-teal pixel walker** on the composer's
+  top edge, alternating **Stetho Buddy** (front-on, 13×12, ×2) and **Stetho Strider** (side-on,
+  14×10, ×3) per turn. Sprites are rows of characters → 1×1 `<rect>`s (`maikPixG`/`maikPixSVG`);
+  palette is fixed in `MAIK_PIX` (body #0E6E63, rim/diaphragm #2DD4BF, tube #14807A, eye #04211E).
+  No image files, no library, ~3 KB. The dark-teal fill is deliberately quiet, so the walker carries
+  a teal `drop-shadow` to stay legible at night — brighten the glow, never the fill. Everything is
+  CSS keyframes and stops under `prefers-reduced-motion`. Pinned by `test/run-maik-busy-art-ui.mjs`.
 - **The MaiK stylesheet is ONE JS template literal** — a backtick in a CSS comment ends it and takes
   the rest of `home.js` with it. Cost an hour of "why is the card gone".
 - **The router (`/refine`) is the biggest non-model cost** — 6.0-7.7s, and it runs BEFORE the
