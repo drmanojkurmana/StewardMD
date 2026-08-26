@@ -5,6 +5,32 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · SURGX notes survive a reinstall, without a background sync
+
+**Decision:** an explicit, confirmed **backup + restore** to the surgeon's own Google Drive
+(`surgx-backup.js`), NOT continuous sync. **Why:** notes are encrypted device-local with no note
+server by design, and every native install creates a new container, so a reinstall destroys them —
+twice, already. The `drive` destination that shipped in August is a readable `.txt` per note: an
+export for a human, not something the app can read back.
+
+**Why note bodies and not ciphertext:** `surgx-store.js` encrypts with a per-device, per-account
+random secret in `localStorage`. A reinstall wipes that secret, so backed-up ciphertext would be
+permanently unreadable. A backup that cannot restore is not a backup. The file carries note JSON
+into the doctor's OWN Drive — the same data class and destination the sanctioned `.txt` export
+already uses — and restoring re-encrypts under the new device's secret.
+
+**Why not auto-sync, given the request was "get SURGX synced":** the module's PHI posture states
+that every non-local send needs `confirmed:true` AND a second in-UI tap, and that no silent or
+background upload path exists. Continuous sync would break both. So the feature is foreground and
+double-pressed, and **the owner is told plainly that background sync remains available as a
+deliberate decision to relax that posture** rather than something shipped quietly under a
+sync-shaped request. **Trade-off:** the surgeon must remember to back up; the mitigation is that the
+control sits in the Notes screen where the loss is felt, not buried in settings.
+
+**Restore is additive**: strictly-newer-wins on `updatedAt`, equal timestamps skip, so a repeat
+restore writes nothing and a restore onto a working device cannot roll back newer edits. See
+[[SURGX]].
+
 ## 2026-08-26 · The overlay-stacking trap again (MaiK), and the brand field's missing query
 
 **A third module hit the same z-index trap.** `#maikSheet` is **999**; `.db-overlay` (Drugs

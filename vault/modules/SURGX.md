@@ -149,6 +149,35 @@ under a "Save to" card (inline, NOT an overlay — deliberately, to avoid anothe
 **Local is always written first**, on every destination — the exports layer on top of a successful
 local save, so a failed upload can never lose an operative note.
 
+## Notes BACKUP + RESTORE (Drive) — added 2026-08-26
+
+`surgx-backup.js` → `window.SMD_SURGX_BACKUP`. Distinct from the `drive` destination above: that one
+writes a **readable `.txt` per note** for a human, which the app cannot read back. This is the round
+trip, and it exists because **notes do not survive a reinstall** (every native install is a new
+container; two notes have been lost that way).
+
+- **One file**, `StewardMD-SURGX-notes-backup.json`, in the same "StewardMD Surgical Notes" folder,
+  **updated in place (PATCH)** so a surgeon's Drive does not fill with dated duplicates.
+- **It carries note BODIES, not ciphertext, and that is deliberate.** `surgx-store.js` encrypts with
+  a per-device, per-account random secret in `localStorage`; a reinstall wipes that secret, so
+  backed-up ciphertext would be permanently unreadable. Restoring re-encrypts with the NEW device's
+  secret. Same data class and same destination as the `.txt` export already sanctioned.
+- **The PHI posture is unchanged, and constrained the design:** `confirmed:true` at the API for both
+  directions, plus the arm-then-act double press in the UI (the `armSignOff()` discipline). Nothing
+  runs on a timer, on save, or in the background — **there is still no silent upload path, and no
+  auto-sync.** Adding continuous sync would be a deliberate change to this posture, not a tweak.
+- **Restore is additive and cannot lose work.** A device note is replaced only when the backup copy
+  is *strictly* newer (`updatedAt`); equal timestamps SKIP, so a repeat restore writes nothing and a
+  restore onto a working device cannot roll back newer edits.
+- Drive token + folder come from `SMD_SURGX_DEST` (now exported) — one Drive integration, not two.
+- A note that will not decrypt is **reported** in the result, never silently dropped from a file
+  presented as complete.
+- Tests: `test/surgx-backup.test.mjs` (merge rules, confirmation contract, back-up → wipe → restore
+  round trip against a stubbed Drive) + `test/run-surgx-backup-ui.mjs` (one tap arms, never sends).
+
+**The Notes banner was corrected**: it said notes are "never uploaded", which stops being true the
+moment the surgeon taps Back up. It now says the only copy that leaves is a backup they ask for.
+
 ### How the EMR write works (2026-08-24)
 GHIS has no captured operative-note form, so rather than invent an endpoint the note is **appended
 to `assessment.management_plan`** on the patient's own visit, through `saveAssessment` - the exact
