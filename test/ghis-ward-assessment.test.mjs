@@ -120,3 +120,37 @@ test("the doc_id 0 refusal is still in place", () => {
   assert.match(SRC, /no_active_assessment/);
   assert.match(SRC, /patient_mismatch/);
 });
+
+/* ── activation format, verified against the live server ──────────────────── */
+
+test("an admitted patient activates with the same <MR>-<visit> recordNo as an out-patient", () => {
+  /* Captured 2026-08-26 by clicking a patient in the IP worklist:
+   *   POST /Doctor/Home/Searchnew   recordNo=MR26160934-IPMR260025490
+   * followed immediately by GET /Doctor/Home/GetInitialAssessmentnew/?id=MR26160934.
+   *
+   * So the activation request never needed changing - only the VALUE was missing, because the
+   * episode was looked up in the OPD list alone. Pinned because a future refactor that "tidies"
+   * this into a different shape (an ip= param, a separate endpoint, a JSON body) would break the
+   * ward path silently: a wrong recordNo does not error, it just activates nothing and the form
+   * comes back blank with doc_id 0. */
+  const mr = "MR26160934", visit = "IPMR260025490";
+  assert.equal(mr + "-" + visit, "MR26160934-IPMR260025490");
+  // Both live call sites must build exactly that, and both must send the CSRF token with it.
+  const calls = SRC.match(/'\/Doctor\/Home\/Searchnew'[\s\S]{0,200}?recordNo=' \+ encodeURIComponent\((mrId|mr) \+ '-' \+ epi\)/g) || [];
+  assert.ok(calls.length >= 2,
+    `both the prefill and the save must activate with <MR>-<visit>; found ${calls.length}`);
+  assert.ok(SRC.includes("__RequestVerificationToken=' + encodeURIComponent(s.csrf || '') + '&recordNo="),
+    "activation carries the antiforgery token, as the capture does");
+  // The form is then read by MR, not by the visit - also straight from the capture.
+  assert.match(SRC, /GetInitialAssessmentnew\/\?id=' \+ encodeURIComponent\(mrId\)/,
+    "the prefill reads the form by MR number");
+});
+
+test("the ward episode reaches the activation unchanged", () => {
+  // An IPMR id must survive the candidate pass verbatim - no trimming of the IP prefix, no
+  // coercion to a number, both of which would produce a recordNo GHIS silently ignores.
+  const c = ipEpisodeCandidates({ patientId: "MR26160934", episodeId: "IPMR260025490" });
+  assert.equal(c[0][1], "IPMR260025490");
+  assert.equal("MR26160934" + "-" + c[0][1], "MR26160934-IPMR260025490",
+    "the captured recordNo is reproduced exactly");
+});

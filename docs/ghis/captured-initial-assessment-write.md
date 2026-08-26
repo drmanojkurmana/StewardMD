@@ -76,7 +76,44 @@ writes into live patient charts):
 Note the real payload posts `Y` for this while every other yes/no defaults to `N`. Not investigated;
 recorded so it is not mistaken for our own bug later.
 
-## 3. Session check
+## 3. ACTIVATION — how an ADMITTED patient is selected  ← the one that closed this
+
+Captured 2026-08-26 by clicking a patient in the IP worklist:
+
+```
+POST /Doctor/Home/Searchnew
+content-type: application/x-www-form-urlencoded; charset=UTF-8
+x-requested-with: XMLHttpRequest
+origin + referer: https://ghis.gitam.edu
+
+__RequestVerificationToken=CfDJ8...&recordNo=MR26160934-IPMR260025490
+```
+
+Then, immediately after:
+
+```
+GET /Doctor/Home/GetInitialAssessmentnew/?id=MR26160934
+```
+
+**An in-patient activates with exactly the same `<MR>-<visit>` recordNo as an out-patient.** The
+only difference is the visit itself: `IPMR260025490`, the "Visit ID" column of the IP worklist,
+where an out-patient carries an OP/episode number.
+
+This confirms the shape our code already builds (`mr + '-' + epi`). Nothing about the activation
+request needed changing. What was missing was only ever the VALUE: `saveAssessment` and
+`resolveEpisode` looked the episode up in the OPD list alone, so for an admitted patient there was
+no `epi` to activate with and the whole chain collapsed into "form doc_id is 0". Fixed by also
+searching the ward roster (GetIPWL).
+
+The full working sequence, all three steps now verified against the live server:
+
+1. `POST /Doctor/Home/Searchnew` with `recordNo=<MR>-<visit>` — sets the active visit in the
+   server-side session, and returns it as a Set-Cookie that MUST be carried into step 2.
+2. `GET /Doctor/Home/GetInitialAssessmentnew/?id=<MR>` — the form for whatever visit is active.
+3. `POST /Doctor/Home/CreateinitialAssessmentnew` — the whole model, ids empty, resolved from the
+   session.
+
+## 4. Session check
 
 ```
 GET /Doctor/Home/CheckSession
