@@ -330,11 +330,43 @@ test("a missing field never throws if it is not on screen", () => {
 
 /* ── the finalise gate must be passable ───────────────────────────────────── */
 
-test("finalise stays a DOUBLE press - that discipline is not relaxed", () => {
-  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
-  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
-  assert.match(h, /isArmed\("notefinal", ""\)/, "signing a clinical record is never one tap");
-  assert.match(h, /if \(!comp\.canFinalize\)/, "and never possible with a required field outstanding");
+test("finalising is still a deliberate act, and still refuses an incomplete note", () => {
+  /* The two-tap arm became a confirm() for the same reason as the send: an armed button is
+   * invisible state with a clock on it, and it kept failing silently on a real phone. A dialog is a
+   * STRONGER confirmation - it cannot be half-completed and cannot expire. */
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /window\.confirm\(writable/, "signing is confirmed, never a bare single tap");
+  assert.match(h, /if \(!goSign\) return/, "declining must abort before anything is signed");
+  assert.match(h, /if \(!comp\.canFinalize\)/, "an incomplete note can never be signed");
+  assert.ok(h.indexOf("canFinalize") < h.indexOf("state.note.finalized = true"),
+    "completeness is checked before the signature");
+});
+
+test("finalising OFFERS to send, because signing silently removes the send row", () => {
+  /* 2026-08-27 00:50: the owner tapped the big green Finalise button, saw "Finalised", and
+   * reasonably believed the note had gone to GHIS. It had not - the chart still showed the previous
+   * write. Worse, signing REMOVES the "Finalise and write to the hospital record" row (that row
+   * only exists on a draft) and replaces it with a plain destination needing a separate action. The
+   * most obvious button on the screen quietly took the send away. */
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /asked next whether to write it into the patient's hospital record/i,
+    "signing must warn that a send question follows");
+  assert.match(h, /Write it into the patient's hospital record now\?/, "and then actually ask");
+  assert.match(h, /D\.send\("emr"/, "and send it");
+  assert.match(h, /Signed\. Not sent/, "declining must say plainly that it was NOT sent");
+});
+
+test("the send offer only appears when there is a writable record", () => {
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /PT\(\)\.writability/);
+  assert.match(h, /if \(!writable\) \{ toast\("Finalised"\); return; \}/,
+    "a manual or Connect patient is signed and nothing more");
+});
+
+test("a failed send after finalising still says the note is signed and safe", () => {
+  const h = SCR.slice(SCR.indexOf('if (act === "notefinal") {'), SCR.indexOf('if (act === "notedelete")'));
+  assert.match(h, /SIGNED and saved on this phone, but it was NOT written/);
+  assert.match(h, /window\.openGHIS/, "an expired sign-in opens Ward Sync here too");
 });
 
 
