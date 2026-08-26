@@ -101,6 +101,38 @@ try {
   ok(await ev(`return document.querySelectorAll('#pfPro [data-offnote]').length;`) === 1,
     "a genuinely offline card shows exactly ONE error notice, never a stack of them");
 
+  // ── 3b. a get() that NEVER settles ──
+  // Reported: every row stuck on "Loading…" with no Retry. Firestore waits on the server
+  // indefinitely on a half-open connection, so the read has to be bounded and fall back to the
+  // on-device cache.
+  await ev(`
+    window.__cacheReads = 0;
+    window.SMD_DB = { collection: function(){ return { doc: function(){ return { collection: function(){ return { doc: function(){ return {
+      get: function(opts){
+        if (opts && opts.source === "cache") { window.__cacheReads++; return Promise.resolve({ exists: true, data: function(){ return { regNo: "CACHED-9", hospital: "Cached Hospital" }; } }); }
+        return new Promise(function(){});           // hangs forever, exactly like the bug
+      },
+      set: function(){ return Promise.resolve(); }
+    }; } }; } }; } }; } };
+    delete window.SMD_loadFirebase; return 1;`);
+  await ev(`SMD_openProfile(); return 1;`); await sleep(1000);
+  ok((await ev(PRO_ROWS)).indexOf("regno=Loading…") >= 0, "a hanging read shows Loading… at first");
+  await sleep(8000);
+  const hung = await ev(PRO_ROWS);
+  ok(await ev(`return window.__cacheReads;`) >= 1, "the hanging read is bounded and the cache is tried");
+  ok(hung.indexOf("regno=CACHED-9") >= 0, "cached details render instead of hanging on Loading…");
+  ok(hung.indexOf("Loading…") === -1, "no row is left on Loading… forever");
+
+  // …and when the cache has nothing either, the card says so ONCE, with a Retry.
+  await ev(`
+    window.SMD_DB = { collection: function(){ return { doc: function(){ return { collection: function(){ return { doc: function(){ return {
+      get: function(opts){ if (opts && opts.source === "cache") return Promise.reject(new Error("no cache")); return new Promise(function(){}); },
+      set: function(){ return Promise.resolve(); }
+    }; } }; } }; } }; } }; return 1;`);
+  await ev(`SMD_openProfile(); return 1;`); await sleep(9000);
+  ok(await ev(`return document.querySelectorAll('#pfPro [data-offnote]').length;`) === 1, "an unreadable hanging card shows exactly one Retry notice");
+  ok((await ev(PRO_ROWS)).indexOf("Loading…") === -1, "and no row is still Loading…");
+
   // ── 4. the first-run form ──
   await ev(`window.SMD_DB = window.__mkDb(); window.__fakeDoc = { regNo: "TSMC-12345" }; return 1;`);
   ok(JSON.stringify(await ev(`return SMD_PROFILE_SETUP.missing({});`)) === JSON.stringify(["phone", "hospital", "degree", "speciality"]),

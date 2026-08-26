@@ -2685,7 +2685,9 @@
       SMD_VERIFY.isVerified().then(function (ok) {
         try {
           if (!document.body.contains(box)) return;
+          var prev = box.querySelector("[data-verifbadge]"); if (prev) prev.remove();   // never two
           var b = document.createElement("span");
+          b.setAttribute("data-verifbadge", "1");
           b.className = "hv-pf-badge " + (ok ? "ok" : "warn");
           b.textContent = ok ? "Verified doctor" : "Not verified";
           box.appendChild(b);
@@ -2731,7 +2733,7 @@
       note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
-      if (rb) rb.addEventListener("click", function () { openAccount(); });
+      if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
     }
     /* Firestore is loaded LAZILY (window.SMD_loadFirebase, index.html) — window.SMD_DB simply does
      * not exist yet on a cold start. Declaring "Offline" on that first look was wrong: the user is
@@ -2739,7 +2741,12 @@
      * the reported bug. Boot Firebase and come back instead; only a real failure shows the notice. */
     if (uid && !fdb && typeof window.SMD_loadFirebase === "function") {
       ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
-      if (!acctFillProfessional._booting) {
+      // _bootTried, not a "booting" flag: SMD_loadFirebase fires its callback SYNCHRONOUSLY once
+      // the SDK is loaded, so a boot that leaves SMD_DB null (init threw) re-entered this function
+      // on the spot and recursed until the stack blew — leaving the rows on "Loading…" forever.
+      if (acctFillProfessional._booting) return;   // a boot is in flight — never declare Offline yet
+      if (!acctFillProfessional._bootTried) {
+        acctFillProfessional._bootTried = true;
         acctFillProfessional._booting = true;
         try {
           window.SMD_loadFirebase(function () {
@@ -2749,14 +2756,32 @@
             try { var live = sheetEl(); if (live && live.querySelector("#pfPro")) acctFillProfessional(live); } catch (e) {}
           });
         } catch (e) { acctFillProfessional._booting = false; }
+        return;
       }
-      return;   // a boot is in flight either way — never declare Offline while still waiting
+      // The boot already ran and left no database. Say so — with a Retry that re-arms it — instead
+      // of returning and leaving every row on "Loading…" forever.
+      offline("Offline");
+      return;
     }
     if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
 
     var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
-    pref.get().then(function (snap) {
+    /* A get() that never settles is the "stuck on Loading…" report: on a half-open connection
+     * Firestore waits on the server indefinitely, so every row sat at "Loading…" with no Retry and
+     * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
+    var settled = false;
+    function once(fn) { return function (v) { if (settled) return; settled = true; try { fn(v); } catch (e) {} }; }
+    var onFail = function () { try { if (document.body.contains(card)) offline("Offline"); } catch (e) {} };
+    pref.get().then(once(onData), once(onFail));
+    setTimeout(function () {
+      if (settled || !document.body.contains(card)) return;
+      try { pref.get({ source: "cache" }).then(once(onData), once(onFail)); }
+      catch (e) { once(onFail)(); }
+    }, 7000);
+
+    function onData(snap) {
       if (!document.body.contains(card)) return;
+      var stale = card.querySelector("[data-offnote]"); if (stale) stale.remove();   // the read worked
       var d = (snap && snap.exists && snap.data()) || {};
       var pendingCert = !!d.regNoPendingCert;
       setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
@@ -2839,7 +2864,7 @@
         });
       }
       wire();
-    }).catch(function () { try { if (document.body.contains(card)) offline("Unavailable offline"); } catch (e) {} });
+    }
   }
   // Submit a "please add this hospital" request → admin review (functions/api/hospital-request).
   // Attaches the Firebase ID token when signed in so the admin sees who asked. Resolves true/false.
@@ -3351,6 +3376,71 @@
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
+  // Factors the clinician has ALREADY answered in this conversation. The model re-emits its
+  // @@REFINE@@ line on every answer, so after "renal function: creatinine 1.2" the next answer
+  // asked for "renal impairment" again — the reported "it asks me to specify what I just
+  // specified". Cleared with the thread; never persisted; not PHI.
+  var _maikRefined = {};
+  // Reduce a factor label to its significant tokens: generic modifiers carry no meaning of their
+  // own ("renal function" / "renal impairment" are the same ask), and British spellings must match.
+  var MAIK_REFINE_STOP = { the: 1, a: 1, an: 1, of: 1, for: 1, to: 1, in: 1, on: 1, this: 1, patient: 1, patients: 1, any: 1, and: 1, or: 1, with: 1, s: 1, status: 1, state: 1, level: 1, levels: 1, function: 1, functions: 1, impairment: 1, impaired: 1, disease: 1, risk: 1, control: 1, pattern: 1, patterns: 1, history: 1, use: 1, current: 1, known: 1, presence: 1, degree: 1, severity: 1 };
+  function maikRefineTokens(label) {
+    var s = String(label || "").toLowerCase().replace(/ae|oe/g, "e").replace(/[^a-z0-9]+/g, " ").trim();
+    var out = {}, n = 0;
+    s.split(" ").forEach(function (w) {
+      if (!w || w.length < 3 || MAIK_REFINE_STOP[w]) return;
+      w = w.replace(/(ies)$/, "y").replace(/([^s])s$/, "$1");
+      if (!out[w]) { out[w] = 1; n++; }
+    });
+    return n ? out : null;
+  }
+  function maikRefineSubset(a, b) { for (var k in a) if (!b[k]) return false; return true; }
+  // Already asked if this factor's significant tokens are a subset of an answered one's, or vice
+  // versa — "patient preference" after "patient preference for injections", "renal impairment"
+  // after "renal function". Distinct factors that merely share a word ("blood glucose" vs "blood
+  // pressure") are NOT subsets of each other and still render.
+  function maikRefineKnown(label) {
+    var t = maikRefineTokens(label); if (!t) return false;
+    for (var k in _maikRefined) {
+      var o = _maikRefined[k];
+      if (o && (maikRefineSubset(t, o) || maikRefineSubset(o, t))) return true;
+    }
+    return false;
+  }
+  function maikRefineRemember(label) {
+    var t = maikRefineTokens(label); if (!t) return;
+    _maikRefined[Object.keys(t).sort().join(" ")] = t;
+  }
+  /* A plain "dose of amlodipine" is a LOOKUP, not a question for a language model: the StewardMD
+   * Drug Index already holds a curated, sourced dose line, offline and instantly. Sending it to the
+   * cloud costs the clinician ~8s and a paid turn to be told what the app already knows.
+   * Detection is deliberately narrow — anything the Index cannot answer (renal/hepatic dosing,
+   * pregnancy, paediatrics, weight-based, infusions, interactions, comparisons) is NOT a lookup and
+   * goes to MaiK untouched. The clinician always gets both doors; nothing is auto-redirected. */
+  // Two groups on purpose: whole words, then STEMS (a bare "pregnan" inside \b…\b never matches
+  // "pregnancy" — the boundary is after the n).
+  var MAIK_DOSE_NUANCE = /\b(renal|kidney|ckd|dialysis|egfr|creatinine|hepatic|liver|cirrhosis|child|children|infant|infants|elderly|weight|kg|overdose|maximum|max|versus|vs|compare|convert|switch|taper|stop|sepsis|shock|icu|failure|why|mechanism|iv|infusion)\b|\b(pregnan|lactat|breastfeed|paediatr|pediatr|neonat|obes|titrat|infus|interact|resist|ventilat|toxic|poison|drip)[a-z]*/;
+  function maikDoseLookup(q) {
+    try {
+      // Local normaliser: maikNorm lives inside the sheet closure and this runs at module scope.
+      var n = String(q || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      if (!/\b(dose|doses|dosage|dosing|how much)\b/.test(n)) return null;
+      if (MAIK_DOSE_NUANCE.test(n)) return null;
+      if (n.split(" ").filter(Boolean).length > 8) return null;
+      var list = (window.MEDDRUGS && MEDDRUGS._list) || []; if (!list.length) return null;
+      var hits = [];
+      list.forEach(function (d) {
+        var names = [String(d.generic || "").toLowerCase().replace(/\s*\(.*$/, "")].concat(d.brands || []);
+        var hit = names.some(function (name) {
+          name = String(name || "").toLowerCase().trim();
+          if (name.length < 4) return false;                     // "ccb", "asa" … class abbreviations
+          return new RegExp("\\b" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(n);
+        });
+        if (hit && hits.indexOf(d) < 0) hits.push(d);
+      });
+      return hits.length === 1 ? hits[0] : null;                  // two drugs named = not a lookup
+    } catch (e) { return null; }
+  }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
@@ -3576,14 +3666,37 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-refine .maik-fu::before{content:"+";font:800 13px/1 'Inter';opacity:.65;margin-right:-1px}
 .maik-refine .maik-fu:hover{background:var(--mk-bg);border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-refine .maik-fu:hover::before{opacity:1}
-/* Inline refine input: a tapped free-text factor chip becomes "factor: [ … ] →" so the clinician
-   supplies the value instead of the model assuming one. */
-.maik-refine-in{display:inline-flex;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
+/* Inline refine input: a tapped factor chip becomes "factor: [ … ] ×" so the clinician supplies the
+   value instead of the model assuming one. The value is optional; one button commits the group. */
+/* A staged factor takes its own row: at 200px the typed value was clipped mid-word
+   ("Known case of CAD P…"), which reads as data loss on the one screen that must show
+   the clinician exactly what they are about to ask. */
+.maik-refine-in{display:flex;flex:1 1 100%;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
 .maik-refine-il{font:600 12px/1 'Inter';color:var(--mk-mut);white-space:nowrap}
-.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:96px;max-width:200px;flex:1 1 auto;padding:2px 0}
+.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0}
 .maik-refine-inp::placeholder{color:var(--mk-faint)}
-.maik-refine-go{flex:none;border:0;background:var(--mk-teal);color:#fff;width:24px;height:24px;border-radius:50%;font:800 14px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.maik-refine-go:hover{filter:brightness(1.08)}
+.maik-refine-x{position:relative;flex:none;border:0;background:transparent;color:var(--mk-mut);width:24px;height:24px;border-radius:50%;font:700 15px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:background .12s,color .12s}
+.maik-refine-x:hover{background:var(--mk-bg);color:var(--mk-ink)}
+.maik-refine-x::after{content:"";position:absolute;inset:-9px}   /* a 24px glyph, a finger-sized target */
+.maik-refine-x:active{transform:scale(.92)}
+/* ONE commit for the whole group: stage as many factors as the patient needs, ask once. */
+.maik-refine-ask{width:100%;margin-top:10px;border:0;border-radius:12px;background:var(--mk-teal);color:#fff;font:700 13px/1 'Inter';letter-spacing:.01em;padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:transform .12s ease,filter .12s}
+.maik-refine-ask:hover{filter:brightness(1.06)}
+.maik-refine-ask:active{transform:scale(.985)}
+.maik-refine-ask[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.maik-fu,.maik-refine-ask,.maik-refine-x{transition:none}}
+/* Drug-Index fast path: what the app already knows, before a cloud turn is spent on it */
+.maik-dosecard{border:1px solid var(--mk-bd);border-radius:14px;padding:13px 14px;background:var(--mk-bg)}
+.maik-dose-h{display:flex;align-items:center;gap:6px;font:700 10.5px/1.2 'Inter';letter-spacing:.07em;text-transform:uppercase;color:var(--mk-teal)}
+.maik-dose-n{font:700 16px/1.25 'Inter';color:var(--mk-ink);margin-top:7px}
+.maik-dose-c{font:500 12px/1.3 'Inter';color:var(--mk-mut);margin-top:1px}
+.maik-dose-d{font:600 14px/1.5 'Inter';color:var(--mk-ink);margin-top:9px}
+.maik-dose-note{font:500 12px/1.45 'Inter';color:var(--mk-mut);margin-top:5px}
+.maik-dose-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+/* #maikSheet-scoped: body.dark .maik-fu outranks a bare class and repainted this as a plain chip.
+   (No backticks in this block — the whole stylesheet is one JS template literal.) */
+.maik-dose-go,#maikSheet .maik-dose-go{color:#fff;background:var(--mk-teal);border-color:transparent}
+.maik-dose-go:hover,#maikSheet .maik-dose-go:hover{color:#fff;background:var(--mk-teal);filter:brightness(1.06)}
 /* Phase 4 — "open in app" tool chips: bordered action chips with a trailing chevron */
 .maik-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px}
 .maik-tools-lbl{width:100%;font:700 10px/1.2 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--mk-mut);margin-bottom:1px}
@@ -4311,10 +4424,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return { lead: parts[0].trim(), detail: parts.slice(1).join("\n\n").trim() };
     }
     function maikRefineHTML(question, chips) {
-      if (!chips || !chips.length) return "";
+      chips = (chips || []).filter(function (c) { return !maikRefineKnown(c); });
+      if (!chips.length) return "";
       var h = '<div class="maik-refine"><div class="maik-refine-lbl">Refine for this patient</div><div class="maik-followups">';
       chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-refine="' + maikEscH(c) + '" data-maik-baseq="' + maikEscH(String(question || "")) + '" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
-      return h + '</div></div>';
+      // ONE commit for the group. Tapping chips only STAGES them, so a patient who is 71, on
+      // 1.2 creatinine and hypo-prone is described in one question instead of three separate
+      // answers that each know a third of the story.
+      h += '</div><button class="maik-refine-ask" data-maik-askall="1" data-maik-baseq="' + maikEscH(String(question || "")) + '" hidden>Ask with these details</button>';
+      return h + '</div>';
     }
     // Some refinement factors map to a real in-app tool rather than a re-prompt: e.g. "local resistance
     // patterns" belongs in the Antibiogram explorer (actual local/ICMR susceptibility data), not another
@@ -4937,6 +5055,23 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
+    // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
+    // saved/restored thread and are handled by the one delegated listener.
+    function maikDoseCard(drug, question) {
+      var dose = String(drug.dose || "").trim();
+      var html = '<div class="maik-dosecard">' +
+        '<div class="maik-dose-h">' + MK.book + '<span>StewardMD Drug Index</span></div>' +
+        '<div class="maik-dose-n">' + maikEscH(drug.generic) + '</div>' +
+        (drug.cls ? '<div class="maik-dose-c">' + maikEscH(drug.cls) + '</div>' : '') +
+        (dose ? '<div class="maik-dose-d">' + maikEscH(dose) + '</div>' : '') +
+        (drug.notes ? '<div class="maik-dose-note">' + maikEscH(drug.notes) + '</div>' : '') +
+        '<div class="maik-dose-acts">' +
+          '<button class="maik-fu maik-dose-go" data-maik-drugidx="' + maikEscH(drug.generic) + '">Open in Drug Index</button>' +
+          '<button class="maik-fu" data-maik-anyway="' + maikEscH(question) + '">Let MaiK answer</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -4973,15 +5108,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
       if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
+      var _lk = maikDoseLookup(q);
+      if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
       var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireChip) SMD_MAIK_ENGINE.wireChip(sheet); } catch (e) {}
@@ -5064,7 +5201,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
-      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikTopic = null; _maikCache = {};
+      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {};
       if (body) { body.innerHTML = _maikBodyHTML; scroll(); }
       try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
       maikCloseSide();
@@ -5178,26 +5315,85 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!chip || !chip.parentNode) return;
       var row = document.createElement("span");
       row.className = "maik-refine-in"; row.setAttribute("data-maik-inline", "1");
+      row.setAttribute("data-maik-factor", label);
       var lb = document.createElement("span"); lb.className = "maik-refine-il"; lb.textContent = label + ":";
       var inp = document.createElement("input");
       inp.type = "text"; inp.className = "maik-refine-inp"; inp.setAttribute("aria-label", label);
-      inp.placeholder = "specify…"; inp.autocomplete = "off"; inp.setAttribute("autocapitalize", "sentences");
-      var go = document.createElement("button");
-      go.type = "button"; go.className = "maik-refine-go"; go.setAttribute("aria-label", "Ask"); go.textContent = "→";
-      row.appendChild(lb); row.appendChild(inp); row.appendChild(go);
+      // The VALUE IS OPTIONAL. A factor like "renal impairment" or "differentials" is a lens, not a
+      // number — demanding text before the chip would do anything is what made those chips useless.
+      inp.placeholder = "add detail (optional)"; inp.autocomplete = "off"; inp.setAttribute("autocapitalize", "sentences");
+      var x = document.createElement("button");
+      x.type = "button"; x.className = "maik-refine-x"; x.setAttribute("aria-label", "Remove " + label); x.textContent = "×";
+      row.appendChild(lb); row.appendChild(inp); row.appendChild(x);
       chip.parentNode.replaceChild(row, chip);
-      function submit() {
-        var v = (inp.value || "").trim();
-        if (!v) { try { inp.focus(); } catch (e) {} return; }
-        if (_maikBusy) return;
-        var q = (baseq ? baseq + " — " : "") + label + ": " + v;
-        var tpc = maikV2() ? maikCanonTopic(q) : q;
-        runClinical(q, q, "concise", maikActiveCase(), tpc);
-      }
-      go.addEventListener("click", function (e) { e.preventDefault(); submit(); });
-      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); submit(); } });
+      var group = row.closest ? row.closest(".maik-refine") : null;
+      // × / counting / Enter are all DELEGATED (below) rather than bound here: a thread is saved and
+      // restored as innerHTML, so any listener bound to these nodes is gone on the next open and the
+      // × would look tappable and do nothing.
+      maikRefineSync(group);
       try { inp.focus(); } catch (e) {}
     }
+    // Forgiveness: × puts the original chip back exactly where it was — a mis-tap costs nothing.
+    function maikRefineUnstage(row) {
+      var group = row.closest ? row.closest(".maik-refine") : null;
+      var label = row.getAttribute("data-maik-factor") || "";
+      var baseq = (group && group.getAttribute("data-maik-baseq")) || "";
+      if (!baseq && group) { var b = group.querySelector("[data-maik-baseq]"); baseq = (b && b.getAttribute("data-maik-baseq")) || ""; }
+      var chip = document.createElement("button");
+      chip.className = "maik-fu";
+      chip.setAttribute("data-maik-refine", label);
+      chip.setAttribute("data-maik-baseq", baseq);
+      chip.setAttribute("data-maik-q", baseq + " — " + label);
+      chip.textContent = label;
+      if (row.parentNode) row.parentNode.replaceChild(chip, row);
+      maikRefineSync(group);
+    }
+    // Status feedback while staging: the commit button appears with the first factor and counts up.
+    function maikRefineSync(group) {
+      if (!group) return;
+      var btn = group.querySelector("[data-maik-askall]"); if (!btn) return;
+      var n = group.querySelectorAll("[data-maik-inline]").length;
+      btn.hidden = !n;
+      btn.textContent = n ? ("Ask with " + n + " detail" + (n > 1 ? "s" : "")) : "Ask with these details";
+    }
+    // The one question every staged factor becomes: "<base> — age: 71 · renal function: 1.2 creat".
+    // A factor with no value still travels, as the factor itself. Pure (DOM in, string out) so the
+    // composition is testable without an AI call.
+    function maikRefineCompose(group) {
+      if (!group) return "";
+      var parts = [];
+      Array.prototype.forEach.call(group.querySelectorAll("[data-maik-inline]"), function (row) {
+        var f = row.getAttribute("data-maik-factor") || "";
+        var inp = row.querySelector(".maik-refine-inp");
+        var v = ((inp && inp.value) || "").trim();
+        if (f) parts.push(v ? (f + ": " + v) : f);
+      });
+      if (!parts.length) return "";
+      var baseq = group.getAttribute("data-maik-baseq") || "";
+      if (!baseq) { var b = group.querySelector("[data-maik-baseq]"); baseq = (b && b.getAttribute("data-maik-baseq")) || ""; }
+      return (baseq ? baseq + " — " : "") + parts.join(" · ");
+    }
+    function maikRefineAsk(group) {
+      if (!group || _maikBusy) return;
+      var q = maikRefineCompose(group);
+      if (!q) return;
+      Array.prototype.forEach.call(group.querySelectorAll("[data-maik-inline]"), function (row) {
+        maikRefineRemember(row.getAttribute("data-maik-factor") || "");
+      });
+      var tpc = maikV2() ? maikCanonTopic(q) : q;
+      runClinical(q, q, "concise", maikActiveCase(), tpc);
+    }
+    // Staged-factor typing: keep the commit button's count live, and let Enter commit the group.
+    // Delegated for the same reason as × — a restored thread has no per-node listeners.
+    body.addEventListener("input", function (ev) {
+      var i = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-inp") : null;
+      if (i) maikRefineSync(i.closest(".maik-refine"));
+    });
+    body.addEventListener("keydown", function (ev) {
+      if (ev.key !== "Enter") return;
+      var i = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-inp") : null;
+      if (i) { ev.preventDefault(); maikRefineAsk(i.closest(".maik-refine")); }
+    });
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
@@ -5233,6 +5429,35 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var more = ev.target && ev.target.closest ? ev.target.closest(".maik-more") : null;
       if (more) { var mbub = more.closest(".maik-b.ai"); var cd2 = mbub && mbub.querySelector(".maik-collapsed"); if (cd2) { var opened = cd2.style.maxHeight === "none"; cd2.style.maxHeight = opened ? "260px" : "none"; cd2.style.overflow = opened ? "hidden" : ""; more.textContent = opened ? "Show more ▾" : "Show less ▴"; } return; }
+      // Drug Index fast path: open the molecule's own page, or fall back to the index.
+      var dx = ev.target && ev.target.closest ? ev.target.closest("[data-maik-drugidx]") : null;
+      if (dx) {
+        ev.preventDefault();
+        var dn = dx.getAttribute("data-maik-drugidx") || "";
+        close();
+        setTimeout(function () {
+          try {
+            if (window.MEDDB && MEDDB.openComposition && dn) MEDDB.openComposition(dn);
+            else if (window.MEDDRUGS && MEDDRUGS.openList) MEDDRUGS.openList();
+            else if (window.MEDDB && MEDDB.openList) MEDDB.openList();
+            else if (window.toast) toast("Drug Index loading…");
+          } catch (e) {}
+        }, 180);
+        return;
+      }
+      var anyway = ev.target && ev.target.closest ? ev.target.closest("[data-maik-anyway]") : null;
+      if (anyway) {
+        ev.preventDefault();
+        if (_maikBusy) return;
+        var aq = anyway.getAttribute("data-maik-anyway") || "";
+        var acard = anyway.closest(".maik-dosecard"); if (acard) acard.querySelector(".maik-dose-acts").remove();
+        runClinical(aq, aq, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(aq) : aq);
+        return;
+      }
+      var rx = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-x") : null;
+      if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
+      var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
+      if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
       if (!el) return;
       ev.preventDefault();

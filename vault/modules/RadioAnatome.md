@@ -41,6 +41,11 @@ built only from licence-cleared sources.
   `modules.json.credits` lines on the info screen. `provenance` in each `atlas.json` is an
   audit trail only — it contains internal tooling paths.
 - **The selected label's white pill is `paint-order: stroke`**, not a second element.
+- **The overlay is `fixed; inset:0`, so it inherits NO safe-area padding.** `.atlas-top`
+  carries `env(safe-area-inset-top)` and `.atlas-foot`/`.atlas-scroll`/`.atlas-sheet-body`
+  carry `env(safe-area-inset-bottom)` — every screen (catalog, viewer, grid, info) is built
+  from those same classes, so that is the only place the insets belong. Without them the
+  header renders under the iPhone status bar (fixed 2026-08-27).
 
 
 ## Content status (2026-08-18)

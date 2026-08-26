@@ -33,6 +33,20 @@ using a feature.
   `e_{hash}` never overwrites a pointer owned by a different uid (one email, one account).
 
 ## Gotchas
+- **A FAILED profile read is not "no ID" — never mint on it.** `ensure()` used to call `mint()` from
+  the `.get()` rejection handler, so one unreachable-Firestore moment (native cold start, ward wifi)
+  reissued the "permanent" ID and the new value overwrote `profile/self.smdId` and the `e_{hash}`
+  pointer. Reported as *"my StewardMD ID keeps changing"* — two different IDs on one Google account,
+  days apart, with the profile card showing "Offline" on the same screen.
+  Both paths now fail closed and retry on the next `ensure()`: `steward-id.js` AND the inline
+  fallback in `icu-collab.js`. Old directory rows survive, so an ID a colleague already saved still
+  resolves to the same uid. Pinned by the PERMANENCE block in `test/steward-id.test.js`.
+- **A profile doc with no `smdId` adopts from `e_{emailHash}` before minting** (same uid only), so a
+  lost/unreadable private doc recovers the account's own ID instead of issuing a new one. Adopting a
+  pointer owned by a DIFFERENT uid is never allowed — one smdId maps to one uid in the directory.
+- **The profile write is a transaction (`claimProfile`).** Two devices signing in at once both mint;
+  the loser adopts the winner's ID rather than renaming the account. Its directory row is an
+  unreferenced orphan, which costs nothing.
 - **Never cache the ID without its uid.** Now that it is minted for everyone, sign-out → sign-in as
   another user happens in one page lifetime; a uid-less cache hands account B account A's ID, and it
   then travels into referrals, invites and the directory. Both `steward-id.js` `_cache` and
@@ -65,6 +79,16 @@ One Firestore doc, two writers — keep them in step:
 `window.SMD_DB` once at open, found it absent (lazy SDK), and showed every row as "Offline" with a
 Retry that was the only escape. Boot via `SMD_loadFirebase` and re-fill the sheet that is on screen
 *then* — a re-render detaches the card you captured. Pinned by `test/run-profile-details-ui.mjs`.
+
+**It then broke a second way (fixed 2026-08-27), also pinned by that test:**
+- `pref.get()` **can hang forever** on a half-open connection — Firestore waits on the server with no
+  timeout — so every row sat on "Loading…" with no Retry. The read is now bounded (7s) and falls back
+  to `get({source:"cache"})` before it will say a word about being offline.
+- `SMD_loadFirebase` fires its callback **synchronously** once the SDK is loaded. The old `_booting`
+  flag was cleared before the re-entry, so a boot that left `SMD_DB` null recursed until the stack
+  blew. `_bootTried` now caps it at one boot per app-open; the Retry button re-arms it.
+- A successful read **clears a stale offline notice**, and the verification badge is written
+  idempotently (`data-verifbadge`) — two in-flight reads used to render "Verified doctor" twice.
 
 ## History
 Built as Phase 1 of the 4-phase identity/entitlement initiative (PR #545, all phases merged
