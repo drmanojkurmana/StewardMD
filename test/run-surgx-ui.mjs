@@ -445,39 +445,17 @@ try {
     const roundTrip = await ev(`window.SMD_SURGX_STORE.loadNote(window.SMD_SURGX_STORE.listNotes()[0].id).then(n => !!(n && n.finalized && n.values && n.values.findings))`);
     ok(roundTrip === true, "and it decrypts back to a finalised note with its fields intact");
 
-    /* ── encrypted Drive backup, in the real screen ────────────────────── */
-    console.log("\n--- 01 notes: encrypted Drive backup ---");
-    ok((await ev("!!window.SMD_SURGX_SYNC")) === true, "surgx-sync.js is loaded by index.html");
-    // Back to the notes LIST - the banner and controls live there, not on an open note.
+    /* The encrypted Drive backup is surgx-backup.js's (window.SMD_SURGX_BACKUP), built in parallel
+     * by another session and kept over a duplicate surgx-sync.js of mine. Its own harnesses cover
+     * it (test/run-surgx-backup-{e2e,ui}.mjs); all this file asserts is that the notes screen tells
+     * the truth while no backup module is present - a blunt warning, not a false reassurance. */
+    console.log("\n--- 01 notes: device-only warning ---");
     await ev("window.SURGX.open('notes')");
     await sleep(300);
-    // Default OFF: an upgrade must never silently begin uploading operative notes.
-    ok((await ev("window.SMD_SURGX_SYNC.flagOn() === false")) === true,
-      "the backup feature is OFF until it is switched on");
     ok((await ev(`document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('signing out or reinstalling')`)) === true,
-      "with no backup, the notes banner warns plainly that sign-out deletes them");
+      "with no backup module, the notes banner warns that sign-out destroys them");
     ok((await ev(`!document.querySelector('#surgxRoot [data-sgx="bkToggle"]')`)) === true,
-      "and no backup controls are shown while the feature flag is off");
-
-    // Turn the flag on and repaint: the controls and the honest banner must both appear.
-    await ev(`(() => { localStorage.setItem('smd_surgx_drive_backup','1'); return true; })()`);
-    await ev("window.SURGX.open('notes')");
-    await sleep(300);
-    ok((await ev("window.SMD_SURGX_SYNC.flagOn() === true")) === true, "the flag reads back on");
-    ok((await ev(`!!document.querySelector('#surgxRoot [data-sgx="bkToggle"]')`)) === true,
-      "the backup control appears once the feature is enabled");
-    ok((await ev(`document.querySelector('#surgxRoot .sgx-wrap').textContent.includes('Google')`)) === true,
-      "and the section names where the backup goes");
-    // Nothing may upload without BOTH a password and a Drive token; headless Chrome has neither.
-    ok(["no_password", "no_token"].includes(
-      await ev("window.SMD_SURGX_SYNC.syncNow().then(r => r.error)")),
-      "with no clinic password and no Drive token, a sync refuses instead of uploading");
-    ok((await ev("window.SMD_SURGX_SYNC.restore().then(r => r.ok === false)")) === true,
-      "and a restore cannot run either");
-    // The payload guard, in the real browser: a My Clinic backup must never load as notes.
-    ok((await ev(`(() => { try { window.SMD_SURGX_SYNC.parsePayload(JSON.stringify({v:1,patients:[]})); return "no-throw"; } catch (e) { return e.message; } })()`)) === "not_surgx_backup",
-      "a My Clinic backup is refused as a note backup");
-    await ev(`(() => { localStorage.removeItem('smd_surgx_drive_backup'); return true; })()`);
+      "and this screen no longer offers a second, competing backup control");
 
     // Sign-out must not leave PHI behind for the next account on this device.
     await ev("(() => { window.SMD_SURGX_STORE.wipe(); return true; })()");
