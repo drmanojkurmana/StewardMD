@@ -38,6 +38,31 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 - `smd_maik_llm_first` (default ON) makes standalone questions SKIP the templated Tier-0 KB path.
   The KB-only and On-device engines depend on Tier 0, so `SMD_MAIK_ENGINE.setPref()` forces it off
   for those two and restores the default for Cloud.
+- **"Refine for this patient" chips STAGE, they do not ask** (changed 2026-08-27). A tapped chip
+  becomes an inline `factor: [value]` pill; the value is OPTIONAL (a factor like "renal impairment"
+  is a lens, not a number, and demanding text made those chips dead ends); `×` puts the chip back;
+  ONE `[data-maik-askall]` button commits every staged factor as a single question
+  `base — age: 71 · renal function: creatinine 1.2`. Before this, each chip fired its own question,
+  so no answer ever saw the whole patient. `maikRefineCompose()` is pure and exposed on
+  `window.__MAIK_TEST`; pinned by `test/run-maik-refine-ui.mjs`. Unrelated to the `/refine`
+  ROUTER below — same word, different thing.
+- **A factor answered once is never asked again in that conversation.** The model re-emits its
+  `@@REFINE@@` line on every answer, so it kept asking for "renal impairment" right after
+  "renal function: creatinine 1.2". `maikRefineKnown()` drops a chip whose significant tokens
+  (generic modifiers — function/impairment/risk/status/level… — and ae/oe spellings stripped)
+  are a subset of an answered factor's, or vice versa. Distinct factors sharing one word
+  ("blood glucose" vs "blood pressure") are not subsets, so they survive. `_maikRefined`
+  clears with the thread.
+- **A plain dose lookup never reaches the model.** "dose of amlodipine" is answered from the curated
+  on-device formulary (`MEDDRUGS._list`, `drugs.js`) as a card in the thread — molecule, class, dose,
+  note — with two buttons: *Open in Drug Index* (`MEDDB.openComposition`) and *Let MaiK answer*.
+  Instant, offline, zero tokens; nothing is auto-redirected, the clinician still chooses.
+  `maikDoseLookup()` is deliberately NARROW and returns null for anything the Index cannot answer —
+  renal/hepatic, pregnancy, paediatric, weight-based, infusions, interactions, comparisons, >8 words,
+  or two drugs named. `MAIK_DOSE_NUANCE` has a whole-word group AND a stem group: inside `\b…\b`,
+  "pregnan" never matches "pregnancy". Pinned by `test/run-maik-dose-lookup-ui.mjs`.
+- **The MaiK stylesheet is ONE JS template literal** — a backtick in a CSS comment ends it and takes
+  the rest of `home.js` with it. Cost an hour of "why is the card gone".
 - **The router (`/refine`) is the biggest non-model cost** — 6.0-7.7s, and it runs BEFORE the
   answer on every NEW question. Cached server-side (hash of the normalised query → canonical
   concepts; the raw query is never stored) and warmed client-side on a typing pause.

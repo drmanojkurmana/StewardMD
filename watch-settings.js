@@ -117,6 +117,24 @@
 
   var devTaps = 0;
 
+  // "Connected" means the watch app is actually reachable right now — isWatchAppInstalled
+  // alone stays true for a watch that is off, out of range or whose app is closed, which
+  // read as a live connection that wasn't there.
+  function connLabel(st) {
+    var supported = !!(st && st.supported);
+    var paired = supported && !!st.paired;
+    var installed = paired && !!st.watchAppInstalled;
+    var reachable = installed && !!st.reachable;
+    return {
+      text: !supported ? "Not supported"
+        : !paired ? "No watch paired"
+        : !installed ? "Paired — app not installed"
+        : reachable ? "Connected"
+        : "Not connected",
+      dot: reachable ? "smdaw-ok" : (installed ? "smdaw-warn" : "smdaw-off")
+    };
+  }
+
   function render(bd, st) {
     bd.innerHTML = "";
     var native = isNative();
@@ -137,10 +155,9 @@
     // ── Connection ──────────────────────────────────────────────
     bd.appendChild(sectionTitle("Connection"));
     var conn = card();
-    var connText = !supported ? "Not supported"
-      : paired ? (installed ? "Connected" : "Paired — app not installed")
-      : "No watch paired";
-    var connDot = !supported || !paired ? "smdaw-off" : (installed ? "smdaw-ok" : "smdaw-warn");
+    var reachable = supported && !!st.reachable;
+    var conn0 = connLabel(st);
+    var connText = conn0.text, connDot = conn0.dot;
     conn.appendChild(infoRow("StewardMD Watch", valueText(connText, connDot)));
     conn.appendChild(infoRow("Paired", valueText(paired ? "Yes" : "No", paired ? "smdaw-ok" : "smdaw-off")));
     conn.appendChild(infoRow("Watch app installed", valueText(installed ? "Yes" : "No", installed ? "smdaw-ok" : "smdaw-off")));
@@ -148,6 +165,8 @@
     bd.appendChild(conn);
     if (!installed && paired) {
       bd.appendChild(Object.assign(document.createElement("div"), { className: "smdaw-note", textContent: "Open the Watch app on your iPhone ▸ StewardMD ▸ Install to add it to your watch." }));
+    } else if (installed && !reachable) {
+      bd.appendChild(Object.assign(document.createElement("div"), { className: "smdaw-note", textContent: "The watch app isn't running. Updates are queued and delivered the next time you open StewardMD on your watch." }));
     }
 
     // ── Sync ────────────────────────────────────────────────────
@@ -277,4 +296,5 @@
   }
 
   window.SMD_APPLE_WATCH = { open: open };
+  if (typeof module !== "undefined" && module.exports) module.exports = { connLabel: connLabel };
 })();
