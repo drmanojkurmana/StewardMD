@@ -35,9 +35,9 @@ Pending / deferred, by area. `- [ ]` so Obsidian renders checkboxes (Tasks/Datav
       `MENTOR_SYS` still to be written. Cases are fully playable without it.
 - [ ] Missing surgical calculators for `calculators.js` (NOT for SURGX): POSSUM / P-POSSUM,
       Clavien-Dindo, Tokyo Guidelines grading, LRINEC, Boey, Mannheim Peritonitis Index.
-- [ ] Apply SURGX's `?v=<contentVersion>` content-fetch fix to [[CliniX]] — `clinix-content.js`
-      fetches its JSON unversioned and `sw.js` caches on the full URL, so a content update may never
-      reach a device that has already cached it. Same exposure, not yet fixed there.
+- [x] Apply SURGX's `?v=<contentVersion>` content-fetch fix to [[CliniX]] — done 2026-08-26.
+      `clinix-content.js` now fetches the manifest `no-store` and everything else with
+      `?v=<contentVersion>`; pinned by `test/clinix-content-version.test.mjs`.
 - [ ] **[[CliniX]] clinical sign-off** — content is `ai_drafted` and the review gate hides ALL of it
       from students. Flip `review.status` to `approved` per skill after review. This is the ONLY
       thing between the module and student testing.

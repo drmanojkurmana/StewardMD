@@ -92,14 +92,18 @@
       // Optional by design: absent until surgx-backup.js lands (PR #760), and absence means
       // `backed` stays false, i.e. the stronger warning. Never a hard dependency.
       var B = window.SMD_SURGX_BACKUP;
-      if (B && B.describe) { var d = B.describe(); backed = !!(d && (d.hasBackup || d.lastBackupAt)); }
+      // status(), not describe(): describe(result) renders a RESULT into a sentence and returns a
+      // STRING, so `d.hasBackup` on it was always undefined and this branch could never be true.
+      // It failed safe - always the harsher warning - so nothing was harmed, but the softer message
+      // never appeared for anyone who HAD a backup. status() is the accessor that answers this.
+      if (B && B.status) { var d = B.status(); backed = !!(d && d.hasBackup); }
     } catch (x) { backed = false; }
     var label = n + " SURG" + String.fromCharCode(0x02E3) + " note" + (n === 1 ? "" : "s");
     try {
       return window.confirm(backed
         ? ("Signing out removes " + label + " from this device.\n\nYou have an encrypted Drive " +
-           "backup, so you can restore them after signing in again with the same My Clinic " +
-           "password.\n\nSign out?")
+           "backup, so you can restore them after signing in again using your SURG" +
+           String.fromCharCode(0x02E3) + " backup password.\n\nSign out?")
         : ("Signing out will permanently delete " + label + " from this device.\n\nThey are " +
            "encrypted on this device only and there is no server copy, so they cannot be " +
            "recovered. You can turn on encrypted Drive backup in Notes.\n\nSign out anyway?"));

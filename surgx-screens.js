@@ -902,10 +902,31 @@
         '<span class="go">' + ic("chevron_right") + "</span></button>";
     }).join("") : '<div class="sgx-empty">No notes on this device yet.</div>';
 
+    /* Backup to the doctor's OWN Drive. Offered here rather than buried in settings because the
+     * loss it prevents happens at reinstall time, when the surgeon is already looking at an empty
+     * Notes list and it is too late. Both directions are explicit taps - there is still no silent
+     * upload path (see surgx-backup.js). */
+    var bk = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var bkAvail = bk ? bk.available() : { ok: false, reason: "Unavailable." };
+    var backupHTML = bk ? ('<div class="sgx-seclabel">Backup</div>' +
+      '<div class="sgx-card"><div class="sgx-bk-h">Your own Google Drive</div>' +
+      '<div class="sgx-bk-s">Notes live only on this device, so reinstalling the app destroys them. ' +
+      'A backup encrypts them <b>on this device</b> with a password only you know, then writes them to ' +
+      'a folder in <b>your</b> Drive. Google stores ciphertext; nothing but this app, with your ' +
+      'password, can open it. Nothing is sent unless you tap.</div>' +
+      (bkAvail.ok
+        ? '<div class="sgx-bk-row">' +
+            '<button class="sgx-btn pri" data-sgx="bkup" ' + (list.length ? "" : "disabled ") + '>Back up ' + list.length + ' note' + (list.length === 1 ? "" : "s") + '</button>' +
+            '<button class="sgx-btn" data-sgx="bkrestore">Restore from Drive</button>' +
+          "</div>"
+        : '<div class="sgx-bk-off">' + esc(bkAvail.reason) + "</div>") +
+      '<div class="sgx-bk-msg" id="sgxBkMsg" role="status" aria-live="polite"></div></div>') : "";
+
     return head("Notes", "01") + wrap(
       notesBanner() +
       '<div class="sgx-seclabel">New note</div>' + newRows +
-      '<div class="sgx-seclabel">On this device</div>' + listHTML);
+      '<div class="sgx-seclabel">On this device</div>' + listHTML +
+      backupHTML);
   }
 
   /* The encrypted Drive backup lives in surgx-backup.js (the SMD_SURGX_BACKUP global), built in
@@ -918,7 +939,27 @@
    * truth, and deliberately does not reach for a global nothing defines - test/surgx-deeplinks
    * catches exactly that, and caught this. When surgx-backup.js merges it makes the wording
    * conditional on whether a backup actually exists. */
+  /* Three different true statements, and which one is true depends on the device. Written as a
+   * ladder rather than one line because the harsh version, shown to a surgeon who HAS set up a
+   * backup, just teaches them to ignore the banner - and the reassuring version, shown to one who
+   * has not, is a lie that costs notes. FAILS TOWARDS THE HARDER WARNING: anything unproven reads
+   * as "permanent". */
   function notesBanner() {
+    var B = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var st = null;
+    try { if (B && B.status) st = B.status(); } catch (e) { st = null; }
+    if (st && st.hasBackup) {
+      return '<div class="sgx-banner info">' + ic("lock") +
+        " Encrypted on this device, and backed up to your own Google Drive" +
+        (st.lastBackupAtText ? " (" + esc(st.lastBackupAtText) + ")" : "") +
+        ". Signing out or reinstalling removes them from this device; your backup password restores " +
+        "them.</div>";
+    }
+    if (B) {
+      return '<div class="sgx-banner warn">' + ic("lock") +
+        " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+        "signing out or reinstalling the app DELETES these notes permanently. Back them up below.</div>";
+    }
     return '<div class="sgx-banner warn">' + ic("lock") +
       " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
       "signing out or reinstalling the app DELETES these notes permanently.</div>";
@@ -1337,6 +1378,83 @@
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }
+
+      /* Notes backup / restore. DOUBLE PRESS, the armSignOff() discipline used elsewhere for actions
+       * that move patient data: the first tap arms and says what will happen, the second performs it.
+       * That is the "second in-UI tap" the PHI posture requires, and it also means a mis-tap on
+       * Restore cannot overwrite anything. */
+      /* Notes backup / restore. Tapping a button does NOT send: it opens the password form, which
+       * is the deliberate second step (and carries the warning that a lost password is final).
+       * The notes are encrypted on THIS device before anything reaches Google. */
+      if (act === "bkup" || act === "bkrestore") {
+        var BK = window.SMD_SURGX_BACKUP;
+        var msg = rootEl.querySelector("#sgxBkMsg");
+        if (!BK) { if (msg) msg.textContent = "Backup did not finish loading."; return; }
+        var restoring = act === "bkrestore";
+        var row = rootEl.querySelector(".sgx-bk-row");
+        if (!row) return;
+        if (msg) msg.textContent = "";
+        haptic("light");
+        row.innerHTML =
+          '<div class="sgx-bk-form" data-mode="' + (restoring ? "restore" : "backup") + '">' +
+            '<label class="sgx-bk-l" for="sgxBkPw">' + (restoring ? "Backup password" : "Set a backup password") + "</label>" +
+            '<input class="sgx-bk-in" id="sgxBkPw" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="' + (restoring ? "The password you used" : "At least 8 characters") + '">' +
+            (restoring ? "" :
+              '<input class="sgx-bk-in" id="sgxBkPw2" type="password" autocomplete="off" autocapitalize="off" ' +
+              'autocorrect="off" spellcheck="false" placeholder="Type it again">') +
+            '<div class="sgx-bk-warn">' + ic("lock") +
+              (restoring
+                ? " Your notes were encrypted on your device before they were uploaded. Only this password can open them."
+                : " Your notes are encrypted on this device first, so Google stores only ciphertext. <b>If you lose this password nobody can open the backup - not you, not StewardMD. There is no reset.</b>") +
+            "</div>" +
+            '<div class="sgx-bk-actions">' +
+              '<button class="sgx-btn" data-sgx="bkcancel" type="button">Cancel</button>' +
+              '<button class="sgx-btn pri" data-sgx="bkgo" data-mode="' + (restoring ? "restore" : "backup") + '" type="button">' +
+                (restoring ? "Unlock and restore" : "Encrypt and back up") + "</button>" +
+            "</div>" +
+          "</div>";
+        var f = row.querySelector("#sgxBkPw"); if (f) { try { f.focus(); } catch (e) {} }
+        return;
+      }
+      if (act === "bkcancel") { render(); return; }
+      if (act === "bkgo") {
+        var BK2 = window.SMD_SURGX_BACKUP;
+        var msg2 = rootEl.querySelector("#sgxBkMsg");
+        if (!BK2) { if (msg2) msg2.textContent = "Backup did not finish loading."; return; }
+        var isRestore = t.getAttribute("data-mode") === "restore";
+        var p1 = rootEl.querySelector("#sgxBkPw"), p2 = rootEl.querySelector("#sgxBkPw2");
+        var pw = p1 ? String(p1.value || "") : "";
+        // A typo in a password nobody can reset is a permanent loss, so it is caught HERE, before
+        // anything is written, rather than months later at restore time.
+        if (!isRestore) {
+          var chk = BK2.checkPassword(pw);
+          if (!chk.ok) { if (msg2) msg2.textContent = BK2.describe({ error: chk.error }); return; }
+          if (!p2 || String(p2.value || "") !== pw) {
+            if (msg2) msg2.textContent = "The two passwords do not match.";
+            return;
+          }
+        } else if (!pw) { if (msg2) msg2.textContent = BK2.describe({ error: "password_required" }); return; }
+
+        t.disabled = true;
+        t.textContent = isRestore ? "Unlocking…" : "Encrypting…";
+        if (msg2) msg2.textContent = "";
+        (isRestore ? BK2.restoreNow({ confirmed: true, password: pw })
+                   : BK2.backupNow({ confirmed: true, password: pw })).then(function (res) {
+          // Do not leave the password sitting in a DOM node once it has been used.
+          try { if (p1) p1.value = ""; if (p2) p2.value = ""; } catch (e) {}
+          var text = BK2.describe(res);
+          if (res && res.ok) {
+            render();
+            var m2 = rootEl.querySelector("#sgxBkMsg"); if (m2) m2.textContent = text;
+            return;
+          }
+          t.disabled = false;
+          t.textContent = isRestore ? "Unlock and restore" : "Encrypt and back up";
+          if (msg2) msg2.textContent = text;
+        });
+        return;
+      }
       /* MEDDB.openList() is the app's own Drugs Database entry point (api.js; the same call
        * home.js's `drugs` action makes). MEDDRUGS is a DIFFERENT module - home.js uses it only for
        * openInteractions - so do not "correct" this to that one.

@@ -5,6 +5,187 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · SURGX notes survive a reinstall, without a background sync
+
+**Decision:** an explicit, confirmed **backup + restore** to the surgeon's own Google Drive
+(`surgx-backup.js`), NOT continuous sync. **Why:** notes are encrypted device-local with no note
+server by design, and every native install creates a new container, so a reinstall destroys them —
+twice, already. The `drive` destination that shipped in August is a readable `.txt` per note: an
+export for a human, not something the app can read back.
+
+**Why note bodies and not ciphertext:** `surgx-store.js` encrypts with a per-device, per-account
+random secret in `localStorage`. A reinstall wipes that secret, so backed-up ciphertext would be
+permanently unreadable. A backup that cannot restore is not a backup. The file carries note JSON
+into the doctor's OWN Drive — the same data class and destination the sanctioned `.txt` export
+already uses — and restoring re-encrypts under the new device's secret.
+
+**Why not auto-sync, given the request was "get SURGX synced":** the module's PHI posture states
+that every non-local send needs `confirmed:true` AND a second in-UI tap, and that no silent or
+background upload path exists. Continuous sync would break both. So the feature is foreground and
+double-pressed, and **the owner is told plainly that background sync remains available as a
+deliberate decision to relax that posture** rather than something shipped quietly under a
+sync-shaped request. **Trade-off:** the surgeon must remember to back up; the mitigation is that the
+control sits in the Notes screen where the loss is felt, not buried in settings.
+
+**Restore is additive**: strictly-newer-wins on `updatedAt`, equal timestamps skip, so a repeat
+restore writes nothing and a restore onto a working device cannot roll back newer edits. See
+[[SURGX]].
+
+## 2026-08-26 · The overlay-stacking trap again (MaiK), and the brand field's missing query
+
+**A third module hit the same z-index trap.** `#maikSheet` is **999**; `.db-overlay` (Drugs
+Database) is **880** and `.mc-overlay` (Calculators) **870**. The "Open in StewardMD" copilot chips
+called `TOOLS[kind].open()` with the MaiK sheet still up, so the module opened BEHIND it, working
+and invisible. The sibling chip group (`data-maik-tool`) always `close()`s first, which is precisely
+why those worked. **Rule, now three modules deep (SURGX, CliniX, MaiK):** before deep-linking into a
+shared app surface, either close your own overlay or lift the target above it. Never assume a module
+overlay is below yours. Also: the "Drug database" chip pointed at `MEDDRUGS.openList()` (drugs.js,
+the small local list used elsewhere only for `openInteractions`) instead of `MEDDB.openList()`
+(api.js, the 4-lakh brand index) — `surgx-screens.js` already carried a comment warning not to
+confuse the two, and this is what confusing them looks like.
+
+**The Rx pad had no entry of its own** — only from a MaiK answer or a consult. It now has a tile in
+the Hospital hub. Opening it cold also produced NO drug row, because `regimenFromCtx()` always seeds
+a `"Lifestyle & general measures"` **advice** row, which carries no drug/brand input: a length check
+on `lines` therefore never fires, and the pad looked populated while offering nothing to type into.
+The guard tests for a non-advice row.
+
+**The brand field could not find brands the Drugs Database found instantly — same backend, one
+missing query.** The pad resolved the typed drug to a composition via `/search` and filtered that
+molecule's brands; it never called `/brand-search`, which the Drugs Database pairs with `/search`.
+So a drug field holding a shorthand the composition index does not carry (`Amoxiclav` for
+Amoxycillin + Clavulanic Acid) made every brand unreachable, while the empty state still said "Type
+the drug first". Two further faults surfaced while fixing it: clearing the box left the previous
+drug's suggestions on screen, and `if (loading) return` DROPPED a newer drug mid-flight, parking
+`loadedFor` on the wrong molecule. Requests supersede now. The rules live in **`rx-brand-match.js`**
+as pure functions, for the same reason `functions/_sse_parse.js` was extracted: unit-testable
+without a browser. **Harness note:** the app calls `location.reload()` when the guest session
+expires, which lands mid-run and wipes long browser tests — keep them short and push detail into
+unit tests. See [[Scan-Meds and Drug Index]].
+
+## 2026-08-26 · Edge swipe ownership, and the profile that never loaded
+
+**The edge swipe belongs to home; every other screen goes back.** `homeIsForeground()` decided "am
+I at home?" by asking `elementFromPoint()` about ONE pixel, the viewport centre. Anything not
+covering that pixel was invisible to it (a bottom sheet shorter than half the screen, a small
+dialog, a top-anchored panel), so home still looked like the foreground and the swipe opened the
+MENU instead of dismissing what was on top. A structural check now runs first: is a LIVE layer
+stacked above `#homeV2`? Measured on the app, at home every layer above home (`sbBackdrop`,
+`hvScrim`, `harrisonQuotePopup`) is `opacity:0` AND `pointer-events:none`, while an open sheet's
+scrim and sheet are `opacity:1` / `pointer-events:auto`. Both conditions required, so a parked layer
+can never suppress the home menu. The pixel test is KEPT as a second, independent condition because
+it still catches an overlay rendered INSIDE `#homeV2`. `edgeSwipeAction()` was
+`openMenuAtHome() || goBack()` and is now an explicit either/or, so a false positive can no longer
+open the menu on a screen the user meant to step back from. **Also:** `#hvSheet` (More, the settings
+sheets, Customize tools, Account) ships no back/close control, so the `BACK_SEL` scan found nothing
+in it and clicked a stray match on the home screen UNDERNEATH, leaving the sheet open. `goBack()`
+now clicks `#hvScrim`, whose handler is the app's own `closeSheet()`. Pinned by
+`test/run-swipe-back-ui.mjs`. **Not reproduced:** "the sidebar opens on every page" did not occur on
+any screen driven in the web build; what was found is the same rule failing on sheets/dialogs. If it
+persists on device, check the installed bundle's `?v=`.
+
+**The Profile's professional details never loaded.** Firestore is loaded LAZILY
+(`window.SMD_loadFirebase`), so `window.SMD_DB` does not exist on a cold start;
+`acctFillProfessional()` looked once, saw no DB and declared "Offline" with no way back but a manual
+Retry. It now boots Firebase and re-fills the sheet that is on screen at that moment. Separately,
+`offline()` appended its notice unconditionally, so a second call stacked a second
+"Couldn't load your details" row (visible in the owner's screenshot); it is now keyed on
+`data-offnote`. **Trade-off:** none. `Offline` now means an actual failure.
+
+**Nothing ever asked for the professional details.** `hospitals-in.js` (~2,400 institutions) and its
+searchable picker were already wired into the Profile card, but the card never loaded and no flow
+requested them, so the directory looked absent. `profile-setup.js` asks on every app start when a
+signed-in user is missing phone / college / degree / speciality; "Later" postpones for that app-open
+only. It writes the SAME `users/{uid}/profile/self` doc the card reads. Degree and Speciality are now
+rows on the card too, chosen from shared lists that live in `profile-setup.js` so the two surfaces
+cannot drift. **MBBS is in the degree list** although the request named only PG degrees: a
+near-mandatory form must let an intern or medical officer answer truthfully. Pinned by
+`test/run-profile-details-ui.mjs`. See [[StewardMD ID]].
+
+## 2026-08-26 (follow-up) · Closing the sweep's own caveats: verify by observation, not by reading
+
+The sweep below shipped with three stated caveats. Two are now closed by evidence; the third needs
+the owner. Closing them turned up a real bug the original fix had left standing.
+
+**Verification, not more code.** The answer-cache fix was pinned only by asserting the ORDER of two
+blocks in the handler's source. That is too weak for this particular bug: the original defect was
+code that was present, correct, and in a plausible-looking place — a source grep would have passed
+against the broken build. `test/maik-cache-wiring.test.mjs` now drives the real exported
+`onRequest()` over the live-stream path with a fake KV and a fake Gemini upstream and asserts on
+OBSERVED EFFECTS (a `maik:ans:*` key appears; the next identical question makes no upstream call).
+**Checked the check:** run against the pre-fix handler (`9f9e4770^`) the three live-stream tests
+FAIL and the three controls (non-stream, differential-not-cached, flag-off) still pass.
+
+**Confirmed against live prod, read-only.** `MAIK_KV` (`c110474d…`) holds 453 keys, 114 under
+`maik:`, including `maik:route:` — and **zero** under `maik:ans:`. `maik:cfg` reads
+`{"answerCache":true,...}`, so the KV runtime override is NOT the explanation. That is the reported
+symptom reproduced live and the last alternative cause ruled out. The FIX itself cannot be verified
+in prod until it deploys (server changes go live on push to `main`); the post-deploy check is
+`npx wrangler kv key list --namespace-id c110474def2947ddb657d93a6f9cbefe --prefix "maik:ans:" --remote`
+turning non-empty.
+
+**A browser test found what the unit tests could not.** KardiQ had no headless-browser harness, so
+the Learn-progress fix rested on unit tests plus a one-string UI edit. `test/run-kardiox-progress-ui.mjs`
+drives the real library + lesson screens in Chrome — and the bookmark still did not persist. Cause:
+`data-act="kx-bookmark"` had TWO live handlers, the lesson screen's `host.onclick` on `#kxScroll`
+and a duplicate `case` in the router's delegated listener on the ancestor `#kardioxRoot`. One tap
+toggled the store twice and netted zero. Invisible before the sweep (the toggle only mutated an
+in-memory record that was already lost on reload); once the store became real it WAS the bug.
+**Decision:** the router's duplicate case is deleted rather than the screen's handler silenced —
+`kx-bookmark` is emitted by exactly one screen, which also owns its `aria-pressed` and toast, and
+`render09` already documented the toggle as local. **Trade-off:** a future screen wanting the same
+`data-act` must handle it itself; there is no such screen. See [[KardiQ X]].
+
+**`MAIK_GUEST_DAILY_LIMIT` set back to 15** (owner ran it; two attempts from this session were
+refused by the environment's permission policy). 15 is also the code default in `functions/_usage.js`.
+**Not live yet:** Pages binds secrets at deploy time — Cloudflare's own docs say a secret "needs to
+be done before a deployment that uses" it — and production is still deployment `87b57391`
+(`main` @ `d59d8ba`), which predates the change. The next push to `main` picks it up; no separate
+action needed if #760 is merged. Nothing verifies this from outside, since secrets are write-only
+and the effective limit is not exposed on an unauthenticated route: confirm on the Pages deployment,
+not by probing.
+
+## 2026-08-26 · Audit sweep: four open items, each fixed at the seam every caller routes through
+
+Cleared from [[Roadmap]] and the 2026-08-25 handoff. Nothing here needed new architecture; each was
+a fix in the one place all callers already pass through, plus a test that pins it.
+
+**1. The MaiK answer cache was UNREACHABLE, not broken.** `maik:ans:*` stayed empty with
+`MAIK_ANSWER_CACHE=1` even though the router cache proved the KV binding good — the cause the
+handoff left open. The block sat BELOW the live-stream early return in `/explain`, so with
+`MAIK_LIVE_STREAM` (or `?livestream=1`) on, the handler returned the SSE response before reaching
+either the read or the write. Lookup hoisted above that return; the stream path now writes from its
+completion callback via `context.waitUntil` — the same pattern the router cache uses, which is
+exactly why that one always worked. **Trade-off:** none; flag-off is still byte-identical.
+
+**2. CliniX content could never be updated on a cached device.** SURGX's `?v=<contentVersion>` fix
+applied verbatim. See [[CliniX]].
+
+**3. KardiQ Learn state was frozen inside the content records.** `status`/`masteryPct`/`bookmarked`
+are fields of the shipped, read-only bundle, so the 1,041-lesson pack rendered "new · 0%" forever
+and bookmarks died on reload. Real state already existed in `kxProgress` (localStorage); the library
+now overlays it in `mockLibrary`, the single seam every screen reads through, and never mutates the
+content record. Two more in that layer: the progress ring's denominator was a hardcoded `100`
+against a 1,141-lesson library, and one lucky answer marked a lesson mastered — mastery now needs
+repeated success on SEPARATE days, which is what this log already said it should be.
+**Drift corrected:** the 2026-08-22 entry below says the `tier:"atlas"` mismatch makes all 1,041
+pack lessons "unreachable through the UI". Verified against the code: they DO render under the
+default "All" chip and in search; what was true is that no tier chip could ever surface them. An
+Atlas chip is added. The rest of that entry's critique (1.9 MB parsed on every load, no media
+licence manifest) stands unchanged, and so does the decision to build CliniX like RadioAnatome.
+
+**4. `functions/_research.test.mjs` had been red since #596** made per-module caps opt-in; it still
+asserted the old always-on 2/day. It now asks for `MAIK_ENFORCE_CAPS` the way `test/ai-usage.test.mjs`
+already did, and pins the launch default too. **The cap behaviour was never wrong — only the test.**
+
+Also corrected: `native-bridge.js` claimed `X-SMD-App` was INERT because no server code read
+`env.APP_GATE_KEY`. Three handlers read it and the secret has been in prod since 2026-08-16, so the
+header is load-bearing — acting on that comment would have locked the native app out of `/api/*`.
+
+**Status:** 2495/2495 unit green + `test/run-clinix-ui.mjs` green in a real browser. Client `?v=`
+tokens bumped. NOT deployed — server changes go live on push to `main`; the client needs
+build-www → cap sync → rebuild.
+
 ## 2026-08-24 · SURGX projects the existing surgery engine rather than re-authoring it
 New module (see [[SURGX]]), built behind `smd_surgx` off tag `pre-surgx`. Three decisions worth keeping.
 

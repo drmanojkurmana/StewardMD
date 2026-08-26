@@ -47,9 +47,24 @@ The **profile page** — `openAccount()` in `home.js`, exported as `window.SMD_o
 entry point opens the same sheet: the sidebar identity block (`#smdSbProfile` — your own photo/name),
 More → Profile, and Settings → Account → "Profile & StewardMD ID" (`sidebar-redesign.js` ACT
 `profile`). The page shows identity → StewardMD ID (copyable) → professional details (reg no,
-hospital/college, city, phone, edited in place) → account → danger zone. Also on both ICU Team
-screens. Note "Account & Verification" (verify.js) is a DIFFERENT sheet — the registration
-certificate flow — and is reached from the same Settings section.
+hospital/college, **degree**, **speciality**, city, phone, edited in place) → account → danger zone.
+Also on both ICU Team screens. Note "Account & Verification" (verify.js) is a DIFFERENT sheet — the
+registration certificate flow — and is reached from the same Settings section.
+
+## Professional details (`users/{uid}/profile/self`)
+One Firestore doc, two writers — keep them in step:
+- **The Profile card** (`acctFillProfessional` in `home.js`) reads and edits it in place.
+- **`profile-setup.js`** asks for the four required fields (phone · college/hospital · degree ·
+  speciality) on every app start while any is missing. "Later" postpones for that app-open only.
+  It owns the shared `DEGREES` / `SPECIALITIES` lists (`window.SMD_PROFILE_SETUP`), which the
+  Profile card's chooser also reads, so the two surfaces can never offer different options.
+- Institutions come from `hospitals-in.js` (`window.SMD_HOSPITALS`, ~2,400 entries) with a
+  request-to-add flow via `functions/api/hospital-request`.
+
+**Gotcha, and it bit us:** this card broke exactly the way the bullet above warns. It read
+`window.SMD_DB` once at open, found it absent (lazy SDK), and showed every row as "Offline" with a
+Retry that was the only escape. Boot via `SMD_loadFirebase` and re-fill the sheet that is on screen
+*then* — a re-render detaches the card you captured. Pinned by `test/run-profile-details-ui.mjs`.
 
 ## History
 Built as Phase 1 of the 4-phase identity/entitlement initiative (PR #545, all phases merged

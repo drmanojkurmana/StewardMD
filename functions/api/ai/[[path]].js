@@ -1532,14 +1532,11 @@ export async function onRequest(context) {
         // regression here cannot reach a clinician who did not ask for it.
         const liveStream = ["1", "true", "on", "yes"].indexOf(String(env.MAIK_LIVE_STREAM || "").toLowerCase()) >= 0
           || new URL(request.url).searchParams.get("livestream") === "1";
-        if (wantStream && liveStream) {
-          let up = null;
-          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
-          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
-          _at("streamOpen"); _mark.liveStream = !!up;
-          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {} }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
-        }
         // ── Answer cache (flag MAIK_ANSWER_CACHE, default OFF) ──────────────────────────────────────
+        // This MUST sit above the live-stream early return below. It used to sit under it, so whenever
+        // MAIK_LIVE_STREAM (or ?livestream=1) was on the handler returned the SSE response before ever
+        // reading or writing the cache - the "maik:ans:* stays empty though the KV binding is proven"
+        // bug. The stream path now writes the finished answer back from its completion callback.
         // Only GENERIC knowledge answers: no computed Dx (case commentary), no lazy tiers, and never
         // when Connect-MaiK wiring is on (that path can carry PHI). A hit is a zero-token instant reply.
         const _cacheEligible = _mcfg.answerCache && !hasDx && !(body && body.tier) && !maikWiringOn(env);
@@ -1557,6 +1554,17 @@ export async function onRequest(context) {
               }
             }
           } catch (e) { _ckey = null; }
+        }
+        if (wantStream && liveStream) {
+          let up = null;
+          const _tUp = Date.now();   // when we ISSUE the upstream request — the baseline for firstTokMs
+          try { up = await geminiStreamUpstream(env, [{ text: sysA + "\n\n" + grounded }], MAX_OUT, { temperature: hasDx ? 0.25 : 0.45, maik: true, model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : undefined }); } catch (e) { up = null; _mark.streamErr = String((e && e.message) || e).slice(0, 120); }
+          _at("streamOpen"); _mark.liveStream = !!up;
+          if (up) return withCors(request, streamGeminiToSSE(up, function (full) { try { recordUsage(gate, { inTok: estTokens(sys.length + grounded.length), outTok: estTokens((full || "").length), status: "success" }); } catch (e) {}
+            // Populate the answer cache from the STREAM path too. waitUntil, because the response has
+            // already been handed to the client by the time the last token lands (same pattern as the
+            // router cache write below, which is why that one has always worked and this one did not).
+            if (_ckey && full) { try { context.waitUntil(putCachedAnswer(usageKv(env), _ckey, { text: full }, env)); } catch (e) {} } }, _tUp, { idleMs: streamIdleMs(env), totalMs: streamTotalMs(env), model: isTutor ? (env.CLINIX_TUTOR_MODEL || CHEAP_MODEL) : modelId(env), preMs: _tUp - _mark.t0, headMs: _mark.t0 - _reqT0, hm: _hm, pm: { gate: _mark.gate, rerank: _mark.rerank, connect: _mark.connect, prompt: _mark.prompt, cfg: _mark.cfg, qms: _mark.qms } }));
         }
         let text;
         // Non-stream path (native, or a stream that failed to open): use the SAME full system prompt +

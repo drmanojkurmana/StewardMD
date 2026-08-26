@@ -590,10 +590,13 @@
     if (!Http || !Http.request) return null;          // signal caller to fall back
     init = init || {};
     var headers = headersToObj(init.headers);
-    // Native-app marker for the site access gate. NOTE: no server code currently reads
-    // env.APP_GATE_KEY, so this token is presently INERT (it enforces nothing) — it is rotated and
-    // kept in sync with the Cloudflare secret so it is ready if /api/* gate enforcement (or App
-    // Check) is turned on later. It ships INSIDE the app bundle only (the public web never serves it).
+    // Native-app marker for the site access gate. This is LOAD-BEARING, not inert: functions/api/ai,
+    // functions/api/fundx and functions/api/kardiox all check it against env.APP_GATE_KEY, and that
+    // secret has been provisioned in prod since 2026-08-16 — so an empty-Origin native call that
+    // omits this header is now REJECTED. Keep it in sync with the Cloudflare secret; changing one
+    // without the other locks the native app out of /api/*. It ships INSIDE the app bundle only.
+    // It is an app-POSSESSION signal, not per-user auth: it is extractable from the IPA/APK, so it
+    // bounds casual abuse only — per-user quota and the _usage.js breaker are the real controls.
     headers["X-SMD-App"] = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
     var ct = ""; for (var k in headers) if (k.toLowerCase() === "content-type") ct = String(headers[k]);
     var data = init.body;

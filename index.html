@@ -74,7 +74,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/sknx-screens.css?v=sx13">
 <link rel="stylesheet" href="/insulin.css?v=ins11">
 <link rel="stylesheet" href="/clinix.css?v=cx17-annex">
-<link rel="stylesheet" href="/surgx.css?v=sg7-deeplink">
+<link rel="stylesheet" href="/surgx.css?v=sg9-bkenc">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1499,7 +1499,7 @@ window.openExternal = function (u) {
 <script src="/account.js?v=gold364-thread" defer></script>
 <script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
-<script src="/signout-fix.js?v=gold341-backup" defer></script>
+<script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
@@ -1508,7 +1508,8 @@ window.openExternal = function (u) {
      prescription.js; export is user-triggered so defer order is safe. -->
 <script src="/vendor-html2canvas.js?v=1" defer></script>
 <script src="/vendor-jspdf.js?v=1" defer></script>
-<script src="/prescription.js?v=gold981-rx5night-vfyprime-mic1" defer></script>
+<script src="/rx-brand-match.js?v=rxb1" defer></script>
+<script src="/prescription.js?v=gold982-brandsearch" defer></script>
 <script src="/ku.js?v=gold434-thread" defer></script>
 <!-- Learning-streak active-time engine, achievement share card, and the Clinical Progress
      dashboard (levels / quests / badges / stats / timeline). Load after ku.js + account.js. -->
@@ -1585,7 +1586,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1604,7 +1605,7 @@ window.openExternal = function (u) {
 <script src="/haptics.js?v=gold348" defer></script>
 <script src="/antibiogram.js?v=gold992" defer></script>
 <script src="/asp-region.js?v=gold363" defer></script>
-<script src="/swipe-back.js?v=gold481-homemenu" defer></script>
+<script src="/swipe-back.js?v=gold482-edgeback" defer></script>
 <script src="/workspaces.js?v=gold1051-wsroute-surgx1" defer></script>
 <script src="/ws-surgery.js?v=gold363" defer></script>
 <script src="/ws-ent.js?v=gold363" defer></script>
@@ -1683,7 +1684,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-rules.js?v=kx3" defer></script>
 <script src="/kardiox-fusion.js?v=kx1" defer></script>
 <script src="/kardiox-ort-image.js?v=kx1" defer></script>
-<script src="/kardiox-providers.js?v=kx20-edge" defer></script>
+<script src="/kardiox-providers.js?v=kx22-progress" defer></script>
 <script src="/kardiox-net.js?v=kx4" defer></script>
 <script src="/kardiox-reconstruct.js?v=kx1" defer></script>
 <script src="/kardiox-stemi.js?v=kx1" defer></script>
@@ -1696,7 +1697,7 @@ window.openExternal = function (u) {
 <script src="/kardiox-acs.js?v=kx1" defer></script>
 <script src="/kardiox-feedback.js?v=kx1" defer></script>
 <script src="/kardiox-pdf.js?v=kx1" defer></script>
-<script src="/kardiox-screens.js?v=kx22-wipe" defer></script>
+<script src="/kardiox-screens.js?v=kx24-bmfix-wipe" defer></script>
 <script src="/kardiox.js?v=kx7" defer></script>
 <!-- ThoreX AI · chest X-ray interpretation (additive, flag-gated smd_thorex, DEFAULT OFF;
      enable with ?thorex=1 or Settings). Sibling of KardioX: scoped #thorexRoot + .tx-* +
@@ -1748,7 +1749,7 @@ window.openExternal = function (u) {
      deliberately unlike kardiox-content-pack.js which parses 1.9 MB on every page load. -->
 <script src="/clinix-flags.js?v=cx14-session" defer></script>
 <script src="/clinix-model.js?v=cx20-annex" defer></script>
-<script src="/clinix-content.js?v=cx14" defer></script>
+<script src="/clinix-content.js?v=cx15-ver" defer></script>
 <script src="/clinix-diagrams.js?v=cx13" defer></script>
 <script src="/clinix-audio.js?v=cx-stridor2" defer></script>
 <script src="/clinix-store.js?v=cx12" defer></script>
@@ -1772,10 +1773,11 @@ window.openExternal = function (u) {
 <script src="/surgx-store.js?v=sg13-backup" defer></script>
 <script src="/surgx-entitlement.js?v=sg10-nogate" defer></script>
 <script src="/surgx-patient.js?v=sg14-create" defer></script>
-<script src="/surgx-destinations.js?v=sg5-pt" defer></script>
+<script src="/surgx-destinations.js?v=sg6-bk" defer></script>
+<script src="/surgx-backup.js?v=sgbk2-enc" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg19-send" defer></script>
+<script src="/surgx-screens.js?v=sg20-bkenc" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->

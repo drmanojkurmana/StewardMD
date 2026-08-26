@@ -2,6 +2,7 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
 import { answerCacheOn, answerCacheKey, getCachedAnswer, putCachedAnswer, cacheTtl } from "../functions/_maik_cache.js";
+import { readFileSync } from "node:fs";
 
 // deterministic fake hash so key logic is testable without crypto
 const fakeHash = async (s) => Buffer.from(String(s)).toString("base64");   // injective stand-in for sha256hex
@@ -54,4 +55,22 @@ test("TTL: default 14d, clamps to 1..90, invalid → default", () => {
   assert.equal(cacheTtl({ MAIK_CACHE_TTL_DAYS: "1000" }), 90 * 86400);   // clamp high
   assert.equal(cacheTtl({ MAIK_CACHE_TTL_DAYS: "2" }), 2 * 86400);       // honored
   assert.equal(cacheTtl({ MAIK_CACHE_TTL_DAYS: "0" }), 14 * 86400);      // 0 is invalid → default 14
+});
+
+/* The cache was correct but UNREACHABLE: it sat below the live-stream early return, so with
+ * MAIK_LIVE_STREAM (or ?livestream=1) on, /explain returned the SSE response before ever touching
+ * it - "maik:ans:* stays empty though the KV binding is proven". Pin the wiring, not just the unit. */
+const HANDLER = readFileSync(new URL("../functions/api/ai/[[path]].js", import.meta.url), "utf8");
+
+test("the answer cache is consulted BEFORE the live-stream early return", () => {
+  const cache = HANDLER.indexOf("// \u2500\u2500 Answer cache (flag MAIK_ANSWER_CACHE");
+  const stream = HANDLER.indexOf("if (wantStream && liveStream) {");
+  assert.ok(cache > 0, "answer-cache block not found in the handler");
+  assert.ok(stream > 0, "live-stream block not found in the handler");
+  assert.ok(cache < stream, "the answer cache must be read before /explain can return a live stream");
+});
+
+test("both answer paths WRITE the cache (stream via waitUntil, non-stream inline)", () => {
+  assert.match(HANDLER, /context\.waitUntil\(putCachedAnswer\(/, "the stream path never writes the answer cache");
+  assert.match(HANDLER, /if \(_ckey && text\) \{ try \{ await putCachedAnswer\(/, "the non-stream path never writes the answer cache");
 });
