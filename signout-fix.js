@@ -79,11 +79,20 @@
       if (st && st.listNotes) n = (st.listNotes() || []).length;
     } catch (x) { return true; }
     if (!n) return true;
+    /* If the surgeon turned on the encrypted Drive backup, the notes are recoverable and the
+     * warning must say so - an alarming message about permanent loss, shown to someone who set up
+     * a backup precisely so this would not be permanent, just teaches them to ignore the dialog. */
+    var backed = false;
+    try { backed = !!(window.SMD_SURGX_SYNC && window.SMD_SURGX_SYNC.hasBackup()); } catch (x) {}
+    var label = n + " SURG" + String.fromCharCode(0x02E3) + " note" + (n === 1 ? "" : "s");
     try {
-      return window.confirm(
-        "Signing out will permanently delete " + n + " SURG" + String.fromCharCode(0x02E3) + " note" +
-        (n === 1 ? "" : "s") + " from this device.\n\nThey are encrypted on this device only and " +
-        "there is no server copy, so they cannot be recovered.\n\nSign out anyway?");
+      return window.confirm(backed
+        ? ("Signing out removes " + label + " from this device.\n\nYou have an encrypted Drive " +
+           "backup, so you can restore them after signing in again with the same My Clinic " +
+           "password.\n\nSign out?")
+        : ("Signing out will permanently delete " + label + " from this device.\n\nThey are " +
+           "encrypted on this device only and there is no server copy, so they cannot be " +
+           "recovered. You can turn on encrypted Drive backup in Notes.\n\nSign out anyway?"));
     } catch (x) { return true; }
   }
 

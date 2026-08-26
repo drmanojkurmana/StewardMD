@@ -505,3 +505,54 @@ run left the flag ON and made the next run fail three checks against correct cod
 failing "viva opens on the MBBS tier by default" for the same reason. Fresh profile per run. A test
 that fails because the last run of itself passed is worse than no test. (Second harness-state bug of
 this exact shape this week; the first was `smd_verify_bypass`.)
+
+---
+
+## 2026-08-26 — SURGX notes get an encrypted Drive backup (the only clinical data with no copy)
+
+**Why.** SURGX notes were the single piece of clinical data in the app with no copy anywhere:
+encrypted by `surgx-store.js` under a **per-device random secret** with no server record. A
+reinstall makes a new container and destroys them (CLAUDE.md records this costing a linked note
+twice in one session), and once the sign-out wipe actually started running (same day, see above)
+signing out destroyed them too.
+
+**Why the local ciphertext could not simply be uploaded.** The device secret exists nowhere but
+that phone. Uploading blobs encrypted under it would produce a backup no other device could ever
+read: insurance that is worthless at the moment it is claimed. So the backup is **re-encrypted
+under a password-derived key** (PBKDF2-SHA256 200k -> AES-GCM 256) that the surgeon can reproduce
+on a new phone.
+
+**Reused, not reinvented.** That scheme is `personal-clinic.js`'s `encryptBackup`/`decryptBackup`,
+already shipping for My Clinic, and the same clinic backup password from the Keychain. One password
+for the doctor, one crypto implementation to review, none to drift. Drive auth is native-auth's
+existing `SMD_getDriveToken` (`drive.file` scope, so it cannot see the user's other Drive files).
+`surgx-sync.js` adds no new auth and no new cryptography.
+
+**Decisions worth not re-litigating:**
+- **Opt-in, default OFF** (`smd_surgx_drive_backup`, def false). An app upgrade must never silently
+  begin uploading operative notes. Both the feature flag AND a per-account toggle must be on.
+- **Silence is not consent.** Personal clinic treats a missing auto-sync key as ON (opt-out). For
+  PHI leaving the device that is the wrong way round, so `autoSyncOn()` requires an explicit `"1"`.
+- **Both keys are per-account**, mirroring `surgx-store.js`'s `uid()`. Global keys would have meant
+  the next person on a shared ward phone inherits "backup on" and starts uploading to their own
+  Drive without ever agreeing, and is told they have a backup to restore when they have none. This
+  is the same shared-device trap the sign-out wipe exists for.
+- **Restore MERGES, newest-wins per note, never deletes.** A restore that dropped a note the phone
+  had but the backup did not would turn "recover my notes" into "lose my notes".
+- **ONE file, overwritten in place.** Drive must not accumulate a history of operative notes.
+- **An empty note list never uploads**, so a fresh install cannot overwrite a real backup with an
+  empty one.
+- **A My Clinic backup is refused as a note backup.** Both use the same `{smd_enc:1}` envelope and
+  `decryptBackup` opens either, so only the payload (`{surgx:1}`) can tell them apart. It is checked
+  before anything is written.
+
+**Consistency fix that came with it.** The Notes banner said "Encrypted on this device and never
+uploaded ... Sign out wipes them" unconditionally. That becomes a flat lie once a backup exists, so
+it now branches, and the sign-out confirmation softens when a backup is present (an alarming
+"permanent loss" dialog shown to someone who set up a backup only teaches them to ignore dialogs).
+
+**GHIS was already done.** `smd_surgx_dest_emr` has defaulted true, `/api/ghis/surgx-note` writes
+over the same verified transport as the OPD assessment (visit activation, authoritative form
+re-serialisation, patient_id mismatch abort, doc_id 0 refusal), gated by the same `QUEUE_EMR_WRITE`
+env var. No new work was needed; it needs a patient with an ACTIVE assessment, which is what the
+earlier live attempt lacked.

@@ -903,11 +903,68 @@
     }).join("") : '<div class="sgx-empty">No notes on this device yet.</div>';
 
     return head("Notes", "01") + wrap(
-      '<div class="sgx-banner info">' + ic("lock") +
-      " Encrypted on this device and never uploaded. There is no SURGX note server, by design. " +
-      "Sign out wipes them.</div>" +
+      notesBanner() +
       '<div class="sgx-seclabel">New note</div>' + newRows +
-      '<div class="sgx-seclabel">On this device</div>' + listHTML);
+      '<div class="sgx-seclabel">On this device</div>' + listHTML +
+      backupSection());
+  }
+
+  function SY() { try { return window.SMD_SURGX_SYNC || null; } catch (e) { return null; } }
+
+  /* The banner has to describe what is ACTUALLY true of these notes, which now depends on whether
+   * the surgeon turned the encrypted Drive backup on. The old text said "never uploaded ... sign
+   * out wipes them" unconditionally; leaving that up once a backup exists would be a false
+   * reassurance in one direction and a false warning in the other. */
+  function notesBanner() {
+    var sy = SY();
+    if (sy && sy.flagOn() && sy.autoSyncOn()) {
+      return '<div class="sgx-banner info">' + ic("lock") +
+        " Encrypted on this device, and backed up to your Google Drive still encrypted - Google " +
+        "cannot read it. Your notes survive a reinstall or a sign-out." + "</div>";
+    }
+    return '<div class="sgx-banner warn">' + ic("lock") +
+      " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+      "signing out or reinstalling the app DELETES these notes permanently. Turn on Drive backup " +
+      "below to keep a copy.</div>";
+  }
+
+  /* Backup controls live at the BOTTOM of the notes list, not in Settings: the moment a surgeon
+   * understands the risk is when they are looking at notes they would hate to lose. */
+  function backupSection() {
+    var sy = SY();
+    if (!sy || !sy.flagOn()) return "";
+    var on = sy.autoSyncOn();
+    var last = sy.lastBackupAt();
+    var when = last ? new Date(last).toLocaleString() : "never";
+    var body = '<div class="sgx-notesec"><div class="h">Encrypted Drive backup</div>' +
+      '<div class="n">' +
+      (on
+        ? "On. Notes are re-encrypted with your My Clinic password and kept as ONE file in your own " +
+          "Google Drive. Last backup: " + esc(when) + "."
+        : "Off. Your notes exist only on this phone and nowhere else, so a reinstall or a sign-out " +
+          "loses them. Turning this on keeps ONE encrypted file in your own Google Drive, locked " +
+          "with your My Clinic password - Google cannot read it.") +
+      "</div>" +
+      '<div class="sgx-btnrow">' +
+      '<button class="sgx-btn" data-sgx="bkToggle">' + (on ? "Turn backup off" : "Turn backup on") + "</button>";
+    if (on) {
+      body += '<button class="sgx-btn" data-sgx="bkNow">Back up now</button>' +
+        '<button class="sgx-btn" data-sgx="bkRestore">Restore from Drive</button>';
+    }
+    return body + "</div></div>";
+  }
+
+  /* One place to turn a sync/restore result into something a surgeon can act on. Never surfaces a
+   * raw transport string: "http_403" tells a clinician nothing they can do. */
+  function backupMessage(r) {
+    if (r && r.ok) return null;
+    var e = String((r && r.error) || "");
+    if (e === "no_password") return "Set a My Clinic backup password first (Settings -> My Clinic). It is the key to your backup.";
+    if (e === "no_token") return "Sign in with Google in the installed app to use Drive backup.";
+    if (e === "no_backup") return "There is no backup in this Drive account yet.";
+    if (e === "wrong_password") return "That password does not open this backup. It must be the same My Clinic password used when it was made.";
+    if (e === "not_surgx_backup" || e === "unreadable_backup") return "That Drive file is not a SURGX note backup.";
+    return "Backup failed. Check your connection and Google sign-in.";
   }
 
   /* Create a blank note of a type, optionally from a procedure template. */
@@ -1355,6 +1412,54 @@
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
+      if (act === "bkToggle") {
+        var sy0 = SY(); if (!sy0) return;
+        var turningOn = !sy0.autoSyncOn();
+        sy0.setAutoSync(turningOn);
+        haptic("light"); render();
+        if (turningOn) {
+          toast("Backing up...");
+          Promise.resolve(sy0.syncNow()).then(function (r) {
+            var m = backupMessage(r);
+            toast(m || "Notes backed up to your Drive, encrypted.");
+            render();
+          });
+        } else {
+          toast("Backup off. The Drive copy already made is left untouched.");
+        }
+        return;
+      }
+      if (act === "bkNow") {
+        var sy1 = SY(); if (!sy1) return;
+        toast("Backing up...");
+        Promise.resolve(sy1.syncNow()).then(function (r) {
+          var m = backupMessage(r);
+          toast(m || (r && r.skipped === "empty" ? "No notes to back up yet." : "Notes backed up, encrypted."));
+          render();
+        });
+        return;
+      }
+      if (act === "bkRestore") {
+        var sy2 = SY(); if (!sy2) return;
+        /* A restore MERGES (newest wins per note) and can never delete a note, so it does not need
+         * a scary confirmation - but it does need to say that, or a surgeon will not risk it. */
+        var okGo = true;
+        try {
+          okGo = window.confirm(
+            "Restore notes from your encrypted Drive backup?\n\nThis ADDS anything missing and " +
+            "keeps the newer version of anything you already have. Nothing on this phone is deleted.");
+        } catch (e) {}
+        if (!okGo) return;
+        toast("Restoring...");
+        Promise.resolve(sy2.restore()).then(function (r) {
+          var m = backupMessage(r);
+          if (m) { toast(m); return; }
+          toast(r.restored ? ("Restored " + r.restored + " note" + (r.restored === 1 ? "" : "s") + ".")
+                           : "Already up to date - nothing was missing.");
+          render();
+        });
+        return;
+      }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");

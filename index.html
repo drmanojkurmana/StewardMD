@@ -1499,7 +1499,7 @@ window.openExternal = function (u) {
 <script src="/account.js?v=gold364-thread" defer></script>
 <script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
-<script src="/signout-fix.js?v=gold340-wipe" defer></script>
+<script src="/signout-fix.js?v=gold341-backup" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles" defer></script>
 <!-- Search the Indian Medical Register (window.SMD_NMC), opened from More. Backend: /api/nmc-search. -->
@@ -1765,17 +1765,20 @@ window.openExternal = function (u) {
      (ws-surgery.js, loaded above at the workspaces block) onto its seven-band spine, so the
      surgical decision engine has exactly one home and parity is structural.
      Content is NOT bundled - it is lazily fetched from /surgx/*.json on first open. -->
-<script src="/surgx-flags.js?v=sg10-nogate" defer></script>
+<script src="/surgx-flags.js?v=sg13-backup" defer></script>
 <script src="/surgx-model.js?v=sg1" defer></script>
 <script src="/surgx-content.js?v=sg1" defer></script>
 <script src="/surgx-note-schema.js?v=sg1" defer></script>
-<script src="/surgx-store.js?v=sg5-pt" defer></script>
+<script src="/surgx-store.js?v=sg13-backup" defer></script>
 <script src="/surgx-entitlement.js?v=sg10-nogate" defer></script>
 <script src="/surgx-patient.js?v=sg12-assess" defer></script>
 <script src="/surgx-destinations.js?v=sg5-pt" defer></script>
+<!-- Encrypted Drive backup for notes. Loads before the screens that offer it; it resolves
+     SMD_CLINIC (personal-clinic.js, further down) lazily at call time, not at load. -->
+<script src="/surgx-sync.js?v=sg13-backup" defer></script>
 <script src="/surgx-evidence.js?v=sg1" defer></script>
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
-<script src="/surgx-screens.js?v=sg12-assess" defer></script>
+<script src="/surgx-screens.js?v=sg13-backup" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
