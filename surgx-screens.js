@@ -1127,6 +1127,44 @@
    * destination is shown greyed WITH its reason rather than hidden - a row that silently vanishes
    * is the most confusing thing you can do to someone looking for it mid-list.
    * Export needs a finalised note: a draft is explicitly not a record. */
+  /* ── armed confirmations live in STATE, never on the DOM node ──────────────
+   *
+   * They used to be a `data-armed` attribute on the button. Any repaint - the assessment probe
+   * resolving, a status refresh, a save completing - replaces that element and takes the attribute
+   * with it, so the SECOND tap re-arms instead of acting and the surgeon loops forever believing
+   * they confirmed. Measured on a Pixel 9 on 2026-08-26: tap, tap, and the toast "Tap once more to
+   * sign and send" fired TWICE with the note still unsigned. It is very likely the original cause
+   * of a note that was finalised and never sent.
+   *
+   * Keyed by action+target so arming one row cannot arm another, and time-boxed so a stale arm from
+   * five minutes ago cannot be completed by an unrelated tap. */
+  var ARM_MS = 15000;
+  function armKey(act, id) { return String(act) + ":" + String(id == null ? "" : id); }
+  function isArmed(act, id) {
+    var a = state.armed;
+    return !!(a && a.key === armKey(act, id) && a.until > Date.now());
+  }
+  function arm(act, id) {
+    state.armed = { key: armKey(act, id), until: Date.now() + ARM_MS };
+    if (state.armTimer) { try { clearTimeout(state.armTimer); } catch (e) {} }
+    state.armTimer = setTimeout(function () {
+      state.armTimer = null;
+      if (state.armed && state.armed.until <= Date.now()) { state.armed = null; render(); }
+    }, ARM_MS);
+  }
+  function disarm() {
+    state.armed = null;
+    if (state.armTimer) { try { clearTimeout(state.armTimer); } catch (e) {} state.armTimer = null; }
+  }
+
+  /* Complete AND confirmed - the same gate the Finalise button uses, asked without a DOM. */
+  function readyToFinalize(n) {
+    try {
+      var sc = state.noteSchema || NS().schemaFor(n.type, n.templateId);
+      return M().noteCompleteness(sc.sections, n.values, n.provenance).canFinalize === true;
+    } catch (e) { return false; }
+  }
+
   function destinationCard(n) {
     var D = DEST();
     if (!D || !D.availability) return "";
@@ -1138,14 +1176,45 @@
       d = rows[i];
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
+      var act = "notedest", label = d.label;
       if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
       // Writable, but this note will CREATE the Initial Assessment rather than append to one.
       // Not a warning - a description, so the surgeon knows what they are about to start.
       else if (d.id === "emr" && w.willCreate && n.finalized) why = w.note;
-      if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
-      out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
+
+      /* ONE action for the overwhelmingly common intent.
+       *
+       * A note that is complete and has a writable patient was being told "Finalise the note before
+       * sending it anywhere" - and finalising is its OWN armed double-tap, so filing one note took
+       * FOUR deliberate taps across two separate gates. The owner lost an hour to exactly that on
+       * 2026-08-26: finalised, confirmed, and reasonably believed it had sent.
+       *
+       * So when the note is ready but not yet finalised, this row becomes "Finalise and write...".
+       * It still arms and still carries the PHI disclosure - one confirmation before patient data
+       * leaves the device is the safety feature. Two in a row is theatre that teaches people to tap
+       * through, which is worse than one they actually read. */
+      if (d.id !== "local" && !n.finalized && d.available && (d.id !== "emr" || w.canWrite) && readyToFinalize(n)) {
+        blocked = false;
+        act = "notefinalsend";
+        label = d.id === "drive" ? "Finalise and send to Drive" : "Finalise and write to the hospital record";
+        why = d.id === "emr" && w.willCreate ? w.note : "Signs the note, then sends it. Confirmed once.";
+      } else if (!why && d.id !== "local" && !n.finalized) {
+        why = "Finalise the note before sending it anywhere.";
+      }
+      /* Armed appearance comes FROM STATE, so a repaint mid-confirmation redraws the armed row
+       * instead of silently resetting it to "tap me" while the user believes it is still armed. */
+      var isArm = isArmed(act, d.id);
+      if (isArm) {
+        label = act === "notefinalsend"
+          ? (d.id === "drive" ? "Tap again to sign and send to Drive" : "Tap again to sign and write to the record")
+          : (d.id === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record");
+        why = act === "notefinalsend"
+          ? "Signs the note as final and sends it. Contains patient identifiers."
+          : "Contains patient identifiers.";
+      }
+      out += '<button class="sgx-row' + (isArm ? " danger" : "") + '" data-sgx="' + act + '" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
-        '<span class="tt">' + esc(d.label) + "</span>" +
+        '<span class="tt">' + esc(label) + "</span>" +
         '<span class="sb">' + esc(why || d.sub) + "</span></span>" +
         '<span class="go">' + ic(blocked ? "block" : "chevron_right") + "</span></button>";
     }
@@ -1174,6 +1243,14 @@
     }
     if (e === "no_active_assessment" || /no_active_assessment/.test(String(r && r.resp))) {
       return "No active visit assessment for this patient. Open their visit in GHIS first.";
+    }
+    /* The server says login_required when the stored GHIS session has timed out - GHIS expires in
+     * about 30 minutes, so this is the NORMAL state for a note written an hour after Ward Sync was
+     * last opened. It was falling through to the generic "could not reach the hospital record",
+     * which sent the owner hunting a network fault for an expired sign-in. Only the clinician can
+     * fix it (it needs their credentials), so say exactly that. */
+    if (e === "login_required" || e === "ghis_session_expired") {
+      return "Your GHIS sign-in has expired. Open Ward Sync, sign in again, then send the note.";
     }
     if (e.indexOf("http_401") === 0 || e.indexOf("http_403") === 0) return "Access refused. Sign in again.";
     if (e.indexOf("http_") === 0) return (dest === "drive" ? "Drive" : "The hospital record") + " refused the save (" + e.replace("http_", "") + ")";
@@ -1242,7 +1319,9 @@
       '<button class="sgx-btn" data-sgx="notesave">' + ic("save") + " Save</button>" +
       (n.finalized
         ? '<button class="sgx-btn" data-sgx="noteunfinal">Reopen</button>'
-        : '<button class="sgx-btn pri" data-sgx="notefinal"' + (comp.canFinalize ? "" : " disabled") + '>Finalise</button>') +
+        : '<button class="sgx-btn pri' + (isArmed("notefinal", "") ? " danger" : "") + '" data-sgx="notefinal"' +
+          (comp.canFinalize ? "" : " disabled") + '>' +
+          (isArmed("notefinal", "") ? ic("warning") + " Tap again to finalise" : "Finalise") + "</button>") +
       "</div>";
 
     return head(schema.title, "01 · " + (n.finalized ? "Finalised" : "Draft")) + wrap(body) + sticky;
@@ -1643,6 +1722,70 @@
         return;
       }
       if (act === "notesave") { saveNote(false); return; }
+      /* Finalise AND send, behind ONE armed confirmation.
+       *
+       * Deliberately not two gates in a row. Finalising is a clinical act and sending PHI off-device
+       * is a disclosure, but a surgeon who has just filled a complete note and tapped "Finalise and
+       * write to the hospital record" has stated both intentions in one gesture. Asking twice does
+       * not make them think twice; it teaches them to tap through, and it is how a note ended up
+       * finalised-but-never-sent while its author believed otherwise. */
+      if (act === "notefinalsend") {
+        var fsDest = t.getAttribute("data-id");
+        var fsNote = state.note;
+        if (!fsNote) return;
+        var fsComp = M().noteCompleteness(state.noteSchema.sections, fsNote.values, fsNote.provenance);
+        if (!fsComp.canFinalize) { toast("Complete and confirm every required field first"); return; }
+        /* A DIALOG, not a second tap.
+         *
+         * The two-tap gate failed for the owner over and over on a real phone: the first tap armed
+         * visibly, the second did nothing they could see. Whether that was the 15s window expiring
+         * while they read the disclosure, or a repaint, the mechanism itself is the problem - it is
+         * invisible state with a clock on it, and when it goes wrong there is no feedback at all.
+         *
+         * A confirm() is unmissable, has no timer, survives any repaint, cannot be half-completed,
+         * and is a STRONGER confirmation than tapping the same spot twice. Same pattern the sign-out
+         * and restore paths already use. */
+        var fsMsg = fsDest === "drive"
+          ? "Sign this note as final and send it to your Google Drive?\n\nIt contains patient identifiers."
+          : "Sign this note as final and write it into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+        var goFs = true;
+        try { goFs = window.confirm(fsMsg); } catch (e) { goFs = true; }
+        if (!goFs) return;
+
+        fsNote.finalized = true;
+        fsNote.finalizedAt = todayISO();
+        fsNote.finalizedBy = "clinician";
+        fsNote.audit.push({ a: "finalize" });
+        haptic("medium");
+        toast(fsDest === "drive" ? "Signing and sending to Drive..." : "Signing and writing to the hospital record...");
+        saveNote(true).then(function (okLocal) {
+          if (okLocal === false) { toast("Could not save on this device - nothing was sent"); render(); return; }
+          var D = DEST(); if (!D) { toast("Destinations unavailable"); render(); return; }
+          var mm = M(), sc = state.noteSchema;
+          var text = mm.renderNoteText(sc.sections, fsNote.values, fsNote.provenance, {
+            title: sc.title, finalized: fsNote.finalized,
+            finalizedBy: fsNote.finalizedBy, finalizedAt: fsNote.finalizedAt
+          });
+          D.send(fsDest, fsNote, text, { confirmed: true }).then(function (r) {
+            if (r && r.ok) {
+              fsNote.audit.push({ a: "sent", to: fsDest });
+              saveNote(true);
+              try { window.alert(fsDest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              /* Never let a failed write be silent. The note IS signed; say so, and say why the send
+               * failed, in a dialog they cannot miss. */
+              var whyFs = destError(fsDest, r);
+              try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyFs + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
+              // An expired sign-in is the one failure the clinician can fix right now, so take them there.
+              if (/sign-in has expired/i.test(whyFs)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
+            render();
+          });
+        });
+        return;
+      }
+
       if (act === "notedest") {
         var dest = t.getAttribute("data-id");
         // ALWAYS write the device copy first, whatever the destination. If the export then fails
@@ -1653,19 +1796,13 @@
           if (!state.note.finalized) { toast("Finalise the note before sending it anywhere"); return; }
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
-          if (t.getAttribute("data-armed") !== "1") {
-            /* Same two-tap discipline as finalise, and the same trap it had: a SIX second fuse that
-             * expired in silence, so reading the disclosure and then tapping just re-armed it. The
-             * confirmation is the point - the fuse is not - so give it the same 15s. */
-            t.setAttribute("data-armed", "1");
-            t.classList.add("danger");
-            var label = dest === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record";
-            t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
-              '<span class="sb">Contains patient identifiers.</span></span>';
-            toast(dest === "drive" ? "Tap once more to send to Drive" : "Tap once more to write to the hospital record");
-            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 15000);
-            return;
-          }
+          /* Dialog, not a second tap - same reasoning as notefinalsend above. */
+          var dMsg = dest === "drive"
+            ? "Send this note to your Google Drive?\n\nIt contains patient identifiers."
+            : "Write this note into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+          var goD = true;
+          try { goD = window.confirm(dMsg); } catch (e) { goD = true; }
+          if (!goD) return;
           var mm = M(), sc = state.noteSchema;
           var text = mm.renderNoteText(sc.sections, state.note.values, state.note.provenance, {
             title: sc.title, finalized: state.note.finalized,
@@ -1673,8 +1810,16 @@
           });
           toast(dest === "drive" ? "Sending to Drive…" : "Writing to the hospital record…");
           D.send(dest, state.note, text, { confirmed: true }).then(function (r) {
-            if (r && r.ok) { toast(dest === "drive" ? "Saved to Google Drive" : "Written to the hospital record"); }
-            else { toast(destError(dest, r)); }
+            /* A toast is missable, and a write into a patient's chart that silently did not happen
+             * is the worst outcome this screen has. Both results are a dialog. */
+            if (r && r.ok) {
+              try { window.alert(dest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              var whyD = destError(dest, r);
+              try { window.alert("NOT written to the hospital record.\n\nReason: " + whyD + "\n\nThe note is safe on this phone."); } catch (e) {}
+              if (/sign-in has expired/i.test(whyD)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
             render();
           });
         });
@@ -1686,27 +1831,13 @@
         if (!comp.canFinalize) { toast("Complete and confirm every required field first"); return; }
         // Double-press gate: finalising a clinical record is never a single tap.
         // (Same discipline as discharge-ghis.js armSignOff().)
-        if (t.getAttribute("data-armed") !== "1") {
-          /* Finalising a clinical record is deliberately two taps. But the window was FIVE seconds
-           * and expired in silence: a surgeon who taps once, reads "Confirm: this is final", thinks
-           * about it, and taps again at six seconds simply re-arms it - and can loop forever
-           * without the note ever finalising, which is exactly what "filled all 6, still can't send
-           * to GHIS" looked like (owner, 2026-08-26).
-           *
-           * Longer window, and say what the second tap is FOR rather than restating the warning. A
-           * toast too, because the button sits in a sticky bar the thumb is covering at the moment
-           * it changes. */
-          t.setAttribute("data-armed", "1");
-          t.classList.add("danger");
-          t.innerHTML = ic("warning") + " Tap again to finalise";
+        if (!isArmed("notefinal", "")) {
+          arm("notefinal", "");
           toast("Tap Finalise once more to sign this note");
-          setTimeout(function () {
-            if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.classList.remove("danger");
-            t.innerHTML = "Finalise";   // innerHTML, not textContent: keep it consistent with the armed state
-          }, 15000);
+          render();
           return;
         }
+        disarm();
         state.note.finalized = true;
         state.note.finalizedAt = todayISO();
         state.note.finalizedBy = "clinician";
@@ -1742,15 +1873,15 @@
         return;
       }
       if (act === "notedelete") {
-        if (t.getAttribute("data-armed") !== "1") {
-          t.setAttribute("data-armed", "1");
-          t.innerHTML = ic("warning") + " Confirm delete";
-          setTimeout(function () {
-            if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.innerHTML = ic("delete") + " Delete note";
-          }, 5000);
+        /* State-backed like the others. A repaint disarming a DELETE is fail-safe rather than
+         * dangerous, but it produces the same unwinnable loop for the surgeon. */
+        if (!isArmed("notedelete", "")) {
+          arm("notedelete", "");
+          toast("Tap Delete once more to remove this note");
+          render();
           return;
         }
+        disarm();
         try { ST().deleteNote(state.note.id); } catch (er) {}
         state.note = null;
         toast("Deleted");

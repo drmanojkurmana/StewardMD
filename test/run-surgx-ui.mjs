@@ -357,10 +357,21 @@ try {
 
     await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').click()");
     await sleep(200);
-    ok((await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').getAttribute('data-armed') === '1'")) === true,
+    ok((await ev("(SMD_SURGX_SCREENS._state().armed||{}).key === 'notefinal:'")) === true,
       "FINALISE GATE: the first press ARMS rather than finalising - a clinical record is never one tap");
     ok((await ev("!!document.querySelector('#surgxRoot #sgxNotePreview').textContent.includes('DRAFT')")) === true,
       "and the note is still a draft after that first press");
+
+    /* THE REGRESSION THIS EXISTS FOR (Pixel 9, 2026-08-26): the armed flag used to be a data-armed
+     * ATTRIBUTE on the button, so any repaint - the assessment probe resolving, a status refresh, a
+     * save completing - replaced the element and silently disarmed it. The second tap then re-armed
+     * instead of acting, an unwinnable loop that presented as "I confirmed and nothing happened".
+     * Force a repaint mid-confirmation and prove the arm survives it. */
+    await ev("SMD_SURGX_SCREENS._state(); (window.SMD_SURGX_SCREENS.go ? 0 : 0); document.querySelector('#surgxRoot') && SMD_SURGX_SCREENS._state()");
+    await ev("(function(){ var S=window.SURGX; S.open(location.hash ? location.hash : 'note/' + SMD_SURGX_STORE.listNotes()[0].id); return 1; })()");
+    await sleep(400);
+    ok((await ev("(SMD_SURGX_SCREENS._state().armed||{}).key === 'notefinal:'")) === true,
+      "REPAINT: the confirmation is still armed after the screen redraws");
 
     await ev("document.querySelector('#surgxRoot [data-sgx=\"notefinal\"]').click()");
     await sleep(700);
