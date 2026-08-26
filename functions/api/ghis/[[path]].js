@@ -455,20 +455,38 @@ function parseAssessmentFields(html) {
  * visit id. So when the episode is missing, look it up rather than giving up. Best-effort and only on
  * the missing path — a patient genuinely not on today's OPD list still falls through to the guard,
  * which is the right outcome (there is no visit to attach an assessment to). */
-/* `deps.listOpd` is injectable ONLY so this is testable without a GHIS session. Production passes nothing. */
+/* `deps.listOpd` / `deps.listWard` are injectable ONLY so this is testable without a GHIS session.
+ * Production passes nothing.
+ *
+ * BOTH rosters are searched, because an admitted patient's assessment is just as real as an
+ * out-patient's. Looking only in the OPD list meant a ward patient resolved to no episode, the
+ * prefill came back blank, and everything downstream concluded "no active assessment" - the
+ * assessment existed, we were looking in the wrong list. OPD first (the common case and the
+ * cheaper call), ward second. */
 export async function resolveEpisode(env, token, mr, episodeId, deps) {
   const epi = String(episodeId || '');
   if (epi || !mr) return epi;
   const listOpd = (deps && deps.listOpd) || getOpdPatients;
+  const listWard = (deps && deps.listWard) || getPatients;
+  const want = String(mr).trim().toUpperCase();
   try {
     const rows = await listOpd(env, token, '', false, '');
-    if (!Array.isArray(rows)) return '';
-    const want = String(mr).trim().toUpperCase();
-    for (let i = 0; i < rows.length; i++) {
-      const r = rows[i] || {};
-      // Prefer the real episode column; fall back to visitId (which on many tables IS the episode).
-      if (String(r.patientId || '').trim().toUpperCase() === want) return String(r.episodeId || r.visitId || '');
+    if (Array.isArray(rows)) {
+      for (let i = 0; i < rows.length; i++) {
+        const r = rows[i] || {};
+        // Prefer the real episode column; fall back to visitId (which on many tables IS the episode).
+        if (String(r.patientId || '').trim().toUpperCase() === want) {
+          const v = String(r.episodeId || r.visitId || '');
+          if (v) return v;
+        }
+      }
     }
+  } catch (e) { /* best-effort: try the ward next */ }
+  try {
+    const wrows = await listWard(env, token);
+    const row = findWardRow(Array.isArray(wrows) ? wrows : [], mr);
+    const cands = ipEpisodeCandidates(row);
+    if (cands.length) return cands[0][1];
   } catch (e) { /* best-effort: fall through to the doc_id guard */ }
   return '';
 }
@@ -694,6 +712,40 @@ export function appendText(cur, add) {
   return c ? (c.replace(/\s+$/, '') + '\n\n' + a) : a;
 }
 
+/* ── ward (in-patient) episode resolution ─────────────────────────────────────
+ *
+ * An ADMITTED patient has an Initial assessment exactly like an out-patient does — the ward
+ * worklist row (Visit ID IPMR…) opens the same Chief complaints / Present history / Past history
+ * form (owner screen recording, 2026-08-26, General surgery ward2). saveAssessment's recovery path
+ * only ever consulted the OPD list, so an in-patient was never found and the write died at
+ * doc_id 0, which reads as "this patient has no assessment" when in fact we simply never looked
+ * where theirs lives.
+ *
+ * These two are PURE and exported so the field-name tolerance is tested without a GHIS session:
+ * the IP and OPD tables come straight from GHIS's own JSON and do not agree on casing, so nothing
+ * here may assume a single spelling. */
+const WARD_MR_KEYS = ['patientId', 'PatientId', 'PatientID', 'MRNo', 'MRNumber', 'PatientMRNo', 'UHID', 'uhid', 'mrn'];
+const WARD_EPI_KEYS = ['episodeId', 'episode_id', 'EpisodeId', 'Episode_Id', 'VisitId', 'visitId', 'VisitID', 'VisitNo', 'IPNo', 'ip_no', 'AdmissionNo', 'encounterId'];
+const wardPick = (o, keys) => { for (const k of keys) { const v = o && o[k]; if (v != null && String(v).trim() !== '') return String(v).trim(); } return ''; };
+
+export function findWardRow(rows, mr) {
+  const want = String(mr || '').trim().toUpperCase();
+  if (!want || !Array.isArray(rows)) return null;
+  return rows.filter((r) => wardPick(r, WARD_MR_KEYS).toUpperCase() === want)[0] || null;
+}
+
+/* Every DISTINCT identifier on the row, most-likely first. One of them is the recordNo the
+ * activation wants; finding out which is not worth another deploy, and each is one cheap request
+ * on a path that has already failed. */
+export function ipEpisodeCandidates(row) {
+  const out = [], seen = new Set();
+  for (const k of WARD_EPI_KEYS) {
+    const v = wardPick(row, [k]);
+    if (v && !seen.has(v)) { seen.add(v); out.push(['ip:' + k, v]); }
+  }
+  return out;
+}
+
 export async function saveAssessment(env, token, body) {
   const s = await getSession(env, token); if (!s) return { unauth: true };
   body = body || {};
@@ -756,6 +808,19 @@ export async function saveAssessment(env, token, body) {
      * an episode AND an OP/visit number and only one of them is the episode recordNo wants — and which
      * is which varies with the table. Trying both costs one extra request on a path that is already
      * failing, and removes a whole round of guessing. */
+    const tried = new Set([String(body.episodeId || '')]);
+    const tryCands = async (cands) => {
+      for (let i = 0; i < cands.length && !got.live; i++) {
+        const v = String(cands[i][1] || '');
+        if (!v || tried.has(v)) continue;                      // already tried, or nothing to try
+        tried.add(v);
+        const retry = await activateAndLoad(v, cands[i][0]);
+        if (retry.unauth) return retry;
+        if (retry.live) got = retry;
+      }
+      return null;
+    };
+
     const cands = [];
     try {
       const rows = await getOpdPatients(env, token, '', false, '');
@@ -766,12 +831,32 @@ export async function saveAssessment(env, token, body) {
         else attempts.push('opdlist:no-row(' + rows.length + ')');
       } else attempts.push('opdlist:unavailable');
     } catch (e) { attempts.push('opdlist:error'); }
-    for (let i = 0; i < cands.length && !got.live; i++) {
-      const v = String(cands[i][1] || '');
-      if (!v || v === String(body.episodeId || '')) continue;   // already tried, or nothing to try
-      const retry = await activateAndLoad(v, cands[i][0]);
-      if (retry.unauth) return retry;
-      if (retry.live) got = retry;
+    const uOpd = await tryCands(cands);
+    if (uOpd) return uOpd;
+
+    /* ADMITTED PATIENTS. Everything above only ever consulted the OPD list, so an IN-PATIENT was
+     * never found and the write died at doc_id 0 — which read as "this patient has no assessment".
+     * They do: the ward worklist row (Visit ID IPMR…) opens a full Initial assessment with Chief
+     * complaints / Present history / Past history, exactly like an out-patient (owner screen
+     * recording, 2026-08-26, General surgery ward2). GetIPWL is the same ward roster Ward Sync
+     * already syncs, so this adds no new endpoint and no new auth.
+     *
+     * Field names come straight from GHIS's own JSON and differ in casing between the IP and OPD
+     * tables, so both the MR and the episode are read tolerantly rather than assumed. */
+    if (!got.live) {
+      let ip = [];
+      try {
+        const rows = await getPatients(env, token);
+        if (Array.isArray(rows)) {
+          const row = findWardRow(rows, mr);
+          if (row) {
+            ip = ipEpisodeCandidates(row);
+            if (!ip.length) attempts.push('iplist:row-no-episode');
+          } else attempts.push('iplist:no-row(' + rows.length + ')');
+        } else attempts.push('iplist:unavailable');
+      } catch (e) { attempts.push('iplist:error'); }
+      const uIp = await tryCands(ip);
+      if (uIp) return uIp;
     }
   }
   const all = got.form || {};
@@ -790,8 +875,17 @@ export async function saveAssessment(env, token, body) {
   /* doc_id 0 means TWO different things, and conflating them is what broke Save to GHIS.
    *
    *   (a) "this visit has no assessment yet"  -> 0 is CORRECT. This file's own header says so:
-   *       "New = docId 0". Posting the full model with patient_id + episode_id set is exactly how
-   *       GHIS's own form creates the first assessment for a visit.
+   *       "New = docId 0". GHIS's own form creates the first assessment for a visit by posting the
+   *       whole model with doc_id 0.
+   *       CORRECTION (live capture, 2026-08-26 — docs/ghis/captured-initial-assessment-write.md):
+   *       the real UI posts assessment.patient_id and assessment.episode_id EMPTY. This comment
+   *       previously claimed the opposite ("with patient_id + episode_id set is exactly how GHIS's
+   *       own form creates" one) and that was simply wrong. GHIS resolves the target from the
+   *       ACTIVE VISIT in its server-side session — the thing clicking a patient sets, and the
+   *       thing Searchnew is our stand-in for — not from the posted ids. We still send them (as a
+   *       fallback only, when the form omitted them) because no evidence yet says GHIS rejects
+   *       them, and changing a live-chart write on one capture is not worth the risk; but
+   *       ACTIVATION, not the body, is what makes a write land on the right patient.
    *   (b) "the visit never activated"         -> 0 is an ORPHAN risk, which is what the guard is for.
    *
    * The guard refused BOTH since 2026-08-13, so the first-ever save for any visit was blocked — the

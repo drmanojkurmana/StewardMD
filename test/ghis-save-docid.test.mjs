@@ -149,7 +149,14 @@ test("SAVE: the caller's episode is verified, not trusted", () => {
 test("SAVE: every identifier GHIS gives for the visit is tried, not one guess", () => {
   assert.match(SAVE, /cands\.push\(\['epi', row\.episodeId\], \['visit', row\.visitId\]\)/, "episode AND visit number");
   assert.match(SAVE, /for \(let i = 0; i < cands\.length && !got\.live; i\+\+\)/, "stops at the first that activates");
-  assert.match(SAVE, /v === String\(body\.episodeId \|\| ''\)\) continue/, "never repeats the one already tried");
+  /* The guarantee is "never activate the same identifier twice", not one particular expression.
+   * It was `v === String(body.episodeId || '')`, which only covered the CALLER's episode; it is now
+   * a `tried` Set seeded with that value, so it also spans the OPD and ward passes - each attempt
+   * is a live POST that re-points the active visit in GHIS's session, so a repeat is not free. */
+  assert.match(SAVE, /const tried = new Set\(\[String\(body\.episodeId \|\| ''\)\]\)/,
+    "the caller's episode still counts as already tried");
+  assert.match(SAVE, /if \(!v \|\| tried\.has\(v\)\) continue/, "never repeats one already tried");
+  assert.match(SAVE, /tried\.add\(v\)/, "and each attempt is recorded");
 });
 
 test("PARSE: the episode column is captured, not swallowed by the OP number", () => {
