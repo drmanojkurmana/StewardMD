@@ -88,12 +88,49 @@
   // further "back" to go (see #3 in the file header), no matter what topBackControl()'s
   // pattern-matching (BACK_SEL is necessarily broad — any "-close"/"-back" class or aria-label
   // prefix) thinks it found on the page; a stray match there must never win over this.
+  /* Is a LIVE overlay stacked above home right now? Structural, not a hit test.
+   *
+   * homeIsForeground() used to ask elementFromPoint() about ONE pixel — the exact centre of the
+   * viewport. Anything that does not cover that pixel was invisible to it: a bottom sheet shorter
+   * than half the screen, a small confirm dialog, a top-anchored panel. On those screens home still
+   * looked like the foreground, so the left-edge swipe opened the MENU instead of dismissing the
+   * thing on top — the "sidebar opens on every page" report.
+   *
+   * Measured on the real app: at home every layer above #homeV2 (sbBackdrop, hvScrim,
+   * harrisonQuotePopup) is opacity:0 AND pointer-events:none, while an open sheet's scrim/sheet are
+   * opacity:1 and pointer-events:auto. So "live" = on screen, not transparent, and not click-through.
+   * Both conditions are required, so a parked-but-present layer can never suppress the home menu. */
+  function overlayAboveHome() {
+    var h = document.getElementById("homeV2");
+    if (!h || !document.body) return false;
+    var hz = parseInt(window.getComputedStyle(h).zIndex, 10); if (isNaN(hz)) hz = 0;
+    var kids = document.body.children;
+    for (var i = 0; i < kids.length; i++) {
+      var n = kids[i];
+      if (n === h || n.id === "smdTopBack") continue;
+      var cs = window.getComputedStyle(n);
+      if (cs.position !== "fixed" && cs.position !== "absolute") continue;
+      if (cs.display === "none" || cs.visibility === "hidden") continue;
+      if (parseFloat(cs.opacity || "1") < 0.05) continue;          // parked scrim
+      if (cs.pointerEvents === "none") continue;                   // click-through -> not a real layer
+      var z = parseInt(cs.zIndex, 10); if (isNaN(z) || z <= hz) continue;
+      var r = n.getBoundingClientRect();
+      if (r.width < 120 || r.height < 80) continue;                // toasts/badges are not screens
+      if (r.right <= 0 || r.left >= window.innerWidth) continue;   // parked off-screen (closed drawer)
+      if (r.bottom <= 0 || r.top >= window.innerHeight) continue;  // parked below (closed sheet)
+      return true;
+    }
+    return false;
+  }
   function homeIsForeground() {
     var h = document.getElementById("homeV2");
     if (!h || !h.classList.contains("on")) return false;
     var cs = window.getComputedStyle(h);
     if (cs.display === "none" || cs.visibility === "hidden") return false;
+    if (overlayAboveHome()) return false;          // a sheet/dialog is up -> home is NOT the root screen
     try {
+      // Kept as a second, independent condition: it still catches an overlay rendered INSIDE #homeV2,
+      // which the body-level scan above cannot see. Both must agree that home owns the screen.
       var el = document.elementFromPoint(Math.round(window.innerWidth / 2), Math.round(window.innerHeight / 2));
       return !!(el && h.contains(el));
     } catch (e) { return false; }
@@ -114,6 +151,15 @@
     // 0) FundX / Atlas AI full-screen overlay owns back while open.
     try { if (window.ATLAS && window.ATLAS.isOpen && window.ATLAS.isOpen()) { _last = now; return window.ATLAS.back() !== false; }
     if (window.FUNDX && window.FUNDX.isOpen && window.FUNDX.isOpen()) { _last = now; return window.FUNDX.back() !== false; } } catch (e) {}
+    // 0b) home's bottom-sheet system (#hvSheet + #hvScrim): the More sheet, the settings sheets,
+    // Customize tools, Account. Its rows are `.hv-mi` buttons and it ships NO back/close control, so
+    // the BACK_SEL scan below finds nothing inside it and instead clicks a stray match on the home
+    // screen UNDERNEATH — leaving the sheet open and doing something the user never asked for. The
+    // scrim's own click handler is closeSheet(), so that is the dismissal the app already defines.
+    try {
+      var _sheet = document.getElementById("hvSheet"), _scrim = document.getElementById("hvScrim");
+      if (_sheet && _scrim && _sheet.classList.contains("on")) { _last = now; _scrim.click(); return true; }
+    } catch (e) {}
     // 1) top-most open overlay → its BACK control (never Close, so we step back, not jump home)
     var ctrl = topBackControl();
     if (ctrl) { _last = now; try { ctrl.click(); } catch (e) {} return true; }
@@ -140,9 +186,15 @@
   }
   // With the menu already open it covers the left edge, so a further RIGHTWARD drag on it is a
   // no-op (it closes by swiping left, tapping the backdrop, or hardware back — all unchanged).
+  /* The two behaviours are MUTUALLY EXCLUSIVE, and "go back" is the default everywhere.
+   * This was `openMenuAtHome() || goBack()`, which meant any false positive from the home test
+   * opened the menu on a screen the user expected to step back from, and — when SB was missing —
+   * could fall through to goBack() ON HOME and click whatever stray "-close" element BACK_SEL
+   * matched there. Home (and only home) opens the menu; every other screen goes back. */
   function edgeSwipeAction() {
     try { var d = document.getElementById("sbDrawer"); if (d && d.classList.contains("open")) return true; } catch (e) {}
-    return openMenuAtHome() || goBack();
+    if (homeIsForeground()) return openMenuAtHome();
+    return goBack();
   }
 
   // The screen to slide during an interactive edge-drag = the largest positioned (fixed/absolute) ancestor
