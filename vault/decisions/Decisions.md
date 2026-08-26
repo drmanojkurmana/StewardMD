@@ -5,6 +5,45 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · Edge swipe ownership, and the profile that never loaded
+
+**The edge swipe belongs to home; every other screen goes back.** `homeIsForeground()` decided "am
+I at home?" by asking `elementFromPoint()` about ONE pixel, the viewport centre. Anything not
+covering that pixel was invisible to it (a bottom sheet shorter than half the screen, a small
+dialog, a top-anchored panel), so home still looked like the foreground and the swipe opened the
+MENU instead of dismissing what was on top. A structural check now runs first: is a LIVE layer
+stacked above `#homeV2`? Measured on the app, at home every layer above home (`sbBackdrop`,
+`hvScrim`, `harrisonQuotePopup`) is `opacity:0` AND `pointer-events:none`, while an open sheet's
+scrim and sheet are `opacity:1` / `pointer-events:auto`. Both conditions required, so a parked layer
+can never suppress the home menu. The pixel test is KEPT as a second, independent condition because
+it still catches an overlay rendered INSIDE `#homeV2`. `edgeSwipeAction()` was
+`openMenuAtHome() || goBack()` and is now an explicit either/or, so a false positive can no longer
+open the menu on a screen the user meant to step back from. **Also:** `#hvSheet` (More, the settings
+sheets, Customize tools, Account) ships no back/close control, so the `BACK_SEL` scan found nothing
+in it and clicked a stray match on the home screen UNDERNEATH, leaving the sheet open. `goBack()`
+now clicks `#hvScrim`, whose handler is the app's own `closeSheet()`. Pinned by
+`test/run-swipe-back-ui.mjs`. **Not reproduced:** "the sidebar opens on every page" did not occur on
+any screen driven in the web build; what was found is the same rule failing on sheets/dialogs. If it
+persists on device, check the installed bundle's `?v=`.
+
+**The Profile's professional details never loaded.** Firestore is loaded LAZILY
+(`window.SMD_loadFirebase`), so `window.SMD_DB` does not exist on a cold start;
+`acctFillProfessional()` looked once, saw no DB and declared "Offline" with no way back but a manual
+Retry. It now boots Firebase and re-fills the sheet that is on screen at that moment. Separately,
+`offline()` appended its notice unconditionally, so a second call stacked a second
+"Couldn't load your details" row (visible in the owner's screenshot); it is now keyed on
+`data-offnote`. **Trade-off:** none. `Offline` now means an actual failure.
+
+**Nothing ever asked for the professional details.** `hospitals-in.js` (~2,400 institutions) and its
+searchable picker were already wired into the Profile card, but the card never loaded and no flow
+requested them, so the directory looked absent. `profile-setup.js` asks on every app start when a
+signed-in user is missing phone / college / degree / speciality; "Later" postpones for that app-open
+only. It writes the SAME `users/{uid}/profile/self` doc the card reads. Degree and Speciality are now
+rows on the card too, chosen from shared lists that live in `profile-setup.js` so the two surfaces
+cannot drift. **MBBS is in the degree list** although the request named only PG degrees: a
+near-mandatory form must let an intern or medical officer answer truthfully. Pinned by
+`test/run-profile-details-ui.mjs`. See [[StewardMD ID]].
+
 ## 2026-08-26 (follow-up) · Closing the sweep's own caveats: verify by observation, not by reading
 
 The sweep below shipped with three stated caveats. Two are now closed by evidence; the third needs
