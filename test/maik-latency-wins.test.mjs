@@ -43,12 +43,38 @@ test("tier 1 is a bottom-line-only instruction, and tier 2 still returns the ful
 });
 
 /* ---------------------------------------------------------------- 2. answer cache */
+/* This used to require `!(body && body.tier)` — "never a tier call". That fence was too wide and it
+ * silently disabled the cache for EVERY real user: home.js `maikLazyOn()` is
+ * `localStorage.getItem("smd_maik_lazy") !== "0"`, so the app sends `tier: 1` on essentially every
+ * question. `maik:ans:*` was still empty in production hours after the reachability fix, and a
+ * repeated question still came back slow, because of this line rather than the streaming path.
+ *
+ * The PHI fences are untouched. What the tier fence actually protected was CORRECTNESS, and only for
+ * one tier: tier 1 appends "BOTTOM LINE ONLY" and is a pure function of the question, while tier 2
+ * embeds `body.priorLead` verbatim in the prompt — request-specific state that is not in the key, so
+ * two callers asking the same thing can legitimately need different detail.
+ *
+ * So the invariant is now stated properly rather than approximated: cache tier 1 and untiered, never
+ * anything carrying priorLead, and put the tier IN THE KEY so a truncated lead can never be served
+ * to a request that asked for the whole answer. Behaviour is pinned in
+ * test/maik-cache-wiring.test.mjs, which exercises it rather than reading it. */
 test("the answer cache stays fenced to generic knowledge", () => {
   const line = API.split("\n").find((l) => l.includes("const _cacheEligible"));
   assert.ok(line, "eligibility must be explicit");
   assert.match(line, /!hasDx/, "never a computed diagnosis");
-  assert.match(line, /!\(body && body\.tier\)/, "never a tier call");
   assert.match(line, /!maikWiringOn\(env\)/, "never when Connect wiring could carry PHI");
+  assert.match(line, /_tierCacheable/, "tier eligibility must be decided explicitly, not inlined");
+
+  const tier = API.split("\n").find((l) => l.includes("const _tierCacheable"));
+  assert.ok(tier, "the tier rule must be its own named line");
+  assert.match(tier, /_tier === 0 \|\| _tier === 1/, "only untiered and the bottom-line tier");
+  assert.match(tier, /priorLead/, "never a follow-up conditioned on the lead already shown");
+});
+
+test("the cache key carries the tier, so a bottom line cannot be served as a full answer", () => {
+  const CACHE = readFileSync(new URL("../functions/_maik_cache.js", import.meta.url), "utf8");
+  assert.match(CACHE, /o\.tier/, "answerCacheKey must take the tier into account");
+  assert.match(CACHE, /tier \? \[/, "and only append it when set, so pre-tier entries still hit");
 });
 
 /* ---------------------------------------------------------------- 3. parallelise gate + re-rank */

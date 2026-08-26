@@ -58,7 +58,15 @@ export async function answerCacheKey(sha256hex, env, o) {
   const q = normQ(o.question);
   if (q.length < 12 || q.split(" ").length < 2) return null;   // too vague to be a stable, safe key
   const ver = String(o.version != null ? o.version : ((env && env.MAIK_CACHE_VERSION) || "1"));   // runtime override wins
-  const parts = [ver, q, String(o.depth || "std"), String(o.audience || "any"), String(o.model || "def")].join("|");
+  /* `tier` is part of the key, not a reason to refuse the cache. A lazy tier-1 answer is the LEAD
+   * ONLY, so serving it to a request that wanted the whole answer would silently truncate it - but
+   * keying on the tier keeps the two apart and lets both be cached. Excluding tiers entirely, which
+   * is what this used to do, disabled the cache for every real client: the app sends tier 1 by
+   * default (home.js maikLazyOn). Absent/0 keeps the ORIGINAL key shape, so existing entries written
+   * before this still hit rather than being orphaned by a format change. */
+  const tier = Number(o.tier) || 0;
+  const parts = [ver, q, String(o.depth || "std"), String(o.audience || "any"), String(o.model || "def")]
+    .concat(tier ? ["t" + tier] : []).join("|");
   return PREFIX + (await sha256hex(parts));
 }
 

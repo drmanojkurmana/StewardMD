@@ -28,7 +28,17 @@ function fakeKv() {
   return {
     _m: m,
     keys: (prefix) => [...m.keys()].filter((k) => !prefix || k.startsWith(prefix)),
-    get: async (k) => (m.has(k) ? m.get(k) : null),
+    /* Real Cloudflare KV parses when asked: get(key, "json") returns an OBJECT. The first version of
+     * this fake ignored the type and always handed back the raw string, so the usage counter tried to
+     * assign a property to a string and blew up as an unhandled rejection AFTER the test had passed -
+     * a green test with a time bomb behind it. Honour the type argument. */
+    get: async (k, type) => {
+      if (!m.has(k)) return null;
+      const raw = m.get(k);
+      const t = typeof type === "string" ? type : (type && type.type);
+      if (t === "json") { try { return JSON.parse(raw); } catch { return null; } }
+      return raw;
+    },
     put: async (k, v) => { m.set(k, v); },
     delete: async (k) => { m.delete(k); },
     list: async (o) => ({ keys: [...m.keys()].filter((k) => !(o && o.prefix) || k.startsWith(o.prefix)).map((name) => ({ name })), list_complete: true }),
@@ -170,4 +180,68 @@ test("with MAIK_ANSWER_CACHE off, nothing is cached at all", async () => {
     assert.equal(h.calls.stream, 1);
     assert.equal(cacheKeys(h.kv).length, 0, "the flag must still gate the whole feature");
   } finally { h.restore(); }
+});
+
+/* ── the lazy tier, which is what the real app actually sends ──────────────────
+ *
+ * THE BUG THIS PINS: hoisting the cache above the live-stream return was necessary and still did
+ * not make `maik:ans:*` fill in production. `maikLazyOn()` in home.js is
+ * `localStorage.getItem("smd_maik_lazy") !== "0"` - TRUE unless someone opted out - so the client
+ * sends `tier: 1` on essentially every question, and the eligibility test was
+ * `!(body && body.tier)`. Every real request was therefore ineligible. The cache was correct,
+ * reachable, and switched off for everyone by a client default nobody connected to it.
+ *
+ * Observed in production before this fix: the second identical question came back SLOW, and the
+ * KV prefix was still empty hours after deploy. */
+
+test("a lazy tier-1 question IS cached - this is what the app actually sends", async () => {
+  const h = harness();
+  try {
+    const body = { question: QUESTION, tier: 1, grounding: [{ text: "x", provenance: ["KB"] }] };
+    await explain(h.env, { body });
+    assert.equal(h.calls.stream, 1);
+    assert.equal(cacheKeys(h.kv).length, 1, "tier 1 is a pure function of the question, so it caches");
+
+    await explain(h.env, { body });
+    assert.equal(h.calls.stream, 1, "and the second identical lazy question costs no upstream call");
+  } finally { h.restore(); }
+});
+
+test("a tier-1 lead is NEVER served to a request that wanted the whole answer", async () => {
+  // The lead is a truncated answer. Keying on the tier is what keeps them apart; without it the
+  // cache would silently shorten answers, which is worse than not caching at all.
+  const h = harness();
+  try {
+    await explain(h.env, { body: { question: QUESTION, tier: 1, grounding: [{ text: "x", provenance: ["KB"] }] } });
+    const tier1Key = cacheKeys(h.kv)[0];
+
+    h.calls.stream = 0;
+    await explain(h.env, { body: { question: QUESTION, grounding: [{ text: "x", provenance: ["KB"] }] } });
+    assert.equal(h.calls.stream, 1, "the untiered request must NOT be answered from the tier-1 entry");
+    assert.equal(cacheKeys(h.kv).length, 2, "it gets its own entry");
+    assert.notEqual(cacheKeys(h.kv).find((k) => k !== tier1Key), undefined);
+  } finally { h.restore(); }
+});
+
+test("tier 2 / a follow-up carrying priorLead is NOT cached", async () => {
+  // Its output is conditioned on the lead already shown, which is not in the key. Two callers with
+  // the same question can legitimately need different detail, so caching it would cross the wires.
+  const h = harness();
+  try {
+    await explain(h.env, {
+      body: { question: QUESTION, tier: 2, priorLead: "Amlodipine 5 mg once daily.", grounding: [{ text: "x", provenance: ["KB"] }] },
+    });
+    assert.equal(cacheKeys(h.kv).length, 0, "a priorLead-conditioned answer must never enter the shared cache");
+  } finally { h.restore(); }
+});
+
+test("an untiered question still uses the ORIGINAL key shape, so old entries are not orphaned", async () => {
+  // Adding the tier to the key must not invalidate everything written before it.
+  const { answerCacheKey } = await import(new URL("../functions/_maik_cache.js", import.meta.url));
+  const sha = async (str) => Buffer.from(String(str)).toString("base64");
+  const base = await answerCacheKey(sha, {}, { question: QUESTION, depth: "concise", model: "m", version: "1" });
+  const zero = await answerCacheKey(sha, {}, { question: QUESTION, depth: "concise", model: "m", version: "1", tier: 0 });
+  const one = await answerCacheKey(sha, {}, { question: QUESTION, depth: "concise", model: "m", version: "1", tier: 1 });
+  assert.equal(base, zero, "tier 0 and no tier must produce the SAME key");
+  assert.notEqual(base, one, "tier 1 must produce a different one");
 });
