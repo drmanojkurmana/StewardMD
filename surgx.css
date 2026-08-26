@@ -494,3 +494,11 @@ html.sgx-lock .mc-overlay { z-index: 1300; }
    test/surgx-deeplinks.test.mjs asserts every one of these stays above SURGX and below the Rx pad. */
 html.sgx-lock .db-overlay { z-index: 1300; }
 html.sgx-lock .abg { z-index: 1300; }
+
+/* ── Notes backup card (surgx-backup.js) ───────────────────────────────────── */
+#surgxRoot .sgx-bk-h { font: 700 14.5px/1.3 var(--sgx-font, system-ui); margin-bottom: 4px; }
+#surgxRoot .sgx-bk-s { font: 400 12.5px/1.5 var(--sgx-font, system-ui); opacity: .82; }
+#surgxRoot .sgx-bk-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 12px; }
+#surgxRoot .sgx-bk-row .sgx-btn { flex: 1 1 auto; min-width: 46%; }
+#surgxRoot .sgx-bk-off { margin-top: 10px; font: 600 12px var(--sgx-font, system-ui); opacity: .7; }
+#surgxRoot .sgx-bk-msg:not(:empty) { margin-top: 10px; font: 600 12.5px/1.45 var(--sgx-font, system-ui); }

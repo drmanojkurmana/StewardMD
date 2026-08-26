@@ -902,12 +902,32 @@
         '<span class="go">' + ic("chevron_right") + "</span></button>";
     }).join("") : '<div class="sgx-empty">No notes on this device yet.</div>';
 
+    /* Backup to the doctor's OWN Drive. Offered here rather than buried in settings because the
+     * loss it prevents happens at reinstall time, when the surgeon is already looking at an empty
+     * Notes list and it is too late. Both directions are explicit taps - there is still no silent
+     * upload path (see surgx-backup.js). */
+    var bk = (typeof window !== "undefined" && window.SMD_SURGX_BACKUP) || null;
+    var bkAvail = bk ? bk.available() : { ok: false, reason: "Unavailable." };
+    var backupHTML = bk ? ('<div class="sgx-seclabel">Backup</div>' +
+      '<div class="sgx-card"><div class="sgx-bk-h">Your own Google Drive</div>' +
+      '<div class="sgx-bk-s">Notes live only on this device, so reinstalling the app destroys them. ' +
+      'A backup writes them to a folder in <b>your</b> Drive and can put them back afterwards. ' +
+      'Nothing is sent unless you tap.</div>' +
+      (bkAvail.ok
+        ? '<div class="sgx-bk-row">' +
+            '<button class="sgx-btn pri" data-sgx="bkup" ' + (list.length ? "" : "disabled ") + '>Back up ' + list.length + ' note' + (list.length === 1 ? "" : "s") + '</button>' +
+            '<button class="sgx-btn" data-sgx="bkrestore">Restore from Drive</button>' +
+          "</div>"
+        : '<div class="sgx-bk-off">' + esc(bkAvail.reason) + "</div>") +
+      '<div class="sgx-bk-msg" id="sgxBkMsg" role="status" aria-live="polite"></div></div>') : "";
+
     return head("Notes", "01") + wrap(
       '<div class="sgx-banner info">' + ic("lock") +
-      " Encrypted on this device and never uploaded. There is no SURGX note server, by design. " +
-      "Sign out wipes them.</div>" +
+      " Encrypted on this device. There is no SURGX note server, by design - the only copy that ever " +
+      "leaves is a backup you ask for, into your own Drive. Sign out wipes them.</div>" +
       '<div class="sgx-seclabel">New note</div>' + newRows +
-      '<div class="sgx-seclabel">On this device</div>' + listHTML);
+      '<div class="sgx-seclabel">On this device</div>' + listHTML +
+      backupHTML);
   }
 
   /* Create a blank note of a type, optionally from a procedure template. */
@@ -1286,6 +1306,48 @@
       if (act === "retry") { state.protoIndex = null; state.procList = null; state.evList = null; state.caseList = null; render(); return; }
 
       if (act === "calc") { openCalc(t.getAttribute("data-id")); return; }
+
+      /* Notes backup / restore. DOUBLE PRESS, the armSignOff() discipline used elsewhere for actions
+       * that move patient data: the first tap arms and says what will happen, the second performs it.
+       * That is the "second in-UI tap" the PHI posture requires, and it also means a mis-tap on
+       * Restore cannot overwrite anything. */
+      if (act === "bkup" || act === "bkrestore") {
+        var BK = window.SMD_SURGX_BACKUP;
+        var msg = rootEl.querySelector("#sgxBkMsg");
+        if (!BK) { if (msg) msg.textContent = "Backup did not finish loading."; return; }
+        var restoring = act === "bkrestore";
+        if (t.getAttribute("data-armed") !== "1") {
+          // Disarm the sibling so only one action is ever armed at a time.
+          var others = rootEl.querySelectorAll('[data-sgx="bkup"],[data-sgx="bkrestore"]');
+          for (var oi = 0; oi < others.length; oi++) {
+            if (others[oi] === t) continue;
+            others[oi].removeAttribute("data-armed");
+            if (others[oi]._sgxLabel) others[oi].textContent = others[oi]._sgxLabel;
+          }
+          t._sgxLabel = t._sgxLabel || t.textContent;
+          t.setAttribute("data-armed", "1");
+          t.textContent = restoring ? "Tap again to restore" : "Tap again to send to Drive";
+          if (msg) {
+            msg.textContent = restoring
+              ? "Restoring adds notes from your Drive backup. Notes already on this device are only replaced if the backup copy is newer."
+              : "This puts your notes, including patient references, into your own Google Drive.";
+          }
+          haptic("light");
+          return;
+        }
+        t.removeAttribute("data-armed");
+        t.disabled = true;
+        t.textContent = restoring ? "Restoring…" : "Backing up…";
+        if (msg) msg.textContent = "";
+        (restoring ? BK.restoreNow({ confirmed: true }) : BK.backupNow({ confirmed: true })).then(function (res) {
+          if (msg) msg.textContent = BK.describe(res);
+          t.disabled = false;
+          t.textContent = t._sgxLabel || (restoring ? "Restore from Drive" : "Back up");
+          // A restore changes the list under the user, so redraw it rather than leave a stale screen.
+          if (res && res.ok && restoring && (res.added || res.replaced)) setTimeout(render, 700);
+        });
+        return;
+      }
       /* MEDDB.openList() is the app's own Drugs Database entry point (api.js; the same call
        * home.js's `drugs` action makes). MEDDRUGS is a DIFFERENT module - home.js uses it only for
        * openInteractions - so do not "correct" this to that one.
