@@ -115,9 +115,9 @@ a signed-in user silently becomes a guest until they sign in again. This cost re
 
 ## 5. MUST REVERT — temporary values left in production
 
-- **`MAIK_GUEST_DAILY_LIMIT` is 300**, raised for device testing. Put back to **15**:
-  `printf '15' | npx wrangler pages secret put MAIK_GUEST_DAILY_LIMIT --project-name stewardmd`
-  then redeploy. (Safer to restore now that guests are bucketed per device.)
+- ~~**`MAIK_GUEST_DAILY_LIMIT` is 300**~~ **SECRET RESET to 15 on 2026-08-26.** Pages binds secrets
+  at deploy time, so it takes effect on the NEXT production deployment; prod was still `87b57391`
+  (`main` @ `d59d8ba`) when it was written. Nothing further to run.
 - **KV `ai:limits` = `{"maik":500}`** — this one is INTENTIONAL and predates the benchmarking;
   deleting it drops the MaiK module cap to the 50/day default and blocks the owner's own testing.
   Do not "clean it up" again.

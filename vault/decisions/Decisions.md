@@ -39,9 +39,14 @@ in-memory record that was already lost on reload); once the store became real it
 `render09` already documented the toggle as local. **Trade-off:** a future screen wanting the same
 `data-act` must handle it itself; there is no such screen. See [[KardiQ X]].
 
-**Still open — needs the owner.** `MAIK_GUEST_DAILY_LIMIT` is still **300** in prod (should be 15,
-which is also the code default in `functions/_usage.js`). Two attempts to write the secret were
-refused by this environment's permission policy, so it is untouched.
+**`MAIK_GUEST_DAILY_LIMIT` set back to 15** (owner ran it; two attempts from this session were
+refused by the environment's permission policy). 15 is also the code default in `functions/_usage.js`.
+**Not live yet:** Pages binds secrets at deploy time — Cloudflare's own docs say a secret "needs to
+be done before a deployment that uses" it — and production is still deployment `87b57391`
+(`main` @ `d59d8ba`), which predates the change. The next push to `main` picks it up; no separate
+action needed if #760 is merged. Nothing verifies this from outside, since secrets are write-only
+and the effective limit is not exposed on an unauthenticated route: confirm on the Pages deployment,
+not by probing.
 
 ## 2026-08-26 · Audit sweep: four open items, each fixed at the seam every caller routes through
 
