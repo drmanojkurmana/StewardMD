@@ -1244,6 +1244,14 @@
     if (e === "no_active_assessment" || /no_active_assessment/.test(String(r && r.resp))) {
       return "No active visit assessment for this patient. Open their visit in GHIS first.";
     }
+    /* The server says login_required when the stored GHIS session has timed out - GHIS expires in
+     * about 30 minutes, so this is the NORMAL state for a note written an hour after Ward Sync was
+     * last opened. It was falling through to the generic "could not reach the hospital record",
+     * which sent the owner hunting a network fault for an expired sign-in. Only the clinician can
+     * fix it (it needs their credentials), so say exactly that. */
+    if (e === "login_required" || e === "ghis_session_expired") {
+      return "Your GHIS sign-in has expired. Open Ward Sync, sign in again, then send the note.";
+    }
     if (e.indexOf("http_401") === 0 || e.indexOf("http_403") === 0) return "Access refused. Sign in again.";
     if (e.indexOf("http_") === 0) return (dest === "drive" ? "Drive" : "The hospital record") + " refused the save (" + e.replace("http_", "") + ")";
     return (dest === "drive" ? "Could not reach Drive" : "Could not reach the hospital record") + ". The note is saved on this device.";
@@ -1727,14 +1735,23 @@
         if (!fsNote) return;
         var fsComp = M().noteCompleteness(state.noteSchema.sections, fsNote.values, fsNote.provenance);
         if (!fsComp.canFinalize) { toast("Complete and confirm every required field first"); return; }
-        if (!isArmed("notefinalsend", fsDest)) {
-          arm("notefinalsend", fsDest);
-          toast("Tap once more to sign and send");
-          render();                       // re-render FROM STATE, so a later repaint keeps it armed
-          return;
-        }
-        disarm();
-        // Sign first, and SAVE, so a failed send never leaves an unsigned note that claims to be filed.
+        /* A DIALOG, not a second tap.
+         *
+         * The two-tap gate failed for the owner over and over on a real phone: the first tap armed
+         * visibly, the second did nothing they could see. Whether that was the 15s window expiring
+         * while they read the disclosure, or a repaint, the mechanism itself is the problem - it is
+         * invisible state with a clock on it, and when it goes wrong there is no feedback at all.
+         *
+         * A confirm() is unmissable, has no timer, survives any repaint, cannot be half-completed,
+         * and is a STRONGER confirmation than tapping the same spot twice. Same pattern the sign-out
+         * and restore paths already use. */
+        var fsMsg = fsDest === "drive"
+          ? "Sign this note as final and send it to your Google Drive?\n\nIt contains patient identifiers."
+          : "Sign this note as final and write it into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+        var goFs = true;
+        try { goFs = window.confirm(fsMsg); } catch (e) { goFs = true; }
+        if (!goFs) return;
+
         fsNote.finalized = true;
         fsNote.finalizedAt = todayISO();
         fsNote.finalizedBy = "clinician";
@@ -1753,12 +1770,15 @@
             if (r && r.ok) {
               fsNote.audit.push({ a: "sent", to: fsDest });
               saveNote(true);
-              toast(fsDest === "drive" ? "Signed and saved to your Drive"
-                                       : "Signed and written to the hospital record");
+              try { window.alert(fsDest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
             } else {
-              // The note IS finalised; only the send failed. Say both, or they will not know
-              // whether to retry the send or redo the note.
-              toast("Note is signed, but the send failed: " + destError(fsDest, r));
+              /* Never let a failed write be silent. The note IS signed; say so, and say why the send
+               * failed, in a dialog they cannot miss. */
+              var whyFs = destError(fsDest, r);
+              try { window.alert("The note is SIGNED and saved on this phone, but it was NOT written to the hospital record.\n\nReason: " + whyFs + "\n\nThe note is safe - nothing is lost."); } catch (e) {}
+              // An expired sign-in is the one failure the clinician can fix right now, so take them there.
+              if (/sign-in has expired/i.test(whyFs)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
             }
             render();
           });
@@ -1776,13 +1796,13 @@
           if (!state.note.finalized) { toast("Finalise the note before sending it anywhere"); return; }
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
-          if (!isArmed("notedest", dest)) {
-            arm("notedest", dest);
-            toast(dest === "drive" ? "Tap once more to send to Drive" : "Tap once more to write to the hospital record");
-            render();
-            return;
-          }
-          disarm();
+          /* Dialog, not a second tap - same reasoning as notefinalsend above. */
+          var dMsg = dest === "drive"
+            ? "Send this note to your Google Drive?\n\nIt contains patient identifiers."
+            : "Write this note into the patient's hospital record?\n\nIt contains patient identifiers. It is added to the Management plan of their Initial Assessment, below whatever is already there.";
+          var goD = true;
+          try { goD = window.confirm(dMsg); } catch (e) { goD = true; }
+          if (!goD) return;
           var mm = M(), sc = state.noteSchema;
           var text = mm.renderNoteText(sc.sections, state.note.values, state.note.provenance, {
             title: sc.title, finalized: state.note.finalized,
@@ -1790,8 +1810,16 @@
           });
           toast(dest === "drive" ? "Sending to Drive…" : "Writing to the hospital record…");
           D.send(dest, state.note, text, { confirmed: true }).then(function (r) {
-            if (r && r.ok) { toast(dest === "drive" ? "Saved to Google Drive" : "Written to the hospital record"); }
-            else { toast(destError(dest, r)); }
+            /* A toast is missable, and a write into a patient's chart that silently did not happen
+             * is the worst outcome this screen has. Both results are a dialog. */
+            if (r && r.ok) {
+              try { window.alert(dest === "drive" ? "Saved to your Drive."
+                : "Written into the hospital record.\n\nOpen the patient's Initial Assessment in GHIS and scroll to Management plan."); } catch (e) {}
+            } else {
+              var whyD = destError(dest, r);
+              try { window.alert("NOT written to the hospital record.\n\nReason: " + whyD + "\n\nThe note is safe on this phone."); } catch (e) {}
+              if (/sign-in has expired/i.test(whyD)) { try { window.openGHIS && window.openGHIS(); } catch (e) {} }
+            }
             render();
           });
         });
