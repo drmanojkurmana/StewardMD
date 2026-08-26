@@ -461,3 +461,98 @@ come from `test/device/maik-bench.html`, run inside the real WKWebView on a phys
 throwaway build launched with `devicectl ... --console`. Its control arm uses the PATCHED
 `window.fetch` and reliably shows `ttfv == total` — proof on-device that CapacitorHttp buffers and
 the pristine XHR transport is required.
+
+---
+
+## 2026-08-26 — Sign-out never wiped anything, in any module
+
+**The gap.** CliniX, SknX, ThoreX, KardioX and SURGX each registered a `wipe()` on
+`smd:signout` / `smd-signout` / `signout` / `smd:logout`. **Nothing in the repo had ever
+dispatched one of those events.** Every module's privacy contract was dead code from the day it
+was written; `kardiox-screens.js` even carried the note "hook the real signout".
+
+Two things hid it. The real path (`signout-fix.js`) ends in `location.reload()`, so a fresh JS
+context and a closed overlay *look* like a clean slate while the localStorage keys survive
+untouched. And four of the five modules only called `wireSignout()` from `mount()`/`init()`, so
+even a dispatched event would have missed any module the student had not opened that session.
+
+**Consequence.** The next person to sign in on a shared device inherited the previous user's
+CliniX competency, misses and resume tile; their SknX dermatology history; their KardioX/ThoreX
+study records. On a shared ward device that is a real privacy failure, not a cosmetic one.
+
+**Decision.** The dispatch belongs in `signout-fix.js` (the one place that already owns the real
+teardown), fired BEFORE the reload — a wipe after the reload never runs. Modules wire their
+listener at LOAD, not on mount. `SMD_SKNX_STORE` gained the `deleteAll()` its `wipe()` had been
+missing (its handler was a comment reading "no bulk-delete API yet" while the store held up to
+100 analyses).
+
+**The consequence that needed a guard.** Making the wipe real also made sign-out an irreversible
+way to destroy data: **SURGX notes are encrypted, device-local, have no server copy, and the wipe
+deletes the encryption key with them.** Nothing in the app asked before signing out. Sign-out now
+confirms *only when there are notes to lose* — an empty store stays a single tap. Fixing a
+privacy leak must not quietly create a data-loss path.
+
+**Also, same day, in CliniX:** OSCE graded each skill all-or-nothing
+(`record(sid, ps.correct === ps.seen)`), so ticking 5 of 6 items filed one hard WRONG against the
+whole skill and a well-performed chest examination read as a weak area. It now records one attempt
+per checklist item, matching how Learn, Viva and Case record one per probe, and the miss log finally
+names *which step* was missed. A null viva verdict ("MaiK could not judge") no longer fires the
+wrong-answer haptic; reaching for the mic no longer erases what the student had already typed.
+
+**Test-harness note.** `test/run-clinix-ui.mjs` reused one Chrome profile across runs, and it
+toggles a *persisted* flag (`smd_clinix_viva_voice`) as part of its own assertions — so a passing
+run left the flag ON and made the next run fail three checks against correct code. It had been
+failing "viva opens on the MBBS tier by default" for the same reason. Fresh profile per run. A test
+that fails because the last run of itself passed is worse than no test. (Second harness-state bug of
+this exact shape this week; the first was `smd_verify_bypass`.)
+
+---
+
+## 2026-08-26 — SURGX notes get an encrypted Drive backup (the only clinical data with no copy)
+
+**Why.** SURGX notes were the single piece of clinical data in the app with no copy anywhere:
+encrypted by `surgx-store.js` under a **per-device random secret** with no server record. A
+reinstall makes a new container and destroys them (CLAUDE.md records this costing a linked note
+twice in one session), and once the sign-out wipe actually started running (same day, see above)
+signing out destroyed them too.
+
+**Why the local ciphertext could not simply be uploaded.** The device secret exists nowhere but
+that phone. Uploading blobs encrypted under it would produce a backup no other device could ever
+read: insurance that is worthless at the moment it is claimed. So the backup is **re-encrypted
+under a password-derived key** (PBKDF2-SHA256 200k -> AES-GCM 256) that the surgeon can reproduce
+on a new phone.
+
+**Reused, not reinvented.** That scheme is `personal-clinic.js`'s `encryptBackup`/`decryptBackup`,
+already shipping for My Clinic, and the same clinic backup password from the Keychain. One password
+for the doctor, one crypto implementation to review, none to drift. Drive auth is native-auth's
+existing `SMD_getDriveToken` (`drive.file` scope, so it cannot see the user's other Drive files).
+`surgx-sync.js` adds no new auth and no new cryptography.
+
+**Decisions worth not re-litigating:**
+- **Opt-in, default OFF** (`smd_surgx_drive_backup`, def false). An app upgrade must never silently
+  begin uploading operative notes. Both the feature flag AND a per-account toggle must be on.
+- **Silence is not consent.** Personal clinic treats a missing auto-sync key as ON (opt-out). For
+  PHI leaving the device that is the wrong way round, so `autoSyncOn()` requires an explicit `"1"`.
+- **Both keys are per-account**, mirroring `surgx-store.js`'s `uid()`. Global keys would have meant
+  the next person on a shared ward phone inherits "backup on" and starts uploading to their own
+  Drive without ever agreeing, and is told they have a backup to restore when they have none. This
+  is the same shared-device trap the sign-out wipe exists for.
+- **Restore MERGES, newest-wins per note, never deletes.** A restore that dropped a note the phone
+  had but the backup did not would turn "recover my notes" into "lose my notes".
+- **ONE file, overwritten in place.** Drive must not accumulate a history of operative notes.
+- **An empty note list never uploads**, so a fresh install cannot overwrite a real backup with an
+  empty one.
+- **A My Clinic backup is refused as a note backup.** Both use the same `{smd_enc:1}` envelope and
+  `decryptBackup` opens either, so only the payload (`{surgx:1}`) can tell them apart. It is checked
+  before anything is written.
+
+**Consistency fix that came with it.** The Notes banner said "Encrypted on this device and never
+uploaded ... Sign out wipes them" unconditionally. That becomes a flat lie once a backup exists, so
+it now branches, and the sign-out confirmation softens when a backup is present (an alarming
+"permanent loss" dialog shown to someone who set up a backup only teaches them to ignore dialogs).
+
+**GHIS was already done.** `smd_surgx_dest_emr` has defaulted true, `/api/ghis/surgx-note` writes
+over the same verified transport as the OPD assessment (visit activation, authoritative form
+re-serialisation, patient_id mismatch abort, doc_id 0 refusal), gated by the same `QUEUE_EMR_WRITE`
+env var. No new work was needed; it needs a patient with an ACTIVE assessment, which is what the
+earlier live attempt lacked.

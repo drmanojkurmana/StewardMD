@@ -377,7 +377,9 @@
               statusBadge(p.queueStatus) +
             '</div>' +
             ((dept || showDoc) ? '<div class="ghis-pt-dept">' + [esc(dept), (showDoc ? 'Dr. ' + esc(doc) : '')].filter(Boolean).join(' · ') + '</div>' : '') +
-            '<div class="ghis-pt-actions"><button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
+            '<div class="ghis-pt-actions">' +
+              '<button class="ghis-pt-call ghis-pt-assess" type="button" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg> Assess</button>' +
+              '<button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
           '</div>';
         }).join('');
       }
@@ -672,6 +674,28 @@
         },
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode
         // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.
+        /* Initial assessment for an ADMITTED patient.
+         *
+         * Ward Sync already lists exactly the patients who have one - GetIPWL is the admitted
+         * roster - and each row already carries its IPMR visit as episodeId. So there is nothing
+         * to look up: hand the ids straight to the assessment workspace the OPD queue already uses.
+         * Verified against the live server (docs/ghis/captured-initial-assessment-write.md): an
+         * admitted patient activates with the same <MR>-<visit> recordNo as an out-patient, and
+         * the Initial assessment tab is the same form.
+         *
+         * visitId mirrors episodeId because for an in-patient the admission IS the visit. */
+        openAssessment: function(episodeId, patientId, name) {
+          if (!patientId) { try { window.toast && window.toast('This patient has no hospital record number.'); } catch (e) {} return; }
+          if (!episodeId) { try { window.toast && window.toast('No admission visit on this row, so an assessment cannot be filed against it.'); } catch (e) {} return; }
+          if (!(window.OPDEMR && window.OPDEMR.openProfile)) { try { window.toast && window.toast('The patient workspace is still loading.'); } catch (e) {} return; }
+          try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
+          window.OPDEMR.openProfile({
+            name: name || '', patientId: patientId,
+            episodeId: episodeId, visitId: episodeId,
+            source: 'ghis', tab: 'assess'
+          });
+        },
+
         onPatient: function(episodeId, patientId, name) {
           if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
             try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}

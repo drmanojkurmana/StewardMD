@@ -903,11 +903,68 @@
     }).join("") : '<div class="sgx-empty">No notes on this device yet.</div>';
 
     return head("Notes", "01") + wrap(
-      '<div class="sgx-banner info">' + ic("lock") +
-      " Encrypted on this device and never uploaded. There is no SURGX note server, by design. " +
-      "Sign out wipes them.</div>" +
+      notesBanner() +
       '<div class="sgx-seclabel">New note</div>' + newRows +
-      '<div class="sgx-seclabel">On this device</div>' + listHTML);
+      '<div class="sgx-seclabel">On this device</div>' + listHTML +
+      backupSection());
+  }
+
+  function SY() { try { return window.SMD_SURGX_SYNC || null; } catch (e) { return null; } }
+
+  /* The banner has to describe what is ACTUALLY true of these notes, which now depends on whether
+   * the surgeon turned the encrypted Drive backup on. The old text said "never uploaded ... sign
+   * out wipes them" unconditionally; leaving that up once a backup exists would be a false
+   * reassurance in one direction and a false warning in the other. */
+  function notesBanner() {
+    var sy = SY();
+    if (sy && sy.flagOn() && sy.autoSyncOn()) {
+      return '<div class="sgx-banner info">' + ic("lock") +
+        " Encrypted on this device, and backed up to your Google Drive still encrypted - Google " +
+        "cannot read it. Your notes survive a reinstall or a sign-out." + "</div>";
+    }
+    return '<div class="sgx-banner warn">' + ic("lock") +
+      " Encrypted on this device and never uploaded. There is no SURGX note server, by design - so " +
+      "signing out or reinstalling the app DELETES these notes permanently. Turn on Drive backup " +
+      "below to keep a copy.</div>";
+  }
+
+  /* Backup controls live at the BOTTOM of the notes list, not in Settings: the moment a surgeon
+   * understands the risk is when they are looking at notes they would hate to lose. */
+  function backupSection() {
+    var sy = SY();
+    if (!sy || !sy.flagOn()) return "";
+    var on = sy.autoSyncOn();
+    var last = sy.lastBackupAt();
+    var when = last ? new Date(last).toLocaleString() : "never";
+    var body = '<div class="sgx-notesec"><div class="h">Encrypted Drive backup</div>' +
+      '<div class="n">' +
+      (on
+        ? "On. Notes are re-encrypted with your My Clinic password and kept as ONE file in your own " +
+          "Google Drive. Last backup: " + esc(when) + "."
+        : "Off. Your notes exist only on this phone and nowhere else, so a reinstall or a sign-out " +
+          "loses them. Turning this on keeps ONE encrypted file in your own Google Drive, locked " +
+          "with your My Clinic password - Google cannot read it.") +
+      "</div>" +
+      '<div class="sgx-btnrow">' +
+      '<button class="sgx-btn" data-sgx="bkToggle">' + (on ? "Turn backup off" : "Turn backup on") + "</button>";
+    if (on) {
+      body += '<button class="sgx-btn" data-sgx="bkNow">Back up now</button>' +
+        '<button class="sgx-btn" data-sgx="bkRestore">Restore from Drive</button>';
+    }
+    return body + "</div></div>";
+  }
+
+  /* One place to turn a sync/restore result into something a surgeon can act on. Never surfaces a
+   * raw transport string: "http_403" tells a clinician nothing they can do. */
+  function backupMessage(r) {
+    if (r && r.ok) return null;
+    var e = String((r && r.error) || "");
+    if (e === "no_password") return "Set a My Clinic backup password first (Settings -> My Clinic). It is the key to your backup.";
+    if (e === "no_token") return "Sign in with Google in the installed app to use Drive backup.";
+    if (e === "no_backup") return "There is no backup in this Drive account yet.";
+    if (e === "wrong_password") return "That password does not open this backup. It must be the same My Clinic password used when it was made.";
+    if (e === "not_surgx_backup" || e === "unreadable_backup") return "That Drive file is not a SURGX note backup.";
+    return "Backup failed. Check your connection and Google sign-in.";
   }
 
   /* Create a blank note of a type, optionally from a procedure template. */
@@ -940,6 +997,28 @@
       rows);
   }
 
+  /* A linked patient already IS the patient reference. Re-typing the UHID you just selected from
+   * the ward list is pure friction, and because patientRef is required on every note type it was
+   * blocking Finalise - which blocks the EMR write, which is the whole point of linking them.
+   *
+   * Only fills an EMPTY field: whatever the surgeon typed always wins. Marked "auto" rather than
+   * "clinician" so the provenance trail still distinguishes what a person actually wrote. */
+  function applyPatientToFields(link) {
+    if (!state.note || !link) return;
+    state.note.values = state.note.values || {};
+    state.note.provenance = state.note.provenance || {};
+    if (!String(state.note.values.patientRef || "").trim()) {
+      var ref = String(link.patientId || "").trim();
+      var nm = String(link.name || "").trim();
+      state.note.values.patientRef = ref && nm ? (nm + " (" + ref + ")") : (ref || nm);
+      state.note.provenance.patientRef = "auto";
+    }
+    if (!String(state.note.values.date || "").trim()) {
+      state.note.values.date = todayISO();
+      state.note.provenance.date = "auto";
+    }
+  }
+
   function createNote(typeId, templateId) {
     var schema = NS().schemaFor(typeId, templateId);
     if (!schema) { toast("Unknown note type"); return; }
@@ -948,6 +1027,10 @@
       values[k] = schema.prefill[k];
       prov[k] = "ai";      // prefilled boilerplate is NOT the clinician's words until they confirm it
     }
+    /* `date` is required on EVERY note type and is always today. Making a surgeon type it is
+     * friction with no safety value - the note carries createdAt regardless - and it is one of the
+     * "required fields missing" that blocks Finalise, which in turn blocks the EMR write. */
+    if (!values.date) { values.date = todayISO(); prov.date = "auto"; }
     state.noteSchema = schema;
     state.note = {
       id: null, type: typeId, templateId: templateId || "",
@@ -997,7 +1080,9 @@
     var w = P.writability(link);
     var body = '<div class="sgx-row" style="cursor:default">' +
       '<span class="tx"><span class="tt">' + esc(P.describe(link)) + "</span>" +
-      '<span class="sb">' + esc(w.canWrite ? "Can be written to the hospital record." : w.reason) + "</span></span></div>";
+      '<span class="sb">' + esc(w.canWrite
+        ? (w.willCreate ? w.note : "Can be written to the hospital record.")
+        : w.reason) + "</span></span></div>";
 
     if (state.ptPick === "sources") {
       body += '<div class="sgx-btnrow" style="flex-wrap:wrap">' +
@@ -1056,6 +1141,9 @@
       var blocked = !d.available || (d.id !== "local" && !n.finalized);
       var why = d.reason;
       if (d.id === "emr" && !w.canWrite) { blocked = true; why = w.reason || why; }
+      // Writable, but this note will CREATE the Initial Assessment rather than append to one.
+      // Not a warning - a description, so the surgeon knows what they are about to start.
+      else if (d.id === "emr" && w.willCreate && n.finalized) why = w.note;
       if (!why && d.id !== "local" && !n.finalized) why = "Finalise the note before sending it anywhere.";
       out += '<button class="sgx-row" data-sgx="notedest" data-id="' + attr(d.id) + '"' +
         (blocked ? " disabled" : "") + '><span class="tx">' +
@@ -1145,8 +1233,14 @@
     if (comp.missing.length) stat = "<b>" + comp.missing.length + " required field" + (comp.missing.length === 1 ? "" : "s") + " missing</b>";
     else if (comp.unconfirmed.length) stat = "<b>" + comp.unconfirmed.length + " field" + (comp.unconfirmed.length === 1 ? "" : "s") + " to confirm</b>";
     else { stat = "<b>Ready to finalise</b>"; cls = " ok"; }
-    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '">' + stat +
-      " · " + comp.filled + " of " + comp.total + " filled</div>" +
+    /* The count alone is a dead end on a twenty-field form: "6 required fields missing" does not say
+     * which, and they are above the preview while the sticky bar sits at the bottom, so the surgeon
+     * is told they are blocked and left to hunt (owner, 2026-08-26). Make the number the way there:
+     * tap it and it scrolls to the first blocking field and focuses it. */
+    var jumpTo = (comp.missing[0] || comp.unconfirmed[0] || {}).k || "";
+    var sticky = '<div class="sgx-sticky"><div class="stat' + cls + '"' +
+      (jumpTo ? ' data-sgx="notejump" data-k="' + attr(jumpTo) + '" role="button" tabindex="0" style="cursor:pointer;text-decoration:underline"' : "") +
+      ">" + stat + " · " + comp.filled + " of " + comp.total + " filled</div>" +
       '<button class="sgx-btn" data-sgx="notesave">' + ic("save") + " Save</button>" +
       (n.finalized
         ? '<button class="sgx-btn" data-sgx="noteunfinal">Reopen</button>'
@@ -1355,6 +1449,64 @@
 
       // notes
       if (act === "newnote") { startNote(t.getAttribute("data-id")); return; }
+      if (act === "notejump") {
+        var fk = t.getAttribute("data-k");
+        var el = fk && document.getElementById("sgxF-" + fk);
+        if (!el) return;
+        try { el.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) { try { el.scrollIntoView(); } catch (er) {} }
+        // Focus AFTER the scroll settles, or the keyboard opening fights the animation.
+        setTimeout(function () { try { el.focus({ preventScroll: true }); } catch (e) { try { el.focus(); } catch (er) {} } }, 320);
+        haptic("tap");
+        return;
+      }
+      if (act === "bkToggle") {
+        var sy0 = SY(); if (!sy0) return;
+        var turningOn = !sy0.autoSyncOn();
+        sy0.setAutoSync(turningOn);
+        haptic("light"); render();
+        if (turningOn) {
+          toast("Backing up...");
+          Promise.resolve(sy0.syncNow()).then(function (r) {
+            var m = backupMessage(r);
+            toast(m || "Notes backed up to your Drive, encrypted.");
+            render();
+          });
+        } else {
+          toast("Backup off. The Drive copy already made is left untouched.");
+        }
+        return;
+      }
+      if (act === "bkNow") {
+        var sy1 = SY(); if (!sy1) return;
+        toast("Backing up...");
+        Promise.resolve(sy1.syncNow()).then(function (r) {
+          var m = backupMessage(r);
+          toast(m || (r && r.skipped === "empty" ? "No notes to back up yet." : "Notes backed up, encrypted."));
+          render();
+        });
+        return;
+      }
+      if (act === "bkRestore") {
+        var sy2 = SY(); if (!sy2) return;
+        /* A restore MERGES (newest wins per note) and can never delete a note, so it does not need
+         * a scary confirmation - but it does need to say that, or a surgeon will not risk it. */
+        var okGo = true;
+        try {
+          okGo = window.confirm(
+            "Restore notes from your encrypted Drive backup?\n\nThis ADDS anything missing and " +
+            "keeps the newer version of anything you already have. Nothing on this phone is deleted.");
+        } catch (e) {}
+        if (!okGo) return;
+        toast("Restoring...");
+        Promise.resolve(sy2.restore()).then(function (r) {
+          var m = backupMessage(r);
+          if (m) { toast(m); return; }
+          toast(r.restored ? ("Restored " + r.restored + " note" + (r.restored === 1 ? "" : "s") + ".")
+                           : "Already up to date - nothing was missing.");
+          render();
+        });
+        return;
+      }
       if (act === "mknote") { createNote(t.getAttribute("data-t"), t.getAttribute("data-tpl")); return; }
       if (act === "confirm") {
         var fk = t.getAttribute("data-k");
@@ -1399,6 +1551,7 @@
               setTimeout(function () {
                 if (!state.note || state.note.id !== backTo) return;   // they navigated away; don't overwrite
                 state.note.patient = picked;
+                applyPatientToFields(picked);
                 saveNote(true).then(function () {
                   toast(picked.episodeId ? "Patient linked" : "Linked, but this patient has no open visit");
                   render();
@@ -1450,7 +1603,7 @@
         var p = (state.ptResults || [])[+t.getAttribute("data-idx")];
         var cl = PT().linkFromConnect(state.ptTenant, p);
         if (!cl) { toast("Could not read that patient"); return; }
-        state.note.patient = cl; state.ptPick = null; state.ptResults = null;
+        state.note.patient = cl; applyPatientToFields(cl); state.ptPick = null; state.ptResults = null;
         saveNote(true).then(function () { toast("Patient linked"); render(); });
         return;
       }
@@ -1458,7 +1611,7 @@
         var mEl = rootEl.querySelector("[data-sgx-ptmanual]");
         var ml = PT().linkManual(mEl ? mEl.value : "");
         if (!ml) { toast("Enter a patient reference"); return; }
-        state.note.patient = ml; state.ptPick = null;
+        state.note.patient = ml; applyPatientToFields(ml); state.ptPick = null;
         saveNote(true).then(function () { toast("Patient set"); render(); });
         return;
       }
@@ -1474,12 +1627,16 @@
           var D = DEST(); if (!D) { toast("Destinations unavailable"); return; }
           // Second tap confirms: this puts patient-identifying text outside the device.
           if (t.getAttribute("data-armed") !== "1") {
+            /* Same two-tap discipline as finalise, and the same trap it had: a SIX second fuse that
+             * expired in silence, so reading the disclosure and then tapping just re-armed it. The
+             * confirmation is the point - the fuse is not - so give it the same 15s. */
             t.setAttribute("data-armed", "1");
             t.classList.add("danger");
-            var label = dest === "drive" ? "Confirm: send to Drive" : "Confirm: write to the hospital record";
+            var label = dest === "drive" ? "Tap again to send to Drive" : "Tap again to write to the hospital record";
             t.innerHTML = '<span class="tx"><span class="tt">' + esc(label) + "</span>" +
-              '<span class="sb">Contains patient identifiers. Tap again to send.</span></span>';
-            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 6000);
+              '<span class="sb">Contains patient identifiers.</span></span>';
+            toast(dest === "drive" ? "Tap once more to send to Drive" : "Tap once more to write to the hospital record");
+            setTimeout(function () { if (t && t.getAttribute("data-armed") === "1") render(); }, 15000);
             return;
           }
           var mm = M(), sc = state.noteSchema;
@@ -1503,13 +1660,24 @@
         // Double-press gate: finalising a clinical record is never a single tap.
         // (Same discipline as discharge-ghis.js armSignOff().)
         if (t.getAttribute("data-armed") !== "1") {
+          /* Finalising a clinical record is deliberately two taps. But the window was FIVE seconds
+           * and expired in silence: a surgeon who taps once, reads "Confirm: this is final", thinks
+           * about it, and taps again at six seconds simply re-arms it - and can loop forever
+           * without the note ever finalising, which is exactly what "filled all 6, still can't send
+           * to GHIS" looked like (owner, 2026-08-26).
+           *
+           * Longer window, and say what the second tap is FOR rather than restating the warning. A
+           * toast too, because the button sits in a sticky bar the thumb is covering at the moment
+           * it changes. */
           t.setAttribute("data-armed", "1");
           t.classList.add("danger");
-          t.innerHTML = ic("warning") + " Confirm: this is final";
+          t.innerHTML = ic("warning") + " Tap again to finalise";
+          toast("Tap Finalise once more to sign this note");
           setTimeout(function () {
             if (!t || t.getAttribute("data-armed") !== "1") return;
-            t.removeAttribute("data-armed"); t.classList.remove("danger"); t.textContent = "Finalise";
-          }, 5000);
+            t.removeAttribute("data-armed"); t.classList.remove("danger");
+            t.innerHTML = "Finalise";   // innerHTML, not textContent: keep it consistent with the armed state
+          }, 15000);
           return;
         }
         state.note.finalized = true;

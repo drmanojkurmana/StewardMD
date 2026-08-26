@@ -61,6 +61,17 @@
         "gate without a rebuild. SURGX still exposes no prescription affordance at all, and the " +
         "EMR write-back stays gated separately (QUEUE_EMR_WRITE + a live GHIS session)."
     },
+    smd_surgx_drive_backup: {
+      type: "bool", def: false, query: "surgxbackup",
+      desc: "Keep an ENCRYPTED backup of SURGX notes in the surgeon's own Google Drive, so they " +
+        "survive a reinstall or a sign-out (notes are otherwise device-only, encrypted under a " +
+        "per-device secret, with no server copy - a reinstall has already destroyed real notes). " +
+        "The backup is re-encrypted under the My Clinic password via personal-clinic.js's scheme, " +
+        "so Drive holds an opaque blob and the key never leaves the phone. OFF by default and " +
+        "opt-in: an upgrade must never silently begin uploading operative notes. Local storage " +
+        "stays the system of record; Drive is read only by an explicit restore.",
+      restart: false
+    },
     smd_surgx_dest_drive: {
       type: "bool", def: true, query: "surgxdrive",
       desc: "Offer 'Google Drive' as a save destination for a finalised note. Native only (the " +

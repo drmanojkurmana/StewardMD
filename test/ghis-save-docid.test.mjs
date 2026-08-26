@@ -149,7 +149,14 @@ test("SAVE: the caller's episode is verified, not trusted", () => {
 test("SAVE: every identifier GHIS gives for the visit is tried, not one guess", () => {
   assert.match(SAVE, /cands\.push\(\['epi', row\.episodeId\], \['visit', row\.visitId\]\)/, "episode AND visit number");
   assert.match(SAVE, /for \(let i = 0; i < cands\.length && !got\.live; i\+\+\)/, "stops at the first that activates");
-  assert.match(SAVE, /v === String\(body\.episodeId \|\| ''\)\) continue/, "never repeats the one already tried");
+  /* The guarantee is "never activate the same identifier twice", not one particular expression.
+   * It was `v === String(body.episodeId || '')`, which only covered the CALLER's episode; it is now
+   * a `tried` Set seeded with that value, so it also spans the OPD and ward passes - each attempt
+   * is a live POST that re-points the active visit in GHIS's session, so a repeat is not free. */
+  assert.match(SAVE, /const tried = new Set\(\[String\(body\.episodeId \|\| ''\)\]\)/,
+    "the caller's episode still counts as already tried");
+  assert.match(SAVE, /if \(!v \|\| tried\.has\(v\)\) continue/, "never repeats one already tried");
+  assert.match(SAVE, /tried\.add\(v\)/, "and each attempt is recorded");
 });
 
 test("PARSE: the episode column is captured, not swallowed by the OP number", () => {
@@ -229,19 +236,70 @@ test("REGRESSION: no dangling `gr` after the activate-then-check refactor", () =
  * never be saved. That is the "it used to work and now it doesn't". The two meanings of 0 are told
  * apart by whether we have a patient AND a visit to attach the new record to.
  */
-test("CREATE: doc_id 0 with a patient and visit is a NEW assessment, not an orphan", () => {
+test("CREATE: doc_id 0 needs a patient, a visit, AND a confirmed activation", () => {
+  /* Tightened on 2026-08-26 together with the payload flip below. While the POST carried the
+   * patient and episode ids, knowing the episode was enough - the ids themselves targeted the
+   * record. Now that the ids go out empty (matching GHIS's own UI), the session's active visit is
+   * the ONLY thing deciding which chart a create lands in, so naming an episode proves nothing.
+   * Only a Searchnew that actually returned 2xx does. */
   const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
-  assert.match(save, /const canCreate = !!\(mr && attachTo\)/, "a create needs both ids");
+  assert.match(save, /const canCreate = !!\(mr && attachTo && epiActivated\)/,
+    "a create needs both ids and a confirmed activation");
   assert.match(save, /&& !clientDoc && !canCreate\)/, "…and only then is the refusal still correct");
   assert.match(save, /const attachTo = String\(body\.episodeId \|\| ''\) \|\| epiUsed/,
-    "the visit may have come from the OPD-list lookup rather than the caller");
+    "the visit may have come from the roster lookup rather than the caller");
+  /* MEASURED against the live server, 2026-08-26: HTTP 200 proves nothing. An unauthenticated
+   * session and a working one BOTH answered 200 to Searchnew - the first a redirect stub, the
+   * second the patient's own page. A guard on the status alone could not fail. What separates them
+   * is the body echoing the MR that was activated (13 occurrences vs 0). */
+  assert.match(save, /const echoed = String\(\(a && a\.body\) \|\| ''\)\.indexOf\(mr\) !== -1/,
+    "activation is confirmed by the response naming the patient, not by the status");
+  assert.match(save, /epiActivated = !!\(a && a\.status >= 200 && a\.status < 300 && echoed\)/,
+    "both the transport AND the identity must agree");
+  assert.match(save, /:mr-ok' : ':mr-absent'/,
+    "the attempt trail distinguishes a real activation from a 200 that did nothing");
+  assert.match(save, /\{ epiActivated = false; attempts\.push\(how \+ ':no-epi'\); \}/,
+    "no episode means no activation, never a stale true from a previous candidate");
 });
 
-test("CREATE: a new record always carries the patient and the visit", () => {
+test("CREATE: the ids go out EXACTLY as the form gave them — empty for a new record", () => {
+  /* THE PAYLOAD FLIP (live capture, 2026-08-26, docs/ghis/captured-initial-assessment-write.md).
+   *
+   * This file used to fill both ids in whenever the form omitted them, justified in a comment
+   * asserting that posting them set "is exactly how GHIS's own form creates the first assessment
+   * for a visit". The capture shows the opposite: the real UI posts
+   *     assessment.Initial_Assessment_doc_id=0
+   *     assessment.episode_id=
+   *     assessment.patient_id=
+   * and GHIS answers 200, resolving the target from the active visit in its session. Every create
+   * we sent therefore deviated from the only payload known to work. */
   const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
-  assert.match(save, /all\['assessment\.patient_id'\] = String\(body\.patientId\)/);
-  assert.match(save, /all\['assessment\.episode_id'\] = String\(attachTo\)/,
-    "filing a new assessment under no visit IS the orphan the guard protects against");
+  assert.ok(!/all\['assessment\.patient_id'\] = String\(body\.patientId\)/.test(save),
+    "the patient id must no longer be invented when the form left it blank");
+  assert.ok(!/all\['assessment\.episode_id'\] = String\(attachTo\)/.test(save),
+    "nor the episode id");
+  assert.match(save, /all\['assessment\.patient_id'\] = ''/, "an absent patient id is sent as empty");
+  assert.match(save, /all\['assessment\.episode_id'\] = ''/, "an absent episode id is sent as empty");
+});
+
+test("UPDATE is untouched: a form that HAS the ids still passes them through", () => {
+  /* The flip must only affect the create path. On an update the form supplies the real ids and
+   * overwriting them with a stale client value is what made GHIS answer "Unable to process". */
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  // Both writes are guarded on the field being ABSENT, so a populated form value survives.
+  assert.match(save, /if \(!all\['assessment\.patient_id'\]\) all\['assessment\.patient_id'\] = ''/);
+  assert.match(save, /if \(!all\['assessment\.episode_id'\]\) all\['assessment\.episode_id'\] = ''/);
+  assert.match(save, /if \(!all\['assessment\.Initial_Assessment_doc_id'\] && body\.docId/,
+    "the doc id keeps its client fallback — that one IS still read back from the form");
+});
+
+test("the patient-mismatch abort still fires, and still runs BEFORE the payload is built", () => {
+  // The one guard that stops a write landing on another patient's chart. Emptying the ids must not
+  // have moved or weakened it.
+  const save = GHIS.slice(GHIS.indexOf("export async function saveAssessment"), GHIS.indexOf("export async function onRequest"));
+  assert.match(save, /patient_mismatch: loaded form for/);
+  assert.ok(save.indexOf("patient_mismatch") < save.indexOf("all['assessment.patient_id'] = ''"),
+    "the mismatch check reads the form's own patient_id before anything is normalised away");
 });
 
 test("CREATE: the response says whether it created or updated", () => {

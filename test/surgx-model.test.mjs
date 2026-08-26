@@ -421,3 +421,32 @@ test("rendered note: an optional empty field is simply absent", () => {
   const t = M.renderNoteText(NOTE_SCHEMA, { a: "x", b: "y" }, {}, { title: "T" });
   assert.ok(!/^C:/m.test(t));
 });
+
+/* ── what counts as signed ─────────────────────────────────────────────────── */
+
+test("AI and VOICE fields still block finalise - that is the whole gate", () => {
+  /* Widened `auto` on 2026-08-26 so a linked patient's reference and today's date stop demanding a
+   * confirmation tap. The values that carry clinical judgement must NOT have moved with them. */
+  const schema = [{ title: "S", fields: [{ k: "a", label: "A", required: true }] }];
+  for (const p of ["ai", "voice", undefined, "", "guess"]) {
+    const c = M.noteCompleteness(schema, { a: "something" }, { a: p });
+    assert.equal(c.canFinalize, false, `provenance ${JSON.stringify(p)} must still block finalise`);
+    assert.equal(c.unconfirmed.length, 1);
+  }
+});
+
+test("a clinician-confirmed or machine-derived field does not block", () => {
+  const schema = [{ title: "S", fields: [{ k: "a", label: "A", required: true }] }];
+  for (const p of ["clinician", "auto"]) {
+    assert.equal(M.noteCompleteness(schema, { a: "x" }, { a: p }).canFinalize, true,
+      `provenance ${p} must satisfy the gate`);
+  }
+});
+
+test("an EMPTY required field blocks regardless of provenance", () => {
+  // "auto" must never be a way to satisfy a field that has no value.
+  const schema = [{ title: "S", fields: [{ k: "a", label: "A", required: true }] }];
+  const c = M.noteCompleteness(schema, { a: "   " }, { a: "auto" });
+  assert.equal(c.canFinalize, false);
+  assert.equal(c.missing.length, 1);
+});

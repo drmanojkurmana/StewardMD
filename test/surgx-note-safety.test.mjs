@@ -1,5 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert";
+import { readFileSync } from "node:fs";
 import M from "../surgx-model.js";
 import { sanitizeSurgxNote, surgxNotePrompt, NEVER_AI_FILLABLE } from "../functions/api/ai/_surgx-note.js";
 import NS from "../surgx-note-schema.js";
@@ -289,4 +290,95 @@ test("schema: prefilled boilerplate is never provenance 'clinician'", () => {
   const values = {}, prov = {};
   Object.keys(s.prefill).forEach((k) => { values[k] = s.prefill[k]; prov[k] = "ai"; });
   assert.equal(M.noteCompleteness(s.sections, values, prov).canFinalize, false);
+});
+
+/* ── being blocked must come with a way forward ───────────────────────────── */
+
+test("the missing-field count is a link to the first blocking field", () => {
+  /* Owner, 2026-08-26: repeatedly stuck on "6 required fields missing" with Finalise greyed out.
+   * The fields render ABOVE the preview while the sticky bar sits at the bottom of a twenty-field
+   * form, so the count told the surgeon they were blocked and then left them to hunt for what. */
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const sticky = src.slice(src.indexOf("The count alone is a dead end"), src.indexOf("return head(schema.title"));
+  assert.match(sticky, /comp\.missing\[0\] \|\| comp\.unconfirmed\[0\]/,
+    "it must point at whatever is actually blocking, missing or unconfirmed");
+  assert.match(sticky, /data-sgx="notejump"/);
+  assert.match(sticky, /role="button"/, "a tappable status must be reachable, not just clickable");
+});
+
+test("the jump scrolls to the field AND focuses it", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notejump")'), src.indexOf('if (act === "notejump")') + 800);
+  assert.match(h, /getElementById\("sgxF-" \+ fk\)/, "field ids are sgxF-<key>");
+  assert.match(h, /scrollIntoView/);
+  assert.match(h, /focus/);
+  assert.match(h, /setTimeout/, "focus after the scroll settles, or the keyboard fights the animation");
+});
+
+test("a note with nothing left to fix offers no jump", () => {
+  // "Ready to finalise" must not be an underlined link to nowhere.
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const sticky = src.slice(src.indexOf("var jumpTo ="), src.indexOf("return head(schema.title"));
+  assert.match(sticky, /jumpTo \?/, "the attributes are conditional on there being somewhere to go");
+});
+
+test("a missing field never throws if it is not on screen", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notejump")'), src.indexOf('if (act === "notejump")') + 800);
+  assert.match(h, /if \(!el\) return/, "a stale key must be a no-op, not a crash mid-consult");
+});
+
+/* ── the finalise gate must be passable ───────────────────────────────────── */
+
+test("finalise stays a DOUBLE press - that discipline is not relaxed", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
+  assert.match(h, /data-armed/, "signing a clinical record is never one tap");
+  assert.match(h, /if \(!comp\.canFinalize\)/, "and never possible with a required field outstanding");
+});
+
+test("the arming window is long enough to read the warning", () => {
+  /* It was 5s and expired SILENTLY, so tapping once, reading, and tapping again at six seconds
+   * just re-armed it - an unwinnable loop that looked like "I filled everything and still can't
+   * send". */
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
+  const ms = /\}, (\d+)\);/.exec(h);
+  assert.ok(ms, "the disarm timeout must still exist");
+  assert.ok(Number(ms[1]) >= 12000, `arming window is ${ms[1]}ms; too short to read and decide`);
+});
+
+test("the armed state says what the second tap DOES", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notefinal")'), src.indexOf('if (act === "notefinal")') + 2200);
+  assert.match(h, /Tap again to finalise/, "restating the warning does not tell them what to do next");
+  assert.match(h, /toast\(/, "the button is under the thumb at the moment it changes");
+});
+
+test("todayISO is defined exactly once", () => {
+  /* A second declaration in the same IIFE silently overwrites the first for EVERY caller,
+   * including evidence currency - identical bodies today, a divergence waiting to happen. */
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  assert.equal((src.match(/function todayISO\(\)/g) || []).length, 1);
+});
+
+test("the SEND confirmation is two taps, with a window long enough to read it", () => {
+  /* Sending PHI off-device stays a deliberate second tap. But it had the same 6s silent fuse as
+   * finalise: read the disclosure, tap, and you have only re-armed it. Same fix, same reasoning -
+   * the confirmation is the safety feature, the countdown never was. */
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notedest")'), src.indexOf('if (act === "notedest")') + 2600);
+  assert.match(h, /data-armed/, "sending patient-identifying text is never one tap");
+  assert.match(h, /Contains patient identifiers/, "and the disclosure must still be stated");
+  const ms = /\}, (\d+)\);/.exec(h);
+  assert.ok(ms && Number(ms[1]) >= 12000, `send arming window is ${ms && ms[1]}ms; too short to read and decide`);
+  assert.match(h, /Tap again to write to the hospital record/, "say what the second tap does");
+});
+
+test("the device copy is written BEFORE any export, always", () => {
+  // If the upload fails the note must already be safe; local is never a fallback.
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const h = src.slice(src.indexOf('if (act === "notedest")'), src.indexOf('if (act === "notedest")') + 2600);
+  assert.ok(h.indexOf("saveNote(true)") < h.indexOf("data-armed"),
+    "the local save happens first, whatever the destination");
 });

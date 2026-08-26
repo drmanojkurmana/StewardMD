@@ -8,13 +8,15 @@
  * Resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_CLINIX_FLAGS for the browser.
  *
- * PUBLIC-RELEASE-GATE: smd_clinix is the master flag and stays def:false until the owner signs off
- * the clinical content. Flag off must be a COMPLETE no-op (clinix.js returns before touching DOM).
+ * PUBLIC-RELEASE-GATE: smd_clinix is the master flag. It is currently def:TRUE (owner decision,
+ * 2026-08-23, recorded at the top of this file) because the app ships only to testers. Flag off
+ * must be a COMPLETE no-op (clinix.js returns before touching DOM).
  *
- * smd_clinix_draft is the one that matters for safety: with it OFF (the default), the runtime
- * refuses to render any content object whose review.status is not approved/published. The KB COPD
- * reference this module grounds on is currently review.status "ai_drafted", so the draft flag is
- * how an author sees it at all. It must never ship on.
+ * smd_clinix_draft is the one that matters for safety: with it OFF the runtime refuses to render
+ * any content object whose review.status is not approved/published. It is currently def:TRUE, so
+ * unreviewed content DOES render today, badged "Draft, pending clinician review". That is
+ * deliberate for testers and is the single flag that must be flipped to false before any public
+ * release - do not read the default as a safety guarantee.
  */
 (function () {
   "use strict";
