@@ -69,7 +69,18 @@ async function raw(jar, method, url, body, extra = {}) {
 }
 async function follow(jar, r, max = 10) { let n = 0; while (r.status >= 300 && r.status < 400 && r.location && n < max) { r = await raw(jar, 'GET', new URL(r.location, r.url).href); n++; } return r; }
 const parseGhis = (b) => { if (!b) return []; try { let v = JSON.parse(b); return typeof v === 'string' ? JSON.parse(v) : v; } catch { return []; } };
-function htmlToText(s){ if(!s) return ''; return String(s).replace(/<\s*(br|\/p|\/div|\/tr|\/h[1-6])\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'').replace(/&nbsp;/gi,' ').replace(/&amp;/gi,'&').replace(/&ndash;/gi,'–').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>').replace(/&quot;/gi,'"').replace(/&#39;/gi,"'").replace(/\n{3,}/g,'\n\n').replace(/[ \t]{2,}/g,' ').trim(); }
+/* NUMERIC ENTITIES MATTER HERE, and their absence was a live bug. GHIS returns every newline in a
+ * textarea as &#xA; and a middot as &#xB7;, so a value read back never string-matched the text we
+ * had just written. appendText's "already present -> unchanged" guard therefore never fired, and a
+ * double-tap or a retry appended a SECOND copy of a surgical note into the patient's management
+ * plan (observed on a live chart, 2026-08-26: two copies, 1372 chars). Decode &#NN; and &#xNN;
+ * alongside the named entities so a round-trip is faithful and the dedupe guard works. */
+function decodeEntities(s){ return String(s)
+  .replace(/&#x([0-9a-f]+);/gi, function(_, h){ try { return String.fromCodePoint(parseInt(h, 16)); } catch (e) { return _; } })
+  .replace(/&#(\d+);/g, function(_, d){ try { return String.fromCodePoint(parseInt(d, 10)); } catch (e) { return _; } })
+  .replace(/&nbsp;/gi,' ').replace(/&ndash;/gi,'–').replace(/&lt;/gi,'<').replace(/&gt;/gi,'>')
+  .replace(/&quot;/gi,'"').replace(/&#39;/gi,"'").replace(/&amp;/gi,'&'); }
+function htmlToText(s){ if(!s) return ''; return decodeEntities(String(s).replace(/<\s*(br|\/p|\/div|\/tr|\/h[1-6])\s*\/?>/gi,'\n').replace(/<[^>]+>/g,'')).replace(/\n{3,}/g,'\n\n').replace(/[ \t]{2,}/g,' ').trim(); }
 
 // ── GHIS login (one doctor's credentials) ────────────────────────────────────
 // Best-effort scrape of the logged-in doctor's display name from GHIS home HTML (falls back to '' -> the
