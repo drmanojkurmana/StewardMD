@@ -725,11 +725,39 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%);
   pointer-events: none;
 }
-/* White, and a hair heavier: a 2px outline glyph that read well on pale mint goes thin and grey on a
- * dark sphere, which is what made the branded logos look "designed" and the rest look unfinished. */
-#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: #fff; margin: 0; }
-#homeV2.rnav .rnav-badge svg { color: #fff; stroke: currentColor; }
-#homeV2.rnav .rnav-badge svg[stroke-width], #homeV2.rnav .rnav-badge svg * { vector-effect: non-scaling-stroke; }
+/* ── ONE stroke weight across three different glyph systems ────────────────────────────────────
+ * The badges hold Material Symbols ligatures, hand-authored inline SVG, and raster brand marks.
+ * Measured on the real page, they disagreed badly:
+ *     inline SVG (24-wide viewBox at 32px)   2 x 1.333 = 2.67px
+ *     the ECG    (48-wide viewBox at 36px)   2 x 0.75  = 1.50px   <- nearly half the others
+ *     Material Symbols, wght 400 at 28px     approx.     2.3px
+ * Stroke-width is in USER units, so the same "2" draws a different thickness in every viewBox -
+ * which is why this drifted silently as icons were added.
+ *
+ * `vector-effect: non-scaling-stroke` takes the viewBox out of the equation: stroke-width then means
+ * SCREEN pixels, so one number governs every SVG no matter how its artboard was drawn. Material's
+ * weight axis is nudged to 500 to sit on the same line. Change --rds-glyph-stroke and the whole set
+ * moves together. */
+#homeV2.rnav .rnav-badge { --rds-glyph-stroke: 2.5; }
+#homeV2.rnav .rnav-badge .rds-icon {
+  font-size: 28px; color: #fff; margin: 0;
+  font-variation-settings: "FILL" 0, "GRAD" 0, "opsz" 24, "wght" 500;
+}
+#homeV2.rnav .rnav-badge svg { color: #fff; stroke: currentColor; fill: none; overflow: visible; }
+#homeV2.rnav .rnav-badge svg * { vector-effect: non-scaling-stroke; }
+#homeV2.rnav .rnav-badge svg,
+#homeV2.rnav .rnav-badge svg *:not([fill]):not(.pupil):not(.p):not(.n):not(.beam) { stroke-width: var(--rds-glyph-stroke); }
+/* Solid shapes are mass, not line - they must NOT pick up a stroke or they bloat. */
+#homeV2.rnav .rnav-badge svg .pupil, #homeV2.rnav .rnav-badge svg .p,
+#homeV2.rnav .rnav-badge svg .n, #homeV2.rnav .rnav-badge svg .beam { stroke: none; }
+
+/* The raster brand marks (MAiTRI, CliniX, SURGX) were inline-styled at 48 / 38 / 34px, so three
+ * logos that sit side by side had three different optical weights. One box, object-fit: contain, so
+ * each keeps its own aspect ratio while occupying the same optical area as every other glyph. */
+#homeV2.rnav .rnav-badge .ai-brandmark {
+  width: auto; height: auto; max-width: 38px; max-height: 38px; object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0, 0, 0, .35));
+}
 #homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
 #homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
 /* `.feat` no longer owns the sphere - every badge has it (above). What `.feat` still marks is a
@@ -746,8 +774,11 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
 /* ── AI tile live-icon animations (dark feat badge) ────────────────────────────
    eye blink · ECG sweep · lesion pulse · X-ray beam. Motion only when the user
    allows it (reduced-motion keeps a clean static icon). */
-#homeV2.rnav .rnav-badge .ai-anim { width: 32px; height: 32px; fill: none; stroke: #eafff8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #eafff8; }
-#homeV2.rnav .rnav-badge .ai-ecg { width: 36px; }
+/* Sizes only. Stroke weight and colour come from the normalisation block above, so an icon added
+ * later cannot reintroduce its own thickness. The ECG keeps a wider box because its artboard is
+ * 48 wide rather than 24 - with non-scaling-stroke that changes its footprint, not its weight. */
+#homeV2.rnav .rnav-badge .ai-anim { width: 30px; height: 30px; stroke-linecap: round; stroke-linejoin: round; }
+#homeV2.rnav .rnav-badge .ai-ecg { width: 40px; height: 30px; }
 #homeV2.rnav .ai-eye .pupil, #homeV2.rnav .ai-derm .p { fill: #eafff8; stroke: none; }
 #homeV2.rnav .ai-cxr .beam { fill: rgba(138,255,234,.5); stroke: none; }
 #homeV2.rnav .ai-oncotree .n { fill: #eafff8; stroke: none; }
