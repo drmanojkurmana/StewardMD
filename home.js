@@ -3441,6 +3441,119 @@
       return hits.length === 1 ? hits[0] : null;                  // two drugs named = not a lookup
     } catch (e) { return null; }
   }
+  /* ── Busy art: the wait gets a character ───────────────────────────────────
+   * Two pieces, both inline (no image files, nothing fetched):
+   *   Medibot   — a vector robot listening to its own chest, in the pending bubble.
+   *   Stetho    — two DARK-TEAL pixel walkers (Buddy front-on, Strider side-on) that
+   *               cross the top edge of the composer while an answer generates.
+   * The pair alternates per turn. Everything stops under prefers-reduced-motion. */
+  var MAIK_PIX = {
+    d: "#0E6E63",   // dark teal body
+    l: "#2DD4BF",   // rim + diaphragm
+    t: "#14807A",   // tubing
+    k: "#04211E"    // eyes
+  };
+  var MAIK_BUDDY = [[
+    "..t.......t..",
+    "..t.......t..",
+    "...t.....t...",
+    "....t...t....",
+    ".....ttt.....",
+    "...lllllll...",
+    "..ddddddddd..",
+    "..dkdddddkd..",
+    "..ddddddddd..",
+    "...lllllll...",
+    "....d...d....",
+    "....d...d...."], [
+    ".............",
+    "..t.......t..",
+    "..t.......t..",
+    "...t.....t...",
+    "....ttttt....",
+    "...lllllll...",
+    "..ddddddddd..",
+    "..dkdddddkd..",
+    "..ddddddddd..",
+    "...lllllll...",
+    "...d.....d...",
+    "..d.......d.."]];
+  var MAIK_STRIDER = [[
+    "..........tt..",
+    ".........t....",
+    "........t.....",
+    "...ttttt......",
+    "..llllll......",
+    ".dkddddkd.....",
+    ".dddddddd.....",
+    ".llllllll.....",
+    "..d...d.......",
+    "..d...d......."], [
+    "..........t...",
+    ".........tt...",
+    "........t.....",
+    "...ttttt......",
+    "..llllll......",
+    ".dkddddkd.....",
+    ".dddddddd.....",
+    ".llllllll.....",
+    ".d.....d......",
+    "d.......d....."]];
+  // rows -> <g> of 1x1 rects. Pure string building so it drops into innerHTML anywhere.
+  function maikPixG(rows, cls) {
+    var out = '<g class="' + cls + '">', y, x, c;
+    for (y = 0; y < rows.length; y++) for (x = 0; x < rows[y].length; x++) {
+      c = rows[y].charAt(x);
+      if (!MAIK_PIX[c]) continue;
+      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + MAIK_PIX[c] + '"/>';
+    }
+    return out + "</g>";
+  }
+  function maikPixSVG(frames, scale) {
+    var w = frames[0][0].length, h = frames[0].length, i, g = "";
+    for (i = 0; i < frames.length; i++) g += maikPixG(frames[i], "mkw-f" + (i + 1));
+    return '<svg class="mkw-svg" width="' + (w * scale) + '" height="' + (h * scale) + '" viewBox="0 0 ' + w + ' ' + h +
+      '" shape-rendering="crispEdges" aria-hidden="true">' + g + "</svg>";
+  }
+  // Medibot: one vector robot, ids suffixed so several can share a page.
+  var _mkBotN = 0;
+  function maikBotSVG(px) {
+    var p = "mkb" + (++_mkBotN) + "_";
+    return '<svg class="maik-bot" width="' + px + '" height="' + px + '" viewBox="0 0 200 200" aria-hidden="true">' +
+      '<defs>' +
+        '<linearGradient id="' + p + 's" x1=".2" y1="0" x2=".8" y2="1">' +
+          '<stop offset="0%" stop-color="#F4F9FB"/><stop offset="46%" stop-color="#D2DEE4"/><stop offset="100%" stop-color="#93A6B0"/></linearGradient>' +
+        '<linearGradient id="' + p + 'v" x1="0" y1="0" x2=".6" y2="1">' +
+          '<stop offset="0%" stop-color="#123642"/><stop offset="55%" stop-color="#08202A"/><stop offset="100%" stop-color="#04141B"/></linearGradient>' +
+        '<linearGradient id="' + p + 'e" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="#9CFFEF"/><stop offset="100%" stop-color="#2DD4BF"/></linearGradient>' +
+        '<linearGradient id="' + p + 'c" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0%" stop-color="#EEF5F8"/><stop offset="40%" stop-color="#AFC0C9"/><stop offset="70%" stop-color="#7B8F9A"/><stop offset="100%" stop-color="#D8E3E8"/></linearGradient>' +
+        '<radialGradient id="' + p + 'b" cx="34%" cy="28%" r="76%">' +
+          '<stop offset="0%" stop-color="#FBFDFE"/><stop offset="45%" stop-color="#C2D0D8"/><stop offset="100%" stop-color="#6F838E"/></radialGradient>' +
+      '</defs>' +
+      '<g class="mkb-bob">' +
+        '<path d="M100 44 L100 30" stroke="#94A7B1" stroke-width="4" stroke-linecap="round"/>' +
+        '<circle cx="100" cy="26" r="5.5" fill="#2DD4BF" class="mkb-pulse"/>' +
+        '<rect x="56" y="42" width="88" height="70" rx="26" fill="url(#' + p + 's)"/>' +
+        '<rect x="66" y="54" width="68" height="46" rx="21" fill="url(#' + p + 'v)"/>' +
+        '<g class="mkb-blink"><rect x="82" y="68" width="12" height="18" rx="6" fill="url(#' + p + 'e)"/></g>' +
+        '<g class="mkb-blink b2"><rect x="106" y="68" width="12" height="18" rx="6" fill="url(#' + p + 'e)"/></g>' +
+        '<rect x="46" y="66" width="12" height="24" rx="6" fill="#B6C6CE"/>' +
+        '<rect x="142" y="66" width="12" height="24" rx="6" fill="#B6C6CE"/>' +
+        '<path d="M72 116 h56 a16 16 0 0 1 16 16 v18 a16 16 0 0 1 -16 16 h-56 a16 16 0 0 1 -16 -16 v-18 a16 16 0 0 1 16 -16 z" fill="url(#' + p + 's)"/>' +
+        '<circle cx="100" cy="140" r="13" fill="none" stroke="#2DD4BF" stroke-width="2.4" class="mkb-ping"/>' +
+        '<circle cx="100" cy="140" r="13" fill="none" stroke="#2DD4BF" stroke-width="2.4" class="mkb-ping p2"/>' +
+        '<path d="M60 62 C48 84 52 116 74 130" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M140 62 C152 84 148 116 126 130" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M74 130 C84 138 92 140 100 140" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M126 130 C116 138 108 140 100 140" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<g class="mkb-tick">' +
+          '<circle cx="100" cy="141" r="12.5" fill="url(#' + p + 'b)"/>' +
+          '<circle cx="100" cy="141" r="7" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".72"/>' +
+        '</g>' +
+      '</g></svg>';
+  }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
@@ -3801,8 +3914,38 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}
 /* Buffering loader — polished skeleton shimmer + stage label (replaces the plain dots). */
 .maik-buffer{display:block}
-.maik-buffer-head{display:flex;align-items:center;gap:7px;font:700 11px/1.2 'Inter';letter-spacing:.02em;color:var(--mk-teal);margin-bottom:10px}
+.maik-buffer-head{display:flex;align-items:center;gap:9px;font:700 11px/1.2 'Inter';letter-spacing:.02em;color:var(--mk-teal);margin-bottom:10px}
 .maik-buffer-head .smd-ico{width:15px;height:15px;flex:none;color:var(--mk-teal);animation:maikSpark 1.5s ease-in-out infinite}
+/* Medibot — the vector robot that listens to its own chest while MaiK generates. */
+.maik-bot{flex:none;overflow:visible}
+.mkb-bob{animation:mkbBob 3.4s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes mkbBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.mkb-blink{transform-box:fill-box;transform-origin:50% 55%;animation:mkbBlink 5.2s steps(1,end) infinite}
+@keyframes mkbBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
+.mkb-blink.b2{animation-delay:-2.4s}
+.mkb-pulse{animation:mkbPulse 2.1s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes mkbPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.mkb-ping{transform-box:fill-box;transform-origin:50% 50%;animation:mkbPing 2.1s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes mkbPing{0%{transform:scale(.35);opacity:.85}70%{opacity:0}100%{transform:scale(1.9);opacity:0}}
+.mkb-ping.p2{animation-delay:-1.05s}
+.mkb-tick{transform-box:fill-box;transform-origin:50% 100%;animation:mkbTick 3.1s cubic-bezier(.42,0,.58,1) infinite}
+@keyframes mkbTick{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+/* Stetho walkers — dark-teal pixel characters crossing the composer's top edge. */
+.maik-cmp{position:relative}
+.mkw{position:absolute;left:10px;right:10px;top:-30px;height:32px;overflow:hidden;pointer-events:none;z-index:1}
+/* A dark-teal body is deliberately quiet; the glow is what keeps it legible on the
+   night-shift theme without brightening the fill the owner picked. */
+.mkw-a{position:absolute;bottom:0;left:0;animation:mkwWalk 8s linear infinite;filter:drop-shadow(0 0 4px rgba(45,212,191,.38))}
+@keyframes mkwWalk{from{transform:translateX(-32px)}to{transform:translateX(calc(100vw + 32px))}}
+.mkw-svg{display:block}
+.mkw-f2{opacity:0}
+.mkw-f1{animation:mkwFrame .34s steps(1,end) infinite}
+.mkw-f2{animation:mkwFrame .34s steps(1,end) infinite;animation-delay:-.17s}
+@keyframes mkwFrame{0%,49.9%{opacity:1}50%,100%{opacity:0}}
+@media (prefers-reduced-motion:reduce){
+  .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a,.mkw-f1,.mkw-f2{animation:none}
+  .mkw-a{transform:translateX(40px)} .mkw-f2{opacity:0}
+}
 .maik-buffer-txt{color:var(--mk-mut);font-weight:600}
 .maik-sk{display:flex;flex-direction:column;gap:8px}
 .maik-sk span{display:block;height:9px;border-radius:6px;background:rgba(125,139,161,.22);position:relative;overflow:hidden}
@@ -3993,8 +4136,24 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
      * contradicted a stop button by disabling the only control that could cancel. Centralised so the
      * two states cannot drift apart.
      */
+    var _mkWalkN = 0;
+    // One walker at a time, alternating the two characters per turn so the wait is not identical
+    // every time. Mounted in .maik-cmp (position:relative) so it rides the composer's top edge.
+    function maikWalker(on) {
+      try {
+        var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
+        var old = cmp.querySelector(".mkw"); if (old) old.remove();
+        if (!on) return;
+        var strider = !!(_mkWalkN++ % 2);
+        var which = strider ? MAIK_STRIDER : MAIK_BUDDY;
+        var box = document.createElement("div"); box.className = "mkw";
+        box.innerHTML = '<span class="mkw-a">' + maikPixSVG(which, strider ? 3 : 2) + "</span>";
+        cmp.appendChild(box);
+      } catch (e) {}
+    }
     function maikSetSendMode(busy) {
       _maikBusy = busy;
+      maikWalker(!!busy);
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -5115,7 +5274,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, walker: maikWalker, botSVG: maikBotSVG }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
@@ -5279,7 +5438,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
     // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
     function maikBufferHTML(stage, cls) {
-      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + svg("spark", "smd-ico") +
+      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + maikBotSVG(30) +
         '<span class="maik-buffer-txt">' + maikEscH(stage || "Searching StewardMD knowledge") + '</span></div>' +
         '<div class="maik-sk"><span></span><span></span><span></span></div></div>';
     }
