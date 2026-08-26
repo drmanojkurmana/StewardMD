@@ -5,6 +5,38 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-26 · The overlay-stacking trap again (MaiK), and the brand field's missing query
+
+**A third module hit the same z-index trap.** `#maikSheet` is **999**; `.db-overlay` (Drugs
+Database) is **880** and `.mc-overlay` (Calculators) **870**. The "Open in StewardMD" copilot chips
+called `TOOLS[kind].open()` with the MaiK sheet still up, so the module opened BEHIND it, working
+and invisible. The sibling chip group (`data-maik-tool`) always `close()`s first, which is precisely
+why those worked. **Rule, now three modules deep (SURGX, CliniX, MaiK):** before deep-linking into a
+shared app surface, either close your own overlay or lift the target above it. Never assume a module
+overlay is below yours. Also: the "Drug database" chip pointed at `MEDDRUGS.openList()` (drugs.js,
+the small local list used elsewhere only for `openInteractions`) instead of `MEDDB.openList()`
+(api.js, the 4-lakh brand index) — `surgx-screens.js` already carried a comment warning not to
+confuse the two, and this is what confusing them looks like.
+
+**The Rx pad had no entry of its own** — only from a MaiK answer or a consult. It now has a tile in
+the Hospital hub. Opening it cold also produced NO drug row, because `regimenFromCtx()` always seeds
+a `"Lifestyle & general measures"` **advice** row, which carries no drug/brand input: a length check
+on `lines` therefore never fires, and the pad looked populated while offering nothing to type into.
+The guard tests for a non-advice row.
+
+**The brand field could not find brands the Drugs Database found instantly — same backend, one
+missing query.** The pad resolved the typed drug to a composition via `/search` and filtered that
+molecule's brands; it never called `/brand-search`, which the Drugs Database pairs with `/search`.
+So a drug field holding a shorthand the composition index does not carry (`Amoxiclav` for
+Amoxycillin + Clavulanic Acid) made every brand unreachable, while the empty state still said "Type
+the drug first". Two further faults surfaced while fixing it: clearing the box left the previous
+drug's suggestions on screen, and `if (loading) return` DROPPED a newer drug mid-flight, parking
+`loadedFor` on the wrong molecule. Requests supersede now. The rules live in **`rx-brand-match.js`**
+as pure functions, for the same reason `functions/_sse_parse.js` was extracted: unit-testable
+without a browser. **Harness note:** the app calls `location.reload()` when the guest session
+expires, which lands mid-run and wipes long browser tests — keep them short and push detail into
+unit tests. See [[Scan-Meds and Drug Index]].
+
 ## 2026-08-26 · Edge swipe ownership, and the profile that never loaded
 
 **The edge swipe belongs to home; every other screen goes back.** `homeIsForeground()` decided "am
