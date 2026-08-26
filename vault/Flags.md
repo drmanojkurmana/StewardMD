@@ -3,7 +3,7 @@ tags: [reference, flags]
 ---
 # Feature flags — what is ON, what is OFF, and why
 
-Generated from the `*-flags.js` registries on 2026-08-26. **105 flags: 68 ON, 30 OFF, 7 non-boolean.**
+Generated from the `*-flags.js` registries on 2026-08-26. **105 flags: 74 ON, 24 OFF, 7 non-boolean.**
 
 Regenerate rather than hand-edit — the registries are the source of truth, this is a view of them.
 
@@ -42,17 +42,17 @@ Both open **per device** today via the sidebar Experimental access code, so test
 
 ## Everything, by module
 
-### CliniX  <sub>3 ON · 4 OFF</sub>
+### CliniX  <sub>5 ON · 2 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
 | `smd_clinix` | **ON** | CliniX clinical-learning module master flag. ON by default: the app ships only to the |
 | `smd_clinix_draft` | **ON** | Render content that is not clinician-approved. ON by default because ALL CliniX content |
 | `smd_clinix_haptics` | **ON** | Haptic feedback on lesson turns and answer checks (iOS native only). |
-| `smd_clinix_tutor` | OFF | **OPT-IN.** MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only. |
+| `smd_clinix_tutor` | **ON** | MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only. |
+| `smd_clinix_viva_voice` | **ON** | Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by |
 | `smd_clinix_uncleared_media` | OFF | **NEVER, LEGAL.** The repo's own text: 'Authoring escape hatch: render media whose licence is not cleared. NEVER ship on.' |
 | `smd_clinix_viva_tier` | `"mbbs"` | Viva difficulty tier (mbbs | pg). |
-| `smd_clinix_viva_voice` | OFF | **OPT-IN.** Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by |
 
 ### FollowCare  <sub>6 ON · 2 OFF</sub>
 
@@ -102,10 +102,11 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_insulin_dka` | **ON** | Clinician DKA insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_dka=0. |
 | `smd_insulin_peds` | **ON** | Pediatric insulin workflow. Access-gated. PUBLIC-RELEASE-GATE: dev/testing default ON (owner 'flip all on' 2026-08-16). Hide with ?insulin_peds=0. |
 
-### KardiQ X  <sub>10 ON · 6 OFF</sub>
+### KardiQ X  <sub>11 ON · 5 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
+| `smd_kardiox` | **ON** | KardiQ X AI master flag (home card + module). OWNER DECISION 2026-08-26: def:true, so the module is live for every user of this build rather than only… |
 | `smd_kardiox_acs` | **ON** | Optional ACS clinical-context panel on the result: add chest-pain / labs (troponin) / history -> validated HEART & TIMI scores + NSTEMI/STEMI decision… |
 | `smd_kardiox_backend` | **ON** | Use the live KardioX pipeline backend (RemoteAnalyzer via /api/kardiox) instead of the on-device mock. Health-gated: falls back to mock if the pipelin… |
 | `smd_kardiox_confidence` | **ON** | Always show the AI confidence % (Settings · Intelligence). |
@@ -116,7 +117,6 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_kardiox_ondevice` | **ON** | Prefer FULLY ON-DEVICE analysis (offline, no PHI upload): image → on-device digitiser → ensemble, when the model pack is downloaded. PUBLIC-RELEASE-GA… |
 | `smd_kardiox_ondevice_image` | **ON** | ON-DEVICE image model (ONNX Runtime Web): run the 19-class + MI-any models ENTIRELY on the phone — the ECG photo NEVER leaves the device (DPDP, no PHI… |
 | `smd_kardiox_pdf` | **ON** | Digital ECG-PDF import (highest-trust path): import a vector/device ECG PDF (Apple Watch / KardiaMobile / 12-lead EMR export) -> exact signal to ECGFo… |
-| `smd_kardiox` | OFF | **CLINICAL GATE.** Its own words: clinically unvalidated, regulatory-pending. Opens per device via the Experimental passcode. |
 | `smd_kardiox_cloud` | `null` | Cloud ECG-analysis consent (null = ask once). Off = mock/offline only. |
 | `smd_kardiox_demo` | OFF | **NEVER, SAFETY.** Makes Analyze return a CANNED FABRICATED result instead of real inference. Off is what guarantees a real answer or an honest 'unavailable'. |
 | `smd_kardiox_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
@@ -176,22 +176,22 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_sknx_rx` | **ON** | — |
 | `smd_sknx_secure_egress` | OFF | **BLOCKED ON SERVER.** Same posture as ThoreX: needs the server-side proxy first. |
 
-### StewardMD ID  <sub>1 ON · 1 OFF</sub>
+### StewardMD ID  <sub>2 ON · 0 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
+| `smd_steward_id` | **ON** | Verified-email / Apple-proxy anchor capture UI. ON by owner decision 2026-08-26. The ID itself was already minted on sign-in regardless (smd_steward_i… |
 | `smd_steward_id_mint` | **ON** | Mint the universal StewardMD ID on sign-in. DEFAULT ON. |
-| `smd_steward_id` | OFF | **STAGED.** Verified-email / Apple-proxy anchor capture UI. |
 
-### ThoreX  <sub>3 ON · 6 OFF</sub>
+### ThoreX  <sub>5 ON · 4 OFF</sub>
 
 | Flag | Def | Why |
 |---|---|---|
+| `smd_thorex` | **ON** | ThoreX AI master flag (home card + module). OWNER DECISION 2026-08-26: def:true, so the module is live for every user of this build rather than only o… |
+| `smd_thorex_backend` | **ON** | Use the live ThoreX pipeline backend (RemoteAnalyzer via /api/thorex) instead of the on-device path. HEALTH-GATED: /v1/health is probed first and it f… |
 | `smd_thorex_confidence` | **ON** | Always show the AI confidence % (Settings · Intelligence). |
 | `smd_thorex_haptics` | **ON** | Haptic feedback for taps / result-ready / urgent. |
 | `smd_thorex_ondevice` | **ON** | Prefer FULLY ON-DEVICE inference (onnxruntime-web via thorex-ort.js) — no upload, runs in the WebView. Runs BOTH engines: Clinical Engine 1 (torchxray… |
-| `smd_thorex` | OFF | **CLINICAL GATE.** Its own words: needs GROQ + validation. Opens per device via the Experimental passcode. |
-| `smd_thorex_backend` | OFF | **OPT-IN.** Live pipeline backend instead of the on-device path; health-gated, opt-in. |
 | `smd_thorex_cloud` | `null` | Cloud analysis consent (null = ask once). Off = offline only. |
 | `smd_thorex_demo` | OFF | **NEVER, SAFETY.** Same: a canned fabricated chest X-ray result instead of real inference. |
 | `smd_thorex_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
@@ -205,3 +205,59 @@ Both open **per device** today via the sidebar Experimental access code, so test
 
 - `smd_surgx` and `smd_surgx_draft` both default ON *because the app is a tester build*, and `surgx-flags.js` says: FLIP BOTH TO FALSE BEFORE ANY NON-TESTER RELEASE. `smd_clinix` is the same by owner decision on 2026-08-23.
 
+
+## A flag is not a switch: 14 of these cannot be turned on at all
+
+Checked by finding every READER of each flag, not by reading its description. Two ways a flag can
+be inert, and both were found here:
+
+**Nothing reads them.** The name appears in its `*-flags.js` registry and nowhere else in the repo.
+Editing `def:` changes nothing, ever — there is no code on the other side.
+
+| Flag | Status |
+|---|---|
+| `smd_fundx_a11y_contrast` | no reader anywhere |
+| `smd_fundx_a11y_large` | no reader anywhere |
+| `smd_fundx_a11y_cvd` | no reader anywhere |
+| `smd_surgx_mentor` | no reader — Senior Surgeon Mode is Phase 2, unbuilt |
+| `smd_kardiox_dev` | no reader |
+| `smd_thorex_dev` | no reader |
+
+**They bypass the registry.** These read `localStorage` DIRECTLY (`fundx.js`, `fundx-sensors.js`),
+so the registry default is never consulted. They are per-device toggles in FundX Settings, and the
+only way to turn them on is on the device.
+
+`smd_fundx_depth` · `smd_fundx_gpu_preview` · `smd_fundx_sensors` · `smd_fundx_spatial_ar` ·
+`smd_fundx_lens_confirm` · `smd_fundx_telemetry` · `smd_fundx_dev`
+
+**Why this matters beyond FundX:** a request to "turn on all flags" cannot be satisfied by editing
+the registries, and a session that edited `def:` and reported success would be reporting something
+untrue. Check the reader before promising a flag does anything.
+
+## Turned ON on 2026-08-26 (owner decision)
+
+| Flag | Was | Note |
+|---|---|---|
+| `smd_kardiox` | OFF | Module live for everyone, not only passcode-unlocked devices. **The clinical position is unchanged: still unvalidated and regulatory-pending.** `?kardiox=0` still closes it. |
+| `smd_thorex` | OFF | Same. `GROQ_API_KEY` is provisioned (verified against the Pages secret list); the *validation* half of the original gate is still outstanding. |
+| `smd_thorex_backend` | OFF | Safe because it is health-gated: `/v1/health` is probed and it falls back on its own if the pipeline is unreachable. |
+| `smd_clinix_tutor` | OFF | Complete feature; the default was the only thing holding it back. |
+| `smd_clinix_viva_voice` | OFF | **This one changes a stated property.** It was "a per-device student opt-in, never forced on". It is now on by default, so a student wanting a silent viva must switch it off. |
+| `smd_steward_id` | OFF | Only controls the anchor-capture UI. The ID itself was already minted on sign-in (`smd_steward_id_mint`, long ON), so this adds a surface rather than changing identity behaviour. |
+
+Three tests asserted the old defaults and were re-pointed, not deleted: each now asserts the new
+default **plus** that the per-device escape hatch still works, which is the property that actually
+protects a user.
+
+## NOT turned on, and why
+
+| Flag | Why not |
+|---|---|
+| `smd_thorex_secure_egress` | Would **break** chest X-ray analysis. `functions/api/thorex/[[path]].js` fails CLOSED with 503 until `THOREX_ANALYZE_URL` exists, and it is **not** in the Pages secret list. Provision it first, then flip. |
+| `smd_sknx_secure_egress` | Same posture, same missing server side. |
+| `smd_thorex_demo` | Makes Analyze return a **canned fabricated result** instead of real inference. |
+| `smd_surgx_uncleared_media` | Renders media whose licence was never cleared. |
+| `smd_kardiox_learned` | Segmentation-validation stage only; full reconstruction is unbuilt. Turning it on exposes unfinished work, it does not complete it. |
+| `smd_kardiox_parity` | A dev measurement tool that runs a SECOND analysis on every image — doubles inference cost and time for no user-facing gain. |
+| `smd_surgx_notes_verify` | Turning it on **restricts** rather than enables: `surgx-entitlement.js` reads `if (!flag(...)) return "allowed"`, so ON re-imposes the verified-registration requirement on SURGX Notes. |
+| `smd_followcare_sms` / `_voice` | Need provider config; on without it means failed or misdirected patient messages. |

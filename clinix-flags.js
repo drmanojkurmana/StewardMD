@@ -36,8 +36,10 @@
         "clinician review' line and its sources. Set to 0 before any non-tester release."
     },
     smd_clinix_tutor: {
-      type: "bool", def: false, query: "clinixtutor",
-      desc: "MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only."
+      type: "bool", def: true, query: "clinixtutor",
+      desc: "MaiK tutor turns inside a lesson (Phase 2). Off = deterministic content only. " +
+        "Turned ON by owner decision 2026-08-26: the feature is complete and read through the " +
+        "registry, so the default is the only thing that was holding it back."
     },
     smd_clinix_haptics: {
       type: "bool", def: true, query: "clinixhaptics",
@@ -54,7 +56,7 @@
         "an author flips - persisted so it survives between viva sessions."
     },
     smd_clinix_viva_voice: {
-      type: "bool", def: false, query: "clinixvoice",
+      type: "bool", def: true, query: "clinixvoice",
       desc: "Spoken viva: MaiK speaks the question aloud (native TTS) and the student answers by " +
         "voice (on-device Whisper via SMD_VOICE, same STT already used by MaiK Ask - falls back to " +
         "the device's default on-device recognizer if Whisper is not built for this platform). " +

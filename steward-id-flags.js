@@ -5,7 +5,7 @@
 (function () {
   "use strict";
   var DEFS = {
-    smd_steward_id: { type: "bool", def: false, query: "stewardid", desc: "Verified-email / Apple-proxy anchor capture UI. DEFAULT OFF." },
+    smd_steward_id: { type: "bool", def: true, query: "stewardid", desc: "Verified-email / Apple-proxy anchor capture UI. ON by owner decision 2026-08-26. The ID itself was already minted on sign-in regardless (smd_steward_id_mint, long def:true) - this flag only controls whether the anchor-capture UI is shown, so turning it on adds a surface rather than changing identity behaviour." },
     // The ID itself is UNIVERSAL: every signed-in user gets an SMD-XXXXXX, whether or not they ever
     // open ICU or turn on Group mode. This is the kill switch for that mint (default ON), kept so the
     // per-user Firestore write can be stopped without a redeploy — not a rollout gate.
