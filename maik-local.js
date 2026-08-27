@@ -278,7 +278,27 @@
      * stripReasoning() then correctly returns "", which reads as the app failing. "/no_think" is the
      * family's own switch and costs three tokens, which is far cheaper than the reasoning it prevents.
      */
-    if (packId && noThinkPack(packId)) L.push("/no_think");
+    if (packId && noThinkPack(packId)) {
+      /* TWO switches, because from here we cannot tell which one the runtime will honour.
+       *
+       * "/no_think" is Qwen3's own switch, but it is read by the CHAT TEMPLATE - and this engine
+       * sends a RAW completion prompt (generate({ prompt, system, ... }) below, no template). In a
+       * raw prompt those three tokens can be treated as ordinary text and ignored, which produces
+       * exactly the failure the switch exists to prevent: the model reasons anyway, stripReasoning()
+       * bins every one of those tokens, and the doctor waits through generation they never see.
+       * A 1.7B burning 400 tokens on reasoning loses to a 4B that answers in 120 - which is what
+       * "Lite is SLOWER than the 4B" turned out to look like on a real phone.
+       *
+       * So we also CLOSE AN EMPTY THINKING BLOCK. The model resumes from a point where its reasoning
+       * has already happened and yielded nothing, so it goes straight to the answer. That needs no
+       * template support at all, which is the whole point.
+       *
+       * Both are kept: /no_think costs three tokens and still helps if a template IS applied, and
+       * stripReasoning() removes a closed empty block either way, so neither can leak to the doctor.
+       */
+      L.push("/no_think");
+      L.push("<think>\n\n</think>");
+    }
     return L.join("\n");
   }
 

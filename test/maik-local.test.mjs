@@ -52,7 +52,9 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
     SMD_MAIK_MODELS: {
       PACKS: {
         "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 },
-        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true }
+        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true },
+        // Entry tier, Qwen3-1.7B based like Apex, so it needs the same thinking suppression.
+        "maik-lite": { label: "MAiK Lite", actual: "MedPsy 1.7B (Q4_K_M, imatrix)", nCtx: 4096, nPredict: 512, noThink: true }
       },
       pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf",
       totalBytes: () => 2.5e9
@@ -226,7 +228,20 @@ const { L } = load();
   const { L } = load();
   const q = { question: "empiric antibiotic for pyogenic liver abscess" };
 
-  ok("a pack with noThink gets the switch appended", /\/no_think\s*$/.test(L.buildPrompt(q, "maik-apex")));
+  /* Both switches, because only one of them can work and buildPrompt cannot know which: /no_think is
+     read by the Qwen3 CHAT TEMPLATE, but this engine sends a RAW prompt, so it can be ignored as
+     plain text. The closed empty <think></think> needs no template and makes the model resume as if
+     reasoning already happened. Registry-driven, so it covers Apex AND Lite. */
+  {
+    const p = L.buildPrompt(q, "maik-apex");
+    ok("a pack with noThink still gets Qwen3's own switch", /\/no_think/.test(p));
+    ok("...and an empty thinking block, which works without a chat template", /<think>\s*<\/think>\s*$/.test(p));
+    ok("the block is CLOSED - an unterminated one would make stripReasoning() bin the answer",
+       (p.match(/<think>/g) || []).length === (p.match(/<\/think>/g) || []).length);
+    ok("the question still precedes both switches", p.indexOf("liver abscess") < p.indexOf("/no_think"));
+    // Same treatment for the 1.7B entry tier - this is the pack the slowdown was reported on.
+    ok("MAiK Lite gets it too", /<think>\s*<\/think>\s*$/.test(L.buildPrompt(q, "maik-lite")));
+  }
   ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
   ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
   ok("an unknown pack id does not crash or inject", !/no_think/.test(L.buildPrompt(q, "nope")));
