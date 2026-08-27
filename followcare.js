@@ -362,8 +362,14 @@
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
-      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
-      body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      // The two primary actions sit on ONE row: they are siblings, not a sequence, and stacking
+      // them pushed the recovery board (the actual content of this screen) below the fold.
+      // Equal columns so neither reads as the more important one. min-height:46px on .fc-btn keeps
+      // both above the touch minimum even at half width.
+      body.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px" }, [
+        h("button", { "class": "fc-btn", style: "background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:19px;height:19px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
+        h("button", { "class": "fc-btn", style: "padding:12px 10px;line-height:1.2", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
       if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
       body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
@@ -989,17 +995,17 @@
   }
   function maitriHero(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled);
-    var wrap = h("div", { "class": "mai-hero", style: "border-radius:20px;padding:22px 18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
+    var wrap = h("div", { "class": "mai-hero", style: "border-radius:16px;padding:18px 14px 13px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
     wrap.innerHTML =
       '<div class="mai-aura"></div>' +
-      '<div style="position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
+      '<div style="position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
         '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
       '<div style="position:relative;z-index:1">' +
-        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:88px;height:88px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
+        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:70px;height:70px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
         // The real brand lockup (title + tagline, cropped from the official logo file) rather than a
         // CSS re-typeset — guarantees an exact match to the "MAiTRI" wordmark and its rounded "i".
-        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:6px auto 0;width:210px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
+        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:5px auto 0;width:168px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
           '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
       '</div>' +
       '<span class="mai-mark" aria-hidden="true"></span>';
@@ -1041,8 +1047,11 @@
       host.appendChild(maitriSection("Needs attention", urgent.length));
       if (!urgent.length) host.appendChild(h("div", { "class": "fc-empty", text: "No red flags right now. Everyone is on track." }));
       else urgent.slice(0, 8).forEach(function (ep) { host.appendChild(episodeRow(ep)); });
-      host.appendChild(h("button", { "class": "fc-btn", style: "margin-top:10px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation settings" }));
-      host.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      // Same pairing as the dashboard, so the two screens do not disagree about how actions look.
+      host.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px" }, [
+        h("button", { "class": "fc-btn", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation" }),
+        h("button", { "class": "fc-btn sec", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
     }).catch(function () {
       host.innerHTML = ""; host.appendChild(maitriHero(null));
       host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAiTRI. Check your connection." }));
