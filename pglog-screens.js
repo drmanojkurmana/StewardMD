@@ -559,10 +559,15 @@
           esc(instErr(I.ctxErr, "This device is pointed at an institution the server did not return.")) +
         "</p>" +
         '<p style="font-size:12px;line-height:1.5;color:var(--pgl-muted);margin-top:10px">' +
-          "Institution ID stored on this device</p>" +
+          (I.ctxErr.code === "signin_required"
+            ? "Your institution is on the server, not on this device. Sign in and reopen this screen."
+            : "Institution ID stored on this device") + "</p>" +
         '<div style="font:600 12px/1.45 var(--mono,ui-monospace,monospace);color:var(--pgl-muted);word-break:break-all;user-select:all">' +
           esc(orgId) + "</div></div>" +
-        '<button class="pgl-btn wide" data-pgl="clear-inst">Choose a different institution</button>'
+        // A signed-out user does not need a different institution, they need to sign in. Offering
+        // the picker there sends them round a loop that cannot succeed.
+        (I.ctxErr.code === "signin_required" ? ""
+          : '<button class="pgl-btn wide" data-pgl="clear-inst">Choose a different institution</button>')
       );
     }
     var progs = I.programmes || [];
@@ -657,8 +662,13 @@
      * for the render that followed, state.inst was cleared alongside it, and BOTH code sources were
      * empty, leaving only the orgId fallback. Re-establish the context here, where every caller of
      * this screen routes through, instead of at each of the three call sites that null it. */
-    return ensureContext().then(function () { state.inst.ctxErr = null; },
-                                function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
+    return ensureContext().then(function () {
+      // A stub context is not a context. It resolves, so the rejection branch never runs.
+      var cx = state.ctx;
+      state.inst.ctxErr = (cx && cx.stub)
+        ? Object.assign(new Error(cx.reason || "signin_required"), { code: cx.reason || "signin_required" })
+        : null;
+    }, function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
       (cur && cur.loadSpecialties)
@@ -2427,7 +2437,13 @@
         // yet, or offline, or running on-device by choice.
         var normal = { signin_required: 1, forbidden: 1, server_disabled: 1, offline: 1, store_missing: 1 };
         if (e && (normal[e.code] || e.status === 401 || e.status === 403)) {
-          state.ctx = state.ctx || { role: "viewer", caps: [], resident: null };
+          /* MARK IT. This stub is deliberate - a resident who is not linked yet gets their own
+           * screen rather than an error - but ensureContext() short-circuits on `if (state.ctx)`,
+           * so an unmarked stub silently becomes the permanent answer for EVERY screen, /me is
+           * never retried, and surfaces that genuinely need an org (the Academic Cell console)
+           * render an empty institution instead of saying "you are signed out". */
+          state.ctx = state.ctx || { role: "viewer", caps: [], resident: null,
+                                     stub: true, reason: (e && e.code) || "signin_required" };
           state.dash = state.dash || null;
           render();
           return;

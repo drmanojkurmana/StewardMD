@@ -189,6 +189,29 @@ try {
   ok(/Cannot open this institution/i.test(te), `a failing /me is reported (got: ${JSON.stringify(te.slice(0, 140))})`);
   ok(!/Share this with your residents/i.test(te), "a broken institution is not offered as shareable");
 
+  /* ── 8. A SIGNED-OUT session must say so, not render an empty institution ──
+   * Read off the owner's actual device over ios_webkit_debug_proxy: /me was returning
+   * 401 signin_required. pglog-screens.js:2430 deliberately swallows that and installs a viewer
+   * stub context (right for a resident's home screen). But ensureContext() short-circuits on
+   * `if (state.ctx)`, so the stub became the permanent answer, /me was never retried, and the
+   * Academic Cell console rendered a nameless institution with the raw org id - for four builds. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:${JSON.stringify(HEX)}};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([{id:cur.orgId,name:"Test Medical College",code:"SMD-TEST42"}])};
+    s.me=function(){ var e=new Error("signin_required"); e.code="signin_required"; return Promise.reject(e); };
+    s.dashboard=function(){ var e=new Error("signin_required"); e.code="signin_required"; return Promise.reject(e); };
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1600);
+  await tap("setting up our institution");
+  await sleep(1800);
+  const ts = String(await txt());
+  ok(/Cannot open this institution/i.test(ts), `signed out is reported (got: ${JSON.stringify(ts.slice(0, 150))})`);
+  ok(/[Ss]ign in/.test(ts), "it says to sign in");
+  ok(!/Choose a different institution/i.test(ts), "it does not offer a picker that cannot succeed");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}
