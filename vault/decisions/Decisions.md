@@ -5,6 +5,39 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · The verification split-brain: two stores, one question, no reconciler
+
+**Reported with a screen recording.** The verification panel showed "Your account is verified ✓"
+while, at the same moment and for the same account, every Pro feature showed "This feature needs a
+verified registration". Both were reading honestly, from different places:
+
+| Reader | Source |
+|---|---|
+| `GET /api/verify-doctor` (the panel) | the KV doctor record `icu:doctor:<uid>` |
+| every entitlement gate (`accessState`) | the Firebase claim `verified` / `verifiedAt` |
+
+They drift whenever a record is written and the claim does not land: a doctor verified before the
+claim existed, an owner approval whose claim write failed, a claim cleared by a later merge. Nothing
+ever reconciled them, so once drifted the disagreement was **permanent and invisible** - and the new
+enforcement turned a latent inconsistency into a hard lockout.
+
+**Fix: `functions/_verify_claim.js` `reconcileVerifiedClaim()`.** The CLAIM stays authoritative - it
+is what the gates read, it is signed, a client cannot forge it - so healing is **one-way**: a record
+that says verified re-asserts the claim, never the reverse (a stale KV record must not be able to
+grant entitlement on its own). Called from BOTH the panel's GET (heals while the doctor is looking
+at it) and `/billing/status` BEFORE the entitlement is computed (so Pro returns on the next app open
+without the doctor having to know to visit that screen). `verifiedAt` starts now, so an
+already-verified doctor gets a full free week rather than one that expired before they saw it.
+
+**The second half, and the reason a server-only fix would have looked broken anyway:** the gates read
+claims out of the ID token the CLIENT sends, and Firebase caches that token for up to an hour. A
+just-written claim does not reach them until the token happens to refresh. `account.js` now forces
+ONE refresh per session when `/billing/status` reports a verified account. Without this the app says
+"verified" and every feature keeps refusing for an hour.
+
+**Status:** 8/8 `test/verify-claim-reconcile.test.mjs` (the one-way direction is the load-bearing
+case), 15/15 `run-pro-notice-ui`. Suite 2830/2833.
+
 ## 2026-08-27 · Selling to institutions: tenant provisioning, and the code-vs-id bug under it
 
 Owner: *"we should also be able to make medical colleges admins ... for each medical college there

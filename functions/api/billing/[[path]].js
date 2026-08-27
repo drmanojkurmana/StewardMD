@@ -18,6 +18,7 @@ import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { entitlementFor, grantPro, revokePro, promoUntil, promoActive } from "../../_entitlement.js";
 import { markFirstSeen } from "../../_lifecycle.js";
+import { reconcileVerifiedClaim } from "../../_verify_claim.js";
 import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
@@ -164,6 +165,11 @@ export async function onRequest(context) {
 
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
+      /* BEFORE the entitlement is computed, not after: a doctor whose KV record says verified but
+       * whose claim never landed was told every Pro feature "needs a verified registration" while
+       * the verification screen showed a green tick. Reconciling here means Pro returns on the next
+       * app open rather than only if they happen to open that screen. */
+      try { await reconcileVerifiedClaim(env, uid); } catch (e) {}
       const state = await entitlementFor(env, uid);
       /* Give every UNVERIFIED account a lifecycle record, so the day-7 sweep can actually see it.
        *
