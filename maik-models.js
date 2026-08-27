@@ -117,6 +117,41 @@
     " On any other phone this is at your own risk. It may hang or crash the phone.";
 
   var PACKS = {
+    /* ENTRY TIER (added 2026-08-27). The 4B packs work, but "works" is doing a lot of lifting: 27 s
+     * cold, 20-25 s warm, first token at 9-12 s on a Pixel 9, and iOS peak memory has never been
+     * measured on an 8 GB phone. This is a genuinely SMALLER model at a sane quant - NOT a 4B
+     * crushed to IQ2, which is the distinction that matters, because a gutted quant keeps sounding
+     * fluent while it corrupts exactly the digits a clinician reads off a screen. Half the
+     * parameters, roughly half the KV cache.
+     *
+     * NO VISION: qvac/MedPsy-1.7B-GGUF ships no mmproj, so this pack is text-only. visionFile()
+     * returns null for it and listAll() simply never offers it a vision row - both already handle
+     * an absent `vision` key, so nothing else needs to know.
+     *
+     * noThink is INHERITED from the 4B on the assumption the family behaves the same way (its
+     * reasoning traces eat the token budget and the doctor gets thinking with no answer). Confirm
+     * against the eval before trusting it. */
+    "maik-lite": {
+      label: "MAiK Lite",
+      actual: "MedPsy 1.7B (Q4_K_M, imatrix)",
+      tier: 0,
+      noThink: true,
+      note: "Smallest and fastest. Runs on phones the larger packs cannot, and answers in a fraction of the time.",
+      guide: {
+        speed: 3, medical: 2, general: 1,
+        bestFor: "Older or mid-range phones, and any moment where an answer in seconds beats a better answer in half a minute.",
+        why: "A medical model at full Q4_K_M precision rather than a bigger one squeezed into the same space, so it stays quick and light without the silent number errors a crushed quant introduces.",
+        pick: "Start here if MxCore is too slow or will not load at all. Move up to MxCore when you want more depth."
+      },
+      nCtx: 4096,
+      nPredict: 512,
+      files: [{
+        name: "medpsy-1.7b-q4_k_m-imat.gguf",
+        url: HF + "/qvac/MedPsy-1.7B-GGUF/resolve/main/medpsy-1.7b-q4_k_m-imat.gguf?download=true",
+        bytes: 1282439360,   // exact, HuggingFace API
+        sha256: "41ee947d9cce72ec657577219fd1798fabeabf0d832217fe23c9d6d3d18d5880"   // lfs.oid from the HF API
+      }]
+    },
     "maik-mxcore": {
       label: "MAiK MxCore",
       actual: "MedGemma 1.5 4B (Q4_K_M)",
@@ -240,7 +275,10 @@
 
   /** Packs in recommended order: MxCore -> Neural -> Horizon. */
   function packIds() {
-    return Object.keys(PACKS).sort(function (a, b) { return (PACKS[a].tier || 99) - (PACKS[b].tier || 99); });
+    // `tier || 99` sent tier 0 to the BACK, because 0 is falsy - so the entry pack, the one that
+    // should be offered first, sorted last. Any future tier 0 would have hit the same trap.
+    var rank = function (id) { var t = PACKS[id].tier; return typeof t === "number" ? t : 99; };
+    return Object.keys(PACKS).sort(function (a, b) { return rank(a) - rank(b); });
   }
 
   /* VISION AS A SUB-PACK, "<packId>#vision".
