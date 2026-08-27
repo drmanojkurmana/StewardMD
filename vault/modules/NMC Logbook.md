@@ -48,14 +48,14 @@ are throws at the data layer, not disabled buttons.
 | `pglog/assessment-templates.json` | DOPS / shift WPBA / clinical WPBA / appraisal, taken from the NMC proformas. |
 | `pglog-store.js` | Client: account-scoped local drafts, offline queue, API. |
 | `pglog-screens.js` | Router + every screen (resident / faculty / HOD / Academic Cell). |
-| `pglog-reports.js` | 11 pure report builders + print/CSV. |
+| `pglog-reports.js` | 12 pure report builders + print/CSV + `certifiedLogbook`/`certifiedDocHtml`/`exportCertifiedPdf` (the document that leaves the app). |
 | `pglog-ai.js` | Advisory assist. Two of its six functions are pure and have no AI at all. |
 | `functions/_pglog_store.js` | Firestore I/O + the org-RBAC gate + `publicEntry()` (the privacy boundary). |
 | `functions/_pglog_signer.js` | **THE SIGNING GATE.** Nobody signs without a verified medical-council registration. Reads the existing `/api/verify-doctor` result; never re-implements it. Fails closed. |
 | `functions/_pglog_verify.js` | The HMAC-signed verification code behind every QR + supersede-on-amend. **`payloadFor()` is the single definition of what a signature covers.** |
 | `functions/_pglog_public.js` | The one definition of what a verification DISCLOSES. Both the JSON route and the HTML page resolve through it. |
 | `functions/pglog/v/[code].js` | The page an examiner lands on. Server-rendered, no JavaScript, strict CSP, noindex. |
-| `pglog-qr.js` | Our own ISO/IEC 18004 QR encoder (byte mode, v1-10). No dependency, no image service. |
+| `pglog-qr.js` | Our own ISO/IEC 18004 QR encoder (byte mode, v1-10). No dependency, no image service. `toSvg` for the app, `toTableHtml`+`tableCss` for the PDF. |
 | `functions/_pglog_templates.js` | **Generated.** The server's own scoring contract, so a forged client template cannot inflate a mark. |
 | `functions/api/pglog/[[path]].js` | The API router. |
 | `scripts/build-pglog-curricula.mjs` | Emits the packs. **Add a new specialty here**, never by hand-editing JSON. |
@@ -280,6 +280,55 @@ department dashboard (~600 reads a call) is rate-limited per caller.
 **The rule the two mistakes have in common:** a boundary defined in two places drifts, and the copy
 that drifts is the one that leaks. One payload builder, one pinned-field list, one audience function.
 
+## Certification and the exported PDF — 2026-08-27
+
+The module now produces a document that LEAVES the app: a signed, frozen PDF a college, a University
+or the NMC can be handed and can check.
+
+**The quorum.** Default **2 faculty + 1 HoD, the HoD counting toward both** — so two distinct people
+can complete it. Configurable per programme (`config.certQuorum`), plus an optional `requireGuide`
+(default OFF: a guide who has left would otherwise strand their former trainees permanently).
+
+**WHOSE RULE IS WHOSE — the thing not to break.** The **HoD signature is sourced** (2022-revised NMC
+curricula, "the completed log book should be signed by the Head of the Department"). The **number of
+faculty signatures is the owner's policy and is NOT an NMC requirement**, and both the screen and the
+exported document say so in those words. This is the likeliest place in the whole module to launder a
+local policy into a regulatory claim, so it is stated on the artefact, not in a help page.
+
+**What makes the document worth anything:**
+- It **freezes its content**: `contentDigest` is an HMAC over the exact verified-entry set, each with
+  its own signature state, sorted by id (Firestore result order must never flip a certificate to
+  tampered). Amend a covered entry and the certificate is **superseded** — its code stops validating
+  and the page says why; the certificate and its signatures are retained, never deleted.
+- Every signature carries a **registration number** (`_pglog_signer.js` refuses otherwise) and the
+  **server decides the signing role from the membership** — a client that could name itself "hod"
+  would be the whole quorum on its own.
+- It covers **verified entries only**, and prints what it excluded. A certificate that silently
+  omitted forty unverified entries would read as a complete logbook.
+- Re-derived at issue: if the logbook moved between the request and the last signature, it is
+  refused (`pglog_cert_content_changed`) rather than certifying something nobody read.
+- Only a **pg_hod** can revoke, and a revocation needs a reason that is shown to anyone who checks.
+
+**What it is NOT, and must never claim to be:** a digitally signed document under the **IT Act,
+2000**. No DSC from a licensed Certifying Authority is applied — nobody here holds such a key. The
+limitation is printed **on the document**. Upgrade path if it is ever required: a per-faculty DSC
+(eMudhra / Capricorn / NIC class 3, or Aadhaar eSign) plus PAdES signing at issue; the certificate
+record already pins exactly what would be signed, so nothing in this design has to change.
+
+**The PDF path.** `REP.exportCertifiedPdf()` → `SMD_NATIVE.sharePdfFromHtml` (iOS WKWebView → real
+PDF → share sheet), `SMD_PDF.fromHtml` (html2canvas + jsPDF) elsewhere, browser print as the last
+fallback. No new dependency.
+
+**The print QR is a TABLE, not the SVG** (`SMD_PGLOG_QR.toTableHtml` + `tableCss`). html2canvas's
+inline-SVG support is unreliable and a QR that silently fails to render is worse than none, because
+the document still says it is verifiable. It needs an explicit `<colgroup>`: `table-layout: fixed`
+sizes columns from the first row, and a QR's first row is all quiet zone — one cell spanning
+everything — which leaves the algorithm nothing to read. Class is `pgl-qrt`, deliberately NOT
+`pgl-qr` (the in-app block owns that and styles it as a flex card).
+
+**An uncertified export is stamped `NOT CERTIFIED` and carries no QR and no signature block.** There
+is no configuration in which the exported document is ambiguous about whether anyone signed it.
+
 ## Gotchas
 
 - **Only VERIFIED entries count toward progress.** A resident cannot move their own bar. Submitted
@@ -303,6 +352,12 @@ that drifts is the one that leaks. One payload builder, one pinned-field list, o
 - **A wrong QR is worse than no QR** — it looks scannable and is not. Every part of the encoder with
   a published reference value is tested against it (GF(256) tables, RS generators, all 32 format
   strings from Table C.1, the version strings from Table D.1). Do not "optimise" it without those.
+- **The signature block is NOT in `M.entry()`'s schema**, so every read path must re-attach it —
+  `withSignature()` in the store. `getEntry` did and `listEntries` did not, which silently zeroed the
+  "verified entries carrying the signer's registration" count in every report and made a
+  certificate's content digest flip between request and issue for no visible reason.
+- **The faculty COUNT is ours; the HoD signature is the NMC's.** Never let the UI or the document
+  blur the two.
 - **Order the read guard by NAMED RESPONSIBILITY, never by capability breadth.** `academic_cell` and
   `admin` hold `PGLOG_VIEW_DEPT` as well as their own caps, so any "widest cap first" ordering hands
   them the department branch. This has been got wrong twice; `test/pglog-audience.test.mjs` is the guard.
@@ -321,14 +376,15 @@ that drifts is the one that leaks. One payload builder, one pinned-field list, o
 | `test/pglog-model.test.mjs` | 65 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
 | `test/pglog-provenance.test.mjs` | 18 — **the real one**: every quotation and every number checked against `pglog-sources/`, plus specialty coverage |
 | `test/pglog-curriculum.test.mjs` | 29 — pack structure, flatten/resolve, overrides, the requirement mapper |
+| `test/pglog-certificate.test.mjs` | 20 — the quorum, what a signature covers, and that a draft export can never look certified |
 | `test/pglog-audience.test.mjs` | 8 — the audience matrix: every role x every relationship, and what each audience discloses |
 | `test/pglog-public.test.mjs` | 13 — the unauthenticated verification page: what it says, what it refuses to say, escaping, headers |
 | `test/pglog-qr.test.mjs` | 22 — the encoder against ISO/IEC 18004 reference values + code normalisation |
-| `test/pglog-server.test.mjs` | 66 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
-| `test/run-pglog-ui.mjs` | 57 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
+| `test/pglog-server.test.mjs` | 76 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
+| `test/run-pglog-ui.mjs` | 68 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
 
 Run: `node --test test/pglog-*.test.mjs` and `node test/run-pglog-ui.mjs`.
-**221 unit assertions + 57 browser assertions, all green.** Full repo suite: 422 files, 0 failures.
+**251 unit assertions + 68 browser assertions, all green.** Full repo suite: 423 files, 0 failures.
 `test/run-gate-middleware.mjs` also covers the public verify path (and two of its assertions were
 stale against the web-app-killed middleware; fixed).
 
@@ -353,6 +409,9 @@ which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They 
 - **`PGLOG_SIGNING_KEY` is not provisioned yet.** Until it is set on the Pages project, signatures
   still work and are still gated on registration, but **no QR or verification code is issued** — by
   design. `PGLOG_VERIFY_BASE` optionally overrides the printed domain.
+- **Certification is built but not exercised on a device.** The PDF path reuses the existing
+  `sharePdfFromHtml` bridge; it has been verified in headless Chrome (layout, QR uniformity,
+  self-containment) but not through a real iOS share sheet.
 - **UG/CBME not built**, by instruction.
 
 ## Adding a specialty

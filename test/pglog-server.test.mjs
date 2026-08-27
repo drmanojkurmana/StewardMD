@@ -917,3 +917,161 @@ test("issuing a code stores the digest and the reference, and nothing identifyin
   assert.ok(!/procedure|2026-08-20|assisted/.test(blob.replace(/"kind":"entry"/, "")),
     "the verification record must not duplicate the clinical facts");
 });
+
+/* ══ certificates: the signed document a college is handed ═══════════════════════════════════ */
+
+const KEYED2 = { PGLOG_SIGNING_KEY: "test-key-not-a-real-secret" };
+function certDeps(db, role) {
+  return Object.assign({}, db, {
+    gate: async () => ({ role: role || "pg_faculty", owner: false, org: { id: ORG }, member: {} }),
+    signerSnapshot: async (env, uid) => ({ uid: String(uid), regNo: "REG/" + String(uid).replace(/\W/g, ""),
+      council: "TNMC", name: "Dr " + uid, source: "register", via: "certificate" })
+  });
+}
+async function seedVerified(db, n) {
+  const { res } = await seed(db);
+  db.listMembers = async () => [{ identity: FACULTY_UID, role: "pg_faculty", active: true }];
+  const dep = certDeps(db, "pg_faculty");
+  for (let i = 0; i < (n || 2); i++) {
+    const e = await S.createEntry(env, ORG, entryBody(res, { occurredAt: "2026-0" + (i + 1) + "-10" }), RESIDENT_UID, db);
+    await S.submitEntry(env, e.id, RESIDENT_UID, db);
+    await S.verifyEntry(env, e.id, FACULTY_UID, "ok", dep);
+  }
+  return { res, dep };
+}
+
+test("a certificate covers VERIFIED entries only, and says what it left out", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 2);
+  // ...plus work that is not verified and must NOT be certified.
+  const draft = await S.createEntry(env, ORG, entryBody(res, { occurredAt: "2026-05-01" }), RESIDENT_UID, db);
+  const pend = await S.createEntry(env, ORG, entryBody(res, { occurredAt: "2026-05-02" }), RESIDENT_UID, db);
+  await S.submitEntry(env, pend.id, RESIDENT_UID, db);
+
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  assert.equal(cert.status, "pending");
+  assert.equal(cert.entryCount, 2, "only the verified two");
+  assert.ok(cert.entryIds.indexOf(draft.id) < 0, "a draft is not certified");
+  assert.ok(cert.entryIds.indexOf(pend.id) < 0, "nor is work still awaiting verification");
+  assert.equal(cert.excluded.draft, 1);
+  assert.equal(cert.excluded.submitted, 1);
+  assert.ok(cert.contentDigest, "and what it covers is frozen");
+});
+
+test("a logbook with nothing verified cannot be certified at all", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  await S.createEntry(env, ORG, entryBody(res), RESIDENT_UID, db);
+  await assert.rejects(() => S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db)),
+    (e) => e.message === "pglog_cert_nothing_to_certify");
+});
+
+test("THE FULL FLOW: faculty + HOD sign, the certificate issues and mints a QR code", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 2);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+
+  const one = await S.signCertificate(KEYED2, cert.id, "fb:faculty-2", {}, certDeps(db, "pg_faculty"));
+  assert.equal(one.status, "pending", "one faculty signature is not a certificate");
+  assert.equal(one.signatures[0].reg, "REG/fbfaculty2", "the registration is recorded, not just a uid");
+  assert.equal(one.verifyCode, "", "and nothing is verifiable yet");
+
+  const two = await S.signCertificate(KEYED2, cert.id, "fb:hod-1", {}, certDeps(db, "pg_hod"));
+  assert.equal(two.status, "issued");
+  assert.equal(two.signatures[1].role, "hod", "the SERVER decides the role from the membership");
+  assert.ok(two.verifyCode, "an issued certificate carries a code");
+  assert.ok(db.docs.get("pg_verify/" + two.verifyCode), "and the code resolves to a stored record");
+});
+
+test("the signing role comes from the membership, never from the request body", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 1);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  // A client that could name itself "hod" would BE the whole quorum.
+  const out = await S.signCertificate(KEYED2, cert.id, "fb:faculty-2",
+    { role: "hod", reg: "FORGED/1", name: "Someone Else" }, certDeps(db, "pg_faculty"));
+  assert.equal(out.signatures[0].role, "faculty");
+  assert.equal(out.signatures[0].reg, "REG/fbfaculty2");
+  assert.notEqual(out.signatures[0].name, "Someone Else");
+});
+
+test("the guide who verified the entries signs as GUIDE, and that is recorded", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 1);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  const out = await S.signCertificate(KEYED2, cert.id, FACULTY_UID, {}, certDeps(db, "pg_faculty"));
+  assert.equal(out.signatures[0].role, "guide", "seed() names FACULTY_UID as this resident's guide");
+});
+
+test("an unverified signer cannot sign a certificate, and the certificate is untouched", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 1);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  const unverified = Object.assign({}, certDeps(db), {
+    signerSnapshot: async () => { throw SIGNER.signerError("signer_unverified", "x"); }
+  });
+  await assert.rejects(() => S.signCertificate(KEYED2, cert.id, "fb:faculty-9", {}, unverified),
+    (e) => e.message === "signer_unverified");
+  const after = await S.getCertificate(KEYED2, cert.id, db);
+  assert.equal(after.signatures.length, 0, "nothing was half-signed");
+});
+
+test("AMENDING a covered entry supersedes the certificate and kills its code", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 2);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  await S.signCertificate(KEYED2, cert.id, "fb:faculty-2", {}, certDeps(db, "pg_faculty"));
+  const issued = await S.signCertificate(KEYED2, cert.id, "fb:hod-1", {}, certDeps(db, "pg_hod"));
+  assert.equal(issued.status, "issued");
+
+  // The resident corrects a record the certificate covered. The document those people signed no
+  // longer exists, so the certificate must SAY so rather than keep showing a green tick.
+  await S.amendEntry(KEYED2, issued.entryIds[0], { role: "assisted" }, RESIDENT_UID, "corrected my role", certDeps(db));
+  const after = await S.getCertificate(KEYED2, cert.id, db);
+  assert.equal(after.status, "superseded");
+  assert.match(after.supersedeReason, /amended/);
+  assert.equal(db.docs.get("pg_verify/" + issued.verifyCode).revoked, true, "the QR stops validating");
+});
+
+test("integrity is checked against the LIVE entries, not against a stored flag", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 2);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  await S.signCertificate(KEYED2, cert.id, "fb:faculty-2", {}, certDeps(db, "pg_faculty"));
+  const issued = await S.signCertificate(KEYED2, cert.id, "fb:hod-1", {}, certDeps(db, "pg_hod"));
+  assert.equal((await S.certificateIntegrity(KEYED2, issued, db)).ok, true);
+
+  // Somebody edits Firestore directly, underneath the signature.
+  db.docs.get("pg_entries/" + issued.entryIds[0]).occurredAt = "2020-01-01";
+  const bad = await S.certificateIntegrity(KEYED2, issued, db);
+  assert.equal(bad.ok, false);
+  assert.equal(bad.reason, "digest");
+});
+
+test("only a head of department can revoke an issued certificate", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 1);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  await S.signCertificate(KEYED2, cert.id, "fb:faculty-2", {}, certDeps(db, "pg_faculty"));
+  const issued = await S.signCertificate(KEYED2, cert.id, "fb:hod-1", {}, certDeps(db, "pg_hod"));
+  assert.equal(issued.status, "issued");
+  await assert.rejects(() => S.revokeCertificate(KEYED2, cert.id, "fb:faculty-2", "no", certDeps(db, "pg_faculty")),
+    (e) => e.message === "hod_required");
+  const out = await S.revokeCertificate(KEYED2, cert.id, "fb:hod-1", "Issued against the wrong programme", certDeps(db, "pg_hod"));
+  assert.equal(out.status, "revoked");
+  assert.equal(db.docs.get("pg_verify/" + issued.verifyCode).revoked, true);
+});
+
+test("the public projection of a certificate carries the registrations but no uids at aggregate", async () => {
+  const db = fakeDb();
+  const { res } = await seedVerified(db, 1);
+  const cert = await S.requestCertificate(KEYED2, { residentId: res.id }, RESIDENT_UID, certDeps(db));
+  const signed = await S.signCertificate(KEYED2, cert.id, "fb:faculty-2", {}, certDeps(db, "pg_faculty"));
+  const agg = S.publicCertificate(signed, "aggregate");
+  assert.equal(agg.signatures[0].reg, "REG/fbfaculty2", "the registration IS the point of the document");
+  assert.equal(agg.signatures[0].by, "", "the uid is not");
+  assert.equal(agg.verifyCode, "", "nor is the code, which is a capability");
+  assert.equal(agg.entryIds, undefined);
+  const self = S.publicCertificate(signed, "self");
+  assert.ok(self.entryIds.length, "the resident sees what their own certificate covers");
+});

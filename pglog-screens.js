@@ -5,7 +5,7 @@
  * use .pgl-back / .pgl-close, which swipe-back.js's BACK_SEL already matches.
  *
  * Routes: "home" · "add" · "add/<kind>" · "entries" · "entry/<id>" · "progress" · "rotations" ·
- *         "research" · "attendance" · "reports" · "report/<id>" · "faculty" · "review/<id>" ·
+ *         "research" · "attendance" · "reports" · "report/<id>" · "certify" · "faculty" · "review/<id>" ·
  *         "dept" · "resident/<id>" · "setup" · "inbox"
  *
  * THREE THINGS THIS FILE IS DELIBERATELY NOT
@@ -62,6 +62,7 @@
     draft: null, draftErrors: [], suggestions: [],
     faculty: null, dept: null, review: null, assessment: null,
     roster: [], checked: null,
+    cert: null, certVerifyUrl: "", certLoading: false,   // the signed document + its QR target
     filter: { kind: "", status: "" },
     deptFilter: { departmentId: "", trainingYear: "" },
     inbox: []
@@ -292,7 +293,8 @@
     h.push(navRow("research", "science", "Research and thesis", researchSubtitle()));
     if (flag("smd_pglog_attendance")) h.push(navRow("attendance", "event_available", "Attendance", attendanceSubtitle()));
     h.push(navRow("progress", "insights", "Progress and gaps", state.gaps.length ? state.gaps.length + " gap(s)" : "On track"));
-    if (flag("smd_pglog_reports")) h.push(navRow("reports", "description", "Reports and portfolio", "11 documents"));
+    if (flag("smd_pglog_reports")) h.push(navRow("reports", "description", "Reports and portfolio", "12 documents"));
+    if (flag("smd_pglog_certify")) h.push(navRow("certify", "verified_user", "Certification and official PDF", certNavSubtitle()));
     if (canFaculty()) h.push(navRow("faculty", "how_to_reg", "Faculty review", "Verify, assess, authenticate"));
     if (canDept()) h.push(navRow("dept", "corporate_fare", "Department oversight", "Progress across residents"));
     h.push(navRow("check", "qr_code_scanner", "Verify a signed record", "Scan or type a verification code"));
@@ -407,9 +409,11 @@
 
   /* The QR that makes a signature checkable by someone who does not use this app. Rendered from
    * pglog-qr.js — no library, no network, so it prints and works on a ward. */
-  function qrBlock(code, caption) {
+  function qrBlock(code, caption, url) {
     if (!code) return "";
-    var url = "https://stewardmd.in/pglog/v/" + code;
+    // The server tells us where to point (PGLOG_VERIFY_BASE lets a self-hosted deployment print its
+    // own domain); the constant is only a fallback for a record whose URL we were not given.
+    url = url || ("https://stewardmd.in/pglog/v/" + code);
     var svg = "";
     try { svg = window.SMD_PGLOG_QR ? SMD_PGLOG_QR.toSvg(url, { scale: 4, label: "Verification code " + code }) : ""; }
     catch (e) { svg = ""; }
@@ -1075,7 +1079,8 @@
     ["rotation_report", "route", "Rotations", "Including the District Residency Programme"],
     ["assessment_report", "fact_check", "Assessments", "Formative assessment and outcomes"],
     ["feedback_report", "forum", "Faculty feedback", "Narrative feedback and returns"],
-    ["final_portfolio", "menu_book", "Final training portfolio", "Everything, in examiner order"]
+    ["final_portfolio", "menu_book", "Final training portfolio", "Everything, in examiner order"],
+    ["certified_logbook", "verified_user", "Certified logbook", "The signed document, with its verification QR"]
   ];
   function screenReports() {
     var h = REPORT_LIST.map(function (r) {
@@ -1139,7 +1144,8 @@
       rotation_report: function () { return r.rotationReport(ctx); },
       assessment_report: function () { return r.assessmentReport(ctx); },
       feedback_report: function () { return r.feedbackReport(ctx); },
-      final_portfolio: function () { return r.finalPortfolio(ctx); }
+      final_portfolio: function () { return r.finalPortfolio(ctx); },
+      certified_logbook: function () { return r.certifiedLogbook(Object.assign({}, ctx, { certificate: state.cert })); }
     }[id];
     return fn ? fn() : null;
   }
@@ -1443,6 +1449,150 @@
   }
   function kvRow(k, v) { return v ? "<dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd>" : ""; }
 
+
+  /* ── CERTIFICATION ───────────────────────────────────────────────────────────
+   * The screen where a logbook stops being a working record and becomes a document. Three audiences
+   * meet here: the resident who wants to submit it, the faculty who have to sign it, and whoever
+   * later has to trust it. So the screen is built around one question — CAN THIS BE SUBMITTED YET —
+   * and it never answers that question with a maybe. */
+  function screenCertify() {
+    var m = M(), c = state.cert, res = state.dash && state.dash.resident;
+    if (state.certLoading) return loading();
+    var h = [];
+
+    if (!c) {
+      h.push(emptyState("verified_user", "Not certified yet",
+        "A certification freezes your verified entries and collects the signatures your institution " +
+        "requires. Until it is issued, anything you export is stamped as a draft."));
+      h.push(certRuleCard(null));
+      if (isOwnLogbook()) {
+        h.push('<button class="pgl-btn wide" data-pgl="cert-request">' + ic("how_to_reg") + "Request certification</button>");
+      }
+      h.push(certLimitsNote());
+      return wrap(h.join(""));
+    }
+
+    var st = m ? m.quorumState(c, c.quorum, res) : { missing: [], met: false, faculty: 0, hod: 0 };
+    var TONE = {
+      issued: ["info", "verified", "Certified — ready to share"],
+      pending: ["warn", "hourglass_top", "Awaiting signatures"],
+      superseded: ["warn", "history", "Superseded — a covered record was corrected after signing"],
+      revoked: ["bad", "gpp_bad", "Revoked by the head of department"]
+    }[c.status] || ["warn", "help", c.status];
+    h.push(banner(TONE[0], TONE[1], "<b>" + esc(TONE[2]) + "</b>" +
+      (c.status === "pending" && st.missing.length ? "<br>Still required: " + esc(st.missing.join("; ")) : "") +
+      (c.status === "superseded" && c.supersedeReason ? "<br>" + esc(c.supersedeReason) : "") +
+      (c.status === "revoked" && c.revokeReason ? "<br>" + esc(c.revokeReason) : "")));
+
+    h.push('<div class="pgl-stats">' +
+      stat(st.faculty + "/" + st.needFaculty, "Faculty") +
+      stat(st.hod + "/" + st.needHod, "HOD") +
+      stat(c.entryCount, "Entries covered") +
+      stat(c.monthsTotal ? c.monthsAttested + "/" + c.monthsTotal : "—", "Months signed") +
+      "</div>");
+
+    // WHAT IS NOT IN IT. A certificate that quietly omitted unverified work would read as a complete
+    // logbook, which is the one way this document could mislead by accident.
+    var ex = c.excluded || {};
+    if (ex.draft || ex.submitted || ex.returned) {
+      h.push(banner("warn", "filter_alt_off",
+        "<b>Not covered by this certificate:</b> " +
+        [ex.submitted ? ex.submitted + " awaiting verification" : "",
+         ex.returned ? ex.returned + " returned for correction" : "",
+         ex.draft ? ex.draft + " still in draft" : ""].filter(Boolean).join(", ") +
+        ". A certificate covers verified entries only, and the exported document says so."));
+    }
+
+    h.push('<div class="pgl-sec-title"><span>Signatures</span><span>' + arr(c.signatures).length + "</span></div>");
+    if (!arr(c.signatures).length) {
+      h.push(emptyState("draw", "No signatures yet", "Your guide and the head of department have been notified."));
+    }
+    arr(c.signatures).forEach(function (sig) {
+      h.push('<div class="pgl-row static"><span class="pgl-row-ic">' + ic(sig.role === "hod" ? "shield_person" : "draw") + "</span>" +
+        '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(sig.name || REP().person(sig.by)) + "</span>" +
+        '<span class="pgl-row-s">' + esc(sig.role === "hod" ? "Head of Department" : sig.role === "guide" ? "Postgraduate guide" : "Faculty") +
+        (sig.reg ? " · Reg " + esc(sig.reg) : "") + (sig.at ? " · " + esc(m.isoDate(sig.at)) : "") + "</span></span></div>");
+    });
+
+    h.push(certRuleCard(c));
+
+    if (c.status === "issued" && c.verifyCode) {
+      h.push('<div class="pgl-card"><h3>Verification</h3>' + qrBlock(c.verifyCode, "Scan to verify this certified logbook", state.certVerifyUrl) +
+        '<p class="hint">Printed on the exported PDF. Anyone can scan it — no StewardMD account needed.</p></div>');
+    }
+
+    // Faculty controls. The button is present only for someone who could actually sign; a control
+    // that fails is worse than a control that is not there.
+    if (canFaculty() && !isOwnLogbook() && c.status === "pending") {
+      var already = arr(c.signatures).some(function (x) { return m.sameActor(x.by, state.ctx && state.ctx.uid); });
+      h.push('<div class="pgl-actionbar">' +
+        (already
+          ? '<button class="pgl-btn ghost" disabled>' + ic("task_alt") + "You have signed</button>"
+          : '<button class="pgl-btn" data-pgl="cert-sign" data-id="' + attr(c.id) + '">' + ic("draw") + "Sign this logbook</button>") +
+        "</div>");
+      if (!already && state.ctx && state.ctx.signer && state.ctx.signer.ok === false) {
+        h.push(signerBanner());
+      }
+    }
+    if (canDept() && c.status === "issued") {
+      h.push('<button class="pgl-btn ghost wide" data-pgl="cert-revoke" data-id="' + attr(c.id) + '">' +
+        ic("gpp_bad") + "Revoke this certificate</button>");
+    }
+
+    h.push('<div class="pgl-actionbar">' +
+      '<button class="pgl-btn' + (c.status === "issued" ? "" : " ghost") + '" data-pgl="cert-pdf">' +
+      ic("picture_as_pdf") + (c.status === "issued" ? "Share certified PDF" : "Export draft PDF") + "</button>" +
+      "</div>");
+    if (c.status !== "issued") {
+      h.push('<p class="hint">An uncertified export is stamped <b>NOT CERTIFIED</b> on every copy and carries no ' +
+        "signature or QR. That is deliberate: a draft must never be mistakable for a submitted document.</p>");
+    }
+    if (isOwnLogbook() && (c.status === "superseded" || c.status === "revoked")) {
+      h.push('<button class="pgl-btn wide" data-pgl="cert-request">' + ic("restart_alt") + "Request a fresh certification</button>");
+    }
+    h.push(certLimitsNote());
+    return wrap(h.join(""));
+  }
+
+  // WHOSE RULE IS WHOSE. The only place in the module where an institutional policy and an NMC
+  // requirement sit side by side, so it is the place they most need to be told apart.
+  // What the home row says without opening the screen — a resident checks this more often than
+  // anything else in the module once they are near the end of training.
+  function certNavSubtitle() {
+    var c = state.cert;
+    if (!c) return "Get your logbook signed and shareable";
+    if (c.status === "issued") return "Certified · ready to share as PDF";
+    if (c.status === "superseded") return "Superseded — a covered record was corrected";
+    if (c.status === "revoked") return "Revoked by the head of department";
+    var m = M(), st = m ? m.quorumState(c, c.quorum, state.dash && state.dash.resident) : null;
+    return st && st.missing.length ? "Awaiting " + st.missing.join("; ") : "Awaiting signatures";
+  }
+  function certRuleCard(c) {
+    var m = M();
+    var q = (c && c.quorum) || (m ? m.certQuorum(null) : { faculty: 2, hod: 1, hodCountsAsFaculty: true });
+    return '<div class="pgl-card"><h3>What this institution requires</h3>' +
+      "<p>" + esc(q.faculty + " faculty signature" + (q.faculty > 1 ? "s" : "") +
+        (q.hod ? " and " + q.hod + " Head of Department signature" : "") +
+        (q.hodCountsAsFaculty ? " — the Head of Department counts toward both, so two people can complete it." : ".")) + "</p>" +
+      '<p class="pgl-clause">The Head of Department signature follows the NMC specialty curricula ' +
+      '("the completed log book should be signed by the Head of the Department"). The NUMBER OF ' +
+      "FACULTY signatures is your institution's own rule, not an NMC requirement.</p>" +
+      (q.requireGuide ? '<p class="pgl-clause">Your institution also requires the postgraduate guide named on your record to sign. PGMER-2023 5.2(vii).</p>' : "") +
+      "</div>";
+  }
+  function certLimitsNote() {
+    return '<p class="hint" style="margin-top:14px"><b>What a certified PDF is.</b> It is a tamper-evident ' +
+      "document: every signatory's medical registration was checked against the Indian Medical Register " +
+      "when they signed, and the QR lets a college, a University or the NMC confirm with StewardMD that " +
+      "the document still matches the record. It is <b>not</b> digitally signed under the Information " +
+      "Technology Act, 2000 — no licensed Certifying Authority key is applied — and it is not an NMC or " +
+      "University determination. Whether it is accepted is the receiving institution's decision.</p>";
+  }
+  function isOwnLogbook() {
+    var m = M(), res = state.dash && state.dash.resident;
+    return !!(res && state.ctx && m.sameActor(state.ctx.uid, res.uid));
+  }
+
   /* ── INBOX ───────────────────────────────────────────────────────────────── */
   function screenInbox() {
     var m = M();
@@ -1484,6 +1634,7 @@
       case "resident": title = "Resident"; body = screenResidentDetail(a); break;
       case "inbox": title = "Notifications"; body = screenInbox(); break;
       case "check": title = "Verify a record"; sub = "Scan or type a code"; body = screenCheck(); break;
+      case "certify": title = "Certification"; sub = "Signatures and the official PDF"; body = screenCertify(); break;
       default: body = wrap(errorState("Unknown screen."));
     }
     state.host.innerHTML = head(title, sub) + body;
@@ -1548,7 +1699,17 @@
     switch (a) {
       case "close": return window.PGLOG && window.PGLOG.close();
       case "back": return back();
-      case "go": return go(t.getAttribute("data-r"));
+      case "go": {
+        var dest = t.getAttribute("data-r");
+        // The certificate is fetched when the screen is opened, not held in the dashboard payload:
+        // it changes when SOMEONE ELSE signs, so a cached copy would show a resident "awaiting
+        // signatures" on a logbook that was certified an hour ago.
+        if (dest === "certify" || dest === "report/certified_logbook") {
+          go(dest);
+          return loadCert().then(render, render);
+        }
+        return go(dest);
+      }
       case "retry": state.error = ""; return enter(t.getAttribute("data-r"));
       case "filter":
         state.filter[t.getAttribute("data-dim")] = t.getAttribute("data-v");
@@ -1584,6 +1745,10 @@
         return toast("Could not open the print view.");
       }
       case "share": return doShare(id);
+      case "cert-request": return doCertRequest();
+      case "cert-sign": return doCertSign(id);
+      case "cert-revoke": return doCertRevoke(id);
+      case "cert-pdf": return doCertPdf();
       case "toggle-ref": state.includeCaseRef = !state.includeCaseRef; return render();
       case "do-verify": return doVerify(id);
       case "do-return": return doReturn(id);
@@ -1758,6 +1923,103 @@
     } catch (e) {}
     try { navigator.clipboard.writeText(text); toast("Copied."); } catch (e) { toast("Could not share."); }
   }
+
+  /* ── certification ─────────────────────────────────────────────────────────── */
+  function loadCert(residentId) {
+    var st = ST();
+    var id = residentId || (state.dash && state.dash.resident && state.dash.resident.id);
+    if (!id || !st || !st.certificates) return Promise.resolve();
+    state.certLoading = true;
+    return st.certificates(id).then(function (list) {
+      // The CURRENT certification is the newest one. An older superseded certificate stays in the
+      // record — it is history, not clutter to hide — but it is not what this screen acts on.
+      var c = arr(list)[0] || null;
+      state.cert = c;
+      state.certLoading = false;
+      if (c && c.verifyCode) {
+        return st.certificate(c.id).then(function (full) {
+          state.cert = full.certificate || c;
+          state.certVerifyUrl = full.verifyUrl || "";
+        }, function () {});
+      }
+    }, function () { state.certLoading = false; state.cert = null; });
+  }
+  function doCertRequest() {
+    var st = ST(), res = state.dash && state.dash.resident;
+    if (!res) return toast("Set up your logbook first.");
+    state.loading = true; render();
+    st.requestCertificate({ residentId: res.id, scope: "final" }).then(function () {
+      state.loading = false;
+      toast("Certification opened. Your guide and the head of department have been notified.");
+      haptic("success");
+      loadCert(res.id).then(render);
+    }, function (e) {
+      state.loading = false;
+      toast(e.userMessage || "Could not open a certification.");
+      render();
+    });
+  }
+  function doCertSign(id) {
+    var st = ST();
+    state.loading = true; render();
+    st.signCertificate(id, {}).then(function (r) {
+      state.loading = false;
+      state.cert = r.certificate || state.cert;
+      state.certVerifyUrl = r.verifyUrl || state.certVerifyUrl;
+      var issued = state.cert && state.cert.status === "issued";
+      toast(issued ? "Signed. The logbook is now certified." : "Signed. Waiting on the remaining signatures.");
+      haptic("success");
+      render();
+    }, function (e) {
+      state.loading = false;
+      toast(e.userMessage || "Could not sign.");
+      render();
+    });
+  }
+  function doCertRevoke(id) {
+    var reason = G.prompt ? G.prompt("Why is this certificate being revoked? This is recorded and shown to anyone who checks it.") : "";
+    if (!reason || !String(reason).trim()) return toast("A reason is required.");
+    var st = ST();
+    state.loading = true; render();
+    st.revokeCertificate(id, String(reason).trim()).then(function (c) {
+      state.loading = false; state.cert = c;
+      toast("Revoked."); render();
+    }, function (e) {
+      state.loading = false;
+      toast(e.userMessage || "Could not revoke.");
+      render();
+    });
+  }
+  /* Export. The SERVER decides whether this is an official document — the client never promotes a
+   * draft by deciding it looks issued. */
+  function doCertPdf() {
+    var r = REP(), rep = buildCertifiedReport();
+    if (!rep) return toast("Nothing to export yet.");
+    toast(rep.official ? "Building the certified PDF…" : "Building a draft copy…");
+    try {
+      var out = r.exportCertifiedPdf(rep, {
+        verifyUrl: state.certVerifyUrl,
+        residentName: (state.dash && state.dash.resident && state.dash.resident.name) || ""
+      });
+      if (out && out.catch) out.catch(function () { toast("Could not build the PDF on this device."); });
+    } catch (e) { toast("Could not build the PDF on this device."); }
+  }
+  function buildCertifiedReport() {
+    var r = REP();
+    if (!r || !state.dash) return null;
+    var res = state.dash.resident;
+    return r.certifiedLogbook({
+      resident: res, programme: state.dash.programme, entries: state.dash.entries,
+      rotations: state.dash.rotations, assessments: state.dash.assessments,
+      months: state.dash.months, attestations: state.dash.attestations || [],
+      attendance: state.dash.attendance, weekly: state.dash.weekly,
+      requirementProgress: state.progress, gaps: state.gaps, eligibility: state.eligibility,
+      procedureCatalog: state.pack ? state.pack.procedureCatalog : [],
+      today: todayISO(), orgName: res && res.orgId, departmentName: res && res.departmentId,
+      certificate: state.cert
+    });
+  }
+
   function doVerify(id) {
     var st = ST();
     state.loading = true; render();

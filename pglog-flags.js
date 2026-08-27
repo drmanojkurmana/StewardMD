@@ -54,6 +54,15 @@
         "WORKING days, i.e. calendar days minus 52 weekly offs a year. WHICH days count is institutional " +
         "and is labelled as such."
     },
+    smd_pglog_certify: {
+      type: "bool", def: true, query: "pglogcertify",
+      desc: "Certification: collect the signatures a completed logbook needs, freeze what was signed, " +
+        "and export a verifiable PDF a college / University / the NMC can check by QR. The signature " +
+        "COUNT is institutional policy (default 2 faculty + 1 HoD, the HoD counting toward both); the " +
+        "requirement that the HEAD OF DEPARTMENT signs the completed log book comes from the NMC " +
+        "specialty curricula, and the document says which is which. Flag OFF = no certification " +
+        "surface at all; the ordinary reports still export, still stamped as uncertified drafts."
+    },
     smd_pglog_reports: {
       type: "bool", def: true, query: "pglogreports",
       desc: "Report + export surface (individual logbook, rotation, procedure, academic, assessment, " +

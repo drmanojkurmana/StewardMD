@@ -42,6 +42,15 @@ export async function rateLimit(env, request, bucket, limit, windowSec) {
 /* Build the PUBLIC answer for a verification code. Every field here was chosen by asking: is this
  * already on the document the examiner is holding? If not, it does not appear. */
 /* Show enough of an identifier to match it against the document in front of you, and no more. */
+/* A short, human-comparable form of a 64-character digest. Printed on the document and shown here,
+ * so a reader can match the two by eye. Not a security control on its own — the server's own digest
+ * check above is — but it lets someone holding paper spot a substituted document in seconds. */
+function fingerprint(d) {
+  const t = String(d || "").toUpperCase();
+  if (t.length < 16) return "";
+  return (t.slice(0, 4) + "-" + t.slice(4, 8) + "-" + t.slice(8, 12) + "-" + t.slice(12, 16));
+}
+
 function maskId(v) {
   const t = String(v || "");
   // A StewardMD ID is SMD-XXXXXX. Anything shorter is not one, and half-masking it would produce a
@@ -53,6 +62,7 @@ export async function describeVerification(env, rec, code, deps) {
   // Test seam, same convention the store uses. Production never passes it.
   const D = Object.assign({ getEntry: S.getEntry, getAssessment: S.getAssessment,
     getAttestation: S.getAttestation, getResident: S.getResident, getProgramme: S.getProgramme,
+    getCertificate: S.getCertificate, certificateIntegrity: S.certificateIntegrity,
     digestFor: V.digestFor }, deps || {});
   const out = {
     ok: true, code,
@@ -77,6 +87,7 @@ export async function describeVerification(env, rec, code, deps) {
     if (rec.kind === "entry") live = await D.getEntry(env, rec.refId);
     else if (rec.kind === "assessment") live = await D.getAssessment(env, rec.refId);
     else if (rec.kind === "attestation") live = await D.getAttestation(env, rec.refId);
+    else if (rec.kind === "certificate") live = await D.getCertificate(env, rec.refId);
   } catch (e) { live = null; }
 
   if (!live) {
@@ -115,6 +126,48 @@ export async function describeVerification(env, rec, code, deps) {
                    score: live.maxTotal ? live.total + " / " + live.maxTotal : "—" };
     out.signedBy = { name: live.assessorName || "", registrationNo: live.assessorReg || "",
                      council: live.assessorCouncil || "", at: live.assessedAt, role: "Assessor" };
+  } else if (rec.kind === "certificate") {
+    /* THE ONE AN EXAMINER ACTUALLY SCANS. A college or a University holding a printed logbook needs
+     * three questions answered: is this document still valid, does its CONTENT still match what was
+     * signed, and who signed it. The content check is separate from the signature check — the
+     * signature can be intact while the underlying entries have moved, and saying "valid" then would
+     * be the most damaging thing this page could do. */
+    const integ = await D.certificateIntegrity(env, live).catch(() => ({ ok: false, reason: "unavailable" }));
+    if (!integ.ok && integ.reason === "digest") {
+      out.status = "tampered";
+      out.message = "The logbook behind this certificate has changed since it was signed. Do not rely " +
+        "on this document. Ask the institution for a current certified copy.";
+      return out;
+    }
+    out.record = {
+      type: "Certified postgraduate logbook",
+      scope: live.scope === "final" ? "Complete training record" : live.scope,
+      entriesCertified: live.entryCount,
+      monthsAuthenticated: live.monthsTotal ? (live.monthsAttested + " of " + live.monthsTotal) : "",
+      // Printed on the document too, so the reader can compare the paper against this page without
+      // trusting either one alone.
+      contentFingerprint: fingerprint(live.contentDigest),
+      excludedFromCertificate: live.excluded,
+      issuedAt: live.issuedAt
+    };
+    out.signedBy = null;
+    out.signatures = (live.signatures || []).map((sig) => ({
+      name: sig.name || "", registrationNo: sig.reg || "", council: sig.council || "",
+      role: sig.role === "hod" ? "Head of Department"
+          : sig.role === "guide" ? "Postgraduate guide (PGMER-2023 \u00a75.2(vii))" : "Faculty",
+      at: sig.at
+    }));
+    out.quorum = {
+      required: (live.quorum.faculty || 0) + " faculty signature(s) and " + (live.quorum.hod || 0) +
+        " Head of Department signature" + (live.quorum.hodCountsAsFaculty ? " (the HoD counts toward both)" : ""),
+      // Say WHOSE rule this is. The HoD signature is in the NMC curricula; the faculty count is the
+      // institution's own policy, and reading one as the other is exactly what this module exists to
+      // prevent.
+      source: "The Head of Department signature follows the NMC specialty curricula (\u201cthe completed " +
+        "log book should be signed by the Head of the Department\u201d). The number of faculty " +
+        "signatures is the institution's own rule, not an NMC requirement."
+    };
+    return out;
   } else {
     out.record = { type: live.kind === "monthly" ? "Monthly authentication" : "Head of Department certification",
                    period: live.period || "", entries: (live.counts || {}).total || 0,

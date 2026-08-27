@@ -822,6 +822,64 @@ The module's headline claim moves with it: it is structured to **§5.2(vi)–(vi
 | **Medical Institutions (Qualifications of Faculty) Regulations, 2025** (gazette 30.06.2025) + its FAQ (28.10.2025) | Supersedes the "Teachers Eligibility Qualifications … in vogue" that PGMER §7.1 points at. **§16: a Postgraduate Guide in a broad specialty needs at least five years as Assistant Professor or above; §17: three years for a super specialty.** This is the definition of the person §5.2(vii) requires to sign the monthly authentication. |
 | **MSMER-2023** + FAQ, **Recognition Regulations 2023** + FAQ | Institution-level accreditation and qualification recognition. No logbook or PG-training-record content. Checked, and deliberately claimed nowhere. |
 
+## 17. Certification and the exported PDF — 2026-08-27
+
+The module now produces a document that leaves the app: a signed, frozen PDF a college, a University
+or the NMC can be handed and can check. This section exists because that document makes CLAIMS, and
+every claim on it has to be traceable to a source or labelled as ours.
+
+### 17.1 What is sourced, and what is our policy
+
+| Claim on the document | Provenance | Source |
+|---|---|---|
+| The completed log book is signed by the **Head of the Department** | `nmc_curriculum` | 2022-revised NMC specialty curricula, "J. Log book": *"the completed log book should be signed by the Head of the Department"* |
+| A **proficiency certificate** from the HoD is submitted at the examination | `nmc_curriculum` | same clause set |
+| The logbook is **authenticated monthly by the postgraduate guide** | `nmc_regulation` | PGMER-2023 §5.2(vii) (gazette CG-DL-E-03012024-251108) |
+| A **named** faculty member / HoD / Dean is penalised for a false record | `nmc_regulation` | PGMER-2023 §9.2(c) |
+| **Two faculty signatures** | **`institution`** | **NOT an NMC requirement.** This is the owner's default policy, configurable per programme (`config.certQuorum`). |
+| The **HoD may count as one of the two faculty** | `institution` | Owner's default. A head of department is a faculty member; a small unit where the HoD is also the guide would otherwise be unable to certify anybody. |
+| The **guide must personally sign** the completed logbook | `institution`, **default OFF** | Defensible from §5.2(vii), but a guide who has left, retired or died would otherwise strand their former trainees permanently. Reported either way on the document; enforced only if an institution turns it on. |
+
+The certification screen and the exported PDF both print the last three rows as *the institution's
+own rule, not an NMC requirement*, in those words. This is the single most likely place for the
+module to launder a local policy into a regulatory claim, so it is stated on the artefact itself
+rather than in a help page.
+
+### 17.2 What the PDF is, and what it is not
+
+**It is:** a tamper-EVIDENT representation of a server-held record. Every signature was made by an
+account whose medical registration had been verified against the live Indian Medical Register at that
+moment, and the registration number is printed. The document carries an opaque verification code, a
+QR to `/pglog/v/<code>`, and a short **content fingerprint** of the exact entry set that was signed.
+Scanning re-reads the live record and re-derives the digest, so a changed logbook reads TAMPERED
+rather than showing a green tick over altered content.
+
+**It is not a digitally signed document under the Information Technology Act, 2000.** No Digital
+Signature Certificate from a CCA-licensed Certifying Authority is applied to the file. Nobody in this
+system holds such a key, and claiming otherwise would be the single most damaging false statement the
+module could make. The limitation is printed **on the document**, because the person relying on it is
+the person who needs to read it.
+
+**It is not an NMC or University determination.** Whether a certified PDF is accepted is the
+receiving institution's decision, exactly as with examination eligibility everywhere else here.
+
+**Upgrade path, if a legally-recognised signature is ever required:** each signing faculty member
+would need their own DSC (eMudhra/Capricorn/NIC class 3 or an Aadhaar eSign flow), and the PDF would
+need PAdES signing at the point of issue. That is a key-custody problem, not a rendering one, and
+nothing in the present design has to change to accommodate it — the certificate record already pins
+exactly what would be signed.
+
+### 17.3 What a certificate covers, and what it deliberately leaves out
+
+A certificate covers **verified entries only**. Drafts, entries awaiting verification and returned
+entries are excluded, and their counts are printed on the document and shown on the screen. A
+certificate that silently omitted forty unverified entries would read as a complete logbook, which is
+the one way this artefact could mislead by accident.
+
+Amending a covered entry **supersedes** the certificate: the document those people signed no longer
+exists, so its code stops validating and the verification page says why. The original certificate and
+every signature on it are retained — nothing is deleted.
+
 ## 15. Changelog of this document
 
 | Date | Change |

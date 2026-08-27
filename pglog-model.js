@@ -276,7 +276,39 @@
       attendanceCounts: attendanceCounts(c.attendanceCounts),
       attendanceDays: posInt(c.attendanceDays, 0),               // PGMEB FAQ 751/501 - SECONDARY source; 0 = not set
       attendanceDaysSource: clampStr(c.attendanceDaysSource || "nmc_faq_secondary", 40),
-      researchMilestones: strArr(c.researchMilestones, 20).length ? strArr(c.researchMilestones, 20) : RESEARCH_MILESTONES.slice()
+      researchMilestones: strArr(c.researchMilestones, 20).length ? strArr(c.researchMilestones, 20) : RESEARCH_MILESTONES.slice(),
+      certQuorum: certQuorum(c.certQuorum)                       // INSTITUTIONAL - see certQuorum()
+    };
+  }
+
+  /* HOW MANY SIGNATURES A COMPLETED LOGBOOK NEEDS BEFORE IT CAN BE ISSUED AS AN OFFICIAL DOCUMENT.
+   *
+   * THIS IS AN INSTITUTIONAL RULE, NOT AN NMC ONE, and the distinction matters more here than
+   * anywhere else in the module. What the sources actually say:
+   *   - PGMER-2023 5.2(vii): the logbook is "checked, assessed and authenticated monthly by the
+   *     Post-graduate guide" — one named person, monthly.
+   *   - The 2022-revised curricula: the completed log book "should be signed by the Head of the
+   *     Department", and a proficiency certificate comes "from Head of Department".
+   * Neither says "two faculty". The HoD signature IS sourced; the faculty count is the owner's rule,
+   * and the certificate prints which is which so nobody reads our policy as the regulation's.
+   *
+   * hodCountsAsFaculty is the default because the head of a department IS a faculty member — a small
+   * unit where the HoD is also the guide would otherwise be unable to certify anybody.
+   */
+  function certQuorum(q) {
+    q = q || {};
+    return {
+      faculty: posInt(q.faculty, 2),
+      hod: q.hod === 0 ? 0 : posInt(q.hod, 1),
+      hodCountsAsFaculty: q.hodCountsAsFaculty === false ? false : true,
+      // PGMER-2023 5.2(vii) makes the postgraduate guide responsible for this logbook, so an
+      // institution may reasonably insist the completed document carries their signature.
+      // DEFAULT OFF, deliberately: a guide who has left, retired or died would otherwise make their
+      // former trainees permanently uncertifiable, and a rule that strands a resident is a rule the
+      // department will work around. Whether the guide signed is reported EITHER WAY on the
+      // certificate and on the exported document, so the reader can see it without us enforcing it.
+      requireGuide: q.requireGuide === true,
+      source: "institution"
     };
   }
   // Normalise an institutional attendance-counting map: known states only, 1 or 0 only, defaults
@@ -646,9 +678,9 @@
   // Identity comparison tolerant of the app's namespacing ("fb:<uid>" vs "<uid>"), the same
   // normalisation functions/_taskpush.js rawUid() does. Getting this wrong would silently DISABLE the
   // self-verify guard, so it is one function used by every check.
+  function normActor(a) { return trim(a).toLowerCase().replace(/^(fb:|ghis:|cfa:)/, ""); }
   function sameActor(a, b) {
-    var x = trim(a).toLowerCase().replace(/^(fb:|ghis:|cfa:)/, "");
-    var y = trim(b).toLowerCase().replace(/^(fb:|ghis:|cfa:)/, "");
+    var x = normActor(a), y = normActor(b);
     return !!x && x === y;
   }
 
@@ -887,6 +919,206 @@
       createdAt: num(o.createdAt, 0)
     };
   }
+  /* ══════════════════════════════════════════════════════════════════════════════════════════════
+   * THE LOGBOOK CERTIFICATE — the artefact a college or a University can actually be handed.
+   * ══════════════════════════════════════════════════════════════════════════════════════════════
+   *
+   * A monthly attestation says "this month's entries were checked". A certificate says something
+   * different and much stronger: "THIS COMPILED LOGBOOK, exactly this content, was signed by these
+   * named registered practitioners on these dates." It is what the exported PDF rests on, and the
+   * PDF is worth precisely as much as this record — no more.
+   *
+   * WHAT MAKES IT MEAN ANYTHING
+   *
+   *   1. It FREEZES ITS CONTENT. `contentDigest` is a hash of the exact set of verified entries it
+   *      covers, each with its own signature state. Add an entry afterwards and the certificate does
+   *      not silently grow to include it; amend a covered entry and the certificate is SUPERSEDED,
+   *      because the document those people signed no longer exists.
+   *   2. Every signature carries a REGISTRATION NUMBER (functions/_pglog_signer.js refuses otherwise),
+   *      so a reader can check each signer against the Indian Medical Register themselves.
+   *   3. It is not issued until the quorum is met, and the quorum is checked HERE — one function,
+   *      used by the server that enforces it and by the UI that explains it.
+   *
+   * WHAT IT IS NOT. It is not a Digital Signature Certificate under the IT Act, 2000. Nobody here
+   * holds a CCA-licensed key, and the PDF is not PAdES-signed. It is a tamper-EVIDENT printed
+   * representation of a server-held record, checkable against that record through a QR. Saying more
+   * than that would be the single most damaging false claim this module could make, so the document
+   * itself says exactly this.
+   */
+  var CERT_STATUS = ["pending", "issued", "superseded", "revoked"];
+  var SIGNER_ROLES = ["faculty", "guide", "hod"];
+  var CERT_ENTRY_CAP = 5000;
+
+  function certSignature(o) {
+    o = o || {};
+    return {
+      by: clampStr(o.by, 120),
+      role: oneOf(SIGNER_ROLES, o.role, "faculty"),
+      reg: clampStr(o.reg, 60),
+      council: clampStr(o.council, 120),
+      name: clampStr(o.name, 120),
+      regSource: clampStr(o.regSource, 20),
+      note: clampStr(o.note, 500),
+      at: num(o.at, 0)
+    };
+  }
+
+  function certificate(o) {
+    o = o || {};
+    return {
+      id: clampStr(o.id, 200),
+      v: VERSION,
+      residentId: clampStr(o.residentId, 80),
+      programmeId: clampStr(o.programmeId, 80),
+      orgId: clampStr(o.orgId, 80),
+      departmentId: clampStr(o.departmentId, 80),
+      scope: clampStr(o.scope || "final", 24),          // "final" today; a period/year later
+      status: oneOf(CERT_STATUS, o.status, "pending"),
+      // The frozen content.
+      entryIds: strArr(o.entryIds, CERT_ENTRY_CAP),
+      entryCount: posInt(o.entryCount, 0) || 0,
+      contentDigest: clampStr(o.contentDigest, 128),
+      counts: countsOf(o.counts),
+      // What was DELIBERATELY LEFT OUT, printed on the document. A certificate that quietly omitted
+      // 40 unverified entries would read as a complete logbook, which is the lie this field prevents.
+      excluded: {
+        draft: posInt(o.excluded && o.excluded.draft, 0) || 0,
+        submitted: posInt(o.excluded && o.excluded.submitted, 0) || 0,
+        returned: posInt(o.excluded && o.excluded.returned, 0) || 0
+      },
+      monthsAttested: posInt(o.monthsAttested, 0) || 0,
+      monthsTotal: posInt(o.monthsTotal, 0) || 0,
+      quorum: certQuorum(o.quorum),
+      signatures: arr(o.signatures).slice(0, 20).map(certSignature),
+      requestedBy: clampStr(o.requestedBy, 120),
+      requestedAt: num(o.requestedAt, 0),
+      issuedAt: num(o.issuedAt, 0),
+      verifyCode: clampStr(o.verifyCode, 40),
+      supersededBy: clampStr(o.supersededBy, 200),
+      supersededAt: num(o.supersededAt, 0),
+      supersedeReason: clampStr(o.supersedeReason, 300),
+      revokedBy: clampStr(o.revokedBy, 120),
+      revokedAt: num(o.revokedAt, 0),
+      revokeReason: clampStr(o.revokeReason, 300),
+      history: arr(o.history).slice(-100),
+      createdAt: num(o.createdAt, 0),
+      updatedAt: num(o.updatedAt, 0)
+    };
+  }
+
+  /* THE CONTENT A SIGNATURE COVERS, as one deterministic string. Sorted by entry id, so the same
+   * logbook always produces the same digest regardless of query order — a digest that depended on
+   * Firestore's result ordering would flip to "tampered" at random. */
+  function certificateContent(cert, entries) {
+    var byId = {};
+    arr(entries).forEach(function (e) { if (e && e.id) byId[e.id] = e; });
+    var ids = arr(cert.entryIds).slice().sort();
+    var parts = ["v1", "cert", s(cert.residentId), s(cert.programmeId), s(cert.orgId),
+                 s(cert.scope), String(ids.length)];
+    ids.forEach(function (id) {
+      var e = byId[id];
+      // A MISSING entry is part of the content, not an excuse to skip it. If a covered entry is
+      // deleted the digest must change, not quietly shrink to match.
+      parts.push(e
+        ? [id, s(e.kind), s(e.occurredAt), s(e.status), String(num(e.verifiedAt, 0)),
+           s(e.verifiedReg), String(arr(e.revisions).length || num(e.revisionCount, 0))].join(":")
+        : id + ":MISSING");
+    });
+    return parts.join("|");
+  }
+
+  /* WHERE THE QUORUM STANDS. Pure, so the server enforcing it and the screen explaining it can never
+   * disagree about whether a logbook is ready. Distinct PEOPLE, never distinct signatures — signing
+   * twice from two devices is not two faculty. */
+  function quorumState(cert, quorum, resident) {
+    var q = certQuorum(quorum || (cert && cert.quorum));
+    var sigs = arr(cert && cert.signatures);
+    var seen = {}, faculty = [], hod = [], guideSigned = false;
+    var named = resident ? [resident.guide].concat(arr(resident.coGuides)) : [];
+    sigs.forEach(function (sig) {
+      var key = normActor(sig.by);
+      if (!key || seen[key]) return;
+      seen[key] = 1;
+      if (sig.role === "hod") { hod.push(sig); if (q.hodCountsAsFaculty) faculty.push(sig); }
+      else faculty.push(sig);
+      // Identity, not job title: "the guide signed" means the person named as this resident's guide
+      // signed, not that somebody senior did.
+      if (named.some(function (g) { return sameActor(g, sig.by); })) guideSigned = true;
+    });
+    var needF = Math.max(0, q.faculty - faculty.length);
+    var needH = Math.max(0, q.hod - hod.length);
+    // With no resident to compare against we cannot DISPROVE the guide signed, so we do not claim
+    // they did: the requirement is only evaluated when the caller supplies the resident.
+    var needGuide = q.requireGuide && !!resident && !guideSigned;
+    var missing = [];
+    if (needF) missing.push(needF + " more faculty signature" + (needF > 1 ? "s" : ""));
+    if (needH) missing.push(needH + " Head of Department signature" + (needH > 1 ? "s" : ""));
+    if (needGuide) missing.push("the postgraduate guide's signature");
+    return {
+      faculty: faculty.length, hod: hod.length, signers: Object.keys(seen).length,
+      needFaculty: q.faculty, needHod: q.hod, hodCountsAsFaculty: q.hodCountsAsFaculty,
+      guideSigned: guideSigned, requireGuide: q.requireGuide,
+      met: needF === 0 && needH === 0 && !needGuide, missing: missing, source: q.source
+    };
+  }
+
+  /* Add one signature. Every refusal here is a THROW, not a hidden no-op — the caller is minting a
+   * document a University will rely on and must be told exactly why it did not happen. */
+  function signCertificate(cert, sig, residentUid, at, quorum, resident) {
+    if (!cert) throw err("pglog_cert_not_found");
+    if (cert.status === "revoked") throw err("pglog_cert_revoked");
+    if (cert.status === "superseded") throw err("pglog_cert_superseded");
+    if (cert.status === "issued") throw err("pglog_cert_already_issued");
+    var who = certSignature(Object.assign({}, sig, { at: at }));
+    if (!who.by) throw err("pglog_actor_required");
+    if (!who.reg) throw err("pglog_cert_registration_required");
+    // RULE 1, again: nobody certifies their own training record.
+    if (residentUid && sameActor(who.by, residentUid)) throw err("pglog_self_certify_forbidden");
+    if (arr(cert.signatures).some(function (x) { return sameActor(x.by, who.by); })) {
+      throw err("pglog_cert_already_signed_by_you");
+    }
+    var out = clone(cert);
+    out.signatures = arr(out.signatures).concat([who]);
+    out.updatedAt = at;
+    out.history = arr(out.history).concat([{ at: at, by: who.by, action: "sign", role: who.role }]).slice(-100);
+    var st = quorumState(out, quorum || out.quorum, resident);
+    if (st.met) { out.status = "issued"; out.issuedAt = at;
+      out.history = out.history.concat([{ at: at, by: who.by, action: "issued" }]).slice(-100); }
+    return out;
+  }
+
+  /* The certificate describes a document that no longer stands. Not a deletion: the record and every
+   * signature on it are kept, and the verification page says what happened. */
+  function supersedeCertificate(cert, reason, at, byId) {
+    if (!cert) throw err("pglog_cert_not_found");
+    var out = clone(cert);
+    out.status = "superseded";
+    out.supersededAt = at;
+    out.supersededBy = clampStr(byId, 200);
+    out.supersedeReason = clampStr(reason, 300);
+    out.updatedAt = at;
+    out.history = arr(out.history).concat([{ at: at, action: "superseded", reason: clampStr(reason, 300) }]).slice(-100);
+    return out;
+  }
+
+  function revokeCertificate(cert, actor, at, reason) {
+    if (!cert) throw err("pglog_cert_not_found");
+    if (!trim(reason)) throw err("pglog_cert_revoke_reason_required");
+    var out = clone(cert);
+    out.status = "revoked";
+    out.revokedBy = clampStr(actor, 120);
+    out.revokedAt = at;
+    out.revokeReason = clampStr(reason, 300);
+    out.updatedAt = at;
+    out.history = arr(out.history).concat([{ at: at, by: clampStr(actor, 120), action: "revoke", reason: clampStr(reason, 300) }]).slice(-100);
+    return out;
+  }
+
+  // May this certificate be exported as the OFFICIAL document? One question, one answer, used by the
+  // export button, the report renderer and the server alike — so a draft can never be printed as if
+  // it were certified.
+  function certIsOfficial(cert) { return !!cert && cert.status === "issued" && !!cert.verifyCode; }
+
   function countsOf(c) {
     var out = {};
     ENTRY_KINDS.forEach(function (k) { out[k] = posInt(c && c[k], 0) || 0; });
@@ -1425,6 +1657,10 @@
     // entities
     programme: programme, pconfig: pconfig, resident: resident, rotation: rotation,
     entry: entry, assessment: assessment, attestation: attestation, attestationId: attestationId,
+    certificate: certificate, certSignature: certSignature, certificateContent: certificateContent,
+    quorumState: quorumState, signCertificate: signCertificate, supersedeCertificate: supersedeCertificate,
+    revokeCertificate: revokeCertificate, certIsOfficial: certIsOfficial, certQuorum: certQuorum,
+    CERT_STATUS: CERT_STATUS, SIGNER_ROLES: SIGNER_ROLES, CERT_ENTRY_CAP: CERT_ENTRY_CAP,
 
     // validation + state machine
     validateEntry: validateEntry, requiresProcedureLog: requiresProcedureLog,

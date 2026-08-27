@@ -45,6 +45,7 @@ const COL = {
   entry: "pg_entries",
   assessment: "pg_assessments",
   attestation: "pg_attestations",
+  certificate: "pg_certificates",
   notif: "pg_notifs",
   config: "pg_config"
 };
@@ -57,6 +58,7 @@ function norm(id) { return String(id == null ? "" : id).toLowerCase().replace(/^
 function e403(detail) { return Object.assign(new Error("forbidden"), { status: 403, detail }); }
 function e404(detail) { return Object.assign(new Error("not_found"), { status: 404, detail }); }
 function e400(code) { return Object.assign(new Error(code || "bad_request"), { status: 400 }); }
+function e409(code) { return Object.assign(new Error(code || "conflict"), { status: 409 }); }
 
 async function audit(env, orgId, actor, action, meta, deps) {
   // PHI-free by construction: meta carries ids, kinds and counts, never a case reference, a
@@ -243,13 +245,23 @@ export async function getEntry(env, id, deps) {
   const d = D(deps);
   const doc = await d.fsGet(env, COL.entry + "/" + sanitize(id));
   if (!doc) return null;
-  // M.entry() is the schema authority and drops anything it does not know, which is what keeps a
-  // crafted field out of the record. The signature block is re-attached explicitly, so adding one
-  // is a deliberate act here rather than a hole in the normaliser.
-  return Object.assign(M.entry(withId(sanitize(id), doc.fields)), {
-    verifiedReg: doc.fields.verifiedReg || "", verifiedCouncil: doc.fields.verifiedCouncil || "",
-    verifiedName: doc.fields.verifiedName || "", verifiedRegSource: doc.fields.verifiedRegSource || "",
-    verifyCode: doc.fields.verifyCode || ""
+  return withSignature(M.entry(withId(sanitize(id), doc.fields)), doc.fields);
+}
+
+/* M.entry() is the schema authority and drops anything it does not know, which is what keeps a
+ * crafted field out of the record. The signature block therefore has to be re-attached explicitly —
+ * ONE function, used by every read path.
+ *
+ * It was not, once: getEntry() re-attached it and listEntries() did not, so the same stored document
+ * came back with a registration number down one path and without it down the other. That is the same
+ * shape of bug as the two field lists behind the QR digest, and it had two live consequences — a
+ * certificate's content digest flipped between "request" and "issue" for no reason a reader could
+ * see, and every report counting "verified entries carrying the signer's registration" counted zero. */
+function withSignature(e, f) {
+  return Object.assign(e, {
+    verifiedReg: (f && f.verifiedReg) || "", verifiedCouncil: (f && f.verifiedCouncil) || "",
+    verifiedName: (f && f.verifiedName) || "", verifiedRegSource: (f && f.verifiedRegSource) || "",
+    verifyCode: (f && f.verifyCode) || ""
   });
 }
 
@@ -408,7 +420,8 @@ export async function verifyEntry(env, id, actorUid, note, deps) {
   const d = D(deps);
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
-  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY,
+    { target: { departmentId: cur.departmentId } }, deps);
   // A cap says what a ROLE may do; this says whether this PERSON is the one the record names.
   await requireNamedFor(env, actorUid, cur, g.role, deps);
   // THE REGISTRATION GATE. Throws unless the actor holds a verified medical-council registration.
@@ -438,7 +451,8 @@ export async function returnEntry(env, id, actorUid, reason, deps) {
   const d = D(deps);
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
-  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY,
+    { target: { departmentId: cur.departmentId } }, deps);
   // A return is an adverse judgement recorded against a trainee by name, so it carries BOTH gates:
   // the person must be the one responsible for this logbook, and a registered practitioner.
   await requireNamedFor(env, actorUid, cur, g.role, deps);
@@ -461,7 +475,8 @@ export async function amendEntry(env, id, patch, actorUid, reason, deps) {
   // Either the author correcting their own record, or someone holding VERIFY (a guide fixing a
   // record they signed). Nobody else can touch a verified document.
   if (norm(cur.createdBy) !== norm(actorUid)) {
-    const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+    const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY,
+      { target: { departmentId: cur.departmentId } }, deps);
     await requireNamedFor(env, actorUid, cur, g.role, deps);
   }
   const ctx = await entryContext(env, cur.residentId, deps);
@@ -481,6 +496,8 @@ export async function amendEntry(env, id, patch, actorUid, reason, deps) {
   out.supervisor = await resolveSupervisor(env, cur.orgId, out.supervisor || cur.supervisor, ctx.resident, deps);
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:amend", id + " rev" + out.revisions.length, deps);
+  // A certified logbook that COVERED this entry no longer describes a document that exists.
+  await supersedeCertificatesFor(env, id, "a covered entry was amended", deps);
   await notify(env, { to: cur.verifiedBy, orgId: cur.orgId, kind: "verify_pending", entryId: id,
     residentId: cur.residentId, text: "A verified entry was amended and needs re-verification." }, deps);
   return out;
@@ -501,7 +518,7 @@ export async function listEntries(env, residentId, opts, deps) {
   opts = opts || {};
   const d = D(deps);
   const r = await d.fsQuery(env, COL.entry, { where: { field: "residentId", value: sanitize(residentId) }, limit: opts.limit || 2000 });
-  let rows = r.map((x) => M.entry(withId(x.id, x.fields)));
+  let rows = r.map((x) => withSignature(M.entry(withId(x.id, x.fields)), x.fields));
   if (!opts.includeDeleted) rows = rows.filter((x) => !x.deleted);
   if (opts.kind) rows = rows.filter((x) => x.kind === opts.kind);
   if (opts.status) rows = rows.filter((x) => x.status === opts.status);
@@ -514,7 +531,7 @@ export async function listEntries(env, residentId, opts, deps) {
 export async function pendingForFaculty(env, orgId, identity, deps) {
   const d = D(deps);
   const r = await d.fsQuery(env, COL.entry, { where: { field: "pendingFor", value: norm(identity) }, limit: 500 });
-  return r.map((x) => M.entry(withId(x.id, x.fields)))
+  return r.map((x) => withSignature(M.entry(withId(x.id, x.fields)), x.fields))
     .filter((x) => !x.deleted && x.status === "submitted" && x.orgId === sanitize(orgId))
     .sort((a, b) => (a.submittedAt || 0) - (b.submittedAt || 0));
 }
@@ -526,14 +543,18 @@ export async function listEntriesForScope(env, orgId, opts, deps) {
     ? { field: "deptScope", value: sanitize(orgId) + "|" + sanitize(opts.departmentId) }
     : { field: "orgScope", value: sanitize(orgId) };
   const r = await d.fsQuery(env, COL.entry, { where, limit: opts.limit || 5000 });
-  return r.map((x) => M.entry(withId(x.id, x.fields))).filter((x) => !x.deleted);
+  return r.map((x) => withSignature(M.entry(withId(x.id, x.fields)), x.fields)).filter((x) => !x.deleted);
 }
 
 /* ── assessments ─────────────────────────────────────────────────────────── */
 
 export async function createAssessment(env, orgId, body, actorUid, deps) {
   const d = D(deps);
-  await gate(env, actorUid, orgId, CAPS.PGLOG_ASSESS, null, deps);
+  // An assessment is written ABOUT a resident, so the department it is scoped to is theirs, not the
+  // caller's claim. Resolve the resident first and gate on THAT department.
+  const subject = await getResident(env, (body || {}).residentId, deps);
+  await gate(env, actorUid, orgId, CAPS.PGLOG_ASSESS,
+    { target: { departmentId: subject && subject.departmentId } }, deps);
   const id = newId();
   // The signature block is server-owned, exactly as it is on an entry. M.assessment() carries
   // signedBy/signedAt, so without this a draft could be created already claiming a signature that
@@ -559,7 +580,8 @@ export async function completeAssessment(env, id, patch, template, actorUid, dep
   const d = D(deps);
   const cur = await getAssessment(env, id, deps);
   if (!cur) throw e404("assessment");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS, null, deps);
+  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
+    { target: { departmentId: cur.departmentId } }, deps);
   const res = await getResident(env, cur.residentId, deps);
   // FAIL CLOSED. RULE 6 (an assessor may not assess themselves) compares against residentUid; if the
   // resident cannot be resolved that comparison silently passes, which is the exact "namespace
@@ -586,7 +608,8 @@ export async function signAssessment(env, id, actorUid, deps) {
   const d = D(deps);
   const cur = await getAssessment(env, id, deps);
   if (!cur) throw e404("assessment");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS, null, deps);
+  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
+    { target: { departmentId: cur.departmentId } }, deps);
   const snapS = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
   const out = Object.assign(M.signAssessment(cur, actorUid, d.now()),
     signatureFields("signed", snapS, d.now()));
@@ -685,7 +708,228 @@ export async function listAttestations(env, residentId, deps) {
   return r.map((x) => M.attestation(withId(x.id, x.fields))).sort((a, b) => String(b.period).localeCompare(String(a.period)));
 }
 
+
+/* ═══════════════════════════════════════════════════════════════════════════════════════════════
+ * LOGBOOK CERTIFICATES — the signed, frozen document a college or University is handed.
+ * ═══════════════════════════════════════════════════════════════════════════════════════════════
+ *
+ * The monthly attestation says "this month was checked". A certificate says "THIS COMPILED LOGBOOK,
+ * exactly this content, was signed by these named registered practitioners". It is what the exported
+ * PDF rests on, and it is issued only when the quorum is met.
+ *
+ * The digest is computed HERE, over the frozen entry set, and recomputed at verification time. If a
+ * covered entry is amended afterwards the certificate is SUPERSEDED — the document those people
+ * signed no longer exists, and a green tick over changed content would be the worst possible outcome
+ * for a record an examination relies on.
+ */
+
+async function digestContent(env, cert, entries, deps) {
+  const canon = M.certificateContent(cert, entries);
+  return (deps && deps.certDigest ? deps.certDigest : V.digestFor)(env, "certificate_content", { canon });
+}
+
+export async function getCertificate(env, id, deps) {
+  const d = D(deps);
+  const doc = await d.fsGet(env, COL.certificate + "/" + sanitize(id));
+  return doc ? M.certificate(withId(sanitize(id), doc.fields)) : null;
+}
+export async function listCertificates(env, residentId, deps) {
+  const d = D(deps);
+  const r = await d.fsQuery(env, COL.certificate, { where: { field: "residentId", value: sanitize(residentId) }, limit: 50 });
+  return r.map((x) => M.certificate(withId(x.id, x.fields))).sort((a, b) => (b.requestedAt || 0) - (a.requestedAt || 0));
+}
+
+/* Open a certification request: freeze WHAT is being certified, and say plainly what is being left
+ * out. Only VERIFIED entries are covered — a certificate that quietly included drafts would be a
+ * signature over work nobody checked. */
+export async function requestCertificate(env, body, actorUid, deps) {
+  const d = D(deps);
+  const res = await getResident(env, (body || {}).residentId, deps);
+  if (!res) throw e404("resident");
+  // The resident may ask for their own logbook to be certified; faculty may open it for them.
+  if (!M.sameActor(actorUid, res.uid)) {
+    await gate(env, actorUid, res.orgId, CAPS.PGLOG_VERIFY, { target: { departmentId: res.departmentId } }, deps);
+  } else {
+    await gate(env, actorUid, res.orgId, CAPS.PGLOG_VIEW_OWN, null, deps);
+  }
+
+  const [all, atts, prog] = await Promise.all([
+    listEntries(env, res.id, {}, deps),
+    listAttestations(env, res.id, deps),
+    getProgramme(env, res.programmeId, deps)
+  ]);
+  const verified = all.filter((e) => !e.deleted && e.status === "verified");
+  if (!verified.length) throw Object.assign(e400("pglog_cert_nothing_to_certify"), {
+    userMessage: "There are no verified entries to certify yet. A certificate covers verified work only."
+  });
+
+  const today = M.isoDate(d.now());
+  const months = M.attestationStatus(res, all, atts, { today });
+  const counts = {};
+  M.ENTRY_KINDS.forEach((k) => { counts[k] = verified.filter((e) => e.kind === k).length; });
+
+  const at = d.now();
+  const id = newId();
+  let cert = M.certificate({
+    id, residentId: res.id, programmeId: res.programmeId, orgId: res.orgId,
+    departmentId: res.departmentId, scope: String((body && body.scope) || "final"),
+    status: "pending",
+    entryIds: verified.map((e) => e.id),
+    entryCount: verified.length,
+    counts,
+    excluded: {
+      draft: all.filter((e) => !e.deleted && e.status === "draft").length,
+      submitted: all.filter((e) => !e.deleted && e.status === "submitted").length,
+      returned: all.filter((e) => !e.deleted && e.status === "returned").length
+    },
+    monthsAttested: months.filter((m) => m.attested).length,
+    monthsTotal: months.length,
+    quorum: (prog && prog.config && prog.config.certQuorum) || undefined,
+    requestedBy: actorUid, requestedAt: at, createdAt: at, updatedAt: at,
+    history: [{ at, by: actorUid, action: "request" }]
+  });
+  cert.contentDigest = await digestContent(env, cert, verified, deps).catch(() => "");
+
+  await d.fsCommit(env, [d.wCreate(env, COL.certificate + "/" + id, cert)]);
+  await audit(env, res.orgId, actorUid, "pglog:cert:request", cert.entryCount + " entries", deps);
+  // Tell the people who have to sign it. A request nobody hears about is a request that stalls.
+  const roster = await facultyRoster(env, res.orgId, deps).catch(() => []);
+  const tell = [res.guide].concat(res.coGuides || [],
+    roster.filter((m) => m.role === "pg_hod").map((m) => m.identity));
+  const told = {};
+  for (const who of tell) {
+    const k = norm(who);
+    if (!k || told[k]) continue;
+    told[k] = 1;
+    await notify(env, { to: who, orgId: res.orgId, kind: "cert_signature_requested",
+      residentId: res.id, certificateId: id,
+      text: "A completed logbook is ready for your signature." }, deps);
+  }
+  return cert;
+}
+
+/* Sign it. Two gates, both already built: the CAPABILITY (a role that may verify or attest) and the
+ * REGISTRATION (a person actually on a medical register). The signing role is decided by the SERVER
+ * from the membership, never taken from the body — a client that could name itself "hod" would be
+ * the whole quorum. */
+export async function signCertificate(env, id, actorUid, body, deps) {
+  const d = D(deps);
+  const cur = await getCertificate(env, id, deps);
+  if (!cur) throw e404("certificate");
+  const res = await getResident(env, cur.residentId, deps);
+  if (!res) throw e404("resident");
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ATTEST,
+    { target: { departmentId: res.departmentId } }, deps);
+  const snap = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
+
+  const isGuide = M.sameActor(actorUid, res.guide) || (res.coGuides || []).some((x) => M.sameActor(actorUid, x));
+  const role = g.role === "pg_hod" ? "hod" : (isGuide ? "guide" : "faculty");
+  const at = d.now();
+  const prog = await getProgramme(env, res.programmeId, deps);
+  const quorum = (prog && prog.config && prog.config.certQuorum) || cur.quorum;
+
+  let out = M.signCertificate(cur, {
+    by: actorUid, role, reg: snap.regNo, council: snap.council, name: snap.name,
+    regSource: snap.source, note: (body && body.note) || ""
+  }, res.uid, at, quorum, res);
+
+  // ISSUED. Re-derive the digest from the entries as they stand NOW: signing a document whose
+  // content moved between the request and the last signature would certify something nobody read.
+  if (out.status === "issued") {
+    const covered = await entriesByIds(env, out.entryIds, deps);
+    const fresh = await digestContent(env, out, covered, deps).catch(() => "");
+    if (fresh && cur.contentDigest && fresh !== cur.contentDigest) {
+      throw Object.assign(e409("pglog_cert_content_changed"), {
+        userMessage: "The logbook changed after this certification was opened, so it was not issued. " +
+          "Open a fresh certification request so the signatures cover what is actually there now."
+      });
+    }
+    out.contentDigest = fresh || out.contentDigest;
+    out.verifyCode = await issueCode(env, "certificate", out, deps);
+  }
+
+  await d.fsCommit(env, [d.wUpdate(env, COL.certificate + "/" + sanitize(id), out)]);
+  await audit(env, cur.orgId, actorUid, "pglog:cert:sign", role + " reg:" + snap.regNo + " -> " + out.status, deps);
+  await notify(env, { to: res.uid, orgId: cur.orgId, kind: out.status === "issued" ? "cert_issued" : "cert_signed",
+    residentId: res.id, certificateId: id,
+    text: out.status === "issued"
+      ? "Your logbook is certified and can now be shared as a PDF."
+      : "A faculty signature was added to your logbook certification." }, deps);
+  return out;
+}
+
+// Read a specific set of entries. Chunked, because a certificate can cover thousands and the store's
+// one-equality-filter rule means there is no "where id in (...)" to lean on.
+async function entriesByIds(env, ids, deps) {
+  const out = [];
+  for (const id of (ids || [])) {
+    const e = await getEntry(env, id, deps).catch(() => null);
+    if (e) out.push(e);
+  }
+  return out;
+}
+
+/* A covered entry changed, so the certificate no longer describes a document that exists. Called
+ * from amendEntry/deleteEntry — best-effort, because the digest recomputation at verification time
+ * is the real backstop and a failure here must never block the correction itself. */
+export async function supersedeCertificatesFor(env, entryId, reason, deps) {
+  const d = D(deps);
+  const e = await getEntry(env, entryId, deps).catch(() => null);
+  if (!e) return 0;
+  let n = 0;
+  try {
+    const certs = await listCertificates(env, e.residentId, deps);
+    for (const c of certs) {
+      if (c.status !== "issued") continue;
+      if ((c.entryIds || []).indexOf(entryId) < 0) continue;
+      const out = M.supersedeCertificate(c, reason, d.now(), "");
+      await d.fsCommit(env, [d.wUpdate(env, COL.certificate + "/" + sanitize(c.id), out)]);
+      if (c.verifyCode) { try { await V.supersede(env, c.verifyCode, "", deps); } catch (x) {} }
+      await audit(env, c.orgId, "system", "pglog:cert:supersede", c.id + " " + reason, deps);
+      await notify(env, { to: (await getResident(env, c.residentId, deps).catch(() => null) || {}).uid || "",
+        orgId: c.orgId, kind: "cert_superseded", residentId: c.residentId, certificateId: c.id,
+        text: "A certified logbook was superseded because a record it covered was corrected." }, deps);
+      n++;
+    }
+  } catch (x) {}
+  return n;
+}
+
+export async function revokeCertificate(env, id, actorUid, reason, deps) {
+  const d = D(deps);
+  const cur = await getCertificate(env, id, deps);
+  if (!cur) throw e404("certificate");
+  const res = await getResident(env, cur.residentId, deps);
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ATTEST,
+    { target: { departmentId: res && res.departmentId } }, deps);
+  // Withdrawing a document a University may already hold is a departmental decision, not a
+  // faculty one.
+  if (g.role !== "pg_hod") throw Object.assign(new Error("hod_required"), { status: 403,
+    userMessage: "Only the head of department can revoke an issued certificate." });
+  const out = M.revokeCertificate(cur, actorUid, d.now(), reason);
+  if (cur.verifyCode) { try { await V.supersede(env, cur.verifyCode, "", deps); } catch (e) {} }
+  await d.fsCommit(env, [d.wUpdate(env, COL.certificate + "/" + sanitize(id), out)]);
+  await audit(env, cur.orgId, actorUid, "pglog:cert:revoke", id, deps);
+  await notify(env, { to: res && res.uid, orgId: cur.orgId, kind: "cert_revoked", residentId: cur.residentId,
+    certificateId: id, text: "A certified logbook was revoked: " + String(reason).slice(0, 160) }, deps);
+  return out;
+}
+
+/* Is the certificate still true? Re-reads every covered entry and re-derives the digest — the same
+ * check the public verification page runs, exposed so the export path can refuse to print an
+ * "official" document over content that has moved. */
+export async function certificateIntegrity(env, cert, deps) {
+  if (!cert) return { ok: false, reason: "not_found" };
+  if (cert.status !== "issued") return { ok: false, reason: cert.status };
+  const covered = await entriesByIds(env, cert.entryIds, deps);
+  const fresh = await digestContent(env, cert, covered, deps).catch(() => "");
+  if (!fresh) return { ok: false, reason: "unavailable" };
+  return { ok: V.digestEqual(fresh, cert.contentDigest), reason: "digest",
+           missing: cert.entryIds.length - covered.length };
+}
+
 /* ── curriculum overrides (Academic Cell) ─────────────────────────────────── */
+
 
 export async function getConfig(env, programmeId, deps) {
   const d = D(deps);
@@ -826,6 +1070,33 @@ export function publicResident(r, audience) {
   };
   if (audience === "self") out.uid = r.uid;
   if (full) { out.notes = r.notes || ""; }
+  return out;
+}
+
+/* A certificate is a document ABOUT a trainee that other people are meant to read, so it discloses
+ * more than an entry does — but it still carries no clinical content, and the covered entry IDS are
+ * the certificate's own audit trail, not something a third party needs. */
+export function publicCertificate(c, audience) {
+  if (!c) return null;
+  const full = audience === "self" || audience === "verifier" || audience === "hod";
+  const out = {
+    id: c.id, residentId: c.residentId, orgId: c.orgId, scope: c.scope, status: c.status,
+    entryCount: c.entryCount, counts: c.counts, excluded: c.excluded,
+    monthsAttested: c.monthsAttested, monthsTotal: c.monthsTotal,
+    quorum: c.quorum,
+    // The registration numbers are the point of the document: they are public register data, and a
+    // signature nobody can check is not a signature.
+    signatures: (c.signatures || []).map((sig) => ({
+      by: full ? sig.by : "", role: sig.role, reg: sig.reg, council: sig.council,
+      name: sig.name, at: sig.at, note: full ? sig.note : ""
+    })),
+    requestedAt: c.requestedAt, issuedAt: c.issuedAt,
+    contentDigest: c.contentDigest,
+    supersededAt: c.supersededAt, supersedeReason: c.supersedeReason,
+    revokedAt: c.revokedAt, revokeReason: c.revokeReason,
+    verifyCode: full ? (c.verifyCode || "") : ""
+  };
+  if (full) { out.entryIds = c.entryIds; out.history = c.history; out.requestedBy = c.requestedBy; }
   return out;
 }
 

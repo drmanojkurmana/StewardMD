@@ -138,6 +138,26 @@
     return G.fetch(API + "/v/" + encodeURIComponent(String(code || "").trim()), { cache: "no-store" })
       .then(function (r) { return r.json().catch(function () { return { ok: false, status: "unavailable" }; }); });
   }
+  /* ── certification ─────────────────────────────────────────────────────────
+   * The signed, frozen document. Never cached and never queued offline: a certificate is minted by
+   * the server against live content, and an offline "certify" that landed hours later would sign a
+   * logbook nobody was looking at. */
+  function certificates(residentId) {
+    return req("/certificates?residentId=" + encodeURIComponent(residentId))
+      .then(function (r) { return r.certificates || []; });
+  }
+  function certificate(id) { return req("/certificates/" + encodeURIComponent(id)); }
+  function requestCertificate(body) {
+    return req("/certificates", { method: "POST", body: body }).then(function (r) { return r.certificate; });
+  }
+  function signCertificate(id, body) {
+    return req("/certificates/" + encodeURIComponent(id) + "/sign", { method: "POST", body: body || {} });
+  }
+  function revokeCertificate(id, reason) {
+    return req("/certificates/" + encodeURIComponent(id) + "/revoke", { method: "POST", body: { reason: reason } })
+      .then(function (r) { return r.certificate; });
+  }
+
   function facultyRoster(orgId) { return req("/faculty-roster?orgId=" + encodeURIComponent(orgId)).then(function (r) { return r.faculty || []; }); }
   function pending(orgId) { return req("/pending?orgId=" + encodeURIComponent(orgId)); }
   function notifications() { return req("/notifications"); }
@@ -304,6 +324,8 @@
     attestations: attestations, pending: pending, residents: residents, programmes: programmes,
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
     facultyRoster: facultyRoster, verifyCode: verifyCode,
+    certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
+    signCertificate: signCertificate, revokeCertificate: revokeCertificate,
     // drafts
     saveDraft: saveDraft, drafts: drafts, getDraft: getDraft, dropDraft: dropDraft,
     validateDraft: validateDraft, submitDraft: submitDraft, queueDraft: queueDraft,

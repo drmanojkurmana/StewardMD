@@ -77,6 +77,8 @@ body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 -apple-system,
 .card h2{font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut);margin:16px 0 10px}
 .r{display:flex;gap:14px;padding:8px 0;border-top:1px solid var(--line)}
 .r:first-of-type{border-top:0}
+.sep{height:10px;margin:6px 0 0;border-top:2px solid var(--line)}
+.sep+.r{border-top:0}
 .k{flex:0 0 42%;color:var(--mut);font-size:14px}
 .v{flex:1;font-size:15px;word-break:break-word}
 .reg{font-variant-numeric:tabular-nums;font-weight:600}
@@ -102,7 +104,10 @@ export async function onRequest(context) {
 
   let html = '<div class="wrap"><p class="brand">StewardMD &middot; NMC Postgraduate Logbook</p>';
   html += '<div class="banner" style="background:' + tone.bg + '"><h1>' + esc(tone.label) + "</h1>";
-  if (d.status === "valid") {
+  if (d.status === "valid" && d.signatures) {
+    html += "<p>This certified logbook was signed by the practitioners named below, each of whose " +
+      "medical registration was verified at the time of signing. Its contents have not changed since.</p>";
+  } else if (d.status === "valid") {
     html += "<p>This record was signed in the StewardMD logbook by a practitioner whose medical " +
       "registration was verified at the time of signing, and it has not changed since.</p>";
   } else if (d.message) {
@@ -132,8 +137,50 @@ export async function onRequest(context) {
       html += row("Period", d.record.period);
       html += row("Entries in period", d.record.entries);
       html += row("Verified in period", d.record.verifiedEntries);
+      html += row("Scope", d.record.scope);
+      html += row("Verified entries certified", d.record.entriesCertified);
+      html += row("Months authenticated by the guide", d.record.monthsAuthenticated);
+      html += row("Issued", dt(d.record.issuedAt));
+      if (d.record.contentFingerprint) {
+        html += '<div class="r"><div class="k">Content fingerprint</div><div class="v code">' +
+          esc(d.record.contentFingerprint) + "</div></div>";
+      }
+      // What the certificate deliberately does NOT cover. A document that silently omitted 40
+      // unverified entries would read as a complete logbook.
+      const ex = d.record.excludedFromCertificate;
+      if (ex && (ex.draft || ex.submitted || ex.returned)) {
+        html += row("Not covered (unverified at issue)",
+          [ex.submitted ? ex.submitted + " awaiting verification" : "",
+           ex.returned ? ex.returned + " returned for correction" : "",
+           ex.draft ? ex.draft + " draft" : ""].filter(Boolean).join(", "));
+      }
       if (d.record.amendments) html += row("Amendments", d.record.amendments + " (each retained in the audit trail)");
       html += "</div>";
+    }
+    // A certificate carries a LIST of signatures, not one — that is the whole point of it, and the
+    // reader's question is "did the right people sign", so each one gets its own block with the
+    // registration number they can check against the register themselves.
+    if (d.signatures && d.signatures.length) {
+      html += '<div class="card"><h2>Signed by ' + esc(String(d.signatures.length)) + " registered practitioner" +
+        (d.signatures.length > 1 ? "s" : "") + "</h2>";
+      d.signatures.forEach((sig, i) => {
+        if (i) html += '<div class="sep"></div>';
+        html += row("Name", sig.name);
+        html += sig.registrationNo
+          ? '<div class="r"><div class="k">Medical registration</div><div class="v reg">' +
+            esc(sig.registrationNo) + "</div></div>"
+          : "";
+        html += row("Council", sig.council);
+        html += row("Capacity", sig.role);
+        html += row("Signed at", dt(sig.at));
+      });
+      html += "</div>";
+      if (d.quorum) {
+        html += '<div class="card"><h2>What was required</h2>';
+        html += row("Signatures required", d.quorum.required);
+        html += "</div>";
+        html += '<p class="note">' + esc(d.quorum.source) + "</p>";
+      }
     }
     if (d.signedBy) {
       html += '<div class="card"><h2>Signed by</h2>';

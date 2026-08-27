@@ -1076,3 +1076,63 @@ stored text, which stays readable to the resident and their guide.
 
 Not done, and owed before a non-tester release: **these fixes have not themselves been re-reviewed**,
 and `PGLOG_SIGNING_KEY` is not provisioned (so no QR is issued yet — deliberately).
+
+### 2026-08-27, later still — the logbook becomes a document
+
+Owner's requirement: a logbook must be shareable as a PDF once signed, with at least two faculty and
+the HoD signing before it can be approved or shared (the HoD may count as both), and the PDF must
+carry a digital signature verifiable through StewardMD so a college or the NMC can hold it and rely
+on it.
+
+**The core decision: a CERTIFICATE, not a flag.** "Approved" as a boolean on a logbook would be a
+claim about a moving target — a logbook gains entries daily. So certification mints a separate record
+that **freezes what it covers**: an HMAC over the exact verified-entry set, each entry with its own
+signature state, sorted by id. Amend a covered entry afterwards and the certificate is **superseded**
+rather than quietly continuing to validate. The document those people signed no longer exists, and
+saying otherwise over changed content is the worst thing this feature could do.
+
+**Decisions worth not re-litigating:**
+
+- **The quorum defaults to exactly the owner's rule** — 2 faculty + 1 HoD, HoD counting toward both,
+  so two distinct people suffice — and is per-programme configurable. The same person cannot fill two
+  slots: distinct *people*, matched through `sameActor` so a namespace or case difference is not a
+  second signatory.
+- **WHOSE RULE IS WHOSE, printed on the artefact.** The HoD signature is sourced (the 2022-revised
+  curricula say the completed log book is signed by the Head of the Department). The **number of
+  faculty signatures is ours**, and the screen and the PDF both say "not an NMC requirement" in those
+  words. This is the likeliest place in the module for a local policy to be laundered into a
+  regulatory claim.
+- **`requireGuide` defaults OFF.** Defensible from §5.2(vii), but a guide who has left, retired or
+  died would otherwise make their former trainees permanently uncertifiable, and a rule that strands
+  a resident is a rule the department will work around. Whether the guide signed is reported either
+  way.
+- **The server decides the signing role from the membership.** A client that could name itself "hod"
+  would be the entire quorum by itself.
+- **Only verified entries are certified**, and what was excluded is printed. A certificate that
+  silently omitted unverified work would read as a complete logbook.
+- **NOT a digital signature under the IT Act, 2000.** No DSC from a licensed Certifying Authority is
+  applied, because nobody here holds such a key. It is tamper-EVIDENT: a QR that re-reads the live
+  record and re-derives the digest. **The limitation is printed on the document**, since the person
+  relying on it is the person who needs to read it. Upgrading later is a key-custody problem, not a
+  rendering one — the certificate record already pins exactly what would be signed.
+- **An uncertified export is stamped `NOT CERTIFIED`, with no QR and no signature block.** There is
+  no configuration in which the exported document is ambiguous about whether anyone signed it. That
+  ambiguity is the only way it could mislead by accident.
+- **The print QR is a TABLE of cells, not the SVG.** The export runs through two renderers — the iOS
+  WKWebView (fine with SVG) and an html2canvas fallback (not reliably). A QR that silently fails to
+  render is worse than no QR, because the document still says it is verifiable. It needs an explicit
+  `<colgroup>`: `table-layout: fixed` reads column widths from the first row, and a QR's first row is
+  all quiet zone, i.e. one cell spanning everything.
+
+**A real bug this surfaced, well outside the feature.** The certificate's content digest flipped
+between "request" and "issue" for no reason a reader could see. Cause: `getEntry()` re-attached the
+signature block that `M.entry()`'s schema drops, and `listEntries()` did not — the same stored
+document came back with a registration number down one path and without it down the other. Same shape
+as the two field lists behind the QR digest. It had a second, silent consequence nobody had noticed:
+every report's "verified entries carrying the signer's registration" count was reading zero. One
+`withSignature()` now serves every read path.
+
+**Measurement note.** The browser test first "failed" the printed QR at 132.8px against an expected
+123px. That was not the QR: the app carries a root `zoom` of 1.08 for the OS text-size setting. The
+assertion was wrong, not the code — so it now tests **module uniformity and squareness**, which is
+what actually decides whether a scanner can read it, and is zoom-independent.

@@ -38,6 +38,8 @@
  *   GET    /assessments?residentId=            POST /assessments
  *   PATCH  /assessments/:id                    POST /assessments/:id/sign
  *   GET    /attestations?residentId=           POST /attest
+ *   GET    /certificates?residentId=           POST /certificates          (open a certification)
+ *   GET    /certificates/:id                   POST /certificates/:id/sign | /revoke
  *   GET    /config/:programmeId                PUT  /config/:programmeId
  *   GET    /dashboard/resident?residentId=     -> the aggregate "My NMC Logbook" needs
  *   GET    /dashboard/faculty?orgId=           -> pending, overdue, residents needing attention
@@ -87,6 +89,16 @@ function fail(e) {
     signer_no_registration_number: [403, "Your verified account carries no registration number."],
     signer_unidentified: [401, "Sign in again before signing a logbook record."],
     signer_check_unavailable: [503, "Your registration could not be checked. Nothing was signed."],
+    pglog_cert_already_issued: [409, "This certification is already issued."],
+    pglog_cert_already_signed_by_you: [409, "You have already signed this logbook."],
+    pglog_cert_registration_required: [403, "A certificate signature needs a verified medical registration number."],
+    pglog_self_certify_forbidden: [403, "You cannot certify your own logbook."],
+    pglog_cert_revoked: [410, "This certification was revoked."],
+    pglog_cert_superseded: [409, "This certification was superseded because the logbook changed."],
+    pglog_cert_revoke_reason_required: [400, "A reason is required to revoke a certificate."],
+    pglog_cert_nothing_to_certify: [400, "There are no verified entries to certify yet."],
+    pglog_cert_content_changed: [409, "The logbook changed after this certification was opened, so it was not issued."],
+    hod_required: [403, "Only the head of department can do that."],
     not_the_named_supervisor: [403, "You are not this resident's guide and you are not named on this entry, so you cannot sign it."],
     supervisor_unresolved: [400, "That supervisor is not on your department's faculty list, so nobody would receive this entry to verify."]
   };
@@ -593,6 +605,54 @@ export async function onRequest(context_) {
           });
         }
         return json({ ok: true, role: ctx.role, audience, residents: rows });
+      }
+    }
+
+
+    /* ── certificates: the signed, frozen document a college or University is handed ───────── */
+    if (seg === "certificates") {
+      if (method === "GET" && !id) {
+        const res = await S.getResident(env, q("residentId"));
+        const ctx = await context(request, env, res && res.orgId);
+        const audience = await canReadResident(env, ctx, res);
+        const certs = await S.listCertificates(env, res.id);
+        return json({ ok: true, audience, certificates: certs.map((c) => S.publicCertificate(c, audience)) });
+      }
+      if (method === "GET" && id) {
+        const cert = await S.getCertificate(env, id);
+        if (!cert) return json({ error: "not_found" }, 404);
+        const res = await S.getResident(env, cert.residentId);
+        const ctx = await context(request, env, cert.orgId);
+        const audience = await canReadResident(env, ctx, res);
+        // The integrity check is what the EXPORT decides on, so it is computed server-side and not
+        // left to the client to infer from a status string.
+        const integrity = await S.certificateIntegrity(env, cert);
+        return json({ ok: true, audience, certificate: S.publicCertificate(cert, audience),
+                      quorum: M.quorumState(cert, cert.quorum, res), integrity,
+                      verifyUrl: cert.verifyCode ? V.verifyUrl(env, cert.verifyCode) : "" });
+      }
+      if (method === "POST" && !id) {
+        const res = await S.getResident(env, body.residentId);
+        if (!res) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, res.orgId);
+        return json({ ok: true, certificate: await S.requestCertificate(env, body, ctx.actorUid) });
+      }
+      if (method === "POST" && id && action === "sign") {
+        const cert = await S.getCertificate(env, id);
+        if (!cert) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, cert.orgId);
+        const out = await S.signCertificate(env, id, ctx.actorUid, body);
+        const res = await S.getResident(env, out.residentId);
+        return json({ ok: true, certificate: S.publicCertificate(out, "verifier"),
+                      quorum: M.quorumState(out, out.quorum, res),
+                      verifyUrl: out.verifyCode ? V.verifyUrl(env, out.verifyCode) : "" });
+      }
+      if (method === "POST" && id && action === "revoke") {
+        const cert = await S.getCertificate(env, id);
+        if (!cert) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, cert.orgId);
+        return json({ ok: true, certificate: S.publicCertificate(
+          await S.revokeCertificate(env, id, ctx.actorUid, body.reason), "verifier") });
       }
     }
 

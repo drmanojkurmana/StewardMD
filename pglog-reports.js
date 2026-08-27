@@ -26,6 +26,7 @@
   "use strict";
 
   var G = (typeof window !== "undefined") ? window : null;
+  function Q() { try { return (G && G.SMD_PGLOG_QR) || (typeof require === "function" ? require("./pglog-qr.js") : null); } catch (e) { return null; } }
   function M() { try { return (G && G.SMD_PGLOG_MODEL) || (typeof require === "function" ? require("./pglog-model.js") : null); } catch (e) { return null; } }
   function C() { try { return (G && G.SMD_PGLOG_CURRICULUM) || (typeof require === "function" ? require("./pglog-curriculum.js") : null); } catch (e) { return null; } }
 
@@ -577,6 +578,204 @@
     return r;
   }
 
+
+  /* ═══════════════════════════════════════════════════════════════════════════════════════════════
+   * THE CERTIFIED LOGBOOK — the document that leaves the app.
+   * ═══════════════════════════════════════════════════════════════════════════════════════════════
+   *
+   * Everything else in this file is a working report a department reads on screen. This one is an
+   * ARTEFACT: it is printed, signed, filed with a college, and possibly produced years later at an
+   * examination. So it obeys three rules the others do not.
+   *
+   * 1. IT SAYS WHAT IT IS. An uncertified export is stamped, on every page, as a draft that carries
+   *    no signature. There is no configuration in which this document is silently ambiguous about
+   *    whether anyone signed it — that ambiguity is the only way it could ever mislead.
+   * 2. IT CARRIES ITS OWN VERIFICATION. The signature page prints every signer with the medical
+   *    registration number a reader can check on the Indian Medical Register, the content
+   *    fingerprint, and a QR to the StewardMD verification page.
+   * 3. IT DOES NOT OVERSTATE ITSELF. It is not a Digital Signature Certificate under the IT Act,
+   *    2000, and it does not claim NMC endorsement. The limits are printed ON the document, not
+   *    buried in a help page, because the person relying on it is the person who needs to read them.
+   */
+  function certifiedLogbook(ctx) {
+    var cert = ctx.certificate || null;
+    var official = !!(cert && cert.status === "issued" && cert.verifyCode);
+    var r = header(ctx, "certified_logbook", "Postgraduate Training Logbook",
+      official ? "Certified record for submission" : "UNCERTIFIED DRAFT — not for submission");
+    r.official = official;
+    r.certificate = cert;
+    r.draftBanner = official ? "" :
+      (cert && cert.status === "superseded"
+        ? "SUPERSEDED — a record covered by this certificate was corrected after it was signed. Ask for a current certified copy."
+        : cert && cert.status === "revoked"
+        ? "REVOKED — this certification was withdrawn by the head of department."
+        : cert && cert.status === "pending"
+        ? "AWAITING SIGNATURES — this logbook has not yet been certified. It carries no signature and must not be submitted."
+        : "NOT CERTIFIED — this is a working copy of a logbook. It carries no signature and must not be submitted.");
+
+    // The whole record, then the certification page.
+    var parts = [
+      progressReport(ctx), rotationReport(ctx), clinicalReport(ctx, { includeCaseRef: false }),
+      procedureReport(ctx, { includeCaseRef: false }), academicReport(ctx), researchReport(ctx),
+      assessmentReport(ctx), feedbackReport(ctx)
+    ];
+    parts.forEach(function (p) {
+      r.sections.push({ heading: "— " + p.title + " —", columns: [], rows: [], divider: true });
+      p.sections.forEach(function (sec) { r.sections.push(sec); });
+    });
+    r.sections.push(monthlyAttestationSection(ctx));
+    r.sections.push(certificationSection(ctx, cert));
+    r.verification = verificationBlock(ctx);
+    return r;
+  }
+
+  /* The signature page. Each row is a person a reader can look up on the register — that is the
+   * entire reason this document is worth more than a printout. */
+  function certificationSection(ctx, cert) {
+    var m = M();
+    var sigs = arr(cert && cert.signatures);
+    var st = (m && cert) ? m.quorumState(cert, cert.quorum, ctx.resident) : null;
+    var rows = sigs.map(function (sig) {
+      return [
+        sig.name || person(sig.by),
+        sig.role === "hod" ? "Head of Department"
+          : sig.role === "guide" ? "Postgraduate guide" : "Faculty",
+        sig.reg || "—",
+        sig.council || "—",
+        fmtTs(sig.at)
+      ];
+    });
+    var note;
+    if (cert && cert.status === "issued") {
+      note = "Each signatory above held a medical registration verified against the Indian Medical " +
+        "Register at the moment of signing, and that number is recorded on this document so it can " +
+        "be checked independently. " + quorumSentence(st, cert);
+    } else if (cert) {
+      note = "This logbook is NOT certified. " + (st && st.missing.length ? "Still required: " + st.missing.join("; ") + ". " : "") +
+        quorumSentence(st, cert);
+    } else {
+      note = "No certification has been opened for this logbook.";
+    }
+    return {
+      heading: "Certification",
+      provenance: { source: "nmc_curriculum", clause: "J. Log book — signed by the Head of the Department" },
+      columns: ["Signatory", "Capacity", "Medical registration", "Council", "Signed"],
+      rows: rows,
+      note: note
+    };
+  }
+
+  // Whose rule is whose. The HoD signature comes from the NMC curricula; the number of faculty
+  // signatures is the institution's own policy, and this document must never let one read as the
+  // other — that is the single rule the whole module is built around.
+  function quorumSentence(st, cert) {
+    var q = (cert && cert.quorum) || (st || {});
+    var need = [];
+    if (q.faculty) need.push(q.faculty + " faculty signature" + (q.faculty > 1 ? "s" : ""));
+    if (q.hod) need.push(q.hod + " Head of Department signature" + (q.hod > 1 ? "s" : ""));
+    return "This institution requires " + (need.join(" and ") || "no signatures") +
+      (q.hodCountsAsFaculty ? " (the Head of Department counts toward both)" : "") + ". " +
+      "The Head of Department signature follows the NMC specialty curricula, which require the " +
+      "completed log book to be signed by the Head of the Department. The NUMBER OF FACULTY " +
+      "signatures is this institution's own rule and is not an NMC requirement.";
+  }
+
+  /* The standalone HTML document that becomes the PDF. Self-contained: inline CSS, a QR built out of
+   * table cells (so it survives both the WKWebView renderer and the html2canvas fallback), and no
+   * external request of any kind — this file has to render years from now, offline, from a folder. */
+  function certifiedDocHtml(rep, opts) {
+    opts = opts || {};
+    var qr = Q();
+    var cert = rep.certificate || null;
+    var official = !!rep.official;
+    var url = opts.verifyUrl || "";
+    var code = (cert && cert.verifyCode) || "";
+    var qrHtml = (official && qr && url) ? qr.toTableHtml(url, { scale: 3 }) : "";
+
+    var h = ['<!doctype html><html lang="en"><head><meta charset="utf-8"><title>' + esc(rep.title) +
+             // The QR geometry rules ship only with a QR. A draft that carried them would contain the
+             // string "pgl-qrt" while showing no code, which is exactly the ambiguity this document
+             // must not have.
+             "</title><style>" + PRINT_CSS + CERT_CSS + (qrHtml && qr ? qr.tableCss(3) : "") + "</style></head><body>"];
+    if (!official) h.push('<div class="pgl-draft-band">' + esc(rep.draftBanner) + "</div>");
+    h.push(toHtml(rep));
+    if (official) {
+      h.push('<section class="pgl-cert-seal">');
+      h.push("<h2>Verification</h2>");
+      h.push('<div class="pgl-cert-seal-grid"><div>');
+      h.push("<p><b>This document can be checked independently.</b> Scan the code, or open the link " +
+             "below and enter the verification code. StewardMD will show who signed this logbook, " +
+             "their medical registration numbers, and whether the record still stands unchanged.</p>");
+      h.push('<dl class="pgl-rep-meta">');
+      h.push("<dt>Verification code</dt><dd class=\"pgl-mono\">" + esc(code) + "</dd>");
+      h.push("<dt>Verify at</dt><dd class=\"pgl-mono\">" + esc(url) + "</dd>");
+      h.push("<dt>Content fingerprint</dt><dd class=\"pgl-mono\">" + esc(fingerprint(cert.contentDigest)) + "</dd>");
+      h.push("<dt>Entries certified</dt><dd>" + esc(String(cert.entryCount)) + "</dd>");
+      h.push("<dt>Issued</dt><dd>" + esc(fmtTs(cert.issuedAt)) + "</dd>");
+      h.push("</dl>");
+      h.push("</div><div class=\"pgl-cert-qr\">" + qrHtml + '<p class="pgl-mono">' + esc(code) + "</p></div></div>");
+      h.push('<p class="pgl-cert-limits"><b>What this verification does and does not mean.</b> ' +
+        "StewardMD attests to the content it recorded and to each signatory's medical registration as " +
+        "verified against the Indian Medical Register at the time of signing. It does not certify the " +
+        "clinical content of any entry, and it is not a determination by the National Medical " +
+        "Commission or by any University. " +
+        "<b>This is a tamper-evident verifiable document, not a digitally signed one under the " +
+        "Information Technology Act, 2000</b> — no Digital Signature Certificate from a licensed " +
+        "Certifying Authority is applied to this file. A printed or forwarded copy is only as good as " +
+        "the check above: if the two do not agree, trust the StewardMD verification page, not the paper.</p>");
+      h.push("</section>");
+    }
+    h.push("</body></html>");
+    return h.join("");
+  }
+
+  function fingerprint(d) {
+    var t = s(d).toUpperCase();
+    if (t.length < 16) return "";
+    return t.slice(0, 4) + "-" + t.slice(4, 8) + "-" + t.slice(8, 12) + "-" + t.slice(12, 16);
+  }
+
+  var CERT_CSS =
+    ".pgl-draft-band{background:#8a1c1c;color:#fff;font:700 13px/1.3 -apple-system,BlinkMacSystemFont,sans-serif;" +
+      "padding:10px 12px;border-radius:4px;margin:0 0 16px;letter-spacing:.02em;-webkit-print-color-adjust:exact;print-color-adjust:exact;}" +
+    ".pgl-cert-seal{margin-top:26px;border:2px solid #0F766E;border-radius:6px;padding:12px 14px;page-break-inside:avoid;}" +
+    ".pgl-cert-seal h2{margin-top:0;border:0;color:#0F766E;}" +
+    ".pgl-cert-seal-grid{display:flex;gap:18px;align-items:flex-start;}" +
+    ".pgl-cert-seal-grid>div:first-child{flex:1;}" +
+    ".pgl-cert-qr{text-align:center;}" +
+    ".pgl-cert-qr p{margin:4px 0 0;font-size:10px;}" +
+    ".pgl-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.04em;}" +
+    ".pgl-cert-limits{font-size:10.5px;color:#444;margin:12px 0 0;line-height:1.5;}";
+
+  /* Export it. Native → a REAL PDF through the existing WKWebView renderer and the share sheet;
+   * web → the browser's own print dialog, which offers Save as PDF. One path, because a second PDF
+   * engine for a document that is a table would be a dependency we do not need. */
+  function exportCertifiedPdf(rep, opts) {
+    opts = opts || {};
+    var html = certifiedDocHtml(rep, opts);
+    var res = ctxResident(opts);
+    var name = ("StewardMD-Logbook-" + (res || "record") + (rep.official ? "-certified" : "-DRAFT"))
+      .replace(/[^\w.-]+/g, "-");
+    var title = rep.official ? "Certified postgraduate logbook" : "Postgraduate logbook (draft)";
+    var N = G.SMD_NATIVE;
+    if (G.SMD_IS_NATIVE && N && N.sharePdfFromHtml) return N.sharePdfFromHtml(html, name, title);
+    if (G.SMD_PDF && G.SMD_PDF.fromHtml) {
+      return G.SMD_PDF.fromHtml(html, name, title).catch(function () { return printHtml(html); });
+    }
+    return Promise.resolve(printHtml(html));
+  }
+  function ctxResident(opts) { return (opts && opts.residentName) || ""; }
+  function printHtml(html) {
+    try {
+      var w = G.open("", "_blank");
+      if (!w) return false;
+      w.document.write(html);
+      w.document.close();
+      setTimeout(function () { try { w.print(); } catch (e) {} }, 350);
+      return true;
+    } catch (e) { return false; }
+  }
+
   /* ── labels ──────────────────────────────────────────────────────────────── */
   var KIND_LABEL = { clinical: "Clinical", procedure: "Procedure", academic: "Academic",
     research: "Research", certification: "Certification", attendance: "Attendance", reflection: "Reflection" };
@@ -708,6 +907,9 @@
     academicReport: academicReport, researchReport: researchReport, assessmentReport: assessmentReport,
     feedbackReport: feedbackReport, rotationReport: rotationReport, progressReport: progressReport,
     departmentSummary: departmentSummary, finalPortfolio: finalPortfolio,
+    certifiedLogbook: certifiedLogbook, certifiedDocHtml: certifiedDocHtml,
+    exportCertifiedPdf: exportCertifiedPdf, certificationSection: certificationSection,
+    fingerprint: fingerprint,
     toHtml: toHtml, toCsv: toCsv, print: print,
     verificationBlock: verificationBlock, DISCLAIMER: DISCLAIMER,
     // exported for the screens' own labelling
@@ -715,7 +917,7 @@
     milestoneLabel: milestoneLabel, stateLabel: stateLabel, scopeLabel: scopeLabel, person: person,
     ALL: ["resident_logbook", "rotation_report", "procedure_report", "clinical_report",
           "academic_report", "assessment_report", "feedback_report", "research_report",
-          "progress_report", "department_summary", "final_portfolio"]
+          "progress_report", "department_summary", "final_portfolio", "certified_logbook"]
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

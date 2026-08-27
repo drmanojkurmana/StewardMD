@@ -268,6 +268,103 @@ try {
   ok(await ev(`var h=document.getElementById("pglogScroll"); return /Scan or type|verification code/i.test(h.textContent);`) === true,
     "and explains what to do with a code");
 
+
+  /* ── 8c. Certification: the screen where a logbook becomes a document ────── */
+  console.log("\n— certification —");
+  // Drive the screen off an injected certificate rather than a live server: what is being tested is
+  // that the UI cannot present an unsigned logbook as a signed one, which is a rendering property.
+  await ev(`
+    var M = SMD_PGLOG_MODEL;
+    window.__res = { id: "r1", uid: "fb:res1", name: "Dr B", guide: "fb:guide1", coGuides: [] };
+    window.__mkCert = function (sigs, over) {
+      var c = M.certificate(Object.assign({ id: "c1", residentId: "r1", orgId: "o1",
+        entryIds: ["e1"], entryCount: 1, excluded: { draft: 2, submitted: 1, returned: 0 } }, over || {}));
+      (sigs || []).forEach(function (x, i) {
+        c = M.signCertificate(c, { by: x[0], role: x[1], reg: x[2], name: x[3] }, "fb:res1", 100 + i, null, window.__res);
+      });
+      return c;
+    };
+    return 1;`);
+
+  ok(await ev(`
+    var st = SMD_PGLOG_MODEL.quorumState(window.__mkCert([["fb:f1","faculty","R/1","Dr F"]]), null, window.__res);
+    return st.met === false && st.missing.join("|");`) !== true,
+    "one faculty signature does not meet the quorum");
+  ok(await ev(`
+    var c = window.__mkCert([["fb:f1","faculty","R/1","Dr F"],["fb:h1","hod","R/2","Dr H"]]);
+    return c.status === "issued";`) === true,
+    "faculty + HOD issues it in the browser too (the same pure function the server runs)");
+
+  await ev(`SMD_PGLOG_SCREENS.go("certify"); return 1;`);
+  await sleep(500);
+  ok(await ev(`var h=document.getElementById("pglogScroll"); return /Head of Department/i.test(h.textContent);`) === true,
+    "the certification screen states what the institution requires");
+  ok(await ev(`var h=document.getElementById("pglogScroll"); return /not an NMC requirement/i.test(h.textContent);`) === true,
+    "and says plainly that the faculty COUNT is the institution's rule, not the NMC's");
+  ok(await ev(`var h=document.getElementById("pglogScroll"); return /Information Technology Act, 2000/i.test(h.textContent);`) === true,
+    "the screen states the limit of what a certified PDF is");
+
+  // THE PROPERTY THAT MATTERS MOST: a draft export can never look like a signed one.
+  ok(await ev(`
+    var R = SMD_PGLOG_REPORTS, M = SMD_PGLOG_MODEL;
+    var ctx = { resident: window.__res, programme: M.programme({ id: "p1", degree: "MD" }),
+      entries: [], rotations: [], assessments: [], months: [], attestations: [], today: "2026-08-27" };
+    var draft = R.certifiedDocHtml(R.certifiedLogbook(ctx), {});
+    return draft.indexOf("NOT CERTIFIED") > -1 && draft.indexOf("pgl-qrt") === -1;`) === true,
+    "an uncertified export is stamped and carries no QR");
+  ok(await ev(`
+    var R = SMD_PGLOG_REPORTS, M = SMD_PGLOG_MODEL;
+    var c = window.__mkCert([["fb:g1","guide","KMC/2011/44321","Dr A Rao"],["fb:h1","hod","KMC/1998/1102","Dr H Nair"]]);
+    c.contentDigest = "a1b2c3d4e5f60718293a4b5c6d7e8f90"; c.verifyCode = "PGL-7K2M9-XQ4TB";
+    var ctx = { resident: window.__res, programme: M.programme({ id: "p1", degree: "MD" }),
+      entries: [], rotations: [], assessments: [], months: [], attestations: [], today: "2026-08-27", certificate: c };
+    var doc = R.certifiedDocHtml(R.certifiedLogbook(ctx), { verifyUrl: "https://stewardmd.in/pglog/v/PGL-7K2M9-XQ4TB" });
+    window.__doc = doc;
+    return doc.indexOf("NOT CERTIFIED") === -1 && doc.indexOf("pgl-qrt") > -1 &&
+           doc.indexOf("KMC/2011/44321") > -1 && doc.indexOf("A1B2-C3D4-E5F6-0718") > -1;`) === true,
+    "a certified export carries the QR, both registration numbers and the content fingerprint");
+
+  // The print QR must survive an actual browser layout — the whole reason it is a table and not an
+  // SVG. What has to hold is that every module is the SAME SIZE and the symbol is square. Absolute
+  // pixel sizes are not testable here: the app carries a root `zoom` for the OS text-size setting
+  // (1.08 on this run), so 123px of QR measures 132.8px. Uniformity is the property that decides
+  // whether a scanner can read it, and it is zoom-independent.
+  {
+    const box = await ev(`
+      var d = document.createElement("div");
+      d.style.cssText = "position:fixed;left:-9999px;top:0";
+      d.innerHTML = "<style>" + SMD_PGLOG_QR.tableCss(3) + "</style>" +
+        SMD_PGLOG_QR.toTableHtml("https://stewardmd.in/pglog/v/PGL-7K2M9-XQ4TB", { scale: 3 });
+      document.body.appendChild(d);
+      var t = d.querySelector("table.pgl-qrt");
+      var r = t.getBoundingClientRect();
+      var total = t.querySelectorAll("col").length;
+      var unit = r.width / total, worst = 0, rowsOk = true;
+      for (var y = 0; y < t.rows.length; y++) {
+        var row = t.rows[y], sum = 0;
+        for (var i = 0; i < row.cells.length; i++) {
+          var c = row.cells[i], want = unit * (c.colSpan || 1);
+          worst = Math.max(worst, Math.abs(c.getBoundingClientRect().width - want));
+          sum += c.colSpan || 1;
+        }
+        if (sum !== total) rowsOk = false;
+      }
+      var out = { rows: t.rows.length, cols: total, square: Math.abs(r.width - r.height) < 1,
+                  worstCellDrift: Math.round(worst * 100) / 100, rowsOk: rowsOk,
+                  zoom: getComputedStyle(document.documentElement).zoom };
+      d.remove();
+      return out;`);
+    // 33 modules + 8 quiet zone = 41 columns, every row spanning all of them, every module the same
+    // width, and the whole symbol square.
+    const good = box && box.rows === 41 && box.cols === 41 && box.square === true &&
+                 box.rowsOk === true && box.worstCellDrift < 1;
+    ok(good === true,
+      "every module of the printed QR is the same size and the symbol is square" +
+      (good ? "" : " — got " + JSON.stringify(box)));
+  }
+  ok(await ev(`return window.__doc.indexOf("<script") === -1 && window.__doc.indexOf("<link ") === -1;`) === true,
+    "the exported document is self-contained — it must render years from now, offline");
+
   /* ── 9. Navigation + close ───────────────────────────────────────────────── */
   console.log("\n— navigation —");
   await ev(`SMD_PGLOG_SCREENS.go("progress"); return 1;`);

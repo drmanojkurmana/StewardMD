@@ -94,6 +94,15 @@ export function payloadFor(kind, doc) {
              period: e.period, counts: e.counts, attestedBy: e.attestedBy,
              attestedByReg: e.attestedReg, attestedAt: e.attestedAt };
   }
+  /* A CERTIFICATE covers a document, not a single record. What its signature has to pin down is:
+   * whose logbook, what was frozen (the content digest, which itself covers every entry), who signed
+   * and with which registration number, and when it was issued. Change any of those and the QR must
+   * stop saying "valid" — including a signature list that quietly gained a name. */
+  if (kind === "certificate") {
+    return { id: e.id, residentId: e.residentId, orgId: e.orgId, scope: e.scope,
+             contentDigest: e.contentDigest, entryCount: e.entryCount, issuedAt: e.issuedAt,
+             signers: (e.signatures || []).map((x) => [x.role, x.by, x.reg, x.at].join("~")).join(";") };
+  }
   throw new Error("pglog_verify_unknown_kind");
 }
 
@@ -117,6 +126,13 @@ export function canonical(kind, payload) {
     return ["v2", "assessment", f(p.id), f(p.residentId), f(p.orgId), f(p.templateId),
             f(p.outcome), f(p.total == null ? "" : p.total), f(p.maxTotal == null ? "" : p.maxTotal),
             f(p.assessor), f(p.assessorReg), f(p.assessedAt)].join("|");
+  }
+  // The certificate's frozen CONTENT — hashed separately from the certificate record, because the
+  // content digest has to be computable before anybody has signed anything.
+  if (kind === "certificate_content") return ["v2", "certcontent", f(p.canon)].join("|");
+  if (kind === "certificate") {
+    return ["v2", "certificate", f(p.id), f(p.residentId), f(p.orgId), f(p.scope),
+            f(p.contentDigest), f(p.entryCount), f(p.issuedAt), f(p.signers)].join("|");
   }
   if (kind === "attestation") {
     return ["v2", "attestation", f(p.id), f(p.residentId), f(p.orgId), f(p.kind2 || p.attKind),

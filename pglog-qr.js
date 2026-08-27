@@ -401,6 +401,76 @@
       '<rect width="' + total + '" height="' + total + '" fill="#fff"/>' +
       '<path d="' + d.join("") + '" fill="#000"/></svg>';
   }
+  /* THE SAME QR AS A TABLE OF CELLS, for the PDF.
+   *
+   * The exported document goes through two very different renderers: WKWebView on iOS (which
+   * produces a real PDF and handles inline SVG perfectly) and an html2canvas + jsPDF fallback
+   * everywhere else — and html2canvas's inline-SVG support is unreliable. A QR that silently fails
+   * to render is worse than no QR at all, because the document still SAYS it is verifiable.
+   *
+   * A table of background-coloured cells renders identically in every engine that can lay out HTML,
+   * which is the lowest common denominator we can count on. Rows are run-length encoded into
+   * colspans, so a typical code is a few hundred cells rather than a few thousand.
+   *
+   * NO BORDERS, NO PADDING, border-collapse — a hairline between modules is a QR a scanner rejects.
+   * The class is `pgl-qrt`, NOT `pgl-qr`: the in-app screen block already owns `.pgl-qr` and styles it
+   * as a flex card, which would tear this table apart if the two ever met on one page.
+   */
+  function toTableHtml(text, opts) {
+    opts = opts || {};
+    var q = opts.quiet == null ? 4 : opts.quiet;
+    var px = opts.scale || 3;
+    var qr = encode(text, opts);
+    var n = qr.size, total = n + q * 2;
+    var dark = opts.dark || "#000", lightC = opts.light || "#fff";
+    /* AN EXPLICIT COLGROUP, one <col> per module.
+     *
+     * `table-layout: fixed` takes its column widths from the FIRST ROW (or from a colgroup) — and the
+     * first row of a QR is entirely quiet zone, which run-length encodes to a SINGLE cell spanning
+     * the whole width. That leaves the algorithm nothing per-column to read, and the widths then
+     * depend on how each row happens to encode rather than on the symbol. A QR with uneven modules
+     * still looks like a QR and still fails to scan, so the columns are pinned explicitly here
+     * instead of being left to the run lengths.
+     *
+     * The table also carries no explicit height: the rows define it, so the symbol is square by
+     * construction rather than by a height the browser may stretch to fill. (Do not test this in
+     * absolute pixels — the app carries a root `zoom` for the OS text-size setting, so a 123px QR
+     * measures 132.8px at zoom 1.08. Uniformity and squareness are the properties that matter.) */
+    var h = ['<table class="pgl-qrt" style="width:' + (total * px) + 'px;background:' + lightC + '">'];
+    h.push("<colgroup>");
+    for (var ci = 0; ci < total; ci++) h.push('<col style="width:' + px + 'px">');
+    h.push("</colgroup>");
+    // The per-cell style is inline AND class-based: TABLE_CSS carries the geometry (which every cell
+    // shares, so it is not repeated 600 times), while the colour stays inline so the code still
+    // scans if a renderer drops the stylesheet.
+    function cell(on, span) {
+      return '<td colspan="' + span + '" style="background:' + (on ? dark : lightC) + '"></td>';
+    }
+    for (var y = 0; y < total; y++) {
+      h.push("<tr>");
+      var run = 0, cur = false;
+      for (var x = 0; x < total; x++) {
+        var on = (y >= q && y < q + n && x >= q && x < q + n) ? !!qr.modules[y - q][x - q] : false;
+        if (x === 0) { cur = on; run = 1; continue; }
+        if (on === cur) { run++; continue; }
+        h.push(cell(cur, run)); cur = on; run = 1;
+      }
+      h.push(cell(cur, run));
+      h.push("</tr>");
+    }
+    h.push("</table>");
+    return h.join("");
+  }
+
+  /* The geometry every QR cell shares. MUST be present in the document that embeds toTableHtml() —
+   * a hairline border or a stray line-height between modules is a code a scanner rejects. */
+  function tableCss(px) {
+    px = px || 3;
+    return ".pgl-qrt{border-collapse:collapse;border-spacing:0;table-layout:fixed}" +
+      ".pgl-qrt tr{height:" + px + "px}" +
+      ".pgl-qrt td{padding:0;margin:0;border:0;line-height:0;font-size:0;height:" + px + "px}";
+  }
+
   function toDataUri(text, opts) {
     // encodeURIComponent, not base64: it keeps the SVG readable in a data: URI and avoids btoa's
     // Latin-1 limitation entirely.
@@ -408,7 +478,7 @@
   }
 
   var API = {
-    encode: encode, toSvg: toSvg, toDataUri: toDataUri,
+    encode: encode, toSvg: toSvg, toDataUri: toDataUri, toTableHtml: toTableHtml, tableCss: tableCss,
     // exported for the tests that check them against published reference values
     _gfMul: gfMul, _rsGenerator: rsGenerator, _rsEncode: rsEncode,
     _formatBits: formatBits, _versionBits: versionBits,
