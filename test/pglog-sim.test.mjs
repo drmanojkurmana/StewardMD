@@ -239,6 +239,32 @@ test("HARD 1 · a verified entry cannot be silently rewritten", async () => {
   assert.ok(after.revisions.length >= 1, "the trail is persisted, not just returned");
 });
 
+/* ══ SECURITY ══ an assessment records ONE person's judgement, under their registration ══
+ * Found by audit: completeAssessment/signAssessment scoped on `cur.departmentId`, a field
+ * M.assessment() never produces, so withinScope() short-circuited to true and department scope was
+ * never evaluated. Neither checked who the assessor was, so a second faculty member could take over
+ * another's form - M.assess sets out.assessor = actor - or sign it under their own council number. */
+test("SECURITY · a second faculty member cannot take over or sign another's assessment", async () => {
+  const db = fakeDb();
+  const { residents } = await buildCollege(db);
+  const res = residents[4];
+  const guide = guideOf(res.departmentId);
+  const other = "fb:sim-other-faculty";
+
+  const a = await S.createAssessment(env, ORG, { residentId: res.id, templateId: "mini-cex" }, guide, db);
+  assert.equal(a.assessor, guide, "the creator is recorded as the assessor");
+
+  await assert.rejects(
+    () => S.completeAssessment(env, a.id, { scores: {} }, null, other, db),
+    (e) => /not_the_assessor/.test(String((e && e.message) || "")),
+    "another faculty member must not complete someone else's assessment");
+
+  await assert.rejects(
+    () => S.signAssessment(env, a.id, other, db),
+    (e) => /not_the_assessor/.test(String((e && e.message) || "")),
+    "another faculty member must not sign it under their own registration");
+});
+
 /* ══ HARD 2 ══ cross-resident reads must never carry clinical identifiers ══ */
 test("HARD 2 · an institution-wide viewer never receives case refs or diagnoses", async () => {
   const db = fakeDb();

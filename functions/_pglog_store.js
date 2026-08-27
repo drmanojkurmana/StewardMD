@@ -580,9 +580,23 @@ export async function completeAssessment(env, id, patch, template, actorUid, dep
   const d = D(deps);
   const cur = await getAssessment(env, id, deps);
   if (!cur) throw e404("assessment");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
-    { target: { departmentId: cur.departmentId } }, deps);
   const res = await getResident(env, cur.residentId, deps);
+  /* Scope on the RESIDENT's department, not the assessment's. M.assessment() has no departmentId
+   * field at all, so `cur.departmentId` was always undefined and withinScope() short-circuited to
+   * true - department scope was never evaluated here, only on create. */
+  const gA = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
+    { target: { departmentId: res && res.departmentId } }, deps);
+  // A signed assessment is evidence. Completing over it silently reset status to "completed", minted
+  // a fresh verifyCode and re-stamped the signature block.
+  if (cur.status === "signed") throw e409("assessment_signed");
+  /* An assessment names its assessor, and signatureFields() stamps that person's council
+   * registration on it. Without this, faculty X could take over faculty Y's draft: M.assess sets
+   * out.assessor = actor, so the record silently changed whose judgement it recorded. */
+  if (cur.assessor && !M.sameActor(cur.assessor, actorUid) && gA.role !== "pg_hod") {
+    throw Object.assign(new Error("not_the_assessor"), { status: 403,
+      userMessage: "This assessment was started by another faculty member, so only they (or the " +
+        "head of department) can complete it." });
+  }
   // FAIL CLOSED. RULE 6 (an assessor may not assess themselves) compares against residentUid; if the
   // resident cannot be resolved that comparison silently passes, which is the exact "namespace
   // mismatch disables the guard" failure the verify() path was designed against. (R1, finding I6.)
@@ -608,8 +622,19 @@ export async function signAssessment(env, id, actorUid, deps) {
   const d = D(deps);
   const cur = await getAssessment(env, id, deps);
   if (!cur) throw e404("assessment");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
-    { target: { departmentId: cur.departmentId } }, deps);
+  const subject = await getResident(env, cur.residentId, deps);
+  // Same phantom-field bug as completeAssessment: scope on the resident's department.
+  const gS = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS,
+    { target: { departmentId: subject && subject.departmentId } }, deps);
+  /* The signature has to belong to the person whose judgement the form records. M.signAssessment
+   * checked nothing about identity, so a second faculty member could sign someone else's completed
+   * form under their own council registration - the same forgery the entry path blocks with
+   * requireNamedFor(). The head of department may still sign when the assessor has left. */
+  if (cur.assessor && !M.sameActor(cur.assessor, actorUid) && gS.role !== "pg_hod") {
+    throw Object.assign(new Error("not_the_assessor"), { status: 403,
+      userMessage: "Only the faculty member who made this assessment, or the head of department, " +
+        "can sign it." });
+  }
   const snapS = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
   const out = Object.assign(M.signAssessment(cur, actorUid, d.now()),
     signatureFields("signed", snapS, d.now()));
