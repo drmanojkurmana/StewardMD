@@ -128,6 +128,29 @@ const { L } = load();
   ok("asks for a verify line", /Verify against local protocol/.test(L.SYSTEM));
 }
 
+// ── greetings: "hi" must not become a clinical answer ──
+// Reported from a real phone: "hi" came back as an answer about vancomycin. SYSTEM gives the model
+// no way to NOT answer clinically, so with no question it invented a topic.
+{
+  const { L: LG } = load();
+  for (const q of ["hi", "Hi", "hello", "hey", "hiya", "Hi there", "hello doctor", "good morning", "hey MaiK", "namaste"])
+    ok(`greeting detected: ${JSON.stringify(q)}`, LG.isGreeting(q) === true);
+
+  // THE regression this must never cause. A greeting carrying a real question routes CLINICAL -
+  // "Hi rx of uti" once got a canned hello instead of an answer (see maik-greeting-route.test.mjs).
+  for (const q of ["hi rx of uti", "hello what is the dose of vancomycin", "good morning, meropenem in meningitis",
+                   "vancomycin dose", "hyponatremia", ""])
+    ok(`NOT a greeting: ${JSON.stringify(q)}`, LG.isGreeting(q) === false);
+
+  // The fix must not be paid for on every clinical answer: SYSTEM is prefill on the critical path.
+  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 900);
+  ok("greetings get their own, shorter prompt", LG.SYSTEM_GREET.length < LG.SYSTEM.length);
+  ok("greeting prompt asks for one short sentence", /one short/i.test(LG.SYSTEM_GREET));
+  ok("greeting prompt keeps it non-clinical", /nothing clinical/i.test(LG.SYSTEM_GREET));
+  // No canned app-side string: the model still writes the words.
+  ok("no scripted reply text anywhere", !/Hello\. I can help/i.test(SRC));
+}
+
 // ── an ungrounded answer must NOT claim StewardMD citations ──
 {
   const { L: L2 } = load();

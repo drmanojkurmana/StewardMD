@@ -78,6 +78,34 @@
     "and say it varies.\n" +
     "End with one line: \"Verify against local protocol.\"";
 
+  /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
+   * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
+   * carrying a real question routes clinical, and a narrow keyword allow-list once broke it. */
+  var GREET_HEAD = /^(hi+|hey+|hello+|helo|yo|hiya|namaste|namaskar|salaam|salam|greetings|good|morning|evening)$/;
+  var GREET_TAIL = /^(morning|afternoon|evening|day|there|maik|doctor|doc|sir|madam|mate|again)$/;
+  function isGreeting(q) {
+    var toks = String(q == null ? "" : q).toLowerCase().replace(/[^a-z\s']/g, " ").split(/\s+/).filter(Boolean);
+    if (!toks.length || toks.length > 3) return false;
+    if (!GREET_HEAD.test(toks[0])) return false;
+    for (var i = 1; i < toks.length; i++) if (!GREET_TAIL.test(toks[i])) return false;
+    return true;
+  }
+
+  /* Greetings get their OWN system prompt rather than an extra rule bolted onto SYSTEM.
+   *
+   * "hi" came back as an answer about vancomycin on a real phone. SYSTEM gives the model no way to
+   * NOT answer clinically - it must open with a sentence answering the question and end with the
+   * verify line - so with no question to answer, it invents a topic.
+   *
+   * Adding a rule to SYSTEM was the obvious fix and the wrong one: SYSTEM is PREFILL on every single
+   * answer, prefill is the whole latency story on-device, and the suite pins it under 900 chars for
+   * that reason. A separate short prompt costs nothing on clinical answers and makes the greeting
+   * itself faster. Still no canned app-side text: the model writes the reply, which is what was
+   * asked for ("WHY IS HI NOT BEING DIRECTED DIRECTLY TO GEMMA TO RESPOND"). */
+  var SYSTEM_GREET =
+    "You are MaiK, clinical decision support for doctors. Reply to this greeting in one short, " +
+    "friendly sentence and ask what they would like to know. Nothing clinical.";
+
   /* Reasoning leak guard.
    *
    * Observed on device: an answer that began "thought The user wants me to act as MaiK, a clinical
@@ -464,6 +492,8 @@
            *   SYSTEM_IMAGE    a first look at an image: findings, then interpretation.
            */
           system: (opts && opts.systemOverride) ? opts.systemOverride
+                // A greeting with no image: answer it as a greeting, not as a clinical question.
+                : (!images.length && isGreeting(pkg && pkg.question)) ? SYSTEM_GREET
                 : !images.length ? SYSTEM
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
@@ -597,7 +627,7 @@
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
-    isFollowUp: isFollowUp, stripReasoning: stripReasoning,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
     warm: warm, isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release
