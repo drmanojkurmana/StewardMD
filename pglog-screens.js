@@ -561,7 +561,9 @@
     return wrap(
       '<div class="pgl-card"><h3>' + esc(I.orgName || (state.ctx && state.ctx.orgName) || "Your institution") + "</h3>" +
       '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">Institution code</p>' +
-      '<div style="font:800 20px var(--sans);letter-spacing:.06em;color:var(--pgl-accent,#0e6e63)">' +
+      /* break-all + a size that fits: the fallback value is a 32-char org id and it ran straight off
+       * the edge of the card. A code a human has to read out to a resident must never be clipped. */
+      '<div style="font:800 19px/1.3 var(--sans);letter-spacing:.04em;color:var(--pgl-accent,#0e6e63);word-break:break-all;user-select:all">' +
         esc(I.orgCode || (state.ctx && state.ctx.orgCode) || orgId) + "</div>" +
       '<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin-top:8px">' +
       "Share this with your residents and faculty. They enter it under Set up." + "</p></div>" +
@@ -575,7 +577,8 @@
           }).join("")
         : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
       '<div class="pgl-field"><label for="pglSpec">Specialty</label>' +
-      '<select id="pglSpec">' + (specOpts || '<option value="">Loading the NMC list…</option>') + "</select>" +
+      '<select id="pglSpec"><option value="" selected disabled>Choose a specialty…</option>' +
+        (specOpts || '<option value="" disabled>Loading the NMC list…</option>') + "</select>" +
       '<div class="hint">From PGMER-2023 Annexure-1 and Annexure-2. 15 specialties have a full curriculum pack; the rest use the PGMER requirements.</div></div>' +
       '<button class="pgl-btn wide" data-pgl="create-prog"' + (I.busy ? " disabled" : "") + ">Add programme</button></div>" +
 
@@ -622,6 +625,10 @@
         .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
     }
     var cur = C();
+    /* Resolve the SHAREABLE code, not the internal id. /me returns orgCode, but if it is empty for
+     * any reason the screen was falling back to the raw 32-char org id and presenting THAT as the
+     * "Institution code" - which is what shipped, unwrapped and overflowing its card. myInstitutions()
+     * carries the full org record, so ask it directly rather than depending on one field of /me. */
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
       (cur && cur.loadSpecialties)
@@ -631,6 +638,13 @@
     ]).then(function (r) {
       state.inst.programmes = r[0];
       state.inst.specialties = r[1];
+      if (!state.inst.orgCode && st.myInstitutions) {
+        return st.myInstitutions().then(function (list) {
+          (list || []).forEach(function (o) {
+            if (o && o.id === org) { state.inst.orgCode = o.code || ""; state.inst.orgName = o.name || ""; }
+          });
+        }, function () {});
+      }
     });
   }
 
