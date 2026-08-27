@@ -73,7 +73,9 @@ function decodePayload(token) {
 // Set the verified custom claim (via the shared Firebase-admin helper). Uses the clobber-safe
 // merge so verifying an already-Pro doctor keeps their pro/proExp claim instead of wiping it.
 async function setVerifiedClaim(env, uid, regNo) {
-  await mergeUserClaims(env, uid, { verified: true, regNo });
+  // verifiedAt starts the free Pro week (_entitlement.js accessState). Without it the doctor is
+  // verified but holds no entitlement, which reads to them as "verification did nothing".
+  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), regNo });
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
@@ -330,6 +332,9 @@ export async function onRequest(context) {
         await env.FOLLOWCARE_R2.put(photoKey, bytes, { httpMetadata: { contentType: mime } });
       }
     } catch (e) { photoKey = ""; }
+    // Owner decision 2026-08-27: full access WHILE PENDING, so review latency is never an outage
+    // for someone who did everything right. The claim is what _entitlement.js accessState() reads.
+    try { await mergeUserClaims(env, uid, { provUntil: Date.now() + PROVISIONAL_DAYS * 86400000 }); } catch (e) {}
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",

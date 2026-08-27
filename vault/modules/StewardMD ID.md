@@ -32,6 +32,14 @@ using a feature.
 - Mint and the email index are **transactions**: `{smdId}` aborts + regenerates on collision, and
   `e_{hash}` never overwrites a pointer owned by a different uid (one email, one account).
 
+## Access tiers (2026-08-27)
+Pro is an entitlement of a **verified** account, decided server-side in `functions/_entitlement.js`
+`accessState()`/`isPro()` from CLAIMS ONLY (`verified`, `verifiedAt`, `provUntil`) - no KV read on
+the hot path. Verified doctor: Pro free for 7 days, then paid. Signed up but unverified: free tier,
+account removed at day 7 (sweep is built but OFF, see [[Flags]]). Guest: 300 s per session, 2 per day
+(`app.js` + `account.js`, surfaced by `guest-timer.js`). Pending manual review counts as full access.
+Client mirror is `account.js` `SMD_PRO`, seeded from `smd_pro_last:<uid>` rather than `true`.
+
 ## Gotchas
 - **Never cache the ID without its uid.** Now that it is minted for everyone, sign-out → sign-in as
   another user happens in one page lifetime; a uid-less cache hands account B account A's ID, and it

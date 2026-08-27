@@ -197,6 +197,19 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_thorex_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
 | `smd_thorex_secure_egress` | OFF | **BLOCKED ON SERVER.** The proxy fails CLOSED with 503 until THOREX_ANALYZE_URL is provisioned. Turning it on breaks analysis. |
 
+### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>1 ON · 2 OFF</sub>
+
+Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localStorage` flags.
+
+| Flag | Def | Why |
+|---|---|---|
+| `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
+| `UNVERIFIED_PURGE_ON` | OFF | **DESTRUCTIVE.** Arms the 7-day unverified-account sweep. OFF = it reports what it would do and changes nothing. Warning emails send either way. |
+| `UNVERIFIED_PURGE_HARD_DELETE` | OFF | **IRREVERSIBLE.** Second switch: with it OFF the armed sweep *disables* an account (recoverable); ON it deletes the Firebase user, orphaning saved cases / ICU membership. |
+| `UNVERIFIED_PURGE_DAYS` | `7` | Age at which an unverified account is removed. |
+| `UNVERIFIED_WARN_DAYS` | `5` | Age at which the single warning email goes out. Nobody is removed who was never warned. |
+
 ## Reading the defaults
 
 - **ON does not mean released.** Many `def:true` entries carry a `PUBLIC-RELEASE-GATE` marker meaning the opposite of what it sounds like: they are open *for dev and testing* and must be **re-closed or owner-gated before a public release**. `queue-flags.js` says so at the top and tells you to `grep PUBLIC-RELEASE-GATE` and re-close every hit.

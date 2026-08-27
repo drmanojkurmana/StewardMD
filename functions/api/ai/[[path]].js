@@ -1222,7 +1222,7 @@ export async function onRequest(context) {
     try {
       if (action === "grant-pro") { await mergeUserClaims(env, uid, { pro: true }); ok = true; }
       else if (action === "revoke-pro") { await mergeUserClaims(env, uid, { pro: false }); ok = true; }
-      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true }); ok = true; }
+      else if (action === "verify") { await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null }); ok = true; }
       else if (action === "unverify") { await mergeUserClaims(env, uid, { verified: false }); ok = true; }
       else if (action === "disable") { ok = await setUserDisabled(env, uid, true); }
       else if (action === "enable") { ok = await setUserDisabled(env, uid, false); }

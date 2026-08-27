@@ -51,12 +51,21 @@
   window.SMD_OWNER_KEY = function () { return uid(); };
 
   /* -------- Pro entitlement (single source of truth) --------
-   * The SERVER decides (Firebase pro claim + launch promo + per-user trial); the client only
-   * caches the last /api/billing/status verdict. FAIL-OPEN: default true and keep the last known
-   * value on any fetch error, so a network blip never locks a clinician out. It only turns false
-   * when the server EXPLICITLY returns { pro:false } — which today never happens (launch promo
-   * active until 2026-09-15), so this is a no-op until the promo ends + enforcement flips. */
-  var _pro = true, _proState = null;
+   * The SERVER decides (verification → Firebase pro claim → the verified free week); the client
+   * only caches the last /api/billing/status verdict.
+   *
+   * FAIL-OPEN, BUT ONLY FOR SOMEONE WE HAVE ALREADY SEEN AS PRO (changed 2026-08-27). Seeding
+   * `_pro = true` for everyone was harmless while the launch promo granted Pro to all callers. Now
+   * that Pro requires a verified registration, that seed would flash Pro UI at an unverified
+   * account for as long as /api/billing/status takes to answer — and offline it would never be
+   * corrected. So the seed is the LAST KNOWN verdict FOR THIS UID, and false when there has never
+   * been one: a verified doctor on a ward with no signal still gets in, a brand-new unverified
+   * account does not. The server gates the actual features either way; this only stops the UI
+   * from promising something the server will refuse. */
+  function proCacheKey(u) { return "smd_pro_last:" + (u || "anon"); }
+  function loadProCache() { try { return localStorage.getItem(proCacheKey(uid())) === "1"; } catch (e) { return false; } }
+  function saveProCache(v) { try { localStorage.setItem(proCacheKey(uid()), v ? "1" : "0"); } catch (e) {} }
+  var _pro = loadProCache(), _proState = null;
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function idToken() { var u = fbUser(); try { return u && u.getIdToken ? u.getIdToken(false) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function syncStatus() {
@@ -65,7 +74,7 @@
       return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
     }).then(function (d) {
       _proState = d || null;
-      if (d && typeof d.pro === "boolean") _pro = d.pro;   // only an explicit boolean flips the cache
+      if (d && typeof d.pro === "boolean") { _pro = d.pro; saveProCache(_pro); }   // only an explicit boolean flips the cache
       return _proState;
     }, function () { return _proState; });                 // error → keep last known (fail-open)
   }
@@ -73,7 +82,7 @@
   function isPro() { return syncStatus().then(function () { return _pro; }); }
   function proState() { return _proState; }
   window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, TEST_PRO_EMAILS: [] };
-  onChange(function () { try { syncStatus(); } catch (e) {} });   // refresh on sign-in / provider change
+  onChange(function () { try { _pro = loadProCache(); } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
    * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer

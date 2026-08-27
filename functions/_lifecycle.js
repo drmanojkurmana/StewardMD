@@ -31,7 +31,8 @@ export async function getLifecycle(env, uid) {
 async function putLifecycle(env, uid, rec) {
   const kv = lcKv(env); if (!kv || !uid) return;
   // Mirror the sweep-relevant fields into metadata so list() can filter without reading each value.
-  const metadata = { firstSeen: rec.firstSeen || 0, upsellAt: rec.upsellAt || 0, verifiedAt: rec.verifiedAt || 0 };
+  const metadata = { firstSeen: rec.firstSeen || 0, upsellAt: rec.upsellAt || 0, verifiedAt: rec.verifiedAt || 0,
+                     purgeWarnedAt: rec.purgeWarnedAt || 0, purgedAt: rec.purgedAt || 0 };
   try { await kv.put(KEY(uid), JSON.stringify(rec), { metadata }); } catch (e) {}
 }
 
@@ -90,6 +91,88 @@ export async function sendProUpsellOnce(env, uid, { email, name } = {}) {
   if (ok) rec.upsellAt = Date.now();
   await putLifecycle(env, uid, rec);
   return { sent: ok };
+}
+
+/* ── Unverified-account sweep (owner decision, 2026-08-27) ────────────────────────────────────
+ * "Who signs up just gets access to FREE, with auto account deletion after 7 days."
+ *
+ * decidePurge() is deliberately PURE: given a lifecycle record and the account's claims it returns
+ * what should happen, with no network and no writes. Every skip rule below is a way for a real
+ * person to be spared, so they are worth reading as a list rather than trusting to a KV filter:
+ * KV list() metadata can be stale, claims are authoritative, and this is a destructive path.
+ *
+ * Returns { action, reason, ageDays } where action is one of:
+ *   "skip"    leave the account alone
+ *   "warn"    send the day-5 reminder (once)
+ *   "purge"   the account is due for removal (the CALLER decides disable vs delete)
+ */
+export const PURGE_DAYS_DEFAULT = 7;
+export const WARN_DAYS_DEFAULT = 5;
+
+export function purgeDays(env) {
+  const n = +(env && env.UNVERIFIED_PURGE_DAYS);
+  return Number.isFinite(n) && n > 0 ? n : PURGE_DAYS_DEFAULT;
+}
+export function warnDays(env) {
+  const n = +(env && env.UNVERIFIED_WARN_DAYS);
+  return Number.isFinite(n) && n > 0 ? n : WARN_DAYS_DEFAULT;
+}
+// The destructive switch. OFF by default: the sweep reports what it WOULD do and changes nothing
+// until the owner turns it on deliberately.
+export function purgeEnabled(env) {
+  const v = env && env.UNVERIFIED_PURGE_ON;
+  return v === "1" || v === 1 || v === true || v === "true";
+}
+// Even when the sweep is on, the default action is a REVERSIBLE disable. Hard delete is a second,
+// separate switch, because a StewardMD account can own ICU membership and saved clinical cases.
+export function hardDeleteEnabled(env) {
+  const v = env && env.UNVERIFIED_PURGE_HARD_DELETE;
+  return v === "1" || v === 1 || v === true || v === "true";
+}
+
+export function decidePurge(env, rec, claims, now) {
+  now = now || Date.now();
+  const c = claims || {};
+  const r = rec || {};
+  const ageDays = r.firstSeen ? (now - r.firstSeen) / 86400000 : null;
+
+  // --- reasons a real account is spared, checked against CLAIMS, not the KV metadata ---
+  if (c.verified === true) return { action: "skip", reason: "verified", ageDays };
+  if (c.provUntil && +c.provUntil > now) return { action: "skip", reason: "pending-review", ageDays };
+  // Never remove someone who paid us, verified or not. If that ever happens it is a refund
+  // conversation, not a cron job.
+  if (c.pro === true && (!c.proExp || +c.proExp > now)) return { action: "skip", reason: "paying", ageDays };
+  if (r.verifiedAt) return { action: "skip", reason: "verified-record", ageDays };
+  if (r.purgedAt) return { action: "skip", reason: "already-purged", ageDays };
+  if (!r.firstSeen) return { action: "skip", reason: "no-first-seen", ageDays };
+
+  const age = ageDays;
+  if (age >= purgeDays(env)) {
+    // Nobody is removed who was never told. If the warning has not gone out (a sweep that only
+    // started running today, an email that kept failing), warn now and purge on a later run.
+    if (!r.purgeWarnedAt) return { action: "warn", reason: "overdue-but-unwarned", ageDays };
+    return { action: "purge", reason: "unverified", ageDays };
+  }
+  if (age >= warnDays(env) && !r.purgeWarnedAt) return { action: "warn", reason: "approaching", ageDays };
+  return { action: "skip", reason: "too-young", ageDays };
+}
+
+// Stamp the day-5 warning (send-once guard).
+export async function markPurgeWarned(env, uid) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  rec.purgeWarnedAt = Date.now();
+  await putLifecycle(env, uid, rec);
+  return rec;
+}
+// Stamp the removal, so a re-run never touches the same account twice.
+export async function markPurged(env, uid, how) {
+  if (!lcKv(env) || !uid) return null;
+  const rec = (await getLifecycle(env, uid)) || { firstSeen: Date.now() };
+  rec.purgedAt = Date.now();
+  rec.purgedHow = how || "disable";
+  await putLifecycle(env, uid, rec);
+  return rec;
 }
 
 // List uids whose entry passes `pred(metadata)` — filtered from list() metadata, no per-key get.

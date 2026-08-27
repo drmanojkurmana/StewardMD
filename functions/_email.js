@@ -113,6 +113,24 @@ export function emailVerified(env, { email, name, regNo, council }) {
   });
 }
 
+/* Day-5 warning before an unverified account is removed. Sent ONCE (guarded by purgeWarnedAt in
+ * the lifecycle record) and always at least two days before the account is touched, so nobody
+ * loses access without having been told first. */
+export function emailVerifyReminder(env, { email, name, daysLeft }) {
+  var d = (daysLeft && +daysLeft > 0) ? +daysLeft : 2;
+  return sendBranded(env, {
+    to: email,
+    subject: "Verify your medical registration to keep your StewardMD account",
+    title: "Verify to keep your account",
+    preheader: "Your StewardMD account is not verified yet. Verify within " + d + " days to keep it.",
+    bodyHtml:
+      '<p style="font-size:14px;line-height:1.6">' + (name ? "Dr. " + esc(name) : "Hello") + ', StewardMD is for registered doctors, so every account has to be linked to a medical registration.</p>' +
+      '<p style="font-size:14px;line-height:1.6">Yours has not been verified yet. Please verify within <b>' + d + ' days</b> or the account will be removed.</p>' +
+      '<p style="font-size:14px;line-height:1.6">It takes about a minute: open <b>Account &amp; Verification</b> and upload your NMC or State Medical Council certificate, or enter your registration number with a government photo ID. Verified doctors get <b>Pro free for 7 days</b>.</p>' +
+      '<p style="font-size:13px;line-height:1.6;color:#5a7184">Already verified? You can ignore this email.</p>' + btn("Verify now"),
+  });
+}
+
 export function emailProConfirmation(env, { email, name, until, forever, trial }) {
   var dur = forever ? "lifetime access" : (trial ? "a 7-day free trial" : (until ? "access until " + until : "Pro access"));
   return sendBranded(env, {

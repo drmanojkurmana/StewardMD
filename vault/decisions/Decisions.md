@@ -5,6 +5,64 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · Pro is an entitlement of a VERIFIED account (three tiers)
+
+**The bug behind the ask.** "The app is not verifying anyone" was true, but not because the gate was
+off: `verify.js` has had `BETA_VERIFY_ALL = false` for a while and the forced gate does fire. The
+hole was in `functions/_entitlement.js` `isPro()`, whose FIRST line was `if (promoActive(env, now))
+return true` - the launch promo (to 15 Sep 2026) granted Pro to every caller **without ever reading
+`claims.verified`**. Nothing anywhere in the codebase consulted `verified` when deciding Pro. Eleven
+server modules gate on that one function, so the fix is one guard, not eleven.
+
+Secondary hole: the forced gate's "Skip for now" button AND its ✕ both called `startTrial()`, so any
+signed-in user got **7 days of full access** by tapping the close box.
+
+**Decision (owner).** Three tiers:
+
+| Who | What they get |
+|---|---|
+| Verified against NMC/SMC | **Pro free for 7 days** from the moment of verification, then paid |
+| Signed up, not verified | **Free tier only**; the account is removed after 7 days |
+| Guest (not signed up) | **300 s per session, 2 sessions per day** |
+| Proof uploaded, review pending | **Full access while pending** - owner review latency must never be a user-facing outage |
+
+**How.** `isPro()`/`entitlementState()` ask `accessState()` first, which reads **claims only**
+(`verified`, `verifiedAt`, `provUntil`) so the hot path stays free of KV/Firestore reads. When
+enforcement is on the promo deliberately does NOT apply - it is the exact hole being closed.
+`verifiedAt` is stamped at all three places that set `verified:true` (auto NMC, the owner's review
+dashboard, the admin console) and **backfilled** in `entitlementFor()` for doctors verified before
+this existed, so nobody who did the right thing blinks out of Pro on deploy day.
+
+**Trade-off, and it is a pricing decision:** enforcement effectively **ends the launch promo early**
+for unverified accounts. That is the point, but it is the owner's call to keep or revert -
+`VERIFY_REQUIRED_FOR_PRO=0` in KV restores the old contract with no deploy, and
+`test/entitlement-trial.test.mjs` pins that the flag-off path is byte-identical.
+
+**Client.** `account.js` seeded `_pro = true` for everyone and failed open. Harmless while the promo
+covered all; with verification enforced it would flash Pro UI at an unverified account. Now the seed
+is the **last known verdict for that uid** (`smd_pro_last:<uid>`), false when never seen - a verified
+doctor offline on a ward still gets in, a new unverified account does not.
+
+**Guest 300 s.** Already existed and was already correct (`app.js` writes
+`expiresAt: Date.now()+3e5`, ticks `Guest · M:SS`, wipes and reloads at zero; `account.js`
+`GUEST_MAX_PER_DAY = 2`). What was missing is that the clock lived in a chip nobody looks at. New
+`guest-timer.js` renders the same clock as a **top bar** (additive, never edits app.js) and carries a
+backstop teardown at zero, so auto-sign-out is a guarantee rather than a side effect of a chip having
+rendered.
+
+**Auto-deletion is built but OFF.** A StewardMD account can own ICU membership and saved clinical
+cases, so the destructive path is deliberately two switches deep: `UNVERIFIED_PURGE_ON` (default
+OFF - the sweep reports what it would do and changes nothing) and, only then,
+`UNVERIFIED_PURGE_HARD_DELETE` (default OFF - otherwise it **disables**, which is reversible).
+Day 5 sends one warning email; **nobody is removed who was never warned**, and verified, paying and
+pending-review accounts are all spared by explicit rules in `decidePurge()` rather than by a KV
+filter that can go stale.
+
+**Status:** 25/25 across `test/verify-gate.test.mjs` + `test/unverified-purge.test.mjs`, 14/14
+headless-Chrome `test/run-guest-bar-ui.mjs`, full suite 2531/2534 (the 2 failures are pre-existing
+`mock.module` issues in OPD/FollowCare, untouched here). Recovery point: tag
+`pre-verify-enforcement-2026-08-27`. NOT deployed. See [[StewardMD ID]].
+
 ## 2026-08-27 · MaiK on-device is a Pro feature, not a private beta
 
 **Decision:** `SMD_MAIK_ENGINE.gateActive()` is now **Pro only** - `window.SMD_PRO.isProSync()`.
