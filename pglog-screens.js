@@ -528,27 +528,64 @@
         ? '<div class="pgl-card"><h3>Your institutions</h3>' +
           '<p style="font-size:13px;color:var(--pgl-muted)">This device is not pointed at one yet. Pick it rather than creating a second.</p>' +
           mine.map(function (o) {
+            // Every org this account owns is listed here, clinics included - that is how an OPD
+            // clinic came to be adopted as "your institution". Name the kind on the row.
+            var clinic = o.kind !== "institution";
             return '<button class="pgl-row" data-pgl="pick-inst" data-id="' + attr(o.id) + '">' +
-              '<span class="pgl-row-ic">' + ic("apartment") + "</span>" +
+              '<span class="pgl-row-ic">' + ic(clinic ? "local_hospital" : "apartment") + "</span>" +
               '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(o.name || o.id) + "</span>" +
-              '<span class="pgl-row-s">' + esc(o.code || "") + "</span></span>" + ic("chevron_right") + "</button>";
+              '<span class="pgl-row-s">' + esc((o.code || "") + (clinic ? " · OPD clinic, not a PG institution" : " · PG institution")) +
+              "</span></span>" + ic("chevron_right") + "</button>";
           }).join("") + "</div>"
         : "";
+      /* NO self-serve create. A PG institution is provisioned for a college that licenses StewardMD,
+       * through the owner-gated /api/tenants route which also names its administrator. The server
+       * enforces that; showing a "Create institution" button here would only ever 403, and a
+       * self-appointed Academic Cell running a recognised programme is the thing being prevented. */
       return wrap(
         pick +
-        '<div class="pgl-card"><h3>' + (mine.length ? "Or create another" : "Create your institution") + "</h3>" +
+        '<div class="pgl-card"><h3>Institutions are set up by StewardMD</h3>' +
         "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
-        "This creates your institution in StewardMD and gives you its <b>institution code</b>. Residents " +
-        "and faculty enter that code to find the programme. You become its administrator." +
+        "A PG institution is provisioned for the college that licenses StewardMD. We create it, name its " +
+        "administrator, and issue the <b>institution code</b> - then that administrator adds programmes, " +
+        "faculty and residents from this console." +
+        "</p>" +
+        "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted);margin-top:10px\">" +
+        "If your college has already been set up, you were sent an institution code." +
         "</p></div>" +
-        '<div class="pgl-field"><label for="pglInstName">Institution name</label>' +
-        '<input type="text" id="pglInstName" placeholder="e.g. Test Medical College">' +
-        '<div class="hint">Already have a code? <button class="pgl-chip" data-pgl="go" data-r="setup-faculty">Enter it instead</button></div></div>' +
-        '<button class="pgl-btn wide" data-pgl="create-inst"' + (I.busy ? " disabled" : "") + '>' +
-          (I.busy ? "Creating…" : "Create institution") + "</button>" +
+        '<div class="pgl-field"><div class="hint">Have a code? ' +
+        '<button class="pgl-chip" data-pgl="go" data-r="setup-faculty">Enter it here</button></div></div>' +
         (I.msg ? banner(I.err ? "warn" : "info", I.err ? "error" : "check_circle", esc(I.msg)) : "")
       );
     }
+    /* If /me failed there is no code, no name, and no roster - the previous build still rendered the
+     * full card and presented the raw orgId under "Share this with your residents", which is both
+     * wrong and unactionable. Say what broke and offer the way out. */
+    if (I.ctxErr) {
+      return wrap(
+        '<div class="pgl-card"><h3>Cannot open this institution</h3>' +
+        '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+          esc(instErr(I.ctxErr, "This device is pointed at an institution the server did not return.")) +
+        "</p>" +
+        '<p style="font-size:12px;line-height:1.5;color:var(--pgl-muted);margin-top:10px">' +
+          (I.ctxErr.code === "signin_required"
+            ? "Your institution is on the server, not on this device. Sign in and reopen this screen."
+            : "Institution ID stored on this device") + "</p>" +
+        '<div style="font:600 12px/1.45 var(--mono,ui-monospace,monospace);color:var(--pgl-muted);word-break:break-all;user-select:all">' +
+          esc(orgId) + "</div></div>" +
+        // A signed-out user does not need a different institution, they need to sign in. Offering
+        // the picker there sends them round a loop that cannot succeed.
+        (I.ctxErr.code === "signin_required" ? ""
+          : '<button class="pgl-btn wide" data-pgl="clear-inst">Choose a different institution</button>')
+      );
+    }
+    var kind = (state.ctx && state.ctx.orgKind) || "";
+    var clinicWarn = kind && kind !== "institution"
+      ? banner("warn", "error",
+          "This is an OPD clinic, not a PG institution. Residents enrolled here will not be on a recognised " +
+          "programme. Create your medical college instead.") +
+        '<button class="pgl-btn wide" data-pgl="clear-inst">Choose or create the right institution</button>'
+      : "";
     var progs = I.programmes || [];
     var specs = I.specialties || [];
     var opts = progs.map(function (pr) {
@@ -559,12 +596,22 @@
         esc(sp.name + " (" + (sp.degree || "") + ")") + (sp.hasSpecialtyPack ? "" : " · generic pack") + "</option>";
     }).join("");
     return wrap(
+      clinicWarn +
       '<div class="pgl-card"><h3>' + esc(I.orgName || (state.ctx && state.ctx.orgName) || "Your institution") + "</h3>" +
-      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">Institution code</p>' +
-      '<div style="font:800 20px var(--sans);letter-spacing:.06em;color:var(--pgl-accent,#0e6e63)">' +
+      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+        ((I.orgCode || (state.ctx && state.ctx.orgCode)) ? "Institution code" : "Institution ID (no short code yet)") + "</p>" +
+      /* break-all + a size that fits: the fallback value is a 32-char org id and it ran straight off
+       * the edge of the card. A code a human has to read out to a resident must never be clipped. */
+      '<div style="font:800 19px/1.3 var(--sans);letter-spacing:.04em;color:var(--pgl-accent,#0e6e63);word-break:break-all;user-select:all">' +
         esc(I.orgCode || (state.ctx && state.ctx.orgCode) || orgId) + "</div>" +
       '<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin-top:8px">' +
-      "Share this with your residents and faculty. They enter it under Set up." + "</p></div>" +
+      /* Only invite sharing when there is something SHAREABLE. Telling the owner to hand a raw
+       * document id to their residents is how it got typed back into the setup field - and the
+       * setup field then upper-cased it, which is what broke every call. */
+      ((I.orgCode || (state.ctx && state.ctx.orgCode))
+        ? "Share this with your residents and faculty. They enter it under Set up."
+        : "This is an internal ID, not a shareable code. Reopen this screen once you are online to mint the institution code.") +
+      "</p></div>" +
 
       '<div class="pgl-card"><h3>PG programmes</h3>' +
       (progs.length
@@ -575,7 +622,8 @@
           }).join("")
         : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
       '<div class="pgl-field"><label for="pglSpec">Specialty</label>' +
-      '<select id="pglSpec">' + (specOpts || '<option value="">Loading the NMC list…</option>') + "</select>" +
+      '<select id="pglSpec"><option value="" selected disabled>Choose a specialty…</option>' +
+        (specOpts || '<option value="" disabled>Loading the NMC list…</option>') + "</select>" +
       '<div class="hint">From PGMER-2023 Annexure-1 and Annexure-2. 15 specialties have a full curriculum pack; the rest use the PGMER requirements.</div></div>' +
       '<button class="pgl-btn wide" data-pgl="create-prog"' + (I.busy ? " disabled" : "") + ">Add programme</button></div>" +
 
@@ -610,6 +658,12 @@
     if (e && e.userMessage) return e.userMessage;
     if (e && e.code === "forbidden") return "You do not have Academic Cell access to this institution.";
     if (e && e.code === "signin_required") return "Sign in to set up an institution.";
+    /* gate() -> e404("org") reaches the client as "not_found". It means this device holds an org id
+     * the server cannot resolve - created against a different environment, or since deleted. */
+    if (e && e.code === "institution_provisioning_required")
+      return "PG institutions are set up by StewardMD for the college that licenses it. Ask StewardMD to " +
+             "provision your institution and name its administrator - you will get an institution code to share.";
+    if (e && e.code === "not_found") return "The server does not have an institution with this ID. It may have been created on a different account or environment.";
     return fallback;
   }
   function loadInstitution() {
@@ -622,6 +676,19 @@
         .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
     }
     var cur = C();
+    /* ROOT CAUSE of the raw 32-char id showing as "Institution code": this screen reads the code from
+     * state.ctx (populated by /me, which does return orgCode), but "pick-inst" sets state.ctx = null
+     * and then calls loadInstitution() directly - never re-running ensureContext(). So ctx was null
+     * for the render that followed, state.inst was cleared alongside it, and BOTH code sources were
+     * empty, leaving only the orgId fallback. Re-establish the context here, where every caller of
+     * this screen routes through, instead of at each of the three call sites that null it. */
+    return ensureContext().then(function () {
+      // A stub context is not a context. It resolves, so the rejection branch never runs.
+      var cx = state.ctx;
+      state.inst.ctxErr = (cx && cx.stub)
+        ? Object.assign(new Error(cx.reason || "signin_required"), { code: cx.reason || "signin_required" })
+        : null;
+    }, function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
       (cur && cur.loadSpecialties)
@@ -631,6 +698,9 @@
     ]).then(function (r) {
       state.inst.programmes = r[0];
       state.inst.specialties = r[1];
+      if (!state.inst.orgCode && state.ctx && state.ctx.orgCode) state.inst.orgCode = state.ctx.orgCode;
+      if (!state.inst.orgName && state.ctx && state.ctx.orgName) state.inst.orgName = state.ctx.orgName;
+    });
     });
   }
 
@@ -1887,6 +1957,11 @@
       case "deptfilter":
         state.deptFilter[t.getAttribute("data-dim")] = t.getAttribute("data-v");
         return loadDept();
+      case "clear-inst": {
+        st.setContext({ orgId: "" });
+        state.ctx = null; state.dash = null; state.inst = {};
+        return loadInstitution().then(render, render);
+      }
       case "pick-inst": {
         st.setContext({ orgId: t.getAttribute("data-id") });
         state.ctx = null; state.dash = null; state.inst = {};
@@ -1954,7 +2029,9 @@
       }
       case "save-org": {
         var v = (state.host.querySelector("#pglOrg") || {}).value || "";
-        st.setContext({ orgId: v.trim().toUpperCase() });
+        // setContext normalises: SMD codes upper, a 32-char org id lower. Upper-casing here broke
+        // every pasted org id.
+        st.setContext({ orgId: v.trim() });
         state.ctx = null; state.dash = null;
         toast("Checking…");
         return enter("home");
@@ -2380,7 +2457,13 @@
         // yet, or offline, or running on-device by choice.
         var normal = { signin_required: 1, forbidden: 1, server_disabled: 1, offline: 1, store_missing: 1 };
         if (e && (normal[e.code] || e.status === 401 || e.status === 403)) {
-          state.ctx = state.ctx || { role: "viewer", caps: [], resident: null };
+          /* MARK IT. This stub is deliberate - a resident who is not linked yet gets their own
+           * screen rather than an error - but ensureContext() short-circuits on `if (state.ctx)`,
+           * so an unmarked stub silently becomes the permanent answer for EVERY screen, /me is
+           * never retried, and surfaces that genuinely need an org (the Academic Cell console)
+           * render an empty institution instead of saying "you are signed out". */
+          state.ctx = state.ctx || { role: "viewer", caps: [], resident: null,
+                                     stub: true, reason: (e && e.code) || "signin_required" };
           state.dash = state.dash || null;
           render();
           return;

@@ -31,7 +31,10 @@ function load(env = {}) {
       route: function (q) { return this.refine(q); }
     }
   };
-  if (env.gate || env.pro !== undefined) win.SMD_PRO = { isProSync: () => (env.pro !== undefined ? env.pro : !!env.gate) };
+  if (env.gate || env.pro !== undefined) win.SMD_PRO = {
+    isProSync: () => (env.pro !== undefined ? env.pro : !!env.gate),
+    proKnown: () => (env.proKnown !== undefined ? env.proKnown : true),
+  };
   if (env.xaccess) win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
   if (env.runtime) {
     win.SMD_MAIK_LOCAL = { answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); } };
@@ -567,6 +570,46 @@ function load(env = {}) {
      /Included with Pro/.test(E.settingsHTML()) && !/access code/i.test(E.settingsHTML()));
   ok("the on-device row is badged Pro, like MaiK Cloud", />Pro</.test(E.settingsHTML()));
   ok("no em-dash in the new app-facing copy", !/Included with Pro[^<]*\u2014/.test(E.settingsHTML()));
+}
+
+/* == The regression that made on-device look broken after the Pro gate shipped ================
+ * gateActive() is read SYNCHRONOUSLY while painting, but /billing/status answers after that paint.
+ * Seeding _pro from a per-uid cache that had never been written meant the FIRST launch of a build
+ * started at false, so the row rendered locked and, with nothing listening for the flip, stayed
+ * locked. Two halves: do not claim "not Pro" before you know, and re-render when you find out. */
+{
+  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
+  const h = E.settingsHTML();
+  ok("unknown Pro says CHECKING, not 'subscribe'", /Checking your subscription/.test(h));
+  ok("unknown Pro never shows the upsell copy", !/Subscribe to unlock/.test(h));
+}
+{
+  const { E } = load({ pro: false, proKnown: true, runtime: true, pack: true });
+  const h = E.settingsHTML();
+  ok("a KNOWN non-Pro account does get the upsell", /Subscribe to unlock/.test(h));
+  ok("...and not the checking state", !/Checking your subscription/.test(h));
+}
+{
+  // An older account.js with no proKnown() must not break the row.
+  const { win, E } = load({ pro: false, runtime: true, pack: true });
+  delete win.SMD_PRO.proKnown;
+  ok("missing proKnown() degrades to the upsell, never to a blank row",
+     /Subscribe to unlock/.test(E.settingsHTML()));
+}
+ok("the module re-renders when Pro flips (watchPro is wired)", /smd:pro|onProChange/.test(SRC));
+ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slice(SRC.indexOf("function watchPro"))));
+
+/* == Dark mode: only use CSS vars the app actually defines ====================================
+ * The picker cards were background:var(--card,#fff). --card is defined NOWHERE in StewardMD, so it
+ * always resolved to #fff - a white card in dark mode - while the text on it used --ink, which DOES
+ * flip to light. Light text on a permanently white card. Reported from a real phone.
+ * --mk-* is not a fix either: that palette is scoped to #maikSheet, and this renders in Settings. */
+{
+  ok("no undefined --card token", !/var\(--card/.test(SRC));
+  ok("cards use --panel, which is globally defined and flips", /var\(--panel/.test(SRC));
+  // --mk-* only exists inside #maikSheet; using it in the Settings surface silently falls back.
+  const settingsFn = SRC.slice(SRC.indexOf("function settingsHTML"), SRC.indexOf("function modelRowHTML"));
+  ok("the Settings surface does not rely on the sheet-scoped --mk-* palette", !/var\(--mk-/.test(settingsFn));
 }
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);

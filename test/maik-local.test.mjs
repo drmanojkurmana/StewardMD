@@ -52,7 +52,9 @@ function load({ tokens = ["Hel", "lo ", "world"], noPlugin = false, loadFails = 
     SMD_MAIK_MODELS: {
       PACKS: {
         "maik-mxcore": { label: "MAiK MxCore", actual: "MedGemma 1.5 4B (Q4_K_M)", nCtx: 4096, nPredict: 512 },
-        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true }
+        "maik-apex": { label: "MAiK Apex", actual: "MedPsy 4B (Q5_K_M, imatrix)", nCtx: 4096, nPredict: 768, noThink: true, flagship: true },
+        // Entry tier, Qwen3-1.7B based like Apex, so it needs the same thinking suppression.
+        "maik-lite": { label: "MAiK Lite", actual: "MedPsy 1.7B (Q4_K_M, imatrix)", nCtx: 4096, nPredict: 512, noThink: true }
       },
       pathFor: async () => "/var/mobile/Data/maik-models/medgemma.gguf",
       totalBytes: () => 2.5e9
@@ -124,6 +126,29 @@ const { L } = load();
   ok("mg/kg is scoped, not forbidden", /Use mg\/kg only when/.test(L.SYSTEM));
   ok("no bare prohibitions left", !/\bnot a made-up\b|\bNever invent\b/.test(L.SYSTEM));
   ok("asks for a verify line", /Verify against local protocol/.test(L.SYSTEM));
+}
+
+// ── greetings: "hi" must not become a clinical answer ──
+// Reported from a real phone: "hi" came back as an answer about vancomycin. SYSTEM gives the model
+// no way to NOT answer clinically, so with no question it invented a topic.
+{
+  const { L: LG } = load();
+  for (const q of ["hi", "Hi", "hello", "hey", "hiya", "Hi there", "hello doctor", "good morning", "hey MaiK", "namaste"])
+    ok(`greeting detected: ${JSON.stringify(q)}`, LG.isGreeting(q) === true);
+
+  // THE regression this must never cause. A greeting carrying a real question routes CLINICAL -
+  // "Hi rx of uti" once got a canned hello instead of an answer (see maik-greeting-route.test.mjs).
+  for (const q of ["hi rx of uti", "hello what is the dose of vancomycin", "good morning, meropenem in meningitis",
+                   "vancomycin dose", "hyponatremia", ""])
+    ok(`NOT a greeting: ${JSON.stringify(q)}`, LG.isGreeting(q) === false);
+
+  // The fix must not be paid for on every clinical answer: SYSTEM is prefill on the critical path.
+  ok("SYSTEM is untouched by the greeting fix", LG.SYSTEM.length < 900);
+  ok("greetings get their own, shorter prompt", LG.SYSTEM_GREET.length < LG.SYSTEM.length);
+  ok("greeting prompt asks for one short sentence", /one short/i.test(LG.SYSTEM_GREET));
+  ok("greeting prompt keeps it non-clinical", /nothing clinical/i.test(LG.SYSTEM_GREET));
+  // No canned app-side string: the model still writes the words.
+  ok("no scripted reply text anywhere", !/Hello\. I can help/i.test(SRC));
 }
 
 // ── an ungrounded answer must NOT claim StewardMD citations ──
@@ -226,7 +251,20 @@ const { L } = load();
   const { L } = load();
   const q = { question: "empiric antibiotic for pyogenic liver abscess" };
 
-  ok("a pack with noThink gets the switch appended", /\/no_think\s*$/.test(L.buildPrompt(q, "maik-apex")));
+  /* Both switches, because only one of them can work and buildPrompt cannot know which: /no_think is
+     read by the Qwen3 CHAT TEMPLATE, but this engine sends a RAW prompt, so it can be ignored as
+     plain text. The closed empty <think></think> needs no template and makes the model resume as if
+     reasoning already happened. Registry-driven, so it covers Apex AND Lite. */
+  {
+    const p = L.buildPrompt(q, "maik-apex");
+    ok("a pack with noThink still gets Qwen3's own switch", /\/no_think/.test(p));
+    ok("...and an empty thinking block, which works without a chat template", /<think>\s*<\/think>\s*$/.test(p));
+    ok("the block is CLOSED - an unterminated one would make stripReasoning() bin the answer",
+       (p.match(/<think>/g) || []).length === (p.match(/<\/think>/g) || []).length);
+    ok("the question still precedes both switches", p.indexOf("liver abscess") < p.indexOf("/no_think"));
+    // Same treatment for the 1.7B entry tier - this is the pack the slowdown was reported on.
+    ok("MAiK Lite gets it too", /<think>\s*<\/think>\s*$/.test(L.buildPrompt(q, "maik-lite")));
+  }
   ok("a pack without noThink does NOT", !/no_think/.test(L.buildPrompt(q, "maik-mxcore")));
   ok("no pack id given behaves as before", !/no_think/.test(L.buildPrompt(q)));
   ok("an unknown pack id does not crash or inject", !/no_think/.test(L.buildPrompt(q, "nope")));

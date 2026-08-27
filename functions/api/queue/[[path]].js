@@ -17,7 +17,7 @@
  */
 import { queueEnabled, isQueueConfigured, mintDisplayToken, verifyDisplayToken } from "../../_queue.js";
 import { identify } from "../../_usage.js";
-import { ownerEmails } from "../../_adminauth.js";
+import { ownerEmails, ownerOK } from "../../_adminauth.js";
 // NOTE: roleForActor is deliberately NOT imported. It prefers actor.role, which resolveActor
 // hardcodes to "viewer" for staff sessions, so using it here would silently demote every nurse
 // and receptionist to read-only. Org roles resolve through ORG.authorizeOrg / whoami instead.
@@ -544,7 +544,16 @@ export async function onRequest(context) {
       const azOrg = async (cap, target) => ORG.authorizeOrg(env, actor, body.orgId, cap, target);
       const deny = (az) => json({ ok: false, error: az.reason || "forbidden" }, az.reason === "org_not_found" ? 404 : 403, request);
       const needAccount = () => actor.kind !== "firebase";   // creating an org needs a StewardMD account (= the owner)
-      if (seg === "org" && !sub) { if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request); return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request); }
+      if (seg === "org" && !sub) {
+        if (needAccount()) return json({ ok: false, error: "account_required" }, 403, request);
+        /* A PG institution is SOLD, not self-served: it is provisioned for a college through the
+         * owner-gated /api/tenants route, which also names its admin. Anyone may still create a
+         * clinic here - that is the existing OPD flow and is unchanged - but minting an institution
+         * would put a self-appointed "Academic Cell" in charge of a recognised programme. */
+        if (String(body && body.kind) === "institution" && !(await ownerOK(request, env)))
+          return json({ ok: false, error: "institution_provisioning_required" }, 403, request);
+        return json({ ok: true, org: await ORG.createOrg(env, body, actor.id) }, 200, request);
+      }
       if (seg === "org" && sub === "update") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, org: await ORG.updateOrg(env, body.orgId, body, actor.id) }, 200, request); }
       if (seg === "org" && sub === "delete") { const az = await azOrg(CAPS.STAFF_ADMIN); if (!az.ok) return deny(az); return json({ ok: true, deleted: await ORG.deleteOrg(env, body.orgId, actor.id) }, 200, request); }
       // One-tap: turn a Connect EMR connection into an OPD hospital (so it appears in the app's Hospital list

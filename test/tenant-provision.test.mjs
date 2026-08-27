@@ -82,7 +82,7 @@ test("a college cannot be created without a name or an admin email", () => {
 test("the admin OWNS their college — the reason support cannot read tenant data", () => {
   // createOrg's third argument is the ownerUid. Passing the admin's identity is what makes the
   // college theirs; passing the platform's would leave StewardMD able to read their records.
-  assert.match(SRC, /createOrg\(env, \{ name, mode: "native" \}, identity\)/);
+  assert.match(SRC, /createOrg\(env, \{ name, mode: "native", kind: "institution" \}, identity\)/);
   assert.match(SRC, /setMembership\(env, org\.id, identity, \{ role: "admin" \}/);
 });
 
@@ -91,4 +91,23 @@ test("the two-logins limitation is written down where the next reader will hit i
   // ever stops being true this comment should change with it.
   assert.match(SRC, /verifyFirebaseToken\(\) only/);
   assert.match(SRC, /STAFF SESSION/);
+});
+
+/* ── institutions are SOLD, not self-served ────────────────────────────────────────────────────
+ * Before this, POST /api/queue/org would mint anything for any signed-in account, so any user
+ * could appoint themselves the Academic Cell of a "recognised" PG programme. */
+test("only the platform owner may mint kind:institution through the queue route", () => {
+  const q = readFileSync(new URL("../functions/api/queue/[[path]].js", import.meta.url), "utf8");
+  assert.match(q, /institution_provisioning_required/,
+    "the queue org-create route must refuse a self-served institution");
+  assert.match(q, /String\(body && body\.kind\) === "institution" && !\(await ownerOK\(request, env\)\)/,
+    "the refusal must be gated on ownerOK, not on a client-supplied claim");
+  assert.match(q, /import \{ ownerEmails, ownerOK \}/, "ownerOK must actually be imported");
+});
+
+test("the eLOGBook console offers no self-serve create button", () => {
+  const scr = readFileSync(new URL("../pglog-screens.js", import.meta.url), "utf8");
+  assert.doesNotMatch(scr, /data-pgl="create-inst"/,
+    "a create button that can only 403 is worse than none");
+  assert.match(scr, /Institutions are set up by StewardMD/, "it explains who provisions one");
 });

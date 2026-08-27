@@ -253,14 +253,20 @@
 
     var gated = gateActive(), rt = runtimeAvailable(), have = packInstalled();
     var localDesc, localDisabled = false;
-    if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
+    var proKnown = true;
+    try { proKnown = !window.SMD_PRO || !window.SMD_PRO.proKnown || window.SMD_PRO.proKnown(); } catch (e) { proKnown = true; }
+    // "Not Pro" and "have not asked the server yet" are different answers. On the first launch of a
+    // build the per-uid Pro cache is empty, so the honest state for a second is CHECKING, not
+    // "subscribe". The row re-renders itself when the verdict lands (see watchPro).
+    if (!gated && !proKnown) { localDesc = "Checking your subscription…"; localDisabled = true; }
+    else if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
     else if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
     else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
     else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
 
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Answer engine</div>' +
-      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
+      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
       opt("rag", "KB only", pill("Free", "#dcfce7", "#166534"),
           "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
@@ -360,7 +366,7 @@
       // ABOVE the list, not below it: the hardware warning has to be read before a 3 GB tap, not
       // discovered afterwards. Same text is repeated at the moment of selection.
       deviceWarnHTML() +
-      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
+      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
@@ -459,7 +465,7 @@
       "</div>";
     }).join("");
 
-    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--card,#fff);padding:14px;margin-top:8px">' +
+    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:14px;margin-top:8px">' +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">Will it run on my phone?</div>' +
       deviceWarnHTML() +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +
@@ -835,6 +841,28 @@
     chip.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openPicker(); });
     syncChip();
   }
+
+  /* Pro decides gateActive(), and it is read synchronously while painting the settings row and the
+   * picker - but /billing/status resolves AFTER that paint. Before this, the row rendered locked on
+   * first launch of a build (the per-uid Pro cache had never been written) and never corrected
+   * itself, which is exactly "the on-device model is not working". Re-render on the flip. */
+  (function watchPro() {
+    if (typeof window === "undefined" || window.__smdMaikProWatch) return;
+    window.__smdMaikProWatch = 1;
+    var onFlip = function () {
+      try {
+        var seg = document.querySelector(".me-seg");
+        if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, seg.parentNode || document);
+      } catch (e) {}
+      try { syncChip(); } catch (e) {}
+      // Now that the gate may be open, warm the model if it is the chosen engine.
+      try { warmIfLocal(); } catch (e) {}
+    };
+    try {
+      if (window.SMD_PRO && window.SMD_PRO.onProChange) window.SMD_PRO.onProChange(onFlip);
+      else window.addEventListener("smd:pro", onFlip);   // account.js may load after this module
+    } catch (e) {}
+  })();
 
   var API = {
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,

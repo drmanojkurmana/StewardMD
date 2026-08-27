@@ -120,23 +120,129 @@ try {
   ok(await tap("setting up our institution") === true, "institution row is tappable");
   await sleep(900);
   const ti = String(await txt());
-  ok(/Create your institution/i.test(ti), "Academic Cell can create an institution");
-  ok(/institution code/i.test(ti), "explains that this mints the institution code");
-  ok(/Institution name/i.test(ti), "asks for the institution name");
-  ok(await ev(`return !!document.getElementById("pglInstName")`) === true, "name field is present");
-  ok(await ev(`return !!document.querySelector("[data-pgl='create-inst']")`) === true,
-     "the create action is wired (this is what pglog-store.js could never do before)");
+  // Institutions are SOLD, not self-served: provisioned through the owner-gated /api/tenants route.
+  ok(/set up by StewardMD/i.test(ti), "the institution path explains it is provisioned, not self-served");
+  ok(/institution code/i.test(ti), "explains that a code is issued");
+  ok(!/Create institution/i.test(ti), "no self-serve create button that could only 403");
+  // These asserted the self-serve create form. It is deliberately gone: the server refuses
+  // kind:"institution" from anyone but the platform owner, so the form could only ever 403.
+  ok(await ev(`return !document.getElementById("pglInstName")`) === true, "no self-serve name field");
+  ok(await ev(`return !document.querySelector("[data-pgl='create-inst']")`) === true,
+     "no self-serve create action");
 
   // ── 4. The store really did gain the three writes ──
   ok(await ev(`var s=window.SMD_PGLOG_STORE;
      return !!(s && typeof s.createInstitution==="function" && typeof s.createProgramme==="function" && typeof s.enrolPerson==="function")`) === true,
      "store exposes createInstitution / createProgramme / enrolPerson");
 
-  // ── 5. An empty name must not create a nameless institution ──
-  await ev(`document.getElementById("pglInstName").value=""; return 1;`);
-  await tap("Create institution");
-  await sleep(500);
-  ok(/Create your institution/i.test(String(await txt())), "empty name does not proceed");
+  // ── 5. The only way forward from here is entering an issued code ──
+  ok(await tap("Enter it here") === true, "offers the code entry path");
+  await sleep(700);
+  ok(/[Ii]nstitution code/.test(String(await txt())), "code entry screen is reachable");
+
+  /* ── 6. REGRESSION: pick an institution, then read the code off the card ──
+   * The owner's screenshot showed a raw 32-char org id under the heading "Institution code".
+   * "pick-inst" sets state.ctx = null and state.inst = {} and then calls loadInstitution()
+   * DIRECTLY - nothing re-ran ensureContext(), so both sources of the code were empty for the
+   * render that followed and the orgId fallback is what painted. Drive that exact path. */
+  const HEX = "349cdc32210144cca031cccd1e0e2abc";
+  await ev(`
+    var HEX=${JSON.stringify(HEX)};
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&o.orgId) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([{id:HEX,name:"Test Medical College",code:"SMD-TEST42"}])};
+    s.me=function(id){return Promise.resolve({uid:"u1",orgId:id||HEX,orgCode:"SMD-TEST42",
+      orgName:"Test Medical College",role:"academic_cell",
+      caps:["pglog.configure","pglog.view.institution"],resident:null,programme:null,rotations:[]})};
+    s.programmes=function(){return Promise.resolve({programmes:[]})};
+    s.seedDemo=function(){return null};
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(900);
+  await tap("setting up our institution");
+  await sleep(1200);
+  ok(await tap("Test Medical College") === true, "the institution is offered to pick");
+  await sleep(1500);
+  const tp = String(await txt());
+  ok(/SMD-TEST42/.test(tp), `picked institution shows the shareable code (got: ${JSON.stringify(tp.slice(0, 160))})`);
+  ok(!new RegExp(HEX).test(tp), "the raw 32-char org id is NOT presented as the institution code");
+
+  /* ── 7. A FAILING /me must be reported, not painted over ──
+   * This is the state the owner's second screenshot was actually in: no code, no name, and the raw
+   * org id offered under "Share this with your residents and faculty". If the server will not
+   * resolve the institution, the screen has to say so. */
+  // Fresh context object: test 6 left cur.orgId set, so the picker would not render and pick-inst
+  // (the only thing that re-runs ensureContext) would never fire.
+  await ev(`
+    var HEX=${JSON.stringify(HEX)};
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.me=function(){ var e=new Error("not_found"); e.code="not_found"; return Promise.reject(e); };
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(700);
+  await tap("setting up our institution");
+  await sleep(900);
+  await tap("Test Medical College");
+  await sleep(1500);
+  const te = String(await txt());
+  ok(/Cannot open this institution/i.test(te), `a failing /me is reported (got: ${JSON.stringify(te.slice(0, 140))})`);
+  ok(!/Share this with your residents/i.test(te), "a broken institution is not offered as shareable");
+
+  /* ── 8. A SIGNED-OUT session must say so, not render an empty institution ──
+   * Read off the owner's actual device over ios_webkit_debug_proxy: /me was returning
+   * 401 signin_required. pglog-screens.js:2430 deliberately swallows that and installs a viewer
+   * stub context (right for a resident's home screen). But ensureContext() short-circuits on
+   * `if (state.ctx)`, so the stub became the permanent answer, /me was never retried, and the
+   * Academic Cell console rendered a nameless institution with the raw org id - for four builds. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:${JSON.stringify(HEX)}};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([{id:cur.orgId,name:"Test Medical College",code:"SMD-TEST42"}])};
+    s.me=function(){ var e=new Error("signin_required"); e.code="signin_required"; return Promise.reject(e); };
+    s.dashboard=function(){ var e=new Error("signin_required"); e.code="signin_required"; return Promise.reject(e); };
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1600);
+  await tap("setting up our institution");
+  await sleep(1800);
+  const ts = String(await txt());
+  ok(/Cannot open this institution/i.test(ts), `signed out is reported (got: ${JSON.stringify(ts.slice(0, 150))})`);
+  ok(/[Ss]ign in/.test(ts), "it says to sign in");
+  ok(!/Choose a different institution/i.test(ts), "it does not offer a picker that cannot succeed");
+
+  /* ── 9. An OPD clinic must not pass as a PG institution ──
+   * Read off the owner's account: the ONLY org it owns is "StewardMD Clinic A", an OPD clinic, and
+   * the eLOGBook adopted it and called it "your institution". Nothing in q_orgs distinguished the
+   * two - mode is native/connect (the EMR coupling), never clinic/college. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([
+      {id:"c111",name:"StewardMD Clinic A",code:"SMD-W2DG5S"},
+      {id:"i222",name:"Test Medical College",code:"SMD-COLL01",kind:"institution"}]);};
+    s.me=function(id){return Promise.resolve({uid:"u1",orgId:id,orgCode:"SMD-W2DG5S",
+      orgName:"StewardMD Clinic A",orgKind:"clinic",role:"admin",caps:["pglog.configure"],
+      resident:null,programme:null,rotations:[]});};
+    s.programmes=function(){return Promise.resolve({programmes:[]})};
+    s.seedDemo=function(){return null};
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1500);
+  await tap("setting up our institution");
+  await sleep(1600);
+  const tk = String(await txt());
+  ok(/OPD clinic, not a PG institution/i.test(tk), `the picker names the clinic as a clinic (got: ${JSON.stringify(tk.slice(0, 170))})`);
+  ok(/PG institution/.test(tk), "and names the college as an institution");
+
+  await tap("StewardMD Clinic A");
+  await sleep(1800);
+  const tw = String(await txt());
+  ok(/not a PG institution/i.test(tw), `adopting a clinic is warned about (got: ${JSON.stringify(tw.slice(0, 170))})`);
 
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {

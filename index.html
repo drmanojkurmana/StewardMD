@@ -1505,7 +1505,7 @@ window.openExternal = function (u) {
 <script src="/antibiogram-data.js?v=gold363" defer></script>
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
-<script src="/account.js?v=gold364-thread-vclaim1" defer></script>
+<script src="/account.js?v=gold364-thread-vclaim1-proevt1" defer></script>
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
 <script src="/guest-timer.js?v=gold1200-guestbar" defer></script>
@@ -1552,7 +1552,7 @@ window.openExternal = function (u) {
 <script src="/drugs.js?v=gold978" defer></script>
 <script src="/interaction-rules.js?v=gold363" defer></script>
 <script defer src="/kb/ai/drug-fuzzy.js?v=gold1047"></script>
-<script defer src="/medlist.js?v=gold1048-scan"></script>
+<script defer src="/medlist.js?v=gold1049-scan-choose"></script>
 <script defer src="/ghis-meds.js?v=gold363"></script>
 <script defer src="/interactions.js"></script>
 <script src="/api.js?v=gold465-azclass" defer></script>
@@ -1578,16 +1578,16 @@ window.openExternal = function (u) {
 <script src="/privacy.js?v=gold363" defer></script>
 <!-- Image Engine chooser for ICU Snapshot (Private Device OCR vs AI Vision). Needs SMD_AI
      (reasoning.js) at runtime; used by icu.js + the Settings section in home.js. -->
-<script src="/image-engine.js?v=ie-local2" defer></script>
+<script src="/image-engine.js?v=ie-local3-choose" defer></script>
 <!-- MaiK Answer Engine chooser (KB only · Cloud · On-device). DECORATES window.SMD_AI, so it must
      load after reasoning.js; the Settings row is rendered by home.js. Default pref is "cloud", so
      an untouched install is byte-for-byte the current behaviour. -->
-<script src="/maik-engine.js?v=mxgate2" defer></script>
+<script src="/maik-engine.js?v=mxgate4-dark" defer></script>
 <!-- On-device MaiK: model pack download/cache (SMD_MAIK_MODELS) + llama.cpp inference
      (SMD_MAIK_LOCAL). Native-only in effect; both are inert on the web PWA because the
      capacitor-llama plugin is absent, which is what keeps the picker's third option hidden there. -->
-<script src="/maik-models.js?v=ux1-polish" defer></script>
-<script src="/maik-local.js?v=mxfix3" defer></script>
+<script src="/maik-models.js?v=ux1-polish-lite" defer></script>
+<script src="/maik-local.js?v=mxfix4-greet" defer></script>
 <script src="/kb/ai/steward-ai.browser.js?v=gold1034" defer></script>
 <!-- MaiK V2 — deterministic KB Answer Engine (window.MaiKKB). Retrieval-first: answers KB
      knowledge questions locally with citations, no Gemini. Loads before home.js. -->
@@ -1810,11 +1810,11 @@ window.openExternal = function (u) {
 <script src="/pglog-flags.js?v=pgl4" defer></script>
 <script src="/pglog-model.js?v=pgl4" defer></script>
 <script src="/pglog-curriculum.js?v=pgl4" defer></script>
-<script src="/pglog-store.js?v=pgl6-enrol" defer></script>
+<script src="/pglog-store.js?v=pgl8-kind" defer></script>
 <script src="/pglog-qr.js?v=pgl4" defer></script>
 <script src="/pglog-reports.js?v=pgl4" defer></script>
 <script src="/pglog-ai.js?v=pgl4" defer></script>
-<script src="/pglog-screens.js?v=pgl7-designation" defer></script>
+<script src="/pglog-screens.js?v=pgl14-prov" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
