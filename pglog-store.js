@@ -196,6 +196,15 @@
       .then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (j) { return (j && j.orgs) || []; }, function () { return []; });
   }
+  /* Fetch ONE org by id. myInstitutions() filters by ownerUid, so it silently returns nothing when
+   * the signed-in account is a member rather than the creator - and then the screen has no code to
+   * show and falls back to printing the raw 32-char id. This asks for the record directly. */
+  function institution(orgId) {
+    return G.fetch("/api/queue/org?orgId=" + encodeURIComponent(orgId), {
+      headers: { "Authorization": "Bearer " + token() }
+    }).then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) { return (j && j.org) || null; }, function () { return null; });
+  }
   function createProgramme(orgId, body) {
     return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })
       .then(function (r) { return r.programme; });
@@ -362,7 +371,7 @@
     facultyRoster: facultyRoster, verifyCode: verifyCode,
     // academic-cell writes
     createInstitution: createInstitution, createProgramme: createProgramme, enrolPerson: enrolPerson,
-    myInstitutions: myInstitutions,
+    myInstitutions: myInstitutions, institution: institution,
     certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
     signCertificate: signCertificate, revokeCertificate: revokeCertificate,
     // drafts

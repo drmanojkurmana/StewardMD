@@ -560,7 +560,8 @@
     }).join("");
     return wrap(
       '<div class="pgl-card"><h3>' + esc(I.orgName || (state.ctx && state.ctx.orgName) || "Your institution") + "</h3>" +
-      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">Institution code</p>' +
+      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+        ((I.orgCode || (state.ctx && state.ctx.orgCode)) ? "Institution code" : "Institution ID (no short code yet)") + "</p>" +
       /* break-all + a size that fits: the fallback value is a 32-char org id and it ran straight off
        * the edge of the card. A code a human has to read out to a resident must never be clipped. */
       '<div style="font:800 19px/1.3 var(--sans);letter-spacing:.04em;color:var(--pgl-accent,#0e6e63);word-break:break-all;user-select:all">' +
@@ -638,11 +639,12 @@
     ]).then(function (r) {
       state.inst.programmes = r[0];
       state.inst.specialties = r[1];
-      if (!state.inst.orgCode && st.myInstitutions) {
-        return st.myInstitutions().then(function (list) {
-          (list || []).forEach(function (o) {
-            if (o && o.id === org) { state.inst.orgCode = o.code || ""; state.inst.orgName = o.name || ""; }
-          });
+      // Direct lookup by id. The previous attempt used myInstitutions(), which filters by ownerUid
+      // and so returns nothing for a member who did not create the org - leaving the screen with no
+      // code and printing the raw id instead.
+      if (!state.inst.orgCode && st.institution) {
+        return st.institution(org).then(function (o) {
+          if (o) { state.inst.orgCode = o.code || ""; state.inst.orgName = o.name || state.inst.orgName || ""; }
         }, function () {});
       }
     });
