@@ -11,7 +11,7 @@
  */
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { readFileSync } from "node:fs";
+import { readFileSync, readdirSync } from "node:fs";
 import { genPassword, ALPHABET } from "../functions/api/tenants/[[path]].js";
 
 const SRC = readFileSync(new URL("../functions/api/tenants/[[path]].js", import.meta.url), "utf8");
@@ -122,10 +122,34 @@ test("the admin identity is built from found.uid, never the lookup object", () =
   assert.match(SRC, /const identity = "fb:" \+ uid/, "identity is namespaced on the real uid");
 });
 
+/* The first sweep listed the files by hand and MISSED functions/api/pglog/[[path]].js - the enrol
+ * route, i.e. the one an Academic Cell actually uses. It would have written a membership under
+ * "fb:[object Object]" and returned 200, so the resident signs in and is still told they are not
+ * enrolled. Enumerate the tree instead of trusting a hand-written list. */
+test("no call site anywhere under functions/ treats the lookup result as a bare uid", () => {
+  const root = new URL("../functions/", import.meta.url);
+  const bad = [];
+  (function walk(dir) {
+    for (const e of readdirSync(dir, { withFileTypes: true })) {
+      const u = new URL(e.name + (e.isDirectory() ? "/" : ""), dir);
+      if (e.isDirectory()) { walk(u); continue; }
+      if (!e.name.endsWith(".js")) continue;
+      const src = readFileSync(u, "utf8");
+      if (!/lookupUidByEmail/.test(src)) continue;
+      // Match a BARE assignment too. Both real bugs were `let uid = null; try { uid = await ... }`,
+      // which a const|let|var-anchored pattern sails straight past - the first version of this
+      // sweep did exactly that and passed while the enrol route was still broken.
+      if (/\buid\s*=\s*await\s+lookupUidByEmail/.test(src)) bad.push(e.name);
+    }
+  })(root);
+  assert.deepEqual(bad, [], "these assign the { uid, email, name } object to a variable named uid");
+});
+
 test("no call site treats the lookup result as a bare uid", () => {
-  for (const rel of ["../functions/api/ai/[[path]].js", "../functions/api/tenants/[[path]].js"]) {
+  for (const rel of ["../functions/api/ai/[[path]].js", "../functions/api/tenants/[[path]].js",
+                     "../functions/api/pglog/[[path]].js"]) {
     const src = readFileSync(new URL(rel, import.meta.url), "utf8");
-    assert.doesNotMatch(src, /(const|let|var) uid = await lookupUidByEmail/,
+    assert.doesNotMatch(src, /\buid\s*=\s*await\s+lookupUidByEmail/,
       rel + " still assigns the {uid,email,name} object to a variable named uid");
   }
 });

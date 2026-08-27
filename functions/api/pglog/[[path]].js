@@ -271,8 +271,12 @@ export async function onRequest(context_) {
 
       const email = String(body.email || "").trim().toLowerCase();
       if (!email) return json({ error: "email_required" }, 400);
-      let uid = null;
-      try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
+      // lookupUidByEmail resolves to { uid, email, name } - NOT a bare uid. Taking the object made
+      // identity "fb:[object Object]", so the enrolment returned 200 while writing a membership
+      // nobody could ever match: the resident would sign in and still be told they are not enrolled.
+      let found = null;
+      try { found = await lookupUidByEmail(env, email); } catch (e) { found = null; }
+      const uid = found && found.uid;
       // Say WHICH email failed: an Academic Cell typing twenty of them needs to know which one, and
       // "they have not signed in to StewardMD yet" is the usual cause, not a typo.
       if (!uid) return json({ error: "no_such_account", email }, 404);
