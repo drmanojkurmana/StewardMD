@@ -65,7 +65,7 @@
   function proCacheKey(u) { return "smd_pro_last:" + (u || "anon"); }
   function loadProCache() { try { return localStorage.getItem(proCacheKey(uid())) === "1"; } catch (e) { return false; } }
   function saveProCache(v) { try { localStorage.setItem(proCacheKey(uid()), v ? "1" : "0"); } catch (e) {} }
-  var _pro = loadProCache(), _proState = null;
+  var _pro = loadProCache(), _proState = null, _claimRefreshed = false;
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function idToken() { var u = fbUser(); try { return u && u.getIdToken ? u.getIdToken(false) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function syncStatus() {
@@ -75,6 +75,16 @@
     }).then(function (d) {
       _proState = d || null;
       if (d && typeof d.pro === "boolean") { _pro = d.pro; saveProCache(_pro); }   // only an explicit boolean flips the cache
+      /* The gates on the SERVER read claims out of the ID token this client sends, and Firebase
+       * caches that token for up to an hour. So a `verified` claim that was just written - by a
+       * fresh verification, an owner approval, or the reconciler that heals a record/claim
+       * disagreement - does not reach those gates until the token happens to refresh. That is the
+       * window where the app says "verified" and every feature still refuses. One forced refresh
+       * per session closes it; it is a no-op when the token already carries the claim. */
+      if (d && d.verified === true && !_claimRefreshed) {
+        _claimRefreshed = true;
+        try { var fu = fbUser(); if (fu && fu.getIdToken) fu.getIdToken(true).catch(function () {}); } catch (e) {}
+      }
       return _proState;
     }, function () { return _proState; });                 // error → keep last known (fail-open)
   }

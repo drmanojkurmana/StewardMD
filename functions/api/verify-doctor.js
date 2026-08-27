@@ -24,6 +24,7 @@ import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
 import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
 import { clearBudgetCache } from "../_aibudget.js";
+import { reconcileVerifiedClaim } from "../_verify_claim.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -257,12 +258,21 @@ export async function onRequest(context) {
     const store = kv(env);
     let rec = null;
     try { if (store) rec = await store.get(doctorKey(uid), "json"); } catch (e) {}
-    if (rec) return json({
+    if (rec) {
+      /* This endpoint answers from the KV record; every Pro gate reads the Firebase claim. When the
+       * two disagreed the doctor saw "Your account is verified" here and "needs a verified
+       * registration" on every feature, at the same moment. Heal it while they are on the screen. */
+      try {
+        const r = await reconcileVerifiedClaim(env, uid);
+        if (r.healed) { try { await clearBudgetCache(env, uid); } catch (e) {} }
+      } catch (e) {}
+      return json({
       status: rec.status || (rec.verified ? "verified" : "unverified"),
       regNo: rec.regNo || rec.extractedRegNo || "", name: rec.name || "",
       council: rec.council || "", verifiedAt: rec.verifiedAt || "", reason: rec.reason || "",
       provisionalUntil: rec.provisionalUntil || "",
-    });
+      });
+    }
     return json({ status: "unverified" });
   }
 
