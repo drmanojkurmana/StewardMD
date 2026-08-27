@@ -209,6 +209,12 @@
   function screenHome() {
     var m = M(), st = ST();
     var res = state.dash && state.dash.resident;
+    /* A guide, HOD or Academic Cell has no resident record, so loadDashboard() returns null and
+     * state.dash stays null forever. The "Faculty review" and "Department oversight" rows are built
+     * BELOW this early return, which made every faculty screen unreachable: a professor holding
+     * pglog.verify opened the module and was shown the trainee setup prompt, with no route to the
+     * pending queue, assessments or certificate signing. Give them their own home instead. */
+    if (!res && (canFaculty() || canDept())) return wrap(facultyHome());
     if (!res) return wrap(setupPrompt());
     var prog = state.dash.programme || {};
     var sum = state.dash.summary || {};
@@ -446,6 +452,28 @@
       " A PG logbook entry is a document a University relies on, so it has to carry a registered " +
       "practitioner's number. " +
       '<button class="pgl-chip" data-pgl="go-verify" style="margin-top:8px">Verify my registration</button>');
+  }
+
+  /* Home for someone whose role in this institution is to REVIEW rather than to log: a guide, a head
+   * of department, or the Academic Cell. Built from the same caps the nav rows use, so it can never
+   * offer a screen the server would refuse. */
+  function facultyHome() {
+    var cx = state.ctx || {};
+    var h = [];
+    h.push('<div class="pgl-card"><h3>' + esc(cx.orgName || "Your institution") + "</h3>" +
+      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+      "You are signed in for review duties. Your own trainee logbook is not set up, and it does not " +
+      "need to be." + "</p></div>");
+    if (canFaculty()) h.push(navRow("faculty", "how_to_reg", "Faculty review", "Verify, assess, authenticate"));
+    if (canDept()) h.push(navRow("dept", "corporate_fare", "Department oversight", "Progress across residents"));
+    if (arr(cx.caps).indexOf("pglog.configure") > -1) {
+      h.push(navRow("institution", "apartment", "Institution", "Programmes, faculty and residents"));
+    }
+    h.push(navRow("check", "qr_code_scanner", "Verify a signed record", "Scan or type a verification code"));
+    h.push('<div class="pgl-banner" data-t="ai" style="margin-top:18px">' + ic("policy") +
+      "<div>Signing a trainee's record is a personal act tied to your council registration. " +
+      "PGMER-2023 9.2(c) puts a penalty on certifying work you did not supervise.</div></div>");
+    return h.join("");
   }
 
   function setupPrompt() {
@@ -1958,6 +1986,12 @@
           go(dest);
           return loadCert().then(render, render);
         }
+        /* screenFaculty()/screenDept() open on `if (!f) return loading()`, and loadFaculty/loadDept
+         * were called ONLY from enter() when the module was mounted directly on that route. Reaching
+         * them by tapping the nav row therefore issued no request at all and left a skeleton on
+         * screen forever - the state every faculty user would have arrived in. */
+        if (dest === "faculty") { go(dest); return loadFaculty().then(render, render); }
+        if (dest === "dept") { go(dest); return loadDept().then(render, render); }
         return go(dest);
       }
       case "retry": state.error = ""; return enter(t.getAttribute("data-r"));
@@ -2299,7 +2333,11 @@
     });
   }
   function doCertRevoke(id) {
-    var reason = G.prompt ? G.prompt("Why is this certificate being revoked? This is recorded and shown to anyone who checks it.") : "";
+    // `G` was never declared in this IIFE, so this threw ReferenceError on the handler's first line:
+    // an HOD tapping "Revoke this certificate" got no prompt, no error and no toast, and a wrongly
+    // issued certificate stayed live and verifiable by QR.
+    var ask = (typeof window !== "undefined" && window.prompt) ? window.prompt : null;
+    var reason = ask ? ask("Why is this certificate being revoked? This is recorded and shown to anyone who checks it.") : "";
     if (!reason || !String(reason).trim()) return toast("A reason is required.");
     var st = ST();
     state.loading = true; render();

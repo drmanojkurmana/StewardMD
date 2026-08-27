@@ -175,15 +175,20 @@ try {
   // Fresh context object: test 6 left cur.orgId set, so the picker would not render and pick-inst
   // (the only thing that re-runs ensureContext) would never fire.
   await ev(`
-    var HEX=${JSON.stringify(HEX)};
+    // Distinct org id per case: ensureContext() only refetches when the org changes, so reusing the
+    // previous case's id would keep its ctx (and caps) alive and assert against stale state.
+    var HEX="7777cccc7777cccc7777cccc7777cccc";
     var s=window.SMD_PGLOG_STORE, cur={orgId:""};
     s.context=function(){return cur};
     s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([{id:HEX,name:"Test Medical College",code:"SMD-TEST42"}])};
     s.me=function(){ var e=new Error("not_found"); e.code="not_found"; return Promise.reject(e); };
     return 1;`);
   await ev(`window.PGLOG.open(); return 1;`);
   await sleep(700);
-  await tap("setting up our institution");
+  // Home offers "I am setting up our institution" to a user with no role yet, and a plain
+  // "Institution" row to one who already holds pglog.configure. Either is a valid way in.
+  await tap("setting up our institution|Institution");
   await sleep(900);
   await tap("Test Medical College");
   await sleep(1500);
@@ -198,7 +203,10 @@ try {
    * `if (state.ctx)`, so the stub became the permanent answer, /me was never retried, and the
    * Academic Cell console rendered a nameless institution with the raw org id - for four builds. */
   await ev(`
-    var s=window.SMD_PGLOG_STORE, cur={orgId:${JSON.stringify(HEX)}};
+    // A DIFFERENT org id from the previous case on purpose: these cases share one page, and
+    // ensureContext() only refetches when the org actually changes. Reusing the id left the previous
+    // test's ctx - and its caps - in place, so this case asserted against stale state.
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"8888dddd8888dddd8888dddd8888dddd"};
     s.context=function(){return cur};
     s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
     s.myInstitutions=function(){return Promise.resolve([{id:cur.orgId,name:"Test Medical College",code:"SMD-TEST42"}])};
@@ -281,6 +289,37 @@ try {
   const t2 = String(await txt());
   ok(/SMD-SECOND/.test(t2), `the new college's code is shown (got: ${JSON.stringify(t2.slice(0, 150))})`);
   ok(!/SMD-FIRST1/.test(t2), "the previous college's code is NOT still on screen");
+
+  /* ── 11. A faculty member must be able to REACH the faculty screens ──
+   * screenHome() returned the trainee setup prompt whenever there was no resident record, and the
+   * "Faculty review" / "Department oversight" rows are built BELOW that early return. A guide or HOD
+   * therefore opened the module, was told to set up their own trainee logbook, and had no route to
+   * the pending queue at all. Separately, `case "go"` did not call loadFaculty/loadDept, so even on
+   * arrival the screen sat on a loading skeleton with no request issued. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"9999eeee9999eeee9999eeee9999eeee"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.me=function(id){return Promise.resolve({uid:"fb:guide-1",orgId:id,orgCode:"SMD-FAC001",
+      orgName:"Sim Medical College",orgKind:"institution",role:"pg_faculty",
+      caps:["pglog.verify","pglog.view.assigned"], resident:null, programme:null, rotations:[]});};
+    window.__facultyCalls = 0;
+    s.facultyDashboard=function(){ window.__facultyCalls++; return Promise.resolve({pending:[],residents:[],summary:{}}); };
+    return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1800);
+  const tf2 = String(await txt());
+  ok(/Faculty review/i.test(tf2), `a guide sees the faculty entry point (got: ${JSON.stringify(tf2.slice(0, 150))})`);
+  ok(!/Set up your logbook|Which of these are you/i.test(tf2),
+     "a guide is NOT told to set up a trainee logbook");
+
+  ok(await tap("Faculty review") === true, "the faculty row is tappable");
+  await sleep(1600);
+  ok(await ev(`return window.__facultyCalls > 0`) === true,
+     "navigating to the faculty screen actually requests its data (no permanent skeleton)");
 
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
