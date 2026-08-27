@@ -265,6 +265,27 @@ test("SECURITY · a second faculty member cannot take over or sign another's ass
     "another faculty member must not sign it under their own registration");
 });
 
+/* ══ INTEGRITY ══ attendance is an examination pre-requisite, so it cannot be pre-dated ══
+ * occurredAt was future-bounded; endDate was not. Attendance is the one kind that EXPANDS into
+ * per-day rows, so a single "present" range ending twelve months out added up to 366 attended days
+ * to the count an eligibility check reads. */
+test("INTEGRITY · attendance cannot be recorded for days that have not happened", () => {
+  const today = "2026-08-28";
+  const e = M.entry({
+    id: "att-1", residentId: "r1", orgId: ORG, kind: "attendance",
+    occurredAt: "2026-08-01", endDate: "2027-06-30", state: "present",
+  });
+
+  const v = M.validateEntry(e, { today });
+  assert.equal(v.ok, false, "a future end date must be refused");
+  assert.ok(v.errors.some((x) => x.field === "endDate"), "and the end date is the field named");
+
+  // Defence in depth: rows written before the rule existed must still not be counted forward.
+  const rows = M.expandAttendance([e], today);
+  assert.ok(rows.length > 0, "the days up to today still count");
+  assert.ok(rows.every((r) => r.date <= today), "no attended day may fall in the future");
+});
+
 /* ══ HARD 2 ══ cross-resident reads must never carry clinical identifiers ══ */
 test("HARD 2 · an institution-wide viewer never receives case refs or diagnoses", async () => {
   const db = fakeDb();

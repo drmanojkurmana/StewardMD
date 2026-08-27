@@ -46,6 +46,7 @@
     drafts: {},          // localId -> entry (kind draft/returned; the ONLY locally-writable records)
     queue: [],           // localIds waiting to reach the server
     cache: null,         // last server dashboard payload (read-only mirror)
+    cacheKey: "",        // residentId@orgId the mirror belongs to — load() drops keys absent here
     cacheAt: 0,
     prefs: { lastKind: "procedure", lastSetting: "opd", lastSupervisor: "", lastDepartmentId: "", lastRotationId: "" }
   };
@@ -109,11 +110,26 @@
   }
   function dashboard(residentId) {
     return req("/dashboard/resident?residentId=" + encodeURIComponent(residentId)).then(function (d) {
-      patch(function (p) { p.cache = d; p.cacheAt = Date.now(); });
+      // Stamp WHOSE logbook this is. The mirror was stored unkeyed, and the screen falls back to it
+      // on ANY rejection - so after switching institution, a 403 on the new one resurfaced the
+      // previous college's logbook and labelled it merely "your last synced copy".
+      patch(function (p) { p.cache = d; p.cacheAt = Date.now(); p.cacheKey = cacheKeyFor(residentId); });
       return d;
     });
   }
-  function cachedDashboard() { var p = load(); return p.cache; }
+  function cacheKeyFor(residentId) {
+    var c = context();
+    return String(residentId || "") + "@" + String((c && c.orgId) || "");
+  }
+  /* Returns the mirror ONLY when it belongs to the resident and institution being asked about.
+   * `residentId` is optional so older callers still work, but they get nothing back unless the
+   * stored key matches - refusing to show a logbook is always safer than showing the wrong one. */
+  function cachedDashboard(residentId) {
+    var p = load();
+    if (!p.cache) return null;
+    if (residentId === undefined) return p.cacheKey ? null : p.cache;
+    return p.cacheKey === cacheKeyFor(residentId) ? p.cache : null;
+  }
   function facultyDashboard(orgId) { return req("/dashboard/faculty?orgId=" + encodeURIComponent(orgId)); }
   function deptDashboard(orgId, opts) {
     opts = opts || {};

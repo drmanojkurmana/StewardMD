@@ -198,8 +198,11 @@
     if (state.dash && !force) return Promise.resolve(state.dash);
     return st.dashboard(res.id).then(function (d) { state.dash = d; recompute(); return d; },
       function (e) {
-        // Offline: fall back to the last mirror rather than an empty screen, and SAY it is a mirror.
-        var cached = st.cachedDashboard();
+        /* Offline: fall back to the last mirror rather than an empty screen, and SAY it is a mirror.
+         * Pass the resident, so a mirror belonging to a DIFFERENT resident or institution is refused
+         * rather than shown: this path catches every rejection, not just offline ones, so a 403 on a
+         * newly switched institution used to resurface the previous college's logbook here. */
+        var cached = st.cachedDashboard(res.id);
         if (cached) { state.dash = cached; state.dash.stale = true; recompute(); return cached; }
         throw e;
       });
