@@ -188,6 +188,14 @@
         return j.org;
       });
   }
+  // Institutions this account OWNS. A provisioned college admin owns theirs, so this is what stops
+  // the console offering "create" to someone whose college already exists — which would quietly
+  // produce a second, empty college and a second code.
+  function myInstitutions() {
+    return G.fetch("/api/queue/orgs", { headers: { "Authorization": "Bearer " + token() } })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) { return (j && j.orgs) || []; }, function () { return []; });
+  }
   function createProgramme(orgId, body) {
     return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })
       .then(function (r) { return r.programme; });
@@ -354,6 +362,7 @@
     facultyRoster: facultyRoster, verifyCode: verifyCode,
     // academic-cell writes
     createInstitution: createInstitution, createProgramme: createProgramme, enrolPerson: enrolPerson,
+    myInstitutions: myInstitutions,
     certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
     signCertificate: signCertificate, revokeCertificate: revokeCertificate,
     // drafts
