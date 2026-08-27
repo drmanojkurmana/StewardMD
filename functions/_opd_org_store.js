@@ -60,6 +60,12 @@ export async function userSmdId(env, uid, email) {
   try { await fsCommit(env, [wUpdate(env, "q_users/" + id, { smdId, email: String(email || "").toLowerCase(), createdAt: now() })]); } catch (e) {}
   return smdId;
 }
+// Every institution, for the PLATFORM owner's tenant console only (never an org-scoped caller).
+// Decoding goes through M.org/withId like every other read in this file, so the shape cannot drift.
+export async function listAllOrgs(env, limit) {
+  const r = await fsQuery(env, "q_orgs", { limit: limit || 300 });
+  return r.map((x) => M.org(withId(x.id, x.fields)));
+}
 export async function listOrgsForOwner(env, ownerUid) {
   const r = await fsQuery(env, "q_orgs", { where: { field: "ownerUid", value: String(ownerUid) }, limit: 100 });
   return r.filter((x) => !(x.fields && x.fields.deleted)).map((x) => M.org(withId(x.id, x.fields)));

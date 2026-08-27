@@ -53,6 +53,8 @@ import * as S from "../../_pglog_store.js";
 import * as V from "../../_pglog_verify.js";
 import * as P from "../../_pglog_public.js";
 import M from "../../../pglog-model.js";
+import { lookupUidByEmail } from "../../_fbadmin.js";
+import * as ORG from "../../_opd_org_store.js";
 
 const json = (obj, status = 200, extra) => new Response(JSON.stringify(obj), {
   status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, extra || {})
@@ -121,9 +123,16 @@ async function context(request, env, orgId) {
   const uid = await verifyFirebaseToken(bearer(request), env);
   if (!uid) throw Object.assign(new Error("signin_required"), { status: 401 });
   const actorUid = "fb:" + uid;
-  if (!orgId) return { uid, actorUid, role: "viewer" };
-  const g = await S.gate(env, actorUid, orgId, null);
-  return { uid, actorUid, role: g.role, owner: g.owner, org: g.org, member: g.member };
+  if (!orgId) return { uid, actorUid, orgId: "", role: "viewer" };
+  /* Accept EITHER the SMD-XXXXXX institution code a human was handed, or the internal org id.
+   * These were never reconciled: screenSetup() asks for "Institution code (SMD-XXXXXX)" and stores
+   * it as orgId, while every store call keys on the internal id and getOrg() is a direct document
+   * fetch. So a resident who typed exactly what their department told them got org_not_found, and
+   * the whole enrolment path was unreachable. resolveOrgId() passes a real id straight through, so
+   * this is a no-op for callers that already had one. */
+  const canonical = (await ORG.resolveOrgId(env, orgId)) || orgId;
+  const g = await S.gate(env, actorUid, canonical, null);
+  return { uid, actorUid, orgId: canonical, role: g.role, owner: g.owner, org: g.org, member: g.member };
 }
 
 /* Read guard for one resident's logbook. Returns the AUDIENCE, which decides how much of each record
@@ -225,7 +234,7 @@ export async function onRequest(context_) {
     if (seg === "me") {
       const orgId = q("orgId");
       const ctx = await context(request, env, orgId);
-      const resident = orgId ? await S.residentForUid(env, orgId, ctx.actorUid) : null;
+      const resident = ctx.orgId ? await S.residentForUid(env, ctx.orgId, ctx.actorUid) : null;
       const programme = resident ? await S.getProgramme(env, resident.programmeId) : null;
       const rotations = resident ? await S.listRotations(env, resident.id) : [];
       const caps = Object.keys(CAPS).filter((k) => can(ctx.role, CAPS[k]) && CAPS[k].indexOf("pglog.") === 0).map((k) => CAPS[k]);
@@ -233,7 +242,50 @@ export async function onRequest(context_) {
       // control that fails. Never the gate; the gate is server-side on the write path.
       const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
         ? await S.signerStatus(env, ctx.actorUid) : null;
-      return json({ ok: true, uid: ctx.uid, role: ctx.role, caps, resident, programme, rotations, signer });
+      return json({ ok: true, uid: ctx.uid, orgId: ctx.orgId, orgCode: (ctx.org && ctx.org.code) || "",
+                    orgName: (ctx.org && ctx.org.name) || "", role: ctx.role, caps, resident, programme, rotations, signer });
+    }
+
+    /* ── enrol: add a person to this institution ────────────────────────────
+     * PGMER-2023 5.2(iv) makes the Academic Cell responsible for the programme, and every screen in
+     * this module assumed that enrolment had already happened — but nothing could perform it. There
+     * was no create-institution, no create-programme and no enrol path in the client at all, so every
+     * user sat forever on "Your training record is not linked yet". This is that missing step.
+     *
+     * An Academic Cell holds a list of EMAILS, not Firebase uids, so the resolve happens here rather
+     * than asking a human to copy uids around. Two deliberate limits:
+     *   - CONFIGURE-gated, so only an Academic Cell (or org owner/admin) can call it.
+     *   - ASSIGNABLE is an allowlist of pg_* roles ONLY. An Academic Cell can enrol trainees and
+     *     faculty; it can NEVER mint an org admin or owner. Granting membership is real authority,
+     *     so widening it is a deliberate act, not a missing check.
+     */
+    if (seg === "enrol" && method === "POST") {
+      const orgId = String(body.orgId || "");
+      const ctx = await context(request, env, orgId);
+      await S.gate(env, ctx.actorUid, orgId, CAPS.PGLOG_CONFIGURE);
+
+      const ASSIGNABLE = ["pg_resident", "pg_faculty", "pg_hod", "academic_cell"];
+      const role = String(body.role || "");
+      if (ASSIGNABLE.indexOf(role) < 0) return json({ error: "role_not_assignable", role }, 400);
+
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email) return json({ error: "email_required" }, 400);
+      let uid = null;
+      try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
+      // Say WHICH email failed: an Academic Cell typing twenty of them needs to know which one, and
+      // "they have not signed in to StewardMD yet" is the usual cause, not a typo.
+      if (!uid) return json({ error: "no_such_account", email }, 404);
+
+      const identity = "fb:" + uid;
+      await ORG.setMembership(env, orgId, identity, { role: role }, ctx.actorUid);
+
+      // A resident is only usable once they are in a programme, so do both in one call rather than
+      // leaving a half-enrolled member who still sees the "not linked yet" screen.
+      let resident = null;
+      if (role === "pg_resident" && body.programmeId) {
+        resident = await S.enrolResident(env, orgId, Object.assign({}, body, { uid: identity }), ctx.actorUid);
+      }
+      return json({ ok: true, identity, role, email, resident });
     }
 
     /* ── programmes ─────────────────────────────────────────────────────── */

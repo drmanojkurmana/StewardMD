@@ -169,6 +169,42 @@
     return req("/residents" + qs);
   }
   function programmes(orgId) { return req("/programmes?orgId=" + encodeURIComponent(orgId)); }
+
+  /* ── Academic Cell writes ─────────────────────────────────────────────────
+   * The module could READ programmes and residents but never create either, so nobody could be
+   * enrolled and every user sat on "your training record is not linked yet" forever. These three
+   * are the missing setup path. All server-gated on PGLOG_CONFIGURE (the Academic Cell cap). */
+
+  // The institution itself is an ORG in the existing queue/OPD system, not a new entity — the same
+  // SMD-XXXXXX code the rest of the app already uses. Creator becomes its owner.
+  function createInstitution(name) {
+    return G.fetch("/api/queue/org", {
+      method: "POST",
+      headers: { "Authorization": "Bearer " + token(), "Content-Type": "application/json" },
+      body: JSON.stringify({ name: String(name || "").trim(), mode: "native" })
+    }).then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) {
+        if (!j || !j.ok || !j.org) throw mkErr((j && j.error) || "org_failed", "Could not create the institution.");
+        return j.org;
+      });
+  }
+  // Institutions this account OWNS. A provisioned college admin owns theirs, so this is what stops
+  // the console offering "create" to someone whose college already exists — which would quietly
+  // produce a second, empty college and a second code.
+  function myInstitutions() {
+    return G.fetch("/api/queue/orgs", { headers: { "Authorization": "Bearer " + token() } })
+      .then(function (r) { return r.json().catch(function () { return {}; }); })
+      .then(function (j) { return (j && j.orgs) || []; }, function () { return []; });
+  }
+  function createProgramme(orgId, body) {
+    return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })
+      .then(function (r) { return r.programme; });
+  }
+  // One call adds the membership AND, for a resident with a programme, the enrolment — a half-enrolled
+  // member still sees the "not linked yet" screen, which is the bug this whole path exists to fix.
+  function enrolPerson(orgId, body) {
+    return req("/enrol", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) });
+  }
   function config(programmeId) { return req("/config/" + encodeURIComponent(programmeId)); }
   function setConfig(programmeId, overrides) { return req("/config/" + encodeURIComponent(programmeId), { method: "PUT", body: { overrides: overrides } }); }
 
@@ -324,6 +360,9 @@
     attestations: attestations, pending: pending, residents: residents, programmes: programmes,
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
     facultyRoster: facultyRoster, verifyCode: verifyCode,
+    // academic-cell writes
+    createInstitution: createInstitution, createProgramme: createProgramme, enrolPerson: enrolPerson,
+    myInstitutions: myInstitutions,
     certificates: certificates, certificate: certificate, requestCertificate: requestCertificate,
     signCertificate: signCertificate, revokeCertificate: revokeCertificate,
     // drafts
