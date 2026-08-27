@@ -187,13 +187,36 @@
         '<div class="ie-h">Cloud AI processing</div>' +
         '<div class="ie-sub">AI Vision sends the selected clinical image to StewardMD’s secure AI processing service for interpretation. The image may contain patient information. Confirm that you are authorized to process this image and that cloud AI use is permitted by your institution’s privacy policy.</div>' +
         '<label class="ie-chk"><input type="checkbox" id="iePhi"><span>I confirm I am authorized to process this image.</span></label>' +
+        // REMEMBER IS A CHOICE NOW, not a side effect. Consent used to be persisted forever the
+        // moment it was first granted, without saying so, and the only way back was a Revoke button
+        // in Settings. Default OFF: continuing to send patient images to a cloud service should be
+        // decided deliberately, not inherited from one tap made in a hurry.
+        '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice (change it in Settings, Image Engine)</span></label>' +
         '<div class="ie-row"><button class="ie-btn sec" id="ieDevice">Use Private Device OCR</button><button class="ie-btn" id="ieAi" disabled>Continue with AI Vision</button></div>'
       );
       var chk = o.sheet.querySelector("#iePhi"), go = o.sheet.querySelector("#ieAi");
+      var rem = function () { var r = o.sheet.querySelector("#ieRemember"); return !!(r && r.checked); };
       chk.addEventListener("change", function () { go.disabled = !chk.checked; });
-      o.sheet.querySelector("#ieDevice").addEventListener("click", function () { o.close(); resolve("device"); });
-      go.addEventListener("click", function () { if (!chk.checked) return; o.close(); resolve("ai"); });
+      // The PHI confirmation gates the CLOUD button only: choosing the private path needs no
+      // authorisation, because nothing leaves the phone.
+      o.sheet.querySelector("#ieDevice").addEventListener("click", function () { o.close(); resolve({ engine: "device", remember: rem() }); });
+      go.addEventListener("click", function () { if (!chk.checked) return; o.close(); resolve({ engine: "ai", remember: rem() }); });
     });
+  }
+
+  /* Public gate for surfaces that make their OWN cloud image call and so never pass through
+   * process() - Scan-Meds cloudFromImage() is one, and it was uploading a photo of a medication
+   * list with no consent step at all. Resolves true when the upload may proceed. */
+  function ensureCloudConsent() {
+    if (getConsent()) return Promise.resolve(true);
+    return phiConsent().then(function (c) {
+      if (!c || c.engine !== "ai") {
+        if (c && c.engine === "device" && c.remember) setPref("device");
+        return false;
+      }
+      if (c.remember) setConsent(true);
+      return true;
+    }, function () { return false; });
   }
 
   /* ---------------- F: fallback dialog ---------------- */
@@ -344,11 +367,13 @@
 
   function routeAI(image, kind) {
     if (!aiAvailable()) return aiFallback("ai-off", image, kind);
-    var consentP = getConsent() ? Promise.resolve("ai") : phiConsent();
+    var consentP = getConsent() ? Promise.resolve({ engine: "ai", remember: true }) : phiConsent();
     return consentP.then(function (c) {
-      if (c === "device") return routeDevice(image, kind);
-      if (c !== "ai") { log("cancelled at consent"); return { cancelled: true }; }
-      if (!getConsent()) setConsent(true);
+      var eng = c && c.engine;
+      // "Remember" on the private path means stop routing here at all, not just this once.
+      if (eng === "device") { if (c.remember) setPref("device"); return routeDevice(image, kind); }
+      if (eng !== "ai") { log("cancelled at consent"); return { cancelled: true }; }
+      if (c.remember && !getConsent()) setConsent(true);
       log("kind:", kind, "engine: ai", "shape: image  (POST { image, kind })");
       var done = busy("Reading with AI Vision…");
       // ROOT CAUSE of the account-specific Vision hang: a signed-in session's Firestore sync hogs the
@@ -435,6 +460,7 @@
   window.SMD_IMAGE_ENGINE = {
     getPref: getPref, setPref: setPref, getConsent: getConsent, setConsent: setConsent,
     isPro: isPro, recommendFor: recommendFor, aiAvailable: aiAvailable, deviceOcrAvailable: deviceOcrAvailable,
+    ensureCloudConsent: ensureCloudConsent, getConsent: getConsent, setConsent: setConsent,
     process: process, settingsHTML: settingsHTML, wireSettings: wireSettings, openPrivacyModal: openPrivacyModal,
     KEY_ENGINE: KEY_ENGINE, KEY_CONSENT: KEY_CONSENT
   };

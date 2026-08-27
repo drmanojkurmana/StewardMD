@@ -318,6 +318,21 @@
     // the camera usage description.) This is what makes Scan-Meds work on Android at all.
     function cloudFromImage() {
       if (!(window.SMD_AI && window.SMD_AI.vision)) return Promise.reject(new Error("ai-unavailable"));
+      /* CONSENT BEFORE THE UPLOAD. This path sends the RAW PHOTO of a medication list - which
+       * routinely carries a patient name, an MRN or a ward sticker - to the cloud, and it ran
+       * silently as an automatic fallback whenever on-device OCR was unavailable (all of Android)
+       * or simply failed. The clinician was never asked and never offered the private alternative,
+       * even though image-engine.js already owns exactly that dialog for ICU Snapshot.
+       * Reusing that gate rather than growing a second consent story here. */
+      var gate = (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.ensureCloudConsent)
+        ? SMD_IMAGE_ENGINE.ensureCloudConsent()
+        : Promise.resolve(true);   // engine absent (older bundle): behave as before, never block a scan
+      return gate.then(function (okToUpload) {
+        if (!okToUpload) { var e = new Error("consent-declined"); e.code = "consent-declined"; throw e; }
+        return cloudVisionCall();
+      });
+    }
+    function cloudVisionCall() {
       try { window.__SMD_SCAN_DIAG = { stage: "cloud-image", source: "cloud" }; } catch (e) {}
       return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
         if (!r || r.error) throw new Error((r && r.error) || "vision-failed");
