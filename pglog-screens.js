@@ -340,11 +340,20 @@
   function stat(v, label) { return '<div class="pgl-stat"><b>' + esc(String(v)) + "</b><span>" + esc(label) + "</span></div>"; }
   function weekStrip(wk) {
     var missed = {}; arr(wk.missed).forEach(function (w) { missed[w] = 1; });
-    // Rebuild the ordered week list from the counts we have; the model already told us how many.
+    /* Place each gap on ITS OWN week. This used to build the map above and then never read it,
+     * marking the first N cells instead - so a resident who logged steadily for a year and then
+     * stopped saw the gap drawn at the START of their training, and vice versa. */
+    var order = arr(wk.order);
     var cells = [];
-    for (var i = 0; i < Math.min(wk.weeks, 80); i++) cells.push("<i data-l=\"1\"></i>");
-    var missCount = Math.min(arr(wk.missed).length, cells.length);
-    for (var j = 0; j < missCount; j++) cells[j] = '<i data-l="0"></i>';
+    if (order.length) {
+      // Show the most RECENT 80 weeks when there are more; the tail is what a resident acts on.
+      var shown = order.length > 80 ? order.slice(order.length - 80) : order;
+      shown.forEach(function (w) { cells.push(missed[w] ? '<i data-l="0"></i>' : '<i data-l="1"></i>'); });
+    } else {
+      // A payload cached before the model returned `order`: we know how many weeks, not which were
+      // missed. Draw them neutral rather than inventing positions; the label still carries the count.
+      for (var i = 0; i < Math.min(wk.weeks || 0, 80); i++) cells.push('<i data-l="1"></i>');
+    }
     return '<div class="pgl-weeks" aria-label="' + attr(wk.logged + " of " + wk.weeks + " weeks logged") + '">' + cells.join("") + "</div>";
   }
   function navRow(r, icon, title, sub) {

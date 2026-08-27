@@ -1327,6 +1327,10 @@
     for (var i = ordered.length - 1; i >= 0; i--) { if (byWeek[ordered[i]]) streak++; else break; }
     return {
       weeks: ordered.length,
+      // The week keys IN ORDER. Without them a caller has only a count and a set of missed keys, so
+      // it cannot say WHICH weeks were missed - the strip in the app was marking the first N cells
+      // regardless, always drawing the gap at the start of training.
+      order: ordered,
       logged: ordered.length - missed.length,
       missed: missed,
       pct: ordered.length ? Math.round(((ordered.length - missed.length) / ordered.length) * 100) : null,

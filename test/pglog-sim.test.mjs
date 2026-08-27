@@ -286,6 +286,28 @@ test("INTEGRITY · attendance cannot be recorded for days that have not happened
   assert.ok(rows.every((r) => r.date <= today), "no attended day may fall in the future");
 });
 
+/* ══ INTEGRITY ══ a gap in the weekly strip must sit on the week it happened ══
+ * weeklyCadence returned a COUNT and a set of missed keys but not the ordered week list, so the
+ * strip had no way to place a gap and marked the first N cells instead. A resident who logged
+ * steadily for a year and then stopped saw the gap drawn at the start of their training. */
+test("INTEGRITY · weekly cadence exposes the ordered weeks a gap can be placed on", () => {
+  const entries = [
+    { id: "w-first", kind: "procedure", occurredAt: "2026-06-03", deleted: false },
+    { id: "w-last",  kind: "procedure", occurredAt: "2026-08-26", deleted: false },
+  ];
+  const wk = M.weeklyCadence(entries, "2026-06-01", "2026-08-28");
+
+  assert.ok(Array.isArray(wk.order), "the ordered week list is returned");
+  assert.equal(wk.order.length, wk.weeks, "one entry per counted week");
+  assert.deepEqual(wk.order.slice().sort(), wk.order, "and it is in chronological order");
+
+  const missed = new Set(wk.missed);
+  assert.ok(!missed.has(wk.order[0]), "the first week was logged, so it is not a gap");
+  assert.ok(!missed.has(wk.order[wk.order.length - 1]), "nor is the last");
+  assert.ok(missed.size > 0, "the middle weeks are gaps");
+  for (const w of missed) assert.ok(wk.order.indexOf(w) > -1, `${w} is one of the ordered weeks`);
+});
+
 /* ══ HARD 2 ══ cross-resident reads must never carry clinical identifiers ══ */
 test("HARD 2 · an institution-wide viewer never receives case refs or diagnoses", async () => {
   const db = fakeDb();
