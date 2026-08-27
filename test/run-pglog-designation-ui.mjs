@@ -120,23 +120,25 @@ try {
   ok(await tap("setting up our institution") === true, "institution row is tappable");
   await sleep(900);
   const ti = String(await txt());
-  ok(/Create your institution/i.test(ti), "Academic Cell can create an institution");
-  ok(/institution code/i.test(ti), "explains that this mints the institution code");
-  ok(/Institution name/i.test(ti), "asks for the institution name");
-  ok(await ev(`return !!document.getElementById("pglInstName")`) === true, "name field is present");
-  ok(await ev(`return !!document.querySelector("[data-pgl='create-inst']")`) === true,
-     "the create action is wired (this is what pglog-store.js could never do before)");
+  // Institutions are SOLD, not self-served: provisioned through the owner-gated /api/tenants route.
+  ok(/set up by StewardMD/i.test(ti), "the institution path explains it is provisioned, not self-served");
+  ok(/institution code/i.test(ti), "explains that a code is issued");
+  ok(!/Create institution/i.test(ti), "no self-serve create button that could only 403");
+  // These asserted the self-serve create form. It is deliberately gone: the server refuses
+  // kind:"institution" from anyone but the platform owner, so the form could only ever 403.
+  ok(await ev(`return !document.getElementById("pglInstName")`) === true, "no self-serve name field");
+  ok(await ev(`return !document.querySelector("[data-pgl='create-inst']")`) === true,
+     "no self-serve create action");
 
   // ── 4. The store really did gain the three writes ──
   ok(await ev(`var s=window.SMD_PGLOG_STORE;
      return !!(s && typeof s.createInstitution==="function" && typeof s.createProgramme==="function" && typeof s.enrolPerson==="function")`) === true,
      "store exposes createInstitution / createProgramme / enrolPerson");
 
-  // ── 5. An empty name must not create a nameless institution ──
-  await ev(`document.getElementById("pglInstName").value=""; return 1;`);
-  await tap("Create institution");
-  await sleep(500);
-  ok(/Create your institution/i.test(String(await txt())), "empty name does not proceed");
+  // ── 5. The only way forward from here is entering an issued code ──
+  ok(await tap("Enter it here") === true, "offers the code entry path");
+  await sleep(700);
+  ok(/[Ii]nstitution code/.test(String(await txt())), "code entry screen is reachable");
 
   /* ── 6. REGRESSION: pick an institution, then read the code off the card ──
    * The owner's screenshot showed a raw 32-char org id under the heading "Institution code".

@@ -92,7 +92,9 @@ export async function onRequest(context) {
     if (!uid) return json({ error: "no_such_account", email }, 404);
     const identity = "fb:" + uid;
 
-    const org = await ORG.createOrg(env, { name, mode: "native" }, identity);
+    // kind:"institution" is what makes this a PG college rather than an OPD clinic, and this
+    // owner-gated route is the ONLY way to mint one.
+    const org = await ORG.createOrg(env, { name, mode: "native", kind: "institution" }, identity);
     await ORG.setMembership(env, org.id, identity, { role: "admin" }, identity);
 
     // Optional, and returned exactly once — it is only ever stored salted+hashed.

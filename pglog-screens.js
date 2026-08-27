@@ -538,18 +538,23 @@
               "</span></span>" + ic("chevron_right") + "</button>";
           }).join("") + "</div>"
         : "";
+      /* NO self-serve create. A PG institution is provisioned for a college that licenses StewardMD,
+       * through the owner-gated /api/tenants route which also names its administrator. The server
+       * enforces that; showing a "Create institution" button here would only ever 403, and a
+       * self-appointed Academic Cell running a recognised programme is the thing being prevented. */
       return wrap(
         pick +
-        '<div class="pgl-card"><h3>' + (mine.length ? "Or create another" : "Create your institution") + "</h3>" +
+        '<div class="pgl-card"><h3>Institutions are set up by StewardMD</h3>' +
         "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
-        "This creates your institution in StewardMD and gives you its <b>institution code</b>. Residents " +
-        "and faculty enter that code to find the programme. You become its administrator." +
+        "A PG institution is provisioned for the college that licenses StewardMD. We create it, name its " +
+        "administrator, and issue the <b>institution code</b> - then that administrator adds programmes, " +
+        "faculty and residents from this console." +
+        "</p>" +
+        "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted);margin-top:10px\">" +
+        "If your college has already been set up, you were sent an institution code." +
         "</p></div>" +
-        '<div class="pgl-field"><label for="pglInstName">Institution name</label>' +
-        '<input type="text" id="pglInstName" placeholder="e.g. Test Medical College">' +
-        '<div class="hint">Already have a code? <button class="pgl-chip" data-pgl="go" data-r="setup-faculty">Enter it instead</button></div></div>' +
-        '<button class="pgl-btn wide" data-pgl="create-inst"' + (I.busy ? " disabled" : "") + '>' +
-          (I.busy ? "Creating…" : "Create institution") + "</button>" +
+        '<div class="pgl-field"><div class="hint">Have a code? ' +
+        '<button class="pgl-chip" data-pgl="go" data-r="setup-faculty">Enter it here</button></div></div>' +
         (I.msg ? banner(I.err ? "warn" : "info", I.err ? "error" : "check_circle", esc(I.msg)) : "")
       );
     }
@@ -655,6 +660,9 @@
     if (e && e.code === "signin_required") return "Sign in to set up an institution.";
     /* gate() -> e404("org") reaches the client as "not_found". It means this device holds an org id
      * the server cannot resolve - created against a different environment, or since deleted. */
+    if (e && e.code === "institution_provisioning_required")
+      return "PG institutions are set up by StewardMD for the college that licenses it. Ask StewardMD to " +
+             "provision your institution and name its administrator - you will get an institution code to share.";
     if (e && e.code === "not_found") return "The server does not have an institution with this ID. It may have been created on a different account or environment.";
     return fallback;
   }
