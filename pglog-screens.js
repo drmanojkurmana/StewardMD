@@ -61,6 +61,7 @@
     templates: null,
     draft: null, draftErrors: [], suggestions: [],
     faculty: null, dept: null, review: null, assessment: null,
+    roster: [],
     filter: { kind: "", status: "" },
     deptFilter: { departmentId: "", trainingYear: "" },
     inbox: []
@@ -367,7 +368,7 @@
   function attendanceSubtitle() {
     var a = state.dash && state.dash.attendance;
     if (!a || a.pctOfRecorded == null) return "Nothing recorded";
-    return a.attendedDays + " days · " + a.pctOfRecorded + "% of recorded days";
+    return a.attendedDays + " days · " + (a.pctOfWorkingDays == null ? "—" : a.pctOfWorkingDays + "% of working days");
   }
 
   function progressRow(p) {
@@ -507,9 +508,29 @@
         '<div class="hint">' + esc("PGMER-2023 5.2(v) requires MS / M.Ch students to record every surgical procedure assisted or done independently.") + "</div></div>");
     }
 
+    // A PICKER, not a text box. `pendingFor` is a copy of this value and is the only thing that puts
+  // the entry in someone's queue, so a typo here produces an entry that is "submitted" and reaches
+  // nobody. The server refuses an unresolvable supervisor; this is how the resident avoids one.
+  var roster = arr(state.roster);
+  if (roster.length) {
+    var known = roster.some(function (m) { return m.identity === d.supervisor; });
+    h.push(field("Faculty / supervisor", "supervisor",
+      '<select data-f="supervisor">' +
+        '<option value="">— choose —</option>' +
+        roster.map(function (m) {
+          return '<option value="' + attr(m.identity) + '"' + (d.supervisor === m.identity ? " selected" : "") + ">" +
+            esc(REP().person(m.identity)) + (m.role === "pg_hod" ? " (HOD)" : "") + "</option>";
+        }).join("") +
+        (d.supervisor && !known ? '<option value="' + attr(d.supervisor) + '" selected>' + esc(d.supervisor) + " (not on the faculty list)</option>" : "") +
+      "</select>",
+      "They receive this entry for verification (PGMER-2023 5.2(vi)). Only people who can actually " +
+      "verify are listed — an unlisted name would mean nobody receives it.", errs));
+  } else {
     h.push(field("Faculty / supervisor", "supervisor",
       '<input type="text" data-f="supervisor" value="' + attr(d.supervisor) + '" placeholder="Who supervised this?">',
-      "They receive the entry for verification (PGMER-2023 5.2(vi)).", errs));
+      "They receive the entry for verification (PGMER-2023 5.2(vi)). The faculty list is not loaded " +
+      "on this device yet, so this is free text; it will be checked against the list when you submit.", errs));
+  }
 
     if (arr(state.dash && state.dash.rotations).length) {
       h.push(field("Rotation / posting", "rotationId",
@@ -878,7 +899,7 @@
       var a = state.dash.attendance;
       h.push('<div class="pgl-card"><h3>Attendance</h3>' +
         '<div class="pgl-stats">' + stat(a.attendedDays, "Days attended") + stat(a.recordedDays, "Days recorded") +
-        stat(a.pctOfRecorded == null ? "—" : a.pctOfRecorded + "%", "Of recorded") + "</div>" +
+        stat(a.pctOfWorkingDays == null ? "—" : a.pctOfWorkingDays + "%", "Of working days") + "</div>" +
         '<div class="pgl-row-s" style="margin-top:10px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.6") +
         (a.thresholdDays ? " · " + esc(String(a.thresholdDays)) + " days " + prov("nmc_faq_secondary", "PGMEB FAQ 10.04.2024") : "") + "</div>" +
         '<div class="hint" style="margin-top:8px">' + esc(a.note) + "</div></div>");
@@ -971,9 +992,20 @@
     var h = [];
     if (!a) return wrap(errorState("Attendance is not available."));
     h.push('<div class="pgl-card"><div class="pgl-stats">' +
-      stat(a.attendedDays, "Counted as attended") + stat(a.recordedDays, "Days recorded") +
-      stat(a.pctOfRecorded == null ? "—" : a.pctOfRecorded + "%", "Of recorded") +
-      stat(a.pctOfElapsed == null ? "—" : a.pctOfElapsed + "%", "Of elapsed") + "</div>" +
+      stat(a.attendedDays, "Days attended") +
+      stat(a.workingDaysElapsed, "Working days so far") +
+      stat(a.pctOfWorkingDays == null ? "—" : a.pctOfWorkingDays + "%", "Of working days") +
+      stat(a.requiredDays || "—", "Needed for the course") + "</div>" +
+      '<div class="pgl-row-s" style="margin-top:10px">' +
+        esc("The PGMEB FAQ defines the 80% as a percentage of WORKING days — calendar days minus 52 weekly offs a year. " +
+            "A three-year course has " + (a.courseWorkingDays || 939) + " working days, of which 80% is " + (a.requiredDays || 751) + ".") +
+        " " + prov("nmc_faq", "FAQ 10.04.2024 Q2") + "</div>" +
+      (a.termExtension && a.termExtension.totalDays
+        ? banner("info", "event_repeat", "Your training is extended by <b>" + a.termExtension.totalDays +
+            " days</b> (" + a.termExtension.maternity + " maternity, " + a.termExtension.paternity +
+            " paternity, " + a.termExtension.excessCasual + " excess casual leave). This does <b>not</b> " +
+            "reduce your attendance percentage — it moves the end of training. " + prov("nmc_faq", "FAQ Q1, Q2"))
+        : "") +
       '<div class="pgl-row-s" style="margin-top:12px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.6") + "</div>" +
       (a.thresholdDays ? '<div class="pgl-row-s">Day count ' + esc(String(a.thresholdDays)) + " " + prov("nmc_faq_secondary", "PGMEB FAQ 10.04.2024") + "</div>" : "") +
       '<div class="hint" style="margin-top:10px">' + esc(a.note) + "</div></div>");
@@ -1707,6 +1739,13 @@
       state.dept = d; state.loading = false; render(); return d;
     }, function (e) { state.loading = false; state.error = e.userMessage || "Could not load the department view."; render(); });
   }
+  // Who can actually verify. Best-effort: a failure leaves the free-text fallback, which the server
+  // still checks on submit.
+  function loadRoster() {
+    var st = ST(), c = st.context();
+    if (!c.orgId) return Promise.resolve([]);
+    return st.facultyRoster(c.orgId).then(function (r) { state.roster = r; return r; }, function () { state.roster = []; });
+  }
   function loadInbox() {
     var st = ST();
     return st.notifications().then(function (r) { state.inbox = arr(r.notifications).filter(function (n) { return !n.read; }); },
@@ -1721,6 +1760,7 @@
       .then(function () { return loadDashboard(true); })
       .then(function () { return loadTemplates(); })
       .then(function () { if (flag("smd_pglog_server") && !(state.ctx && state.ctx.demo)) return loadInbox(); })
+      .then(function () { if (flag("smd_pglog_server") && !(state.ctx && state.ctx.demo)) return loadRoster(); })
       .then(function () {
         state.loading = false;
         if (head0() === "faculty") return loadFaculty().then(render);

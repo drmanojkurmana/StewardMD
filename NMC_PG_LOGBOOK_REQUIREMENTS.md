@@ -644,7 +644,7 @@ that same count — see §12.)
 | # | Source | Retrieved | URL / locator |
 |---|---|---|---|
 | S1 | **PGMER-2023** — Post-Graduate Medical Education Regulations, 2023, NMC/PGMEB, File No. N-P016(11)/2/2023-PGMEB-NMC, Gazette of India Extraordinary Part-III §4 | 2026-08-27 | `nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/MER.pdf` (23 pp + annexures) |
-| S2 | **PGMEB clarification / FAQs on PGMER-23**, public notice dated 10.04.2024 | 2026-08-27, **secondary** | Reported by careers360 and Legality Simplified; **the primary PDF was not reachable**. Everything sourced from it (751/501 attendance days; "PG students will have to maintain the log book digitally") is graded `nmc_faq` and marked *secondary source — verify against the PGMEB notice before relying on it*. |
+| S2 | **PGMEB clarification / FAQs on PGMER-23** — PUBLIC NOTICE, F.No. N-P016(11)/2/2023-PGMEB-NMC, dated **10.04.2024**, signed Dr Vijay Oza, President PGMEB | **2026-08-27, PRIMARY — obtained** | `nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/FAQs+on+PGMER-2023.pdf`. The PDF is a **scan**; OCR text is checked into `pglog-sources/PGMEB-FAQ-2024-04-10.txt` with its OCR caveats stated. Everything from it is now graded `nmc_faq`, not `nmc_faq_secondary`. **It corrected this module** — see §14. |
 | S3 | MD in General Medicine (revised), NMC 2022 | 2026-08-27 | `nmc.org.in/wp-content/uploads/2022/revised/MD-in-General-Medicine-(revised).pdf` |
 | S4 | MD Emergency Medicine curriculum V6, NMC 2024 | 2026-08-27 | `nmc.org.in/wp-content/uploads/2024/10/NMC MD EM CURRICULUM-V6 with logo revised-1.pdf` |
 | S5 | MS Orthopedics (revised), NMC 2022 | 2026-08-27 | `.../2022/revised/MS_Orthopedics_( revised ).pdf` |
@@ -666,7 +666,7 @@ that same count — see §12.)
 
 | Wanted | Status | Consequence |
 |---|---|---|
-| **PGMEB FAQ / clarification PDF (10.04.2024), primary** | Not reachable at any NMC path tried | The 751/501-day attendance figures are `nmc_faq` **secondary**, editable, and the UI shows "secondary source" on the attendance threshold row. |
+| ~~PGMEB FAQ / clarification PDF (10.04.2024), primary~~ | **OBTAINED 2026-08-27** | Closed. See S2 and §14. |
 | **PG-MSR 2023 / Revised PGMSR (23.08.2024)** | Downloaded (`11RevisedPGMSR2023dated23082024.pdf`, 1.0 MB) but it is a **scanned image PDF** — no extractable text | No MSR-derived requirement is claimed anywhere in the module. If MSR turns out to specify logbook content, this doc and the packs must be revisited. |
 | Specialty curricula for the remaining ~20 broad specialties and all DM/M.Ch | Not fetched | Those specialties get the **generic PG pack** (PGMER-2023 requirements only, no specialty layer) with an explicit "no NMC specialty pack loaded" notice, rather than a guessed one. |
 
@@ -714,12 +714,61 @@ for all 64 shipped minima without ever reading the PDF. `test/pglog-provenance.t
 every quotation and every count against the checked-in source text in `pglog-sources/`, and the
 Emergency Medicine procedure count is asserted **exactly**, not as a floor.
 
-## 13. Changelog of this document
+## 14. The PGMEB FAQ, obtained 2026-08-27 — and what it corrected
+
+The FAQ PDF listed in §10 as unobtainable was found while reviewing a competing product, which cites
+NMC document numbers on its dashboard. Getting it changed three things, one of them a correctness
+defect in this module.
+
+### 14.1 The attendance denominator was wrong
+
+PGMER-2023 §5.6 gives only a percentage. **FAQ Q2 defines what it is a percentage of**, verbatim:
+
+> **For Three-Year Course:** Total days in a three-year course will be 1095 days. So the total
+> **working days will be 939 days after deducting weekly offs (52 x 3 years = 156 days)**. A student
+> will require **80 per cent attendance of working days (i.e. 751 days of 939 days)** for appearing in
+> the examination. However, period of training will be extended by the same number of days for which
+> maternity/paternity leave and total excess casual leave have been availed in three years.
+>
+> **For Two-Year Course:** Total days … 730 days … working days will be **626 days** … (i.e. **501**).
+
+So the denominator is **working days** — calendar days minus 52 weekly offs a year. This module was
+computing two other things: a percentage of the days the resident had *recorded*, and a percentage of
+elapsed *calendar* days. Neither is the FAQ's definition, and **the first is worse than merely wrong —
+it flatters**: a resident who records only the days they were present scores 100%, and that was the
+headline number on their dashboard.
+
+`workingDays()` and `requiredAttendanceDays()` now **reproduce the FAQ's arithmetic** rather than
+copying its answers, and a unit test asserts they land on 1095 → 939 → 751 and 730 → 626 → 501.
+`pctOfWorkingDays` is the headline; `pctOfRecorded` is kept, demoted and labelled secondary.
+
+### 14.2 Two things the gazette does not say, now sourced
+
+| FAQ | What it settles |
+|---|---|
+| Q1 | *"Five days Academic Leave per year, if availed by a student **will be counted as duty**."* — this is why academic leave counts toward attendance here, and it is now quoted rather than assumed. |
+| Q1, Q2 | Maternity/paternity leave and **excess** casual leave do not reduce the percentage; they **extend the period of training by the same number of days**. Implemented as `termExtensionDays()` and surfaced as its own statement, not as a deduction. |
+| Q3, Q4, Q5 | DRP posting: *"posting in any post-graduate medical institution or super specialty hospital is **not permitted**"*; ESIC hospitals allowed only if they run neither; other States/UTs by mutual agreement with PGMEB approval; NEZ students may stay in their own State. |
+| Q7 | *"The PG students from **2023-24 batch** will maintain log book digitally."* — the applicability date for the digital mandate. |
+| Q8, Q9 | Ethics and Cardiac Life Support apply to *"all the PG students admitted **from 2021** and after"*, and are *"designed and conducted by the **Academic Cell** of the respective medical college"* — the issuer, which §5.2(xi) leaves open. |
+| Q6 | The full dissertation mark split: **Clinical/Practical 280 + Dissertation 20 + Viva Voce 100**. |
+
+### 14.3 A second document, and what it is not
+
+The NMC *"Guidelines for preparing Logbook"* (17.01.2020) — which the 2022-revised PG curricula tell
+faculty to consult (*"referred to the MCI Logbook Guidelines uploaded on the Website"*) — turns out to
+be **for the UNDERGRADUATE programme**, written against the CBME 2018 curriculum and GMER 2019. It is
+checked into `pglog-sources/MCI-Logbook-Guidelines-2020-UG.txt` for the UG phase. **No PG requirement
+in this module is derived from it**, and the PG curricula's cross-reference to it should be read with
+that in mind.
+
+## 15. Changelog of this document
 
 | Date | Change |
 |---|---|
 | 2026-08-27 | Created from S1–S18. |
 | 2026-08-27 | §11 clause index, §12 R1 corrections. Source extracts checked into `pglog-sources/`. |
+| 2026-08-27 | §14: PGMEB FAQ **obtained** (S2 upgraded to primary) and the attendance denominator corrected to working days. Specialty picker generated from Annexure-1/-2 — all 84 recognised qualifications. |
 
 **Maintenance rule:** if an NMC amendment lands, update **this file first**, then the packs, then the
 code. A pack requirement whose `source` clause is not in this file is a bug.

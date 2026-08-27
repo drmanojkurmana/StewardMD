@@ -28,7 +28,7 @@
  */
 import { fsGet, fsQuery, fsCommit, wCreate, wUpdate } from "./_fbfirestore.js";
 import { qAudit } from "./_queue_engine.js";
-import { getOrg, getMembership } from "./_opd_org_store.js";
+import { getOrg, getMembership, listMembers } from "./_opd_org_store.js";
 import { authorizeOrgAccess } from "./_opd_org.js";
 import { CAPS, can } from "./_queue_roles.js";
 // pglog-model.js is a root-level UMD module (module.exports, no ESM export) — the same interop path
@@ -54,7 +54,7 @@ const withId = (id, f) => Object.assign({ id }, f || {});
 function norm(id) { return String(id == null ? "" : id).toLowerCase().replace(/^(fb:|ghis:|cfa:)/, ""); }
 function e403(detail) { return Object.assign(new Error("forbidden"), { status: 403, detail }); }
 function e404(detail) { return Object.assign(new Error("not_found"), { status: 404, detail }); }
-function e400(detail) { return Object.assign(new Error("bad_request"), { status: 400, detail }); }
+function e400(code) { return Object.assign(new Error(code || "bad_request"), { status: 400 }); }
 
 async function audit(env, orgId, actor, action, meta, deps) {
   // PHI-free by construction: meta carries ids, kinds and counts, never a case reference, a
@@ -300,6 +300,41 @@ export async function withdrawEntry(env, id, actorUid, reason, deps) {
   return out;
 }
 
+/* ── the faculty roster, and why submit resolves against it ──────────────────────
+ * `pendingFor` is a denormalised copy of norm(supervisor), and it is the ONLY thing that puts an
+ * entry in a faculty member's queue. So a free-text supervisor is not a cosmetic problem: a resident
+ * who types "Dr Sharma" when the guide's identity is "fb:abc123" produces an entry that is
+ * `submitted`, counts toward nothing, appears in NOBODY's queue, and sits there silently until the
+ * examination. The resident believes it was sent. It was not.
+ *
+ * So a submit RESOLVES the supervisor against people who actually exist and actually hold the
+ * verification capability, and REFUSES rather than orphaning the record.
+ */
+export async function facultyRoster(env, orgId, deps) {
+  const members = await (deps && deps.listMembers ? deps.listMembers : listMembers)(env, orgId);
+  return (members || [])
+    .filter((m) => m && m.active !== false && can(m.role, CAPS.PGLOG_VERIFY))
+    .map((m) => ({ identity: m.identity, role: m.role, email: m.email || "" }));
+}
+
+// Resolve free text or an identity to a real, capable supervisor. Matches the resident's own guide
+// and co-guides first (they are named on the training record), then the org roster, by identity or
+// by email local-part. Returns the CANONICAL identity, or "" when nothing matches.
+export async function resolveSupervisor(env, orgId, text, resident, deps) {
+  const want = norm(text);
+  if (!want) return "";
+  const named = [].concat(resident && resident.guide ? [resident.guide] : [], (resident && resident.coGuides) || []);
+  for (const g of named) if (norm(g) === want) return g;
+  let roster = [];
+  try { roster = await facultyRoster(env, orgId, deps); } catch (e) { roster = []; }
+  for (const m of roster) {
+    if (norm(m.identity) === want) return m.identity;
+    if (m.email && norm(m.email) === want) return m.identity;
+    if (m.email && norm(m.email.split("@")[0]) === want) return m.identity;
+  }
+  return "";
+}
+
 export async function submitEntry(env, id, actorUid, deps) {
   const d = D(deps);
   const cur = await getEntry(env, id, deps);
@@ -308,10 +343,22 @@ export async function submitEntry(env, id, actorUid, deps) {
   const ctx = await entryContext(env, cur.residentId, deps);
   const v = M.validateEntry(cur, ctx);
   if (!v.ok) throw Object.assign(e400("validation"), { errors: v.errors });
-  const out = M.submit(cur, actorUid, d.now());
+  // Resolve BEFORE stamping submitted, so an unresolvable supervisor is a refusal the resident sees
+  // rather than an entry that quietly reaches nobody.
+  const resolved = await resolveSupervisor(env, cur.orgId, cur.supervisor, ctx.resident, deps);
+  if (!resolved) {
+    // NOTE: userMessage, not message. The router's fail() maps a known error by e.message, so
+    // overwriting it here would both break that mapping and hide the error code from callers.
+    throw Object.assign(e400("supervisor_unresolved"), {
+      detail: cur.supervisor,
+      userMessage: "That supervisor is not on your department's faculty list, so nobody would " +
+        "receive this entry to verify. Pick your guide or a listed faculty member."
+    });
+  }
+  const out = M.submit(Object.assign({}, cur, { supervisor: resolved }), actorUid, d.now());
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:submit", cur.kind, deps);
-  await notify(env, { to: cur.supervisor, orgId: cur.orgId, kind: "verify_pending", entryId: id,
+  await notify(env, { to: resolved, orgId: cur.orgId, kind: "verify_pending", entryId: id,
     residentId: cur.residentId, text: "A logbook entry is awaiting your verification." }, deps);
   return out;
 }

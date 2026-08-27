@@ -131,6 +131,7 @@
   function rotations(residentId) { return req("/rotations?residentId=" + encodeURIComponent(residentId)); }
   function assessments(residentId) { return req("/assessments?residentId=" + encodeURIComponent(residentId)); }
   function attestations(residentId) { return req("/attestations?residentId=" + encodeURIComponent(residentId)); }
+  function facultyRoster(orgId) { return req("/faculty-roster?orgId=" + encodeURIComponent(orgId)).then(function (r) { return r.faculty || []; }); }
   function pending(orgId) { return req("/pending?orgId=" + encodeURIComponent(orgId)); }
   function notifications() { return req("/notifications"); }
   function markRead(id) { return req("/notifications/" + encodeURIComponent(id) + "/read", { method: "POST", body: {} }); }
@@ -295,6 +296,7 @@
     entries: entries, entry: entry, rotations: rotations, assessments: assessments,
     attestations: attestations, pending: pending, residents: residents, programmes: programmes,
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
+    facultyRoster: facultyRoster,
     // drafts
     saveDraft: saveDraft, drafts: drafts, getDraft: getDraft, dropDraft: dropDraft,
     validateDraft: validateDraft, submitDraft: submitDraft, queueDraft: queueDraft,

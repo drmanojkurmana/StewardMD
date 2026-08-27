@@ -151,6 +151,7 @@
   var SOURCE_LABEL = {
     nmc_regulation: "PGMER-2023",
     nmc_curriculum: "NMC curriculum",
+    nmc_faq: "PGMEB FAQ",
     nmc_faq_secondary: "PGMEB FAQ (secondary)",
     institution: "Institutional policy",
     unspecified: "No NMC number"
@@ -224,6 +225,27 @@
     return arr(bundle && bundle.templates).filter(function (t) { return t.appliesTo === appliesTo; });
   }
 
+  /* ── every qualification PGMER-2023 recognises ───────────────────────────────
+   * pglog/specialties.json is generated from Annexure-1 and Annexure-2 of the gazette itself
+   * (scripts/build-pglog-specialties.mjs), so the picker cannot drift from the regulation's own list.
+   * 84 qualifications; 15 have a specialty curriculum pack and the rest resolve to `generic-pg`,
+   * which carries the PGMER-2023 requirements and SAYS no specialty pack is loaded. A resident in
+   * MD Pharmacology is supported — they simply see the regulation's requirements and no invented
+   * specialty ones. */
+  var specialtiesCache = null;
+  function loadSpecialties() {
+    if (specialtiesCache) return Promise.resolve(specialtiesCache);
+    return fetchJson("/pglog/specialties.json").then(function (x) { specialtiesCache = x; return x; });
+  }
+  function specialtyById(bundle, id) {
+    return arr(bundle && bundle.broad).concat(arr(bundle && bundle.super))
+      .filter(function (x) { return x.id === s(id); })[0] || null;
+  }
+  function packForSpecialty(bundle, id) {
+    var sp = specialtyById(bundle, id);
+    return sp ? sp.packId : "generic-pg";
+  }
+
   /* ── index (the specialty picker) ────────────────────────────────────────── */
   var indexCache = null;
   function loadIndex() {
@@ -235,7 +257,8 @@
   function seed(id, pack) { cache[s(id)] = pack; }
   function seedTemplates(t) { templateCache = t; }
   function seedIndex(i) { indexCache = i; }
-  function clearCache() { cache = {}; templateCache = null; indexCache = null; }
+  function seedSpecialties(x) { specialtiesCache = x; }
+  function clearCache() { cache = {}; templateCache = null; indexCache = null; specialtiesCache = null; }
 
   var API = {
     BASE: BASE,
@@ -244,8 +267,10 @@
     sourceLabel: sourceLabel, isNmc: isNmc, SOURCE_LABEL: SOURCE_LABEL,
     suggestRequirements: suggestRequirements, searchProcedures: searchProcedures,
     loadTemplates: loadTemplates, template: template, templatesFor: templatesFor,
+    loadSpecialties: loadSpecialties, specialtyById: specialtyById, packForSpecialty: packForSpecialty,
     tokens: tokens,
-    seed: seed, seedTemplates: seedTemplates, seedIndex: seedIndex, clearCache: clearCache
+    seed: seed, seedTemplates: seedTemplates, seedIndex: seedIndex,
+    seedSpecialties: seedSpecialties, clearCache: clearCache
   };
 
   if (typeof module !== "undefined" && module.exports) module.exports = API;

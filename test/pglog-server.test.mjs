@@ -569,3 +569,57 @@ test("the attestation kind is validated before it is used for scoping", () => {
   const src = readFileSync(join(HERE, "..", "functions", "_pglog_store.js"), "utf8");
   assert.match(src, /unknown_attestation_kind/);
 });
+
+/* ── competitive review 2026-08-27: the free-text supervisor bug ───────────────
+ * A rival product uses a faculty DROPDOWN. Ours was a text box, and `pendingFor` is a copy of it —
+ * so a typo produced an entry that was `submitted`, counted toward nothing, sat in NOBODY's queue,
+ * and looked sent to the resident. That is silent data loss on a regulatory record.
+ */
+
+test("an unresolvable supervisor is REFUSED, not silently orphaned", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  db.listMembers = async () => [{ identity: FACULTY_UID, role: "pg_faculty", active: true, email: "guide@x.edu" }];
+  const e = await S.createEntry(env, ORG, entryBody(res, { supervisor: "Dr Sharma" }), RESIDENT_UID, db);
+  await assert.rejects(
+    () => S.submitEntry(env, e.id, RESIDENT_UID, db),
+    (err) => err.status === 400 && err.message === "supervisor_unresolved"
+  );
+  // and it is still a draft — nothing was half-written
+  assert.equal((await S.getEntry(env, e.id, db)).status, "draft");
+  assert.equal((await S.pendingForFaculty(env, ORG, FACULTY_UID, db)).length, 0);
+});
+
+test("the resident's own guide always resolves, roster or no roster", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);            // seeded with guide = FACULTY_UID
+  db.listMembers = async () => [];           // empty roster
+  const e = await S.createEntry(env, ORG, entryBody(res, { supervisor: FACULTY_UID }), RESIDENT_UID, db);
+  const sub = await S.submitEntry(env, e.id, RESIDENT_UID, db);
+  assert.equal(sub.status, "submitted");
+  assert.equal((await S.pendingForFaculty(env, ORG, FACULTY_UID, db)).length, 1);
+});
+
+test("a supervisor given by email resolves to the canonical identity", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  db.listMembers = async () => [{ identity: "fb:prof-9", role: "pg_faculty", active: true, email: "Sharma@med.edu" }];
+  const e = await S.createEntry(env, ORG, entryBody(res, { supervisor: "sharma" }), RESIDENT_UID, db);
+  const sub = await S.submitEntry(env, e.id, RESIDENT_UID, db);
+  assert.equal(sub.supervisor, "fb:prof-9", "stored as the identity, not as what was typed");
+  assert.equal((await S.pendingForFaculty(env, ORG, "fb:prof-9", db)).length, 1);
+});
+
+test("the roster lists only people who can actually verify", async () => {
+  const db = fakeDb();
+  db.listMembers = async () => [
+    { identity: "fb:a", role: "pg_faculty", active: true },
+    { identity: "fb:b", role: "pg_hod", active: true },
+    { identity: "fb:c", role: "pg_resident", active: true },     // cannot verify
+    { identity: "fb:d", role: "academic_cell", active: true },   // monitors, does not sign
+    { identity: "fb:e", role: "nurse", active: true },
+    { identity: "fb:f", role: "pg_faculty", active: false }      // disabled
+  ];
+  const roster = await S.facultyRoster(env, ORG, db);
+  assert.deepEqual(roster.map((m) => m.identity).sort(), ["fb:a", "fb:b"]);
+});

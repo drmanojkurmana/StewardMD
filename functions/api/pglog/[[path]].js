@@ -30,6 +30,7 @@
  *   GET    /entries?residentId=&kind=&status=  POST /entries
  *   GET    /entries/:id                        PATCH /entries/:id          DELETE /entries/:id
  *   POST   /entries/:id/submit | /withdraw | /verify | /return | /amend
+ *   GET    /faculty-roster?orgId=               -> people who can actually verify
  *   GET    /pending?orgId=                     -> the caller's verification queue
  *   GET    /assessments?residentId=            POST /assessments
  *   PATCH  /assessments/:id                    POST /assessments/:id/sign
@@ -74,11 +75,12 @@ function fail(e) {
     pglog_deleted: [410, "This entry was deleted."],
     pglog_actor_required: [401, "Sign in required."],
     pglog_submitted_withdraw_first: [409, "This entry is with your guide for verification. Withdraw it first to correct it."],
-    pglog_not_author: [403, "Only the author can withdraw an entry."]
+    pglog_not_author: [403, "Only the author can withdraw an entry."],
+    supervisor_unresolved: [400, "That supervisor is not on your department's faculty list, so nobody would receive this entry to verify."]
   };
   const k = known[e && e.message];
   if (k) return json({ error: e.message, message: k[1] }, k[0]);
-  if (status) return json({ error: (e && e.message) || "error", detail: e && e.detail, errors: e && e.errors }, status);
+  if (status) return json({ error: (e && e.message) || "error", message: e && e.userMessage, detail: e && e.detail, errors: e && e.errors }, status);
   try { console.warn("[pglog]", e && e.message, e && e.stack); } catch (_) {}
   return json({ error: "server_error" }, 500);
 }
@@ -308,6 +310,19 @@ export async function onRequest(context_) {
         const reason = q("reason") || "";
         return json({ ok: true, entry: S.publicEntry(await S.deleteEntry(env, id, ctx.actorUid, reason), "self") });
       }
+    }
+
+    /* ── the faculty roster (so a resident picks a real person, not free text) ── */
+    if (seg === "faculty-roster" && method === "GET") {
+      const orgId = q("orgId");
+      const ctx = await context(request, env, orgId);
+      if (!can(ctx.role, CAPS.PGLOG_VIEW_OWN) && !can(ctx.role, CAPS.PGLOG_VIEW_ASSIGNED)) {
+        return json({ error: "forbidden" }, 403);
+      }
+      // identity + role only. No email: a resident picking a supervisor does not need staff contact
+      // details, and this list is readable by every resident in the org.
+      const roster = await S.facultyRoster(env, orgId);
+      return json({ ok: true, faculty: roster.map((m) => ({ identity: m.identity, role: m.role })) });
     }
 
     /* ── the faculty verification queue ─────────────────────────────────── */

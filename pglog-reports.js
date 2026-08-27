@@ -468,14 +468,23 @@
     var a = ctx.attendance;
     return {
       heading: "Attendance",
-      provenance: { source: "nmc_regulation", clause: "5.6" },
-      columns: ["Days recorded", "Days counted as attended", "% of recorded days", "% of elapsed days", "Threshold", "Meets threshold"],
-      rows: [[String(a.recordedDays), String(a.attendedDays),
-              a.pctOfRecorded == null ? "not enough data" : a.pctOfRecorded + "%",
-              a.pctOfElapsed == null ? "" : a.pctOfElapsed + "%",
-              a.thresholdPct + "%" + (a.thresholdDays ? " / " + a.thresholdDays + " days" : ""),
-              a.meetsPct == null ? "unknown" : (a.meetsPct ? "Yes" : "No")]],
-      note: a.note + (a.thresholdDays ? " The day count comes from the PGMEB FAQ, a secondary source." : "")
+      provenance: { source: "nmc_faq", clause: "PGMER-2023 5.6 · PGMEB FAQ 10.04.2024 Q2" },
+      // The FAQ's own framing: days attended, of WORKING days. The recorded-days reading is kept but
+      // demoted — a resident who records only the days they attended scores 100% on it.
+      columns: ["Days counted as attended", "Working days elapsed", "% of working days",
+                "Required for the course", "Meets threshold", "% of days recorded (secondary)"],
+      rows: [[String(a.attendedDays), String(a.workingDaysElapsed),
+              a.pctOfWorkingDays == null ? "training not started" : a.pctOfWorkingDays + "%",
+              a.requiredDays ? a.requiredDays + " of " + a.courseWorkingDays + " working days" : "",
+              a.meetsPct == null ? "unknown" : (a.meetsPct ? "Yes" : "No"),
+              a.pctOfRecorded == null ? "nothing recorded" : a.pctOfRecorded + "%"]],
+      note: a.note +
+        (a.exceedsWorkingDays ? " More attended days than working days have been recorded, which means attendance was logged on weekly offs." : "") +
+        (a.termExtension && a.termExtension.totalDays
+          ? " Training is extended by " + a.termExtension.totalDays + " days (" +
+            a.termExtension.maternity + " maternity, " + a.termExtension.paternity + " paternity, " +
+            a.termExtension.excessCasual + " excess casual) — these do not reduce the percentage."
+          : "")
     };
   }
 

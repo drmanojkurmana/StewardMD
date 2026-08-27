@@ -1071,11 +1071,47 @@
     return Math.max(0, daysBetween(e.occurredAt, isoDate(e.createdAt)));
   }
 
-  /* ── attendance (PGMER-2023 5.6) ─────────────────────────────────────────────
-   * The regulation gives a PERCENTAGE (80%). The PGMEB FAQ gives DAYS (751 for three years, 501 for
-   * two) - a secondary source we could not fetch as a primary PDF, so it is carried with its own
-   * provenance and is editable. Both views are computed; neither is used to declare anyone
-   * exam-ineligible, because what counts as an attended day is the institution's rule, not ours. */
+  /* ── attendance (PGMER-2023 5.6 + PGMEB FAQ 10.04.2024) ──────────────────────
+   * THE DENOMINATOR IS WORKING DAYS, AND THIS MODULE HAD IT WRONG UNTIL 2026-08-27.
+   *
+   * PGMER-2023 5.6 gives only a percentage ("80% of the attendance"). The PGMEB FAQ of 10.04.2024 —
+   * a PRIMARY source, obtained 2026-08-27, checked into pglog-sources/PGMEB-FAQ-2024-04-10.txt —
+   * defines what that percentage is OF, verbatim:
+   *
+   *   "For Three-Year Course: Total days in a three-year course will be 1095 days. So the total
+   *    working days will be 939 days after deducting weekly offs (52 x 3 years = 156 days). A
+   *    student will require 80 per cent attendance of working days (i.e. 751 days of 939 days) for
+   *    appearing in the examination."
+   *
+   * So: WORKING DAYS = calendar days - weekly offs (52/yr), and the threshold is 80% OF THAT.
+   * The earlier implementation computed a percentage of the days the resident happened to have
+   * RECORDED, and a second one of elapsed CALENDAR days. Neither is the FAQ's definition, and the
+   * first is worse than wrong - it flatters, because a resident who records only the days they were
+   * present scores 100%.
+   *
+   * The FAQ also settles two things the module had been guessing at:
+   *   - "Five days Academic Leave per year, if availed by a student WILL BE COUNTED AS DUTY."
+   *   - maternity/paternity leave and EXCESS casual leave do not reduce the percentage; they
+   *     "extend the period of training by the same number of days" (see termExtensionDays()).
+   *
+   * Nothing here declares anyone exam-ineligible. It reports the number and says whose rule it is. */
+
+  // Derived from the FAQ's own arithmetic, not hard-coded from its answer: 52 weekly offs a year.
+  var WEEKLY_OFFS_PER_YEAR = 52;
+  // Working days and the 80% threshold for a course of N months. Returns the FAQ's own figures for
+  // the two courses it works through (36 mo -> 939/751, 24 mo -> 626/501) because it uses the same
+  // arithmetic, which is the point: the constants are reproduced, not copied.
+  function workingDays(durationMonths) {
+    var months = posInt(durationMonths, 36);
+    var years = months / 12;
+    var calendar = Math.round(years * 365);
+    var offs = Math.round(years * WEEKLY_OFFS_PER_YEAR);
+    return { calendarDays: calendar, weeklyOffs: offs, workingDays: calendar - offs };
+  }
+  function requiredAttendanceDays(durationMonths, pct) {
+    var w = workingDays(durationMonths);
+    return Math.round(w.workingDays * (num(pct, 80) / 100));
+  }
   function expandAttendance(entries) {
     var out = [];
     arr(entries).forEach(function (e) {
@@ -1090,6 +1126,32 @@
     out.forEach(function (r) { byDay[r.date] = r; });
     return Object.keys(byDay).sort().map(function (d) { return byDay[d]; });
   }
+  // The days a resident's training was EXTENDED by, per the FAQ: maternity/paternity leave, and
+  // casual leave taken in excess of the 20 days a year 5.6(a) grants. This does NOT reduce the
+  // attendance percentage — it moves the end of training.
+  function termExtensionDays(entries, ctx) {
+    ctx = ctx || {};
+    var rows = expandAttendance(entries);
+    var mat = 0, pat = 0, casual = 0;
+    rows.forEach(function (r) {
+      if (r.state === "leave_maternity") mat++;
+      else if (r.state === "leave_paternity") pat++;
+      else if (r.state === "leave_paid") casual++;
+    });
+    var years = Math.max(1, posInt(ctx.durationMonths, 36) / 12);
+    var casualAllowance = Math.round(num(ctx.casualLeavePerYear, 20) * years);
+    var excessCasual = Math.max(0, casual - casualAllowance);
+    return {
+      maternity: mat, paternity: pat,
+      casualTaken: casual, casualAllowance: casualAllowance, excessCasual: excessCasual,
+      totalDays: mat + pat + excessCasual,
+      source: "nmc_faq", clause: "PGMEB FAQ 10.04.2024, Q1 and Q2",
+      note: "Maternity/paternity leave and casual leave taken in excess of the annual allowance " +
+        "extend the period of training by the same number of days. They do not reduce the " +
+        "attendance percentage."
+    };
+  }
+
   function attendanceSummary(entries, ctx) {
     ctx = ctx || {};
     var rows = expandAttendance(entries);
@@ -1103,34 +1165,58 @@
     });
     var start = isoDate(ctx.programmeStart), today = isoDate(ctx.today);
     var elapsed = start && today ? Math.max(0, daysBetween(start, today) + 1) : 0;
-    var courseDays = posInt(ctx.courseDays, 0);
+    // THE FAQ'S DENOMINATOR. Working days elapsed so far = calendar days elapsed minus the weekly
+    // offs in that period. This is what the 80% is a percentage OF.
+    var offsElapsed = Math.round((elapsed / 365) * WEEKLY_OFFS_PER_YEAR);
+    var workingElapsed = Math.max(0, elapsed - offsElapsed);
+    var course = workingDays(ctx.durationMonths);
+    var requiredDays = requiredAttendanceDays(ctx.durationMonths, ctx.attendancePct);
+    var courseDays = posInt(ctx.courseDays, 0) || requiredDays;
     return {
       recordedDays: recorded,
       attendedDays: attended,
       counts: counts,
       elapsedDays: elapsed,
-      // % of the days that have actually been RECORDED - stated as such, because a resident who has
-      // not entered attendance has an unknown percentage, not a low one.
+      // THE ONE THAT MATTERS: attendance as a percentage of WORKING days elapsed, which is the
+      // PGMEB FAQ's definition. Null until there are working days to measure against.
+      workingDaysElapsed: workingElapsed,
+      // Capped at 100: a resident who logs "present" on a weekly off produces more attended days
+      // than working days, and a 111% attendance figure on an examiner-facing report reads as a bug.
+      // attendedDays and workingDaysElapsed are both exposed raw so the reader can see 10 of 9, and
+      // exceedsWorkingDays flags it rather than hiding it.
+      pctOfWorkingDays: workingElapsed ? Math.min(100, Math.round((attended / workingElapsed) * 100)) : null,
+      exceedsWorkingDays: workingElapsed ? attended > workingElapsed : false,
+      // The whole course, for the "751 of 939" view the FAQ states directly.
+      courseCalendarDays: course.calendarDays,
+      courseWeeklyOffs: course.weeklyOffs,
+      courseWorkingDays: course.workingDays,
+      requiredDays: requiredDays,
+      // Kept for continuity and shown as SECONDARY readings, clearly labelled. pctOfRecorded in
+      // particular FLATTERS - a resident who records only the days they were present scores 100% -
+      // so it is never the headline number.
       pctOfRecorded: recorded ? Math.round((attended / recorded) * 100) : null,
-      // % against elapsed calendar days - the stricter reading, shown beside the first.
       pctOfElapsed: elapsed ? Math.round((attended / elapsed) * 100) : null,
       thresholdPct: num(ctx.attendancePct, 80),
       thresholdPctSource: "nmc_regulation",           // PGMER-2023 5.6 states the 80% itself
       thresholdDays: courseDays,
-      thresholdDaysSource: ctx.attendanceDaysSource || "nmc_faq_secondary",
+      // PRIMARY now: the PGMEB FAQ PDF was obtained on 2026-08-27 (pglog-sources/). It was carried
+      // as nmc_faq_secondary while it was known only from news coverage of the notice.
+      thresholdDaysSource: ctx.attendanceDaysSource || "nmc_faq",
       // WHICH DAYS COUNT is institutional, and is reported separately from the threshold so a local
       // interpretation can never be read as the gazette's. attendanceCounts is the map that was
       // actually applied, so a report can print it.
       attendanceCounts: cmap,
       interpretationSource: "institution",
       interpretationCustomised: attendanceCountsCustomised(ctx.attendanceCounts),
-      meetsPct: recorded ? (attended / recorded) * 100 >= num(ctx.attendancePct, 80) : null,
-      meetsDays: courseDays ? attended >= courseDays : null,
-      note: "PGMER-2023 5.6 states the 80% figure. The 751/501-day figures come from the PGMEB FAQ " +
-        "(a secondary source). WHICH DAYS COUNT as attended is the institution's rule, not the " +
-        "regulation's: 5.6 grants 20 days paid leave, 5 days academic leave, a weekly holiday and " +
-        "maternity/paternity leave, and extends the term only for leave taken IN EXCESS of what is " +
-        "permitted. By default every permitted leave state counts."
+      // Measured against WORKING days, per the FAQ. Null while there is nothing to measure.
+      meetsPct: workingElapsed ? (attended / workingElapsed) * 100 >= num(ctx.attendancePct, 80) : null,
+      meetsDays: requiredDays ? attended >= requiredDays : null,
+      termExtension: termExtensionDays(entries, ctx),
+      note: "PGMER-2023 5.6 states the 80% figure; the PGMEB FAQ of 10.04.2024 defines what it is a " +
+        "percentage OF: WORKING days, i.e. calendar days minus 52 weekly offs a year (939 working " +
+        "days in a three-year course, of which 80% is 751). Academic leave is counted as duty by " +
+        "the FAQ's own words. Maternity/paternity leave and excess casual leave do not reduce the " +
+        "percentage - they extend the period of training by the same number of days."
     };
   }
 
@@ -1324,6 +1410,8 @@
     progress: progress, gaps: gaps, weeklyCadence: weeklyCadence, latencyDays: latencyDays,
     expandAttendance: expandAttendance, attendanceSummary: attendanceSummary,
     attendanceCounts: attendanceCounts, attendanceCountsCustomised: attendanceCountsCustomised,
+    workingDays: workingDays, requiredAttendanceDays: requiredAttendanceDays,
+    termExtensionDays: termExtensionDays, WEEKLY_OFFS_PER_YEAR: WEEKLY_OFFS_PER_YEAR,
     COUNTS_AS_ATTENDED_DEFAULT: COUNTS_AS_ATTENDED_DEFAULT,
     examEligibility: examEligibility, summarise: summarise,
     overdueVerifications: overdueVerifications, progressScore: progressScore,

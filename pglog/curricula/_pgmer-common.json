@@ -292,9 +292,14 @@
           "24": 501,
           "36": 751
         },
-        "source": "nmc_faq_secondary",
-        "clause": "PGMEB clarification / FAQs on PGMER-23, public notice dated 10.04.2024",
-        "note": "SECONDARY SOURCE. The primary PGMEB FAQ PDF could not be retrieved on 2026-08-27; these day counts are reported by news coverage of the notice. They are editable and are labelled 'secondary source' in the UI. Verify against the PGMEB notice before relying on them."
+        "source": "nmc_faq",
+        "clause": "PGMEB FAQ 10.04.2024, Q2 (F.No. N-P016(11)/2/2023-PGMEB-NMC)",
+        "note": "PRIMARY as of 2026-08-27: the PGMEB FAQ PDF was obtained and is checked into pglog-sources/PGMEB-FAQ-2024-04-10.txt. It was carried as nmc_faq_secondary while it was known only from news coverage. It settles the DENOMINATOR: 80% is of WORKING days (calendar days minus 52 weekly offs a year), not of calendar days and not of the days a resident happens to have recorded.",
+        "quote": "For Three-Year Course: Total days in a three-year course will be 1095 days. So the total working days will be 939 days after deducting weekly offs (52 x 3 years = 156 days). A student will require 80 per cent attendance of working days (i.e. 751 days of 939 days) for appearing in the examination. However, period of training will be extended by the same number of days for which maternity/paternity leave and total excess casual leave have been availed in three years.",
+        "workingDays": {
+          "36": 939,
+          "24": 626
+        }
       }
     },
     {
@@ -319,7 +324,56 @@
       "informational": true,
       "source": "nmc_regulation",
       "clause": "5.6(e)",
-      "quote": "In addition to minimum 20 days' paid leave, the candidates will be allowed academic paid leave of 5 days per year for entire duration of training period."
+      "quote": "In addition to minimum 20 days' paid leave, the candidates will be allowed academic paid leave of 5 days per year for entire duration of training period.",
+      "note": "PGMEB FAQ 10.04.2024 Q1 settles that this leave is counted as duty — see pgmer_faq_academic_leave_duty."
+    },
+    {
+      "id": "pgmer_faq_digital_logbook",
+      "kind": "meta",
+      "label": "Log book maintained digitally — PG students from the 2023-24 batch",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_faq",
+      "clause": "PGMEB FAQ 10.04.2024, Q7",
+      "quote": "The PG students from 2023-24 batch will maintain log book digitally.",
+      "note": "The applicability date for the DIGITAL mandate. A resident admitted before 2023-24 is not required by this answer to keep a digital logbook, though nothing stops them."
+    },
+    {
+      "id": "pgmer_faq_ethics_cls_applicability",
+      "kind": "certification",
+      "label": "Ethics and Cardiac Life Support courses — students admitted from 2021 onwards",
+      "target": 1,
+      "per": "course",
+      "source": "nmc_faq",
+      "informational": true,
+      "clause": "PGMEB FAQ 10.04.2024, Q8 and Q9",
+      "quote": "All the PG students admitted from 2021 and after will have to complete course before appearing in the examination. | The courses in Ethics and Cardiac Life Support Skills will be designed and conducted by the Academic Cell of the respective medical college/institution till further directions.",
+      "note": "Two things PGMER-2023 5.2(xi) does not say: WHO the requirement applies to (2021 admissions onward) and WHO issues the certificate (the college's own Academic Cell, not an external body)."
+    },
+    {
+      "id": "pgmer_faq_drp_sites",
+      "kind": "rotation",
+      "label": "District Residency — where a resident may and may not be posted",
+      "target": null,
+      "per": "course",
+      "source": "nmc_faq",
+      "informational": true,
+      "clause": "PGMEB FAQ 10.04.2024, Q3, Q4 and Q5",
+      "quote": "However, posting in any post-graduate medical institution or super specialty hospital is not permitted. Yes, PG students can be posted in those ESIC hospitals which are not running any post-graduate medical institutions or Super Speciality hospitals.",
+      "note": "The EXCLUSION is the operative part: a posting to a PG institution or a super-specialty hospital does not count as District Residency, and DRP completion is an examination pre-requisite under 5.2(xii)VIII(c). The permitted-sites list (District Hospital, CHC, PHC, Sub-Health Centre, Urban Health Centre, Community Outreach System) is in FAQ Q3 but is not quoted here because the OCR of that sentence is unreliable."
+    },
+    {
+      "id": "pgmer_faq_academic_leave_duty",
+      "kind": "attendance",
+      "label": "Academic leave is counted as duty",
+      "target": 5,
+      "unit": "days",
+      "per": "year",
+      "informational": true,
+      "source": "nmc_faq",
+      "clause": "PGMEB FAQ 10.04.2024, Q1",
+      "quote": "Five days Academic Leave per year, if availed by a student will be counted as duty.",
+      "note": "This is what PGMER-2023 5.6(e) does not say, and it is why academic leave counts toward attendance in this module."
     }
   ]
 }

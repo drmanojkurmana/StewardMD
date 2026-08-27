@@ -125,7 +125,10 @@ test("EVERY requirement quotation appears verbatim in the NMC source it cites", 
     const p = pack(packId);
     (p.requirements || []).forEach((r) => {
       if (!r.quote) return;
-      SOURCE_OF[packId].forEach((srcKey) => {
+      // A requirement is checked against the document its OWN grade points at. A pack's listed
+      // sources are its curriculum PDFs; an nmc_faq requirement belongs to the PGMEB FAQ instead.
+      const keys = r.source === "nmc_faq" ? ["PGMEB-FAQ-2024-04-10"] : SOURCE_OF[packId];
+      keys.forEach((srcKey) => {
         if (!quoteInSource(r.quote, srcKey)) missing.push(packId + "/" + r.id + " not found in " + srcKey);
       });
     });
@@ -300,7 +303,7 @@ test("every numeric target in every pack is present in its own source document",
       // contains no numeral. Its QUOTATION is still verified verbatim above, which is the guarantee
       // that matters. Only counts greater than one are checked for the number itself.
       if (r.target === 1) return;
-      SOURCE_OF[packId].forEach((srcKey) => {
+      (r.source === "nmc_faq" ? ["PGMEB-FAQ-2024-04-10"] : SOURCE_OF[packId]).forEach((srcKey) => {
         const hay = SOURCES[srcKey];
         // The number itself, or the word the source spells it with, must be in the source. The
         // ELEVEN word-numbers the NMC PDFs actually use are listed; nothing else is accepted.
@@ -371,5 +374,49 @@ test("the source register lists every file the packs are checked against", () =>
   Object.keys(SOURCES).forEach((k) => {
     assert.ok(SOURCES[k].length > 2000, k + ".txt looks truncated (" + SOURCES[k].length + " chars)");
   });
-  assert.equal(Object.keys(SOURCES).length, 16, "expected 16 source extracts");
+  assert.ok(Object.keys(SOURCES).length >= 17, "expected the 16 curriculum extracts plus the PGMEB FAQ, got " + Object.keys(SOURCES).length);
+});
+
+/* ── coverage: every qualification the gazette recognises ─────────────────────
+ * A rival product's department picker lists ~35 departments and it is their strongest coverage
+ * claim. Ours is generated from PGMER-2023's own Annexure-1 and Annexure-2, so it cannot drift from
+ * the regulation, and a specialty with no curriculum pack is supported honestly rather than absent.
+ */
+
+test("the specialty picker is generated from the gazette's own annexures", () => {
+  const sp = JSON.parse(readFileSync(join(ROOT, "pglog", "specialties.json"), "utf8"));
+  assert.ok(sp.broad.length >= 37, "PGMER Annexure-1 lists 32 MD + 6 MS; got " + sp.broad.length);
+  assert.ok(sp.super.length >= 40, "PGMER Annexure-2 is the DM/MCh list; got " + sp.super.length);
+  assert.match(sp.source.url, /nmc\.org\.in/);
+  // every name must actually appear in the extracted gazette text
+  const gazette = SOURCES["PGMER-2023"];
+  sp.broad.concat(sp.super).forEach((x) => {
+    assert.ok(gazette.includes(norm(x.name)), x.degree + " (" + x.name + ") is not in PGMER-2023");
+  });
+});
+
+test("a specialty with no pack resolves to generic-pg, and is flagged as such", () => {
+  const sp = JSON.parse(readFileSync(join(ROOT, "pglog", "specialties.json"), "utf8"));
+  const pharm = sp.broad.find((x) => /Pharmacology/i.test(x.name));
+  assert.ok(pharm, "MD Pharmacology must be selectable");
+  assert.equal(pharm.packId, "generic-pg");
+  assert.equal(pharm.hasSpecialtyPack, false);
+  // and the fallback pack says so out loud rather than looking empty
+  assert.match(pack("generic-pg").banner, /No NMC specialty curriculum pack is loaded/);
+});
+
+test("every packId in the picker is a pack that exists", () => {
+  const sp = JSON.parse(readFileSync(join(ROOT, "pglog", "specialties.json"), "utf8"));
+  const ids = new Set(Object.keys(SOURCE_OF));
+  sp.broad.concat(sp.super).forEach((x) => {
+    assert.ok(ids.has(x.packId), x.name + " points at a pack that does not exist: " + x.packId);
+  });
+});
+
+test("the specialties with a real pack are exactly the 15 that were sourced", () => {
+  const sp = JSON.parse(readFileSync(join(ROOT, "pglog", "specialties.json"), "utf8"));
+  const withPack = sp.broad.concat(sp.super).filter((x) => x.hasSpecialtyPack);
+  assert.equal(withPack.length, 15, "a pack appearing or vanishing here should be deliberate");
+  assert.ok(withPack.every((x) => x.degree === "MD" || x.degree === "MS"),
+    "no super-specialty curriculum has been sourced yet, so none may claim a pack");
 });

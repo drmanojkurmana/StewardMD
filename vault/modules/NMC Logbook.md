@@ -43,6 +43,8 @@ are throws at the data layer, not disabled buttons.
 | `pglog-model.js` | **THE PURE CORE.** Entities, the verification state machine, progress/cadence, attendance, exam checklist, assessment scoring, PHI scrubbing. Imported by the server too — the rules exist once. |
 | `pglog-curriculum.js` | Pack registry, flatten/resolve, the **deterministic** requirement matcher. |
 | `pglog/curricula/*.json` | 15 specialty packs + 2 common packs + a PGMER-only fallback. Data, not code. |
+| `pglog/specialties.json` | **Generated from PGMER Annexure-1/-2**: all 84 recognised qualifications → pack id. `scripts/build-pglog-specialties.mjs`. |
+| `pglog-sources/` | The extracted text of 18 NMC PDFs. Test fixtures + audit trail, NOT bundled. |
 | `pglog/assessment-templates.json` | DOPS / shift WPBA / clinical WPBA / appraisal, taken from the NMC proformas. |
 | `pglog-store.js` | Client: account-scoped local drafts, offline queue, API. |
 | `pglog-screens.js` | Router + every screen (resident / faculty / HOD / Academic Cell). |
@@ -134,6 +136,27 @@ quotation, since deleted.
 
 If you add or change a pack, run it. It will name what does not match.
 
+## Competitive position — 2026-08-27
+
+Teardown of **NMC eLogbook** (Neugenic Mediventure, ₹4,999+GST per resident per 3 years) is in
+[[competitor-nmc-elogbook-2026-08-27]]. Three things came out of it:
+
+1. **A real bug in ours.** Their faculty field is a roster dropdown; ours was free text, and
+   `pendingFor` is a copy of it — so a typo produced an entry that was submitted, counted toward
+   nothing and reached nobody. Now resolved against the roster, and refused if unresolvable.
+2. **Their compliance citation led to the PGMEB FAQ we could not find**, which **corrected our
+   attendance model**: 80% is of WORKING days (939 in three years), not of recorded days. See §14 of
+   the requirements doc.
+3. **Coverage**: their picker has ~35 departments. Ours is now generated from PGMER Annexure-1/-2 —
+   **84 recognised qualifications**, 15 with a real pack, the rest honestly on PGMER-only.
+
+Their "Mandatory Checklist" ships **three** items and omits the Ethics/GCP-GLP and BCLS/ACLS courses,
+both of which §5.2(xi) makes examination pre-requisites.
+
+**The one place they are genuinely ahead is onboarding** — a resident self-registers in two minutes;
+ours needs the Academic Cell. That is a deliberate trade (verification needs a real guide) but it is
+the biggest adoption risk and is an owner decision, not a technical one.
+
 ## Gotchas
 
 - **Only VERIFIED entries count toward progress.** A resident cannot move their own bar. Submitted
@@ -158,14 +181,14 @@ If you add or change a pack, run it. It will name what does not match.
 
 | File | Covers |
 |---|---|
-| `test/pglog-model.test.mjs` | 57 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
-| `test/pglog-provenance.test.mjs` | 14 — **the real one**: every quotation and every number checked against `pglog-sources/` |
+| `test/pglog-model.test.mjs` | 64 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
+| `test/pglog-provenance.test.mjs` | 18 — **the real one**: every quotation and every number checked against `pglog-sources/`, plus specialty coverage |
 | `test/pglog-curriculum.test.mjs` | 29 — pack structure, flatten/resolve, overrides, the requirement mapper |
-| `test/pglog-server.test.mjs` | 41 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
+| `test/pglog-server.test.mjs` | 45 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
 | `test/run-pglog-ui.mjs` | 54 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
 
 Run: `node --test test/pglog-*.test.mjs` and `node test/run-pglog-ui.mjs`.
-**141 unit assertions + 54 browser assertions, all green.** Full repo suite: 419 files, 0 failures.
+**156 unit assertions + 54 browser assertions, all green.** Full repo suite: 419 files, 0 failures.
 
 Note: two repo tests (`followcare-voice-server`, `opd-mrn-alloc`) need `node --experimental-test-module-mocks`,
 which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They are unrelated to this module.

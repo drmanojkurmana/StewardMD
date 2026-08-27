@@ -22,7 +22,7 @@ const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
 const packFiles = files.filter((f) => f !== "index.json" && !f.startsWith("_"));
 const commonFiles = files.filter((f) => f.startsWith("_"));
 
-const VALID_SOURCES = ["nmc_regulation", "nmc_curriculum", "nmc_faq_secondary", "institution", "unspecified"];
+const VALID_SOURCES = ["nmc_regulation", "nmc_curriculum", "nmc_faq", "nmc_faq_secondary", "institution", "unspecified"];
 
 /* ── provenance ────────────────────────────────────────────────────────────── */
 
@@ -79,7 +79,15 @@ test("no requirement claims an NMC source while having an unsourced number", () 
 test("PGMER-2023 clause references look like real clauses", () => {
   const common = read("_pgmer-common.json");
   for (const r of common.requirements) {
-    assert.equal(r.source, "nmc_regulation", r.id + ": the PGMER pack must only carry regulation requirements");
+    // The pack now also carries PGMEB FAQ answers (obtained 2026-08-27). Those are graded nmc_faq
+    // and cite an FAQ question, not a gazette section — the two must not be confused, which is why
+    // they are checked apart.
+    if (r.source === "nmc_faq") {
+      assert.match(r.clause, /^PGMEB FAQ /, r.id + ": an FAQ requirement must cite the FAQ notice");
+      assert.ok(r.quote, r.id + ": no verbatim quote");
+      continue;
+    }
+    assert.equal(r.source, "nmc_regulation", r.id + ": the PGMER pack carries only regulation or FAQ requirements");
     assert.match(r.clause, /^\d+\.\d+/, r.id + ": clause '" + r.clause + "' is not a PGMER section number");
     assert.ok(r.quote, r.id + ": a regulation requirement with no verbatim quote");
   }
@@ -91,14 +99,19 @@ test("the PGMER pack carries the six clauses the module is built on", () => {
    "pgmer_dissemination", "pgmer_attendance"].forEach((id) => assert.ok(ids.includes(id), "missing " + id));
 });
 
-test("the attendance day-counts are carried as a SECONDARY source, separately from the 80%", () => {
+test("the 80% is the gazette's; the day counts and the DENOMINATOR are the FAQ's, carried apart", () => {
   const att = read("_pgmer-common.json").requirements.find((r) => r.id === "pgmer_attendance");
   assert.equal(att.source, "nmc_regulation");        // the 80% is the gazette's
   assert.equal(att.target, 80);
-  assert.equal(att.secondary.source, "nmc_faq_secondary");
+  // The FAQ PDF was OBTAINED on 2026-08-27, so this is no longer a secondary claim.
+  assert.equal(att.secondary.source, "nmc_faq");
   assert.equal(att.secondary.days["36"], 751);
   assert.equal(att.secondary.days["24"], 501);
-  assert.match(att.secondary.note, /SECONDARY SOURCE/);
+  // and it now carries the thing that actually corrected the module: the denominator.
+  assert.equal(att.secondary.workingDays["36"], 939);
+  assert.equal(att.secondary.workingDays["24"], 626);
+  assert.match(att.secondary.quote, /working days/i);
+  assert.match(att.secondary.note, /PRIMARY as of 2026-08-27/);
 });
 
 /* ── the one pack with real NMC counts ─────────────────────────────────────── */
@@ -308,7 +321,8 @@ test("a specialty with no pack falls back to PGMER-only and SAYS it has no speci
   assert.match(g.banner, /No NMC specialty curriculum pack is loaded/);
   const f = flat("generic-pg");
   assert.ok(f.requirements.length > 0, "it must still carry the PGMER-2023 requirements");
-  assert.ok(f.requirements.every((r) => r.source === "nmc_regulation"));
+  assert.ok(f.requirements.every((r) => r.source === "nmc_regulation" || r.source === "nmc_faq"),
+    "the fallback carries only the regulation and the PGMEB FAQ that clarifies it");
 });
 
 test("common packs are marked so they are never offered as a specialty", () => {

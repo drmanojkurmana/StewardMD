@@ -116,6 +116,9 @@ fi
 # for THIS module means a logbook that cannot tell a resident what the NMC requires. These are small
 # plain-JSON files (well under a MB in total), so they are bundled rather than fetched from Pages.
 [ -d pglog ] && mkdir -p "$WWW/pglog" && cp -R pglog/. "$WWW/pglog/"
+# NOTE: pglog-sources/ (the extracted text of the NMC PDFs, ~900 KB) is deliberately NOT copied. It is
+# the evidence the provenance test checks the packs against, not a runtime asset, and it lives outside
+# pglog/ precisely so this line cannot pick it up.
 
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),

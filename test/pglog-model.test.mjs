@@ -298,9 +298,11 @@ test("attendance expands ranges, de-duplicates days, and reports both readings",
   // what is permitted. So permitted leave counts by default; the day is not deducted.
   assert.equal(sum.attendedDays, 10);
   assert.equal(sum.pctOfRecorded, 100);
+  // meetsPct now follows the PGMEB FAQ's denominator (working days elapsed), not recorded days.
+  // Ten present days out of ten elapsed working days is 100% either way.
   assert.equal(sum.meetsPct, true);
   assert.equal(sum.thresholdPctSource, "nmc_regulation");
-  assert.equal(sum.thresholdDaysSource, "nmc_faq_secondary");
+  assert.equal(sum.thresholdDaysSource, "nmc_faq", "the FAQ PDF was obtained 2026-08-27");
   // the threshold is the gazette's; WHICH DAYS COUNT is the institution's, and they are reported apart
   assert.equal(sum.interpretationSource, "institution");
   assert.equal(sum.interpretationCustomised, false);
@@ -351,9 +353,20 @@ test("an institution may change what counts, and the summary SAYS it was changed
   assert.equal(junk.interpretationCustomised, false);
 });
 
-test("with nothing recorded, attendance is UNKNOWN rather than zero", () => {
-  const sum = M.attendanceSummary([], { programmeStart: "2026-08-01", today: "2026-08-27" });
-  assert.equal(sum.pctOfRecorded, null);
+test("with nothing recorded, attendance is 0% of working days — and that is the honest answer", () => {
+  const sum = M.attendanceSummary([], { programmeStart: "2026-08-01", today: "2026-08-27", durationMonths: 36 });
+  assert.equal(sum.pctOfRecorded, null, "no recorded days -> the recorded-days reading is unknown");
+  // But against the FAQ's denominator it is NOT unknown: 27 calendar days have elapsed, ~23 of them
+  // working days, and none are accounted for. Reporting that as "unknown" was the flattering error.
+  assert.ok(sum.workingDaysElapsed > 20);
+  assert.equal(sum.pctOfWorkingDays, 0);
+  assert.equal(sum.meetsPct, false);
+});
+
+test("before training starts there is nothing to measure and the answer IS unknown", () => {
+  const sum = M.attendanceSummary([], {});
+  assert.equal(sum.workingDaysElapsed, 0);
+  assert.equal(sum.pctOfWorkingDays, null);
   assert.equal(sum.meetsPct, null);
 });
 
@@ -639,4 +652,74 @@ test("C3 — a cadence requirement is unaffected and still measures against elap
   const ctx = { programmeStart: "2026-07-01", today: "2026-08-27" };
   assert.equal(M.progressFor(req, [], ctx).expected, 4);
   assert.equal(M.progressFor(req, [], ctx).state, "behind");
+});
+
+/* ── PGMEB FAQ 10.04.2024 — obtained 2026-08-27, and it corrected the attendance model ────────── */
+
+test("the FAQ's own arithmetic is REPRODUCED, not copied: 1095 - 156 = 939, 80% = 751", () => {
+  // "Total days in a three-year course will be 1095 days. So the total working days will be 939 days
+  //  after deducting weekly offs (52 x 3 years = 156 days). A student will require 80 per cent
+  //  attendance of working days (i.e. 751 days of 939 days)."
+  const w = M.workingDays(36);
+  assert.equal(w.calendarDays, 1095);
+  assert.equal(w.weeklyOffs, 156);
+  assert.equal(w.workingDays, 939);
+  assert.equal(M.requiredAttendanceDays(36, 80), 751);
+  // "For Two-Year Course: Total days ... 730 days ... working days will be 626 days ... (i.e. 501)"
+  const t = M.workingDays(24);
+  assert.equal(t.calendarDays, 730);
+  assert.equal(t.weeklyOffs, 104);
+  assert.equal(t.workingDays, 626);
+  assert.equal(M.requiredAttendanceDays(24, 80), 501);
+});
+
+test("attendance is a percentage of WORKING days, not of recorded days", () => {
+  // A resident who records ONLY the days they were present used to score 100%. That number
+  // flattered, and it was the headline. The FAQ's denominator is working days elapsed.
+  const entries = [M.entry({ id: "p", kind: "attendance", occurredAt: "2026-01-01", endDate: "2026-03-31", state: "present" })];
+  const s = M.attendanceSummary(entries, {
+    programmeStart: "2026-01-01", today: "2026-12-31", durationMonths: 36, attendancePct: 80
+  });
+  assert.equal(s.pctOfRecorded, 100, "the flattering reading still exists, but as a secondary one");
+  assert.ok(s.pctOfWorkingDays < 40, "against working days elapsed it is nowhere near 100%, got " + s.pctOfWorkingDays);
+  assert.equal(s.meetsPct, false, "meetsPct must follow the FAQ's denominator, not the flattering one");
+  assert.equal(s.thresholdDaysSource, "nmc_faq", "the FAQ PDF was obtained; it is no longer secondary");
+});
+
+test("the course-level figures the FAQ states directly are exposed", () => {
+  const s = M.attendanceSummary([], { programmeStart: "2026-01-01", today: "2026-06-01", durationMonths: 36 });
+  assert.equal(s.courseCalendarDays, 1095);
+  assert.equal(s.courseWorkingDays, 939);
+  assert.equal(s.requiredDays, 751);
+});
+
+test("FAQ Q1 — academic leave is counted as duty, in the FAQ's own words", () => {
+  // "Five days Academic Leave per year, if availed by a student will be counted as duty."
+  const s = M.attendanceSummary(
+    [M.entry({ id: "a", kind: "attendance", occurredAt: "2026-08-01", state: "leave_academic" })], {});
+  assert.equal(s.attendedDays, 1);
+});
+
+test("FAQ Q1/Q2 — maternity/paternity and EXCESS casual leave extend the term, not the percentage", () => {
+  const entries = [
+    M.entry({ id: "m", kind: "attendance", occurredAt: "2026-01-01", endDate: "2026-03-31", state: "leave_maternity" }),
+    M.entry({ id: "c", kind: "attendance", occurredAt: "2026-04-01", endDate: "2026-07-09", state: "leave_paid" })
+  ];
+  const x = M.termExtensionDays(entries, { durationMonths: 36 });
+  assert.equal(x.maternity, 90);
+  assert.equal(x.casualAllowance, 60, "20 days a year over a three-year course");
+  assert.equal(x.casualTaken, 100);
+  assert.equal(x.excessCasual, 40);
+  assert.equal(x.totalDays, 130, "90 maternity + 40 excess casual");
+  assert.equal(x.source, "nmc_faq");
+  // and it is surfaced on the summary
+  const s = M.attendanceSummary(entries, { programmeStart: "2026-01-01", today: "2026-07-09", durationMonths: 36 });
+  assert.equal(s.termExtension.totalDays, 130);
+});
+
+test("casual leave WITHIN the allowance extends nothing", () => {
+  const entries = [M.entry({ id: "c", kind: "attendance", occurredAt: "2026-01-01", endDate: "2026-01-10", state: "leave_paid" })];
+  const x = M.termExtensionDays(entries, { durationMonths: 36 });
+  assert.equal(x.excessCasual, 0);
+  assert.equal(x.totalDays, 0);
 });
