@@ -303,15 +303,25 @@
   function updateRotation(id, body) { return req("/rotations/" + encodeURIComponent(id), { method: "PATCH", body: body }).then(function (r) { return r.rotation; }); }
 
   /* ── identity / setup ─────────────────────────────────────────────────────── */
+  /* An institution handle is EITHER a human-facing SMD-XXXXXX code (case-insensitive, canonically
+   * upper) or a 32-char Firestore document id (lower-case hex, case-SENSITIVE). The setup screen
+   * upper-cased everything a user typed, which is right for the first and destroys the second: a
+   * pasted org id became 349CDC... , fsGet("q_orgs/349CDC...") matched no document, and every pglog
+   * call failed the same silent way. Normalise in ONE place, on the way in and on the way out, so
+   * a handle already stored wrong on a device heals itself without the user retyping it. */
+  function normOrgHandle(v) {
+    v = String(v == null ? "" : v).trim();
+    return /^[0-9a-fA-F]{32}$/.test(v) ? v.toLowerCase() : v.toUpperCase();
+  }
   function setContext(c) {
     patch(function (p) {
-      if (c.orgId != null) p.orgId = String(c.orgId);
+      if (c.orgId != null) p.orgId = normOrgHandle(c.orgId);
       if (c.residentId != null) p.residentId = String(c.residentId);
       if (c.programmeId != null) p.programmeId = String(c.programmeId);
       if (c.curriculumId != null) p.curriculumId = String(c.curriculumId);
     });
   }
-  function context() { var p = load(); return { orgId: p.orgId, residentId: p.residentId, programmeId: p.programmeId, curriculumId: p.curriculumId }; }
+  function context() { var p = load(); return { orgId: normOrgHandle(p.orgId), residentId: p.residentId, programmeId: p.programmeId, curriculumId: p.curriculumId }; }
   function prefs() { return load().prefs; }
   function clearAccount() { try { ls() && ls().removeItem(pkey()); } catch (e) {} }
 

@@ -583,7 +583,13 @@
       '<div style="font:800 19px/1.3 var(--sans);letter-spacing:.04em;color:var(--pgl-accent,#0e6e63);word-break:break-all;user-select:all">' +
         esc(I.orgCode || (state.ctx && state.ctx.orgCode) || orgId) + "</div>" +
       '<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin-top:8px">' +
-      "Share this with your residents and faculty. They enter it under Set up." + "</p></div>" +
+      /* Only invite sharing when there is something SHAREABLE. Telling the owner to hand a raw
+       * document id to their residents is how it got typed back into the setup field - and the
+       * setup field then upper-cased it, which is what broke every call. */
+      ((I.orgCode || (state.ctx && state.ctx.orgCode))
+        ? "Share this with your residents and faculty. They enter it under Set up."
+        : "This is an internal ID, not a shareable code. Reopen this screen once you are online to mint the institution code.") +
+      "</p></div>" +
 
       '<div class="pgl-card"><h3>PG programmes</h3>' +
       (progs.length
@@ -1993,7 +1999,9 @@
       }
       case "save-org": {
         var v = (state.host.querySelector("#pglOrg") || {}).value || "";
-        st.setContext({ orgId: v.trim().toUpperCase() });
+        // setContext normalises: SMD codes upper, a 32-char org id lower. Upper-casing here broke
+        // every pasted org id.
+        st.setContext({ orgId: v.trim() });
         state.ctx = null; state.dash = null;
         toast("Checking…");
         return enter("home");

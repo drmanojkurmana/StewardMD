@@ -33,11 +33,17 @@ export async function createOrg(env, body, ownerUid) {
   return f;
 }
 export async function getOrg(env, orgId) {
-  const d = await fsGet(env, "q_orgs/" + sanitize(orgId)); if (!d) return null;
-  const o = M.org(withId(sanitize(orgId), d.fields));
+  let id = sanitize(orgId);
+  let d = await fsGet(env, "q_orgs/" + id);
+  /* Document ids are lower-case hex, and clients have upper-cased them: the pglog setup screen
+   * applied .toUpperCase() to every handle a user typed, which is correct for an SMD-XXXXXX code
+   * and fatal for a pasted org id. Retry once folded so those devices resolve instead of 404ing. */
+  if (!d && /^[0-9A-F]{32}$/.test(id)) { id = id.toLowerCase(); d = await fsGet(env, "q_orgs/" + id); }
+  if (!d) return null;
+  const o = M.org(withId(id, d.fields));
   if (!o.code) {   // lazy-assign a StewardMD ID to a legacy org on first load
     o.code = await uniqueOrgCode(env);
-    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + sanitize(orgId), { code: o.code })]); } catch (e) {}
+    try { await fsCommit(env, [wUpdate(env, "q_orgs/" + id, { code: o.code })]); } catch (e) {}
   }
   return o;
 }
