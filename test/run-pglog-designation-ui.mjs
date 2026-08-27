@@ -212,6 +212,36 @@ try {
   ok(/[Ss]ign in/.test(ts), "it says to sign in");
   ok(!/Choose a different institution/i.test(ts), "it does not offer a picker that cannot succeed");
 
+  /* ── 9. An OPD clinic must not pass as a PG institution ──
+   * Read off the owner's account: the ONLY org it owns is "StewardMD Clinic A", an OPD clinic, and
+   * the eLOGBook adopted it and called it "your institution". Nothing in q_orgs distinguished the
+   * two - mode is native/connect (the EMR coupling), never clinic/college. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([
+      {id:"c111",name:"StewardMD Clinic A",code:"SMD-W2DG5S"},
+      {id:"i222",name:"Test Medical College",code:"SMD-COLL01",kind:"institution"}]);};
+    s.me=function(id){return Promise.resolve({uid:"u1",orgId:id,orgCode:"SMD-W2DG5S",
+      orgName:"StewardMD Clinic A",orgKind:"clinic",role:"admin",caps:["pglog.configure"],
+      resident:null,programme:null,rotations:[]});};
+    s.programmes=function(){return Promise.resolve({programmes:[]})};
+    s.seedDemo=function(){return null};
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1500);
+  await tap("setting up our institution");
+  await sleep(1600);
+  const tk = String(await txt());
+  ok(/OPD clinic, not a PG institution/i.test(tk), `the picker names the clinic as a clinic (got: ${JSON.stringify(tk.slice(0, 170))})`);
+  ok(/PG institution/.test(tk), "and names the college as an institution");
+
+  await tap("StewardMD Clinic A");
+  await sleep(1800);
+  const tw = String(await txt());
+  ok(/not a PG institution/i.test(tw), `adopting a clinic is warned about (got: ${JSON.stringify(tw.slice(0, 170))})`);
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}

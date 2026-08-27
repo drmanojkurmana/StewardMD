@@ -243,7 +243,8 @@ export async function onRequest(context_) {
       const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
         ? await S.signerStatus(env, ctx.actorUid) : null;
       return json({ ok: true, uid: ctx.uid, orgId: ctx.orgId, orgCode: (ctx.org && ctx.org.code) || "",
-                    orgName: (ctx.org && ctx.org.name) || "", role: ctx.role, caps, resident, programme, rotations, signer });
+                    orgName: (ctx.org && ctx.org.name) || "", orgKind: (ctx.org && ctx.org.kind) || "",
+                    role: ctx.role, caps, resident, programme, rotations, signer });
     }
 
     /* ── enrol: add a person to this institution ────────────────────────────

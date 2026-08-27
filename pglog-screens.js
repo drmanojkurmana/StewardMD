@@ -528,10 +528,14 @@
         ? '<div class="pgl-card"><h3>Your institutions</h3>' +
           '<p style="font-size:13px;color:var(--pgl-muted)">This device is not pointed at one yet. Pick it rather than creating a second.</p>' +
           mine.map(function (o) {
+            // Every org this account owns is listed here, clinics included - that is how an OPD
+            // clinic came to be adopted as "your institution". Name the kind on the row.
+            var clinic = o.kind !== "institution";
             return '<button class="pgl-row" data-pgl="pick-inst" data-id="' + attr(o.id) + '">' +
-              '<span class="pgl-row-ic">' + ic("apartment") + "</span>" +
+              '<span class="pgl-row-ic">' + ic(clinic ? "local_hospital" : "apartment") + "</span>" +
               '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(o.name || o.id) + "</span>" +
-              '<span class="pgl-row-s">' + esc(o.code || "") + "</span></span>" + ic("chevron_right") + "</button>";
+              '<span class="pgl-row-s">' + esc((o.code || "") + (clinic ? " · OPD clinic, not a PG institution" : " · PG institution")) +
+              "</span></span>" + ic("chevron_right") + "</button>";
           }).join("") + "</div>"
         : "";
       return wrap(
@@ -570,6 +574,13 @@
           : '<button class="pgl-btn wide" data-pgl="clear-inst">Choose a different institution</button>')
       );
     }
+    var kind = (state.ctx && state.ctx.orgKind) || "";
+    var clinicWarn = kind && kind !== "institution"
+      ? banner("warn", "error",
+          "This is an OPD clinic, not a PG institution. Residents enrolled here will not be on a recognised " +
+          "programme. Create your medical college instead.") +
+        '<button class="pgl-btn wide" data-pgl="clear-inst">Choose or create the right institution</button>'
+      : "";
     var progs = I.programmes || [];
     var specs = I.specialties || [];
     var opts = progs.map(function (pr) {
@@ -580,6 +591,7 @@
         esc(sp.name + " (" + (sp.degree || "") + ")") + (sp.hasSpecialtyPack ? "" : " · generic pack") + "</option>";
     }).join("");
     return wrap(
+      clinicWarn +
       '<div class="pgl-card"><h3>' + esc(I.orgName || (state.ctx && state.ctx.orgName) || "Your institution") + "</h3>" +
       '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
         ((I.orgCode || (state.ctx && state.ctx.orgCode)) ? "Institution code" : "Institution ID (no short code yet)") + "</p>" +

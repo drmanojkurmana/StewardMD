@@ -181,7 +181,7 @@
     return G.fetch("/api/queue/org", {
       method: "POST",
       headers: { "Authorization": "Bearer " + token(), "Content-Type": "application/json" },
-      body: JSON.stringify({ name: String(name || "").trim(), mode: "native" })
+      body: JSON.stringify({ name: String(name || "").trim(), mode: "native", kind: "institution" })
     }).then(function (r) { return r.json().catch(function () { return {}; }); })
       .then(function (j) {
         if (!j || !j.ok || !j.org) throw mkErr((j && j.error) || "org_failed", "Could not create the institution.");
