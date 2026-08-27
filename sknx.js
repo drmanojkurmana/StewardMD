@@ -75,7 +75,18 @@
   }
 
   function open() {
-    if (!isOn()) return;               // hard gate: flag off OR free entitlement -> complete no-op
+    if (!isOn()) {
+      /* isOn() is false for two very different reasons, and they deserve different behaviour.
+       *   flag OFF          -> the module is not shipped in this build. No tile should have been
+       *                        tappable, so staying silent is correct.
+       *   flag ON, no entitlement -> a clinician tapped a tile they can SEE and got absolutely
+       *                        nothing back. That is the "the app is broken" report, and it was a
+       *                        deliberate no-op. Say why instead, and offer the right next step
+       *                        (verify vs subscribe - pro-notice.js decides which).
+       * Checked against the flag directly, since isOn() has already collapsed the two. */
+      try { if (dFlag() && window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("sknx"); } catch (e) {}
+      return;
+    }
     var el = root();
     el.classList.add("sknx-open");
     document.documentElement.classList.add("sknx-lock");
