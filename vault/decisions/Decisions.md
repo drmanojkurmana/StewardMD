@@ -5,6 +5,36 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · Acknowledgements: read #ackCard, don't restyle a clone of it
+
+**Owner: "it looks too big".** It was. `openAck()` cloned `#ackCard` into the sheet and used a wall
+of `!important` to force every hover tooltip open INLINE, because hover does not exist on touch.
+Twelve people x a full bio each is roughly three screens, so the names - the entire point of the
+page - were buried in prose nobody scrolls.
+
+**Fix: read the markup instead of restyling it.** `#ackCard` STAYS the single source of truth (the
+desktop hover tooltips still use it, and adding a contributor is still one `<span>` there and
+nothing else). `ackHTML()` now parses name / role / bio / links out of both markup shapes
+(`.creator-tip` -> `.ctp-deg`/`.ctp-bio`/`a.ctp-linkedin`; `.ack-tip` -> `<strong>` + trailing text)
+and renders a compact accordion. Owner picked this from four mockups.
+
+- **Collapsed by default, one open at a time** - twelve open accordions is the same wall again.
+- **Founders get initials avatars**, contributors do not: it separates the two groups without a
+  second heading style, and keeps contributor rows to one line each.
+- **`visibility:hidden` on collapsed bios, not just `overflow:hidden`.** Clipping alone leaves the
+  text in the a11y tree and in find-in-page, so a screen reader still read all twelve. Caught by the
+  browser test, which asserted on `innerText` rather than on height.
+- `openAck()` and the About-box "Acknowledgements" tab now share ONE builder, so the two surfaces
+  cannot drift. Both render into the DOM at once, so anything testing them must scope to the
+  VISIBLE roster - a document-wide query hits the hidden About copy, where `innerText` does not
+  respect collapse and every assertion silently inverts.
+
+**Added:** Dr. Sri Harsha Gora, Field Testing & Bug Reports (IM resident using the app on the wards).
+
+**Measured:** 12 people in ~1000 px, was ~3 screens. **Status:** 19/19 headless-Chrome
+`test/run-ack-ui.mjs`, driven against the REAL page rather than a fixture, precisely so it fails if
+the parser stops matching `#ackCard`. Cache tokens bumped (`home.js` + the SW key).
+
 ## 2026-08-27 · Enforcement armed: deletion on, prompt every open, tiered AI limits
 
 Owner, after reviewing the dry-run design: *"push it, turn on auto delete if not verified in 7 days,

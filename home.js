@@ -1059,18 +1059,39 @@
       // and the rotating quote popup so they never cover the sheet's content (e.g. the contributor card).
       "body.hv-sheet-open .hv-fab,body.hv-sheet-open #harrisonQuotePopup,body.hv-sheet-open .ghis-ward-fab{display:none!important}",
       ".hv-sheet{z-index:calc(var(--z-cases, 600) + 40)}.hv-scrim{z-index:calc(var(--z-cases, 600) + 39)}",
-      // Acknowledgements sheet: render the names' hover tooltips (roles, bios, publications)
-      // INLINE as readable cards — visible on touch, no overlap. Names stack; each description
-      // sits under its name.
-      ".hv-ack .ack-names{display:block!important}",
-      ".hv-ack .ack-role{font:700 11px var(--hfont,var(--sans))!important;text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#5a7184)!important;margin:18px 0 2px!important}",
-      ".hv-ack .ack-contrib-name,.hv-ack .creator-name{display:block!important;position:relative!important;font:800 15px var(--hfont,var(--sans))!important;color:var(--hink,#14202b)!important;margin:14px 0 0!important;padding:0!important;cursor:default!important;border:none!important}",
-      "body.dark .hv-ack .ack-contrib-name,body.dark .hv-ack .creator-name{color:#E7EDF5!important}",
-      "body.dark .hv-ack .ack-role{color:var(--teal,#12a594)!important}",
-      ".hv-ack .ack-tip,.hv-ack .creator-tip{display:block!important;position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;z-index:auto!important;transform:none!important;margin:6px 0 2px!important;border:1px solid var(--hbd,#dde4e8)!important;border-radius:12px!important;background:var(--hbg,#f6f8f8)!important;color:var(--hink,#14202b)!important;padding:11px 13px!important;font:500 12.5px/1.55 var(--hfont,var(--sans))!important;white-space:normal!important}",
-      ".hv-ack .creator-tip{display:flex!important;flex-direction:column!important;padding:0 0 12px!important;background:var(--hpanel,#fff)!important}",
-      ".hv-ack .ack-tip strong{display:block;color:var(--hp,var(--teal))!important;font-weight:800;margin-bottom:3px}",
-      ".hv-ack .ack-tip::before,.hv-ack .ack-tip::after,.hv-ack .creator-tip::before,.hv-ack .creator-tip::after{display:none!important}",
+      /* Acknowledgements roster (redesign 2026-08-27). The old sheet cloned #ackCard and used
+         !important to force every hover tooltip open INLINE. With 12 people that is three screens
+         of bios nobody scrolls — the "it looks too big" report. Now it is an accordion built from
+         the same data: one line per person, bio only on tap, one open at a time. */
+      ".smd-ack{--ak-line:var(--hbd,#dde4e8);--ak-mut:var(--hmut,#5a7184);text-align:left}",
+      ".smd-ack-h{display:flex;align-items:center;gap:8px;margin:20px 0 8px;font:700 11px var(--hfont,var(--sans));text-transform:uppercase;letter-spacing:.07em;color:var(--ak-mut)}",
+      ".smd-ack-h:first-child{margin-top:4px}",
+      ".smd-ack-n{margin-left:auto;font-weight:700;font-size:11px;color:var(--ak-mut);background:var(--hbg,#f1f5f5);border-radius:999px;padding:2px 8px;letter-spacing:0}",
+      ".smd-ack-list{border:1px solid var(--ak-line);border-radius:14px;overflow:hidden;background:var(--hpanel,#fff)}",
+      ".smd-ack-row+.smd-ack-row{border-top:1px solid var(--ak-line)}",
+      ".smd-ack-hit{display:flex;align-items:center;gap:11px;width:100%;box-sizing:border-box;padding:12px 13px;background:none;border:0;text-align:left;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent;font:inherit}",
+      ".smd-ack-hit:disabled{cursor:default}",
+      ".smd-ack-hit:active{background:var(--hbg,#f1f5f5)}",
+      ".smd-ack-av{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--teal,#0e6e63);color:#fff;font:800 12px var(--hfont,var(--sans));letter-spacing:.02em}",
+      ".smd-ack-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}",
+      ".smd-ack-nm{font:700 14px/1.3 var(--hfont,var(--sans));color:var(--hink,#14202b)}",
+      ".smd-ack-rl{font:500 11.5px/1.35 var(--hfont,var(--sans));color:var(--ak-mut)}",
+      ".smd-ack-chev{flex:0 0 auto;color:var(--ak-mut);font-size:17px;line-height:1;transition:transform .18s ease}",
+      ".smd-ack-row.is-open .smd-ack-chev{transform:rotate(90deg)}",
+      /* Collapsed by default — grid-template-rows animates to auto-height without a fixed max. */
+      ".smd-ack-bio{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease}",
+      ".smd-ack-row.is-open .smd-ack-bio{grid-template-rows:1fr}",
+      /* visibility, not just clipping: a collapsed bio must leave the a11y tree and find-in-page
+         too, or a screen reader still reads all twelve. It inherits, so children go with it. */
+      ".smd-ack-bio>*{overflow:hidden;min-height:0;visibility:hidden}",
+      ".smd-ack-row.is-open .smd-ack-bio>*{visibility:visible}",
+      ".smd-ack-bio p{margin:0;padding:0 13px 13px 13px;font:500 12.5px/1.6 var(--hfont,var(--sans));color:var(--ak-mut)}",
+      ".smd-ack-lnk{display:block;margin:0 13px 10px;font:600 12px var(--hfont,var(--sans));color:var(--teal,#0e6e63);word-break:break-all;text-decoration:none}",
+      ".smd-ack-cta{margin-top:18px}",
+      "body.dark .smd-ack-nm{color:#E7EDF5}",
+      "body.dark .smd-ack-list{background:var(--hpanel,#132030)}",
+      "body.dark .smd-ack-n{background:rgba(127,127,127,.16)}",
+      "@media (prefers-reduced-motion:reduce){.smd-ack-bio,.smd-ack-chev{transition:none}}",
       ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
       // account/profile block injected into the sidebar (settings)
       ".smd-sba{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(127,127,127,.18);background:linear-gradient(180deg,rgba(20,184,166,.10),transparent)}",
@@ -3215,20 +3236,116 @@
       body.scrollTop = 0;
     });
   }
-  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the legacy sheet.
+  /* ── Acknowledgements roster ───────────────────────────────────────────────────────────────
+   * REDESIGN 2026-08-27 (owner: "it looks too big"). It was: clone #ackCard into the sheet and
+   * force every hover tooltip open inline. Twelve people x a full bio each is roughly three
+   * screens, so the page read as a wall and the names — the actual point — were lost in it.
+   *
+   * #ackCard stays the single source of truth: the desktop hover tooltips still use it, and a
+   * contributor is still added by adding one <span> there and nothing else. This READS that markup
+   * instead of restyling a clone of it, and renders a compact accordion — one line per person,
+   * bio on tap, one open at a time (twelve open accordions is the same wall again).
+   */
+  function ackEsc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+    });
+  }
+  // The visible name is the element's OWN text; the tooltip is a child element, so skipping
+  // non-text nodes drops the whole bio without needing to know its shape.
+  function ackOwnText(el) {
+    var out = "", n;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      n = el.childNodes[i];
+      if (n.nodeType === 3) out += n.nodeValue;
+    }
+    return out.replace(/\s+/g, " ").trim();
+  }
+  function ackInitials(name) {
+    var t = String(name || "").replace(/^(Dr|Mr|Ms|Mrs|Prof)\.?\s+/i, "").replace(/,.*$/, "").trim().split(/\s+/);
+    var a = (t[0] || "").charAt(0), b = (t.length > 1 ? t[t.length - 1] : "").charAt(0);
+    return (a + b).toUpperCase() || "\u00b7";
+  }
+  /* One person, read out of either markup shape:
+   *   founders     .creator-tip  -> .ctp-deg (role), .ctp-bio (bio), a.ctp-linkedin (links)
+   *   contributors .ack-tip      -> <strong> (role), then the remaining text (bio) */
+  function ackPerson(el) {
+    var tip = el.querySelector(".ack-tip");
+    var p = { name: ackOwnText(el), role: "", bio: "", links: [], founder: /creator-name/.test(el.className || "") };
+    if (!tip) return p;
+    var deg = tip.querySelector(".ctp-deg"), strong = tip.querySelector("strong"), bioEl = tip.querySelector(".ctp-bio");
+    p.role = ((deg || strong || {}).textContent || "").replace(/\s+/g, " ").trim();
+    if (bioEl) p.bio = (bioEl.textContent || "").replace(/\s+/g, " ").trim();
+    else {
+      var t = (tip.textContent || "").replace(/\s+/g, " ").trim();
+      if (p.role && t.indexOf(p.role) === 0) t = t.slice(p.role.length);   // drop the role we already show
+      p.bio = t.trim();
+    }
+    if (!p.name) { var nm = tip.querySelector(".ctp-name"); if (nm) p.name = (nm.textContent || "").trim(); }
+    var as = tip.querySelectorAll("a.ctp-linkedin");
+    for (var i = 0; i < as.length; i++) {
+      p.links.push({ href: as[i].getAttribute("href") || "", text: (as[i].textContent || "").replace(/\s+/g, " ").trim() });
+    }
+    return p;
+  }
+  function ackRowHTML(p) {
+    var hasBio = !!(p.bio || p.links.length), links = "";
+    for (var i = 0; i < p.links.length; i++) {
+      links += '<a class="smd-ack-lnk" href="' + ackEsc(p.links[i].href) + '" target="_blank" rel="noopener">' + ackEsc(p.links[i].text) + '</a>';
+    }
+    return '<div class="smd-ack-row">' +
+      '<button type="button" class="smd-ack-hit"' + (hasBio ? ' aria-expanded="false"' : ' disabled') + '>' +
+        (p.founder ? '<span class="smd-ack-av" aria-hidden="true">' + ackEsc(ackInitials(p.name)) + '</span>' : "") +
+        '<span class="smd-ack-txt"><span class="smd-ack-nm">' + ackEsc(p.name) + '</span>' +
+        (p.role ? '<span class="smd-ack-rl">' + ackEsc(p.role) + '</span>' : "") + '</span>' +
+        (hasBio ? '<span class="smd-ack-chev" aria-hidden="true">\u203a</span>' : "") +
+      '</button>' +
+      (hasBio ? '<div class="smd-ack-bio"><div>' + (p.bio ? '<p>' + ackEsc(p.bio) + '</p>' : "") + links + '</div></div>' : "") +
+    '</div>';
+  }
+  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the sheet.
   function ackHTML() {
     var src = document.getElementById("ackCard");
     if (src) {
-      var c = src.cloneNode(true);
-      c.removeAttribute("id");
-      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
-      c.classList.add("hv-ack-inline");
-      return '<div class="hv-ack">' + c.outerHTML + '</div>';
+      var groups = src.querySelectorAll(".ack-group"), out = '<div class="smd-ack">';
+      for (var g = 0; g < groups.length; g++) {
+        var roleEl = groups[g].querySelector(".ack-role");
+        var names = groups[g].querySelectorAll(".ack-contrib-name, .creator-name");
+        if (!names.length) continue;
+        out += '<div class="smd-ack-h"><span>' + ackEsc(roleEl ? roleEl.textContent.trim() : "") + '</span>' +
+               '<span class="smd-ack-n">' + names.length + '</span></div><div class="smd-ack-list">';
+        for (var i = 0; i < names.length; i++) out += ackRowHTML(ackPerson(names[i]));
+        out += '</div>';
+      }
+      // The "Want your name here?" block already reads well; carry it over untouched.
+      var cta = src.querySelector(".ack-contribute");
+      if (cta) out += '<div class="smd-ack-cta">' + cta.outerHTML + '</div>';
+      return out + '</div>';
     }
     return '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
       '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
       '<p>Developed by MaiKnowledge.</p></div>';
   }
+  /* One delegated listener for BOTH surfaces (the About tab and the sheet), installed once.
+   * Wiring per-container would need a hook in each render path; the roster markup is unique
+   * enough that delegation is both shorter and impossible to forget on a new surface. */
+  (function ackDelegate() {
+    if (typeof document === "undefined" || document.__smdAckWired) return;
+    document.__smdAckWired = 1;
+    document.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest(".smd-ack-hit") : null;
+      if (!btn || btn.disabled) return;
+      var host = btn.closest(".smd-ack"), row = btn.parentNode;
+      if (!host || !row) return;
+      var wasOpen = row.classList.contains("is-open");
+      var open = host.querySelectorAll(".smd-ack-row.is-open");
+      for (var i = 0; i < open.length; i++) {
+        open[i].classList.remove("is-open");
+        var b = open[i].querySelector(".smd-ack-hit"); if (b) b.setAttribute("aria-expanded", "false");
+      }
+      if (!wasOpen) { row.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); }
+    });
+  })();
   // Open the About box (optionally to a tab: about|version|facts|ack). Exposed globally so the
   // redesigned sidebar's "About & Acknowledgements" item opens it (acknowledgements live in About).
   function openAbout(tab) {
@@ -3238,23 +3355,8 @@
   }
   try { window.openAbout = openAbout; window.openAck = openAck; } catch (e) {}
   function openAck() {
-    var src = document.getElementById("ackCard");
-    var inner = "";
-    if (src) {
-      var c = src.cloneNode(true);
-      c.removeAttribute("id");
-      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
-      // The names carry rich hover tooltips (.ack-tip / .creator-tip: roles, bios, publications).
-      // Hover doesn't exist on touch and, cloned here, they'd overlap. Mark this clone so the
-      // sheet CSS renders every tooltip INLINE as a readable card (see .hv-ack .ack-tip below) —
-      // so all contributor descriptions and the creator profile are fully visible, not hidden.
-      c.classList.add("hv-ack-inline");
-      inner = '<div class="hv-ack">' + c.outerHTML + '</div>';
-    } else {
-      inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
-        '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
-        '<p>Developed by MaiKnowledge.</p></div>';
-    }
+    // Same roster the About tab renders — one builder, so the two surfaces cannot drift apart.
+    var inner = ackHTML();
     openSheet('<div class="hv-sh-t">Acknowledgements</div>' + inner +
       '<button class="hv-reset" style="margin-top:14px" data-close="1">Close</button>');
     var s = sheetEl();
