@@ -87,6 +87,12 @@ try {
   ok(ready, "PGLOG module loaded");
   if (!ready) throw new Error("PGLOG never loaded");
 
+  /* myInstitutions() now REJECTS on a failed lookup instead of resolving to [] - a 401 or a 500 must
+   * not read as "you belong to no institutions". This harness runs offline, so without a stub every
+   * case would render the lookup-failed card. Resolve to [] to mean what the old silent catch used
+   * to mean: genuinely none. */
+  await ev(`window.SMD_PGLOG_STORE.myInstitutions = function () { return Promise.resolve([]); }; return 1;`);
+
   // Unenrolled + signed out is exactly the state the bug was reported in.
   await ev(`window.PGLOG.open(); return 1;`);
   await sleep(1500);
@@ -320,6 +326,38 @@ try {
   await sleep(1600);
   ok(await ev(`return window.__facultyCalls > 0`) === true,
      "navigating to the faculty screen actually requests its data (no permanent skeleton)");
+
+  /* ── 12. A FAILED lookup is not an empty list ──
+   * myInstitutions() swallowed everything including the response status, so a 401/500 rendered as
+   * "Institutions are set up by StewardMD" - telling an administrator whose own colleges had just
+   * failed to load that they had none, and sending them somewhere that cannot help. */
+  // Phase 1: point at a DIFFERENT org so ensureContext() drops the previous case's ctx (and its
+  // faculty caps), and let /me fail so the replacement is the capability-free stub.
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"cccc3333cccc3333cccc3333cccc3333"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.me=function(){ var e=new Error("signin_required"); e.code="signin_required"; return Promise.reject(e); };
+    s.myInstitutions=function(){ var e=new Error("http_500"); e.code="http_500"; return Promise.reject(e); };
+    window.__phase1 = cur; return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1600);
+  // Phase 2: now unlink, so the screen takes the picker path where myInstitutions() is consulted.
+  await ev(`window.__phase1.orgId = ""; return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1400);
+  await tap("setting up our institution|Institution");
+  await sleep(1600);
+  const tm = String(await txt());
+  ok(/Could not load your institutions/i.test(tm),
+     `a failed institution lookup is reported (got: ${JSON.stringify(tm.slice(0, 150))})`);
+  ok(!/set up by StewardMD/i.test(tm),
+     "a failed lookup is NOT reported as 'you have no institutions'");
 
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {

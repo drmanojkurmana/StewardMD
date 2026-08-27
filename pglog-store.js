@@ -191,10 +191,19 @@
   // Institutions this account OWNS. A provisioned college admin owns theirs, so this is what stops
   // the console offering "create" to someone whose college already exists — which would quietly
   // produce a second, empty college and a second code.
+  /* Rejects rather than resolving to []. It used to swallow everything, including the response
+   * STATUS, so a 401 or a 500 was indistinguishable from "you belong to no institutions" - and the
+   * screen then told an administrator that their own colleges did not exist. */
   function myInstitutions() {
     return G.fetch("/api/queue/orgs", { headers: { "Authorization": "Bearer " + token() } })
-      .then(function (r) { return r.json().catch(function () { return {}; }); })
-      .then(function (j) { return (j && j.orgs) || []; }, function () { return []; });
+      .then(function (r) {
+        return r.json().catch(function () { return {}; }).then(function (j) {
+          if (!r.ok || (j && j.ok === false)) {
+            throw mkErr((j && j.error) || ("http_" + r.status), (j && j.message) || "");
+          }
+          return (j && j.orgs) || [];
+        });
+      });
   }
   function createProgramme(orgId, body) {
     return req("/programmes", { method: "POST", body: Object.assign({ orgId: orgId }, body || {}) })

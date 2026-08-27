@@ -131,6 +131,11 @@
     if (state.ctx) {
       var want = ((st.context() || {}).orgId) || "";
       var have = state.ctx.orgId || "";
+      /* Only a change BETWEEN two real orgs invalidates. Invalidating when the org is merely absent
+       * was tried and is wrong: ensureContext() runs on every screen, and a context legitimately
+       * fetched without an org (a viewer, or a resident not yet linked) would be thrown away and
+       * refetched on each render, turning an ordinary unlinked state into a request loop and an
+       * error screen. The explicit unlink paths (clear-inst, pick-inst) null state.ctx themselves. */
       if (!want || !have || want === have) return Promise.resolve(state.ctx);
       // state.inst caches the resolved name/code too, and screenInstitution prefers it over ctx -
       // so leaving it behind shows the PREVIOUS college on the new one's screen.
@@ -562,6 +567,13 @@
     var orgId = c.orgId || "";
     if (!orgId) {
       var mine = I.mine || [];
+      // A failed lookup is not an empty list. Saying "institutions are set up by StewardMD" to an
+      // administrator whose own colleges just failed to load sends them to the wrong place entirely.
+      if (I.mineErr) {
+        return wrap(
+          banner("warn", "error", esc(instErr(I.mineErr, "Could not load your institutions."))) +
+          '<button class="pgl-btn wide" data-pgl="retry" data-r="institution">Try again</button>');
+      }
       var pick = mine.length
         ? '<div class="pgl-card"><h3>Your institutions</h3>' +
           '<p style="font-size:13px;color:var(--pgl-muted)">This device is not pointed at one yet. Pick it rather than creating a second.</p>' +
@@ -658,7 +670,11 @@
               '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(pr.name || pr.specialtyId || pr.id) + "</span>" +
               '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span></div>";
           }).join("")
-        : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
+        : I.progErr
+          // "None yet" and "we could not ask" are different answers, and only one of them means
+          // it is safe to add a programme.
+          ? banner("warn", "error", esc(instErr(I.progErr, "Could not load the programmes for this institution.")))
+          : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
       '<div class="pgl-field"><label for="pglSpec">Specialty</label>' +
       '<select id="pglSpec"><option value="" selected disabled>Choose a specialty…</option>' +
         (specOpts || '<option value="" disabled>Loading the NMC list…</option>') + "</select>" +
@@ -711,7 +727,8 @@
     var org = (st.context() || {}).orgId;
     if (!org) {
       return (st.myInstitutions ? st.myInstitutions() : Promise.resolve([]))
-        .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
+        .then(function (list) { state.inst.mine = list || []; state.inst.mineErr = null; },
+              function (e) { state.inst.mine = []; state.inst.mineErr = e || new Error("unknown"); });
     }
     var cur = C();
     /* ROOT CAUSE of the raw 32-char id showing as "Institution code": this screen reads the code from
@@ -728,7 +745,11 @@
         : null;
     }, function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
     return Promise.all([
-      st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
+      /* Record WHY this was empty. Swallowing the rejection made a 403 or a 500 render as "None yet.
+       * A resident cannot be enrolled until one exists" - so an Academic Cell whose request had
+       * failed would create a duplicate programme on top of the ones already there. */
+      st.programmes(org).then(function (r) { state.inst.progErr = null; return (r && r.programmes) || []; },
+                              function (e) { state.inst.progErr = e || new Error("unknown"); return []; }),
       (cur && cur.loadSpecialties)
         ? cur.loadSpecialties().then(function (b) { return [].concat((b && b.broad) || [], (b && b.super) || []); },
                                      function () { return []; })
