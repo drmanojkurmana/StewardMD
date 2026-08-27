@@ -53,6 +53,8 @@ import * as S from "../../_pglog_store.js";
 import * as V from "../../_pglog_verify.js";
 import * as P from "../../_pglog_public.js";
 import M from "../../../pglog-model.js";
+import { lookupUidByEmail } from "../../_fbadmin.js";
+import * as ORG from "../../_opd_org_store.js";
 
 const json = (obj, status = 200, extra) => new Response(JSON.stringify(obj), {
   status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, extra || {})
@@ -234,6 +236,48 @@ export async function onRequest(context_) {
       const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
         ? await S.signerStatus(env, ctx.actorUid) : null;
       return json({ ok: true, uid: ctx.uid, role: ctx.role, caps, resident, programme, rotations, signer });
+    }
+
+    /* ── enrol: add a person to this institution ────────────────────────────
+     * PGMER-2023 5.2(iv) makes the Academic Cell responsible for the programme, and every screen in
+     * this module assumed that enrolment had already happened — but nothing could perform it. There
+     * was no create-institution, no create-programme and no enrol path in the client at all, so every
+     * user sat forever on "Your training record is not linked yet". This is that missing step.
+     *
+     * An Academic Cell holds a list of EMAILS, not Firebase uids, so the resolve happens here rather
+     * than asking a human to copy uids around. Two deliberate limits:
+     *   - CONFIGURE-gated, so only an Academic Cell (or org owner/admin) can call it.
+     *   - ASSIGNABLE is an allowlist of pg_* roles ONLY. An Academic Cell can enrol trainees and
+     *     faculty; it can NEVER mint an org admin or owner. Granting membership is real authority,
+     *     so widening it is a deliberate act, not a missing check.
+     */
+    if (seg === "enrol" && method === "POST") {
+      const orgId = String(body.orgId || "");
+      const ctx = await context(request, env, orgId);
+      await S.gate(env, ctx.actorUid, orgId, CAPS.PGLOG_CONFIGURE);
+
+      const ASSIGNABLE = ["pg_resident", "pg_faculty", "pg_hod", "academic_cell"];
+      const role = String(body.role || "");
+      if (ASSIGNABLE.indexOf(role) < 0) return json({ error: "role_not_assignable", role }, 400);
+
+      const email = String(body.email || "").trim().toLowerCase();
+      if (!email) return json({ error: "email_required" }, 400);
+      let uid = null;
+      try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
+      // Say WHICH email failed: an Academic Cell typing twenty of them needs to know which one, and
+      // "they have not signed in to StewardMD yet" is the usual cause, not a typo.
+      if (!uid) return json({ error: "no_such_account", email }, 404);
+
+      const identity = "fb:" + uid;
+      await ORG.setMembership(env, orgId, identity, { role: role }, ctx.actorUid);
+
+      // A resident is only usable once they are in a programme, so do both in one call rather than
+      // leaving a half-enrolled member who still sees the "not linked yet" screen.
+      let resident = null;
+      if (role === "pg_resident" && body.programmeId) {
+        resident = await S.enrolResident(env, orgId, Object.assign({}, body, { uid: identity }), ctx.actorUid);
+      }
+      return json({ ok: true, identity, role, email, resident });
     }
 
     /* ── programmes ─────────────────────────────────────────────────────── */

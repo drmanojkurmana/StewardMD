@@ -36,6 +36,49 @@ are throws at the data layer, not disabled buttons.
 | `smd_pglog_verify_sla_days` | 7 | **CONFIG, not NMC.** NMC's only cadence is monthly authentication. |
 | `smd_pglog_attest_grace_days` | 7 | CONFIG, not NMC. |
 
+## Onboarding — the gap that made the module unreachable (fixed 2026-08-27)
+
+**Reported:** *"it is considering itself as resident rather than asking whether I'm faculty or
+resident ... where is institution Dashboard ... if I'm HOD should I first get an institute id?"*
+
+Two defects, and the second was the serious one.
+
+1. **The unenrolled empty state was written purely in RESIDENT voice** ("your training record",
+   "your guide's monthly authentication"), so a professor opening the module was told their training
+   record was not linked. Now `setupPrompt()` ASKS: resident / faculty-or-HOD / setting-up-our-
+   institution, and routes to `setup`, `setup-faculty` or `institution`.
+   **The role itself is still never self-declared** - it comes from the server-side membership
+   (`/api/pglog/me` -> `q_members`), because anyone who could name themselves faculty could sign a
+   trainee's record, which is what 9.2(c) penalises. The answer picks the INSTRUCTIONS, nothing more.
+
+2. **Nothing could enrol anyone.** `pglog-store.js` had `programmes()` and `residents()` as READS
+   only. There was no create-institution, no create-programme and no enrol path anywhere in the
+   client, so every user of every role sat on "your training record is not linked yet" permanently.
+   The note above said onboarding "needs the Academic Cell" - but the Academic Cell console did not
+   exist. The API had `programmes` POST and `residents` POST all along; no screen called them.
+
+**What was added (minimum to make a real programme work, not a full console):**
+
+| Piece | Where |
+|---|---|
+| Designation gate + faculty screen + `screenInstitution()` | `pglog-screens.js` |
+| `createInstitution` / `createProgramme` / `enrolPerson` | `pglog-store.js` |
+| `POST /api/pglog/enrol` | `functions/api/pglog/[[path]].js` |
+
+**The institution IS an org** in the existing queue/OPD system - the same `SMD-XXXXXX` code the rest
+of the app uses, created via `POST /api/queue/org` (any signed-in account; the creator becomes owner).
+That code is the "institute id". `screenSetup()` has always asked for it; nothing could mint one.
+
+**`POST /api/pglog/enrol` design notes.** An Academic Cell holds EMAILS, not Firebase uids, so it
+resolves email -> uid server-side (`lookupUidByEmail`) and writes the `q_members` membership, then
+enrols into the programme in the SAME call - a member without a programme is still "not linked".
+Two deliberate limits: it is `PGLOG_CONFIGURE`-gated, and `ASSIGNABLE` is an allowlist of `pg_*`
+roles plus `academic_cell` ONLY. **An Academic Cell can never mint an org admin or owner.**
+
+**Still not built** (deliberate, ask before adding): institution-wide dashboard beyond `dept`,
+faculty-roster management UI, rotation setup, bulk enrolment, institution-level exports. `dept`,
+`resident` detail and the 12 reports already exist for HOD-level oversight and export.
+
 ## Key files
 
 | File | What it is |

@@ -442,12 +442,28 @@
         "The logbook is running on-device only. Drafts are saved here but cannot be submitted for verification.",
         '<button class="pgl-btn" data-pgl="go" data-r="add">Log something anyway</button>');
     }
-    return emptyState("school", "Your training record is not linked yet",
-      "Your institution's Academic Cell enrols you into your PG programme in StewardMD. Once enrolled, this " +
-      "becomes your NMC logbook — the weekly e-logbook PGMER-2023 5.2(vi) requires, with your guide's monthly authentication.",
-      '<button class="pgl-btn" data-pgl="go" data-r="setup">How to get set up</button>' +
-      '<button class="pgl-btn ghost" data-pgl="go" data-r="add" style="margin-left:8px">Log on this device</button>');
+    /* ASK, do not assume (2026-08-27). This screen used to be written entirely in resident voice
+     * ("your training record", "your guide's monthly authentication"), so a professor opening the
+     * module was told they were an un-enrolled trainee.
+     *
+     * The ROLE itself is still never self-declared - it comes from the institution's membership
+     * record, server-side, because someone who could call themselves faculty could sign a trainee's
+     * record and PGMER-2023 9.2(c) puts a monetary penalty on exactly that. What the answer chooses
+     * is which set of INSTRUCTIONS to show, nothing more. */
+    return '<div class="pgl-wrap">' +
+      '<div class="pgl-state"><div class="ic">' + ic("school") + "</div>" +
+      '<div class="t">Set up your logbook</div>' +
+      '<div class="s">StewardMD does not know your role in this programme yet. Which of these are you?</div></div>' +
+      '<div class="pgl-card" style="padding:0;overflow:hidden">' +
+        navRow("setup", "school", "I am a PG resident", "I am in training and will log my work here.") +
+        navRow("setup-faculty", "draw", "I am faculty or HOD", "I verify, assess and sign residents' records.") +
+        navRow("institution", "apartment", "I am setting up our institution", "Academic Cell: create the programme and enrol people.") +
+      "</div>" +
+      '<div style="text-align:center;margin-top:14px">' +
+      '<button class="pgl-btn ghost" data-pgl="go" data-r="add">Just log something on this device</button></div>' +
+      "</div>";
   }
+
 
   function screenSetup() {
     var st = ST(), c = st ? st.context() : {};
@@ -469,6 +485,136 @@
   }
 
   /* ── ADD · the three-tap path ────────────────────────────────────────────── */
+  /* Faculty and HODs are enrolled the same way residents are - by the Academic Cell - but what they
+   * need to hear is different, and one thing is specific to them: signing needs a verified medical
+   * registration, so a faculty member added to the org who never verified still cannot sign. Saying
+   * that here is cheaper than letting them discover it at the moment they try to authenticate a
+   * month's entries. */
+  function screenSetupFaculty() {
+    var st = ST(), c = st ? st.context() : {};
+    return wrap(
+      '<div class="pgl-card"><h3>Faculty and HOD access</h3>' +
+      "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
+      "Your institution's Academic Cell adds you to the programme as <b>faculty</b> or <b>HOD</b>. " +
+      "Once added, the residents assigned to you appear here for verification, assessment and the " +
+      "monthly authentication PGMER-2023 5.2(vi) requires." +
+      "</p></div>" +
+      '<div class="pgl-field"><label for="pglOrg">Institution code (SMD-XXXXXX)</label>' +
+      '<input type="text" id="pglOrg" value="' + attr(c.orgId || "") + '" placeholder="SMD-XXXXXX" autocapitalize="characters">' +
+      '<div class="hint">Ask your Academic Cell for the code. Entering it here only tells this device where to look; it does not grant you access.</div></div>' +
+      '<button class="pgl-btn wide" data-pgl="save-org">Save and check</button>' +
+      banner("info", "verified_user",
+        "<b>Signing needs a verified registration.</b> A logbook entry is a document a University relies on, " +
+        "so it has to carry a registered practitioner's number. Verify yours before your first monthly " +
+        "authentication." +
+        '<button class="pgl-chip" data-pgl="go-verify" style="margin-top:8px">Verify my registration</button>')
+    );
+  }
+
+  /* The Academic Cell console. PGMER-2023 5.2(iv) makes this cell responsible for the programme, and
+   * every other screen in this module assumed enrolment had already happened - but nothing anywhere
+   * could perform it. No create-institution, no create-programme, no enrol. So every user sat on
+   * "your training record is not linked yet" forever, whatever their role. This is that missing step,
+   * kept to the three actions that unblock a real programme. */
+  function screenInstitution() {
+    var st = ST(), c = st ? st.context() : {}, I = state.inst || {};
+    var orgId = c.orgId || "";
+    if (!orgId) {
+      return wrap(
+        '<div class="pgl-card"><h3>Create your institution</h3>' +
+        "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
+        "This creates your institution in StewardMD and gives you its <b>institution code</b>. Residents " +
+        "and faculty enter that code to find the programme. You become its administrator." +
+        "</p></div>" +
+        '<div class="pgl-field"><label for="pglInstName">Institution name</label>' +
+        '<input type="text" id="pglInstName" placeholder="e.g. Test Medical College">' +
+        '<div class="hint">Already have a code? <button class="pgl-chip" data-pgl="go" data-r="setup-faculty">Enter it instead</button></div></div>' +
+        '<button class="pgl-btn wide" data-pgl="create-inst"' + (I.busy ? " disabled" : "") + '>' +
+          (I.busy ? "Creating…" : "Create institution") + "</button>" +
+        (I.msg ? banner(I.err ? "warn" : "info", I.err ? "error" : "check_circle", esc(I.msg)) : "")
+      );
+    }
+    var progs = I.programmes || [];
+    var specs = I.specialties || [];
+    var opts = progs.map(function (pr) {
+      return '<option value="' + attr(pr.id) + '">' + esc((pr.name || pr.specialtyId || pr.id) + " · " + (pr.degree || "")) + "</option>";
+    }).join("");
+    var specOpts = specs.map(function (sp) {
+      return '<option value="' + attr(sp.id) + '" data-deg="' + attr(sp.degree || "MD") + '">' +
+        esc(sp.name + " (" + (sp.degree || "") + ")") + (sp.hasSpecialtyPack ? "" : " · generic pack") + "</option>";
+    }).join("");
+    return wrap(
+      '<div class="pgl-card"><h3>' + esc(I.orgName || "Your institution") + "</h3>" +
+      '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">Institution code</p>' +
+      '<div style="font:800 20px var(--sans);letter-spacing:.06em;color:var(--pgl-accent,#0e6e63)">' + esc(orgId) + "</div>" +
+      '<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin-top:8px">' +
+      "Share this with your residents and faculty. They enter it under Set up." + "</p></div>" +
+
+      '<div class="pgl-card"><h3>PG programmes</h3>' +
+      (progs.length
+        ? progs.map(function (pr) {
+            return '<div class="pgl-row static"><span class="pgl-row-ic">' + ic("school") + "</span>" +
+              '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(pr.name || pr.specialtyId || pr.id) + "</span>" +
+              '<span class="pgl-row-s">' + esc((pr.degree || "") + " · " + (pr.durationMonths || 36) + " months") + "</span></span></div>";
+          }).join("")
+        : '<p style="font-size:13px;color:var(--pgl-muted)">None yet. A resident cannot be enrolled until one exists.</p>') +
+      '<div class="pgl-field"><label for="pglSpec">Specialty</label>' +
+      '<select id="pglSpec">' + (specOpts || '<option value="">Loading the NMC list…</option>') + "</select>" +
+      '<div class="hint">From PGMER-2023 Annexure-1 and Annexure-2. 15 specialties have a full curriculum pack; the rest use the PGMER requirements.</div></div>' +
+      '<button class="pgl-btn wide" data-pgl="create-prog"' + (I.busy ? " disabled" : "") + ">Add programme</button></div>" +
+
+      '<div class="pgl-card"><h3>Enrol a person</h3>' +
+      '<div class="pgl-field"><label for="pglEmail">Their StewardMD email</label>' +
+      '<input type="email" id="pglEmail" placeholder="name@example.com" autocapitalize="none" spellcheck="false">' +
+      '<div class="hint">They must have signed in to StewardMD at least once, so the account exists.</div></div>' +
+      '<div class="pgl-field"><label for="pglRole">Role</label><select id="pglRole">' +
+        '<option value="pg_resident">PG resident</option>' +
+        '<option value="pg_faculty">Faculty (guide)</option>' +
+        '<option value="pg_hod">Head of Department</option>' +
+        '<option value="academic_cell">Academic Cell</option>' +
+      "</select></div>" +
+      '<div class="pgl-field"><label for="pglProg">Programme (residents only)</label>' +
+      '<select id="pglProg"><option value="">None</option>' + opts + "</select></div>" +
+      '<div class="pgl-field"><label for="pglName">Their name</label>' +
+      '<input type="text" id="pglName" placeholder="Dr. …"></div>' +
+      '<div class="pgl-field"><label for="pglStart">Training start date</label>' +
+      '<input type="date" id="pglStart"></div>' +
+      '<button class="pgl-btn wide" data-pgl="enrol-person"' + (I.busy ? " disabled" : "") + ">" +
+        (I.busy ? "Working…" : "Enrol") + "</button></div>" +
+      (I.msg ? banner(I.err ? "warn" : "info", I.err ? "error" : "check_circle", esc(I.msg)) : "") +
+      banner("info", "policy",
+        "Enrolling someone grants them access to this institution's logbook data appropriate to their role. " +
+        "An Academic Cell can add residents, faculty and HODs; it cannot create administrators.")
+    );
+  }
+
+  // Server messages are written for a human already (see needsProBody / the pglog router), so prefer
+  // them over a generic string; fall back only when there is nothing to show.
+  function instErr(e, fallback) {
+    if (e && e.userMessage) return e.userMessage;
+    if (e && e.code === "forbidden") return "You do not have Academic Cell access to this institution.";
+    if (e && e.code === "signin_required") return "Sign in to set up an institution.";
+    return fallback;
+  }
+  function loadInstitution() {
+    var st = ST();
+    state.inst = state.inst || {};
+    if (!st) return Promise.resolve();
+    var org = (st.context() || {}).orgId;
+    if (!org) return Promise.resolve();
+    var cur = C();
+    return Promise.all([
+      st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
+      (cur && cur.loadSpecialties)
+        ? cur.loadSpecialties().then(function (b) { return [].concat((b && b.broad) || [], (b && b.super) || []); },
+                                     function () { return []; })
+        : Promise.resolve([])
+    ]).then(function (r) {
+      state.inst.programmes = r[0];
+      state.inst.specialties = r[1];
+    });
+  }
+
   function screenAddPicker() {
     var kinds = [
       ["procedure", "content_cut", "Procedure / operation", "Assisted, supervised or independent"],
@@ -1614,7 +1760,9 @@
     if (state.error) { state.host.innerHTML = head(title, sub) + wrap(errorState(state.error)); bind(); return; }
     switch (h0) {
       case "home": title = "My NMC eLOGBook"; sub = "Digital residency logbook and competency portfolio"; body = screenHome(); break;
-      case "setup": title = "Set up"; body = screenSetup(); break;
+      case "setup": title = "Set up"; sub = "PG resident"; body = screenSetup(); break;
+      case "setup-faculty": title = "Set up"; sub = "Faculty and HOD"; body = screenSetupFaculty(); break;
+      case "institution": title = "Institution"; sub = "Academic Cell"; body = screenInstitution(); break;
       case "add":
         if (a) { title = "Log " + a; sub = "New entry"; body = screenAddForm(a); }
         else { title = "Add activity"; body = screenAddPicker(); }
@@ -1701,6 +1849,9 @@
       case "back": return back();
       case "go": {
         var dest = t.getAttribute("data-r");
+        // The console needs the org's programmes and the NMC specialty list; neither is in the
+        // dashboard payload because no screen needed them until now.
+        if (dest === "institution") { go(dest); return loadInstitution().then(render, render); }
         // The certificate is fetched when the screen is opened, not held in the dashboard payload:
         // it changes when SOMEONE ELSE signs, so a cached copy would show a resident "awaiting
         // signatures" on a logbook that was certified an hour ago.
@@ -1717,6 +1868,63 @@
       case "deptfilter":
         state.deptFilter[t.getAttribute("data-dim")] = t.getAttribute("data-v");
         return loadDept();
+      case "create-inst": {
+        var nm = ((state.host.querySelector("#pglInstName") || {}).value || "").trim();
+        if (!nm) { toast("Enter the institution name."); return; }
+        state.inst = { busy: true }; render();
+        return st.createInstitution(nm).then(function (org) {
+          // Point this device at the new org immediately, or the creator has to type their own code.
+          st.setContext({ orgId: org.id });
+          state.ctx = null; state.dash = null;
+          state.inst = { busy: false, orgName: org.name, msg: "Institution created. Code: " + org.id };
+          return loadInstitution().then(render, render);
+        }, function (e) {
+          state.inst = { busy: false, err: true, msg: instErr(e, "Could not create the institution.") };
+          render();
+        });
+      }
+      case "create-prog": {
+        var sel = state.host.querySelector("#pglSpec");
+        var sid = (sel && sel.value) || "";
+        if (!sid) { toast("Choose a specialty."); return; }
+        var opt = sel.options[sel.selectedIndex];
+        var deg = (opt && opt.getAttribute("data-deg")) || "MD";
+        var pname = String((opt && opt.textContent) || sid).split(" (")[0].trim();
+        var co = (st.context() || {}).orgId;
+        state.inst = state.inst || {}; state.inst.busy = true; render();
+        return st.createProgramme(co, { name: pname, degree: deg, specialtyId: sid })
+          .then(function () {
+            state.inst.busy = false; state.inst.err = false; state.inst.msg = pname + " added.";
+            return loadInstitution().then(render, render);
+          }, function (e) {
+            state.inst.busy = false; state.inst.err = true;
+            state.inst.msg = instErr(e, "Could not add the programme."); render();
+          });
+      }
+      case "enrol-person": {
+        var val = function (q) { return ((state.host.querySelector(q) || {}).value || "").trim(); };
+        var email = val("#pglEmail"), role = val("#pglRole"), pid = val("#pglProg");
+        if (!email) { toast("Enter their email."); return; }
+        // A resident with no programme is enrolled as a member but still has no logbook, which is
+        // exactly the half-linked state this whole path exists to remove.
+        if (role === "pg_resident" && !pid) { toast("A resident needs a programme. Add one first."); return; }
+        var org2 = (st.context() || {}).orgId;
+        state.inst = state.inst || {}; state.inst.busy = true; render();
+        return st.enrolPerson(org2, {
+          email: email, role: role, programmeId: pid || undefined,
+          name: val("#pglName"), startDate: val("#pglStart") || undefined, trainingYear: 1
+        }).then(function () {
+          state.inst.busy = false; state.inst.err = false;
+          state.inst.msg = email + " enrolled as " + role.replace("pg_", "").replace(/_/g, " ") + ".";
+          render();
+        }, function (e) {
+          state.inst.busy = false; state.inst.err = true;
+          state.inst.msg = (e && e.code === "no_such_account")
+            ? (email + " has not signed in to StewardMD yet, so there is no account to enrol. Ask them to sign in once, then try again.")
+            : instErr(e, "Could not enrol " + email + ".");
+          render();
+        });
+      }
       case "save-org": {
         var v = (state.host.querySelector("#pglOrg") || {}).value || "";
         st.setContext({ orgId: v.trim().toUpperCase() });
