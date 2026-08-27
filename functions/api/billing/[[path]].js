@@ -17,6 +17,7 @@
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
 import { entitlementFor, grantPro, revokePro, promoUntil, promoActive } from "../../_entitlement.js";
+import { markFirstSeen } from "../../_lifecycle.js";
 import { verifyPurchase, daysFromExpiry, iapConfigured } from "../../_iap.js";
 import { lookupUidByEmail, lookupUserByUid } from "../../_fbadmin.js";
 import { emailProConfirmation } from "../../_email.js";
@@ -164,6 +165,22 @@ export async function onRequest(context) {
     if (method === "GET" && seg === "status") {
       const uid = rawUid(await identify(request, env));
       const state = await entitlementFor(env, uid);
+      /* Give every UNVERIFIED account a lifecycle record, so the day-7 sweep can actually see it.
+       *
+       * markFirstSeen() was only ever called from /api/welcome, which fires exclusively for
+       * genuinely NEW accounts (welcome-email.js checks creationTime ~= lastSignInTime). Every
+       * account that existed before this therefore had no record at all, and the deletion sweep
+       * filters on `firstSeen` - so "delete unverified accounts after 7 days" would have quietly
+       * applied to nobody who had already signed up. A feature that silently does nothing is the
+       * exact class of bug this whole change set is about.
+       *
+       * markFirstSeen is IDEMPOTENT: an existing record keeps its original firstSeen, so nobody's
+       * clock is reset or backdated. An account with no record starts its 7 days from now, warned
+       * by email at day 5. Verified accounts are skipped - they have no deletion clock to run.
+       * Best-effort: /billing/status must never fail because a KV write did. */
+      try {
+        if (uid && !state.verified) await markFirstSeen(env, uid, {});
+      } catch (e) {}
       // AI credits + daily cost cap for THIS user (keyed the same as the AI meter: em:<email>).
       let credits = 0, costCap = 0, role = null;
       try {
