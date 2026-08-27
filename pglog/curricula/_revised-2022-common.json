@@ -9,7 +9,7 @@
     "title": "Guidelines for Competency Based Postgraduate Training Programme (revised)",
     "publisher": "National Medical Commission",
     "year": 2022,
-    "note": "The clauses below appear word-for-word in each of the revised guideline PDFs listed in appliesTo. Each specialty pack re-states its OWN source PDF; this file exists so the shared text is quoted once, not four times.",
+    "note": "The clauses below appear word-for-word in each of the revised guideline PDFs listed in appliesTo, and only those clauses are here. VERIFIED 2026-08-27 against pglog-sources/{gen_med,ortho,paeds,patho}.txt. The summative-assessment pre-requisites were REMOVED from this file on 2026-08-27 (R1 finding C4): they are NOT identical across the four — Paediatrics requires one presentation (not two), accepts state level, and treats the publication as an alternative; Pathology accepts state level and a publication draft. Each specialty pack now carries its own wording. Do not move a clause back in here without diffing all four source files. The Research Methodology clause was also removed on 2026-08-27: Paediatrics says 'an NMC recognized course' where the other three say 'an online course', so it is not shared either. It now lives in each specialty pack with that specialty's own wording.",
     "retrieved": "2026-08-27"
   },
   "logbookClause": {
@@ -48,7 +48,7 @@
       "engine": "attestation:hod_proficiency",
       "source": "nmc_curriculum",
       "clause": "J. Log book",
-      "quote": "A proficiency certificate from Head of Department regarding the clinical competence and skillful performance of procedures by the student will be submitted by the PG student at the time of the examination."
+      "quote": "A proficiency certificate from the Head of Department regarding the clinical competence and skillful performance of procedures by the student will be submitted by the PG student at the time of the examination."
     },
     {
       "id": "rev22_reflection",
@@ -81,22 +81,6 @@
       "note": "The curriculum writes the number as a word: \"at least two sessions ... every year\" — target 2 per year."
     },
     {
-      "id": "rev22_research_methodology_6m",
-      "kind": "certification",
-      "label": "Research Methodology course — within six months of the batch commencing",
-      "target": 1,
-      "per": "course",
-      "dueByMonths": 6,
-      "requiresEvidence": true,
-      "match": {
-        "subtype": "research_methodology"
-      },
-      "source": "nmc_curriculum",
-      "clause": "K. Course in Research Methodology",
-      "quote": "All postgraduate students shall complete an online course in Research Methodology within six months of the commencement of the batch and generate the online certificate on successful completion of the course.",
-      "note": "STRICTER than PGMER-2023 5.2(xi)(a), which says 'first year'. Both are shown; the module never silently replaces the regulation's deadline with the curriculum's."
-    },
-    {
       "id": "rev22_additional_project",
       "kind": "research",
       "label": "One additional research project besides the thesis",
@@ -121,47 +105,6 @@
       "source": "nmc_curriculum",
       "clause": "Other aspects",
       "quote": "Trainees shall attend accredited scientific meetings (CME, symposia, and conferences) at least once a year."
-    },
-    {
-      "id": "rev22_exam_conference_presentations",
-      "kind": "research",
-      "label": "At least two presentations at a national-level conference",
-      "target": 2,
-      "per": "course",
-      "mandatoryForExam": true,
-      "match": {
-        "subtype": "conference_paper"
-      },
-      "source": "nmc_curriculum",
-      "clause": "Summative assessment — essential pre-requisites",
-      "quote": "At least two presentations at national level conference. One research paper should be published / accepted in an indexed journal.",
-      "note": "EXCEEDS PGMER-2023 5.2(x), which requires one poster OR one paper read OR one first-author publication. Both are evaluated and reported separately."
-    },
-    {
-      "id": "rev22_exam_indexed_publication",
-      "kind": "research",
-      "label": "One research paper published / accepted in an indexed journal",
-      "target": 1,
-      "per": "course",
-      "mandatoryForExam": true,
-      "match": {
-        "subtype": "publication"
-      },
-      "source": "nmc_curriculum",
-      "clause": "Summative assessment — essential pre-requisites",
-      "quote": "One research paper should be published / accepted in an indexed journal. (It is suggested that the local or University Review committee assess the work sent for publication)."
-    },
-    {
-      "id": "rev22_logbook_submitted",
-      "kind": "meta",
-      "label": "Log book of work done, incl. rotation postings, departmental presentations and internal assessment reports, submitted",
-      "target": 1,
-      "per": "course",
-      "mandatoryForExam": true,
-      "engine": "report:portfolio",
-      "source": "nmc_curriculum",
-      "clause": "Summative assessment — essential pre-requisites",
-      "quote": "Log book of work done during the training period including rotation postings, departmental presentations, and internal assessment reports should be submitted."
     }
   ]
 }

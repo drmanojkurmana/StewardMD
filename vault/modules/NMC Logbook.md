@@ -2,7 +2,7 @@
 tags: [module, education, regulatory]
 flag: smd_pglog
 default: ON (testers)
-status: built, flag-ON for testers, R1 not run
+status: built, flag-ON for testers, R1 run 2026-08-27 (NO-GO -> fixed)
 built: 2026-08-27
 ---
 # NMC Logbook — the PG digital logbook
@@ -101,6 +101,39 @@ This is an educational logbook, **not a second EMR**.
 - `incomplete()` and `reminders()` are **pure, with no AI at all** — a reminder about a regulatory
   deadline must be right, not plausible.
 
+## R1 outcome — 2026-08-27
+
+R1 returned **NO-GO** on the first cut and found 7 critical + 9 important defects. All are fixed; the
+full list with before/after is **`NMC_PG_LOGBOOK_REQUIREMENTS.md` §12**. The five worth carrying in
+your head:
+
+1. **A 77-day District Residency counted as "three months"** — the check was `months >= 2.5`, a
+   tolerance from nowhere. The floor is now **89 days** (the shortest real three calendar months).
+2. **Statutory leave was deducted from attendance** under a §5.6 badge — 90 days of maternity leave
+   read as 47%. §5.6 *grants* that leave. Permitted leave now counts; what counts is institutional
+   config reported separately from the regulation's 80%.
+3. **Any faculty member could read any resident's full record** — both branches of the read guard
+   returned `verifier`. Assigned now means guide, co-guide, or the supervisor named on that entry.
+4. **The Emergency Medicine pack shipped 64 of 81 NMC minima** behind a complete-looking checklist.
+   All 87 entries now ship.
+5. **The test that was supposed to catch (4) could not.** It compared each procedure count against a
+   quotation the generator had built *from that count*. See the next section.
+
+## The provenance test — read this before touching a pack
+
+`pglog-sources/` holds the **extracted plain text of every NMC PDF** (868 KB, checked in, deliberately
+outside `pglog/` so `build-www.sh` never bundles it). `test/pglog-provenance.test.mjs` checks **every
+quotation and every number in every pack against it**. A claim that is not in the source fails the
+build.
+
+That test found four things R1's spot-check did not: the shared 2022 pack dropped "the" from "from
+**the** Head of Department"; MD Radiodiagnosis says "training **program**", not "programme"; MS OBGY
+prints "**clinic**-pathological", which had been silently tidied to "clinico-"; and **MD Pathology
+carried a CPC requirement quoting a clause that does not exist in that PDF** — a fabricated
+quotation, since deleted.
+
+If you add or change a pack, run it. It will name what does not match.
+
 ## Gotchas
 
 - **Only VERIFIED entries count toward progress.** A resident cannot move their own bar. Submitted
@@ -125,18 +158,24 @@ This is an educational logbook, **not a second EMR**.
 
 | File | Covers |
 |---|---|
-| `test/pglog-model.test.mjs` | 47 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment |
-| `test/pglog-curriculum.test.mjs` | 29 — **provenance**: every requirement names a source + clause; every numeric target appears in its own quote; no invented procedure counts |
-| `test/pglog-server.test.mjs` | 31 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract |
-| `test/run-pglog-ui.mjs` | 48 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
+| `test/pglog-model.test.mjs` | 57 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
+| `test/pglog-provenance.test.mjs` | 14 — **the real one**: every quotation and every number checked against `pglog-sources/` |
+| `test/pglog-curriculum.test.mjs` | 29 — pack structure, flatten/resolve, overrides, the requirement mapper |
+| `test/pglog-server.test.mjs` | 41 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
+| `test/run-pglog-ui.mjs` | 54 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
 
 Run: `node --test test/pglog-*.test.mjs` and `node test/run-pglog-ui.mjs`.
+**141 unit assertions + 54 browser assertions, all green.** Full repo suite: 419 files, 0 failures.
+
+Note: two repo tests (`followcare-voice-server`, `opd-mrn-alloc`) need `node --experimental-test-module-mocks`,
+which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They are unrelated to this module.
 
 ## Status / what is NOT done
 
-- **R1 clinical review has not been run.** Nothing here is a dose or a clinical decision, but the
-  content is regulatory and an R1 pass on the requirement mapping is still owed before a non-tester
-  release.
+- **R1 was run on 2026-08-27** (NO-GO, all findings fixed — §12 of the requirements doc). A
+  **re-review** is owed before a non-tester release, since the fixes have not themselves been
+  reviewed. R1 also recommended chaining `stewardmd-security-reviewer` for the C5 read-guard fix,
+  which has not been done.
 - **Native rebuild not done.** Web deploys do not reach installed apps ([[Native app delivery]]).
 - **The PGMEB FAQ primary PDF was not obtainable** — see the open items in
   `NMC_PG_LOGBOOK_REQUIREMENTS.md` §10.

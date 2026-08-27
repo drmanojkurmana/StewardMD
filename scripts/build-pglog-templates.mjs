@@ -2,7 +2,7 @@ import { readFileSync, writeFileSync } from "node:fs";
 const t = JSON.parse(readFileSync("pglog/assessment-templates.json", "utf8"));
 const rows = t.templates.map((x) =>
   "  " + x.id + ": { id: " + JSON.stringify(x.id) + ", scaleMin: " + x.scaleMin + ", scaleMax: " + x.scaleMax +
-  ", logbookMax: " + x.logbookMax + ", requireDiscussed: " + (!!x.requireDiscussed) +
+  ", logbookMax: " + x.logbookMax + ", requireDiscussed: " + (!!x.requireDiscussed) + ", noTotal: " + (!!x.noTotal) +
   ", appliesTo: " + JSON.stringify(x.appliesTo) + ", source: " + JSON.stringify(x.source) + ",\n" +
   "            criteria: [" + x.criteria.map((c) => "{ key: " + JSON.stringify(c.key) + " }").join(", ") + "] }"
 ).join(",\n");

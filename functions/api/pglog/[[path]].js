@@ -29,7 +29,7 @@
  *   GET    /rotations?residentId=              POST /rotations             PATCH /rotations/:id
  *   GET    /entries?residentId=&kind=&status=  POST /entries
  *   GET    /entries/:id                        PATCH /entries/:id          DELETE /entries/:id
- *   POST   /entries/:id/submit | /verify | /return | /amend
+ *   POST   /entries/:id/submit | /withdraw | /verify | /return | /amend
  *   GET    /pending?orgId=                     -> the caller's verification queue
  *   GET    /assessments?residentId=            POST /assessments
  *   PATCH  /assessments/:id                    POST /assessments/:id/sign
@@ -72,7 +72,9 @@ function fail(e) {
     pglog_not_submitted: [409, "This entry is not awaiting verification."],
     pglog_already_verified: [409, "Already verified."],
     pglog_deleted: [410, "This entry was deleted."],
-    pglog_actor_required: [401, "Sign in required."]
+    pglog_actor_required: [401, "Sign in required."],
+    pglog_submitted_withdraw_first: [409, "This entry is with your guide for verification. Withdraw it first to correct it."],
+    pglog_not_author: [403, "Only the author can withdraw an entry."]
   };
   const k = known[e && e.message];
   if (k) return json({ error: e.message, message: k[1] }, k[0]);
@@ -91,20 +93,36 @@ async function context(request, env, orgId) {
   return { uid, actorUid, role: g.role, owner: g.owner, org: g.org, member: g.member };
 }
 
-// Read guard for one resident's logbook: yourself, or someone holding a viewing cap.
-async function canReadResident(env, ctx, resident) {
+/* Read guard for one resident's logbook. Returns the AUDIENCE, which decides how much of each entry
+ * publicEntry() will hand over — "self" / "verifier" / "hod" see clinical detail, "aggregate" sees
+ * counts and categories only.
+ *
+ * ASSIGNED MEANS ASSIGNED. The first version of this function had both branches return "verifier",
+ * so any faculty member anywhere in the institution could read any resident's case references,
+ * diagnoses, remarks and reflections (R1, finding C5). It now falls through to "aggregate", and an
+ * entry-scoped read separately upgrades a supervisor who is actually named on THAT entry. */
+async function canReadResident(env, ctx, resident, entry) {
   if (!resident) throw Object.assign(new Error("not_found"), { status: 404 });
   if (M.sameActor(ctx.actorUid, resident.uid)) return "self";
   const role = ctx.role;
-  if (can(role, CAPS.PGLOG_VIEW_INSTITUTION)) return "aggregate";
-  if (can(role, CAPS.PGLOG_VIEW_DEPT)) return "hod";
-  if (can(role, CAPS.PGLOG_VIEW_ASSIGNED)) {
-    // Assigned means: their guide, a co-guide, or a supervisor named on their entries. Anything
-    // wider would let any faculty member in the institution read any resident's logbook.
-    const mine = S.norm(ctx.actorUid);
-    if (S.norm(resident.guide) === mine || (resident.coGuides || []).some((g) => S.norm(g) === mine)) return "verifier";
-    return "verifier";   // a verifying faculty member may open a record submitted to them
+  const mine = S.norm(ctx.actorUid);
+  // A department head sees their own department, not the whole institution.
+  if (can(role, CAPS.PGLOG_VIEW_DEPT)) {
+    if (!resident.departmentId || !ctx.member || !ctx.member.scope ||
+        !(ctx.member.scope.departments || []).length ||
+        (ctx.member.scope.departments || []).indexOf(resident.departmentId) > -1) return "hod";
+    return "aggregate";
   }
+  if (can(role, CAPS.PGLOG_VIEW_ASSIGNED)) {
+    // Their guide or co-guide: the person §5.2(vi) names as responsible for this logbook.
+    if (S.norm(resident.guide) === mine || (resident.coGuides || []).some((g) => S.norm(g) === mine)) return "verifier";
+    // Or the supervisor named on the specific entry being opened — they were asked to verify it.
+    if (entry && S.norm(entry.supervisor) === mine) return "verifier";
+    return "aggregate";
+  }
+  // Institution-wide oversight (Academic Cell, §5.2(iii) "ensure and monitor") is a completeness
+  // question, so it is deliberately the LAST and narrowest grant.
+  if (can(role, CAPS.PGLOG_VIEW_INSTITUTION)) return "aggregate";
   throw Object.assign(new Error("forbidden"), { status: 403, detail: "read_resident" });
 }
 
@@ -204,8 +222,14 @@ export async function onRequest(context_) {
         return json({ ok: true, rotation: await S.createRotation(env, res.orgId, body, ctx.actorUid) });
       }
       if (method === "PATCH" && id) {
-        const ctx = await context(request, env, body.orgId || q("orgId"));
-        await S.gate(env, ctx.actorUid, body.orgId || q("orgId"), CAPS.PGLOG_CONFIGURE);
+        // Gate on the ROTATION'S OWN org, loaded from the document — never on an org the caller
+        // supplies. The first version gated on body.orgId while updateRotation() wrote to cur.orgId,
+        // so an Academic Cell in one institution could flip another institution's DRP rotation to
+        // "completed" — an exam pre-requisite under §5.2(xii)VIII(c). (R1, finding C6.)
+        const cur = await S.getRotation(env, id);
+        if (!cur) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, cur.orgId);
+        await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_CONFIGURE);
         return json({ ok: true, rotation: await S.updateRotation(env, id, body, ctx.actorUid) });
       }
     }
@@ -227,7 +251,7 @@ export async function onRequest(context_) {
         if (!e) return json({ error: "not_found" }, 404);
         const res = await S.getResident(env, e.residentId);
         const ctx = await context(request, env, e.orgId);
-        const audience = await canReadResident(env, ctx, res);
+        const audience = await canReadResident(env, ctx, res, e);
         return json({ ok: true, audience, entry: S.publicEntry(e, audience) });
       }
       if (method === "POST" && !id) {
@@ -244,6 +268,13 @@ export async function onRequest(context_) {
         const ctx = await context(request, env, cur.orgId);
         await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_SUBMIT_OWN);
         return json({ ok: true, entry: S.publicEntry(await S.submitEntry(env, id, ctx.actorUid), "self") });
+      }
+      if (id && action === "withdraw" && method === "POST") {
+        const cur = await S.getEntry(env, id);
+        if (!cur) return json({ error: "not_found" }, 404);
+        const ctx = await context(request, env, cur.orgId);
+        await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_LOG_OWN);
+        return json({ ok: true, entry: S.publicEntry(await S.withdrawEntry(env, id, ctx.actorUid, body.reason), "self") });
       }
       if (id && action === "verify" && method === "POST") {
         const cur = await S.getEntry(env, id);
@@ -323,6 +354,7 @@ export async function onRequest(context_) {
     if (seg === "attest" && method === "POST") {
       const res = await S.getResident(env, body.residentId);
       if (!res) return json({ error: "not_found" }, 404);
+      if (body.kind && M.ATTESTATION_KINDS.indexOf(String(body.kind)) < 0) return json({ error: "unknown_attestation_kind" }, 400);
       const ctx = await context(request, env, res.orgId);
       return json({ ok: true, attestation: await S.attest(env, body, ctx.actorUid) });
     }
@@ -344,7 +376,11 @@ export async function onRequest(context_) {
       if (method === "GET" && id) {
         const prog = await S.getProgramme(env, id);
         if (!prog) return json({ error: "not_found" }, 404);
-        await context(request, env, prog.orgId);
+        const ctx = await context(request, env, prog.orgId);
+        // Curriculum overrides are what a resident's targets are measured against, so a resident may
+        // read them; but a bare org member with no pglog role may not.
+        if (!can(ctx.role, CAPS.PGLOG_VIEW_OWN) && !can(ctx.role, CAPS.PGLOG_CONFIGURE) &&
+            !can(ctx.role, CAPS.PGLOG_VIEW_ASSIGNED)) return json({ error: "forbidden" }, 403);
         return json({ ok: true, config: await S.getConfig(env, id) });
       }
       if ((method === "PUT" || method === "POST") && id) {

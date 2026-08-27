@@ -52,23 +52,17 @@ test("EVERY requirement in EVERY pack names a source and a clause", () => {
   }
 });
 
-test("EVERY numeric target is backed by a quote containing that number", () => {
-  const exempt = new Set([
-    // Cadence targets of 1 ("once a week") - the number is the word, not a digit.
-    "1"
-  ]);
-  for (const f of files.filter((x) => x !== "index.json")) {
-    const p = read(f);
-    for (const r of (p.requirements || []).concat(p.procedures || [])) {
-      if (r.target == null) continue;
-      if (r.informational || r.advisory) continue;
-      const n = String(r.target);
-      if (exempt.has(n)) continue;
-      const hay = [r.quote, r.note, r.label].join(" ");
-      assert.ok(hay.includes(n),
-        f + "/" + r.id + ": target " + n + " does not appear in its own quote — an unsourced number");
-    }
-  }
+test("numeric targets are verified AGAINST THE SOURCE PDF, not against themselves", () => {
+  // This file used to assert that a target appeared in its own `quote`. For procedures that was
+  // tautological — the generator built the quote FROM the target — so it passed for all 64 shipped
+  // Emergency Medicine minima while 17 more were missing entirely (R1 2026-08-27).
+  // The real check now lives in test/pglog-provenance.test.mjs, which compares every number and
+  // every quotation against the extracted NMC text in pglog-sources/. This assertion exists so the
+  // weak version cannot quietly come back.
+  const provenance = readFileSync(join(DIR, "..", "..", "test", "pglog-provenance.test.mjs"), "utf8");
+  assert.match(provenance, /pglog-sources/, "the provenance test must read the checked-in source extracts");
+  assert.match(provenance, /no NMC-stated minimum is MISSING/, "the missing-minimum check must exist");
+  assert.match(provenance, /EVERY requirement quotation appears verbatim/, "the quotation check must exist");
 });
 
 test("no requirement claims an NMC source while having an unsourced number", () => {
@@ -126,13 +120,13 @@ test("Emergency Medicine carries the NMC procedure minima verbatim", () => {
   assert.ok(em.procedures.length >= 65);
 });
 
-test("every OTHER specialty pack ships procedure targets of null — no invented counts", () => {
-  for (const f of packFiles.filter((x) => x !== "emergency-medicine.json")) {
-    const p = read(f);
-    for (const pr of p.procedures || []) {
-      assert.equal(pr.target, null, f + "/" + pr.id + ": a procedure count that no NMC source states");
-    }
-  }
+test("the vacuous procedure assertions were replaced by exact ones", () => {
+  // `every OTHER specialty pack ships procedure targets of null` iterated ZERO items in all 16 packs
+  // — it passed while reading as if 16 packs had been verified. And `em.procedures.length >= 65` was
+  // a floor, which is exactly why a 69-item list that should have had 87 went unnoticed.
+  const provenance = readFileSync(join(DIR, "..", "..", "test", "pglog-provenance.test.mjs"), "utf8");
+  assert.match(provenance, /and this test is not vacuous/);
+  assert.match(provenance, /Not a floor\./, "the EM procedure count must be asserted exactly");
 });
 
 test("packs whose source says 'a specified number' say so in a note", () => {
@@ -156,6 +150,10 @@ test("extending merges the common packs and lets the specialty override by id", 
   const ids = f.requirements.map((r) => r.id);
   assert.ok(ids.includes("pgmer_elogbook_weekly"), "PGMER requirements must reach every pack");
   assert.ok(ids.includes("rev22_hod_sign"), "2022-revised common must reach a revised pack");
+  // The summative pre-requisites and the Research Methodology clause are NOT shared — they differ
+  // materially between the four revised curricula (R1 finding C4).
+  assert.ok(!ids.includes("rev22_exam_conference_presentations"));
+  assert.ok(!ids.includes("rev22_research_methodology_6m"));
   assert.ok(ids.includes("gm_journal_club"), "the specialty's own requirements must be there");
   assert.equal(new Set(ids).size, ids.length, "duplicate requirement ids after flatten");
 });
@@ -205,7 +203,7 @@ test("an override can hide a requirement the department does not run", () => {
 
 test("dueByMonths resolves to a real date from the resident's start", () => {
   const out = C.resolve(flat("general-medicine"), { degree: "MD", startDate: "2025-07-01" });
-  const rm = out.find((r) => r.id === "rev22_research_methodology_6m");
+  const rm = out.find((r) => r.id === "gm_research_methodology_6m");
   assert.equal(rm.dueAt, "2026-01-01");
   const pgmer = out.find((r) => r.id === "pgmer_cert_ethics");
   assert.equal(pgmer.dueAt, "2026-07-01");

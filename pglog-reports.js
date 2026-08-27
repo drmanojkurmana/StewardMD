@@ -331,9 +331,14 @@
     r.sections.push({
       heading: "Assessments",
       columns: ["Date", "Template", "Period / activity", "Score", "Outcome", "Discussed with trainee", "Assessor", "Status"],
+      note2: "A dash in Score means the NMC form for that assessment prints no total — the element ratings are the record.",
       rows: arr(ctx.assessments).slice().sort(function (a, b) { return (a.assessedAt || 0) - (b.assessedAt || 0); }).map(function (a) {
+        // A template the NMC prints WITHOUT a total row must not acquire one here. The MD General
+        // Medicine appraisal (Annexure 1) is a banded per-element rating; "105 / 135" is a mark that
+        // form does not have, on a document an examiner may read. (R1, finding I5.)
+        var noTotal = arr(ctx.templates).some(function (t) { return t.id === a.templateId && t.noTotal; });
         return [fmtTs(a.assessedAt || a.createdAt), s(a.templateId), s(a.period || a.entryId),
-                a.maxTotal ? a.total + " / " + a.maxTotal : "",
+                (noTotal || !a.maxTotal) ? "—" : a.total + " / " + a.maxTotal,
                 s(a.outcome), a.discussedWithTrainee === true ? "Yes" : (a.discussedWithTrainee === false ? "No" : ""),
                 person(a.assessor), s(a.status)];
       }),
@@ -587,7 +592,7 @@
   }
   function stateLabel(x) {
     return { met: "Met", on_track: "On track", slightly_behind: "Slightly behind", behind: "Behind",
-             counted: "Counted (no NMC number)", not_started: "Not started" }[x] || s(x);
+             in_progress: "In progress", counted: "Counted (no NMC number)", not_started: "Not started" }[x] || s(x);
   }
   function sourceLabel(x) { var c = C(); return c ? c.sourceLabel(x) : s(x); }
 

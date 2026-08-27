@@ -294,18 +294,61 @@ test("attendance expands ranges, de-duplicates days, and reports both readings",
   assert.equal(rows.filter((r) => r.state === "leave_paid").length, 1);
   const sum = M.attendanceSummary(entries, { programmeStart: "2026-08-01", today: "2026-08-10", attendancePct: 80 });
   assert.equal(sum.recordedDays, 10);
-  assert.equal(sum.attendedDays, 9);
-  assert.equal(sum.pctOfRecorded, 90);
+  // PGMER-2023 5.6 GRANTS 20 days paid leave and extends the term only for leave taken IN EXCESS of
+  // what is permitted. So permitted leave counts by default; the day is not deducted.
+  assert.equal(sum.attendedDays, 10);
+  assert.equal(sum.pctOfRecorded, 100);
   assert.equal(sum.meetsPct, true);
   assert.equal(sum.thresholdPctSource, "nmc_regulation");
   assert.equal(sum.thresholdDaysSource, "nmc_faq_secondary");
+  // the threshold is the gazette's; WHICH DAYS COUNT is the institution's, and they are reported apart
+  assert.equal(sum.interpretationSource, "institution");
+  assert.equal(sum.interpretationCustomised, false);
 });
 
-test("academic leave counts as duty, paid leave does not", () => {
-  const acad = M.attendanceSummary([M.entry({ id: "a", kind: "attendance", occurredAt: "2026-08-01", state: "leave_academic" })], {});
-  const paid = M.attendanceSummary([M.entry({ id: "b", kind: "attendance", occurredAt: "2026-08-01", state: "leave_paid" })], {});
-  assert.equal(acad.attendedDays, 1);
-  assert.equal(paid.attendedDays, 0);
+test("every leave state PGMER-2023 5.6 PERMITS counts as attended by default", () => {
+  // 5.6 grants 20 days paid (a), a weekly holiday (b), maternity (c), paternity (d) and 5 days
+  // academic leave (e), and extends the term only "If a candidate avails leave in excess than the
+  // permitted number of days". Deducting statutory maternity leave from a resident's attendance and
+  // badging the result "PGMER-2023 5.6" would be the module inventing a rule. (R1 finding C2.)
+  ["leave_paid", "leave_academic", "leave_maternity", "leave_paternity", "present"].forEach((st) => {
+    const s = M.attendanceSummary([M.entry({ id: "a", kind: "attendance", occurredAt: "2026-08-01", state: st })], {});
+    assert.equal(s.attendedDays, 1, st + " should count as attended by default");
+  });
+  const absent = M.attendanceSummary([M.entry({ id: "b", kind: "attendance", occurredAt: "2026-08-01", state: "absent" })], {});
+  assert.equal(absent.attendedDays, 0);
+});
+
+test("20 days of granted paid leave cannot by itself push a resident under 80%", () => {
+  const entries = [
+    M.entry({ id: "p", kind: "attendance", occurredAt: "2026-01-01", endDate: "2026-03-21", state: "present" }),      // 80 days
+    M.entry({ id: "l", kind: "attendance", occurredAt: "2026-03-22", endDate: "2026-04-10", state: "leave_paid" })    // 20 days
+  ];
+  const s = M.attendanceSummary(entries, { programmeStart: "2026-01-01", today: "2026-04-10", attendancePct: 80 });
+  assert.equal(s.pctOfRecorded, 100);
+  assert.equal(s.meetsPct, true);
+});
+
+test("90 days of statutory maternity leave does not read as 47% attendance", () => {
+  const entries = [
+    M.entry({ id: "p", kind: "attendance", occurredAt: "2026-01-01", endDate: "2026-03-21", state: "present" }),
+    M.entry({ id: "m", kind: "attendance", occurredAt: "2026-03-22", endDate: "2026-06-19", state: "leave_maternity" })
+  ];
+  const s = M.attendanceSummary(entries, { programmeStart: "2026-01-01", today: "2026-06-19", attendancePct: 80 });
+  assert.equal(s.meetsPct, true);
+  assert.ok(s.pctOfRecorded >= 99);
+});
+
+test("an institution may change what counts, and the summary SAYS it was changed", () => {
+  const e = [M.entry({ id: "a", kind: "attendance", occurredAt: "2026-08-01", state: "leave_paid" })];
+  const strict = M.attendanceSummary(e, { attendanceCounts: { leave_paid: 0 } });
+  assert.equal(strict.attendedDays, 0);
+  assert.equal(strict.interpretationCustomised, true);
+  assert.equal(strict.interpretationSource, "institution");
+  // an unknown key cannot quietly redefine "attended"
+  const junk = M.attendanceSummary(e, { attendanceCounts: { made_up_state: 0 } });
+  assert.equal(junk.attendedDays, 1);
+  assert.equal(junk.interpretationCustomised, false);
 });
 
 test("with nothing recorded, attendance is UNKNOWN rather than zero", () => {
@@ -511,4 +554,89 @@ test("a DEVICE-LOCAL draft may have no resident id; the server path still requir
   const v = M.validateEntry(e, { today: "2026-08-27" });
   assert.equal(v.ok, false);
   assert.ok(v.errors.some((x) => x.field === "residentId"));
+});
+
+/* ── R1 2026-08-27 regressions ─────────────────────────────────────────────────
+ * Each of these encodes a defect R1 found in the first cut of this module. They are here so the
+ * same wrong number cannot come back.
+ */
+
+test("C1 — a 77-day District Residency is NOT three months", () => {
+  const prog = M.programme({ id: "p", degree: "MD", durationMonths: 36 });
+  // 2026-05-01 -> 2026-07-17 = 77 days. The old `months >= 2.5` accepted this.
+  const short = [M.rotation({ id: "d", kind: "drp", status: "completed", startDate: "2026-05-01", endDate: "2026-07-17" })];
+  assert.equal(M.drpDays(short), 77);
+  assert.equal(M.drpMeetsThreeMonths(short), false);
+  assert.equal(M.examEligibility({ programme: prog, rotations: short, entries: [] }).rows.find((r) => r.key === "drp").met, false);
+});
+
+test("C1 — the shortest REAL three calendar months (Feb-May, 89 days) does qualify", () => {
+  const prog = M.programme({ id: "p", degree: "MD", durationMonths: 36 });
+  const feb = [M.rotation({ id: "d", kind: "drp", status: "completed", startDate: "2026-02-01", endDate: "2026-05-01" })];
+  assert.equal(M.drpDays(feb), 89);
+  assert.equal(M.DRP_MIN_DAYS, 89);
+  assert.equal(M.drpMeetsThreeMonths(feb), true);
+  assert.equal(M.examEligibility({ programme: prog, rotations: feb, entries: [] }).rows.find((r) => r.key === "drp").met, true);
+  // and a split posting still totals correctly
+  const split = [
+    M.rotation({ id: "a", kind: "drp", status: "completed", startDate: "2026-02-01", endDate: "2026-03-15" }),
+    M.rotation({ id: "b", kind: "drp", status: "completed", startDate: "2026-06-01", endDate: "2026-07-18" })
+  ];
+  assert.ok(M.drpDays(split) >= 89);
+});
+
+test("I8 — a PG Diploma student's DRP is third semester ONLY", () => {
+  const res = M.resident({ id: "r", startDate: "2025-07-01" });
+  const md = M.programme({ id: "p", degree: "MD", durationMonths: 36 });
+  const dip = M.programme({ id: "p", degree: "Diploma", durationMonths: 24 });
+  // semester 5 = ~24 months in
+  const sem5 = M.rotation({ id: "x", kind: "drp", startDate: "2027-07-01", endDate: "2027-10-01" });
+  assert.equal(M.drpWindowOk(sem5, res, md).ok, true, "semester 5 is fine for MD");
+  const w = M.drpWindowOk(sem5, res, dip);
+  assert.equal(w.ok, false);
+  assert.equal(w.thirdOnly, true);
+  assert.match(w.warning, /THIRD SEMESTER ONLY/);
+  assert.equal(w.source, "nmc_regulation");
+});
+
+test("C3 — on day 3 of residency nobody is 'behind' on a 100-procedure course target", () => {
+  const req = { id: "em_intubation", kind: "procedure", label: "Tracheal intubation", target: 100,
+    per: "course", match: { procedureId: "em_intubation" }, source: "nmc_curriculum", clause: "Procedural skills" };
+  const prog = M.programme({ id: "p", degree: "MD", durationMonths: 36 });
+  const ctx = { programmeStart: "2026-08-01", today: "2026-08-03", programme: prog };
+  const p = M.progressFor(req, [], ctx);
+  assert.equal(p.done, 0);
+  assert.equal(p.target, 100);
+  assert.equal(p.expected, 0, "prorated against the programme's own length, not demanded on day one");
+  assert.notEqual(p.state, "behind");
+  assert.equal(M.gaps([req], [], ctx).length, 0, "a three-day-old resident has no gaps");
+});
+
+test("C3 — the same requirement DOES go behind late in training", () => {
+  const req = { id: "em_intubation", kind: "procedure", label: "Tracheal intubation", target: 100,
+    per: "course", match: { procedureId: "em_intubation" }, source: "nmc_curriculum", clause: "Procedural skills" };
+  const prog = M.programme({ id: "p", degree: "MD", durationMonths: 36 });
+  // 30 months into a 36-month programme with nothing logged
+  const ctx = { programmeStart: "2024-02-01", today: "2026-08-01", programme: prog };
+  const p = M.progressFor(req, [], ctx);
+  assert.ok(p.expected >= 80, "expected ~83 by now, got " + p.expected);
+  assert.equal(p.state, "behind");
+  assert.equal(M.gaps([req], [], ctx).length, 1);
+});
+
+test("C3 — with the programme length unknown there is NO expectation and NO gap", () => {
+  const req = { id: "x", kind: "procedure", label: "P", target: 100, per: "course",
+    match: { procedureId: "x" }, source: "nmc_curriculum" };
+  const p = M.progressFor(req, [], { programmeStart: "2024-02-01", today: "2026-08-01" });
+  assert.equal(p.expected, null);
+  assert.equal(p.state, "in_progress", "not 'behind' — that would be a claim we cannot support");
+  assert.equal(M.gaps([req], [], { programmeStart: "2024-02-01", today: "2026-08-01" }).length, 0);
+});
+
+test("C3 — a cadence requirement is unaffected and still measures against elapsed time", () => {
+  const req = { id: "jc", kind: "academic", label: "Journal club", target: 1, per: "fortnight",
+    match: { academicType: "journal_club" }, source: "nmc_curriculum" };
+  const ctx = { programmeStart: "2026-07-01", today: "2026-08-27" };
+  assert.equal(M.progressFor(req, [], ctx).expected, 4);
+  assert.equal(M.progressFor(req, [], ctx).state, "behind");
 });

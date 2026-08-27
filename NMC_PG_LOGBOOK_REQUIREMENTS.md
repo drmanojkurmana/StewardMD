@@ -635,6 +635,12 @@ Adding UG later = new packs + a UG dashboard. It does **not** touch the model, s
 
 ## 10. Source register
 
+**The extracted plain text of every PDF below is checked into `pglog-sources/`**, and
+`test/pglog-provenance.test.mjs` verifies every quotation and every number in every pack against it.
+A claim that is not in those files fails the build. (Added 2026-08-27 after R1 found that the
+previous test compared each procedure count against a quotation the generator had synthesised from
+that same count — see §12.)
+
 | # | Source | Retrieved | URL / locator |
 |---|---|---|---|
 | S1 | **PGMER-2023** — Post-Graduate Medical Education Regulations, 2023, NMC/PGMEB, File No. N-P016(11)/2/2023-PGMEB-NMC, Gazette of India Extraordinary Part-III §4 | 2026-08-27 | `nmc.org.in/MCIRest/open/getDocument?path=/Documents/Public/Portal/LatestNews/MER.pdf` (23 pp + annexures) |
@@ -666,11 +672,54 @@ Adding UG later = new packs + a UG dashboard. It does **not** touch the model, s
 
 ---
 
-## 11. Changelog of this document
+## 11. Clause index
+
+Every PGMER-2023 clause a curriculum pack cites, so the doc is the index it claims to be. Sub-items
+are quoted in full in §1.
+
+`2.2(iii)` · `5.2(iii)` · `5.2(v)` · `5.2(vi)` · `5.2(vii)` · `5.2(x)` · `5.2(xi)` · `5.2(xi)(a)` ·
+`5.2(xi)(b)` · `5.2(xi)(c)` · `5.2(xii)V` · `5.2(xii)VIII` · `5.6` · `5.6(a)` · `5.6(e)` · `6.2` ·
+`8.1` · `9.2(c)`
+
+Specialty-curriculum clauses are PDF headings rather than numbered sections; they are verified
+directly against the source text in `pglog-sources/` rather than being re-listed here.
+
+## 12. Corrections after R1 review — 2026-08-27
+
+R1 (clinical safety & evidence gate) returned **NO-GO** on the first cut of this module and found
+seven critical and nine important defects. What changed, and why each mattered:
+
+| # | Was | Now |
+|---|---|---|
+| C1 | A **77-day** District Residency satisfied "three months" — the check was `months >= 2.5`, a tolerance that appears in no NMC source. | The floor is **89 days**, the shortest possible three calendar months (1 Feb → 1 May). `drpMonths()` is display-only; `drpMeetsThreeMonths()` decides. |
+| C2 | Statutory leave was silently counted as **non-attendance** under a §5.6 badge — 20 days of granted paid leave pushed a resident to exactly 80%, and 90 days of maternity leave read as **47%**. | §5.6 *grants* that leave and extends the term only for leave **in excess** of what is permitted. Every permitted leave state now counts by default; the map is institutional configuration and the summary reports `interpretationSource: "institution"` separately from the regulation's 80%. |
+| C3 | A whole-course target was "expected" **from day one**, so a resident three days into residency saw 72 high-severity gaps and "about 100 intubations expected by now". | Prorated against the programme's own length; with the length unknown there is **no expectation and no gap**, and the state is `in_progress`, not `behind`. |
+| C4 | MD Paediatrics and MD Pathology residents were shown General Medicine's summative pre-requisites as their own NMC requirement. Paediatrics actually requires **one** presentation, accepts **state** level, and treats the publication as an **alternative**. | The pre-requisites moved out of the shared 2022 pack into each specialty's own, quoted from its own PDF. Paediatrics is evaluated as a real OR (`anyOf`). |
+| C5 | **Any** faculty member in the institution could read **any** resident's case references, diagnoses, remarks and reflections — both branches of the guard returned the same value. | Guide, co-guide, or the supervisor named on that specific entry get `verifier`; everyone else falls through to `aggregate`. A department head is scoped to their department. |
+| C6 | A rotation `PATCH` was gated on a **caller-supplied** org but written to the rotation's own org — cross-institution write, including flipping a DRP to `completed`. | Gated on the rotation's own `orgId`, loaded from the document, like every sibling route. |
+| C7 | The "authenticated monthly **by the postgraduate guide**" artefact, and the **HoD's** proficiency certificate, could be signed by any faculty member holding the cap. | Monthly needs the guide, a co-guide, or the HoD (recorded in `attestedRole`); the two HoD documents need `pg_hod`. |
+| I1 | The Emergency Medicine pack shipped **64 of the 81** procedure minima the NMC prints — NG tube insertion (100) and lab/imaging interpretation (100) among the 17 missing — behind a complete-looking checklist. | All **87** entries ship (81 with a number, 6 the NMC lists without one), verified against `pglog-sources/emerg.txt`. |
+| I2 | A resident could edit an entry **while it sat in the verifier's queue**, so a guide could sign a document different from the one they read. | `applyEdit()` throws on `submitted`. The author `withdraw()`s it first, which clears it from the queue and is recorded. |
+| I3 | `history[]` truncated at 200 and `revisions[]` at 30 **silently**, against a doc that promised the original is "preserved in full". | Still bounded for the Firestore document limit, but `overflowedHistory` / `overflowedRevisions` record that older rows were shed, so a truncated chain cannot be presented as complete. |
+| I5 | The MD General Medicine appraisal form produced a **"105 / 135"** total. That form is a banded per-element rating with **no total row**. | The template carries `noTotal`; the report prints the element ratings and no synthesised sum. |
+| I6 | The self-assess guard compared against a `residentUid` that was `""` when the resident could not be resolved — a silently disabled check. | Fails closed: the assessment is refused if the resident cannot be resolved. |
+| I8 | The DRP semester window ignored the clause's own two exceptions. | §5.2(xii)V restricts a post-diploma entrant and a PG Diploma student to the **third semester only**, and the warning now says so. |
+| — | Three quotations were **wrong**, and one was **fabricated**: the shared 2022 pack dropped "the" from "from **the** Head of Department"; MD Radiodiagnosis says "training **program**", not "programme"; MS OBGY prints "**clinic**-pathological", which had been silently tidied to "clinico-"; and MD Pathology carried a CPC requirement quoting "…clinico-pathological conferences…" **to a clause that does not exist in that PDF**. | All quoted as printed; the fabricated Pathology requirement was **deleted** rather than given an invented replacement. PGMER-2023 §5.2(x) already covers CPCs for every specialty. |
+| — | The Research Methodology clause was shared across the four 2022-revised curricula. Paediatrics says "an **NMC recognized** course" where the others say "an **online** course". | Moved into each specialty pack with its own wording. |
+
+**The test that should have caught all of this.** `test/pglog-curriculum.test.mjs` claimed to fail the
+build if a numeric target did not appear in its own quotation — but the generator synthesised each
+procedure's quotation *from that target*, so the assertion compared a number with itself and passed
+for all 64 shipped minima without ever reading the PDF. `test/pglog-provenance.test.mjs` now checks
+every quotation and every count against the checked-in source text in `pglog-sources/`, and the
+Emergency Medicine procedure count is asserted **exactly**, not as a floor.
+
+## 13. Changelog of this document
 
 | Date | Change |
 |---|---|
 | 2026-08-27 | Created from S1–S18. |
+| 2026-08-27 | §11 clause index, §12 R1 corrections. Source extracts checked into `pglog-sources/`. |
 
 **Maintenance rule:** if an NMC amendment lands, update **this file first**, then the packs, then the
 code. A pack requirement whose `source` clause is not in this file is a bug.

@@ -185,8 +185,14 @@ export async function createRotation(env, orgId, body, actorUid, deps) {
   await audit(env, orgId, actorUid, "pglog:rotation:create", f.kind + " " + f.startDate, deps);
   // PGMER-2023 5.2(xii)V — returned with the record, not thrown: a State's posting schedule is not
   // the resident's to fix, and refusing the rotation would lose a true record of where they were.
-  const w = M.drpWindowOk(f, res);
+  const prog = await getProgramme(env, res.programmeId, deps);
+  const w = M.drpWindowOk(f, res, prog);
   return w.ok ? f : Object.assign({}, f, { warning: w.warning, warningSource: w.source, warningClause: w.clause });
+}
+export async function getRotation(env, id, deps) {
+  const d = D(deps);
+  const doc = await d.fsGet(env, COL.rotation + "/" + sanitize(id));
+  return doc ? M.rotation(withId(sanitize(id), doc.fields)) : null;
 }
 export async function listRotations(env, residentId, deps) {
   const d = D(deps);
@@ -279,6 +285,18 @@ export async function editEntry(env, id, patch, actorUid, deps) {
   if (!v.ok) throw Object.assign(e400("validation"), { errors: v.errors });
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:edit", id, deps);
+  return out;
+}
+
+// Pull a submitted entry back out of the verifier's queue. Clears pendingFor, so it leaves their
+// list rather than mutating under them (R1, finding I2).
+export async function withdrawEntry(env, id, actorUid, reason, deps) {
+  const d = D(deps);
+  const cur = await getEntry(env, id, deps);
+  if (!cur) throw e404("entry");
+  const out = M.withdraw(cur, actorUid, d.now(), reason);   // THROWS unless the author
+  await writeEntry(env, out, cur.orgId, deps);
+  await audit(env, cur.orgId, actorUid, "pglog:entry:withdraw", cur.kind, deps);
   return out;
 }
 
@@ -410,13 +428,17 @@ export async function completeAssessment(env, id, patch, template, actorUid, dep
   if (!cur) throw e404("assessment");
   await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS, null, deps);
   const res = await getResident(env, cur.residentId, deps);
+  // FAIL CLOSED. RULE 6 (an assessor may not assess themselves) compares against residentUid; if the
+  // resident cannot be resolved that comparison silently passes, which is the exact "namespace
+  // mismatch disables the guard" failure the verify() path was designed against. (R1, finding I6.)
+  if (!res || !res.uid) throw e404("resident");
   const merged = M.assessment(Object.assign({}, cur, patch || {}, { id: cur.id, residentId: cur.residentId, orgId: cur.orgId, createdAt: cur.createdAt }));
-  merged.residentUid = res ? res.uid : "";                       // so the model can refuse a self-assessment
+  merged.residentUid = res.uid;                                  // so the model can refuse a self-assessment
   const out = M.assess(merged, actorUid, d.now(), template);
   delete out.residentUid;                                        // not persisted; it is a lookup, not a field
   await d.fsCommit(env, [d.wUpdate(env, COL.assessment + "/" + sanitize(id), out)]);
   await audit(env, cur.orgId, actorUid, "pglog:assessment:complete", out.templateId + " " + out.outcome, deps);
-  await notify(env, { to: res ? res.uid : "", orgId: cur.orgId, kind: "assessment_ready", residentId: cur.residentId,
+  await notify(env, { to: res.uid, orgId: cur.orgId, kind: "assessment_ready", residentId: cur.residentId,
     text: out.outcome === "remediation" ? "An assessment with a remediation plan is ready for you." : "New faculty feedback is available." }, deps);
   return out;
 }
@@ -446,7 +468,23 @@ export async function attest(env, body, actorUid, deps) {
   if (!res) throw e404("resident");
   const g = await gate(env, actorUid, res.orgId, CAPS.PGLOG_ATTEST, null, deps);
   if (M.sameActor(actorUid, res.uid)) throw e403("self_attest_forbidden");
-  const kind = body.kind || "monthly";
+  const kind = M.ATTESTATION_KINDS.indexOf(String(body.kind || "monthly")) > -1 ? String(body.kind || "monthly") : "";
+  if (!kind) throw e400("unknown_attestation_kind");
+  /* THE SIGNATURE MUST COME FROM THE AUTHORITY THE DOCUMENT NAMES.
+   * PGMER-2023 5.2(vi): the monthly authentication is by "the postgraduate GUIDE imparting the
+   * training". The 2022-revised curricula: the completed log book "should be signed by the HEAD OF
+   * THE DEPARTMENT", and the proficiency certificate is "from Head of Department".
+   * Holding PGLOG_ATTEST is not the same as being that person, and minting a document that names an
+   * authority the signer does not hold is exactly what 9.2(c) penalises. (R1, finding C7.) */
+  if (kind === "monthly") {
+    const isGuide = M.sameActor(actorUid, res.guide) ||
+      (res.coGuides || []).some((x) => M.sameActor(actorUid, x));
+    // A department head may authenticate for a guide who has left or is unavailable — but it is the
+    // HoD doing it, and attestedRole records which.
+    if (!isGuide && g.role !== "pg_hod") throw e403("not_the_guide");
+  } else if (kind === "hod_final" || kind === "hod_proficiency") {
+    if (g.role !== "pg_hod") throw e403("hod_required");
+  }
   const period = kind === "monthly" ? String(body.period || "") : "";
   if (kind === "monthly" && !/^\d{4}-\d{2}$/.test(period)) throw e400("period_required");
   // Snapshot exactly which entries this signature covers — the artefact an examiner asks for.
@@ -469,8 +507,12 @@ export async function attest(env, body, actorUid, deps) {
   }
   // Stamp the covered entries so an entry can show which authentication carried it.
   if (kind === "monthly" && scope.length) {
-    const writes = scope.slice(0, 400).map((e) => d.wUpdate(env, COL.entry + "/" + sanitize(e.id), { attestedIn: period }));
-    try { await d.fsCommit(env, writes); } catch (e) {}
+    // Firestore caps a commit at 500 writes, so batch rather than truncating at 400 — a silently
+    // unstamped entry would look unauthenticated on its own detail screen while the month is signed.
+    for (let i = 0; i < scope.length; i += 400) {
+      const writes = scope.slice(i, i + 400).map((e) => d.wUpdate(env, COL.entry + "/" + sanitize(e.id), { attestedIn: period }));
+      try { await d.fsCommit(env, writes); } catch (e) {}
+    }
   }
   await audit(env, res.orgId, actorUid, "pglog:attest:" + kind, period + " n=" + scope.length, deps);
   return a;

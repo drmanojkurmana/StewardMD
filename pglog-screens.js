@@ -158,7 +158,10 @@
   function recompute() {
     var m = M(); if (!m || !state.dash) return;
     var res = state.dash.resident || (state.ctx && state.ctx.resident) || {};
-    var ctx = { programmeStart: res.startDate, today: todayISO() };
+    var prog = state.dash.programme || (state.ctx && state.ctx.programme) || null;
+    // `programme` lets progressFor prorate a whole-course target instead of demanding all of it on
+    // day one (R1, finding C3).
+    var ctx = { programmeStart: res.startDate, today: todayISO(), programme: prog };
     state.progress = m.progress(state.requirements, state.dash.entries || [], ctx);
     state.gaps = m.gaps(state.requirements, state.dash.entries || [], ctx);
     state.eligibility = m.examEligibility({
@@ -781,6 +784,13 @@
       bar = '<div class="pgl-actionbar">' +
         '<button class="pgl-btn ghost" data-pgl="edit-draft" data-id="' + attr(id) + '">Edit</button>' +
         '<button class="pgl-btn" data-pgl="submit-existing" data-id="' + attr(id) + '">' + ic("send") + "Submit</button></div>";
+    } else if (e.status === "submitted") {
+      bar = '<div class="pgl-actionbar">' +
+        '<button class="pgl-btn ghost" data-pgl="withdraw" data-id="' + attr(id) + '">' + ic("undo") + "Withdraw to correct</button></div>";
+      h.push(banner("info", "hourglass_top",
+        "This is with <b>" + esc(r.person(e.supervisor)) + "</b> for verification and cannot be edited while it is " +
+        "there — they would end up signing something different from what they read. Withdraw it first; that clears " +
+        "it from their queue and is recorded."));
     } else if (e.status === "returned" || e.status === "draft") {
       bar = '<div class="pgl-actionbar">' +
         '<button class="pgl-btn ghost" data-pgl="edit-server" data-id="' + attr(id) + '">Correct</button>' +
@@ -887,18 +897,19 @@
     var m = M(), rows = arr(state.dash && state.dash.rotations);
     var res = state.dash && state.dash.resident;
     var h = [];
-    var drpMonths = m.drpMonths(rows);
+    var drpDays = m.drpDays(rows), drpMonths = m.drpMonths(rows), drpMet = m.drpMeetsThreeMonths(rows);
     h.push('<div class="pgl-card"><h3>District Residency Programme</h3>' +
-      '<div class="pgl-row-s">' + esc(drpMonths.toFixed(1)) + " of 3 months recorded " + prov("nmc_regulation", "5.2(xii)V") + "</div>" +
-      '<div class="pgl-bar" data-state="' + (drpMonths >= 2.5 ? "met" : "behind") + '"><i style="width:' +
-        Math.min(100, Math.round((drpMonths / 3) * 100)) + '%"></i></div>' +
+      '<div class="pgl-row-s">' + esc(drpDays + " days (" + drpMonths.toFixed(1) + " months) of three calendar months recorded ") +
+        prov("nmc_regulation", "5.2(xii)V") + "</div>" +
+      '<div class="pgl-bar" data-state="' + (drpMet ? "met" : "behind") + '"><i style="width:' +
+        Math.min(100, Math.round((drpDays / m.DRP_MIN_DAYS) * 100)) + '%"></i></div>' +
       '<div class="hint" style="margin-top:8px">A compulsory three-month rotation in a District Hospital / District Health System, ' +
       "in the 3rd, 4th or 5th semester. Satisfactory completion is an essential condition before the final examination (5.2(xii)VIII(c)).</div></div>");
     if (!rows.length) {
       h.push(emptyState("route", "No rotations recorded", "Your department records postings. Ask them to add your rotation schedule so entries can be linked to it."));
     }
     rows.forEach(function (rot) {
-      var w = res ? m.drpWindowOk(rot, res) : { ok: true };
+      var w = res ? m.drpWindowOk(rot, res, state.dash && state.dash.programme) : { ok: true };
       var active = rot.startDate && m.daysBetween(rot.startDate, todayISO()) >= 0 && (!rot.endDate || m.daysBetween(todayISO(), rot.endDate) >= 0);
       var count = arr(state.dash.entries).filter(function (e) { return e.rotationId === rot.id; });
       h.push('<div class="pgl-card tight"><div class="pgl-row-t">' + esc(rot.name) +
@@ -1436,6 +1447,7 @@
       }
       case "edit-server": return toast("Open the entry, correct the fields, then Resubmit.");
       case "resubmit": return doResubmit(id);
+      case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
       case "suggest": return doSuggest();
       case "pick-req": return pickRequirement();
@@ -1524,6 +1536,17 @@
     st.submitDraft(id).then(function () {
       state.loading = false; state.dash = null; toast("Submitted."); haptic("success"); enter("home");
     }, function (e) { state.loading = false; toast(e.userMessage || "Could not submit."); render(); });
+  }
+  function doWithdraw(id) {
+    var reason = window.prompt("Withdraw this entry from your guide's queue to correct it. What is wrong with it?");
+    if (reason === null) return;
+    var st = ST();
+    state.loading = true; render();
+    st.withdraw(id, String(reason || "").trim()).then(function () {
+      state.loading = false; state.dash = null;
+      toast("Withdrawn. It is a draft again and has left your guide's queue.");
+      enter("home");
+    }, function (e) { state.loading = false; toast(e.userMessage || "Could not withdraw."); render(); });
   }
   function doResubmit(id) {
     var st = ST();

@@ -22,6 +22,59 @@
       "per": "course",
       "source": "nmc_curriculum",
       "mandatoryForExam": false,
+      "id": "pd_research_methodology_6m",
+      "kind": "certification",
+      "label": "Research Methodology course — an NMC recognized course, within six months of the batch commencing",
+      "dueByMonths": 6,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "research_methodology"
+      },
+      "clause": "K. Course in Research Methodology",
+      "quote": "All postgraduate students shall complete an NMC recognized course in Research Methodology within six months of the commencement of the batch and generate the online certificate on successful completion of the course.",
+      "note": "Paediatrics says an NMC RECOGNIZED course where the other 2022-revised curricula say an ONLINE course. Quoted as printed."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "pd_exam_dissemination",
+      "kind": "research",
+      "label": "At least one presentation at a national/state level conference — or, if not presented at national level, one paper published/accepted in an indexed journal",
+      "anyOf": [
+        {
+          "subtype": "conference_paper"
+        },
+        {
+          "subtype": "publication",
+          "indexed": true
+        }
+      ],
+      "match": {
+        "subtype": "conference_paper"
+      },
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least one if not two presentation(s) at national/state level conference. If not presented at national level, alternatively, one research paper should be published / accepted in an indexed journal. (It is suggested that the local or University Review committee assess the work sent for publication).",
+      "note": "The Paediatrics wording differs materially from the other 2022-revised curricula: the floor is ONE (not two), STATE level counts, and the publication is an ALTERNATIVE, not an additional requirement. Evaluated as a real OR."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": true,
+      "id": "pd_exam_logbook_submitted",
+      "kind": "meta",
+      "label": "Log book of work done submitted, incl. rotation postings, departmental presentations and internal assessment reports",
+      "engine": "report:portfolio",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "Log book of work done during the training period including rotation postings, departmental presentations, and internal assessment reports should be submitted."
+    },
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
       "id": "pd_life_support",
       "kind": "certification",
       "label": "BCLS, Neonatal Resuscitation, Advanced Paediatric Life Support and ACLS",

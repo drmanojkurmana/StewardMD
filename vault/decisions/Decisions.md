@@ -896,3 +896,62 @@ disabled button, and not a server-only check that a future importer or admin scr
 **A note for whoever runs the tests next.** The headless UI test binds port **8994**, not the shared
 8991. Another worktree's `serve.mjs` on 8991 silently served *its* copy of the app, and 48 assertions
 "failed" against code they were never looking at. See [[two-claude-sessions-one-folder]].
+
+### 2026-08-27, same day — what R1 found, and the one that stings
+
+R1 returned **NO-GO** on the module above. Seven critical, nine important. The full before/after is in
+`NMC_PG_LOGBOOK_REQUIREMENTS.md` §12; the decisions worth recording here are these.
+
+**Three of the seven were the module inventing a number and attributing it to the NMC** — precisely
+the failure the whole design was supposed to prevent. `months >= 2.5` let a 77-day District Residency
+satisfy a clause that says three months. `COUNTS_AS_ATTENDED` deducted statutory maternity leave from
+a resident's attendance and badged the result "PGMER-2023 5.6", when §5.6 *grants* that leave and
+extends the term only for leave **in excess** of what is permitted. And a whole-course target was
+"expected" from day one, so a resident three days into residency saw 72 high-severity gaps and
+"about 100 intubations expected by now". Writing "no invented numbers" in a design document does not
+prevent inventing numbers; a test that reads the source does.
+
+**Two were authorization holes that the client flag does not contain**, because Cloudflare Functions
+go live on push regardless of `smd_pglog`: any faculty member in the institution could read any
+resident's case references, diagnoses and reflections (both branches of the read guard returned the
+same value — the `if` was dead and its comment described a restriction that was not implemented), and
+a rotation `PATCH` gated on a caller-supplied org while writing to the rotation's own. The lesson is
+narrow and worth keeping: **a comment describing a guard is not a guard**, and a branch whose two
+arms return the same value is a bug that reads as a feature.
+
+**The one that stings.** The commit message advertised: *"test/pglog-curriculum.test.mjs fails the
+build if a numeric target does not appear in its own quotation."* It could not. The generator
+synthesised each procedure's quotation *from that target* (`label + " (" + target + ")"`), so the
+assertion compared a number with itself. It passed for all 64 shipped Emergency Medicine minima
+without ever reading the PDF — and did not notice that **17 more minima had been dropped**, including
+nasogastric tube insertion (100) and lab/imaging interpretation (100), about a fifth of the
+requirement, behind a checklist that looked complete. Two neighbouring assertions were worse than
+useless: `every OTHER specialty pack ships procedure targets of null` iterated **zero** items in all
+sixteen packs and read as if sixteen had been verified, and the EM count was asserted as a **floor**,
+which is exactly what let a 69-item list that should have had 87 go by.
+
+**So the fix was not a patch, it was evidence.** `pglog-sources/` now holds the extracted plain text
+of all sixteen NMC PDFs (868 KB, checked in, deliberately *outside* `pglog/` so `build-www.sh` never
+bundles it into the app), and `test/pglog-provenance.test.mjs` checks every quotation and every number
+against it. A number that is not in the source is a build failure.
+
+That test immediately found four things R1's own spot-check had not: the shared 2022 pack dropped
+"the" from "from **the** Head of Department"; MD Radiodiagnosis writes "training **program**", not
+"programme"; MS OBGY prints "**clinic**-pathological", which had been silently tidied to "clinico-";
+and **MD Pathology carried a requirement quoting "…clinico-pathological conferences…" to a clause
+that does not exist in that PDF**. That last one was a fabricated quotation. It was deleted rather
+than given an invented replacement — PGMER-2023 §5.2(x) already covers CPCs for every specialty, so
+nothing was lost by removing it, and inventing a citation to keep a feature would have been the worst
+available outcome.
+
+**A quotation is evidence, not a transcription to be tidied.** Where the NMC PDF prints something
+odd — "clinic-pathological", "examinationof" with the space missing — the pack now quotes it as
+printed, with a note. The test's normaliser is allowed to forgive the *extractor's* artefacts (line-
+break hyphenation, page numbers inside a paragraph, padded columns); it is not allowed to forgive
+ours.
+
+**Also worth not re-litigating:** the appraisal form now prints no total. The MD General Medicine
+Annexure 1 is a banded per-element rating with a comments column and **no total row**, and the module
+was synthesising "105 / 135" onto a document an examiner may read. `noTotal` is carried through the
+model, the server scoring contract and the report. A mark the form does not have is a mark that was
+made up.

@@ -87,7 +87,22 @@
   var CERTIFICATIONS = ["research_methodology", "ethics_gcp_glp", "bcls_acls"];
   // PGMER-2023 5.6.
   var ATTENDANCE_STATES = ["present", "leave_paid", "leave_academic", "leave_maternity", "leave_paternity", "absent", "holiday"];
-  var COUNTS_AS_ATTENDED = { present: 1, leave_paid: 0, leave_academic: 1, leave_maternity: 0, leave_paternity: 0, absent: 0, holiday: 0 };
+  /* WHAT COUNTS AS AN ATTENDED DAY IS INSTITUTIONAL POLICY, NOT REGULATION.
+   * PGMER-2023 5.6 GRANTS 20 days paid leave (5.6(a)), 5 days academic leave (5.6(e)), a weekly
+   * holiday (5.6(b)) and maternity/paternity leave (5.6(c),(d)). It says the term is extended only
+   * "If a candidate avails leave IN EXCESS THAN the permitted number of days". It nowhere says that
+   * permitted leave is non-attendance.
+   *
+   * So the default below counts every PERMITTED leave state. Deducting statutory maternity leave
+   * from a resident's attendance percentage — and then badging the result "PGMER-2023 5.6" — would
+   * be the module inventing a rule and attributing it to the gazette. (R1 2026-08-27, finding C2.)
+   *
+   * Institutions do differ, so this is `attendanceCounts` in pconfig() and the Academic Cell can
+   * change it; attendanceSummary() then reports interpretationSource "institution". */
+  var COUNTS_AS_ATTENDED_DEFAULT = {
+    present: 1, leave_paid: 1, leave_academic: 1, leave_maternity: 1, leave_paternity: 1,
+    absent: 0, holiday: 0
+  };
 
   var STATUSES = ["draft", "submitted", "verified", "returned"];
   var ASSESSMENT_OUTCOMES = ["satisfactory", "needs_improvement", "remediation"];
@@ -167,6 +182,19 @@
    * types a name into the case-reference box gets it stripped rather than stored. It is deliberately
    * conservative - it keeps MRN-shaped tokens and drops long alphabetic runs and anything that looks
    * like a phone/Aadhaar/email. Also applied server-side (never trust the client). */
+  /* The same scrubber, applied to the FREE-TEXT fields a resident actually types into. `title` is the
+   * box someone writes "Mr Ramesh, 54M, DKA" in, and it was previously stored raw, shown to every
+   * `full` audience, and sent to the AI endpoint (R1, finding I9). Unlike caseRef this must NOT drop
+   * ordinary clinical prose, so it removes only the unambiguous identifiers — email, mobile,
+   * Aadhaar-shaped digits — and leaves the rest intact. A clinical title is meant to be readable. */
+  function scrubFreeText(v, max) {
+    var t = trim(v);
+    if (!t) return "";
+    t = t.replace(/\b[\w.+-]+@[\w-]+\.[\w.]+\b/g, "[removed]");
+    t = t.replace(/(?:\+\s?)?(?:91[-\s]?)?\b[6-9]\d{9}\b/g, "[removed]");
+    t = t.replace(/\b\d{4}[- ]?\d{4}[- ]?\d{4}\b/g, "[removed]");
+    return t.replace(/\s{2,}/g, " ").trim().slice(0, max || 160);
+  }
   function sanitizeCaseRef(v) {
     var t = trim(v);
     if (!t) return "";
@@ -225,10 +253,27 @@
       attestationGraceDays: posInt(c.attestationGraceDays, 7),   // CONFIG
       rotationEndNoticeDays: posInt(c.rotationEndNoticeDays, 7), // CONFIG
       attendancePct: num(c.attendancePct, 80),                   // PGMER-2023 5.6 (regulation)
+      // Which attendance states count toward the percentage. INSTITUTIONAL, not NMC — see the
+      // COUNTS_AS_ATTENDED_DEFAULT comment. Only the seven known states are accepted.
+      attendanceCounts: attendanceCounts(c.attendanceCounts),
       attendanceDays: posInt(c.attendanceDays, 0),               // PGMEB FAQ 751/501 - SECONDARY source; 0 = not set
       attendanceDaysSource: clampStr(c.attendanceDaysSource || "nmc_faq_secondary", 40),
       researchMilestones: strArr(c.researchMilestones, 20).length ? strArr(c.researchMilestones, 20) : RESEARCH_MILESTONES.slice()
     };
+  }
+  // Normalise an institutional attendance-counting map: known states only, 1 or 0 only, defaults
+  // filled in. A stray key or a truthy string cannot quietly change what "attended" means.
+  function attendanceCounts(m) {
+    var out = {};
+    ATTENDANCE_STATES.forEach(function (k) {
+      out[k] = (m && Object.prototype.hasOwnProperty.call(m, k)) ? (m[k] ? 1 : 0) : COUNTS_AS_ATTENDED_DEFAULT[k];
+    });
+    return out;
+  }
+  // True when the institution has changed any of the defaults — the UI says so rather than letting a
+  // local interpretation read as the regulation's.
+  function attendanceCountsCustomised(m) {
+    return ATTENDANCE_STATES.some(function (k) { return attendanceCounts(m)[k] !== COUNTS_AS_ATTENDED_DEFAULT[k]; });
   }
 
   function resident(o) {
@@ -290,27 +335,52 @@
       createdAt: num(o.createdAt, 0)
     };
   }
-  // PGMER-2023 5.2(xii)V: the compulsory 3-month District Residency rotation "shall take place in the
-  // 3rd or 4th or 5th semester". Returned as a WARNING, never a block: a State's posting schedule is
-  // not the resident's to fix, and refusing to record a posting that actually happened would make the
-  // logbook less true, not more compliant.
-  function drpWindowOk(rot, res) {
+  /* PGMER-2023 5.2(xii)V, verbatim: "shall undergo a compulsory residential rotation of three months
+   * in District Hospitals/ District Health System ... Such rotation shall take place in the 3rd or
+   * 4th or 5th semester of the post-graduate programme. In case of those students who have taken
+   * admission after completion of Diploma in the relevant specialty, District Residency Programme
+   * shall take place in third semester only. Similarly, the post-graduate diploma students shall
+   * undergo the District Residency Programme in the third semester."
+   *
+   * TWO EXCEPTIONS the clause states and the first version of this function ignored (R1, finding I8):
+   * a post-diploma entrant and a PG-diploma student are BOTH restricted to the third semester.
+   *
+   * Returned as a WARNING, never a block: a State's posting schedule is not the resident's to fix,
+   * and refusing to record a posting that actually happened would make the logbook less true. */
+  function drpWindowOk(rot, res, prog) {
     if (!rot || rot.kind !== "drp") return { ok: true };
     var start = isoDate(rot.startDate);
     if (!start || !res || !res.startDate) return { ok: true, unknown: true };
     var sem = Math.max(1, Math.floor(Math.floor(daysBetween(res.startDate, start) / 30.4375) / 6) + 1);
-    if (sem >= 3 && sem <= 5) return { ok: true, semester: sem };
+    // Third-semester-only cases: a PG Diploma student, or an entrant admitted on the strength of a
+    // diploma in the same specialty (which the programme records by shortening the course to 24 mo).
+    var thirdOnly = !!(prog && (prog.degree === "Diploma" || posInt(prog.durationMonths, 36) <= 24)) || !!(res && res.postDiploma);
+    var lo = thirdOnly ? 3 : 3, hi = thirdOnly ? 3 : 5;
+    if (sem >= lo && sem <= hi) return { ok: true, semester: sem, thirdOnly: thirdOnly };
     return {
-      ok: false, semester: sem,
-      warning: "PGMER-2023 5.2(xii)V places the District Residency in the 3rd, 4th or 5th semester; " +
-        "this rotation starts in semester " + sem + ".",
+      ok: false, semester: sem, thirdOnly: thirdOnly,
+      warning: thirdOnly
+        ? "PGMER-2023 5.2(xii)V places the District Residency in the THIRD SEMESTER ONLY for a " +
+          "post-diploma entrant or a PG Diploma student; this rotation starts in semester " + sem + "."
+        : "PGMER-2023 5.2(xii)V places the District Residency in the 3rd, 4th or 5th semester; " +
+          "this rotation starts in semester " + sem + ".",
       source: "nmc_regulation", clause: "5.2(xii)V"
     };
   }
-  function drpMonths(rots) {
+  // Total DRP DAYS recorded. Days, not months, because months are the thing being tested against and
+  // a fractional-month figure is what let a 77-day posting satisfy "three months" (R1, finding C1).
+  function drpDays(rots) {
     return arr(rots).filter(function (r) { return r && r.kind === "drp"; })
-      .reduce(function (a, r) { return a + Math.max(0, daysBetween(r.startDate, r.endDate)) / 30.4375; }, 0);
+      .reduce(function (a, r) { return a + Math.max(0, daysBetween(r.startDate, r.endDate)); }, 0);
   }
+  // Months, for DISPLAY only. Never compare this against 3.
+  function drpMonths(rots) { return drpDays(rots) / 30.4375; }
+  // THE THRESHOLD. The regulation says three CALENDAR months. The shortest possible three-calendar-
+  // month span is 1 Feb -> 1 May = 89 days (28+31+30); the longest is 92. So 89 days is the honest
+  // floor: it admits every real three-month posting and excludes the 77-day one that the previous
+  // `months >= 2.5` accepted. A DRP may legitimately be split across postings, so days are summed.
+  var DRP_MIN_DAYS = 89;
+  function drpMeetsThreeMonths(rots) { return drpDays(rots) >= DRP_MIN_DAYS; }
 
   /* ── the entry: one polymorphic record for every logged activity ─────────────
    * Deliberately ONE shape rather than seven collections. A logbook's whole value is the union - the
@@ -330,8 +400,8 @@
       departmentId: clampStr(o.departmentId, 80),
       rotationId: clampStr(o.rotationId, 80),
       occurredAt: isoDate(o.occurredAt),
-      title: clampStr(o.title, 160),
-      remarks: clampStr(o.remarks, 1200),
+      title: scrubFreeText(o.title, 160),
+      remarks: scrubFreeText(o.remarks, 1200),
       supervisor: clampStr(o.supervisor, 120),
       requirementIds: strArr(o.requirementIds, 12),
       attachments: arr(o.attachments).slice(0, 6).map(attachment),
@@ -348,8 +418,14 @@
       returnedAt: num(o.returnedAt, 0),
       returnReason: clampStr(o.returnReason, 500),
       attestedIn: clampStr(o.attestedIn, 16),      // the monthly attestation (YYYY-MM) that covered it
-      history: arr(o.history).slice(-200).map(historyRow),
-      revisions: arr(o.revisions).slice(-30),
+      // Bounded for the Firestore 1 MiB document limit, but NEVER silently: overflowedHistory /
+      // overflowedRevisions record that older rows exist and were shed, so a report cannot present a
+      // truncated chain as complete. (R1, finding I3.) At these caps an entry would need 200 state
+      // changes or 30 amendments to reach them, so in practice nothing is ever dropped.
+      history: arr(o.history).slice(-HISTORY_CAP).map(historyRow),
+      overflowedHistory: Math.max(num(o.overflowedHistory, 0), Math.max(0, arr(o.history).length - HISTORY_CAP)),
+      revisions: arr(o.revisions).slice(-REVISION_CAP),
+      overflowedRevisions: Math.max(num(o.overflowedRevisions, 0), Math.max(0, arr(o.revisions).length - REVISION_CAP)),
       deleted: !!o.deleted,
       deletedBy: clampStr(o.deletedBy, 120),
       deletedAt: num(o.deletedAt, 0),
@@ -358,7 +434,7 @@
     if (kind === "clinical") {
       e.setting = oneOf(CLINICAL_SETTINGS, o.setting, "opd");
       e.category = clampStr(o.category, 80);
-      e.diagnosis = clampStr(o.diagnosis, 160);
+      e.diagnosis = scrubFreeText(o.diagnosis, 160);
       e.role = oneOf(ROLES, o.role, "assisted");
       e.caseRef = sanitizeCaseRef(o.caseRef);
       e.ageBand = ageBand(o.ageBand);
@@ -368,20 +444,20 @@
       e.unit = clampStr(o.unit, 60);
     } else if (kind === "procedure") {
       e.procedureId = clampStr(o.procedureId, 80);
-      e.procedureText = clampStr(o.procedureText, 160);
+      e.procedureText = scrubFreeText(o.procedureText, 160);
       e.role = oneOf(ROLES, o.role, "assisted");
       e.caseRef = sanitizeCaseRef(o.caseRef);
       e.ageBand = ageBand(o.ageBand);
       e.sex = oneOf(["male", "female", "other", ""], o.sex, "");
       e.outcome = oneOf(OUTCOMES, o.outcome, "unknown");
       e.complications = strArr(o.complications, 8);
-      e.complicationNotes = clampStr(o.complicationNotes, 600);
+      e.complicationNotes = scrubFreeText(o.complicationNotes, 600);
       e.anaesthesia = clampStr(o.anaesthesia, 60);
       e.setting = oneOf(CLINICAL_SETTINGS.concat(["ot", "daycare", "bedside"]), o.setting, "ot");
     } else if (kind === "academic") {
       e.academicType = oneOf(ACADEMIC_TYPES, o.academicType, "seminar");
       e.role = oneOf(ACADEMIC_ROLES, o.role, "attended");
-      e.topic = clampStr(o.topic, 200);
+      e.topic = scrubFreeText(o.topic, 200);
       e.scope = oneOf(ACADEMIC_SCOPES, o.scope, "within_department");
       e.place = clampStr(o.place, 120);
       e.audience = clampStr(o.audience, 80);
@@ -410,7 +486,7 @@
       e.shift = clampStr(o.shift, 40);
     } else if (kind === "reflection") {
       e.subtype = oneOf(["critical_incident", "learning_point", "feedback_received", "other"], o.subtype, "learning_point");
-      e.body = clampStr(o.body, 4000);
+      e.body = scrubFreeText(o.body, 4000);
     }
     return e;
   }
@@ -497,9 +573,12 @@
    * Each transition returns a NEW entry object; none mutates its input. `at` and `by` are supplied by
    * the caller (the server passes its own clock and the verified caller identity - never the body). */
 
+  var HISTORY_CAP = 200, REVISION_CAP = 30;
   function pushHistory(e, row) {
     var out = clone(e);
-    out.history = arr(out.history).concat([historyRow(row)]).slice(-200);
+    var all = arr(out.history).concat([historyRow(row)]);
+    out.overflowedHistory = num(out.overflowedHistory, 0) + Math.max(0, all.length - HISTORY_CAP);
+    out.history = all.slice(-HISTORY_CAP);
     return out;
   }
 
@@ -555,10 +634,17 @@
     return !!x && x === y;
   }
 
-  // RULE 3. A verified entry is never edited in place. This is the whole point of the audit trail.
+  /* RULE 3. A verified entry is never edited in place — the whole point of the audit trail.
+   *
+   * AND a SUBMITTED entry is not editable either. It is sitting in a named faculty member's queue;
+   * letting it change underneath them means they can sign a document different from the one they
+   * read, which is the §9.2(c) failure mode with extra steps. The author withdraws it to a draft
+   * first (withdraw()), which is visible in history and pulls it out of the verifier's queue.
+   * (R1, finding I2.) */
   function applyEdit(e, patch, actor, at) {
     if (e.deleted) throw err("pglog_deleted");
     if (e.status === "verified") throw err("pglog_verified_immutable");
+    if (e.status === "submitted") throw err("pglog_submitted_withdraw_first");
     var merged = entry(Object.assign({}, e, patch || {}, {
       // never patchable from the outside
       id: e.id, kind: e.kind, residentId: e.residentId, programmeId: e.programmeId, orgId: e.orgId,
@@ -567,6 +653,20 @@
       history: e.history, revisions: e.revisions, deleted: e.deleted
     }));
     var out = pushHistory(merged, { at: at, by: actor, action: "edit", from: e.status, to: e.status, reason: changedFields(e, merged).join(",") });
+    out.updatedAt = at;
+    return out;
+  }
+
+  // Pull a submitted entry back out of the verifier's queue so it can be corrected. Only the author
+  // may do this, and it is recorded — a verifier who had already opened it sees it disappear with a
+  // reason, rather than silently mutating in front of them.
+  function withdraw(e, actor, at, reason) {
+    if (e.deleted) throw err("pglog_deleted");
+    if (e.status !== "submitted") throw err("pglog_not_submitted");
+    if (!sameActor(actor, e.createdBy)) throw err("pglog_not_author");
+    var out = pushHistory(e, { at: at, by: actor, action: "withdraw", from: "submitted", to: "draft", reason: clampStr(reason, 300) });
+    out.status = "draft";
+    out.submittedAt = 0;
     out.updatedAt = at;
     return out;
   }
@@ -587,10 +687,12 @@
     var out = pushHistory(merged, {
       at: at, by: actor, action: "amend", from: "verified", to: "submitted", reason: clampStr(reason, 500)
     });
-    out.revisions = arr(e.revisions).concat([{
+    var allRev = arr(e.revisions).concat([{
       at: at, by: clampStr(actor, 120), reason: clampStr(reason, 500),
       wasVerifiedBy: e.verifiedBy, wasVerifiedAt: e.verifiedAt, doc: snapshot
-    }]).slice(-30);
+    }]);
+    out.overflowedRevisions = num(e.overflowedRevisions, 0) + Math.max(0, allRev.length - REVISION_CAP);
+    out.revisions = allRev.slice(-REVISION_CAP);
     out.status = "submitted";
     out.submittedAt = at;
     out.verifiedBy = ""; out.verifiedAt = 0;
@@ -688,7 +790,11 @@
     return {
       criteriaTotal: sum, criteriaMax: criteriaMax,
       logbookScore: lb, logbookMax: lbMax,
-      total: sum + lb, maxTotal: criteriaMax + lbMax,
+      // A template the NMC prints with no total row reports none. The per-element ratings ARE the
+      // record; a synthesised sum would be a mark the form does not have. (R1, finding I5.)
+      noTotal: !!template.noTotal,
+      total: template.noTotal ? null : sum + lb,
+      maxTotal: template.noTotal ? null : criteriaMax + lbMax,
       missing: missing
     };
   }
@@ -702,7 +808,8 @@
       throw err("pglog_discussed_required");
     }
     var out = clone(a);
-    out.total = sc.total; out.maxTotal = sc.maxTotal;
+    out.total = sc.total == null ? 0 : sc.total;
+    out.maxTotal = sc.maxTotal == null ? 0 : sc.maxTotal;   // 0 = "this form has no total"
     out.assessor = clampStr(actor, 120);
     out.assessedAt = at;
     // An outcome of "remediation" opens the remediation arm rather than closing the assessment.
@@ -813,12 +920,27 @@
 
   var PER_DAYS = { day: 1, week: 7, fortnight: 14, month: 30.4375, quarter: 91.3125, semester: 182.625, year: 365.25 };
 
-  function expectedToDate(req, elapsedDays) {
+  /* How much of a requirement should be done BY NOW.
+   *
+   * For a cadence ("once a fortnight") this is arithmetic on elapsed time and is well defined.
+   *
+   * For a WHOLE-COURSE target ("Tracheal intubation (100)") it is not: the regulation says 100 by the
+   * end of training and says nothing about the rate. The first version returned the full target from
+   * day one, so a resident three days into residency was shown 72 high-severity gaps and told about
+   * 100 intubations were "expected by now" (R1, finding C3). That number came from nowhere.
+   *
+   * So a whole-course target is now prorated against the programme's own length when that is known,
+   * and returns null when it is not — no expectation is better than an invented one. */
+  function expectedToDate(req, elapsedDays, programmeDays) {
     if (!req || req.target == null) return null;
     var per = req.per || "course";
-    if (per === "course") return req.target;
+    if (per === "course") {
+      var total = posInt(programmeDays, 0);
+      if (!total) return null;                       // unknown programme length -> no expectation
+      return Math.floor((Math.min(total, Math.max(0, elapsedDays)) / total) * req.target);
+    }
     var d = PER_DAYS[per];
-    if (!d) return req.target;
+    if (!d) return null;
     return Math.floor((Math.max(0, elapsedDays) / d) * req.target);
   }
 
@@ -844,6 +966,10 @@
   function progressFor(req, entries, ctx) {
     ctx = ctx || {};
     var elapsed = ctx.elapsedDays == null ? daysBetween(ctx.programmeStart, ctx.today) : ctx.elapsedDays;
+    // The programme's full length in days, so a whole-course target can be prorated rather than
+    // demanded on day one. Derived from durationMonths when the caller passes the programme.
+    var programmeDays = posInt(ctx.programmeDays, 0) ||
+      (ctx.programme && posInt(ctx.programme.durationMonths, 0) ? Math.round(posInt(ctx.programme.durationMonths, 36) * 30.4375) : 0);
     var done = 0, pending = 0, lastAt = "";
     arr(entries).forEach(function (e) {
       if (!entryMatches(e, req)) return;
@@ -852,7 +978,7 @@
         if (!lastAt || daysBetween(lastAt, e.occurredAt) > 0) lastAt = e.occurredAt;
       } else if (e.status === "submitted") pending++;
     });
-    var expected = expectedToDate(req, elapsed);
+    var expected = expectedToDate(req, elapsed, programmeDays);
     var out = {
       requirementId: req.id, label: req.label, kind: req.kind,
       target: req.target == null ? null : req.target,
@@ -860,7 +986,8 @@
       done: done, pending: pending, expected: expected,
       lastAt: lastAt,
       source: req.source || "unspecified", clause: req.clause || "",
-      mandatoryForExam: !!req.mandatoryForExam
+      mandatoryForExam: !!req.mandatoryForExam,
+      anyOf: arr(req.anyOf)
     };
     if (req.target == null) { out.state = "counted"; out.pct = null; return out; }
     if (req.per && req.per !== "course") {
@@ -870,7 +997,10 @@
       return out;
     }
     out.pct = req.target > 0 ? Math.min(100, Math.round((done / req.target) * 100)) : null;
-    out.state = done >= req.target ? "met" : (expected != null && done >= expected ? "on_track" : "behind");
+    // With no expectation to measure against (programme length unknown), a resident who has not
+    // finished is "in progress", NOT "behind". Calling them behind would be a claim we cannot make.
+    out.state = done >= req.target ? "met"
+      : (expected == null ? "in_progress" : (done >= expected ? "on_track" : "behind"));
     return out;
   }
 
@@ -883,6 +1013,9 @@
     var rows = progress(requirements, entries, ctx);
     var out = [];
     rows.forEach(function (p) {
+      // No expectation -> no gap. A gap is a claim that the resident should have done more BY NOW,
+      // and without a rate there is nothing to base that on.
+      if (p.expected == null) return;
       if (p.state === "behind" || p.state === "slightly_behind") {
         out.push({
           requirementId: p.requirementId, label: p.label, severity: p.state === "behind" ? "high" : "medium",
@@ -960,12 +1093,13 @@
   function attendanceSummary(entries, ctx) {
     ctx = ctx || {};
     var rows = expandAttendance(entries);
+    var cmap = attendanceCounts(ctx.attendanceCounts);
     var counts = {}; ATTENDANCE_STATES.forEach(function (k) { counts[k] = 0; });
     var attended = 0, recorded = 0;
     rows.forEach(function (r) {
       counts[r.state] = (counts[r.state] || 0) + 1;
       if (r.state !== "holiday") recorded++;
-      attended += COUNTS_AS_ATTENDED[r.state] || 0;
+      attended += cmap[r.state] || 0;
     });
     var start = isoDate(ctx.programmeStart), today = isoDate(ctx.today);
     var elapsed = start && today ? Math.max(0, daysBetween(start, today) + 1) : 0;
@@ -981,13 +1115,22 @@
       // % against elapsed calendar days - the stricter reading, shown beside the first.
       pctOfElapsed: elapsed ? Math.round((attended / elapsed) * 100) : null,
       thresholdPct: num(ctx.attendancePct, 80),
-      thresholdPctSource: "nmc_regulation",           // PGMER-2023 5.6
+      thresholdPctSource: "nmc_regulation",           // PGMER-2023 5.6 states the 80% itself
       thresholdDays: courseDays,
       thresholdDaysSource: ctx.attendanceDaysSource || "nmc_faq_secondary",
+      // WHICH DAYS COUNT is institutional, and is reported separately from the threshold so a local
+      // interpretation can never be read as the gazette's. attendanceCounts is the map that was
+      // actually applied, so a report can print it.
+      attendanceCounts: cmap,
+      interpretationSource: "institution",
+      interpretationCustomised: attendanceCountsCustomised(ctx.attendanceCounts),
       meetsPct: recorded ? (attended / recorded) * 100 >= num(ctx.attendancePct, 80) : null,
       meetsDays: courseDays ? attended >= courseDays : null,
-      note: "PGMER-2023 5.6 states 80% attendance. The 751/501-day figures come from the PGMEB FAQ " +
-        "(secondary source). What counts as an attended day is the institution's rule."
+      note: "PGMER-2023 5.6 states the 80% figure. The 751/501-day figures come from the PGMEB FAQ " +
+        "(a secondary source). WHICH DAYS COUNT as attended is the institution's rule, not the " +
+        "regulation's: 5.6 grants 20 days paid leave, 5 days academic leave, a weekly holiday and " +
+        "maternity/paternity leave, and extends the term only for leave taken IN EXCESS of what is " +
+        "permitted. By default every permitted leave state counts."
     };
   }
 
@@ -1030,8 +1173,8 @@
       rows.push({
         key: "drp",
         label: "District Residency Programme (3 months) completed",
-        met: arr(ctx.rotations).some(function (r) { return r && r.kind === "drp" && r.status === "completed"; }) && months >= 2.5,
-        detail: months ? months.toFixed(1) + " months recorded" : "",
+        met: arr(ctx.rotations).some(function (r) { return r && r.kind === "drp" && r.status === "completed"; }) && drpMeetsThreeMonths(ctx.rotations),
+        detail: months ? months.toFixed(1) + " months (" + drpDays(ctx.rotations) + " days) recorded; three calendar months is at least " + DRP_MIN_DAYS + " days" : "",
         source: "nmc_regulation", clause: "5.2(xii)V, VIII(c)"
       });
     }
@@ -1057,15 +1200,36 @@
       source: "nmc_curriculum", clause: "Summative assessment / Thesis"
     });
 
-    // Whatever the specialty pack additionally marks mandatoryForExam (e.g. MD General Medicine's
-    // "at least two presentations at national level conference; one paper in an indexed journal").
+    /* Whatever the specialty pack additionally marks mandatoryForExam.
+     *
+     * A pack requirement may carry `anyOf`: a list of entry shapes, ANY ONE of which satisfies it.
+     * MD Paediatrics needs this — its wording is "At least one if not two presentation(s) at
+     * national/state level conference. IF NOT PRESENTED AT NATIONAL LEVEL, ALTERNATIVELY, one
+     * research paper should be published / accepted in an indexed journal." Modelling that as two
+     * separate mandatory rows (which the shared 2022 pack did until R1 finding C4) tells a
+     * Paediatrics resident they have two unmet requirements when their curriculum is satisfied. */
     arr(ctx.requirementProgress).forEach(function (p) {
       if (!p.mandatoryForExam) return;
+      var met, detail, via = "";
+      if (arr(p.anyOf).length) {
+        var hit = null;
+        arr(p.anyOf).forEach(function (shape) {
+          if (hit) return;
+          var n = entries.filter(function (e) {
+            return Object.keys(shape).every(function (k) { return e[k] === shape[k]; });
+          }).length;
+          if (n >= (p.target || 1)) hit = shape;
+        });
+        met = !!hit;
+        via = hit ? (hit.subtype || "") : "";
+        detail = met ? "satisfied via " + via : "none of the alternatives recorded yet";
+      } else {
+        met = p.target == null ? p.done > 0 : p.done >= p.target;
+        detail = p.target == null ? p.done + " recorded" : p.done + " of " + p.target;
+      }
       rows.push({
         key: "req_" + p.requirementId, label: p.label,
-        met: p.target == null ? p.done > 0 : p.done >= p.target,
-        detail: p.target == null ? p.done + " recorded" : p.done + " of " + p.target,
-        source: p.source, clause: p.clause
+        met: met, detail: detail, via: via, source: p.source, clause: p.clause
       });
     });
 
@@ -1146,7 +1310,8 @@
     // validation + state machine
     validateEntry: validateEntry, requiresProcedureLog: requiresProcedureLog,
     submit: submit, verify: verify, returnEntry: returnEntry, applyEdit: applyEdit,
-    amend: amend, softDelete: softDelete, sameActor: sameActor,
+    amend: amend, softDelete: softDelete, withdraw: withdraw, sameActor: sameActor,
+    HISTORY_CAP: HISTORY_CAP, REVISION_CAP: REVISION_CAP,
 
     // assessment
     scoreAssessment: scoreAssessment, assess: assess, signAssessment: signAssessment,
@@ -1158,12 +1323,15 @@
     entryMatches: entryMatches, expectedToDate: expectedToDate, progressFor: progressFor,
     progress: progress, gaps: gaps, weeklyCadence: weeklyCadence, latencyDays: latencyDays,
     expandAttendance: expandAttendance, attendanceSummary: attendanceSummary,
+    attendanceCounts: attendanceCounts, attendanceCountsCustomised: attendanceCountsCustomised,
+    COUNTS_AS_ATTENDED_DEFAULT: COUNTS_AS_ATTENDED_DEFAULT,
     examEligibility: examEligibility, summarise: summarise,
     overdueVerifications: overdueVerifications, progressScore: progressScore,
-    trainingYearOn: trainingYearOn, semesterOn: semesterOn, drpWindowOk: drpWindowOk, drpMonths: drpMonths,
+    trainingYearOn: trainingYearOn, semesterOn: semesterOn, drpWindowOk: drpWindowOk,
+    drpMonths: drpMonths, drpDays: drpDays, drpMeetsThreeMonths: drpMeetsThreeMonths, DRP_MIN_DAYS: DRP_MIN_DAYS,
 
     // privacy + dates (exported because the server and the reports use the same ones)
-    sanitizeCaseRef: sanitizeCaseRef, ageBand: ageBand,
+    sanitizeCaseRef: sanitizeCaseRef, scrubFreeText: scrubFreeText, ageBand: ageBand,
     isoDate: isoDate, daysBetween: daysBetween, addDays: addDays, addMonths: addMonths,
     monthKey: monthKey, weekKey: weekKey, weeksBetween: weeksBetween
   };

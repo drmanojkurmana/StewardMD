@@ -225,6 +225,7 @@
 
   /* ── server-side mutations ────────────────────────────────────────────────── */
   function editEntry(id, body) { return req("/entries/" + encodeURIComponent(id), { method: "PATCH", body: body }).then(function (r) { return r.entry; }); }
+  function withdraw(id, reason) { return req("/entries/" + encodeURIComponent(id) + "/withdraw", { method: "POST", body: { reason: reason || "" } }).then(function (r) { return r.entry; }); }
   function resubmit(id) { return req("/entries/" + encodeURIComponent(id) + "/submit", { method: "POST", body: {} }).then(function (r) { return r.entry; }); }
   function verify(id, note) { return req("/entries/" + encodeURIComponent(id) + "/verify", { method: "POST", body: { note: note || "" } }).then(function (r) { return r.entry; }); }
   function returnEntry(id, reason) { return req("/entries/" + encodeURIComponent(id) + "/return", { method: "POST", body: { reason: reason } }).then(function (r) { return r.entry; }); }
@@ -299,7 +300,7 @@
     validateDraft: validateDraft, submitDraft: submitDraft, queueDraft: queueDraft,
     queued: queued, flush: flush, stripLocal: stripLocal, localId: localId,
     // mutations
-    editEntry: editEntry, resubmit: resubmit, verify: verify, returnEntry: returnEntry,
+    editEntry: editEntry, resubmit: resubmit, withdraw: withdraw, verify: verify, returnEntry: returnEntry,
     amend: amend, removeEntry: removeEntry,
     createAssessment: createAssessment, completeAssessment: completeAssessment,
     signAssessment: signAssessment, attest: attest,

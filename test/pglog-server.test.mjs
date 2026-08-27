@@ -450,3 +450,122 @@ test("rotations come back in date order", async () => {
   const rows = await S.listRotations(env, res.id, db);
   assert.deepEqual(rows.map((r) => r.name), ["A", "B"]);
 });
+
+/* ── R1 2026-08-27 regressions (server side) ───────────────────────────────── */
+
+test("C7 — the monthly authentication may only be signed by the guide, a co-guide or the HoD", async () => {
+  // PGMER-2023 5.2(vi) names "the postgraduate GUIDE imparting the training". Holding PGLOG_ATTEST
+  // is not the same as being that person, and the document names an authority.
+  const src = readFileSync(join(HERE, "..", "functions", "_pglog_store.js"), "utf8");
+  assert.match(src, /not_the_guide/, "attest() must refuse a faculty member who is not the guide");
+  assert.match(src, /hod_required/, "the two HoD documents must require pg_hod");
+  assert.match(src, /5\.2\(vi\)/);
+  // and the store must actually consult the resident's guide/coGuides to decide
+  assert.match(src, /res\.guide/);
+  assert.match(src, /coGuides/);
+});
+
+test("C6 — the rotation PATCH route gates on the ROTATION'S org, not a caller-supplied one", () => {
+  const router = readFileSync(join(HERE, "..", "functions", "api", "pglog", "[[path]].js"), "utf8");
+  const patchBlock = router.slice(router.indexOf('if (seg === "rotations")'), router.indexOf('/* ── entries'));
+  assert.match(patchBlock, /const cur = await S\.getRotation\(env, id\)/,
+    "the rotation must be loaded before the gate");
+  assert.match(patchBlock, /S\.gate\(env, ctx\.actorUid, cur\.orgId/,
+    "the gate must use the rotation's own orgId");
+  assert.ok(!/S\.gate\(env, ctx\.actorUid, body\.orgId/.test(patchBlock),
+    "gating on a caller-supplied org is the cross-institution write R1 found");
+});
+
+test("C5 — 'assigned' actually means assigned; the dead branch is gone", () => {
+  const router = readFileSync(join(HERE, "..", "functions", "api", "pglog", "[[path]].js"), "utf8");
+  const fn = router.slice(router.indexOf("async function canReadResident"), router.indexOf("export async function onRequest"));
+  // The bug was two branches returning the same value, so every faculty member got "verifier".
+  const verifierReturns = (fn.match(/return "verifier"/g) || []).length;
+  const aggregateReturns = (fn.match(/return "aggregate"/g) || []).length;
+  assert.ok(aggregateReturns >= 2, "an unassigned faculty member must fall through to aggregate");
+  assert.ok(verifierReturns >= 2 && verifierReturns <= 3);
+  assert.match(fn, /resident\.guide/);
+  assert.match(fn, /coGuides/);
+  assert.match(fn, /entry && S\.norm\(entry\.supervisor\)/,
+    "the named supervisor of THAT entry should still be able to read it");
+});
+
+test("I2 — a submitted entry cannot be edited under the verifier; it is withdrawn first", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  const e = await S.createEntry(env, ORG, entryBody(res), RESIDENT_UID, db);
+  await S.submitEntry(env, e.id, RESIDENT_UID, db);
+  await assert.rejects(() => S.editEntry(env, e.id, { remarks: "changed" }, RESIDENT_UID, db),
+    /pglog_submitted_withdraw_first/);
+  // withdraw, then edit, then resubmit
+  const w = await S.withdrawEntry(env, e.id, RESIDENT_UID, "Wrong role", db);
+  assert.equal(w.status, "draft");
+  assert.equal(w.submittedAt, 0);
+  assert.ok(w.history.some((h) => h.action === "withdraw"));
+  // and it has left the faculty member's queue
+  assert.equal((await S.pendingForFaculty(env, ORG, FACULTY_UID, db)).length, 0);
+  const edited = await S.editEntry(env, e.id, { remarks: "corrected" }, RESIDENT_UID, db);
+  assert.equal(edited.remarks, "corrected");
+});
+
+test("I2 — only the AUTHOR may withdraw", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  const e = await S.createEntry(env, ORG, entryBody(res), RESIDENT_UID, db);
+  await S.submitEntry(env, e.id, RESIDENT_UID, db);
+  await assert.rejects(() => S.withdrawEntry(env, e.id, FACULTY_UID, "x", db), /pglog_not_author/);
+});
+
+test("I3 — truncation of the audit chain is RECORDED, never silent", () => {
+  let e = M.entry({ id: "x", kind: "clinical", occurredAt: "2026-08-01", title: "t", createdBy: "fb:a" });
+  // drive it past the cap
+  for (let i = 0; i < M.HISTORY_CAP + 5; i++) e = M.submit(e, "fb:a", 1000 + i);
+  assert.equal(e.history.length, M.HISTORY_CAP);
+  assert.ok(e.overflowedHistory >= 5, "the shed rows must be counted, not forgotten");
+});
+
+test("I6 — an assessment whose resident cannot be resolved FAILS CLOSED", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  const a = await S.createAssessment(env, ORG, { residentId: "does-not-exist", templateId: "dops" }, FACULTY_UID, db)
+    .catch(() => null);
+  // createAssessment does not resolve the resident; completeAssessment must.
+  const src = readFileSync(join(HERE, "..", "functions", "_pglog_store.js"), "utf8");
+  assert.match(src, /FAIL CLOSED/);
+  assert.match(src, /if \(!res \|\| !res\.uid\) throw e404\("resident"\)/);
+});
+
+test("I9 — a phone number or email typed into a free-text field never reaches storage", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  const e = await S.createEntry(env, ORG, entryBody(res, {
+    kind: "clinical", setting: "opd", title: "Mr R 9876543210 with DKA",
+    procedureText: "", role: "assisted", remarks: "relative on ramesh@example.com"
+  }), RESIDENT_UID, db);
+  const stored = JSON.stringify(db.docs.get("pg_entries/" + e.id));
+  assert.ok(!stored.includes("9876543210"), "a mobile number reached storage via `title`");
+  assert.ok(!stored.includes("ramesh@example.com"), "an email reached storage via `remarks`");
+  // ordinary clinical prose survives — the field has to stay readable
+  assert.match(e.title, /DKA/);
+});
+
+test("I5 — a template the NMC prints with no total row produces no total", async () => {
+  const T = await import("../functions/_pglog_templates.js");
+  const appraisal = T.templateFor("appraisal");
+  assert.equal(appraisal.noTotal, true);
+  const scores = {};
+  appraisal.criteria.forEach((c) => { scores[c.key] = 7; });
+  const sc = M.scoreAssessment({ scores, logbookScore: null }, appraisal);
+  assert.equal(sc.total, null, "the appraisal form has no total row; synthesising one is a fabricated mark");
+  assert.equal(sc.maxTotal, null);
+  assert.equal(sc.noTotal, true);
+  // DOPS, which DOES print its total, is unaffected
+  const dops = T.templateFor("dops");
+  const ds = {}; dops.criteria.forEach((c) => { ds[c.key] = 5; });
+  assert.equal(M.scoreAssessment({ scores: ds, logbookScore: 10 }, dops).maxTotal, 50);
+});
+
+test("the attestation kind is validated before it is used for scoping", () => {
+  const src = readFileSync(join(HERE, "..", "functions", "_pglog_store.js"), "utf8");
+  assert.match(src, /unknown_attestation_kind/);
+});
