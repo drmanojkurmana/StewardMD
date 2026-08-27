@@ -13,7 +13,7 @@
 /* Both sides bumped this: main carries the FollowCare UX pass (fcux1), this branch the Pro-gate and
  * eLOGBook work (proevt1-b12). The key is a single opaque string, so keeping ONE would leave the
  * other deploy's clients on a stale cache. Carry both markers. */
-var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b15";
+var CACHE = "stewardmd-nb-consult1-onco6-atlas2-maikllm1-wr1-clinix29-ccsguard-surgx12-maikart1-pglog5-ack1-pgl1-vclaim1-fcux1-proevt1-b16";
 
 self.addEventListener("install", function () {
   self.skipWaiting();

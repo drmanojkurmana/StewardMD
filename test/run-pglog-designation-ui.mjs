@@ -359,6 +359,80 @@ try {
   ok(!/set up by StewardMD/i.test(tm),
      "a failed lookup is NOT reported as 'you have no institutions'");
 
+  /* ── 13. A RETURNED entry must actually be correctable ──
+   * "Correct" was a toast that told the resident to open the entry and correct the fields - which is
+   * exactly what they had just tried to do. screenEntry renders read-only rows and store.editEntry()
+   * had no callers anywhere, so the only live control was Resubmit, which sent the identical entry
+   * back to the guide who returned it. An infinite return loop. */
+  const RET_ID = "entry-returned-1";
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"dddd4444dddd4444dddd4444dddd4444"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.getDraft=function(){return null};
+    s.myInstitutions=function(){return Promise.resolve([])};
+    s.me=function(id){return Promise.resolve({uid:"fb:res-1",orgId:id,orgCode:"SMD-RET001",
+      orgName:"Sim Medical College",orgKind:"institution",role:"pg_resident",
+      caps:["pglog.log.own","pglog.submit.own","pglog.view.own"],
+      resident:{id:"res-1",name:"Aarav Sharma",programmeId:"prog-1",departmentId:"dept-medicine",
+                trainingYear:2,startDate:"2024-05-01",guide:"fb:guide-1"},
+      programme:{id:"prog-1",name:"General Medicine",degree:"MD",curriculumId:"md-general-medicine"},
+      rotations:[]});};
+    s.dashboard=function(){return Promise.resolve({
+      resident:{id:"res-1",name:"Aarav Sharma",programmeId:"prog-1",trainingYear:2,startDate:"2024-05-01"},
+      programme:{id:"prog-1",name:"General Medicine",degree:"MD"},
+      summary:{}, weekly:{}, months:[], rotations:[], assessments:[], attestations:[],
+      entries:[{id:${JSON.stringify(RET_ID)},residentId:"res-1",kind:"procedure",status:"returned",
+                occurredAt:"2026-08-20",procedureText:"Central venous access",
+                role:"performed_supervised",supervisor:"fb:guide-1",
+                returnReason:"Name the supervising consultant."}]});};
+    /* Reset the module's cached context explicitly. ensureContext() only invalidates between two
+     * REAL orgs - going from "no institution" to one does not, because invalidating on an absent org
+     * turns every ordinary unlinked state into a refetch loop. In the app the paths that link an
+     * institution (pick-inst, save-org) null state.ctx themselves; a harness that pokes the store
+     * directly has to do the same. */
+    window.SMD_PGLOG_SCREENS._state.ctx = null;
+    window.SMD_PGLOG_SCREENS._state.dash = null;
+    window.__edits = []; window.__resubmits = [];
+    s.editEntry=function(id, body){ window.__edits.push({id:id, hasServerKey: "__serverId" in (body||{})});
+      return Promise.resolve({id:id, status:"returned"}); };
+    s.resubmit=function(id){ window.__resubmits.push(id); return Promise.resolve({id:id, status:"submitted"}); };
+    return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1800);
+
+  ok(await ev(`var d=window.SMD_PGLOG_SCREENS._state.dash;
+     return !!(d && d.entries && d.entries.length === 1)`) === true,
+     `the stubbed dashboard loaded (state.dash: ${await ev(`var d=window.SMD_PGLOG_SCREENS._state.dash;
+        return d ? ("entries=" + ((d.entries||[]).length)) : "null"`)})`);
+
+  // Open the returned entry, then correct it.
+  await ev(`window.PGLOG.open(${JSON.stringify("entry/" + RET_ID)}); return 1;`);
+  await sleep(1200);
+  const tEntry = String(await txt());
+  ok(/Correct/i.test(tEntry), `the returned entry offers Correct (got: ${JSON.stringify(tEntry.slice(0, 130))})`);
+
+  ok(await tap("^Correct$") === true, "the Correct action is present");
+  await sleep(1400);
+  // Field VALUES are not innerText, so read them off the controls themselves.
+  const filled = await ev(`var r=document.getElementById("pglogRoot");
+    var vals=[].slice.call(r.querySelectorAll("input,textarea,select")).map(function(x){return String(x.value||"")});
+    return vals.join(" | ")`);
+  ok(/Central venous access/i.test(String(filled)),
+     `Correct opens the editor pre-filled with the entry (values: ${JSON.stringify(String(filled).slice(0, 160))})`);
+
+  await tap("Submit");
+  await sleep(1600);
+  ok(await ev(`return window.__edits.length === 1 && window.__edits[0].id === ${JSON.stringify(RET_ID)}`) === true,
+     "saving PATCHes the existing entry rather than creating a second one");
+  ok(await ev(`return window.__edits[0].hasServerKey === false`) === true,
+     "the internal __serverId marker is not sent to the server");
+  ok(await ev(`return window.__resubmits.length === 1`) === true,
+     "and the corrected entry goes back for verification");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}

@@ -2109,7 +2109,20 @@
         if (d) { state.draft = d; go("add/" + d.kind); }
         return;
       }
-      case "edit-server": return toast("Open the entry, correct the fields, then Resubmit.");
+      /* This used to be a toast telling the resident to do the thing they had just tried to do:
+       * screenEntry renders read-only rows, and store.editEntry() had NO callers anywhere. So a
+       * returned entry could never actually be corrected - the only live control was Resubmit,
+       * which sent the identical entry back to the guide who had just returned it. */
+      case "edit-server": {
+        var se = arr(state.dash && state.dash.entries).filter(function (x) { return x.id === id; })[0];
+        if (!se) return toast("That entry is not in this device's copy yet. Refresh and try again.");
+        if (se.status !== "returned" && se.status !== "draft") {
+          return toast("Only a returned or draft entry can be corrected.");
+        }
+        state.draft = Object.assign({}, se, { __serverId: se.id });
+        state.draftErrors = null;
+        return go("add/" + se.kind);
+      }
       case "resubmit": return doResubmit(id);
       case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
@@ -2176,9 +2189,38 @@
     var prog = (state.dash && state.dash.programme) || (state.ctx && state.ctx.programme) || {};
     return { today: todayISO(), programmeStart: res.startDate, degree: prog.degree };
   }
+  /* Correcting an entry that already exists on the server is a PATCH, not a new draft. Saving it
+   * through the draft path would have created a SECOND entry beside the returned one. */
+  function doSaveServerEdit(thenSubmit) {
+    var st = ST(), m = M();
+    var d = state.draft, sid = d.__serverId;
+    var v = m.validateEntry(m.entry(d), Object.assign(validationContext(), { requireResident: true }));
+    state.draftErrors = v.errors;
+    if (!v.ok) { render(); haptic("warning"); return toast("Fix the highlighted fields."); }
+    var patch = Object.assign({}, d);
+    delete patch.__serverId;
+    state.loading = true; render();
+    return st.editEntry(sid, patch).then(function () {
+      if (!thenSubmit) {
+        state.draft = null; state.loading = false; state.dash = null;
+        toast("Correction saved.");
+        return enter("home");
+      }
+      return st.resubmit(sid).then(function () {
+        state.draft = null; state.loading = false; state.dash = null;
+        toast("Corrected and sent back for verification.");
+        return enter("home");
+      });
+    }, function (e) {
+      state.loading = false; render(); haptic("warning");
+      toast((e && e.userMessage) || "Could not save the correction.");
+    });
+  }
+
   function doSaveDraft(thenSubmit) {
     var st = ST(), m = M();
     if (!state.draft) return;
+    if (state.draft.__serverId) return doSaveServerEdit(thenSubmit);
     var linked = !!(state.dash && state.dash.resident);
     // Saving a draft does not need an enrolled resident; submitting one does. A resident whose
     // Academic Cell has not enrolled them yet can still record today's work, and that draft is what
