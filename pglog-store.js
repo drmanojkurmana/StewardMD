@@ -289,18 +289,37 @@
   function queued() { var p = load(); return (p.queue || []).map(function (id) { return p.drafts[id]; }).filter(Boolean); }
   // Drain the queue. Resolves with a per-item result rather than rejecting, so one bad entry does
   // not strand the rest.
+  /* Two callers can start a flush: the boot timer and the `online` listener, and a reconnect fires
+   * both. Without a guard they each snapshot the same queue and each POST every draft in it, so the
+   * guide receives two identical entries - and the server has no idempotency key to collapse them.
+   * A second caller now joins the pass already running instead of starting another. */
+  var _flushing = null;
   function flush() {
+    if (_flushing) return _flushing;
     var q = (load().queue || []).slice();
     if (!q.length) return Promise.resolve({ sent: 0, failed: [] });
     var sent = 0, failed = [];
-    return q.reduce(function (chain, id) {
+    var done = function () {
+      patch(function (p) {
+        var attempted = {};
+        q.forEach(function (id) { attempted[id] = 1; });
+        /* Keep anything that FAILED, and anything queued DURING this pass. The old filter kept only
+         * the failures, so a draft saved while the flush was in flight was dropped from the queue
+         * without ever being sent - after the app had told the resident "it will be submitted when
+         * you are back online". */
+        p.queue = (p.queue || []).filter(function (id) {
+          return !attempted[id] || failed.some(function (f) { return f.id === id; });
+        });
+      });
+      _flushing = null;
+      return { sent: sent, failed: failed };
+    };
+    _flushing = q.reduce(function (chain, id) {
       return chain.then(function () {
         return submitDraft(id).then(function () { sent++; }, function (e) { failed.push({ id: id, error: e.code, message: e.userMessage }); });
       });
-    }, Promise.resolve()).then(function () {
-      patch(function (p) { p.queue = (p.queue || []).filter(function (id) { return failed.some(function (f) { return f.id === id; }); }); });
-      return { sent: sent, failed: failed };
-    });
+    }, Promise.resolve()).then(done, function (e) { _flushing = null; throw e; });
+    return _flushing;
   }
   function stripLocal(e) {
     var o = JSON.parse(JSON.stringify(e));

@@ -1428,7 +1428,10 @@
       attendance: state.dash.attendance, weekly: state.dash.weekly,
       requirementProgress: state.progress, gaps: state.gaps, eligibility: state.eligibility,
       procedureCatalog: state.pack ? state.pack.procedureCatalog : [],
-      today: todayISO(), orgName: res && res.orgId, departmentName: res && res.departmentId
+      today: todayISO(), // The NAME, not the database id. This printed "349cdc32210144cca031cccd1e0e20d4" in the header of
+      // a document a resident hands to their university. /me already returns orgName.
+      orgName: (state.ctx && state.ctx.orgName) || (res && res.orgId),
+      departmentName: (res && (res.departmentName || res.departmentId))
     };
     var opts = { includeCaseRef: !!state.includeCaseRef };
     var fn = {
@@ -2441,7 +2444,10 @@
       attendance: state.dash.attendance, weekly: state.dash.weekly,
       requirementProgress: state.progress, gaps: state.gaps, eligibility: state.eligibility,
       procedureCatalog: state.pack ? state.pack.procedureCatalog : [],
-      today: todayISO(), orgName: res && res.orgId, departmentName: res && res.departmentId,
+      today: todayISO(), // The NAME, not the database id. This printed "349cdc32210144cca031cccd1e0e20d4" in the header of
+      // a document a resident hands to their university. /me already returns orgName.
+      orgName: (state.ctx && state.ctx.orgName) || (res && res.orgId),
+      departmentName: (res && (res.departmentName || res.departmentId)),
       certificate: state.cert
     });
   }
