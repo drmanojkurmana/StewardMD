@@ -31,7 +31,10 @@ function load(env = {}) {
       route: function (q) { return this.refine(q); }
     }
   };
-  if (env.gate || env.pro !== undefined) win.SMD_PRO = { isProSync: () => (env.pro !== undefined ? env.pro : !!env.gate) };
+  if (env.gate || env.pro !== undefined) win.SMD_PRO = {
+    isProSync: () => (env.pro !== undefined ? env.pro : !!env.gate),
+    proKnown: () => (env.proKnown !== undefined ? env.proKnown : true),
+  };
   if (env.xaccess) win.SMD_XACCESS = { isActiveCached: () => true, devBypass: () => true };
   if (env.runtime) {
     win.SMD_MAIK_LOCAL = { answer: (...a) => { calls.push(["local", a]); return Promise.resolve({ text: "LOCAL answer" }); } };
@@ -568,6 +571,33 @@ function load(env = {}) {
   ok("the on-device row is badged Pro, like MaiK Cloud", />Pro</.test(E.settingsHTML()));
   ok("no em-dash in the new app-facing copy", !/Included with Pro[^<]*\u2014/.test(E.settingsHTML()));
 }
+
+/* == The regression that made on-device look broken after the Pro gate shipped ================
+ * gateActive() is read SYNCHRONOUSLY while painting, but /billing/status answers after that paint.
+ * Seeding _pro from a per-uid cache that had never been written meant the FIRST launch of a build
+ * started at false, so the row rendered locked and, with nothing listening for the flip, stayed
+ * locked. Two halves: do not claim "not Pro" before you know, and re-render when you find out. */
+{
+  const { E } = load({ pro: false, proKnown: false, runtime: true, pack: true });
+  const h = E.settingsHTML();
+  ok("unknown Pro says CHECKING, not 'subscribe'", /Checking your subscription/.test(h));
+  ok("unknown Pro never shows the upsell copy", !/Subscribe to unlock/.test(h));
+}
+{
+  const { E } = load({ pro: false, proKnown: true, runtime: true, pack: true });
+  const h = E.settingsHTML();
+  ok("a KNOWN non-Pro account does get the upsell", /Subscribe to unlock/.test(h));
+  ok("...and not the checking state", !/Checking your subscription/.test(h));
+}
+{
+  // An older account.js with no proKnown() must not break the row.
+  const { win, E } = load({ pro: false, runtime: true, pack: true });
+  delete win.SMD_PRO.proKnown;
+  ok("missing proKnown() degrades to the upsell, never to a blank row",
+     /Subscribe to unlock/.test(E.settingsHTML()));
+}
+ok("the module re-renders when Pro flips (watchPro is wired)", /smd:pro|onProChange/.test(SRC));
+ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slice(SRC.indexOf("function watchPro"))));
 
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);

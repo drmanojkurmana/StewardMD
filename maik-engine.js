@@ -253,7 +253,13 @@
 
     var gated = gateActive(), rt = runtimeAvailable(), have = packInstalled();
     var localDesc, localDisabled = false;
-    if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
+    var proKnown = true;
+    try { proKnown = !window.SMD_PRO || !window.SMD_PRO.proKnown || window.SMD_PRO.proKnown(); } catch (e) { proKnown = true; }
+    // "Not Pro" and "have not asked the server yet" are different answers. On the first launch of a
+    // build the per-uid Pro cache is empty, so the honest state for a second is CHECKING, not
+    // "subscribe". The row re-renders itself when the verdict lands (see watchPro).
+    if (!gated && !proKnown) { localDesc = "Checking your subscription…"; localDisabled = true; }
+    else if (!gated) { localDesc = "Included with Pro. Subscribe to unlock, then download the model."; localDisabled = true; }
     else if (!rt) { localDesc = "Needs the latest native app build. Update the app to use this."; localDisabled = true; }
     else if (!have) { localDesc = "Ready to set up. Download the model to answer without any AI tokens."; }
     else { localDesc = "The model's own knowledge, on this device. Fast, no network, no tokens, and no StewardMD grounding, so it can be wrong."; }
@@ -835,6 +841,28 @@
     chip.addEventListener("click", function (e) { e.preventDefault(); e.stopPropagation(); openPicker(); });
     syncChip();
   }
+
+  /* Pro decides gateActive(), and it is read synchronously while painting the settings row and the
+   * picker - but /billing/status resolves AFTER that paint. Before this, the row rendered locked on
+   * first launch of a build (the per-uid Pro cache had never been written) and never corrected
+   * itself, which is exactly "the on-device model is not working". Re-render on the flip. */
+  (function watchPro() {
+    if (typeof window === "undefined" || window.__smdMaikProWatch) return;
+    window.__smdMaikProWatch = 1;
+    var onFlip = function () {
+      try {
+        var seg = document.querySelector(".me-seg");
+        if (seg) rerender(seg.querySelector("[data-me-opt]") || seg, seg.parentNode || document);
+      } catch (e) {}
+      try { syncChip(); } catch (e) {}
+      // Now that the gate may be open, warm the model if it is the chosen engine.
+      try { warmIfLocal(); } catch (e) {}
+    };
+    try {
+      if (window.SMD_PRO && window.SMD_PRO.onProChange) window.SMD_PRO.onProChange(onFlip);
+      else window.addEventListener("smd:pro", onFlip);   // account.js may load after this module
+    } catch (e) {}
+  })();
 
   var API = {
     KEY_ENGINE: KEY_ENGINE, KEY_LLM_FIRST: KEY_LLM_FIRST, PACK_ID: PACK_ID,
