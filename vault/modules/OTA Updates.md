@@ -107,11 +107,25 @@ never by calling an internal function name directly — there isn't one to call.
   banner end to end including the tap. Verified inert (zero exceptions) in all three real device
   states: plain web, native-without-the-plugin-yet (today's actual state), native-with-plugin.
 
-## Phase 3 (not built yet) — the one native release
-- `@capgo/capacitor-updater` is in `package.json` (verified npm-resolvable, MPL-2.0, zero new
-  transitive deps) but NOT yet in `node_modules`/the native Xcode/Android projects — that needs
-  `npm install && npx cap sync` on the owner's machine, then a normal Xcode/Play Store release.
-  Every phone must take THIS ONE store release, the normal way, before OTA can ever reach it.
+## Phase 3 — the one native release
+- **DRIFT FIXED 2026-08-27:** this section used to say the plugin was "NOT yet in
+  `node_modules`/the native Xcode/Android projects". It IS, verified against the tree:
+  `node_modules/@capgo/capacitor-updater` exists, `android/capacitor.settings.gradle:20` includes
+  `:capgo-capacitor-updater`, and `ios/App/CapApp-SPM/Package.swift:20,54` declares + links
+  `CapgoCapacitorUpdater`. `npm install && npx cap sync` has been run.
+- `@capgo/capacitor-updater` `^8.51.14` (verified npm-resolvable, MPL-2.0, zero new transitive deps).
+- **Still true and still the gate:** a phone only gains OTA once it has taken a native release
+  BUILT SINCE that wiring. Whether the build currently installed on a given device has the plugin
+  cannot be read from this repo — check the running app, not the project (see the CLAUDE.md rule
+  about verifying the RUNNING bundle rather than the install message).
+- **Merging to `main` does NOT reach devices by itself.** `.github/workflows/ota-stage.yml` runs
+  `scripts/ota-stage.mjs`, which writes `ota/candidate.json` ONLY (`ota-stage.mjs:155`) and never
+  `ota/channels/stable.json`. Going live is a separate, owner-gated human act:
+  **stewardmd.in/admin → App updates → Push to devices** (`POST /api/ota/publish`). That two-step
+  split is the direct fix for the 1 Aug incident and is deliberate, not a missing feature.
+- So a client change reaches phones as: merge to `main` → CI stages a candidate → owner presses
+  Push to devices → devices offered the bundle (auto-install only for users who opted in; everyone
+  else sees the banner).
 - Staged rollout (10/50/100%) and the native-version gate are already modeled in `_ota.js`
   (`minNativeBuild`, `rollout` field on the channel) but the admin UI doesn't expose the rollout
   slider yet — every publish defaults to 100%.
