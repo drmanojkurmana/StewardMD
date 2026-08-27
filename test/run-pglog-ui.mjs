@@ -381,6 +381,43 @@ try {
   /* ── 10. It did not break the rest of the app ────────────────────────────── */
   console.log("\n— no collateral damage —");
   ok(await ev(`return !!document.querySelector('[data-act="pglog"]') || !!window.PGLOG;`) === true, "the home tile / action is registered");
+
+  /* ── the two places a user finds it ──────────────────────────────────────── */
+  console.log("\n— entry points —");
+  // NOTE: ev() serialises the expression's value, and a Promise serialises to {}. So every step here
+  // is click -> await sleep() -> read, never a promise returned from the page.
+  await ev(`var b = document.querySelector('[data-act="more"]'); if (b) b.click(); return !!b;`);
+  await sleep(600);
+  // THE MORE MENU. Asked for by name, so the name is asserted VERBATIM: a row that opens the right
+  // module under the wrong product name is still wrong.
+  const more = await ev(`
+    var row = document.querySelector('.hv-mi[data-mi="pglog"]');
+    if (!row) return { missing: true, rows: document.querySelectorAll(".hv-mi").length };
+    var ml = row.querySelector(".ml"), mc = row.querySelector(".mc");
+    return { label: ml && ml.firstChild ? String(ml.firstChild.textContent).trim() : "",
+             caption: mc ? mc.textContent.trim() : "",
+             hasIcon: !!row.querySelector("svg") };`);
+  ok(more && more.label === "NMC eLOGBook",
+    "the More menu carries the row, named NMC eLOGBook" +
+    (more && more.label === "NMC eLOGBook" ? "" : " — got " + JSON.stringify(more)));
+  ok(more && more.caption === "Digital Residency Logbook & Competency Portfolio Powered by AI",
+    "with the full subtitle" +
+    (more && more.caption ? " (" + more.caption + ")" : " — got " + JSON.stringify(more)));
+  ok(more && more.hasIcon === true, "and an icon");
+
+  // Tapping it opens the module, rather than being a row that leads nowhere.
+  await ev(`var row = document.querySelector('.hv-mi[data-mi="pglog"]'); if (row) row.click(); return !!row;`);
+  await sleep(900);
+  ok(await ev(`var e = document.getElementById("pglogRoot"); return !!e && e.classList.contains("pgl-open");`) === true,
+    "tapping the More row actually opens the module");
+  ok(await ev(`var e = document.getElementById("pglogRoot"); return !!e && /NMC eLOGBook/.test(e.textContent);`) === true,
+    "and the module header carries the same product name");
+  await ev(`PGLOG.close(); return 1;`);
+  await sleep(400);
+
+  // The tile and the menu must agree: ONE predicate decides whether it is offered at all.
+  ok(await ev(`return !!document.querySelector('[data-act="pglog"]');`) === true,
+    "the home tile is offered too, under the same flag");
   ok(await ev(`return typeof window.SURGX !== "undefined" && typeof window.CLINIX !== "undefined";`) === true,
     "the sibling modules still load");
   ok(await ev(`return document.querySelectorAll("#surgxRoot.sgx-open, #clinixRoot.cx-open").length === 0;`) === true,

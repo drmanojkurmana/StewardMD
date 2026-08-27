@@ -1483,8 +1483,8 @@
     // NMC Logbook - PG digital logbook. eligible() reads localStorage DIRECTLY rather than
     // SMD_PGLOG_FLAGS, because home.js loads BEFORE the pglog block in index.html: the flag object
     // does not exist yet at tile-render time. Same fallback pattern as SURGX/ThoreX/CliniX above.
-    { act: "pglog", ic: "history_edu", tt: "NMC Logbook", sub: "PG training record", feat: true,
-      eligible: function () { try { var q = (location.search.match(/[?&]pglog=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_pglog") !== "0"; } catch (e) { return true; } } },
+    { act: "pglog", ic: "history_edu", tt: "NMC eLOGBook", sub: "Residency logbook & portfolio", feat: true,
+      eligible: pglogOn },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",
@@ -1940,6 +1940,15 @@
     render(null);   // instant paint from cached balance
     SMD_KU.summary().then(function (s) { if (s) render(s); }).catch(function () {});
   }
+  // Is the NMC eLOGBook offered? ONE predicate for both the home tile and the More menu — two copies
+  // of this test is how a tile appears while the menu row does not, or the reverse.
+  function pglogOn() {
+    try {
+      var q = (location.search.match(/[?&]pglog=([^&]+)/) || [])[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      return localStorage.getItem("smd_pglog") !== "0";
+    } catch (e) { return true; }
+  }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
@@ -1952,6 +1961,11 @@
       mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
+      // NMC eLOGBook. Flag-gated the same way the home tile is, and read from localStorage DIRECTLY
+      // rather than through SMD_PGLOG_FLAGS: home.js loads BEFORE the pglog block in index.html, so
+      // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
+      // not a row that opens nothing.
+      (pglogOn() ? mi("book", "NMC eLOGBook", "Digital Residency Logbook &amp; Competency Portfolio Powered by AI", "pglog") : "") +
       mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
       mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +

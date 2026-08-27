@@ -24,7 +24,7 @@
     el.id = ROOT_ID;
     el.setAttribute("role", "dialog");
     el.setAttribute("aria-modal", "true");
-    el.setAttribute("aria-label", "NMC Logbook");
+    el.setAttribute("aria-label", "NMC eLOGBook");
     // The module owns its scroll host (matching surgx.js / thorex.js). swipe-back.js needs the root
     // itself to be position:fixed inset:0 (set in pglog.css) so the drag-back gesture moves the
     // whole overlay rather than the inner scroller.

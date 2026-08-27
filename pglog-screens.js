@@ -82,7 +82,7 @@
   function head(title, sub, right) {
     var isHome = route() === "home";
     var lead = isHome
-      ? '<button class="pgl-hbtn pgl-close" data-pgl="close" aria-label="Close NMC Logbook">' + ic("close") + "</button>"
+      ? '<button class="pgl-hbtn pgl-close" data-pgl="close" aria-label="Close NMC eLOGBook">' + ic("close") + "</button>"
       : '<button class="pgl-hbtn pgl-back" data-pgl="back" aria-label="Back">' + ic("arrow_back") + "</button>";
     return '<div class="pgl-head">' + lead +
       '<div class="pgl-htitle">' + (sub ? '<span class="pgl-hsub">' + esc(sub) + "</span>" : "") + esc(title) + "</div>" +
@@ -1609,11 +1609,11 @@
   function render() {
     if (!state.host) return;
     var r = route(), h0 = head0(), a = arg();
-    var title = "NMC Logbook", sub = "", body = "";
+    var title = "NMC eLOGBook", sub = "", body = "";
     if (state.loading) { state.host.innerHTML = head(title, sub) + loading(); return; }
     if (state.error) { state.host.innerHTML = head(title, sub) + wrap(errorState(state.error)); bind(); return; }
     switch (h0) {
-      case "home": title = "My NMC Logbook"; sub = "Postgraduate"; body = screenHome(); break;
+      case "home": title = "My NMC eLOGBook"; sub = "Digital residency logbook and competency portfolio"; body = screenHome(); break;
       case "setup": title = "Set up"; body = screenSetup(); break;
       case "add":
         if (a) { title = "Log " + a; sub = "New entry"; body = screenAddForm(a); }
