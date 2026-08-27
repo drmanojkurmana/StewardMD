@@ -135,6 +135,9 @@
     var c = st.context();
     return st.me(c.orgId).then(function (r) {
       state.ctx = r;
+      // The human types SMD-XXXXXX; the store keys on the internal id. /me resolves and tells us
+      // which, so this is where the two stop disagreeing.
+      if (r.orgId && r.orgId !== c.orgId) st.setContext({ orgId: r.orgId });
       if (r.resident) st.setContext({ residentId: r.resident.id, programmeId: r.resident.programmeId, curriculumId: r.programme && r.programme.curriculumId });
       return loadPack().then(function () { return r; });
     });
@@ -544,9 +547,10 @@
         esc(sp.name + " (" + (sp.degree || "") + ")") + (sp.hasSpecialtyPack ? "" : " · generic pack") + "</option>";
     }).join("");
     return wrap(
-      '<div class="pgl-card"><h3>' + esc(I.orgName || "Your institution") + "</h3>" +
+      '<div class="pgl-card"><h3>' + esc(I.orgName || (state.ctx && state.ctx.orgName) || "Your institution") + "</h3>" +
       '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">Institution code</p>' +
-      '<div style="font:800 20px var(--sans);letter-spacing:.06em;color:var(--pgl-accent,#0e6e63)">' + esc(orgId) + "</div>" +
+      '<div style="font:800 20px var(--sans);letter-spacing:.06em;color:var(--pgl-accent,#0e6e63)">' +
+        esc(I.orgCode || (state.ctx && state.ctx.orgCode) || orgId) + "</div>" +
       '<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin-top:8px">' +
       "Share this with your residents and faculty. They enter it under Set up." + "</p></div>" +
 
@@ -1876,7 +1880,10 @@
           // Point this device at the new org immediately, or the creator has to type their own code.
           st.setContext({ orgId: org.id });
           state.ctx = null; state.dash = null;
-          state.inst = { busy: false, orgName: org.name, msg: "Institution created. Code: " + org.id };
+          // org.id is the internal handle the API keys on; org.code is the SMD-XXXXXX a human shares.
+          // Storing the code as the id was the exact confusion that made setup unreachable.
+          state.inst = { busy: false, orgName: org.name, orgCode: org.code,
+                         msg: "Institution created. Share this code: " + (org.code || org.id) };
           return loadInstitution().then(render, render);
         }, function (e) {
           state.inst = { busy: false, err: true, msg: instErr(e, "Could not create the institution.") };

@@ -123,9 +123,16 @@ async function context(request, env, orgId) {
   const uid = await verifyFirebaseToken(bearer(request), env);
   if (!uid) throw Object.assign(new Error("signin_required"), { status: 401 });
   const actorUid = "fb:" + uid;
-  if (!orgId) return { uid, actorUid, role: "viewer" };
-  const g = await S.gate(env, actorUid, orgId, null);
-  return { uid, actorUid, role: g.role, owner: g.owner, org: g.org, member: g.member };
+  if (!orgId) return { uid, actorUid, orgId: "", role: "viewer" };
+  /* Accept EITHER the SMD-XXXXXX institution code a human was handed, or the internal org id.
+   * These were never reconciled: screenSetup() asks for "Institution code (SMD-XXXXXX)" and stores
+   * it as orgId, while every store call keys on the internal id and getOrg() is a direct document
+   * fetch. So a resident who typed exactly what their department told them got org_not_found, and
+   * the whole enrolment path was unreachable. resolveOrgId() passes a real id straight through, so
+   * this is a no-op for callers that already had one. */
+  const canonical = (await ORG.resolveOrgId(env, orgId)) || orgId;
+  const g = await S.gate(env, actorUid, canonical, null);
+  return { uid, actorUid, orgId: canonical, role: g.role, owner: g.owner, org: g.org, member: g.member };
 }
 
 /* Read guard for one resident's logbook. Returns the AUDIENCE, which decides how much of each record
@@ -227,7 +234,7 @@ export async function onRequest(context_) {
     if (seg === "me") {
       const orgId = q("orgId");
       const ctx = await context(request, env, orgId);
-      const resident = orgId ? await S.residentForUid(env, orgId, ctx.actorUid) : null;
+      const resident = ctx.orgId ? await S.residentForUid(env, ctx.orgId, ctx.actorUid) : null;
       const programme = resident ? await S.getProgramme(env, resident.programmeId) : null;
       const rotations = resident ? await S.listRotations(env, resident.id) : [];
       const caps = Object.keys(CAPS).filter((k) => can(ctx.role, CAPS[k]) && CAPS[k].indexOf("pglog.") === 0).map((k) => CAPS[k]);
@@ -235,7 +242,8 @@ export async function onRequest(context_) {
       // control that fails. Never the gate; the gate is server-side on the write path.
       const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
         ? await S.signerStatus(env, ctx.actorUid) : null;
-      return json({ ok: true, uid: ctx.uid, role: ctx.role, caps, resident, programme, rotations, signer });
+      return json({ ok: true, uid: ctx.uid, orgId: ctx.orgId, orgCode: (ctx.org && ctx.org.code) || "",
+                    orgName: (ctx.org && ctx.org.name) || "", role: ctx.role, caps, resident, programme, rotations, signer });
     }
 
     /* ── enrol: add a person to this institution ────────────────────────────
