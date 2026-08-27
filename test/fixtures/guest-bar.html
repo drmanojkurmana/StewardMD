@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>guest-bar fixture</title>
+<!-- Minimal host page for test/run-guest-bar-ui.mjs. index.html boots Firebase and the whole app,
+     which the guest bar does not depend on; this loads the real module against a real DOM. -->
+</head>
+<body>
+<header id="appHeader" style="height:56px;background:#eee">app header</header>
+<main id="content" style="height:400px">content</main>
+<script src="/guest-timer.js"></script>
+</body>
+</html>

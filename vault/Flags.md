@@ -198,6 +198,20 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_thorex_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
 | `smd_thorex_secure_egress` | OFF | **BLOCKED ON SERVER.** The proxy fails CLOSED with 503 until THOREX_ANALYZE_URL is provisioned. Turning it on breaks analysis. |
 
+### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>4 ON · 0 OFF</sub>
+
+Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localStorage` flags.
+
+| Flag | Def | Why |
+|---|---|---|
+| `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
+| `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
+| `UNVERIFIED_PURGE_ON` | **ON** | **DESTRUCTIVE, ARMED 2026-08-27 (owner).** The 7-day unverified-account sweep acts. Set `0` for report-only. Warning emails send either way. |
+| `UNVERIFIED_PURGE_HARD_DELETE` | **ON** | **IRREVERSIBLE, ARMED 2026-08-27 (owner).** Deletes the Firebase user, after `purgeUserData()` removes their cases, verification record, budget cache and Firestore profile/directory entry. Set `0` to *disable* the account instead (reversible). |
+| `AI_BUDGET_ON` | **ON** | Per-tier AI allowances (`_aibudget.js`). Default ON since 2026-08-27, so verification is worth something: unverified **0**, verified-not-Pro 5k, Pro 1M, physician 3M. Set `0` for the legacy flat caps. `BUDGET_FREE_TOKENS` / `BUDGET_PRO_TOKENS` / `BUDGET_PROMAX_TOKENS` tune each rung. |
+| `UNVERIFIED_PURGE_DAYS` | `7` | Age at which an unverified account is removed. |
+| `UNVERIFIED_WARN_DAYS` | `5` | Age at which the single warning email goes out. Nobody is removed who was never warned. |
+
 ## Reading the defaults
 
 - **ON does not mean released.** Many `def:true` entries carry a `PUBLIC-RELEASE-GATE` marker meaning the opposite of what it sounds like: they are open *for dev and testing* and must be **re-closed or owner-gated before a public release**. `queue-flags.js` says so at the top and tells you to `grep PUBLIC-RELEASE-GATE` and re-close every hit.

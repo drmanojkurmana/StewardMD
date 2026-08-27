@@ -83,6 +83,9 @@ downstream consumer already reads.
 The `local` option is only OFFERED when `SMD_XACCESS.ensure("maik_local")` reports active AND the
 model pack is installed. Otherwise the picker shows two engines.
 
+> **SUPERSEDED 2026-08-27** - the access-code gate is gone. The `local` option is offered when
+> `SMD_PRO.isProSync()` is true AND the model pack is installed. See `vault/decisions/Decisions.md`.
+
 ---
 
 ## 3. BLOCKERS AND SOLUTIONS

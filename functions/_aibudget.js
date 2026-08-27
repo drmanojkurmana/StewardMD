@@ -10,7 +10,14 @@ import { usageKv } from "./_usage.js";
 export const PREMIUM_MODELS = ["kardiox_ecg19"];
 const num = (v, d) => { const n = parseInt(v, 10); return Number.isFinite(n) ? n : d; };
 
-export function aiBudgetOn(env) { return String((env && env.AI_BUDGET_ON) || "") === "1"; }
+// DEFAULT ON since 2026-08-27 (owner decision). The per-tier allowances above are the whole
+// point of verifying: an unverified account gets no AI budget, a verified one does. Set
+// AI_BUDGET_ON=0 to fall back to the legacy flat caps.
+export function aiBudgetOn(env) {
+  const v = env && env.AI_BUDGET_ON;
+  if (v === undefined || v === null || v === "") return true;
+  return !(String(v) === "0" || String(v) === "false");
+}
 
 // not Pro & not verified -> none (0); not Pro & verified -> free trial; Pro+physician -> promax; else pro.
 export function budgetTier(isPro, role, verified) {
@@ -41,6 +48,15 @@ export function premiumModelAllowed(env, record, key, role) {
 
 const CACHE_TTL = 60 * 60 * 26;   // ~26h; also self-heals on month change via the stored month
 function cacheKey(uid) { return "maik:budget:" + uid; }
+
+/* Drop the cached cap for a uid. Call whenever the TIER changes under a user (verification,
+ * approval, a grant), or they keep the old allowance for up to CACHE_TTL. */
+export async function clearBudgetCache(env, uid, deps) {
+  if (!uid) return false;
+  const kv = (deps && deps.kv) || usageKv(env);
+  if (!kv) return false;
+  try { await kv.delete(cacheKey(uid)); return true; } catch (e) { return false; }
+}
 
 export async function monthlyCapFor(env, uid, isPro, verified, month, deps) {
   if (!aiBudgetOn(env) || !uid) return null;

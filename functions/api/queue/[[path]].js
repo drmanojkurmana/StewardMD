@@ -30,7 +30,7 @@ import * as ORG from "../../_opd_org_store.js";
 import * as PAT from "../../_opd_patient_store.js";
 import { resolveRoomDoctor, roomStatus, roomForActor } from "../../_opd_org.js";
 import { brandingFor, putBranding, validateLogo, logoKey, bucket as brandBucket } from "../../_clinic_branding.js";
-import { proFromRequest } from "../../_entitlement.js";
+import { proFromRequest, requirePro, needsProBody } from "../../_entitlement.js";
 import * as BILL from "../../_clinic_billing_store.js";
 import { orderQueue, orderRoomView, displayBoard } from "../../_queue_eta.js";
 import { verifyStaffSession, verifySecret, pinLocked, nextPinState, mintStaffSession } from "../../_opd_auth.js";
@@ -254,8 +254,10 @@ export async function onRequest(context) {
       const orgId = url.searchParams.get("orgId") || "";
       const az = await ORG.authorizeOrg(env, actor, orgId, CAPS.STAFF_ADMIN);
       if (!az.ok) return json({ ok: false, error: "forbidden" }, 403, request);
-      let pro = false; try { pro = (await proFromRequest(env, request)).pro; } catch (e) {}
-      if (!pro) return json({ ok: false, error: "pro_required" }, 402, request);
+      let _pg = { ok: false, reason: "none" };
+      try { _pg = await requirePro(env, request); } catch (e) {}
+      // Keep the legacy `error: "pro_required"` key for any older client, and add the reason.
+      if (!_pg.ok) return json(needsProBody(_pg, { ok: false, error: "pro_required", feature: "queue-branding" }), 402, request);
       const bkt = brandBucket(env);
       if (!bkt) return json({ ok: false, error: "storage_unavailable" }, 503, request);
       const ct = request.headers.get("Content-Type") || "";

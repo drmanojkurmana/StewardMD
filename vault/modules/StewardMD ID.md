@@ -32,6 +32,21 @@ using a feature.
 - Mint and the email index are **transactions**: `{smdId}` aborts + regenerates on collision, and
   `e_{hash}` never overwrites a pointer owned by a different uid (one email, one account).
 
+## Access tiers (2026-08-27)
+Pro is an entitlement of a **verified** account, decided server-side in `functions/_entitlement.js`
+`accessState()`/`isPro()` from CLAIMS ONLY (`verified`, `verifiedAt`, `provUntil`) - no KV read on
+the hot path. Verified doctor: Pro free for 7 days, then paid. Signed up but unverified: free tier,
+account removed at day 7 (sweep is built but OFF, see [[Flags]]). Guest: 300 s per session, 2 per day
+(`app.js` + `account.js`, surfaced by `guest-timer.js`). Pending manual review counts as full access.
+Client mirror is `account.js` `SMD_PRO`, seeded from `smd_pro_last:<uid>` rather than `true`.
+
+**Never let a Pro gate fail silently.** Route every refusal through `pro-notice.js`
+(`SMD_PRO_NOTICE.handle(body, feature)` for a 402, `.show(feature)` for a client-side gate,
+`.gate(feature, fn)` instead of a no-op). The server's 402 carries `reason` via
+`needsProBody()`, and the explainer picks verify-vs-subscribe from it: an unverified doctor
+must never be shown a price, because verification unlocks it free. `openPaywall()` self-bounces
+for the unverified/pending reasons, so no call site can open the wrong door.
+
 ## Gotchas
 - **A FAILED profile read is not "no ID" — never mint on it.** `ensure()` used to call `mint()` from
   the `.get()` rejection handler, so one unreachable-Firestore moment (native cold start, ward wifi)

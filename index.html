@@ -1498,8 +1498,14 @@ window.openExternal = function (u) {
 <script src="/theme-sync.js?v=gold363" defer></script>
 <script src="/theme-reveal.js?v=gold1721" defer></script>
 <script src="/account.js?v=gold364-thread" defer></script>
+<!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
+     the account chip. Additive, reads app.js's account record; never edits app.js. -->
+<script src="/guest-timer.js?v=gold1200-guestbar" defer></script>
 <script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
+<!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
+     RIGHT button (verify vs subscribe). A silent Pro gate reads as a broken app. -->
+<script src="/pro-notice.js?v=gold1200-why" defer></script>
 <script src="/signout-fix.js?v=gold342-bkstatus" defer></script>
 <script src="/welcome-email.js?v=gold342" defer></script>
 <script src="/verify.js?v=gold1026-roles" defer></script>

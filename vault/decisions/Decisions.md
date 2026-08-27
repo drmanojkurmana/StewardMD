@@ -5,6 +5,177 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · Enforcement armed: deletion on, prompt every open, tiered AI limits
+
+Owner, after reviewing the dry-run design: *"push it, turn on auto delete if not verified in 7 days,
+and ask them to verify on every app opening, and no launch promo for who not verified (like who
+verified had better pro limits while guest have very less)"*. All four, plus the first push.
+
+**1. The sweep is ARMED and DELETES.** `UNVERIFIED_PURGE_ON` and `UNVERIFIED_PURGE_HARD_DELETE` now
+both default ON. The concern about irreversibility was raised and the owner reaffirmed, so it ships.
+What makes it survivable is not the switches but `decidePurge()`: verified, paying and
+pending-review accounts are spared by explicit claim-checked rules, and **nobody is removed who was
+not warned by email first** (day 5, send-once, and an overdue-but-unwarned account gets warned rather
+than deleted). Either switch can be softened from env with no deploy.
+
+**New: `purgeUserData()` runs BEFORE the account delete.** Deleting the Firebase user alone would
+have left the account's saved cases (`icu:index:` / `icu:case:` in CASES_KV), verification record,
+budget cache and Firestore `users/{uid}/profile/self` + `doctorDirectory/{smdId}` behind: the doctor
+locked out of records we were still holding, which is the worst of both outcomes and a retention
+problem rather than a tidy-up. The lifecycle record itself is KEPT as a `purgedAt` tombstone so a
+later run cannot reprocess the same uid.
+
+**2. Ask on every app open.** `verify.js` `evaluate()` re-opens the gate for a provisional
+(skipped) account once per app OPEN, latched on `_promptedThisOpen` because evaluate() also fires on
+every auth/account change. Still dismissible, because unverified keeps the free tier. **Pending
+review is exempt** - nagging someone for something they have already done is how a real doctor is
+lost. Before this, one tap on skip silenced the prompt for the whole 7 days, so an account could
+reach the deletion sweep having been asked exactly once.
+
+**3. Tiered AI limits ON.** `_aibudget.js` already encoded precisely what the owner described and
+was simply switched off behind `AI_BUDGET_ON`, now default ON: unverified **0**, verified-not-Pro
+5k, Pro 1M, physician 3M, every rung env-tunable. This is also what "no launch promo for the
+unverified" means in practice at the token level.
+
+**Gotcha found while arming it:** `monthlyCapFor()` caches the computed cap for ~26h. Verification
+changes the tier from 0 to a real allowance, so without busting that cache a doctor verifies and
+MaiK still refuses them until the next day - the exact "I did what you asked and nothing happened"
+report. New `clearBudgetCache()` is called on both verification paths (auto NMC + owner approval).
+
+**Status:** 2560/2563 (2 pre-existing `mock.module` failures), new suites
+`ai-budget-tiers` 6/6 and `verify-prompt` 6/6. PUSHED to `fix/audit-sweep-2026-08-26`.
+Recovery point: tag `pre-verify-enforcement-2026-08-27`. See [[Flags]].
+
+## 2026-08-27 · A locked Pro feature must explain itself, with the RIGHT button
+
+**Why this had to ship with the verification gate, not after it.** Enforcing verification turns on a
+brand-new failure mode: features that worked yesterday stop working, and the app's existing answer
+was either silence or "upgrade to Pro". Both are wrong now. Silence reads as a bug, and a paywall
+shown to an unverified doctor takes money for something verification would have unlocked **free**.
+
+**The silence was real, not hypothetical.** `functions/api/cases/[[path]].js` carried the comment
+*"client handles 402 silently"* — a doctor's saved patients simply never appeared on their second
+device and nothing, anywhere, said why. `icu.js` said "Saved on this device" and stopped there.
+
+**Server: every refusal now names its cause.** `requirePro()` returns `{ reason, verified,
+pendingReview }` from `entitlementState`, and the new `needsProBody()` builds the 402 body so eleven
+endpoints cannot drift into eleven different answers. Wired through cases, watch (x2), ghis,
+queue and `_usage.js`. `proMessageFor()` holds the one wording of each case. `_usage.js` reuses the
+`callerVerified` it already had, so a doctor over the free AI allowance who is merely unverified is
+told to verify rather than sold a subscription.
+
+**Client: one explainer, `pro-notice.js` (`SMD_PRO_NOTICE`).** `explain()` is pure, so the wording
+is unit-tested — the wording IS the feature. Four cases:
+
+| State | What they see | Button |
+|---|---|---|
+| not verified | "needs a verified registration ... free for 7 days. This is not a payment." | **Verify my registration** |
+| review pending | "we are reviewing it, you keep full access" | Got it (**no price, ever**) |
+| free week over | "your free Pro week has ended, your saved work is untouched" | See Pro plans |
+| unknown | admits it could not confirm, rather than inventing a cause | Open account |
+
+`openPaywall()` itself now bounces an unverified or pending user to the explainer, so **the paywall
+can no longer be the wrong door** regardless of which call site opens it. No loop: the explainer
+never routes those two reasons back to the paywall.
+
+**Trade-off:** `SMD_PRO_NOTICE` is a fifth place that can render a modal (paywall, AI-limit sheet,
+verify gate, guest bar). Accepted: the alternative is each gate inventing its own wording, which is
+exactly how "upgrade to Pro" ended up being shown to people who could not benefit from it.
+
+**Status:** 11/11 `test/pro-notice.test.mjs` + 15/15 `test/verify-gate.test.mjs`, 15/15
+headless-Chrome `test/run-pro-notice-ui.mjs` (incl. that the unverified button reaches verification
+and not the paywall), full suite 2547/2550 (2 pre-existing `mock.module` failures). See
+[[StewardMD ID]].
+
+## 2026-08-27 · Pro is an entitlement of a VERIFIED account (three tiers)
+
+**The bug behind the ask.** "The app is not verifying anyone" was true, but not because the gate was
+off: `verify.js` has had `BETA_VERIFY_ALL = false` for a while and the forced gate does fire. The
+hole was in `functions/_entitlement.js` `isPro()`, whose FIRST line was `if (promoActive(env, now))
+return true` - the launch promo (to 15 Sep 2026) granted Pro to every caller **without ever reading
+`claims.verified`**. Nothing anywhere in the codebase consulted `verified` when deciding Pro. Eleven
+server modules gate on that one function, so the fix is one guard, not eleven.
+
+Secondary hole: the forced gate's "Skip for now" button AND its ✕ both called `startTrial()`, so any
+signed-in user got **7 days of full access** by tapping the close box.
+
+**Decision (owner).** Three tiers:
+
+| Who | What they get |
+|---|---|
+| Verified against NMC/SMC | **Pro free for 7 days** from the moment of verification, then paid |
+| Signed up, not verified | **Free tier only**; the account is removed after 7 days |
+| Guest (not signed up) | **300 s per session, 2 sessions per day** |
+| Proof uploaded, review pending | **Full access while pending** - owner review latency must never be a user-facing outage |
+
+**How.** `isPro()`/`entitlementState()` ask `accessState()` first, which reads **claims only**
+(`verified`, `verifiedAt`, `provUntil`) so the hot path stays free of KV/Firestore reads. When
+enforcement is on the promo deliberately does NOT apply - it is the exact hole being closed.
+`verifiedAt` is stamped at all three places that set `verified:true` (auto NMC, the owner's review
+dashboard, the admin console) and **backfilled** in `entitlementFor()` for doctors verified before
+this existed, so nobody who did the right thing blinks out of Pro on deploy day.
+
+**Trade-off, and it is a pricing decision:** enforcement effectively **ends the launch promo early**
+for unverified accounts. That is the point, but it is the owner's call to keep or revert -
+`VERIFY_REQUIRED_FOR_PRO=0` in KV restores the old contract with no deploy, and
+`test/entitlement-trial.test.mjs` pins that the flag-off path is byte-identical.
+
+**Client.** `account.js` seeded `_pro = true` for everyone and failed open. Harmless while the promo
+covered all; with verification enforced it would flash Pro UI at an unverified account. Now the seed
+is the **last known verdict for that uid** (`smd_pro_last:<uid>`), false when never seen - a verified
+doctor offline on a ward still gets in, a new unverified account does not.
+
+**Guest 300 s.** Already existed and was already correct (`app.js` writes
+`expiresAt: Date.now()+3e5`, ticks `Guest · M:SS`, wipes and reloads at zero; `account.js`
+`GUEST_MAX_PER_DAY = 2`). What was missing is that the clock lived in a chip nobody looks at. New
+`guest-timer.js` renders the same clock as a **top bar** (additive, never edits app.js) and carries a
+backstop teardown at zero, so auto-sign-out is a guarantee rather than a side effect of a chip having
+rendered.
+
+**Auto-deletion is built but OFF.** A StewardMD account can own ICU membership and saved clinical
+cases, so the destructive path is deliberately two switches deep: `UNVERIFIED_PURGE_ON` (default
+OFF - the sweep reports what it would do and changes nothing) and, only then,
+`UNVERIFIED_PURGE_HARD_DELETE` (default OFF - otherwise it **disables**, which is reversible).
+Day 5 sends one warning email; **nobody is removed who was never warned**, and verified, paying and
+pending-review accounts are all spared by explicit rules in `decidePurge()` rather than by a KV
+filter that can go stale.
+
+**Status:** 25/25 across `test/verify-gate.test.mjs` + `test/unverified-purge.test.mjs`, 14/14
+headless-Chrome `test/run-guest-bar-ui.mjs`, full suite 2531/2534 (the 2 failures are pre-existing
+`mock.module` issues in OPD/FollowCare, untouched here). Recovery point: tag
+`pre-verify-enforcement-2026-08-27`. NOT deployed. See [[StewardMD ID]].
+
+## 2026-08-27 · MaiK on-device is a Pro feature, not a private beta
+
+**Decision:** `SMD_MAIK_ENGINE.gateActive()` is now **Pro only** - `window.SMD_PRO.isProSync()`.
+The shared experimental access-code gate (`SMD_XACCESS` feature `maik_local`) is REMOVED from the
+feature: the constant, the client row under Settings > Experimental Features, its `openFeat()`
+branch, and the `maik_local` entry in `functions/_experimental.js` FEATURES are all gone. The two
+developer escape hatches stay (`localStorage smd_maik_local_bypass=1`, and a native DEBUG build via
+`SMD_MAIK_LOCAL.isDebugBuild()`) because the device harnesses drive them and a debug install has no
+Pro state to read.
+
+**Why:** it was never a boolean feature flag - it was the FundX/KardioX beta-code gate, so on-device
+answering was unreachable for every clinician who did not have a code from the team. A paying
+subscriber was being shown a greyed-out row reading "Private beta. Unlock with an access code below"
+and a toast telling them to go find one. Owner: make it available to Pro subscribers, no gates.
+
+**Trade-off:** a code can no longer unlock it for a non-subscriber, so existing MAIK-prefixed codes
+are inert. Accepted - that is the point of the change. `SMD_PRO` **fails OPEN** (`_pro` defaults
+true, only an explicit `{pro:false}` from `/api/billing/status` flips it), so during the launch promo
+(to 2026-09-15) this is effectively open to everyone on a native build; enforcement tightens by
+itself when the promo ends. That is the right direction: a network blip must never lock a clinician
+out of a 2.5 GB model already on their phone.
+
+**Copy** follows the gate: the locked row now reads "Included with Pro. Subscribe to unlock, then
+download the model.", the picker row carries a **Pro** pill next to **Beta** (Pro = access, Beta =
+quality - the model is still ungrounded and can be wrong), and `kbOnlyNotice()` says
+"On-device answering is included with Pro." instead of naming an access code.
+
+**Status:** 178/178 `test/maik-engine.test.mjs` + 19/19 headless-Chrome `test/run-maik-engine-ui.mjs`
+green. Client-only apart from the dead FEATURES line. NOT yet in a native build - needs
+`build-www` -> `cap sync` -> rebuild + reinstall to reach a device. See [[MaiK]].
+
 ## 2026-08-26 · ACCEPTED EXPOSURE: real patient identifiers are permanent in main's history
 
 **Owner decision: leave it, and record it here so it is not rediscovered as a surprise.**

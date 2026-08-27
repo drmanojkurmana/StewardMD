@@ -243,8 +243,17 @@
     ]).then(function (res) { _status = res[0]; _plans = (res[1] && res[1].plans) || null; if (_root) paint(); });
   }
 
-  function openPaywall() {
+  function openPaywall(feature) {
     if (_root) return;
+    /* Never sell a subscription to someone whose problem is verification. An unverified doctor who
+     * pays here gets nothing they would not have got free by uploading a certificate, so hand them
+     * to the explainer instead. SMD_PRO_NOTICE routes them onward and never bounces back here for
+     * this reason, so there is no loop. */
+    try {
+      var N = window.SMD_PRO_NOTICE;
+      if (N && N.reason && N.reason() === "unverified") { N.show(feature); return; }
+      if (N && N.reason && N.reason() === "pending") { N.show(feature); return; }
+    } catch (e) {}
     var div = document.createElement("div");
     div.innerHTML = shell(header("") + '<div style="padding:40px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading…</div>');
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
