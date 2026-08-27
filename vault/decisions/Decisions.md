@@ -822,3 +822,317 @@ over the same verified transport as the OPD assessment (visit activation, author
 re-serialisation, patient_id mismatch abort, doc_id 0 refusal), gated by the same `QUEUE_EMR_WRITE`
 env var. No new work was needed; it needs a patient with an ACTIVE assessment, which is what the
 earlier live attempt lacked.
+
+---
+
+## 2026-08-27 — NMC Logbook: a regulatory record, built as a data layer that refuses
+
+**Context.** StewardMD gains a Medical Education module. Phase 1 is the **PG digital logbook** that
+PGMER-2023 §5.2(v)–(vi) requires every Indian PG resident to maintain. UG/CBME is explicitly out of
+scope and was not built.
+
+**The decision that shaped everything else.** A PG logbook entry is not app data. It is a document a
+University examiner relies on, and **PGMER-2023 §9.2(c) puts a monetary penalty on the named
+faculty / HoD / Dean who submits a false record**. So every guarantee is a **throw in
+`pglog-model.js`**, the pure core that the client AND the Cloudflare Function both import — not a
+disabled button, and not a server-only check that a future importer or admin script would bypass:
+
+- `verify()` throws if the actor is the entry's author (namespace-tolerant, so `fb:uid` vs `uid`
+  cannot silently disable the guard — that is exactly how this class of check dies).
+- `applyEdit()` / `softDelete()` throw on a verified entry. Correction is `amend()`, which snapshots
+  the **entire prior document** into `revisions[]` and re-opens verification.
+- A return without a reason, an assessment with a blank criterion, a remediation without a plan: all
+  refused at the data layer.
+- Attestation ids are deterministic + `wCreate`, so **a month can be authenticated exactly once**.
+
+**Decisions worth not re-litigating:**
+
+- **The module does NOT claim "NMC compliant."** It claims *"structured to PGMER-2023 §5.2(v)–(vi)"*
+  and, per pack, *"NMC \<specialty\> guidelines, \<year\>"*. Whether a logbook satisfies a University
+  is the institution's decision. Every report says so in its own footer.
+- **No invented numbers, ever.** `NMC_PG_LOGBOOK_REQUIREMENTS.md` maps source → clause → verbatim
+  quote → feature for every requirement, and `test/pglog-curriculum.test.mjs` **fails the build if a
+  numeric target does not appear in its own quotation**. Most NMC specialty curricula say
+  *"a specified number of cases"* — so those requirements COUNT and show **no denominator and no
+  progress bar**. MD Emergency Medicine 2024 is the one curriculum in the set that prints procedure
+  minima; those 64 numbers are shipped verbatim, and the 5 procedures it names *without* a number
+  stay `null` rather than being back-filled from a neighbour.
+- **Provenance is a visible material, not metadata.** An NMC requirement and an institutional target
+  must never look alike, so `.pgl-prov` differs by colour AND weight AND border style per grade —
+  the distinction survives greyscale and a photocopy. An institutional override may change a
+  `target`; it can **never** rewrite a label, source, clause or quote.
+- **Attendance carries two provenances and they are not merged.** The 80% is §5.6 (the gazette). The
+  751/501-day figures come from the PGMEB FAQ of 10.04.2024 — **a secondary source; the primary PDF
+  was not obtainable on 2026-08-27**. They are graded differently, shown differently, and editable.
+  The module reports attendance; it never declares anyone exam-ineligible on it.
+- **Only VERIFIED entries count toward progress.** A resident cannot advance their own bar; a faculty
+  member advancing it is the entire point of §5.2(vi). Submitted-but-unverified work is surfaced
+  separately as `pending` so it does not look lost.
+- **Two independent locks on self-approval.** `pg_resident` holds no `PGLOG_VERIFY` cap *and* the
+  model throws. `admin` is deliberately **not** granted verify/assess/attest — the same separation
+  the ONCQIS approval caps already use, for the same reason: signing a trainee's clinical record is
+  not a technical-admin power.
+- **The DRP semester window is a WARNING, not a block** (§5.2(xii)V). A State's posting schedule is
+  not the resident's to fix, and refusing to record a posting that actually happened would make the
+  logbook less true, not more compliant. Same reasoning for late logging: the delay is measured and
+  shown, never used to reject the entry.
+- **It is a logbook, not a second EMR.** The entry schema has no field for a patient name, phone,
+  address or Aadhaar; `sanitizeCaseRef()` strips them on write, server-side included; age is a band,
+  never a DOB; and `publicEntry(e, audience)` withholds case reference and diagnosis from every
+  cross-resident surface — the Academic Cell's institution-wide view (§5.2(iii) "ensure and monitor")
+  is a completeness question, so it gets counts.
+- **AI cannot touch the record.** Suggestions are filtered against the resolved pack, so the model
+  cannot mint a requirement; no AI path creates, edits, submits or verifies anything; and the two
+  features the brief listed as AI — detecting incomplete entries, and reminders — were implemented as
+  **pure code with no model call**, because a reminder about a regulatory deadline must be right
+  rather than plausible.
+- **Drafts work with no network and are never called "submitted."** Submitted means a named faculty
+  member now owes a verification, which is a fact about the server, not the phone. A queued draft
+  says "waiting to submit".
+- **Offline computes the same numbers.** The client recomputes progress with the same pure functions
+  the server uses, so a phone that was offline and a server that was not can never disagree about a
+  number printed on a regulatory document.
+
+**A note for whoever runs the tests next.** The headless UI test binds port **8994**, not the shared
+8991. Another worktree's `serve.mjs` on 8991 silently served *its* copy of the app, and 48 assertions
+"failed" against code they were never looking at. See [[two-claude-sessions-one-folder]].
+
+### 2026-08-27, same day — what R1 found, and the one that stings
+
+R1 returned **NO-GO** on the module above. Seven critical, nine important. The full before/after is in
+`NMC_PG_LOGBOOK_REQUIREMENTS.md` §12; the decisions worth recording here are these.
+
+**Three of the seven were the module inventing a number and attributing it to the NMC** — precisely
+the failure the whole design was supposed to prevent. `months >= 2.5` let a 77-day District Residency
+satisfy a clause that says three months. `COUNTS_AS_ATTENDED` deducted statutory maternity leave from
+a resident's attendance and badged the result "PGMER-2023 5.6", when §5.6 *grants* that leave and
+extends the term only for leave **in excess** of what is permitted. And a whole-course target was
+"expected" from day one, so a resident three days into residency saw 72 high-severity gaps and
+"about 100 intubations expected by now". Writing "no invented numbers" in a design document does not
+prevent inventing numbers; a test that reads the source does.
+
+**Two were authorization holes that the client flag does not contain**, because Cloudflare Functions
+go live on push regardless of `smd_pglog`: any faculty member in the institution could read any
+resident's case references, diagnoses and reflections (both branches of the read guard returned the
+same value — the `if` was dead and its comment described a restriction that was not implemented), and
+a rotation `PATCH` gated on a caller-supplied org while writing to the rotation's own. The lesson is
+narrow and worth keeping: **a comment describing a guard is not a guard**, and a branch whose two
+arms return the same value is a bug that reads as a feature.
+
+**The one that stings.** The commit message advertised: *"test/pglog-curriculum.test.mjs fails the
+build if a numeric target does not appear in its own quotation."* It could not. The generator
+synthesised each procedure's quotation *from that target* (`label + " (" + target + ")"`), so the
+assertion compared a number with itself. It passed for all 64 shipped Emergency Medicine minima
+without ever reading the PDF — and did not notice that **17 more minima had been dropped**, including
+nasogastric tube insertion (100) and lab/imaging interpretation (100), about a fifth of the
+requirement, behind a checklist that looked complete. Two neighbouring assertions were worse than
+useless: `every OTHER specialty pack ships procedure targets of null` iterated **zero** items in all
+sixteen packs and read as if sixteen had been verified, and the EM count was asserted as a **floor**,
+which is exactly what let a 69-item list that should have had 87 go by.
+
+**So the fix was not a patch, it was evidence.** `pglog-sources/` now holds the extracted plain text
+of all sixteen NMC PDFs (868 KB, checked in, deliberately *outside* `pglog/` so `build-www.sh` never
+bundles it into the app), and `test/pglog-provenance.test.mjs` checks every quotation and every number
+against it. A number that is not in the source is a build failure.
+
+That test immediately found four things R1's own spot-check had not: the shared 2022 pack dropped
+"the" from "from **the** Head of Department"; MD Radiodiagnosis writes "training **program**", not
+"programme"; MS OBGY prints "**clinic**-pathological", which had been silently tidied to "clinico-";
+and **MD Pathology carried a requirement quoting "…clinico-pathological conferences…" to a clause
+that does not exist in that PDF**. That last one was a fabricated quotation. It was deleted rather
+than given an invented replacement — PGMER-2023 §5.2(x) already covers CPCs for every specialty, so
+nothing was lost by removing it, and inventing a citation to keep a feature would have been the worst
+available outcome.
+
+**A quotation is evidence, not a transcription to be tidied.** Where the NMC PDF prints something
+odd — "clinic-pathological", "examinationof" with the space missing — the pack now quotes it as
+printed, with a note. The test's normaliser is allowed to forgive the *extractor's* artefacts (line-
+break hyphenation, page numbers inside a paragraph, padded columns); it is not allowed to forgive
+ours.
+
+**Also worth not re-litigating:** the appraisal form now prints no total. The MD General Medicine
+Annexure 1 is a banded per-element rating with a comments column and **no total row**, and the module
+was synthesising "105 / 135" onto a document an examiner may read. `noTotal` is carried through the
+model, the server scoring contract and the report. A mark the form does not have is a mark that was
+made up.
+
+### 2026-08-27, later — signatures that mean something: the registration gate and the QR
+
+Two things were missing from a module whose entire purpose is an auditable official record.
+
+**A signature from an unverified account is worth nothing, and looks exactly like one that is worth
+something.** PGMER-2023 §5.2(vii) says the logbook is authenticated by "the Post-graduate guide";
+§9.2(c) attaches a monetary penalty to the NAMED faculty/HoD/Dean who submits a false record. Both
+presuppose a registered medical practitioner. The module was checking a *capability* — what a role
+may do — and never whether the *person* was on a medical register at all.
+
+So `functions/_pglog_signer.js` now gates every act of signing: verify, return, assess, sign-off and
+the monthly attestation. It does **not** re-implement verification — StewardMD already checks
+doctors against the **live Indian Medical Register** via `/api/verify-doctor`, which writes
+`icu:doctor:<uid>` and sets the `verified` custom claim. This reads that.
+
+**Decisions worth not re-litigating:**
+
+- **FAIL CLOSED.** If KV is unreachable and the claims lookup throws, the signature is refused with a
+  503 that says *nothing was signed*. An outage must never silently downgrade a regulatory signature
+  to an unverified one: the resident can wait, a falsified training record cannot be taken back.
+- **The registration NUMBER is recorded on the record**, not just a uid — number, council, registered
+  name, and how it was verified. A signature that said only "fb:abc123 signed this" is unauditable by
+  the University that has to rely on it.
+- **`verified:true` with no registration number is refused.** A signature nobody can check is not a
+  signature.
+- **The uid is de-namespaced before lookup.** `fb:abc` vs `abc` would have made every lookup miss —
+  and before the fail-closed rule that would have failed *open*. It is one function, used everywhere,
+  with a test.
+
+**The QR.** A printed logbook is trusted because a named person signed it; a PDF of one is trusted
+because of nothing at all. Every signed event now mints an 80-bit code and a QR
+(`functions/_pglog_verify.js`), and `GET /api/pglog/v/<code>` answers **unauthenticated** — an
+examiner holding a printout has no account, and requiring one would make the QR useless to the only
+person it exists for.
+
+- **The code is an opaque handle, not an encoding of the record.** A code on a whiteboard leaks
+  nothing.
+- **The stored record holds an HMAC digest of a FIXED canonical form** — an explicit field list, never
+  `Object.keys()` over a live document, whose key order would change with a schema edit and silently
+  invalidate every code ever issued. On lookup the digest is recomputed from the live record: if
+  someone edits Firestore directly, the page says **TAMPERED** rather than showing a green tick over
+  altered content.
+- **The honest claim is the one on the page.** This is tamper-EVIDENT, not tamper-proof, and it is
+  *not* a cryptographic signature by the faculty member — it is the server attesting to what it
+  recorded. A real per-signer keypair needs key custody we do not have, and claiming otherwise would
+  be worse than not claiming it.
+- **Amending a verified entry supersedes its code.** The old signature described a document that no
+  longer stands, so the code says so instead of continuing to validate.
+- **Without `PGLOG_SIGNING_KEY`, no code is issued at all** — an uncheckable "verification code" is
+  worse than no QR, because it looks like one that can be checked.
+- **Minting a code can never take a signature down with it.** If signing is unconfigured or the write
+  fails, the record is still signed and auditable; it simply carries no QR and the UI says so.
+- **The public payload is PHI-free by construction.** Every field was chosen by asking: *is this
+  already on the document the examiner is holding?* Resident name and SMD ID, programme, activity
+  KIND and date, signer and registration, and whether it still stands. Never the case reference, the
+  diagnosis, the remarks or the reflection.
+
+**The QR encoder is ours** (`pglog-qr.js`, ~350 lines, ISO/IEC 18004 byte mode, versions 1–10). A
+library would add a dependency to a buildless ES5 app; an image service would send the code to a
+third party and fail on a ward with no signal. **A wrong QR is worse than no QR** — it looks
+scannable and is not — so every part with a published reference value is tested against it: the
+GF(256) tables, the RS generator polynomials, **all 32 format-information strings from Table C.1**,
+the version strings from Table D.1. The QR block deliberately stays **light in dark mode**: an
+inverted QR does not scan reliably.
+
+**Two bugs the tests caught, both mine.** `normalizeCode()` folded confusable characters *before*
+stripping the `PGL` prefix — and "PGL" contains an L, which the folder rewrites to `1`. Every scanned
+and every hand-typed code returned empty. Order was the whole bug. And the first cut of the
+supervisor-resolution error overwrote `err.message`, which broke the router's error mapping it was
+supposed to feed.
+
+### 2026-08-27, later still — what two security reviewers found, and the rule they both found
+
+Two reviewers (R3 security/privacy, S4 app-security) over the signing + QR surface, independently.
+Four blocking findings. Both reviewers found the same two authorization holes without seeing each
+other's work, which is the part worth keeping: **the module's own comments described boundaries the
+code did not enforce.** A comment is not a control.
+
+**The rule underneath all four:** a boundary defined in two places drifts, and the copy that drifts
+is the one that leaks. Every fix collapses a duplicated definition into one.
+
+- **Every entry QR would have read TAMPERED.** The signing side and the verification side each had
+  their own list of the field names a signature covers, in two different files, and they disagreed
+  twice. Every genuine record would have told the examiner not to rely on it. The tests missed it
+  because both sides were handed a hand-built payload — so the fix is `payloadFor()`, one definition,
+  called at both ends, plus a round-trip test that signs a real entry and verifies its real code.
+  **A signature that cries forgery over honest records is worse than no signature.**
+- **The URL printed on every QR was not served.** `/pglog/v/<code>` is extensionless, so the site
+  gate classified it as an anonymous page view and returned the marketing home page with a 200. The
+  feature existed end to end except for the end the examiner actually touches. Now a server-rendered
+  page (no JavaScript at all — the reader is a stranger on an unknown device, often printing it) plus
+  a middleware pass-through, and a gate regression test so it cannot silently close again.
+- **Any faculty member could sign any resident's entry.** `PGLOG_VERIFY` is an org-wide capability;
+  §5.2(vii) is not an org-wide question — it names "the Post-graduate guide". The gate was asking
+  what a ROLE may do where the regulation asks who a PERSON is to this trainee.
+- **The Academic Cell and the technical admin read every trainee's clinical detail.** The read guard
+  tested the department capability first, and both of those roles hold it too, so they took the HoD
+  branch and the institution-wide → aggregate line below it was dead code. The role definition in
+  `_queue_roles.js` promised the opposite in a comment. Now ordered by named responsibility, with a
+  table-driven test enumerating every role against every relationship — this guard has been wrong
+  twice, so it gets a table rather than another careful reading.
+- **`publicEntry()` was called the privacy boundary and covered entries only.** Assessments (3000
+  characters of feedback about a named trainee, their remediation plan, every criterion score),
+  attestation notes and the raw resident record including the Firebase uid sat next to it,
+  unprojected. A boundary that covers one of four record types is not a boundary.
+- **`amend` could mass-assign `deleted`** and retire a verified, signed training record that
+  `softDelete()` explicitly refuses to touch — while naming someone else as the deleter. The two edit
+  paths kept separate lists of un-patchable fields and disagreed. One `SERVER_OWNED` list now.
+
+Smaller, same spirit: the verification code is a **capability**, not a fact about the record, so it
+no longer goes to an aggregate audience; `getUserClaims()` returning `{}` during an outage no longer
+reads as "this person is not verified"; the rate-limit key no longer falls back to the
+client-supplied `X-Forwarded-For`; `PGLOG_OFF` now covers the public endpoint, because an operator
+flipping a kill switch during an incident should not find the one unauthenticated route still
+serving; Firestore error detail stays in the log; the SMD ID is masked on the public page; and the
+free text posted to the AI endpoint is scrubbed of honorific-led names — the *copy sent out*, not the
+stored text, which stays readable to the resident and their guide.
+
+Not done, and owed before a non-tester release: **these fixes have not themselves been re-reviewed**,
+and `PGLOG_SIGNING_KEY` is not provisioned (so no QR is issued yet — deliberately).
+
+### 2026-08-27, later still — the logbook becomes a document
+
+Owner's requirement: a logbook must be shareable as a PDF once signed, with at least two faculty and
+the HoD signing before it can be approved or shared (the HoD may count as both), and the PDF must
+carry a digital signature verifiable through StewardMD so a college or the NMC can hold it and rely
+on it.
+
+**The core decision: a CERTIFICATE, not a flag.** "Approved" as a boolean on a logbook would be a
+claim about a moving target — a logbook gains entries daily. So certification mints a separate record
+that **freezes what it covers**: an HMAC over the exact verified-entry set, each entry with its own
+signature state, sorted by id. Amend a covered entry afterwards and the certificate is **superseded**
+rather than quietly continuing to validate. The document those people signed no longer exists, and
+saying otherwise over changed content is the worst thing this feature could do.
+
+**Decisions worth not re-litigating:**
+
+- **The quorum defaults to exactly the owner's rule** — 2 faculty + 1 HoD, HoD counting toward both,
+  so two distinct people suffice — and is per-programme configurable. The same person cannot fill two
+  slots: distinct *people*, matched through `sameActor` so a namespace or case difference is not a
+  second signatory.
+- **WHOSE RULE IS WHOSE, printed on the artefact.** The HoD signature is sourced (the 2022-revised
+  curricula say the completed log book is signed by the Head of the Department). The **number of
+  faculty signatures is ours**, and the screen and the PDF both say "not an NMC requirement" in those
+  words. This is the likeliest place in the module for a local policy to be laundered into a
+  regulatory claim.
+- **`requireGuide` defaults OFF.** Defensible from §5.2(vii), but a guide who has left, retired or
+  died would otherwise make their former trainees permanently uncertifiable, and a rule that strands
+  a resident is a rule the department will work around. Whether the guide signed is reported either
+  way.
+- **The server decides the signing role from the membership.** A client that could name itself "hod"
+  would be the entire quorum by itself.
+- **Only verified entries are certified**, and what was excluded is printed. A certificate that
+  silently omitted unverified work would read as a complete logbook.
+- **NOT a digital signature under the IT Act, 2000.** No DSC from a licensed Certifying Authority is
+  applied, because nobody here holds such a key. It is tamper-EVIDENT: a QR that re-reads the live
+  record and re-derives the digest. **The limitation is printed on the document**, since the person
+  relying on it is the person who needs to read it. Upgrading later is a key-custody problem, not a
+  rendering one — the certificate record already pins exactly what would be signed.
+- **An uncertified export is stamped `NOT CERTIFIED`, with no QR and no signature block.** There is
+  no configuration in which the exported document is ambiguous about whether anyone signed it. That
+  ambiguity is the only way it could mislead by accident.
+- **The print QR is a TABLE of cells, not the SVG.** The export runs through two renderers — the iOS
+  WKWebView (fine with SVG) and an html2canvas fallback (not reliably). A QR that silently fails to
+  render is worse than no QR, because the document still says it is verifiable. It needs an explicit
+  `<colgroup>`: `table-layout: fixed` reads column widths from the first row, and a QR's first row is
+  all quiet zone, i.e. one cell spanning everything.
+
+**A real bug this surfaced, well outside the feature.** The certificate's content digest flipped
+between "request" and "issue" for no reason a reader could see. Cause: `getEntry()` re-attached the
+signature block that `M.entry()`'s schema drops, and `listEntries()` did not — the same stored
+document came back with a registration number down one path and without it down the other. Same shape
+as the two field lists behind the QR digest. It had a second, silent consequence nobody had noticed:
+every report's "verified entries carrying the signer's registration" count was reading zero. One
+`withSignature()` now serves every read path.
+
+**Measurement note.** The browser test first "failed" the printed QR at 132.8px against an expected
+123px. That was not the QR: the app carries a root `zoom` of 1.08 for the OS text-size setting. The
+assertion was wrong, not the code — so it now tests **module uniformity and squareness**, which is
+what actually decides whether a scanner can read it, and is zoom-independent.

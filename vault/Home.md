@@ -23,6 +23,11 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
 - [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
 
+### Medical education
+- [[NMC Logbook]] — the PG digital logbook required by PGMER-2023 5.2(v)-(vi): weekly e-logbook,
+  monthly guide authentication, faculty verification, department oversight. **PG only** — UG/CBME
+  deliberately not built. Every regulatory claim traces to `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
+
 ## Cross-cutting
 - [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
   PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it

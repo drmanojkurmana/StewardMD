@@ -75,6 +75,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/insulin.css?v=ins11">
 <link rel="stylesheet" href="/clinix.css?v=cx17-annex">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc">
+<link rel="stylesheet" href="/pglog.css?v=pgl4">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1586,7 +1587,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart1-pglog1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->
@@ -1779,6 +1780,28 @@ window.openExternal = function (u) {
 <script src="/surgx-diagrams.js?v=sg1" defer></script>
 <script src="/surgx-screens.js?v=sg25-signsend" defer></script>
 <script src="/surgx.js?v=sg1" defer></script>
+<!-- NMC Logbook (PG digital logbook) - additive, flag-gated smd_pglog, DEFAULT ON for testers, same
+     owner decision as clinix/surgx (see pglog-flags.js, which is the authority); force either way
+     with ?pglog=1 / ?pglog=0. Scoped #pglogRoot + .pgl-* + SMD_PGLOG_* globals. Flag off = a
+     COMPLETE no-op: pglog.js never mounts the root, no curriculum pack is fetched and no
+     /api/pglog call is made (test/run-pglog-ui.mjs asserts it).
+     Load order matters: flags -> model (the pure core everything else calls) -> curriculum packs ->
+     store -> reports -> ai -> screens -> pglog.js (the entry that mounts).
+     THE RULES ARE NOT IN THE UI. Validation, the verification state machine, progress and the audit
+     trail live in pglog-model.js and are enforced identically on the server
+     (functions/_pglog_store.js imports the same file). See NMC_PG_LOGBOOK_REQUIREMENTS.md for
+     source -> clause -> feature traceability for every NMC requirement this module implements.
+     Curriculum packs are NOT bundled inline - they are fetched from /pglog/curricula/*.json on
+     first open (copied into www/ by scripts/build-www.sh). -->
+<script src="/pglog-flags.js?v=pgl4" defer></script>
+<script src="/pglog-model.js?v=pgl4" defer></script>
+<script src="/pglog-curriculum.js?v=pgl4" defer></script>
+<script src="/pglog-store.js?v=pgl4" defer></script>
+<script src="/pglog-qr.js?v=pgl4" defer></script>
+<script src="/pglog-reports.js?v=pgl4" defer></script>
+<script src="/pglog-ai.js?v=pgl4" defer></script>
+<script src="/pglog-screens.js?v=pgl5" defer></script>
+<script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
 <script src="/insulin-flags.js?v=ins12" defer></script>

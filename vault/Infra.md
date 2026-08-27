@@ -45,3 +45,26 @@ xcodebuild -project ios/App/App.xcodeproj -scheme App -configuration Debug \
 ```
 
 Device list: `xcrun devicectl list devices` (needs the same DEVELOPER_DIR).
+
+
+## PGLOG_SIGNING_KEY — the NMC Logbook verification key (set 2026-08-27)
+
+The HMAC key behind every logbook verification code / QR. **Pages secret, never a var** — anyone
+holding it can forge a digest and make the public verification page show "valid" over a fabricated
+certificate, and `wrangler.toml` is tracked in git.
+
+- Set with `wrangler pages secret put PGLOG_SIGNING_KEY --project-name stewardmd` for **production**
+  and (with a **different** value) `--env preview`. Different keys mean a code issued by a branch
+  deploy can never validate against production — the isolation the digest design already assumed.
+- Generated as 32 random bytes into `~/.stewardmd-secrets/pglog-signing.env` (0600, outside the
+  repo), piped from the file so the value never reached a command line or a process list.
+- `PGLOG_VERIFY_BASE` (the domain printed on the PDFs) IS public config and lives in `wrangler.toml`
+  — top-level `[vars]` **and** `[env.production.vars]`, because named envs do not inherit the top level.
+
+**ROTATION IS EFFECTIVELY PERMANENT.** The digest is derived from the key, so changing it makes every
+code ever issued read TAMPERED. Rotate only on an actual compromise, and expect to re-issue every
+certificate.
+
+**Pages snapshots bindings at DEPLOY time.** Adding the secret does not affect deployments that
+already exist — `/api/pglog/ready` kept reporting `"signing":false` until the next build. Push a
+commit (or re-deploy) after adding any Pages secret, and confirm with the readiness probe.

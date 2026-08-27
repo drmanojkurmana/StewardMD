@@ -19,8 +19,15 @@ const run = (url, { method = "GET", headers = {} } = {}) =>
   onRequest({ request: new Request(url, { method, headers }), env, next });
 
 const passedThrough = (res) => res.headers.get("x-next") === "1";
-const isComingSoon = async (res) =>
-  res.status === 200 && !passedThrough(res) && (await res.text()).includes("Coming soon");
+// The gate no longer serves a "Coming soon" placeholder: an anonymous top-level page view now gets
+// the real marketing site from /_site/ (a sub-request through next()), and the COMING_SOON_HTML is
+// only the fallback if that is unavailable. What the contract still guarantees is that the visitor
+// does NOT get the clinical app.
+const isPublicPage = async (res) => {
+  if (res.status !== 200) return false;
+  const body = await res.text();
+  return body.includes("Coming soon") || (passedThrough(res) && !body.includes("__APP__"));
+};
 
 let fails = 0;
 const chk = (name, ok, d) => { console.log(`  ${ok ? "✅" : "❌"} ${name}${d ? " — " + d : ""}`); if (!ok) fails++; };
@@ -29,7 +36,8 @@ const ORIGIN = "https://stewardmd.in";
 const doc = { "Sec-Fetch-Dest": "document", "Accept": "text/html" }; // a browser page navigation
 
 // 1) Public page view → coming soon (the lock still works).
-chk("public page view is locked", await isComingSoon(await run(ORIGIN + "/", { headers: doc })));
+chk("public page view gets the marketing site, never the app",
+  await isPublicPage(await run(ORIGIN + "/", { headers: doc })));
 
 // 2) In-app AI: /api/ai/* must always work (this was the "AI not working in app" bug).
 chk("POST /api/ai/reason passes through", passedThrough(await run(ORIGIN + "/api/ai/reason", { method: "POST" })));
@@ -44,9 +52,12 @@ chk("POST /api/verify-doctor passes through", passedThrough(await run(ORIGIN + "
 // 5) Admin console page loads (protected by its own owner login).
 chk("GET /admin/ passes through", passedThrough(await run(ORIGIN + "/admin/", { headers: doc })));
 
-// 6) Assets never get replaced by the gate.
-chk("GET /app.js (script) passes through",
-  passedThrough(await run(ORIGIN + "/app.js", { headers: { "Sec-Fetch-Dest": "script" } })));
+// 6) Assets are never REPLACED by the gate with a page — and since the web app was killed
+// (native-only), the app bundle itself must be hard-404'd rather than served to a browser.
+{
+  const res = await run(ORIGIN + "/app.js", { headers: { "Sec-Fetch-Dest": "script" } });
+  chk("GET /app.js is 404'd, never swapped for a page", res.status === 404 && !passedThrough(res));
+}
 
 // 7) The secret knock unlocks (302 + Set-Cookie).
 {
@@ -67,6 +78,19 @@ chk("GET /app.js (script) passes through",
   const token = [...new Uint8Array(digest)].map((b) => b.toString(16).padStart(2, "0")).join("");
   const res = await run(ORIGIN + "/", { headers: { ...doc, Cookie: `smd_access=${token}` } });
   chk("unlocked cookie passes through", passedThrough(res));
+}
+
+// 10) The PG logbook signature-verification page must resolve for an ANONYMOUS visitor. An examiner
+// scans the QR printed on a logbook; they have no account, no app and no cookie. Without this the
+// gate sees an extensionless path, calls it a page view, and every printed QR lands on the marketing
+// page — which is exactly what it did before this line existed.
+chk("GET /pglog/v/<code> passes through for an anonymous scanner",
+  passedThrough(await run(ORIGIN + "/pglog/v/PGL-7K2M9-XQ4TB", { headers: doc })));
+
+// ...but the curriculum packs under /pglog/ are app assets and must stay 404'd.
+{
+  const res = await run(ORIGIN + "/pglog/curricula/generic-pg.json", { headers: { "Sec-Fetch-Dest": "empty" } });
+  chk("GET /pglog/curricula/*.json stays blocked", res.status === 404 && !passedThrough(res));
 }
 
 console.log(`\n${fails ? "❌ " + fails + " FAILED" : "✅ ALL GREEN — public UI locked; every API/endpoint/app feature untouched"}`);

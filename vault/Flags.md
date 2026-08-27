@@ -17,6 +17,7 @@ Not judgement calls. Each is the repo's own instruction, and each has a specific
 | `smd_surgx_uncleared_media` | **NEVER, LEGAL.** Same sentence, same rule: unlicensed images would render to users. |
 | `smd_kardiox_demo` | **NEVER, SAFETY.** Makes Analyze return a CANNED FABRICATED result instead of real inference. Off is what guarantees a real answer or an honest 'unavailable'. |
 | `smd_thorex_demo` | **NEVER, SAFETY.** Same: a canned fabricated chest X-ray result instead of real inference. |
+| `smd_pglog_demo` | **NEVER, INTEGRITY.** Seeds FABRICATED residents, logbook entries and *verifications* into the NMC logbook. PGMER-2023 9.2(c) penalises submitting a false training record; this switch manufactures them. Local-only, and the server has no demo path — but it must not ship on. |
 
 The two `*_uncleared_media` flags render images whose licence was never cleared. The two `*_demo` flags make **Analyze return a canned, fabricated clinical result** instead of real inference — in a diagnostic app, that is the single most dangerous switch in the repo. Their being OFF is what makes "a real answer, or an honest 'inference unavailable'" true.
 
@@ -261,3 +262,20 @@ protects a user.
 | `smd_kardiox_parity` | A dev measurement tool that runs a SECOND analysis on every image — doubles inference cost and time for no user-facing gain. |
 | `smd_surgx_notes_verify` | Turning it on **restricts** rather than enables: `surgx-entitlement.js` reads `if (!flag(...)) return "allowed"`, so ON re-imposes the verified-registration requirement on SURGX Notes. |
 | `smd_followcare_sms` / `_voice` | Need provider config; on without it means failed or misdirected patient messages. |
+
+### NMC Logbook  <sub>6 ON · 1 OFF · 2 non-boolean</sub>
+
+The PG digital logbook required by PGMER-2023 5.2(v)-(vi). See [[NMC Logbook]] and, for every
+regulatory claim, `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
+
+| Flag | Def | Why |
+|---|---|---|
+| `smd_pglog` | **ON** | Master flag (home tile + module). ON for testers, the same owner decision recorded for `smd_clinix` / `smd_surgx`. Flag off is a COMPLETE no-op — no root, no fetch, no CSS. |
+| `smd_pglog_server` | **ON** | `/api/pglog` sync. Off = on-device drafts only, and the UI says so rather than pretending an entry was submitted. |
+| `smd_pglog_ai` | **ON** | MaiK assist. ADVISORY ONLY — it cannot create an entry, mark a competency complete or verify anything. Off leaves the deterministic matcher, which is the part that actually maps requirements. |
+| `smd_pglog_faculty` | **ON** | Faculty / HOD / Academic-Cell surfaces. Cosmetic only — the server cap-gates every call regardless. |
+| `smd_pglog_attendance` | **ON** | PGMER-2023 5.6 attendance records. |
+| `smd_pglog_reports` | **ON** | The 11 reports + the final training portfolio. |
+| `smd_pglog_demo` | OFF | **NEVER, INTEGRITY.** Fabricated residents, entries and verifications. See the table at the top of this file. |
+| `smd_pglog_verify_sla_days` | `7` | **CONFIG, NOT NMC.** NMC's only cadence is the monthly guide authentication (5.2(vi)); there is no per-entry SLA. Labelled as institutional policy in the UI. |
+| `smd_pglog_attest_grace_days` | `7` | CONFIG, not NMC. Days after a month closes before its missing authentication is called overdue. |

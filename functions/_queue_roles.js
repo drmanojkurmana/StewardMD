@@ -39,8 +39,31 @@ export const CAPS = {
   // NOT granted any of the three (see ADMIN role below).
   ONCQIS_PROTOCOL_AUTHOR: "oncqis.protocol.author",           // create/edit a DRAFT + upload evidence
   ONCQIS_CLINICAL_REVIEWER: "oncqis.clinical.reviewer",       // R1 accept/reject + resolve VERIFY (platform CLINICAL APPROVAL)
-  ONCQIS_INSTITUTIONAL_APPROVER: "oncqis.institutional.approver" // hospital approve + activate (HOSPITAL APPROVAL)
+  ONCQIS_INSTITUTIONAL_APPROVER: "oncqis.institutional.approver", // hospital approve + activate (HOSPITAL APPROVAL)
+  // ---- NMC PG Logbook (pglog) caps -----------------------------------------------------------
+  // The same separation ONCQIS uses, for the same reason: a PG logbook entry is a document a
+  // University examiner relies on, and PGMER-2023 9.2(c) penalises the NAMED faculty/HoD/Dean who
+  // submits a false record. So the person who LOGS never holds the cap to VERIFY, and technical
+  // admin is not clinical sign-off. (pg_resident below holds no verify/assess/attest cap at all;
+  // pglog-model.js additionally THROWS on a self-verify, so there are two independent locks.)
+  PGLOG_LOG_OWN: "pglog.log.own",                   // create/edit own draft entries
+  PGLOG_SUBMIT_OWN: "pglog.submit.own",             // submit own entries for verification
+  PGLOG_VIEW_OWN: "pglog.view.own",                 // read own logbook + progress + feedback
+  PGLOG_VIEW_ASSIGNED: "pglog.view.assigned",       // read the logbooks of assigned residents
+  PGLOG_VERIFY: "pglog.verify",                     // verify / return an entry (PGMER-2023 5.2(vi))
+  PGLOG_ASSESS: "pglog.assess",                     // record a formative assessment + feedback
+  PGLOG_ATTEST: "pglog.attest",                     // the MONTHLY guide authentication (5.2(vi))
+  PGLOG_VIEW_DEPT: "pglog.view.dept",               // department-wide oversight (HOD)
+  PGLOG_VIEW_INSTITUTION: "pglog.view.institution", // institution-wide oversight (Academic Cell, 5.2(iii))
+  PGLOG_CONFIGURE: "pglog.configure",               // programmes, rotations, curriculum overrides
+  PGLOG_AUDIT: "pglog.audit"                        // read the audit trail / revision history
 };
+
+// The PG-logbook sign-off caps. Like the ONCQIS three, these are NOT granted to the technical admin
+// role: signing a resident's training record is clinical supervision, not system administration.
+export const PGLOG_SIGNOFF_CAPS = [
+  CAPS.PGLOG_VERIFY, CAPS.PGLOG_ASSESS, CAPS.PGLOG_ATTEST
+];
 
 // The ONCQIS governance caps. System admin (technical config only) is explicitly NOT granted any of
 // these - clinical/hospital approval is never a technical-admin power (spec role separation).
@@ -57,7 +80,7 @@ export const ROLE_CAPS = {
   // hospital approval caps. Protocol authoring, clinical review, and institutional approval are clinical
   // governance, never a technical-admin power - a system admin must not be able to approve/activate a
   // protocol (spec role separation, non-negotiable).
-  admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0),
+  admin: Object.values(CAPS).filter((c) => ONCQIS_CAPS.indexOf(c) < 0 && PGLOG_SIGNOFF_CAPS.indexOf(c) < 0),
   // Doctor: own clinical workflow + full EMR. Manages their own queue; can assign/transfer.
   doctor: [C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.QUEUE_PRIORITY, C.QUEUE_ASSIGN, C.QUEUE_REORDER,
            C.EMR_VITALS, C.EMR_TREAT, C.EMR_VIEW, C.SESSION_MANAGE, C.ANALYTICS_VIEW, C.ORDER_CREATE, C.ORDER_READ],
@@ -99,6 +122,30 @@ export const ROLE_CAPS = {
   // Institutional Approver: HOSPITAL APPROVAL + activation of a hospital implementation. Cannot
   // author or clinically review.
   oncqis_institutional_approver: [C.ONCQIS_INSTITUTIONAL_APPROVER],
+  // ---- NMC PG Logbook roles (see NMC_PG_LOGBOOK_REQUIREMENTS.md section 7) --------------------
+  // PG resident: creates and submits their OWN records and reads their own progress and feedback.
+  // Holds NO verify/assess/attest cap - "cannot approve own official records" is enforced by the
+  // ABSENCE of the capability here, and independently by a throw in pglog-model.verify().
+  // Also carries the trainee's clinical caps (a PG resident is a working resident), matching the
+  // existing `resident` role above so a PG does not need two logins.
+  pg_resident: [C.PGLOG_LOG_OWN, C.PGLOG_SUBMIT_OWN, C.PGLOG_VIEW_OWN,
+                C.QUEUE_VIEW, C.QUEUE_ADD, C.QUEUE_STATUS, C.EMR_VITALS, C.EMR_VIEW],
+  // PG guide / faculty: reviews, assesses, verifies or returns, and gives the MONTHLY authentication
+  // PGMER-2023 5.2(vi) requires. May keep their own logbook (many are also trainees elsewhere).
+  pg_faculty: [C.PGLOG_VIEW_ASSIGNED, C.PGLOG_VERIFY, C.PGLOG_ASSESS, C.PGLOG_ATTEST,
+               C.PGLOG_LOG_OWN, C.PGLOG_SUBMIT_OWN, C.PGLOG_VIEW_OWN,
+               C.QUEUE_VIEW, C.EMR_VIEW, C.EMR_TREAT],
+  // Head of Department: everything faculty hold, plus department-wide oversight, the audit trail and
+  // the final HoD signature + proficiency certificate the curricula require.
+  pg_hod: [C.PGLOG_VIEW_ASSIGNED, C.PGLOG_VERIFY, C.PGLOG_ASSESS, C.PGLOG_ATTEST,
+           C.PGLOG_VIEW_DEPT, C.PGLOG_AUDIT, C.PGLOG_VIEW_OWN,
+           C.QUEUE_VIEW, C.EMR_VIEW, C.EMR_TREAT, C.ANALYTICS_VIEW],
+  // Academic Cell (PGMER-2023 5.2(iii): "shall ensure and monitor the implementation of training
+  // programmes in each specialities"). Institution-wide oversight, curriculum configuration and audit
+  // access - but explicitly NOT verify/assess/attest: monitoring implementation is not signing a
+  // trainee's clinical record.
+  academic_cell: [C.PGLOG_VIEW_INSTITUTION, C.PGLOG_VIEW_DEPT, C.PGLOG_VIEW_ASSIGNED,
+                  C.PGLOG_CONFIGURE, C.PGLOG_AUDIT, C.ANALYTICS_VIEW],
   // Default for a recognised-but-unmapped login: read-only.
   viewer: [C.QUEUE_VIEW]
 };

@@ -132,6 +132,24 @@ FOUNDING_SEATS = "500"
 # override per role via DEVICE_LIMIT_<ROLE>). "0"/unset = record-only, no eviction. Clinic limits per role
 # are code defaults (Pro 2, Physician 4, Physician Pro 6; override via CLINIC_LIMIT_<ROLE>).
 DEVICE_LOCK_ON = "0"
+# ── NMC PG Logbook: the domain printed on every certified logbook PDF and encoded in its QR.
+# PUBLIC config, which is why it is here. It exists so a self-hosted or white-labelled deployment
+# does not print stewardmd.in onto another institution's records; the default in
+# functions/_pglog_verify.js is this same value, so changing it here is the only thing needed.
+#
+# THE SIGNING KEY IS NOT IN THIS FILE, AND MUST NEVER BE.
+#   PGLOG_SIGNING_KEY is the HMAC key behind every verification code. Anyone holding it can forge a
+#   digest, which means making the public verification page show "valid" over a fabricated
+#   certificate — the one thing this whole feature exists to prevent. This file is tracked in git, so
+#   a key in [vars] would be a key in the repository's history for good.
+#   It lives with every other key in this project:  wrangler pages secret put PGLOG_SIGNING_KEY
+#   (set for production and preview on 2026-08-27, with DIFFERENT values, so a code issued by a
+#   branch deploy can never validate against production.)
+#
+# ROTATION IS EFFECTIVELY PERMANENT: the digest is derived from the key, so changing it makes every
+# code ever issued read as TAMPERED. Rotate only in response to an actual key compromise, and expect
+# to re-issue certificates.
+PGLOG_VERIFY_BASE = "https://stewardmd.in"
 # AI_COST_CAP_ON intentionally UNSET → the rupee cost cap + founding pool stay INERT until go-live.
 
 [env.production]
@@ -182,6 +200,9 @@ FOUNDING_AI_REFILL_INR = "120"
 FOUNDING_DAILY_CAP_INR = "0.01"      # ~0 free daily → founding AI draws the annual pool
 FOUNDING_SEATS = "500"
 DEVICE_LOCK_ON = "0"                  # "1" enforces the anti-sharing device limit (1/tier; Co-Res + Physician Pro 2)
+# NMC PG Logbook verification domain (public). Named envs do NOT inherit top-level [vars], so it is
+# repeated here. The SIGNING KEY is a Pages secret, never a var — see the note in [vars] above.
+PGLOG_VERIFY_BASE = "https://stewardmd.in"
 
 [[env.production.kv_namespaces]]
 id = "fe08922ff2504aeb913b10a818054a08"
