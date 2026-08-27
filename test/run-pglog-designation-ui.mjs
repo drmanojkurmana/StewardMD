@@ -244,6 +244,44 @@ try {
   const tw = String(await txt());
   ok(/not a PG institution/i.test(tw), `adopting a clinic is warned about (got: ${JSON.stringify(tw.slice(0, 170))})`);
 
+  /* ── 10. Switching institution must not show the previous one's identity ──
+   * state.ctx was cached but keyed to nothing, so after the device is pointed at a different
+   * college the console kept rendering the old name and code (seen live: /me returned
+   * SMD-AKNZGB / "Test Medical College" while the screen still showed the previous org's id). */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"aaaa1111aaaa1111aaaa1111aaaa1111"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([])};
+    s.programmes=function(){return Promise.resolve({programmes:[]})};
+    s.seedDemo=function(){return null};
+    s.me=function(id){
+      var first = id==="aaaa1111aaaa1111aaaa1111aaaa1111";
+      return Promise.resolve({uid:"u1",orgId:id,
+        orgCode: first?"SMD-FIRST1":"SMD-SECOND",
+        orgName: first?"First College":"Second College",
+        orgKind:"institution",role:"academic_cell",caps:["pglog.configure"],
+        resident:null,programme:null,rotations:[]});
+    };
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1400);
+  await tap("setting up our institution");
+  await sleep(1800);
+  ok(/SMD-FIRST1/.test(String(await txt())), "first college renders");
+
+  // Repoint the device WITHOUT going through pick-inst, then reopen the screen.
+  await ev(`SMD_PGLOG_STORE.setContext({orgId:"bbbb2222bbbb2222bbbb2222bbbb2222"}); return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(500);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1400);
+  await tap("setting up our institution");
+  await sleep(2000);
+  const t2 = String(await txt());
+  ok(/SMD-SECOND/.test(t2), `the new college's code is shown (got: ${JSON.stringify(t2.slice(0, 150))})`);
+  ok(!/SMD-FIRST1/.test(t2), "the previous college's code is NOT still on screen");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}

@@ -87,8 +87,12 @@ export async function onRequest(context) {
 
     // The admin must already have a StewardMD account, because ownership is keyed on the Firebase
     // uid. Naming the email is the difference between a fixable message and a mystery.
-    let uid = null;
-    try { uid = await lookupUidByEmail(env, email); } catch (e) { uid = null; }
+    // lookupUidByEmail resolves to { uid, email, name } - NOT a bare uid. Taking the object here
+    // made identity "fb:[object Object]", which would have silently created a college owned by
+    // nobody, with an admin who could never sign in to it.
+    let found = null;
+    try { found = await lookupUidByEmail(env, email); } catch (e) { found = null; }
+    const uid = found && found.uid;
     if (!uid) return json({ error: "no_such_account", email }, 404);
     const identity = "fb:" + uid;
 

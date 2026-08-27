@@ -111,3 +111,21 @@ test("the eLOGBook console offers no self-serve create button", () => {
     "a create button that can only 403 is worse than none");
   assert.match(scr, /Institutions are set up by StewardMD/, "it explains who provisions one");
 });
+
+/* lookupUidByEmail resolves to { uid, email, name }, NOT a bare uid. Taking the object made the
+ * owner identity "fb:[object Object]" - a college owned by nobody, whose named admin could never
+ * sign in to it. functions/api/auth/[[path]].js:197 already did this correctly. */
+test("the admin identity is built from found.uid, never the lookup object", () => {
+  assert.doesNotMatch(SRC, /uid = await lookupUidByEmail/,
+    "assigning the lookup result straight to `uid` is the bug");
+  assert.match(SRC, /const uid = found && found\.uid/, "unwrap the object first");
+  assert.match(SRC, /const identity = "fb:" \+ uid/, "identity is namespaced on the real uid");
+});
+
+test("no call site treats the lookup result as a bare uid", () => {
+  for (const rel of ["../functions/api/ai/[[path]].js", "../functions/api/tenants/[[path]].js"]) {
+    const src = readFileSync(new URL(rel, import.meta.url), "utf8");
+    assert.doesNotMatch(src, /(const|let|var) uid = await lookupUidByEmail/,
+      rel + " still assigns the {uid,email,name} object to a variable named uid");
+  }
+});

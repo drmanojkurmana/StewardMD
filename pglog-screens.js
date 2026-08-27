@@ -125,7 +125,17 @@
   function ensureContext() {
     var st = ST();
     if (!st) return Promise.reject(new Error("store_missing"));
-    if (state.ctx) return Promise.resolve(state.ctx);
+    /* Cached, but keyed to nothing. If the device is now pointed at a DIFFERENT institution, the
+     * cached answer describes the old one - the console then renders the previous college's name
+     * and code, or falls back to the raw id. Invalidate when the org has moved under us. */
+    if (state.ctx) {
+      var want = ((st.context() || {}).orgId) || "";
+      var have = state.ctx.orgId || "";
+      if (!want || !have || want === have) return Promise.resolve(state.ctx);
+      // state.inst caches the resolved name/code too, and screenInstitution prefers it over ctx -
+      // so leaving it behind shows the PREVIOUS college on the new one's screen.
+      state.ctx = null; state.dash = null; state.inst = {};
+    }
     var demo = st.seedDemo(todayISO());
     if (demo) {   // smd_pglog_demo — LOCAL ONLY, never a server call. Every screen labels it.
       state.ctx = { role: "pg_resident", caps: [], resident: demo.resident, programme: demo.programme, rotations: [], demo: true };
