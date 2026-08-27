@@ -5,6 +5,47 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · Enforcement armed: deletion on, prompt every open, tiered AI limits
+
+Owner, after reviewing the dry-run design: *"push it, turn on auto delete if not verified in 7 days,
+and ask them to verify on every app opening, and no launch promo for who not verified (like who
+verified had better pro limits while guest have very less)"*. All four, plus the first push.
+
+**1. The sweep is ARMED and DELETES.** `UNVERIFIED_PURGE_ON` and `UNVERIFIED_PURGE_HARD_DELETE` now
+both default ON. The concern about irreversibility was raised and the owner reaffirmed, so it ships.
+What makes it survivable is not the switches but `decidePurge()`: verified, paying and
+pending-review accounts are spared by explicit claim-checked rules, and **nobody is removed who was
+not warned by email first** (day 5, send-once, and an overdue-but-unwarned account gets warned rather
+than deleted). Either switch can be softened from env with no deploy.
+
+**New: `purgeUserData()` runs BEFORE the account delete.** Deleting the Firebase user alone would
+have left the account's saved cases (`icu:index:` / `icu:case:` in CASES_KV), verification record,
+budget cache and Firestore `users/{uid}/profile/self` + `doctorDirectory/{smdId}` behind: the doctor
+locked out of records we were still holding, which is the worst of both outcomes and a retention
+problem rather than a tidy-up. The lifecycle record itself is KEPT as a `purgedAt` tombstone so a
+later run cannot reprocess the same uid.
+
+**2. Ask on every app open.** `verify.js` `evaluate()` re-opens the gate for a provisional
+(skipped) account once per app OPEN, latched on `_promptedThisOpen` because evaluate() also fires on
+every auth/account change. Still dismissible, because unverified keeps the free tier. **Pending
+review is exempt** - nagging someone for something they have already done is how a real doctor is
+lost. Before this, one tap on skip silenced the prompt for the whole 7 days, so an account could
+reach the deletion sweep having been asked exactly once.
+
+**3. Tiered AI limits ON.** `_aibudget.js` already encoded precisely what the owner described and
+was simply switched off behind `AI_BUDGET_ON`, now default ON: unverified **0**, verified-not-Pro
+5k, Pro 1M, physician 3M, every rung env-tunable. This is also what "no launch promo for the
+unverified" means in practice at the token level.
+
+**Gotcha found while arming it:** `monthlyCapFor()` caches the computed cap for ~26h. Verification
+changes the tier from 0 to a real allowance, so without busting that cache a doctor verifies and
+MaiK still refuses them until the next day - the exact "I did what you asked and nothing happened"
+report. New `clearBudgetCache()` is called on both verification paths (auto NMC + owner approval).
+
+**Status:** 2560/2563 (2 pre-existing `mock.module` failures), new suites
+`ai-budget-tiers` 6/6 and `verify-prompt` 6/6. PUSHED to `fix/audit-sweep-2026-08-26`.
+Recovery point: tag `pre-verify-enforcement-2026-08-27`. See [[Flags]].
+
 ## 2026-08-27 · A locked Pro feature must explain itself, with the RIGHT button
 
 **Why this had to ship with the verification gate, not after it.** Enforcing verification turns on a

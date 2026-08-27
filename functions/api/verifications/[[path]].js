@@ -14,6 +14,7 @@
  * ---------------------------------------------------------------------------
  */
 import { mergeUserClaims } from "../../_fbadmin.js";
+import { clearBudgetCache } from "../../_aibudget.js";
 import { emailVerified, emailFailed } from "../../_email.js";
 import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
@@ -85,6 +86,7 @@ async function doApprove(store, env, uid, regNo) {
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
   // verifiedAt starts the free Pro week; provUntil is cleared because the review is over.
   await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null, regNo: reg });   // merge: keep any existing pro claim
+  try { await clearBudgetCache(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));

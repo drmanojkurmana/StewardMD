@@ -23,6 +23,7 @@ import { verifyFirebaseToken } from "../_fbauth.js";
 import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
 import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
+import { clearBudgetCache } from "../_aibudget.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -407,6 +408,9 @@ export async function onRequest(context) {
   // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
   try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email, name: match.firstName }); } catch (e) {}
+  // The AI budget tier just changed from "none" to a real allowance. The cap is cached for ~26h, so
+  // without this the doctor verifies and MaiK still refuses them until tomorrow.
+  try { await clearBudgetCache(env, uid); } catch (e) {}
 
   return json({ status: "verified", regNo: match.registrationNo, name: match.firstName, council: match.smcName });
 }

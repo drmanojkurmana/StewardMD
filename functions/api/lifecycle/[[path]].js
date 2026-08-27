@@ -12,18 +12,23 @@
  * THE UNVERIFIED SWEEP (owner decision, 2026-08-27): StewardMD is for registered doctors, so an
  * account that never verifies is removed. Day 5 sends one warning email; day 7 removes.
  *
- *   IT IS OFF BY DEFAULT AND REPORTS ONLY. Warnings are real emails; the removal itself does
- *   nothing until UNVERIFIED_PURGE_ON=1, and even then it DISABLES (reversible) rather than
- *   deletes unless UNVERIFIED_PURGE_HARD_DELETE=1 as well. A StewardMD account can own ICU
- *   membership and saved clinical cases, so the irreversible option is a deliberate second switch.
- *   Pass { dryRun: true } to force a report even when the switches are on.
+ *   IT IS ARMED (owner decision, 2026-08-27) and DELETES. purgeUserData() removes the account's
+ *   saved cases, verification record, budget cache and Firestore profile/directory entry FIRST,
+ *   then the Firebase user goes. Deleting the sign-in while keeping the clinical data would be the
+ *   worst of both outcomes.
+ *
+ *   What keeps this safe to leave running on a cron is decidePurge(), not the switches: verified,
+ *   paying and pending-review accounts are spared by explicit rules, and NOBODY is removed who was
+ *   not warned by email first. To soften it: UNVERIFIED_PURGE_HARD_DELETE=0 disables the account
+ *   instead (reversible), UNVERIFIED_PURGE_ON=0 returns to report-only, and { dryRun: true } forces
+ *   a report on any single call without changing either setting.
  *
  * Auth: owner Google login OR X-Admin-Token (UPDATES_ADMIN_TOKEN / VERIFY_ADMIN_TOKEN), via ownerOK.
  */
 import { ownerOK } from "../../_adminauth.js";
 import {
   listLifecycleUids, sendProUpsellOnce, getLifecycle, decidePurge, markPurgeWarned, markPurged,
-  purgeDays, warnDays, purgeEnabled, hardDeleteEnabled,
+  purgeDays, warnDays, purgeEnabled, hardDeleteEnabled, purgeUserData,
 } from "../../_lifecycle.js";
 import { getUserClaims, setUserDisabled, deleteUser } from "../../_fbadmin.js";
 import { emailVerifyReminder } from "../../_email.js";
@@ -97,7 +102,12 @@ async function unverifiedSweep(env, { dryRun } = {}) {
       if (d.action === "purge") {
         if (!enabled) { out.wouldPurge++; continue; }
         let ok = false;
-        try { ok = hard ? await deleteUser(env, uid) : await setUserDisabled(env, uid, true); } catch (e) { ok = false; }
+        try {
+          // Data first. If the account delete succeeds and this had not run, the doctor would be
+          // locked out of records we were still holding.
+          if (hard) { const wiped = await purgeUserData(env, uid); out.dataDeleted = (out.dataDeleted || 0) + (wiped.cases || 0); }
+          ok = hard ? await deleteUser(env, uid) : await setUserDisabled(env, uid, true);
+        } catch (e) { ok = false; }
         if (ok) { await markPurged(env, uid, hard ? "delete" : "disable"); out.purged++; } else { out.failed++; }
       }
     } catch (e) { out.failed++; }

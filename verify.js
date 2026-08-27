@@ -370,6 +370,7 @@
   }
 
   // ---- Forced gate: signed-in real accounts must be verified ----
+  var _promptedThisOpen = false;   // re-ask once per app open, not once per evaluate() call
   function evaluate() {
     var u = fbUser();
     if (!u) { hideGate(); return; }            // not signed in → app.js's account gate handles it
@@ -393,6 +394,18 @@
         // "skip" trial — while inside the window; else force verification.
         var provisional = d && (d.status === "pending" || d.status === "trial") && provisionalActive(d.provisionalUntil);
         if (provisional) {
+          /* ASK ON EVERY APP OPEN until verified (owner decision, 2026-08-27). Before this, one tap
+           * on "Not now" silenced the prompt for the whole 7 days, so an account could reach the
+           * deletion sweep having been asked exactly once. Still dismissible - an unverified doctor
+           * keeps the free tier - but they are asked again next time they open the app.
+           *
+           * PENDING REVIEW IS EXEMT: they have already sent us their proof and are waiting on us.
+           * Nagging someone for something they have already done is how an app loses a real doctor.
+           * Once per app OPEN, not per evaluate(): this runs on every auth/account change too. */
+          if (d.status !== "pending" && !_promptedThisOpen) {
+            _promptedThisOpen = true;
+            if (!gate() || gate().dataset.mode !== "panel") { render("forced", d); return; }
+          }
           if (gate() && gate().dataset.mode !== "panel") hideGate();
           try { (window.toast || window.SMD_toast || function () {})((d.status === "trial" ? "Trial access · " : "Provisional access · ") + daysLeft(d.provisionalUntil) + "d left to verify · prescription locked"); } catch (e) {}
         } else {

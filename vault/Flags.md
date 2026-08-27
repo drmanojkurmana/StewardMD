@@ -197,7 +197,7 @@ Both open **per device** today via the sidebar Experimental access code, so test
 | `smd_thorex_dev` | OFF | **DEV TOOL.** Pipeline/timing overlay. |
 | `smd_thorex_secure_egress` | OFF | **BLOCKED ON SERVER.** The proxy fails CLOSED with 503 until THOREX_ANALYZE_URL is provisioned. Turning it on breaks analysis. |
 
-### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>1 ON · 2 OFF</sub>
+### Verification & account lifecycle (SERVER env / KV, not client flags)  <sub>4 ON · 0 OFF</sub>
 
 Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localStorage` flags.
 
@@ -205,8 +205,9 @@ Set in Cloudflare (env or the billing-cfg KV, which wins). These are not `localS
 |---|---|---|
 | `VERIFY_REQUIRED_FOR_PRO` | **ON** | Pro requires a verified NMC/SMC registration (`_entitlement.js` `isPro`). Set `0` to restore the pre-2026-08-27 launch-promo free-for-all with no deploy; `test/entitlement-trial.test.mjs` pins that path. |
 | `VERIFIED_PRO_DAYS` | `7` | Length of the free Pro window a doctor earns by verifying. |
-| `UNVERIFIED_PURGE_ON` | OFF | **DESTRUCTIVE.** Arms the 7-day unverified-account sweep. OFF = it reports what it would do and changes nothing. Warning emails send either way. |
-| `UNVERIFIED_PURGE_HARD_DELETE` | OFF | **IRREVERSIBLE.** Second switch: with it OFF the armed sweep *disables* an account (recoverable); ON it deletes the Firebase user, orphaning saved cases / ICU membership. |
+| `UNVERIFIED_PURGE_ON` | **ON** | **DESTRUCTIVE, ARMED 2026-08-27 (owner).** The 7-day unverified-account sweep acts. Set `0` for report-only. Warning emails send either way. |
+| `UNVERIFIED_PURGE_HARD_DELETE` | **ON** | **IRREVERSIBLE, ARMED 2026-08-27 (owner).** Deletes the Firebase user, after `purgeUserData()` removes their cases, verification record, budget cache and Firestore profile/directory entry. Set `0` to *disable* the account instead (reversible). |
+| `AI_BUDGET_ON` | **ON** | Per-tier AI allowances (`_aibudget.js`). Default ON since 2026-08-27, so verification is worth something: unverified **0**, verified-not-Pro 5k, Pro 1M, physician 3M. Set `0` for the legacy flat caps. `BUDGET_FREE_TOKENS` / `BUDGET_PRO_TOKENS` / `BUDGET_PROMAX_TOKENS` tune each rung. |
 | `UNVERIFIED_PURGE_DAYS` | `7` | Age at which an unverified account is removed. |
 | `UNVERIFIED_WARN_DAYS` | `5` | Age at which the single warning email goes out. Nobody is removed who was never warned. |
 

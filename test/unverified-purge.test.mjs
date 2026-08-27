@@ -27,14 +27,22 @@ test("defaults: warn at day 5, remove at day 7", () => {
   assert.equal(purgeDays({ UNVERIFIED_PURGE_DAYS: "14" }), 14);
 });
 
-test("BOTH destructive switches are OFF unless explicitly turned on", () => {
-  assert.equal(purgeEnabled(ENV), false, "an unattended cron must not delete accounts by default");
-  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_ON: "1" }), true);
-  assert.equal(hardDeleteEnabled({ UNVERIFIED_PURGE_ON: "1" }), false, "on != hard delete");
-  assert.equal(hardDeleteEnabled({ UNVERIFIED_PURGE_HARD_DELETE: "1" }), true);
-  // A truthy-looking string must not arm it by accident.
-  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_ON: "no" }), false);
-  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_ON: "0" }), false);
+/* ARMED on 2026-08-27 by owner decision: "turn on auto delete if not verified in 7 days".
+ * What makes an unattended cron with a real delete safe is NOT the switches - it is every sparing
+ * rule below, which is why they each have their own test. The switches are the escape hatch. */
+test("the sweep is ARMED and deletes, per the owner decision", () => {
+  assert.equal(purgeEnabled(ENV), true, "default: the sweep acts");
+  assert.equal(hardDeleteEnabled(ENV), true, "default: it deletes, not disables");
+});
+
+test("both switches can be softened without a deploy", () => {
+  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_ON: "0" }), false, "back to report-only");
+  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_ON: "false" }), false);
+  assert.equal(hardDeleteEnabled({ UNVERIFIED_PURGE_HARD_DELETE: "0" }), false,
+    "disable instead of delete: reversible, still enforcing");
+  // The two are independent: reports-only must not silently imply hard delete is off, and vice versa.
+  assert.equal(hardDeleteEnabled({ UNVERIFIED_PURGE_ON: "0" }), true);
+  assert.equal(purgeEnabled({ UNVERIFIED_PURGE_HARD_DELETE: "0" }), true);
 });
 
 test("the timeline: young -> warn -> purge", () => {

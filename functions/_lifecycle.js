@@ -14,6 +14,7 @@
 import { emailProUpsell } from "./_email.js";
 import { promoActive, promoUntil } from "./_entitlement.js";
 import { getUserClaims } from "./_fbadmin.js";
+import { fsGet, fsCommit, wDelete } from "./_fbfirestore.js";
 
 function lcKv(env) { return env.MAIK_KV || env.GHIS_KV || env.UPDATES_KV || null; }
 const PREFIX = "lifecycle:u:";
@@ -117,17 +118,62 @@ export function warnDays(env) {
   const n = +(env && env.UNVERIFIED_WARN_DAYS);
   return Number.isFinite(n) && n > 0 ? n : WARN_DAYS_DEFAULT;
 }
-// The destructive switch. OFF by default: the sweep reports what it WOULD do and changes nothing
-// until the owner turns it on deliberately.
+// ARMED by owner decision, 2026-08-27. Set UNVERIFIED_PURGE_ON=0 to put it back into report-only
+// mode without a deploy. The protections in decidePurge() are what make this safe to leave running:
+// verified, paying and pending-review accounts are spared, and nobody is removed unwarned.
 export function purgeEnabled(env) {
   const v = env && env.UNVERIFIED_PURGE_ON;
-  return v === "1" || v === 1 || v === true || v === "true";
+  if (v === undefined || v === null || v === "") return true;
+  return !(String(v) === "0" || String(v) === "false");
 }
-// Even when the sweep is on, the default action is a REVERSIBLE disable. Hard delete is a second,
-// separate switch, because a StewardMD account can own ICU membership and saved clinical cases.
+// Owner asked for DELETE, not disable. Set UNVERIFIED_PURGE_HARD_DELETE=0 to soften it back to a
+// reversible account disable. When this is on, purgeUserData() runs FIRST - deleting the sign-in
+// while leaving the clinical data behind would be the worst of both: the doctor cannot reach their
+// own records and we are still holding them.
 export function hardDeleteEnabled(env) {
   const v = env && env.UNVERIFIED_PURGE_HARD_DELETE;
-  return v === "1" || v === 1 || v === true || v === "true";
+  if (v === undefined || v === null || v === "") return true;
+  return !(String(v) === "0" || String(v) === "false");
+}
+
+/* Remove the server-side data an account owns, before the account itself goes.
+ *
+ * An unverified account is by definition one that never unlocked the clinical tools, so in practice
+ * this is near-empty - but "near" is not "always", and a delete that orphans patient data is a
+ * retention problem, not a tidy-up. Best-effort and never throws: a failure here must not stop the
+ * sweep, and every step is independently safe to retry.
+ *
+ * Deliberately NOT deleted: the lifecycle record itself, which stays as a tombstone (purgedAt) so a
+ * later run does not reprocess the same uid.
+ */
+export async function purgeUserData(env, uid) {
+  const out = { cases: 0, index: false, doctor: false, budget: false, profile: false, directory: false };
+  if (!uid) return out;
+  const cs = (env && (env.CASES_KV || env.GHIS_KV)) || null;
+  if (cs) {
+    try {
+      const idx = (await cs.get("icu:index:" + uid, "json")) || [];
+      for (const e of (Array.isArray(idx) ? idx : [])) {
+        if (!e || !e.id) continue;
+        try { await cs.delete("icu:case:" + uid + ":" + e.id); out.cases++; } catch (x) {}
+      }
+      await cs.delete("icu:index:" + uid); out.index = true;
+    } catch (e) {}
+    try { await cs.delete("icu:doctor:" + uid); out.doctor = true; } catch (e) {}   // verification record
+  }
+  const mk = lcKv(env);
+  if (mk) { try { await mk.delete("maik:budget:" + uid); out.budget = true; } catch (e) {} }
+
+  // Firestore: the private profile, and the directory pointer that makes them findable by ID.
+  try {
+    const prof = await fsGet(env, "users/" + uid + "/profile/self");
+    const writes = [wDelete(env, "users/" + uid + "/profile/self")];
+    const smdId = prof && prof.smdId;
+    if (smdId) writes.push(wDelete(env, "doctorDirectory/" + smdId));
+    await fsCommit(env, writes);
+    out.profile = true; out.directory = !!smdId;
+  } catch (e) {}
+  return out;
 }
 
 export function decidePurge(env, rec, claims, now) {
