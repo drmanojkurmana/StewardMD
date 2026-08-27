@@ -1,0 +1,182 @@
+{
+  "id": "general-medicine",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "General Medicine",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common",
+    "_revised-2022-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in General Medicine (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MD-in-General-Medicine-(revised).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 10,
+      "per": "year",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_lecture",
+      "kind": "academic",
+      "label": "Departmental lectures attended",
+      "match": {
+        "academicType": "lecture"
+      },
+      "clause": "Teaching-Learning methods — A. Lectures",
+      "quote": "Didactic lectures should be used sparingly. A minimum of 10 lectures per year in the concerned PG department is suggested. … All postgraduate trainees will be required to attend these lectures."
+    },
+    {
+      "target": 1,
+      "per": "fortnight",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_journal_club",
+      "kind": "academic",
+      "label": "Journal club",
+      "match": {
+        "academicType": "journal_club"
+      },
+      "clause": "Teaching-Learning methods — B. Journal club",
+      "quote": "Journal club: Minimum of once in 1-2 weeks is suggested. Topics will include presentation and critical appraisal of original research papers published in peer reviewed indexed journals. The presenter(s) shall be assessed by faculty and grades recorded in the logbook.",
+      "note": "'once in 1-2 weeks' is a RANGE. The pack uses the conservative end (once a fortnight) so the module never reports a resident behind on a cadence the curriculum does not actually demand."
+    },
+    {
+      "target": 1,
+      "per": "fortnight",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_seminar",
+      "kind": "academic",
+      "label": "Student seminar",
+      "match": {
+        "academicType": "seminar"
+      },
+      "clause": "Teaching-Learning methods — C. Student Seminar",
+      "quote": "Student Seminar: Minimum of once every 1-2 weeks is suggested. … The student should be graded by the faculty and peers.",
+      "note": "Range; conservative end used (see gm_journal_club)."
+    },
+    {
+      "target": 1,
+      "per": "quarter",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_symposium",
+      "kind": "academic",
+      "label": "Student symposium",
+      "match": {
+        "academicType": "symposium"
+      },
+      "clause": "Teaching-Learning methods — D. Student Symposium",
+      "quote": "Student Symposium: Minimum of once every 3 months. … All participating postgraduates should be graded by the faculty and peers."
+    },
+    {
+      "target": 1,
+      "per": "fortnight",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_bedside",
+      "kind": "academic",
+      "label": "Laboratory work / bedside clinics",
+      "match": {
+        "academicType": "laboratory_work"
+      },
+      "clause": "Teaching-Learning methods — E. Laboratory work / Bedside clinics",
+      "quote": "Laboratory work / Bedside clinics: Minimum - once every 1-2 weeks. … Various methods like DOAP (Demonstrate, Observe, Assist, Perform), simulations in skills lab, and case-based discussions etc. are to be used.",
+      "note": "Range; conservative end used."
+    },
+    {
+      "target": 1,
+      "per": "month",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_interdepartmental",
+      "kind": "academic",
+      "label": "Interdepartmental colloquium",
+      "match": {
+        "academicType": "interdepartmental"
+      },
+      "clause": "Teaching-Learning methods — F. Interdepartmental colloquium",
+      "quote": "Faculty and students must attend monthly meetings between the main Department and other department/s on topics of current/common interest or clinical cases."
+    },
+    {
+      "target": 1,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_case_presentation",
+      "kind": "academic",
+      "label": "Case presentation / work-up / handling",
+      "match": {
+        "academicType": "case_presentation"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Quarterly assessment during the MD training should be based on: Case presentation, case work up, case handling/management : once a week"
+    },
+    {
+      "target": 2,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_lab_performance",
+      "kind": "academic",
+      "label": "Laboratory performance",
+      "match": {
+        "academicType": "laboratory_work"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Laboratory performance : twice a week",
+      "note": "The curriculum writes the number as a word: 'twice a week' — target 2 per week."
+    },
+    {
+      "target": 1,
+      "per": "month",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_case_discussion",
+      "kind": "academic",
+      "label": "Case discussions",
+      "match": {
+        "academicType": "case_discussion"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Case discussions : once a fortnight/month",
+      "note": "The curriculum gives 'fortnight/month'. The pack uses the conservative end (monthly)."
+    },
+    {
+      "target": 2,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_cme",
+      "kind": "academic",
+      "label": "Attendance at scientific meetings / CME programmes",
+      "match": {
+        "academicType": "cme_conference"
+      },
+      "clause": "Assessment — Quarterly assessment",
+      "quote": "Attendance at Scientific meetings, CME programmes (at least 02 each)"
+    },
+    {
+      "target": 3,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "gm_drp",
+      "kind": "rotation",
+      "label": "District Residency Programme posting",
+      "unit": "months",
+      "rotationKind": "drp",
+      "clause": "Teaching-Learning methods — G.(b) Posting under District Residency Programme",
+      "quote": "All postgraduate students pursuing MS/MS in broad specialties in all Medical Colleges/Institutions shall undergo a compulsory rotation of three months in District Hospitals/District Health System as a part of the course curriculum … Such rotation shall take place in the 3rd or 4th or 5th semester."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "The MD General Medicine guidelines prescribe no procedure counts. Procedure entries are counted; the department sets targets in-app (which then display as institutional policy, not as NMC).",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

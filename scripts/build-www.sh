@@ -110,6 +110,13 @@ fi
 # already copies, so there is nothing extra to do for it.
 [ -d surgx ] && mkdir -p "$WWW/surgx" && cp -R surgx/. "$WWW/surgx/"
 
+# NMC Logbook curriculum packs + assessment templates. Same rule and the same failure mode as clinix
+# and surgx above: the root *.js glob copies the module code, DATA DIRECTORIES ARE NOT COPIED. Without
+# this line pglog loads, the tile appears, and every requirement list is empty on the device — which
+# for THIS module means a logbook that cannot tell a resident what the NMC requires. These are small
+# plain-JSON files (well under a MB in total), so they are bundled rather than fetched from Pages.
+[ -d pglog ] && mkdir -p "$WWW/pglog" && cp -R pglog/. "$WWW/pglog/"
+
 # Native-only license lock (Phase 2b): when KB_ENCRYPT=1 (+ env KB_KEY = the server APP_KB_KEY secret,
 # base64 32B), AES-GCM-encrypt the KB blobs the loader gates, ship ONLY the .enc (drop the plaintext KB),
 # and flip window.SMD_KB_ENC=1 so kb-loader.js takes the licensed path. Default (unset) = plaintext, unchanged.

@@ -822,3 +822,77 @@ over the same verified transport as the OPD assessment (visit activation, author
 re-serialisation, patient_id mismatch abort, doc_id 0 refusal), gated by the same `QUEUE_EMR_WRITE`
 env var. No new work was needed; it needs a patient with an ACTIVE assessment, which is what the
 earlier live attempt lacked.
+
+---
+
+## 2026-08-27 — NMC Logbook: a regulatory record, built as a data layer that refuses
+
+**Context.** StewardMD gains a Medical Education module. Phase 1 is the **PG digital logbook** that
+PGMER-2023 §5.2(v)–(vi) requires every Indian PG resident to maintain. UG/CBME is explicitly out of
+scope and was not built.
+
+**The decision that shaped everything else.** A PG logbook entry is not app data. It is a document a
+University examiner relies on, and **PGMER-2023 §9.2(c) puts a monetary penalty on the named
+faculty / HoD / Dean who submits a false record**. So every guarantee is a **throw in
+`pglog-model.js`**, the pure core that the client AND the Cloudflare Function both import — not a
+disabled button, and not a server-only check that a future importer or admin script would bypass:
+
+- `verify()` throws if the actor is the entry's author (namespace-tolerant, so `fb:uid` vs `uid`
+  cannot silently disable the guard — that is exactly how this class of check dies).
+- `applyEdit()` / `softDelete()` throw on a verified entry. Correction is `amend()`, which snapshots
+  the **entire prior document** into `revisions[]` and re-opens verification.
+- A return without a reason, an assessment with a blank criterion, a remediation without a plan: all
+  refused at the data layer.
+- Attestation ids are deterministic + `wCreate`, so **a month can be authenticated exactly once**.
+
+**Decisions worth not re-litigating:**
+
+- **The module does NOT claim "NMC compliant."** It claims *"structured to PGMER-2023 §5.2(v)–(vi)"*
+  and, per pack, *"NMC \<specialty\> guidelines, \<year\>"*. Whether a logbook satisfies a University
+  is the institution's decision. Every report says so in its own footer.
+- **No invented numbers, ever.** `NMC_PG_LOGBOOK_REQUIREMENTS.md` maps source → clause → verbatim
+  quote → feature for every requirement, and `test/pglog-curriculum.test.mjs` **fails the build if a
+  numeric target does not appear in its own quotation**. Most NMC specialty curricula say
+  *"a specified number of cases"* — so those requirements COUNT and show **no denominator and no
+  progress bar**. MD Emergency Medicine 2024 is the one curriculum in the set that prints procedure
+  minima; those 64 numbers are shipped verbatim, and the 5 procedures it names *without* a number
+  stay `null` rather than being back-filled from a neighbour.
+- **Provenance is a visible material, not metadata.** An NMC requirement and an institutional target
+  must never look alike, so `.pgl-prov` differs by colour AND weight AND border style per grade —
+  the distinction survives greyscale and a photocopy. An institutional override may change a
+  `target`; it can **never** rewrite a label, source, clause or quote.
+- **Attendance carries two provenances and they are not merged.** The 80% is §5.6 (the gazette). The
+  751/501-day figures come from the PGMEB FAQ of 10.04.2024 — **a secondary source; the primary PDF
+  was not obtainable on 2026-08-27**. They are graded differently, shown differently, and editable.
+  The module reports attendance; it never declares anyone exam-ineligible on it.
+- **Only VERIFIED entries count toward progress.** A resident cannot advance their own bar; a faculty
+  member advancing it is the entire point of §5.2(vi). Submitted-but-unverified work is surfaced
+  separately as `pending` so it does not look lost.
+- **Two independent locks on self-approval.** `pg_resident` holds no `PGLOG_VERIFY` cap *and* the
+  model throws. `admin` is deliberately **not** granted verify/assess/attest — the same separation
+  the ONCQIS approval caps already use, for the same reason: signing a trainee's clinical record is
+  not a technical-admin power.
+- **The DRP semester window is a WARNING, not a block** (§5.2(xii)V). A State's posting schedule is
+  not the resident's to fix, and refusing to record a posting that actually happened would make the
+  logbook less true, not more compliant. Same reasoning for late logging: the delay is measured and
+  shown, never used to reject the entry.
+- **It is a logbook, not a second EMR.** The entry schema has no field for a patient name, phone,
+  address or Aadhaar; `sanitizeCaseRef()` strips them on write, server-side included; age is a band,
+  never a DOB; and `publicEntry(e, audience)` withholds case reference and diagnosis from every
+  cross-resident surface — the Academic Cell's institution-wide view (§5.2(iii) "ensure and monitor")
+  is a completeness question, so it gets counts.
+- **AI cannot touch the record.** Suggestions are filtered against the resolved pack, so the model
+  cannot mint a requirement; no AI path creates, edits, submits or verifies anything; and the two
+  features the brief listed as AI — detecting incomplete entries, and reminders — were implemented as
+  **pure code with no model call**, because a reminder about a regulatory deadline must be right
+  rather than plausible.
+- **Drafts work with no network and are never called "submitted."** Submitted means a named faculty
+  member now owes a verification, which is a fact about the server, not the phone. A queued draft
+  says "waiting to submit".
+- **Offline computes the same numbers.** The client recomputes progress with the same pure functions
+  the server uses, so a phone that was offline and a server that was not can never disagree about a
+  number printed on a regulatory document.
+
+**A note for whoever runs the tests next.** The headless UI test binds port **8994**, not the shared
+8991. Another worktree's `serve.mjs` on 8991 silently served *its* copy of the app, and 48 assertions
+"failed" against code they were never looking at. See [[two-claude-sessions-one-folder]].

@@ -1,0 +1,52 @@
+{
+  "id": "pathology",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Pathology",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common",
+    "_revised-2022-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Pathology (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MD_Pathology_(revised).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pa_lab_work",
+      "kind": "academic",
+      "label": "Laboratory bench work / reporting sessions",
+      "match": {
+        "academicType": "laboratory_work"
+      },
+      "clause": "Teaching and learning methods",
+      "quote": "Laboratory work / Bedside clinics … should be coordinated and guided by faculty from the department."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pa_cpc",
+      "kind": "academic",
+      "label": "Clinico-pathological conferences",
+      "match": {
+        "academicType": "cpc"
+      },
+      "clause": "Teaching and learning methods",
+      "quote": "…clinico-pathological conferences…"
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No specimen/slide counts in the MD Pathology guidelines. Reporting workload is counted.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

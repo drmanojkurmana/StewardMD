@@ -833,6 +833,12 @@
       try { localStorage.setItem("smd_clinix", "1"); } catch (e) {}
       if (window.CLINIX && CLINIX.open) CLINIX.open(); else toast("CliniX loading…");
     },
+    pglog: function () {
+      // NMC Logbook - the PG digital logbook (PGMER-2023 5.2(v)-(vi)). Like SURGX/CliniX it is not
+      // code-gated via SMD_XACCESS: PGLOG.open() checks smd_pglog itself and is a complete no-op
+      // when off.
+      if (window.PGLOG && PGLOG.open) PGLOG.open(); else toast("NMC Logbook loading…");
+    },
     surgx: function () {
       // SURGX (SURGˣ) — Surgical Intelligence. Like SknX/CliniX it is not code-gated via
       // SMD_XACCESS: SURGX.open() checks smd_surgx itself and is a complete no-op when off.
@@ -1474,6 +1480,11 @@
     // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
     { act: "surgx", ic: "content_cut", tt: "SURG\u02E3", sub: "Surgical intelligence", feat: true, anim: "surgx",
       eligible: function () { try { var q = (location.search.match(/[?&]surgx=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_surgx") !== "0"; } catch (e) { return true; } } },
+    // NMC Logbook - PG digital logbook. eligible() reads localStorage DIRECTLY rather than
+    // SMD_PGLOG_FLAGS, because home.js loads BEFORE the pglog block in index.html: the flag object
+    // does not exist yet at tile-render time. Same fallback pattern as SURGX/ThoreX/CliniX above.
+    { act: "pglog", ic: "history_edu", tt: "NMC Logbook", sub: "PG training record", feat: true,
+      eligible: function () { try { var q = (location.search.match(/[?&]pglog=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_pglog") !== "0"; } catch (e) { return true; } } },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",

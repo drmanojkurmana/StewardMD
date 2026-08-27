@@ -1,0 +1,167 @@
+{
+  "id": "_revised-2022-common",
+  "kindOfPack": "curriculum-common",
+  "programmeType": "PG",
+  "label": "NMC 2022-revised competency-based PG curricula — the shared Teaching/Learning + Log book text",
+  "version": "2026-08-27",
+  "appliesTo": "Specialties whose NMC guidelines were revised in 2022 and carry the identical 'Teaching and learning methods' and 'J. Log book' sections: General Medicine, Orthopaedics, Paediatrics, Pathology (and any later pack that declares extends: _revised-2022-common).",
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "note": "The clauses below appear word-for-word in each of the revised guideline PDFs listed in appliesTo. Each specialty pack re-states its OWN source PDF; this file exists so the shared text is quoted once, not four times.",
+    "retrieved": "2026-08-27"
+  },
+  "logbookClause": {
+    "clause": "J. Log book",
+    "quote": "During the training period, the postgraduate student should maintain a Log Book indicating the duration of the postings/work done in Wards, OPDs, Casualty and other areas of posting. This should indicate the procedures assisted and performed and the teaching sessions attended. The log book entries must be done in real time. The log book is thus a record of various activities by the student like: (1) Participation & performance, (2) attendance, (3) participation in sessions, (4) completion of pre-determined activities, and (5) acquisition of selected competencies. … The Log Book should be used in the internal assessment of the student; should be checked and assessed periodically by the faculty members imparting the training. The PG students will be required to produce completed log book in original at the time of final practical examination. It should be signed by the Head of the Department. A proficiency certificate from the Head of Department regarding the clinical competence and skillful performance of procedures by the student will be submitted by the PG student at the time of the examination. The PG students shall be trained to reflect and record their reflections in log book particularly of the critical incidents."
+  },
+  "requirements": [
+    {
+      "id": "rev22_realtime",
+      "kind": "meta",
+      "label": "Log book entries made in real time",
+      "target": null,
+      "engine": "latencyDays",
+      "source": "nmc_curriculum",
+      "clause": "J. Log book",
+      "quote": "The log book entries must be done in real time.",
+      "note": "Measured and shown as a latency, never enforced as a block — refusing a late entry would lose a true record."
+    },
+    {
+      "id": "rev22_hod_sign",
+      "kind": "meta",
+      "label": "Completed log book signed by the Head of the Department",
+      "target": 1,
+      "per": "course",
+      "engine": "attestation:hod_final",
+      "source": "nmc_curriculum",
+      "clause": "J. Log book",
+      "quote": "The PG students will be required to produce completed log book in original at the time of final practical examination. It should be signed by the Head of the Department."
+    },
+    {
+      "id": "rev22_hod_proficiency",
+      "kind": "meta",
+      "label": "Proficiency certificate from the Head of Department",
+      "target": 1,
+      "per": "course",
+      "engine": "attestation:hod_proficiency",
+      "source": "nmc_curriculum",
+      "clause": "J. Log book",
+      "quote": "A proficiency certificate from Head of Department regarding the clinical competence and skillful performance of procedures by the student will be submitted by the PG student at the time of the examination."
+    },
+    {
+      "id": "rev22_reflection",
+      "kind": "reflection",
+      "label": "Reflections, particularly on critical incidents",
+      "target": null,
+      "per": "course",
+      "match": {
+        "subtype": "critical_incident"
+      },
+      "source": "nmc_curriculum",
+      "clause": "J. Log book",
+      "quote": "The PG students shall be trained to reflect and record their reflections in log book particularly of the critical incidents."
+    },
+    {
+      "id": "rev22_teaching_skill_assessment",
+      "kind": "academic",
+      "label": "Assessment of teaching skills",
+      "target": 2,
+      "per": "year",
+      "match": {
+        "academicType": "ug_teaching",
+        "roles": [
+          "presented"
+        ]
+      },
+      "source": "nmc_curriculum",
+      "clause": "J. Log book",
+      "quote": "Components of good teaching practices must be assessed in all academic activity conducted by the PG student and at least two sessions dedicated for assessment of teaching skills must be conducted every year of the PG program.",
+      "note": "The curriculum writes the number as a word: \"at least two sessions ... every year\" — target 2 per year."
+    },
+    {
+      "id": "rev22_research_methodology_6m",
+      "kind": "certification",
+      "label": "Research Methodology course — within six months of the batch commencing",
+      "target": 1,
+      "per": "course",
+      "dueByMonths": 6,
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "research_methodology"
+      },
+      "source": "nmc_curriculum",
+      "clause": "K. Course in Research Methodology",
+      "quote": "All postgraduate students shall complete an online course in Research Methodology within six months of the commencement of the batch and generate the online certificate on successful completion of the course.",
+      "note": "STRICTER than PGMER-2023 5.2(xi)(a), which says 'first year'. Both are shown; the module never silently replaces the regulation's deadline with the curriculum's."
+    },
+    {
+      "id": "rev22_additional_project",
+      "kind": "research",
+      "label": "One additional research project besides the thesis",
+      "target": 1,
+      "per": "course",
+      "match": {
+        "subtype": "additional_project"
+      },
+      "source": "nmc_curriculum",
+      "clause": "H. Teaching research skills",
+      "quote": "In addition to the thesis project, every postgraduate trainee shall participate in at least one additional research project that may be started or already ongoing in the department. It is preferable that this project will be in an area different from the thesis work."
+    },
+    {
+      "id": "rev22_scientific_meeting",
+      "kind": "academic",
+      "label": "Accredited scientific meetings (CME, symposia, conferences)",
+      "target": 1,
+      "per": "year",
+      "match": {
+        "academicType": "cme_conference"
+      },
+      "source": "nmc_curriculum",
+      "clause": "Other aspects",
+      "quote": "Trainees shall attend accredited scientific meetings (CME, symposia, and conferences) at least once a year."
+    },
+    {
+      "id": "rev22_exam_conference_presentations",
+      "kind": "research",
+      "label": "At least two presentations at a national-level conference",
+      "target": 2,
+      "per": "course",
+      "mandatoryForExam": true,
+      "match": {
+        "subtype": "conference_paper"
+      },
+      "source": "nmc_curriculum",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "At least two presentations at national level conference. One research paper should be published / accepted in an indexed journal.",
+      "note": "EXCEEDS PGMER-2023 5.2(x), which requires one poster OR one paper read OR one first-author publication. Both are evaluated and reported separately."
+    },
+    {
+      "id": "rev22_exam_indexed_publication",
+      "kind": "research",
+      "label": "One research paper published / accepted in an indexed journal",
+      "target": 1,
+      "per": "course",
+      "mandatoryForExam": true,
+      "match": {
+        "subtype": "publication"
+      },
+      "source": "nmc_curriculum",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "One research paper should be published / accepted in an indexed journal. (It is suggested that the local or University Review committee assess the work sent for publication)."
+    },
+    {
+      "id": "rev22_logbook_submitted",
+      "kind": "meta",
+      "label": "Log book of work done, incl. rotation postings, departmental presentations and internal assessment reports, submitted",
+      "target": 1,
+      "per": "course",
+      "mandatoryForExam": true,
+      "engine": "report:portfolio",
+      "source": "nmc_curriculum",
+      "clause": "Summative assessment — essential pre-requisites",
+      "quote": "Log book of work done during the training period including rotation postings, departmental presentations, and internal assessment reports should be submitted."
+    }
+  ]
+}

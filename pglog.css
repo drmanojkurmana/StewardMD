@@ -1,0 +1,351 @@
+/* pglog.css — NMC Logbook (PG digital logbook).
+ *
+ * ALL selectors are scoped to #pglogRoot / .pgl-* — additive, zero global leakage (the same gate
+ * SURGX / ThoreX / CliniX use). Reuses StewardMD design tokens (--rds-*) so light/dark and every
+ * accent theme flow through with no extra CSS. Module-local --pgl-* tokens are defined ON
+ * #pglogRoot only, never on body or :root.
+ *
+ * Flag-gated by smd_pglog via pglog.js; when off, #pglogRoot is never created, so none of this
+ * applies. The CSS scope IS part of the feature gate.
+ *
+ * DESIGN INTENT — a training record, not a government form and not a game.
+ *   · ONE domain hue (indigo-slate). The accent is used for structure, never for decoration.
+ *   · PROVENANCE IS A VISIBLE MATERIAL. An NMC requirement and an institutional target must never
+ *     look alike, so .pgl-prov carries a different weight, colour and border per source grade.
+ *     This is the single most load-bearing visual rule in the module.
+ *   · VERIFICATION STATE IS ALWAYS ON THE ROW. A resident should never have to open an entry to
+ *     learn whether it counts. Four states, four distinct treatments, colour never alone.
+ *   · No streaks, no badges, no celebration. Progress bars show position, not achievement.
+ *   · One-handed: the primary action sits in a thumb-reachable bar, and the quick-add is three
+ *     taps from the home screen.
+ */
+
+#pglogRoot {
+  /* Aliases with literal fallbacks so the module still renders if the design system is absent. */
+  --pgl-primary: var(--rds-primary, #0F766E);
+  --pgl-ink-hue: #26324A;                       /* the module's domain hue: record-keeping slate */
+  --pgl-hue-soft: #EEF1F7;
+  --pgl-bg: var(--rds-bg, #F5F7FA);
+  --pgl-surface: var(--rds-surface, #FFFFFF);
+  --pgl-surface-2: var(--rds-surface-2, #EFF2F6);
+  --pgl-ink: var(--rds-ink, #101828);
+  --pgl-muted: var(--rds-muted, #5B6779);
+  --pgl-faint: var(--rds-faint, #8B97A8);
+  --pgl-line: var(--rds-line, #E3E8EF);
+  --pgl-ok: var(--sev-stable-fg, #1B7F5C);
+  --pgl-ok-bg: var(--sev-stable-bg, #E7F5EF);
+  --pgl-warn: var(--sev-warning-fg, #92620A);
+  --pgl-warn-bg: var(--sev-warning-bg, #FDF3E2);
+  --pgl-bad: var(--sev-critical-fg, #B42332);
+  --pgl-bad-bg: var(--sev-critical-bg, #FCEDEF);
+  --pgl-r: var(--rds-r, 16px);
+  --pgl-r-ctl: var(--rds-r-ctl, 12px);
+  --pgl-ease: cubic-bezier(.2, .7, .2, 1);
+  --pgl-sans: var(--rds-font, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif);
+  --pgl-mono: var(--rds-mono, "IBM Plex Mono", ui-monospace, monospace);
+
+  position: fixed;
+  inset: 0;
+  z-index: 1258;
+  display: none;
+  flex-direction: column;
+  background: var(--pgl-bg);
+  color: var(--pgl-ink);
+  font-family: var(--pgl-sans);
+  -webkit-font-smoothing: antialiased;
+}
+#pglogRoot.pgl-open { display: flex; }
+html.pgl-lock, html.pgl-lock body { overflow: hidden; }
+
+#pglogRoot .pgl-scroll {
+  flex: 1 1 auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(88px + env(safe-area-inset-bottom, 0px));
+}
+#pglogRoot .pgl-wrap { padding: 0 16px 20px; max-width: 780px; margin: 0 auto; }
+
+/* ── chrome ───────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-head {
+  position: sticky; top: 0; z-index: 4;
+  display: flex; align-items: center; gap: 10px;
+  padding: calc(10px + env(safe-area-inset-top, 0px)) 12px 10px;
+  background: color-mix(in srgb, var(--pgl-bg) 88%, transparent);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  border-bottom: 1px solid var(--pgl-line);
+}
+#pglogRoot .pgl-hbtn {
+  flex: 0 0 auto; width: 38px; height: 38px; display: grid; place-items: center;
+  border: 0; border-radius: 50%; background: var(--pgl-surface-2); color: var(--pgl-ink);
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#pglogRoot .pgl-hbtn:active { transform: scale(.94); }
+#pglogRoot .pgl-htitle { flex: 1 1 auto; min-width: 0; font-weight: 700; font-size: 17px; line-height: 1.2; }
+#pglogRoot .pgl-hsub { display: block; font-size: 11px; font-weight: 600; letter-spacing: .04em;
+  text-transform: uppercase; color: var(--pgl-faint); }
+
+/* ── the provenance badge — the module's most important visual rule ───────────
+ * An NMC requirement and an institutional target must never be mistaken for each other. Grade is
+ * carried by weight + colour + border style TOGETHER, so the distinction survives greyscale,
+ * colour-blindness and a photocopied printout. */
+#pglogRoot .pgl-prov {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 10.5px; font-weight: 700; letter-spacing: .02em;
+  padding: 2px 7px; border-radius: 999px; white-space: nowrap;
+}
+#pglogRoot .pgl-prov[data-src="nmc_regulation"] { color: #1D3A8A; background: #E8EEFB; border: 1px solid #C3D2F4; }
+#pglogRoot .pgl-prov[data-src="nmc_curriculum"] { color: #0F5F57; background: #E4F3F0; border: 1px solid #BFE2DB; }
+#pglogRoot .pgl-prov[data-src="nmc_faq_secondary"] { color: #7A4E06; background: var(--pgl-warn-bg); border: 1px dashed #E0BE7A; }
+#pglogRoot .pgl-prov[data-src="institution"] { color: var(--pgl-muted); background: transparent; border: 1px dashed var(--pgl-line); font-weight: 600; }
+#pglogRoot .pgl-prov[data-src="unspecified"] { color: var(--pgl-faint); background: transparent; border: 1px dotted var(--pgl-line); font-weight: 600; font-style: italic; }
+#pglogRoot .pgl-clause { font-family: var(--pgl-mono); font-size: 10.5px; color: var(--pgl-faint); }
+#pglogRoot .pgl-quote {
+  margin: 8px 0 0; padding: 8px 10px; border-left: 3px solid var(--pgl-line);
+  background: var(--pgl-surface-2); border-radius: 0 8px 8px 0;
+  font-size: 12px; line-height: 1.5; color: var(--pgl-muted);
+}
+
+/* ── verification state — always on the row, never colour alone ────────────── */
+#pglogRoot .pgl-vstate {
+  display: inline-flex; align-items: center; gap: 4px;
+  font-size: 11px; font-weight: 700; padding: 2px 8px; border-radius: 999px; white-space: nowrap;
+}
+#pglogRoot .pgl-vstate[data-s="verified"]  { color: var(--pgl-ok);   background: var(--pgl-ok-bg); }
+#pglogRoot .pgl-vstate[data-s="submitted"] { color: var(--pgl-warn); background: var(--pgl-warn-bg); }
+#pglogRoot .pgl-vstate[data-s="returned"]  { color: var(--pgl-bad);  background: var(--pgl-bad-bg); }
+#pglogRoot .pgl-vstate[data-s="draft"]     { color: var(--pgl-muted); background: var(--pgl-surface-2); }
+#pglogRoot .pgl-vstate[data-s="queued"]    { color: var(--pgl-muted); background: var(--pgl-surface-2); border: 1px dashed var(--pgl-line); }
+#pglogRoot .pgl-vstate .material-symbols-rounded { font-size: 14px; }
+
+/* ── cards + lists ────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-card {
+  background: var(--pgl-surface); border: 1px solid var(--pgl-line);
+  border-radius: var(--pgl-r); padding: 14px; margin: 12px 0;
+}
+#pglogRoot .pgl-card.tight { padding: 10px 12px; }
+#pglogRoot .pgl-card h3 { margin: 0 0 8px; font-size: 14px; font-weight: 700; letter-spacing: -.01em; }
+#pglogRoot .pgl-sec-title {
+  display: flex; align-items: baseline; justify-content: space-between; gap: 10px;
+  margin: 20px 0 6px; font-size: 12px; font-weight: 700; letter-spacing: .06em;
+  text-transform: uppercase; color: var(--pgl-faint);
+}
+#pglogRoot .pgl-row {
+  display: flex; align-items: flex-start; gap: 10px; width: 100%; text-align: left;
+  padding: 11px 12px; border: 1px solid var(--pgl-line); border-radius: var(--pgl-r-ctl);
+  background: var(--pgl-surface); margin-bottom: 8px; cursor: pointer;
+  -webkit-tap-highlight-color: transparent; color: inherit; font: inherit;
+}
+#pglogRoot .pgl-row:active { background: var(--pgl-surface-2); }
+#pglogRoot .pgl-row-main { flex: 1 1 auto; min-width: 0; }
+#pglogRoot .pgl-row-t { font-weight: 650; font-size: 14px; line-height: 1.3; }
+#pglogRoot .pgl-row-s { font-size: 12px; color: var(--pgl-muted); margin-top: 2px;
+  display: flex; flex-wrap: wrap; gap: 4px 8px; align-items: center; }
+#pglogRoot .pgl-row-ic { flex: 0 0 auto; width: 34px; height: 34px; border-radius: 10px;
+  display: grid; place-items: center; background: var(--pgl-hue-soft); color: var(--pgl-ink-hue); }
+#pglogRoot .pgl-row-ic .material-symbols-rounded { font-size: 19px; }
+
+/* ── progress ──────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-bar { height: 6px; border-radius: 999px; background: var(--pgl-surface-2); overflow: hidden; margin-top: 6px; }
+#pglogRoot .pgl-bar i { display: block; height: 100%; border-radius: 999px; background: var(--pgl-primary);
+  transition: width .5s var(--pgl-ease); }
+#pglogRoot .pgl-bar[data-state="behind"] i { background: var(--pgl-bad); }
+#pglogRoot .pgl-bar[data-state="slightly_behind"] i { background: var(--pgl-warn); }
+#pglogRoot .pgl-bar[data-state="met"] i { background: var(--pgl-ok); }
+/* A requirement with no NMC number gets NO bar — a bar implies a denominator that does not exist. */
+#pglogRoot .pgl-count { font-family: var(--pgl-mono); font-size: 13px; font-weight: 700; }
+#pglogRoot .pgl-count small { font-family: var(--pgl-sans); font-weight: 600; color: var(--pgl-faint); }
+
+#pglogRoot .pgl-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(88px, 1fr)); gap: 8px; }
+#pglogRoot .pgl-stat { background: var(--pgl-surface); border: 1px solid var(--pgl-line);
+  border-radius: var(--pgl-r-ctl); padding: 10px; text-align: center; }
+#pglogRoot .pgl-stat b { display: block; font-size: 22px; font-weight: 750; letter-spacing: -.02em; line-height: 1.1; }
+#pglogRoot .pgl-stat span { display: block; font-size: 10.5px; color: var(--pgl-faint); margin-top: 3px;
+  font-weight: 600; letter-spacing: .02em; }
+
+/* The weekly cadence strip — PGMER-2023 5.2(v). One cell per ISO week, most recent last. */
+#pglogRoot .pgl-weeks { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 8px; }
+#pglogRoot .pgl-weeks i { width: 11px; height: 11px; border-radius: 3px; background: var(--pgl-surface-2);
+  border: 1px solid var(--pgl-line); }
+#pglogRoot .pgl-weeks i[data-l="1"] { background: var(--pgl-primary); border-color: transparent; }
+#pglogRoot .pgl-weeks i[data-l="0"] { background: var(--pgl-bad-bg); border-color: color-mix(in srgb, var(--pgl-bad) 30%, transparent); }
+
+/* ── forms ────────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-field { margin: 12px 0; }
+#pglogRoot .pgl-field > label { display: block; font-size: 12px; font-weight: 700; color: var(--pgl-muted); margin-bottom: 5px; }
+#pglogRoot .pgl-field .hint { font-size: 11.5px; color: var(--pgl-faint); margin-top: 4px; line-height: 1.4; }
+#pglogRoot input[type="text"], #pglogRoot input[type="date"], #pglogRoot input[type="number"],
+#pglogRoot select, #pglogRoot textarea {
+  width: 100%; box-sizing: border-box; padding: 11px 12px; font: inherit; font-size: 15px;
+  color: var(--pgl-ink); background: var(--pgl-surface);
+  border: 1px solid var(--pgl-line); border-radius: var(--pgl-r-ctl); -webkit-appearance: none; appearance: none;
+}
+#pglogRoot select { background-image: none; }
+#pglogRoot textarea { min-height: 86px; resize: vertical; line-height: 1.45; }
+#pglogRoot input:focus, #pglogRoot select:focus, #pglogRoot textarea:focus {
+  outline: 2px solid color-mix(in srgb, var(--pgl-primary) 45%, transparent); outline-offset: 1px; border-color: var(--pgl-primary);
+}
+#pglogRoot .pgl-err { color: var(--pgl-bad); font-size: 12px; font-weight: 600; margin-top: 4px; }
+#pglogRoot .pgl-field.bad input, #pglogRoot .pgl-field.bad select, #pglogRoot .pgl-field.bad textarea { border-color: var(--pgl-bad); }
+
+/* Segmented chips — the role ladder and the kind picker. Big tap targets, one-handed. */
+#pglogRoot .pgl-chips { display: flex; flex-wrap: wrap; gap: 6px; }
+#pglogRoot .pgl-chip {
+  padding: 9px 13px; border-radius: 999px; border: 1px solid var(--pgl-line);
+  background: var(--pgl-surface); color: var(--pgl-ink); font-size: 13.5px; font-weight: 600;
+  cursor: pointer; -webkit-tap-highlight-color: transparent; min-height: 38px;
+}
+#pglogRoot .pgl-chip[aria-pressed="true"] {
+  background: var(--pgl-ink-hue); border-color: var(--pgl-ink-hue); color: #fff;
+}
+#pglogRoot .pgl-chip:active { transform: scale(.97); }
+
+#pglogRoot .pgl-btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 6px;
+  padding: 12px 18px; min-height: 46px; border: 0; border-radius: var(--pgl-r-ctl);
+  background: var(--pgl-primary); color: #fff; font: inherit; font-size: 15px; font-weight: 650;
+  cursor: pointer; -webkit-tap-highlight-color: transparent;
+}
+#pglogRoot .pgl-btn[disabled] { opacity: .45; cursor: default; }
+#pglogRoot .pgl-btn:active:not([disabled]) { transform: scale(.98); }
+#pglogRoot .pgl-btn.ghost { background: var(--pgl-surface); color: var(--pgl-ink); border: 1px solid var(--pgl-line); }
+#pglogRoot .pgl-btn.danger { background: var(--pgl-bad); }
+#pglogRoot .pgl-btn.wide { width: 100%; }
+#pglogRoot .pgl-btnrow { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 14px; }
+#pglogRoot .pgl-btnrow .pgl-btn { flex: 1 1 140px; }
+
+/* Thumb-reachable action bar. The primary action of a screen lives here, never at the top. */
+#pglogRoot .pgl-actionbar {
+  position: sticky; bottom: 0; z-index: 3;
+  display: flex; gap: 8px; padding: 10px 16px calc(10px + env(safe-area-inset-bottom, 0px));
+  background: color-mix(in srgb, var(--pgl-bg) 92%, transparent);
+  backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px);
+  border-top: 1px solid var(--pgl-line);
+  margin: 16px 0 0;
+  /* NO negative side margins. The bar is a direct child of the scroll host, so a -16px pull would
+     put it 16px past the viewport on each side and make the whole page scroll horizontally — which
+     is exactly what the headless test caught. box-sizing keeps the padding inside the width. */
+  box-sizing: border-box;
+  width: 100%;
+}
+#pglogRoot .pgl-actionbar .pgl-btn { flex: 1 1 auto; }
+
+/* ── states ───────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-state { text-align: center; padding: 46px 24px; color: var(--pgl-muted); }
+#pglogRoot .pgl-state .ic { width: 54px; height: 54px; margin: 0 auto 12px; border-radius: 16px;
+  display: grid; place-items: center; background: var(--pgl-surface-2); color: var(--pgl-faint); }
+#pglogRoot .pgl-state .ic .material-symbols-rounded { font-size: 28px; }
+#pglogRoot .pgl-state .t { font-size: 16px; font-weight: 700; color: var(--pgl-ink); }
+#pglogRoot .pgl-state .s { font-size: 13.5px; margin-top: 6px; line-height: 1.5; }
+#pglogRoot .pgl-state .pgl-btn { margin-top: 16px; }
+#pglogRoot .pgl-skel i { display: block; height: 62px; border-radius: var(--pgl-r-ctl);
+  background: linear-gradient(90deg, var(--pgl-surface-2) 25%, var(--pgl-surface) 50%, var(--pgl-surface-2) 75%);
+  background-size: 200% 100%; animation: pglShim 1.3s linear infinite; margin-bottom: 8px; }
+@keyframes pglShim { to { background-position: -200% 0; } }
+
+/* ── banners ──────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-banner {
+  display: flex; gap: 9px; align-items: flex-start;
+  padding: 11px 13px; border-radius: var(--pgl-r-ctl); font-size: 12.5px; line-height: 1.5;
+  margin: 12px 0; border: 1px solid transparent;
+}
+#pglogRoot .pgl-banner .material-symbols-rounded { font-size: 18px; flex: 0 0 auto; margin-top: 1px; }
+#pglogRoot .pgl-banner[data-t="info"] { background: var(--pgl-hue-soft); color: var(--pgl-ink-hue); border-color: #D6DEEE; }
+#pglogRoot .pgl-banner[data-t="warn"] { background: var(--pgl-warn-bg); color: var(--pgl-warn); border-color: #EBD3A2; }
+#pglogRoot .pgl-banner[data-t="bad"] { background: var(--pgl-bad-bg); color: var(--pgl-bad); border-color: #F0C2C8; }
+#pglogRoot .pgl-banner[data-t="ai"] { background: var(--pgl-surface-2); color: var(--pgl-muted); border-style: dashed; border-color: var(--pgl-line); }
+
+/* ── reports ──────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-report { font-size: 13px; }
+#pglogRoot .pgl-rep-head h1 { font-size: 19px; margin: 0 0 2px; }
+#pglogRoot .pgl-rep-sub { color: var(--pgl-muted); margin: 0 0 12px; font-size: 13px; }
+#pglogRoot .pgl-rep-meta { display: grid; grid-template-columns: max-content 1fr; gap: 3px 12px;
+  margin: 0 0 14px; font-size: 12px; }
+#pglogRoot .pgl-rep-meta dt { color: var(--pgl-faint); }
+#pglogRoot .pgl-rep-meta dd { margin: 0; font-weight: 650; }
+#pglogRoot .pgl-rep-sec { margin: 18px 0; }
+#pglogRoot .pgl-rep-sec h2 { font-size: 13.5px; margin: 0 0 6px; }
+#pglogRoot .pgl-rep-divider { margin: 26px 0 10px; font-size: 15px; background: var(--pgl-surface-2);
+  padding: 7px 10px; border-radius: 8px; }
+/* Wide tables scroll inside their own container — the page body must never scroll horizontally. */
+#pglogRoot .pgl-rep-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--pgl-line); border-radius: 10px; }
+#pglogRoot .pgl-rep-scroll table { border-collapse: collapse; width: 100%; font-size: 11.5px; }
+#pglogRoot .pgl-rep-scroll th, #pglogRoot .pgl-rep-scroll td {
+  border-bottom: 1px solid var(--pgl-line); padding: 6px 8px; text-align: left; vertical-align: top; white-space: nowrap; }
+#pglogRoot .pgl-rep-scroll th { background: var(--pgl-surface-2); font-weight: 700; position: sticky; top: 0; }
+#pglogRoot .pgl-rep-note, #pglogRoot .pgl-rep-clause { font-size: 11.5px; color: var(--pgl-muted); margin: 7px 0 0; line-height: 1.5; }
+#pglogRoot .pgl-rep-prov { font-size: 11px; font-weight: 700; color: var(--pgl-primary); margin: 0 0 6px; }
+#pglogRoot .pgl-rep-verif { background: var(--pgl-surface); border: 1px solid var(--pgl-line);
+  border-radius: var(--pgl-r-ctl); padding: 11px 13px; font-size: 12.5px; }
+#pglogRoot .pgl-rep-verif h2 { font-size: 12px; text-transform: uppercase; letter-spacing: .05em; color: var(--pgl-faint); }
+#pglogRoot .pgl-rep-verif p { margin: 4px 0; }
+#pglogRoot .pgl-rep-empty { color: var(--pgl-faint); font-size: 12.5px; font-style: italic; }
+#pglogRoot .pgl-rep-foot { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--pgl-line);
+  font-size: 11px; color: var(--pgl-faint); line-height: 1.5; }
+
+/* ── audit trail ──────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-audit { list-style: none; margin: 8px 0 0; padding: 0 0 0 16px; border-left: 2px solid var(--pgl-line); }
+#pglogRoot .pgl-audit li { position: relative; padding: 0 0 12px; font-size: 12.5px; }
+#pglogRoot .pgl-audit li::before { content: ""; position: absolute; left: -21px; top: 5px;
+  width: 8px; height: 8px; border-radius: 50%; background: var(--pgl-faint); }
+#pglogRoot .pgl-audit li[data-a="verify"]::before { background: var(--pgl-ok); }
+#pglogRoot .pgl-audit li[data-a="return"]::before { background: var(--pgl-bad); }
+#pglogRoot .pgl-audit li[data-a="amend"]::before { background: var(--pgl-warn); }
+#pglogRoot .pgl-audit b { font-weight: 700; }
+#pglogRoot .pgl-audit .when { color: var(--pgl-faint); font-family: var(--pgl-mono); font-size: 11px; }
+#pglogRoot .pgl-audit .why { color: var(--pgl-muted); display: block; margin-top: 2px; }
+
+/* ── faculty review ───────────────────────────────────────────────────────── */
+#pglogRoot .pgl-scale { display: flex; gap: 5px; flex-wrap: wrap; }
+#pglogRoot .pgl-scale button {
+  flex: 1 1 40px; min-width: 40px; min-height: 42px; border-radius: 10px; border: 1px solid var(--pgl-line);
+  background: var(--pgl-surface); font: inherit; font-weight: 700; font-size: 15px; cursor: pointer; color: var(--pgl-ink);
+}
+#pglogRoot .pgl-scale button[aria-pressed="true"] { background: var(--pgl-ink-hue); color: #fff; border-color: var(--pgl-ink-hue); }
+#pglogRoot .pgl-crit { padding: 12px 0; border-bottom: 1px solid var(--pgl-line); }
+#pglogRoot .pgl-crit:last-child { border-bottom: 0; }
+#pglogRoot .pgl-crit .lbl { font-size: 13.5px; font-weight: 650; }
+#pglogRoot .pgl-crit .hint { font-size: 11.5px; color: var(--pgl-faint); margin: 2px 0 8px; line-height: 1.4; }
+#pglogRoot .pgl-anchor { font-size: 11.5px; color: var(--pgl-muted); margin-top: 6px; min-height: 16px; }
+
+/* ── filters ──────────────────────────────────────────────────────────────── */
+#pglogRoot .pgl-filters { display: flex; gap: 6px; overflow-x: auto; padding: 2px 0 8px;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+#pglogRoot .pgl-filters::-webkit-scrollbar { display: none; }
+#pglogRoot .pgl-filters .pgl-chip { flex: 0 0 auto; padding: 7px 12px; min-height: 34px; font-size: 12.5px; }
+
+/* ── dark mode ────────────────────────────────────────────────────────────── */
+@media (prefers-color-scheme: dark) {
+  #pglogRoot {
+    --pgl-hue-soft: #1C2231;
+    --pgl-ink-hue: #A9BBDD;
+    --pgl-bg: var(--rds-bg, #0C1017);
+    --pgl-surface: var(--rds-surface, #141A24);
+    --pgl-surface-2: var(--rds-surface-2, #1B2331);
+    --pgl-ink: var(--rds-ink, #E7ECF3);
+    --pgl-muted: var(--rds-muted, #9AA7B8);
+    --pgl-faint: var(--rds-faint, #6B7789);
+    --pgl-line: var(--rds-line, #26303F);
+  }
+  #pglogRoot .pgl-prov[data-src="nmc_regulation"] { color: #A9C0F5; background: #15203A; border-color: #27395F; }
+  #pglogRoot .pgl-prov[data-src="nmc_curriculum"] { color: #7FD4C6; background: #10251F; border-color: #1E4038; }
+  #pglogRoot .pgl-chip[aria-pressed="true"] { background: #38507C; border-color: #38507C; }
+  #pglogRoot .pgl-scale button[aria-pressed="true"] { background: #38507C; border-color: #38507C; }
+}
+
+/* ── motion ───────────────────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  #pglogRoot .pgl-bar i { transition: none; }
+  #pglogRoot .pgl-skel i { animation: none; }
+  #pglogRoot .pgl-chip:active, #pglogRoot .pgl-btn:active, #pglogRoot .pgl-hbtn:active { transform: none; }
+}
+
+/* ── the ui-v2 native shell ──────────────────────────────────────────────────
+ * The native app runs body.ui-v2, whose home.js rules carry !important and outrank component CSS
+ * (see vault: ui-v2-native-css-override). Re-assert the two properties that actually break the
+ * overlay there — position:fixed and the module background — at the same specificity. */
+body.ui-v2 #pglogRoot { position: fixed !important; inset: 0 !important; background: var(--pgl-bg) !important; }
+body.ui-v2 #pglogRoot .pgl-btn { color: #fff !important; }
+body.ui-v2 #pglogRoot .pgl-btn.ghost { color: var(--pgl-ink) !important; }

@@ -1,0 +1,40 @@
+{
+  "id": "paediatrics",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Paediatrics",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common",
+    "_revised-2022-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Paediatrics (revised)",
+    "publisher": "National Medical Commission",
+    "year": 2022,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2022/revised/MD_Peadiatrics_( revised ).pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 1,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "pd_life_support",
+      "kind": "certification",
+      "label": "BCLS, Neonatal Resuscitation, Advanced Paediatric Life Support and ACLS",
+      "requiresEvidence": true,
+      "match": {
+        "subtype": "bcls_acls"
+      },
+      "clause": "Other aspects",
+      "quote": "The Postgraduate trainees should undergo training in Basic Cardiac Life Support (BCLS), Neonatal Resuscitation, Advanced Pediatric Life Support and Adult Advanced Cardiac Life Support (ACLS).",
+      "note": "WIDER than PGMER-2023 5.2(xi)(c) (BCLS + ACLS only) — paediatrics adds NRP and APLS."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No procedure counts in the MD Paediatrics guidelines.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}
