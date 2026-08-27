@@ -40,6 +40,13 @@ account removed at day 7 (sweep is built but OFF, see [[Flags]]). Guest: 300 s p
 (`app.js` + `account.js`, surfaced by `guest-timer.js`). Pending manual review counts as full access.
 Client mirror is `account.js` `SMD_PRO`, seeded from `smd_pro_last:<uid>` rather than `true`.
 
+**Never let a Pro gate fail silently.** Route every refusal through `pro-notice.js`
+(`SMD_PRO_NOTICE.handle(body, feature)` for a 402, `.show(feature)` for a client-side gate,
+`.gate(feature, fn)` instead of a no-op). The server's 402 carries `reason` via
+`needsProBody()`, and the explainer picks verify-vs-subscribe from it: an unverified doctor
+must never be shown a price, because verification unlocks it free. `openPaywall()` self-bounces
+for the unverified/pending reasons, so no call site can open the wrong door.
+
 ## Gotchas
 - **Never cache the ID without its uid.** Now that it is minted for everyone, sign-out → sign-in as
   another user happens in one page lifetime; a uid-less cache hands account B account A's ID, and it

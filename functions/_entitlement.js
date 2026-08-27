@@ -204,8 +204,40 @@ export async function proFromRequest(env, request) {
 }
 
 // Hard gate for Pro-only server features (Ward Sync sign-in, Lab Watch, cross-device case sync).
-// { ok:true } when allowed; the caller replies 402 { needsPro:true } when ok is false.
+// { ok:true } when allowed; the caller replies needsProBody() with 402 when ok is false.
+//
+// It now also reports WHY. "You need Pro" is the wrong thing to tell an unverified doctor: what
+// they need is to upload a certificate, and sending them to a payment sheet instead reads as the
+// app being broken. The reason travels to the client so the client can offer the right button.
 export async function requirePro(env, request) {
-  const { pro, uid } = await proFromRequest(env, request);
-  return { ok: !!pro, pro: !!pro, uid };
+  const { pro, uid, claims } = await proFromRequest(env, request);
+  const st = entitlementState(env, claims || {});
+  return {
+    ok: !!pro, pro: !!pro, uid,
+    reason: pro ? null : (st.reason || "none"),
+    verified: !!st.verified,
+    pendingReview: !!st.pendingReview,
+  };
+}
+
+// The one wording of each refusal, so eleven endpoints cannot drift into eleven different answers.
+export function proMessageFor(reason) {
+  if (reason === "unverified") {
+    return "This feature needs a verified medical registration. Verify your NMC or State Medical Council registration to unlock it, free for 7 days.";
+  }
+  if (reason === "verified-week-expired") {
+    return "Your free Pro week has ended. Subscribe to keep using Pro features.";
+  }
+  return "This is a StewardMD Pro feature.";
+}
+
+// The 402 body every Pro-gated endpoint should return. `extra` merges in anything endpoint-specific.
+export function needsProBody(gate, extra) {
+  const g = gate || {};
+  const reason = g.reason || "none";
+  return Object.assign({
+    error: "needs-pro", needsPro: true, reason,
+    verified: !!g.verified, pendingReview: !!g.pendingReview,
+    message: proMessageFor(reason),
+  }, extra || {});
 }

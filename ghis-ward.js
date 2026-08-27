@@ -989,6 +989,10 @@
         .then(function(res) {
           if (res.s === 402 || (res.d && res.d.needsPro)) {
             errEl.textContent = '';
+            // The server now says WHY (unverified / free week over). Let the shared explainer pick
+            // the wording and the button; going straight to the paywall told an unverified doctor
+            // to pay for something verification would have unlocked for free.
+            try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.handle(res.d || {}, 'ward-sync')) return; } catch (e) {}
             try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall('wardsync'); return; } } catch (e) {}
             errEl.textContent = 'Ward Sync is a StewardMD Pro feature.';
             return;

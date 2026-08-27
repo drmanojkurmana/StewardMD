@@ -5,6 +5,47 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · A locked Pro feature must explain itself, with the RIGHT button
+
+**Why this had to ship with the verification gate, not after it.** Enforcing verification turns on a
+brand-new failure mode: features that worked yesterday stop working, and the app's existing answer
+was either silence or "upgrade to Pro". Both are wrong now. Silence reads as a bug, and a paywall
+shown to an unverified doctor takes money for something verification would have unlocked **free**.
+
+**The silence was real, not hypothetical.** `functions/api/cases/[[path]].js` carried the comment
+*"client handles 402 silently"* — a doctor's saved patients simply never appeared on their second
+device and nothing, anywhere, said why. `icu.js` said "Saved on this device" and stopped there.
+
+**Server: every refusal now names its cause.** `requirePro()` returns `{ reason, verified,
+pendingReview }` from `entitlementState`, and the new `needsProBody()` builds the 402 body so eleven
+endpoints cannot drift into eleven different answers. Wired through cases, watch (x2), ghis,
+queue and `_usage.js`. `proMessageFor()` holds the one wording of each case. `_usage.js` reuses the
+`callerVerified` it already had, so a doctor over the free AI allowance who is merely unverified is
+told to verify rather than sold a subscription.
+
+**Client: one explainer, `pro-notice.js` (`SMD_PRO_NOTICE`).** `explain()` is pure, so the wording
+is unit-tested — the wording IS the feature. Four cases:
+
+| State | What they see | Button |
+|---|---|---|
+| not verified | "needs a verified registration ... free for 7 days. This is not a payment." | **Verify my registration** |
+| review pending | "we are reviewing it, you keep full access" | Got it (**no price, ever**) |
+| free week over | "your free Pro week has ended, your saved work is untouched" | See Pro plans |
+| unknown | admits it could not confirm, rather than inventing a cause | Open account |
+
+`openPaywall()` itself now bounces an unverified or pending user to the explainer, so **the paywall
+can no longer be the wrong door** regardless of which call site opens it. No loop: the explainer
+never routes those two reasons back to the paywall.
+
+**Trade-off:** `SMD_PRO_NOTICE` is a fifth place that can render a modal (paywall, AI-limit sheet,
+verify gate, guest bar). Accepted: the alternative is each gate inventing its own wording, which is
+exactly how "upgrade to Pro" ended up being shown to people who could not benefit from it.
+
+**Status:** 11/11 `test/pro-notice.test.mjs` + 15/15 `test/verify-gate.test.mjs`, 15/15
+headless-Chrome `test/run-pro-notice-ui.mjs` (incl. that the unverified button reaches verification
+and not the paywall), full suite 2547/2550 (2 pre-existing `mock.module` failures). See
+[[StewardMD ID]].
+
 ## 2026-08-27 · Pro is an entitlement of a VERIFIED account (three tiers)
 
 **The bug behind the ask.** "The app is not verifying anyone" was true, but not because the gate was

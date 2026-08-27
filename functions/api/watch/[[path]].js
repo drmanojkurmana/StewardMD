@@ -13,7 +13,7 @@
  */
 import { identify } from "../../_fbauth.js";
 import { ownerOK } from "../../_adminauth.js";
-import { requirePro } from "../../_entitlement.js";
+import { requirePro, needsProBody } from "../../_entitlement.js";
 import {
   watchConfigured, saveCred, getCred, getList, addWatch, removeWatch, forget,
   getSeen, setSeen, listWatchUids,
@@ -244,7 +244,8 @@ export async function onRequest(context) {
     return json({ consented: !!cred, watching: list });
   }
   if (method === "POST" && seg === "enable") {
-    if (!(await requirePro(env, request)).ok) return json({ error: "needs-pro", needsPro: true }, 402);   // Lab Watch is Pro
+    const _pg = await requirePro(env, request);
+    if (!_pg.ok) return json(needsProBody(_pg, { feature: "lab-watch" }), 402);   // Lab Watch is Pro
     let b = {}; try { b = await request.json(); } catch (e) {}
     if (b.consent !== true) return json({ error: "consent-required" }, 400);
     if (!b.ghisUserId || !b.ghisPassword) return json({ error: "missing-credentials" }, 400);
@@ -254,7 +255,8 @@ export async function onRequest(context) {
     return json({ ok: true, consented: true, watching: list });
   }
   if (method === "POST" && seg === "add") {
-    if (!(await requirePro(env, request)).ok) return json({ error: "needs-pro", needsPro: true }, 402);   // Lab Watch is Pro
+    const _pg = await requirePro(env, request);
+    if (!_pg.ok) return json(needsProBody(_pg, { feature: "lab-watch" }), 402);   // Lab Watch is Pro
     if (!(await getCred(env, uid))) return json({ error: "not-consented" }, 403);
     let b = {}; try { b = await request.json(); } catch (e) {}
     if (!b.patient || !b.patient.patientId) return json({ error: "missing-patient" }, 400);

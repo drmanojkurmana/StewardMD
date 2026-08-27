@@ -13,7 +13,7 @@
  * so MaiK never breaks purely because metering storage is absent.
  */
 
-import { proFromRequest } from "./_entitlement.js";
+import { proFromRequest, proMessageFor } from "./_entitlement.js";
 import { aiBudgetOn, monthlyCapFor } from "./_aibudget.js";
 import { ownerOK } from "./_adminauth.js";
 import { addAiSpend } from "./_ai_usage.js";   // per-user spend rollup (the cost cap + wallet read it)
@@ -244,7 +244,12 @@ export async function checkQuota(env, request, type, opts) {
     } catch (e) { /* fail-open: keep legacy cap */ }
   }
   if (!exempt && m.tokens >= monthlyCap) {
-    if (!isProCaller) return { ok: false, reason: "needs-pro", needsPro: true, message: PRO_MSG, id };
+    if (!isProCaller) {
+      // callerVerified is already resolved above for the budget cap. Reuse it: "upgrade to Pro"
+      // is the wrong ask for someone whose registration simply is not verified yet.
+      const _r = callerVerified ? "verified-week-expired" : "unverified";
+      return { ok: false, reason: _r, needsPro: true, verified: !!callerVerified, message: proMessageFor(_r), id };
+    }
     return { ok: false, reason: budgetApplied ? "over-budget" : "monthly-tokens", message: QUOTA_MSG, id };
   }
   if (!exempt) {

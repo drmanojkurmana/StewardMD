@@ -17,6 +17,7 @@ import { test } from "node:test";
 import assert from "node:assert/strict";
 import {
   isPro, entitlementState, accessState, verifyRequired, verifiedProDays,
+  needsProBody, proMessageFor,
 } from "../functions/_entitlement.js";
 
 const DAY = 86400000;
@@ -120,4 +121,48 @@ test("flag off restores the old entitlementState contract byte for byte", () => 
   assert.equal(s.pro, true);
   assert.equal(s.source, "launch-promo");
   assert.equal(s.promo, true);
+});
+
+/* ── The refusal has to explain itself ────────────────────────────────────────────────────────
+ * A Pro gate that fails without a reason is indistinguishable from a bug, and "you need Pro" is an
+ * actively WRONG thing to tell an unverified doctor: verification would have unlocked it free. The
+ * reason travels in the 402 body so the client can offer the right button. */
+
+test("the 402 body names the reason, not just the refusal", () => {
+  const gate = { ok: false, pro: false, reason: "unverified", verified: false, pendingReview: false };
+  const b = needsProBody(gate);
+  assert.equal(b.needsPro, true);
+  assert.equal(b.error, "needs-pro", "the key older clients already branch on is preserved");
+  assert.equal(b.reason, "unverified");
+  assert.equal(b.verified, false);
+  assert.ok(b.message.length > 20, "a sentence a doctor can read, not a code");
+});
+
+test("the refusal message tells an unverified doctor to VERIFY, not to pay", () => {
+  const m = proMessageFor("unverified");
+  assert.match(m, /verif/i);
+  assert.match(m, /free for 7 days/i);
+  assert.ok(!/subscri|pay|price/i.test(m), `must not sell: ${m}`);
+
+  const expired = proMessageFor("verified-week-expired");
+  assert.match(expired, /subscribe/i, "once the free week is over, selling IS the honest answer");
+});
+
+test("an unrecognised reason still produces a usable sentence", () => {
+  assert.ok(proMessageFor(undefined).length > 10);
+  assert.ok(needsProBody(null).message.length > 10);
+  assert.equal(needsProBody(null).reason, "none");
+});
+
+test("endpoint-specific fields merge in without losing the reason", () => {
+  const b = needsProBody({ ok: false, reason: "unverified" }, { ok: false, error: "pro_required", feature: "queue-branding" });
+  assert.equal(b.reason, "unverified", "the reason survives an endpoint's legacy shape");
+  assert.equal(b.error, "pro_required", "and the endpoint keeps the key its client expects");
+  assert.equal(b.feature, "queue-branding");
+  assert.equal(b.needsPro, true);
+});
+
+test("a granted gate carries no reason to leak into a message", () => {
+  const b = needsProBody({ ok: true, pro: true, reason: null });
+  assert.equal(b.reason, "none");
 });

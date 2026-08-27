@@ -7543,6 +7543,7 @@
   var MAX_CASES = 10;
   var CASES_API = "/api/cases";
   var _cloud = { enabled: null };   // null = not yet probed; true / false after a call
+  var _cloudNagged = false;         // the full "why" dialog is shown once per session, not per save
   function ownerNow() {
     try { var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
       if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid; } catch (e) {}
@@ -7676,6 +7677,18 @@
     // 2) cloud (best-effort) — server enforces the same MAX_CASES cap
     cloudSave(entry).then(function (res) {
       if (res && res.ok) { _cloud.enabled = true; if (window.toast) toast(found ? "Updated · saved to cloud ☁︎" : "Saved to cloud ☁︎"); }
+      else if (res && res.needsPro) {
+        // "Saved on this device" alone is why cross-device sync reads as broken: the patient just
+        // does not appear on the doctor's other phone and nothing ever says why. Say it, and show
+        // the full explanation ONCE per session rather than on every save.
+        _cloud.enabled = false;
+        if (window.toast) toast((found ? "Updated on this device. " : "Saved on this device. ") +
+          (res.reason === "unverified" ? "Cloud sync unlocks when you verify." : "Cloud sync is a Pro feature."));
+        if (!_cloudNagged) {
+          _cloudNagged = true;
+          try { if (window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("cloud-sync", res); } catch (e) {}
+        }
+      }
       else { if (window.toast) toast(found ? "Updated (saved on this device)" : "Saved on this device"); }
       paint();
     });

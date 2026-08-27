@@ -92,6 +92,9 @@
             go.disabled = false; go.textContent = "Enable alerts";
             if (e && /needs-pro/.test(e.message || "")) {
               close({ ok: false, needsPro: true });
+              // e.body carries the server's reason when SMD_WATCH could attach it; the explainer
+              // falls back to this account's cached entitlement when it could not.
+              try { if (window.SMD_PRO_NOTICE) { SMD_PRO_NOTICE.show("lab-watch", (e && e.body) || null); return; } } catch (x) {}
               try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall("labwatch"); return; } } catch (x) {}
               toast("Lab Watch 24/7 is a StewardMD Pro feature.");
               return;
