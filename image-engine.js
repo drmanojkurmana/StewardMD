@@ -145,7 +145,8 @@
 
   /* ---------------- A/B: Choose Image Engine sheet ---------------- */
   // resolves { engine, remember } | null (cancel)
-  function chooseEngine(kind) {
+  function chooseEngine(kind, opts) {
+    var allowLocal = !(opts && opts.allowLocal === false);
     return new Promise(function (resolve) {
       var sel = getPref();                                   // default from Settings…
       // …but nudge toward the recommendation for this kind if the user has no explicit pref set.
@@ -162,7 +163,7 @@
           '<div class="ie-list" role="radiogroup" aria-label="Image engine">' +
           engineCard("device", sel === "device", kind) +
           engineCard("ai", sel === "ai", kind) +
-          (localVisionReady() ? engineCard("local", sel === "local", kind) : "") +
+          ((allowLocal && localVisionReady()) ? engineCard("local", sel === "local", kind) : "") +
           '</div>' +
           warn +
           '<label class="ie-chk"><input type="checkbox" id="ieRemember"><span>Remember my choice</span></label>' +
@@ -459,6 +460,7 @@
 
   window.SMD_IMAGE_ENGINE = {
     getPref: getPref, setPref: setPref, getConsent: getConsent, setConsent: setConsent,
+    chooseEngine: chooseEngine,
     isPro: isPro, recommendFor: recommendFor, aiAvailable: aiAvailable, deviceOcrAvailable: deviceOcrAvailable,
     ensureCloudConsent: ensureCloudConsent, getConsent: getConsent, setConsent: setConsent,
     process: process, settingsHTML: settingsHTML, wireSettings: wireSettings, openPrivacyModal: openPrivacyModal,
