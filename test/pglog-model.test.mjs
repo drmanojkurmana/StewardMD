@@ -90,6 +90,33 @@ test("INVARIANT 4 — amend preserves the verified original in full and re-opens
   assert.ok(a.history.some((h) => h.action === "amend" && h.from === "verified"));
 });
 
+test("an amend patch cannot RETIRE a verified record, or forge who signed or deleted it", () => {
+  // The two edit paths each kept their own list of un-patchable fields, and they disagreed: applyEdit
+  // pinned `deleted`, amend did not. So {deleted:true} on the amend route retired a VERIFIED, signed
+  // training record — the one thing softDelete() explicitly refuses to do — while naming someone else
+  // as the deleter and stamping itself into a monthly authentication that never covered it.
+  const v = M.verify(M.submit(mkEntry(), "fb:resident-uid", NOW), "fb:faculty-uid", NOW);
+  v.attestedIn = "";
+  const a = M.amend(v, {
+    deleted: true, deletedBy: "fb:someone-else", deletedAt: 9, deleteReason: "forged",
+    attestedIn: "2026-08", verifiedBy: "fb:someone-else", verifiedAt: 9,
+    status: "verified", createdBy: "fb:someone-else", createdAt: 9,
+    id: "other", residentId: "other", orgId: "other", kind: "academic"
+  }, "fb:resident-uid", NOW, "typo in the role");
+
+  assert.equal(a.deleted, false, "a verified record must not be retired by an amend patch");
+  assert.equal(a.deletedBy, "");
+  assert.equal(a.deleteReason, "");
+  assert.equal(a.attestedIn, "", "an entry cannot stamp itself into a monthly authentication");
+  assert.equal(a.verifiedBy, "", "an amend re-opens verification; it cannot pre-fill the signature");
+  assert.equal(a.status, "submitted");
+  assert.equal(a.createdBy, "fb:resident-uid");
+  assert.equal(a.id, v.id);
+  assert.equal(a.residentId, v.residentId);
+  assert.equal(a.orgId, v.orgId);
+  assert.equal(a.kind, v.kind);
+});
+
 test("INVARIANT 5 — delete is soft, needs a reason, and keeps the record", () => {
   const e = mkEntry();
   assert.throws(() => M.softDelete(e, "fb:resident-uid", NOW, ""), /pglog_delete_reason_required/);

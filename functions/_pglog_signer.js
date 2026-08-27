@@ -91,6 +91,11 @@ export async function signerSnapshot(env, actorUid, deps) {
   let claims = null, claimsFailed = false;
   try { claims = await (deps.getUserClaims || getUserClaims)(env, uid); }
   catch (e) { claimsFailed = true; }
+  // getUserClaims() returns {} on an HTTP failure rather than throwing (other callers rely on that
+  // soft return). Taken at face value it made an Identity Toolkit outage look like a definite
+  // "this person is not verified" — which is precisely the confusion the 503 below exists to prevent,
+  // and it would send verified faculty off to re-do their registration during an outage.
+  if (!claims || !Object.keys(claims).length) claimsFailed = true;
   if (claims && claims.verified === true && String(claims.regNo || "").trim()) {
     return {
       uid, regNo: String(claims.regNo).trim(),

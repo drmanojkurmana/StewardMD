@@ -30,6 +30,10 @@
 
   var G = (typeof window !== "undefined") ? window : null;
   function M() { try { return G && G.SMD_PGLOG_MODEL; } catch (e) { return null; } }
+  /* Scrub free text on the way OUT to the model. FAIL CLOSED: if the model module is not loaded we
+   * send nothing rather than send it unscrubbed — a worse suggestion is cheaper than a patient's
+   * name reaching a third-party provider. */
+  function scrub(v) { var m = M(); return (m && m.scrubForAi) ? m.scrubForAi(v) : ""; }
   function C() { try { return G && G.SMD_PGLOG_CURRICULUM; } catch (e) { return null; } }
   function on() { try { return !!(G && G.SMD_PGLOG_FLAGS && G.SMD_PGLOG_FLAGS.bool("smd_pglog_ai")); } catch (e) { return false; } }
   function arr(x) { return Array.isArray(x) ? x : []; }
@@ -96,9 +100,13 @@
       "requirement(s) it satisfies.\n\n" +
       "CHOOSE ONLY FROM THIS LIST. Never invent an id, a requirement, or a regulation.\n" +
       JSON.stringify(allowed) + "\n\n" +
+      // The free-text fields are scrubbed on the way OUT. What is stored stays readable to the
+      // resident and their guide; what leaves the device for a model does not carry a patient's name.
       "THE ENTRY:\n" + JSON.stringify({
-        kind: entry.kind, setting: entry.setting, title: entry.title, topic: entry.topic,
-        procedureText: entry.procedureText, academicType: entry.academicType, subtype: entry.subtype,
+        kind: entry.kind, setting: entry.setting,
+        title: scrub(entry.title), topic: scrub(entry.topic),
+        procedureText: scrub(entry.procedureText),
+        academicType: entry.academicType, subtype: entry.subtype,
         role: entry.role, category: entry.category
       }) + "\n\n" +
       "Reply with JSON only: {\"ids\":[\"id1\",\"id2\"],\"why\":\"one short sentence\"}. " +
@@ -152,7 +160,7 @@
       entries: ctx.summary, weekly: ctx.weekly,
       roleMix: ctx.roleMix, gaps: arr(ctx.gaps).slice(0, 6).map(function (g) { return g.label; }),
       recentActivity: arr(ctx.recent).slice(0, 12).map(function (e) {
-        return { date: e.occurredAt, kind: e.kind, role: e.role, activity: e.title || e.topic || e.procedureText || "" };
+        return { date: e.occurredAt, kind: e.kind, role: e.role, activity: scrub(e.title || e.topic || e.procedureText || "") };
       })
     };
     var prompt =

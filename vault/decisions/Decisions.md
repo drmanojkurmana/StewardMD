@@ -1026,3 +1026,53 @@ stripping the `PGL` prefix — and "PGL" contains an L, which the folder rewrite
 and every hand-typed code returned empty. Order was the whole bug. And the first cut of the
 supervisor-resolution error overwrote `err.message`, which broke the router's error mapping it was
 supposed to feed.
+
+### 2026-08-27, later still — what two security reviewers found, and the rule they both found
+
+Two reviewers (R3 security/privacy, S4 app-security) over the signing + QR surface, independently.
+Four blocking findings. Both reviewers found the same two authorization holes without seeing each
+other's work, which is the part worth keeping: **the module's own comments described boundaries the
+code did not enforce.** A comment is not a control.
+
+**The rule underneath all four:** a boundary defined in two places drifts, and the copy that drifts
+is the one that leaks. Every fix collapses a duplicated definition into one.
+
+- **Every entry QR would have read TAMPERED.** The signing side and the verification side each had
+  their own list of the field names a signature covers, in two different files, and they disagreed
+  twice. Every genuine record would have told the examiner not to rely on it. The tests missed it
+  because both sides were handed a hand-built payload — so the fix is `payloadFor()`, one definition,
+  called at both ends, plus a round-trip test that signs a real entry and verifies its real code.
+  **A signature that cries forgery over honest records is worse than no signature.**
+- **The URL printed on every QR was not served.** `/pglog/v/<code>` is extensionless, so the site
+  gate classified it as an anonymous page view and returned the marketing home page with a 200. The
+  feature existed end to end except for the end the examiner actually touches. Now a server-rendered
+  page (no JavaScript at all — the reader is a stranger on an unknown device, often printing it) plus
+  a middleware pass-through, and a gate regression test so it cannot silently close again.
+- **Any faculty member could sign any resident's entry.** `PGLOG_VERIFY` is an org-wide capability;
+  §5.2(vii) is not an org-wide question — it names "the Post-graduate guide". The gate was asking
+  what a ROLE may do where the regulation asks who a PERSON is to this trainee.
+- **The Academic Cell and the technical admin read every trainee's clinical detail.** The read guard
+  tested the department capability first, and both of those roles hold it too, so they took the HoD
+  branch and the institution-wide → aggregate line below it was dead code. The role definition in
+  `_queue_roles.js` promised the opposite in a comment. Now ordered by named responsibility, with a
+  table-driven test enumerating every role against every relationship — this guard has been wrong
+  twice, so it gets a table rather than another careful reading.
+- **`publicEntry()` was called the privacy boundary and covered entries only.** Assessments (3000
+  characters of feedback about a named trainee, their remediation plan, every criterion score),
+  attestation notes and the raw resident record including the Firebase uid sat next to it,
+  unprojected. A boundary that covers one of four record types is not a boundary.
+- **`amend` could mass-assign `deleted`** and retire a verified, signed training record that
+  `softDelete()` explicitly refuses to touch — while naming someone else as the deleter. The two edit
+  paths kept separate lists of un-patchable fields and disagreed. One `SERVER_OWNED` list now.
+
+Smaller, same spirit: the verification code is a **capability**, not a fact about the record, so it
+no longer goes to an aggregate audience; `getUserClaims()` returning `{}` during an outage no longer
+reads as "this person is not verified"; the rate-limit key no longer falls back to the
+client-supplied `X-Forwarded-For`; `PGLOG_OFF` now covers the public endpoint, because an operator
+flipping a kill switch during an incident should not find the one unauthenticated route still
+serving; Firestore error detail stays in the log; the SMD ID is masked on the public page; and the
+free text posted to the AI endpoint is scrubbed of honorific-led names — the *copy sent out*, not the
+stored text, which stays readable to the resident and their guide.
+
+Not done, and owed before a non-tester release: **these fixes have not themselves been re-reviewed**,
+and `PGLOG_SIGNING_KEY` is not provisioned (so no QR is issued yet — deliberately).

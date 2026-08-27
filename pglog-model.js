@@ -211,6 +211,24 @@
     // scrubbed value comes back as "" rather than as a stub that looks like a real reference.
     return t.replace(/\s{2,}/g, " ").replace(/^[^A-Za-z0-9]+|[^A-Za-z0-9]+$/g, "").trim().slice(0, 32);
   }
+  /* THE COPY THAT LEAVES THE DEVICE. scrubFreeText() deliberately keeps clinical prose, because the
+   * stored title has to stay readable to the resident and their guide — but that same prose is what
+   * gets posted to the AI endpoint, and "Mr Ramesh Kumar, 54M, DKA" is a perfectly ordinary way for a
+   * tired resident to title an entry. sanitizeCaseRef() is too blunt to reuse here: it drops any run
+   * of two alphabetic words, which would also destroy "Diabetic ketoacidosis".
+   *
+   * So this removes what actually carries a name — an honorific and the words that follow it, and a
+   * "Baby of"/"S/o"/"W/o" construction — and leaves the clinical content the model needs. It is
+   * applied ONLY to the copy sent for analysis; nothing stored is changed.
+   */
+  function scrubForAi(v, max) {
+    var t = scrubFreeText(v, max || 300);
+    if (!t) return "";
+    t = t.replace(/\b(?:baby\s+of|s\/o|d\/o|w\/o|c\/o)\s+[A-Za-z]+(?:\s+[A-Za-z]+)?/gi, "[patient]");
+    t = t.replace(/\b(?:mr|mrs|ms|miss|master|smt|shri|sri|dr|md|baby)\.?\s+[A-Za-z]+(?:\s+[A-Za-z]+)?/gi, "[patient]");
+    return t.replace(/\s{2,}/g, " ").trim();
+  }
+
   var AGE_BANDS = ["0-1", "1-5", "5-12", "12-18", "18-30", "30-45", "45-60", "60-75", "75+"];
   function ageBand(v) {
     var t = trim(v);
@@ -641,17 +659,35 @@
    * read, which is the §9.2(c) failure mode with extra steps. The author withdraws it to a draft
    * first (withdraw()), which is visible in history and pulls it out of the verifier's queue.
    * (R1, finding I2.) */
+  /* THE FIELDS NO PATCH MAY EVER SET. Listed ONCE, because the two edit paths each keeping their own
+   * copy of this list is exactly how it went wrong: applyEdit pinned `deleted`, amend did not, so a
+   * PATCH .../amend body of {deleted:true} retired a VERIFIED, signed training record that
+   * softDelete() explicitly refuses to touch — and could name someone else as the deleter, stamp
+   * itself into a monthly authentication that never covered it, and re-point the verification queue.
+   *
+   * Everything here is server-owned: identity, lifecycle, provenance, the signature and the codes
+   * that attest to it. `supervisor` is deliberately NOT here — redirecting a record to a different
+   * guide is a legitimate edit — but the SERVER re-resolves it against the faculty roster, so it
+   * cannot be pointed at somebody who would never receive it.
+   */
+  var SERVER_OWNED = ["id", "kind", "residentId", "programmeId", "orgId",
+    "status", "createdBy", "createdAt", "submittedAt",
+    "verifiedBy", "verifiedAt", "verifiedReg", "verifiedCouncil", "verifiedName",
+    "verifiedRegSource", "verifiedRegCheckedAt", "verifyCode",
+    "history", "revisions", "overflowedRevisions",
+    "deleted", "deletedBy", "deletedAt", "deleteReason",
+    "attestedIn", "returnedAt", "returnedBy"];
+  function pinned(e) {
+    var o = {};
+    for (var i = 0; i < SERVER_OWNED.length; i++) o[SERVER_OWNED[i]] = e[SERVER_OWNED[i]];
+    return o;
+  }
+
   function applyEdit(e, patch, actor, at) {
     if (e.deleted) throw err("pglog_deleted");
     if (e.status === "verified") throw err("pglog_verified_immutable");
     if (e.status === "submitted") throw err("pglog_submitted_withdraw_first");
-    var merged = entry(Object.assign({}, e, patch || {}, {
-      // never patchable from the outside
-      id: e.id, kind: e.kind, residentId: e.residentId, programmeId: e.programmeId, orgId: e.orgId,
-      status: e.status, createdBy: e.createdBy, createdAt: e.createdAt,
-      submittedAt: e.submittedAt, verifiedBy: e.verifiedBy, verifiedAt: e.verifiedAt,
-      history: e.history, revisions: e.revisions, deleted: e.deleted
-    }));
+    var merged = entry(Object.assign({}, e, patch || {}, pinned(e)));
     var out = pushHistory(merged, { at: at, by: actor, action: "edit", from: e.status, to: e.status, reason: changedFields(e, merged).join(",") });
     out.updatedAt = at;
     return out;
@@ -680,10 +716,7 @@
     if (!trim(reason)) throw err("pglog_amend_reason_required");
     var snapshot = clone(e);
     delete snapshot.revisions;                       // revisions are not nested inside revisions
-    var merged = entry(Object.assign({}, e, patch || {}, {
-      id: e.id, kind: e.kind, residentId: e.residentId, programmeId: e.programmeId, orgId: e.orgId,
-      createdBy: e.createdBy, createdAt: e.createdAt, history: e.history, revisions: e.revisions
-    }));
+    var merged = entry(Object.assign({}, e, patch || {}, pinned(e)));
     var out = pushHistory(merged, {
       at: at, by: actor, action: "amend", from: "verified", to: "submitted", reason: clampStr(reason, 500)
     });
@@ -1419,7 +1452,7 @@
     drpMonths: drpMonths, drpDays: drpDays, drpMeetsThreeMonths: drpMeetsThreeMonths, DRP_MIN_DAYS: DRP_MIN_DAYS,
 
     // privacy + dates (exported because the server and the reports use the same ones)
-    sanitizeCaseRef: sanitizeCaseRef, scrubFreeText: scrubFreeText, ageBand: ageBand,
+    sanitizeCaseRef: sanitizeCaseRef, scrubFreeText: scrubFreeText, scrubForAi: scrubForAi, ageBand: ageBand,
     isoDate: isoDate, daysBetween: daysBetween, addDays: addDays, addMonths: addMonths,
     monthKey: monthKey, weekKey: weekKey, weeksBetween: weeksBetween
   };

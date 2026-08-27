@@ -17,9 +17,11 @@
  * 4. Cross-resident reads are projected through publicEntry() — a department or institution view
  *    receives counts and categories, never a case reference or a diagnosis.
  *
- * KILL SWITCH: env PGLOG_OFF=1 returns 404 for everything except /ready. There is no "enabled by
- * env" gate because the data here is per-user and cap-gated — availability is not the control that
- * protects it, authorization is.
+ * KILL SWITCH: env PGLOG_OFF=1 returns 404 for everything except /ready, and 503 for the public
+ * verification endpoint. There is no "enabled by env" gate because the data here is per-user and
+ * cap-gated — availability is not the control that protects it, authorization is. The switch is for
+ * an incident, so it covers the unauthenticated route too; nothing is revoked by flipping it, and
+ * codes verify again when it is flipped back.
  *
  * Routes (all under /api/pglog):
  *   GET    /ready                              -> { ok, enabled, signing }        (unauth probe)
@@ -47,6 +49,7 @@ import { CAPS, can } from "../../_queue_roles.js";
 import { templateFor } from "../../_pglog_templates.js";
 import * as S from "../../_pglog_store.js";
 import * as V from "../../_pglog_verify.js";
+import * as P from "../../_pglog_public.js";
 import M from "../../../pglog-model.js";
 
 const json = (obj, status = 200, extra) => new Response(JSON.stringify(obj), {
@@ -84,116 +87,22 @@ function fail(e) {
     signer_no_registration_number: [403, "Your verified account carries no registration number."],
     signer_unidentified: [401, "Sign in again before signing a logbook record."],
     signer_check_unavailable: [503, "Your registration could not be checked. Nothing was signed."],
+    not_the_named_supervisor: [403, "You are not this resident's guide and you are not named on this entry, so you cannot sign it."],
     supervisor_unresolved: [400, "That supervisor is not on your department's faculty list, so nobody would receive this entry to verify."]
   };
   const k = known[e && e.message];
   if (k) return json({ error: e.message, message: k[1] }, k[0]);
-  if (status) return json({ error: (e && e.message) || "error", message: e && e.userMessage, detail: e && e.detail, errors: e && e.errors }, status);
+  if (status) {
+    // `detail` stays in the LOG, never in the response: for an fs_* error it is 300 characters of the
+    // Firestore REST body (document paths, the project id), and for e403 it is the capability name,
+    // which maps the permission model for free. `errors` is our own validation output and is safe.
+    try { if (e && e.detail) console.warn("[pglog]", e.message, String(e.detail).slice(0, 300)); } catch (_) {}
+    return json({ error: (e && e.message) || "error", message: e && e.userMessage, errors: e && e.errors }, status);
+  }
   try { console.warn("[pglog]", e && e.message, e && e.stack); } catch (_) {}
   return json({ error: "server_error" }, 500);
 }
 
-/* A small fixed-window rate limiter over the KV binding the rest of the app already uses. Fails
- * OPEN on a KV error: a verification lookup is read-only and PHI-free, so refusing every examiner
- * because a cache is down is the worse failure. (The WRITE paths fail closed; this one does not,
- * and the asymmetry is deliberate.) */
-async function rateLimit(env, request, bucket, limit, windowSec) {
-  const store = env.CASES_KV || env.GHIS_KV || null;
-  if (!store) return { ok: true };
-  try {
-    const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "anon";
-    const win = Math.floor(Date.now() / (windowSec * 1000));
-    const key = "pglog:rl:" + bucket + ":" + win + ":" + ip;
-    const cur = Number(await store.get(key)) || 0;
-    if (cur >= limit) return { ok: false, retryAfter: windowSec };
-    await store.put(key, String(cur + 1), { expirationTtl: windowSec * 2 });
-    return { ok: true };
-  } catch (e) { return { ok: true }; }
-}
-
-/* Build the PUBLIC answer for a verification code. Every field here was chosen by asking: is this
- * already on the document the examiner is holding? If not, it does not appear. */
-async function describeVerification(env, rec, code) {
-  const out = {
-    ok: true, code,
-    kind: rec.kind,
-    issuedAt: rec.issuedAt,
-    disclaimer: "StewardMD attests to what it recorded and to the signer's registration as verified " +
-      "against the Indian Medical Register at the time of signing. It does not certify the clinical " +
-      "content, and it is not a determination by the NMC or by any University."
-  };
-  if (rec.revoked) {
-    out.status = "superseded";
-    out.message = "This record was amended after it was signed, so this signature no longer stands. " +
-      "The corrected record carries its own code, and the original is retained in the audit trail.";
-    return out;
-  }
-
-  // Re-derive the digest from the LIVE record. If it no longer matches, the stored document has
-  // changed underneath the signature and we say so plainly.
-  let live = null, payload = null;
-  try {
-    if (rec.kind === "entry") {
-      live = await S.getEntry(env, rec.refId);
-      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId, kind: live.kind,
-        occurredAt: live.occurredAt, role: live.role, verifiedBy: live.verifiedBy,
-        verifiedByReg: live.verifiedReg, verifiedAt: live.verifiedAt,
-        revisionCount: (live.revisions || []).length };
-    } else if (rec.kind === "assessment") {
-      live = await S.getAssessment(env, rec.refId);
-      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId,
-        templateId: live.templateId, outcome: live.outcome, total: live.total, maxTotal: live.maxTotal,
-        assessor: live.assessor, assessorReg: live.assessorReg, assessedAt: live.assessedAt };
-    } else if (rec.kind === "attestation") {
-      live = await S.getAttestation(env, rec.refId);
-      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId,
-        attKind: live.kind, period: live.period, counts: live.counts,
-        attestedBy: live.attestedBy, attestedByReg: live.attestedReg, attestedAt: live.attestedAt };
-    }
-  } catch (e) { live = null; }
-
-  if (!live || !payload) {
-    out.status = "unavailable";
-    out.message = "The record behind this code could not be read just now. Nothing is implied about " +
-      "its validity — try again shortly.";
-    return out;
-  }
-
-  let expect = "";
-  try { expect = await V.digestFor(env, rec.kind, payload); } catch (e) { expect = ""; }
-  if (!expect || !V.digestEqual(expect, rec.digest)) {
-    out.status = "tampered";
-    out.message = "This record does not match what was signed. Do not rely on it. Report it to the " +
-      "institution's Academic Cell.";
-    return out;
-  }
-
-  out.status = "valid";
-  const res = await S.getResident(env, live.residentId).catch(() => null);
-  const prog = res ? await S.getProgramme(env, res.programmeId).catch(() => null) : null;
-  out.resident = res ? { name: res.name, smdId: res.smdId, trainingYear: res.trainingYear } : null;
-  out.programme = prog ? { degree: prog.degree, specialty: prog.specialtyId, name: prog.name } : null;
-  if (rec.kind === "entry") {
-    out.record = { type: "Logbook entry", activity: live.kind, setting: live.setting || "",
-                   role: live.role || "", date: live.occurredAt, amendments: (live.revisions || []).length };
-    out.signedBy = { name: live.verifiedName || "", registrationNo: live.verifiedReg || "",
-                     council: live.verifiedCouncil || "", at: live.verifiedAt,
-                     role: "Verifying faculty (PGMER-2023 §5.2(vii))" };
-  } else if (rec.kind === "assessment") {
-    out.record = { type: "Formative assessment", template: live.templateId, outcome: live.outcome,
-                   score: live.maxTotal ? live.total + " / " + live.maxTotal : "—" };
-    out.signedBy = { name: live.assessorName || "", registrationNo: live.assessorReg || "",
-                     council: live.assessorCouncil || "", at: live.assessedAt, role: "Assessor" };
-  } else {
-    out.record = { type: live.kind === "monthly" ? "Monthly authentication" : "Head of Department certification",
-                   period: live.period || "", entries: (live.counts || {}).total || 0,
-                   verifiedEntries: (live.counts || {}).verified || 0 };
-    out.signedBy = { name: live.attestedName || "", registrationNo: live.attestedReg || "",
-                     council: live.attestedCouncil || "", at: live.attestedAt,
-                     role: "Postgraduate guide (PGMER-2023 §5.2(vii))" };
-  }
-  return out;
-}
 
 // Resolve the caller's role in an org once per request.
 async function context(request, env, orgId) {
@@ -205,36 +114,55 @@ async function context(request, env, orgId) {
   return { uid, actorUid, role: g.role, owner: g.owner, org: g.org, member: g.member };
 }
 
-/* Read guard for one resident's logbook. Returns the AUDIENCE, which decides how much of each entry
- * publicEntry() will hand over — "self" / "verifier" / "hod" see clinical detail, "aggregate" sees
- * counts and categories only.
+/* Read guard for one resident's logbook. Returns the AUDIENCE, which decides how much of each record
+ * publicEntry()/publicAssessment() will hand over — "self" / "verifier" / "hod" see clinical detail,
+ * "aggregate" sees counts and categories only.
  *
- * ASSIGNED MEANS ASSIGNED. The first version of this function had both branches return "verifier",
- * so any faculty member anywhere in the institution could read any resident's case references,
- * diagnoses, remarks and reflections (R1, finding C5). It now falls through to "aggregate", and an
- * entry-scoped read separately upgrades a supervisor who is actually named on THAT entry. */
-async function canReadResident(env, ctx, resident, entry) {
+ * ORDERED BY NAMED RESPONSIBILITY, NOT BY CAPABILITY BREADTH. That distinction is the whole guard,
+ * and it has now been got wrong twice:
+ *
+ *   - The first version had both faculty branches return "verifier", so any faculty member anywhere
+ *     in the institution could read any resident's case references, diagnoses, remarks and
+ *     reflections (R1, finding C5).
+ *   - The fix then tested PGLOG_VIEW_DEPT FIRST. But `academic_cell` and `admin` also hold
+ *     PGLOG_VIEW_DEPT, so they entered the department branch and never reached the
+ *     PGLOG_VIEW_INSTITUTION -> "aggregate" line below it, which was dead code. Institution-wide
+ *     oversight read every trainee's clinical detail, and the role comment in _queue_roles.js
+ *     promising otherwise was simply false.
+ *
+ * So: ask who this person IS to this resident, in order of narrowness, and let breadth of capability
+ * decide only whether they may look at all.
+ */
+export async function canReadResident(env, ctx, resident, entry) {
   if (!resident) throw Object.assign(new Error("not_found"), { status: 404 });
   if (M.sameActor(ctx.actorUid, resident.uid)) return "self";
   const role = ctx.role;
   const mine = S.norm(ctx.actorUid);
-  // A department head sees their own department, not the whole institution.
-  if (can(role, CAPS.PGLOG_VIEW_DEPT)) {
-    if (!resident.departmentId || !ctx.member || !ctx.member.scope ||
-        !(ctx.member.scope.departments || []).length ||
-        (ctx.member.scope.departments || []).indexOf(resident.departmentId) > -1) return "hod";
-    return "aggregate";
-  }
+
+  // 1. NAMED for this resident: their guide or co-guide (the person 5.2(vii) makes responsible for
+  //    this logbook), or the supervisor named on the specific entry being opened.
   if (can(role, CAPS.PGLOG_VIEW_ASSIGNED)) {
-    // Their guide or co-guide: the person §5.2(vii) names as responsible for this logbook.
     if (S.norm(resident.guide) === mine || (resident.coGuides || []).some((g) => S.norm(g) === mine)) return "verifier";
-    // Or the supervisor named on the specific entry being opened — they were asked to verify it.
     if (entry && S.norm(entry.supervisor) === mine) return "verifier";
+  }
+
+  // 2. Head of THIS resident's department. An institution-wide role does not become a department
+  //    head by also holding the department cap, so this requires the resident to actually be IN a
+  //    department and the caller's role to be the departmental one.
+  if (role === "pg_hod" && can(role, CAPS.PGLOG_VIEW_DEPT) && resident.departmentId) {
+    const scope = (ctx.member && ctx.member.scope && ctx.member.scope.departments) || [];
+    // An empty scope means whole-org membership throughout this app (_opd_org.js), so it is honoured
+    // here too — but only for the departmental role, never as a side door for admin or the cell.
+    if (!scope.length || scope.indexOf(resident.departmentId) > -1) return "hod";
     return "aggregate";
   }
-  // Institution-wide oversight (Academic Cell, §5.2(iv) "ensure and monitor") is a completeness
-  // question, so it is deliberately the LAST and narrowest grant.
-  if (can(role, CAPS.PGLOG_VIEW_INSTITUTION)) return "aggregate";
+
+  // 3. Everyone else who may look at all — Academic Cell institution-wide oversight (5.2(iv) "ensure
+  //    and monitor"), a technical admin, a faculty member who is not this resident's guide. Whether
+  //    training is being DELIVERED is a completeness question, and completeness is answered by counts.
+  if (can(role, CAPS.PGLOG_VIEW_INSTITUTION) || can(role, CAPS.PGLOG_VIEW_DEPT) ||
+      can(role, CAPS.PGLOG_VIEW_ASSIGNED)) return "aggregate";
+
   throw Object.assign(new Error("forbidden"), { status: 403, detail: "read_resident" });
 }
 
@@ -260,19 +188,17 @@ export async function onRequest(context_) {
    * no diagnosis, no remarks, no reflection, no uid, no email, no entry ids.
    *
    * Rate-limited per IP: the code space is 80 bits, so enumeration is hopeless, but an unlimited
-   * unauthenticated endpoint is a free amplifier regardless. */
+   * unauthenticated endpoint is a free amplifier regardless.
+   *
+   * INSIDE the kill switch. The header above promises PGLOG_OFF=1 takes the module down, and an
+   * operator flipping it is usually responding to an incident — a kill switch that leaves the one
+   * unauthenticated endpoint serving would be a lie at the worst possible moment. Codes verify again
+   * when the module is re-enabled; nothing is revoked by the switch. */
   if (method === "GET" && seg === "v" && id) {
-    const rl = await rateLimit(env, request, "verify", 30, 60);
-    if (!rl.ok) return json({ error: "rate_limited", message: "Too many lookups. Try again in a minute." }, 429,
-      { "Retry-After": String(rl.retryAfter) });
-    const code = V.normalizeCode(id);
-    if (!code) return json({ ok: false, status: "malformed", message: "That is not a StewardMD verification code." }, 400);
-    let rec = null;
-    try { rec = await V.lookup(env, code); } catch (e) { rec = null; }
-    // A miss and a malformed code answer identically slowly and identically vaguely — there is
-    // nothing to learn from probing.
-    if (!rec) return json({ ok: false, status: "not_found", message: "No signed record carries that code." }, 404);
-    return json(await describeVerification(env, rec, code));
+    if (!enabled(env)) return json({ ok: false, status: "unavailable",
+      message: "Verification is temporarily unavailable. Nothing is implied about this record." }, 503);
+    const r = await P.resolve(env, request, id);
+    return json(r.body, r.status, r.retryAfter ? { "Retry-After": String(r.retryAfter) } : null);
   }
   if (!enabled(env)) return json({ error: "disabled" }, 404);
   if (method === "OPTIONS") return new Response(null, { status: 204 });
@@ -330,7 +256,19 @@ export async function onRequest(context_) {
         const opts = { departmentId: q("departmentId"), programmeId: q("programmeId"), trainingYear: q("trainingYear") };
         // Faculty (not HOD / Academic Cell) see only the residents assigned to them.
         if (!can(ctx.role, CAPS.PGLOG_VIEW_DEPT) && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION)) opts.guide = ctx.actorUid;
-        return json({ ok: true, residents: await S.listResidents(env, orgId, opts) });
+        // A departmental membership is a departmental membership. The query parameter chose the
+        // department with nothing checking it against the caller's recorded scope, so an HoD scoped
+        // to one department could list every resident in the institution by asking for them.
+        const scope = (ctx.member && ctx.member.scope && ctx.member.scope.departments) || [];
+        if (scope.length && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION)) {
+          if (opts.departmentId && scope.indexOf(opts.departmentId) < 0) return json({ error: "forbidden" }, 403);
+        }
+        let list = await S.listResidents(env, orgId, opts);
+        if (scope.length && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION) && !opts.departmentId) {
+          list = list.filter((r) => !r.departmentId || scope.indexOf(r.departmentId) > -1);
+        }
+        // A roster is a roster: names, ids and postings. The Firebase uid is an internal handle.
+        return json({ ok: true, residents: list.map((r) => S.publicResident(r, "roster")) });
       }
       if (method === "POST") {
         const ctx = await context(request, env, body.orgId);
@@ -354,8 +292,8 @@ export async function onRequest(context_) {
       if (method === "GET") {
         const res = await S.getResident(env, q("residentId"));
         const ctx = await context(request, env, res && res.orgId);
-        await canReadResident(env, ctx, res);
-        return json({ ok: true, rotations: await S.listRotations(env, res.id) });
+        const audience = await canReadResident(env, ctx, res);
+        return json({ ok: true, audience, rotations: await S.listRotations(env, res.id) });
       }
       if (method === "POST") {
         const res = await S.getResident(env, body.residentId);
@@ -480,8 +418,12 @@ export async function onRequest(context_) {
       if (method === "GET") {
         const res = await S.getResident(env, q("residentId"));
         const ctx = await context(request, env, res && res.orgId);
-        await canReadResident(env, ctx, res);
-        return json({ ok: true, assessments: await S.listAssessments(env, res.id) });
+        // The audience is not decoration: an assessment carries 3000 characters of feedback about a
+        // named trainee and their remediation plan. It was being serialised raw to every caller that
+        // got past the gate, including the ones deliberately downgraded to "aggregate".
+        const audience = await canReadResident(env, ctx, res);
+        const list = await S.listAssessments(env, res.id);
+        return json({ ok: true, audience, assessments: list.map((a) => S.publicAssessment(a, audience)) });
       }
       if (method === "POST" && !id) {
         const res = await S.getResident(env, body.residentId);
@@ -517,14 +459,14 @@ export async function onRequest(context_) {
     if (seg === "attestations" && method === "GET") {
       const res = await S.getResident(env, q("residentId"));
       const ctx = await context(request, env, res && res.orgId);
-      await canReadResident(env, ctx, res);
+      const audience = await canReadResident(env, ctx, res);
       const [entries, atts] = await Promise.all([S.listEntries(env, res.id, {}), S.listAttestations(env, res.id)]);
       const prog = await S.getProgramme(env, res.programmeId);
       const months = M.attestationStatus(res, entries, atts, {
         today: M.isoDate(Date.now()),
         attestationGraceDays: (prog && prog.config && prog.config.attestationGraceDays) || 7
       });
-      return json({ ok: true, attestations: atts, months });
+      return json({ ok: true, audience, attestations: atts.map((a) => S.publicAttestation(a, audience)), months });
     }
 
     /* ── curriculum configuration (Academic Cell) ───────────────────────── */
@@ -569,12 +511,12 @@ export async function onRequest(context_) {
           attendanceDaysSource: cfg.attendanceDaysSource
         });
         return json({
-          ok: true, audience, resident: res, programme: prog,
+          ok: true, audience, resident: S.publicResident(res, audience), programme: prog,
           summary: M.summarise(entries),
           weekly: M.weeklyCadence(entries, res.startDate, today),
           attendance,
           months: M.attestationStatus(res, entries, atts, { today, attestationGraceDays: cfg.attestationGraceDays }),
-          rotations, assessments,
+          rotations, assessments: assessments.map((a) => S.publicAssessment(a, audience)),
           // The requirement list itself lives in the curriculum packs, which are static client-side
           // assets — the client resolves progress against them with the SAME pure functions. The
           // server sends the verified entry set so both arrive at the same numbers.
@@ -617,10 +559,20 @@ export async function onRequest(context_) {
         const orgId = q("orgId"), departmentId = q("departmentId");
         const ctx = await context(request, env, orgId);
         if (!can(ctx.role, CAPS.PGLOG_VIEW_DEPT) && !can(ctx.role, CAPS.PGLOG_VIEW_INSTITUTION)) return json({ error: "forbidden" }, 403);
+        // THE MOST EXPENSIVE ROUTE IN THE MODULE: three Firestore queries per resident, so one call
+        // is ~600 reads. It is authenticated, but an authenticated amplifier is still an amplifier
+        // and this one is a single GET. Keyed on the caller, not the IP — a department shares an
+        // institution's network. The page is oversight, not a live feed; a handful a minute is ample.
+        const dl = await P.rateLimit(env, request, "dept:" + ctx.uid, 6, 60);
+        if (!dl.ok) return json({ error: "rate_limited", message: "That view is still loading. Try again in a moment." },
+          429, { "Retry-After": String(dl.retryAfter) });
         const residents = await S.listResidents(env, orgId, { departmentId, programmeId: q("programmeId"), trainingYear: q("trainingYear") });
         const today = M.isoDate(Date.now());
         // The Academic Cell's audience is aggregate: counts and completeness, never clinical detail.
-        const audience = can(ctx.role, CAPS.PGLOG_VIEW_DEPT) ? "hod" : "aggregate";
+        // Only the DEPARTMENTAL role gets the department view — `academic_cell` and `admin` hold the
+        // department cap as well, which is how this same test let institution-wide roles through the
+        // per-resident read guard.
+        const audience = ctx.role === "pg_hod" ? "hod" : "aggregate";
         const rows = [];
         for (const r of residents.slice(0, 200)) {
           const entries = await S.listEntries(env, r.id, {});

@@ -721,6 +721,42 @@ test("verifyEntry REFUSES an unverified signer, and the entry stays submitted", 
   assert.equal((await S.getEntry(env, e.id, db)).status, "submitted", "nothing was half-signed");
 });
 
+test("a faculty member who is NOT the guide and NOT named on the entry cannot sign it", async () => {
+  // PGLOG_VERIFY is an org-wide capability. PGMER-2023 5.2(vii) is not an org-wide question: it names
+  // "the Post-graduate guide". Without this, any faculty member in the institution could sign any
+  // resident's entry under their own registration number — and the QR would announce them as the
+  // verifying faculty.
+  const db = fakeDb();
+  const { res } = await seed(db);
+  db.listMembers = async () => [
+    { identity: FACULTY_UID, role: "pg_faculty", active: true },
+    { identity: "fb:stranger", role: "pg_faculty", active: true }
+  ];
+  const signer = async () => ({ uid: "x", regNo: "TN/1", council: "TNMC", name: "Dr S", source: "register" });
+  const asStranger = { ...db, gate: async () => ({ role: "pg_faculty", owner: false }), signerSnapshot: signer };
+  const asHod = { ...db, gate: async () => ({ role: "pg_hod", owner: false }), signerSnapshot: signer };
+  const asGuide = { ...db, gate: async () => ({ role: "pg_faculty", owner: false }), signerSnapshot: signer };
+
+  const e = await S.createEntry(env, ORG, entryBody(res), RESIDENT_UID, db);
+  await S.submitEntry(env, e.id, RESIDENT_UID, db);
+
+  await assert.rejects(() => S.verifyEntry(env, e.id, "fb:stranger", "ok", asStranger),
+    (err) => /not_the_named_supervisor/.test(err.message));
+  await assert.rejects(() => S.returnEntry(env, e.id, "fb:stranger", "redo it", asStranger),
+    (err) => /not_the_named_supervisor/.test(err.message));
+  assert.equal((await S.getEntry(env, e.id, db)).status, "submitted", "nothing happened to the record");
+
+  // the guide themselves can
+  const v = await S.verifyEntry(env, e.id, FACULTY_UID, "ok", asGuide);
+  assert.equal(v.status, "verified");
+
+  // and a head of department may act for an absent guide — recorded as the HoD
+  const e2 = await S.createEntry(env, ORG, entryBody(res, { supervisor: FACULTY_UID }), RESIDENT_UID, db);
+  await S.submitEntry(env, e2.id, RESIDENT_UID, db);
+  const v2 = await S.verifyEntry(env, e2.id, "fb:stranger", "guide on leave", asHod);
+  assert.equal(v2.status, "verified");
+});
+
 test("the signature fields record the registration, not just a uid", () => {
   const f = SIGNER.signatureFields("verified",
     { regNo: "TN/12345", council: "TNMC", name: "Dr B", source: "register" }, 1700000000000);
@@ -768,12 +804,60 @@ test("the canonical form is FIXED — a schema edit must not silently invalidate
   const c = VER.canonical("entry", { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure",
     occurredAt: "2026-08-20", role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1",
     verifiedAt: 123, revisionCount: 0 });
-  assert.equal(c, "v1|entry|e1|r1|o1|procedure|2026-08-20|assisted|fb:f|TN/1|123|0");
+  assert.equal(c, "v2|entry|2:e1|2:r1|2:o1|9:procedure|10:2026-08-20|8:assisted|4:fb:f|4:TN/1|3:123|1:0");
+  // Parts are LENGTH-PREFIXED, so a delimiter inside a value cannot shift the fields after it. The
+  // registration number is the one free-form field a signature covers, and it is owner/register
+  // supplied — "TN/1|x" must not be able to impersonate a different verifiedAt.
+  assert.notEqual(
+    VER.canonical("entry", { id: "e1", verifiedByReg: "A|B", verifiedAt: "" }),
+    VER.canonical("entry", { id: "e1", verifiedByReg: "A", verifiedAt: "B" }));
   // an unrelated extra field must not change it
   const c2 = VER.canonical("entry", { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure",
     occurredAt: "2026-08-20", role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1",
     verifiedAt: 123, revisionCount: 0, somethingNew: "x" });
   assert.equal(c, c2);
+});
+
+test("ROUND TRIP: a signed entry verifies as VALID — the two ends derive the same payload", async () => {
+  // THE REGRESSION THAT MATTERS. The issue side and the lookup side once used different field names
+  // (verifiedReg vs verifiedByReg, revisions vs revisionCount), so every genuine entry QR told the
+  // examiner the record had been tampered with. The tests missed it because both sides were fed a
+  // hand-built payload. This one signs a REAL entry document and verifies its REAL code.
+  const db = fakeDb();
+  const PUB = await import("../functions/_pglog_public.js");
+  db.listMembers = async () => [{ identity: FACULTY_UID, role: "pg_faculty", active: true }];
+  const dep = Object.assign({}, db, {
+    gate: async () => ({ role: "pg_hod", owner: false, org: { id: ORG }, member: {} }),
+    signerSnapshot: async () => ({ uid: "faculty-1", regNo: "KMC/2011/44321",
+      council: "Karnataka Medical Council", name: "Dr A Rao", source: "register", via: "certificate" })
+  });
+  const { res } = await seed(db);
+  const e = await S.createEntry(KEYED, ORG, entryBody(res), RESIDENT_UID, dep);
+  await S.submitEntry(KEYED, e.id, RESIDENT_UID, dep);
+  const v = await S.verifyEntry(KEYED, e.id, FACULTY_UID, "seen", dep);
+
+  assert.ok(v.verifyCode, "a signed entry must carry a code");
+  assert.equal(v.verifiedReg, "KMC/2011/44321");
+
+  const rec = db.docs.get("pg_verify/" + v.verifyCode);
+  assert.ok(rec, "the code must be stored");
+  const answer = await PUB.describeVerification(KEYED, rec, v.verifyCode, Object.assign({}, dep, {
+    getEntry: (env, id) => S.getEntry(env, id, dep),
+    getResident: async () => ({ id: "r1", name: "Dr B", smdId: "SMD-1", programmeId: "p1" }),
+    getProgramme: async () => ({ id: "p1", degree: "MD", name: "MD General Medicine" }),
+    digestFor: (env, kind, payload) => VER.digestFor(env, kind, payload)
+  }));
+  assert.equal(answer.status, "valid", "a genuine signature must not read as tampered");
+  assert.equal(answer.signedBy.registrationNo, "KMC/2011/44321");
+
+  // ...and a real edit to the stored document DOES read as tampered.
+  const stored = db.docs.get("pg_entries/" + e.id);
+  stored.occurredAt = "2026-08-01";
+  const after = await PUB.describeVerification(KEYED, rec, v.verifyCode, Object.assign({}, dep, {
+    getEntry: (env, id) => S.getEntry(env, id, dep),
+    digestFor: (env, kind, payload) => VER.digestFor(env, kind, payload)
+  }));
+  assert.equal(after.status, "tampered");
 });
 
 test("the digest changes when ANY signed fact changes", async () => {

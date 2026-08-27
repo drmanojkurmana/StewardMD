@@ -377,11 +377,40 @@ export async function submitEntry(env, id, actorUid, deps) {
   return out;
 }
 
+/* WHO MAY SIGN THIS PARTICULAR RECORD — not "who may sign records".
+ *
+ * The cap check answers a question about a ROLE. PGMER-2023 5.2(vii) asks a question about a PERSON:
+ * the logbook is authenticated by "the Post-graduate guide", and 9.2(c) penalises the NAMED faculty
+ * member who submits a false record. Between those two, an org-wide PGLOG_VERIFY meant any faculty
+ * member in the institution could sign, return or amend any resident's entry — an anaesthetist
+ * signing a surgery trainee's operative record, under their own registration number, which the QR
+ * then announces as "Verifying faculty (PGMER-2023 5.2(vii))".
+ *
+ * The same shape the attest path already uses (R1, finding C7): the named supervisor on the entry,
+ * the resident's guide or co-guide, or the head of department — who may act when a guide has left or
+ * is unavailable, and whose role is recorded.
+ */
+function isNamedFor(actorUid, entry, resident) {
+  return M.sameActor(actorUid, entry && entry.supervisor) ||
+    M.sameActor(actorUid, resident && resident.guide) ||
+    ((resident && resident.coGuides) || []).some((x) => M.sameActor(actorUid, x));
+}
+async function requireNamedFor(env, actorUid, entry, role, deps) {
+  const res = await getResident(env, entry.residentId, deps);
+  if (isNamedFor(actorUid, entry, res)) return res;
+  if (role === "pg_hod") return res;
+  throw Object.assign(new Error("not_the_named_supervisor"), { status: 403,
+    userMessage: "You are not this resident's guide and you are not named on this entry, so you " +
+      "cannot sign it. Ask their guide, or the head of department." });
+}
+
 export async function verifyEntry(env, id, actorUid, note, deps) {
   const d = D(deps);
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  // A cap says what a ROLE may do; this says whether this PERSON is the one the record names.
+  await requireNamedFor(env, actorUid, cur, g.role, deps);
   // THE REGISTRATION GATE. Throws unless the actor holds a verified medical-council registration.
   // Before the cap check would have been the whole story; a cap says what a ROLE may do, and this
   // says whether the PERSON is a registered practitioner whose signature means anything.
@@ -409,8 +438,10 @@ export async function returnEntry(env, id, actorUid, reason, deps) {
   const d = D(deps);
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
-  await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
-  // A return is a clinical judgement recorded against a trainee, so it carries the same gate.
+  const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  // A return is an adverse judgement recorded against a trainee by name, so it carries BOTH gates:
+  // the person must be the one responsible for this logbook, and a registered practitioner.
+  await requireNamedFor(env, actorUid, cur, g.role, deps);
   await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
   const out = M.returnEntry(cur, actorUid, d.now(), reason);   // THROWS without a reason
   await writeEntry(env, out, cur.orgId, deps);
@@ -429,7 +460,10 @@ export async function amendEntry(env, id, patch, actorUid, reason, deps) {
   if (!cur) throw e404("entry");
   // Either the author correcting their own record, or someone holding VERIFY (a guide fixing a
   // record they signed). Nobody else can touch a verified document.
-  if (norm(cur.createdBy) !== norm(actorUid)) await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  if (norm(cur.createdBy) !== norm(actorUid)) {
+    const g = await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+    await requireNamedFor(env, actorUid, cur, g.role, deps);
+  }
   const ctx = await entryContext(env, cur.residentId, deps);
   const out = M.amend(cur, patch, actorUid, d.now(), reason);
   const v = M.validateEntry(out, ctx);
@@ -438,7 +472,13 @@ export async function amendEntry(env, id, patch, actorUid, reason, deps) {
   // returning a green tick for content that has since changed.
   if (cur.verifyCode) { try { await V.supersede(env, cur.verifyCode, "", deps); } catch (e) {} }
   out.verifyCode = "";
+  // Clear the WHOLE signature block. Leaving RegSource/RegCheckedAt behind left an amended,
+  // unverified record still carrying evidence of a check that no longer applies to it.
   out.verifiedReg = ""; out.verifiedCouncil = ""; out.verifiedName = "";
+  out.verifiedRegSource = ""; out.verifiedRegCheckedAt = 0;
+  // An amend may redirect the record to a different guide; the SERVER decides whether that person
+  // can actually receive it, exactly as submit does. Otherwise an amend orphans the entry.
+  out.supervisor = await resolveSupervisor(env, cur.orgId, out.supervisor || cur.supervisor, ctx.resident, deps);
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:amend", id + " rev" + out.revisions.length, deps);
   await notify(env, { to: cur.verifiedBy, orgId: cur.orgId, kind: "verify_pending", entryId: id,
@@ -495,7 +535,11 @@ export async function createAssessment(env, orgId, body, actorUid, deps) {
   const d = D(deps);
   await gate(env, actorUid, orgId, CAPS.PGLOG_ASSESS, null, deps);
   const id = newId();
-  const a = M.assessment(Object.assign({}, body, { id, orgId, assessor: actorUid, createdAt: d.now(), status: "draft" }));
+  // The signature block is server-owned, exactly as it is on an entry. M.assessment() carries
+  // signedBy/signedAt, so without this a draft could be created already claiming a signature that
+  // signAssessment() never granted.
+  const a = M.assessment(Object.assign({}, body, { id, orgId, assessor: actorUid, createdAt: d.now(),
+    status: "draft", signedBy: "", signedAt: 0, assessedAt: 0, verifyCode: "" }));
   await d.fsCommit(env, [d.wCreate(env, COL.assessment + "/" + id, a)]);
   await audit(env, orgId, actorUid, "pglog:assessment:create", a.templateId, deps);
   return a;
@@ -521,14 +565,17 @@ export async function completeAssessment(env, id, patch, template, actorUid, dep
   // resident cannot be resolved that comparison silently passes, which is the exact "namespace
   // mismatch disables the guard" failure the verify() path was designed against. (R1, finding I6.)
   if (!res || !res.uid) throw e404("resident");
-  const merged = M.assessment(Object.assign({}, cur, patch || {}, { id: cur.id, residentId: cur.residentId, orgId: cur.orgId, createdAt: cur.createdAt }));
+  const merged = M.assessment(Object.assign({}, cur, patch || {}, {
+    id: cur.id, residentId: cur.residentId, orgId: cur.orgId, createdAt: cur.createdAt,
+    assessor: cur.assessor, signedBy: cur.signedBy, signedAt: cur.signedAt, verifyCode: cur.verifyCode
+  }));
   merged.residentUid = res.uid;                                  // so the model can refuse a self-assessment
   const snap = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
   const at = d.now();
   const out = M.assess(merged, actorUid, at, template);
   delete out.residentUid;                                        // not persisted; it is a lookup, not a field
   Object.assign(out, signatureFields("assessor", snap, at));
-  out.verifyCode = await issueCode(env, "assessment", Object.assign({}, out, { assessorReg: snap.regNo }), deps);
+  out.verifyCode = await issueCode(env, "assessment", out, deps);
   await d.fsCommit(env, [d.wUpdate(env, COL.assessment + "/" + sanitize(id), out)]);
   await audit(env, cur.orgId, actorUid, "pglog:assessment:complete", out.templateId + " " + out.outcome, deps);
   await notify(env, { to: res.uid, orgId: cur.orgId, kind: "assessment_ready", residentId: cur.residentId,
@@ -561,7 +608,13 @@ export async function attest(env, body, actorUid, deps) {
   const d = D(deps);
   const res = await getResident(env, (body || {}).residentId, deps);
   if (!res) throw e404("resident");
-  const g = await gate(env, actorUid, res.orgId, CAPS.PGLOG_ATTEST, null, deps);
+  // Pass the TARGET so authorizeOrgAccess() actually evaluates the membership's department scope.
+  // Every gate() call in this module was passing `null`, so `withinScope` never ran and a head of
+  // department scoped to one department could mint the Head-of-Department proficiency certificate
+  // for a resident in a department they do not head. (An empty scope still means whole-org
+  // membership, the same as everywhere else in the app.)
+  const g = await gate(env, actorUid, res.orgId, CAPS.PGLOG_ATTEST,
+    { target: { departmentId: res.departmentId } }, deps);
   if (M.sameActor(actorUid, res.uid)) throw e403("self_attest_forbidden");
   const kind = M.ATTESTATION_KINDS.indexOf(String(body.kind || "monthly")) > -1 ? String(body.kind || "monthly") : "";
   if (!kind) throw e400("unknown_attestation_kind");
@@ -598,8 +651,7 @@ export async function attest(env, body, actorUid, deps) {
     entryIds: scope.map((e) => e.id), counts, note: body.note,
     attestedBy: actorUid, attestedRole: g.role, attestedAt: at, createdAt: at
   }), signatureFields("attested", snapA, at));
-  a.verifyCode = await issueCode(env, "attestation",
-    Object.assign({}, a, { attKind: kind, attestedByReg: snapA.regNo }), deps);
+  a.verifyCode = await issueCode(env, "attestation", a, deps);
   try {
     await d.fsCommit(env, [d.wCreate(env, COL.attestation + "/" + sanitize(a.id), a)]);
   } catch (err) {
@@ -706,6 +758,77 @@ export async function markNotificationRead(env, id, uid, deps) {
  * audience that is not the resident, their verifying faculty or their HoD receives counts and
  * categories — never a case reference and never a diagnosis. Every cross-resident dashboard,
  * department summary and export goes through here. */
+/* The same boundary for the OTHER records, which had none.
+ *
+ * publicEntry() was the documented privacy boundary and it was applied to entries only, while
+ * assessments, attestations and the resident record were serialised raw next to it — so an audience
+ * deliberately downgraded to "aggregate" still read the trainee's formative feedback (3000 chars),
+ * their remediation action plan, every criterion score, and the resident's Firebase uid. A boundary
+ * that covers one of four record types is not a boundary.
+ *
+ * What survives at aggregate is what oversight actually needs: that an assessment HAPPENED, of what
+ * kind, when, by whom. Not what it said about the person.
+ */
+export function publicAssessment(a, audience) {
+  if (!a) return null;
+  const full = audience === "self" || audience === "verifier" || audience === "hod";
+  const out = {
+    id: a.id, residentId: a.residentId, templateId: a.templateId, status: a.status,
+    encounterDate: a.encounterDate, assessedAt: a.assessedAt, assessor: a.assessor,
+    createdAt: a.createdAt, signedAt: a.signedAt,
+    assessorReg: a.assessorReg || "", assessorCouncil: a.assessorCouncil || "",
+    assessorName: a.assessorName || "",
+    // The OUTCOME is a fact about training progress and oversight needs it; the WORDS are feedback
+    // to a named trainee and are nobody else's business.
+    outcome: a.outcome, total: a.total, maxTotal: a.maxTotal,
+    discussedWithTrainee: a.discussedWithTrainee,
+    verifyCode: full ? (a.verifyCode || "") : ""
+  };
+  if (full) {
+    out.scores = a.scores || {};
+    out.feedback = a.feedback || "";
+    out.strengths = a.strengths || "";
+    out.improvements = a.improvements || "";
+    out.actionPlan = a.actionPlan || "";
+    out.setting = a.setting || "";
+    out.caseSummary = a.caseSummary || "";
+    out.history = a.history || [];
+  }
+  return out;
+}
+
+export function publicAttestation(a, audience) {
+  if (!a) return null;
+  const full = audience === "self" || audience === "verifier" || audience === "hod";
+  return {
+    id: a.id, residentId: a.residentId, kind: a.kind, period: a.period, counts: a.counts,
+    attestedBy: a.attestedBy, attestedRole: a.attestedRole, attestedAt: a.attestedAt,
+    attestedReg: a.attestedReg || "", attestedCouncil: a.attestedCouncil || "",
+    attestedName: a.attestedName || "",
+    entryCount: (a.entryIds || []).length,
+    note: full ? (a.note || "") : "",
+    entryIds: full ? (a.entryIds || []) : [],
+    verifyCode: full ? (a.verifyCode || "") : ""
+  };
+}
+
+/* The resident record itself. `uid` is the Firebase identity — an internal handle that has no
+ * business leaving the server for anyone but the resident, and was being returned in full to every
+ * dashboard caller. */
+export function publicResident(r, audience) {
+  if (!r) return null;
+  const full = audience === "self" || audience === "verifier" || audience === "hod";
+  const out = {
+    id: r.id, name: r.name, smdId: r.smdId, orgId: r.orgId, programmeId: r.programmeId,
+    departmentId: r.departmentId, trainingYear: r.trainingYear, startDate: r.startDate,
+    expectedEndDate: r.expectedEndDate, status: r.status, unit: r.unit,
+    guide: r.guide, coGuides: r.coGuides || [], rollNo: r.rollNo || ""
+  };
+  if (audience === "self") out.uid = r.uid;
+  if (full) { out.notes = r.notes || ""; }
+  return out;
+}
+
 export function publicEntry(e, audience) {
   if (!e) return null;
   const full = audience === "self" || audience === "verifier" || audience === "hod";
@@ -720,7 +843,12 @@ export function publicEntry(e, audience) {
     // The signature is not a secret — it is the thing that makes the record mean anything, and a
     // registration number is public information on the Indian Medical Register.
     verifiedReg: e.verifiedReg || "", verifiedCouncil: e.verifiedCouncil || "",
-    verifiedName: e.verifiedName || "", verifyCode: e.verifyCode || ""
+    verifiedName: e.verifiedName || "",
+    // The CODE is not part of the signature — it is the capability that makes the public
+    // verification endpoint safe to leave unauthenticated. Handing it to a third party with only
+    // aggregate access lets them look the resident up by name and programme without ever holding the
+    // document. It goes only to people who can already read the record it belongs to.
+    verifyCode: full ? (e.verifyCode || "") : ""
   };
   if (e.kind === "clinical") { out.setting = e.setting; out.category = e.category; out.outcome = e.outcome; }
   if (e.kind === "procedure") { out.procedureId = e.procedureId; out.setting = e.setting; out.outcome = e.outcome; out.complications = e.complications; }

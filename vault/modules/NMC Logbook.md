@@ -51,6 +51,11 @@ are throws at the data layer, not disabled buttons.
 | `pglog-reports.js` | 11 pure report builders + print/CSV. |
 | `pglog-ai.js` | Advisory assist. Two of its six functions are pure and have no AI at all. |
 | `functions/_pglog_store.js` | Firestore I/O + the org-RBAC gate + `publicEntry()` (the privacy boundary). |
+| `functions/_pglog_signer.js` | **THE SIGNING GATE.** Nobody signs without a verified medical-council registration. Reads the existing `/api/verify-doctor` result; never re-implements it. Fails closed. |
+| `functions/_pglog_verify.js` | The HMAC-signed verification code behind every QR + supersede-on-amend. **`payloadFor()` is the single definition of what a signature covers.** |
+| `functions/_pglog_public.js` | The one definition of what a verification DISCLOSES. Both the JSON route and the HTML page resolve through it. |
+| `functions/pglog/v/[code].js` | The page an examiner lands on. Server-rendered, no JavaScript, strict CSP, noindex. |
+| `pglog-qr.js` | Our own ISO/IEC 18004 QR encoder (byte mode, v1-10). No dependency, no image service. |
 | `functions/_pglog_templates.js` | **Generated.** The server's own scoring contract, so a forged client template cannot inflate a mark. |
 | `functions/api/pglog/[[path]].js` | The API router. |
 | `scripts/build-pglog-curricula.mjs` | Emits the packs. **Add a new specialty here**, never by hand-editing JSON. |
@@ -183,6 +188,98 @@ both of which §5.2(xi) makes examination pre-requisites.
 ours needs the Academic Cell. That is a deliberate trade (verification needs a real guide) but it is
 the biggest adoption risk and is an owner decision, not a technical one.
 
+## Signing and the QR — 2026-08-27
+
+**Nobody digitally signs anything in this module without a verified medical registration, and the
+registration number is written onto the record they signed.**
+
+PGMER-2023 §5.2(vii) has the logbook authenticated by "the Post-graduate guide"; §9.2(c) attaches a
+penalty to the NAMED faculty / HoD / Dean who submits a false record. Both presuppose a registered
+practitioner. Before this, the module checked a *capability* — what a role may do — and never whether
+the person was on a medical register at all.
+
+`functions/_pglog_signer.js` gates **verify, return, assess, sign-off and the monthly attestation**.
+It does not re-implement verification: StewardMD already checks doctors against the **live Indian
+Medical Register** via `/api/verify-doctor`, which writes `icu:doctor:<uid>` and sets the `verified`
+custom claim. This reads that, and cannot grant it.
+
+- **Fails CLOSED.** KV unreachable *and* the claims lookup throwing gives a 503 that says nothing was
+  signed. An outage must never quietly downgrade a regulatory signature.
+- **`verified: true` with no registration number is refused.** A signature nobody can check is not a
+  signature.
+- **De-namespace the uid first** (`rawUid`): the router says `fb:abc`, KV and claims are keyed `abc`.
+  Getting that wrong misses every lookup — and before the fail-closed rule it would have failed OPEN.
+- The UI (`signerBanner()`) explains *why* the verify button is unavailable. That is a courtesy, not
+  the gate. The gate is `signerSnapshot()` throwing on the write path.
+
+**Every signed event mints a code and a QR.** A printed logbook is trusted because a named person
+signed it; a PDF of one is trusted because of nothing. `GET /api/pglog/v/<code>` answers
+**unauthenticated** — an examiner holding a printout has no account, and requiring one would make the
+QR useless to the only person it exists for.
+
+- The code is an **opaque 80-bit handle**, not an encoding of the record. A code on a whiteboard leaks
+  nothing.
+- The stored record holds an **HMAC-SHA256 digest of a FIXED canonical field list** — never
+  `Object.keys()` over a live document, whose key order would change with a schema edit and silently
+  invalidate every code ever issued. The digest is recomputed from the live record on lookup, so a
+  direct Firestore edit shows **TAMPERED** instead of a green tick over altered content.
+- **Tamper-EVIDENT, not tamper-proof**, and **not** a cryptographic signature by the faculty member —
+  it is the server attesting to what it recorded. A real per-signer keypair needs key custody we do
+  not have. The page says exactly this; do not upgrade the wording without upgrading the crypto.
+- **Amending a verified entry supersedes its code.**
+- **No `PGLOG_SIGNING_KEY` → no code is issued at all.** An uncheckable "verification code" is worse
+  than none, because it looks checkable.
+- **Minting a code can never take a signature down with it.** A failure leaves the record signed and
+  auditable, with no QR, and the UI says so.
+- The public payload is PHI-free by construction: resident name + SMD ID, programme, activity KIND
+  and date, signer + registration + council, and whether it still stands. Never the case reference,
+  the diagnosis, the remarks or the reflection.
+
+## The security review — 2026-08-27 (R3 + S4). Read this before touching authorization.
+
+Two reviewers, run independently over the signing/QR surface. **Four blocking findings, all fixed.**
+Both reviewers independently found the same two authorization holes, which is the part worth
+remembering: the module's own comments described boundaries the code did not enforce.
+
+**B1 — every entry QR would have read TAMPERED.** The document written at signing and the document
+read back at verification were mapped into the canonical form by two separate lists of field names,
+in two files, and they disagreed twice (`verifiedReg` vs `verifiedByReg`, `revisions` vs
+`revisionCount`). Every genuine signature would have told the examiner *"This record does not match
+what was signed. Do not rely on it."* The tests missed it because both sides were fed a hand-built
+payload. Fixed by `V.payloadFor()` — **one definition of what a signature covers, called at both
+ends** — plus a round-trip test that signs a real entry and verifies its real code.
+
+**B2 — the URL printed on every QR was not served.** `/pglog/v/<code>` is extensionless, so the site
+gate treated it as an anonymous page view and returned the **marketing home page, HTTP 200**. Fixed
+by `functions/pglog/v/[code].js` (server-rendered, script-free, strict CSP, noindex) and a
+pass-through in `functions/_middleware.js`, with a gate regression test for both halves.
+
+**B3 — any faculty member could sign any resident's entry.** `PGLOG_VERIFY` is an org-wide
+capability; PGMER-2023 §5.2(vii) is not an org-wide question. `requireNamedFor()` now demands the
+named supervisor, the guide/co-guide, or the HoD — the same shape the attest path already had.
+
+**B4 / C5-again — the Academic Cell and the technical admin read every trainee's clinical detail.**
+The read guard tested `PGLOG_VIEW_DEPT` first, and `academic_cell` and `admin` hold that cap too, so
+they entered the HoD branch and the `VIEW_INSTITUTION -> aggregate` line below it was **dead code**.
+`canReadResident` is now ordered by **named responsibility, not capability breadth**, and there is a
+table-driven test (`test/pglog-audience.test.mjs`) enumerating every role against every relationship.
+Also: `publicEntry()` was the documented privacy boundary and covered **entries only**, so
+assessments (3000 chars of feedback, the remediation plan, every criterion score), attestation notes
+and the raw resident record (including the Firebase uid) were serialised next to it unprojected.
+`publicAssessment` / `publicAttestation` / `publicResident` now exist and are applied.
+
+Also fixed: `amend` could mass-assign `deleted` (retiring a verified, signed record that
+`softDelete()` refuses to touch) — both edit paths now share **one** `SERVER_OWNED` list; the
+verification code is a capability and no longer goes to an aggregate audience; `getUserClaims()`
+returning `{}` on an outage no longer reads as "not verified"; the rate-limit key no longer falls
+back to the client-supplied `X-Forwarded-For`; `PGLOG_OFF` now covers the public endpoint; Firestore
+error detail is no longer echoed to clients; the SMD ID is masked on the public page; the free text
+sent to the AI is scrubbed of honorific-led names (`scrubForAi`, stored text unchanged); the
+department dashboard (~600 reads a call) is rate-limited per caller.
+
+**The rule the two mistakes have in common:** a boundary defined in two places drifts, and the copy
+that drifts is the one that leaks. One payload builder, one pinned-field list, one audience function.
+
 ## Gotchas
 
 - **Only VERIFIED entries count toward progress.** A resident cannot move their own bar. Submitted
@@ -199,6 +296,20 @@ the biggest adoption risk and is an owner decision, not a technical one.
   different grades and the UI shows which. Do not merge them.
 - **The DRP semester window is a WARNING, not a block.** A State's posting schedule is not the
   resident's to fix, and refusing the record would make the logbook less true.
+- **`normalizeCode()` must strip the `PGL` prefix BEFORE folding confusables** — "PGL" contains an
+  L, and the folder rewrites L to 1. Reversed, every scanned and every hand-typed code returns empty.
+  Order is the whole bug; there is a test.
+- **The QR block stays LIGHT in dark mode on purpose.** An inverted QR does not scan reliably.
+- **A wrong QR is worse than no QR** — it looks scannable and is not. Every part of the encoder with
+  a published reference value is tested against it (GF(256) tables, RS generators, all 32 format
+  strings from Table C.1, the version strings from Table D.1). Do not "optimise" it without those.
+- **Order the read guard by NAMED RESPONSIBILITY, never by capability breadth.** `academic_cell` and
+  `admin` hold `PGLOG_VIEW_DEPT` as well as their own caps, so any "widest cap first" ordering hands
+  them the department branch. This has been got wrong twice; `test/pglog-audience.test.mjs` is the guard.
+- **`/pglog/v/*` must stay in the `_middleware.js` pass-through.** Remove it and every printed QR
+  silently lands on the marketing page with a 200.
+- **Signature content is defined ONLY by `V.payloadFor()`.** Hand-building a payload at either end is
+  how every genuine QR once read TAMPERED.
 - **Test on port 8994, not 8991.** Another worktree's `serve.mjs` on the shared port silently serves
   *its* copy of the app — that is how this module's UI test once "failed" 48 assertions against code
   it was never looking at. See [[two-claude-sessions-one-folder]].
@@ -207,14 +318,19 @@ the biggest adoption risk and is an owner decision, not a technical one.
 
 | File | Covers |
 |---|---|
-| `test/pglog-model.test.mjs` | 64 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
+| `test/pglog-model.test.mjs` | 65 — every invariant, dates, privacy, progress, cadence, attendance, eligibility, attestation, assessment, + the R1 regressions |
 | `test/pglog-provenance.test.mjs` | 18 — **the real one**: every quotation and every number checked against `pglog-sources/`, plus specialty coverage |
 | `test/pglog-curriculum.test.mjs` | 29 — pack structure, flatten/resolve, overrides, the requirement mapper |
-| `test/pglog-server.test.mjs` | 45 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
-| `test/run-pglog-ui.mjs` | 54 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
+| `test/pglog-audience.test.mjs` | 8 — the audience matrix: every role x every relationship, and what each audience discloses |
+| `test/pglog-public.test.mjs` | 13 — the unauthenticated verification page: what it says, what it refuses to say, escaping, headers |
+| `test/pglog-qr.test.mjs` | 22 — the encoder against ISO/IEC 18004 reference values + code normalisation |
+| `test/pglog-server.test.mjs` | 66 — store flow against an in-memory Firestore, RBAC, the privacy projection, exactly-once attestation, the server template contract, + the R1 regressions |
+| `test/run-pglog-ui.mjs` | 57 — real headless Chrome: flag-off no-op, mount, drafts offline, provenance rendering, packs over HTTP, reports, navigation |
 
 Run: `node --test test/pglog-*.test.mjs` and `node test/run-pglog-ui.mjs`.
-**156 unit assertions + 54 browser assertions, all green.** Full repo suite: 419 files, 0 failures.
+**221 unit assertions + 57 browser assertions, all green.** Full repo suite: 422 files, 0 failures.
+`test/run-gate-middleware.mjs` also covers the public verify path (and two of its assertions were
+stale against the web-app-killed middleware; fixed).
 
 Note: two repo tests (`followcare-voice-server`, `opd-mrn-alloc`) need `node --experimental-test-module-mocks`,
 which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They are unrelated to this module.
@@ -223,8 +339,9 @@ which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They 
 
 - **R1 was run on 2026-08-27** (NO-GO, all findings fixed — §12 of the requirements doc). A
   **re-review** is owed before a non-tester release, since the fixes have not themselves been
-  reviewed. R1 also recommended chaining `stewardmd-security-reviewer` for the C5 read-guard fix,
-  which has not been done.
+  reviewed. R1 also recommended chaining `stewardmd-security-reviewer` for the C5 read-guard fix
+  — **done 2026-08-27** (R3 + S4, see the security section above; 4 blocking findings, all fixed).
+  **The security fixes have not themselves been re-reviewed**, and the C5 read guard was wrong twice.
 - **Native rebuild not done.** Web deploys do not reach installed apps ([[Native app delivery]]).
 - ~~PGMEB FAQ not obtainable~~ — **obtained 2026-08-27**, and it corrected the attendance model
   (80% is of WORKING days). §14 of the requirements doc.
@@ -233,6 +350,9 @@ which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They 
   requirement, reconstructed from a table with `sourceFragments`.
 - **~20 broad specialties and all DM/M.Ch have no pack** — they fall back to `generic-pg`, which
   carries the PGMER requirements and *says* no specialty pack is loaded.
+- **`PGLOG_SIGNING_KEY` is not provisioned yet.** Until it is set on the Pages project, signatures
+  still work and are still gated on registration, but **no QR or verification code is issued** — by
+  design. `PGLOG_VERIFY_BASE` optionally overrides the printed domain.
 - **UG/CBME not built**, by instruction.
 
 ## Adding a specialty

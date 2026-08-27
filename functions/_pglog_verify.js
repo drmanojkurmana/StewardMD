@@ -65,30 +65,72 @@ async function hmacHex(key, message) {
   return Array.from(new Uint8Array(sig)).map((b) => b.toString(16).padStart(2, "0")).join("");
 }
 
-/* THE CANONICAL FORM. Field order is fixed and explicit — never Object.keys() over a live document,
- * whose key order would change with a schema edit and silently invalidate every code ever issued.
- * Only the facts a verifier is entitled to see are included, which is also exactly the set that must
- * not change without invalidating the signature. */
-export function canonical(kind, payload) {
-  const p = payload || {};
-  const f = (v) => String(v == null ? "" : v);
+/* THE SIGNED CONTENT, DEFINED ONCE.
+ *
+ * This function exists because the first version did not. The document written at signing time and
+ * the document read back at verification time were mapped into the canonical form by two separate
+ * lists of field names, in two files — and they disagreed twice (`verifiedReg` vs `verifiedByReg`,
+ * `revisions` vs `revisionCount`). The digest therefore never matched, and EVERY genuine entry QR
+ * told the examiner "This record does not match what was signed. Do not rely on it." A signature
+ * that cries forgery over honest records is worse than no signature at all.
+ *
+ * So there is now exactly one place that says what a signature covers. Both ends call it.
+ */
+export function payloadFor(kind, doc) {
+  const e = doc || {};
   if (kind === "entry") {
-    return ["v1", "entry", f(p.id), f(p.residentId), f(p.orgId), f(p.kind), f(p.occurredAt),
-            f(p.role), f(p.verifiedBy), f(p.verifiedByReg), f(p.verifiedAt),
-            String(p.revisionCount || 0)].join("|");
+    return { id: e.id, residentId: e.residentId, orgId: e.orgId, kind: e.kind,
+             occurredAt: e.occurredAt, role: e.role, verifiedBy: e.verifiedBy,
+             verifiedByReg: e.verifiedReg, verifiedAt: e.verifiedAt,
+             revisionCount: (e.revisions || []).length };
   }
   if (kind === "assessment") {
-    return ["v1", "assessment", f(p.id), f(p.residentId), f(p.orgId), f(p.templateId),
-            f(p.outcome), String(p.total == null ? "" : p.total), String(p.maxTotal == null ? "" : p.maxTotal),
+    return { id: e.id, residentId: e.residentId, orgId: e.orgId, templateId: e.templateId,
+             outcome: e.outcome, total: e.total, maxTotal: e.maxTotal,
+             assessor: e.assessor, assessorReg: e.assessorReg, assessedAt: e.assessedAt };
+  }
+  if (kind === "attestation") {
+    return { id: e.id, residentId: e.residentId, orgId: e.orgId, attKind: e.kind,
+             period: e.period, counts: e.counts, attestedBy: e.attestedBy,
+             attestedByReg: e.attestedReg, attestedAt: e.attestedAt };
+  }
+  throw new Error("pglog_verify_unknown_kind");
+}
+
+/* THE CANONICAL FORM. Field order is fixed and explicit — never Object.keys() over a live document,
+ * whose key order would change with a schema edit and silently invalidate every code ever issued.
+ *
+ * Each part is LENGTH-PREFIXED rather than delimiter-joined. Only one signed field is free-form (the
+ * registration number, which comes from the register response or an owner-typed approval), but a
+ * separator that can appear inside a value is a separator that can shift every field after it. The
+ * prefix costs nothing and removes the question.
+ */
+export function canonical(kind, payload) {
+  const p = payload || {};
+  const f = (v) => { const s = String(v == null ? "" : v); return s.length + ":" + s; };
+  if (kind === "entry") {
+    return ["v2", "entry", f(p.id), f(p.residentId), f(p.orgId), f(p.kind), f(p.occurredAt),
+            f(p.role), f(p.verifiedBy), f(p.verifiedByReg), f(p.verifiedAt),
+            f(p.revisionCount || 0)].join("|");
+  }
+  if (kind === "assessment") {
+    return ["v2", "assessment", f(p.id), f(p.residentId), f(p.orgId), f(p.templateId),
+            f(p.outcome), f(p.total == null ? "" : p.total), f(p.maxTotal == null ? "" : p.maxTotal),
             f(p.assessor), f(p.assessorReg), f(p.assessedAt)].join("|");
   }
   if (kind === "attestation") {
-    return ["v1", "attestation", f(p.id), f(p.residentId), f(p.orgId), f(p.kind2 || p.attKind),
-            f(p.period), String((p.counts && p.counts.total) || 0),
-            String((p.counts && p.counts.verified) || 0),
+    return ["v2", "attestation", f(p.id), f(p.residentId), f(p.orgId), f(p.kind2 || p.attKind),
+            f(p.period), f((p.counts && p.counts.total) || 0),
+            f((p.counts && p.counts.verified) || 0),
             f(p.attestedBy), f(p.attestedByReg), f(p.attestedAt)].join("|");
   }
   throw new Error("pglog_verify_unknown_kind");
+}
+
+/* Digest a LIVE DOCUMENT. This is the form both callers should use — passing a hand-built payload is
+ * how the two ends drifted apart in the first place. */
+export async function digestForDoc(env, kind, doc) {
+  return digestFor(env, kind, payloadFor(kind, doc));
 }
 
 export async function digestFor(env, kind, payload) {
@@ -111,17 +153,20 @@ export function digestEqual(a, b) {
  * unlikely at 80 bits, but the guard costs nothing) fails rather than overwriting someone else's
  * verification record. Returns "" when signing is not configured — the CALLER must then not claim a
  * QR exists, and the store simply records nothing. */
-export async function issue(env, kind, payload, deps) {
+export async function issue(env, kind, doc, deps) {
   deps = deps || {};
   if (!signingConfigured(env)) return "";
   const d = { fsCommit, wCreate, fsGet, now: Date.now, ...deps };
+  // The LIVE DOCUMENT in, the canonical payload derived here — the same derivation the verification
+  // page runs. Never a payload hand-built by the caller.
+  const payload = payloadFor(kind, doc);
   const digest = await (deps.digestFor || digestFor)(env, kind, payload);
   for (let attempt = 0; attempt < 3; attempt++) {
     const code = (deps.newCode || newCode)();
     try {
       await d.fsCommit(env, [d.wCreate(env, COL_VERIFY + "/" + code, {
-        code, kind, refId: String(payload.id || ""),
-        residentId: String(payload.residentId || ""), orgId: String(payload.orgId || ""),
+        code, kind, refId: String(doc.id || ""),
+        residentId: String(doc.residentId || ""), orgId: String(doc.orgId || ""),
         digest, issuedAt: d.now(), revoked: false, supersededBy: ""
       })]);
       return code;
