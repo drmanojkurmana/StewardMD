@@ -211,7 +211,6 @@
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
         var txActive = false; try { txActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("thorex")); } catch (e) {}
         var sxActive = false; try { sxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) {}
-        var mlActive = false; try { mlActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("maik_local")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
         // BUG (2026-08-23, user report): this used to render at the tail of "Experimental Features",
         // an odd, easy-to-miss home for a core update mechanism that isn't experimental or gated by
@@ -229,8 +228,7 @@
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (mlActive ? ' on' : '') + '" data-xa-open="maik_local">' + (mlActive ? 'MaiK on-device model: enabled' : 'MaiK on-device model: enter access code') + '</button>';
+          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>';
         setBody.insertAdjacentHTML("beforeend",
           (otaBlk ? group("update", "Software Update", otaBlk, false) : "") +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
@@ -299,9 +297,6 @@
                   if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
                   return;
                 }
-                // MaiK on-device model: no module to open — the engine picker + model download live
-                // in Settings › AI Assistant, so just confirm the unlock and point there.
-                if (feat === "maik_local") { toast("On-device model unlocked. Open Settings › AI Assistant to download it."); return; }
                 try { localStorage.setItem("smd_fundx", "1"); } catch (e) {}
                 if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…");
               }

@@ -5,6 +5,37 @@ tags: [decisions, adr]
 
 Dated architectural calls + why. Newest first. Keep each short: **decision · why · trade-off · status**.
 
+## 2026-08-27 · MaiK on-device is a Pro feature, not a private beta
+
+**Decision:** `SMD_MAIK_ENGINE.gateActive()` is now **Pro only** - `window.SMD_PRO.isProSync()`.
+The shared experimental access-code gate (`SMD_XACCESS` feature `maik_local`) is REMOVED from the
+feature: the constant, the client row under Settings > Experimental Features, its `openFeat()`
+branch, and the `maik_local` entry in `functions/_experimental.js` FEATURES are all gone. The two
+developer escape hatches stay (`localStorage smd_maik_local_bypass=1`, and a native DEBUG build via
+`SMD_MAIK_LOCAL.isDebugBuild()`) because the device harnesses drive them and a debug install has no
+Pro state to read.
+
+**Why:** it was never a boolean feature flag - it was the FundX/KardioX beta-code gate, so on-device
+answering was unreachable for every clinician who did not have a code from the team. A paying
+subscriber was being shown a greyed-out row reading "Private beta. Unlock with an access code below"
+and a toast telling them to go find one. Owner: make it available to Pro subscribers, no gates.
+
+**Trade-off:** a code can no longer unlock it for a non-subscriber, so existing MAIK-prefixed codes
+are inert. Accepted - that is the point of the change. `SMD_PRO` **fails OPEN** (`_pro` defaults
+true, only an explicit `{pro:false}` from `/api/billing/status` flips it), so during the launch promo
+(to 2026-09-15) this is effectively open to everyone on a native build; enforcement tightens by
+itself when the promo ends. That is the right direction: a network blip must never lock a clinician
+out of a 2.5 GB model already on their phone.
+
+**Copy** follows the gate: the locked row now reads "Included with Pro. Subscribe to unlock, then
+download the model.", the picker row carries a **Pro** pill next to **Beta** (Pro = access, Beta =
+quality - the model is still ungrounded and can be wrong), and `kbOnlyNotice()` says
+"On-device answering is included with Pro." instead of naming an access code.
+
+**Status:** 178/178 `test/maik-engine.test.mjs` + 19/19 headless-Chrome `test/run-maik-engine-ui.mjs`
+green. Client-only apart from the dead FEATURES line. NOT yet in a native build - needs
+`build-www` -> `cap sync` -> rebuild + reinstall to reach a device. See [[MaiK]].
+
 ## 2026-08-26 · ACCEPTED EXPOSURE: real patient identifiers are permanent in main's history
 
 **Owner decision: leave it, and record it here so it is not rediscovered as a surprise.**

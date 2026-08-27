@@ -32,6 +32,10 @@ physical iPhone: 126/126 requests streamed with multiple deltas.
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
+- **The on-device engine is gated on PRO, not on a flag** (2026-08-27). `gateActive()` reads
+  `SMD_PRO.isProSync()` only; the old `SMD_XACCESS` `maik_local` access-code gate is gone from the
+  client AND from `functions/_experimental.js`. Dev hatches kept: `smd_maik_local_bypass=1` and a
+  native debug build. `SMD_PRO` fails OPEN, so the promo period makes it open to everyone on native.
 - Model is env-driven (`GEMINI_MODEL`); `thinkingBudget:0`.
 - Preview env has no Vertex → Tier-0 (KB) only.
 - No em-dash in app-facing text (AI *output* exempt).
