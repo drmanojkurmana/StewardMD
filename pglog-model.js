@@ -40,7 +40,7 @@
   var ENTRY_KINDS = ["clinical", "procedure", "academic", "research", "certification", "attendance", "reflection"];
   var CLINICAL_SETTINGS = ["opd", "ipd", "emergency"];
 
-  // The role ladder. PGMER-2023 5.2(v) names two of these literally ("assisted or done
+  // The role ladder. PGMER-2023 5.2(vi) names two of these literally ("assisted or done
   // independently"); the curricula's DOAP (Demonstrate-Observe-Assist-Perform) gives the other two.
   // Order is meaningful: index = graded responsibility (5.2(x)).
   var ROLES = ["observed", "assisted", "performed_supervised", "performed_independent"];
@@ -51,7 +51,7 @@
     performed_independent: "Performed independently"
   };
 
-  // Academic activity types. The first nine are PGMER-2023 5.2(x) verbatim; ug_teaching is 5.2(vii);
+  // Academic activity types. The first nine are PGMER-2023 5.2(x) verbatim; ug_teaching is 5.2(viii);
   // the rest come from the specialty curricula (see the requirements doc section 1.4 / 3.3).
   var ACADEMIC_TYPES = [
     "lecture", "seminar", "journal_club", "group_discussion", "laboratory_work",
@@ -82,19 +82,19 @@
     "ethics_approval", "data_collection", "analysis", "draft_written", "submitted", "accepted"
   ];
   var RESEARCH_SUBTYPES = ["thesis_milestone", "publication", "poster", "conference_paper", "additional_project", "presentation"];
-  // PGMER-2023 5.2(xi)(a)-(c): the three certifications that are mandatory in year 1 and are a
+  // PGMER-2023 5.2(xi)-(c): the three certifications that are mandatory in year 1 and are a
   // pre-requisite to sitting the final examination.
   var CERTIFICATIONS = ["research_methodology", "ethics_gcp_glp", "bcls_acls"];
-  // PGMER-2023 5.6.
+  // PGMER-2023 5.5.
   var ATTENDANCE_STATES = ["present", "leave_paid", "leave_academic", "leave_maternity", "leave_paternity", "absent", "holiday"];
   /* WHAT COUNTS AS AN ATTENDED DAY IS INSTITUTIONAL POLICY, NOT REGULATION.
-   * PGMER-2023 5.6 GRANTS 20 days paid leave (5.6(a)), 5 days academic leave (5.6(e)), a weekly
-   * holiday (5.6(b)) and maternity/paternity leave (5.6(c),(d)). It says the term is extended only
+   * PGMER-2023 5.5 GRANTS 20 days paid leave (5.5(a)), 5 days academic leave (5.5(e)), a weekly
+   * holiday (5.5(b)) and maternity/paternity leave (5.5(c),(d)). It says the term is extended only
    * "If a candidate avails leave IN EXCESS THAN the permitted number of days". It nowhere says that
    * permitted leave is non-attendance.
    *
    * So the default below counts every PERMITTED leave state. Deducting statutory maternity leave
-   * from a resident's attendance percentage — and then badging the result "PGMER-2023 5.6" — would
+   * from a resident's attendance percentage — and then badging the result "PGMER-2023 5.5" — would
    * be the module inventing a rule and attributing it to the gazette. (R1 2026-08-27, finding C2.)
    *
    * Institutions do differ, so this is `attendanceCounts` in pconfig() and the Academic Cell can
@@ -159,7 +159,7 @@
     return t.toISOString().slice(0, 10);
   }
   function monthKey(iso) { var d = isoDate(iso); return d ? d.slice(0, 7) : ""; }
-  // ISO-8601 week key "YYYY-Www". PGMER 5.2(v) says the e-logbook is "updated on weekly basis", so
+  // ISO-8601 week key "YYYY-Www". PGMER 5.2(vi) says the e-logbook is "updated on weekly basis", so
   // the week is a regulatory unit here and must be the same week for everyone (Mon-Sun, ISO).
   function weekKey(iso) {
     var t = dayMs(iso); if (!isFinite(t)) return "";
@@ -252,7 +252,7 @@
       verifySlaDays: posInt(c.verifySlaDays, 7),                 // CONFIG
       attestationGraceDays: posInt(c.attestationGraceDays, 7),   // CONFIG
       rotationEndNoticeDays: posInt(c.rotationEndNoticeDays, 7), // CONFIG
-      attendancePct: num(c.attendancePct, 80),                   // PGMER-2023 5.6 (regulation)
+      attendancePct: num(c.attendancePct, 80),                   // PGMER-2023 5.5 (regulation)
       // Which attendance states count toward the percentage. INSTITUTIONAL, not NMC — see the
       // COUNTS_AS_ATTENDED_DEFAULT comment. Only the seven known states are accepted.
       attendanceCounts: attendanceCounts(c.attendanceCounts),
@@ -328,14 +328,14 @@
       startDate: isoDate(o.startDate),
       endDate: isoDate(o.endDate),
       faculty: clampStr(o.faculty, 120),
-      coordinator: clampStr(o.coordinator, 120),        // DRPC for a DRP rotation (PGMER 5.2(xii)VI)
+      coordinator: clampStr(o.coordinator, 120),        // DRPC for a DRP rotation (PGMER 5.2(xv)VI)
       requirementIds: strArr(o.requirementIds, 60),
       objectives: clampStr(o.objectives, 600),
       status: oneOf(["planned", "active", "completed"], o.status, "planned"),
       createdAt: num(o.createdAt, 0)
     };
   }
-  /* PGMER-2023 5.2(xii)V, verbatim: "shall undergo a compulsory residential rotation of three months
+  /* PGMER-2023 5.2(xv)V, verbatim: "shall undergo a compulsory residential rotation of three months
    * in District Hospitals/ District Health System ... Such rotation shall take place in the 3rd or
    * 4th or 5th semester of the post-graduate programme. In case of those students who have taken
    * admission after completion of Diploma in the relevant specialty, District Residency Programme
@@ -360,11 +360,11 @@
     return {
       ok: false, semester: sem, thirdOnly: thirdOnly,
       warning: thirdOnly
-        ? "PGMER-2023 5.2(xii)V places the District Residency in the THIRD SEMESTER ONLY for a " +
+        ? "PGMER-2023 5.2(xv)V places the District Residency in the THIRD SEMESTER ONLY for a " +
           "post-diploma entrant or a PG Diploma student; this rotation starts in semester " + sem + "."
-        : "PGMER-2023 5.2(xii)V places the District Residency in the 3rd, 4th or 5th semester; " +
+        : "PGMER-2023 5.2(xv)V places the District Residency in the 3rd, 4th or 5th semester; " +
           "this rotation starts in semester " + sem + ".",
-      source: "nmc_regulation", clause: "5.2(xii)V"
+      source: "nmc_regulation", clause: "5.2(xv)V"
     };
   }
   // Total DRP DAYS recorded. Days, not months, because months are the thing being tested against and
@@ -384,7 +384,7 @@
 
   /* ── the entry: one polymorphic record for every logged activity ─────────────
    * Deliberately ONE shape rather than seven collections. A logbook's whole value is the union - the
-   * weekly-cadence check (5.2(v)), the monthly attestation (5.2(vi)) and every report iterate all
+   * weekly-cadence check (5.2(vi)), the monthly attestation (5.2(vii)) and every report iterate all
    * activity at once, and seven parallel schemas would mean seven places to get the audit trail
    * right. Kind-specific fields are validated per kind by validateEntry(). */
   function entry(o) {
@@ -533,7 +533,7 @@
       if (ROLES.indexOf(e.role) < 0) bad("role", "Your role is required.");
     } else if (e.kind === "procedure") {
       if (!trim(e.procedureId) && !trim(e.procedureText)) bad("procedure", "Select or name the procedure.");
-      if (ROLES.indexOf(e.role) < 0) bad("role", "Your role is required (PGMER-2023 5.2(v)).");
+      if (ROLES.indexOf(e.role) < 0) bad("role", "Your role is required (PGMER-2023 5.2(vi)).");
     } else if (e.kind === "academic") {
       if (!trim(e.topic) && !trim(e.title)) bad("topic", "Topic is required.");
     } else if (e.kind === "research") {
@@ -546,7 +546,7 @@
       }
     } else if (e.kind === "certification") {
       if (CERTIFICATIONS.indexOf(e.subtype) < 0) bad("subtype", "Unknown certification.");
-      // PGMER-2023 5.2(xi)(a)iv: "The online certificate generated on successful completion ... will
+      // PGMER-2023 5.2(xi)iv: "The online certificate generated on successful completion ... will
       // be acceptable evidence of having completed this course."
       if (!e.attachments.length && !trim(e.certificateNo)) {
         bad("attachments", "Attach the certificate (PGMER-2023 5.2(xi)) or enter its number.");
@@ -557,15 +557,15 @@
     } else if (e.kind === "reflection") {
       if (!trim(e.body)) bad("body", "Write the reflection.");
     }
-    // MS / M.Ch: PGMER-2023 5.2(v) makes the surgical-procedure log mandatory, so a procedure entry
+    // MS / M.Ch: PGMER-2023 5.2(vi) makes the surgical-procedure log mandatory, so a procedure entry
     // from these degrees must name a supervisor - "assisted or done independently" is a claim about a
     // named person's theatre.
     if (e.kind === "procedure" && ctx.degree && requiresProcedureLog(ctx.degree) && !trim(e.supervisor)) {
-      bad("supervisor", "Supervising consultant is required for " + ctx.degree + " procedure entries (PGMER-2023 5.2(v)).");
+      bad("supervisor", "Supervising consultant is required for " + ctx.degree + " procedure entries (PGMER-2023 5.2(vi)).");
     }
     return { ok: !errors.length, errors: errors };
   }
-  // PGMER-2023 5.2(v): "MS/M.Ch students shall mandatorily enter details of surgical procedures
+  // PGMER-2023 5.2(vi): "MS/M.Ch students shall mandatorily enter details of surgical procedures
   // assisted or done independently."
   function requiresProcedureLog(degree) { return degree === "MS" || degree === "MCh"; }
 
@@ -827,7 +827,7 @@
     return out;
   }
 
-  /* ── attestation (PGMER-2023 5.2(vi)) ────────────────────────────────────────
+  /* ── attestation (PGMER-2023 5.2(vii)) ────────────────────────────────────────
    * "The record (Log) books shall be checked, assessed and authenticated MONTHLY by the postgraduate
    * guide imparting the training." The clause's unit is the month, so this is a first-class object -
    * a per-entry tick does not satisfy it and does not produce the artefact an examiner asks for. */
@@ -915,7 +915,7 @@
    * be exactly the thing the brief forbids.
    *
    * ONLY VERIFIED ENTRIES COUNT toward progress. A resident cannot advance their own progress bar by
-   * logging; a faculty member advancing it is the point of 5.2(vi). Submitted-but-unverified work is
+   * logging; a faculty member advancing it is the point of 5.2(vii). Submitted-but-unverified work is
    * reported separately as `pending` so the resident can see it is not lost. */
 
   var PER_DAYS = { day: 1, week: 7, fortnight: 14, month: 30.4375, quarter: 91.3125, semester: 182.625, year: 365.25 };
@@ -1031,7 +1031,7 @@
     return out.sort(function (a, b) { return (a.severity === "high" ? 0 : 1) - (b.severity === "high" ? 0 : 1); });
   }
 
-  /* ── weekly cadence (PGMER-2023 5.2(v)) ──────────────────────────────────────
+  /* ── weekly cadence (PGMER-2023 5.2(vi)) ──────────────────────────────────────
    * "a dynamic e-log book which needs to be updated on WEEKLY basis". This measures the clause
    * literally: ISO weeks from the start of training to today, and which of them have no entry.
    * An entry counts toward its OCCURRED week, and separately we track the week it was CREATED in, so
@@ -1059,7 +1059,7 @@
       missed: missed,
       pct: ordered.length ? Math.round(((ordered.length - missed.length) / ordered.length) * 100) : null,
       streak: streak,
-      source: "nmc_regulation", clause: "5.2(v)"
+      source: "nmc_regulation", clause: "5.2(vi)"
     };
   }
 
@@ -1071,10 +1071,10 @@
     return Math.max(0, daysBetween(e.occurredAt, isoDate(e.createdAt)));
   }
 
-  /* ── attendance (PGMER-2023 5.6 + PGMEB FAQ 10.04.2024) ──────────────────────
+  /* ── attendance (PGMER-2023 5.5 + PGMEB FAQ 10.04.2024) ──────────────────────
    * THE DENOMINATOR IS WORKING DAYS, AND THIS MODULE HAD IT WRONG UNTIL 2026-08-27.
    *
-   * PGMER-2023 5.6 gives only a percentage ("80% of the attendance"). The PGMEB FAQ of 10.04.2024 —
+   * PGMER-2023 5.5 gives only a percentage ("80% of the attendance"). The PGMEB FAQ of 10.04.2024 —
    * a PRIMARY source, obtained 2026-08-27, checked into pglog-sources/PGMEB-FAQ-2024-04-10.txt —
    * defines what that percentage is OF, verbatim:
    *
@@ -1127,7 +1127,7 @@
     return Object.keys(byDay).sort().map(function (d) { return byDay[d]; });
   }
   // The days a resident's training was EXTENDED by, per the FAQ: maternity/paternity leave, and
-  // casual leave taken in excess of the 20 days a year 5.6(a) grants. This does NOT reduce the
+  // casual leave taken in excess of the 20 days a year 5.5(a) grants. This does NOT reduce the
   // attendance percentage — it moves the end of training.
   function termExtensionDays(entries, ctx) {
     ctx = ctx || {};
@@ -1197,7 +1197,7 @@
       pctOfRecorded: recorded ? Math.round((attended / recorded) * 100) : null,
       pctOfElapsed: elapsed ? Math.round((attended / elapsed) * 100) : null,
       thresholdPct: num(ctx.attendancePct, 80),
-      thresholdPctSource: "nmc_regulation",           // PGMER-2023 5.6 states the 80% itself
+      thresholdPctSource: "nmc_regulation",           // PGMER-2023 5.5 states the 80% itself
       thresholdDays: courseDays,
       // PRIMARY now: the PGMEB FAQ PDF was obtained on 2026-08-27 (pglog-sources/). It was carried
       // as nmc_faq_secondary while it was known only from news coverage of the notice.
@@ -1212,7 +1212,7 @@
       meetsPct: workingElapsed ? (attended / workingElapsed) * 100 >= num(ctx.attendancePct, 80) : null,
       meetsDays: requiredDays ? attended >= requiredDays : null,
       termExtension: termExtensionDays(entries, ctx),
-      note: "PGMER-2023 5.6 states the 80% figure; the PGMEB FAQ of 10.04.2024 defines what it is a " +
+      note: "PGMER-2023 5.5 states the 80% figure; the PGMEB FAQ of 10.04.2024 defines what it is a " +
         "percentage OF: WORKING days, i.e. calendar days minus 52 weekly offs a year (939 working " +
         "days in a three-year course, of which 80% is 751). Academic leave is counted as duty by " +
         "the FAQ's own words. Maternity/paternity leave and excess casual leave do not reduce the " +
@@ -1230,7 +1230,7 @@
     var rows = [];
     function has(fn) { return entries.some(fn); }
 
-    // PGMER-2023 5.2(xi)(a)-(c): the three mandatory first-year courses.
+    // PGMER-2023 5.2(xi)-(c): the three mandatory first-year courses.
     var certLabel = { research_methodology: "Research Methodology course", ethics_gcp_glp: "Ethics / GCP / GLP course", bcls_acls: "BCLS + ACLS certification" };
     CERTIFICATIONS.forEach(function (c) {
       rows.push({
@@ -1253,7 +1253,7 @@
       source: "nmc_regulation", clause: "5.2(x)"
     });
 
-    // PGMER-2023 5.2(xii)VIII(c): satisfactory completion of the District Residency.
+    // PGMER-2023 5.2(xv)VIII(c): satisfactory completion of the District Residency.
     if (ctx.programme && ctx.programme.programmeType === "PG" && (ctx.programme.degree === "MD" || ctx.programme.degree === "MS" || ctx.programme.degree === "Diploma")) {
       var months = drpMonths(ctx.rotations);
       rows.push({
@@ -1261,18 +1261,18 @@
         label: "District Residency Programme (3 months) completed",
         met: arr(ctx.rotations).some(function (r) { return r && r.kind === "drp" && r.status === "completed"; }) && drpMeetsThreeMonths(ctx.rotations),
         detail: months ? months.toFixed(1) + " months (" + drpDays(ctx.rotations) + " days) recorded; three calendar months is at least " + DRP_MIN_DAYS + " days" : "",
-        source: "nmc_regulation", clause: "5.2(xii)V, VIII(c)"
+        source: "nmc_regulation", clause: "5.2(xv)V, VIII(c)"
       });
     }
 
-    // PGMER-2023 5.6: the attendance threshold. Reported, never adjudicated.
+    // PGMER-2023 5.5: the attendance threshold. Reported, never adjudicated.
     if (ctx.attendance) {
       rows.push({
         key: "attendance",
         label: "80% attendance",
         met: ctx.attendance.meetsPct,
         detail: ctx.attendance.pctOfRecorded == null ? "no attendance recorded yet" : ctx.attendance.pctOfRecorded + "% of recorded days",
-        source: "nmc_regulation", clause: "5.6",
+        source: "nmc_regulation", clause: "5.5",
         advisory: true
       });
     }

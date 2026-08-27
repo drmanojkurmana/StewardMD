@@ -23,7 +23,13 @@ the native bundle.
 
 | File | Source | Fetched |
 |---|---|---|
-| `PGMER-2023.txt` | Post-Graduate Medical Education Regulations, 2023 · NMC/PGMEB · File No. N-P016(11)/2/2023-PGMEB-NMC · Gazette of India Extraordinary Part-III §4 | 2026-08-27 |
+| `PGMER-2023.txt` | **THE PUBLISHED GAZETTE** — PGMER-2023 · CG-DL-E-03012024-251108 · *PUBLISHED BY AUTHORITY* · 29 Dec 2023. **The only PGMER text this module may cite.** | 2026-08-27 |
+| `PGMER-2023-DRAFT-prepublication.txt` | **NOT AUTHORITATIVE.** The `LatestNews/MER.pdf` rendition, headed *"[To be published in the Gazette of India…]"*. The module was built against it until 2026-08-27; its clause numbering and some wording differ. Retained so the correction is auditable. | 2026-08-27 |
+| `PGMEB-FAQ-2024-04-10.txt` | PGMEB clarification on PGMER-2023 (FAQs), 10 Apr 2024. Scan → OCR; caveats in its own header. **Defines the attendance denominator.** | 2026-08-27 |
+| `PGMSR-2023.txt` | Minimum Standard of Requirements for PG Courses, 2023, 15 Jan 2024. Institutional capacity, **not** logbook content. | 2026-08-27 |
+| `Faculty-Qualifications-Regulations-2025.txt` | Medical Institutions (Qualifications of Faculty) Regulations, 2025 · gazette 30 Jun 2025. **s.16/s.17 define who may be a PG Guide.** | 2026-08-27 |
+| `Faculty-Qualifications-FAQ-2025-10-28.txt` | FAQs on the above, 28 Oct 2025. Nothing in this module derives from it. | 2026-08-27 |
+| `MCI-Logbook-Guidelines-2020-UG.txt` | *Guidelines for preparing Logbook*, 17 Jan 2020 — **for the UNDERGRADUATE programme**, despite the PG curricula cross-referencing it. Retained for the UG phase. | 2026-08-27 |
 | `gen_med.txt` | MD General Medicine (revised), NMC 2022 | 2026-08-27 |
 | `gen_surg.txt` | MS General Surgery, NMC 2019 | 2026-08-27 |
 | `obg.txt` | MS Obstetrics & Gynaecology, NMC 2019 | 2026-08-27 |
@@ -48,10 +54,12 @@ Full URLs are in `NMC_PG_LOGBOOK_REQUIREMENTS.md` §10.
   and split a label from its number across lines. The test therefore matches on the number *and* a
   distinctive token of the label, and any pack requirement whose label was reworded for the UI
   carries the original PDF spelling in its `sourceText` field.
-- **PG-MSR 2023/2024 is absent** — the NMC PDF is a scanned image with no extractable text. No
-  MSR-derived requirement is claimed anywhere in the module.
-- **The PGMEB FAQ (10.04.2024) is absent** — the primary PDF was not reachable. Anything sourced from
-  it is graded `nmc_faq_secondary` and is editable by the institution.
+- ~~PG-MSR absent~~ — **obtained 2026-08-27** (`PGMSR-2023.txt`, text-extractable). It contains no
+  logbook specification; exactly one per-resident figure is used, and it is reconstructed from a
+  table (see `sourceFragments` in the pack).
+- ~~PGMEB FAQ absent~~ — **obtained 2026-08-27**. Now graded `nmc_faq`, not `nmc_faq_secondary`.
+- **The `PGMER-2023.txt` here is the GAZETTE.** If you are diffing against something that numbers the
+  e-logbook clause 5.2(v), you are looking at the draft. The gazette numbers it **5.2(vi)**.
 
 ## When an NMC document is amended
 

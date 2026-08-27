@@ -152,6 +152,7 @@
     nmc_regulation: "PGMER-2023",
     nmc_curriculum: "NMC curriculum",
     nmc_faq: "PGMEB FAQ",
+    nmc_msr: "PG-MSR 2023",
     nmc_faq_secondary: "PGMEB FAQ (secondary)",
     institution: "Institutional policy",
     unspecified: "No NMC number"

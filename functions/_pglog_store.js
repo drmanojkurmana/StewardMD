@@ -183,7 +183,7 @@ export async function createRotation(env, orgId, body, actorUid, deps) {
   const rec = Object.assign({}, f, { orgScope: sanitize(orgId), deptScope: sanitize(orgId) + "|" + sanitize(f.departmentId) });
   await d.fsCommit(env, [d.wCreate(env, COL.rotation + "/" + id, rec)]);
   await audit(env, orgId, actorUid, "pglog:rotation:create", f.kind + " " + f.startDate, deps);
-  // PGMER-2023 5.2(xii)V — returned with the record, not thrown: a State's posting schedule is not
+  // PGMER-2023 5.2(xv)V — returned with the record, not thrown: a State's posting schedule is not
   // the resident's to fix, and refusing the rotation would lose a true record of where they were.
   const prog = await getProgramme(env, res.programmeId, deps);
   const w = M.drpWindowOk(f, res, prog);
@@ -256,7 +256,7 @@ export async function createEntry(env, orgId, body, actorUid, deps) {
   const ctx = await entryContext(env, (body || {}).residentId, deps);
   if (ctx.resident.orgId !== sanitize(orgId)) throw e403("cross_org");
   // A resident may only create their OWN records. Faculty logging on a resident's behalf is
-  // deliberately not a thing: 5.2(v) says the STUDENT maintains the logbook, and a faculty-authored
+  // deliberately not a thing: 5.2(vi) says the STUDENT maintains the logbook, and a faculty-authored
   // entry would also defeat the self-verify guard (the author and the verifier would be one person).
   if (norm(ctx.resident.uid) !== norm(actorUid)) throw e403("not_own_record");
   const id = newId();
@@ -505,7 +505,7 @@ export async function listAssessments(env, residentId, deps) {
   return r.map((x) => M.assessment(withId(x.id, x.fields))).sort((a, b) => (b.assessedAt || b.createdAt || 0) - (a.assessedAt || a.createdAt || 0));
 }
 
-/* ── attestation — PGMER-2023 5.2(vi) ────────────────────────────────────────
+/* ── attestation — PGMER-2023 5.2(vii) ────────────────────────────────────────
  * The monthly guide authentication. Written with wCreate (currentDocument.exists:false) on a
  * DETERMINISTIC id, so a month can be signed exactly once: a second attempt fails the precondition
  * rather than silently replacing a signature. */
@@ -518,7 +518,7 @@ export async function attest(env, body, actorUid, deps) {
   const kind = M.ATTESTATION_KINDS.indexOf(String(body.kind || "monthly")) > -1 ? String(body.kind || "monthly") : "";
   if (!kind) throw e400("unknown_attestation_kind");
   /* THE SIGNATURE MUST COME FROM THE AUTHORITY THE DOCUMENT NAMES.
-   * PGMER-2023 5.2(vi): the monthly authentication is by "the postgraduate GUIDE imparting the
+   * PGMER-2023 5.2(vii): the monthly authentication is by "the postgraduate GUIDE imparting the
    * training". The 2022-revised curricula: the completed log book "should be signed by the HEAD OF
    * THE DEPARTMENT", and the proficiency certificate is "from Head of Department".
    * Holding PGLOG_ATTEST is not the same as being that person, and minting a document that names an
@@ -677,7 +677,7 @@ export function publicEntry(e, audience) {
 }
 
 // What audience is this caller to this record? Drives publicEntry(). Deliberately narrow: an
-// Academic Cell has institution-wide OVERSIGHT (5.2(iii) "ensure and monitor"), which is a
+// Academic Cell has institution-wide OVERSIGHT (5.2(iv) "ensure and monitor"), which is a
 // completeness question, not a clinical-detail one.
 export function audienceFor(role, actorUid, entry, resident) {
   if (resident && M.sameActor(actorUid, resident.uid)) return "self";

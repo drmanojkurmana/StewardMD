@@ -136,6 +136,32 @@ quotation, since deleted.
 
 If you add or change a pack, run it. It will name what does not match.
 
+## THE CLAUSE NUMBERS CHANGED — 2026-08-27. Read this before citing anything.
+
+This module was built against **`LatestNews/MER.pdf`**, whose own first line reads
+*"[To be published in the Gazette of India…]"*. It is the **pre-publication draft**. The
+**published gazette** (`CG-DL-E-03012024-251108`, 29 Dec 2023) numbers the clauses differently
+**and words some of them differently**.
+
+| | Draft (old citations) | **Gazette (correct)** |
+|---|---|---|
+| e-log book, weekly | 5.2(v) | **5.2(vi)** |
+| Monthly guide authentication | 5.2(vi) | **5.2(vii)** |
+| UG teaching | 5.2(vii) | **5.2(viii)** |
+| Activity types | 5.2(x) | **5.2(i)** |
+| Academic Cell | 5.2(iii) | **5.2(iv)** |
+| Thesis research | *absent* | **5.2(iii)** |
+| Research Methodology / Ethics / BCLS | 5.2(xi)(a)/(b)/(c) | **5.2(xi) / (xii) / (xiii)** |
+| DRP | 5.2(xii) | **5.2(xv)** |
+| Leave + 80% attendance | 5.6 | **5.5** |
+
+Both texts are in `pglog-sources/`; only `PGMER-2023.txt` (the gazette) may be cited, and
+`PGMER-2023-DRAFT-prepublication.txt` is marked non-authoritative. Full diff, including the wording
+changes, in **§16** of the requirements doc.
+
+**The module is "structured to PGMER-2023 §5.2(vi)–(vii)".** If you see §5.2(v)–(vi) anywhere, it is
+stale.
+
 ## Competitive position — 2026-08-27
 
 Teardown of **NMC eLogbook** (Neugenic Mediventure, ₹4,999+GST per resident per 3 years) is in
@@ -200,9 +226,11 @@ which `npm test` passes and a bare `node --test test/*.test.mjs` does not. They 
   reviewed. R1 also recommended chaining `stewardmd-security-reviewer` for the C5 read-guard fix,
   which has not been done.
 - **Native rebuild not done.** Web deploys do not reach installed apps ([[Native app delivery]]).
-- **The PGMEB FAQ primary PDF was not obtainable** — see the open items in
-  `NMC_PG_LOGBOOK_REQUIREMENTS.md` §10.
-- **PG-MSR 2023/2024 is a scanned image PDF**, so no MSR-derived requirement is claimed anywhere.
+- ~~PGMEB FAQ not obtainable~~ — **obtained 2026-08-27**, and it corrected the attendance model
+  (80% is of WORKING days). §14 of the requirements doc.
+- ~~PG-MSR is a scanned image~~ — **obtained 2026-08-27**. It specifies no logbook content; the one
+  per-resident figure in it (OT training ≥2 full days/week, surgical specialties) is now a
+  requirement, reconstructed from a table with `sourceFragments`.
 - **~20 broad specialties and all DM/M.Ch have no pack** — they fall back to `generic-pg`, which
   carries the PGMER requirements and *says* no specialty pack is loaded.
 - **UG/CBME not built**, by instruction.

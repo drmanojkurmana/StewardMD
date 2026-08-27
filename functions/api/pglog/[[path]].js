@@ -1,6 +1,6 @@
 /* functions/api/pglog/[[path]].js — NMC Logbook API (Cloudflare Pages Function).
  * ===========================================================================
- * The PG digital logbook required by PGMER-2023 5.2(v)-(vi). Every route is authenticated with a
+ * The PG digital logbook required by PGMER-2023 5.2(vi)-(vii). Every route is authenticated with a
  * Firebase ID token and authorized through the EXISTING org-membership RBAC (q_members +
  * _queue_roles caps) — there is no parallel permission system here.
  *
@@ -116,13 +116,13 @@ async function canReadResident(env, ctx, resident, entry) {
     return "aggregate";
   }
   if (can(role, CAPS.PGLOG_VIEW_ASSIGNED)) {
-    // Their guide or co-guide: the person §5.2(vi) names as responsible for this logbook.
+    // Their guide or co-guide: the person §5.2(vii) names as responsible for this logbook.
     if (S.norm(resident.guide) === mine || (resident.coGuides || []).some((g) => S.norm(g) === mine)) return "verifier";
     // Or the supervisor named on the specific entry being opened — they were asked to verify it.
     if (entry && S.norm(entry.supervisor) === mine) return "verifier";
     return "aggregate";
   }
-  // Institution-wide oversight (Academic Cell, §5.2(iii) "ensure and monitor") is a completeness
+  // Institution-wide oversight (Academic Cell, §5.2(iv) "ensure and monitor") is a completeness
   // question, so it is deliberately the LAST and narrowest grant.
   if (can(role, CAPS.PGLOG_VIEW_INSTITUTION)) return "aggregate";
   throw Object.assign(new Error("forbidden"), { status: 403, detail: "read_resident" });
@@ -227,7 +227,7 @@ export async function onRequest(context_) {
         // Gate on the ROTATION'S OWN org, loaded from the document — never on an org the caller
         // supplies. The first version gated on body.orgId while updateRotation() wrote to cur.orgId,
         // so an Academic Cell in one institution could flip another institution's DRP rotation to
-        // "completed" — an exam pre-requisite under §5.2(xii)VIII(c). (R1, finding C6.)
+        // "completed" — an exam pre-requisite under §5.2(xv)VIII(c). (R1, finding C6.)
         const cur = await S.getRotation(env, id);
         if (!cur) return json({ error: "not_found" }, 404);
         const ctx = await context(request, env, cur.orgId);
@@ -365,7 +365,7 @@ export async function onRequest(context_) {
       }
     }
 
-    /* ── attestation — PGMER-2023 5.2(vi) ───────────────────────────────── */
+    /* ── attestation — PGMER-2023 5.2(vii) ───────────────────────────────── */
     if (seg === "attest" && method === "POST") {
       const res = await S.getResident(env, body.residentId);
       if (!res) return json({ error: "not_found" }, 404);

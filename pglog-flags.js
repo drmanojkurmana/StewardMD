@@ -3,7 +3,7 @@
  * same resolution order: ?query param -> localStorage -> default. Persistence is localStorage only.
  * Dual export: module.exports for node tests, window.SMD_PGLOG_FLAGS for the browser.
  *
- * WHAT THIS MODULE IS: the NMC PG e-logbook required by PGMER-2023 §5.2(v)-(vi). It holds records
+ * WHAT THIS MODULE IS: the NMC PG e-logbook required by PGMER-2023 §5.2(vi)-(vii). It holds records
  * that a University examiner may rely on and whose falsification carries a statutory penalty on a
  * NAMED person (PGMER-2023 §9.2(c)). That is why the audit/immutability behaviour is NOT behind a
  * flag - there is no configuration in which a verified record may be silently overwritten.
@@ -49,9 +49,10 @@
     },
     smd_pglog_attendance: {
       type: "bool", def: true, query: "pglogattendance",
-      desc: "Attendance / training-participation records (PGMER-2023 section 5.6). The 80% figure is " +
-        "the regulation's; the 751/501-day figures come from the PGMEB FAQ (a SECONDARY source we " +
-        "could not fetch as a primary PDF) and are shown labelled as such and are editable."
+      desc: "Attendance / training-participation records (PGMER-2023 section 5.5). The 80% is the gazette's; " +
+        "the PGMEB FAQ of 10.04.2024 (obtained 2026-08-27, PRIMARY) defines what it is a percentage OF - " +
+        "WORKING days, i.e. calendar days minus 52 weekly offs a year. WHICH days count is institutional " +
+        "and is labelled as such."
     },
     smd_pglog_reports: {
       type: "bool", def: true, query: "pglogreports",
@@ -72,13 +73,13 @@
     smd_pglog_verify_sla_days: {
       type: "int", def: 7, query: "pglogsla",
       desc: "CONFIG (not NMC): days after submission before a pending verification is called overdue. " +
-        "NMC gives exactly one cadence - monthly guide authentication, section 5.2(vi) - and no " +
+        "NMC gives exactly one cadence - monthly guide authentication, section 5.2(vii) - and no " +
         "per-entry SLA. This is institutional policy and is labelled as such in the UI."
     },
     smd_pglog_attest_grace_days: {
       type: "int", def: 7, query: "pglogattestgrace",
       desc: "CONFIG (not NMC): days after a calendar month closes before its missing guide " +
-        "authentication (section 5.2(vi)) is called overdue."
+        "authentication (section 5.2(vii)) is called overdue."
     }
   };
 

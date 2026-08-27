@@ -434,7 +434,7 @@ test("a DRP rotation outside the 3rd-5th semester is recorded WITH a warning, no
     residentId: res.id, kind: "drp", name: "District Hospital", startDate: "2025-08-01", endDate: "2025-11-01"
   }, FACULTY_UID, db);
   assert.ok(early.warning, "the semester-window warning is missing");
-  assert.match(early.warning, /5\.2\(xii\)V/);
+  assert.match(early.warning, /5\.2\(xv\)V/, "GAZETTE numbering — the draft called the DRP clause 5.2(xii)");
   assert.equal((await S.listRotations(env, res.id, db)).length, 1, "the rotation must still be recorded");
   const ok = await S.createRotation(env, ORG, {
     residentId: res.id, kind: "drp", name: "District Hospital", startDate: "2026-08-01", endDate: "2026-11-01"

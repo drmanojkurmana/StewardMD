@@ -241,12 +241,12 @@
       stat(wk.pct == null ? "—" : wk.pct + "%", "Weekly cadence") +
       "</div>");
 
-    // The weekly strip — PGMER-2023 5.2(v) made visible. One cell per ISO week.
+    // The weekly strip — PGMER-2023 5.2(vi) made visible. One cell per ISO week.
     if (wk.weeks) {
       h.push('<div class="pgl-card tight">' +
         '<div class="pgl-row-s" style="justify-content:space-between">' +
           "<span><b>" + esc(String(wk.logged)) + "</b> of " + esc(String(wk.weeks)) + " weeks logged</span>" +
-          prov("nmc_regulation", "5.2(v)") + "</div>" +
+          prov("nmc_regulation", "5.2(vi)") + "</div>" +
         weekStrip(wk) +
         '<div class="hint" style="font-size:11.5px;color:var(--pgl-faint);margin-top:6px">' +
           "The e-logbook “needs to be updated on weekly basis”. A week counts once anything is logged in it." +
@@ -263,7 +263,7 @@
       h.push(banner("warn", "gavel",
         "<b>" + overdueMonths.length + " month(s)</b> without your guide's authentication (" +
         esc(overdueMonths.map(function (x) { return x.period; }).join(", ")) +
-        "). " + prov("nmc_regulation", "5.2(vi)")));
+        "). " + prov("nmc_regulation", "5.2(vii)")));
     }
 
     // Progress by category — only requirements with a real target get a bar.
@@ -413,7 +413,7 @@
     }
     return emptyState("school", "Your training record is not linked yet",
       "Your institution's Academic Cell enrols you into your PG programme in StewardMD. Once enrolled, this " +
-      "becomes your NMC logbook — the weekly e-logbook PGMER-2023 5.2(v) requires, with your guide's monthly authentication.",
+      "becomes your NMC logbook — the weekly e-logbook PGMER-2023 5.2(vi) requires, with your guide's monthly authentication.",
       '<button class="pgl-btn" data-pgl="go" data-r="setup">How to get set up</button>' +
       '<button class="pgl-btn ghost" data-pgl="go" data-r="add" style="margin-left:8px">Log on this device</button>');
   }
@@ -423,7 +423,7 @@
     return wrap(
       '<div class="pgl-card"><h3>Linking your logbook</h3>' +
       "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
-      "PGMER-2023 5.2(iii) requires every institution running a PG programme to set up an Academic Cell. " +
+      "PGMER-2023 5.2(iv) requires every institution running a PG programme to set up an Academic Cell. " +
       "That cell creates the programme in StewardMD and enrols you into it with your training dates and your guide. " +
       "Until then, anything you log stays on this device." +
       "</p></div>" +
@@ -432,7 +432,7 @@
       '<div class="hint">Ask your department for the StewardMD institution code. Entering it here only tells this device where to look — it does not enrol you.</div></div>' +
       '<button class="pgl-btn wide" data-pgl="save-org">Save and check</button>' +
       banner("info", "policy",
-        "This module is <b>structured to</b> PGMER-2023 5.2(v)–(vi). It does not claim to be certified by the NMC, " +
+        "This module is <b>structured to</b> PGMER-2023 5.2(vi)–(vi). It does not claim to be certified by the NMC, " +
         "and whether a logbook is acceptable to your University is your institution's decision, not this app's.")
     );
   }
@@ -505,7 +505,7 @@
             esc(m.ROLE_LABEL[r]) + "</button>";
         }).join("") + "</div>" +
         (errs.role ? '<div class="pgl-err">' + esc(errs.role) + "</div>" : "") +
-        '<div class="hint">' + esc("PGMER-2023 5.2(v) requires MS / M.Ch students to record every surgical procedure assisted or done independently.") + "</div></div>");
+        '<div class="hint">' + esc("PGMER-2023 5.2(vi) requires MS / M.Ch students to record every surgical procedure assisted or done independently.") + "</div></div>");
     }
 
     // A PICKER, not a text box. `pendingFor` is a copy of this value and is the only thing that puts
@@ -523,12 +523,12 @@
         }).join("") +
         (d.supervisor && !known ? '<option value="' + attr(d.supervisor) + '" selected>' + esc(d.supervisor) + " (not on the faculty list)</option>" : "") +
       "</select>",
-      "They receive this entry for verification (PGMER-2023 5.2(vi)). Only people who can actually " +
+      "They receive this entry for verification (PGMER-2023 5.2(vii)). Only people who can actually " +
       "verify are listed — an unlisted name would mean nobody receives it.", errs));
   } else {
     h.push(field("Faculty / supervisor", "supervisor",
       '<input type="text" data-f="supervisor" value="' + attr(d.supervisor) + '" placeholder="Who supervised this?">',
-      "They receive the entry for verification (PGMER-2023 5.2(vi)). The faculty list is not loaded " +
+      "They receive the entry for verification (PGMER-2023 5.2(vii)). The faculty list is not loaded " +
       "on this device yet, so this is free text; it will be checked against the list when you submit.", errs));
   }
 
@@ -613,7 +613,7 @@
       '<select data-f="academicType">' + m.ACADEMIC_TYPES.map(function (t) {
         return '<option value="' + t + '"' + (d.academicType === t ? " selected" : "") + ">" + esc(m.ACADEMIC_LABEL[t] || t) + "</option>";
       }).join("") + "</select>",
-      "PGMER-2023 5.2(x) names lectures, seminars, journal clubs, group discussions, laboratory work, clinical meetings, grand rounds and CPCs; 5.2(vii) requires teaching undergraduates.", errs);
+      "PGMER-2023 5.2(x) names lectures, seminars, journal clubs, group discussions, laboratory work, clinical meetings, grand rounds and CPCs; 5.2(viii) requires teaching undergraduates.", errs);
     h += field("Topic", "topic", '<input type="text" data-f="topic" value="' + attr(d.topic) + '" placeholder="What was it about?">', "", errs);
     h += '<div class="pgl-field"><label>Your role</label><div class="pgl-chips">' +
       m.ACADEMIC_ROLES.map(function (r) {
@@ -679,7 +679,7 @@
     h += field("Until (for a range)", "endDate", '<input type="date" data-f="endDate" value="' + attr(d.endDate || d.occurredAt) + '">',
       "A range expands to one record per day. Re-entering a day corrects it.", errs);
     h += banner("info", "policy",
-      "PGMER-2023 5.6 states 80% attendance. The 751 / 501-day figures come from the PGMEB FAQ, a " +
+      "PGMER-2023 5.5 states 80% attendance. The 751 / 501-day figures come from the PGMEB FAQ, a " +
       "<b>secondary source</b> we could not fetch as a primary document. What counts as an attended day " +
       "is your institution's rule — this records, it does not adjudicate.");
     return h;
@@ -796,7 +796,7 @@
           ? '<div class="hint" style="margin-top:8px">' + arr(e.revisions).length +
             " amendment(s). The verified original of each is retained in full and is never overwritten.</div>"
           : "") +
-        (e.attestedIn ? '<div class="hint">Covered by the guide\'s authentication for ' + esc(e.attestedIn) + ". " + prov("nmc_regulation", "5.2(vi)") + "</div>" : "") +
+        (e.attestedIn ? '<div class="hint">Covered by the guide\'s authentication for ' + esc(e.attestedIn) + ". " + prov("nmc_regulation", "5.2(vii)") + "</div>" : "") +
         "</div>");
     }
 
@@ -900,7 +900,7 @@
       h.push('<div class="pgl-card"><h3>Attendance</h3>' +
         '<div class="pgl-stats">' + stat(a.attendedDays, "Days attended") + stat(a.recordedDays, "Days recorded") +
         stat(a.pctOfWorkingDays == null ? "—" : a.pctOfWorkingDays + "%", "Of working days") + "</div>" +
-        '<div class="pgl-row-s" style="margin-top:10px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.6") +
+        '<div class="pgl-row-s" style="margin-top:10px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.5") +
         (a.thresholdDays ? " · " + esc(String(a.thresholdDays)) + " days " + prov("nmc_faq_secondary", "PGMEB FAQ 10.04.2024") : "") + "</div>" +
         '<div class="hint" style="margin-top:8px">' + esc(a.note) + "</div></div>");
     }
@@ -921,11 +921,11 @@
     var drpDays = m.drpDays(rows), drpMonths = m.drpMonths(rows), drpMet = m.drpMeetsThreeMonths(rows);
     h.push('<div class="pgl-card"><h3>District Residency Programme</h3>' +
       '<div class="pgl-row-s">' + esc(drpDays + " days (" + drpMonths.toFixed(1) + " months) of three calendar months recorded ") +
-        prov("nmc_regulation", "5.2(xii)V") + "</div>" +
+        prov("nmc_regulation", "5.2(xv)V") + "</div>" +
       '<div class="pgl-bar" data-state="' + (drpMet ? "met" : "behind") + '"><i style="width:' +
         Math.min(100, Math.round((drpDays / m.DRP_MIN_DAYS) * 100)) + '%"></i></div>' +
       '<div class="hint" style="margin-top:8px">A compulsory three-month rotation in a District Hospital / District Health System, ' +
-      "in the 3rd, 4th or 5th semester. Satisfactory completion is an essential condition before the final examination (5.2(xii)VIII(c)).</div></div>");
+      "in the 3rd, 4th or 5th semester. Satisfactory completion is an essential condition before the final examination (5.2(xv)VIII(c)).</div></div>");
     if (!rows.length) {
       h.push(emptyState("route", "No rotations recorded", "Your department records postings. Ask them to add your rotation schedule so entries can be linked to it."));
     }
@@ -1006,7 +1006,7 @@
             " paternity, " + a.termExtension.excessCasual + " excess casual leave). This does <b>not</b> " +
             "reduce your attendance percentage — it moves the end of training. " + prov("nmc_faq", "FAQ Q1, Q2"))
         : "") +
-      '<div class="pgl-row-s" style="margin-top:12px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.6") + "</div>" +
+      '<div class="pgl-row-s" style="margin-top:12px">Threshold ' + esc(String(a.thresholdPct)) + "% " + prov("nmc_regulation", "5.5") + "</div>" +
       (a.thresholdDays ? '<div class="pgl-row-s">Day count ' + esc(String(a.thresholdDays)) + " " + prov("nmc_faq_secondary", "PGMEB FAQ 10.04.2024") + "</div>" : "") +
       '<div class="hint" style="margin-top:10px">' + esc(a.note) + "</div></div>");
     var counts = a.counts || {};
@@ -1016,8 +1016,8 @@
           "</span><b>" + counts[k] + "</b></div>";
       }).join("") + "</div>");
     h.push(banner("info", "policy",
-      "PGMER-2023 5.6 also sets your entitlements: a minimum of <b>20 days paid leave per year</b> (5.6(a)), " +
-      "<b>one weekly holiday</b> subject to exigencies (5.6(b)) and <b>5 days academic leave per year</b> (5.6(e)). " +
+      "PGMER-2023 5.5 also sets your entitlements: a minimum of <b>20 days paid leave per year</b> (5.5(a)), " +
+      "<b>one weekly holiday</b> subject to exigencies (5.5(b)) and <b>5 days academic leave per year</b> (5.5(e)). " +
       "This module records what you enter; it does not approve or refuse leave."));
     return wrap(h.join("")) +
       '<div class="pgl-actionbar"><button class="pgl-btn" data-pgl="go" data-r="add/attendance">' + ic("add") + "Record attendance</button></div>";
@@ -1121,7 +1121,7 @@
       h.push(banner("warn", "hourglass_bottom",
         "<b>" + arr(f.overdue).length + " entries</b> have been waiting beyond your institution's " +
         fint("smd_pglog_verify_sla_days") + "-day review target. " +
-        "<span class=\"pgl-clause\">Institutional policy — NMC sets no per-entry SLA, only the monthly authentication in 5.2(vi).</span>"));
+        "<span class=\"pgl-clause\">Institutional policy — NMC sets no per-entry SLA, only the monthly authentication in 5.2(vii).</span>"));
     }
     h.push('<div class="pgl-sec-title"><span>Awaiting your verification</span><span>' + arr(f.pending).length + "</span></div>");
     if (!arr(f.pending).length) h.push(emptyState("task_alt", "Nothing waiting", "Every entry submitted to you has been reviewed."));
@@ -1287,7 +1287,7 @@
     if (d.audience === "aggregate") {
       h.push(banner("info", "shield_person",
         "Institution-wide view. It shows training completeness only — no case reference, diagnosis or clinical " +
-        "detail reaches this screen. PGMER-2023 5.2(iii) asks the Academic Cell to <b>ensure and monitor the " +
+        "detail reaches this screen. PGMER-2023 5.2(iv) asks the Academic Cell to <b>ensure and monitor the " +
         "implementation of training programmes</b>, which is a completeness question."));
     }
     h.push('<div class="pgl-filters">');
@@ -1342,7 +1342,7 @@
     if (x.attendance) {
       h.push('<div class="pgl-card tight"><div class="pgl-row-s">Attendance ' +
         (x.attendance.pctOfRecorded == null ? "not recorded" : x.attendance.pctOfRecorded + "% of recorded days") +
-        " " + prov("nmc_regulation", "5.6") + "</div></div>");
+        " " + prov("nmc_regulation", "5.5") + "</div></div>");
     }
     h.push(banner("info", "shield_person",
       "This view shows training completeness. Opening an individual entry's clinical detail requires being " +
@@ -1381,7 +1381,7 @@
       case "progress": title = "Progress"; sub = "Against NMC requirements"; body = screenProgress(); break;
       case "rotations": title = "Rotations"; body = screenRotations(); break;
       case "research": title = "Research and thesis"; body = screenResearch(); break;
-      case "attendance": title = "Attendance"; sub = "PGMER-2023 5.6"; body = screenAttendance(); break;
+      case "attendance": title = "Attendance"; sub = "PGMER-2023 5.5"; body = screenAttendance(); break;
       case "reports": title = "Reports"; body = screenReports(); break;
       case "report": title = "Report"; body = screenReport(a); break;
       case "faculty": title = "Faculty review"; sub = "Verify and assess"; body = screenFaculty(); break;

@@ -164,14 +164,14 @@ test("occurredAt is bounded by today and by the start of training", () => {
   assert.equal(M.validateEntry(mkEntry({ occurredAt: "2026-08-20" }), ctx).ok, true);
 });
 
-test("PGMER-2023 5.2(v) — an MS/M.Ch procedure entry must name its supervisor", () => {
+test("PGMER-2023 5.2(vi) — an MS/M.Ch procedure entry must name its supervisor", () => {
   assert.equal(M.requiresProcedureLog("MS"), true);
   assert.equal(M.requiresProcedureLog("MCh"), true);
   assert.equal(M.requiresProcedureLog("MD"), false);
   const ctx = { today: "2026-08-27", programmeStart: "2025-07-01", degree: "MS" };
   const bad = M.validateEntry(mkEntry({ supervisor: "" }), ctx);
   assert.equal(bad.ok, false);
-  assert.ok(bad.errors.some((e) => e.field === "supervisor" && /5\.2\(v\)/.test(e.message)));
+  assert.ok(bad.errors.some((e) => e.field === "supervisor" && /5\.2\(vi\)/.test(e.message)));
   assert.equal(M.validateEntry(mkEntry({ supervisor: "" }), Object.assign({}, ctx, { degree: "MD" })).ok, true);
 });
 
@@ -268,7 +268,7 @@ test("weeklyCadence measures the regulation's own unit and names the missed week
   ];
   const wk = M.weeklyCadence(entries, "2026-08-01", "2026-08-27");
   assert.equal(wk.source, "nmc_regulation");
-  assert.equal(wk.clause, "5.2(v)");
+  assert.equal(wk.clause, "5.2(vi)", "GAZETTE numbering — the draft called it 5.2(v)");
   assert.ok(wk.weeks >= 4);
   assert.ok(wk.missed.length >= 2);
   assert.ok(wk.pct < 100);
@@ -423,7 +423,7 @@ test("the DRP semester window is a warning, not a block", () => {
   const early = M.rotation({ id: "y", kind: "drp", startDate: "2025-08-01", endDate: "2025-11-01" });      // semester 1
   const w = M.drpWindowOk(early, res);
   assert.equal(w.ok, false);
-  assert.match(w.warning, /5\.2\(xii\)V/);
+  assert.match(w.warning, /5\.2\(xv\)V/);
   assert.equal(w.source, "nmc_regulation");
   // a non-DRP rotation is never warned about
   assert.equal(M.drpWindowOk(M.rotation({ id: "z", kind: "department", startDate: "2025-08-01" }), res).ok, true);

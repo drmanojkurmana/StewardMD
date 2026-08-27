@@ -19,8 +19,9 @@ it is marked `CONFIG` and the UI labels it as institutional policy, never as an 
 
 **The module does not claim "NMC compliant."** It claims, and only claims:
 
-- *"Structured to PGMER-2023 §5.2(v)–(vi)"* — for the weekly e-logbook + monthly guide authentication,
-  because those clauses are quoted verbatim below and implemented literally.
+- *"Structured to PGMER-2023 §5.2(vi)–(vii)"* — for the weekly e-logbook + monthly guide authentication,
+  because those clauses are quoted verbatim below and implemented literally. **(Gazette numbering. The
+  pre-publication draft numbers them 5.2(vi)–(vii); see §16.)**
 - *"Curriculum pack: NMC <specialty> guidelines, <year>"* — per pack, with the PDF URL and the clause.
 
 Certification of a logbook as acceptable to a University / examiner is **the institution's decision**,
@@ -47,7 +48,7 @@ Post-Graduate Medical Education Board. File No. N-P016(11)/2/2023-PGMEB-NMC. Gaz
 Extraordinary, Part-III, Section-4. Signed Dr Vijay Oza, President (PGMEB).
 PDF: `https://www.nmc.org.in/MCIRest/open/getDocument?path=%2FDocuments%2FPublic%2FPortal%2FLatestNews%2FMER.pdf`
 
-### 1.1 The e-logbook itself — §5.2(v)
+### 1.1 The e-logbook itself — §5.2(vi)
 
 > **(v)** Post-graduate students of broad and super specialty degree courses shall maintain a **dynamic
 > e-log book which needs to be updated on weekly basis** about the work being carried out by them and the
@@ -115,7 +116,7 @@ published / accepted in an indexed journal"*). The engine evaluates **both** and
 the regulation's floor (`nmc_regulation`) and the specialty's requirement (`nmc_curriculum`). It never
 silently replaces one with the other, and it never averages them.
 
-### 1.5 Common mandatory course work — §5.2(xi)
+### 1.5 Common mandatory course work — §5.2(xi)–(xiii)
 
 > **(xi) Common Course work** — The following course work shall be common and mandatory for all broad and
 > super specialty post-graduate students irrespective of the specialty.
@@ -139,7 +140,7 @@ silently replaces one with the other, and it never averages them.
 | Three `certification` requirements, `mandatoryForExam: true`, `dueBy: {year: 1}` | `pg_entries` kind `certification`, `subtype ∈ research_methodology \| ethics_gcp_glp \| bcls_acls` | **certificate attachment required** (the clause names the certificate as the evidence) | faculty verify | Exam-eligibility block on every progress report + the final portfolio |
 | First-year deadline is enforced as a **warning, not a block** | `dueAt = programme.startDate + 12 months`; overdue → resident "Outstanding actions" + faculty "requires intervention" | — | — | Training progress report |
 
-### 1.6 Attendance — §5.6
+### 1.6 Attendance — §5.5
 
 > **5.6 LEAVE RULES** … a. Every post-graduate student will be given **minimum 20 days of paid leave per
 > year**. b. Subject to exigencies of work, post-graduate students will be **allowed one weekly holiday**
@@ -155,8 +156,8 @@ course** and **501 days for a two-year course***.
 |---|---|---|
 | `attendance` entry kind: `present \| leave_paid \| leave_academic \| leave_maternity \| leave_paternity \| absent` | one row per day, or a date-range that expands | The module **records**; it does not adjudicate leave. |
 | `attendanceSummary()` → days present, leave by type, % against course days | `pglog-model.js`, pure + unit-tested | |
-| **80%** threshold, and the 751/501-day figures | `CONFIG` **seeded from** PGMER §5.6 + the FAQ, flagged `nmc_regulation` for the 80% and `nmc_faq` for the day counts, editable by the Academic Cell | The regulation states the **percentage**; the day counts come from the FAQ, which is a clarification, not the gazette. They are stored with **different provenance grades** and the UI shows which. |
-| Leave allowances (20 + 5 days/yr) | shown as institutional counters against §5.6 | The module never blocks a leave entry. |
+| **80%** threshold, and the 751/501-day figures | `CONFIG` **seeded from** PGMER §5.5 + the FAQ, flagged `nmc_regulation` for the 80% and `nmc_faq` for the day counts, editable by the Academic Cell | The regulation states the **percentage**; the day counts come from the FAQ, which is a clarification, not the gazette. They are stored with **different provenance grades** and the UI shows which. |
+| Leave allowances (20 + 5 days/yr) | shown as institutional counters against §5.5 | The module never blocks a leave entry. |
 
 ⚠ **This is the requirement most easily got wrong.** The regulation gives a *percentage of attendance*;
 the FAQ gives *days*. Neither says what counts as an attended day, and institutions differ. The module
@@ -164,7 +165,7 @@ therefore computes **both** views (percentage of elapsed course days, and absolu
 labels the threshold's source. It does **not** declare a resident exam-ineligible on attendance — it
 surfaces the number and says whose rule it is.
 
-### 1.7 Academic Cell — §5.2(iii)
+### 1.7 Academic Cell — §5.2(iv)
 
 > **(iii)** Every institution undertaking post-graduate training programme shall set up an **Academic
 > Cell**, under the chairmanship of a senior faculty member, which shall **ensure and monitor the
@@ -174,7 +175,7 @@ surfaces the number and says whose rule it is.
 Its capabilities — curriculum configuration, institution-wide progress, audit access — are the clause's
 "ensure and monitor", not an invented admin tier.
 
-### 1.8 District Residency Programme — §5.2(xii)
+### 1.8 District Residency Programme — §5.2(xv)
 
 > **V.** All post-graduate students pursuing MD/MS in broad specialties … shall undergo a **compulsory
 > residential rotation of three months in District Hospitals/District Health System** … Such rotation shall
@@ -191,7 +192,7 @@ Its capabilities — curriculum configuration, institution-wide progress, audit 
 | Digital feature | Field |
 |---|---|
 | DRP is a **first-class rotation type**, not a free-text posting | `pg_rotations.kind = "drp"`, `externalSite` (district hospital name), `coordinator` (DRPC identity), `durationMonths` default 3 |
-| Semester window check | `drpWindowOk(rotation, programme)` → semester 3/4/5; outside the window → a **warning on the rotation**, attributed to §5.2(xii)V (not a hard block — a State posting schedule is not the resident's to fix) |
+| Semester window check | `drpWindowOk(rotation, programme)` → semester 3/4/5; outside the window → a **warning on the rotation**, attributed to §5.2(xv)V (not a hard block — a State posting schedule is not the resident's to fix) |
 | DRPC verification | the DRPC is a `pg_faculty` membership scoped to that rotation; their verification is what makes DRP entries count |
 | Exam-eligibility row | `drpComplete` in `examEligibility()`, source `nmc_regulation` |
 
@@ -237,12 +238,13 @@ faculty formative assessments against configurable templates (§2.4).
 
 - **No procedure counts.** PGMER-2023 contains no procedure-number requirement for any specialty. Counts
   in the module come from specialty curricula only (§2), or are `unspecified`.
-- **No "5.3 THESIS" clause.** The gazette PDF numbering runs 5.2 → 5.4; thesis provisions live in
-  §2.2(iii) ("Writing thesis" as a curriculum component), §8.1 (5% of practical marks), and the
-  specialty curricula. A published review (Chaudhari *et al.*, *Indian J Psychol Med*, PMC12054657) is
-  literally titled *"Confusion Surrounding the Mandatory Requirement of Thesis Submission"* over this.
-  **The module does not present a "PGMER §5.3" thesis clause, because there isn't one.** Thesis milestones
-  are `nmc_curriculum` + `CONFIG`.
+- ~~**No "5.3 THESIS" clause.**~~ **CORRECTED 2026-08-27 — this entry was wrong, and it was wrong
+  because it was written against a draft.** The pre-publication draft's numbering runs 5.2 → 5.4 and
+  contains no thesis clause. **The published gazette has one: §5.2(iv), *"All broad-speciality and
+  super-speciality students will do thesis related research and will write thesis."*** That is exactly
+  the clause Chaudhari *et al.* (*Indian J Psychol Med*, PMC12054657) cite as 5.2(iii) — their citation
+  was right and this document's contradiction of it was an artefact of the draft. Thesis MILESTONES
+  remain `nmc_curriculum` + `CONFIG`; the requirement to do thesis research is `nmc_regulation` 5.2(iii).
 - **No logbook field schema.** NMC prescribes *that* a logbook exists and *what it records* — never a
   column list. The field sets in §3 come from the specialty curricula's own tables (notably MD Emergency
   Medicine 2024, which prints its logbook tables) and are otherwise `CONFIG`.
@@ -433,11 +435,11 @@ Single entry kind `clinical`, `setting ∈ opd | ipd | emergency`. Shared fields
 
 | Brief field | Implemented as | Source |
 |---|---|---|
-| Date | `occurredAt` | §5.2(v) |
+| Date | `occurredAt` | §5.2(vi) |
 | Specialty / department | `departmentId` / programme specialty | — |
 | Procedure / operation | `procedureId` (from the curriculum pack) **or** `procedureText` free text — a resident is never blocked by a pack that lacks their procedure | design |
 | Patient / hospital reference | `caseRef` — **MRN-style reference only**, see §5 | §5 privacy |
-| Resident role (4 levels) | `role` | §5.2(v) "assisted or done independently" + DOAP |
+| Resident role (4 levels) | `role` | §5.2(vi) "assisted or done independently" + DOAP |
 | Faculty / supervisor | `supervisor` | §5.2(vi) |
 | Outcome | `outcome` | `CONFIG` |
 | Complications | `complications[]` + `complicationNotes` | `CONFIG` |
@@ -487,7 +489,7 @@ Additional research project — **MD General Medicine**:
 
 ### 3.5 Rotations
 
-PGMER §5.2(xii) (DRP) + the curricula's rotation schedules. MD Emergency Medicine 2024 prints a full
+PGMER §5.2(xv) (DRP) + the curricula's rotation schedules. MD Emergency Medicine 2024 prints a full
 three-year schedule (ED 8 months, Paediatric Emergency 1 month, Dermatology 2 weeks, …) — shipped in its
 pack as a **suggested** schedule the Academic Cell instantiates. Every other pack ships no schedule; the
 department creates rotations.
@@ -677,9 +679,12 @@ that same count — see §12.)
 Every PGMER-2023 clause a curriculum pack cites, so the doc is the index it claims to be. Sub-items
 are quoted in full in §1.
 
-`2.2(iii)` · `5.2(iii)` · `5.2(v)` · `5.2(vi)` · `5.2(vii)` · `5.2(x)` · `5.2(xi)` · `5.2(xi)(a)` ·
-`5.2(xi)(b)` · `5.2(xi)(c)` · `5.2(xii)V` · `5.2(xii)VIII` · `5.6` · `5.6(a)` · `5.6(e)` · `6.2` ·
-`8.1` · `9.2(c)`
+**GAZETTE numbering** (CG-DL-E-03012024-251108). The pre-publication draft numbers several of these
+differently — see §16.
+
+`2.2(iii)` · `5.2(i)` · `5.2(iii)` · `5.2(iv)` · `5.2(v)` · `5.2(vi)` · `5.2(vii)` · `5.2(viii)` ·
+`5.2(x)` · `5.2(xi)` · `5.2(xii)` · `5.2(xiii)` · `5.2(xv)V` · `5.2(xv)VIII` · `5.5` · `5.5(a)` ·
+`5.5(e)` · `6.2` · `8.1` · `9.2(c)`
 
 Specialty-curriculum clauses are PDF headings rather than numbered sections; they are verified
 directly against the source text in `pglog-sources/` rather than being re-listed here.
@@ -692,7 +697,7 @@ seven critical and nine important defects. What changed, and why each mattered:
 | # | Was | Now |
 |---|---|---|
 | C1 | A **77-day** District Residency satisfied "three months" — the check was `months >= 2.5`, a tolerance that appears in no NMC source. | The floor is **89 days**, the shortest possible three calendar months (1 Feb → 1 May). `drpMonths()` is display-only; `drpMeetsThreeMonths()` decides. |
-| C2 | Statutory leave was silently counted as **non-attendance** under a §5.6 badge — 20 days of granted paid leave pushed a resident to exactly 80%, and 90 days of maternity leave read as **47%**. | §5.6 *grants* that leave and extends the term only for leave **in excess** of what is permitted. Every permitted leave state now counts by default; the map is institutional configuration and the summary reports `interpretationSource: "institution"` separately from the regulation's 80%. |
+| C2 | Statutory leave was silently counted as **non-attendance** under a §5.5 badge — 20 days of granted paid leave pushed a resident to exactly 80%, and 90 days of maternity leave read as **47%**. | §5.5 *grants* that leave and extends the term only for leave **in excess** of what is permitted. Every permitted leave state now counts by default; the map is institutional configuration and the summary reports `interpretationSource: "institution"` separately from the regulation's 80%. |
 | C3 | A whole-course target was "expected" **from day one**, so a resident three days into residency saw 72 high-severity gaps and "about 100 intubations expected by now". | Prorated against the programme's own length; with the length unknown there is **no expectation and no gap**, and the state is `in_progress`, not `behind`. |
 | C4 | MD Paediatrics and MD Pathology residents were shown General Medicine's summative pre-requisites as their own NMC requirement. Paediatrics actually requires **one** presentation, accepts **state** level, and treats the publication as an **alternative**. | The pre-requisites moved out of the shared 2022 pack into each specialty's own, quoted from its own PDF. Paediatrics is evaluated as a real OR (`anyOf`). |
 | C5 | **Any** faculty member in the institution could read **any** resident's case references, diagnoses, remarks and reflections — both branches of the guard returned the same value. | Guide, co-guide, or the supervisor named on that specific entry get `verifier`; everyone else falls through to `aggregate`. A department head is scoped to their department. |
@@ -703,7 +708,7 @@ seven critical and nine important defects. What changed, and why each mattered:
 | I3 | `history[]` truncated at 200 and `revisions[]` at 30 **silently**, against a doc that promised the original is "preserved in full". | Still bounded for the Firestore document limit, but `overflowedHistory` / `overflowedRevisions` record that older rows were shed, so a truncated chain cannot be presented as complete. |
 | I5 | The MD General Medicine appraisal form produced a **"105 / 135"** total. That form is a banded per-element rating with **no total row**. | The template carries `noTotal`; the report prints the element ratings and no synthesised sum. |
 | I6 | The self-assess guard compared against a `residentUid` that was `""` when the resident could not be resolved — a silently disabled check. | Fails closed: the assessment is refused if the resident cannot be resolved. |
-| I8 | The DRP semester window ignored the clause's own two exceptions. | §5.2(xii)V restricts a post-diploma entrant and a PG Diploma student to the **third semester only**, and the warning now says so. |
+| I8 | The DRP semester window ignored the clause's own two exceptions. | §5.2(xv)V restricts a post-diploma entrant and a PG Diploma student to the **third semester only**, and the warning now says so. |
 | — | Three quotations were **wrong**, and one was **fabricated**: the shared 2022 pack dropped "the" from "from **the** Head of Department"; MD Radiodiagnosis says "training **program**", not "programme"; MS OBGY prints "**clinic**-pathological", which had been silently tidied to "clinico-"; and MD Pathology carried a CPC requirement quoting "…clinico-pathological conferences…" **to a clause that does not exist in that PDF**. | All quoted as printed; the fabricated Pathology requirement was **deleted** rather than given an invented replacement. PGMER-2023 §5.2(x) already covers CPCs for every specialty. |
 | — | The Research Methodology clause was shared across the four 2022-revised curricula. Paediatrics says "an **NMC recognized** course" where the others say "an **online** course". | Moved into each specialty pack with its own wording. |
 
@@ -722,7 +727,7 @@ defect in this module.
 
 ### 14.1 The attendance denominator was wrong
 
-PGMER-2023 §5.6 gives only a percentage. **FAQ Q2 defines what it is a percentage of**, verbatim:
+PGMER-2023 §5.5 gives only a percentage. **FAQ Q2 defines what it is a percentage of**, verbatim:
 
 > **For Three-Year Course:** Total days in a three-year course will be 1095 days. So the total
 > **working days will be 939 days after deducting weekly offs (52 x 3 years = 156 days)**. A student
@@ -750,7 +755,7 @@ copying its answers, and a unit test asserts they land on 1095 → 939 → 751 a
 | Q1, Q2 | Maternity/paternity leave and **excess** casual leave do not reduce the percentage; they **extend the period of training by the same number of days**. Implemented as `termExtensionDays()` and surfaced as its own statement, not as a deduction. |
 | Q3, Q4, Q5 | DRP posting: *"posting in any post-graduate medical institution or super specialty hospital is **not permitted**"*; ESIC hospitals allowed only if they run neither; other States/UTs by mutual agreement with PGMEB approval; NEZ students may stay in their own State. |
 | Q7 | *"The PG students from **2023-24 batch** will maintain log book digitally."* — the applicability date for the digital mandate. |
-| Q8, Q9 | Ethics and Cardiac Life Support apply to *"all the PG students admitted **from 2021** and after"*, and are *"designed and conducted by the **Academic Cell** of the respective medical college"* — the issuer, which §5.2(xi) leaves open. |
+| Q8, Q9 | Ethics and Cardiac Life Support apply to *"all the PG students admitted **from 2021** and after"*, and are *"designed and conducted by the **Academic Cell** of the respective medical college"* — the issuer, which §5.2(xi)–(xiii) leaves open. |
 | Q6 | The full dissertation mark split: **Clinical/Practical 280 + Dissertation 20 + Viva Voce 100**. |
 
 ### 14.3 A second document, and what it is not
@@ -762,12 +767,68 @@ checked into `pglog-sources/MCI-Logbook-Guidelines-2020-UG.txt` for the UG phase
 in this module is derived from it**, and the PG curricula's cross-reference to it should be read with
 that in mind.
 
+## 16. The published gazette, obtained 2026-08-27 — every clause citation was against a draft
+
+The owner supplied ten NMC PDFs. One of them was the **published gazette** of PGMER-2023. The file
+this module had been built against — `LatestNews/MER.pdf` — is headed, in its own first line:
+
+> `[To be published in the Gazette of India, Extraordinary, Part-III, Section-4]`
+
+It is the **pre-publication draft**. The published text is
+`CG-DL-E-03012024-251108 · PUBLISHED BY AUTHORITY · New Delhi, the 29th December, 2023`, and it
+differs in clause numbering **and in wording**. Both are checked into `pglog-sources/`; only
+`PGMER-2023.txt` (the gazette) may be cited, and `PGMER-2023-DRAFT-prepublication.txt` is retained
+marked non-authoritative.
+
+### 16.1 The renumbering
+
+| Provision | Draft (what this module cited) | **Gazette (authoritative)** |
+|---|---|---|
+| Activity types — lectures, seminars, journal clubs, grand rounds, CPCs | 5.2(x) | **5.2(i)** |
+| Thesis-related research and writing a thesis | **absent** | **5.2(iii)** |
+| Academic Cell | 5.2(iii) | **5.2(iv)** |
+| Structured training programme | 5.2(iv) | **5.2(v)** |
+| **Dynamic e-log book, updated weekly** | **5.2(v)** | **5.2(vi)** |
+| **Monthly authentication by the PG guide** | **5.2(vi)** | **5.2(vii)** |
+| Participation in UG teaching | 5.2(vii) | **5.2(viii)** |
+| Dissemination (poster / podium / first-author paper) | 5.2(x) | 5.2(x) — *text differs* |
+| Course in Research Methodology | 5.2(xi)(a) | **5.2(xi)** |
+| Course in Ethics | 5.2(xi)(b) | **5.2(xii)** |
+| Course in Cardiac Life Support | 5.2(xi)(c) | **5.2(xiii)** |
+| District Residency Programme | 5.2(xii) | **5.2(xv)** |
+| **Leave rules + the 80% attendance sentence** | **5.6** | **5.5** |
+| Accommodation | 5.7 | **5.6** |
+
+The module's headline claim moves with it: it is structured to **§5.2(vi)–(vii)**, not §5.2(v)–(vi).
+
+### 16.2 The wording differences that changed a claim
+
+| | Draft | Gazette |
+|---|---|---|
+| **Thesis** | no clause at all — which is why §1.11 of this document previously asserted PGMER-2023 contains none | **5.2(iii)**: *"All broad-speciality and super-speciality students will do thesis related research and will write thesis."* Chaudhari *et al.* cited this correctly as 5.2(iii); this document's contradiction of them was an artefact of the draft. |
+| **Dissemination, middle option** | *"to **read one paper** at a national/Zonal/state conference"* | *"b. **Podium presentation** at a National/Zonal/State conference of his/her speciality"* |
+| **Assessment split** | 6.1(e): *"provide a combination of both **formative and summative** assessment"* | 6.1(e): *"Provide a **summative** assessment for overall successful completion"*. The draft's 6.1 also had a duplicated item (a–g); the gazette has a–f. **The module implements formative assessment only, which §8.1 still supports** (*"The medical college/institute will conduct the Formative Assessment"*) — but the 6.1(e) justification is withdrawn. |
+| **Ethics / BCLS deadline** | *"The students **shall** complete the course in the first year"* | *"The students **are expected to** complete the course in the first year"* — materially softer, which is why the module treats the first-year deadline as a warning and not a block. |
+| **Casual leave** | *"minimum 20 days of paid leave"* | *"minimum 20 days of paid leave **(casual leave)**"* |
+| **Academic Cell** | *"which shall **ensure and monitor** the implementation"* | *"who shall **monitor** the implementation … and **ensure its quality as mandated by the PGMEB**"* |
+| **DRP, post-diploma** | present | present, and the gazette confirms the third-semester-only exceptions R1 flagged as I8 |
+| **8.1 marks** | prose | a table: Theory 400 (4×100) · **Practical/Clinical 300** · Viva Voce 100; ≥50% in each head, ≥40% in each theory paper. The PGMEB FAQ's 280 + 20 split is a *refinement of the 300*. |
+
+### 16.3 What the other nine documents settled
+
+| Document | Effect on this module |
+|---|---|
+| **PG-MSR 2023** (15.01.2024) and **Revised PG-MSR** (23.08.2024) | **Closes the open item in §10.** PG-MSR governs institutional capacity — hospital building, beds, bed occupancy, OPD attendance, faculty:student ratio — **not logbook content**. The string "log book" appears in exactly one of the ten documents supplied, and it is the regulation itself. One item IS per-resident and is now a requirement: Annexure-I, *"The Surgical post-graduate student should get Operation Theatre Training for at least two full days in a week. Second Year onwards, trainees will get training as First Assistant/Supervised performance two full days in a week."* |
+| **Medical Institutions (Qualifications of Faculty) Regulations, 2025** (gazette 30.06.2025) + its FAQ (28.10.2025) | Supersedes the "Teachers Eligibility Qualifications … in vogue" that PGMER §7.1 points at. **§16: a Postgraduate Guide in a broad specialty needs at least five years as Assistant Professor or above; §17: three years for a super specialty.** This is the definition of the person §5.2(vii) requires to sign the monthly authentication. |
+| **MSMER-2023** + FAQ, **Recognition Regulations 2023** + FAQ | Institution-level accreditation and qualification recognition. No logbook or PG-training-record content. Checked, and deliberately claimed nowhere. |
+
 ## 15. Changelog of this document
 
 | Date | Change |
 |---|---|
 | 2026-08-27 | Created from S1–S18. |
 | 2026-08-27 | §11 clause index, §12 R1 corrections. Source extracts checked into `pglog-sources/`. |
+| 2026-08-27 | §16: the **published gazette** obtained; every clause re-cited (5.2(v)→(vi), 5.2(vi)→(vii), 5.6→5.5, thesis clause 5.2(iii) restored). PG-MSR open item closed. |
 | 2026-08-27 | §14: PGMEB FAQ **obtained** (S2 upgraded to primary) and the attendance denominator corrected to working days. Specialty picker generated from Annexure-1/-2 — all 84 recognised qualifications. |
 
 **Maintenance rule:** if an NMC amendment lands, update **this file first**, then the packs, then the

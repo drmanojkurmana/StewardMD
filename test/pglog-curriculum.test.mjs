@@ -22,7 +22,7 @@ const files = readdirSync(DIR).filter((f) => f.endsWith(".json"));
 const packFiles = files.filter((f) => f !== "index.json" && !f.startsWith("_"));
 const commonFiles = files.filter((f) => f.startsWith("_"));
 
-const VALID_SOURCES = ["nmc_regulation", "nmc_curriculum", "nmc_faq", "nmc_faq_secondary", "institution", "unspecified"];
+const VALID_SOURCES = ["nmc_regulation", "nmc_curriculum", "nmc_faq", "nmc_msr", "nmc_faq_secondary", "institution", "unspecified"];
 
 /* ── provenance ────────────────────────────────────────────────────────────── */
 
@@ -82,8 +82,9 @@ test("PGMER-2023 clause references look like real clauses", () => {
     // The pack now also carries PGMEB FAQ answers (obtained 2026-08-27). Those are graded nmc_faq
     // and cite an FAQ question, not a gazette section — the two must not be confused, which is why
     // they are checked apart.
-    if (r.source === "nmc_faq") {
-      assert.match(r.clause, /^PGMEB FAQ /, r.id + ": an FAQ requirement must cite the FAQ notice");
+    if (r.source === "nmc_faq" || r.source === "nmc_msr" || /Qualifications of Faculty/.test(r.clause)) {
+      assert.match(r.clause, /^(PGMEB FAQ |PGMSR-2023|Medical Institutions \(Qualifications)/,
+        r.id + ": a non-PGMER requirement must cite its own instrument");
       assert.ok(r.quote, r.id + ": no verbatim quote");
       continue;
     }
@@ -321,8 +322,10 @@ test("a specialty with no pack falls back to PGMER-only and SAYS it has no speci
   assert.match(g.banner, /No NMC specialty curriculum pack is loaded/);
   const f = flat("generic-pg");
   assert.ok(f.requirements.length > 0, "it must still carry the PGMER-2023 requirements");
-  assert.ok(f.requirements.every((r) => r.source === "nmc_regulation" || r.source === "nmc_faq"),
-    "the fallback carries only the regulation and the PGMEB FAQ that clarifies it");
+  // The fallback carries the regulation, the PGMEB FAQ that clarifies it, the one per-resident
+  // figure in PG-MSR, and the 2025 rule for who may be a PG guide. Nothing specialty-specific.
+  assert.ok(f.requirements.every((r) => ["nmc_regulation", "nmc_faq", "nmc_msr"].includes(r.source)),
+    "the fallback must carry no nmc_curriculum requirement — it has no specialty pack");
 });
 
 test("common packs are marked so they are never offered as a specialty", () => {

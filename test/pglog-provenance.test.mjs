@@ -127,8 +127,30 @@ test("EVERY requirement quotation appears verbatim in the NMC source it cites", 
       if (!r.quote) return;
       // A requirement is checked against the document its OWN grade points at. A pack's listed
       // sources are its curriculum PDFs; an nmc_faq requirement belongs to the PGMEB FAQ instead.
-      const keys = r.source === "nmc_faq" ? ["PGMEB-FAQ-2024-04-10"] : SOURCE_OF[packId];
+      const BY_GRADE = { nmc_faq: ["PGMEB-FAQ-2024-04-10"], nmc_msr: ["PGMSR-2023"] };
+      // s.16/s.17 of the 2025 faculty regulations live in their own gazette, not in PGMER-2023.
+      /* A quote RECONSTRUCTED from a table cell cannot appear contiguously: `pdftotext -layout`
+       * interleaves the other columns between its lines. Such a requirement declares
+       * reconstructedFrom + sourceFragments, and every fragment is verified literally instead. The
+       * reconstruction stays in `quote` because that is what a reader needs to see; the fragments are
+       * what makes it evidence. */
+      if (r.reconstructedFrom) {
+        assert.ok(Array.isArray(r.sourceFragments) && r.sourceFragments.length >= 2,
+          packId + "/" + r.id + ": a reconstructed quote must carry sourceFragments");
+        assert.match(r.note || "", /RECONSTRUCTED/,
+          packId + "/" + r.id + ": a reconstructed quote must say so in its note");
+      }
+      const keys = /Qualifications of Faculty/.test(r.clause || "")
+        ? ["Faculty-Qualifications-Regulations-2025"]
+        : (BY_GRADE[r.source] || SOURCE_OF[packId]);
       keys.forEach((srcKey) => {
+        if (r.reconstructedFrom) {
+          r.sourceFragments.forEach((frag) => {
+            const f = norm(frag);
+            if (!SOURCES[srcKey].includes(f)) missing.push(packId + "/" + r.id + " fragment not in " + srcKey + ": " + frag);
+          });
+          return;
+        }
         if (!quoteInSource(r.quote, srcKey)) missing.push(packId + "/" + r.id + " not found in " + srcKey);
       });
     });
@@ -303,7 +325,9 @@ test("every numeric target in every pack is present in its own source document",
       // contains no numeral. Its QUOTATION is still verified verbatim above, which is the guarantee
       // that matters. Only counts greater than one are checked for the number itself.
       if (r.target === 1) return;
-      (r.source === "nmc_faq" ? ["PGMEB-FAQ-2024-04-10"] : SOURCE_OF[packId]).forEach((srcKey) => {
+      const BY_GRADE2 = { nmc_faq: ["PGMEB-FAQ-2024-04-10"], nmc_msr: ["PGMSR-2023"] };
+      (/Qualifications of Faculty/.test(r.clause || "") ? ["Faculty-Qualifications-Regulations-2025"]
+        : (BY_GRADE2[r.source] || SOURCE_OF[packId])).forEach((srcKey) => {
         const hay = SOURCES[srcKey];
         // The number itself, or the word the source spells it with, must be in the source. The
         // ELEVEN word-numbers the NMC PDFs actually use are listed; nothing else is accepted.
@@ -316,6 +340,7 @@ test("every numeric target in every pack is present in its own source document",
         const ok = q.includes(n) || (words[r.target] && q.includes(words[r.target])) ||
           (alt[r.target] || []).some((w) => q.includes(w));
         if (!ok) bad.push(packId + "/" + r.id + ": target " + n + " is in neither digits nor words in its quote");
+        else if (r.reconstructedFrom) { /* fragments already verified above */ }
         else if (r.quote && !quoteInSource(r.quote, srcKey)) bad.push(packId + "/" + r.id + ": quote not in " + srcKey);
         else if (!hay.includes(n) && !(words[r.target] && hay.includes(words[r.target]))) {
           bad.push(packId + "/" + r.id + ": " + n + " does not occur anywhere in " + srcKey);

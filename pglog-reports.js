@@ -12,7 +12,7 @@
  * THREE RULES THE BUILDERS ENFORCE
  * --------------------------------
  * 1. A REPORT CARRIES ITS VERIFICATION STATE. Every row shows whether it is verified, by whom and
- *    when, and every report carries the monthly-authentication ledger (PGMER-2023 5.2(vi)) and the
+ *    when, and every report carries the monthly-authentication ledger (PGMER-2023 5.2(vii)) and the
  *    revision count. A logbook printout that hides which rows are unverified is worse than none.
  * 2. PATIENT IDENTITY IS OPT-IN AND NEVER CROSS-RESIDENT. `includeCaseRef` defaults FALSE. It may
  *    only be true for the resident's OWN logbook and procedure report — the two documents that are
@@ -91,7 +91,7 @@
       monthsTotal: months.length,
       monthsOverdue: months.filter(function (x) { return x.overdue; }).map(function (x) { return x.period; }),
       weekly: ctx.weekly || (m ? m.weeklyCadence(entries, (ctx.resident || {}).startDate, ctx.today) : null),
-      clause: "PGMER-2023 5.2(v) weekly update; 5.2(vi) monthly authentication by the postgraduate guide"
+      clause: "PGMER-2023 5.2(vi) weekly update; 5.2(vii) monthly authentication by the postgraduate guide"
     };
   }
 
@@ -127,13 +127,13 @@
   function monthlyAttestationSection(ctx) {
     return {
       heading: "Monthly authentication by the postgraduate guide",
-      provenance: { source: "nmc_regulation", clause: "5.2(vi)" },
+      provenance: { source: "nmc_regulation", clause: "5.2(vii)" },
       columns: ["Month", "Entries", "Authenticated", "By", "Date"],
       rows: arr(ctx.months).map(function (x) {
         return [x.period, String(x.entries), x.attested ? "Yes" : (x.overdue ? "OVERDUE" : (x.closed ? "No" : "Month open")),
                 person(x.attestedBy), fmtTs(x.attestedAt)];
       }),
-      note: "PGMER-2023 5.2(vi): “The record (Log) books shall be checked, assessed and " +
+      note: "PGMER-2023 5.2(vii): “The record (Log) books shall be checked, assessed and " +
         "authenticated monthly by the postgraduate guide imparting the training.”"
     };
   }
@@ -168,7 +168,7 @@
         return [b.label, String(b.observed), String(b.assisted), String(b.supervised), String(b.independent),
                 String(b.total), String(b.verified), String(b.complications), fmtDate(b.last)];
       }),
-      note: "PGMER-2023 5.2(v) requires MS/M.Ch students to enter every surgical procedure assisted " +
+      note: "PGMER-2023 5.2(vi) requires MS/M.Ch students to enter every surgical procedure assisted " +
         "or done independently. Only verified entries count toward a training requirement."
     });
     var withRef = opts.includeCaseRef === true;
@@ -269,7 +269,7 @@
       }),
       note: "PGMER-2023 5.2(x) names lectures, seminars, journal clubs, group discussions, " +
         "laboratory work, clinical meetings, grand rounds and clinico-pathological conferences; " +
-        "5.2(vii) requires participation in the teaching of undergraduates and interns."
+        "5.2(viii) requires participation in the teaching of undergraduates and interns."
     });
     r.verification = verificationBlock(ctx);
     return r;
@@ -402,13 +402,13 @@
     var drp = arr(ctx.rotations).filter(function (x) { return x.kind === "drp"; });
     r.sections.push({
       heading: "District Residency Programme",
-      provenance: { source: "nmc_regulation", clause: "5.2(xii)V, VIII(c)" },
+      provenance: { source: "nmc_regulation", clause: "5.2(xv)V, VIII(c)" },
       columns: ["Start", "End", "District site", "Coordinator (DRPC)", "Months", "Status"],
       rows: drp.map(function (rot) {
         return [fmtDate(rot.startDate), fmtDate(rot.endDate), s(rot.externalSite || rot.name),
                 person(rot.coordinator), (m ? (m.daysBetween(rot.startDate, rot.endDate) / 30.4375).toFixed(1) : ""), s(rot.status)];
       }),
-      note: "PGMER-2023 5.2(xii)V requires a compulsory three-month rotation in a District Hospital " +
+      note: "PGMER-2023 5.2(xv)V requires a compulsory three-month rotation in a District Hospital " +
         "/ District Health System, in the 3rd, 4th or 5th semester; VIII(c) makes satisfactory " +
         "completion an essential condition before the final examination." +
         (m && drp.length ? " Recorded: " + m.drpMonths(drp).toFixed(1) + " months." : "")
@@ -435,10 +435,10 @@
     if (ctx.weekly) {
       r.sections.push({
         heading: "Weekly logbook cadence",
-        provenance: { source: "nmc_regulation", clause: "5.2(v)" },
+        provenance: { source: "nmc_regulation", clause: "5.2(vi)" },
         columns: ["Weeks in training", "Weeks with an entry", "Weeks missed", "Current streak"],
         rows: [[String(ctx.weekly.weeks), String(ctx.weekly.logged), String(arr(ctx.weekly.missed).length), String(ctx.weekly.streak)]],
-        note: "PGMER-2023 5.2(v): the e-logbook “needs to be updated on weekly basis”."
+        note: "PGMER-2023 5.2(vi): the e-logbook “needs to be updated on weekly basis”."
       });
     }
     if (ctx.attendance) r.sections.push(attendanceSection(ctx));
@@ -468,7 +468,7 @@
     var a = ctx.attendance;
     return {
       heading: "Attendance",
-      provenance: { source: "nmc_faq", clause: "PGMER-2023 5.6 · PGMEB FAQ 10.04.2024 Q2" },
+      provenance: { source: "nmc_faq", clause: "PGMER-2023 5.5 · PGMEB FAQ 10.04.2024 Q2" },
       // The FAQ's own framing: days attended, of WORKING days. The recorded-days reading is kept but
       // demoted — a resident who records only the days they attended scores 100% on it.
       columns: ["Days counted as attended", "Working days elapsed", "% of working days",
@@ -525,8 +525,8 @@
       columns: ["Resident", "Why"],
       rows: attention.map(function (x) {
         var why = [];
-        if (x.weekly && x.weekly.pct != null && x.weekly.pct < 70) why.push("weekly logbook cadence " + x.weekly.pct + "% (PGMER-2023 5.2(v))");
-        if (x.attestationOverdue) why.push(x.attestationOverdue + " month(s) without guide authentication (5.2(vi))");
+        if (x.weekly && x.weekly.pct != null && x.weekly.pct < 70) why.push("weekly logbook cadence " + x.weekly.pct + "% (PGMER-2023 5.2(vi))");
+        if (x.attestationOverdue) why.push(x.attestationOverdue + " month(s) without guide authentication (5.2(vii))");
         if (x.overdueVerifications) why.push(x.overdueVerifications + " entries awaiting verification beyond the institutional SLA");
         return [(x.resident || {}).name || person((x.resident || {}).id), why.join("; ")];
       }),
