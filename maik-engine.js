@@ -266,7 +266,7 @@
 
     return '<div class="me-seg">' +
       '<div class="smd-nav-lbl" style="margin-bottom:6px">Answer engine</div>' +
-      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff);margin-bottom:8px">' +
+      '<div role="radiogroup" aria-label="MaiK answer engine" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff);margin-bottom:8px">' +
       opt("rag", "KB only", pill("Free", "#dcfce7", "#166534"),
           "StewardMD knowledge base only, with citations. No AI tokens, works offline.", true, false) +
       opt("cloud", "MaiK Cloud", pill("Pro", "#fef3c7", "#92400e"),
@@ -366,7 +366,7 @@
       // ABOVE the list, not below it: the hardware warning has to be read before a 3 GB tap, not
       // discovered afterwards. Same text is repeated at the moment of selection.
       deviceWarnHTML() +
-      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--card,#fff)">' + rows + '</div>' +
+      '<div role="radiogroup" aria-label="On-device model" style="border:1px solid var(--line,#e2e8f0);border-radius:14px;overflow:hidden;background:var(--panel,#fff)">' + rows + '</div>' +
       '<div class="smd-nav-note" style="margin-top:6px">Downloads over Wi-Fi or mobile data and resumes if interrupted. You can leave this screen; the download keeps going.</div>' +
       '<button type="button" class="smd-nav-btn" data-me-guide aria-expanded="false" style="margin:8px 0 0;width:100%">Which one should I download?</button>' +
       guideHTML();
@@ -465,7 +465,7 @@
       "</div>";
     }).join("");
 
-    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--card,#fff);padding:14px;margin-top:8px">' +
+    return '<div data-me-guide-panel hidden style="border:1px solid var(--line,#e2e8f0);border-radius:14px;background:var(--panel,#fff);padding:14px;margin-top:8px">' +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">Will it run on my phone?</div>' +
       deviceWarnHTML() +
       '<div style="font:700 13px/1.3 var(--sans,system-ui);margin-bottom:8px">How on-device mode works</div>' +

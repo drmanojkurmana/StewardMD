@@ -599,5 +599,18 @@ function load(env = {}) {
 ok("the module re-renders when Pro flips (watchPro is wired)", /smd:pro|onProChange/.test(SRC));
 ok("...and warms the model once the gate opens", /warmIfLocal\(\)/.test(SRC.slice(SRC.indexOf("function watchPro"))));
 
+/* == Dark mode: only use CSS vars the app actually defines ====================================
+ * The picker cards were background:var(--card,#fff). --card is defined NOWHERE in StewardMD, so it
+ * always resolved to #fff - a white card in dark mode - while the text on it used --ink, which DOES
+ * flip to light. Light text on a permanently white card. Reported from a real phone.
+ * --mk-* is not a fix either: that palette is scoped to #maikSheet, and this renders in Settings. */
+{
+  ok("no undefined --card token", !/var\(--card/.test(SRC));
+  ok("cards use --panel, which is globally defined and flips", /var\(--panel/.test(SRC));
+  // --mk-* only exists inside #maikSheet; using it in the Settings surface silently falls back.
+  const settingsFn = SRC.slice(SRC.indexOf("function settingsHTML"), SRC.indexOf("function modelRowHTML"));
+  ok("the Settings surface does not rely on the sheet-scoped --mk-* palette", !/var\(--mk-/.test(settingsFn));
+}
+
 console.log(`\nmaik-engine: ${pass} passed, ${fail} failed`);
 if (fail) process.exit(1);
