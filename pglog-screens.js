@@ -549,6 +549,22 @@
         (I.msg ? banner(I.err ? "warn" : "info", I.err ? "error" : "check_circle", esc(I.msg)) : "")
       );
     }
+    /* If /me failed there is no code, no name, and no roster - the previous build still rendered the
+     * full card and presented the raw orgId under "Share this with your residents", which is both
+     * wrong and unactionable. Say what broke and offer the way out. */
+    if (I.ctxErr) {
+      return wrap(
+        '<div class="pgl-card"><h3>Cannot open this institution</h3>' +
+        '<p style="font-size:13.5px;line-height:1.6;color:var(--pgl-muted)">' +
+          esc(instErr(I.ctxErr, "This device is pointed at an institution the server did not return.")) +
+        "</p>" +
+        '<p style="font-size:12px;line-height:1.5;color:var(--pgl-muted);margin-top:10px">' +
+          "Institution ID stored on this device</p>" +
+        '<div style="font:600 12px/1.45 var(--mono,ui-monospace,monospace);color:var(--pgl-muted);word-break:break-all;user-select:all">' +
+          esc(orgId) + "</div></div>" +
+        '<button class="pgl-btn wide" data-pgl="clear-inst">Choose a different institution</button>'
+      );
+    }
     var progs = I.programmes || [];
     var specs = I.specialties || [];
     var opts = progs.map(function (pr) {
@@ -614,6 +630,9 @@
     if (e && e.userMessage) return e.userMessage;
     if (e && e.code === "forbidden") return "You do not have Academic Cell access to this institution.";
     if (e && e.code === "signin_required") return "Sign in to set up an institution.";
+    /* gate() -> e404("org") reaches the client as "not_found". It means this device holds an org id
+     * the server cannot resolve - created against a different environment, or since deleted. */
+    if (e && e.code === "not_found") return "The server does not have an institution with this ID. It may have been created on a different account or environment.";
     return fallback;
   }
   function loadInstitution() {
@@ -632,7 +651,8 @@
      * for the render that followed, state.inst was cleared alongside it, and BOTH code sources were
      * empty, leaving only the orgId fallback. Re-establish the context here, where every caller of
      * this screen routes through, instead of at each of the three call sites that null it. */
-    return ensureContext().catch(function () { return null; }).then(function () {
+    return ensureContext().then(function () { state.inst.ctxErr = null; },
+                                function (e) { state.inst.ctxErr = e || new Error("unknown"); }).then(function () {
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
       (cur && cur.loadSpecialties)
@@ -1901,6 +1921,11 @@
       case "deptfilter":
         state.deptFilter[t.getAttribute("data-dim")] = t.getAttribute("data-v");
         return loadDept();
+      case "clear-inst": {
+        st.setContext({ orgId: "" });
+        state.ctx = null; state.dash = null; state.inst = {};
+        return loadInstitution().then(render, render);
+      }
       case "pick-inst": {
         st.setContext({ orgId: t.getAttribute("data-id") });
         state.ctx = null; state.dash = null; state.inst = {};

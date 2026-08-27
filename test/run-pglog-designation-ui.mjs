@@ -166,6 +166,29 @@ try {
   ok(/SMD-TEST42/.test(tp), `picked institution shows the shareable code (got: ${JSON.stringify(tp.slice(0, 160))})`);
   ok(!new RegExp(HEX).test(tp), "the raw 32-char org id is NOT presented as the institution code");
 
+  /* ── 7. A FAILING /me must be reported, not painted over ──
+   * This is the state the owner's second screenshot was actually in: no code, no name, and the raw
+   * org id offered under "Share this with your residents and faculty". If the server will not
+   * resolve the institution, the screen has to say so. */
+  // Fresh context object: test 6 left cur.orgId set, so the picker would not render and pick-inst
+  // (the only thing that re-runs ensureContext) would never fire.
+  await ev(`
+    var HEX=${JSON.stringify(HEX)};
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.me=function(){ var e=new Error("not_found"); e.code="not_found"; return Promise.reject(e); };
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(700);
+  await tap("setting up our institution");
+  await sleep(900);
+  await tap("Test Medical College");
+  await sleep(1500);
+  const te = String(await txt());
+  ok(/Cannot open this institution/i.test(te), `a failing /me is reported (got: ${JSON.stringify(te.slice(0, 140))})`);
+  ok(!/Share this with your residents/i.test(te), "a broken institution is not offered as shareable");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}
