@@ -97,6 +97,8 @@ html.pgl-lock, html.pgl-lock body { overflow: hidden; }
 }
 #pglogRoot .pgl-prov[data-src="nmc_regulation"] { color: #1D3A8A; background: #E8EEFB; border: 1px solid #C3D2F4; }
 #pglogRoot .pgl-prov[data-src="nmc_curriculum"] { color: #0F5F57; background: #E4F3F0; border: 1px solid #BFE2DB; }
+#pglogRoot .pgl-prov[data-src="nmc_faq"] { color: #6B3FA0; background: #F1EAFA; border: 1px solid #D9C7F0; }
+#pglogRoot .pgl-prov[data-src="nmc_msr"] { color: #17506B; background: #E6F1F7; border: 1px solid #BFD9E8; }
 #pglogRoot .pgl-prov[data-src="nmc_faq_secondary"] { color: #7A4E06; background: var(--pgl-warn-bg); border: 1px dashed #E0BE7A; }
 #pglogRoot .pgl-prov[data-src="institution"] { color: var(--pgl-muted); background: transparent; border: 1px dashed var(--pgl-line); font-weight: 600; }
 #pglogRoot .pgl-prov[data-src="unspecified"] { color: var(--pgl-faint); background: transparent; border: 1px dotted var(--pgl-line); font-weight: 600; font-style: italic; }
@@ -284,6 +286,24 @@ html.pgl-lock, html.pgl-lock body { overflow: hidden; }
 #pglogRoot .pgl-rep-empty { color: var(--pgl-faint); font-size: 12.5px; font-style: italic; }
 #pglogRoot .pgl-rep-foot { margin-top: 22px; padding-top: 10px; border-top: 1px solid var(--pgl-line);
   font-size: 11px; color: var(--pgl-faint); line-height: 1.5; }
+
+/* ── verification QR ─────────────────────────────────────────────────────────
+ * The QR is the only part of a printed logbook a stranger can check, so it is sized to survive a
+ * photocopy (4px modules, full quiet zone) and it never depends on a webfont or a network image. */
+#pglogRoot .pgl-qr { display: flex; gap: 14px; align-items: center; margin-top: 12px;
+  padding: 12px; border: 1px solid var(--pgl-line); border-radius: var(--pgl-r-ctl);
+  background: #fff; }
+#pglogRoot .pgl-qr svg { flex: 0 0 auto; display: block; width: 116px; height: 116px; }
+#pglogRoot .pgl-qr-meta { min-width: 0; }
+#pglogRoot .pgl-qr-code { font-family: var(--pgl-mono); font-size: 15px; font-weight: 700;
+  letter-spacing: .04em; color: #111; }
+#pglogRoot .pgl-qr-cap { font-size: 12px; color: #555; margin-top: 4px; line-height: 1.45; }
+#pglogRoot .pgl-qr-url { font-size: 10.5px; color: #888; margin-top: 4px; word-break: break-all; }
+/* The QR block stays light in dark mode ON PURPOSE — an inverted QR does not scan reliably. */
+@media (prefers-color-scheme: dark) {
+  #pglogRoot .pgl-qr { background: #fff; border-color: #ccc; }
+}
+@media print { #pglogRoot .pgl-qr { break-inside: avoid; } }
 
 /* ── audit trail ──────────────────────────────────────────────────────────── */
 #pglogRoot .pgl-audit { list-style: none; margin: 8px 0 0; padding: 0 0 0 16px; border-left: 2px solid var(--pgl-line); }

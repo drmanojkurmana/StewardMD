@@ -955,3 +955,74 @@ Annexure 1 is a banded per-element rating with a comments column and **no total 
 was synthesising "105 / 135" onto a document an examiner may read. `noTotal` is carried through the
 model, the server scoring contract and the report. A mark the form does not have is a mark that was
 made up.
+
+### 2026-08-27, later — signatures that mean something: the registration gate and the QR
+
+Two things were missing from a module whose entire purpose is an auditable official record.
+
+**A signature from an unverified account is worth nothing, and looks exactly like one that is worth
+something.** PGMER-2023 §5.2(vii) says the logbook is authenticated by "the Post-graduate guide";
+§9.2(c) attaches a monetary penalty to the NAMED faculty/HoD/Dean who submits a false record. Both
+presuppose a registered medical practitioner. The module was checking a *capability* — what a role
+may do — and never whether the *person* was on a medical register at all.
+
+So `functions/_pglog_signer.js` now gates every act of signing: verify, return, assess, sign-off and
+the monthly attestation. It does **not** re-implement verification — StewardMD already checks
+doctors against the **live Indian Medical Register** via `/api/verify-doctor`, which writes
+`icu:doctor:<uid>` and sets the `verified` custom claim. This reads that.
+
+**Decisions worth not re-litigating:**
+
+- **FAIL CLOSED.** If KV is unreachable and the claims lookup throws, the signature is refused with a
+  503 that says *nothing was signed*. An outage must never silently downgrade a regulatory signature
+  to an unverified one: the resident can wait, a falsified training record cannot be taken back.
+- **The registration NUMBER is recorded on the record**, not just a uid — number, council, registered
+  name, and how it was verified. A signature that said only "fb:abc123 signed this" is unauditable by
+  the University that has to rely on it.
+- **`verified:true` with no registration number is refused.** A signature nobody can check is not a
+  signature.
+- **The uid is de-namespaced before lookup.** `fb:abc` vs `abc` would have made every lookup miss —
+  and before the fail-closed rule that would have failed *open*. It is one function, used everywhere,
+  with a test.
+
+**The QR.** A printed logbook is trusted because a named person signed it; a PDF of one is trusted
+because of nothing at all. Every signed event now mints an 80-bit code and a QR
+(`functions/_pglog_verify.js`), and `GET /api/pglog/v/<code>` answers **unauthenticated** — an
+examiner holding a printout has no account, and requiring one would make the QR useless to the only
+person it exists for.
+
+- **The code is an opaque handle, not an encoding of the record.** A code on a whiteboard leaks
+  nothing.
+- **The stored record holds an HMAC digest of a FIXED canonical form** — an explicit field list, never
+  `Object.keys()` over a live document, whose key order would change with a schema edit and silently
+  invalidate every code ever issued. On lookup the digest is recomputed from the live record: if
+  someone edits Firestore directly, the page says **TAMPERED** rather than showing a green tick over
+  altered content.
+- **The honest claim is the one on the page.** This is tamper-EVIDENT, not tamper-proof, and it is
+  *not* a cryptographic signature by the faculty member — it is the server attesting to what it
+  recorded. A real per-signer keypair needs key custody we do not have, and claiming otherwise would
+  be worse than not claiming it.
+- **Amending a verified entry supersedes its code.** The old signature described a document that no
+  longer stands, so the code says so instead of continuing to validate.
+- **Without `PGLOG_SIGNING_KEY`, no code is issued at all** — an uncheckable "verification code" is
+  worse than no QR, because it looks like one that can be checked.
+- **Minting a code can never take a signature down with it.** If signing is unconfigured or the write
+  fails, the record is still signed and auditable; it simply carries no QR and the UI says so.
+- **The public payload is PHI-free by construction.** Every field was chosen by asking: *is this
+  already on the document the examiner is holding?* Resident name and SMD ID, programme, activity
+  KIND and date, signer and registration, and whether it still stands. Never the case reference, the
+  diagnosis, the remarks or the reflection.
+
+**The QR encoder is ours** (`pglog-qr.js`, ~350 lines, ISO/IEC 18004 byte mode, versions 1–10). A
+library would add a dependency to a buildless ES5 app; an image service would send the code to a
+third party and fail on a ward with no signal. **A wrong QR is worse than no QR** — it looks
+scannable and is not — so every part with a published reference value is tested against it: the
+GF(256) tables, the RS generator polynomials, **all 32 format-information strings from Table C.1**,
+the version strings from Table D.1. The QR block deliberately stays **light in dark mode**: an
+inverted QR does not scan reliably.
+
+**Two bugs the tests caught, both mine.** `normalizeCode()` folded confusable characters *before*
+stripping the `PGL` prefix — and "PGL" contains an L, which the folder rewrites to `1`. Every scanned
+and every hand-typed code returned empty. Order was the whole bug. And the first cut of the
+supervisor-resolution error overwrote `err.message`, which broke the router's error mapping it was
+supposed to feed.

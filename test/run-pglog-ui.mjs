@@ -102,8 +102,8 @@ try {
   ok(await attach(BASE + "?pglog=1&pglogserver=0"), "app loads with ?pglog=1");
   await clearOverlays();
   ok(await ev(`return SMD_PGLOG_FLAGS.bool("smd_pglog");`) === true, "the flag resolves to true");
-  ok(await ev(`return !!(window.SMD_PGLOG_MODEL && window.SMD_PGLOG_CURRICULUM && window.SMD_PGLOG_STORE && window.SMD_PGLOG_REPORTS && window.SMD_PGLOG_SCREENS);`) === true,
-    "all seven module globals are present");
+  ok(await ev(`return !!(window.SMD_PGLOG_MODEL && window.SMD_PGLOG_CURRICULUM && window.SMD_PGLOG_STORE && window.SMD_PGLOG_REPORTS && window.SMD_PGLOG_SCREENS && window.SMD_PGLOG_QR);`) === true,
+    "all eight module globals are present");
   await ev(`PGLOG.open(); return 1;`);
   await sleep(1400);
   ok(await ev(`return !!document.getElementById("pglogRoot");`) === true, "#pglogRoot is created");
@@ -244,6 +244,29 @@ try {
     var b=document.getElementById("pglogScroll");
     return b.scrollWidth <= b.clientWidth + 2;`) === true,
     "the report does not make the page scroll horizontally");
+
+  /* ── 8b. The QR that makes a signature checkable ──────────────────────────── */
+  console.log("\n— verification QR —");
+  ok(await ev(`
+    var svg = SMD_PGLOG_QR.toSvg("https://stewardmd.in/pglog/v/PGL-7K2M9-XQ4TB", { scale: 4 });
+    return svg.indexOf("<svg") === 0 && svg.indexOf("<path") > 0;`) === true,
+    "the QR encoder renders an SVG in the browser");
+  ok(await ev(`
+    var d = document.createElement("div");
+    d.innerHTML = SMD_PGLOG_QR.toSvg("https://stewardmd.in/pglog/v/PGL-7K2M9-XQ4TB");
+    var svg = d.querySelector("svg");
+    return svg && svg.querySelectorAll("path").length === 1 && !d.querySelector("script,image,use");`) === true,
+    "the rendered QR is inert — one path, no script, no external reference");
+  ok(await ev(`
+    var a = SMD_PGLOG_QR.toSvg("https://stewardmd.in/pglog/v/PGL-AAAAA-AAAAA");
+    var b = SMD_PGLOG_QR.toSvg("https://stewardmd.in/pglog/v/PGL-AAAAA-AAAAB");
+    return a !== b;`) === true, "a different code renders a different symbol");
+  await ev(`SMD_PGLOG_SCREENS.go("check"); return 1;`);
+  await sleep(500);
+  ok(await ev(`return !!document.getElementById("pglCode");`) === true,
+    "the in-app code checker screen renders");
+  ok(await ev(`var h=document.getElementById("pglogScroll"); return /Scan or type|verification code/i.test(h.textContent);`) === true,
+    "and explains what to do with a code");
 
   /* ── 9. Navigation + close ───────────────────────────────────────────────── */
   console.log("\n— navigation —");

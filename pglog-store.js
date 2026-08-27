@@ -131,6 +131,13 @@
   function rotations(residentId) { return req("/rotations?residentId=" + encodeURIComponent(residentId)); }
   function assessments(residentId) { return req("/assessments?residentId=" + encodeURIComponent(residentId)); }
   function attestations(residentId) { return req("/attestations?residentId=" + encodeURIComponent(residentId)); }
+  // PUBLIC verification lookup. Deliberately NOT via req(): it needs no token, must work for an
+  // examiner who has never signed in, and must not be blocked by the server-sync flag.
+  function verifyCode(code) {
+    if (!G || !G.fetch) return Promise.reject(mkErr("no_fetch", ""));
+    return G.fetch(API + "/v/" + encodeURIComponent(String(code || "").trim()), { cache: "no-store" })
+      .then(function (r) { return r.json().catch(function () { return { ok: false, status: "unavailable" }; }); });
+  }
   function facultyRoster(orgId) { return req("/faculty-roster?orgId=" + encodeURIComponent(orgId)).then(function (r) { return r.faculty || []; }); }
   function pending(orgId) { return req("/pending?orgId=" + encodeURIComponent(orgId)); }
   function notifications() { return req("/notifications"); }
@@ -296,7 +303,7 @@
     entries: entries, entry: entry, rotations: rotations, assessments: assessments,
     attestations: attestations, pending: pending, residents: residents, programmes: programmes,
     notifications: notifications, markRead: markRead, config: config, setConfig: setConfig,
-    facultyRoster: facultyRoster,
+    facultyRoster: facultyRoster, verifyCode: verifyCode,
     // drafts
     saveDraft: saveDraft, drafts: drafts, getDraft: getDraft, dropDraft: dropDraft,
     validateDraft: validateDraft, submitDraft: submitDraft, queueDraft: queueDraft,

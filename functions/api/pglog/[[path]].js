@@ -22,7 +22,8 @@
  * protects it, authorization is.
  *
  * Routes (all under /api/pglog):
- *   GET    /ready                              -> { ok, enabled }                  (unauth probe)
+ *   GET    /ready                              -> { ok, enabled, signing }        (unauth probe)
+ *   GET    /v/:code                            -> PUBLIC, PHI-free signature verification
  *   GET    /me?orgId=                          -> { role, resident, programme, rotations, caps }
  *   GET    /programmes?orgId=                  POST /programmes            PATCH /programmes/:id
  *   GET    /residents?orgId=&departmentId=...  POST /residents             PATCH /residents/:id
@@ -45,10 +46,11 @@ import { verifyFirebaseToken } from "../../_fbauth.js";
 import { CAPS, can } from "../../_queue_roles.js";
 import { templateFor } from "../../_pglog_templates.js";
 import * as S from "../../_pglog_store.js";
+import * as V from "../../_pglog_verify.js";
 import M from "../../../pglog-model.js";
 
-const json = (obj, status = 200) => new Response(JSON.stringify(obj), {
-  status, headers: { "Content-Type": "application/json", "Cache-Control": "no-store" }
+const json = (obj, status = 200, extra) => new Response(JSON.stringify(obj), {
+  status, headers: Object.assign({ "Content-Type": "application/json", "Cache-Control": "no-store" }, extra || {})
 });
 const bearer = (request) => {
   try { return (request.headers.get("Authorization") || "").replace(/^Bearer\s+/i, ""); } catch (e) { return ""; }
@@ -76,6 +78,12 @@ function fail(e) {
     pglog_actor_required: [401, "Sign in required."],
     pglog_submitted_withdraw_first: [409, "This entry is with your guide for verification. Withdraw it first to correct it."],
     pglog_not_author: [403, "Only the author can withdraw an entry."],
+    signer_unverified: [403, "Verify your medical council registration before signing a logbook record."],
+    signer_verification_pending: [403, "Your medical registration is still under review."],
+    signer_verification_rejected: [403, "Your medical registration was not verified."],
+    signer_no_registration_number: [403, "Your verified account carries no registration number."],
+    signer_unidentified: [401, "Sign in again before signing a logbook record."],
+    signer_check_unavailable: [503, "Your registration could not be checked. Nothing was signed."],
     supervisor_unresolved: [400, "That supervisor is not on your department's faculty list, so nobody would receive this entry to verify."]
   };
   const k = known[e && e.message];
@@ -83,6 +91,108 @@ function fail(e) {
   if (status) return json({ error: (e && e.message) || "error", message: e && e.userMessage, detail: e && e.detail, errors: e && e.errors }, status);
   try { console.warn("[pglog]", e && e.message, e && e.stack); } catch (_) {}
   return json({ error: "server_error" }, 500);
+}
+
+/* A small fixed-window rate limiter over the KV binding the rest of the app already uses. Fails
+ * OPEN on a KV error: a verification lookup is read-only and PHI-free, so refusing every examiner
+ * because a cache is down is the worse failure. (The WRITE paths fail closed; this one does not,
+ * and the asymmetry is deliberate.) */
+async function rateLimit(env, request, bucket, limit, windowSec) {
+  const store = env.CASES_KV || env.GHIS_KV || null;
+  if (!store) return { ok: true };
+  try {
+    const ip = request.headers.get("CF-Connecting-IP") || request.headers.get("X-Forwarded-For") || "anon";
+    const win = Math.floor(Date.now() / (windowSec * 1000));
+    const key = "pglog:rl:" + bucket + ":" + win + ":" + ip;
+    const cur = Number(await store.get(key)) || 0;
+    if (cur >= limit) return { ok: false, retryAfter: windowSec };
+    await store.put(key, String(cur + 1), { expirationTtl: windowSec * 2 });
+    return { ok: true };
+  } catch (e) { return { ok: true }; }
+}
+
+/* Build the PUBLIC answer for a verification code. Every field here was chosen by asking: is this
+ * already on the document the examiner is holding? If not, it does not appear. */
+async function describeVerification(env, rec, code) {
+  const out = {
+    ok: true, code,
+    kind: rec.kind,
+    issuedAt: rec.issuedAt,
+    disclaimer: "StewardMD attests to what it recorded and to the signer's registration as verified " +
+      "against the Indian Medical Register at the time of signing. It does not certify the clinical " +
+      "content, and it is not a determination by the NMC or by any University."
+  };
+  if (rec.revoked) {
+    out.status = "superseded";
+    out.message = "This record was amended after it was signed, so this signature no longer stands. " +
+      "The corrected record carries its own code, and the original is retained in the audit trail.";
+    return out;
+  }
+
+  // Re-derive the digest from the LIVE record. If it no longer matches, the stored document has
+  // changed underneath the signature and we say so plainly.
+  let live = null, payload = null;
+  try {
+    if (rec.kind === "entry") {
+      live = await S.getEntry(env, rec.refId);
+      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId, kind: live.kind,
+        occurredAt: live.occurredAt, role: live.role, verifiedBy: live.verifiedBy,
+        verifiedByReg: live.verifiedReg, verifiedAt: live.verifiedAt,
+        revisionCount: (live.revisions || []).length };
+    } else if (rec.kind === "assessment") {
+      live = await S.getAssessment(env, rec.refId);
+      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId,
+        templateId: live.templateId, outcome: live.outcome, total: live.total, maxTotal: live.maxTotal,
+        assessor: live.assessor, assessorReg: live.assessorReg, assessedAt: live.assessedAt };
+    } else if (rec.kind === "attestation") {
+      live = await S.getAttestation(env, rec.refId);
+      if (live) payload = { id: live.id, residentId: live.residentId, orgId: live.orgId,
+        attKind: live.kind, period: live.period, counts: live.counts,
+        attestedBy: live.attestedBy, attestedByReg: live.attestedReg, attestedAt: live.attestedAt };
+    }
+  } catch (e) { live = null; }
+
+  if (!live || !payload) {
+    out.status = "unavailable";
+    out.message = "The record behind this code could not be read just now. Nothing is implied about " +
+      "its validity — try again shortly.";
+    return out;
+  }
+
+  let expect = "";
+  try { expect = await V.digestFor(env, rec.kind, payload); } catch (e) { expect = ""; }
+  if (!expect || !V.digestEqual(expect, rec.digest)) {
+    out.status = "tampered";
+    out.message = "This record does not match what was signed. Do not rely on it. Report it to the " +
+      "institution's Academic Cell.";
+    return out;
+  }
+
+  out.status = "valid";
+  const res = await S.getResident(env, live.residentId).catch(() => null);
+  const prog = res ? await S.getProgramme(env, res.programmeId).catch(() => null) : null;
+  out.resident = res ? { name: res.name, smdId: res.smdId, trainingYear: res.trainingYear } : null;
+  out.programme = prog ? { degree: prog.degree, specialty: prog.specialtyId, name: prog.name } : null;
+  if (rec.kind === "entry") {
+    out.record = { type: "Logbook entry", activity: live.kind, setting: live.setting || "",
+                   role: live.role || "", date: live.occurredAt, amendments: (live.revisions || []).length };
+    out.signedBy = { name: live.verifiedName || "", registrationNo: live.verifiedReg || "",
+                     council: live.verifiedCouncil || "", at: live.verifiedAt,
+                     role: "Verifying faculty (PGMER-2023 §5.2(vii))" };
+  } else if (rec.kind === "assessment") {
+    out.record = { type: "Formative assessment", template: live.templateId, outcome: live.outcome,
+                   score: live.maxTotal ? live.total + " / " + live.maxTotal : "—" };
+    out.signedBy = { name: live.assessorName || "", registrationNo: live.assessorReg || "",
+                     council: live.assessorCouncil || "", at: live.assessedAt, role: "Assessor" };
+  } else {
+    out.record = { type: live.kind === "monthly" ? "Monthly authentication" : "Head of Department certification",
+                   period: live.period || "", entries: (live.counts || {}).total || 0,
+                   verifiedEntries: (live.counts || {}).verified || 0 };
+    out.signedBy = { name: live.attestedName || "", registrationNo: live.attestedReg || "",
+                     council: live.attestedCouncil || "", at: live.attestedAt,
+                     role: "Postgraduate guide (PGMER-2023 §5.2(vii))" };
+  }
+  return out;
 }
 
 // Resolve the caller's role in an org once per request.
@@ -136,7 +246,34 @@ export async function onRequest(context_) {
   const method = request.method.toUpperCase();
   const q = (k) => url.searchParams.get(k) || "";
 
-  if (method === "GET" && seg === "ready") return json({ ok: true, enabled: enabled(env), v: M.VERSION });
+  if (method === "GET" && seg === "ready") {
+    return json({ ok: true, enabled: enabled(env), v: M.VERSION, signing: V.signingConfigured(env) });
+  }
+
+  /* ── PUBLIC verification: GET /api/pglog/v/<code> ─────────────────────────────
+   * UNAUTHENTICATED BY DESIGN. An examiner holding a printed logbook has no StewardMD account, and
+   * requiring one would make the QR useless for the only person it exists for.
+   *
+   * What that means for what it may return: NOTHING that is not already on the paper in their hand.
+   * The resident's name and StewardMD ID, the programme, the KIND of activity and its date, the
+   * signer's name and registration number, and whether the record still stands. No case reference,
+   * no diagnosis, no remarks, no reflection, no uid, no email, no entry ids.
+   *
+   * Rate-limited per IP: the code space is 80 bits, so enumeration is hopeless, but an unlimited
+   * unauthenticated endpoint is a free amplifier regardless. */
+  if (method === "GET" && seg === "v" && id) {
+    const rl = await rateLimit(env, request, "verify", 30, 60);
+    if (!rl.ok) return json({ error: "rate_limited", message: "Too many lookups. Try again in a minute." }, 429,
+      { "Retry-After": String(rl.retryAfter) });
+    const code = V.normalizeCode(id);
+    if (!code) return json({ ok: false, status: "malformed", message: "That is not a StewardMD verification code." }, 400);
+    let rec = null;
+    try { rec = await V.lookup(env, code); } catch (e) { rec = null; }
+    // A miss and a malformed code answer identically slowly and identically vaguely — there is
+    // nothing to learn from probing.
+    if (!rec) return json({ ok: false, status: "not_found", message: "No signed record carries that code." }, 404);
+    return json(await describeVerification(env, rec, code));
+  }
   if (!enabled(env)) return json({ error: "disabled" }, 404);
   if (method === "OPTIONS") return new Response(null, { status: 204 });
 
@@ -154,7 +291,11 @@ export async function onRequest(context_) {
       const programme = resident ? await S.getProgramme(env, resident.programmeId) : null;
       const rotations = resident ? await S.listRotations(env, resident.id) : [];
       const caps = Object.keys(CAPS).filter((k) => can(ctx.role, CAPS[k]) && CAPS[k].indexOf("pglog.") === 0).map((k) => CAPS[k]);
-      return json({ ok: true, uid: ctx.uid, role: ctx.role, caps, resident, programme, rotations });
+      // Whether this person may SIGN, and if not, why — so the UI can explain rather than present a
+      // control that fails. Never the gate; the gate is server-side on the write path.
+      const signer = can(ctx.role, CAPS.PGLOG_VERIFY) || can(ctx.role, CAPS.PGLOG_ATTEST)
+        ? await S.signerStatus(env, ctx.actorUid) : null;
+      return json({ ok: true, uid: ctx.uid, role: ctx.role, caps, resident, programme, rotations, signer });
     }
 
     /* ── programmes ─────────────────────────────────────────────────────── */

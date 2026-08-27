@@ -43,7 +43,13 @@
     return t.length > 24 ? t.slice(0, 10) + "…" + t.slice(-6) : t;
   }
   function verifiedCell(e) {
-    if (e.status === "verified") return "Verified " + fmtTs(e.verifiedAt) + " · " + person(e.verifiedBy);
+    // A signature is only worth printing if it names the registration behind it. The uid is a
+    // fallback for records signed before the registration gate existed.
+    if (e.status === "verified") {
+      var who = e.verifiedName || person(e.verifiedBy);
+      var reg = e.verifiedReg ? " (" + e.verifiedReg + ")" : "";
+      return "Verified " + fmtTs(e.verifiedAt) + " · " + who + reg + (e.verifyCode ? " · " + e.verifyCode : "");
+    }
     if (e.status === "submitted") return "Awaiting verification";
     if (e.status === "returned") return "Returned for correction";
     return "Draft — not submitted";
@@ -91,7 +97,11 @@
       monthsTotal: months.length,
       monthsOverdue: months.filter(function (x) { return x.overdue; }).map(function (x) { return x.period; }),
       weekly: ctx.weekly || (m ? m.weeklyCadence(entries, (ctx.resident || {}).startDate, ctx.today) : null),
-      clause: "PGMER-2023 5.2(vi) weekly update; 5.2(vii) monthly authentication by the postgraduate guide"
+      clause: "PGMER-2023 5.2(vi) weekly update; 5.2(vii) monthly authentication by the postgraduate guide",
+      // Every signature on this document names a registered practitioner and carries a code the
+      // reader can check independently. Reported so the reader knows to expect it.
+      signedWithRegistration: entries.filter(function (e) { return e.status === "verified" && e.verifiedReg; }).length,
+      withVerificationCode: entries.filter(function (e) { return e.verifyCode; }).length
     };
   }
 
@@ -623,6 +633,8 @@
             v.returned + " returned · " + v.draft + " draft" + (v.amended ? " · " + v.amended + " amended (originals retained)" : "")) +
         "</p><p>" + esc(v.monthsAttested + " of " + v.monthsTotal + " months authenticated by the guide" +
           (v.monthsOverdue.length ? " · overdue: " + v.monthsOverdue.join(", ") : "")) + "</p>" +
+        "<p>" + esc(v.signedWithRegistration + " of " + v.verified + " verified entries carry the signer's " +
+          "medical registration number; " + v.withVerificationCode + " carry a scannable verification code.") + "</p>" +
         '<p class="pgl-rep-clause">' + esc(v.clause) + "</p></section>");
     }
     arr(rep.sections).forEach(function (sec) {

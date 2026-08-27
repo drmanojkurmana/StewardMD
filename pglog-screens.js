@@ -61,7 +61,7 @@
     templates: null,
     draft: null, draftErrors: [], suggestions: [],
     faculty: null, dept: null, review: null, assessment: null,
-    roster: [],
+    roster: [], checked: null,
     filter: { kind: "", status: "" },
     deptFilter: { departmentId: "", trainingYear: "" },
     inbox: []
@@ -295,6 +295,7 @@
     if (flag("smd_pglog_reports")) h.push(navRow("reports", "description", "Reports and portfolio", "11 documents"));
     if (canFaculty()) h.push(navRow("faculty", "how_to_reg", "Faculty review", "Verify, assess, authenticate"));
     if (canDept()) h.push(navRow("dept", "corporate_fare", "Department oversight", "Progress across residents"));
+    h.push(navRow("check", "qr_code_scanner", "Verify a signed record", "Scan or type a verification code"));
 
     h.push('<div class="pgl-banner" data-t="ai" style="margin-top:18px">' + ic("policy") +
       "<div>Requirements shown here are traced to their NMC source. This app does not certify " +
@@ -402,6 +403,32 @@
   function kindIcon(e) {
     if (e.kind === "clinical") return e.setting === "emergency" ? "emergency" : e.setting === "ipd" ? "bed" : "stethoscope";
     return KIND_ICON[e.kind] || "note";
+  }
+
+  /* The QR that makes a signature checkable by someone who does not use this app. Rendered from
+   * pglog-qr.js — no library, no network, so it prints and works on a ward. */
+  function qrBlock(code, caption) {
+    if (!code) return "";
+    var url = "https://stewardmd.in/pglog/v/" + code;
+    var svg = "";
+    try { svg = window.SMD_PGLOG_QR ? SMD_PGLOG_QR.toSvg(url, { scale: 4, label: "Verification code " + code }) : ""; }
+    catch (e) { svg = ""; }
+    return '<div class="pgl-qr">' + (svg || "") +
+      '<div class="pgl-qr-meta"><div class="pgl-qr-code">' + esc(code) + "</div>" +
+      '<div class="pgl-qr-cap">' + esc(caption || "Scan to verify this signature") + "</div>" +
+      '<div class="pgl-qr-url">' + esc(url) + "</div></div></div>";
+  }
+
+  // The banner a faculty member sees when they cannot sign, and WHY. Never a disabled button with
+  // no explanation — the commonest reason is simply that they have not verified their registration.
+  function signerBanner() {
+    var sg = state.ctx && state.ctx.signer;
+    if (!sg || sg.ok) return "";
+    return banner("warn", "verified_user",
+      "<b>You cannot sign logbook records yet.</b> " + esc(sg.message || "") +
+      " A PG logbook entry is a document a University relies on, so it has to carry a registered " +
+      "practitioner's number. " +
+      '<button class="pgl-chip" data-pgl="go-verify" style="margin-top:8px">Verify my registration</button>');
   }
 
   function setupPrompt() {
@@ -800,6 +827,20 @@
         "</div>");
     }
 
+    if (e.status === "verified") {
+      h.push('<div class="pgl-card"><h3>Signature</h3>' +
+        '<dl class="pgl-rep-meta">' +
+        (e.verifiedName ? "<dt>Verified by</dt><dd>" + esc(e.verifiedName) + "</dd>" : "") +
+        (e.verifiedReg ? "<dt>Registration</dt><dd>" + esc(e.verifiedReg) +
+          (e.verifiedCouncil ? " · " + esc(e.verifiedCouncil) : "") + "</dd>" : "") +
+        "<dt>Signed</dt><dd>" + esc(m.isoDate(e.verifiedAt)) + "</dd></dl>" +
+        (e.verifyCode
+          ? qrBlock(e.verifyCode, "Anyone can scan this to confirm who signed it and that it has not changed.")
+          : banner("warn", "qr_code_2",
+              "No verification code was issued for this signature, so it cannot be checked by scanning. " +
+              "The signature and the audit trail still stand.")) +
+        "</div>");
+    }
     var bar = "";
     if (local) {
       bar = '<div class="pgl-actionbar">' +
@@ -1111,6 +1152,7 @@
     var f = state.faculty, r = REP();
     if (!f) return loading();
     var h = [];
+    h.push(signerBanner());
     h.push('<div class="pgl-stats">' +
       stat(arr(f.pending).length, "To verify") +
       stat(arr(f.overdue).length, "Overdue") +
@@ -1193,10 +1235,19 @@
         });
       }
     }
+    var sg = state.ctx && state.ctx.signer;
+    if (sg && !sg.ok) h.push(signerBanner());
+    else if (sg && sg.ok) {
+      h.push(banner("info", "verified_user",
+        "Verifying signs this record as <b>" + esc(sg.name || REP().person(state.ctx.uid)) +
+        "</b>, registration <b>" + esc(sg.regNo) + "</b>" + (sg.council ? " (" + esc(sg.council) + ")" : "") +
+        ". That number is recorded on the entry and printed on its verification QR."));
+    }
+    var canSign = !sg || sg.ok;
     return wrap(h.join("")) +
       '<div class="pgl-actionbar">' +
-      '<button class="pgl-btn ghost" data-pgl="do-return" data-id="' + attr(e.id) + '">' + ic("undo") + "Return</button>" +
-      '<button class="pgl-btn" data-pgl="do-verify" data-id="' + attr(e.id) + '">' + ic("task_alt") + "Verify</button></div>";
+      '<button class="pgl-btn ghost" data-pgl="do-return" data-id="' + attr(e.id) + '"' + (canSign ? "" : " disabled") + ">" + ic("undo") + "Return</button>" +
+      '<button class="pgl-btn" data-pgl="do-verify" data-id="' + attr(e.id) + '"' + (canSign ? "" : " disabled") + ">" + ic("task_alt") + "Verify</button></div>";
   }
 
   // The assessment form, rendered from the NMC proforma in pglog/assessment-templates.json.
@@ -1350,6 +1401,48 @@
     return wrap(h.join(""));
   }
 
+  /* ── CHECK A CODE ────────────────────────────────────────────────────────────
+   * The in-app side of the public verification endpoint, for a HOD or examiner who has the app
+   * open. The same answer is available to anyone with a browser and no account at all. */
+  function screenCheck() {
+    var r = state.checked;
+    var h = ['<div class="pgl-field"><label for="pglCode">Verification code</label>' +
+      '<input type="text" id="pglCode" placeholder="PGL-XXXXX-XXXXX" autocapitalize="characters" spellcheck="false">' +
+      '<div class="hint">Printed under the QR on any signed record. Scanning the QR opens the same check.</div></div>' +
+      '<button class="pgl-btn wide" data-pgl="check-code">' + ic("qr_code_scanner") + "Check</button>"];
+    if (r) {
+      var STATE = {
+        valid: ["task_alt", "info", "This signature is valid"],
+        superseded: ["history", "warn", "Superseded — the record was amended after signing"],
+        tampered: ["gpp_bad", "bad", "This record does not match what was signed"],
+        not_found: ["search_off", "warn", "No signed record carries that code"],
+        malformed: ["error", "warn", "That is not a StewardMD verification code"],
+        unavailable: ["cloud_off", "warn", "Could not read the record just now"]
+      }[r.status] || ["help", "warn", "Unknown result"];
+      h.push(banner(STATE[1], STATE[0], "<b>" + esc(STATE[2]) + "</b>" + (r.message ? "<br>" + esc(r.message) : "")));
+      if (r.status === "valid") {
+        h.push('<div class="pgl-card"><h3>What was signed</h3><dl class="pgl-rep-meta">' +
+          kvRow("Resident", r.resident && (r.resident.name + (r.resident.smdId ? " · " + r.resident.smdId : ""))) +
+          kvRow("Programme", r.programme && ((r.programme.degree || "") + " " + (r.programme.specialty || ""))) +
+          kvRow("Record", r.record && r.record.type) +
+          kvRow("Activity", r.record && (r.record.activity || r.record.template || r.record.period)) +
+          kvRow("Date", r.record && r.record.date) +
+          kvRow("Role", r.record && r.record.role) +
+          kvRow("Amendments", r.record && r.record.amendments != null ? String(r.record.amendments) : "") +
+          "</dl></div>");
+        h.push('<div class="pgl-card"><h3>Signed by</h3><dl class="pgl-rep-meta">' +
+          kvRow("Name", r.signedBy && r.signedBy.name) +
+          kvRow("Registration", r.signedBy && r.signedBy.registrationNo) +
+          kvRow("Council", r.signedBy && r.signedBy.council) +
+          kvRow("Capacity", r.signedBy && r.signedBy.role) +
+          "</dl></div>");
+      }
+      if (r.disclaimer) h.push('<div class="hint" style="margin-top:12px">' + esc(r.disclaimer) + "</div>");
+    }
+    return wrap(h.join(""));
+  }
+  function kvRow(k, v) { return v ? "<dt>" + esc(k) + "</dt><dd>" + esc(v) + "</dd>" : ""; }
+
   /* ── INBOX ───────────────────────────────────────────────────────────────── */
   function screenInbox() {
     var m = M();
@@ -1390,6 +1483,7 @@
       case "dept": title = "Department"; sub = "Oversight"; body = screenDept(); break;
       case "resident": title = "Resident"; body = screenResidentDetail(a); break;
       case "inbox": title = "Notifications"; body = screenInbox(); break;
+      case "check": title = "Verify a record"; sub = "Scan or type a code"; body = screenCheck(); break;
       default: body = wrap(errorState("Unknown screen."));
     }
     state.host.innerHTML = head(title, sub) + body;
@@ -1504,6 +1598,21 @@
           render();
         }
         return;
+      case "go-verify":
+        // Route to the app's EXISTING doctor-verification flow. This module does not verify
+        // registrations; it only refuses to accept a signature from an unverified one.
+        try { if (window.SMD_VERIFY && SMD_VERIFY.open) return SMD_VERIFY.open(); } catch (err) {}
+        try { window.location.hash = "#verify"; } catch (err) {}
+        return toast("Open Settings → Verify your medical registration.");
+      case "check-code": {
+        var input = state.host.querySelector("#pglCode");
+        var v = input ? String(input.value || "").trim() : "";
+        if (!v) return toast("Enter or scan a code.");
+        state.loading = true; render();
+        return ST().verifyCode(v).then(function (r) {
+          state.loading = false; state.checked = r; render();
+        }, function () { state.loading = false; toast("Could not reach the verification service."); render(); });
+      }
       case "open-notif": {
         var e = t.getAttribute("data-e");
         st.markRead(id).catch(function () {});

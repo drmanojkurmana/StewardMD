@@ -35,6 +35,8 @@ import { CAPS, can } from "./_queue_roles.js";
 // functions/_onco_store.js already uses for onco-dose.js. Never re-derive the rules here; that file
 // is the one place they exist.
 import M from "../pglog-model.js";
+import { signerSnapshot, signatureFields, canSign } from "./_pglog_signer.js";
+import * as V from "./_pglog_verify.js";
 
 const COL = {
   programme: "pg_programmes",
@@ -69,6 +71,10 @@ async function audit(env, orgId, actor, action, meta, deps) {
  * resident acting on their own record — that is what PGLOG_*_OWN means. */
 export async function gate(env, actorUid, orgId, cap, opts, deps) {
   opts = opts || {};
+  // Test seam, consistent with the deps convention this whole file uses. Production never passes it;
+  // without it the org/membership lookups below would need real Firestore to exercise anything that
+  // sits BEHIND the gate — such as the registration check.
+  if (deps && deps.gate) return deps.gate(env, actorUid, orgId, cap, opts);
   if (!actorUid) throw Object.assign(new Error("signin_required"), { status: 401 });
   const org = await getOrg(env, orgId);
   if (!org) throw e404("org");
@@ -236,7 +242,15 @@ async function writeEntry(env, e, orgId, deps, opts) {
 export async function getEntry(env, id, deps) {
   const d = D(deps);
   const doc = await d.fsGet(env, COL.entry + "/" + sanitize(id));
-  return doc ? M.entry(withId(sanitize(id), doc.fields)) : null;
+  if (!doc) return null;
+  // M.entry() is the schema authority and drops anything it does not know, which is what keeps a
+  // crafted field out of the record. The signature block is re-attached explicitly, so adding one
+  // is a deliberate act here rather than a hole in the normaliser.
+  return Object.assign(M.entry(withId(sanitize(id), doc.fields)), {
+    verifiedReg: doc.fields.verifiedReg || "", verifiedCouncil: doc.fields.verifiedCouncil || "",
+    verifiedName: doc.fields.verifiedName || "", verifiedRegSource: doc.fields.verifiedRegSource || "",
+    verifyCode: doc.fields.verifyCode || ""
+  });
 }
 
 // Load the context the model needs to validate: the resident's programme window + degree.
@@ -368,10 +382,27 @@ export async function verifyEntry(env, id, actorUid, note, deps) {
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
   await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
-  const out = M.verify(cur, actorUid, d.now(), note);   // THROWS on self-verify
+  // THE REGISTRATION GATE. Throws unless the actor holds a verified medical-council registration.
+  // Before the cap check would have been the whole story; a cap says what a ROLE may do, and this
+  // says whether the PERSON is a registered practitioner whose signature means anything.
+  const snap = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
+  const at = d.now();
+  let out = M.verify(cur, actorUid, at, note);          // THROWS on self-verify
+  // The signature records WHO, by registration number — not just a uid.
+  out = Object.assign(out, signatureFields("verified", snap, at));
+  // A code + QR the University can check independently.
+  out.verifyCode = await issueCode(env, "entry", out, deps);
   await writeEntry(env, out, cur.orgId, deps);
-  await audit(env, cur.orgId, actorUid, "pglog:entry:verify", cur.kind + " " + cur.residentId, deps);
+  await audit(env, cur.orgId, actorUid, "pglog:entry:verify", cur.kind + " reg:" + snap.regNo, deps);
   return out;
+}
+
+// Minting a code must never take a signature down with it. If signing is unconfigured or the write
+// fails, the record is still signed and auditable — it simply carries no QR, and the UI says so
+// rather than printing a code that cannot be checked.
+async function issueCode(env, kind, payload, deps) {
+  try { return await (deps && deps.issueCode ? deps.issueCode : V.issue)(env, kind, payload, deps) || ""; }
+  catch (e) { return ""; }
 }
 
 export async function returnEntry(env, id, actorUid, reason, deps) {
@@ -379,6 +410,8 @@ export async function returnEntry(env, id, actorUid, reason, deps) {
   const cur = await getEntry(env, id, deps);
   if (!cur) throw e404("entry");
   await gate(env, actorUid, cur.orgId, CAPS.PGLOG_VERIFY, null, deps);
+  // A return is a clinical judgement recorded against a trainee, so it carries the same gate.
+  await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
   const out = M.returnEntry(cur, actorUid, d.now(), reason);   // THROWS without a reason
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:return", cur.kind, deps);
@@ -401,6 +434,11 @@ export async function amendEntry(env, id, patch, actorUid, reason, deps) {
   const out = M.amend(cur, patch, actorUid, d.now(), reason);
   const v = M.validateEntry(out, ctx);
   if (!v.ok) throw Object.assign(e400("validation"), { errors: v.errors });
+  // The old code attested to a document that no longer stands. It must SAY so rather than keep
+  // returning a green tick for content that has since changed.
+  if (cur.verifyCode) { try { await V.supersede(env, cur.verifyCode, "", deps); } catch (e) {} }
+  out.verifyCode = "";
+  out.verifiedReg = ""; out.verifiedCouncil = ""; out.verifiedName = "";
   await writeEntry(env, out, cur.orgId, deps);
   await audit(env, cur.orgId, actorUid, "pglog:entry:amend", id + " rev" + out.revisions.length, deps);
   await notify(env, { to: cur.verifiedBy, orgId: cur.orgId, kind: "verify_pending", entryId: id,
@@ -465,7 +503,11 @@ export async function createAssessment(env, orgId, body, actorUid, deps) {
 export async function getAssessment(env, id, deps) {
   const d = D(deps);
   const doc = await d.fsGet(env, COL.assessment + "/" + sanitize(id));
-  return doc ? M.assessment(withId(sanitize(id), doc.fields)) : null;
+  if (!doc) return null;
+  return Object.assign(M.assessment(withId(sanitize(id), doc.fields)), {
+    assessorReg: doc.fields.assessorReg || "", assessorCouncil: doc.fields.assessorCouncil || "",
+    assessorName: doc.fields.assessorName || "", verifyCode: doc.fields.verifyCode || ""
+  });
 }
 // Complete an assessment. The template is passed in by the router (it is static JSON, and passing it
 // keeps this file free of a second content loader). scoreAssessment() refuses a partial form.
@@ -481,8 +523,12 @@ export async function completeAssessment(env, id, patch, template, actorUid, dep
   if (!res || !res.uid) throw e404("resident");
   const merged = M.assessment(Object.assign({}, cur, patch || {}, { id: cur.id, residentId: cur.residentId, orgId: cur.orgId, createdAt: cur.createdAt }));
   merged.residentUid = res.uid;                                  // so the model can refuse a self-assessment
-  const out = M.assess(merged, actorUid, d.now(), template);
+  const snap = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
+  const at = d.now();
+  const out = M.assess(merged, actorUid, at, template);
   delete out.residentUid;                                        // not persisted; it is a lookup, not a field
+  Object.assign(out, signatureFields("assessor", snap, at));
+  out.verifyCode = await issueCode(env, "assessment", Object.assign({}, out, { assessorReg: snap.regNo }), deps);
   await d.fsCommit(env, [d.wUpdate(env, COL.assessment + "/" + sanitize(id), out)]);
   await audit(env, cur.orgId, actorUid, "pglog:assessment:complete", out.templateId + " " + out.outcome, deps);
   await notify(env, { to: res.uid, orgId: cur.orgId, kind: "assessment_ready", residentId: cur.residentId,
@@ -494,7 +540,9 @@ export async function signAssessment(env, id, actorUid, deps) {
   const cur = await getAssessment(env, id, deps);
   if (!cur) throw e404("assessment");
   await gate(env, actorUid, cur.orgId, CAPS.PGLOG_ASSESS, null, deps);
-  const out = M.signAssessment(cur, actorUid, d.now());
+  const snapS = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
+  const out = Object.assign(M.signAssessment(cur, actorUid, d.now()),
+    signatureFields("signed", snapS, d.now()));
   await d.fsCommit(env, [d.wUpdate(env, COL.assessment + "/" + sanitize(id), out)]);
   await audit(env, cur.orgId, actorUid, "pglog:assessment:sign", id, deps);
   return out;
@@ -541,11 +589,17 @@ export async function attest(env, body, actorUid, deps) {
     : all.filter((e) => e.kind !== "attendance");
   const counts = { verified: scope.filter((e) => e.status === "verified").length, total: scope.length };
   M.ENTRY_KINDS.forEach((k) => { counts[k] = scope.filter((e) => e.kind === k).length; });
-  const a = M.attestation({
+  // The clause says "the Post-graduate guide". A guide is a registered practitioner; this is where
+  // that stops being an assumption.
+  const snapA = await (deps && deps.signerSnapshot ? deps.signerSnapshot : signerSnapshot)(env, actorUid, deps);
+  const at = d.now();
+  const a = Object.assign(M.attestation({
     residentId: res.id, programmeId: res.programmeId, orgId: res.orgId, kind, period,
     entryIds: scope.map((e) => e.id), counts, note: body.note,
-    attestedBy: actorUid, attestedRole: g.role, attestedAt: d.now(), createdAt: d.now()
-  });
+    attestedBy: actorUid, attestedRole: g.role, attestedAt: at, createdAt: at
+  }), signatureFields("attested", snapA, at));
+  a.verifyCode = await issueCode(env, "attestation",
+    Object.assign({}, a, { attKind: kind, attestedByReg: snapA.regNo }), deps);
   try {
     await d.fsCommit(env, [d.wCreate(env, COL.attestation + "/" + sanitize(a.id), a)]);
   } catch (err) {
@@ -563,6 +617,15 @@ export async function attest(env, body, actorUid, deps) {
   }
   await audit(env, res.orgId, actorUid, "pglog:attest:" + kind, period + " n=" + scope.length, deps);
   return a;
+}
+export async function getAttestation(env, id, deps) {
+  const d = D(deps);
+  const doc = await d.fsGet(env, COL.attestation + "/" + sanitize(id));
+  return doc ? Object.assign(M.attestation(withId(sanitize(id), doc.fields)), {
+    // the signature fields live alongside the model's own shape
+    attestedReg: doc.fields.attestedReg || "", attestedCouncil: doc.fields.attestedCouncil || "",
+    attestedName: doc.fields.attestedName || "", verifyCode: doc.fields.verifyCode || ""
+  }) : null;
 }
 export async function listAttestations(env, residentId, deps) {
   const d = D(deps);
@@ -653,7 +716,11 @@ export function publicEntry(e, audience) {
     departmentId: e.departmentId, createdAt: e.createdAt, submittedAt: e.submittedAt,
     verifiedBy: e.verifiedBy, verifiedAt: e.verifiedAt, returnReason: full ? e.returnReason : "",
     attestedIn: e.attestedIn, revisionCount: (e.revisions || []).length,
-    latencyDays: M.latencyDays(e)
+    latencyDays: M.latencyDays(e),
+    // The signature is not a secret — it is the thing that makes the record mean anything, and a
+    // registration number is public information on the Indian Medical Register.
+    verifiedReg: e.verifiedReg || "", verifiedCouncil: e.verifiedCouncil || "",
+    verifiedName: e.verifiedName || "", verifyCode: e.verifyCode || ""
   };
   if (e.kind === "clinical") { out.setting = e.setting; out.category = e.category; out.outcome = e.outcome; }
   if (e.kind === "procedure") { out.procedureId = e.procedureId; out.setting = e.setting; out.outcome = e.outcome; out.complications = e.complications; }
@@ -686,5 +753,9 @@ export function audienceFor(role, actorUid, entry, resident) {
   if (can(role, CAPS.PGLOG_VERIFY)) return "verifier";
   return "aggregate";
 }
+
+// Can this actor sign anything at all? Used by the UI to EXPLAIN why a verify control is
+// unavailable, never as the gate — the gate is signerSnapshot() throwing on the write path.
+export async function signerStatus(env, actorUid, deps) { return canSign(env, actorUid, deps); }
 
 export { COL, norm, residentId };

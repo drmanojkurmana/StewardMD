@@ -623,3 +623,213 @@ test("the roster lists only people who can actually verify", async () => {
   const roster = await S.facultyRoster(env, ORG, db);
   assert.deepEqual(roster.map((m) => m.identity).sort(), ["fb:a", "fb:b"]);
 });
+
+/* ── THE REGISTRATION GATE ──────────────────────────────────────────────────────
+ * "Faculty must verify their medical council registration before they can digitally sign anyone's
+ * logbook." A signature from an unverified account is worth nothing AND looks exactly like one that
+ * is worth something, which is the dangerous part.
+ */
+const SIGNER = await import("../functions/_pglog_signer.js");
+
+function kvWith(rec) {
+  return { async get(key) { return key === "icu:doctor:faculty-1" ? rec : null; } };
+}
+const NO_CLAIMS = { async getUserClaims() { return {}; } };
+
+test("a verified registration resolves to a signature carrying the registration number", async () => {
+  const snap = await SIGNER.signerSnapshot({}, FACULTY_UID, {
+    kv: kvWith({ verified: true, regNo: "TN/12345", council: "Tamil Nadu Medical Council", name: "Dr B" }),
+    ...NO_CLAIMS
+  });
+  assert.equal(snap.regNo, "TN/12345");
+  assert.equal(snap.council, "Tamil Nadu Medical Council");
+  assert.equal(snap.source, "register");
+});
+
+test("an UNVERIFIED account cannot sign", async () => {
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, { kv: kvWith(null), ...NO_CLAIMS }),
+    (e) => e.message === "signer_unverified" && e.status === 403
+  );
+});
+
+test("a PENDING verification cannot sign, and says why", async () => {
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, { kv: kvWith({ status: "pending" }), ...NO_CLAIMS }),
+    (e) => e.message === "signer_verification_pending" && /still under review/.test(e.userMessage)
+  );
+});
+
+test("a REJECTED verification cannot sign", async () => {
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, { kv: kvWith({ status: "rejected" }), ...NO_CLAIMS }),
+    (e) => e.message === "signer_verification_rejected"
+  );
+});
+
+test("verified but with NO registration number is refused — an uncheckable signature is not one", async () => {
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, { kv: kvWith({ verified: true, regNo: "" }), ...NO_CLAIMS }),
+    (e) => e.message === "signer_no_registration_number"
+  );
+});
+
+test("IT FAILS CLOSED: when the check itself is unavailable, nothing is signed", async () => {
+  const brokenKv = { async get() { throw new Error("kv down"); } };
+  const brokenClaims = { async getUserClaims() { throw new Error("identitytoolkit down"); } };
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, { kv: brokenKv, ...brokenClaims }),
+    (e) => e.message === "signer_check_unavailable" && e.status === 503
+  );
+});
+
+test("the namespaced uid is stripped before lookup — the guard must not miss and fail open", async () => {
+  assert.equal(SIGNER.rawUid("fb:faculty-1"), "faculty-1");
+  assert.equal(SIGNER.rawUid("faculty-1"), "faculty-1");
+  assert.equal(SIGNER.rawUid("ghis:faculty-1"), "faculty-1");
+  // and the lookup actually uses it: kvWith keys on the RAW uid
+  const snap = await SIGNER.signerSnapshot({}, "fb:faculty-1", {
+    kv: kvWith({ verified: true, regNo: "KA/9" }), ...NO_CLAIMS });
+  assert.equal(snap.regNo, "KA/9");
+});
+
+test("the Firebase claim is accepted as a fallback only WITH a registration number", async () => {
+  const withNum = await SIGNER.signerSnapshot({}, FACULTY_UID, {
+    kv: kvWith(null), getUserClaims: async () => ({ verified: true, regNo: "MH/77" }) });
+  assert.equal(withNum.regNo, "MH/77");
+  assert.equal(withNum.source, "claim");
+  await assert.rejects(
+    () => SIGNER.signerSnapshot({}, FACULTY_UID, {
+      kv: kvWith(null), getUserClaims: async () => ({ verified: true }) }),
+    (e) => e.message === "signer_unverified");
+});
+
+test("verifyEntry REFUSES an unverified signer, and the entry stays submitted", async () => {
+  const db = fakeDb();
+  const { res } = await seed(db);
+  db.listMembers = async () => [{ identity: FACULTY_UID, role: "pg_faculty", active: true }];
+  const e = await S.createEntry(env, ORG, entryBody(res), RESIDENT_UID, db);
+  await S.submitEntry(env, e.id, RESIDENT_UID, db);
+  const unverified = {
+    gate: async () => ({ role: "pg_faculty", owner: false }),
+    signerSnapshot: async () => { throw SIGNER.signerError("signer_unverified", "x"); }
+  };
+  await assert.rejects(
+    () => S.verifyEntry(env, e.id, FACULTY_UID, "", { ...db, ...unverified }),
+    (err) => err.message === "signer_unverified"
+  );
+  assert.equal((await S.getEntry(env, e.id, db)).status, "submitted", "nothing was half-signed");
+});
+
+test("the signature fields record the registration, not just a uid", () => {
+  const f = SIGNER.signatureFields("verified",
+    { regNo: "TN/12345", council: "TNMC", name: "Dr B", source: "register" }, 1700000000000);
+  assert.equal(f.verifiedReg, "TN/12345");
+  assert.equal(f.verifiedCouncil, "TNMC");
+  assert.equal(f.verifiedName, "Dr B");
+  assert.equal(f.verifiedRegSource, "register");
+  assert.equal(f.verifiedRegCheckedAt, 1700000000000);
+});
+
+/* ── VERIFICATION CODES + TAMPER EVIDENCE ─────────────────────────────────────── */
+const VER = await import("../functions/_pglog_verify.js");
+const KEYED = { PGLOG_SIGNING_KEY: "test-key-not-a-real-secret" };
+
+test("codes are unguessable, human-readable, and free of confusable characters", () => {
+  const seen = new Set();
+  for (let i = 0; i < 500; i++) {
+    const c = VER.newCode();
+    assert.match(c, /^PGL-[0-9A-Z]{5}-[0-9A-Z]{5}$/);
+      // (the fixed "PGL-" prefix is exempt — it is unambiguous, and normalizeCode strips it BEFORE
+    // folding confusables, which is exactly the ordering bug that broke every scanned code once.)
+    assert.ok(!/[ILOU]/.test(c.slice(4)), "I, L, O and U are excluded so a code can be read aloud: " + c);
+    seen.add(c);
+  }
+  assert.ok(seen.size > 495, "80 bits of entropy should not collide in 500 draws");
+});
+
+test("normalizeCode repairs what a human mistypes off paper", () => {
+  assert.equal(VER.normalizeCode("pgl-7k2m9-xq4tb"), "PGL-7K2M9-XQ4TB");
+  assert.equal(VER.normalizeCode("PGL 7K2M9 XQ4TB"), "PGL-7K2M9-XQ4TB");
+  assert.equal(VER.normalizeCode("7K2M9XQ4TB"), "PGL-7K2M9-XQ4TB");
+  // the four confusables map to what they look like
+  // I->1, L->1, O->0, U->V : the four a reader confuses. "ILOU9XQ4TB" folds to "110V9XQ4TB".
+  assert.equal(VER.normalizeCode("PGL-ILOU9-XQ4TB"), "PGL-110V9-XQ4TB");
+  // REGRESSION: the prefix contains an L. Folding confusables before stripping it turned every real
+  // code into "PG1..." and normalizeCode returned "" for its own output.
+  const round = VER.newCode();
+  assert.equal(VER.normalizeCode(round), round, "a freshly minted code must normalise to itself");
+  assert.equal(VER.normalizeCode(round.toLowerCase()), round);
+  assert.equal(VER.normalizeCode(round.replace(/-/g, " ")), round);
+  assert.equal(VER.normalizeCode("nonsense!"), "");
+});
+
+test("the canonical form is FIXED — a schema edit must not silently invalidate every code", () => {
+  const c = VER.canonical("entry", { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure",
+    occurredAt: "2026-08-20", role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1",
+    verifiedAt: 123, revisionCount: 0 });
+  assert.equal(c, "v1|entry|e1|r1|o1|procedure|2026-08-20|assisted|fb:f|TN/1|123|0");
+  // an unrelated extra field must not change it
+  const c2 = VER.canonical("entry", { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure",
+    occurredAt: "2026-08-20", role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1",
+    verifiedAt: 123, revisionCount: 0, somethingNew: "x" });
+  assert.equal(c, c2);
+});
+
+test("the digest changes when ANY signed fact changes", async () => {
+  const base = { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure", occurredAt: "2026-08-20",
+    role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1", verifiedAt: 123, revisionCount: 0 };
+  const d0 = await VER.digestFor(KEYED, "entry", base);
+  for (const [k, v] of [["role", "performed_independent"], ["occurredAt", "2026-08-21"],
+                        ["verifiedByReg", "TN/2"], ["revisionCount", 1]]) {
+    const d1 = await VER.digestFor(KEYED, "entry", { ...base, [k]: v });
+    assert.notEqual(d0, d1, "changing " + k + " must change the digest");
+  }
+  assert.equal(d0, await VER.digestFor(KEYED, "entry", base), "and it must be stable");
+});
+
+test("a different signing key produces a different digest — codes do not transfer between deployments", async () => {
+  const p = { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure", occurredAt: "2026-08-20",
+    role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1", verifiedAt: 1, revisionCount: 0 };
+  assert.notEqual(await VER.digestFor(KEYED, "entry", p),
+                  await VER.digestFor({ PGLOG_SIGNING_KEY: "other" }, "entry", p));
+});
+
+test("WITHOUT a signing key nothing is issued — no uncheckable code is ever printed", async () => {
+  assert.equal(VER.signingConfigured({}), false);
+  assert.equal(await VER.issue({}, "entry", { id: "e1" }), "");
+  await assert.rejects(() => VER.digestFor({}, "entry", { id: "e1" }),
+    (e) => e.message === "pglog_signing_unconfigured" && e.status === 503);
+});
+
+test("digestEqual is length-safe and constant-time in shape", () => {
+  assert.equal(VER.digestEqual("abc", "abc"), true);
+  assert.equal(VER.digestEqual("abc", "abd"), false);
+  assert.equal(VER.digestEqual("abc", "abcd"), false);
+  assert.equal(VER.digestEqual("", ""), true);
+  assert.equal(VER.digestEqual(null, undefined), true, "both normalise to empty");
+});
+
+test("the verification URL is configurable and encodes the code", () => {
+  assert.equal(VER.verifyUrl({}, "PGL-7K2M9-XQ4TB"), "https://stewardmd.in/pglog/v/PGL-7K2M9-XQ4TB");
+  assert.equal(VER.verifyUrl({ PGLOG_VERIFY_BASE: "https://logbook.example.edu/" }, "PGL-A-B"),
+               "https://logbook.example.edu/pglog/v/PGL-A-B");
+});
+
+test("issuing a code stores the digest and the reference, and nothing identifying", async () => {
+  const db = fakeDb();
+  const code = await VER.issue(KEYED, "entry",
+    { id: "e1", residentId: "r1", orgId: "o1", kind: "procedure", occurredAt: "2026-08-20",
+      role: "assisted", verifiedBy: "fb:f", verifiedByReg: "TN/1", verifiedAt: 5, revisionCount: 0 },
+    { fsCommit: db.fsCommit, wCreate: db.wCreate, fsGet: db.fsGet, now: db.now });
+  assert.match(code, /^PGL-/);
+  const stored = db.docs.get("pg_verify/" + code);
+  assert.equal(stored.kind, "entry");
+  assert.equal(stored.refId, "e1");
+  assert.equal(stored.revoked, false);
+  assert.ok(stored.digest && stored.digest.length === 64);
+  // the stored record must not carry clinical content
+  const blob = JSON.stringify(stored);
+  assert.ok(!/procedure|2026-08-20|assisted/.test(blob.replace(/"kind":"entry"/, "")),
+    "the verification record must not duplicate the clinical facts");
+});
