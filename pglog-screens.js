@@ -626,10 +626,13 @@
         .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
     }
     var cur = C();
-    /* Resolve the SHAREABLE code, not the internal id. /me returns orgCode, but if it is empty for
-     * any reason the screen was falling back to the raw 32-char org id and presenting THAT as the
-     * "Institution code" - which is what shipped, unwrapped and overflowing its card. myInstitutions()
-     * carries the full org record, so ask it directly rather than depending on one field of /me. */
+    /* ROOT CAUSE of the raw 32-char id showing as "Institution code": this screen reads the code from
+     * state.ctx (populated by /me, which does return orgCode), but "pick-inst" sets state.ctx = null
+     * and then calls loadInstitution() directly - never re-running ensureContext(). So ctx was null
+     * for the render that followed, state.inst was cleared alongside it, and BOTH code sources were
+     * empty, leaving only the orgId fallback. Re-establish the context here, where every caller of
+     * this screen routes through, instead of at each of the three call sites that null it. */
+    return ensureContext().catch(function () { return null; }).then(function () {
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
       (cur && cur.loadSpecialties)
@@ -639,14 +642,9 @@
     ]).then(function (r) {
       state.inst.programmes = r[0];
       state.inst.specialties = r[1];
-      // Direct lookup by id. The previous attempt used myInstitutions(), which filters by ownerUid
-      // and so returns nothing for a member who did not create the org - leaving the screen with no
-      // code and printing the raw id instead.
-      if (!state.inst.orgCode && st.institution) {
-        return st.institution(org).then(function (o) {
-          if (o) { state.inst.orgCode = o.code || ""; state.inst.orgName = o.name || state.inst.orgName || ""; }
-        }, function () {});
-      }
+      if (!state.inst.orgCode && state.ctx && state.ctx.orgCode) state.inst.orgCode = state.ctx.orgCode;
+      if (!state.inst.orgName && state.ctx && state.ctx.orgName) state.inst.orgName = state.ctx.orgName;
+    });
     });
   }
 

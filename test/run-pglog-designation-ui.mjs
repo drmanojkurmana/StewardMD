@@ -138,6 +138,34 @@ try {
   await sleep(500);
   ok(/Create your institution/i.test(String(await txt())), "empty name does not proceed");
 
+  /* ── 6. REGRESSION: pick an institution, then read the code off the card ──
+   * The owner's screenshot showed a raw 32-char org id under the heading "Institution code".
+   * "pick-inst" sets state.ctx = null and state.inst = {} and then calls loadInstitution()
+   * DIRECTLY - nothing re-ran ensureContext(), so both sources of the code were empty for the
+   * render that followed and the orgId fallback is what painted. Drive that exact path. */
+  const HEX = "349cdc32210144cca031cccd1e0e2abc";
+  await ev(`
+    var HEX=${JSON.stringify(HEX)};
+    var s=window.SMD_PGLOG_STORE, cur={orgId:""};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&o.orgId) cur.orgId=o.orgId; return cur };
+    s.myInstitutions=function(){return Promise.resolve([{id:HEX,name:"Test Medical College",code:"SMD-TEST42"}])};
+    s.me=function(id){return Promise.resolve({uid:"u1",orgId:id||HEX,orgCode:"SMD-TEST42",
+      orgName:"Test Medical College",role:"academic_cell",
+      caps:["pglog.configure","pglog.view.institution"],resident:null,programme:null,rotations:[]})};
+    s.programmes=function(){return Promise.resolve({programmes:[]})};
+    s.seedDemo=function(){return null};
+    return 1;`);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(900);
+  await tap("setting up our institution");
+  await sleep(1200);
+  ok(await tap("Test Medical College") === true, "the institution is offered to pick");
+  await sleep(1500);
+  const tp = String(await txt());
+  ok(/SMD-TEST42/.test(tp), `picked institution shows the shareable code (got: ${JSON.stringify(tp.slice(0, 160))})`);
+  ok(!new RegExp(HEX).test(tp), "the raw 32-char org id is NOT presented as the institution code");
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}
