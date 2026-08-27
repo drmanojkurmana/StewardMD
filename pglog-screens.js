@@ -523,8 +523,20 @@
     var st = ST(), c = st ? st.context() : {}, I = state.inst || {};
     var orgId = c.orgId || "";
     if (!orgId) {
+      var mine = I.mine || [];
+      var pick = mine.length
+        ? '<div class="pgl-card"><h3>Your institutions</h3>' +
+          '<p style="font-size:13px;color:var(--pgl-muted)">This device is not pointed at one yet. Pick it rather than creating a second.</p>' +
+          mine.map(function (o) {
+            return '<button class="pgl-row" data-pgl="pick-inst" data-id="' + attr(o.id) + '">' +
+              '<span class="pgl-row-ic">' + ic("apartment") + "</span>" +
+              '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(o.name || o.id) + "</span>" +
+              '<span class="pgl-row-s">' + esc(o.code || "") + "</span></span>" + ic("chevron_right") + "</button>";
+          }).join("") + "</div>"
+        : "";
       return wrap(
-        '<div class="pgl-card"><h3>Create your institution</h3>' +
+        pick +
+        '<div class="pgl-card"><h3>' + (mine.length ? "Or create another" : "Create your institution") + "</h3>" +
         "<p style=\"font-size:13.5px;line-height:1.6;color:var(--pgl-muted)\">" +
         "This creates your institution in StewardMD and gives you its <b>institution code</b>. Residents " +
         "and faculty enter that code to find the programme. You become its administrator." +
@@ -605,7 +617,10 @@
     state.inst = state.inst || {};
     if (!st) return Promise.resolve();
     var org = (st.context() || {}).orgId;
-    if (!org) return Promise.resolve();
+    if (!org) {
+      return (st.myInstitutions ? st.myInstitutions() : Promise.resolve([]))
+        .then(function (list) { state.inst.mine = list || []; }, function () { state.inst.mine = []; });
+    }
     var cur = C();
     return Promise.all([
       st.programmes(org).then(function (r) { return (r && r.programmes) || []; }, function () { return []; }),
@@ -1872,6 +1887,11 @@
       case "deptfilter":
         state.deptFilter[t.getAttribute("data-dim")] = t.getAttribute("data-v");
         return loadDept();
+      case "pick-inst": {
+        st.setContext({ orgId: t.getAttribute("data-id") });
+        state.ctx = null; state.dash = null; state.inst = {};
+        return loadInstitution().then(render, render);
+      }
       case "create-inst": {
         var nm = ((state.host.querySelector("#pglInstName") || {}).value || "").trim();
         if (!nm) { toast("Enter the institution name."); return; }
