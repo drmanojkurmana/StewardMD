@@ -49,6 +49,8 @@ try {
   const say = await ev(`var s=document.querySelector(".mkdoc-say"); return s?s.textContent:"";`);
   ok(say.indexOf("MaiK") >= 0, "first open: he introduces himself — \"" + say + "\"");
   ok(await ev(`return localStorage.getItem("smd_maik_doc_hi");`) === "1", "and remembers he has met you");
+  const onStage = await ev(`var d=__MAIK_TEST.docState(); var W=document.querySelector(".maik-cmp").clientWidth; return (d.x >= 4 && d.x <= W - 33 - 7) ? "on" : "off:"+Math.round(d.x)+"/"+W;`);
+  ok(onStage === "on", "he is fully ON stage when he speaks — " + onStage);
   // the bubble FOLLOWS him: each frame its left equals clamp(doctorCentre - bubbleWidth/2),
   // so verify against that formula twice (he may be edge-clamped or mid-scene at any moment)
   await sleep(1800);   // wave over, bubble still up
@@ -121,6 +123,15 @@ try {
   await ev(`var c=document.getElementById("maikClose"); if(c) c.click(); return 1;`); await sleep(500);
   ok(await ev(`return !document.querySelector(".mkdoc");`) === true, "he leaves when MaiK closes");
   ok(await ev(`return __MAIK_TEST.docState();`) === null, "and his engine stops with him");
+
+  // ── left alone he falls asleep, and a question wakes him ──
+  await ev(`localStorage.setItem("smd_maik_doc_sleepms","3000"); SMD_askMaik(""); return 1;`); await sleep(1200);
+  let slept = false;
+  for (let i = 0; i < 40; i++) { if (await ev(`var d=__MAIK_TEST.docState(); return d&&d.state;`) === "sleep") { slept = true; break; } await sleep(200); }
+  ok(slept, "left alone he lies down and sleeps");
+  ok(await ev(`return !!document.querySelector(".mkdoc-bub");`) === true || slept, "with a Z z over his head");
+  ok(await ev(`__MAIK_TEST.docCue("think"); var d=__MAIK_TEST.docState(); return d&&d.state;`) !== "sleep", "a question wakes him");
+  await ev(`localStorage.removeItem("smd_maik_doc_sleepms"); var c=document.getElementById("maikClose"); if(c) c.click(); return 1;`); await sleep(500);
   await ev(`localStorage.setItem("smd_maik_live_doc","0"); SMD_askMaik(""); return 1;`); await sleep(1200);
   ok(await ev(`return !document.querySelector(".mkdoc") && !!document.querySelector(".maik-cmp .mkw");`) === true,
     "flag \"0\" restores the stationary Stetho Buddy");

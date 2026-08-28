@@ -3768,7 +3768,8 @@
     jump:    { f: [2], fps: 1 },
     flip:    { f: [3], fps: 1 },
     skid:    { f: [2], fps: 1 },
-    write:   { f: [10, 11], fps: 2.6 }
+    write:   { f: [10, 11], fps: 2.6 },
+    sleep:   { f: [1], fps: 1 }
   };
   var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
   var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null, _mkdCueFn = null, _mkdOnTap = null;
@@ -3830,6 +3831,15 @@
     var actor = box.querySelector(".mkdoc-a"), sh = box.querySelector(".mkdoc-sh");
     var groups = box.querySelectorAll(".mkdoc-svg > g");
     var WALK_V = 38, RUN_V = 120, JUMP_H = 20, JUMP_MS = 620, FLIP_MS = 760;
+    // Untouched and off-duty for this long, he lies down and sleeps until woken.
+    var SLEEP_MS = 45000;
+    try { var _sms = +localStorage.getItem("smd_maik_doc_sleepms"); if (_sms > 0) SLEEP_MS = _sms; } catch (e) {}
+    var lastAct = performance.now();
+    function wake() {
+      lastAct = performance.now();
+      if (D.state === "sleep") { setSt("startle", 420); return true; }
+      return false;
+    }
     // Layout read cached: clientWidth only changes on rotation/keyboard, not per frame (R6 #2).
     var W = cmp.clientWidth;
     _mkdOnRz = function () { try { if (cmp.isConnected) W = cmp.clientWidth; } catch (e) {} };
@@ -3885,7 +3895,7 @@
       }
       sched();
     }
-    actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); react(); });
+    actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); if (wake()) return; react(); });
     /* Tap ANYWHERE on the sheet and he sprints to that x and skids in. The listener
      * is purely an observer: no preventDefault, no stopPropagation - every button,
      * bubble and the composer behave exactly as before, he just also comes running.
@@ -3895,6 +3905,7 @@
       _mkdOnTap = { el: sheetEl, fn: function (e) {
         try {
           if (!_mkdState || _mkdState !== D) return;
+          if (wake()) return;   // a tap first just wakes him
           if (D.state === "startle" || D.state === "listen") return;   // let a scene finish
           var px = e.clientX - cmp.getBoundingClientRect().left - MAIK_DOC_W / 2;
           D.target = Math.max(4, Math.min(W - MAIK_DOC_W - 4, px));
@@ -3906,6 +3917,7 @@
     }
     /* Question-aware acting. Each cue is a short scene built from the states he already has. */
     _mkdCueFn = function (kind) {
+      wake();   // a question always wakes him, straight into the scene
       if (kind === "urgent") {          // emergency wording: startled, then sprints to help
         setSt("startle", 450);
         maikDocFx(box, '<span class="mkdoc-bub">!</span>', MAIK_DOC_W * 0.5 - 6, -20, 700);
@@ -3946,6 +3958,10 @@
       try { first = !localStorage.getItem("smd_maik_doc_hi"); if (first) localStorage.setItem("smd_maik_doc_hi", "1"); } catch (e) {}
       var msg = first ? "Hi, I am MaiK, your medical AI assistant. Tap me any time."
                       : MAIK_DOC_SAY[Math.floor(Math.random() * MAIK_DOC_SAY.length)];
+      // He must be ON stage before he speaks: half a doctor at the screen edge with a
+      // bubble pointing at nothing was the owner's screen recording. Snap him inside.
+      if (D.x > W - MAIK_DOC_W - 8) D.x = W - MAIK_DOC_W - 8;
+      if (D.x < 8) D.x = 8;
       setSt("wave", 1600);
       var d2 = document.createElement("div");
       d2.className = "mkdoc-fx";
@@ -3966,7 +3982,16 @@
       switch (D.state) {
         case "walk":
           D.x += wv * D.dir * dt;
+          if (!busy && now - lastAct > SLEEP_MS) { setSt("sleep", 0); break; }
           if (now > D.next) stunt();
+          break;
+        case "sleep":
+          rot = -90;   // lying down; the blink frame keeps his eyes shut
+          if (busy) { wake(); break; }
+          if (now - (D.zz || 0) > 2600) {
+            D.zz = now;
+            maikDocFx(box, '<span class="mkdoc-heart"><span class="mkdoc-bub">Z z</span></span>', MAIK_DOC_W + 2, -4, 1700);
+          }
           break;
         case "run":
           D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
@@ -4004,8 +4029,12 @@
       // Keep the speech bubble glued above his head while he moves (size cached once).
       if (sayBub && sayBub.isConnected) {
         if (!sayBub._w) { sayBub._w = sayBub.offsetWidth || 130; sayBub._h = sayBub.offsetHeight || 34; }
-        sayBub.style.left = Math.max(4, Math.min(W - sayBub._w - 4, D.x + MAIK_DOC_W / 2 - sayBub._w / 2)).toFixed(0) + "px";
+        var sbl = Math.max(4, Math.min(W - sayBub._w - 4, D.x + MAIK_DOC_W / 2 - sayBub._w / 2));
+        sayBub.style.left = sbl.toFixed(0) + "px";
         sayBub.style.top = (36 - MAIK_DOC_H - sayBub._h - 5 + y).toFixed(0) + "px";
+        // The tail keeps pointing at HIM even when the bubble is clamped at an edge.
+        var tail = Math.max(10, Math.min(sayBub._w - 10, D.x + MAIK_DOC_W / 2 - sbl));
+        try { sayBub.firstChild.style.setProperty("--mkTail", tail.toFixed(0) + "px"); } catch (e) {}
       }
       var a = MAIK_DOC_ANIM[D.state];
       show(a.f[Math.floor(now / 1000 * a.fps) % a.f.length]);
@@ -4430,7 +4459,7 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
 .mkdoc-conf{position:absolute;top:0;opacity:0;animation:mkdocConf 900ms cubic-bezier(.2,.6,.4,1) forwards}
 .mkdoc-say{position:relative;display:inline-block;font:600 10px/1.35 'Inter';color:var(--mk-ink,#0f172a);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:10px;padding:7px 9px;max-width:170px;width:max-content;white-space:normal;box-shadow:0 4px 14px rgba(15,23,42,.14);animation:mkdocPop .24s ease-out forwards}
-.mkdoc-say::after{content:"";position:absolute;left:50%;bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top:5px solid var(--mk-bg,#fff);filter:drop-shadow(0 1px 0 var(--mk-bd,#d5dde6))}
+.mkdoc-say::after{content:"";position:absolute;left:var(--mkTail,50%);bottom:-5px;margin-left:-5px;border:5px solid transparent;border-bottom:0;border-top:5px solid var(--mk-bg,#fff);filter:drop-shadow(0 1px 0 var(--mk-bd,#d5dde6))}
 @keyframes mkdocConf{0%{transform:translate(0,0) rotate(0deg);opacity:1}35%{transform:translate(calc(var(--cx)*.55),var(--cy)) rotate(140deg);opacity:1}100%{transform:translate(var(--cx),48px) rotate(320deg);opacity:0}}
 @keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
 @keyframes mkdocEcg{to{stroke-dashoffset:0}}
