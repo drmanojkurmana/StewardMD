@@ -274,6 +274,11 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
       </span>
     </div>
     <div class="sbs-bar"><span></span></div>
+    <!-- Phase 2 turns the passive "loading" pill into a deliberate stop: the signed-in clinician
+         opens their own workspace. Static markup so the flag-off path is exact (it stays hidden,
+         like .sbs-hello); the script below unhides it, attaches the tap handler and only THEN
+         arms the hold. Guests never reach it. -->
+    <button class="sbs-go" id="sbsGo" type="button" hidden>Open Workspace</button>
   </div>
   <div class="sbs-foot">
     <span class="sbs-by">developed by</span>
@@ -316,13 +321,48 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   var BEAT=900,XF=220,rm=false;
   try{rm=!!(window.matchMedia&&matchMedia("(prefers-reduced-motion: reduce)").matches);}catch(e){}
   function live(){return !!s.parentNode&&!s.classList.contains("sbs-hide");}
+  /* ── the Open Workspace gate ────────────────────────────────────────────────────────────
+     Two loading screens in a row read as dead time, so phase 2 stops being passive: the pill
+     becomes a real button and the splash HOLDS on the welcome-back screen until the clinician
+     taps it. FAIL-OPEN is the whole design here, because a clinician stuck behind a splash is
+     a clinical problem, not a cosmetic one:
+       - the hold is armed ONLY after the button is in the DOM, measured at a real tap size and
+         its listener attached. Any throw, any bad measurement, and we arm nothing, .sbs-gate
+         never lands, phase 2 keeps today's "Loading your workspace" pill and auto-hides,
+       - a 20s safety valve opens it for them if they set the phone down, and the hide loop
+         re-checks that deadline itself so a lost timer cannot strand anyone,
+       - ?splashv2=0 and guests never get here at all (this whole block returned early). */
+  var GATE_CAP=20000;
+  function arm(){
+    var btn=null;
+    try{
+      btn=document.getElementById("sbsGo");
+      if(!btn||!live())return;
+      btn.hidden=false;s.classList.add("sbs-gate");
+      /* the button must genuinely be a tap target before we hand it the boot */
+      if(!(btn.offsetHeight>=44&&btn.offsetWidth>=44))throw new Error("sbsGo not tappable");
+      var gate={held:true,armed:Date.now(),cap:GATE_CAP};
+      gate.open=function(){
+        if(!gate.held)return;
+        gate.held=false;
+        /* if boot is still running, say so rather than looking unresponsive */
+        try{btn.disabled=true;btn.classList.add("is-opening");btn.textContent="Opening...";}catch(e){}
+        try{if(window.__smdBootGateOpened)window.__smdBootGateOpened();}catch(e){}
+      };
+      btn.addEventListener("click",gate.open);
+      window.__smdBootGate=gate;
+      setTimeout(function(){try{gate.open();}catch(e){}},GATE_CAP);
+    }catch(e){
+      try{window.__smdBootGate=null;s.classList.remove("sbs-gate");if(btn)btn.hidden=true;}catch(_){}
+    }
+  }
   setTimeout(function(){
     if(!live())return;
-    if(rm){s.classList.add("smd-boot-phase2");return;}
+    if(rm){s.classList.add("smd-boot-phase2");arm();return;}
     s.classList.add("sbs-xfade");
     setTimeout(function(){
       if(!live())return;
-      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");
+      s.classList.add("smd-boot-phase2");s.classList.remove("sbs-xfade");arm();
     },XF);
   },BEAT);
 }catch(e){}})();</script>
@@ -410,6 +450,17 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{content:"Loading your workspace\2026";display:block;font-size:11.5px;font-weight:500;letter-spacing:.01em;color:#6b8398;animation:sbsGlow 1.8s ease-in-out infinite}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar{background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.12)}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.6)}
+  /* ── Open Workspace: the pill becomes the button, once the gate is actually armed ──
+     .sbs-gate only lands after the script has the button in the DOM at a real tap size with its
+     listener attached, so if any of that fails the pill above stays and phase 2 auto-hides as
+     before. That is why the swap is keyed on .sbs-gate rather than on phase 2 itself. */
+  html.smd-splash-v2 #smdBootSplash .sbs-go[hidden]{display:none}
+  html.smd-splash-v2 #smdBootSplash .sbs-go{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-bar{display:none}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go{display:inline-flex;align-items:center;justify-content:center;min-height:52px;min-width:200px;margin-top:10px;padding:15px 34px;border:1px solid transparent;border-radius:999px;font-family:var(--smd-dsp);font-size:15.5px;font-weight:700;letter-spacing:-.01em;line-height:1;color:#0a141c;cursor:pointer;-webkit-tap-highlight-color:transparent;-webkit-appearance:none;appearance:none;background:linear-gradient(160deg,rgba(104,231,212,.95) 0%,rgba(63,199,179,.92) 38%,rgba(14,110,99,.94) 100%) padding-box,linear-gradient(155deg,rgba(220,255,249,.95) 0%,rgba(255,255,255,.32) 32%,rgba(255,255,255,.06) 58%,rgba(180,245,233,.6) 100%) border-box;box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 14px 34px rgba(63,199,179,.34),0 2px 8px rgba(0,0,0,.22);-webkit-backdrop-filter:var(--lg-blur-sm);backdrop-filter:var(--lg-blur-sm);transition:transform .12s ease,box-shadow .2s ease,opacity .2s ease}
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go:active{transform:scale(.97);box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 6px 16px rgba(63,199,179,.3),0 1px 4px rgba(0,0,0,.2)}
+  /* the "Opening..." state reuses the pill's existing glow so nothing new animates */
+  html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go.is-opening{cursor:default;animation:sbsGlow 1.8s ease-in-out infinite}
   /* "developed by MaiK" foot: a glass bar carrying the REAL MaiK logo (light/dark swap kept) */
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-foot{left:24px;right:24px;transform:none;flex-direction:row;align-items:center;justify-content:center;gap:11px;padding:11px 18px;border-radius:18px}
   html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-by{font-family:var(--smd-dsp);font-size:9px;font-weight:600;letter-spacing:.2em}
@@ -438,6 +489,8 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     html.smd-splash-v2 #smdBootSplash .sbs-foot{transition:none}
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-hello{animation:none}
     html.smd-splash-v2 #smdBootSplash.smd-boot-phase2 .sbs-bar::after{animation:none}
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go{transition:none}
+    html.smd-splash-v2 #smdBootSplash.smd-boot-phase2.sbs-gate .sbs-go.is-opening{animation:none}
   }
 
   /* ══ LIQUID GLASS material (shared tokens) ═════════════════════════════════════════════
@@ -527,7 +580,20 @@ function ready(){try{
   var a=document.querySelector(".app-head");if(a&&getComputedStyle(a).display!=="none"&&a.offsetHeight>0)return true;
 }catch(e){return true;}return false;}
 function finish(){if(done)return;done=true;s.classList.add("sbs-hide");setTimeout(function(){if(s.parentNode)s.parentNode.removeChild(s);},480);}
-function tick(){if(done)return;var el=Date.now()-t0;if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
+/* The Open Workspace gate (armed by the splash-v2 script above, signed-in users only). While it
+   holds, this loop keeps polling but does not hide: the clinician opens their own workspace. The
+   deadline is re-checked HERE as well as in the gate's own timer, so a dropped/throttled timer
+   still cannot strand anyone; anything unexpected reads as "not held" and boot proceeds as before.
+   This also suppresses CAP while held, which is deliberate: a visible button the user can press is
+   a better failure mode than a screen that vanishes under them, and the gate's own 20s deadline
+   bounds the wait either way. */
+function gateHeld(){try{var g=window.__smdBootGate;
+  return !!(g&&g.held===true&&(Date.now()-g.armed)<(g.cap||20000)+2000);}catch(e){return false;}}
+/* tapped: reveal at once if boot has finished, otherwise the loop below takes it from here */
+window.__smdBootGateOpened=function(){try{if(!done&&ready())finish();}catch(e){}};
+function tick(){if(done)return;var el=Date.now()-t0;
+  if(gateHeld()){setTimeout(tick,120);return;}
+  if((ready()&&el>=MIN)||el>=CAP){finish();return;}setTimeout(tick,120);}
 tick();})();</script>
 <script>/* anti-flash theme boot — mirrors theme-sync.js resolution so the initial paint matches the OS (no flash) */
 (function(){try{var L=localStorage,os=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches),stored=L.getItem("stewardmd_theme"),src=L.getItem("stewardmd_theme_source"),on=L.getItem("stewardmd_theme_autosync")!=="0",dark;

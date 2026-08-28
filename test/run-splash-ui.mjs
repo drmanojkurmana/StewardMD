@@ -14,10 +14,13 @@
  *     (107px mark, two-tone 30px/800 Steward/MD wordmark, "Built by clinicians, for clinicians",
  *     the 132x3 progress bar, the stacked developed-by foot) in BOTH themes, and only after a
  *     short beat crossfades into phase 2,
- *   - phase 2 is the personalised boot splash (84px avatar, status dot, loading pill), read
- *     from the SAME localStorage "stewardmd_account" record the sidebar/profile use, in both
- *     the light and dark themes,
+ *   - phase 2 is the personalised boot splash (84px avatar, status dot), read from the SAME
+ *     localStorage "stewardmd_account" record the sidebar/profile use, in both themes, and its
+ *     pill is a real "Open Workspace" BUTTON that HOLDS the splash until the clinician taps:
+ *     the hold arms only once the button rendered at a 44px+ tap target and bound, carries a
+ *     20s safety valve, flips to "Opening..." if boot is still running, and reveals on tap,
  *   - guests/first-time users do NOT get it and keep the classic splash for the whole boot,
+ *     are never gated, and still auto-hide,
  *   - prefers-reduced-motion still stills every interstitial,
  *   - no uncaught JS errors are raised on any of those paths.
  * Screenshots are written to $SHOT_DIR (default /tmp) for eyeballing.
@@ -341,24 +344,95 @@ try {
       var s=getComputedStyle(e,"::after");
       return s.position + " " + Math.round(parseFloat(s.width)) + " " + s.backgroundColor;`), "absolute 16 rgb(77, 214, 140)",
     "avatar carries the online-status dot accent");
-  ok(await ev(`var e=document.querySelector("#smdBootSplash .sbs-bar"); if(!e)return "";
-      return (getComputedStyle(e,"::after").content||"").replace(/^["']|["']$/g,"");`) === "Loading your workspace…",
-    "translucent loading pill reads 'Loading your workspace...'");
+  /* ---- the pill is now the Open Workspace BUTTON ----------------------------------------
+     The owner's read of two loading screens in a row was that the second one was dead time. So
+     phase 2 is a deliberate stop: a real button, and the splash holds on it. */
+  const btn = `#smdBootSplash .sbs-go`;
+  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)});
+      return e ? e.tagName + ":" + e.textContent.trim() : "missing";`), "BUTTON:Open Workspace",
+    "the loading pill is a real <button> reading 'Open Workspace'");
+  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)}); if(!e)return "missing";
+      if(e.hidden) return "still hidden";
+      var r=e.getBoundingClientRect();
+      return (r.height>=44 && r.width>=44) ? "tappable" : Math.round(r.width)+"x"+Math.round(r.height);`),
+    "tappable", "the button is a 44px+ tap target");
+  okv(await ev(`var e=document.querySelector(${JSON.stringify(btn)}); if(!e)return "missing";
+      var s=getComputedStyle(e);
+      return s.cursor==="pointer" && parseFloat(s.borderTopLeftRadius)>=20 ? "button-like" : s.cursor+" r"+s.borderTopLeftRadius;`),
+    "button-like", "it reads as a button (pointer cursor, pill radius)");
+  await glass(btn, "the button is the Direction C tinted-glass primary treatment");
+  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar");
+      return b ? getComputedStyle(b).display : "missing";`), "none",
+    "the passive 'Loading your workspace' pill is gone once the gate is armed");
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && e.classList.contains("sbs-gate");`), true,
+    "the hold is armed (.sbs-gate) only after the button rendered and bound");
+  okv(await ev(`var g=window.__smdBootGate;
+      return g ? (g.held===true) + "/" + g.cap : "no gate";`), "true/20000",
+    "the gate holds and carries a 20s safety valve");
   ok(await ev(`var e=document.querySelector("#smdBootSplash .sbs-foot"); return e ? getComputedStyle(e).flexDirection : "";`) === "row",
     "the 'developed by MaiK' credit is the Direction C glass bar");
   await glass("#smdBootSplash .sbs-foot", "phase 2: the developed-by bar is the liquid-glass material");
   ok(await ev(`var l=document.querySelector("#smdBootSplash .sbs-maik-light"),d=document.querySelector("#smdBootSplash .sbs-maik-dark");
       return !!l && !!d && /maik-logo\\.png/.test(l.getAttribute("src")||"") && /maik-logo-white\\.png/.test(d.getAttribute("src")||"");`) === true,
     "the existing light/dark MaiK logo pairing in .sbs-foot is preserved");
-  // the two surfaces the owner circled, in the LIGHT theme (the screenshot he reviewed)
-  await glass("#smdBootSplash .sbs-bar", "light boot splash: the loading pill is liquid glass");
-  await glass("#smdBootSplash .sbs-foot", "light boot splash: the 'developed by' bar is liquid glass");
   await shot("splash-05-boot-personal-monogram");
 
   // same layout with a real photo in the avatar (local asset stands in for the Google photoURL)
   await ev(`var d=document.getElementById("sbsDp"); if(d){d.style.backgroundImage='url("/logo.png")';d.textContent="";d.className="sbs-dp has-pic";} return 1;`);
   await sleep(300);
   await shot("splash-06-boot-personal-photo");
+
+  /* ---- the hold: the splash waits for the tap, then reveals -----------------------------
+     The proof that the gate does something has to be that the splash stays up under the exact
+     condition that would otherwise take it down, not merely that it stays up for a while.
+     The app does not finish booting inside this headless harness, so force the exact condition
+     the hide loop polls for (a visible #accountGate is one of its "boot finished" states). With
+     that true and past MIN, the pre-gate splash would hide on the very next 120ms tick. */
+  const makeReady = `var g=document.getElementById("accountGate");
+      if(g){g.classList.remove("hidden");
+        g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
+      return !!g;`;
+  okv(await ev(makeReady), true, "the harness can force the hide loop's ready() condition");
+  await sleep(600);   // several 120ms ticks: ample for the pre-gate auto-hide to have fired
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && !e.classList.contains("sbs-hide");`), true,
+    "the splash HOLDS on the welcome-back screen instead of auto-hiding");
+  okv(await ev(`var g=window.__smdBootGate; return g ? g.held : "no gate";`), true,
+    "the gate is still holding with boot reported finished");
+  await sleep(2500);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && !e.classList.contains("sbs-hide");`), true,
+    "and it is still holding 3s later (this is a stop, not a slower timer)");
+
+  await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(b)b.click(); return 1;`);
+  okv(await ev(`var g=window.__smdBootGate; return g ? g.held : "no gate";`), false,
+    "the tap releases the gate");
+  await sleep(700);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !e || e.classList.contains("sbs-hide");`), true,
+    "the tap reveals the app (splash hidden/removed)");
+
+  /* ---- fail-open: a boot that is still running gets the 'Opening...' state, not a dead button */
+  await newTab();
+  await call("Page.navigate", { url: BASE });
+  await sleep(1500);
+  await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Slow Boot",email:"slow@example.com"})); return 1;`);
+  await call("Page.navigate", { url: BASE });
+  await sleep(1400);
+  /* pin the app as "not ready" so the tap cannot reveal immediately, then tap */
+  await ev(`var h=document.getElementById("homeV2"); if(h)h.classList.remove("on");
+      ["verifyGate","accountGate"].forEach(function(id){var e=document.getElementById(id);if(e)e.style.display="none";});
+      var a=document.querySelector(".app-head"); if(a)a.style.display="none"; return 1;`);
+  await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(b)b.click(); return 1;`);
+  await sleep(200);
+  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go"); if(!b)return "missing";
+      return b.textContent.trim() + "/" + b.classList.contains("is-opening") + "/" + b.disabled;`),
+    "Opening.../true/true",
+    "tapping mid-boot flips the button into the 'Opening...' state rather than doing nothing");
+  okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-go");
+      return b ? getComputedStyle(b).animationName : "missing";`), "sbsGlow",
+    "the 'Opening...' state reuses the existing glow animation");
 
   // the same personalised boot splash in the dark theme (Direction C's gradient mesh)
   await newTab();
@@ -379,7 +453,11 @@ try {
              /radial-gradient/.test(getComputedStyle(e,"::before").backgroundImage||"") &&
              getComputedStyle(e,"::before").opacity === "1";`) === true,
     "dark boot splash fades up the Direction C gradient mesh in phase 2");
-  await glass("#smdBootSplash .sbs-bar", "dark boot splash: the loading pill is liquid glass");
+  okv(await ev(`var e=document.querySelector("#smdBootSplash .sbs-go"); if(!e||e.hidden)return "missing";
+      var r=e.getBoundingClientRect();
+      return e.textContent.trim() + "/" + (r.height>=44 && r.width>=44);`), "Open Workspace/true",
+    "dark boot splash: the Open Workspace button renders at a 44px+ tap target");
+  await glass("#smdBootSplash .sbs-go", "dark boot splash: the button is the tinted-glass primary");
   await glass("#smdBootSplash .sbs-foot", "dark boot splash: the 'developed by' bar is liquid glass");
   await shot("splash-07-boot-personal-dark");
   await call("Emulation.setEmulatedMedia", { features: [] });
@@ -400,6 +478,21 @@ try {
   okv(await ev(`var e=document.getElementById("smdBootSplash");
       return !e || !e.classList.contains("smd-boot-phase2");`), true,
     "a guest never enters phase 2 (classic splash for the whole boot)");
+  /* a guest must never be gated: no button, no hold, boot auto-hides exactly as before */
+  okv(await ev(`var b=document.getElementById("sbsGo");
+      return !b || b.hidden===true || getComputedStyle(b).display==="none";`), true,
+    "a guest never sees the Open Workspace button");
+  okv(await ev(`return !window.__smdBootGate;`), true,
+    "a guest is never gated (no hold armed)");
+  /* ungated, the same forced ready() condition takes the splash down on the next tick */
+  await ev(`var g=document.getElementById("accountGate");
+      if(g){g.classList.remove("hidden");
+        g.setAttribute("style","display:block;visibility:visible;opacity:1;min-height:200px");}
+      return !!g;`);
+  await sleep(600);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !e || e.classList.contains("sbs-hide");`), true,
+    "the guest splash still auto-hides on its own (nothing holds it)");
 
   /* ---------- 4. Flag OFF reverts cleanly ---------- */
   await newTab();
@@ -411,6 +504,9 @@ try {
     "?splashv2=0 restores the original dots (7px)");
   ok(await ev(`var e=document.getElementById("sbsHello"); return !e || e.hidden===true;`) === true,
     "?splashv2=0 leaves the boot splash unpersonalised");
+  okv(await ev(`var b=document.getElementById("sbsGo");
+      return (!b || b.hidden===true) && !window.__smdBootGate;`), true,
+    "?splashv2=0 drops the button and the hold entirely (auto-hide restored)");
 
   /* ---------- 5. prefers-reduced-motion still covers all three interstitials ---------- */
   await newTab();
