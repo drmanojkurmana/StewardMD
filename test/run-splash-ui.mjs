@@ -10,10 +10,14 @@
  *     (a silent fallback to the system sans would undo the change while leaving the layout
  *     intact), the mark is a hero size with no glass tile around it, and the brand lock-up is
  *     set with light-against-extrabold weight contrast,
- *   - a returning signed-in clinician gets the personalised boot splash (84px avatar, status
- *     dot, loading pill), read from the SAME localStorage "stewardmd_account" record the
- *     sidebar/profile use, in both the light and dark themes,
- *   - guests/first-time users do NOT get it,
+ *   - the boot splash is a SEQUENCE, not a replacement: it opens in the CLASSIC composition
+ *     (107px mark, two-tone 30px/800 Steward/MD wordmark, "Built by clinicians, for clinicians",
+ *     the 132x3 progress bar, the stacked developed-by foot) in BOTH themes, and only after a
+ *     short beat crossfades into phase 2,
+ *   - phase 2 is the personalised boot splash (84px avatar, status dot, loading pill), read
+ *     from the SAME localStorage "stewardmd_account" record the sidebar/profile use, in both
+ *     the light and dark themes,
+ *   - guests/first-time users do NOT get it and keep the classic splash for the whole boot,
  *   - prefers-reduced-motion still stills every interstitial,
  *   - no uncaught JS errors are raised on any of those paths.
  * Screenshots are written to $SHOT_DIR (default /tmp) for eyeballing.
@@ -252,13 +256,71 @@ try {
     "the 'Steward|MD' lock-up is large and set with light-against-extrabold weight contrast");
   await shot("splash-04-landing");
 
-  /* ---------- 2. RETURNING signed-in clinician: personalised boot splash ---------- */
+  /* ---------- 2. RETURNING signed-in clinician: CLASSIC boot splash, THEN personalised ----
+     The owner's requirement is a sequence, not a replacement: the boot splash must open in its
+     original composition (mark, Steward/MD wordmark, tagline, thin progress bar, developed-by
+     foot) in both themes, and only then crossfade into the personalised phase 2. Phase 1 is
+     asserted first, before the ~900ms beat, then phase 2 after it. */
   await newTab();
   await call("Page.navigate", { url: BASE });
   await sleep(1500);
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com",picture:"https://example.invalid/photo.jpg"})); return 1;`);
   await call("Page.navigate", { url: BASE });
-  await sleep(1600);
+  await sleep(380);
+
+  /* ---- phase 1: the classic splash, exactly as it was before the v2 layer ---- */
+  const classic = async (label) => {
+    okv(await ev(`var e=document.getElementById("smdBootSplash");
+        return !!e && !e.classList.contains("smd-boot-phase2");`), true,
+      label + ": boot splash opens in the classic phase (no .smd-boot-phase2)");
+    okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word");
+        return w ? w.textContent.trim() : "missing";`), "StewardMD",
+      label + ": the Steward/MD wordmark is on screen");
+    okv(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"); if(!w)return "missing";
+        var s=getComputedStyle(w), sp=getComputedStyle(w.querySelector("span"));
+        if(/Bricolage/.test(s.fontFamily||"")) return "display face (v2 styling leaked)";
+        if(Math.round(parseFloat(s.fontSize))!==30) return "font-size "+s.fontSize;
+        if(parseInt(s.fontWeight,10)!==800) return "weight "+s.fontWeight;
+        if(s.color===sp.color) return "wordmark is not two-tone";
+        return "classic";`), "classic",
+      label + ": wordmark keeps its classic two-tone 30px/800 setting");
+    okv(await ev(`var t=document.querySelector("#smdBootSplash .sbs-tag"); if(!t)return "missing";
+        var s=getComputedStyle(t);
+        return s.display!=="none" && t.offsetHeight>1 ? t.textContent.trim() : "hidden";`),
+      "Built by clinicians, for clinicians", label + ": the tagline is on screen");
+    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar"); if(!b)return "missing";
+        var s=getComputedStyle(b), i=b.firstElementChild;
+        if(!i||getComputedStyle(i).display==="none") return "no progress indicator";
+        return Math.round(parseFloat(s.width))+"x"+Math.round(parseFloat(s.height));`), "132x3",
+      label + ": the thin classic progress bar is back (132x3, not the loading pill)");
+    okv(await ev(`var b=document.querySelector("#smdBootSplash .sbs-bar");
+        return b ? (getComputedStyle(b,"::after").content||"none") : "missing";`), "none",
+      label + ": no 'Loading your workspace' pill copy in phase 1");
+    okv(await ev(`var m=document.querySelector("#smdBootSplash .sbs-logo"),k=document.querySelector("#smdBootSplash .sbs-mark");
+        var e=[m,k].filter(function(x){return x&&getComputedStyle(x).display!=="none"})[0];
+        return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 107,
+      label + ": the mark is at its classic 107px size");
+    okv(await ev(`var h=document.getElementById("sbsHello");
+        return !h || getComputedStyle(h).display==="none";`), true,
+      label + ": the personalised row is not shown yet");
+    okv(await ev(`var f=document.querySelector("#smdBootSplash .sbs-foot"); if(!f)return "missing";
+        var s=getComputedStyle(f);
+        if(s.flexDirection!=="column") return "foot layout is "+s.flexDirection;
+        var img=[].slice.call(f.querySelectorAll(".sbs-maik")).filter(function(x){return getComputedStyle(x).display!=="none"})[0];
+        if(!img) return "no MaiK logo";
+        if(Math.round(parseFloat(getComputedStyle(img).height))!==53) return "MaiK logo "+getComputedStyle(img).height;
+        return "classic foot";`), "classic foot",
+      label + ": the developed-by foot keeps its classic stacked composition");
+    /* the one thing that carries over: the owner asked for the glass material there */
+    await glass("#smdBootSplash .sbs-foot", label + ": the developed-by bar is still liquid glass");
+  };
+  await classic("classic light");
+  await shot("splash-05a-boot-classic-light");
+
+  await sleep(900);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && e.classList.contains("smd-boot-phase2");`), true,
+    "after the beat the splash transitions into phase 2");
 
   ok(await ev(`var e=document.getElementById("sbsHello"); return !!e && !e.hidden && e.offsetHeight>1;`) === true,
     "returning signed-in user gets the personalised welcome row");
@@ -300,9 +362,18 @@ try {
   await sleep(1500);
   await ev(`localStorage.setItem("stewardmd_account", JSON.stringify({type:"google",name:"Dr. Manoj Kumar Kurmana",email:"doctor@example.com"})); return 1;`);
   await call("Page.navigate", { url: BASE });
-  await sleep(1600);
-  ok(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark") && /radial-gradient/.test(getComputedStyle(e).backgroundImage||"");`) === true,
-    "dark boot splash uses the Direction C gradient mesh");
+  await sleep(380);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && e.classList.contains("sbs-dark");`), true, "the dark theme variant resolves");
+  await classic("classic dark");
+  await shot("splash-05b-boot-classic-dark");
+
+  await sleep(900);
+  ok(await ev(`var e=document.getElementById("smdBootSplash");
+      return !!e && e.classList.contains("sbs-dark") && e.classList.contains("smd-boot-phase2") &&
+             /radial-gradient/.test(getComputedStyle(e,"::before").backgroundImage||"") &&
+             getComputedStyle(e,"::before").opacity === "1";`) === true,
+    "dark boot splash fades up the Direction C gradient mesh in phase 2");
   await glass("#smdBootSplash .sbs-bar", "dark boot splash: the loading pill is liquid glass");
   await glass("#smdBootSplash .sbs-foot", "dark boot splash: the 'developed by' bar is liquid glass");
   await shot("splash-07-boot-personal-dark");
@@ -314,17 +385,16 @@ try {
   await sleep(1200);
   await ev(`localStorage.clear(); localStorage.setItem("stewardmd_guest_used","1"); return 1;`);
   await call("Page.navigate", { url: BASE });
-  await sleep(1500);
+  await sleep(380);
   ok(await ev(`var e=document.getElementById("sbsHello"); return !e || e.hidden===true;`) === true,
     "guest sees no personalised row (brand tagline retained)");
-  ok(await ev(`var w=document.querySelector("#smdBootSplash .sbs-word"),s=w&&w.querySelector("span");
-      if(!w||!s)return false;
-      var sw=getComputedStyle(w), ss=getComputedStyle(s);
-      return /Bricolage Grotesque/.test(sw.fontFamily||"") && parseFloat(sw.fontSize) >= 38 &&
-             parseInt(sw.fontWeight,10) <= 300 && parseInt(ss.fontWeight,10) >= 800;`) === true,
-    "the boot splash carries the same large light-against-extrabold word-mark");
-  okv(await ev(`var e=document.querySelector("#smdBootSplash .sbs-logo"); return e ? Math.round(parseFloat(getComputedStyle(e).width)) : 0;`), 126,
-    "the boot splash mark is the hero size (126px)");
+  /* guests never enter phase 2: their "what you created" is the intro poster + landing that
+     follow, so the boot splash stays classic for the whole boot */
+  await classic("guest");
+  await sleep(1400);
+  okv(await ev(`var e=document.getElementById("smdBootSplash");
+      return !e || !e.classList.contains("smd-boot-phase2");`), true,
+    "a guest never enters phase 2 (classic splash for the whole boot)");
 
   /* ---------- 4. Flag OFF reverts cleanly ---------- */
   await newTab();
