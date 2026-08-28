@@ -3601,12 +3601,14 @@
     "...d.....d...",
     "..d.......d.."]];
   // rows -> <g> of 1x1 rects. Pure string building so it drops into innerHTML anywhere.
-  function maikPixG(rows, cls) {
+  // pal is optional: the Live Doctor brings his own colours, everyone else uses MAIK_PIX.
+  function maikPixG(rows, cls, pal) {
+    var P = pal || MAIK_PIX;
     var out = '<g class="' + cls + '">', y, x, c;
     for (y = 0; y < rows.length; y++) for (x = 0; x < rows[y].length; x++) {
       c = rows[y].charAt(x);
-      if (!MAIK_PIX[c]) continue;
-      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + MAIK_PIX[c] + '"/>';
+      if (!P[c]) continue;
+      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + P[c] + '"/>';
     }
     return out + "</g>";
   }
@@ -3689,6 +3691,200 @@
           '<circle cx="100" cy="141" r="7" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".72"/>' +
         '</g>' +
       '</g></svg>';
+  }
+  /* ── The Live Doctor (2026-08-29) ──────────────────────────────────────────
+   * A pixel physician who LIVES on the composer's top edge while MaiK is open:
+   * walks his ward round right to left, freelances stunts (hop, backflip,
+   * sprint, auscultating the screen with a bpm report), and reacts when tapped
+   * (startle, wave, hearts). Sub-pixel travel + real jump arcs over hand-placed
+   * 12x16 frames; one rAF loop that tears itself down when his node is gone.
+   * Flag smd_maik_live_doc, "0" restores the stationary Stetho Buddy resident.
+   * Under prefers-reduced-motion the resident is used instead (he stands still).
+   * Taps on the thread/composer are NEVER intercepted: only the doctor himself
+   * (a ~44px hit inset around him) is tappable. */
+  function maikLiveDocOn() { try { return localStorage.getItem("smd_maik_live_doc") !== "0"; } catch (e) { return true; } }
+  var MAIK_DOC_PAL = {
+    h: "#25333B", s: "#E9B48C", k: "#0A1519", w: "#F2F6F7", c: "#C9D6DA",
+    g: "#2DD4BF", d: "#0E6E63", r: "#E05252", p: "#22333C"
+  };
+  var MAIK_DOC_F = [
+    [ // 0 idle
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 1 blink
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 2 walk A, legs apart
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."],
+    [ // 3 walk B, passing + bob
+    "............", "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...",
+    "....ssss....", "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..",
+    "..wwwwwwww..", "..cwwwwwwc..", "...pp.pp....", "...kk.kk...."],
+    [ // 4 walk C, offset stride
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "..pp....pp..", "..kk....kk.."],
+    [ // 5 wave A
+    "............", "....hhhh..s.", "...hhhhhh.s.", "...hssssh.w.", "...skssks.w.", "....ssss.ww.",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 6 wave B
+    "............", "....hhhh.s..", "...hhhhhh.s.", "...hssssh.w.", "...skssks.w.", "....ssss.ww.",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 7 listen A, chest piece out
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...skssks...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", ".ggwgggwww..", "g.wwwgwwww..", "d.wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 8 listen B, bell pulses, eyes closed
+    "............", "....hhhh....", "...hhhhhh...", "...hssssh...", "...ssssss...", "....ssss....",
+    "...wwwwww...", "..wwgwwgww..", ".ggwgggwww..", "g.wwwgwwww..", "dd.wrwdwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "...pp..pp...", "...pp..pp...", "...kk..kk..."],
+    [ // 9 startle, arms up
+    "............", ".s..hhhh..s.", ".s.hhhhhh.s.", ".w.hssssh.w.", "...skssks...", "....ssks....",
+    "...wwwwww...", "..wwgwwgww..", "..wwgggwww..", "..wwwgwwww..", "..wrwdwwww..", "..wwwwwwww..",
+    "..cwwwwwwc..", "..pp....pp..", "..pp....pp..", "..kk....kk.."]
+  ];
+  var MAIK_DOC_HEART = [".r.r.", "rrrrr", "rrrrr", ".rrr.", "..r.."];
+  var MAIK_DOC_ANIM = {
+    walk:    { f: [2, 3, 4, 3], fps: 7 },
+    run:     { f: [2, 3, 4, 3], fps: 13 },
+    idle:    { f: [0, 0, 0, 1], fps: 3 },
+    wave:    { f: [5, 6], fps: 5 },
+    listen:  { f: [7, 8], fps: 3 },
+    startle: { f: [9], fps: 1 },
+    jump:    { f: [2], fps: 1 },
+    flip:    { f: [3], fps: 1 }
+  };
+  var MAIK_DOC_SC = 2.75, MAIK_DOC_W = 12 * MAIK_DOC_SC, MAIK_DOC_H = 16 * MAIK_DOC_SC;
+  var _mkdRaf = 0, _mkdState = null, _mkdOnRz = null;
+  function maikDocStop() {
+    if (_mkdRaf) { cancelAnimationFrame(_mkdRaf); _mkdRaf = 0; }
+    if (_mkdOnRz) { try { window.removeEventListener("resize", _mkdOnRz); } catch (e) {} _mkdOnRz = null; }
+    _mkdState = null;
+  }
+  function maikDocFx(box, html, dx, dy, life) {
+    try {
+      var el = document.createElement("div");
+      el.className = "mkdoc-fx"; el.innerHTML = html;
+      el.style.left = (_mkdState.x + dx) + "px";
+      el.style.top = (36 - MAIK_DOC_H + dy) + "px";
+      box.appendChild(el);
+      setTimeout(function () { try { el.remove(); } catch (e) {} }, life);
+    } catch (e) {}
+  }
+  function maikDocMount(cmp) {
+    maikDocStop();
+    var old = cmp.querySelector(".mkdoc"); if (old) old.remove();
+    var box = document.createElement("div"); box.className = "mkdoc";
+    var svg = '<svg class="mkdoc-svg" width="' + MAIK_DOC_W + '" height="' + MAIK_DOC_H +
+      '" viewBox="0 0 12 16" shape-rendering="crispEdges" aria-hidden="true">';
+    for (var i = 0; i < MAIK_DOC_F.length; i++) svg += maikPixG(MAIK_DOC_F[i], "mkdoc-f" + i, MAIK_DOC_PAL);
+    svg += "</svg>";
+    // Purely decorative: hidden from VoiceOver entirely so he never lands between real controls (R5 #2).
+    box.setAttribute("aria-hidden", "true");
+    box.innerHTML = '<div class="mkdoc-sh"></div><div class="mkdoc-a">' + svg + "</div>";
+    cmp.appendChild(box);
+    var actor = box.querySelector(".mkdoc-a"), sh = box.querySelector(".mkdoc-sh");
+    var groups = box.querySelectorAll(".mkdoc-svg > g");
+    var WALK_V = 38, RUN_V = 120, JUMP_H = 20, JUMP_MS = 620, FLIP_MS = 760;
+    // Layout read cached: clientWidth only changes on rotation/keyboard, not per frame (R6 #2).
+    var W = cmp.clientWidth;
+    _mkdOnRz = function () { try { if (cmp.isConnected) W = cmp.clientWidth; } catch (e) {} };
+    window.addEventListener("resize", _mkdOnRz);
+    var D = _mkdState = { x: W + MAIK_DOC_W, dir: -1, state: "walk", t0: 0, until: 0, gone: 0, next: 0 };
+    function rnd(a, b) { return a + Math.random() * (b - a); }
+    function setSt(s, dur) {
+      D.state = s; D.t0 = performance.now(); D.until = dur ? D.t0 + dur : 0;
+      if (s === "listen") {
+        var pts = '<svg width="58" height="20" viewBox="0 0 60 20"><polyline points="0,10 14,10 18,10 21,2 24,17 27,10 40,10 60,10" fill="none" stroke="#2DD4BF" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round" style="stroke-dasharray:90;stroke-dashoffset:90;animation:mkdocEcg 1.2s linear forwards"/></svg>';
+        maikDocFx(box, pts, D.dir === -1 ? -62 : MAIK_DOC_W + 4, 4, 1700);
+        setTimeout(function () {
+          if (!_mkdState || D.state !== "listen") return;
+          maikDocFx(box, '<span class="mkdoc-bub">' + Math.round(rnd(64, 96)) + " bpm</span>", D.dir === -1 ? -46 : MAIK_DOC_W + 4, -12, 1500);
+        }, 850);
+      }
+    }
+    function sched() { D.next = performance.now() + (box.classList.contains("busy") ? rnd(1500, 3000) : rnd(2600, 5200)); }
+    function stunt() {
+      var r = Math.random();
+      if (r < 0.30) setSt("jump", JUMP_MS);
+      else if (r < 0.52) setSt("flip", FLIP_MS);
+      else if (r < 0.68) setSt("run", rnd(700, 1200));
+      else if (r < 0.84) setSt("listen", 1800);
+      else setSt("idle", rnd(900, 1500));
+      sched();
+    }
+    function react() {
+      var r = Math.random();
+      if (r < 0.4) { setSt("startle", 700); maikDocFx(box, '<span class="mkdoc-bub">!</span>', MAIK_DOC_W * 0.5 - 6, -20, 800); }
+      else if (r < 0.7) setSt("wave", 1100);
+      else {
+        setSt("wave", 1100);
+        for (var i = 0; i < 4; i++) (function (i) {
+          setTimeout(function () {
+            if (!_mkdState) return;
+            maikDocFx(box, '<span class="mkdoc-heart">' +
+              '<svg width="10" height="10" viewBox="0 0 5 5" shape-rendering="crispEdges">' + maikPixG(MAIK_DOC_HEART, "h", MAIK_DOC_PAL) + "</svg></span>",
+              rnd(-4, MAIK_DOC_W - 6), rnd(-12, -2), 1500);
+          }, i * 110);
+        })(i);
+      }
+      sched();
+    }
+    actor.addEventListener("pointerdown", function (e) { e.preventDefault(); e.stopPropagation(); react(); });
+    var shown = -1;
+    function show(fi) { if (fi === shown) return; if (shown >= 0) groups[shown].style.display = "none"; groups[fi].style.display = "block"; shown = fi; }
+    var last = performance.now();
+    sched();
+    function tick(now) {
+      if (!box.isConnected) { maikDocStop(); return; }
+      // Screen locked / app occluded: let WebKit's hidden-document throttle idle us (R6 #1).
+      if (document.hidden) { last = now; _mkdRaf = requestAnimationFrame(tick); return; }
+      var dt = Math.min(0.05, (now - last) / 1000); last = now;
+      var y = 0, rot = 0, sq = 1, W = cmp.clientWidth;
+      var busy = box.classList.contains("busy");
+      var wv = busy ? WALK_V * 1.5 : WALK_V;
+      switch (D.state) {
+        case "walk":
+          D.x += wv * D.dir * dt;
+          if (now > D.next) stunt();
+          break;
+        case "run":
+          D.x += RUN_V * D.dir * dt; rot = D.dir * 6;
+          if (D.until && now > D.until) setSt("walk", 0);
+          break;
+        case "jump": case "flip":
+          var dur = D.state === "flip" ? FLIP_MS : JUMP_MS;
+          var pr = Math.min(1, (now - D.t0) / dur);
+          D.x += wv * 1.25 * D.dir * dt;
+          y = -JUMP_H * 4 * pr * (1 - pr);
+          if (D.state === "flip") rot = -D.dir * 360 * pr;
+          if (pr >= 1) { sq = 0.82; setSt("walk", 0); }
+          break;
+        default: // idle / wave / listen / startle
+          if (now > D.until) { if (D.dir === 1 && Math.random() < 0.6) D.dir = -1; setSt("walk", 0); }
+      }
+      if (D.x < -MAIK_DOC_W - 20 && D.dir === -1) {
+        if (!D.gone) D.gone = now + rnd(700, 1600);
+        if (now > D.gone) { D.gone = 0; D.x = W + MAIK_DOC_W + 10; setSt("walk", 0); sched(); }
+      } else if (D.x > W + MAIK_DOC_W + 30 && D.dir === 1) {
+        D.dir = -1;
+      } else D.gone = 0;
+      var a = MAIK_DOC_ANIM[D.state];
+      show(a.f[Math.floor(now / 1000 * a.fps) % a.f.length]);
+      var flip = D.dir === 1 ? -1 : 1;
+      actor.style.transform = "translate(" + D.x.toFixed(1) + "px," + y.toFixed(1) + "px) scale(" + flip + "," + sq + ") rotate(" + rot.toFixed(1) + "deg)";
+      var air = Math.min(1, -y / JUMP_H);
+      sh.style.transform = "translateX(" + (D.x + MAIK_DOC_W / 2 - 16.5).toFixed(1) + "px) scaleX(" + (1 - air * 0.45).toFixed(2) + ")";
+      sh.style.opacity = (0.8 - air * 0.5).toFixed(2);
+      _mkdRaf = requestAnimationFrame(tick);
+    }
+    _mkdRaf = requestAnimationFrame(tick);
   }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
@@ -3855,14 +4051,23 @@ body.dark #maikSheet{
 .maik-hd-btn{width:34px;height:34px;border-radius:50%;border:1px solid var(--mk-bd);background:var(--mk-soft);color:var(--mk-ink);display:flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:.15s}
 .maik-hd-btn:hover{border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-hd-btn:active{transform:scale(.94)}
+/* Invisible hit-slop lifts every icon control to ~44pt for one-handed night use
+   without changing the visual size (R5 #3). */
+.maik-hd-btn,.maik-mic,.maik-img,.maik-research,.maik-send{position:relative}
+.maik-hd-btn::after,.maik-mic::after,.maik-img::after,.maik-research::after,.maik-send::after{content:"";position:absolute;inset:-5px;border-radius:50%}
 
 /* disclaimer (shared, wraps — never clips) */
 .maik-disc{display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--mk-soft);border-top:1px solid var(--mk-bd);border-bottom:1px solid var(--mk-bd);flex:0 0 auto}
 .maik-disc svg{flex:0 0 auto}
-.maik-disc span{font:600 11px/1.3 'Inter';color:var(--mk-mut)}
+/* The one sentence telling the clinician to verify independently must clear WCAG AA:
+   #64748b on --mk-soft was 4.43:1, so light theme gets its own darker ink (R5 #4). */
+.maik-disc span{font:600 11px/1.3 'Inter';color:#5a6b80}
+body.dark #maikSheet .maik-disc span,body.v3-dark #maikSheet .maik-disc span{color:var(--mk-mut)}
 
-/* body (shared scroll area) */
-.maik-body{position:relative;flex:1;overflow-y:auto;padding:14px 14px 6px;display:flex;flex-direction:column;gap:10px}
+/* body (shared scroll area) — 56px bottom padding keeps the last bubble's chips and citations
+   clear of the Live Doctor's strip above the composer (sprite is 44px tall + 9px hit inset),
+   so he can never cover or out-tap them (R5 #1). */
+.maik-body{position:relative;flex:1;overflow-y:auto;padding:14px 14px 56px;display:flex;flex-direction:column;gap:10px}
 .maik-wm{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:230px;opacity:.05;pointer-events:none}
 body.dark .maik-wm{opacity:.06}
 
@@ -4078,8 +4283,24 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .mkw-svg{display:block}
 .mkw-svg > g{display:none}
 .mkw-svg > g:first-child{display:block}
+/* The Live Doctor: the strip he lives on spans the composer width but takes no taps -
+   only the doctor himself (.mkdoc-a, hit inset widened to ~44px) is interactive. */
+.mkdoc{position:absolute;left:0;right:0;top:-36px;height:36px;pointer-events:none;z-index:1;overflow:visible}
+.mkdoc-a{position:absolute;left:0;bottom:1px;pointer-events:auto;cursor:pointer;will-change:transform;transform-origin:50% 100%;filter:drop-shadow(0 1px 2px rgba(8,19,26,.35))}
+.mkdoc-a::after{content:"";position:absolute;inset:-9px}
+.mkdoc.busy .mkdoc-a{filter:drop-shadow(0 1px 2px rgba(8,19,26,.35)) drop-shadow(0 0 6px rgba(45,212,191,.5))}
+.mkdoc-svg{display:block}
+.mkdoc-svg > g{display:none}
+.mkdoc-sh{position:absolute;left:0;bottom:0;width:33px;height:6px;border-radius:50%;background:radial-gradient(50% 50% at 50% 50%,rgba(8,19,26,.4),transparent 70%);will-change:transform,opacity;pointer-events:none}
+.mkdoc-fx{position:absolute;pointer-events:none}
+.mkdoc-bub{font:700 9px/1 'Inter';color:var(--mk-teal,#0f766e);background:var(--mk-bg,#fff);border:1px solid var(--mk-bd,#d5dde6);border-radius:6px;padding:4px 6px;white-space:nowrap;animation:mkdocPop .24s ease-out forwards;display:inline-block}
+.mkdoc-heart{display:inline-block;animation:mkdocFloat 1.1s ease-out forwards}
+@keyframes mkdocPop{0%{transform:translateY(5px) scale(.6);opacity:0}60%{transform:translateY(-2px) scale(1.05);opacity:1}100%{transform:translateY(0) scale(1);opacity:1}}
+@keyframes mkdocFloat{0%{transform:translateY(0) scale(.7);opacity:0}15%{opacity:1}100%{transform:translateY(-42px) scale(1.15);opacity:0}}
+@keyframes mkdocEcg{to{stroke-dashoffset:0}}
 @media (prefers-reduced-motion:reduce){
   .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a{animation:none}
+  .mkdoc-fx{animation:none}
 }
 .maik-buffer-txt{color:var(--mk-mut);font-weight:600}
 .maik-sk{display:flex;flex-direction:column;gap:8px}
@@ -4096,7 +4317,10 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 .maik-tbl{border-collapse:collapse;width:100%;font:400 12px 'Inter'}
 .maik-tbl th,.maik-tbl td{border:1px solid var(--mk-bd);padding:6px 9px;text-align:left;vertical-align:top;color:var(--mk-ink)}
 .maik-tbl th{background:var(--mk-soft);font-weight:700}
-.maik-cite{cursor:pointer;padding:0 1px;line-height:0}
+/* A ~9px superscript is the primary "verify" affordance; give it an invisible
+   ~25px hit area so it is actually tappable one-handed (R5 #5). */
+.maik-cite{cursor:pointer;padding:0 1px;line-height:0;position:relative}
+.maik-cite::after{content:"";position:absolute;inset:-8px}
 /* expandable <details> sources — the app uses <details class="maik-src">, so make it a
    disclosure block (overrides the spec's flat flex row while keeping its border/spacing/teal) */
 .maik-src{display:block}
@@ -4284,6 +4508,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       try {
         var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
         var old = cmp.querySelector(".mkw"); if (old) old.remove();
+        // The Live Doctor replaces the stationary resident unless the flag is off or the
+        // clinician asked for reduced motion (he only travels; standing still is Buddy's job).
+        var reduce = false;
+        try { reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches; } catch (e) {}
+        if (maikLiveDocOn() && !reduce) { maikDocMount(cmp); return; }
         var box = document.createElement("div"); box.className = "mkw";
         // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
         box.innerHTML = '<span class="mkw-a">' + maikPixSVG([MAIK_BUDDY[0], MAIK_BUDDY[1], maikBlinkFrame(MAIK_BUDDY[0])], 2.3) + "</span>";
@@ -4293,12 +4522,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     }
     function maikBuddyUnmount() {
       try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
-      maikBuddyStop();
+      try { var od = sheet && sheet.querySelector(".mkdoc"); if (od) od.remove(); } catch (e) {}
+      maikBuddyStop(); maikDocStop();
     }
     // Sending a question does not summon him — he is already there. It just perks him up, while
     // Medibot appears in the pending bubble (maikBufferHTML).
     function maikBuddyBusy(on) {
-      try { var b = sheet && sheet.querySelector(".mkw"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
+      try { var b = sheet && sheet.querySelector(".mkw, .mkdoc"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
     }
     function maikSetSendMode(busy) {
       _maikBusy = busy;
@@ -5424,7 +5654,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG, docState: function () { return _mkdState ? { x: _mkdState.x, dir: _mkdState.dir, state: _mkdState.state } : null; } }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
     function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
