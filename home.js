@@ -313,19 +313,36 @@
           if (otaCheck) otaCheck.addEventListener("click", function () {
             if (!window.SMD_OTA) return;
             otaCheck.disabled = true; if (otaStatus) otaStatus.textContent = "Checking…";
+            // (otaSay is defined below, hoisted - see the note there.)
             SMD_OTA.check().then(function (r) {
               otaCheck.disabled = false; r = r || {};
               if (r.status === "available") { pending = r; if (otaStatus) otaStatus.textContent = "Update available: v" + r.version; if (otaInstall) otaInstall.style.display = ""; }
               else if (r.status === "uptodate") { pending = null; if (otaStatus) otaStatus.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (otaInstall) otaInstall.style.display = "none"; }
-              else { if (otaStatus) otaStatus.textContent = "Couldn't check — " + (r.error || "try again"); }
+              else { if (otaStatus) otaStatus.textContent = otaSay(r.error, "Couldn't check for updates"); }
             });
           });
+          /* Phrase the failure from a CODE. This used to interpolate the error straight from
+           * native-ota.js, which passed through @capgo/capacitor-updater's own message - and that
+           * plugin is handed the bundle's zipUrl, so its failures quote our OTA endpoint back. The
+           * settings screen was printing our infrastructure to anyone who tapped Update. Each line
+           * below also tells the reader what to DO, which a URL never did. */
+          function otaSay(code, fallback) {
+            switch (String(code || "")) {
+              case "network":      return "Couldn't reach the update server. Check your connection and try again.";
+              case "checksum":     return "That update didn't verify, so it was not installed. Try again later.";
+              case "storage":      return "Not enough space on this device to download the update.";
+              case "unauthorized": return "This device isn't allowed to fetch that update.";
+              case "missing":      return "That update is no longer available.";
+              case "unavailable":  return "Updates aren't available on this build.";
+              default:             return fallback + ". Try again later.";
+            }
+          }
           if (otaInstall) otaInstall.addEventListener("click", function () {
             if (!window.SMD_OTA || !pending) return;
             otaInstall.disabled = true;
             SMD_OTA.install(pending, function (pct) { if (otaStatus) otaStatus.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
               if (res && res.ok) { if (otaStatus) otaStatus.textContent = "Update ready — reopening…"; }
-              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+              else { otaInstall.disabled = false; if (otaStatus) otaStatus.textContent = otaSay(res && res.error, "Update failed"); }
             });
           });
         })();
