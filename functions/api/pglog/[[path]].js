@@ -373,6 +373,19 @@ export async function onRequest(context_) {
         const structural = ["programmeId", "startDate", "endDate", "trainingYear", "guide", "coGuides",
                             "active", "departmentId", "name", "smdId", "batch"];
         if (!own || structural.some((k) => k in body)) await S.gate(env, ctx.actorUid, cur.orgId, CAPS.PGLOG_CONFIGURE);
+        /* YOU MAY NOT NAME YOURSELF THIS RESIDENT'S GUIDE. Assigning the guide is CONFIGURE-gated,
+         * and academic_cell and admin both hold CONFIGURE - while canReadResident() grants a guide
+         * the "verifier" audience, which releases caseRef, diagnosis, remarks and reflection bodies.
+         * So the role documented as seeing aggregate only could hand itself full clinical detail on
+         * any trainee with a single PATCH. Someone else appoints a guide; that is what makes it an
+         * appointment. A head of department already reads that detail through their own role, so
+         * this costs them nothing. */
+        const namesSelf = M.sameActor(ctx.actorUid, body.guide) ||
+          (Array.isArray(body.coGuides) && body.coGuides.some((x) => M.sameActor(ctx.actorUid, x)));
+        if (namesSelf) {
+          return json({ error: "cannot_assign_self_as_guide",
+            message: "You cannot make yourself this resident's guide. Ask the head of department." }, 403);
+        }
         return json({ ok: true, resident: await S.updateResident(env, id, body, ctx.actorUid) });
       }
     }

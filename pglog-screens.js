@@ -137,8 +137,11 @@
        * refetched on each render, turning an ordinary unlinked state into a request loop and an
        * error screen. The explicit unlink paths (clear-inst, pick-inst) null state.ctx themselves. */
       if (!want || !have || want === have) return Promise.resolve(state.ctx);
-      // state.inst caches the resolved name/code too, and screenInstitution prefers it over ctx -
-      // so leaving it behind shows the PREVIOUS college on the new one's screen.
+      /* NARROW on purpose. This runs inside ensureContext, which every screen calls on every render
+       * pass, so the full org reset here wipes state that is mid-load and the module never settles
+       * (15 checks failed when it did). state.inst is included because screenInstitution prefers it
+       * over ctx and would otherwise paint the previous college; the wider reset belongs on the
+       * user-initiated switches, which is where resetOrgScopedState() is called. */
       state.ctx = null; state.dash = null; state.inst = {};
     }
     var demo = st.seedDemo(todayISO());
@@ -161,6 +164,20 @@
    * store.config() had no callers, so every requirement shown was the raw pack default even where
    * the Academic Cell had configured otherwise - the configuration screen wrote to a server nobody
    * asked. Failure is not fatal: fall back to pack defaults rather than blocking the logbook. */
+  /* Everything that describes ONE institution. Five call sites nulled ctx and dash and left the rest
+   * behind, so after switching college the faculty queue, the department view, the certificate, the
+   * progress bars and the requirement targets were still the PREVIOUS institution's until something
+   * happened to reload them. One place, so a sixth caller cannot get it half right. */
+  function resetOrgScopedState() {
+    state.ctx = null; state.dash = null; state.inst = {};
+    state.faculty = null; state.dept = null;
+    state.cert = null; state.certErr = null; state.certVerifyUrl = "";
+    state.checked = null; state.inbox = [];
+    state.pack = null; state.config = null; state.requirements = null;
+    state.progress = null; state.gaps = [];
+    state.assessment = null; state.review = null;
+  }
+
   function loadConfig() {
     var st = ST();
     var prog = state.ctx && state.ctx.programme;
@@ -1848,6 +1865,14 @@
     if (state.certLoading) return loading();
     var h = [];
 
+    if (!c && state.certErr) {
+      // "We could not ask" is not "you have none" - and acting on the wrong one means requesting a
+      // second certification over an existing one.
+      h.push(banner("warn", "error",
+        esc(instErr(state.certErr, "Could not check your certification just now."))));
+      h.push('<button class="pgl-btn wide" data-pgl="retry" data-r="certify">Try again</button>');
+      return wrap(h.join(""));
+    }
     if (!c) {
       h.push(emptyState("verified_user", "Not certified yet",
         "A certification freezes your verified entries and collects the signatures your institution " +
@@ -2124,12 +2149,12 @@
         return loadDept();
       case "clear-inst": {
         st.setContext({ orgId: "" });
-        state.ctx = null; state.dash = null; state.inst = {};
+        resetOrgScopedState();
         return loadInstitution().then(render, render);
       }
       case "pick-inst": {
         st.setContext({ orgId: t.getAttribute("data-id") });
-        state.ctx = null; state.dash = null; state.inst = {};
+        resetOrgScopedState();
         return loadInstitution().then(render, render);
       }
       case "create-inst": {
@@ -2139,7 +2164,7 @@
         return st.createInstitution(nm).then(function (org) {
           // Point this device at the new org immediately, or the creator has to type their own code.
           st.setContext({ orgId: org.id });
-          state.ctx = null; state.dash = null;
+          resetOrgScopedState();
           // org.id is the internal handle the API keys on; org.code is the SMD-XXXXXX a human shares.
           // Storing the code as the id was the exact confusion that made setup unreachable.
           state.inst = { busy: false, orgName: org.name, orgCode: org.code,
@@ -2197,7 +2222,7 @@
         // setContext normalises: SMD codes upper, a 32-char org id lower. Upper-casing here broke
         // every pasted org id.
         st.setContext({ orgId: v.trim() });
-        state.ctx = null; state.dash = null;
+        resetOrgScopedState();
         toast("Checking…");
         return enter("home");
       }
@@ -2529,14 +2554,16 @@
       // record — it is history, not clutter to hide — but it is not what this screen acts on.
       var c = arr(list)[0] || null;
       state.cert = c;
-      state.certLoading = false;
+      state.certLoading = false; state.certErr = null;
       if (c && c.verifyCode) {
         return st.certificate(c.id).then(function (full) {
           state.cert = full.certificate || c;
           state.certVerifyUrl = full.verifyUrl || "";
         }, function () {});
       }
-    }, function () { state.certLoading = false; state.cert = null; });
+    /* Record the failure. Resolving to "no certificate" on a 403 or a 500 told a resident their
+     * certification did not exist, and the obvious response to that is to request a second one. */
+    }, function (e) { state.certLoading = false; state.cert = null; state.certErr = e || new Error("unknown"); });
   }
   function doCertRequest() {
     var st = ST(), res = state.dash && state.dash.resident;
@@ -2741,8 +2768,12 @@
   }
   function loadInbox() {
     var st = ST();
-    return st.notifications().then(function (r) { state.inbox = arr(r.notifications).filter(function (n) { return !n.read; }); },
-      function () { state.inbox = []; });
+    return st.notifications().then(
+      function (r) { state.inbox = arr(r.notifications).filter(function (n) { return !n.read; }); },
+      /* KEEP what we already have. Emptying the inbox on any failure hid "your entry was returned"
+       * behind a transient error - the one notification a resident has to act on, silently replaced
+       * by nothing to see. A stale list is strictly better than a wrong empty one. */
+      function () { state.inbox = arr(state.inbox); });
   }
 
   function enter(r) {

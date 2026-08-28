@@ -152,7 +152,16 @@
   function verifyCode(code) {
     if (!G || !G.fetch) return Promise.reject(mkErr("no_fetch", ""));
     return G.fetch(API + "/v/" + encodeURIComponent(String(code || "").trim()), { cache: "no-store" })
-      .then(function (r) { return r.json().catch(function () { return { ok: false, status: "unavailable" }; }); });
+      .then(function (r) {
+        return r.json().catch(function () { return null; }).then(function (j) {
+          /* Check the STATUS. A 429 or a 500 returns a body with no `status` field, which the check
+           * screen rendered as "Unknown result" - to an examiner asking whether a signature on a
+           * training record is genuine. "We could not check right now" is a different answer from
+           * "we do not recognise this", and only one of them means try again. */
+          if (!r.ok) return { ok: false, status: "unavailable", message: (j && j.message) || "" };
+          return j || { ok: false, status: "unavailable" };
+        });
+      });
   }
   /* ── certification ─────────────────────────────────────────────────────────
    * The signed, frozen document. Never cached and never queued offline: a certificate is minted by

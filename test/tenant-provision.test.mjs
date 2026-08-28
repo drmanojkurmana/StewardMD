@@ -118,7 +118,9 @@ test("the eLOGBook console offers no self-serve create button", () => {
 test("the admin identity is built from found.uid, never the lookup object", () => {
   assert.doesNotMatch(SRC, /uid = await lookupUidByEmail/,
     "assigning the lookup result straight to `uid` is the bug");
-  assert.match(SRC, /const uid = found && found\.uid/, "unwrap the object first");
+  // Match the PROPERTY, not the exact line: the uid may also fall back to an explicit body.adminUid,
+  // which is fine - what must never come back is the lookup object itself.
+  assert.match(SRC, /found && found\.uid/, "unwrap the object first");
   assert.match(SRC, /const identity = "fb:" \+ uid/, "identity is namespaced on the real uid");
 });
 

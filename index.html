@@ -75,7 +75,7 @@ try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/
 <link rel="stylesheet" href="/insulin.css?v=ins11">
 <link rel="stylesheet" href="/clinix.css?v=cx17-annex">
 <link rel="stylesheet" href="/surgx.css?v=sg9-bkenc">
-<link rel="stylesheet" href="/pglog.css?v=pgl4">
+<link rel="stylesheet" href="/pglog.css?v=pgl5-guestbar">
 <!-- App-wide Liquid Glass appearance (Display & Accessibility → App appearance). Sets
      html[data-appearance] before paint so glass surfaces don't flash. ICU/GHIS never touched. -->
 <link rel="stylesheet" href="/appearance.css?v=appx5-flatsquare">
@@ -1508,7 +1508,7 @@ window.openExternal = function (u) {
 <script src="/account.js?v=gold364-thread-vclaim1-proevt1-boot1" defer></script>
 <!-- Guest session bar: the 300 s auto-sign-out clock, across the top instead of buried in
      the account chip. Additive, reads app.js's account record; never edits app.js. -->
-<script src="/guest-timer.js?v=gold1200-guestbar" defer></script>
+<script src="/guest-timer.js?v=gold1200-guestbar2" defer></script>
 <script src="/iap.js?v=iap2" defer></script><script src="/pro-paywall.js?v=gold990" defer></script>
 <script src="/pro-badge.js?v=gold692" defer></script>
 <!-- "Why is this locked?" - the one place that turns a Pro refusal into a sentence and the
@@ -1810,11 +1810,11 @@ window.openExternal = function (u) {
 <script src="/pglog-flags.js?v=pgl4" defer></script>
 <script src="/pglog-model.js?v=pgl4" defer></script>
 <script src="/pglog-curriculum.js?v=pgl4" defer></script>
-<script src="/pglog-store.js?v=pgl11-queue" defer></script>
+<script src="/pglog-store.js?v=pgl12-final" defer></script>
 <script src="/pglog-qr.js?v=pgl4" defer></script>
 <script src="/pglog-reports.js?v=pgl5-diag" defer></script>
 <script src="/pglog-ai.js?v=pgl4" defer></script>
-<script src="/pglog-screens.js?v=pgl24-rot" defer></script>
+<script src="/pglog-screens.js?v=pgl25-final" defer></script>
 <script src="/pglog.js?v=pgl5" defer></script>
 <!-- Insulin dose CDSS · additive, flag-gated smd_insulin (DEFAULT OFF; reveal with ?insulin=1). Pure
      engine + safety load before the UI; when the flag is off, insulin.js is a complete no-op. -->
@@ -1837,7 +1837,7 @@ window.openExternal = function (u) {
 <script src="/followcare-analytics.js?v=fc3" defer></script>
 <script src="/followcare-integration.js?v=fc7" defer></script>
 <script src="/followcare-intel.js?v=fc7" defer></script>
-<script src="/followcare.js?v=fc15-ux" defer></script>
+<script src="/followcare.js?v=fc16-guestbar" defer></script>
 <!-- Smart OPD Queue (flag smd_opd_queue, default OFF). Inert unless the flag is on + QUEUE.open() is
      called (or ?queue=1). Doctor dashboard is a faithful port of the Google Stitch design. -->
 

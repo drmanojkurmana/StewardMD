@@ -353,12 +353,22 @@ export async function resolveSupervisor(env, orgId, text, resident, deps) {
   for (const g of named) if (norm(g) === want) return g;
   let roster = [];
   try { roster = await facultyRoster(env, orgId, deps); } catch (e) { roster = []; }
+  /* A local-part match ("arjun" for arjun@a.edu) is a convenience, and it was returning whichever
+   * row Firestore happened to yield first. Two faculty sharing a local part across domains therefore
+   * resolved to an arbitrary one - and the person named on an entry becomes its supervisor, gains the
+   * "verifier" audience over that resident's clinical detail, and is who requireNamedFor() lets sign
+   * it. Resolve only when it is UNAMBIGUOUS; otherwise resolve nothing, so the resident is asked to
+   * name the supervisor properly rather than the wrong consultant being handed the record. */
+  const exact = [];
+  const byLocal = [];
   for (const m of roster) {
     if (norm(m.identity) === want) return m.identity;
-    if (m.email && norm(m.email) === want) return m.identity;
-    if (m.email && norm(m.email.split("@")[0]) === want) return m.identity;
+    if (m.email && norm(m.email) === want) exact.push(m.identity);
+    else if (m.email && norm(m.email.split("@")[0]) === want) byLocal.push(m.identity);
   }
-  return "";
+  if (exact.length === 1) return exact[0];
+  if (exact.length > 1) return "";
+  return byLocal.length === 1 ? byLocal[0] : "";
 }
 
 export async function submitEntry(env, id, actorUid, deps) {
