@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>pro-notice fixture</title>
+<!-- Host page for test/run-pro-notice-ui.mjs. Stubs the two things pro-notice.js routes to, so the
+     test can assert the button really reaches verification rather than the paywall. -->
+<script>
+  window.__acted = [];
+  window.SMD_PRO = {
+    isProSync: function () { return !!window.__pro; },
+    proState: function () { return window.__state || null; },
+    openPaywall: function (f) { window.__acted.push("paywall:" + f); }
+  };
+  window.SMD_VERIFY = { openPanel: function () { window.__acted.push("verify"); } };
+  window.toast = function (m) { window.__acted.push("toast:" + m); };
+</script>
+</head>
+<body>
+<main style="height:300px">app</main>
+<script src="/pro-notice.js"></script>
+</body>
+</html>

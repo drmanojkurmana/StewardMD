@@ -1,0 +1,65 @@
+{
+  "id": "upper-gi-bleed",
+  "title": "Upper GI bleeding",
+  "subtitle": "Resuscitate, risk-stratify, scope",
+  "category": "abdomen",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "nice-ng24", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Acute upper gastrointestinal bleeding in over 16s: management (CG141/NG24 series)", "year": 2016, "url": "https://www.nice.org.uk/guidance/cg141", "accessed": "2026-08-24" },
+    { "id": "esge", "org": "European Society of Gastrointestinal Endoscopy (ESGE)", "title": "Diagnosis and management of nonvariceal upper gastrointestinal haemorrhage: guideline update", "year": 2021, "url": "https://www.esge.com/", "accessed": "2026-08-24" },
+    { "id": "baveno7", "org": "Baveno VII Faculty", "title": "Baveno VII consensus on portal hypertension", "year": 2022, "url": "https://pubmed.ncbi.nlm.nih.gov/", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Haematemesis with shock, or fresh melaena with a tachycardia at rest." },
+      { "text": "Known varices, cirrhosis, or stigmata of chronic liver disease with any bleed." },
+      { "text": "Ongoing haematemesis with a reduced conscious level. This is an airway problem before it is a bleeding problem." },
+      { "text": "A bleed on anticoagulation, or a bleed after aortic surgery or with an aortic graft: think aorto-enteric fistula." },
+      { "text": "Rebleeding after endoscopic therapy. The second bleed carries a far higher mortality than the first." }
+    ],
+    "do_now": [
+      { "text": "Two large-bore cannulae, bloods, crossmatch, and activate the major haemorrhage protocol for shock.", "timeCritical": true, "evidenceRef": "nice-ng24" },
+      { "text": "Protect the airway in an actively vomiting or obtunded patient before anything else. Aspiration kills more often than exsanguination here.", "timeCritical": true, "evidenceRef": "nice-ng24" },
+      { "text": "Transfuse to a restrictive target in the absence of massive haemorrhage or cardiac ischaemia; liberal transfusion worsens outcome in variceal bleeding.", "timeCritical": true, "evidenceRef": "nice-ng24" },
+      { "text": "Suspected variceal bleed: start a splanchnic vasoconstrictor and antibiotic prophylaxis immediately, before endoscopy.", "timeCritical": true, "evidenceRef": "baveno7" }
+    ],
+    "assess": [
+      { "text": "Calculate a pre-endoscopy risk score. A very low score identifies the patient who can be managed without admission.", "calcs": ["gbs", "aims65"] },
+      { "text": "Distinguish variceal from non-variceal on history and examination: alcohol, known liver disease, jaundice, ascites, splenomegaly, caput." },
+      { "text": "Drug history: anticoagulants, antiplatelets, non-steroidal anti-inflammatories, steroids, and any recent change of dose." },
+      { "text": "Post-endoscopy risk stratification once the lesion is seen.", "calcs": ["rockall"] },
+      { "text": "In known liver disease, quantify the reserve because it drives everything that follows.", "calcs": ["childpugh", "meld"] }
+    ],
+    "investigate": [
+      { "text": "FBC, U&E, LFT, coagulation, group and crossmatch, venous gas with lactate. A raised urea with normal creatinine suggests a substantial upper bleed." },
+      { "text": "Upper GI endoscopy within 24 hours of admission for all, and immediately after resuscitation for unstable patients." },
+      { "text": "CT angiography for continued bleeding when endoscopy has failed or cannot localise the source." },
+      { "text": "Ultrasound abdomen when varices are suspected and the liver history is unclear." }
+    ],
+    "resuscitate": [
+      { "text": "Correct coagulopathy according to the agent involved and the local reversal protocol; do not withhold reversal awaiting endoscopy in a shocked patient.", "evidenceRef": "nice-ng24" },
+      { "text": "Platelet transfusion for active bleeding with a low count; fibrinogen replacement in massive haemorrhage.", "evidenceRef": "nice-ng24" },
+      { "text": "Proton pump inhibitor after endoscopy in non-variceal bleeding with high-risk stigmata. Routine pre-endoscopy use does not change outcome.", "evidenceRef": "esge" },
+      { "text": "Balloon tamponade only as a bridge in uncontrolled variceal bleeding, with a definitive plan already agreed.", "evidenceRef": "baveno7" }
+    ],
+    "definitive": [
+      { "text": "Endoscopic haemostasis is the definitive treatment for most upper GI bleeds: dual therapy for a bleeding ulcer, band ligation for oesophageal varices.", "evidenceRef": "esge" },
+      { "text": "Interventional radiology embolisation for rebleeding after failed endoscopic therapy, where available.", "evidenceRef": "esge" },
+      { "text": "Surgery for uncontrolled bleeding when endoscopy and radiology have failed or are unavailable: under-run the vessel, and address the cause.", "evidenceRef": "nice-ng24" },
+      { "text": "Early transjugular intrahepatic portosystemic shunt in selected high-risk variceal bleeds, decided with hepatology.", "evidenceRef": "baveno7" }
+    ],
+    "escalate": [
+      { "text": "Endoscopist and anaesthetist together for the unstable patient. An unprotected airway in an actively bleeding patient is not an endoscopy list problem." },
+      { "text": "Critical care for shock, rebleeding, or a patient needing airway protection for endoscopy." },
+      { "text": "Hepatology and interventional radiology early in variceal bleeding, not after the second bleed." }
+    ]
+  },
+  "notes": [
+    "Risk scores here are unusually useful: they identify both the patient who can go home and the patient who must not leave the resuscitation room.",
+    "The surgical role in upper GI bleeding is now small and late. Knowing when to call it is the skill.",
+    "Rebleeding is the event that changes the prognosis. Anticipate it before it happens rather than reacting when it does."
+  ],
+  "calcs": ["gbs", "rockall", "aims65", "childpugh", "meld", "meld_na", "shock_index"]
+}

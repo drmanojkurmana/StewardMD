@@ -1,0 +1,162 @@
+{
+  "id": "lap-cholecystectomy",
+  "title": "Laparoscopic cholecystectomy",
+  "subtitle": "Critical View of Safety",
+  "system": "hepatobiliary",
+  "aliases": ["lap chole", "gallbladder removal"],
+  "estMinutes": 60,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "sages-cvs", "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety", "year": 2018, "url": "https://www.sages.org/safe-cholecystectomy-program/", "accessed": "2026-08-24" },
+    { "id": "tg18", "org": "Tokyo Guidelines Steering Committee", "title": "Tokyo Guidelines 2018 (TG18): flowchart for the management of acute cholecystitis", "year": 2018, "version": "TG18", "url": "https://onlinelibrary.wiley.com/journal/18686982", "accessed": "2026-08-24" }
+  ],
+  "calcs": ["rcri", "childpugh", "caprini"],
+  "chapters": {
+    "indications": [
+      "Symptomatic gallstone disease: biliary colic, acute cholecystitis, gallstone pancreatitis after recovery, and choledocholithiasis after duct clearance.",
+      "Acute calculous cholecystitis: early cholecystectomy on the index admission has better outcomes than delayed surgery.",
+      "Gallbladder polyps meeting size or growth criteria, and porcelain gallbladder."
+    ],
+    "contraindications": [
+      "Uncorrected coagulopathy or an unfit patient in whom percutaneous cholecystostomy is the better source control.",
+      "Suspected gallbladder carcinoma, which needs an oncological plan rather than a routine cholecystectomy.",
+      "Inability to tolerate pneumoperitoneum. This favours an open approach rather than no operation."
+    ],
+    "preparation": [
+      "Ultrasound to confirm stones, wall thickening and duct diameter; liver function tests to interrogate the duct.",
+      "Clear the duct first if choledocholithiasis is confirmed, or plan an intra-operative approach to it.",
+      "Antibiotic prophylaxis; therapeutic antibiotics if this is an inflamed gallbladder.",
+      "Consent must include conversion to open, bile duct injury, bile leak, retained stones, and injury to bowel or vessels."
+    ],
+    "positioning": [
+      "Supine, reverse Trendelenburg with left tilt so the colon and duodenum fall away from the porta.",
+      "Arms out or tucked according to whether the American or French position is used.",
+      "Monitor sited so the surgeon looks along the axis of dissection."
+    ],
+    "equipment": [
+      "Four ports typically: 10 mm umbilical camera, 10 mm epigastric, two 5 mm right subcostal.",
+      "30-degree scope, hook diathermy, Maryland dissector, clip applier, retrieval bag.",
+      "Facility for intra-operative cholangiography or laparoscopic ultrasound.",
+      "An open set immediately available in theatre, not in the store."
+    ],
+    "anatomy": [
+      "Calot triangle is bounded by the cystic duct, the common hepatic duct and the inferior border of the liver. The cystic artery usually lies within it.",
+      "Anatomical variation is the rule, not the exception: an accessory or aberrant right hepatic duct, a short cystic duct, and a right hepatic artery running close to the gallbladder are all common.",
+      "Rouviere sulcus marks the plane of the right portal pedicle and is a reliable external landmark: dissection stays anterior to it.",
+      "The cystic plate lies between the gallbladder and the liver; staying on it avoids both liver bleeding and injury to structures behind."
+    ],
+    "criticalSafety": [
+      "Achieve the Critical View of Safety before dividing anything: the hepatocystic triangle cleared of fat and fibrous tissue, the lower third of the gallbladder separated from the cystic plate, and exactly two structures seen entering the gallbladder.",
+      "The Critical View is a view, not a manoeuvre. If it cannot be obtained, do not proceed to clip.",
+      "Bail out rather than persist: subtotal cholecystectomy, conversion, or cholecystostomy and come back. A bail-out is a good outcome; a bile duct injury is not."
+    ],
+    "structuresAtRisk": [
+      "Common bile duct and common hepatic duct",
+      "Right hepatic artery and an aberrant right hepatic duct",
+      "Duodenum and hepatic flexure of the colon",
+      "Portal vein",
+      "Liver bed, causing troublesome venous bleeding"
+    ],
+    "commonErrors": [
+      "The classical injury pattern: the common bile duct mistaken for the cystic duct because traction was applied upwards rather than laterally.",
+      "Dissecting high on the gallbladder wall in the wrong plane and entering the liver, or too low and approaching the porta.",
+      "Persisting laparoscopically for another twenty minutes because conversion feels like failure.",
+      "Using energy near the common bile duct, causing a delayed thermal stricture that presents weeks later."
+    ],
+    "complications": [
+      "Bile duct injury, the complication that defines this operation. Recognised intra-operatively it is retrievable; recognised late it is life-changing.",
+      "Bile leak from the cystic duct stump or a duct of Luschka.",
+      "Retained common bile duct stone.",
+      "Bleeding from the cystic artery or the liver bed.",
+      "Port-site hernia, wound infection, and dropped stones causing a late intra-abdominal abscess."
+    ],
+    "postop": [
+      "Same-day or next-day discharge for an uncomplicated elective case.",
+      "Persistent pain, tachycardia, or a rising bilirubin after cholecystectomy is a bile leak or a duct injury until imaging says otherwise. Do not attribute it to wind.",
+      "Discuss any suspected duct injury with a hepatobiliary unit immediately. Do not attempt a repair without that expertise.",
+      "Follow up the histology: an unexpected gallbladder carcinoma changes the whole plan."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check" },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning", "emphasis": "Reverse Trendelenburg with left tilt does more for exposure at the porta than any retractor." },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.lap.access" },
+    { "ref": "step.lap.ports" },
+    { "ref": "step.lap.survey" },
+    { "ref": "step.chole.retraction" },
+    { "ref": "step.chole.cvs" },
+    { "ref": "step.chole.divide" },
+    { "ref": "step.chole.plate" },
+    { "ref": "step.lap.specimen-retrieval", "emphasis": "Always use a bag. A perforated gallbladder that spills stones into the abdomen produces an abscess months later." },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.lap.closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.chole.retraction": {
+      "id": "step.chole.retraction", "kind": "dissection", "critical": true,
+      "title": "Retraction: fundus up, infundibulum lateral",
+      "why": "The single commonest cause of bile duct injury is retraction that aligns the cystic duct with the common bile duct, so the two look like one tube.",
+      "how": [
+        "Retract the fundus cephalad over the liver edge.",
+        "Retract the infundibulum LATERALLY and inferiorly, never upwards. This opens the hepatocystic triangle and separates the two ducts.",
+        "Re-establish this retraction every time it is lost. Almost every difficult moment in this operation is a retraction problem."
+      ],
+      "structuresAtRisk": ["Common bile duct"],
+      "pitfalls": ["Cephalad traction on the infundibulum, which tents the common bile duct into the field."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.chole.cvs": {
+      "id": "step.chole.cvs", "kind": "checkpoint", "critical": true,
+      "title": "The Critical View of Safety",
+      "why": "This is the step the whole operation exists around. It is a positive confirmation of anatomy, and it is the only one that reliably prevents the classical bile duct injury.",
+      "how": [
+        "Clear the hepatocystic triangle of all fat and fibrous tissue. It does not require exposure of the common bile duct.",
+        "Separate the lower third of the gallbladder from the cystic plate.",
+        "Confirm that exactly two structures, and only two, are seen entering the gallbladder.",
+        "Pause, state the view aloud to the team, and document it. If you cannot achieve it, take a bail-out option."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Right hepatic artery", "Aberrant right hepatic duct"],
+      "pitfalls": ["Declaring the view when only the anterior aspect has been cleared.", "Achieving a 'nearly' critical view and proceeding anyway."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.chole.divide": {
+      "id": "step.chole.divide", "kind": "resection", "critical": true,
+      "title": "Clipping and dividing the cystic duct and artery",
+      "why": "Once a structure is divided, an error becomes an injury. Everything before this step is reversible; this step is not.",
+      "how": [
+        "Only after the Critical View: place clips on the cystic artery and duct, leaving an adequate stump on the retained side.",
+        "Divide between clips under direct vision, with the tips of the clip applier seen on both sides.",
+        "Consider intra-operative cholangiography where anatomy is uncertain or the duct may contain stones.",
+        "A cystic duct too wide or too inflamed for a clip needs a loop or a suture, not a bigger clip."
+      ],
+      "structuresAtRisk": ["Common bile duct", "Right hepatic artery"],
+      "pitfalls": ["Clipping with the far tip out of view.", "Dividing before the view, intending to 'see better afterwards'."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.chole.plate": {
+      "id": "step.chole.plate", "kind": "resection",
+      "title": "Separating the gallbladder from the cystic plate",
+      "why": "The plane between the gallbladder and the cystic plate is nearly bloodless. Straying above it bleeds from the liver; straying below it perforates the gallbladder.",
+      "how": [
+        "Work in the areolar plane with gentle counter-traction, hook diathermy in short controlled bursts.",
+        "Before detaching the fundus, inspect the gallbladder bed and the clips one final time while the gallbladder is still held.",
+        "Deal with a perforation promptly: retrieve spilled stones and irrigate."
+      ],
+      "structuresAtRisk": ["Liver parenchyma", "Ducts of Luschka in the cystic plate"],
+      "pitfalls": ["Detaching the fundus before inspecting the bed, losing the retraction that exposes it."],
+      "review": { "status": "ai_drafted" }
+    }
+  },
+  "media": {
+    "anatomy": ["med.surgx.calot-triangle"],
+    "criticalSafety": ["med.surgx.cvs-diagram"]
+  }
+}

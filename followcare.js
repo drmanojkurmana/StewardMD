@@ -19,7 +19,10 @@
 
   // ---- pure view-model layer (testable) ----------------------------------------------------
   var ESC = {
-    red:    { label: "Urgent", rank: 3, color: "#b3261e", bg: "#fdeceb", icon: "⚠" },
+    // U+FE0E = text presentation. Without it iOS renders a bare U+26A0 as the colour emoji, so the
+    // most severe badge in a clinical list picks up a yellow-and-black glyph that fights its own
+    // red styling and matches nothing else in the app.
+    red:    { label: "Urgent", rank: 3, color: "#b3261e", bg: "#fdeceb", icon: "\u26a0\ufe0e" },
     orange: { label: "Review", rank: 2, color: "#8a5a00", bg: "#fdf1dc", icon: "●" },
     yellow: { label: "Watch",  rank: 1, color: "#8a6d00", bg: "#fbf6e0", icon: "○" },
     green:  { label: "On track", rank: 0, color: "#127a52", bg: "#e7f6ee", icon: "✓" },
@@ -149,7 +152,10 @@
       ".fc-ov{position:fixed;inset:0;z-index:9600;background:rgba(8,18,24,.5);backdrop-filter:blur(3px);display:flex;justify-content:center;align-items:flex-start;overflow:auto;padding:0}",
       ".fc-sheet{background:var(--panel,#fff);color:var(--ink,#14202b);width:100%;max-width:620px;min-height:100%;box-shadow:0 20px 60px -20px rgba(0,0,0,.5);display:flex;flex-direction:column}",
       ".fc-hd{position:sticky;top:0;background:#0e6e63;color:#fff;padding:calc(14px + env(safe-area-inset-top)) 16px 14px;display:flex;align-items:center;gap:10px;z-index:2}",
-      ".fc-hd b{font-size:16px;font-weight:800}.fc-hd .fc-x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:34px;height:34px;border-radius:9px;font-size:18px;cursor:pointer}",
+      // The close control is the most-tapped thing on this overlay and it was 34x34 - under the 44x44
+      // minimum, on a surface used one-handed on a ward round. The box grows; the header padding
+      // already had room for it.
+      ".fc-hd b{font-size:16px;font-weight:800}.fc-hd .fc-x{margin-left:auto;background:rgba(255,255,255,.16);border:none;color:#fff;width:44px;height:44px;border-radius:11px;font-size:20px;line-height:1;cursor:pointer;display:inline-flex;align-items:center;justify-content:center}",
       ".fc-bd{padding:16px 16px calc(16px + env(safe-area-inset-bottom));flex:1}",
       ".fc-sum{display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap}",
       ".fc-sect{font:800 11px var(--sans,system-ui);letter-spacing:.08em;color:var(--slate,#5a7184);margin:18px 0 8px;padding:0 2px}",
@@ -256,7 +262,33 @@
       ".mai-dot{animation:maiPulse 2.4s ease-out infinite}",
       // StewardMD corner watermark — same masked-logo technique as ONCqis's .oh-hero-mark
       // (onco-home.css), so every module hero card carries the identical brand mark.
-      ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}"
+      ".mai-mark{position:absolute;right:-14px;bottom:-20px;width:128px;height:128px;opacity:.16;-webkit-mask:url(/logo.png) center/contain no-repeat;mask:url(/logo.png) center/contain no-repeat;background:#fff;pointer-events:none}",
+
+      /* == Keyboard focus =====================================================================
+       * There was exactly ONE :focus rule in this whole module, so a doctor driving it from an
+       * external keyboard (or any switch/AT user) had no idea where they were. Browser defaults do
+       * not survive here because these are restyled buttons and divs. :focus-visible keeps it off
+       * the pointer path, so nothing changes for touch. */
+      ".fc-sheet :focus-visible{outline:2.5px solid #0e6e63;outline-offset:2px;border-radius:10px}",
+      // On the teal header a teal ring is invisible, so the ring inverts there.
+      ".fc-hd :focus-visible{outline-color:#fff;outline-offset:2px}",
+      "body.dark .fc-sheet :focus-visible,body.v3-dark .fc-sheet :focus-visible{outline-color:#5eead4}",
+
+      /* == Reduced motion =====================================================================
+       * The JS guard (_RM) only covers the motion.dev helpers. It never covered the CSS: UI v2 adds
+       * transitions and :active transforms, and the MAiTRI hero runs .mai-aura and .mai-dot as
+       * INFINITE animations. Continuous unstoppable motion on a clinical dashboard is the exact
+       * thing this media query exists for, and it is a vestibular trigger, not a taste preference. */
+      "@media (prefers-reduced-motion:reduce){",
+      "  .fc-sheet *,.fc-sheet *::before,.fc-sheet *::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important}",
+      "  .fc-sheet .mai-aura{animation:none;opacity:.5}",
+      "  .fc-sheet .fc-btn:active,.fc-sheet .fc-row:active{transform:none}",
+      "}",
+
+      /* == Dark mode: the one chip that never got a dark rule =================================
+       * .fc-soon is a light amber pill (#ffe9c7) on what becomes a dark card, so it glowed as the
+       * brightest thing on the screen while marking the LEAST important item (a not-yet feature). */
+      "body.dark .fc-sheet .fc-act .fc-soon,body.v3-dark .fc-sheet .fc-act .fc-soon{background:rgba(230,162,60,.18);color:#f0c060}"
     ].join("");
   }
   function ensureStyle() { if (mounted) return; var s = document.createElement("style"); s.id = "fc-style"; s.textContent = css(); document.head.appendChild(s); mounted = true; }
@@ -330,8 +362,14 @@
       body.appendChild(h("div", { "class": "fc-sum" }, [
         pill(c.red + " urgent", ESC.red), pill(c.orange + " review", ESC.orange), pill(c.green + " on track", ESC.green)
       ]));
-      body.appendChild(h("button", { "class": "fc-btn", style: "margin-bottom:8px;background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:8px", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:20px;height:20px;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI dashboard</span>' }));
-      body.appendChild(h("button", { "class": "fc-btn", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      // The two primary actions sit on ONE row: they are siblings, not a sequence, and stacking
+      // them pushed the recovery board (the actual content of this screen) below the fold.
+      // Equal columns so neither reads as the more important one. min-height:46px on .fc-btn keeps
+      // both above the touch minimum even at half width.
+      body.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px" }, [
+        h("button", { "class": "fc-btn", style: "background:linear-gradient(135deg,#0e7d70,#0b544c);display:flex;align-items:center;justify-content:center;gap:7px;padding:12px 10px;line-height:1.2", onclick: function () { renderMaitri(body); }, html: '<img src="/maitri-logo.png" alt="" aria-hidden="true" style="width:19px;height:19px;flex:0 0 auto;object-fit:contain;filter:brightness(0) invert(1)">' + '<span style="font-weight:800">MAiTRI</span>' }),
+        h("button", { "class": "fc-btn", style: "padding:12px 10px;line-height:1.2", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
       if (voiceEnabled()) body.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & ambulance settings" }));
       if (!list.length) { body.appendChild(h("div", { "class": "fc-empty", text: "No active recovery episodes yet. Enroll a discharged patient to begin." })); return; }
       body.appendChild(h("div", { "class": "fc-sect", text: "RECOVERY BOARD" }));
@@ -957,17 +995,17 @@
   }
   function maitriHero(sv) {
     var on = !!(sv && sv.voice && sv.voice.enabled);
-    var wrap = h("div", { "class": "mai-hero", style: "border-radius:20px;padding:22px 18px 16px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
+    var wrap = h("div", { "class": "mai-hero", style: "border-radius:16px;padding:18px 14px 13px;margin:2px 0 14px;color:#fff;position:relative;overflow:hidden;text-align:center" });
     wrap.innerHTML =
       '<div class="mai-aura"></div>' +
-      '<div style="position:absolute;top:12px;right:12px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
+      '<div style="position:absolute;top:10px;right:10px;z-index:2;display:flex;align-items:center;gap:6px;background:rgba(255,255,255,' + (on ? ".2" : ".1") + ');padding:5px 10px;border-radius:999px;font-size:10.5px;font-weight:800;border:1px solid rgba(255,255,255,.22)">' +
         '<span class="mai-dot" style="width:7px;height:7px;border-radius:50%;background:' + (on ? "#7CF5C6" : "#ffd27a") + '"></span>' + (on ? "Live" : "Standby") + '</div>' +
       '<div style="position:relative;z-index:1">' +
-        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:88px;height:88px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
+        '<img src="/maitri-logo.png" alt="MAiTRI" style="display:block;margin:2px auto 4px;width:70px;height:70px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 5px 12px rgba(0,0,0,.4)) drop-shadow(0 0 20px rgba(94,234,212,.7))">' +
         // The real brand lockup (title + tagline, cropped from the official logo file) rather than a
         // CSS re-typeset — guarantees an exact match to the "MAiTRI" wordmark and its rounded "i".
-        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:6px auto 0;width:210px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
-        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:12px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
+        '<img src="/maitri-wordmark.png" alt="MAiTRI — Medical Adaptive Intelligence for Treatment &amp; Recovery Integration" style="display:block;margin:5px auto 0;width:168px;max-width:100%;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 14px rgba(94,234,212,.4))">' +
+        '<div style="display:inline-flex;align-items:center;gap:6px;margin-top:10px;background:rgba(94,234,212,.14);border:1px solid rgba(94,234,212,.32);border-radius:999px;padding:6px 13px;font-size:11px;font-weight:700;color:#bff3ea">' +
           '<span style="width:7px;height:7px;border-radius:50%;background:#7CF5C6"></span>Speaks 10 Indian languages + English</div>' +
       '</div>' +
       '<span class="mai-mark" aria-hidden="true"></span>';
@@ -1009,8 +1047,11 @@
       host.appendChild(maitriSection("Needs attention", urgent.length));
       if (!urgent.length) host.appendChild(h("div", { "class": "fc-empty", text: "No red flags right now. Everyone is on track." }));
       else urgent.slice(0, 8).forEach(function (ep) { host.appendChild(episodeRow(ep)); });
-      host.appendChild(h("button", { "class": "fc-btn", style: "margin-top:10px", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation settings" }));
-      host.appendChild(h("button", { "class": "fc-btn sec", style: "margin-top:8px", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" }));
+      // Same pairing as the dashboard, so the two screens do not disagree about how actions look.
+      host.appendChild(h("div", { style: "display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px" }, [
+        h("button", { "class": "fc-btn", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderVoiceSettings(body); }, text: "Voice & escalation" }),
+        h("button", { "class": "fc-btn sec", style: "padding:12px 10px;font-size:13.5px;line-height:1.25", onclick: function () { renderEnroll(body); }, text: "+ Enroll a patient" })
+      ]));
     }).catch(function () {
       host.innerHTML = ""; host.appendChild(maitriHero(null));
       host.appendChild(h("div", { "class": "fc-empty", text: "Could not load MAiTRI. Check your connection." }));

@@ -3612,6 +3612,200 @@
       return { v:r1(py), u:"pack-years", i:"Cumulative smoking exposure (1 pack-year = 20 cigarettes/day for 1 year). ≥ ~20–30 pack-years markedly raises lung-cancer and COPD risk. Ref: standard definition." };
     } },
 
+  { id:"ccs_angina", cat:"Cardiology", icon:"", title:"CCS Angina Classification",
+    desc:"Canadian Cardiovascular Society class of effort angina (I to IV).",
+    inputs:[
+      { id:"g", label:"Limitation of ordinary activity", type:"select", opts:[
+        {v:"1",t:"I - Ordinary activity does not cause angina; angina only with strenuous, rapid or prolonged exertion"},
+        {v:"2",t:"II - Slight limitation: angina on walking or climbing stairs rapidly, uphill, after meals, in cold or wind, under stress, or in the first hours after waking. Walking MORE than two blocks on the level, or climbing MORE than one flight at a normal pace, is still possible"},
+        {v:"3",t:"III - Marked limitation: angina walking one or two blocks on the level, or one flight of stairs at normal pace"},
+        {v:"4",t:"IV - Unable to carry out any physical activity without discomfort; angina may be present at rest"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      // There is no CCS class 0. Anything outside I to IV is an error, not an empty result.
+      if(!(g>=1&&g<=4)) return ERR;
+      var roman=["","I","II","III","IV"][g];
+      var i=["",
+        "Class I. Ordinary activity such as walking or climbing stairs does not cause angina; it appears only with strenuous, rapid or prolonged exertion.",
+        "Class II. Slight limitation of ordinary activity.",
+        "Class III. Marked limitation of ordinary physical activity.",
+        "Class IV. Angina with any activity, and possibly at rest."][g];
+      return { v:roman, u:"CCS class", i:i+" The CCS scale runs I to IV; THERE IS NO CLASS 0, and a class must be written in Roman numerals to avoid being read as NYHA. A class rising over days or weeks, or angina appearing at rest, is unstable angina regardless of the absolute class. Ref: Campeau L, Circulation 1976 (CCS grading)." };
+    } },
+
+  { id:"mrc_power", cat:"Neurology", icon:"", title:"MRC Muscle Power Grading",
+    desc:"Medical Research Council 0 to 5 scale for a single muscle group.",
+    inputs:[
+      { id:"g", label:"Best contraction observed", type:"select", opts:[
+        {v:"0",t:"0 - No contraction"},
+        {v:"1",t:"1 - Flicker or trace of contraction"},
+        {v:"2",t:"2 - Active movement with gravity eliminated"},
+        {v:"3",t:"3 - Active movement against gravity"},
+        {v:"4",t:"4 - Active movement against gravity and resistance"},
+        {v:"5",t:"5 - Normal power"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g<=1 ? "Essentially no useful movement."
+            : g===2 ? "Moves only with gravity eliminated. The change from 2 to 3 is the functionally important step."
+            : g===3 ? "Antigravity movement: the threshold at which a limb becomes functionally useful."
+            : g===4 ? "Against resistance but less than normal. Grade 4 spans a wide range, so record 4-, 4 or 4+."
+            : "Normal power for that muscle, age and build.";
+      return { v:g, u:"MRC grade", i:i+" Grade each muscle GROUP separately and record both sides; a single global number hides the pattern that localises the lesion. Ref: MRC scale." };
+    } },
+
+  { id:"ninds_reflex", cat:"Neurology", icon:"", title:"NINDS Myotactic Reflex Scale",
+    desc:"Standardised 0 to 4 grading of a deep tendon reflex.",
+    inputs:[
+      { id:"g", label:"Reflex response", type:"select", opts:[
+        {v:"0",t:"0 - Absent"},
+        {v:"1",t:"1 - Small, less than normal; trace, or present only with reinforcement"},
+        {v:"2",t:"2 - Lower half of the normal range"},
+        {v:"3",t:"3 - Upper half of the normal range"},
+        {v:"4",t:"4 - Enhanced, more than normal; includes clonus"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g===0 ? "Absent. Confirm with reinforcement before recording it as absent."
+            : g===1 ? "Diminished, or present only on reinforcement."
+            : (g===2||g===3) ? "Within the normal range."
+            : "Brisk. Note clonus separately in words if present.";
+      return { v:g, u:"NINDS grade", i:i+" Grades 2 and 3 are both NORMAL, which is why this scale is preferred to plus signs. Asymmetry between sides matters more than the absolute grade. Ref: Hallett M, Neurology 1993;43:2723." };
+    } },
+
+  { id:"levine_murmur", cat:"Cardiology", icon:"", title:"Levine Grading (Systolic Murmur)",
+    desc:"Freeman and Levine 1 to 6 grading of a systolic murmur.",
+    inputs:[
+      { id:"g", label:"Loudness", type:"select", opts:[
+        {v:"1",t:"1 - So faint it is heard only with special effort, after some seconds"},
+        {v:"2",t:"2 - Faint, but immediately audible"},
+        {v:"3",t:"3 - Moderately loud"},
+        {v:"4",t:"4 - Very loud"},
+        {v:"5",t:"5 - Very loud, with a thrill; audible with the chestpiece PARTLY off the chest"},
+        {v:"6",t:"6 - Audible with the chestpiece ENTIRELY off the chest wall"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var thrill = g>=4 ? "A thrill is present by definition from grade 4 upwards." : "No thrill at this grade; a palpable thrill would make it at least grade 4.";
+      return { v:g, u:"/6", i:"Grade "+g+" of 6. "+thrill+" Loudness does NOT track severity: a small ventricular septal defect can be deafening and severe aortic stenosis can be quiet when the stroke volume falls. Ref: Levine SA, JAMA 1933;101:436." };
+    } },
+
+  { id:"diastolic_murmur", cat:"Cardiology", icon:"", title:"Diastolic Murmur Grading",
+    desc:"Four point grading of a diastolic murmur.",
+    inputs:[
+      { id:"g", label:"Loudness", type:"select", opts:[
+        {v:"1",t:"1 - Very soft"},
+        {v:"2",t:"2 - Soft"},
+        {v:"3",t:"3 - Loud"},
+        {v:"4",t:"4 - Very loud"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      return { v:g, u:"/4", i:"Grade "+g+" of 4. A thrill is present at grade 4. Diastolic murmurs are graded out of FOUR, not six; quoting a diastolic murmur out of six is a common and avoidable error. Any diastolic murmur is pathological. Ref: standard four point scale." };
+    } },
+
+  { id:"pulse_grade", cat:"Cardiology", icon:"", title:"Peripheral Pulse Grading",
+    desc:"Zero to 4+ grading of a palpated pulse.",
+    inputs:[
+      { id:"g", label:"Pulse", type:"select", opts:[
+        {v:"0",t:"0 - Not palpable"},
+        {v:"1",t:"1+ - Faint"},
+        {v:"2",t:"2+ - Slightly diminished"},
+        {v:"3",t:"3+ - Normal"},
+        {v:"4",t:"4+ - Bounding"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var i = g===0 ? "Absent. Confirm with Doppler before recording absence, and compare with the other side."
+            : g===1 ? "Faint. Suggests reduced flow; compare sides and check the rest of the arterial tree."
+            : g===2 ? "Slightly diminished."
+            : g===3 ? "Normal."
+            : "Bounding. Consider a hyperdynamic circulation: anaemia, fever, thyrotoxicosis, aortic regurgitation, or CO2 retention.";
+      return { v:g, u:"+", i:i+" CAUTION, TWO SCALES ARE IN USE: on this 0 to 4+ scale 3+ is normal, but on the Bates 0 to 4+ scale 2+ is the normal expected pulse and 3+ means increased. State which scale you are using when you document, or the number means nothing to the next reader. Always record both sides. Ref: 0 to 4+ peripheral pulse scale." };
+    } },
+
+  { id:"ehra_af", cat:"Cardiology", icon:"", title:"EHRA Symptom Score (Atrial Fibrillation)",
+    desc:"European Heart Rhythm Association grading of AF-related symptoms.",
+    inputs:[
+      { id:"g", label:"Symptoms attributable to AF", type:"select", opts:[
+        {v:"1",t:"I - No symptoms"},
+        {v:"2",t:"IIa - Mild symptoms; normal daily activity not affected"},
+        {v:"3",t:"IIb - Moderate symptoms; daily activity not affected but symptoms trouble the patient"},
+        {v:"4",t:"III - Severe symptoms; normal daily activity affected"},
+        {v:"5",t:"IV - Disabling symptoms; normal daily activity discontinued"} ] }
+    ],
+    compute:function(v){
+      if(v.g===undefined||v.g==="") return ERR;
+      var g=+v.g;
+      var lbl=["","I","IIa","IIb","III","IV"][g];
+      var i = g<=2 ? "Symptoms do not limit activity. Rate control has traditionally been reasonable here, but since EAST-AFNET 4 early rhythm control is favoured in selected patients regardless of symptom burden, so the score alone does not decide the strategy."
+            : g===3 ? "Symptoms trouble the patient without limiting activity. The IIa to IIb distinction exists precisely to capture this."
+            : "Activity is limited or has stopped, which strengthens the case for a rhythm control strategy.";
+      return { v:lbl, u:"EHRA", i:"EHRA "+lbl+". "+i+" This scores SYMPTOMS only. It says nothing about stroke risk, which is CHA2DS2-VASc, or bleeding risk, which is HAS-BLED. Ref: EHRA/ESC." };
+    } },
+
+  { id:"framingham_hf", cat:"Cardiology", icon:"", title:"Framingham Criteria (Heart Failure)",
+    desc:"Two major, or one major and two minor, make the clinical diagnosis.",
+    inputs:[
+      { id:"major", label:"MAJOR criteria present", type:"number", step:"1",
+        hint:"PND or orthopnoea, neck vein distension, crackles, cardiomegaly, acute pulmonary oedema, S3 gallop, raised JVP >16 cmH2O, hepatojugular reflux, weight loss >4.5 kg in 5 days on treatment" },
+      { id:"minor", label:"MINOR criteria present", type:"number", step:"1",
+        hint:"Bilateral ankle oedema, nocturnal cough, dyspnoea on ordinary exertion, hepatomegaly, pleural effusion, tachycardia >120/min, vital capacity reduced by a third" }
+    ],
+    compute:function(v){
+      if(!ok(v.major)||!ok(v.minor)||v.major<0||v.minor<0) return ERR;
+      if(v.major>9||v.minor>7) return ERR;   // 9 major and 7 minor criteria exist; more means double counting
+      var met = (v.major>=2) || (v.major>=1 && v.minor>=2);
+      var i = met ? "Criteria MET for the clinical diagnosis of heart failure (2 major, or 1 major plus 2 minor)."
+                  : "Criteria NOT met (needs 2 major, or 1 major plus 2 minor).";
+      return { v: met?"Met":"Not met", u:"", i:i+" EACH CRITERION COUNTS ONCE: neck vein distension and a measured venous pressure above 16 cmH2O are the same physical sign, not two findings. A minor criterion counts only if it is not attributable to another condition. These are CLINICAL criteria and do not replace echocardiography or natriuretic peptides. Ref: Framingham Heart Study." };
+    } },
+
+  { id:"alcohol_units", cat:"General", icon:"", title:"Alcohol Units (UK) and weekly intake",
+    desc:"Units in a drink from volume and ABV, plus the weekly total.",
+    inputs:[
+      { id:"ml", label:"Volume of the drink", type:"number", unit:"mL", step:"5" },
+      { id:"abv", label:"Alcohol by volume (ABV)", type:"number", unit:"%", step:"0.5" },
+      { id:"perweek", label:"Drinks of this size per week", type:"number", step:"1" }
+    ],
+    compute:function(v){
+      if(!ok(v.ml)||!ok(v.abv)||v.ml<0||v.abv<0||v.abv>100) return ERR;
+      var units=(v.ml*v.abv)/1000;                 // 1 UK unit = 10 mL (8 g) pure ethanol
+      var grams=units*8;
+      var msg="1 unit = 10 mL (8 g) pure ethanol. This drink = "+r1(units)+" units ("+r1(grams)+" g ethanol).";
+      if(ok(v.perweek)&&v.perweek>0){
+        var wu=units*v.perweek, wg=wu*8, gday=wg/7;
+        msg+=" Weekly: "+r1(wu)+" units ("+r1(wg)+" g). ";
+        msg+= wu>14 ? "ABOVE the 14 units/week low-risk threshold for men and women. " : "Within the 14 units/week low-risk threshold. ";
+        msg+= gday>=20 ? "Daily intake ~"+r1(gday)+" g/day is at or above the threshold where alcohol-related liver disease risk begins: about 30 g/day for men and about 20 g/day for women." : "Daily average ~"+r1(gday)+" g/day.";
+      }
+      msg+=" Continuous daily drinking carries more liver risk than intermittent; at least two alcohol-free days a week are advised. Women reach higher blood ethanol levels than men for the same intake (smaller volume of distribution). Ref: standard UK unit definition.";
+      return { v:r1(units), u:"units", i:msg };
+    } },
+
+  { id:"smoking_index", cat:"General", icon:"", title:"Smoking Index",
+    desc:"Cigarettes per day x years smoked, with severity grading.",
+    inputs:[
+      { id:"cpd", label:"Cigarettes per day", type:"number", step:"1" },
+      { id:"years", label:"Years smoked", type:"number", step:"0.5" }
+    ],
+    compute:function(v){
+      if(!ok(v.cpd)||!ok(v.years)||v.cpd<0||v.years<0) return ERR;
+      var si=v.cpd*v.years;
+      var band = si<100 ? "Mild smoker" : (si<=300 ? "Moderate smoker" : "Heavy smoker");   // 100 to 300 inclusive = moderate
+      var msg=band+" (SI under 100 mild, 100 to 300 moderate, above 300 heavy).";
+      if(si>300) msg+=" Lung cancer is common above a smoking index of 300.";
+      msg+=" Smoking index is not the same as pack-years: it does not divide by 20, so the numbers are not interchangeable. Use PACK-YEARS for screening: USPSTF 2021 recommends annual low-dose CT from age 50 to 80 with 20 or more pack-years, still smoking or quit within 15 years (the older age 55 / 30 pack-year rule is superseded). India has no LDCT screening programme and high TB prevalence raises false positives. The <100 / 101-300 / >300 bands and the lung-cancer association above 300 are Indian textbook convention. Ref: USPSTF 2021; smoking index per standard Indian texts.";
+      return { v:r1(si), u:"", i:msg };
+    } },
+
   { id:"phq2", cat:"Psychiatry", icon:"", title:"PHQ-2 (Depression Screen)",
     desc:"Ultra-brief screen for depression over the past 2 weeks.",
     inputs:[
@@ -7430,10 +7624,32 @@
     try{ if(window.SMD_APPLE_WATCH_SYNC) window.SMD_APPLE_WATCH_SYNC(); }catch(e){}
   }
 
+  // Card markup, shared between the browse (grouped-by-category) and search (flat) layouts below.
+  function calcCardHTML(c){
+    var favOn=isWatchFav(c.id);
+    return '<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
+      '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
+      '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
+      (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
+    '</div>';
+  }
   function renderList(){
     var el=root.querySelector("#mcList");
+    // BUG (2026-08-23, WhatsApp bug report): typing already filtered live (see the #mcSearch
+    // "input" listener) — the actual gap was presentation: the category chips + grouped headers
+    // stayed on screen while searching, so a match could sit well below the fold instead of
+    // appearing right under the search box the way it does here (and in most search UIs).
+    // Active search now hides the chip row and drops the grouping for a flat "RESULTS: N" list —
+    // exactly the reference screenshot's layout. Browsing (no query) is completely unchanged.
+    var catsEl=root.querySelector("#mcCats"); if(catsEl) catsEl.style.display=q?"none":"";
     var list=CALCS.filter(matches);
     if(!list.length){ el.innerHTML='<div class="mc-empty">'+(favOnly&&!q&&!watchFavs().length?'No starred calculators yet — tap the '+mcIco("star")+' on any calculator to pin it here (and to your Apple Watch).':'No calculators match “'+esc(q)+'”.')+'</div>'; return; }
+    if(q){
+      el.innerHTML='<div class="mc-grp-h">Results <span>'+list.length+'</span></div><div class="mc-grid">'+list.map(calcCardHTML).join("")+'</div>';
+      wireListEvents(el);
+      if(openId) renderPanel(openId);
+      return;
+    }
     // group by category preserving order
     var html="";
     CAT_ORDER.forEach(function(cat){
@@ -7444,25 +7660,19 @@
         return c.cat===cat;
       });
       if(!inCat.length) return;
-      html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">';
-      inCat.forEach(function(c){
-        var favOn=isWatchFav(c.id);
-        html+='<div class="mc-card'+(openId===c.id?" open":"")+'" data-id="'+c.id+'" style="position:relative">'+
-          '<button data-fav="'+c.id+'" aria-label="'+(favOn?"Remove from":"Add to")+' Apple Watch" title="Show on Apple Watch" style="position:absolute;top:6px;right:8px;background:none;border:none;cursor:pointer;color:'+(favOn?"#e0a800":"#c2c2c2")+';z-index:2;padding:2px;line-height:0">'+mcIco("star","mc-fav"+(favOn?" on":""))+'</button>'+
-          '<button class="mc-card-head" data-open="'+c.id+'" style="padding-right:34px"><span class="mc-ic">'+mcCatIco(c.cat)+'</span><span class="mc-card-main"><span class="mc-card-t">'+esc(c.title)+'</span><span class="mc-card-d">'+esc(c.desc)+'</span></span><span class="mc-chev">'+(openId===c.id?"▾":"▸")+'</span></button>'+
-          (openId===c.id?'<div class="mc-panel" id="mcPanel_'+c.id+'"></div>':"")+
-        '</div>';
-      });
-      html+='</div>';
+      html+='<div class="mc-grp-h">'+mcCatIco(cat)+" "+esc(cat)+'</div><div class="mc-grid">'+inCat.map(calcCardHTML).join("")+'</div>';
     });
     el.innerHTML=html;
+    wireListEvents(el);
+    if(openId) renderPanel(openId);
+  }
+  function wireListEvents(el){
     el.querySelectorAll("[data-open]").forEach(function(b){
       b.addEventListener("click", function(){ var id=b.getAttribute("data-open"); openId=(openId===id?null:id); renderList(); });
     });
     el.querySelectorAll("[data-fav]").forEach(function(b){
       b.addEventListener("click", function(ev){ ev.stopPropagation(); toggleWatchFav(b.getAttribute("data-fav")); renderList(); });
     });
-    if(openId) renderPanel(openId);
   }
 
   function inputHTML(c){

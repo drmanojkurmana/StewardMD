@@ -1,0 +1,147 @@
+{
+  "_comment": "SURGX evidence index. Each record is OUR OWN explanation of what a source says and why it matters, plus a pointer to the authoritative document. It deliberately does NOT reproduce recommendation tables, algorithms or figures: summarising with attribution is ordinary scholarly use, reproducing the artefact is not ours to do. surgx-evidence.js validateRecord() rejects any record with a `verbatim` field or without an originalSummary.",
+  "schemaVersion": 1,
+  "updated": "2026-08-24",
+  "records": [
+    {
+      "id": "ev.atls",
+      "title": "The ABCDE primary survey",
+      "category": "trauma",
+      "topics": ["trauma", "resuscitation", "airway", "shock"],
+      "originalSummary": "The primary survey exists because injured patients die in a predictable order, and treating problems in that order buys the most time. Its real contribution is not the letters but the discipline: a problem found at A is treated before anyone moves to B, and any deterioration sends you back to the start. The evidence base for the sequence itself is largely observational and consensus-driven; what is well supported is that a standardised, rehearsed team process reduces missed injuries and shortens time to definitive care.",
+      "source": { "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" },
+      "protocolRefs": ["atls-primary-survey", "chest-trauma", "burns"]
+    },
+    {
+      "id": "ev.damage-control",
+      "title": "Damage control resuscitation and the lethal triad",
+      "category": "trauma",
+      "topics": ["trauma", "haemorrhage", "transfusion", "resuscitation"],
+      "originalSummary": "Hypothermia, acidosis and coagulopathy reinforce one another, and each one makes the next harder to correct. The practical consequence is a change in what a first operation is for: control bleeding and contamination, then leave, correct the physiology in intensive care, and return. The associated resuscitation strategy favours early blood components over crystalloid, keeps the patient warm, and accepts a lower blood pressure until the bleeding is controlled. The strongest single piece of evidence in this area is for early antifibrinolytic therapy in traumatic haemorrhage, where the benefit is clearly time-dependent.",
+      "source": { "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "version": "NG39", "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-08-24" },
+      "protocolRefs": ["haemorrhagic-shock", "atls-primary-survey"]
+    },
+    {
+      "id": "ev.source-control",
+      "title": "Why source control beats broader antibiotics",
+      "category": "infection",
+      "topics": ["sepsis", "infection", "abdomen", "abscess", "source control"],
+      "originalSummary": "Antimicrobials work on organisms that are perfused and dividing. Pus, dead tissue, an obstructed duct and a colonised implant are none of those things, which is why a patient failing on an appropriate antibiotic almost never needs a broader one. The consistent finding across intra-abdominal infection literature is that delay to source control, rather than choice of agent, drives mortality. The practical corollary is to choose the least invasive intervention that will actually control the source, and to re-image or re-explore rather than escalate the prescription.",
+      "source": { "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
+      "protocolRefs": ["surgical-sepsis", "postop-deterioration", "abscess"]
+    },
+    {
+      "id": "ev.ssc",
+      "title": "The sepsis bundle, and the surgical element it adds",
+      "category": "resuscitation",
+      "topics": ["sepsis", "shock", "resuscitation", "antibiotics"],
+      "originalSummary": "The sepsis bundle is a set of time-bound actions - cultures, antimicrobials, fluid, lactate, vasopressor - whose benefit comes largely from the fact that they happen quickly rather than from any one of them individually. In surgical sepsis there is a sixth element that the general bundle understates: identifying and controlling the anatomical source. The lactate is the most useful repeated measurement, not because it diagnoses anything but because a lactate that will not fall is a source that has not been controlled.",
+      "source": { "org": "Surviving Sepsis Campaign", "title": "International guidelines for management of sepsis and septic shock", "year": 2021, "url": "https://www.sccm.org/SurvivingSepsisCampaign/Guidelines", "accessed": "2026-08-24" },
+      "protocolRefs": ["surgical-sepsis", "postop-deterioration"]
+    },
+    {
+      "id": "ev.cvs",
+      "title": "The Critical View of Safety",
+      "category": "hepatobiliary",
+      "topics": ["cholecystectomy", "biliary", "safety", "gallbladder"],
+      "originalSummary": "The classical bile duct injury happens because the common bile duct is mistaken for the cystic duct, usually after retraction that aligns the two. The Critical View of Safety is a positive confirmation of anatomy rather than a dissection technique: the hepatocystic triangle cleared, the lower third of the gallbladder separated from the cystic plate, and exactly two structures seen entering the gallbladder. Its power is that it is a checkpoint with a defined pass mark, which makes failure to achieve it a recognisable event that triggers a bail-out rather than a slower version of the same dissection.",
+      "source": { "org": "Society of American Gastrointestinal and Endoscopic Surgeons (SAGES)", "title": "Safe Cholecystectomy Program: Critical View of Safety and the universal culture of safety", "year": 2018, "url": "https://www.sages.org/safe-cholecystectomy-program/", "accessed": "2026-08-24" },
+      "procedureRefs": ["lap-cholecystectomy"]
+    },
+    {
+      "id": "ev.tg18",
+      "title": "Grading acute cholecystitis and cholangitis",
+      "category": "hepatobiliary",
+      "topics": ["cholecystitis", "cholangitis", "biliary", "grading"],
+      "originalSummary": "The value of a formal severity grade in biliary sepsis is that it separates three quite different patients who present similarly: the one for early cholecystectomy, the one for percutaneous drainage, and the one whose duct must be decompressed tonight. It also changes the conversation from an impression to a category, which is what makes it possible to hand over. The diagnostic criteria combine local signs, systemic inflammation and imaging, and the associated flowcharts tie each grade to a management pathway.",
+      "source": { "org": "Tokyo Guidelines Steering Committee", "title": "Tokyo Guidelines 2018 (TG18) for acute cholangitis and cholecystitis", "year": 2018, "version": "TG18", "url": "https://onlinelibrary.wiley.com/journal/18686982", "accessed": "2026-08-24" },
+      "protocolRefs": ["cholecystitis", "cholangitis"],
+      "procedureRefs": ["lap-cholecystectomy"]
+    },
+    {
+      "id": "ev.appendicitis",
+      "title": "Appendicitis: scoring, imaging and the non-operative option",
+      "category": "abdomen",
+      "topics": ["appendicitis", "abdomen", "scoring", "antibiotics"],
+      "originalSummary": "Scoring instruments in appendicitis earn their place at both ends: a low score with normal inflammatory markers safely avoids imaging and admission, and a high score in a typical patient supports operating without a CT. Ultrasound has good specificity but poor sensitivity, so a non-visualised appendix is not a negative test. Antibiotic-first management of selected uncomplicated appendicitis is genuinely supported by trial evidence, with a recurrence rate that must be part of the conversation rather than a footnote.",
+      "source": { "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: Jerusalem guidelines, 2020 update", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
+      "protocolRefs": ["acute_abdomen"],
+      "procedureRefs": ["appendicectomy"]
+    },
+    {
+      "id": "ev.ssti",
+      "title": "Skin and soft-tissue infection: what antibiotics can and cannot do",
+      "category": "infection",
+      "topics": ["cellulitis", "abscess", "necrotising", "infection"],
+      "originalSummary": "The central distinction is purulent versus non-purulent. A purulent collection is treated by drainage, with antibiotics as an adjunct for surrounding cellulitis, systemic features or immunocompromise. Non-purulent cellulitis is treated with antibiotics and elevation, and the commonest error is treating bilateral lower-leg venous change as infection. Necrotising infection sits outside both: it is a clinical and operative diagnosis, imaging delays it, and the extent of the first debridement is the strongest determinant of survival.",
+      "source": { "org": "Infectious Diseases Society of America (IDSA)", "title": "Practice guidelines for the diagnosis and management of skin and soft tissue infections", "year": 2014, "url": "https://www.idsociety.org/practice-guideline/skin-and-soft-tissue-infections/", "accessed": "2026-08-24" },
+      "protocolRefs": ["cellulitis", "abscess", "nec_sti"],
+      "procedureRefs": ["abscess-drainage"]
+    },
+    {
+      "id": "ev.diabetic-foot",
+      "title": "Diabetic foot infection: perfusion, bone and the deep specimen",
+      "category": "infection",
+      "topics": ["diabetic foot", "infection", "osteomyelitis", "ischaemia"],
+      "originalSummary": "Three things separate a diabetic foot infection from a soft-tissue infection elsewhere. Perfusion must be assessed in every case, because infection does not clear in an ischaemic foot however good the antibiotic. Bone involvement is common and is suggested by a positive probe-to-bone test at the bedside, long before imaging is conclusive. And the specimen that guides therapy is deep tissue or bone, not a superficial swab, which grows colonisers and misdirects treatment for weeks.",
+      "source": { "org": "International Working Group on the Diabetic Foot (IWGDF) / IDSA", "title": "Guidelines on the diagnosis and treatment of diabetes-related foot infections", "year": 2023, "url": "https://iwgdfguidelines.org/", "accessed": "2026-08-24" },
+      "protocolRefs": ["diabetic_foot"]
+    },
+    {
+      "id": "ev.ugib",
+      "title": "Upper GI bleeding: risk scores that work in both directions",
+      "category": "abdomen",
+      "topics": ["gi bleeding", "endoscopy", "transfusion", "varices"],
+      "originalSummary": "Upper gastrointestinal bleeding is one of the few areas where a pre-endoscopy score reliably identifies a patient who does not need admission at all, as well as one who must not leave the resuscitation room. Two other findings have changed practice more than any drug: a restrictive transfusion strategy improves outcomes outside massive haemorrhage, and in suspected variceal bleeding a splanchnic vasoconstrictor plus antibiotic prophylaxis started before endoscopy improves survival. Proton pump inhibition matters after endoscopy in high-risk non-variceal lesions, not routinely before it.",
+      "source": { "org": "National Institute for Health and Care Excellence (NICE)", "title": "Acute upper gastrointestinal bleeding in over 16s: management", "year": 2016, "url": "https://www.nice.org.uk/guidance/cg141", "accessed": "2026-08-24" },
+      "protocolRefs": ["upper-gi-bleed"]
+    },
+    {
+      "id": "ev.hernia",
+      "title": "Groin hernia: tension-free repair and the pain problem",
+      "category": "abdominal wall",
+      "topics": ["hernia", "mesh", "chronic pain", "groin"],
+      "originalSummary": "Mesh repair reduced recurrence to the point where the dominant long-term complication of groin hernia surgery is no longer recurrence but chronic pain. That reframes the operation: identifying and deliberately handling the three groin nerves is now as important as the mesh itself. The other consistent lesson is about the femoral canal - it must be inspected in every case, particularly in women, because a missed femoral hernia is the one that strangulates. Watchful waiting is a defensible option in minimally symptomatic reducible inguinal hernia in men.",
+      "source": { "org": "HerniaSurge Group", "title": "International guidelines for groin hernia management", "year": 2018, "url": "https://link.springer.com/journal/10029", "accessed": "2026-08-24" },
+      "procedureRefs": ["hernia-repair"],
+      "protocolRefs": ["hernia"]
+    },
+    {
+      "id": "ev.checklist",
+      "title": "The surgical safety checklist",
+      "category": "perioperative",
+      "topics": ["safety", "checklist", "perioperative", "never events"],
+      "originalSummary": "The checklist works less because of the items on it and more because it forces every member of the team to speak once, out loud, before the operation starts. That single change alters whether a scrub practitioner will challenge a surgeon later. Implementation quality matters enormously: a checklist recited while people continue working produces none of the measured benefit, which is why the sign-out - the part most often skipped when a list is running late - is the element most worth defending.",
+      "source": { "org": "World Health Organization", "title": "WHO Surgical Safety Checklist and implementation manual", "year": 2009, "url": "https://www.who.int/teams/integrated-health-services/patient-safety/research/safe-surgery", "accessed": "2026-08-24" },
+      "procedureRefs": ["appendicectomy", "lap-cholecystectomy", "hernia-repair", "laparotomy", "abscess-drainage"]
+    },
+    {
+      "id": "ev.ssi",
+      "title": "Preventing surgical site infection",
+      "category": "perioperative",
+      "topics": ["infection", "prophylaxis", "wound", "perioperative"],
+      "originalSummary": "Most surgical site infections come from the patient's own skin and gut flora, which is why the measures that work are unglamorous: an alcohol-based skin preparation allowed to dry, an antibiotic given within the hour before incision and stopped afterwards, normothermia, glycaemic control, and not closing a dirty wound. The measure that does not work, and that is still widely practised, is continuing prophylactic antibiotics for days after a clean operation; it increases resistance without reducing infection.",
+      "source": { "org": "World Health Organization", "title": "Global guidelines for the prevention of surgical site infection, 2nd edition", "year": 2018, "url": "https://www.who.int/publications/i/item/9789241550475", "accessed": "2026-08-24" },
+      "protocolRefs": ["wound_infection"],
+      "procedureRefs": ["laparotomy", "appendicectomy"]
+    },
+    {
+      "id": "ev.clavien",
+      "title": "Grading surgical complications consistently",
+      "category": "perioperative",
+      "topics": ["complications", "audit", "outcomes", "perioperative"],
+      "originalSummary": "The Clavien-Dindo classification grades a complication by the treatment it required rather than by how serious it felt, which is what makes it reproducible between surgeons and between units. Its practical value is in audit and in honest conversation: a unit that grades consistently can tell whether its outcomes are changing, and a surgeon who records a grade III has recorded something a reader can interpret without being there.",
+      "source": { "org": "Dindo, Demartines and Clavien", "title": "Classification of surgical complications: a new proposal with evaluation in a cohort of 6336 patients", "year": 2004, "url": "https://pubmed.ncbi.nlm.nih.gov/15273542/", "accessed": "2026-08-24" },
+      "protocolRefs": ["postop-deterioration"]
+    },
+    {
+      "id": "ev.icmr-amr",
+      "title": "Choosing an empiric regimen in India",
+      "category": "infection",
+      "topics": ["antibiotics", "resistance", "india", "stewardship", "infection"],
+      "originalSummary": "Empiric antimicrobial choice is a local question wearing the clothes of a global one. National surveillance in India shows resistance patterns, particularly among enteric Gram-negative organisms, that differ substantially from those the international guidelines were written around. The practical rule is to take the syndrome from the guideline and the agent from the local antibiogram, then de-escalate on culture with a documented stop date. StewardMD's own stewardship engine and antibiogram tools exist for exactly this step.",
+      "source": { "org": "Indian Council of Medical Research (ICMR)", "title": "Antimicrobial Resistance Surveillance Network annual report", "year": 2024, "url": "https://www.icmr.gov.in/", "accessed": "2026-08-24" },
+      "protocolRefs": ["surgical-sepsis", "acute_abdomen", "gi_perforation", "diabetic_foot"]
+    }
+  ]
+}

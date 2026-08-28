@@ -1,0 +1,75 @@
+{
+  "id": "rlq-pain-young-man",
+  "title": "Right iliac fossa pain",
+  "subtitle": "Emergency - who goes to theatre",
+  "simulation": true,
+  "levels": ["student", "intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "acute_abdomen",
+  "procedureRef": "appendicectomy",
+  "sources": [
+    { "id": "wses-app", "org": "World Society of Emergency Surgery (WSES)", "title": "Diagnosis and treatment of acute appendicitis: Jerusalem guidelines, 2020 update", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+  ],
+  "stem": "A 24-year-old man presents to the emergency department with 18 hours of abdominal pain. It began around the umbilicus and has since moved to the right iliac fossa. He has vomited twice and has not eaten since yesterday. He has no past medical history and takes nothing regularly.",
+  "vitals": { "Temp": "37.9 C", "HR": "104", "BP": "126/78", "RR": "18", "SpO2": "99% air" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "triage",
+      "prompt": "What is the first thing you do?",
+      "hint": "Think about what changes management in the next five minutes, not what confirms the diagnosis in the next five hours.",
+      "options": [
+        { "id": "a", "text": "Examine the abdomen, including the hernial orifices and the external genitalia, and give analgesia", "correct": true, "feedback": "Correct. Examination and analgesia together, and the genitalia are part of the examination in a young man with iliac fossa pain." },
+        { "id": "b", "text": "Order a CT abdomen and pelvis and review when it is done", "correct": false, "feedback": "Imaging before examination in a stable patient wastes time and misses the diagnosis you can make with your hands." },
+        { "id": "c", "text": "Withhold analgesia so the signs are not masked", "correct": false, "feedback": "This is a persistent myth. Adequate analgesia does not obscure peritonism and withholding it is not defensible." },
+        { "id": "d", "text": "Start intravenous antibiotics immediately", "correct": false, "feedback": "Blind antibiotics in an undifferentiated abdomen mask the picture and delay the decision that matters." }
+      ],
+      "why": "Two things happen first in any acute abdomen: a full examination and adequate analgesia. In a young man with right iliac fossa pain, testicular torsion is the diagnosis that is missed by not looking, and it has a shorter time window than appendicitis does.",
+      "missedRedFlags": ["Testicular torsion presenting as referred abdominal pain", "An obstructed inguinal hernia"],
+      "alternatives": ["A urine dipstick and a pregnancy test in the equivalent female patient are part of the same first pass, not a later step."],
+      "stepRef": "step.app.mobilise"
+    },
+    {
+      "id": "dp2", "phase": "assess",
+      "prompt": "He is tender at McBurney point with voluntary guarding. Testes are normal, hernial orifices intact. Where does the assessment go next?",
+      "hint": "You now have a working diagnosis. What would change it, and what would change its urgency?",
+      "options": [
+        { "id": "a", "text": "Apply a clinical scoring instrument, send bloods, and dip the urine", "correct": true, "feedback": "Correct. A score plus inflammatory markers plus urinalysis is the standard triage, and it identifies both the low-risk patient who can be observed and the high-risk one who should not wait." },
+        { "id": "b", "text": "Book theatre now on clinical grounds alone", "correct": false, "feedback": "Defensible in a florid case, but in a stable patient with voluntary guarding you have time to be right, and a normal appendicectomy rate is a real cost." },
+        { "id": "c", "text": "Discharge with safety-net advice and review in 24 hours", "correct": false, "feedback": "With migratory pain, fever, tachycardia and localised tenderness, this patient is not going home." },
+        { "id": "d", "text": "Start antibiotics and reassess in the morning", "correct": false, "feedback": "Antibiotics before a decision blur the picture, and 'reassess in the morning' is not a plan for a patient with an evolving abdomen." }
+      ],
+      "why": "Scoring instruments are useful here in both directions: a low score with normal inflammatory markers safely reduces imaging and admission, and a high score in a typical patient supports proceeding without a CT. Urinalysis matters because a ureteric stone and a urinary infection both mimic this.",
+      "missedRedFlags": ["Ileocaecal tuberculosis and enteric fever, which are important considerations in India and change the management entirely"],
+      "alternatives": ["Ultrasound first in a young patient to limit radiation; CT if the ultrasound is non-diagnostic and the picture stays unclear."]
+    },
+    {
+      "id": "dp3", "phase": "investigate",
+      "prompt": "White cell count 15.2, CRP 68, urine clear. Score is in the high-probability band. Ultrasound is equivocal because of bowel gas. What now?",
+      "hint": "An equivocal test does not reset the clinical picture to zero.",
+      "options": [
+        { "id": "a", "text": "Proceed to appendicectomy on the clinical picture and blood results", "correct": true, "feedback": "Correct. In a young man with a classical history, localised signs, raised inflammatory markers and a high score, an equivocal ultrasound does not lower the probability enough to change the plan." },
+        { "id": "b", "text": "CT abdomen and pelvis before any decision", "correct": false, "feedback": "Reasonable in an older patient or an atypical picture, but here it delays a decision that the clinical data already supports and adds radiation to a young man." },
+        { "id": "c", "text": "Repeat the ultrasound in 12 hours", "correct": false, "feedback": "Serial examination is a legitimate strategy, but serial ultrasound in a patient who already meets the threshold is delay dressed up as caution." },
+        { "id": "d", "text": "Treat with antibiotics alone and avoid an operation", "correct": false, "feedback": "Non-operative management is a genuine option for selected uncomplicated appendicitis, but it is a considered discussion with the patient, not a way to avoid a decision at 2am." }
+      ],
+      "why": "Ultrasound has good specificity but poor sensitivity for appendicitis, particularly when bowel gas obscures the view. A non-visualised appendix is not a negative test. The clinical picture plus inflammatory markers plus a high score already exceeds the operative threshold in this patient.",
+      "missedRedFlags": ["Treating a non-visualised appendix as a negative scan"],
+      "alternatives": ["Non-operative management with antibiotics is an evidence-supported alternative in selected uncomplicated appendicitis, with a recognised recurrence rate that the patient must be told about."]
+    },
+    {
+      "id": "dp4", "phase": "operate",
+      "prompt": "At laparoscopy the appendix is normal. What do you do?",
+      "hint": "The operation has already answered one question. What is the next one?",
+      "options": [
+        { "id": "a", "text": "Perform a systematic survey: terminal ileum, Meckel diverticulum, mesenteric nodes, pelvis, and in a female patient the tubes and ovaries", "correct": true, "feedback": "Correct. A normal appendix converts the operation into a diagnostic laparoscopy, and the survey is the whole point of being inside." },
+        { "id": "b", "text": "Remove the appendix anyway and close", "correct": false, "feedback": "Removing a normal appendix without looking further leaves the actual diagnosis inside the patient. Whether to remove a normal-looking appendix is a separate, secondary question." },
+        { "id": "c", "text": "Close immediately and treat conservatively", "correct": false, "feedback": "Closing without a survey wastes the one look you get, and the patient will still have pain in the morning." },
+        { "id": "d", "text": "Convert to open and explore", "correct": false, "feedback": "Laparoscopy gives a better survey of the pelvis than a small open incision does. Conversion here adds morbidity without adding information." }
+      ],
+      "why": "The commonest findings in a normal-appendix laparoscopy are mesenteric adenitis, terminal ileitis, a Meckel diverticulum and gynaecological pathology. Each is only found by looking for it. Whether to remove a macroscopically normal appendix is a separate decision, made after the survey and influenced by whether another cause has been found.",
+      "missedRedFlags": ["Closing without inspecting the terminal ileum, which is where Crohn disease and a Meckel diverticulum live"],
+      "alternatives": ["If a clear alternative diagnosis is found, many surgeons leave a normal appendix; if no cause is found, many remove it so the scar does not mislead the next clinician. Both are defensible; record the reasoning."],
+      "stepRef": "step.lap.survey"
+    }
+  ]
+}

@@ -39,7 +39,9 @@
     shield: '<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10Z"/><path d="M9 12l2 2 4-4"/>',
     spark: '<path d="M12 3l1.6 4.6L18 9l-4.4 1.4L12 15l-1.6-4.6L6 9l4.4-1.4Z"/><path d="M5 15l.7 1.9L8 18l-2.3.6L5 21l-.7-1.9L2 18l2.3-.6Z"/>',
     steth: '<path d="M4.5 3v6a4.5 4.5 0 0 0 9 0V3"/><path d="M4.5 3H3M13.5 3H12"/><path d="M9 13.5V16a5 5 0 0 0 10 0v-1.2"/><circle cx="19" cy="12.5" r="2.2"/>',
-    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>'
+    watch: '<rect x="6" y="6" width="12" height="12" rx="3"/><path d="M9 6l.7-3h4.6l.7 3M9 18l.7 3h4.6l.7-3"/><path d="M12 9v3l2 1"/>',
+    refresh: '<path d="M21 12a9 9 0 1 1-3-6.7"/><path d="M21 4v5h-5"/>',
+    download: '<path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/>'
   };
   function svg(name) {
     return '<svg viewBox="0 0 24 24" class="sbr-ic"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + (ICON[name] || "") + "</g></svg>";
@@ -102,7 +104,11 @@
     { id: "fundx", title: "FundX AI · Retinal (Beta)", sub: "AI-guided fundus imaging · reload to apply", def: false, key: "smd_fundx" },
     { id: "kardiox", title: "KardiQ X AI · ECG (Beta)", sub: "On-device 12-lead ECG interpretation · reload to apply", def: false, key: "smd_kardiox" },
     { id: "thorex", title: "ThoreX AI · Chest X-ray (Beta)", sub: "On-device chest X-ray interpretation · reload to apply", def: false, key: "smd_thorex" },
-    { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" }
+    { id: "sknx", title: "SknX AI · Dermatology (Beta)", sub: "Skin lesion / rash analysis · reload to apply", def: false, key: "smd_sknx" },
+    { id: "clinix", title: "CliniX · Clinical learning (Beta)", sub: "Bedside skills for students · reload to apply", def: false, key: "smd_clinix" },
+    { id: "clinixtutor", title: "MaiK Examiner (Beta)", sub: "AI review inside CliniX Viva, only when the free keyword grade can't judge it", def: false, key: "smd_clinix_tutor" },
+    { id: "surgx", title: "SURGX · Surgical Intelligence (Beta)", sub: "Notes, protocols, procedures, evidence, cases · reload to apply", def: true, key: "smd_surgx" },
+    { id: "surgxdraft", title: "SURGX draft content", sub: "Show surgical content that is not yet clinician-approved. Turn OFF before any non-tester release", def: true, key: "smd_surgx_draft" }
   ];
   function setToggle(id, key, on) {
     try {
@@ -270,6 +276,58 @@
     return html;
   }
 
+  // Software Update — Apple-style: Automatic-updates toggle + Check + Download & install.
+  // BUG (2026-08-23, user report): home.js has carried this exact UI since before the 1 Aug OTA
+  // teardown, but it was wired into home.js's OWN Settings-group builder, which stands down the
+  // moment this file sets window.SMD_SBR (see the file banner above) - so it has never actually
+  // rendered anywhere the user could reach it. Rebuilt here, in the live Settings page, using this
+  // file's own sbr-tg/sbr-sw markup (styled by THIS file's injectCSS, unlike home.js's - which
+  // never runs either, for the same reason).
+  function otaSectionHTML() {
+    try { if (!(window.SMD_OTA && SMD_OTA.available())) return ""; } catch (e) { return ""; }
+    var on = false; try { on = !!SMD_OTA.isAuto(); } catch (e) {}
+    var ver = "current"; try { ver = SMD_OTA.currentVersion() || "current"; } catch (e) {}
+    return '<div class="sbr-sec">Software Update</div>' +
+      '<div class="sbr-card"><div class="sbr-tg"><div class="sbr-tg-l"><span class="sbr-tg-t">Automatic updates</span>' +
+        '<span class="sbr-tg-s">Fetch new versions in the background</span></div>' +
+        '<button class="sbr-sw' + (on ? " on" : "") + '" data-ota-auto="1" role="switch" aria-checked="' + on + '" aria-label="Automatic updates"><span></span></button></div></div>' +
+      '<div class="sbr-note" id="otaStatus">Version ' + ver + '</div>' +
+      '<button class="sbr-row" id="otaCheck">' + svg("refresh") + '<span class="sbr-lbl">Check for updates</span></button>' +
+      '<button class="sbr-row" id="otaInstall" style="display:none">' + svg("download") + '<span class="sbr-lbl">Download &amp; install</span></button>';
+  }
+  // Wires the section rendered by otaSectionHTML() - separate from the generic [data-sbr-tg]
+  // delegation (setToggle()'s localStorage-flag model doesn't fit SMD_OTA.setAuto()) and from the
+  // generic [data-sbr-act] delegation (Check/Install need live status text + a pending-update
+  // handle between the two taps, not a fire-and-forget action).
+  function wireOtaSection(root) {
+    if (!(window.SMD_OTA && SMD_OTA.available())) return;
+    var autoSw = root.querySelector("[data-ota-auto]"), statusEl = root.querySelector("#otaStatus");
+    var checkBtn = root.querySelector("#otaCheck"), installBtn = root.querySelector("#otaInstall");
+    var pending = null;
+    if (autoSw) autoSw.addEventListener("click", function () {
+      var on = !autoSw.classList.contains("on");
+      try { SMD_OTA.setAuto(on); } catch (e) {}
+      autoSw.classList.toggle("on", on); autoSw.setAttribute("aria-checked", on);
+    });
+    if (checkBtn) checkBtn.addEventListener("click", function () {
+      checkBtn.disabled = true; if (statusEl) statusEl.textContent = "Checking…";
+      SMD_OTA.check().then(function (r) {
+        checkBtn.disabled = false; r = r || {};
+        if (r.status === "available") { pending = r; if (statusEl) statusEl.textContent = "Update available: v" + r.version; if (installBtn) installBtn.style.display = ""; }
+        else if (r.status === "uptodate") { pending = null; if (statusEl) statusEl.textContent = "You're up to date" + (r.current ? " (v" + r.current + ")" : ""); if (installBtn) installBtn.style.display = "none"; }
+        else { if (statusEl) statusEl.textContent = "Couldn't check — " + (r.error || "try again"); }
+      });
+    });
+    if (installBtn) installBtn.addEventListener("click", function () {
+      if (!pending) return;
+      installBtn.disabled = true;
+      SMD_OTA.install(pending, function (pct) { if (statusEl) statusEl.textContent = "Downloading… " + pct + "%"; }).then(function (res) {
+        if (res && res.ok) { if (statusEl) statusEl.textContent = "Update ready — reopening…"; }
+        else { installBtn.disabled = false; if (statusEl) statusEl.textContent = "Install failed — " + ((res && res.error) || "try again"); }
+      });
+    });
+  }
+
   // Clinical workspace / specialty ("branch") selector — restored here because this file now OWNS
   // #sbMenu and rebuilds it on every open (which was wiping workspaces.js's own injected switcher).
   // Rendered as a normal row (consistent styling) → opens the Specialty Workspaces sheet. Only shown
@@ -361,6 +419,7 @@
         row("notifications", "bell", "Notifications") +
         row("appearance", "sun", "Appearance &amp; Theme") +
         watchRow() +
+        otaSectionHTML() +
         '<div class="sbr-sec">Advanced &amp; Experimental</div>' +
         advBody() +
       "</div>";
@@ -369,6 +428,7 @@
     try { if (window.SMD_IMAGE_ENGINE && SMD_IMAGE_ENGINE.wireSettings) SMD_IMAGE_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_VOICE && SMD_VOICE.wireModelSettings) SMD_VOICE.wireModelSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireSettings) SMD_MAIK_ENGINE.wireSettings(ov.querySelector(".sbr-set-body")); } catch (e) {}
+    try { wireOtaSection(ov.querySelector(".sbr-set-body")); } catch (e) {}
     ov.addEventListener("click", function (e) {
       var t = e.target; if (!t || !t.closest) return;
       if (t.closest("[data-sset=close]")) { closeSettingsPage(); return; }

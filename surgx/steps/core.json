@@ -1,0 +1,126 @@
+{
+  "_comment": "Steps shared by EVERY operation. This pack is the reason procedure number 200 is cheap: it is authored once and referenced. A step that cannot say WHY it is done fails validateStep().",
+  "schemaVersion": 1,
+  "steps": {
+    "step.core.consent-check": {
+      "id": "step.core.consent-check", "kind": "prep", "critical": true,
+      "title": "Consent, site marking and identity check",
+      "why": "Wrong-patient, wrong-site and wrong-procedure events are almost entirely preventable, and every prevention step happens before the patient is asleep.",
+      "how": [
+        "Confirm identity, procedure and side with the awake patient, against the consent form and the list.",
+        "Mark the site yourself, with an indelible arrow that remains visible after draping.",
+        "Confirm allergies, anticoagulation, fasting status and implant requirements."
+      ],
+      "pitfalls": ["Marking after the patient is anaesthetised.", "Accepting a consent form completed by someone who did not discuss the operation."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.timeout": {
+      "id": "step.core.timeout", "kind": "checkpoint", "critical": true,
+      "title": "Team brief, sign-in and time-out",
+      "why": "The surgical safety checklist reduces mortality and complications, and it works because it forces the whole team to speak once before the knife.",
+      "how": [
+        "Sign-in before induction: identity, site, procedure, consent, anaesthetic machine, allergies, airway risk, blood loss risk.",
+        "Time-out before incision: everyone introduced by name and role, procedure and site confirmed aloud, antibiotic prophylaxis given, imaging displayed, anticipated critical events stated.",
+        "Sign-out before the patient leaves theatre: procedure recorded, counts correct, specimens labelled, equipment problems noted, recovery concerns stated."
+      ],
+      "pitfalls": ["Running the checklist as a recitation while people continue working.", "Skipping the sign-out because the case finished late."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.prophylaxis": {
+      "id": "step.core.prophylaxis", "kind": "prep",
+      "title": "Antimicrobial and thromboprophylaxis",
+      "why": "Prophylaxis given at the wrong time is prophylaxis not given: tissue concentration at the moment of incision is what matters.",
+      "how": [
+        "Give the antibiotic within the hour before incision, redose for long operations or major blood loss, and stop it after the procedure unless there is an infection to treat.",
+        "Choose the agent against local policy and the antibiogram, not from memory.",
+        "Assess venous thromboembolism risk and apply mechanical and pharmacological prophylaxis accordingly."
+      ],
+      "pitfalls": ["Continuing prophylaxis for days after a clean operation.", "Omitting mechanical prophylaxis in a patient in whom heparin is contraindicated."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.positioning": {
+      "id": "step.core.positioning", "kind": "prep",
+      "title": "Positioning and pressure care",
+      "why": "Position determines exposure, and it determines which nerve gets stretched. Both are decided before the drapes go on and are hard to change after.",
+      "how": [
+        "Position for the operation you are doing, then check the head, arms, heels and sacrum.",
+        "Abduct the arm no more than 90 degrees; pad the ulnar groove and the common peroneal nerve.",
+        "Secure the patient before tilting the table, and warn the team before every tilt."
+      ],
+      "pitfalls": ["Extreme Trendelenburg with an unsecured patient.", "Forgetting that the position will be changed intra-operatively."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.prep-drape": {
+      "id": "step.core.prep-drape", "kind": "prep",
+      "title": "Skin preparation and draping",
+      "why": "Most surgical site infections come from the patient's own skin flora, so the antiseptic and its drying time do more than anything that follows.",
+      "how": [
+        "Prepare widely enough to allow the incision to be extended and a drain to be brought out through clean skin.",
+        "Allow alcohol-based preparation to dry fully before draping or using diathermy.",
+        "Drape to leave a field that does not need to be re-prepared if the plan changes."
+      ],
+      "pitfalls": ["Diathermy over wet alcohol preparation.", "A field so small that extending the incision means starting again."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.counts": {
+      "id": "step.core.counts", "kind": "checkpoint", "critical": true,
+      "title": "Swab, instrument and needle counts",
+      "why": "A retained foreign body is a never event, and the count is the only defence. It is a two-person physical verification, not a formality and not something anyone can dictate.",
+      "how": [
+        "Count before the operation starts, at the closure of any cavity, and at the end.",
+        "Any discrepancy stops the closure: recount, search the field and the floor, then image before the patient leaves theatre.",
+        "Record the result in the operative note in the surgeon's own words."
+      ],
+      "pitfalls": ["Closing on an unresolved count because the patient is unstable, without recording the decision and the imaging plan.", "Adding swabs to the field without telling the scrub practitioner."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.specimen": {
+      "id": "step.core.specimen", "kind": "checkpoint", "critical": true,
+      "title": "Specimen handling and labelling",
+      "why": "A mislabelled specimen produces a confident histological report about the wrong patient, and nothing downstream will catch it.",
+      "how": [
+        "Orient the specimen and mark it as the pathologist needs before it leaves the field.",
+        "Label at the point of hand-off, read the label aloud with the scrub practitioner, and record it on the request.",
+        "Record every specimen in the operative note, including 'none sent'."
+      ],
+      "pitfalls": ["Labelling a pot after the case, from memory.", "Sending a specimen without the clinical question the pathologist needs to answer."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.haemostasis": {
+      "id": "step.core.haemostasis", "kind": "closure",
+      "title": "Haemostasis before closure",
+      "why": "A haematoma is a culture medium, a source of pain and, in the neck, an airway emergency. It is far easier to prevent than to return for.",
+      "how": [
+        "Ask the anaesthetist to raise the pressure towards the patient's normal before you inspect.",
+        "Inspect systematically rather than looking at the place that bled last.",
+        "Release retraction and look again: retraction tamponades the vessel that will bleed in recovery."
+      ],
+      "pitfalls": ["Assessing haemostasis at a permissive pressure.", "Relying on a drain to manage bleeding you have not controlled."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.skin-closure": {
+      "id": "step.core.skin-closure", "kind": "closure",
+      "title": "Skin closure and dressing",
+      "why": "The skin is the last barrier and the first thing the patient sees. Tension and inversion cause both the infection and the complaint.",
+      "how": [
+        "Appose without tension; do not strangulate. Choose interrupted sutures, subcuticular, clips or adhesive to suit contamination and cosmesis.",
+        "Leave a contaminated or dirty wound open for delayed primary closure rather than closing it and returning to open it.",
+        "Apply a dressing that can stay undisturbed for the first 48 hours."
+      ],
+      "pitfalls": ["Primary closure of a dirty wound.", "Tight sutures placed to control bleeding that should have been controlled directly."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.core.debrief": {
+      "id": "step.core.debrief", "kind": "checkpoint",
+      "title": "Debrief, operative note and handover",
+      "why": "The operative note is the only durable record of what was found and done, and it is read by people who will be making decisions at three in the morning without you.",
+      "how": [
+        "Write the note immediately, while the detail is exact. Record findings and procedure separately.",
+        "State explicitly what was NOT done and why, and what the specific concerns are.",
+        "Hand over the post-operative plan verbally as well as in writing, including who to call and what would worry you."
+      ],
+      "pitfalls": ["A note that describes the procedure but not the findings.", "Post-operative instructions that say 'routine' without saying what routine means here."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

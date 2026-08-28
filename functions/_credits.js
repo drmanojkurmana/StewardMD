@@ -22,6 +22,31 @@ function r2(n) { return Math.round(n * 100) / 100; }
 export function costCapOn(env) { return String(cfgFlag(env, "AI_COST_CAP_ON")) === "1"; }
 export function creditConversion(env) { const v = Number(cfgFlag(env, "CREDIT_CONVERSION")); return Number.isFinite(v) && v > 0 && v <= 1 ? v : 0.5; }
 
+// ---- MaiK Tokens: the user-facing unit for AI allowance --------------------------------------
+// Everything internal is rupees; the UI, the token packs and the rate card all speak MaiK Tokens.
+// ONE conversion, exported, so the paywall, the dashboard and pack fulfilment can never drift apart
+// (they had: packs promised 750k MT for ₹499 while the credit math would have paid out 499k).
+export const MT_PER_INR = 2000;
+export function inrToMt(inr) { return Math.round(Math.max(0, Number(inr) || 0) * MT_PER_INR); }
+export function mtToInr(mt) { return r2(Math.max(0, Number(mt) || 0) / MT_PER_INR); }
+// Which purchase is a MaiK Token pack? Payment paths carry a server-issued selection key
+// ("tokens:plus" / "pro:monthly" / "student:annual"). Anything that is not a token pack is a
+// subscription and must still grant Pro — the split lives here so all three payment paths agree.
+export function tokenPackFor(planKey) {
+  const m = /^tokens:([a-z][a-z0-9]*)$/.exec(String(planKey || ""));
+  return m ? m[1] : null;
+}
+// Token-pack fulfilment. The pack's advertised `mt` is the SOURCE OF TRUTH — the number the doctor
+// was shown is the number they get — so this deliberately does NOT go through creditConversion
+// (which prices a raw rupee top-up, a different product).
+export async function addTokens(store, id, mt) {
+  const rec = await getCreditRecord(store, id);
+  const add = mtToInr(mt);
+  rec.balance = r2((rec.balance || 0) + add);
+  await putCreditRecord(store, id, rec);
+  return { balance: rec.balance, addedInr: add, addedMt: inrToMt(add) };
+}
+
 // ---- Founding-Doctor annual AI pool (fixed ceiling, one auto-refill) ----
 export function foundingGrant(env) { const v = Number(env && env.FOUNDING_AI_GRANT_INR); return Number.isFinite(v) && v >= 0 ? v : 120; }
 export function foundingRefill(env) { const v = Number(env && env.FOUNDING_AI_REFILL_INR); return Number.isFinite(v) && v >= 0 ? v : 120; }
@@ -101,7 +126,9 @@ export async function checkCostCap(env, store, doctorId, cap, now) {
   }
   if (dirty) await putCreditRecord(store, doctorId, rec);
   const resetAt = _nextMidnightMs(now);
-  if (dayCost < cap) return { ok: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), resetAt };
-  if (rec.balance > 0) return { ok: true, onCredits: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), resetAt };
-  return { ok: false, reason: "ai-cost-cap", cap, dayCost: r2(dayCost), credits: 0, resetAt };
+  // creditsMt/usedMt: the same numbers in MaiK Tokens, so the "limit hit" sheet never has to hold its
+  // own copy of the conversion (it did, and it would have drifted the day MT_PER_INR moved).
+  if (dayCost < cap) return { ok: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), creditsMt: inrToMt(rec.balance), resetAt };
+  if (rec.balance > 0) return { ok: true, onCredits: true, cap, dayCost: r2(dayCost), credits: r2(rec.balance), creditsMt: inrToMt(rec.balance), resetAt };
+  return { ok: false, reason: "ai-cost-cap", cap, dayCost: r2(dayCost), credits: 0, creditsMt: 0, usedMt: inrToMt(dayCost), capMt: inrToMt(cap), resetAt };
 }

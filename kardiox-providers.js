@@ -71,14 +71,28 @@
   function mockLibrary(content) {
     var ecgs = content || [];
     var byId = {}; ecgs.forEach(function (e) { byId[e.id] = e; });
+    var store = kxProgress();
     function cats() { var m = {}; ecgs.forEach(function (e) { m[e.category] = (m[e.category] || 0) + 1; }); return Object.keys(m).map(function (c) { return { name: c, count: m[c] }; }); }
+    /* The shipped content records carry status/masteryPct/bookmarked, but they are read-only
+     * bundle data: writing to them is lost on reload, so every row rendered straight from the
+     * pack reads "new · 0%" forever. Real state lives in kxProgress (localStorage); overlay it
+     * here, at the single seam every screen reads the library through. */
+    function view(e) {
+      if (!e) return e;
+      var mastered = store.masteredMap(), marks = store.bookmarkIds(), out = {}, k;
+      for (k in e) if (Object.prototype.hasOwnProperty.call(e, k)) out[k] = e[k];
+      if (mastered[e.id]) { out.status = "mastered"; out.masteryPct = 100; }
+      out.bookmarked = marks.indexOf(e.id) >= 0;
+      return out;
+    }
+    function viewAll(list) { return list.map(view); }
     return {
       categories: function () { return Promise.resolve(cats()); },
-      ecgs: function (cat) { return Promise.resolve(ecgs.filter(function (e) { return !cat || e.category === (cat && cat.name || cat); })); },
-      ecg: function (id) { return Promise.resolve(byId[id] || null); },
-      search: function (q) { q = String(q || "").toLowerCase(); return Promise.resolve(ecgs.filter(function (e) { return (e.title || "").toLowerCase().indexOf(q) >= 0 || (e.category || "").toLowerCase().indexOf(q) >= 0 || (e.ecgFindingTags || []).join(" ").toLowerCase().indexOf(q) >= 0; })); },
-      bookmarks: function () { return Promise.resolve(ecgs.filter(function (e) { return e.bookmarked; }).map(function (e) { return e.id; })); },
-      toggleBookmark: function (id) { if (byId[id]) byId[id].bookmarked = !byId[id].bookmarked; return Promise.resolve(); }
+      ecgs: function (cat) { return Promise.resolve(viewAll(ecgs.filter(function (e) { return !cat || e.category === (cat && cat.name || cat); }))); },
+      ecg: function (id) { return Promise.resolve(byId[id] ? view(byId[id]) : null); },
+      search: function (q) { q = String(q || "").toLowerCase(); return Promise.resolve(viewAll(ecgs.filter(function (e) { return (e.title || "").toLowerCase().indexOf(q) >= 0 || (e.category || "").toLowerCase().indexOf(q) >= 0 || (e.ecgFindingTags || []).join(" ").toLowerCase().indexOf(q) >= 0; }))); },
+      bookmarks: function () { return Promise.resolve(store.bookmarkIds()); },
+      toggleBookmark: function (id) { store.toggleBookmark(id); return Promise.resolve(); }
     };
   }
 
@@ -115,10 +129,17 @@
         res = res || {}; var s = load();
         s.seen = s.seen || 0; s.correct = s.correct || 0; s.quizzes = s.quizzes || 0;
         s.topics = s.topics || {}; s.mastered = s.mastered || {}; s.dailyDone = s.dailyDone || {}; s.maxStreak = s.maxStreak || 0;
+        s.masteredOn = s.masteredOn || {}; s.bookmarks = s.bookmarks || {};
         (res.items || []).forEach(function (it) {
           s.seen++; if (it.correct) s.correct++;
           if (it.category) { var t = s.topics[it.category] || { seen: 0, correct: 0 }; t.seen++; if (it.correct) t.correct++; s.topics[it.category] = t; }
-          if (it.correct && it.lessonId) s.mastered[it.lessonId] = 1;
+          // Mastery is repeated success on SEPARATE days, not one lucky answer. masteredOn[lesson]
+          // is the set of day-keys it was answered correctly on; two distinct days = mastered.
+          if (it.correct && it.lessonId) {
+            var on = s.masteredOn[it.lessonId] || (s.masteredOn[it.lessonId] = {});
+            on[dateKey(new Date())] = 1;
+            if (Object.keys(on).length >= 2) s.mastered[it.lessonId] = 1;
+          }
         });
         s.quizzes++;
         if (res.isDaily) { s.dailyDone[dateKey(new Date())] = 1; var st = streakFrom(s.dailyDone); if (st > s.maxStreak) s.maxStreak = st; }
@@ -126,7 +147,7 @@
         var c = (res.items || []).filter(function (i) { return i.correct; }).length;
         return { correct: c, total: (res.items || []).length, streakDays: streakFrom(s.dailyDone) };
       },
-      progress: function () {
+      progress: function (total) {
         var s = load(), topics = s.topics || {}, weakest = null;
         Object.keys(topics).forEach(function (k) {
           var t = topics[k]; if (t.seen >= 3) { var acc = t.correct / t.seen; if (!weakest || acc < weakest.acc) weakest = { name: k, acc: acc }; }
@@ -134,10 +155,19 @@
         var wk = [], mon = monday();
         for (var i = 0; i < 7; i++) { var d = new Date(mon); d.setDate(mon.getDate() + i); wk.push(!!(s.dailyDone && s.dailyDone[dateKey(d)])); }
         return {
-          mastered: Object.keys(s.mastered || {}).length, total: 100,
+          mastered: Object.keys(s.mastered || {}).length, total: total || 100,
           streakDays: streakFrom(s.dailyDone || {}), weeklyDone: wk,
           weakestTopic: weakest ? { name: weakest.name, accuracyPct: Math.round(weakest.acc * 100), recommendedCards: Math.max(3, Math.round((1 - weakest.acc) * 10)) } : null
         };
+      },
+      // Per-lesson state the library overlays onto content records. It lives HERE, not inside the
+      // content objects, which are shipped read-only and would otherwise freeze at "new"/0 forever.
+      masteredMap: function () { return load().mastered || {}; },
+      bookmarkIds: function () { var b = load().bookmarks || {}; return Object.keys(b).filter(function (k) { return b[k]; }); },
+      toggleBookmark: function (id) {
+        var s = load(); s.bookmarks = s.bookmarks || {};
+        if (s.bookmarks[id]) delete s.bookmarks[id]; else s.bookmarks[id] = 1;
+        save(s); return !!s.bookmarks[id];
       },
       achievements: function () {
         var s = load();
@@ -159,7 +189,7 @@
       dueFlashcards: function (nowMs) { nowMs = nowMs || Date.now(); return Promise.resolve(cards.filter(function (c) { return !c.dueDate || Date.parse(c.dueDate) <= nowMs; })); },
       grade: function (cardId, grade, nowMs) { var c = cards.filter(function (x) { return x.id === cardId; })[0]; if (c) { var u = sm2(c, grade, nowMs); Object.keys(u).forEach(function (k) { c[k] = u[k]; }); } return Promise.resolve(); },
       dailyChallenge: function (date) { var pool = withQuiz(); if (!pool.length) pool = lib; if (!pool.length) return Promise.resolve(null); var d = date ? new Date(date) : new Date(); var key = d.getUTCFullYear() * 372 + (d.getUTCMonth() + 1) * 31 + d.getUTCDate(); return Promise.resolve(pool[key % pool.length]); },
-      progress: function () { return Promise.resolve(store.progress()); },
+      progress: function () { return Promise.resolve(store.progress(lib.length)); },
       achievements: function () { return Promise.resolve(store.achievements()); },
       // Record a completed quiz/daily-challenge session. res = { items:[{category,lessonId,correct}], isDaily:bool }.
       recordQuiz: function (res) { return Promise.resolve(store.record(res)); },

@@ -8,7 +8,8 @@
   var G = (typeof window !== "undefined") ? window : globalThis;
   var API = "/api/queue";
   var POLL_MS = 8000;
-  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "" };
+  var st = { session: null, tickets: [], me: {}, view: "dashboard", analytics: null, config: null, pollId: 0, ghisToken: null, ghisUser: "", ghisDoctorName: "", demo: false, openOpts: {}, pollN: 0, search: "",
+    staffTok: "", staffWho: null, board: null };   // front-desk staff session (clinic ID + login + PIN)
 
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#39;"); }
   function ms(name, fill) { return '<span class="material-symbols-outlined' + (fill ? " fill" : "") + '">' + name + "</span>"; }
@@ -369,7 +370,20 @@
     } catch (e) {}
     return Promise.resolve(null);
   }
-  function authHeaders() { return fbToken().then(function (t) { var h = { "Content-Type": "application/json" }; if (t) h.Authorization = "Bearer " + t; return h; }); }
+  // ---- front-desk staff session -----------------------------------------------------------------
+  // A receptionist/nurse has no Firebase account: they sign in with the clinic ID + their login + PIN
+  // and the server mints an ORG-BOUND staff token. Until now the app only ever sent a Firebase token,
+  // which is why "I'm front-desk staff" could only point at the web console.
+  var LS_STAFF = "smd_opd_staff_tok";
+  function staffTok() { if (st.staffTok) return st.staffTok; try { st.staffTok = localStorage.getItem(LS_STAFF) || ""; } catch (e) {} return st.staffTok; }
+  function setStaffTok(t) { st.staffTok = t || ""; try { if (t) localStorage.setItem(LS_STAFF, t); else localStorage.removeItem(LS_STAFF); } catch (e) {} }
+  function staffCan(cap) { return !!(st.staffWho && st.staffWho.caps && st.staffWho.caps.indexOf(cap) > -1); }
+  // A staff token wins when present: it is how the server knows this is reception, not the doctor.
+  function authHeaders() {
+    var t = staffTok();
+    if (t) return Promise.resolve({ "Content-Type": "application/json", "X-Staff-Token": t });
+    return fbToken().then(function (t2) { var h = { "Content-Type": "application/json" }; if (t2) h.Authorization = "Bearer " + t2; return h; });
+  }
   // Retry transient network/DNS failures (e.g. a momentary "Unable to resolve host" right after app launch or a
   // WiFi/data switch) so the app self-heals and users NEVER touch WiFi/DNS settings. Only retries a REJECTED
   // fetch (network error) - never an HTTP error status. 3 tries with ~0.7s backoff.
@@ -487,7 +501,7 @@
     if (cmd === "switch") { _setWp(""); clearInterval(st.pollId); st.session = null; st.tickets = []; st.demo = false; st.ghisToken = null; st.profileOpen = false; st.orgId = null; st.clinicAdmin = null; root().innerHTML = _chooseType(); return; }  // dashboard back -> switch workplace (forget remembered); drop clinic identity so the next workplace never shows a stale clinic's staff-admin
     if (cmd === "typehosp") { _listHospitals(); return; }                               // Hospital -> pick a connected hospital
     if (cmd === "typeclinic") { _listClinics(); return; }                               // Personal clinic -> pick one
-    if (cmd === "rolestaff") { root().innerHTML = _staffNote(); return; }               // front-desk staff -> web console
+    if (cmd === "rolestaff") { root().innerHTML = _staffGate(); prefillStaff(); return; }   // front-desk staff -> sign in HERE
     if (cmd === "pickghis") { _setWp("ghis"); _enterGhis(); return; }  // GITAM / GHIS: reuse a live token if present (no needless re-login), else the prefilled gate
     if (cmd === "pickhosp") { _setWp("connect:" + arg); st.ghisToken = null; st.openOpts = { hospitalId: arg, source: "connect" }; loadSession(); return; }   // EMR-Connect hospital: worklist model (auto-import from the connected EMR, like GHIS). Drop any GHIS token: not a GHIS session.
     if (cmd === "pickclinic") { _setWp("clinic:" + arg); st.ghisToken = null; startClinic(arg); return; }     // a personal clinic (remembered so re-opening returns here, not GHIS). Drop any GHIS token: not a GHIS session.
@@ -495,6 +509,11 @@
     if (cmd === "newclinic") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
     if (cmd === "addhosp") { try { window.open("https://stewardmd.in/admin/connect-emr", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/admin/connect-emr"; } catch (x) {} } return; }  // reuse the Connect EMR onboarding wizard
     if (cmd === "openconsole") { try { window.open("https://stewardmd.in/opd", "_blank"); } catch (e) { try { location.href = "https://stewardmd.in/opd"; } catch (x) {} } return; }
+    if (cmd === "stafflogin") { staffLogin(); return; }
+    if (cmd === "staffout") { setStaffTok(""); st.staffWho = null; st.board = null; clearInterval(st.pollId); root().innerHTML = _chooseType(); return; }
+    if (cmd === "fdrefresh") { loadFrontDesk(); return; }
+    if (cmd === "fdadd") { frontDeskAdd(); return; }
+    if (cmd === "fdroute") { frontDeskRoute(arg); return; }
     if (cmd === "ghislogin") { ghisLogin(); return; }
     if (cmd === "demo") { demo(); return; }
     if (cmd === "logout") { doLogout(); return; }
@@ -562,12 +581,48 @@
       act(st.session.id, "/import", { rows: rows }).then(function (res) { if (res && res.ok && res.imported) { say("Imported " + res.imported + " patient(s)"); } });
     }).catch(function () { say("Could not reach Ward Sync"); });
   }
-  // View EMR profile (flag smd_opd_emr): look up the ticket locally for its full MR# + name, hand to OPDEMR.
-  function openEmrProfile(ticketId) {
+  // ONE decision point for "open this ticket's record". The WORKPLACE decides which EMR - never whether
+  // an MR number happens to be filled in.
+  //
+  // BUGFIX (2026-08-24): openAdd() asks for an "MR number" in EVERY workplace and the server stores
+  // whatever is typed as ghisPatientId (functions/_queue_engine.js), so a personal-clinic patient given
+  // the clinic's own file number took the GHIS branch. That branch passed NO `source`, opd-emr defaulted
+  // it to "ghis", GHIS.ensureSession() found no token (a clinic session nulls it - INVARIANT) and Ward
+  // Sync slid its GIMSR hospital-picker / sign-in over the queue AND returned, so Start never opened the
+  // assessment at all. Leaving the MRN blank happened to work, which is why it looked intermittent.
+  // Worse than the redirect: with a LIVE Ward Sync token it would have opened the hospital record for a
+  // personal-clinic patient - a wrong-record risk.
+  function inClinicWorkplace() { return !!st.orgId; }   // loadRoom() sets orgId; loadSession() clears it for GHIS/Connect
+  function openTicketEmr(ticketId, tab) {
     var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
     if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id });
+    var o = { name: t.name || "", ticketId: t.id, sessionId: st.session && st.session.id };
+    if (tab) o.tab = tab;
+    // Hospital workplace (GHIS / Connect) with a real hospital id -> the hospital record.
+    if (t.ghisPatientId && !inClinicWorkplace()) {
+      o.patientId = t.ghisPatientId || t.mrn || "";
+      o.episodeId = t.ghisEpisodeId || t.visitId || "";
+      o.visitId = t.visitId || t.ghisEpisodeId || "";
+      G.OPDEMR.openProfile(o);
+      return;
+    }
+    // Personal / shared clinic -> the on-device record. Never touches GHIS.
+    var oc = opdClinic();
+    if (oc.needUnlock) { try { G.toast && G.toast("Unlock your Shared Clinic to save this case."); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
+    var store = oc.store;
+    if (store && store.addPatient && store.localStore) {
+      var pid = localClinicId(t, store, oc.map);
+      var rec = (store.getPatient && store.getPatient(pid)) || {};
+      o.source = oc.source; o.localStore = store.localStore; o.patientId = pid; o.displayId = rec.mrn || "";
+      o.author = st.ghisDoctorName || (st.session && st.session.doctorName) || (st.me && st.me.name) || "Doctor";
+      G.OPDEMR.openProfile(o);
+      return;
+    }
+    o.noStore = true;                 // no local store on this device: decision-support only, nothing saved
+    G.OPDEMR.openProfile(o);
   }
+  // View EMR profile (flag smd_opd_emr) and Start-consult both route through openTicketEmr.
+  function openEmrProfile(ticketId) { openTicketEmr(ticketId, ""); }
   // Find-or-create the on-device My Clinic record for an OPD ticket (keyed by ticket id, so re-opening
   // the same patient reuses their record instead of creating a duplicate each time).
   function localClinicId(t, store, mapKey) {
@@ -582,35 +637,32 @@
     map[t.id] = id; try { localStorage.setItem(MAP, JSON.stringify(map)); } catch (e) {}
     return id;
   }
-  // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab). GHIS patients
-  // save to the hospital record; patients with no hospital MRN save to My Clinic on this device with
-  // encrypted Google Drive backup (reuses the personal-clinic backend) so nothing is lost.
-  function openAssessment(ticketId) {
-    var t = null; for (var i = 0; i < st.tickets.length; i++) { if (st.tickets[i].id === ticketId) { t = st.tickets[i]; break; } }
-    if (!t || !G.OPDEMR || !G.OPDEMR.openProfile) return;
-    if (!t.ghisPatientId) {
-      var oc = opdClinic();
-      if (oc.needUnlock) { try { G.toast && G.toast("Unlock your Shared Clinic to save this case."); } catch (e) {} if (G.SMD_SHARED && G.SMD_SHARED.open) G.SMD_SHARED.open(); return; }
-      var store = oc.store;
-      if (store && store.addPatient && store.localStore) {
-        var pid = localClinicId(t, store, oc.map);
-        var rec = (store.getPatient && store.getPatient(pid)) || {};
-        var author = st.ghisDoctorName || (st.session && st.session.doctorName) || (st.me && st.me.name) || "Doctor";
-        G.OPDEMR.openProfile({ source: oc.source, localStore: store.localStore, name: t.name || "", patientId: pid, displayId: rec.mrn || "", author: author, tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
-      } else {
-        G.OPDEMR.openProfile({ name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id, noStore: true });
-      }
-      return;
-    }
-    G.OPDEMR.openProfile({ patientId: t.ghisPatientId || t.mrn || "", episodeId: t.ghisEpisodeId || t.visitId || "", visitId: t.visitId || t.ghisEpisodeId || "", name: t.name || "", tab: "assess", ticketId: t.id, sessionId: st.session && st.session.id });
-  }
+  // Open the Initial Assessment (+ Ask MaiK) for this patient (EMR overlay, "assess" tab).
+  function openAssessment(ticketId) { openTicketEmr(ticketId, "assess"); }
   function openAdd() {
-    var name = prompt("Patient name?"); if (name == null) return;
-    var mrn = prompt("GHIS MR number (enables EMR profile + assessment for this patient)?") || "";
-    var mobile = prompt("Mobile (optional)?") || "";
-    var vt = (prompt("Visit type: new / followup", "new") || "new").toLowerCase();
-    act(st.session.id, "/ticket", { name: name, mrn: mrn, mobile: mobile, visitType: vt === "followup" ? "followup" : "new", priority: 0 });
+    // The check-in sheet (patient-register.js) is shared with the staff web console, so the two can
+    // never drift apart again. It replaced four sequential prompt() boxes. The SERVER validates and
+    // issues the MR number - this only carries the answers and renders the field errors it returns.
+    if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
+    var mode = inClinicWorkplace() ? "native" : (st.ghisToken ? "ghis" : ((st.openOpts && st.openOpts.source === "connect") ? "connect" : "native"));
+    G.SMD_PATIENTREG.open({
+      mode: mode,
+      clinicName: (st.me && st.me.name) || (st.session && st.session.doctorName) || "Check-in",
+      submit: function (body) {
+        body.orgId = st.orgId || st.hospital || "";
+        body.workplaceMode = mode;
+        return apiPost("/patient/register", body);
+      },
+      onAdded: function (r) {
+        // Registered -> put them in THIS doctor's queue with the identity we just created.
+        act(st.session.id, "/ticket", {
+          name: r.patient && r.patient.name, mrn: r.mrn, mobile: r.patient && r.patient.mobile,
+          visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new", priority: 0
+        });
+      }
+    });
   }
+
 
   // ---- OPD entry chooser: Doctor vs Staff; Doctor -> My clinic (StewardMD) vs Hospital (GITAM/GHIS) ----
   function _wrap(inner) {
@@ -650,11 +702,149 @@
       el.innerHTML = _wrap('<p class="q-gate-sub">Choose your clinic.</p>' + rows + '<button class="q-gate-btn" style="margin-top:12px;background:#f1f5f9;color:#0f172a" data-q-act="newclinic">' + ms("add") + " New clinic (in console)</button><button class=\"q-gate-close\" data-q-act=\"chooser\">Back</button>");
     }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-close" data-q-act="chooser">Back</button>'); });
   }
-  function _staffNote() {
-    return _wrap('<p class="q-gate-sub">Front-desk staff use the OPD web console - no app install needed.</p>' +
-      '<button class="q-gate-btn" data-q-act="openconsole">' + ms("open_in_new") + " Open OPD console</button>" +
+  // The old dead end: a note telling front-desk staff to go and use the web console, behind a button
+  // that called window.open(_blank) - which a Capacitor WKWebView silently ignores, so it did nothing
+  // at all. Front desk now signs in and works here.
+  function _staffGate(err) {
+    return _wrap('<p class="q-gate-sub">Front-desk sign in. Ask your clinic for the Clinic ID.</p>' +
+      '<input id="qFdOrg" class="q-gate-in" type="text" autocapitalize="characters" autocorrect="off" spellcheck="false" placeholder="Clinic ID (SMD-XXXXXX)">' +
+      '<input id="qFdUser" class="q-gate-in" type="text" autocomplete="username" autocapitalize="off" autocorrect="off" placeholder="Your login (e.g. nurse1)">' +
+      '<input id="qFdPin" class="q-gate-in" type="password" inputmode="numeric" autocomplete="current-password" placeholder="PIN">' +
+      '<div class="q-gate-err">' + (err ? esc(err) : "") + "</div>" +
+      '<button class="q-gate-btn" data-q-act="stafflogin">Sign in</button>' +
       '<button class="q-gate-close" data-q-act="chooser">Back</button>');
   }
+  function prefillStaff() {
+    setTimeout(function () {
+      try {
+        var o = document.getElementById("qFdOrg"), last = localStorage.getItem("smd_opd_staff_org") || "";
+        if (o && last) o.value = last;
+        var f = document.getElementById(last ? "qFdUser" : "qFdOrg"); if (f) f.focus();
+      } catch (e) {}
+    }, 60);
+  }
+  function staffLogin() {
+    var org = "", user = "", pin = "";
+    try {
+      org = (document.getElementById("qFdOrg") || {}).value || "";
+      user = (document.getElementById("qFdUser") || {}).value || "";
+      pin = (document.getElementById("qFdPin") || {}).value || "";
+    } catch (e) {}
+    org = org.trim(); user = user.trim(); pin = pin.trim();
+    if (!org || !user || !pin) { root().innerHTML = _staffGate("Enter the Clinic ID, your login and your PIN."); prefillStaff(); return; }
+    root().innerHTML = '<div class="q-empty" style="padding:80px">Signing in…</div>';
+    fetchRetry(API + "/auth/pin", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ clinicCode: org, identity: user, pin: pin }) })
+      .then(function (r) { return r.json(); })
+      .then(function (r) {
+        if (!r || !r.ok || !r.token) {
+          var msg = (r && r.error === "locked") ? "Too many attempts. Try again shortly."
+            : (r && r.error === "staff_disabled") ? "Staff sign-in is not enabled for this clinic."
+            : "Wrong Clinic ID, login or PIN.";
+          root().innerHTML = _staffGate(msg); prefillStaff(); return;
+        }
+        setStaffTok(r.token);
+        try { localStorage.setItem("smd_opd_staff_org", org); } catch (e) {}
+        st.orgId = r.orgId || "";
+        _setWp("");                     // a staff session is not a doctor workplace
+        loadFrontDesk();
+      })
+      .catch(function () { root().innerHTML = _staffGate("Could not reach the server. Check your connection."); prefillStaff(); });
+  }
+
+  // ---- front desk: the whole clinic at a glance ---------------------------------------------------
+  // Mirrors the web console's nurse station using the SAME endpoints (whoami -> caps, opd-board ->
+  // rooms + pool, pool -> register, assign-room -> route). No new server work.
+  function loadFrontDesk() {
+    var el = root();
+    el.innerHTML = '<div class="q-empty" style="padding:80px">Loading the front desk…</div>';
+    apiGet("/whoami").then(function (w) {
+      if (!w || !w.ok) { setStaffTok(""); root().innerHTML = _staffGate("Your session ended. Sign in again."); prefillStaff(); return; }
+      st.staffWho = w; st.orgId = w.orgId || st.orgId || "";
+      if (!st.orgId) { el.innerHTML = _wrap('<p class="q-gate-sub">You are not assigned to a clinic yet. Ask the clinic owner to add you.</p><button class="q-gate-close" data-q-act="staffout">Back</button>'); return; }
+      return apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (b) {
+        if (!b || !b.ok) { el.innerHTML = _wrap('<p class="q-gate-sub">Could not load the clinic board.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button><button class="q-gate-close" data-q-act="staffout">Sign out</button>'); return; }
+        st.board = b;
+        el.innerHTML = renderFrontDesk(b);
+        clearInterval(st.pollId);
+        st.pollId = setInterval(function () {
+          apiGet("/opd-board?orgId=" + encodeURIComponent(st.orgId)).then(function (n) {
+            if (n && n.ok) { st.board = n; var e2 = root(); if (e2 && e2.querySelector(".q-fd")) e2.innerHTML = renderFrontDesk(n); }
+          }).catch(function () {});
+        }, POLL_MS);
+      });
+    }).catch(function () { el.innerHTML = _wrap('<p class="q-gate-sub">Could not reach the server.</p><button class="q-gate-btn" data-q-act="fdrefresh">Retry</button>'); });
+  }
+
+  function renderFrontDesk(b) {
+    var who = st.staffWho || {}, rooms = (b && b.rooms) || [], pool = (b && b.pool) || [];
+    var canAdd = staffCan("queue.add"), canAssign = staffCan("queue.assign");
+    var head = '<div class="q-fd-top"><div><h2 class="q-h2" style="margin:0">' + ms("badge") + "Front desk</h2>" +
+      '<div class="q-hint">' + esc(who.name || "Staff") + " &middot; " + esc(who.role || "viewer") + (who.orgCode ? " &middot; " + esc(who.orgCode) : "") + "</div></div>" +
+      '<button class="q-pause" style="width:auto;padding:8px 14px" data-q-act="staffout">Sign out</button></div>';
+
+    var waitingTotal = rooms.reduce(function (n, r) { return n + (r.waiting || 0); }, 0);
+    var kpis = '<section class="q-kpis">' +
+      kpi("Waiting", "groups", String(waitingTotal), "") +
+      kpi("Unassigned", "help", String(pool.length), "") +
+      kpi("Rooms", "door_front", String(rooms.length), "") + "</section>";
+
+    var roomCards = rooms.length ? rooms.map(function (r) {
+      var rm = r.room || {}, unavailable = r.status === "unavailable";
+      return '<div class="q-card"><div class="q-card-h">' + ms("door_front") + esc(rm.name || "Room") +
+        (rm.number ? ' <span class="q-hint">#' + esc(rm.number) + "</span>" : "") + "</div>" +
+        '<div class="q-out"><span>' + (unavailable ? "No doctor assigned" : "Waiting") + "</span><b>" +
+        (unavailable ? "&mdash;" : r.waiting) + "</b></div>" +
+        (rm.department ? '<div class="q-hint">' + esc(rm.department) + "</div>" : "") + "</div>";
+    }).join("") : '<div class="q-empty">No rooms set up yet. The clinic owner adds rooms in the console.</div>';
+
+    var poolRows = pool.length ? pool.map(function (t) {
+      return '<div class="q-fd-row"><div><b>' + esc(t.name || "Patient") + "</b>" +
+        '<div class="q-hint">' + esc(t.mrnLast4 ? "MRN ..." + t.mrnLast4 : "No MRN") + " &middot; " + esc(t.visitType === "followup" ? "Follow-up" : "New") + "</div></div>" +
+        (canAssign ? '<button class="q-pause" style="width:auto;padding:8px 12px" data-q-act="fdroute:' + esc(t.id) + '">Route</button>' : "") +
+        "</div>";
+    }).join("") : '<div class="q-empty" style="padding:22px">Nobody waiting to be routed.</div>';
+
+    return '<div class="q-fd">' + head + kpis +
+      (canAdd ? '<button class="q-gate-btn" style="margin:4px 0 14px" data-q-act="fdadd">' + ms("person_add") + " Add patient</button>" : "") +
+      '<h2 class="q-h2">' + ms("meeting_room") + "Rooms</h2><div class=\"q-grid2\">" + roomCards + "</div>" +
+      '<h2 class="q-h2">' + ms("groups") + "Waiting to be routed</h2>" + poolRows +
+      '<div style="height:24px"></div></div>';
+  }
+
+  // Add a patient from the front desk: the SAME ABDM-ready check-in sheet the doctor uses, then into
+  // the central pool (a one-room clinic auto-routes server-side).
+  function frontDeskAdd() {
+    if (!(G.SMD_PATIENTREG && G.SMD_PATIENTREG.open)) { toast("Patient check-in is unavailable on this build."); return; }
+    G.SMD_PATIENTREG.open({
+      mode: "native",
+      clinicName: (st.staffWho && st.staffWho.orgCode) || "Check-in",
+      submit: function (body) { body.orgId = st.orgId; body.workplaceMode = "native"; return apiPost("/patient/register", body); },
+      onAdded: function (r) {
+        apiPost("/pool", { orgId: st.orgId, name: r.patient && r.patient.name, mobile: r.patient && r.patient.mobile,
+          mrn: r.mrn, visitType: (r.patient && r.patient.visitType) === "followup" ? "followup" : "new" })
+          .then(function () { toast("Added - " + r.mrn); loadFrontDesk(); });
+      }
+    });
+  }
+
+  // Route a pooled patient into a room. Only rooms that actually have a doctor can receive one.
+  function frontDeskRoute(ticketId) {
+    var rooms = ((st.board && st.board.rooms) || []).filter(function (r) { return r.status !== "unavailable"; });
+    if (!rooms.length) { toast("No room has a doctor assigned yet."); return; }
+    if (rooms.length === 1) { doRoute(ticketId, rooms[0].room.id); return; }
+    var names = rooms.map(function (r, i) { return (i + 1) + ". " + (r.room.name || "Room") + " (" + r.waiting + " waiting)"; }).join("\n");
+    var pick = "";
+    try { pick = window.prompt("Route to which room?\n\n" + names + "\n\nEnter the number:", "1") || ""; } catch (e) {}
+    var idx = parseInt(pick, 10);
+    if (!idx || idx < 1 || idx > rooms.length) return;
+    doRoute(ticketId, rooms[idx - 1].room.id);
+  }
+  function doRoute(ticketId, roomId) {
+    apiPost("/assign-room", { orgId: st.orgId, ticketId: ticketId, roomId: roomId })
+      .then(function (r) { if (r && r.ok) { toast("Routed"); loadFrontDesk(); } else { toast("Could not route that patient."); } })
+      .catch(function () { toast("Could not route that patient."); });
+  }
+
   // Doctor at a CHOSEN StewardMD org (clinic or Connect hospital). Loads the doctor's ROOM session - the
   // SAME queue the sister routes into on the console (server resolves the room by identity). No GHIS.
   function startClinic(orgId) { if (!orgId) { _listClinics(); return; } loadRoom(orgId, ""); }
@@ -821,6 +1011,9 @@
     var el = root(); el.classList.add("on");
     el.removeEventListener("click", onClick); el.addEventListener("click", onClick);
     if (st.demo) { loadSession(); return; }
+    // A front-desk staff session is not a doctor workplace: go straight to the desk, never the
+    // Hospital/Personal chooser or the GHIS gate.
+    if (staffTok()) { loadFrontDesk(); return; }
     // Route to the doctor's REMEMBERED workplace. A remembered choice always wins, so once a personal-clinic
     // doctor picks their clinic (via the chooser reachable from the gate "Back" or dashboard "Switch") it sticks
     // and they never land on GHIS again. With NO remembered choice we keep the old behaviour: reuse a live GHIS
@@ -861,6 +1054,7 @@
   } catch (e) {}
 
   G.QUEUE = { open: open, close: close, refresh: refresh, _render: _render, _st: st,
+    _openTicketEmr: openTicketEmr,   // test seam: workplace-based EMR routing (see test/queue-clinic-emr-route.test.mjs)
     // Live filter of the queue timeline - updates ONLY the rows container so the search input
     // keeps focus while typing (no full repaint).
     _search: function (v) {

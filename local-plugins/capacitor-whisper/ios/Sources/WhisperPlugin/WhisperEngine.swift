@@ -20,6 +20,40 @@ final class WhisperEngine {
     var onPartial: ((String) -> Void)?
     var onFinal: ((String) -> Void)?
     var onError: ((WhisperErr, String) -> Void)?
+    /// End-of-speech detected (opt-in, see `silenceEndpointMs`). The plugin turns this into the same
+    /// stop-and-transcribe the JS "stop" would do. Fires at most once per recording.
+    var onEndpoint: (() -> Void)?
+
+    // MARK: - Endpointing (VAD)
+    //
+    // MaiK Ask used to keep the mic open for a fixed 14 s per question no matter how short the answer
+    // was, which was most of the interview's wall-clock. When `silenceEndpointMs > 0` we watch the
+    // captured frames and fire `onEndpoint` once the patient has clearly spoken and then gone quiet
+    // for that long. OFF (0) by default, so the ambient Scribe's fixed 15 s chunking is unchanged.
+    //
+    // The threshold is MEASURED, not guessed. v1 used a hard-coded absolute floor (0.012) and failed
+    // on device: a short "no" never counted as speech, so the silence countdown never started and the
+    // turn ran to the hard cap. The session runs in `.measurement` mode, which disables input gain
+    // processing, so absolute levels here are much lower than an AGC'd mic would produce - any fixed
+    // number is a guess about a microphone and a room we cannot see.
+    //
+    // So: spend the first 0.4 s of each turn measuring the actual room noise, then require speech to
+    // clear a multiple of THAT. Recalibrated per turn, so it tracks a ward round into a quiet office.
+    // Fails safe: if it never fires, the hard cap still ends the turn (and the Done button always does).
+    // ponytail: energy-only detector. Upgrade path if a noisy OPD hall defeats it is a real VAD
+    // (WebRTC/Silero), not more constants.
+    private var silenceEndpointMs: Int = 0
+    private var vadSawSpeech = false
+    private var vadFired = false
+    private var vadLastVoiceAt: CFAbsoluteTime = 0
+    private var vadNoiseFloor: Float = 0
+    private var vadCalibSamples = 0
+    private var vadCalibEnergy: Float = 0
+    private var vadPeak: Float = 0                    // diagnostics: loudest frame seen this turn
+    private let vadCalibSamplesNeeded = 6400          // 0.4 s @ 16 kHz
+    private let vadSpeechFactor: Float = 2.5          // speech must exceed this * the measured floor
+    private let vadAbsoluteFloor: Float = 0.0035      // ...and this, so a dead-silent room can't self-trigger
+    private let vadFloorCap: Float = 0.02             // measured floor can never exceed this (see CLAMP below)
 
     private var ctx: OpaquePointer?
     private var loadedModelPath: String?
@@ -69,9 +103,14 @@ final class WhisperEngine {
     // MARK: - Capture
 
     /// Begin recording. `modelPath` must already be installed & verified.
-    func start(modelPath: String) {
+    /// `silenceEndpointMs` > 0 enables end-of-speech auto-stop (see the VAD section above).
+    func start(modelPath: String, silenceEndpointMs: Int = 0) {
         guard !recording else { return }                       // duplicate-start guard
         cancelled = false
+        self.silenceEndpointMs = max(0, silenceEndpointMs)
+        vadSawSpeech = false; vadFired = false; vadNoiseFloor = 0
+        vadCalibSamples = 0; vadCalibEnergy = 0; vadPeak = 0
+        vadLastVoiceAt = CFAbsoluteTimeGetCurrent()
 
         let perm = AVAudioSession.sharedInstance().recordPermission
         if perm == .denied { onError?(.micPermissionDenied, ""); return }
@@ -136,10 +175,54 @@ final class WhisperEngine {
             self.sampleLock.lock()
             self.samples.append(contentsOf: UnsafeBufferPointer(start: ch[0], count: n))
             self.sampleLock.unlock()
+            self.checkEndpoint(ch[0], n)
         }
 
         engine.prepare()
         do { try engine.start() } catch { input.removeTap(onBus: 0); throw WhisperError(.recordingFailure, "engine") }
+    }
+
+    /// Frame-level end-of-speech detection. No-op unless `silenceEndpointMs > 0`.
+    private func checkEndpoint(_ buf: UnsafeMutablePointer<Float>, _ n: Int) {
+        guard silenceEndpointMs > 0, !vadFired, recording, n > 0 else { return }
+        var sum: Float = 0
+        for i in 0..<n { let v = buf[i]; sum += v * v }
+        let rms = (sum / Float(n)).squareRoot()
+        if rms > vadPeak { vadPeak = rms }
+        let now = CFAbsoluteTimeGetCurrent()
+
+        // Phase 1 - measure the room. Never end a turn while still calibrating.
+        if vadCalibSamples < vadCalibSamplesNeeded {
+            vadCalibSamples += n
+            vadCalibEnergy += sum
+            if vadCalibSamples >= vadCalibSamplesNeeded {
+                // CLAMP: if the patient starts answering during the calibration window we would
+                // measure speech as "the room" and then nothing could ever clear the threshold -
+                // the exact deadlock this whole fix exists to remove. Cap it at a level no quiet
+                // room reaches, so a fast answerer degrades to a slightly deaf detector, never a
+                // dead one.
+                vadNoiseFloor = min((vadCalibEnergy / Float(vadCalibSamples)).squareRoot(), vadFloorCap)
+                NSLog("[SV-vad] floor=%.5f thresh=%.5f", vadNoiseFloor,
+                      max(vadNoiseFloor * vadSpeechFactor, vadAbsoluteFloor))
+            }
+            vadLastVoiceAt = now
+            return
+        }
+
+        // Phase 2 - detect.
+        if rms > max(vadNoiseFloor * vadSpeechFactor, vadAbsoluteFloor) {
+            vadSawSpeech = true
+            vadLastVoiceAt = now
+            return
+        }
+        // Only ever end a turn the patient actually started - silence before any speech is just a
+        // slow starter, and cutting there would drop the answer entirely.
+        guard vadSawSpeech else { return }
+        if (now - vadLastVoiceAt) * 1000.0 >= Double(silenceEndpointMs) {
+            vadFired = true
+            NSLog("[SV-vad] endpoint peak=%.5f floor=%.5f", vadPeak, vadNoiseFloor)
+            DispatchQueue.main.async { [weak self] in self?.onEndpoint?() }
+        }
     }
 
     // MARK: - Stop / cancel
@@ -147,6 +230,9 @@ final class WhisperEngine {
     /// Stop recording and transcribe the captured audio (async). Emits `whisperFinal`.
     func stopAndTranscribe(language: String, initialPrompt: String) {
         guard recording else { return }
+        if silenceEndpointMs > 0 && !vadFired {
+            NSLog("[SV-vad] NO endpoint: peak=%.5f floor=%.5f sawSpeech=%d", vadPeak, vadNoiseFloor, vadSawSpeech ? 1 : 0)
+        }
         recording = false
         stopCapture()
         teardownSession()
@@ -223,11 +309,28 @@ final class WhisperEngine {
         let ret: Int32 = audio.withUnsafeBufferPointer { buf in
             whisper_full(liveCtx, params, buf.baseAddress, Int32(buf.count))
         }
-        var text = ""
+        // MOJIBAKE FIX: accumulate the segments' RAW BYTES and decode ONCE at the end.
+        // whisper.cpp emits byte-level BPE, so a multi-byte character (any Indic script — Telugu
+        // హ is e0 b0 b9) can straddle a segment boundary: segment N ends with `e0 b0` and segment
+        // N+1 begins with the bare continuation byte `b9`. Decoding EACH segment separately (the
+        // old `text += String(cString: c)`) makes both halves individually invalid UTF-8, and
+        // Swift's repairing initialiser replaces them with U+FFFD — the "◇?" wall in the OPD
+        // Scribe VoiceNote. MEASURED: `whisper_full_get_segment_text` returned a leading `b9`
+        // exactly where `e0 b0 b9` belonged. Android already does it this way (whisper_jni.cpp
+        // accumulates into a std::string and calls NewStringUTF once); iOS now matches.
+        var bytes: [UInt8] = []
         if ret == 0 {
             let n = whisper_full_n_segments(liveCtx)
-            if n > 0 { for i in 0..<n { if let c = whisper_full_get_segment_text(liveCtx, i) { text += String(cString: c) } } }
+            if n > 0 {
+                for i in 0..<n {
+                    if let c = whisper_full_get_segment_text(liveCtx, i) {
+                        var p = c
+                        while p.pointee != 0 { bytes.append(UInt8(bitPattern: p.pointee)); p += 1 }
+                    }
+                }
+            }
         }
+        let text = String(decoding: bytes, as: UTF8.self)
         ctxLock.unlock()
         if cancelled { return }
         if ret != 0 { onError?(.transcriptionFailure, "whisper_full \(ret)"); return }

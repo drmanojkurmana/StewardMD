@@ -318,6 +318,15 @@
     // the camera usage description.) This is what makes Scan-Meds work on Android at all.
     function cloudFromImage() {
       if (!(window.SMD_AI && window.SMD_AI.vision)) return Promise.reject(new Error("ai-unavailable"));
+      /* CONSENT BEFORE THE UPLOAD. This path sends the RAW PHOTO of a medication list - which
+       * routinely carries a patient name, an MRN or a ward sticker - to the cloud, and it ran
+       * silently as an automatic fallback whenever on-device OCR was unavailable (all of Android)
+       * or simply failed. The clinician was never asked and never offered the private alternative,
+       * even though image-engine.js already owns exactly that dialog for ICU Snapshot.
+       * Reusing that gate rather than growing a second consent story here. */
+      return cloudVisionCall();
+    }
+    function cloudVisionCall() {
       try { window.__SMD_SCAN_DIAG = { stage: "cloud-image", source: "cloud" }; } catch (e) {}
       return window.SMD_AI.vision(imageDataUrl, "medication_list").then(function (r) {
         if (!r || r.error) throw new Error((r && r.error) || "vision-failed");
@@ -327,14 +336,53 @@
     // On-device-first (privacy: image stays on device) ONLY when a real native OCR bridge exists —
     // that is iOS Apple Vision. Android / anything without it goes straight to cloud image OCR.
     var hasOnDevice = !!(window.SMD_AI && window.SMD_AI.readImage && window.SMD_NATIVE && window.SMD_NATIVE.ocr);
-    if (!hasOnDevice) return cloudFromImage();
-    return window.SMD_AI.readImage(imageDataUrl, "medication_list").then(function (r) {
-      if (!r || r.error) throw new Error((r && r.error) || "ocr-failed");
-      if (r.mode === "fields") { var rows = fromFields((r.fields && typeof r.fields === "object") ? r.fields : r); if (rows.length) return rows; return cloudFromImage(); }
-      var lines = (r.lines || []).map(function (ln) { return normalizeScanRow({ detected_text: ln }); }).filter(Boolean);
-      return lines.length ? lines : cloudFromImage();   // on-device read nothing → cloud image OCR
-    }).catch(function () { return cloudFromImage(); });   // on-device failed → cloud image OCR
+
+    /* ASK WHICH ENGINE, using the SAME chooser ICU Snapshot uses.
+     *
+     * Scan-Meds never called it, so the clinician was never offered the choice here - and worse, the
+     * chain below silently fell through to a cloud upload of the RAW PHOTO (name, MRN, ward sticker)
+     * whenever on-device OCR was missing, empty or threw. On Android, which has no Apple Vision
+     * bridge, that silent upload was the only path.
+     *
+     * allowLocal:false on purpose: the on-device vision model answers in PROSE, and this surface
+     * needs drug ROWS. Offering it here would promise something it cannot deliver, and a misread
+     * drug name in a medication list is not a cosmetic failure.
+     */
+    /* The private path, end to end. Every branch that used to fall through to cloudFromImage() now
+     * fails instead: once the clinician has chosen "stays on this device", an empty or failed read
+     * is a reason to tell them, not a licence to upload the photo anyway. */
+    function onDeviceRead() {
+      return window.SMD_AI.readImage(imageDataUrl, "medication_list").then(function (r) {
+        if (!r || r.error) throw new Error((r && r.error) || "ocr-failed");
+        if (r.mode === "fields") {
+          var rows = fromFields((r.fields && typeof r.fields === "object") ? r.fields : r);
+          if (rows.length) return rows;
+        } else {
+          var lines = (r.lines || []).map(function (ln) { return normalizeScanRow({ detected_text: ln }); }).filter(Boolean);
+          if (lines.length) return lines;
+        }
+        var empty = new Error("ocr-empty"); empty.code = "ocr-empty"; throw empty;
+      });
+    }
+
+    var IE = window.SMD_IMAGE_ENGINE;
+    var picked = (IE && IE.chooseEngine)
+      ? IE.chooseEngine("medication_list", { allowLocal: false })
+      // Engine module absent (older bundle): keep the previous behaviour rather than block a scan.
+      : Promise.resolve({ engine: hasOnDevice ? "device" : "ai", remember: false });
+
+    return picked.then(function (choice) {
+      if (!choice) { var c = new Error("cancelled"); c.code = "cancelled"; throw c; }
+      if (choice.remember && IE && IE.setPref) IE.setPref(choice.engine);
+      if (choice.engine === "ai") return cloudFromImage();
+      // PRIVATE MEANS PRIVATE. If they chose on-device, a failed read must NOT quietly become an
+      // upload - that is the exact behaviour this replaced. Fail and let them retry or re-choose.
+      if (!hasOnDevice) { var u = new Error("ocr-unavailable"); u.code = "ocr-unavailable"; throw u; }
+      return onDeviceRead();
+    });
   }
+
+
   // Normalise a raw OCR med row into a candidate the review screen understands.
   // Runs the detected text through parseEntry/resolveGeneric to map + get
   // candidates. NEVER trusts an OCR-supplied generic that isn't a known generic.

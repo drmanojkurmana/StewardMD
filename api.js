@@ -125,7 +125,11 @@
         '<button class="db-back" id="dbBack">‹ Back</button>' +
         '<div class="db-title" id="dbTitle">Drugs Database</div>' +
         '<button class="db-brandbtn" id="dbBrandBtn" style="display:none" aria-label="Available brands">' + dbIco("pills") + ' Brands</button>' +
-        '<button class="db-close" id="dbClose" aria-label="Close">' + dbIco("close") + '</button>' +
+        // BUG (2026-08-22, WhatsApp report): this button always fully exits the Drugs Database
+        // (back to wherever it was opened from, usually Home) - a doctor reading it as an "X"
+        // expected it to just dismiss the current drug page and return to the list, which "‹ Back"
+        // already does. A home icon states what it actually does instead of implying "close this".
+        '<button class="db-close" id="dbClose" aria-label="Close and return home">' + dbIco("home") + '</button>' +
       '</div>' +
       '<div class="db-body" id="dbBody"></div>' +
       '<div class="db-scrim" id="dbScrim"></div>' +

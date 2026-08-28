@@ -1,0 +1,773 @@
+{
+  "_comment": "CliniX SHORT case. VSD and ASD are the two acyanotic lesions taught most heavily at the bedside; this pathway leans on shared CVS exam skills with emphasis (fixed splitting, precordial bulge, thrill sites) and adds local skills only for the classification, the growth/cyanotic-spell history, the syndrome, differential and workup.",
+  "id": "congenital-heart-disease",
+  "name": "Congenital heart disease",
+  "fullName": "Acyanotic congenital heart disease: VSD and ASD",
+  "system": "cardiovascular",
+  "kbRef": "congenital_heart_disease",
+  "oneLine": "A hole that never closed, and what the shunt through it does to the heart sounds",
+  "estMinutes": 50,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Acyanotic versus cyanotic, and where a hole in the heart sits",
+      "skills": [
+        "skill.chd.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "The same approach, adapted for a child",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "particulars",
+      "title": "Patient particulars",
+      "blurb": "Age at presentation narrows the lesion before you have heard a murmur",
+      "skills": [
+        "skill.particulars.demographics"
+      ],
+      "emphasis": {
+        "skill.particulars.demographics": {
+          "expect": "Congenital lesions are usually found in childhood, sometimes on a routine examination in an entirely asymptomatic child, sometimes because of recurrent chest infections or poor growth. An adult presenting for the first time with an incidental murmur, or with breathlessness from a longstanding, previously undetected shunt, is also a genuine and important presentation, particularly for a small VSD or an ASD, which can both be clinically silent for decades."
+        }
+      }
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Growth, effort tolerance, infections, and the antenatal story",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.chd.history"
+      ]
+    },
+    {
+      "id": "general_exam",
+      "title": "General examination",
+      "blurb": "Growth first, then the signs a shunt leaves on the whole body",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.gen.cyanosis",
+        "skill.gen.clubbing",
+        "skill.gen.edema"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "In a child, comment explicitly on growth: failure to thrive and poor weight gain are genuine findings in a significant left-to-right shunt, not incidental. Look for dysmorphic features suggesting an associated syndrome, since several congenital heart lesions cluster with recognisable syndromes."
+        },
+        "skill.gen.cyanosis": {
+          "expect": "A purely acyanotic lesion should show no cyanosis at rest. NEW cyanosis appearing in a patient with a known longstanding acyanotic shunt is a critical finding: it suggests the shunt has reversed (Eisenmenger syndrome) because pulmonary vascular resistance has risen above systemic resistance, turning a left-to-right shunt into a right-to-left one."
+        }
+      }
+    },
+    {
+      "id": "systemic_exam",
+      "title": "Cardiovascular examination",
+      "blurb": "One murmur, one splitting pattern, and a bulge that tells you the age of the lesion",
+      "skills": [
+        "skill.exam.cvs.inspection",
+        "skill.exam.cvs.precordium_palpation",
+        "skill.exam.cvs.heartsounds",
+        "skill.exam.cvs.murmurs",
+        "skill.exam.cvs.pulse"
+      ],
+      "emphasis": {
+        "skill.exam.cvs.inspection": {
+          "expect": "A precordial bulge from right ventricular enlargement is classically seen with an atrial septal defect specifically, because the volume-overloaded right ventricle deforms the still-pliable chest wall of a growing child; its presence supports a longstanding lesion present since early childhood."
+        },
+        "skill.exam.cvs.precordium_palpation": {
+          "expect": "A systolic thrill at the lower left sternal border (Roger's area) points to a small, high-velocity ventricular septal defect; paradoxically, a very large VSD with near-equalised pressures can be thrill-free and produce only a soft murmur, so the absence of a thrill does NOT mean the defect is small."
+        },
+        "skill.exam.cvs.heartsounds": {
+          "expect": "Wide, FIXED splitting of S2 that does not vary with respiration is the classic finding in an atrial septal defect, because the two atria are already in free communication and the right-sided volume load is already maximal throughout the respiratory cycle. Do not confuse this with an ordinary physiological split that simply widens further on inspiration."
+        },
+        "skill.exam.cvs.murmurs": {
+          "expect": "A ventricular septal defect classically produces a loud, harsh, pansystolic murmur at the lower left sternal border (Roger's area), often with a thrill. An atrial septal defect classically produces a soft, ejection systolic murmur at the pulmonary area from increased flow across a structurally normal pulmonary valve, which is a flow murmur, not a murmur of the defect itself; the defect is silent, since flow across a low-pressure-gradient atrial septal defect produces essentially no sound."
+        },
+        "skill.exam.cvs.pulse": {
+          "expect": "Usually normal in an uncomplicated left-to-right shunt. If pulmonary hypertension has developed, a right ventricular heave and a loud, palpable P2 may be found instead, alongside a murmur that has become softer as the shunt diminishes with rising pulmonary pressure."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Putting the shunt picture together",
+      "blurb": "The defect, the murmur it makes, and what the loudness of that murmur means",
+      "skills": [
+        "skill.chd.signs"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "VSD, ASD, PDA, an innocent murmur, or something else entirely",
+      "skills": [
+        "skill.chd.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "Echo makes the diagnosis; the rest look for its effects",
+      "skills": [
+        "skill.ix.chd.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "The defect, its size, its physiological effect, and whether the shunt has reversed",
+      "skills": [
+        "skill.dx.chd"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.chd.cvs_exam",
+        "title": "Examine a child with a known murmur",
+        "seconds": 360,
+        "task": "This 6-year-old has been referred for an asymptomatic murmur found on a routine school check. Examine the cardiovascular system and present your findings.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.cvs.inspection",
+          "skill.exam.cvs.precordium_palpation",
+          "skill.exam.cvs.heartsounds",
+          "skill.exam.cvs.murmurs"
+        ],
+        "examinerQuestions": [
+          "The murmur is loud and pansystolic at the lower left sternal border, with a thrill. What is the likely diagnosis?",
+          "S2 is widely and fixedly split. What does that suggest, and why does it not vary with breathing?",
+          "How would you tell an innocent murmur from one of these lesions at the bedside?"
+        ]
+      }
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.chd.aarav",
+      "title": "A boy with a murmur found at a school health check",
+      "opening": "Aarav Singh, 6, was found to have a heart murmur at a routine school health check and has been brought by his mother. He is playing happily in the room. Introduce yourself and take a history from his mother.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Aarav Singh",
+        "age": 6,
+        "sex": "male",
+        "occupation": "School student",
+        "residence": "Urban, lives with both parents"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, the school nurse said she heard a murmur in his heart during a routine checkup and told us to get it looked at. He has never complained of anything himself.",
+          "key": true
+        },
+        "symptoms": {
+          "cues": [
+            "any symptoms",
+            "breathless",
+            "tired",
+            "chest pain",
+            "unwell"
+          ],
+          "reply": "No, he runs around and plays just like any other child his age. He has never complained of chest pain or breathlessness."
+        },
+        "growth": {
+          "cues": [
+            "growth",
+            "weight gain",
+            "height",
+            "growing well",
+            "feeding as a baby"
+          ],
+          "reply": "He has always grown well, roughly along the same line on his growth chart. As a baby he fed normally, no difficulty.",
+          "key": true
+        },
+        "infections": {
+          "cues": [
+            "chest infection",
+            "pneumonia",
+            "recurrent",
+            "cough",
+            "cold"
+          ],
+          "reply": "He does get a chest cold most winters, maybe a bit more often than his older sister, but nothing that needed hospital admission."
+        },
+        "cyanosis_history": {
+          "cues": [
+            "blue",
+            "cyanosis",
+            "turned blue",
+            "lips blue"
+          ],
+          "reply": "No, I have never seen him turn blue, even when he cries hard or is very active."
+        },
+        "squatting": {
+          "cues": [
+            "squat",
+            "squatting",
+            "sits down after running"
+          ],
+          "reply": "No, he does not do anything like that."
+        },
+        "antenatal": {
+          "cues": [
+            "pregnancy",
+            "antenatal",
+            "infection during pregnancy",
+            "rubella",
+            "medications during pregnancy"
+          ],
+          "reply": "The pregnancy was normal. I do not remember any particular infection or illness during it, and I was not on any regular medication."
+        },
+        "family_history": {
+          "cues": [
+            "family",
+            "heart problem in the family",
+            "hereditary",
+            "sibling"
+          ],
+          "reply": "No one else in the family has a known heart problem. His older sister is completely healthy."
+        },
+        "when_found": {
+          "cues": [
+            "when was it found",
+            "first noticed",
+            "previous checkup"
+          ],
+          "reply": "This is the first time anyone has mentioned a murmur. He has had normal checkups before this."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Playful, well-grown child, appropriate height and weight for age.",
+          "abnormal": false
+        },
+        "skill.gen.vitals": {
+          "finding": "Pulse 96 regular. Respiratory rate 20. SpO2 99 percent on room air.",
+          "abnormal": false
+        },
+        "skill.gen.cyanosis": {
+          "finding": "No central or peripheral cyanosis.",
+          "abnormal": false
+        },
+        "skill.gen.clubbing": {
+          "finding": "No clubbing.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.inspection": {
+          "finding": "No precordial bulge, no scars, no visible pulsations.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.precordium_palpation": {
+          "finding": "A systolic thrill is palpable at the lower left sternal border, 3rd to 4th intercostal space. No parasternal heave.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.heartsounds": {
+          "finding": "S1 normal. S2 splits normally and widens appropriately on inspiration; not fixed.",
+          "abnormal": false
+        },
+        "skill.exam.cvs.murmurs": {
+          "finding": "A loud, harsh, pansystolic murmur, grade 4/6, best heard at the lower left sternal border, not radiating to the axilla, with an associated thrill.",
+          "abnormal": true
+        },
+        "skill.exam.cvs.pulse": {
+          "finding": "Regular, good volume, no delay.",
+          "abnormal": false
+        }
+      },
+      "essentialInvestigations": [
+        "echo",
+        "cxr",
+        "ecg"
+      ],
+      "investigations": {
+        "echo": {
+          "label": "Transthoracic echocardiogram",
+          "indicated": true,
+          "result": "A small perimembranous ventricular septal defect, approximately 4 mm, with a high-velocity left-to-right jet. Normal chamber sizes. Estimated pulmonary artery pressure normal. No other structural abnormality.",
+          "note": "This is the test that makes the diagnosis. A small defect with normal chamber sizes and normal pulmonary pressure explains both the loud murmur (high-velocity flow through a small, restrictive orifice) and the entirely normal growth and exercise tolerance."
+        },
+        "cxr": {
+          "label": "Chest radiograph",
+          "indicated": true,
+          "result": "Normal heart size, normal pulmonary vascularity.",
+          "note": "A small, restrictive VSD with normal pulmonary pressure is expected to have an essentially normal chest radiograph; a large shunt would be expected to show cardiomegaly and pulmonary plethora instead."
+        },
+        "ecg": {
+          "label": "ECG",
+          "indicated": true,
+          "result": "Normal sinus rhythm for age, no chamber enlargement pattern.",
+          "note": "Consistent with a small, haemodynamically insignificant shunt; a large VSD would more often show left ventricular or biventricular hypertrophy."
+        },
+        "sats": {
+          "label": "Pulse oximetry",
+          "indicated": true,
+          "result": "99 percent on room air.",
+          "note": "Confirms this is a purely acyanotic lesion at this stage, with no evidence of any right-to-left component."
+        }
+      },
+      "differentialModel": {
+        "answer": "Small perimembranous ventricular septal defect. Consider an innocent (Still's) murmur, an atrial septal defect, and pulmonary stenosis as alternative explanations for a murmur found incidentally in an asymptomatic child.",
+        "accept": [
+          "ventricular septal defect",
+          "vsd",
+          "innocent murmur",
+          "still",
+          "atrial septal defect",
+          "asd",
+          "pulmonary stenosis"
+        ],
+        "minMatch": 1
+      },
+      "diagnosis": {
+        "answer": "Small, haemodynamically insignificant perimembranous ventricular septal defect, acyanotic, with normal growth, normal pulmonary artery pressure and no evidence of shunt reversal.",
+        "accept": [
+          "ventricular septal defect",
+          "vsd"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "No intervention needed for a small, restrictive VSD with normal pulmonary pressure and no symptoms; routine paediatric cardiology follow-up to monitor for spontaneous closure (common in small perimembranous defects) or any change in size or pulmonary pressure, endocarditis-prevention counselling for procedures, and reassurance regarding normal activity.",
+        "accept": [
+          "no intervention",
+          "follow-up",
+          "monitor",
+          "spontaneous closure",
+          "endocarditis",
+          "reassurance"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The LOUDNESS of the murmur here is almost inversely informative: a small, restrictive defect creates a high-velocity jet and a loud murmur, while a large, near-unrestrictive defect can be much softer because pressures on both sides have nearly equalised. Loud does not mean large.",
+        "Normal growth, a normal chest radiograph and a normal ECG are not just reassuring background, they are direct evidence the shunt is small and has not produced significant volume overload, exactly the kind of relevant negative that carried real weight in the COPD and CCF cases too.",
+        "S2 splitting stayed physiological here, widening normally with inspiration. Fixed splitting is the ASD sign specifically, and its absence is itself useful evidence against that diagnosis.",
+        "This child has no cyanosis and a normal saturation, confirming this is still a simple left-to-right shunt. The single most important thing to track over time in any such patient is exactly this: watching for the day, if it ever comes, that saturations start to fall as pulmonary pressures rise.",
+        "The absence of squatting or cyanotic spells argued specifically against a cyanotic lesion such as tetralogy of Fallot, in which squatting is a classic, deliberate compensatory behaviour."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "viva": {
+    "skills": [
+      "skill.chd.basics",
+      "skill.hx.chd.history",
+      "skill.exam.cvs.heartsounds",
+      "skill.exam.cvs.murmurs",
+      "skill.chd.differential",
+      "skill.ix.chd.workup",
+      "skill.dx.chd"
+    ]
+  },
+  "skills": {
+    "skill.chd.basics": {
+      "id": "skill.chd.basics",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Acyanotic congenital heart disease",
+      "oneLine": "A left-to-right shunt, and the two commonest holes it flows through",
+      "why": "Congenital heart disease is usually taught as a long list of named lesions. Almost all of the common ones you will actually meet at the bedside reduce to one simple idea, a shunt between the two circulations, and knowing whether it runs left-to-right or right-to-left predicts the whole clinical picture, cyanosed or not, before you have examined anything.",
+      "body": "Congenital heart lesions are broadly split into acyanotic, where the shunt (if any) runs left-to-right, and cyanotic, where deoxygenated blood reaches the systemic circulation, either from a right-to-left shunt or from mixing.",
+      "keyPoints": [
+        "Ventricular septal defect (VSD) is the single commonest congenital heart lesion; atrial septal defect (ASD) and patent ductus arteriosus (PDA) are the other two classic acyanotic left-to-right shunts.",
+        "In a left-to-right shunt, oxygenated blood recirculates through the lungs rather than reaching the body, so the patient is not cyanosed; the physiological consequence instead is a volume load on whichever chambers carry the extra flow, and, over time, a rise in pulmonary vascular resistance.",
+        "A VSD shunts at the ventricular level, directly loading the left atrium and left ventricle with the extra pulmonary venous return; an ASD shunts at the atrial level, loading the right atrium and right ventricle instead, since the extra flow crosses back into the low-pressure right side before ever reaching the lungs a second time.",
+        "If pulmonary vascular resistance rises high enough over years, it can exceed systemic resistance and reverse the shunt to right-to-left, producing cyanosis in a previously acyanotic patient. This is Eisenmenger syndrome, and once established it generally makes surgical closure of the original defect inappropriate, because closing the defect would remove the only pop-off valve the failing right heart has left.",
+        "Many small VSDs close spontaneously in childhood; a small, restrictive ASD or VSD with normal pulmonary pressure and no symptoms can be managed with observation rather than intervention."
+      ],
+      "pitfalls": [
+        "Treating 'congenital heart disease' as a single entity rather than asking whether the shunt is left-to-right or right-to-left.",
+        "Assuming every VSD or ASD needs surgical closure, when many small, haemodynamically insignificant defects are safely observed.",
+        "Missing early Eisenmenger physiology because new cyanosis in a previously acyanotic patient was not actively looked for."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three classic acyanotic congenital shunt lesions.",
+          "a": "Ventricular septal defect, atrial septal defect, and patent ductus arteriosus.",
+          "accept": [
+            "vsd",
+            "ventricular septal",
+            "asd",
+            "atrial septal",
+            "pda",
+            "patent ductus"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why does an uncomplicated left-to-right shunt not cause cyanosis?",
+          "a": "Because oxygenated blood recirculates back through the lungs rather than deoxygenated blood reaching the systemic circulation, so systemic arterial oxygen saturation stays normal.",
+          "accept": [
+            "recirculat",
+            "oxygenated",
+            "no deoxygenated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is Eisenmenger syndrome, and why does it change the treatment plan?",
+          "a": "It is reversal of a longstanding left-to-right shunt to right-to-left, once pulmonary vascular resistance has risen above systemic resistance, producing cyanosis. Once established, closing the original defect removes the pop-off route the overloaded right heart depends on, so surgical closure generally becomes inappropriate at that stage.",
+          "accept": [
+            "reversal",
+            "pulmonary resistance",
+            "right-to-left",
+            "inappropriate closure"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: congenital heart disease classification"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Congenital heart disease in the adult"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.chd.signs": {
+      "id": "skill.chd.signs",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "The VSD and ASD picture",
+      "oneLine": "One murmur locates the defect, one splitting pattern tells you which atrium is overloaded",
+      "why": "VSD and ASD are commonly confused because both are 'a hole in the heart', but their examination findings are genuinely distinct once you know what to listen for, because the level at which the shunt occurs determines which chamber is loaded and which sound changes.",
+      "body": "Derive the findings from the level of the shunt: a VSD loads the left heart and produces a loud murmur from high-velocity flow across a pressure gradient; an ASD loads the right heart and produces a soft flow murmur plus a fixed-split S2, because the defect itself is silent.",
+      "keyPoints": [
+        "VSD: a loud, harsh, pansystolic murmur at the lower left sternal border (Roger's area), often with a thrill; the murmur is loudest with a SMALL, restrictive defect (high-velocity jet) and can be surprisingly soft with a large, near-unrestrictive one where pressures have nearly equalised.",
+        "ASD: a soft, ejection systolic FLOW murmur at the pulmonary area, from increased flow across a structurally normal pulmonary valve; the atrial defect itself, a low-pressure-gradient shunt, produces no audible murmur.",
+        "ASD's signature finding is wide, FIXED splitting of S2, unchanged by respiration, because the two atria are already in free communication and right-sided volume load is already maximal throughout the respiratory cycle.",
+        "A precordial bulge is classically associated with ASD specifically, from right ventricular enlargement deforming the still-pliable chest wall of a growing child.",
+        "As pulmonary vascular resistance rises with either lesion, the murmur SOFTENS (as the pressure gradient driving the shunt falls) while signs of pulmonary hypertension appear instead: a right ventricular heave and a loud, palpable P2. New cyanosis at this stage signals shunt reversal (Eisenmenger syndrome)."
+      ],
+      "pitfalls": [
+        "Assuming murmur loudness tracks defect size in a VSD, when the opposite can be true for a large, unrestrictive defect.",
+        "Confusing fixed splitting (ASD) with an ordinary physiological split that simply widens on inspiration.",
+        "Missing early Eisenmenger physiology because a softening murmur was read as improvement rather than as rising pulmonary pressure."
+      ],
+      "media": [
+        "media.vid.s2fixed",
+        "media.vid.s2physiological"
+      ],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What is the classic auscultatory finding of an atrial septal defect, beyond the flow murmur itself?",
+          "a": "Wide, fixed splitting of S2 that does not vary with respiration.",
+          "accept": [
+            "fixed split",
+            "fixed splitting"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why can a large VSD produce a SOFTER murmur than a small one?",
+          "a": "In a large, unrestrictive VSD, left and right ventricular pressures nearly equalise, so there is little pressure gradient to drive a high-velocity, turbulent jet; a small, restrictive defect maintains a large pressure gradient and produces a louder, higher-velocity jet murmur instead.",
+          "accept": [
+            "equalise",
+            "pressure gradient",
+            "restrictive"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient with a known longstanding VSD is noted to have a murmur that has become softer over several years, together with a new right ventricular heave. What does this trajectory suggest?",
+          "a": "Rising pulmonary vascular resistance: as pulmonary pressure rises towards systemic pressure, the shunt gradient and murmur diminish, while right ventricular pressure overload produces a heave and a loud P2; this trajectory should prompt an active check for early Eisenmenger physiology, including a check for new cyanosis.",
+          "accept": [
+            "pulmonary resistance",
+            "eisenmenger",
+            "pressure rising"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: VSD and ASD signs"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The cardiovascular system: congenital heart disease"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: congenital heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.chd.differential": {
+      "id": "skill.chd.differential",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Differential diagnosis of a childhood murmur",
+      "oneLine": "VSD, ASD, PDA, an innocent murmur, and what argues for each",
+      "why": "The great majority of murmurs found incidentally in children are innocent, not structural, and reflexively frightening a family with a structural diagnosis before it is confirmed is a real harm. Reasoning through the discriminating features properly is what avoids both under- and over-diagnosis.",
+      "body": "For a murmur found in a child, work through the structural shunt lesions, an innocent murmur, and the other classic congenital lesions with distinct signatures.",
+      "keyPoints": [
+        "Ventricular septal defect: a loud, harsh, pansystolic murmur at the lower left sternal border, often with a thrill.",
+        "Atrial septal defect: a soft ejection systolic flow murmur at the pulmonary area, with fixed splitting of S2, often with a precordial bulge if longstanding.",
+        "Patent ductus arteriosus: a continuous, machinery murmur, loudest at the left infraclavicular area (Gibson's area), radiating to the back, present throughout systole and diastole rather than confined to one.",
+        "Innocent (functional) murmurs are common in children: typically soft, systolic, vary with position and respiration, occur in an asymptomatic child with normal growth and pulses, and are not associated with a thrill; Still's murmur, a vibratory, musical systolic murmur at the lower left sternal border, is the classic example.",
+        "Pulmonary stenosis: an ejection systolic murmur at the pulmonary area with an ejection click, but WITHOUT the fixed splitting of an ASD, and typically with a normal or widely split but respiration-VARYING S2.",
+        "Cyanotic lesions (tetralogy of Fallot and others) present with a fundamentally different clinical picture, cyanosis, squatting, and often a single S2, and belong in the differential whenever the history or examination raises any suspicion of cyanosis."
+      ],
+      "pitfalls": [
+        "Labelling every childhood murmur as structural, causing unnecessary parental anxiety, when an innocent murmur is far more common.",
+        "Missing a continuous murmur as PDA because it was heard only in systole and the diastolic component was not specifically listened for.",
+        "Confusing the flow murmur of pulmonary stenosis with that of an ASD, when the fixed-versus-variable splitting of S2 is what actually separates them."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What features suggest an innocent rather than a structural childhood murmur?",
+          "a": "Soft, systolic, varies with position and respiration, no thrill, occurring in an asymptomatic child with normal growth and normal pulses.",
+          "accept": [
+            "soft",
+            "no thrill",
+            "asymptomatic",
+            "normal growth"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "How would you distinguish a PDA murmur from a VSD murmur on timing alone?",
+          "a": "PDA produces a continuous murmur spanning both systole and diastole (machinery murmur); a VSD murmur is confined to systole (pansystolic).",
+          "accept": [
+            "continuous",
+            "both systole and diastole",
+            "pansystolic"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "How do you distinguish the ejection systolic murmur of pulmonary stenosis from the flow murmur of an atrial septal defect at the bedside?",
+          "a": "By the splitting of S2: an ASD gives wide, FIXED splitting that does not change with respiration, while pulmonary stenosis gives a split S2 that still varies with respiration (or, in severe stenosis, a delayed or soft P2), so the fixed-versus-variable distinction is the discriminating feature, not the murmur itself.",
+          "accept": [
+            "fixed splitting",
+            "varies with respiration",
+            "s2 splitting"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "innocent",
+          "text": "Considers an innocent murmur before assuming a structural lesion",
+          "critical": true
+        },
+        {
+          "id": "discriminate",
+          "text": "States a discriminating feature for each structural lesion"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: childhood murmur differential"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Cardiovascular system: innocent murmurs and congenital heart disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.chd.workup": {
+      "id": "skill.ix.chd.workup",
+      "kind": "investigation",
+      "system": "cardiovascular",
+      "title": "Working up a suspected structural congenital heart lesion",
+      "oneLine": "Echo makes the diagnosis; the chest film and ECG show what the shunt has done so far",
+      "why": "As with the other lesions in this pathway, echo is the one test that both confirms and characterises the defect; the rest of the workup exists to show its downstream haemodynamic effect, not to make the diagnosis themselves.",
+      "body": "Group investigations by purpose: confirm and characterise the defect, and assess its haemodynamic consequence.",
+      "keyPoints": [
+        "Confirm and characterise: transthoracic echocardiography identifies the defect's location, size, the direction and velocity of the shunt, chamber sizes, and an estimate of pulmonary artery pressure; it is the definitive test for essentially all of these lesions.",
+        "Chest radiograph: a small, restrictive shunt with normal pulmonary pressure typically shows a normal heart size and normal pulmonary vascularity; a large, significant shunt shows cardiomegaly and increased pulmonary vascular markings (plethora) from the excess pulmonary blood flow.",
+        "ECG: usually normal in a small, insignificant shunt; a large VSD tends to show left ventricular or biventricular hypertrophy, while a large ASD tends to show right ventricular hypertrophy or an incomplete right bundle branch block pattern, reflecting which chamber is volume-loaded.",
+        "Pulse oximetry, ideally pre- and post-ductal in an infant, screens for any right-to-left component and should be checked at every review in a patient with a known shunt, since a fall over time is the earliest bedside clue to rising pulmonary pressure.",
+        "Cardiac catheterisation is reserved for cases where non-invasive imaging is inconclusive, or where a precise measurement of pulmonary vascular resistance is needed before a treatment decision, particularly when pulmonary hypertension is a concern; it is not a routine first-line test."
+      ],
+      "pitfalls": [
+        "Treating the chest radiograph as sufficient to characterise the defect, when it only shows its downstream effect, not the defect itself.",
+        "Not repeating pulse oximetry at follow-up visits in a patient with a known shunt.",
+        "Ordering cardiac catheterisation routinely rather than reserving it for a specific, unanswered question."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single test both confirms and characterises a VSD or ASD?",
+          "a": "Transthoracic echocardiography.",
+          "accept": [
+            "echo",
+            "echocardiogram"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "What radiographic findings suggest a LARGE, haemodynamically significant left-to-right shunt?",
+          "a": "Cardiomegaly and increased pulmonary vascular markings (pulmonary plethora).",
+          "accept": [
+            "cardiomegaly",
+            "plethora",
+            "increased vascular"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is repeat pulse oximetry important at follow-up in a patient with a known acyanotic shunt?",
+          "a": "A gradual fall in saturation over time is often the earliest bedside clue that pulmonary vascular resistance is rising and the shunt may be beginning to reverse, before overt cyanosis or symptoms are obvious.",
+          "accept": [
+            "fall in saturation",
+            "earliest clue",
+            "reversing"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: congenital heart disease workup"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Congenital heart disease in the adult: evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.dx.chd": {
+      "id": "skill.dx.chd",
+      "kind": "reasoning",
+      "system": "cardiovascular",
+      "title": "Stating the diagnosis in congenital heart disease",
+      "oneLine": "The defect, its size, its haemodynamic effect, and whether the shunt has reversed",
+      "why": "Naming the defect alone ('VSD') tells the reader nothing about urgency or plan. A complete statement carries the size, the haemodynamic significance, and explicitly addresses whether the shunt is still left-to-right, because each of those changes whether the patient needs intervention, observation, or urgent specialist referral.",
+      "body": "State it in four parts: the specific defect and its anatomical detail, its size and haemodynamic significance, associated findings such as pulmonary hypertension, and the current shunt direction.",
+      "keyPoints": [
+        "Name the specific defect and, where known, its anatomical type (for example a perimembranous VSD, or a secundum ASD).",
+        "State its size and haemodynamic significance: small and restrictive with normal pressures and no symptoms, versus large and haemodynamically significant with chamber enlargement or elevated pulmonary pressure.",
+        "State any complication found: pulmonary hypertension, growth failure, recurrent chest infections, or evidence of early heart failure.",
+        "State the current shunt direction explicitly: left-to-right (acyanotic), or evidence of reversal (Eisenmenger physiology), since this alone can determine whether closure is still appropriate.",
+        "A worked example for a small defect: 'Small, haemodynamically insignificant perimembranous ventricular septal defect, acyanotic, with normal growth, normal pulmonary artery pressure and no evidence of shunt reversal.'",
+        "A worked example for a larger, complicated defect: 'Large secundum atrial septal defect with right ventricular volume overload and moderate pulmonary hypertension, still left-to-right, in a child with recurrent chest infections and mild growth faltering.'"
+      ],
+      "pitfalls": [
+        "Naming the defect alone without stating its size, significance, or shunt direction.",
+        "Failing to explicitly state that the shunt is STILL left-to-right, which is the detail that most directly changes eligibility for closure.",
+        "Omitting growth and functional impact in a child, when these are the paediatric markers of haemodynamic significance."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements make a complete diagnostic statement for a congenital shunt lesion?",
+          "a": "The specific defect, its size and haemodynamic significance, any complication, and the current shunt direction.",
+          "accept": [
+            "defect",
+            "size",
+            "significance",
+            "complication",
+            "direction"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "Why must the diagnostic statement explicitly say whether the shunt is still left-to-right?",
+          "a": "Because eligibility for surgical or percutaneous closure depends on the shunt still being left-to-right with a favourable pulmonary vascular resistance; once irreversible pulmonary hypertension has caused reversal (Eisenmenger physiology), closure is generally no longer appropriate, so this single fact changes the entire management pathway.",
+          "accept": [
+            "closure",
+            "eisenmenger",
+            "reversal"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "complete",
+          "text": "States defect, size/significance and shunt direction, not just the defect name",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Cardiovascular: congenital heart disease diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Congenital heart disease in the adult"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

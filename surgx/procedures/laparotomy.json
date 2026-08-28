@@ -1,0 +1,122 @@
+{
+  "id": "laparotomy",
+  "title": "Exploratory laparotomy",
+  "subtitle": "Systematic exploration and damage control",
+  "system": "gastrointestinal",
+  "aliases": ["exlap", "emergency laparotomy"],
+  "estMinutes": 90,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "wses-iai", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for the management of intra-abdominal infections", "year": 2017, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" },
+    { "id": "nela", "org": "National Emergency Laparotomy Audit (NELA)", "title": "Standards for emergency laparotomy care", "year": 2022, "url": "https://www.nela.org.uk/", "accessed": "2026-08-24" }
+  ],
+  "calcs": ["rcri", "qsofa", "sofa", "apache2", "news2", "caprini"],
+  "chapters": {
+    "indications": [
+      "Peritonitis, perforation or an acute abdomen requiring source control.",
+      "Haemodynamic instability with intra-abdominal haemorrhage.",
+      "Bowel obstruction with strangulation, ischaemia or failure of conservative management.",
+      "Diagnostic uncertainty in a deteriorating patient where imaging cannot answer the question in time."
+    ],
+    "contraindications": [
+      "There is rarely an absolute contraindication in a patient who needs source control. The real decision is whether operating serves this patient at all.",
+      "A frank discussion about ceiling of care and the likely outcome belongs before the incision, not after.",
+      "A stable patient whose collection can be drained percutaneously does not need a laparotomy."
+    ],
+    "preparation": [
+      "Resuscitate deliberately, but do not delay source control for a physiology that will only improve once the source is controlled.",
+      "Risk-score and document it; it drives consultant presence, critical-care booking and the conversation with the family.",
+      "Cross-match, correct coagulopathy, warm the patient, catheterise, and place a nasogastric tube.",
+      "Antibiotics, and involve critical care before the operation rather than at the end of it."
+    ],
+    "positioning": [
+      "Supine, arms out, with access for the anaesthetist to both arms and the neck.",
+      "Lloyd-Davies position if the pelvis or rectum may be involved, or if a stoma or on-table colonoscopy is possible.",
+      "Warming mattress and forced-air warming from the start."
+    ],
+    "equipment": [
+      "Major general set, self-retaining retractor system, large packs.",
+      "Linear staplers, bowel clamps, energy device, suction with a large-bore sucker.",
+      "Stoma appliances, and temporary abdominal closure material if damage control is possible.",
+      "Cell salvage where trauma or major haemorrhage is expected."
+    ],
+    "anatomy": [
+      "The abdomen is explored as compartments: supracolic, infracolic, both paracolic gutters, the lesser sac and the pelvis.",
+      "The retroperitoneum is divided into zones; in trauma, central zone I haematomas are explored, and lateral zone II and pelvic zone III haematomas are usually not, unless expanding or pulsatile.",
+      "Mobilising the duodenum (Kocher) and the left colon exposes structures the anterior approach cannot reach.",
+      "The lesser sac is entered through the gastrocolic omentum to see the pancreas and the posterior stomach."
+    ],
+    "criticalSafety": [
+      "Complete the systematic exploration even after the pathology is found. Second pathologies are missed by stopping early.",
+      "Decide damage control EARLY, on physiology, not after four hours of definitive surgery in a cooling, acidotic, coagulopathic patient.",
+      "Do not close an abdomen that will develop compartment syndrome. An open abdomen managed well is better than a closed one that cannot ventilate."
+    ],
+    "structuresAtRisk": [
+      "Spleen, from retraction",
+      "Ureters, particularly in a re-operative or inflamed pelvis",
+      "Duodenum, during mobilisation of the right colon",
+      "Bowel, during adhesiolysis - an unrecognised enterotomy is a leak"
+    ],
+    "commonErrors": [
+      "An incision too short for the operation being attempted.",
+      "Stopping the exploration at the first abnormality.",
+      "Persisting with definitive reconstruction in a patient who is physiologically exhausted.",
+      "Anastomosing bowel in a contaminated, hypotensive, vasopressor-dependent patient rather than forming a stoma."
+    ],
+    "complications": [
+      "Anastomotic leak and intra-abdominal collection.",
+      "Burst abdomen and incisional hernia.",
+      "Abdominal compartment syndrome.",
+      "Prolonged ileus, malnutrition and enterocutaneous fistula.",
+      "The complications of the physiological insult: acute kidney injury, delirium, respiratory failure, venous thromboembolism."
+    ],
+    "postop": [
+      "Critical care for most emergency laparotomies. The decision not to admit should be the exception that is justified.",
+      "Early enteral nutrition, thromboprophylaxis, multimodal analgesia, and a documented plan for what would trigger a return to theatre.",
+      "Daily consultant review, and re-image early if the patient is not improving as expected.",
+      "Explicit handover of what was found, what was NOT done, and what specifically worries the operating surgeon."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Include the possibility of a stoma, an open abdomen, and critical care. If the patient cannot consent, document the discussion with the family." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape", "emphasis": "Prepare from nipples to mid-thigh: the incision may need to go anywhere, and a stoma may need siting." },
+    { "ref": "step.abd.midline" },
+    { "ref": "step.abd.exploration" },
+    { "ref": "step.abd.bowel-handling" },
+    { "ref": "step.lap.survey", "emphasis": "The same discipline applies to an open survey as to a laparoscopic one: look everywhere before deciding anything." },
+    { "ref": "step.lapa.damage-control" },
+    { "ref": "step.abd.lavage" },
+    { "ref": "step.abd.stoma" },
+    { "ref": "step.abd.drain" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts", "emphasis": "Packs left deliberately for damage control are counted and RECORDED as retained, with the number written in the note and on the dressing." },
+    { "ref": "step.core.specimen" },
+    { "ref": "step.abd.mass-closure" },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.lapa.damage-control": {
+      "id": "step.lapa.damage-control", "kind": "bailout", "critical": true,
+      "title": "The damage-control decision",
+      "why": "The lethal triad of hypothermia, acidosis and coagulopathy is self-reinforcing. The decision to abbreviate the operation must be made while the patient still has reserve, not once they have none.",
+      "how": [
+        "Decide on physiology, not on anatomy: temperature, pH, base deficit, lactate, transfusion requirement and how the anaesthetist says it is going.",
+        "Control haemorrhage by packing and direct control; control contamination by stapling off or exteriorising, without reconstruction.",
+        "Leave bowel in discontinuity. Do not anastomose.",
+        "Temporary abdominal closure, then intensive care to rewarm, correct and resuscitate. Plan a specific return time.",
+        "State the plan out loud to the anaesthetist and the theatre team, and write it in the note."
+      ],
+      "structuresAtRisk": ["Bowel left in discontinuity, which must be recorded so nobody is surprised at the re-look"],
+      "pitfalls": ["Deciding on damage control after four hours instead of after forty minutes.", "A temporary closure that is too tight, which produces exactly the compartment syndrome it was meant to prevent."],
+      "review": { "status": "ai_drafted" }
+    }
+  },
+  "media": {
+    "anatomy": ["med.surgx.lap-quadrants"]
+  }
+}

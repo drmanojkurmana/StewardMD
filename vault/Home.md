@@ -20,12 +20,27 @@ local `www/` bundle, calling `stewardmd.in/api/*`). Buildless PWA (ES5 IIFEs, `?
 - [[KardiQ X]] — ECG interpretation + Learn atlas
 - [[ThoreX]] — chest X-ray support
 - [[FundX]] — smartphone fundus/retinal imaging
+- [[CliniX]] — clinical learning + bedside skills for medical students (flag OFF, content pending R1)
+- [[SURGX]] — SURGˣ Surgical Intelligence: notes, protocols, procedures, evidence, cases (flag ON for testers, content pending R1)
+
+### Medical education
+- [[NMC Logbook]] — the PG digital logbook required by PGMER-2023 5.2(v)-(vi): weekly e-logbook,
+  monthly guide authentication, faculty verification, department oversight. **PG only** — UG/CBME
+  deliberately not built. Every regulatory claim traces to `NMC_PG_LOGBOOK_REQUIREMENTS.md`.
 
 ## Cross-cutting
+- [[OTA Updates]] — push-to-devices update system, self-hosted (Cloudflare R2 + admin console).
+  PHASE 1 (server-only) built 2026-08-22; a rebuild of a system torn down once before — read it
+  before touching this.
 - [[StewardMD ID]] — the universal per-user SMD-XXXXXX handle (units, referrals, entitlements)
 - [[Infra]] — Cloudflare, Firebase, signing, hosting
 - [[Decisions]] — architectural decision log
+- [[Flags]] — every feature flag: what is ON, what is OFF, and WHY (incl. the four that must never ship on)
 - [[Roadmap]] — pending / deferred work
+- **Handoffs** — session-spanning records, in `vault/handoff/`. Read the most recent before
+  picking up a thread; they carry the open items and the temporary production values that must be
+  reverted. Latest: `2026-08-25-three-days-maik-opd-quotas.md` (MaiK latency/streaming, OPD,
+  quota + guest-identity fixes).
 
 ## The shape of the thing
 The [[Medical Knowledge Base]] hierarchy (Harrison = disease reference → ICMR → guidelines → hospital

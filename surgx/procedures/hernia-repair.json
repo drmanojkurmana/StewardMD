@@ -1,0 +1,159 @@
+{
+  "id": "hernia-repair",
+  "title": "Open inguinal hernia repair",
+  "subtitle": "Lichtenstein tension-free mesh",
+  "system": "abdominal wall",
+  "aliases": ["inguinal herniorrhaphy", "hernioplasty", "Lichtenstein repair"],
+  "estMinutes": 50,
+  "educationalOnly": true,
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "sources": [
+    { "id": "heraniagroup", "org": "HerniaSurge Group", "title": "International guidelines for groin hernia management", "year": 2018, "url": "https://link.springer.com/journal/10029", "accessed": "2026-08-24" },
+    { "id": "wses-hernia", "org": "World Society of Emergency Surgery (WSES)", "title": "Guidelines for emergency repair of complicated abdominal wall hernias", "year": 2020, "url": "https://wjes.biomedcentral.com/", "accessed": "2026-08-24" }
+  ],
+  "calcs": ["rcri", "caprini", "bmi"],
+  "chapters": {
+    "indications": [
+      "Symptomatic inguinal hernia.",
+      "Any irreducible, incarcerated or strangulated hernia, as an emergency.",
+      "A femoral hernia should be repaired promptly whether or not it is symptomatic, because the strangulation risk is high.",
+      "Watchful waiting is reasonable for a minimally symptomatic reducible inguinal hernia in a man, and is a discussion rather than a default."
+    ],
+    "contraindications": [
+      "Active infection at the operative site: mesh is avoided in a contaminated field.",
+      "A patient who cannot tolerate the anaesthetic required. Local anaesthesia is often the answer rather than deferral.",
+      "Untreated ascites, prostatism or chronic cough will cause recurrence if not addressed first."
+    ],
+    "preparation": [
+      "Examine standing and lying, both groins, and document reducibility and the cough impulse.",
+      "Optimise the driver: constipation, cough, prostatism, weight.",
+      "Antibiotic prophylaxis according to local policy for mesh implantation.",
+      "Consent must include chronic groin pain, recurrence, injury to cord structures and testicular atrophy, urinary retention and seroma."
+    ],
+    "positioning": [
+      "Supine, slight Trendelenburg to reduce the hernia contents and empty the veins.",
+      "Bladder emptied before the patient comes to theatre.",
+      "Arm out on the side of the anaesthetist; the operating side kept clear."
+    ],
+    "equipment": [
+      "Standard general set, self-retaining retractor, a fine dissecting set.",
+      "Flat polypropylene mesh of adequate size, and non-absorbable or slowly absorbable suture for fixation.",
+      "Local anaesthetic for field block and for post-operative comfort even under general anaesthesia."
+    ],
+    "anatomy": [
+      "The inguinal canal runs from the deep ring, an opening in the transversalis fascia lateral to the inferior epigastric vessels, to the superficial ring in the external oblique aponeurosis.",
+      "An indirect hernia passes through the deep ring, lateral to the inferior epigastric vessels, within the cord. A direct hernia pushes through Hesselbach triangle, medial to them.",
+      "A femoral hernia passes below the inguinal ligament, medial to the femoral vein, and is the one that strangulates.",
+      "The cord contains the vas deferens, the testicular and cremasteric vessels, the pampiniform plexus, and the genital branch of the genitofemoral nerve.",
+      "Three nerves are at risk and should be identified and preserved or deliberately divided: the ilioinguinal, the iliohypogastric and the genital branch of the genitofemoral."
+    ],
+    "criticalSafety": [
+      "Identify the three nerves before placing mesh. Chronic groin pain is the commonest long-term complication of this operation and it starts here.",
+      "Always inspect the femoral canal, particularly in women and in any obstructed presentation.",
+      "In a strangulated hernia, do not reduce non-viable bowel into the abdomen. Get control of the sac before you reduce."
+    ],
+    "structuresAtRisk": [
+      "Vas deferens",
+      "Testicular vessels and pampiniform plexus",
+      "Ilioinguinal, iliohypogastric and genitofemoral nerves",
+      "Inferior epigastric vessels",
+      "Femoral vein, when suturing medially and inferiorly",
+      "Bladder, in a large direct or sliding hernia"
+    ],
+    "commonErrors": [
+      "Missing a coexisting femoral hernia because only the inguinal one was looked for.",
+      "Mesh that is too small, or not fixed adequately to the pubic tubercle: the medial corner is where recurrence happens.",
+      "Mesh placed under tension or without a slit accommodating the cord, causing pain and recurrence.",
+      "Forcible reduction of a tender hernia, reducing dead bowel en masse into the abdomen."
+    ],
+    "complications": [
+      "Chronic post-operative inguinal pain, in a meaningful minority of patients.",
+      "Recurrence, most often at the pubic tubercle.",
+      "Seroma or haematoma; scrotal haematoma after a large indirect sac.",
+      "Ischaemic orchitis and testicular atrophy.",
+      "Urinary retention, especially in older men after spinal anaesthesia.",
+      "Mesh infection, which is uncommon but may require mesh removal."
+    ],
+    "postop": [
+      "Day-case surgery for most patients, with simple analgesia and early return to normal activity.",
+      "No lifting restriction beyond comfort in a tension-free repair; advise activity as tolerated.",
+      "Warn about scrotal swelling and bruising, which is common and alarming to the patient.",
+      "Review any new severe or burning groin pain: early recognition of chronic pain gives more options."
+    ]
+  },
+  "steps": [
+    { "ref": "step.core.consent-check", "emphasis": "Mark the correct side with the patient standing, with the hernia visible." },
+    { "ref": "step.core.timeout" },
+    { "ref": "step.core.prophylaxis" },
+    { "ref": "step.core.positioning" },
+    { "ref": "step.core.prep-drape" },
+    { "ref": "step.hern.incision" },
+    { "ref": "step.hern.cord" },
+    { "ref": "step.hern.sac" },
+    { "ref": "step.hern.mesh" },
+    { "ref": "step.core.haemostasis" },
+    { "ref": "step.core.counts" },
+    { "ref": "step.core.specimen", "emphasis": "A sac is usually not sent. Any resected bowel or an unexpected mass always is." },
+    { "ref": "step.core.skin-closure" },
+    { "ref": "step.core.debrief" }
+  ],
+  "steps_local": {
+    "step.hern.incision": {
+      "id": "step.hern.incision", "kind": "access",
+      "title": "Incision and opening the inguinal canal",
+      "why": "A correctly placed incision gives access to both rings and to the femoral canal without a fight.",
+      "how": [
+        "Oblique incision about two centimetres above and parallel to the medial two thirds of the inguinal ligament.",
+        "Divide skin, Camper and Scarpa fascia, controlling the superficial epigastric and external pudendal vessels.",
+        "Open the external oblique aponeurosis along its fibres from the superficial ring laterally, protecting the nerves lying immediately beneath it."
+      ],
+      "structuresAtRisk": ["Ilioinguinal nerve, directly under the external oblique aponeurosis"],
+      "pitfalls": ["Cutting the ilioinguinal nerve while opening the aponeurosis.", "An incision placed too low, over the ligament rather than above it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.cord": {
+      "id": "step.hern.cord", "kind": "dissection", "critical": true,
+      "title": "Mobilising the cord and identifying the nerves",
+      "why": "Every structure that causes a long-term complication is identified at this step: the vas, the vessels and the three nerves.",
+      "how": [
+        "Mobilise the cord at the pubic tubercle where the plane is easiest, and encircle it with a sling.",
+        "Identify the ilioinguinal, iliohypogastric and genital branch of the genitofemoral nerve and make a deliberate decision to preserve each.",
+        "Palpate and inspect the cord for an indirect sac, and the floor for a direct defect. Then inspect the femoral canal."
+      ],
+      "structuresAtRisk": ["Vas deferens", "Testicular vessels", "All three groin nerves"],
+      "pitfalls": ["Stripping the cord bare and devascularising the testis.", "Failing to look for a second, femoral, hernia."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.sac": {
+      "id": "step.hern.sac", "kind": "dissection",
+      "title": "Dealing with the sac",
+      "why": "How the sac is handled determines scrotal haematoma, testicular problems and, in the emergency setting, whether dead bowel is recognised.",
+      "how": [
+        "Separate an indirect sac from the cord structures up to the deep ring, then transfix and excise it, or simply invert a small one.",
+        "Do not dissect a large scrotal sac out completely: divide it and leave the distal part open, which reduces haematoma.",
+        "Invaginate a direct sac rather than opening it.",
+        "In an incarcerated hernia, open the sac and hold the contents BEFORE releasing the constriction, so nothing non-viable escapes into the abdomen."
+      ],
+      "structuresAtRisk": ["Bladder in a sliding hernia", "Bowel within the sac", "Vas deferens adherent to the sac"],
+      "pitfalls": ["Complete excision of a large scrotal sac, causing a substantial haematoma.", "Releasing the neck of a strangulated sac before controlling the contents."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.hern.mesh": {
+      "id": "step.hern.mesh", "kind": "reconstruction", "critical": true,
+      "title": "Placing and fixing the mesh",
+      "why": "A tension-free mesh repair works because of overlap and a secure medial corner. Both recurrence and chronic pain are decided at this step.",
+      "how": [
+        "Use a mesh large enough to overlap the pubic tubercle medially by about two centimetres and to extend well lateral to the deep ring.",
+        "Fix the medial corner securely onto the rectus sheath over the pubic tubercle, not into periosteum.",
+        "Suture the inferior edge to the shelving edge of the inguinal ligament; keep well away from the femoral vessels.",
+        "Create a slit around the cord and recreate a snug deep ring, then lay the mesh with a slight dome rather than stretched flat."
+      ],
+      "structuresAtRisk": ["Femoral vein, inferolaterally", "Ilioinguinal and iliohypogastric nerves caught in a fixation suture"],
+      "pitfalls": ["A mesh that stops at the pubic tubercle rather than overlapping it.", "A suture through periosteum, a recognised cause of persistent pain.", "A slit made too tight or too loose around the cord."],
+      "review": { "status": "ai_drafted" }
+    }
+  },
+  "media": {
+    "anatomy": ["med.surgx.inguinal-canal"]
+  }
+}

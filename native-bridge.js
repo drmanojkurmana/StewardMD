@@ -335,7 +335,8 @@
     // falls back to any cloud transcription. Throws SYNCHRONOUSLY when the plugin is absent (web, or
     // Android — not built yet) so SMD_VOICE can offer Fast Dictation instead. Stop-to-transcribe:
     // startTranscribe → (speak) → stopWhisper() runs inference natively → onFinal.
-    // opts: { language?, model?, initialPrompt?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
+    // opts: { language?, model?, initialPrompt?, silenceEndpointMs?, onPartial?, onFinal?, onError?, onStateChange?, onDownloadProgress? }
+    // silenceEndpointMs > 0 asks the native engine to auto-stop that long after speech ends (MaiK Ask).
     transcribeWhisper: function (opts) {
       opts = opts || {};
       var P = plugins(); var W = P && P.Whisper;
@@ -363,7 +364,8 @@
       function begin() {
         if (!current()) return;
         try { console.info("[SV-native] startTranscribe model=" + modelKey + " lang=" + lang); } catch (e) {}
-        W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "" })
+        W.startTranscribe({ model: modelKey, language: lang, initialPrompt: opts.initialPrompt || "",
+            silenceEndpointMs: Number(opts.silenceEndpointMs) || 0 })
           .catch(function (e) { try { console.info("[SV-native] startTranscribe FAIL " + ((e && e.code) || e)); } catch (e2) {} fail((e && e.code) || "recording-failure"); });
       }
       // Ensure the model is installed (download only if missing), then start recording.
@@ -583,23 +585,71 @@
     } catch (e) {}
     return o;
   }
+  /* The error class worth retrying: the device lost DNS or the route, not "the server said no".
+   * Matched on the message because CapacitorHttp surfaces the Java exception text verbatim. */
+  function isNetworkLost(e) {
+    var m = String((e && (e.message || e.errorMessage)) || e || "");
+    return /Unable to resolve host|No address associated with hostname|UnknownHostException|Failed to connect|Network is unreachable|ECONNRESET|Software caused connection abort|Failed to fetch/i.test(m);
+  }
+  function netLostError() {
+    var e = new Error("The app lost its network connection. Close and reopen StewardMD, then try again.");
+    e.code = "network_lost";
+    return e;
+  }
+
   function nativeApiFetch(url, init) {
     var Http = capHttp();
     if (!Http || !Http.request) return null;          // signal caller to fall back
     init = init || {};
     var headers = headersToObj(init.headers);
-    // Native-app marker for the site access gate. NOTE: no server code currently reads
-    // env.APP_GATE_KEY, so this token is presently INERT (it enforces nothing) — it is rotated and
-    // kept in sync with the Cloudflare secret so it is ready if /api/* gate enforcement (or App
-    // Check) is turned on later. It ships INSIDE the app bundle only (the public web never serves it).
+    // Native-app marker for the site access gate. This is LOAD-BEARING, not inert: functions/api/ai,
+    // functions/api/fundx and functions/api/kardiox all check it against env.APP_GATE_KEY, and that
+    // secret has been provisioned in prod since 2026-08-16 — so an empty-Origin native call that
+    // omits this header is now REJECTED. Keep it in sync with the Cloudflare secret; changing one
+    // without the other locks the native app out of /api/*. It ships INSIDE the app bundle only.
+    // It is an app-POSSESSION signal, not per-user auth: it is extractable from the IPA/APK, so it
+    // bounds casual abuse only — per-user quota and the _usage.js breaker are the real controls.
     headers["X-SMD-App"] = "smdapp_ddc578ad04b399a332e53e04706433d96803e91c2d373b7d";
     var ct = ""; for (var k in headers) if (k.toLowerCase() === "content-type") ct = String(headers[k]);
     var data = init.body;
     // CapacitorHttp wants string or JSON object on iOS; hand JSON bodies as objects so it encodes them.
     if (typeof data === "string" && /json/i.test(ct)) { try { data = JSON.parse(data); } catch (e) {} }
-    return Http.request({
+    var reqOpts = {
       url: url, method: (init.method || "GET").toUpperCase(),
       headers: headers, data: data, connectTimeout: 30000, readTimeout: 30000
+    };
+    /* NETWORK RECOVERY AFTER SLEEP.
+     *
+     * Measured on a Pixel 9, 2026-08-26: after the phone slept, EVERY CapacitorHttp request failed
+     * with `Unable to resolve host "stewardmd.in": No address associated with hostname` while the OS
+     * itself pinged the same host in 67ms. It stayed broken until the app was force-restarted, and
+     * came back the next time the device slept. Nothing told the user - a surgeon tapped "write to
+     * the hospital record", the note was signed, and the send died silently on DNS.
+     *
+     * The native client (OkHttp) is holding a resolver/connection pool bound to a network that went
+     * away. So on that specific error class: retry once on a fresh native request, then fall back to
+     * the WebView's own stack, which has a separate resolver. If both fail, reject with something a
+     * clinician can act on rather than "Failed to fetch".
+     *
+     * Only the FAILURE path pays for any of this; a healthy request is unchanged. */
+    return Http.request(reqOpts).catch(function (err) {
+      if (!isNetworkLost(err)) throw err;
+      return new Promise(function (r) { setTimeout(r, 600); }).then(function () {
+        return Http.request(reqOpts).catch(function (err2) {
+          if (!isNetworkLost(err2)) throw err2;
+          var web = (typeof window.CapacitorWebFetch === "function") ? window.CapacitorWebFetch : null;
+          if (!web) throw netLostError();
+          // Shape the web response like a CapacitorHttp one so the mapper below is untouched.
+          return web(url, { method: reqOpts.method, headers: headers, body: init.body })
+            .then(function (wr) {
+              return wr.text().then(function (t) {
+                var wh = {}; try { wr.headers.forEach(function (v, k) { wh[k] = v; }); } catch (e) {}
+                return { status: wr.status, data: t, headers: wh };
+              });
+            })
+            .catch(function () { throw netLostError(); });
+        });
+      });
     }).then(function (res) {
       var body = res && res.data;
       if (body != null && typeof body !== "string") { try { body = JSON.stringify(body); } catch (e) { body = String(body); } }
@@ -721,5 +771,27 @@
     }
     try { P.App.getLaunchUrl().then(function (r) { if (r && r.url) { feed(r.url); routeDeepLink(r.url); } }).catch(function () {}); } catch (e) {}
     try { P.App.addListener("appUrlOpen", function (d) { if (d && d.url) { feed(d.url); routeDeepLink(d.url); } }); } catch (e) {}
+    /* RE-WARM THE NATIVE RESOLVER ON RESUME.
+     *
+     * The sleep/wake DNS failure above is recoverable, but only after something has already failed -
+     * and the thing that fails is whatever the clinician just tapped. Firing one cheap request when
+     * the app comes back to the foreground moves that first failure off the critical path: by the
+     * time they tap "write to the hospital record", OkHttp has already been made to re-resolve.
+     *
+     * Deliberately fire-and-forget and unauthenticated: it exists to make the stack reconnect, not
+     * to fetch anything. Its response, success or failure, is ignored. */
+    try {
+      P.App.addListener("appStateChange", function (st) {
+        if (!st || !st.isActive) return;
+        try {
+          var H = capHttp();
+          if (H && H.request) {
+            H.request({ url: API_ORIGIN + "/api/ghis/warm", method: "GET",
+                        connectTimeout: 8000, readTimeout: 8000 })
+             .catch(function () {});   // a 404 warms the resolver exactly as well as a 200
+          }
+        } catch (e) {}
+      });
+    } catch (e) {}
   })();
 })();

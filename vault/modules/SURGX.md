@@ -1,0 +1,282 @@
+---
+tags: [module, surgery, education, documentation]
+status: MVP built (flag ON for testers, content ai_drafted pending R1 clinical sign-off)
+flag: smd_surgx (client, def:true for testers, ?surgx=1) + smd_surgx_draft (def:true, FLIP BEFORE RELEASE) + smd_surgx_notes (def:true, role-gated at runtime) + smd_surgx_mentor (Phase 2, def:false) + smd_surgx_uncleared_media (def:false, NEVER ship on) + smd_surgx_haptics (def:true)
+---
+# SURGX (SURGˣ · Surgical Intelligence)
+
+Five sections, one door: **01 Notes · 02 Protocols · 03 Procedures · 04 Evidence · 05 Cases**.
+Recovery point: tag `pre-surgx` (8cf77662). Design audit that preceded it is in this session's plan.
+
+**Brand vs identifier.** The product is "SURGˣ". Every key, flag, route, filename and variable is the
+ASCII-safe `surgx` / `SURGX`. The superscript appears in user-facing strings only. Do not let it into
+a storage key.
+
+## The one architectural idea that matters
+**StewardMD already had a surgical decision engine, and SURGX does not re-author it.**
+`ws-surgery.js` (709 lines, 13 syndromes) registers into `window.SMD_WS_ENGINES.surgery` and has
+shipped for months behind the Surgery workspace. SURGX **projects** its output onto a seven-band
+protocol spine via `surgx-model.compileEngineProtocol()`. The clinical logic therefore has exactly
+one home, and **parity is structural rather than something a test has to chase** - though
+`test/surgx-content.test.mjs` asserts it anyway, for every syndrome, in both the no-findings and
+all-findings states.
+
+**`ws-surgery.js` was not modified at all.** Provenance, an INVESTIGATE band and calculator links
+live in `surgx/protocols/engine-overlay.json`, reviewed separately, so the engine file stays the
+single source of clinical truth and this module adds only what it lacked.
+
+The second idea, inherited from [[CliniX]] deliberately: **a Step is the atom.** Procedures are
+ORDERED selections of shared steps plus emphasis; a case decision point can reference one. Measured
+reuse across the five procedures is asserted at >=60% in CI, so a step authored locally that belonged
+in a shared pack fails the build rather than quietly costing more at procedure 200.
+
+## Key files
+- `surgx-model.js` - **PURE, the architecture.** Schemas, validators, THREE gates, the compilers,
+  and the note logic (`noteCompleteness`, `numericGuard`, `applyExtraction`, `renderNoteText`).
+  No DOM, no fetch, no clock. 43 unit tests.
+- `surgx-content.js` - catalog-first lazy loader over `/surgx/`. Gates applied AT THE SEAM so no
+  screen can forget them. Fetches with `?v=<contentVersion>` because `sw.js` caches on the full URL.
+- `surgx-note-schema.js` - five note types + procedure template deltas. DATA ONLY.
+- `surgx-store.js` - account-scoped prefs (plaintext) + **AES-256-GCM device-local note store**
+  via `SMD_CLINIC_CRYPTO`. Fails CLOSED: no WebCrypto means no save, never a cleartext PHI write.
+- `surgx-entitlement.js` - Notes gated on `SMD_RX.canPrescribe()`, the app's existing clinician gate.
+- `surgx-evidence.js` - three layers: authored sources (offline) -> curated index (offline) ->
+  MaiK Research Mode (network, explicit tap only).
+- `surgx-diagrams.js` - five self-authored inline SVGs. The only media clearable on day one.
+- `surgx-screens.js` - router + the five sections. `surgx.js` - flag gate + `#surgxRoot`.
+- `surgx/**` - content as data. 24 files, 240 KB total.
+- `functions/api/ai/_surgx-note.js` - the note extraction prompt + server whitelist.
+
+## The three gates (each fails CLOSED, each has a test both ways)
+1. **REVIEW** - `review.status` not approved/published does not render. Missing or garbled reads as
+   `draft`. Absence is a refusal.
+2. **LICENCE** - media renders only when positively cleared. `cleared + licence + attribution` is NOT
+   enough for a hosted external file; it must also pass `isCommonsVerified` or `isOwnerProduced`.
+   Uncleared renders caption + "visual pending", never a blank.
+3. **EVIDENCE** - an item in DO NOW / RESUSCITATE / DEFINITIVE must resolve a source, or
+   `validateProtocol()` fails and the content cannot reach the directory.
+
+## Notes: the anti-fabrication stack (the reason this module needed care)
+An operative note is a legal record. A fabricated blood loss or swab count in a signed note is a
+patient-safety event. **Four layers, and only one is a prompt:**
+
+1. `functions/api/ai/_surgx-note.js` prompt - "if the surgeon did not say it, OMIT THE FIELD".
+2. **Server whitelist** - output keys intersected with the schema's `aiFillable:true` set, then a
+   hard `NEVER_AI_FILLABLE` DENY list applied on top. Counts, specimens, implants, consent,
+   discharge medications, identifiers and attribution are structurally unreachable however the
+   model responds - and the deny list wins even if a future schema change allow-lists them.
+3. **`numericGuard()`** - any number in an AI-filled field that is not in the transcript VOIDS the
+   field and marks it missing. The numeric analogue of `clinix-tutor.js` `sanitize()`.
+   **Known limitation, asserted in the test rather than assumed:** it is a set-membership test, so a
+   digit spoken anywhere whitelists it everywhere. That is why the catastrophic fields are on the
+   deny list rather than merely guarded.
+4. **Verification gate** - export blocked until every required field is `clinician`-confirmed, and
+   finalising is a DOUBLE press (the `discharge-ghis.js` `armSignOff()` discipline).
+
+Provenance renders as colour PLUS a text label: green yours, amber generated, red missing.
+A missing required field prints as `[NOT RECORDED]` in the note. **A UI that degrades by omission
+lies about the data.**
+
+## Hard invariants (each has a test)
+- **Flag off = total no-op.** No `#surgxRoot`, no `sgx-lock`, no `--sgx-*` property, nothing fetched,
+  no home tile. `test/run-surgx-ui.mjs`.
+- **All seven bands always render, in the model's fixed order.** An absent band shows an honest empty
+  state; it never reorders the page. A 3am protocol must read identically every time.
+- **The engine's own strings are carried verbatim.** `result.sc` -> DEFINITIVE, `result.ref` ->
+  ESCALATION, `result.mgmt[]` -> one notes block carried WHOLE. Nothing is regex-split across bands.
+- **No prescribing surface.** No SURGX path reaches `SMD_RX.open`.
+- **No free-text AI chat.** SURGX has no chatbot surface anywhere.
+- **No gamification.** No streaks, badges or trophies (owner brief). Progress exists only to resume.
+- **Case scoring is not a single percentage.** Safety misses are reported separately: a trainee who
+  reaches the right answer past a missed red flag got the answer right and the encounter wrong.
+- **Notes never leave the device.** There is no SURGX note endpoint, by design.
+
+## Gotchas
+- **BUMP `?v=` ON EVERY EXISTING FILE YOU EDIT.** SURGX edits `home.js`, `sidebar-redesign.js` and
+  `workspaces.js`; all three tokens now carry a `surgx` marker and
+  `test/surgx-content.test.mjs` FAILS if one loses it. This is the CliniX incident (module present
+  and working on the device, no tile and no toggle to reach it with).
+- **`scripts/build-www.sh` needs the explicit `cp -R surgx`** - root `*.js`/`*.css` are globbed, data
+  dirs are not. Asserted by a test.
+- **Load order is load-bearing**: flags -> model -> content -> note-schema -> store -> entitlement ->
+  evidence -> diagrams -> screens -> surgx.js. Asserted by a test. `ws-surgery.js` must load first.
+- **Content JSON is fetched with `?v=<contentVersion>`** from `surgx/manifest.json`, which is itself
+  fetched `cache:"no-store"`. Without this a content update can never reach a cached device.
+  **[[CliniX]] does NOT do this yet and has the same exposure** - worth fixing there.
+- The CDP helper `ev()` wraps its argument in `return (...)`, so a multi-statement snippet must be an
+  IIFE expression. Getting it wrong fails SILENTLY: the statement never runs and the assertion
+  reports a product bug that does not exist. This cost a debugging cycle during the build.
+- `home.js` loads BEFORE the SURGX block, so `HOME_TOOLS` `eligible()` reads `localStorage` directly
+  rather than `SMD_SURGX_FLAGS` (the ThoreX/CliniX pattern).
+- The tile badge is an inline SVG, not a Material ligature, so it cannot depend on a glyph being in
+  the font subset.
+
+## AI wiring (all additive, all metered separately)
+- `functions/_ai_usage.js` - `surgx_note` (30/day) and `surgx_case` (40/day). Separate buckets so a
+  surgeon's documentation load never eats their clinical MaiK allowance, and the admin console can
+  tell them apart. Same rationale as the `clinix` bucket.
+- `functions/api/ai/[[path]].js` - `extract` kind `"surgx-note"`; `mode:"surgx-mentor"` remapped to
+  `surgx_case` at the same place and shape as the existing `clinix-tutor` remap.
+- **MVP uses none of it.** Typed notes work with zero AI calls; cases run entirely on authored
+  reasoning. The AI path is built, tested and off.
+
+## Status
+- **MVP built.** 105 unit tests + 96 real-browser checks green, against both the repo and the built
+  `www/` bundle. Full suite: 11 failing files before and after, identical set (zero regression,
+  verified against `pre-surgx` in a clean worktree).
+- **Content: `ai_drafted`, NOT approved.** 8 authored protocols, 13 engine overlays, 5 procedures
+  (37 shared steps), 3 cases, 15 evidence records. Every one cites a real, dated source.
+  **The owner flips `review.status` after clinical review; until then `smd_surgx_draft` is what
+  makes it visible to testers, and every screen says so.**
+- **Media: 5 cleared, all self-authored inline SVG.** 3 entries are the sourcing work order.
+
+Deps: `ws-surgery.js` / [[Home|workspaces]] (the protocol engine) · [[CliniX]] (the content
+architecture this copies) · [[MaiK]] (Evidence Review, and Phase 2 mentor) · [[AI Control Center]]
+(the two new buckets) · `MEDCALC` (calculator deep links) · `SMD_CLINIC_CRYPTO` (note encryption) ·
+`SMD_RX.canPrescribe` (the Notes role gate).
+
+## Save destinations (Notes) — added 2026-08-24
+
+`surgx-destinations.js` → `window.SMD_SURGX_DEST`. Three destinations offered in the note editor
+under a "Save to" card (inline, NOT an overlay — deliberately, to avoid another stacking context).
+
+| id | flag | state |
+|----|------|-------|
+| `local` | — | works. AES-256-GCM via surgx-store.js. **System of record.** |
+| `drive` | `smd_surgx_dest_drive` (def **true**) | works on device. Doctor's own Drive, readable `.txt` in a "StewardMD Surgical Notes" folder. Native only (`SMD_getDriveToken` is null on web). |
+| `emr` | `smd_surgx_dest_emr` (def **true**) | **LIVE** (server gate permitting). Appends the note to the Initial Assessment's **Management plan** via the same verified `saveAssessment` transport as OPD. Needs a GHIS session + a ward patient opened (for `episodeId`) + `QUEUE_EMR_WRITE=1`. |
+
+**Local is always written first**, on every destination — the exports layer on top of a successful
+local save, so a failed upload can never lose an operative note.
+
+## Notes BACKUP + RESTORE (Drive) — added 2026-08-26
+
+`surgx-backup.js` → `window.SMD_SURGX_BACKUP`. Distinct from the `drive` destination above: that one
+writes a **readable `.txt` per note** for a human, which the app cannot read back. This is the round
+trip, and it exists because **notes do not survive a reinstall** (every native install is a new
+container; two notes have been lost that way).
+
+- **END-TO-END ENCRYPTED with the surgeon's own password** (the WhatsApp model), added 2026-08-26:
+  `password --PBKDF2-SHA256, 200k, fresh 16-byte salt per backup--> AES-256-GCM`, derived by
+  `SMD_CLINIC_CRYPTO` — the SAME adapter personal-clinic and shared-clinic sync use, so there is
+  still exactly one place that decides how StewardMD derives a key. **No new crypto was written.**
+- **Google stores ciphertext.** Outside the encrypted payload there is only what a restore needs
+  before it can derive a key: envelope version, KDF parameters, salt, and a timestamp for the UI.
+  No note text, no label, no patient reference, no account id, **and not even the note count** (that
+  would leak clinical volume). Asserted by searching the actual uploaded bytes.
+- **There is no escrow and no reset.** StewardMD never sees the password and stores it nowhere; a
+  lost password means an unrecoverable backup. Hence: confirmed twice before the first backup,
+  minimum 8 characters, leading/trailing spaces refused (easy to lose when retyping months later) —
+  all caught BEFORE anything is written.
+- **Refusals that matter as much as the encryption:** a PLAINTEXT file is refused on read (there is
+  no unencrypted format to fall back to, so a hand-written note dump can never be imported); a
+  backup asking for WEAKER key stretching is refused (otherwise anyone who can write to the folder
+  could downgrade the KDF and hand it back); a wrong password fails the AES-GCM tag, so it cannot
+  yield plausible-looking notes, and nothing is half-restored.
+- **One file**, `StewardMD-SURGX-notes-backup.smdbk` (not `.json` — it is ciphertext and the name
+  should not invite a text editor), in the same "StewardMD Surgical Notes" folder, **updated in
+  place (PATCH)** so a surgeon's Drive does not fill with dated duplicates.
+- **It carries note BODIES, not the DEVICE ciphertext, and that is deliberate.** `surgx-store.js`
+  encrypts with a per-device, per-account random secret in `localStorage`; a reinstall wipes that
+  secret — the very event this backup exists to survive — so device ciphertext would be permanently
+  unreadable. The bodies are re-encrypted under the password for transit, and restoring re-encrypts
+  them under the NEW device secret.
+- **The PHI posture is unchanged, and constrained the design:** `confirmed:true` at the API for both
+  directions, plus the arm-then-act double press in the UI (the `armSignOff()` discipline). Nothing
+  runs on a timer, on save, or in the background — **there is still no silent upload path, and no
+  auto-sync.** Adding continuous sync would be a deliberate change to this posture, not a tweak.
+- **Restore is additive and cannot lose work.** A device note is replaced only when the backup copy
+  is *strictly* newer (`updatedAt`); equal timestamps SKIP, so a repeat restore writes nothing and a
+  restore onto a working device cannot roll back newer edits.
+- Drive token + folder come from `SMD_SURGX_DEST` (now exported) — one Drive integration, not two.
+- A note that will not decrypt is **reported** in the result, never silently dropped from a file
+  presented as complete.
+- Tests: `test/surgx-backup.test.mjs` (18 — merge rules, password rules, leakage, wrong password,
+  weak-KDF and plaintext refusal, plus a REAL encrypt/decrypt round trip against the actual PBKDF2 +
+  AES-GCM adapter: back up → wipe the device → restore → readable again) +
+  `test/run-surgx-backup-ui.mjs` (one tap opens the password form and sends nothing; the uploaded
+  bytes carry no note text).
+- **Gotcha for whoever writes the next leakage test:** do not assert that a SHORT string is absent
+  from the uploaded bytes. Random base64 ciphertext contains a two-character note id by chance, and
+  the test fails intermittently for a reason unrelated to leakage. Use a long, distinctive fixture id.
+
+**The Notes banner was corrected**: it said notes are "never uploaded", which stops being true the
+moment the surgeon taps Back up. It now says the only copy that leaves is a backup they ask for.
+
+### How the EMR write works (2026-08-24)
+GHIS has no captured operative-note form, so rather than invent an endpoint the note is **appended
+to `assessment.management_plan`** on the patient's own visit, through `saveAssessment` - the exact
+transport the OPD EMR connect uses. Everything that makes that safe applies unchanged: visit
+activation, re-serialising the live form for the authoritative `doc_id`, the `patient_id` mismatch
+abort, and the `doc_id 0` refusal.
+
+**APPEND, never overlay.** `saveAssessment` gained `appendFields` (alongside the existing
+overwriting `fields`). OPD may overwrite `management_plan` because the doctor is looking at its
+current value; a note posted from SURGX is not, so replacing it would silently destroy the treating
+doctor's plan. The pure `appendText(cur, add)` helper is exported and unit-tested: keeps the
+existing value, separates with a blank line, and is **idempotent** so a double-tap or retry cannot
+write the note twice.
+
+**Requires `episodeId`.** An Initial Assessment attaches to a VISIT; without it the form GET returns
+a blank `doc_id 0` and the server refuses (correctly) rather than creating an orphan record.
+`GHIS._selectedPatient` did not store `episodeId` - `getSelectedPatient()` and the `SMD_WATCH` call
+site were reading a field that was **always `undefined`**. Now stored in `openLab()` and exposed.
+
+**Still server-gated by `QUEUE_EMR_WRITE=1`.** The client flag only controls whether the option is
+OFFERED; it can never by itself write to a live record.
+
+### PHI posture
+Notes carry patient identifiers (`patientRef` is required + `phi:true`). Every non-local send needs
+`confirmed:true` AND a second in-UI tap; there is no silent/background upload path. The patient
+reference never appears in a Drive **filename** (filenames leak into search results, "shared with
+me" lists and notification emails — a wider audience than the file itself).
+
+## Gotcha: deep-linked calculators need a z-index lift
+`.mc-overlay` is z-index **870**; the SURGX overlay is **1255**. A calculator opened from a score
+chip renders *underneath* SURGX — fully working and completely invisible, which reads as "the
+calculator links are broken". Fixed by `html.sgx-lock .mc-overlay { z-index: 1300 }` in surgx.css,
+scoped to the class surgx.js adds on open/removes on close so it reverts itself.
+
+## Gotcha: calculator ids are not greppable
+`calcChips()` is fail-soft — an id the catalog lacks is silently skipped, no error. `asa`, `iss` and
+`tbsa` shipped dead this way. `asa` looks valid to a naive grep because it is an **input field** id
+*inside* another calculator; only top-level entries (`{ id:"x", cat:...`) are real calculators.
+`test/surgx-calc-links.test.mjs` now resolves every id against the parsed catalog.
+
+## Patient linking (Notes) — added 2026-08-25
+
+`surgx-patient.js` → `window.SMD_SURGX_PATIENT`. A "Patient" card at the top of the note editor,
+two routes:
+
+- **From a hospital EMR** — one list with **GHIS (GIMSR) alongside every Connect-onboarded tenant**
+  (`SMD_CONNECT.tenants()`), the same presentation `connect-patient.js`'s admit chooser uses. GHIS
+  adopts the patient already open in Ward Sync (that is where the roster + visit context live);
+  a Connect hospital opens an inline search (`SMD_CONNECT.searchPatients`).
+- **Enter manually** — a free-text reference, for a surgeon working alone with no hospital EMR.
+
+The link `{source, tenantId, patientId, episodeId, name}` rides on the note and is persisted
+**inside the encrypted body** (`surgx-store.js`), never in the plaintext note index.
+
+### Writability is decided in ONE place
+`SMD_SURGX_PATIENT.writability(link)` — the picker, the EMR row and the error text all read it, so
+they cannot disagree:
+
+| source | writable | why |
+|--------|----------|-----|
+| `ghis` + `episodeId` | **yes** | the only verified write path |
+| `ghis` without a visit | no | an assessment attaches to a VISIT |
+| `connect` | no | Connect is **pull-only** — no note write-back endpoint exists |
+| `manual` | no | there is no hospital record to write to |
+
+`saveToEmr` checks the SOURCE before the id: a manual patient has no `patientId` by definition, and
+"no patient selected" would be a wrong and confusing thing to tell that surgeon.
+
+**The note's own linked patient wins over whoever is open in Ward Sync** — a note written this
+morning must never be filed against the patient opened this afternoon. Notes predating patient
+linking still fall back to the ward selection.
+
+## EMR write gate — CONFIRMED LIVE (2026-08-25)
+`QUEUE_EMR_WRITE = "1"` is set in `wrangler.toml` `[env.production.vars]` (this file IS the Pages
+config for project `stewardmd`). Verified against production, not assumed: a POST to
+`/api/ghis/assessment-save` with an invalid token returns **401 login_required**, not 501 — so the
+write gate is open and the request only failed on auth. Probe writes nothing (no valid session).

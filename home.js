@@ -211,13 +211,14 @@
         var kxActive = false; try { kxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("kardiox")); } catch (e) {}
         var txActive = false; try { txActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("thorex")); } catch (e) {}
         var sxActive = false; try { sxActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("sknx")); } catch (e) {}
-        var mlActive = false; try { mlActive = !!(window.SMD_XACCESS && SMD_XACCESS.isActiveCached && SMD_XACCESS.isActiveCached("maik_local")); } catch (e) {}
         // Software update (native only) — Apple-style: Automatic toggle + Check + Download & install.
+        // BUG (2026-08-23, user report): this used to render at the tail of "Experimental Features",
+        // an odd, easy-to-miss home for a core update mechanism that isn't experimental or gated by
+        // an access code. Now its own top-level Settings group, same as Clinical Engine / AI Assistant.
         var otaBlk = "";
         try {
           if (window.SMD_OTA && SMD_OTA.available()) {
-            otaBlk = '<div class="smd-nav-note" style="margin-top:14px">' + svg("download", "smd-ico") + ' Software update</div>' +
-              swRow("ota_auto", "Automatic updates", "Fetch new versions in the background", SMD_OTA.isAuto()) +
+            otaBlk = swRow("ota_auto", "Automatic updates", "Fetch new versions in the background", SMD_OTA.isAuto()) +
               '<div class="smd-nav-sub" id="otaStatus" style="padding:0 0 6px">Version ' + (SMD_OTA.currentVersion() || "current") + '</div>' +
               '<button class="smd-nav-btn" id="otaCheck">' + svg("refresh", "smd-ico") + ' Check for updates</button>' +
               '<button class="smd-nav-btn" id="otaInstall" style="display:none">' + svg("download", "smd-ico") + ' Download &amp; install</button>';
@@ -227,9 +228,9 @@
           '<button class="smd-nav-btn' + (xaActive ? ' on' : '') + '" data-xa-open="fundx">' + (xaActive ? '🟢 FundX AI — enabled' : '🔬 FundX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (kxActive ? ' on' : '') + '" data-xa-open="kardiox">' + (kxActive ? '🟢 KardioX AI — enabled' : '🫀 KardioX AI — enter access code') + '</button>' +
           '<button class="smd-nav-btn' + (txActive ? ' on' : '') + '" data-xa-open="thorex">' + (txActive ? '🟢 ThoreX AI — enabled' : '🫁 ThoreX AI — enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>' +
-          '<button class="smd-nav-btn' + (mlActive ? ' on' : '') + '" data-xa-open="maik_local">' + (mlActive ? 'MaiK on-device model: enabled' : 'MaiK on-device model: enter access code') + '</button>' + otaBlk;
+          '<button class="smd-nav-btn' + (sxActive ? ' on' : '') + '" data-xa-open="sknx">' + (sxActive ? 'SknX AI: enabled' : 'SknX AI: enter access code') + '</button>';
         setBody.insertAdjacentHTML("beforeend",
+          (otaBlk ? group("update", "Software Update", otaBlk, false) : "") +
           group("engine", "Clinical Engine (Advanced)", engineBody, false) +
           (toolsBody ? group("tools", "Clinical Tools", toolsBody, false) : "") +
           group("ai", "AI Assistant", aiBody, false) +
@@ -296,9 +297,6 @@
                   if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
                   return;
                 }
-                // MaiK on-device model: no module to open — the engine picker + model download live
-                // in Settings › AI Assistant, so just confirm the unlock and point there.
-                if (feat === "maik_local") { toast("On-device model unlocked. Open Settings › AI Assistant to download it."); return; }
                 try { localStorage.setItem("smd_fundx", "1"); } catch (e) {}
                 if (window.FUNDX && FUNDX.open) FUNDX.open(); else toast("FundX AI loading…");
               }
@@ -762,15 +760,29 @@
         tile("ward", "Ward Sync", "Inpatient labs &amp; imaging (GHIS)", "ward") +
         (oncoOn ? tile("ribbon", "OncoTree", "Cancer pathway navigator", "oncotree") : "") +
         tile("pills", "Protocol", "Assign a treatment protocol", "protocol") +
+        // The Rx pad was only reachable from inside a MaiK answer or a consult, so writing a
+        // prescription for the patient in front of you meant going through something else first.
+        // It belongs under the same roof as the other patient-facing tools.
+        tile("note", "Prescription", "Write and sign an Rx", "rx") +
         tile("heart", "FollowCare", "Post-discharge follow-up", "fc") +
         tile("share", "Connect", "Link your hospital EMR", "connect") +
         '</div>');
       sheetEl().querySelectorAll("[data-mi]").forEach(function (b) {
         b.addEventListener("click", function () {
           var a = b.getAttribute("data-mi"); closeSheet();
-          setTimeout(function () { ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)(); }, 70);
+          setTimeout(function () {
+            if (a === "rx") { ACT.prescription(); return; }
+            ((a === "opd" || a === "protocol") ? ACT.queue : a === "icu" ? ACT.icu : a === "ward" ? ACT.ward : a === "oncotree" ? ACT.oncotree : a === "fc" ? ACT.followcare : ACT.connect)();
+          }, 70);
         });
       });
+    },
+    // Open the prescription pad straight away, with no case and no pre-fill: SMD_RX.open() already
+    // handles the doctor-verification gate and shows its own "verify first" path, so there is nothing
+    // to duplicate here.
+    prescription: function () {
+      if (window.SMD_RX && SMD_RX.open) { try { SMD_RX.open({}); } catch (e) { toast("Prescription pad unavailable"); } }
+      else toast("Prescription pad loading…");
     },
     syndromes: function () { if (window.SB && SB.openRef) SB.openRef("syndromes"); else if (window.SB && SB.openSyn) SB.openSyn(); else if (window.ASP && ASP.open) ASP.open(); else toast("Syndromes loading…"); },
     askai: function () { openAskAi(); },
@@ -808,6 +820,24 @@
       // SknX is not code-gated via SMD_XACCESS — it's gated internally by SKNX.isOn() (flag + a
       // non-free entitlement), so open() is already a complete no-op when the gate fails.
       if (window.SKNX && SKNX.open) SKNX.open(); else toast("SknX AI loading…");
+    },
+    clinix: function () {
+      // CliniX — clinical learning for medical students. Like SknX, it is not code-gated via
+      // SMD_XACCESS: CLINIX.open() checks smd_clinix itself and is a complete no-op when off.
+      // Persist the flag so the tile stays visible once a user has opened it from Settings.
+      try { localStorage.setItem("smd_clinix", "1"); } catch (e) {}
+      if (window.CLINIX && CLINIX.open) CLINIX.open(); else toast("CliniX loading…");
+    },
+    pglog: function () {
+      // NMC Logbook - the PG digital logbook (PGMER-2023 5.2(v)-(vi)). Like SURGX/CliniX it is not
+      // code-gated via SMD_XACCESS: PGLOG.open() checks smd_pglog itself and is a complete no-op
+      // when off.
+      if (window.PGLOG && PGLOG.open) PGLOG.open(); else toast("NMC Logbook loading…");
+    },
+    surgx: function () {
+      // SURGX (SURGˣ) — Surgical Intelligence. Like SknX/CliniX it is not code-gated via
+      // SMD_XACCESS: SURGX.open() checks smd_surgx itself and is a complete no-op when off.
+      if (window.SURGX && SURGX.open) SURGX.open(); else toast("SURGX loading…");
     },
     insulin: function () {
       // Insulin dose CDSS — opened from its Clinical-Tools tile. Master flag smd_insulin (DEFAULT ON);
@@ -986,6 +1016,12 @@
       // sheet (More / Display)
       ".hv-scrim{position:fixed;inset:0;background:rgba(8,18,26,.5);opacity:0;pointer-events:none;transition:opacity .2s;z-index:130}.hv-scrim.on{opacity:1;pointer-events:auto}",
       ".hv-sheet{--hpanel:var(--v3-panel,#fff);--hink:var(--v3-ink,#0F172A);--hmut:var(--v3-muted,#64748B);--hbd:var(--v3-border,#E2E8F0);--hbg:var(--v3-bg,#F8FAFC);--hp:var(--v3-primary,#0F766E);--hps:var(--v3-primary-soft,#CCFBF1);--hfont:'Inter',-apple-system,'Segoe UI',Roboto,system-ui,sans-serif;position:fixed;left:0;right:0;bottom:0;z-index:131;background:var(--hpanel,#fff);color:var(--hink,#0F172A);border-radius:20px 20px 0 0;box-shadow:0 -10px 40px rgba(0,0,0,.22);transform:translateY(100%);transition:transform .26s cubic-bezier(.2,.7,.2,1);max-height:86vh;overflow-y:auto;font-family:var(--hfont)}.hv-sheet.on{transform:none}.hv-sheet-wrap{max-width:480px;margin:0 auto;padding:8px 18px calc(22px + env(safe-area-inset-bottom))}",
+      // BUG (2026-08-23, WhatsApp bug report): .hv-sheet (the "More" sheet + every other sheet
+      // openSheet() builds) is appended to document.body, not #homeV2 - so the dark-mode token
+      // overrides scoped to "body.dark #homeV2" never reached it, and the sheet stayed light-
+      // themed (light panel, dark ink) even with the rest of the app in dark mode. Same tokens,
+      // same values, just scoped to reach this element too.
+      "body.dark .hv-sheet{--hbg:#0B1220;--hpanel:#111B2E;--hbd:#1E2B43;--hink:#E7EDF5;--hmut:#8597AD;--hps:#0c2e2a}",
       // touch-action:none: #hv-sheet itself is the scroll container (overflow-y:auto). Without this,
       // a touch that starts on the grab handle is still native-scroll territory (iOS rubber-bands the
       // whole sheet) and fights our manual drag transform below — same drag JS, but only MaiK's
@@ -1023,18 +1059,39 @@
       // and the rotating quote popup so they never cover the sheet's content (e.g. the contributor card).
       "body.hv-sheet-open .hv-fab,body.hv-sheet-open #harrisonQuotePopup,body.hv-sheet-open .ghis-ward-fab{display:none!important}",
       ".hv-sheet{z-index:calc(var(--z-cases, 600) + 40)}.hv-scrim{z-index:calc(var(--z-cases, 600) + 39)}",
-      // Acknowledgements sheet: render the names' hover tooltips (roles, bios, publications)
-      // INLINE as readable cards — visible on touch, no overlap. Names stack; each description
-      // sits under its name.
-      ".hv-ack .ack-names{display:block!important}",
-      ".hv-ack .ack-role{font:700 11px var(--hfont,var(--sans))!important;text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#5a7184)!important;margin:18px 0 2px!important}",
-      ".hv-ack .ack-contrib-name,.hv-ack .creator-name{display:block!important;position:relative!important;font:800 15px var(--hfont,var(--sans))!important;color:var(--hink,#14202b)!important;margin:14px 0 0!important;padding:0!important;cursor:default!important;border:none!important}",
-      "body.dark .hv-ack .ack-contrib-name,body.dark .hv-ack .creator-name{color:#E7EDF5!important}",
-      "body.dark .hv-ack .ack-role{color:var(--teal,#12a594)!important}",
-      ".hv-ack .ack-tip,.hv-ack .creator-tip{display:block!important;position:static!important;left:auto!important;right:auto!important;top:auto!important;bottom:auto!important;width:auto!important;max-width:none!important;max-height:none!important;overflow:visible!important;box-shadow:none!important;z-index:auto!important;transform:none!important;margin:6px 0 2px!important;border:1px solid var(--hbd,#dde4e8)!important;border-radius:12px!important;background:var(--hbg,#f6f8f8)!important;color:var(--hink,#14202b)!important;padding:11px 13px!important;font:500 12.5px/1.55 var(--hfont,var(--sans))!important;white-space:normal!important}",
-      ".hv-ack .creator-tip{display:flex!important;flex-direction:column!important;padding:0 0 12px!important;background:var(--hpanel,#fff)!important}",
-      ".hv-ack .ack-tip strong{display:block;color:var(--hp,var(--teal))!important;font-weight:800;margin-bottom:3px}",
-      ".hv-ack .ack-tip::before,.hv-ack .ack-tip::after,.hv-ack .creator-tip::before,.hv-ack .creator-tip::after{display:none!important}",
+      /* Acknowledgements roster (redesign 2026-08-27). The old sheet cloned #ackCard and used
+         !important to force every hover tooltip open INLINE. With 12 people that is three screens
+         of bios nobody scrolls — the "it looks too big" report. Now it is an accordion built from
+         the same data: one line per person, bio only on tap, one open at a time. */
+      ".smd-ack{--ak-line:var(--hbd,#dde4e8);--ak-mut:var(--hmut,#5a7184);text-align:left}",
+      ".smd-ack-h{display:flex;align-items:center;gap:8px;margin:20px 0 8px;font:700 11px var(--hfont,var(--sans));text-transform:uppercase;letter-spacing:.07em;color:var(--ak-mut)}",
+      ".smd-ack-h:first-child{margin-top:4px}",
+      ".smd-ack-n{margin-left:auto;font-weight:700;font-size:11px;color:var(--ak-mut);background:var(--hbg,#f1f5f5);border-radius:999px;padding:2px 8px;letter-spacing:0}",
+      ".smd-ack-list{border:1px solid var(--ak-line);border-radius:14px;overflow:hidden;background:var(--hpanel,#fff)}",
+      ".smd-ack-row+.smd-ack-row{border-top:1px solid var(--ak-line)}",
+      ".smd-ack-hit{display:flex;align-items:center;gap:11px;width:100%;box-sizing:border-box;padding:12px 13px;background:none;border:0;text-align:left;cursor:pointer;color:inherit;-webkit-tap-highlight-color:transparent;font:inherit}",
+      ".smd-ack-hit:disabled{cursor:default}",
+      ".smd-ack-hit:active{background:var(--hbg,#f1f5f5)}",
+      ".smd-ack-av{flex:0 0 auto;width:34px;height:34px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:var(--teal,#0e6e63);color:#fff;font:800 12px var(--hfont,var(--sans));letter-spacing:.02em}",
+      ".smd-ack-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:2px}",
+      ".smd-ack-nm{font:700 14px/1.3 var(--hfont,var(--sans));color:var(--hink,#14202b)}",
+      ".smd-ack-rl{font:500 11.5px/1.35 var(--hfont,var(--sans));color:var(--ak-mut)}",
+      ".smd-ack-chev{flex:0 0 auto;color:var(--ak-mut);font-size:17px;line-height:1;transition:transform .18s ease}",
+      ".smd-ack-row.is-open .smd-ack-chev{transform:rotate(90deg)}",
+      /* Collapsed by default — grid-template-rows animates to auto-height without a fixed max. */
+      ".smd-ack-bio{display:grid;grid-template-rows:0fr;transition:grid-template-rows .22s ease}",
+      ".smd-ack-row.is-open .smd-ack-bio{grid-template-rows:1fr}",
+      /* visibility, not just clipping: a collapsed bio must leave the a11y tree and find-in-page
+         too, or a screen reader still reads all twelve. It inherits, so children go with it. */
+      ".smd-ack-bio>*{overflow:hidden;min-height:0;visibility:hidden}",
+      ".smd-ack-row.is-open .smd-ack-bio>*{visibility:visible}",
+      ".smd-ack-bio p{margin:0;padding:0 13px 13px 13px;font:500 12.5px/1.6 var(--hfont,var(--sans));color:var(--ak-mut)}",
+      ".smd-ack-lnk{display:block;margin:0 13px 10px;font:600 12px var(--hfont,var(--sans));color:var(--teal,#0e6e63);word-break:break-all;text-decoration:none}",
+      ".smd-ack-cta{margin-top:18px}",
+      "body.dark .smd-ack-nm{color:#E7EDF5}",
+      "body.dark .smd-ack-list{background:var(--hpanel,#132030)}",
+      "body.dark .smd-ack-n{background:rgba(127,127,127,.16)}",
+      "@media (prefers-reduced-motion:reduce){.smd-ack-bio,.smd-ack-chev{transition:none}}",
       ".brand,.v3-mark,.v3-shield,img[alt=\"StewardMD\"]{cursor:pointer}",
       // account/profile block injected into the sidebar (settings)
       ".smd-sba{display:flex;align-items:center;gap:10px;padding:12px 16px;border-bottom:1px solid rgba(127,127,127,.18);background:linear-gradient(180deg,rgba(20,184,166,.10),transparent)}",
@@ -1432,6 +1489,18 @@
       eligible: function () { try { if (window.THOREX && THOREX.isOn) return THOREX.isOn(); var q = (location.search.match(/[?&]thorex=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_thorex") === "1"); } catch (e) { return false; } } },
     { act: "sknx", ic: "dermatology", tt: "SknX AI", sub: "Lesion analysis", feat: true, anim: "derm",
       eligible: function () { try { if (window.SKNX && SKNX.isOn) return SKNX.isOn(); var q = (location.search.match(/[?&]sknx=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_sknx") === "1"); } catch (e) { return false; } } },
+    { act: "clinix", ic: "school", anim: "clinix", tt: "CliniX", sub: "Clinical learning", feat: true,
+      eligible: function () { try { if (window.CLINIX && CLINIX.isOn) return CLINIX.isOn(); var q = (location.search.match(/[?&]clinix=([^&]+)/) || [])[1]; return q != null ? (q === "1" || q === "on" || q === "true") : (localStorage.getItem("smd_clinix") === "1"); } catch (e) { return false; } } },
+    // SURGX (SURGˣ) — Surgical Intelligence. eligible() reads localStorage DIRECTLY rather than
+    // SMD_SURGX_FLAGS, because home.js loads at index.html:1587, BEFORE the SURGX block: the flag
+    // object does not exist yet at tile-render time. Same fallback pattern as ThoreX/CliniX above.
+    { act: "surgx", ic: "content_cut", tt: "SURG\u02E3", sub: "Surgical intelligence", feat: true, anim: "surgx",
+      eligible: function () { try { var q = (location.search.match(/[?&]surgx=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); return localStorage.getItem("smd_surgx") !== "0"; } catch (e) { return true; } } },
+    // NMC Logbook - PG digital logbook. eligible() reads localStorage DIRECTLY rather than
+    // SMD_PGLOG_FLAGS, because home.js loads BEFORE the pglog block in index.html: the flag object
+    // does not exist yet at tile-render time. Same fallback pattern as SURGX/ThoreX/CliniX above.
+    { act: "pglog", ic: "history_edu", tt: "NMC eLOGBook", sub: "Residency logbook & portfolio", feat: true,
+      eligible: pglogOn },
     { act: "followcare", ic: "health_and_safety", tt: "FollowCare", sub: "Recovery",
       eligible: function () { try { var q = (location.search.match(/[?&]fc=([^&]+)/) || [])[1]; if (q != null) return (q === "1" || q === "on" || q === "true"); if (window.FollowCare && FollowCare.enabled) return FollowCare.enabled(); if (window.SMD_FOLLOWCARE_FLAGS && SMD_FOLLOWCARE_FLAGS.on) return SMD_FOLLOWCARE_FLAGS.on(); return localStorage.getItem("smd_followcare") !== "0"; } catch (e) { return true; } } },
     { act: "maitri", ic: "support_agent", tt: "MAiTRI", sub: "Recovery", feat: true, anim: "maitri",
@@ -1475,7 +1544,19 @@
     derm: '<svg class="ai-anim ai-derm" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4.5"/><circle class="p" cx="10" cy="10" r="1.7"/><circle class="p p2" cx="15" cy="14" r="1.7"/><circle class="p p3" cx="9.5" cy="15" r="1.3"/></svg>',
     cxr: '<svg class="ai-anim ai-cxr" viewBox="0 0 24 24"><path d="M12 4v9"/><path d="M12 8c-1-2-3.2-2.4-4.6-1.3C6 8 5 10.2 5 13.2A2.9 2.9 0 0 0 10.8 14"/><path d="M12 8c1-2 3.2-2.4 4.6-1.3C18 8 19 10.2 19 13.2A2.9 2.9 0 0 1 13.2 14"/><rect class="beam" x="2" y="3" width="3.4" height="18"/></svg>',
     oncotree: '<svg class="ai-anim ai-oncotree" viewBox="0 0 24 24"><path class="branch" d="M12 5v4M12 9c0 0-5 1-5 6M12 9c0 0 5 1 5 6"/><circle class="n n0" cx="12" cy="4.5" r="1.9"/><circle class="n n1" cx="7" cy="16" r="1.9"/><circle class="n n2" cx="17" cy="16" r="1.9"/></svg>',
-    maitri: '<img src="/maitri-logo.png" alt="" style="width:48px;height:48px;object-fit:contain;filter:brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0,0,0,.35))">'
+    // Brand marks share .ai-brandmark: ONE optical box in CSS, rather than the 48/38/34px inline
+    // sizes these carried, which made three logos sitting side by side three different weights.
+    maitri: '<img class="ai-brandmark" src="/maitri-logo.png" alt="">',
+    // The real CliniX logo (owner-supplied, clinix-logo.png - same pattern as maitri-logo.png
+    // above): brightness(0) invert(1) forces it white against this dark badge regardless of the
+    // source file's own color, since the PNG is alpha-masked, not a white-background image.
+    clinix: '<img class="ai-brandmark ai-clinix-img" src="/clinix-logo.png" alt="">',
+    // SURGX: the real owner-supplied monogram (surgx-logo.png), same pattern as maitri/clinix above.
+    // brightness(0) invert(1) forces it WHITE on this dark badge regardless of the source colour,
+    // which works because the PNG is alpha-masked rather than a white-background image.
+    // Deliberately STATIC - the module's design brief is "not gamified", and an animating badge on
+    // a surgical tile reads wrong.
+    surgx: '<img class="ai-brandmark ai-surgx-img" src="/surgx-logo.png" alt="">'
   };
   function homeToolTile(t) {
     var icon = (t.anim && ANIM_ICON[t.anim]) ? ANIM_ICON[t.anim] : ric(t.ic);
@@ -1702,9 +1783,13 @@
       else if (_fl) _fl.src = "/logo.png";
     } catch (e) {}
 
-    var scrim = document.getElementById("hvScrim");
-    if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
-    if (!document.getElementById("hvSheet")) { var sheet = document.createElement("div"); sheet.className = "hv-sheet"; sheet.id = "hvSheet"; sheet.setAttribute("role", "dialog"); sheet.setAttribute("aria-modal", "true"); sheet.setAttribute("aria-label", "StewardMD"); document.body.appendChild(sheet); }
+    // BUG (2026-08-22, WhatsApp report): this used to pre-create #hvScrim/#hvSheet inline, duplicating
+    // sheetEl()'s own "create if missing" check below - so by the time ANY sheet actually opened,
+    // sheetEl() found the nodes already there and skipped its `if (!s)` branch entirely, which is the
+    // ONLY place the swipe-to-dismiss touch handlers get bound. Every bottom sheet in the app (not just
+    // Customize tools) silently never had drag-to-close wired up. Routing through sheetEl() itself
+    // keeps this warm-render step but lets the real binding run exactly once, as intended.
+    sheetEl();
     fab = document.createElement("button"); fab.className = "hv-fab"; fab.id = "hvFab"; fab.setAttribute("aria-label", "StewardMD home");
     // Home FAB = house outline with the StewardMD logo mark inside it.
     fab.innerHTML = '<svg viewBox="0 0 48 48" width="34" height="34" aria-hidden="true"><path d="M4 23 L24 6 L44 23 M9 22 V43 H39 V22" fill="none" stroke="#fff" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/><image href="/logo.png" xlink:href="/logo.png" x="15" y="26.5" width="18" height="13.5" preserveAspectRatio="xMidYMid meet"/></svg>';
@@ -1783,13 +1868,21 @@
     if (!s) {
       var scrim = document.getElementById("hvScrim");
       if (!scrim) { scrim = document.createElement("div"); scrim.className = "hv-scrim"; scrim.id = "hvScrim"; document.body.appendChild(scrim); scrim.addEventListener("click", closeSheet); }
-      s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet"; document.body.appendChild(s);
+      s = document.createElement("div"); s.className = "hv-sheet"; s.id = "hvSheet";
+      s.setAttribute("role", "dialog"); s.setAttribute("aria-modal", "true"); s.setAttribute("aria-label", "StewardMD");
+      document.body.appendChild(s);
       // BUG-19: drag the sheet down (from the "—" grab handle / top) to dismiss it — iOS + Android.
-      // Only engages when the content is scrolled to the top, so it never fights inner scrolling.
+      // Content-area touches only engage when scrolled to the top, so they never fight inner scrolling.
+      // BUG (2026-08-22, WhatsApp report): the grab handle is a DEDICATED non-scrolling drag target
+      // (touch-action:none) but used to be gated behind the SAME scrollTop==0 check as the content -
+      // so once a long sheet (e.g. Customize tools' 10+ toggle rows) was scrolled down even slightly,
+      // dragging the handle stopped closing it. The handle must always start a drag.
       (function (sh) {
         var sy = 0, dy = 0, drag = false;
         sh.addEventListener("touchstart", function (e) {
-          if (sh.scrollTop > 0 || !e.touches || !e.touches.length) { drag = false; return; }
+          if (!e.touches || !e.touches.length) { drag = false; return; }
+          var onHandle = e.target && e.target.closest && e.target.closest(".hv-grab");
+          if (!onHandle && sh.scrollTop > 0) { drag = false; return; }
           sy = e.touches[0].clientY; dy = 0; drag = true; sh.style.transition = "none";
         }, { passive: true });
         sh.addEventListener("touchmove", function (e) {
@@ -1863,31 +1956,40 @@
     render(null);   // instant paint from cached balance
     SMD_KU.summary().then(function (s) { if (s) render(s); }).catch(function () {});
   }
+  // Is the NMC eLOGBook offered? ONE predicate for both the home tile and the More menu — two copies
+  // of this test is how a tile appears while the menu row does not, or the reverse.
+  function pglogOn() {
+    try {
+      var q = (location.search.match(/[?&]pglog=([^&]+)/) || [])[1];
+      if (q != null) return (q === "1" || q === "on" || q === "true");
+      return localStorage.getItem("smd_pglog") !== "0";
+    } catch (e) { return true; }
+  }
   function mi(icon, label, cap, act) { return '<button class="hv-mi" data-mi="' + act + '">' + svg(icon) + '<div class="ml">' + label + (cap ? '<div class="mc">' + cap + '</div>' : '') + '</div><span class="marr">' + svg("chev") + '</span></button>'; }
   function openMore() {
     openSheet(
       '<div class="hv-sh-t">More</div>' +
-      // In-app toggle for the redesign (so it can be enabled/reviewed on a native device
-      // where there is no URL bar for ?rnav=1). Toggles smd_redesign_nav + reloads.
-      '<button class="hv-mi" style="width:100%" onclick="try{var on=localStorage.getItem(\'smd_redesign_nav\')!==\'0\';localStorage.setItem(\'smd_redesign_nav\',on?\'0\':\'1\');location.reload();}catch(e){}">' +
-        svg("spark") + '<div class="ml">New design <span class="mc">' +
-        (redesignNavOn() ? "On — tap to switch back" : "Beta — tap to try it") +
-        '</span></div><span class="marr">' + svg("chev") + '</span></button>' +
-      mi("info", "About StewardMD", "Version, credits, disclaimer", "about") +
+      // BUG (2026-08-23, WhatsApp bug report via a friend testing the app): this screen used to
+      // duplicate rows the live sidebar (sidebar-redesign.js) already surfaces — Calculators,
+      // Guidelines & References, About StewardMD, Acknowledgements — plus a "switch back to the
+      // old UI" toggle that, per the same report, should stop being offered. Removed all five
+      // rather than maintain the same destination from two different menus.
       mi("help", "Help &amp; support", "Contact us &amp; track your requests", "help") +
       mi("search", "Open shared case", "Retrieve by case code", "opencase") +
       mi("steth", "Search Medical Register", "Find a doctor by name or NMC number", "nmcsearch") +
-      mi("award", "Acknowledgements", "Contributors &amp; credits", "ack") +
+      // NMC eLOGBook. Flag-gated the same way the home tile is, and read from localStorage DIRECTLY
+      // rather than through SMD_PGLOG_FLAGS: home.js loads BEFORE the pglog block in index.html, so
+      // the flag object does not exist yet when this sheet is built. Flag off = the row is absent,
+      // not a row that opens nothing.
+      (pglogOn() ? mi("book", "NMC eLOGBook", "Digital Residency Logbook &amp; Competency Portfolio Powered by AI", "pglog") : "") +
       mi("user", "Profile", "Your StewardMD ID, hospital, plan &amp; sign-in", "account") +
       mi("spark", "Subscription", "Plans &amp; billing", "subscription") +
-      mi("trend", "AI Usage", "Your daily AI limits &amp; activity", "aiusage") +
+      mi("trend", "AI Usage", "MaiK Tokens, today&rsquo;s spend &amp; rate card", "aiusage") +
       (nIsOwner() ? mi("framework", "AI Control Center", "Models, usage &amp; quotas (owner)", "aictl") : "") +
       mi("framework", "Connect EMR", "Onboard a hospital or EMR", "connect") +
       mi("framework", "Connect patient", "Pull a patient from a connected hospital", "connectpatient") +
       mi("settings", "Display &amp; Accessibility", "Font size, density, auto-fit", "display") +
       mi("bell", "Notification preferences", "Control tasks, labs, guidelines &amp; more", "notifprefs") +
-      mi("book", "Guidelines &amp; References", "IDSA · WHO · ICMR", "guidelines") +
-      mi("calc", "Calculators", "50+ clinical tools", "calculators") +
       mi("play", "App tour", "Replay the guided tour", "apptour") +
       '<div style="font:700 11px var(--hfont,sans-serif);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:16px 6px 6px">Legal &amp; safety</div>' +
       mi("shield", "Medical disclaimer", "Decision support — not medical advice", "disclaimer") +
@@ -1931,48 +2033,211 @@
     if (!document.getElementById("ai-usage-css")) {
       var st = document.createElement("style"); st.id = "ai-usage-css";
       st.textContent =
-        ".ai-usage{padding:2px 2px 8px}" +
-        ".aiu-head{font:600 12px var(--hfont,system-ui);color:var(--hmut,#889);margin:2px 0 14px}" +
+        ".ai-usage{padding:2px 2px 8px;--aiuCard:#f1f5f9;--aiuBg:#ffffff}" +
+        "body.dark .ai-usage{--aiuCard:#0f172a;--aiuBg:#0b1220}" +
+        ".aiu-h{font:800 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.06em;color:var(--hmut,#889);margin:18px 2px 9px}" +
+        ".aiu-h:first-child{margin-top:2px}" +
+        ".aiu-wallet{background:var(--aiuCard);border:1px solid var(--line,#1e293b);border-radius:14px;padding:14px 15px}" +
+        ".aiu-wallet .bal{font:800 30px var(--hfont,system-ui);color:var(--ink,#e6edf3);line-height:1.1;letter-spacing:-.02em}" +
+        ".aiu-wallet .bl{font:700 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--teal,#14b8a6);margin-top:3px}" +
+        ".aiu-wallet .sub{font:500 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:7px;line-height:1.5}" +
+        ".aiu-buy{display:block;width:100%;margin-top:12px;padding:12px;border:none;border-radius:11px;background:var(--teal,#0e6e63);color:#fff;font:800 13px var(--hfont,system-ui);cursor:pointer}" +
+        ".aiu-stats{display:flex;gap:8px}" +
+        ".aiu-stats .c{flex:1;min-width:0;background:var(--aiuCard);border:1px solid var(--line,#1e293b);border-radius:12px;padding:10px 6px;text-align:center}" +
+        ".aiu-stats .n{font:800 17px var(--hfont,system-ui);color:var(--ink,#e6edf3)}" +
+        ".aiu-stats .l{font:600 9px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.04em;color:var(--hmut,#889);margin-top:3px}" +
+        ".aiu-grp{display:flex;justify-content:space-between;align-items:baseline;font:700 11px var(--hfont,system-ui);text-transform:uppercase;letter-spacing:.05em;color:var(--hmut,#889);margin:14px 2px 8px;padding-top:9px;border-top:1px solid var(--line,#1e293b)}" +
+        ".aiu-grp:first-of-type{border-top:none;padding-top:0;margin-top:0}" +
+        ".aiu-grp .n{font:800 12px var(--hfont,system-ui);color:var(--ink,#e6edf3);letter-spacing:0}" +
         ".aiu-row{margin:0 0 13px}" +
-        ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
-        ".aiu-row .u{font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
+        ".aiu-row.zero .h{color:var(--hmut,#889)}" +   /* an unused feature stays listed, just recedes */
+        ".aiu-row .h{display:flex;justify-content:space-between;align-items:baseline;gap:10px;font:600 13px var(--hfont,system-ui);color:var(--ink,#e6edf3);margin-bottom:5px}" +
+        ".aiu-row .u{flex:none;font:700 12px var(--hfont,system-ui);color:var(--hmut,#889)}" +
         ".aiu-bar{height:8px;border-radius:6px;background:var(--line,#1e293b);overflow:hidden}" +
         ".aiu-bar>span{display:block;height:100%;border-radius:6px;background:var(--teal,#0e6e63);transition:width .3s}" +
         ".aiu-bar.amber>span{background:#d97706}.aiu-bar.red>span{background:#dc2626}" +
         ".aiu-unl{font:700 12px var(--hfont,system-ui);color:var(--teal,#14b8a6)}" +
-        ".ai-usage-note{font:500 12px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.5}" +
-        ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}";
+        ".aiu-rate{width:100%;border-collapse:collapse}" +
+        ".aiu-rate td{padding:8px 2px;border-top:1px solid var(--line,#1e293b);font:600 12.5px var(--hfont,system-ui);color:var(--ink,#e6edf3);vertical-align:top}" +
+        ".aiu-rate tr:first-child td{border-top:none}" +
+        ".aiu-rate td.v{text-align:right;white-space:nowrap;color:var(--hmut,#889);font-weight:700}" +
+        ".aiu-rate td .d{display:block;font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:2px}" +
+        ".aiu-legend{font:500 11px var(--hfont,system-ui);color:var(--hmut,#889);margin:7px 2px 0;line-height:1.5}" +
+        ".ai-usage-note{font:500 11.5px var(--hfont,system-ui);color:var(--hmut,#889);margin-top:10px;line-height:1.55}" +
+        ".ai-usage-load,.ai-usage-err{padding:24px 8px;text-align:center;color:var(--hmut,#889);font:600 13px var(--hfont,system-ui)}" +
+        ".aiu-retry{margin-top:12px;padding:10px 20px;border:1px solid var(--line,#1e293b);border-radius:10px;background:var(--aiuCard);color:var(--ink,#e6edf3);font:800 13px var(--hfont,system-ui);cursor:pointer}" +
+        /* Loading skeleton — same block sizes as the real content, so nothing shifts when it lands. */
+        ".aiu-skel .s{background:var(--aiuCard);border-radius:10px;opacity:.65;animation:aiuPulse 1.4s ease-in-out infinite}" +
+        ".aiu-skel .s-h{height:11px;width:40%;margin:2px 2px 9px;border-radius:6px}" +
+        ".aiu-skel .s-card{height:150px;margin-bottom:18px;border-radius:14px}" +
+        ".aiu-skel .s-stats{height:60px;margin-bottom:18px;border-radius:12px}" +
+        ".aiu-skel .s-row{height:34px;margin-bottom:11px}" +
+        "@keyframes aiuPulse{0%,100%{opacity:.65}50%{opacity:.35}}" +
+        "@media (prefers-reduced-motion:reduce){.aiu-skel .s{animation:none}.aiu-bar>span{transition:none}}";
       document.head.appendChild(st);
     }
-    openSheet('<div class="hv-sh-t">AI Usage</div><div id="aiUsageBody" class="ai-usage"><div class="ai-usage-load">Loading your usage…</div></div>');
+    openSheet('<div class="hv-sh-t">AI Usage</div><div id="aiUsageBody" class="ai-usage">' + aiuSkeleton() + '</div>');
+    aiuLoad();
+  }
+  // A shaped placeholder rather than a spinner: the sheet does not jump when the data lands.
+  function aiuSkeleton() {
+    return '<div class="aiu-skel" aria-busy="true" aria-label="Loading your AI usage">' +
+      '<div class="s s-h"></div><div class="s s-card"></div>' +
+      '<div class="s s-h"></div><div class="s s-stats"></div>' +
+      '<div class="s s-h"></div><div class="s s-row"></div><div class="s s-row"></div></div>';
+  }
+  function aiuLoad() {
     var host = document.getElementById("aiUsageBody");
+    if (!host) return;
+    host.innerHTML = aiuSkeleton();
     var base = window.AI_PROXY || "/api/ai";
     var tokP;
     try { var cu = window.SMD_AUTH && SMD_AUTH.currentUser; tokP = (cu && cu.getIdToken) ? cu.getIdToken() : Promise.resolve(null); } catch (e) { tokP = Promise.resolve(null); }
+    function fail() {
+      if (!document.getElementById("aiUsageBody")) return;
+      document.getElementById("aiUsageBody").innerHTML =
+        '<div class="ai-usage-err"><div>Your usage could not be loaded.</div>' +
+        '<button id="aiuRetry" type="button" class="aiu-retry">Try again</button>' +
+        '<div class="ai-usage-note" style="text-align:center">Your AI features are unaffected — this screen only reports usage.</div></div>';
+      var rt = document.getElementById("aiuRetry"); if (rt) rt.onclick = aiuLoad;   // retry in place, no reopen
+    }
     tokP.then(function (t) {
       var h = {}; if (t) h["Authorization"] = "Bearer " + t;
       return fetch(base + "/usage", { headers: h, credentials: "same-origin" });
     }).then(function (r) { return (r && r.ok) ? r.json() : null; }).then(function (data) {
-      if (!host) return;
-      host.innerHTML = data ? renderAiUsage(data) : '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>';
-    }).catch(function () { if (host) host.innerHTML = '<div class="ai-usage-err">Usage is unavailable right now. Please try again.</div>'; });
+      var h2 = document.getElementById("aiUsageBody");
+      if (!h2) return;                                   // sheet closed while the request was in flight
+      if (!data || typeof data !== "object") return fail();
+      h2.innerHTML = renderAiUsage(data);
+      var buy = document.getElementById("aiuBuy");
+      // The token store already lives in the Pro paywall sheet — reuse it, don't build a second one.
+      if (buy) buy.onclick = function () { closeSheet(); setTimeout(function () { try { if (window.SMD_PRO && SMD_PRO.openPaywall) SMD_PRO.openPaywall(); else toast("Loading…"); } catch (e) {} }, 120); };
+    }).catch(fail);
+  }
+  // Compact MaiK Token count: 1,240 · 50k · 1.2M — a wallet reads better than a 7-digit number.
+  function aiuMt(n) {
+    n = Math.max(0, Math.round(+n || 0));
+    if (n >= 1000000) return (Math.round(n / 100000) / 10) + "M";
+    if (n >= 10000) return Math.round(n / 1000) + "k";
+    return n.toLocaleString("en-IN");
+  }
+  function aiuBar(n, lim, label) {
+    var pct = lim > 0 ? Math.min(100, Math.round(n / lim * 100)) : 0;
+    var cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
+    // A bar is the only carrier of "how much is left" here, so it must be readable to a screen reader too.
+    return '<div class="aiu-bar' + cls + '" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="' + pct + '"' +
+      (label ? ' aria-label="' + aiCtlEsc(label) + '"' : '') + '><span style="width:' + pct + '%"></span></div>';
   }
   function renderAiUsage(u) {
-    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision)", stt: "Voice transcription", fundx: "FundX", followcare: "FollowCare", tts: "Text-to-speech" };
-    var ORDER = ["maik", "maik_case", "research", "ecg", "thorex", "ocr", "stt"];
-    var limits = u.limits || {}, used = u.byModule || {}, rows = "";
-    ORDER.forEach(function (id) {
-      if (!(id in limits)) return;
-      var lim = limits[id] | 0, n = used[id] | 0, lbl = LBL[id] || id;
-      if (lim === 0) { rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="aiu-unl">Unlimited</span></div></div>'; return; }
-      var pct = Math.min(100, Math.round(n / lim * 100)), cls = pct >= 100 ? " red" : (pct >= 70 ? " amber" : "");
-      rows += '<div class="aiu-row"><div class="h"><span>' + lbl + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' +
-        '<div class="aiu-bar' + cls + '"><span style="width:' + pct + '%"></span></div></div>';
-    });
+    var LBL = { maik: "MaiK questions", maik_case: "MaiK patient cases", summary: "Patient summaries", research: "MaiK Evidence Review", ecg: "ECG reads (KardiQ X)", thorex: "Chest X-ray (ThoreX)", ocr: "Photo scans (Vision / OCR)", stt: "Voice transcription", tts: "Read-aloud (text-to-speech)", scribe: "MaiK Scribe", fundx: "FundX (retinal)", followcare: "FollowCare", clinix: "CliniX tutor", surgx_note: "SURGX notes", surgx_case: "SURGX case mentor", kb: "Knowledge Base search" };
+    // Every AI surface, grouped the way a doctor thinks about them. This is PRESENTATION ORDER ONLY —
+    // the modules actually rendered come from what the SERVER reports (limits ∪ byModule), so a module
+    // added to the registry shows up here without a client change. The old hardcoded list silently
+    // dropped `tts` and `kb`: usage on those two could never appear on this screen at all.
+    var GROUPS = [
+      { label: "MaiK AI", ids: ["maik", "maik_case", "summary", "research"] },
+      { label: "Vision & imaging", ids: ["ocr", "ecg", "thorex", "fundx"] },
+      { label: "Voice", ids: ["stt", "scribe", "tts"] },
+      { label: "Specialty & learning", ids: ["clinix", "surgx_note", "surgx_case", "followcare"] },
+      { label: "Knowledge", ids: ["kb"] },
+    ];
+    var limits = u.limits || {}, used = u.byModule || {}, enforced = !!u.capsEnforced, out = "";
+
+    // ---- wallet: MaiK Tokens left, plus today's free allowance if the cost cap is switched on ----
+    var bal = Math.max(0, u.balanceMt | 0), spent = Math.max(0, u.tokensUsedMt | 0);
+    var free = Math.max(0, u.dailyFreeMt | 0), per = u.mtPerInr > 0 ? u.mtPerInr : 2000;
+    var worth = Math.round(bal / per * 10) / 10;   // ₹, one decimal — a wallet of 100 MT is ₹0.1, not "₹0"
+    out += '<div class="aiu-h">Your MaiK Tokens</div><div class="aiu-wallet">' +
+      '<div class="bal">' + aiuMt(bal) + '</div><div class="bl">Tokens in wallet</div>' +
+      '<div class="sub">' + (bal > 0
+        ? 'Worth about &#8377;' + worth + ' of AI. Tokens never expire and work across every AI feature.'
+        : 'You haven&rsquo;t added any tokens yet. Top up once and spend it on anything — MaiK, imaging, voice, Evidence Review.') +
+      (u.pooled ? '<br>Shared pool: this balance is shared with your linked account.' : '') + '</div>' +
+      '<button id="aiuBuy" class="aiu-buy" type="button">' + (bal > 0 ? 'Add more tokens' : 'Buy MaiK Tokens') + '</button></div>';
+    if (u.costCapOn && free > 0) {
+      out += '<div class="aiu-h">Today&rsquo;s free allowance</div><div class="aiu-row">' +
+        '<div class="h"><span>Included with your plan</span><span class="u">' + aiuMt(spent) + ' / ' + aiuMt(free) + '</span></div>' +
+        aiuBar(spent, free, "Free allowance used today") +
+        '<div class="ai-usage-note">Resets at midnight. Past this, your wallet takes over — nothing stops mid-consult.</div></div>';
+    }
+
+    // ---- today. NOTE the two different "tokens" on this screen: MaiK Tokens (MT) are the wallet
+    // currency, AI tokens are the model's own unit. Labelling both "tokens" read as one number
+    // twice, so they are named apart and the legend below says which is which. ----
     var req = u.req | 0;
-    return '<div class="aiu-head">Today &middot; ' + req + ' AI request' + (req === 1 ? '' : 's') + '</div>' +
-      (rows || '<div class="ai-usage-note">No AI activity yet today.</div>') +
-      '<div class="ai-usage-note">Daily limits reset at midnight. These per-doctor caps keep AI fast and available for everyone; your hospital can adjust them.</div>';
+    out += '<div class="aiu-h">Today</div><div class="aiu-stats">' +
+      '<div class="c"><div class="n">' + req.toLocaleString("en-IN") + '</div><div class="l">Requests</div></div>' +
+      '<div class="c"><div class="n">' + aiuMt(u.tokens) + '</div><div class="l">AI tokens</div></div>' +
+      '<div class="c"><div class="n">' + aiuMt(spent) + '</div><div class="l">MT spent</div></div>' +
+      '<div class="c"><div class="n">' + (u.avgLatencyMs > 0 ? (Math.round((u.avgLatencyMs / 1000) * 10) / 10) + 's' : '&mdash;') + '</div><div class="l">Avg reply</div></div>' +
+      '</div>' +
+      '<div class="aiu-legend"><b>AI tokens</b> is how much text the model read and wrote. <b>MT</b> is what that cost your wallet.</div>';
+
+    // ---- per feature. Only draw a cap bar when the caps are actually ENFORCED; otherwise a bar
+    // would imply a limit that blocks nobody today. ----
+    // The server is the source of truth for WHICH modules exist: limits carries every registry module,
+    // byModule carries anything actually used. Union them so nothing is invisible, and so a module the
+    // client has no label for still appears (by id) rather than vanishing.
+    var known = {}, all = [];
+    function addId(id) { if (id && !known[id]) { known[id] = 1; all.push(id); } }
+    Object.keys(limits).forEach(addId);
+    Object.keys(used).forEach(addId);
+
+    function moduleRow(id) {
+      var n = used[id] | 0, lim = limits[id] | 0, lbl = LBL[id] || id;
+      var zero = n === 0 ? " zero" : "";
+      if (!enforced) {
+        return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + '</span></div></div>';
+      }
+      if (lim === 0) return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="aiu-unl">' + n + ' &middot; unlimited</span></div></div>';
+      return '<div class="aiu-row' + zero + '"><div class="h"><span>' + aiCtlEsc(lbl) + '</span><span class="u">' + n + ' / ' + lim + '</span></div>' +
+        aiuBar(n, lim, lbl + ": " + n + " of " + lim + " used today") + '</div>';
+    }
+
+    var rendered = {}, body = "";
+    GROUPS.forEach(function (g) {
+      var ids = g.ids.filter(function (id) { return known[id]; });
+      if (!ids.length) return;
+      var sub = 0;
+      ids.forEach(function (id) { sub += used[id] | 0; rendered[id] = 1; });
+      body += '<div class="aiu-grp"><span>' + aiCtlEsc(g.label) + '</span><span class="n">' + sub + '</span></div>' +
+        ids.map(moduleRow).join("");
+    });
+    // Anything the server reports that no group claims — future modules, so they are never dropped.
+    var rest = all.filter(function (id) { return !rendered[id]; });
+    if (rest.length) {
+      var restSub = 0; rest.forEach(function (id) { restSub += used[id] | 0; });
+      body += '<div class="aiu-grp"><span>Other</span><span class="n">' + restSub + '</span></div>' + rest.map(moduleRow).join("");
+    }
+
+    var totalCalls = 0; all.forEach(function (id) { totalCalls += used[id] | 0; });
+    out += '<div class="aiu-h">Where your AI went' + (enforced ? '' : ' &middot; today') + '</div>' +
+      (body || '<div class="ai-usage-note">No AI features are reporting yet.</div>') +
+      (totalCalls === 0 ? '<div class="ai-usage-note">No AI activity yet today — every feature above is ready when you need it.</div>' : '') +
+      (enforced ? '<div class="ai-usage-note">Daily limits reset at midnight.</div>'
+                : '<div class="ai-usage-note">No per-feature daily limits are in force right now — usage is metered from your wallet.</div>');
+
+    // ---- rate card ----
+    var r = u.rates;
+    if (r) {
+      // Coerce: the card is a PRICE. A malformed field must render as a number, never "undefined MT".
+      var rIn = Math.max(0, r.inPer1k | 0), rOut = Math.max(0, r.outPer1k | 0);
+      var rImg = Math.max(0, r.perImage | 0), rAud = Math.max(0, r.perAudioSec | 0);
+      out += '<div class="aiu-h">Rate card</div><table class="aiu-rate"><tbody>' +
+        '<tr><td>Text you send<span class="d">Your question and the case context</span></td><td class="v">' + rIn + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Text MaiK writes<span class="d">The answer, note or summary</span></td><td class="v">' + rOut + ' MT<span class="d">per 1,000 tokens</span></td></tr>' +
+        '<tr><td>Each image<span class="d">ECG, X-ray, prescription or lab photo</span></td><td class="v">' + rImg + ' MT<span class="d">per image</span></td></tr>' +
+        '<tr><td>Voice<span class="d">Dictation and read-aloud</span></td><td class="v">' + rAud + ' MT<span class="d">per second</span></td></tr>' +
+        '</tbody></table>' +
+        '<div class="ai-usage-note">1,000 tokens is roughly 700 words. A typical MaiK question costs about ' + Math.round((rIn * 0.6) + (rOut * 0.8)) + ' MT.' +
+        (r.model ? ' Rates are for ' + aiCtlEsc(r.model) + ' and are' : ' Rates are') + ' billed on actual usage, never rounded up per request.</div>';
+    } else if (u.ratesProvisional) {
+      // The active model's published rates are not confirmed yet. Say so plainly rather than quote a
+      // number we are guessing at — a doctor deciding what to spend must not be given an estimate.
+      out += '<div class="aiu-h">Rate card</div><div class="ai-usage-note">Rates for the model currently in use are being confirmed and are not published yet. Your spend above is exact, and nothing is charged beyond what you actually use.</div>';
+    }
+    out += '<div class="ai-usage-note">Metered per request, metadata only. Your questions, notes and patient data are never stored in these counts.</div>';
+    return out;
   }
   // AI Control Center — OWNER admin console (Phase 4): switch the active model, see today's global
   // usage, and edit per-module daily caps live (no redeploy). All three APIs are owner-gated server-side
@@ -2381,6 +2646,8 @@
       '<div class="hv-pf-card" id="pfPro">' +
         row("Medical reg. no", "regno", { value: "", placeholder: "Loading…", edit: false }) +
         row("Hospital / college", "hospital", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Degree", "degree", { value: "", placeholder: "Loading…", edit: false }) +
+        row("Speciality", "speciality", { value: "", placeholder: "Loading…", edit: false }) +
         row("City", "city", { value: "", placeholder: "Loading…", edit: false }) +
         row("Phone", "phone", { value: "", placeholder: "Loading…", edit: false }) +
       '</div>' +
@@ -2459,7 +2726,9 @@
       SMD_VERIFY.isVerified().then(function (ok) {
         try {
           if (!document.body.contains(box)) return;
+          var prev = box.querySelector("[data-verifbadge]"); if (prev) prev.remove();   // never two
           var b = document.createElement("span");
+          b.setAttribute("data-verifbadge", "1");
           b.className = "hv-pf-badge " + (ok ? "ok" : "warn");
           b.textContent = ok ? "Verified doctor" : "Not verified";
           box.appendChild(b);
@@ -2493,23 +2762,73 @@
       btn.textContent = opts.editLabel || (empty ? "Add" : "Edit");
     }
     function offline(msg) {
-      ["regno", "hospital", "city", "phone"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
-      var note = document.createElement("div");
+      ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: msg, edit: false }); });
+      // ONE note, ever. This used to append unconditionally, so any second call (the auth watcher
+      // re-renders, and the .catch() below can fire after the !fdb branch already ran) stacked a
+      // second "Couldn't load your details" row underneath the first — visible in the wild.
+      var note = card.querySelector("[data-offnote]");
+      if (note) return;
+      note = document.createElement("div");
       note.className = "hv-pf-row";
+      note.setAttribute("data-offnote", "1");
       note.innerHTML = '<span class="hv-pf-k">&nbsp;</span><span class="hv-pf-v unset">Couldn\'t load your details. <button class="hv-pf-retry" type="button" data-retry>Retry</button></span>';
       card.appendChild(note);
       var rb = note.querySelector("[data-retry]");
-      if (rb) rb.addEventListener("click", function () { openAccount(); });
+      if (rb) rb.addEventListener("click", function () { acctFillProfessional._bootTried = false; openAccount(); });
+    }
+    /* Firestore is loaded LAZILY (window.SMD_loadFirebase, index.html) — window.SMD_DB simply does
+     * not exist yet on a cold start. Declaring "Offline" on that first look was wrong: the user is
+     * online, signed in, and every row reads Offline with no way back except a manual Retry. That is
+     * the reported bug. Boot Firebase and come back instead; only a real failure shows the notice. */
+    if (uid && !fdb && typeof window.SMD_loadFirebase === "function") {
+      ["regno", "hospital", "city", "phone", "degree", "speciality"].forEach(function (k) { setRow(k, "", { placeholder: "Loading…", edit: false }); });
+      // _bootTried, not a "booting" flag: SMD_loadFirebase fires its callback SYNCHRONOUSLY once
+      // the SDK is loaded, so a boot that leaves SMD_DB null (init threw) re-entered this function
+      // on the spot and recursed until the stack blew — leaving the rows on "Loading…" forever.
+      if (acctFillProfessional._booting) return;   // a boot is in flight — never declare Offline yet
+      if (!acctFillProfessional._bootTried) {
+        acctFillProfessional._bootTried = true;
+        acctFillProfessional._booting = true;
+        try {
+          window.SMD_loadFirebase(function () {
+            acctFillProfessional._booting = false;
+            // Re-fill the sheet that is on screen NOW: a re-render between the request and the
+            // callback leaves the captured card detached, and filling that shows the user nothing.
+            try { var live = sheetEl(); if (live && live.querySelector("#pfPro")) acctFillProfessional(live); } catch (e) {}
+          });
+        } catch (e) { acctFillProfessional._booting = false; }
+        return;
+      }
+      // The boot already ran and left no database. Say so — with a Retry that re-arms it — instead
+      // of returning and leaving every row on "Loading…" forever.
+      offline("Offline");
+      return;
     }
     if (!uid || !fdb) { offline(uid ? "Offline" : "Sign-in still loading"); return; }
 
     var pref = fdb.collection("users").doc(uid).collection("profile").doc("self");
-    pref.get().then(function (snap) {
+    /* A get() that never settles is the "stuck on Loading…" report: on a half-open connection
+     * Firestore waits on the server indefinitely, so every row sat at "Loading…" with no Retry and
+     * no way out. Bound the wait, then read the on-device cache before declaring it unreadable. */
+    var settled = false;
+    function once(fn) { return function (v) { if (settled) return; settled = true; try { fn(v); } catch (e) {} }; }
+    var onFail = function () { try { if (document.body.contains(card)) offline("Offline"); } catch (e) {} };
+    pref.get().then(once(onData), once(onFail));
+    setTimeout(function () {
+      if (settled || !document.body.contains(card)) return;
+      try { pref.get({ source: "cache" }).then(once(onData), once(onFail)); }
+      catch (e) { once(onFail)(); }
+    }, 7000);
+
+    function onData(snap) {
       if (!document.body.contains(card)) return;
+      var stale = card.querySelector("[data-offnote]"); if (stale) stale.remove();   // the read worked
       var d = (snap && snap.exists && snap.data()) || {};
       var pendingCert = !!d.regNoPendingCert;
       setRow("regno", d.regNo, { placeholder: pendingCert ? "Awaiting certificate" : "Not set" });
       setRow("hospital", d.hospital, { editLabel: d.hospital ? "Change" : "Choose" });
+      setRow("degree", d.degree, { editLabel: d.degree ? "Change" : "Choose" });
+      setRow("speciality", d.speciality, { editLabel: d.speciality ? "Change" : "Choose" });
       setRow("city", d.city);
       setRow("phone", d.phone);
 
@@ -2542,6 +2861,23 @@
               openHospitalPicker(function (h) { save({ hospital: h }).then(function () { d.hospital = h; setRow("hospital", h, { editLabel: "Change" }); wire(); if (window.toast) toast("Hospital updated"); }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); }); });
               return;
             }
+            // Degree and speciality are CHOICES, not free text: the option lists live in
+            // profile-setup.js so the first-run form and this card can never drift apart.
+            if (f === "degree" || f === "speciality") {
+              var PS = window.SMD_PROFILE_SETUP;
+              var opts = PS ? (f === "degree" ? PS.DEGREES : PS.SPECIALITIES) : null;
+              if (!opts) { if (window.toast) toast("Still loading — try again in a moment"); return; }
+              openChoicePicker(f === "degree" ? "Choose your degree" : "Choose your speciality", opts, function (val) {
+                var obj = {}; obj[f] = val;
+                save(obj).then(function () {
+                  if (window.toast) toast((f === "degree" ? "Degree" : "Speciality") + " updated");
+                  // The picker replaced this sheet's contents, so re-open Profile to show the result
+                  // rather than writing into a card that is no longer on screen.
+                  openAccount();
+                }).catch(function () { if (window.toast) toast("Couldn't save — check your connection"); openAccount(); });
+              });
+              return;
+            }
             if (f === "regno") {
               inlineEdit("regno", "Medical reg. no", d.regNo, function (val, restore) {
                 if (!val) { restore(); return; }
@@ -2569,7 +2905,7 @@
         });
       }
       wire();
-    }).catch(function () { try { if (document.body.contains(card)) offline("Unavailable offline"); } catch (e) {} });
+    }
   }
   // Submit a "please add this hospital" request → admin review (functions/api/hospital-request).
   // Attaches the Firebase ID token when signed in so the admin sees who asked. Resolves true/false.
@@ -2632,6 +2968,32 @@
     load();
   }
   try { window.SMD_openHospitalAdmin = function () { if (nIsOwner()) openHospitalAdmin(); else if (window.toast) toast("Owner access only"); }; } catch (e) {}
+  /* Searchable single-choice picker for a plain list of strings (degree, speciality). Same shape and
+   * behaviour as openHospitalPicker below, minus the request-to-add flow, which only the institution
+   * directory has. The option lists themselves live in profile-setup.js so the first-run form and the
+   * Profile card always offer exactly the same choices. */
+  function openChoicePicker(title, opts, onPick) {
+    function render(q) {
+      q = String(q || "").toLowerCase().trim();
+      var hits = opts.filter(function (o) { return !q || String(o).toLowerCase().indexOf(q) >= 0; });
+      if (!hits.length) return '<div style="padding:14px 4px;color:var(--hmut,#64748b);font:500 12.5px var(--hfont,system-ui)">No match.</div>';
+      return hits.map(function (o) {
+        return '<button class="hosp-opt" data-c="' + smdEsc(o) + '" style="display:block;width:100%;text-align:left;border:0;border-top:1px solid var(--hbd,#e2e8f0);background:none;padding:12px 4px;cursor:pointer;min-height:46px">' +
+          '<span style="display:block;font:600 13.5px var(--hfont,system-ui);color:var(--hink,#0f172a)">' + smdEsc(o) + "</span></button>";
+      }).join("");
+    }
+    openSheet('<div class="hv-sh-t">' + smdEsc(title) + "</div>" +
+      '<input id="choiceSearch" type="search" placeholder="Search" autocomplete="off" style="width:100%;box-sizing:border-box;padding:11px 12px;border:1px solid var(--hbd,#e2e8f0);border-radius:12px;font:600 14px var(--hfont,system-ui);margin:2px 0 8px;background:var(--hpanel,#fff);color:var(--hink,#0f172a)">' +
+      '<div id="choiceList" style="max-height:54vh;overflow:auto;-webkit-overflow-scrolling:touch">' + render("") + "</div>");
+    var sh = sheetEl();
+    var inp = sh.querySelector("#choiceSearch"), lst = sh.querySelector("#choiceList");
+    if (inp) inp.addEventListener("input", function () { if (lst) lst.innerHTML = render(inp.value); });
+    if (lst) lst.addEventListener("click", function (e) {
+      var b = e.target.closest && e.target.closest("[data-c]"); if (!b) return;
+      var val = b.getAttribute("data-c"); if (!val) return;
+      closeSheet(); setTimeout(function () { try { onPick(val); } catch (er) {} }, 60);
+    });
+  }
   // Searchable hospital / medical-college picker (data: window.SMD_HOSPITALS — hospitals-in.js).
   function openHospitalPicker(onPick) {
     function opt(h) {
@@ -2874,20 +3236,116 @@
       body.scrollTop = 0;
     });
   }
-  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the legacy sheet.
+  /* ── Acknowledgements roster ───────────────────────────────────────────────────────────────
+   * REDESIGN 2026-08-27 (owner: "it looks too big"). It was: clone #ackCard into the sheet and
+   * force every hover tooltip open inline. Twelve people x a full bio each is roughly three
+   * screens, so the page read as a wall and the names — the actual point — were lost in it.
+   *
+   * #ackCard stays the single source of truth: the desktop hover tooltips still use it, and a
+   * contributor is still added by adding one <span> there and nothing else. This READS that markup
+   * instead of restyling a clone of it, and renders a compact accordion — one line per person,
+   * bio on tap, one open at a time (twelve open accordions is the same wall again).
+   */
+  function ackEsc(t) {
+    return String(t == null ? "" : t).replace(/[&<>"']/g, function (c) {
+      return ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c];
+    });
+  }
+  // The visible name is the element's OWN text; the tooltip is a child element, so skipping
+  // non-text nodes drops the whole bio without needing to know its shape.
+  function ackOwnText(el) {
+    var out = "", n;
+    for (var i = 0; i < el.childNodes.length; i++) {
+      n = el.childNodes[i];
+      if (n.nodeType === 3) out += n.nodeValue;
+    }
+    return out.replace(/\s+/g, " ").trim();
+  }
+  function ackInitials(name) {
+    var t = String(name || "").replace(/^(Dr|Mr|Ms|Mrs|Prof)\.?\s+/i, "").replace(/,.*$/, "").trim().split(/\s+/);
+    var a = (t[0] || "").charAt(0), b = (t.length > 1 ? t[t.length - 1] : "").charAt(0);
+    return (a + b).toUpperCase() || "\u00b7";
+  }
+  /* One person, read out of either markup shape:
+   *   founders     .creator-tip  -> .ctp-deg (role), .ctp-bio (bio), a.ctp-linkedin (links)
+   *   contributors .ack-tip      -> <strong> (role), then the remaining text (bio) */
+  function ackPerson(el) {
+    var tip = el.querySelector(".ack-tip");
+    var p = { name: ackOwnText(el), role: "", bio: "", links: [], founder: /creator-name/.test(el.className || "") };
+    if (!tip) return p;
+    var deg = tip.querySelector(".ctp-deg"), strong = tip.querySelector("strong"), bioEl = tip.querySelector(".ctp-bio");
+    p.role = ((deg || strong || {}).textContent || "").replace(/\s+/g, " ").trim();
+    if (bioEl) p.bio = (bioEl.textContent || "").replace(/\s+/g, " ").trim();
+    else {
+      var t = (tip.textContent || "").replace(/\s+/g, " ").trim();
+      if (p.role && t.indexOf(p.role) === 0) t = t.slice(p.role.length);   // drop the role we already show
+      p.bio = t.trim();
+    }
+    if (!p.name) { var nm = tip.querySelector(".ctp-name"); if (nm) p.name = (nm.textContent || "").trim(); }
+    var as = tip.querySelectorAll("a.ctp-linkedin");
+    for (var i = 0; i < as.length; i++) {
+      p.links.push({ href: as[i].getAttribute("href") || "", text: (as[i].textContent || "").replace(/\s+/g, " ").trim() });
+    }
+    return p;
+  }
+  function ackRowHTML(p) {
+    var hasBio = !!(p.bio || p.links.length), links = "";
+    for (var i = 0; i < p.links.length; i++) {
+      links += '<a class="smd-ack-lnk" href="' + ackEsc(p.links[i].href) + '" target="_blank" rel="noopener">' + ackEsc(p.links[i].text) + '</a>';
+    }
+    return '<div class="smd-ack-row">' +
+      '<button type="button" class="smd-ack-hit"' + (hasBio ? ' aria-expanded="false"' : ' disabled') + '>' +
+        (p.founder ? '<span class="smd-ack-av" aria-hidden="true">' + ackEsc(ackInitials(p.name)) + '</span>' : "") +
+        '<span class="smd-ack-txt"><span class="smd-ack-nm">' + ackEsc(p.name) + '</span>' +
+        (p.role ? '<span class="smd-ack-rl">' + ackEsc(p.role) + '</span>' : "") + '</span>' +
+        (hasBio ? '<span class="smd-ack-chev" aria-hidden="true">\u203a</span>' : "") +
+      '</button>' +
+      (hasBio ? '<div class="smd-ack-bio"><div>' + (p.bio ? '<p>' + ackEsc(p.bio) + '</p>' : "") + links + '</div></div>' : "") +
+    '</div>';
+  }
+  // Acknowledgements content — shared by the About-box "Acknowledgements" tab and the sheet.
   function ackHTML() {
     var src = document.getElementById("ackCard");
     if (src) {
-      var c = src.cloneNode(true);
-      c.removeAttribute("id");
-      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
-      c.classList.add("hv-ack-inline");
-      return '<div class="hv-ack">' + c.outerHTML + '</div>';
+      var groups = src.querySelectorAll(".ack-group"), out = '<div class="smd-ack">';
+      for (var g = 0; g < groups.length; g++) {
+        var roleEl = groups[g].querySelector(".ack-role");
+        var names = groups[g].querySelectorAll(".ack-contrib-name, .creator-name");
+        if (!names.length) continue;
+        out += '<div class="smd-ack-h"><span>' + ackEsc(roleEl ? roleEl.textContent.trim() : "") + '</span>' +
+               '<span class="smd-ack-n">' + names.length + '</span></div><div class="smd-ack-list">';
+        for (var i = 0; i < names.length; i++) out += ackRowHTML(ackPerson(names[i]));
+        out += '</div>';
+      }
+      // The "Want your name here?" block already reads well; carry it over untouched.
+      var cta = src.querySelector(".ack-contribute");
+      if (cta) out += '<div class="smd-ack-cta">' + cta.outerHTML + '</div>';
+      return out + '</div>';
     }
     return '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
       '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
       '<p>Developed by MaiKnowledge.</p></div>';
   }
+  /* One delegated listener for BOTH surfaces (the About tab and the sheet), installed once.
+   * Wiring per-container would need a hook in each render path; the roster markup is unique
+   * enough that delegation is both shorter and impossible to forget on a new surface. */
+  (function ackDelegate() {
+    if (typeof document === "undefined" || document.__smdAckWired) return;
+    document.__smdAckWired = 1;
+    document.addEventListener("click", function (e) {
+      var btn = e.target && e.target.closest ? e.target.closest(".smd-ack-hit") : null;
+      if (!btn || btn.disabled) return;
+      var host = btn.closest(".smd-ack"), row = btn.parentNode;
+      if (!host || !row) return;
+      var wasOpen = row.classList.contains("is-open");
+      var open = host.querySelectorAll(".smd-ack-row.is-open");
+      for (var i = 0; i < open.length; i++) {
+        open[i].classList.remove("is-open");
+        var b = open[i].querySelector(".smd-ack-hit"); if (b) b.setAttribute("aria-expanded", "false");
+      }
+      if (!wasOpen) { row.classList.add("is-open"); btn.setAttribute("aria-expanded", "true"); }
+    });
+  })();
   // Open the About box (optionally to a tab: about|version|facts|ack). Exposed globally so the
   // redesigned sidebar's "About & Acknowledgements" item opens it (acknowledgements live in About).
   function openAbout(tab) {
@@ -2897,23 +3355,8 @@
   }
   try { window.openAbout = openAbout; window.openAck = openAck; } catch (e) {}
   function openAck() {
-    var src = document.getElementById("ackCard");
-    var inner = "";
-    if (src) {
-      var c = src.cloneNode(true);
-      c.removeAttribute("id");
-      var hdr = c.querySelector(".ack-header-row"); if (hdr) hdr.parentNode.removeChild(hdr);
-      // The names carry rich hover tooltips (.ack-tip / .creator-tip: roles, bios, publications).
-      // Hover doesn't exist on touch and, cloned here, they'd overlap. Mark this clone so the
-      // sheet CSS renders every tooltip INLINE as a readable card (see .hv-ack .ack-tip below) —
-      // so all contributor descriptions and the creator profile are fully visible, not hidden.
-      c.classList.add("hv-ack-inline");
-      inner = '<div class="hv-ack">' + c.outerHTML + '</div>';
-    } else {
-      inner = '<div class="hv-ack" style="text-align:center;color:var(--hmut);font:500 13px/1.6 var(--hfont)">' +
-        '<p><b>Concept, content &amp; development</b><br>Dr. Manoj Kumar Kurmana, MD</p>' +
-        '<p>Developed by MaiKnowledge.</p></div>';
-    }
+    // Same roster the About tab renders — one builder, so the two surfaces cannot drift apart.
+    var inner = ackHTML();
     openSheet('<div class="hv-sh-t">Acknowledgements</div>' + inner +
       '<button class="hv-reset" style="margin-top:14px" data-close="1">Close</button>');
     var s = sheetEl();
@@ -3055,6 +3498,198 @@
   var _maikTopic = null;          // { topic, question, depth, lastDrug, ts }
   var _maikDisambigResolved = false;  // set true for ONE send when the user just tapped a "Which did you mean?" chip → skip the never-guess re-ask (else it loops on its own answer, e.g. "Pulmonary" → pulmonary-anatomy chips)
   var _maikTurns = [];            // recent {q, a-gist} turns sent to the provider for conversational continuity (not persisted; not PHI)
+  // Factors the clinician has ALREADY answered in this conversation. The model re-emits its
+  // @@REFINE@@ line on every answer, so after "renal function: creatinine 1.2" the next answer
+  // asked for "renal impairment" again — the reported "it asks me to specify what I just
+  // specified". Cleared with the thread; never persisted; not PHI.
+  var _maikRefined = {};
+  // Reduce a factor label to its significant tokens: generic modifiers carry no meaning of their
+  // own ("renal function" / "renal impairment" are the same ask), and British spellings must match.
+  var MAIK_REFINE_STOP = { the: 1, a: 1, an: 1, of: 1, for: 1, to: 1, in: 1, on: 1, this: 1, patient: 1, patients: 1, any: 1, and: 1, or: 1, with: 1, s: 1, status: 1, state: 1, level: 1, levels: 1, function: 1, functions: 1, impairment: 1, impaired: 1, disease: 1, risk: 1, control: 1, pattern: 1, patterns: 1, history: 1, use: 1, current: 1, known: 1, presence: 1, degree: 1, severity: 1 };
+  function maikRefineTokens(label) {
+    var s = String(label || "").toLowerCase().replace(/ae|oe/g, "e").replace(/[^a-z0-9]+/g, " ").trim();
+    var out = {}, n = 0;
+    s.split(" ").forEach(function (w) {
+      if (!w || w.length < 3 || MAIK_REFINE_STOP[w]) return;
+      w = w.replace(/(ies)$/, "y").replace(/([^s])s$/, "$1");
+      if (!out[w]) { out[w] = 1; n++; }
+    });
+    return n ? out : null;
+  }
+  function maikRefineSubset(a, b) { for (var k in a) if (!b[k]) return false; return true; }
+  // Already asked if this factor's significant tokens are a subset of an answered one's, or vice
+  // versa — "patient preference" after "patient preference for injections", "renal impairment"
+  // after "renal function". Distinct factors that merely share a word ("blood glucose" vs "blood
+  // pressure") are NOT subsets of each other and still render.
+  function maikRefineKnown(label) {
+    var t = maikRefineTokens(label); if (!t) return false;
+    for (var k in _maikRefined) {
+      var o = _maikRefined[k];
+      if (o && (maikRefineSubset(t, o) || maikRefineSubset(o, t))) return true;
+    }
+    return false;
+  }
+  function maikRefineRemember(label) {
+    var t = maikRefineTokens(label); if (!t) return;
+    _maikRefined[Object.keys(t).sort().join(" ")] = t;
+  }
+  /* A plain "dose of amlodipine" is a LOOKUP, not a question for a language model: the StewardMD
+   * Drug Index already holds a curated, sourced dose line, offline and instantly. Sending it to the
+   * cloud costs the clinician ~8s and a paid turn to be told what the app already knows.
+   * Detection is deliberately narrow — anything the Index cannot answer (renal/hepatic dosing,
+   * pregnancy, paediatrics, weight-based, infusions, interactions, comparisons) is NOT a lookup and
+   * goes to MaiK untouched. The clinician always gets both doors; nothing is auto-redirected. */
+  // Two groups on purpose: whole words, then STEMS (a bare "pregnan" inside \b…\b never matches
+  // "pregnancy" — the boundary is after the n).
+  var MAIK_DOSE_NUANCE = /\b(renal|kidney|ckd|dialysis|egfr|creatinine|hepatic|liver|cirrhosis|child|children|infant|infants|elderly|weight|kg|overdose|maximum|max|versus|vs|compare|convert|switch|taper|stop|sepsis|shock|icu|failure|why|mechanism|iv|infusion)\b|\b(pregnan|lactat|breastfeed|paediatr|pediatr|neonat|obes|titrat|infus|interact|resist|ventilat|toxic|poison|drip)[a-z]*/;
+  function maikDoseLookup(q) {
+    try {
+      // Local normaliser: maikNorm lives inside the sheet closure and this runs at module scope.
+      var n = String(q || "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+      if (!/\b(dose|doses|dosage|dosing|how much)\b/.test(n)) return null;
+      if (MAIK_DOSE_NUANCE.test(n)) return null;
+      if (n.split(" ").filter(Boolean).length > 8) return null;
+      var list = (window.MEDDRUGS && MEDDRUGS._list) || []; if (!list.length) return null;
+      var hits = [];
+      list.forEach(function (d) {
+        var names = [String(d.generic || "").toLowerCase().replace(/\s*\(.*$/, "")].concat(d.brands || []);
+        var hit = names.some(function (name) {
+          name = String(name || "").toLowerCase().trim();
+          if (name.length < 4) return false;                     // "ccb", "asa" … class abbreviations
+          return new RegExp("\\b" + name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&") + "\\b").test(n);
+        });
+        if (hit && hits.indexOf(d) < 0) hits.push(d);
+      });
+      return hits.length === 1 ? hits[0] : null;                  // two drugs named = not a lookup
+    } catch (e) { return null; }
+  }
+  /* ── Busy art: the wait gets a character ───────────────────────────────────
+   * Two pieces, both inline (no image files, nothing fetched):
+   *   Medibot   — a vector robot listening to its own chest, in the pending bubble.
+   *   Stetho    — two DARK-TEAL pixel walkers (Buddy front-on, Strider side-on) that
+   *               cross the top edge of the composer while an answer generates.
+   * The pair alternates per turn. Everything stops under prefers-reduced-motion. */
+  var MAIK_PIX = {
+    d: "#0E6E63",   // dark teal body
+    l: "#2DD4BF",   // rim + diaphragm
+    t: "#14807A",   // tubing
+    k: "#04211E"    // eyes
+  };
+  var MAIK_BUDDY = [[
+    "..t.......t..",
+    "..t.......t..",
+    "...t.....t...",
+    "....t...t....",
+    ".....ttt.....",
+    "...lllllll...",
+    "..ddddddddd..",
+    "..dkdddddkd..",
+    "..ddddddddd..",
+    "...lllllll...",
+    "....d...d....",
+    "....d...d...."], [
+    ".............",
+    "..t.......t..",
+    "..t.......t..",
+    "...t.....t...",
+    "....ttttt....",
+    "...lllllll...",
+    "..ddddddddd..",
+    "..dkdddddkd..",
+    "..ddddddddd..",
+    "...lllllll...",
+    "...d.....d...",
+    "..d.......d.."]];
+  // rows -> <g> of 1x1 rects. Pure string building so it drops into innerHTML anywhere.
+  function maikPixG(rows, cls) {
+    var out = '<g class="' + cls + '">', y, x, c;
+    for (y = 0; y < rows.length; y++) for (x = 0; x < rows[y].length; x++) {
+      c = rows[y].charAt(x);
+      if (!MAIK_PIX[c]) continue;
+      out += '<rect x="' + x + '" y="' + y + '" width="1" height="1" fill="' + MAIK_PIX[c] + '"/>';
+    }
+    return out + "</g>";
+  }
+  /* ONE clock for the resident, at module scope and reading the DOM each tick. It stops itself the
+   * moment his node is gone, so nothing has to remember to tear it down. Two independent schedules
+   * (foot-shuffle and blink) are why this is JS rather than CSS keyframes fighting over opacity. */
+  var _mkClock = null, _mkClockT = 0;
+  function maikBuddyFrames() { try { return document.querySelectorAll("#maikSheet .mkw .mkw-svg > g"); } catch (e) { return []; } }
+  function maikBuddyStop() { if (_mkClock) { clearInterval(_mkClock); _mkClock = null; } }
+  function maikBuddyStart() {
+    maikBuddyStop(); _mkClockT = 0;
+    if (window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches) { maikBuddyPose(0); return; }
+    _mkClock = setInterval(maikBuddyTick, 120);
+    maikBuddyTick();
+  }
+  function maikBuddyPose(i) {
+    var g = maikBuddyFrames();
+    for (var n = 0; n < g.length; n++) g[n].style.display = (n === i ? "block" : "none");
+    return g.length;
+  }
+  function maikBuddyTick() {
+    var busy = false;
+    try { var b = document.querySelector("#maikSheet .mkw"); busy = !!(b && b.classList.contains("busy")); } catch (e) {}
+    var rate = busy ? 0.55 : 1;                              // thinking: the same idle, quicker
+    _mkClockT += 120;
+    var stepC = _mkClockT % Math.round(MK_IDLE.step * rate);
+    var blinkC = _mkClockT % Math.round(MK_IDLE.blink * rate);
+    // two quick foot-shuffles, a blink later in the cycle, otherwise the resting pose
+    var frame = (stepC < 140 || (stepC >= 280 && stepC < 420)) ? 1 : (blinkC < 130 ? 2 : 0);
+    if (!maikBuddyPose(frame)) maikBuddyStop();              // he left; so does his clock
+  }
+  // Idle cadence, in ms. At module scope on purpose: openAskAi mounts the resident before its own
+  // `var` lines further down have run, so a var inside that closure is still undefined at first tick.
+  var MK_IDLE = { step: 5200, blink: 4400 };
+  // Blink is frame 1 with the eye pixels painted body-colour — one derived frame, no new art.
+  function maikBlinkFrame(rows) {
+    return rows.map(function (r) { return r.replace(/k/g, "d"); });
+  }
+  function maikPixSVG(frames, scale) {
+    var w = frames[0][0].length, h = frames[0].length, i, g = "";
+    for (i = 0; i < frames.length; i++) g += maikPixG(frames[i], "mkw-f" + (i + 1));
+    return '<svg class="mkw-svg" width="' + (w * scale) + '" height="' + (h * scale) + '" viewBox="0 0 ' + w + ' ' + h +
+      '" shape-rendering="crispEdges" aria-hidden="true">' + g + "</svg>";
+  }
+  // Medibot: one vector robot, ids suffixed so several can share a page.
+  var _mkBotN = 0;
+  function maikBotSVG(px) {
+    var p = "mkb" + (++_mkBotN) + "_";
+    return '<svg class="maik-bot" width="' + px + '" height="' + px + '" viewBox="0 0 200 200" aria-hidden="true">' +
+      '<defs>' +
+        '<linearGradient id="' + p + 's" x1=".2" y1="0" x2=".8" y2="1">' +
+          '<stop offset="0%" stop-color="#F4F9FB"/><stop offset="46%" stop-color="#D2DEE4"/><stop offset="100%" stop-color="#93A6B0"/></linearGradient>' +
+        '<linearGradient id="' + p + 'v" x1="0" y1="0" x2=".6" y2="1">' +
+          '<stop offset="0%" stop-color="#123642"/><stop offset="55%" stop-color="#08202A"/><stop offset="100%" stop-color="#04141B"/></linearGradient>' +
+        '<linearGradient id="' + p + 'e" x1="0" y1="0" x2="0" y2="1">' +
+          '<stop offset="0%" stop-color="#9CFFEF"/><stop offset="100%" stop-color="#2DD4BF"/></linearGradient>' +
+        '<linearGradient id="' + p + 'c" x1="0" y1="0" x2="1" y2="1">' +
+          '<stop offset="0%" stop-color="#EEF5F8"/><stop offset="40%" stop-color="#AFC0C9"/><stop offset="70%" stop-color="#7B8F9A"/><stop offset="100%" stop-color="#D8E3E8"/></linearGradient>' +
+        '<radialGradient id="' + p + 'b" cx="34%" cy="28%" r="76%">' +
+          '<stop offset="0%" stop-color="#FBFDFE"/><stop offset="45%" stop-color="#C2D0D8"/><stop offset="100%" stop-color="#6F838E"/></radialGradient>' +
+      '</defs>' +
+      '<g class="mkb-bob">' +
+        '<path d="M100 44 L100 30" stroke="#94A7B1" stroke-width="4" stroke-linecap="round"/>' +
+        '<circle cx="100" cy="26" r="5.5" fill="#2DD4BF" class="mkb-pulse"/>' +
+        '<rect x="56" y="42" width="88" height="70" rx="26" fill="url(#' + p + 's)"/>' +
+        '<rect x="66" y="54" width="68" height="46" rx="21" fill="url(#' + p + 'v)"/>' +
+        '<g class="mkb-blink"><rect x="82" y="68" width="12" height="18" rx="6" fill="url(#' + p + 'e)"/></g>' +
+        '<g class="mkb-blink b2"><rect x="106" y="68" width="12" height="18" rx="6" fill="url(#' + p + 'e)"/></g>' +
+        '<rect x="46" y="66" width="12" height="24" rx="6" fill="#B6C6CE"/>' +
+        '<rect x="142" y="66" width="12" height="24" rx="6" fill="#B6C6CE"/>' +
+        '<path d="M72 116 h56 a16 16 0 0 1 16 16 v18 a16 16 0 0 1 -16 16 h-56 a16 16 0 0 1 -16 -16 v-18 a16 16 0 0 1 16 -16 z" fill="url(#' + p + 's)"/>' +
+        '<circle cx="100" cy="140" r="13" fill="none" stroke="#2DD4BF" stroke-width="2.4" class="mkb-ping"/>' +
+        '<circle cx="100" cy="140" r="13" fill="none" stroke="#2DD4BF" stroke-width="2.4" class="mkb-ping p2"/>' +
+        '<path d="M60 62 C48 84 52 116 74 130" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M140 62 C152 84 148 116 126 130" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M74 130 C84 138 92 140 100 140" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<path d="M126 130 C116 138 108 140 100 140" fill="none" stroke="url(#' + p + 'c)" stroke-width="6.5" stroke-linecap="round"/>' +
+        '<g class="mkb-tick">' +
+          '<circle cx="100" cy="141" r="12.5" fill="url(#' + p + 'b)"/>' +
+          '<circle cx="100" cy="141" r="7" fill="none" stroke="#FFFFFF" stroke-width="1.6" opacity=".72"/>' +
+        '</g>' +
+      '</g></svg>';
+  }
   function maikV2() { try { var v = localStorage.getItem("smd_maik_v2"); return v === null ? true : v !== "0"; } catch (e) { return true; } }
   function maikEscH(s) { return String(s == null ? "" : s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); }
   // ── MaiK "Aurora" wordmark + icon set (design_handoff_maik_assistant/IMPLEMENTATION.md §2) ──
@@ -3280,14 +3915,37 @@ body.dark .maik-fu{background:var(--mk-field)}
 .maik-refine .maik-fu::before{content:"+";font:800 13px/1 'Inter';opacity:.65;margin-right:-1px}
 .maik-refine .maik-fu:hover{background:var(--mk-bg);border-color:var(--mk-teal);color:var(--mk-teal)}
 .maik-refine .maik-fu:hover::before{opacity:1}
-/* Inline refine input: a tapped free-text factor chip becomes "factor: [ … ] →" so the clinician
-   supplies the value instead of the model assuming one. */
-.maik-refine-in{display:inline-flex;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
+/* Inline refine input: a tapped factor chip becomes "factor: [ … ] ×" so the clinician supplies the
+   value instead of the model assuming one. The value is optional; one button commits the group. */
+/* A staged factor takes its own row: at 200px the typed value was clipped mid-word
+   ("Known case of CAD P…"), which reads as data loss on the one screen that must show
+   the clinician exactly what they are about to ask. */
+.maik-refine-in{display:flex;flex:1 1 100%;align-items:center;gap:6px;padding:5px 6px 5px 12px;border:1px solid var(--mk-teal);border-radius:999px;background:var(--mk-field);color:var(--mk-ink);margin:0;max-width:100%}
 .maik-refine-il{font:600 12px/1 'Inter';color:var(--mk-mut);white-space:nowrap}
-.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:96px;max-width:200px;flex:1 1 auto;padding:2px 0}
+.maik-refine-inp{border:0;outline:0;background:transparent;font:500 13px/1.2 'Inter';color:var(--mk-ink);min-width:0;flex:1 1 auto;padding:2px 0}
 .maik-refine-inp::placeholder{color:var(--mk-faint)}
-.maik-refine-go{flex:none;border:0;background:var(--mk-teal);color:#fff;width:24px;height:24px;border-radius:50%;font:800 14px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0}
-.maik-refine-go:hover{filter:brightness(1.08)}
+.maik-refine-x{position:relative;flex:none;border:0;background:transparent;color:var(--mk-mut);width:24px;height:24px;border-radius:50%;font:700 15px/1 'Inter';cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:0;transition:background .12s,color .12s}
+.maik-refine-x:hover{background:var(--mk-bg);color:var(--mk-ink)}
+.maik-refine-x::after{content:"";position:absolute;inset:-9px}   /* a 24px glyph, a finger-sized target */
+.maik-refine-x:active{transform:scale(.92)}
+/* ONE commit for the whole group: stage as many factors as the patient needs, ask once. */
+.maik-refine-ask{width:100%;margin-top:10px;border:0;border-radius:12px;background:var(--mk-teal);color:#fff;font:700 13px/1 'Inter';letter-spacing:.01em;padding:12px 14px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:7px;transition:transform .12s ease,filter .12s}
+.maik-refine-ask:hover{filter:brightness(1.06)}
+.maik-refine-ask:active{transform:scale(.985)}
+.maik-refine-ask[hidden]{display:none}
+@media (prefers-reduced-motion:reduce){.maik-fu,.maik-refine-ask,.maik-refine-x{transition:none}}
+/* Drug-Index fast path: what the app already knows, before a cloud turn is spent on it */
+.maik-dosecard{border:1px solid var(--mk-bd);border-radius:14px;padding:13px 14px;background:var(--mk-bg)}
+.maik-dose-h{display:flex;align-items:center;gap:6px;font:700 10.5px/1.2 'Inter';letter-spacing:.07em;text-transform:uppercase;color:var(--mk-teal)}
+.maik-dose-n{font:700 16px/1.25 'Inter';color:var(--mk-ink);margin-top:7px}
+.maik-dose-c{font:500 12px/1.3 'Inter';color:var(--mk-mut);margin-top:1px}
+.maik-dose-d{font:600 14px/1.5 'Inter';color:var(--mk-ink);margin-top:9px}
+.maik-dose-note{font:500 12px/1.45 'Inter';color:var(--mk-mut);margin-top:5px}
+.maik-dose-acts{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+/* #maikSheet-scoped: body.dark .maik-fu outranks a bare class and repainted this as a plain chip.
+   (No backticks in this block — the whole stylesheet is one JS template literal.) */
+.maik-dose-go,#maikSheet .maik-dose-go{color:#fff;background:var(--mk-teal);border-color:transparent}
+.maik-dose-go:hover,#maikSheet .maik-dose-go:hover{color:#fff;background:var(--mk-teal);filter:brightness(1.06)}
 /* Phase 4 — "open in app" tool chips: bordered action chips with a trailing chevron */
 .maik-tools{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:11px}
 .maik-tools-lbl{width:100%;font:700 10px/1.2 'Inter';letter-spacing:.08em;text-transform:uppercase;color:var(--mk-mut);margin-bottom:1px}
@@ -3392,8 +4050,37 @@ body.v3-dark #maikSheet .maik-cmp-in{background:var(--mk-field);box-shadow:0 6px
 @keyframes maikThink{0%,100%{opacity:.45}50%{opacity:1}}
 /* Buffering loader — polished skeleton shimmer + stage label (replaces the plain dots). */
 .maik-buffer{display:block}
-.maik-buffer-head{display:flex;align-items:center;gap:7px;font:700 11px/1.2 'Inter';letter-spacing:.02em;color:var(--mk-teal);margin-bottom:10px}
+.maik-buffer-head{display:flex;align-items:center;gap:9px;font:700 11px/1.2 'Inter';letter-spacing:.02em;color:var(--mk-teal);margin-bottom:10px}
 .maik-buffer-head .smd-ico{width:15px;height:15px;flex:none;color:var(--mk-teal);animation:maikSpark 1.5s ease-in-out infinite}
+/* Medibot — the vector robot that listens to its own chest while MaiK generates. */
+.maik-bot{flex:none;overflow:visible}
+.mkb-bob{animation:mkbBob 3.4s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes mkbBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+.mkb-blink{transform-box:fill-box;transform-origin:50% 55%;animation:mkbBlink 5.2s steps(1,end) infinite}
+@keyframes mkbBlink{0%,92%,100%{transform:scaleY(1)}95%{transform:scaleY(.12)}}
+.mkb-blink.b2{animation-delay:-2.4s}
+.mkb-pulse{animation:mkbPulse 2.1s cubic-bezier(.4,0,.6,1) infinite}
+@keyframes mkbPulse{0%,100%{opacity:.55}50%{opacity:1}}
+.mkb-ping{transform-box:fill-box;transform-origin:50% 50%;animation:mkbPing 2.1s cubic-bezier(.2,.7,.3,1) infinite}
+@keyframes mkbPing{0%{transform:scale(.35);opacity:.85}70%{opacity:0}100%{transform:scale(1.9);opacity:0}}
+.mkb-ping.p2{animation-delay:-1.05s}
+.mkb-tick{transform-box:fill-box;transform-origin:50% 100%;animation:mkbTick 3.1s cubic-bezier(.42,0,.58,1) infinite}
+@keyframes mkbTick{0%,100%{transform:rotate(-5deg)}50%{transform:rotate(5deg)}}
+/* Stetho walkers — dark-teal pixel characters crossing the composer's top edge. */
+.maik-cmp{position:relative}
+.mkw{position:absolute;left:16px;top:-34px;height:34px;pointer-events:none;z-index:1}
+/* A dark-teal body is deliberately quiet; the glow is what keeps it legible on the
+   night-shift theme without brightening the fill the owner picked. */
+.mkw-a{display:block;animation:mkwBreathe 3.2s cubic-bezier(.45,0,.55,1) infinite;filter:drop-shadow(0 0 4px rgba(45,212,191,.38))}
+/* He stays put. The bob is the whole of his motion, so it is small enough to sit beside text. */
+@keyframes mkwBreathe{0%,100%{transform:translateY(0)}50%{transform:translateY(-2px)}}
+.mkw.busy .mkw-a{animation-duration:1.5s;filter:drop-shadow(0 0 6px rgba(45,212,191,.55))}
+.mkw-svg{display:block}
+.mkw-svg > g{display:none}
+.mkw-svg > g:first-child{display:block}
+@media (prefers-reduced-motion:reduce){
+  .mkb-bob,.mkb-blink,.mkb-pulse,.mkb-ping,.mkb-tick,.mkw-a{animation:none}
+}
 .maik-buffer-txt{color:var(--mk-mut);font-weight:600}
 .maik-sk{display:flex;flex-direction:column;gap:8px}
 .maik-sk span{display:block;height:9px;border-radius:6px;background:rgba(125,139,161,.22);position:relative;overflow:hidden}
@@ -3530,6 +4217,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     sheet.innerHTML = maikShellHTML();
     document.body.appendChild(sheet);
     document.body.classList.add("maik-open");
+    maikBuddyMount();          // the resident: present from the moment MaiK opens
     requestAnimationFrame(function () {
       scrim.classList.add("on"); sheet.classList.add("on");
       // Motion One spring: stagger the sheet content in on open (mk2 + Motion present, reduced-motion respected)
@@ -3551,14 +4239,70 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     try { fetch("/api/ai/health", { method: "GET" }).catch(function () {}); } catch (e) {}
     var body = sheet.querySelector("#maikBody"), qEl = sheet.querySelector("#maikQ"), sendBtn = sheet.querySelector("#maikSend");
 
+    /* ROUTE PREFETCH (2026-08-24, measured on device).
+     *
+     * The universal semantic router costs ~6.0-7.7s on a cache miss and runs BEFORE the answer, so a
+     * NEW question pays router + answer serially: ~6s + ~3.7s TTFV = the ~9.7s a clinician actually
+     * waits (matches the 9.2s seen on the iPhone). But the router's input is only the QUESTION TEXT,
+     * which we already have while they are still typing — so warm it during the pause before send.
+     * getRoute() caches by normalised question, so the send-time call then resolves from that cache.
+     *
+     * Routing quality is UNCHANGED: same router, same text, same result — only earlier. A failed or
+     * unfinished prefetch changes nothing; send-time still calls getRoute() exactly as it does today.
+     *
+     * Bounded on purpose, because each prefetch is a real metered call: fires only after a 1s pause,
+     * needs a reasonably complete question, skips text it already warmed, and stops after 3 per
+     * composer session so a long edit cannot fan out into many router calls. */
+    var _preT = null, _preLast = "", _preN = 0;
+    if (qEl) qEl.addEventListener("input", function () {
+      var q = String(qEl.value || "").trim();
+      if (q.length < 15 || q === _preLast || _preN >= 3) return;
+      if (_preT) clearTimeout(_preT);
+      _preT = setTimeout(function () {
+        var cur = String(qEl.value || "").trim();
+        if (cur.length < 15 || cur === _preLast || _preN >= 3) return;
+        _preLast = cur; _preN++;
+        try { getRoute(cur); } catch (e) {}          // fire and forget — result lands in the route cache
+      }, 1000);
+    });
+
     /* The one place the send/stop button's state lives.
      *
      * It used to be twelve scattered `sendBtn.disabled = ...` assignments, and every one of them
      * contradicted a stop button by disabling the only control that could cancel. Centralised so the
      * two states cannot drift apart.
      */
+    /* Stetho Buddy lives on the composer's top edge for as long as MaiK is open — not only while
+     * an answer generates. He does NOT travel: he idles in place, shuffles his feet every few
+     * seconds and blinks, which reads as alive without dragging the eye across the screen while
+     * the clinician is reading. Frame choice is a tiny JS state machine because the three frames
+     * are on two independent schedules, which pure CSS keyframes cannot express without fighting
+     * each other over opacity. */
+    // Stetho Buddy is mounted here but CLOCKED at module scope (maikBuddyStart): a per-sheet timer
+    // died whenever a second MaiK sheet was created, leaving him frozen mid-step.
+    function maikBuddyMount() {
+      try {
+        var cmp = sheet && sheet.querySelector(".maik-cmp"); if (!cmp) return;
+        var old = cmp.querySelector(".mkw"); if (old) old.remove();
+        var box = document.createElement("div"); box.className = "mkw";
+        // +15% over the original 2x: vector rects, so a fractional scale stays sharp.
+        box.innerHTML = '<span class="mkw-a">' + maikPixSVG([MAIK_BUDDY[0], MAIK_BUDDY[1], maikBlinkFrame(MAIK_BUDDY[0])], 2.3) + "</span>";
+        cmp.appendChild(box);
+        maikBuddyStart();
+      } catch (e) {}
+    }
+    function maikBuddyUnmount() {
+      try { var old = sheet && sheet.querySelector(".mkw"); if (old) old.remove(); } catch (e) {}
+      maikBuddyStop();
+    }
+    // Sending a question does not summon him — he is already there. It just perks him up, while
+    // Medibot appears in the pending bubble (maikBufferHTML).
+    function maikBuddyBusy(on) {
+      try { var b = sheet && sheet.querySelector(".mkw"); if (b) b.classList.toggle("busy", !!on); } catch (e) {}
+    }
     function maikSetSendMode(busy) {
       _maikBusy = busy;
+      maikBuddyBusy(!!busy);
       if (!sendBtn) return;
       sendBtn.disabled = false;                 // never disabled: while busy it is the STOP control
       sendBtn.classList.toggle("stopping", !!busy);
@@ -3598,6 +4342,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       // Unlock: if a request was still in flight (or never settled), the busy guard would otherwise stay
       // true and block send() on reopen — the conversation would appear "stuck" and un-continuable.
       _maikBusy = false;
+      maikBuddyUnmount();      // stop his timer — the sheet is about to be removed
       sheet.classList.remove("on"); scrim.classList.remove("on"); document.body.classList.remove("maik-open"); setTimeout(function () { sheet.remove(); scrim.remove(); }, 260);
     }
     function scroll() { body.scrollTop = body.scrollHeight; }
@@ -3974,7 +4719,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Lazy two-tier generation (flag smd_maik_lazy, default OFF): the FIRST call fetches only the concise
     // bottom line (cheap + fast); the tier-2 detail is fetched on demand when "Know more" is tapped. Cuts
     // output tokens ~40-60% since most reads stop at the bottom line. Off by default → test then enable.
-    function maikLazyOn() { try { return localStorage.getItem("smd_maik_lazy") === "1"; } catch (e) { return false; } }
+    /* Two-tier answers, DEFAULT ON (2026-08-24). Measured on production, n=20: MaiK latency is
+     * output-token-bound - gen_ms ~= 1389 + 7.8 x outputTokens - so the first answer's LENGTH is the
+     * wait. Tier 1 asks for the bottom line PLUS everything safety-critical (red flags,
+     * contraindications, time-critical actions, drug cautions); the system prompt FORBIDS putting
+     * any of those behind @@MORE@@, and tier 2 is one tap away via the "Loading detail…" control.
+     * Same content, ordered - not a shorter answer. Opt out with smd_maik_lazy="0". */
+    function maikLazyOn() { try { return localStorage.getItem("smd_maik_lazy") !== "0"; } catch (e) { return true; } }
     var _maikLazyCtx = {}, _maikLazySeq = 0;
     function maikSplitMore(s) {
       var parts = String(s == null ? "" : s).split(/@@\s*MORE\s*@@/i);
@@ -3982,10 +4733,15 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       return { lead: parts[0].trim(), detail: parts.slice(1).join("\n\n").trim() };
     }
     function maikRefineHTML(question, chips) {
-      if (!chips || !chips.length) return "";
+      chips = (chips || []).filter(function (c) { return !maikRefineKnown(c); });
+      if (!chips.length) return "";
       var h = '<div class="maik-refine"><div class="maik-refine-lbl">Refine for this patient</div><div class="maik-followups">';
       chips.forEach(function (c) { h += '<button class="maik-fu" data-maik-refine="' + maikEscH(c) + '" data-maik-baseq="' + maikEscH(String(question || "")) + '" data-maik-q="' + maikEscH(String(question || "") + " — " + c) + '">' + maikEscH(c) + '</button>'; });
-      return h + '</div></div>';
+      // ONE commit for the group. Tapping chips only STAGES them, so a patient who is 71, on
+      // 1.2 creatinine and hypo-prone is described in one question instead of three separate
+      // answers that each know a third of the story.
+      h += '</div><button class="maik-refine-ask" data-maik-askall="1" data-maik-baseq="' + maikEscH(String(question || "")) + '" hidden>Ask with these details</button>';
+      return h + '</div>';
     }
     // Some refinement factors map to a real in-app tool rather than a re-prompt: e.g. "local resistance
     // patterns" belongs in the Antibiogram explorer (actual local/ICMR susceptibility data), not another
@@ -4011,6 +4767,37 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikRenderAnswer(think, r, pkg, active, cacheKey, topicLabel, question, depth, assume) {
       // The provider call has returned and we are rendering the interactive answer, so clear the busy
       // guard NOW rather than in the trailing .then(). On native the answer is revealed via a
+  /* The engine hands back a REAL reason - out of memory, model not installed, no native runtime -
+   * and this used to discard it and print one opaque line. That is exactly what "I installed the
+   * on-device model and it just says MaiK is unavailable" looks like from the clinician's side: the
+   * app knew why and would not say. Name the cause and what to do about it.
+   * maik-engine.js localAnswer() maps any rejection to { error: <message> }. */
+  function maikErrorNotice(r) {
+    var e = String((r && r.error) || "");
+    var mem = e.match(/^not-enough-memory:(.+)$/);
+    if (mem) {
+      return "There is not enough free memory to load the on-device model right now (" + maikEscH(mem[1]) + ").<br><br>" +
+             "Close other apps and ask again, or tap the model name at the top and choose <b>MaiK Cloud</b>.";
+    }
+    if (/needs the native app|model manager unavailable/i.test(e)) {
+      return "On-device answering is not available in this build.<br><br>" +
+             "Tap the model name at the top and choose <b>MaiK Cloud</b>.";
+    }
+    if (/model-corrupted|corrupt/i.test(e)) {
+      return "The downloaded model file was damaged and could not be loaded, so it has been removed.<br><br>" +
+             "This usually happens when a download is interrupted and resumed. Tap the model name at the top " +
+             "to download it again - on Wi-Fi, and leave the app open until it finishes. " +
+             "In the meantime choose <b>MaiK Cloud</b> for answers.";
+    }
+    if (/unknown model pack|not installed|model file/i.test(e)) {
+      return "That on-device model is not fully installed on this device.<br><br>" +
+             "Tap the model name at the top to finish installing it, or choose <b>MaiK Cloud</b>.";
+    }
+    if (/cancel/i.test(e)) return "That answer was cancelled.";
+    return "MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available." +
+           (e ? '<br><br><span style="opacity:.7;font-size:12.5px">Reason: ' + maikEscH(e) + "</span>" : "");
+  }
+
       // requestAnimationFrame typewriter (explainGroundedStream fallback replay) that held _maikBusy
       // true for the WHOLE animation, so the follow-up chips were visible but taps silently no-op'd
       // until the next turn cleared it ("tapped First-line treatment, nothing; sent Hi, then it worked").
@@ -4026,7 +4813,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         });
         think.appendChild(onBtn); scroll(); return;
       }
-      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — the deterministic StewardMD engine, calculators and reference tools remain available.</div>'; return; }
+      if (r && r.error) { think.innerHTML = '<div class="maik-welcome">' + maikErrorNotice(r) + '</div>'; return; }
       var md = (r && r.text) ? String(r.text).trim() : "";
       var _refine = maikParseRefine(md); md = _refine.text;   // strip the @@REFINE@@ block; its chips render below
       if (!md || /\b(no (relevant |specific )?information|does not (cover|contain)|unable to (find|answer)|i (don'?t|do not) have (enough|any))\b/i.test(md)) {
@@ -4404,7 +5191,19 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
               if (tools.length) {
                 var tb = document.createElement("div"); tb.className = "maik-tools";
                 var tl = document.createElement("div"); tl.className = "maik-tools-lbl"; tl.textContent = "Open in StewardMD"; tb.appendChild(tl);
-                tools.slice(0, 4).forEach(function (t) { var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label; b.addEventListener("click", function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }); tb.appendChild(b); });
+                /* CLOSE MaiK FIRST. #maikSheet is z-index 999 while .db-overlay (Drugs Database) is
+                 * 880 and .mc-overlay (Calculators) is 870, so opening a module with the sheet still
+                 * up put it BEHIND MaiK: fully working, completely invisible, which is exactly what
+                 * "the chips don't do anything" looks like. The data-maik-tool chips below always
+                 * close() first, which is why those worked and these did not. Same trap as SURGX. */
+                tools.slice(0, 4).forEach(function (t) {
+                  var b = document.createElement("button"); b.className = "maik-fu maik-tool"; b.textContent = t.label;
+                  b.addEventListener("click", function () {
+                    try { close(); } catch (e) {}
+                    setTimeout(function () { try { MaiKCopilot.TOOLS[t.kind].open(t.arg); } catch (e) {} }, 180);
+                  });
+                  tb.appendChild(b);
+                });
                 host.appendChild(tb);
               }
               try { scroll(); } catch (e) {}
@@ -4450,7 +5249,13 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
                   var ttft = _perfTTFT ? ((_perfTTFT - _perfT0) / 1000).toFixed(1) : null;
                   var el = document.createElement("div"); el.className = "maik-perf";
                   el.style.cssText = "margin-top:8px;font:600 11px/1.4 var(--sans,system-ui);color:var(--slate-soft,#5a7184);opacity:.9";
-                  el.textContent = "⏱ " + (ttft ? ("first token " + ttft + "s · ") : "") + "full answer " + total + "s" + (r && r.mode ? " · " + r.mode : "");
+                  // Label it truthfully. On native there is NO live stream (reasoning.js explainGroundedStream
+                  // returns fallback(): fetch the whole answer, then type it out), so what used to be shown
+                  // as "first token" was really "the server finished" - and the gap after it was a cosmetic
+                  // animation, not generation. Calling that "first token" hid where the time actually went.
+                  var _replayed = !!(r && r.replayed);
+                  el.textContent = "⏱ " + (ttft ? ((_replayed ? "answer " : "first token ") + ttft + "s · ") : "") +
+                    (_replayed ? "shown " : "full answer ") + total + "s" + (r && r.mode ? " · " + r.mode : "");
                   _h.appendChild(el);
                   try { console.debug("[MaiK TTFT]", { ttft_s: ttft, total_s: total, mode: r && r.mode }); } catch (e) {}
                 }
@@ -4559,6 +5364,23 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         .catch(function (e) { if (!_maikDone) { _clearStages(); think.innerHTML = '<div class="maik-welcome">MaiK is unavailable right now — clinical reasoning, calculators, and reference tools remain available.</div>'; } })
         .then(function () { _fsResume(); if (_maikDone) return; _maikDone = true; _clearStages(); clearTimeout(_maikTO); _maikBusy = false; maikSetSendMode(false); });
     }
+    // The two doors, as one card in the thread. Both are data-attribute buttons so they survive a
+    // saved/restored thread and are handled by the one delegated listener.
+    function maikDoseCard(drug, question) {
+      var dose = String(drug.dose || "").trim();
+      var html = '<div class="maik-dosecard">' +
+        '<div class="maik-dose-h">' + MK.book + '<span>StewardMD Drug Index</span></div>' +
+        '<div class="maik-dose-n">' + maikEscH(drug.generic) + '</div>' +
+        (drug.cls ? '<div class="maik-dose-c">' + maikEscH(drug.cls) + '</div>' : '') +
+        (dose ? '<div class="maik-dose-d">' + maikEscH(dose) + '</div>' : '') +
+        (drug.notes ? '<div class="maik-dose-note">' + maikEscH(drug.notes) + '</div>' : '') +
+        '<div class="maik-dose-acts">' +
+          '<button class="maik-fu maik-dose-go" data-maik-drugidx="' + maikEscH(drug.generic) + '">Open in Drug Index</button>' +
+          '<button class="maik-fu" data-maik-anyway="' + maikEscH(question) + '">Let MaiK answer</button>' +
+        '</div></div>';
+      bubble("ai", html); scroll();
+      try { _maikBodyHTML = body.innerHTML; maikSaveThread(_maikBodyHTML); } catch (e) {}
+    }
     function send() {
       if (_maikBusy) return;
       var q = (qEl.value || "").trim(); if (!q) return; qEl.value = "";
@@ -4595,15 +5417,17 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
         b.addEventListener("click", function () { close(); try { openDxChooser(); } catch (e) {} }); d.appendChild(b); scroll(); return;
       }
       if (route.kind === "clarify") { bubble("ai", '<div class="maik-welcome">Could you tell me the condition, symptoms, or what aspect you’d like to review? For example: “how to treat DKA?” or “signs of meningitis”.</div>'); return; }
+      var _lk = maikDoseLookup(q);
+      if (_lk) { maikDoseCard(_lk, q); return; }
       var topic = maikV2() ? maikCanonTopic(q) : q;
       var depth = /(in (more )?detail|detailed|elaborate|in depth)/.test(maikNorm(q)) ? "detailed" : "concise";
       runClinical(q, q, depth, active, topic);
     }
     // test hook (dev/regression harnesses only — closures are otherwise unreachable)
-    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; } }; } catch (e) {}
+    try { window.__MAIK_TEST = { resolveFollowup: maikResolveFollowup, getTopic: function () { return _maikTopic; }, setTopic: function (t) { _maikTopic = t; }, refineHTML: maikRefineHTML, refineCompose: maikRefineCompose, refineKnown: maikRefineKnown, refineRemember: maikRefineRemember, refineForget: function () { _maikRefined = {}; }, doseLookup: maikDoseLookup, buddyBusy: maikBuddyBusy, botSVG: maikBotSVG }; } catch (e) {}
     // restore the prior conversation verbatim (questions AND answers) for this session; else empty state
     if (_maikBodyHTML && /maik-b you/.test(_maikBodyHTML)) { body.innerHTML = _maikBodyHTML; scroll(); } else { emptyState(); }
-    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
+    function maikNewThread() { maikSetActive(maikNewConvId()); _maikBodyHTML = ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {}; _maikHist = []; try { localStorage.setItem(maikThreadKey(), ""); } catch (e) {} if (body) body.innerHTML = ""; emptyState(); try { maikCloseSide(); } catch (e) {} if (qEl) { qEl.value = ""; qEl.placeholder = "Ask a clinical question…"; qEl.focus(); } }
     sheet.querySelector("#maikClose").addEventListener("click", close);
     var _newBtn = sheet.querySelector("#maikNew"); if (_newBtn) _newBtn.addEventListener("click", maikNewThread);
     try { if (window.SMD_MAIK_ENGINE && SMD_MAIK_ENGINE.wireChip) SMD_MAIK_ENGINE.wireChip(sheet); } catch (e) {}
@@ -4686,7 +5510,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     function maikCloseSide() { var e = maikSideEls(); if (!e.wrap) return; e.wrap.classList.remove("open"); setTimeout(function () { try { e.wrap.hidden = true; } catch (x) {} }, 220); }
     function maikOpenConv(id) {
       var rec = maikLoadConvos().filter(function (c) { return c.id === id; })[0]; if (!rec) return;
-      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikTopic = null; _maikCache = {};
+      maikSetActive(id); _maikBodyHTML = rec.html || ""; _maikTurns = []; _maikRefined = {}; _maikTopic = null; _maikCache = {};
       if (body) { body.innerHTML = _maikBodyHTML; scroll(); }
       try { localStorage.setItem(maikThreadKey(), _maikBodyHTML); } catch (e) {}
       maikCloseSide();
@@ -4764,7 +5588,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     // Buffering loader markup — a stage label + shimmering skeleton lines (the "thinking" state while
     // MaiK waits ~15s for the first token). `cls` preserves the legacy .maik-thinking/.maik-webbusy hooks.
     function maikBufferHTML(stage, cls) {
-      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + svg("spark", "smd-ico") +
+      return '<div class="maik-buffer ' + (cls || "") + '"><div class="maik-buffer-head">' + maikBotSVG(30) +
         '<span class="maik-buffer-txt">' + maikEscH(stage || "Searching StewardMD knowledge") + '</span></div>' +
         '<div class="maik-sk"><span></span><span></span><span></span></div></div>';
     }
@@ -4800,26 +5624,85 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       if (!chip || !chip.parentNode) return;
       var row = document.createElement("span");
       row.className = "maik-refine-in"; row.setAttribute("data-maik-inline", "1");
+      row.setAttribute("data-maik-factor", label);
       var lb = document.createElement("span"); lb.className = "maik-refine-il"; lb.textContent = label + ":";
       var inp = document.createElement("input");
       inp.type = "text"; inp.className = "maik-refine-inp"; inp.setAttribute("aria-label", label);
-      inp.placeholder = "specify…"; inp.autocomplete = "off"; inp.setAttribute("autocapitalize", "sentences");
-      var go = document.createElement("button");
-      go.type = "button"; go.className = "maik-refine-go"; go.setAttribute("aria-label", "Ask"); go.textContent = "→";
-      row.appendChild(lb); row.appendChild(inp); row.appendChild(go);
+      // The VALUE IS OPTIONAL. A factor like "renal impairment" or "differentials" is a lens, not a
+      // number — demanding text before the chip would do anything is what made those chips useless.
+      inp.placeholder = "add detail (optional)"; inp.autocomplete = "off"; inp.setAttribute("autocapitalize", "sentences");
+      var x = document.createElement("button");
+      x.type = "button"; x.className = "maik-refine-x"; x.setAttribute("aria-label", "Remove " + label); x.textContent = "×";
+      row.appendChild(lb); row.appendChild(inp); row.appendChild(x);
       chip.parentNode.replaceChild(row, chip);
-      function submit() {
-        var v = (inp.value || "").trim();
-        if (!v) { try { inp.focus(); } catch (e) {} return; }
-        if (_maikBusy) return;
-        var q = (baseq ? baseq + " — " : "") + label + ": " + v;
-        var tpc = maikV2() ? maikCanonTopic(q) : q;
-        runClinical(q, q, "concise", maikActiveCase(), tpc);
-      }
-      go.addEventListener("click", function (e) { e.preventDefault(); submit(); });
-      inp.addEventListener("keydown", function (e) { if (e.key === "Enter") { e.preventDefault(); submit(); } });
+      var group = row.closest ? row.closest(".maik-refine") : null;
+      // × / counting / Enter are all DELEGATED (below) rather than bound here: a thread is saved and
+      // restored as innerHTML, so any listener bound to these nodes is gone on the next open and the
+      // × would look tappable and do nothing.
+      maikRefineSync(group);
       try { inp.focus(); } catch (e) {}
     }
+    // Forgiveness: × puts the original chip back exactly where it was — a mis-tap costs nothing.
+    function maikRefineUnstage(row) {
+      var group = row.closest ? row.closest(".maik-refine") : null;
+      var label = row.getAttribute("data-maik-factor") || "";
+      var baseq = (group && group.getAttribute("data-maik-baseq")) || "";
+      if (!baseq && group) { var b = group.querySelector("[data-maik-baseq]"); baseq = (b && b.getAttribute("data-maik-baseq")) || ""; }
+      var chip = document.createElement("button");
+      chip.className = "maik-fu";
+      chip.setAttribute("data-maik-refine", label);
+      chip.setAttribute("data-maik-baseq", baseq);
+      chip.setAttribute("data-maik-q", baseq + " — " + label);
+      chip.textContent = label;
+      if (row.parentNode) row.parentNode.replaceChild(chip, row);
+      maikRefineSync(group);
+    }
+    // Status feedback while staging: the commit button appears with the first factor and counts up.
+    function maikRefineSync(group) {
+      if (!group) return;
+      var btn = group.querySelector("[data-maik-askall]"); if (!btn) return;
+      var n = group.querySelectorAll("[data-maik-inline]").length;
+      btn.hidden = !n;
+      btn.textContent = n ? ("Ask with " + n + " detail" + (n > 1 ? "s" : "")) : "Ask with these details";
+    }
+    // The one question every staged factor becomes: "<base> — age: 71 · renal function: 1.2 creat".
+    // A factor with no value still travels, as the factor itself. Pure (DOM in, string out) so the
+    // composition is testable without an AI call.
+    function maikRefineCompose(group) {
+      if (!group) return "";
+      var parts = [];
+      Array.prototype.forEach.call(group.querySelectorAll("[data-maik-inline]"), function (row) {
+        var f = row.getAttribute("data-maik-factor") || "";
+        var inp = row.querySelector(".maik-refine-inp");
+        var v = ((inp && inp.value) || "").trim();
+        if (f) parts.push(v ? (f + ": " + v) : f);
+      });
+      if (!parts.length) return "";
+      var baseq = group.getAttribute("data-maik-baseq") || "";
+      if (!baseq) { var b = group.querySelector("[data-maik-baseq]"); baseq = (b && b.getAttribute("data-maik-baseq")) || ""; }
+      return (baseq ? baseq + " — " : "") + parts.join(" · ");
+    }
+    function maikRefineAsk(group) {
+      if (!group || _maikBusy) return;
+      var q = maikRefineCompose(group);
+      if (!q) return;
+      Array.prototype.forEach.call(group.querySelectorAll("[data-maik-inline]"), function (row) {
+        maikRefineRemember(row.getAttribute("data-maik-factor") || "");
+      });
+      var tpc = maikV2() ? maikCanonTopic(q) : q;
+      runClinical(q, q, "concise", maikActiveCase(), tpc);
+    }
+    // Staged-factor typing: keep the commit button's count live, and let Enter commit the group.
+    // Delegated for the same reason as × — a restored thread has no per-node listeners.
+    body.addEventListener("input", function (ev) {
+      var i = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-inp") : null;
+      if (i) maikRefineSync(i.closest(".maik-refine"));
+    });
+    body.addEventListener("keydown", function (ev) {
+      if (ev.key !== "Enter") return;
+      var i = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-inp") : null;
+      if (i) { ev.preventDefault(); maikRefineAsk(i.closest(".maik-refine")); }
+    });
     // One delegated listener handles every follow-up / refine chip (data-maik-q re-runs a grounded
     // query; data-maik-web opens opt-in web research). Delegation survives the innerHTML answer-cache.
     body.addEventListener("click", function (ev) {
@@ -4855,6 +5738,35 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       }
       var more = ev.target && ev.target.closest ? ev.target.closest(".maik-more") : null;
       if (more) { var mbub = more.closest(".maik-b.ai"); var cd2 = mbub && mbub.querySelector(".maik-collapsed"); if (cd2) { var opened = cd2.style.maxHeight === "none"; cd2.style.maxHeight = opened ? "260px" : "none"; cd2.style.overflow = opened ? "hidden" : ""; more.textContent = opened ? "Show more ▾" : "Show less ▴"; } return; }
+      // Drug Index fast path: open the molecule's own page, or fall back to the index.
+      var dx = ev.target && ev.target.closest ? ev.target.closest("[data-maik-drugidx]") : null;
+      if (dx) {
+        ev.preventDefault();
+        var dn = dx.getAttribute("data-maik-drugidx") || "";
+        close();
+        setTimeout(function () {
+          try {
+            if (window.MEDDB && MEDDB.openComposition && dn) MEDDB.openComposition(dn);
+            else if (window.MEDDRUGS && MEDDRUGS.openList) MEDDRUGS.openList();
+            else if (window.MEDDB && MEDDB.openList) MEDDB.openList();
+            else if (window.toast) toast("Drug Index loading…");
+          } catch (e) {}
+        }, 180);
+        return;
+      }
+      var anyway = ev.target && ev.target.closest ? ev.target.closest("[data-maik-anyway]") : null;
+      if (anyway) {
+        ev.preventDefault();
+        if (_maikBusy) return;
+        var aq = anyway.getAttribute("data-maik-anyway") || "";
+        var acard = anyway.closest(".maik-dosecard"); if (acard) acard.querySelector(".maik-dose-acts").remove();
+        runClinical(aq, aq, "concise", maikActiveCase(), maikV2() ? maikCanonTopic(aq) : aq);
+        return;
+      }
+      var rx = ev.target && ev.target.closest ? ev.target.closest(".maik-refine-x") : null;
+      if (rx) { ev.preventDefault(); var rrow = rx.closest("[data-maik-inline]"); if (rrow) maikRefineUnstage(rrow); return; }
+      var askAll = ev.target && ev.target.closest ? ev.target.closest("[data-maik-askall]") : null;
+      if (askAll) { ev.preventDefault(); maikRefineAsk(askAll.closest(".maik-refine")); return; }
       var el = ev.target && ev.target.closest ? ev.target.closest("[data-maik-q],[data-maik-web]") : null;
       if (!el) return;
       ev.preventDefault();
@@ -5468,7 +6380,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var tag = TYPE_TAG[it.type] || NCAT.general;
     var hi = it.importance === "high" || it.importance === "critical";
     var badge = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
-    var read = it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "";
+    var read = it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "";
     var ws = it.workspace ? '<span class="fd-ws">' + nEsc(WSLBL[it.workspace] || it.workspace) + '</span>' : "";
     var org = it.organization || it.source || "";
     var prev = String(it.summary || it.body || "");
@@ -5501,7 +6413,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     fetchDigest().then(function (dg) {
       if (!dg || !dg.data) { el.innerHTML = ""; return; }
       var d = dg.data;
-      el.innerHTML = '<button class="dg-banner" id="dgOpen"><div class="dg-badge">📰 This Week in Medicine</div>' +
+      el.innerHTML = '<button class="dg-banner" id="dgOpen"><div class="dg-badge">This Week in Medicine</div>' +
         '<div class="dg-h">' + nEsc(d.headline || "Weekly digest") + '</div>' +
         (d.intro ? '<div class="dg-sub">' + nEsc(String(d.intro).slice(0, 140)) + '</div>' : "") +
         '<div class="dg-go">Read the weekly digest ›</div></button>';
@@ -5515,7 +6427,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var secs = (d.sections || []).map(function (s) {
       return '<div class="dt-sec"><h4>' + nEsc(s.label || "") + '</h4><ul>' + (s.items || []).map(function (x) { return "<li>" + nEsc(x) + "</li>"; }).join("") + '</ul></div>';
     }).join("");
-    body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">📰 Weekly digest</span></div>' +
+    body.innerHTML = '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-guideline">Weekly digest</span></div>' +
       '<h2>' + nEsc(d.headline || "This Week in Medicine") + '</h2></div>' +
       (d.intro ? '<div class="dt-summary">' + nMd(d.intro) + '</div>' : "") +
       (hi ? '<div class="dt-sec"><h4>Highlights</h4><ul>' + hi + '</ul></div>' : "") + secs;
@@ -5626,7 +6538,7 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var hi = it.importance === "critical" ? '<span class="ntf-hi crit">Critical</span>' : (it.importance === "high" ? '<span class="ntf-hi">Important</span>' : "");
     body.innerHTML =
       '<div class="dt-head"><div class="ntf-top"><span class="ntf-cat cat-' + nEsc(it.category || "general") + '">' + (TYPE_TAG[it.type] || NCAT.general) + '</span>' + hi +
-        (it.est_read_min ? '<span class="fd-read">⏱ ' + it.est_read_min + ' min</span>' : "") + '</div>' +
+        (it.est_read_min ? '<span class="fd-read">' + it.est_read_min + ' min</span>' : "") + '</div>' +
       '<h2>' + nEsc(it.title) + '</h2>' +
       '<div class="dt-sub">' + nEsc(it.organization || it.source || "") + (s.version ? " · " + nEsc(s.version) : "") + (it.ts ? " · " + nEsc(nDate(it.ts)) : "") + (it.workspace ? " · " + nEsc(WSLBL[it.workspace] || it.workspace) : "") + '</div></div>' +
       ((s.summary || it.summary) ? '<div class="dt-summary">' + nMd(s.summary || it.summary) + '</div>' : "") +
@@ -5692,11 +6604,11 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   // `safety:true` categories (tasks, critical & immediate values) CANNOT be disabled by a junior
   // resident or intern — a patient-safety rule enforced in the UI and re-asserted on save.
   var NOTIF_CATS = [
-    { k: "tasks",      ico: "🗒️", label: "Tasks & assignments",          desc: "Ward/unit tasks assigned to you, and reminders",     safety: true },
-    { k: "critical",   ico: "🚨", label: "Critical & immediate values",   desc: "Critical lab values and urgent patient alerts",      safety: true },
-    { k: "labs",       ico: "🧪", label: "Lab reports",                   desc: "Routine (non-critical) lab results",                 safety: false },
-    { k: "guidelines", ico: "📘", label: "Clinical guidelines & updates", desc: "New guidelines, drug approvals and safety alerts",   safety: false },
-    { k: "general",    ico: "📣", label: "General app notifications",      desc: "Announcements, tips and product updates",            safety: false }
+    { k: "tasks",      label: "Tasks & assignments",          desc: "Ward/unit tasks assigned to you, and reminders",     safety: true },
+    { k: "critical",   label: "Critical & immediate values",   desc: "Critical lab values and urgent patient alerts",      safety: true },
+    { k: "labs",       label: "Lab reports",                   desc: "Routine (non-critical) lab results",                 safety: false },
+    { k: "guidelines", label: "Clinical guidelines & updates", desc: "New guidelines, drug approvals and safety alerts",   safety: false },
+    { k: "general",    label: "General app notifications",      desc: "Announcements, tips and product updates",            safety: false }
   ];
   function defaultCategories() { return { tasks: true, critical: true, labs: true, guidelines: true, general: true }; }
   // Junior resident / intern → safety categories are locked ON. Role comes from ICU-group
@@ -5761,7 +6673,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
     var catRows = NOTIF_CATS.map(function (c) {
       var on = cats[c.k] !== false, lock = restricted && c.safety;
       return '<label class="np-crow' + (lock ? " np-locked" : "") + '">' +
-        '<span class="np-cico" aria-hidden="true">' + c.ico + '</span>' +
         '<span class="np-ctext"><span class="np-clabel">' + nEsc(c.label) + (lock ? '<span class="np-lockpill">Required</span>' : "") + '</span>' +
         '<span class="np-cdesc">' + nEsc(c.desc) + '</span></span>' +
         '<input type="checkbox" class="np-catck" value="' + c.k + '"' + ((on || lock) ? " checked" : "") + (lock ? " disabled" : "") + '></label>';
@@ -6258,7 +7169,6 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
       ".np-cats{display:flex;flex-direction:column;gap:2px;margin:2px 0 16px}",
       ".np-crow{display:flex;align-items:flex-start;gap:11px;padding:11px 2px;border-bottom:1px solid var(--line,#e5e5e0);cursor:pointer}",
       ".np-crow.np-locked{cursor:default}",
-      ".np-cico{flex:0 0 auto;font-size:18px;line-height:1.5}",
       ".np-ctext{flex:1;display:flex;flex-direction:column;gap:2px;min-width:0}",
       ".np-clabel{font:700 14px var(--sans,system-ui);color:var(--ink,#1a1a1a);display:flex;align-items:center;gap:7px;flex-wrap:wrap}",
       ".np-cdesc{font:500 12px var(--sans,system-ui);color:var(--slate-soft,#888);line-height:1.4}",

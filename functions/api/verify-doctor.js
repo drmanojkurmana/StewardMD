@@ -23,6 +23,8 @@ import { verifyFirebaseToken } from "../_fbauth.js";
 import { mergeUserClaims } from "../_fbadmin.js";
 import { emailVerified } from "../_email.js";
 import { markVerified, sendProUpsellOnce } from "../_lifecycle.js";
+import { clearBudgetCache } from "../_aibudget.js";
+import { reconcileVerifiedClaim } from "../_verify_claim.js";
 
 const NMC_SEARCH  = "https://www.nmc.org.in/MCIRest/open/getDataFromService?service=searchDoctor";
 const NMC_REFERER = "https://www.nmc.org.in/information-desk/indian-medical-register/";
@@ -73,7 +75,9 @@ function decodePayload(token) {
 // Set the verified custom claim (via the shared Firebase-admin helper). Uses the clobber-safe
 // merge so verifying an already-Pro doctor keeps their pro/proExp claim instead of wiping it.
 async function setVerifiedClaim(env, uid, regNo) {
-  await mergeUserClaims(env, uid, { verified: true, regNo });
+  // verifiedAt starts the free Pro week (_entitlement.js accessState). Without it the doctor is
+  // verified but holds no entitlement, which reads to them as "verification did nothing".
+  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), regNo });
 }
 
 // ── Gemini — read the certificate ─────────────────────────────────────────────
@@ -254,12 +258,21 @@ export async function onRequest(context) {
     const store = kv(env);
     let rec = null;
     try { if (store) rec = await store.get(doctorKey(uid), "json"); } catch (e) {}
-    if (rec) return json({
+    if (rec) {
+      /* This endpoint answers from the KV record; every Pro gate reads the Firebase claim. When the
+       * two disagreed the doctor saw "Your account is verified" here and "needs a verified
+       * registration" on every feature, at the same moment. Heal it while they are on the screen. */
+      try {
+        const r = await reconcileVerifiedClaim(env, uid);
+        if (r.healed) { try { await clearBudgetCache(env, uid); } catch (e) {} }
+      } catch (e) {}
+      return json({
       status: rec.status || (rec.verified ? "verified" : "unverified"),
       regNo: rec.regNo || rec.extractedRegNo || "", name: rec.name || "",
       council: rec.council || "", verifiedAt: rec.verifiedAt || "", reason: rec.reason || "",
       provisionalUntil: rec.provisionalUntil || "",
-    });
+      });
+    }
     return json({ status: "unverified" });
   }
 
@@ -330,6 +343,9 @@ export async function onRequest(context) {
         await env.FOLLOWCARE_R2.put(photoKey, bytes, { httpMetadata: { contentType: mime } });
       }
     } catch (e) { photoKey = ""; }
+    // Owner decision 2026-08-27: full access WHILE PENDING, so review latency is never an outage
+    // for someone who did everything right. The claim is what _entitlement.js accessState() reads.
+    try { await mergeUserClaims(env, uid, { provUntil: Date.now() + PROVISIONAL_DAYS * 86400000 }); } catch (e) {}
     try { if (store) await store.put(doctorKey(uid), JSON.stringify({
       uid, email, status: "pending", reason, role,
       extractedRegNo: effReg, extractedName: ex.name, council: ex.council || "",
@@ -402,6 +418,9 @@ export async function onRequest(context) {
   // Confirmation email to the doctor (best-effort), then the Pro upsell at this high-intent moment.
   try { await emailVerified(env, { email, name: match.firstName, regNo: match.registrationNo, council: match.smcName }); } catch (e) {}
   try { await markVerified(env, uid); await sendProUpsellOnce(env, uid, { email, name: match.firstName }); } catch (e) {}
+  // The AI budget tier just changed from "none" to a real allowance. The cap is cached for ~26h, so
+  // without this the doctor verifies and MaiK still refuses them until tomorrow.
+  try { await clearBudgetCache(env, uid); } catch (e) {}
 
   return json({ status: "verified", regNo: match.registrationNo, name: match.firstName, council: match.smcName });
 }

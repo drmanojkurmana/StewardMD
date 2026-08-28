@@ -13,7 +13,8 @@ import Capacitor
  *   isModelInstalled({ model })                         -> { installed, path?, bytes }
  *   downloadModel({ model, url, sha256 })               -> { path }        (+ whisperDownloadProgress events)
  *   deleteModel({ model })                              -> { ok }
- *   startTranscribe({ model, language?, initialPrompt? })-> { ok }         (+ whisperState events)
+ *   startTranscribe({ model, language?, initialPrompt?, silenceEndpointMs? }) -> { ok }  (+ whisperState)
+ *     silenceEndpointMs > 0 auto-stops the turn once the speaker goes quiet that long (MaiK Ask).
  *   stopTranscribe()                                    -> { ok }         (+ whisperFinal / whisperError)
  *   cancel()                                            -> { ok }
  *
@@ -45,6 +46,13 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
         engine.onState = { [weak self] s in self?.notifyListeners("whisperState", data: ["state": s]) }
         engine.onPartial = { [weak self] t in self?.notifyListeners("whisperPartial", data: ["text": t]) }
         engine.onFinal = { [weak self] t in self?.notifyListeners("whisperFinal", data: ["text": t]) }
+        // End-of-speech (opt-in VAD): finish this turn exactly as an explicit stopTranscribe() would,
+        // so the same language/prompt are used and whisperFinal is emitted on the normal path.
+        engine.onEndpoint = { [weak self] in
+            guard let self = self, self.engine.isRecording else { return }
+            self.notifyListeners("whisperState", data: ["state": "endpoint"])
+            self.engine.stopAndTranscribe(language: self.lastLanguage, initialPrompt: self.lastPrompt)
+        }
         engine.onError = { [weak self] code, msg in
             self?.notifyListeners("whisperError", data: ["code": code.rawValue, "message": msg])
         }
@@ -112,7 +120,7 @@ public class WhisperPlugin: CAPPlugin, CAPBridgedPlugin {
         if engine.isRecording { call.reject("Already recording", WhisperErr.recordingFailure.rawValue); return }
         lastLanguage = call.getString("language") ?? "auto"
         lastPrompt = call.getString("initialPrompt") ?? ""
-        engine.start(modelPath: path)
+        engine.start(modelPath: path, silenceEndpointMs: call.getInt("silenceEndpointMs") ?? 0)
         call.resolve(["ok": true])
     }
 

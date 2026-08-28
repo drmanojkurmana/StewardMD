@@ -1,0 +1,125 @@
+{
+  "id": "dermatology",
+  "programmeType": "PG",
+  "degree": "MD",
+  "specialty": "Dermatology, Venereology & Leprosy",
+  "durationMonths": 36,
+  "version": "2026-08-27",
+  "extends": [
+    "_pgmer-common"
+  ],
+  "source": {
+    "title": "Guidelines for Competency Based Postgraduate Training Programme for MD in Dermatology, Venereology and Leprosy",
+    "publisher": "National Medical Commission",
+    "year": 2019,
+    "url": "https://www.nmc.org.in/wp-content/uploads/2019/09/MD-Dermatology.pdf",
+    "retrieved": "2026-08-27"
+  },
+  "requirements": [
+    {
+      "target": 1,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_journal_club",
+      "kind": "academic",
+      "label": "Journal club",
+      "match": {
+        "academicType": "journal_club"
+      },
+      "clause": "2. Journal Club & Subject seminars",
+      "quote": "Journal Club & Subject seminars: Both are recommended to be held once a week. All PG students are expected to attend and actively participate in discussion and enter relevant details in the Log Book."
+    },
+    {
+      "target": 1,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_seminar",
+      "kind": "academic",
+      "label": "Subject seminar",
+      "match": {
+        "academicType": "seminar"
+      },
+      "clause": "2. Journal Club & Subject seminars",
+      "quote": "Journal Club & Subject seminars: Both are recommended to be held once a week."
+    },
+    {
+      "target": 4,
+      "per": "year",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_journal_presentation",
+      "kind": "academic",
+      "label": "Journal presentations made by the student",
+      "match": {
+        "academicType": "journal_club",
+        "roles": [
+          "presented"
+        ]
+      },
+      "clause": "2. Journal Club & Subject seminars",
+      "quote": "Further, every post graduate student must make a presentation from the allotted journal(s), selected articles at least four times a year. The presentations would be evaluated and would carry weightage for internal assessment.",
+      "note": "The guideline writes the number as a word: 'at least four times a year' — target 4 per year."
+    },
+    {
+      "target": 5,
+      "per": "year",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_case_presentation",
+      "kind": "academic",
+      "label": "Clinical case presentations",
+      "match": {
+        "academicType": "case_presentation"
+      },
+      "clause": "5. Clinical Case Presentations",
+      "quote": "Clinical Case Presentations: Minimum of 5 cases to be presented by every post graduate student each year. They should be assessed using check lists and entries made in the log book."
+    },
+    {
+      "target": 1,
+      "per": "month",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_cpc",
+      "kind": "academic",
+      "label": "Clinico-pathological conference",
+      "match": {
+        "academicType": "cpc"
+      },
+      "clause": "6. Clinico-Pathological Conference (CPC)",
+      "quote": "Clinico-Pathological Conference (CPC): Recommended once a month for all post graduate students. Presentation is to be done by rotation."
+    },
+    {
+      "target": 1,
+      "per": "week",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_interdepartmental",
+      "kind": "academic",
+      "label": "Inter-departmental meetings (Pathology, Radio-diagnosis)",
+      "match": {
+        "academicType": "interdepartmental"
+      },
+      "clause": "7. Inter-Departmental Meetings",
+      "quote": "Inter-Departmental Meetings: Strongly recommended particularly with Departments of Pathology and Radio-Diagnosis at least once a week. These meetings should be attended by post graduate students and relevant entries must be made in the Log Book."
+    },
+    {
+      "target": null,
+      "per": "course",
+      "source": "nmc_curriculum",
+      "mandatoryForExam": false,
+      "id": "dv_ward_round",
+      "kind": "academic",
+      "label": "Teaching / grand rounds",
+      "match": {
+        "academicType": "grand_round"
+      },
+      "clause": "4. Ward Rounds",
+      "quote": "Teaching Rounds: Every unit should have 'grand rounds' for teaching purpose. A diary (log book) should be maintained for day to day activities by the students."
+    }
+  ],
+  "procedures": [],
+  "proceduresNote": "No procedure counts in the MD Dermatology guidelines.",
+  "disclaimer": "Requirements are traced to the NMC source named above. A requirement with target null is one the source mandates WITHOUT giving a number — it is counted, never scored against an invented target. This pack does not certify compliance; see NMC_PG_LOGBOOK_REQUIREMENTS.md."
+}

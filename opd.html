@@ -154,6 +154,8 @@
   @keyframes sh{0%{background-position:100% 0}100%{background-position:-100% 0}}
   @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
+<link rel="stylesheet" href="/patient-register.css?v=preg1">
+<script src="/patient-register.js?v=preg1" defer></script>
 </head>
 <body>
 <div id="app"></div>
@@ -163,7 +165,13 @@
 (function(){
   "use strict";
   var LS_TOK="smd_opd_staff_tok", LS_HOSP="smd_opd_hospital", LS_TT="smd_opd_toktype";
-  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:new Date().toISOString().slice(0,10)};
+  // The clinic DAY is IST, not UTC. The session key bakes the date in (functions/_queue_engine.js
+  // sessionId()), and the server computes it as now()+05:30 (opdDate). This page used to send
+  // new Date().toISOString().slice(0,10) - a UTC day - so between 00:00 and 05:30 IST the console wrote
+  // to YESTERDAY's session while the doctor's app read TODAY's, and console-added patients simply never
+  // appeared. Same clinic, same room, different bucket.
+  function istDay(){ return new Date(Date.now()+19800000).toISOString().slice(0,10); }
+  var st={tok:localStorage.getItem(LS_TOK)||"", tokType:localStorage.getItem(LS_TT)||"", who:null, ownsOrg:false, orgCode:"", smdId:"", hospital:localStorage.getItem(LS_HOSP)||"manual", board:[], date:istDay()};
   var app=document.getElementById("app"), scrim=document.getElementById("scrim"), sheet=document.getElementById("sheet"), toastEl=document.getElementById("toast");
   var esc=function(s){return String(s==null?"":s).replace(/[&<>"']/g,function(c){return {"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c];});};
   var toast=function(m){toastEl.textContent=m;toastEl.classList.add("on");setTimeout(function(){toastEl.classList.remove("on");},2600);};
@@ -235,7 +243,7 @@
     app.innerHTML='<div class="login"><p>Loading…</p></div>';
     api("whoami").then(function(r){
       if(!r||!r.ok){ if(r&&r.error==="unauthorized"){logout("Your session ended. Please sign in again.");return;} renderLogin("Session expired. Sign in again."); return; }
-      st.who=r; st.smdId=r.smdId||""; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
+      st.who=r; st.smdId=r.smdId||""; st.billingOn=!!r.billing; if(r.orgId||r.hospitalId) st.hospital=r.orgId||r.hospitalId; st.orgId=r.orgId||r.hospitalId||st.hospital; st.orgCode=r.orgCode||"";
       // ANY StewardMD account can own a clinic. No clinic yet -> the create-clinic wizard (never a shared board).
       // A StewardMD account can own SEVERAL clinics: none -> wizard; one -> open it; many -> the picker.
       if(r.kind==="firebase"){ api("orgs").then(function(o){ var list=(o&&o.orgs)||[]; st.ownsOrg=true;
@@ -243,7 +251,13 @@
         if(list.length===1){ openClinic(list[0]); return; }
         renderClinics(list);
       }); return; }
-      if(st.who&&st.who.role==="cashier"){ location.replace("/clinic-billing"); return; }   // cashiers belong on the billing station, not the read-only queue board
+      // Station-bound roles open on their own station rather than the read-only queue board. Guarded on
+      // the SERVER's billing switch: the station is inert unless CLINIC_BILLING_ENABLED=1, and redirecting
+      // into a switched-off page left the cashier with nowhere to go at all - they could not fall back,
+      // because the redirect fired first. When it is off, they stay here and are told why.
+      var stationRole=st.who&&(st.who.role==="cashier"||st.who.role==="pharmacy");
+      if(stationRole&&st.billingOn){ location.replace(st.who.role==="pharmacy"?"/clinic-billing?station=pharmacy":"/clinic-billing"); return; }
+      if(stationRole&&!st.billingOn){ renderShell('<div class="empty">The billing and pharmacy station is not switched on for this clinic yet.<br>Ask the owner to enable it, then sign in again.</div>'); return; }
       loadDash();
     }).catch(function(){ renderLogin("Could not reach the server. Check your connection and try again."); });
   }
@@ -541,7 +555,7 @@
   // Staff & roles = ORGANIZATION MEMBERSHIP (q_members). Owner/admin invites staff, assigns role, sets a
   // PIN or email login, and can disable/restore - all server-authorized. Identity = a chosen staff id
   // (private clinic) or "ghis:<employeeId>" (GITAM). No GHIS required.
-  var ROLES=["nurse","reception","supervisor","intern","resident","doctor","admin","viewer"];
+  var ROLES=["nurse","reception","supervisor","intern","resident","doctor","cashier","pharmacy","hr","admin","viewer"];
   function openStaffAdmin(){
     open('<h3>Staff & roles</h3><div class="t" style="margin-bottom:8px">Clinic code (staff sign in with this): <b>'+esc(st.orgCode||st.orgId)+'</b></div><div id="slist">Loading…</div>'+
       '<div style="border-top:1px solid var(--line);margin-top:12px;padding-top:12px">'+
@@ -677,19 +691,24 @@
     };
   }
   function openPoolAdd(){
-    open('<h3>Register walk-in (unassigned)</h3>'+
-      '<input id="pn" placeholder="Patient name" style="margin-bottom:10px">'+
-      '<input id="pm" placeholder="Mobile (optional)" inputmode="tel" style="margin-bottom:10px">'+
-      '<input id="pd" placeholder="Department (optional)">'+
-      '<div class="row2"><button class="cancel" id="cx">Cancel</button><button class="btn" id="ok" style="margin:0">Add to pool</button></div>');
-    sheet.querySelector("#cx").onclick=close;
-    sheet.querySelector("#ok").onclick=function(){
-      var n=sheet.querySelector("#pn").value.trim(); if(!n){toast("Enter a name");return;}
-      var body={orgId:st.orgId,name:n,mobile:sheet.querySelector("#pm").value.trim(),department:sheet.querySelector("#pd").value.trim(),visitType:"new",date:st.date};
-      close();
-      api("pool",{method:"POST",body:body}).then(function(r){ if(!r||!r.ok){toast(r&&r.error?friendly(r.error):"Add failed");return;} if(r.board){st.opd=r.board;renderNurseStation(r.board);}else loadDash(); });
-    };
+    // The SAME check-in sheet the phone app uses (patient-register.js). It replaced a three-field
+    // sheet that captured no gender, age or date of birth - none of which ABDM can work without.
+    // The server validates and issues the MR number; this only carries the answers.
+    if(!(window.SMD_PATIENTREG&&SMD_PATIENTREG.open)){ toast("Patient check-in is unavailable."); return; }
+    var mode=(st.opd&&st.opd.mode==="connect")?"connect":"native";
+    SMD_PATIENTREG.open({
+      mode: mode,
+      clinicName: st.orgCode||"Check-in",
+      submit: function(b){ b.orgId=st.orgId; b.workplaceMode=mode; b.date=st.date; return api("patient/register",{method:"POST",body:b}); },
+      onAdded: function(r){
+        // Registered -> into the central pool for routing (a one-room clinic auto-routes server-side).
+        api("pool",{method:"POST",body:{orgId:st.orgId,name:(r.patient&&r.patient.name)||"",mobile:(r.patient&&r.patient.mobile)||"",
+          mrn:r.mrn,visitType:(r.patient&&r.patient.visitType)==="followup"?"followup":"new",date:st.date}})
+          .then(function(){ toast("Added - "+r.mrn); refresh(); });
+      }
+    });
   }
+
 
   // ---- ROOMS EDITOR (owner/admin): add rooms + assign/rotate doctors ----
   var ASSIGN_MODES=[["primary","One doctor"],["rotating","Rotating (multiple)"],["unassigned","No doctor (unassigned)"]];
@@ -808,8 +827,16 @@
   scrim.onclick=function(e){ if(e.target===scrim) close(); };
 
   // Preview mode (?mock=1): render the central-routing control with sample data - no auth/network.
+  // The admin capabilities below are COSMETIC: every request is authorised independently on the
+  // server, so nothing here can read or write real data. A banner says so, because the Staff /
+  // Rooms / Branding controls render in full and a staff member landing on this URL would
+  // otherwise believe they had been given admin rights and report the failures as bugs.
   if(new URLSearchParams(location.search||"").get("mock")==="1"){
     st.who={role:"admin",caps:["queue.view","queue.add","queue.reorder","queue.status","queue.priority","queue.assign","staff.admin","emr.vitals","emr.view"],kind:"firebase",name:"Preview"}; st.ownsOrg=true; st.orgCode="SMD-DEMO01"; st.orgId="demo";
+    try { var pv=document.createElement("div"); pv.setAttribute("role","status");
+      pv.style.cssText="position:sticky;top:0;z-index:99;background:#8a5208;color:#fff;padding:8px 14px;font:700 12px/1.4 -apple-system,system-ui,sans-serif;text-align:center";
+      pv.textContent="Preview with sample data - not your clinic. Nothing here is saved.";
+      document.body.insertBefore(pv, document.body.firstChild); } catch(e){}
     var nm=Date.now();
     renderNurseStation({mode:"native",rooms:[
       {room:{id:"r1",name:"Medicine 1",number:"101",department:"General",assignment:{primary:"drA"}},doctorUid:"drA",sessionId:"s1",waiting:3,status:"moderate",tickets:[

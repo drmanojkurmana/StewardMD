@@ -725,30 +725,78 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
    a round badge; the featured tile gets the dark "signature" badge + dot. */
 #homeV2.rnav .rnav-grid { grid-template-columns: repeat(3, 1fr); gap: 16px 6px; }
 #homeV2.rnav .rnav-tile { flex-direction: column; align-items: center; gap: 0; padding: 4px 2px; border: none; background: none; text-align: center; min-height: 0; }
-#homeV2.rnav .rnav-badge { width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center; justify-content: center; position: relative; background: color-mix(in srgb, var(--rds-primary) 13%, var(--rds-surface, #fff)); color: var(--rds-primary); }
-#homeV2.rnav .rnav-badge .rds-icon { font-size: 28px; color: inherit; margin: 0; }
-#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
-#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
-/* Round 3D glossy sphere for the AI tiles (light top sheen + dark base + drop shadow). */
-#homeV2.rnav .rnav-tile.feat .rnav-badge {
+/* EVERY tile badge is the glossy sphere. It used to be a flat mint disc with a dark outline glyph,
+ * and only `.feat` (the branded AI modules) got the sphere - so a home screen of eighteen tools read
+ * as two unrelated icon sets, six "real" and twelve placeholders. One treatment, one visual weight,
+ * and the module logos stop looking like a different product. `.addtool` still opts out below: it is
+ * an action, not a tool, and it should not pretend to be one. */
+#homeV2.rnav .rnav-badge {
+  width: 70px; height: 70px; border-radius: 50%; display: flex; align-items: center;
+  justify-content: center; position: relative;
   background: radial-gradient(circle at 34% 26%, #2f9184 0%, #12564a 52%, #06231e 100%);
   color: #fff;
   box-shadow: inset 0 3px 8px rgba(255,255,255,.28), inset 0 -9px 16px rgba(0,0,0,.42), 0 10px 20px -7px rgba(8,40,35,.6);
 }
-#homeV2.rnav .rnav-tile.feat .rnav-badge::before {
+/* The specular highlight, the thing that actually reads as "sphere" rather than "dark circle". */
+#homeV2.rnav .rnav-badge::before {
   content: ""; position: absolute; top: 9%; left: 21%; width: 34%; height: 26%; border-radius: 50%;
   background: radial-gradient(circle at 50% 50%, rgba(255,255,255,.6), rgba(255,255,255,0) 70%);
   pointer-events: none;
 }
+/* ── ONE stroke weight across three different glyph systems ────────────────────────────────────
+ * The badges hold Material Symbols ligatures, hand-authored inline SVG, and raster brand marks.
+ * Measured on the real page, they disagreed badly:
+ *     inline SVG (24-wide viewBox at 32px)   2 x 1.333 = 2.67px
+ *     the ECG    (48-wide viewBox at 36px)   2 x 0.75  = 1.50px   <- nearly half the others
+ *     Material Symbols, wght 400 at 28px     approx.     2.3px
+ * Stroke-width is in USER units, so the same "2" draws a different thickness in every viewBox -
+ * which is why this drifted silently as icons were added.
+ *
+ * `vector-effect: non-scaling-stroke` takes the viewBox out of the equation: stroke-width then means
+ * SCREEN pixels, so one number governs every SVG no matter how its artboard was drawn. Material's
+ * weight axis is nudged to 500 to sit on the same line. Change --rds-glyph-stroke and the whole set
+ * moves together. */
+#homeV2.rnav .rnav-badge { --rds-glyph-stroke: 2.5; }
+#homeV2.rnav .rnav-badge .rds-icon {
+  font-size: 28px; color: #fff; margin: 0;
+  font-variation-settings: "FILL" 0, "GRAD" 0, "opsz" 24, "wght" 500;
+}
+#homeV2.rnav .rnav-badge svg { color: #fff; stroke: currentColor; fill: none; overflow: visible; }
+#homeV2.rnav .rnav-badge svg * { vector-effect: non-scaling-stroke; }
+#homeV2.rnav .rnav-badge svg,
+#homeV2.rnav .rnav-badge svg *:not([fill]):not(.pupil):not(.p):not(.n):not(.beam) { stroke-width: var(--rds-glyph-stroke); }
+/* Solid shapes are mass, not line - they must NOT pick up a stroke or they bloat. */
+#homeV2.rnav .rnav-badge svg .pupil, #homeV2.rnav .rnav-badge svg .p,
+#homeV2.rnav .rnav-badge svg .n, #homeV2.rnav .rnav-badge svg .beam { stroke: none; }
+
+/* The raster brand marks (MAiTRI, CliniX, SURGX) were inline-styled at 48 / 38 / 34px, so three
+ * logos that sit side by side had three different optical weights. One box, object-fit: contain, so
+ * each keeps its own aspect ratio while occupying the same optical area as every other glyph. */
+#homeV2.rnav .rnav-badge .ai-brandmark {
+  width: auto; height: auto; max-width: 38px; max-height: 38px; object-fit: contain;
+  filter: brightness(0) invert(1) drop-shadow(0 2px 3px rgba(0, 0, 0, .35));
+}
+#homeV2.rnav .rnav-tile .rnav-tile-tt { margin-top: 10px; font-weight: 800; }
+#homeV2.rnav .rnav-tile .rnav-tile-sub { margin-top: 1px; }
+/* `.feat` no longer owns the sphere - every badge has it (above). What `.feat` still marks is a
+ * BRANDED module, which is why it keeps the status dot. Kept as a hook rather than deleted: the
+ * markup, the tools registry and the customise sheet all still set it. */
 #homeV2.rnav .rnav-dot { position: absolute; top: 7px; right: 15px; width: 11px; height: 11px; border-radius: 50%; background: #f2a33c; border: 2px solid #0c332e; }
-#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); }
+/* Add Tool opts OUT of the sphere on purpose: it is an empty slot inviting a choice, not a tool.
+ * Must also clear the inherited sheen and shadow, or it reads as a broken sphere. */
+#homeV2.rnav .rnav-tile.addtool .rnav-badge { background: none; border: 2px dashed var(--rds-line); color: var(--rds-muted); box-shadow: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge::before { display: none; }
+#homeV2.rnav .rnav-tile.addtool .rnav-badge .rds-icon, #homeV2.rnav .rnav-tile.addtool .rnav-badge svg { color: var(--rds-muted); }
 #homeV2.rnav .rnav-tile.addtool .rnav-tile-tt, #homeV2.rnav .rnav-tile.addtool .rnav-tile-sub { color: var(--rds-muted); }
 
 /* ── AI tile live-icon animations (dark feat badge) ────────────────────────────
    eye blink · ECG sweep · lesion pulse · X-ray beam. Motion only when the user
    allows it (reduced-motion keeps a clean static icon). */
-#homeV2.rnav .rnav-badge .ai-anim { width: 32px; height: 32px; fill: none; stroke: #eafff8; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; color: #eafff8; }
-#homeV2.rnav .rnav-badge .ai-ecg { width: 36px; }
+/* Sizes only. Stroke weight and colour come from the normalisation block above, so an icon added
+ * later cannot reintroduce its own thickness. The ECG keeps a wider box because its artboard is
+ * 48 wide rather than 24 - with non-scaling-stroke that changes its footprint, not its weight. */
+#homeV2.rnav .rnav-badge .ai-anim { width: 30px; height: 30px; stroke-linecap: round; stroke-linejoin: round; }
+#homeV2.rnav .rnav-badge .ai-ecg { width: 40px; height: 30px; }
 #homeV2.rnav .ai-eye .pupil, #homeV2.rnav .ai-derm .p { fill: #eafff8; stroke: none; }
 #homeV2.rnav .ai-cxr .beam { fill: rgba(138,255,234,.5); stroke: none; }
 #homeV2.rnav .ai-oncotree .n { fill: #eafff8; stroke: none; }
@@ -769,4 +817,8 @@ html body.rds-on #sbMenu [data-smd-top] { margin: 2px 8px; }
   #homeV2.rnav .ai-oncotree .n { transform-origin: center; animation: aiOncoPulse 2.8s infinite; }
   #homeV2.rnav .ai-oncotree .n1 { animation-delay: .55s; } #homeV2.rnav .ai-oncotree .n2 { animation-delay: 1.1s; }
   @keyframes aiOncoPulse { 0%,100% { opacity: .3; transform: scale(.65); } 50% { opacity: 1; transform: scale(1.18); } }
+  /* CliniX mark: a slow breathing pulse on the home tile only - the module's own hero banner
+     uses the same clinix-logo.png with no animation class, so it sits still while read. */
+  #homeV2.rnav .ai-clinix-img { animation: cxBreathe 3.2s ease-in-out infinite; }
+  @keyframes cxBreathe { 0%,100% { transform: scale(1); } 50% { transform: scale(1.07); } }
 }

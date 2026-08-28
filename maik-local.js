@@ -78,6 +78,34 @@
     "and say it varies.\n" +
     "End with one line: \"Verify against local protocol.\"";
 
+  /* A PURE greeting: the whole message is hello-ish with no clinical substance. Deliberately TIGHT -
+   * "hi rx of uti" must NOT match. test/maik-greeting-route.test.mjs guards exactly that: a greeting
+   * carrying a real question routes clinical, and a narrow keyword allow-list once broke it. */
+  var GREET_HEAD = /^(hi+|hey+|hello+|helo|yo|hiya|namaste|namaskar|salaam|salam|greetings|good|morning|evening)$/;
+  var GREET_TAIL = /^(morning|afternoon|evening|day|there|maik|doctor|doc|sir|madam|mate|again)$/;
+  function isGreeting(q) {
+    var toks = String(q == null ? "" : q).toLowerCase().replace(/[^a-z\s']/g, " ").split(/\s+/).filter(Boolean);
+    if (!toks.length || toks.length > 3) return false;
+    if (!GREET_HEAD.test(toks[0])) return false;
+    for (var i = 1; i < toks.length; i++) if (!GREET_TAIL.test(toks[i])) return false;
+    return true;
+  }
+
+  /* Greetings get their OWN system prompt rather than an extra rule bolted onto SYSTEM.
+   *
+   * "hi" came back as an answer about vancomycin on a real phone. SYSTEM gives the model no way to
+   * NOT answer clinically - it must open with a sentence answering the question and end with the
+   * verify line - so with no question to answer, it invents a topic.
+   *
+   * Adding a rule to SYSTEM was the obvious fix and the wrong one: SYSTEM is PREFILL on every single
+   * answer, prefill is the whole latency story on-device, and the suite pins it under 900 chars for
+   * that reason. A separate short prompt costs nothing on clinical answers and makes the greeting
+   * itself faster. Still no canned app-side text: the model writes the reply, which is what was
+   * asked for ("WHY IS HI NOT BEING DIRECTED DIRECTLY TO GEMMA TO RESPOND"). */
+  var SYSTEM_GREET =
+    "You are MaiK, clinical decision support for doctors. Reply to this greeting in one short, " +
+    "friendly sentence and ask what they would like to know. Nothing clinical.";
+
   /* Reasoning leak guard.
    *
    * Observed on device: an answer that began "thought The user wants me to act as MaiK, a clinical
@@ -278,7 +306,27 @@
      * stripReasoning() then correctly returns "", which reads as the app failing. "/no_think" is the
      * family's own switch and costs three tokens, which is far cheaper than the reasoning it prevents.
      */
-    if (packId && noThinkPack(packId)) L.push("/no_think");
+    if (packId && noThinkPack(packId)) {
+      /* TWO switches, because from here we cannot tell which one the runtime will honour.
+       *
+       * "/no_think" is Qwen3's own switch, but it is read by the CHAT TEMPLATE - and this engine
+       * sends a RAW completion prompt (generate({ prompt, system, ... }) below, no template). In a
+       * raw prompt those three tokens can be treated as ordinary text and ignored, which produces
+       * exactly the failure the switch exists to prevent: the model reasons anyway, stripReasoning()
+       * bins every one of those tokens, and the doctor waits through generation they never see.
+       * A 1.7B burning 400 tokens on reasoning loses to a 4B that answers in 120 - which is what
+       * "Lite is SLOWER than the 4B" turned out to look like on a real phone.
+       *
+       * So we also CLOSE AN EMPTY THINKING BLOCK. The model resumes from a point where its reasoning
+       * has already happened and yielded nothing, so it goes straight to the answer. That needs no
+       * template support at all, which is the whole point.
+       *
+       * Both are kept: /no_think costs three tokens and still helps if a template IS applied, and
+       * stripReasoning() removes a closed empty block either way, so neither can leak to the doctor.
+       */
+      L.push("/no_think");
+      L.push("<think>\n\n</think>");
+    }
     return L.join("\n");
   }
 
@@ -348,7 +396,32 @@
       })
       .then(function () { return M.pathFor(packId); }).then(function (path) {
       return L.load({ path: path, nCtx: pk.nCtx || 4096 });
-    }).then(function () { _loadedPack = packId; return null; });
+    }).then(function () { _loadedPack = packId; return null; }, function (err) {
+      /* A CORRUPT MODEL IS A DEAD END UNLESS WE CLEAR IT.
+       *
+       * llama.cpp rejects a structurally bad file and the plugin reports "model-corrupted". Nothing
+       * used to act on that, so the pack stayed marked installed, every question failed, and there was
+       * no way out from inside the app - the clinician just saw "MaiK is unavailable" forever.
+       *
+       * Integrity here is byte-length + GGUF magic, deliberately not a full SHA of 2.5 GB read back
+       * through the bridge. A download RESUMED from the wrong offset can land on the exact expected
+       * length with corrupt bytes inside, pass that check, and be marked installed. This file's own
+       * header records that happening before ("resumed after a timeout and was not intact").
+       *
+       * So delete it. A file the loader will not accept has no value, keeping it wastes 2.5 GB, and
+       * leaving the marker alone would not help: installed() re-checks the SIZE, still matches, and
+       * marks it installed again. Removing it is what makes re-downloading possible.
+       */
+      var code = String((err && (err.code || err.message)) || "");
+      if (/model-corrupted|corrupt|failed to load/i.test(code)) {
+        _loadedPack = null;
+        try { if (M.remove) M.remove(packId); } catch (e) {}
+        var e2 = new Error("model-corrupted");
+        e2.code = "model-corrupted";
+        throw e2;
+      }
+      throw err;
+    });
   }
 
   /**
@@ -419,6 +492,8 @@
            *   SYSTEM_IMAGE    a first look at an image: findings, then interpretation.
            */
           system: (opts && opts.systemOverride) ? opts.systemOverride
+                // A greeting with no image: answer it as a greeting, not as a clinical question.
+                : (!images.length && isGreeting(pkg && pkg.question)) ? SYSTEM_GREET
                 : !images.length ? SYSTEM
                 : (opts && opts.imageFollowUp) ? SYSTEM_IMAGE_FOLLOWUP
                 : SYSTEM_IMAGE,
@@ -476,18 +551,42 @@
    */
   function available() { return !!llama(); }
 
-  /* Is this a DEVELOPMENT build? Asked once at load and cached, because the engine picker needs the
-   * answer synchronously. Used only to open the experimental gate on a dev build - a release build
-   * reports false and still requires an access code. */
-  var _debugBuild = false;
-  function isDebugBuild() { return _debugBuild; }
-  (function probeDebug() {
+  /* Is this a DEVELOPMENT build? Cached, because the engine picker needs the answer synchronously.
+   * Used only to open the experimental gate on a dev build - a release build reports false and still
+   * requires an access code.
+   *
+   * BUGFIX (2026-08-24): this probe used to be ONE SHOT -
+   *     var L = llama(); if (!L || !L.available) return;
+   * Capacitor registers its plugins asynchronously, so when this module loaded first the plugin was
+   * not there yet, the probe gave up FOREVER, and _debugBuild stayed false for the whole session.
+   * gateActive() then read false, effective() silently downgraded "local" to "rag", and a clinician
+   * who had downloaded 2.5 GB got KB-only answers with no explanation. Now it retries until the
+   * bridge is up, and re-probes on demand so a caller is never stuck with a stale "no".
+   */
+  var _debugBuild = false, _debugProbed = false;
+  function isDebugBuild() { if (!_debugProbed) probeDebug(0); return _debugBuild; }
+  function debugProbed() { return _debugProbed; }
+  function probeDebug(tries) {
+    tries = (tries == null) ? PROBE_TRIES : tries;
     try {
       var L = llama();
-      if (!L || !L.available) return;
-      L.available().then(function (a) { _debugBuild = !!(a && a.debugBuild); }).catch(function () {});
-    } catch (e) {}
-  })();
+      if (!L || !L.available) {
+        if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+        return;
+      }
+      L.available().then(function (a) {
+        _debugBuild = !!(a && a.debugBuild); _debugProbed = true;
+      }).catch(function () {
+        if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+      });
+    } catch (e) {
+      if (tries > 0) setTimeout(function () { probeDebug(tries - 1); }, PROBE_DELAY_MS);
+    }
+  }
+  // ~6 s of retries: the bridge is normally up in well under a second, and giving up quietly is the
+  // exact failure this replaces.
+  var PROBE_TRIES = 24, PROBE_DELAY_MS = 250;
+  probeDebug();
 
   /**
    * Load the model AND fault its pages in, ahead of any question.
@@ -528,10 +627,10 @@
   var API = {
     SYSTEM: SYSTEM, DEFAULT_PACK: DEFAULT_PACK,
     HISTORY_TURNS: HISTORY_TURNS, buildPrompt: buildPrompt, answer: answer, available: available, currentPack: currentPack,
-    isFollowUp: isFollowUp, stripReasoning: stripReasoning,
+    isFollowUp: isFollowUp, isGreeting: isGreeting, SYSTEM_GREET: SYSTEM_GREET, stripReasoning: stripReasoning,
     visionReady: visionReady, visionPathFor: visionPathFor, MAX_IMAGES: MAX_IMAGES, SYSTEM_IMAGE: SYSTEM_IMAGE,
     SYSTEM_IMAGE_FOLLOWUP: SYSTEM_IMAGE_FOLLOWUP,
-    warm: warm, isDebugBuild: isDebugBuild, cancel: cancel, release: release
+    warm: warm, isDebugBuild: isDebugBuild, debugProbed: debugProbed, cancel: cancel, release: release
   };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_MAIK_LOCAL = API;

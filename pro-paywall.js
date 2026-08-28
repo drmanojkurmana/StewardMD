@@ -1,16 +1,18 @@
 /* StewardMD — Pro paywall / subscribe UI.
  *
  * Augments window.SMD_PRO (defined in account.js) with openPaywall() + refresh(). The SERVER is the
- * source of truth (/api/billing/*): this only renders the plans, drives PhonePe checkout on
- * web/Android, and reflects entitlement. iOS/Android native IAP buttons appear once StoreKit/Play
- * Billing are wired. During the launch promo everyone is already Pro — the sheet says so and still
- * lets you subscribe early (and test the flow).
+ * source of truth (/api/billing/*): this only renders the plans, drives Razorpay Standard Checkout on
+ * web/Android (grantPro happens server-side off the webhook, never the client success callback), and
+ * reflects entitlement. iOS uses native IAP (StoreKit) once wired. NOTE: routing Razorpay through the
+ * Android app's own paywall (not just the stewardmd.in web page) needs Play's User Choice Billing
+ * enrolment for India to stay policy-compliant on a Play-distributed build — see docs/native-only-lock.md.
+ * During the launch promo everyone is already Pro — the sheet says so and still lets you subscribe
+ * early (and test the flow).
  */
 (function () {
   "use strict";
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function plat() { try { var C = window.Capacitor; return (C && (typeof C.getPlatform === "function" ? C.getPlatform() : C.platform)) || "web"; } catch (e) { return "web"; } }
-  function isNative() { var p = plat(); return p === "ios" || p === "android"; }
   function fbUser() { try { return (window.SMD_AUTH && SMD_AUTH.currentUser) || null; } catch (e) { return null; } }
   function token(fresh) { var u = fbUser(); return u ? u.getIdToken(!!fresh) : Promise.resolve(null); }
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
@@ -176,11 +178,30 @@
     r.addEventListener("click", function (e) { if (e.target === r.firstChild) close(); }, { once: true });
   }
 
-  function openUrl(url) {
-    try { if (isNative() && window.Capacitor && Capacitor.Plugins && Capacitor.Plugins.Browser) { Capacitor.Plugins.Browser.open({ url: url }); } else { window.location.href = url; } }
-    catch (e) { window.location.href = url; }
+  // Razorpay Checkout.js — loaded once, lazily (only when a non-iOS purchase is actually attempted).
+  var _rzpReady = null;
+  function loadRazorpay() {
+    if (_rzpReady) return _rzpReady;
+    _rzpReady = new Promise(function (resolve, reject) {
+      if (window.Razorpay) return resolve();
+      var s = document.createElement("script");
+      s.src = "https://checkout.razorpay.com/v1/checkout.js";
+      s.onload = function () { resolve(); };
+      s.onerror = function () { _rzpReady = null; reject(new Error("razorpay-script-failed")); };
+      document.head.appendChild(s);
+    });
+    return _rzpReady;
   }
-  // Route a purchase: iOS -> StoreKit via SMD_IAP (Session A's plugin); web/Android -> PhonePe.
+  // Poll /api/billing/status briefly after a successful checkout — grantPro happens server-side from
+  // Razorpay's webhook (not the client success callback), which can lag a few seconds behind the modal.
+  function pollProUntilActive(tries) {
+    tries = tries == null ? 8 : tries;
+    return refresh().then(function (st) {
+      if ((st && st.pro) || tries <= 0) return st;
+      return new Promise(function (r) { setTimeout(r, 1500); }).then(function () { return pollProUntilActive(tries - 1); });
+    });
+  }
+  // Route a purchase: iOS -> StoreKit via SMD_IAP (Session A's plugin); web/Android -> Razorpay Standard Checkout.
   function doBuy(body, btn) {
     if (!fbUser()) { try { if (window.SMD_signInWithGoogle) SMD_signInWithGoogle(); } catch (e) {} return; }
     if (plat() === "ios") {
@@ -193,10 +214,24 @@
       return;
     }
     if (btn) btn.disabled = true;
-    api("/api/billing/phonepe/pay", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) })
+    loadRazorpay()
+      .then(function () { return api("/api/billing/razorpay/order", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }); })
       .then(function (x) {
-        if (x.s === 200 && x.d && x.d.redirectUrl) { openUrl(x.d.redirectUrl); }
-        else { if (btn) btn.disabled = false; toast(x.d && x.d.error === "phonepe-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again.")); }
+        if (x.s !== 200 || !x.d || !x.d.orderId) {
+          if (btn) btn.disabled = false;
+          toast(x.d && x.d.error === "razorpay-not-configured" ? "Payments aren’t switched on yet." : (x.d && x.d.error === "signin-required" ? "Sign in first." : "Couldn’t start checkout — try again."));
+          return;
+        }
+        var o = x.d;
+        var rzp = new Razorpay({
+          key: o.keyId, amount: o.amount, currency: o.currency, order_id: o.orderId,
+          name: "StewardMD", description: o.label || "StewardMD Pro",
+          theme: { color: "#0e6e63" },
+          handler: function () { toast("Payment received — activating…"); pollProUntilActive().then(function () { if (btn) btn.disabled = false; }); },
+          modal: { ondismiss: function () { if (btn) btn.disabled = false; } },
+        });
+        rzp.on("payment.failed", function () { if (btn) btn.disabled = false; toast("Payment failed — try again."); });
+        rzp.open();
       })
       .catch(function () { if (btn) btn.disabled = false; toast("Network error — try again."); });
   }
@@ -208,8 +243,17 @@
     ]).then(function (res) { _status = res[0]; _plans = (res[1] && res[1].plans) || null; if (_root) paint(); });
   }
 
-  function openPaywall() {
+  function openPaywall(feature) {
     if (_root) return;
+    /* Never sell a subscription to someone whose problem is verification. An unverified doctor who
+     * pays here gets nothing they would not have got free by uploading a certificate, so hand them
+     * to the explainer instead. SMD_PRO_NOTICE routes them onward and never bounces back here for
+     * this reason, so there is no loop. */
+    try {
+      var N = window.SMD_PRO_NOTICE;
+      if (N && N.reason && N.reason() === "unverified") { N.show(feature); return; }
+      if (N && N.reason && N.reason() === "pending") { N.show(feature); return; }
+    } catch (e) {}
     var div = document.createElement("div");
     div.innerHTML = shell(header("") + '<div style="padding:40px;text-align:center;color:var(--slate-soft);font:500 13px var(--sans)">Loading…</div>');
     _root = div.firstChild; document.body.appendChild(_root); document.body.style.overflow = "hidden";
@@ -223,7 +267,8 @@
     info = info || {}; close();
     var reset = info.resetAt ? new Date(+info.resetAt) : null;
     var resetTxt = reset ? reset.toLocaleTimeString("en-IN", { hour: "numeric", minute: "2-digit" }) : "midnight";
-    var mt = (typeof info.credits === "number") ? Math.round(info.credits * 2000) : null;   // ₹ credit → MaiK Tokens
+    // The server sends the balance in MaiK Tokens (creditsMt); the ₹ fallback is for an older payload.
+    var mt = (typeof info.creditsMt === "number") ? info.creditsMt : ((typeof info.credits === "number") ? Math.round(info.credits * 2000) : null);
     var msg = info.message || "You've used today's MaiK Tokens.";
     var inner = header("Today's MaiK Tokens are used up") +
       '<div style="padding:6px 18px 4px"><div style="padding:13px 14px;border-radius:12px;background:var(--amber-bg,#fff4e0);border:1px solid var(--amber-line,#f0d090);font:600 13px/1.6 var(--sans);color:var(--ink)">' + ppIco("bell") + ' ' + esc(msg) + '</div></div>' +

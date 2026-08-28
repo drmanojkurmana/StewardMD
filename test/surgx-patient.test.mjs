@@ -1,0 +1,382 @@
+/* SURGX note patient linking — hospital EMR (GHIS / Connect) or manual.
+ *
+ * The invariant that matters: WRITABILITY IS DECIDED IN ONE PLACE. Only a GHIS-sourced patient with
+ * a visit can be written back to a hospital record — Connect is a pull-only integration and a
+ * manually-typed reference has no record at all. If the picker, the save button and the error text
+ * ever disagree about that, a surgeon is told a note reached a chart when it did not.
+ */
+import { test } from "node:test";
+import assert from "node:assert/strict";
+const NS = () => require_schema;
+import require_schema from "../surgx-note-schema.js";
+import { createRequire } from "node:module";
+import { readFileSync } from "node:fs";
+import { join, dirname } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const ROOT = join(dirname(fileURLToPath(import.meta.url)), "..");
+const require = createRequire(import.meta.url);
+const P = require(join(ROOT, "surgx-patient.js"));
+const DEST = require(join(ROOT, "surgx-destinations.js"));
+
+test("GHIS is always offered, signed in or not, and flags when sign-in is needed", async () => {
+  // Hiding GHIS when there is no session makes the option invisible precisely to the surgeon who
+  // has not set it up yet. It is listed always; picking it prompts sign-in.
+  delete global.SMD_CONNECT;
+  global.GHIS = { getToken: () => "" };                       // signed OUT
+  try {
+    let list = await P.sources();
+    let ghis = list.find((s) => s.kind === "ghis");
+    assert.ok(ghis, "GHIS must be listed even when signed out");
+    assert.equal(ghis.needsSignIn, true);
+
+    global.GHIS = { getToken: () => "tok" };                   // signed IN
+    list = await P.sources();
+    ghis = list.find((s) => s.kind === "ghis");
+    assert.equal(ghis.needsSignIn, false);
+  } finally { delete global.GHIS; }
+});
+
+test("the hospital list survives a Connect failure instead of erroring", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  global.SMD_CONNECT = { tenants: () => Promise.reject(new Error("offline")), searchPatients: () => {} };
+  try {
+    const list = await P.sources();
+    assert.ok(list.some((s) => s.kind === "ghis"), "GHIS must still be offered when Connect is down");
+  } finally { delete global.GHIS; delete global.SMD_CONNECT; }
+});
+
+test("Connect tenants are listed alongside GHIS", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  global.SMD_CONNECT = { tenants: () => Promise.resolve([{ tenantId: "t1", name: "Demo Hospital" }]), searchPatients: () => {} };
+  try {
+    const list = await P.sources();
+    assert.deepEqual(list.map((s) => s.kind), ["ghis", "connect"]);
+    assert.equal(list[1].name, "Demo Hospital");
+    assert.equal(list[1].id, "t1");
+  } finally { delete global.GHIS; delete global.SMD_CONNECT; }
+});
+
+test("a GHIS selection from Ward Sync feeds linkFromGhis directly", () => {
+  // GHIS.pickPatient hands back {episodeId, patientId, name}; that shape must link as-is.
+  const link = P.linkFromGhis({ patientId: "MR1", episodeId: "EP9", name: "Asha Rao" });
+  assert.equal(link.source, "ghis");
+  assert.equal(link.patientId, "MR1");
+  assert.equal(link.episodeId, "EP9");
+  assert.equal(P.writability(link).canWrite, true);
+});
+
+test("a Ward Sync selection with no visit links but is NOT writable", () => {
+  const link = P.linkFromGhis({ patientId: "MR3", name: "No Visit" });
+  assert.ok(link, "the patient must still be selectable");
+  const w = P.writability(link);
+  assert.equal(w.canWrite, false);
+  assert.match(w.reason, /visit/i);
+});
+
+test("Ward Sync owns the roster: SURGX ships no second patient list", () => {
+  /* The ward list is HUNDREDS of patients (705 on the test account) and Ward Sync already has the
+   * search, filters and sign-in handling. A second list inside SURGX would duplicate all of it and
+   * then drift. SURGX hands off via GHIS.pickPatient and gets one selection back. */
+  const src = readFileSync(join(ROOT, "surgx-screens.js"), "utf8");
+  assert.match(src, /GHIS\.pickPatient\(/, "SURGX must hand the choice to Ward Sync");
+  assert.ok(!/data-sgx="ptghispick"/.test(src), "no in-SURGX roster rows may remain");
+  assert.ok(!/ghisRoster/.test(src), "SURGX must not fetch its own roster");
+});
+
+test("the pick handoff is ONE-SHOT and cancellable", () => {
+  /* A stale callback must never hijack a later, unrelated patient tap: pickPatient clears the
+   * callback BEFORE firing it, and cancelPick drops it if the doctor backs out. */
+  const src = readFileSync(join(ROOT, "ghis-ward.js"), "utf8");
+  const i = src.indexOf("if (GHIS._pickCb)");
+  assert.ok(i > 0, "onPatient must check for a pending pick");
+  const block = src.slice(i, i + 400);
+  assert.match(block, /GHIS\._pickCb = null;[\s\S]{0,200}cb\(/, "cleared BEFORE the callback runs");
+  assert.match(src, /cancelPick: function\(\) \{ GHIS\._pickCb = null; \}/);
+  // and it must be checked before the other modes, or the ward drawer eats the tap
+  assert.ok(src.indexOf("if (GHIS._pickCb)") < src.indexOf("if (GHIS._importMode)"),
+    "the pick handoff must be checked before import/lab");
+});
+
+test("a GHIS patient with a visit is the ONLY writable source", () => {
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
+});
+
+test("SUPERSEDED 2026-08-26: no Initial Assessment means CREATE one, not refuse", () => {
+  /* This test used to assert the opposite, and asserting it is how the wrong behaviour survived.
+   *
+   * The 2026-08-25 reasoning was: a live inpatient with an open visit and an empty management plan
+   * got "no_active_assessment ... doc_id is 0" from the server, so writability() should say so at
+   * link time rather than after the note was finalised. The premise was wrong. doc_id 0 does not
+   * mean unwritable - the live capture the next day showed GHIS's OWN UI creating the first
+   * assessment for a visit with exactly doc_id 0 and both ids empty, answered 200. The server's
+   * canCreate path handled it the whole time.
+   *
+   * So the note is writable and it STARTS the assessment. Kept under the old name so the reversal
+   * is visible rather than silently deleted. */
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "none" });
+  assert.equal(w.canWrite, true);
+  assert.equal(w.willCreate, true);
+  assert.ok(!/nowhere to file|Start their assessment in GHIS first/i.test(JSON.stringify(w)),
+    "the refusal this test used to demand must not come back");
+});
+
+test("an assessment probe that FAILED must not block the surgeon", () => {
+  // "unknown" means the probe itself failed. The server's guard is the real gate; a flaky network
+  // must never tell a surgeon their patient is unwritable.
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "unknown" }).canWrite, true);
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1", assessment: "active" }).canWrite, true);
+  // absent (older notes, probe not run yet) behaves as before
+  assert.equal(P.writability({ source: "ghis", patientId: "MR1", episodeId: "EP1" }).canWrite, true);
+});
+
+test("assessmentStatus reads the SAME doc_id the server refuses on", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    // a real assessment
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: "44821" }] }) });
+    let r = await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" });
+    assert.equal(r.state, "active");
+    assert.equal(r.docId, "44821");
+
+    // doc_id 0 == the exact condition saveAssessment refuses on
+    for (const v of ["0", "", null]) {
+      global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "Initial_Assessment_doc_id", value: v }] }) });
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none", `doc_id ${JSON.stringify(v)} means no document`);
+    }
+
+    // field absent entirely
+    global.fetch = () => Promise.resolve({ ok: true, json: () => Promise.resolve({ fields: [{ name: "something_else", value: "x" }] }) });
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "none");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus degrades to 'unknown' rather than throwing", async () => {
+  global.GHIS = { getToken: () => "tok" };
+  try {
+    for (const f of [
+      () => Promise.reject(new Error("offline")),
+      () => Promise.resolve({ ok: false, status: 500, json: () => Promise.resolve({}) }),
+      () => Promise.resolve({ ok: true, json: () => Promise.reject(new Error("bad json")) })
+    ]) {
+      global.fetch = f;
+      assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    }
+  } finally { delete global.GHIS; delete global.fetch; }
+
+  // signed out: no request at all, and no false "none"
+  const calls = [];
+  global.GHIS = { getToken: () => "" };
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "ghis", patientId: "MR1", episodeId: "EP1" })).state, "unknown");
+    assert.equal(calls.length, 0);
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("assessmentStatus never probes a non-GHIS patient", async () => {
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({}) }); };
+  try {
+    assert.equal((await P.assessmentStatus({ source: "manual", name: "R.K." })).state, "n/a");
+    assert.equal((await P.assessmentStatus({ source: "connect", patientId: "p1" })).state, "n/a");
+    assert.equal((await P.assessmentStatus(null)).state, "n/a");
+    assert.equal(calls.length, 0, "no chart may be read for a patient we cannot write to");
+  } finally { delete global.fetch; }
+});
+
+test("every non-writable source explains itself, and none of them can write", () => {
+  const cases = [
+    null,
+    { source: "manual", name: "R.K." },
+    { source: "connect", tenantId: "t1", patientId: "p1" },
+    { source: "ghis", patientId: "MR1", episodeId: "" },   // no visit
+    { source: "ghis", patientId: "", episodeId: "EP1" },    // no id
+    { source: "wat", patientId: "x" }
+  ];
+  for (const c of cases) {
+    const w = P.writability(c);
+    assert.equal(w.canWrite, false, `${JSON.stringify(c)} must not be writable`);
+    assert.ok(w.reason && w.reason.length > 5, `${JSON.stringify(c)} must give a reason`);
+  }
+});
+
+test("a GHIS link carries the visit, because an assessment attaches to one", () => {
+  const l = P.linkFromGhis({ patientId: "MR1", episodeId: "EP9", name: "A B" });
+  assert.deepEqual(l, { source: "ghis", tenantId: "", patientId: "MR1", episodeId: "EP9", name: "A B" });
+  assert.equal(P.linkFromGhis({ patientId: "" }), null, "no id, no link");
+  assert.equal(P.linkFromGhis(null), null);
+});
+
+test("a Connect link records its tenant and is never marked writable", () => {
+  const l = P.linkFromConnect("t1", { id: "p1", name: { given: ["Asha"], family: "Rao" } });
+  assert.equal(l.source, "connect");
+  assert.equal(l.tenantId, "t1");
+  assert.equal(l.name, "Asha Rao");
+  assert.equal(P.writability(l).canWrite, false);
+  assert.equal(P.linkFromConnect("", { id: "p" }), null, "a tenant is required");
+});
+
+test("a manual reference is accepted, trimmed, and rejected when blank", () => {
+  assert.equal(P.linkManual("  R.K. 4471 ").name, "R.K. 4471");
+  assert.equal(P.linkManual("   "), null);
+  assert.equal(P.linkManual(""), null);
+  assert.equal(P.linkManual(null), null);
+});
+
+test("patient labels handle every FHIR name shape without printing 'undefined'", () => {
+  assert.equal(P.patientLabel({ name: { text: "Asha Rao" } }), "Asha Rao");
+  assert.equal(P.patientLabel({ name: { given: ["Asha"], family: "Rao" } }), "Asha Rao");
+  assert.equal(P.patientLabel({ name: { family: "Rao" } }), "Rao");
+  assert.equal(P.patientLabel({ name: "Asha Rao" }), "Asha Rao");
+  assert.equal(P.patientLabel({ id: "p1" }), "p1", "falls back to the id");
+  assert.equal(P.patientLabel({}), "Unknown");
+  assert.equal(P.patientLabel(null), "Unknown");
+  for (const shape of [{}, null, { name: {} }, { name: { given: [] } }]) {
+    assert.ok(!String(P.patientLabel(shape)).includes("undefined"));
+  }
+});
+
+test("the MRN comes from identifiers and is never undefined", () => {
+  assert.equal(P.patientMrn({ identifiers: [{ value: "4471" }] }), "4471");
+  assert.equal(P.patientMrn({ mrn: "99" }), "99");
+  assert.equal(P.patientMrn({}), "");
+  assert.equal(P.patientMrn(null), "");
+});
+
+test("the EMR write refuses a non-GHIS patient before touching the network", async () => {
+  const calls = [];
+  global.fetch = (...a) => { calls.push(a); return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }); };
+  global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "OTHER", episodeId: "EPX" }) };
+  try {
+    for (const patient of [
+      { source: "manual", name: "R.K." },
+      { source: "connect", tenantId: "t1", patientId: "p1" }
+    ]) {
+      const r = await DEST.saveToEmr({ patient }, "note", { confirmed: true });
+      assert.equal(r.error, "source_not_writable");
+    }
+    assert.equal(calls.length, 0, "nothing may be sent for a non-writable source");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the note's OWN patient wins over whoever is open in Ward Sync", async () => {
+  // A note written this morning must not be filed against the patient opened this afternoon.
+  let sent = null;
+  global.fetch = (url, init) => { sent = JSON.parse(init.body); return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }); };
+  global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "AFTERNOON", episodeId: "EP-PM" }) };
+  try {
+    const note = { patient: { source: "ghis", patientId: "MORNING", episodeId: "EP-AM" } };
+    const r = await DEST.saveToEmr(note, "note text", { confirmed: true });
+    assert.equal(r.ok, true);
+    assert.equal(sent.patientId, "MORNING");
+    assert.equal(sent.episodeId, "EP-AM");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("a note with no linked patient still falls back to the ward selection", async () => {
+  // Notes created before patient linking existed must keep working.
+  let sent = null;
+  global.fetch = (url, init) => { sent = JSON.parse(init.body); return Promise.resolve({ ok: true, json: () => Promise.resolve({ ok: true }) }); };
+  global.GHIS = { getToken: () => "tok", getSelectedPatient: () => ({ patientId: "WARD", episodeId: "EPW" }) };
+  try {
+    const r = await DEST.saveToEmr({}, "note text", { confirmed: true });
+    assert.equal(r.ok, true);
+    assert.equal(sent.patientId, "WARD");
+  } finally { delete global.GHIS; delete global.fetch; }
+});
+
+test("the store persists the linked patient inside the ENCRYPTED body, not the index", () => {
+  // patient identity must never land in the plaintext note index.
+  const src = require("node:fs").readFileSync(join(ROOT, "surgx-store.js"), "utf8");
+  const save = src.slice(src.indexOf("function saveNote"), src.indexOf("function saveNote") + 1800);
+  assert.ok(/patient:\s*note\.patient/.test(save), "the encrypted body must carry the patient");
+  const idx = save.slice(save.indexOf("idx.unshift"));
+  assert.ok(!/patient/.test(idx), "the plaintext index must NOT carry patient identity");
+});
+
+/* ── an absent Initial Assessment is a CREATE, not a refusal ──────────────── */
+
+test("a GHIS patient with no assessment yet is WRITABLE - the note starts one", () => {
+  /* Owner, 2026-08-26, on a real admitted patient (ward10-3, admitted 22-Aug): SURGX said "This
+   * patient has no Initial Assessment in GHIS yet, so there is nowhere to file the note" while
+   * that patient's Initial assessment tab was open and empty in GHIS at the same moment.
+   *
+   * The gate was built on the belief that doc_id 0 meant unwritable. The live capture disproved it:
+   * GHIS's own UI creates the first assessment for a visit by posting doc_id 0 with both ids empty,
+   * and gets a 200. saveAssessment has supported exactly that via canCreate all along. So SURGX was
+   * refusing the one case the hospital system actually handles. */
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "none" });
+  assert.equal(w.canWrite, true, "an unstarted assessment must not block the note");
+  assert.equal(w.willCreate, true, "but it must be flagged as a create");
+  assert.match(w.note, /starts the patient's Initial Assessment/i);
+  assert.ok(!/nowhere to file/i.test(JSON.stringify(w)), "the old refusal must not return");
+});
+
+test("an EXISTING assessment is an append, and says so differently", () => {
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "active" });
+  assert.equal(w.canWrite, true);
+  assert.ok(!w.willCreate, "appending to a chart the team already wrote is not a create");
+});
+
+test("the things that genuinely cannot be written still cannot", () => {
+  // Widening the assessment gate must not widen anything else.
+  const manual = P.writability({ source: "manual", patientId: "", episodeId: "" });
+  assert.equal(manual.canWrite, false);
+  const connect = P.writability({ source: "connect", tenantId: "t", patientId: "p" });
+  assert.equal(connect.canWrite, false, "Connect is pull-only");
+  const noVisit = P.writability({ source: "ghis", patientId: "MR1", episodeId: "", assessment: "none" });
+  assert.equal(noVisit.canWrite, false, "an assessment attaches to a VISIT; without one there is no target");
+  assert.match(noVisit.reason, /ward list|no visit/i);
+});
+
+test("a failed probe still errs towards letting the surgeon try", () => {
+  const w = P.writability({ source: "ghis", patientId: "MR1", episodeId: "IPMR1", assessment: "unknown" });
+  assert.equal(w.canWrite, true, "a flaky network must not declare a patient unwritable");
+  assert.equal(w.willCreate, false, "and must not claim to know it will create one");
+});
+
+/* ── the linked patient IS the patient reference ──────────────────────────── */
+
+test("patientRef and date are required on EVERY note type", () => {
+  /* Which is why leaving them for the surgeon to type blocked Finalise on all five - and Finalise
+   * is what gates the EMR write, so linking a patient and then being unable to send the note was
+   * the end state (owner, 2026-08-26: "8 required fields missing · 0 of 20 filled"). */
+  const S = NS();
+  for (const id of Object.keys(S.SCHEMAS)) {
+    const req = [];
+    (S.SCHEMAS[id].sections || []).forEach((sec) => (sec.fields || []).forEach((f) => { if (f.required) req.push(f.k); }));
+    assert.ok(req.includes("patientRef"), `${id} requires patientRef`);
+    assert.ok(req.includes("date"), `${id} requires date`);
+  }
+});
+
+test("linking a patient fills the reference instead of asking for it again", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function applyPatientToFields"), src.indexOf("function createNote"));
+  assert.match(fn, /values\.patientRef/);
+  assert.match(fn, /provenance\.patientRef = "auto"/,
+    'autofilled values must not be recorded as the clinician\'s own words');
+  assert.match(fn, /values\.date/);
+});
+
+test("what the surgeon typed always wins over the autofill", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function applyPatientToFields"), src.indexOf("function createNote"));
+  assert.match(fn, /if \(!String\(state\.note\.values\.patientRef \|\| ""\)\.trim\(\)\)/,
+    "only an EMPTY field is filled");
+  assert.match(fn, /if \(!String\(state\.note\.values\.date \|\| ""\)\.trim\(\)\)/);
+});
+
+test("all three link routes autofill, not just the GHIS one", () => {
+  // A manually entered patient and a Connect patient are still patients.
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const calls = (src.match(/applyPatientToFields\(/g) || []).length;
+  assert.ok(calls >= 4, `expected the definition plus three call sites, found ${calls}`);
+});
+
+test("a new note already knows today's date", () => {
+  const src = readFileSync(new URL("../surgx-screens.js", import.meta.url), "utf8");
+  const fn = src.slice(src.indexOf("function createNote"), src.indexOf("function createNote") + 1200);
+  assert.match(fn, /values\.date = todayISO\(\)/);
+});

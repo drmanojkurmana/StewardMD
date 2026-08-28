@@ -1,0 +1,64 @@
+{
+  "id": "atls-primary-survey",
+  "title": "Trauma primary survey (ABCDE)",
+  "subtitle": "The first ten minutes",
+  "category": "trauma",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2026-06-30",
+  "sources": [
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" },
+    { "id": "nice-ng39", "org": "National Institute for Health and Care Excellence (NICE)", "title": "Major trauma: assessment and initial management (NG39)", "year": 2016, "version": "NG39", "url": "https://www.nice.org.uk/guidance/ng39", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Noisy breathing, stridor, hoarseness or an expanding neck haematoma. The airway is closing." },
+      { "text": "Tracheal deviation with distended neck veins and a silent hemithorax." },
+      { "text": "Systolic pressure that does not respond, or responds only transiently, to the first fluid or blood." },
+      { "text": "GCS falling by 2 or more, a unilateral dilated pupil, or a new focal deficit." },
+      { "text": "A pelvis that is unstable on imaging, in a shocked patient. Do not spring the pelvis repeatedly." }
+    ],
+    "do_now": [
+      { "text": "Catastrophic external haemorrhage first: direct pressure, then a tourniquet high and tight for a limb, then a haemostatic dressing for a junctional bleed.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Airway with manual in-line cervical spine stabilisation. Talk to the patient: a normal voice is a patent airway and an adequate perfusing pressure at that moment.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "High-flow oxygen, two large-bore cannulae, bloods including group and crossmatch, and activate the major haemorrhage protocol if shocked.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Decompress a tension pneumothorax on clinical grounds. Do not wait for a radiograph.", "timeCritical": true, "evidenceRef": "atls" }
+    ],
+    "assess": [
+      { "text": "A: patency, obstruction, burns to the face or airway, expanding haematoma. Anticipate, do not react." },
+      { "text": "B: respiratory rate, chest expansion, percussion, air entry, oxygen saturation. Look for the six early killers separately." },
+      { "text": "C: pulse, capillary refill, blood pressure, external bleeding, and the five places blood hides - chest, abdomen, pelvis, long bones, on the floor." },
+      { "text": "D: GCS, pupils, lateralising signs, capillary glucose. Record the components of GCS, not just the total.", "calcs": ["gcs"] },
+      { "text": "E: expose fully, then cover. Hypothermia is part of the lethal triad and it is the part you cause." },
+      { "text": "Score injury severity for audit and transfer discussion, never to decide the next action.", "calcs": ["rts"] }
+    ],
+    "investigate": [
+      { "text": "Chest and pelvis radiographs in the resuscitation room for the unstable patient." },
+      { "text": "FAST or eFAST for free fluid. A negative scan in a shocked patient excludes nothing." },
+      { "text": "Venous or arterial gas with lactate and base deficit: the best early marker of occult hypoperfusion." },
+      { "text": "Whole-body CT for the stabilised patient with a significant mechanism. The unstable patient goes to theatre, not to the scanner." }
+    ],
+    "resuscitate": [
+      { "text": "Blood, not crystalloid, for haemorrhagic shock. Limit clear fluid; it dilutes clotting factors and raises pressure off a clot.", "evidenceRef": "nice-ng39" },
+      { "text": "Tranexamic acid as early as possible in significant traumatic haemorrhage; the benefit falls away with delay.", "evidenceRef": "nice-ng39" },
+      { "text": "Keep the patient warm actively: warmed fluids, forced-air blanket, and stop exposing once the survey is done.", "evidenceRef": "atls" },
+      { "text": "Bind an unstable pelvis at the level of the greater trochanters, not the iliac crests.", "evidenceRef": "atls" }
+    ],
+    "definitive": [
+      { "text": "Stop the bleeding. In a non-responder that means theatre or interventional radiology now, with resuscitation continuing on the way.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Damage control surgery for the physiologically exhausted patient: control haemorrhage and contamination, pack, close temporarily, correct physiology in intensive care, return later.", "evidenceRef": "atls" },
+      { "text": "Only after the primary survey and its interventions are complete does the secondary survey begin. Reassess from A whenever the patient deteriorates.", "evidenceRef": "atls" }
+    ],
+    "escalate": [
+      { "text": "Call the trauma team leader, anaesthesia and blood bank early rather than accurately." },
+      { "text": "Transfer to a major trauma centre for penetrating torso injury, an unstable pelvis, a significant head injury needing neurosurgery, or any injury beyond local capability." },
+      { "text": "Never transfer a patient whose airway or haemorrhage is uncontrolled. Fix A and C, then move." }
+    ]
+  },
+  "notes": [
+    "The order is the message: a problem found at A is treated at A before anyone moves to B.",
+    "Reassess after every intervention, and start again at A on any deterioration. Most missed injuries are missed because nobody went back to the beginning.",
+    "The review date on the ATLS reference has passed; confirm the current edition before teaching from this page."
+  ],
+  "calcs": ["gcs", "rts", "shock_index", "allowable_blood_loss"]
+}

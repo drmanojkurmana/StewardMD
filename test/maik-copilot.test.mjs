@@ -73,3 +73,29 @@ test("Stage 9 — anonymous gap analytics (no LLM training)", () => {
   assert.equal(r.byKind.unanswered, 2);
   assert.ok(r.repeated.some(q => /rare tropical fever/i.test(q)), "repeated unanswered query surfaced as a KB gap");
 });
+
+
+/* The "Drug database" chip used to call MEDDRUGS.openList(). MEDDRUGS (drugs.js) is a DIFFERENT,
+ * much smaller local list that the rest of the app uses only for openInteractions; the Drugs
+ * Database the Drugs tile opens is MEDDB (api.js), the 4-lakh Indian brand index. So the chip
+ * looked right and went to the wrong screen. Prefer MEDDB, keep MEDDRUGS as the fallback. */
+test("the drug chip opens the app's Drugs Database (MEDDB), not the small local list", () => {
+  const seen = [];
+  const prevDb = globalThis.MEDDB, prevDrugs = globalThis.MEDDRUGS;
+  globalThis.MEDDB = { openList: () => seen.push("MEDDB") };
+  globalThis.MEDDRUGS = Object.assign({}, prevDrugs, { openList: () => seen.push("MEDDRUGS") });
+  try {
+    assert.ok(C.TOOLS.drug.probe(), "the chip must be offered when a drug index exists");
+    C.TOOLS.drug.open();
+    assert.deepEqual(seen, ["MEDDB"], "must route to MEDDB, the Drugs Database the rest of the app opens");
+
+    seen.length = 0;
+    delete globalThis.MEDDB;
+    assert.ok(C.TOOLS.drug.probe(), "MEDDRUGS alone is still a usable fallback");
+    C.TOOLS.drug.open();
+    assert.deepEqual(seen, ["MEDDRUGS"], "falls back to MEDDRUGS when MEDDB is not loaded");
+  } finally {
+    if (prevDb === undefined) delete globalThis.MEDDB; else globalThis.MEDDB = prevDb;
+    if (prevDrugs === undefined) delete globalThis.MEDDRUGS; else globalThis.MEDDRUGS = prevDrugs;
+  }
+});

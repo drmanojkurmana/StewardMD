@@ -51,12 +51,26 @@
   window.SMD_OWNER_KEY = function () { return uid(); };
 
   /* -------- Pro entitlement (single source of truth) --------
-   * The SERVER decides (Firebase pro claim + launch promo + per-user trial); the client only
-   * caches the last /api/billing/status verdict. FAIL-OPEN: default true and keep the last known
-   * value on any fetch error, so a network blip never locks a clinician out. It only turns false
-   * when the server EXPLICITLY returns { pro:false } — which today never happens (launch promo
-   * active until 2026-09-15), so this is a no-op until the promo ends + enforcement flips. */
-  var _pro = true, _proState = null;
+   * The SERVER decides (verification → Firebase pro claim → the verified free week); the client
+   * only caches the last /api/billing/status verdict.
+   *
+   * FAIL-OPEN, BUT ONLY FOR SOMEONE WE HAVE ALREADY SEEN AS PRO (changed 2026-08-27). Seeding
+   * `_pro = true` for everyone was harmless while the launch promo granted Pro to all callers. Now
+   * that Pro requires a verified registration, that seed would flash Pro UI at an unverified
+   * account for as long as /api/billing/status takes to answer — and offline it would never be
+   * corrected. So the seed is the LAST KNOWN verdict FOR THIS UID, and false when there has never
+   * been one: a verified doctor on a ward with no signal still gets in, a brand-new unverified
+   * account does not. The server gates the actual features either way; this only stops the UI
+   * from promising something the server will refuse. */
+  function proCacheKey(u) { return "smd_pro_last:" + (u || "anon"); }
+  // null = never checked on this device for this uid. Distinguishing that from a known false is the
+  // whole point: "not Pro" and "do not know yet" must not produce the same UI.
+  function loadProCacheRaw() { try { var v = localStorage.getItem(proCacheKey(uid())); return v === null ? null : v === "1"; } catch (e) { return null; } }
+  function loadProCache() { var v = loadProCacheRaw(); return v === null ? false : v; }
+  function saveProCache(v) { try { localStorage.setItem(proCacheKey(uid()), v ? "1" : "0"); } catch (e) {} }
+  var _pro = loadProCache(), _proState = null, _claimRefreshed = false;
+  var _proKnown = loadProCacheRaw() !== null;   // flips true on the first server answer
+  function proKnown() { return _proKnown; }
   function apiUrl(p) { return (window.SMD_API_BASE || "") + p; }
   function idToken() { var u = fbUser(); try { return u && u.getIdToken ? u.getIdToken(false) : Promise.resolve(null); } catch (e) { return Promise.resolve(null); } }
   function syncStatus() {
@@ -65,15 +79,44 @@
       return fetch(apiUrl("/api/billing/status"), { headers: h }).then(function (r) { return r.json(); });
     }).then(function (d) {
       _proState = d || null;
-      if (d && typeof d.pro === "boolean") _pro = d.pro;   // only an explicit boolean flips the cache
+      if (d && typeof d.pro === "boolean") {
+        var was = _pro;
+        _pro = d.pro; saveProCache(_pro);                                          // only an explicit boolean flips the cache
+        /* TELL SOMEONE. Nothing in the app was notified when this flipped, which was harmless while
+         * _pro defaulted to true - every gate read true from the first paint and never had to change
+         * its mind. Seeding from the per-uid cache made the first launch of a build start at FALSE
+         * (the cache key has never been written before), so a gate could render LOCKED and then never
+         * re-render when the real verdict arrived a moment later. That is what "on-device models
+         * still not working" looked like. */
+        var firstAnswer = !_proKnown; _proKnown = true;
+        if (was !== _pro || firstAnswer) { try { window.dispatchEvent(new CustomEvent("smd:pro", { detail: { pro: _pro, known: true } })); } catch (e) {} }
+      }
+      /* The gates on the SERVER read claims out of the ID token this client sends, and Firebase
+       * caches that token for up to an hour. So a `verified` claim that was just written - by a
+       * fresh verification, an owner approval, or the reconciler that heals a record/claim
+       * disagreement - does not reach those gates until the token happens to refresh. That is the
+       * window where the app says "verified" and every feature still refuses. One forced refresh
+       * per session closes it; it is a no-op when the token already carries the claim. */
+      if (d && d.verified === true && !_claimRefreshed) {
+        _claimRefreshed = true;
+        try { var fu = fbUser(); if (fu && fu.getIdToken) fu.getIdToken(true).catch(function () {}); } catch (e) {}
+      }
       return _proState;
     }, function () { return _proState; });                 // error → keep last known (fail-open)
   }
   function isProSync() { return _pro; }
   function isPro() { return syncStatus().then(function () { return _pro; }); }
   function proState() { return _proState; }
-  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, TEST_PRO_EMAILS: [] };
-  onChange(function () { try { syncStatus(); } catch (e) {} });   // refresh on sign-in / provider change
+  // onProChange: for surfaces that render a Pro gate synchronously and cannot poll. Fires only on an
+  // actual flip, so a listener can rerender without guarding against churn.
+  function onProChange(cb) {
+    if (typeof cb !== "function") return function () {};
+    var h = function (e) { try { cb(!!(e && e.detail && e.detail.pro)); } catch (x) {} };
+    try { window.addEventListener("smd:pro", h); } catch (e) {}
+    return function () { try { window.removeEventListener("smd:pro", h); } catch (e) {} };
+  }
+  window.SMD_PRO = { isPro: isPro, isProSync: isProSync, proState: proState, sync: syncStatus, onProChange: onProChange, proKnown: proKnown, TEST_PRO_EMAILS: [] };
+  onChange(function () { try { _pro = loadProCache(); _proKnown = loadProCacheRaw() !== null; } catch (e) {} try { syncStatus(); } catch (e) {} });   // reseed for this uid, then refresh
 
   /* -------- Anti-sharing device lock --------
    * Register this device on sign-in + resume. When the server (DEVICE_LOCK_ON) reports we are no longer

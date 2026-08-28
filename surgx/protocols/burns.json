@@ -1,0 +1,66 @@
+{
+  "id": "burns",
+  "title": "Major burns",
+  "subtitle": "Airway, area, fluids, transfer",
+  "category": "trauma",
+  "review": { "status": "ai_drafted", "reviewer": "", "date": "" },
+  "updated": "2026-08-24",
+  "nextReviewDue": "2027-02-28",
+  "sources": [
+    { "id": "isbi", "org": "International Society for Burn Injuries (ISBI)", "title": "ISBI practice guidelines for burn care", "year": 2016, "url": "https://www.burninjuryonline.com/", "accessed": "2026-08-24" },
+    { "id": "atls", "org": "American College of Surgeons Committee on Trauma", "title": "Advanced Trauma Life Support (ATLS) Student Course Manual", "edition": "10th edition", "year": 2018, "url": "https://www.facs.org/quality-programs/trauma/education/advanced-trauma-life-support/", "accessed": "2026-08-24" }
+  ],
+  "bands": {
+    "red_flags": [
+      { "text": "Facial burns, singed nasal hair, soot in the mouth, hoarseness or stridor. The airway will swell." },
+      { "text": "Burn sustained in an enclosed space, or any reduced conscious level: assume carbon monoxide or cyanide exposure." },
+      { "text": "Circumferential full-thickness burn of a limb, or of the chest with rising airway pressures." },
+      { "text": "High-voltage electrical injury: the surface burn understates the deep muscle damage." },
+      { "text": "Chemical burn still in contact with the skin, or a burn with an inconsistent history in a child or vulnerable adult." }
+    ],
+    "do_now": [
+      { "text": "Stop the burning process, remove clothing and jewellery, and irrigate a chemical burn with running water for a prolonged period.", "timeCritical": true, "evidenceRef": "isbi" },
+      { "text": "Assess the airway first and intubate early if there is any inhalational feature. The window closes as oedema develops.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "High-flow oxygen for every significant burn, and specifically for suspected carbon monoxide exposure.", "timeCritical": true, "evidenceRef": "atls" },
+      { "text": "Cool the burn with running water for about 20 minutes within the first three hours, then keep the patient warm. Cool the burn, warm the patient.", "timeCritical": true, "evidenceRef": "isbi" }
+    ],
+    "assess": [
+      { "text": "Estimate burn surface area excluding simple erythema, then check it against a chart rather than an impression.", "calcs": ["burn_tbsa"] },
+      { "text": "Assess depth by capillary refill, sensation and appearance, and accept that depth declares itself over 48 hours." },
+      { "text": "Full trauma survey: a burn is often accompanied by a fall, a blast or an inhalation injury." },
+      { "text": "Weigh the patient or obtain an accurate weight. Every fluid calculation depends on it.", "calcs": ["bmi", "ibw"] },
+      { "text": "Document the mechanism, the time of injury and the pre-hospital fluid. Resuscitation is timed from the burn, not from arrival." }
+    ],
+    "investigate": [
+      { "text": "Arterial gas with carboxyhaemoglobin and lactate. A high lactate with a normal gas suggests cyanide toxicity." },
+      { "text": "FBC, U&E, creatine kinase, myoglobin and urinalysis for electrical or extensive deep burns." },
+      { "text": "Chest radiograph and, where indicated, bronchoscopy for inhalational injury." },
+      { "text": "Hourly urine output is the resuscitation monitor. It is more useful than any single blood test.", "calcs": ["kdigo_aki"] },
+      { "text": "ECG and cardiac monitoring after high-voltage electrical injury." }
+    ],
+    "resuscitate": [
+      { "text": "Start formal fluid resuscitation for adults above roughly 15 percent total body surface area, and children above roughly 10 percent, using a weight and area formula.", "evidenceRef": "isbi", "calcs": ["parkland"] },
+      { "text": "Titrate to urine output, not to the formula. The formula is a starting rate that is expected to change.", "evidenceRef": "isbi" },
+      { "text": "Avoid over-resuscitation. Fluid creep causes compartment syndrome, pulmonary oedema and a worse outcome than modest under-resuscitation.", "evidenceRef": "isbi" },
+      { "text": "Analgesia intravenously, titrated. Intramuscular absorption is unreliable in a shocked burned patient.", "evidenceRef": "isbi" },
+      { "text": "Early enteral feeding and active warming. Tetanus status checked and updated.", "evidenceRef": "isbi" }
+    ],
+    "definitive": [
+      { "text": "Escharotomy for a circumferential full-thickness burn threatening limb perfusion or ventilation.", "timeCritical": true, "evidenceRef": "isbi" },
+      { "text": "Dress with a clean non-adherent dressing and transfer. Definitive debridement and grafting belong to the burns unit.", "evidenceRef": "isbi" },
+      { "text": "Prophylactic systemic antibiotics are not indicated for a fresh burn. Treat infection when it appears.", "evidenceRef": "isbi" },
+      { "text": "Early excision and grafting of deep burns, planned by the burns service.", "evidenceRef": "isbi" }
+    ],
+    "escalate": [
+      { "text": "Refer to a burns unit for a large area burn, any full-thickness burn, burns of face, hands, feet, perineum or major joints, circumferential burns, inhalational, electrical or chemical injury, and burns at the extremes of age." },
+      { "text": "Speak to the burns unit before dressing, and follow their dressing instruction: an inappropriate dressing makes assessment on arrival harder." },
+      { "text": "Safeguarding referral for any burn with an inconsistent history, a delayed presentation, or a pattern suggesting non-accidental injury." }
+    ]
+  },
+  "notes": [
+    "The three decisions in the first hour are the airway, the surface area, and whether this patient is being transferred.",
+    "Cool the burn, warm the patient. Both halves are frequently got wrong at the same time.",
+    "Erythema is not included in surface area, and including it is the commonest reason for over-resuscitation."
+  ],
+  "calcs": ["burn_tbsa", "parkland", "bmi", "ibw", "kdigo_aki"]
+}

@@ -1,0 +1,72 @@
+{
+  "id": "preop-cardiac-risk",
+  "title": "Fit for surgery?",
+  "subtitle": "Pre-operative decision-making",
+  "simulation": true,
+  "levels": ["intern", "resident", "surgeon"],
+  "review": { "status": "ai_drafted" },
+  "protocolRef": "postop-deterioration",
+  "sources": [
+    { "id": "esc-nca", "org": "European Society of Cardiology / European Society of Anaesthesiology", "title": "Guidelines on cardiovascular assessment and management of patients undergoing non-cardiac surgery", "year": 2022, "url": "https://www.escardio.org/Guidelines", "accessed": "2026-08-24" }
+  ],
+  "stem": "A 71-year-old man is listed for an elective open inguinal hernia repair. He had a drug-eluting coronary stent placed four months ago and takes aspirin and clopidogrel. He also takes metformin and ramipril. He can walk to the local shop on the flat but stops on hills. His hernia is reducible and has been present for two years.",
+  "vitals": { "HR": "68", "BP": "148/84", "SpO2": "97% air", "HbA1c": "7.4%", "Creatinine": "112 umol/L" },
+  "decisionPoints": [
+    {
+      "id": "dp1", "phase": "assess",
+      "prompt": "How do you frame the pre-operative decision?",
+      "hint": "Two axes: how urgent is the operation, and how much risk does the patient carry.",
+      "options": [
+        { "id": "a", "text": "Establish that this is elective and low-risk surgery, assess functional capacity, and quantify cardiac risk formally", "correct": true, "feedback": "Correct. Urgency, surgical risk and patient risk are three separate questions, and they are answered in that order." },
+        { "id": "b", "text": "Cancel the operation because of the recent stent", "correct": false, "feedback": "Too blunt. The recent stent matters a great deal, but the decision is about timing and antiplatelet strategy, not a permanent refusal." },
+        { "id": "c", "text": "Proceed as planned; a hernia repair is a minor operation", "correct": false, "feedback": "Surgical risk is low, but patient risk is not, and stopping dual antiplatelet therapy at four months carries a real stent-thrombosis risk." },
+        { "id": "d", "text": "Request a stress test before any further discussion", "correct": false, "feedback": "Testing that will not change management is not a screening step. Decide first what a positive result would change." }
+      ],
+      "why": "The framework is: is the surgery urgent, what is the risk of the surgery itself, and what is the patient's cardiac risk. Only after those three does testing enter the picture, and only when the result would change the plan.",
+      "missedRedFlags": ["Treating the recent drug-eluting stent as a historical detail rather than the central issue"],
+      "alternatives": ["Watchful waiting is a legitimate option for a minimally symptomatic reducible inguinal hernia, and it neatly avoids the whole antiplatelet problem."]
+    },
+    {
+      "id": "dp2", "phase": "investigate",
+      "prompt": "Which of these is the most useful single step now?",
+      "hint": "One of these produces a number that changes a conversation. The others produce data nobody will act on.",
+      "options": [
+        { "id": "a", "text": "Score the cardiac risk formally and discuss timing with cardiology", "correct": true, "feedback": "Correct. A formal risk index plus a cardiology conversation about the stent and the antiplatelet plan is what actually determines the date." },
+        { "id": "b", "text": "Routine echocardiography for everyone over 70", "correct": false, "feedback": "Routine echocardiography in an asymptomatic patient without new murmur or heart failure does not change management." },
+        { "id": "c", "text": "Coronary angiography before any elective surgery in a stented patient", "correct": false, "feedback": "Invasive testing to permit low-risk elective surgery is out of proportion and carries its own risk." },
+        { "id": "d", "text": "A resting ECG alone, and proceed if it is unchanged", "correct": false, "feedback": "A normal resting ECG is reassuring about very little in this patient and does not address the stent timing." }
+      ],
+      "why": "Risk indices exist precisely so that the conversation with the patient and with cardiology starts from a number rather than an impression. The critical question here is antiplatelet timing after a drug-eluting stent, and that is a discussion, not a test.",
+      "missedRedFlags": ["Ordering tests that will not change the plan, which delays the operation and reassures nobody"],
+      "alternatives": ["Functional capacity below about 4 metabolic equivalents, as here, is the trigger for closer assessment before intermediate or high-risk surgery. This operation is low-risk, which changes the threshold."]
+    },
+    {
+      "id": "dp3", "phase": "decide",
+      "prompt": "Cardiology advise that clopidogrel should ideally continue to six months. The hernia is reducible and minimally symptomatic. What do you recommend?",
+      "hint": "What is the cost of waiting two months, and what is the cost of not waiting?",
+      "options": [
+        { "id": "a", "text": "Defer the operation by two months, continue dual antiplatelet therapy, and give clear safety-net advice about incarceration", "correct": true, "feedback": "Correct. The hernia is not urgent, the stent risk is time-limited, and waiting removes the conflict entirely. The safety-net advice is the part people forget." },
+        { "id": "b", "text": "Operate now, stopping clopidogrel five days beforehand", "correct": false, "feedback": "Stopping a second antiplatelet at four months after a drug-eluting stent, for an operation that can wait, exchanges a small hernia risk for a potentially fatal cardiac one." },
+        { "id": "c", "text": "Operate now on aspirin alone with no other change", "correct": false, "feedback": "This is the same trade as option B with less deliberation. The question is not whether it can be done but whether it should be now." },
+        { "id": "d", "text": "Cancel the operation permanently and manage with a truss", "correct": false, "feedback": "Overcorrection. A truss is not a treatment, and the barrier here is two months, not forever." }
+      ],
+      "why": "The whole decision turns on urgency. A reducible, minimally symptomatic hernia has a low risk of acute complication over two months. A drug-eluting stent at four months has a real risk of thrombosis if the second antiplatelet is withdrawn. Deferring is the option that removes the conflict rather than trading one risk for another.",
+      "missedRedFlags": ["Failing to give explicit safety-net advice about a hernia that becomes painful or irreducible while the patient waits"],
+      "alternatives": ["If the hernia were irreducible or symptomatic enough to warrant urgency, the answer changes: operate, continue aspirin, and manage the bleeding risk with meticulous haemostasis and a discussion with cardiology."]
+    },
+    {
+      "id": "dp4", "phase": "postop",
+      "prompt": "Two months later the operation goes ahead uneventfully. On the ward that evening he is confused and his heart rate is 118. What is your first thought?",
+      "hint": "In this patient, one of the classic post-operative causes carries far more weight than the others.",
+      "options": [
+        { "id": "a", "text": "Assess for a cardiac event, hypoxia, bleeding and sepsis together, with an ECG, gas, bloods and a wound examination", "correct": true, "feedback": "Correct. Post-operative confusion with tachycardia in a cardiac patient is a physiological emergency until proven otherwise, and all four causes are checked at once." },
+        { "id": "b", "text": "Diagnose post-operative delirium and prescribe a sedative", "correct": false, "feedback": "Sedating an undiagnosed cause of confusion in a patient with coronary disease is how a myocardial infarction is missed overnight." },
+        { "id": "c", "text": "Attribute it to the anaesthetic and review in the morning", "correct": false, "feedback": "Confusion attributed to the anaesthetic is the commonest way a serious cause goes unexamined." },
+        { "id": "d", "text": "Give a fluid bolus and reassess in two hours", "correct": false, "feedback": "Fluid may be part of the answer, but two hours of waiting without a diagnosis in this patient is too long." }
+      ],
+      "why": "Perioperative myocardial injury is frequently silent and presents as confusion, tachycardia or hypotension rather than chest pain. In a patient with a recent stent, it sits at the top of the list, alongside hypoxia, haemorrhage and sepsis, and all four are assessed in the same visit.",
+      "missedRedFlags": ["Perioperative myocardial infarction presenting without chest pain", "Scrotal or retroperitoneal haematoma in a patient on antiplatelet therapy"],
+      "alternatives": ["Troponin surveillance in high-risk patients after non-cardiac surgery is used by many units precisely because these events are silent."]
+    }
+  ]
+}

@@ -1,0 +1,84 @@
+{
+  "_comment": "SURGX media registry AND THE LICENCE GATE. Absence of a licence record is a REFUSAL, not a default-allow (assets/kardiox-learn/ holds 872 images with no manifest and no licence record; that is the failure mode this exists to prevent). An uncleared entry is a WORK ORDER: it must say what is needed and where to look, and it renders as a caption plus 'visual pending' until it is cleared. Only self-authored inline SVG is cleared today, because it is the one kind of media that needs no sourcing and whose provenance we can honestly assert.",
+  "schemaVersion": 1,
+  "updated": "2026-08-24",
+  "media": {
+    "med.surgx.appendix-anatomy": {
+      "id": "med.surgx.appendix-anatomy",
+      "kind": "diagram",
+      "inline": true,
+      "diagramId": "appendixAnatomy",
+      "title": "Finding the appendix",
+      "caption": "The three taeniae coli converge on the base of the appendix. Following one distally locates the base whatever the position of the tip.",
+      "cleared": true,
+      "licence": "StewardMD original work",
+      "attribution": "StewardMD"
+    },
+    "med.surgx.calot-triangle": {
+      "id": "med.surgx.calot-triangle",
+      "kind": "diagram",
+      "inline": true,
+      "diagramId": "calotTriangle",
+      "title": "The hepatocystic triangle",
+      "caption": "Bounded by the cystic duct, the common hepatic duct and the inferior border of the liver. Lateral traction on the infundibulum opens it; cephalad traction closes it and aligns the cystic duct with the common bile duct.",
+      "cleared": true,
+      "licence": "StewardMD original work",
+      "attribution": "StewardMD"
+    },
+    "med.surgx.cvs-diagram": {
+      "id": "med.surgx.cvs-diagram",
+      "kind": "diagram",
+      "inline": true,
+      "diagramId": "criticalView",
+      "title": "The Critical View of Safety",
+      "caption": "Three criteria, all required: the hepatocystic triangle cleared of fat and fibrous tissue, the lower third of the gallbladder separated from the cystic plate, and exactly two structures entering the gallbladder.",
+      "cleared": true,
+      "licence": "StewardMD original work",
+      "attribution": "StewardMD"
+    },
+    "med.surgx.inguinal-canal": {
+      "id": "med.surgx.inguinal-canal",
+      "kind": "diagram",
+      "inline": true,
+      "diagramId": "inguinalCanal",
+      "title": "Direct, indirect and femoral",
+      "caption": "The inferior epigastric vessels separate an indirect hernia (lateral, through the deep ring) from a direct one (medial, through Hesselbach triangle). A femoral hernia passes below the inguinal ligament, medial to the vein.",
+      "cleared": true,
+      "licence": "StewardMD original work",
+      "attribution": "StewardMD"
+    },
+    "med.surgx.lap-quadrants": {
+      "id": "med.surgx.lap-quadrants",
+      "kind": "diagram",
+      "inline": true,
+      "diagramId": "explorationSequence",
+      "title": "The exploration sequence",
+      "caption": "The same order every time: supracolic, small bowel from the duodenojejunal flexure to the caecum, colon, both paracolic gutters, pelvis, retroperitoneum. The numbering is the point.",
+      "cleared": true,
+      "licence": "StewardMD original work",
+      "attribution": "StewardMD"
+    },
+
+    "med.surgx.appendix-base": {
+      "id": "med.surgx.appendix-base",
+      "kind": "image",
+      "caption": "Endoscopic view of the appendix base cleared circumferentially, with healthy caecal wall visible on both sides before an endoloop is applied.",
+      "cleared": false,
+      "note": "WORK ORDER: an intra-operative still showing a properly cleared base. Source it either from an openly licensed surgical atlas (CC BY or CC0 only) or produce it in-house with documented patient consent for educational use. Do NOT take a frame from a commercial atlas or a YouTube video."
+    },
+    "med.surgx.abscess-deloculation": {
+      "id": "med.surgx.abscess-deloculation",
+      "kind": "diagram",
+      "caption": "A multiloculated abscess cavity in cross-section, showing why a single stab incision drains only one compartment.",
+      "cleared": false,
+      "note": "WORK ORDER: authorable in-house as an inline SVG in surgx-diagrams.js, in the same style as the other five. Until it is drawn it stays refused. Estimated effort: one diagram."
+    },
+    "med.surgx.cvs-video": {
+      "id": "med.surgx.cvs-video",
+      "kind": "embed",
+      "caption": "A narrated laparoscopic cholecystectomy demonstrating achievement of the Critical View of Safety.",
+      "cleared": false,
+      "note": "WORK ORDER: SAGES publishes safe-cholecystectomy teaching video. Confirm the embedding terms in writing before adding videoId + embeddable:true. Do not hotlink or re-host. Note that a permitted embed also needs the /_site/yt shim on native, as CliniX documents."
+    }
+  }
+}

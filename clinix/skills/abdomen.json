@@ -1,0 +1,4548 @@
+{
+  "_comment": "CliniX abdomen/GI skills, shared across abdominal disease pathways.",
+  "version": 1,
+  "system": "abdomen",
+  "skills": {
+    "skill.hx.gi.pain": {
+      "id": "skill.hx.gi.pain",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Abdominal pain",
+      "oneLine": "Site, character and radiation, mapped onto the nine regions",
+      "why": "Abdominal pain localises poorly to the organ that causes it, because visceral pain is felt in the midline zone that shares its embryological origin, not over the organ itself. Knowing that pattern is what lets you interpret vague pain instead of dismissing it.",
+      "asks": [
+        {
+          "text": "Where did it start, and where is it now? Ask them to point."
+        },
+        {
+          "text": "What does it feel like: colicky, constant, burning, tearing?"
+        },
+        {
+          "text": "Does it move anywhere: back, shoulder, groin?"
+        },
+        {
+          "text": "What makes it worse or better: food, movement, position, defecation?"
+        },
+        {
+          "text": "Any associated nausea, vomiting, fever, or change in bowel habit?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Visceral pain is midline and vague, for a reason",
+          "body": "Pain from an abdominal organ travels with autonomic fibres to the spinal segment that supplies its embryological origin, not the segment over its adult position. That is why early appendicitis is felt centrally, around the umbilicus, before localising to the right iliac fossa once the peritoneum itself becomes inflamed.",
+          "table": {
+            "cols": [
+              "Origin",
+              "Felt in"
+            ],
+            "rows": [
+              [
+                "Foregut (stomach, duodenum, biliary, pancreas)",
+                "Epigastrium"
+              ],
+              [
+                "Midgut (small bowel, appendix, right colon)",
+                "Periumbilical"
+              ],
+              [
+                "Hindgut (left colon, rectum)",
+                "Suprapubic"
+              ]
+            ]
+          },
+          "note": "Pain that MOVES from central to a fixed site, as in appendicitis, is one of the most reliable patterns in the whole history."
+        },
+        {
+          "heading": "Site once it localises",
+          "table": {
+            "cols": [
+              "Region",
+              "Common causes"
+            ],
+            "rows": [
+              [
+                "Right hypochondrium",
+                "Biliary colic, cholecystitis, hepatitis"
+              ],
+              [
+                "Epigastrium",
+                "Peptic ulcer, pancreatitis, early appendicitis"
+              ],
+              [
+                "Left hypochondrium",
+                "Splenic pathology, rarely"
+              ],
+              [
+                "Right iliac fossa",
+                "Appendicitis, ectopic pregnancy, right ureteric colic"
+              ],
+              [
+                "Suprapubic",
+                "Cystitis, pelvic pathology"
+              ],
+              [
+                "Left iliac fossa",
+                "Diverticulitis, left ureteric colic"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Character narrows it further",
+          "points": [
+            {
+              "t": "Colicky.",
+              "d": "Rises and falls, from a hollow viscus contracting against an obstruction: biliary, ureteric, intestinal."
+            },
+            {
+              "t": "Constant, sharp, worse on movement.",
+              "d": "Peritoneal irritation, once the process reaches the parietal peritoneum."
+            },
+            {
+              "t": "Burning, related to meals.",
+              "d": "Peptic ulcer disease."
+            },
+            {
+              "t": "Tearing, radiating to the back.",
+              "d": "Pancreatitis, or an aortic catastrophe if sudden and severe."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Accepting a vague location without asking about movement or change over time.",
+        "Missing the classic central-to-right-iliac-fossa migration of appendicitis.",
+        "Not asking about radiation to the back, shoulder tip or groin."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Why is early visceral pain felt in the midline rather than over the organ?",
+          "a": "It follows the autonomic nerve supply of the organ's embryological origin, which enters the spinal cord in midline segments, rather than the site of the adult organ.",
+          "accept": [
+            "embryolog",
+            "midline",
+            "autonomic",
+            "segment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Colicky pain. What kind of organ produces it?",
+          "a": "A hollow, muscular viscus contracting against an obstruction, such as the biliary tree, ureter, or bowel.",
+          "accept": [
+            "hollow",
+            "obstruct",
+            "contract"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Pain that starts central and localises to the right iliac fossa over hours. What is happening, mechanistically?",
+          "a": "Initial visceral (midgut) pain is periumbilical; as inflammation reaches the parietal peritoneum overlying the appendix, the pain becomes somatic and localises precisely to the right iliac fossa.",
+          "accept": [
+            "parietal",
+            "peritoneum",
+            "somatic",
+            "localis"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "site",
+          "text": "Establishes site and asks about movement/localisation"
+        },
+        {
+          "id": "character",
+          "text": "Elicits character (colicky vs constant vs burning)"
+        },
+        {
+          "id": "radiation",
+          "text": "Asks about radiation"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: pain"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.inspection": {
+      "id": "skill.exam.gi.inspection",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Inspection of the abdomen",
+      "oneLine": "Every case-sheet component: shape, skin, umbilicus, movement, and what each one, on its own, can tell you",
+      "why": "Inspection carries real diagnostic weight in the abdomen, and the case sheet asks for six separate observations, not one glance. A single eponymous sign spotted on inspection, Cullen's, Grey Turner's, Sister Mary Joseph, can name the diagnosis before you have touched the patient.",
+      "steps": [
+        {
+          "text": "Position the patient supine, arms at the sides, hips and knees slightly flexed to relax the abdominal wall."
+        },
+        {
+          "text": "Expose from the xiphisternum to mid-thigh."
+        },
+        {
+          "text": "Look at the SHAPE: scaphoid, generally distended, or locally distended."
+        },
+        {
+          "text": "Look at the SKIN: discolouration, striae, scars, sinuses, dilated veins."
+        },
+        {
+          "text": "Look at the UMBILICUS: position, eversion, herniation."
+        },
+        {
+          "text": "Shine a light across the abdomen and watch MOVEMENT with respiration, for at least one full cycle."
+        },
+        {
+          "text": "Ask the patient to lift their head off the bed, tensing the recti, and look for a midline bulge."
+        }
+      ],
+      "normal": "A scaphoid or flat abdomen, normal skin, a slightly retracted umbilicus, symmetrical movement with respiration, no bulge on head-raising.",
+      "abnormal": "Distension, abnormal skin findings, an everted or displaced umbilicus, reduced or absent movement, visible peristalsis, or a midline bulge on straining.",
+      "significance": "Each of the six components has its own differential; put together they can localise a mass, suggest chronic liver disease, or point to peritonitis before you palpate at all.",
+      "teach": [
+        {
+          "heading": "Shape: the seven Fs of distension",
+          "body": "Generalised distension has seven causes, and the book gives them as a checklist you should be able to recite. A localised bulge instead suggests one organ or one mass, not a systemic cause.",
+          "points": [
+            "Fluid",
+            "Fat",
+            "Flatus",
+            "Faeces",
+            "Fetus",
+            "Full bladder",
+            "Fatal neoplasm"
+          ],
+          "note": "Fullness of the FLANKS specifically, rather than the whole abdomen, is the shape free fluid classically makes."
+        },
+        {
+          "heading": "The skin tells its own story",
+          "table": {
+            "cols": [
+              "Finding",
+              "Seen in"
+            ],
+            "rows": [
+              [
+                "Cullen's sign, discolouration around the umbilicus",
+                "Pancreatitis (haemorrhagic)"
+              ],
+              [
+                "Grey Turner's sign, discolouration over the flanks",
+                "Pancreatitis (haemorrhagic)"
+              ],
+              [
+                "Striae, white or pink, linear",
+                "Recent rapid distension: pregnancy, ascites, wasting"
+              ],
+              [
+                "Purple striae",
+                "Cushing's syndrome"
+              ],
+              [
+                "Linea nigra",
+                "Midline pigmentation below the umbilicus, in pregnancy"
+              ],
+              [
+                "Erythema ab igne, mottled brown pigmentation",
+                "Chronic application of heat, a sign of chronic pain as in chronic pancreatitis"
+              ],
+              [
+                "Stretched, shiny skin",
+                "Tense ascites"
+              ],
+              [
+                "Sinuses",
+                "Tuberculosis, Crohn's disease"
+              ]
+            ]
+          },
+          "note": "Cullen's and Grey Turner's signs are both markers of retroperitoneal or intraperitoneal haemorrhage, classically from severe pancreatitis, and both are genuine examination findings worth naming correctly rather than just recognising."
+        },
+        {
+          "heading": "The umbilicus, in detail",
+          "table": {
+            "cols": [
+              "Finding",
+              "Meaning"
+            ],
+            "rows": [
+              [
+                "Everted",
+                "Suggests tense ascites"
+              ],
+              [
+                "Umbilical hernia",
+                "A lax abdominal wall, often with gross ascites"
+              ],
+              [
+                "A hard umbilical node (Sister Mary Joseph node)",
+                "Metastasis from an intra-abdominal malignancy"
+              ],
+              [
+                "Displaced UP ('smiling')",
+                "A pelvic mass or ovarian tumour"
+              ],
+              [
+                "Displaced DOWN ('weeping')",
+                "An upper abdominal mass, or ascites"
+              ]
+            ]
+          },
+          "note": "Sister Mary Joseph node is a real, examinable finding: a firm nodule at the umbilicus signalling metastatic spread, most often from a gastric, pancreatic, or ovarian primary."
+        },
+        {
+          "heading": "Movement, and what visible peristalsis actually means",
+          "body": "Watch for a full respiratory cycle before deciding movement is reduced. A generalised absence of movement, the 'still, silent abdomen', is a sign of peritonitis, since the patient is guarding by not moving the abdominal wall at all.",
+          "table": {
+            "cols": [
+              "Site of obstruction",
+              "Direction of visible peristalsis"
+            ],
+            "rows": [
+              [
+                "Pylorus",
+                "Left costal margin towards the right"
+              ],
+              [
+                "Distal small bowel",
+                "Right to left, or an irregular pattern"
+              ]
+            ]
+          },
+          "note": "Visible peristalsis can be a NORMAL finding in a very thin, elderly patient with lax abdominal muscles. Interpret it against the rest of the picture, not in isolation."
+        },
+        {
+          "heading": "Divarication of the recti",
+          "body": "Ask the patient to lift their head off the bed against resistance, tensing the rectus abdominis. A midline gap that bulges is divarication of recti, common postpartum and with chronic distension such as tense ascites. It is a benign finding, distinct from a true hernia, but worth naming correctly on the case sheet."
+        }
+      ],
+      "pitfalls": [
+        "Inspecting for only a few seconds instead of a full respiratory cycle.",
+        "Missing Cullen's or Grey Turner's sign because the abdomen was not adequately exposed.",
+        "Calling a normal, thin-patient peristalsis abnormal without considering the whole clinical picture.",
+        "Skipping the head-raise test for divarication of recti."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "List the seven Fs of generalised abdominal distension.",
+          "a": "Fluid, fat, flatus, faeces, fetus, full bladder, fatal neoplasm.",
+          "accept": [
+            "fluid",
+            "fat",
+            "flatus",
+            "faeces",
+            "fetus",
+            "bladder",
+            "neoplasm"
+          ],
+          "minMatch": 4
+        },
+        {
+          "level": 2,
+          "q": "A patient has periumbilical bruising after severe abdominal pain. What is this called and what does it suggest?",
+          "a": "Cullen's sign, suggesting haemorrhagic or severe pancreatitis, or another cause of retroperitoneal haemorrhage.",
+          "accept": [
+            "cullen",
+            "pancreatitis",
+            "haemorrhag",
+            "hemorrhag"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "What is a Sister Mary Joseph node and what does it mean?",
+          "a": "A firm, palpable umbilical nodule representing metastatic spread from an intra-abdominal malignancy, classically gastric, pancreatic or ovarian.",
+          "accept": [
+            "metasta",
+            "malignan"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "An elderly, very thin patient has visible peristalsis but no other symptoms. Is this necessarily abnormal?",
+          "a": "No. Visible peristalsis can be a normal finding in thin, elderly patients with lax abdominal muscles, and must be interpreted alongside the rest of the clinical picture rather than in isolation.",
+          "accept": [
+            "normal",
+            "thin",
+            "lax",
+            "not necessarily"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "expose",
+          "text": "Exposes adequately from xiphisternum to mid-thigh"
+        },
+        {
+          "id": "shape",
+          "text": "Comments on shape using the seven Fs framework where relevant"
+        },
+        {
+          "id": "skin",
+          "text": "Examines the skin systematically"
+        },
+        {
+          "id": "umbilicus",
+          "text": "Comments explicitly on the umbilicus"
+        },
+        {
+          "id": "movement",
+          "text": "Watches a full respiratory cycle for movement"
+        }
+      ],
+      "media": [
+        "media.img.abdregions",
+        "media.dia.giregions"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: inspection"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: inspection"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.palpation": {
+      "id": "skill.exam.gi.palpation",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Superficial and deep palpation",
+      "oneLine": "A fixed route through nine regions, light before deep, away from the pain",
+      "why": "Palpation is where a frightened, guarded abdomen becomes uninterpretable. The book gives a fixed route for exactly this reason: a systematic sequence gets a reliable examination out of a patient in pain, where an unsystematic one does not.",
+      "steps": [
+        {
+          "text": "Kneel or sit at the bedside so your forearm is level with the abdomen. Warm your hands first."
+        },
+        {
+          "text": "Ask if there is any pain, and start FAR from that area."
+        },
+        {
+          "text": "Follow the route: left lower quadrant, then all quadrants in turn."
+        },
+        {
+          "text": "Palpate LIGHTLY first, all regions, watching the patient's face throughout."
+        },
+        {
+          "text": "Then palpate DEEPLY, feeling in this order: left kidney, spleen, right kidney, liver, aorta and para-aortic nodes, femoral vessels, bladder, both groins, external genitalia."
+        },
+        {
+          "text": "If peritonism is suspected, test for rebound tenderness LAST, after guarding/rigidity: press slowly and deeply, then release quickly, and ask whether release hurts more than the pressing itself."
+        }
+      ],
+      "normal": "Soft, non-tender throughout, no palpable masses.",
+      "abnormal": "Tenderness, guarding, rigidity, or a palpable mass in any region.",
+      "significance": "Guarding is voluntary and can be talked through; rigidity is involuntary and means peritonitis. The fixed deep-palpation order exists so that nothing is forgotten under pressure.",
+      "teach": [
+        {
+          "heading": "The book's route, learn it as one sequence",
+          "body": "Start in the left lower quadrant and work through all four quadrants for the light, screening pass. For the deep pass, feel specifically for: left kidney, then spleen, then right kidney, then liver, then the aorta and para-aortic glands, then the common femoral vessels, then the bladder, then both groins, then the external genitalia.",
+          "note": "Learning this as a fixed route, not a list to recall from memory each time, is what stops an organ being skipped when a patient is anxious or in pain."
+        },
+        {
+          "heading": "Guarding versus rigidity, do not confuse them",
+          "table": {
+            "cols": [
+              "",
+              "Guarding",
+              "Rigidity"
+            ],
+            "rows": [
+              [
+                "What it is",
+                "Voluntary muscle tensing",
+                "Involuntary muscle spasm"
+              ],
+              [
+                "Can you overcome it",
+                "Yes, with reassurance and distraction",
+                "No"
+              ],
+              [
+                "Meaning",
+                "Anxiety or anticipated pain",
+                "Peritonitis"
+              ]
+            ]
+          },
+          "note": "Distract the patient and talk to them while examining; true guarding relaxes, rigidity does not."
+        },
+        {
+          "heading": "Rebound tenderness completes the triad",
+          "body": "Guarding and rigidity are found on pressing; rebound tenderness is found on RELEASING. Pain that is worse on sudden release than on pressure itself means the inflamed peritoneum is being stretched, and is the third classic sign of peritonism alongside guarding and rigidity.",
+          "note": "Elicit it deliberately and last, once, rather than repeatedly - it is genuinely painful for the patient and does not need to be repeated to be believed."
+        }
+      ],
+      "pitfalls": [
+        "Starting over the painful area, guaranteeing a guarded, uninterpretable examination.",
+        "Skipping straight to deep palpation without a light, screening pass first.",
+        "Palpating with cold hands, which reflexively tenses the abdominal wall.",
+        "Never testing for rebound tenderness at all, or testing it repeatedly out of habit once a peritonitic picture is already obvious - it is painful and only needs eliciting once."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where do you begin palpation when the patient reports pain in the right iliac fossa?",
+          "a": "Away from it, working towards it last.",
+          "accept": [
+            "away",
+            "last"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Distinguish guarding from rigidity.",
+          "a": "Guarding is voluntary and can be overcome with distraction; rigidity is involuntary and persists regardless, and indicates peritonitis.",
+          "accept": [
+            "voluntary",
+            "involuntary",
+            "peritonitis"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Give the book's fixed order for deep palpation.",
+          "a": "Left kidney, spleen, right kidney, liver, aorta and para-aortic glands, common femoral vessels, bladder, both groins, external genitalia.",
+          "accept": [
+            "kidney",
+            "spleen",
+            "liver",
+            "aorta",
+            "femoral"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "What is rebound tenderness, and how does it differ from guarding?",
+          "a": "Pain on sudden RELEASE of pressure, worse than on pressing itself, from stretching an inflamed peritoneum - guarding and rigidity are found on pressing, rebound is found on releasing; together they form the classic triad of peritonism.",
+          "accept": [
+            "rebound",
+            "release",
+            "peritoneum",
+            "peritonism"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "start",
+          "text": "Starts away from the site of pain",
+          "critical": true
+        },
+        {
+          "id": "light",
+          "text": "Performs a light pass before deep palpation"
+        },
+        {
+          "id": "route",
+          "text": "Follows a systematic route rather than an arbitrary order"
+        }
+      ],
+      "media": [
+        "media.vid.abdpalpation"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: palpation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: palpation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: palpation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.ascites": {
+      "id": "skill.exam.gi.ascites",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Detecting ascites",
+      "oneLine": "Shifting dullness needs about 1500 mL; a fluid thrill needs more",
+      "why": "Ascites is missed less often than it is over-called. Knowing how much fluid each test actually requires stops you diagnosing ascites in a patient who is simply obese, and stops you missing an early effusion that has not yet reached the volume a simple test can detect.",
+      "steps": [
+        {
+          "text": "Percuss from the midline outward to the flanks, marking where resonant becomes dull."
+        },
+        {
+          "text": "With your finger at that point, ask the patient to roll onto the opposite side."
+        },
+        {
+          "text": "Wait, then percuss again at the same mark: fluid that has shifted with gravity will now be resonant."
+        },
+        {
+          "text": "For a fluid thrill, have an assistant press the edge of their hand firmly onto the midline to stop transmission through fat, then flick one flank while feeling the other."
+        }
+      ],
+      "normal": "Resonant percussion throughout, no shift with position, no fluid thrill.",
+      "abnormal": "Dullness in the flanks that shifts with position (shifting dullness), or a palpable fluid thrill.",
+      "significance": "Shifting dullness reliably detects ascites once it reaches roughly 1500 mL. A fluid thrill needs a large volume and is unreliable in a thin patient without the damping manoeuvre, so absence of a thrill does not exclude ascites.",
+      "teach": [
+        {
+          "heading": "Why shifting dullness works",
+          "body": "Free fluid obeys gravity and pools in the flanks and pelvis when the patient is supine, while gas-filled bowel floats to the top. Percussion finds the border between resonant bowel above and dull fluid below; rolling the patient moves that border because the fluid redistributes."
+        },
+        {
+          "heading": "How much fluid each sign needs",
+          "table": {
+            "cols": [
+              "Sign",
+              "Approximate volume needed"
+            ],
+            "rows": [
+              [
+                "Shifting dullness",
+                "About 1500 mL"
+              ],
+              [
+                "Fluid thrill",
+                "Larger volumes, and easily missed in a thin patient without damping"
+              ],
+              [
+                "Puddle sign",
+                "As little as 120 mL, in the knee-elbow position, rarely used"
+              ]
+            ]
+          },
+          "note": "A negative shifting dullness in a patient you strongly suspect has ascites does not exclude a smaller volume. Ultrasound is far more sensitive and is the right next step."
+        }
+      ],
+      "pitfalls": [
+        "Not waiting long enough after rolling the patient for the fluid to actually redistribute.",
+        "Forgetting the damping hand for a fluid thrill, so the wave is falsely transmitted through the fat of the abdominal wall.",
+        "Calling obesity ascites without eliciting either sign."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Roughly how much ascitic fluid is needed for shifting dullness to be detectable?",
+          "a": "About 1500 mL.",
+          "accept": [
+            "1500",
+            "1.5"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does dullness shift when the patient rolls onto their side?",
+          "a": "Free fluid moves with gravity to the dependent flank while gas-filled bowel floats above it, moving the resonant-dull border.",
+          "accept": [
+            "gravity",
+            "dependent",
+            "float"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why is a hand placed on the midline during the fluid thrill test?",
+          "a": "To damp transmission of the impulse through the abdominal wall fat, so that a true thrill is only felt if it has actually travelled through fluid.",
+          "accept": [
+            "damp",
+            "fat",
+            "transmission"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "percuss",
+          "text": "Percusses from midline to flank correctly"
+        },
+        {
+          "id": "wait",
+          "text": "Waits an adequate time after repositioning"
+        },
+        {
+          "id": "thrill",
+          "text": "Uses the damping hand if testing for a fluid thrill"
+        }
+      ],
+      "media": [
+        "media.gi.ascites.1",
+        "media.gi.ascites.2",
+        "media.gi.ascites.3"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: percussion"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: ascites"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.auscultation": {
+      "id": "skill.exam.gi.auscultation",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Auscultation of the abdomen",
+      "oneLine": "Bowel sounds, bruits, venous hums and rubs, done BEFORE palpation",
+      "why": "The abdomen is auscultated before it is touched, because palpation and percussion can themselves alter bowel sounds. Five things are listened for, and each has its own site and its own meaning.",
+      "steps": [
+        {
+          "text": "Auscultate BEFORE palpating or percussing."
+        },
+        {
+          "text": "Place the diaphragm just below the umbilicus and listen for bowel sounds for up to a minute."
+        },
+        {
+          "text": "If none are heard, continue for a full 3 minutes before concluding they are truly absent."
+        },
+        {
+          "text": "Listen over the epigastrium in the midline for an aortic bruit."
+        },
+        {
+          "text": "Listen 2.5 cm above and lateral to the umbilicus, in the transpyloric plane, for a renal artery bruit, and 2.5 cm below and lateral for an iliac bruit."
+        },
+        {
+          "text": "Listen over the liver for a hepatic bruit or rub, and midway between the xiphisternum and umbilicus on the right for a venous hum."
+        }
+      ],
+      "normal": "Bowel sounds present at 5 to 34 per minute, no bruits, no rub, no venous hum.",
+      "abnormal": "Increased (borborygmi), decreased, or absent bowel sounds; any bruit; a hepatic or splenic rub; a venous hum.",
+      "significance": "Absent bowel sounds after 3 full minutes of listening suggests paralytic ileus or peritonitis. A bruit localises to the vessel beneath it. A venous hum at the classic site is a specific sign of portal hypertension with a patent umbilical vein.",
+      "teach": [
+        {
+          "heading": "Bowel sounds: how long you listen matters",
+          "body": "Normal bowel sounds occur roughly 5 to 34 times a minute. Do not call them absent after a few seconds of silence.",
+          "points": [
+            {
+              "t": "Increased (borborygmi).",
+              "d": "Early intestinal obstruction, diarrhoea, laxative use, carcinoid syndrome, a massive GI bleed."
+            },
+            {
+              "t": "Decreased or absent.",
+              "d": "Paralytic ileus, peritonitis. Confirm with a FULL 3 MINUTES of listening before recording 'absent'."
+            }
+          ],
+          "note": "This is a specific, examinable rule: you cannot say bowel sounds are absent until you have listened for a full three minutes."
+        },
+        {
+          "heading": "Four bruits, each with its own site",
+          "table": {
+            "cols": [
+              "Bruit",
+              "Site",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Aortic",
+                "Epigastrium, midline",
+                "Aneurysm, aortoarteritis"
+              ],
+              [
+                "Renal artery",
+                "2.5 cm above and lateral to the umbilicus",
+                "Renal artery stenosis"
+              ],
+              [
+                "Iliac",
+                "2.5 cm below and lateral to the umbilicus",
+                "Iliac artery stenosis"
+              ],
+              [
+                "Hepatic",
+                "Over the liver",
+                "Hepatocellular carcinoma, acute alcoholic hepatitis, haemangioma"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Venous hum and the two rubs",
+          "points": [
+            {
+              "t": "Cruveilhier-Baumgarten murmur.",
+              "d": "A continuous venous hum, heard midway between the xiphisternum and umbilicus on the right, from a patent paraumbilical vein opening into the falciform ligament. Its presence means the umbilical vein is patent, which excludes an EXTRAhepatic cause of portal hypertension, since that vein arises from the intrahepatic portion of the left portal vein."
+            },
+            {
+              "t": "Hepatic friction rub.",
+              "d": "A superficial, scratchy sound over the liver. Seen with hepatocellular carcinoma, after liver biopsy, hepatic infarcts, and Fitz-Hugh-Curtis syndrome (gonococcal perihepatitis)."
+            },
+            {
+              "t": "Splenic rub.",
+              "d": "A coarse sound coinciding with inspiration over the left upper quadrant, from a splenic infarct. Seen in subacute bacterial endocarditis, chronic myeloid leukaemia, sickle cell disease, and after splenic puncture."
+            }
+          ]
+        },
+        {
+          "heading": "Succussion splash",
+          "body": "Auscultate the epigastrium or left upper quadrant while gently shaking the patient's hips; a splash-like sound heard several hours after eating suggests delayed gastric emptying, as in gastric outlet obstruction. A thoracic succussion splash is described in achalasia, hydropneumothorax and a large hiatal hernia."
+        }
+      ],
+      "pitfalls": [
+        "Palpating before auscultating, which can alter the bowel sounds you are about to listen for.",
+        "Declaring bowel sounds absent after only a few seconds.",
+        "Never checking for a venous hum in a patient with signs of chronic liver disease."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "In what order should the abdomen be examined?",
+          "a": "Inspection, then auscultation, then palpation and percussion, because palpation and percussion can alter the auscultatory findings.",
+          "accept": [
+            "inspection",
+            "auscultation",
+            "palpation"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "How long must you listen before declaring bowel sounds absent?",
+          "a": "A full 3 minutes.",
+          "accept": [
+            "3 minute",
+            "three minute"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "You hear a continuous venous hum midway between the xiphisternum and umbilicus. What does its presence tell you about the CAUSE of any portal hypertension?",
+          "a": "It indicates a patent umbilical vein, which excludes an extrahepatic cause of portal hypertension, since the umbilical vein arises from the intrahepatic portion of the left portal vein.",
+          "accept": [
+            "extrahepatic",
+            "patent",
+            "exclude"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "order",
+          "text": "Auscultates before palpating",
+          "critical": true
+        },
+        {
+          "id": "time",
+          "text": "Allows adequate time before calling bowel sounds absent"
+        },
+        {
+          "id": "bruits",
+          "text": "Checks for at least aortic and renal bruits"
+        }
+      ],
+      "media": [
+        "media.gi.auscultation.sites"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: auscultation"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: auscultation"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: auscultation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.liver": {
+      "id": "skill.exam.gi.liver",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Examination of the liver",
+      "oneLine": "Five palpation methods, the span, and what edge, margin and surface each tell you",
+      "why": "The liver is examined by more than one method because no single technique works in every body habitus, and because span, not just a palpable edge, is what actually defines hepatomegaly. A palpable edge with a normal span is not an enlarged liver; it may simply be pushed down.",
+      "steps": [
+        {
+          "text": "TRADITIONAL method: place the right hand in the right iliac fossa, parallel to the costal margin. Keep it still through inspiration, feeling for the edge; if not felt, move the hand up 1 cm during expiration and repeat."
+        },
+        {
+          "text": "PREFERRED method: sit facing the patient's head, place both hands flat, side by side, in the right subcostal region lateral to the rectus, fingers pointing towards the ribs. Exert gentle pressure and ask for a deep breath; the edge is felt on the fingertips, and the technique can be repeated lateral to medial to trace the whole edge."
+        },
+        {
+          "text": "ALTERNATE method: place the right hand below and parallel to the subcostal margin; the edge is felt against the radial border of the index finger."
+        },
+        {
+          "text": "HOOKING method: stand at the patient's right shoulder facing the feet, and curl the fingertips under the right costal margin to feel the lower edge."
+        },
+        {
+          "text": "DIPPING method, for ascites: place both hands one over the other, then rapidly flex the metacarpophalangeal joints so the fingers dip suddenly into the abdomen, displacing fluid to make the organ briefly palpable."
+        },
+        {
+          "text": "Once felt, assess edge, span, tenderness, margin, surface, consistency and pulsatility, in that order."
+        },
+        {
+          "text": "Measure the span: percuss the upper border in the midclavicular line with heavy percussion, then the lower border with light percussion."
+        }
+      ],
+      "normal": "Liver not palpable below the costal margin, or just palpable on deep inspiration; span under 13 cm; smooth, soft, non-tender, non-pulsatile.",
+      "abnormal": "A palpable edge more than 1 to 2 cm below the costal margin with an increased span, tenderness, an irregular margin, a nodular surface, a firm or hard consistency, or pulsatility.",
+      "significance": "Span is the measurement that actually defines hepatomegaly; a palpable edge alone can be a false positive from a hyperinflated chest or right pleural pathology pushing the liver down. Margin, surface and consistency together narrow the cause: smooth and soft suggests infection or infiltration, nodular and hard suggests malignancy or cirrhosis.",
+      "teach": [
+        {
+          "heading": "Why five different methods exist",
+          "body": "No single technique works for every patient. The traditional method is the standard teaching method; the preferred (bimanual) method traces the whole edge more precisely; the alternate method suits an examiner who finds the traditional grip awkward; the hooking method works well in a well-relaxed, thin abdomen; and the dipping method is the only one that works through significant ascites, because it briefly displaces fluid out of the way.",
+          "note": "Learn the traditional and preferred methods first, since those are what most examiners expect, then add hooking and dipping as the situation demands them."
+        },
+        {
+          "heading": "Measuring the span correctly",
+          "body": "The upper border needs HEAVY percussion; the lower border needs LIGHT percussion, because heavy percussion at the lower border underestimates how far down the liver actually extends.",
+          "table": {
+            "cols": [
+              "Line",
+              "Normal span"
+            ],
+            "rows": [
+              [
+                "Midclavicular line",
+                "6 to 12 cm"
+              ],
+              [
+                "Midsternal line (left lobe)",
+                "4 to 8 cm"
+              ]
+            ]
+          },
+          "note": "The book is explicit that a clinical span usually UNDERESTIMATES true liver size by about 2 to 5 cm, so a span at the upper end of normal is not automatically reassuring."
+        },
+        {
+          "heading": "The false positive every student eventually makes",
+          "body": "A hyperinflated chest, as in COPD, or a right-sided pleural effusion or lower lobe consolidation, can push the liver edge down so it becomes palpable well below the costal margin with a completely NORMAL span. Percussing the upper border reveals it is lower than expected, which is the only way to catch this.",
+          "note": "Never call a palpable edge hepatomegaly without percussing the span. This is one of the most consistently examined traps in the whole abdominal case."
+        },
+        {
+          "heading": "If it is enlarged, describe it fully",
+          "points": [
+            {
+              "t": "Location and span.",
+              "d": "In centimetres below the costal margin, in the midclavicular or anterior axillary line, plus the total span."
+            },
+            {
+              "t": "Tenderness.",
+              "d": "Tender hepatomegaly: right heart failure, acute hepatitis, liver abscess, hepatoma, infarcts, actinomycosis, acute Budd-Chiari. Painless: fatty liver, infiltrative disease, malaria, leukaemia, lymphoma."
+            },
+            {
+              "t": "Margin.",
+              "d": "Rounded suggests infiltrative disease. Sharp suggests metastases, acute or chronic hepatitis, or biliary obstruction."
+            },
+            {
+              "t": "Surface.",
+              "d": "Smooth suggests malaria, acute hepatitis, infiltrative disease. Nodular suggests metastatic cancer, hepatoma, or cirrhosis (micronodular in alcoholic disease, macronodular after hepatitis)."
+            },
+            {
+              "t": "Consistency.",
+              "d": "Firm to hard in metastatic cancer and obstructive jaundice."
+            },
+            {
+              "t": "Pulsatility.",
+              "d": "A pulsatile liver occurs in tricuspid regurgitation (systolic), tricuspid stenosis (diastolic), hepatocellular carcinoma, and haemangioma."
+            }
+          ]
+        },
+        {
+          "heading": "The ausculto-percussion scratch test",
+          "body": "Place the stethoscope diaphragm over the xiphoid or just above the costal margin in the midclavicular line, then gently scratch the skin along that line, starting low and moving upward. The transmitted sound changes quality and becomes louder once your scratching finger crosses onto the solid liver, because sound transmits better through a solid organ than through bowel gas."
+        },
+        {
+          "heading": "Named anatomical variants worth recognising",
+          "points": [
+            {
+              "t": "Caudate lobe hypertrophy.",
+              "d": "Characteristic of hepatic outflow obstruction, as in Budd-Chiari syndrome."
+            },
+            {
+              "t": "Riedel's lobe.",
+              "d": "A congenital tongue-like projection from the right lobe, easily mistaken for the gallbladder or right kidney."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Palpating vigorously or repeatedly on a large, tender liver - deep or repeated palpation of an acutely inflamed or congested liver is uncomfortable and unnecessary once hepatomegaly and tenderness are confirmed.",
+        "Calling a palpable edge hepatomegaly without percussing the span.",
+        "Using heavy percussion at the lower border, which underestimates the true extent.",
+        "Not describing margin, surface and consistency, so the description gives no clue to the cause.",
+        "Missing a pulsatile liver, which is a real and examinable sign."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the normal liver span in the midclavicular line?",
+          "a": "6 to 12 cm.",
+          "accept": [
+            "6",
+            "12"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name the five methods of liver palpation.",
+          "a": "Traditional, preferred (bimanual), alternate, hooking, and dipping.",
+          "accept": [
+            "traditional",
+            "preferred",
+            "bimanual",
+            "alternate",
+            "hooking",
+            "dipping"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 3,
+          "q": "You percuss heavy pressure at the lower border of the liver. Why is this wrong?",
+          "a": "Heavy percussion at the lower border underestimates how far down the liver actually extends; light percussion should be used there, with heavy percussion reserved for the upper border.",
+          "accept": [
+            "underestimat",
+            "light percussion"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 4,
+          "q": "A patient with known COPD has a liver edge palpable 3 cm below the costal margin, but the span on percussion is normal. What is happening?",
+          "a": "A hyperinflated chest has pushed a normal-sized liver downward, making the edge falsely palpable without true hepatomegaly. Percussion of the upper border, found lower than expected, confirms this rather than genuine enlargement.",
+          "accept": [
+            "hyperinflat",
+            "pushed",
+            "normal span",
+            "false"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "technique",
+          "text": "Demonstrates at least the traditional and preferred palpation methods"
+        },
+        {
+          "id": "span",
+          "text": "Measures the span by percussion, heavy above, light below",
+          "critical": true
+        },
+        {
+          "id": "describe",
+          "text": "Describes margin, surface, consistency and tenderness when enlarged"
+        }
+      ],
+      "media": [
+        "media.dia.liverpalp",
+        "media.vid.liverexam",
+        "media.gi.liver.bimanual"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: liver examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the liver"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: liver"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.spleen": {
+      "id": "skill.exam.gi.spleen",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Examination of the spleen",
+      "oneLine": "It has to double in size before you can feel it; five palpation methods and three percussion tests",
+      "why": "A normal spleen is never palpable. Any palpable spleen has already enlarged two to three times, which is exactly why the examination technique, and the grading once you find it, matter so much: you are detecting something genuinely abnormal, and the grade changes the differential.",
+      "steps": [
+        {
+          "text": "CLASSICAL method: single right hand placed in the right iliac fossa, moved diagonally towards the left upper quadrant in 1 cm steps on expiration, feeling for the edge on inspiration."
+        },
+        {
+          "text": "BIMANUAL method, supine: left hand over the lower left ribs posterolaterally, restricting their expansion; right hand insinuated beneath the left costal margin while the patient breathes deeply."
+        },
+        {
+          "text": "BIMANUAL method, right lateral position: same technique with the patient rolled onto their right side, left hip and knee flexed, which brings a marginally enlarged spleen forward."
+        },
+        {
+          "text": "HOOKING method: fingers hooked beneath the left costal margin as the patient inspires, in either supine or right lateral position."
+        },
+        {
+          "text": "MIDDLETON'S MANOEUVRE: the patient's left fist is placed just inferior to their left scapula, which can bring a subtle spleen forward for hooking."
+        },
+        {
+          "text": "DIPPING method, for ascites: as for the liver, both hands together, a rapid flexing dip to displace fluid."
+        },
+        {
+          "text": "Percuss to confirm: Castell's method first, then Traube's space, then Nixon's method if needed."
+        }
+      ],
+      "normal": "Not palpable. Castell's point remains resonant on full inspiration. Traube's space is tympanic.",
+      "abnormal": "A palpable spleen, of any grade; a positive Castell's sign (dullness on full inspiration); obliteration of Traube's space.",
+      "significance": "Once palpable, grade the spleen and note whether it crosses the midline, since the degree of enlargement narrows the differential sharply between mild, moderate and massive splenomegaly.",
+      "teach": [
+        {
+          "heading": "It must double or triple before you can feel it",
+          "body": "The spleen enlarges superiorly and posteriorly first, hidden under the ribs, and only becomes palpable once it has grown two to three times its normal size. A spleen you can feel is never a trivial finding.",
+          "note": "Once palpable it appears below the tip of the 10th rib and enlarges downward, medially, and forward, towards the umbilicus, moving from the left hypochondrium towards the right iliac fossa."
+        },
+        {
+          "heading": "Five methods, learn the classical and bimanual first",
+          "points": [
+            {
+              "t": "Classical.",
+              "d": "Single-handed, diagonal sweep from the right iliac fossa. The standard teaching method."
+            },
+            {
+              "t": "Bimanual.",
+              "d": "The left hand restricts lower rib movement, forcing the diaphragm to push the spleen down onto the right hand. Works in both supine and right lateral position."
+            },
+            {
+              "t": "Hooking, with Middleton's manoeuvre.",
+              "d": "Useful for a borderline, just-palpable spleen."
+            },
+            {
+              "t": "Dipping.",
+              "d": "For examining through ascites, exactly as for the liver."
+            }
+          ]
+        },
+        {
+          "heading": "Grading by distance below the costal margin",
+          "table": {
+            "cols": [
+              "Grade",
+              "Distance"
+            ],
+            "rows": [
+              [
+                "Mild (tip)",
+                "1 to 2 cm (some sources: under 3 cm)"
+              ],
+              [
+                "Moderate",
+                "3 to 7 cm, between costal margin and umbilicus"
+              ],
+              [
+                "Severe (massive)",
+                "Over 7 cm, may cross the midline"
+              ]
+            ]
+          },
+          "note": "Size can also be graded by the largest dimension on imaging: moderate 11 to 20 cm, severe over 20 cm. The two grading systems answer slightly different questions and both are used in practice."
+        },
+        {
+          "heading": "Hackett's grading, the finer bedside scale",
+          "table": {
+            "cols": [
+              "Grade",
+              "Description"
+            ],
+            "rows": [
+              [
+                "0",
+                "Impalpable"
+              ],
+              [
+                "1",
+                "Palpable only on deep inspiration"
+              ],
+              [
+                "2",
+                "Palpable at the midpoint between umbilicus and costal margin"
+              ],
+              [
+                "3",
+                "Expands towards the umbilicus"
+              ],
+              [
+                "4",
+                "Crosses the umbilicus"
+              ],
+              [
+                "5",
+                "Reaches towards the pubic symphysis"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Percussion: three techniques, Castell's is the one to know cold",
+          "points": [
+            {
+              "t": "Castell's method.",
+              "d": "Percuss the lowest left intercostal space in the anterior axillary line (usually the 8th or 9th space), which should stay resonant on full inspiration. Dullness appearing on inspiration is a POSITIVE Castell's sign, sensitivity 82%, specificity 83%, the most sensitive clinical sign for splenomegaly."
+            },
+            {
+              "t": "Traube's space.",
+              "d": "The semilunar space bounded above by the 6th rib, below by the costal margin, laterally by the midaxillary line. Percuss medial to lateral; normally tympanic from the gastric air bubble. Obliteration suggests massive splenomegaly, a left pleural effusion, pericardial effusion, an enlarged left liver lobe, or a full stomach."
+            },
+            {
+              "t": "Nixon's method.",
+              "d": "With the patient in the right lateral position, percuss upward from the midpoint of the left costal margin. Dullness extending more than 8 cm above the costal margin indicates splenomegaly."
+            }
+          ],
+          "note": "Castell's sign is worth memorising precisely, because it is the single most sensitive bedside test for an early, not-yet-palpable splenomegaly."
+        },
+        {
+          "heading": "Telling spleen from left kidney at the bedside",
+          "table": {
+            "cols": [
+              "Feature",
+              "Spleen",
+              "Left kidney"
+            ],
+            "rows": [
+              [
+                "Direction of enlargement",
+                "Towards right iliac fossa",
+                "Towards left hypochondrium/iliac fossa"
+              ],
+              [
+                "Moves with respiration",
+                "Yes",
+                "No"
+              ],
+              [
+                "Can you get your fingers above it (between it and the costal margin)",
+                "No",
+                "Yes"
+              ],
+              [
+                "Bimanually palpable",
+                "No",
+                "Yes"
+              ],
+              [
+                "Ballotable",
+                "No",
+                "Yes"
+              ],
+              [
+                "Crosses the midline",
+                "Can",
+                "Never"
+              ],
+              [
+                "Notch",
+                "Present",
+                "Absent"
+              ],
+              [
+                "Band of colonic resonance in front, on percussion",
+                "Absent (dull)",
+                "Present (tympanic)"
+              ]
+            ]
+          },
+          "note": "No single feature is absolute on its own; use the whole table together, and the inability to insinuate fingers above the mass is usually the most reliable single discriminator."
+        }
+      ],
+      "pitfalls": [
+        "Palpating vigorously or repeatedly on a large, soft, or tender spleen (malaria, infectious mononucleosis, leukaemia) - this carries a real risk of splenic rupture. Palpate gently and stop once splenomegaly is confirmed; do not repeat the manoeuvre to 'double check'.",
+        "Concluding 'no splenomegaly' after only the classical method, without trying a second method or Castell's sign.",
+        "Forgetting that the spleen must be roughly doubled before it is palpable, so a normal examination does not exclude early enlargement, which is exactly what Castell's percussion is for.",
+        "Confusing spleen with left kidney by relying on only one discriminating feature."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many times must the spleen enlarge before it becomes palpable?",
+          "a": "About two to three times its normal size.",
+          "accept": [
+            "two",
+            "three",
+            "2",
+            "3"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Describe Castell's method and sign.",
+          "a": "Percuss the lowest left intercostal space (usually 8th or 9th) in the anterior axillary line; it should stay resonant on full inspiration. Dullness appearing on inspiration is a positive sign, and it is the most sensitive bedside test for splenomegaly.",
+          "accept": [
+            "intercostal",
+            "resonant",
+            "inspiration",
+            "dull"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Give three features that distinguish an enlarged spleen from an enlarged left kidney.",
+          "a": "The spleen moves with respiration and the kidney classically does not; you cannot get above the spleen but can above the kidney; the spleen is not bimanually palpable or ballotable while the kidney is; and the spleen has a notch and never crosses the midline behind, unlike the kidney.",
+          "accept": [
+            "respiration",
+            "above",
+            "bimanual",
+            "ballot",
+            "notch",
+            "midline"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 4,
+          "q": "Obliteration of Traube's space. Give two possible causes besides massive splenomegaly.",
+          "a": "A left-sided pleural effusion, a pericardial effusion, an enlarged left lobe of the liver, or a full stomach or fundic mass.",
+          "accept": [
+            "pleural",
+            "pericardial",
+            "liver",
+            "stomach",
+            "fundic"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "method",
+          "text": "Attempts at least two palpation methods before concluding impalpable"
+        },
+        {
+          "id": "percuss",
+          "text": "Uses Castell's percussion sign",
+          "critical": true
+        },
+        {
+          "id": "grade",
+          "text": "Grades any splenomegaly found and comments on crossing the midline"
+        }
+      ],
+      "media": [
+        "media.dia.spleenpalp",
+        "media.vid.spleenexam"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: spleen examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the spleen"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: spleen"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.gallbladder_kidney": {
+      "id": "skill.exam.gi.gallbladder_kidney",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Gallbladder and kidneys",
+      "oneLine": "Murphy's sign, Courvoisier's law, and the bimanual ballottement of a loin mass",
+      "why": "Both organs are missed for the same reason: neither is examined unless you deliberately look for it. Murphy's sign and Courvoisier's law are two of the most examined bedside findings in the whole abdominal case, and both are quick once you know where to feel and what to ask.",
+      "steps": [
+        {
+          "text": "GALLBLADDER: locate the point at the lateral edge of the rectus abdominis, near the tip of the right 9th costal margin."
+        },
+        {
+          "text": "Ask the patient to breathe in deeply while your fingers rest at that point; in acute cholecystitis, they will catch their breath abruptly as the inflamed gallbladder meets your fingers (Murphy's sign)."
+        },
+        {
+          "text": "LEFT KIDNEY: right hand anterior in the left lumbar region, left hand posterior in the left loin. Ask for a deep breath, press the posterior hand forward and the anterior hand backward, upward and inward."
+        },
+        {
+          "text": "RIGHT KIDNEY: mirror the technique, right hand posterior in the right loin, left hand anterior in the right lumbar region."
+        },
+        {
+          "text": "If a kidney is felt, confirm it is bimanually palpable and ballotable, pushed from one hand to the other."
+        }
+      ],
+      "normal": "Gallbladder not palpable, Murphy's sign negative, kidneys not palpable (the right lower pole may be felt in a thin, normal patient).",
+      "abnormal": "A palpable, tender gallbladder with a positive Murphy's sign; a palpable, ballotable kidney.",
+      "significance": "Murphy's sign, positive, points to acute cholecystitis. Courvoisier's law states that in a jaundiced patient, a palpable gallbladder makes a stone as the cause of obstruction unlikely, because a gallbladder chronically diseased by stones is usually too scarred to distend; a smoothly obstructing lesion such as a pancreatic head tumour is more likely.",
+      "teach": [
+        {
+          "heading": "Murphy's sign, precisely",
+          "body": "Position your fingers at the gallbladder point and ask for a deep breath. A positive sign is the patient CATCHING their breath, with a gasp, as the inflamed gallbladder descends onto your fingers, not simply reporting tenderness.",
+          "note": "Causes of a genuinely enlarged, palpable gallbladder include carcinoma of the head of the pancreas, common bile duct obstruction, a mucocele of the gallbladder, and gallbladder carcinoma itself."
+        },
+        {
+          "heading": "Courvoisier's law, and why it is taught as a rule",
+          "body": "In a jaundiced patient, if the gallbladder is palpable, it is UNLIKELY to be due to a common bile duct stone. Gallstone disease usually scars and shrinks the gallbladder over time, so it cannot distend even when the duct obstructs; a malignant, smoothly progressive obstruction, classically from the head of the pancreas, allows the gallbladder to distend freely and become palpable.",
+          "note": "This is a probabilistic rule of thumb, not an absolute law: it changes the odds, it does not exclude stones outright."
+        },
+        {
+          "heading": "Bimanual ballottement of the kidney",
+          "body": "The key manoeuvre is BALLOTTEMENT, using one hand to push the kidney towards the other and feeling it rebound, which is possible because perinephric fat allows the kidney to move freely within the retroperitoneum. A spleen or an enlarged liver cannot be ballotted this way.",
+          "note": "The right kidney's lower pole is commonly palpable even in a normal, thin patient; do not mistake this for pathology on its own."
+        }
+      ],
+      "pitfalls": [
+        "Recording tenderness alone as a positive Murphy's sign, rather than the characteristic catch in breathing.",
+        "Applying Courvoisier's law as an absolute rule rather than a probability.",
+        "Failing to demonstrate ballottement, and so mistaking a kidney for a different mass."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What exactly constitutes a positive Murphy's sign?",
+          "a": "The patient catches their breath with a gasp of pain as the inflamed gallbladder meets the examiner's fingers on inspiration.",
+          "accept": [
+            "catch",
+            "gasp",
+            "breath"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "State Courvoisier's law.",
+          "a": "In a jaundiced patient, a palpable gallbladder makes a common bile duct stone an unlikely cause of the obstruction.",
+          "accept": [
+            "stone",
+            "unlikely",
+            "jaundice"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "What manoeuvre confirms a mass is a kidney rather than an enlarged spleen or liver?",
+          "a": "Ballottement: pushing with one hand and feeling the mass rebound against the other, which is possible for a kidney because of its mobility within the perinephric fat but is not possible for the spleen or liver.",
+          "accept": [
+            "ballott",
+            "rebound"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "murphy",
+          "text": "Correctly elicits and interprets Murphy's sign"
+        },
+        {
+          "id": "ballot",
+          "text": "Attempts bimanual ballottement of both kidneys"
+        }
+      ],
+      "media": [
+        "media.gi.gbkidney.ballottement"
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: gallbladder and kidney"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: gallbladder and kidney"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.cld": {
+      "id": "skill.hx.gi.cld",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The chronic liver disease history",
+      "oneLine": "Alcohol, exposure and the four questions that catch decompensation",
+      "why": "A patient with cirrhosis rarely volunteers the diagnosis. The history has two separate jobs: finding the likely cause, which needs a direct and specific alcohol and exposure history, and screening for decompensation, which needs four targeted questions asked of every patient regardless of how well they look.",
+      "asks": [
+        {
+          "text": "Quantify alcohol precisely: what, how much, for how long, and when the last drink was. Do not accept 'socially'."
+        },
+        {
+          "text": "Risk for viral hepatitis: transfusions, injections with reused needles, tattoos, unprotected exposure, IV drug use, family history of liver disease or jaundice."
+        },
+        {
+          "text": "Abdominal distension: onset, rate of increase, and any leg swelling alongside it."
+        },
+        {
+          "text": "Jaundice: ever noticed yellow eyes or urine, and when."
+        },
+        {
+          "text": "Gastrointestinal bleed: vomiting blood, or black tarry stools, ever."
+        },
+        {
+          "text": "Altered sensorium: any confusion, day-night reversal of sleep, or a family member noticing personality change, however mild."
+        },
+        {
+          "text": "Drug history: any known hepatotoxic drug, herbal or unregulated medication use, and current diuretics if already diagnosed."
+        },
+        {
+          "text": "Weight and appetite: unintentional weight loss argues for malignancy rather than simple decompensation."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Alcohol history has to be quantified, not accepted as a category",
+          "body": "Ask for the type of drink, the daily quantity, and the duration in years, then convert to grams per day if you can. A vague 'occasional drinker' hides enormous variation; a precise quantity changes both the differential and how strongly you can attribute the disease to alcohol.",
+          "note": "Average alcohol consumption reported in cirrhotic men in published series is around 160 g a day; asking for an actual number, not a category, is what lets you compare a patient's history against that kind of benchmark."
+        },
+        {
+          "heading": "Four questions that must never be skipped",
+          "points": [
+            {
+              "t": "Distension.",
+              "d": "Onset and rate of increase distinguishes ascites (progressive over weeks) from an acute surgical abdomen."
+            },
+            {
+              "t": "Jaundice.",
+              "d": "New or worsening jaundice in a known cirrhotic often signals superadded injury: alcohol binge, hepatitis, or a tumour."
+            },
+            {
+              "t": "GI bleed.",
+              "d": "Ask directly. A patient may not connect black stools to their liver disease at all."
+            },
+            {
+              "t": "Altered sensorium.",
+              "d": "Hepatic encephalopathy in its earliest grade is a subtle personality change that only a family member notices; the patient themselves often cannot report it."
+            }
+          ],
+          "note": "These four map directly onto the major decompensating events: ascites, GI bleed, jaundice/hepatitis, and encephalopathy. Asking about all four, in every patient, is what stops decompensation being missed on a 'well-looking' outpatient visit."
+        }
+      ],
+      "pitfalls": [
+        "Accepting 'I drink socially' instead of a quantified history.",
+        "Never asking the family whether the patient's personality or sleep pattern has changed, which is where early encephalopathy is actually caught.",
+        "Forgetting to ask about a prior GI bleed, since a first variceal bleed can present exactly like this one."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the four questions that screen for decompensation in every chronic liver disease history.",
+          "a": "Abdominal distension, jaundice, GI bleeding, and altered sensorium/personality change.",
+          "accept": [
+            "distension",
+            "jaundice",
+            "bleed",
+            "sensorium",
+            "encephalopathy"
+          ],
+          "minMatch": 3
+        },
+        {
+          "level": 2,
+          "q": "Why ask a family member about personality change rather than only the patient?",
+          "a": "Early hepatic encephalopathy causes subtle changes in attention and behaviour that the patient themselves often cannot recognise or report, but a family member notices.",
+          "accept": [
+            "family",
+            "notice",
+            "subtle",
+            "personality"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient reports 'occasional' alcohol use. What do you do?",
+          "a": "Quantify precisely: the drink, the amount, the frequency and the duration, converted to an estimate of grams per day where possible, rather than accepting the vague category.",
+          "accept": [
+            "quantify",
+            "amount",
+            "duration",
+            "grams"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "alcohol",
+          "text": "Quantifies alcohol use rather than accepting a vague answer"
+        },
+        {
+          "id": "decompensation",
+          "text": "Screens all four decompensating events (ascites, jaundice, bleed, sensorium)",
+          "critical": true
+        },
+        {
+          "id": "exposure",
+          "text": "Asks about viral hepatitis risk exposures"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, history and risk factors"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: history taking"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.cld_stigmata": {
+      "id": "skill.exam.gi.cld_stigmata",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Peripheral stigmata of chronic liver disease",
+      "oneLine": "A head-to-hand survey that names the disease before the abdomen is even exposed",
+      "why": "Chronic liver disease announces itself outside the abdomen more often than in it. A deliberate survey of hands, chest, endocrine features and breath gathers most of its diagnostic weight before you have touched the liver at all, and several of the signs found here point towards a specific cause of the cirrhosis, not just the cirrhosis itself.",
+      "steps": [
+        {
+          "text": "Hands: look for palmar erythema (sparing the centre of the palm), leuconychia (white nails), clubbing, and Dupuytren's contracture."
+        },
+        {
+          "text": "Test for asterixis: extend both arms, dorsiflex the wrists, spread the fingers, and hold for 15 to 30 seconds, watching for an irregular flap."
+        },
+        {
+          "text": "Chest and trunk: examine the 'necklace' area above the nipples and the upper trunk for spider naevi; demonstrate one by compressing with a pinhead or glass slide and watching it fill from the centre outward on release."
+        },
+        {
+          "text": "Endocrine: look for gynaecomastia (a palpable subareolar nodule, not just fat), diminished body and axillary hair, and ask about testicular atrophy in men or menstrual irregularity in women."
+        },
+        {
+          "text": "Face: parotid and lacrimal gland enlargement, and smell the breath for fetor hepaticus, a sweet, pungent odour."
+        },
+        {
+          "text": "Look for jaundice in the sclera in good light, and for signs of the specific aetiology: tattoo marks (hepatitis B/C), xanthelasma (primary biliary cirrhosis), or skin hyperpigmentation (haemochromatosis)."
+        }
+      ],
+      "normal": "No spider naevi, palmar erythema, gynaecomastia, Dupuytren's contracture, or asterixis; breath unremarkable.",
+      "abnormal": "Spider naevi in the SVC-drained territory, palmar erythema sparing the palm centre, gynaecomastia, testicular atrophy, Dupuytren's contracture, asterixis, fetor hepaticus, or parotid enlargement.",
+      "significance": "Each stigma reflects a specific mechanism: spider naevi and palmar erythema from hyperoestrogenism due to reduced hepatic clearance of androstenedione; asterixis from encephalopathy; fetor hepaticus from portosystemic shunting. Together they turn a suspicion into a syndrome, and some point towards a specific cause.",
+      "teach": [
+        {
+          "heading": "Why so many of these signs are hormonal",
+          "body": "A cirrhotic liver clears androstenedione poorly, so more of it is converted peripherally to oestrogen. The resulting hyperoestrogenic state produces spider naevi, palmar erythema, gynaecomastia and testicular atrophy as one linked group, not four separate findings to memorise independently.",
+          "note": "Spider naevi occur only in the territory drained by the superior vena cava (head, neck, upper chest, arms) because that is where the physiology plays out; a lesion below the umbilicus is not a spider naevus."
+        },
+        {
+          "heading": "Demonstrating a spider naevus correctly",
+          "body": "Compress the central arteriole with a pinhead or the edge of a glass slide; the whole lesion blanches, and on release it refills from the centre outward, in that order. Fewer than a handful can occur normally (about 2 percent of healthy adults), so it is the NUMBER and the associated findings, not one lesion alone, that make the case."
+        },
+        {
+          "heading": "Testing for asterixis properly",
+          "body": "Ask the patient to extend both arms, dorsiflex the wrists fully and spread the fingers, then hold the position. Asterixis is a brief, irregular loss of tone at the wrist, a 'flap', from momentary silent periods in an otherwise tonically active muscle, not a rhythmic tremor. It can be demonstrated at the hip as well, by letting the knees fall apart with the patient supine and the feet flat.",
+          "note": "Asterixis is not specific to liver disease; it also occurs in uraemia, respiratory failure, and several drugs including phenytoin. Context decides the interpretation."
+        },
+        {
+          "heading": "Signs that point to a specific cause",
+          "table": {
+            "cols": [
+              "Finding",
+              "Points towards"
+            ],
+            "rows": [
+              [
+                "Parotid enlargement, Dupuytren's contracture",
+                "Alcohol"
+              ],
+              [
+                "Tattoo marks alongside jaundice",
+                "Hepatitis B or C"
+              ],
+              [
+                "Central obesity, features of metabolic syndrome",
+                "NASH"
+              ],
+              [
+                "Xanthelasma, obstructive jaundice pattern",
+                "Primary biliary cirrhosis"
+              ],
+              [
+                "Skin hyperpigmentation with organomegaly and diabetes",
+                "Haemochromatosis"
+              ],
+              [
+                "Emphysema alongside cirrhosis",
+                "Alpha-1 antitrypsin deficiency"
+              ]
+            ]
+          },
+          "note": "This table is worth learning as a set, since 'signs suggesting the cause' is a favourite viva question distinct from 'signs of cirrhosis' in general."
+        }
+      ],
+      "pitfalls": [
+        "Counting a single small spider naevus as diagnostic; a few can occur normally, and it is the pattern and number that matter.",
+        "Missing gynaecomastia because only the chest was glanced at rather than palpated for a true subareolar nodule.",
+        "Not testing asterixis in a patient who looks entirely well; grade 1 encephalopathy can be missed on inspection alone.",
+        "Failing to look for the signs that suggest a specific aetiology, and so stopping at 'cirrhosis' without a cause."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where on the body do spider naevi classically occur, and why there specifically?",
+          "a": "In the territory drained by the superior vena cava: head, neck, upper chest and arms, above the nipple line, because that is the physiological pattern of the hyperoestrogenic vascular change.",
+          "accept": [
+            "superior vena cava",
+            "svc",
+            "above the nipple",
+            "neck",
+            "upper chest"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Explain the mechanism linking spider naevi, palmar erythema and gynaecomastia.",
+          "a": "All three follow from hyperoestrogenism, caused by reduced hepatic clearance of androstenedione, its peripheral precursor, so more is converted to oestrogen.",
+          "accept": [
+            "oestrogen",
+            "estrogen",
+            "androstenedione",
+            "clearance"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "How do you correctly elicit asterixis?",
+          "a": "Extend both arms with the wrists dorsiflexed and fingers spread, and hold the position for around 15 to 30 seconds, watching for an irregular flap from brief lapses of tone.",
+          "accept": [
+            "dorsiflex",
+            "extend",
+            "hold",
+            "flap"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 4,
+          "q": "A patient with cirrhosis has parotid enlargement and Dupuytren's contracture. What does this pattern suggest about the aetiology, and why is this different from a random collection of signs?",
+          "a": "This combination is classically seen in alcohol-related liver disease, and recognising it as a set (rather than as isolated findings) is what lets the stigmata point towards a specific cause rather than only confirming that liver disease is present.",
+          "accept": [
+            "alcohol",
+            "combination",
+            "set",
+            "pattern"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [
+        {
+          "id": "hands",
+          "text": "Examines hands for palmar erythema, leuconychia, clubbing and Dupuytren's"
+        },
+        {
+          "id": "asterixis",
+          "text": "Correctly elicits asterixis",
+          "critical": true
+        },
+        {
+          "id": "naevi",
+          "text": "Looks for and correctly demonstrates spider naevi in the SVC territory"
+        },
+        {
+          "id": "endocrine",
+          "text": "Comments on endocrine features (gynaecomastia, hair loss)"
+        }
+      ],
+      "media": [
+        "media.img.spidernaevus",
+        "media.vid.asterixis"
+      ],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: examination"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Cirrhosis, physical findings"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: general examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.ascites": {
+      "id": "skill.hx.gi.ascites",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The ascites history",
+      "oneLine": "Onset, rate, and the four questions that separate cardiac, hepatic, renal and malignant causes",
+      "why": "Ascites is a sign, not a diagnosis, and the history is where the four broad causes, cardiac, hepatic, renal and malignant, first start to separate, well before the abdomen is examined or a single test is sent.",
+      "asks": [
+        {
+          "text": "Onset and rate of increase: sudden versus gradual over weeks."
+        },
+        {
+          "text": "Which came first, leg swelling or abdominal swelling? Leg swelling first suggests a cardiac or renal cause; abdominal swelling first suggests a hepatic or malignant one."
+        },
+        {
+          "text": "Breathlessness or orthopnoea alongside the swelling, suggesting a cardiac cause."
+        },
+        {
+          "text": "Known liver disease, alcohol use, or risk factors for chronic hepatitis."
+        },
+        {
+          "text": "Frothy urine, or known kidney disease, suggesting a nephrotic cause."
+        },
+        {
+          "text": "Weight loss, loss of appetite, or a known malignancy, past or present."
+        },
+        {
+          "text": "Fever, night sweats, or contact with tuberculosis."
+        },
+        {
+          "text": "Menstrual history and any pelvic symptoms in a woman, given ovarian pathology as a cause."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The order swelling appears in is a genuine clue",
+          "body": "In cardiac and renal disease, dependent oedema of the legs typically appears before or alongside ascites, because the driving pressure is systemic venous or generalised fluid retention. In cirrhosis and in malignant or tuberculous peritoneal disease, the abdomen often distends first, sometimes for weeks, before any leg swelling appears at all.",
+          "note": "This single question, asked precisely, does real discriminating work before you have examined anything."
+        },
+        {
+          "heading": "Four causes, four question sets",
+          "table": {
+            "cols": [
+              "Suspected cause",
+              "Key questions"
+            ],
+            "rows": [
+              [
+                "Cardiac",
+                "Orthopnoea, paroxysmal nocturnal dyspnoea, leg swelling first, known heart disease"
+              ],
+              [
+                "Hepatic",
+                "Alcohol, jaundice, known liver disease, viral hepatitis risk"
+              ],
+              [
+                "Renal (nephrotic)",
+                "Frothy urine, facial puffiness on waking, known kidney disease"
+              ],
+              [
+                "Malignant / tuberculous",
+                "Weight loss, appetite, fever, night sweats, TB contact, known malignancy"
+              ]
+            ]
+          }
+        }
+      ],
+      "pitfalls": [
+        "Assuming all ascites is hepatic without asking about orthopnoea or frothy urine.",
+        "Not asking which swelling, leg or abdomen, came first.",
+        "Missing a B symptom pattern (fever, weight loss, night sweats) that should raise tuberculosis or malignancy."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single history question helps separate a cardiac/renal cause of ascites from a hepatic/malignant one?",
+          "a": "Whether leg swelling or abdominal swelling appeared first: legs first suggests cardiac or renal disease, abdomen first suggests hepatic or malignant disease.",
+          "accept": [
+            "leg",
+            "first",
+            "abdomen"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Name three symptoms that would make you suspect a malignant or tuberculous cause of ascites rather than cirrhosis.",
+          "a": "Weight loss, loss of appetite, fever, night sweats, or known TB contact.",
+          "accept": [
+            "weight loss",
+            "fever",
+            "night sweats",
+            "appetite"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "Why ask specifically about frothy urine in a patient with new ascites?",
+          "a": "It suggests heavy proteinuria and a nephrotic cause of ascites through hypoalbuminaemia, which needs a very different workup from a hepatic cause.",
+          "accept": [
+            "proteinuria",
+            "nephrotic",
+            "protein"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "onset",
+          "text": "Establishes onset and rate of increase"
+        },
+        {
+          "id": "order",
+          "text": "Asks which swelling, leg or abdomen, came first",
+          "critical": true
+        },
+        {
+          "id": "causes",
+          "text": "Screens cardiac, hepatic, renal and malignant/TB causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Ascites, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: ascites history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.splenomegaly": {
+      "id": "skill.hx.gi.splenomegaly",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The splenomegaly history",
+      "oneLine": "Fever, bleeding, and B symptoms: the three question sets behind an enlarged spleen",
+      "why": "A palpable spleen has already doubled or tripled in size, so it is never a trivial finding, and the history exists to sort it into infective, haematological, or portal hypertensive before a single test is sent.",
+      "asks": [
+        {
+          "text": "Fever, its pattern and duration, and any travel to or residence in a malaria- or kala-azar-endemic area."
+        },
+        {
+          "text": "Easy bruising, bleeding gums, or prolonged bleeding after minor cuts, suggesting thrombocytopenia."
+        },
+        {
+          "text": "Loss of weight, loss of appetite, drenching night sweats, and any lump felt elsewhere (lymph nodes), suggesting a lymphoproliferative cause."
+        },
+        {
+          "text": "Joint pains, skin rash, or photosensitivity, suggesting a connective tissue disease such as SLE or rheumatoid arthritis."
+        },
+        {
+          "text": "Alcohol use, jaundice, or known liver disease, suggesting a portal hypertensive cause."
+        },
+        {
+          "text": "Left upper quadrant pain radiating to the left shoulder, suggesting a splenic infarct."
+        },
+        {
+          "text": "Any known chronic haemolytic disorder, or a family history of one."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Three question sets, three categories",
+          "table": {
+            "cols": [
+              "Category",
+              "Ask about"
+            ],
+            "rows": [
+              [
+                "Infective",
+                "Fever pattern, travel/endemic exposure, contact with TB or infective endocarditis risk"
+              ],
+              [
+                "Haematological",
+                "Bruising, bleeding, B symptoms (weight loss, night sweats), lymph node swelling"
+              ],
+              [
+                "Portal hypertensive",
+                "Alcohol, jaundice, known liver disease, GI bleeding"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Left shoulder tip pain is a specific clue",
+          "body": "Pain in the left upper quadrant radiating to the tip of the left shoulder (Kehr's sign) is classically taught as a sign of splenic rupture (blood irritating the diaphragm), and should prompt urgent evaluation for haemoperitoneum in the right context (trauma, or a known fragile spleen); the same referred-pain mechanism can also occur with a splenic infarct. Ask about it directly rather than leaving it to a general pain question."
+        }
+      ],
+      "pitfalls": [
+        "Asking only about fever and missing the bleeding/bruising questions that point to a haematological cause.",
+        "Not asking about B symptoms, which are the single most useful screen for a lymphoproliferative cause.",
+        "Forgetting to ask about travel or residence in an endemic area for malaria or kala-azar."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three broad categories a splenomegaly history is trying to sort between.",
+          "a": "Infective, haematological (including lymphoproliferative), and portal hypertensive causes.",
+          "accept": [
+            "infect",
+            "haematolog",
+            "hematolog",
+            "portal"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "What are 'B symptoms' and why ask about them specifically?",
+          "a": "Fever, drenching night sweats and unintentional weight loss; their presence raises suspicion of a lymphoproliferative malignancy such as lymphoma or leukaemia.",
+          "accept": [
+            "fever",
+            "night sweats",
+            "weight loss",
+            "lymphoma"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient with splenomegaly reports pain radiating to the left shoulder tip. What does this suggest?",
+          "a": "Kehr's sign, diaphragmatic irritation classically taught as a marker of splenic rupture, though it can also occur with a splenic infarct - either way it should prompt urgent evaluation.",
+          "accept": [
+            "rupture",
+            "kehr",
+            "diaphragm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "fever",
+          "text": "Explores fever pattern and endemic exposure"
+        },
+        {
+          "id": "bleeding",
+          "text": "Asks about bruising/bleeding tendency",
+          "critical": true
+        },
+        {
+          "id": "bsymptoms",
+          "text": "Screens for B symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Splenomegaly, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: splenomegaly history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.hepatomegaly": {
+      "id": "skill.hx.gi.hepatomegaly",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The hepatomegaly history",
+      "oneLine": "Tender or painless is the first fork, and it separates the two differentials cleanly",
+      "why": "An enlarged liver divides early, on history alone, into tender and painless causes, and those two groups barely overlap. Asking about pain first, before anything else, is the single most efficient question in this short case.",
+      "asks": [
+        {
+          "text": "Right upper quadrant pain or discomfort: present or absent, and its character."
+        },
+        {
+          "text": "Jaundice, dark urine, or pale stools."
+        },
+        {
+          "text": "Fever, and its pattern and duration."
+        },
+        {
+          "text": "Alcohol use, quantified."
+        },
+        {
+          "text": "Weight loss and appetite."
+        },
+        {
+          "text": "Known malignancy elsewhere, past or present."
+        },
+        {
+          "text": "Breathlessness, orthopnoea, or known heart disease, suggesting a congestive cause."
+        },
+        {
+          "text": "Travel or residence in a malaria- or kala-azar-endemic area."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Tender versus painless splits the differential immediately",
+          "table": {
+            "cols": [
+              "Tender hepatomegaly",
+              "Painless hepatomegaly"
+            ],
+            "rows": [
+              [
+                "Right heart failure",
+                "Fatty liver"
+              ],
+              [
+                "Acute hepatitis",
+                "Infiltrative disease (amyloid, lymphoma)"
+              ],
+              [
+                "Liver abscess",
+                "Malaria"
+              ],
+              [
+                "Hepatoma (can be either)",
+                "Leukaemia"
+              ],
+              [
+                "Hepatic infarcts",
+                "Chronic (burnt-out) cirrhosis, if palpable"
+              ],
+              [
+                "Acute Budd-Chiari syndrome",
+                ""
+              ]
+            ]
+          },
+          "note": "This single question, asked first, does more work than any other in the hepatomegaly short case."
+        },
+        {
+          "heading": "Fever plus tenderness plus a travel or exposure history",
+          "body": "This combination should specifically raise a liver abscess (amoebic or pyogenic) or malaria, both of which are common, treatable causes of a tender liver in an endemic setting and are frequently missed if the history stops at 'fever'."
+        }
+      ],
+      "pitfalls": [
+        "Not asking specifically whether the liver enlargement is tender, and so missing the fastest branch point in the whole differential.",
+        "Skipping travel and endemic exposure history in a febrile patient with a tender liver.",
+        "Not asking about a known primary malignancy elsewhere when painless hepatomegaly is found."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What single history question most efficiently splits the hepatomegaly differential?",
+          "a": "Whether the liver enlargement is tender or painless.",
+          "accept": [
+            "tender",
+            "painless",
+            "pain"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three causes of TENDER hepatomegaly.",
+          "a": "Right heart failure, acute hepatitis, liver abscess, hepatoma, hepatic infarcts, acute Budd-Chiari syndrome.",
+          "accept": [
+            "heart failure",
+            "hepatitis",
+            "abscess",
+            "hepatoma",
+            "budd-chiari"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A febrile patient has a tender liver and a history of travel to a rural area. What two treatable causes should you actively consider?",
+          "a": "Liver abscess (amoebic or pyogenic) and malaria.",
+          "accept": [
+            "abscess",
+            "malaria"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "tenderness",
+          "text": "Asks explicitly whether the enlargement is tender or painless",
+          "critical": true
+        },
+        {
+          "id": "systemic",
+          "text": "Screens jaundice, fever, weight loss and cardiac symptoms"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Hepatomegaly, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: hepatomegaly history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.jaundice": {
+      "id": "skill.hx.gi.jaundice",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "The jaundice history",
+      "oneLine": "Urine, stools and pruritus separate the three mechanisms before any test is sent",
+      "why": "Jaundice is a laboratory finding you can see. The history's job is to sort it into prehepatic, hepatic, or posthepatic using three questions that carry most of the discriminating power: the colour of the urine, the colour of the stool, and whether there is itching.",
+      "asks": [
+        {
+          "text": "Urine colour: normal, or dark/tea-coloured."
+        },
+        {
+          "text": "Stool colour: normal, or pale/clay-coloured."
+        },
+        {
+          "text": "Itching (pruritus): present or absent, and its severity."
+        },
+        {
+          "text": "Abdominal pain, its site and character, and any fever with chills."
+        },
+        {
+          "text": "Alcohol use, quantified, and any known chronic liver disease."
+        },
+        {
+          "text": "Risk factors for viral hepatitis: transfusion, injections, tattoos, unprotected exposure."
+        },
+        {
+          "text": "Drug history, including any new medication, herbal remedy, or unregulated supplement in the preceding weeks."
+        },
+        {
+          "text": "Family history of jaundice, anaemia, or gallstones, and, in a child or young adult, of early jaundice with a similar pattern."
+        },
+        {
+          "text": "Contact with jaundice, contaminated food or water, in the preceding weeks."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Three questions, most of the discriminating power",
+          "table": {
+            "cols": [
+              "Finding",
+              "Mechanism suggested"
+            ],
+            "rows": [
+              [
+                "Normal urine and stool, no pruritus",
+                "Prehepatic (haemolytic): unconjugated bilirubin is not water-soluble and is not excreted in urine"
+              ],
+              [
+                "Dark urine, normal stool, no or mild pruritus",
+                "Hepatic: some conjugated bilirubin is made and excreted in urine, biliary flow is not fully obstructed"
+              ],
+              [
+                "Dark urine, pale stool, marked pruritus",
+                "Posthepatic (obstructive): conjugated bilirubin cannot reach the gut, so stool loses its colour and bile salts accumulate in the skin"
+              ]
+            ]
+          },
+          "note": "This table is worth being able to reproduce cold; it is the single most examined piece of reasoning in the whole jaundice short case."
+        },
+        {
+          "heading": "Pain and fever add the surgical dimension",
+          "body": "Colicky right upper quadrant pain with fever and rigors (Charcot's triad, when jaundice is added as the third element) points towards ascending cholangitis from a stone or stricture, and is a different urgency from painless progressive jaundice, which should raise a malignant biliary obstruction instead."
+        }
+      ],
+      "pitfalls": [
+        "Asking 'any jaundice symptoms' as a single vague question instead of urine, stool and pruritus specifically.",
+        "Not asking about new drugs or herbal remedies, a common and reversible cause that is easy to miss.",
+        "Missing Charcot's triad in a patient with painful, febrile jaundice."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name the three history questions that carry the most weight in separating the mechanisms of jaundice.",
+          "a": "Urine colour, stool colour, and the presence of pruritus.",
+          "accept": [
+            "urine",
+            "stool",
+            "pruritus",
+            "itch"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient has dark urine, pale stools and marked itching. Which mechanism does this suggest, and why?",
+          "a": "Posthepatic (obstructive) jaundice: conjugated bilirubin cannot reach the gut, so the stool loses its normal colour, and accumulating bile salts in the skin cause the itching.",
+          "accept": [
+            "posthepatic",
+            "obstructive",
+            "conjugated"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does prehepatic (haemolytic) jaundice typically NOT cause dark urine?",
+          "a": "The excess bilirubin is unconjugated and not water-soluble, so it is not filtered into the urine even though the serum level is raised.",
+          "accept": [
+            "unconjugated",
+            "water-soluble",
+            "not filtered"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "triad",
+          "text": "Asks specifically about urine colour, stool colour and pruritus",
+          "critical": true
+        },
+        {
+          "id": "pain_fever",
+          "text": "Explores pain and fever pattern for a surgical/obstructive cause"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, approach to the patient"
+        },
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: jaundice history"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.gen.jaundice": {
+      "id": "skill.gen.jaundice",
+      "kind": "general_exam",
+      "system": "abdomen",
+      "title": "Examining for jaundice",
+      "oneLine": "The sclera in daylight, and what its exact shade is trying to tell you",
+      "why": "Jaundice is graded and even sub-classified by simple inspection, done correctly: in adequate natural light, at the sclera first, because the sclera shows colour change before the skin does and is unaffected by skin pigmentation.",
+      "steps": [
+        {
+          "text": "Examine in good natural daylight wherever possible; artificial light, especially fluorescent or yellow-toned lighting, distorts colour judgement."
+        },
+        {
+          "text": "Ask the patient to look down while you gently retract the upper eyelid, exposing the sclera, and inspect it against the white of your own eye or a white background."
+        },
+        {
+          "text": "Then inspect the undersurface of the tongue and the hard palate, which are the next most sensitive sites."
+        },
+        {
+          "text": "Finally inspect the skin generally, noting the distribution and any additional colour: lemon-yellow, dark yellow, or greenish."
+        },
+        {
+          "text": "Grade as mild (sclera only) or moderate (skin also involved); note that no single standard grading scale is universally used, and describing what you actually see is preferred to forcing a grade."
+        }
+      ],
+      "normal": "No scleral or skin yellowing.",
+      "abnormal": "Scleral icterus, with or without generalised skin yellowing.",
+      "significance": "Clinically detectable jaundice requires a serum bilirubin of roughly 2 to 3 mg/dL or more; the scleral colour itself gives a further clue to the mechanism.",
+      "teach": [
+        {
+          "heading": "Why the sclera first",
+          "body": "The sclera is white, avascular connective tissue with a high affinity for bilirubin and no confounding skin pigment, so it shows colour change earlier and more reliably than skin, particularly in patients with darker skin tones where skin yellowing is harder to judge."
+        },
+        {
+          "heading": "Scleral colour is itself a clue",
+          "table": {
+            "cols": [
+              "Scleral colour",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Lemon yellow",
+                "Most likely haemolytic (prehepatic) jaundice"
+              ],
+              [
+                "Dark yellow",
+                "Obstructive (posthepatic) jaundice"
+              ],
+              [
+                "Greenish dark yellow",
+                "Longstanding obstructive jaundice, from oxidation of bilirubin to biliverdin"
+              ]
+            ]
+          },
+          "note": "This is a genuine bedside clue, though never a substitute for the urine/stool/pruritus history and the actual liver function tests."
+        }
+      ],
+      "pitfalls": [
+        "Examining under artificial or yellow-toned lighting and over- or under-calling jaundice as a result.",
+        "Stopping at the sclera and never checking the undersurface of the tongue, which is useful when scleral findings are equivocal.",
+        "Treating the presence of jaundice as itself a diagnosis rather than a sign needing a mechanism."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Where should jaundice be looked for first, and why?",
+          "a": "The sclera, because it is white avascular tissue with no confounding skin pigment and shows colour change earlier than skin.",
+          "accept": [
+            "sclera",
+            "avascular",
+            "pigment"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Roughly what serum bilirubin is needed before jaundice becomes clinically detectable?",
+          "a": "Around 2 to 3 mg/dL.",
+          "accept": [
+            "2",
+            "3"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient's sclera is described as lemon-yellow. What mechanism does this suggest, and how confident should you be in that alone?",
+          "a": "It suggests a haemolytic (prehepatic) cause, but scleral colour is a soft clue only and must be confirmed with the urine/stool/pruritus history and liver function tests, never relied on alone.",
+          "accept": [
+            "haemolytic",
+            "prehepatic",
+            "soft clue",
+            "confirm"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "light",
+          "text": "Examines in adequate natural light"
+        },
+        {
+          "id": "sclera",
+          "text": "Checks sclera before skin",
+          "critical": true
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "General examination: jaundice"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "General examination: jaundice"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Jaundice, evaluation"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.dre": {
+      "id": "skill.exam.gi.dre",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Digital rectal examination",
+      "oneLine": "Sphincter tone, the prostate, and what is on the glove",
+      "why": "A DRE that is never performed cannot find what it is looking for. It is skipped more often than any other part of the abdominal examination, yet it answers real questions a history alone cannot: is there fresh or altered blood, is the sphincter intact, is the prostate benign or suspicious, and is there a low rectal mass within reach of a finger.",
+      "steps": [
+        {
+          "text": "Explain the examination clearly, obtain explicit consent, and offer a chaperone regardless of the patient's or examiner's sex."
+        },
+        {
+          "text": "Position the patient in the left lateral position, hips and knees flexed, buttocks at the edge of the bed."
+        },
+        {
+          "text": "Inspect the perianal skin first: for fissures, external haemorrhoids, fistulae, skin tags, or a visible mass, before touching the patient."
+        },
+        {
+          "text": "Lubricate a gloved index finger and rest it on the anal margin; ask the patient to bear down gently, then insert slowly, following the natural posterior curve of the anal canal."
+        },
+        {
+          "text": "Assess resting sphincter tone, then ask the patient to squeeze around your finger to assess voluntary tone."
+        },
+        {
+          "text": "Sweep the finger circumferentially, feeling all quadrants of the rectal wall for a mass, and anteriorly for the prostate (male) or cervix (female)."
+        },
+        {
+          "text": "In a male patient, assess the prostate specifically: size, surface (smooth or nodular), consistency (firm or hard), symmetry, and whether the median sulcus is preserved."
+        },
+        {
+          "text": "Withdraw and inspect the glove: for stool colour and consistency, fresh blood, melaena, or mucus."
+        }
+      ],
+      "normal": "Normal sphincter tone. No mass, fissure, or haemorrhoid felt. Prostate (if assessed) smooth, firm, symmetrical, non-tender, with the median sulcus palpable. Glove clean or with normal-coloured stool, no blood.",
+      "abnormal": "Reduced sphincter tone (a cord-compression or cauda equina red flag). A hard, irregular, asymmetric prostate with the sulcus obliterated. A palpable rectal mass. Fresh blood, melaena, or mucus on the glove.",
+      "significance": "This single examination answers several different questions depending on why it was performed: sphincter tone in a patient with a possible cord or cauda equina lesion, a mass or blood in a patient with a change in bowel habit or PR bleeding, and the prostate's surface and consistency in a man with urinary symptoms. Read the finding in the context of why you did the test, not as a single generic 'PR exam normal/abnormal'.",
+      "teach": [
+        {
+          "heading": "Benign prostatic hyperplasia versus prostate cancer, by feel",
+          "table": {
+            "cols": [
+              "",
+              "BPH",
+              "Cancer"
+            ],
+            "rows": [
+              [
+                "Surface",
+                "Smooth",
+                "Nodular, irregular"
+              ],
+              [
+                "Consistency",
+                "Firm, rubbery",
+                "Hard, stony"
+              ],
+              [
+                "Symmetry",
+                "Symmetrically enlarged",
+                "Often asymmetric"
+              ],
+              [
+                "Median sulcus",
+                "Preserved",
+                "May be obliterated"
+              ]
+            ]
+          },
+          "note": "DRE alone is not sensitive enough to exclude prostate cancer; a suspicious feel is an indication for further workup (PSA, imaging, biopsy), not a diagnosis on its own."
+        },
+        {
+          "heading": "Sphincter tone is a cord-compression red flag, not just a bowel-habit check",
+          "body": "In a patient with back pain and leg weakness, reduced anal tone plus saddle sensory loss and urinary retention is cauda equina syndrome until proven otherwise - a surgical emergency needing urgent imaging, not a routine finding to note and move on from.",
+          "note": "This links directly to the sphincter-history question already taught in the cord-compression module - the exam finding and the history question are testing the same red flag."
+        }
+      ],
+      "pitfalls": [
+        "Skipping the examination altogether because it is uncomfortable to perform or to ask for - a change in bowel habit, PR bleeding, or a possible cord lesion cannot be safely assessed without it.",
+        "Not offering a chaperone, or not explaining the examination clearly before starting.",
+        "Reporting 'DRE normal' without stating what was actually assessed (tone, mass, prostate, blood) - a generic normal tells the next reader nothing.",
+        "Missing reduced sphincter tone in a patient with cord compression, because the exam was rushed or was not linked back to the sphincter-history question."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What must you obtain before performing a digital rectal examination, beyond consent for the exam itself?",
+          "a": "An offer of a chaperone, regardless of the sex of the patient or examiner.",
+          "accept": [
+            "chaperone"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A prostate feels hard, irregular, and asymmetric with the median sulcus obliterated. What does this suggest, versus a smooth, firm, symmetrically enlarged prostate?",
+          "a": "A hard, irregular, asymmetric prostate with the sulcus obliterated raises suspicion of prostate cancer and needs further workup; a smooth, firm, symmetrically enlarged prostate is the classic feel of benign prostatic hyperplasia.",
+          "accept": [
+            "cancer",
+            "malignant",
+            "bph",
+            "benign"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "In a patient with back pain and leg weakness, why is sphincter tone on DRE assessed urgently rather than left for a routine review?",
+          "a": "Reduced anal tone, together with saddle sensory loss and urinary retention, points to cauda equina syndrome, a surgical emergency needing urgent imaging and decompression, not a routine finding.",
+          "accept": [
+            "cauda equina",
+            "emergency",
+            "urgent"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "consent",
+          "text": "Explains the examination and obtains consent, offering a chaperone",
+          "critical": true
+        },
+        {
+          "id": "tone",
+          "text": "Assesses resting and voluntary sphincter tone"
+        },
+        {
+          "id": "glove",
+          "text": "Inspects the glove for blood, melaena, or mucus"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: digital rectal examination"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: rectal examination"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: per rectal examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.exam.gi.hernia": {
+      "id": "skill.exam.gi.hernia",
+      "kind": "exam",
+      "system": "abdomen",
+      "title": "Examination of a hernia",
+      "oneLine": "Site, reducibility, cough impulse, and the emergency features that change the plan",
+      "why": "Most of what matters in a hernia examination is not naming the swelling but answering one question fast: is this reducible and asymptomatic, or is it irreducible, obstructed, or strangulated. The second group is a surgical emergency, and missing it because the exam stopped at 'cough impulse present' is a real and avoidable error.",
+      "steps": [
+        {
+          "text": "Inspect with the patient STANDING first, since a small hernia may reduce and disappear when lying flat."
+        },
+        {
+          "text": "Note the site, size, shape, and whether the overlying skin is normal, red, or discoloured."
+        },
+        {
+          "text": "Ask the patient to cough, or to strain, and watch for an expansile impulse at the swelling."
+        },
+        {
+          "text": "Palpate: define the swelling's borders, its consistency, and whether it is tender."
+        },
+        {
+          "text": "Attempt gentle reduction (only if not tender, not red, and not suspected to be strangulated): ask whether it goes back on its own lying down, or reduce it gently with sustained pressure."
+        },
+        {
+          "text": "For an inguinal hernia: after reduction, occlude the deep inguinal ring (midpoint of the inguinal ligament) with a finger and ask the patient to cough again. Controlled by occlusion, it is INDIRECT; still appearing despite occlusion, it is DIRECT."
+        },
+        {
+          "text": "Determine the relationship to the pubic tubercle: above and medial is inguinal; below and lateral is femoral."
+        },
+        {
+          "text": "Auscultate over the swelling for bowel sounds, which supports bowel as the contents."
+        },
+        {
+          "text": "Examine the contralateral side and the rest of the abdomen, and always complete the examination by examining both testes when assessing a groin swelling in a male."
+        }
+      ],
+      "normal": "No swelling on standing or with cough/strain. If a hernia is present but this is a screening exam, no reducible or expansile swelling is felt.",
+      "abnormal": "A swelling with an expansile cough impulse, reducible or otherwise. Tenderness, redness of the overlying skin, or a swelling that will not reduce all point towards a complication rather than a simple reducible hernia.",
+      "significance": "The occlusion test at the deep ring separates indirect from direct inguinal hernia; the relationship to the pubic tubercle separates inguinal from femoral. Both matter for planning surgery, but neither matters as much as first recognising a complicated hernia, which changes the plan from elective review to same-day surgical assessment.",
+      "teach": [
+        {
+          "heading": "Irreducible, obstructed, strangulated: escalating emergencies, not one category",
+          "table": {
+            "cols": [
+              "",
+              "Irreducible",
+              "Obstructed",
+              "Strangulated"
+            ],
+            "rows": [
+              [
+                "Reduces?",
+                "No, but otherwise well",
+                "No",
+                "No"
+              ],
+              [
+                "Bowel obstruction?",
+                "No",
+                "Yes - vomiting, distension, absolute constipation",
+                "Yes, plus vascular compromise"
+              ],
+              [
+                "Overlying skin",
+                "Normal",
+                "Normal or mildly tender",
+                "Red, tense, exquisitely tender"
+              ],
+              [
+                "Urgency",
+                "Urgent surgical review",
+                "Emergency",
+                "Immediate emergency"
+              ]
+            ]
+          },
+          "note": "A strangulated hernia is a surgical emergency: the bowel's blood supply is compromised and will become gangrenous if not operated on promptly. Do NOT attempt to forcibly reduce a tender, red, irreducible hernia - this can push non-viable or perforated bowel back into the abdomen."
+        },
+        {
+          "heading": "Indirect versus direct, by the occlusion test",
+          "body": "An INDIRECT inguinal hernia follows the inguinal canal through the deep ring, so occluding the deep ring with a finger controls it, and it does not reappear on coughing until the finger is released. A DIRECT hernia bulges straight through a weakness in the posterior wall (Hesselbach's triangle), medial to the inferior epigastric vessels, so it reappears despite occlusion of the deep ring."
+        }
+      ],
+      "pitfalls": [
+        "Examining only lying down, which can miss a hernia that reduces spontaneously when supine.",
+        "Attempting to reduce a tender, red, or clearly complicated hernia - this risks reducing non-viable bowel and masking the problem, not fixing it.",
+        "Forgetting to examine both testes in a male patient with a groin swelling, which can hide a testicular cause of the swelling or an associated finding.",
+        "Stopping at 'cough impulse present, likely hernia' without checking for the specific emergency features (tenderness, redness, irreducibility, obstruction) that change the urgency of referral."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What is the single examination finding that most strongly suggests a swelling is a hernia?",
+          "a": "An expansile cough impulse.",
+          "accept": [
+            "cough impulse",
+            "expansile"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "How do you clinically distinguish a direct from an indirect inguinal hernia at the bedside?",
+          "a": "Reduce the hernia, then occlude the deep inguinal ring (at the midpoint of the inguinal ligament) and ask the patient to cough: controlled by occlusion, it is indirect; still appearing despite occlusion, it is direct, bulging through the posterior wall medial to the deep ring.",
+          "accept": [
+            "occlu",
+            "deep ring",
+            "indirect",
+            "direct"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 3,
+          "q": "A patient has a tender, red, irreducible groin swelling with vomiting and abdominal distension. What is this, and what must you NOT do?",
+          "a": "A strangulated (obstructed and vascularly compromised) hernia - a surgical emergency. Do not attempt to forcibly reduce it, since this can push non-viable or perforated bowel back into the abdomen.",
+          "accept": [
+            "strangulat",
+            "emergency",
+            "do not reduce",
+            "not reduce"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "standing",
+          "text": "Examines with the patient standing, not just lying down",
+          "critical": true
+        },
+        {
+          "id": "complication",
+          "text": "Actively checks for tenderness, redness, and reducibility, not just cough impulse alone",
+          "critical": true
+        },
+        {
+          "id": "occlusion",
+          "text": "Attempts the deep-ring occlusion test to distinguish direct from indirect"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: examination of a hernia"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: groin and hernial orifices"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: examination of hernia"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.vomiting": {
+      "id": "skill.hx.gi.vomiting",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Nausea and vomiting",
+      "oneLine": "Timing, content and relief, which together say obstruction, irritation or brain",
+      "why": "Vomiting is a reflex with one motor pattern and many afferents, so the vomiting itself never tells you the cause. What discriminates is the company it keeps: when it happens, what comes up, and whether it relieves anything.",
+      "asks": [
+        {
+          "text": "How long after eating do you vomit, and does vomiting relieve the pain?"
+        },
+        {
+          "text": "What comes up: food you ate hours ago, bile, blood, or faeculent material?"
+        },
+        {
+          "text": "How much, and how many times a day?"
+        },
+        {
+          "text": "Is there nausea before it, or does it come without warning?"
+        },
+        {
+          "text": "Any headache, early morning timing, or vomiting that hits the wall?"
+        },
+        {
+          "text": "Are you still passing flatus and stool?"
+        },
+        {
+          "text": "Any vertigo, ringing in the ears, or spinning? That points away from the gut altogether."
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Timing and content localise the level",
+          "body": "The higher the obstruction, the earlier the vomiting and the less bile it contains. The lower it is, the later, the more distended the abdomen, and the more the vomitus smells of bowel content.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Level suggested"
+            ],
+            "rows": [
+              [
+                "Vomiting soon after eating, no bile",
+                "At or above the pylorus"
+              ],
+              [
+                "Bile stained",
+                "Below the ampulla, so not gastric outlet"
+              ],
+              [
+                "Undigested food eaten many hours or a day earlier",
+                "Gastric outlet obstruction"
+              ],
+              [
+                "Faeculent, with distension and absolute constipation",
+                "Distal small bowel or colonic obstruction"
+              ]
+            ]
+          },
+          "note": "Vomiting that RELIEVES epigastric pain points to a peptic or gastric outlet cause. Vomiting that relieves nothing is more worrying."
+        },
+        {
+          "heading": "Vomiting without nausea is a red flag",
+          "body": "Raised intracranial pressure drives the vomiting centre directly, bypassing the nausea that normally precedes a peripheral cause. Effortless, projectile, early-morning vomiting with headache is neurological until proven otherwise, and no amount of abdominal examination will settle it."
+        },
+        {
+          "heading": "Does vomiting relieve the pain? The answer is diagnostic",
+          "body": "In bowel obstruction, vomiting decompresses the distended segment and the pain eases. In pancreatitis and cholecystitis the inflamed organ is untouched by emptying the stomach, so the patient vomits and the pain continues unchanged. Asking this one question separates a hollow viscus problem from an inflamed solid one.",
+          "table": {
+            "cols": [
+              "Vomiting",
+              "Effect on pain",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Relieves the pain",
+                "Pain eases after vomiting",
+                "Bowel obstruction, gastric outlet"
+              ],
+              [
+                "No effect",
+                "Pain continues unchanged",
+                "Pancreatitis, cholecystitis"
+              ],
+              [
+                "Within an hour of eating",
+                "Variable",
+                "Gastroparesis or pyloric obstruction"
+              ],
+              [
+                "Minutes after every meal, effortless",
+                "None",
+                "Rumination, rather than true vomiting"
+              ]
+            ]
+          },
+          "note": "Emesis of undigested food that was never acidified suggests it never reached the stomach: a pharyngeal pouch or achalasia rather than gastric outlet obstruction."
+        },
+        {
+          "heading": "The three questions that change management",
+          "points": [
+            {
+              "t": "Is it obstruction?",
+              "d": "Distension, absolute constipation and faeculent vomiting together mean obstruction until imaging says otherwise."
+            },
+            {
+              "t": "Is there blood?",
+              "d": "Frank blood or coffee grounds turns this into an upper GI bleed, with a different pathway and different urgency."
+            },
+            {
+              "t": "Is the patient dry?",
+              "d": "Duration and volume, not the diagnosis, decide the fluid and potassium the patient needs first."
+            }
+          ]
+        },
+        {
+          "heading": "When the cause is not in the abdomen at all",
+          "points": [
+            {
+              "t": "Headache or visual field change.",
+              "d": "Intracranial. Projectile vomiting, forceful and typically without preceding nausea, is the classic sign of raised intracranial tension."
+            },
+            {
+              "t": "Vertigo or tinnitus.",
+              "d": "Labyrinthine disease. The vomiting is severe and the abdomen is entirely normal."
+            },
+            {
+              "t": "Drugs and metabolic.",
+              "d": "Opioids, digoxin, chemotherapy; uraemia, hypercalcaemia, ketoacidosis, pregnancy."
+            }
+          ],
+          "note": "Vomiting WITHOUT abdominal pain should push you to look outside the gut before investigating it further."
+        }
+      ],
+      "pitfalls": [
+        "Recording the fact of vomiting without its timing relative to food, which is where the diagnosis lives.",
+        "Missing effortless early morning vomiting with headache, and working it up as gastritis.",
+        "Not asking about flatus and stool, so obstruction is missed in a patient who is still vomiting only bile.",
+        "Treating the vomiting and never quantifying it, so the dehydration and hypokalaemia are undertreated."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Vomiting of food eaten the previous day. What does that suggest?",
+          "a": "Gastric outlet obstruction: the stomach is not emptying, so retained food is vomited long after the meal.",
+          "accept": [
+            "outlet",
+            "gastric",
+            "pylor",
+            "obstruct"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does bile in the vomit tell you the obstruction is NOT at the gastric outlet?",
+          "a": "Bile enters at the ampulla in the second part of the duodenum. If bile is being vomited, the lumen is patent down to that point, so the block must be distal to it.",
+          "accept": [
+            "ampulla",
+            "duoden",
+            "distal",
+            "patent"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient vomits without any preceding nausea, worst on waking, with headache. Where is the lesion and why is there no nausea?",
+          "a": "Raised intracranial pressure stimulating the vomiting centre directly. Peripheral causes reach it through vagal and visceral afferents that also produce nausea; a central stimulus skips that, so the vomiting is effortless and unheralded.",
+          "accept": [
+            "intracranial",
+            "central",
+            "vomiting centre",
+            "pressure"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient with severe epigastric pain vomits repeatedly, and the pain is unchanged afterwards. What does that tell you?",
+          "a": "That the pain is not from a distended hollow viscus. Emptying the stomach relieves obstruction but does nothing for an inflamed pancreas or gallbladder, so this pattern points to pancreatitis or cholecystitis.",
+          "accept": [
+            "pancreat",
+            "cholecyst",
+            "inflam",
+            "not obstruct"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "timing",
+          "text": "Relates vomiting to meals and asks whether it relieves pain"
+        },
+        {
+          "id": "content",
+          "text": "Establishes content: bile, blood, undigested food, faeculent"
+        },
+        {
+          "id": "obstruction",
+          "text": "Asks about flatus, stool and distension"
+        },
+        {
+          "id": "redflag",
+          "text": "Screens for effortless or early morning vomiting with headache"
+        },
+        {
+          "id": "extraabdominal",
+          "text": "Screens for intracranial, labyrinthine, drug and metabolic causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.dysphagia": {
+      "id": "skill.hx.gi.dysphagia",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Dysphagia",
+      "oneLine": "Solids or liquids, and whether it is getting worse, which separates obstruction from a motility problem",
+      "why": "Dysphagia is one of the few symptoms where the history alone can localise the lesion and grade its urgency. Two questions, whether liquids are affected and whether it is progressing, do most of that work.",
+      "asks": [
+        {
+          "text": "Can you swallow your own saliva right now, or are you drooling?"
+        },
+        {
+          "text": "Is it difficulty with solids, liquids, or both?"
+        },
+        {
+          "text": "Did it start with solids and then include liquids, or were both difficult from the start?"
+        },
+        {
+          "text": "Is it getting worse, and over how many weeks or months?"
+        },
+        {
+          "text": "Where do you feel the food sticking? Ask them to point."
+        },
+        {
+          "text": "Do you cough or choke when you swallow, or does food come back down the nose?"
+        },
+        {
+          "text": "Have you lost weight, and how much?"
+        },
+        {
+          "text": "Have you ever swallowed acid or a corrosive liquid, even years ago?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Solids then liquids means a narrowing lumen",
+          "body": "A mechanical stricture obstructs the largest bolus first, so solids fail before liquids and the difficulty progresses as the lumen narrows. A motility disorder disturbs the coordinated wave, which fails for both consistencies at once and often varies day to day.",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Solids first, then liquids, steadily progressive",
+                "Mechanical: carcinoma, peptic stricture"
+              ],
+              [
+                "Solids and liquids equally, from the start, intermittent",
+                "Motility: achalasia, spasm"
+              ],
+              [
+                "Progressive over weeks with weight loss, older patient",
+                "Malignancy until excluded"
+              ],
+              [
+                "Long history, regurgitation of undigested food at night",
+                "Achalasia or a pouch"
+              ],
+              [
+                "Sudden, complete, drooling and unable to swallow saliva",
+                "Food bolus impaction. Same-day endoscopy"
+              ],
+              [
+                "Long-standing, after corrosive ingestion",
+                "Corrosive stricture, a common cause in India"
+              ]
+            ]
+          },
+          "note": "Progressive solid dysphagia with weight loss in an older patient is an urgent endoscopy, not a trial of a proton pump inhibitor."
+        },
+        {
+          "heading": "Oropharyngeal or oesophageal",
+          "body": "Ask where it sticks and what happens at the moment of swallowing. Difficulty initiating the swallow, coughing at the moment of swallowing, or nasal regurgitation is oropharyngeal and usually neuromuscular. Food sticking seconds later, felt retrosternally, is oesophageal.",
+          "points": [
+            {
+              "t": "Coughs at the moment of swallowing.",
+              "d": "Aspiration from a failed oropharyngeal phase. This patient is at risk now, not later."
+            },
+            {
+              "t": "Nasal regurgitation.",
+              "d": "Palatal weakness, so look for a bulbar cause."
+            },
+            {
+              "t": "Points to the suprasternal notch.",
+              "d": "Poorly localising; the lesion may be anywhere below."
+            }
+          ]
+        },
+        {
+          "heading": "Odynophagia is a different symptom",
+          "body": "Pain on swallowing suggests mucosal disease rather than obstruction: candidal or viral oesophagitis, or a pill ulcer. Ask about immunosuppression, inhaled steroids and doxycycline taken without water."
+        }
+      ],
+      "pitfalls": [
+        "Not asking about liquids, which is the single question that separates mechanical from motility.",
+        "Accepting the level the patient points to as the level of the lesion.",
+        "Missing coughing at the moment of swallowing, which is an aspiration risk rather than a diagnostic detail.",
+        "Treating progressive dysphagia with weight loss as reflux without endoscopy.",
+        "Not asking whether the patient can swallow their own saliva, which distinguishes complete obstruction."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Solids difficult first, liquids later. Mechanical or motility?",
+          "a": "Mechanical. A narrowing lumen obstructs the largest bolus first, so solids fail before liquids.",
+          "accept": [
+            "mechanic",
+            "stricture",
+            "obstruct",
+            "narrow"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does achalasia trouble liquids as much as solids from the outset?",
+          "a": "The problem is the coordinated peristaltic wave and a failure of lower oesophageal sphincter relaxation, not the calibre of the lumen, so bolus consistency does not matter.",
+          "accept": [
+            "peristal",
+            "sphincter",
+            "motil",
+            "coordinat"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient coughs at the moment of swallowing and food returns through the nose. Which phase is failing, and what is the immediate risk?",
+          "a": "The oropharyngeal phase, from neuromuscular weakness including the palate. The immediate risk is aspiration, so swallowing should be assessed and held before further oral intake.",
+          "accept": [
+            "oropharyng",
+            "aspirat",
+            "bulbar",
+            "palat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "consistency",
+          "text": "Asks solids versus liquids, and the order in which they were affected"
+        },
+        {
+          "id": "progression",
+          "text": "Establishes progression and its time course"
+        },
+        {
+          "id": "level",
+          "text": "Asks where the food sticks, and distinguishes oropharyngeal from oesophageal"
+        },
+        {
+          "id": "alarm",
+          "text": "Screens for weight loss and aspiration"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.gibleed": {
+      "id": "skill.hx.gi.gibleed",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Gastrointestinal bleeding",
+      "oneLine": "Haematemesis, melaena and bleeding per rectum, and what each says about the level and the volume",
+      "why": "The colour of the blood is a clock and a map at once: it tells you roughly where the bleeding is and roughly how long it has been in the gut. Getting that right at the bedside decides the pathway before any endoscopy.",
+      "asks": [
+        {
+          "text": "Did you vomit blood? Was it fresh red, or dark like coffee grounds?"
+        },
+        {
+          "text": "Have your stools been black, tarry and offensive, or was there fresh red blood?"
+        },
+        {
+          "text": "Is the blood mixed through the stool, or on the surface and on the paper?"
+        },
+        {
+          "text": "How many episodes, and roughly how much each time?"
+        },
+        {
+          "text": "Any dizziness on standing, or have you fainted?"
+        },
+        {
+          "text": "Do you take aspirin, an anti-inflammatory, a steroid or a blood thinner? Any alcohol, or known liver disease?"
+        },
+        {
+          "text": "Any retching before the first vomit of blood?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Colour is a clock",
+          "body": "Blood turns black through acid and bacterial degradation of haemoglobin, which takes hours. So black means time in the gut, and time in the gut usually means a proximal source. Brisk enough bleeding from anywhere can arrive red.",
+          "table": {
+            "cols": [
+              "Finding",
+              "Usual level",
+              "Caveat"
+            ],
+            "rows": [
+              [
+                "Coffee ground vomit",
+                "Upper, blood altered by acid",
+                "Volume may be small but the source is upper"
+              ],
+              [
+                "Fresh red haematemesis",
+                "Upper, brisk",
+                "Suggests active or variceal bleeding"
+              ],
+              [
+                "Melaena, black tarry offensive",
+                "Upper, or small bowel or right colon",
+                "Needs roughly 50 mL and several hours"
+              ],
+              [
+                "Fresh red per rectum",
+                "Usually lower",
+                "A massive upper bleed can present this way, with shock"
+              ]
+            ]
+          },
+          "note": "Black stool that is not tarry or offensive may simply be iron or bismuth. Ask, before calling it melaena."
+        },
+        {
+          "heading": "Mixed through, or on the surface",
+          "points": [
+            {
+              "t": "Mixed through the stool.",
+              "d": "A source above the rectum, so colonic and proximal causes are in play."
+            },
+            {
+              "t": "On the surface and on the paper, with pain on defecation.",
+              "d": "Anorectal: fissure or haemorrhoids. Common, but never the assumption in an older patient."
+            },
+            {
+              "t": "With mucus and urgency.",
+              "d": "Think inflammatory or infective colitis rather than a simple anorectal cause."
+            }
+          ]
+        },
+        {
+          "heading": "The history that changes the resuscitation",
+          "body": "Ask about the drugs and the liver before anything else. Antiplatelets, anticoagulants and non-steroidals change both the risk and the reversal plan. Known liver disease or alcohol raises varices, which bleed differently and are managed differently. Retching that preceded the first haematemesis suggests a Mallory-Weiss tear.",
+          "note": "Postural dizziness or syncope estimates volume lost better than the patient's own description of the amount."
+        }
+      ],
+      "pitfalls": [
+        "Calling any black stool melaena without asking about iron, bismuth and the smell.",
+        "Assuming fresh red bleeding per rectum is always a lower source, and missing a massive upper bleed in a shocked patient.",
+        "Not taking the drug history, so an anticoagulant is discovered after the first hour.",
+        "Quantifying the bleed by what the patient says they lost rather than by postural symptoms and vital signs."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What makes melaena black?",
+          "a": "Degradation of haemoglobin by acid and gut bacteria over several hours, which requires a proximal source and time in the gut.",
+          "accept": [
+            "haemoglobin",
+            "hemoglobin",
+            "acid",
+            "bacteri",
+            "degrad"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A shocked patient passing fresh red blood per rectum. Why might the source still be upper?",
+          "a": "A large, brisk upper bleed transits too quickly to be degraded, so it arrives red. The shock is the clue that the volume is large and the source proximal.",
+          "accept": [
+            "brisk",
+            "rapid",
+            "transit",
+            "massive",
+            "upper"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Retching several times, then fresh haematemesis. What is the likely lesion, and how does that differ from variceal bleeding in the history?",
+          "a": "A Mallory-Weiss tear at the gastro-oesophageal junction, caused by the retching itself, so the bleeding FOLLOWS vomiting. Variceal bleeding is usually painless and unheralded, in a patient with stigmata or a history of chronic liver disease.",
+          "accept": [
+            "mallory",
+            "tear",
+            "junction",
+            "retch"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "character",
+          "text": "Establishes colour and character of blood in vomit and stool"
+        },
+        {
+          "id": "level",
+          "text": "Asks whether blood is mixed through or on the surface"
+        },
+        {
+          "id": "volume",
+          "text": "Estimates volume through postural symptoms, not description alone"
+        },
+        {
+          "id": "drugs",
+          "text": "Takes the drug, alcohol and liver disease history"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.diarrhoea": {
+      "id": "skill.hx.gi.diarrhoea",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Diarrhoea",
+      "oneLine": "Small bowel or large bowel, and inflammatory or not, decided at the bedside",
+      "why": "Diarrhoea means different things to patients and to clinicians. Once you have defined it as increased frequency, fluidity or volume, two axes do the work: which part of the bowel, and whether there is inflammation.",
+      "asks": [
+        {
+          "text": "How many times a day, and is it waking you at night?"
+        },
+        {
+          "text": "Is it large and watery, or small, frequent and urgent?"
+        },
+        {
+          "text": "Any blood, mucus or pus in the stool?"
+        },
+        {
+          "text": "Does it float, look greasy, or is it difficult to flush?"
+        },
+        {
+          "text": "How long has it lasted: days, or more than four weeks?"
+        },
+        {
+          "text": "Any recent travel, antibiotics, new food, or others affected?"
+        },
+        {
+          "text": "Does fasting stop it?"
+        },
+        {
+          "text": "Are you passing urine as usual? Any dizziness on standing, or a dry mouth?"
+        },
+        {
+          "text": "Any blood with fever, or severe abdominal pain and distension?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Small bowel and large bowel behave differently",
+          "table": {
+            "cols": [
+              "Feature",
+              "Small bowel",
+              "Large bowel"
+            ],
+            "rows": [
+              [
+                "Volume",
+                "Large, watery",
+                "Small, frequent"
+              ],
+              [
+                "Urgency and tenesmus",
+                "Uncommon",
+                "Common"
+              ],
+              [
+                "Blood",
+                "Unusual",
+                "Common if inflammatory"
+              ],
+              [
+                "Periumbilical or right iliac pain",
+                "Typical",
+                "Lower abdominal, relieved by defecation"
+              ]
+            ]
+          },
+          "note": "Nocturnal diarrhoea that wakes the patient is organic until proven otherwise. Functional diarrhoea rarely does."
+        },
+        {
+          "heading": "Assess the patient before the stool",
+          "body": "Diarrhoea kills through volume loss, not through its cause. Before working out the mechanism, decide whether this patient is dry.",
+          "points": [
+            {
+              "t": "Postural dizziness, reduced urine output, dry mouth, sunken eyes.",
+              "d": "Hypovolaemia. Replace fluid first; oral rehydration where tolerated."
+            },
+            {
+              "t": "Tachycardia, hypotension, confusion, cold peripheries.",
+              "d": "Hypovolaemic shock. Resuscitate now."
+            },
+            {
+              "t": "Bloody diarrhoea with fever.",
+              "d": "Dysentery or inflammatory colitis. Do not give an antimotility agent."
+            },
+            {
+              "t": "Distension, severe pain, systemic toxicity.",
+              "d": "Toxic megacolon. Surgical involvement, not more antibiotics."
+            }
+          ],
+          "note": "In a child or an older adult, the fluid assessment matters more than the microbiology."
+        },
+        {
+          "heading": "Osmotic, secretory or inflammatory",
+          "points": [
+            {
+              "t": "Stops with fasting.",
+              "d": "Osmotic: an unabsorbed solute is drawing water in, as in lactose intolerance."
+            },
+            {
+              "t": "Continues despite fasting, large volume.",
+              "d": "Secretory: the mucosa is actively secreting, so fasting changes nothing."
+            },
+            {
+              "t": "Blood, mucus, fever, urgency.",
+              "d": "Inflammatory: infective colitis or inflammatory bowel disease."
+            },
+            {
+              "t": "Pale, greasy, floats, hard to flush.",
+              "d": "Steatorrhoea: fat malabsorption, so think pancreas or small bowel mucosa."
+            }
+          ]
+        },
+        {
+          "heading": "Duration decides the workup",
+          "body": "Under two weeks is usually infective and self-limiting, and the history should target contacts, travel, food and recent antibiotics. Beyond four weeks it is chronic, and the question becomes malabsorption, inflammation, or a colonic lesion, particularly with weight loss or blood."
+        },
+        {
+          "heading": "The chronic causes that matter in India",
+          "points": [
+            {
+              "t": "Ileocaecal and abdominal tuberculosis.",
+              "d": "The principal mimic of Crohn disease. Ask about contact, fever, night sweats and weight loss."
+            },
+            {
+              "t": "Amoebic and bacillary dysentery.",
+              "d": "Blood and mucus; ask the water source."
+            },
+            {
+              "t": "Giardiasis.",
+              "d": "Bloating, foul steatorrhoea, no blood."
+            },
+            {
+              "t": "Tropical sprue.",
+              "d": "Malabsorption after a period in an endemic area."
+            },
+            {
+              "t": "HIV-associated diarrhoea.",
+              "d": "Ask about risk factors and prior testing."
+            }
+          ],
+          "note": "Chronic diarrhoea treated as inflammatory bowel disease without excluding intestinal tuberculosis is a recognised and serious error here: immunosuppression will make the tuberculosis worse."
+        }
+      ],
+      "pitfalls": [
+        "Not defining what the patient means, so frequent formed stool is worked up as diarrhoea.",
+        "Missing nocturnal diarrhoea, which points away from a functional cause.",
+        "Forgetting recent antibiotics, and missing Clostridioides difficile.",
+        "Overlooking steatorrhoea because the patient was never asked whether the stool floats or is hard to flush.",
+        "Working out the mechanism before assessing whether the patient is dry.",
+        "Giving an antimotility drug in bloody diarrhoea with fever.",
+        "Treating chronic diarrhoea as inflammatory bowel disease without excluding intestinal tuberculosis."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Diarrhoea that stops when the patient fasts. Osmotic or secretory?",
+          "a": "Osmotic. The unabsorbed solute driving water into the lumen is no longer being ingested.",
+          "accept": [
+            "osmotic",
+            "solute",
+            "fast"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does large bowel diarrhoea come with urgency and tenesmus, while small bowel diarrhoea does not?",
+          "a": "The rectum is inflamed or distended and its stretch receptors signal the need to defecate, producing urgency and the sensation of incomplete evacuation. Small bowel disease produces volume without rectal irritation.",
+          "accept": [
+            "rectum",
+            "rectal",
+            "inflam",
+            "stretch",
+            "distend"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Chronic pale bulky stool that floats, with weight loss but a normal appetite. What is the mechanism, and where is the lesion?",
+          "a": "Fat malabsorption. Undigested fat makes the stool bulky, pale and difficult to flush, and calories are lost despite adequate intake. The lesion is pancreatic exocrine insufficiency or small bowel mucosal disease such as coeliac.",
+          "accept": [
+            "malabsorp",
+            "steatorrh",
+            "pancrea",
+            "coeliac",
+            "celiac",
+            "fat"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "define",
+          "text": "Defines what the patient means by diarrhoea"
+        },
+        {
+          "id": "localise",
+          "text": "Separates small bowel from large bowel by volume, urgency and blood"
+        },
+        {
+          "id": "mechanism",
+          "text": "Asks about fasting, steatorrhoea and inflammation"
+        },
+        {
+          "id": "context",
+          "text": "Takes travel, antibiotic, food and contact history"
+        },
+        {
+          "id": "hydration",
+          "text": "Assesses hydration and circulation before working out the mechanism"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.constipation": {
+      "id": "skill.hx.gi.constipation",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Constipation and change in bowel habit",
+      "oneLine": "What changed, when, and whether anything is passing at all",
+      "why": "Constipation is common and usually benign, which is exactly why the significant cases are missed. The history has to separate a lifelong pattern from a recent change, because a recent and persistent change in an older patient is a colonic lesion until excluded.",
+      "asks": [
+        {
+          "text": "What is normal for you, and what has changed?"
+        },
+        {
+          "text": "When did the change start, and has it persisted?"
+        },
+        {
+          "text": "Are you passing flatus? Any stool at all?"
+        },
+        {
+          "text": "Do you have to strain, or feel you have not finished?"
+        },
+        {
+          "text": "Any blood, weight loss, or thinner stools than before?"
+        },
+        {
+          "text": "What medicines are you taking, including opioids and iron?"
+        },
+        {
+          "text": "Any cold intolerance, weight gain, or known low potassium or high calcium?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Absolute constipation is a different symptom",
+          "body": "Constipation with no stool AND no flatus, with distension and vomiting, is intestinal obstruction, not slow transit. The presence of flatus is the single most useful discriminator at the bedside, and it takes one question.",
+          "note": "Absolute constipation plus vomiting plus distension is a surgical presentation until imaging says otherwise."
+        },
+        {
+          "heading": "New, persistent change in an older patient",
+          "table": {
+            "cols": [
+              "Feature",
+              "Why it matters"
+            ],
+            "rows": [
+              [
+                "Change over weeks, persisting",
+                "Colorectal carcinoma until excluded"
+              ],
+              [
+                "Blood mixed with stool",
+                "A source above the anorectum"
+              ],
+              [
+                "Thinner stools, tenesmus",
+                "A distal narrowing lesion"
+              ],
+              [
+                "Weight loss, anaemia",
+                "Raises the same concern sharply"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "Secondary causes worth a single question each",
+          "points": [
+            {
+              "t": "Drugs.",
+              "d": "Opioids, anticholinergics, iron, calcium channel blockers. The commonest reversible cause, and easily missed."
+            },
+            {
+              "t": "Metabolic.",
+              "d": "Hypothyroidism, hypercalcaemia, hypokalaemia."
+            },
+            {
+              "t": "Neurological.",
+              "d": "Parkinson's disease, cord lesions, autonomic neuropathy. Ask about sphincter and urinary symptoms."
+            },
+            {
+              "t": "Mechanical and anorectal.",
+              "d": "Painful fissure or stricture causing avoidance rather than true slow transit."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Not asking what the patient's normal bowel habit is, so a change cannot be recognised.",
+        "Missing absolute constipation because flatus was never asked about.",
+        "Attributing a new change in an older patient to diet or age without excluding a colonic lesion.",
+        "Overlooking the drug chart, particularly opioids started recently."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Which single question separates constipation from intestinal obstruction at the bedside?",
+          "a": "Whether the patient is still passing flatus. Absolute constipation means neither stool nor flatus.",
+          "accept": [
+            "flatus",
+            "gas",
+            "wind"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does a new, persistent change in bowel habit in an older patient demand investigation?",
+          "a": "Because colorectal carcinoma presents that way, and the change is often the only symptom before bleeding or obstruction appear.",
+          "accept": [
+            "carcinoma",
+            "cancer",
+            "malignan",
+            "colorectal"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Constipation with cold intolerance and weight gain. What is the mechanism?",
+          "a": "Hypothyroidism reduces gut motility, slowing colonic transit. It is a secondary and fully reversible cause, so it should be sought before the constipation is treated symptomatically forever.",
+          "accept": [
+            "hypothyroid",
+            "thyroid",
+            "motility",
+            "transit"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "baseline",
+          "text": "Establishes the patient's normal habit and what changed"
+        },
+        {
+          "id": "absolute",
+          "text": "Asks about flatus, distension and vomiting"
+        },
+        {
+          "id": "alarm",
+          "text": "Screens for blood, weight loss and stool calibre"
+        },
+        {
+          "id": "secondary",
+          "text": "Covers drugs and metabolic causes"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.dyspepsia": {
+      "id": "skill.hx.gi.dyspepsia",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Dyspepsia and heartburn",
+      "oneLine": "Epigastric pain and reflux, and the alarm features that stop you treating empirically",
+      "why": "Most dyspepsia is benign and can be treated without endoscopy. The whole clinical skill is recognising the minority who must not be, and not mistaking cardiac pain for indigestion.",
+      "asks": [
+        {
+          "text": "Where is the discomfort, and does it burn or gnaw?"
+        },
+        {
+          "text": "Does it come up behind the breastbone, or bring acid or food into the throat?"
+        },
+        {
+          "text": "Is it worse lying flat, bending forward, or after large meals?"
+        },
+        {
+          "text": "Does food or an antacid relieve it, or make it worse?"
+        },
+        {
+          "text": "Any difficulty swallowing, vomiting, weight loss, or black stools?"
+        },
+        {
+          "text": "Do you take anti-inflammatories, aspirin or steroids?"
+        },
+        {
+          "text": "Does it ever come on with exertion and settle with rest?"
+        },
+        {
+          "text": "Have you ever been tested or treated for H. pylori?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Reflux, ulcer, or neither",
+          "table": {
+            "cols": [
+              "Pattern",
+              "Suggests"
+            ],
+            "rows": [
+              [
+                "Retrosternal burning, worse lying flat or bending",
+                "Gastro-oesophageal reflux"
+              ],
+              [
+                "Epigastric pain relieved by food or antacid",
+                "Duodenal ulcer"
+              ],
+              [
+                "Epigastric pain worsened by food, with weight loss",
+                "Gastric ulcer or malignancy"
+              ],
+              [
+                "Discomfort with no alarm features, younger patient",
+                "Functional dyspepsia"
+              ]
+            ]
+          }
+        },
+        {
+          "heading": "The alarm features",
+          "body": "These are the features that convert empirical treatment into endoscopy. They are worth knowing as a list because each one is a single question.",
+          "points": [
+            {
+              "t": "Dysphagia.",
+              "d": "Any difficulty swallowing."
+            },
+            {
+              "t": "Weight loss.",
+              "d": "Unintentional and quantified."
+            },
+            {
+              "t": "Persistent vomiting.",
+              "d": "Especially with a suggestion of outlet obstruction."
+            },
+            {
+              "t": "Bleeding or anaemia.",
+              "d": "Haematemesis, melaena, or iron deficiency."
+            },
+            {
+              "t": "New onset in an older patient.",
+              "d": "Conventionally new dyspepsia from about age 55, though a lower threshold is reasonable where gastric cancer is commoner."
+            },
+            {
+              "t": "An epigastric mass.",
+              "d": "Found on examination, not history, but it belongs on the list."
+            }
+          ],
+          "note": "Non-steroidals, aspirin and steroids raise ulcer risk and are frequently taken without being reported as medicines. Ask specifically. Without alarm features, the usual approach is to test for Helicobacter pylori and treat if positive, rather than to endoscope."
+        },
+        {
+          "heading": "The mistake that matters most",
+          "body": "Inferior myocardial ischaemia is felt in the epigastrium and is regularly treated as indigestion. Anything brought on by exertion and relieved by rest, or accompanied by sweating, nausea or breathlessness, is cardiac until an ECG says otherwise. An antacid response proves nothing."
+        }
+      ],
+      "pitfalls": [
+        "Treating exertional epigastric pain as dyspepsia without an ECG.",
+        "Not asking about anti-inflammatories, which patients rarely volunteer as drugs.",
+        "Missing alarm features because they were never asked as a checklist.",
+        "Taking relief with an antacid as proof the pain is not cardiac."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Name three alarm features in dyspepsia.",
+          "a": "Dysphagia, unintentional weight loss, persistent vomiting, bleeding or anaemia, new onset in an older patient, an epigastric mass.",
+          "accept": [
+            "dysphag",
+            "weight",
+            "vomit",
+            "bleed",
+            "anaem",
+            "anem",
+            "mass",
+            "age"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "Why is a duodenal ulcer classically relieved by food while a gastric ulcer is worsened by it?",
+          "a": "Food buffers acid in the duodenum, easing duodenal pain. In gastric ulceration eating stimulates acid secretion and distends the inflamed stomach, so pain increases and patients begin to avoid food, which is why weight loss is more typical.",
+          "accept": [
+            "buffer",
+            "acid",
+            "secret",
+            "distend"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A 58 year old describes epigastric burning that comes on walking uphill and settles within minutes of stopping. What must be excluded first, and why does an antacid response not reassure?",
+          "a": "Myocardial ischaemia, particularly inferior. Exertional onset with rapid relief on rest is the pattern of angina regardless of where it is felt. Antacid relief is non-specific and coincidental relief is common, so it cannot exclude a cardiac cause.",
+          "accept": [
+            "ischaem",
+            "ischem",
+            "angina",
+            "cardiac",
+            "myocard",
+            "ecg"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "character",
+          "text": "Characterises the pain and its relation to food and posture"
+        },
+        {
+          "id": "alarm",
+          "text": "Runs the alarm feature checklist"
+        },
+        {
+          "id": "drugs",
+          "text": "Asks specifically about NSAIDs, aspirin and steroids"
+        },
+        {
+          "id": "cardiac",
+          "text": "Excludes exertional, cardiac-sounding pain"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.hx.gi.weightloss": {
+      "id": "skill.hx.gi.weightloss",
+      "kind": "history",
+      "system": "abdomen",
+      "title": "Anorexia and weight loss",
+      "oneLine": "Quantify it, then decide whether intake, absorption or demand is the problem",
+      "why": "Weight loss is only meaningful once it is quantified and confirmed. After that, a single question, what is the appetite doing, splits the causes into groups that need entirely different investigation.",
+      "asks": [
+        {
+          "text": "How much weight, over how long? Do you know it from a scale, or from your clothes?"
+        },
+        {
+          "text": "Was it intentional?"
+        },
+        {
+          "text": "What has your appetite been doing: reduced, normal, or increased?"
+        },
+        {
+          "text": "Are you eating less because it hurts, because you feel full quickly, or because you are not hungry?"
+        },
+        {
+          "text": "Any fever, night sweats, cough or change in bowel habit?"
+        },
+        {
+          "text": "Any pale greasy stool that is hard to flush?"
+        },
+        {
+          "text": "How is your mood, and has anything changed at home?"
+        },
+        {
+          "text": "Any risk factors for HIV, or has an HIV test ever been done?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "Appetite splits the differential",
+          "table": {
+            "cols": [
+              "Appetite",
+              "Mechanism",
+              "Typical causes"
+            ],
+            "rows": [
+              [
+                "Reduced",
+                "Intake falls",
+                "Malignancy, chronic infection including tuberculosis and HIV, depression, uraemia, chronic liver disease"
+              ],
+              [
+                "Normal or increased",
+                "Calories lost or burned",
+                "Malabsorption, thyrotoxicosis, uncontrolled diabetes"
+              ]
+            ]
+          },
+          "note": "Weight loss with a good appetite is the more discriminating history, because it points away from the cachexia of malignancy and towards malabsorption or a hypermetabolic state."
+        },
+        {
+          "heading": "Quantify before you investigate",
+          "body": "Ask for a number and a timeframe, and corroborate it: a documented weight, a belt notch, clothes that no longer fit. Loss of more than five per cent of body weight over six months without intent is significant. An unquantified impression is not a symptom you can act on."
+        },
+        {
+          "heading": "Why the patient is eating less",
+          "points": [
+            {
+              "t": "It hurts to eat.",
+              "d": "Mesenteric angina, gastric ulcer, or oral and oesophageal pathology."
+            },
+            {
+              "t": "Early satiety.",
+              "d": "Gastric outlet or infiltration, or an abdominal mass."
+            },
+            {
+              "t": "No hunger at all.",
+              "d": "Systemic: malignancy, chronic infection including tuberculosis, depression."
+            },
+            {
+              "t": "Cannot afford or obtain food.",
+              "d": "Ask. It is common, it is rarely volunteered, and no investigation will reveal it."
+            }
+          ]
+        }
+      ],
+      "pitfalls": [
+        "Recording weight loss without a number and a timeframe.",
+        "Not asking what the appetite is doing, which is the question that splits the differential.",
+        "Attributing it to malignancy without asking about steatorrhoea, thyroid symptoms or diabetes.",
+        "Never asking about mood, food security or swallowing, so a treatable cause is missed."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What makes weight loss clinically significant?",
+          "a": "Unintentional loss of more than about five per cent of body weight over six months, corroborated rather than estimated.",
+          "accept": [
+            "five",
+            "5",
+            "per cent",
+            "percent",
+            "unintent"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Weight loss with a normal or increased appetite. What does that point to?",
+          "a": "Calories are being lost or burned rather than not eaten: malabsorption, thyrotoxicosis, or uncontrolled diabetes.",
+          "accept": [
+            "malabsorp",
+            "thyrotox",
+            "thyroid",
+            "diabet"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient eats less because of abdominal pain that starts twenty minutes after every meal. What is the mechanism?",
+          "a": "Chronic mesenteric ischaemia. Post-prandial demand outstrips a narrowed splanchnic supply, so pain follows meals and the patient begins to avoid food, producing weight loss with an intact appetite.",
+          "accept": [
+            "mesenteric",
+            "ischaem",
+            "ischem",
+            "post-prandial",
+            "postprandial",
+            "food fear"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Quantifies and corroborates the loss"
+        },
+        {
+          "id": "appetite",
+          "text": "Establishes what the appetite is doing"
+        },
+        {
+          "id": "why",
+          "text": "Asks WHY intake fell: pain, early satiety, no hunger, access"
+        },
+        {
+          "id": "systemic",
+          "text": "Screens for fever, night sweats, steatorrhoea and mood"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Abdomen: symptomatology"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system: the history"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Gastrointestinal system: symptomatology"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.alcohol": {
+      "id": "skill.annex.alcohol",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Alcohol: units, thresholds and complications",
+      "oneLine": "Turn what the patient drinks into grams, then into risk",
+      "why": "A history that records 'drinks alcohol' is useless. Converting the drink into units makes intake comparable between patients and against the thresholds that actually predict harm, and it takes one multiplication.",
+      "calcs": [
+        "alcohol_units",
+        "auditc",
+        "cage",
+        "ciwa",
+        "gahs"
+      ],
+      "asks": [
+        {
+          "text": "What exactly do you drink: which drink, what size glass or bottle, and what strength?"
+        },
+        {
+          "text": "How many of those on a typical drinking day?"
+        },
+        {
+          "text": "How many days a week, and are there any alcohol-free days?"
+        },
+        {
+          "text": "Is it spread through the week, or concentrated into a few heavy sessions?"
+        },
+        {
+          "text": "How many years have you been drinking at this level?"
+        },
+        {
+          "text": "Has anyone ever suggested you cut down, or have you felt you should?"
+        },
+        {
+          "text": "When was the last drink? Any shakes, sweats or fits on stopping before?"
+        }
+      ],
+      "teach": [
+        {
+          "heading": "The arithmetic",
+          "body": "One UK unit is 10 mL, which is 8 g, of pure ethanol. Units are volume in millilitres multiplied by the alcohol by volume percentage, divided by 1000. That single formula converts any drink anywhere.",
+          "table": {
+            "cols": [
+              "Drink",
+              "ABV",
+              "Volume",
+              "Units"
+            ],
+            "rows": [
+              [
+                "Whisky, single measure",
+                "40%",
+                "25 mL",
+                "1"
+              ],
+              [
+                "Wine, large glass",
+                "12%",
+                "250 mL",
+                "3"
+              ],
+              [
+                "Lager, bottle",
+                "5%",
+                "330 mL",
+                "1.65"
+              ],
+              [
+                "Beer, pint",
+                "3.5%",
+                "568 mL",
+                "2"
+              ],
+              [
+                "Whisky, full bottle",
+                "40%",
+                "700 mL",
+                "28"
+              ]
+            ]
+          },
+          "note": "Open the Alcohol Units calculator for any drink not on this list. It also totals the week and compares it against the thresholds below."
+        },
+        {
+          "heading": "The thresholds that matter",
+          "points": [
+            {
+              "t": "14 units a week.",
+              "d": "The conservative low-risk threshold, and it is the same for men and women."
+            },
+            {
+              "t": "About 30 g of ethanol a day in men, about 20 g in women.",
+              "d": "Where the risk of alcohol-related liver disease begins. Thirty grams is under four units. The lower figure for women follows from the smaller volume of distribution described below."
+            },
+            {
+              "t": "Sustained heavy intake over years.",
+              "d": "Cirrhosis risk rises steeply with intake of roughly 160 to 180 g a day maintained for a decade or more. Treat this as an order of magnitude for counselling, not a diagnostic number."
+            }
+          ],
+          "note": "Ethanol yields 7 kcal per gram, and many drinks add sugar on top. Obesity multiplies liver-related mortality in heavy drinkers several fold."
+        },
+        {
+          "heading": "Pattern matters as much as amount",
+          "body": "Continuous daily drinking damages the liver more than the same weekly total taken intermittently, because the liver gets no chance to recover. That is why at least two alcohol-free days a week are advised, and why the question 'do you have days off' belongs in every alcohol history.",
+          "points": [
+            {
+              "t": "Sex.",
+              "d": "Women reach higher blood ethanol levels than men after the same intake, because of a smaller volume of distribution. The same number of units is not the same exposure."
+            },
+            {
+              "t": "Genetics.",
+              "d": "Alcoholism is more concordant in monozygotic than dizygotic twins; PNPLA3 is implicated in both alcoholic and non-alcoholic fatty liver disease."
+            },
+            {
+              "t": "Nutrition.",
+              "d": "Obesity raises liver-related mortality in heavy drinkers over five-fold."
+            }
+          ]
+        },
+        {
+          "heading": "Complications worth screening for by system",
+          "table": {
+            "cols": [
+              "System",
+              "What to look for"
+            ],
+            "rows": [
+              [
+                "Neurological",
+                "Blackouts, withdrawal tremor, hallucinations, rum fits, delirium tremens, cerebellar degeneration, dementia, myopathy, autonomic neuropathy"
+              ],
+              [
+                "Gastrointestinal",
+                "Gastritis, diarrhoea, pancreatitis, fatty liver, alcoholic hepatitis, cirrhosis and its complications"
+              ],
+              [
+                "Cardiovascular",
+                "Cardiomyopathy, hypertension, arrhythmia"
+              ],
+              [
+                "Metabolic",
+                "Hyponatraemia, hypoglycaemia, hypokalaemia, hypomagnesaemia, hypocalcaemia, hypophosphataemia"
+              ],
+              [
+                "Malignancy",
+                "Oral cavity, oropharynx, oesophagus, colorectum, breast, hepatocellular carcinoma"
+              ],
+              [
+                "Musculoskeletal",
+                "Myopathy, osteoporosis, falls"
+              ]
+            ]
+          },
+          "note": "Withdrawal is the complication that kills in hospital. Ask the time of the last drink on every admission, and score withdrawal with CIWA-Ar rather than by impression."
+        }
+      ],
+      "pitfalls": [
+        "Recording 'social drinker' or 'occasional' instead of units per week.",
+        "Not asking the strength and the glass size, which is where the units actually come from.",
+        "Missing the pattern: the same weekly total is more harmful taken daily than intermittently.",
+        "Not asking the time of the last drink, so withdrawal is diagnosed after it has begun.",
+        "Applying a lower threshold to women for the wrong reason; the weekly threshold is the same, but the same intake produces higher blood levels."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "How many units in a 250 mL glass of 12% wine?",
+          "a": "Three. Units are millilitres multiplied by ABV divided by 1000, so 250 x 12 / 1000 = 3.",
+          "accept": [
+            "3",
+            "three"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient drinks the same weekly total as another, but spread over every day rather than two sessions. Who is at greater liver risk, and why?",
+          "a": "The daily drinker. Continuous exposure gives the liver no recovery period, which is why alcohol-free days are advised even when the weekly total is unchanged.",
+          "accept": [
+            "daily",
+            "continuous",
+            "recover",
+            "no break"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Why does the same intake carry higher risk in a woman than in a man?",
+          "a": "A smaller volume of distribution for alcohol produces higher blood ethanol concentrations for the same dose, so the exposure of the liver and other organs is greater despite an identical number of units.",
+          "accept": [
+            "volume of distribution",
+            "blood",
+            "concentration",
+            "body water"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "quantify",
+          "text": "Converts the drink into units per week"
+        },
+        {
+          "id": "pattern",
+          "text": "Establishes drinking pattern and alcohol-free days"
+        },
+        {
+          "id": "threshold",
+          "text": "Compares intake against the 14 unit and 30 g/day thresholds"
+        },
+        {
+          "id": "withdrawal",
+          "text": "Asks the time of the last drink and any previous withdrawal"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: alcohol use"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The history: alcohol and substance use"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Alcohol and alcoholic liver disease"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.annex.defs.gi": {
+      "id": "skill.annex.defs.gi",
+      "kind": "annexure",
+      "system": "abdomen",
+      "title": "Definitions: vomiting and gastrointestinal bleeding",
+      "oneLine": "Nausea, retching, vomiting and regurgitation are four different events; so are the four ways blood appears",
+      "why": "These words are used interchangeably in notes and they are not interchangeable. Regurgitation recorded as vomiting sends the workup in the wrong direction, and melaena recorded loosely turns iron tablets into an upper GI bleed.",
+      "teach": [
+        {
+          "heading": "The emetic sequence, in order",
+          "table": {
+            "cols": [
+              "Term",
+              "What it is",
+              "Effort"
+            ],
+            "rows": [
+              [
+                "Nausea",
+                "The subjective sensation that vomiting is impending, felt in the epigastrium or throat",
+                "None"
+              ],
+              [
+                "Retching",
+                "Spasmodic respiratory movements against a CLOSED glottis, usually with intense nausea",
+                "Considerable"
+              ],
+              [
+                "Vomiting",
+                "Forceful expulsion of gastric or intestinal contents through the mouth",
+                "Forceful"
+              ],
+              [
+                "Regurgitation",
+                "Effortless return of contents into the oesophagus and sometimes the mouth",
+                "None"
+              ]
+            ]
+          },
+          "note": "Effort is the discriminator. Regurgitation is effortless and unheralded; vomiting is forceful and usually preceded by nausea and retching. Effortless return of undigested food points to achalasia or a pouch, not to a stomach problem."
+        },
+        {
+          "heading": "The four ways blood appears, and what each implies",
+          "table": {
+            "cols": [
+              "Term",
+              "What it looks like",
+              "Source"
+            ],
+            "rows": [
+              [
+                "Haematemesis",
+                "Vomited blood: red, or coffee grounds once altered by acid",
+                "Upper GI tract"
+              ],
+              [
+                "Melaena",
+                "Black, tarry, offensive stool",
+                "Usually upper; also small bowel or right colon"
+              ],
+              [
+                "Haematochezia",
+                "Bright red blood per rectum",
+                "Usually distal colon or anorectum; can be a brisk upper bleed"
+              ],
+              [
+                "Occult bleeding",
+                "Not visible at all; found on testing or as iron deficiency",
+                "Anywhere"
+              ]
+            ]
+          },
+          "note": "Melaena needs roughly 50 to 100 mL of blood and several hours in the gut. The black colour comes from bacterial and acid degradation of haemoglobin, which is why it takes time and implies a proximal source."
+        },
+        {
+          "heading": "Severe, occult and obscure mean specific things",
+          "points": [
+            {
+              "t": "Severe GI bleeding.",
+              "d": "Documented bleeding WITH shock or postural hypotension, or a fall in haematocrit of at least 6 percent (haemoglobin at least 2 g/dL), or transfusion of at least two units. It is defined by physiological impact, not by how alarming it looked."
+            },
+            {
+              "t": "Occult bleeding.",
+              "d": "Not clinically visible. Presents as iron deficiency anaemia or a positive faecal test."
+            },
+            {
+              "t": "Obscure bleeding.",
+              "d": "Bleeding whose source is not found after upper and lower endoscopy. Current ACG and ASGE usage prefers SMALL BOWEL BLEEDING for this situation, reserving obscure for bleeding still unexplained after small bowel evaluation including capsule endoscopy."
+            }
+          ]
+        },
+        {
+          "heading": "Black stool that is not melaena",
+          "body": "Iron and bismuth both blacken stool. The distinguishing features are that melaena is tarry and characteristically offensive, whereas iron-related stool is simply dark and formed. Ask, before an admission is arranged."
+        }
+      ],
+      "pitfalls": [
+        "Recording effortless regurgitation as vomiting, which redirects the workup to the stomach.",
+        "Calling any black stool melaena without asking about iron, bismuth, tarriness and smell.",
+        "Using 'severe' loosely, when it has a definition based on shock, haematocrit fall or transfusion.",
+        "Confusing occult with obscure: one is invisible bleeding, the other is bleeding with an unfound source."
+      ],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What distinguishes regurgitation from vomiting?",
+          "a": "Effort. Regurgitation is effortless and not preceded by nausea and retching; vomiting is a forceful expulsion.",
+          "accept": [
+            "effort",
+            "forceful",
+            "nausea",
+            "retch"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Why does melaena imply both a volume and a time?",
+          "a": "The black tarry appearance comes from acid and bacterial degradation of haemoglobin, which needs roughly 50 to 100 mL of blood and several hours in the gut. Less blood, or too rapid a transit, and the stool will not be melaenic.",
+          "accept": [
+            "degrad",
+            "haemoglobin",
+            "hemoglobin",
+            "50",
+            "hours",
+            "bacteri"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient has recurrent visible bleeding, and upper and lower endoscopy are both normal. Which term applies, and what does it direct you towards?",
+          "a": "Obscure gastrointestinal bleeding. The term describes the state of the investigation, and it directs attention to the small bowel, which conventional endoscopy does not reach: capsule endoscopy or enteroscopy.",
+          "accept": [
+            "obscure",
+            "small bowel",
+            "capsule",
+            "enteroscop"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "sequence",
+          "text": "Distinguishes nausea, retching, vomiting and regurgitation by effort"
+        },
+        {
+          "id": "blood",
+          "text": "Uses haematemesis, melaena, haematochezia and occult correctly"
+        },
+        {
+          "id": "severity",
+          "text": "Applies the physiological definition of severe bleeding"
+        }
+      ],
+      "media": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Annexure: definitions"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine 22e",
+          "locator": "Gastrointestinal bleeding"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The gastrointestinal system"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

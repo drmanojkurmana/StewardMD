@@ -20,15 +20,71 @@ UpToDate-style answer. Aurora bottom-sheet UI. Account-scoped on-device conversa
   `reasoning.js:3771` and that is its ONLY assignment (verified 2026-08-20) — this file does not set it
 
 ## Flow detail
-`send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini. Native can't stream (CapacitorHttp buffers SSE) → whole-then-typed.
+`send()` → local `maikRoute` → `runClinical()`: [[MaiK Intent Firewall]] gate → clinical-dialogue → instant KB → `/refine` router → KB retry → `/explain` Gemini.
+
+**Native DOES stream, since 2026-08-24** (this note previously said it could not). `window.fetch`
+on native is the CapacitorHttp bridge and buffers; `CapacitorWebFetch` does not stream in WKWebView
+AND ignores `AbortController`. Native therefore streams over the **pristine XHR**
+(`window.CapacitorWebXMLHttpRequest.fullObject`), whose `abort()` genuinely works — verified on a
+physical iPhone: 126/126 requests streamed with multiple deltas.
 
 ## Deps
 [[MaiK Intent Firewall]] · [[AI Control Center]] (per-module caps, model) · [[Medical Knowledge Base]] · Vertex (prod only; preview lacks it) · [[Infra]] MAIK_KV.
 
 ## Gotchas
+- **The on-device engine is gated on PRO, not on a flag** (2026-08-27). `gateActive()` reads
+  `SMD_PRO.isProSync()` only; the old `SMD_XACCESS` `maik_local` access-code gate is gone from the
+  client AND from `functions/_experimental.js`. Dev hatches kept: `smd_maik_local_bypass=1` and a
+  native debug build. `SMD_PRO` fails OPEN, so the promo period makes it open to everyone on native.
 - Model is env-driven (`GEMINI_MODEL`); `thinkingBudget:0`.
 - Preview env has no Vertex → Tier-0 (KB) only.
 - No em-dash in app-facing text (AI *output* exempt).
 - `smd_maik_llm_first` (default ON) makes standalone questions SKIP the templated Tier-0 KB path.
   The KB-only and On-device engines depend on Tier 0, so `SMD_MAIK_ENGINE.setPref()` forces it off
   for those two and restores the default for Cloud.
+- **"Refine for this patient" chips STAGE, they do not ask** (changed 2026-08-27). A tapped chip
+  becomes an inline `factor: [value]` pill; the value is OPTIONAL (a factor like "renal impairment"
+  is a lens, not a number, and demanding text made those chips dead ends); `×` puts the chip back;
+  ONE `[data-maik-askall]` button commits every staged factor as a single question
+  `base — age: 71 · renal function: creatinine 1.2`. Before this, each chip fired its own question,
+  so no answer ever saw the whole patient. `maikRefineCompose()` is pure and exposed on
+  `window.__MAIK_TEST`; pinned by `test/run-maik-refine-ui.mjs`. Unrelated to the `/refine`
+  ROUTER below — same word, different thing.
+- **A factor answered once is never asked again in that conversation.** The model re-emits its
+  `@@REFINE@@` line on every answer, so it kept asking for "renal impairment" right after
+  "renal function: creatinine 1.2". `maikRefineKnown()` drops a chip whose significant tokens
+  (generic modifiers — function/impairment/risk/status/level… — and ae/oe spellings stripped)
+  are a subset of an answered factor's, or vice versa. Distinct factors sharing one word
+  ("blood glucose" vs "blood pressure") are not subsets, so they survive. `_maikRefined`
+  clears with the thread.
+- **A plain dose lookup never reaches the model.** "dose of amlodipine" is answered from the curated
+  on-device formulary (`MEDDRUGS._list`, `drugs.js`) as a card in the thread — molecule, class, dose,
+  note — with two buttons: *Open in Drug Index* (`MEDDB.openComposition`) and *Let MaiK answer*.
+  Instant, offline, zero tokens; nothing is auto-redirected, the clinician still chooses.
+  `maikDoseLookup()` is deliberately NARROW and returns null for anything the Index cannot answer —
+  renal/hepatic, pregnancy, paediatric, weight-based, infusions, interactions, comparisons, >8 words,
+  or two drugs named. `MAIK_DOSE_NUANCE` has a whole-word group AND a stem group: inside `\b…\b`,
+  "pregnan" never matches "pregnancy". Pinned by `test/run-maik-dose-lookup-ui.mjs`.
+- **The wait has art (2026-08-27).** `maikBufferHTML()` renders **Medibot** — an inline vector robot
+  listening to its own chest (`maikBotSVG(px)`, gradient ids suffixed per instance so several can
+  coexist) — and `maikSetSendMode()` mounts/unmounts a **dark-teal pixel walker** on the composer's
+  top edge, alternating **Stetho Buddy** (front-on, 13×12, ×2) and **Stetho Strider** (side-on,
+  14×10, ×3) per turn. Sprites are rows of characters → 1×1 `<rect>`s (`maikPixG`/`maikPixSVG`);
+  palette is fixed in `MAIK_PIX` (body #0E6E63, rim/diaphragm #2DD4BF, tube #14807A, eye #04211E).
+  No image files, no library, ~3 KB. The dark-teal fill is deliberately quiet, so the walker carries
+  a teal `drop-shadow` to stay legible at night — brighten the glow, never the fill. Everything is
+  CSS keyframes and stops under `prefers-reduced-motion`. Pinned by `test/run-maik-busy-art-ui.mjs`.
+- **The MaiK stylesheet is ONE JS template literal** — a backtick in a CSS comment ends it and takes
+  the rest of `home.js` with it. Cost an hour of "why is the card gone".
+- **The router (`/refine`) is the biggest non-model cost** — 6.0-7.7s, and it runs BEFORE the
+  answer on every NEW question. Cached server-side (hash of the normalised query → canonical
+  concepts; the raw query is never stored) and warmed client-side on a typing pause.
+- **Measure with the done event, never by guessing.** A stream's done event carries `headMs`,
+  `preMs`, `firstTokMs`, `totalMs` and `model`. A 1.2s "network latency" once turned out to be
+  92ms of network and 1.1s of our own KV writes.
+- **KV writes cost ~380ms each** in this Worker. Anything that does not GATE (analytics rollups,
+  counter increments) belongs in `waitUntil`, not in front of the answer.
+- **Device numbers only.** Laptop/curl numbers hid a 26.6s on-device regression. Use
+  `test/device/maik-bench.html` in a throwaway build; its control arm proves the buffering.
+- Stream deadlines: connect 10s / idle 10s / total 25s. A deadline-closed stream sets
+  `stalled:true` and the client MUST refuse it — otherwise a truncated clinical answer looks whole.

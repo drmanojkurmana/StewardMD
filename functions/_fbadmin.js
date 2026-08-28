@@ -119,6 +119,20 @@ export async function setUserDisabled(env, uid, disabled) {
   return res.ok;
 }
 
+/* Permanently delete a user (Identity Toolkit accounts:delete). IRREVERSIBLE: the account, its
+ * custom claims and its sign-in identities are gone, and anything keyed on the uid (saved cases,
+ * ICU membership, the doctorDirectory entry) is orphaned. Nothing calls this unless the owner sets
+ * UNVERIFIED_PURGE_HARD_DELETE; the unverified sweep DISABLES by default, which is reversible. */
+export async function deleteUser(env, uid) {
+  const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
+  const saToken = await serviceAccountToken(env);
+  const res = await fetch(`https://identitytoolkit.googleapis.com/v1/projects/${project}/accounts:delete`, {
+    method: "POST", headers: { "Authorization": `Bearer ${saToken}`, "Content-Type": "application/json" },
+    body: JSON.stringify({ localId: String(uid || "").trim() }),
+  });
+  return res.ok;
+}
+
 export async function lookupUidByEmail(env, email) {
   const project = env.FIREBASE_PROJECT_ID || FB_PROJECT_DEFAULT;
   const saToken = await serviceAccountToken(env);

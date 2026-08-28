@@ -25,6 +25,14 @@
   /* ---------------------------------------------------------------- utils */
   function esc(s) { return String(s == null ? "" : s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;"); }
   function nowTs() { return Date.now(); }
+  // BUG B1 (2026-08-22 ward-round audit): every patient id used to be JUST nowTs() (or a fallback
+  // to it), so two patients admitted in the same millisecond collided into ONE record — reproduced:
+  // admit Mrs Lakshmi (septic shock) then Mr Rao (post-op) in the same tick, board showed only Mr
+  // Rao. Local roster upsert-by-id AND the Firestore doc key are both this id, so the loss is
+  // silent on both the device and the cloud copy. A random suffix makes two calls in the same
+  // millisecond distinguishable; used only as a FALLBACK where no stable id (a ward patientId)
+  // already exists, so a re-sync of the SAME ward patient still resolves to the SAME record.
+  function uniqSuffix() { return nowTs() + "_" + Math.random().toString(36).slice(2, 8); }
   function num(v) { if (v === "" || v == null) return null; var n = +v; return isFinite(n) ? n : null; }
   function clone(o) { return JSON.parse(JSON.stringify(o)); }
   function pick(o, keys) { var r = {}; keys.forEach(function (k) { if (o[k] != null && o[k] !== "") r[k] = o[k]; }); return r; }
@@ -799,17 +807,28 @@
     // (needed for the EMR workspace + Initial Assessment write-back). Travels with the shared unit too.
     if (bundle && bundle.episodeId) { st.wardSync = st.wardSync || {}; st.wardSync.episodeId = String(bundle.episodeId); }
     if (grpActive() && _grp && _grp.id) {
-      var api = groupsApi(), pid = "w_" + (wardId || nowTs());
+      var api = groupsApi(), pid = "w_" + (wardId || uniqSuffix());
       st.patient._id = pid;
       if (api && api.upsertPatient) return api.upsertPatient(_grp.id, pid, st, "Added from Ward Sync");
       return Promise.reject(new Error("group-api-unavailable"));
     }
-    var id = "pw_" + (wardId || nowTs());
+    var id = "pw_" + (wardId || uniqSuffix());
     st.patient._id = id;
     var entry = { id: id, name: st.patient.name || "Unnamed", dx: st.patient.diagnosis || "", bed: st.patient.bed || "", mrn: st.patient.mrn || "", savedAt: nowTs(), state: st };
     var r = loadRoster(), found = false, i;
+    // BUG B5: this path supports ticking several ward patients in a row (a bulk import), so unlike
+    // the manual Save button a per-row confirm() would be the wrong interruption — surface the
+    // clash as a toast instead and let the import proceed; the clinician still sees it happened.
+    var clash = bedHolder(r, String(entry.bed || "").trim(), id);
+    if (clash && window.toast) toast("Bed " + entry.bed + " is now shared with " + (clash.name || "another patient"));
     for (i = 0; i < r.length; i++) { if (r[i].id === id) { r[i] = entry; found = true; break; } }
     if (!found) r.push(entry);
+    // BUG B4: same reasoning as the bed-clash toast above — a bulk import can't stop for a
+    // confirm() per row, so name the dropped patient in a toast instead of evicting them silently.
+    if (!found && r.length > MAX_CASES) {
+      var evicted = r.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
+      if (evicted && evicted.id !== id && window.toast) toast((evicted.name || "The oldest saved patient") + "'s saved record was removed (max " + MAX_CASES + " patients)");
+    }
     saveRoster(capTen(r));
     try { if (ICU.isOpen()) paint(); } catch (e) {}
     return Promise.resolve(entry);
@@ -1248,6 +1267,10 @@
       '#icuRoot.icu-v2 .icu-v2-scount.crit::before{background:#F98C82}#icuRoot.icu-v2 .icu-v2-scount.crit span{color:#FBC2BC}' +
       '#icuRoot.icu-v2 .icu-v2-scount.review::before{background:#F2C066}#icuRoot.icu-v2 .icu-v2-scount.review span{color:#F6D9A5}' +
       '#icuRoot.icu-v2 .icu-v2-scount.stable::before{background:#7FD3A2}#icuRoot.icu-v2 .icu-v2-scount.stable span{color:#B4E4C8}' +
+      // BUG B2 (2026-08-22 ward-round audit, acuity v2): "Not assessed" is deliberately NEUTRAL -
+      // neither a green reassurance nor an amber/red alarm, since it means "no verdict yet", not
+      // "verdict: fine" or "verdict: unwell". A blue-grey distinct from all three existing tones.
+      '#icuRoot.icu-v2 .icu-v2-scount.unassessed::before{background:#B9C4CE}#icuRoot.icu-v2 .icu-v2-scount.unassessed span{color:#D3DBE2}' +
       // Selected filter = the tile lifts to an opaque white-on-teal state (not an outline sticker).
       '#icuRoot.icu-v2 .icu-v2-scount.on{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.55)}' +
       // board body
@@ -1255,7 +1278,7 @@
       '#icuRoot.icu-v2 .icu-v2-sec-lbl{font:700 10.5px var(--font);letter-spacing:.11em;text-transform:uppercase;color:var(--muted);margin:2px 2px 9px}' +
       '#icuRoot.icu-v2 .icu-v2-attn{display:flex;gap:10px;overflow-x:auto;-webkit-overflow-scrolling:touch;margin:0 -16px 4px;padding:0 16px 4px;scrollbar-width:none}#icuRoot.icu-v2 .icu-v2-attn::-webkit-scrollbar{display:none}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card{flex:0 0 auto;width:212px;text-align:left;background:var(--panel);border:1px solid var(--border);border-left:3px solid var(--muted);border-radius:var(--r);padding:11px 13px;cursor:pointer;box-shadow:var(--sh)}' +
-      '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}' +
+      '#icuRoot.icu-v2 .icu-v2-attn-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-attn-card.unassessed{border-left-color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-kind{font:700 9.5px var(--font);letter-spacing:.09em;text-transform:uppercase;color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-card.critical .icu-v2-attn-kind{color:var(--danger)}#icuRoot.icu-v2 .icu-v2-attn-card.review .icu-v2-attn-kind{color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-attn-name{font:700 14px var(--font);color:var(--ink);margin-top:6px}' +
@@ -1275,7 +1298,7 @@
       '#icuRoot.icu-v2 .icu-v2-swipe{position:relative}' +
       '#icuRoot.icu-v2 .icu-v2-swipe .icu-v2-card{position:relative;z-index:1;touch-action:pan-y}' +
       '#icuRoot.icu-v2 .icu-v2-swipe-act{position:absolute;top:0;right:0;bottom:8px;width:104px;border:none;border-radius:var(--r);background:var(--danger);color:#fff;font:600 11px var(--font);letter-spacing:.04em;text-transform:uppercase;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;cursor:pointer;padding-left:14px}#icuRoot.icu-v2 .icu-v2-swipe-act .icu-ico{width:18px;height:18px}' +
-      '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}' +
+      '#icuRoot.icu-v2 .icu-v2-card.critical{border-left-color:var(--danger)}#icuRoot.icu-v2 .icu-v2-card.review{border-left-color:var(--warn)}#icuRoot.icu-v2 .icu-v2-card.stable{border-left-color:var(--ok)}#icuRoot.icu-v2 .icu-v2-card.unassessed{border-left-color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-body{padding:13px 14px 12px}' +
       '#icuRoot.icu-v2 .icu-v2-card-top{display:flex;align-items:center;gap:11px}' +
       // Bed marker: a tile, squarer than the card, reading as a physical bay label.
@@ -1286,13 +1309,14 @@
       '#icuRoot.icu-v2 .icu-v2-bed.critical{background:var(--danger-soft);border-color:color-mix(in srgb,var(--danger) 30%,var(--border))}#icuRoot.icu-v2 .icu-v2-bed.critical b,#icuRoot.icu-v2 .icu-v2-bed.critical span{color:var(--danger)}' +
       '#icuRoot.icu-v2 .icu-v2-bed.review{background:var(--warn-soft);border-color:color-mix(in srgb,var(--warn) 30%,var(--border))}#icuRoot.icu-v2 .icu-v2-bed.review b,#icuRoot.icu-v2 .icu-v2-bed.review span{color:var(--warn)}' +
       '#icuRoot.icu-v2 .icu-v2-bed.stable{background:var(--panel2)}#icuRoot.icu-v2 .icu-v2-bed.stable b{color:var(--ink)}#icuRoot.icu-v2 .icu-v2-bed.stable span{color:var(--muted)}' +
+      '#icuRoot.icu-v2 .icu-v2-bed.unassessed{background:color-mix(in srgb,var(--muted) 16%,var(--panel2));border-color:color-mix(in srgb,var(--muted) 30%,var(--border))}#icuRoot.icu-v2 .icu-v2-bed.unassessed b,#icuRoot.icu-v2 .icu-v2-bed.unassessed span{color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-id{flex:1;min-width:0}' +
       '#icuRoot.icu-v2 .icu-v2-card-name{font:600 15.5px var(--font);color:var(--ink);display:flex;align-items:baseline;gap:7px;flex-wrap:wrap}' +
       '#icuRoot.icu-v2 .icu-v2-card-demo{font:500 12px var(--font);color:var(--muted)}' +
       '#icuRoot.icu-v2 .icu-v2-card-dx{font:400 13px var(--font);color:var(--muted);opacity:1;margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}' +
       // Status is a small squared tag, not a lozenge — same shape language as the rest of the chrome.
       '#icuRoot.icu-v2 .icu-v2-pill{flex:0 0 auto;font:700 9.5px var(--font);border-radius:5px;padding:4px 7px;letter-spacing:.07em;text-transform:uppercase}' +
-      '#icuRoot.icu-v2 .icu-v2-pill.critical{color:var(--danger);background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-pill.review{color:var(--warn);background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-pill.stable{color:var(--ok);background:var(--ok-soft)}' +
+      '#icuRoot.icu-v2 .icu-v2-pill.critical{color:var(--danger);background:var(--danger-soft)}#icuRoot.icu-v2 .icu-v2-pill.review{color:var(--warn);background:var(--warn-soft)}#icuRoot.icu-v2 .icu-v2-pill.stable{color:var(--ok);background:var(--ok-soft)}#icuRoot.icu-v2 .icu-v2-pill.unassessed{color:var(--muted);background:color-mix(in srgb,var(--muted) 16%,var(--panel2))}' +
       // Vitals row: evenly divided columns on a hairline, so values line up down the whole board.
       '#icuRoot.icu-v2 .icu-v2-vstrip{display:flex;gap:0;margin-top:11px;padding-top:10px;border-top:1px solid var(--border-soft)}' +
       '#icuRoot.icu-v2 .icu-v2-vc{flex:1;min-width:0;padding-right:12px}' +
@@ -3558,6 +3582,41 @@
    * Phase 1 (single-device roster; presence/team/notifications are local stubs
    * clearly labelled until Phase 2 Firestore). All markup gated behind #icuRoot.icu-v2.
    */
+  // BUG B2/B3 (2026-08-22 ward-round audit, owner-approved 2026-08-23, turned ON 2026-08-23): a
+  // richer acuity engine - a genuine "Not assessed" state (for a patient with nothing charted, or
+  // nothing RECENT) and NEWS2-driven escalation on top of the original four raw thresholds. Shipped
+  // flag-gated OFF by default first, verified, then the owner reviewed the ranking design and
+  // turned it ON for everyone. DEFAULT ON now; kill-switch via ?acuityv2=0 or localStorage "0",
+  // same opt-out pattern as labWatchOn()/icuGroupsOn() - instant revert with no redeploy if needed.
+  function icuAcuityV2On() {
+    try {
+      var q = (location.search.match(/[?&]acuityv2=([^&]+)/) || [])[1];
+      if (q != null) return q === "1" || q === "on" || q === "true";
+      return localStorage.getItem("smd_icu_acuity_v2") !== "0";
+    } catch (e) { return true; }
+  }
+  // "Not assessed" staleness window (B7's escalation half): past this, a STABLE read based on old
+  // data no longer counts as reassurance. Deliberately only demotes FROM "stable" - a patient
+  // already flagged critical/review on old data is already getting attention, so this is about
+  // catching the one bucket where deterioration hides silently, not re-triaging everyone.
+  var ACUITY_STALE_MS = 24 * 3600000;   // 24h, per owner's call (was 12h at first ship)
+  // NEWS2 needs the FULL state (the vitals series + ventilator/ABG for the O2 point) - v2Snapshot's
+  // summary fields aren't enough for it, so this reads st directly. Reuses icu-autoscores.js's own
+  // NEWS2 adapter + MEDCALC formula via computeOne(), so the board's number is guaranteed identical
+  // to whatever the Monitoring tab shows for the same patient - never a second hand-rolled copy.
+  function v2NewsInfo(st) {
+    try {
+      if (!(window.ICU_AUTOSCORES && ICU_AUTOSCORES.computeOne)) return null;
+      var r = ICU_AUTOSCORES.computeOne(st, "news2");
+      if (!r || r.missing || typeof r.value !== "number") return null;
+      return { value: r.value, interp: r.interp || "" };
+    } catch (e) { return null; }
+  }
+  function v2NothingCharted(st) {
+    st = st || {};
+    var v = st.vitals || [], l = (st.labs && st.labs.recent) || {};
+    return v.length === 0 && Object.keys(l).length === 0;
+  }
   // Acuity derived from RAW values WITHOUT calling recompute (entry.state.alerts is stripped on save).
   function v2Snapshot(st) {
     st = st || {};
@@ -3565,24 +3624,52 @@
     var mp = lv.map != null ? lv.map : mapCalc(lv.sbp, lv.dbp);
     var press = (st.infusions || []).filter(function (i) { return isPressor(i.drug); });
     var L = (st.labs && st.labs.recent) || {};
-    return { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, pressors: press.length, k: L.k };
+    var s = { map: mp, hr: lv.hr, spo2: lv.spo2, lactate: lv.lactate, temp: lv.temp, rr: lv.rr, pressors: press.length, k: L.k };
+    if (icuAcuityV2On()) s.news2 = v2NewsInfo(st);   // only paid for when the flag is actually on
+    return s;
+  }
+  // BUG B7 (2026-08-22 ward-round audit): the newest CHARTED observation (vitals or a lab), for the
+  // board card footer - deliberately separate from savedAt, which is when the app last wrote the
+  // record and says nothing about whether anyone has actually charted anything since.
+  function v2LastObsTs(st) {
+    st = st || {};
+    var vTs = (latestByTs(st.vitals || []).ts) || 0;
+    var lTs = (latestByTs((st.labs && st.labs.trends) || []).ts) || 0;
+    return Math.max(vTs, lTs) || null;
   }
   function v2Severity(st) {
-    var s = v2Snapshot(st);
+    var s = v2Snapshot(st), v2 = icuAcuityV2On();
     if ((s.map != null && s.map < 65) || (s.lactate != null && s.lactate > 4) || (s.spo2 != null && s.spo2 < 90) || s.pressors >= 1) return "critical";
-    if ((s.map != null && s.map < 70) || (s.lactate != null && s.lactate > 2) || (s.spo2 != null && s.spo2 < 93) || (s.k != null && (s.k > K_WARN_HI || s.k < K_WARN_LO))) return "review";
+    if (v2 && s.news2 && s.news2.value >= 7) return "critical";   // NEWS2 >=7: high risk, urgent response
+    // BUG B3: the SpO2 threshold was `< 93` on both tiers, so a reading of EXACTLY 93 - already
+    // borderline by NEWS2's own Scale-1 banding - cleared the review tier too. Only the review
+    // boundary is corrected (inclusive); the unambiguous critical threshold (<90) is untouched.
+    var spo2Review = s.spo2 != null && (v2 ? s.spo2 <= 93 : s.spo2 < 93);
+    if ((s.map != null && s.map < 70) || (s.lactate != null && s.lactate > 2) || spo2Review || (s.k != null && (s.k > K_WARN_HI || s.k < K_WARN_LO))) return "review";
+    if (v2 && s.news2 && s.news2.value >= 5) return "review";   // NEWS2 5-6: medium risk, urgent review
+    if (v2) {
+      if (v2NothingCharted(st)) return "unassessed";
+      var obsTs = v2LastObsTs(st);
+      if (obsTs && (nowTs() - obsTs) > ACUITY_STALE_MS) return "unassessed";
+    }
     return "stable";
   }
-  var V2_LABEL = { critical: "Critical", review: "Needs review", stable: "Stable" };
+  var V2_LABEL = { critical: "Critical", review: "Needs review", stable: "Stable", unassessed: "Not assessed" };
   function v2Reason(s) {
     var r = [];
+    if (s.news2 && s.news2.value >= 5) r.push("NEWS2 " + s.news2.value);
+    if (s.rr != null && (s.rr < 8 || s.rr > 24)) r.push("RR " + s.rr);
     if (s.map != null && s.map < 70) r.push("MAP " + s.map);
     if (s.lactate != null && s.lactate > 2) r.push("Lactate " + s.lactate);
-    if (s.spo2 != null && s.spo2 < 93) r.push("SpO₂ " + s.spo2 + "%");
+    if (s.spo2 != null && (icuAcuityV2On() ? s.spo2 <= 93 : s.spo2 < 93)) r.push("SpO₂ " + s.spo2 + "%");
     if (s.pressors >= 1) r.push(s.pressors + " pressor" + (s.pressors > 1 ? "s" : ""));
     if (s.k != null && (s.k > K_WARN_HI || s.k < K_WARN_LO)) r.push("K⁺ " + s.k);
     return r.join(" · ");
   }
+  // "Review recommended" (a verdict was reached and flagged something) is the wrong fallback for a
+  // patient nobody has assessed yet - BUG B2's whole point is that absence of data must never read
+  // as reassurance OR as an alarm someone already raised.
+  function v2ReasonFallback(p) { return (p && p.sev === "unassessed") ? "No observations recorded yet" : "Review recommended"; }
   function v2AccountProfile() { try { return (window.SMD_ACCOUNT && SMD_ACCOUNT.profile) ? SMD_ACCOUNT.profile() : null; } catch (e) { return null; } }
   function v2AccountName() { var p = v2AccountProfile(); return (p && (p.name || p.email)) || "You"; }
   function v2Initials(s) {
@@ -3613,16 +3700,31 @@
       p.age = (p.state.patient && p.state.patient.age != null) ? p.state.patient.age : null;
       p.sex = (p.state.patient && p.state.patient.sex) || "";
     });
-    var rank = { critical: 0, review: 1, stable: 2 };
+    // BUG B2: "unassessed" ranks ahead of stable (never buried below patients confirmed fine) but
+    // behind critical/review - a patient with CONFIRMED physiological derangement shouldn't be
+    // displaced from the top by one who simply has no data yet (which could just as easily be a
+    // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
+    var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
     list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
   function v2CardVitals(s) {
     function mk(k, val, sst) { return { k: k, val: (val == null ? "—" : val), st: sst || "" }; }
+    // BUG B8 (2026-08-22 ward-round audit): pulse and respiratory rate — charted on every
+    // observation round, on every patient — appeared nowhere on the card. Reuse the SAME thresholds
+    // already used for these vitals elsewhere (renderLiveStatus/renderV2Banner) via vstat(), just
+    // dropping its "ok" down to "" to match this card's own tile styling vocabulary (only "crit"/
+    // "warn" carry a highlight class here).
+    function tileSt(v, lo, hi, clo, chi) { var r = vstat(v, lo, hi, clo, chi); return r === "ok" ? "" : r; }
     var v = [];
     v.push(mk("MAP", s.map, s.map == null ? "" : (s.map < 65 ? "crit" : s.map < 70 ? "warn" : "")));
-    v.push(mk("LACT", s.lactate, s.lactate == null ? "" : (s.lactate > 4 ? "crit" : s.lactate > 2 ? "warn" : "")));
+    if (s.hr != null) v.push(mk("HR", s.hr, tileSt(s.hr, 50, 110, 40, 140)));
     v.push(mk("SpO₂", s.spo2 == null ? null : (s.spo2 + "%"), s.spo2 == null ? "" : (s.spo2 < 90 ? "crit" : s.spo2 < 93 ? "warn" : "")));
+    if (s.rr != null) v.push(mk("RR", s.rr, tileSt(s.rr, 8, 24, null, 30)));
+    // BUG B8: lactate used to occupy a slot with a bare "—" even though it's blank for most ward
+    // patients most of the time, crowding out HR/RR on a card with room for only a few tiles. Only
+    // take a slot when there is an actual value.
+    if (s.lactate != null) v.push(mk("LACT", s.lactate, s.lactate > 4 ? "crit" : s.lactate > 2 ? "warn" : ""));
     if (s.pressors >= 1) v.push(mk("PRESS", s.pressors, "crit"));
     return v;
   }
@@ -3741,10 +3843,66 @@
     return '<div class="icu-v2-swipe"><button class="icu-v2-swipe-act" data-icu-act="ptswipe:' + encodeURIComponent(id) + '" tabindex="-1" aria-label="Discharge or remove this patient">' +
       ico("trash", "🗑") + '<span>Remove</span></button>' + cardHTML + '</div>';
   }
+  // Shared board-body renderer (attention strip + filters + patient cards + count footer) — the
+  // list itself may be the solo device roster (renderV2Board) or, since B6, that SAME device
+  // roster shown as a read-only fallback inside the group board when the shared unit is unreachable
+  // (renderV2BoardGroup). Extracted so both paths render identical cards, not two copies to drift.
+  function v2BoardBodyHTML(list, counts, opts) {
+    opts = opts || {};
+    // actPrefix: which data-icu-act opens a card — "openpt" (normal board) resolves local-vs-group
+    // from CURRENT mode, which is wrong for the B6 fallback (group mode is still ON, just
+    // unreachable, so "openpt" would try Firestore for a patient that only exists locally).
+    // readOnly: the B6 fallback is explicitly read-only (device roster shown while disconnected) -
+    // no swipe-to-remove, since that resolves local-vs-group the same wrong way.
+    var actPrefix = opts.actPrefix || "openpt", readOnly = !!opts.readOnly;
+    var attn = list.filter(function (p) { return p.sev !== "stable"; });
+    var attnHTML = (_v2Filter === "all" && attn.length)
+      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
+          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
+            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
+            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
+            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || v2ReasonFallback(p)) + '</div></button>';
+        }).join("") + '</div>'
+      : "";
+    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }].concat(icuAcuityV2On() ? [{ k: "unassessed", label: "Not assessed" }] : []);
+    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
+      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
+    }).join("") + '</div>';
+    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
+    var ini = esc(v2Initials(v2AccountName()));
+    var cards = shown.length ? shown.map(function (p) {
+      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
+      var vits = v2CardVitals(p.snap);
+      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
+      var cardBtn = '<button class="icu-v2-card ' + p.sev + '" data-icu-act="' + actPrefix + ':' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
+        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
+        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
+        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
+        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
+        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
+          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
+        }).join("") + '</div></div>' +
+        // BUG B7 (2026-08-22 ward-round audit): this footer used to always say "Saved" + the age
+        // of the last SAVE - a claim about the app, not the patient. A board can look entirely
+        // green at 4pm because the morning's numbers were saved at 9am and nobody has charted
+        // since. Show the age of the newest actual OBSERVATION (vitals or labs) instead, when
+        // there is one - falling back to "Saved" only for a patient with nothing charted yet.
+        (function () {
+          var obsTs = v2LastObsTs(p.state);
+          var lbl = obsTs ? "Vitals" : "Saved";
+          var ago = esc(fmtAgo(obsTs || p.savedAt) || fmtWhen(obsTs || p.savedAt));
+          return '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">' + lbl + '</span>' +
+            '<span class="icu-v2-foot-ago">' + ago + '</span></div></button>';
+        })();
+      return readOnly ? cardBtn : v2SwipeRow(p.id, cardBtn);
+    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
+    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
+    return attnHTML + filters + cards + foot;
+  }
   function renderV2Board() {
     if (groupMode()) return renderV2BoardGroup();   // Phase 2: live Firestore unit (additive, gated)
     var list = v2BoardList();
-    var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
+    var counts = { total: list.length, critical: 0, review: 0, stable: 0, unassessed: 0 };
     list.forEach(function (p) { counts[p.sev]++; });
     var unread = counts.critical + counts.review;
     var uhead = '<div class="icu-v2-uhead"><div class="icu-v2-uhead-top">' +
@@ -3756,6 +3914,9 @@
       '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"' + v2StripAria("critical", counts.critical, "Critical") + '><b>' + counts.critical + '</b><span>Critical</span></button>' +
       '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"' + v2StripAria("review", counts.review, "Needs review") + '><b>' + counts.review + '</b><span>Review</span></button>' +
       '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"' + v2StripAria("stable", counts.stable, "Stable") + '><b>' + counts.stable + '</b><span>Stable</span></button>' +
+      // BUG B2: its own census tile - but only when the flag is on, so the other 99% of boards
+      // don't carry a permanent "0 Not assessed" tile they can never make non-zero.
+      (icuAcuityV2On() ? '<button class="icu-v2-scount unassessed' + (_v2Filter === "unassessed" ? " on" : "") + '" data-icu-act="icufilter:unassessed"' + v2StripAria("unassessed", counts.unassessed, "Not assessed") + '><b>' + counts.unassessed + '</b><span>Not assessed</span></button>' : "") +
       '</div></div>';
     if (!list.length) {
       return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board"><div class="icu-v2-empty">' +
@@ -3764,38 +3925,7 @@
         '<p class="icu-v2-empty-p">Admit your first ' + ctxLabel() + ' patient to start tracking vitals, labs, instructions and a round-ready summary — all on this device.</p>' +
         '<button class="icu-btn icu-v2-empty-cta" data-icu-act="icuadmit">＋ Admit patient</button></div></div></div>';
     }
-    var attn = list.filter(function (p) { return p.sev !== "stable"; });
-    var attnHTML = (_v2Filter === "all" && attn.length)
-      ? '<div class="icu-v2-sec-lbl">Needs your attention</div><div class="icu-v2-attn">' + attn.map(function (p) {
-          return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
-            '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
-            '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
-            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
-        }).join("") + '</div>'
-      : "";
-    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
-    var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
-      return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
-    }).join("") + '</div>';
-    var shown = _v2Filter === "all" ? list : list.filter(function (p) { return p.sev === _v2Filter; });
-    var ini = esc(v2Initials(v2AccountName()));
-    var cards = shown.length ? shown.map(function (p) {
-      var demo = (p.age != null) ? (p.age + (p.sex ? "/" + p.sex : "")) : "";
-      var vits = v2CardVitals(p.snap);
-      var tOpen = (grpActive() && _grpTaskOpen[p.id]) || 0;   // live open-task count (board task listeners)
-      return v2SwipeRow(p.id, '<button class="icu-v2-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '><div class="icu-v2-card-body"><div class="icu-v2-card-top">' +
-        '<div class="icu-v2-bed ' + p.sev + '"><b>' + esc(p.bed || "—") + '</b><span>BED</span></div>' +
-        '<div class="icu-v2-card-id"><div class="icu-v2-card-name">' + esc(p.name || "Patient") + (demo ? '<span class="icu-v2-card-demo">' + esc(demo) + '</span>' : "") + '</div>' +
-        '<div class="icu-v2-card-dx">' + (p.dx ? esc(p.dx) : "No diagnosis") + '</div></div>' +
-        '<span class="icu-v2-pill ' + p.sev + '">' + V2_LABEL[p.sev] + '</span></div>' +
-        '<div class="icu-v2-vstrip">' + vits.map(function (v) {
-          return '<div class="icu-v2-vc ' + v.st + '"><div class="icu-v2-vk">' + v.k + '</div><div class="icu-v2-vv">' + esc(v.val) + '</div></div>';
-        }).join("") + '</div></div>' +
-        '<div class="icu-v2-card-foot"><span class="icu-v2-foot-av">' + ini + '</span><span class="icu-v2-foot-txt">Saved</span>' +
-        '<span class="icu-v2-foot-ago">' + esc(fmtAgo(p.savedAt) || fmtWhen(p.savedAt)) + '</span></div></button>');
-    }).join("") : '<div class="icu-v2-empty2">No patients match this filter.</div>';
-    var foot = '<div class="icu-v2-foot-count">Showing ' + shown.length + ' of ' + counts.total + '</div>';
-    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + attnHTML + filters + cards + foot + '</div></div>';
+    return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + v2BoardBodyHTML(list, counts) + '</div></div>';
   }
   // Board / alerts / team bottom bar: Unit · Alerts · Team · Admit.
   function renderV2BottomBar() {
@@ -3842,7 +3972,7 @@
     var list = v2BoardListActive(), rows = [];
     list.forEach(function (p) {
       if (p.sev === "stable") return;
-      rows.push({ id: p.id, sev: p.sev, title: V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · " + (p.name || "Patient"), body: v2Reason(p.snap) || "Review recommended" });
+      rows.push({ id: p.id, sev: p.sev, title: V2_LABEL[p.sev] + " · Bed " + (p.bed || "—") + " · " + (p.name || "Patient"), body: v2Reason(p.snap) || v2ReasonFallback(p) });
     });
     rows.sort(function (a, b) { return (a.sev === "critical" ? 0 : 1) - (b.sev === "critical" ? 0 : 1); });
     var header = '<div class="icu-v2-shead"><button class="icu-v2-sback" data-icu-act="icuboard" aria-label="Back to unit board">‹</button><div><div class="icu-v2-shead-h">Notifications</div><div class="icu-v2-shead-s">Only clinically meaningful events</div></div></div>';
@@ -4018,7 +4148,11 @@
       p.sex = (p.state.patient && p.state.patient.sex) || "";
       p.reviewed = !!p.reviewedAt;
     });
-    var rank = { critical: 0, review: 1, stable: 2 };
+    // BUG B2: "unassessed" ranks ahead of stable (never buried below patients confirmed fine) but
+    // behind critical/review - a patient with CONFIRMED physiological derangement shouldn't be
+    // displaced from the top by one who simply has no data yet (which could just as easily be a
+    // routine, minutes-old admission). Revisit this ordering once the owner has watched it run.
+    var rank = { critical: 0, review: 1, unassessed: 2, stable: 3 };
     list.sort(function (a, b) { var d = (rank[a.sev] || 9) - (rank[b.sev] || 9); return d ? d : (v2BedNum(a.bed) - v2BedNum(b.bed)); });
     return list;
   }
@@ -4324,7 +4458,7 @@
   function grpAdmit() {
     if (!grpActive()) return;
     grpTeardownPatient();
-    var id = "p" + nowTs();
+    var id = "p" + uniqSuffix();
     _grpPtId = id; _grpPtVM = { patient: null, timeline: [], tasks: [] }; _grpPresence = [];
     Object.keys(DEFAULT_STATE).forEach(function (k) { STATE[k] = clone(DEFAULT_STATE[k]); });
     STATE.patient._id = id;
@@ -4366,7 +4500,7 @@
     var gsub = _grp
       ? ((_grp.unit ? esc(_grp.unit) + " · " : "") + (grpActive() && _grpPatients ? _grpPatients.length + " patient" + (_grpPatients.length === 1 ? "" : "s") : "…") + (_grp.myRole ? " · " + esc(grpRoleLabel(_grp.myRole)) : ""))
       : "Tap to open or create a shared unit";
-    var counts = { total: list.length, critical: 0, review: 0, stable: 0 };
+    var counts = { total: list.length, critical: 0, review: 0, stable: 0, unassessed: 0 };
     list.forEach(function (p) { counts[p.sev]++; });
     // Phase 3: the bell badge = count of meaningful UNSEEN events (per-user last-seen), not raw acuity.
     var unread = grpActive() ? grpUnreadCount(grpNotifRows(), grpNotifSeen()) : (counts.critical + counts.review);
@@ -4381,9 +4515,25 @@
         '<button class="icu-v2-scount crit' + (_v2Filter === "critical" ? " on" : "") + '" data-icu-act="icufilter:critical"' + v2StripAria("critical", counts.critical, "Critical") + '><b>' + counts.critical + '</b><span>Critical</span></button>' +
         '<button class="icu-v2-scount review' + (_v2Filter === "review" ? " on" : "") + '" data-icu-act="icufilter:review"' + v2StripAria("review", counts.review, "Needs review") + '><b>' + counts.review + '</b><span>Review</span></button>' +
         '<button class="icu-v2-scount stable' + (_v2Filter === "stable" ? " on" : "") + '" data-icu-act="icufilter:stable"' + v2StripAria("stable", counts.stable, "Stable") + '><b>' + counts.stable + '</b><span>Stable</span></button>' +
+        (icuAcuityV2On() ? '<button class="icu-v2-scount unassessed' + (_v2Filter === "unassessed" ? " on" : "") + '" data-icu-act="icufilter:unassessed"' + v2StripAria("unassessed", counts.unassessed, "Not assessed") + '><b>' + counts.unassessed + '</b><span>Not assessed</span></button>' : "") +
         '</div>') : "") + '</div>';
     // Hard error state — takes precedence over loading/empty (never a raw error / blank screen).
     if (errFull) {
+      // BUG B6 (2026-08-22 ward-round audit): the shared unit being unreachable used to blank out
+      // patients the doctor ALREADY has, saved on this very device — a spinner, then a full error
+      // card, with no way to see them until the connection came back. Hospital wifi failing at 3am
+      // is exactly when this bites. Fall back to the device roster read-only (same cards, same tap-
+      // to-open), under a persistent banner so it's never mistaken for the live shared list.
+      var localList = v2BoardList();
+      if (localList.length) {
+        var localCounts = { total: localList.length, critical: 0, review: 0, stable: 0, unassessed: 0 };
+        localList.forEach(function (p) { localCounts[p.sev]++; });
+        var localBanner = '<div class="icu-v2-note" style="border-color:var(--warn);color:var(--warn)">' + ico("warn", "⚠️") +
+          ' Shared unit unreachable · showing ' + localList.length + ' patient' + (localList.length === 1 ? "" : "s") + ' saved on this device' +
+          (grpErrIsPermission() ? "" : ' <button class="icu-btn ghost" data-icu-act="grpretry" aria-label="Retry connecting to the unit" style="margin-left:8px;padding:3px 10px;font-size:12px">' + ico("refresh", "↻") + ' Retry</button>') +
+          '</div>';
+        return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + localBanner + v2BoardBodyHTML(localList, localCounts, { actPrefix: "openptlocal", readOnly: true }) + '</div></div>';
+      }
       return '<div class="icu-scroll icu-v2-scroll">' + uhead + '<div class="icu-v2-board">' + offBar + grpErrCard() + '</div></div>';
     }
     // No unit selected → an inviting "open or create a unit" state (calm spinner while connecting).
@@ -4413,10 +4563,10 @@
           return '<button class="icu-v2-attn-card ' + p.sev + '" data-icu-act="openpt:' + encodeURIComponent(p.id) + '"' + v2CardAria(p) + '>' +
             '<div class="icu-v2-attn-kind">' + V2_LABEL[p.sev] + '</div>' +
             '<div class="icu-v2-attn-name">Bed ' + esc(p.bed || "—") + ' · ' + esc(p.name || "Patient") + '</div>' +
-            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || "Review recommended") + '</div></button>';
+            '<div class="icu-v2-attn-detail">' + (esc(v2Reason(p.snap)) || v2ReasonFallback(p)) + '</div></button>';
         }).join("") + '</div>'
       : "";
-    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }];
+    var chips = [{ k: "all", label: "All" }, { k: "critical", label: "Critical" }, { k: "review", label: "Needs review" }, { k: "stable", label: "Stable" }].concat(icuAcuityV2On() ? [{ k: "unassessed", label: "Not assessed" }] : []);
     var filters = '<div class="icu-v2-filters" role="group" aria-label="Filter patients">' + chips.map(function (c) {
       return '<button class="icu-v2-fchip' + (_v2Filter === c.k ? " on" : "") + '" data-icu-act="icufilter:' + c.k + '"' + v2ChipAria(c.k, c.label) + '>' + esc(c.label) + '</button>';
     }).join("") + '</div>';
@@ -7393,6 +7543,7 @@
   var MAX_CASES = 10;
   var CASES_API = "/api/cases";
   var _cloud = { enabled: null };   // null = not yet probed; true / false after a call
+  var _cloudNagged = false;         // the full "why" dialog is shown once per session, not per save
   function ownerNow() {
     try { var a = window.SMD_AUTH || (window.firebase && firebase.auth && firebase.auth());
       if (a && a.currentUser && a.currentUser.uid) return a.currentUser.uid; } catch (e) {}
@@ -7485,8 +7636,35 @@
   function cloudGet(id) { return cloudFetch("/" + encodeURIComponent(id)).then(function (r) { return r.json(); }).catch(function () { return null; }); }
   function cloudDel(id) { return cloudFetch("/" + encodeURIComponent(id), { method: "DELETE" }).then(function (r) { return r.json(); }).catch(function () { return null; }); }
 
+  // BUG B5 (2026-08-22 ward-round audit): two live patients could hold the same bed with nothing
+  // said. Bed number is how a nurse names a patient at 3am ("bed 7 needs review") — two patients in
+  // bed 7 makes every verbal instruction ambiguous. Not a hard block (a bed swap mid-transfer is
+  // real and must stay possible) but never silent: confirm, naming who else is already there.
+  function bedHolder(roster, bed, excludeId) {
+    if (!bed) return null;
+    for (var i = 0; i < roster.length; i++) {
+      if (roster[i].id !== excludeId && String(roster[i].bed || "").trim() === bed) return roster[i];
+    }
+    return null;
+  }
   function savePatient() {
-    var id = _raw.patient._id || ("p" + nowTs());
+    var id = _raw.patient._id || ("p" + uniqSuffix());
+    var bed = String(_raw.patient.bed || "").trim();
+    var rChk = loadRoster();
+    if (bed) {
+      var clash = bedHolder(rChk, bed, id);
+      if (clash && !window.confirm("Bed " + bed + " is already assigned to " + (clash.name || "another patient") + ". Save anyway?")) return;
+    }
+    // BUG B4 (2026-08-22 ward-round audit): saving past MAX_CASES used to silently drop the oldest
+    // saved patient's full record (vitals/labs/notes) with nothing said — a doctor could lose an
+    // active patient's chart and never know until they happened to open Saved patients. Warn BEFORE
+    // it happens, naming who would be dropped, so discharging someone first (or proceeding anyway)
+    // is the doctor's choice, not a silent side effect.
+    var isNewCase = !rChk.some(function (p) { return p.id === id; });
+    if (isNewCase && rChk.length >= MAX_CASES) {
+      var oldest = rChk.slice().sort(function (a, b) { return (a.savedAt || 0) - (b.savedAt || 0); })[0];
+      if (!window.confirm("You already have " + MAX_CASES + " saved patients (the maximum). Saving this one will remove " + (oldest && oldest.name ? oldest.name : "the oldest saved patient") + "'s saved record. Continue?")) return;
+    }
     STATE.patient._id = id;                                  // reactive write persists live state
     var snap = clone(_raw); snap.alerts = [];                // derived; recomputed on load
     var entry = { id: id, name: _raw.patient.name || "Unnamed", dx: _raw.patient.diagnosis || "", bed: _raw.patient.bed || "", savedAt: nowTs(), state: snap };
@@ -7499,6 +7677,18 @@
     // 2) cloud (best-effort) — server enforces the same MAX_CASES cap
     cloudSave(entry).then(function (res) {
       if (res && res.ok) { _cloud.enabled = true; if (window.toast) toast(found ? "Updated · saved to cloud ☁︎" : "Saved to cloud ☁︎"); }
+      else if (res && res.needsPro) {
+        // "Saved on this device" alone is why cross-device sync reads as broken: the patient just
+        // does not appear on the doctor's other phone and nothing ever says why. Say it, and show
+        // the full explanation ONCE per session rather than on every save.
+        _cloud.enabled = false;
+        if (window.toast) toast((found ? "Updated on this device. " : "Saved on this device. ") +
+          (res.reason === "unverified" ? "Cloud sync unlocks when you verify." : "Cloud sync is a Pro feature."));
+        if (!_cloudNagged) {
+          _cloudNagged = true;
+          try { if (window.SMD_PRO_NOTICE) SMD_PRO_NOTICE.show("cloud-sync", res); } catch (e) {}
+        }
+      }
       else { if (window.toast) toast(found ? "Updated (saved on this device)" : "Saved on this device"); }
       paint();
     });
@@ -7805,6 +7995,10 @@
       case "testpush": grpTestPush(); break;
       case "notifprefs": grpOpenNotifPrefs(); break;   // per-user ICU notification category toggles
       case "openpt": { var _op = decodeURIComponent(arg); _screen = "patient"; if (grpActive()) { grpOpenPatient(_op); } else if (_op === (_raw.patient._id || "cur") || _op === "cur") { _paintTop = true; paint(); } else { loadPatient(_op); } break; }
+      // BUG B6: a card from the device-roster fallback (group unreachable) is ALWAYS a local patient,
+      // even though grpActive() is still true (group mode + a unit are selected, just unreachable) -
+      // "openpt" would wrongly route it through grpOpenPatient()/Firestore. Always load it locally.
+      case "openptlocal": { var _opl = decodeURIComponent(arg); _screen = "patient"; if (_opl === (_raw.patient._id || "cur") || _opl === "cur") { _paintTop = true; paint(); } else { loadPatient(_opl); } break; }
       case "icufilter": _v2Filter = arg; paint(); break;
       // swipe-to-remove on a board card: reveal → chooser → discharge / clear / cancel
       case "ptswipe": v2SwipeChooser(decodeURIComponent(arg)); break;

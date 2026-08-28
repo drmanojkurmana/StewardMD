@@ -1,0 +1,81 @@
+{
+  "_comment": "Soft-tissue and drainage steps. Shared by abscess drainage, wound debridement and minor procedures.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.st.local": {
+      "id": "step.st.local", "kind": "prep",
+      "title": "Local anaesthesia for an inflamed field",
+      "why": "Local anaesthetic works poorly in the acidic tissue of an abscess, which is why patients remember these procedures. Say so, and plan around it.",
+      "how": [
+        "Infiltrate a field block in healthy tissue around the abscess rather than into it.",
+        "Check the maximum safe dose for the patient's weight and whether adrenaline is appropriate for that site.",
+        "If adequate anaesthesia cannot be achieved, stop and do it under general anaesthesia rather than doing it badly."
+      ],
+      "pitfalls": ["Injecting into the cavity, which hurts and does not work.", "Exceeding the maximum dose when a large area needs infiltration."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.incision": {
+      "id": "step.st.incision", "kind": "access",
+      "title": "Incision over the collection",
+      "why": "The incision must be long enough and placed so the cavity drains with gravity, or the abscess reforms and the patient returns.",
+      "how": [
+        "Incise at the point of maximal fluctuance, along skin tension lines where cosmesis matters, and at the most dependent point where drainage matters.",
+        "Make the incision long enough to allow the cavity to be explored and to keep draining as it heals.",
+        "For a pilonidal abscess, drain off the midline."
+      ],
+      "structuresAtRisk": ["Facial nerve branches in a parotid or facial abscess", "Anal sphincter complex in a perianal abscess", "Neurovascular bundles in the limbs"],
+      "pitfalls": ["A stab incision that closes over within a day.", "An incision placed for convenience rather than for dependent drainage."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.culture": {
+      "id": "step.st.culture", "kind": "checkpoint",
+      "title": "Pus for culture",
+      "why": "Pus obtained at drainage is the specimen that guides therapy. A superficial swab of intact skin taken afterwards answers a different and less useful question.",
+      "how": [
+        "Aspirate or swab pus from within the cavity at the moment it is opened, before irrigation.",
+        "Send in an appropriate container, and request anaerobic culture where the site suggests it.",
+        "Record on the request what the patient has already had, so the laboratory can interpret a negative culture."
+      ],
+      "pitfalls": ["Irrigating first, then swabbing.", "Sending no culture from an abscess in a diabetic or immunocompromised patient."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.deloculate": {
+      "id": "step.st.deloculate", "kind": "dissection", "critical": true,
+      "title": "Breaking down loculations",
+      "why": "An abscess that is not fully de-loculated is an abscess that has been partly drained, and it is the commonest reason for recurrence and readmission.",
+      "how": [
+        "Explore the whole cavity with a finger or a blunt instrument and break every septum.",
+        "Feel for the extent in every direction, particularly deep, where the cavity is usually larger than the skin suggests.",
+        "For a perianal abscess, consider examination under anaesthesia to exclude ischiorectal, supralevator or horseshoe extension."
+      ],
+      "structuresAtRisk": ["Anal sphincter", "Named vessels and nerves at the base of a deep cavity"],
+      "pitfalls": ["Stopping at the first gush of pus.", "Probing forcibly through the cavity wall and creating a false passage."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.debride": {
+      "id": "step.st.debride", "kind": "resection", "critical": true,
+      "title": "Debridement of non-viable tissue",
+      "why": "Antibiotics do not reach dead tissue. In necrotising infection the extent of debridement at the first operation is the strongest determinant of survival.",
+      "how": [
+        "Excise to bleeding, contractile, healthy tissue in every direction.",
+        "In necrotising infection, follow the plane of easy finger dissection: where the fascia separates without resistance, the disease has been.",
+        "Plan a re-look at 24 to 48 hours as the default, not as a rescue."
+      ],
+      "structuresAtRisk": ["Named neurovascular structures at the margin of debridement", "Viable skin that will be needed for later closure"],
+      "pitfalls": ["A conservative first debridement in necrotising infection.", "Debriding to a cosmetic margin rather than a physiological one."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.st.pack": {
+      "id": "step.st.pack", "kind": "closure",
+      "title": "Irrigation, packing and leaving the wound open",
+      "why": "An abscess cavity closed primarily becomes an abscess again. It is left open, or lightly packed, so it heals from the base up.",
+      "how": [
+        "Irrigate with saline until the effluent is clear.",
+        "Pack lightly if at all: the purpose is to keep the skin edges apart, not to fill the cavity under pressure.",
+        "Arrange the first dressing change and tell the patient who will do it and when."
+      ],
+      "pitfalls": ["Tight packing, which causes pain and pressure necrosis.", "Discharging a patient with a packed wound and no dressing plan."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

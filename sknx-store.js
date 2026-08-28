@@ -14,7 +14,12 @@
   }
   function list(impl) { var s = store(impl); if (!s) return []; return readAll(s).map(function (r) { return { id: r.id, at: r.at, top: (r.differential && r.differential[0] && r.differential[0].label) || null }; }); }
   function get(id, impl) { var s = store(impl); if (!s) return null; return readAll(s).filter(function (r) { return r.id === id; })[0] || null; }
-  var API = { save: save, list: list, get: get };
+  /* Sign-out has to be able to empty this. The history holds up to 100 dermatology analyses -
+   * clinical findings about whoever was photographed - and the module's wipe() was a comment
+   * saying "no bulk-delete API yet", so it silently kept them for the next account on the device.
+   * (Harmless while nothing dispatched the sign-out event; a real leak now that something does.) */
+  function deleteAll(impl) { var s = store(impl); if (!s) return false; try { s.removeItem(KEY); return true; } catch (e) { return false; } }
+  var API = { save: save, list: list, get: get, deleteAll: deleteAll };
   if (typeof module !== "undefined" && module.exports) module.exports = API;
   if (typeof window !== "undefined") window.SMD_SKNX_STORE = API;
 })();

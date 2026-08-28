@@ -32,7 +32,6 @@ export const FEATURES = {
   kardiox: { id: "kardiox", label: "KardiQ X AI", prefix: "KARDX", blurb: "AI ECG interpretation" },
   thorex: { id: "thorex", label: "ThoreX AI", prefix: "THORX", blurb: "AI chest X-ray interpretation" },
   sknx: { id: "sknx", label: "SknX AI", prefix: "SKNX", blurb: "AI dermatology (skin lesion/rash)" },
-  maik_local: { id: "maik_local", label: "MaiK on-device model", prefix: "MAIK", blurb: "Offline answers, no AI tokens" },
   // ecg:      { id: "ecg",      label: "ECG AI",          prefix: "ECG",   blurb: "12-lead ECG interpretation" },
   // ultrasound:{ id: "ultrasound", label: "Ultrasound AI", prefix: "USG",   blurb: "POCUS assistance" },
   // copilot:  { id: "copilot",  label: "Clinical Copilot", prefix: "COPILOT", blurb: "Bedside reasoning copilot" },

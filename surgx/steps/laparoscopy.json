@@ -1,0 +1,71 @@
+{
+  "_comment": "Laparoscopic access, survey and closure. Shared by every laparoscopic procedure.",
+  "schemaVersion": 1,
+  "steps": {
+    "step.lap.access": {
+      "id": "step.lap.access", "kind": "access", "critical": true,
+      "title": "Establishing pneumoperitoneum",
+      "why": "Access is where laparoscopy injures people. Vascular and bowel injuries at entry are rare, are usually caused blind, and are frequently recognised late.",
+      "how": [
+        "Prefer an open (Hasson) cut-down in a previously operated abdomen, in the very thin and in the very obese.",
+        "Empty the stomach and the bladder before entry.",
+        "If using a Veress needle, insert at a site away from scars, confirm position by low opening pressure and free flow rather than by feel alone.",
+        "Insufflate to the working pressure gradually and watch the airway pressure and the capnograph as you go."
+      ],
+      "structuresAtRisk": ["Aorta and inferior vena cava at the umbilicus in a thin patient", "Small bowel adherent to a previous scar", "Bladder if not emptied", "Inferior epigastric vessels at the lateral port sites"],
+      "pitfalls": ["Repeated blind Veress attempts.", "A high opening pressure interpreted as 'the abdomen is stiff' rather than as a misplaced needle."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.lap.ports": {
+      "id": "step.lap.ports", "kind": "access",
+      "title": "Port placement",
+      "why": "Ports placed for the anatomy you have, rather than for the textbook, are the difference between a comfortable operation and a fight.",
+      "how": [
+        "Place the camera port first, inspect beneath the intended sites, then place every subsequent port under direct vision.",
+        "Transilluminate the abdominal wall to avoid the inferior epigastric vessels.",
+        "Triangulate: keep working ports about a hand's breadth apart and aimed at the target."
+      ],
+      "structuresAtRisk": ["Inferior epigastric vessels", "Bowel adherent to the anterior abdominal wall"],
+      "pitfalls": ["Ports placed too close together, so the instruments fight each other.", "A port placed without looking at what lies under it."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.lap.survey": {
+      "id": "step.lap.survey", "kind": "checkpoint",
+      "title": "Diagnostic laparoscopy and survey",
+      "why": "The first look answers a question the imaging could not, and it is the only chance to find the second diagnosis before attention narrows to the first.",
+      "how": [
+        "Before touching the target, look at the liver, gallbladder, stomach, small bowel, colon, pelvis and both paracolic gutters.",
+        "Note the character and volume of any free fluid, and aspirate it for culture where relevant.",
+        "In a woman of childbearing age, inspect the tubes and ovaries explicitly."
+      ],
+      "pitfalls": ["Going straight to the target and missing a second pathology.", "Recording 'diagnostic laparoscopy normal' without saying what was actually seen."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.lap.specimen-retrieval": {
+      "id": "step.lap.specimen-retrieval", "kind": "resection",
+      "title": "Specimen retrieval",
+      "why": "Bringing an infected or neoplastic specimen through the abdominal wall unprotected causes port-site infection and, in malignancy, port-site recurrence.",
+      "how": [
+        "Use a retrieval bag for any infected, perforated or potentially malignant specimen.",
+        "Extract through the largest port, extending the fascial incision rather than tearing the bag.",
+        "Inspect the bag afterwards to confirm the specimen is intact and nothing has been left behind."
+      ],
+      "pitfalls": ["A bag torn during extraction, spilling contents into the wound.", "Enlarging the skin but not the fascia."],
+      "review": { "status": "ai_drafted" }
+    },
+    "step.lap.closure": {
+      "id": "step.lap.closure", "kind": "closure", "critical": true,
+      "title": "Desufflation and port-site closure",
+      "why": "A port-site hernia through an unclosed 10 mm fascial defect can strangulate, and it presents days later to someone who was not in theatre.",
+      "how": [
+        "Inspect the operative field again at low insufflation pressure: bleeding tamponaded by pneumoperitoneum appears as the pressure falls.",
+        "Remove ports under vision and check each site from inside for bleeding.",
+        "Close the fascia at every port of 10 mm or more, and at any site where the fascia has been stretched.",
+        "Desufflate fully to reduce shoulder-tip pain."
+      ],
+      "structuresAtRisk": ["Bowel caught in a fascial suture placed blind"],
+      "pitfalls": ["Removing all ports at once with the camera already out.", "Closing skin over an unclosed 10 mm fascial defect."],
+      "review": { "status": "ai_drafted" }
+    }
+  }
+}

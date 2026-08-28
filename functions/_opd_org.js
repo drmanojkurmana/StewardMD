@@ -28,7 +28,12 @@ export function roomStatus(waiting, inConsult, t) {
 // ---- entities ----------------------------------------------------------------------------------
 export function org(o = {}) {
   requireId(o);
-  return { id: s(o.id), code: s(o.code), name: s(o.name), mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
+  /* kind is NOT mode. mode is the EMR coupling (native/connect); kind is what the organisation is.
+   * Without it an OPD clinic and a medical college are indistinguishable, so the eLOGBook offered a
+   * clinic as "your institution" and adopted it. Default "clinic" - only the PG path sets
+   * "institution" - so no existing document changes meaning. */
+  return { id: s(o.id), code: s(o.code), name: s(o.name), kind: o.kind === "institution" ? "institution" : "clinic",
+           mode: o.mode === "connect" ? "connect" : "native", connectorId: orNull(o.connectorId), connectTenantId: orNull(o.connectTenantId), connectConnectionId: orNull(o.connectConnectionId), ownerUid: s(o.ownerUid), thresholds: thresholds(o.thresholds), createdAt: Number(o.createdAt) || 0 };
 }
 // Human StewardMD IDs: short, unambiguous (no 0/O/1/I). Clinics "SMD-XXXXXX", users "SMD-U-XXXXX".
 const SMD_ALPHABET = "23456789ABCDEFGHJKMNPQRSTUVWXYZ";

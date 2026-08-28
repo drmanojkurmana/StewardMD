@@ -377,7 +377,9 @@
               statusBadge(p.queueStatus) +
             '</div>' +
             ((dept || showDoc) ? '<div class="ghis-pt-dept">' + [esc(dept), (showDoc ? 'Dr. ' + esc(doc) : '')].filter(Boolean).join(' · ') + '</div>' : '') +
-            '<div class="ghis-pt-actions"><button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
+            '<div class="ghis-pt-actions">' +
+              '<button class="ghis-pt-call ghis-pt-assess" type="button" title="Initial assessment" onclick="event.stopPropagation();GHIS.openAssessment(\'' + jsq(p.episodeId) + '\',\'' + jsq(p.patientId) + '\',\'' + jsq(p.patientFirstName) + '\')"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M9 15h6"/><path d="M12 12v6"/></svg> Assess</button>' +
+              '<button class="ghis-pt-call" type="button" title="Call patient" onclick="event.stopPropagation();GHIS.callPatient(\'' + jsq(p.patientId) + '\',this)"><svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.81.36 1.6.68 2.34a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.74-1.24a2 2 0 0 1 2.11-.45c.74.32 1.53.55 2.34.68A2 2 0 0 1 22 16.92z"/></svg> Call</button></div>' +
           '</div>';
         }).join('');
       }
@@ -431,7 +433,7 @@
         _selectedPatient: null,
         // Public getter for the currently-selected Ward-Sync patient. Returns null when
         // none is selected (import stays disabled). name is display-only, id is required.
-        getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name } : null; },
+        getSelectedPatient: function() { return GHIS._selectedPatient ? { patientId: GHIS._selectedPatient.patientId, name: GHIS._selectedPatient.name, episodeId: GHIS._selectedPatient.episodeId || '' } : null; },
         // Bearer token for authorized GHIS proxy calls (used by GHISMEDS medication fetch).
         getToken: function() { return getToken(); },
         // Persist a token another module obtained via the SAME /login proxy (e.g. the OPD
@@ -497,7 +499,11 @@
           if (GHIS._selectedPatient && String(GHIS._selectedPatient.patientId) !== String(patientId)) {
             try { if (window.GHISMEDS && window.GHISMEDS.clearDraft) window.GHISMEDS.clearDraft(); } catch (e) {}
           }
-          GHIS._selectedPatient = { patientId: patientId, name: name };
+          // episodeId is the GHIS VISIT this selection belongs to. Store it: an Initial-Assessment
+          // write attaches to a visit, and without it the assessment GET returns a blank doc_id 0
+          // form and the write is (correctly) refused. SMD_WATCH below already read
+          // _selectedPatient.episodeId, which was always undefined until now.
+          GHIS._selectedPatient = { patientId: patientId, name: name, episodeId: episodeId || '' };
           GHIS._patientId = patientId;
           title.textContent = name + ' (' + patientId + ')';
           var lwOk = !!(window.ICU && ICU.openLabWatch && (!ICU.labWatchOn || ICU.labWatchOn()));
@@ -668,10 +674,40 @@
         },
         // Patient-card click dispatcher: normal browse -> lab drawer; import mode
         // (launched from Dx My Patient -> Import Patient) -> pull reports into the engine.
+        /* Initial assessment for an ADMITTED patient.
+         *
+         * Ward Sync already lists exactly the patients who have one - GetIPWL is the admitted
+         * roster - and each row already carries its IPMR visit as episodeId. So there is nothing
+         * to look up: hand the ids straight to the assessment workspace the OPD queue already uses.
+         * Verified against the live server (docs/ghis/captured-initial-assessment-write.md): an
+         * admitted patient activates with the same <MR>-<visit> recordNo as an out-patient, and
+         * the Initial assessment tab is the same form.
+         *
+         * visitId mirrors episodeId because for an in-patient the admission IS the visit. */
+        openAssessment: function(episodeId, patientId, name) {
+          if (!patientId) { try { window.toast && window.toast('This patient has no hospital record number.'); } catch (e) {} return; }
+          if (!episodeId) { try { window.toast && window.toast('No admission visit on this row, so an assessment cannot be filed against it.'); } catch (e) {} return; }
+          if (!(window.OPDEMR && window.OPDEMR.openProfile)) { try { window.toast && window.toast('The patient workspace is still loading.'); } catch (e) {} return; }
+          try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
+          window.OPDEMR.openProfile({
+            name: name || '', patientId: patientId,
+            episodeId: episodeId, visitId: episodeId,
+            source: 'ghis', tab: 'assess'
+          });
+        },
+
         onPatient: function(episodeId, patientId, name) {
           if (_connectCtx) {   // Connect-hospital roster: tap -> pull this patient from the FHIR EMR into ICU
             try { var pnl = document.getElementById('ghisPanel'); if (pnl) pnl.classList.remove('open'); } catch (e) {}
             if (window.SMD_openConnectPatient) window.SMD_openConnectPatient(_connectCtx.tid, patientId, _connectCtx.cid, name);
+            return;
+          }
+          // One-shot "pick a patient for another module" handoff (see pickPatient below). Checked
+          // before the import and lab paths so the caller gets the tap instead of the ward drawer.
+          if (GHIS._pickCb) {
+            var cb = GHIS._pickCb; GHIS._pickCb = null;
+            try { var pk = document.getElementById('ghisPanel'); if (pk) pk.classList.remove('open'); } catch (e) {}
+            try { cb({ episodeId: episodeId, patientId: patientId, name: name }); } catch (e) {}
             return;
           }
           if (GHIS._importMode) { GHIS._importMode = false; GHIS.importPatientReports(patientId, name); }
@@ -680,6 +716,18 @@
         // Entry point for Dx My Patient -> Import Patient. Opens the ward picker in
         // import mode; selecting a patient assembles their reports and hands them to DX.
         startImport: function() { GHIS._importMode = true; try { window.openGHIS(); } catch (e) {} },
+        /* Generic one-shot patient picker for another module (SURGX notes uses it).
+         * Opens THIS roster - which already has the search, filters and sign-in handling - and
+         * calls cb({episodeId, patientId, name}) once, on the next patient tap. Rebuilding a
+         * second ward list inside another module would duplicate all of that and drift from it.
+         * The callback is cleared before firing, so a stale handoff can never hijack a later tap;
+         * cancel() drops it if the doctor backs out instead. */
+        pickPatient: function(cb) {
+          GHIS._pickCb = (typeof cb === 'function') ? cb : null;
+          GHIS._importMode = false;
+          try { window.openGHIS(); } catch (e) {}
+        },
+        cancelPick: function() { GHIS._pickCb = null; },
         // Assemble a ward patient's labs + imaging + culture and load into the reasoning
         // workspace (display + suggest-with-confirm — DX never auto-ticks findings).
         importPatientReports: function(patientId, name) {
@@ -941,6 +989,10 @@
         .then(function(res) {
           if (res.s === 402 || (res.d && res.d.needsPro)) {
             errEl.textContent = '';
+            // The server now says WHY (unverified / free week over). Let the shared explainer pick
+            // the wording and the button; going straight to the paywall told an unverified doctor
+            // to pay for something verification would have unlocked for free.
+            try { if (window.SMD_PRO_NOTICE && SMD_PRO_NOTICE.handle(res.d || {}, 'ward-sync')) return; } catch (e) {}
             try { if (window.SMD_PRO && SMD_PRO.openPaywall) { SMD_PRO.openPaywall('wardsync'); return; } } catch (e) {}
             errEl.textContent = 'Ward Sync is a StewardMD Pro feature.';
             return;

@@ -1,0 +1,721 @@
+{
+  "_comment": "Cranial nerve palsy is the SHORT CASE built most directly on the existing shared cranial-nerve skills: skill.exam.neuro.cn7 already teaches the forehead-sparing UMN/LMN distinction and the facial-canal localisation in full, so this disease file mostly adds emphasis plus the genuinely new content, an isolated LMN facial (Bell's) palsy worked as a complete case, its differential, and the general principle of localising ANY isolated cranial nerve palsy.",
+  "id": "cranial-nerve-palsy",
+  "name": "Cranial nerve palsy",
+  "fullName": "Isolated cranial nerve palsy (the facial nerve as the worked example)",
+  "system": "neurology",
+  "kbRef": "cranial_nerve_palsy",
+  "oneLine": "One nerve, one side, and the single bedside test that says central or peripheral",
+  "estMinutes": 35,
+  "review": {
+    "status": "ai_drafted"
+  },
+  "version": 1,
+  "chapters": [
+    {
+      "id": "basics",
+      "title": "Basics",
+      "blurb": "Isolated or multiple, central or peripheral: the two questions every cranial nerve palsy answers",
+      "skills": [
+        "skill.cnpalsy.basics"
+      ]
+    },
+    {
+      "id": "approach",
+      "title": "Approach to the patient",
+      "blurb": "Identical to any other short case",
+      "skills": [
+        "skill.approach.hygiene",
+        "skill.approach.introduce",
+        "skill.approach.consent",
+        "skill.approach.position"
+      ]
+    },
+    {
+      "id": "history",
+      "title": "History",
+      "blurb": "Onset speed, ear symptoms, and the systemic disease that can present as one nerve",
+      "skills": [
+        "skill.hx.chief_complaints",
+        "skill.hx.cnpalsy"
+      ],
+      "emphasis": {
+        "skill.hx.chief_complaints": {
+          "expect": "A typical isolated facial (Bell's) palsy presentation is a weakness of one side of the face that the patient or a family member noticed on waking, sometimes preceded by a day or two of pain behind or below the ear on that side."
+        }
+      }
+    },
+    {
+      "id": "general_exam",
+      "title": "General and cranial nerve examination",
+      "blurb": "The one bedside test that decides everything else",
+      "skills": [
+        "skill.gen.appearance",
+        "skill.gen.vitals",
+        "skill.exam.neuro.cn7"
+      ],
+      "emphasis": {
+        "skill.gen.appearance": {
+          "expect": "Look at the whole face at rest for asymmetry, and specifically for any vesicular rash in or around the ear, which would point to Ramsay Hunt syndrome rather than Bell's palsy. Check the eye on the affected side is not already showing signs of exposure (redness, discharge) from incomplete closure."
+        },
+        "skill.exam.neuro.cn7": {
+          "expect": "This single skill decides most of the case. Test the forehead separately from the lower face before saying anything else: full-face weakness including the forehead means a lower motor neurone (peripheral) lesion, forehead-sparing weakness means an upper motor neurone (central) one. Then work through where in the facial canal the lesion sits using taste and hyperacusis, since that localisation is exactly what a focused cranial-nerve OSCE station is testing."
+        }
+      }
+    },
+    {
+      "id": "disease_findings",
+      "title": "Localising the palsy",
+      "blurb": "Central or peripheral, then how far down the nerve",
+      "skills": [
+        "skill.cnpalsy.localise"
+      ]
+    },
+    {
+      "id": "differential",
+      "title": "Differential diagnosis",
+      "blurb": "Bell's palsy is a diagnosis of exclusion, not a default",
+      "skills": [
+        "skill.cnpalsy.differential"
+      ]
+    },
+    {
+      "id": "investigations",
+      "title": "Investigations",
+      "blurb": "A typical Bell's palsy needs almost none of these",
+      "skills": [
+        "skill.ix.cnpalsy.workup"
+      ]
+    },
+    {
+      "id": "diagnosis",
+      "title": "Stating the diagnosis",
+      "blurb": "Nerve, side, level, and why it is not something else",
+      "skills": [
+        "skill.cnpalsy.diagnosis"
+      ]
+    },
+    {
+      "id": "case",
+      "title": "Case presentation",
+      "blurb": "Present this patient to your consultant",
+      "skills": [
+        "skill.present.case"
+      ]
+    }
+  ],
+  "osce": {
+    "stations": [
+      {
+        "id": "osce.cnpalsy.exam",
+        "title": "Examine this patient's facial weakness and localise the lesion",
+        "seconds": 300,
+        "task": "This 34-year-old woman noticed her mouth was drooping on the right side when she woke up two days ago. Examine the relevant cranial nerve and localise the lesion.",
+        "skills": [
+          "skill.approach.hygiene",
+          "skill.approach.introduce",
+          "skill.approach.consent",
+          "skill.exam.neuro.cn7"
+        ],
+        "examinerQuestions": [
+          "Is this an upper or a lower motor neurone facial palsy, and what single test told you?",
+          "What in the history and examination argues against a stroke here?",
+          "What would make you image this patient rather than manage it as a typical Bell's palsy?"
+        ]
+      }
+    ]
+  },
+  "viva": {
+    "skills": [
+      "skill.cnpalsy.basics",
+      "skill.exam.neuro.cn7",
+      "skill.cnpalsy.localise",
+      "skill.cnpalsy.differential",
+      "skill.ix.cnpalsy.workup"
+    ]
+  },
+  "cases": [
+    {
+      "id": "case.cnpalsy.farida",
+      "title": "A woman who woke up with a drooping mouth",
+      "opening": "Farida Sheikh, 34, noticed when she woke up two days ago that the right side of her mouth was drooping and she could not close her right eye properly. Introduce yourself and take a history.",
+      "fallback": "I am not sure what you mean, doctor. Can you ask that a different way?",
+      "patient": {
+        "name": "Farida Sheikh",
+        "age": 34,
+        "sex": "female",
+        "occupation": "School teacher",
+        "residence": "Urban"
+      },
+      "history": {
+        "presenting": {
+          "cues": [
+            "what brings you",
+            "what is the problem",
+            "why have you come",
+            "complaint",
+            "tell me about",
+            "how can i help"
+          ],
+          "reply": "Doctor, I woke up two days ago and the right side of my face was not working properly. My mouth droops, and water spills out of that side when I drink.",
+          "key": true
+        },
+        "onset": {
+          "cues": [
+            "when did it start",
+            "how did it start",
+            "sudden or gradual",
+            "onset"
+          ],
+          "reply": "As far as I know it was sudden, I noticed it on waking. It was fine the night before.",
+          "key": true
+        },
+        "ear_pain": {
+          "cues": [
+            "ear pain",
+            "pain behind the ear",
+            "pain near the ear"
+          ],
+          "reply": "Now that you mention it, I did have a dull ache behind my right ear for about a day before this happened.",
+          "key": true
+        },
+        "forehead": {
+          "cues": [
+            "forehead",
+            "wrinkle",
+            "raise your eyebrows"
+          ],
+          "reply": "I cannot wrinkle my forehead on the right side at all, it is completely smooth compared to the left.",
+          "key": true
+        },
+        "eye_closure": {
+          "cues": [
+            "close your eye",
+            "eye closure",
+            "blink"
+          ],
+          "reply": "I cannot close my right eye fully. It feels dry and I have been using drops.",
+          "key": true
+        },
+        "taste": {
+          "cues": [
+            "taste",
+            "tongue"
+          ],
+          "reply": "Food does taste a bit strange on the right side of my tongue, yes."
+        },
+        "hyperacusis": {
+          "cues": [
+            "sounds too loud",
+            "hyperacusis",
+            "sensitive to noise"
+          ],
+          "reply": "Sounds do seem unusually loud in my right ear since this started."
+        },
+        "rash": {
+          "cues": [
+            "rash",
+            "blisters",
+            "vesicles",
+            "spots near the ear"
+          ],
+          "reply": "No rash or blisters that I have noticed, in or around my ear."
+        },
+        "ear_discharge": {
+          "cues": [
+            "ear discharge",
+            "fluid from the ear",
+            "ear infection"
+          ],
+          "reply": "No discharge from the ear."
+        },
+        "weakness_elsewhere": {
+          "cues": [
+            "arm weak",
+            "leg weak",
+            "other weakness",
+            "any other part"
+          ],
+          "reply": "No, my arms and legs feel completely normal, I can grip and walk fine."
+        },
+        "speech": {
+          "cues": [
+            "speech",
+            "slurred",
+            "talking"
+          ],
+          "reply": "My speech is a little slurred because my mouth does not move properly, but I can find my words fine."
+        },
+        "headache": {
+          "cues": [
+            "headache",
+            "head pain"
+          ],
+          "reply": "No headache."
+        },
+        "diabetes": {
+          "cues": [
+            "diabetes",
+            "sugar"
+          ],
+          "reply": "No, I have never been told I have diabetes."
+        },
+        "pregnancy": {
+          "cues": [
+            "pregnant",
+            "pregnancy"
+          ],
+          "reply": "No, I am not pregnant."
+        },
+        "trauma": {
+          "cues": [
+            "injury",
+            "trauma",
+            "hit your head",
+            "fall"
+          ],
+          "reply": "No injury to my head or ear."
+        },
+        "similar_before": {
+          "cues": [
+            "happened before",
+            "previous episode",
+            "again"
+          ],
+          "reply": "No, this has never happened before."
+        }
+      },
+      "exam": {
+        "skill.gen.appearance": {
+          "finding": "Right facial asymmetry at rest with a flattened nasolabial fold. No vesicular rash seen in or around the right ear or on the palate. Right eye slightly red from exposure.",
+          "abnormal": true
+        },
+        "skill.gen.vitals": {
+          "finding": "Blood pressure 118/76. Pulse 78 regular. Temperature 36.9 C.",
+          "abnormal": false
+        },
+        "skill.exam.neuro.cn7": {
+          "finding": "Complete right-sided facial weakness including the forehead: cannot wrinkle the right forehead, cannot close the right eye fully (Bell's phenomenon present, eyeball rolls up on attempted closure), and the mouth droops further to the left on smiling. Taste sensation reduced on the right anterior two-thirds of the tongue. Hyperacusis reported on the right. No other cranial nerve or limb findings.",
+          "abnormal": true
+        }
+      },
+      "essentialInvestigations": [
+        "clinical_diagnosis"
+      ],
+      "investigations": {
+        "clinical_diagnosis": {
+          "label": "No investigation required",
+          "indicated": true,
+          "result": "History and examination are entirely typical for an idiopathic (Bell's) palsy: acute onset, complete unilateral LMN facial weakness including the forehead, preceding ear pain, no other cranial nerve or limb involvement, no rash, no ear discharge, no risk factors for an alternative cause.",
+          "note": "A typical presentation like this one is a clinical diagnosis. Investigation is reserved for atypical features, not performed as a routine reflex."
+        },
+        "mri_brain": {
+          "label": "MRI brain",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Not indicated here: the forehead is involved (confirming a lower motor neurone, not a central, lesion), there are no limb signs, and the onset and course are entirely typical. Imaging is reserved for atypical features: forehead-sparing weakness, other cranial nerve or limb involvement, a very slowly progressive course, or no recovery beginning within a few weeks."
+        },
+        "glucose": {
+          "label": "Random blood glucose",
+          "indicated": false,
+          "result": "Not done.",
+          "note": "Reasonable in an older patient or where there are risk factors, since diabetes is a recognised association, but not essential in this otherwise typical young patient with no diabetic risk factors."
+        }
+      },
+      "differentialModel": {
+        "answer": "Bell's palsy (idiopathic lower motor neurone facial palsy). Consider Ramsay Hunt syndrome (herpes zoster oticus), otitis media or cholesteatoma, parotid disease, and, given the sudden onset, a brainstem or cerebellopontine angle lesion, though the forehead involvement and lack of other signs argue against a central cause.",
+        "accept": [
+          "bell",
+          "idiopathic facial palsy",
+          "ramsay hunt",
+          "zoster",
+          "otitis media",
+          "cholesteatoma",
+          "parotid",
+          "stroke"
+        ],
+        "minMatch": 2
+      },
+      "diagnosis": {
+        "answer": "Right idiopathic lower motor neurone facial (Bell's) palsy, likely at or proximal to the chorda tympani given the reduced taste, with hyperacusis suggesting involvement above the branch to stapedius; no red flags for an alternative cause.",
+        "accept": [
+          "bell",
+          "facial palsy",
+          "lmn facial"
+        ],
+        "minMatch": 1
+      },
+      "managementModel": {
+        "answer": "Protect the exposed eye (lubricating drops, taping closed at night, review if it stays red or painful), explain the expected course and that most patients recover substantially over weeks to months, arrange follow-up to confirm recovery is progressing, and image or refer if red-flag features appear (no improvement by several weeks, other cranial nerve or limb signs, or a very atypical course). Any medication decision (a corticosteroid course, antiviral cover) is a specialist prescribing decision and is outside what this module teaches.",
+        "accept": [
+          "eye protection",
+          "lubricant",
+          "tape",
+          "follow-up",
+          "review",
+          "red flag",
+          "recovery"
+        ],
+        "minMatch": 2
+      },
+      "teachingPoints": [
+        "The forehead involvement is the whole diagnosis in one finding: because it is affected, this cannot be a stroke, which would spare it, and must instead be a lesion of the nerve itself.",
+        "Reduced taste and hyperacusis together tell you roughly where in the facial canal the lesion sits, proximal to where the chorda tympani and the nerve to stapedius branch off, without needing any imaging to say so.",
+        "The eye is the organ most at risk here, not the face. Exposure keratopathy from incomplete closure is a real, preventable complication and needs active protection from the first visit.",
+        "Her preceding ear-area pain is a recognised prodrome and does not by itself suggest an alternative diagnosis; it becomes worrying only combined with other features such as a vesicular rash or ear discharge.",
+        "Bell's palsy is a diagnosis of exclusion at the bedside: it is made confidently BECAUSE nothing else was found, not simply because a facial palsy is common."
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  ],
+  "skills": {
+    "skill.cnpalsy.basics": {
+      "id": "skill.cnpalsy.basics",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "What an isolated cranial nerve palsy is",
+      "oneLine": "One nerve or several; central or peripheral: two questions before you name a cause",
+      "why": "The same two questions apply whichever cranial nerve is affected, and asking them in order is what stops a student jumping straight to 'Bell's palsy' or a similarly reassuring label before actually checking whether this is really an isolated, peripheral problem.",
+      "body": "Before naming a specific cause, establish whether one nerve or several are involved, and whether the pattern of weakness or sensory loss fits a central (nuclear/supranuclear) or a peripheral (nerve trunk) lesion.",
+      "keyPoints": [
+        "Isolated versus multiple: a single cranial nerve palsy suggests a focal process affecting that nerve alone (its nucleus, or its course); multiple cranial nerve palsies together point instead to a process affecting a shared anatomical space, such as the cavernous sinus, the skull base, or the brainstem, or a widespread process such as Guillain-Barre syndrome or meningeal carcinomatosis.",
+        "Central versus peripheral is read from the SPECIFIC pattern of the deficit, not simply from which nerve is involved: the clearest example is the facial nerve, where forehead sparing means central (supranuclear) and forehead involvement means peripheral (nuclear or infranuclear), because the forehead's motor neurones alone receive bilateral cortical input.",
+        "The same 'pushing versus pulling' logic that separates trigeminal and hypoglossal palsies (which push the jaw or tongue toward the WEAK side) from facial and vagal palsies (which let the unopposed normal side pull the mouth or uvula toward ITSELF, the normal side) is a generalisable principle worth carrying across every cranial nerve exam, not a fact specific to any one nerve.",
+        "A cranial nerve palsy accompanied by long tract signs (limb weakness, sensory loss, or an extensor plantar) on the OPPOSITE side is a crossed brainstem pattern and localises centrally, not peripherally, regardless of which cranial nerve is involved."
+      ],
+      "pitfalls": [
+        "Naming a specific cause before establishing whether the pattern is central or peripheral.",
+        "Treating every facial weakness as Bell's palsy without checking the forehead specifically.",
+        "Missing a crossed pattern (cranial nerve palsy on one side, limb signs on the other), which changes the localisation entirely."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "What two questions come before naming a specific cause of a cranial nerve palsy?",
+          "a": "Is it isolated or are multiple cranial nerves involved, and is the pattern central or peripheral?",
+          "accept": [
+            "isolated",
+            "multiple",
+            "central",
+            "peripheral"
+          ],
+          "minMatch": 2
+        },
+        {
+          "level": 2,
+          "q": "A patient has a right facial weakness AND a left-sided limb weakness. What does that combination suggest?",
+          "a": "A crossed brainstem pattern: the lesion is in the brainstem on the SAME side as the cranial nerve palsy (right), with the long tract (limb) signs on the OPPOSITE side because the corticospinal fibres have not yet crossed at that level.",
+          "accept": [
+            "crossed",
+            "brainstem"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: approach to a cranial nerve palsy"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Alagappan, Manual of Practical Medicine",
+          "locator": "Nervous system: cranial nerve examination"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cnpalsy.localise": {
+      "id": "skill.cnpalsy.localise",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Localising the palsy",
+      "oneLine": "Central or peripheral first, then exactly how far down the nerve",
+      "why": "This is the reasoning step an OSCE examiner is actually testing when they ask a student to 'localise the lesion': it is not enough to say 'facial nerve palsy', the answer needs to say where along that nerve's course the problem sits, and that is worked out entirely from which additional functions are lost alongside the weakness.",
+      "body": "Apply the forehead-sparing rule first to settle central versus peripheral, then use the additional findings (taste, hyperacusis, lacrimation) to localise along the length of the nerve, exactly as already taught in the shared facial nerve exam skill.",
+      "keyPoints": [
+        "Step one, central or peripheral: forehead spared, lower face weak means central (supranuclear); forehead also weak means peripheral (nuclear or infranuclear). This single rule does most of the localising work for the facial nerve and is worth restating as the first move every time.",
+        "Step two, if peripheral, localise along the facial canal: taste and secretion lost plus hyperacusis present means the lesion is proximal, above where the chorda tympani and the nerve to stapedius branch off; taste and secretion preserved with hyperacusis absent means the lesion is distal, below those branch points, and produces motor weakness alone.",
+        "Step three, look for company: involvement of the vestibulocochlear (hearing, balance) or trigeminal nerves alongside the facial nerve pushes the lesion further back, toward the cerebellopontine angle, and away from a simple peripheral facial canal problem.",
+        "The same three-step logic (central-vs-peripheral first, then how far along the nerve's course, then what travels alongside it) generalises to localising an isolated oculomotor, trochlear or abducens palsy too: for the oculomotor nerve specifically, whether the PUPIL is involved is the equivalent first move, separating a compressive lesion needing urgent imaging from an ischaemic one that can usually be observed."
+      ],
+      "pitfalls": [
+        "Stopping at 'peripheral facial nerve palsy' without going on to localise along the nerve's course using taste and hyperacusis.",
+        "Not checking for other cranial nerve involvement, and so missing a cerebellopontine angle lesion.",
+        "Applying the forehead rule correctly for the facial nerve but forgetting that the equivalent first move for an oculomotor palsy is checking the pupil, not the forehead."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "A patient has a facial weakness that spares the forehead. Central or peripheral?",
+          "a": "Central (supranuclear), because the forehead's bilateral cortical representation means only a peripheral (nuclear/infranuclear) lesion removes all input to it.",
+          "accept": [
+            "central",
+            "supranuclear"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "A patient has a peripheral (forehead-involving) facial palsy with reduced taste but no hyperacusis. Roughly where is the lesion?",
+          "a": "Below the branch point of the nerve to stapedius but above (proximal to) the chorda tympani, since taste is lost but hyperacusis is not present.",
+          "accept": [
+            "between",
+            "chorda tympani",
+            "stapedius"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "Generalise the localising logic used for the facial nerve to an isolated oculomotor (IIIrd nerve) palsy: what is the equivalent 'first move'?",
+          "a": "Checking whether the pupil is involved: a dilated, poorly reactive pupil suggests a compressive lesion needing urgent imaging, while a pupil-sparing palsy is more typical of an ischaemic (e.g. diabetic) cause that can usually be observed.",
+          "accept": [
+            "pupil"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "step1",
+          "text": "Correctly applies central-vs-peripheral as the first localising step",
+          "critical": true
+        },
+        {
+          "id": "step2",
+          "text": "Uses taste/hyperacusis (or the equivalent for another nerve) to localise further along the nerve's course"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: localising a cranial nerve palsy"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cnpalsy.differential": {
+      "id": "skill.cnpalsy.differential",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Differential diagnosis",
+      "oneLine": "Bell's palsy is what is left once everything else has been actively looked for",
+      "why": "Bell's palsy is idiopathic by definition, which means it can only be diagnosed correctly by actively excluding the causes that look the same at the bedside, not by defaulting to it because it is the most common cause of a facial palsy.",
+      "body": "Work through causes of a peripheral (forehead-involving) facial palsy by what would make you suspect each one specifically.",
+      "keyPoints": [
+        "Bell's palsy (idiopathic): the default diagnosis once the alternatives below have been actively considered and no red flag is found; sudden onset, may be preceded by ear-area pain, no rash, no other cranial nerve or limb involvement.",
+        "Ramsay Hunt syndrome (herpes zoster oticus): a vesicular rash in the ear canal, pinna, or palate, often with more severe pain and a higher risk of permanent hearing loss.",
+        "Otitis media or cholesteatoma: ear discharge, hearing loss, and a visible abnormality on otoscopy; the facial palsy here follows a recognisable ear infection.",
+        "Parotid gland disease (tumour, most importantly): a palpable parotid mass, and, critically, a facial weakness that spares SOME branches while affecting others (rather than the whole face uniformly), or a very slowly progressive course, both of which are atypical for Bell's palsy and should prompt urgent evaluation.",
+        "Guillain-Barre syndrome: bilateral facial weakness, or a unilateral one accompanied by limb weakness and areflexia.",
+        "A central (stroke) cause: forehead-sparing weakness with or without limb involvement, which the initial bedside test should already have excluded.",
+        "Other recognised but less common causes: sarcoidosis (which can also cause bilateral facial palsy), Lyme disease in an endemic area, and trauma or surgery involving the facial nerve's course."
+      ],
+      "pitfalls": [
+        "Diagnosing Bell's palsy without actively checking for the specific red flags of each alternative.",
+        "Missing a parotid mass because the face, not the neck and parotid region, was examined.",
+        "Assuming bilateral facial weakness must be a bilateral coincidence of Bell's palsy rather than actively considering Guillain-Barre syndrome or sarcoidosis."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What examination finding would make you suspect a parotid tumour rather than Bell's palsy as the cause of a facial weakness?",
+          "a": "A palpable parotid mass, or a facial weakness that does not affect the whole face uniformly (some branches spared, others not), or a very slowly progressive course, since Bell's palsy typically produces a uniform, acute weakness of the entire distribution.",
+          "accept": [
+            "parotid mass",
+            "uneven",
+            "slow",
+            "progressive"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 3,
+          "q": "A patient presents with BILATERAL facial weakness. Name two diagnoses this should make you actively consider, beyond bilateral Bell's palsy.",
+          "a": "Guillain-Barre syndrome and sarcoidosis (also consider Lyme disease in an endemic area); simultaneous bilateral Bell's palsy is rare enough that an alternative cause should be actively sought.",
+          "accept": [
+            "guillain",
+            "gbs",
+            "sarcoid",
+            "lyme"
+          ],
+          "minMatch": 1
+        }
+      ],
+      "rubric": [
+        {
+          "id": "exclusion",
+          "text": "Treats Bell's palsy as a diagnosis reached by exclusion, not by default",
+          "critical": true
+        },
+        {
+          "id": "redflags",
+          "text": "Names at least two specific red flags for an alternative cause"
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: differential of a peripheral facial palsy"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        },
+        {
+          "source": "Macleod's Clinical Examination",
+          "locator": "The nervous system: cranial nerves"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.ix.cnpalsy.workup": {
+      "id": "skill.ix.cnpalsy.workup",
+      "kind": "investigation",
+      "system": "neurology",
+      "title": "When to investigate a facial palsy, and when not to",
+      "oneLine": "A typical presentation needs none of these; the atypical features are what earn a test",
+      "why": "Over-investigating a textbook-typical Bell's palsy is as much a reasoning error as under-investigating an atypical one; knowing exactly which features earn which test is what separates a targeted workup from a reflex panel.",
+      "body": "A typical, acute, isolated peripheral facial palsy with no red flags is a clinical diagnosis and needs no investigation. Order a test only when a specific atypical feature demands it.",
+      "keyPoints": [
+        "No investigation is required for a classic presentation: sudden onset, complete unilateral LMN facial weakness, preceding ear-area pain, no rash, no other cranial nerve or limb involvement, no ear or parotid abnormality.",
+        "MRI brain (or, where more relevant to the ear and parotid, dedicated imaging of the temporal bone and parotid region) is indicated for atypical features: forehead-sparing weakness (suggesting a central cause), other cranial nerve or limb involvement, a slowly progressive course over several weeks, no sign of recovery beginning within about three weeks, bilateral involvement, or recurrence.",
+        "Otoscopy is a simple, always-reasonable bedside step to look for a vesicular rash, discharge, or a visible ear abnormality, and is not the same as ordering imaging.",
+        "Blood glucose is reasonable where diabetes is a plausible unrecognised association, particularly in an older patient or one with other diabetic risk factors.",
+        "A parotid or neck examination, feeling specifically for a mass, is part of a complete examination in every case, not an investigation reserved for atypical presentations."
+      ],
+      "pitfalls": [
+        "Ordering an MRI reflexively in every facial palsy, including entirely typical presentations.",
+        "Not investigating a genuinely atypical presentation because 'it is probably just Bell's palsy'.",
+        "Forgetting that examining the parotid gland and doing otoscopy are both part of the basic clinical assessment, not optional extras reserved for complicated cases."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 1,
+          "q": "Does a typical, acute, isolated peripheral facial palsy require imaging?",
+          "a": "No. It is a clinical diagnosis; imaging is reserved for atypical features.",
+          "accept": [
+            "no",
+            "clinical diagnosis"
+          ],
+          "minMatch": 1
+        },
+        {
+          "level": 2,
+          "q": "Name three features of a facial palsy that would justify ordering imaging.",
+          "a": "Forehead-sparing weakness, other cranial nerve or limb involvement, a slowly progressive course, no recovery beginning within about three weeks, bilateral involvement, or recurrence.",
+          "accept": [
+            "forehead-sparing",
+            "other cranial nerve",
+            "limb",
+            "progressive",
+            "bilateral",
+            "recurrence"
+          ],
+          "minMatch": 2
+        }
+      ],
+      "rubric": [],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: investigation of facial palsy"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    },
+    "skill.cnpalsy.diagnosis": {
+      "id": "skill.cnpalsy.diagnosis",
+      "kind": "reasoning",
+      "system": "neurology",
+      "title": "Stating the diagnosis",
+      "oneLine": "Nerve, side, central or peripheral, level along the nerve, and why nothing else fits",
+      "why": "'Facial nerve palsy' alone does not communicate the localisation work that was actually done. A complete statement carries the central-versus-peripheral finding and the level along the nerve, and says explicitly that alternatives were considered.",
+      "body": "State the nerve and side, whether it is central or peripheral, the level along the nerve if peripheral, and the working diagnosis with the red flags that were checked and not found.",
+      "keyPoints": [
+        "The nerve and side affected.",
+        "Central or peripheral, from the forehead-sparing test (for the facial nerve) or the equivalent test for another cranial nerve.",
+        "If peripheral, the level along the nerve's course, from the accompanying findings (for the facial nerve: taste and hyperacusis).",
+        "The working diagnosis, stated as idiopathic (Bell's palsy) only once the specific alternatives have been actively excluded, with that exclusion stated explicitly.",
+        "A worked example: 'Right lower motor neurone facial palsy, likely proximal to the chorda tympani given reduced taste and hyperacusis, acute onset with a preceding ear-area ache, no rash, no other cranial nerve or limb involvement: idiopathic (Bell's) palsy.'"
+      ],
+      "pitfalls": [
+        "Writing 'facial palsy' without stating central versus peripheral.",
+        "Labelling a palsy 'Bell's' without stating that the alternatives were actively looked for and not found.",
+        "Omitting the level along the nerve when it was actually established on examination."
+      ],
+      "media": [],
+      "probes": [
+        {
+          "level": 2,
+          "q": "What four elements make a complete cranial nerve palsy diagnosis?",
+          "a": "The nerve and side, central versus peripheral, the level along the nerve if peripheral, and the working cause with alternatives explicitly excluded.",
+          "accept": [
+            "nerve",
+            "side",
+            "central",
+            "peripheral",
+            "level",
+            "exclude"
+          ],
+          "minMatch": 3
+        }
+      ],
+      "rubric": [
+        {
+          "id": "localise",
+          "text": "States central-vs-peripheral and, where peripheral, the level along the nerve"
+        },
+        {
+          "id": "exclusion",
+          "text": "States that alternative causes were actively excluded before calling it idiopathic",
+          "critical": true
+        }
+      ],
+      "sources": [
+        {
+          "source": "StewardMD Clinical KB",
+          "locator": "Neurology: cranial nerve palsy diagnosis"
+        },
+        {
+          "source": "Harrison's Principles of Internal Medicine",
+          "locator": "Disorders of the seventh cranial nerve"
+        }
+      ],
+      "review": {
+        "status": "ai_drafted"
+      }
+    }
+  }
+}

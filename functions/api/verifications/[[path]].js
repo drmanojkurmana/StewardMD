@@ -14,6 +14,7 @@
  * ---------------------------------------------------------------------------
  */
 import { mergeUserClaims } from "../../_fbadmin.js";
+import { clearBudgetCache } from "../../_aibudget.js";
 import { emailVerified, emailFailed } from "../../_email.js";
 import { markVerified, sendProUpsellOnce } from "../../_lifecycle.js";
 import { verifyFirebaseToken } from "../../_fbauth.js";
@@ -83,7 +84,9 @@ async function actionSigOK(env, uid, action, sig) {
 async function doApprove(store, env, uid, regNo) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
   const reg = String(regNo || rec.regNo || rec.extractedRegNo || "").trim();
-  await mergeUserClaims(env, uid, { verified: true, regNo: reg });   // merge: keep any existing pro claim
+  // verifiedAt starts the free Pro week; provUntil is cleared because the review is over.
+  await mergeUserClaims(env, uid, { verified: true, verifiedAt: Date.now(), provUntil: null, regNo: reg });   // merge: keep any existing pro claim
+  try { await clearBudgetCache(env, uid); } catch (e) {}   // tier changed; the cap is cached ~26h
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   const updated = { ...rec, uid, status: "verified", verified: true, regNo: reg, photoKey: "", approvedBy: "admin", verifiedAt: new Date().toISOString() };
   await store.put(doctorKey(uid), JSON.stringify(updated));
@@ -94,7 +97,8 @@ async function doApprove(store, env, uid, regNo) {
 }
 async function doReject(store, env, uid, reason) {
   const rec = (await store.get(doctorKey(uid), "json")) || { uid };
-  try { await mergeUserClaims(env, uid, { verified: false }); } catch (e) {}   // merge: revoke verified only, keep pro
+  // Clear the free-week start and any pending grant too, or a rejected account keeps Pro.
+  try { await mergeUserClaims(env, uid, { verified: false, verifiedAt: null, provUntil: null }); } catch (e) {}   // merge: revoke verified only, keep pro
   try { if (rec.photoKey && env.FOLLOWCARE_R2) await env.FOLLOWCARE_R2.delete(rec.photoKey); } catch (e) {}   // purge the review photo on decision
   // Clear provisional so the client gate forces a fresh upload.
   const updated = { ...rec, uid, status: "rejected", verified: false, provisionalUntil: "", photoKey: "", reason: String(reason || "rejected_by_admin"), updatedAt: new Date().toISOString() };
