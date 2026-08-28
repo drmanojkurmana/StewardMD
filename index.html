@@ -55,6 +55,11 @@
 <link rel="stylesheet" href="/maik-ask.css?v=maik1">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
 try{var _q=location.search||"";var _on=!/[?&]rnav=0\b/.test(_q)&&(/[?&]rnav=1\b/.test(_q)||localStorage.getItem("smd_redesign_nav")!=="0");if(_on)document.documentElement.classList.add("rds-on");}catch(e){}</script>
+<script>/* Interstitial revamp flag → html.smd-splash-v2, set before first paint so the boot splash,
+   intro poster and landing splash all pick it up with no flash. Presentation only (CSS overrides
+   + the personalised greeting on the boot splash); default ON, ?splashv2=0 or
+   localStorage smd_splash_v2="0" reverts to the previous look. */
+try{var _sq=location.search||"";var _sv=!/[?&]splashv2=0\b/.test(_sq)&&(/[?&]splashv2=1\b/.test(_sq)||localStorage.getItem("smd_splash_v2")!=="0");if(_sv)document.documentElement.classList.add("smd-splash-v2");}catch(e){}</script>
 <!-- Antibiotic-engine UI restyle (presentation-only CSS layer, scoped to #dxOverlay/#dxMgmt/classic
      engine). Flag html.abx-ui: default ON; ?abxui=0 (or localStorage smd_abx_ui="0") disables. -->
 <link rel="stylesheet" href="/abx-redesign.css?v=gold432">
@@ -250,6 +255,16 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     <span class="sbs-mark" aria-hidden="true"></span>
     <div class="sbs-word">Steward<span>MD</span></div>
     <div class="sbs-tag">Built by clinicians, for clinicians</div>
+    <!-- Returning, signed-in clinicians get their own face + name here instead of the generic
+         tagline (populated by the script below from the SAME localStorage account record the
+         sidebar/profile use). Hidden and inert for guests and first-time users. -->
+    <div class="sbs-hello" id="sbsHello" hidden>
+      <span class="sbs-dp" id="sbsDp" aria-hidden="true"></span>
+      <span class="sbs-hello-txt">
+        <span class="sbs-hello-k">Welcome back</span>
+        <span class="sbs-hello-n" id="sbsHelloName"></span>
+      </span>
+    </div>
     <div class="sbs-bar"><span></span></div>
   </div>
   <div class="sbs-foot">
@@ -260,6 +275,31 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
 </div>
 <script>/* splash theme — iOS/web: follow OS light/dark; Android: day (06-18)=light, night=dark. Runs pre-paint, no flash. */
 (function(){try{var s=document.getElementById("smdBootSplash");if(!s)return;var plat="";try{plat=(window.Capacitor&&Capacitor.getPlatform&&Capacitor.getPlatform())||"";}catch(e){}var ua=navigator.userAgent||"",android=plat==="android"||(/Android/i.test(ua)&&!/iPhone|iPad|iPod/i.test(ua)),dark;if(android){var h=new Date().getHours();dark=!(h>=6&&h<18);}else{dark=!!(window.matchMedia&&matchMedia("(prefers-color-scheme: dark)").matches);}if(dark)s.classList.add("sbs-dark");}catch(e){}})();</script>
+<script>/* Personalised boot splash (flag smd-splash-v2). Reads the SAME account record the sidebar and
+   profile sheet read — localStorage "stewardmd_account" (.name/.email/.picture, mirrored from the
+   Firebase user by account.js) — because Firebase has not booted this early. Signed-in users only;
+   guests and first-time users keep the generic brand tagline. Name/photo are the viewer's own, never
+   another person's data, and nothing is written or sent anywhere. Fails silently. */
+(function(){try{
+  if(!document.documentElement.classList.contains("smd-splash-v2"))return;
+  var s=document.getElementById("smdBootSplash");if(!s)return;
+  var a=null;try{a=JSON.parse(localStorage.getItem("stewardmd_account")||"null");}catch(e){}
+  if(!a||!(a.email||a.type==="google"||a.type==="apple"))return;
+  var nm=String(a.name||a.email||"").trim();if(!nm)return;
+  var label=nm.indexOf("@")>-1?nm.split("@")[0]:nm;
+  if(label.length>28)label=label.slice(0,27)+"\u2026";
+  var host=document.getElementById("sbsHello"),who=document.getElementById("sbsHelloName"),dp=document.getElementById("sbsDp");
+  if(!host||!who||!dp)return;
+  who.textContent=label;
+  var pic=String(a.picture||"");
+  if(/^https:\/\//.test(pic)){
+    var img=new Image();
+    img.onload=function(){try{dp.style.backgroundImage='url("'+pic.replace(/["\\]/g,"")+'")';dp.textContent="";dp.className="sbs-dp has-pic";}catch(e){}};
+    img.referrerPolicy="no-referrer";img.src=pic;
+  }
+  dp.textContent=(label.replace(/^dr\.?\s+/i,"").charAt(0)||"S").toUpperCase();
+  host.hidden=false;s.classList.add("sbs-personal");
+}catch(e){}})();</script>
 <style>
   #smdBootSplash{position:fixed;inset:0;z-index:2147483000;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:1;transition:opacity .45s ease;-webkit-font-smoothing:antialiased;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,system-ui,sans-serif}
   #smdBootSplash.sbs-hide{opacity:0;pointer-events:none}
@@ -293,6 +333,25 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
   @keyframes sbsFade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
   @keyframes sbsBar{0%{transform:translateX(-130%)}100%{transform:translateX(340%)}}
   @media (prefers-reduced-motion:reduce){#smdBootSplash .sbs-logo,#smdBootSplash .sbs-word{animation:none}#smdBootSplash .sbs-bar>span{animation-duration:2.2s}}
+  /* ── v2 (html.smd-splash-v2): tighter rhythm + the personalised "welcome back" row ──
+     Same palette as before (teal #0e6e63 / #4fd6c2, slate #5a7184); only spacing, hierarchy
+     and one new element. .sbs-hello is display:none until the script un-hides it. */
+  html.smd-splash-v2 #smdBootSplash .sbs-center{gap:13px}
+  html.smd-splash-v2 #smdBootSplash .sbs-word{font-size:29px;letter-spacing:-.025em}
+  html.smd-splash-v2 #smdBootSplash .sbs-tag{font-size:13px;font-weight:500;color:#6b8398;letter-spacing:.01em}
+  html.smd-splash-v2 #smdBootSplash.sbs-personal .sbs-tag{display:none}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello[hidden]{display:none}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello{display:flex;align-items:center;gap:11px;margin-top:2px;padding:7px 15px 7px 7px;border:1px solid #e2ecea;border-radius:999px;background:#f6faf9;max-width:min(84vw,300px);animation:sbsFade .55s .26s ease both}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp{flex:0 0 auto;width:36px;height:36px;border-radius:50%;background:#e6efee center/cover no-repeat;box-shadow:0 0 0 1.5px #fff,0 0 0 3px rgba(14,110,99,.28);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;color:#0e6e63;letter-spacing:-.01em}
+  html.smd-splash-v2 #smdBootSplash .sbs-dp.has-pic{background-color:#fff}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-txt{display:flex;flex-direction:column;gap:1px;min-width:0;text-align:left}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-k{font-size:9.5px;font-weight:700;letter-spacing:.13em;text-transform:uppercase;color:#8ba0ae;line-height:1}
+  html.smd-splash-v2 #smdBootSplash .sbs-hello-n{font-size:14.5px;font-weight:700;color:#0f172a;line-height:1.25;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello{background:rgba(255,255,255,.06);border-color:rgba(79,214,194,.28)}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-dp{background-color:rgba(79,214,194,.14);color:#4fd6c2;box-shadow:0 0 0 1.5px rgba(6,31,28,.9),0 0 0 3px rgba(79,214,194,.4)}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-k{color:rgba(255,255,255,.45)}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-hello-n{color:#fff}
+  @media (prefers-reduced-motion:reduce){html.smd-splash-v2 #smdBootSplash .sbs-hello{animation:none}}
 </style>
 <script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
@@ -325,6 +384,93 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
 <h1 class="sr-only">StewardMD</h1>
 <!-- ===== INTRO POSTER: shows first, auto-dismisses after 4s or on tap ===== -->
 
+
+<!-- ===== INTERSTITIAL REVAMP (html.smd-splash-v2) =====
+     Presentation-only override layer for the intro poster and the landing splash. Same palette as
+     the originals (teal #3fc7b3, paper #f6f7f5, the existing navy/teal gradient); the revamp is in
+     composition, spacing, type hierarchy and micro-motion. Nothing here changes markup or logic, so
+     ?splashv2=0 falls straight back to the previous look. -->
+<style>
+/* ── Intro poster (first-run, brand-led) ── */
+html.smd-splash-v2 #introPoster{padding:calc(env(safe-area-inset-top,0px) + 20px) 0 calc(env(safe-area-inset-bottom,0px) + 92px)}
+html.smd-splash-v2 .ip-bg{background:linear-gradient(158deg,#0a1f2e 0%,#0d3530 52%,#061a28 100%)}
+html.smd-splash-v2 .ip-bg::after{content:"";position:absolute;inset:0;background:radial-gradient(118% 72% at 50% 0%,rgba(63,199,179,.16) 0%,rgba(63,199,179,0) 62%),radial-gradient(90% 60% at 50% 108%,rgba(0,0,0,.34) 0%,rgba(0,0,0,0) 70%)}
+html.smd-splash-v2 .ip-phase{max-width:392px;padding:0 26px;animation:ipRise .62s cubic-bezier(.2,.75,.25,1) both}
+/* Phase 1 — logo lock-up */
+html.smd-splash-v2 .ip-logo-wrap{margin-bottom:22px}
+html.smd-splash-v2 .ip-logo-fallback{animation:ipBreathe 5.2s ease-in-out infinite}
+html.smd-splash-v2 .ip-appname{font-size:34px;font-weight:800;letter-spacing:-.03em;margin-bottom:14px}
+html.smd-splash-v2 .ip-in{font-size:19px;vertical-align:super;opacity:.8}
+html.smd-splash-v2 .ip-tagline-sub{font-size:10px;letter-spacing:.26em;color:rgba(63,199,179,.82);position:relative;padding-top:14px}
+html.smd-splash-v2 .ip-tagline-sub::before{content:"";position:absolute;top:0;left:50%;transform:translateX(-50%);width:34px;height:1px;background:rgba(63,199,179,.42)}
+/* Phase 2 — AMR */
+html.smd-splash-v2 .ip-amr-head{font-size:31px;font-weight:800;line-height:1.08;letter-spacing:-.025em;margin-bottom:0}
+html.smd-splash-v2 .ip-amr-sub{font-size:23px;font-weight:700;letter-spacing:.01em;display:inline-block;margin-top:6px}
+html.smd-splash-v2 .ip-amr-desc{font-size:13px;line-height:1.55;color:rgba(246,247,245,.62);max-width:33ch;margin:16px auto 22px}
+html.smd-splash-v2 .ip-stats{display:grid;grid-template-columns:1fr 1px 1fr 1px 1fr;align-items:stretch;gap:0;padding:18px 6px;border-radius:16px;background:rgba(255,255,255,.055);border:1px solid rgba(63,199,179,.22);box-shadow:inset 0 1px 0 rgba(255,255,255,.06);margin-bottom:22px}
+html.smd-splash-v2 .ip-stat{display:flex;flex-direction:column;justify-content:flex-start;gap:6px;padding:0 6px}
+html.smd-splash-v2 .ip-stat-num{font-size:21px;font-weight:700;font-variant-numeric:tabular-nums;letter-spacing:-.01em;margin-bottom:0}
+html.smd-splash-v2 .ip-stat-label{font-size:9.5px;line-height:1.35;letter-spacing:.02em;color:rgba(246,247,245,.52)}
+html.smd-splash-v2 .ip-stat-div{background:linear-gradient(180deg,rgba(255,255,255,0),rgba(255,255,255,.14),rgba(255,255,255,0))}
+html.smd-splash-v2 .ip-together{font-size:12.5px;font-weight:700;letter-spacing:.01em;line-height:1.5}
+html.smd-splash-v2 .ip-together span{display:inline-block;margin-top:6px;font-size:11.5px;color:rgba(246,247,245,.55)}
+/* Phase 3 — credit */
+html.smd-splash-v2 .ip-dev-label{font-size:9.5px;letter-spacing:.2em;color:rgba(246,247,245,.34);margin-bottom:7px}
+html.smd-splash-v2 .ip-dev-name{font-size:16px;font-weight:600;letter-spacing:-.01em;color:rgba(246,247,245,.9);margin-bottom:26px}
+html.smd-splash-v2 .ip-dev-product-of{font-size:9.5px;letter-spacing:.2em;color:rgba(246,247,245,.32)}
+/* The credit wordmark is a white-on-transparent asset, so the old invert(1) rendered it BLACK on
+   the dark poster (all but invisible). brightness(0) invert(1) forces white whatever the source is,
+   matching how .dev-studio-logo is handled on the landing splash. */
+html.smd-splash-v2 .ip-dev-maik-logo{filter:brightness(0) invert(1);opacity:.92!important}
+html.smd-splash-v2 .ip-grave{font-size:12.5px;line-height:1.65;color:rgba(246,247,245,.5);border-left-color:rgba(63,199,179,.45);padding-left:14px;margin-bottom:22px}
+html.smd-splash-v2 .ip-copy{font-size:10px;letter-spacing:.03em;color:rgba(246,247,245,.28)}
+/* Footer — dots read as progress, skip reads as a control */
+html.smd-splash-v2 .ip-footer{bottom:max(24px,env(safe-area-inset-bottom,24px));padding:0 22px}
+html.smd-splash-v2 .ip-dots{gap:5px;align-items:center}
+html.smd-splash-v2 .ip-dot{width:6px;height:6px;border-radius:999px;background:rgba(255,255,255,.22);transition:width .32s cubic-bezier(.2,.75,.25,1),background .32s ease}
+html.smd-splash-v2 .ip-dot.active{width:20px;transform:none;background:#3fc7b3}
+html.smd-splash-v2 .ip-skip{padding:8px 15px;font-size:12.5px;font-weight:600;letter-spacing:.01em;border-radius:999px;background:rgba(255,255,255,.07);border-color:rgba(255,255,255,.16);color:rgba(246,247,245,.78);transition:background .18s ease,color .18s ease,transform .12s ease}
+html.smd-splash-v2 .ip-skip:active{transform:scale(.96);background:rgba(255,255,255,.13)}
+@keyframes ipRise{from{opacity:0;transform:translateY(18px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes ipBreathe{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.88;transform:scale(.982)}}
+
+/* ── Landing splash (first-run case preview + consent CTA) ── */
+html.smd-splash-v2 #splash{background:linear-gradient(158deg,#0f1b24 0%,#14202b 52%,#0d3a33 100%)}
+html.smd-splash-v2 #splash .splash-inner{max-width:404px;padding:0 24px}
+html.smd-splash-v2 #splash .splash-mark{margin:0 auto 10px}
+html.smd-splash-v2 #splash .splash-name{font-size:26px;font-weight:800;letter-spacing:-.03em}
+html.smd-splash-v2 #splash .splash-tagline{margin-top:6px;font-size:10.5px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:rgba(63,199,179,.8)}
+/* Module strip: tightened so the five pills read as one balanced row at 390px instead of
+   breaking 4 + 1. Still wraps (never overflows) on narrower devices. */
+html.smd-splash-v2 #splash .splash-modules{gap:4px;margin-top:11px}
+html.smd-splash-v2 #splash .splash-module-pill{font-size:9.5px;font-weight:700;letter-spacing:.02em;padding:4px 8px}
+html.smd-splash-v2 #splash .demo-wrap{margin-top:22px}
+html.smd-splash-v2 #splash .demo-label{margin-bottom:10px;font-size:9.5px;letter-spacing:.16em;color:rgba(63,199,179,.72)}
+html.smd-splash-v2 #splash .demo-card{border-radius:18px;background:linear-gradient(180deg,rgba(255,255,255,.075) 0%,rgba(255,255,255,.035) 100%);border-color:rgba(255,255,255,.13);box-shadow:0 18px 42px -22px rgba(0,0,0,.85)}
+html.smd-splash-v2 #splash .demo-case-head{padding:15px 16px 13px}
+html.smd-splash-v2 #splash .demo-case-icon{border-radius:12px}
+html.smd-splash-v2 #splash .demo-case-title{font-size:14.5px;letter-spacing:-.01em;margin-bottom:5px}
+html.smd-splash-v2 #splash .demo-case-tag{border-radius:999px;padding:2px 9px;letter-spacing:.02em}
+html.smd-splash-v2 #splash .demo-rx-label{letter-spacing:.14em}
+html.smd-splash-v2 #splash .demo-drug{border-radius:999px;padding:6px 14px;letter-spacing:-.005em}
+html.smd-splash-v2 #splash .demo-notes-row{font-size:12px;line-height:1.45;margin-bottom:6px}
+html.smd-splash-v2 #splash .demo-dot-btn{transition:width .3s cubic-bezier(.2,.75,.25,1),background .3s ease}
+html.smd-splash-v2 #splash .demo-dot-btn.active{width:18px;border-radius:999px;transform:none}
+html.smd-splash-v2 #splash .demo-cta{margin-top:16px;padding:14px;border-radius:12px;letter-spacing:.005em;box-shadow:0 12px 26px -14px rgba(63,199,179,.9);transition:opacity .15s ease,transform .12s ease}
+html.smd-splash-v2 #splash .demo-cta:active{transform:scale(.985)}
+html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-height:1.65}
+
+@media (prefers-reduced-motion:reduce){
+  html.smd-splash-v2 .ip-bg,
+  html.smd-splash-v2 .ip-phase,
+  html.smd-splash-v2 .ip-logo-fallback,
+  html.smd-splash-v2 #splash .demo-slide{animation:none!important}
+  html.smd-splash-v2 .ip-dot,
+  html.smd-splash-v2 .ip-skip,
+  html.smd-splash-v2 #splash .demo-dot-btn,
+  html.smd-splash-v2 #splash .demo-cta{transition:none!important}
+}
+</style>
 
 <!-- ===== CODED INTRO SPLASH SCREEN ===== -->
 <div id="introPoster">
@@ -490,7 +636,7 @@ document.body.classList.toggle("dark",dark);}catch(e){}})();</script>
             </div>
           </div>
           <div class="demo-notes">
-            <div class="demo-notes-row"><div class="demo-dot"></div>Fluoroquinolone resistance common — avoid empirically</div>
+            <div class="demo-notes-row"><div class="demo-dot"></div>Fluoroquinolone resistance common, avoid empirically</div>
             <div class="demo-notes-row"><div class="demo-dot"></div>Step down to oral once sensitivity confirmed</div>
             <div class="demo-notes-row"><div class="demo-dot"></div>WHO Typhoid Guidelines · NCDC India</div>
           </div>

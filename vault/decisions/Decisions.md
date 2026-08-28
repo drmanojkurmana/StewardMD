@@ -204,3 +204,36 @@ deliberately NOT inserted, so nothing unverified travels into the printed docume
 **Open question for the owner**: whether the printed summary should carry a provenance line saying
 parts were AI-drafted. It is stamped DRAFT and clinician-review-required either way, but the
 medico-legal answer is a product call, not an engineering one. Deliberately not decided here.
+
+## 2026-08-28 — Interstitial revamp is a flagged override layer, and the returning-user splash is personalised
+The three interstitials (boot splash `#smdBootSplash`, first-run intro poster `#introPoster`, landing
+splash `#splash`) all live inline in `index.html` — the poster's phase logic sits in the minified
+`app.js`, and the poster/landing CSS is inside the ~100 KB single-line `<style>` blob on line 30.
+Editing that blob in place would have been an unreviewable diff with no way back, so the revamp is an
+**additive override `<style>` layer scoped to `html.smd-splash-v2`**, appended in readable form just
+above the poster markup. Flag resolution copies the `rds-on` pattern set before first paint: default
+**ON**, `?splashv2=0` or `localStorage smd_splash_v2="0"` reverts. No markup, IDs or phase logic
+changed, so `app.js` is untouched and the fallback is exact.
+
+Scope of the visual change is deliberately narrow: composition, spacing, type hierarchy, micro-motion.
+The palette is unchanged (same teal `#3fc7b3` / `#0e6e63`, paper `#f6f7f5` and navy-teal gradients the
+originals used). Reduced-motion was previously honoured only on the boot splash; the layer now covers
+the poster and landing splash too.
+
+**The returning-user splash is personalised with the clinician's own profile photo.** `#smdBootSplash`
+is the only interstitial a returning user actually sees (the gate at the top of `index.html` hides
+`#introPoster` and `#splash` for them), so that is where "welcome back" belongs. It reads the SAME
+record the sidebar and profile sheet read — `localStorage "stewardmd_account"` (`.name`/`.email`/
+`.picture`, mirrored from the Firebase user by `account.js`) — because Firebase has not booted that
+early; no new avatar field was invented. Signed-in users only; guests and first-time users keep the
+brand tagline, and the poster stays entirely logo/brand-led. The photo is accepted only over `https:`
+and falls back to a monogram if it fails to load; nothing is written or transmitted. Test:
+`test/run-splash-ui.mjs` (CDP, 390x844, covers both flag states and the guest path).
+
+The layer sits on top of the same day's "broaden the splash from antibiotic-only to full platform"
+change and styles its module-pill strip too, tightened so the five pills read as one balanced row at
+390px instead of breaking 4 + 1.
+
+Also fixed there: `.ip-dev-maik-logo` carried `filter:invert(1)` over a white-on-transparent asset, so
+the credit wordmark rendered black on the dark poster. It now uses `brightness(0) invert(1)`, matching
+`.dev-studio-logo`.
