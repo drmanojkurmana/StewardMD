@@ -73,6 +73,43 @@ const draftFor = (text) => ({
   role: "performed_supervised", supervisor: "fb:guide-1", residentId: "res-1",
 });
 
+/* SMD_IDTOKEN() is primed on idle, so it is empty for the first seconds after a cold start. Treating
+ * that as "signed out" made every eLOGBook request fail on launch, the module fall back to a stub
+ * context with no orgCode, and the institution screen print the raw 32-char org id instead of the
+ * SMD code. A signed-in user must still be served while the cache is cold. */
+test("a cold token cache still authenticates a signed-in user", async () => {
+  const server = fakeServer();
+  const mem = new Map();
+  const localStorage = {
+    getItem: (k) => (mem.has(k) ? mem.get(k) : null),
+    setItem: (k, v) => mem.set(k, String(v)),
+    removeItem: (k) => mem.delete(k),
+    key: (i) => Array.from(mem.keys())[i],
+    get length() { return mem.size; },
+  };
+  const win = {
+    SMD_PGLOG_FLAGS: { bool: (k) => k === "smd_pglog_server" },
+    localStorage,
+    navigator: { onLine: true },
+    SMD_IDTOKEN: () => "",                                                  // the cache is COLD
+    SMD_AUTH: { currentUser: { getIdToken: async () => "fresh-token" } },   // but we ARE signed in
+    addEventListener() {},
+    location: { origin: "https://stewardmd.in" },
+    fetch: server.impl,
+  };
+  const mod = { exports: {} };
+  new Function("window", "module", MODEL_SRC)(win, { exports: {} });
+  new Function("window", "localStorage", "module", "document", "fetch",
+               SRC)(win, localStorage, mod, { addEventListener() {} }, server.impl);
+  const store = win.SMD_PGLOG_STORE || mod.exports;
+
+  const d = store.saveDraft(draftFor("Ascitic tap"));
+  store.queueDraft(d.id);
+  await store.flush();
+  assert.equal(server.calls.created.length, 1,
+    "the request went out rather than being refused as signed-out");
+});
+
 test("two concurrent flushes submit each queued draft exactly once", async () => {
   const server = fakeServer();
   const { store } = loadStore(server.impl);

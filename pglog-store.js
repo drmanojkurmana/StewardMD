@@ -78,11 +78,30 @@
   function online() { try { return G.navigator ? G.navigator.onLine !== false : true; } catch (e) { return true; } }
   function serverOn() { return flag("smd_pglog_server"); }
 
+  /* SMD_IDTOKEN() is a CACHE that id-token.js primes on idle, so for the first seconds after launch
+   * it is empty even though the user is signed in. Treating that as "signed out" is what made the
+   * module open on a stub context with no orgCode - and the institution screen then printed the raw
+   * 32-char org id instead of the SMD code, on every cold start. Ask Firebase directly when the
+   * cache is cold; a genuinely signed-out user still resolves to "" and is still refused. */
+  function tokenAsync() {
+    var t = token();
+    if (t) return Promise.resolve(t);
+    try {
+      var u = G && G.SMD_AUTH && G.SMD_AUTH.currentUser;
+      if (u && u.getIdToken) {
+        return u.getIdToken().then(function (x) { return String(x || ""); }, function () { return ""; });
+      }
+    } catch (e) {}
+    return Promise.resolve("");
+  }
+
   function req(path, opts) {
     opts = opts || {};
     if (!serverOn()) return Promise.reject(mkErr("server_disabled", "Server sync is turned off for this device."));
     if (!online()) return Promise.reject(mkErr("offline", "You are offline."));
-    var t = token();
+    return tokenAsync().then(function (t) { return reqWith(t, path, opts); });
+  }
+  function reqWith(t, path, opts) {
     if (!t) return Promise.reject(mkErr("signin_required", "Sign in to sync your logbook."));
     var h = { "Authorization": "Bearer " + t };
     if (opts.body) h["Content-Type"] = "application/json";
