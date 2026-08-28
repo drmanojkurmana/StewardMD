@@ -321,3 +321,56 @@ Still presentation-only and inside `html.smd-splash-v2`: no markup, ID or logic 
 genuinely LOADS (`document.fonts.check` on both ends of the axis, the loaded-font set, canvas metrics
 differing from the fallback stack, and the woff2 returning 200) alongside the hero sizes, the absent
 tile chrome and the weight contrast.
+
+## Interstitials: Apple-style liquid glass for every splash surface (2026-08-28)
+
+Owner review of the LIGHT-theme personalised boot splash on device: he circled the "Loading your
+workspace" pill and the "developed by MaiK" footer bar with "can we make this marked boxes liquid
+glass for all - it should look like apple liquid glass". Direction C's surfaces were
+"translucent fill + flat 1px border + blur(10px)", which on a near-white field renders as a flat
+white shape with an outline. On the dark screens it passed; on light it was the flattest thing in
+the set.
+
+**One material, six tokens.** `--lg-blur / --lg-blur-sm`, `--lg-fill(-d)`, `--lg-rim(-d)`,
+`--lg-inset(-d)`, `--lg-shadow(-d)`, `--lg-solid(-d)` are declared once on `html.smd-splash-v2` in
+the boot-splash `<style>` and consumed by the poster/landing layer further down (custom properties
+cross `<style>` boundaries, so the two layers stay separate but share one surface language). Every
+pill and card on the five screens is rebuilt from them: the loading pill, the developed-by bar,
+poster phase 3's credit card, the skip pill, the landing case card, the module chips and the CTA.
+
+What actually makes it read as Apple glass, rather than generic glassmorphism:
+- **refraction**: `blur(22px) saturate(180%)` (16px on small controls, so a 30px pill does not smear
+  the whole background), always with the `-webkit-` twin, since iOS renders these in WKWebView.
+- **specular edge as a 1px GRADIENT border**, not a solid one: the sheen fill is painted to
+  `padding-box` and a rim gradient to `border-box` in one `background` shorthand, so no
+  pseudo-element is needed (several of these surfaces already spend `::after` on content).
+- **layered inset highlights** top and bottom plus a soft ambient drop shadow, which on the light
+  theme is most of what makes the glass visible at all.
+- **something worth refracting**: the light boot splash's radial blobs were so faint the backdrop
+  was effectively flat white, so they were strengthened and two were added under the pill and the
+  foot bar. Light-theme copy darkened (`#4a6577` / `#54707f`) to stay readable on the brighter fill.
+- **the CTA stays tinted glass**, not clear: a near-solid teal gradient keeps the dark label legible
+  and keeps it reading as the one tappable thing; the glass shows up as rim, sheen and refraction.
+
+**Fallback is mandatory.** Each surface has a more opaque plain fill + solid hairline outside the
+`@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px)))` block, so a WebView
+without backdrop-filter still gets a legible panel.
+
+**Gotcha found here:** `home.js` injects `body.ui-v2 .demo-card{border-radius:16px!important;
+border:...!important;box-shadow:...!important}` for the advanced app theme, and that sheet lands
+after `index.html`. It had already been flattening the landing case card whenever that theme was on.
+The interstitial is a splash surface, not an app card, so `html.smd-splash-v2 #splash .demo-card`
+now re-asserts its radius/border/shadow with `!important`. Scoped to that one card. This also made
+the harness flaky: the assertion passed or failed depending on whether the injected sheet had landed.
+
+Same commit, owner's second ask: the interstitials display the brand as **StewardMD**, never
+"StewardMD.in". Two visible spots, both plain copy in the poster markup: the `.ip-in` superscript on
+the phase 1 word-mark and the phase 3 copyright line. Functional uses of the domain (api endpoints,
+`mailto:Support@StewardMD.in`) are untouched.
+
+Still presentation-only inside `html.smd-splash-v2`: no layout, size, ID, data or flag changes, and
+`?splashv2=0` reverts everything. `sw.js` `CACHE` and the `redesign-system.css` token bumped to
+`splashv2e`. `test/run-splash-ui.mjs` grew a `glass()` helper asserting blur+saturate, a rim/sheen
+gradient and layered inset speculars on all seven surfaces in both themes, a source check that every
+`backdrop-filter` in the material ships with its `-webkit-` twin (Chromium drops the prefixed alias
+at parse time, so the CSSOM cannot prove it), and the two brand-text assertions.

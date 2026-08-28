@@ -55,7 +55,7 @@
      fallback, and the interstitials are the very first paint, so start the fetch here rather
      than waiting for the stylesheet to be parsed. Same-origin, so no crossorigin mismatch. -->
 <link rel="preload" href="/assets/fonts/bricolage-grotesque.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="/redesign-system.css?v=splashv2d">
+<link rel="stylesheet" href="/redesign-system.css?v=splashv2e">
 <link rel="stylesheet" href="/motion.css?v=gold1">
 <link rel="stylesheet" href="/maik-ask.css?v=maik1">
 <script>/* Redesign flag → html.rds-on early (before boot) so the onboarding gate is covered too. */
@@ -392,6 +392,79 @@ body.smd-ddi-open #smdBackToTop{display:none!important}
     html.smd-splash-v2 #smdBootSplash .sbs-hello{animation:none}
     html.smd-splash-v2 #smdBootSplash .sbs-bar::after{animation:none}
   }
+
+  /* ══ LIQUID GLASS material (shared tokens) ═════════════════════════════════════════════
+     The Direction C surfaces were "translucent panel + flat 1px border", which on the light
+     boot splash rendered as a near-white shape on a near-white field: flat, not glass. This
+     is the Apple-style material instead, and every pill/card on the five interstitials is
+     rebuilt from these tokens so they read as ONE material:
+       - a real refraction: blur + saturate on the backdrop, so the gradient behind bends
+         through the surface (both -webkit- and unprefixed, for WKWebView and Chrome WebView),
+       - a fill that is a soft vertical sheen rather than one flat alpha, which is what sells
+         the curvature of the "liquid" surface,
+       - the signature specular edge: a bright rim along the top and a dimmer one along the
+         bottom, drawn as a 1px GRADIENT border (fill painted to padding-box, rim gradient to
+         border-box) plus layered inset highlights. A flat solid border cannot do this.
+       - a soft ambient shadow so the surface floats above the field instead of being cut
+         into it. On the light theme that shadow is most of what makes the glass visible.
+     Tokens are declared once here and consumed by the poster/landing layer further down.
+     Everything is presentation only: no markup, ID, size or layout change. */
+  html.smd-splash-v2{
+    --lg-blur:blur(22px) saturate(180%);
+    --lg-blur-sm:blur(16px) saturate(180%);
+    /* light theme */
+    --lg-fill:linear-gradient(180deg,rgba(255,255,255,.74) 0%,rgba(255,255,255,.26) 44%,rgba(223,241,237,.34) 100%);
+    --lg-rim:linear-gradient(155deg,rgba(255,255,255,1) 0%,rgba(255,255,255,.55) 26%,rgba(14,110,99,.22) 58%,rgba(255,255,255,.9) 100%);
+    --lg-inset:inset 0 1px 0 rgba(255,255,255,1),inset 0 -1px 1px rgba(255,255,255,.7),inset 0 -12px 24px rgba(14,110,99,.055);
+    --lg-shadow:0 12px 30px rgba(12,58,52,.16),0 3px 8px rgba(12,58,52,.08),0 0 0 .5px rgba(14,110,99,.1);
+    --lg-solid:rgba(255,255,255,.9);
+    /* dark theme (set on .sbs-dark / the dark interstitials below) */
+    --lg-fill-d:linear-gradient(180deg,rgba(255,255,255,.15) 0%,rgba(255,255,255,.055) 48%,rgba(255,255,255,.1) 100%);
+    --lg-rim-d:linear-gradient(155deg,rgba(255,255,255,.58) 0%,rgba(255,255,255,.17) 30%,rgba(255,255,255,.04) 56%,rgba(255,255,255,.32) 100%);
+    --lg-inset-d:inset 0 1px 0 rgba(255,255,255,.34),inset 0 -1px 0 rgba(255,255,255,.13),inset 0 0 26px rgba(255,255,255,.06);
+    --lg-shadow-d:0 14px 42px rgba(0,0,0,.44),0 2px 10px rgba(0,0,0,.28);
+    --lg-solid-d:rgba(28,52,60,.86);
+  }
+
+  /* The light boot splash needs something behind the glass worth refracting: the previous
+     blobs were so faint the backdrop was effectively one flat white. Same palette, same
+     positions, just enough presence for the material to pick up. */
+  html.smd-splash-v2 #smdBootSplash{background:radial-gradient(360px 360px at 4% 2%,rgba(14,110,99,.17) 0%,rgba(14,110,99,0) 70%),radial-gradient(380px 380px at 100% 98%,rgba(146,98,10,.11) 0%,rgba(146,98,10,0) 70%),radial-gradient(300px 260px at 84% 16%,rgba(63,199,179,.13) 0%,rgba(63,199,179,0) 72%),radial-gradient(420px 300px at 50% 68%,rgba(14,110,99,.1) 0%,rgba(14,110,99,0) 72%),radial-gradient(460px 260px at 50% 100%,rgba(63,199,179,.14) 0%,rgba(63,199,179,0) 74%),#f7fbfa}
+
+  /* ── the two surfaces the owner circled ── */
+  html.smd-splash-v2 #smdBootSplash .sbs-bar,
+  html.smd-splash-v2 #smdBootSplash .sbs-foot{
+    border:1px solid rgba(14,110,99,.16);
+    background:var(--lg-solid);
+    box-shadow:var(--lg-shadow);
+  }
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-bar,
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-foot{
+    border-color:rgba(255,255,255,.16);
+    background:var(--lg-solid-d);
+    box-shadow:var(--lg-shadow-d);
+  }
+  @supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+    html.smd-splash-v2 #smdBootSplash .sbs-bar,
+    html.smd-splash-v2 #smdBootSplash .sbs-foot{
+      border-color:transparent;
+      background:var(--lg-fill) padding-box,var(--lg-rim) border-box;
+      box-shadow:var(--lg-inset),var(--lg-shadow);
+      -webkit-backdrop-filter:var(--lg-blur);
+      backdrop-filter:var(--lg-blur);
+    }
+    html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-bar,
+    html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-foot{
+      background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+      box-shadow:var(--lg-inset-d),var(--lg-shadow-d);
+    }
+  }
+  /* text on the new material: the glass is brighter than the old panel, so the light-theme
+     copy is darkened to keep it comfortably readable over the gradient */
+  html.smd-splash-v2 #smdBootSplash .sbs-bar::after{color:#4a6577}
+  html.smd-splash-v2 #smdBootSplash .sbs-by{color:#54707f}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-bar::after{color:rgba(246,247,245,.72)}
+  html.smd-splash-v2 #smdBootSplash.sbs-dark .sbs-by{color:rgba(246,247,245,.62)}
 </style>
 <script>(function(){var s=document.getElementById("smdBootSplash");if(!s)return;var t0=Date.now(),done=false,MIN=900,CAP=15000;
 /* Native handoff: once this white splash has actually PAINTED (two rAFs after it is in the
@@ -580,6 +653,80 @@ html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-heig
   html.smd-splash-v2 #splash .demo-dot-btn,
   html.smd-splash-v2 #splash .demo-cta{transition:none!important}
 }
+
+/* ══ LIQUID GLASS pass (poster + landing) ══════════════════════════════════════════════════
+   Same material as the boot splash, built from the tokens declared in the boot-splash layer
+   above, so all five interstitials share ONE surface language instead of three different
+   translucent panels. Every rule here is a material swap on an existing surface: no markup,
+   ID, size, radius or layout is touched, and ?splashv2=0 still reverts the lot.
+   These screens are always on the dark gradient mesh, so they take the dark tokens.
+   Structure of each surface:
+     fallback (no backdrop-filter)  -> a MORE OPAQUE plain fill + solid hairline, still legible
+     @supports (backdrop-filter)    -> refraction (blur + saturate), sheen fill painted to
+                                       padding-box, 1px specular RIM gradient painted to
+                                       border-box, inset highlights top/bottom, ambient shadow */
+html.smd-splash-v2 #ipPhase3,
+html.smd-splash-v2 .ip-skip,
+html.smd-splash-v2 #splash .demo-card,
+html.smd-splash-v2 #splash .splash-module-pill{
+  border:1px solid rgba(255,255,255,.18);
+  background:var(--lg-solid-d);
+  box-shadow:var(--lg-shadow-d);
+}
+@supports ((-webkit-backdrop-filter:blur(1px)) or (backdrop-filter:blur(1px))){
+  html.smd-splash-v2 #ipPhase3,
+  html.smd-splash-v2 #splash .demo-card{
+    border-color:transparent;
+    background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+    box-shadow:var(--lg-inset-d),var(--lg-shadow-d);
+    -webkit-backdrop-filter:var(--lg-blur);
+    backdrop-filter:var(--lg-blur);
+  }
+  /* home.js injects "body.ui-v2 .demo-card{border-radius:16px!important;border:...!important;
+     box-shadow:...!important}" for the advanced app theme, and that sheet lands after this one.
+     It was already flattening the Direction C card whenever that theme is on (the radius and
+     the elevation were being replaced by the app-card treatment). The interstitial is a splash
+     surface, not an app card, so it holds its own material here. Scoped to this one card. */
+  html.smd-splash-v2 #splash .demo-card{
+    border-radius:22px!important;
+    border:1px solid transparent!important;
+    box-shadow:var(--lg-inset-d),var(--lg-shadow-d)!important;
+  }
+  /* the small controls get the same material at a tighter blur, so a 30px-tall pill does not
+     smear the whole background behind it */
+  html.smd-splash-v2 .ip-skip,
+  html.smd-splash-v2 #splash .splash-module-pill{
+    border-color:transparent;
+    background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;
+    box-shadow:var(--lg-inset-d),0 6px 18px rgba(0,0,0,.3);
+    -webkit-backdrop-filter:var(--lg-blur-sm);
+    backdrop-filter:var(--lg-blur-sm);
+  }
+  /* the first chip stays the filled/accent one: same glass, tinted teal so the row still has
+     a start rather than five identical lozenges */
+  html.smd-splash-v2 #splash .splash-module-pill:first-child{
+    background:linear-gradient(180deg,rgba(63,199,179,.34) 0%,rgba(63,199,179,.16) 48%,rgba(63,199,179,.26) 100%) padding-box,
+               linear-gradient(155deg,rgba(160,255,238,.7) 0%,rgba(63,199,179,.2) 34%,rgba(63,199,179,.06) 58%,rgba(160,255,238,.4) 100%) border-box;
+    color:#9defdd;
+  }
+  html.smd-splash-v2 .ip-skip:active{background:var(--lg-fill-d) padding-box,var(--lg-rim-d) border-box;box-shadow:var(--lg-inset-d),0 2px 8px rgba(0,0,0,.34)}
+  /* inner pills sit ON glass, so they get the specular edge but no second blur pass */
+  html.smd-splash-v2 #splash .demo-drug,
+  html.smd-splash-v2 #splash .demo-case-tag{
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.30),inset 0 -1px 0 rgba(255,255,255,.08);
+  }
+  /* PRIMARY CTA: tinted glass, not clear glass. It keeps a near-solid teal gradient so the
+     dark label stays fully legible and the button still reads as the one tappable thing on
+     the screen; the glass shows up as the specular rim, the sheen and the refracted edge. */
+  html.smd-splash-v2 #splash .demo-cta{
+    border:1px solid transparent;
+    background:linear-gradient(160deg,rgba(104,231,212,.95) 0%,rgba(63,199,179,.92) 38%,rgba(14,110,99,.94) 100%) padding-box,
+               linear-gradient(155deg,rgba(220,255,249,.95) 0%,rgba(255,255,255,.32) 32%,rgba(255,255,255,.06) 58%,rgba(180,245,233,.6) 100%) border-box;
+    box-shadow:inset 0 1px 0 rgba(255,255,255,.6),inset 0 -1px 0 rgba(255,255,255,.18),0 14px 34px rgba(63,199,179,.34),0 2px 8px rgba(0,0,0,.22);
+    -webkit-backdrop-filter:var(--lg-blur-sm);
+    backdrop-filter:var(--lg-blur-sm);
+  }
+}
 </style>
 
 <!-- ===== CODED INTRO SPLASH SCREEN ===== -->
@@ -596,7 +743,7 @@ html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-heig
         <img loading="lazy" src="data:image/webp;base64,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" alt="StewardMD" class="ip-logo-img" style="width:130px;height:auto;object-fit:contain;">
       </div>
     </div>
-    <div class="ip-appname">Steward<span>MD</span><span class="ip-in">.in</span></div>
+    <div class="ip-appname">Steward<span>MD</span></div>
     <div class="ip-tagline-sub">CLINICAL DECISION SUPPORT PLATFORM</div>
   </div>
 
@@ -634,7 +781,7 @@ html.smd-splash-v2 #splash .splash-foot{margin-top:18px;font-size:11px;line-heig
       
     </div>
     <div class="ip-grave">"Be ready for the day when you are the only thing<br>standing between a patient and the grave."</div>
-    <div class="ip-copy">© 2026 StewardMD.in · All rights reserved</div>
+    <div class="ip-copy">© 2026 StewardMD · All rights reserved</div>
   </div>
 
   <!-- Always visible: progress dots + skip -->

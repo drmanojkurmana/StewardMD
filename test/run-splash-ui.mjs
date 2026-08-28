@@ -141,6 +141,10 @@ try {
   ok(await ev(`var p=document.getElementById("ipPhase1"),f=document.querySelector(".ip-footer");
       if(!p||!f)return false; return p.getBoundingClientRect().bottom <= f.getBoundingClientRect().top + 1;`) === true,
     "phase content does not collide with the footer at 390x844");
+  /* the displayed brand is "StewardMD", never the domain. Functional uses of stewardmd.in
+     (api calls, mailto links) are untouched; this is the visible word-mark only. */
+  okv(await ev(`var e=document.querySelector(".ip-appname"); return e ? e.textContent.trim() : "missing";`),
+    "StewardMD", "poster word-mark reads StewardMD (no .in suffix)");
   await shot("splash-01-intro-phase1");
 
   // advance to the AMR phase and the credit phase (tap anywhere but the skip button)
@@ -182,6 +186,8 @@ try {
     "credit uses the REAL /maik-logo-white.png word-mark (not a drawn lock-up)");
   ok(await ev(`var e=document.querySelector(".ip-dev-maik-logo"); return e ? getComputedStyle(e).display : "gone";`) === "none",
     "the old inline placeholder MaiK image is not rendered under the flag");
+  okv(await ev(`var e=document.querySelector(".ip-copy"); return e ? /\\.in\\b/.test(e.textContent||"") : "missing";`),
+    false, "the poster copyright line drops the .in too");
   await shot("splash-03-intro-phase3-credit");
 
   // skip -> the landing splash underneath
@@ -190,8 +196,41 @@ try {
     "#splash (landing) renders after the poster is dismissed");
   okv(await ev(`var e=document.querySelector("#splash .demo-card"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`), "22px",
     "Direction C case-preview glass card in effect (radius 22px)");
-  ok(await ev(`var e=document.querySelector("#splash .demo-card"); return e ? /blur\\(10px\\)/.test(getComputedStyle(e).backdropFilter||getComputedStyle(e).webkitBackdropFilter||"") : false;`) === true,
+  ok(await ev(`var e=document.querySelector("#splash .demo-card"); return e ? /blur\\(/.test(getComputedStyle(e).backdropFilter||getComputedStyle(e).webkitBackdropFilter||"") : false;`) === true,
     "case-preview card is glass (backdrop-filter blur)");
+  /* ---- the liquid-glass material -------------------------------------------------------
+     Every pill/card on the interstitials shares one Apple-style material. The three things a
+     flat translucent panel CANNOT fake, and that a silent regression would drop, are asserted
+     here: a real refraction (blur + saturate on the backdrop, prefixed AND unprefixed, since
+     these ship in WKWebView and Chrome WebView), a 1px specular RIM drawn as a gradient
+     border rather than a flat solid one, and layered inset highlights along the edges. */
+  const glass = async (sel, label) => {
+    const r = await ev(`var e=document.querySelector(${JSON.stringify(sel)}); if(!e)return "MISSING";
+        var s=getComputedStyle(e);
+        var bf=s.backdropFilter||s.getPropertyValue("-webkit-backdrop-filter")||"";
+        var out=[];
+        if(!/blur\\(/.test(bf)||!/saturate\\(/.test(bf)) out.push("backdrop-filter="+(bf||"none"));
+        if(!/gradient/.test(s.backgroundImage||"")) out.push("no rim/sheen gradient");
+        if((s.boxShadow||"").split("inset").length-1 < 2) out.push("no layered inset specular");
+        return out.join(", ")||"glass";`);
+    okv(r, "glass", label);
+  };
+  /* The prefixed property is what actually ships: iOS renders these screens in WKWebView.
+     Chromium drops -webkit-backdrop-filter at parse time (it is a WebKit-only alias), so the
+     CSSOM cannot prove it is there - read the served source instead and require that every
+     unprefixed backdrop-filter in the glass material is paired with its -webkit- twin. */
+  {
+    const src = await (await fetch(BASE)).text();
+    const un = (src.match(/(?<!-webkit-)backdrop-filter:var\(--lg-blur/g) || []).length;
+    const pf = (src.match(/-webkit-backdrop-filter:var\(--lg-blur/g) || []).length;
+    okv(un > 0 && un === pf ? "paired" : "unprefixed=" + un + " prefixed=" + pf, "paired",
+      "every liquid-glass backdrop-filter ships with its -webkit- prefixed twin");
+  }
+  await glass("#splash .demo-card", "landing case card is the liquid-glass material");
+  await glass("#splash .splash-module-pill", "landing module chips are the liquid-glass material");
+  await glass("#splash .demo-cta", "primary CTA is tinted glass (legible fill + specular rim)");
+  await glass("#ipPhase3", "the poster credit card is the liquid-glass material");
+  await glass(".ip-skip", "the poster skip pill is the liquid-glass material");
   ok(await ev(`var e=document.querySelector("#splash .demo-drug"); return e ? getComputedStyle(e).borderTopLeftRadius : "";`) === "999px",
     "revamped drug chips in effect (pill radius)");
   ok(await ev(`var e=document.querySelector("#splash .demo-cta"); return e ? /linear-gradient/.test(getComputedStyle(e).backgroundImage||"") : false;`) === true,
@@ -244,6 +283,9 @@ try {
   ok(await ev(`var l=document.querySelector("#smdBootSplash .sbs-maik-light"),d=document.querySelector("#smdBootSplash .sbs-maik-dark");
       return !!l && !!d && /maik-logo\\.png/.test(l.getAttribute("src")||"") && /maik-logo-white\\.png/.test(d.getAttribute("src")||"");`) === true,
     "the existing light/dark MaiK logo pairing in .sbs-foot is preserved");
+  // the two surfaces the owner circled, in the LIGHT theme (the screenshot he reviewed)
+  await glass("#smdBootSplash .sbs-bar", "light boot splash: the loading pill is liquid glass");
+  await glass("#smdBootSplash .sbs-foot", "light boot splash: the 'developed by' bar is liquid glass");
   await shot("splash-05-boot-personal-monogram");
 
   // same layout with a real photo in the avatar (local asset stands in for the Google photoURL)
@@ -261,6 +303,8 @@ try {
   await sleep(1600);
   ok(await ev(`var e=document.getElementById("smdBootSplash"); return !!e && e.classList.contains("sbs-dark") && /radial-gradient/.test(getComputedStyle(e).backgroundImage||"");`) === true,
     "dark boot splash uses the Direction C gradient mesh");
+  await glass("#smdBootSplash .sbs-bar", "dark boot splash: the loading pill is liquid glass");
+  await glass("#smdBootSplash .sbs-foot", "dark boot splash: the 'developed by' bar is liquid glass");
   await shot("splash-07-boot-personal-dark");
   await call("Emulation.setEmulatedMedia", { features: [] });
 
