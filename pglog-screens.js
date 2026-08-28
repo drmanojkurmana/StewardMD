@@ -1439,12 +1439,20 @@
   }
   function buildReport(id) {
     var r = REP(), m = M();
-    if (!r || !state.dash) return null;
+    if (!r) return null;
+    /* BEFORE the state.dash guard. The department summary is a REVIEWER's document, and a guide,
+     * HOD or Academic Cell has no resident record - so state.dash is null for exactly the people
+     * this report is for, and it returned "not available yet" every time. It needs state.dept, which
+     * the navigation path now loads. orgName, not orgId: this prints in the header. */
     if (id === "department_summary") {
       if (!state.dept) return null;
-      return r.departmentSummary({ residents: state.dept.residents, today: todayISO(),
-        departmentName: state.deptFilter.departmentId, orgName: (ST() ? ST().context().orgId : "") });
+      return r.departmentSummary({
+        residents: state.dept.residents, today: todayISO(),
+        departmentName: state.deptFilter.departmentId,
+        orgName: (state.ctx && state.ctx.orgName) || (ST() ? ST().context().orgId : ""),
+      });
     }
+    if (!state.dash) return null;
     var res = state.dash.resident;
     var ctx = {
       resident: res, programme: state.dash.programme, entries: state.dash.entries,
@@ -2080,6 +2088,12 @@
          * screen forever - the state every faculty user would have arrived in. */
         if (dest === "faculty") { go(dest); return loadFaculty().then(render, render); }
         if (dest === "dept") { go(dest); return loadDept().then(render, render); }
+        // The department summary is built from state.dept, which only the dept screen used to load -
+        // so reaching this report from anywhere else produced "That report is not available yet".
+        if (dest === "report/department_summary") {
+          go(dest);
+          return (state.dept ? Promise.resolve(state.dept) : loadDept()).then(render, render);
+        }
         return go(dest);
       }
       case "retry": state.error = ""; return enter(t.getAttribute("data-r"));
@@ -2609,11 +2623,32 @@
         discussedWithTrainee: a.discussed,
         feedback: a.free.facultyOverall || "", strengths: a.free.strengths || "", improvements: a.free.improvements || ""
       });
-    }).then(function () {
+    }).then(function (completed) {
+      /* SIGN IT. store.signAssessment() had no callers anywhere, so every assessment stopped at
+       * "completed" and none ever carried a signature - the state the model, the verify page and the
+       * portfolio all treat as the finished artefact. Filling in the form IS the assessor asserting
+       * it, exactly as on paper, so the signature follows the save rather than needing a second
+       * screen nobody knew to visit. */
+      var id = completed && completed.id;
+      if (!id || !st.signAssessment) return null;
+      return st.signAssessment(id).then(function () { return "signed"; }, function (e) {
+        // Never lose the assessment because the signature was refused - say which happened.
+        return { unsigned: (e && e.userMessage) || signErr(e) };
+      });
+    }).then(function (r) {
       state.loading = false; state.assessment = null;
-      toast("Assessment saved.");
+      if (r && r.unsigned) toast("Assessment saved, but not signed: " + r.unsigned);
+      else toast("Assessment saved and signed.");
       back();
     }, function (e) { state.loading = false; toast(e.userMessage || "Could not save the assessment."); render(); });
+  }
+  /** The server's refusals on signing, each with a different remedy. */
+  function signErr(e) {
+    var c = e && e.code;
+    if (c === "signer_unverified") return "your council registration is not verified yet.";
+    if (c === "not_the_assessor") return "only the faculty member who made it can sign it.";
+    if (c === "assessment_signed") return "it was already signed.";
+    return "the server refused the signature.";
   }
   function doAiSummary() {
     var ai = AI(); if (!ai) return;

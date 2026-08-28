@@ -223,10 +223,16 @@
       var withRef = opts.includeCaseRef === true;
       r.sections.push({
         heading: { opd: "Outpatient (OPD)", ipd: "Inpatient (IPD)", emergency: "Emergency" }[setting],
-        columns: ["Date", "Case / problem", "Category", "Diagnosis", "Role"].concat(withRef ? ["Case ref"] : [])
+        /* Diagnosis is identifying clinical detail, exactly like the case reference, so it is filled
+         * only when refs are shown - but the COLUMN was emitted either way, printing a column of
+         * blanks on every Clinical Activity report. Emit the header only when it will carry data. */
+        columns: ["Date", "Case / problem", "Category"].concat(withRef ? ["Diagnosis"] : [])
+          .concat(["Role"]).concat(withRef ? ["Case ref"] : [])
           .concat(["Outcome", "Supervisor", "Verification"]),
         rows: sortByDate(sub).map(function (e) {
-          var row = [fmtDate(e.occurredAt), s(e.title), s(e.category), opts.includeCaseRef ? s(e.diagnosis) : "", roleLabel(e)];
+          var row = [fmtDate(e.occurredAt), s(e.title), s(e.category)];
+          if (withRef) row.push(s(e.diagnosis));
+          row.push(roleLabel(e));
           if (withRef) row.push(e.caseRef || "");
           row.push(s(e.outcome), person(e.supervisor), verifiedCell(e));
           return row;

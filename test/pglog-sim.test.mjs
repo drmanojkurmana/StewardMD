@@ -308,6 +308,40 @@ test("INTEGRITY · weekly cadence exposes the ordered weeks a gap can be placed 
   for (const w of missed) assert.ok(wk.order.indexOf(w) > -1, `${w} is one of the ordered weeks`);
 });
 
+/* ══ INTEGRITY ══ a printed report must not carry a column it never fills ══
+ * The Clinical Activity report always emitted a "Diagnosis" header while filling the cell only when
+ * case references were shown, and that toggle is offered on two other reports but not this one - so
+ * it printed a column of blanks with no way to populate it. Emitting a column conditionally is also
+ * the easiest way to desynchronise headers from rows, so the arity is asserted in both modes. */
+test("INTEGRITY · the clinical report's columns and rows stay in step", () => {
+  const R = require("../pglog-reports.js");
+  const ctx = {
+    resident: { id: "r1", name: "Aarav Sharma", trainingYear: 2 },
+    programme: { name: "General Medicine", degree: "MD" },
+    entries: [{
+      id: "e1", kind: "clinical", setting: "ipd", occurredAt: "2026-08-20",
+      title: "Sepsis", category: "infection", diagnosis: "Septic shock",
+      caseRef: "MRN 44821", outcome: "improved", supervisor: "fb:guide-1", status: "verified",
+    }],
+    today: "2026-08-28", orgName: "Sim Medical College",
+  };
+
+  for (const includeCaseRef of [false, true]) {
+    const rep = R.clinicalReport(ctx, { includeCaseRef });
+    for (const s of rep.sections || []) {
+      if (!s.columns) continue;
+      for (const row of s.rows || []) {
+        assert.equal(row.length, s.columns.length,
+          `every row matches the header count (includeCaseRef=${includeCaseRef}, ${s.heading})`);
+      }
+    }
+    const clinical = (rep.sections || []).find((s) => s.columns && (s.rows || []).length === 1);
+    const hasDiagnosis = !!(clinical && clinical.columns.indexOf("Diagnosis") > -1);
+    assert.equal(hasDiagnosis, includeCaseRef,
+      "the Diagnosis column appears only when it will actually be filled");
+  }
+});
+
 /* ══ HARD 2 ══ cross-resident reads must never carry clinical identifiers ══ */
 test("HARD 2 · an institution-wide viewer never receives case refs or diagnoses", async () => {
   const db = fakeDb();
