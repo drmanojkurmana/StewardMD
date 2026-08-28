@@ -1770,6 +1770,25 @@
         (x.attendance.pctOfRecorded == null ? "not recorded" : x.attendance.pctOfRecorded + "% of recorded days") +
         " " + prov("nmc_regulation", "5.5") + "</div></div>");
     }
+    /* POSTINGS. store.createRotation() had no callers, and the resident's own Rotations screen tells
+     * them to ask their department - which had no control either, so a posting could never be
+     * recorded anywhere. The server requires PGLOG_CONFIGURE, so the form appears for the people who
+     * hold it and nobody else. */
+    if (arr(state.ctx && state.ctx.caps).indexOf("pglog.configure") > -1) {
+      h.push('<div class="pgl-card"><h3>Add a posting</h3>' +
+        '<p style="font-size:13px;line-height:1.55;color:var(--pgl-muted)">' +
+        "Rotations decide which department a resident's work counts toward, and the residential " +
+        "posting requirement is measured from them." + "</p></div>");
+      h.push('<div class="pgl-field"><label for="pglRotName">Posting</label>' +
+        '<input type="text" id="pglRotName" placeholder="e.g. Medical ICU"></div>');
+      h.push('<div class="pgl-field"><label for="pglRotFrom">From</label>' +
+        '<input type="date" id="pglRotFrom"></div>');
+      h.push('<div class="pgl-field"><label for="pglRotTo">To</label>' +
+        '<input type="date" id="pglRotTo"></div>');
+      h.push('<button class="pgl-btn wide" data-pgl="add-rotation" data-id="' + attr(res.id) + '"' +
+        (state.rotBusy ? " disabled" : "") + ">" + (state.rotBusy ? "Adding…" : "Add posting") + "</button>");
+    }
+
     h.push(banner("info", "shield_person",
       "This view shows training completeness. Opening an individual entry's clinical detail requires being " +
       "the resident's verifying faculty or the Head of Department."));
@@ -2205,6 +2224,7 @@
         return go("add/" + se.kind);
       }
       case "attest-month": return doAttestMonth(id, t.getAttribute("data-p"));
+      case "add-rotation": return doAddRotation(id);
       case "resubmit": return doResubmit(id);
       case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
@@ -2304,6 +2324,37 @@
       toast((e && e.userMessage) || attestErr(e));
     });
   }
+  /* Record a posting. The dates decide which department the work counts toward and feed the
+   * residential-posting requirement, so both are required rather than defaulted. */
+  function doAddRotation(residentId) {
+    var st = ST(), host = state.host;
+    var val = function (sel) { var el = host && host.querySelector(sel); return el ? String(el.value || "").trim() : ""; };
+    var name = val("#pglRotName"), from = val("#pglRotFrom"), to = val("#pglRotTo");
+    if (!name) return toast("Name the posting.");
+    if (!from || !to) return toast("Enter both dates.");
+    if (to < from) return toast("The end date is before the start date.");
+
+    var d = state.dept || state.faculty;
+    var x = arr(d && d.residents).filter(function (y) { return (y.resident || {}).id === residentId; })[0];
+    var res = x && x.resident;
+    if (!res) return toast("That resident is not in the current list.");
+
+    state.rotBusy = true; render();
+    return st.createRotation({
+      residentId: residentId, programmeId: res.programmeId, name: name,
+      kind: "department", departmentId: res.departmentId, unit: res.unit || "",
+      startDate: from, endDate: to,
+    }).then(function () {
+      state.rotBusy = false;
+      toast("Posting added.");
+      // Reload so the department's own counts reflect it rather than trusting a local patch.
+      return (state.dept ? loadDept() : loadFaculty()).then(render, render);
+    }, function (e) {
+      state.rotBusy = false; haptic("warning"); render();
+      toast((e && e.userMessage) || "Could not add that posting.");
+    });
+  }
+
   /** Name the reason. These are the server's own refusals, and each one has a different remedy. */
   function attestErr(e) {
     var c = e && e.code;

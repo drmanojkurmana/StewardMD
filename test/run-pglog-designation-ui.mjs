@@ -492,6 +492,55 @@ try {
      /"residentId":"res-9"/.test(String(sent)),
      `it signs that month for that resident (sent: ${String(sent).slice(0, 140)})`);
 
+  /* ── 15. A posting must be recordable by someone ──
+   * store.createRotation() had no callers, and the resident's own Rotations screen tells them to ask
+   * their department - which had no control either. So a posting could not be recorded anywhere,
+   * while the residential-posting requirement is measured from exactly these records. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"bbbb6666bbbb6666bbbb6666bbbb6666"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.myInstitutions=function(){return Promise.resolve([])};
+    s.me=function(id){return Promise.resolve({uid:"fb:cell-1",orgId:id,orgCode:"SMD-ROT001",
+      orgName:"Sim Medical College",orgKind:"institution",role:"academic_cell",
+      caps:["pglog.configure","pglog.view.institution","pglog.view.dept"],
+      resident:null, programme:null, rotations:[]});};
+    window.__rots = [];
+    s.createRotation=function(body){ window.__rots.push(body); return Promise.resolve({id:"rot-1"}); };
+    s.deptDashboard=function(){ return Promise.resolve({
+      residents:[{ resident:{id:"res-7",name:"Kabir Reddy",trainingYear:1,
+                             programmeId:"prog-1",departmentId:"dept-medicine",unit:"Unit A"},
+                   summary:{verified:3}, weekly:{pct:75}, attestationOverdue:0 }]}); };
+    window.SMD_PGLOG_SCREENS._state.ctx = null;
+    window.SMD_PGLOG_SCREENS._state.dash = null;
+    window.SMD_PGLOG_SCREENS._state.dept = null;
+    window.SMD_PGLOG_SCREENS._state.faculty = null;
+    return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1600);
+  ok(await tap("Department oversight") === true, "the Academic Cell can open department oversight");
+  await sleep(1700);
+  ok(await tap("Kabir Reddy") === true, "and open a resident");
+  await sleep(1400);
+
+  const tRot = String(await txt());
+  ok(/Add a posting/i.test(tRot), `the posting form is offered (got: ${JSON.stringify(tRot.slice(0, 150))})`);
+
+  await ev(`var h=window.SMD_PGLOG_SCREENS._state.host;
+    h.querySelector("#pglRotName").value="Medical ICU";
+    h.querySelector("#pglRotFrom").value="2026-01-01";
+    h.querySelector("#pglRotTo").value="2026-03-31";
+    return 1;`);
+  await ev(`var b=document.querySelector('[data-pgl="add-rotation"]'); if(b) b.click(); return !!b;`);
+  await sleep(1500);
+  const rots = await ev(`return JSON.stringify(window.__rots)`);
+  ok(/"name":"Medical ICU"/.test(String(rots)) && /"residentId":"res-7"/.test(String(rots)) &&
+     /"departmentId":"dept-medicine"/.test(String(rots)),
+     `the posting is recorded against that resident (sent: ${String(rots).slice(0, 150)})`);
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}
