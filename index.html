@@ -621,10 +621,10 @@ html.smd-splash-v2 #splash .splash-mark-logo{position:relative;width:118px;heigh
 html.smd-splash-v2 #splash .splash-name{font-family:var(--smd-dsp);font-size:42px;font-weight:300;letter-spacing:-.045em;line-height:1;text-align:left}
 html.smd-splash-v2 #splash .splash-name .accent{font-weight:800;color:#3fc7b3}
 html.smd-splash-v2 #splash .splash-tagline{text-align:left;margin-top:11px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.44)}
-html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:6px;margin-top:18px}
+html.smd-splash-v2 #splash .splash-modules{justify-content:flex-start;gap:5px;margin-top:18px;flex-wrap:nowrap;white-space:nowrap}
 /* chips, not pills: squared-off hairline tags, with only the first one filled so the row has a
    start instead of five identical lozenges */
-html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:5px 9px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6)}
+html.smd-splash-v2 #splash .splash-module-pill{font-family:var(--smd-dsp);font-size:8.5px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;padding:5px 7px;border-radius:6px;border:1px solid rgba(63,199,179,.24);background:none;color:rgba(246,247,245,.6);flex:0 0 auto}
 html.smd-splash-v2 #splash .splash-module-pill:first-child{border-color:transparent;background:rgba(63,199,179,.18);color:#7fe6d6}
 html.smd-splash-v2 #splash .demo-wrap{margin-top:22px}
 html.smd-splash-v2 #splash .demo-label{text-align:left;margin-bottom:12px;font-family:var(--smd-dsp);font-size:9.5px;font-weight:600;letter-spacing:.24em;text-transform:uppercase;color:rgba(246,247,245,.42)}
@@ -847,7 +847,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 1: CAP -->
         <div class="demo-slide active" id="demo-0">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🫁</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">pulmonology</span></div>
             <div>
               <div class="demo-case-title">Community-Acquired Pneumonia</div>
               <div class="demo-case-tags">
@@ -875,7 +875,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 2: Typhoid -->
         <div class="demo-slide" id="demo-1">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🌡️</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">thermostat</span></div>
             <div>
               <div class="demo-case-title">Enteric Fever (Typhoid)</div>
               <div class="demo-case-tags">
@@ -903,7 +903,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 3: Malaria -->
         <div class="demo-slide" id="demo-2">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🦟</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">coronavirus</span></div>
             <div>
               <div class="demo-case-title">Severe Falciparum Malaria</div>
               <div class="demo-case-tags">
@@ -929,7 +929,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 4: ICU Workstation -->
         <div class="demo-slide" id="demo-3">
           <div class="demo-case-head">
-            <div class="demo-case-icon">🩺</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">stethoscope</span></div>
             <div>
               <div class="demo-case-title">ICU Workstation</div>
               <div class="demo-case-tags">
@@ -959,7 +959,7 @@ html.smd-splash-v2 #splash .splash-module-pill{
         <!-- SLIDE 5: MaiK AI Assistant -->
         <div class="demo-slide" id="demo-4">
           <div class="demo-case-head">
-            <div class="demo-case-icon">✨</div>
+            <div class="demo-case-icon"><span class="material-symbols-rounded" aria-hidden="true">auto_awesome</span></div>
             <div>
               <div class="demo-case-title">MaiK AI Assistant</div>
               <div class="demo-case-tags">
@@ -1989,7 +1989,7 @@ window.openExternal = function (u) {
      update" row in Settings (home.js) + a proactive banner. Inert (no-op) until the owner adds
      @capgo/capacitor-updater via `npm install && npx cap sync` and rebuilds natively — see
      vault/modules/OTA Updates.md. Must load AFTER native-bridge.js (needs window.SMD_IS_NATIVE). -->
-<script src="/native-ota.js?v=ota3-noleak" defer></script>
+<script src="/native-ota.js?v=ota3-noleak-gate1" defer></script>
 <!-- Email sign-up/sign-in + Resend OTP verification + doctor profile (hospital/state/city).
      Additive over Firebase Auth; smd-geo.js is the India states/cities + curated hospital list. -->
 <script src="/smd-geo.js?v=gold472" defer></script>
@@ -2051,7 +2051,7 @@ window.openExternal = function (u) {
 <script src="/kb/ai/maik-copilot.js?v=gold1053-calcfix" defer></script>
 <script src="/electrolytes.js?v=bug808" defer></script>
 <script src="/caseshare.js?v=gold363" defer></script>
-<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart1-pglog1-ack1-otasay-oncqis-sync1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
+<script src="/hospitals-in.js?v=gold1018" defer></script><script src="/connect-source.js?v=cs3docs" defer></script><script src="/connect-patient.js?v=cp4" defer></script><script src="/queue-flags.js?v=q5-all-on" defer></script><script src="/home.js?v=nstream1-clinix5-surgx2-logo-aiu1-profile2-rxtile-glyphs-maikart1-pglog1-ack1-otasay-oncqis-sync1-prompt1" defer></script><script src="/profile-setup.js?v=pfs1" defer></script><script src="/syndromes-motion.js?v=synmo5" defer></script><script src="/dialog-motion.js?v=dm2" defer></script>
 <!-- Lean sidebar redesign (Tools / Reference & Help / Settings / Advanced). Additive; wraps
      SB.open and rebuilds #sbMenu, superseding home.js's legacy reorganizer (which stands down
      via window.SMD_SBR). Must load AFTER home.js. -->

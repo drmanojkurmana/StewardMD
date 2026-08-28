@@ -161,13 +161,26 @@ try {
   // real multi-subscriber Capacitor App plugin) — several OTHER modules (autofetch.js, streak.js,
   // theme-sync.js) ALSO register their own listener for this event, so calling only "the" callback
   // would just hit whichever one happened to register last.
-  const banner = await J(`
+  /* The banner must NOT appear over the splash / intro / sign-in gate (reported from internal
+   * testing with it stacked on the pre-login screen, clipping the notification ask). native-ota.js
+   * asks window.SMD_PROMPT_OK - home.js's single definition of "signed in and actually on home" -
+   * and defers on a timer until it passes. Prove the deferral first, then let it through. */
+  await ev(`window.SMD_PROMPT_OK = function(){ return false; }; return 1;`);
+  await J(`
     window.__otaResponses = [{ ota:true, version:7, zipUrl:"https://stewardmd.in/api/ota/file/ghi", zipHash:"ghi" }];
     try { localStorage.removeItem("smd_ota_lastcheck"); } catch(e){}
     try { localStorage.setItem("smd_ota_auto", "0"); } catch(e){}   // manual mode -> banner, not silent apply
     window.__fireAppState({ isActive: true });
-    return JSON.stringify({ nListeners: window.__appStateCbs.length });
+    return JSON.stringify({ ok: 1 });
   `);
+  await sleep(500);
+  ok(await ev(`var b=document.getElementById("smdOtaBanner"); return !b || b.className.indexOf("on") < 0;`) === true,
+    "the banner does NOT appear while the sign-in gate is still up");
+
+  // Now the doctor is signed in and on home: the deferred banner should arrive on the next tick.
+  await ev(`window.SMD_PROMPT_OK = function(){ return true; }; return 1;`);
+  await sleep(1900);
+  const banner = await J(`return JSON.stringify({ nListeners: window.__appStateCbs.length });`);
   ok(banner.nListeners >= 1, `native-ota.js registered an app-foreground listener (alongside ${banner.nListeners - 1} others)`);
   await sleep(500);
   const bannerShown = await ev(`var b=document.getElementById("smdOtaBanner"); return b ? b.className : "absent";`);

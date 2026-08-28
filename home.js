@@ -7092,8 +7092,34 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   }
   // On native app open: if notifications aren't decided yet, offer a one-tap enable popup.
   // Already-granted → silently re-register; denied → respect it (no popup).
+  /* A prompt must never land on the splash, the intro poster or the sign-in gate. Reported from
+   * internal testing with a screenshot of the notification ask AND the OTA update banner stacked on
+   * the pre-login screen, clipping each other. Two conditions, both required: the doctor is SIGNED
+   * IN, and the home screen is what they are actually looking at. refreshFab() already computed the
+   * second half for the Home FAB - the id list is named ONCE here so the two cannot drift.
+   * Exposed as window.SMD_PROMPT_OK so native-ota.js gates its banner on the same rule. */
+  var SMD_GATE_IDS = ["introPoster", "splash", "accountGate", "disclaimerModal", "introOverlay", "smdBootSplash"];
+  function smdGateUp() {
+    return SMD_GATE_IDS.some(function (id) {
+      var el = document.getElementById(id); if (!el) return false;
+      // These gates fade out via opacity/visibility but stay display:flex, so offsetWidth alone
+      // would read them as "up" forever after dismissal.
+      var cs = window.getComputedStyle(el);
+      return cs.display !== "none" && cs.visibility !== "hidden" && parseFloat(cs.opacity || "1") > 0.01;
+    });
+  }
+  function smdSignedIn() {
+    try { return !!(window.SMD_AUTH && SMD_AUTH.currentUser && SMD_AUTH.currentUser.uid); } catch (e) { return false; }
+  }
+  function smdPromptOK() { return smdSignedIn() && !smdGateUp(); }
+  try { window.SMD_PROMPT_OK = smdPromptOK; } catch (e) {}
+
   function maybeOfferPushOnOpen() {
-    var P = nativePush(); if (!P || window.__smdPushOffered) return; window.__smdPushOffered = true;
+    var P = nativePush(); if (!P || window.__smdPushOffered) return;
+    // Not yet: still on the splash / intro / sign-in gate, or not signed in. Asking here is exactly
+    // what put this popup on the pre-login screen. The caller retries, so this is a "later", not a no.
+    if (!smdPromptOK()) return;
+    window.__smdPushOffered = true;
     initNativePushListeners();
     P.checkPermissions().then(function (res) {
       var st = res && res.receive;
@@ -7105,21 +7131,38 @@ body.mk2 #maikSheet .maik-side-ov{background:rgba(11,17,22,.5)}
   function showPushPopup() {
     if (document.getElementById("smdPushPop")) return;
     var d = document.createElement("div"); d.id = "smdPushPop";
-    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.55);display:flex;align-items:flex-end;justify-content:center";
-    d.innerHTML = '<div style="background:var(--panel,#fff);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:18px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -8px 40px rgba(0,0,0,.3)">' +
-      '<div style="font:800 17px var(--sans,system-ui);margin-bottom:6px">🔔 Turn on notifications?</div>' +
-      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates — drug approvals, safety alerts and recalls — plus notices from StewardMD.</div>' +
-      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid var(--line,#d7dee3);border-radius:12px;background:transparent;color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
-      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:12px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer">Turn on</button></div></div>';
+    // Liquid glass, matching the interstitial surfaces: a translucent, blurred card over a dimmed
+    // scrim, with a hairline top highlight. The 🔔 emoji is gone - real Material Symbol, like the
+    // rest of the app. -webkit-backdrop-filter is required for WKWebView.
+    d.style.cssText = "position:fixed;inset:0;z-index:16050;background:rgba(8,18,26,.45);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center";
+    d.innerHTML = '<div style="position:relative;overflow:hidden;background:color-mix(in srgb, var(--panel,#fff) 74%, transparent);-webkit-backdrop-filter:saturate(180%) blur(22px);backdrop-filter:saturate(180%) blur(22px);border:1px solid color-mix(in srgb, var(--line,#d7dee3) 70%, transparent);color:var(--ink,#14202b);max-width:460px;width:100%;margin:0 12px 12px;border-radius:22px;padding:20px 18px calc(18px + env(safe-area-inset-bottom));box-shadow:0 -10px 44px rgba(0,0,0,.32)">' +
+      '<span aria-hidden="true" style="position:absolute;top:0;left:12%;right:12%;height:1px;background:linear-gradient(90deg,transparent,rgba(255,255,255,.75),transparent)"></span>' +
+      '<div style="display:flex;align-items:center;gap:9px;margin-bottom:6px"><span class="material-symbols-rounded" aria-hidden="true" style="font-size:22px;color:var(--teal,#0e6e63)">notifications_active</span>' +
+      '<span style="font:800 17px var(--sans,system-ui)">Turn on notifications?</span></div>' +
+      '<div style="font:500 14px var(--sans,system-ui);color:var(--slate,#5a7184);line-height:1.5;margin-bottom:16px">Get trusted medical updates - drug approvals, safety alerts and recalls - plus notices from StewardMD.</div>' +
+      '<div style="display:flex;gap:10px"><button id="smdPushLater" style="flex:1;padding:12px;border:1px solid color-mix(in srgb, var(--line,#d7dee3) 80%, transparent);border-radius:14px;background:color-mix(in srgb, var(--panel,#fff) 45%, transparent);color:var(--slate,#5a7184);font:700 14px var(--sans,system-ui);cursor:pointer">Not now</button>' +
+      '<button id="smdPushYes" style="flex:2;padding:12px;border:none;border-radius:14px;background:var(--teal,#0e6e63);color:#fff;font:700 14px var(--sans,system-ui);cursor:pointer;box-shadow:0 4px 14px -4px rgba(14,110,99,.65)">Turn on</button></div></div>';
     document.body.appendChild(d);
     function close() { if (d.parentNode) d.parentNode.removeChild(d); }
     d.querySelector("#smdPushLater").addEventListener("click", close);
     d.addEventListener("click", function (e) { if (e.target === d) close(); });
     d.querySelector("#smdPushYes").addEventListener("click", function () { close(); enablePushNative(); });
   }
-  // Offer the notification popup shortly after the app is up (native only).
+  // Offer the notification popup once the doctor is signed in AND on home (native only).
+  // POLL, don't fire once: sign-in and the splash dismissal both finish asynchronously, so the old
+  // single 1800ms shot landed on whatever happened to be on screen - which is how this ended up over
+  // the pre-login splash. Bounded (~2 min) so it can never spin; if home is never reached, the offer
+  // simply waits for the next launch.
   if (window.SMD_IS_NATIVE) {
-    try { window.addEventListener("load", function () { setTimeout(function () { try { maybeOfferPushOnOpen(); } catch (e) {} }, 1800); }); } catch (e) {}
+    try {
+      window.addEventListener("load", function () {
+        var tries = 0;
+        var iv = setInterval(function () {
+          try { maybeOfferPushOnOpen(); } catch (e) {}
+          if (window.__smdPushOffered || ++tries > 80) { try { clearInterval(iv); } catch (e2) {} }
+        }, 1500);
+      });
+    } catch (e) {}
   }
   function injectNotifCSS() {
     if (document.getElementById("ntf-css")) return;
