@@ -433,6 +433,65 @@ try {
   ok(await ev(`return window.__resubmits.length === 1`) === true,
      "and the corrected entry goes back for verification");
 
+  /* ── 14. Monthly authentication must be performable, not just counted ──
+   * PGMER-2023 5.2(vii). store.attest() existed with zero callers anywhere in the client, while the
+   * home, faculty and department screens and the printed report all counted months as OVERDUE. The
+   * app told four different people a month was unauthenticated and gave nobody a way to sign it. */
+  await ev(`
+    var s=window.SMD_PGLOG_STORE, cur={orgId:"aaaa5555aaaa5555aaaa5555aaaa5555"};
+    s.context=function(){return cur};
+    s.setContext=function(o){ if(o&&"orgId" in o) cur.orgId=o.orgId; return cur };
+    s.seedDemo=function(){return null};
+    s.myInstitutions=function(){return Promise.resolve([])};
+    s.me=function(id){return Promise.resolve({uid:"fb:guide-1",orgId:id,orgCode:"SMD-ATT001",
+      orgName:"Sim Medical College",orgKind:"institution",role:"pg_faculty",
+      caps:["pglog.verify","pglog.view.assigned","pglog.attest"],
+      resident:null, programme:null, rotations:[]});};
+    window.__attests = [];
+    s.attest=function(body){ window.__attests.push(body); return Promise.resolve({id:"att-1"}); };
+    s.facultyDashboard=function(){ return Promise.resolve({
+      pending:[], overdue:[],
+      residents:[{ resident:{id:"res-9",name:"Meera Iyer",trainingYear:2},
+                   summary:{verified:12}, weekly:{pct:88},
+                   attestationOverdue:["2026-06","2026-07"] }]}); };
+    window.SMD_PGLOG_SCREENS._state.ctx = null;
+    window.SMD_PGLOG_SCREENS._state.dash = null;
+    window.SMD_PGLOG_SCREENS._state.faculty = null;
+    // headless Chrome answers confirm() with false unless told otherwise
+    window.confirm = function(){ return true; };
+    return 1;`);
+  await ev(`window.PGLOG.close && window.PGLOG.close(); return 1;`);
+  await sleep(400);
+  await ev(`window.PGLOG.open(); return 1;`);
+  await sleep(1600);
+  ok(await tap("Faculty review") === true, "the guide can open faculty review");
+  await sleep(1600);
+
+  const tAtt = String(await txt());
+  ok(/Months to authenticate/i.test(tAtt),
+     `the outstanding months are listed (got: ${JSON.stringify(tAtt.slice(0, 170))})`);
+  ok(/June 2026/.test(tAtt), "and each month is named in words, not as a raw period key");
+
+  /* Click the control by its ACTION, not its label: the resident row above it carries the subtitle
+   * "2 month(s) to authenticate", and tap() matches case-insensitively, so a text match hits the row
+   * and navigates away instead. */
+  ok(await ev(`var b=document.querySelector('[data-pgl="attest-month"]');
+     if(!b) return false; b.click(); return true;`) === true,
+     "an Authenticate control exists for the outstanding month");
+  await sleep(1500);
+  const diag = await ev(`return JSON.stringify({
+    attesting: window.SMD_PGLOG_SCREENS._state.attesting || null,
+    confirmIsStub: String(window.confirm).indexOf("return true") > -1,
+    btn: (function(){ var b=document.querySelector('[data-pgl="attest-month"]');
+      return b ? {id:b.getAttribute("data-id"), p:b.getAttribute("data-p"), txt:(b.innerText||"").trim()} : null; })(),
+    screen: (document.getElementById("pglogRoot")||{}).innerText ? "ok" : "none"
+  })`);
+  const sent = await ev(`return JSON.stringify(window.__attests)`);
+  if (String(sent) === "[]") console.log("   diag:", String(diag).slice(0, 260));
+  ok(/"kind":"monthly"/.test(String(sent)) && /"period":"2026-06"/.test(String(sent)) &&
+     /"residentId":"res-9"/.test(String(sent)),
+     `it signs that month for that resident (sent: ${String(sent).slice(0, 140)})`);
+
   console.log(fails ? `\n${fails} check(s) FAILED` : "\nall checks passed");
 } finally {
   try { ws && ws.close(); } catch {}

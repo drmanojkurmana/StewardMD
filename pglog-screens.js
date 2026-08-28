@@ -157,12 +157,28 @@
       return loadPack().then(function () { return r; });
     });
   }
+  /* The institution's own targets. state.config was READ here and never written anywhere, and
+   * store.config() had no callers, so every requirement shown was the raw pack default even where
+   * the Academic Cell had configured otherwise - the configuration screen wrote to a server nobody
+   * asked. Failure is not fatal: fall back to pack defaults rather than blocking the logbook. */
+  function loadConfig() {
+    var st = ST();
+    var prog = state.ctx && state.ctx.programme;
+    var pid = prog && prog.id;
+    if (!pid || !st || !st.config) { state.config = null; return Promise.resolve(null); }
+    if (state.config && state.config.programmeId === pid) return Promise.resolve(state.config);
+    return st.config(pid).then(function (c) {
+      state.config = c ? Object.assign({ programmeId: pid }, c) : null;
+      return state.config;
+    }, function () { state.config = null; return null; });
+  }
+
   function loadPack() {
     var c = C(), st = ST();
     if (!c) return Promise.resolve(null);
     var prog = state.ctx && state.ctx.programme;
     var id = (prog && prog.curriculumId) || (st && st.context().curriculumId) || "generic-pg";
-    return c.load(id).then(function (pack) {
+    return loadConfig().then(function () { return c.load(id); }).then(function (pack) {
       state.pack = pack;
       var overrides = (state.config && state.config.overrides) || {};
       state.requirements = c.resolve(pack, {
@@ -1501,7 +1517,43 @@
         (arr(x.attestationOverdue).length ? " · " + arr(x.attestationOverdue).length + " month(s) to authenticate" : "") +
         "</span></span>" + ic("chevron_right") + "</button>");
     });
+
+    /* MONTHLY AUTHENTICATION - PGMER-2023 5.2(vii). store.attest() existed with no callers anywhere,
+     * so the app counted these months as overdue on four screens and gave nobody a way to sign one.
+     * The server decides whether this caller may: the guide or a co-guide, or the head of department
+     * when a guide has left, never the resident, and a month can be signed exactly once. */
+    var due = [];
+    arr(f.residents).forEach(function (x) {
+      arr(x.attestationOverdue).forEach(function (p) { due.push({ res: x.resident, period: p }); });
+    });
+    h.push('<div class="pgl-sec-title"><span>Months to authenticate</span><span>' + due.length + "</span></div>");
+    if (!due.length) {
+      h.push(emptyState("verified", "Nothing to authenticate",
+        "Every completed month for your residents carries your authentication."));
+    } else {
+      h.push('<p style="font-size:12.5px;line-height:1.55;color:var(--pgl-muted);margin:0 0 10px">' +
+        "PGMER-2023 5.2(vii): the guide authenticates the logbook every month. Signing records your " +
+        "council registration against that month's entries." + "</p>");
+      due.forEach(function (d) {
+        var busy = state.attesting === d.res.id + d.period;
+        h.push('<div class="pgl-row static"><span class="pgl-row-ic">' + ic("event_available") + "</span>" +
+          '<span class="pgl-row-main"><span class="pgl-row-t">' + esc(d.res.name || d.res.id) + "</span>" +
+          '<span class="pgl-row-s">' + esc(monthLabel(d.period)) + "</span></span>" +
+          '<button class="pgl-chip" data-pgl="attest-month" data-id="' + attr(d.res.id) +
+          '" data-p="' + attr(d.period) + '"' + (busy ? " disabled" : "") + ">" +
+          (busy ? "Signing…" : "Authenticate") + "</button></div>");
+      });
+    }
     return wrap(h.join(""));
+  }
+
+  /** "2026-08" -> "August 2026". The period itself is what the server keys the signature on. */
+  function monthLabel(p) {
+    var mm = /^(\d{4})-(\d{2})$/.exec(String(p || ""));
+    if (!mm) return String(p || "");
+    var names = ["January", "February", "March", "April", "May", "June",
+                 "July", "August", "September", "October", "November", "December"];
+    return (names[parseInt(mm[2], 10) - 1] || mm[2]) + " " + mm[1];
   }
 
   // The review sheet: Open -> Review -> Assess -> Feedback -> Verify / Return.
@@ -2138,6 +2190,7 @@
         state.draftErrors = null;
         return go("add/" + se.kind);
       }
+      case "attest-month": return doAttestMonth(id, t.getAttribute("data-p"));
       case "resubmit": return doResubmit(id);
       case "withdraw": return doWithdraw(id);
       case "amend": return doAmend(id);
@@ -2206,6 +2259,48 @@
   }
   /* Correcting an entry that already exists on the server is a PATCH, not a new draft. Saving it
    * through the draft path would have created a SECOND entry beside the returned one. */
+  /* Sign one month of a resident's logbook. Deliberately thin: every rule about WHO may sign lives on
+   * the server (guide or co-guide, or the head of department when a guide has left; never the
+   * resident; exactly once per month, enforced by a create precondition on a deterministic id), and
+   * a client-side copy of those rules could only ever disagree with it. So this asks, and reports
+   * back whatever the server says. */
+  function doAttestMonth(residentId, period) {
+    var st = ST();
+    if (!residentId || !period) return;
+    var who = arr(state.faculty && state.faculty.residents)
+      .filter(function (x) { return x.resident && x.resident.id === residentId; })[0];
+    var name = (who && who.resident && who.resident.name) || "this resident";
+    var okToSign = (typeof window !== "undefined" && window.confirm)
+      ? window.confirm("Authenticate " + monthLabel(period) + " for " + name + "?\n\n" +
+          "This records your council registration against that month's entries. It cannot be undone.")
+      : true;
+    if (!okToSign) return;
+
+    state.attesting = residentId + period;
+    render();
+    return st.attest({ residentId: residentId, kind: "monthly", period: period }).then(function () {
+      state.attesting = null;
+      toast(monthLabel(period) + " authenticated.");
+      // Reload rather than patching locally: the server recomputes which months are still outstanding.
+      return loadFaculty().then(render, render);
+    }, function (e) {
+      state.attesting = null;
+      haptic("warning");
+      render();
+      toast((e && e.userMessage) || attestErr(e));
+    });
+  }
+  /** Name the reason. These are the server's own refusals, and each one has a different remedy. */
+  function attestErr(e) {
+    var c = e && e.code;
+    if (c === "not_the_guide") return "You are not this resident's guide, so only they or the head of department can authenticate this month.";
+    if (c === "hod_required") return "Only the head of department can sign that.";
+    if (c === "self_attest_forbidden") return "You cannot authenticate your own logbook.";
+    if (c === "conflict" || c === "precondition") return "That month has already been authenticated.";
+    if (c === "signer_unverified") return "Your council registration is not verified yet, so you cannot sign a training record.";
+    return "Could not authenticate that month.";
+  }
+
   function doSaveServerEdit(thenSubmit) {
     var st = ST(), m = M();
     var d = state.draft, sid = d.__serverId;
