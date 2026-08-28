@@ -237,3 +237,42 @@ change and styles its module-pill strip too, tightened so the five pills read as
 Also fixed there: `.ip-dev-maik-logo` carried `filter:invert(1)` over a white-on-transparent asset, so
 the credit wordmark rendered black on the dark poster. It now uses `brightness(0) invert(1)`, matching
 `.dev-studio-logo`.
+
+## 2026-08-28 - Interstitials adopt Direction C (gradient depth, glass cards, real brand assets)
+The owner was shown three design directions for the five interstitial screens and picked **Direction C**
+(modern app-native: gradient depth, glass cards, bold type). It is built as a **restyle of the existing
+`html.smd-splash-v2` override layer**, not a new mechanism: same flag, same default-ON resolution, same
+`?splashv2=0` / `localStorage smd_splash_v2="0"` revert, still zero markup / ID / `app.js` changes.
+
+The visual language, from the approved mockups:
+- a deep teal-to-navy radial gradient mesh with two soft off-edge glows (teal, amber), expressed as
+  extra `radial-gradient` layers in one `background` rather than blurred blob elements, so there is no
+  `filter:blur` compositing cost on device;
+- glass cards (`rgba(255,255,255,.06-.07)` fill, hairline border, `backdrop-filter:blur(10px)`, 18-26px
+  radius, soft elevation) for the AMR stats, the credit card, the case preview and the boot-splash foot;
+- bold tight-tracked display type (700-800, -.01 to -.02em), tinted pill chips (teal `#6fe0cf`, amber
+  `#f0c060` for the risk/de-escalation note), progress dots as rounded-rect pills with an elongated
+  active pill, and a teal glow shadow on the primary CTA only.
+
+Two structural notes worth keeping. `.ip-bg` animates the `background` **shorthand** via `ipBgShift`,
+and a keyframe beats a normal declaration, so the previous layer's `.ip-bg{background:...}` never
+actually applied; the Direction C rule sets `animation:none` first. Phase 2 and phase 3 are recomposed
+without touching markup: the AMR block flips from a 3-up grid to stacked rows by setting
+`grid-template-columns:1fr`, and phase 3 becomes one glass card by styling `#ipPhase3` itself and
+re-ordering its children with flex `order` (quote, then credit, then copyright).
+
+**Brand marks are the real assets, not drawn shapes.** The mockups used a placeholder shield-and-pulse
+SVG and a typographic "MaiK" because the canvas tool could not reach app assets. The shipped layer uses
+`/mark-white.png` for the app mark (phase 1 and the landing splash, swapped in via CSS `background` so
+the markup is untouched) and `/maik-logo-white.png` for the "a product of" / "developed by" credit,
+preserving the existing `.sbs-maik-light` / `.sbs-maik-dark` theme pairing in `.sbs-foot`. Only genuinely
+decorative shapes stay generated: the phase-1 pulse line (an inline SVG data URI) and the avatar's
+online-status dot.
+
+The boot splash keeps both themes: Direction C's gradient mesh on `.sbs-dark`, a light equivalent
+otherwise. The C5 avatar treatment (84px gradient avatar, status dot, translucent "Loading your
+workspace" pill) applies **only** in the personalised state, off the same `stewardmd_account` record as
+before; the guest and first-run paths are structurally unchanged. Reduced-motion coverage from the
+previous layer is retained and now also stills the loading pill. `sw.js` `CACHE` bumped to
+`...-splashv2c`. Test: `test/run-splash-ui.mjs`, extended to assert the Direction C treatment, that the
+real brand assets resolve 200 (not 404 placeholders), the dark boot splash, and reduced-motion.
