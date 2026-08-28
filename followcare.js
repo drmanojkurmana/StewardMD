@@ -731,15 +731,15 @@
       if (voiceEnabled() && res.body && res.body.voice) { body.appendChild(voiceCard(episodeId, res.body.voice)); }
       // Acknowledge clears the "needs review" flag (an escalated episode leaves the list only by clinician action).
       if (ep.escalation === "red" || ep.escalation === "orange") {
-        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px", text: "Mark reviewed" });
+        var ack = h("button", { "class": "fc-btn", style: "margin-top:14px;width:100%", text: "Mark reviewed" });
         ack.addEventListener("click", function () { ack.disabled = true; API.ack(episodeId).then(function () { toast("Marked reviewed"); renderDetail(episodeId); }); });
         body.appendChild(ack);
       }
-      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px", text: "Revoke patient link" });
+      var rev = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%", text: "Revoke patient link" });
       rev.addEventListener("click", function () { API.revoke(episodeId).then(function () { toast("Link revoked"); }); });
       body.appendChild(rev);
       // Right-to-erasure: permanently delete this patient's episode + all check-in data.
-      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
+      var er = h("button", { "class": "fc-btn sec", style: "margin-top:10px;width:100%;color:#b3261e;border-color:#b3261e", text: "Delete patient data" });
       er.addEventListener("click", function () {
         if (!(G.confirm && confirm("Permanently delete this patient's recovery episode and all check-ins? This cannot be undone."))) return;
         er.disabled = true; API.erase(episodeId).then(function () { toast("Patient data deleted"); open(); });
